@@ -1,23 +1,32 @@
-# Project Charter
+# 프로젝트 차터 (Project Charter)
 
-Status: **Completed** (Week 2)
+상태: **완료** (2주차)
 
-The signed-off Project Charter is kept in this folder as the original `.docx`
-submitted through LMS.
+LMS로 제출한 원본 `.docx` 파일을 이 폴더에 함께 보관합니다.
 
-| Item | Value |
+| 항목 | 내용 |
 |---|---|
-| Project | Bodyguard |
-| Team | UHI |
-| Members | Seongsu Lee (Lead), Yoon Heo |
-| Core problem | People who work seated cannot check or correct their own posture, and have no way to keep a record of how it changes. |
+| 프로젝트명 | Bodyguard |
+| 팀명 | UHI |
+| 팀원 | 이성수(팀장), 허윤 |
+| 핵심 문제 | 앉아서 일하는 사람은 자신의 자세를 스스로 확인·교정할 수 없고, 그 변화를 기록으로 남길 수단이 없다. |
 
-## Scope summary
+## 범위 요약
 
-**In scope** — real-time posture recognition web MVP, 3D avatar posture guide,
-6–8 stretching routines with hold verification, three posture metrics with a
-dashboard, measurement report PDF, posture-metric change detection.
+**In-Scope**
 
-**Out of scope** — medical diagnosis or condition assessment, storing or
-transmitting camera footage, native apps, training our own pose model,
-commercial operation, wearable or external sensor integration.
+- 오픈소스 기반 실시간 자세 인식 Web MVP
+- 3D 인체 아바타 정자세 가이드 및 차이 부위 시각화
+- 스트레칭 6~8종(목·어깨·등·허리) 코칭 및 유지시간 판정
+- 자세 지표 3종 측정·누적 및 대시보드
+- 측정 리포트 PDF 생성
+- 관절 시계열 변화 탐지 및 사용자 테스트
+
+**Out-of-Scope**
+
+- 의학적 진단 및 질환 판정
+- 카메라 영상의 저장 및 외부 전송
+- Native App (iOS / Android)
+- 자체 포즈 추정 모델 직접 학습
+- 상용 서비스 운영 및 유료 결제
+- 웨어러블·외부 센서 연동

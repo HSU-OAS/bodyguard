@@ -1,22 +1,22 @@
-# Product Requirements Document (PRD)
+# 요구사항 정의서 (PRD)
 
-Status: **Draft pending** (Week 3)
+상태: **초안 작성 예정** (3주차)
 
-## Requirements carried over from the Charter
+## 프로젝트 차터에서 이어받은 요구사항
 
-| ID | Requirement | Priority | OSS |
+| ID | 요구사항 | 중요도 | OSS 활용 |
 |---|---|---|---|
-| R-01 | Extract joint coordinates from webcam video in real time. | Must | OSS AI |
-| R-02 | Display correct posture as a 3D avatar and highlight deviating body parts by colour. | Must | OSS 3D |
-| R-03 | Measure three posture metrics and indicate in real time when correct posture is reached. | Must | OSS AI |
-| R-04 | Guide 6–8 stretching routines and verify hold time where required. | Must | OSS AI |
-| R-05 | Accumulate measurements over time, present a dashboard, and detect change patterns. | Must | OSS AI |
-| R-06 | Generate a measurement report as PDF. | Must | OSS Library |
-| R-07 | Document every OSS dependency and its license. | Must | OSS governance |
+| R-01 | 웹캠 영상에서 실시간으로 관절 좌표를 추출한다. | 필수 | OSS AI |
+| R-02 | 3D 인체 아바타로 정자세를 표시하고 현재 자세와 다른 부위를 색상으로 구분한다. | 필수 | OSS 3D |
+| R-03 | 자세 지표 3종(목 전방 경사각·어깨 좌우 기울기·상체 전방 굴곡각)을 측정하고 정자세 도달 시 실시간으로 표시한다. | 필수 | OSS AI |
+| R-04 | 스트레칭 6~8종을 안내하고, 유지시간이 필요한 동작은 유지 여부를 판정한다. | 필수 | OSS AI |
+| R-05 | 측정값을 시간축으로 누적하고 대시보드로 제공하며 변화 패턴을 탐지해 알린다. | 필수 | OSS AI |
+| R-06 | 누적 기록을 측정 리포트 PDF로 생성한다. | 필수 | OSS Library |
+| R-07 | 사용한 OSS와 License를 문서화한다. | 필수 | OSS 관리 |
 
-## To be completed
+## 보완 예정
 
-- Functional specification per requirement
-- Non-functional requirements (performance, privacy, accessibility)
-- Success metrics
-- User scenarios and screen flow
+- 요구사항별 기능 명세 상세화
+- 비기능 요구사항 (성능 · 개인정보 · 접근성)
+- 성공 지표 (Success Metric)
+- 사용자 시나리오 및 화면 흐름

@@ -1,26 +1,31 @@
-# Open Source Research & Selection
+# OSS 조사 및 선정 보고서
 
-Status: **In progress** (Week 3)
+상태: **작성 중** (3주차)
 
-Evaluation criteria: functional fit, technical compatibility, activity,
-documentation, community, extensibility, license.
+평가 항목: 기능 적합성 · 기술 호환성 · 활성도 · 문서화 · 커뮤니티 · 확장성 · 라이선스
 
-## Pose estimation candidates
+## 포즈 추정 후보 비교
 
-| Candidate | Stars | License | Last push | Decision |
+| 후보 | Stars | License | 최종 커밋 | 판단 |
 |---|---:|---|---|---|
-| MediaPipe | 36,930 | Apache-2.0 | 2026-09-11 | **Adopted** |
-| YOLO-Pose (Ultralytics) | 61,552 | AGPL-3.0 | 2026-09-12 | Rejected — copyleft obligation |
-| MoveNet (TF.js Models) | 14,804 | Apache-2.0 | 2026-06-23 | Rejected — no 3D coordinates |
-| RTMPose (MMPose) | 7,893 | Apache-2.0 | 2025-08-04 | Rejected — maintenance stalled |
+| MediaPipe | 36,930 | Apache-2.0 | 2026-09-11 | **채택** |
+| YOLO-Pose (Ultralytics) | 61,552 | AGPL-3.0 | 2026-09-12 | 미채택 — 소스 공개 의무 |
+| MoveNet (TF.js Models) | 14,804 | Apache-2.0 | 2026-06-23 | 미채택 — 3D 좌표 미지원 |
+| RTMPose (MMPose) | 7,893 | Apache-2.0 | 2025-08-04 | 미채택 — 유지보수 정체 |
 
-> Figures surveyed 2026-09.
+> 수치는 2026년 9월 조사 기준입니다.
 
-The most starred candidate was rejected on license grounds, and the second on
-maintenance activity. Star count alone was not treated as a selection signal.
+**Stars 1위 후보를 라이선스 때문에, 2위 후보를 유지보수 활성도 때문에 탈락시켰습니다.** Stars 수만으로는 선정 근거가 되지 않는다고 판단했습니다.
 
-## To be completed
+## 채택 이유 — MediaPipe
 
-- Full seven-criteria scoring table for each candidate
-- Prototype verification notes
-- Rationale write-up
+- **브라우저 온디바이스 구동**이 가능해 영상을 서버로 전송하지 않아도 됨 (개인정보 보호 설계의 전제)
+- 3D 좌표를 제공하여 3D 아바타 비교 기능 구현 가능
+- Apache-2.0으로 라이선스 제약 없음
+- 문서·예제·커뮤니티가 충실하고 유지보수가 활발함
+
+## 보완 예정
+
+- 후보별 7개 평가 항목 점수표 작성
+- 프로토타입 검증 결과 기록
+- 선정 근거 상세 서술

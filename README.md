@@ -1,106 +1,106 @@
 # Bodyguard
 
-Real-time sitting posture coaching and measurement report service powered by open-source pose estimation AI.
+오픈소스 포즈 추정 AI를 활용한 실시간 자세 코칭 및 측정 리포트 서비스
 
-> **Team UHI** · Open Source AI·SW Convergence Project, Hansung University (2026-2)
-
----
-
-## Problem
-
-According to the Korea National Health and Nutrition Examination Survey (KNHANES), daily sedentary time among Korean adults aged 19+ rose from **8.3 hours in 2018 to 9.0 hours in 2023**. A study of 244 Korean university students reported an average sitting time of **7.96 hours per day** (8.40 hours on weekdays) — roughly twice that of U.S. students. Health Insurance Review and Assessment Service (HIRA) data shows that **61% of forward head posture patients are in their teens to thirties**.
-
-People already know that stretching helps. It still does not happen, for three reasons:
-
-1. While concentrating, they simply **forget** to stretch.
-2. Even when following a video, they **cannot verify whether their own posture is correct** — you cannot see your own posture.
-3. **No record is kept** of how posture changes over time, so they cannot describe their condition with evidence.
-
-**Core problem — people who work seated cannot check or correct their own posture, and have no way to keep a record of how it changes.**
+> **팀 UHI** · 한성대학교 오픈소스 AI·SW 융합 프로젝트 (2026-2)
 
 ---
 
-## What Bodyguard does
+## 배경
 
-| | Feature |
+질병관리청 국민건강영양조사에 따르면 19세 이상 성인의 하루 좌식시간은 **2018년 8.3시간에서 2023년 9.0시간**으로 늘었습니다. 국내 대학생 244명을 대상으로 한 연구에서는 평균 좌식시간이 **하루 7.96시간**(평일 8.40시간)으로, 미국 대학생 평균 4.2시간의 약 두 배로 나타났습니다. 건강보험심사평가원 자료에서는 **거북목 증후군 진료인원의 61%가 10~30대**에 집중되어 있습니다.
+
+스트레칭이 효과적이라는 사실은 이미 다들 압니다. 그런데도 실천으로 이어지지 않는 이유는 세 가지입니다.
+
+1. 작업에 집중하는 동안 스트레칭을 해야 한다는 사실 자체를 **잊습니다.**
+2. 영상을 따라 하더라도 **자신의 자세가 올바른지 스스로 확인할 수 없습니다.** 자신의 자세는 자신이 볼 수 없기 때문입니다.
+3. 자세가 어떻게 변해왔는지 **기록이 남지 않아**, 진료 시에도 자신의 상태를 구체적인 근거와 함께 설명하지 못합니다.
+
+> **핵심 문제 — 앉아서 일하는 사람은 자신의 자세를 스스로 확인·교정할 수 없고, 그 변화를 기록으로 남길 수단이 없다.**
+
+---
+
+## 주요 기능
+
+| | 기능 |
 |---|---|
-| 🎥 | **Real-time posture tracking** from a webcam — 33 body landmarks, processed in the browser |
-| 🧍 | **3D avatar guide** showing the correct posture, with deviating body parts highlighted in red |
-| 🧘 | **Stretching coach** — 6–8 routines (neck, shoulder, back, waist) with hold-time verification |
-| 📊 | **Posture dashboard** — three metrics accumulated over time |
-| 📄 | **Measurement report (PDF)** — an objective record to bring to a clinician |
-| 🔔 | **Change detection** — flags shifts in the posture-metric time series |
+| 🎥 | **실시간 자세 인식** — 웹캠으로 관절 33점을 브라우저에서 추출 |
+| 🧍 | **3D 아바타 가이드** — 정자세를 3D 인체 모델로 제시하고, 현재 자세와 다른 부위를 빨간색으로 표시 |
+| 🧘 | **스트레칭 코칭** — 목·어깨·등·허리 6~8종 안내 및 유지시간 판정 |
+| 📊 | **자세 대시보드** — 측정 지표 3종을 시간축으로 누적 |
+| 📄 | **측정 리포트 PDF** — 진료 시 제시할 수 있는 객관적 기록 |
+| 🔔 | **변화 탐지** — 자세 지표 시계열에서 변화 패턴 감지 |
 
-### Measured metrics
+### 측정 지표
 
-- Craniovertebral angle (forward head posture)
-- Shoulder lateral tilt
-- Trunk forward flexion
+- **목 전방 경사각** — 거북목 정도
+- **어깨 좌우 기울기** — 한쪽으로 쏠려 앉는 정도
+- **상체 전방 굴곡각** — 구부정한 정도
 
-> **Bodyguard does not perform medical diagnosis.** It provides camera-based posture measurement records only. Clinical judgement belongs to a medical professional.
-
----
-
-## Privacy by design
-
-Video never leaves the browser.
-
-```
-webcam ──► MediaPipe (on-device, in browser) ──► joint coordinates only ──► server
-                        │
-                   frames discarded
-```
-
-Only landmark coordinates and derived angle values are transmitted and stored. No image or video frame is saved or sent anywhere.
+> ⚠️ **Bodyguard는 의학적 진단을 수행하지 않습니다.** 카메라 기반 자세 측정 기록을 제공할 뿐이며, 의학적 판단은 전문의의 영역입니다.
 
 ---
 
-## Tech stack
+## 개인정보 보호 설계
 
-| Layer | Technology | License |
+**영상은 브라우저를 벗어나지 않습니다.**
+
+```
+웹캠 ──► MediaPipe (브라우저 내 온디바이스 처리) ──► 관절 좌표만 ──► 서버
+              │
+         프레임 즉시 폐기
+```
+
+서버로 전송·저장되는 것은 관절 좌표와 이를 계산한 각도값뿐입니다. 이미지나 영상 프레임은 어디에도 저장되거나 전송되지 않습니다.
+
+---
+
+## 기술 스택
+
+| 구분 | 기술 | License |
 |---|---|---|
-| Pose estimation | [MediaPipe](https://github.com/google-ai-edge/mediapipe) | Apache-2.0 |
-| 3D rendering | [Three.js](https://github.com/mrdoob/three.js) | MIT |
-| Change detection | [PyOD](https://github.com/yzhao062/pyod) | BSD-2-Clause |
-| Frontend | [React](https://github.com/facebook/react) | MIT |
-| Backend | [FastAPI](https://github.com/fastapi/fastapi) | MIT |
+| 포즈 추정 | [MediaPipe](https://github.com/google-ai-edge/mediapipe) | Apache-2.0 |
+| 3D 렌더링 | [Three.js](https://github.com/mrdoob/three.js) | MIT |
+| 변화 탐지 | [PyOD](https://github.com/yzhao062/pyod) | BSD-2-Clause |
+| 프론트엔드 | [React](https://github.com/facebook/react) | MIT |
+| 백엔드 | [FastAPI](https://github.com/fastapi/fastapi) | MIT |
 
-Candidates evaluated and **not** adopted, with reasons, are documented in [`docs/02_oss_research.md`](docs/02_oss_research.md).
+비교 검토했으나 **채택하지 않은 후보와 그 이유**는 [`docs/02_oss_research.md`](docs/02_oss_research.md)에 기록되어 있습니다.
 
 ---
 
-## Repository structure
+## 저장소 구조
 
 ```
 bodyguard/
-├── docs/                  # Project documents
-│   ├── 01_project_charter.md
-│   ├── 02_oss_research.md
-│   ├── 03_prd.md
-│   └── 04_license_checklist.md
+├── docs/                        # 프로젝트 산출물
+│   ├── 01_project_charter.md    # 프로젝트 차터 요약
+│   ├── 02_oss_research.md       # OSS 조사 및 선정 보고서
+│   ├── 03_prd.md                # 제품 요구사항 정의서
+│   └── 04_license_checklist.md  # 라이선스 체크리스트
 ├── README.md
 └── LICENSE
 ```
 
 ---
 
-## Getting started
+## 실행 방법
 
-> Setup instructions will be added once the development environment is configured (Week 6).
+> 개발 환경 구축(6주차) 이후 설치 방법과 실행 환경을 추가할 예정입니다.
 
 ---
 
-## Team
+## 팀 구성
 
-| Role | Member |
+| 역할 | 담당자 |
 |---|---|
-| PM / Frontend · 3D | Seongsu Lee |
-| OSS · AI / Backend · Data | Yoon Heo |
+| PM / Frontend · 3D | 이성수 |
+| OSS · AI / Backend · Data | 허윤 |
 
 ---
 
-## License
+## 라이선스
 
-Released under the [MIT License](LICENSE).
+본 프로젝트는 [MIT License](LICENSE)로 배포됩니다.
 
-This project builds on open-source software. Each dependency retains its own license; see [`docs/04_license_checklist.md`](docs/04_license_checklist.md) for the full list.
+이 프로젝트는 오픈소스 소프트웨어를 기반으로 합니다. 각 의존성은 고유한 라이선스를 유지하며, 전체 목록은 [`docs/04_license_checklist.md`](docs/04_license_checklist.md)에서 확인할 수 있습니다.

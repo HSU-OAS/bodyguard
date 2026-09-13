@@ -1,31 +1,32 @@
-# OSS License Checklist
+# OSS 라이선스 체크리스트
 
-Status: **In progress**
+상태: **작성 중**
 
-| OSS | Used for | License | Modified | Source |
+## 사용 OSS
+
+| OSS | 활용 기능 | License | 수정·확장 | 출처 |
 |---|---|---|---|---|
-| MediaPipe | Webcam joint landmark extraction | Apache-2.0 | Extended | Official repository |
-| Three.js | 3D avatar rendering | MIT | Extended | Official repository |
-| PyOD | Posture-metric change detection | BSD-2-Clause | Extended | Official repository |
-| React | Frontend UI | MIT | No | Official repository |
-| FastAPI | REST API | MIT | No | Official repository |
+| MediaPipe | 웹캠 관절 33점 추출 | Apache-2.0 | O | 공식 Repository |
+| Three.js | 3D 인체 아바타 렌더링 | MIT | O | 공식 Repository |
+| PyOD | 자세 지표 시계열 변화 탐지 | BSD-2-Clause | O | 공식 Repository |
+| React | 프론트엔드 UI | MIT | X | 공식 Repository |
+| FastAPI | REST API | MIT | X | 공식 Repository |
 
-## Rejected on license grounds
+## 라이선스 문제로 미채택
 
-| OSS | License | Reason |
+| OSS | License | 사유 |
 |---|---|---|
-| YOLO-Pose (Ultralytics) | AGPL-3.0 | Copyleft would require publishing our source |
-| OpenPose | Non-commercial | Non-commercial restriction |
+| YOLO-Pose (Ultralytics) | AGPL-3.0 | 전염성 — 우리 소스 코드까지 공개 의무 발생 |
+| OpenPose | 비상업 전용 | 비상업적 사용으로 제한 |
 
-## Note
+## 확인 시 주의사항
 
-A repository's own license is not the same as the license of its model
-weights. Weight files are checked separately.
+**저장소의 라이선스와 모델 가중치의 라이선스는 다를 수 있습니다.** 저장소 배지가 Apache-2.0이어도 가중치 파일은 별도 조건이 붙는 경우가 있으므로 각각 확인합니다.
 
-## Contribution plan
+## Contribution 계획
 
-| OSS | Plan |
+| OSS | 계획 |
 |---|---|
-| MediaPipe | File issues with reproducible examples; propose Korean documentation improvements |
-| Three.js | Publish implementation examples; file documentation issues |
-| PyOD | Contribute a usage example |
+| MediaPipe | 사용 중 발견한 문제를 재현 코드와 함께 Issue 등록, 한국어 예제 문서 개선 제안 |
+| Three.js | 구현 예제 공개 및 문서 개선 Issue 등록 |
+| PyOD | 활용 사례 문서 기여 |
