@@ -1,0 +1,22 @@
+import { defineConfig } from '@playwright/test'
+
+// 설치된 크롬과 가짜 카메라로 측정 흐름을 확인한다.
+// 가짜 카메라 화면에는 사람이 없어서, 인식 여부가 아니라 카메라 → 추론 루프가 에러 없이 도는지만 본다
+export default defineConfig({
+  testDir: 'e2e',
+  timeout: 90_000,
+  use: {
+    baseURL: 'http://localhost:4173',
+    channel: 'chrome',
+    permissions: ['camera'],
+    launchOptions: {
+      args: ['--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream'],
+    },
+  },
+  webServer: {
+    command: 'node scripts/prepare-assets.mjs && vite build && vite preview',
+    url: 'http://localhost:4173',
+    reuseExistingServer: true,
+    timeout: 180_000,
+  },
+})
