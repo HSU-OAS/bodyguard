@@ -1,0 +1,27 @@
+# Node
+node_modules/
+dist/
+.vite/
+coverage/
+playwright-report/
+test-results/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# 환경 변수 — .env.example만 커밋한다
+.env
+.env.*
+!.env.example
+
+# 포즈 모델 파일은 빌드 때 내려받는다
+*.task
+*.tflite
+
+# OS / 에디터
+.DS_Store
+.vscode/
+.idea/
