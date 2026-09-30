@@ -3,6 +3,7 @@
 import os
 import secrets
 from collections.abc import Iterator
+from contextlib import contextmanager
 from datetime import UTC, datetime
 
 import pytest
@@ -37,8 +38,8 @@ class Outbox:
         self.messages.append((email, code))
 
 
-@pytest.fixture(scope="session")
-def engine() -> Iterator[Engine]:
+@contextmanager
+def test_database() -> Iterator[Engine]:
     raw = os.environ.get("BODYGUARD_TEST_DATABASE_URL")
     if not raw:
         pytest.fail("Set isolated BODYGUARD_TEST_DATABASE_URL (no skip)")
@@ -65,8 +66,16 @@ def engine() -> Iterator[Engine]:
     os.environ["BODYGUARD_ENVIRONMENT"] = "development"
     os.environ["BODYGUARD_ORIGIN"] = ORIGIN
     command.upgrade(Config("alembic.ini"), "head")
-    yield db
-    db.dispose()
+    try:
+        yield db
+    finally:
+        db.dispose()
+
+
+@pytest.fixture(scope="session")
+def engine() -> Iterator[Engine]:
+    with test_database() as db:
+        yield db
 
 
 @pytest.fixture
@@ -115,11 +124,13 @@ class Harness:
         return str(response.json()["challenge_id"])
 
     def verify(self, challenge: str, code: str | None = None) -> Response:
-        return self.client.post(
+        response = self.client.post(
             "/api/v1/auth/verify",
             headers=self.csrf(),
             json={"challenge_id": challenge, "code": code or self.mail.messages[-1][1]},
         )
+        assert isinstance(response, Response)
+        return response
 
     def account(self, email: str = "person@example.com", password: str = PASSWORD) -> str:
         response = self.verify(self.signup(email, password))
@@ -127,8 +138,10 @@ class Harness:
         return str(response.json()["id"])
 
     def login(self, email: str = "person@example.com", password: str = PASSWORD) -> Response:
-        return self.client.post(
+        response = self.client.post(
             "/api/v1/auth/login",
             headers=self.csrf(),
             json={"email": email, "password": password},
         )
+        assert isinstance(response, Response)
+        return response

@@ -93,7 +93,7 @@ bodyguard/                 ← 레포 루트 (HSU-OAS/bodyguard)
     ├── AGENTS.md
     ├── docs/              개발 문서
     ├── compose.yaml       Docker Compose (tasks #1)
-    ├── frontend/          React 앱 (스켈레톤 데모까지)
+    ├── frontend/          React 공개·계정 화면 (S2.2), 개발 시제품은 /dev/measure 전용
     │   └── src/
     │       ├── posture/   지표·판정 — 순수 TS
     │       ├── stretch/   스트레칭 판정 — 순수 TS
