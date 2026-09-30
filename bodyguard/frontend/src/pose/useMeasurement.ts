@@ -30,6 +30,10 @@ export type HandPose = {
 
 /** 가장 최근 프레임의 관절. 그리는 데만 쓰고 매 프레임 덮어쓴다. 저장하지 않는다 (FR-M-02) */
 export type LatestPose = {
+  /** 최근 추론 시각. performance.now 기준, 중지·초기에는 null (FR-M-07). */
+  sampledAt: number | null
+  /** 포즈 추정 결과 수. 실제 인원 보장이 아니며 복수 검출 좌표는 사용하지 않는다. */
+  personCount: number
   image: NormalizedLandmark[] | null
   world: Landmark[] | null
   hands: HandPose[]
@@ -55,7 +59,14 @@ export type MeasureStats = {
   gesture: string | null
 }
 
-const EMPTY_POSE: LatestPose = { image: null, world: null, hands: [], face: null }
+const EMPTY_POSE: LatestPose = {
+  sampledAt: null,
+  personCount: 0,
+  image: null,
+  world: null,
+  hands: [],
+  face: null,
+}
 const EMPTY_STATS: MeasureStats = {
   fps: 0,
   inferenceMs: 0,
@@ -95,6 +106,8 @@ export function useMeasurement(
   const gestureRef = useRef<LoadedGestureRecognizer | null>(null)
   const faceRef = useRef<LoadedFaceLandmarker | null>(null)
   const streamRef = useRef<MediaStream | null>(null)
+  const sessionRef = useRef<AbortController | null>(null)
+  const cancelFrameRef = useRef<(() => void) | null>(null)
   const fpsLimitRef = useRef<InferenceFpsLimit>(fpsLimit)
   const framingModeRef = useRef<FramingMode>(framingMode)
   const modelRef = useRef<PoseModel>(model)
@@ -122,6 +135,10 @@ export function useMeasurement(
   }, [onFrame])
 
   const release = useCallback(() => {
+    sessionRef.current?.abort()
+    sessionRef.current = null
+    cancelFrameRef.current?.()
+    cancelFrameRef.current = null
     closeCamera(videoRef.current, streamRef.current)
     streamRef.current = null
     poseRef.current = EMPTY_POSE
@@ -142,19 +159,38 @@ export function useMeasurement(
   const stop = useCallback(() => {
     release()
     setStats(EMPTY_STATS)
+    setError(null)
     setStatus('idle')
   }, [release])
 
   // FR-M-01 측정 시작 — 버튼을 눌렀을 때만 카메라를 켠다
   const start = useCallback(async () => {
     const video = videoRef.current
-    if (!video) return
+    if (!video || sessionRef.current) return
+    // FR-M-07 취소·재시작 뒤 지난 비동기 작업/프레임은 새 측정에 개입하지 않는다.
+    const session = new AbortController()
+    sessionRef.current = session
+    const current = () => sessionRef.current === session && !session.signal.aborted
     setStatus('starting')
     setError(null)
     try {
-      streamRef.current = await openCamera(video)
+      const stream = await openCamera(video, session.signal)
+      if (!current()) {
+        closeCamera(video, stream)
+        return
+      }
+      streamRef.current = stream
+      for (const track of stream.getTracks()) {
+        track.addEventListener(
+          'ended',
+          () => {
+            if (current()) fail('unknown')
+          },
+          { signal: session.signal },
+        )
+      }
     } catch (e) {
-      fail(cameraErrorKind(e))
+      if (current()) fail(cameraErrorKind(e))
       return
     }
     try {
@@ -164,28 +200,50 @@ export function useMeasurement(
         loadedRef.current.landmarker.close()
         loadedRef.current = null
       }
-      loadedRef.current ??= await createPoseLandmarker(wanted)
+      if (!loadedRef.current) {
+        const loaded = await createPoseLandmarker(wanted)
+        if (!current()) {
+          loaded.landmarker.close()
+          return
+        }
+        loadedRef.current = loaded
+      }
     } catch {
-      fail('model')
+      if (current()) fail('model')
       return
     }
     try {
-      gestureRef.current ??= await createGestureRecognizer()
+      if (!gestureRef.current) {
+        const loaded = await createGestureRecognizer()
+        if (!current()) {
+          loaded.recognizer.close()
+          return
+        }
+        gestureRef.current = loaded
+      }
     } catch {
       // 손가락 모델이 없어도 몸 측정은 계속한다
-      gestureRef.current = null
+      if (!current()) return
     }
     try {
-      faceRef.current ??= await createFaceLandmarker()
+      if (!faceRef.current) {
+        const loaded = await createFaceLandmarker()
+        if (!current()) {
+          loaded.landmarker.close()
+          return
+        }
+        faceRef.current = loaded
+      }
     } catch {
       // 얼굴 모델이 없으면 둥근 머리는 정면을 보고 몸 측정은 계속한다
-      faceRef.current = null
+      if (!current()) return
     }
+    if (!current()) return
     const { landmarker, delegate } = loadedRef.current
     setStatus('running')
 
     const stabilize = createHintStabilizer()
-    const trackFace = createFaceTracker()
+    let trackFace = createFaceTracker()
     let hint: string | null = null
     let budget = 1 // 첫 프레임은 바로 처리한다
     let lastTick = performance.now()
@@ -196,15 +254,22 @@ export function useMeasurement(
     let faceFrames = 0
     let faceMsSum = 0
     let windowStart = performance.now()
+    let lastVideoTime = -1
 
     const tick = () => {
-      if (!streamRef.current) return // 중지됨
+      if (!current()) return
+      cancelFrameRef.current = null
       const now = performance.now()
       const limit = fpsLimitRef.current
       // 초당 limit번만 추론한다. 카메라 프레임 간격이 흔들려도 평균이 limit에 맞도록 예산을 쌓아 쓴다
       budget = limit === 0 ? 1 : budget + ((now - lastTick) * limit) / 1000
       lastTick = now
-      if (budget >= 1) {
+      if (
+        budget >= 1 &&
+        video.readyState >= 2 && // HAVE_CURRENT_DATA: 실제 영상이 준비된 뒤 추론한다 (FR-M-02).
+        video.currentTime !== lastVideoTime
+      ) {
+        lastVideoTime = video.currentTime
         // 탭이 멈췄다 돌아와도 한꺼번에 몰아서 돌지 않게 남는 예산은 한 번치까지만 둔다
         budget = Math.min(budget - 1, 1)
         try {
@@ -212,13 +277,14 @@ export function useMeasurement(
           const result = landmarker.detectForVideo(video, now)
           msSum += performance.now() - t0
           frames += 1
-          const image = result.landmarks[0] ?? null
-          const world = result.worldLandmarks[0] ?? null
+          const personCount = result.landmarks.length
+          const image = personCount === 1 ? result.landmarks[0] : null
+          const world = personCount === 1 ? (result.worldLandmarks[0] ?? null) : null
           const trusted = trustedJoints(image)
 
           let hands: HandPose[] = []
           const gesture = gestureRef.current
-          if (handsEnabledRef.current && gesture) {
+          if (image && handsEnabledRef.current && gesture) {
             const h0 = performance.now()
             const g = gesture.recognizer.recognizeForVideo(video, now)
             handMsSum += performance.now() - h0
@@ -233,19 +299,25 @@ export function useMeasurement(
 
           let face: FaceState | null = null
           const faceModel = faceRef.current
-          if (faceEnabledRef.current && faceModel) {
+          if (image && faceEnabledRef.current && faceModel) {
             const f0 = performance.now()
             const r = faceModel.landmarker.detectForVideo(video, now)
             faceMsSum += performance.now() - f0
             faceFrames += 1
             face = trackFace(readFace(r, video.videoWidth / video.videoHeight), now)
           } else {
-            trackFace(null, now)
+            // 미검출·복수 인물 뒤에는 다른 사람의 정면 기준을 이어 쓰지 않는다 (FR-M-07).
+            trackFace = createFaceTracker()
           }
 
-          poseRef.current = { image, world, hands, face }
+          poseRef.current = { sampledAt: now, personCount, image, world, hands, face }
           onFrameRef.current(poseRef.current)
-          hint = stabilize(framingHint(image !== null, trusted, framingModeRef.current), now)
+          hint = stabilize(
+            personCount > 1
+              ? '한 사람만 화면에 들어오게 해 주세요'
+              : framingHint(image !== null, trusted, framingModeRef.current),
+            now,
+          )
         } catch {
           fail('model')
           return
@@ -279,8 +351,14 @@ export function useMeasurement(
     }
     // 카메라 프레임이 들어올 때마다 깨어난다. 탭이 가려지면 멈춘다 (가려진 탭 측정은 tasks #17)
     const schedule = () => {
-      if ('requestVideoFrameCallback' in video) video.requestVideoFrameCallback(tick)
-      else requestAnimationFrame(tick)
+      if (!current()) return
+      if ('requestVideoFrameCallback' in video) {
+        const id = video.requestVideoFrameCallback(tick)
+        cancelFrameRef.current = () => video.cancelVideoFrameCallback(id)
+      } else {
+        const id = requestAnimationFrame(tick)
+        cancelFrameRef.current = () => cancelAnimationFrame(id)
+      }
     }
     schedule()
   }, [videoRef, fail])

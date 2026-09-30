@@ -11,8 +11,8 @@ export async function createPoseLandmarker(model: PoseModel): Promise<LoadedLand
     PoseLandmarker.createFromOptions(vision, {
       baseOptions: { modelAssetPath: POSE_MODELS[model].path, delegate },
       runningMode: 'VIDEO',
-      // 두 명 감지(FR-M-07)는 tasks #13에서 2로 올린다
-      numPoses: 1,
+      // FR-M-07 복수 검출은 사용하지 않는다. 미검출 인물까지 배제하는지는 실측 대상이다.
+      numPoses: 2,
     })
   try {
     return { landmarker: await create('GPU'), delegate: 'GPU', model }

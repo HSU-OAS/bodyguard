@@ -19,6 +19,23 @@ describe('trustedJoints', () => {
   it('관절이 없으면 전부 믿지 않는다', () => {
     expect(trustedJoints(null).some(Boolean)).toBe(false)
   })
+
+  it('NaN·무한·범위 밖 가시성·비정상 깊이·잘못된 기준을 신뢰하지 않는다', () => {
+    for (const invalid of [
+      { visibility: Number.NaN },
+      { visibility: Infinity },
+      { visibility: 1.1 },
+      { visibility: -0.1 },
+      { z: Number.NaN },
+      { x: Infinity },
+    ]) {
+      expect(trustedJoints(body({ 0: invalid }))[0]).toBe(false)
+      expect(headShoulderConfidence(body({ 0: invalid }))).toBeCloseTo(0.72)
+    }
+    for (const min of [Number.NaN, Infinity, -1, 0, 1.1]) {
+      expect(trustedJoints(body(), min).some(Boolean)).toBe(false)
+    }
+  })
 })
 
 describe('isInFrame', () => {
