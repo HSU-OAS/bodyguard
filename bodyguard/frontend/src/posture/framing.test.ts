@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { createHintStabilizer, framingHint, REQUIRED_JOINTS } from './framing'
+import { trustedJoints } from './landmarks'
 
 const trustedExcept = (...missing: number[]) =>
   Array.from({ length: 33 }, (_, i) => !missing.includes(i))
@@ -28,6 +29,23 @@ describe('framingHint', () => {
 
   it('앉은 자세는 엉덩이를 요구하지 않는다', () => {
     expect(REQUIRED_JOINTS.seated).not.toContain(23)
+  })
+
+  it('상반신 동작은 전신이 나와도 허용하고, 필수 어깨가 가려지면 다시 멈춘다', () => {
+    const allVisible = Array.from({ length: 33 }, () => ({ x: 0.5, y: 0.5, z: 0, visibility: 0.9 }))
+    expect(framingHint(true, trustedJoints(allVisible), 'seated')).toBeNull()
+    allVisible[12].visibility = 0.1
+    expect(framingHint(true, trustedJoints(allVisible), 'seated')).not.toBeNull()
+  })
+
+  it('전신 동작은 상반신만 보일 때 촬영 위치를 다시 안내한다', () => {
+    const upperBodyOnly = Array.from({ length: 33 }, (_, i) => ({
+      x: 0.5,
+      y: i >= 23 ? 1.3 : 0.5,
+      z: 0,
+      visibility: 0.9,
+    }))
+    expect(framingHint(true, trustedJoints(upperBodyOnly), 'standing')).not.toBeNull()
   })
 })
 

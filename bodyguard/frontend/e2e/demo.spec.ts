@@ -5,6 +5,7 @@ test('측정을 시작하면 카메라와 추론 루프가 에러 없이 돈다'
   page.on('pageerror', (e) => errors.push(e.message))
 
   await page.goto('/')
+  await expect(page.getByRole('button', { name: '현재 프레임 기록' })).toHaveCount(0)
   await page.getByRole('button', { name: '측정 시작' }).click()
   await expect(page.getByTestId('measuring-badge')).toBeVisible({ timeout: 60_000 })
   await expect
