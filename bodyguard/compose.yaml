@@ -1,0 +1,19 @@
+# S2.1, FR-U-02/03: local PostgreSQL only. Never use trust authentication in production.
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: bodyguard_test
+      POSTGRES_DB: bodyguard_test
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "127.0.0.1:55439:5432"
+    volumes:
+      - bodyguard-local-db:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bodyguard_test -d bodyguard_test"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+volumes:
+  bodyguard-local-db:
