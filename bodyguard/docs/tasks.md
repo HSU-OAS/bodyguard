@@ -17,7 +17,7 @@
 | 동작 근거와 촬영 가능성 | 후보별 출처·주의점·필수 관절·촬영 계획과 관찰 하네스 | 후보 분류·근거·계획. 실제 동작/임계값 검증은 S2.3 | PR #2 main 병합, 출시 동작 0개 |
 | 새 아바타 제작 기준·초기 제작 | 남녀 Blender 모델·리그 기준과 시각 비교 | 새 편집 원본·기초 검수·권리·차이 기록. 최종 외형/웹 성능은 S2.4 | PR #3 main 병합, 최종 에셋 아님 |
 
-[1단계 준비 게이트](stage1-gate.md)는 증거 기준을 충족했다. [2단계 실행 순서](stories/stage2-first-flow.md)와 [S2.1 상세 명세](stories/stage2-account-api.md)·[하네스 계약](stories/stage2-account-harness.md)은 PR #4로 main 반영되었으며 실제 구현/검증 완료가 아니다. [사전 승인 운영 규칙](operating-rules.md)에 따라 다음 미완료 S2.1부터 진행한다.
+[1단계 준비 게이트](stage1-gate.md)는 증거 기준을 충족했다. [S2.1 상세 결과](stories/stage2-account-api.md)·[하네스](stories/stage2-account-harness.md)는 로컬 실제 API/PostgreSQL 62개·프런트 회귀 58개·가짜 카메라 E2E 1개와 코드 리뷰 통과다. Git 병합 상태는 구현 PR 참조. 실제 Gmail·화면·촬영·최종 아바타·2단계 전체는 미완료다. [사전 승인 운영 규칙](operating-rules.md)으로 PR 게이트 통과 후 S2.2를 진행한다.
 
 ---
 

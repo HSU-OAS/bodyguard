@@ -1,8 +1,8 @@
 # S2.1 — 계정·세션 하네스 계약
 
-2026-10-01 · **구현 전 / 아래 검증 전부 미실행**. [상세 Story](stage2-account-api.md), [단계 게이트](stage2-first-flow.md).
+2026-10-01 · **H-01~21 실행형 하네스 구현·로컬 통과 / 실제 메일·화면 미검증**. [상세 Story 결과](stage2-account-api.md), [단계 게이트](stage2-first-flow.md).
 
-실행형 하네스가 검사할 계약이다. API/DB는 아직 없으며 표나 기존 프런트 테스트로 계정 검증을 통과 처리하지 않는다. 구현 PR에서 하네스의 실제 실패(red)와 구현 후 통과(green) 증거를 남긴다.
+API/DB 검증 계약과 결과다. backend/tests/test_auth.py의 H 번호별 62개 테스트가 실제 PostgreSQL 18.6에서 통과했다. 아래 표나 기존 프런트 테스트만으로 계정 검증을 통과 처리하지 않으며 실제 red/green·환경·미실행 구분은 상세 Story에 기록한다.
 
 ## 실행 장치
 
@@ -53,6 +53,6 @@ HTTP 코드만 보지 않는다. DB 변경·발송 횟수·다음 요청 권한�
 
 ## 완료 증거
 
-구현 후 README에 uv sync --locked, 새 로컬 migration, uv run pytest, uv run ruff check ., uv run mypy app의 명령·테스트 DB 조건을 남긴다. backend가 없어 현재는 **실행 가능한 완료 증거가 아니다**.
+backend/README.md에 uv sync --locked, 새 로컬 migration, uv run pytest, uv run ruff check ., uv run mypy app의 명령·테스트 DB 조건이 있다. 테스트 DB가 없으면 skip하지 않고 실패한다. 메일 outbox는 pytest 한정이며 실제 Gmail 증거가 아니다.
 
 각 H 사례의 테스트 이름·실행 결과·PostgreSQL 버전·HEAD·모의/실제 메일·skip/미실행·남은 위험을 PR에 연결. git diff --check와 시크릿/입력 검사도 수행. 근거 없이 통과 표시하면 Story 게이트 실패.

@@ -40,6 +40,7 @@ pnpm dev
 | `pnpm test` | Vitest — 관절 신뢰, 자세 안내, 손가락, 스켈레톤 선분, 둥근 머리, 얼굴 추적(정면 기준·떨림·눈·입), 첫 화면 |
 | `pnpm test:e2e` | Playwright — 설치된 크롬과 가짜 카메라로 측정 시작·추론 루프·안내 문구·중지 확인 |
 | `pnpm typecheck` | 타입 검사만 |
+| `pnpm gen:api` | 실제 FastAPI 명세의 계정 타입 생성. backend의 uv sync --locked 선행, DB/SMTP/HTTP 서버 불필요 |
 | `pnpm check` / `pnpm format` | Biome 검사 / 자동 정리 |
 
 E2E는 설치된 Google Chrome을 쓴다. 크롬이 없으면 `pnpm exec playwright install chromium`으로 받고 `playwright.config.ts`의 `channel`을 지운다.

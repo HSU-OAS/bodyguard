@@ -103,7 +103,7 @@ bodyguard/                 ← 레포 루트 (HSU-OAS/bodyguard)
     │       ├── summary/   1분 집계·업로드 큐
     │       ├── api/       백엔드 클라이언트
     │       └── pages/     화면
-    └── backend/           FastAPI (아직 없음, tasks #1)
+    └── backend/           FastAPI 계정·세션 API (S2.1), 기록·구글 등은 후속 Story
 ```
 
 **`posture/`와 `stretch/`는 브라우저 API를 import하지 않는다.** DOM, MediaPipe, Three.js 모두 안 된다.
@@ -113,17 +113,19 @@ bodyguard/                 ← 레포 루트 (HSU-OAS/bodyguard)
 
 ## 빌드와 테스트
 
-프런트엔드는 있다(`frontend/README.md`). 백엔드는 아직 없다. pnpm이 설치돼 있지 않으면 `pnpm` 대신 `npx pnpm@12`를 쓴다.
+프런트는 `frontend/README.md`, 계정 백엔드는 `backend/README.md`를 따른다. PostgreSQL·필수 환경 변수를 로컬 전용으로 준비한다. pnpm이 설치돼 있지 않으면 `pnpm` 대신 `npx pnpm@12`를 쓴다.
 
 ```bash
 docker compose up -d db                      # PostgreSQL 18
 cd frontend && pnpm install && pnpm dev      # localhost라 HTTPS 없이도 카메라가 켜진다
 cd frontend && pnpm test                     # Vitest — 판정 엔진 (빠름, 자주 돌릴 것)
 cd frontend && pnpm test:e2e                 # Playwright — 설치된 크롬 + 가짜 카메라
-cd frontend && pnpm gen:api                  # FastAPI 명세로 API 타입 생성 (백엔드가 생기면 추가)
+cd frontend && pnpm gen:api                  # 실제 FastAPI 명세로 타입 생성 (서버/DB/메일 불필요)
 cd frontend && pnpm check                    # Biome
-cd backend && uv sync && uv run uvicorn app.main:app --reload
-cd backend && uv run pytest
+cd backend && uv sync --locked
+cd backend && uv run alembic upgrade head     # 새 로컬 DB 한정; 운영은 별도 승인
+cd backend && uv run uvicorn app.main:create_app --factory --host 127.0.0.1 --no-proxy-headers --no-access-log
+cd backend && uv run pytest                  # 격리 BODYGUARD_TEST_DATABASE_URL 필수
 cd backend && uv run ruff check . && uv run mypy app
 ```
 

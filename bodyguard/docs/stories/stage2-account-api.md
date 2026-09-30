@@ -1,6 +1,6 @@
 # S2.1 — 이메일 계정·세션 API
 
-2026-10-01 · **명세 main 반영 / 사전 승인 범위의 다음 미완료 Story** · E1, FR-U-02·03·04, NFR-08. [운영 규칙](../operating-rules.md).
+2026-10-01 · **S2.1 로컬 구현·필수 검증·코드 리뷰 통과** · E1, FR-U-02·03·04, NFR-08. Git 병합 증거는 구현 PR의 Verification을 따른다. [운영 규칙](../operating-rules.md). 화면·실제 Gmail 연결·2단계 완료를 뜻하지 않는다.
 
 사용자는 자기 이메일을 확인한 계정으로 로그인하고 본인 세션을 조회하며 로그아웃으로 서버 접근 권한을 끊는다. 화면은 S2.2에서 연결한다. [단계 명세](stage2-first-flow.md)와 [하네스 계약](stage2-account-harness.md)을 함께 따른다.
 
@@ -28,9 +28,9 @@
 
 | 메서드·경로 | 정상 | 실패·보안 |
 |---|---|---|
-| GET /auth/csrf | 익명/현재 세션에 묶인 토큰 | no-store, 인증 권한 없음 |
+| GET /auth/csrf | 익명/현재 세션에 묶인 토큰 | no-store, 인증 권한 없음. 익명 신규 발급 IP당 100회/분·429 |
 | POST /auth/signup | email/password → 202·불투명 challenge_id | 422/429/503, 기존 계정 수정 금지 |
-| POST /auth/verify | challenge_id/code → 최초 201 | 무효/만료/소비됨 공통 400, 원자적 소비·이메일 유일성 |
+| POST /auth/verify | challenge_id/code → 최초 201·id/email/새 CSRF·쿠키 | 무효/만료/소비됨 공통 400, 원자적 소비·이메일 유일성 |
 | POST /auth/resend | challenge_id → 202 | 너무 이르면 429·Retry-After, 발송 실패 503, 이전 코드 무효 |
 | POST /auth/login | email/password → 200·본인·새 CSRF | 실패 401·제한 429, 인증 토큰을 JSON/URL에 넣지 않음 |
 | GET /me | id/email → 200 | 무효 세션 401, user_id는 서버만 결정 |
@@ -49,10 +49,24 @@ challenge_id도 충분한 난수로 만든다. 유효한 가입 요청은 기존
 
 ## 개발 경계·완료
 
-현재 main에 backend/compose는 없다. ADR-0011/0015의 Python 3.14/FastAPI/PostgreSQL 18/uv 구조를 재사용하고 auth가 쓰는 코드만 만든다. lock으로 의존성 고정·설치 호환 검사. 무관한 AI/기록 모듈의 빈 껍데기 생성 금지.
+착수 기준 main 887c587에는 backend/compose가 없었다. ADR-0011/0015의 Python 3.14/FastAPI/PostgreSQL 18/uv 구조를 재사용해 auth가 쓰는 코드만 만들었다. lock으로 의존성 고정·설치 호환 검사. 무관한 AI/기록 모듈의 빈 껍데기 생성 금지.
 
 예상 신규 위치: backend/pyproject.toml·lock, app/main.py·auth·최소 DB, alembic 새 migration, tests·README와 로컬 compose.yaml. 실제 코드 크기에 맞춰 나눈다. 기존 migration·.env·CI는 수정하지 않으며 운영 DB 작업은 하지 않는다.
 
 frontend/App.tsx는 측정 데모를 즉시 보여준다. 이 Story에서는 변경하지 않는다. S2.2에서 공개/보호 경계를 만들고 모델 조절·촬영 관찰 등 기존 개발 기능은 개발 경로로 보존하되 제품에 노출하지 않는다.
 
 완료 증거: 실제 API/PostgreSQL 테스트·로컬 migration 재현, lint/type 검사, 민감 입력 미노출·경쟁/실패 증거·README. 미실행/skip/가짜 메일을 실제 연결·출시 완료로 표시하지 않는다. Story·Git·조건부 병합은 사전 승인 운영 규칙을 따르고 외부/운영 작업은 별도 승인을 받는다.
+
+## 개발 기록·실행 증거
+
+- 기준 main: 887c587(PR #5). branch codex/stage2-account-api, 제품 App/카메라/아바타·기존 migration·.env·CI·운영 DB는 변경하지 않았다.
+- 구현: backend/app의 FastAPI·Argon2id·HMAC 코드·DB 세션/공유 제한, 신규 0001_accounts migration, tests/test_auth.py. frontend의 API 타입 생성만 연결했으며 계정 화면은 S2.2다.
+- red: pytest 경로 오류를 먼저 고친 뒤, 실제 새 PostgreSQL DB에서 H-01이 미구현 GET csrf=404로 실패. green: H-01~21에 연결한 62개 테스트 통과, skip 0. 시간·난수·메일만 fixture이며 DB/권한/독립 연결 경쟁은 실제다.
+- 실제 환경: macOS, Python 3.14.7, uv 0.11.3(설치된 버전), FastAPI 0.141.1, SQLAlchemy 2.1.1, PostgreSQL 18.6의 전용 Unix 소켓 클러스터. uv sync --locked, pytest -q, Ruff check/format check, mypy app 통과.
+- migration: 격리 DB에서 alembic check → downgrade base → upgrade head → check 통과. 사용자/운영 DB에 적용하지 않았다.
+- 실제 TCP 시험: localhost Uvicorn factory 기동, csrf=200·me=401; 임시 PG 중단 시 503(인증 폴백 0), 재기동 후 200. 실제 외부 서버/HTTPS 배포 시험은 아니다.
+- 프런트 회귀: pnpm test 58개, check·typecheck·build·gen:api 통과. Chrome/가짜 카메라 Playwright 1개 통과. 실제 촬영·자세 정확도 검증으로 세지 않는다.
+- CTO 기술 보완: 비ASCII CSRF 헤더는 403, 잠금 대기 후 만료 재확인, 세션→challenge→quota 정리 순서, 익명 발급 100/IP/분. 동기 SMTP timeout 10초는 실패를 성공으로 숨기지 않는 최소 구현이며 실제 공급자 수신·처리량은 미검증이다.
+- 리뷰 보완/재검증: 쿠키 fixture 중복 도메인과 두 사용자 시험의 세션 회전을 바로잡고 독립 계정 격리를 검사했다. production 테스트 provider/clock·env test 기동 차단, 민감 validation 입력 미반사·유일성·단일 소비·폐기 지속·동시 로그인 제한·이메일 비합치기를 검사했다. 빈 메일 설정도 실제 연결 없이 503이며 코드 생성기는 SMTP 환경을 가져오지 않는다. 현재 diff의 보안/성능/정확성/유지보수 재검토에 미해결 P1/P2 없음. 원격 최신 diff·HEAD·CLEAN·체크 확인은 병합 직전 별도 수행한다.
+- 남은 경고: TestClient의 httpx 호환 계층 deprecation 1개, 기존 데모 Vite chunk 크기 경고. 인증 실패나 실제 촬영 통과로 왜곡하지 않는다. CI 체크는 아직 없다.
+- 미실행: 실제 Gmail 발송/도착, Google·복구, Docker DB 기동(daemon 없음; compose config는 통과), 계정 화면 E2E, 실제 노트북 자세·최종 아바타·HTTPS·운영·출시. 다음 미완료 Story S2.2.

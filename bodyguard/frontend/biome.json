@@ -26,5 +26,17 @@
         "organizeImports": "on"
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["src/api/generated/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConfusingVoidType": "off"
+          }
+        }
+      }
+    }
+  ]
 }
