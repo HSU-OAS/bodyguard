@@ -1,16 +1,21 @@
 // @vitest-environment happy-dom
-import { fireEvent, render, screen, within } from '@testing-library/react'
-import { expect, it, vi } from 'vitest'
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react'
+import { MemoryRouter } from 'react-router'
+import { afterEach, expect, it, vi } from 'vitest'
 import { useMeasurement } from '../pose/useMeasurement'
 import { MeasureDemoPage } from './MeasureDemoPage'
 
 vi.mock('../avatar/Skeleton3D', () => ({ Skeleton3D: () => null }))
 vi.mock('../pose/useMeasurement', () => ({ useMeasurement: vi.fn() }))
 
-// FR-M-02·FR-M-07: 가시성 충족을 성공으로 기록하거나 원시 좌표를 저장하지 않는다.
-it('상반신 프레임은 머리·어깨 범위만 충족하며 전신·미검출 기록은 촬영 안내를 남긴다', () => {
+afterEach(() => {
+  cleanup()
+  vi.restoreAllMocks()
+})
+
+function measurementFixture(): ReturnType<typeof useMeasurement> {
   const noop = vi.fn()
-  const measurement: ReturnType<typeof useMeasurement> = {
+  return {
     status: 'running',
     error: null,
     stats: {
@@ -34,10 +39,12 @@ it('상반신 프레임은 머리·어깨 범위만 충족하며 전신·미검�
     setHandsEnabled: noop,
     faceEnabled: false,
     setFaceEnabled: noop,
-    start: noop,
-    stop: noop,
+    start: vi.fn(),
+    stop: vi.fn(),
     poseRef: {
       current: {
+        sampledAt: performance.now(),
+        personCount: 1,
         image: Array.from({ length: 33 }, (_, i) => ({
           x: 0.481234,
           y: i >= 23 ? 1.3 : 0.5,
@@ -50,9 +57,14 @@ it('상반신 프레임은 머리·어깨 범위만 충족하며 전신·미검�
       },
     },
   }
+}
+
+// FR-M-02·FR-M-07: 가시성 충족을 성공으로 기록하거나 원시 좌표를 저장하지 않는다.
+it('상반신 프레임은 머리·어깨 범위만 충족하며 전신·미검출 기록은 촬영 안내를 남긴다', () => {
+  const measurement = measurementFixture()
   vi.mocked(useMeasurement).mockReturnValue(measurement)
   const storage = vi.spyOn(Storage.prototype, 'setItem')
-  const view = render(<MeasureDemoPage />)
+  const view = render(<MeasureDemoPage />, { wrapper: MemoryRouter })
   const panel = within(screen.getByRole('region', { name: '동작 촬영 검증' }))
   const record = panel.getByRole('button', { name: '현재 프레임 기록' })
   fireEvent.click(record)
@@ -66,6 +78,7 @@ it('상반신 프레임은 머리·어깨 범위만 충족하며 전신·미검�
   expect(panel.getAllByRole('listitem')[1].textContent).toContain('한 걸음 뒤로')
 
   measurement.poseRef.current.image = null
+  measurement.poseRef.current.personCount = 0
   fireEvent.click(record)
   expect(panel.getAllByRole('listitem')[2].textContent).toContain('0/9')
   expect(panel.getAllByRole('listitem')[2].textContent).toContain('카메라 앞에 서 주세요')
@@ -76,4 +89,46 @@ it('상반신 프레임은 머리·어깨 범위만 충족하며 전신·미검�
   fireEvent.click(panel.getByRole('button', { name: '기록 지우기' }))
   expect(panel.queryAllByRole('listitem')).toHaveLength(0)
   storage.mockRestore()
+})
+
+it('첫 프레임 전·오래된 프레임·복수 포즈를 촬영 범위 충족으로 기록하지 않는다', () => {
+  const clock = vi.spyOn(performance, 'now').mockReturnValue(1000)
+  const measurement = measurementFixture()
+  vi.mocked(useMeasurement).mockReturnValue(measurement)
+  render(<MeasureDemoPage />, { wrapper: MemoryRouter })
+  const panel = within(screen.getByRole('region', { name: '동작 촬영 검증' }))
+  const record = panel.getByRole('button', { name: '현재 프레임 기록' })
+  clock.mockReturnValue(2001)
+  fireEvent.click(record)
+  measurement.poseRef.current.sampledAt = null
+  fireEvent.click(record)
+  measurement.poseRef.current.sampledAt = 3000 // 미래 시각도 거부
+  fireEvent.click(record)
+  measurement.poseRef.current.sampledAt = 2001
+  measurement.poseRef.current.personCount = 2
+  fireEvent.click(record)
+  const rows = panel.getAllByRole('listitem')
+  for (const row of rows) {
+    expect(row.textContent).toContain('0/5')
+    expect(row.textContent).not.toContain('촬영 범위 충족 (동작 성공 아님)')
+  }
+  expect(rows[0].textContent).toContain('새 프레임 대기')
+  expect(rows[3].textContent).toContain('복수 포즈')
+})
+
+it('최신 100개만 남기고 준비 중에도 취소할 수 있다', () => {
+  vi.spyOn(performance, 'now').mockReturnValue(1000)
+  const measurement = measurementFixture()
+  vi.mocked(useMeasurement).mockReturnValue(measurement)
+  const view = render(<MeasureDemoPage />, { wrapper: MemoryRouter })
+  const panel = within(screen.getByRole('region', { name: '동작 촬영 검증' }))
+  const record = panel.getByRole('button', { name: '현재 프레임 기록' })
+  for (let i = 0; i < 101; i++) fireEvent.click(record)
+  expect(panel.getAllByRole('listitem')).toHaveLength(100)
+  measurement.status = 'starting'
+  view.rerender(<MeasureDemoPage />)
+  fireEvent.click(screen.getByRole('button', { name: '준비 취소' }))
+  expect(measurement.stop).toHaveBeenCalledTimes(1)
+  expect(measurement.start).not.toHaveBeenCalled()
+  expect(record.hasAttribute('disabled')).toBe(true)
 })

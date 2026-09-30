@@ -15,7 +15,20 @@ export const MIN_VISIBILITY = 0.5
 export const HEAD_SHOULDER_JOINTS: readonly number[] = [0, 7, 8, 11, 12]
 
 /** 화면 좌표(0~1)가 카메라 화면 안에 있는가 */
-export const isInFrame = (p: Point): boolean => p.x >= 0 && p.x <= 1 && p.y >= 0 && p.y <= 1
+export const isInFrame = (p: Point): boolean =>
+  Number.isFinite(p.x) &&
+  Number.isFinite(p.y) &&
+  Number.isFinite(p.z) &&
+  p.x >= 0 &&
+  p.x <= 1 &&
+  p.y >= 0 &&
+  p.y <= 1
+
+// FR-M-07 비정상 모델 값을 신뢰도/관절 색으로 전파하지 않는다. 실제 관절 가시성 보장은 아니다.
+const visibility = (p: Point): number => {
+  const value = p.visibility ?? 0
+  return Number.isFinite(value) && value >= 0 && value <= 1 ? value : 0
+}
 
 /**
  * 관절마다 믿고 쓸 수 있는지. 가시성이 충분하고 화면 안에 있어야 한다.
@@ -27,7 +40,14 @@ export function trustedJoints(
 ): boolean[] {
   return Array.from({ length: JOINT_COUNT }, (_, i) => {
     const p = image?.[i]
-    return p !== undefined && (p.visibility ?? 0) >= min && isInFrame(p)
+    return (
+      p !== undefined &&
+      Number.isFinite(min) &&
+      min > 0 &&
+      min <= 1 &&
+      visibility(p) >= min &&
+      isInFrame(p)
+    )
   })
 }
 
@@ -36,7 +56,7 @@ export function headShoulderConfidence(image: readonly Point[] | null | undefine
   if (!image || image.length < JOINT_COUNT) return null
   const sum = HEAD_SHOULDER_JOINTS.reduce((acc, i) => {
     const p = image[i]
-    return acc + (p && isInFrame(p) ? (p.visibility ?? 0) : 0)
+    return acc + (p && isInFrame(p) ? visibility(p) : 0)
   }, 0)
   return sum / HEAD_SHOULDER_JOINTS.length
 }

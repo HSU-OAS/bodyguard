@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router'
 import { drawSkeleton2D } from '../avatar/drawSkeleton2D'
 import { Skeleton3D } from '../avatar/Skeleton3D'
 import { StatsPanel } from '../components/StatsPanel'
@@ -27,6 +28,11 @@ const TRIAL_SCENARIOS = [
   '상반신만 보임',
   '한쪽 어깨 가림',
   '전신 보임',
+  '얼굴 가림',
+  '두 사람 보임',
+  '대상 전환',
+  '사선·역광·어두움',
+  '카메라 중단',
 ] as const
 
 // 스켈레톤이 내 몸을 따라 움직이는지 확인하는 데모 화면. 자세 판정·알림은 아직 없다
@@ -79,15 +85,25 @@ export function MeasureDemoPage() {
   }, [stats.gesture])
 
   const captureTrial = () => {
-    const points = poseRef.current.image
+    const pose = poseRef.current
+    // FR-M-07 개발 관찰용 1초 상한. 동작 판정/유지 시간의 검증된 수치가 아니다.
+    const age = pose.sampledAt === null ? null : performance.now() - pose.sampledAt
+    const fresh = age !== null && Number.isFinite(age) && age >= 0 && age <= 1000
+    const points = running && fresh && pose.personCount === 1 ? pose.image : null
     const trusted = trustedJoints(points)
     const required = REQUIRED_JOINTS[framingMode]
     const visible = required.filter((joint) => trusted[joint]).length
-    const hint = framingHint(points !== null, trusted, framingMode)
+    const hint = !running
+      ? '측정 중 아님'
+      : !fresh
+        ? '새 프레임 대기 (촬영 범위 충족 아님)'
+        : pose.personCount > 1
+          ? '복수 포즈 — 한 사람만 화면에 들어오게 해 주세요'
+          : framingHint(points !== null, trusted, framingMode)
     const scope = framingMode === 'seated' ? '머리·어깨' : '전신'
     const id = ++trialId.current
     setTrialRows((rows) => [
-      ...rows,
+      ...rows.slice(-99),
       {
         id,
         text: `${trialScenario} / ${scope}: 필수 관절 ${visible}/${required.length} · ${hint ?? '촬영 범위 충족 (동작 성공 아님)'}`,
@@ -105,6 +121,9 @@ export function MeasureDemoPage() {
           </p>
         </div>
         <div className="flex items-center gap-3">
+          <Link to="/" className="rounded-lg px-3 py-2 underline focus-visible:outline-2">
+            서비스로 돌아가기
+          </Link>
           {/* FR-M-01 측정 중에는 항상 표시한다 */}
           {running && (
             <span
@@ -116,11 +135,10 @@ export function MeasureDemoPage() {
           )}
           <button
             type="button"
-            onClick={running ? stop : start}
-            disabled={status === 'starting'}
+            onClick={running || status === 'starting' ? stop : start}
             className="rounded-lg bg-sky-500 px-4 py-2 font-medium text-slate-950 hover:bg-sky-400 disabled:opacity-50"
           >
-            {running ? '측정 중지' : status === 'starting' ? '준비 중…' : '측정 시작'}
+            {running ? '측정 중지' : status === 'starting' ? '준비 취소' : '측정 시작'}
           </button>
         </div>
       </header>
@@ -198,7 +216,7 @@ export function MeasureDemoPage() {
           <h2 className="font-semibold">동작 촬영 검증 · 개발 전용</h2>
           <p className="mt-1 text-slate-400">
             관찰자가 상황을 선택한 뒤 현재 프레임의 필수 관절만 기록합니다. 자세의 옳음·통증·성공은
-            판정하지 않습니다. 기록은 이 화면의 메모리에만 있고 새로고침하면 사라집니다.
+            판정하지 않습니다. 최신 100개 요약만 이 화면의 메모리에 있고 새로고침하면 사라집니다.
           </p>
           <div className="mt-3 flex flex-wrap items-end gap-3">
             <label className="flex flex-col gap-1">

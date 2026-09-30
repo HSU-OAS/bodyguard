@@ -206,18 +206,24 @@ function Shell() {
   )
 }
 
+// FR-M-01·07 라우트 이탈은 측정 화면을 실제로 해제하여 카메라를 끈다.
+function AppContent() {
+  const location = useLocation()
+  return Demo && location.pathname === '/dev/measure' ? (
+    <Suspense fallback={<p role="status">개발 도구를 여는 중입니다</p>}>
+      <Demo />
+    </Suspense>
+  ) : (
+    <AuthProvider>
+      <Shell />
+    </AuthProvider>
+  )
+}
+
 export function App() {
   return (
     <BrowserRouter>
-      {Demo && window.location.pathname === '/dev/measure' ? (
-        <Suspense fallback={<p role="status">개발 도구를 여는 중입니다</p>}>
-          <Demo />
-        </Suspense>
-      ) : (
-        <AuthProvider>
-          <Shell />
-        </AuthProvider>
-      )}
+      <AppContent />
     </BrowserRouter>
   )
 }
