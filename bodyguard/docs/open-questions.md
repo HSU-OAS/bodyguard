@@ -155,7 +155,7 @@
 
 ### Q-23 브랜치·리뷰·CI
 - CEO 확정(2026-09-29): 최신 `origin/main`에서 Story마다 새 `codex/*` 브랜치, 한 PR에 한 목적, `main` 직접 푸시 금지. 커밋·PR 제목은 `docs: ...`, `feat(web): ...`처럼 목적·범위를 표시하고 본인 계정만 사용한다
-- 로컬 커밋, 푸시·PR 생성, 정확한 번호의 `PR #번호 병합 승인`은 각각 별도 승인. 병합 직전 최신 diff·CLEAN·체크를 재확인하고 체크가 없으면 명시한다. merge commit으로 병합하며 브랜치를 자동 삭제하지 않는다
+- CEO 변경(2026-10-01): [운영 규칙](operating-rules.md)에 따라 합의 1~6단계 Story·커밋·푸시·PR·리뷰 보완·다음 Story를 사전 승인. 필수 검증 통과·미해결 P1/P2 없음·최신 diff/충돌/체크 확인을 충족한 PR 병합도 사전 승인. merge commit·브랜치 유지·CLEAN 확인·체크 없음 표기는 그대로다
 - 서버·시크릿·운영 DB migration·배포·비용은 병합과 별도 승인. 읽기·로컬 테스트·PR 재검토는 승인 불필요
 - CI 도구는 GitHub Actions로 확정(ADR-0015). 현재 체크는 없으며 도입은 별도 Story로 진행한다. Git 규칙은 더 이상 PO 제안이 아니다
 
@@ -232,7 +232,7 @@ M-4의 단안 깊이 모델은 무겁다. 정답과 가장 잘 맞더라도 CPU 
 | Q-01 | 개발 스택 — React 19.3 + TypeScript 6.0 + Vite 8 / Python 3.14 + FastAPI / PostgreSQL 18 / Docker. 실제 설치·빌드로 버전 검증 | 원문 46~48 | ADR-0015, design §2, AGENTS.md |
 | Q-03 | DB는 PostgreSQL 18 | 원문 48 | ADR-0015 |
 | Q-13 일부 | PDF 라이브러리는 WeasyPrint. 내용은 아직 | 원문 48 | ADR-0015, design §15 |
-| Q-23 | CI는 GitHub Actions(아직 미구현). 최신 main의 Story 브랜치·개별 Git/운영 승인·merge commit·브랜치 유지 | 원문 48, CEO 2026-09-29 Git 규칙 | ADR-0015, AGENTS.md, release-plan.md |
+| Q-23 | CI는 GitHub Actions(아직 미구현). 최신 main의 Story 브랜치·조건부 Git 사전 승인·운영 별도 승인·merge commit·브랜치 유지 | 원문 48, CEO 2026-09-29/10-01 Git 규칙 | ADR-0015, AGENTS.md, operating-rules.md |
 | Q-02 | 인증은 FastAPI에서 직접 만든다. 구글 OAuth + 이메일 가입 | 원문 42 | ADR-0006, design §13 |
 | Q-14 | 리포트에 LLM 자연어 요약을 넣는다. 상용 LLM API, 비교 테스트를 통과한 모델 중 가장 싼 것 | 원문 41 | ADR-0013, FR-R-07, design §15 |
 | Q-16 | 가입할 때 메일 인증을 필수로 한다. 팀 Gmail로 보내고 서버에서 코드를 대조한다. 비밀번호 재설정도 같은 메일로 | 원문 42 | FR-U-03, design §13 |

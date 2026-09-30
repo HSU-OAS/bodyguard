@@ -17,7 +17,7 @@
 | 동작 근거와 촬영 가능성 | 후보별 출처·주의점·필수 관절·촬영 계획과 관찰 하네스 | 후보 분류·근거·계획. 실제 동작/임계값 검증은 S2.3 | PR #2 main 병합, 출시 동작 0개 |
 | 새 아바타 제작 기준·초기 제작 | 남녀 Blender 모델·리그 기준과 시각 비교 | 새 편집 원본·기초 검수·권리·차이 기록. 최종 외형/웹 성능은 S2.4 | PR #3 main 병합, 최종 에셋 아님 |
 
-[1단계 통과 검토](stage1-gate.md)는 CEO 결정 전이다. [2단계 실행 순서](stories/stage2-first-flow.md)와 [S2.1 상세 명세](stories/stage2-account-api.md)·[하네스 계약](stories/stage2-account-harness.md)은 검토안이며 구현/검증 완료가 아니다.
+[1단계 준비 게이트](stage1-gate.md)는 증거 기준을 충족했다. [2단계 실행 순서](stories/stage2-first-flow.md)와 [S2.1 상세 명세](stories/stage2-account-api.md)·[하네스 계약](stories/stage2-account-harness.md)은 PR #4로 main 반영되었으며 실제 구현/검증 완료가 아니다. [사전 승인 운영 규칙](operating-rules.md)에 따라 다음 미완료 S2.1부터 진행한다.
 
 ---
 
@@ -66,7 +66,7 @@
 | # | 작업 | 근거 | 필요한 결정 | 산출물 | 담당 | 기간 |
 |---|---|---|---|---|---|---|
 | 1 | `frontend/`·`backend/` 초기화 — ADR-0015 버전, pnpm 보안 설정, Docker Compose(PostgreSQL 18) | design §2, §3 | | 빌드·테스트 되는 빈 프로젝트 | | |
-| 2 | CI — GitHub Actions로 PR마다 테스트·코드 검사 | AGENTS.md, ADR-0015 | CI 도입 Story 승인 (Q-23 Git 규칙은 확정) | PR에서 테스트 통과 | | |
+| 2 | CI — GitHub Actions로 PR마다 테스트·코드 검사 | AGENTS.md, ADR-0015 | 합의 검증 범위의 별도 Story로 도입 | PR에서 테스트 통과 | | |
 | 3 | MediaPipe 측정 프로토타입, fps 측정 (WASM·모델 파일 복사 포함) | design §4.1 | | 모델·환경별 fps 기록 (M-2) | | |
 | 4 | 뒤 탭 측정 실험 (방식 a → b → c) | design §4.3 | | 측정 간격 기록 (M-1), ADR-0004 갱신 | | |
 | 5 | 지표 실험 — 정면 웹캠과 옆모습 폰으로 동시에 기록하고 자세별 라벨. 목 후보 4개(깊이값·2D 지수·얼굴/어깨 비율·깊이 모델) 비교 | design §5.4, §5.7 | | 랜드마크 픽스처, 후보별 비교표 (M-3, M-4) | | |
