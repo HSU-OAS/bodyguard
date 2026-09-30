@@ -2,7 +2,7 @@
 
 React 19.3 + TypeScript 6.0 + Vite 8. 쓰는 버전과 이유는 [ADR-0015](../docs/adr/0015-tech-stack.md)에 있다.
 
-지금은 **스켈레톤 데모**만 있다. 웹캠으로 잡은 몸을 스켈레톤이 따라 움직이는지 확인하는 화면이다. 자세 판정·알림·서버 연결은 아직 없다.
+공개 소개·이메일 가입/인증·로그인·보호된 시작·로그아웃을 실제 계정 API에 연결했다(S2.2). 스트레칭 선택·추천·고품질 두 아바타·코칭·기록은 아직 구현 중이며 출시 가능 상태가 아니다. 기존 스켈레톤은 개발 전용 시제품이다.
 
 ## 실행
 
@@ -17,9 +17,13 @@ pnpm dev
 - MediaPipe WASM을 `public/mediapipe/`에 복사한다
 - 모델 다섯 개를 Google MediaPipe 공식 저장소(Apache-2.0)에서 `public/models/`로 받는다. 포즈 lite 5.5MB·full 9.0MB·heavy 29.2MB, 손가락·제스처 8.0MB, 얼굴 3.8MB
 
-크롬이나 엣지에서 http://localhost:5173 을 열고 **측정 시작**을 누른 뒤 카메라를 허용한다. localhost라 HTTPS 없이도 카메라가 켜진다.
+크롬에서 http://localhost:5173 을 열면 서비스 소개가 나온다. `/api`는 127.0.0.1:8000의 로컬 백엔드로 연결한다. backend/README.md의 필수 변수·로컬 migration·실행 명령을 먼저 따른다. 로컬 Origin은 `http://localhost:5173`과 정확히 일치해야 한다. SMTP가 설정되지 않으면 가입 발송은 실패하며 가짜로 성공시키지 않는다. 실제 Gmail/시크릿 연결은 CEO 별도 승인 대상이다.
 
-## 화면
+계정 접속·로그인만으로 카메라·MediaPipe·3D를 시작하지 않는다. `/start` 직접 방문도 `/me` 확인 전에는 개인 화면을 열지 않는다. HTTP 세션 쿠키는 서버의 HttpOnly 쿠키이고 인증값을 localStorage/sessionStorage에 두지 않는다. 가입 폼 새로고침 시 메모리 입력은 사라지며 안전하게 다시 시작한다.
+
+개발 빌드의 http://localhost:5173/dev/measure 에서만 **측정 시작**으로 시제품 카메라를 허용할 수 있다. production 빌드에는 이 경로·측정 UI 코드가 없다. 이 데모가 제품 인증이나 실제 출시 코칭을 우회하는 것은 아니다.
+
+## 개발용 측정 화면
 
 - 왼쪽: 웹캠 화면(거울처럼 좌우 반전) 위에 2D 스켈레톤. 개발용 확인 화면이다. 제품 화면에는 영상을 보여주지 않는다 (FR-V-02)
 - 오른쪽: 3D 스켈레톤. MediaPipe 월드 좌표(엉덩이 중심, 미터)로 그린다. 마우스로 돌려 볼 수 있다
@@ -38,12 +42,18 @@ pnpm dev
 | `pnpm dev` | 개발 서버 (자산 준비 포함) |
 | `pnpm build` | 자산 준비 + 타입 검사 + 프로덕션 빌드 |
 | `pnpm test` | Vitest — 관절 신뢰, 자세 안내, 손가락, 스켈레톤 선분, 둥근 머리, 얼굴 추적(정면 기준·떨림·눈·입), 첫 화면 |
-| `pnpm test:e2e` | Playwright — 설치된 크롬과 가짜 카메라로 측정 시작·추론 루프·안내 문구·중지 확인 |
+| `pnpm test:e2e` | 별도 5181 개발 서버에서 Chrome·가짜 카메라 회귀. 사용 중인 5173 서버는 재사용/종료하지 않음 |
 | `pnpm typecheck` | 타입 검사만 |
 | `pnpm gen:api` | 실제 FastAPI 명세의 계정 타입 생성. backend의 uv sync --locked 선행, DB/SMTP/HTTP 서버 불필요 |
 | `pnpm check` / `pnpm format` | Biome 검사 / 자동 정리 |
 
 E2E는 설치된 Google Chrome을 쓴다. 크롬이 없으면 `pnpm exec playwright install chromium`으로 받고 `playwright.config.ts`의 `channel`을 지운다.
+
+## 실제 API 계정 브라우저 하네스
+
+backend에서 격리 `BODYGUARD_TEST_DATABASE_URL`을 설정하고 `uv run python -m tests.run_browser`를 실행한다. 기존 API 하네스와 동일한 역할/DB/로컬 호스트 검사를 거친 **시험 DB의 계정 데이터만 초기화**한다. 사용자의 기존 서버를 재사용하지 않으며 8000·4173 포트가 사용 중이면 실패한다. 자체 API/preview만 종료하고 시험 메일 임시 파일을 정리한다. 실제 계정 API·PostgreSQL·production 화면을 사용하며 시험 메일만 격리 프로세스 파일로 전달한다. 공개 outbox API나 production 인증 stub은 없다. 실제 Gmail 발송 증거가 아니다.
+
+2026-10-01: Vitest 66개, 실제 API/SQL 계정 Chrome 9개(실제 60초 재발송 포함), 별도 개발 가짜 카메라 1개 통과. 1440px·700px 데스크톱 창의 공개/가입/인증/로그인/보호/오류 화면과 키보드 초점을 확인했다. 화면 증거는 `test-results/`에 재현되며 시험 주소만 사용한다. B-03 늦은 응답 상태 경쟁은 Vitest 모의 응답 검사이며 실제 브라우저 시험과 구분한다. 자세 정확도·실제 사람·Gmail·Google·HTTPS·최종 아바타는 미검증이다.
 
 ## 폴더
 
@@ -62,8 +72,8 @@ e2e/                         Playwright
 
 - 사람이 직접 확인했다(2026-09-26). 상반신과 몸 기울이기를 따라온다. 가짜 카메라 화면에는 사람이 없어서 자동 테스트로는 인식까지 보지 못한다
 - 둥근 머리의 방향·깜빡임·입(원문 57)은 사람 얼굴로 아직 확인하지 않았다. 고개를 돌린 쪽과 캐릭터가 도는 쪽이 거울처럼 맞는지, 한쪽 눈을 감으면 같은 쪽 눈이 감기는지 본다
-- 제품 화면에는 카메라 영상을 보여주지 않는다(FR-V-02). 지금 왼쪽 카메라 화면은 확인용이라 개발 빌드의 디버그 화면으로 옮긴다
+- 제품 화면에는 카메라 영상을 보여주지 않는다(FR-V-02). 왼쪽 영상과 디버그는 development 전용 `/dev/measure`로 분리했다
 - 이 맥에서 나온 fps와 추론 시간을 `docs/adr/0007-pose-oss-candidates.md`에 적는다 (M-2)
 - 다음 작업: 지표 실험 기록 도구(tasks #5), 판정 엔진 `src/posture/`(tasks #7), 스켈레톤 부위별 판정 색(tasks #12)
-- 첫 화면 JS가 1.3MB(gzip 370KB)다. 3D 화면을 지연 로딩으로 나눈다
+- S2.2 production 계정 진입 JS는 273.13KB(gzip 86.81KB)다. 개발 시제품 코드는 product에서 제외했다. 최종 두 아바타 성능은 S2.4에서 별도로 검증한다
 - 3D 화면은 매 프레임 다시 그린다. 더 가볍게 하려면 `frameloop="demand"`로 바꾸고 새 관절이 들어올 때만 그린다 (constitution P8)

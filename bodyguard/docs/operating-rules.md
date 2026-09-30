@@ -31,8 +31,8 @@ PR 본문은 Summary / Verification / Excluded로 작성한다. 검증에는 실
 
 명세 표는 실행형 하네스가 아니다. 가짜 카메라·메일 fixture·공급자 mock을 실제 촬영/외부 연결 완료로 세지 않는다. 전문가 검토만 남은 상태는 1~6단계가 실제 통과했을 때만 선언한다.
 
-## 현재 기준선
+## 운영 규칙 기록 시점의 기준선
 
-PR #1~4 main 병합 확인, 기준 main d14ae68. [1단계 준비 게이트](stage1-gate.md)는 계약·근거·촬영 계획·Blender 착수 기준을 충족한다. 최종 아바타·실촬영 정확도·계정/웹 서비스는 아직 완료가 아니다. 다음 미완료 구현 Story는 [S2.1 계정·세션 API](stories/stage2-account-api.md), 해당 [하네스 계약](stories/stage2-account-harness.md)을 실제 테스트로 구현한다.
+PR #1~4 main 병합 확인, 당시 기준 main d14ae68. [1단계 준비 게이트](stage1-gate.md)는 계약·근거·촬영 계획·Blender 착수 기준을 충족했다. 이 시점의 다음 구현은 [S2.1 계정·세션 API](stories/stage2-account-api.md)였다. **현재 진행 상태·다음 Story는 [tasks.md](tasks.md)와 [2단계 계약](stories/stage2-first-flow.md)을 읽는다.** 기록 시점의 미완료 상태를 현재 상태로 사용하지 않는다.
 
 이 문서 Story는 운영 권한·문서 정합화만 포함하며 제품 구현·외부 연결·운영 작업을 하지 않는다. 로컬 링크·이전 승인 대기 문구·diff 검사와 PR 재검토를 필수 검증으로 둔다.

@@ -4,8 +4,8 @@ import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  server: { port: 5173, strictPort: true },
-  preview: { port: 4173, strictPort: true },
+  server: { port: 5173, strictPort: true, proxy: { '/api': 'http://127.0.0.1:8000' } },
+  preview: { port: 4173, strictPort: true, proxy: { '/api': 'http://127.0.0.1:8000' } },
   test: {
     include: ['src/**/*.test.{ts,tsx}'],
     environment: 'node',

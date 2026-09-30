@@ -7,15 +7,16 @@ from datetime import timedelta
 from threading import Barrier
 
 import pytest
-from conftest import ORIGIN, PASSWORD, Harness
+from fastapi import FastAPI
 from fastapi.testclient import TestClient
 from pydantic import SecretStr, ValidationError
-from sqlalchemy import func, inspect, select, text
+from sqlalchemy import Table, func, inspect, select, text
 
 from app.config import Settings
 from app.db import challenges, limits, metadata, sessions, users
 from app.main import create_app
 from app.security import digest, passwords
+from tests.conftest import ORIGIN, PASSWORD, Harness
 
 
 def test_h01_unverified_signup_has_no_account_or_session(harness: Harness) -> None:
@@ -34,9 +35,9 @@ def test_h01_unverified_signup_has_no_account_or_session(harness: Harness) -> No
     assert len(h.mail.messages) == 1
 
 
-def count(h: Harness, table: object) -> int:
+def count(h: Harness, table: Table) -> int:
     with h.engine.connect() as connection:
-        return int(connection.scalar(select(func.count()).select_from(table)))
+        return int(connection.execute(select(func.count()).select_from(table)).scalar_one())
 
 
 def snapshot(h: Harness) -> str:
@@ -140,7 +141,7 @@ def concurrent_verify(h: Harness, pairs: list[tuple[str, str]]) -> list[int]:
     def run(index: int) -> int:
         challenge, value = pairs[index]
         barrier.wait(timeout=15)
-        return (
+        return int(
             clients[index]
             .post(
                 "/api/v1/auth/verify",
@@ -241,6 +242,26 @@ def test_h09_resend_exact_boundary_replaces_code(
     assert h.verify(challenge, "654321").status_code == 201
 
 
+@pytest.mark.parametrize("stuck", [False, True])
+def test_h09_resend_cannot_reissue_immediately_previous_value(
+    harness: Harness, monkeypatch: pytest.MonkeyPatch, stuck: bool
+) -> None:
+    h = harness
+    challenge = h.signup()
+    previous = h.mail.messages[-1][1]
+    different = str((int(previous) + 1) % 1_000_000).zfill(6)
+    values = iter([previous, different])
+    monkeypatch.setattr("app.main.code", lambda: previous if stuck else next(values))
+    h.clock.now += timedelta(seconds=60)
+    result = h.client.post(
+        "/api/v1/auth/resend", headers=h.csrf(), json={"challenge_id": challenge}
+    )
+    assert result.status_code == (503 if stuck else 202)
+    assert h.verify(challenge, previous).status_code == 400
+    if not stuck:
+        assert h.verify(challenge, different).status_code == 201
+
+
 def test_h10_mail_failure_invalidates_old_code_and_retry(harness: Harness) -> None:
     h = harness
     h.mail.fail = True
@@ -286,7 +307,7 @@ def test_h10_concurrent_resend_sends_once(harness: Harness) -> None:
 
     def run(i: int) -> int:
         barrier.wait(timeout=15)
-        return (
+        return int(
             clients[i]
             .post("/api/v1/auth/resend", headers=headers[i], json={"challenge_id": challenge})
             .status_code
@@ -309,7 +330,7 @@ def test_h11_email_quota_concurrent_and_restarted(harness: Harness) -> None:
 
     def run(i: int) -> int:
         barrier.wait(timeout=15)
-        return (
+        return int(
             clients[i]
             .post(
                 "/api/v1/auth/signup",
@@ -420,7 +441,7 @@ def test_h11_concurrent_login_failures_cannot_exceed_email_quota(harness: Harnes
 
     def run(i: int) -> int:
         barrier.wait(timeout=15)
-        return (
+        return int(
             clients[i]
             .post(
                 "/api/v1/auth/login",
@@ -678,7 +699,7 @@ def test_h19_production_requires_security_and_mail(harness: Harness, missing: st
     with pytest.MonkeyPatch.context() as patch:
         patch.delenv("BODYGUARD_SECURITY_KEY", raising=False)
         with pytest.raises(ValidationError):
-            Settings(**values)
+            Settings.model_validate(values)
 
 
 def test_h19_no_test_provider_or_environment_launch(harness: Harness) -> None:
@@ -754,10 +775,11 @@ def test_h20_cookie_json_db_logs_schema_are_safe(
             [list(connection.execute(select(table)).mappings()) for table in metadata.sorted_tables]
         )
         hashed = connection.scalar(select(users.c.password_hash))
+        assert isinstance(hashed, str)
         assert hashed.startswith("$argon2id$") and passwords.verify(PASSWORD, hashed)
-    combined = (
-        rows + json.dumps(h.client.app.openapi()) + caplog.text + invalid.text + response.text
-    )
+    app = h.client.app
+    assert isinstance(app, FastAPI)
+    combined = rows + json.dumps(app.openapi()) + caplog.text + invalid.text + response.text
     for sensitive in [
         PASSWORD,
         value + "EXTRA_PRIVATE_VALUE",

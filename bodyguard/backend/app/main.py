@@ -385,7 +385,6 @@ def create_app(
             )
             if retry:
                 return failure(429, "잠시 후 다시 시도해 주세요.", retry)
-            value = code()
             connection.execute(
                 update(challenges)
                 .where(challenges.c.id == row["id"])
@@ -394,6 +393,14 @@ def create_app(
                 )
             )
             try:
+                # FR-U-03: do not randomly reissue the immediately revoked value.
+                for _ in range(8):
+                    value = code()
+                    candidate = keyed(key, "signup-code", row["id"] + ":" + value)
+                    if candidate != row["code_hash"]:
+                        break
+                else:
+                    return failure(503, "메일을 보내지 못했습니다. 다시 시도해 주세요.")
                 send(row["email"], value)
             except Exception:
                 return failure(503, "메일을 보내지 못했습니다. 다시 시도해 주세요.")
