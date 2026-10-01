@@ -16,6 +16,8 @@ class Settings(BaseSettings):
     origin: str
     smtp_username: SecretStr | None = None
     smtp_password: SecretStr | None = None
+    google_client_id: str | None = None
+    google_client_secret: SecretStr | None = None
 
     @model_validator(mode="after")
     def safe_configuration(self) -> Settings:
@@ -34,6 +36,17 @@ class Settings(BaseSettings):
             raise ValueError("PostgreSQL/psycopg required")
         if len(self.security_key.get_secret_value()) < 43:
             raise ValueError("At least 32 random bytes required for security key")
+        if bool(self.google_client_id) != bool(
+            self.google_client_secret and self.google_client_secret.get_secret_value()
+        ):
+            raise ValueError("Google client configuration requires both values")
+        if self.google_client_id and (
+            not self.google_client_id.endswith(".apps.googleusercontent.com")
+            or len(self.google_client_id) > 255
+            or not self.google_client_id.isascii()
+            or not all(char.isalnum() or char in ".-_" for char in self.google_client_id)
+        ):
+            raise ValueError("Invalid Google client ID")
         if self.environment == "production":
             if parsed.scheme != "https" or parsed.hostname in {"localhost", "127.0.0.1", "::1"}:
                 raise ValueError("Production HTTPS origin required")
@@ -73,6 +86,10 @@ class Settings(BaseSettings):
         return (
             "__Host-bodyguard_session" if self.environment == "production" else "bodyguard_session"
         )
+
+    @property
+    def google_configured(self) -> bool:
+        return bool(self.google_client_id and self.google_client_secret)
 
     @property
     def secure_cookie(self) -> bool:

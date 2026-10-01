@@ -25,6 +25,8 @@ def main() -> int:
     args = parser.parse_args()
     # Bind before touching data; never reuse a user's server on this port.
     with socket.socket() as listener:
+        # Reuse a closed test listener's TIME_WAIT, never another live listener.
+        listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         listener.bind(("127.0.0.1", 8000))
         with (
             test_database() as db,

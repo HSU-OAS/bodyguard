@@ -18,11 +18,31 @@ users = Table(
     metadata,
     Column("id", String(36), primary_key=True),
     Column("email", String(320), nullable=False, unique=True),
-    Column("password_hash", Text, nullable=False),
+    Column("password_hash", Text),
+    Column("google_sub", String(255), unique=True),
     Column("email_verified_at", DateTime(timezone=True), nullable=False),
     Column("created_at", DateTime(timezone=True), nullable=False),
     Column("credentials_version", Integer, nullable=False, server_default="0"),
     CheckConstraint("credentials_version >= 0", name="user_credentials_version_nonnegative"),
+    CheckConstraint(
+        "(password_hash IS NOT NULL AND google_sub IS NULL) OR "
+        "(password_hash IS NULL AND google_sub IS NOT NULL)",
+        name="user_has_authentication",
+    ),
+)
+google_flows = Table(
+    "google_flows",
+    metadata,
+    Column("state_hash", String(64), primary_key=True),
+    Column(
+        "session_hash",
+        String(64),
+        ForeignKey("sessions.token_hash", ondelete="CASCADE"),
+        nullable=False,
+    ),
+    Column("created_at", DateTime(timezone=True), nullable=False),
+    Column("expires_at", DateTime(timezone=True), nullable=False, index=True),
+    Column("used_at", DateTime(timezone=True)),
 )
 challenges = Table(
     "signup_challenges",

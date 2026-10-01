@@ -34,6 +34,10 @@ export type ErrorOut = {
   detail: string
 }
 
+export type GoogleStatusOut = {
+  configured: boolean
+}
+
 export type ResetInput = {
   token: string
   password: string
@@ -53,6 +57,70 @@ export type CredentialsWritable = {
   email: string
   password: string
 }
+
+export type GoogleStatusApiV1AuthGoogleStatusGetData = {
+  body?: never
+  path?: never
+  query?: never
+  url: '/api/v1/auth/google/status'
+}
+
+export type GoogleStatusApiV1AuthGoogleStatusGetErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type GoogleStatusApiV1AuthGoogleStatusGetError =
+  GoogleStatusApiV1AuthGoogleStatusGetErrors[keyof GoogleStatusApiV1AuthGoogleStatusGetErrors]
+
+export type GoogleStatusApiV1AuthGoogleStatusGetResponses = {
+  200: GoogleStatusOut
+}
+
+export type GoogleStatusApiV1AuthGoogleStatusGetResponse =
+  GoogleStatusApiV1AuthGoogleStatusGetResponses[keyof GoogleStatusApiV1AuthGoogleStatusGetResponses]
+
+export type GoogleLoginApiV1AuthGoogleLoginGetData = {
+  body?: never
+  path?: never
+  query?: never
+  url: '/api/v1/auth/google/login'
+}
+
+export type GoogleLoginApiV1AuthGoogleLoginGetErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type GoogleLoginApiV1AuthGoogleLoginGetError =
+  GoogleLoginApiV1AuthGoogleLoginGetErrors[keyof GoogleLoginApiV1AuthGoogleLoginGetErrors]
+
+export type GoogleCallbackApiV1AuthGoogleCallbackGetData = {
+  body?: never
+  path?: never
+  query?: never
+  url: '/api/v1/auth/google/callback'
+}
+
+export type GoogleCallbackApiV1AuthGoogleCallbackGetErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type GoogleCallbackApiV1AuthGoogleCallbackGetError =
+  GoogleCallbackApiV1AuthGoogleCallbackGetErrors[keyof GoogleCallbackApiV1AuthGoogleCallbackGetErrors]
 
 export type CsrfApiV1AuthCsrfGetData = {
   body?: never

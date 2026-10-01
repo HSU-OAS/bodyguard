@@ -31,6 +31,8 @@ const schema = execFileSync(
       BODYGUARD_SECURITY_KEY: randomBytes(32).toString('hex'),
       BODYGUARD_SMTP_USERNAME: '',
       BODYGUARD_SMTP_PASSWORD: '',
+      BODYGUARD_GOOGLE_CLIENT_ID: '',
+      BODYGUARD_GOOGLE_CLIENT_SECRET: '',
     },
   },
 )
