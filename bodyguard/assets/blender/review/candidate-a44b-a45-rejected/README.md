@@ -6,7 +6,7 @@
 
 기존 실패한 연결망에 표면 투영을 반복하는 대신, [이미 사용 중인 CC0 전문 원본](../../README.md)의 연속 목 일부를 Blender native Multires1/Bisect/skin 전송/Bridge로 교체했다. 단순 도형 인체 생성·전신 remesh·새 의존성/에셋/외부 계약은 없다. 전문 번들 SHA는 `3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137`다.
 
-A45를 생성한 코드 SHA는 `880339aa30caca6acb9f16ceb005cea8879d92b7350eac99f7ab09618697e959`다. A44b 당시 코드는 `0c194a2612cc5ca1bb17e126c7f08a63619a3ca5529b7b2e49cde5645d4f57b6`이며 동일 코드라고 주장하지 않는다. 각 정확한 실행 코드 사본은 제작 임시 폴더의 `a44b-producer.py`/`a45-producer.py`에 보존했다. [현재 제작 코드](../../replace_neck_from_artist.py) SHA는 `db0c0055d9391f8da9ab8cb6d7be8486b813b87a2d66ece72614328ab52e79a3`이며 검수 후 출력 확장자/경로 충돌 guard만 보완했다. 실제 바이트 비교로 그 외 제작 부분이 같은지 확인하며 정상/실패 사전 검사도 실행했다. 이 후속 guard 검사를 새 원본 생성/전체 QA로 세지 않는다.
+A45를 생성한 코드 SHA는 `880339aa30caca6acb9f16ceb005cea8879d92b7350eac99f7ab09618697e959`다. A44b 당시 코드는 `0c194a2612cc5ca1bb17e126c7f08a63619a3ca5529b7b2e49cde5645d4f57b6`이며 동일 코드라고 주장하지 않는다. 각 정확한 실행 코드 사본은 제작 임시 폴더의 `a44b-producer.py`/`a45-producer.py`에 보존했다. [당시 후속 guard 코드](https://github.com/HSU-OAS/bodyguard/blob/5d6946bcb06b42d91baa437428bf5795058c4f1d/bodyguard/assets/blender/replace_neck_from_artist.py) SHA는 `db0c0055d9391f8da9ab8cb6d7be8486b813b87a2d66ece72614328ab52e79a3`이며 검수 후 출력 확장자/경로 충돌 guard만 보완했다. 실제 바이트 비교로 그 외 제작 부분이 같은지 확인하며 정상/실패 사전 검사도 실행했다. 이 후속 guard 검사를 새 원본 생성/전체 QA로 세지 않는다. 현재 후속 제작 코드는 [A46b 검수 기록](../candidate-a46b-rejected/README.md)에서 구분한다.
 
 남녀별 높이0.81~0.87 밴드를 편집하고 전문 패치는 절단 경계에서8mm 안쪽까지 둔다. A44b는 직선 native bridge, A45는 기존 곡면 연결 기능 `SURFACE/cuts6/smoothness1`을 사용했다. 전문 패치의 모든 좌표, 영역 밖 기존 좌표·skin, 보호 손, 각163bones/rest를 실제 assertion으로 보존했다. 이름 대응 가중치를 새 패치에만 전송하고 전송/정규화 준비 중 입력 신체 불변도 확인했다.
 
@@ -74,7 +74,7 @@ Chrome154.0.8037.58/headless1440×1080DPR1/Mac16,12·Apple M4·16GB를 실제 �
 
 ## 재현
 
-현재 코드로 생성하는 것은 A45 경로다. A44b와 혼동하지 않는다. 저장소 루트에서 존재하지 않는 경로를 사용하며 생성에는 이미 받은 전문 번들이 필요하다. 보존된 원본 편집/QA에는 추가 donor가 필요 없다.
+당시 기본 생성 경로는 A45였다. A44b와 혼동하지 않는다. 현재 코드는 후속 내부 경계 보완을 포함하므로 정확한 역사 재현은 위 생성 당시 코드를 사용한다. 저장소 루트에서 존재하지 않는 경로를 사용하며 생성에는 이미 받은 전문 번들이 필요하다. 보존된 원본 편집/QA에는 추가 donor가 필요 없다.
 
 ```bash
 /Applications/Blender.app/Contents/MacOS/Blender \
