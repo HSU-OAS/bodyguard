@@ -1,5 +1,7 @@
 # Blender 아바타 작업 원본
 
+2026-10-02 [A58 방향 대조·A59 새 연결면 정제](review/candidate-a58-a59-rejected/README.md)의 별도 원본·GLB·실제44PNG/native 진단/Chrome3개를 보존했다. A59 원본/왕복 각118개·원본34컷 PASS에도 목 돌출/주름이 남아 외형 미채택이다. 기존 신체/head/skin·각163bones/rest·6mm guard·여성 무의상/통일 표면·이전 증거·개발 A37·외형 P2·병합 보류·1~6/승인 기준은 유지한다. 다음은 고정 경계 자체와 전문 원본 턱/목의 대응 조사·조형이다. A58 전체34컷/GLB/Chrome과 실제 사람/시범/웹캠 통합은 미실행이다.
+
 2026-10-02 [A56 실패·A57 대응 가중치 보완](review/candidate-a56-a57-rejected/README.md)의 별도 원본·GLB·실제 렌더/Chrome·진단을 보존했다. A56은 목4개 실패/exit1, A57은 원본/왕복 각각118개·121행/실패0·원본34컷·Chrome3개다. 전체 신체 좌표·retained body skin·각163bones/rest 동일을 native 대조했다. 목의 띠 같은 경계/앞 돌출이 남아 둘 다 외형 미채택이며, 여성 무의상/통일 마감·기존 증거·개발 A37·외형 P2·PR #9 병합 보류·1~6/승인 기준을 유지한다. A56 전체34컷/GLB/Chrome과 실제 사람/시범/웹캠 통합 성능은 미실행이다.
 
 2026-10-02 [A50·A51 전문 head/경계 대응](review/candidate-a50-a51-rejected/README.md), [A52·A53 PATH/법선 대조](review/candidate-a52-a53-rejected/README.md), [A55 LINEAR/리그 정렬](review/candidate-a55-rejected/README.md)의 별도 원본과 실제40PNG를 보존했다. 각각 원본118개·121행은 완료했지만 외형 미달로 미채택한다. 이 다섯 후보의 전체34컷·GLB·왕복·Chrome은 미실행이다. [A54 목 국소 정제](review/candidate-a54-rejected/README.md)는 기존6mm guard/exit1로 저장 전에 중단됐다. 여성 무의상/남녀 같은 백색 표면·자연 곡선/관절·구조/리그 보존·기존 증거/개발 A37·외형 P2·병합 보류·1~6/승인 기준을 유지한다.

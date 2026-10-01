@@ -1,0 +1,85 @@
+"""FR-A-02/03: read-only cut-plane geometry probe, not clinical acceptance."""
+
+import json
+import sys
+from math import degrees, pi
+from pathlib import Path
+from statistics import mean
+
+import bmesh
+import bpy
+
+generation, output = map(Path, sys.argv[sys.argv.index("--") + 1 :])
+if output.exists():
+    raise FileExistsError("Preserve prior diagnostic evidence")
+reports = []
+for info in json.loads(generation.read_text()):
+    body = bpy.data.objects[f"BODYGUARD {info['body']} sculpt WIP"]
+    bm = bmesh.new()
+    bm.from_mesh(body.data)
+    bm.normal_update()
+    rows = {}
+    for key, z in (("body", info["cut_m"]), ("head", info["head_cut_m"])):
+        edges = [
+            e for e in bm.edges if e.is_manifold and all(abs(v.co.z - z) < 1e-6 for v in e.verts)
+        ]
+        angles = sorted(degrees(e.calc_face_angle()) for e in edges)
+        assert edges
+        long = [e for e in edges if e.calc_length() > 0.001]
+        worst = []
+        for edge in sorted(long, key=lambda e: e.calc_face_angle(), reverse=True)[:3]:
+            worst.append(
+                {
+                    "edge_m": edge.calc_length(),
+                    "dihedral_degrees": degrees(edge.calc_face_angle()),
+                    "coordinates_m": [list(v.co) for v in edge.verts],
+                    "faces": [
+                        {
+                            "area_m2": f.calc_area(),
+                            "normal": list(f.normal),
+                            "z_span_m": max(v.co.z for v in f.verts) - min(v.co.z for v in f.verts),
+                            "coordinates_m": [list(v.co) for v in f.verts],
+                        }
+                        for f in edge.link_faces
+                    ],
+                }
+            )
+        rows[key] = {
+            "plane_m": z,
+            "edges": len(edges),
+            "mean_degrees": mean(angles),
+            "p95_degrees": angles[int(0.95 * (len(angles) - 1))],
+            "max_degrees": max(angles),
+            "long_edges_over90": sum(e.calc_face_angle() > pi / 2 for e in long),
+            "non_contiguous_edges": sum(not e.is_contiguous for e in edges),
+            "short_edges_below1um": sum(e.calc_length() < 1e-6 for e in edges),
+            "plane_coordinate_error_max_m": max(abs(v.co.z - z) for e in edges for v in e.verts),
+            "minimum_adjacent_area_m2": min(f.calc_area() for e in edges for f in e.link_faces),
+            "planar_adjacent_faces_below1um": sum(
+                max(v.co.z for v in f.verts) - min(v.co.z for v in f.verts) < 1e-6
+                for f in {f for e in edges for f in e.link_faces}
+            ),
+            "worst_original_long_edges": worst,
+        }
+    reports.append(
+        {
+            "body": info["body"],
+            "smooth_faces": sum(f.use_smooth for f in body.data.polygons),
+            "total_faces": len(body.data.polygons),
+            "rings": rows,
+        }
+    )
+    bm.free()
+output.write_text(
+    json.dumps(
+        {
+            "source_saved": False,
+            "artist_model_only": True,
+            "blender": bpy.app.version_string,
+            "reports": reports,
+        },
+        indent=2,
+    )
+    + "\n"
+)
+print("NATIVE CUT SURFACE PROBE", json.dumps(reports))
