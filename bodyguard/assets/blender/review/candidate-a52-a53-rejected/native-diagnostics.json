@@ -1,0 +1,56 @@
+{
+  "blender": "5.1.1",
+  "source_saved": false,
+  "comparison_exit_code": 0,
+  "comparison_stdout": "00:01.000  blend            | Read blend: \"/private/tmp/bodyguard-tailor.6b7Uvu/draft-a53-normal-update-head.blend\"\nNATIVE A52 A53 COORDINATE COMPARISON BODYGUARD Male sculpt WIP {\"vertices\": 141912, \"changed_vertices\": 0, \"maximum_displacement_m\": 0.0, \"same_coordinates_multiset\": true, \"same_named_skin_multiset\": true, \"source_saved\": false}\nNATIVE A52 A53 COORDINATE COMPARISON BODYGUARD Female sculpt WIP {\"vertices\": 143026, \"changed_vertices\": 706, \"maximum_displacement_m\": 0.1268104994586631, \"same_coordinates_multiset\": true, \"same_named_skin_multiset\": true, \"source_saved\": false}\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n",
+  "interpretation": "Female index differences are native vertex ordering only; coordinates and named skin multisets are identical. Index maximum is NOT actual anatomical displacement.",
+  "initial_diagnostics": [
+    {
+      "exit_code": 1,
+      "error": "wrong generation-report path; fixed to a52-generation.json"
+    },
+    {
+      "exit_code": 1,
+      "error": "unlinked appended object matrix_world not evaluated; fixed by view-layer link/update"
+    },
+    {
+      "exit_code": 1,
+      "error": "female skin comparison by vertex index/order was invalid; canonical coordinate+named-skin multisets actually match"
+    }
+  ],
+  "join_diagnostic": {
+    "type": "near-plane manifold-edge dihedral; not clinical or acceptance thresholds",
+    "Male": {
+      "body": {
+        "count": 809,
+        "mean_deg": 77.77764989023817,
+        "p95_deg": 175.621525901898,
+        "max_deg": 177.2088072234956,
+        "folds_over90_long_1mm": 11
+      },
+      "head": {
+        "count": 809,
+        "mean_deg": 61.83759683196091,
+        "p95_deg": 139.23081075882533,
+        "max_deg": 169.17150506108817,
+        "folds_over90_long_1mm": 0
+      }
+    },
+    "Female": {
+      "body": {
+        "count": 706,
+        "mean_deg": 75.72774838269714,
+        "p95_deg": 175.8853078076439,
+        "max_deg": 179.4591496493397,
+        "folds_over90_long_1mm": 1
+      },
+      "head": {
+        "count": 710,
+        "mean_deg": 67.87819140285352,
+        "p95_deg": 132.40611306090526,
+        "max_deg": 166.42902018478796,
+        "folds_over90_long_1mm": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+import bpy,json; from collections import Counter
+source="/private/tmp/bodyguard-tailor.6b7Uvu/draft-a52-path-head.blend"
+names=[f"BODYGUARD {label} sculpt WIP" for label in ("Male","Female")]
+targets=[bpy.data.objects[n] for n in names]
+with bpy.data.libraries.load(source) as (available,loaded):
+ assert all(n in available.objects for n in names)
+ loaded.objects=names
+for obj in loaded.objects:
+ bpy.context.scene.collection.objects.link(obj)
+bpy.context.view_layer.update()
+for old,new in zip(loaded.objects,targets,strict=True):
+ assert len(old.data.vertices)==len(new.data.vertices)
+ assert old.matrix_world==new.matrix_world
+ delta=[(a.co-b.co).length for a,b in zip(old.data.vertices,new.data.vertices,strict=True)]
+ coordinates_equal=Counter(tuple(v.co) for v in old.data.vertices)==Counter(tuple(v.co) for v in new.data.vertices)
+ def points_with_skin(obj):
+  return Counter((tuple(v.co),tuple(sorted((obj.vertex_groups[g.group].name,g.weight) for g in v.groups))) for v in obj.data.vertices)
+ skin_equal=points_with_skin(old)==points_with_skin(new)
+ print("NATIVE A52 A53 COORDINATE COMPARISON",new.name,json.dumps({"vertices":len(delta),"changed_vertices":sum(d>0 for d in delta),"maximum_displacement_m":max(delta),"same_coordinates_multiset":coordinates_equal,"same_named_skin_multiset":skin_equal,"source_saved":False}))

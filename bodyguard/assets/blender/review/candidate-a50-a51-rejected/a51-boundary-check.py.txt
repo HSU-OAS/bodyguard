@@ -1,0 +1,60 @@
+"""FR-A-03: native synthetic sample-alignment checks; no avatar/source save."""
+
+from collections import Counter
+from importlib.util import module_from_spec, spec_from_file_location
+from math import cos, sin, tau
+from pathlib import Path
+
+import bmesh
+
+modules = []
+for name in ("a49-density-producer.py", "a51-authored-head-producer.py"):
+    spec = spec_from_file_location(name, Path(__file__).with_name(name))
+    module = module_from_spec(spec)
+    spec.loader.exec_module(module)
+    modules.append(module)
+closed_loops = modules[0].closed_loops
+checks = []
+for lower, upper, phase, upper_z, crossed, valid in (
+    (4, 8, 0, 0.4, False, True),
+    (4, 5, 0.37, 0.4, False, True),
+    (4, 9, 0.73, 0.4, False, True),
+    (4, 8, 0, 0, False, False),
+    (4, 5, 0.37, 0.4, True, False),
+    (2050, 2051, 0.17, 0.4, False, False),
+):
+    mesh = bmesh.new()
+    deform = mesh.verts.layers.deform.new()
+    original = mesh.verts.layers.int.new("original")
+    edges = []
+    for number, (count, z) in enumerate(((lower, 0), (upper, upper_z))):
+        offset = phase if number else 0
+        top = [
+            mesh.verts.new((cos(tau * i / count + offset), sin(tau * i / count + offset), z))
+            for i in range(count)
+        ]
+        if crossed and number:
+            top[1], top[2] = top[2], top[1]
+        bottom = [mesh.verts.new((v.co.x, v.co.y, z - 0.2)) for v in top]
+        for i in range(count):
+            j = (i + 1) % count
+            mesh.faces.new((top[i], top[j], bottom[j], bottom[i]))
+            edges.append(next(e for e in top[i].link_edges if top[j] in e.verts))
+    for i, vertex in enumerate(mesh.verts):
+        vertex[original] = i + 1
+        vertex[deform][0], vertex[deform][1] = 0.25, 0.75
+    before = Counter((tuple(v.co), tuple(sorted(v[deform].items()))) for v in mesh.verts)
+    count_before = len(mesh.verts)
+    try:
+        result = modules[1].align_neck_boundary_samples(mesh, edges, original, closed_loops)
+    except AssertionError:
+        assert not valid and len(mesh.verts) == count_before
+    else:
+        assert valid and result["after"][0] == result["after"][1]
+        assert all(abs(sum(v[deform].values()) - 1) < 1e-6 for v in mesh.verts)
+    after = Counter((tuple(v.co), tuple(sorted(v[deform].items()))) for v in mesh.verts)
+    assert before <= after
+    checks.append({"rings": [lower, upper], "phase": phase, "valid": valid, "passed": True})
+    mesh.free()
+print("NATIVE A51 SAMPLE ALIGNMENT", checks)
+print("SYNTHETIC ONLY; NO FILES SAVED")

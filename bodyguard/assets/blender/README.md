@@ -1,5 +1,7 @@
 # Blender 아바타 작업 원본
 
+2026-10-02 [A50·A51 전문 head/경계 대응](review/candidate-a50-a51-rejected/README.md), [A52·A53 PATH/법선 대조](review/candidate-a52-a53-rejected/README.md), [A55 LINEAR/리그 정렬](review/candidate-a55-rejected/README.md)의 별도 원본과 실제40PNG를 보존했다. 각각 원본118개·121행은 완료했지만 외형 미달로 미채택한다. 이 다섯 후보의 전체34컷·GLB·왕복·Chrome은 미실행이다. [A54 목 국소 정제](review/candidate-a54-rejected/README.md)는 기존6mm guard/exit1로 저장 전에 중단됐다. 여성 무의상/남녀 같은 백색 표면·자연 곡선/관절·구조/리그 보존·기존 증거/개발 A37·외형 P2·병합 보류·1~6/승인 기준을 유지한다.
+
 2026-10-01 [A49 별도 반려 원본](bodyguard_avatar_candidate_a49_rejected.blend)·[실제 원본/GLB/Chrome·36PNG·밀도/법선 진단·해시](review/candidate-a49-rejected/README.md)를 보존했다. native 경계 점 수 대응으로 각118개·Chrome3개·합성 대조6개를 실제 완료했으나 목 경계 외형은 미달이다. 다음은 전문 head–목 형상/정렬 대조이며 기본 제작 코드/개발 A37은 변경하지 않는다. 여성 무의상/남녀 같은 백색 표면·자연 곡선/관절·구조/리그 보존·외형 P2·병합 보류·전체 완료/승인 기준은 유지한다.
 
 2026-10-01 [A48 별도 반려 원본](bodyguard_avatar_candidate_a48_rejected.blend)·[원본/GLB/Chrome·36PNG·좌표/법선 진단·해시](review/candidate-a48-rejected/README.md)를 보존했다. 동일 전문 목/12mm에서 native LINEAR 비교의 실제 형상 차이를 확인했고 각118개·Chrome3개를 실제 완료했다. 목 경계 외형은 미달이므로 기본 제작 SURFACE·개발 A37은 변경하지 않는다. 여성 무의상/남녀 통일 표면·구조/리그 보존·외형 P2·PR #9 병합 보류와 전체 완료/승인 기준은 유지한다.

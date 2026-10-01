@@ -1,0 +1,39 @@
+"""FR-A-03: executable rejected-input/file-preservation check for A50 native edits."""
+
+import importlib.util
+import sys
+from pathlib import Path
+
+import bpy
+
+producer = Path(__file__).with_name("a50-authored-head-producer.py")
+spec = importlib.util.spec_from_file_location("authored_head_candidate", producer)
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+base = producer.parent
+bundle = (
+    "/private/tmp/bodyguard-base-meshes/human-base-meshes-bundle-v1.4.1/"
+    "human_base_meshes_bundle.blend"
+)
+new_source = str(base / "head-invalid-must-not-exist.blend")
+new_report = str(base / "head-invalid-must-not-exist.json")
+assert not Path(new_source).exists() and not Path(new_report).exists()
+cases = [([new_source, new_report, bundle, gap], ValueError) for gap in ("0", "0.1", "nan", "inf")]
+cases += [
+    ([new_source, new_report + ".bad", bundle], ValueError),
+    ([str(base / "draft-a50-authored-head.blend"), new_report, bundle], FileExistsError),
+    ([new_source, new_report], ValueError),
+]
+original_argv = sys.argv[:]
+for args, error in cases:
+    sys.argv = [str(producer), "--", *args]
+    try:
+        module.main()
+    except error:
+        pass
+    else:
+        raise AssertionError(f"Must reject {args}")
+sys.argv = original_argv
+assert not Path(new_source).exists() and not Path(new_report).exists()
+assert not bpy.data.is_saved
+print("NATIVE A50 CLI REJECTIONS 7 PASS; NO SOURCE/OUTPUT SAVED")
