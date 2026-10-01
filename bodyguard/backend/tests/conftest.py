@@ -103,7 +103,7 @@ class Harness:
 
     def new_client(self, peer: str = "testclient") -> TestClient:
         return TestClient(
-            create_app(self.settings, self.engine, self.mail, self.clock),
+            create_app(self.settings, self.engine, self.mail, self.clock, reset_mail=self.mail),
             base_url="http://localhost",
             client=(peer, 50000),
         )

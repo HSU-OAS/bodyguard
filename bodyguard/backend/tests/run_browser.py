@@ -52,7 +52,7 @@ def main() -> int:
             )
             server = uvicorn.Server(
                 uvicorn.Config(
-                    create_app(settings, db, mail=mail),
+                    create_app(settings, db, mail=mail, reset_mail=mail),
                     host="127.0.0.1",
                     port=8000,
                     access_log=False,
