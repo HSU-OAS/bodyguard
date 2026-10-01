@@ -1,0 +1,175 @@
+{
+  "date_local": "2026-10-02",
+  "story": "S2.4 / FR-A-01~04 / A-07",
+  "before_head": "011b634bc48c47ba53a1276476913710a4e2cf31",
+  "base_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "root_cause": "A74 selected projected_min+12mm near the pointed head tip (~50mm X width) instead of the fixed authored cervical cut (~121/106mm body width). Section registration introduced 50.929/54.818mm extra vertical shift.",
+  "fix": "Use the actual fixed head_cut for registration. A75b only adds exact authored cut-ring identity for read-only diagnostics. No tolerance, native cut/gap, skin/rig/body/hand, or global surface changes.",
+  "a75": {
+    "generation_exit_code": 0,
+    "source_sha256": "5badc589381a9cf7e881bf8e3cadb331d649efd2d1e283289809568ae12faa1a",
+    "source_bytes": 27777082,
+    "native_boundary_checks": 21,
+    "native_boundary_exit_code": 0,
+    "source_qa_exit_code": 0,
+    "source_qa_rows": 121,
+    "source_technical_checks": 118,
+    "source_actual_png": 34,
+    "export_exit_code": 0,
+    "actual_body_preservation_exit_code": 0,
+    "glb_import_deformation_unrun": true,
+    "browser_unrun": true
+  },
+  "a75b": {
+    "generation_exit_code": 0,
+    "source_sha256": "9131b9cb10661bda844b8377df89e90cd610c63c6783d95f107d9baf01e0732c",
+    "source_bytes": 27784763,
+    "native_boundary_checks": 21,
+    "native_boundary_exit_code": 0,
+    "unique_native_cases": 21,
+    "source_qa_exit_code": 0,
+    "source_qa_rows": 121,
+    "source_technical_checks": 118,
+    "source_qa_rendered": false,
+    "source_actual_first_preview_png": 8,
+    "actual_native_geometry_equality_exit_code": 0,
+    "actual_body_preservation_exit_code": 0,
+    "actual_authored_contour_diagnostic_exit_code": 0,
+    "export_exit_code": 0,
+    "glb_roundtrip_qa_exit_code": 0,
+    "glb_qa_rows": 121,
+    "glb_technical_checks": 118,
+    "glb_qa_rendered": false,
+    "browser_exit_code": 0,
+    "browser": {
+      "startTime": "2026-10-01T22:17:12.743Z",
+      "duration": 40843.878,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "browser_metrics": [
+      {
+        "name": "남성-technical-render",
+        "samples": 180,
+        "mean_ms": 16.655000000529817,
+        "p95_ms": 18.59999990463257,
+        "draw_calls": 21,
+        "triangles": 1082426,
+        "renderer": "WebKit WebGL",
+        "skeletons_independent": true,
+        "static_angle_max": 0,
+        "moving_angle_max": 0.2094383709370847,
+        "eight_weight_meshes": 2
+      },
+      {
+        "name": "여성-technical-render",
+        "samples": 180,
+        "mean_ms": 16.666666666666668,
+        "p95_ms": 18.200000047683716,
+        "draw_calls": 21,
+        "triangles": 1074562,
+        "renderer": "WebKit WebGL",
+        "skeletons_independent": true,
+        "static_angle_max": 0,
+        "moving_angle_max": 0.20943206892533506,
+        "eight_weight_meshes": 2
+      }
+    ],
+    "browser_actual_png": 2
+  },
+  "actual_png_total": 44,
+  "device": {
+    "model": "Mac16,12",
+    "chip": "Apple M4",
+    "memory_bytes": 17179869184,
+    "chrome": "Google Chrome 154.0.8037.58",
+    "headless": true,
+    "viewport": [
+      1440,
+      1080
+    ],
+    "dpr": 1
+  },
+  "device_fields_read_exit_code": 0,
+  "serial_uuid_read": false,
+  "native_all_terminal_before_browser": true,
+  "camera_requests": 0,
+  "api_sql_smtp_oauth_actors": "not started",
+  "external_browser_network": "non-listening native proxy; actual A-00 refusal passed",
+  "controlled_fixtures": [
+    "API guest401",
+    "GLB503",
+    "actual WebGL context-loss and retry"
+  ],
+  "warnings": [
+    "native armature-parent5 per export",
+    "A75 weight-limit866905/904643; A75b866921/904643",
+    "NO_COLOR/FORCE_COLOR",
+    "THREE.Clock deprecation",
+    "injected GLB503",
+    "WEBGL_lose_context warning after real loss/recovery"
+  ],
+  "workflow_diagnostics": [
+    {
+      "result": "A75 near-plane contour diagnostic exit1",
+      "tool": {
+        "chunk_id": "62d4b5",
+        "wall_time_seconds": 0.000010667,
+        "exit_code": 1,
+        "original_token_count": 121,
+        "output": "Traceback (most recent call last):\n  File \"/private/tmp/bodyguard-tailor.6b7Uvu/a75-candidate-contour-diagnostic.py\", line 43, in <module>\n    assert len(edges) == report[\"native_boundary_density\"][\"after\"][0]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n\nError: script failed, file: '/private/tmp/bodyguard-tailor.6b7Uvu/a75-candidate-contour-diagnostic.py', exiting.\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+      },
+      "cause": "same1µm proximity selected571 edges at male head cut, though actual authored ring has567",
+      "repair": "preserve failed diagnostic; save exact authored ring identity, keep1µm tolerance, actual native rerun exit0"
+    },
+    {
+      "result": "first A75b producer exit1 before save",
+      "tool": {
+        "chunk_id": "cc3fe5",
+        "wall_time_seconds": 0.000018584,
+        "exit_code": 1,
+        "original_token_count": 230,
+        "output": "Traceback (most recent call last):\n  File \"/private/tmp/bodyguard-tailor.6b7Uvu/a75b-authored-cervical-rings.py\", line 684, in <module>\n    main()\n    ~~~~^^\n  File \"/private/tmp/bodyguard-tailor.6b7Uvu/a75b-authored-cervical-rings.py\", line 657, in main\n    assert all(\n           ~~~^\n        abs(\n        ^^^^\n    ...<4 lines>...\n        for index in indices\n        ^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\nNEW BRIDGE ONLY ARTIST DISPLACEMENT Male 0.0008224558091810027\n  File \"/private/tmp/bodyguard-tailor.6b7Uvu/a75b-authored-cervical-rings.py\", line 659, in <genexpr>\n    jaw_normal.dot(bm.verts[index].co)\n                   ~~~~~~~~^^^^^^^\nIndexError: BMElemSeq[index]: outdated internal index table, run ensure_lookup_table() first\n\nError: script failed, file: '/private/tmp/bodyguard-tailor.6b7Uvu/a75b-authored-cervical-rings.py', exiting.\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+      },
+      "cause": "BMesh index lookup table outdated after final edits",
+      "repair": "native ensure_lookup_table before reading exact saved cut indices; preserve failed producer; actual generation rerun exit0"
+    },
+    {
+      "result": "diagnostic shell git-diff command in temporary nonrepository exit129",
+      "repair": "run actual git diff --check in repository exit0; expected producer diff-u exit1 is text differences, not QA failure"
+    },
+    {
+      "result": "read-only docs/qa path checks exit1 (wrong root, unexpanded glob, wrong report filename)",
+      "repair": "resolve actual bodyguard/docs and deformation-report.json with rg --files; no mutation or missing QA acceptance"
+    }
+  ],
+  "unrun": [
+    "A75 imported118 deformation and Chrome (not substituted by A75b)",
+    "A75b full34PNG source render (qc118+actual8PNG only; exact geometry/skin/topology/rest/PBR equality to A75 separately proved)",
+    "imported34PNG render",
+    "actual performer/observer, camera tracking, correct demonstration, retargeting and integrated camera latency/accuracy",
+    "multidevice/lighting/body-type/long-session power/thermal testing",
+    "API160/Vitest133/build/service regressions in this avatar-only change (not rerun)",
+    "provider connections, production DB migration, secrets, deployment, release",
+    "Stages3–6 completion gates"
+  ],
+  "appearance": {
+    "default_adopted": false,
+    "unresolved_p2": true,
+    "reasons": [
+      "neck collar and extra height reduced by correcting wrong section selection",
+      "front/side still show tall pointed upper head, residual lower face plane and finish mismatch",
+      "rear neck residual striation and reference-level final material/silhouette not approved",
+      "technical stress is not correct exercise, clinical anatomy or webcam accuracy approval"
+    ],
+    "development_default": "A37 unchanged",
+    "pr9_draft": true,
+    "merge_gate_satisfied": false,
+    "stages_1_to_6_complete": false
+  },
+  "measurement_scope": "Exact ring dihedral/widths and artist head fitting are geometry diagnostics, not medical targets. Variant equality compares points, named skin, coordinate-defined topology, hands, 163 bone/rest/matrices and five PBR inputs; not identical vertex order, split normals or identical GLB bytes. 180 RAF intervals are not camera/person/GPU-only accuracy or latency.",
+  "prior_files_evidence_preserved": true,
+  "scope_safety_privacy_operating_gates_unchanged": true
+}

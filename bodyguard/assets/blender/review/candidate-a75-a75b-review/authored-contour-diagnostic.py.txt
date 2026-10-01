@@ -1,0 +1,124 @@
+"""FR-A-02/03: inspect actual oblique registration and seam normals; source unsaved."""
+
+import json
+import sys
+from hashlib import file_digest
+from math import degrees, isfinite
+from pathlib import Path
+
+import bmesh
+import bpy
+from mathutils import Vector
+
+generation, output = map(Path, sys.argv[sys.argv.index("--") + 1 :])
+assert output.suffix == ".json" and not output.exists()
+source = Path(bpy.data.filepath)
+with source.open("rb") as file:
+    source_sha = file_digest(file, "sha256").hexdigest()
+assert source_sha == "9131b9cb10661bda844b8377df89e90cd610c63c6783d95f107d9baf01e0732c"
+rows = []
+for report in json.loads(generation.read_text()):
+    label = report["body"]
+    normal = Vector(report["jaw_cut_plane_normal"])
+    translation = Vector(
+        report["head_authored_registration"]["native_head_translation_m"]
+    )
+    plane_shift = normal.dot(translation)
+    reference_to_final = report["head_authored_registration"][
+        "reference_to_final_plane_delta_m"
+    ]
+    assert abs(plane_shift - reference_to_final) < 1e-7
+    intercepts = (report["cut_m"], report["head_cut_m"])
+    assert abs(intercepts[1] - intercepts[0] - report["artist_gap_m"]) < 1e-7
+    mesh = bmesh.new()
+    body = bpy.data.objects[f"BODYGUARD {label} sculpt WIP"]
+    mesh.from_mesh(body.data)
+    mesh.verts.ensure_lookup_table()
+    mesh.normal_update()
+    rings = []
+    for role, intercept in zip(("body", "registered_head"), intercepts, strict=True):
+        key = (
+            "bodyguard_authored_cervical_"
+            + ("body" if role == "body" else "head")
+            + "_ring"
+        )
+        indices = set(body[key])
+        assert len(indices) == report["native_boundary_density"]["after"][0]
+        assert all(0 <= index < len(mesh.verts) for index in indices)
+        assert all(
+            abs(normal.dot(mesh.verts[index].co) - intercept) < 1e-6
+            for index in indices
+        )
+        proximity_edges = [
+            edge
+            for edge in mesh.edges
+            if all(
+                abs(normal.dot(vertex.co) - intercept) < 1e-6 for vertex in edge.verts
+            )
+        ]
+        edges = [
+            edge
+            for edge in mesh.edges
+            if all(vertex.index in indices for vertex in edge.verts)
+        ]
+        assert len(edges) == report["native_boundary_density"]["after"][0]
+        assert all(e.is_manifold for e in edges)
+        vertices = {vertex for edge in edges for vertex in edge.verts}
+        assert len(vertices) == len(edges)
+        assert all(
+            sum(vertex in edge.verts for edge in edges) == 2 for vertex in vertices
+        )
+        ranges = [
+            [
+                min(vertex.co[axis] for vertex in vertices),
+                max(vertex.co[axis] for vertex in vertices),
+            ]
+            for axis in range(3)
+        ]
+        perimeter = sum(edge.calc_length() for edge in edges)
+        assert isfinite(perimeter) and perimeter > 0
+        assert all(isfinite(value) for values in ranges for value in values)
+        angles = sorted(degrees(e.calc_face_angle()) for e in edges)
+        assert all(isfinite(a) for a in angles)
+        rings.append(
+            {
+                "role": role,
+                "actual_intercept_m": intercept,
+                "edges": len(edges),
+                "identity": "exact authored native ring, saved at generation",
+                "same_1um_proximity_candidates": len(proximity_edges),
+                "contour_bounds_m": ranges,
+                "contour_widths_m": [b - a for a, b in ranges],
+                "contour_perimeter_m": perimeter,
+                "dihedral_mean_degrees": sum(angles) / len(angles),
+                "dihedral_p95_degrees": angles[int(0.95 * (len(angles) - 1))],
+                "dihedral_max_degrees": max(angles),
+            }
+        )
+    rows.append(
+        {
+            "body": label,
+            "intended_artist_vertical_gap_m": report["artist_gap_m"],
+            "head_plane_intercept_change_from_section_registration_m": plane_shift,
+            "actual_artist_vertical_gap_m": intercepts[1] - intercepts[0],
+            "actual_perpendicular_gap_m": (intercepts[1] - intercepts[0])
+            / normal.length,
+            "rings": rings,
+            "artist_geometry_only_not_clinical_or_webcam_accuracy": True,
+        }
+    )
+    mesh.free()
+with source.open("rb") as file:
+    assert file_digest(file, "sha256").hexdigest() == source_sha
+output.write_text(
+    json.dumps(
+        {
+            "source_sha256": source_sha,
+            "source_saved": False,
+            "rows": rows,
+        },
+        indent=2,
+    )
+    + "\n"
+)
+print("ACTUAL ARTIST CONTOUR SIZE DIAGNOSTIC", json.dumps(rows))

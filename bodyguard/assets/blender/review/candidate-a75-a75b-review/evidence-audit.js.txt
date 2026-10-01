@@ -1,0 +1,428 @@
+// FR-A-03/07: native evidence consistency; not clinical or release approval.
+const fs = require('node:fs'), path = require('node:path'), crypto = require('node:crypto');
+const assert = require('node:assert/strict'), { execFileSync } = require('node:child_process');
+const [root, tmp] = process.argv.slice(2);
+assert(path.isAbsolute(root) && path.isAbsolute(tmp), 'Absolute evidence roots required');
+const base = 'bodyguard/assets/blender/', folder = base + 'review/candidate-a75-a75b-review/';
+const before = '011b634bc48c47ba53a1276476913710a4e2cf31';
+const read = p => fs.readFileSync(path.join(root,p)), json = p => JSON.parse(read(p));
+const sha = b => crypto.createHash('sha256').update(b).digest('hex');
+let assertions = 0, png = 0, links = 0;
+const ok = (v, label) => { assert(v,label); assertions++; };
+const copies = [
+  [
+    "tmp/draft-a75-cervical-head-section.blend",
+    "bodyguard/assets/blender/bodyguard_avatar_candidate_a75_review.blend"
+  ],
+  [
+    "tmp/draft-a75b-authored-cervical-rings.blend",
+    "bodyguard/assets/blender/bodyguard_avatar_candidate_a75b_review.blend"
+  ],
+  [
+    "tmp/a75-cervical-head-section.py",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75-producer-at-generation.py.txt"
+  ],
+  [
+    "tmp/a75b-authored-cervical-rings.py",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b-producer-at-generation.py.txt"
+  ],
+  [
+    "tmp/a75-contour-size-diagnostic.py",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a74-contour-size-diagnostic.py.txt"
+  ],
+  [
+    "tmp/a75-contour-size-diagnostic.json",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a74-contour-size-diagnostic.json"
+  ],
+  [
+    "tmp/a75-candidate-contour-diagnostic.py",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/failed-a75-proximity-contour-diagnostic.py.txt"
+  ],
+  [
+    "tmp/a75b-first-failed-producer.py.txt",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/failed-a75b-producer.py.txt"
+  ],
+  [
+    "tmp/a75b-authored-contour-diagnostic.py",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/authored-contour-diagnostic.py.txt"
+  ],
+  [
+    "tmp/a75b-native-geometry-equality.py",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/native-geometry-equality.py.txt"
+  ],
+  [
+    "tmp/a75b-authored-body-preservation.py",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/authored-body-preservation.py.txt"
+  ],
+  [
+    "tmp/a75b-native-boundary-regression.py",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/native-boundary-regression.py.txt"
+  ],
+  [
+    "tmp/a75-generation.json",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/generation-report.json"
+  ],
+  [
+    "tmp/a75b-generation.json",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/generation-report.json"
+  ],
+  [
+    "tmp/a75-native-boundary-regression.json",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/native-boundary-regression.json"
+  ],
+  [
+    "tmp/a75b-native-boundary-regression.json",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/native-boundary-regression.json"
+  ],
+  [
+    "tmp/a75-authored-body-preservation.json",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/authored-body-preservation.json"
+  ],
+  [
+    "tmp/a75b-authored-body-preservation.json",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/authored-body-preservation.json"
+  ],
+  [
+    "tmp/a75b-authored-contour-diagnostic.json",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/actual-authored-contours.json"
+  ],
+  [
+    "tmp/a75b-native-geometry-equality.json",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/native-geometry-equality.json"
+  ],
+  [
+    "tmp/review-a75b-native-qc/deformation-report.json",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/source-deformation-report.json"
+  ],
+  [
+    "tmp/review-a75b-glb-qc/deformation-report.json",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/roundtrip-deformation-report.json"
+  ],
+  [
+    "tmp/glb-a75-cervical-head-section/bodyguard-male-candidate.glb",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/bodyguard-male-candidate.glb"
+  ],
+  [
+    "tmp/glb-a75-cervical-head-section/bodyguard-female-candidate.glb",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/bodyguard-female-candidate.glb"
+  ],
+  [
+    "tmp/glb-a75-cervical-head-section/roundtrip-report.json",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/roundtrip-report.json"
+  ],
+  [
+    "tmp/glb-a75b-authored-cervical-rings/bodyguard-male-candidate.glb",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/bodyguard-male-candidate.glb"
+  ],
+  [
+    "tmp/glb-a75b-authored-cervical-rings/bodyguard-female-candidate.glb",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/bodyguard-female-candidate.glb"
+  ],
+  [
+    "tmp/glb-a75b-authored-cervical-rings/roundtrip-report.json",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/roundtrip-report.json"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/faceless-side-female.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/faceless-side-female.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/technical-male-upperleg01.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/technical-male-upperleg01.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/technical-male-foot.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/technical-male-foot.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/technical-female-lowerleg01.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/technical-female-lowerleg01.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/faceless-quarter.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/faceless-quarter.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/faceless-hand-female.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/faceless-hand-female.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/technical-male-lowerleg01.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/technical-male-lowerleg01.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/faceless-neck-male-left.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/faceless-neck-male-left.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/technical-female-finger2-1.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/technical-female-finger2-1.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/technical-female-spine02.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/technical-female-spine02.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/faceless-neck-female-left.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/faceless-neck-female-left.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/technical-female-upperleg01.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/technical-female-upperleg01.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/technical-female-wrist.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/technical-female-wrist.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/technical-male-finger2-1.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/technical-male-finger2-1.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/faceless-hand-male.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/faceless-hand-male.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/faceless-body-side-female.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/faceless-body-side-female.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/faceless-neck-female-right.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/faceless-neck-female-right.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/faceless-knee-male.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/faceless-knee-male.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/technical-male-clavicle.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/technical-male-clavicle.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/technical-male-spine02.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/technical-male-spine02.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/technical-female-foot.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/technical-female-foot.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/faceless-body-back-male.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/faceless-body-back-male.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/technical-male-upperarm01.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/technical-male-upperarm01.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/technical-female-lowerarm01.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/technical-female-lowerarm01.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/technical-female-clavicle.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/technical-female-clavicle.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/deformation-report.json",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/deformation-report.json"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/faceless-side-male.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/faceless-side-male.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/faceless-body-side-male.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/faceless-body-side-male.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/technical-male-wrist.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/technical-male-wrist.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/faceless-neck-male-right.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/faceless-neck-male-right.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/technical-male-lowerarm01.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/technical-male-lowerarm01.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/faceless-knee-female.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/faceless-knee-female.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/faceless-front.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/faceless-front.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/faceless-body-back-female.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/faceless-body-back-female.png"
+  ],
+  [
+    "tmp/review-a75-cervical-head-section/technical-female-upperarm01.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75/source/technical-female-upperarm01.png"
+  ],
+  [
+    "tmp/review-a75b-first-preview/first-side-female.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/preview/first-side-female.png"
+  ],
+  [
+    "tmp/review-a75b-first-preview/first-side-male.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/preview/first-side-male.png"
+  ],
+  [
+    "tmp/review-a75b-first-preview/first-front.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/preview/first-front.png"
+  ],
+  [
+    "tmp/review-a75b-first-preview/first-back-female.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/preview/first-back-female.png"
+  ],
+  [
+    "tmp/review-a75b-first-preview/first-neck-male-left.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/preview/first-neck-male-left.png"
+  ],
+  [
+    "tmp/review-a75b-first-preview/first-quarter.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/preview/first-quarter.png"
+  ],
+  [
+    "tmp/review-a75b-first-preview/first-back-male.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/preview/first-back-male.png"
+  ],
+  [
+    "tmp/review-a75b-first-preview/first-neck-female-left.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/preview/first-neck-female-left.png"
+  ],
+  [
+    "tmp/a75b-browser-report.json",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/browser-report.json"
+  ],
+  [
+    "root/bodyguard/frontend/test-results/avatar/avatar-A-06-실제-남녀-GLB-두-복제본을-로드하고-한쪽-기술-변형이-다른-뼈대를-바꾸지-않는다/남성-two-models.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/browser/male-two-models.png"
+  ],
+  [
+    "root/bodyguard/frontend/test-results/avatar/avatar-A-06-실제-남녀-GLB-두-복제본을-로드하고-한쪽-기술-변형이-다른-뼈대를-바꾸지-않는다/여성-two-models.png",
+    "bodyguard/assets/blender/review/candidate-a75-a75b-review/a75b/browser/female-two-models.png"
+  ]
+];
+for (const [origin, target] of copies) {
+  const [kind,...parts] = origin.split('/');
+  ok(read(target).equals(fs.readFileSync(path.join(kind === 'tmp' ? tmp : root,...parts))), 'exact executed immutable copy');
+}
+for (const [variant,bytes,digest] of [
+ ['a75',27777082,'5badc589381a9cf7e881bf8e3cadb331d649efd2d1e283289809568ae12faa1a'],
+ ['a75b',27784763,'9131b9cb10661bda844b8377df89e90cd610c63c6783d95f107d9baf01e0732c'],
+]) {
+ const b = read(base+'bodyguard_avatar_candidate_'+variant+'_review.blend');
+ ok(b.length === bytes && sha(b) === digest,'separate preserved native source');
+ const g = json(folder+variant+'/generation-report.json');
+ ok(g.length === 2 && g.map(x=>x.candidate_vertices).join() === '133261,132274','actual whole professional bodies');
+ for (const [i,row] of g.entries()) {
+  ok(row.retained_original_vertices === [75915,75865][i] && row.retained_body_skin_hands_bones_rest_preserved && row.head_skin_correspondence.prepared_weights_preserved_during_registration, 'body/skin/hand/rest invariants');
+  ok(row.artist_gap_m === 0.024 && row.head_cut_m === row.head_authored_registration.initial_diagnostic_plane_intercept_m && row.head_authored_registration.reference_to_final_plane_delta_m === 0 && Math.abs(row.head_authored_registration.registration_plane_intercept_change_m) < 1e-7, 'fixed actual cervical section, no tip registration drift');
+  ok(row.bridge_only_native_fairing.maximum_artist_displacement_m < .006 && row.bridge_only_native_fairing.authored_points_skin_and_topology_preserved, 'unchanged bridge-only6mm guard');
+  for (const [key,helper] of [
+   ['helper_sha256','review/candidate-a49-rejected/producer-at-generation.py.txt'],
+   ['head_volume_helper_sha256','review/candidate-a73-a73d-review/head-volume-sculpt.py.txt'],
+   ['head_cage_helper_sha256','review/candidate-a73-a73d-review/head-lower-cage-sculpt.py.txt'],
+   ['head_orientation_helper_sha256','review/candidate-a74-review/head-orientation.py.txt'],
+  ]) ok(row[key] === sha(read(base+helper)), 'frozen professional/native helper');
+ }
+ const regression = json(folder+variant+'/native-boundary-regression.json');
+ ok(regression.passed && regression.artist_fixture_only && regression.checks.length === 21 && regression.checks.every(x=>x.passed) && new Set(regression.checks.map(x=>x.name)).size === 21, '21 distinct actual native regression cases per run');
+ const preservation = json(folder+variant+'/authored-body-preservation.json');
+ ok(preservation.passed && !preservation.source_saved && preservation.source_sha256[1] === digest && preservation.rows.map(x=>x.retained_authored_body_points_and_named_skin).join() === '75915,75865' && preservation.rows.every(x=>x.hands_163bones_rest_matrices_identical), 'actual independent A66 retained body/skin/hands/163bones/rest/matrices');
+ const report = json(folder+variant+'/roundtrip-report.json');
+ ok(report.transforms_passed && report.geometry_deformation_pending && report.ratio === 1 && report.maximum_skin_influences === 8,'export transforms are not deformation approval');
+ for(const gender of ['male','female']) {
+  const b = read(folder+variant+'/bodyguard-'+gender+'-candidate.glb');
+  ok(b.toString('ascii',0,4) === 'glTF' && b.readUInt32LE(4) === 2 && b.readUInt32LE(8) === b.length && b.readUInt32LE(16) === 0x4e4f534a, 'complete native GLB2');
+  const gltf = JSON.parse(b.toString('utf8',20,20+b.readUInt32LE(12)));
+  ok(gltf.meshes.length === 5 && gltf.skins.length === 1 && gltf.skins[0].joints.length === 163 && !(gltf.images||[]).length && !(gltf.animations||[]).length && !(gltf.cameras||[]).length, 'GLB neutral rig without reference images or exercise actions');
+  ok([...gltf.nodes,...gltf.meshes].every(x=>x.extras === undefined), 'diagnostic ring IDs not exported');
+  const body = gltf.nodes.find(x=>x.name === 'BODYGUARD '+(gender === 'male' ? 'Male' : 'Female')+' sculpt WIP');
+  ok(body?.skin !== undefined && gltf.meshes[body.mesh].primitives.every(x=>x.attributes.JOINTS_1 !== undefined && x.attributes.WEIGHTS_1 !== undefined), 'authored body native second weight set');
+ }
+}
+for (const [relative,rendered] of [
+ ['a75/source/deformation-report.json',true],['a75b/source-deformation-report.json',false],['a75b/roundtrip-deformation-report.json',false],
+]) {
+ const q = json(folder+relative), poses = q.checks.filter(x=>typeof x.edge_ratio_max === 'number');
+ ok(q.passed && !q.failures.length && q.rendered === rendered && q.checks.length === 121 && poses.length === 118,'actual121 rows/118technical checks; exact render scope');
+ ok(poses.every(x=>Number.isFinite(x.edge_ratio_max) && x.edge_ratio_max < 3), 'unchanged 1mm/ratio<3 technical guard');
+ ok(q.checks[0].surface_style === 'unified-white-mannequin' && !q.checks[0].garments.length,'unified neutral surface without separate clothing');
+ ok(q.checks.filter(x=>x.surface && x.pose === 'neutral').every(x=>x.components === 1 && x.non_manifold === 0 && x.unnormalized === 0),'closed finite normalized bodies');
+}
+const equality = json(folder+'a75b/native-geometry-equality.json');
+ok(equality.passed && !equality.source_saved && equality.all_body_head_bridge_points_named_skin_topology_hands_bones_matrices_finish_identical, 'native actual variant equality, not GLB byte/vertex order equality');
+const contours = json(folder+'a75b/actual-authored-contours.json');
+ok(!contours.source_saved && contours.source_sha256 === '9131b9cb10661bda844b8377df89e90cd610c63c6783d95f107d9baf01e0732c' && contours.rows.length === 2,'actual read-only authored boundary diagnostic');
+for (const [i,row] of contours.rows.entries()) {
+ ok(Math.abs(row.actual_artist_vertical_gap_m-.024)<1e-7 && row.rings.every(x=>x.edges === [567,587][i] && x.identity === 'exact authored native ring, saved at generation'), 'exact intended authored ring, not proximity artifacts');
+ ok(row.rings.every(x=>x.contour_widths_m.every(Number.isFinite) && x.contour_perimeter_m > 0 && Number.isFinite(x.dihedral_max_degrees)), 'finite native diagnostic data');
+}
+ok(contours.rows[0].rings[1].same_1um_proximity_candidates === 571,'real failed proximity overcount retained; tolerance unchanged');
+const browser = json(folder+'a75b/browser-report.json');
+ok(browser.stats.expected === 3 && !browser.stats.unexpected && !browser.stats.flaky && !browser.stats.skipped && !browser.errors.length,'actual3 Chrome passes');
+const results = [];
+function resultsOf(s) {
+ for(const spec of s.specs||[])for(const t of spec.tests||[])results.push(...t.results);
+ for(const child of s.suites||[])resultsOf(child);
+}
+resultsOf(browser);
+ok(results.length === 3 && results.every(x=>x.status === 'passed'),'terminal browser test outcomes');
+const attachments = results.flatMap(x=>x.attachments||[]);
+for(const gender of ['male','female']) {
+ const b = read(folder+'a75b/bodyguard-'+gender+'-candidate.glb');
+ const assets = attachments.filter(x=>x.name === gender+'-native-asset').map(x=>JSON.parse(Buffer.from(x.body,'base64')));
+ ok(assets.length === 3 && assets.every(x=>x.bytes === b.length && x.sha256 === sha(b)), 'Chrome tested exact new native bytes');
+}
+const renders = attachments.filter(x=>x.name.endsWith('-technical-render')).map(x=>JSON.parse(Buffer.from(x.body,'base64')));
+ok(renders.length === 2 && renders.every(x=>x.samples === 180 && x.skeletons_independent && x.static_angle_max === 0 && x.moving_angle_max > .1 && x.eight_weight_meshes === 2 && Number.isFinite(x.mean_ms) && Number.isFinite(x.p95_ms)), 'actual independent skeleton/RAF metrics, not webcam approval');
+const record = json(folder+'execution-record.json');
+ok(record.native_all_terminal_before_browser && record.camera_requests === 0 && record.a75b.browser_exit_code === 0 && record.actual_png_total === 44, 'actual actor ordering and image scope');
+ok(record.workflow_diagnostics.filter(x=>x.tool?.exit_code === 1).length === 2 && record.unrun.length >= 8, 'failed native tools preserved; unrun explicitly distinguished');
+ok(!record.appearance.default_adopted && record.appearance.unresolved_p2 && !record.appearance.merge_gate_satisfied && !record.appearance.stages_1_to_6_complete && record.appearance.development_default === 'A37 unchanged', 'no failed appearance adoption, merge or stage skip');
+const files = [], markdown = ['bodyguard/docs/avatar-production.md','bodyguard/docs/stories/stage2-avatar-candidate.md'];
+function walk(relative) {
+ for(const entry of fs.readdirSync(path.join(root,relative),{withFileTypes:true}).sort((a,b)=>a.name.localeCompare(b.name,'en'))) {
+  if(entry.name === 'evidence-audit.json')continue;
+  const p = relative+entry.name;
+  if(entry.isDirectory()){walk(p+'/');continue;}
+  ok(entry.isFile(),'regular evidence file');
+  const b = read(p);files.push({file:p,bytes:b.length,sha256:sha(b)});
+  if(entry.name.endsWith('.md'))markdown.push(p);
+  if(entry.name.endsWith('.png')){
+   ok(b.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])),'actual PNG signature');png++;
+  }
+ }
+}
+walk(folder);
+ok(png === 44,'actual34A75+8A75b+2Chrome images');
+for(const file of markdown)for(const m of read(file).toString().matchAll(/!?\[[^\]]*\]\(([^\)]+)\)/g)) {
+ const target = m[1].split('#')[0];
+ if(!target || /^(https?:|codex:|mailto:)/.test(target))continue;
+ const resolved = path.resolve(root,path.dirname(file),target);
+ if(resolved === path.join(root,folder,'evidence-audit.json'))continue;
+ ok(fs.existsSync(resolved),'local evidence link: '+target);links++;
+}
+const prior = base+'review/candidate-a74-review/evidence-audit.json';
+for(const file of json(prior).manifest)ok(read(file.file).length === file.bytes && sha(read(file.file)) === file.sha256,'all prior A74 evidence unchanged');
+ok(read(prior).equals(execFileSync('git',['show',before+':'+prior],{cwd:root})),'prior audit itself preserved');
+for(const [p,d] of [
+ ['bodyguard_avatar_candidate_a74_review.blend','76237732c83c24b5d0b5b1c135b1e2fee6473343c573eaab78995262910d9171'],
+ ['bodyguard_avatar_candidate_a66_review.blend','03ac3629b76858ee7f55fc0ffa9e6118c5d64fcbf4ba29100889af1318a8b3b5'],
+ ['replace_neck_from_artist.py','774b34a1330548f9e6dfe087f0bd561bff5ba934577df9d0f07668b6a603f7d0'],
+])ok(sha(read(base+p)) === d,'prior native source/helper unchanged');
+ok(execFileSync('git',['diff',before,'--name-only','--',base+'bodyguard_avatar_candidate_a37.blend','bodyguard/frontend','bodyguard/backend','bodyguard/AGENTS.md','bodyguard/docs/operating-rules.md','bodyguard/docs/release-plan.md'],{cwd:root,encoding:'utf8'}).trim() === '','default/service/safety/approval gates unchanged');
+for(const file of markdown.slice(0,2)) {
+ const old = execFileSync('git',['show',before+':'+file],{cwd:root,encoding:'utf8'});
+ const now = read(file).toString(), insertion = /^2026-10-02 \[A75·A75b[^\n]*\n\n/gm;
+ ok([...now.matchAll(insertion)].length === 1 && now.replace(insertion,'') === old,'only new progress paragraph; all older doc evidence preserved');
+}
+const report = {passed:true,assertions,actual_png:png,local_links:links,files:files.length,manifest:files};
+const output = path.join(root,folder,'evidence-audit.json');
+if(fs.existsSync(output))assert.deepEqual(JSON.parse(fs.readFileSync(output)),report,'fresh audit matches immutable manifest');
+console.log(JSON.stringify(report,null,2));

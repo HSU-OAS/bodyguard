@@ -1,0 +1,93 @@
+"""FR-A-03: compare native artist variants; no source is saved."""
+
+import json
+import sys
+from collections import Counter
+from hashlib import file_digest
+from pathlib import Path
+
+import bpy
+
+before_path, after_path, output = map(Path, sys.argv[sys.argv.index("--") + 1 :])
+assert output.suffix == ".json" and not output.exists()
+expected = [
+    (before_path, "5badc589381a9cf7e881bf8e3cadb331d649efd2d1e283289809568ae12faa1a"),
+    (after_path, "9131b9cb10661bda844b8377df89e90cd610c63c6783d95f107d9baf01e0732c"),
+]
+snapshots = []
+for source, digest in expected:
+    with source.open("rb") as file:
+        assert file_digest(file, "sha256").hexdigest() == digest
+    bpy.ops.wm.open_mainfile(filepath=str(source))
+    rows = []
+    for label in ("Male", "Female"):
+        body = bpy.data.objects[f"BODYGUARD {label} sculpt WIP"]
+        rig = bpy.data.objects[f"BODYGUARD {label} rig WIP"]
+        points = [tuple(vertex.co) for vertex in body.data.vertices]
+        skin = [
+            tuple(
+                sorted(
+                    (body.vertex_groups[g.group].name, g.weight) for g in vertex.groups
+                )
+            )
+            for vertex in body.data.vertices
+        ]
+        shader = next(
+            node
+            for node in body.data.materials[0].node_tree.nodes
+            if node.type == "BSDF_PRINCIPLED"
+        )
+        rows.append(
+            {
+                "points_skin": Counter(zip(points, skin, strict=True)),
+                "edges": Counter(
+                    tuple(sorted(points[index] for index in edge.vertices))
+                    for edge in body.data.edges
+                ),
+                "faces": Counter(
+                    tuple(sorted(points[index] for index in face.vertices))
+                    for face in body.data.polygons
+                ),
+                "hands": [
+                    (points[index], skin[index])
+                    for index in body["bodyguard_distal_hand_vertices"]
+                ],
+                "bones": [
+                    (bone.name, tuple(tuple(row) for row in bone.matrix_local))
+                    for bone in rig.data.bones
+                ],
+                "body_matrix": tuple(tuple(row) for row in body.matrix_world),
+                "rig_matrix": tuple(tuple(row) for row in rig.matrix_world),
+                "finish": [
+                    tuple(value) if hasattr(value, "__iter__") else value
+                    for name in (
+                        "Base Color",
+                        "Metallic",
+                        "Roughness",
+                        "Specular IOR Level",
+                        "Alpha",
+                    )
+                    for value in [shader.inputs[name].default_value]
+                ],
+            }
+        )
+    snapshots.append(rows)
+for label, before, after in zip(("Male", "Female"), *snapshots, strict=True):
+    assert before == after, label
+for source, digest in expected:
+    with source.open("rb") as file:
+        assert file_digest(file, "sha256").hexdigest() == digest
+output.write_text(
+    json.dumps(
+        {
+            "passed": True,
+            "source_saved": False,
+            "source_sha256": [digest for _, digest in expected],
+            "all_body_head_bridge_points_named_skin_topology_hands_bones_matrices_finish_identical": True,
+            "scope": "artist geometry equality only; diagnostic properties differ; not camera or clinical approval",
+        },
+        indent=2,
+    )
+    + "\n"
+)
+print("ACTUAL NATIVE ARTIST VARIANT EQUALITY PASS")
