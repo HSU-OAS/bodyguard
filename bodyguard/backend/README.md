@@ -47,7 +47,7 @@ POST `auth/password/forgot`의 email은 기존 이메일 정규화를 따른다.
 
 기존 ADR-0015의 Authlib 1.8.0(BSD)·native httpx2를 사용한다. `BODYGUARD_GOOGLE_CLIENT_ID`와 `BODYGUARD_GOOGLE_CLIENT_SECRET`은 함께 설정해야 하며, 실제 계정 연결·시크릿 주입은 별도 승인 전 실행하지 않는다. 설정하지 않으면 status는 `{configured:false}`, login은 503이고 이메일 로그인은 유지한다. 일부만 설정하면 기동을 거부한다. 웹 버튼은 별도 S2.6b2 Story다.
 
-GET `auth/google/login`은 고정 Google authorization endpoint로 303 이동한다. 허용 범위는 `openid email`뿐이며 이름·사진·Drive·offline 권한이나 공급자 토큰을 저장하지 않는다. 서비스 origin의 정확한 `/api/v1/auth/google/callback`을 사용하며 Host·외부 next를 신뢰하지 않는다. S256 PKCE와 nonce·익명 쿠키에 연결된 일회용 state를 검사한다. state는 해시만 DB에 저장하고 nonce/verifier는 기존 목적별 HMAC으로 도출한다. 익명 세션당 최신 시도 하나·10분, 시작은 IP당 10회/분이다.
+GET `auth/google/login`은 고정 Google authorization endpoint로 303 이동한다. 허용 범위는 `openid email`뿐이며 이름·사진·Drive·offline 권한이나 공급자 토큰을 저장하지 않는다. 서비스 origin의 정확한 `/api/v1/auth/google/callback`을 사용하며 Host·외부 next를 신뢰하지 않는다. S256 PKCE와 nonce·익명 쿠키에 연결된 일회용 state를 검사한다. state는 해시만 DB에 저장하고 nonce/verifier는 기존 목적별 HMAC으로 도출한다. 익명 세션당 최신 시도 하나·10분, 시작은 IP당 10회/분이다. S2.6b2에서 native HTML 탐색의 미설정/제한·시작/callback DB 오류는 고정 로그인 enum으로 303 복귀한다. JSON API의 503/429와 Retry-After·인증 검사는 유지한다.
 
 callback은 외부 토큰 교환 전에 흐름을 소비한다. native SDK로 RS256 서명·JWKS 키 교체·발급자·이 앱을 포함한 대상·발급/만료 시각을 검사하고 nonce·인증된 이메일을 추가 확인한다. 다른 탭의 로그인/로그아웃·만료 이후 늦은 공급자 응답은 세션을 바꾸거나 되살리지 않는다. 성공은 기존 세션 교체 후 `/start`, 실패/취소/계정 충돌은 고정 enum만 담은 `/login?google=...`다. 원문 code/state/error·토큰은 응답/DB/로그에 복사하지 않는다. API의 no-store/no-referrer, SDK 민감 DEBUG 로그 차단과 서버 access-log 금지를 유지한다. 운영 프록시/수집기의 URL 로그도 배포 Story에서 별도 검사해야 한다.
 
@@ -68,7 +68,7 @@ uv run mypy app
 
 pytest는 실제 FastAPI와 PostgreSQL 18 migration·제약·독립 연결 경쟁을 사용한다. 시간·코드 난수·메일을 시험에서 통제하고, Google 시험은 자체 RSA 키와 native SDK 검증을 사용하되 공급자 HTTPS는 MockTransport다. 실제 Google TLS·승인·로그인·Gmail 도착 증거가 아니다. test 설정은 환경 변수로 서버를 기동할 수 없고, production/development의 가짜 메일·clock·Google transport 주입도 거부한다. 공개 outbox/코드 조회/인증 우회 API는 없다.
 
-`uv run python -m tests.run_browser`(기본/account)와 `uv run python -m tests.run_browser password`는 각각 실제 계정/복구 API·SQL·production Chrome의 별도 시험이다. 소유한 시험 DB만 초기화하므로 동시에 실행하지 않는다. 복구 전달은 잠금·원자적 교체를 쓰는 비공개 시험 파일이며 Gmail이 아니다. 계정/복구 결과는 frontend/test-results/의 각 suite에 재현된다.
+`uv run python -m tests.run_browser`(기본/account), `... password`, `... google`은 실제 계정/복구/구글 API·SQL·production Chrome의 별도 시험이다. 소유한 시험 DB만 초기화하므로 동시에 실행하지 않는다. 메일/Google 응답은 원자적 비공개 IPC 파일이며 실제 공급자가 아니다. Google clock offset은 시험용이며 실제 기다린 시간으로 표시하지 않는다. 로컬 시작 응답을 redirect 0회로 캡처하고, 공통 브라우저의 외부 통신은 소유한 닫힌 포트 proxy로 강제 거부한다. 실제 차단·실패 실행/수정은 [b2 Story](../docs/stories/stage2-google-auth-web.md)에 기록한다. 계정/복구/구글 결과는 frontend/test-results/의 각 suite에 재현된다.
 
 [하네스 계약](../docs/stories/stage2-account-harness.md) H-01~21에 해당하는 실행 테스트 이름은 tests/test_auth.py의 test_h01_...~test_h21_...다. 초기 실제 DB red는 미구현 csrf의 404, 구현 green·리뷰 보완·잔여 위험은 [Story 결과](../docs/stories/stage2-account-api.md)에 기록한다. 메모리 outbox 성공은 Gmail 도착 증거가 아니다.
 

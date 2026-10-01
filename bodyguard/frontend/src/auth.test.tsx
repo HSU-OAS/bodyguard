@@ -206,3 +206,21 @@ it('PW-03 late aborted reset cannot erase a newer authenticated session', async 
   await act(async () => finish?.(new Response(null, { status: 204 })))
   expect(screen.getByRole('status').textContent).toBe(account.email)
 })
+
+it('GW-06 cached pageshow rechecks the real session instead of restoring stale private UI', async () => {
+  vi.stubGlobal(
+    'fetch',
+    vi.fn().mockResolvedValueOnce(response(account)).mockResolvedValueOnce(response({}, 401)),
+  )
+  render(
+    <AuthProvider>
+      <Screen />
+    </AuthProvider>,
+  )
+  await screen.findByText(account.email)
+  const restored = new Event('pageshow')
+  Object.defineProperty(restored, 'persisted', { value: true })
+  fireEvent(window, restored)
+  expect(screen.queryByText(account.email)).toBeNull()
+  await screen.findByText('guest')
+})

@@ -80,6 +80,19 @@ export async function me(signal: AbortSignal): Promise<UserOut | null> {
   }
 }
 
+// FR-U-01: configuration is not an authenticated user; malformed status stays disabled.
+export async function googleConfigured(signal: AbortSignal): Promise<boolean> {
+  const value = await request('/auth/google/status', signal, undefined, 200)
+  if (
+    !value ||
+    typeof value !== 'object' ||
+    !('configured' in value) ||
+    typeof value.configured !== 'boolean'
+  )
+    throw new ApiError(503)
+  return value.configured
+}
+
 export async function authenticate(
   kind: 'login' | 'verify',
   body: CredentialsWritable | Verification,

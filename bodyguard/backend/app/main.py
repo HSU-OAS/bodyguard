@@ -274,6 +274,13 @@ def create_app(
 
     @app.exception_handler(SQLAlchemyError)
     async def database_error(request: Request, exc: SQLAlchemyError) -> Response:
+        # FR-U-01: callback/start DB outages must not strand browser navigation on JSON.
+        if (
+            request.method == "GET"
+            and request.url.path in {"/api/v1/auth/google/login", "/api/v1/auth/google/callback"}
+            and "text/html" in request.headers.get("Accept", "").lower()
+        ):
+            return google_failure()
         return failure(503, "서비스 연결을 다시 시도해 주세요.")
 
     def new_session(
@@ -336,8 +343,14 @@ def create_app(
 
     @app.get("/api/v1/auth/google/login", status_code=303, response_class=RedirectResponse)
     async def google_login(request: Request) -> Response:
+        # FR-U-01: native browser navigation returns to UI; JSON clients keep API errors.
+        html = "text/html" in request.headers.get("Accept", "").lower()
         if google is None:
-            return failure(503, "구글 로그인을 연결하지 못했습니다. 이메일로 로그인해 주세요.")
+            return (
+                google_failure("unavailable")
+                if html
+                else failure(503, "구글 로그인을 연결하지 못했습니다. 이메일로 로그인해 주세요.")
+            )
         response = RedirectResponse(config.origin + "/start", status_code=303)
 
         def begin_google() -> str | None:
@@ -380,7 +393,14 @@ def create_app(
                 )
                 return state
 
-        state = await asyncio.to_thread(begin_google)
+        try:
+            state = await asyncio.to_thread(begin_google)
+        except HTTPException as exc:
+            if not html:
+                raise
+            failed = google_failure("rate-limited" if exc.status_code == 429 else "failed")
+            failed.headers.update(exc.headers or {})
+            return failed
         if state:
             data = await google.create_authorization_url(
                 config.origin + "/api/v1/auth/google/callback",

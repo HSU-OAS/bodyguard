@@ -61,6 +61,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       void refresh()
     }
     window.addEventListener('focus', onFocus)
+    const onPageShow = (event: PageTransitionEvent) => {
+      if (!event.persisted) return
+      current.current?.controller.abort()
+      current.current = null
+      void refresh()
+    }
+    // FR-U-04: cached Back navigation is not authority for a private screen.
+    window.addEventListener('pageshow', onPageShow)
     if (typeof BroadcastChannel !== 'undefined') {
       channel.current = new BroadcastChannel('bodyguard-account-change')
       channel.current.onmessage = onFocus
@@ -69,6 +77,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       current.current?.controller.abort()
       current.current = null
       window.removeEventListener('focus', onFocus)
+      window.removeEventListener('pageshow', onPageShow)
       channel.current?.close()
       channel.current = null
     }

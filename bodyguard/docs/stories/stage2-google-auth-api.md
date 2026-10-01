@@ -1,6 +1,6 @@
 # S2.6b1 — 구글 인증 API·보안 하네스
 
-2026-10-01 · 로컬 구현·검증 통과 / PR 최종 게이트 대기 · 기준 main `5f0c40cc16181574530db302b6ba065e7fb4091a`. S2.6a1/a2 PR #10/#11 병합 확인. [사전 승인 규칙](../operating-rules.md)·FR-U-01~04·ADR-0006을 따른다. 아바타 Draft PR #9 외형 P2 및 S2.3b 실제 수행 시험은 별도 미완료다.
+2026-10-01 · **PR #12 merge commit 병합** `d5cade78668105e3d9faf96b32f03490f9ce67ea`(부모·트리·브랜치 유지 확인) · 기준 main `5f0c40cc16181574530db302b6ba065e7fb4091a`. S2.6a1/a2 PR #10/#11 병합 확인. [사전 승인 규칙](../operating-rules.md)·FR-U-01~04·ADR-0006을 따른다. 아바타 Draft PR #9 외형 P2 및 S2.3b 실제 수행 시험은 별도 미완료다.
 
 ## 범위·기술 결정
 
@@ -67,4 +67,4 @@ RED → GREEN은 실제 실패를 재현한 뒤 공통 경계를 수정했다.
 
 오프라인 pnpm cache가 없던 초기 설치와 자산 다운로드의 sandbox DNS 실패는 실제 빌드 성공이 아니다. 잠긴 194개 의존성을 재사용하고 소유한 이전 Story의 같은 버전 MediaPipe 자산 5개를 복사한 뒤 위 build를 실제 재실행했다. API에는 기존 asyncio deprecation 1개, 브라우저에는 NO_COLOR와 시제품 Three/MediaPipe 경고가 있다. 경고가 없다고 보고하지 않는다.
 
-수동 PR 전 리뷰에서 대상 앱 설정 누락을 위 재현으로 해결했다. b1 범위의 미해결 P1/P2는 없다. PR 최종 diff/HEAD·충돌·체크를 다시 읽고 조건부 merge commit 규칙을 적용한다. **실제 공급자 연결·b2 웹·S2.3b·최종 아바타·S2.7·1~6 전체 완료를 의미하지 않는다.**
+수동 PR 전 리뷰에서 대상 앱 설정 누락을 위 재현으로 해결했다. b1 범위의 미해결 P1/P2는 없었고 exact HEAD `5ab4c6c31cff3da3bdf322ae60ebd8c8a4040f4c`·최신 diff·CLEAN/MERGEABLE·브랜치 자동 삭제 false를 확인해 PR #12를 merge commit으로 병합했다. GitHub checks/reviews는 0(**체크 없음**). 로컬 검증을 GitHub 체크 통과로 표시하지 않았다. **실제 공급자 연결·b2 웹·S2.3b·최종 아바타·S2.7·1~6 전체 완료를 의미하지 않는다.**
