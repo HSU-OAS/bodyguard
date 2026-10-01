@@ -259,6 +259,18 @@
 .account-form form {
   margin-top: 32px;
 }
+.google-option {
+  margin-top: 28px;
+}
+.google-feedback {
+  margin-top: 12px;
+}
+.account-divider {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
 .account-form label {
   display: block;
   font-size: 14px;
@@ -300,6 +312,33 @@
   text-underline-offset: 4px;
   cursor: pointer;
 }
+/* FR-U-01: official Google brand shape/colors; no external SDK/font requests. */
+.google-button {
+  gap: 10px;
+  padding: 11px 12px;
+  background: #fff;
+  border-color: #747775;
+  color: #1f1f1f;
+  font-family: "Roboto", arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+.google-button:hover:not(:disabled) {
+  background: #f2f2f2;
+}
+.google-icon {
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.google-icon img {
+  max-width: none;
+  transform: translate(-10px, -10px);
+}
+.google-retry {
+  margin-top: 12px;
+}
 #password-help {
   margin-top: 8px;
 }
@@ -313,6 +352,8 @@
 }
 .form-error {
   color: #9c2c23;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 .form-notice {
   color: var(--accent);

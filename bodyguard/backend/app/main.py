@@ -1,19 +1,24 @@
-"""FR-U-02/03/04: email account and server-cookie sessions."""
+"""FR-U-01~04: Google/email accounts and server-cookie sessions."""
 
 import asyncio
 import hmac
 import logging
 import math
+import re
+import time
 from collections.abc import Awaitable, Callable
 from datetime import UTC, datetime, timedelta
 from email.message import EmailMessage
+from http.cookies import SimpleCookie
 from uuid import uuid4
 
 import aiosmtplib
+import httpx2
+from authlib.integrations.starlette_client import OAuth  # type: ignore[import-untyped]
 from email_validator import EmailNotValidError, validate_email
 from fastapi import BackgroundTasks, FastAPI, HTTPException, Request, Response
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from pydantic import BaseModel, ConfigDict, Field, SecretStr, field_validator
 from sqlalchemy import Connection, Engine, RowMapping, create_engine, delete, select, update
 from sqlalchemy.dialects.postgresql import insert
@@ -21,7 +26,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.config import Settings
-from app.db import challenges, limits, resets, sessions, users
+from app.db import challenges, google_flows, limits, resets, sessions, users
 from app.security import cleanup, code, digest, keyed, passwords, quota, token
 
 
@@ -82,6 +87,10 @@ class CsrfOut(BaseModel):
     csrf_token: str
 
 
+class GoogleStatusOut(BaseModel):
+    configured: bool
+
+
 class ChallengeOut(BaseModel):
     challenge_id: str
 
@@ -129,10 +138,11 @@ def create_app(
     clock: Callable[[], datetime] | None = None,
     *,
     reset_mail: Callable[[str, str], None] | None = None,
+    google_transport: httpx2.AsyncBaseTransport | None = None,
 ) -> FastAPI:
     config = settings or Settings.from_environment()
     if config.environment != "test" and any(
-        value is not None for value in (mail, clock, reset_mail)
+        value is not None for value in (mail, clock, reset_mail, google_transport)
     ):
         raise RuntimeError("Test dependencies cannot launch a non-test server")
     db = engine or create_engine(
@@ -145,6 +155,32 @@ def create_app(
     now_fn = clock or utcnow
     key = config.security_key.get_secret_value()
     dummy_hash = passwords.hash(token())
+    # FR-U-01/NFR-08: this SDK logs PKCE verifiers at DEBUG. Never enable that logger.
+    logging.getLogger("authlib.integrations.base_client.sync_app").disabled = True
+    # HTTP dependency request/debug logs can contain complete URLs and headers.
+    logging.getLogger("httpx2").setLevel(logging.WARNING)
+    logging.getLogger("httpcore2").setLevel(logging.WARNING)
+    google = None
+    if config.google_configured:
+        assert config.google_client_secret is not None
+        google = OAuth().register(
+            "google",
+            client_id=config.google_client_id,
+            client_secret=config.google_client_secret.get_secret_value(),
+            authorize_url="https://accounts.google.com/o/oauth2/v2/auth",
+            access_token_url="https://oauth2.googleapis.com/token",
+            jwks_uri="https://www.googleapis.com/oauth2/v3/certs",
+            id_token_signing_alg_values_supported=["RS256"],
+            client_kwargs={
+                "scope": "openid email",
+                "code_challenge_method": "S256",
+                "token_endpoint_auth_method": "client_secret_post",
+                "timeout": 10,
+                "trust_env": False,
+                "follow_redirects": False,
+                **({"transport": google_transport} if google_transport is not None else {}),
+            },
+        )
     app = FastAPI(
         title="BODYGUARD 계정 API",
         docs_url=None if config.environment == "production" else "/docs",
@@ -221,6 +257,7 @@ def create_app(
         response.headers["Cache-Control"] = "no-store"
         response.headers["Pragma"] = "no-cache"
         response.headers["X-Content-Type-Options"] = "nosniff"
+        response.headers["Referrer-Policy"] = "no-referrer"
         return response
 
     @app.exception_handler(RequestValidationError)
@@ -237,6 +274,13 @@ def create_app(
 
     @app.exception_handler(SQLAlchemyError)
     async def database_error(request: Request, exc: SQLAlchemyError) -> Response:
+        # FR-U-01: callback/start DB outages must not strand browser navigation on JSON.
+        if (
+            request.method == "GET"
+            and request.url.path in {"/api/v1/auth/google/login", "/api/v1/auth/google/callback"}
+            and "text/html" in request.headers.get("Accept", "").lower()
+        ):
+            return google_failure()
         return failure(503, "서비스 연결을 다시 시도해 주세요.")
 
     def new_session(
@@ -292,6 +336,229 @@ def create_app(
             (keyed(key, "mail-email", email), 5),
             (keyed(key, "mail-ip", peer), 20),
         ]
+
+    @app.get("/api/v1/auth/google/status", response_model=GoogleStatusOut)
+    def google_status() -> dict[str, bool]:
+        return {"configured": config.google_configured}
+
+    @app.get("/api/v1/auth/google/login", status_code=303, response_class=RedirectResponse)
+    async def google_login(request: Request) -> Response:
+        # FR-U-01: native browser navigation returns to UI; JSON clients keep API errors.
+        html = "text/html" in request.headers.get("Accept", "").lower()
+        if google is None:
+            return (
+                google_failure("unavailable")
+                if html
+                else failure(503, "구글 로그인을 연결하지 못했습니다. 이메일로 로그인해 주세요.")
+            )
+        response = RedirectResponse(config.origin + "/start", status_code=303)
+
+        def begin_google() -> str | None:
+            with db.begin() as connection:
+                now = now_fn()
+                cleanup(connection, now)
+                old = session(connection, request, now, locked=True)
+                if old and old["user_id"]:
+                    return None  # Account switching requires explicit logout.
+                peer = request.client.host if request.client else "unknown"
+                retry = quota(
+                    connection,
+                    [(keyed(key, "google-ip", peer), 10)],
+                    now,
+                    timedelta(minutes=1),
+                    consume=True,
+                )
+                if retry:
+                    raise HTTPException(
+                        429, "잠시 후 다시 시도해 주세요.", headers={"Retry-After": str(retry)}
+                    )
+                if old is None:
+                    new_session(connection, response, now, None)
+                    raw = SimpleCookie(response.headers["set-cookie"])[config.cookie_name].value
+                    session_hash = digest(raw)
+                else:
+                    session_hash = old["token_hash"]
+                # Bound storage: only the newest attempt on this anonymous session.
+                connection.execute(
+                    delete(google_flows).where(google_flows.c.session_hash == session_hash)
+                )
+                state = token()
+                connection.execute(
+                    insert(google_flows).values(
+                        state_hash=digest(state),
+                        session_hash=session_hash,
+                        created_at=now,
+                        expires_at=now + timedelta(minutes=10),
+                    )
+                )
+                return state
+
+        try:
+            state = await asyncio.to_thread(begin_google)
+        except HTTPException as exc:
+            if not html:
+                raise
+            failed = google_failure("rate-limited" if exc.status_code == 429 else "failed")
+            failed.headers.update(exc.headers or {})
+            return failed
+        if state:
+            data = await google.create_authorization_url(
+                config.origin + "/api/v1/auth/google/callback",
+                state=state,
+                nonce=keyed(key, "google-nonce", state),
+                code_verifier=keyed(key, "google-pkce", state),
+                prompt="select_account",
+            )
+            response.headers["location"] = str(data["url"])
+        return response
+
+    def google_failure(kind: str = "failed") -> Response:
+        # Fixed enum only, never provider text, code, state, email or token.
+        return RedirectResponse(config.origin + "/login?google=" + kind, status_code=303)
+
+    @app.get("/api/v1/auth/google/callback", status_code=303, response_class=RedirectResponse)
+    async def google_callback(request: Request) -> Response:
+        if google is None:
+            return google_failure("unavailable")
+        params = request.query_params
+        state = params.get("state", "")
+        if (
+            len(params.getlist("state")) != 1
+            or not re.fullmatch(r"[A-Za-z0-9_-]{43}", state)
+            or len(params.getlist("code")) > 1
+            or len(params.getlist("error")) > 1
+        ):
+            return google_failure()
+
+        def consume() -> bool:
+            with db.begin() as connection:
+                old = session(connection, request, now_fn(), locked=True)
+                if old is None or old["user_id"]:
+                    return False
+                flow = (
+                    connection.execute(
+                        select(google_flows)
+                        .where(
+                            google_flows.c.state_hash == digest(state),
+                            google_flows.c.session_hash == old["token_hash"],
+                        )
+                        .with_for_update()
+                    )
+                    .mappings()
+                    .first()
+                )
+                now = now_fn()
+                if not flow or flow["used_at"] is not None or flow["expires_at"] <= now:
+                    return False
+                connection.execute(
+                    update(google_flows)
+                    .where(google_flows.c.state_hash == flow["state_hash"])
+                    .values(used_at=now)
+                )
+                return True
+
+        if not await asyncio.to_thread(consume):
+            return google_failure()
+        if "error" in params:
+            return google_failure(
+                "cancelled"
+                if not params.getlist("code") and params["error"] == "access_denied"
+                else "failed"
+            )
+        authorization_code = params.get("code", "")
+        if (
+            not authorization_code
+            or len(authorization_code) > 2048
+            or not all(33 <= ord(char) <= 126 for char in authorization_code)
+        ):
+            return google_failure()
+        nonce = keyed(key, "google-nonce", state)
+        try:
+            provider_token = await google.fetch_access_token(
+                config.origin + "/api/v1/auth/google/callback",
+                code=authorization_code,
+                code_verifier=keyed(key, "google-pkce", state),
+            )
+            info = await google.parse_id_token(
+                provider_token,
+                nonce=nonce,
+                leeway=0,
+                claims_options={
+                    "iss": {"values": ["https://accounts.google.com", "accounts.google.com"]},
+                    "aud": {"essential": True, "value": config.google_client_id},
+                },
+            )
+            # Authlib permits nonce_supported:false. This Google flow never does.
+            sub, email = info.get("sub"), info.get("email")
+            if (
+                info.get("nonce") != nonce
+                or info.get("email_verified") is not True
+                or not isinstance(sub, str)
+                or not 1 <= len(sub) <= 255
+                or not all(33 <= ord(char) <= 126 for char in sub)
+                or not isinstance(email, str)
+                or type(info.get("exp")) is not int
+                or type(info.get("iat")) is not int
+                or info["exp"] <= time.time()
+            ):
+                return google_failure()
+            email = EmailInput(email=email).email
+        except Exception:
+            # Provider/SDK malformed payloads fail closed; never log exception text.
+            return google_failure()
+
+        def finish() -> Response:
+            with db.begin() as connection:
+                old = session(connection, request, now_fn(), locked=True)
+                if old is None or old["user_id"]:
+                    return google_failure()
+                flow = (
+                    connection.execute(
+                        select(google_flows).where(
+                            google_flows.c.state_hash == digest(state),
+                            google_flows.c.session_hash == old["token_hash"],
+                        )
+                    )
+                    .mappings()
+                    .first()
+                )
+                now = now_fn()
+                if not flow or flow["used_at"] is None or flow["expires_at"] <= now:
+                    return google_failure()
+                user = (
+                    connection.execute(
+                        select(users).where(users.c.google_sub == sub).with_for_update()
+                    )
+                    .mappings()
+                    .first()
+                )
+                if user is None:
+                    connection.execute(
+                        insert(users)
+                        .values(
+                            id=str(uuid4()),
+                            email=email,
+                            google_sub=sub,
+                            password_hash=None,
+                            email_verified_at=now,
+                            created_at=now,
+                        )
+                        .on_conflict_do_nothing()
+                    )
+                    user = (
+                        connection.execute(
+                            select(users).where(users.c.google_sub == sub).with_for_update()
+                        )
+                        .mappings()
+                        .first()
+                    )
+                if user is None:
+                    return google_failure("account-conflict")
+                response = RedirectResponse(config.origin + "/start", status_code=303)
+                rotate(connection, response, old, now, user["id"], user["credentials_version"])
+                return response
+
+        return await asyncio.to_thread(finish)
 
     @app.get("/api/v1/auth/csrf", response_model=CsrfOut)
     def csrf(request: Request, response: Response) -> dict[str, str]:
@@ -485,9 +752,10 @@ def create_app(
                 .first()
             )
             valid = passwords.verify(
-                payload.password.get_secret_value(), user["password_hash"] if user else dummy_hash
+                payload.password.get_secret_value(),
+                user["password_hash"] if user and user["password_hash"] else dummy_hash,
             )
-            if not valid or user is None:
+            if not valid or user is None or not user["password_hash"]:
                 for k, _ in keys:
                     connection.execute(
                         update(limits)
@@ -508,7 +776,9 @@ def create_app(
         try:
             with db.begin() as connection:
                 user_id = connection.scalar(
-                    select(users.c.id).where(users.c.email == email).with_for_update()
+                    select(users.c.id)
+                    .where(users.c.email == email, users.c.password_hash.is_not(None))
+                    .with_for_update()
                 )
                 if user_id is None:
                     return
@@ -589,7 +859,9 @@ def create_app(
             if user_id is None:
                 return failure(400, "링크가 만료되었거나 사용할 수 없습니다. 다시 요청해 주세요.")
             user_id = connection.scalar(
-                select(users.c.id).where(users.c.id == user_id).with_for_update()
+                select(users.c.id)
+                .where(users.c.id == user_id, users.c.password_hash.is_not(None))
+                .with_for_update()
             )
             row = (
                 connection.execute(
