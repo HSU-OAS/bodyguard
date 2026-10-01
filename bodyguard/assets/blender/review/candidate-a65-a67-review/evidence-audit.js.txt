@@ -1,0 +1,97 @@
+// FR-A-03/07: reuse stdlib evidence checks; not clinical or release acceptance.
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const assert=require('node:assert/strict'),{execFileSync}=require('node:child_process');
+const [root,tmp]=process.argv.slice(2),base='bodyguard/assets/blender/';
+const folder=base+'review/candidate-a65-a67-review/';
+const read=p=>fs.readFileSync(path.join(root,p)),json=p=>JSON.parse(read(p));
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+let assertions=0,png=0,localLinks=0;
+const ok=(value,label)=>{assert(value,label);assertions++;};
+const sources=[
+[65,'draft-a65-oblique-under-jaw-head.blend','086fafa0332240ed5b7eb5e990020de4c545d59a7ab92204aa0dd1f7d463c5c3','rejected'],
+[66,'draft-a66-neutral-under-jaw-head.blend','03ac3629b76858ee7f55fc0ffa9e6118c5d64fcbf4ba29100889af1318a8b3b5','review'],
+[67,'draft-a67-parallel-oblique-head.blend','2f6e1fc510ddc3deb2b500e62ec3e274197a475046a4421d2d2af0bb766d03f3','review'],
+];
+for(const [n,native,digest,suffix] of sources){
+ const b=read(base+'bodyguard_avatar_candidate_a'+n+'_'+suffix+'.blend');
+ ok(sha(b)===digest&&b.equals(fs.readFileSync(path.join(tmp,native))),'exact native source '+n);
+}
+ok(!fs.existsSync(path.join(tmp,'a65-source-preflight/deformation-report.json')),'early failure did not complete/write 118-pose report');
+for(const [file,rendered] of [['a66/source-preflight-report.json',false],['a67/source/deformation-report.json',true],['a67/glb-deformation-report.json',false]]){
+ const q=json(folder+file),poses=q.checks.filter(c=>typeof c.edge_ratio_max==='number');
+ ok(q.passed&&!q.failures.length&&q.rendered===rendered&&q.checks.length===121&&poses.length===118,'actual QA '+file);
+ ok(poses.every(c=>Number.isFinite(c.edge_ratio_max)&&c.edge_ratio_max<3),'original guard '+file);
+ ok(!q.checks[0].garments.length&&q.checks[0].surface_style==='unified-white-mannequin','common no-garment finish');
+ ok(q.checks.filter(c=>c.surface&&c.pose==='neutral').every(c=>c.components===1&&!c.non_manifold&&!c.unnormalized),'closed normalized bodies');
+}
+const diagnosis=json(folder+'connected-surface-diagnostic.json');
+ok(!diagnosis.source_saved&&diagnosis.source_sha256===sources[0][2],'actual read-only diagnosis');
+for(const [index,count] of [[0,456],[1,336]]){
+ const c=diagnosis.rows[index].components;
+ ok(c.length===2&&c[1].vertices===count&&c[1].outer_inside_vertices_three_directions.every(n=>n===count)&&!c[1].outer_surface_overlap_pairs,'enclosed detached shell, not exterior');
+ const g=json(folder+'a66/generation-report.json')[index];
+ ok(g.removed_enclosed_disconnected_oral_vertices===count&&g.external_surface_and_skin_exact&&g.protected_hands_163_rest_bones_matrices_exact,'exact external/rig preservation');
+}
+for(const n of [65,67]){
+ const q=json(folder+'boundary-oblique-check-a'+n+'.json');
+ ok(q.passed&&q.artist_fixture_only&&q.checks.length===9&&q.checks.every(c=>c.passed)&&q.checks.filter(c=>c.expected_rejection).length===4,'actual nine native regression cases '+n);
+}
+const helper=n=>read(folder+'a'+n+'/producer-at-generation.py.txt').toString().match(/def align_neck_boundary_samples[\s\S]*?(?=\n\ndef main)/)[0];
+ok(helper(65)===helper(67),'same coverage, no eighteen new cases');
+const lower=json(folder+'lower-under-jaw-diagnostic.json');
+ok(!lower.source_saved&&lower.artist_model_only&&lower.source_sha256===sources[2][2]&&lower.rows.length===4&&lower.rows.every(r=>r.contours.length===1&&r.contours[0].outer),'lower cut is a read-only next-step diagnostic');
+const browser=json(folder+'a67/browser/playwright-report.json');
+ok(browser.stats.expected===3&&!browser.stats.unexpected&&!browser.stats.flaky&&!browser.stats.skipped,'three actual Chrome passes');
+const results=browser.suites.flatMap(s=>s.specs||[]).flatMap(s=>s.tests||[]).flatMap(t=>t.results);
+ok(results.length===3&&results.every(r=>r.status==='passed'),'actual browser results');
+const attachments=results.flatMap(r=>r.attachments||[]);
+for(const gender of ['male','female']){
+ const b=read(folder+'a67/glb/bodyguard-'+gender+'-candidate.glb');
+ ok(b.equals(fs.readFileSync(path.join(tmp,'glb-a67-parallel-oblique-head/bodyguard-'+gender+'-candidate.glb'))),'exact native GLB copy');
+ ok(b.toString('ascii',0,4)==='glTF'&&b.readUInt32LE(4)===2&&b.readUInt32LE(8)===b.length,'complete GLB2');
+ const g=JSON.parse(b.toString('utf8',20,20+b.readUInt32LE(12)));
+ ok(g.meshes.length===5&&g.skins.length===1&&g.skins[0].joints.length===163&&!(g.images||[]).length&&!(g.cameras||[]).length&&!(g.animations||[]).length,'neutral professional meshes/skin no references or coaching clips');
+ const node=g.nodes.find(v=>v.name==='BODYGUARD '+(gender==='male'?'Male':'Female')+' sculpt WIP');
+ ok(node.skin!==undefined&&g.meshes[node.mesh].primitives.every(p=>p.attributes.JOINTS_1!==undefined&&p.attributes.WEIGHTS_1!==undefined),'actual second weight set');
+ const native=attachments.filter(a=>a.name===gender+'-native-asset').map(a=>JSON.parse(Buffer.from(a.body,'base64')));
+ ok(native.length===3&&native.every(n=>n.sha256===sha(b)&&n.bytes===b.length),'Chrome loaded exact bytes');
+}
+const render=attachments.filter(a=>a.name.endsWith('technical-render')).map(a=>JSON.parse(Buffer.from(a.body,'base64')));
+ok(render.length===2&&render.every(r=>r.samples===180&&r.static_angle_max===0&&r.moving_angle_max>0.1&&r.skeletons_independent&&r.eight_weight_meshes===2),'independent native skeleton render, not webcam');
+const execution=json(folder+'execution-record.json');
+ok(!execution.adopted_for_release&&execution.invariants.story_appearance_p2_unresolved&&!execution.invariants.merge&&execution.development_default==='A37','not adopted and not merged');
+ok(execution.observed_runs.filter(r=>r.exit_code===1&&r.expected_negative===false).length===1&&execution.observed_runs.filter(r=>r.expected_negative).length===2,'actual failure vs two overwrite refusals');
+ok(execution.unrun.some(v=>v.startsWith('A66'))&&execution.unrun.some(v=>v.includes('actual performer')),'unrun cannot count as passes');
+const files=[],markdown=['bodyguard/docs/avatar-production.md','bodyguard/docs/stories/stage2-avatar-candidate.md'];
+function walk(relative){
+ for(const entry of fs.readdirSync(path.join(root,relative),{withFileTypes:true})){
+  if(entry.name==='evidence-audit.json')continue;
+  const p=relative+entry.name;
+  if(entry.isDirectory()){walk(p+'/');continue;}
+  const b=read(p);files.push({file:p,bytes:b.length,sha256:sha(b)});
+  if(entry.name.endsWith('.md'))markdown.push(p);
+  if(entry.name.endsWith('.png')){
+   ok(b.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])),'real PNG');
+   if(p.includes('/a65/'))ok(b.equals(fs.readFileSync(path.join(tmp,'a65-first-preview',entry.name))),'actual first render bytes');
+   else if(p.includes('/a67/source/'))ok(b.equals(fs.readFileSync(path.join(tmp,'a67-source-full-review',entry.name))),'actual full render bytes');
+   else ok(b.readUInt32BE(16)===1440&&b.readUInt32BE(20)===1080,'actual browser viewport');
+   png++;
+  }
+ }
+}
+walk(folder);ok(png===44,'eight+thirtyfour+two actual PNG');
+for(const file of markdown)for(const match of read(file).toString().matchAll(/!?\[[^\]]*\]\(([^\)]+)\)/g)){
+ const target=match[1].split('#')[0];
+ if(!target||/^(https?:|codex:|mailto:)/.test(target))continue;
+ const resolved=path.resolve(root,path.dirname(file),target);
+ // The generated result's own link is checked after saving actual stdout.
+ if(resolved===path.join(root,folder,'evidence-audit.json'))continue;
+ ok(fs.existsSync(resolved),'local link '+target);localLinks++;
+}
+for(const [file,digest] of [
+ ['bodyguard_avatar_candidate_a63_rejected.blend','07b120b2692a91dc36921f8e6198ddfaa268022130f059593d0b146a4fed88c4'],
+ ['bodyguard_avatar_candidate_a64_rejected.blend','4b3a5f97c120dadd4d11814e2c5f45d1c2a2a27dd2f809c6a384077a43a03077'],
+ ['replace_neck_from_artist.py','774b34a1330548f9e6dfe087f0bd561bff5ba934577df9d0f07668b6a603f7d0'],
+])ok(sha(read(base+file))===digest,'previous source/helper unchanged');
+ok(execFileSync('git',['diff','HEAD','--name-only','--',base+'bodyguard_avatar_candidate_a37.blend','bodyguard/frontend','bodyguard/backend','bodyguard/AGENTS.md','bodyguard/docs/operating-rules.md','bodyguard/docs/release-plan.md'],{cwd:root,encoding:'utf8'}).trim()==='','development default/service/approval/criteria unchanged');
+console.log(JSON.stringify({passed:true,assertions,actual_png:png,local_links:localLinks,generated_result_self_link:'verify after saving this actual output',files:files.length,manifest:files},null,2));

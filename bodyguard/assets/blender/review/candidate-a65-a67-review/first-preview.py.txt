@@ -1,0 +1,65 @@
+"""FR-A-02: actual first visual preview only; not the complete 34-image harness."""
+
+import sys
+from math import radians
+from pathlib import Path
+
+import bpy
+from mathutils import Quaternion, Vector
+
+output = Path(sys.argv[sys.argv.index("--") + 1])
+if output.exists():
+    raise FileExistsError("Preserve prior preview evidence")
+output.mkdir()
+scene = bpy.context.scene
+scene.render.engine = "CYCLES"
+scene.cycles.samples = 24
+scene.cycles.use_denoising = True
+scene.render.image_settings.file_format = "PNG"
+scene.render.resolution_percentage = 100
+camera = scene.camera
+camera.data.type = "ORTHO"
+
+
+def render(name, location, target, scale, width=900):
+    scene.render.resolution_x, scene.render.resolution_y = width, 1000
+    camera.location = location
+    camera.rotation_euler = (Vector(target) - camera.location).to_track_quat("-Z", "Y").to_euler()
+    camera.data.ortho_scale = scale
+    scene.render.filepath = str(output / name)
+    bpy.context.view_layer.update()
+    bpy.ops.render.render(write_still=True)
+
+
+for obj in scene.objects:
+    if obj.type == "ARMATURE":
+        for bone in obj.pose.bones:
+            bone.rotation_mode = "QUATERNION"
+            bone.rotation_quaternion = Quaternion()
+render("first-front.png", (0, -5, 0.84), (0, 0, 0.84), 2.8, 1400)
+render("first-quarter.png", (2.4, -4.8, 0.84), (0, 0, 0.84), 2.8, 1400)
+for label in ("Male", "Female"):
+    body = bpy.data.objects[f"BODYGUARD {label} sculpt WIP"]
+    rig = bpy.data.objects[f"BODYGUARD {label} rig WIP"]
+    x = body.matrix_world.translation.x
+    z = max((body.matrix_world @ v.co).z for v in body.data.vertices) - 0.2
+    others = [
+        o
+        for o in scene.objects
+        if o.type == "MESH"
+        and o.name.startswith(f"BODYGUARD {'Female' if label == 'Male' else 'Male'}")
+    ]
+    for obj in others:
+        obj.hide_render = True
+    render(f"first-side-{label.lower()}.png", (x + 4, 0, z), (x, 0, z), 0.7)
+    render(f"first-back-{label.lower()}.png", (x, 4, z), (x, 0, z), 0.7)
+    for name, angle in (("neck01", 4), ("neck02", 5), ("neck03", 5), ("head", 6)):
+        bone = rig.pose.bones[name]
+        axis = bone.bone.matrix_local.to_3x3().inverted() @ Vector((0, 1, 0))
+        bone.rotation_quaternion = Quaternion(axis, radians(angle))
+    render(f"first-neck-{label.lower()}-left.png", (x, -4, z), (x, 0, z), 0.7)
+    for bone in rig.pose.bones:
+        bone.rotation_quaternion = Quaternion()
+    for obj in others:
+        obj.hide_render = False
+print("ACTUAL FIRST VISUAL PREVIEW 8 PNG; SOURCE UNSAVED; NOT FULL QA")
