@@ -4,6 +4,7 @@ import { defineConfig } from '@playwright/test'
 if (!process.env.BODYGUARD_TEST_MAILBOX) throw new Error('Run the isolated browser harness')
 export default defineConfig({
   testDir: 'e2e',
+  outputDir: 'test-results/account',
   testMatch: ['account.spec.ts', 'password.spec.ts'],
   workers: 1,
   timeout: 30_000,

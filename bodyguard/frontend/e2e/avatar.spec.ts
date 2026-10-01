@@ -19,6 +19,14 @@ test('A-06 실제 남녀 GLB 두 복제본을 로드하고 한쪽 기술 변형�
 }, testInfo) => {
   const errors: string[] = []
   page.on('pageerror', (error) => errors.push(error.message))
+  page.on('console', (message) => {
+    // The account endpoint is intentionally guest/401, not part of this GPU test.
+    const guestFixture =
+      message.location().url === 'http://localhost:5182/api/v1/me' &&
+      message.text() ===
+        'Failed to load resource: the server responded with a status of 401 (Unauthorized)'
+    if (message.type() === 'error' && !guestFixture) errors.push(message.text())
+  })
   await page.goto('/dev/avatar')
   const read = async () =>
     JSON.parse((await page.getByTestId('avatar-report').getAttribute('data-report')) || '{}')
@@ -35,6 +43,7 @@ test('A-06 실제 남녀 GLB 두 복제본을 로드하고 한쪽 기술 변형�
     expect(result.draw_calls).toBeGreaterThan(0)
     expect(result.triangles).toBeGreaterThan(100_000)
     expect(result.skeletons_independent).toBe(true)
+    expect(result.eight_weight_meshes).toBeGreaterThanOrEqual(4)
     expect(result.static_angle_max).toBeLessThan(0.00001)
     expect(result.moving_angle_max).toBeLessThan(0.00001)
     await page.getByRole('button', { name: '기술 변형 시작' }).click()

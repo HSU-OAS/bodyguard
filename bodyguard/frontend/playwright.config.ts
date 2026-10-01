@@ -4,6 +4,7 @@ import { defineConfig } from '@playwright/test'
 // 가짜 카메라 화면에는 사람이 없어서, 인식 여부가 아니라 카메라 → 추론 루프가 에러 없이 도는지만 본다
 export default defineConfig({
   testDir: 'e2e',
+  outputDir: 'test-results/demo',
   testMatch: 'demo.spec.ts',
   timeout: 90_000,
   use: {

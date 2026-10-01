@@ -1,6 +1,6 @@
 # 출시 아바타 제작 계약 — 1단계
 
-상태: 2026-10-01 S2.4 진행 중. **현재 작업 원본/웹 후보는 승인된 출시 아바타가 아니다.** 기존 1단계 원본은 보존했다. 별도 A27 원본의 기술 변형 118개와 개발 웹 두 모델 시험 2개를 실행했지만 외형·네 가중치 웹 변형 P2가 남았다. [상세 Story](stories/stage2-avatar-candidate.md)와 [원본/왕복 JSON·실제 컷](../assets/blender/review/web-candidate/README.md)을 따른다. 아래 초기 제작 기록은 역사적 상태다. 실제 운동 예시·사람 추적·노트북 웹캠 통합 성능은 미검증이며 [출시 계획](release-plan.md)의 2단계 전에 검증한다.
+상태: 2026-10-01 S2.4 진행 중. **현재 작업 원본/웹 후보는 승인된 출시 아바타가 아니다.** 기존 1단계 원본을 보존했다. A27 원본과 여덟 가중치 GLB 왕복의 118개 기술 변형, 실제 개발 웹 두 모델 시험 2개를 통과했지만 외형 P2는 남아 있다. [상세 Story](stories/stage2-avatar-candidate.md)·[현재 검수](../assets/blender/review/web-eight-weight/README.md)·[이전 실패](../assets/blender/review/web-candidate/README.md)를 구분한다. 아래 초기 제작 기록은 역사적 상태다. 실제 운동 예시·사람 추적·노트북 웹캠 통합 성능은 미검증이며 [출시 계획](release-plan.md)의 2단계 전에 검증한다.
 
 ## 시각 목표와 금지선
 

@@ -40,21 +40,32 @@ Blender 5.1.1에서 별도 background 후보를 제작·검수 중이다. 저장
 - 의상 바인딩은 여유·두께를 더하기 전 실제 신체 표면에서 한다. Blender의 `Outside Surface`는 원래 투영선 방향으로 offset을 적용하고 `Above Surface`는 target의 매끄러운 법선 방향을 쓰므로, 표면 위에서 여유를 만들 때 후자를 검증 중이다. 근거: [공식 Shrinkwrap 문서](https://docs.blender.org/manual/en/latest/modeling/modifiers/deform/shrinkwrap.html)와 Blender 5.1.1의 실제 RNA 설명. 검사 오차 허용치를 높이지 않았다.
 - A27은 여성 팔의 중립 배치를 정리해 팔–몸통 여유를 확보하고, 의상 경계의 native subdivision·투영·두께를 검수했다. 남녀 각각 연결 성분 1개·non-manifold 0개·가중치 오류 0개, 114개 사지/손/몸통과 4개 목, 합계 **118개 기술 변형을 실제 실행해 통과**했다. 최대 국소 edge 비율은 2.943930, 의상 내부/판정 불일치 표본은 전 검사 0개였다. [실행 보고서](../../assets/blender/review/candidate-a27/deformation-report.json)와 실제 렌더 34컷을 보존했다. 단일 관절 기술 시험이며 검증된 운동 시범/사람 코칭 통과가 아니다.
 - [수정 가능한 별도 A27 후보](../../assets/blender/bodyguard_avatar_candidate_a27.blend)는 남성 142,160·여성 139,663 vertices, 각각 163 bones다. 생성 파일 `draft-a27-native.blend`의 동일 바이트 사본이며 SHA-256 `bfb09fabff11e77214b7f25740cd6e07b527c5519f59b2afd35f4457c50b9ade`다. 기존 studio는 변경하지 않았다. 제작·왕복 재현 명령과 CC0 core 손/리그 출처는 [에셋 README](../../assets/blender/README.md)에 있다.
-- GLB 왕복 검사는 편집용 bone widget 생성을 꺼 실제 표면만 비교한다. Blender native 삼각화·1μm 미세 중복/퇴화 정리 후 웹 표면을 검사한다. 닫힌 표면의 미세 triangular fin만 제거하며 그 외 non-manifold 오류는 실패한다. 웹 모델에 의상을 재바인딩하고 네 가중치로 정규화한다. 원본 실루엣 envelope 3mm·재가져오기 bounds 0.1mm 기준은 기술 검사용이지 사용자 신체 측정 정확도가 아니다. 경량화가 발·손을 손상시키던 후보는 제외했고 기본 비율을 1로 두었다. 실제 성능이 충분하면 과도한 경량화를 추가하지 않는다.
-- 웹 후보의 GLB는 남성 10,066,984 bytes·여성 11,325,824 bytes, 카메라/조명/참조 이미지/운동 액션 0개다. [왕복 변환 보고서](../../assets/blender/review/web-candidate/roundtrip-report.json)의 `transforms_passed`는 배율·위치 검사만 의미한다. 전체 변형 검사가 아니다. 네 가중치 제한 후 남성 어깨·손바닥 검사 실패가 남았으며, 영역 한정 정제 실험은 어깨 비율을 3.953까지 악화시켜 제거했다. 실패 기준을 높여 통과시키지 않았다.
+- GLB 왕복 검사는 편집용 bone widget 생성을 꺼 실제 표면만 비교한다. Blender native 삼각화·1μm 미세 중복/퇴화 정리 후 웹 표면을 검사한다. 닫힌 표면의 미세 triangular fin만 제거하며 그 외 non-manifold 오류는 실패한다. 이전 웹 후보는 의상을 재바인딩하고 네 가중치로 정규화했다. 원본 실루엣 envelope 3mm·재가져오기 bounds 0.1mm 기준은 기술 검사용이지 사용자 신체 측정 정확도가 아니다. 경량화가 발·손을 손상시키던 후보는 제외했고 기본 비율을 1로 두었다. 실제 성능이 충분하면 과도한 경량화를 추가하지 않는다.
+- 이전 네 가중치 GLB는 남성 10,066,984 bytes·여성 11,325,824 bytes, 카메라/조명/참조 이미지/운동 액션 0개다. [왕복 변환 보고서](../../assets/blender/review/web-candidate/roundtrip-report.json)의 `transforms_passed`는 배율·위치 검사만 의미한다. 전체 변형 검사가 아니다. 네 가중치 제한 후 남성 어깨·손바닥 검사 실패가 남았으며, 영역 한정 정제 실험은 어깨 비율을 3.953까지 악화시켜 제거했다. 실패 기준을 높여 통과시키지 않았다.
 
 ## 개발 웹 하네스와 검수
 
-`pnpm exec playwright test --config playwright.avatar.config.ts --reporter=list,json`으로 설치된 Chrome의 headless·1440×1080·DPR 1 조건에서 실제 로컬 GLB를 읽는다. 두 모델은 `SkeletonUtils.clone`으로 뼈대를 독립 복제하고 읽기 전용 geometry/material만 공유한다. 180개 실제 렌더 간격, 정지 모델의 회전 변화 0, 움직이는 모델의 합성 변형, 남녀 전환·정지·503 실패/재시도·native WebGL context loss/재시도·페이지 이탈과 카메라 요청 0회를 검사한다. 503과 context loss는 제어된 오류 주입이다. 카메라/사람 좌표/운동 성공 타이머/진단/서버 전송을 추가하지 않았다.
+`pnpm exec playwright test --config playwright.avatar.config.ts --reporter=list,json`으로 설치된 Chrome의 headless·1440×1080·DPR 1 조건에서 실제 로컬 GLB를 읽는다. 두 모델은 `SkeletonUtils.clone`으로 뼈대를 독립 복제한다. 여덟 가중치용 geometry/material는 원본 캐시를 바꾸지 않는 별도 읽기 전용 복사본을 두 모델이 공유한다. 180개 실제 렌더 간격, 정지 모델의 회전 변화 0, 움직이는 모델의 합성 변형, 남녀 전환·정지·503 실패/재시도·native WebGL context loss/재시도·페이지 이탈과 카메라 요청 0회를 검사한다. 503과 context loss는 제어된 오류 주입이다. 카메라/사람 좌표/운동 성공 타이머/진단/서버 전송을 추가하지 않았다.
 
 하네스의 API 차단 패턴이 `/src/api/` 개발 파일까지 가로채던 오류와 두 `status`의 선택자 충돌을 고쳤다. 사용자 데이터가 없는 개발 후보 화면의 실제 스크린샷으로 모델이 너무 작던 배치를 확인해 미터 배율에 맞춘 고정 카메라와 접지 그림자를 사용했다. 새 3D 의존성이나 자체 스킨 복제기를 추가하지 않았다. `/dev/avatar`와 GLB는 production에서 제외하며 `/dev/measure` 시제품을 출시 아바타로 바꾸지 않았다.
 
-웹 브라우저 검사 2개, Vitest 82개, 사람 없는 시험 카메라 Chrome 회귀 1개, 실제 API·격리 PostgreSQL·production 계정 Chrome 회귀 9개(실제 60초 재발송)를 실행했다. 마지막 파일의 정확한 측정값·스크린샷·실패 목록은 [웹 검수 기록](../../assets/blender/review/web-candidate/README.md)에 기록한다. 실제 Gmail·사람 동작·다양한 노트북의 코칭 성능·전문가 승인은 미검증이다.
+이전 네 가중치 후보에서는 웹 브라우저 검사 2개, Vitest 82개, 사람 없는 시험 카메라 Chrome 회귀 1개, 실제 API·격리 PostgreSQL·production 계정 Chrome 회귀 9개(실제 60초 재발송)를 실행했다. 당시 정확한 측정값·스크린샷·실패 목록은 [역사 기록](../../assets/blender/review/web-candidate/README.md)에 보존한다. 현재 여덟 가중치 결과는 다음 절과 별도 기록을 따른다. 실제 Gmail·사람 동작·다양한 노트북의 코칭 성능·전문가 승인은 미검증이다.
+
+## 여덟 가중치 리뷰 보완 결과
+
+어깨·손바닥의 원인을 집중 검사로 대조했다. 같은 A27 원본을 임시로 삼각화한 표면은 남성 어깨 1.978355/1.904807, 손바닥 2.846714/2.846750으로 기준을 통과했다. 네 가중치 제한만 적용하면 각각 3.521474/3.432478·3.003989/3.003902로 실패했다. 이웃 정점이 spine/arm 중 서로 다른 가중치를 버리고 나머지를 재정규화하는 과정이 원인이었다. 가까운 뼈에 버린 질량을 접는 실험도 어깨 6.290, 손바닥 4.019 및 의상 실패로 악화돼 제거했다. 임계값을 높이지 않았다.
+
+CTO 기술 결정: 원본의 영향과 세부 리그를 유지하는 **native 여덟 가중치 GLB**를 검증한다. [glTF 공식 규격](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#skinned-mesh-attributes)은 추가 JOINTS_1/WEIGHTS_1 세트를 허용하지만 클라이언트가 네 개만 처리하면 동작에 영향을 줄 수 있다고 명시한다. 설치된 Three 0.186/GLTFLoader의 실제 코드에서 기본 셰이더/CPU가 네 가중치만 사용하고 WEIGHTS_0만 정규화하는 것을 확인했다. 파일만 바꾸지 않고, 추가 세트 보존·첫 세트의 원래 비중 복구·GPU 표면/법선·CPU 위치/방향·native depth 그림자까지 연결했다. 잘못된 가중치/뼈 인덱스·누락 세트는 검수를 차단한다. 기본 ContactShadows의 override depth는 추가 세트를 처리하지 않아 native PCF 바닥 그림자로 바꿨다. 새 의존성·사용자 데이터·임의 인체 메시 생성은 없다.
+
+A27 여덟 가중치 왕복은 기존과 같은 **118개 검사, edge 비율 3 미만, 의상 내부/판정 불일치 0개를 실제 통과**했다. 최대 edge 비율 2.947680이다. GLB는 남성 13,002,844·여성 14,721,760 bytes, 8/9 meshes·163 bones, 이미지/카메라/조명/액션 0개다. 실제 Chrome 두 모델 시험 2개, 여덟 가중치 Vitest 13개(전체 118개), API/격리 PostgreSQL 90개, 실제 production 계정 Chrome 9개·복구 5개, 사람 없는 가짜 카메라 Chrome 1개, 타입/Biome/build/Ruff/diff 검사를 실행했다. 실제 수치·파일 해시·컷은 [현재 기록](../../assets/blender/review/web-eight-weight/README.md)에 있고 [이전 네 가중치 실패](../../assets/blender/review/web-candidate/README.md)는 덮어쓰지 않았다. 출력 폴더를 avatar/demo/account/password로 분리해 다른 회귀가 증거를 정리하지 않게 했다.
+
+외형 정제 A28은 원본/왕복 기술 검사를 통과했지만 실제 렌더의 의상 경계가 더 두드러져 채택하지 않았다. [반려 근거](../../assets/blender/review/candidate-a28-rejected/README.md)를 보존한다. 원본/웹 변형 통과를 외형·해부학·올바른 운동·실제 사람 사용의 통과로 확대하지 않는다.
 
 ## 병합을 막는 현재 P2
 
 1. **A-02 외형 미달**: 여성 목/진동 둘레·의상 경계의 거친 형태, 손목/뒤 목 연결, 남성 골반 쉘과 어깨 관절 표현, 참조 대비 재질/실루엣을 더 정제해야 한다. 실제 렌더와 웹 화면을 확인했으며 참조 품질 충족이라고 기록하지 않는다.
-2. **A-04/05 웹 변형 미통과**: 원본 118개 통과가 네 가중치 GLB의 통과를 보증하지 않았다. 왕복 메시의 위상·의상 침투는 통과하지만 남성 어깨·손바닥의 국소 변형 경보가 남는다. 아래 실제 실패 JSON을 보존하고 해결/재검수 후에만 PR을 병합한다.
+
+이전 A-04/05 네 가중치 변형 P2는 여덟 가중치 왕복/웹 검수로 기술적 원인을 보완했다. 이는 S2.4c의 실제 시범·사용자 리타게팅과 복합 동작 검증 완료가 아니다. **A-02가 미해결이므로 Draft PR #9는 병합하지 않는다.**
 
 S2.3b 관찰자/수행자, S2.4c 실제 시범·리타게팅·두 아바타 반응, 목표 노트북 조건의 인식 15fps/피드백 1초와 전체 통합 검증은 별도 미충족 게이트다. 이를 건너뛰어 S2.4/2단계나 출시 후보 완료로 표시하지 않는다.
 

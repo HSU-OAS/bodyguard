@@ -3,6 +3,7 @@ import { defineConfig } from '@playwright/test'
 // FR-A-02/03: actual Chrome GLB rendering, no camera, SMTP, account or user data.
 export default defineConfig({
   testDir: 'e2e',
+  outputDir: 'test-results/avatar',
   testMatch: 'avatar.spec.ts',
   timeout: 90_000,
   use: {

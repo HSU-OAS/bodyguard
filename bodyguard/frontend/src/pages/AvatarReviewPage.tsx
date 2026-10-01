@@ -1,4 +1,4 @@
-import { ContactShadows, OrbitControls, useGLTF } from '@react-three/drei'
+import { OrbitControls, useGLTF } from '@react-three/drei'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import {
   Component,
@@ -12,7 +12,7 @@ import {
 } from 'react'
 import { Link } from 'react-router'
 import { type Bone, Quaternion, type SkinnedMesh, Vector3 } from 'three'
-import { clone } from 'three/addons/utils/SkeletonUtils.js'
+import { cloneEightWeightPair } from '../avatar/eightWeightSkin'
 
 // FR-A-02~04: artist-authored GLBs; no primitive human, camera, user data or coaching clip.
 const models = {
@@ -30,6 +30,7 @@ type Report = {
   skeletons_independent: boolean
   static_angle_max: number
   moving_angle_max: number
+  eight_weight_meshes: number
 }
 
 class ReviewBoundary extends Component<
@@ -71,9 +72,19 @@ function Pair({
 }) {
   const { scene } = useGLTF(url)
   const { gl } = useThree()
-  // SkeletonUtils clones bones as well as objects. Geometry/materials remain read-only shared assets.
+  // Read-only loaded assets; private shared eight-weight surfaces, independent bones.
   const pair = useMemo(() => {
-    const copies = [clone(scene), clone(scene)]
+    const { copies, dispose } = cloneEightWeightPair(scene)
+    let eightWeightMeshes = 0
+    for (const copy of copies)
+      copy.traverse((object) => {
+        if (
+          (object as SkinnedMesh).isSkinnedMesh &&
+          (object as SkinnedMesh).geometry.hasAttribute('skinWeight1')
+        )
+          eightWeightMeshes++
+      })
+    if (eightWeightMeshes === 0) throw new Error('여덟 가중치 웹 검수 후보가 아닙니다')
     const bones = copies.map((model) => {
       model.updateMatrixWorld(true)
       const bone = model.getObjectByName('upperarm01L') as Bone | undefined
@@ -99,7 +110,7 @@ function Pair({
       [...skeletons[0]].some((bone) => skeletons[1].has(bone))
     )
       throw new Error('두 아바타의 뼈대가 독립적이지 않습니다')
-    return { copies, bones }
+    return { copies, bones, dispose, eightWeightMeshes }
   }, [scene])
   const samples = useRef<number[]>([])
   const warmup = useRef(0)
@@ -107,6 +118,7 @@ function Pair({
   const maximum = useRef([0, 0])
   const rotation = useMemo(() => new Quaternion(), [])
   useEffect(ready, [ready])
+  useEffect(() => () => pair.dispose(), [pair])
   useEffect(() => {
     const canvas = gl.domElement
     const handleLost = (event: Event) => {
@@ -140,6 +152,7 @@ function Pair({
         skeletons_independent: true,
         static_angle_max: maximum.current[0],
         moving_angle_max: maximum.current[1],
+        eight_weight_meshes: pair.eightWeightMeshes,
       })
     }
   })
@@ -147,15 +160,10 @@ function Pair({
     <>
       <primitive object={pair.copies[0]} position={[-0.82, 0, 0]} dispose={null} />
       <primitive object={pair.copies[1]} position={[0.82, 0, 0]} dispose={null} />
-      <ContactShadows
-        frames={1}
-        position={[0, -0.01, 0]}
-        opacity={0.2}
-        scale={4}
-        blur={2}
-        far={1.5}
-        resolution={256}
-      />
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow>
+        <planeGeometry args={[10, 10]} />
+        <shadowMaterial transparent opacity={0.16} />
+      </mesh>
     </>
   )
 }
@@ -245,10 +253,20 @@ export function AvatarReviewPage() {
                   <span>모델 A · 중립</span>
                   <span>모델 B · 기술 변형</span>
                 </div>
-                <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0.84, 3.4], fov: 35 }}>
+                <Canvas
+                  shadows="percentage"
+                  dpr={[1, 1.5]}
+                  camera={{ position: [0, 0.84, 3.4], fov: 35 }}
+                >
                   <color attach="background" args={['#eeefeb']} />
                   <hemisphereLight args={['#ffffff', '#69675f', 1.4]} />
-                  <directionalLight position={[-2, 3, 3]} intensity={2.2} />
+                  <directionalLight
+                    position={[-2, 3, 3]}
+                    intensity={2.2}
+                    castShadow
+                    shadow-mapSize={[512, 512]}
+                    shadow-bias={-0.0001}
+                  />
                   <directionalLight position={[2, 2, -1]} intensity={0.8} />
                   <Suspense fallback={null}>
                     <Pair

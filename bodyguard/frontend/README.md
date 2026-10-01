@@ -29,11 +29,11 @@ S2.3a에서 준비 중에도 취소할 수 있고 중지·재시작·서비스�
 
 ## 개발용 아바타 검수
 
-`http://localhost:5173/dev/avatar`는 실제 Blender 후보 GLB의 **기술 검수 전용**이다. 남녀 선택·독립된 두 뼈대·한쪽 합성 변형 시작/정지·회전/확대·실패 재시도를 제공한다. 카메라·운동 정답·타이머·사용자 추적은 없다. 설치된 Three/R3F/drei를 재사용했고 새 3D 의존성은 없다. 읽기 전용 geometry/material만 공유하며 뼈대는 `SkeletonUtils.clone`으로 독립 복제한다.
+`http://localhost:5173/dev/avatar`는 실제 Blender 후보 GLB의 **기술 검수 전용**이다. 남녀 선택·독립된 두 뼈대·한쪽 합성 변형 시작/정지·회전/확대·실패 재시도를 제공한다. 카메라·운동 정답·타이머·사용자 추적은 없다. 설치된 Three/R3F/drei를 재사용했고 새 3D 의존성은 없다. `SkeletonUtils.clone`으로 뼈대를 독립 복제하며, 여덟 가중치 geometry/material는 원본 캐시를 바꾸지 않는 별도 읽기 전용 복사본을 두 모델이 공유한다. 화면·CPU 위치/방향·법선·native depth 그림자가 추가 가중치를 함께 사용한다.
 
 `pnpm exec playwright test --config playwright.avatar.config.ts --reporter=list,json`은 자체 5182 개발 서버와 설치된 Chrome으로 남녀 두 모델·180 렌더 간격·503/실제 context loss 복구·이탈·카메라 0회를 검사한다. 개발 경로/뷰어/후보 GLB는 production에서 제외한다. production 계정 Chrome 회귀는 두 개발 경로가 404이고 계정 진입에서 GLB/WASM을 받지 않는지 확인한다.
 
-2026-10-01: 실제 브라우저 기술 시험 2개는 통과했지만 **후보 외형과 웹 가중치 변형에 P2가 남아 있다**. [실제 결과·남녀 컷·실패 JSON](../assets/blender/review/web-candidate/README.md)을 따른다. 실제 사람·목표 노트북 웹캠 코칭·최종 아바타 승인 증거가 아니다.
+2026-10-01: A27 여덟 가중치 왕복 118개·실제 브라우저 기술 시험 2개와 관련 Vitest 13개(전체 118개)를 통과했다. **후보 외형 P2는 남아 있다**. [현재 검수](../assets/blender/review/web-eight-weight/README.md)와 [이전 네 가중치 실패](../assets/blender/review/web-candidate/README.md)를 구분한다. 실제 사람·목표 노트북 웹캠 코칭·최종 아바타 승인 증거가 아니다. 시험 결과는 `test-results/avatar/`·`demo/`·`account/`·`password/`로 분리해 다른 시험이 기존 증거를 정리하지 않게 했다.
 
 ## 개발용 측정 화면
 

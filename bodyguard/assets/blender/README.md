@@ -1,6 +1,6 @@
 # Blender 아바타 작업 원본
 
-2026-10-01: 기존 studio 원본을 보존하고 [A27 후보](bodyguard_avatar_candidate_a27.blend)를 별도로 제작했다. **원본 기술 변형 118개는 통과했지만 외형과 네 가중치 웹 변형은 미통과**다. [후보 결과·실제 웹 컷·실패](review/web-candidate/README.md)를 확인한다. 어느 파일도 합격한 출시 아바타가 아니다.
+2026-10-01: 기존 studio 원본과 [A27 후보](bodyguard_avatar_candidate_a27.blend)를 보존했다. 원본 118개·새 여덟 가중치 GLB 왕복 118개 기술 변형과 실제 Chrome 두 모델 검사를 통과했다. **외형은 미통과**다. [새 웹 검수](review/web-eight-weight/README.md)와 [이전 네 가중치 실패](review/web-candidate/README.md)를 구분한다. 어느 파일도 합격한 출시 아바타가 아니다.
 
 `bodyguard_avatar_studio.blend`는 **제작 중인 편집 원본**이다. 배포용 GLB나 합격한 아바타가 아니다. 기존 MPFB 시제품을 조형 베이스로 채택하지 않고, [Blender Foundation Human Base Meshes v1.4.1](https://www.blender.org/download/demo-files/)의 CC0 남녀 realistic body와 전문 제작 head 메시로 교체·조형했다. CEO의 남녀 참조 이미지는 파일 안에 패킹했다. 얼굴 요소를 제거하고 머리·목 표면을 연결했으며, MPFB core 리그·가중치를 전송했다. **아직 의상·관절 표현, 전체 관절 변형 검수, 시범 애니메이션과 웹 성능 검증은 없다.**
 
@@ -65,7 +65,7 @@ Blender 5.1.1에서 실행했다. 로컬 Blender 실행 파일을 지정하고 �
   --python-exit-code 1 --python bodyguard/assets/blender/export_avatar_candidate.py \
   -- /private/tmp/bodyguard-new-web.blend /private/tmp/bodyguard-new-web-glb
 
-# 현재 후보는 남성 4개 변형 경보로 exit 1: 미통과
+# 현재 여덟 가중치 왕복은 118개 기술 검사 통과. 외형/운동 정답 승인 아님
 /Applications/Blender.app/Contents/MacOS/Blender \
   --factory-startup --disable-autoexec \
   -b /private/tmp/bodyguard-new-web-roundtrip.blend \
@@ -74,3 +74,7 @@ Blender 5.1.1에서 실행했다. 로컬 Blender 실행 파일을 지정하고 �
 ```
 
 `--qc-only`는 렌더만 생략하고 검사를 생략하지 않는다. 실패 목록·JSON·nonzero exit를 남긴다. 단일 관절 스트레스 검사와 의상 표본은 해부학·운동 정답·외형의 전문가 승인이나 실제 웹캠 사용 검증을 대체하지 않는다. native export의 남성 첫 선택에서 parent 경고가 있었으며 실제 계층·배율·두 복제 뼈대를 별도로 검사했다. 경고가 없었다고 기록하지 않는다.
+
+`diagnose_web_skin.py -- new-report.json [--triangulate]`는 원본/웹 파일을 저장하지 않고 어깨·손바닥 8개 집중 검사와 **에셋**의 정점·가중치를 대조한다. 이는 사람 좌표나 전체 QA가 아니다. 새 경로만 받으며 검사 기준을 완화하지 않는다.
+
+`polish_avatar_candidate.py -- new-polish.blend`는 전문 A27 표면을 별도 파일에서 정제하는 제작 실험이다. A28 원본/왕복 118개는 통과했지만 실제 렌더에서 의상 경계가 더 두드러져 **채택하지 않았다**. [실제 반려 기록](review/candidate-a28-rejected/README.md)을 따른다. 현행 웹 GLB는 A28이 아닌 A27 여덟 가중치 파일이다.

@@ -163,7 +163,7 @@ for label, file in files.items():
     ), f"{label}: reduction changed the authored silhouette envelope"
     for obj in sorted(objects, key=lambda surface: surface != body):
         if obj != body:
-            # Bind overlays to the actual reduced/four-weight surface, not the artist draft.
+            # Bind overlays to the actual reduced web surface, not the artist draft.
             if "draft" in obj.name:
                 tree = BVHTree.FromObject(body, bpy.context.evaluated_depsgraph_get())
                 for vertex in obj.data.vertices:
@@ -184,14 +184,16 @@ for label, file in files.items():
                 layers_select_dst="NAME",
             )
         active(obj)
-        bpy.ops.object.vertex_group_limit_total(group_select_mode="ALL", limit=4)
+        # FR-A-03: four-weight truncation failed shoulder/palm deformation QA.
+        # Native eight-weight skin is a candidate, requiring roundtrip + web QA.
+        bpy.ops.object.vertex_group_limit_total(limit=8)
         bpy.ops.object.vertex_group_normalize_all(lock_active=False)
         assert all(
-            len([g for g in v.groups if g.weight > 0]) <= 4
+            len([g for g in v.groups if g.weight > 0]) <= 8
             and isfinite(total := sum(g.weight for g in v.groups))
             and abs(total - 1) < 0.01
             for v in obj.data.vertices
-        ), f"Incomplete four-weight web skin: {obj.name}"
+        ), f"Incomplete eight-weight web skin: {obj.name}"
     hand_selection(body)
     for obj in objects:
         world = obj.matrix_world.copy()
@@ -215,7 +217,7 @@ for label, file in files.items():
         export_skins=True,
         export_def_bones=True,
         export_extras=False,
-        export_all_influences=False,
+        export_all_influences=True,
     )
     rig.location.x += offsets[label]
 
@@ -223,6 +225,7 @@ scene["bodyguard_stage"] = (
     "S2.4 optimized engineering draft; NOT release approved; no coaching clips"
 )
 scene["bodyguard_web_ratio"] = ratio
+scene["bodyguard_web_skin_influences"] = 8
 bpy.context.preferences.filepaths.save_version = 0
 bpy.ops.wm.save_as_mainfile(filepath=str(output), compress=True)
 checks = []
@@ -289,6 +292,7 @@ bpy.ops.wm.save_as_mainfile(filepath=str(roundtrip), compress=True)
             "source": source,
             "blender": bpy.app.version_string,
             "ratio": ratio,
+            "maximum_skin_influences": 8,
             "transforms_passed": True,
             "geometry_deformation_pending": True,
             "checks": checks,
