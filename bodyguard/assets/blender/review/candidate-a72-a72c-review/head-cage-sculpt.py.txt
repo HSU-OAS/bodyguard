@@ -1,0 +1,42 @@
+"""FR-A-02/03: native editing of a licensed professional head, not body generation."""
+
+from collections import Counter
+from math import isfinite
+
+import bmesh
+
+
+def refine_head_cage(mesh, iterations):
+    """Only lower head Y/Z; retain all topology, X and upper artist points."""
+    assert iterations in (0, 6, 12)
+    vertices = list(mesh.verts)
+    before = [(tuple(v.co), v) for v in vertices]
+    topology = (len(mesh.verts), len(mesh.edges), len(mesh.faces))
+    minimum, maximum = min(v.co.z for v in vertices), max(v.co.z for v in vertices)
+    lower = [v for v in vertices if v.co.z < minimum + (maximum - minimum) * 0.55]
+    assert 3 < len(lower) < len(vertices)
+    protected = Counter(tuple(v.co) for v in vertices if v not in set(lower))
+    for _ in range(iterations):
+        bmesh.ops.smooth_vert(
+            mesh,
+            verts=lower,
+            factor=0.45,
+            use_axis_x=False,
+            use_axis_y=True,
+            use_axis_z=True,
+        )
+    assert topology == (len(mesh.verts), len(mesh.edges), len(mesh.faces))
+    assert protected <= Counter(tuple(v.co) for v in mesh.verts)
+    assert all(co[0] == v.co.x and all(isfinite(c) for c in v.co) for co, v in before)
+    return {
+        "method": "native lower professional head cage Y/Z smoothing",
+        "iterations": iterations,
+        "factor": 0.45,
+        "selected_vertices": len(lower),
+        "cage_vertices": len(vertices),
+        "upper_cage_and_topology_preserved": True,
+        "maximum_cage_displacement_m": max(
+            (v.co - type(v.co)(co)).length for co, v in before
+        ),
+        "artist_edit_only_not_anatomical_or_clinical_target": True,
+    }

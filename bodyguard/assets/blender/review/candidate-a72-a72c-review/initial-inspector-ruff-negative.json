@@ -1,0 +1,37 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 29,
+      "row": 12
+    },
+    "filename": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a72-a72c-review/head-cage-inspection-first-run.py.txt",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import importlib.util\nimport json\nimport sys\nfrom hashlib import file_digest\nfrom pathlib import Path\n\nimport bmesh\nimport bpy\nfrom mathutils import Vector\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 14
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  }
+]
