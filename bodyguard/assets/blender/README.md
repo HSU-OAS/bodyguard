@@ -1,5 +1,7 @@
 # Blender 아바타 작업 원본
 
+2026-10-01 A38 [별도 편집 원본](bodyguard_avatar_candidate_a38.blend)·[손목/뒤 목 실제 비교와 전체 재검수](review/candidate-a38/README.md)를 보존했다. `refine_mannequin_joins.py`는 전문 A37의 국소 표면만 native 정제하고, `diagnose_mannequin_joins.py`는 같은 원본 edge/길이 분류를 고정해 비교한다. 기존 파일 덮어쓰기·인체 재생성·리그/가중치 변경을 하지 않는다. 전체 기술 변형과 Chrome은 통과했지만 목표 외형은 미달이라 **A38은 채택하지 않았고 기본 개발 모델은 A37 그대로**다.
+
 2026-10-01 CEO 변경: 남녀 모두 별도 의상 없는 백색 중성 마네킹을 목표로 한다. 여성 참조의 의상 요구만 대체했다. 새 [A37 편집 원본](bodyguard_avatar_candidate_a37.blend)·[실제 원본/GLB/웹/외형 검수](review/candidate-a37/README.md)를 추가했고 개발 검수 화면만 A37로 연결했다. 이전 A27/의상/실패 증거는 보존한다. **최종 외형 P2와 실제 코칭 검증은 남아 있다.** 아래 A27·studio 제작 기록은 역사적 상태다.
 
 2026-10-01: 기존 studio 원본과 [A27 후보](bodyguard_avatar_candidate_a27.blend)를 보존했다. 원본 118개·새 여덟 가중치 GLB 왕복 118개 기술 변형과 실제 Chrome 두 모델 검사를 통과했다. **외형은 미통과**다. [새 웹 검수](review/web-eight-weight/README.md)와 [이전 네 가중치 실패](review/web-candidate/README.md)를 구분한다. 어느 파일도 합격한 출시 아바타가 아니다.
