@@ -3,6 +3,7 @@
 Blender --factory-startup --disable-autoexec -b --python-exit-code 1 --python this.py
 """
 
+import sys
 from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
 
@@ -79,4 +80,33 @@ except AssertionError:
 else:
     raise AssertionError("Branched boundary was accepted")
 mesh.free()
-print("NATIVE NECK CUT: 7 positive/negative checks passed; no files saved")
+# FR-A-03: invalid CLI calibration must fail before touching any Blender surface/file.
+original_args = sys.argv
+before_objects = tuple(bpy_obj.name for bpy_obj in helpers.bpy.data.objects)
+for values in (
+    ["0.81"],
+    ["nan", "0.87"],
+    ["0.81", "inf"],
+    ["0.78", "0.87"],
+    ["0.81", "0.95"],
+    ["0.81", "0.87", "nan"],
+    ["0.81", "0.87", "0.007"],
+    ["0.81", "0.87", "0.033"],
+):
+    sys.argv = [
+        "neck-test",
+        "--",
+        "/private/tmp/bodyguard-neck-invalid-input.blend",
+        "/private/tmp/bodyguard-neck-invalid-input.json",
+        "/private/tmp/bodyguard-neck-invalid-donor.blend",
+        *values,
+    ]
+    try:
+        helpers.main()
+    except ValueError:
+        assert before_objects == tuple(obj.name for obj in helpers.bpy.data.objects)
+    else:
+        raise AssertionError("Invalid artist band/transition was accepted")
+    finally:
+        sys.argv = original_args
+print("NATIVE NECK CUT: 7 boundary + 8 invalid input checks passed; no files saved")

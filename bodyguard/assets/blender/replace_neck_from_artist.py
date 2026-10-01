@@ -1,7 +1,7 @@
 """FR-A-01~04: replace a failed neck seam with the existing CC0 artist mesh.
 
 Blender -b explicit-mannequin.blend --python-exit-code 1 --python this.py --
- new-source.blend new-report.json official-bundle.blend [low-ratio high-ratio]
+ new-source.blend new-report.json official-bundle.blend [low-ratio high-ratio [transition-m]]
 This is a native surface edit, not a body generator or medical motion.
 All source/GLB/deformation/browser/visual checks remain required.
 """
@@ -83,7 +83,7 @@ def cap_inner_cut(mesh, edges):
 
 def main():
     args = sys.argv[sys.argv.index("--") + 1 :]
-    if len(args) not in (3, 5):
+    if len(args) not in (3, 5, 6):
         raise ValueError("Expected new source/report, professional source and optional artist band")
     output, report_path, professional = map(Path, args[:3])
     if (
@@ -92,11 +92,15 @@ def main():
         or output.resolve() == report_path.resolve()
     ):
         raise ValueError("Distinct explicit .blend source and .json report paths required")
-    low_ratio, high_ratio = map(float, args[3:]) if len(args) == 5 else (0.81, 0.87)
+    low_ratio, high_ratio = map(float, args[3:5]) if len(args) >= 5 else (0.81, 0.87)
+    margin = float(args[5]) if len(args) == 6 else 0.008
     if not (isfinite(low_ratio) and isfinite(high_ratio)) or not (
         0.795 <= low_ratio <= 0.82 and 0.86 <= high_ratio <= 0.90
     ):
         raise ValueError("Artist band must isolate the neck, not unrelated anatomy")
+    # FR-A-02/03: explicit native artist transition, not a relaxed QA threshold.
+    if not isfinite(margin) or not 0.008 <= margin <= 0.032:
+        raise ValueError("Artist transition must be finite and between 8 and 32mm")
     if output.exists() or report_path.exists():
         raise FileExistsError("Preserve prior artist files and evidence")
     if not professional.is_file():
@@ -117,7 +121,7 @@ def main():
         initial_skin = [tuple((g.group, g.weight) for g in v.groups) for v in body.data.vertices]
         height = max(v.co.z for v in body.data.vertices)
         low, high = low_ratio * height, high_ratio * height
-        margin = 0.008
+        assert 2 * margin < high - low, "Artist transition overlaps the professional patch"
         protected = {i + 1 for i in body["bodyguard_distal_hand_vertices"]}
         name = f"GEO-body_{label.lower()}_realistic"
         with bpy.data.libraries.load(str(professional)) as (available, loaded):
@@ -291,6 +295,7 @@ def main():
                 "professional_source": professional.name,
                 "professional_sha256": source_sha,
                 "neck_band_m": [low, high],
+                "artist_transition_m": margin,
                 "professional_patch_points": len(authored_points),
                 "proven_interior_cut_edges_capped_without_moving_points": inner_cut_edges,
                 "native_seam": {

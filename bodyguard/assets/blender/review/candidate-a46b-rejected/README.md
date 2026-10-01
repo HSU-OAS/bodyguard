@@ -10,7 +10,7 @@
 
 A46b는 같은 CC0 전문 원본의 neck patch에서 **native 삼각화로 내부 포함을 확인하고 외곽과 교차하지 않는 내부 경계만 native holes_fill**한다. 연결에는 정확히 두 개의 단순 닫힌 경계만 허용한다. 내부 닫힘은 좌표를 움직이거나 정점을 삭제하지 않으며, 외부/교차/분기/다중 경계를 임의로 덮지 않는다. 원본 전문 번들 SHA는 `3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137`다.
 
-A46b의 정확한 [생성 코드 사본](producer-at-generation.py.txt) SHA는 `8172ac0c955d0f6803885c40a8b8a55be11113df13dad5554a37e20837c81443`다. [현재 제작 코드](../../replace_neck_from_artist.py) SHA `00c29c03d94b0c7964aaf09d80ad48aec7806a8d758b5cff134606bed0a06dfb`는 검수 중 정상 import를 위한 main 경계·동일 길이 zip의 strict 검사·형식을 보완했다. 실제 AST 대조로 그 외 helpers/제작 본문 불변을 확인했다. 현재 코드로 A46b를 새로 생성했다고 주장하지 않는다.
+A46b의 정확한 [생성 코드 사본](producer-at-generation.py.txt) SHA는 `8172ac0c955d0f6803885c40a8b8a55be11113df13dad5554a37e20837c81443`다. [검수 당시 후속 코드](https://github.com/HSU-OAS/bodyguard/blob/e8f09688d8e4dd2df26d6610abfed9845cd85eb3/bodyguard/assets/blender/replace_neck_from_artist.py) SHA `00c29c03d94b0c7964aaf09d80ad48aec7806a8d758b5cff134606bed0a06dfb`는 정상 import를 위한 main 경계·동일 길이 zip의 strict 검사·형식을 보완했다. 당시 실제 AST 대조로 그 외 helpers/제작 본문 불변을 확인했다. 그 후속 코드로 A46b를 새로 생성했다고 주장하지 않는다. 이후 연결 여유 변경은 [A47 검수](../candidate-a47-rejected/README.md)에서 별도 기록한다.
 
 [생성 보고서](neck-replacement-report.json): 영역0.81~0.90/경계 여유8mm, 남녀 패치5,332/5,222개 좌표 그대로, 내부86/100개 edge 닫힘, 후보102,116/101,114정점. 영역 밖 원래 신체 좌표/skin·보호 손·각163bones/rest와 입력 신체 준비 불변을 실제 검사했다. 새 패치의 native 이름 대응 skin 전송과 SURFACE/cuts6 연결을 유지한다. 이전 실패 이음매→후보20.035002/18.425118mm, 반대52.165639/43.574113mm는 기록만 하며 기존 이음매를 해부학 목표로 삼지 않는다. 임계값 완화·전신 remesh·단순 도형 인체·새 에셋/의존성은 없다.
 
@@ -49,7 +49,7 @@ A46b의 정확한 [생성 코드 사본](producer-at-generation.py.txt) SHA는 `
 
 ## 회귀·실패·미실행
 
-[현재 코드의 native 경계 검사](native-boundary-regression.json)/[실행형 하네스](../../test_neck_cut.py)는 단일/내부 경계 정상2개, 분리·외곽 교차·3경계·오목한 외곽 횡단·분기 거부5개, 합계7개/exit0 PASS다. 좌표/face 불변, 정상 import의 CLI 무실행도 실제 확인했다. 합성 경계 시험이지 사람/운동 검증은 아니다.
+[당시 native 경계 검사](native-boundary-regression.json)/[당시 실행형 하네스](https://github.com/HSU-OAS/bodyguard/blob/e8f09688d8e4dd2df26d6610abfed9845cd85eb3/bodyguard/assets/blender/test_neck_cut.py)는 단일/내부 경계 정상2개, 분리·외곽 교차·3경계·오목한 외곽 횡단·분기 거부5개, 합계7개/exit0 PASS다. 좌표/face 불변, 정상 import의 CLI 무실행도 실제 확인했다. 합성 경계 시험이지 사람/운동 검증은 아니다. 이후 입력8개 추가 검사는 A47 기록과 구분한다.
 
 0.81/0.89 비교는 분기 실패를 예상했지만 **실제 제작은 exit0/원본 저장**이었다. 읽기 전용 full-cut의 분기 수와 반대쪽을 제거한 실제 patch의 경계가 달랐다. 예상 실패 PASS로 세지 않는다. [실제 생성 보고서](comparison-089-generation-report.json), 당시 코드 `8e51a73445051a0dfb34622a778fe7b2f949834be39a025f514138b771e0e5c9`, 임시 원본 `a46-ambiguous-cut-must-not-exist.blend` SHA `3706419711e79452f637df1722eaf37137cb889760296dc5894838f5d033bfe0`를 보존한다. 그 이름은 당시 의도일 뿐 미생성/실패를 뜻하지 않는다. 그 비교의 전체 QA/GLB/렌더/Chrome은 미실행이다.
 
