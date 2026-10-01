@@ -1,0 +1,89 @@
+"""Read-only A56 root-cause probe using the existing neck QA stress and edges."""
+
+import json
+import sys
+from hashlib import file_digest
+from math import degrees, radians
+from pathlib import Path
+
+import bpy
+from mathutils import Quaternion, Vector
+
+output = Path(sys.argv[sys.argv.index("--") + 1])
+if output.exists():
+    raise FileExistsError("Preserve prior diagnostic evidence")
+source = Path(bpy.data.filepath)
+with source.open("rb") as file:
+    source_sha = file_digest(file, "sha256").hexdigest()
+rows = []
+for label in ("Male", "Female"):
+    body = bpy.data.objects[f"BODYGUARD {label} sculpt WIP"]
+    rig = bpy.data.objects[f"BODYGUARD {label} rig WIP"]
+    cut = max(v.co.z for v in body.data.vertices) * 0.87 - 0.012
+    head_cut = cut + 0.032
+    edges = [
+        (a, b, length)
+        for edge in body.data.edges
+        for a, b in [edge.vertices]
+        if (length := (body.data.vertices[a].co - body.data.vertices[b].co).length) > 0.001
+    ]
+    for side, sign in (("left", 1), ("right", -1)):
+        for pb in rig.pose.bones:
+            pb.rotation_mode = "QUATERNION"
+            pb.rotation_quaternion = Quaternion()
+        for name, angle in (("neck01", 4), ("neck02", 5), ("neck03", 5), ("head", 6)):
+            pb = rig.pose.bones[name]
+            axis = pb.bone.matrix_local.to_3x3().inverted() @ Vector((0, 1, 0))
+            pb.rotation_quaternion = Quaternion(axis, radians(sign * angle))
+        bpy.context.view_layer.update()
+        delta = (
+            rig.pose.bones["head"].matrix @ rig.data.bones["head"].matrix_local.inverted()
+        ).to_quaternion()
+        assert abs(degrees(delta.angle) - 20) < 0.05
+        posed = body.evaluated_get(bpy.context.evaluated_depsgraph_get()).data
+        ranked = sorted(
+            (
+                ((posed.vertices[a].co - posed.vertices[b].co).length / length, a, b, length)
+                for a, b, length in edges
+            ),
+            reverse=True,
+        )
+        worst = []
+        for ratio, a, b, length in ranked[:5]:
+            endpoints = []
+            for index in (a, b):
+                vertex = body.data.vertices[index]
+                endpoints.append(
+                    {
+                        "index": index,
+                        "authoring_coordinate_m": list(vertex.co),
+                        "region": "head"
+                        if vertex.co.z >= head_cut - 1e-6
+                        else ("bridge" if vertex.co.z > cut + 1e-6 else "retained-body"),
+                        "named_weights": {
+                            body.vertex_groups[g.group].name: g.weight
+                            for g in vertex.groups
+                            if g.weight > 1e-5
+                        },
+                    }
+                )
+            worst.append({"ratio": ratio, "rest_length_m": length, "endpoints": endpoints})
+        rows.append({"pose": f"{label}/neck/{side}", "worst_edges": worst})
+    for pb in rig.pose.bones:
+        pb.rotation_quaternion = Quaternion()
+with source.open("rb") as file:
+    assert file_digest(file, "sha256").hexdigest() == source_sha
+output.write_text(
+    json.dumps(
+        {
+            "blender": bpy.app.version_string,
+            "source_sha256": source_sha,
+            "source_saved": False,
+            "artist_model_only": True,
+            "rows": rows,
+        },
+        indent=2,
+    )
+    + "\n"
+)
+print("READ ONLY NECK WEIGHT DIAGNOSTIC", json.dumps(rows))

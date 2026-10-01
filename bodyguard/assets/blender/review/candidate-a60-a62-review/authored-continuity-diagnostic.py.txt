@@ -1,0 +1,122 @@
+"""FR-A-02/03: read-only native authored head/neck continuity diagnostic.
+
+Reuse the frozen licensed mesh and closed-ring helper. No source is saved,
+no clinical target is created, and no boundary is repaired to force a match.
+"""
+
+import importlib.util
+import json
+import sys
+from collections import Counter
+from hashlib import file_digest
+from pathlib import Path
+
+import bmesh
+import bpy
+
+
+def digest(path):
+    with path.open("rb") as file:
+        return file_digest(file, "sha256").hexdigest()
+
+
+def key(point):
+    return tuple(round(c * 1e6) for c in point)
+
+
+def cut(mesh, plane, upper):
+    part = mesh.copy()
+    bmesh.ops.bisect_plane(
+        part,
+        geom=list(part.verts) + list(part.edges) + list(part.faces),
+        plane_co=(0, 0, plane),
+        plane_no=(0, 0, 1),
+        dist=1e-8,
+        clear_inner=upper,
+        clear_outer=not upper,
+    )
+    boundary = [e for e in part.edges if e.is_boundary]
+    rings = helper.closed_loops(boundary)
+    assert len(rings) == 1, "Authored cut must be a single continuous outer ring"
+    ring = rings[0]
+    assert all(abs(v.co.z - plane) < 1e-6 for v in ring)
+    assert all(e.is_manifold or e in boundary for e in part.edges)
+    return part, ring
+
+
+generation, professional, output = map(Path, sys.argv[sys.argv.index("--") + 1 :])
+assert output.suffix == ".json" and not output.exists()
+assert digest(professional) == "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137"
+helper_path = Path(__file__).with_name("a49-density-producer.py")
+assert digest(helper_path) == "6a96114e186b0db44a622beaef770dc58a193656344586f9f189783cc14018c4"
+spec = importlib.util.spec_from_file_location("a49_native_boundary", helper_path)
+helper = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(helper)
+reports = []
+for info in json.loads(generation.read_text()):
+    label = info["body"]
+    body = bpy.data.objects[f"BODYGUARD {label} sculpt WIP"]
+    height = max(v.co.z for v in body.data.vertices)
+    plane = info["cut_m"] - 0.020
+    name = f"GEO-body_{label.lower()}_realistic"
+    with bpy.data.libraries.load(str(professional)) as (available, loaded):
+        assert name in available.objects
+        loaded.objects = [name]
+    patch = loaded.objects[0]
+    bpy.context.scene.collection.objects.link(patch)
+    assert len(patch.modifiers) == 1 and patch.modifiers[0].type == "MULTIRES"
+    patch.modifiers[0].levels = patch.modifiers[0].render_levels = 1
+    bpy.context.view_layer.update()
+    evaluated = bpy.data.meshes.new_from_object(
+        patch.evaluated_get(bpy.context.evaluated_depsgraph_get())
+    )
+    source_height = max(v.co.z for v in evaluated.vertices)
+    assert source_height > 0
+    for vertex in evaluated.vertices:
+        vertex.co *= height / source_height
+    source, authored = bmesh.new(), bmesh.new()
+    source.from_mesh(body.data)
+    authored.from_mesh(evaluated)
+    lower, lower_ring = cut(source, plane, False)
+    upper, upper_ring = cut(authored, plane, True)
+    body_keys = Counter(key(v.co) for v in lower_ring)
+    authored_keys = Counter(key(v.co) for v in upper_ring)
+    matched = body_keys == authored_keys
+    # Nearest distances are reported even if rounded coordinates differ;
+    # they are observations, not a relaxed weld/QA tolerance.
+    maximum = max(min((a.co - b.co).length for b in upper_ring) for a in lower_ring)
+    reports.append(
+        {
+            "body": label,
+            "professional_source": name,
+            "plane_m": plane,
+            "old_boundary_vertices": len(lower_ring),
+            "authored_boundary_vertices": len(upper_ring),
+            "same_boundary_at_original_one_um": matched,
+            "maximum_nearest_boundary_distance_m": maximum,
+            "authored_upper_vertices": len(upper.verts),
+            "authored_upper_faces": len(upper.faces),
+            "upper_bbox_m": [
+                [min(v.co[a] for v in upper.verts), max(v.co[a] for v in upper.verts)]
+                for a in range(3)
+            ],
+            "head_neck_native_connected_topology": True,
+            "facial_neutralization_and_all_candidate_qa": "NOT RUN",
+        }
+    )
+    for mesh in (source, authored, lower, upper):
+        mesh.free()
+output.write_text(
+    json.dumps(
+        {
+            "source_saved": False,
+            "artist_model_only": True,
+            "source_sha256": digest(Path(bpy.data.filepath)),
+            "professional_sha256": digest(professional),
+            "reports": reports,
+        },
+        indent=2,
+    )
+    + "\n"
+)
+print("ACTUAL AUTHORED CONTINUITY DIAGNOSTIC", json.dumps(reports))

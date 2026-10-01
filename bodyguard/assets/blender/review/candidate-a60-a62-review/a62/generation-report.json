@@ -1,0 +1,194 @@
+[
+  {
+    "body": "Male",
+    "professional_source": "human_base_meshes_bundle.blend",
+    "professional_sha256": "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137",
+    "helper_sha256": "6a96114e186b0db44a622beaef770dc58a193656344586f9f189783cc14018c4",
+    "head_source": "GEO-head_male_primitive_realistic",
+    "head_world_matrix": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        -6.191712379455566
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        -0.04134513810276985
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        1.5101579427719116
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "head_translation_m": [
+      5.511690616607666,
+      0.02649904228746891,
+      -0.00962972640991211
+    ],
+    "head_authored_registration": {
+      "reference_surface": "GEO-body_male_realistic",
+      "reference_cervical_cut_m": 1.4536255388259887,
+      "authored_contour_points": 134,
+      "proven_inner_cut_edges_capped_for_diagnostic": 0,
+      "initial_head_translation_m": [
+        5.511697769165039,
+        -0.0008621085435152054,
+        -0.00962972640991211
+      ],
+      "cut_ring_center_xy_before_m": [
+        -1.4781951904296875e-05,
+        -0.06081009958870709
+      ],
+      "target_body_point_m": [
+        -2.1813437342643738e-05,
+        -0.033448949456214905,
+        1.5016255378723145
+      ],
+      "native_head_translation_m": [
+        -7.031485438346863e-06,
+        0.027361150830984116,
+        0.0
+      ],
+      "contour_points": 400,
+      "purpose": "native artist contour registration only; no clinical target"
+    },
+    "head_skin_correspondence": {
+      "native_transfer": "POLYINTERP_NEAREST/NAME before rigid registration",
+      "prepared_weights_preserved_during_registration": true,
+      "reason": "avoid nearest donor neck/shoulder switching after head translation",
+      "full_deformation_and_visual_qa_required": true
+    },
+    "cut_m": 1.4536255388259887,
+    "head_cut_m": 1.5016255388259887,
+    "artist_gap_m": 0.048,
+    "native_boundary_density": {
+      "before": [
+        400,
+        488
+      ],
+      "after": [
+        888,
+        888
+      ],
+      "method": "native polar-edge splits"
+    },
+    "native_bridge": {
+      "interpolation": "LINEAR",
+      "cuts": 6,
+      "smoothness": 1
+    },
+    "boundary_normal_refresh_max_delta": 0.0004178293761437207,
+    "source_vertices": 104472,
+    "candidate_vertices": 138363,
+    "professional_head_points": 56156,
+    "retained_body_skin_hands_bones_rest_preserved": true,
+    "all_source_glb_deformation_browser_visual_checks_pending": true
+  },
+  {
+    "body": "Female",
+    "professional_source": "human_base_meshes_bundle.blend",
+    "professional_sha256": "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137",
+    "helper_sha256": "6a96114e186b0db44a622beaef770dc58a193656344586f9f189783cc14018c4",
+    "head_source": "GEO-head_primitive_female_realistic",
+    "head_world_matrix": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        -5.177048683166504
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        -0.04044957458972931
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        1.4523576498031616
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "head_translation_m": [
+      5.856815814971924,
+      0.04292336851358414,
+      0.009931802749633789
+    ],
+    "head_authored_registration": {
+      "reference_surface": "GEO-body_female_realistic",
+      "reference_cervical_cut_m": 1.4137818460464477,
+      "authored_contour_points": 132,
+      "proven_inner_cut_edges_capped_for_diagnostic": 0,
+      "initial_head_translation_m": [
+        5.8570475578308105,
+        -0.0007243603467941284,
+        0.009931802749633789
+      ],
+      "cut_ring_center_xy_before_m": [
+        -9.5367431640625e-07,
+        -0.07891950197517872
+      ],
+      "target_body_point_m": [
+        -0.00023254752159118652,
+        -0.0352717749774456,
+        1.4617818593978882
+      ],
+      "native_head_translation_m": [
+        -0.00023159384727478027,
+        0.043647728860378265,
+        0.0
+      ],
+      "contour_points": 344,
+      "purpose": "native artist contour registration only; no clinical target"
+    },
+    "head_skin_correspondence": {
+      "native_transfer": "POLYINTERP_NEAREST/NAME before rigid registration",
+      "prepared_weights_preserved_during_registration": true,
+      "reason": "avoid nearest donor neck/shoulder switching after head translation",
+      "full_deformation_and_visual_qa_required": true
+    },
+    "cut_m": 1.4137818460464477,
+    "head_cut_m": 1.4617818460464478,
+    "artist_gap_m": 0.048,
+    "native_boundary_density": {
+      "before": [
+        344,
+        426
+      ],
+      "after": [
+        770,
+        770
+      ],
+      "method": "native polar-edge splits"
+    },
+    "native_bridge": {
+      "interpolation": "LINEAR",
+      "cuts": 6,
+      "smoothness": 1
+    },
+    "boundary_normal_refresh_max_delta": 0.00019079340654701814,
+    "source_vertices": 102762,
+    "candidate_vertices": 140060,
+    "professional_head_points": 58758,
+    "retained_body_skin_hands_bones_rest_preserved": true,
+    "all_source_glb_deformation_browser_visual_checks_pending": true
+  }
+]

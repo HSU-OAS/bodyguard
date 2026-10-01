@@ -1,0 +1,15 @@
+"""FR-A-01/02: read-only existing licensed mesh names, not external acquisition."""
+
+import json
+import sys
+from pathlib import Path
+
+import bpy
+
+source, output = map(Path, sys.argv[sys.argv.index("--") + 1 :])
+assert not output.exists()
+with bpy.data.libraries.load(str(source)) as (available, loaded):
+    names = sorted(name for name in available.objects if name.startswith("GEO-"))
+assert names
+output.write_text(json.dumps({"objects": names, "source_saved": False}, indent=2) + "\n")
+print("EXISTING LICENSED ASSET NAMES", json.dumps(names))

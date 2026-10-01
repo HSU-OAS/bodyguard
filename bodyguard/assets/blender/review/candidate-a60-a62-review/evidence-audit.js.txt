@@ -1,0 +1,75 @@
+// FR-A-03/07: stdlib audit of actual artist evidence, not people or exercise validity.
+const fs = require('node:fs'), path = require('node:path');
+const assert = require('node:assert/strict'), crypto = require('node:crypto');
+const {execFileSync} = require('node:child_process');
+const [root, temporary] = process.argv.slice(2);
+const base = 'bodyguard/assets/blender/', folder = base + 'review/candidate-a60-a62-review/';
+const read = p => fs.readFileSync(path.join(root, p));
+const json = p => JSON.parse(read(p));
+const sha = b => crypto.createHash('sha256').update(b).digest('hex');
+let assertions = 0, actualPng = 0, localLinks = 0;
+const ok = (value, label) => {assert(value, label); assertions++;};
+for (const [n, name, expected] of [
+  [60, 'draft-a60-continuous-authored-head.blend', '7751f3a4ea79ba21bbfa44b22de533fb36037e5d6a0ed5e9d97bf44948042b86'],
+  [61, 'draft-a61-cervical-contour-head.blend', '8eb9e98a7c75ad816d822e57cf2bbf3d3aedd4dae3373bea7b60d4a67a30c45f'],
+  [62, 'draft-a62-linear-authored-contour-head.blend', '6bccdf59e30dd35685c5581e414cf66572bf8a97aabe344d0f894cf73ea786e4'],
+]) {
+  const asset = base + 'bodyguard_avatar_candidate_a' + n + (n === 62 ? '_review.blend' : '_rejected.blend');
+  const b = read(asset);
+  ok(sha(b) === expected && b.equals(fs.readFileSync(path.join(temporary, name))), 'native source identical A' + n);
+  const q = json(folder + 'a' + n + '/source-preflight-report.json');
+  const cases = q.checks.filter(c => typeof c.edge_ratio_max === 'number');
+  ok(q.checks.length === 121 && cases.length === 118 && !q.rendered, 'actual original preflight A' + n);
+  ok(q.checks[0].garments.length === 0 && q.checks[0].surface_style === 'unified-white-mannequin', 'unified no garments A' + n);
+  ok(q.checks.filter(c => c.pose === 'neutral' && c.surface).every(c => c.components === 1 && !c.non_manifold && !c.unnormalized), 'topology and skin A' + n);
+  if (n === 60) {
+    ok(!q.passed && q.failures.length === 4 && cases.filter(c => c.edge_ratio_max >= 3).length === 4, 'preserved real neck failure');
+  } else {
+    ok(q.passed && !q.failures.length && cases.every(c => Number.isFinite(c.edge_ratio_max) && c.edge_ratio_max < 3), 'unchanged technical guard A' + n);
+  }
+  const generation = json(folder + 'a' + n + '/generation-report.json');
+  ok(generation.length === 2 && generation.every(c => n === 60 ? c.retained_skin_hands_rest_163_bones_exact : c.retained_body_skin_hands_bones_rest_preserved), 'actual native preservation A' + n);
+}
+const before = read(folder + 'a61/producer-at-generation.py.txt').toString();
+const after = read(folder + 'a62/producer-at-generation.py.txt').toString();
+ok((before.match(/"SURFACE"/g) || []).length === 2 && before.replaceAll('"SURFACE"', '"LINEAR"') === after, 'exact interpolation-only native comparison');
+const probe = json(folder + 'authored-continuity-diagnostic.json');
+ok(!probe.source_saved && probe.artist_model_only && probe.reports.length === 2, 'actual read-only probe');
+ok(probe.reports.every(c => c.same_boundary_at_original_one_um && c.maximum_nearest_boundary_distance_m === 0 && c.old_boundary_vertices === c.authored_boundary_vertices), 'exact coincident authored contours');
+const diagnostic = json(folder + 'a60/neck-weight-diagnostic.json');
+ok(!diagnostic.source_saved && diagnostic.rows.length === 4 && diagnostic.rows.every(c => c.worst_edges[0].ratio >= 3), 'actual failing weight diagnostic');
+const execution = json(folder + 'execution-record.json');
+ok(execution.observed_runs.filter(c => c.exit_code === 1).length === 3 && !execution.adopted_for_release, 'real failures not success');
+ok(execution.unrun.length === 4 && execution.unrun.some(c => c.includes('actual Chrome')), 'unrun checks explicit');
+const manifest = [], markdown = ['bodyguard/docs/stories/stage2-avatar-candidate.md', 'bodyguard/docs/avatar-production.md'];
+function walk(relative) {
+  for (const item of fs.readdirSync(path.join(root, relative), {withFileTypes:true})) {
+    const p = relative + item.name;
+    if (item.name === 'evidence-audit.json') continue;
+    if (item.isDirectory()) walk(p + '/');
+    else {
+      const b = read(p); manifest.push({file:p, bytes:b.length, sha256:sha(b)});
+      if (item.name.endsWith('.md')) markdown.push(p);
+      if (item.name.endsWith('.png')) {
+        ok(b.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])), 'native PNG signature');
+        const label = p.match(/\/(a6[012])\//)[1];
+        ok(b.equals(fs.readFileSync(path.join(temporary, label + '-first-preview', item.name))), 'exact actual render bytes'); actualPng++;
+      }
+    }
+  }
+}
+walk(folder);
+ok(actualPng === 24, 'actual eight images for each candidate');
+for (const file of markdown) for (const match of read(file).toString().matchAll(/!?\[[^\]]*\]\(([^\)]+)\)/g)) {
+  const target = match[1].split('#')[0];
+  if (!target || /^(https?:|codex:|mailto:)/.test(target)) continue;
+  ok(fs.existsSync(path.resolve(root, path.dirname(file), target)), 'local link ' + target); localLinks++;
+}
+for (const [file, expected] of [
+  ['bodyguard_avatar_candidate_a49_rejected.blend', '84eb04403d9b20edea5c017e10dcc3092cdf4c6f84ae95aca930efb6d29f1232'],
+  ['bodyguard_avatar_candidate_a59_rejected.blend', '9b5d7177fbf71e310cd8c0e89a99349be459478faa1ff33e5c4fb7be5c7bd4ef'],
+  ['replace_neck_from_artist.py', '774b34a1330548f9e6dfe087f0bd561bff5ba934577df9d0f07668b6a603f7d0'],
+]) ok(sha(read(base + file)) === expected, 'prior frozen file ' + file);
+const protectedDiff = execFileSync('git', ['diff', 'HEAD', '--name-only', '--', base + 'bodyguard_avatar_candidate_a37.blend', 'bodyguard/frontend/src/avatar', 'bodyguard/frontend/public'], {cwd:root, encoding:'utf8'});
+ok(protectedDiff.trim() === '', 'development default and frontend untouched');
+console.log(JSON.stringify({passed:true, assertions, actual_png:actualPng, local_links:localLinks, files:manifest.length, manifest}, null, 2));
