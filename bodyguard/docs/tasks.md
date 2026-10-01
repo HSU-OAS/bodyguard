@@ -17,7 +17,7 @@
 | 동작 근거와 촬영 가능성 | 후보별 출처·주의점·필수 관절·촬영 계획과 관찰 하네스 | 후보 분류·근거·계획. 실제 동작/임계값 검증은 S2.3 | PR #2 main 병합, 출시 동작 0개 |
 | 새 아바타 제작 기준·초기 제작 | 남녀 Blender 모델·리그 기준과 시각 비교 | 새 편집 원본·기초 검수·권리·차이 기록. 최종 외형/웹 성능은 S2.4 | PR #3 main 병합, 최종 에셋 아님 |
 
-[1단계 준비 게이트](stage1-gate.md)는 증거 기준을 충족했다. [S2.1](stories/stage2-account-api.md)은 PR #6, [S2.2](stories/stage2-account-web.md)는 PR #7, [S2.3a](stories/stage2-motion-validation.md)는 PR #8 병합. S2.4 [Draft PR #9](https://github.com/HSU-OAS/bodyguard/pull/9)는 Blender 원본 118개·개발 웹 기술 시험 2개를 실행했지만 외형/왕복 변형 P2로 보류다. 독립 [S2.6a1 복구 API](stories/stage2-password-recovery-api.md)를 진행하고 다음은 복구 웹이다. 실제 Gmail·S2.3b 사람 수행 검증·최종 아바타·2단계 전체는 미완료이며 [사전 승인 운영 규칙](operating-rules.md)을 적용한다.
+[1단계 준비 게이트](stage1-gate.md)는 증거 기준을 충족했다. [S2.1](stories/stage2-account-api.md)은 PR #6, [S2.2](stories/stage2-account-web.md)는 PR #7, [S2.3a](stories/stage2-motion-validation.md)는 PR #8, [S2.6a1 복구 API](stories/stage2-password-recovery-api.md)는 PR #10 병합. S2.4 [Draft PR #9](https://github.com/HSU-OAS/bodyguard/pull/9)는 Blender 원본 118개·개발 웹 기술 시험 2개를 실행했지만 외형/왕복 변형 P2로 보류다. 독립 [S2.6a2 복구 웹](stories/stage2-password-recovery-web.md)은 구현·검증/PR 게이트를 진행한다. 실제 Gmail·Google·S2.3b 사람 수행 검증·최종 아바타·2단계 전체는 미완료이며 [사전 승인 운영 규칙](operating-rules.md)을 적용한다.
 
 ---
 

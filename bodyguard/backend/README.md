@@ -1,6 +1,6 @@
 # BODYGUARD 계정 API
 
-S2.1 + S2.6a1, FR-U-02/03/04·NFR-08. 이메일 확인 계정, 서버 쿠키·CSRF, 본인 조회·로그아웃과 비밀번호 복구 API다. 복구 웹 화면은 후속 S2.6a2, 구글·기록·실제 Gmail 연결·운영 배포는 미완료다.
+S2.1 + S2.6a1, FR-U-02/03/04·NFR-08. 이메일 확인 계정, 서버 쿠키·CSRF, 본인 조회·로그아웃과 비밀번호 복구 API다. [복구 웹 화면](../docs/stories/stage2-password-recovery-web.md)은 S2.6a2에서 연결했고 구글·기록·실제 Gmail 연결·운영 배포는 미완료다.
 
 ## 로컬 실행
 
@@ -55,6 +55,8 @@ uv run mypy app
 ```
 
 pytest는 실제 FastAPI와 PostgreSQL 18 migration·제약·독립 연결 경쟁을 사용한다. 시간·코드 난수·메일만 시험에서 통제한다. test 설정은 환경 변수로 서버를 기동할 수 없고, production/development의 가짜 메일·clock 주입도 거부한다. 공개 outbox/코드 조회/인증 우회 API는 없다.
+
+`uv run python -m tests.run_browser`(기본/account)와 `uv run python -m tests.run_browser password`는 각각 실제 계정/복구 API·SQL·production Chrome의 별도 시험이다. 소유한 시험 DB만 초기화하므로 동시에 실행하지 않는다. 복구 전달은 잠금·원자적 교체를 쓰는 비공개 시험 파일이며 Gmail이 아니다. 계정/복구 결과는 frontend/test-results/의 각 suite에 재현된다.
 
 [하네스 계약](../docs/stories/stage2-account-harness.md) H-01~21에 해당하는 실행 테스트 이름은 tests/test_auth.py의 test_h01_...~test_h21_...다. 초기 실제 DB red는 미구현 csrf의 404, 구현 green·리뷰 보완·잔여 위험은 [Story 결과](../docs/stories/stage2-account-api.md)에 기록한다. 메모리 outbox 성공은 Gmail 도착 증거가 아니다.
 

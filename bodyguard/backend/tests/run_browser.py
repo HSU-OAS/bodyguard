@@ -1,5 +1,6 @@
 """FR-U-02/03/04: real HTTP/SQL browser harness; only mail delivery is simulated."""
 
+import argparse
 import json
 import os
 import secrets
@@ -19,6 +20,9 @@ from tests.conftest import test_database
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("suite", choices=("account", "password"), nargs="?", default="account")
+    args = parser.parse_args()
     # Bind before touching data; never reuse a user's server on this port.
     with socket.socket() as listener:
         listener.bind(("127.0.0.1", 8000))
@@ -36,11 +40,17 @@ def main() -> int:
             mailbox.write_text("{}")
             mailbox.chmod(0o600)
 
+            mail_lock = threading.Lock()
+
             def mail(email: str, code: str) -> None:
                 # Synthetic test credentials only; no HTTP outbox endpoint or real SMTP.
-                values = json.loads(mailbox.read_text())
-                values[email] = code
-                mailbox.write_text(json.dumps(values))
+                with mail_lock:
+                    values = json.loads(mailbox.read_text())
+                    values[email] = code
+                    pending = Path(temporary) / "mailbox.next"
+                    pending.write_text(json.dumps(values))
+                    pending.chmod(0o600)
+                    pending.replace(mailbox)
 
             settings = Settings(
                 environment="test",
@@ -77,8 +87,11 @@ def main() -> int:
                         "exec",
                         "playwright",
                         "test",
+                        f"{args.suite}.spec.ts",
                         "--config",
                         "playwright.account.config.ts",
+                        "--output",
+                        f"test-results/{args.suite}",
                     ],
                     cwd=Path(__file__).resolve().parents[2] / "frontend",
                     env={**os.environ, "BODYGUARD_TEST_MAILBOX": str(mailbox)},

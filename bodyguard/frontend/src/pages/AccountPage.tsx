@@ -1,7 +1,7 @@
 // FR-U-02/03: credentials and challenges live only in this mounted form.
 import { type FormEvent, useEffect, useRef, useState } from 'react'
 import { Link, Navigate } from 'react-router'
-import { ApiError, errorMessage, resend, signup } from '../api/auth'
+import { ApiError, errorMessage, resend, signup, validPassword } from '../api/auth'
 import { useAuth } from '../auth'
 
 export function AccountPage({ mode }: { mode: 'login' | 'signup' }) {
@@ -19,6 +19,7 @@ export function AccountPage({ mode }: { mode: 'login' | 'signup' }) {
   const busy = useRef(false)
   const controller = useRef<AbortController | null>(null)
   const codeInput = useRef<HTMLInputElement>(null)
+  const passwordInput = useRef<HTMLInputElement>(null)
   const verify = Boolean(challenge)
 
   useEffect(() => () => controller.current?.abort(), [])
@@ -35,6 +36,11 @@ export function AccountPage({ mode }: { mode: 'login' | 'signup' }) {
   async function submit(event?: FormEvent<HTMLFormElement>, sendAgain = false) {
     event?.preventDefault()
     if (busy.current) return
+    if (!verify && !sendAgain && !validPassword(password)) {
+      setError('비밀번호는 15~128자로 입력해 주세요.')
+      passwordInput.current?.focus()
+      return
+    }
     busy.current = true
     setPending(true)
     setError('')
@@ -168,14 +174,14 @@ export function AccountPage({ mode }: { mode: 'login' | 'signup' }) {
               <div className="password-input">
                 <input
                   id="account-password"
+                  ref={passwordInput}
                   name="password"
                   type={visible ? 'text' : 'password'}
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                   autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
                   required
-                  minLength={15}
-                  maxLength={128}
+                  maxLength={256}
                   disabled={pending}
                   aria-describedby={mode === 'signup' ? 'password-help' : undefined}
                 />
@@ -260,6 +266,11 @@ export function AccountPage({ mode }: { mode: 'login' | 'signup' }) {
             <Link to={mode === 'signup' ? '/login?next=%2Fstart' : '/signup?next=%2Fstart'}>
               {mode === 'signup' ? '로그인' : '이메일로 가입'}
             </Link>
+          </p>
+        )}
+        {mode === 'login' && (
+          <p className="form-secondary">
+            <Link to="/password/forgot">비밀번호를 잊으셨나요?</Link>
           </p>
         )}
         <Link className="back-link" to="/">
