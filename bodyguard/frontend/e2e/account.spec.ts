@@ -146,9 +146,12 @@ test('B-01 공개·제품 개발 경로·카메라 0·좁은 창·키보드', as
   await page.goto('/')
   await expect(page.getByRole('heading', { name: '내 몸을 이해하는 스트레칭' })).toBeVisible()
   await page.screenshot({ path: info.outputPath('public-desktop.png'), fullPage: true })
-  await page.goto('/dev/measure')
-  await expect(page.getByRole('heading', { name: '페이지를 찾을 수 없습니다' })).toBeVisible()
-  await expect(page.getByRole('button', { name: '측정 시작' })).toHaveCount(0)
+  for (const path of ['/dev/measure', '/dev/avatar']) {
+    await page.goto(path)
+    await expect(page.getByRole('heading', { name: '페이지를 찾을 수 없습니다' })).toBeVisible()
+    await expect(page.getByRole('button', { name: '측정 시작' })).toHaveCount(0)
+    await expect(page.getByRole('heading', { name: '두 아바타 기술 검수' })).toHaveCount(0)
+  }
   await page.goto('/start')
   await expect(page).toHaveURL(/\/login\?next=%2Fstart$/)
   await expect(page.getByRole('heading', { name: '다시 만나 반갑습니다' })).toBeVisible()
@@ -160,7 +163,9 @@ test('B-01 공개·제품 개발 경로·카메라 0·좁은 창·키보드', as
   await expect(page.getByLabel('비밀번호', { exact: true })).toBeFocused()
   await page.screenshot({ path: info.outputPath('login-narrow.png'), fullPage: true })
   expect(
-    requests.some((url) => /\.wasm|pose_landmarker|MeasureDemoPage|three|mediapipe/.test(url)),
+    requests.some((url) =>
+      /\.wasm|\.glb|pose_landmarker|MeasureDemoPage|AvatarReviewPage|three|mediapipe/.test(url),
+    ),
   ).toBe(false)
   expect(errors).toEqual([])
 })

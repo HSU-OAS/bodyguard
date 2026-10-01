@@ -25,6 +25,14 @@ pnpm dev
 
 S2.3a에서 준비 중에도 취소할 수 있고 중지·재시작·서비스로 돌아가기로 이전 스트림/프레임 작업을 정리한다. 모델은 최대 2포즈로 추정하되 복수 결과의 첫 사람을 골라 쓰지 않는다. 실제 복수 인물 검출 정확도·대상 전환은 미검증이다. 동작 촬영 패널은 최근 1초 이내 단일 포즈만 촬영 범위 충족 후보로 기록하고 최신 100개 요약만 메모리에 둔다. 이 도구는 자세 성공/오류를 판정하지 않는다. [명세·실행 결과](../docs/stories/stage2-motion-validation.md)를 따른다.
 
+## 개발용 아바타 검수
+
+`http://localhost:5173/dev/avatar`는 실제 Blender 후보 GLB의 **기술 검수 전용**이다. 남녀 선택·독립된 두 뼈대·한쪽 합성 변형 시작/정지·회전/확대·실패 재시도를 제공한다. 카메라·운동 정답·타이머·사용자 추적은 없다. 설치된 Three/R3F/drei를 재사용했고 새 3D 의존성은 없다. 읽기 전용 geometry/material만 공유하며 뼈대는 `SkeletonUtils.clone`으로 독립 복제한다.
+
+`pnpm exec playwright test --config playwright.avatar.config.ts --reporter=list,json`은 자체 5182 개발 서버와 설치된 Chrome으로 남녀 두 모델·180 렌더 간격·503/실제 context loss 복구·이탈·카메라 0회를 검사한다. 개발 경로/뷰어/후보 GLB는 production에서 제외한다. production 계정 Chrome 회귀는 두 개발 경로가 404이고 계정 진입에서 GLB/WASM을 받지 않는지 확인한다.
+
+2026-10-01: 실제 브라우저 기술 시험 2개는 통과했지만 **후보 외형과 웹 가중치 변형에 P2가 남아 있다**. [실제 결과·남녀 컷·실패 JSON](../assets/blender/review/web-candidate/README.md)을 따른다. 실제 사람·목표 노트북 웹캠 코칭·최종 아바타 승인 증거가 아니다.
+
 ## 개발용 측정 화면
 
 - 왼쪽: 웹캠 화면(거울처럼 좌우 반전) 위에 2D 스켈레톤. 개발용 확인 화면이다. 제품 화면에는 영상을 보여주지 않는다 (FR-V-02)
