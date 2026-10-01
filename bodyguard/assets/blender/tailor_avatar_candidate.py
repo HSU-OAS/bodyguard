@@ -29,6 +29,183 @@ def active(obj):
     bpy.context.view_layer.objects.active = obj
 
 
+def rebuild_wrist_seams(body, wrist_planes):
+    # A-02 root cause: the capped Boolean union left thin overlapping fins.
+    # Cut only the joined wrist band; bridge the existing professional surfaces.
+    bm = bmesh.new()
+    bm.from_mesh(body.data)
+    bm.verts.ensure_lookup_table()
+    original = bm.verts.layers.int.new("Original artist vertex")
+    deform = bm.verts.layers.deform.active
+    assert deform is not None
+    arm_groups = {
+        g.index
+        for g in body.vertex_groups
+        if g.name.startswith(("lowerarm", "wrist", "finger", "metacarpal"))
+    }
+
+    def wrist_vertex(vertex, center):
+        # A rest wrist is near the thigh: a sphere alone also cuts the leg.
+        # Use the existing authored arm weights to exclude that other surface.
+        return (vertex.co - center).length < 0.13 and sum(
+            vertex[deform].get(i, 0) for i in arm_groups
+        ) > 0.25
+
+    retained = {v.index + 1: (v.co.copy(), dict(v[deform])) for v in bm.verts}
+    distal = {i + 1 for i in body["bodyguard_distal_hand_vertices"]}
+    for v in bm.verts:
+        v[original] = v.index + 1
+    for center, direction in wrist_planes:
+        for offset in (-0.08, 0.009):
+            faces = [
+                f for f in bm.faces if any(wrist_vertex(v, center) for v in f.verts)
+            ]
+            edges = {e for f in faces for e in f.edges}
+            vertices = {v for f in faces for v in f.verts}
+            before = set(bm.verts)
+            bmesh.ops.bisect_plane(
+                bm,
+                geom=list(vertices) + list(edges) + faces,
+                plane_co=center + direction * offset,
+                plane_no=direction,
+                dist=1e-8,
+            )
+            for v in set(bm.verts) - before:
+                v[original] = 0
+        faces = [
+            f
+            for f in bm.faces
+            if all(wrist_vertex(v, center) for v in f.verts)
+            and -0.08 + 1e-7
+            < (f.calc_center_median() - center).dot(direction)
+            < 0.009 - 1e-7
+        ]
+        assert faces, "No joined wrist band selected"
+        bmesh.ops.delete(bm, geom=faces, context="FACES")
+        bmesh.ops.delete(
+            bm, geom=[v for v in bm.verts if not v.link_faces], context="VERTS"
+        )
+        boundary = {e for e in bm.edges if e.is_boundary}
+        assert boundary and all(
+            sum(e.is_boundary for e in v.link_edges) == 2
+            for e in boundary
+            for v in e.verts
+        ), "Wrist cut did not produce simple closed contours"
+        loops = []
+        remaining = set(boundary)
+        while remaining:
+            loop = {remaining.pop()}
+            stack = list(loop)
+            while stack:
+                for vertex in stack.pop().verts:
+                    for edge in vertex.link_edges:
+                        if edge in remaining:
+                            remaining.remove(edge)
+                            loop.add(edge)
+                            stack.append(edge)
+            loops.append(loop)
+        print(
+            "WRIST CUT CONTOURS",
+            body.name,
+            [
+                {
+                    "edges": len(loop),
+                    "radius_max": max(
+                        (v.co - center).length for e in loop for v in e.verts
+                    ),
+                    "plane_range": (
+                        min(
+                            (v.co - center).dot(direction)
+                            for e in loop
+                            for v in e.verts
+                        ),
+                        max(
+                            (v.co - center).dot(direction)
+                            for e in loop
+                            for v in e.verts
+                        ),
+                    ),
+                }
+                for loop in loops
+            ],
+        )
+        assert len(loops) == 2, f"Expected two wrist contours, got {len(loops)}"
+        assert all((v.co - center).length < 0.13 for e in boundary for v in e.verts), (
+            "Cut escaped the wrist region"
+        )
+        result = bmesh.ops.bridge_loops(bm, edges=list(boundary))
+        assert result["faces"] and all(e.is_manifold for e in bm.edges)
+        # Native subdivision may invalidate cached BMVert handles. Identify
+        # new points by their unchanged coordinates, not stale Python handles.
+        before = {tuple(v.co): v[original] for v in bm.verts}
+        strip_edges = {e for f in result["faces"] for e in f.edges}
+        bmesh.ops.subdivide_edges(
+            bm, edges=list(strip_edges), cuts=3, use_grid_fill=True
+        )
+        added = []
+        for v in bm.verts:
+            point = tuple(v.co)
+            if point not in before:
+                added.append(v)
+            v[original] = before.get(point, 0)
+        for _ in range(6):
+            bmesh.ops.smooth_vert(
+                bm,
+                verts=list(added),
+                factor=0.2,
+                use_axis_x=True,
+                use_axis_y=True,
+                use_axis_z=True,
+            )
+        assert all(e.is_manifold for e in bm.edges), (
+            "Native wrist finish opened the mesh"
+        )
+        print("NATIVE WRIST BRIDGE", body.name, [len(x) for x in loops])
+    bm.verts.index_update()
+    remap = {v[original]: v.index for v in bm.verts if v[original]}
+    print(
+        "MISSING HAND QA",
+        body.name,
+        len(distal - remap.keys()),
+        [
+            {
+                "original": i - 1,
+                "position": tuple(retained[i][0]),
+                "planes": [(retained[i][0] - c).dot(d) for c, d in wrist_planes],
+            }
+            for i in sorted(distal - remap.keys())[:4]
+        ],
+    )
+    assert distal <= remap.keys(), "Wrist repair removed authored hand QA vertices"
+    assert all(
+        any(
+            (p - center).length < 0.13
+            and -0.080001 <= (p - center).dot(direction) <= 0.009001
+            and sum(weights.get(i, 0) for i in arm_groups) > 0.25
+            for center, direction in wrist_planes
+        )
+        for key, (p, weights) in retained.items()
+        if key not in remap
+    ), "Wrist repair removed an unrelated professional vertex"
+    assert all(
+        (v.co - retained[v[original]][0]).length < 1e-6
+        and dict(v[deform]) == retained[v[original]][1]
+        for v in bm.verts
+        if v[original]
+    ), "Wrist repair changed retained professional coordinates/weights"
+    assert all(
+        isfinite(total := sum(v[deform].values())) and abs(total - 1) < 0.01
+        for v in bm.verts
+    ), "Native wrist interpolation lost normalized skin weights"
+    body["bodyguard_distal_hand_vertices"] = [remap[i] for i in sorted(distal)]
+    bm.verts.layers.int.remove(original)
+    bmesh.ops.recalc_face_normals(bm, faces=list(bm.faces))
+    bm.to_mesh(body.data)
+    bm.free()
+    for polygon in body.data.polygons:
+        polygon.use_smooth = True
+
+
 def garment(body, name, fields, material):
     # A-02 root cause: centroid face removal produces stair-step cloth edges.
     # Native bisect interpolates original positions AND deform data at the cut.
@@ -62,6 +239,15 @@ def garment(body, name, fields, material):
         bm, geom=[v for v in bm.verts if not v.link_faces], context="VERTS"
     )
     assert len(bm.faces) > 100, "Empty/fragmented tailored garment"
+    remaining = set(bm.verts)
+    stack = [remaining.pop()]
+    while stack:
+        for edge in stack.pop().link_edges:
+            for vertex in edge.verts:
+                if vertex in remaining:
+                    remaining.remove(vertex)
+                    stack.append(vertex)
+    assert not remaining, "Detached arm/other surface remained in the garment"
     boundary = [v for v in bm.verts if v.is_boundary]
     assert boundary and all(
         sum(e.is_boundary for e in v.link_edges) == 2 for v in boundary
@@ -125,21 +311,13 @@ for label in ("Male", "Female"):
     untouched = {}
     for vertex in body.data.vertices:
         p = vertex.co / height
-        neck = exp(-((p.x / 0.052) ** 2)) * max(0, 1 - abs(p.z - 0.862) / 0.04)
-        wrist = max(
-            (
-                max(0, 1 - abs((vertex.co - center).dot(direction)) / 0.035)
-                if (vertex.co - center).length < 0.065
-                else 0
-            )
-            for center, direction in wrist_planes
-        )
+        neck = exp(-((p.x / 0.075) ** 2)) * max(0, 1 - abs(p.z - 0.862) / 0.055)
         pelvis = (
             max(0, 1 - abs(p.x) / 0.09) * max(0, 1 - abs(p.z - 0.50) / 0.065)
             if label == "Male"
             else 0
         )
-        weight = max(neck, wrist, pelvis)
+        weight = max(neck, pelvis)
         if weight:
             mask.add([vertex.index], weight, "REPLACE")
         else:
@@ -162,6 +340,9 @@ for label in ("Male", "Female"):
     assert before == [
         tuple((g.group, g.weight) for g in v.groups) for v in body.data.vertices
     ], "Surface polish must preserve every original skin weight and vertex"
+    # The minimal garment-only comparison retained the old wrist crease. Keep
+    # native local retopology, with original hand/outside vertices guarded.
+    rebuild_wrist_seams(body, wrist_planes)
     # Remove only temporary candidate garments, not the original .blend file.
     old = [
         o
@@ -214,6 +395,11 @@ for label in ("Male", "Female"):
                 lambda v, d, height=height: v.co.z / height - 0.397,
                 lambda v, d, height=height: 0.564 - v.co.z / height,
                 lambda v, d, height=height: 0.15 - abs(v.co.x) / height,
+                # Arms hang beside the pelvis. XYZ bounds alone leave detached
+                # arm patches that masquerade as wrist fins in the shorts.
+                lambda v, d, groups=arm_groups: (
+                    0.15 - sum(v[d].get(i, 0) for i in groups)
+                ),
             ],
             material,
         )
@@ -221,6 +407,14 @@ for label in ("Male", "Female"):
 scene["bodyguard_stage"] = (
     "S2.4 tailored candidate; ALL QA pending; NOT release approved"
 )
+# Studio presentation, not a change to surface/clinical acceptance criteria.
+key = bpy.data.objects["BODYGUARD review key"]
+key.location = (-3, -2, 3.5)
+key.rotation_euler = (
+    (Vector((0, 0, 1)) - key.location).to_track_quat("-Z", "Y").to_euler()
+)
+key.data.size = 1.5
+bpy.data.objects["BODYGUARD review fill"].data.energy = 60
 bpy.context.preferences.filepaths.save_version = 0
 bpy.ops.wm.save_as_mainfile(filepath=str(output), compress=True)
 scene.render.resolution_x = 1400
@@ -232,6 +426,8 @@ for name, label, location, target, scale in (
     ("female-back", "Female", (0, 4, 0.83), (0, 0, 0.83), 1.95),
     ("female-hand", "Female", (0.43, -2, 0.75), (0.34, 0, 0.75), 0.42),
     ("female-neck", "Female", (0, -4, 1.42), (0, 0, 1.42), 0.7),
+    ("male-hand", "Male", (0.43, -2, 0.75), (0.34, 0, 0.75), 0.42),
+    ("male-neck", "Male", (0, -4, 1.42), (0, 0, 1.42), 0.7),
 ):
     for obj in scene.objects:
         if (

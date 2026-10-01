@@ -71,6 +71,8 @@ A30은 native 체적 보존 국소 정제와 상의/쇼츠 층 분리를 시험�
 
 A30의 native Laplacian(`lambda0.05/12회/normalized·volume-preserve`)이 영역 밖 표면까지 바꿔 위 assertion에서 실제 실패했다. 원본/렌더 저장 전 중단됐고 해당 파일의 QA는 미실행이다. 좌표를 사후 덮거나 허용 오차를 키워 감추지 않았다. A30b는 설치된 native `Corrective Smooth / LENGTH_WEIGHTED / only-smooth`로 교체하고 동일 영역/가중치·전체118개 변형 검사를 실제 통과했다. 그러나 손목 외형은 여전히 미달이라 **반려했다**. [실제 렌더/원본 QA/코드·파일 해시와 미실행](../../assets/blender/review/candidate-a30b-rejected/README.md)을 보존한다.
 
+A33에서는 별도 native 아티스트 진단으로 손목의 백색 핀에 **쇼츠로 잘라낸 팔 조각**도 포함됐음을 확인했다. 기존 국소 smoothing 원인 추정을 보완하고, 쇼츠도 기존 arm 가중치로 팔을 제외한다. 의상만 고친 최소 A32b 비교에는 원래 손목 주름이 남아 native 국소 연결 재구성을 유지했다. 손가락 가중치/QA 선택·영역 밖 형상 보존을 검사하며 정점 수는 위상 변경으로 남142,915·여140,698이다. 새 의상 연결/닫힘 검사2행을 더한 **118개 기술 변형·242행을 실제 통과**했다. [진단·실제6컷·보고서·실패/최소 비교·해시](../../assets/blender/review/candidate-a33/README.md)를 보존한다. 목/의상 경계와 재질/실루엣은 더 보완해야 하므로 외형 P2는 미해결이고 GLB/웹은 아직 A27이다.
+
 최신 main `4bbb784` 통합의 회귀는 실제 API160개(40.79s)·Vitest133개/14파일(2.62s)·TypeScript/Biome56파일·Ruff/mypy·production Chrome Google10개(23.1s)→account9개(1.3m)→password5개(11.5s)를 순차 실행해 통과했다. Google/메일/일부 server clock은 모의이고 실제 공급자·사람 완료가 아니다. A27 개발 웹2개는 제작이 끝난 조건에서 다시 실행해32.803s로 통과했다. [별도 native 보고서/실제 두 화면·장치 조건](../../assets/blender/review/main-regression-20261001/README.md)을 보존했다. 사람 없는 시험 카메라1개8.5s·SDK 재생성 diff0·production build도 통과했고 오류/NO_COLOR/Three 경고가 있었다. 제작 초기에 sandbox native Blender 초기화·오프라인 cache 설치가 실패해 허용된 native 실행/잠긴 패키지 정상 재설치 뒤 실제 재실행했다. 실패를 통과로 세지 않았다.
 
 1. **A-02 외형 미달**: 여성 목/진동 둘레·의상 경계의 거친 형태, 손목/뒤 목 연결, 남성 골반 쉘과 어깨 관절 표현, 참조 대비 재질/실루엣을 더 정제해야 한다. 실제 렌더와 웹 화면을 확인했으며 참조 품질 충족이라고 기록하지 않는다.

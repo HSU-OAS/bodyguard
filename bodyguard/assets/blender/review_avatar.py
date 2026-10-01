@@ -102,6 +102,25 @@ def clothing_clearance(body, clothes):
         )
 
 
+def topology(mesh):
+    bm = bmesh.new()
+    bm.from_mesh(mesh)
+    invalid = sum(not e.is_manifold for e in bm.edges)
+    unseen = set(bm.verts)
+    components = 0
+    while unseen:
+        components += 1
+        stack = [unseen.pop()]
+        while stack:
+            for edge in stack.pop().link_edges:
+                for vertex in edge.verts:
+                    if vertex in unseen:
+                        unseen.remove(vertex)
+                        stack.append(vertex)
+    bm.free()
+    return components, invalid
+
+
 for label in ("Male", "Female"):
     obj = bpy.data.objects[f"BODYGUARD {label} sculpt WIP"]
     rig = bpy.data.objects[f"BODYGUARD {label} rig WIP"]
@@ -117,22 +136,7 @@ for label in ("Male", "Female"):
     assert 1.5 < height < 2, (
         f"{label}: expected complete metre-scale body, got {height}"
     )
-    bm = bmesh.new()
-    bm.from_mesh(obj.data)
-    invalid = sum(not e.is_manifold for e in bm.edges)
-    unseen = set(bm.verts)
-    components = 0
-    while unseen:
-        components += 1
-        stack = [unseen.pop()]
-        while stack:
-            vertex = stack.pop()
-            for edge in vertex.link_edges:
-                other = edge.other_vert(vertex)
-                if other in unseen:
-                    unseen.remove(other)
-                    stack.append(other)
-    bm.free()
+    components, invalid = topology(obj.data)
     assert invalid == 0, f"{label}: {invalid} non-manifold edges"
     assert components == 1, (
         f"{label}: head/body must be joined, got {components} components"
@@ -194,6 +198,20 @@ for label in ("Male", "Female"):
             assert any(
                 m.type == "ARMATURE" and m.object == rig for m in surface.modifiers
             )
+            if "draft" in surface.name:
+                components, invalid = topology(surface.data)
+                checks.append(
+                    {
+                        "pose": "neutral",
+                        "surface": surface.name,
+                        "components": components,
+                        "non_manifold": invalid,
+                    }
+                )
+                if components != 1 or invalid:
+                    failures.append(
+                        f"{surface.name}: detached/open garment ({components} components, {invalid} non-manifold)"
+                    )
         clothing_clearance(obj, [o for o in extra if "draft" in o.name])
 
 scene.render.engine = "CYCLES" if candidate else "BLENDER_EEVEE"
