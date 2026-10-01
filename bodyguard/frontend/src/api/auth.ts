@@ -1,5 +1,12 @@
 // FR-U-02/03, NFR-08: same-origin HttpOnly session; no credential persistence.
-import type { ChallengeOut, CredentialsWritable, UserOut, Verification } from './generated'
+import type {
+  ChallengeOut,
+  CredentialsWritable,
+  EmailInput,
+  ResetInput,
+  UserOut,
+  Verification,
+} from './generated'
 
 export class ApiError extends Error {
   constructor(
@@ -10,7 +17,18 @@ export class ApiError extends Error {
   }
 }
 
-async function request(path: string, signal: AbortSignal, body?: unknown): Promise<unknown> {
+// FR-U-02/03: match the API's Unicode code-point length, not HTML's UTF-16 units.
+export function validPassword(value: string): boolean {
+  const length = Array.from(value).length
+  return length >= 15 && length <= 128
+}
+
+async function request(
+  path: string,
+  signal: AbortSignal,
+  body?: unknown,
+  expected?: number,
+): Promise<unknown> {
   let headers: HeadersInit | undefined
   if (body !== undefined || path === '/auth/logout') {
     const csrf = await request('/auth/csrf', signal)
@@ -36,6 +54,7 @@ async function request(path: string, signal: AbortSignal, body?: unknown): Promi
     const delay = Number(response.headers.get('Retry-After'))
     throw new ApiError(response.status, Number.isFinite(delay) ? Math.max(0, delay) : 0)
   }
+  if (expected !== undefined && response.status !== expected) throw new ApiError(503)
   return response.status === 204 || path === '/auth/resend' ? null : response.json()
 }
 
@@ -92,6 +111,15 @@ export async function resend(challenge_id: string, signal: AbortSignal): Promise
 
 export async function logout(signal: AbortSignal): Promise<void> {
   await request('/auth/logout', signal)
+}
+
+// FR-U-03: request acceptance is not mail delivery; exact reset acknowledgement required.
+export async function forgot(body: EmailInput, signal: AbortSignal): Promise<void> {
+  await request('/auth/password/forgot', signal, body, 202)
+}
+
+export async function resetPassword(body: ResetInput, signal: AbortSignal): Promise<void> {
+  await request('/auth/password/reset', signal, body, 204)
 }
 
 export function errorMessage(error: unknown, verification = false): string {
