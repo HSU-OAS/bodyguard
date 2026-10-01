@@ -1,5 +1,7 @@
 # 출시 아바타 제작 계약 — 1단계
 
+[A39b 목 재구성/실제 재검수](../assets/blender/review/candidate-a39b/README.md)는 원본/GLB 각각118개·Chrome3개를 통과했지만 실제 목 기울임/뒤 목 외형 결함이 남아 채택하지 않았다. 개발 기본 모델 A37·외형 P2·아래 제작/완료/승인 계약은 그대로이며 이전 A39 GLB 실패 원본과 증거도 보존했다.
+
 별도 A38 국소 표면 정제·원본/GLB 각각118개·Chrome3개와 동일 조건 A37 비교를 실제 실행했다. [원본·미리보기·실패/미실행](../assets/blender/review/candidate-a38/README.md). 국소 수치는 개선됐지만 뒤 목·전완/최종 외형은 미달이라 A38은 채택하지 않았다. **개발 기본 모델 A37/외형 P2와 아래 제작 계약·승인·완료 기준은 그대로다.**
 
 상태: 2026-10-01 S2.4 진행 중. **현재 A37 작업 원본/웹 후보는 승인된 출시 아바타가 아니다.** CEO의 무의상 백색 중성 마네킹 변경을 별도 후보에 반영하고 신체 좌표/가중치·각163bones 보존, 원본/여덟 가중치 왕복 각각118개·121행, 실제 개발 기본 연결 Chrome3개를 검증했다. 전체 외형 P2는 남아 있다. [상세 Story](stories/stage2-avatar-candidate.md)·[현재 검수/실제 미리보기](../assets/blender/review/candidate-a37/README.md)·[이전 A27](../assets/blender/review/web-eight-weight/README.md)·[네 가중치 실패](../assets/blender/review/web-candidate/README.md)를 구분한다. 아래 초기 제작 기록과 기존 원본/GLB/증거는 보존했다. 실제 운동 예시·사람 추적·노트북 웹캠 통합 성능은 미검증이며 [출시 계획](release-plan.md)의 2단계 전에 검증한다.
