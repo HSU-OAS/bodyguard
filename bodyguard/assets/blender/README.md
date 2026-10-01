@@ -1,5 +1,7 @@
 # Blender 아바타 작업 원본
 
+2026-10-01 [A44b](bodyguard_avatar_candidate_a44b_rejected.blend)·[A45](bodyguard_avatar_candidate_a45_rejected.blend) 전문 목 패치 후보와 [실제 원본/GLB/Chrome·72PNG·해시·실패 기록](review/candidate-a44b-a45-rejected/README.md)을 보존했다. `replace_neck_from_artist.py`는 기존 CC0 전문 목 일부를 native 절단·가중치 전송·곡면 연결하며 전문 패치/영역 밖 좌표·skin·손·리그를 보존한다. 각118개/Chrome3개 PASS에도 목 경계 외형 P2가 남아 두 후보 미채택·개발 기본 A37 유지다. 이전 원본·GLB·증거는 삭제하지 않았다.
+
 2026-10-01 [A40b 반려 원본](bodyguard_avatar_candidate_a40b_rejected.blend)·[목 검사 보완/실제 재검수/실패 진단](review/candidate-a40b-rejected/README.md)을 보존했다. 목에도 기존 사지 skin-stretch 기준을 적용하고 실제 양성/음성 대조를 실행했다. 별도 후보 원본/GLB 각각118개·Chrome3개는 통과했으나 외형 P2는 남아 미채택이며 개발 기본 A37은 그대로다. 현재 제작 코드에는 실패 smoothing 대신 native bridge 투영 전후의 **진단**만 추가했다.
 
 2026-10-01 [A39b 새 원본](bodyguard_avatar_candidate_a39b.blend)·[실제 원본/GLB/Chrome 재검수와 이전 실패](review/candidate-a39b/README.md)를 보존했다. `rebuild_mannequin_neck.py`는 전문 A38 목 contour를 native 재구성하며 기존 영역 밖 신체·skin/손/리그와 원형 envelope를 검사한다.118개 기술 변형과 Chrome 통과에도 실제 변형 외형 결함이 남아 **미채택/개발 기본 A37 유지**다. [첫 A39 GLB 실패 원본](bodyguard_avatar_candidate_a39_rejected.blend)도 별도 보존했다.

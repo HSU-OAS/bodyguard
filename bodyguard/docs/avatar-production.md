@@ -1,5 +1,7 @@
 # 출시 아바타 제작 계약 — 1단계
 
+[전문 목 교체 A44b·A45 실제 검수/반려](../assets/blender/review/candidate-a44b-a45-rejected/README.md): 전문 패치/영역 밖 신체·skin·손·각163bones를 보존하고 각 원본/GLB118개·Chrome3개·실제72PNG를 완료했다. 목의 옷깃 같은 경계가 남아 둘 다 미채택한다. 여성 무의상/남녀 통일 재질 결정·개발 기본 A37·외형 P2·전체 완료/승인 기준은 유지한다. 다음 수정은 기존 머리와 전문 목의 경계 위치·형태에 한정해 새 후보로 검수한다.
+
 [A40b 실제 재검수/반려·목 검사 보완](../assets/blender/review/candidate-a40b-rejected/README.md)을 추가했다. 목에도 기존 사지 skin-stretch 기준을 적용하고 실제 실패 주입으로 검사 누락을 보완했다. 새 원본/GLB 각118개·Chrome3개 PASS에도 목 외형 결함은 남아 채택하지 않는다. 기존 원본·GLB·증거/개발 기본 A37·외형 P2·전체 완료/승인 계약을 유지한다.
 
 [A39b 목 재구성/실제 재검수](../assets/blender/review/candidate-a39b/README.md)는 원본/GLB 각각118개·Chrome3개를 통과했지만 실제 목 기울임/뒤 목 외형 결함이 남아 채택하지 않았다. 개발 기본 모델 A37·외형 P2·아래 제작/완료/승인 계약은 그대로이며 이전 A39 GLB 실패 원본과 증거도 보존했다.
