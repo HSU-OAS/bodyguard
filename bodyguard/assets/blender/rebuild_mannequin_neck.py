@@ -9,7 +9,7 @@ Run full source/GLB/browser/visual QA; producing a file does not approve it.
 import json
 import sys
 from bisect import bisect_left
-from math import isfinite
+from math import isfinite, pi
 from pathlib import Path
 
 import bmesh
@@ -54,6 +54,18 @@ def cut_contours(mesh, low, high):
         loops.append(loop)
     assert len(loops) == 2, "Neck repair must not cut an arm or unrelated surface"
     return boundary, loops
+
+
+def band_folds(mesh, low, high):
+    # Artist geometry diagnosis only, not a clinical or whole-avatar approval.
+    mesh.normal_update()
+    return sum(
+        e.is_manifold
+        and e.calc_length() > 0.001
+        and all(low - 1e-6 < v.co.z < high + 1e-6 for v in e.verts)
+        and e.calc_face_angle() > pi / 2
+        for e in mesh.edges
+    )
 
 
 for label in ("Male", "Female"):
@@ -165,8 +177,10 @@ for label in ("Male", "Female"):
         ids = before.get(tuple(v.co))
         v[original] = ids.pop() if ids else 0
     bm.verts.index_update()
-    # Native retopology conformance: only new bridge points follow the artist
-    # surface. Never clamp coordinates or relax the authored-envelope guard.
+    folds_before_conformance = band_folds(bm, low, high)
+    print("NATIVE BRIDGE FOLDS BEFORE CONFORMANCE", label, folds_before_conformance)
+    # Only new points follow the professional surface. This is a candidate,
+    # not an approved solution for the diagnosed native bridge folds.
     generated = [v.index for v in bm.verts if not v[original]]
     bm.to_mesh(body.data)
     bm.free()
@@ -177,7 +191,7 @@ for label in ("Male", "Female"):
     mask = body.vertex_groups.new(name="New neck surface conformance")
     mask_name = mask.name
     mask.add(generated, 1.0, "REPLACE")
-    wrap = body.modifiers.new("Conform new neck to authored anatomy", "SHRINKWRAP")
+    wrap = body.modifiers.new("Conform new neck to authored surface", "SHRINKWRAP")
     wrap.target = reference
     wrap.vertex_group = mask_name
     wrap.wrap_method = "NEAREST_SURFACEPOINT"
@@ -192,6 +206,8 @@ for label in ("Male", "Female"):
     original = bm.verts.layers.int.get("Original neck repair vertex")
     deform = bm.verts.layers.deform.active
     assert original is not None and deform is not None
+    folds_after_conformance = band_folds(bm, low, high)
+    print("NATIVE BRIDGE FOLDS AFTER CONFORMANCE", label, folds_after_conformance)
     remap = {v[original]: v.index for v in bm.verts if v[original]}
     assert protected <= remap.keys(), "Neck repair removed authored hand vertices"
     missing = retained.keys() - remap.keys()
@@ -240,6 +256,10 @@ for label in ("Male", "Female"):
             "source_contour_edges": source_contour_counts,
             "native_surface_bridge_cuts": 12,
             "native_surface_bridge_smoothness": 1.0,
+            "bridge_band_long_folds_before_after_conformance": [
+                folds_before_conformance,
+                folds_after_conformance,
+            ],
             "new_bridge_points_conformed_to_authored_surface": len(generated),
             "removed_band_vertices": len(missing),
             "original_to_candidate_envelope_m": old_to_new,

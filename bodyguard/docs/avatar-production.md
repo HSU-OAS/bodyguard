@@ -1,5 +1,7 @@
 # 출시 아바타 제작 계약 — 1단계
 
+[A40b 실제 재검수/반려·목 검사 보완](../assets/blender/review/candidate-a40b-rejected/README.md)을 추가했다. 목에도 기존 사지 skin-stretch 기준을 적용하고 실제 실패 주입으로 검사 누락을 보완했다. 새 원본/GLB 각118개·Chrome3개 PASS에도 목 외형 결함은 남아 채택하지 않는다. 기존 원본·GLB·증거/개발 기본 A37·외형 P2·전체 완료/승인 계약을 유지한다.
+
 [A39b 목 재구성/실제 재검수](../assets/blender/review/candidate-a39b/README.md)는 원본/GLB 각각118개·Chrome3개를 통과했지만 실제 목 기울임/뒤 목 외형 결함이 남아 채택하지 않았다. 개발 기본 모델 A37·외형 P2·아래 제작/완료/승인 계약은 그대로이며 이전 A39 GLB 실패 원본과 증거도 보존했다.
 
 별도 A38 국소 표면 정제·원본/GLB 각각118개·Chrome3개와 동일 조건 A37 비교를 실제 실행했다. [원본·미리보기·실패/미실행](../assets/blender/review/candidate-a38/README.md). 국소 수치는 개선됐지만 뒤 목·전완/최종 외형은 미달이라 A38은 채택하지 않았다. **개발 기본 모델 A37/외형 P2와 아래 제작 계약·승인·완료 기준은 그대로다.**

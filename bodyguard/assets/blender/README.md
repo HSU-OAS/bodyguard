@@ -1,5 +1,7 @@
 # Blender 아바타 작업 원본
 
+2026-10-01 [A40b 반려 원본](bodyguard_avatar_candidate_a40b_rejected.blend)·[목 검사 보완/실제 재검수/실패 진단](review/candidate-a40b-rejected/README.md)을 보존했다. 목에도 기존 사지 skin-stretch 기준을 적용하고 실제 양성/음성 대조를 실행했다. 별도 후보 원본/GLB 각각118개·Chrome3개는 통과했으나 외형 P2는 남아 미채택이며 개발 기본 A37은 그대로다. 현재 제작 코드에는 실패 smoothing 대신 native bridge 투영 전후의 **진단**만 추가했다.
+
 2026-10-01 [A39b 새 원본](bodyguard_avatar_candidate_a39b.blend)·[실제 원본/GLB/Chrome 재검수와 이전 실패](review/candidate-a39b/README.md)를 보존했다. `rebuild_mannequin_neck.py`는 전문 A38 목 contour를 native 재구성하며 기존 영역 밖 신체·skin/손/리그와 원형 envelope를 검사한다.118개 기술 변형과 Chrome 통과에도 실제 변형 외형 결함이 남아 **미채택/개발 기본 A37 유지**다. [첫 A39 GLB 실패 원본](bodyguard_avatar_candidate_a39_rejected.blend)도 별도 보존했다.
 
 2026-10-01 A38 [별도 편집 원본](bodyguard_avatar_candidate_a38.blend)·[손목/뒤 목 실제 비교와 전체 재검수](review/candidate-a38/README.md)를 보존했다. `refine_mannequin_joins.py`는 전문 A37의 국소 표면만 native 정제하고, `diagnose_mannequin_joins.py`는 같은 원본 edge/길이 분류를 고정해 비교한다. 기존 파일 덮어쓰기·인체 재생성·리그/가중치 변경을 하지 않는다. 전체 기술 변형과 Chrome은 통과했지만 목표 외형은 미달이라 **A38은 채택하지 않았고 기본 개발 모델은 A37 그대로**다.

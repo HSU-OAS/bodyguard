@@ -120,6 +120,25 @@ def topology(mesh):
     return components, invalid
 
 
+def rest_edges(body):
+    # FR-A-03: the same original >1mm edge set for neck and articulation stress.
+    rest = [v.co.copy() for v in body.data.vertices]
+    return [
+        (a, b, length)
+        for edge in body.data.edges
+        for a, b in [edge.vertices]
+        if (length := (rest[a] - rest[b]).length) > 0.001
+    ]
+
+
+def skin_stretch(body, edges):
+    mesh = body.evaluated_get(bpy.context.evaluated_depsgraph_get()).data
+    assert all(isfinite(c) for v in mesh.vertices for c in v.co)
+    return max(
+        (mesh.vertices[a].co - mesh.vertices[b].co).length / length for a, b, length in edges
+    )
+
+
 if mannequin:
     # FR-A-01~04 / CEO 2026-10-01: no clothing; shared physical finish after GLB too.
     assert candidate, "Unified mannequin QA requires the complete candidate harness"
@@ -323,6 +342,7 @@ for label in ("Male", "Female"):
     camera.rotation_euler = (
         (Vector((x, 0, z)) - camera.location).to_track_quat("-Z", "Y").to_euler()
     )
+    edges = rest_edges(obj) if candidate else None
     for side, sign in (("left", 1), ("right", -1)):
         current_pose = f"{label}/neck/{side}"
         for name, angle in (("neck01", 4), ("neck02", 5), ("neck03", 5), ("head", 6)):
@@ -346,14 +366,16 @@ for label in ("Male", "Female"):
             "axis",
             tuple(round(v, 3) for v in delta.axis),
         )
-        checks.append(
-            {
-                "pose": current_pose,
-                "head_rotation_degrees": degrees(delta.angle),
-                "axis_y": delta.axis.y,
-            }
-        )
+        neck_check = {
+            "pose": current_pose,
+            "head_rotation_degrees": degrees(delta.angle),
+            "axis_y": delta.axis.y,
+        }
         if candidate:
+            maximum = skin_stretch(obj, edges)
+            neck_check["edge_ratio_max"] = maximum
+            if maximum >= 3:
+                failures.append(f"{current_pose}: severe local skin stretch {maximum:.3f}")
             clothing_clearance(
                 obj,
                 [
@@ -364,6 +386,7 @@ for label in ("Male", "Female"):
                     and "draft" in o.name
                 ],
             )
+        checks.append(neck_check)
         render(f"faceless-neck-{label.lower()}-{side}.png")
     for pb in rig.pose.bones:
         pb.rotation_quaternion = Quaternion()
@@ -377,13 +400,7 @@ if candidate:
     for label in ("Male", "Female"):
         body = bpy.data.objects[f"BODYGUARD {label} sculpt WIP"]
         rig = bpy.data.objects[f"BODYGUARD {label} rig WIP"]
-        rest = [v.co.copy() for v in body.data.vertices]
-        edges = [
-            (a, b, (rest[a] - rest[b]).length)
-            for edge in body.data.edges
-            for a, b in [edge.vertices]
-            if (rest[a] - rest[b]).length > 0.001
-        ]
+        edges = rest_edges(body)
         others = [
             o
             for o in scene.objects
@@ -426,12 +443,7 @@ if candidate:
                 sign = -1 if side == "R" and axis[1] else 1
                 bone.rotation_quaternion = Quaternion(local_axis, radians(angle * sign))
                 bpy.context.view_layer.update()
-                mesh = body.evaluated_get(bpy.context.evaluated_depsgraph_get()).data
-                assert all(isfinite(c) for v in mesh.vertices for c in v.co)
-                maximum = max(
-                    (mesh.vertices[a].co - mesh.vertices[b].co).length / length
-                    for a, b, length in edges
-                )
+                maximum = skin_stretch(body, edges)
                 print(
                     "ARTICULATION QC",
                     label,
