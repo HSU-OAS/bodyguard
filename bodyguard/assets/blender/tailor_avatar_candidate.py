@@ -83,7 +83,9 @@ def garment(body, name, fields, material):
     wrap.target = body
     wrap.wrap_method = "NEAREST_SURFACEPOINT"
     wrap.wrap_mode = "ABOVE_SURFACE"
-    wrap.offset = 0.006
+    # A-02: two garments on the same 6mm surface flicker in their waist overlap.
+    # Keep the shorts' validated ease; place the top on a separate outer layer.
+    wrap.offset = 0.008 if "tank" in name else 0.006
     bpy.ops.object.modifier_apply(modifier=wrap.name)
     edge = obj.modifiers.new("Thin tailored textile edge", "SOLIDIFY")
     edge.thickness = 0.0008
@@ -120,6 +122,7 @@ for label in ("Male", "Female"):
     active(body)
     mask = body.vertex_groups.new(name="Artist seam-only finish")
     mask_name = mask.name
+    untouched = {}
     for vertex in body.data.vertices:
         p = vertex.co / height
         neck = exp(-((p.x / 0.052) ** 2)) * max(0, 1 - abs(p.z - 0.862) / 0.04)
@@ -139,13 +142,23 @@ for label in ("Male", "Female"):
         weight = max(neck, wrist, pelvis)
         if weight:
             mask.add([vertex.index], weight, "REPLACE")
-    finish = body.modifiers.new("Continuous authored seam surface", "SMOOTH")
+        else:
+            untouched[vertex.index] = vertex.co.copy()
+    # Global volume correction moved unselected vertices in the rejected A30
+    # attempt. Use native edge-length-weighted local smoothing, never restore
+    # unrelated vertices afterwards just to hide that failed boundary check.
+    finish = body.modifiers.new("Length-aware artist seam surface", "CORRECTIVE_SMOOTH")
     finish.vertex_group = mask_name
-    finish.factor = 0.5
-    finish.iterations = 48
+    finish.factor = 0.35
+    finish.iterations = 12
+    finish.smooth_type = "LENGTH_WEIGHTED"
+    finish.use_only_smooth = True
     bpy.ops.object.modifier_move_up(modifier=finish.name)
     bpy.ops.object.modifier_apply(modifier=finish.name)
     body.vertex_groups.remove(body.vertex_groups[mask_name])
+    assert all(
+        (body.data.vertices[i].co - p).length < 1e-6 for i, p in untouched.items()
+    ), "Local seam polish changed an unrelated part of the artist surface"
     assert before == [
         tuple((g.group, g.weight) for g in v.groups) for v in body.data.vertices
     ], "Surface polish must preserve every original skin weight and vertex"
