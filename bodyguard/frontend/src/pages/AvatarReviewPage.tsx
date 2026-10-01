@@ -16,8 +16,8 @@ import { cloneEightWeightPair } from '../avatar/eightWeightSkin'
 
 // FR-A-02~04: artist-authored GLBs; no primitive human, camera, user data or coaching clip.
 const models = {
-  male: new URL('../avatar/models/bodyguard-male-candidate.glb', import.meta.url).href,
-  female: new URL('../avatar/models/bodyguard-female-candidate.glb', import.meta.url).href,
+  male: new URL('../avatar/models/bodyguard-male-candidate-a37.glb', import.meta.url).href,
+  female: new URL('../avatar/models/bodyguard-female-candidate-a37.glb', import.meta.url).href,
 }
 
 type Report = {

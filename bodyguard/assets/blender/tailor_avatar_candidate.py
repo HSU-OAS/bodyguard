@@ -57,9 +57,7 @@ def rebuild_wrist_seams(body, wrist_planes):
         v[original] = v.index + 1
     for center, direction in wrist_planes:
         for offset in (-0.08, 0.009):
-            faces = [
-                f for f in bm.faces if any(wrist_vertex(v, center) for v in f.verts)
-            ]
+            faces = [f for f in bm.faces if any(wrist_vertex(v, center) for v in f.verts)]
             edges = {e for f in faces for e in f.edges}
             vertices = {v for f in faces for v in f.verts}
             before = set(bm.verts)
@@ -76,20 +74,14 @@ def rebuild_wrist_seams(body, wrist_planes):
             f
             for f in bm.faces
             if all(wrist_vertex(v, center) for v in f.verts)
-            and -0.08 + 1e-7
-            < (f.calc_center_median() - center).dot(direction)
-            < 0.009 - 1e-7
+            and -0.08 + 1e-7 < (f.calc_center_median() - center).dot(direction) < 0.009 - 1e-7
         ]
         assert faces, "No joined wrist band selected"
         bmesh.ops.delete(bm, geom=faces, context="FACES")
-        bmesh.ops.delete(
-            bm, geom=[v for v in bm.verts if not v.link_faces], context="VERTS"
-        )
+        bmesh.ops.delete(bm, geom=[v for v in bm.verts if not v.link_faces], context="VERTS")
         boundary = {e for e in bm.edges if e.is_boundary}
         assert boundary and all(
-            sum(e.is_boundary for e in v.link_edges) == 2
-            for e in boundary
-            for v in e.verts
+            sum(e.is_boundary for e in v.link_edges) == 2 for e in boundary for v in e.verts
         ), "Wrist cut did not produce simple closed contours"
         loops = []
         remaining = set(boundary)
@@ -110,20 +102,10 @@ def rebuild_wrist_seams(body, wrist_planes):
             [
                 {
                     "edges": len(loop),
-                    "radius_max": max(
-                        (v.co - center).length for e in loop for v in e.verts
-                    ),
+                    "radius_max": max((v.co - center).length for e in loop for v in e.verts),
                     "plane_range": (
-                        min(
-                            (v.co - center).dot(direction)
-                            for e in loop
-                            for v in e.verts
-                        ),
-                        max(
-                            (v.co - center).dot(direction)
-                            for e in loop
-                            for v in e.verts
-                        ),
+                        min((v.co - center).dot(direction) for e in loop for v in e.verts),
+                        max((v.co - center).dot(direction) for e in loop for v in e.verts),
                     ),
                 }
                 for loop in loops
@@ -133,32 +115,31 @@ def rebuild_wrist_seams(body, wrist_planes):
         assert all((v.co - center).length < 0.13 for e in boundary for v in e.verts), (
             "Cut escaped the wrist region"
         )
-        result = bmesh.ops.bridge_loops(bm, edges=list(boundary))
-        assert result["faces"] and all(e.is_manifold for e in bm.edges)
-        # Native subdivision may invalidate cached BMVert handles. Identify
-        # new points by their unchanged coordinates, not stale Python handles.
+        # Native surface interpolation follows the neighbouring artist faces;
+        # do not own a linear loft/subdivision/smoothing pipeline for this band.
         before = {tuple(v.co): v[original] for v in bm.verts}
-        strip_edges = {e for f in result["faces"] for e in f.edges}
-        bmesh.ops.subdivide_edges(
-            bm, edges=list(strip_edges), cuts=3, use_grid_fill=True
+        for element in list(bm.verts) + list(bm.edges) + list(bm.faces):
+            element.select = False
+        for edge in boundary:
+            edge.select_set(True)
+        bm.to_mesh(body.data)
+        bm.free()
+        active(body)
+        bpy.context.scene.tool_settings.mesh_select_mode = (False, True, False)
+        bpy.ops.object.mode_set(mode="EDIT")
+        bpy.ops.mesh.bridge_edge_loops(
+            type="SINGLE", number_cuts=6, interpolation="SURFACE", smoothness=1.0
         )
-        added = []
-        for v in bm.verts:
-            point = tuple(v.co)
-            if point not in before:
-                added.append(v)
-            v[original] = before.get(point, 0)
-        for _ in range(6):
-            bmesh.ops.smooth_vert(
-                bm,
-                verts=list(added),
-                factor=0.2,
-                use_axis_x=True,
-                use_axis_y=True,
-                use_axis_z=True,
-            )
-        assert all(e.is_manifold for e in bm.edges), (
-            "Native wrist finish opened the mesh"
+        bpy.ops.object.mode_set(mode="OBJECT")
+        bm = bmesh.new()
+        bm.from_mesh(body.data)
+        original = bm.verts.layers.int.get("Original artist vertex")
+        deform = bm.verts.layers.deform.active
+        assert original is not None and deform is not None
+        for vertex in bm.verts:
+            vertex[original] = before.get(tuple(vertex.co), 0)
+        assert all(edge.is_manifold for edge in bm.edges), (
+            "Native surface bridge opened the professional mesh"
         )
         print("NATIVE WRIST BRIDGE", body.name, [len(x) for x in loops])
     bm.verts.index_update()
@@ -194,8 +175,7 @@ def rebuild_wrist_seams(body, wrist_planes):
         if v[original]
     ), "Wrist repair changed retained professional coordinates/weights"
     assert all(
-        isfinite(total := sum(v[deform].values())) and abs(total - 1) < 0.01
-        for v in bm.verts
+        isfinite(total := sum(v[deform].values())) and abs(total - 1) < 0.01 for v in bm.verts
     ), "Native wrist interpolation lost normalized skin weights"
     body["bodyguard_distal_hand_vertices"] = [remap[i] for i in sorted(distal)]
     bm.verts.layers.int.remove(original)
@@ -235,9 +215,7 @@ def garment(body, name, fields, material):
         for vertex in bm.verts:
             vertex.co = vertex[original]
     bm.verts.layers.float_vector.remove(original)
-    bmesh.ops.delete(
-        bm, geom=[v for v in bm.verts if not v.link_faces], context="VERTS"
-    )
+    bmesh.ops.delete(bm, geom=[v for v in bm.verts if not v.link_faces], context="VERTS")
     assert len(bm.faces) > 100, "Empty/fragmented tailored garment"
     remaining = set(bm.verts)
     stack = [remaining.pop()]
@@ -249,13 +227,13 @@ def garment(body, name, fields, material):
                     stack.append(vertex)
     assert not remaining, "Detached arm/other surface remained in the garment"
     boundary = [v for v in bm.verts if v.is_boundary]
-    assert boundary and all(
-        sum(e.is_boundary for e in v.link_edges) == 2 for v in boundary
-    ), "Non-simple contour; do not hide malformed cuts"
+    assert boundary and all(sum(e.is_boundary for e in v.link_edges) == 2 for v in boundary), (
+        "Non-simple contour; do not hide malformed cuts"
+    )
     deform = bm.verts.layers.deform.active
-    assert deform is not None and all(
-        abs(sum(v[deform].values()) - 1) < 0.01 for v in bm.verts
-    ), "Native cut lost normalized artist weights"
+    assert deform is not None and all(abs(sum(v[deform].values()) - 1) < 0.01 for v in bm.verts), (
+        "Native cut lost normalized artist weights"
+    )
     bmesh.ops.recalc_face_normals(bm, faces=list(bm.faces))
     bm.to_mesh(obj.data)
     bm.free()
@@ -273,10 +251,20 @@ def garment(body, name, fields, material):
     # Keep the shorts' validated ease; place the top on a separate outer layer.
     wrap.offset = 0.008 if "tank" in name else 0.006
     bpy.ops.object.modifier_apply(modifier=wrap.name)
+    finish = obj.modifiers.new("Local cloth fairing - QA required", "SMOOTH")
+    finish.factor = 0.4
+    finish.iterations = 6
+    bpy.ops.object.modifier_apply(modifier=finish.name)
     edge = obj.modifiers.new("Thin tailored textile edge", "SOLIDIFY")
     edge.thickness = 0.0008
     edge.offset = -1
     bpy.ops.object.modifier_apply(modifier=edge.name)
+    rim = obj.modifiers.new("Soft tailored rim - QA required", "BEVEL")
+    rim.limit_method = "ANGLE"
+    rim.angle_limit = 0.6
+    rim.width = 0.0003
+    rim.segments = 2
+    bpy.ops.object.modifier_apply(modifier=rim.name)
     assert all(
         isfinite(total := sum(g.weight for g in v.groups)) and abs(total - 1) < 0.01
         for v in obj.data.vertices
@@ -301,9 +289,7 @@ for label in ("Male", "Female"):
         wrist = rig.data.bones[f"wrist.{side}"]
         to_body = body.matrix_world.inverted() @ rig.matrix_world
         center = to_body @ wrist.head_local
-        direction = (
-            to_body.to_3x3() @ (wrist.tail_local - wrist.head_local)
-        ).normalized()
+        direction = (to_body.to_3x3() @ (wrist.tail_local - wrist.head_local)).normalized()
         wrist_planes.append((center, direction))
     active(body)
     mask = body.vertex_groups.new(name="Artist seam-only finish")
@@ -334,41 +320,38 @@ for label in ("Male", "Female"):
     bpy.ops.object.modifier_move_up(modifier=finish.name)
     bpy.ops.object.modifier_apply(modifier=finish.name)
     body.vertex_groups.remove(body.vertex_groups[mask_name])
-    assert all(
-        (body.data.vertices[i].co - p).length < 1e-6 for i, p in untouched.items()
-    ), "Local seam polish changed an unrelated part of the artist surface"
-    assert before == [
-        tuple((g.group, g.weight) for g in v.groups) for v in body.data.vertices
-    ], "Surface polish must preserve every original skin weight and vertex"
+    assert all((body.data.vertices[i].co - p).length < 1e-6 for i, p in untouched.items()), (
+        "Local seam polish changed an unrelated part of the artist surface"
+    )
+    assert before == [tuple((g.group, g.weight) for g in v.groups) for v in body.data.vertices], (
+        "Surface polish must preserve every original skin weight and vertex"
+    )
     # The minimal garment-only comparison retained the old wrist crease. Keep
     # native local retopology, with original hand/outside vertices guarded.
     rebuild_wrist_seams(body, wrist_planes)
     # Remove only temporary candidate garments, not the original .blend file.
     old = [
-        o
-        for o in scene.objects
-        if o.name.startswith(f"BODYGUARD {label}") and "draft" in o.name
+        o for o in scene.objects if o.name.startswith(f"BODYGUARD {label}") and "draft" in o.name
     ]
     material = old[0].data.materials[0]
     for obj in old:
         bpy.data.objects.remove(obj, do_unlink=True)
+    # Flat circular shoulder appliques looked like stickers, not the reference
+    # anatomy. Keep the professional shoulder surface and elbow/knee contours.
+    for obj in list(scene.objects):
+        if obj.name.startswith(f"BODYGUARD {label} joint edge upperarm01."):
+            bpy.data.objects.remove(obj, do_unlink=True)
     if label == "Female":
         arm_groups = {
             g.index
             for g in body.vertex_groups
-            if g.name.startswith(
-                ("upperarm", "lowerarm", "wrist", "finger", "metacarpal")
-            )
+            if g.name.startswith(("upperarm", "lowerarm", "wrist", "finger", "metacarpal"))
         }
 
         # All dimensions are artist pattern coordinates, NOT human/clinical thresholds.
         def neck(v, deform, height=height):
             x, y, z = v.co / height
-            return (
-                0.830
-                - (0.045 - 0.015 * tanh(y / 0.012)) * max(0, 1 - (x / 0.079) ** 2)
-                - z
-            )
+            return 0.830 - (0.045 - 0.015 * tanh(y / 0.012)) * max(0, 1 - (x / 0.079) ** 2) - z
 
         def armhole(v, deform, height=height):
             x, _, z = v.co / height
@@ -382,9 +365,7 @@ for label in ("Male", "Female"):
                 lambda v, d, height=height: v.co.z / height - 0.555,
                 neck,
                 armhole,
-                lambda v, d, groups=arm_groups: (
-                    0.15 - sum(v[d].get(i, 0) for i in groups)
-                ),
+                lambda v, d, groups=arm_groups: 0.15 - sum(v[d].get(i, 0) for i in groups),
             ],
             material,
         )
@@ -397,22 +378,16 @@ for label in ("Male", "Female"):
                 lambda v, d, height=height: 0.15 - abs(v.co.x) / height,
                 # Arms hang beside the pelvis. XYZ bounds alone leave detached
                 # arm patches that masquerade as wrist fins in the shorts.
-                lambda v, d, groups=arm_groups: (
-                    0.15 - sum(v[d].get(i, 0) for i in groups)
-                ),
+                lambda v, d, groups=arm_groups: 0.15 - sum(v[d].get(i, 0) for i in groups),
             ],
             material,
         )
 
-scene["bodyguard_stage"] = (
-    "S2.4 tailored candidate; ALL QA pending; NOT release approved"
-)
+scene["bodyguard_stage"] = "S2.4 tailored candidate; ALL QA pending; NOT release approved"
 # Studio presentation, not a change to surface/clinical acceptance criteria.
 key = bpy.data.objects["BODYGUARD review key"]
 key.location = (-3, -2, 3.5)
-key.rotation_euler = (
-    (Vector((0, 0, 1)) - key.location).to_track_quat("-Z", "Y").to_euler()
-)
+key.rotation_euler = (Vector((0, 0, 1)) - key.location).to_track_quat("-Z", "Y").to_euler()
 key.data.size = 1.5
 bpy.data.objects["BODYGUARD review fill"].data.energy = 60
 bpy.context.preferences.filepaths.save_version = 0
@@ -435,17 +410,13 @@ for name, label, location, target, scale in (
             and obj.name.startswith("BODYGUARD ")
             and "review ground" not in obj.name
         ):
-            obj.hide_render = bool(
-                label and not obj.name.startswith(f"BODYGUARD {label}")
-            )
+            obj.hide_render = bool(label and not obj.name.startswith(f"BODYGUARD {label}"))
     if label:
         x = bpy.data.objects[f"BODYGUARD {label} sculpt WIP"].matrix_world.translation.x
         location = (x + location[0], *location[1:])
         target = (x + target[0], *target[1:])
     camera.location = location
-    camera.rotation_euler = (
-        (Vector(target) - camera.location).to_track_quat("-Z", "Y").to_euler()
-    )
+    camera.rotation_euler = (Vector(target) - camera.location).to_track_quat("-Z", "Y").to_euler()
     camera.data.ortho_scale = scale
     scene.render.filepath = str(previews / f"{name}.png")
     bpy.ops.render.render(write_still=True)

@@ -1,7 +1,8 @@
 """FR-A-01~03: derive a dressed, neutral draft from the authored CC0 body/head.
 
 Blender --factory-startup --disable-autoexec -b bodyguard_avatar_studio.blend
-  --python-exit-code 1 --python make_avatar_candidate.py -- new-draft.blend review-directory mpfb-source.blend
+  --python-exit-code 1 --python make_avatar_candidate.py
+  -- new-draft.blend review-directory mpfb-source.blend
 No live scene or input file is saved. A rendered draft is not a release approval.
 """
 
@@ -46,8 +47,7 @@ def transfer_weights(source, target):
     active(target)
     bpy.ops.object.vertex_group_normalize_all(lock_active=False)
     if any(
-        not isfinite(total := sum(g.weight for g in vertex.groups))
-        or abs(total - 1) > 0.01
+        not isfinite(total := sum(g.weight for g in vertex.groups)) or abs(total - 1) > 0.01
         for vertex in target.data.vertices
     ):
         raise ValueError(f"Incomplete final-surface weights: {target.name}")
@@ -78,9 +78,7 @@ def authored_hands(body, donor, rig, height):
         inverse = body.matrix_world.inverted()
         center = inverse @ (rig.matrix_world @ wrist.head_local)
         direction = (
-            inverse.to_3x3()
-            @ rig.matrix_world.to_3x3()
-            @ (wrist.tail_local - wrist.head_local)
+            inverse.to_3x3() @ rig.matrix_world.to_3x3() @ (wrist.tail_local - wrist.head_local)
         ).normalized()
         planes.append((sign, center, direction))
         hand = donor.copy()
@@ -108,9 +106,7 @@ def authored_hands(body, donor, rig, height):
             plane_no=direction,
             clear_inner=True,
         )
-        bmesh.ops.holes_fill(
-            bm, edges=[edge for edge in bm.edges if edge.is_boundary], sides=0
-        )
+        bmesh.ops.holes_fill(bm, edges=[edge for edge in bm.edges if edge.is_boundary], sides=0)
         bmesh.ops.recalc_face_normals(bm, faces=list(bm.faces))
         bm.to_mesh(hand.data)
         bm.free()
@@ -133,9 +129,7 @@ def authored_hands(body, donor, rig, height):
             plane_no=direction,
             clear_outer=True,
         )
-        bmesh.ops.holes_fill(
-            bm, edges=[edge for edge in bm.edges if edge.is_boundary], sides=0
-        )
+        bmesh.ops.holes_fill(bm, edges=[edge for edge in bm.edges if edge.is_boundary], sides=0)
         bmesh.ops.recalc_face_normals(bm, faces=list(bm.faces))
         bm.to_mesh(body.data)
         bm.free()
@@ -178,9 +172,7 @@ def fit_authored_rig(body, old_rig, label):
     height = max(v.co.z for v in body.data.vertices)
     bpy.context.view_layer.update()
     evaluated = donor.evaluated_get(bpy.context.evaluated_depsgraph_get())
-    source_height = max(
-        (evaluated.matrix_world @ v.co).z for v in evaluated.data.vertices
-    )
+    source_height = max((evaluated.matrix_world @ v.co).z for v in evaluated.data.vertices)
     rig.location = body.location
     rig.scale *= height / source_height
     bpy.context.view_layer.update()
@@ -208,9 +200,7 @@ def fit_authored_rig(body, old_rig, label):
         bone = rig.pose.bones[name]
         direction = end - start
         rotation = bone.matrix.to_quaternion()
-        rotation = (rotation @ Vector((0, 1, 0))).rotation_difference(
-            direction
-        ) @ rotation
+        rotation = (rotation @ Vector((0, 1, 0))).rotation_difference(direction) @ rotation
         bone.matrix = (
             Matrix.Translation(start)
             @ rotation.to_matrix().to_4x4()
@@ -232,12 +222,8 @@ def fit_authored_rig(body, old_rig, label):
                 shoulder,
             )
         # These are artist-mesh rig fitting coordinates, not camera/clinical thresholds.
-        elbow_point = (
-            (0.172, -0.002, 0.645) if label == "Male" else (0.147, 0.019, 0.645)
-        )
-        wrist_point = (
-            (0.221, -0.039, 0.540) if label == "Male" else (0.203, -0.012, 0.540)
-        )
+        elbow_point = (0.172, -0.002, 0.645) if label == "Male" else (0.147, 0.019, 0.645)
+        wrist_point = (0.221, -0.039, 0.540) if label == "Male" else (0.203, -0.012, 0.540)
         elbow = Vector((sign * elbow_point[0], *elbow_point[1:])) * height / rig.scale.x
         wrist = Vector((sign * wrist_point[0], *wrist_point[1:])) * height / rig.scale.x
         # Two authored twist segments remain, with their proportions preserved.
@@ -256,12 +242,8 @@ def fit_authored_rig(body, old_rig, label):
             wrist + Vector((sign * 0.014, -0.012, -0.024)) * height / rig.scale.x,
         )
         hip = rig.pose.bones[f"upperleg01.{side}"].head.copy()
-        knee_point = (
-            (0.079, 0.004, 0.283) if label == "Male" else (0.064, -0.004, 0.284)
-        )
-        ankle_point = (
-            (0.103, 0.032, 0.053) if label == "Male" else (0.075, 0.022, 0.053)
-        )
+        knee_point = (0.079, 0.004, 0.283) if label == "Male" else (0.064, -0.004, 0.284)
+        ankle_point = (0.103, 0.032, 0.053) if label == "Male" else (0.075, 0.022, 0.053)
         knee = Vector((sign * knee_point[0], *knee_point[1:])) * height / rig.scale.x
         ankle = Vector((sign * ankle_point[0], *ankle_point[1:])) * height / rig.scale.x
         for prefix, start, end in (("upperleg", hip, knee), ("lowerleg", knee, ankle)):
@@ -324,18 +306,14 @@ def fit_authored_rig(body, old_rig, label):
     bpy.ops.object.parent_set(type="ARMATURE_AUTO")
     bpy.context.view_layer.update()
     assert (
-        max(
-            abs(binding.matrix_world[i][j] - before[i][j])
-            for i in range(4)
-            for j in range(4)
-        )
+        max(abs(binding.matrix_world[i][j] - before[i][j]) for i in range(4) for j in range(4))
         < 1e-5
     )
     active(binding)
     bpy.ops.object.vertex_group_normalize_all(lock_active=False)
-    assert all(
-        abs(sum(g.weight for g in v.groups) - 1) < 0.01 for v in binding.data.vertices
-    ), "Native core binding incomplete"
+    assert all(abs(sum(g.weight for g in v.groups) - 1) < 0.01 for v in binding.data.vertices), (
+        "Native core binding incomplete"
+    )
     transfer_weights(binding, body)
     bpy.data.objects.remove(binding, do_unlink=True)
     for bone in rig.data.bones:
@@ -395,22 +373,18 @@ def fit_authored_rig(body, old_rig, label):
             if not neighbours:
                 raise ValueError("Disconnected authored hand vertex")
             factor = 0.5 * hand_finish[index]
-            weights = {
-                group: weight * (1 - factor) for group, weight in vertex[deform].items()
-            }
+            weights = {group: weight * (1 - factor) for group, weight in vertex[deform].items()}
             for neighbour in neighbours:
                 for group, weight in neighbour[deform].items():
-                    weights[group] = weights.get(group, 0) + weight * factor / len(
-                        neighbours
-                    )
+                    weights[group] = weights.get(group, 0) + weight * factor / len(neighbours)
             updates[index] = weights
         for index, weights in updates.items():
             bm.verts[index][deform].clear()
             for group, weight in weights.items():
                 bm.verts[index][deform][group] = weight
-    assert all(
-        dict(bm.verts[index][deform]) == weights for index, weights in untouched.items()
-    ), "Hand finish changed torso weights"
+    assert all(dict(bm.verts[index][deform]) == weights for index, weights in untouched.items()), (
+        "Hand finish changed torso weights"
+    )
     bm.to_mesh(body.data)
     bm.free()
     bpy.ops.object.vertex_group_normalize_all(lock_active=False)
@@ -423,16 +397,12 @@ def fit_authored_rig(body, old_rig, label):
     for index in hand_indices:
         vertex = body.data.vertices[index]
         if any(
-            body.vertex_groups[g.group].name.startswith(
-                ("upperleg", "lowerleg", "pelvis")
-            )
+            body.vertex_groups[g.group].name.startswith(("upperleg", "lowerleg", "pelvis"))
             and g.weight > 0.01
             for g in vertex.groups
         ):
             raise ValueError(f"Wrong-limb hand weights remain: {label}")
-    skin = body.modifiers.new(
-        "Fitted authored weights - deformation QA required", "ARMATURE"
-    )
+    skin = body.modifiers.new("Fitted authored weights - deformation QA required", "ARMATURE")
     skin.object = rig
     bpy.data.objects.remove(donor, do_unlink=True)
     old_name = old_rig.name
@@ -462,17 +432,13 @@ def garment(body, name, include):
         f
         for f in bm.faces
         if not include(f.calc_center_median())
-        or sum(sum(v[deform].get(i, 0) for i in arm_groups) for v in f.verts)
-        / len(f.verts)
-        > 0.15
+        or sum(sum(v[deform].get(i, 0) for i in arm_groups) for v in f.verts) / len(f.verts) > 0.15
     ]
     bmesh.ops.delete(bm, geom=remove, context="FACES")
     # Face selection can leave pinched, self-touching hems. Remove their tiny
     # boundary bridges rather than hiding a malformed clothing surface.
     for _ in range(8):
-        pinches = [
-            v for v in bm.verts if sum(edge.is_boundary for edge in v.link_edges) > 2
-        ]
+        pinches = [v for v in bm.verts if sum(edge.is_boundary for edge in v.link_edges) > 2]
         if not pinches:
             break
         bmesh.ops.delete(bm, geom=pinches, context="VERTS")
@@ -495,12 +461,7 @@ def garment(body, name, include):
     largest = max(components, key=len)
     bmesh.ops.delete(
         bm,
-        geom=[
-            face
-            for component in components
-            if component != largest
-            for face in component
-        ],
+        geom=[face for component in components if component != largest for face in component],
         context="FACES",
     )
     boundary = [v for v in bm.verts if v.is_boundary]
@@ -508,16 +469,10 @@ def garment(body, name, include):
         # Fair the boundary loop itself; interior neighbours make cut hems jagged.
         updates = {}
         for vertex in boundary:
-            neighbours = [
-                edge.other_vert(vertex)
-                for edge in vertex.link_edges
-                if edge.is_boundary
-            ]
+            neighbours = [edge.other_vert(vertex) for edge in vertex.link_edges if edge.is_boundary]
             if len(neighbours) != 2:
                 raise ValueError(f"Non-simple garment boundary: {name}")
-            updates[vertex] = vertex.co.lerp(
-                (neighbours[0].co + neighbours[1].co) / 2, 0.45
-            )
+            updates[vertex] = vertex.co.lerp((neighbours[0].co + neighbours[1].co) / 2, 0.45)
         for vertex, point in updates.items():
             vertex.co = point
     bmesh.ops.recalc_face_normals(bm, faces=list(bm.faces))
@@ -576,9 +531,7 @@ def joint_edge(body, rig, bone_name, radius_x, radius_z):
     points = []
     for i in range(64):
         angle = tau * i / 64
-        origin = Vector(
-            (center.x + radius_x * cos(angle), -1, center.z + radius_z * sin(angle))
-        )
+        origin = Vector((center.x + radius_x * cos(angle), -1, center.z + radius_z * sin(angle)))
         point, normal, _, _ = tree.ray_cast(origin, Vector((0, 1, 0)), 2)
         if point is None:
             raise ValueError(
@@ -594,9 +547,7 @@ def joint_edge(body, rig, bone_name, radius_x, radius_z):
     for point, co in zip(spline.points, points, strict=True):
         point.co = (*co, 1)
     spline.use_cyclic_u = True
-    obj = bpy.data.objects.new(
-        f"BODYGUARD {body.name.split()[1]} joint edge {bone_name}", curve
-    )
+    obj = bpy.data.objects.new(f"BODYGUARD {body.name.split()[1]} joint edge {bone_name}", curve)
     scene.collection.objects.link(obj)
     obj.location = body.location
     active(obj)
@@ -677,9 +628,7 @@ for label in ("Male", "Female"):
             garment(
                 body,
                 "BODYGUARD Female shorts draft",
-                lambda p, height=height: (
-                    0.397 < p.z / height < 0.564 and abs(p.x) / height < 0.15
-                ),
+                lambda p, height=height: 0.397 < p.z / height < 0.564 and abs(p.x) / height < 0.15,
             )
         )
     else:
@@ -697,7 +646,8 @@ for label in ("Male", "Female"):
 
     for obj in [body, *garments]:
         obj["bodyguard_source"] = (
-            "Blender Foundation Human Base Meshes v1.4.1 CC0 body/head; MakeHuman MPFB CC0 core hands/rig; BODYGUARD authored edits"
+            "Blender Foundation Human Base Meshes v1.4.1 CC0 body/head; "
+            "MakeHuman MPFB CC0 core hands/rig; BODYGUARD authored edits"
         )
         print(
             "DRESSED DRAFT",
@@ -748,9 +698,7 @@ scene.view_settings.look = "AgX - Medium High Contrast"
 for name, location, energy in (("key", (-2, -3, 4), 550), ("fill", (3, -1, 2.8), 140)):
     light = bpy.data.objects[f"BODYGUARD review {name}"]
     light.location = location
-    light.rotation_euler = (
-        (Vector((0, 0, 1)) - light.location).to_track_quat("-Z", "Y").to_euler()
-    )
+    light.rotation_euler = (Vector((0, 0, 1)) - light.location).to_track_quat("-Z", "Y").to_euler()
     light.data.energy = energy
     light.data.size = 2.3
 floor_mat = material("BODYGUARD studio ground", (0.70, 0.70, 0.69), 0.9)
@@ -762,14 +710,11 @@ camera = scene.camera
 camera.data.type = "ORTHO"
 camera.data.ortho_scale = 2.6
 camera.location = (0, -5, 0.85)
-camera.rotation_euler = (
-    (Vector((0, 0, 0.85)) - camera.location).to_track_quat("-Z", "Y").to_euler()
-)
-scene["bodyguard_stage"] = (
-    "S2.4 dressed neutral draft; NOT release approved; no coaching motion"
-)
+camera.rotation_euler = (Vector((0, 0, 0.85)) - camera.location).to_track_quat("-Z", "Y").to_euler()
+scene["bodyguard_stage"] = "S2.4 dressed neutral draft; NOT release approved; no coaching motion"
 scene["bodyguard_clothing"] = (
-    "Authored derivatives of the existing CC0 professional body surface; no third-party clothing assets"
+    "Authored derivatives of the existing CC0 professional body surface; "
+    "no third-party clothing assets"
 )
 scene["rig_source"] = (
     "MakeHuman MPFB CC0 core hands/rig/weights; fitted and deformation-tested derivative"

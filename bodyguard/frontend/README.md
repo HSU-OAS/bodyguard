@@ -31,9 +31,9 @@ S2.3a에서 준비 중에도 취소할 수 있고 중지·재시작·서비스�
 
 `http://localhost:5173/dev/avatar`는 실제 Blender 후보 GLB의 **기술 검수 전용**이다. 남녀 선택·독립된 두 뼈대·한쪽 합성 변형 시작/정지·회전/확대·실패 재시도를 제공한다. 카메라·운동 정답·타이머·사용자 추적은 없다. 설치된 Three/R3F/drei를 재사용했고 새 3D 의존성은 없다. `SkeletonUtils.clone`으로 뼈대를 독립 복제하며, 여덟 가중치 geometry/material는 원본 캐시를 바꾸지 않는 별도 읽기 전용 복사본을 두 모델이 공유한다. 화면·CPU 위치/방향·법선·native depth 그림자가 추가 가중치를 함께 사용한다.
 
-`pnpm exec playwright test --config playwright.avatar.config.ts --reporter=list,json`은 자체 5182 개발 서버와 설치된 Chrome으로 남녀 두 모델·180 렌더 간격·503/실제 context loss 복구·이탈·카메라 0회를 검사한다. 개발 경로/뷰어/후보 GLB는 production에서 제외한다. production 계정 Chrome 회귀는 두 개발 경로가 404이고 계정 진입에서 GLB/WASM을 받지 않는지 확인한다.
+backend에서 `uv run python -m tests.run_browser avatar`로 실행한다. 자체5182 개발 서버·설치 Chrome·소유한 비청취 localhost 프록시로 외부 연결 차단(A-00), 남녀 두 모델·180 렌더 간격·503/실제 context loss 복구·이탈·카메라0회를 검사한다. 계정 API/DB/SMTP는 시작하지 않는다. 직접 Playwright 실행은 소유한 차단 프록시가 없으면 거부한다. `BODYGUARD_AVATAR_QA_DIRECTORY=<native GLB 절대 폴더>`로 기존 에셋을 덮지 않고 새 GLB를 하네스에만 공급하고 해시·추가 가중치 수를 남긴다. `PLAYWRIGHT_JSON_OUTPUT_NAME=<새 경로>`로 결과를 보존한다. 개발 경로/GLB는 production에서 제외하며 production 계정 회귀에서404·GLB/WASM 미수신을 확인한다.
 
-2026-10-01: A27 여덟 가중치 왕복 118개·실제 브라우저 기술 시험 2개와 관련 Vitest 13개(전체 118개)를 통과했다. **후보 외형 P2는 남아 있다**. [현재 검수](../assets/blender/review/web-eight-weight/README.md)와 [이전 네 가중치 실패](../assets/blender/review/web-candidate/README.md)를 구분한다. 실제 사람·목표 노트북 웹캠 코칭·최종 아바타 승인 증거가 아니다. 시험 결과는 `test-results/avatar/`·`demo/`·`account/`·`password/`로 분리해 다른 시험이 기존 증거를 정리하지 않게 했다.
+2026-10-01: 개발 검수 화면은 CEO의 무의상 백색 중성 마네킹 결정을 반영한 별도 **A37** 원본/GLB를 사용한다. 모든 신체 좌표·가중치·각163bones를 보존했고 원본/왕복 각각118개 기술 변형·121행, native38컷, 기본 연결 후 실제 Chrome3개와 Vitest133개를 실행했다. [현재 검수·해시·실제 미리보기](../assets/blender/review/candidate-a37/README.md). 기존 [A27 여덟 가중치](../assets/blender/review/web-eight-weight/README.md)와 [네 가중치 실패](../assets/blender/review/web-candidate/README.md), 원본/GLB/기록은 보존한다. **후보 전체 외형 P2는 남아 있다**. 실제 사람·목표 노트북 웹캠 코칭·최종 아바타 승인 증거가 아니다. 시험 결과는 `test-results/avatar/`·`demo/`·`account/`·`password/`로 분리해 다른 시험이 기존 증거를 정리하지 않게 했다.
 
 ## 개발용 측정 화면
 

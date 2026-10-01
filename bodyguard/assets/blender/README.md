@@ -1,5 +1,7 @@
 # Blender 아바타 작업 원본
 
+2026-10-01 CEO 변경: 남녀 모두 별도 의상 없는 백색 중성 마네킹을 목표로 한다. 여성 참조의 의상 요구만 대체했다. 새 [A37 편집 원본](bodyguard_avatar_candidate_a37.blend)·[실제 원본/GLB/웹/외형 검수](review/candidate-a37/README.md)를 추가했고 개발 검수 화면만 A37로 연결했다. 이전 A27/의상/실패 증거는 보존한다. **최종 외형 P2와 실제 코칭 검증은 남아 있다.** 아래 A27·studio 제작 기록은 역사적 상태다.
+
 2026-10-01: 기존 studio 원본과 [A27 후보](bodyguard_avatar_candidate_a27.blend)를 보존했다. 원본 118개·새 여덟 가중치 GLB 왕복 118개 기술 변형과 실제 Chrome 두 모델 검사를 통과했다. **외형은 미통과**다. [새 웹 검수](review/web-eight-weight/README.md)와 [이전 네 가중치 실패](review/web-candidate/README.md)를 구분한다. 어느 파일도 합격한 출시 아바타가 아니다.
 
 `bodyguard_avatar_studio.blend`는 **제작 중인 편집 원본**이다. 배포용 GLB나 합격한 아바타가 아니다. 기존 MPFB 시제품을 조형 베이스로 채택하지 않고, [Blender Foundation Human Base Meshes v1.4.1](https://www.blender.org/download/demo-files/)의 CC0 남녀 realistic body와 전문 제작 head 메시로 교체·조형했다. CEO의 남녀 참조 이미지는 파일 안에 패킹했다. 얼굴 요소를 제거하고 머리·목 표면을 연결했으며, MPFB core 리그·가중치를 전송했다. **아직 의상·관절 표현, 전체 관절 변형 검수, 시범 애니메이션과 웹 성능 검증은 없다.**
@@ -9,6 +11,8 @@ Blender에서 파일을 열어 `CEO references - modeling only` 컬렉션의 참
 검수 이미지: [이전 시제품](review/mpfb-rejected-front.png), [새 조형 베이스의 시작 상태](review/sculpt-base-front.png), [현재 정면](review/faceless-front.png), [3/4](review/faceless-quarter.png), 측면 [남성](review/faceless-side-male.png)·[여성](review/faceless-side-female.png), 목 기울임 [남성 좌](review/faceless-neck-male-left.png)·[우](review/faceless-neck-male-right.png), [여성 좌](review/faceless-neck-female-left.png)·[우](review/faceless-neck-female-right.png). **외형 개선과 기초 리깅만으로 참조 품질이나 올바른 코칭 동작이 완성된 것은 아니다.** 차이와 다음 검수는 [제작 계약](../../docs/avatar-production.md)에 기록했다.
 
 ## 반복 검수
+
+새 무의상 후보는 `review_avatar.py -- <새 검수 폴더> --candidate --mannequin`으로 전체118개 기술 변형·실제 렌더·동일 재질/무의상 조건을 검사한다. GLB 재가져오기도 같은 옵션을 사용하며 `--qc-only`는 렌더만 생략한다. 기존 의상 후보에는 `--mannequin`을 적용하면 의상 조건에서 실패한다. `unify_mannequin_surface.py -- <새 원본> <새 렌더 폴더>`는 A36 같은 전문 기존 후보에서 의상만 제거하며 신체 좌표/가중치/리그 불변을 검사한다. 이미 있는 출력 파일을 덮지 않는다. 유두·생식기 사실적 세부/실루엣의 최종 판단은 실제 렌더 검수 대상이며 자동 수치 PASS로 대신하지 않는다.
 
 Blender 5.1.1에서 실행했다. 로컬 Blender 실행 파일을 지정하고 저장소 루트에서 실행한다. 출력 폴더는 검수 이미지를 새로 생성할 곳이며, 원본 `.blend`는 저장하거나 변경하지 않는다.
 
@@ -77,4 +81,4 @@ Blender 5.1.1에서 실행했다. 로컬 Blender 실행 파일을 지정하고 �
 
 `diagnose_web_skin.py -- new-report.json [--triangulate]`는 원본/웹 파일을 저장하지 않고 어깨·손바닥 8개 집중 검사와 **에셋**의 정점·가중치를 대조한다. 이는 사람 좌표나 전체 QA가 아니다. 새 경로만 받으며 검사 기준을 완화하지 않는다.
 
-`polish_avatar_candidate.py -- new-polish.blend`는 전문 A27 표면을 별도 파일에서 정제하는 제작 실험이다. A28 원본/왕복 118개는 통과했지만 실제 렌더에서 의상 경계가 더 두드러져 **채택하지 않았다**. [실제 반려 기록](review/candidate-a28-rejected/README.md)을 따른다. 현행 웹 GLB는 A28이 아닌 A27 여덟 가중치 파일이다.
+`polish_avatar_candidate.py -- new-polish.blend`는 전문 A27 표면을 별도 파일에서 정제하는 제작 실험이다. A28 원본/왕복 118개는 통과했지만 실제 렌더에서 의상 경계가 더 두드러져 **채택하지 않았다**. [실제 반려 기록](review/candidate-a28-rejected/README.md)을 따른다. 당시 웹은 A27이었고 현재 개발 검수 화면의 별도 GLB는 A37이다.

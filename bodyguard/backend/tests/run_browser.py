@@ -28,9 +28,31 @@ from tests.test_google_auth import CLIENT_ID, Provider
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "suite", choices=("account", "password", "google"), nargs="?", default="account"
+        "suite", choices=("account", "password", "google", "avatar"), nargs="?", default="account"
     )
     args = parser.parse_args()
+    if args.suite == "avatar":
+        # FR-A-06: isolated native browser egress, without auth API/mail/SQL.
+        with socket.socket() as blocked_proxy:
+            blocked_proxy.bind(("127.0.0.1", 0))
+            return subprocess.run(
+                [
+                    "pnpm",
+                    "exec",
+                    "playwright",
+                    "test",
+                    "--config",
+                    "playwright.avatar.config.ts",
+                    "--reporter",
+                    "list,json",
+                ],
+                cwd=Path(__file__).resolve().parents[2] / "frontend",
+                env={
+                    **os.environ,
+                    "BODYGUARD_TEST_BLOCKED_PROXY": f"http://127.0.0.1:{blocked_proxy.getsockname()[1]}",
+                },
+                check=False,
+            ).returncode
     # Bind before touching data; never reuse a user's server on this port.
     with socket.socket() as listener, socket.socket() as blocked_proxy:
         # Reuse a closed test listener's TIME_WAIT, never another live listener.

@@ -6,13 +6,12 @@ The output is an editable rigging draft, not a validated stretching instruction.
 Use --python-exit-code 1 so a failed script cannot appear to pass a shell check.
 """
 
-from pathlib import Path
 import sys
+from pathlib import Path
 
 import bmesh
 import bpy
 from mathutils import Vector
-
 
 source, rig_source, output = map(Path, sys.argv[sys.argv.index("--") + 1 :])
 for path in (source, rig_source):
@@ -33,7 +32,9 @@ with bpy.data.libraries.load(str(source)) as (available, loaded):
 heads = list(loaded.objects)
 
 with bpy.data.libraries.load(str(rig_source)) as (available, loaded):
-    loaded.objects = [f"Bodyguard_{label}_Base{suffix}" for label in ("Male", "Female") for suffix in ("", ".rig")]
+    loaded.objects = [
+        f"Bodyguard_{label}_Base{suffix}" for label in ("Male", "Female") for suffix in ("", ".rig")
+    ]
 for obj in loaded.objects:
     if obj is None:
         raise ValueError("The MPFB male/female rig source is incomplete")
@@ -46,7 +47,9 @@ for label, head in zip(("Male", "Female"), heads, strict=True):
     bpy.context.view_layer.objects.active = obj
     obj.modifiers[0].levels = 1
     bpy.context.view_layer.update()
-    obj.data = bpy.data.meshes.new_from_object(obj.evaluated_get(bpy.context.evaluated_depsgraph_get()))
+    obj.data = bpy.data.meshes.new_from_object(
+        obj.evaluated_get(bpy.context.evaluated_depsgraph_get())
+    )
     obj.modifiers.clear()
     height = max(v.co.z for v in obj.data.vertices)
 
@@ -59,7 +62,9 @@ for label, head in zip(("Male", "Female"), heads, strict=True):
     bm.from_mesh(head.data)
     face = [v for v in bm.verts if v.co.y < -0.025]
     for _ in range(18):
-        bmesh.ops.smooth_vert(bm, verts=face, factor=0.65, use_axis_x=False, use_axis_y=True, use_axis_z=False)
+        bmesh.ops.smooth_vert(
+            bm, verts=face, factor=0.65, use_axis_x=False, use_axis_y=True, use_axis_z=False
+        )
     bm.to_mesh(head.data)
     bm.free()
     # Conforming to a coarse evaluated target bakes its planar facets into the
@@ -69,7 +74,9 @@ for label, head in zip(("Male", "Female"), heads, strict=True):
             modifier.levels = 4
             modifier.render_levels = 4
     bpy.context.view_layer.update()
-    head.data = bpy.data.meshes.new_from_object(head.evaluated_get(bpy.context.evaluated_depsgraph_get()))
+    head.data = bpy.data.meshes.new_from_object(
+        head.evaluated_get(bpy.context.evaluated_depsgraph_get())
+    )
     head.modifiers.clear()
     head.data.materials.clear()
     head.data.materials.append(obj.data.materials[0])
@@ -105,8 +112,14 @@ for label, head in zip(("Male", "Female"), heads, strict=True):
     for part, z, above in ((clean_head, join_z, True), (obj, join_z + 0.025, False)):
         bm = bmesh.new()
         bm.from_mesh(part.data)
-        bmesh.ops.bisect_plane(bm, geom=list(bm.verts) + list(bm.edges) + list(bm.faces),
-            plane_co=(0, 0, z), plane_no=(0, 0, 1), clear_inner=above, clear_outer=not above)
+        bmesh.ops.bisect_plane(
+            bm,
+            geom=list(bm.verts) + list(bm.edges) + list(bm.faces),
+            plane_co=(0, 0, z),
+            plane_no=(0, 0, 1),
+            clear_inner=above,
+            clear_outer=not above,
+        )
         bmesh.ops.holes_fill(bm, edges=[e for e in bm.edges if e.is_boundary], sides=0)
         bmesh.ops.recalc_face_normals(bm, faces=list(bm.faces))
         bm.to_mesh(part.data)
@@ -166,9 +179,14 @@ for label, head in zip(("Male", "Female"), heads, strict=True):
     obj.select_set(True)
     donor.select_set(True)
     bpy.context.view_layer.objects.active = donor
-    bpy.ops.object.data_transfer(data_type="VGROUP_WEIGHTS", use_create=True,
-        use_object_transform=True, vert_mapping="POLYINTERP_NEAREST",
-        layers_select_src="ALL", layers_select_dst="NAME")
+    bpy.ops.object.data_transfer(
+        data_type="VGROUP_WEIGHTS",
+        use_create=True,
+        use_object_transform=True,
+        vert_mapping="POLYINTERP_NEAREST",
+        layers_select_src="ALL",
+        layers_select_dst="NAME",
+    )
     for group in list(obj.vertex_groups):
         bone = rig.data.bones.get(group.name)
         if bone is None or not bone.use_deform:
@@ -185,11 +203,25 @@ for label, head in zip(("Male", "Female"), heads, strict=True):
     rig.name = f"BODYGUARD {label} rig WIP"
     rig.show_in_front = True
     bpy.data.objects.remove(donor, do_unlink=True)
-    print("DRAFT QC", label, "vertices", len(obj.data.vertices), "bones", len(rig.data.bones),
-        "deform_groups", len(obj.vertex_groups), "unweighted", unweighted)
+    print(
+        "DRAFT QC",
+        label,
+        "vertices",
+        len(obj.data.vertices),
+        "bones",
+        len(rig.data.bones),
+        "deform_groups",
+        len(obj.vertex_groups),
+        "unweighted",
+        unweighted,
+    )
 
-bpy.context.scene["bodyguard_stage"] = "faceless rigging draft; deformation QA only; not a release asset"
-bpy.context.scene["base_mesh_source"] = "Blender Human Base Meshes v1.4.1 bodies and artist-made heads (CC0)"
+bpy.context.scene["bodyguard_stage"] = (
+    "faceless rigging draft; deformation QA only; not a release asset"
+)
+bpy.context.scene["base_mesh_source"] = (
+    "Blender Human Base Meshes v1.4.1 bodies and artist-made heads (CC0)"
+)
 bpy.context.scene["rig_source"] = "MPFB standard rig/core weights (CC0); transferred draft weights"
 scene = bpy.context.scene
 scene.render.resolution_x = 1400

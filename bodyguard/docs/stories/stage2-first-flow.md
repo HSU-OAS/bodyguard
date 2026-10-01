@@ -1,6 +1,6 @@
 # 2단계 — 첫 완성 흐름 실행 명세
 
-2026-10-01 · **S2.1 PR #6·S2.2 PR #7·S2.3a PR #8·S2.6a1 PR #10·S2.6a2 PR #11·S2.6b1 PR #12·S2.6b2 PR #13 병합, 2단계 전체 미완료** · S2.4 [Draft PR #9](https://github.com/HSU-OAS/bodyguard/pull/9)는 최신 main `4bbb784`에서 리뷰 보완 중이다. A27 원본/여덟 가중치 GLB 각각 118개·웹 기술 시험 2개를 통과했지만 외형 P2로 병합은 보류한다. [상세 결과](stage2-avatar-candidate.md). Google/메일 모의 로컬 Story 완료는 실제 공급자 검증이 아니다. 선행: [1단계 준비 게이트](../stage1-gate.md), [사전 승인 운영 규칙](../operating-rules.md).
+2026-10-01 · **S2.1 PR #6·S2.2 PR #7·S2.3a PR #8·S2.6a1 PR #10·S2.6a2 PR #11·S2.6b1 PR #12·S2.6b2 PR #13 병합, 2단계 전체 미완료** · S2.4 [Draft PR #9](https://github.com/HSU-OAS/bodyguard/pull/9)는 최신 main `4bbb784`에서 리뷰 보완 중이다. CEO 외형 변경을 반영한 A37은 신체 좌표/가중치·각163bones를 보존하며 남녀 공통 무의상 백색 중성 마네킹으로 제작했고 원본/왕복 각각118개·121행, native38컷, 기본 연결 후 실제 Chrome3개를 검증했다. 기존 A27 파일/증거는 보존한다. 전체 외형 P2로 병합은 보류한다. [상세 결과](stage2-avatar-candidate.md)·[실제 A37 미리보기/미충족](../../assets/blender/review/candidate-a37/README.md). Google/메일 모의 로컬 Story 완료는 실제 공급자 검증이 아니다. 선행: [1단계 준비 게이트](../stage1-gate.md), [사전 승인 운영 규칙](../operating-rules.md).
 
 목표: 공개 소개 → 가입·로그인 → 동작 직접 선택 → 카메라 준비 → 기준/내 아바타 코칭 → 결과. 추천은 3단계, 기록 목록·데이터 관리 확장은 4단계다. 첫 결과 화면을 기록 서비스 전체의 완성으로 표시하지 않는다. [출시 계약](../release-plan.md)의 계정·고품질 두 아바타·세밀한 코칭·오판정 방지 요구를 축소하지 않는다.
 
@@ -11,7 +11,7 @@
 | S2.1 계정·세션 API | 이메일 가입 요청·코드 확인·로그인·본인 조회·로그아웃, 로컬 PostgreSQL과 권한 경계 | [상세 명세](stage2-account-api.md)·[하네스 계약](stage2-account-harness.md)의 실제 API/DB 검사. 실제 메일 발송 완료와 구분 |
 | S2.2 공개 시작·계정 화면 | 소개·이메일 가입/인증/로그인, 보호된 시작 화면·원래 목적 복귀·접근성 | [상세 명세·결과](stage2-account-web.md): 실제 API/SQL Chrome 9개, Vitest 66개, 개발 가짜 카메라 1개. 계정 카메라 0회·production 데모 진입 차단. 실제 메일은 별도 |
 | S2.3 첫 동작 실제 촬영 | #1 목 옆 기울이기의 특징·시작/복귀·보상·가림·복수 인물·시간/임계값 검증 | [상세 명세·하네스](stage2-motion-validation.md): a 관찰 장치 보완과 b 실제 수행 검증 분리. [동작 근거](../motion-evidence.md)를 사람이 실제 수행. 튜닝/검증 데이터 분리. 실패하면 재선정·CEO 범위 확인 |
-| S2.4 남녀 아바타 첫 출시 후보 | 사진 대비 조형·의상·관절 표현, 축·변형, 웹용 최적화·권리·두 모델 비교 | [상세 명세·검수](stage2-avatar-candidate.md)·[제작 계약](../avatar-production.md). A27 원본/여덟 가중치 왕복 각각 118개·웹 기술 시험 2개 통과. 외형 P2 미해결. S2.3 근거 없이 시범 각도·유지시간 확정 금지 |
+| S2.4 남녀 아바타 첫 출시 후보 | 남녀 공통 무의상 백색 중성 표면·자연 체형/관절, 축·변형, 웹용 최적화·권리·두 모델 비교 | [상세 명세·검수](stage2-avatar-candidate.md)·[제작 계약](../avatar-production.md). A37 원본/여덟 가중치 왕복 각각118개·기본 연결 Chrome3개 통과. 외형 P2 미해결. S2.3 근거 없이 시범 각도·유지시간 확정 금지 |
 | S2.5 첫 코칭·결과 연결 | 목록/상세·직접 선택, 준비·두 아바타·관찰 가능한 세밀한 피드백·중단·결과 | S2.3·S2.4 통과 전제. 정상/오류/가림/추론·자산 실패·중단·탭 이탈. 완료·중단·건너뜀 구분 |
 | S2.6 구글 로그인·복구 | OAuth, 비밀번호 재설정, 기존 세션 무효화·안전한 복귀 | [a1 복구 API](stage2-password-recovery-api.md) PR #10·[a2 복구 웹](stage2-password-recovery-web.md) PR #11·[b1 Google API](stage2-google-auth-api.md) PR #12·[b2 웹](stage2-google-auth-web.md) PR #13 병합. 실제 공급자와 모의 시험 분리. 묵시적 계정 합치기 금지. 실제 Gmail/Google 연결은 별도 승인 |
 | S2.7 통합 게이트 | 실제 가입부터 선택·두 아바타·코칭·결과·로그아웃 | 남녀/정상/오류/가림/권한 거부/세션 만료를 실제 노트북에서 확인. 가짜 카메라·메일만으로 통과 금지 |

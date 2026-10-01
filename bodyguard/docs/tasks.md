@@ -17,11 +17,13 @@
 | 동작 근거와 촬영 가능성 | 후보별 출처·주의점·필수 관절·촬영 계획과 관찰 하네스 | 후보 분류·근거·계획. 실제 동작/임계값 검증은 S2.3 | PR #2 main 병합, 출시 동작 0개 |
 | 새 아바타 제작 기준·초기 제작 | 남녀 Blender 모델·리그 기준과 시각 비교 | 새 편집 원본·기초 검수·권리·차이 기록. 최종 외형/웹 성능은 S2.4 | PR #3 main 병합, 최종 에셋 아님 |
 
-[1단계 준비 게이트](stage1-gate.md)는 증거 기준을 충족했다. [S2.1](stories/stage2-account-api.md)은 PR #6, [S2.2](stories/stage2-account-web.md)는 PR #7, [S2.3a](stories/stage2-motion-validation.md)는 PR #8, [S2.6a1 복구 API](stories/stage2-password-recovery-api.md)는 PR #10, [S2.6a2 복구 웹](stories/stage2-password-recovery-web.md)은 PR #11, [S2.6b1 구글 API](stories/stage2-google-auth-api.md)는 PR #12, [S2.6b2 구글 웹](stories/stage2-google-auth-web.md)은 PR #13 병합. 구글 웹의 실제 API160·Vitest120·Chrome Google10/계정9/복구5를 통과했지만 Google/메일은 모의 응답이다. [S2.4 후보/검수](stories/stage2-avatar-candidate.md)의 Draft PR #9는 최신 main `4bbb784`에서 리뷰 보완 중이며 A27 원본/여덟 가중치 왕복 각각 118개·웹 기술 시험 2개·Vitest118개를 통과한 기존 증거를 보존한다. 최신 main 통합 회귀는 별도 재실행한다. **외형 P2로 병합은 보류**한다. 실제 Gmail·Google·S2.3b 사람 수행 검증·최종 아바타·2단계 전체는 미완료이며 [사전 승인 운영 규칙](operating-rules.md)을 적용한다.
+[1단계 준비 게이트](stage1-gate.md)는 증거 기준을 충족했다. [S2.1](stories/stage2-account-api.md)은 PR #6, [S2.2](stories/stage2-account-web.md)는 PR #7, [S2.3a](stories/stage2-motion-validation.md)는 PR #8, [S2.6a1 복구 API](stories/stage2-password-recovery-api.md)는 PR #10, [S2.6a2 복구 웹](stories/stage2-password-recovery-web.md)은 PR #11, [S2.6b1 구글 API](stories/stage2-google-auth-api.md)는 PR #12, [S2.6b2 구글 웹](stories/stage2-google-auth-web.md)는 PR #13 병합. [S2.4 후보/검수](stories/stage2-avatar-candidate.md)의 Draft PR #9는 최신 main `4bbb784`에서 리뷰 보완 중이다. 최신 main 통합 회귀 API160·Vitest133·Chrome Google10/계정9/복구5와 새 A37 원본/왕복118개·기본 연결 Chrome3개의 실제 기록을 분리 보존한다. Google/메일은 모의이며 **외형 P2로 병합은 보류**한다. 실제 Gmail·Google·S2.3b 사람 수행 검증·최종 아바타·2단계 전체는 미완료이며 [사전 승인 운영 규칙](operating-rules.md)을 적용한다.
 
 ---
 
 ## 진행 상황
+
+2026-10-01 **S2.4 A37 외형 변경**: 남녀 공통 무의상 백색 중성 마네킹을 개발 검수 화면에만 연결했다. 자연 체형·신체 좌표/가중치·각163bones 보존, 원본/GLB 각각118개 기술 변형·121행, native38컷, 연결된 실제 Chrome3개·Vitest133개를 검증했다. [실제 원본·해시·미리보기·실패/미실행](../assets/blender/review/candidate-a37/README.md). 기존 원본/GLB/증거를 보존했으며 A-02 외형 P2·실제 사람/시범/리타게팅은 미완료라 Draft PR #9는 병합하지 않는다. 1~6단계·승인/안전 기준은 유지한다.
 
 2026-09-26 **스켈레톤 데모** (`frontend/`, 실행 방법은 `frontend/README.md`)
 

@@ -20,6 +20,7 @@ output.mkdir(parents=True, exist_ok=True)
 scene = bpy.context.scene
 candidate = "--candidate" in sys.argv
 only_check = "--qc-only" in sys.argv
+mannequin = "--mannequin" in sys.argv
 failures = []
 checks = []
 current_pose = "neutral"
@@ -87,9 +88,7 @@ def clothing_clearance(body, clothes):
             round(min(signed), 6),
         )
         if inside or ambiguous:
-            failures.append(
-                f"{obj.name}: {inside} inside / {ambiguous} unresolved volume samples"
-            )
+            failures.append(f"{obj.name}: {inside} inside / {ambiguous} unresolved volume samples")
         checks.append(
             {
                 "pose": current_pose,
@@ -121,26 +120,51 @@ def topology(mesh):
     return components, invalid
 
 
+if mannequin:
+    # FR-A-01~04 / CEO 2026-10-01: no clothing; shared physical finish after GLB too.
+    assert candidate, "Unified mannequin QA requires the complete candidate harness"
+    garments = [
+        obj.name
+        for obj in scene.objects
+        if obj.type == "MESH" and obj.name.startswith("BODYGUARD ") and "draft" in obj.name
+    ]
+    assert not garments, f"Separate garment remained: {garments}"
+    finishes = []
+    for label in ("Male", "Female"):
+        body = bpy.data.objects[f"BODYGUARD {label} sculpt WIP"]
+        assert len(body.data.materials) == 1 and all(
+            face.material_index == 0 for face in body.data.polygons
+        ), "Mannequin body must have one neutral material"
+        nodes = [n for n in body.data.materials[0].node_tree.nodes if n.type == "BSDF_PRINCIPLED"]
+        assert len(nodes) == 1 and not any(i.is_linked for i in nodes[0].inputs), (
+            "Unexpected skin texture/procedural detail"
+        )
+        finish = {}
+        for name in ("Base Color", "Metallic", "Roughness", "Specular IOR Level", "Alpha"):
+            value = nodes[0].inputs[name].default_value
+            finish[name] = list(value) if hasattr(value, "__iter__") else value
+        finishes.append(finish)
+    assert finishes[0] == finishes[1], "Male/female physical surface finish differs"
+    checks.append(
+        {
+            "pose": "neutral",
+            "surface_style": "unified-white-mannequin",
+            "garments": garments,
+            "shared_finish": finishes[0],
+            "realistic_details_visual_review_required": True,
+        }
+    )
+
 for label in ("Male", "Female"):
     obj = bpy.data.objects[f"BODYGUARD {label} sculpt WIP"]
     rig = bpy.data.objects[f"BODYGUARD {label} rig WIP"]
-    assert len(obj.data.vertices) > 10_000, (
-        f"{label}: unexpected loss of authored body topology"
-    )
-    assert all(isfinite(c) for v in obj.data.vertices for c in v.co), (
-        f"{label}: nonfinite surface"
-    )
-    height = max(v.co.z for v in obj.data.vertices) - min(
-        v.co.z for v in obj.data.vertices
-    )
-    assert 1.5 < height < 2, (
-        f"{label}: expected complete metre-scale body, got {height}"
-    )
+    assert len(obj.data.vertices) > 10_000, f"{label}: unexpected loss of authored body topology"
+    assert all(isfinite(c) for v in obj.data.vertices for c in v.co), f"{label}: nonfinite surface"
+    height = max(v.co.z for v in obj.data.vertices) - min(v.co.z for v in obj.data.vertices)
+    assert 1.5 < height < 2, f"{label}: expected complete metre-scale body, got {height}"
     components, invalid = topology(obj.data)
     assert invalid == 0, f"{label}: {invalid} non-manifold edges"
-    assert components == 1, (
-        f"{label}: head/body must be joined, got {components} components"
-    )
+    assert components == 1, f"{label}: head/body must be joined, got {components} components"
     unweighted = sum(
         not isfinite(total := sum(g.weight for g in v.groups)) or abs(total - 1) > 0.01
         for v in obj.data.vertices
@@ -178,9 +202,7 @@ for label in ("Male", "Female"):
         assert indices, "Candidate must retain the authored hand QA selection"
         for index in indices:
             assert not any(
-                obj.vertex_groups[g.group].name.startswith(
-                    ("upperleg", "lowerleg", "pelvis")
-                )
+                obj.vertex_groups[g.group].name.startswith(("upperleg", "lowerleg", "pelvis"))
                 and g.weight > 0.01
                 for g in obj.data.vertices[index].groups
             ), "Wrong-limb hand skinning"
@@ -192,12 +214,9 @@ for label in ("Male", "Female"):
         for surface in extra:
             assert all(isfinite(c) for v in surface.data.vertices for c in v.co)
             assert all(
-                abs(sum(g.weight for g in v.groups) - 1) < 0.01
-                for v in surface.data.vertices
+                abs(sum(g.weight for g in v.groups) - 1) < 0.01 for v in surface.data.vertices
             ), f"{surface.name}: unnormalized skin"
-            assert any(
-                m.type == "ARMATURE" and m.object == rig for m in surface.modifiers
-            )
+            assert any(m.type == "ARMATURE" and m.object == rig for m in surface.modifiers)
             if "draft" in surface.name:
                 components, invalid = topology(surface.data)
                 checks.append(
@@ -210,7 +229,8 @@ for label in ("Male", "Female"):
                 )
                 if components != 1 or invalid:
                     failures.append(
-                        f"{surface.name}: detached/open garment ({components} components, {invalid} non-manifold)"
+                        f"{surface.name}: detached/open garment "
+                        f"({components} components, {invalid} non-manifold)"
                     )
         clothing_clearance(obj, [o for o in extra if "draft" in o.name])
 
@@ -242,14 +262,10 @@ camera = scene.camera
 camera.data.type = "ORTHO"
 camera.data.ortho_scale = 2.8
 camera.location = (0, -5, 0.84)
-camera.rotation_euler = (
-    (Vector((0, 0, 0.84)) - camera.location).to_track_quat("-Z", "Y").to_euler()
-)
+camera.rotation_euler = (Vector((0, 0, 0.84)) - camera.location).to_track_quat("-Z", "Y").to_euler()
 render("faceless-front.png")
 camera.location = (2.4, -4.8, 0.84)
-camera.rotation_euler = (
-    (Vector((0, 0, 0.84)) - camera.location).to_track_quat("-Z", "Y").to_euler()
-)
+camera.rotation_euler = (Vector((0, 0, 0.84)) - camera.location).to_track_quat("-Z", "Y").to_euler()
 render("faceless-quarter.png")
 
 scene.render.resolution_x = 900
@@ -317,8 +333,7 @@ for label in ("Male", "Female"):
             pb.rotation_quaternion = Quaternion(axis, radians(sign * angle))
         bpy.context.view_layer.update()
         delta = (
-            rig.pose.bones["head"].matrix
-            @ rig.data.bones["head"].matrix_local.inverted()
+            rig.pose.bones["head"].matrix @ rig.data.bones["head"].matrix_local.inverted()
         ).to_quaternion()
         assert abs(degrees(delta.angle) - 20) < 0.05
         assert abs(abs(delta.axis.y) - 1) < 0.01
@@ -373,9 +388,7 @@ if candidate:
             o
             for o in scene.objects
             if o.type == "MESH"
-            and o.name.startswith(
-                f"BODYGUARD {'Female' if label == 'Male' else 'Male'}"
-            )
+            and o.name.startswith(f"BODYGUARD {'Female' if label == 'Male' else 'Male'}")
         ]
         for surface in others:
             surface.hide_render = True
