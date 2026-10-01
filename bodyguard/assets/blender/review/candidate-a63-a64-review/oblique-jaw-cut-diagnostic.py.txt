@@ -1,0 +1,114 @@
+"""FR-A-03: inspect actual artist jaw cuts without changing or saving a source."""
+
+import importlib.util
+import json
+import sys
+from hashlib import file_digest
+from pathlib import Path
+
+import bmesh
+import bpy
+from mathutils import geometry
+
+
+def sha(path):
+    with path.open("rb") as file:
+        return file_digest(file, "sha256").hexdigest()
+
+
+professional, output = map(Path, sys.argv[sys.argv.index("--") + 1 :])
+assert output.suffix == ".json" and not output.exists()
+assert sha(professional) == "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137"
+helper_path = Path(__file__).with_name("a49-density-producer.py")
+assert sha(helper_path) == "6a96114e186b0db44a622beaef770dc58a193656344586f9f189783cc14018c4"
+spec = importlib.util.spec_from_file_location("a49_existing_guard", helper_path)
+helper = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(helper)
+source = Path(bpy.data.filepath)
+source_sha = sha(source)
+rows = []
+for label in ("Male", "Female"):
+    body = bpy.data.objects[f"BODYGUARD {label} sculpt WIP"]
+    crown = max(v.co.z for v in body.data.vertices)
+    plane = crown * 0.91 - 0.006
+    name = f"GEO-body_{label.lower()}_realistic"
+    with bpy.data.libraries.load(str(professional)) as (available, loaded):
+        assert name in available.objects
+        loaded.objects = [name]
+    reference = loaded.objects[0]
+    bpy.context.scene.collection.objects.link(reference)
+    reference.modifiers[0].levels = reference.modifiers[0].render_levels = 1
+    bpy.context.view_layer.update()
+    evaluated = bpy.data.meshes.new_from_object(
+        reference.evaluated_get(bpy.context.evaluated_depsgraph_get())
+    )
+    ratio = crown / max(v.co.z for v in evaluated.vertices)
+    for vertex in evaluated.vertices:
+        vertex.co *= ratio
+    for model, data in (("professional", evaluated), ("existing", body.data)):
+        bm = bmesh.new()
+        bm.from_mesh(data)
+        bmesh.ops.bisect_plane(
+            bm,
+            geom=list(bm.verts) + list(bm.edges) + list(bm.faces),
+            plane_co=(0, 0, plane),
+            plane_no=(0, -0.22, 1),
+            dist=1e-8,
+            clear_outer=True,
+        )
+        loops = helper.closed_loops([e for e in bm.edges if e.is_boundary])
+        areas = [
+            abs(
+                sum(
+                    a.co.x * b.co.y - b.co.x * a.co.y
+                    for a, b in zip(loop, loop[1:] + loop[:1], strict=True)
+                )
+            )
+            for loop in loops
+        ]
+        outer = loops[areas.index(max(areas))]
+        points = [v.co for v in outer]
+        triangles = geometry.tessellate_polygon([points])
+        contours = []
+        for loop, area in zip(loops, areas, strict=True):
+            contours.append(
+                {
+                    "vertices": len(loop),
+                    "area_twice_m2": area,
+                    "bounds_m": [
+                        [min(v.co[i] for v in loop), max(v.co[i] for v in loop)] for i in range(3)
+                    ],
+                    "outer": loop is outer,
+                    "all_inside_outer": all(
+                        any(
+                            geometry.intersect_point_tri_2d(v.co, *(points[i] for i in tri))
+                            for tri in triangles
+                        )
+                        for v in loop
+                    ),
+                }
+            )
+        rows.append(
+            {
+                "body": label,
+                "model": model,
+                "plane_m": plane,
+                "plane_normal": [0, -0.22, 1],
+                "contours": contours,
+            }
+        )
+        bm.free()
+assert sha(source) == source_sha
+output.write_text(
+    json.dumps(
+        {
+            "source_sha256": source_sha,
+            "source_saved": False,
+            "artist_model_only": True,
+            "rows": rows,
+        },
+        indent=2,
+    )
+    + "\n"
+)
+print("ACTUAL READ-ONLY JAW CUTS", json.dumps(rows))

@@ -1,0 +1,466 @@
+"""FR-A-01~04: continuous artist jaw retained with a licensed neutral head.
+
+Use Blender -b existing A60 --python-exit-code 1 --python this.py --
+ new-source.blend new-report.json existing-CC0-bundle.blend [artist-gap-m]
+The existing A49 density helper is reused unchanged. All QA remains required.
+"""
+
+import importlib.util
+import json
+import sys
+from collections import Counter
+from hashlib import file_digest
+from math import atan2, cos, isfinite, sin, tau
+from pathlib import Path
+
+import bmesh
+import bpy
+from mathutils import Vector
+
+
+def align_neck_boundary_samples(mesh, edges, original, closed_loops):
+    """FR-A-03: native boundary splits at corresponding polar positions only."""
+    loops = closed_loops(edges)
+    assert len(loops) == 2
+    planes = [sum(v.co.z for v in loop) / len(loop) for loop in loops]
+    assert abs(planes[0] - planes[1]) > 1e-6 and all(
+        abs(v.co.z - z) < 1e-6 for loop, z in zip(loops, planes, strict=True) for v in loop
+    )
+    deform = mesh.verts.layers.deform.active
+    assert deform is not None
+    before = Counter(
+        (tuple(v.co), tuple(sorted(v[deform].items()))) for loop in loops for v in loop
+    )
+    rings = []
+    for loop in loops:
+        center = [(min(v.co[a] for v in loop) + max(v.co[a] for v in loop)) / 2 for a in (0, 1)]
+        ordered = sorted(
+            ((atan2(v.co.y - center[1], v.co.x - center[0]) % tau, v) for v in loop),
+            key=lambda item: item[0],
+        )
+        assert all(
+            mesh.edges.get((a[1], b[1])) in edges
+            for a, b in zip(ordered, ordered[1:] + ordered[:1], strict=True)
+        ), "Only star-shaped authored cut contours can share polar samples"
+        assert len({angle for angle, _ in ordered}) == len(loop)
+        rings.append((center, ordered))
+    knots = sorted({angle for _, ordered in rings for angle, _ in ordered})
+    assert 3 <= len(knots) <= 4096
+    counts = [len(loop) for loop in loops]
+    for center, ordered in rings:
+        for (aa, start), (ab, end) in zip(ordered, ordered[1:] + ordered[:1], strict=True):
+            if ab <= aa:
+                ab += tau
+            targets = [angle for angle in knots + [a + tau for a in knots] if aa < angle < ab]
+            a = Vector((start.co.x - center[0], start.co.y - center[1]))
+            delta = Vector((end.co.x - start.co.x, end.co.y - start.co.y))
+            previous = 0.0
+            for angle in targets:
+                ray = Vector((cos(angle), sin(angle)))
+                denominator = delta.x * ray.y - delta.y * ray.x
+                assert abs(denominator) > 1e-12
+                fraction = -(a.x * ray.y - a.y * ray.x) / denominator
+                assert previous < fraction < 1
+                edge = mesh.edges.get((start, end))
+                assert edge is not None and edge.is_boundary
+                _, vertex = bmesh.utils.edge_split(
+                    edge, start, (fraction - previous) / (1 - previous)
+                )
+                vertex[original] = 0
+                start, previous = vertex, fraction
+    after = Counter((tuple(v.co), tuple(sorted(v[deform].items()))) for v in mesh.verts)
+    assert before <= after, "Native alignment moved authored coordinates/skin"
+    aligned = closed_loops(
+        [
+            e
+            for e in mesh.edges
+            if e.is_boundary
+            and any(
+                abs(e.verts[0].co.z - z) < 1e-6 and abs(e.verts[1].co.z - z) < 1e-6 for z in planes
+            )
+        ]
+    )
+    assert len(aligned) == 2 and all(len(loop) == len(knots) for loop in aligned)
+    return {
+        "before": counts,
+        "after": [len(knots), len(knots)],
+        "method": "native polar-edge splits",
+    }
+
+
+def main():
+    args = sys.argv[sys.argv.index("--") + 1 :]
+    if len(args) not in (3, 4):
+        raise ValueError("Expected new .blend/report, professional source and optional artist gap")
+    output, report_path, professional = map(Path, args[:3])
+    if output.suffix != ".blend" or report_path.suffix != ".json":
+        raise ValueError("Explicit .blend and .json outputs required")
+    if len({output.resolve(), report_path.resolve(), professional.resolve()}) != 3:
+        raise ValueError("Input and output paths must be distinct")
+    if output.exists() or report_path.exists():
+        raise FileExistsError("Preserve prior artist files/evidence")
+    if not professional.is_file():
+        raise FileNotFoundError(professional)
+    gap = float(args[3]) if len(args) == 4 else 0.024
+    if not isfinite(gap) or not 0.012 <= gap <= 0.048:
+        raise ValueError("Finite artist transition between 12 and 48mm required")
+    helper_path = Path(__file__).with_name("a49-density-producer.py")
+    with helper_path.open("rb") as file:
+        helper_sha = file_digest(file, "sha256").hexdigest()
+    if helper_sha != "6a96114e186b0db44a622beaef770dc58a193656344586f9f189783cc14018c4":
+        raise ValueError("Use the preserved A49 native boundary helper")
+    spec = importlib.util.spec_from_file_location("a49_native_boundary", helper_path)
+    helper = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(helper)
+    with professional.open("rb") as file:
+        professional_sha = file_digest(file, "sha256").hexdigest()
+    assert professional_sha == "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137"
+    with Path(bpy.data.filepath).open("rb") as file:
+        assert file_digest(file, "sha256").hexdigest() == (
+            "7751f3a4ea79ba21bbfa44b22de533fb36037e5d6a0ed5e9d97bf44948042b86"
+        )
+    reports = []
+    for label, name in (
+        ("Male", "GEO-head_male_primitive_realistic"),
+        ("Female", "GEO-head_primitive_female_realistic"),
+    ):
+        body = bpy.data.objects[f"BODYGUARD {label} sculpt WIP"]
+        rig = bpy.data.objects[f"BODYGUARD {label} rig WIP"]
+        assert len(body.modifiers) == 1 and body.modifiers[0].object == rig
+        assert len(rig.data.bones) == 163 and all(
+            b.matrix_basis.is_identity for b in rig.pose.bones
+        )
+        bones = [(b.name, tuple(b.matrix_local)) for b in rig.data.bones]
+        body_matrix, rig_matrix = body.matrix_world.copy(), rig.matrix_world.copy()
+        crown = max(v.co.z for v in body.data.vertices)
+        # FR-A-03: A63 fixed the native jaw transfer discontinuity on this exact
+        # topology. Transfer weights by TOPOLOGY, never copy its flattened surface.
+        skin_source = Path(__file__).with_name("draft-a63-continuous-neutral-head.blend")
+        with skin_source.open("rb") as file:
+            assert (
+                file_digest(file, "sha256").hexdigest()
+                == "07b120b2692a91dc36921f8e6198ddfaa268022130f059593d0b146a4fed88c4"
+            )
+        with bpy.data.libraries.load(str(skin_source)) as (available, loaded):
+            donor_name = f"BODYGUARD {label} sculpt WIP"
+            assert donor_name in available.objects
+            loaded.objects = [donor_name]
+        donor = loaded.objects[0]
+        bpy.context.scene.collection.objects.link(donor)
+        assert len(donor.data.vertices) == len(body.data.vertices)
+        assert [tuple(p.vertices) for p in donor.data.polygons] == [
+            tuple(p.vertices) for p in body.data.polygons
+        ]
+        before_points = [tuple(v.co) for v in body.data.vertices]
+        before_skin = [{g.group: g.weight for g in v.groups} for v in body.data.vertices]
+        donor_skin = [{g.group: g.weight for g in v.groups} for v in donor.data.vertices]
+        assert [g.name for g in body.vertex_groups] == [g.name for g in donor.vertex_groups]
+        bpy.ops.object.select_all(action="DESELECT")
+        donor.select_set(True)
+        body.select_set(True)
+        bpy.context.view_layer.objects.active = donor
+        bpy.ops.object.data_transfer(
+            data_type="VGROUP_WEIGHTS",
+            use_create=False,
+            use_object_transform=False,
+            vert_mapping="TOPOLOGY",
+            layers_select_src="ALL",
+            layers_select_dst="NAME",
+        )
+        assert before_points == [tuple(v.co) for v in body.data.vertices]
+        assert donor_skin == [{g.group: g.weight for g in v.groups} for v in body.data.vertices]
+        assert all(
+            before_skin[v.index] == {g.group: g.weight for g in v.groups}
+            for v in body.data.vertices
+            if v.co.z <= crown * 0.87 - 0.031
+        )
+        bpy.data.objects.remove(donor, do_unlink=True)
+        input_points = [tuple(v.co) for v in body.data.vertices]
+        input_skin = [tuple((g.group, g.weight) for g in v.groups) for v in body.data.vertices]
+        cut, head_cut = crown * 0.91 - 0.006, crown * 0.91 - 0.006 + gap
+        old_head = [v.co for v in body.data.vertices if v.co.z > crown * 0.87]
+        target_xy = [
+            (min(v[a] for v in old_head) + max(v[a] for v in old_head)) / 2 for a in (0, 1)
+        ]
+        protected = {i + 1 for i in body["bodyguard_distal_hand_vertices"]}
+        with bpy.data.libraries.load(str(professional)) as (available, loaded):
+            if name not in available.objects:
+                raise ValueError("Expected existing licensed professional blank head")
+            loaded.objects = [name]
+        head = loaded.objects[0]
+        bpy.context.scene.collection.objects.link(head)
+        bpy.context.view_layer.update()
+        authored_world = head.matrix_world.copy()
+        # Reuse the existing shallow-face edit; x/z outline is unchanged.
+        bm = bmesh.new()
+        bm.from_mesh(head.data)
+        face = [v for v in bm.verts if v.co.y < -0.025]
+        outline = [(v.co.x, v.co.z) for v in bm.verts]
+        for _ in range(18):
+            bmesh.ops.smooth_vert(
+                bm, verts=face, factor=0.65, use_axis_x=False, use_axis_y=True, use_axis_z=False
+            )
+        assert outline == [(v.co.x, v.co.z) for v in bm.verts]
+        bm.to_mesh(head.data)
+        bm.free()
+        assert len(head.modifiers) == 1 and head.modifiers[0].type == "SUBSURF"
+        head.modifiers[0].levels = head.modifiers[0].render_levels = 4
+        bpy.context.view_layer.update()
+        head.data = bpy.data.meshes.new_from_object(
+            head.evaluated_get(bpy.context.evaluated_depsgraph_get())
+        )
+        head.modifiers.clear()
+        # Resolve parent transforms before baking, then fit the artist head without
+        # body shrinkwrap, remesh, or coordinate-clamping to hide surface faults.
+        inverse = body_matrix.inverted()
+        points = [inverse @ (authored_world @ v.co) for v in head.data.vertices]
+        shift = Vector(
+            (
+                target_xy[0] - (min(v.x for v in points) + max(v.x for v in points)) / 2,
+                target_xy[1] - (min(v.y for v in points) + max(v.y for v in points)) / 2,
+                crown - max(v.z for v in points),
+            )
+        )
+        head.parent = None
+        head.matrix_world = body_matrix.copy()
+        for vertex, point in zip(head.data.vertices, points, strict=True):
+            vertex.co = point + shift
+        assert min(v.co.z for v in head.data.vertices) < head_cut < crown - 0.1
+        hm = bmesh.new()
+        hm.from_mesh(head.data)
+        bmesh.ops.bisect_plane(
+            hm,
+            geom=list(hm.verts) + list(hm.edges) + list(hm.faces),
+            plane_co=(0, 0, head_cut),
+            plane_no=(0, 0, 1),
+            dist=1e-8,
+            clear_inner=True,
+        )
+        head_loops = helper.closed_loops([e for e in hm.edges if e.is_boundary])
+        assert len(head_loops) == 1
+        ring = head_loops[0]
+        # FR-A-02/03: the actual retained continuous artist jaw is the target.
+        # The raw bundle cut has an exterior ear contour and must never be capped.
+        body_name = body.name
+        evaluated = body.data.copy()
+        native = bmesh.new()
+        native.from_mesh(evaluated)
+        bmesh.ops.bisect_plane(
+            native,
+            geom=list(native.verts) + list(native.edges) + list(native.faces),
+            plane_co=(0, 0, cut),
+            plane_no=(0, 0, 1),
+            dist=1e-8,
+            clear_outer=True,
+        )
+        cavity = helper.cap_inner_cut(native, [e for e in native.edges if e.is_boundary])
+        contours = helper.closed_loops([e for e in native.edges if e.is_boundary])
+        assert len(contours) == 1
+        authored_ring = contours[0]
+        assert all(abs(v.co.z - cut) < 1e-6 for v in authored_ring)
+        target = Vector(
+            tuple(
+                (min(v.co[a] for v in authored_ring) + max(v.co[a] for v in authored_ring)) / 2
+                for a in (0, 1)
+            )
+            + (head_cut,)
+        )
+        authored_contour_count = len(authored_ring)
+        native.free()
+        bpy.data.meshes.remove(evaluated)
+        ring_center = [
+            (min(v.co[a] for v in ring) + max(v.co[a] for v in ring)) / 2 for a in (0, 1)
+        ]
+        rig_fit = Vector((target.x - ring_center[0], target.y - ring_center[1], 0))
+        assert abs(max(v.co.z for v in hm.verts) - crown) < 1e-6
+        assert len(hm.faces) > 1000
+        hm.to_mesh(head.data)
+        hm.free()
+        head.vertex_groups.clear()
+        for group in body.vertex_groups:
+            head.vertex_groups.new(name=group.name)
+        bpy.ops.object.select_all(action="DESELECT")
+        body.select_set(True)
+        head.select_set(True)
+        bpy.context.view_layer.objects.active = body
+        bpy.ops.object.data_transfer(
+            data_type="VGROUP_WEIGHTS",
+            use_create=True,
+            use_object_transform=True,
+            vert_mapping="POLYINTERP_NEAREST",
+            layers_select_src="ALL",
+            layers_select_dst="NAME",
+        )
+        bpy.ops.object.select_all(action="DESELECT")
+        head.select_set(True)
+        bpy.context.view_layer.objects.active = head
+        bpy.ops.object.vertex_group_normalize_all(lock_active=False)
+        assert [g.name for g in head.vertex_groups] == [g.name for g in body.vertex_groups]
+        # Bind at the authored head correspondence, not against a different
+        # nearest neck/shoulder face after rig registration (A56 tearing).
+        before_registration = [v.co.copy() for v in head.data.vertices]
+        prepared_skin = [tuple((g.group, g.weight) for g in v.groups) for v in head.data.vertices]
+        for vertex in head.data.vertices:
+            vertex.co += rig_fit
+        assert all(
+            (v.co - (point + rig_fit)).length < 1e-6
+            for v, point in zip(head.data.vertices, before_registration, strict=True)
+        )
+        assert prepared_skin == [
+            tuple((g.group, g.weight) for g in v.groups) for v in head.data.vertices
+        ]
+        assert abs(max(v.co.z for v in head.data.vertices) - crown) < 1e-6
+        assert input_points == [tuple(v.co) for v in body.data.vertices]
+        assert input_skin == [
+            tuple((g.group, g.weight) for g in v.groups) for v in body.data.vertices
+        ]
+        authored_points = {tuple(v.co) for v in head.data.vertices}
+        bm = bmesh.new()
+        bm.from_mesh(body.data)
+        bm.verts.ensure_lookup_table()
+        original = bm.verts.layers.int.new("Original authored head vertex")
+        deform = bm.verts.layers.deform.active
+        assert deform is not None
+        retained = {v.index + 1: (v.co.copy(), dict(v[deform])) for v in bm.verts}
+        for v in bm.verts:
+            v[original] = v.index + 1
+        before = set(bm.verts)
+        bmesh.ops.bisect_plane(
+            bm,
+            geom=list(bm.verts) + list(bm.edges) + list(bm.faces),
+            plane_co=(0, 0, cut),
+            plane_no=(0, 0, 1),
+            dist=1e-8,
+            clear_outer=True,
+        )
+        for v in set(bm.verts) - before:
+            v[original] = 0
+        retained_cavity = helper.cap_inner_cut(bm, [e for e in bm.edges if e.is_boundary])
+        assert len(helper.closed_loops([e for e in bm.edges if e.is_boundary])) == 1
+        bm.from_mesh(head.data)
+        edges = [e for e in bm.edges if e.is_boundary]
+        density = align_neck_boundary_samples(bm, edges, original, helper.closed_loops)
+        edges = [e for e in bm.edges if e.is_boundary]
+        loops = helper.closed_loops(edges)
+        assert len(loops) == 2 and len(loops[0]) == len(loops[1])
+        before = {}
+        for v in bm.verts:
+            before.setdefault(tuple(v.co), []).append(v[original])
+        for element in list(bm.verts) + list(bm.edges) + list(bm.faces):
+            element.select = False
+        for edge in edges:
+            edge.select_set(True)
+        boundary_faces = {face for edge in edges for face in edge.link_faces}
+        cached_normals = {face: face.normal.copy() for face in boundary_faces}
+        bm.normal_update()
+        normal_refresh_delta = max(
+            (face.normal - cached_normals[face]).length for face in boundary_faces
+        )
+        bm.to_mesh(body.data)
+        bm.free()
+        bpy.ops.object.select_all(action="DESELECT")
+        body.select_set(True)
+        bpy.context.view_layer.objects.active = body
+        bpy.context.scene.tool_settings.mesh_select_mode = (False, True, False)
+        bpy.ops.object.mode_set(mode="EDIT")
+        bpy.ops.mesh.bridge_edge_loops(
+            type="SINGLE", number_cuts=6, interpolation="LINEAR", smoothness=1.0
+        )
+        bpy.ops.object.mode_set(mode="OBJECT")
+        bm = bmesh.new()
+        bm.from_mesh(body.data)
+        original = bm.verts.layers.int.get("Original authored head vertex")
+        deform = bm.verts.layers.deform.active
+        assert original is not None and deform is not None
+        for v in bm.verts:
+            ids = before.get(tuple(v.co))
+            v[original] = ids.pop() if ids else 0
+        assert all(e.is_manifold for e in bm.edges)
+        bm.verts.index_update()
+        remap = {v[original]: v.index for v in bm.verts if v[original]}
+        missing = retained.keys() - remap.keys()
+        assert missing and all(retained[i][0].z > cut - 1e-6 for i in missing)
+        assert protected <= remap.keys()
+        assert all(
+            (v.co - retained[v[original]][0]).length < 1e-6
+            and dict(v[deform]) == retained[v[original]][1]
+            for v in bm.verts
+            if v[original]
+        ), "Do not alter retained authored body/skin"
+        assert authored_points <= {tuple(v.co) for v in bm.verts}
+        assert all(
+            all(isfinite(c) for c in v.co)
+            and isfinite(total := sum(v[deform].values()))
+            and abs(total - 1) < 0.01
+            for v in bm.verts
+        )
+        assert abs(max(v.co.z for v in bm.verts) - crown) < 1e-6
+        assert bones == [(b.name, tuple(b.matrix_local)) for b in rig.data.bones]
+        assert body_matrix == body.matrix_world and rig_matrix == rig.matrix_world
+        bmesh.ops.recalc_face_normals(bm, faces=list(bm.faces))
+        report = {
+            "body": label,
+            "professional_source": professional.name,
+            "professional_sha256": professional_sha,
+            "helper_sha256": helper_sha,
+            "head_source": name,
+            "head_world_matrix": [list(row) for row in authored_world],
+            "head_translation_m": list(shift + rig_fit),
+            "head_authored_registration": {
+                "reference_surface": body_name,
+                "reference_cervical_cut_m": cut,
+                "authored_contour_points": authored_contour_count,
+                "proven_inner_cut_edges_capped_for_diagnostic": cavity,
+                "initial_head_translation_m": list(shift),
+                "cut_ring_center_xy_before_m": ring_center,
+                "target_body_point_m": list(target),
+                "native_head_translation_m": list(rig_fit),
+                "contour_points": len(ring),
+                "purpose": "native artist contour registration only; no clinical target",
+            },
+            "head_skin_correspondence": {
+                "native_transfer": "POLYINTERP_NEAREST/NAME before rigid registration",
+                "prepared_weights_preserved_during_registration": True,
+                "reason": "avoid nearest donor neck/shoulder switching after head translation",
+                "full_deformation_and_visual_qa_required": True,
+            },
+            "cut_m": cut,
+            "head_cut_m": head_cut,
+            "artist_gap_m": gap,
+            "native_boundary_density": density,
+            "native_bridge": {"interpolation": "LINEAR", "cuts": 6, "smoothness": 1},
+            "boundary_normal_refresh_max_delta": normal_refresh_delta,
+            "source_vertices": len(retained),
+            "candidate_vertices": len(bm.verts),
+            "professional_head_points": len(authored_points),
+            "same_topology_weight_donor": {
+                "source": skin_source.name,
+                "sha256": "07b120b2692a91dc36921f8e6198ddfaa268022130f059593d0b146a4fed88c4",
+                "method": "native TOPOLOGY/NAME; no donor coordinates copied",
+                "unchanged_original_skin_below_professional_patch": True,
+                "retained_jaw_cavity_edges_native_capped": retained_cavity,
+                "old_source_and_qa_preserved": True,
+            },
+            "retained_body_skin_hands_bones_rest_preserved": True,
+            "all_source_glb_deformation_browser_visual_checks_pending": True,
+        }
+        reports.append(report)
+        body["bodyguard_distal_hand_vertices"] = [remap[i] for i in sorted(protected)]
+        bm.verts.layers.int.remove(original)
+        bm.to_mesh(body.data)
+        bm.free()
+        bpy.data.objects.remove(head, do_unlink=True)
+        for polygon in body.data.polygons:
+            polygon.use_smooth = True
+        body.data.update()
+        print("AUTHORED HEAD REPLACEMENT", report)
+    report_path.write_text(json.dumps(reports, indent=2) + "\n")
+    bpy.context.scene["bodyguard_stage"] = (
+        "S2.4 authored head replacement; ALL QA pending; NOT release"
+    )
+    bpy.context.preferences.filepaths.save_version = 0
+    bpy.ops.wm.save_as_mainfile(filepath=str(output), compress=True)
+
+
+if __name__ == "__main__":
+    main()
