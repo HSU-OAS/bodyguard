@@ -1,0 +1,80 @@
+"""FR-A-02/03: inspect actual oblique registration and seam normals; source unsaved."""
+
+import json
+import sys
+from hashlib import file_digest
+from math import degrees, isfinite
+from pathlib import Path
+
+import bmesh
+import bpy
+from mathutils import Vector
+
+generation, output = map(Path, sys.argv[sys.argv.index("--") + 1 :])
+assert output.suffix == ".json" and not output.exists()
+source = Path(bpy.data.filepath)
+with source.open("rb") as file:
+    source_sha = file_digest(file, "sha256").hexdigest()
+assert source_sha == "d0c55dc6f25a034a9f1fac59e26022841e5598c2948e68947b46df60deb39058"
+rows = []
+for report in json.loads(generation.read_text()):
+    label = report["body"]
+    normal = Vector(report["jaw_cut_plane_normal"])
+    translation = Vector(
+        report["head_authored_registration"]["native_head_translation_m"]
+    )
+    plane_shift = normal.dot(translation)
+    assert abs(plane_shift) < 1e-7
+    intercepts = (report["cut_m"], report["head_cut_m"])
+    assert abs(intercepts[1] - intercepts[0] - report["artist_gap_m"]) < 1e-7
+    mesh = bmesh.new()
+    mesh.from_mesh(bpy.data.objects[f"BODYGUARD {label} sculpt WIP"].data)
+    mesh.normal_update()
+    rings = []
+    for role, intercept in zip(("body", "registered_head"), intercepts, strict=True):
+        edges = [
+            e
+            for e in mesh.edges
+            if all(abs(normal.dot(v.co) - intercept) < 1e-6 for v in e.verts)
+        ]
+        assert len(edges) == report["native_boundary_density"]["after"][0]
+        assert all(e.is_manifold for e in edges)
+        angles = sorted(degrees(e.calc_face_angle()) for e in edges)
+        assert all(isfinite(a) for a in angles)
+        rings.append(
+            {
+                "role": role,
+                "actual_intercept_m": intercept,
+                "edges": len(edges),
+                "dihedral_mean_degrees": sum(angles) / len(angles),
+                "dihedral_p95_degrees": angles[int(0.95 * (len(angles) - 1))],
+                "dihedral_max_degrees": max(angles),
+            }
+        )
+    rows.append(
+        {
+            "body": label,
+            "intended_artist_vertical_gap_m": report["artist_gap_m"],
+            "head_plane_intercept_change_from_xy_registration_m": plane_shift,
+            "actual_artist_vertical_gap_m": intercepts[1] - intercepts[0],
+            "actual_perpendicular_gap_m": (intercepts[1] - intercepts[0])
+            / normal.length,
+            "rings": rings,
+            "artist_geometry_only_not_clinical_or_webcam_accuracy": True,
+        }
+    )
+    mesh.free()
+with source.open("rb") as file:
+    assert file_digest(file, "sha256").hexdigest() == source_sha
+output.write_text(
+    json.dumps(
+        {
+            "source_sha256": source_sha,
+            "source_saved": False,
+            "rows": rows,
+        },
+        indent=2,
+    )
+    + "\n"
+)
+print("ACTUAL REGISTERED OBLIQUE SEAM", json.dumps(rows))
