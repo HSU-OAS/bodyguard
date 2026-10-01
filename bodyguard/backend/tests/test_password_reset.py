@@ -433,9 +433,6 @@ def test_r05_actual_migration_preserves_old_users_and_sessions(harness: Harness)
                 )
             )
         with h.engine.connect() as c:
-            assert (
-                c.scalar(text("SELECT version_num FROM alembic_version"))
-                == "0002_password_recovery"
-            )
+            assert c.scalar(text("SELECT version_num FROM alembic_version")) == "0003_google_auth"
     finally:
         command.upgrade(config, "head")
