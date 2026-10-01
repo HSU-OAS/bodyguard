@@ -1,0 +1,51 @@
+"""Actual native synthetic boundary check, no avatar generation/source save."""
+
+from collections import Counter
+from importlib.util import module_from_spec, spec_from_file_location
+from math import cos, sin, tau
+from pathlib import Path
+
+import bmesh
+
+spec = spec_from_file_location("a49_helpers", Path(__file__).with_name("a49-density-producer.py"))
+helpers = module_from_spec(spec)
+spec.loader.exec_module(helpers)
+checks = []
+for target, upper_z, valid in (
+    (4, 1, True),
+    (8, 1, True),
+    (9, 1, True),
+    (15, 1, True),
+    (17, 1, False),
+    (9, 0, False),
+):
+    mesh = bmesh.new()
+    deform = mesh.verts.layers.deform.new()
+    edges = []
+    for count, z in ((4, 0), (target, upper_z)):
+        top = [
+            mesh.verts.new((cos(tau * i / count), sin(tau * i / count), z)) for i in range(count)
+        ]
+        bottom = [mesh.verts.new((v.co.x, v.co.y, z - 0.2)) for v in top]
+        for i in range(count):
+            j = (i + 1) % count
+            mesh.faces.new((top[i], top[j], bottom[j], bottom[i]))
+            edges.append(next(e for e in top[i].link_edges if top[j] in e.verts))
+    for v in mesh.verts:
+        v[deform][0], v[deform][1] = 0.25, 0.75
+    before = Counter((tuple(v.co), tuple(sorted(v[deform].items()))) for v in mesh.verts)
+    count_before = len(mesh.verts)
+    try:
+        result = helpers.match_neck_boundary_density(mesh, edges)
+    except AssertionError:
+        assert not valid and len(mesh.verts) == count_before
+    else:
+        assert valid and result["after"] == [target, target]
+        assert all(abs(sum(v[deform].values()) - 1) < 1e-6 for v in mesh.verts)
+    deform = mesh.verts.layers.deform.active
+    after = Counter((tuple(v.co), tuple(sorted(v[deform].items()))) for v in mesh.verts)
+    assert before <= after
+    checks.append({"target": target, "upper_z": upper_z, "valid": valid, "passed": True})
+    mesh.free()
+print("NATIVE A49 DENSITY CHECK", checks)
+print("READ ONLY SYNTHETIC MESH; NO FILES SAVED")
