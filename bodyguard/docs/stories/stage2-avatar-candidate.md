@@ -28,6 +28,8 @@
 
 ## 현재 결과
 
+2026-10-02 **A56 실패·A57 대응 가중치 보완**: [실제 원본/GLB/렌더/Chrome·진단](../../assets/blender/review/candidate-a56-a57-rejected/README.md)을 보존했다. A56은 리그 정렬 후 최근접 skin 전송에서 목4개가 비율6.21~6.45/exit1로 실패했다. A57은 대응 head 위치에서 먼저 전송하고 준비한 skin을 보존해 원본/GLB 각118개·121행/실패0, 원본34컷과 실제 Chrome3개를 완료했다. native 대조에서 전체 좌표·retained body skin·각163bones/rest/행렬 동일을 확인했다. 여성 무의상/남녀 같은 백색 표면은 유지하나 앞 목 돌출·띠 같은 경계로 외형 미채택이다. 개발 A37·외형 P2·PR #9 병합 보류·1~6/승인 기준은 그대로다. A56 전체34컷/GLB/Chrome과 실제 사람/시범/웹캠 통합 성능은 미실행이다.
+
 **2026-10-02 A50~A55 원인 분리/실제 초회 검수**: [A50·A51 전문 head/경계 대응](../../assets/blender/review/candidate-a50-a51-rejected/README.md), [A52·A53 PATH/법선 대조](../../assets/blender/review/candidate-a52-a53-rejected/README.md), [A55 LINEAR/리그 정렬 진단](../../assets/blender/review/candidate-a55-rejected/README.md)을 별도 보존했다. 다섯 원본 각각118개·121행과 실제8PNG씩은 완료했으나 머리–목 경계/실루엣이 미달이다. **이 다섯 후보의 전체34컷·GLB·왕복·Chrome은 미실행**이다. [A54 목 정제](../../assets/blender/review/candidate-a54-rejected/README.md)는 기존6mm guard에서 실패해 저장 전에 중단됐다. 여성 무의상/남녀 통일 표면·retained 신체/skin·손·각163bones/rest·기존 파일/증거는 보존했다. 다음은 whole-head bbox 대신 전문 cervical 단면/기존 리그 기준 피팅을 검증한다. 기본 제작 코드·개발 A37·외형 P2·Draft PR #9 병합 보류·1~6/승인 기준은 그대로다.
 
 **A49 경계 밀도 대응/전체 실제 검수**: [별도 원본·GLB·36PNG·검사/진단/해시](../../assets/blender/review/candidate-a49-rejected/README.md)를 보존했다. native SURFACE에서 두 연결 경계의 점 수를 대응하고 전문 패치·영역 밖 신체/skin·손·각163bones를 보존했다. 원본/GLB 각118개·121행, native34컷/Chrome3개·합성 밀도 대조6개를 실제 완료했다. 여성 무의상/남녀 동일 표면은 유지하나 수평 접힘/뒤 목 경계가 남아 미채택한다. 법선 수치 일부 개선을 외형 통과로 확대하지 않는다. 이후 전문 head 교체/정렬 대조는 위 A50~A55 기록을 따른다. 기본 제작 코드·개발 A37·외형 P2·PR #9 병합 보류·1~6/승인 기준은 그대로다.

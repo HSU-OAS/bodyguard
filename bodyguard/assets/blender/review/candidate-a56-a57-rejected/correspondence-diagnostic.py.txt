@@ -1,0 +1,71 @@
+"""Read-only native A56/A57 geometry, skin and rest-rig comparison."""
+
+import json
+import sys
+from collections import Counter
+from pathlib import Path
+
+import bpy
+
+previous, output = map(Path, sys.argv[sys.argv.index("--") + 1 :])
+if output.exists():
+    raise FileExistsError("Preserve prior diagnostic evidence")
+names = [
+    f"BODYGUARD {label} {kind} WIP" for label in ("Male", "Female") for kind in ("sculpt", "rig")
+]
+targets = [bpy.data.objects[name] for name in names]
+with bpy.data.libraries.load(str(previous)) as (available, loaded):
+    assert all(name in available.objects for name in names)
+    loaded.objects = names
+for obj in loaded.objects:
+    bpy.context.scene.collection.objects.link(obj)
+bpy.context.view_layer.update()
+
+
+def points_with_skin(obj, maximum_z):
+    return Counter(
+        (tuple(v.co), tuple(sorted((obj.vertex_groups[g.group].name, g.weight) for g in v.groups)))
+        for v in obj.data.vertices
+        if v.co.z <= maximum_z
+    )
+
+
+rows = []
+for offset, label in ((0, "Male"), (2, "Female")):
+    old, old_rig = loaded.objects[offset : offset + 2]
+    new, new_rig = targets[offset : offset + 2]
+    assert old.matrix_world == new.matrix_world and old_rig.matrix_world == new_rig.matrix_world
+    assert [(b.name, tuple(b.matrix_local)) for b in old_rig.data.bones] == [
+        (b.name, tuple(b.matrix_local)) for b in new_rig.data.bones
+    ]
+    assert len(new_rig.data.bones) == 163
+    coordinates = Counter(tuple(v.co) for v in old.data.vertices)
+    assert coordinates == Counter(tuple(v.co) for v in new.data.vertices)
+    cut = max(v.co.z for v in new.data.vertices) * 0.87 - 0.012
+    assert points_with_skin(old, cut + 1e-6) == points_with_skin(new, cut + 1e-6)
+    all_skin_equal = points_with_skin(old, 2) == points_with_skin(new, 2)
+    assert not all_skin_equal, "The correspondence correction must actually change head skin"
+    rows.append(
+        {
+            "body": label,
+            "vertices": len(new.data.vertices),
+            "bones": 163,
+            "coordinate_multisets_identical": True,
+            "retained_body_named_skin_identical": True,
+            "head_bridge_named_skin_changed": True,
+            "rig_rest_matrices_identical": True,
+        }
+    )
+output.write_text(
+    json.dumps(
+        {
+            "source_saved": False,
+            "artist_model_only": True,
+            "blender": bpy.app.version_string,
+            "rows": rows,
+        },
+        indent=2,
+    )
+    + "\n"
+)
+print("NATIVE CORRESPONDENCE DIAGNOSTIC", json.dumps(rows))
