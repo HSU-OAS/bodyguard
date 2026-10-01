@@ -1,0 +1,589 @@
+{
+  "date": "2026-10-02",
+  "story": "S2.4 / FR-A-01~04 / A-07",
+  "base_head": "84e90f469806a5c6c9b5f0ec119910522b546f7d",
+  "base_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "approval": "2026-10-01 blanket Story/commit/push/PR/review-fix; merge conditional; operating approval separate",
+  "decision": "Female clothing requirements replaced by neutral unified white mannequin. A37 change retained by A77; old assets preserved.",
+  "native_all_terminal_before_browser": true,
+  "native_terminal_runs": [
+    {
+      "execution": "avatar_a76_head_raw_handle",
+      "exit_code": 0
+    },
+    {
+      "execution": "avatar_a76_head_volume_handle",
+      "exit_code": 0
+    },
+    {
+      "execution": "avatar_a76_head_volume-lower_handle",
+      "exit_code": 0
+    },
+    {
+      "execution": "avatar_a76_cage_diag_handle",
+      "exit_code": 0
+    },
+    {
+      "execution": "avatar_a76_face6_handle",
+      "exit_code": 0
+    },
+    {
+      "execution": "avatar_a76_face12_handle",
+      "exit_code": 0
+    },
+    {
+      "execution": "avatar_a76b_face6_handle",
+      "exit_code": 0
+    },
+    {
+      "execution": "avatar_a76b_face12_handle",
+      "exit_code": 0
+    },
+    {
+      "execution": "avatar_a76c_face24_handle",
+      "exit_code": 0
+    },
+    {
+      "execution": "avatar_a76c_face36_handle",
+      "exit_code": 0
+    },
+    {
+      "execution": "avatar_a76d_face36_handle",
+      "exit_code": 0
+    },
+    {
+      "execution": "avatar_a77_generation_handle",
+      "exit_code": 0
+    },
+    {
+      "execution": "avatar_a77_boundary_handle",
+      "exit_code": 0
+    },
+    {
+      "execution": "avatar_a77_preview_handle",
+      "exit_code": 0
+    },
+    {
+      "execution": "avatar_a77_qc_handle",
+      "exit_code": 0
+    },
+    {
+      "execution": "avatar_a77_body_comparison_handle",
+      "exit_code": 0
+    },
+    {
+      "execution": "avatar_a77_full_handle",
+      "exit_code": 0
+    },
+    {
+      "execution": "avatar_a77_export_handle",
+      "exit_code": 0
+    },
+    {
+      "execution": "avatar_a77_import_handle",
+      "exit_code": 0
+    }
+  ],
+  "a77": {
+    "generation_exit_code": 0,
+    "source_sha256": "5f158d9ad9cbba42e6eaf143eed761d3eabdc3fc46c4f30b860799963999dcf3",
+    "source_bytes": 28724972,
+    "source_vertices": {
+      "male": 142115,
+      "female": 140259
+    },
+    "bones_each": 163,
+    "native_regression_distinct_cases": 24,
+    "source_qc_exit_code": 0,
+    "source_full_exit_code": 0,
+    "source_checks_per_run": 118,
+    "source_rows_per_run": 121,
+    "full_source_png": 34,
+    "preview_png": 8,
+    "body_preservation_exit_code": 0,
+    "export_exit_code": 0,
+    "roundtrip_exit_code": 0,
+    "roundtrip_checks": 118,
+    "roundtrip_png": 0,
+    "browser_exit_code": 0,
+    "browser_expected": 3,
+    "browser_duration_ms": 41618.928,
+    "browser_png": 2
+  },
+  "head_comparisons": 10,
+  "actual_png_total": 64,
+  "camera_requests": 0,
+  "device": {
+    "model": "Mac16,12",
+    "ram_bytes": 17179869184,
+    "cpu": "Apple M4",
+    "browser": "Google Chrome 154.0.8037.58",
+    "viewport": {
+      "width": 1440,
+      "height": 1080
+    },
+    "device_scale_factor": 1,
+    "headless": true,
+    "fields_read_only": [
+      "hw.model",
+      "hw.memsize",
+      "machdep.cpu.brand_string",
+      "Chrome --version"
+    ],
+    "serial_or_uuid_read": false
+  },
+  "native_original_terminal_outputs": {
+    "generation": "NEW BRIDGE ONLY ARTIST DISPLACEMENT Male 0.005623225478783226\nAUTHORED HEAD REPLACEMENT {'body': 'Male', 'professional_source': 'human_base_meshes_bundle.blend', 'professional_sha256': '3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137', 'helper_sha256': '6a96114e186b0db44a622beaef770dc58a193656344586f9f189783cc14018c4', 'head_source': 'GEO-head_primitve', 'head_cage_sculpt': {'method': 'native smooth_vert/front surface XYZ only; raw upper/rear points protected', 'iterations': 36, 'factor': 0.45, 'selected_vertices': 170, 'cage_vertices': 266, 'upper_rear_points_and_all_topology_preserved': True, 'maximum_artist_displacement_m': 0.05587566774184506, 'native_volume_before': 0.0035623890776594223, 'native_volume_after': 0.00295776490344206, 'volume_preservation_claimed': False, 'artist_edit_only_not_anatomical_or_clinical_target': True}, 'head_volume_sculpt': {'applied': False, 'reason': 'preserve raw professional cranial silhouette'}, 'head_cage_helper_sha256': '062d30f6ffaa3d6dddf5a00f6a494c7b03b72d93c83570fa502d8896eb346974', 'head_rigid_artist_orientation': {'native_edit': 'bmesh rotate / rigid professional cage only', 'artist_angle_degrees': 30, 'axis': 'X', 'pivot_native_m': [2.4088344652284377e-09, -0.035107485949993134, 0.07337470352649689], 'cage_vertices': 266, 'topology_edge_lengths_and_volume_preserved': True, 'actual_volume_ratio': 0.999999990976032, 'rotation_matrix': [[1.0, 0.0, 0.0], [0.0, 0.8660253286361694, -0.5000001192092896], [0.0, 0.5000001192092896, 0.8660253286361694]], 'not_an_exercise_or_clinical_target': True}, 'head_orientation_helper_sha256': '33a0c17f1c02b9b3f06939d2fff420ccbf89b0a62e2b7e736f2c30648dcf2418', 'head_world_matrix': [[1.0, 0.0, 0.0, 2.291865348815918], [0.0, 1.0, 0.0, -0.045136597007513046], [0.0, 0.0, 1.0, -0.0032976099755614996], [0.0, 0.0, 0.0, 1.0]], 'head_translation_m': [-2.9718739986419678, 0.007141147740185261, 1.4822663068771362], 'head_authored_registration': {'reference_surface': 'BODYGUARD Male sculpt WIP', 'reference_cervical_cut_m': 1.4933180799484254, 'authored_contour_points': 114, 'proven_inner_cut_edges_capped_for_diagnostic': 0, 'initial_head_translation_m': [-2.97186279296875, 0.006275668740272522, 1.481747031211853], 'cut_ring_center_xy_before_m': [2.6226043701171875e-06, -0.03088750410825014], 'target_body_point_m': [-8.596107363700867e-06, -0.030022025108337402, 1.5173181295394897], 'native_head_translation_m': [-1.1218711733818054e-05, 0.0008654789999127388, 0.0005192874232307076], 'initial_diagnostic_contour_points': 308, 'initial_projection_bounds_m': [1.5093153174966574, 1.7310973890125751], 'artist_section_inset_m': 0.008002762451768008, 'initial_diagnostic_plane_intercept_m': 1.5173180799484254, 'reference_to_final_plane_delta_m': 0.0, 'contour_points': 308, 'final_cut_after_registration': {'final_plane_intercept_m': 1.5173180799484254, 'final_contour_points': 308, 'retained_registered_head_points_and_skin': 62832}, 'registration_plane_intercept_change_m': 0.0, 'registered_head_crown_m': 1.6851463435450569, 'original_body_crown_m': 1.6846270561218262, 'purpose': 'native artist contour registration only; no clinical target'}, 'head_skin_correspondence': {'native_transfer': 'POLYINTERP_NEAREST/NAME before rigid registration', 'prepared_weights_preserved_during_registration': True, 'reason': 'avoid nearest donor neck/shoulder switching after head translation', 'full_deformation_and_visual_qa_required': True}, 'cut_m': 1.4933180799484254, 'jaw_cut_plane_normal': [0.0, -0.6000000238418579, 1.0], 'jaw_cut_plane_anchor': [0.0, 0.0, 1.4933180809020996], 'retained_original_vertices': 75915, 'removed_head_original_vertices': 46594, 'head_cut_m': 1.5173180799484254, 'head_cut_plane_normal': [0.0, -0.6000000238418579, 1.0], 'artist_gap_m': 0.024, 'native_boundary_density': {'before': [308, 114], 'after': [421, 421], 'method': 'native ordered arc-length edge splits on distinct planar cuts', 'cut_plane_normals': [[1.7913962437887676e-06, -0.5144962072372437, 0.8574927449226379], [-6.519062480947468e-07, -0.5144954919815063, 0.8574930429458618]]}, 'native_bridge': {'interpolation': 'SURFACE', 'cuts': 6, 'smoothness': 1}, 'bridge_only_native_fairing': {'modifier': 'CORRECTIVE_SMOOTH/LENGTH_WEIGHTED/only-smooth', 'factor': 0.5, 'iterations': 8, 'selected_new_vertices': 2526, 'maximum_artist_displacement_m': 0.005623225478783226, 'authored_points_skin_and_topology_preserved': True, 'full_deformation_visual_browser_qa_required': True, 'reused': 'preserved A59 native new-bridge-only refinement'}, 'boundary_normal_refresh_max_delta': 0.0004557251038014647, 'source_vertices': 122509, 'candidate_vertices': 142115, 'professional_head_points': 63140, 'preserved_external_body_source': {'source': 'draft-a66-neutral-under-jaw-head.blend', 'sha256': '03ac3629b76858ee7f55fc0ffa9e6118c5d64fcbf4ba29100889af1318a8b3b5', 'method': 'reuse A66 external surface/skin; no new donor or anatomy deletion', 'cut_closed_cavity_count': 0, 'old_source_and_qa_preserved': True}, 'retained_body_skin_hands_bones_rest_preserved': True, 'authored_cervical_ring_identifiers_saved_for_diagnostic': True, 'all_source_glb_deformation_browser_visual_checks_pending': True}\nNEW BRIDGE ONLY ARTIST DISPLACEMENT Female 0.003846035458334352\nAUTHORED HEAD REPLACEMENT {'body': 'Female', 'professional_source': 'human_base_meshes_bundle.blend', 'professional_sha256': '3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137', 'helper_sha256': '6a96114e186b0db44a622beaef770dc58a193656344586f9f189783cc14018c4', 'head_source': 'GEO-head_primitve', 'head_cage_sculpt': {'method': 'native smooth_vert/front surface XYZ only; raw upper/rear points protected', 'iterations': 36, 'factor': 0.45, 'selected_vertices': 170, 'cage_vertices': 266, 'upper_rear_points_and_all_topology_preserved': True, 'maximum_artist_displacement_m': 0.05587566774184506, 'native_volume_before': 0.0035623890776594223, 'native_volume_after': 0.00295776490344206, 'volume_preservation_claimed': False, 'artist_edit_only_not_anatomical_or_clinical_target': True}, 'head_volume_sculpt': {'applied': False, 'reason': 'preserve raw professional cranial silhouette'}, 'head_cage_helper_sha256': '062d30f6ffaa3d6dddf5a00f6a494c7b03b72d93c83570fa502d8896eb346974', 'head_rigid_artist_orientation': {'native_edit': 'bmesh rotate / rigid professional cage only', 'artist_angle_degrees': 30, 'axis': 'X', 'pivot_native_m': [2.4088344652284377e-09, -0.035107485949993134, 0.07337470352649689], 'cage_vertices': 266, 'topology_edge_lengths_and_volume_preserved': True, 'actual_volume_ratio': 0.999999990976032, 'rotation_matrix': [[1.0, 0.0, 0.0], [0.0, 0.8660253286361694, -0.5000001192092896], [0.0, 0.5000001192092896, 0.8660253286361694]], 'not_an_exercise_or_clinical_target': True}, 'head_orientation_helper_sha256': '33a0c17f1c02b9b3f06939d2fff420ccbf89b0a62e2b7e736f2c30648dcf2418', 'head_world_matrix': [[1.0, 0.0, 0.0, 2.291865348815918], [0.0, 1.0, 0.0, -0.045136597007513046], [0.0, 0.0, 1.0, -0.0032976099755614996], [0.0, 0.0, 0.0, 1.0]], 'head_translation_m': [-1.6120543479919434, -0.0038101254031062126, 1.431046724319458], 'head_authored_registration': {'reference_surface': 'BODYGUARD Female sculpt WIP', 'reference_cervical_cut_m': 1.452558440208435, 'authored_contour_points': 116, 'proven_inner_cut_edges_capped_for_diagnostic': 0, 'initial_head_translation_m': [-1.611838936805725, 0.004361467435956001, 1.435949683189392], 'cut_ring_center_xy_before_m': [2.6345252990722656e-05, -0.027906558476388454], 'target_body_point_m': [-0.00018902122974395752, -0.03607815131545067, 1.4765584468841553], 'native_head_translation_m': [-0.00021536648273468018, -0.008171592839062214, -0.004902956075966358], 'initial_diagnostic_contour_points': 344, 'initial_projection_bounds_m': [1.4646664876490831, 1.686448559165001], 'artist_section_inset_m': 0.011891952559351937, 'initial_diagnostic_plane_intercept_m': 1.476558440208435, 'reference_to_final_plane_delta_m': 0.0, 'contour_points': 344, 'final_cut_after_registration': {'final_plane_intercept_m': 1.476558440208435, 'final_contour_points': 344, 'retained_registered_head_points_and_skin': 60722}, 'registration_plane_intercept_change_m': 0.0, 'registered_head_crown_m': 1.6339267520233989, 'original_body_crown_m': 1.6388297080993652, 'purpose': 'native artist contour registration only; no clinical target'}, 'head_skin_correspondence': {'native_transfer': 'POLYINTERP_NEAREST/NAME before rigid registration', 'prepared_weights_preserved_during_registration': True, 'reason': 'avoid nearest donor neck/shoulder switching after head translation', 'full_deformation_and_visual_qa_required': True}, 'cut_m': 1.452558440208435, 'jaw_cut_plane_normal': [0.0, -0.6000000238418579, 1.0], 'jaw_cut_plane_anchor': [0.0, 0.0, 1.4525583982467651], 'retained_original_vertices': 75865, 'removed_head_original_vertices': 49153, 'head_cut_m': 1.476558440208435, 'head_cut_plane_normal': [0.0, -0.6000000238418579, 1.0], 'artist_gap_m': 0.024, 'native_boundary_density': {'before': [344, 116], 'after': [459, 459], 'method': 'native ordered arc-length edge splits on distinct planar cuts', 'cut_plane_normals': [[3.449272583111451e-07, -0.5144984722137451, 0.8574913144111633], [1.2619981362149701e-06, -0.5144984722137451, 0.8574913144111633]]}, 'native_bridge': {'interpolation': 'SURFACE', 'cuts': 6, 'smoothness': 1}, 'bridge_only_native_fairing': {'modifier': 'CORRECTIVE_SMOOTH/LENGTH_WEIGHTED/only-smooth', 'factor': 0.5, 'iterations': 8, 'selected_new_vertices': 2754, 'maximum_artist_displacement_m': 0.003846035458334352, 'authored_points_skin_and_topology_preserved': True, 'full_deformation_visual_browser_qa_required': True, 'reused': 'preserved A59 native new-bridge-only refinement'}, 'boundary_normal_refresh_max_delta': 0.0005471207389745925, 'source_vertices': 125018, 'candidate_vertices': 140259, 'professional_head_points': 61066, 'preserved_external_body_source': {'source': 'draft-a66-neutral-under-jaw-head.blend', 'sha256': '03ac3629b76858ee7f55fc0ffa9e6118c5d64fcbf4ba29100889af1318a8b3b5', 'method': 'reuse A66 external surface/skin; no new donor or anatomy deletion', 'cut_closed_cavity_count': 0, 'old_source_and_qa_preserved': True}, 'retained_body_skin_hands_bones_rest_preserved': True, 'authored_cervical_ring_identifiers_saved_for_diagnostic': True, 'all_source_glb_deformation_browser_visual_checks_pending': True}\nInfo: Saved as \"draft-a77-raw-cranium-front-head.blend\"\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n",
+    "boundary": "ACTUAL NATIVE OBLIQUE REGRESSION [{\"name\": \"nonstar-horizontal\", \"passed\": true, \"expected_rejection\": false}, {\"name\": \"reverse-order-oblique\", \"passed\": true, \"expected_rejection\": false}, {\"name\": \"different-counts\", \"passed\": true, \"expected_rejection\": false}, {\"name\": \"parallel-oblique\", \"passed\": true, \"expected_rejection\": false}, {\"name\": \"steeper-parallel-oblique\", \"passed\": true, \"expected_rejection\": false}, {\"name\": \"same-plane-rejected\", \"passed\": true, \"expected_rejection\": true}, {\"name\": \"third-ring-rejected\", \"passed\": true, \"expected_rejection\": true}, {\"name\": \"crossing-planes-rejected\", \"passed\": true, \"expected_rejection\": true}, {\"name\": \"nonplanar-rejected\", \"passed\": true, \"expected_rejection\": true}, {\"name\": \"legacy-oblique-failure-reproduced\", \"passed\": true}, {\"name\": \"registered-final-plane-0.6\", \"passed\": true}, {\"name\": \"registered-final-plane-0.22\", \"passed\": true}, {\"name\": \"early-cut-translation-plane-drift-reproduced\", \"passed\": true, \"artist_plane_drift_m\": 0.018}, {\"name\": \"artist-section-registration-0.6\", \"passed\": true}, {\"name\": \"artist-section-registration-0.22\", \"passed\": true}, {\"name\": \"invalid-artist-plane-rejected\", \"passed\": true}, {\"name\": \"invalid-artist-angle-negative\", \"passed\": true}, {\"name\": \"invalid-artist-angle-unlisted\", \"passed\": true}, {\"name\": \"invalid-artist-angle-nan\", \"passed\": true}, {\"name\": \"actual-male-tip-section-height-drift\", \"passed\": true, \"old_extra_vertical_registration_m\": 0.05092853866517544, \"fixed_plane_rigid_translation_only\": true, \"artist_only_not_clinical_or_camera_accuracy\": true}, {\"name\": \"actual-female-tip-section-height-drift\", \"passed\": true, \"old_extra_vertical_registration_m\": 0.0548177226446569, \"fixed_plane_rigid_translation_only\": true, \"artist_only_not_clinical_or_camera_accuracy\": true}, {\"name\": \"invalid-front-iterations-negative\", \"passed\": true}, {\"name\": \"invalid-front-iterations-unlisted\", \"passed\": true}, {\"name\": \"invalid-front-iterations-nan\", \"passed\": true}]\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n",
+    "source_full": "00:00.426  blend            | Read blend: \"/private/tmp/bodyguard-tailor.6b7Uvu/draft-a77-raw-cranium-front-head.blend\"\n00:14.694  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/faceless-front.png'\n00:23.580  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/faceless-quarter.png'\n00:28.147  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/faceless-body-side-male.png'\n00:33.146  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/faceless-body-back-male.png'\n00:37.827  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/faceless-hand-male.png'\n00:44.859  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/faceless-knee-male.png'\n00:49.791  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/faceless-side-male.png'\n00:56.347  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/faceless-neck-male-left.png'\n01:02.851  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/faceless-neck-male-right.png'\n01:06.429  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/faceless-body-side-female.png'\n01:10.480  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/faceless-body-back-female.png'\n01:14.635  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/faceless-hand-female.png'\n01:21.768  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/faceless-knee-female.png'\n01:26.529  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/faceless-side-female.png'\n01:33.002  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/faceless-neck-female-left.png'\n01:39.447  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/faceless-neck-female-right.png'\n01:44.099  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/technical-male-clavicle.png'\n01:48.890  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/technical-male-upperarm01.png'\n01:53.614  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/technical-male-lowerarm01.png'\n01:58.528  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/technical-male-wrist.png'\n02:03.347  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/technical-male-upperleg01.png'\n02:08.987  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/technical-male-lowerleg01.png'\n02:15.029  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/technical-male-foot.png'\n02:22.807  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/technical-male-finger2-1.png'\n02:38.536  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/technical-male-spine02.png'\n02:45.430  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/technical-female-clavicle.png'\n02:51.204  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/technical-female-upperarm01.png'\n02:56.782  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/technical-female-lowerarm01.png'\n03:03.057  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/technical-female-wrist.png'\n03:10.090  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/technical-female-upperleg01.png'\n03:16.156  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/technical-female-lowerleg01.png'\n03:21.916  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/technical-female-foot.png'\n03:28.498  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/technical-female-finger2-1.png'\n03:42.526  render           | Saved: '/private/tmp/bodyguard-tailor.6b7Uvu/review-a77-raw-cranium-full/technical-female-spine02.png'\nAVATAR QC Male vertices 142115 bones 163 components 1 non_manifold 0 unnormalized 0\nAVATAR QC Female vertices 140259 bones 163 components 1 non_manifold 0 unnormalized 0\nNECK QC Male left rotation 20.0 axis (0.0, 1.0, 0.0)\nNECK QC Male right rotation 20.0 axis (0.0, -1.0, -0.0)\nNECK QC Female left rotation 20.0 axis (0.0, 1.0, 0.0)\nNECK QC Female right rotation 20.0 axis (0.0, -1.0, -0.0)\nARTICULATION QC Male clavicle L edge_ratio_max 1.281\nARTICULATION QC Male clavicle R edge_ratio_max 1.282\nARTICULATION QC Male upperarm01 L edge_ratio_max 1.978\nARTICULATION QC Male upperarm01 R edge_ratio_max 1.905\nARTICULATION QC Male lowerarm01 L edge_ratio_max 1.6\nARTICULATION QC Male lowerarm01 R edge_ratio_max 1.605\nARTICULATION QC Male wrist L edge_ratio_max 1.22\nARTICULATION QC Male wrist R edge_ratio_max 1.178\nARTICULATION QC Male upperleg01 L edge_ratio_max 1.525\nARTICULATION QC Male upperleg01 R edge_ratio_max 1.516\nARTICULATION QC Male lowerleg01 L edge_ratio_max 1.638\nARTICULATION QC Male lowerleg01 R edge_ratio_max 1.631\nARTICULATION QC Male foot L edge_ratio_max 1.183\nARTICULATION QC Male foot R edge_ratio_max 1.181\nARTICULATION QC Male finger1-1 L edge_ratio_max 1.955\nARTICULATION QC Male finger1-1 R edge_ratio_max 1.955\nARTICULATION QC Male finger1-2 L edge_ratio_max 1.53\nARTICULATION QC Male finger1-2 R edge_ratio_max 1.53\nARTICULATION QC Male finger1-3 L edge_ratio_max 1.394\nARTICULATION QC Male finger1-3 R edge_ratio_max 1.387\nARTICULATION QC Male finger2-1 L edge_ratio_max 1.459\nARTICULATION QC Male finger2-1 R edge_ratio_max 1.459\nARTICULATION QC Male finger2-2 L edge_ratio_max 1.242\nARTICULATION QC Male finger2-2 R edge_ratio_max 1.242\nARTICULATION QC Male finger2-3 L edge_ratio_max 1.24\nARTICULATION QC Male finger2-3 R edge_ratio_max 1.24\nARTICULATION QC Male finger3-1 L edge_ratio_max 1.493\nARTICULATION QC Male finger3-1 R edge_ratio_max 1.493\nARTICULATION QC Male finger3-2 L edge_ratio_max 1.221\nARTICULATION QC Male finger3-2 R edge_ratio_max 1.221\nARTICULATION QC Male finger3-3 L edge_ratio_max 1.163\nARTICULATION QC Male finger3-3 R edge_ratio_max 1.163\nARTICULATION QC Male finger4-1 L edge_ratio_max 1.493\nARTICULATION QC Male finger4-1 R edge_ratio_max 1.493\nARTICULATION QC Male finger4-2 L edge_ratio_max 1.19\nARTICULATION QC Male finger4-2 R edge_ratio_max 1.19\nARTICULATION QC Male finger4-3 L edge_ratio_max 1.219\nARTICULATION QC Male finger4-3 R edge_ratio_max 1.219\nARTICULATION QC Male finger5-1 L edge_ratio_max 1.279\nARTICULATION QC Male finger5-1 R edge_ratio_max 1.279\nARTICULATION QC Male finger5-2 L edge_ratio_max 1.206\nARTICULATION QC Male finger5-2 R edge_ratio_max 1.206\nARTICULATION QC Male finger5-3 L edge_ratio_max 1.13\nARTICULATION QC Male finger5-3 R edge_ratio_max 1.134\nARTICULATION QC Male metacarpal1 L edge_ratio_max 2.847\nARTICULATION QC Male metacarpal1 R edge_ratio_max 2.847\nARTICULATION QC Male metacarpal2 L edge_ratio_max 2.944\nARTICULATION QC Male metacarpal2 R edge_ratio_max 2.944\nARTICULATION QC Male metacarpal3 L edge_ratio_max 2.477\nARTICULATION QC Male metacarpal3 R edge_ratio_max 2.477\nARTICULATION QC Male metacarpal4 L edge_ratio_max 1.326\nARTICULATION QC Male metacarpal4 R edge_ratio_max 1.326\nARTICULATION QC Male spine01  edge_ratio_max 1.353\nARTICULATION QC Male spine02  edge_ratio_max 1.154\nARTICULATION QC Male spine03  edge_ratio_max 1.115\nARTICULATION QC Male spine04  edge_ratio_max 1.15\nARTICULATION QC Male spine05  edge_ratio_max 1.198\nARTICULATION QC Female clavicle L edge_ratio_max 1.238\nARTICULATION QC Female clavicle R edge_ratio_max 1.238\nARTICULATION QC Female upperarm01 L edge_ratio_max 2.218\nARTICULATION QC Female upperarm01 R edge_ratio_max 2.123\nARTICULATION QC Female lowerarm01 L edge_ratio_max 1.588\nARTICULATION QC Female lowerarm01 R edge_ratio_max 1.572\nARTICULATION QC Female wrist L edge_ratio_max 1.144\nARTICULATION QC Female wrist R edge_ratio_max 1.143\nARTICULATION QC Female upperleg01 L edge_ratio_max 1.599\nARTICULATION QC Female upperleg01 R edge_ratio_max 1.582\nARTICULATION QC Female lowerleg01 L edge_ratio_max 1.7\nARTICULATION QC Female lowerleg01 R edge_ratio_max 1.694\nARTICULATION QC Female foot L edge_ratio_max 1.179\nARTICULATION QC Female foot R edge_ratio_max 1.189\nARTICULATION QC Female finger1-1 L edge_ratio_max 2.058\nARTICULATION QC Female finger1-1 R edge_ratio_max 2.058\nARTICULATION QC Female finger1-2 L edge_ratio_max 1.55\nARTICULATION QC Female finger1-2 R edge_ratio_max 1.55\nARTICULATION QC Female finger1-3 L edge_ratio_max 1.318\nARTICULATION QC Female finger1-3 R edge_ratio_max 1.312\nARTICULATION QC Female finger2-1 L edge_ratio_max 1.412\nARTICULATION QC Female finger2-1 R edge_ratio_max 1.412\nARTICULATION QC Female finger2-2 L edge_ratio_max 1.189\nARTICULATION QC Female finger2-2 R edge_ratio_max 1.189\nARTICULATION QC Female finger2-3 L edge_ratio_max 1.152\nARTICULATION QC Female finger2-3 R edge_ratio_max 1.152\nARTICULATION QC Female finger3-1 L edge_ratio_max 1.427\nARTICULATION QC Female finger3-1 R edge_ratio_max 1.427\nARTICULATION QC Female finger3-2 L edge_ratio_max 1.184\nARTICULATION QC Female finger3-2 R edge_ratio_max 1.184\nARTICULATION QC Female finger3-3 L edge_ratio_max 1.122\nARTICULATION QC Female finger3-3 R edge_ratio_max 1.122\nARTICULATION QC Female finger4-1 L edge_ratio_max 1.386\nARTICULATION QC Female finger4-1 R edge_ratio_max 1.385\nARTICULATION QC Female finger4-2 L edge_ratio_max 1.154\nARTICULATION QC Female finger4-2 R edge_ratio_max 1.154\nARTICULATION QC Female finger4-3 L edge_ratio_max 1.158\nARTICULATION QC Female finger4-3 R edge_ratio_max 1.158\nARTICULATION QC Female finger5-1 L edge_ratio_max 1.296\nARTICULATION QC Female finger5-1 R edge_ratio_max 1.296\nARTICULATION QC Female finger5-2 L edge_ratio_max 1.103\nARTICULATION QC Female finger5-2 R edge_ratio_max 1.103\nARTICULATION QC Female finger5-3 L edge_ratio_max 1.101\nARTICULATION QC Female finger5-3 R edge_ratio_max 1.101\nARTICULATION QC Female metacarpal1 L edge_ratio_max 2.588\nARTICULATION QC Female metacarpal1 R edge_ratio_max 2.588\nARTICULATION QC Female metacarpal2 L edge_ratio_max 2.755\nARTICULATION QC Female metacarpal2 R edge_ratio_max 2.755\nARTICULATION QC Female metacarpal3 L edge_ratio_max 2.382\nARTICULATION QC Female metacarpal3 R edge_ratio_max 2.382\nARTICULATION QC Female metacarpal4 L edge_ratio_max 1.355\nARTICULATION QC Female metacarpal4 R edge_ratio_max 1.355\nARTICULATION QC Female spine01  edge_ratio_max 1.41\nARTICULATION QC Female spine02  edge_ratio_max 1.104\nARTICULATION QC Female spine03  edge_ratio_max 1.139\nARTICULATION QC Female spine04  edge_ratio_max 1.162\nARTICULATION QC Female spine05  edge_ratio_max 1.274\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n",
+    "export": "00:00.355  blend            | Read blend: \"/private/tmp/bodyguard-tailor.6b7Uvu/draft-a77-raw-cranium-front-head.blend\"\nWEB FIN REPAIR Male 0\nInfo: 925269 vertex weights limited\nINFO Draco mesh compression is available, use library at /Applications/Blender.app/Contents/Resources/5.1/scripts/addons_core/io_scene_gltf2/libextern_draco.dylib\n07:53:00 | INFO: Starting glTF 2.0 export\n07:53:00 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances\n07:53:00 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances\n07:53:00 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances\n07:53:00 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances\n07:53:00 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances\n07:53:00 | INFO: Extracting primitive: Quiet edge lowerarm01.L\n07:53:00 | INFO: Primitives created: 1\n07:53:00 | INFO: Extracting primitive: Quiet edge lowerarm01.R\n07:53:00 | INFO: Primitives created: 1\n07:53:00 | INFO: Extracting primitive: Quiet edge lowerleg01.L\n07:53:00 | INFO: Primitives created: 1\n07:53:00 | INFO: Extracting primitive: Quiet edge lowerleg01.R\n07:53:00 | INFO: Primitives created: 1\n07:53:00 | INFO: Extracting primitive: female_v006lowresUV.001\n07:53:01 | INFO: Primitives created: 1\n07:53:01 | INFO: Finished glTF 2.0 export in 1.54811429977417 s\n\nWEB FIN REPAIR Female 0\nInfo: 972046 vertex weights limited\n07:53:08 | INFO: Starting glTF 2.0 export\n07:53:08 | INFO: Extracting primitive: Quiet edge lowerarm01.L.001\n07:53:08 | INFO: Primitives created: 1\n07:53:08 | INFO: Extracting primitive: Quiet edge lowerarm01.R.001\n07:53:08 | INFO: Primitives created: 1\n07:53:08 | INFO: Extracting primitive: Quiet edge lowerleg01.L.001\n07:53:08 | INFO: Primitives created: 1\n07:53:08 | INFO: Extracting primitive: Quiet edge lowerleg01.R.001\n07:53:08 | INFO: Primitives created: 1\n07:53:09 | INFO: Extracting primitive: GEO-body_female_realistic.001\n07:53:10 | INFO: Primitives created: 1\n07:53:10 | INFO: Finished glTF 2.0 export in 1.637535810470581 s\n\nInfo: Saved as \"web-a77-raw-cranium-front-head.blend\"\n07:53:10 | INFO: Data are loaded, start creating Blender stuff\n07:53:10 | INFO: Blender create Mesh node Quiet edge lowerarm01.L\n07:53:10 | INFO: Blender create Mesh node Quiet edge lowerarm01.R\n07:53:10 | INFO: Blender create Mesh node Quiet edge lowerleg01.L\n07:53:10 | INFO: Blender create Mesh node Quiet edge lowerleg01.R\n07:53:10 | INFO: Blender create Mesh node female_v006lowresUV.001\n07:53:12 | INFO: glTF import finished in 1.76s\n07:53:13 | INFO: Data are loaded, start creating Blender stuff\n07:53:13 | INFO: Blender create Mesh node Quiet edge lowerarm01.L.001\n07:53:13 | INFO: Blender create Mesh node Quiet edge lowerarm01.R.001\n07:53:13 | INFO: Blender create Mesh node Quiet edge lowerleg01.L.001\n07:53:13 | INFO: Blender create Mesh node Quiet edge lowerleg01.R.001\n07:53:13 | INFO: Blender create Mesh node GEO-body_female_realistic.001\n07:53:14 | INFO: glTF import finished in 1.72s\n00:22.423  blend            | Read blend: \"/private/tmp/bodyguard-tailor.6b7Uvu/web-a77-raw-cranium-front-head.blend\"\n07:53:15 | INFO: Data are loaded, start creating Blender stuff\n07:53:15 | INFO: Blender create Mesh node Quiet edge lowerarm01.L\n07:53:15 | INFO: Blender create Mesh node Quiet edge lowerarm01.R\n07:53:15 | INFO: Blender create Mesh node Quiet edge lowerleg01.L\n07:53:15 | INFO: Blender create Mesh node Quiet edge lowerleg01.R\n07:53:15 | INFO: Blender create Mesh node female_v006lowresUV.001\n07:53:17 | INFO: glTF import finished in 2.02s\n07:53:18 | INFO: Data are loaded, start creating Blender stuff\n07:53:18 | INFO: Blender create Mesh node Quiet edge lowerarm01.L.001\n07:53:18 | INFO: Blender create Mesh node Quiet edge lowerarm01.R.001\n07:53:18 | INFO: Blender create Mesh node Quiet edge lowerleg01.L.001\n07:53:18 | INFO: Blender create Mesh node Quiet edge lowerleg01.R.001\n07:53:18 | INFO: Blender create Mesh node GEO-body_female_realistic.001\n07:53:19 | INFO: glTF import finished in 1.80s\nInfo: Saved as \"web-a77-raw-cranium-front-head-roundtrip.blend\"\nWEB ROUNDTRIP [{\"gender\": \"Male\", \"bytes\": 12659968, \"meshes\": 5, \"bounds_m\": [[-0.2751196324825287, 0.2751199007034302], [-0.18425239622592926, 0.11133291572332382], [-0.0056211985647678375, 1.6851458549499512]], \"animations\": 0, \"images\": 0}, {\"gender\": \"Female\", \"bytes\": 12496816, \"meshes\": 5, \"bounds_m\": [[-0.3038701117038727, 0.30387017130851746], [-0.16392144560813904, 0.1165170893073082], [0.0019709879998117685, 1.6339267492294312]], \"animations\": 0, \"images\": 0}]\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n",
+    "roundtrip": "00:00.526  blend            | Read blend: \"/private/tmp/bodyguard-tailor.6b7Uvu/web-a77-raw-cranium-front-head-roundtrip.blend\"\nAVATAR QC Male vertices 142115 bones 163 components 1 non_manifold 0 unnormalized 0\nAVATAR QC Female vertices 140259 bones 163 components 1 non_manifold 0 unnormalized 0\nNECK QC Male left rotation 20.0 axis (0.0, 1.0, 0.0)\nNECK QC Male right rotation 20.0 axis (0.0, -1.0, -0.0)\nNECK QC Female left rotation 20.0 axis (-0.0, 1.0, -0.0)\nNECK QC Female right rotation 20.0 axis (-0.0, -1.0, 0.0)\nARTICULATION QC Male clavicle L edge_ratio_max 1.281\nARTICULATION QC Male clavicle R edge_ratio_max 1.282\nARTICULATION QC Male upperarm01 L edge_ratio_max 1.978\nARTICULATION QC Male upperarm01 R edge_ratio_max 1.905\nARTICULATION QC Male lowerarm01 L edge_ratio_max 1.6\nARTICULATION QC Male lowerarm01 R edge_ratio_max 1.605\nARTICULATION QC Male wrist L edge_ratio_max 1.224\nARTICULATION QC Male wrist R edge_ratio_max 1.198\nARTICULATION QC Male upperleg01 L edge_ratio_max 1.525\nARTICULATION QC Male upperleg01 R edge_ratio_max 1.516\nARTICULATION QC Male lowerleg01 L edge_ratio_max 1.638\nARTICULATION QC Male lowerleg01 R edge_ratio_max 1.631\nARTICULATION QC Male foot L edge_ratio_max 1.183\nARTICULATION QC Male foot R edge_ratio_max 1.181\nARTICULATION QC Male finger1-1 L edge_ratio_max 2.151\nARTICULATION QC Male finger1-1 R edge_ratio_max 2.152\nARTICULATION QC Male finger1-2 L edge_ratio_max 1.584\nARTICULATION QC Male finger1-2 R edge_ratio_max 1.584\nARTICULATION QC Male finger1-3 L edge_ratio_max 1.41\nARTICULATION QC Male finger1-3 R edge_ratio_max 1.409\nARTICULATION QC Male finger2-1 L edge_ratio_max 1.459\nARTICULATION QC Male finger2-1 R edge_ratio_max 1.459\nARTICULATION QC Male finger2-2 L edge_ratio_max 1.242\nARTICULATION QC Male finger2-2 R edge_ratio_max 1.242\nARTICULATION QC Male finger2-3 L edge_ratio_max 1.24\nARTICULATION QC Male finger2-3 R edge_ratio_max 1.24\nARTICULATION QC Male finger3-1 L edge_ratio_max 1.537\nARTICULATION QC Male finger3-1 R edge_ratio_max 1.537\nARTICULATION QC Male finger3-2 L edge_ratio_max 1.221\nARTICULATION QC Male finger3-2 R edge_ratio_max 1.221\nARTICULATION QC Male finger3-3 L edge_ratio_max 1.163\nARTICULATION QC Male finger3-3 R edge_ratio_max 1.163\nARTICULATION QC Male finger4-1 L edge_ratio_max 1.493\nARTICULATION QC Male finger4-1 R edge_ratio_max 1.493\nARTICULATION QC Male finger4-2 L edge_ratio_max 1.19\nARTICULATION QC Male finger4-2 R edge_ratio_max 1.19\nARTICULATION QC Male finger4-3 L edge_ratio_max 1.219\nARTICULATION QC Male finger4-3 R edge_ratio_max 1.219\nARTICULATION QC Male finger5-1 L edge_ratio_max 1.279\nARTICULATION QC Male finger5-1 R edge_ratio_max 1.279\nARTICULATION QC Male finger5-2 L edge_ratio_max 1.217\nARTICULATION QC Male finger5-2 R edge_ratio_max 1.217\nARTICULATION QC Male finger5-3 L edge_ratio_max 1.137\nARTICULATION QC Male finger5-3 R edge_ratio_max 1.137\nARTICULATION QC Male metacarpal1 L edge_ratio_max 2.846\nARTICULATION QC Male metacarpal1 R edge_ratio_max 2.846\nARTICULATION QC Male metacarpal2 L edge_ratio_max 2.948\nARTICULATION QC Male metacarpal2 R edge_ratio_max 2.947\nARTICULATION QC Male metacarpal3 L edge_ratio_max 2.477\nARTICULATION QC Male metacarpal3 R edge_ratio_max 2.477\nARTICULATION QC Male metacarpal4 L edge_ratio_max 1.35\nARTICULATION QC Male metacarpal4 R edge_ratio_max 1.35\nARTICULATION QC Male spine01  edge_ratio_max 1.407\nARTICULATION QC Male spine02  edge_ratio_max 1.252\nARTICULATION QC Male spine03  edge_ratio_max 1.18\nARTICULATION QC Male spine04  edge_ratio_max 1.277\nARTICULATION QC Male spine05  edge_ratio_max 1.291\nARTICULATION QC Female clavicle L edge_ratio_max 1.238\nARTICULATION QC Female clavicle R edge_ratio_max 1.238\nARTICULATION QC Female upperarm01 L edge_ratio_max 2.218\nARTICULATION QC Female upperarm01 R edge_ratio_max 2.123\nARTICULATION QC Female lowerarm01 L edge_ratio_max 1.588\nARTICULATION QC Female lowerarm01 R edge_ratio_max 1.572\nARTICULATION QC Female wrist L edge_ratio_max 1.165\nARTICULATION QC Female wrist R edge_ratio_max 1.166\nARTICULATION QC Female upperleg01 L edge_ratio_max 1.599\nARTICULATION QC Female upperleg01 R edge_ratio_max 1.582\nARTICULATION QC Female lowerleg01 L edge_ratio_max 1.7\nARTICULATION QC Female lowerleg01 R edge_ratio_max 1.694\nARTICULATION QC Female foot L edge_ratio_max 1.179\nARTICULATION QC Female foot R edge_ratio_max 1.189\nARTICULATION QC Female finger1-1 L edge_ratio_max 2.185\nARTICULATION QC Female finger1-1 R edge_ratio_max 2.186\nARTICULATION QC Female finger1-2 L edge_ratio_max 1.544\nARTICULATION QC Female finger1-2 R edge_ratio_max 1.544\nARTICULATION QC Female finger1-3 L edge_ratio_max 1.296\nARTICULATION QC Female finger1-3 R edge_ratio_max 1.291\nARTICULATION QC Female finger2-1 L edge_ratio_max 1.402\nARTICULATION QC Female finger2-1 R edge_ratio_max 1.402\nARTICULATION QC Female finger2-2 L edge_ratio_max 1.188\nARTICULATION QC Female finger2-2 R edge_ratio_max 1.188\nARTICULATION QC Female finger2-3 L edge_ratio_max 1.147\nARTICULATION QC Female finger2-3 R edge_ratio_max 1.147\nARTICULATION QC Female finger3-1 L edge_ratio_max 1.497\nARTICULATION QC Female finger3-1 R edge_ratio_max 1.497\nARTICULATION QC Female finger3-2 L edge_ratio_max 1.184\nARTICULATION QC Female finger3-2 R edge_ratio_max 1.184\nARTICULATION QC Female finger3-3 L edge_ratio_max 1.12\nARTICULATION QC Female finger3-3 R edge_ratio_max 1.12\nARTICULATION QC Female finger4-1 L edge_ratio_max 1.369\nARTICULATION QC Female finger4-1 R edge_ratio_max 1.369\nARTICULATION QC Female finger4-2 L edge_ratio_max 1.154\nARTICULATION QC Female finger4-2 R edge_ratio_max 1.154\nARTICULATION QC Female finger4-3 L edge_ratio_max 1.155\nARTICULATION QC Female finger4-3 R edge_ratio_max 1.155\nARTICULATION QC Female finger5-1 L edge_ratio_max 1.293\nARTICULATION QC Female finger5-1 R edge_ratio_max 1.293\nARTICULATION QC Female finger5-2 L edge_ratio_max 1.139\nARTICULATION QC Female finger5-2 R edge_ratio_max 1.139\nARTICULATION QC Female finger5-3 L edge_ratio_max 1.095\nARTICULATION QC Female finger5-3 R edge_ratio_max 1.095\nARTICULATION QC Female metacarpal1 L edge_ratio_max 2.587\nARTICULATION QC Female metacarpal1 R edge_ratio_max 2.587\nARTICULATION QC Female metacarpal2 L edge_ratio_max 2.757\nARTICULATION QC Female metacarpal2 R edge_ratio_max 2.756\nARTICULATION QC Female metacarpal3 L edge_ratio_max 2.382\nARTICULATION QC Female metacarpal3 R edge_ratio_max 2.382\nARTICULATION QC Female metacarpal4 L edge_ratio_max 1.349\nARTICULATION QC Female metacarpal4 R edge_ratio_max 1.349\nARTICULATION QC Female spine01  edge_ratio_max 1.41\nARTICULATION QC Female spine02  edge_ratio_max 1.215\nARTICULATION QC Female spine03  edge_ratio_max 1.205\nARTICULATION QC Female spine04  edge_ratio_max 1.359\nARTICULATION QC Female spine05  edge_ratio_max 1.371\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n",
+    "body_preservation": "00:01.545  blend            | Read blend: \"/private/tmp/bodyguard-tailor.6b7Uvu/draft-a66-neutral-under-jaw-head.blend\"\n00:19.422  blend            | Read blend: \"/private/tmp/bodyguard-tailor.6b7Uvu/draft-a77-raw-cranium-front-head.blend\"\nACTUAL AUTHORED BODY PRESERVATION [{\"body\": \"Male\", \"retained_authored_body_points_and_named_skin\": 75915, \"hands_163bones_rest_matrices_identical\": true, \"head_artist_edit_and_new_bridge_checked_by_generation_assertions_not_this_comparison\": true}, {\"body\": \"Female\", \"retained_authored_body_points_and_named_skin\": 75865, \"hands_163bones_rest_matrices_identical\": true, \"head_artist_edit_and_new_bridge_checked_by_generation_assertions_not_this_comparison\": true}]\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+  },
+  "browser_terminal_output": "[WebServer] (node:29314) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\nRunning 3 tests using 1 worker\n\n(node:29328) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n  ✓  1 e2e/avatar.spec.ts:81:1 › A-00 native proxy는 브라우저의 외부 연결을 차단한다 (8.6s)\n[WebServer] 7:57:21 AM [vite] (client) [console.warn] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\n[WebServer] 7:57:35 AM [vite] (client) [console.warn] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\n  ✓  2 e2e/avatar.spec.ts:85:1 › A-06 실제 남녀 GLB 두 복제본을 로드하고 한쪽 기술 변형이 다른 뼈대를 바꾸지 않는다 (27.0s)\n[WebServer] 7:57:48 AM [vite] (client) [console.warn] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\n[WebServer] 7:57:49 AM [vite] (client) [Unhandled error] Error: Could not load http://localhost:5182/src/avatar/models/bodyguard-male-candidate-a37.glb: fetch for \"http://localhost:5182/src/avatar/models/bodyguard-male-candidate-a37.glb\" responded with 503: Service Unavailable\n[WebServer]  > node_modules/.pnpm/@react-three+fiber@9.8.1_@types+react@19.3.0_react-dom@19.3.0_react@19.3.0__react@19.3.0_three@0.186.1/node_modules/@react-three/fiber/dist/events-9ce18a08.esm.js:1305:35\n[WebServer]  > Object._onError [as onError] node_modules/.pnpm/three-stdlib@2.36.1_three@0.186.1/node_modules/three-stdlib/loaders/GLTFLoader.js:82:8\n[WebServer]  > node_modules/.pnpm/three@0.186.1/node_modules/three/build/three.core.js:45285:38\n[WebServer] \n[WebServer] 7:57:49 AM [vite] (client) [console.error] Error: Could not load http://localhost:5182/src/avatar/models/bodyguard-male-candidate-a37.glb: fetch for \"http://localhost:5182/src/avatar/models/bodyguard-male-candidate-a37.glb\" responded with 503: Service Unavailable\n[WebServer]     at http://localhost:5182/node_modules/.vite/deps/react-three-fiber.esm-0ZlcBiTT.js?v=aab34aa9:1293:52\n[WebServer]     at Object._onError [as onError] (http://localhost:5182/node_modules/.vite/deps/@react-three_drei.js?v=aab34aa9:16622:17)\n[WebServer]     at http://localhost:5182/node_modules/.vite/deps/three.module-QAJAubfM.js?v=aab34aa9:31895:36\n[WebServer] \n[WebServer] The above error occurred in the <CanvasImpl> component.\n[WebServer] \n[WebServer] React will try to recreate this component tree from scratch using the error boundary you provided, ReviewBoundary.\n[WebServer] \n[WebServer] 7:57:49 AM [vite] (client) [console.warn] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\n[WebServer] 7:57:50 AM [vite] (client) [console.warn] THREE.WebGLRenderer: WEBGL_lose_context extension not supported.\n[WebServer] 7:57:50 AM [vite] (client) [console.warn] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\n  ✓  3 e2e/avatar.spec.ts:142:1 › A-06 GLB 실패와 WebGL 연결 상실에서 재시도하여 새 모델을 연다 (3.3s)\n\n  3 passed (41.6s)\n",
+  "workflow_diagnostics": [
+    {
+      "stage": "raw-cage diagnostic initial Ruff",
+      "exit_code": 1,
+      "actual_findings": [
+        "I001 unsorted imports",
+        "F401 unused mathutils.Vector"
+      ],
+      "native_started_from_failed_script": false,
+      "repair": "installed Ruff mechanical check --fix; actual format/check and native diagnostic rerun exit0",
+      "original_failure_text_snapshot_available": false,
+      "failure_not_counted_as_verification_pass": true
+    }
+  ],
+  "warnings": {
+    "export_parent_warnings": 5,
+    "vertex_weights_limited": [
+      925269,
+      972046
+    ],
+    "browser": [
+      "NO_COLOR/FORCE_COLOR",
+      "THREE.Clock deprecation",
+      "injected guest401 andGLB503",
+      "actual native WebGL loss/recovery warning"
+    ]
+  },
+  "unrun": [
+    "head-only A76 variants full body/GLB/rig QA",
+    "A77 imported34PNG",
+    "actual people/observer/framing/lighting/body-shape/latency/accuracy",
+    "correct-motion demo/retargeting/webcam integration",
+    "this iteration API/Vitest/production build service regressions",
+    "multiple devices/long sessions/battery",
+    "supplier SMTP/Google connections",
+    "operating DB migration/secrets/cost/accounts",
+    "deployment/release"
+  ],
+  "appearance": {
+    "default_adopted": false,
+    "unresolved_p2": "A-02: face plane and chin/neck collar-like seam, rear neck/wrist and final finish/silhouette",
+    "merge_gate_satisfied": false,
+    "development_default": "A37 unchanged",
+    "stages_1_to_6_complete": false,
+    "expert_review_only_remaining": false,
+    "next": "Preserve raw cranium; refine actual professional lower-jaw/cervical surface correspondence, not repeated global/head smoothing or guard relaxation"
+  },
+  "immutable_copies": [
+    [
+      "tmp/draft-a77-raw-cranium-front-head.blend",
+      "bodyguard/assets/blender/bodyguard_avatar_candidate_a77_review.blend"
+    ],
+    [
+      "tmp/a76-head-processing-inspection.py",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a76-head-processing-inspection.py.txt"
+    ],
+    [
+      "tmp/a76-raw-cage-diagnostic.py",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a76-raw-cage-diagnostic.py.txt"
+    ],
+    [
+      "tmp/a76-front-face-sculpt.py",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a76-front-face-sculpt.py.txt"
+    ],
+    [
+      "tmp/a76-face-only-inspection.py",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a76-face-only-inspection.py.txt"
+    ],
+    [
+      "tmp/a76b-front-surface-sculpt.py",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a76b-front-surface-sculpt.py.txt"
+    ],
+    [
+      "tmp/a76b-front-surface-inspection.py",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a76b-front-surface-inspection.py.txt"
+    ],
+    [
+      "tmp/a76c-front-surface-sculpt.py",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a76c-front-surface-sculpt.py.txt"
+    ],
+    [
+      "tmp/a76c-front-surface-inspection.py",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a76c-front-surface-inspection.py.txt"
+    ],
+    [
+      "tmp/a76d-front-midface-sculpt.py",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a76d-front-midface-sculpt.py.txt"
+    ],
+    [
+      "tmp/a76d-front-midface-inspection.py",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a76d-front-midface-inspection.py.txt"
+    ],
+    [
+      "tmp/a77-native-boundary-regression.py",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77-native-boundary-regression.py.txt"
+    ],
+    [
+      "tmp/a77-authored-body-preservation.py",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77-authored-body-preservation.py.txt"
+    ],
+    [
+      "tmp/a77-raw-cranium-front-head.py",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77-producer-at-generation.py.txt"
+    ],
+    [
+      "tmp/a76-raw-cage-diagnostic.json",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/raw-cage-diagnostic.json"
+    ],
+    [
+      "tmp/head-a76-stage-raw/generic-front.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/stage-raw/generic-front.png"
+    ],
+    [
+      "tmp/head-a76-stage-raw/generic-side.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/stage-raw/generic-side.png"
+    ],
+    [
+      "tmp/head-a76-stage-raw/inspection-report.json",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/stage-raw/inspection-report.json"
+    ],
+    [
+      "tmp/head-a76-stage-volume/generic-front.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/stage-volume/generic-front.png"
+    ],
+    [
+      "tmp/head-a76-stage-volume/generic-side.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/stage-volume/generic-side.png"
+    ],
+    [
+      "tmp/head-a76-stage-volume/inspection-report.json",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/stage-volume/inspection-report.json"
+    ],
+    [
+      "tmp/head-a76-stage-volume-lower/generic-front.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/stage-volume-lower/generic-front.png"
+    ],
+    [
+      "tmp/head-a76-stage-volume-lower/generic-side.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/stage-volume-lower/generic-side.png"
+    ],
+    [
+      "tmp/head-a76-stage-volume-lower/inspection-report.json",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/stage-volume-lower/inspection-report.json"
+    ],
+    [
+      "tmp/head-a76-face6/generic-front.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/y6/generic-front.png"
+    ],
+    [
+      "tmp/head-a76-face6/generic-side.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/y6/generic-side.png"
+    ],
+    [
+      "tmp/head-a76-face6/inspection-report.json",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/y6/inspection-report.json"
+    ],
+    [
+      "tmp/head-a76-face12/generic-front.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/y12/generic-front.png"
+    ],
+    [
+      "tmp/head-a76-face12/generic-side.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/y12/generic-side.png"
+    ],
+    [
+      "tmp/head-a76-face12/inspection-report.json",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/y12/inspection-report.json"
+    ],
+    [
+      "tmp/head-a76b-face6/generic-front.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/xyz6/generic-front.png"
+    ],
+    [
+      "tmp/head-a76b-face6/generic-side.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/xyz6/generic-side.png"
+    ],
+    [
+      "tmp/head-a76b-face6/inspection-report.json",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/xyz6/inspection-report.json"
+    ],
+    [
+      "tmp/head-a76b-face12/generic-front.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/xyz12/generic-front.png"
+    ],
+    [
+      "tmp/head-a76b-face12/generic-side.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/xyz12/generic-side.png"
+    ],
+    [
+      "tmp/head-a76b-face12/inspection-report.json",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/xyz12/inspection-report.json"
+    ],
+    [
+      "tmp/head-a76c-face24/generic-front.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/xyz24/generic-front.png"
+    ],
+    [
+      "tmp/head-a76c-face24/generic-side.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/xyz24/generic-side.png"
+    ],
+    [
+      "tmp/head-a76c-face24/inspection-report.json",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/xyz24/inspection-report.json"
+    ],
+    [
+      "tmp/head-a76c-face36/generic-front.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/xyz36/generic-front.png"
+    ],
+    [
+      "tmp/head-a76c-face36/generic-side.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/xyz36/generic-side.png"
+    ],
+    [
+      "tmp/head-a76c-face36/inspection-report.json",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/xyz36/inspection-report.json"
+    ],
+    [
+      "tmp/head-a76d-face36/generic-front.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/midface36/generic-front.png"
+    ],
+    [
+      "tmp/head-a76d-face36/generic-side.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/midface36/generic-side.png"
+    ],
+    [
+      "tmp/head-a76d-face36/inspection-report.json",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/head/midface36/inspection-report.json"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/deformation-report.json",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/deformation-report.json"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/faceless-body-back-female.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/faceless-body-back-female.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/faceless-body-back-male.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/faceless-body-back-male.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/faceless-body-side-female.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/faceless-body-side-female.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/faceless-body-side-male.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/faceless-body-side-male.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/faceless-front.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/faceless-front.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/faceless-hand-female.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/faceless-hand-female.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/faceless-hand-male.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/faceless-hand-male.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/faceless-knee-female.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/faceless-knee-female.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/faceless-knee-male.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/faceless-knee-male.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/faceless-neck-female-left.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/faceless-neck-female-left.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/faceless-neck-female-right.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/faceless-neck-female-right.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/faceless-neck-male-left.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/faceless-neck-male-left.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/faceless-neck-male-right.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/faceless-neck-male-right.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/faceless-quarter.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/faceless-quarter.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/faceless-side-female.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/faceless-side-female.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/faceless-side-male.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/faceless-side-male.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/technical-female-clavicle.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/technical-female-clavicle.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/technical-female-finger2-1.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/technical-female-finger2-1.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/technical-female-foot.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/technical-female-foot.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/technical-female-lowerarm01.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/technical-female-lowerarm01.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/technical-female-lowerleg01.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/technical-female-lowerleg01.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/technical-female-spine02.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/technical-female-spine02.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/technical-female-upperarm01.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/technical-female-upperarm01.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/technical-female-upperleg01.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/technical-female-upperleg01.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/technical-female-wrist.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/technical-female-wrist.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/technical-male-clavicle.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/technical-male-clavicle.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/technical-male-finger2-1.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/technical-male-finger2-1.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/technical-male-foot.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/technical-male-foot.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/technical-male-lowerarm01.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/technical-male-lowerarm01.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/technical-male-lowerleg01.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/technical-male-lowerleg01.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/technical-male-spine02.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/technical-male-spine02.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/technical-male-upperarm01.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/technical-male-upperarm01.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/technical-male-upperleg01.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/technical-male-upperleg01.png"
+    ],
+    [
+      "tmp/review-a77-raw-cranium-full/technical-male-wrist.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source/technical-male-wrist.png"
+    ],
+    [
+      "tmp/preview-a77-raw-cranium/first-back-female.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/preview/first-back-female.png"
+    ],
+    [
+      "tmp/preview-a77-raw-cranium/first-back-male.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/preview/first-back-male.png"
+    ],
+    [
+      "tmp/preview-a77-raw-cranium/first-front.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/preview/first-front.png"
+    ],
+    [
+      "tmp/preview-a77-raw-cranium/first-neck-female-left.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/preview/first-neck-female-left.png"
+    ],
+    [
+      "tmp/preview-a77-raw-cranium/first-neck-male-left.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/preview/first-neck-male-left.png"
+    ],
+    [
+      "tmp/preview-a77-raw-cranium/first-quarter.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/preview/first-quarter.png"
+    ],
+    [
+      "tmp/preview-a77-raw-cranium/first-side-female.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/preview/first-side-female.png"
+    ],
+    [
+      "tmp/preview-a77-raw-cranium/first-side-male.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/preview/first-side-male.png"
+    ],
+    [
+      "tmp/a77-generation.json",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/generation-report.json"
+    ],
+    [
+      "tmp/a77-native-boundary-regression.json",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/native-boundary-regression.json"
+    ],
+    [
+      "tmp/a77-authored-body-preservation.json",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/authored-body-preservation.json"
+    ],
+    [
+      "tmp/qc-a77-raw-cranium/deformation-report.json",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/source-qc-report.json"
+    ],
+    [
+      "tmp/qc-a77-native-roundtrip/deformation-report.json",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/roundtrip-deformation-report.json"
+    ],
+    [
+      "tmp/glb-a77-raw-cranium/roundtrip-report.json",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/roundtrip-report.json"
+    ],
+    [
+      "tmp/glb-a77-raw-cranium/bodyguard-male-candidate.glb",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/bodyguard-male-candidate.glb"
+    ],
+    [
+      "tmp/glb-a77-raw-cranium/bodyguard-female-candidate.glb",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/bodyguard-female-candidate.glb"
+    ],
+    [
+      "tmp/a77-browser-report.json",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/browser-report.json"
+    ],
+    [
+      "root/bodyguard/frontend/test-results/avatar/avatar-A-06-실제-남녀-GLB-두-복제본을-로드하고-한쪽-기술-변형이-다른-뼈대를-바꾸지-않는다/남성-two-models.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/browser/male-two-models.png"
+    ],
+    [
+      "root/bodyguard/frontend/test-results/avatar/avatar-A-06-실제-남녀-GLB-두-복제본을-로드하고-한쪽-기술-변형이-다른-뼈대를-바꾸지-않는다/여성-two-models.png",
+      "bodyguard/assets/blender/review/candidate-a76-a77-review/a77/browser/female-two-models.png"
+    ]
+  ]
+}

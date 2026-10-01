@@ -1,0 +1,79 @@
+{
+  "source_sha256": "03ac3629b76858ee7f55fc0ffa9e6118c5d64fcbf4ba29100889af1318a8b3b5",
+  "source_saved": false,
+  "head_cage_sculpt": {
+    "method": "native lower professional head cage Y/Z smoothing",
+    "iterations": 12,
+    "factor": 0.45,
+    "selected_vertices": 151,
+    "cage_vertices": 266,
+    "upper_cage_and_topology_preserved": true,
+    "maximum_cage_displacement_m": 0.031244902455789817,
+    "artist_edit_only_not_anatomical_or_clinical_target": true
+  },
+  "head_depth_sculpt": {
+    "native_edit": "LAPLACIANSMOOTH / existing cage / normalized volume-preserving",
+    "iterations": 100,
+    "lambda_factor": 0.2,
+    "lambda_border": 0.1,
+    "native_volume_preserve_enabled": true,
+    "cage_vertices": 266,
+    "topology_and_closed_surface_preserved": true,
+    "cage_volume_before_native_units3": 0.0035623890776594223,
+    "cage_volume_after_native_units3": 0.0035642057086671696,
+    "cage_volume_ratio": 1.0005099473887173,
+    "maximum_artist_displacement_m": 0.0345892780207275,
+    "not_an_exercise_or_release_approval": true
+  },
+  "head_orientation": {
+    "native_edit": "bmesh rotate / rigid professional cage only",
+    "artist_angle_degrees": 30,
+    "axis": "X",
+    "pivot_native_m": [
+      -1.5748963244632819e-09,
+      -0.040024127811193466,
+      0.06900680810213089
+    ],
+    "cage_vertices": 266,
+    "topology_edge_lengths_and_volume_preserved": true,
+    "actual_volume_ratio": 1.000000024451242,
+    "rotation_matrix": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.8660253286361694,
+        -0.5000001192092896
+      ],
+      [
+        0.0,
+        0.5000001192092896,
+        0.8660253286361694
+      ]
+    ],
+    "not_an_exercise_or_clinical_target": true
+  },
+  "professional_asset": "GEO-head_primitve",
+  "processing_stage": "volume-lower",
+  "artist_orientation_fixed_degrees": 30,
+  "vertices": 67586,
+  "bounds_m": [
+    [
+      -0.08087658882141113,
+      0.08087658882141113
+    ],
+    [
+      -0.1380268782377243,
+      0.01802687905728817
+    ],
+    [
+      1.426269769668579,
+      1.6846270561218262
+    ]
+  ],
+  "artist_inspection_only": true,
+  "rig_deformation_or_release_approval": false
+}

@@ -1,0 +1,58 @@
+"""FR-A-02/03: read existing licensed head cage coordinate ranges only."""
+
+import json
+import sys
+from hashlib import file_digest
+from pathlib import Path
+
+import bmesh
+import bpy
+
+bundle, output = map(Path, sys.argv[sys.argv.index("--") + 1 :])
+assert not output.exists()
+with bundle.open("rb") as f:
+    assert (
+        file_digest(f, "sha256").hexdigest()
+        == "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137"
+    )
+with bpy.data.libraries.load(str(bundle)) as (_, data):
+    data.objects = ["GEO-head_primitve"]
+head = data.objects[0]
+points = [tuple(v.co) for v in head.data.vertices]
+ranges = [[min(p[i] for p in points), max(p[i] for p in points)] for i in range(3)]
+mesh = bmesh.new()
+mesh.from_mesh(head.data)
+assert len(mesh.verts) == 266 and all(e.is_manifold for e in mesh.edges)
+rows = []
+for a, b in ((0, 0.25), (0.25, 0.5), (0.5, 0.7), (0.7, 1.000001)):
+    low, high = ranges[2]
+    band = [
+        p for p in points if low + (high - low) * a <= p[2] < low + (high - low) * b
+    ]
+    rows.append(
+        {
+            "height_fraction": [a, b],
+            "vertices": len(band),
+            "bounds": [
+                [min(p[i] for p in band), max(p[i] for p in band)] for i in range(3)
+            ],
+        }
+    )
+volume = abs(mesh.calc_volume())
+mesh.free()
+output.write_text(
+    json.dumps(
+        {
+            "range_native_m": ranges,
+            "bands": rows,
+            "cage_vertices": 266,
+            "source_world_matrix": [list(r) for r in head.matrix_world],
+            "actual_native_volume": volume,
+            "artist_cage_only_not_human_coordinates": True,
+            "source_saved": False,
+        },
+        indent=2,
+    )
+    + "\n"
+)
+print("NATIVE PROFESSIONAL CAGE", ranges, rows)
