@@ -2,7 +2,7 @@
 // B-03 state races are synthetic; the browser harness separately tests real API auth.
 import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { afterEach, expect, it, vi } from 'vitest'
-import { ApiError, authenticate, me, signup } from './api/auth'
+import { ApiError, authenticate, me, signup, validPassword } from './api/auth'
 import { AuthProvider, useAuth } from './auth'
 
 afterEach(() => {
@@ -11,8 +11,16 @@ afterEach(() => {
 })
 const response = (value: unknown, status = 200) => new Response(JSON.stringify(value), { status })
 const account = { id: 'own-user', email: 'own@example.com' }
+it.each([
+  ['가'.repeat(14), false],
+  ['가'.repeat(15), true],
+  ['😀'.repeat(128), true],
+  ['😀'.repeat(129), false],
+])('PW-02 Unicode password policy boundary %#', (value, valid) => {
+  expect(validPassword(value as string)).toBe(valid)
+})
 function Screen() {
-  const { state, refresh, signOut, signIn } = useAuth()
+  const { state, refresh, signOut, signIn, resetPassword } = useAuth()
   return (
     <>
       <output>{state.status === 'ready' ? state.user.email : state.status}</output>
@@ -43,6 +51,17 @@ function Screen() {
         }}
       >
         Login
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          void resetPassword(
+            { token: 'test-only-token'.padEnd(43, '_'), password: 'test-only-password-long' },
+            new AbortController().signal,
+          ).catch(() => {})
+        }}
+      >
+        Reset
       </button>
     </>
   )
@@ -157,4 +176,33 @@ it('B-02 rate limit preserves Retry-After without exposing server input', async 
       new AbortController().signal,
     ),
   ).rejects.toMatchObject({ status: 429, retryAfter: 60 })
+})
+
+it('PW-03 late aborted reset cannot erase a newer authenticated session', async () => {
+  let finish: ((value: Response) => void) | undefined
+  const fetcher = vi
+    .fn()
+    .mockResolvedValueOnce(response(account))
+    .mockResolvedValueOnce(response({ csrf_token: 'csrf-test-value' }))
+    .mockImplementationOnce(
+      () =>
+        new Promise<Response>((resolve) => {
+          finish = resolve
+        }),
+    )
+    .mockResolvedValueOnce(response({ csrf_token: 'csrf-test-value' }))
+    .mockResolvedValueOnce(response(account))
+  vi.stubGlobal('fetch', fetcher)
+  render(
+    <AuthProvider>
+      <Screen />
+    </AuthProvider>,
+  )
+  await screen.findByText(account.email)
+  fireEvent.click(screen.getByText('Reset'))
+  await waitFor(() => expect(fetcher).toHaveBeenCalledTimes(3))
+  fireEvent.click(screen.getByText('Login'))
+  await screen.findByText(account.email)
+  await act(async () => finish?.(new Response(null, { status: 204 })))
+  expect(screen.getByRole('status').textContent).toBe(account.email)
 })

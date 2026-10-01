@@ -2,6 +2,7 @@
 
 import asyncio
 import hmac
+import logging
 import math
 from collections.abc import Awaitable, Callable
 from datetime import UTC, datetime, timedelta
@@ -10,24 +11,23 @@ from uuid import uuid4
 
 import aiosmtplib
 from email_validator import EmailNotValidError, validate_email
-from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi import BackgroundTasks, FastAPI, HTTPException, Request, Response
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field, SecretStr, field_validator
-from sqlalchemy import Connection, Engine, RowMapping, create_engine, select, update
+from sqlalchemy import Connection, Engine, RowMapping, create_engine, delete, select, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.exc import SQLAlchemyError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.config import Settings
-from app.db import challenges, limits, sessions, users
+from app.db import challenges, limits, resets, sessions, users
 from app.security import cleanup, code, digest, keyed, passwords, quota, token
 
 
-class Credentials(BaseModel):
+class EmailInput(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
     email: str = Field(max_length=320)
-    password: SecretStr = Field(min_length=15, max_length=128)
 
     @field_validator("email")
     @classmethod
@@ -36,6 +36,28 @@ class Credentials(BaseModel):
             return str(validate_email(value.strip(), check_deliverability=False).normalized).lower()
         except EmailNotValidError:
             raise ValueError("Invalid email") from None
+
+
+class Credentials(EmailInput):
+    password: SecretStr = Field(min_length=15, max_length=128)
+
+
+class ResetInput(BaseModel):
+    model_config = ConfigDict(extra="forbid", strict=True)
+    token: SecretStr
+    password: SecretStr = Field(min_length=15, max_length=128)
+
+    @field_validator("token")
+    @classmethod
+    def valid_token(cls, value: SecretStr) -> SecretStr:
+        raw = value.get_secret_value()
+        if (
+            len(raw) != 43
+            or not raw.isascii()
+            or not all(char.isalnum() or char in "_-" for char in raw)
+        ):
+            raise ValueError("Invalid token")
+        return value
 
 
 class ChallengeInput(BaseModel):
@@ -72,15 +94,20 @@ def utcnow() -> datetime:
     return datetime.now(UTC)
 
 
-def smtp_mail(settings: Settings, email: str, value: str) -> None:
+def smtp_mail(settings: Settings, email: str, value: str, *, reset: bool = False) -> None:
     if not settings.mail_configured:
         raise RuntimeError("Mail unavailable")
     assert settings.smtp_username is not None and settings.smtp_password is not None
     message = EmailMessage()
     message["From"] = settings.smtp_username.get_secret_value()
     message["To"] = email
-    message["Subject"] = "BODYGUARD 이메일 인증"
-    message.set_content(f"인증 코드: {value}\n10분 이내에 가입 화면에서 입력해 주세요.")
+    message["Subject"] = "BODYGUARD 비밀번호 재설정" if reset else "BODYGUARD 이메일 인증"
+    message.set_content(
+        f"비밀번호 재설정 요청을 받았습니다.\n{value}\n"
+        "30분 안에 새 비밀번호를 설정해 주세요. 본인이 요청하지 않았다면 무시해 주세요."
+        if reset
+        else f"인증 코드: {value}\n10분 이내에 가입 화면에서 입력해 주세요."
+    )
     # ponytail: bounded synchronous delivery; durable outbox when provider throughput requires it.
     asyncio.run(
         aiosmtplib.send(
@@ -100,14 +127,21 @@ def create_app(
     engine: Engine | None = None,
     mail: Callable[[str, str], None] | None = None,
     clock: Callable[[], datetime] | None = None,
+    *,
+    reset_mail: Callable[[str, str], None] | None = None,
 ) -> FastAPI:
     config = settings or Settings.from_environment()
-    if config.environment != "test" and (mail is not None or clock is not None):
+    if config.environment != "test" and any(
+        value is not None for value in (mail, clock, reset_mail)
+    ):
         raise RuntimeError("Test dependencies cannot launch a non-test server")
     db = engine or create_engine(
         config.database_url.get_secret_value(), hide_parameters=True, pool_pre_ping=True
     )
     send = mail or (lambda address, value: smtp_mail(config, address, value))
+    send_reset = reset_mail or (
+        lambda address, value: smtp_mail(config, address, value, reset=True)
+    )
     now_fn = clock or utcnow
     key = config.security_key.get_secret_value()
     dummy_hash = passwords.hash(token())
@@ -139,6 +173,14 @@ def create_app(
         if not row or row["revoked_at"] is not None or row["expires_at"] <= now:
             return None
         if row["user_id"] and row["last_seen_at"] + timedelta(minutes=30) <= now:
+            return None
+        if (
+            row["user_id"]
+            and connection.scalar(
+                select(users.c.credentials_version).where(users.c.id == row["user_id"])
+            )
+            != row["credentials_version"]
+        ):
             return None
         return row
 
@@ -198,7 +240,11 @@ def create_app(
         return failure(503, "서비스 연결을 다시 시도해 주세요.")
 
     def new_session(
-        connection: Connection, response: Response, now: datetime, user_id: str | None
+        connection: Connection,
+        response: Response,
+        now: datetime,
+        user_id: str | None,
+        credentials_version: int | None = None,
     ) -> str:
         raw = token()
         seconds = 8 * 3600 if user_id else 600
@@ -210,6 +256,7 @@ def create_app(
                 last_seen_at=now,
                 expires_at=now + timedelta(seconds=seconds),
                 revoked_at=None,
+                credentials_version=credentials_version,
             )
         )
         response.set_cookie(
@@ -224,14 +271,19 @@ def create_app(
         return keyed(key, "csrf", raw)
 
     def rotate(
-        connection: Connection, response: Response, row: RowMapping, now: datetime, user_id: str
+        connection: Connection,
+        response: Response,
+        row: RowMapping,
+        now: datetime,
+        user_id: str,
+        credentials_version: int,
     ) -> str:
         connection.execute(
             update(sessions)
             .where(sessions.c.token_hash == row["token_hash"])
             .values(revoked_at=now)
         )
-        return new_session(connection, response, now, user_id)
+        return new_session(connection, response, now, user_id, credentials_version)
 
     def mail_keys(request: Request, email: str) -> list[tuple[str, int]]:
         # Transport peer only; ASGI server must use --no-proxy-headers (README).
@@ -356,7 +408,7 @@ def create_app(
             )
             if created is None:
                 return failure(400, "인증 코드를 다시 확인해 주세요.")
-            csrf_token = rotate(connection, response, old, now, user_id)
+            csrf_token = rotate(connection, response, old, now, user_id, 0)
             return {"id": user_id, "email": row["email"], "csrf_token": csrf_token}
 
     @app.post("/api/v1/auth/resend", status_code=202)
@@ -445,8 +497,132 @@ def create_app(
                 return failure(401, "이메일 또는 비밀번호를 확인해 주세요.")
             now = now_fn()
             protect(connection, request, now)
-            csrf_token = rotate(connection, response, old, now, user["id"])
+            csrf_token = rotate(
+                connection, response, old, now, user["id"], user["credentials_version"]
+            )
             return {"id": user["id"], "email": user["email"], "csrf_token": csrf_token}
+
+    def deliver_reset(email: str) -> None:
+        # FR-U-03: response is already sent; neither SMTP latency nor existence changes it.
+        hashed = ""
+        try:
+            with db.begin() as connection:
+                user_id = connection.scalar(
+                    select(users.c.id).where(users.c.email == email).with_for_update()
+                )
+                if user_id is None:
+                    return
+                raw, now = token(), now_fn()
+                hashed = digest(raw)
+                connection.execute(
+                    insert(resets)
+                    .values(
+                        user_id=user_id,
+                        token_hash=hashed,
+                        created_at=now,
+                        expires_at=now + timedelta(minutes=30),
+                        used_at=None,
+                    )
+                    .on_conflict_do_update(
+                        index_elements=[resets.c.user_id],
+                        set_={
+                            "token_hash": hashed,
+                            "created_at": now,
+                            "expires_at": now + timedelta(minutes=30),
+                            "used_at": None,
+                        },
+                    )
+                )
+            # Only configured origin, never Host; fragment stays out of HTTP URLs.
+            send_reset(email, config.origin + "/password/reset#token=" + raw)
+        except Exception:
+            logging.getLogger("bodyguard.auth").error("Password recovery delivery failed")
+            if hashed:
+                try:
+                    with db.begin() as connection:
+                        connection.execute(delete(resets).where(resets.c.token_hash == hashed))
+                except SQLAlchemyError:
+                    logging.getLogger("bodyguard.auth").error("Password recovery cleanup failed")
+
+    @app.post("/api/v1/auth/password/forgot", status_code=202, response_model=ErrorOut)
+    def forgot(payload: EmailInput, request: Request, background: BackgroundTasks) -> Response:
+        with db.begin() as connection:
+            protect(connection, request, now_fn())
+            if not config.mail_configured and reset_mail is None:
+                return failure(503, "메일 연결을 확인할 수 없습니다. 다시 시도해 주세요.")
+            retry = quota(
+                connection,
+                mail_keys(request, payload.email),
+                now_fn(),
+                timedelta(hours=1),
+                consume=True,
+            )
+            if retry:
+                return failure(429, "잠시 후 다시 시도해 주세요.", retry)
+        # ponytail: native background delivery can be lost on process exit; re-request,
+        # then add a durable outbox only if operational throughput/reliability requires it.
+        background.add_task(deliver_reset, payload.email)
+        return JSONResponse(
+            {"detail": "요청을 접수했습니다. 등록된 이메일이면 재설정 안내를 받을 수 있습니다."},
+            status_code=202,
+        )
+
+    @app.post("/api/v1/auth/password/reset", status_code=204)
+    def reset_password(payload: ResetInput, request: Request) -> Response:
+        hashed = digest(payload.token.get_secret_value())
+        with db.begin() as connection:
+            protect(connection, request, now_fn())
+            peer = request.client.host if request.client else "unknown"
+            retry = quota(
+                connection,
+                [(keyed(key, "reset-ip", peer), 30)],
+                now_fn(),
+                timedelta(minutes=1),
+                consume=True,
+            )
+            if retry:
+                return failure(429, "잠시 후 다시 시도해 주세요.", retry)
+            # Discover, then lock user → reset, matching issuance and avoiding reverse locks.
+            user_id = connection.scalar(
+                select(resets.c.user_id).where(resets.c.token_hash == hashed)
+            )
+            if user_id is None:
+                return failure(400, "링크가 만료되었거나 사용할 수 없습니다. 다시 요청해 주세요.")
+            user_id = connection.scalar(
+                select(users.c.id).where(users.c.id == user_id).with_for_update()
+            )
+            row = (
+                connection.execute(
+                    select(resets).where(resets.c.user_id == user_id).with_for_update()
+                )
+                .mappings()
+                .first()
+            )
+            now = now_fn()
+            protect(connection, request, now)
+            if (
+                not row
+                or row["token_hash"] != hashed
+                or row["used_at"] is not None
+                or row["expires_at"] <= now
+            ):
+                return failure(400, "링크가 만료되었거나 사용할 수 없습니다. 다시 요청해 주세요.")
+            connection.execute(
+                update(users)
+                .where(users.c.id == user_id)
+                .values(
+                    password_hash=passwords.hash(payload.password.get_secret_value()),
+                    credentials_version=users.c.credentials_version + 1,
+                )
+            )
+            connection.execute(
+                update(resets).where(resets.c.user_id == user_id).values(used_at=now)
+            )
+        response = Response(status_code=204)
+        response.delete_cookie(
+            config.cookie_name, httponly=True, secure=config.secure_cookie, samesite="lax", path="/"
+        )
+        return response
 
     @app.get("/api/v1/me", response_model=UserOut)
     def me(request: Request) -> dict[str, str]:

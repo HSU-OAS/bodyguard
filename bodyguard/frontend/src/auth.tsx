@@ -9,7 +9,7 @@ import {
   useState,
 } from 'react'
 import * as api from './api/auth'
-import type { CredentialsWritable, UserOut, Verification } from './api/generated'
+import type { CredentialsWritable, ResetInput, UserOut, Verification } from './api/generated'
 
 type State =
   | { status: 'checking' | 'guest' | 'offline' | 'logging-out' | 'logout-error' }
@@ -24,6 +24,7 @@ const Auth = createContext<{
     body: CredentialsWritable | Verification,
     signal: AbortSignal,
   ) => Promise<void>
+  resetPassword: (body: ResetInput, signal: AbortSignal) => Promise<void>
 } | null>(null)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -109,7 +110,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (!operation.controller.signal.aborted) setState({ status: 'logout-error' })
     }
   }
-  return <Auth.Provider value={{ state, refresh, signIn, signOut }}>{children}</Auth.Provider>
+
+  // FR-U-03: no automatic authentication; uncertain/cancelled reset never revives private UI.
+  async function resetPassword(body: ResetInput, external: AbortSignal) {
+    const operation = begin('auth')
+    const signal = AbortSignal.any([operation.controller.signal, external])
+    setState({ status: 'checking' })
+    try {
+      await api.resetPassword(body, signal)
+      if (signal.aborted) throw new DOMException('Aborted', 'AbortError')
+      setState({ status: 'guest' })
+      channel.current?.postMessage('changed')
+    } catch (error) {
+      if (!operation.controller.signal.aborted) setState({ status: 'offline' })
+      throw error
+    } finally {
+      if (current.current === operation) current.current = null
+    }
+  }
+  return (
+    <Auth.Provider value={{ state, refresh, signIn, signOut, resetPassword }}>
+      {children}
+    </Auth.Provider>
+  )
 }
 
 export function useAuth() {

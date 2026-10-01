@@ -21,6 +21,8 @@ users = Table(
     Column("password_hash", Text, nullable=False),
     Column("email_verified_at", DateTime(timezone=True), nullable=False),
     Column("created_at", DateTime(timezone=True), nullable=False),
+    Column("credentials_version", Integer, nullable=False, server_default="0"),
+    CheckConstraint("credentials_version >= 0", name="user_credentials_version_nonnegative"),
 )
 challenges = Table(
     "signup_challenges",
@@ -44,6 +46,21 @@ sessions = Table(
     Column("last_seen_at", DateTime(timezone=True), nullable=False),
     Column("expires_at", DateTime(timezone=True), nullable=False, index=True),
     Column("revoked_at", DateTime(timezone=True)),
+    Column("credentials_version", Integer),
+    CheckConstraint(
+        "(user_id IS NULL AND credentials_version IS NULL) OR "
+        "(user_id IS NOT NULL AND credentials_version IS NOT NULL AND credentials_version >= 0)",
+        name="session_credentials_version_matches_user",
+    ),
+)
+resets = Table(
+    "password_resets",
+    metadata,
+    Column("user_id", String(36), ForeignKey("users.id", ondelete="CASCADE"), primary_key=True),
+    Column("token_hash", String(64), nullable=False, unique=True),
+    Column("created_at", DateTime(timezone=True), nullable=False),
+    Column("expires_at", DateTime(timezone=True), nullable=False, index=True),
+    Column("used_at", DateTime(timezone=True)),
 )
 limits = Table(
     "auth_limits",

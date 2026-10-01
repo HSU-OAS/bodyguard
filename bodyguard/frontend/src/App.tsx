@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect } from 'react'
 import { BrowserRouter, Link, Navigate, Route, Routes, useLocation } from 'react-router'
 import { AuthProvider, useAuth } from './auth'
 import { AccountPage } from './pages/AccountPage'
+import { PasswordPage } from './pages/PasswordPage'
 
 // FR-V-02/03: prototype camera/debug UI is compiled out of production.
 const Demo = import.meta.env.DEV
@@ -156,16 +157,25 @@ function Shell() {
         ? '로그인'
         : location.pathname === '/signup'
           ? '이메일 가입'
-          : location.pathname === '/start'
-            ? '내 시작'
-            : '자세 코칭'
+          : location.pathname.startsWith('/password/')
+            ? '계정 복구'
+            : location.pathname === '/start'
+              ? '내 시작'
+              : '자세 코칭'
     } · BODYGUARD`
   }, [location.pathname])
   return (
     <div className="website">
-      <a className="skip-link" href="#content">
+      <button
+        className="skip-link"
+        type="button"
+        onClick={() => {
+          // FR-U-03/NFR-08: focus the page without overwriting recovery fragments.
+          document.getElementById('content')?.focus()
+        }}
+      >
         본문으로 이동
-      </a>
+      </button>
       <header className="site-header">
         <Link className="wordmark" to="/" aria-label="BODYGUARD 서비스 소개">
           BODYGUARD<span aria-hidden="true">.</span>
@@ -186,11 +196,13 @@ function Shell() {
           )}
         </nav>
       </header>
-      <main id="content">
+      <main id="content" tabIndex={-1}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<AccountPage key="login" mode="login" />} />
           <Route path="/signup" element={<AccountPage key="signup" mode="signup" />} />
+          <Route path="/password/forgot" element={<PasswordPage key="forgot" mode="forgot" />} />
+          <Route path="/password/reset" element={<PasswordPage key="reset" mode="reset" />} />
           <Route path="/start" element={<SessionGate />} />
           <Route
             path="*"

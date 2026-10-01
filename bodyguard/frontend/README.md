@@ -2,7 +2,7 @@
 
 React 19.3 + TypeScript 6.0 + Vite 8. 쓰는 버전과 이유는 [ADR-0015](../docs/adr/0015-tech-stack.md)에 있다.
 
-공개 소개·이메일 가입/인증·로그인·보호된 시작·로그아웃을 실제 계정 API에 연결했다(S2.2). 스트레칭 선택·추천·고품질 두 아바타·코칭·기록은 아직 구현 중이며 출시 가능 상태가 아니다. 기존 스켈레톤은 개발 전용 시제품이다.
+공개 소개·이메일 가입/인증·로그인·보호된 시작·로그아웃(S2.2)과 비밀번호 복구(S2.6a2)를 실제 계정 API에 연결했다. 스트레칭 선택·추천·고품질 두 아바타·코칭·기록은 아직 구현 중이며 출시 가능 상태가 아니다. 기존 스켈레톤은 개발 전용 시제품이다.
 
 ## 실행
 
@@ -20,6 +20,8 @@ pnpm dev
 크롬에서 http://localhost:5173 을 열면 서비스 소개가 나온다. `/api`는 127.0.0.1:8000의 로컬 백엔드로 연결한다. backend/README.md의 필수 변수·로컬 migration·실행 명령을 먼저 따른다. 로컬 Origin은 `http://localhost:5173`과 정확히 일치해야 한다. SMTP가 설정되지 않으면 가입 발송은 실패하며 가짜로 성공시키지 않는다. 실제 Gmail/시크릿 연결은 CEO 별도 승인 대상이다.
 
 계정 접속·로그인만으로 카메라·MediaPipe·3D를 시작하지 않는다. `/start` 직접 방문도 `/me` 확인 전에는 개인 화면을 열지 않는다. HTTP 세션 쿠키는 서버의 HttpOnly 쿠키이고 인증값을 localStorage/sessionStorage에 두지 않는다. 가입 폼 새로고침 시 메모리 입력은 사라지며 안전하게 다시 시작한다.
+
+로그인 화면의 비밀번호 복구 입구는 `/password/forgot`다. 요청 접수는 메일 도착 확인이 아니다. 메일의 `/password/reset#token=...` 링크는 토큰을 메모리에 받아 URL에서 지운다. 새로고침/이탈 후에는 메일 링크를 다시 열어야 한다. 성공하면 기존 로그인을 모두 종료하고 일반 로그인으로 돌아간다. 서버와 같은 Unicode 문자 단위의 15~128자 정책을 적용하며 비밀번호를 자르거나 정규화하지 않는다. 자세한 예외/실제·모의 구분은 [복구 웹 Story](../docs/stories/stage2-password-recovery-web.md)에 있다.
 
 개발 빌드의 http://localhost:5173/dev/measure 에서만 **측정 시작**으로 시제품 카메라를 허용할 수 있다. production 빌드에는 이 경로·측정 UI 코드가 없다. 이 데모가 제품 인증이나 실제 출시 코칭을 우회하는 것은 아니다.
 
@@ -62,6 +64,8 @@ E2E는 설치된 Google Chrome을 쓴다. 크롬이 없으면 `pnpm exec playwri
 ## 실제 API 계정 브라우저 하네스
 
 backend에서 격리 `BODYGUARD_TEST_DATABASE_URL`을 설정하고 `uv run python -m tests.run_browser`를 실행한다. 기존 API 하네스와 동일한 역할/DB/로컬 호스트 검사를 거친 **시험 DB의 계정 데이터만 초기화**한다. 사용자의 기존 서버를 재사용하지 않으며 8000·4173 포트가 사용 중이면 실패한다. 자체 API/preview만 종료하고 시험 메일 임시 파일을 정리한다. 실제 계정 API·PostgreSQL·production 화면을 사용하며 시험 메일만 격리 프로세스 파일로 전달한다. 공개 outbox API나 production 인증 stub은 없다. 실제 Gmail 발송 증거가 아니다.
+
+`uv run python -m tests.run_browser password`는 복구 시험 5개, 기본값/account는 기존 계정 시험 9개다. 각 실행에서 소유한 시험 DB를 비우므로 서로 동시에 돌리지 않는다. 기존 메일 제한을 완화하지 않고 별도 실행으로 분리했으며 결과 화면은 `test-results/password/`·`test-results/account/`에 남는다.
 
 2026-10-01: Vitest 66개, 실제 API/SQL 계정 Chrome 9개(실제 60초 재발송 포함), 별도 개발 가짜 카메라 1개 통과. 1440px·700px 데스크톱 창의 공개/가입/인증/로그인/보호/오류 화면과 키보드 초점을 확인했다. 화면 증거는 `test-results/`에 재현되며 시험 주소만 사용한다. B-03 늦은 응답 상태 경쟁은 Vitest 모의 응답 검사이며 실제 브라우저 시험과 구분한다. 자세 정확도·실제 사람·Gmail·Google·HTTPS·최종 아바타는 미검증이다.
 

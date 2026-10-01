@@ -816,9 +816,13 @@ def test_h21_migrated_constraints_and_restart(harness: Harness) -> None:
         "signup_challenges",
         "sessions",
         "auth_limits",
+        "password_resets",
     }
     with h.engine.connect() as connection:
-        assert connection.scalar(text("SELECT version_num FROM alembic_version")) == "0001_accounts"
+        assert (
+            connection.scalar(text("SELECT version_num FROM alembic_version"))
+            == "0002_password_recovery"
+        )
     user_id = h.account()
     cookie = h.client.cookies.get(h.settings.cookie_name)
     with h.new_client() as restarted:

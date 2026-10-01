@@ -10,7 +10,7 @@ from pwdlib import PasswordHash
 from sqlalchemy import Connection, delete, select, update
 from sqlalchemy.dialects.postgresql import insert
 
-from app.db import challenges, limits, sessions
+from app.db import challenges, limits, resets, sessions
 
 passwords = PasswordHash.recommended()
 
@@ -76,4 +76,5 @@ def cleanup(connection: Connection, now: datetime) -> None:
     # Same order as protected requests: session → challenge → quotas.
     connection.execute(delete(sessions).where(sessions.c.expires_at <= now))
     connection.execute(delete(challenges).where(challenges.c.expires_at <= now))
+    connection.execute(delete(resets).where(resets.c.expires_at <= now))
     connection.execute(delete(limits).where(limits.c.expires_at <= now))
