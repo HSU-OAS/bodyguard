@@ -1,0 +1,43 @@
+{
+  "source_sha256": "6383829d3b631bf22c66bbce5472806f7fe9525dd3b6c554ad96ef4be3b5e0a5",
+  "source_saved": false,
+  "head_cage_sculpt": {
+    "method": "native lower professional head cage Y/Z smoothing",
+    "iterations": 12,
+    "factor": 0.45,
+    "selected_vertices": 162,
+    "cage_vertices": 266,
+    "upper_cage_and_topology_preserved": true,
+    "maximum_cage_displacement_m": 0.029661369372177376,
+    "artist_edit_only_not_anatomical_or_clinical_target": true
+  },
+  "head_depth_sculpt": {
+    "native_edit": "LAPLACIANSMOOTH / existing cage / normalized volume-preserving",
+    "iterations": 40,
+    "lambda_factor": 0.2,
+    "lambda_border": 0.1,
+    "native_volume_preserve_enabled": true,
+    "cage_vertices": 266,
+    "topology_preserved": true,
+    "maximum_artist_displacement_m": 0.020834763974250468,
+    "not_an_exercise_or_release_approval": true
+  },
+  "professional_asset": "GEO-head_primitve",
+  "vertices": 67586,
+  "bounds_m": [
+    [
+      -0.07567906379699707,
+      0.07567906379699707
+    ],
+    [
+      -0.1534062772989273,
+      0.03340628370642662
+    ],
+    [
+      1.450857162475586,
+      1.6692376136779785
+    ]
+  ],
+  "artist_inspection_only": true,
+  "rig_deformation_or_release_approval": false
+}

@@ -1,0 +1,62 @@
+"""FR-A-02/03: native refinement of the existing professional head, not a generator."""
+
+from math import isfinite
+
+import bmesh
+import bpy
+
+
+def refine_head_volume(head):
+    assert len(head.modifiers) == 1 and head.modifiers[0].type == "SUBSURF"
+    before = [vertex.co.copy() for vertex in head.data.vertices]
+    topology = (len(head.data.vertices), len(head.data.edges), len(head.data.polygons))
+    assert topology[0] == 266
+    mesh = bmesh.new()
+    mesh.from_mesh(head.data)
+    assert all(edge.is_manifold for edge in mesh.edges)
+    volume_before = abs(mesh.calc_volume())
+    mesh.free()
+    finish = head.modifiers.new("Native head cage volume refinement", "LAPLACIANSMOOTH")
+    finish.iterations = 100
+    finish.lambda_factor = 0.2
+    finish.lambda_border = 0.1
+    finish.use_volume_preserve = True
+    finish.use_normalized = True
+    bpy.ops.object.select_all(action="DESELECT")
+    head.select_set(True)
+    bpy.context.view_layer.objects.active = head
+    bpy.ops.object.modifier_move_up(modifier=finish.name)
+    bpy.ops.object.modifier_apply(modifier=finish.name)
+    assert topology == (
+        len(head.data.vertices),
+        len(head.data.edges),
+        len(head.data.polygons),
+    )
+    assert len(head.modifiers) == 1 and head.modifiers[0].type == "SUBSURF"
+    assert all(
+        all(isfinite(value) for value in vertex.co) for vertex in head.data.vertices
+    )
+    mesh = bmesh.new()
+    mesh.from_mesh(head.data)
+    assert all(edge.is_manifold for edge in mesh.edges)
+    volume_after = abs(mesh.calc_volume())
+    mesh.free()
+    assert isfinite(volume_before) and volume_before > 0
+    assert isfinite(volume_after) and volume_after > 0
+    return {
+        "native_edit": "LAPLACIANSMOOTH / existing cage / normalized volume-preserving",
+        "iterations": 100,
+        "lambda_factor": 0.2,
+        "lambda_border": 0.1,
+        "native_volume_preserve_enabled": True,
+        "cage_vertices": topology[0],
+        "topology_and_closed_surface_preserved": True,
+        "cage_volume_before_native_units3": volume_before,
+        "cage_volume_after_native_units3": volume_after,
+        "cage_volume_ratio": volume_after / volume_before,
+        "maximum_artist_displacement_m": max(
+            (vertex.co - point).length
+            for vertex, point in zip(head.data.vertices, before, strict=True)
+        ),
+        "not_an_exercise_or_release_approval": True,
+    }

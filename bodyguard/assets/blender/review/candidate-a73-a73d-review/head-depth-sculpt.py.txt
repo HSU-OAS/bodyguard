@@ -1,0 +1,45 @@
+"""FR-A-02/03: native depth-only edit of the existing licensed head cage."""
+
+from math import isfinite
+
+import bmesh
+
+
+def refine_head_depth(mesh, iterations):
+    if iterations not in (0, 4, 8):
+        raise ValueError("Inspect the original cage or mild native 4/8-pass edits")
+    vertices = list(mesh.verts)
+    assert len(vertices) == 266, "Use the existing professional control cage"
+    before = [vertex.co.copy() for vertex in vertices]
+    topology = (len(mesh.verts), len(mesh.edges), len(mesh.faces))
+    for _ in range(iterations):
+        bmesh.ops.smooth_vert(
+            mesh,
+            verts=vertices,
+            factor=0.35,
+            use_axis_x=False,
+            use_axis_y=True,
+            use_axis_z=False,
+        )
+    assert topology == (len(mesh.verts), len(mesh.edges), len(mesh.faces))
+    assert all(
+        vertex.co.x == point.x
+        and vertex.co.z == point.z
+        and all(isfinite(value) for value in vertex.co)
+        for vertex, point in zip(vertices, before, strict=True)
+    ), "Preserve the authored frontal outline and finite control points"
+    displacement = max(
+        (vertex.co - point).length
+        for vertex, point in zip(vertices, before, strict=True)
+    )
+    if iterations == 0:
+        assert displacement == 0
+    return {
+        "native_edit": "smooth_vert / all existing cage points / Y only",
+        "iterations": iterations,
+        "factor": 0.35,
+        "cage_vertices": len(vertices),
+        "maximum_artist_displacement_m": displacement,
+        "authored_x_z_and_topology_preserved": True,
+        "not_an_exercise_or_release_approval": True,
+    }
