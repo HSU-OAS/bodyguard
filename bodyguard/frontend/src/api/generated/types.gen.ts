@@ -26,8 +26,17 @@ export type CsrfOut = {
   csrf_token: string
 }
 
+export type EmailInput = {
+  email: string
+}
+
 export type ErrorOut = {
   detail: string
+}
+
+export type ResetInput = {
+  token: string
+  password: string
 }
 
 export type UserOut = {
@@ -170,6 +179,58 @@ export type LoginApiV1AuthLoginPostResponses = {
 
 export type LoginApiV1AuthLoginPostResponse =
   LoginApiV1AuthLoginPostResponses[keyof LoginApiV1AuthLoginPostResponses]
+
+export type ForgotApiV1AuthPasswordForgotPostData = {
+  body: EmailInput
+  path?: never
+  query?: never
+  url: '/api/v1/auth/password/forgot'
+}
+
+export type ForgotApiV1AuthPasswordForgotPostErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type ForgotApiV1AuthPasswordForgotPostError =
+  ForgotApiV1AuthPasswordForgotPostErrors[keyof ForgotApiV1AuthPasswordForgotPostErrors]
+
+export type ForgotApiV1AuthPasswordForgotPostResponses = {
+  202: ErrorOut
+}
+
+export type ForgotApiV1AuthPasswordForgotPostResponse =
+  ForgotApiV1AuthPasswordForgotPostResponses[keyof ForgotApiV1AuthPasswordForgotPostResponses]
+
+export type ResetPasswordApiV1AuthPasswordResetPostData = {
+  body: ResetInput
+  path?: never
+  query?: never
+  url: '/api/v1/auth/password/reset'
+}
+
+export type ResetPasswordApiV1AuthPasswordResetPostErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type ResetPasswordApiV1AuthPasswordResetPostError =
+  ResetPasswordApiV1AuthPasswordResetPostErrors[keyof ResetPasswordApiV1AuthPasswordResetPostErrors]
+
+export type ResetPasswordApiV1AuthPasswordResetPostResponses = {
+  204: void
+}
+
+export type ResetPasswordApiV1AuthPasswordResetPostResponse =
+  ResetPasswordApiV1AuthPasswordResetPostResponses[keyof ResetPasswordApiV1AuthPasswordResetPostResponses]
 
 export type MeApiV1MeGetData = {
   body?: never
