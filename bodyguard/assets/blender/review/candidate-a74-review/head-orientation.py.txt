@@ -1,0 +1,43 @@
+"""FR-A-02/03: native rigid fitting of an existing professional head cage."""
+
+from math import isfinite, radians
+
+import bmesh
+from mathutils import Matrix, Vector
+
+
+def orient_artist_head(mesh, angle):
+    if angle not in (0, 20, 30):
+        raise ValueError("Use the original or the explicit native artist comparisons")
+    vertices = list(mesh.verts)
+    assert len(vertices) == 266, "Existing professional cage required"
+    assert all(edge.is_manifold for edge in mesh.edges)
+    before = [vertex.co.copy() for vertex in vertices]
+    topology = (len(mesh.verts), len(mesh.edges), len(mesh.faces))
+    lengths = [(edge, edge.calc_length()) for edge in mesh.edges]
+    center = sum(before, Vector()) / len(before)
+    rotation = Matrix.Rotation(radians(angle), 3, "X")
+    volume_before = abs(mesh.calc_volume())
+    bmesh.ops.rotate(mesh, verts=vertices, cent=center, matrix=rotation)
+    mesh.normal_update()
+    volume_after = abs(mesh.calc_volume())
+    assert topology == (len(mesh.verts), len(mesh.edges), len(mesh.faces))
+    assert all(
+        all(isfinite(value) for value in vertex.co)
+        and (vertex.co - (center + rotation @ (point - center))).length < 1e-6
+        for vertex, point in zip(vertices, before, strict=True)
+    )
+    assert all(abs(edge.calc_length() - length) < 1e-6 for edge, length in lengths)
+    assert isfinite(volume_before) and volume_before > 0
+    assert isfinite(volume_after) and abs(volume_after / volume_before - 1) < 1e-5
+    return {
+        "native_edit": "bmesh rotate / rigid professional cage only",
+        "artist_angle_degrees": angle,
+        "axis": "X",
+        "pivot_native_m": list(center),
+        "cage_vertices": len(vertices),
+        "topology_edge_lengths_and_volume_preserved": True,
+        "actual_volume_ratio": volume_after / volume_before,
+        "rotation_matrix": [list(row) for row in rotation],
+        "not_an_exercise_or_clinical_target": True,
+    }

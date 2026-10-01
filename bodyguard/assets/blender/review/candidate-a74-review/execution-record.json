@@ -1,0 +1,181 @@
+{
+  "date_local": "2026-10-02",
+  "story": "S2.4 / FR-A-01~04 / A-07",
+  "before_head": "46a18211bc6db219517582861635ccf11b356947",
+  "base_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "professional_head_source": "existing CC0 GEO-head_primitve control cage, not a generated body",
+  "head_inspections": [
+    {
+      "artist_angle_degrees": 0,
+      "method": "native X-axis rigid professional cage rotation after existing volume100/lower12",
+      "exit_code": 0,
+      "actual_png": 2,
+      "source_saved": false,
+      "whole_avatar_glb_browser_unrun": true
+    },
+    {
+      "artist_angle_degrees": 20,
+      "method": "native X-axis rigid professional cage rotation after existing volume100/lower12",
+      "exit_code": 0,
+      "actual_png": 2,
+      "source_saved": false,
+      "whole_avatar_glb_browser_unrun": true
+    },
+    {
+      "artist_angle_degrees": 30,
+      "method": "native X-axis rigid professional cage rotation after existing volume100/lower12",
+      "exit_code": 0,
+      "actual_png": 2,
+      "source_saved": false,
+      "whole_avatar_glb_browser_unrun": false
+    }
+  ],
+  "a74": {
+    "generation_exit_code": 0,
+    "source_sha256": "76237732c83c24b5d0b5b1c135b1e2fee6473343c573eaab78995262910d9171",
+    "source_bytes": 29169593,
+    "native_boundary_exit_code": 0,
+    "native_boundary_checks": 19,
+    "source_qa_exit_code": 0,
+    "source_qa_rows": 121,
+    "source_technical_checks": 118,
+    "source_actual_png": 34,
+    "export_exit_code": 0,
+    "glb_roundtrip_qa_exit_code": 0,
+    "glb_qa_rows": 121,
+    "glb_technical_checks": 118,
+    "glb_qa_rendered": false,
+    "actual_body_preservation_exit_code": 0,
+    "actual_seam_diagnostic_exit_code": 0,
+    "browser_exit_code": 0,
+    "browser": {
+      "startTime": "2026-10-01T21:41:50.665Z",
+      "duration": 42116.551999999996,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "browser_metrics": [
+      {
+        "name": "남성-technical-render",
+        "samples": 180,
+        "mean_ms": 16.65777777698305,
+        "p95_ms": 17.90000009536743,
+        "draw_calls": 21,
+        "triangles": 1162594,
+        "renderer": "WebKit WebGL",
+        "skeletons_independent": true,
+        "static_angle_max": 0,
+        "moving_angle_max": 0.2094364382183891,
+        "eight_weight_meshes": 2
+      },
+      {
+        "name": "여성-technical-render",
+        "samples": 180,
+        "mean_ms": 16.65611111190584,
+        "p95_ms": 18.300000190734863,
+        "draw_calls": 21,
+        "triangles": 1162322,
+        "renderer": "WebKit WebGL",
+        "skeletons_independent": true,
+        "static_angle_max": 0,
+        "moving_angle_max": 0.20943295388342859,
+        "eight_weight_meshes": 2
+      }
+    ],
+    "browser_actual_png": 2
+  },
+  "actual_png_total": 42,
+  "device": {
+    "model": "Mac16,12",
+    "chip": "Apple M4",
+    "memory_bytes": 17179869184,
+    "chrome": "Google Chrome 154.0.8037.58",
+    "headless": true,
+    "viewport": [
+      1440,
+      1080
+    ],
+    "dpr": 1
+  },
+  "device_read": {
+    "explicit_three_fields_and_chrome_exit_code": 0,
+    "serial_uuid_read": false
+  },
+  "native_all_terminal_before_browser": true,
+  "camera_requests": 0,
+  "api_sql_smtp_oauth_actors": "not started",
+  "external_browser_network": "non-listening native proxy, actual A-00 refusal passed",
+  "controlled_fixtures": [
+    "API guest401",
+    "GLB503",
+    "actual WebGL context-loss and retry"
+  ],
+  "warnings": [
+    "native armature-parent5",
+    "vertex-weight limit1043693/1106348",
+    "NO_COLOR/FORCE_COLOR",
+    "THREE.Clock deprecation",
+    "injected GLB503",
+    "WEBGL_lose_context warning after real loss/recovery"
+  ],
+  "workflow_diagnostics": [
+    {
+      "result": "initial Ruff shell command exit127",
+      "cause": "unquoted workspace path with spaces; no Ruff execution",
+      "repair": "quoted absolute executable; format/check actual PASS before native launch"
+    },
+    {
+      "result": "initial retained-body comparison exit1",
+      "cause": "cloned verifier retained A73d SHA instead of new A74 SHA",
+      "tool": {
+        "chunk_id": "40a888",
+        "wall_time_seconds": 0.000014208,
+        "exit_code": 1,
+        "original_token_count": 145,
+        "output": "00:01.549  blend            | Read blend: \"/private/tmp/bodyguard-tailor.6b7Uvu/draft-a66-neutral-under-jaw-head.blend\"\nTraceback (most recent call last):\n  File \"/private/tmp/bodyguard-tailor.6b7Uvu/a74-authored-body-preservation.py\", line 22, in <module>\n    assert file_digest(file, \"sha256\").hexdigest() == digest\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n\nError: script failed, file: '/private/tmp/bodyguard-tailor.6b7Uvu/a74-authored-body-preservation.py', exiting.\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+      },
+      "repair": "exact actual A74 SHA specified; native rerun exit0; failed verifier snapshot preserved"
+    },
+    {
+      "result": "initial seam diagnostic exit1",
+      "cause": "cloned verifier retained A73d SHA instead of new A74 SHA",
+      "tool": {
+        "chunk_id": "9fb587",
+        "wall_time_seconds": 0.000010042,
+        "exit_code": 1,
+        "original_token_count": 129,
+        "output": "Traceback (most recent call last):\n  File \"/private/tmp/bodyguard-tailor.6b7Uvu/a74-oblique-seam-diagnostic.py\", line 18, in <module>\n    assert source_sha == \"59ca68cdaef44b3a5945990e933d29be56f77c8ce388899e28d39af693cfd35b\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n\nError: script failed, file: '/private/tmp/bodyguard-tailor.6b7Uvu/a74-oblique-seam-diagnostic.py', exiting.\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+      },
+      "repair": "exact actual A74 SHA specified; native rerun exit0; failed verifier snapshot preserved"
+    }
+  ],
+  "unrun": [
+    "whole avatar/GLB/browser for head-only0/20 artist comparisons",
+    "imported GLB34PNG render",
+    "actual performer/observer, camera tracking, correct demonstrations, retargeting and integrated camera latency/accuracy",
+    "multidevice/lighting/body-type/long-session power and thermal testing",
+    "API160/Vitest133/build/service regressions in this avatar-only change (not rerun)",
+    "provider connections, production DB migrations, secrets, deployment, release",
+    "stages3–6 completion gates"
+  ],
+  "appearance": {
+    "default_adopted": false,
+    "unresolved_p2": true,
+    "reasons": [
+      "head-only rearward inclination reduced, but pointed lower head and residual face plane remain",
+      "whole-avatar fixed-plane section registration raises head crown by male57.345/female58.749mm",
+      "whole-avatar neck collar and front projection visibly worsen; actual seam dihedral p95/max worsens against A73d",
+      "no reference-level finish or clinical/demo/retarget approval"
+    ],
+    "development_default": "A37 unchanged",
+    "pr9_draft": true,
+    "merge_gate_satisfied": false,
+    "stages_1_to_6_complete": false
+  },
+  "measurement_scope": "30-degree X rotation is an artist fitting transform, not an exercise target. Cage rigid invariants do not imply final body volume/appearance approval. Native100 volume ratio applies only to that modifier phase. 180 RAF intervals are not camera/person accuracy or latency.",
+  "prior_files_evidence_preserved": true,
+  "scope_safety_privacy_operating_gates_unchanged": true
+}
+

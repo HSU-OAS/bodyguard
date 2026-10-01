@@ -1,0 +1,122 @@
+"""FR-A-02: compare rigid professional head orientations; no source is saved."""
+
+import importlib.util
+import json
+import sys
+from hashlib import file_digest
+from pathlib import Path
+
+import bmesh
+import bpy
+from mathutils import Vector
+
+professional, output = map(Path, sys.argv[sys.argv.index("--") + 1 : -1])
+angle = int(sys.argv[-1])
+spec = importlib.util.spec_from_file_location(
+    "cage_edit", Path(__file__).with_name("a72-head-cage-sculpt.py")
+)
+cage = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(cage)
+assert not output.exists()
+with professional.open("rb") as file:
+    assert file_digest(file, "sha256").hexdigest() == (
+        "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137"
+    )
+source = Path(bpy.data.filepath)
+with source.open("rb") as file:
+    original_sha = file_digest(file, "sha256").hexdigest()
+scene = bpy.context.scene
+body = bpy.data.objects["BODYGUARD Male sculpt WIP"]
+crown = max(v.co.z for v in body.data.vertices)
+for obj in scene.objects:
+    if obj.type == "MESH" and obj.name.startswith("BODYGUARD "):
+        obj.hide_render = True
+name = "GEO-head_primitve"
+with bpy.data.libraries.load(str(professional)) as (available, loaded):
+    assert name in available.objects
+    loaded.objects = [name]
+head = loaded.objects[0]
+scene.collection.objects.link(head)
+assert len(head.modifiers) == 1 and head.modifiers[0].type == "SUBSURF"
+volume_spec = importlib.util.spec_from_file_location(
+    "volume_edit", Path(__file__).with_name("a73d-head-volume-sculpt.py")
+)
+volume = importlib.util.module_from_spec(volume_spec)
+volume_spec.loader.exec_module(volume)
+head_depth_sculpt = volume.refine_head_volume(head)
+orientation_spec = importlib.util.spec_from_file_location(
+    "artist_orientation", Path(__file__).with_name("a74-head-orientation.py")
+)
+orientation = importlib.util.module_from_spec(orientation_spec)
+orientation_spec.loader.exec_module(orientation)
+mesh = bmesh.new()
+mesh.from_mesh(head.data)
+sculpt = cage.refine_head_cage(mesh, 12)
+head_orientation = orientation.orient_artist_head(mesh, angle)
+mesh.to_mesh(head.data)
+mesh.free()
+head.modifiers[0].levels = head.modifiers[0].render_levels = 4
+bpy.context.view_layer.update()
+world = head.matrix_world.copy()
+head.data = bpy.data.meshes.new_from_object(
+    head.evaluated_get(bpy.context.evaluated_depsgraph_get())
+)
+head.modifiers.clear()
+points = [world @ v.co for v in head.data.vertices]
+shift = Vector(
+    (
+        -(min(v.x for v in points) + max(v.x for v in points)) / 2,
+        -(min(v.y for v in points) + max(v.y for v in points)) / 2 - 0.06,
+        crown - max(v.z for v in points),
+    )
+)
+head.parent = None
+head.matrix_world.identity()
+for vertex, point in zip(head.data.vertices, points, strict=True):
+    vertex.co = point + shift
+for polygon in head.data.polygons:
+    polygon.use_smooth = True
+head.data.materials.clear()
+head.data.materials.append(body.data.materials[0])
+output.mkdir()
+scene.render.engine = "CYCLES"
+scene.cycles.samples = 24
+scene.cycles.use_denoising = True
+scene.render.image_settings.file_format = "PNG"
+scene.render.resolution_x = 900
+scene.render.resolution_y = 1000
+scene.render.resolution_percentage = 100
+camera = scene.camera
+camera.data.type = "ORTHO"
+camera.data.ortho_scale = 0.5
+target = Vector((0, -0.06, crown - 0.17))
+for label, location in (("front", (0, -4, target.z)), ("side", (4, 0, target.z))):
+    camera.location = location
+    camera.rotation_euler = (
+        (target - camera.location).to_track_quat("-Z", "Y").to_euler()
+    )
+    scene.render.filepath = str(output / f"generic-{label}.png")
+    bpy.context.view_layer.update()
+    bpy.ops.render.render(write_still=True)
+with source.open("rb") as file:
+    assert file_digest(file, "sha256").hexdigest() == original_sha
+report = {
+    "source_sha256": original_sha,
+    "source_saved": False,
+    "head_cage_sculpt": sculpt,
+    "head_depth_sculpt": head_depth_sculpt,
+    "head_orientation": head_orientation,
+    "professional_asset": name,
+    "vertices": len(head.data.vertices),
+    "bounds_m": [
+        [
+            min(v.co[i] for v in head.data.vertices),
+            max(v.co[i] for v in head.data.vertices),
+        ]
+        for i in range(3)
+    ],
+    "artist_inspection_only": True,
+    "rig_deformation_or_release_approval": False,
+}
+(output / "inspection-report.json").write_text(json.dumps(report, indent=2) + "\n")
+print("ACTUAL GENERIC PROFESSIONAL HEAD", json.dumps(report))
