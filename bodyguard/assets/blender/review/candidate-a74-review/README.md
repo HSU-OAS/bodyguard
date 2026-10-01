@@ -56,6 +56,8 @@ Blender5.1.1 `--background --factory-startup --disable-autoexec --python-exit-co
 
 첫 Ruff 명령은 공백 경로 인용 누락/exit127로 실행되지 않았고, 경로 인용을 고친 실제 검사 PASS 후 제작했다. 첫 body 비교/seam 진단은 이전 A73d SHA가 남아 exit1로 거부됐다. [실패 body verifier](failed-authored-body-preservation.py.txt)·[실패 seam verifier](failed-oblique-seam-diagnostic.py.txt)와 실제 실패 도구 출력은 기록에 보존했고, 정확한 새 SHA로 수정한 native 재실행은 각각 exit0다. export의 parent5/가중치 제한, Chrome deprecation/색상 경고·주입503·실제 WebGL loss 후 extension 경고를 숨기지 않는다.
 
+첫 staged diff 검사는 새 텍스트2개의 EOF 빈 줄로 exit2였다. 오케스트레이션이 후속 커밋을 차단하지 않아 초기 로컬 커밋 `546aa3a`가 생성됐다. 이 커밋은 보존하고 빈 줄만 제거한 별도 보완 커밋 전 scope/diff/audit를 실제 재실행한다. 실패 상태는 푸시·병합하지 않았다. 반복되는 순차 단계는 검증 exit0/terminal 여부를 확인한 다음 호출한다.
+
 0°/20°의 전신/GLB/Chrome, imported34PNG, 실제 사람/observer/다양한 촬영/시범/리타게팅/통합 지연, API160/Vitest133/build 서비스 회귀의 이번 재실행, 장시간/다기기, 실제 공급자·운영 DB·시크릿·배포·출시는 **미실행**이다. S2.4/2단계/전체1~6은 미완료이며 전문가 검토만 남은 상태가 아니다.
 
 코드/diff 리뷰: 기존 제작 경로에는 회전 helper 호출·해시·보고 필드만 추가했고 body/skin/rig/등록/bridge/QA 한계값은 변경하지 않았다. 실행형 helper invariants와 native19개 회귀로 검증했다. 신규 보안·개인정보/운영 변경은 없고 미해결 **A-02 외형 P2**가 남아 Request Changes다. 커밋은 검증된 실험/반려 기록 보존이지 채택·병합 승인이 아니다. 새 프레임워크/의존성 대신 기존 native producer·QA·export·Chrome 하네스를 재사용했다.

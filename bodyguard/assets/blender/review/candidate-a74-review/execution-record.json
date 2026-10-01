@@ -149,6 +149,11 @@
         "output": "Traceback (most recent call last):\n  File \"/private/tmp/bodyguard-tailor.6b7Uvu/a74-oblique-seam-diagnostic.py\", line 18, in <module>\n    assert source_sha == \"59ca68cdaef44b3a5945990e933d29be56f77c8ce388899e28d39af693cfd35b\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n\nError: script failed, file: '/private/tmp/bodyguard-tailor.6b7Uvu/a74-oblique-seam-diagnostic.py', exiting.\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
       },
       "repair": "exact actual A74 SHA specified; native rerun exit0; failed verifier snapshot preserved"
+    },
+    {
+      "result": "first staged diff check exit2; initial local commit 546aa3a nevertheless created",
+      "cause": "two new evidence text files had extra EOF blank lines; orchestration did not gate the next commit on verifier exit",
+      "repair": "preserve initial local commit; remove only extra EOF blank lines; rerun exact scopes/diff/audit before separate corrective commit; no initial failed state pushed or merged"
     }
   ],
   "unrun": [
@@ -178,4 +183,3 @@
   "prior_files_evidence_preserved": true,
   "scope_safety_privacy_operating_gates_unchanged": true
 }
-

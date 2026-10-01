@@ -103,4 +103,3 @@ for (const [p,d] of [
 ]) ok(sha(read(base+p)) === d,'prior source/helper unchanged');
 ok(execFileSync('git',['diff','46a18211bc6db219517582861635ccf11b356947','--name-only','--',base+'bodyguard_avatar_candidate_a37.blend','bodyguard/frontend','bodyguard/backend','bodyguard/AGENTS.md','bodyguard/docs/operating-rules.md','bodyguard/docs/release-plan.md'],{cwd:root,encoding:'utf8'}).trim() === '','default/service/safety/approval gates unchanged');
 console.log(JSON.stringify({passed:true,assertions,actual_png:png,local_links:links,files:files.length,manifest:files},null,2));
-
