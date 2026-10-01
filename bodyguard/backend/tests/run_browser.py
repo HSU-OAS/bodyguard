@@ -1,4 +1,4 @@
-"""FR-U-02/03/04: real HTTP/SQL browser harness; only mail delivery is simulated."""
+"""FR-U-01~04: real HTTP/SQL; mail/Google and optional server clock are simulated."""
 
 import argparse
 import json
@@ -9,25 +9,37 @@ import subprocess
 import tempfile
 import threading
 import time
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
+from urllib.parse import parse_qs
 
+import httpx2
 import uvicorn
+from joserfc.jwk import RSAKey
+from pydantic import SecretStr
 from sqlalchemy import text
 
 from app.config import Settings
 from app.main import create_app
-from tests.conftest import test_database
+from tests.conftest import Harness, test_database
+from tests.test_google_auth import CLIENT_ID, Provider
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("suite", choices=("account", "password"), nargs="?", default="account")
+    parser.add_argument(
+        "suite", choices=("account", "password", "google"), nargs="?", default="account"
+    )
     args = parser.parse_args()
     # Bind before touching data; never reuse a user's server on this port.
-    with socket.socket() as listener:
+    with socket.socket() as listener, socket.socket() as blocked_proxy:
         # Reuse a closed test listener's TIME_WAIT, never another live listener.
         listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         listener.bind(("127.0.0.1", 8000))
+        # Native browser egress sink: reserve a port without listening, so external
+        # traffic is refused even if a route handler misses a redirected request.
+        blocked_proxy.bind(("127.0.0.1", 0))
+        proxy_url = f"http://127.0.0.1:{blocked_proxy.getsockname()[1]}"
         with (
             test_database() as db,
             tempfile.TemporaryDirectory(
@@ -62,9 +74,54 @@ def main() -> int:
                 smtp_username=None,
                 smtp_password=None,
             )
+            google_file = Path(temporary) / "google.json"
+            google_transport = None
+            clock = None
+            if args.suite == "google":
+                # Test-only private IPC: synthetic responses/clock, never a public endpoint.
+                google_file.write_text('{"offset_seconds":0,"responses":{}}')
+                google_file.chmod(0o600)
+                settings = settings.model_copy(
+                    update={
+                        "google_client_id": CLIENT_ID,
+                        "google_client_secret": SecretStr("synthetic-client-secret-never-real"),
+                    }
+                )
+                h = Harness(db)
+                h.client.close()
+                h.settings = settings
+                provider = Provider(h, RSAKey.generate_key(2048, parameters={"kid": "fixture"}))
+
+                def browser_clock() -> datetime:
+                    values = json.loads(google_file.read_text())
+                    return datetime.now(UTC) + timedelta(seconds=values["offset_seconds"])
+
+                def google_response(request: httpx2.Request) -> httpx2.Response:
+                    if request.url.path == "/token":
+                        values = parse_qs(request.content.decode())
+                        raw_code = values["code"][0]
+                        fixture = json.loads(google_file.read_text())["responses"][raw_code]
+                        provider.codes[raw_code] = (
+                            fixture["challenge"],
+                            fixture["nonce"],
+                            fixture["sub"],
+                        )
+                        provider.email = fixture["email"]
+                        provider.fault = fixture.get("fault", "")
+                    return provider.handle(request)
+
+                google_transport = httpx2.MockTransport(google_response)
+                clock = browser_clock
             server = uvicorn.Server(
                 uvicorn.Config(
-                    create_app(settings, db, mail=mail, reset_mail=mail),
+                    create_app(
+                        settings,
+                        db,
+                        mail=mail,
+                        reset_mail=mail,
+                        clock=clock,
+                        google_transport=google_transport,
+                    ),
                     host="127.0.0.1",
                     port=8000,
                     access_log=False,
@@ -96,7 +153,12 @@ def main() -> int:
                         f"test-results/{args.suite}",
                     ],
                     cwd=Path(__file__).resolve().parents[2] / "frontend",
-                    env={**os.environ, "BODYGUARD_TEST_MAILBOX": str(mailbox)},
+                    env={
+                        **os.environ,
+                        "BODYGUARD_TEST_MAILBOX": str(mailbox),
+                        "BODYGUARD_TEST_GOOGLE_FIXTURE": str(google_file),
+                        "BODYGUARD_TEST_BLOCKED_PROXY": proxy_url,
+                    },
                     check=False,
                 )
                 return result.returncode

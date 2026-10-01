@@ -40,6 +40,7 @@ class Provider:
         self.codes: dict[str, tuple[str, str, str]] = {}
         self.requests: list[tuple[str, str]] = []
         self.fault = ""
+        self.email = "google.person@example.com"
         self.entered: Barrier | None = None
         self.action = lambda: None
 
@@ -56,7 +57,7 @@ class Provider:
         values = parse_qs(request.content.decode())
         assert values["client_id"] == [CLIENT_ID]
         assert values["client_secret"] == ["synthetic-client-secret-never-real"]
-        assert values["redirect_uri"] == [ORIGIN + CALLBACK]
+        assert values["redirect_uri"] == [self.h.settings.origin + CALLBACK]
         assert values["grant_type"] == ["authorization_code"]
         challenge, nonce, sub = self.codes.pop(values["code"][0])
         verifier = values["code_verifier"][0]
@@ -77,7 +78,7 @@ class Provider:
             "exp": now + 3600,
             "iat": now,
             "nonce": nonce,
-            "email": "google.person@example.com",
+            "email": self.email,
             "email_verified": True,
         }
         faults: dict[str, tuple[str, object]] = {
@@ -596,3 +597,54 @@ def test_g01_unconfigured_google_has_no_fallback(harness: Harness) -> None:
     response = harness.client.get("/api/v1/auth/google/login", follow_redirects=False)
     assert response.status_code == 503
     assert harness.client.get("/api/v1/me").status_code == 401
+
+
+def test_gw05_html_unconfigured_start_returns_to_login(harness: Harness) -> None:
+    result = harness.client.get(LOGIN, headers={"Accept": "text/html"}, follow_redirects=False)
+    assert_failed(result, "unavailable")
+    assert harness.client.get("/api/v1/me").status_code == 401
+
+
+def test_gw05_html_quota_and_database_errors_return_safely(google, monkeypatch) -> None:
+    from sqlalchemy.exc import SQLAlchemyError
+
+    h, provider, client = google
+    for _ in range(10):
+        begin(client, provider)
+    result = client.get(LOGIN, headers={"Accept": "text/html"}, follow_redirects=False)
+    assert_failed(result, "rate-limited")
+    assert result.headers["retry-after"] == "60"
+    assert client.get(LOGIN, follow_redirects=False).status_code == 429
+    with monkeypatch.context() as patch:
+        patch.setattr(h.engine, "begin", lambda: (_ for _ in ()).throw(SQLAlchemyError()))
+        assert_failed(client.get(LOGIN, headers={"Accept": "text/html"}, follow_redirects=False))
+    assert not provider.requests and count(h, users) == 0
+
+
+@pytest.mark.parametrize("after_exchange", [False, True])
+@pytest.mark.parametrize("html", [False, True])
+def test_gw05_callback_database_outage_is_safe(google, monkeypatch, after_exchange, html) -> None:
+    from sqlalchemy.exc import SQLAlchemyError
+
+    h, provider, client = google
+    state, code = begin(client, provider)
+    with monkeypatch.context() as patch:
+
+        def fail_database() -> None:
+            patch.setattr(h.engine, "begin", lambda: (_ for _ in ()).throw(SQLAlchemyError()))
+
+        if after_exchange:
+            provider.action = fail_database
+        else:
+            fail_database()
+        result = client.get(
+            CALLBACK,
+            params={"state": state, "code": code},
+            headers={"Accept": "text/html" if html else "application/json"},
+            follow_redirects=False,
+        )
+        if html:
+            assert_failed(result)
+        else:
+            assert result.status_code == 503
+    assert count(h, users) == 0 and client.get("/api/v1/me").status_code == 401

@@ -152,6 +152,10 @@ test('B-01 공개·제품 개발 경로·카메라 0·좁은 창·키보드', as
   await page.goto('/start')
   await expect(page).toHaveURL(/\/login\?next=%2Fstart$/)
   await expect(page.getByRole('heading', { name: '다시 만나 반갑습니다' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Google로 계속하기', exact: true })).toBeDisabled()
+  await expect(
+    page.getByText('구글 연결을 준비하고 있습니다. 이메일로 계속해 주세요.'),
+  ).toBeVisible()
   await page.screenshot({ path: info.outputPath('login-desktop.png'), fullPage: true })
   await page.setViewportSize({ width: 700, height: 800 })
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
