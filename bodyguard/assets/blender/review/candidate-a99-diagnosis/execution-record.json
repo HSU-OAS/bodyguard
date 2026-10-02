@@ -1,0 +1,146 @@
+{
+  "date": "2026-10-03",
+  "kind": "native memory contour density and recut isolation, not asset/appearance QA",
+  "base_head": "58daeade6010ef460c0e4494a36aa87013095ae7",
+  "main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "source": {
+    "file": "bodyguard/assets/blender/bodyguard_avatar_candidate_a97_unapproved.blend",
+    "sha256": "8a2bcf7d74f10d084fd5551a9470a076c003de7ef7dfcb9a7348607cbd3e3618"
+  },
+  "maker": {
+    "file": "bodyguard/assets/blender/tailor_avatar_candidate.py",
+    "sha256": "8d9a29b0b75ed19caab25cd926e015b9ad786fd97adb50558d3bc1793e55cb39"
+  },
+  "runs": [
+    {
+      "name": "A99",
+      "session": 80768,
+      "exit_code": 1,
+      "reason": "protected hand marker guard; 50689 missing markers; no JSON saved"
+    },
+    {
+      "name": "A99b",
+      "session": 10322,
+      "exit_code": 1,
+      "reason": "native subdivision invalidated BMVert handle; ReferenceError"
+    },
+    {
+      "name": "A99c",
+      "session": 39096,
+      "exit_code": 1,
+      "reason": "all-point immutable skin assertion also applied to newly cut marker0"
+    },
+    {
+      "name": "A99d",
+      "session": 90361,
+      "exit_code": 1,
+      "reason": "rewritten inner AST unterminated string; no JSON saved",
+      "ruff_exit": 1,
+      "ruff_E501": 1
+    },
+    {
+      "name": "A99e",
+      "session": 35046,
+      "exit_code": 1,
+      "reason": "intentional stop after read-only skin diagnostic JSON",
+      "report": "skin-diagnosis.json",
+      "outer_and_inner_ast_check_exit": 0
+    },
+    {
+      "name": "A99f",
+      "session": 5476,
+      "exit_code": 0,
+      "report": "recut-memory.json",
+      "appearance_passed": false,
+      "poll_log_omits_first_initial_read_line": true
+    },
+    {
+      "name": "A99g",
+      "session": 41328,
+      "exit_code": 1,
+      "reason": "rewrite index escaped newline incorrectly; ValueError; no JSON saved"
+    },
+    {
+      "name": "A99h",
+      "session": 64465,
+      "exit_code": 0,
+      "report": "existing-contours-memory.json",
+      "rewrite_index_and_inner_ast_check_exit": 0,
+      "appearance_passed": false
+    }
+  ],
+  "style": {
+    "A99": 0,
+    "A99b": 0,
+    "A99c": 0,
+    "A99d": 1,
+    "A99e": 0,
+    "A99f": 0,
+    "A99g": 0,
+    "A99h": 0,
+    "format_checks_before_native_passed_except_A99d": true,
+    "copier_syntax_check_exit": 0
+  },
+  "captured_poll_logs": [
+    "A99b",
+    "A99c",
+    "A99d",
+    "A99e",
+    "A99f",
+    "A99g",
+    "A99h"
+  ],
+  "all_eight_complete_stdout_archived": false,
+  "copies": 19,
+  "gzip": 16,
+  "JSON_reports": 3,
+  "assets_saved": 0,
+  "new_png": 0,
+  "new_full_deformation_qa": false,
+  "new_browser_comparison": false,
+  "observations": {
+    "new_cut_interpolated_points_skin_changed": 13,
+    "authored_original_markers_skin_changed": 0,
+    "protected_hands_skin_changed": 0,
+    "max_new_cut_skin_numeric_delta": 5.960464477539063e-8,
+    "existing_coordinates_preserved_in_first_subdivision": true,
+    "recut_original_density_long_folds": [
+      1070,
+      1033
+    ],
+    "recut_matched_density_long_folds": [
+      500,
+      539
+    ],
+    "no_recut_original_density_long_folds": [
+      133,
+      123
+    ],
+    "no_recut_matched_density_long_folds": [
+      9,
+      11
+    ],
+    "no_recut_matched_density_narrow_faces": [
+      0,
+      0
+    ],
+    "original_guard_or_deformation_thresholds_weakened": false,
+    "coordinates_or_weights_restored_to_hide_failure": false,
+    "topology_different_so_not_fixed_edge_identity_metric": true,
+    "actual_browser_stripe_cause_proven": false
+  },
+  "native_api_evidence": "installed subdivide_edges docstring in skin-diagnosis.json; primary web API fetch returned402 and was not evidence",
+  "human_camera_capture": false,
+  "human_coordinate_collection": false,
+  "appearance_passed": false,
+  "adopted": false,
+  "release_approved": false,
+  "stages_1_to_6_complete": false,
+  "pr9_merge_allowed": false,
+  "next": "separate A100 candidate/actual source, GLB, deformation and Chrome QA; A99 itself is memory-only",
+  "not_run": [
+    "A99 new blend/GLB/PNG/118-pose/Chrome",
+    "actual performer/webcam/retarget/clinical/integrated latency",
+    "external accounts/secrets/operating migration/deploy/release"
+  ]
+}
