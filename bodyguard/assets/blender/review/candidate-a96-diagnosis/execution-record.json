@@ -1,0 +1,181 @@
+{
+  "date": "2026-10-02",
+  "kind": "authored surface/coordinate-space diagnosis, not new asset QA",
+  "base_head": "adec63febcbd74addc2dad1fa3151d9a00288235",
+  "main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "unchanged_files": [
+    {
+      "file": "bodyguard/assets/blender/bodyguard_avatar_candidate_a94_rejected.blend",
+      "sha256": "939b8f55d894fbb5f4d0a2e5023a7eb87a6b5a51c21780f5ffa1c706392acbae"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a94-review/bodyguard-male-candidate.glb",
+      "sha256": "6bd222341a622f10a68e766f6f5810d78806797367a88fcfe104b842338bfac9"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a94-review/bodyguard-female-candidate.glb",
+      "sha256": "c0de001ccba534c730f8e1a9870f883222ae5b901d54bb2351959f9f4935bd23"
+    },
+    {
+      "file": "bodyguard/assets/blender/review_avatar.py",
+      "sha256": "f712444c95cff9f56fbfb1a7d03580b2d9a3321fe7e11b93cf8f6448e0c83a39"
+    },
+    {
+      "file": "bodyguard/assets/blender/export_avatar_candidate.py",
+      "sha256": "890ba2eb8be9e107adc79554537bcdf7d5a6bdf9b536e1df217cc0b59aa0908f"
+    },
+    {
+      "file": "bodyguard/frontend/e2e/avatar.spec.ts",
+      "sha256": "01b035b555fb1ed610c38e0b6a8c0310b011178b2447ea5c51119192259aa367"
+    },
+    {
+      "file": "bodyguard/frontend/playwright.avatar.config.ts",
+      "sha256": "cf11a706fec036b1a8ac3c55b5b916372db5c79da8fc3d960e31fc4afa744299"
+    },
+    {
+      "file": "bodyguard/backend/tests/run_browser.py",
+      "sha256": "ab07d4313a4fa7e87ab0720450d6eaed82e9713f8e58f5861a7ea845fc384c2e"
+    }
+  ],
+  "native_inputs": [
+    {
+      "file": "bodyguard/assets/blender/bodyguard_avatar_candidate_a94_rejected.blend",
+      "sha256": "939b8f55d894fbb5f4d0a2e5023a7eb87a6b5a51c21780f5ffa1c706392acbae"
+    },
+    {
+      "file": "/private/tmp/bodyguard-tailor.6b7Uvu/draft-a94-web.blend",
+      "sha256": "4f492f9c117847063ffdc6431db79445a722d511cc6656b050546ae6f7394058"
+    },
+    {
+      "file": "/private/tmp/bodyguard-tailor.6b7Uvu/draft-a94-web-roundtrip.blend",
+      "sha256": "a27f48396e4007e77ab449a5bf47c1012a6be7f8ce73c31b3f6ae5a4679f1fa2"
+    }
+  ],
+  "runs": [
+    {
+      "name": "first-neutral-identity-hypothesis",
+      "exit_code": 1,
+      "report": "first-browser.json",
+      "passed_tests": 3,
+      "failed_tests": 1,
+      "failed_local_position_m": 0.044498157812664384,
+      "camera_assertion_in_failed_test_reached": false
+    },
+    {
+      "name": "measurement-protocol",
+      "exit_code": 0,
+      "report": "measurement-browser.json",
+      "command": "BODYGUARD_AVATAR_QA_DIRECTORY=/private/tmp/bodyguard-tailor.6b7Uvu/a94-glb PLAYWRIGHT_JSON_OUTPUT_NAME=/private/tmp/bodyguard-tailor.6b7Uvu/a96-measurement-browser-report.json .venv/bin/python -m tests.run_browser avatar",
+      "passed_tests": 4,
+      "identity_hypothesis_passed": false,
+      "camera_calls_asserted": 0
+    },
+    {
+      "name": "read-only-native",
+      "exit_code": 0,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a96-neutral-native.py -- '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a94_rejected.blend' /private/tmp/bodyguard-tailor.6b7Uvu/draft-a94-web.blend /private/tmp/bodyguard-tailor.6b7Uvu/draft-a94-web-roundtrip.blend /private/tmp/bodyguard-tailor.6b7Uvu/a96-neutral-native.json",
+      "browser_actors_terminal_before_native": true
+    }
+  ],
+  "browser": {
+    "first": {
+      "startTime": "2026-10-02T08:56:42.821Z",
+      "duration": 47258.613000000005,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "measurement": {
+      "startTime": "2026-10-02T09:02:43.488Z",
+      "duration": 53239.761,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "coordinate_space_observation": [
+    {
+      "gender": "남성",
+      "local_max_m": 0.044498157812664384,
+      "normal_max_rad": 5.327034870302584e-7,
+      "mesh_world_scale": 0.9742733836174011,
+      "world_bone_matrix_identity_max": 0.0000010217153971856217
+    },
+    {
+      "gender": "여성",
+      "local_max_m": 0.04761469790655775,
+      "normal_max_rad": 5.372690074837256e-7,
+      "mesh_world_scale": 1.029914140701294,
+      "world_bone_matrix_identity_max": 0.0000018459840021535736
+    }
+  ],
+  "style": {
+    "initial_typecheck_exit": 2,
+    "initial_typescript_errors": 2,
+    "corrected_typecheck_exit": 0,
+    "measurement_typecheck_exit": 0,
+    "restored_typecheck_exit": 0,
+    "biome_check_exit": 0,
+    "initial_biome_infos": 3,
+    "native_ruff_check_exit": 0,
+    "native_isolated_format_check_exit": 0,
+    "copy_script_syntax_exit": 0
+  },
+  "diagnostic_parser": {
+    "first_inline_syntax_exit": 1,
+    "corrected_readonly_exit": 0
+  },
+  "actual_png": 8,
+  "directly_viewed": [
+    "first/avatar-A-06-실제-남녀-GLB-두-복제본을-로드하고-한쪽-기술-변형이-다른-뼈대를-바꾸지-않는다/남성-two-models.png",
+    "first/avatar-A-06-실제-남녀-GLB-두-복제본을-로드하고-한쪽-기술-변형이-다른-뼈대를-바꾸지-않는다/여성-two-models.png",
+    "measured/avatar-A-06-실제-남녀-GLB-두-복제본을-로드하고-한쪽-기술-변형이-다른-뼈대를-바꾸지-않는다/남성-two-models.png",
+    "measured/avatar-A-06-실제-남녀-GLB-두-복제본을-로드하고-한쪽-기술-변형이-다른-뼈대를-바꾸지-않는다/여성-two-models.png",
+    "measured/avatar-A96-neutral-skin-di-6bfd9--unskinned-authored-surface/남성-gpu-skin.png",
+    "measured/avatar-A96-neutral-skin-di-6bfd9--unskinned-authored-surface/남성-unskinned.png",
+    "measured/avatar-A96-neutral-skin-di-6bfd9--unskinned-authored-surface/여성-gpu-skin.png",
+    "measured/avatar-A96-neutral-skin-di-6bfd9--unskinned-authored-surface/여성-unskinned.png"
+  ],
+  "copies": 18,
+  "gzip": 7,
+  "archive_handling": {
+    "initial_staged_diff_check_exit": 2,
+    "generated_context_trailing_whitespace_lines": 3,
+    "context_lossless_gzip_replacement": true,
+    "original_error_context_preserved": true,
+    "interrupted_patch_builder": "ReferenceError: constfile is not defined",
+    "gzip_created_before_interruption": true,
+    "metadata_patch_executed_before_interruption": false,
+    "resumed_integrity_check_exit": 0,
+    "resumed_staged_diff_check_exit": 0,
+    "resumed_main_diff_check_exit": 0
+  },
+  "temporary_test_helpers_restored": true,
+  "old_files_changed": 0,
+  "new_blend_files": 0,
+  "new_glb_files": 0,
+  "new_full_deformation_qa": false,
+  "observations": {
+    "forearm_stripes_persist_on_unskinned_render": true,
+    "local_identity_hypothesis_passed": false,
+    "local_displacement_is_human_measurement_error": false,
+    "world_matrix_product_is_GPU_numeric_readback": false,
+    "exact_forearm_connectivity_cause_proven": false
+  },
+  "human_camera_capture": false,
+  "human_coordinate_collection": false,
+  "appearance_passed": false,
+  "adopted": false,
+  "release_approved": false,
+  "stages_1_to_6_complete": false,
+  "pr9_merge_allowed": false,
+  "not_run": [
+    "new source/GLB 118-pose QA (assets unchanged)",
+    "GPU transform feedback/position readback",
+    "actual performer/webcam/retarget/clinical/integrated latency",
+    "account/API/DB/SMTP/OAuth regression",
+    "external accounts/secrets/migration/deploy/release"
+  ]
+}

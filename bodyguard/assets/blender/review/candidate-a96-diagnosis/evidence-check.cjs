@@ -1,0 +1,76 @@
+// Reuses A95 stdlib integrity pattern. Measurements are not appearance approval.
+const assert = require('node:assert/strict'), fs = require('node:fs'), path = require('node:path'), crypto = require('node:crypto'), zlib = require('node:zlib')
+const read = name => JSON.parse(fs.readFileSync(path.join(__dirname, name)))
+const sha = bytes => crypto.createHash('sha256').update(bytes).digest('hex')
+const manifest = read('copy-manifest.json'), record = read('execution-record.json')
+assert.equal(manifest.old_files_changed, 0)
+assert.equal(manifest.copies.length, 18)
+for (const item of manifest.copies) {
+  const bytes = fs.readFileSync(path.join(__dirname, item.file))
+  assert.equal(bytes.length, item.bytes)
+  assert.equal(sha(bytes), item.sha256)
+  assert.equal(sha(item.file.endsWith('.gz') ? zlib.gunzipSync(bytes) : bytes), item.decoded_sha256)
+  if (item.file.endsWith('.png')) assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a')
+}
+assert.equal(manifest.copies.filter(x => x.file.endsWith('.png')).length, 8)
+assert.equal(manifest.copies.filter(x => x.file.endsWith('.gz')).length, 7)
+assert.equal(record.gzip, 7)
+assert.equal(record.archive_handling.initial_staged_diff_check_exit, 2)
+assert(record.archive_handling.context_lossless_gzip_replacement)
+assert(record.archive_handling.original_error_context_preserved)
+assert.equal(record.directly_viewed.length, 8)
+for (const file of record.directly_viewed) assert(manifest.copies.some(x => x.file === file))
+const root = path.resolve(__dirname, '../../../../..')
+for (const item of record.unchanged_files) assert.equal(sha(fs.readFileSync(path.join(root, item.file))), item.sha256)
+const results = browser => browser.suites.flatMap(s => s.specs.flatMap(x => x.tests.flatMap(t => t.results)))
+const first = read('first-browser.json'), measurement = read('measurement-browser.json')
+assert.deepEqual(first.stats, record.browser.first)
+assert.deepEqual(measurement.stats, record.browser.measurement)
+assert.equal(results(first).filter(x => x.status === 'passed').length, 3)
+const failed = results(first).filter(x => x.status === 'failed')
+assert.equal(failed.length, 1)
+assert(failed[0].errors.some(x => x.message.includes('0.044498157812664384')))
+assert(results(measurement).every(x => x.status === 'passed' && x.errors.length === 0))
+assert.deepEqual(measurement.errors, [])
+const attachments = results(measurement).flatMap(x => x.attachments || [])
+const isolation = attachments.filter(x => x.name.endsWith('-neutral-isolation'))
+assert.equal(isolation.length, 2)
+for (const [index, attachment] of isolation.entries()) {
+  const rows = JSON.parse(Buffer.from(attachment.body, 'base64')), expected = record.coordinate_space_observation[index]
+  assert.deepEqual(rows.map(x => [x.mode, x.static_copies]), [['gpu-skin', 0], ['unskinned', 2]])
+  for (const row of rows) for (const body of row.bodies) {
+    assert.equal(body.identity_assumption_met, false)
+    assert.equal(body.position_max_m, expected.local_max_m)
+    assert.equal(body.normal_max_rad, expected.normal_max_rad)
+    assert.equal(body.receive_shadow, false)
+    assert.equal(body.bone_matrices.length, 163)
+    assert.deepEqual(body.attributes, rows[0].bodies[0].attributes)
+    const world = body.mesh_matrix_world
+    assert.deepEqual([world[0], world[5], world[10]], [expected.mesh_world_scale, expected.mesh_world_scale, expected.mesh_world_scale])
+    for (const i of [1, 2, 3, 4, 6, 7, 8, 9, 11]) assert.equal(world[i], 0)
+    let error = 0
+    for (const bone of body.bone_matrices) for (let i = 0; i < 16; i++) {
+      const r = i % 4, c = Math.floor(i / 4)
+      const value = r === 3 ? bone.elements[i] : world[r * 5] * bone.elements[i] + (c === 3 ? world[12 + r] : 0)
+      const target = i % 5 === 0 ? 1 : (c === 3 && r < 3 ? world[12 + r] : 0)
+      error = Math.max(error, Math.abs(value - target))
+    }
+    assert.equal(error, expected.world_bone_matrix_identity_max)
+  }
+}
+for (const a of attachments.filter(x => x.name.endsWith('-native-asset'))) {
+  const asset = JSON.parse(Buffer.from(a.body, 'base64'))
+  assert.equal(asset.sha256, record.unchanged_files.find(x => x.file.endsWith('/' + asset.filename)).sha256)
+}
+const native = read('native-neutral.json')
+assert.equal(native.rows.length, 6)
+for (const row of native.rows) assert(row.pose_constraints === 0 && Number.isFinite(row.raw_to_evaluated_position_max_m))
+for (const key of ['assets_changed', 'full_deformation_qa', 'appearance_approved']) assert.equal(native[key], false)
+assert.deepEqual(record.runs.map(x => x.exit_code), [1, 0, 0])
+assert.equal(record.style.initial_typecheck_exit, 2)
+assert.equal(record.style.initial_typescript_errors, 2)
+for (const key of ['corrected_typecheck_exit', 'measurement_typecheck_exit', 'restored_typecheck_exit', 'biome_check_exit', 'native_ruff_check_exit', 'native_isolated_format_check_exit']) assert.equal(record.style[key], 0)
+assert(record.temporary_test_helpers_restored)
+assert(record.new_blend_files === 0 && record.new_glb_files === 0)
+for (const key of ['new_full_deformation_qa', 'human_camera_capture', 'human_coordinate_collection', 'appearance_passed', 'adopted', 'release_approved', 'stages_1_to_6_complete', 'pr9_merge_allowed']) assert.equal(record[key], false)
+console.log(JSON.stringify({ integrity_passed: true, first_Chrome: { passed: 3, failed: 1 }, measured_Chrome: 4, local_identity_hypothesis_passed: false, copies: 18, png: 8, directly_viewed: 8, new_assets: 0, appearance_passed: false }))
