@@ -1,0 +1,17 @@
+{
+  "kind": "native-script-path-preflight",
+  "source": {
+    "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec '/private/tmp/bodyguard-tailor.6b7Uvu/draft-a93-free-diagonal-joins.blend' --python-exit-code 1 --python '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/tools/blender/review_avatar.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/a93-source-review' --candidate --mannequin",
+    "exit_code": 1,
+    "output": "00:00.382  blend            | Read blend: \"/private/tmp/bodyguard-tailor.6b7Uvu/draft-a93-free-diagonal-joins.blend\"\nOSError: Python file \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/tools/blender/review_avatar.py\" could not be opened: No such file or directory\n\nError: script failed, file: '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/tools/blender/review_avatar.py', exiting.\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+  },
+  "export": {
+    "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec '/private/tmp/bodyguard-tailor.6b7Uvu/draft-a93-free-diagonal-joins.blend' --python-exit-code 1 --python '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/tools/blender/export_avatar_candidate.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/draft-a93-web.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/a93-glb' 1",
+    "exit_code": 1,
+    "observed_excerpt_paths_abbreviated": "00:00.385: draft-a93-free-diagonal-joins.blend read. OSError: bodyguard/tools/blender/export_avatar_candidate.py could not be opened: No such file or directory. Error: script failed, exiting.",
+    "final_output": "Blender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+  },
+  "native_checker_passed": true,
+  "geometry_result": false,
+  "rerun_reason": "Invoked non-existent bodyguard/tools/blender path. Correct existing helpers are bodyguard/assets/blender. No QA/export output was created by failed invocations."
+}

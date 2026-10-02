@@ -1,5 +1,7 @@
 # 출시 아바타 제작 계약 — 1단계
 
+2026-10-02 [A93 점유 대각선 제약·실제 제작/검수](../assets/blender/review/candidate-a93-review/README.md): A92 진단을 native 원본에 반영하고 저장 재열기에서 모든 좌표·named skin·손·각163개 숫자 rest bones/행렬·영역 밖 연결/winding을 정확 보존했다. 삼각분할 edge/face 남5/여37 추가·국소 긴 접힘49→48/50→47은 일부 개선이며 전체 위상 동일/외형 통과는 아니다. 원본/재수입 각118개·각34실제PNG와 Chrome3개41.436s를 재실행하고89사본/4gzip·74실제PNG/직접열람38을 보존했다. 잘못된 helper 경로2회·Chrome 실행 전 sandbox 거절·backend 문맥 format1/isolated0을 구분한다. 뒤 목/전완/손목·웹 외형 P2가 남아 미채택하며 최신 얼굴/앞목·통일 백색/자연 곡선·관절, 이전 원본/증거·개발 A37·Draft PR #9 미병합·전체1~6/승인 기준은 유지한다.
+
 2026-10-02 [A92 남은 뒤 목 연결 원인 대조](../assets/blender/review/candidate-a92-diagnosis/README.md): 국소 n-gon 분할에서 여성 quad의 이미 점유된 대각선이4면 edge를 만들어 nonmanifold guard가 중단했다(exit1, 저장0). 별도 native 단계/중복 면 진단 후 점유 대각선을 피하는 ALTERNATE v2를 메모리에서 대조했고 좌표/영역 밖 연결 완전 보존·nonmanifold0·국소 접힘49→48/50→47을 확인했다. 잘못된 native enum의 별도 실패도 보존한다. native7회/실패2·JSON5/log2/gzip7·14사본을 기록하며 새blend/GLB/PNG0, 새118변형/Chrome 미실행이다. 진단을 외형 통과로 대신하지 않는다. 기존 파일/증거·개발 A37·외형 P2·Draft PR #9 미병합·전체1~6/승인 기준은 유지한다.
 
 2026-10-02 [A91 뒤 목 국소 연결 수정·실제 검수](../assets/blender/review/candidate-a91-review/README.md): native AREA 대조는 접힘 수가 줄지 않아 저장하지 않았고, 같은 전문 원본의 뒤 목 삼각형만 edge 회전했다. 저장 재열기에서 모든 좌표·named skin·손·각163개 숫자 rest bones/행렬·정점/edge/face 수와 영역 밖 연결/winding 완전 동일, 국소 면 남25/여17개 교체·이동0을 확인했다. 국소 긴 접힘은55→49/52→50으로 일부 감소했지만 이전 고정 edge 지표와 같지 않으며 뒤 목/전완/손목·웹 외형 P2는 남아 미채택한다. 원본/GLB 각118개·각34실제PNG와 Chrome3개41.443s를 재실행했고74실제PNG/직접열람38·97사본/11gzip, 독립 검사기 실패/숫자 동결 후 정확 비교 재실행·Chrome 실행 전 sandbox 거절을 구분해 보존한다. 기존 원본/증거·개발 A37·Draft PR #9 미병합·전체1~6/승인 기준은 유지한다.
