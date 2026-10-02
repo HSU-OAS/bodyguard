@@ -1,0 +1,142 @@
+{
+  "date": "2026-10-02",
+  "branch": "codex/stage2-avatar-candidate",
+  "base_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "previous_head": "5b536ac1784da3ab0ef5e92e03c7f4f3a4152e67",
+  "runs": [
+    {
+      "name": "posterior-only-native-source-and6png",
+      "exit": 0
+    },
+    {
+      "name": "saved-file-independent-preservation",
+      "exit": 0
+    },
+    {
+      "name": "locked-original-edge-diagnostic",
+      "exit": 0
+    },
+    {
+      "name": "source118-and34png",
+      "exit": 0
+    },
+    {
+      "name": "native-glb-export-import",
+      "exit": 0
+    },
+    {
+      "name": "import118-and34png",
+      "exit": 0
+    },
+    {
+      "name": "isolated-chrome3",
+      "exit": 0
+    }
+  ],
+  "native_failures": 0,
+  "all_native_actors_terminal_before_chrome": true,
+  "actual_first_png": 6,
+  "actual_source_png": 34,
+  "actual_import_png": 34,
+  "actual_browser_png": 2,
+  "ceo_reference_png": 1,
+  "actual_png_viewed": 40,
+  "first_png_viewed": [
+    "male-front.png",
+    "male-neck-back.png",
+    "female-front.png",
+    "female-neck-back.png",
+    "male-wrist.png",
+    "female-wrist.png"
+  ],
+  "source_png_viewed": [
+    "faceless-front.png",
+    "faceless-quarter.png",
+    "faceless-body-side-male.png",
+    "faceless-body-back-male.png",
+    "faceless-hand-male.png",
+    "faceless-knee-male.png",
+    "faceless-side-male.png",
+    "faceless-neck-male-left.png",
+    "faceless-neck-male-right.png",
+    "faceless-body-side-female.png",
+    "faceless-body-back-female.png",
+    "faceless-hand-female.png",
+    "faceless-knee-female.png",
+    "faceless-side-female.png",
+    "faceless-neck-female-left.png",
+    "faceless-neck-female-right.png"
+  ],
+  "import_png_viewed": [
+    "faceless-front.png",
+    "faceless-quarter.png",
+    "faceless-body-side-male.png",
+    "faceless-body-back-male.png",
+    "faceless-hand-male.png",
+    "faceless-knee-male.png",
+    "faceless-side-male.png",
+    "faceless-neck-male-left.png",
+    "faceless-neck-male-right.png",
+    "faceless-body-side-female.png",
+    "faceless-body-back-female.png",
+    "faceless-hand-female.png",
+    "faceless-knee-female.png",
+    "faceless-side-female.png",
+    "faceless-neck-female-left.png",
+    "faceless-neck-female-right.png"
+  ],
+  "browser_png_viewed": [
+    "male-two-models.png",
+    "female-two-models.png"
+  ],
+  "script_checks": {
+    "initial_maker_ruff_exit": 1,
+    "initial_maker_format_check_exit": 1,
+    "initial_failure": "C419 unnecessary list comprehension copied from existing helper; fixed to generator and formatted BEFORE native execution; initial style FAIL not native model failure.",
+    "final_two_native_full_ruff_exit": 0,
+    "final_two_native_format_check_exit": 0,
+    "preserver_node_syntax_exit": 0,
+    "auditor_node_syntax_exit": 0,
+    "whole_repository_style": "NOT RUN"
+  },
+  "native_source_sha256": "b1263a8f7f8be59ff238f0615a2ab65f148ed94dfee02cabf4c4823b209d2d3c",
+  "browser": {
+    "device": "Mac16,12",
+    "cpu": "Apple M4",
+    "memory_bytes": 17179869184,
+    "chrome": "154.0.8037.93",
+    "headless": true,
+    "viewport": [
+      1440,
+      1080
+    ],
+    "dpr": 1,
+    "actual_tests": 3,
+    "duration_ms": 41457.185,
+    "startTime": "2026-10-02T04:32:46.356Z",
+    "camera_calls": 0,
+    "external_egress": "A-00 owned non-listening native proxy actual PASS",
+    "api_sql_smtp_google": "NOT RUN; guest401/model503 synthetic, native WebGL loss/restore actual",
+    "raf_not_gpu_or_camera_latency": true
+  },
+  "appearance_passed": false,
+  "accepted_candidate": false,
+  "merge_allowed": false,
+  "stages1_to6_passed": false,
+  "release_approved": false,
+  "development_default": "A37 unchanged",
+  "next_safe_edit": "Retain new-reference continuous face/front-neck and inspect/refine remaining localized posterior-neck/forearm/wrist surface/topology and actual web finish. No whole-head graft, broad smoothing/QA weakening or declared Stage completion.",
+  "notes": [
+    "Runs are grouped, not chronology. Every yielded actor awaited to terminal, never restarted on timeout. Some immutable-source native renders overlapped; their duration is not a performance benchmark. All six native actors terminated before Chrome.",
+    "Whole source edges/faces/named skin/hands/163 rest bones/world matrices were independently compared after save; protected outside-posterior points M121062/F120406 exact, including all front and above-neck head. Artist-only local maximum M1.642217/F4.009153mm below unchanged6mm guard, no anatomical/clinical/pose threshold.",
+    "Locked original-edge diagnostics neck114->102/116->80; wrists30/34/16/13 unchanged. Maker reclassified rest lengths yielded103/85; not the same measurement and not approval.",
+    "Source and actual GLB import121rows/118cases/pass/failures0, rendered:true both with actual34PNG each. Worst2.9439303671031447/2.94767980329051. Technical20-degree stress is not exercise truth or clinical approval.",
+    "Source vertex counts142087/139882; native1um fin cleanup6/9 gives import142081/139873. Native influence limits300407/296607, five male parent warnings. Whole original-to-GLB geometry identity or warning-free logs not claimed.",
+    "Actual first6+source34+import34+Chrome2=76PNG preserved; direct views6+16+16+2=40 only, not all76. CEO reference viewed separately/modeling-only/not packaged into GLB.",
+    "Face/front-neck form remains the latest reference-style continuous authored source, but posterior rough facets/creases and existing forearm/wrist/web finish remain visibly below contract. A-02 P2 unresolved; no default replacement, merge or release.",
+    "Chrome3 passed41.457185s after native termination, independent two rigs/eight-weight meshes2/static0/moving>0.1, 180RAF. Color/Clock/WebGL cleanup warnings/injected503 not hidden. No actual user camera or pose capture, storage or upload.",
+    "Whole service/API/Vitest/typecheck/build/whole repository style, clinical/demo/retarget/compound motion, live people/webcam, multiple devices/target laptop/long-duration/GPU timings/provider/expert tests NOT RUN. No new framework/dependencies/primitive body/broad remesh/coordinate restoration/QA changes/provider accounts/secrets/cost/operating migration/deploy/release.",
+    "Prior A37-A88 source/GLB/review evidence and original dirty main checkout unchanged. Latest reference safely applied after prior native terminal; overall Stages1-6 goal/acceptance/authorization rules unchanged.",
+    "Initial staged git diff --check flagged extra blank EOF lines in new README/execution-record; its exit was not separately collected because subsequent stat/name commands ended the same shell with0. A mistaken README patch context was rejected without changing the file; correct apply_patch removed the extra blank lines, and a separately collected staged recheck actually passed/exit0. Neither issue changed native source/GLB or prior evidence."
+  ]
+}
