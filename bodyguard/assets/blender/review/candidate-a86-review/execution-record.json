@@ -1,0 +1,90 @@
+{
+  "date": "2026-10-02",
+  "branch": "codex/stage2-avatar-candidate",
+  "base_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "previous_head": "eaa82c78f5c42ea4c037ded813cc705ac6c2216d",
+  "runs": [
+    {
+      "name": "a86-maker",
+      "exit": 0
+    },
+    {
+      "name": "a86-source118",
+      "exit": 0
+    },
+    {
+      "name": "a86-first8",
+      "exit": 0
+    },
+    {
+      "name": "a86-saved-comparison",
+      "exit": 0
+    },
+    {
+      "name": "a86-export-roundtrip",
+      "exit": 0
+    },
+    {
+      "name": "a86-import118",
+      "exit": 0
+    },
+    {
+      "name": "a86-import-first8",
+      "exit": 0
+    },
+    {
+      "name": "a86-chrome",
+      "exit": 0
+    }
+  ],
+  "all_native_actors_terminal_before_chrome": true,
+  "actual_native_png": 16,
+  "actual_browser_png": 2,
+  "actual_png_viewed": 18,
+  "full34_source_import": "NOT RUN",
+  "script_checks": {
+    "ruff_e9_f_maker_and_checker_exit": 0,
+    "ruff_format_check_two_files_exit": 0,
+    "ruff_default_two_files_exit": 1,
+    "ruff_default_failures": [
+      "C402 a86 maker line516",
+      "C402 a86 maker line518"
+    ],
+    "historical_executed_code_unchanged": true
+  },
+  "browser": {
+    "device": "Mac16,12",
+    "cpu": "Apple M4",
+    "memory_bytes": 17179869184,
+    "chrome": "154.0.8037.93",
+    "headless": true,
+    "viewport": [
+      1440,
+      1080
+    ],
+    "dpr": 1,
+    "actual_tests": 3,
+    "duration_ms": 41520.054,
+    "camera_calls": 0,
+    "api_sql_smtp_google": "NOT RUN; guest401/model503 synthetic, actual native WebGL loss/restore",
+    "external_egress": "actual native non-listening owned proxy A-00 PASS"
+  },
+  "appearance_passed": false,
+  "accepted_candidate": false,
+  "merge_allowed": false,
+  "stages1_to6_passed": false,
+  "release_approved": false,
+  "development_default": "A37 unchanged",
+  "notes": [
+    "Runs are grouped, not a claim of serial wall-clock execution. Yield was always awaited to terminal; no native actor restarted on observation.",
+    "Native weighted cage masking reduced the forehead band, but jaw/neck collar and posterior crease still fail final appearance.",
+    "Only mask weights are bounded; authored coordinates are never clamped. Native licensed 266-point cage; 63 zero-mask points/topology exact before artist rotation/fitting. Volume preservation after native smoothing/whole fitting is not claimed.",
+    "A60 continuous coordinates/A63 exact topology named-skin correspondence retained; old retained body 75915/75865 points/named skin/hands/163 rest bones/matrices actually independently checked. Technical ratio3/new bridge6mm guards unchanged.",
+    "Source118/import118 are engineering stress, not anatomy/medical/exercise approval. RAF180 is not GPU completion, inference/camera latency, people/target laptop/usability/performance approval.",
+    "Full Ruff default check returned1 for two C402 comprehensions. Format/E9,F actually passed; no full-style/adoption/merge success claim. Cleanup of a new producer and actual rerun remain.",
+    "First archive preflight returned1 before any directory/copy because path.join kept a trailing slash and the prefix comparison appended another separator. Failed code preserved; corrected path.resolve helper copied39 files/12 decoded scripts/18 PNG without overwriting any prior source/evidence. The dependent image view failed as missing and was only actually viewed after preservation.",
+    "Four guessed helper-path read attempts returned file-not-found; rg --files located the existing Blender asset helpers. No write/result was inferred from those failed reads.",
+    "Male GLB export warned five times about armature parent and limited1185660 weights; female limited1264715. Chrome Clock deprecation/color/WebGL cleanup warning and expected503 are preserved; actual roundtrip and browser assertions passed.",
+    "No full service regression/API/Vitest/typecheck/build, actual users/camera/pose/video, demos/retarget/compound motions/multidevice/long-duration/target laptop, provider connections/accounts/secrets/cost/operating DB migration/deployment/release."
+  ]
+}
