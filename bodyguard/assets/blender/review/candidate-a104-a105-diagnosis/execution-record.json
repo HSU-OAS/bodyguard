@@ -1,0 +1,109 @@
+{
+  "date": "2026-10-03",
+  "timezone": "Asia/Seoul",
+  "kind": "A104 read-only posterior intersection diagnosis and A105 single-pass merit-constrained native topology memory comparison",
+  "base_head": "fba2b98d90c1612c8121579fa83d62f2e0c0983e",
+  "main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "source": {
+    "file": "bodyguard/assets/blender/bodyguard_avatar_candidate_a103_unapproved.blend",
+    "bytes": 29660726,
+    "sha256": "56766af46c8c5a1330d0d0c22c56ea9f287a9d871d8068afa0812a56e1fb9820"
+  },
+  "glb": [
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a103-review/bodyguard-male-candidate.glb",
+      "bytes": 12622128,
+      "sha256": "49ce9e3e6221e9469f44793417c5bf5c896a5b61c1e9612d2abe266f0217060a"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a103-review/bodyguard-female-candidate.glb",
+      "bytes": 12427736,
+      "sha256": "90dc826e323802e4da4d930f7c45d9be31f3a3773d19767d251d2a5ed441779f"
+    }
+  ],
+  "runs": [
+    {
+      "name": "A104 local rest-pose nonadjacent intersection diagnosis",
+      "session": 54358,
+      "exit_code": 0,
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec \"bodyguard/assets/blender/bodyguard_avatar_candidate_a103_unapproved.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-tailor.6b7Uvu/a104-posterior-intersection-probe.py\" -- \"/private/tmp/bodyguard-tailor.6b7Uvu/a104-posterior-intersections.json\"",
+      "rows": 2,
+      "source_saved": false,
+      "new_png": 0,
+      "report": "posterior-intersections.json"
+    },
+    {
+      "name": "A105 constrained native patch trial and same-camera posterior renders",
+      "session": 85918,
+      "exit_code": 0,
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec \"bodyguard/assets/blender/bodyguard_avatar_candidate_a103_unapproved.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-tailor.6b7Uvu/a105-merit-constrained-topology-dryrun.py\" -- \"/private/tmp/bodyguard-tailor.6b7Uvu/a105-merit-topology\"",
+      "rows": 2,
+      "source_saved": false,
+      "new_png": 4,
+      "report": "merit-topology.json"
+    }
+  ],
+  "style": {
+    "early_default_ruff_reported_E501_counts": [
+      3,
+      1
+    ],
+    "early_command_groups_final_exit": 0,
+    "corrections": "format/line wrap and test-triangle correction before native execution; no executed source script was edited afterwards",
+    "final_ruff_default_exit": 0,
+    "final_ruff_isolated_exit": 0,
+    "final_isolated_88_format_check_exit": 0,
+    "exclusive_copier_syntax_exit": 0,
+    "exclusive_copier_exit": 0
+  },
+  "copies": 11,
+  "gzip": 5,
+  "new_png": 4,
+  "directly_viewed_png": 4,
+  "source_saved": false,
+  "new_blend_files": 0,
+  "new_glb_files": 0,
+  "human_camera_capture": false,
+  "human_coordinate_collection": false,
+  "new_full_deformation_qa": false,
+  "new_browser_comparison": false,
+  "appearance_passed": false,
+  "adopted": false,
+  "release_approved": false,
+  "stages_1_to_6_complete": false,
+  "pr9_merge_allowed": false,
+  "limitations": [
+    "A104 excludes any shared vertex, coplanar contact and crossings at or below 0.1 micrometre tolerance; zero strict hits is not no whole-body/self/adjacent intersections",
+    "A105 is a discarded in-memory scene, not a saved or QA-approved asset",
+    "Four real Blender posterior PNGs are not new 118-pose, GLB or Chrome evidence",
+    "Fewer local long folded edges does not establish reference appearance/anatomy or clinical accuracy"
+  ],
+  "preserved": "A103 source/GLBs and archived 99-copy integrity actually rechecked; old head/neck/wrist, development A37 and prior evidence not replaced",
+  "not_run": [
+    "new saved native source candidate",
+    "new source/GLB full 118-pose QA or export",
+    "new Chrome or real-camera latency/accuracy",
+    "human filming or pose collection, approved demonstration/user retarget",
+    "API/auth/database/mail/OAuth regression, external accounts/secrets/production migration/deploy/release"
+  ],
+  "review": {
+    "first_read_only_scope_scan_exit": 1,
+    "first_error": "node -e extra closing brace; syntax error before scan ran",
+    "corrected_scope_scan_exit": 0,
+    "targeted_secret_findings": 0,
+    "archive_text_files_checked": 11,
+    "trace_rows_checked": 50,
+    "new_logic_p1_p2": 0,
+    "existing_appearance_p2": [
+      "A-02",
+      "A-08"
+    ],
+    "merge_allowed": false
+  },
+  "verification": {
+    "archive_checker_exit": 0,
+    "prior_a103_checker_exit": 0,
+    "git_diff_check_exit": 0
+  },
+  "next": "Preserve the A105 accepted trace; inspect remaining shared-vertex/near-coplanar folds and tangent arrangement before one bounded native geometry repair. No repeat-all-diagonal or smoothing-strength loop, head graft, source/skin restoration to hide failure, or guard relaxation."
+}

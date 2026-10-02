@@ -1,5 +1,7 @@
 # S2.4 — 남녀 아바타 출시 후보 제작
 
+2026-10-03 [A104·A105 뒤 목 교차/품질 제한 연결 대조](../../assets/blender/review/candidate-a104-a105-diagnosis/README.md): native 두 진단 종료0·4행에서 국소 비공유정점 엄격 교차 검출0과 인접/평면/전신 검사의 한계를 기록했다. 품질이 실제 개선되는 native 회전 남10/여4만 메모리 대조해 접힘26→10/24→18, 전체 좌표/skin·각163rest 행렬·수/영역 밖 면/winding·nonmanifold0 guard와 실제 전후PNG4/직접열람4를 확인했다. 실제 뒤 목 외형은 부족해 새원본/GLB 저장·118변형·Chrome은 미실행/미채택이다. 11사본/5gzip·A103 원본/GLB2/99사본 보존과 초기 E5013/1→실행 전 수정/최종0을 구분한다. 최신 얼굴/앞목·손목 개선·통일 무의상 백색/필요 구조/리깅·기존 증거/개발 A37·Draft PR #9 미병합·전체1~6/승인 기준은 유지하며 남은 공유정점/평면 접힘과 접선 배열을 이어서 확인한다.
+
 2026-10-03 [A103 native 손목 보간·실제 재검수](../../assets/blender/review/candidate-a103-review/README.md): 동일 A100 윤곽의 SURFACE/PATH 대조에서 PATH 국소 긴 접힘9/11→각0을 확인하고 별도 원본을 저장했다. 영역 밖 좌표/named skin·면/winding·손·각163rest bones/행렬 보존, 원본/GLB 각118변형·각34PNG·Chrome4개53.416s/웹캠 요청0·99사본/14gzip·76PNG/직접열람29를 실제 완료했다. 같은 웹 확대의 잔줄무늬는 완화됐으나 손목 경계 음영/뒤 목·전체 외형 P2가 남아 미채택한다. 새 static Python3개 Ruff/format0·임시 frontend 복원0, 첫 format1→실행 전 수정0과 과거 A100 S102를 구분한다. 최신 얼굴/앞목·무의상 남녀 통일 백색/필요 구조·정확도·원본/증거·개발 A37·Draft PR #9 미병합·전체1~6/승인 기준은 유지한다. 다음은 뒤 목 국소 연결 진단이다.
 
 2026-10-03 [A101 실제 접힘·법선 원인 분리](../../assets/blender/review/candidate-a101-diagnosis/README.md): native 읽기 전용24+2행/각exit0에서 원본 손목 접합부 큰 기하 면각과 재수입 flat arm0을 확인했다. imported163 nonidentity는 정확한 float 비교이며 최대 행렬 원소 차이6.080/8.821e-6으로 구분해 실제163관절 운동으로 해석하지 않는다. 입력 SHA 불변·7사본/5gzip·두 코드 Ruff/format0, 새asset/PNG/전체 변형/Chrome0이다. 다음은 동일 경계/보호 기준의 native bridge 보간 대조다. 기존 외형 P2·A100 S102·원본/증거·개발 A37·Draft PR #9 미병합·전체1~6/승인 규칙은 그대로다.
