@@ -1,5 +1,7 @@
 # 출시 아바타 제작 계약 — 1단계
 
+2026-10-03 [A100 기존 손목 경계 대응·실제 검수](../assets/blender/review/candidate-a100-review/README.md): 재절단 없이 native 점 수를 대응한 별도 원본/GLB의 각118변형·각34PNG와 Chrome4개50.747s/웹캠 요청0을 완료했다. 영역 밖 좌표/named skin·손·각163rest bones/행렬 보존,90사본/5gzip·76실제PNG/직접열람22를 확인했다. 국소 좁은 면0·긴 접힘9/11이어도 실제 Chrome 전완 줄무늬와 뒤 목 P2가 남아 외형 미통과·미채택이다. Metal startup139→실제 재검사0, 생산자 Ruff S1021/isolated1과 성공한 나머지 검사를 구분해 보존하며 전체 style 통과로 표시하지 않는다. 최신 얼굴/앞목·무의상 통일 백색/필요 구조·리깅 정확도·이전 파일/증거·개발 A37·PR #9 Draft/미병합·전체1~6/승인 기준은 그대로다.
+
 2026-10-03 [A99 재절단·경계 밀도 원인 분리](../assets/blender/review/candidate-a99-diagnosis/README.md): native8회/대조 완료2·실패/의도 종료6을 보존했다. 재절단 대조는 원래/대응 밀도 모두 악화해 미채택했고, 이미 있는 경계를 유지한 native 점 수 대응은 남녀 좁은 면0·긴 접힘9/11·보호 손/원래 좌표·skin/각163rest bones·행렬 guard0을 통과했다. 새 절단점13개만 skin 변화/원래점·손0을 분리하고 BMVert 참조 대신 식별 tag만 유지했으며 좌표/가중치 복원·guard 완화는 없다. 19사본/16gzip·3JSON, 기존 source/maker SHA 불변·새asset/PNG/118변형/Chrome0이고 외형 통과가 아니다. 별도 A100 제작·실제 검수로 이어가며 최신 얼굴/목·무의상 통일 백색/필요 구조·정확도·기존 증거/개발 A37·외형 P2·PR #9 Draft/미병합·전체1~6/승인 기준은 유지한다.
 
 2026-10-03 [A98 손목 경계 밀도 읽기 전용 조사](../assets/blender/review/candidate-a98-diagnosis/README.md): native8행/exit0에서 전완 경계 각42점 vs 손 경계 남각96/여각94점, 최소 edge 남6.442/10.649μm·여105.218/112.964μm를 실제 확인했다. 단일 닫힌 경계/degree2·보호 손0·source SHA 불변이며 새asset/PNG/118변형/Chrome0이다. 첫 format check1→수정/check0 뒤 실행했고 인과 브라우저 비교·외형 승인으로 확대하지 않는다. 다음은 경계 대응/근접 점의 native 메모리 대조다. 최신 얼굴/목·무의상 통일 백색/필요 구조·리깅 정확도·기존 증거/개발 A37·외형 P2·Draft PR #9 미병합·전체1~6/승인 기준은 유지한다.
