@@ -1,0 +1,87 @@
+{
+  "date": "2026-10-03",
+  "story": "S2.4a/FR-A-02/08",
+  "head_before": "2dd6c1371f9b06b45c129fdcbf80d6c352a65975",
+  "origin_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "source": {
+    "file": "bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend",
+    "sha256": "9191a2c1a0bd7bf4bb3ae3c358f911188052e9c204d4c4f74783806fb937b661"
+  },
+  "native": {
+    "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec \"bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-tailor.6b7Uvu/a115-ordered-boundary-probe.py\" -- \"/private/tmp/bodyguard-tailor.6b7Uvu/a115-ordered-boundary.json\"",
+    "session": 76532,
+    "exit_code": 0
+  },
+  "copies": 5,
+  "gzip": 5,
+  "read_only": true,
+  "source_saved": false,
+  "new_blend_files": 0,
+  "new_glb_files": 0,
+  "new_png": 0,
+  "new_full_deformation_qa": false,
+  "new_browser_comparison": false,
+  "appearance_passed": false,
+  "adopted": false,
+  "release_approved": false,
+  "stages_1_to_6_complete": false,
+  "pr9_merge_allowed": false,
+  "boundary_side_counts": [
+    [
+      56,
+      107,
+      104,
+      107
+    ],
+    [
+      56,
+      103,
+      81,
+      123
+    ]
+  ],
+  "limitations": "Measured geometric XZ corners, not approved anatomical landmarks. Projected strict crossing 0 is not 3D collision/geometry/anatomy/appearance proof. Female original boundary 363; no parity edit in this probe.",
+  "primary_source": {
+    "url": "https://github.com/blender/blender/blob/b70da489d7f4/source/blender/editors/mesh/editmesh_tools.cc",
+    "build": "b70da489d7f4",
+    "cli_session": 81622,
+    "exit_code": 0,
+    "selected_sections_only": true,
+    "spdx": "GPL-2.0-or-later",
+    "copyright": "2004 Blender Authors",
+    "license_header_read_exit": 0,
+    "header": "/* SPDX-FileCopyrightText: 2004 Blender Authors\n *\n * SPDX-License-Identifier: GPL-2.0-or-later */\n\n/** \\file\n * \\ingroup edmesh\n */",
+    "inference": "Face selection invokes split/join before prepare; active original point may not persist. That effect has NOT been measured natively; explicit requested corner is not a verified final operator corner."
+  },
+  "static_verification": {
+    "initial_default_and_isolated_B023": 6,
+    "corrected_before_native": true,
+    "default_ruff_exit": 0,
+    "isolated_E4_E7_E9_F_I_B_exit": 0,
+    "format_88_check_exit": 0
+  },
+  "prior_reporting_correction": {
+    "comment_url": "https://github.com/HSU-OAS/bodyguard/pull/9#issuecomment-5960765627",
+    "initial_shell_backtick_interpretation": "Attempted command named commit hash (not found) and README path (permission denied); body lost those fields and line breaks. No asset was executed or changed by these two failed attempts.",
+    "repair": "Exact own comment patched with --field body=@file; corrected fetched body matched intended full text exactly.",
+    "correction_exit": 0,
+    "new_head": "2dd6c1371f9b06b45c129fdcbf80d6c352a65975",
+    "latest_remote": "OPEN/Draft/CLEAN/MERGEABLE/checks none; not a verification of a future A115 commit"
+  },
+  "next": "Use measured opposing boundary correspondence, inspect the native two-open-loop fill path before editing. No further arbitrary quarter-span/corner or smoothing-strength trial.",
+  "appearance_p2_open": [
+    "A-02",
+    "A-08"
+  ],
+  "review": {
+    "archive_checker_exit": 0,
+    "prior_a110_a114_checker_exit": 0,
+    "prior_a107_a109_checker_exit": 0,
+    "prior_a106_checker_exit": 0,
+    "node_syntax_check_exit": 0,
+    "targeted_secret_text_files": 11,
+    "targeted_secret_findings": 0,
+    "exhaustive_security_audit": false,
+    "merge_allowed": false
+  }
+}
