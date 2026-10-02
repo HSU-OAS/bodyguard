@@ -1,0 +1,8 @@
+{
+  "command": "BODYGUARD_AVATAR_QA_DIRECTORY=/private/tmp/bodyguard-tailor.6b7Uvu/a94-glb PLAYWRIGHT_JSON_OUTPUT_NAME=/private/tmp/bodyguard-tailor.6b7Uvu/a94-browser-report.json .venv/bin/python -m tests.run_browser avatar",
+  "exit_code": 1,
+  "chrome_started": false,
+  "tests_executed": false,
+  "output": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/backend/tests/run_browser.py\", line 195, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/backend/tests/run_browser.py\", line 37, in main\n    blocked_proxy.bind((\"127.0.0.1\", 0))\n    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^\nPermissionError: [Errno 1] Operation not permitted\n",
+  "retry": "Same local avatar harness with scoped permission for loopback proxy/Chrome; no webcam, external account, operating DB or deployment."
+}
