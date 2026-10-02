@@ -1,0 +1,158 @@
+{
+  "story": "S2.4 / Draft PR #9 review supplement",
+  "date": "2026-10-02",
+  "base_commit": "96a1bd28ed5e5444ec31576db0d749e9f769d7f0",
+  "origin_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "ceo_design": "Female and male: no clothing or clothing boundaries; same neutral white mannequin; preserve curves, anatomy, rig/deformation quality and all previous files/evidence.",
+  "runs": [
+    {
+      "run": "a81 boundary probe",
+      "exit": 0
+    },
+    {
+      "run": "a81b direct grid probe",
+      "exit": 0
+    },
+    {
+      "run": "a81c editor grid probe",
+      "exit": 0
+    },
+    {
+      "run": "a81d native maker",
+      "exit": 1
+    },
+    {
+      "run": "a81e containment maker",
+      "exit": 1
+    },
+    {
+      "run": "a81f complete facial boundary probe",
+      "exit": 0
+    },
+    {
+      "run": "a81g maker",
+      "exit": 0
+    },
+    {
+      "run": "a81g first8 render",
+      "exit": 0
+    },
+    {
+      "run": "a81g source118",
+      "exit": 0
+    },
+    {
+      "run": "a81g first saved comparison",
+      "exit": 1
+    },
+    {
+      "run": "a81g corrected saved comparison",
+      "exit": 0
+    },
+    {
+      "run": "a81h maker",
+      "exit": 0
+    },
+    {
+      "run": "a81h first8 render",
+      "exit": 0
+    },
+    {
+      "run": "a81h source118",
+      "exit": 0
+    },
+    {
+      "run": "a81h first saved comparison",
+      "exit": 1
+    },
+    {
+      "run": "a81h corrected saved comparison",
+      "exit": 0
+    },
+    {
+      "run": "a82 maker",
+      "exit": 0
+    },
+    {
+      "run": "a82 first8 render",
+      "exit": 0
+    },
+    {
+      "run": "a82 source118",
+      "exit": 0
+    },
+    {
+      "run": "a82 saved comparison",
+      "exit": 0
+    },
+    {
+      "run": "a82 native glb export/roundtrip",
+      "exit": 0
+    },
+    {
+      "run": "a82 imported118",
+      "exit": 0
+    },
+    {
+      "run": "a82 actual chrome3",
+      "exit": 0
+    }
+  ],
+  "run_order_note": "Grouped by candidate, not a serial wall-clock timeline. Independent native actors used immutable scripts; every actor was terminal before Chrome.",
+  "all_native_actors_terminal_before_chrome": true,
+  "device": {
+    "model": "Mac16,12",
+    "ram_bytes": 17179869184,
+    "cpu": "Apple M4",
+    "chrome": "154.0.8037.93",
+    "headless": true,
+    "viewport": {
+      "width": 1440,
+      "height": 1080
+    },
+    "dpr": 1
+  },
+  "actual_camera_calls": 0,
+  "external_egress": "owned non-listening proxy; A-00 actual rejection; loopback only",
+  "api_mail_sql_oauth": "NOT CONNECTED; guest401/asset503 synthetic; WebGL loss via actual extension",
+  "source": "a81g/a81h/a82 each 121 rows/118 technical deform cases PASS; 8 real PNG per candidate, not full34",
+  "glb": "a82 native ratio1/eight influences/export+roundtrip and imported121/118 PASS; fins0/0; five parent warnings; limited309438/311332 weights",
+  "browser": "a82 actual Chrome154.0.8037.93, three PASS/41.24397s; 180 RAF samples per gender/mean16.66444,16.66556ms/p9516.80000ms",
+  "actual_native_png": 24,
+  "actual_browser_png": 2,
+  "all26_png_viewed": true,
+  "appearance_passed": false,
+  "accepted_candidate": false,
+  "merge_allowed": false,
+  "stages1_to6_passed": false,
+  "development_default": "A37 unchanged",
+  "appearance_findings": [
+    "a81g: native tangent fill gross fold/overshoot across face, rejected.",
+    "a81h: simple fill collapses front depth, ear/forehead/chin boundaries/corrugation, rejected.",
+    "a82: front volume recovered partly, but chin/forehead/side seams, protruding jaw platform and proportions fail. Ray misses Male2685/Female1614 before projection; not claimed complete fit."
+  ],
+  "scope_notes": [
+    "Native facial region .875.. .985 crown and y<-.035 is an artist selection, NOT medical/camera threshold.",
+    "Prepare existing A63 ordered topology/named skin before editing A60. Retained neck/body/hands skin exact below the established donor boundary.",
+    "Only unnecessary detailed frontal face and oral cavity are replaced with native Grid Fill. No separate remnant deletion in g/h.",
+    "A82 only new grid points: native XZ regularization .25/16 and native negative-Y PROJECT shrinkwrap onto preserved professional A77. No global head smoothing/remesh/clamp, no existing point edited.",
+    "Actual saved independent checks retained79070/78603 points,79020/78576 old faces, named skin/hands/crown/163 rest bones/matrices exact."
+  ],
+  "known_failed": [
+    "a81d BMDeformVert direct iteration TypeError, no source/report save. Clone e uses .keys().",
+    "a81e Male oral crossing96 and parities47/48/46, guard fails before save; Female UNRUN. No guard relaxation.",
+    "Initial saved comparison g/h failed because library objects were not scene-linked/evaluated. Original code kept; corrected native link/update rerun passes exact matrices, no tolerance relaxed.",
+    "Initial staged diff check rejected accidental trailing EOF blank lines in seven new wrapper/docs files. Removed only accidental padding; the 65 byte/hash archive copies were not edited. Re-run required before commit."
+  ],
+  "unrun": [
+    "a81d/e source/GLB/deformation/render/browser after pre-save failure",
+    "all three full34 source render sets and imported full34/first8; first8 only does not cover every visual joint pose",
+    "a81g/h GLB export/roundtrip/browser",
+    "actual humans/exercise demos/retarget/webcam/inference/compound poses/multidevice/longruns/GPU timing",
+    "provider connections/ops DB/secrets/deployment/release",
+    "full service/API/Vitest/typecheck/build/full style-format regression in this supplement"
+  ],
+  "checks": "Archive integrity runnable check; actual Ruff E9,F over11 Python snapshots, not full style. Frozen existing runtime/browser helpers unchanged.",
+  "next": "Fit the complete licensed neutral head front/cranium to the actual authored crown/chin before panel projection; inspect full 3D contour and connectivity. Do not repeat strength-only smoothing.",
+  "reuse": "Existing Blender native editor/professional assets/installed harnesses; no new libraries, framework, accounts or services."
+}
