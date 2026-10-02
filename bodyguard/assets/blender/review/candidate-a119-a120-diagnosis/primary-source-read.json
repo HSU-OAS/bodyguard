@@ -1,0 +1,19 @@
+{
+  "read_only": true,
+  "installed_build": "b70da489d7f4",
+  "source_url": "https://github.com/blender/blender/blob/b70da489d7f4/source/blender/makesrna/intern/rna_modifier.cc",
+  "command": "gh api repos/blender/blender/contents/source/blender/makesrna/intern/rna_modifier.cc --method GET --raw-field ref=b70da489d7f4 --jq .content | base64 --decode | sed -n '/static void rna_def_modifier_shrinkwrap(/,/^static void /p'",
+  "exit_code": 0,
+  "observed_properties": [
+    "wrap_method",
+    "use_project_x",
+    "use_project_y",
+    "use_project_z",
+    "use_negative_direction",
+    "use_positive_direction",
+    "project_limit",
+    "cull_face"
+  ],
+  "method": "Official repository installed-build RNA definitions read via GitHub CLI. No source implementation copied into product.",
+  "web_manual_and_api_attempts": "402 Payment Required, no claims based on those failed opens."
+}

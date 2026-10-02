@@ -1,0 +1,653 @@
+{
+  "copies": [
+    {
+      "file": "nearest/grid-trial.json",
+      "bytes": 14647,
+      "sha256": "81eb0fc63fc844191bbae001dc4e65ec38e48cd0953cafc13cceacb12e8c3fdd",
+      "decoded_sha256": "81eb0fc63fc844191bbae001dc4e65ec38e48cd0953cafc13cceacb12e8c3fdd",
+      "original_path": "/private/tmp/bodyguard-tailor.6b7Uvu/a119-conformance-chart-trial/grid-trial.json"
+    },
+    {
+      "file": "nearest/male-grid-plan.json",
+      "bytes": 501,
+      "sha256": "0ac592cd450f02d280f37eda44a280d3761250ce0b00423e48800af4b507d784",
+      "decoded_sha256": "0ac592cd450f02d280f37eda44a280d3761250ce0b00423e48800af4b507d784",
+      "original_path": "/private/tmp/bodyguard-tailor.6b7Uvu/a119-conformance-chart-trial/male-grid-plan.json"
+    },
+    {
+      "file": "nearest/female-grid-plan.json",
+      "bytes": 501,
+      "sha256": "4afd4b257a5e7feeaa8e2b66b20ac32ce12b12b3f34e8c57e7bc6fa0b14ee4da",
+      "decoded_sha256": "4afd4b257a5e7feeaa8e2b66b20ac32ce12b12b3f34e8c57e7bc6fa0b14ee4da",
+      "original_path": "/private/tmp/bodyguard-tailor.6b7Uvu/a119-conformance-chart-trial/female-grid-plan.json"
+    },
+    {
+      "file": "directional/grid-trial.json",
+      "bytes": 8478,
+      "sha256": "2d6a856ca412c21e8341b63faddca5bb693211cddafb5d3f98af23e4712b2b3f",
+      "decoded_sha256": "2d6a856ca412c21e8341b63faddca5bb693211cddafb5d3f98af23e4712b2b3f",
+      "original_path": "/private/tmp/bodyguard-tailor.6b7Uvu/a120-directional-conformance-trial/grid-trial.json"
+    },
+    {
+      "file": "directional/male-grid-plan.json",
+      "bytes": 501,
+      "sha256": "0ac592cd450f02d280f37eda44a280d3761250ce0b00423e48800af4b507d784",
+      "decoded_sha256": "0ac592cd450f02d280f37eda44a280d3761250ce0b00423e48800af4b507d784",
+      "original_path": "/private/tmp/bodyguard-tailor.6b7Uvu/a120-directional-conformance-trial/male-grid-plan.json"
+    },
+    {
+      "file": "directional/female-grid-plan.json",
+      "bytes": 501,
+      "sha256": "4afd4b257a5e7feeaa8e2b66b20ac32ce12b12b3f34e8c57e7bc6fa0b14ee4da",
+      "decoded_sha256": "4afd4b257a5e7feeaa8e2b66b20ac32ce12b12b3f34e8c57e7bc6fa0b14ee4da",
+      "original_path": "/private/tmp/bodyguard-tailor.6b7Uvu/a120-directional-conformance-trial/female-grid-plan.json"
+    },
+    {
+      "file": "directional/male-grid-posterior.png",
+      "bytes": 994487,
+      "sha256": "2377034e30a457d7be3f6c38bcb42a1b6c9e6750a38bc5903126c3125fe16518",
+      "decoded_sha256": "2377034e30a457d7be3f6c38bcb42a1b6c9e6750a38bc5903126c3125fe16518",
+      "original_path": "/private/tmp/bodyguard-tailor.6b7Uvu/a120-directional-conformance-trial/male-grid-posterior.png"
+    },
+    {
+      "file": "directional/female-grid-posterior.png",
+      "bytes": 982096,
+      "sha256": "a32c00adfc2f4e7cafc916cde52650563e11a3ce0c2d8295ec19bb3164bd6e38",
+      "decoded_sha256": "a32c00adfc2f4e7cafc916cde52650563e11a3ce0c2d8295ec19bb3164bd6e38",
+      "original_path": "/private/tmp/bodyguard-tailor.6b7Uvu/a120-directional-conformance-trial/female-grid-posterior.png"
+    },
+    {
+      "file": "scripts/a119-conformance-chart-trace.py.txt.gz",
+      "bytes": 5331,
+      "sha256": "ec209a571492850b89b08bfc7413b239ed7c28a302e8fba218701c7231251682",
+      "decoded_sha256": "4a85edfd7f7c9f5f14f8b3b2e1f469fdf47891afa5f73ee29f03e2e6cfdd5a05",
+      "original_path": "/private/tmp/bodyguard-tailor.6b7Uvu/a119-conformance-chart-trace.py"
+    },
+    {
+      "file": "scripts/a120-directional-conformance-trace.py.txt.gz",
+      "bytes": 5729,
+      "sha256": "673764103b492d1fdf3c2452909b1fb089f4463053ee57d2ee680dcbac142877",
+      "decoded_sha256": "017eac844c43a96b429ec7516aca817b98e0763ebdef352ca29edd55896ce21d",
+      "original_path": "/private/tmp/bodyguard-tailor.6b7Uvu/a120-directional-conformance-trace.py"
+    },
+    {
+      "file": "scripts/a119-a120-copy-evidence.cjs.txt.gz",
+      "bytes": 1275,
+      "sha256": "c4bf0d2514f370772349fe0057ee528e25836ad94fb95065e2562a013fec0d69",
+      "decoded_sha256": "84c69b08256780e5fccfd9a74810fbdb4e62fc071bafc4f6fc68cfdb6de4d152",
+      "original_path": "/private/tmp/bodyguard-tailor.6b7Uvu/a119-a120-copy-evidence.cjs"
+    },
+    {
+      "file": "logs/a119-observed-terminal-chunks.log.txt.gz",
+      "bytes": 345,
+      "sha256": "b35d441408c153cd14933a10ecee88610da7c0275811af683646eabfa93d7725",
+      "decoded_sha256": "227a839a29c4aa4c0729f2ba40eb7cb5ee8ae5249e94f950699bf6724484bc49",
+      "original_path": "/private/tmp/bodyguard-tailor.6b7Uvu/a119-observed-terminal-chunks.log"
+    },
+    {
+      "file": "logs/a120-observed-output.log.txt.gz",
+      "bytes": 2078,
+      "sha256": "763b58287cec0f90ed9a41fa57a27e69324ac2d603d2e3e6490ca3969bc7f3bb",
+      "decoded_sha256": "cb277e1430a99f92ffbbc0f9983949a8d44ea4047d75ff1154d1e2fc4c9352e1",
+      "original_path": "/private/tmp/bodyguard-tailor.6b7Uvu/a120-observed-output.log"
+    },
+    {
+      "file": "primary-source-read.json",
+      "bytes": 886,
+      "sha256": "01194eab1609c5cb90a8617da016277b01fae6887d7df6cfb2aea211c88bb178",
+      "decoded_sha256": "01194eab1609c5cb90a8617da016277b01fae6887d7df6cfb2aea211c88bb178",
+      "original_path": "/private/tmp/bodyguard-tailor.6b7Uvu/a120-primary-source-read.json"
+    }
+  ],
+  "protected_old_files": [
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/merit-topology.json",
+      "sha256": "189c8ae44d3baf576dfe2e7bfd8d1573adb971dbc19c2b1e3bcae74ca0470aa1"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/local-fairing.json",
+      "sha256": "c79046b193149de676edfd94f2bc6d62b61e509d1cb2f9aef2b066c4d3786aa9"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/saved-preservation.json",
+      "sha256": "6ec7cc61a59ce1e7d053c1b435c78ba251d7662ee38e22e96dddc72dde315ca3"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source-deformation-report.json",
+      "sha256": "b8ed88ae2e61398fc8b4a62064f8ca346e3b0d2b0df2e871019d970b1f5d025e"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip-deformation-report.json",
+      "sha256": "7b121413e0c5ffb42aa1faebdaf6d8ecbbb5d57541593e6317eda8604fe81383"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/export-report.json",
+      "sha256": "3fa7bd74c40035ad41772fa644fc4180a9b9d39852c039d148a0c3e17297450f"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/browser-report.json",
+      "sha256": "30389a28eadb69fb3ba57ecc88e002fc823618b90b5852093b13b032df112dbe"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/web-candidate.blend",
+      "sha256": "247ff31be4647ee00b77f46b62e58c3cdab6376dcae69d64c7c09491c90a28f6"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/web-roundtrip.blend",
+      "sha256": "e02ab92b2160a18b59dbfed9745faaf56d13830ea3bcf79775ae2a33bc0c31e4"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/bodyguard-male-candidate.glb",
+      "sha256": "6e160be8b89beb6420cab138b4aeef0ca1b4071347f13f114a50843106c862d4"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/comparison/male-before-posterior.png",
+      "sha256": "6fe964d3d16c6d2f61a1a9087f2171138a4ae42753181164bb68afc6b0c9324f"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/comparison/male-after-posterior.png",
+      "sha256": "8655217282788e0350b3d0ca4f48790513c32768d07a1e4870fcb44240471249"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/comparison/male-fairing-posterior.png",
+      "sha256": "1add2a3fc6c2af567e384e818d2c7d04aca632c4b8724e34b3a47fd78b6dfbf7"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/bodyguard-female-candidate.glb",
+      "sha256": "1fb40ef5a92980ce6fca03cf0a09b11f24b56a8f43213385adb949204b16dbdf"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/comparison/female-before-posterior.png",
+      "sha256": "149ff1ef00276fe8f2bba519ebcade5e1cd34a2a60a169a61132f08e1c5b71b7"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/comparison/female-after-posterior.png",
+      "sha256": "43f3a9dcd0909f37f73a7b578182c541df4554fa4b991d1b668d82d6da201f0a"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/comparison/female-fairing-posterior.png",
+      "sha256": "5e69985245546646597a5f315fd7e62662cf2d8f0c1fa11a0aee2c1624ed5a12"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/faceless-body-back-female.png",
+      "sha256": "24ca33d46f50535d9e6bd9c6c7b1936c6caf24edd56dd9671d63b13fac734743"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/faceless-body-back-male.png",
+      "sha256": "e8550621abf0223a6e52e9161561765783b16a81489db9b7c35c99ea9c154eab"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/faceless-body-side-female.png",
+      "sha256": "28ee63bb3b4c9a9295d1b9fcec922666d68eafe50332ad30b8f6298d70bf3cd1"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/faceless-body-side-male.png",
+      "sha256": "aba1db0de3454dcb577bc7ef30f9be44f7aa6758b92422ae14266bf23192e2b8"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/faceless-front.png",
+      "sha256": "8fcd640a422bedaa28b65d88a799bd91a8ce7ed72792a5a15ea3183295c9dc64"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/faceless-hand-female.png",
+      "sha256": "b6a6fad57934c04c78dfdf370321aa9e5e80b0447d483170095a5eb6e946587f"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/faceless-hand-male.png",
+      "sha256": "75c87d724e87967061bb6c02691a5cb3acc35ea2e3f55c747de877a48b74c01a"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/faceless-knee-female.png",
+      "sha256": "91568de7b412fc9ba59b7871061e87c58a7f55b6391aba7c670f4e4d65624296"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/faceless-knee-male.png",
+      "sha256": "93de702df2c5f63bc1fca860f04fcd7ca62cc9a373de45c9be513fd01fe46eb7"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/faceless-neck-female-left.png",
+      "sha256": "770e1f274bf7a0b648497bb2a6c5121f7c2c67298af409741d0e63441c9f1819"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/faceless-neck-female-right.png",
+      "sha256": "b735af2069fe4c5ced488fbcf35e7ec496eadcadd018d8471f370fb9ac2f835b"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/faceless-neck-male-left.png",
+      "sha256": "b5346c2a737dbf1828d85a99faa24d3b299cc0f2ef10ccd9e1f74b15d872b2ad"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/faceless-neck-male-right.png",
+      "sha256": "ebceba5f39c45350ce43d2ebc6228bd1807ade4aec211d1206fe1a9916483461"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/faceless-quarter.png",
+      "sha256": "69df3b5846426fa7ff9fe8908d2a9625eed8902efa491d698560f011773cdd41"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/faceless-side-female.png",
+      "sha256": "dda68b95a9a900f52838c8cd2a2b2ea1fee6d8a732c1ef337fb0de7e4ea9aed2"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/faceless-side-male.png",
+      "sha256": "808a1d777707ec9773ababe4df11e78a5f1c4e33c43f018e3ff3acd7ebd96311"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/technical-female-clavicle.png",
+      "sha256": "e7f31ce80477424d8c0b39da0bf262e6f69658c2c6dd2d198e434a377221fe89"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/technical-female-finger2-1.png",
+      "sha256": "91fbf5c65174a25a2158428e808a403ee83e9724c5e85777f958ad8a27c3c423"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/technical-female-foot.png",
+      "sha256": "d4e7e5519a0a04efadeed39b833aea2e231210d96d9b08679aec37f8bfbf1b17"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/technical-female-lowerarm01.png",
+      "sha256": "bc901dd33bb9dfdfe213b7ad449864623113c5b45f298e6f77aa9ba611a500cb"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/technical-female-lowerleg01.png",
+      "sha256": "3a25c88d6eef711cc404aa2e64a02ff3c2f45d2c0a6596644bf530a16be6ee86"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/technical-female-spine02.png",
+      "sha256": "bd3688858b2487ade2f80a9515a29d4a5549a98a0d0f6cd6d86303c253ab8a3e"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/technical-female-upperarm01.png",
+      "sha256": "8003e65eb3fe0ea4f4a3909d7f95ab0c9034a99de3ad10749f5d9785b613187d"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/technical-female-upperleg01.png",
+      "sha256": "d06b2d4dc383a0021f83a791bbf87e24fed739a41224db79f320bac33e17032e"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/technical-female-wrist.png",
+      "sha256": "8c9845c6fe7c46c6c3c9045e3e1a40e0d39cd3b04ce05d857850dffa1aeebc25"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/technical-male-clavicle.png",
+      "sha256": "011c83e1e1f445c447e754e4c346b23186516f12ab7279576e1f66be1f72bd84"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/technical-male-finger2-1.png",
+      "sha256": "41014f2bdd4454aa0b058663d1a1ef5b357d6a9ed9e586e67e618e317a9b17af"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/technical-male-foot.png",
+      "sha256": "3a3816bd32e43a9ed30cc1dafe1ca0f60617a7ce20c8d62def45733cc665e168"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/technical-male-lowerarm01.png",
+      "sha256": "920a9c35f40772b1e504b3a59b1918122a6bdf2715deb833fa075010aceb8a3a"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/technical-male-lowerleg01.png",
+      "sha256": "b1a1c46fb29c516587cccd503dec74787032b3262781f2c4ff57f95638c5e67a"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/technical-male-spine02.png",
+      "sha256": "51764be2e6d7ef89b4e1357c4e6423e65d866446239e364dbf4bf9f91291ce4b"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/technical-male-upperarm01.png",
+      "sha256": "788098cc5efb95a8f7ae837753cc87732fcf9b89d825c71a0875315be9a6b419"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/technical-male-upperleg01.png",
+      "sha256": "45074137e7bd7267bacd4b634a4b1dbaaf032218a693f53a8594d5949a594a07"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/source/technical-male-wrist.png",
+      "sha256": "5b983bb6c74fbcb1b38033e62251859beaf1755f03aa24c7e7600b11ec1985cc"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/faceless-body-back-female.png",
+      "sha256": "6b93b29052c9a778234e2726a555f4e8eafc3b1c57c15de1c18e72a08c3ac5d0"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/faceless-body-back-male.png",
+      "sha256": "3e281a0e25319d33c14abc04f427c2bc952835d3faef14409301c8f1be844d2f"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/faceless-body-side-female.png",
+      "sha256": "40e17428aba5c928f548ae81e15314e8f0774de3df43296e51f4da64b0165b6d"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/faceless-body-side-male.png",
+      "sha256": "eea5deae290374e17a5007e0fc25527d3511357e9d1ee9e7304aab6e80494048"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/faceless-front.png",
+      "sha256": "c9ff903f7dc4edd3f0ece4eb5d8eb3567912cafbbff64018f0b383a0e12d746a"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/faceless-hand-female.png",
+      "sha256": "cac69ba93a1dd4399a9c7d8ae9ce2462aacd839002d3a3e4924c930bbfdaa130"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/faceless-hand-male.png",
+      "sha256": "96efb483ce612eabc1bfe14289da9c1322f5134e6eb311349ca45e2a44e4feb1"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/faceless-knee-female.png",
+      "sha256": "1d64572208b530d2cbdf9c80a2eb9d53bb79e9ef233fbff83c9c4687cd0705f5"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/faceless-knee-male.png",
+      "sha256": "901f136ca66880ec40f3ae23db3cd4282aa52b09950c7893da1f7551516bacfb"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/faceless-neck-female-left.png",
+      "sha256": "fb56bf7442ac886e5d76b38e14d588d1dffd30236efa272f7c937c8d70974b49"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/faceless-neck-female-right.png",
+      "sha256": "025afd53a9ba2f09d7d111539c6a4d12b9e5b0c7b8bfed3965a95d98e2df665f"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/faceless-neck-male-left.png",
+      "sha256": "b8b7461a14e63ff7c8a1504ad8c7b526c3110660fd89aa92f5dd8d0dc3ba5cdc"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/faceless-neck-male-right.png",
+      "sha256": "aec9ae8f711b8cef08becfdee04e2145f87e8b7e0dcbbd22c96c8c7f42c6fa93"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/faceless-quarter.png",
+      "sha256": "d81ff140a61ee2fa082e86dfee35f23eb69c39702d1378338bd1e0f420af4480"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/faceless-side-female.png",
+      "sha256": "6e8eae8077e49db9f490bc2591e2dd60e9090572f0be5db0872a69045491f339"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/faceless-side-male.png",
+      "sha256": "e398c5ccc1aab5edb514080cb409d9139785b5ee8645370853a19b3e1948a4be"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/technical-female-clavicle.png",
+      "sha256": "eaf5eb1b4fdef4d442c6cd9af898f601a1356b3e2a6b2abc1518a6753e89c187"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/technical-female-finger2-1.png",
+      "sha256": "97902d6c4cb40f6bbe53beb1f1537c3424c8dafe021ca64396bdc96b32ba4ba4"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/technical-female-foot.png",
+      "sha256": "5b728e38aafd9beb4100295ea8434d05d567d3dd7314cc02c877485c1d6571d1"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/technical-female-lowerarm01.png",
+      "sha256": "22849e77736568effbd69354befc35270e9362fd0a946e14a215c94cd721ccd1"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/technical-female-lowerleg01.png",
+      "sha256": "6aebd62771323cac0be06cc720f1dc949eb4d334e5808f8150eea1facf540178"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/technical-female-spine02.png",
+      "sha256": "6c4437247030ce4f4985dae72bf59b9b49617fb38db0de8145954d7471d63e24"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/technical-female-upperarm01.png",
+      "sha256": "e574dfea245c5c64b358ba16e41056a6b2720b10cfc24a90cf3a534a59e548cc"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/technical-female-upperleg01.png",
+      "sha256": "9c621cbd1051e1b273a99b990ae974a40ce34ec5f5364e1f17765dcab121e445"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/technical-female-wrist.png",
+      "sha256": "9ed8b62f7bd0c3a26bd72b972f3189b88615b4f2cf542329333d3f7dfa8f0d6e"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/technical-male-clavicle.png",
+      "sha256": "c7a49f90dbcc48df225e35b8881cfc7c3acbbb2f2ea3e6699c1e6aa4ae4235ae"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/technical-male-finger2-1.png",
+      "sha256": "7706b515af1a40cb6fe0ce1c745e398348f533252832978f752b853eae8a72a1"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/technical-male-foot.png",
+      "sha256": "f68bbc1ae4079714a8d520b285856d7226f60ead35a7fe262336ed9175f306c7"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/technical-male-lowerarm01.png",
+      "sha256": "4186415ecdeb7cb4edc14f031bfd835c4391ac1f338f9aa79381720dd6fb1e87"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/technical-male-lowerleg01.png",
+      "sha256": "535012b3218b4cbaa1be68239597e2542f6743f31d360edab345cc69b9c84b37"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/technical-male-spine02.png",
+      "sha256": "d9c1a9a113265e256ba5e7509c7ef5b6c3d5a2492febcb157360a2f24296b0a0"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/technical-male-upperarm01.png",
+      "sha256": "149c2372bed13b6b46d41568c6d2583c79ad3e1b2b422f505964b24961020b4d"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/technical-male-upperleg01.png",
+      "sha256": "b88abac08e9e81dfedab8ae53706de248fb6c4c1d89a7467bce2afa5392d0870"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/roundtrip/technical-male-wrist.png",
+      "sha256": "bb8343dc801f307a512d98832fe7806b4c2735dac21c6889cf8606e44ca5d319"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/scripts/a106-local-fold-fairing.py.txt.gz",
+      "sha256": "e53cd825b03c787db17fd53eed8c6300b9e264fdea6ac36083e49abdddeb3fbb"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/scripts/a106-saved-preservation.py.txt.gz",
+      "sha256": "063e47fa54210351c8c76cbc687528f26bb9334bc7fb5dacadc10080d68a4027"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/scripts/a106-copy-evidence.cjs.txt.gz",
+      "sha256": "0cf37fa662b445133b9784d9caa7465627d7575f67cf3e681831de70a98f9453"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/scripts/avatar.spec.ts.txt.gz",
+      "sha256": "1acc7756ddd6743f734baf61c834fb344a4a472721b23ea2af207424d426f618"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/scripts/a106-frame-client.ts.txt.gz",
+      "sha256": "8d12411b05f66966daf2d82d5380d6098b4c4da622deda6d0d6cda5b3fe36d1b"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/logs/producer-observed.json.txt.gz",
+      "sha256": "13c13ff546eafda98e64cc3fd0d7e063051962ce1db04f92ccb9a65d6606364f"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/logs/preservation-observed.json.txt.gz",
+      "sha256": "f9b9f446af767d1cfd2ae97bef62375de37965e58dae50e088e692ef80b10245"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/logs/source-observed.json.txt.gz",
+      "sha256": "0c4792b7acd0dd5231e5fd2e19433eff43a3774e337b45fd31427a26d85eee12"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/logs/export-observed.json.txt.gz",
+      "sha256": "27325e567f48cc7b84fb35064d69b8f153bd6faaad1206444deb8104ee3c6d02"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/logs/roundtrip-observed.json.txt.gz",
+      "sha256": "0b4d8f7580481326d93dfbdca41ba6baf277bf717417acc81765882cc9b4de5c"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/logs/browser-observed.json.txt.gz",
+      "sha256": "ca96398c517f7803abbb47f36e86e1b191597bb3415c40a024386fec739c88da"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/logs/static-observed.json.txt.gz",
+      "sha256": "1c17cb793fa27e658948c610bdba1ad0342d80c2325c3a4f2af9e3a5c3017418"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/browser/male-two-models.png",
+      "sha256": "15e2ef28fef20d8dd07b9c1589c987fd8748342f726d36e4c7f2152cd0bd2b8a"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/browser/female-two-models.png",
+      "sha256": "951665775b5675fce467917cb86b02aac2d8b47a20a380d05962fef8d4ba3b1f"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/browser/male-posterior-neck.png",
+      "sha256": "729998de0916c46286102a1388f862cd0a7fe95d704afadb0a2b6d6ce1133755"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a106-review/browser/female-posterior-neck.png",
+      "sha256": "e4de4c338a91c7ccf21f4aa9d719c5035d27fecf1b332cbcd709450f5c3f731c"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a115-diagnosis/ordered-boundary.json.gz",
+      "sha256": "ba77667e56c434023a81a389777f2f6c48476a31ec616adaa5c02cebd914ad8b"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a115-diagnosis/probe.py.txt.gz",
+      "sha256": "0571ae043a7ac40d89214e2c245990de77846833a98b4d55cb5d082c271e74dd"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a115-diagnosis/observed-output.log.txt.gz",
+      "sha256": "a65355ab3251b38b8d6b096c1b1b96ad9249ee2721661c374d807fcb264a3ac3"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a115-diagnosis/primary-source-read.log.txt.gz",
+      "sha256": "22abf24dd30d4af330b7808d553a699b94831348a2bb455e5d866b2be7205e8e"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a115-diagnosis/copy-evidence.cjs.txt.gz",
+      "sha256": "2cd5e305469619a463afb52bff92b18757846db89bd8e49b1ab7131bd8c15140"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/primary-source-read.json",
+      "sha256": "f1f9c19eaa13652011b6773919f1084b1391c374101000c7a4529fac2d853840"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/unverified-context/female-before-posterior.png",
+      "sha256": "47648066e362a791cf91a35dfbba68d4173efb7120cdaf992fdcf1438e757795"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/unverified-context/female-grid-plan.json",
+      "sha256": "4afd4b257a5e7feeaa8e2b66b20ac32ce12b12b3f34e8c57e7bc6fa0b14ee4da"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/unverified-context/female-grid-posterior.png",
+      "sha256": "f23ab40b1088fe71bfd2a13c3448733eb95b8230b8e03dbafe5508e8bc9967a0"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/unverified-context/grid-trial.json",
+      "sha256": "abd447463674cfb14a1511749e8f3e777aef61a44f4d5fc2042c4753e8080c21"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/unverified-context/male-before-posterior.png",
+      "sha256": "cf518f9d8f18c9d67f6e4cb71373a8d4ca282266cb7e3a905f2bc1ba4eb343e7"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/unverified-context/male-grid-plan.json",
+      "sha256": "0ac592cd450f02d280f37eda44a280d3761250ce0b00423e48800af4b507d784"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/unverified-context/male-grid-posterior.png",
+      "sha256": "2a372c9f74bd4db0515f95d91048ba0afcf0b66403ac6204f0692c4bddfbdc9b"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/verified-context/female-before-posterior.png",
+      "sha256": "e22eb5f30ffc3744b07d7704a397d2abe042de47cbd77a69eb8175f640841580"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/verified-context/female-grid-plan.json",
+      "sha256": "4afd4b257a5e7feeaa8e2b66b20ac32ce12b12b3f34e8c57e7bc6fa0b14ee4da"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/verified-context/female-grid-posterior.png",
+      "sha256": "88e4fa80105cbdf8d7a3e7fc2f8e613e25d112afedb92c8e9f45fc6188e3bac8"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/verified-context/grid-trial.json",
+      "sha256": "fd5726d2ac40492fa619a69679c54394a85ff8f07d566c594e500cf45693c28b"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/verified-context/male-before-posterior.png",
+      "sha256": "47b3baa62742245abd5efeba2bd2f5ce0cccd1e11e64a8d5a3f695cd9aabf2fd"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/verified-context/male-grid-plan.json",
+      "sha256": "0ac592cd450f02d280f37eda44a280d3761250ce0b00423e48800af4b507d784"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/verified-context/male-grid-posterior.png",
+      "sha256": "7f26358912e1999886028566d0a4a134c73c20e46cf851ba434f9b8a6be38dad"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/web-triangles/female-before-posterior.png",
+      "sha256": "e68344e7034a843e3c6e063ce7286fab4d72b0b7b9dbf27609fb27a170f0e10a"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/web-triangles/female-grid-plan.json",
+      "sha256": "4afd4b257a5e7feeaa8e2b66b20ac32ce12b12b3f34e8c57e7bc6fa0b14ee4da"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/web-triangles/female-grid-posterior.png",
+      "sha256": "2cd31663e1bd50a564dfbcdc8762f9963baeb745b46cae4dd769ce088aa75774"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/web-triangles/grid-trial.json",
+      "sha256": "66859a673b87984d9e790ce4b32a877efb7b250790533fe561c95f8e134b2653"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/web-triangles/male-before-posterior.png",
+      "sha256": "cc7bb402729c0935f28add9bedfd178e94287042087e173a0d6ced9f61d1ea98"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/web-triangles/male-grid-plan.json",
+      "sha256": "0ac592cd450f02d280f37eda44a280d3761250ce0b00423e48800af4b507d784"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/web-triangles/male-grid-posterior.png",
+      "sha256": "60b4a3a6773a588562e0837ba4e9dd546db51232aadc3f5b5cb72f2c64844862"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/scripts/a116-known-two-loops-dryrun.py.txt.gz",
+      "sha256": "2ef7f7fc56615d603d13457643b22e4068eb6afacdcdede47d4ce8c7c1cdf1b8"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/scripts/a117-verified-two-loops-dryrun.py.txt.gz",
+      "sha256": "b8bd991a3c9484ce4136039ed14039cb75e230dfc3caec19cd8762cc606dcf04"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/scripts/a118-local-web-triangles-dryrun.py.txt.gz",
+      "sha256": "439b326a633ce12aec835e2a27fcc0a2b62a11fd4511223cb341b1a862de361a"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/scripts/a116-a118-copy-evidence.cjs.txt.gz",
+      "sha256": "ff04acd1bdc83acc7f0c00d51f6cb573218ef7fe08592be00929a433b57b4076"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/logs/a116-observed-output.log.txt.gz",
+      "sha256": "08b336d498dfcf377d1e99d72c01d8d71958dd699f9e376aab73e235c16b6452"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/logs/a117-observed-output.log.txt.gz",
+      "sha256": "5d2f3604bfaaa82cd404886c105b08cae1f8cfaff236fb92dafa175fe6a038ae"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/logs/a118-observed-output.log.txt.gz",
+      "sha256": "104179365218ade79e63678c0d96022724b066402c1a5cae6f1575b07ee08582"
+    },
+    {
+      "file": "bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend",
+      "sha256": "9191a2c1a0bd7bf4bb3ae3c358f911188052e9c204d4c4f74783806fb937b661"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a116-a118-diagnosis/copy-manifest.json",
+      "sha256": "db0e3516612702fbcb37bb41fb40bed1bf72e8e787308c98ad2e415e206c24aa"
+    }
+  ],
+  "old_files_changed": 0
+}

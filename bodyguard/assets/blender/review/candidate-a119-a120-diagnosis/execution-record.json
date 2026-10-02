@@ -1,0 +1,87 @@
+{
+  "date": "2026-10-03",
+  "story": "S2.4a/FR-A-02/03/08",
+  "head_before": "96e5f41effd652ea0e6c19e3c281c86fce943087",
+  "origin_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "source": {
+    "file": "bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend",
+    "bytes": 29667488,
+    "sha256": "9191a2c1a0bd7bf4bb3ae3c358f911188052e9c204d4c4f74783806fb937b661"
+  },
+  "profile": {
+    "file": "bodyguard/assets/blender/review/candidate-a115-diagnosis/ordered-boundary.json.gz",
+    "decoded_sha256": "156aa798c00e8b2b91a71d78c0b21dc8a9f55be62be0fb58551ceca03f60d765"
+  },
+  "runs": [
+    {
+      "name": "A119 same nearest conformance with authored point IDs and projected face trace",
+      "session": 24406,
+      "exit_code": 0,
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a119-conformance-chart-trace.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a119-conformance-chart-trial",
+      "intermediate_stdout_archived": false
+    },
+    {
+      "name": "A120 native PROJECT Y-axis only, same local grid and guards",
+      "session": 27886,
+      "exit_code": 0,
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a120-directional-conformance-trace.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a120-directional-conformance-trial",
+      "actual_png": 2
+    }
+  ],
+  "copies": 14,
+  "gzip": 5,
+  "new_png": 2,
+  "directly_viewed_png": 2,
+  "observed_images": [
+    "directional/male-grid-posterior.png",
+    "directional/female-grid-posterior.png"
+  ],
+  "source_saved": false,
+  "new_blend_files": 0,
+  "new_glb_files": 0,
+  "new_full_deformation_qa": false,
+  "new_browser_comparison": false,
+  "human_camera_capture": false,
+  "human_coordinate_collection": false,
+  "appearance_passed": false,
+  "adopted": false,
+  "release_approved": false,
+  "stages_1_to_6_complete": false,
+  "pr9_merge_allowed": false,
+  "appearance_p2_open": [
+    "A-02",
+    "A-08"
+  ],
+  "limitations": [
+    "A119 same authored triangle before/after XZ projected sign flips 3995/2065 are chart measurements, not exhaustive 3D collision or clinical/anatomy evidence. Sign class epsilon1e-12 m2 is numerical diagnostic, not a changed quality gate.",
+    "Triangles for each trace use that run's post-conformance native BEAUTY connectivity. A119/A120 triangulation may choose different diagonals: before sign counts across runs are not an exactly same triangle set. All quad rings are asserted unchanged across conformance within each run.",
+    "XZ-only preservation was achieved in A120 (all X/Z changes exactly0 and projected flips0) but fold guards and original-surface sampled envelopes failed: chart sign consistency alone is insufficient. Raw grid already has folds197/106; raw projected signs are mixed.",
+    "Maximum pre/post movement is relative to generated raw grid points, NOT original source displacement or user measurement error. Sample distances are not exhaustive Hausdorff/collision and do not prove deformation or appearance.",
+    "All retained original coordinates/skin, all conformance skin/rings, protected hands,163 rest matrices and world matrices asserted exactly in memory. Local original points replaced; whole topology is NOT identical and normalized new weights alone are not deformation evidence.",
+    "Observed actual native terminal0 for two runs. A119 intermediate output chunk999331 observed in chat but not archived as stdout; log explicitly contains initial/final only. Actual generated JSON carries full measured rows. A120 tool chunks are not independently captured complete process stdout.",
+    "Actual A120 PNG2 both directly inspected: deep notches/pinching at posterior neck/shoulder boundaries, rejected. No new source save, GLB,118 deformation, Chrome, human, operating DB migration, deployment or release. Prior A106 full QA does not cover these trials."
+  ],
+  "static_verification": {
+    "producers": 2,
+    "default_ruff_exit": 0,
+    "isolated_E4_E7_E9_F_I_B_exit": 0,
+    "format_88_check_exit": 0,
+    "producer_edits_after_execution": 0,
+    "node_copy_syntax_exit": 0,
+    "copy_exit": 0,
+    "formatting": "A119 mechanically formatted before native execution; A120 already formatted. Historical unrelated static failures are not cleared."
+  },
+  "review": {
+    "archive_checker_exit": 0,
+    "prior_a116_a118_checker_exit": 0,
+    "prior_a115_checker_exit": 0,
+    "node_syntax_check_exit": 0,
+    "targeted_secret_text_files": 18,
+    "targeted_secret_findings": 0,
+    "unstaged_diff_check_exit": 0,
+    "new_archive_code_p1_p2_findings": 0,
+    "merge_allowed": false,
+    "exhaustive_security_audit": false
+  },
+  "next": "Localize raw-grid mixed projected orientation near native expand/collapse rails and boundary fans before another edit. Do not repeat broad grid tuning, normal/lighting overrides, fullbody replacement, guard relaxation or coordinate/skin restoration to conceal failure."
+}
