@@ -21,6 +21,11 @@ assert(record.archive_handling.original_error_context_preserved)
 assert.equal(record.directly_viewed.length, 8)
 for (const file of record.directly_viewed) assert(manifest.copies.some(x => x.file === file))
 const root = path.resolve(__dirname, '../../../../..')
+for (const file of [path.join(root, 'bodyguard/docs/avatar-production.md'), path.join(root, 'bodyguard/docs/stories/stage2-avatar-candidate.md'), path.join(__dirname, 'README.md')]) {
+  for (const match of fs.readFileSync(file, 'utf8').matchAll(/\]\(([^\s)]+)\)/g)) {
+    if (!/^(https?:|#)/.test(match[1])) assert(fs.existsSync(path.resolve(path.dirname(file), match[1].split('#')[0])), match[1])
+  }
+}
 for (const item of record.unchanged_files) assert.equal(sha(fs.readFileSync(path.join(root, item.file))), item.sha256)
 const results = browser => browser.suites.flatMap(s => s.specs.flatMap(x => x.tests.flatMap(t => t.results)))
 const first = read('first-browser.json'), measurement = read('measurement-browser.json')

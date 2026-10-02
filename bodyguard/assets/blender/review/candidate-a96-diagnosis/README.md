@@ -23,7 +23,7 @@ native Blender5.1.1에서 원본→웹 파생→재수입의 raw/evaluated 위�
 
 설치 Chrome154.0.8037.93·macOS15.6/24G84·Mac16,12/M4/16GiB·headless1440×1080/DPR1·차단 프록시 조건이다. source/GLB/helper/spec8개 SHA와 개발 A37은 그대로다. R3F _roots/기존 Three Mesh/Matrix4를 test 전용으로 사용했고 새 패키지/production UI 변경은 없다. 임시 진단2파일은 복원·제거했으며 두 실행 버전과 native/copier gzip6로 복구/재현할 수 있다.
 
-생성된 실패 context의 trailing whitespace3행으로 첫 staged diff 검사 exit2가 발생했다. 내용을 삭제/정리하지 않고 byte가 같은 원문을 lossless gzip1개로 보존했으며 원래 임시 사본도 유지했다. gzip 생성 뒤 메타데이터 patch 조립의 ReferenceError로 중단됐고 당시 patch는 미실행이었다. 재개 후 압축 내용/SHA를 확인해 기록을 정합화했다. copier나 기존 검사를 재실행한 것으로 표시하지 않는다.
+생성된 실패 context의 trailing whitespace3행으로 첫 staged diff 검사 exit2가 발생했다. 내용을 삭제/정리하지 않고 byte가 같은 원문을 lossless gzip1개로 보존했으며 원래 임시 사본도 유지했다. gzip 생성 뒤 메타데이터 patch 조립의 ReferenceError로 중단됐고 당시 patch는 미실행이었다. 재개 후 압축 내용/SHA·staged/main diff exit0을 확인했다. 재개 시 inline 링크 parser도 구문1로 실패했고 수정된 검사에서 문서3개 로컬 링크113개를 실제 통과했다. copier나 기존 Chrome/native를 재실행한 것으로 표시하지 않는다.
 
 [첫 실패](first-browser.json), [별도 측정](measurement-browser.json), [native](native-neutral.json), [명령/exit/해시/미실행](execution-record.json), [18사본/7gzip·byte/SHA](copy-manifest.json)을 보존한다. 이미 실행한 일회용 copier는 재실행하지 않으며 replay는 새 임시 출력에서만 한다. 반복 가능한 읽기 전용 검사는 다음과 같다.
 
