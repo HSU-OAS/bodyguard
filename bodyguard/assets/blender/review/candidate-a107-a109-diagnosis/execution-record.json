@@ -1,0 +1,88 @@
+{
+  "date": "2026-10-03",
+  "story": "S2.4a/FR-A-02/03/08, existing Draft PR #9 review diagnosis",
+  "head_before": "c7c25d4e6eb654202944dd6994622c0705925efe",
+  "origin_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "source": {
+    "file": "bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend",
+    "bytes": 29667488,
+    "sha256": "9191a2c1a0bd7bf4bb3ae3c358f911188052e9c204d4c4f74783806fb937b661"
+  },
+  "runs": [
+    {
+      "name": "A107 read-only fold probe",
+      "session": 59009,
+      "exit_code": 0,
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec \"bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-tailor.6b7Uvu/a107-fold-patch-probe.py\" -- \"/private/tmp/bodyguard-tailor.6b7Uvu/a107-fold-patches.json\""
+    },
+    {
+      "name": "A108 bounded native disk memory trial",
+      "session": 14677,
+      "exit_code": 0,
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec \"bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-tailor.6b7Uvu/a108-native-patch-dryrun.py\" -- \"/private/tmp/bodyguard-tailor.6b7Uvu/a108-patch-trial\""
+    },
+    {
+      "name": "A109 same patch plus native area-angle normal memory trial",
+      "session": 68483,
+      "exit_code": 0,
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec \"bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-tailor.6b7Uvu/a109-native-normal-dryrun.py\" -- \"/private/tmp/bodyguard-tailor.6b7Uvu/a109-normal-trial\""
+    }
+  ],
+  "copies": 25,
+  "gzip": 7,
+  "new_png": 10,
+  "directly_viewed_png": 10,
+  "source_saved": false,
+  "new_blend_files": 0,
+  "new_glb_files": 0,
+  "new_full_deformation_qa": false,
+  "new_browser_comparison": false,
+  "human_camera_capture": false,
+  "human_coordinate_collection": false,
+  "appearance_passed": false,
+  "adopted": false,
+  "release_approved": false,
+  "stages_1_to_6_complete": false,
+  "pr9_merge_allowed": false,
+  "preservation": "A108 all retained coordinate/deform values, protected hands, 163 rest matrices/world matrices and unmodified face winding asserted exact. Local 20/29 vertices removed; whole topology is NOT identical. Bidirectional envelope is sampled, not exhaustive. A109 normal-only step preserved full geometry/topology/skin/group names; custom corner normals changed, not adopted.",
+  "observed_images": [
+    "normal/female-after-posterior.png",
+    "normal/female-before-posterior.png",
+    "normal/female-weighted-normal-posterior.png",
+    "normal/male-after-posterior.png",
+    "normal/male-before-posterior.png",
+    "normal/male-weighted-normal-posterior.png",
+    "patch/female-after-posterior.png",
+    "patch/female-before-posterior.png",
+    "patch/male-after-posterior.png",
+    "patch/male-before-posterior.png"
+  ],
+  "limitations": [
+    "A108 patch geometry guards are not anatomy, clinical correctness, full collision or appearance approval.",
+    "A109 outside_exact_normal_count is an acos(clamped dot)==0 count, NOT byte/vector equality. Non-unit float normals can influence the angle; outside exact normals are not proven.",
+    "Observed logs only: A107 tool output truncated, A109 retains final output chunk only. No full stdout assertion.",
+    "Official manual first wrong-path fetch failed (402); primary Blender 5.1 weighted-normal manual found through search. Existing installed native modifier ran successfully.",
+    "No GLB save/export, 118-pose rerun, Chrome, human webcam, performer, deployment or changed acceptance gate in these trials."
+  ],
+  "static_verification": {
+    "default_ruff_exit": 0,
+    "isolated_ruff_exit": 0,
+    "format_88_check_exit": 0,
+    "prior_a106_checker_exit": 0,
+    "historical_failures": "A107 initial format check 1 and A108 initial B023 (3 findings) corrected before native execution. A109 mechanical formatting then default/isolated/format 0. Historical A100 S102 is not cleared."
+  },
+  "review": {
+    "archive_checker_exit": 0,
+    "prior_a106_checker_exit": 0,
+    "node_syntax_checks_exit": 0,
+    "targeted_secret_text_files": 19,
+    "targeted_secret_findings": 0,
+    "exhaustive_security_audit": false,
+    "appearance_p2_open": [
+      "A-02",
+      "A-08"
+    ],
+    "merge_allowed": false,
+    "next": "Bounded posterior connection/edge-flow repair using measured fan connectivity; not another lighting/normal override or smoothing-strength sweep."
+  }
+}
