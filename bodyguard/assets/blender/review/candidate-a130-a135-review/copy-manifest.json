@@ -1,0 +1,837 @@
+{
+  "old_files_changed": 0,
+  "previous_integrity_checker": "bodyguard/assets/blender/review/candidate-a124-a129-diagnosis/evidence-check.cjs",
+  "previous_control_files": [
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a124-a129-diagnosis/README.md",
+      "sha256": "974bafe7d8b2243122286840760c13f6122909b90eed611d2792038ee9c43345"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a124-a129-diagnosis/execution-record.json",
+      "sha256": "f38a00f53eebdf12a1c52d2ac80add09ba63abf34b4bbe84de4cdfeeb306539b"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a124-a129-diagnosis/copy-manifest.json",
+      "sha256": "16d84b93d04e41c9da7c97cbb1267be805ca26f71354686537c2f2f50c0c48c7"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a124-a129-diagnosis/evidence-check.cjs",
+      "sha256": "4787da8418128f1408e9e0435e2bdf20e281e0450e0d95fb31b5b6f3d710009a"
+    }
+  ],
+  "protected_old_file_count": 302,
+  "copies": [
+    {
+      "file": "diagnosis/a130-stage.json",
+      "bytes": 50674,
+      "sha256": "12173a75edfae9aebef050722eb2cc113f12056d3a3f4bb33694588c2cdd02f7",
+      "decoded_sha256": "12173a75edfae9aebef050722eb2cc113f12056d3a3f4bb33694588c2cdd02f7",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a130-native-cap-stage-probe/density-report.json"
+    },
+    {
+      "file": "diagnosis/a131-earclip.json",
+      "bytes": 69401,
+      "sha256": "2ae045078cbc90b99f59830201981424aea9258d0d6ae09a08c97043cfb78623",
+      "decoded_sha256": "2ae045078cbc90b99f59830201981424aea9258d0d6ae09a08c97043cfb78623",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a131-native-cap-earclip-probe/density-report.json"
+    },
+    {
+      "file": "diagnosis/a132-grid.json",
+      "bytes": 71466,
+      "sha256": "2f71d18e0211ea353d51af9137c7ebec6b96dff832421344adfbfc17cfb2cbe8",
+      "decoded_sha256": "2f71d18e0211ea353d51af9137c7ebec6b96dff832421344adfbfc17cfb2cbe8",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a132-native-cap-grid-probe/density-report.json"
+    },
+    {
+      "file": "diagnosis/a133-dense-area.json",
+      "bytes": 74061,
+      "sha256": "3229b28eb3d30597ac61f2c1f5e758f4a941cc34b6fa7a765e74b7e38fa1e52c",
+      "decoded_sha256": "3229b28eb3d30597ac61f2c1f5e758f4a941cc34b6fa7a765e74b7e38fa1e52c",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a133-native-cap-area-probe/density-report.json"
+    },
+    {
+      "file": "diagnosis/a134-authored-area.json",
+      "bytes": 1607,
+      "sha256": "ff88cba9bfe6d212d37d23b49fe5aca55032e0b07f5431980a9727246a052b35",
+      "decoded_sha256": "ff88cba9bfe6d212d37d23b49fe5aca55032e0b07f5431980a9727246a052b35",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a134-native-authored-cap-area-review/topology-report.json"
+    },
+    {
+      "file": "topology-report.json",
+      "bytes": 1730,
+      "sha256": "5185d754ca1e628faa777c3ff9c82f05820b0c1e243a33376f47410fb527566e",
+      "decoded_sha256": "5185d754ca1e628faa777c3ff9c82f05820b0c1e243a33376f47410fb527566e",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-authored-cap-candidate/topology-report.json"
+    },
+    {
+      "file": "artist-candidate.blend",
+      "bytes": 26945176,
+      "sha256": "7108ceeba278f11d76a79382fc2c013366677ee931b7b3d6fa23d8f5bb4d4828",
+      "decoded_sha256": "7108ceeba278f11d76a79382fc2c013366677ee931b7b3d6fa23d8f5bb4d4828",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-bodyguard-candidate.blend"
+    },
+    {
+      "file": "web-candidate.blend",
+      "bytes": 28859086,
+      "sha256": "9a2a15391e985a56026aace7aaf0720fae514358ffc509b5d3eef79907660c72",
+      "decoded_sha256": "9a2a15391e985a56026aace7aaf0720fae514358ffc509b5d3eef79907660c72",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-web-candidate.blend"
+    },
+    {
+      "file": "web-roundtrip.blend",
+      "bytes": 24181807,
+      "sha256": "f379efdb250edb92de8edeb1b4610ce6a4c4c191c7a9f97e0b90315abf1b08eb",
+      "decoded_sha256": "f379efdb250edb92de8edeb1b4610ce6a4c4c191c7a9f97e0b90315abf1b08eb",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-web-candidate-roundtrip.blend"
+    },
+    {
+      "file": "saved-preservation.json",
+      "bytes": 1118,
+      "sha256": "12a5c6a15479218663a707025d13d442d6e72ee552f5930e44c8d1da4fc5dba2",
+      "decoded_sha256": "12a5c6a15479218663a707025d13d442d6e72ee552f5930e44c8d1da4fc5dba2",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-saved-preservation.json"
+    },
+    {
+      "file": "source-deformation-report.json",
+      "bytes": 12024,
+      "sha256": "5bf9aa866effd4b5d519ba3c86cfa8a0994c30b50105e7da32d3860d5c790e25",
+      "decoded_sha256": "5bf9aa866effd4b5d519ba3c86cfa8a0994c30b50105e7da32d3860d5c790e25",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/deformation-report.json"
+    },
+    {
+      "file": "roundtrip-deformation-report.json",
+      "bytes": 12032,
+      "sha256": "ed89adeef394c93310c955f4ccfa4b083194f80abd8be6aaab7e337e3bb985b9",
+      "decoded_sha256": "ed89adeef394c93310c955f4ccfa4b083194f80abd8be6aaab7e337e3bb985b9",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/deformation-report.json"
+    },
+    {
+      "file": "export-report.json",
+      "bytes": 1002,
+      "sha256": "ab448041a1c2469666da82b422484f63bb26e53c852011c44d7af763f9759247",
+      "decoded_sha256": "ab448041a1c2469666da82b422484f63bb26e53c852011c44d7af763f9759247",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-glb/roundtrip-report.json"
+    },
+    {
+      "file": "browser-report.json",
+      "bytes": 14081,
+      "sha256": "44d27a4ab3c419764a44248f254dd7025e89e23d7178b39204cc41649e79d677",
+      "decoded_sha256": "44d27a4ab3c419764a44248f254dd7025e89e23d7178b39204cc41649e79d677",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-browser-report.json"
+    },
+    {
+      "file": "bodyguard-male-candidate.glb",
+      "bytes": 11022816,
+      "sha256": "29f9480ce671dc604cd62d0a01f144652cf868a6d0292b16445113e50a054814",
+      "decoded_sha256": "29f9480ce671dc604cd62d0a01f144652cf868a6d0292b16445113e50a054814",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-glb/bodyguard-male-candidate.glb"
+    },
+    {
+      "file": "bodyguard-female-candidate.glb",
+      "bytes": 10913520,
+      "sha256": "c12c5377ee1bad4d7cd76cb5cd3b395b2fb9954d3b22dee871ab37294fa7625b",
+      "decoded_sha256": "c12c5377ee1bad4d7cd76cb5cd3b395b2fb9954d3b22dee871ab37294fa7625b",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-glb/bodyguard-female-candidate.glb"
+    },
+    {
+      "file": "cap/authored-cap-back-female.png",
+      "bytes": 850043,
+      "sha256": "82742ab7e53e410f6798f9510775dba2e71cd6e4eb4c053253e7f1841a303591",
+      "decoded_sha256": "82742ab7e53e410f6798f9510775dba2e71cd6e4eb4c053253e7f1841a303591",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a134-native-authored-cap-area-review/authored-cap-back-female.png"
+    },
+    {
+      "file": "cap/authored-cap-back-male.png",
+      "bytes": 862966,
+      "sha256": "2504ddb966238325cdca482dbe21743f48596a323372865d3b143fee10d5dbef",
+      "decoded_sha256": "2504ddb966238325cdca482dbe21743f48596a323372865d3b143fee10d5dbef",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a134-native-authored-cap-area-review/authored-cap-back-male.png"
+    },
+    {
+      "file": "cap/authored-cap-side-female.png",
+      "bytes": 839978,
+      "sha256": "8670306695b5bce84e503c22cde2116e57cb30c68d292a79182cc8ba59e3b378",
+      "decoded_sha256": "8670306695b5bce84e503c22cde2116e57cb30c68d292a79182cc8ba59e3b378",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a134-native-authored-cap-area-review/authored-cap-side-female.png"
+    },
+    {
+      "file": "cap/authored-cap-side-male.png",
+      "bytes": 843924,
+      "sha256": "6d41a9b8289389e72b87b1748243f50820d2031b88a077c5f01b5c9b7fca4853",
+      "decoded_sha256": "6d41a9b8289389e72b87b1748243f50820d2031b88a077c5f01b5c9b7fca4853",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a134-native-authored-cap-area-review/authored-cap-side-male.png"
+    },
+    {
+      "file": "source/faceless-body-back-female.png",
+      "bytes": 840296,
+      "sha256": "41671107709b5b7af039c8d2b53d2dc65fcdeeeb2ebae598b2ba00d61e9f76bc",
+      "decoded_sha256": "41671107709b5b7af039c8d2b53d2dc65fcdeeeb2ebae598b2ba00d61e9f76bc",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/faceless-body-back-female.png"
+    },
+    {
+      "file": "source/faceless-body-back-male.png",
+      "bytes": 846951,
+      "sha256": "290301261fe5b7a0e2b0c9668c0b8d152d96b8e918c0e949d448a9f5cab89b7d",
+      "decoded_sha256": "290301261fe5b7a0e2b0c9668c0b8d152d96b8e918c0e949d448a9f5cab89b7d",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/faceless-body-back-male.png"
+    },
+    {
+      "file": "source/faceless-body-side-female.png",
+      "bytes": 825489,
+      "sha256": "d4a42506ea6d887bda06bac72b8acce34d75c8a9876d7d09fca42d519b359cbd",
+      "decoded_sha256": "d4a42506ea6d887bda06bac72b8acce34d75c8a9876d7d09fca42d519b359cbd",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/faceless-body-side-female.png"
+    },
+    {
+      "file": "source/faceless-body-side-male.png",
+      "bytes": 832187,
+      "sha256": "8c53fd999f0b8c24497dda6841731ac87596d5e39a36ca57b10eacce85c83acf",
+      "decoded_sha256": "8c53fd999f0b8c24497dda6841731ac87596d5e39a36ca57b10eacce85c83acf",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/faceless-body-side-male.png"
+    },
+    {
+      "file": "source/faceless-front.png",
+      "bytes": 1315294,
+      "sha256": "c6fafcd2277c3cc0dbd782f7bb9445c71159f650eb425cf66bd8c5860d447d2c",
+      "decoded_sha256": "c6fafcd2277c3cc0dbd782f7bb9445c71159f650eb425cf66bd8c5860d447d2c",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/faceless-front.png"
+    },
+    {
+      "file": "source/faceless-hand-female.png",
+      "bytes": 820803,
+      "sha256": "8948deb149aec06ef85dd709cba465f6364d953830209b94878230635a588d9e",
+      "decoded_sha256": "8948deb149aec06ef85dd709cba465f6364d953830209b94878230635a588d9e",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/faceless-hand-female.png"
+    },
+    {
+      "file": "source/faceless-hand-male.png",
+      "bytes": 824762,
+      "sha256": "33481b69540eca290b06c7dd8bd86f93a396e754c68333e7ea333d58999ea59c",
+      "decoded_sha256": "33481b69540eca290b06c7dd8bd86f93a396e754c68333e7ea333d58999ea59c",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/faceless-hand-male.png"
+    },
+    {
+      "file": "source/faceless-knee-female.png",
+      "bytes": 847130,
+      "sha256": "b7612c6ba1525b36c8415e987a87e0cafcc67441e3887addf98c9c5facbacb48",
+      "decoded_sha256": "b7612c6ba1525b36c8415e987a87e0cafcc67441e3887addf98c9c5facbacb48",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/faceless-knee-female.png"
+    },
+    {
+      "file": "source/faceless-knee-male.png",
+      "bytes": 848676,
+      "sha256": "2c9c0e274085d665925c77ac4b1b958496ffd1755c7411cc6a09e5b3f6d9a533",
+      "decoded_sha256": "2c9c0e274085d665925c77ac4b1b958496ffd1755c7411cc6a09e5b3f6d9a533",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/faceless-knee-male.png"
+    },
+    {
+      "file": "source/faceless-neck-female-left.png",
+      "bytes": 841459,
+      "sha256": "3fd0df8a1d3473906ca5a9e234fe3630f091de59fb6eb4733b48b5cc5de9ec9e",
+      "decoded_sha256": "3fd0df8a1d3473906ca5a9e234fe3630f091de59fb6eb4733b48b5cc5de9ec9e",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/faceless-neck-female-left.png"
+    },
+    {
+      "file": "source/faceless-neck-female-right.png",
+      "bytes": 841780,
+      "sha256": "32bf1fed89e5759d39a328702bd1ca444063e3a961b80604d5677d50ce79be08",
+      "decoded_sha256": "32bf1fed89e5759d39a328702bd1ca444063e3a961b80604d5677d50ce79be08",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/faceless-neck-female-right.png"
+    },
+    {
+      "file": "source/faceless-neck-male-left.png",
+      "bytes": 853763,
+      "sha256": "c08c924a93ca7a32c3883a200cbe067b24fec02a811e5e5743727890d91bba67",
+      "decoded_sha256": "c08c924a93ca7a32c3883a200cbe067b24fec02a811e5e5743727890d91bba67",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/faceless-neck-male-left.png"
+    },
+    {
+      "file": "source/faceless-neck-male-right.png",
+      "bytes": 855289,
+      "sha256": "890cac8cf088d2562df4a82daaceed4604f9c9d909a81fcc5e7530ec9a60c27f",
+      "decoded_sha256": "890cac8cf088d2562df4a82daaceed4604f9c9d909a81fcc5e7530ec9a60c27f",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/faceless-neck-male-right.png"
+    },
+    {
+      "file": "source/faceless-quarter.png",
+      "bytes": 1320903,
+      "sha256": "80594a8991c79013fb1b6e27c8db99166294142e80aade27b37175f62d119a7c",
+      "decoded_sha256": "80594a8991c79013fb1b6e27c8db99166294142e80aade27b37175f62d119a7c",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/faceless-quarter.png"
+    },
+    {
+      "file": "source/faceless-side-female.png",
+      "bytes": 839784,
+      "sha256": "2c84a14bab0a9ef49e81c86f03c37c56a1a62c62494f3226a4aa22094cb46d9b",
+      "decoded_sha256": "2c84a14bab0a9ef49e81c86f03c37c56a1a62c62494f3226a4aa22094cb46d9b",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/faceless-side-female.png"
+    },
+    {
+      "file": "source/faceless-side-male.png",
+      "bytes": 843730,
+      "sha256": "0d31b5000d8f5c86d406cf4420080346d304eea8cdfc70867226261d4984fb00",
+      "decoded_sha256": "0d31b5000d8f5c86d406cf4420080346d304eea8cdfc70867226261d4984fb00",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/faceless-side-male.png"
+    },
+    {
+      "file": "source/technical-female-clavicle.png",
+      "bytes": 836478,
+      "sha256": "60c07db3546e537b7d4797bd60be90373e425de655c38e267c14ec5d7940fca5",
+      "decoded_sha256": "60c07db3546e537b7d4797bd60be90373e425de655c38e267c14ec5d7940fca5",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/technical-female-clavicle.png"
+    },
+    {
+      "file": "source/technical-female-finger2-1.png",
+      "bytes": 836208,
+      "sha256": "4a328dec64bce9c9297c1e17c5a0187fc26c59ac5de51d97c1adf0ee9bc1bbb8",
+      "decoded_sha256": "4a328dec64bce9c9297c1e17c5a0187fc26c59ac5de51d97c1adf0ee9bc1bbb8",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/technical-female-finger2-1.png"
+    },
+    {
+      "file": "source/technical-female-foot.png",
+      "bytes": 836294,
+      "sha256": "6a4c5076173bde2b27d6b1ef9f1ebf346bc40e3821149af77dd24964f4734ad8",
+      "decoded_sha256": "6a4c5076173bde2b27d6b1ef9f1ebf346bc40e3821149af77dd24964f4734ad8",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/technical-female-foot.png"
+    },
+    {
+      "file": "source/technical-female-lowerarm01.png",
+      "bytes": 836179,
+      "sha256": "e50af5d9634ec7ac2fbcfe54a5b3767010253f63778568573a1a4d24b4f14c35",
+      "decoded_sha256": "e50af5d9634ec7ac2fbcfe54a5b3767010253f63778568573a1a4d24b4f14c35",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/technical-female-lowerarm01.png"
+    },
+    {
+      "file": "source/technical-female-lowerleg01.png",
+      "bytes": 837382,
+      "sha256": "4fa18b7070987af90537696650350872a98bd7db243e6efa997d868c16b6fa8b",
+      "decoded_sha256": "4fa18b7070987af90537696650350872a98bd7db243e6efa997d868c16b6fa8b",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/technical-female-lowerleg01.png"
+    },
+    {
+      "file": "source/technical-female-spine02.png",
+      "bytes": 836448,
+      "sha256": "6f743a688d4d8e504f90f9dc8165b6945b48a4f5003d859bc88b5ec40b37a52b",
+      "decoded_sha256": "6f743a688d4d8e504f90f9dc8165b6945b48a4f5003d859bc88b5ec40b37a52b",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/technical-female-spine02.png"
+    },
+    {
+      "file": "source/technical-female-upperarm01.png",
+      "bytes": 840229,
+      "sha256": "6f22e7438eae1c99304f139a6926d84620148fad6f76f4236713752fa7f1b6f6",
+      "decoded_sha256": "6f22e7438eae1c99304f139a6926d84620148fad6f76f4236713752fa7f1b6f6",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/technical-female-upperarm01.png"
+    },
+    {
+      "file": "source/technical-female-upperleg01.png",
+      "bytes": 835225,
+      "sha256": "c5253f475c6beb94bc825480beeff13ac17bb17af4d496396014da3e48696018",
+      "decoded_sha256": "c5253f475c6beb94bc825480beeff13ac17bb17af4d496396014da3e48696018",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/technical-female-upperleg01.png"
+    },
+    {
+      "file": "source/technical-female-wrist.png",
+      "bytes": 836334,
+      "sha256": "de72d9247f7077316f8b2772333f2c3a1f0c8122c2d4bc8c9b6d04648e046ebe",
+      "decoded_sha256": "de72d9247f7077316f8b2772333f2c3a1f0c8122c2d4bc8c9b6d04648e046ebe",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/technical-female-wrist.png"
+    },
+    {
+      "file": "source/technical-male-clavicle.png",
+      "bytes": 845532,
+      "sha256": "3be038c454c41503699f47bec4dfdb2416f1fc4774d2455c97621d0da8e8c435",
+      "decoded_sha256": "3be038c454c41503699f47bec4dfdb2416f1fc4774d2455c97621d0da8e8c435",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/technical-male-clavicle.png"
+    },
+    {
+      "file": "source/technical-male-finger2-1.png",
+      "bytes": 845034,
+      "sha256": "4cce785f1a1b2806a2ed8018d7e91e3b4dc1829cffed9577394b1d449439d2c2",
+      "decoded_sha256": "4cce785f1a1b2806a2ed8018d7e91e3b4dc1829cffed9577394b1d449439d2c2",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/technical-male-finger2-1.png"
+    },
+    {
+      "file": "source/technical-male-foot.png",
+      "bytes": 844904,
+      "sha256": "2d500ef39e772eba14eb1f29277d2cb003f4709d78c21ff0969bea4953bb1501",
+      "decoded_sha256": "2d500ef39e772eba14eb1f29277d2cb003f4709d78c21ff0969bea4953bb1501",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/technical-male-foot.png"
+    },
+    {
+      "file": "source/technical-male-lowerarm01.png",
+      "bytes": 845349,
+      "sha256": "cd242f7567ca610a8c90d2bc39578048047cca569dd94546f024bfe765496005",
+      "decoded_sha256": "cd242f7567ca610a8c90d2bc39578048047cca569dd94546f024bfe765496005",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/technical-male-lowerarm01.png"
+    },
+    {
+      "file": "source/technical-male-lowerleg01.png",
+      "bytes": 846393,
+      "sha256": "d1c34d130f42b0ba5ded1727f584036f8677a414768d89e9bd2b078ae5206048",
+      "decoded_sha256": "d1c34d130f42b0ba5ded1727f584036f8677a414768d89e9bd2b078ae5206048",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/technical-male-lowerleg01.png"
+    },
+    {
+      "file": "source/technical-male-spine02.png",
+      "bytes": 844905,
+      "sha256": "bf52babe1ba03c537ede15d3502b5eb518689d581e7337be2dbe48009d6b43e1",
+      "decoded_sha256": "bf52babe1ba03c537ede15d3502b5eb518689d581e7337be2dbe48009d6b43e1",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/technical-male-spine02.png"
+    },
+    {
+      "file": "source/technical-male-upperarm01.png",
+      "bytes": 850691,
+      "sha256": "d66173e11f84872c20f0ca325d585b4b15e8287488ba98a155a6a3b5d9eb3d91",
+      "decoded_sha256": "d66173e11f84872c20f0ca325d585b4b15e8287488ba98a155a6a3b5d9eb3d91",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/technical-male-upperarm01.png"
+    },
+    {
+      "file": "source/technical-male-upperleg01.png",
+      "bytes": 843424,
+      "sha256": "a1106abe53458c7f8ca09c123f2fb8bd4589f153a3129f1b5de5e645f68d3ce2",
+      "decoded_sha256": "a1106abe53458c7f8ca09c123f2fb8bd4589f153a3129f1b5de5e645f68d3ce2",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/technical-male-upperleg01.png"
+    },
+    {
+      "file": "source/technical-male-wrist.png",
+      "bytes": 845026,
+      "sha256": "ea39d7de8182afce8d08bd638508ae3fd31e8392a4498cc2d8f55e142d2a8caa",
+      "decoded_sha256": "ea39d7de8182afce8d08bd638508ae3fd31e8392a4498cc2d8f55e142d2a8caa",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review/technical-male-wrist.png"
+    },
+    {
+      "file": "roundtrip/faceless-body-back-female.png",
+      "bytes": 840403,
+      "sha256": "e2405d7b4ae9930362b7b45efd9e61906b6e32a454d75f3edecabd4c8458d2a4",
+      "decoded_sha256": "e2405d7b4ae9930362b7b45efd9e61906b6e32a454d75f3edecabd4c8458d2a4",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/faceless-body-back-female.png"
+    },
+    {
+      "file": "roundtrip/faceless-body-back-male.png",
+      "bytes": 847344,
+      "sha256": "57e04a40bc157860d8840b7798017bc1fa4e8fe9cb4c6aa21e72d244fa163316",
+      "decoded_sha256": "57e04a40bc157860d8840b7798017bc1fa4e8fe9cb4c6aa21e72d244fa163316",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/faceless-body-back-male.png"
+    },
+    {
+      "file": "roundtrip/faceless-body-side-female.png",
+      "bytes": 825961,
+      "sha256": "40692973ea5e7fd959d142dc64d2a66127c7223a7c50a1627dd80d2f06bce0a2",
+      "decoded_sha256": "40692973ea5e7fd959d142dc64d2a66127c7223a7c50a1627dd80d2f06bce0a2",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/faceless-body-side-female.png"
+    },
+    {
+      "file": "roundtrip/faceless-body-side-male.png",
+      "bytes": 832598,
+      "sha256": "b1e504b2cb7b73be0bbf8f1d8b3549efe62bc499aa6bfa56b5813b9c4a922966",
+      "decoded_sha256": "b1e504b2cb7b73be0bbf8f1d8b3549efe62bc499aa6bfa56b5813b9c4a922966",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/faceless-body-side-male.png"
+    },
+    {
+      "file": "roundtrip/faceless-front.png",
+      "bytes": 1315478,
+      "sha256": "3f7b44775378753c9118d8235aeadec302d28bb5d26201a2b3e913f7f824a7d6",
+      "decoded_sha256": "3f7b44775378753c9118d8235aeadec302d28bb5d26201a2b3e913f7f824a7d6",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/faceless-front.png"
+    },
+    {
+      "file": "roundtrip/faceless-hand-female.png",
+      "bytes": 820784,
+      "sha256": "bcf281c93c00c73e86d5487141a79dd87e0e85909e6ce50a40081e3fc7abd467",
+      "decoded_sha256": "bcf281c93c00c73e86d5487141a79dd87e0e85909e6ce50a40081e3fc7abd467",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/faceless-hand-female.png"
+    },
+    {
+      "file": "roundtrip/faceless-hand-male.png",
+      "bytes": 824362,
+      "sha256": "7ac17f725f1272086a45a43c73fe83d4a3022a7c4c37ce8b5f563bda88519a7c",
+      "decoded_sha256": "7ac17f725f1272086a45a43c73fe83d4a3022a7c4c37ce8b5f563bda88519a7c",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/faceless-hand-male.png"
+    },
+    {
+      "file": "roundtrip/faceless-knee-female.png",
+      "bytes": 847131,
+      "sha256": "2f478585144da173dcd51b825735eca5c56c758b9ba10bb44940f40cf19496bf",
+      "decoded_sha256": "2f478585144da173dcd51b825735eca5c56c758b9ba10bb44940f40cf19496bf",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/faceless-knee-female.png"
+    },
+    {
+      "file": "roundtrip/faceless-knee-male.png",
+      "bytes": 848973,
+      "sha256": "8d99b81f17fae2ca84e2f752969a1a1c84a23d3af65d65383a7dd1fa3710001f",
+      "decoded_sha256": "8d99b81f17fae2ca84e2f752969a1a1c84a23d3af65d65383a7dd1fa3710001f",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/faceless-knee-male.png"
+    },
+    {
+      "file": "roundtrip/faceless-neck-female-left.png",
+      "bytes": 841223,
+      "sha256": "4f7df802023bdc00f14a689285f691b593e6a9107005a5501330ae7fa3138301",
+      "decoded_sha256": "4f7df802023bdc00f14a689285f691b593e6a9107005a5501330ae7fa3138301",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/faceless-neck-female-left.png"
+    },
+    {
+      "file": "roundtrip/faceless-neck-female-right.png",
+      "bytes": 841848,
+      "sha256": "a46d9506a859307462bbb241903824f17128775d2921a62279f217888a463b6e",
+      "decoded_sha256": "a46d9506a859307462bbb241903824f17128775d2921a62279f217888a463b6e",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/faceless-neck-female-right.png"
+    },
+    {
+      "file": "roundtrip/faceless-neck-male-left.png",
+      "bytes": 853588,
+      "sha256": "126a5b71c8d6cd9b7c683e6650715dca5dc658e8aa6ea974bac2978fe9b7d02e",
+      "decoded_sha256": "126a5b71c8d6cd9b7c683e6650715dca5dc658e8aa6ea974bac2978fe9b7d02e",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/faceless-neck-male-left.png"
+    },
+    {
+      "file": "roundtrip/faceless-neck-male-right.png",
+      "bytes": 854891,
+      "sha256": "8f640ef809f1b9e98d1335c68bb63f286e46386123fbbb1d8082fadfaf5a5e91",
+      "decoded_sha256": "8f640ef809f1b9e98d1335c68bb63f286e46386123fbbb1d8082fadfaf5a5e91",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/faceless-neck-male-right.png"
+    },
+    {
+      "file": "roundtrip/faceless-quarter.png",
+      "bytes": 1320955,
+      "sha256": "eade83c744a671ded9bec17d7fce404f5ade45aaf0262a2296906e9e8c062adb",
+      "decoded_sha256": "eade83c744a671ded9bec17d7fce404f5ade45aaf0262a2296906e9e8c062adb",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/faceless-quarter.png"
+    },
+    {
+      "file": "roundtrip/faceless-side-female.png",
+      "bytes": 839128,
+      "sha256": "c5ec17a991f39cba23c2ed4dd7e82f6b431f06c5013abf9403fa5b82e064ee9c",
+      "decoded_sha256": "c5ec17a991f39cba23c2ed4dd7e82f6b431f06c5013abf9403fa5b82e064ee9c",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/faceless-side-female.png"
+    },
+    {
+      "file": "roundtrip/faceless-side-male.png",
+      "bytes": 842803,
+      "sha256": "6e3719cfc16b8ab9540e3b21dfa2b89e85676b5bd876bc3fc574b3d746df7c16",
+      "decoded_sha256": "6e3719cfc16b8ab9540e3b21dfa2b89e85676b5bd876bc3fc574b3d746df7c16",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/faceless-side-male.png"
+    },
+    {
+      "file": "roundtrip/technical-female-clavicle.png",
+      "bytes": 836144,
+      "sha256": "0dfc6ffe4b1ed3d5117eed0ef60e35f7051024035b18acd63abff01fd9be9119",
+      "decoded_sha256": "0dfc6ffe4b1ed3d5117eed0ef60e35f7051024035b18acd63abff01fd9be9119",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/technical-female-clavicle.png"
+    },
+    {
+      "file": "roundtrip/technical-female-finger2-1.png",
+      "bytes": 836231,
+      "sha256": "c9756824cf35def2ef587c259140cb58b0768a2c565d598f46ff93692f29b565",
+      "decoded_sha256": "c9756824cf35def2ef587c259140cb58b0768a2c565d598f46ff93692f29b565",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/technical-female-finger2-1.png"
+    },
+    {
+      "file": "roundtrip/technical-female-foot.png",
+      "bytes": 836707,
+      "sha256": "32936c9f0fcb8d953be594dbab9897f8e6d9c353d1b628cee86319f618627d29",
+      "decoded_sha256": "32936c9f0fcb8d953be594dbab9897f8e6d9c353d1b628cee86319f618627d29",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/technical-female-foot.png"
+    },
+    {
+      "file": "roundtrip/technical-female-lowerarm01.png",
+      "bytes": 836224,
+      "sha256": "b4ab36b36cf385bdba37654ae49538daf17b7895a57773148f2952b5ca3ef76a",
+      "decoded_sha256": "b4ab36b36cf385bdba37654ae49538daf17b7895a57773148f2952b5ca3ef76a",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/technical-female-lowerarm01.png"
+    },
+    {
+      "file": "roundtrip/technical-female-lowerleg01.png",
+      "bytes": 837392,
+      "sha256": "98640f325e77f8bf87073b892e3291127efe3a6ebb72f91e38088c83185630db",
+      "decoded_sha256": "98640f325e77f8bf87073b892e3291127efe3a6ebb72f91e38088c83185630db",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/technical-female-lowerleg01.png"
+    },
+    {
+      "file": "roundtrip/technical-female-spine02.png",
+      "bytes": 836463,
+      "sha256": "3e7dbca7983f86206ac1f735264d0b0827af5efa6f8e99a13e63eec3d8647c5d",
+      "decoded_sha256": "3e7dbca7983f86206ac1f735264d0b0827af5efa6f8e99a13e63eec3d8647c5d",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/technical-female-spine02.png"
+    },
+    {
+      "file": "roundtrip/technical-female-upperarm01.png",
+      "bytes": 839957,
+      "sha256": "50c99a8f316b8ed1486788862fba44f62cf8c9d9acac4fb1062825bcdcd9a64a",
+      "decoded_sha256": "50c99a8f316b8ed1486788862fba44f62cf8c9d9acac4fb1062825bcdcd9a64a",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/technical-female-upperarm01.png"
+    },
+    {
+      "file": "roundtrip/technical-female-upperleg01.png",
+      "bytes": 834839,
+      "sha256": "a230c5921154d5cb9b4eea16e62ee2ddc8a29dc2284ec4ab37b55849e3d56686",
+      "decoded_sha256": "a230c5921154d5cb9b4eea16e62ee2ddc8a29dc2284ec4ab37b55849e3d56686",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/technical-female-upperleg01.png"
+    },
+    {
+      "file": "roundtrip/technical-female-wrist.png",
+      "bytes": 836700,
+      "sha256": "17416ebc62478e6556a873c93cb5f8f8cbfec3fe5eb9f6b5b17acde54db45b9d",
+      "decoded_sha256": "17416ebc62478e6556a873c93cb5f8f8cbfec3fe5eb9f6b5b17acde54db45b9d",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/technical-female-wrist.png"
+    },
+    {
+      "file": "roundtrip/technical-male-clavicle.png",
+      "bytes": 845567,
+      "sha256": "3981c4b35cb304aadc33ce390a60fa6d9973fc4cddb462fe3f23559c175b0c19",
+      "decoded_sha256": "3981c4b35cb304aadc33ce390a60fa6d9973fc4cddb462fe3f23559c175b0c19",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/technical-male-clavicle.png"
+    },
+    {
+      "file": "roundtrip/technical-male-finger2-1.png",
+      "bytes": 845315,
+      "sha256": "2a3f37950f8fe891ff2443dcfaa80bb70b359d2bfbf697ab9e2d34f8190fdaac",
+      "decoded_sha256": "2a3f37950f8fe891ff2443dcfaa80bb70b359d2bfbf697ab9e2d34f8190fdaac",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/technical-male-finger2-1.png"
+    },
+    {
+      "file": "roundtrip/technical-male-foot.png",
+      "bytes": 845301,
+      "sha256": "b31298f92a832350bc867d98293c3acebd96ee1d70ba4f25dbe37fc4853b4e2c",
+      "decoded_sha256": "b31298f92a832350bc867d98293c3acebd96ee1d70ba4f25dbe37fc4853b4e2c",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/technical-male-foot.png"
+    },
+    {
+      "file": "roundtrip/technical-male-lowerarm01.png",
+      "bytes": 845297,
+      "sha256": "02ffbc24e4fe3290a50896a505230808a36c57eaa292f70d7ef948a335554ead",
+      "decoded_sha256": "02ffbc24e4fe3290a50896a505230808a36c57eaa292f70d7ef948a335554ead",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/technical-male-lowerarm01.png"
+    },
+    {
+      "file": "roundtrip/technical-male-lowerleg01.png",
+      "bytes": 846608,
+      "sha256": "c43e9b02fdbb4febbc337d17e9bb09a2cb02a290dfe821dd639ff7cb752f772e",
+      "decoded_sha256": "c43e9b02fdbb4febbc337d17e9bb09a2cb02a290dfe821dd639ff7cb752f772e",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/technical-male-lowerleg01.png"
+    },
+    {
+      "file": "roundtrip/technical-male-spine02.png",
+      "bytes": 845089,
+      "sha256": "361a93309791544d7335adfe28ab75eb7e4ce3d263eb28bb7e29077cedcae2f7",
+      "decoded_sha256": "361a93309791544d7335adfe28ab75eb7e4ce3d263eb28bb7e29077cedcae2f7",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/technical-male-spine02.png"
+    },
+    {
+      "file": "roundtrip/technical-male-upperarm01.png",
+      "bytes": 850694,
+      "sha256": "ecc19b15a6580d1cc399e50f2a5553198db43f359bcf4382ff67ee743d8583d2",
+      "decoded_sha256": "ecc19b15a6580d1cc399e50f2a5553198db43f359bcf4382ff67ee743d8583d2",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/technical-male-upperarm01.png"
+    },
+    {
+      "file": "roundtrip/technical-male-upperleg01.png",
+      "bytes": 843958,
+      "sha256": "d6f8f1bb64ee88171b232b831231388b0b283bb3aafa004457443a6ce2210a5d",
+      "decoded_sha256": "d6f8f1bb64ee88171b232b831231388b0b283bb3aafa004457443a6ce2210a5d",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/technical-male-upperleg01.png"
+    },
+    {
+      "file": "roundtrip/technical-male-wrist.png",
+      "bytes": 845269,
+      "sha256": "915caab93335c657141b239afd023cfb24d29d385882419d2d6391caafe87af0",
+      "decoded_sha256": "915caab93335c657141b239afd023cfb24d29d385882419d2d6391caafe87af0",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review/technical-male-wrist.png"
+    },
+    {
+      "file": "scripts/a130-native-cap-stage-probe.py.txt.gz",
+      "bytes": 3874,
+      "sha256": "96a767ef0a47659ee80a792486993a7e2d531f5cfd018e862cc77706bb8bb391",
+      "decoded_sha256": "2a2822aea2dc8ff59599fc59703ee5aa6056fefdcae4f1cdc8622edea0fe1005",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a130-native-cap-stage-probe.py"
+    },
+    {
+      "file": "scripts/a131-native-cap-earclip-probe.py.txt.gz",
+      "bytes": 3898,
+      "sha256": "878967a111d645f37201a7709351af2d0d2e5d6a50da10dc882c881c49558cfd",
+      "decoded_sha256": "11ec543f8c82ebf7de44a458474a722d41ae82a640d6df02248c927673d5adb6",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a131-native-cap-earclip-probe.py"
+    },
+    {
+      "file": "scripts/a132-native-cap-grid-probe.py.txt.gz",
+      "bytes": 3872,
+      "sha256": "c1f66a851969c27406a6f29b82bb17387738a6084bcbdfeca67c65e069ad0458",
+      "decoded_sha256": "1ee7b08b555a2cc4e455fb29ee707332b5fe63d0c445dc1546736dc29722fdf2",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a132-native-cap-grid-probe.py"
+    },
+    {
+      "file": "scripts/a133-native-cap-area-probe.py.txt.gz",
+      "bytes": 4028,
+      "sha256": "1084c1f8293644adbaeaf9d5e9d75864cd08c23356d226b34e156968cd9f9a83",
+      "decoded_sha256": "7b5cc3a0415050bb0c891875e58f8a74e49166470a10644372feb11802d70928",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a133-native-cap-area-probe.py"
+    },
+    {
+      "file": "scripts/a134-native-authored-cap-area-review.py.txt.gz",
+      "bytes": 2728,
+      "sha256": "e0e5cfed54561a605f5e0931af682df7c31dc9a19f56c30c6eb390e852492d3f",
+      "decoded_sha256": "880b33729c61eb60591e2991ecb14515f1e41ce8f932c22d4ba814797ecf65e5",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a134-native-authored-cap-area-review.py"
+    },
+    {
+      "file": "scripts/a135-save-authored-cap-candidate.py.txt.gz",
+      "bytes": 2498,
+      "sha256": "08f55685d37bc876a678184d3ed707541456630df5ad902c921b8426abc47356",
+      "decoded_sha256": "b1a47fc9bb51e4e34a7e90cb8e504f9481ebc18c705eac32341dc7ac19477ccd",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-save-authored-cap-candidate.py"
+    },
+    {
+      "file": "scripts/a135-saved-connectivity-preservation.py.txt.gz",
+      "bytes": 1555,
+      "sha256": "94465496f174c748a87e861fdb940a0b2c7c1325d6f3cd1c7126675cdd467e54",
+      "decoded_sha256": "5e5e41641ef1532769066973b09880abb85ba126797890b8ca06024c85e48010",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-saved-connectivity-preservation.py"
+    },
+    {
+      "file": "scripts/a135-save-authored-cap-candidate-reproducer.py.txt.gz",
+      "bytes": 2490,
+      "sha256": "680f685440f000fc10cd45d6d0defd51fc871b3700a429b054cb67edf04e4f02",
+      "decoded_sha256": "d463b5001735f33269f27d308584224935cecc2fbd7097be10f22e8926853daa",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-save-authored-cap-candidate-reproducer.py"
+    },
+    {
+      "file": "scripts/a135-avatar.spec.ts.txt.gz",
+      "bytes": 3145,
+      "sha256": "09d1f11f598700bd8d2326f15c898c12a8e43f8d6f8c54a2071dbc7d92cdb3a3",
+      "decoded_sha256": "8ec09a704c1685937ecf81bb015d6fbc3c22ff918a1edd56299bbb505e22e04c",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-avatar.spec.ts"
+    },
+    {
+      "file": "scripts/a135-frame-client.ts.txt.gz",
+      "bytes": 665,
+      "sha256": "a0fb2919a46e4d68d3afca5bc8523a76c6c16899d9050c5d680a7381d41671b1",
+      "decoded_sha256": "6d3e4e1a4c2b8176197823b07b6d06ec7fb5e6df4ebacd0a8b782c1a13db7111",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-frame-client.ts"
+    },
+    {
+      "file": "scripts/a130-a135-copy-evidence.cjs.txt.gz",
+      "bytes": 1911,
+      "sha256": "b3d4167b79b1ffcb2178f4575b2cc6eb52fc92b6402f0286a77f074d9f8ff9c3",
+      "decoded_sha256": "e23f5070fa9f3429bc5b0caeb2725a0ce1a795dd6e875d5f416f6f57535cb38b",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a130-a135-copy-evidence.cjs"
+    },
+    {
+      "file": "logs/a130-observed.json.txt.gz",
+      "bytes": 1197,
+      "sha256": "959ebcfe278bc207b769b5e6e2dd928c4b7546016322bafb415ee207c0c063e5",
+      "decoded_sha256": "f5c434020e41eca194876b2fa13bab066d0ea550b9e808ce1cb4a5538432875d",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-a130-observed.json"
+    },
+    {
+      "file": "logs/a131-observed.json.txt.gz",
+      "bytes": 830,
+      "sha256": "db3d0335db4a7351f9ae43d0c8154a664f7a116a10a82f38f548c5a2574aa854",
+      "decoded_sha256": "53cc97a326cccaca4ee61e45a295fc591909bcda1221610744f1912be9628a00",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-a131-observed.json"
+    },
+    {
+      "file": "logs/a132-observed.json.txt.gz",
+      "bytes": 1143,
+      "sha256": "6806daf9279bff8e8e7ace01ed7cabfa8310e45378f76609260fbbef45fdbde9",
+      "decoded_sha256": "52a0802d6a20b1edeef66dce39540e33e0fe64173f3b1246c85bd01ea63f8142",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-a132-observed.json"
+    },
+    {
+      "file": "logs/a133-observed.json.txt.gz",
+      "bytes": 831,
+      "sha256": "d627ec6948910ace83e19d4d33e7d9ef1c9f8292d01b5889293b0fe9beb423f7",
+      "decoded_sha256": "7d5955f207e0f092c1e1142b602bab005a2f5bb30a34ba923eab5e1a297bb2db",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-a133-observed.json"
+    },
+    {
+      "file": "logs/a134-observed.json.txt.gz",
+      "bytes": 978,
+      "sha256": "3713ac7877619c3c4fb974e1769ff26b275bea34e64391573b01c9d1e2494a02",
+      "decoded_sha256": "b7c82bf5b9f06e59a813305d5d94761101fa19e72e8ec9c16c44255852503632",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-a134-observed.json"
+    },
+    {
+      "file": "logs/producer-observed.json.txt.gz",
+      "bytes": 1318,
+      "sha256": "cca2a6d4682f65da564ffd694d4bdf0f45d22ca5ec592adeadc7b0cb124317b9",
+      "decoded_sha256": "53b2bcc6085591974ac0e7d0c53336c2794b144d996ecca9c2c80e3a5c3b0258",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-producer-observed.json"
+    },
+    {
+      "file": "logs/preservation-observed.json.txt.gz",
+      "bytes": 1184,
+      "sha256": "be265531a5a2f996f74f3390225aa31359eda4db663d4025493ba228bd6c2c17",
+      "decoded_sha256": "ce773b7e752fdf6b3b94a5a72e23ef38dd7c2f2a39dee0c54657ddd5fb0fd414",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-preservation-observed.json"
+    },
+    {
+      "file": "logs/source-observed.json.txt.gz",
+      "bytes": 1863,
+      "sha256": "134cd99af068bca42796cb12ed682870ed9de75e18d034d044d6904c1481508f",
+      "decoded_sha256": "97bc23948e200249131f045ed9fc4c1434b253b3fd21cd2f1c905d31880fb7f6",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-source-observed.json"
+    },
+    {
+      "file": "logs/export-observed.json.txt.gz",
+      "bytes": 1827,
+      "sha256": "4ef7bcfac905f4fc3f47d255b4a99ee73b44594c118cbbf666106e6c5b97ce2d",
+      "decoded_sha256": "e6a0629054712495b4f990a87b888f4ad7486f8556118c5e576651da63f76fc9",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-export-observed.json"
+    },
+    {
+      "file": "logs/roundtrip-observed.json.txt.gz",
+      "bytes": 1902,
+      "sha256": "c42b3b90c512921ba692d3d4a4eea30920fed68109438f9ca84cb6561ef94451",
+      "decoded_sha256": "dc1d2b991db51c5f5fffb2953ca3559e0076b4e8fe270f131c49bff4dafdc938",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-observed.json"
+    },
+    {
+      "file": "logs/browser-observed.json.txt.gz",
+      "bytes": 1940,
+      "sha256": "39bd4f73b20fbdb4a18e249e864bc45eef915606168607774ffce28ef9ec860a",
+      "decoded_sha256": "f1537117e9e5e4ab94ce7dd1ebf3dd18342512aa15f652887b300d65e4da93de",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-browser-observed.json"
+    },
+    {
+      "file": "logs/static-observed.json.txt.gz",
+      "bytes": 424,
+      "sha256": "544e547cd4833b5a43d5f510cba60b6428016e29f375dba2f430e0002aa57571",
+      "decoded_sha256": "d7b4149b3bc9cbf58e3f6e66e2122dbca44ddcfc8b7bcb2f6585a3fcb1094924",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-static-observed.json"
+    },
+    {
+      "file": "logs/primary-read-observed.json.txt.gz",
+      "bytes": 389,
+      "sha256": "544a33c3e2047750247eecd94caa9da5540438f2fcb3e0b11800e85819febcc6",
+      "decoded_sha256": "44ed3f8960f7f569f55691e7b66242dbfffe6715452cfd6e4620c262cd6c90f5",
+      "copied_from": "/private/tmp/bodyguard-tailor.6b7Uvu/a135-primary-read-observed.json"
+    },
+    {
+      "file": "browser/male-two-models.png",
+      "bytes": 153385,
+      "sha256": "e03d155b1d5f9e5a67a7e4c120fdeb3386594b1316bc12eaa4417ca6334e478b",
+      "decoded_sha256": "e03d155b1d5f9e5a67a7e4c120fdeb3386594b1316bc12eaa4417ca6334e478b",
+      "copied_from": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/frontend/test-results/avatar/avatar-A-06-실제-남녀-GLB-두-복제본을-로드하고-한쪽-기술-변형이-다른-뼈대를-바꾸지-않는다/남성-two-models.png"
+    },
+    {
+      "file": "browser/female-two-models.png",
+      "bytes": 145967,
+      "sha256": "d608b427eea91b9f8d481275c76a276de1dd7ee48d163707ab5bde90ee08b2eb",
+      "decoded_sha256": "d608b427eea91b9f8d481275c76a276de1dd7ee48d163707ab5bde90ee08b2eb",
+      "copied_from": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/frontend/test-results/avatar/avatar-A-06-실제-남녀-GLB-두-복제본을-로드하고-한쪽-기술-변형이-다른-뼈대를-바꾸지-않는다/여성-two-models.png"
+    },
+    {
+      "file": "browser/male-posterior-neck.png",
+      "bytes": 129391,
+      "sha256": "23311b3c90c83589f427a776af990ba2ce0559e966a19d2a90e23cfcf2fc2d26",
+      "decoded_sha256": "23311b3c90c83589f427a776af990ba2ce0559e966a19d2a90e23cfcf2fc2d26",
+      "copied_from": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/frontend/test-results/avatar/avatar-A135-posterior-cap--ea799-ces-in-close-browser-review/남성-posterior-neck.png"
+    },
+    {
+      "file": "browser/female-posterior-neck.png",
+      "bytes": 116689,
+      "sha256": "0b250868519c3ad3570107f5a6f33e5ae30b525028711259dd98bf7273aab6f3",
+      "decoded_sha256": "0b250868519c3ad3570107f5a6f33e5ae30b525028711259dd98bf7273aab6f3",
+      "copied_from": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/frontend/test-results/avatar/avatar-A135-posterior-cap--ea799-ces-in-close-browser-review/여성-posterior-neck.png"
+    }
+  ]
+}
