@@ -1,0 +1,309 @@
+{
+  "date_kst": "2026-10-03",
+  "story": "S2.4a/b; appearance P2 review continuation, not S2.4 completion",
+  "repository_head_before": "8b3bd2868e6cfd71a737d5e17fee7d17019e0495",
+  "main_before": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "latest_ceo_reference": {
+    "sha256": "45b313912dee5ae2218bfe76086abb35a9b948fab9e877f1a9d2b05f832de62",
+    "requirement": "smooth faceless head-neck continuity; unified unclothed neutral white male/female mannequins; preserve anatomy and rig fidelity"
+  },
+  "input_source": {
+    "file": "bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend",
+    "bytes": 29667488,
+    "sha256": "9191a2c1a0bd7bf4bb3ae3c358f911188052e9c204d4c4f74783806fb937b661",
+    "overwritten": false
+  },
+  "native_runs": [
+    {
+      "phase": "raw",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a121-raw-grid-localization.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a121-raw-grid-localization",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "승인된 Story의 별도 background Blender에서 맞춤 전 격자·경계와 접힘 위치를 메모리로 측정합니다. 원본/GLB 저장·서비스 변경·사용자 카메라 수집은 없습니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 2500
+      },
+      "session": 2847,
+      "exit_code": 0,
+      "log": "logs/raw-observed.json.txt.gz"
+    },
+    {
+      "phase": "cap",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a122-boundary-cap-conformance.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a122-boundary-cap-conformance",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "승인된 동일 Story에서 기존 native 경계 채움·내부 세분화와 원래 표면 맞춤을 메모리로 대조하고 실제 목 확대 렌더를 생성합니다. 보호 경계/skin/리그 기준을 낮추거나 원본 저장·서비스 반영·카메라 수집은 하지 않습니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 2500
+      },
+      "session": 68106,
+      "exit_code": 0,
+      "log": "logs/cap-observed.json.txt.gz"
+    },
+    {
+      "phase": "producer",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a123-save-cap-candidate.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a123-cap-candidate /private/tmp/bodyguard-tailor.6b7Uvu/a123-bodyguard-candidate.blend",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "승인된 아바타 Story의 국소 기하 guard를 남녀 모두 통과한 경계 채움 후보를 별도 새 .blend로 저장하여 독립 재열기·전체 관절 검증을 준비합니다. 기존 원본과 서비스 모델은 변경하지 않습니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 2500
+      },
+      "session": 66819,
+      "exit_code": 0,
+      "log": "logs/producer-observed.json.txt.gz"
+    },
+    {
+      "phase": "preservation",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a123-saved-preservation.py -- bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend /private/tmp/bodyguard-tailor.6b7Uvu/a123-bodyguard-candidate.blend /private/tmp/bodyguard-tailor.6b7Uvu/a123-cap-candidate/grid-trial.json /private/tmp/bodyguard-tailor.6b7Uvu/a123-saved-preservation.json",
+      "session": 83141,
+      "exit_code": 0,
+      "log": "logs/preservation-observed.json.txt.gz"
+    },
+    {
+      "phase": "source",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec /private/tmp/bodyguard-tailor.6b7Uvu/a123-bodyguard-candidate.blend --python-exit-code 1 --python bodyguard/assets/blender/review_avatar.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a123-source-review --candidate --mannequin",
+      "session": 20678,
+      "exit_code": 0,
+      "log": "logs/source-observed.json.txt.gz"
+    },
+    {
+      "phase": "export",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec /private/tmp/bodyguard-tailor.6b7Uvu/a123-bodyguard-candidate.blend --python-exit-code 1 --python bodyguard/assets/blender/export_avatar_candidate.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a123-web-candidate.blend /private/tmp/bodyguard-tailor.6b7Uvu/a123-glb 1",
+      "session": 83904,
+      "exit_code": 0,
+      "log": "logs/export-observed.json.txt.gz"
+    },
+    {
+      "phase": "roundtrip",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec /private/tmp/bodyguard-tailor.6b7Uvu/a123-web-candidate-roundtrip.blend --python-exit-code 1 --python bodyguard/assets/blender/review_avatar.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a123-roundtrip-review --candidate --mannequin",
+      "session": 61449,
+      "exit_code": 0,
+      "log": "logs/roundtrip-observed.json.txt.gz"
+    }
+  ],
+  "native_actors_sequential": true,
+  "blender": {
+    "version": "5.1.1",
+    "build": "b70da489d7f4",
+    "native_metal": true
+  },
+  "browser_run": {
+    "command": "BODYGUARD_AVATAR_QA_DIRECTORY=/private/tmp/bodyguard-tailor.6b7Uvu/a123-glb PLAYWRIGHT_JSON_OUTPUT_NAME=/private/tmp/bodyguard-tailor.6b7Uvu/a123-browser-report.json .venv/bin/python -m tests.run_browser avatar",
+    "session": 5955,
+    "exit_code": 0,
+    "expected": 4,
+    "unexpected": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "duration_ms": 45746.079,
+    "log": "logs/browser-observed.json.txt.gz"
+  },
+  "browser_conditions": {
+    "macOS": "15.6",
+    "build": "24G84",
+    "chrome": "154.0.8037.93",
+    "version_read": "sw_vers and plutil -extract (current turn); defaults domain lookup failed before successful plutil read",
+    "viewport": [
+      1440,
+      1080
+    ],
+    "device_ram_remeasured": false,
+    "camera_calls": 0,
+    "auth_api_smtp_sql": false,
+    "native_external_proxy_blocked": true,
+    "all_ten_meshes_visible_in_posterior": true
+  },
+  "synthetic_raf": {
+    "male": {
+      "samples": 180,
+      "mean_ms": 16.663888888888888,
+      "p95_ms": 16.90000009536743
+    },
+    "female": {
+      "samples": 180,
+      "mean_ms": 16.666666666666668,
+      "p95_ms": 16.90000009536743
+    },
+    "gpu_completion_or_live_camera_latency": false
+  },
+  "actual_candidate_files": [
+    {
+      "file": "artist-candidate.blend",
+      "bytes": 26900300,
+      "sha256": "e44d0abb136a1d9e96d2b7ca7eb37cb2cd53e07fc7f73b4ba17dc98827a31bc8"
+    },
+    {
+      "file": "web-candidate.blend",
+      "bytes": 28858787,
+      "sha256": "14a907b888833a6bbc19f0a927a5bdc9f12ccd6f6534ae4a5e769e1df34d6121"
+    },
+    {
+      "file": "web-roundtrip.blend",
+      "bytes": 24186201,
+      "sha256": "35cfeae0010591734f51c00e7ebeb9738e63ef7142596bb3e242c9236cea8e37"
+    },
+    {
+      "file": "bodyguard-male-candidate.glb",
+      "bytes": 11022816,
+      "sha256": "b2a86ad428919bcacb4c1a295358a8c286c28a4abbeccf711b710f0527c1e776"
+    },
+    {
+      "file": "bodyguard-female-candidate.glb",
+      "bytes": 10913520,
+      "sha256": "dffcce1f64a7acc60c0685930bf743a224c070673d9428cefe1ea19ed9e2d9e0"
+    }
+  ],
+  "full_deformation": {
+    "source": {
+      "stress": 118,
+      "rows": 121,
+      "png": 34,
+      "failures": 0,
+      "max_edge_ratio": 2.9439303671031447
+    },
+    "roundtrip": {
+      "stress": 118,
+      "rows": 121,
+      "png": 34,
+      "failures": 0,
+      "max_edge_ratio": 2.94767980329051
+    },
+    "technical_not_clinical": true
+  },
+  "raw_grid_localization": {
+    "native_quad_long_folds": [
+      197,
+      106
+    ],
+    "native_triangle_long_folds": [
+      201,
+      108
+    ],
+    "minority_projected_faces": [
+      372,
+      245
+    ],
+    "minority_three_or_more_boundary_hops": [
+      282,
+      203
+    ],
+    "inference": "raw defects extend into the patch interior; changing boundary count correspondence alone is not supported",
+    "projected_sign_not_3d_validity": true
+  },
+  "cap_method": {
+    "native_closed_boundary_holes_fill": true,
+    "beauty_triangulation": true,
+    "native_interior_subdivision_cuts": 3,
+    "boundary_subdivision": false,
+    "original_coordinate_or_skin_restoration": false,
+    "whole_body_remesh": false,
+    "old_source_saved": false,
+    "limits": "authored .81..87 largest posterior disk only; source seam flow remains",
+    "raw_and_final_long_folds": [
+      1,
+      0
+    ],
+    "original_long_folds": [
+      8,
+      16
+    ],
+    "sampled_envelope_not_exhaustive": true
+  },
+  "old_files_preserved": 164,
+  "copy_count": 110,
+  "gzip_count": 17,
+  "observed_images": [
+    "source/faceless-front.png",
+    "source/faceless-side-male.png",
+    "source/faceless-neck-male-left.png",
+    "source/faceless-body-back-male.png",
+    "source/faceless-side-female.png",
+    "source/faceless-neck-female-left.png",
+    "source/technical-male-wrist.png",
+    "source/faceless-quarter.png",
+    "source/faceless-hand-male.png",
+    "source/faceless-hand-female.png",
+    "source/faceless-knee-male.png",
+    "source/faceless-knee-female.png",
+    "source/technical-male-upperarm01.png",
+    "source/technical-female-upperarm01.png",
+    "roundtrip/faceless-front.png",
+    "roundtrip/faceless-quarter.png",
+    "roundtrip/faceless-side-male.png",
+    "roundtrip/faceless-side-female.png",
+    "roundtrip/faceless-neck-male-left.png",
+    "roundtrip/faceless-neck-female-left.png",
+    "roundtrip/faceless-hand-male.png",
+    "roundtrip/faceless-hand-female.png",
+    "roundtrip/faceless-knee-male.png",
+    "roundtrip/faceless-knee-female.png",
+    "roundtrip/technical-male-upperarm01.png",
+    "roundtrip/technical-female-upperarm01.png",
+    "cap/male-grid-posterior.png",
+    "cap/female-grid-posterior.png",
+    "browser/male-two-models.png",
+    "browser/female-two-models.png",
+    "browser/male-posterior-neck.png",
+    "browser/female-posterior-neck.png"
+  ],
+  "new_png": 74,
+  "unviewed_png": 42,
+  "new_blend_files": 3,
+  "new_glb_files": 2,
+  "source_original_id_ledger": "authoring-only retained original ids/zero markers for independently reopened mesh comparison; export_extras=false; no human coordinates",
+  "legacy_report_names": "A122/A123 grid-trial.json and measured_two_loop_grid_before_conformance key are retained executed bytes; they measure the native closed-boundary cap, NOT a two-loop grid",
+  "static": {
+    "four_python_default_ruff": 0,
+    "isolated_E4_E7_E9_F_I_B": 0,
+    "format88": 0,
+    "copier_node_syntax": 0,
+    "checker_node_syntax": 0,
+    "temporary_frontend_tsc_biome": 0,
+    "restored_frontend_tsc_biome": 0
+  },
+  "execution_notes": [
+    "Pre-execution review caught Path candidate shadowing by BVHTree; renamed candidate_path before native producer, no failed native actor or post-run edits.",
+    "Read-only wrong lookup names/defaults domain failure are not native QA failures.",
+    "Logs preserve observed tool chunks, not guaranteed full stdout; saved independent-preservation intermediate chunk 1d33fe is not archived, complete JSON measurements are preserved.",
+    "Four earlier integrity control files are hash-linked; reuse previous checker instead of duplicating its 137-entry SHA ledger.",
+    "Temporary browser spec/client were exclusively copied as executed and then restored/removed; baseline avatar.spec.ts SHA unchanged; original Blender GUI and development A37 unchanged."
+  ],
+  "warnings": [
+    "Native male export parent warning five occurrences",
+    "Chrome NO_COLOR/FORCE_COLOR/THREE.Clock",
+    "Expected guest401 and injected503/context-loss cleanup warning"
+  ],
+  "review_findings": [
+    {
+      "priority": "P2",
+      "gate": "A-02/A-08",
+      "finding": "Posterior broad folds improved; source lateral cap-boundary seam and head-base transition remain, web limb/joint finish remains below reference.",
+      "evidence": [
+        "source/faceless-side-female.png",
+        "browser/male-posterior-neck.png",
+        "browser/female-two-models.png"
+      ]
+    }
+  ],
+  "next_action": "Preserve A123 cap improvement; local boundary/tangent and head-base seam diagnosis/fix with same protection and real QA; no whole-body smoothing, exposure hiding or guard relaxation.",
+  "human_camera_capture": false,
+  "human_coordinate_collection": false,
+  "appearance_passed": false,
+  "adopted": false,
+  "release_approved": false,
+  "stages_1_to_6_complete": false,
+  "pr9_merge_allowed": false,
+  "not_executed": [
+    "Full-body/adjacent/coplanar collision validation",
+    "Expert-approved motion clips and real performer retargeting",
+    "Actual laptop webcam coaching latency/accuracy",
+    "Multi-device/lighting/body-type usability",
+    "SMTP/Google provider connections, operating DB migration, HTTPS deploy and release"
+  ],
+  "skills_effect": "debug localized raw-grid cause; code-review caught pre-execution path shadowing and preservation limits; documentation keeps actual/stress/simulated/unexecuted evidence separate",
+  "approval_rules_unchanged": true
+}
