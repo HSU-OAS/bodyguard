@@ -1,0 +1,14 @@
+Observed tool-output excerpt, not a complete process stdout archive.
+
+00:00.641  blend            | Read blend: "/private/tmp/bodyguard-tailor.6b7Uvu/draft-a63-continuous-neutral-head.blend"
+Traceback (most recent call last):
+  File "/private/tmp/bodyguard-tailor.6b7Uvu/a79-continuous-cage-face.py", line 113, in <module>
+    patch.vertex_groups.remove(group)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+RuntimeError: Error: DeformGroup '' not in object 'GEO-body_male_realistic'
+
+
+Error: script failed, file: '/private/tmp/bodyguard-tailor.6b7Uvu/a79-continuous-cage-face.py', exiting.
+Blender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)
+
+Blender quit

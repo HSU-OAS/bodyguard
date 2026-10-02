@@ -1,0 +1,137 @@
+{
+  "date": "2026-10-02",
+  "story": "S2.4",
+  "old_head": "127f75d71f694f6bc22132bc63eb8ed65b6b03cd",
+  "main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "runs": [
+    {
+      "name": "professional-cage-inspection",
+      "exit": 0,
+      "outputs": [
+        "/private/tmp/bodyguard-tailor.6b7Uvu/a79-continuous-cage-inspection.json"
+      ]
+    },
+    {
+      "name": "a79-native",
+      "exit": 1,
+      "reason": "Modifier application invalidated the saved VertexGroup reference; no candidate saved"
+    },
+    {
+      "name": "a79b-native",
+      "exit": 1,
+      "reason": "The exact coincident boundary guard rejected the re-evaluated professional ring; no candidate saved"
+    },
+    {
+      "name": "a79c-boundary-probe",
+      "exit": 1,
+      "reason": "Actual male ring diagnostic saved, followed by the same unreduced guard rejecting the candidate"
+    },
+    {
+      "name": "a80-native",
+      "exit": 0,
+      "outputs": [
+        "/private/tmp/bodyguard-tailor.6b7Uvu/draft-a80-continuous-surface-face.blend",
+        "/private/tmp/bodyguard-tailor.6b7Uvu/a80-continuous-surface-face.json"
+      ]
+    },
+    {
+      "name": "a80-first-preview",
+      "exit": 0,
+      "outputs": [
+        "/private/tmp/bodyguard-tailor.6b7Uvu/a80-first-preview"
+      ],
+      "rendered_png": 8
+    },
+    {
+      "name": "a80-source-qc",
+      "exit": 0,
+      "outputs": [
+        "/private/tmp/bodyguard-tailor.6b7Uvu/a80-source-qc/deformation-report.json"
+      ],
+      "rendered_png": 0
+    },
+    {
+      "name": "a80-saved-source-comparison",
+      "exit": 0,
+      "outputs": [
+        "/private/tmp/bodyguard-tailor.6b7Uvu/a80-saved-source-preservation.json"
+      ]
+    },
+    {
+      "name": "a80-native-export",
+      "exit": 0,
+      "outputs": [
+        "/private/tmp/bodyguard-tailor.6b7Uvu/web-a80-continuous-surface-face.blend",
+        "/private/tmp/bodyguard-tailor.6b7Uvu/web-a80-continuous-surface-face-roundtrip.blend",
+        "/private/tmp/bodyguard-tailor.6b7Uvu/glb-a80-continuous-surface-face"
+      ]
+    },
+    {
+      "name": "a80-roundtrip-qc",
+      "exit": 0,
+      "outputs": [
+        "/private/tmp/bodyguard-tailor.6b7Uvu/a80-roundtrip-qc/deformation-report.json"
+      ],
+      "rendered_png": 0
+    },
+    {
+      "name": "a80-actual-chrome",
+      "exit": 0,
+      "outputs": [
+        "/private/tmp/bodyguard-tailor.6b7Uvu/a80-browser-report.json"
+      ],
+      "tests": 3,
+      "duration_ms": 40185.602,
+      "rendered_png": 2
+    }
+  ],
+  "all_native_actors_terminal_before_chrome": true,
+  "device": {
+    "model": "Mac16,12",
+    "ram_bytes": 17179869184,
+    "cpu": "Apple M4",
+    "browser": "Google Chrome 154.0.8037.58",
+    "headless": true,
+    "viewport": [
+      1440,
+      1080
+    ],
+    "dpr": 1,
+    "owned_port": 5182
+  },
+  "static_check": {
+    "command": "ruff check --select E9,F <six exact runtime scripts>",
+    "exit": 0,
+    "scope": "Syntax/name errors only; not full style/format verification of immutable native snapshots"
+  },
+  "other_failures": [
+    "First apply_patch attempt for A79 could not match a nonexistent context; no edit was applied; corrected before native execution",
+    "Two documentation patch contexts did not match the exact heading/whole line; corrected using the read heading; no historical content removed",
+    "git config user.name returned exit1 because no configured identity was present; the chained commit never ran; reused the verified previous commit user identity through per-command options",
+    "Read attempts at guessed a63-continuous-head-skin-repair.py and bodyguard/tools/blender/review_avatar.py paths failed; actual files were found with rg and read",
+    "One verbose GitHub body read was output-truncated; subsequent exact PR state was read without its body"
+  ],
+  "warnings": [
+    "Five male glTF armature-parent warnings",
+    "Native export limited 438289 male and 449340 female vertex weights to eight; fin repairs 0/0",
+    "NO_COLOR/FORCE_COLOR and Three.Clock deprecation",
+    "Expected injected GLB503/WebGL context loss and recovery warnings"
+  ],
+  "unrun": [
+    "A79/A79b saved source, full QA, renders, GLB, browser",
+    "Female A79c boundary diagnosis",
+    "A80 complete34PNG source render suite and imported34PNG suite",
+    "API/Vitest/type/build/full Ruff style-format regression",
+    "Actual performer/observer, validated motion demonstrations, webcam tracking/retargeting, compound motion, clinical accuracy",
+    "GPU duration/camera inference performance, multidevice/long-duration tests",
+    "Real mail/OAuth provider, deployment, operating database, secrets, release"
+  ],
+  "appearance_passed": false,
+  "appearance_reason": "A80 retained continuous neck but excessive head contraction, crown/occiput distortion and remaining eye/mouth/ear details; actual native and Chrome images rejected",
+  "accepted_candidate": false,
+  "development_model": "A37",
+  "unresolved_priority": "P2 A-02",
+  "merge_allowed": false,
+  "stages1_to6_passed": false,
+  "next": "Keep the existing continuous professional jaw/cervical surface; replace facial-detail topology locally in Blender rather than another smooth/strength loop; preserve anatomy, skin and whole verification gates"
+}
