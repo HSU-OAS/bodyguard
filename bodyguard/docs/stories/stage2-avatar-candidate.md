@@ -1,5 +1,7 @@
 # S2.4 — 남녀 아바타 출시 후보 제작
 
+2026-10-03 [A101 실제 접힘·법선 원인 분리](../../assets/blender/review/candidate-a101-diagnosis/README.md): native 읽기 전용24+2행/각exit0에서 원본 손목 접합부 큰 기하 면각과 재수입 flat arm0을 확인했다. imported163 nonidentity는 정확한 float 비교이며 최대 행렬 원소 차이6.080/8.821e-6으로 구분해 실제163관절 운동으로 해석하지 않는다. 입력 SHA 불변·7사본/5gzip·두 코드 Ruff/format0, 새asset/PNG/전체 변형/Chrome0이다. 다음은 동일 경계/보호 기준의 native bridge 보간 대조다. 기존 외형 P2·A100 S102·원본/증거·개발 A37·Draft PR #9 미병합·전체1~6/승인 규칙은 그대로다.
+
 2026-10-03 [A100 기존 손목 경계 대응·실제 검수](../../assets/blender/review/candidate-a100-review/README.md): 재절단 없이 native 점 수를 대응한 별도 원본/GLB의 각118변형·각34PNG와 Chrome4개50.747s/웹캠 요청0을 완료했다. 영역 밖 좌표/named skin·손·각163rest bones/행렬 보존,90사본/5gzip·76실제PNG/직접열람22를 확인했다. 국소 좁은 면0·긴 접힘9/11이어도 실제 Chrome 전완 줄무늬와 뒤 목 P2가 남아 외형 미통과·미채택이다. Metal startup139→실제 재검사0, 생산자 Ruff S1021/isolated1과 성공한 나머지 검사를 구분해 보존하며 전체 style 통과로 표시하지 않는다. 최신 얼굴/앞목·무의상 통일 백색/필요 구조·리깅 정확도·이전 파일/증거·개발 A37·PR #9 Draft/미병합·전체1~6/승인 기준은 그대로다.
 
 2026-10-03 [A99 재절단·경계 밀도 원인 분리](../../assets/blender/review/candidate-a99-diagnosis/README.md): native8회/대조 완료2·실패/의도 종료6을 보존했다. 재절단 대조는 원래/대응 밀도 모두 악화해 미채택했고, 이미 있는 경계를 유지한 native 점 수 대응은 남녀 좁은 면0·긴 접힘9/11·보호 손/원래 좌표·skin/각163rest bones·행렬 guard0을 통과했다. 새 절단점13개만 skin 변화/원래점·손0을 분리하고 BMVert 참조 대신 식별 tag만 유지했으며 좌표/가중치 복원·guard 완화는 없다. 19사본/16gzip·3JSON, 기존 source/maker SHA 불변·새asset/PNG/118변형/Chrome0이고 외형 통과가 아니다. 별도 A100 제작·실제 검수로 이어가며 최신 얼굴/목·무의상 통일 백색/필요 구조·정확도·기존 증거/개발 A37·외형 P2·PR #9 Draft/미병합·전체1~6/승인 기준은 유지한다.

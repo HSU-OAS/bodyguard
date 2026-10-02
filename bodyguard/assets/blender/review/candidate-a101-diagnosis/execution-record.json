@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-03",
+  "timezone": "Asia/Seoul",
+  "kind": "read-only source/reimport surface and pose-basis diagnosis",
+  "base_head": "f71e09faffef79d5ccbb11eed5ea49616fdb88e2",
+  "main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "source": {
+    "file": "bodyguard/assets/blender/bodyguard_avatar_candidate_a100_unapproved.blend",
+    "sha256": "abdb8ef2e2a09a0c3601b77e09b0393e590aa704d7f242cbf2f457b4bd2259b6"
+  },
+  "glb": [
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a100-review/bodyguard-male-candidate.glb",
+      "sha256": "7db7dc4b7dacdc97d0769378a5d09e7f54068394dc783e26e13e37b760188e50"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a100-review/bodyguard-female-candidate.glb",
+      "sha256": "d10caee92be45899abcc4d4091ae8fff3a1ca9bc8533135841260160a5e06e79"
+    }
+  ],
+  "temporary_reimport": {
+    "file": "/private/tmp/bodyguard-tailor.6b7Uvu/draft-a100-web-roundtrip.blend",
+    "sha256": "3080760f2394cf6b7ea9df8a1aa183a7b1cd2b006e443fee23670f7a54535034",
+    "persisted_in_this_archive": false,
+    "inputs": "A100 native exporter / archived GLBs; archive checker does not require this temporary file"
+  },
+  "runs": [
+    {
+      "name": "read-only geometry/normal diagnosis",
+      "session": 2297,
+      "exit_code": 0,
+      "rows": 24,
+      "report": "surface-normal-diagnosis.json",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a101-readonly-wrist-surface.py -- bodyguard/assets/blender/bodyguard_avatar_candidate_a100_unapproved.blend /private/tmp/bodyguard-tailor.6b7Uvu/draft-a100-web-roundtrip.blend /private/tmp/bodyguard-tailor.6b7Uvu/a101-readonly-wrist-surface.json"
+    },
+    {
+      "name": "read-only numeric pose-basis distinction",
+      "session": 2397,
+      "exit_code": 0,
+      "rows": 2,
+      "report": "import-basis-rounding.json",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec /private/tmp/bodyguard-tailor.6b7Uvu/draft-a100-web-roundtrip.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a101-import-basis-rounding.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a101-import-basis-rounding.json"
+    }
+  ],
+  "style": {
+    "ruff_check_exits": [
+      0,
+      0
+    ],
+    "isolated_88_format_check_exits": [
+      0,
+      0
+    ],
+    "copy_script_syntax_exit": 0
+  },
+  "copies": 7,
+  "gzip": 5,
+  "new_blend_files": 0,
+  "new_glb_files": 0,
+  "new_png": 0,
+  "human_camera_capture": false,
+  "human_coordinate_collection": false,
+  "new_full_deformation_qa": false,
+  "new_browser_comparison": false,
+  "appearance_passed": false,
+  "adopted": false,
+  "release_approved": false,
+  "stages_1_to_6_complete": false,
+  "pr9_merge_allowed": false,
+  "not_run": [
+    "new avatar or rebridge",
+    "new source/GLB full QA or renders",
+    "new Chrome comparison",
+    "human filming/observer/pose data",
+    "actual motion demonstration or retarget",
+    "external accounts/secrets/production DB/deploy/release"
+  ],
+  "next": "controlled native bridge interpolation comparison on the same contours with original preservation guards; no head replacement, strength loop, source/skin restoration or guard relaxation"
+}
