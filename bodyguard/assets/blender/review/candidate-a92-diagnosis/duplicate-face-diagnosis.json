@@ -1,0 +1,190 @@
+{
+  "input": "bodyguard_avatar_candidate_a91_rejected.blend",
+  "input_sha256": "8424a1306b91e36b7db024987667ca4068a035bc11fe0abe78357216c34bbe9c",
+  "source_saved": false,
+  "read_only_scene": true,
+  "full_qa": false,
+  "appearance_approval": false,
+  "candidate_acceptance": false,
+  "rows": [
+    {
+      "body": "Male",
+      "ngon_sizes": [
+        4,
+        4,
+        6
+      ],
+      "duplicate_face_pairs": [],
+      "tessellation_duplicate_face_map_entries": 0,
+      "native_rotated_edges": 4,
+      "stages": [
+        {
+          "stage": "original",
+          "long_folds": 49,
+          "nonmanifold_edges": 0,
+          "bad_edge_radial_counts": {},
+          "bad_edges": [],
+          "all_coordinates_exact": true,
+          "vertices": 142087,
+          "edges": 344457,
+          "faces": 202372
+        },
+        {
+          "stage": "after_local_ngon_triangulation",
+          "long_folds": 49,
+          "nonmanifold_edges": 0,
+          "bad_edge_radial_counts": {},
+          "bad_edges": [],
+          "all_coordinates_exact": true,
+          "vertices": 142087,
+          "edges": 344462,
+          "faces": 202377
+        },
+        {
+          "stage": "after_local_rotation",
+          "long_folds": 48,
+          "nonmanifold_edges": 0,
+          "bad_edge_radial_counts": {},
+          "bad_edges": [],
+          "all_coordinates_exact": true,
+          "vertices": 142087,
+          "edges": 344462,
+          "faces": 202377
+        }
+      ]
+    },
+    {
+      "body": "Female",
+      "ngon_sizes": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        5,
+        5,
+        5,
+        7,
+        7,
+        17
+      ],
+      "duplicate_face_pairs": [
+        {
+          "key_prior_polygon": [
+            103690,
+            68956,
+            103697,
+            103689
+          ],
+          "value_prior_polygon": [
+            103690,
+            68956,
+            103697,
+            103689
+          ],
+          "key_vertices": [
+            103690,
+            103697,
+            103689
+          ],
+          "value_vertices": [
+            103690,
+            103697,
+            103689
+          ],
+          "key_returned_new_face": true,
+          "value_returned_new_face": true,
+          "key_area_m2": 1.9738987333539626e-08,
+          "value_area_m2": 1.9738987333539626e-08
+        }
+      ],
+      "tessellation_duplicate_face_map_entries": 1,
+      "native_rotated_edges": 4,
+      "stages": [
+        {
+          "stage": "original",
+          "long_folds": 50,
+          "nonmanifold_edges": 0,
+          "bad_edge_radial_counts": {},
+          "bad_edges": [],
+          "all_coordinates_exact": true,
+          "vertices": 139882,
+          "edges": 338191,
+          "faces": 198311
+        },
+        {
+          "stage": "after_local_ngon_triangulation",
+          "long_folds": 48,
+          "nonmanifold_edges": 1,
+          "bad_edge_radial_counts": {
+            "4": 1
+          },
+          "bad_edges": [
+            {
+              "length_m": 0.00033026185701601207,
+              "radial_faces": 4,
+              "coordinates": [
+                [
+                  -0.07981826364994049,
+                  0.0473858080804348,
+                  1.3680486679077148
+                ],
+                [
+                  -0.07986102253198624,
+                  0.047152526676654816,
+                  1.3682785034179688
+                ]
+              ],
+              "endpoint_face_counts": [
+                7,
+                5
+              ]
+            }
+          ],
+          "all_coordinates_exact": true,
+          "vertices": 139882,
+          "edges": 338227,
+          "faces": 198348
+        },
+        {
+          "stage": "after_local_rotation",
+          "long_folds": 46,
+          "nonmanifold_edges": 1,
+          "bad_edge_radial_counts": {
+            "4": 1
+          },
+          "bad_edges": [
+            {
+              "length_m": 0.00033026185701601207,
+              "radial_faces": 4,
+              "coordinates": [
+                [
+                  -0.07981826364994049,
+                  0.0473858080804348,
+                  1.3680486679077148
+                ],
+                [
+                  -0.07986102253198624,
+                  0.047152526676654816,
+                  1.3682785034179688
+                ]
+              ],
+              "endpoint_face_counts": [
+                7,
+                5
+              ]
+            }
+          ],
+          "all_coordinates_exact": true,
+          "vertices": 139882,
+          "edges": 338227,
+          "faces": 198348
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "date": "2026-10-02",
+  "story": "S2.4a/b posterior join diagnosis; latest CEO face-neck reference unchanged",
+  "parent_commit": "f5f060945ca7e4b67a0b3714b248f8cf401102f1",
+  "main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "source_sha256": "8424a1306b91e36b7db024987667ca4068a035bc11fe0abe78357216c34bbe9c",
+  "runs": [
+    {
+      "name": "source-connectivity",
+      "actor": 3030,
+      "exit_code": 0,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a91_rejected.blend' --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a91-posterior-connectivity-probe.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/a92-remaining-posterior-connectivity.json'",
+      "source_saved": false
+    },
+    {
+      "name": "import-connectivity",
+      "actor": 3427,
+      "exit_code": 0,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec '/private/tmp/bodyguard-tailor.6b7Uvu/draft-a91-web-roundtrip.blend' --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a91-posterior-connectivity-probe.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/a92-import-posterior-connectivity.json'",
+      "source_saved": false
+    },
+    {
+      "name": "unconstrained-ngon-test",
+      "actor": 64874,
+      "exit_code": 1,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a91_rejected.blend' --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a92-local-ngon-triangulation-dryrun.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/a92-local-ngon-triangulation-dryrun.json'",
+      "source_saved": false
+    },
+    {
+      "name": "stage-diagnosis",
+      "actor": 64010,
+      "exit_code": 0,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a91_rejected.blend' --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a92-tessellation-stage-probe.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/a92-tessellation-stage-probe.json'",
+      "source_saved": false
+    },
+    {
+      "name": "duplicate-face-diagnosis",
+      "actor": 78320,
+      "exit_code": 0,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a91_rejected.blend' --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a92-duplicate-face-probe.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/a92-duplicate-face-probe.json'",
+      "source_saved": false
+    },
+    {
+      "name": "constrained-native-enum-first",
+      "actor": 64781,
+      "exit_code": 1,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a91_rejected.blend' --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a92-constrained-ngon-dryrun.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/a92-constrained-ngon-dryrun.json'",
+      "source_saved": false
+    },
+    {
+      "name": "constrained-dryrun-v2",
+      "actor": 6629,
+      "exit_code": 0,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a91_rejected.blend' --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a92-constrained-ngon-dryrun-v2.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/a92-constrained-ngon-dryrun-v2.json'",
+      "source_saved": false
+    }
+  ],
+  "failures": [
+    {
+      "run": "unconstrained-ngon-test",
+      "exit_code": 1,
+      "output_json_created": false,
+      "source_saved": false,
+      "reason": "Female local quad tessellation used an occupied diagonal, creating one edge with four radial faces. Nonmanifold guard stopped the dryrun."
+    },
+    {
+      "run": "constrained-native-enum-first",
+      "exit_code": 1,
+      "output_json_created": false,
+      "source_saved": false,
+      "reason": "Installed BMesh API uses ALTERNATE, not FIXED_ALTERNATE. ValueError before report/save; separate v2 used the actual native enum."
+    }
+  ],
+  "native_api_read": {
+    "actor": 28660,
+    "exit_code": 0,
+    "scene_saved": false,
+    "contract": "triangulate faces/quad_method/ngon_method -> edges/faces/face_map/face_map_double; actual invalid-enum response enumerated BEAUTY,FIXED,ALTERNATE,SHORT_EDGE,LONG_EDGE."
+  },
+  "style": {
+    "first_stage_format_exit": 1,
+    "preformat_bytes_preserved": true,
+    "formatted_before_native": true,
+    "final_full_ruff_five_files_exit": 0,
+    "final_format_five_files_exit": 0,
+    "node_copier_check_exit": 0
+  },
+  "finding": "A specific original Female quad [103690,68956,103697,103689] already has occupied A-C diagonal. Local native ALTERNATE avoids it without deleting anatomy or moving coordinates. Separate memory-only v2 preserved all points/outside face connections/nonmanifold0; local fold count Male49->48/Female50->47.",
+  "metric_limit": "Source49/50 and imported57/48 are region/geometry diagnostics on distinct topology and local-length classes, not paired original edge IDs, accuracy or improvement percentages.",
+  "next": "Apply the topology constraint to a separate native source candidate only after remaining folded patches are understood; run saved-source preservation/full118-source/full118-import/actual browser/clear appearance previews if that candidate is made. Do not promote memory diagnostics to completed avatar verification.",
+  "new_blend": 0,
+  "new_glb": 0,
+  "new_png": 0,
+  "source_full_qa_rerun": false,
+  "import_full_qa_rerun": false,
+  "browser_rerun": false,
+  "actual_camera_runs": 0,
+  "old_assets_or_evidence_changed": 0,
+  "development_default": "A37 unchanged",
+  "appearance_passed": false,
+  "stages_1_to_6_complete": false,
+  "release_approved": false,
+  "pr9_merge_allowed": false,
+  "excluded": [
+    "Actual people/camera/pose capture, storage or uploading",
+    "Accounts/API/DB/SMTP/OAuth reruns or provider connection",
+    "Secrets/operating DB migration/deployment/release"
+  ]
+}
