@@ -1,0 +1,182 @@
+{
+  "input_sha256": "602de73537edcf24fd7fe92aed84d28c800e99f5125865c5f5d644657f85e1f9",
+  "professional_sha256": "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137",
+  "source_saved": false,
+  "appearance_approved": false,
+  "full_deformation_qa": false,
+  "scope": "Native 3D unequal-count bridge control in memory only. Earlier XZ projection failures NOT cleared. No source/GLB save or adoption; altered topology/new skin require ALL QA. Samples are actual face centers and new edge midpoints, not full surface or 3D collision proof.",
+  "rows": [
+    {
+      "body": "Male",
+      "current_disk": {
+        "bounds_ymin_m_xmax_normalized_zmin_zmax": [
+          -0.016,
+          0.06,
+          0.82,
+          0.94
+        ],
+        "all_selected_faces": 24559,
+        "selected_components_faces": [
+          24559
+        ],
+        "patch_faces": 24559,
+        "patch_vertices": 13239,
+        "patch_edges": 37797,
+        "boundary_edges": 649,
+        "boundary_degree_histogram": {
+          "2": 649
+        },
+        "patch_euler_characteristic": 1,
+        "simple_disk_before_extraction": true
+      },
+      "professional_disk": {
+        "bounds_ymin_m_xmax_normalized_zmin_zmax": [
+          0.004,
+          0.032,
+          0.84,
+          0.92
+        ],
+        "all_selected_faces": 344,
+        "selected_components_faces": [
+          344
+        ],
+        "patch_faces": 344,
+        "patch_vertices": 402,
+        "patch_edges": 745,
+        "boundary_edges": 114,
+        "boundary_degree_histogram": {
+          "2": 114
+        },
+        "patch_euler_characteristic": 1,
+        "simple_disk_before_extraction": true
+      },
+      "native_boundary_edges": [
+        649,
+        114
+      ],
+      "native_bridge": {
+        "operator": "bmesh.ops.bridge_loops",
+        "use_pairs": true,
+        "new_vertices": 0,
+        "equal_count_subdivision": false
+      },
+      "xz_projection_failure_not_cleared": true,
+      "native_bridge_faces": 763,
+      "native_bridge_edges": 763,
+      "actual_face_center_edge_midpoint_samples": 1526,
+      "source_vertices": 129630,
+      "candidate_vertices": 117442,
+      "removed_old_interior_points": 12590,
+      "retained_old_points": 117040,
+      "retained_coordinate_skin_hands_163_rest_bones_world_outside_faces_exact": true,
+      "retained_maximum_displacement_m": 0.0,
+      "professional_authored_points_exact": 402,
+      "new_bridge_points": 0,
+      "bridge_to_professional_surface_sample_max_m": 0.011915989220142365,
+      "bridge_to_old_failed_surface_sample_max_m": 0.014379517175257206,
+      "professional_patch_to_old_failed_surface_sample_max_m": 0.0173196978867054,
+      "new_patch_native_skin_transfer": "POLYINTERP_NEAREST; old retained skin unchanged; new weights require full deformation QA",
+      "before": {
+        "local_long_folds": 1,
+        "local_tiny_faces": 0,
+        "global_nonmanifold": 0,
+        "global_winding_errors": 0
+      },
+      "after": {
+        "local_long_folds": 91,
+        "local_tiny_faces": 0,
+        "global_nonmanifold": 0,
+        "global_winding_errors": 0
+      },
+      "geometry_guards_passed": false,
+      "all_original_body_coordinates_skin_exact": false,
+      "new_patch_not_anatomy_registration": true
+    },
+    {
+      "body": "Female",
+      "current_disk": {
+        "bounds_ymin_m_xmax_normalized_zmin_zmax": [
+          -0.016,
+          0.06,
+          0.82,
+          0.94
+        ],
+        "all_selected_faces": 27696,
+        "selected_components_faces": [
+          27696
+        ],
+        "patch_faces": 27696,
+        "patch_vertices": 14730,
+        "patch_edges": 42425,
+        "boundary_edges": 634,
+        "boundary_degree_histogram": {
+          "2": 634
+        },
+        "patch_euler_characteristic": 1,
+        "simple_disk_before_extraction": true
+      },
+      "professional_disk": {
+        "bounds_ymin_m_xmax_normalized_zmin_zmax": [
+          0.004,
+          0.032,
+          0.84,
+          0.92
+        ],
+        "all_selected_faces": 339,
+        "selected_components_faces": [
+          339
+        ],
+        "patch_faces": 339,
+        "patch_vertices": 394,
+        "patch_edges": 732,
+        "boundary_edges": 108,
+        "boundary_degree_histogram": {
+          "2": 108
+        },
+        "patch_euler_characteristic": 1,
+        "simple_disk_before_extraction": true
+      },
+      "native_boundary_edges": [
+        634,
+        108
+      ],
+      "native_bridge": {
+        "operator": "bmesh.ops.bridge_loops",
+        "use_pairs": true,
+        "new_vertices": 0,
+        "equal_count_subdivision": false
+      },
+      "xz_projection_failure_not_cleared": true,
+      "native_bridge_faces": 742,
+      "native_bridge_edges": 742,
+      "actual_face_center_edge_midpoint_samples": 1484,
+      "source_vertices": 128389,
+      "candidate_vertices": 114687,
+      "removed_old_interior_points": 14096,
+      "retained_old_points": 114293,
+      "retained_coordinate_skin_hands_163_rest_bones_world_outside_faces_exact": true,
+      "retained_maximum_displacement_m": 0.0,
+      "professional_authored_points_exact": 394,
+      "new_bridge_points": 0,
+      "bridge_to_professional_surface_sample_max_m": 0.009772418066859245,
+      "bridge_to_old_failed_surface_sample_max_m": 0.01109546609222889,
+      "professional_patch_to_old_failed_surface_sample_max_m": 0.01038903184235096,
+      "new_patch_native_skin_transfer": "POLYINTERP_NEAREST; old retained skin unchanged; new weights require full deformation QA",
+      "before": {
+        "local_long_folds": 0,
+        "local_tiny_faces": 0,
+        "global_nonmanifold": 0,
+        "global_winding_errors": 0
+      },
+      "after": {
+        "local_long_folds": 58,
+        "local_tiny_faces": 0,
+        "global_nonmanifold": 0,
+        "global_winding_errors": 0
+      },
+      "geometry_guards_passed": false,
+      "all_original_body_coordinates_skin_exact": false,
+      "new_patch_not_anatomy_registration": true
+    }
+  ]
+}
