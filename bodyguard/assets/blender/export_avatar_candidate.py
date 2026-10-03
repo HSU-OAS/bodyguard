@@ -7,12 +7,22 @@ The artist source is never saved. Run review_avatar.py on both new .blend files.
 
 import json
 import sys
+from importlib.util import module_from_spec, spec_from_file_location
 from math import isfinite
 from pathlib import Path
 
 import bmesh
 import bpy
 from mathutils.bvhtree import BVHTree
+
+# Blender CLI scripts do not add their directory to the normal module path.
+spec = spec_from_file_location(
+    "web_surface_topology", Path(__file__).with_name("web_surface_topology.py")
+)
+assert spec is not None and spec.loader is not None
+surface_helpers = module_from_spec(spec)
+spec.loader.exec_module(surface_helpers)
+final_web_triangles = surface_helpers.final_web_triangles
 
 args = sys.argv[sys.argv.index("--") + 1 :]
 if len(args) not in {2, 3}:
@@ -40,6 +50,7 @@ scene = bpy.context.scene
 models = {}
 offsets = {}
 expected = {}
+surface_topology = []
 
 
 def active(obj):
@@ -151,6 +162,9 @@ for label, file in files.items():
     bmesh.ops.recalc_face_normals(bm, faces=list(bm.faces))
     bm.to_mesh(body.data)
     bm.free()
+    topology_report = final_web_triangles(body.data)
+    surface_topology.append({"gender": label, **topology_report})
+    print("WEB FINAL TRIANGLES", label, json.dumps(topology_report), flush=True)
     print("WEB FIN REPAIR", label, len(fins))
     shape_after = bounds([body])
     assert (
@@ -295,6 +309,7 @@ bpy.ops.wm.save_as_mainfile(filepath=str(roundtrip), compress=True)
             "maximum_skin_influences": 8,
             "transforms_passed": True,
             "geometry_deformation_pending": True,
+            "final_surface_topology": surface_topology,
             "checks": checks,
         },
         indent=2,

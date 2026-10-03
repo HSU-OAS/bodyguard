@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-03 [A196–A213 선택 분할 수정·A211 실제 검수](../assets/blender/review/candidate-a196-a213-review/README.md): 실제GLB 면적0 남11/여4→0/0·뒤 목 tiny0/0을 확인했다. 신체 좌표/skin·각163rest 보존, 장식5행 가중치 미세 차이·source/web/GLB 각118변형·Chrome3개·104PNG/직접열람14·184사본·이전1066대상 중1065live불변/export helper1개 계획적 변경을 기록했다. 원본은 기존A195 그대로이며 새 artist 제작으로 세지 않는다. 뒤 머리–목/웹 장식 외형 P2·PR #9 Draft 미병합·개발A37·2단계/1~6 미완료·최신 얼굴/목·무의상 백색·구조/리깅/승인 기준은 유지한다. 다음은 잔여 연결 접선/edge flow와 웹 장식 국소 보완이다.
+
 > 아래 P0~P7은 기존 시제품의 기술 작업표다. 첫 출시 실행 순서와 단계별 통과 기준은 [`release-plan.md`](release-plan.md)를 따른다. 이전 상태는 시제품 당시 기록이며 현재 상태는 아래 첫 출시 Story·게이트를 따른다.
 
 버전 0.3 · 2026-09-26 · 대응: `prd.md` v0.3, `design.md` v0.3
