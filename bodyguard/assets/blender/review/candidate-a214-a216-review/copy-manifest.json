@@ -1,0 +1,842 @@
+{
+  "copies": [
+    {
+      "file": "artist-candidate.blend",
+      "bytes": 29731199,
+      "sha256": "1bdb837b608b1a2994f26e0fa827c9a57065353d2d242a2efbb6363f45d32000",
+      "decoded_sha256": "1bdb837b608b1a2994f26e0fa827c9a57065353d2d242a2efbb6363f45d32000"
+    },
+    {
+      "file": "web-candidate.blend",
+      "bytes": 31806251,
+      "sha256": "06e324bddf89e8760c3935abc08ac7692fb656a44f6540a13cc56d0bae249d89",
+      "decoded_sha256": "06e324bddf89e8760c3935abc08ac7692fb656a44f6540a13cc56d0bae249d89"
+    },
+    {
+      "file": "web-candidate-roundtrip.blend",
+      "bytes": 25462633,
+      "sha256": "a7eaae31f56db469a8325a65a8320ef1c23e5f3d8b0f3a11f9797eab66587a29",
+      "decoded_sha256": "a7eaae31f56db469a8325a65a8320ef1c23e5f3d8b0f3a11f9797eab66587a29"
+    },
+    {
+      "file": "diagnosis/joint-clearance.json.txt.gz",
+      "bytes": 1463,
+      "sha256": "05072721e4a057e787a9e44a4b74899b1dfcfb7960a0a10f741bf9e54b056871",
+      "decoded_sha256": "ecaa7c6145a3400a7aef6e40f3142ef7169c14e223a9e169aaf441e6e86c1071"
+    },
+    {
+      "file": "diagnosis/body-only-report.json.txt.gz",
+      "bytes": 482,
+      "sha256": "4829734ef0178995385cb6760d1023c2f5a25eeea715b924dd6143c8509ad75e",
+      "decoded_sha256": "209f87c33a49859d55f946952557b9f323807e247a4c58ee38f2ccb402c39200"
+    },
+    {
+      "file": "diagnosis/removal-report.json.txt.gz",
+      "bytes": 864,
+      "sha256": "085c027bb556e4fdd451af5d9a200354b29d931a2989492170b707fb56eece1d",
+      "decoded_sha256": "e80815f6b9061db812f7b7d55138ad9f596e2199b4c1c658172af5e6475adcf4"
+    },
+    {
+      "file": "diagnosis/saved-regression.json.txt.gz",
+      "bytes": 944,
+      "sha256": "b7f160b118cdf51fb4c42074bbaec00d3041e117bcae2d347cd1350ead1761c0",
+      "decoded_sha256": "5bc94ceefa680eceaedbe7c0b3c4d2148c050272546f165c497138202ea273ff"
+    },
+    {
+      "file": "diagnosis/saved-regression-final.json.txt.gz",
+      "bytes": 980,
+      "sha256": "04971756512215cf43fa9d6316ea5de8e47687c1054f5e962085ee47d13e9977",
+      "decoded_sha256": "fc1315aee5d3446f20eea368177ec20c40abbeaf2aab970d8c867c93fb3fa87b"
+    },
+    {
+      "file": "diagnosis/raw-glb-surface.json.txt.gz",
+      "bytes": 527,
+      "sha256": "76dd50a518099744d02b2f26083f6a2cb5053cd61945de67d4d02f489d822f1c",
+      "decoded_sha256": "9683e0325663d1a7f9e03b163ea147a77b8c4add6a7352ecdbb270a7534abe79"
+    },
+    {
+      "file": "diagnosis/body-glb-preservation.json.txt.gz",
+      "bytes": 499,
+      "sha256": "4801122c68f8629b6e72551fd61574b9b53f6c6a6533c9e5a60e1ff7fe7bdd34",
+      "decoded_sha256": "d3e05760c8d80672197c28d8026eb4cbe030034ef4a12693de4c2df4f41d2314"
+    },
+    {
+      "file": "diagnosis/body-only-browser.json.txt.gz",
+      "bytes": 2257,
+      "sha256": "b9df12188806cd52801e9ba3480136e542749f12da43c5b33aba2b602b1ec649",
+      "decoded_sha256": "0d558f3212cf71b1dbdcbb3f2dbd2912ba01ef419ac6b26ab16e2e010c554cb1"
+    },
+    {
+      "file": "diagnosis/browser.json.txt.gz",
+      "bytes": 2394,
+      "sha256": "9a70409db25c222200e1dd6941545f582e5ef4b9863556299d76000823330ffc",
+      "decoded_sha256": "9ed4f52ed4b5307d5f9203405c6bdf45d7ceee11ed1430b18b16e5d0157d5c63"
+    },
+    {
+      "file": "execution-record.json",
+      "bytes": 87955,
+      "sha256": "f79417fc73e5af145f42489b15579ee5a2bde7214487045b0a0b3ec28374a561",
+      "decoded_sha256": "f79417fc73e5af145f42489b15579ee5a2bde7214487045b0a0b3ec28374a561"
+    },
+    {
+      "file": "glb/bodyguard-female-candidate.glb",
+      "bytes": 11542408,
+      "sha256": "dddd3e483b1f487e0978245764b0b847f02e3633220952cf1ed0745305b4592f",
+      "decoded_sha256": "dddd3e483b1f487e0978245764b0b847f02e3633220952cf1ed0745305b4592f"
+    },
+    {
+      "file": "glb/bodyguard-male-candidate.glb",
+      "bytes": 11638276,
+      "sha256": "205310a5f015394455b3ca4c6cd6a3905c3b1516843600d9bc1f2bead358e87f",
+      "decoded_sha256": "205310a5f015394455b3ca4c6cd6a3905c3b1516843600d9bc1f2bead358e87f"
+    },
+    {
+      "file": "glb/roundtrip-report.json",
+      "bytes": 1877,
+      "sha256": "121329d4467049a5497b719015fe38a66023d6131055c4e86c53d80c0bad3c47",
+      "decoded_sha256": "121329d4467049a5497b719015fe38a66023d6131055c4e86c53d80c0bad3c47"
+    },
+    {
+      "file": "body-only-glb/bodyguard-female-candidate.glb",
+      "bytes": 11642328,
+      "sha256": "d76722e17ec1551ab9042fd7a2ca034969d66110387b8dfff0a5af5af867a843",
+      "decoded_sha256": "d76722e17ec1551ab9042fd7a2ca034969d66110387b8dfff0a5af5af867a843"
+    },
+    {
+      "file": "body-only-glb/bodyguard-male-candidate.glb",
+      "bytes": 11738156,
+      "sha256": "07442103d5d30357c222b5d0945f1d0b733c2110f59f8f72cf9c3df555832c91",
+      "decoded_sha256": "07442103d5d30357c222b5d0945f1d0b733c2110f59f8f72cf9c3df555832c91"
+    },
+    {
+      "file": "artist-review/faceless-body-back-female.png",
+      "bytes": 840235,
+      "sha256": "e94c642f4ed01b0a10be0d533d85adf69fe059ccd8c075b0ca6084bc63c7ca6d",
+      "decoded_sha256": "e94c642f4ed01b0a10be0d533d85adf69fe059ccd8c075b0ca6084bc63c7ca6d"
+    },
+    {
+      "file": "artist-review/faceless-body-back-male.png",
+      "bytes": 846658,
+      "sha256": "ddfc2081e2beee1026615fb1dbea378ee205b7467c110c205f3441e9473b065b",
+      "decoded_sha256": "ddfc2081e2beee1026615fb1dbea378ee205b7467c110c205f3441e9473b065b"
+    },
+    {
+      "file": "artist-review/faceless-body-side-female.png",
+      "bytes": 825598,
+      "sha256": "c1337113c63d08160dbc89d9dd7b43c299dfeb6659818b655c0d433a4562a473",
+      "decoded_sha256": "c1337113c63d08160dbc89d9dd7b43c299dfeb6659818b655c0d433a4562a473"
+    },
+    {
+      "file": "artist-review/faceless-body-side-male.png",
+      "bytes": 832756,
+      "sha256": "34f32c4fc5ab894b1518713cba0da855d49d805479d11e22e5467dc56d8c1876",
+      "decoded_sha256": "34f32c4fc5ab894b1518713cba0da855d49d805479d11e22e5467dc56d8c1876"
+    },
+    {
+      "file": "artist-review/faceless-front.png",
+      "bytes": 1314008,
+      "sha256": "e7eb82256026c19f851d193f5c4e61d850d947bc69de63a8ba0b07465d2ffaab",
+      "decoded_sha256": "e7eb82256026c19f851d193f5c4e61d850d947bc69de63a8ba0b07465d2ffaab"
+    },
+    {
+      "file": "artist-review/faceless-hand-female.png",
+      "bytes": 821140,
+      "sha256": "51371f213138ce052526684daebc43cd77d9652d822acc2770773904fbeb9f8c",
+      "decoded_sha256": "51371f213138ce052526684daebc43cd77d9652d822acc2770773904fbeb9f8c"
+    },
+    {
+      "file": "artist-review/faceless-hand-male.png",
+      "bytes": 824506,
+      "sha256": "f4611be49b712e448c3b7d42082a55acb2461d2f81d318ab5fb5a0d7149713ee",
+      "decoded_sha256": "f4611be49b712e448c3b7d42082a55acb2461d2f81d318ab5fb5a0d7149713ee"
+    },
+    {
+      "file": "artist-review/faceless-knee-female.png",
+      "bytes": 841599,
+      "sha256": "f57cc84250b83f2d4860b67aa238d72d4318f025b885dd02d9f814420e6434e3",
+      "decoded_sha256": "f57cc84250b83f2d4860b67aa238d72d4318f025b885dd02d9f814420e6434e3"
+    },
+    {
+      "file": "artist-review/faceless-knee-male.png",
+      "bytes": 845846,
+      "sha256": "530ac11637b6f5fc81e0a73753f3e5dbbde87e398d8b4cc7deb04d1b1a033630",
+      "decoded_sha256": "530ac11637b6f5fc81e0a73753f3e5dbbde87e398d8b4cc7deb04d1b1a033630"
+    },
+    {
+      "file": "artist-review/faceless-neck-female-left.png",
+      "bytes": 841420,
+      "sha256": "a4831fcf2cc93a54652c114688f4a39f8de955feb47c3797b93c60a4df53aae9",
+      "decoded_sha256": "a4831fcf2cc93a54652c114688f4a39f8de955feb47c3797b93c60a4df53aae9"
+    },
+    {
+      "file": "artist-review/faceless-neck-female-right.png",
+      "bytes": 842228,
+      "sha256": "b12f12197437c9b199b39ed3bd796531f300246f089085a22a560c2127fb7238",
+      "decoded_sha256": "b12f12197437c9b199b39ed3bd796531f300246f089085a22a560c2127fb7238"
+    },
+    {
+      "file": "artist-review/faceless-neck-male-left.png",
+      "bytes": 854048,
+      "sha256": "2dd31b6c90987e87710e7240e3c9bb09f2b03cd13d01a6e7c990e49b5ba28cfb",
+      "decoded_sha256": "2dd31b6c90987e87710e7240e3c9bb09f2b03cd13d01a6e7c990e49b5ba28cfb"
+    },
+    {
+      "file": "artist-review/faceless-neck-male-right.png",
+      "bytes": 854794,
+      "sha256": "d1d6829e286ee5e498af62127cdf9c6c9f9d4f366a6f549b6e5d28e59114b438",
+      "decoded_sha256": "d1d6829e286ee5e498af62127cdf9c6c9f9d4f366a6f549b6e5d28e59114b438"
+    },
+    {
+      "file": "artist-review/faceless-quarter.png",
+      "bytes": 1319738,
+      "sha256": "305db49fa0cca16167a0d633d5afd32860243694875f60e90523aeec3be7a33f",
+      "decoded_sha256": "305db49fa0cca16167a0d633d5afd32860243694875f60e90523aeec3be7a33f"
+    },
+    {
+      "file": "artist-review/faceless-side-female.png",
+      "bytes": 839163,
+      "sha256": "afbdfeb89fde4868fac1a5f330d11db92e1c0e5c3e58f6ec79d782ac764a6d06",
+      "decoded_sha256": "afbdfeb89fde4868fac1a5f330d11db92e1c0e5c3e58f6ec79d782ac764a6d06"
+    },
+    {
+      "file": "artist-review/faceless-side-male.png",
+      "bytes": 843652,
+      "sha256": "323a007223d4e1d21b1f240b2e4fcc07af8e4b70a7ada25f27a17a995ce57603",
+      "decoded_sha256": "323a007223d4e1d21b1f240b2e4fcc07af8e4b70a7ada25f27a17a995ce57603"
+    },
+    {
+      "file": "artist-review/technical-female-clavicle.png",
+      "bytes": 835696,
+      "sha256": "af91882e76faf2e4cc07ed55144bb380d4117a878e94360e426a8dbc083d4d5f",
+      "decoded_sha256": "af91882e76faf2e4cc07ed55144bb380d4117a878e94360e426a8dbc083d4d5f"
+    },
+    {
+      "file": "artist-review/technical-female-finger2-1.png",
+      "bytes": 835530,
+      "sha256": "2cd7c031ea0faf3c01a382067c833987172c8d5c1debdfa994dd7fd2e0898ead",
+      "decoded_sha256": "2cd7c031ea0faf3c01a382067c833987172c8d5c1debdfa994dd7fd2e0898ead"
+    },
+    {
+      "file": "artist-review/technical-female-foot.png",
+      "bytes": 835029,
+      "sha256": "d53945b1f0efb2001731f1055b0726b058136e48abcbe92cf76a7efecef988fc",
+      "decoded_sha256": "d53945b1f0efb2001731f1055b0726b058136e48abcbe92cf76a7efecef988fc"
+    },
+    {
+      "file": "artist-review/technical-female-lowerarm01.png",
+      "bytes": 835161,
+      "sha256": "7bc8190deef2deed46a12be8222cf37bc00f9aac3eda1bfbef9742b79289210f",
+      "decoded_sha256": "7bc8190deef2deed46a12be8222cf37bc00f9aac3eda1bfbef9742b79289210f"
+    },
+    {
+      "file": "artist-review/technical-female-lowerleg01.png",
+      "bytes": 836517,
+      "sha256": "c56ef4fb3ffb642afda2c1a04de086cfeb618cc693d7b394f4bedd19f1ce38e7",
+      "decoded_sha256": "c56ef4fb3ffb642afda2c1a04de086cfeb618cc693d7b394f4bedd19f1ce38e7"
+    },
+    {
+      "file": "artist-review/technical-female-spine02.png",
+      "bytes": 835581,
+      "sha256": "2a16831e41bf5aa426cbaad188dfca1b53b789dd675114a3e8009dfca55df7a2",
+      "decoded_sha256": "2a16831e41bf5aa426cbaad188dfca1b53b789dd675114a3e8009dfca55df7a2"
+    },
+    {
+      "file": "artist-review/technical-female-upperarm01.png",
+      "bytes": 839290,
+      "sha256": "b8a3fead0c1f5b5d24116b375fd363d9aa4c2b6c419bb4b1bfb6ecd877f93534",
+      "decoded_sha256": "b8a3fead0c1f5b5d24116b375fd363d9aa4c2b6c419bb4b1bfb6ecd877f93534"
+    },
+    {
+      "file": "artist-review/technical-female-upperleg01.png",
+      "bytes": 834401,
+      "sha256": "8460786fa3504ba940b8dac794a07648764486d3451ded0c30b9119062484404",
+      "decoded_sha256": "8460786fa3504ba940b8dac794a07648764486d3451ded0c30b9119062484404"
+    },
+    {
+      "file": "artist-review/technical-female-wrist.png",
+      "bytes": 835963,
+      "sha256": "a88ae241114d9d1350893595d072d0c3958121c9c3120f65b2ac621e43668b69",
+      "decoded_sha256": "a88ae241114d9d1350893595d072d0c3958121c9c3120f65b2ac621e43668b69"
+    },
+    {
+      "file": "artist-review/technical-male-clavicle.png",
+      "bytes": 844275,
+      "sha256": "e41d57acba77aa529250022981399cbe12c1124f8f3c33536979d275f8a46222",
+      "decoded_sha256": "e41d57acba77aa529250022981399cbe12c1124f8f3c33536979d275f8a46222"
+    },
+    {
+      "file": "artist-review/technical-male-finger2-1.png",
+      "bytes": 844031,
+      "sha256": "d6456045bd74029a5dfecbc78bed48e5fb7fbd0b4e22d307457f306bff916bf2",
+      "decoded_sha256": "d6456045bd74029a5dfecbc78bed48e5fb7fbd0b4e22d307457f306bff916bf2"
+    },
+    {
+      "file": "artist-review/technical-male-foot.png",
+      "bytes": 844412,
+      "sha256": "d1936295cd868781ea8c0b1959635701069cc7cf4367430f46378d6f03e910d8",
+      "decoded_sha256": "d1936295cd868781ea8c0b1959635701069cc7cf4367430f46378d6f03e910d8"
+    },
+    {
+      "file": "artist-review/technical-male-lowerarm01.png",
+      "bytes": 844938,
+      "sha256": "88a3d2031242ad70fccbda8aa559dbab30dbe6a61a768a84a3008b90d5933033",
+      "decoded_sha256": "88a3d2031242ad70fccbda8aa559dbab30dbe6a61a768a84a3008b90d5933033"
+    },
+    {
+      "file": "artist-review/technical-male-lowerleg01.png",
+      "bytes": 845969,
+      "sha256": "f98c6ef92265d668856e9f42f4fb09ce7d1b587226946a6379478ecc5e7e6eb7",
+      "decoded_sha256": "f98c6ef92265d668856e9f42f4fb09ce7d1b587226946a6379478ecc5e7e6eb7"
+    },
+    {
+      "file": "artist-review/technical-male-spine02.png",
+      "bytes": 844017,
+      "sha256": "dcdde76b6b4d07c70225ca5b08ba98b8cd8d061d269ed921e30d23d9df7e576b",
+      "decoded_sha256": "dcdde76b6b4d07c70225ca5b08ba98b8cd8d061d269ed921e30d23d9df7e576b"
+    },
+    {
+      "file": "artist-review/technical-male-upperarm01.png",
+      "bytes": 849669,
+      "sha256": "b720cb799da1f8ac4bd140128b0a61ea91ba081864aa771bff4cc0115726c3fe",
+      "decoded_sha256": "b720cb799da1f8ac4bd140128b0a61ea91ba081864aa771bff4cc0115726c3fe"
+    },
+    {
+      "file": "artist-review/technical-male-upperleg01.png",
+      "bytes": 842554,
+      "sha256": "df486e20008467b7396b0058c430958528b5cfe4fc7c2d74e0ea8ea74511ea4b",
+      "decoded_sha256": "df486e20008467b7396b0058c430958528b5cfe4fc7c2d74e0ea8ea74511ea4b"
+    },
+    {
+      "file": "artist-review/technical-male-wrist.png",
+      "bytes": 844218,
+      "sha256": "7aef45d5376c9b122f29cf996b72d05ca1c42b75b64241b0efcb1737237c71ee",
+      "decoded_sha256": "7aef45d5376c9b122f29cf996b72d05ca1c42b75b64241b0efcb1737237c71ee"
+    },
+    {
+      "file": "artist-review/deformation-report.json.txt.gz",
+      "bytes": 2191,
+      "sha256": "ceed1e45dcd3daad57aad84d4ebdac8cb2686cd89bc96fbe99357ca5e717ea7a",
+      "decoded_sha256": "a8107dd10ed4c8ed7d6794a632af2ab3ec187d3c1477dccec3000c286280d651"
+    },
+    {
+      "file": "web-review/faceless-body-back-female.png",
+      "bytes": 840500,
+      "sha256": "9fed91b400f7dbad4a8a73f92e48904cbab12604098f2e5e7df8f8336ab6a2c7",
+      "decoded_sha256": "9fed91b400f7dbad4a8a73f92e48904cbab12604098f2e5e7df8f8336ab6a2c7"
+    },
+    {
+      "file": "web-review/faceless-body-back-male.png",
+      "bytes": 847319,
+      "sha256": "1f9573b26d3aaa976d705b5a4124c6676923794df11a67f120190a50857b49a8",
+      "decoded_sha256": "1f9573b26d3aaa976d705b5a4124c6676923794df11a67f120190a50857b49a8"
+    },
+    {
+      "file": "web-review/faceless-body-side-female.png",
+      "bytes": 825950,
+      "sha256": "b164c3c569c6a655a8efbce9ae68e6c5a222b3f2fe508065fef1e6d9e7760fb5",
+      "decoded_sha256": "b164c3c569c6a655a8efbce9ae68e6c5a222b3f2fe508065fef1e6d9e7760fb5"
+    },
+    {
+      "file": "web-review/faceless-body-side-male.png",
+      "bytes": 832676,
+      "sha256": "4fdeb8e8306aad7cff376e29ec2a65acb163f9fcd195d6833a566dc38ef186e4",
+      "decoded_sha256": "4fdeb8e8306aad7cff376e29ec2a65acb163f9fcd195d6833a566dc38ef186e4"
+    },
+    {
+      "file": "web-review/faceless-front.png",
+      "bytes": 1314448,
+      "sha256": "9dbd8b6cf1bd9c1c9d14fbad7bd0e1b53afaf9553fb5fe9f81cddfd93533880e",
+      "decoded_sha256": "9dbd8b6cf1bd9c1c9d14fbad7bd0e1b53afaf9553fb5fe9f81cddfd93533880e"
+    },
+    {
+      "file": "web-review/faceless-hand-female.png",
+      "bytes": 820489,
+      "sha256": "8caea82fd72e713f2df93b1d4156ebc6ef034dbb153468cac1da864888cdf43c",
+      "decoded_sha256": "8caea82fd72e713f2df93b1d4156ebc6ef034dbb153468cac1da864888cdf43c"
+    },
+    {
+      "file": "web-review/faceless-hand-male.png",
+      "bytes": 824168,
+      "sha256": "bf94a73751c199f6bb73bd9299cbfd97ac668ea413f354d4e133a6a8e54617e2",
+      "decoded_sha256": "bf94a73751c199f6bb73bd9299cbfd97ac668ea413f354d4e133a6a8e54617e2"
+    },
+    {
+      "file": "web-review/faceless-knee-female.png",
+      "bytes": 841711,
+      "sha256": "0d66eabe7797c2613f071deb1f30dc852a43d3245e80b06d98c2891b547b588e",
+      "decoded_sha256": "0d66eabe7797c2613f071deb1f30dc852a43d3245e80b06d98c2891b547b588e"
+    },
+    {
+      "file": "web-review/faceless-knee-male.png",
+      "bytes": 845482,
+      "sha256": "8b6aacb13ee6bdf4012216c52d03b9d3db23d51ff90eb46661768a410e6d4284",
+      "decoded_sha256": "8b6aacb13ee6bdf4012216c52d03b9d3db23d51ff90eb46661768a410e6d4284"
+    },
+    {
+      "file": "web-review/faceless-neck-female-left.png",
+      "bytes": 841405,
+      "sha256": "ef0bfceb968c06f9caddcb60ae11f171e75f2747a766d4f3b9b731a66da3d0ff",
+      "decoded_sha256": "ef0bfceb968c06f9caddcb60ae11f171e75f2747a766d4f3b9b731a66da3d0ff"
+    },
+    {
+      "file": "web-review/faceless-neck-female-right.png",
+      "bytes": 841990,
+      "sha256": "c6416ecabfed29cade03d46b85175df736db98d26516ab41d7d8531cb995bfe5",
+      "decoded_sha256": "c6416ecabfed29cade03d46b85175df736db98d26516ab41d7d8531cb995bfe5"
+    },
+    {
+      "file": "web-review/faceless-neck-male-left.png",
+      "bytes": 853611,
+      "sha256": "2d6ea887b433319ca82c17d8aebec04cb409959e2a5757bac09fd231aab94981",
+      "decoded_sha256": "2d6ea887b433319ca82c17d8aebec04cb409959e2a5757bac09fd231aab94981"
+    },
+    {
+      "file": "web-review/faceless-neck-male-right.png",
+      "bytes": 854629,
+      "sha256": "69488f71cdba25815a2319f02f7b640d8f55fe304d38e023be5a45d173e3fcd2",
+      "decoded_sha256": "69488f71cdba25815a2319f02f7b640d8f55fe304d38e023be5a45d173e3fcd2"
+    },
+    {
+      "file": "web-review/faceless-quarter.png",
+      "bytes": 1319745,
+      "sha256": "0f3f5030c729750d809dbb846310db6bd6632433610322d60ca168af5a145cdf",
+      "decoded_sha256": "0f3f5030c729750d809dbb846310db6bd6632433610322d60ca168af5a145cdf"
+    },
+    {
+      "file": "web-review/faceless-side-female.png",
+      "bytes": 839100,
+      "sha256": "92607b3e96a60782a6934351459a49bdf816eaa79d4e8d7a7e03597c26fc662f",
+      "decoded_sha256": "92607b3e96a60782a6934351459a49bdf816eaa79d4e8d7a7e03597c26fc662f"
+    },
+    {
+      "file": "web-review/faceless-side-male.png",
+      "bytes": 843410,
+      "sha256": "47eeca34de00997ceab89cba6409c9fd8c2917f9e62471179b6d5f8e92fb7ecd",
+      "decoded_sha256": "47eeca34de00997ceab89cba6409c9fd8c2917f9e62471179b6d5f8e92fb7ecd"
+    },
+    {
+      "file": "web-review/technical-female-clavicle.png",
+      "bytes": 835050,
+      "sha256": "be1fb55a9963a585a064b95639e1dd820a0bea566fd54327c0c4aea91c3237e4",
+      "decoded_sha256": "be1fb55a9963a585a064b95639e1dd820a0bea566fd54327c0c4aea91c3237e4"
+    },
+    {
+      "file": "web-review/technical-female-finger2-1.png",
+      "bytes": 835554,
+      "sha256": "3706b62a1e4837cf42dd9c88081963fdfd0c64821e059c5a442a436020330f50",
+      "decoded_sha256": "3706b62a1e4837cf42dd9c88081963fdfd0c64821e059c5a442a436020330f50"
+    },
+    {
+      "file": "web-review/technical-female-foot.png",
+      "bytes": 835418,
+      "sha256": "5f3b028e78baf271d39c8115e325bc66985087ba313f0f55d3bff3eb275d3985",
+      "decoded_sha256": "5f3b028e78baf271d39c8115e325bc66985087ba313f0f55d3bff3eb275d3985"
+    },
+    {
+      "file": "web-review/technical-female-lowerarm01.png",
+      "bytes": 835525,
+      "sha256": "4919953b80a974b2b4da67d8387c46a1aa255d58b5161a1743c96a87500d8904",
+      "decoded_sha256": "4919953b80a974b2b4da67d8387c46a1aa255d58b5161a1743c96a87500d8904"
+    },
+    {
+      "file": "web-review/technical-female-lowerleg01.png",
+      "bytes": 836493,
+      "sha256": "fee8a57cbc24e958bbcbbd46109a3ac43c5f20e4ffde9f5dffd22796bdf4fec8",
+      "decoded_sha256": "fee8a57cbc24e958bbcbbd46109a3ac43c5f20e4ffde9f5dffd22796bdf4fec8"
+    },
+    {
+      "file": "web-review/technical-female-spine02.png",
+      "bytes": 835632,
+      "sha256": "af5a6aed1970fe70629efdb55c3c97ec241fc608c292d342e18301defc733513",
+      "decoded_sha256": "af5a6aed1970fe70629efdb55c3c97ec241fc608c292d342e18301defc733513"
+    },
+    {
+      "file": "web-review/technical-female-upperarm01.png",
+      "bytes": 839033,
+      "sha256": "2c5a54af978759813d485f4e045a6756f5d762e044cec34c74de8e8d2baab56b",
+      "decoded_sha256": "2c5a54af978759813d485f4e045a6756f5d762e044cec34c74de8e8d2baab56b"
+    },
+    {
+      "file": "web-review/technical-female-upperleg01.png",
+      "bytes": 834305,
+      "sha256": "c7e72ad971f0c54c85d396ba8b2ce21deaed5e4fec9bd73e9ff4f381589d1325",
+      "decoded_sha256": "c7e72ad971f0c54c85d396ba8b2ce21deaed5e4fec9bd73e9ff4f381589d1325"
+    },
+    {
+      "file": "web-review/technical-female-wrist.png",
+      "bytes": 835898,
+      "sha256": "5c836a8556ad72021c436d5310fec7469df865c937cc7dc150f5fed0ac4b5ac4",
+      "decoded_sha256": "5c836a8556ad72021c436d5310fec7469df865c937cc7dc150f5fed0ac4b5ac4"
+    },
+    {
+      "file": "web-review/technical-male-clavicle.png",
+      "bytes": 844502,
+      "sha256": "f75379b8aecb5b948761b940d6351fd70864938859dae95debb8c89ad7673ecb",
+      "decoded_sha256": "f75379b8aecb5b948761b940d6351fd70864938859dae95debb8c89ad7673ecb"
+    },
+    {
+      "file": "web-review/technical-male-finger2-1.png",
+      "bytes": 844533,
+      "sha256": "54fcfa0b814c2a89e7496a7002f14226cc2a191ac494225de4c6f18db5a0e5fa",
+      "decoded_sha256": "54fcfa0b814c2a89e7496a7002f14226cc2a191ac494225de4c6f18db5a0e5fa"
+    },
+    {
+      "file": "web-review/technical-male-foot.png",
+      "bytes": 843937,
+      "sha256": "d5e85d3d09b771768ffbe52edcc599a74ee3f30ac9c7879b99e9a35ebd71e0ea",
+      "decoded_sha256": "d5e85d3d09b771768ffbe52edcc599a74ee3f30ac9c7879b99e9a35ebd71e0ea"
+    },
+    {
+      "file": "web-review/technical-male-lowerarm01.png",
+      "bytes": 845338,
+      "sha256": "8ba8ba95fb86b6f12c449afec284ec59c7d3f4ffb7438b00a2745f1fa36861f3",
+      "decoded_sha256": "8ba8ba95fb86b6f12c449afec284ec59c7d3f4ffb7438b00a2745f1fa36861f3"
+    },
+    {
+      "file": "web-review/technical-male-lowerleg01.png",
+      "bytes": 846303,
+      "sha256": "032c3234245e49b2009f05f065d80cf1687b7147a9d36bd71de5b99762082a4c",
+      "decoded_sha256": "032c3234245e49b2009f05f065d80cf1687b7147a9d36bd71de5b99762082a4c"
+    },
+    {
+      "file": "web-review/technical-male-spine02.png",
+      "bytes": 844539,
+      "sha256": "e1dc56e281bbba62528eed64a4788c623c825ad86a4293a1ec81abed09b6eaa2",
+      "decoded_sha256": "e1dc56e281bbba62528eed64a4788c623c825ad86a4293a1ec81abed09b6eaa2"
+    },
+    {
+      "file": "web-review/technical-male-upperarm01.png",
+      "bytes": 849558,
+      "sha256": "7e6c17647f85f2d194a2a9e14068bc30099a6ef28375a7ecbcc2e47c76e5cae8",
+      "decoded_sha256": "7e6c17647f85f2d194a2a9e14068bc30099a6ef28375a7ecbcc2e47c76e5cae8"
+    },
+    {
+      "file": "web-review/technical-male-upperleg01.png",
+      "bytes": 842968,
+      "sha256": "8e9b9e22e9756cb3633d83cac13221e0df5e91025ca2fc6c249564eff17edaa7",
+      "decoded_sha256": "8e9b9e22e9756cb3633d83cac13221e0df5e91025ca2fc6c249564eff17edaa7"
+    },
+    {
+      "file": "web-review/technical-male-wrist.png",
+      "bytes": 844386,
+      "sha256": "32931c69c014d60c4bcf608d8dbddfe6aec33d40951f58be4e2ed86e2d03a235",
+      "decoded_sha256": "32931c69c014d60c4bcf608d8dbddfe6aec33d40951f58be4e2ed86e2d03a235"
+    },
+    {
+      "file": "web-review/deformation-report.json.txt.gz",
+      "bytes": 2204,
+      "sha256": "96b90e8e1434f5b8c012eca09a60b746006c9ae3469ab28a5ab5e35eaffd07ac",
+      "decoded_sha256": "33366944d94fc5386459e024c5b9633e55f298b21a6ec401674bb2c2343f7635"
+    },
+    {
+      "file": "roundtrip-review/faceless-body-back-female.png",
+      "bytes": 840231,
+      "sha256": "4479c10aee8f1ea6bc0114dcebe8dc99b30592bd3acbb7e3eb3005f38934b2e8",
+      "decoded_sha256": "4479c10aee8f1ea6bc0114dcebe8dc99b30592bd3acbb7e3eb3005f38934b2e8"
+    },
+    {
+      "file": "roundtrip-review/faceless-body-back-male.png",
+      "bytes": 847447,
+      "sha256": "f934ba1928911b5a8afaffa3bb6ff5531261d2fb684c5c66ee7dba7957c39e5c",
+      "decoded_sha256": "f934ba1928911b5a8afaffa3bb6ff5531261d2fb684c5c66ee7dba7957c39e5c"
+    },
+    {
+      "file": "roundtrip-review/faceless-body-side-female.png",
+      "bytes": 826168,
+      "sha256": "05802f7843d9b2b1f446d18b62abb7c969b8fa40a42026aaff8553e020b9c3c4",
+      "decoded_sha256": "05802f7843d9b2b1f446d18b62abb7c969b8fa40a42026aaff8553e020b9c3c4"
+    },
+    {
+      "file": "roundtrip-review/faceless-body-side-male.png",
+      "bytes": 832334,
+      "sha256": "38cfddb5d00fe684cef268c57e7d8683377b79a0ece9688984f73365d5d8c216",
+      "decoded_sha256": "38cfddb5d00fe684cef268c57e7d8683377b79a0ece9688984f73365d5d8c216"
+    },
+    {
+      "file": "roundtrip-review/faceless-front.png",
+      "bytes": 1314617,
+      "sha256": "174dd2248978a80df3e357a0ce79640b58ae06cc9be94c339e81b2d81708025c",
+      "decoded_sha256": "174dd2248978a80df3e357a0ce79640b58ae06cc9be94c339e81b2d81708025c"
+    },
+    {
+      "file": "roundtrip-review/faceless-hand-female.png",
+      "bytes": 820975,
+      "sha256": "0285965aa4fd512e8d656c9217b4bbfa20bb390a75a6958cd7be64ea009b3df0",
+      "decoded_sha256": "0285965aa4fd512e8d656c9217b4bbfa20bb390a75a6958cd7be64ea009b3df0"
+    },
+    {
+      "file": "roundtrip-review/faceless-hand-male.png",
+      "bytes": 824211,
+      "sha256": "d649bd500db6a621942220f7930b26cc36c0a77931eb08648292ab1a93cd2e67",
+      "decoded_sha256": "d649bd500db6a621942220f7930b26cc36c0a77931eb08648292ab1a93cd2e67"
+    },
+    {
+      "file": "roundtrip-review/faceless-knee-female.png",
+      "bytes": 841843,
+      "sha256": "f8a5c19ca3a90978448b56f96fe74c5c94e2e91f89a4575b9cb6b4ac0e20b549",
+      "decoded_sha256": "f8a5c19ca3a90978448b56f96fe74c5c94e2e91f89a4575b9cb6b4ac0e20b549"
+    },
+    {
+      "file": "roundtrip-review/faceless-knee-male.png",
+      "bytes": 845580,
+      "sha256": "8f9c6eedff520af63d897ba62ccf460c38a3de942f538139c1a146000ff01276",
+      "decoded_sha256": "8f9c6eedff520af63d897ba62ccf460c38a3de942f538139c1a146000ff01276"
+    },
+    {
+      "file": "roundtrip-review/faceless-neck-female-left.png",
+      "bytes": 841589,
+      "sha256": "278a7c87aeb7dcf4bbb1999dd1cf9f068e32321f861ccd3c80b5c5d4e670105b",
+      "decoded_sha256": "278a7c87aeb7dcf4bbb1999dd1cf9f068e32321f861ccd3c80b5c5d4e670105b"
+    },
+    {
+      "file": "roundtrip-review/faceless-neck-female-right.png",
+      "bytes": 842406,
+      "sha256": "6071b8ceaefe3223a9a8bf3390786b99ba30a3fd497942abda286e28263dd724",
+      "decoded_sha256": "6071b8ceaefe3223a9a8bf3390786b99ba30a3fd497942abda286e28263dd724"
+    },
+    {
+      "file": "roundtrip-review/faceless-neck-male-left.png",
+      "bytes": 853438,
+      "sha256": "0d3675f5e2a11c6e0c0888d8e1942f9f5cf334a6f421a1f263e6d2bb83b90c38",
+      "decoded_sha256": "0d3675f5e2a11c6e0c0888d8e1942f9f5cf334a6f421a1f263e6d2bb83b90c38"
+    },
+    {
+      "file": "roundtrip-review/faceless-neck-male-right.png",
+      "bytes": 854780,
+      "sha256": "294576eacc07014bbd3fd9b6882bcd159d39b3ce430fd872be0fc7ba7988ee9c",
+      "decoded_sha256": "294576eacc07014bbd3fd9b6882bcd159d39b3ce430fd872be0fc7ba7988ee9c"
+    },
+    {
+      "file": "roundtrip-review/faceless-quarter.png",
+      "bytes": 1319905,
+      "sha256": "ae713ef7130c9b50b33ad86b92e04307f150f8823d718c03d23925b513799e91",
+      "decoded_sha256": "ae713ef7130c9b50b33ad86b92e04307f150f8823d718c03d23925b513799e91"
+    },
+    {
+      "file": "roundtrip-review/faceless-side-female.png",
+      "bytes": 839200,
+      "sha256": "66a71f04f7d73764475953afff2eb2d06961334efef63f5d7e39bdb77d6cc15a",
+      "decoded_sha256": "66a71f04f7d73764475953afff2eb2d06961334efef63f5d7e39bdb77d6cc15a"
+    },
+    {
+      "file": "roundtrip-review/faceless-side-male.png",
+      "bytes": 843305,
+      "sha256": "2826f4b3b2254440627bd82b9a36c20b3d52afdd4e51cd88918d2a97b60a193b",
+      "decoded_sha256": "2826f4b3b2254440627bd82b9a36c20b3d52afdd4e51cd88918d2a97b60a193b"
+    },
+    {
+      "file": "roundtrip-review/technical-female-clavicle.png",
+      "bytes": 835763,
+      "sha256": "88ea5c72b8fdfbd4bcf057e5f554bc45b99356cceb3f53efc16e03c8833175b7",
+      "decoded_sha256": "88ea5c72b8fdfbd4bcf057e5f554bc45b99356cceb3f53efc16e03c8833175b7"
+    },
+    {
+      "file": "roundtrip-review/technical-female-finger2-1.png",
+      "bytes": 835301,
+      "sha256": "5616702353986cc3961e2761f36ddb4a15a12195d9ebfcf8970f4030fd5586c6",
+      "decoded_sha256": "5616702353986cc3961e2761f36ddb4a15a12195d9ebfcf8970f4030fd5586c6"
+    },
+    {
+      "file": "roundtrip-review/technical-female-foot.png",
+      "bytes": 835169,
+      "sha256": "0070a20fbb8f81b36ed15886c9b07c62cbf5a74ebba475d090c461a18fcca08a",
+      "decoded_sha256": "0070a20fbb8f81b36ed15886c9b07c62cbf5a74ebba475d090c461a18fcca08a"
+    },
+    {
+      "file": "roundtrip-review/technical-female-lowerarm01.png",
+      "bytes": 835908,
+      "sha256": "f18801dad742846f05f1a6a8962044da80d4756df8b4eadaf84bb0ff8b68d423",
+      "decoded_sha256": "f18801dad742846f05f1a6a8962044da80d4756df8b4eadaf84bb0ff8b68d423"
+    },
+    {
+      "file": "roundtrip-review/technical-female-lowerleg01.png",
+      "bytes": 836645,
+      "sha256": "11765ea4f301e64faed25ea0cc9e8942ec8d52b4fea8d17e063de967b01c209a",
+      "decoded_sha256": "11765ea4f301e64faed25ea0cc9e8942ec8d52b4fea8d17e063de967b01c209a"
+    },
+    {
+      "file": "roundtrip-review/technical-female-spine02.png",
+      "bytes": 836085,
+      "sha256": "02f1d8d55873ca418834cf7ef8675fcbe8639f6bc3f3d0f55cdceef88eae08aa",
+      "decoded_sha256": "02f1d8d55873ca418834cf7ef8675fcbe8639f6bc3f3d0f55cdceef88eae08aa"
+    },
+    {
+      "file": "roundtrip-review/technical-female-upperarm01.png",
+      "bytes": 839330,
+      "sha256": "1610a5e39c49e7ee570d04470d1a35e08fd9b20c3ff230d4908cf6c53432ef4a",
+      "decoded_sha256": "1610a5e39c49e7ee570d04470d1a35e08fd9b20c3ff230d4908cf6c53432ef4a"
+    },
+    {
+      "file": "roundtrip-review/technical-female-upperleg01.png",
+      "bytes": 834027,
+      "sha256": "06087b3b9e38d2b1227a5cc17c95d41916310a537b63bb20b84582bab195823c",
+      "decoded_sha256": "06087b3b9e38d2b1227a5cc17c95d41916310a537b63bb20b84582bab195823c"
+    },
+    {
+      "file": "roundtrip-review/technical-female-wrist.png",
+      "bytes": 835595,
+      "sha256": "ec0560cb3bcb3df2ea982d8527a7ae8b339f64ebe565a194864d223f8350dc94",
+      "decoded_sha256": "ec0560cb3bcb3df2ea982d8527a7ae8b339f64ebe565a194864d223f8350dc94"
+    },
+    {
+      "file": "roundtrip-review/technical-male-clavicle.png",
+      "bytes": 844746,
+      "sha256": "d1498a6a34d99aa4128695f25cb336d9485373303cb739dd13586510f1e2ec16",
+      "decoded_sha256": "d1498a6a34d99aa4128695f25cb336d9485373303cb739dd13586510f1e2ec16"
+    },
+    {
+      "file": "roundtrip-review/technical-male-finger2-1.png",
+      "bytes": 844307,
+      "sha256": "67024f5f36f9f5e99b2ea48c0f41b13e084e37be1be785ea5352422a8a77172a",
+      "decoded_sha256": "67024f5f36f9f5e99b2ea48c0f41b13e084e37be1be785ea5352422a8a77172a"
+    },
+    {
+      "file": "roundtrip-review/technical-male-foot.png",
+      "bytes": 844563,
+      "sha256": "9f951409f61dff5d79e2a695a7a56033aedf07b120e24b0fc38f240107b91588",
+      "decoded_sha256": "9f951409f61dff5d79e2a695a7a56033aedf07b120e24b0fc38f240107b91588"
+    },
+    {
+      "file": "roundtrip-review/technical-male-lowerarm01.png",
+      "bytes": 845388,
+      "sha256": "194752859551e191450cb87aea220d735d1996e0877db782386a2ad65e2ed7cb",
+      "decoded_sha256": "194752859551e191450cb87aea220d735d1996e0877db782386a2ad65e2ed7cb"
+    },
+    {
+      "file": "roundtrip-review/technical-male-lowerleg01.png",
+      "bytes": 846155,
+      "sha256": "20ec664e351149f4d1e23f6e0f3d0c063b3eff4621da207f292d84e9e59e6c55",
+      "decoded_sha256": "20ec664e351149f4d1e23f6e0f3d0c063b3eff4621da207f292d84e9e59e6c55"
+    },
+    {
+      "file": "roundtrip-review/technical-male-spine02.png",
+      "bytes": 844545,
+      "sha256": "4523caf76b37223d16518685f25dbd1545fc56b8ce15b0912062c14815f56698",
+      "decoded_sha256": "4523caf76b37223d16518685f25dbd1545fc56b8ce15b0912062c14815f56698"
+    },
+    {
+      "file": "roundtrip-review/technical-male-upperarm01.png",
+      "bytes": 849423,
+      "sha256": "4d85e7625093e2746d00a7e990d206e1cc56613ae57b520d3d54013466b1c551",
+      "decoded_sha256": "4d85e7625093e2746d00a7e990d206e1cc56613ae57b520d3d54013466b1c551"
+    },
+    {
+      "file": "roundtrip-review/technical-male-upperleg01.png",
+      "bytes": 842762,
+      "sha256": "021fe7c67bcc27766b4bc18bac91f2d04b4e03112e47e08aeb8e73ce0145d35d",
+      "decoded_sha256": "021fe7c67bcc27766b4bc18bac91f2d04b4e03112e47e08aeb8e73ce0145d35d"
+    },
+    {
+      "file": "roundtrip-review/technical-male-wrist.png",
+      "bytes": 844988,
+      "sha256": "6050ea85e78a7365c7db78b10f9e539e677c9d0d21c6e38f23db557e9acfcd4a",
+      "decoded_sha256": "6050ea85e78a7365c7db78b10f9e539e677c9d0d21c6e38f23db557e9acfcd4a"
+    },
+    {
+      "file": "roundtrip-review/deformation-report.json.txt.gz",
+      "bytes": 2234,
+      "sha256": "a8ffdfdf7d0b6215629493ba6b90e9635041a8533b055c9ab2dfa86ffdfc2b22",
+      "decoded_sha256": "ab758530d04b2ed7915044e65b90d896f3f7100a1fbd375b57e5c14578836b8b"
+    },
+    {
+      "file": "diagnostic-browser/남성-two-models.png",
+      "bytes": 152692,
+      "sha256": "1197f3e77b4373fae08d5a2f8e09452bb9eb2a7f0cfd29629e8b50152907f5fc",
+      "decoded_sha256": "1197f3e77b4373fae08d5a2f8e09452bb9eb2a7f0cfd29629e8b50152907f5fc"
+    },
+    {
+      "file": "diagnostic-browser/여성-two-models.png",
+      "bytes": 145529,
+      "sha256": "897cea6a0e4a4229bff85640077600dee7e51623bb247391596b7dd84e1eb128",
+      "decoded_sha256": "897cea6a0e4a4229bff85640077600dee7e51623bb247391596b7dd84e1eb128"
+    },
+    {
+      "file": "browser/남성-two-models.png",
+      "bytes": 153115,
+      "sha256": "923c4c543e06ec4ba10d3c2d70deaabb9750fdd97733605d88f52cc8fc884d19",
+      "decoded_sha256": "923c4c543e06ec4ba10d3c2d70deaabb9750fdd97733605d88f52cc8fc884d19"
+    },
+    {
+      "file": "browser/여성-two-models.png",
+      "bytes": 145649,
+      "sha256": "4401d47c34776c5b68a5ba92d09f119954f723b46f767abb6770fa6c536f43b0",
+      "decoded_sha256": "4401d47c34776c5b68a5ba92d09f119954f723b46f767abb6770fa6c536f43b0"
+    },
+    {
+      "file": "executed-helpers/remove_joint_overlays.py.txt.gz",
+      "bytes": 1941,
+      "sha256": "3b78ab210482fe6e9c6610674314483a53b55ba816c9b76d4a8930b490f4a8cd",
+      "decoded_sha256": "3ec184f33465467c8c43c5899bf7d1a143e27e8791cde2b87edd28121b556552"
+    },
+    {
+      "file": "executed-helpers/test_removed_joint_overlays.py.txt.gz",
+      "bytes": 1619,
+      "sha256": "bff3536e187a4f74c6f3f3e796c66dcdb57d8825999c45e384b1e78892954d50",
+      "decoded_sha256": "a7f69959a41fd03c0f8adb8a28669caa155edd652827d5be8ab52d4ca1fad6fd"
+    },
+    {
+      "file": "executed-helpers/export_avatar_candidate.py.txt.gz",
+      "bytes": 4005,
+      "sha256": "8d9ba8f43cd728918ac106ef4dc4605ad65643f5634f531fcf28d5af0df4fb00",
+      "decoded_sha256": "52dc7c2f932f5ed19749e87732fac3a9d7ed1c32c7efd9844761b49e0edd69e3"
+    },
+    {
+      "file": "executed-helpers/web_surface_topology.py.txt.gz",
+      "bytes": 1472,
+      "sha256": "fb51333761128b90d5102c47c545998afe6b1d2ec0d654c24769ffd7b352f462",
+      "decoded_sha256": "079eb3149b706fd8b9d91eaf969d5470ed8f57462d3ee5bb417ae11301b4f344"
+    },
+    {
+      "file": "executed-helpers/review_avatar.py.txt.gz",
+      "bytes": 5540,
+      "sha256": "d8d6643c7fb87dfb8bdf18db50723b97fbc7fa1bae6dbc27db006e3e54b324e5",
+      "decoded_sha256": "f712444c95cff9f56fbfb1a7d03580b2d9a3321fe7e11b93cf8f6448e0c83a39"
+    },
+    {
+      "file": "executed-helpers/remove_joint_overlays-creator.py.txt.gz",
+      "bytes": 1858,
+      "sha256": "f2949210af3896cd8f7b8bbe70ddbec4e8d64a460b2a8fc02df0e17eece27669",
+      "decoded_sha256": "ca43353a00306593651d6fcfc8e33e6a168ba2b177289139401c54c137ab7684"
+    },
+    {
+      "file": "scripts/inspect_joint_clearance.py.txt.gz",
+      "bytes": 1914,
+      "sha256": "6a411ded0a91bfd8a7bb980cf52f7c2fd068c7c8caad9fa0b6eca8684081edd6",
+      "decoded_sha256": "bd5c01a01624474c2e3193d97df08cc004c20541b0db70018868e75ffab3b1d1"
+    },
+    {
+      "file": "scripts/diagnostic_body_only.cjs.txt.gz",
+      "bytes": 1290,
+      "sha256": "e3d8f2f0dcad8d2e1569db0e665e272248d52e9332e6ca5b271481ad3e4b4dd4",
+      "decoded_sha256": "fa2c875d9b29567ddc81c85c70631b742eae7446443698e28277a781775b80ce"
+    },
+    {
+      "file": "scripts/compare_body_glb.cjs.txt.gz",
+      "bytes": 1691,
+      "sha256": "fdf13d3802aa8a8b57d9a62565f6d1ad4ea7345d0faa7881f291329bacf46abd",
+      "decoded_sha256": "27230b9b93e3e6f7d404a65fb4e31aaaa4ba8905d258ddadb1a2ee42d1a1ba7a"
+    },
+    {
+      "file": "scripts/archive_joint_evidence.cjs.txt.gz",
+      "bytes": 1745,
+      "sha256": "ca405066473a251d48f9531f7395c4cb39e91317f78f2e48a52d67dd4051a12c",
+      "decoded_sha256": "6f6ebb8fc72bb5814d0ec7352a10f4a0d0bf09503b23de0596aedbeec31829b2"
+    },
+    {
+      "file": "scripts/raw-glb-surface.cjs.txt.gz",
+      "bytes": 1652,
+      "sha256": "7c28267c4b9bece02975c251eeed5268475bc755dce7e24c381f56259a823e01",
+      "decoded_sha256": "0e4bea3834ab4fbf92fdfcb31581e1cc05ca46dd9e65472d0599fb1a435cca94"
+    }
+  ],
+  "counts": {
+    "copies": 138,
+    "gzip": 23,
+    "PNG": 106,
+    "blend": 3,
+    "GLB": 4
+  },
+  "previous_archive": "../candidate-a196-a213-review",
+  "source_sha256": "aba63129842e2bacbbe4cb8f9554ccf9bf123de2d1d6a152e3a2439fdd45618b",
+  "reference_sha256": "45b313912dee5ae2218b1fe76086abb35a9b948fab9e877f1a9d2b05f832de62"
+}
