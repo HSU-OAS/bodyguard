@@ -1,0 +1,335 @@
+{
+  "date": "2026-10-03",
+  "story": "S2.4",
+  "decision": "Rejected for appearance; preserve actual technical evidence without adoption.",
+  "reference_file": "/var/folders/8z/d7p5k9352z75y68hl1l0x3mr0000gn/T/codex-clipboard-e9a0a972-eb70-4458-a588-138720038d28.png",
+  "reference_sha256": "45b313912dee5ae2218b1fe76086abb35a9b948fab9e877f1a9d2b05f832de62",
+  "reference_scope": "Latest CEO facial shape, continuous face-neck connection and neutral white unclothed male/female requirements; not pixel identity.",
+  "native_runs": [
+    {
+      "phase": "a193",
+      "log": "logs/a193-observed.json.txt.gz",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-tailor.6b7Uvu/a193-photo-front-preserved-posterior.py\" -- \"/private/tmp/bodyguard-tailor.6b7Uvu/a193-photo-front-preserved-posterior\"",
+      "exit_code": 1,
+      "terminal_chunk_id": "f5ddea"
+    },
+    {
+      "phase": "a194",
+      "log": "logs/a194-observed.json.txt.gz",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a194-posterior-fold-locator.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a194-posterior-fold-locator",
+      "exit_code": 0,
+      "terminal_chunk_id": "e146a0"
+    },
+    {
+      "phase": "a195",
+      "log": "logs/a195-observed.json.txt.gz",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a195-posterior-lower-cap-protected.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a195-posterior-lower-cap-protected",
+      "exit_code": 0,
+      "terminal_chunk_id": "6ec957"
+    },
+    {
+      "phase": "preservation",
+      "log": "logs/a195-preservation-observed.json.txt.gz",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a195-saved-preservation.py -- bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend /private/tmp/bodyguard-tailor.6b7Uvu/a195-posterior-lower-cap-protected/artist-candidate.blend /private/tmp/bodyguard-tailor.6b7Uvu/a195-posterior-lower-cap-protected/posterior-report.json /private/tmp/bodyguard-tailor.6b7Uvu/a195-saved-preservation.json",
+      "exit_code": 0,
+      "terminal_chunk_id": "f5a67b"
+    },
+    {
+      "phase": "source",
+      "log": "logs/a195-source-observed.json.txt.gz",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec /private/tmp/bodyguard-tailor.6b7Uvu/a195-posterior-lower-cap-protected/artist-candidate.blend --python-exit-code 1 --python bodyguard/assets/blender/review_avatar.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a195-source-review --candidate --mannequin",
+      "exit_code": 0,
+      "terminal_chunk_id": "2719fc"
+    },
+    {
+      "phase": "export",
+      "log": "logs/a195-export-observed.json.txt.gz",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec /private/tmp/bodyguard-tailor.6b7Uvu/a195-posterior-lower-cap-protected/artist-candidate.blend --python-exit-code 1 --python bodyguard/assets/blender/export_avatar_candidate.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a195-web-candidate.blend /private/tmp/bodyguard-tailor.6b7Uvu/a195-glb 1",
+      "exit_code": 0,
+      "terminal_chunk_id": "bbd6a5"
+    },
+    {
+      "phase": "roundtrip",
+      "log": "logs/a195-roundtrip-observed.json.txt.gz",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec /private/tmp/bodyguard-tailor.6b7Uvu/a195-web-candidate-roundtrip.blend --python-exit-code 1 --python bodyguard/assets/blender/review_avatar.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a195-roundtrip-review --candidate --mannequin",
+      "exit_code": 0,
+      "terminal_chunk_id": "c59f19"
+    }
+  ],
+  "native_actors_sequential": true,
+  "native_and_browser_actors_not_overlapped": true,
+  "browser": {
+    "command": "BODYGUARD_AVATAR_QA_DIRECTORY=/private/tmp/bodyguard-tailor.6b7Uvu/a195-glb PLAYWRIGHT_JSON_OUTPUT_NAME=/private/tmp/bodyguard-tailor.6b7Uvu/a195-browser-report.json .venv/bin/python -m tests.run_browser avatar",
+    "exit_code": 0,
+    "terminal_chunk_id": "b43a2e",
+    "log": "logs/a195-browser-observed.json.txt.gz",
+    "report": "browser/browser-report.json.txt.gz",
+    "cases": 3,
+    "camera_calls": 0,
+    "method": "Installed Chrome with authored GLB route override; API 401 fixture; external networking blocked. No person or approved coaching animation."
+  },
+  "frontend_static": [
+    {
+      "command": "pnpm check",
+      "chunks": [
+        {
+          "command": "pnpm check",
+          "chunk_id": "2b0ee0",
+          "wall_time_seconds": 1.046425667,
+          "session_id": 16060,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "9ae081",
+          "wall_time_seconds": 0.000041041,
+          "exit_code": 0,
+          "original_token_count": 16,
+          "output": "$ biome check .\nChecked 56 files in 1175ms. No fixes applied.\n"
+        }
+      ],
+      "exit_code": 0,
+      "terminal_chunk_id": "9ae081"
+    },
+    {
+      "command": "pnpm exec tsc --noEmit",
+      "chunks": [
+        {
+          "command": "pnpm exec tsc --noEmit",
+          "chunk_id": "ebfe71",
+          "wall_time_seconds": 1.004045833,
+          "session_id": 81846,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "07855b",
+          "wall_time_seconds": 5.0019045,
+          "session_id": 81846,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "76b165",
+          "wall_time_seconds": 0.000033167,
+          "exit_code": 0,
+          "original_token_count": 0,
+          "output": ""
+        }
+      ],
+      "terminal_chunk_id": "76b165",
+      "exit_code": 0
+    }
+  ],
+  "evidence_copy": {
+    "command": "node a193-a195-copy-evidence.cjs '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate'",
+    "exit_code": 0,
+    "terminal_chunk_id": "1d3969",
+    "chunks": [
+      {
+        "chunk_id": "cb2a42",
+        "wall_time_seconds": 1.002546834,
+        "session_id": 28499,
+        "original_token_count": 0,
+        "output": ""
+      },
+      {
+        "chunk_id": "1d3969",
+        "wall_time_seconds": 0.0000125,
+        "exit_code": 0,
+        "original_token_count": 25,
+        "output": "{\"copies\":109,\"gzip\":22,\"PNG\":82,\"blend\":3,\"GLB\":2,\"old_files_changed\":0,\"protected_old_files\":953}\n"
+      }
+    ]
+  },
+  "new_assets": {
+    "blend": 3,
+    "GLB": 2
+  },
+  "new_verification": {
+    "PNG": 82,
+    "source_deformation_cases": 118,
+    "glb_deformation_cases": 118,
+    "Chrome_cases": 3,
+    "camera_calls": 0
+  },
+  "directly_viewed": [
+    "a193/posterior-back-female.png",
+    "a193/posterior-back-male.png",
+    "a193/posterior-front-female.png",
+    "a193/posterior-front-male.png",
+    "a193/posterior-side-female.png",
+    "a193/posterior-side-male.png",
+    "a195/posterior-back-female.png",
+    "a195/posterior-back-male.png",
+    "a195/posterior-front-female.png",
+    "a195/posterior-front-male.png",
+    "a195/posterior-side-female.png",
+    "a195/posterior-side-male.png",
+    "source-review/faceless-front.png",
+    "source-review/faceless-quarter.png",
+    "source-review/faceless-body-side-male.png",
+    "source-review/faceless-body-back-male.png",
+    "source-review/faceless-hand-male.png",
+    "source-review/faceless-knee-male.png",
+    "source-review/faceless-side-male.png",
+    "source-review/faceless-neck-male-left.png",
+    "source-review/faceless-neck-male-right.png",
+    "source-review/faceless-body-side-female.png",
+    "source-review/faceless-body-back-female.png",
+    "source-review/faceless-hand-female.png",
+    "source-review/faceless-knee-female.png",
+    "source-review/faceless-side-female.png",
+    "source-review/faceless-neck-female-left.png",
+    "source-review/faceless-neck-female-right.png",
+    "source-review/technical-male-upperarm01.png",
+    "source-review/technical-male-lowerarm01.png",
+    "source-review/technical-male-wrist.png",
+    "source-review/technical-male-finger2-1.png",
+    "source-review/technical-female-upperarm01.png",
+    "source-review/technical-female-lowerarm01.png",
+    "source-review/technical-female-wrist.png",
+    "source-review/technical-female-finger2-1.png",
+    "roundtrip-review/faceless-front.png",
+    "roundtrip-review/faceless-quarter.png",
+    "roundtrip-review/faceless-body-side-male.png",
+    "roundtrip-review/faceless-body-back-male.png",
+    "roundtrip-review/faceless-hand-male.png",
+    "roundtrip-review/faceless-knee-male.png",
+    "roundtrip-review/faceless-side-male.png",
+    "roundtrip-review/faceless-neck-male-left.png",
+    "roundtrip-review/faceless-neck-male-right.png",
+    "roundtrip-review/faceless-body-side-female.png",
+    "roundtrip-review/faceless-body-back-female.png",
+    "roundtrip-review/faceless-hand-female.png",
+    "roundtrip-review/faceless-knee-female.png",
+    "roundtrip-review/faceless-side-female.png",
+    "roundtrip-review/faceless-neck-female-left.png",
+    "roundtrip-review/faceless-neck-female-right.png",
+    "roundtrip-review/technical-male-upperarm01.png",
+    "roundtrip-review/technical-male-lowerarm01.png",
+    "roundtrip-review/technical-male-wrist.png",
+    "roundtrip-review/technical-male-finger2-1.png",
+    "roundtrip-review/technical-female-upperarm01.png",
+    "roundtrip-review/technical-female-lowerarm01.png",
+    "roundtrip-review/technical-female-wrist.png",
+    "roundtrip-review/technical-female-finger2-1.png",
+    "browser/남성-two-models.png",
+    "browser/여성-two-models.png"
+  ],
+  "findings": {
+    "a193": "Original front and named skin preserved but long folds became 17/7; exit 1, six PNGs before rejection, no blend/GLB/full 118/Chrome.",
+    "a194": "Read-only stable edge IDs reproduced A193. New 16 male and 7 female folds were below z/h .875; exit 0 is diagnostic completion, not geometry approval.",
+    "a195": "Protected original lower-cap coordinates before native fairing, no posthoc restoration. Existing long folds stayed 1/0 and all guards passed. Max original displacement .448506974/.585596792 mm; source and roundtrip full geometry checks passed but appearance did not.",
+    "visual": "Photo-like existing front was kept. Posterior head-neck boundary and small web/GLB surface flecks remain; A-02/A-08 P2 unresolved.",
+    "export": "Native export used 8 skin influences, ratio 1, two fin repairs per gender and emitted 5 armature-parent warnings. Source named skin exact is not identical GLB skin.",
+    "frontend": "A37 remained the service development model; A195 was served only by the existing avatar harness route override. No service source/model edits.",
+    "preparatory_errors": "Initial script-generation JS used nonexistent index method and stopped before writes. A194 Ruff F401 unused Vector was removed before native execution. These are not successful native trials."
+  },
+  "preserved_rules": {
+    "prior_assets_and_evidence_unchanged": true,
+    "source_front_and_protected_original_coordinates_exact": true,
+    "source_original_named_skin_exact": true,
+    "source_hands_groups_163_rest_bones_world_material_exact": true,
+    "source_unrelated_face_winding_exact": true,
+    "existing_ledgers_preserved_with_zero_extension": true,
+    "no_whole_neck_body_remesh": true,
+    "no_posthoc_coordinate_or_skin_restoration": true,
+    "geometry_guards_not_relaxed": true,
+    "no_person_capture_or_upload": true,
+    "stage_gates_and_approval_rules_unchanged": true,
+    "professional_authored_base_retained": true
+  },
+  "limitations": {
+    "appearance_approved": false,
+    "service_adopted": false,
+    "reference_pixel_identity_verified": false,
+    "clinical_correctness_verified": false,
+    "approved_coaching_animation_verified": false,
+    "actual_webcam_coaching_verified": false,
+    "actual_person_motion_latency_verified": false,
+    "actual_target_device_population_verified": false,
+    "stage2_complete": false,
+    "stages_1_6_complete": false,
+    "deployment_performed": false
+  },
+  "next": "Diagnose the actual posterior seam/edge flow and native-to-web surface differences before a localized structural fix; do not repeat global smoothing or relax guards.",
+  "final_local_qa": [
+    {
+      "command": "node --check bodyguard/assets/blender/review/candidate-a193-a195-review/evidence-check.cjs",
+      "chunk_id": "3295e0",
+      "wall_time_seconds": 0.000016375,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    {
+      "command": "node bodyguard/assets/blender/review/candidate-a193-a195-review/evidence-check.cjs",
+      "chunk_id": "4266ca",
+      "wall_time_seconds": 1.001233333,
+      "session_id": 46669,
+      "original_token_count": 0,
+      "output": "",
+      "chunks": [
+        {
+          "chunk_id": "edb49e",
+          "wall_time_seconds": 0.000024708,
+          "exit_code": 0,
+          "original_token_count": 64,
+          "output": "{\"integrity_passed\":true,\"copies\":109,\"gzip\":22,\"PNG\":82,\"directly_viewed\":62,\"protected_old_files\":953,\"native_exits\":[1,0,0,0,0,0,0],\"source_118\":118,\"GLB_118\":118,\"Chrome\":3,\"new_blend\":3,\"new_GLB\":2,\"appearance_passed\":false,\"service_adopted\":false}\n"
+        }
+      ],
+      "exit_code": 0,
+      "terminal_chunk_id": "edb49e"
+    },
+    {
+      "command": "node '/private/tmp/bodyguard-tailor.6b7Uvu/a193-a195-local-qa.cjs' '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate'",
+      "chunk_id": "86d166",
+      "wall_time_seconds": 0.000018375,
+      "exit_code": 0,
+      "original_token_count": 34,
+      "output": "{\"markdown_files\":4,\"local_links_checked\":201,\"limited_credential_pattern_scan_gzip\":22,\"passed\":true,\"not_full_security_audit\":true}\n"
+    },
+    {
+      "command": "git diff --check",
+      "chunk_id": "525495",
+      "wall_time_seconds": 0.000011917,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    }
+  ],
+  "staged_verification": {
+    "initial": {
+      "command": "git diff --cached --check",
+      "chunk_id": "f01e08",
+      "exit_code": 2,
+      "output": "bodyguard/assets/blender/review/candidate-a193-a195-review/README.md:50: new blank line at EOF.\n"
+    },
+    "correction": "Removed the new README trailing blank line with apply_patch; no copied evidence changed.",
+    "rerun": {
+      "command": "git diff --cached --check",
+      "chunk_id": "41cc03",
+      "wall_time_seconds": 0.00001025,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    "staged_scope": {
+      "files": 116,
+      "archive": 113,
+      "docs": 3,
+      "unexpected": 0
+    }
+  },
+  "review": {
+    "reviewer": "CTO, local scoped review",
+    "scope": "Three documentation diffs and the new archive controls/manifest/log linkage; no production implementation changed.",
+    "new_archive_control_findings": [],
+    "unresolved_existing_findings": [
+      "A-02 appearance P2",
+      "A-08 head-neck continuity / web surface P2"
+    ],
+    "merge_allowed": false
+  }
+}
