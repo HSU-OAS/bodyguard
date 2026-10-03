@@ -1,0 +1,425 @@
+{
+  "date": "2026-10-03",
+  "input_commit": "406d0d1dcb8d99fe084b20dfc904ae49b380ce84",
+  "origin_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "native_actors_sequential": true,
+  "native_runs": [
+    {
+      "purpose": "original actual full skin preflight",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-presave-curves.CueGBr/preflight_skin.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/avatar_skin_guard.py\" \"/private/tmp/bodyguard-presave-curves.CueGBr/a228-original-skin.json\"",
+      "chunks": [
+        {
+          "chunk_id": "471600",
+          "wall_time_seconds": 1.001877292,
+          "session_id": 60394,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "30fd38",
+          "wall_time_seconds": 0.00001975,
+          "exit_code": 0,
+          "original_token_count": 223,
+          "output": "00:00.934  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\nA228 ACTUAL PRE-SAVE SKIN {\"gender\": \"Male\", \"mesh_vertices\": 131645, \"completely_validated_vertices\": 131645, \"error\": null, \"individual_and_sum_guard_passed\": true, \"saved_assets\": 0, \"skin_or_coordinates_modified\": false}\nA228 ACTUAL PRE-SAVE SKIN {\"gender\": \"Female\", \"mesh_vertices\": 130554, \"completely_validated_vertices\": 130554, \"error\": null, \"individual_and_sum_guard_passed\": true, \"saved_assets\": 0, \"skin_or_coordinates_modified\": false}\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-01.json.txt.gz",
+      "full_stdout_preserved": true
+    },
+    {
+      "purpose": "A225 actual rejected skin preflight",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a217-a227-diagnosis/a225/artist-candidate.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-presave-curves.CueGBr/preflight_skin.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/avatar_skin_guard.py\" \"/private/tmp/bodyguard-presave-curves.CueGBr/a228-rejected-skin.json\"",
+      "chunks": [
+        {
+          "chunk_id": "20a4fa",
+          "wall_time_seconds": 1.002077542,
+          "session_id": 72293,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "b1a740",
+          "wall_time_seconds": 0.00000925,
+          "exit_code": 1,
+          "original_token_count": 352,
+          "output": "00:01.834  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a217-a227-diagnosis/a225/artist-candidate.blend\"\nA228 ACTUAL PRE-SAVE SKIN {\"gender\": \"Male\", \"mesh_vertices\": 132216, \"completely_validated_vertices\": null, \"error\": \"Invalid skin vertex 132069: Invalid skin coefficient\", \"individual_and_sum_guard_passed\": false, \"saved_assets\": 0, \"skin_or_coordinates_modified\": false}\nA228 ACTUAL PRE-SAVE SKIN {\"gender\": \"Female\", \"mesh_vertices\": 131403, \"completely_validated_vertices\": null, \"error\": \"Invalid skin vertex 131265: Invalid skin coefficient\", \"individual_and_sum_guard_passed\": false, \"saved_assets\": 0, \"skin_or_coordinates_modified\": false}\nTraceback (most recent call last):\n  File \"/private/tmp/bodyguard-presave-curves.CueGBr/preflight_skin.py\", line 56, in <module>\n    assert report[\"passed\"], \"Preflight failed before any candidate save/export\"\n           ~~~~~~^^^^^^^^^^\nAssertionError: Preflight failed before any candidate save/export\n\nError: script failed, file: '/private/tmp/bodyguard-presave-curves.CueGBr/preflight_skin.py', exiting.\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-02.json.txt.gz",
+      "full_stdout_preserved": true
+    },
+    {
+      "purpose": "A229 corrective artist support",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-presave-curves.CueGBr/fair_cervical_support.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/remove_joint_overlays.py\" \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/avatar_skin_guard.py\" \"/private/tmp/bodyguard-presave-curves.CueGBr/a229\"",
+      "chunks": [
+        {
+          "chunk_id": "f5ceee",
+          "wall_time_seconds": 1.002091417,
+          "session_id": 94314,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "ec2646",
+          "wall_time_seconds": 5.012072541,
+          "session_id": 94314,
+          "original_token_count": 804,
+          "output": "00:01.453  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\nA229 LOCAL HEAD INTERFACE {\"gender\": \"Male\", \"before\": {\"vertices\": 131645, \"faces\": 181201, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 2, \"long_folds\": 76, \"head_interface_long_edge_angles_deg\": {\"median\": 0.9495062179887273, \"p95\": 3.0165579561345974, \"max\": 14.255002656335764}}, \"after\": {\"vertices\": 131645, \"faces\": 181201, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 2, \"long_folds\": 76, \"head_interface_long_edge_angles_deg\": {\"median\": 0.950149429709472, \"p95\": 3.026750732810372, \"max\": 14.399640449747247}}, \"selected_sharp_edges\": 421, \"selected_points\": 3136, \"zero_mask_coordinates_exact\": true, \"all_numeric_skin_faces_group_order_hands_163_rest_bones_world_materials_exact\": true, \"maximum_artist_displacement_m\": 0.0006745894002989183, \"artist_region\": [0.865, 0.94], \"seed_region\": [0.885, 0.915], \"artist_width_max_fraction\": 0.055, \"same_native_factor_iterations_as_A218\": true, \"selection_degrees\": 5, \"geodesic_radius_m\": 0.02, \"native\": \"CORRECTIVE_SMOOTH/LENGTH_WEIGHTED/only-smooth/.35/16\", \"existing_6mm_guard_and_geometry_passed\": true, \"appearance_approved\": false, \"whole_neck_remesh\": false, \"pre_save_individual_and_sum_skin_guard_vertices\": 131645, \"skin_guard_sha256\": \"044a34e1fb399f3760cfb77b584386c73457595afc4649322cb97b5321e4c240\"}\nA229 LOCAL HEAD INTERFACE {\"gender\": \"Female\", \"before\": {\"vertices\": 130554, \"faces\": 179438, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 0, \"long_folds\": 107, \"head_interface_long_edge_angles_deg\": {\"median\": 1.0442747725575368, \"p95\": 3.4999549896887294, \"max\": 24.256540865539232}}, \"after\": {\"vertices\": 130554, \"faces\": 179438, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 0, \"long_folds\": 107, \"head_interface_long_edge_angles_deg\": {\"median\": 1.0458002526199768, \"p95\": 3.5220702884475847, \"max\": 22.46151421769381}}, \"selected_sharp_edges\": 626, \"selected_points\": 4831, \"zero_mask_coordinates_exact\": true, \"all_numeric_skin_faces_group_order_hands_163_rest_bones_world_materials_exact\": true, \"maximum_artist_displacement_m\": 0.0010508482085456686, \"artist_region\": [0.865, 0.94], \"seed_region\": [0.885, 0.915], \"artist_width_max_fraction\": 0.055, \"same_native_factor_iterations_as_A218\": true, \"selection_degrees\": 5, \"geodesic_radius_m\": 0.02, \"native\": \"CORRECTIVE_SMOOTH/LENGTH_WEIGHTED/only-smooth/.35/16\", \"existing_6mm_guard_and_geometry_passed\": true, \"appearance_approved\": false, \"whole_neck_remesh\": false, \"pre_save_individual_and_sum_skin_guard_vertices\": 130554, \"skin_guard_sha256\": \"044a34e1fb399f3760cfb77b584386c73457595afc4649322cb97b5321e4c240\"}\n00:38.183  render           | Saved: '/private/tmp/bodyguard-presave-curves.CueGBr/a229/head-front-male.png'\n00:47.011  render           | Saved: '/private/tmp/bodyguard-presave-curves.CueGBr/a229/head-side-male.png'\n00:58.322  render           | Saved: '/private/tmp/bodyguard-presave-curves.CueGBr/a229/head-back-male.png'\n"
+        },
+        {
+          "chunk_id": "db440e",
+          "wall_time_seconds": 0.000013583,
+          "exit_code": 0,
+          "original_token_count": 138,
+          "output": "01:24.027  render           | Saved: '/private/tmp/bodyguard-presave-curves.CueGBr/a229/head-front-female.png'\n01:38.573  render           | Saved: '/private/tmp/bodyguard-presave-curves.CueGBr/a229/head-side-female.png'\n01:49.922  render           | Saved: '/private/tmp/bodyguard-presave-curves.CueGBr/a229/head-back-female.png'\nInfo: Saved as \"artist-candidate.blend\"\nA229 actual6PNG; no adoption; full QA pending\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-03.json.txt.gz",
+      "full_stdout_preserved": true
+    },
+    {
+      "purpose": "A229 independent saved reopen",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec --python-exit-code 1 --python \"/private/tmp/bodyguard-presave-curves.CueGBr/test_saved_cervical_support.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" \"/private/tmp/bodyguard-presave-curves.CueGBr/a229/artist-candidate.blend\" \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/avatar_skin_guard.py\" \"/private/tmp/bodyguard-presave-curves.CueGBr/a229-saved-native.json\"",
+      "chunks": [
+        {
+          "chunk_id": "3a6e2b",
+          "wall_time_seconds": 1.00187,
+          "session_id": 40691,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "5cd447",
+          "wall_time_seconds": 0.000012834,
+          "exit_code": 0,
+          "original_token_count": 558,
+          "output": "00:02.146  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\n00:09.598  blend            | Read blend: \"/private/tmp/bodyguard-presave-curves.CueGBr/a229/artist-candidate.blend\"\nA229 INDEPENDENT SAVED NATIVE {\"passed\": true, \"rows\": [{\"gender\": \"Male\", \"changed_points\": 3099, \"maximum_artist_displacement_m\": 0.0006745893994921023, \"all_numeric_skin_topology_group_order_hands_163_rest_bones_world_finish_exact\": true, \"all_original_points_outside_head_interface_artist_band_exact\": true, \"preserved_original_points\": 128546, \"independent_individual_and_sum_skin_guard_passed\": true, \"predeclared_artist_region\": [0.865, 0.94], \"predeclared_artist_half_width_fraction\": 0.055}, {\"gender\": \"Female\", \"changed_points\": 4793, \"maximum_artist_displacement_m\": 0.0010508482097062988, \"all_numeric_skin_topology_group_order_hands_163_rest_bones_world_finish_exact\": true, \"all_original_points_outside_head_interface_artist_band_exact\": true, \"preserved_original_points\": 125761, \"independent_individual_and_sum_skin_guard_passed\": true, \"predeclared_artist_region\": [0.865, 0.94], \"predeclared_artist_half_width_fraction\": 0.055}], \"input_sha256\": {\"/Applications/\\u1112\\u1161\\u11a8\\u1100\\u116d \\u1102\\u1162\\u1107\\u116e/2026-2\\u1112\\u1161\\u11a8\\u1100\\u1175/\\u110b\\u1169\\u1111\\u1173\\u11ab\\u1109\\u1169\\u1109\\u1173 AI SW \\u110b\\u1172\\u11bc\\u1112\\u1161\\u11b8 \\u1111\\u1173\\u1105\\u1169\\u110c\\u1166\\u11a8\\u1110\\u1173/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\": \"1bdb837b608b1a2994f26e0fa827c9a57065353d2d242a2efbb6363f45d32000\", \"/private/tmp/bodyguard-presave-curves.CueGBr/a229/artist-candidate.blend\": \"69d0dfa13ad34932c9b18db51970a808fa0ecafd347f277fdc5914622530d91b\"}, \"independent_saved_native_reopen\": true, \"saved_assets\": 0, \"camera_calls\": 0, \"appearance_approved\": false, \"full_deformation_qa\": false, \"GLB_qa\": false, \"browser_qa\": false}\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-04.json.txt.gz",
+      "full_stdout_preserved": true
+    },
+    {
+      "purpose": "A230 RNA and actual lineage",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-presave-curves.CueGBr/inspect_native_fairing.py\" -- \"/private/tmp/bodyguard-presave-curves.CueGBr/a230-native-api.json\"",
+      "chunks": [
+        {
+          "chunk_id": "2e4976",
+          "wall_time_seconds": 1.000880167,
+          "session_id": 12092,
+          "original_token_count": 77,
+          "output": "00:00.563  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\n"
+        },
+        {
+          "chunk_id": "30877c",
+          "wall_time_seconds": 0.000025458,
+          "exit_code": 0,
+          "original_token_count": 716,
+          "output": "A230 ACTUAL NATIVE FAIRING API {\"source_sha256\": \"1bdb837b608b1a2994f26e0fa827c9a57065353d2d242a2efbb6363f45d32000\", \"laplacian_smooth_native_properties\": [{\"name\": \"name\", \"type\": \"STRING\", \"default\": \"\", \"minimum\": null, \"maximum\": null}, {\"name\": \"show_viewport\", \"type\": \"BOOLEAN\", \"default\": \"False\", \"minimum\": null, \"maximum\": null}, {\"name\": \"show_render\", \"type\": \"BOOLEAN\", \"default\": \"False\", \"minimum\": null, \"maximum\": null}, {\"name\": \"show_in_editmode\", \"type\": \"BOOLEAN\", \"default\": \"False\", \"minimum\": null, \"maximum\": null}, {\"name\": \"show_on_cage\", \"type\": \"BOOLEAN\", \"default\": \"False\", \"minimum\": null, \"maximum\": null}, {\"name\": \"show_expanded\", \"type\": \"BOOLEAN\", \"default\": \"False\", \"minimum\": null, \"maximum\": null}, {\"name\": \"is_active\", \"type\": \"BOOLEAN\", \"default\": \"False\", \"minimum\": null, \"maximum\": null}, {\"name\": \"use_pin_to_last\", \"type\": \"BOOLEAN\", \"default\": \"False\", \"minimum\": null, \"maximum\": null}, {\"name\": \"use_apply_on_spline\", \"type\": \"BOOLEAN\", \"default\": \"False\", \"minimum\": null, \"maximum\": null}, {\"name\": \"use_x\", \"type\": \"BOOLEAN\", \"default\": \"True\", \"minimum\": null, \"maximum\": null}, {\"name\": \"use_y\", \"type\": \"BOOLEAN\", \"default\": \"True\", \"minimum\": null, \"maximum\": null}, {\"name\": \"use_z\", \"type\": \"BOOLEAN\", \"default\": \"True\", \"minimum\": null, \"maximum\": null}, {\"name\": \"use_volume_preserve\", \"type\": \"BOOLEAN\", \"default\": \"True\", \"minimum\": null, \"maximum\": null}, {\"name\": \"use_normalized\", \"type\": \"BOOLEAN\", \"default\": \"True\", \"minimum\": null, \"maximum\": null}, {\"name\": \"lambda_factor\", \"type\": \"FLOAT\", \"default\": \"0.009999999776482582\", \"minimum\": -3.4028234663852886e+38, \"maximum\": 3.4028234663852886e+38}, {\"name\": \"lambda_border\", \"type\": \"FLOAT\", \"default\": \"0.009999999776482582\", \"minimum\": -3.4028234663852886e+38, \"maximum\": 3.4028234663852886e+38}, {\"name\": \"iterations\", \"type\": \"INT\", \"default\": \"1\", \"minimum\": 0, \"maximum\": 32767}, {\"name\": \"vertex_group\", \"type\": \"STRING\", \"default\": \"\", \"minimum\": null, \"maximum\": null}, {\"name\": \"invert_vertex_group\", \"type\": \"BOOLEAN\", \"default\": \"False\", \"minimum\": null, \"maximum\": null}], \"rows\": [{\"gender\": \"Male\", \"per_point_lineage\": {\"bodyguard_authoring_a123_original_ids\": {\"count\": 131645, \"positive_ids\": 122400}, \"bodyguard_a146_parent_ids\": {\"count\": 131645, \"positive_ids\": 123513}, \"bodyguard_a195_parent_ids\": {\"count\": 131645, \"positive_ids\": 129630}}}, {\"gender\": \"Female\", \"per_point_lineage\": {\"bodyguard_authoring_a123_original_ids\": {\"count\": 130554, \"positive_ids\": 121189}, \"bodyguard_a146_parent_ids\": {\"count\": 130554, \"positive_ids\": 122269}, \"bodyguard_a195_parent_ids\": {\"count\": 130554, \"positive_ids\": 128389}}}], \"saved_assets\": 0, \"source_unchanged\": true, \"camera_calls\": 0}\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-05.json.txt.gz",
+      "full_stdout_preserved": true
+    },
+    {
+      "purpose": "A231 no-op laplacian candidate",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-presave-curves.CueGBr/fair_cervical_laplacian.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/remove_joint_overlays.py\" \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/avatar_skin_guard.py\" \"/private/tmp/bodyguard-presave-curves.CueGBr/a231\"",
+      "chunks": [
+        {
+          "chunk_id": "15bee4",
+          "wall_time_seconds": 1.001640667,
+          "session_id": 98632,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "b46702",
+          "wall_time_seconds": 5.000882667,
+          "session_id": 98632,
+          "original_token_count": 861,
+          "output": "00:01.009  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\nA231 LOCAL HEAD INTERFACE {\"gender\": \"Male\", \"before\": {\"vertices\": 131645, \"faces\": 181201, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 2, \"long_folds\": 76, \"head_interface_long_edge_angles_deg\": {\"median\": 0.9495062179887273, \"p95\": 3.0165579561345974, \"max\": 14.255002656335764}}, \"after\": {\"vertices\": 131645, \"faces\": 181201, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 2, \"long_folds\": 76, \"head_interface_long_edge_angles_deg\": {\"median\": 0.9495062179887273, \"p95\": 3.0165579561345974, \"max\": 14.255002656335764}}, \"selected_sharp_edges\": 421, \"selected_points\": 3136, \"zero_mask_coordinates_exact\": true, \"all_numeric_skin_faces_group_order_hands_163_rest_bones_world_materials_exact\": true, \"maximum_artist_displacement_m\": 0.0, \"artist_region\": [0.865, 0.94], \"seed_region\": [0.885, 0.915], \"artist_width_max_fraction\": 0.055, \"same_artist_support_as_A229\": true, \"implicit_solver_lambda_not_equivalent_to_corrective_factor\": true, \"selection_degrees\": 5, \"geodesic_radius_m\": 0.02, \"native\": \"LAPLACIANSMOOTH/lambda.35/border.01/16/normalized/no-volume-correction\", \"existing_6mm_guard_and_geometry_passed\": true, \"appearance_approved\": false, \"whole_neck_remesh\": false, \"pre_save_individual_and_sum_skin_guard_vertices\": 131645, \"skin_guard_sha256\": \"044a34e1fb399f3760cfb77b584386c73457595afc4649322cb97b5321e4c240\"}\nA231 LOCAL HEAD INTERFACE {\"gender\": \"Female\", \"before\": {\"vertices\": 130554, \"faces\": 179438, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 0, \"long_folds\": 107, \"head_interface_long_edge_angles_deg\": {\"median\": 1.0442747725575368, \"p95\": 3.4999549896887294, \"max\": 24.256540865539232}}, \"after\": {\"vertices\": 130554, \"faces\": 179438, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 0, \"long_folds\": 107, \"head_interface_long_edge_angles_deg\": {\"median\": 1.0442747725575368, \"p95\": 3.4999549896887294, \"max\": 24.256540865539232}}, \"selected_sharp_edges\": 626, \"selected_points\": 4831, \"zero_mask_coordinates_exact\": true, \"all_numeric_skin_faces_group_order_hands_163_rest_bones_world_materials_exact\": true, \"maximum_artist_displacement_m\": 0.0, \"artist_region\": [0.865, 0.94], \"seed_region\": [0.885, 0.915], \"artist_width_max_fraction\": 0.055, \"same_artist_support_as_A229\": true, \"implicit_solver_lambda_not_equivalent_to_corrective_factor\": true, \"selection_degrees\": 5, \"geodesic_radius_m\": 0.02, \"native\": \"LAPLACIANSMOOTH/lambda.35/border.01/16/normalized/no-volume-correction\", \"existing_6mm_guard_and_geometry_passed\": true, \"appearance_approved\": false, \"whole_neck_remesh\": false, \"pre_save_individual_and_sum_skin_guard_vertices\": 130554, \"skin_guard_sha256\": \"044a34e1fb399f3760cfb77b584386c73457595afc4649322cb97b5321e4c240\"}\n00:48.469  render           | Saved: '/private/tmp/bodyguard-presave-curves.CueGBr/a231/head-front-male.png'\n00:56.916  render           | Saved: '/private/tmp/bodyguard-presave-curves.CueGBr/a231/head-side-male.png'\n01:11.790  render           | Saved: '/private/tmp/bodyguard-presave-curves.CueGBr/a231/head-back-male.png'\n01:19.884  render           | Saved: '/private/tmp/bodyguard-presave-curves.CueGBr/a231/head-front-female.png'\n"
+        },
+        {
+          "chunk_id": "357d0c",
+          "wall_time_seconds": 0.000036125,
+          "exit_code": 0,
+          "original_token_count": 110,
+          "output": "01:26.094  render           | Saved: '/private/tmp/bodyguard-presave-curves.CueGBr/a231/head-side-female.png'\n01:36.021  render           | Saved: '/private/tmp/bodyguard-presave-curves.CueGBr/a231/head-back-female.png'\nInfo: Saved as \"artist-candidate.blend\"\nA231 actual6PNG; no adoption; full QA pending\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-06.json.txt.gz",
+      "full_stdout_preserved": true
+    },
+    {
+      "purpose": "A232 factory cube solver control NOT avatar",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec --python-exit-code 1 --python \"/private/tmp/bodyguard-presave-curves.CueGBr/test_native_solver_controls.py\" -- \"/private/tmp/bodyguard-presave-curves.CueGBr/a232-solver-control.json\"",
+      "chunks": [
+        {
+          "chunk_id": "66ad7b",
+          "wall_time_seconds": 1.001935417,
+          "session_id": 23981,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "ec2371",
+          "wall_time_seconds": 0.000012459,
+          "exit_code": 0,
+          "original_token_count": 253,
+          "output": "A232 NATIVE SOLVER CONTROL {\"fixture\": \"no-mask\", \"vertices\": 8, \"changed_points\": 8, \"maximum_displacement\": 1.671618005127343, \"operator_flags_before_apply\": {\"show_viewport\": true, \"show_render\": true, \"lambda_factor\": 0.3499999940395355, \"iterations\": 16}, \"native_operator_active_positive_control\": true}\nA232 NATIVE SOLVER CONTROL {\"fixture\": \"full-mask\", \"vertices\": 8, \"changed_points\": 8, \"maximum_displacement\": 1.671618005127343, \"operator_flags_before_apply\": {\"show_viewport\": true, \"show_render\": true, \"lambda_factor\": 0.3499999940395355, \"iterations\": 16}, \"native_operator_active_positive_control\": true}\nA232 NATIVE SOLVER CONTROL {\"fixture\": \"partial-mask\", \"vertices\": 8, \"changed_points\": 4, \"maximum_displacement\": 1.9033428286712524, \"operator_flags_before_apply\": {\"show_viewport\": true, \"show_render\": true, \"lambda_factor\": 0.3499999940395355, \"iterations\": 16}, \"native_operator_active_positive_control\": true}\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-07.json.txt.gz",
+      "full_stdout_preserved": true
+    },
+    {
+      "purpose": "A233 authored crop no-op",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-presave-curves.CueGBr/inspect_cropped_curve_solver.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/remove_joint_overlays.py\" \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/avatar_skin_guard.py\" \"/private/tmp/bodyguard-presave-curves.CueGBr/a233\"",
+      "chunks": [
+        {
+          "chunk_id": "eb1d68",
+          "wall_time_seconds": 1.002472541,
+          "session_id": 5530,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "49fd7d",
+          "wall_time_seconds": 0.000013791,
+          "exit_code": 0,
+          "original_token_count": 918,
+          "output": "00:00.840  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\nA233 LOCAL HEAD INTERFACE {\"gender\": \"Male\", \"before\": {\"vertices\": 131645, \"faces\": 181201, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 2, \"long_folds\": 76, \"head_interface_long_edge_angles_deg\": {\"median\": 0.9495062179887273, \"p95\": 3.0165579561345974, \"max\": 14.255002656335764}}, \"after\": {\"vertices\": 131645, \"faces\": 181201, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 2, \"long_folds\": 76, \"head_interface_long_edge_angles_deg\": {\"median\": 0.9495062179887273, \"p95\": 3.0165579561345974, \"max\": 14.255002656335764}}, \"selected_sharp_edges\": 421, \"selected_points\": 3136, \"zero_mask_coordinates_exact\": true, \"all_numeric_skin_faces_group_order_hands_163_rest_bones_world_materials_exact\": true, \"maximum_artist_displacement_m\": 0.0, \"cropped_authored_vertices\": 3509, \"cropped_authored_faces\": 5565, \"cropped_native_changed_points\": 0, \"cropped_native_maximum_m\": 0.0, \"cropped_boundary_zero_mask_coordinates_exact\": true, \"copied_patch_coordinates_back_to_body\": false, \"artist_region\": [0.865, 0.94], \"seed_region\": [0.885, 0.915], \"artist_width_max_fraction\": 0.055, \"same_artist_support_as_A229\": true, \"implicit_solver_lambda_not_equivalent_to_corrective_factor\": true, \"selection_degrees\": 5, \"geodesic_radius_m\": 0.02, \"native\": \"LAPLACIANSMOOTH/lambda.35/border.01/16/normalized/no-volume-correction\", \"existing_6mm_guard_and_geometry_passed\": true, \"appearance_approved\": false, \"whole_neck_remesh\": false, \"pre_save_individual_and_sum_skin_guard_vertices\": 131645, \"skin_guard_sha256\": \"044a34e1fb399f3760cfb77b584386c73457595afc4649322cb97b5321e4c240\"}\nA233 LOCAL HEAD INTERFACE {\"gender\": \"Female\", \"before\": {\"vertices\": 130554, \"faces\": 179438, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 0, \"long_folds\": 107, \"head_interface_long_edge_angles_deg\": {\"median\": 1.0442747725575368, \"p95\": 3.4999549896887294, \"max\": 24.256540865539232}}, \"after\": {\"vertices\": 130554, \"faces\": 179438, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 0, \"long_folds\": 107, \"head_interface_long_edge_angles_deg\": {\"median\": 1.0442747725575368, \"p95\": 3.4999549896887294, \"max\": 24.256540865539232}}, \"selected_sharp_edges\": 626, \"selected_points\": 4831, \"zero_mask_coordinates_exact\": true, \"all_numeric_skin_faces_group_order_hands_163_rest_bones_world_materials_exact\": true, \"maximum_artist_displacement_m\": 0.0, \"cropped_authored_vertices\": 5394, \"cropped_authored_faces\": 8583, \"cropped_native_changed_points\": 0, \"cropped_native_maximum_m\": 0.0, \"cropped_boundary_zero_mask_coordinates_exact\": true, \"copied_patch_coordinates_back_to_body\": false, \"artist_region\": [0.865, 0.94], \"seed_region\": [0.885, 0.915], \"artist_width_max_fraction\": 0.055, \"same_artist_support_as_A229\": true, \"implicit_solver_lambda_not_equivalent_to_corrective_factor\": true, \"selection_degrees\": 5, \"geodesic_radius_m\": 0.02, \"native\": \"LAPLACIANSMOOTH/lambda.35/border.01/16/normalized/no-volume-correction\", \"existing_6mm_guard_and_geometry_passed\": true, \"appearance_approved\": false, \"whole_neck_remesh\": false, \"pre_save_individual_and_sum_skin_guard_vertices\": 130554, \"skin_guard_sha256\": \"044a34e1fb399f3760cfb77b584386c73457595afc4649322cb97b5321e4c240\"}\nA233 original remains exact; patch is diagnostic only\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-08.json.txt.gz",
+      "full_stdout_preserved": true
+    },
+    {
+      "purpose": "A234 fixed cutoff and unit control",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-presave-curves.CueGBr/inspect_solver_unit_cutoff.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/remove_joint_overlays.py\" \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/avatar_skin_guard.py\" \"/private/tmp/bodyguard-presave-curves.CueGBr/a234\"",
+      "chunks": [
+        {
+          "chunk_id": "e1637e",
+          "wall_time_seconds": 1.0039645,
+          "session_id": 58354,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "36bb47",
+          "wall_time_seconds": 0.000012625,
+          "exit_code": 0,
+          "original_token_count": 47,
+          "output": "A234 original remains exact; patch is diagnostic only\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-09.json.txt.gz",
+      "full_stdout_preserved": false,
+      "missing_stdout_chunk_ids": [
+        "a4451a"
+      ],
+      "note": "The actual a4451a chunk was read but was not retained in the store; native JSON diagnosis is preserved. No missing output is reconstructed."
+    },
+    {
+      "purpose": "A235 authored native local-unit candidate",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-presave-curves.CueGBr/fair_cervical_local_units.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/remove_joint_overlays.py\" \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/avatar_skin_guard.py\" \"/private/tmp/bodyguard-presave-curves.CueGBr/a235\"",
+      "chunks": [
+        {
+          "chunk_id": "d90ab9",
+          "wall_time_seconds": 1.00311425,
+          "session_id": 75110,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "44609b",
+          "wall_time_seconds": 5.001732125,
+          "session_id": 75110,
+          "original_token_count": 608,
+          "output": "00:01.797  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\nA235 LOCAL HEAD INTERFACE {\"gender\": \"Male\", \"before\": {\"vertices\": 131645, \"faces\": 181201, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 2, \"long_folds\": 76, \"head_interface_long_edge_angles_deg\": {\"median\": 0.9495062179887273, \"p95\": 3.0165579561345974, \"max\": 14.255002656335764}}, \"after\": {\"vertices\": 131645, \"faces\": 181201, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 2, \"long_folds\": 76, \"head_interface_long_edge_angles_deg\": {\"median\": 0.9564704496212015, \"p95\": 3.0276738755653816, \"max\": 12.955753827132185}}, \"selected_sharp_edges\": 421, \"selected_points\": 3136, \"zero_mask_coordinates_exact\": true, \"all_numeric_skin_faces_group_order_hands_163_rest_bones_world_materials_exact\": true, \"maximum_artist_displacement_m\": 0.00037976024644171516, \"actually_changed_body_points\": 3118, \"cropped_authored_vertices\": 3509, \"cropped_authored_faces\": 5565, \"cropped_native_changed_points\": 3118, \"cropped_native_maximum_m\": 0.00037976024644171516, \"actual_patch_mask_positive_points\": 3136, \"solver_cutoff_unscaled\": {\"fixed_cutoff\": 1e-05, \"diagnostic_frozen_points\": 3509, \"positive_mask_frozen_points\": 3136, \"face_valence_counts\": {\"3\": 4460, \"4\": 1105}}, \"solver_cutoff_scaled\": {\"fixed_cutoff\": 1e-05, \"diagnostic_frozen_points\": 0, \"positive_mask_frozen_points\": 0, \"face_valence_counts\": {\"3\": 4460, \"4\": 1105}}, \"temporary_authored_copy_unit_scale\": 128.0, \"nonzero_native_movement_observed\": true, \"cropped_boundary_zero_mask_coordinates_exact\": true, \"copied_patch_coordinates_back_to_body\": true, \"artist_region\": [0.865, 0.94], \"seed_region\": [0.885, 0.915], \"artist_width_max_fraction\": 0.055, \"same_artist_support_as_A229\": true, \"implicit_solver_lambda_not_equivalent_to_corrective_factor\": true, \"selection_degrees\": 5, \"geodesic_radius_m\": 0.02, \"native\": \"LAPLACIANSMOOTH/lambda.35/border0/16/normalized/no-volume-correction\", \"existing_6mm_guard_and_geometry_passed\": true, \"appearance_approved\": false, \"whole_neck_remesh\": false, \"pre_save_individual_and_sum_skin_guard_vertices\": 131645, \"skin_guard_sha256\": \"044a34e1fb399f3760cfb77b584386c73457595afc4649322cb97b5321e4c240\"}\n"
+        },
+        {
+          "chunk_id": "7af815",
+          "wall_time_seconds": 5.118904292,
+          "session_id": 75110,
+          "original_token_count": 590,
+          "output": "A235 LOCAL HEAD INTERFACE {\"gender\": \"Female\", \"before\": {\"vertices\": 130554, \"faces\": 179438, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 0, \"long_folds\": 107, \"head_interface_long_edge_angles_deg\": {\"median\": 1.0442747725575368, \"p95\": 3.4999549896887294, \"max\": 24.256540865539232}}, \"after\": {\"vertices\": 130554, \"faces\": 179438, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 0, \"long_folds\": 107, \"head_interface_long_edge_angles_deg\": {\"median\": 1.0554053128620131, \"p95\": 3.480063344391537, \"max\": 23.876082253296595}}, \"selected_sharp_edges\": 626, \"selected_points\": 4831, \"zero_mask_coordinates_exact\": true, \"all_numeric_skin_faces_group_order_hands_163_rest_bones_world_materials_exact\": true, \"maximum_artist_displacement_m\": 0.0005616434424398006, \"actually_changed_body_points\": 4809, \"cropped_authored_vertices\": 5394, \"cropped_authored_faces\": 8583, \"cropped_native_changed_points\": 4809, \"cropped_native_maximum_m\": 0.0005616434424398006, \"actual_patch_mask_positive_points\": 4831, \"solver_cutoff_unscaled\": {\"fixed_cutoff\": 1e-05, \"diagnostic_frozen_points\": 5394, \"positive_mask_frozen_points\": 4831, \"face_valence_counts\": {\"3\": 6899, \"4\": 1683, \"5\": 1}}, \"solver_cutoff_scaled\": {\"fixed_cutoff\": 1e-05, \"diagnostic_frozen_points\": 0, \"positive_mask_frozen_points\": 0, \"face_valence_counts\": {\"3\": 6899, \"4\": 1683, \"5\": 1}}, \"temporary_authored_copy_unit_scale\": 128.0, \"nonzero_native_movement_observed\": true, \"cropped_boundary_zero_mask_coordinates_exact\": true, \"copied_patch_coordinates_back_to_body\": true, \"artist_region\": [0.865, 0.94], \"seed_region\": [0.885, 0.915], \"artist_width_max_fraction\": 0.055, \"same_artist_support_as_A229\": true, \"implicit_solver_lambda_not_equivalent_to_corrective_factor\": true, \"selection_degrees\": 5, \"geodesic_radius_m\": 0.02, \"native\": \"LAPLACIANSMOOTH/lambda.35/border0/16/normalized/no-volume-correction\", \"existing_6mm_guard_and_geometry_passed\": true, \"appearance_approved\": false, \"whole_neck_remesh\": false, \"pre_save_individual_and_sum_skin_guard_vertices\": 130554, \"skin_guard_sha256\": \"044a34e1fb399f3760cfb77b584386c73457595afc4649322cb97b5321e4c240\"}\n00:53.724  render           | Saved: '/private/tmp/bodyguard-presave-curves.CueGBr/a235/head-front-male.png'\n01:01.986  render           | Saved: '/private/tmp/bodyguard-presave-curves.CueGBr/a235/head-side-male.png'\n"
+        },
+        {
+          "chunk_id": "85d3d2",
+          "wall_time_seconds": 2.933352959,
+          "exit_code": 0,
+          "original_token_count": 165,
+          "output": "01:14.362  render           | Saved: '/private/tmp/bodyguard-presave-curves.CueGBr/a235/head-back-male.png'\n01:25.716  render           | Saved: '/private/tmp/bodyguard-presave-curves.CueGBr/a235/head-front-female.png'\n01:43.916  render           | Saved: '/private/tmp/bodyguard-presave-curves.CueGBr/a235/head-side-female.png'\n01:59.019  render           | Saved: '/private/tmp/bodyguard-presave-curves.CueGBr/a235/head-back-female.png'\nInfo: Saved as \"artist-candidate.blend\"\nA231 actual6PNG; no adoption; full QA pending\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-10.json.txt.gz",
+      "full_stdout_preserved": true
+    },
+    {
+      "purpose": "A236 independent saved reopen",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec --python-exit-code 1 --python \"/private/tmp/bodyguard-presave-curves.CueGBr/test_saved_cervical_local_units.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" \"/private/tmp/bodyguard-presave-curves.CueGBr/a235/artist-candidate.blend\" \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/avatar_skin_guard.py\" \"/private/tmp/bodyguard-presave-curves.CueGBr/a236-saved-native.json\"",
+      "chunks": [
+        {
+          "chunk_id": "346079",
+          "wall_time_seconds": 1.002313375,
+          "session_id": 88447,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "0fd121",
+          "wall_time_seconds": 0.000011917,
+          "exit_code": 0,
+          "original_token_count": 558,
+          "output": "00:01.742  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\n00:06.733  blend            | Read blend: \"/private/tmp/bodyguard-presave-curves.CueGBr/a235/artist-candidate.blend\"\nA236 INDEPENDENT SAVED NATIVE {\"passed\": true, \"rows\": [{\"gender\": \"Male\", \"changed_points\": 3118, \"maximum_artist_displacement_m\": 0.0003797602459129757, \"all_numeric_skin_topology_group_order_hands_163_rest_bones_world_finish_exact\": true, \"all_original_points_outside_head_interface_artist_band_exact\": true, \"preserved_original_points\": 128527, \"independent_individual_and_sum_skin_guard_passed\": true, \"predeclared_artist_region\": [0.865, 0.94], \"predeclared_artist_half_width_fraction\": 0.055}, {\"gender\": \"Female\", \"changed_points\": 4809, \"maximum_artist_displacement_m\": 0.0005616434468285517, \"all_numeric_skin_topology_group_order_hands_163_rest_bones_world_finish_exact\": true, \"all_original_points_outside_head_interface_artist_band_exact\": true, \"preserved_original_points\": 125745, \"independent_individual_and_sum_skin_guard_passed\": true, \"predeclared_artist_region\": [0.865, 0.94], \"predeclared_artist_half_width_fraction\": 0.055}], \"input_sha256\": {\"/Applications/\\u1112\\u1161\\u11a8\\u1100\\u116d \\u1102\\u1162\\u1107\\u116e/2026-2\\u1112\\u1161\\u11a8\\u1100\\u1175/\\u110b\\u1169\\u1111\\u1173\\u11ab\\u1109\\u1169\\u1109\\u1173 AI SW \\u110b\\u1172\\u11bc\\u1112\\u1161\\u11b8 \\u1111\\u1173\\u1105\\u1169\\u110c\\u1166\\u11a8\\u1110\\u1173/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\": \"1bdb837b608b1a2994f26e0fa827c9a57065353d2d242a2efbb6363f45d32000\", \"/private/tmp/bodyguard-presave-curves.CueGBr/a235/artist-candidate.blend\": \"1f2e2d2139835c6c29582b56b2aeea90f88eab6c540b8b784715a56ba08ec3e3\"}, \"independent_saved_native_reopen\": true, \"saved_assets\": 0, \"camera_calls\": 0, \"appearance_approved\": false, \"full_deformation_qa\": false, \"GLB_qa\": false, \"browser_qa\": false}\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-11.json.txt.gz",
+      "full_stdout_preserved": true
+    }
+  ],
+  "static_verification": {
+    "chunk_id": "53cc85",
+    "wall_time_seconds": 3.685096958,
+    "exit_code": 0,
+    "original_token_count": 692,
+    "output": "4 files already formatted\nAll checks passed!\nAll checks passed!\ntest_empty_and_unnormalized_vertices_fail (__main__.AvatarSkinGuardTests.test_empty_and_unnormalized_vertices_fail) ... ok\ntest_explicit_zero_is_not_a_rig_change (__main__.AvatarSkinGuardTests.test_explicit_zero_is_not_a_rig_change) ... ok\ntest_failed_preflight_does_not_reach_writer (__main__.AvatarSkinGuardTests.test_failed_preflight_does_not_reach_writer) ... ok\ntest_nonfinite_and_greater_than_one_fail (__main__.AvatarSkinGuardTests.test_nonfinite_and_greater_than_one_fail) ... ok\ntest_normalized_vertices_pass (__main__.AvatarSkinGuardTests.test_normalized_vertices_pass) ... ok\ntest_one_shot_vertex_iterator_is_checked (__main__.AvatarSkinGuardTests.test_one_shot_vertex_iterator_is_checked) ... ok\ntest_source_is_not_mutated_or_fixed (__main__.AvatarSkinGuardTests.test_source_is_not_mutated_or_fixed) ... ok\ntest_sum_near_one_does_not_allow_negative_coefficient (__main__.AvatarSkinGuardTests.test_sum_near_one_does_not_allow_negative_coefficient) ... ok\ntest_unknown_even_zero_palette_entry_fails (__main__.AvatarSkinGuardTests.test_unknown_even_zero_palette_entry_fails) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.001s\n\nOK\ntest_absent_and_explicit_zero_are_exactly_equal (__main__.SkinCoefficientTests.test_absent_and_explicit_zero_are_exactly_equal) ... ok\ntest_boolean_and_nonnumeric_coefficients_are_rejected (__main__.SkinCoefficientTests.test_boolean_and_nonnumeric_coefficients_are_rejected) ... ok\ntest_empty_zero_palette (__main__.SkinCoefficientTests.test_empty_zero_palette) ... ok\ntest_invalid_palette_size_is_rejected (__main__.SkinCoefficientTests.test_invalid_palette_size_is_rejected) ... ok\ntest_negative_and_boolean_groups_are_rejected (__main__.SkinCoefficientTests.test_negative_and_boolean_groups_are_rejected) ... ok\ntest_nonfinite_and_out_of_range_weights_are_rejected (__main__.SkinCoefficientTests.test_nonfinite_and_out_of_range_weights_are_rejected) ... ok\ntest_one_float32_ulp_difference_is_not_tolerated (__main__.SkinCoefficientTests.test_one_float32_ulp_difference_is_not_tolerated) ... ok\ntest_palette_order_is_numeric_not_insertion_order (__main__.SkinCoefficientTests.test_palette_order_is_numeric_not_insertion_order) ... ok\ntest_source_mapping_is_not_mutated_or_normalized (__main__.SkinCoefficientTests.test_source_mapping_is_not_mutated_or_normalized) ... ok\ntest_tiny_positive_weight_is_not_dropped (__main__.SkinCoefficientTests.test_tiny_positive_weight_is_not_dropped) ... ok\ntest_unknown_even_zero_group_is_rejected (__main__.SkinCoefficientTests.test_unknown_even_zero_group_is_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.005s\n\nOK\n"
+  },
+  "static_before_native": [
+    {
+      "key": "preCurveStatic",
+      "result": {
+        "chunk_id": "b10237",
+        "wall_time_seconds": 0.000016917,
+        "exit_code": 0,
+        "original_token_count": 15,
+        "output": "1 file reformatted\nAll checks passed!\nAll checks passed!\n"
+      }
+    },
+    {
+      "key": "preCurveSavedStatic",
+      "result": {
+        "chunk_id": "7666a5",
+        "wall_time_seconds": 1.880045833,
+        "exit_code": 0,
+        "original_token_count": 15,
+        "output": "1 file reformatted\nAll checks passed!\nAll checks passed!\n"
+      }
+    },
+    {
+      "key": "preNativeApiStatic",
+      "result": {
+        "chunk_id": "40d4d8",
+        "wall_time_seconds": 0.085231667,
+        "exit_code": 0,
+        "original_token_count": 15,
+        "output": "1 file left unchanged\nAll checks passed!\nAll checks passed!\n"
+      }
+    },
+    {
+      "key": "preLaplaceStatic",
+      "result": {
+        "chunk_id": "60970f",
+        "wall_time_seconds": 0.000025375,
+        "exit_code": 0,
+        "original_token_count": 15,
+        "output": "1 file left unchanged\nAll checks passed!\nAll checks passed!\n"
+      }
+    },
+    {
+      "key": "preSolverControlStatic",
+      "result": {
+        "chunk_id": "fa47d3",
+        "wall_time_seconds": 0.000012625,
+        "exit_code": 0,
+        "original_token_count": 15,
+        "output": "1 file reformatted\nAll checks passed!\nAll checks passed!\n"
+      }
+    },
+    {
+      "key": "preCropStatic",
+      "result": {
+        "chunk_id": "d39f74",
+        "wall_time_seconds": 0.000094292,
+        "exit_code": 0,
+        "original_token_count": 15,
+        "output": "1 file left unchanged\nAll checks passed!\nAll checks passed!\n"
+      }
+    },
+    {
+      "key": "preUnitCandidateStatic",
+      "result": {
+        "chunk_id": "98e564",
+        "wall_time_seconds": 0.000010416,
+        "exit_code": 0,
+        "original_token_count": 15,
+        "output": "1 file left unchanged\nAll checks passed!\nAll checks passed!\n"
+      }
+    },
+    {
+      "key": "preUnitSavedStatic",
+      "result": {
+        "chunk_id": "c4dd80",
+        "wall_time_seconds": 0.000023458,
+        "exit_code": 0,
+        "original_token_count": 15,
+        "output": "1 file reformatted\nAll checks passed!\nAll checks passed!\n"
+      }
+    }
+  ],
+  "native_preflight_unit_tests": 9,
+  "exact_coefficients_unit_tests": 11,
+  "directly_viewed": [
+    "a229/head-front-male.png",
+    "a229/head-side-male.png",
+    "a229/head-back-male.png",
+    "a229/head-front-female.png",
+    "a229/head-side-female.png",
+    "a229/head-back-female.png",
+    "a231/head-back-male.png",
+    "a231/head-back-female.png",
+    "a235/head-front-male.png",
+    "a235/head-side-male.png",
+    "a235/head-back-male.png",
+    "a235/head-front-female.png",
+    "a235/head-side-female.png",
+    "a235/head-back-female.png"
+  ],
+  "actual_renders": 18,
+  "blend_files": 3,
+  "GLB_files": 0,
+  "full_118_deformation_runs": 0,
+  "browser_runs": [],
+  "appearance_approved": false,
+  "service_adopted": false,
+  "pr_merge_allowed": false,
+  "stages_1_to_6_completed": false,
+  "current_development_asset": "A37",
+  "camera_calls": 0,
+  "known_metadata_errors": [
+    "A233 report native text says border.01 but executed helper lambda_border=0.0; both preserved.",
+    "A235 last stdout banner inherited A231 label; actual helper/save report/output paths identify A235.",
+    "A231 producer allowed zero movement and saved a no-op model; NOT accepted. A235 asserts nonzero before save."
+  ],
+  "limitations": [
+    "No GLB/full118/Chrome for these rejected or preliminary candidates.",
+    "Writer stub is a synthetic unit test, not an actual storage integration test.",
+    "A228 native negative check does not save/export; actual A229/A235 producers call the guard before writes.",
+    "Historical protected exporter and review harness are unchanged; global exporter integration is not claimed."
+  ],
+  "review": {
+    "new_guard_p1_p2_findings": [],
+    "overall_pr_p2": [
+      "A-02 appearance",
+      "A-08 face/neck continuity"
+    ],
+    "merge_allowed": false
+  },
+  "official_source": {
+    "url": "https://raw.githubusercontent.com/blender/blender/b70da489d7f4/source/blender/modifiers/intern/MOD_laplaciansmooth.cc",
+    "commit": "b70da489d7f4",
+    "snapshot": "official-source/MOD_laplaciansmooth.cc.txt.gz",
+    "source_sha256": "aa85424124a4bc4760ffdced29d3a4b90fbd51b40861366e6b0ab864a29075ca"
+  }
+}
