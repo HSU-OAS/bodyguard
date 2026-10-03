@@ -1,0 +1,463 @@
+{
+  "input_sha256": "602de73537edcf24fd7fe92aed84d28c800e99f5125865c5f5d644657f85e1f9",
+  "scope": "Authored mannequin native phase diagnostic only; not real-person coordinates or medical evidence.",
+  "input_sha256_unchanged_after_edits": true,
+  "helper_sha256": "f62a5d04befc710202c105fa3fe71d278c492025bdbf3c310d5d81d9dae444f7",
+  "source_saved": false,
+  "appearance_approved": false,
+  "full_deformation_qa": false,
+  "rows": [
+    {
+      "body": "Male",
+      "modifier": "DISPLACE/Y-axis/push-pull then CORRECTIVE_SMOOTH/LENGTH_WEIGHTED/only-smooth",
+      "fairing_factor": 0.25,
+      "fairing_iterations": 80,
+      "control_selected_vertices": 7370,
+      "fairing_selected_vertices": 5076,
+      "fairing_mask_normalized_z": [
+        0.875,
+        0.945
+      ],
+      "native_controls": [
+        {
+          "offset_normalized_z": 0.003,
+          "strength_m": 0.0045
+        },
+        {
+          "offset_normalized_z": 0.013,
+          "strength_m": -0.0045
+        }
+      ],
+      "artist_gaussian_width_normalized_z": 0.008,
+      "measured_trough_normalized_z": 0.89,
+      "selected_vertices": 8023,
+      "outside_band_exact_vertices": 121607,
+      "mask_normalized_z": [
+        0.86,
+        0.934
+      ],
+      "maximum_displacement_m": 0.004134343267315117,
+      "control_only_maximum_displacement_m": 0.0037746671595864094,
+      "maximum_point": {
+        "index": 76094,
+        "a123_original_id": 77797,
+        "original_normalized_z": 0.8924688055401213,
+        "original_xyz_m": [
+          -0.004543639719486237,
+          0.006167435087263584,
+          1.5034770965576172
+        ],
+        "control_xyz_m": [
+          -0.004543639719486237,
+          0.009852174669504166,
+          1.5034770965576172
+        ],
+        "final_xyz_m": [
+          -0.0041588894091546535,
+          0.010248403064906597,
+          1.5040160417556763
+        ],
+        "control_delta_xyz_m": [
+          0.0,
+          0.0036847395822405815,
+          0.0
+        ],
+        "fairing_delta_xyz_m": [
+          0.000384750310331583,
+          0.0003962283954024315,
+          0.000538945198059082
+        ],
+        "control_displacement_m": 0.00368473963298836,
+        "fairing_displacement_m": 0.0007716810584599214,
+        "original_named_skin": [
+          [
+            "spine01",
+            0.02542700245976448
+          ],
+          [
+            "neck01",
+            0.08472959697246552
+          ],
+          [
+            "neck02",
+            0.3586071729660034
+          ],
+          [
+            "neck03",
+            0.37063097953796387
+          ],
+          [
+            "head",
+            0.1606052666902542
+          ]
+        ],
+        "in_fairing_selection": true
+      },
+      "all_skin_topology_hands_163_rest_bones_world_exact": true,
+      "changed_x_z_vertices_inside_selected_band": 5004,
+      "posterior_section_before": [
+        {
+          "normalized_z": 0.875,
+          "posterior_y_m": 0.01545910356024738
+        },
+        {
+          "normalized_z": 0.88,
+          "posterior_y_m": 0.010816713831111886
+        },
+        {
+          "normalized_z": 0.885,
+          "posterior_y_m": 0.006587930723154287
+        },
+        {
+          "normalized_z": 0.89,
+          "posterior_y_m": 0.004048136142580863
+        },
+        {
+          "normalized_z": 0.895,
+          "posterior_y_m": 0.011488714497460749
+        },
+        {
+          "normalized_z": 0.9,
+          "posterior_y_m": 0.02012571381776179
+        },
+        {
+          "normalized_z": 0.905,
+          "posterior_y_m": 0.027128903859454063
+        },
+        {
+          "normalized_z": 0.91,
+          "posterior_y_m": 0.03285028451338591
+        },
+        {
+          "normalized_z": 0.915,
+          "posterior_y_m": 0.037751134011483736
+        },
+        {
+          "normalized_z": 0.92,
+          "posterior_y_m": 0.04182682006851932
+        },
+        {
+          "normalized_z": 0.925,
+          "posterior_y_m": 0.045255096572625976
+        },
+        {
+          "normalized_z": 0.93,
+          "posterior_y_m": 0.04793652642725968
+        },
+        {
+          "normalized_z": 0.935,
+          "posterior_y_m": 0.05018604979573171
+        },
+        {
+          "normalized_z": 0.9400000000000001,
+          "posterior_y_m": 0.05177267900021257
+        }
+      ],
+      "posterior_section_after": [
+        {
+          "normalized_z": 0.875,
+          "posterior_y_m": 0.015490792626543069
+        },
+        {
+          "normalized_z": 0.88,
+          "posterior_y_m": 0.011271273193594422
+        },
+        {
+          "normalized_z": 0.885,
+          "posterior_y_m": 0.008414539440182084
+        },
+        {
+          "normalized_z": 0.89,
+          "posterior_y_m": 0.007647380024182203
+        },
+        {
+          "normalized_z": 0.895,
+          "posterior_y_m": 0.013629906157796084
+        },
+        {
+          "normalized_z": 0.9,
+          "posterior_y_m": 0.018398003875943647
+        },
+        {
+          "normalized_z": 0.905,
+          "posterior_y_m": 0.023702033532356725
+        },
+        {
+          "normalized_z": 0.91,
+          "posterior_y_m": 0.030457500683247388
+        },
+        {
+          "normalized_z": 0.915,
+          "posterior_y_m": 0.036673879751068256
+        },
+        {
+          "normalized_z": 0.92,
+          "posterior_y_m": 0.04137125197840759
+        },
+        {
+          "normalized_z": 0.925,
+          "posterior_y_m": 0.044962744046580586
+        },
+        {
+          "normalized_z": 0.93,
+          "posterior_y_m": 0.04774830150511874
+        },
+        {
+          "normalized_z": 0.935,
+          "posterior_y_m": 0.05006959152698072
+        },
+        {
+          "normalized_z": 0.9400000000000001,
+          "posterior_y_m": 0.05173454630876169
+        }
+      ],
+      "before": {
+        "posterior_head_base_p95_deg": 2.5927274292189697,
+        "posterior_head_base_max_deg": 12.369099487809681,
+        "seam_p95_deg": 6.307368071125894,
+        "seam_max_deg": 177.32649138289491,
+        "local_long_folds": 1,
+        "local_tiny_faces": 0,
+        "global_nonmanifold": 0,
+        "global_winding_errors": 0
+      },
+      "after": {
+        "posterior_head_base_p95_deg": 2.9826193864790387,
+        "posterior_head_base_max_deg": 11.486864443286644,
+        "seam_p95_deg": 6.307368071125894,
+        "seam_max_deg": 177.32649138289491,
+        "local_long_folds": 1,
+        "local_tiny_faces": 0,
+        "global_nonmanifold": 0,
+        "global_winding_errors": 0
+      },
+      "geometry_guards_passed": true
+    },
+    {
+      "body": "Female",
+      "modifier": "DISPLACE/Y-axis/push-pull then CORRECTIVE_SMOOTH/LENGTH_WEIGHTED/only-smooth",
+      "fairing_factor": 0.25,
+      "fairing_iterations": 80,
+      "control_selected_vertices": 6298,
+      "fairing_selected_vertices": 4606,
+      "fairing_mask_normalized_z": [
+        0.875,
+        0.945
+      ],
+      "native_controls": [
+        {
+          "offset_normalized_z": 0.003,
+          "strength_m": 0.0045
+        },
+        {
+          "offset_normalized_z": 0.013,
+          "strength_m": -0.0045
+        }
+      ],
+      "artist_gaussian_width_normalized_z": 0.008,
+      "measured_trough_normalized_z": 0.895,
+      "selected_vertices": 6668,
+      "outside_band_exact_vertices": 121721,
+      "mask_normalized_z": [
+        0.865,
+        0.9390000000000001
+      ],
+      "maximum_displacement_m": 0.006074373162297005,
+      "control_only_maximum_displacement_m": 0.0037746689666884243,
+      "maximum_point": {
+        "index": 96276,
+        "a123_original_id": 98463,
+        "original_normalized_z": 0.8922015639207128,
+        "original_xyz_m": [
+          0.0007067966507747769,
+          0.004453606903553009,
+          1.462166428565979
+        ],
+        "control_xyz_m": [
+          0.0007067966507747769,
+          0.007019956596195698,
+          1.462166428565979
+        ],
+        "final_xyz_m": [
+          0.0007512657321058214,
+          0.008386996574699879,
+          1.4575377702713013
+        ],
+        "control_delta_xyz_m": [
+          0.0,
+          0.0025663496926426888,
+          0.0
+        ],
+        "fairing_delta_xyz_m": [
+          4.4469081331044436e-05,
+          0.001367039978504181,
+          -0.004628658294677734
+        ],
+        "control_displacement_m": 0.0025663497234158085,
+        "fairing_displacement_m": 0.004826515639301976,
+        "original_named_skin": [
+          [
+            "neck01",
+            0.1028592437505722
+          ],
+          [
+            "neck02",
+            0.5339486598968506
+          ],
+          [
+            "neck03",
+            0.21788260340690613
+          ],
+          [
+            "head",
+            0.1453094631433487
+          ],
+          [
+            "spine01",
+            0.0
+          ]
+        ],
+        "in_fairing_selection": true
+      },
+      "all_skin_topology_hands_163_rest_bones_world_exact": true,
+      "changed_x_z_vertices_inside_selected_band": 4534,
+      "posterior_section_before": [
+        {
+          "normalized_z": 0.875,
+          "posterior_y_m": 0.01756149057244211
+        },
+        {
+          "normalized_z": 0.88,
+          "posterior_y_m": 0.01364576032060047
+        },
+        {
+          "normalized_z": 0.885,
+          "posterior_y_m": 0.009791031545522834
+        },
+        {
+          "normalized_z": 0.89,
+          "posterior_y_m": 0.006047589590496155
+        },
+        {
+          "normalized_z": 0.895,
+          "posterior_y_m": 0.002535130639890937
+        },
+        {
+          "normalized_z": 0.9,
+          "posterior_y_m": 0.0035670606801424948
+        },
+        {
+          "normalized_z": 0.905,
+          "posterior_y_m": 0.01624364593438175
+        },
+        {
+          "normalized_z": 0.91,
+          "posterior_y_m": 0.025328967661238804
+        },
+        {
+          "normalized_z": 0.915,
+          "posterior_y_m": 0.0321311388642771
+        },
+        {
+          "normalized_z": 0.92,
+          "posterior_y_m": 0.037387467529951625
+        },
+        {
+          "normalized_z": 0.925,
+          "posterior_y_m": 0.041462870670300675
+        },
+        {
+          "normalized_z": 0.93,
+          "posterior_y_m": 0.04458155830324461
+        },
+        {
+          "normalized_z": 0.935,
+          "posterior_y_m": 0.0468360102423619
+        },
+        {
+          "normalized_z": 0.9400000000000001,
+          "posterior_y_m": 0.04829901989620913
+        }
+      ],
+      "posterior_section_after": [
+        {
+          "normalized_z": 0.875,
+          "posterior_y_m": 0.01759763142309823
+        },
+        {
+          "normalized_z": 0.88,
+          "posterior_y_m": 0.013907895773984408
+        },
+        {
+          "normalized_z": 0.885,
+          "posterior_y_m": 0.010808585373150822
+        },
+        {
+          "normalized_z": 0.89,
+          "posterior_y_m": 0.008073737565252231
+        },
+        {
+          "normalized_z": 0.895,
+          "posterior_y_m": 0.005726609113963811
+        },
+        {
+          "normalized_z": 0.9,
+          "posterior_y_m": 0.00609675954059935
+        },
+        {
+          "normalized_z": 0.905,
+          "posterior_y_m": 0.014268984877842047
+        },
+        {
+          "normalized_z": 0.91,
+          "posterior_y_m": 0.021668740841357146
+        },
+        {
+          "normalized_z": 0.915,
+          "posterior_y_m": 0.0296039011410284
+        },
+        {
+          "normalized_z": 0.92,
+          "posterior_y_m": 0.03619551200166156
+        },
+        {
+          "normalized_z": 0.925,
+          "posterior_y_m": 0.040955474446606945
+        },
+        {
+          "normalized_z": 0.93,
+          "posterior_y_m": 0.044296011036773164
+        },
+        {
+          "normalized_z": 0.935,
+          "posterior_y_m": 0.04669237449684345
+        },
+        {
+          "normalized_z": 0.9400000000000001,
+          "posterior_y_m": 0.048257610087539156
+        }
+      ],
+      "before": {
+        "posterior_head_base_p95_deg": 2.6366431977046245,
+        "posterior_head_base_max_deg": 22.888513738940915,
+        "seam_p95_deg": 11.240695034089274,
+        "seam_max_deg": 17.138377259740402,
+        "local_long_folds": 0,
+        "local_tiny_faces": 0,
+        "global_nonmanifold": 0,
+        "global_winding_errors": 0
+      },
+      "after": {
+        "posterior_head_base_p95_deg": 2.7257451498615564,
+        "posterior_head_base_max_deg": 22.102425559816854,
+        "seam_p95_deg": 11.240695034089274,
+        "seam_max_deg": 17.138377259740402,
+        "local_long_folds": 0,
+        "local_tiny_faces": 0,
+        "global_nonmanifold": 0,
+        "global_winding_errors": 0
+      },
+      "geometry_guards_passed": false
+    }
+  ]
+}
