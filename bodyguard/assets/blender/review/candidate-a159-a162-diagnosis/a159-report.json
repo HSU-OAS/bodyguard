@@ -1,0 +1,148 @@
+{
+  "input_sha256": "602de73537edcf24fd7fe92aed84d28c800e99f5125865c5f5d644657f85e1f9",
+  "professional_sha256": "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137",
+  "helper_sha256": "774b34a1330548f9e6dfe087f0bd561bff5ba934577df9d0f07668b6a603f7d0",
+  "read_only": true,
+  "source_saved": false,
+  "appearance_approved": false,
+  "full_deformation_qa": false,
+  "scope": "Existing professional authored surface and detached native topology only. Boundary point samples are not surface distance, registration, 3D collision or anatomy validation.",
+  "rows": [
+    {
+      "body": "Male",
+      "current": {
+        "bounds_ymin_m_xmax_normalized_zmin_zmax": [
+          0.0,
+          0.036,
+          0.835,
+          0.925
+        ],
+        "all_selected_faces": 9532,
+        "selected_components_faces": [
+          9532
+        ],
+        "patch_faces": 9532,
+        "patch_vertices": 5251,
+        "patch_edges": 14782,
+        "boundary_edges": 341,
+        "boundary_degree_histogram": {
+          "2": 341
+        },
+        "patch_euler_characteristic": 1,
+        "simple_disk_before_extraction": true,
+        "actual_native_closed_loops": 1,
+        "actual_native_loop_counts": [
+          341
+        ],
+        "supported_single_disk": true
+      },
+      "professional": {
+        "bounds_ymin_m_xmax_normalized_zmin_zmax": [
+          0.004,
+          0.032,
+          0.84,
+          0.92
+        ],
+        "all_selected_faces": 410,
+        "selected_components_faces": [
+          410
+        ],
+        "patch_faces": 410,
+        "patch_vertices": 460,
+        "patch_edges": 869,
+        "boundary_edges": 98,
+        "boundary_degree_histogram": {
+          "2": 98
+        },
+        "patch_euler_characteristic": 1,
+        "simple_disk_before_extraction": true,
+        "actual_native_closed_loops": 1,
+        "actual_native_loop_counts": [
+          98
+        ],
+        "supported_single_disk": true
+      },
+      "boundary_vertex_samples_current_to_professional": {
+        "sample_count": 341,
+        "p95_m": 0.021153638139367104,
+        "max_m": 0.0234217569231987
+      },
+      "boundary_vertex_samples_professional_to_current": {
+        "sample_count": 98,
+        "p95_m": 0.016377339139580727,
+        "max_m": 0.017355073243379593
+      },
+      "native_bridge_supported": true,
+      "current_coordinates_skin_163_rest_bones_exact": true,
+      "native_bridge_performed": false
+    },
+    {
+      "body": "Female",
+      "current": {
+        "bounds_ymin_m_xmax_normalized_zmin_zmax": [
+          0.0,
+          0.036,
+          0.835,
+          0.925
+        ],
+        "all_selected_faces": 8295,
+        "selected_components_faces": [
+          8295
+        ],
+        "patch_faces": 8295,
+        "patch_vertices": 4523,
+        "patch_edges": 12817,
+        "boundary_edges": 355,
+        "boundary_degree_histogram": {
+          "2": 355
+        },
+        "patch_euler_characteristic": 1,
+        "simple_disk_before_extraction": true,
+        "actual_native_closed_loops": 1,
+        "actual_native_loop_counts": [
+          355
+        ],
+        "supported_single_disk": true
+      },
+      "professional": {
+        "bounds_ymin_m_xmax_normalized_zmin_zmax": [
+          0.004,
+          0.032,
+          0.84,
+          0.92
+        ],
+        "all_selected_faces": 380,
+        "selected_components_faces": [
+          380
+        ],
+        "patch_faces": 380,
+        "patch_vertices": 431,
+        "patch_edges": 810,
+        "boundary_edges": 100,
+        "boundary_degree_histogram": {
+          "2": 100
+        },
+        "patch_euler_characteristic": 1,
+        "simple_disk_before_extraction": true,
+        "actual_native_closed_loops": 1,
+        "actual_native_loop_counts": [
+          100
+        ],
+        "supported_single_disk": true
+      },
+      "boundary_vertex_samples_current_to_professional": {
+        "sample_count": 355,
+        "p95_m": 0.01953483559191227,
+        "max_m": 0.023753955960273743
+      },
+      "boundary_vertex_samples_professional_to_current": {
+        "sample_count": 100,
+        "p95_m": 0.014825883321464062,
+        "max_m": 0.015166159719228745
+      },
+      "native_bridge_supported": true,
+      "current_coordinates_skin_163_rest_bones_exact": true,
+      "native_bridge_performed": false
+    }
+  ]
+}

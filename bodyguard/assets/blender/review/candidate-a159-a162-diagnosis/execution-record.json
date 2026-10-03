@@ -1,0 +1,133 @@
+{
+  "status": "REJECTED; Draft PR #9 unmerged, A-02/A-08 P2 unresolved; development A37 unchanged",
+  "input_source": "../candidate-a136-a146-review/artist-candidate.blend",
+  "reference_sha256": "45b313912dee5ae2218b1fe76086abb35a9b948fab9e877f1a9d2b05f832de62",
+  "native_runs": [
+    {
+      "phase": "a159",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a159-detached-posterior-disks.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a159-detached-posterior-disks.json",
+      "exit_code": 0,
+      "terminal_chunk_id": "b9d4ff",
+      "terminal_stdout_retained": true,
+      "log": "logs/a159-observed.json.txt.gz"
+    },
+    {
+      "phase": "a160",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a160-native-posterior-donor-bridge.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a160-native-posterior-donor-bridge",
+      "exit_code": 1,
+      "terminal_chunk_id": "6ac4c4",
+      "terminal_stdout_retained": true,
+      "log": "logs/a160-observed.json.txt.gz"
+    },
+    {
+      "phase": "a161",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a161-native-bridge-correspondence.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a161-native-bridge-correspondence",
+      "exit_code": 0,
+      "terminal_chunk_id": "e670e3",
+      "terminal_stdout_retained": true,
+      "log": "logs/a161-observed.json.txt.gz"
+    },
+    {
+      "phase": "a162",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a162-native-linear-control.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a162-native-linear-control",
+      "exit_code": 1,
+      "terminal_chunk_id": "c85a57",
+      "terminal_stdout_retained": true,
+      "log": "logs/a162-observed.json.txt.gz"
+    }
+  ],
+  "evidence_copy": {
+    "exit_code": 0,
+    "terminal_chunk_id": "7a01dc",
+    "copies": 25,
+    "gzip": 12,
+    "protected_old_files": 646,
+    "old_files_changed": 0
+  },
+  "directly_viewed": [
+    "a160/posterior-side-male.png",
+    "a160/posterior-back-male.png",
+    "a160/posterior-side-female.png",
+    "a160/posterior-back-female.png",
+    "a162/posterior-side-male.png",
+    "a162/posterior-back-male.png",
+    "a162/posterior-side-female.png",
+    "a162/posterior-back-female.png"
+  ],
+  "native_actors_sequential": true,
+  "native_and_browser_actors_not_overlapped": true,
+  "new_verification": {
+    "actual_png": 8,
+    "directly_viewed": 8,
+    "not_viewed": 0,
+    "source_full_118": 0,
+    "glb_full_118": 0,
+    "actual_Chrome_tests": 0,
+    "actual_webcam_trials": 0
+  },
+  "new_assets": {
+    "artist_blend": 0,
+    "web_blend": 0,
+    "roundtrip_blend": 0,
+    "male_glb": 0,
+    "female_glb": 0
+  },
+  "limits": {
+    "appearance_approved": false,
+    "all_original_body_skin_coordinates_exact_for_patch_replacement": false,
+    "anatomy_registration": false,
+    "whole_3d_collision_verified": false,
+    "clinical_accuracy": false,
+    "real_demo_motion_verified": false,
+    "real_user_retarget_verified": false,
+    "release_complete": false,
+    "frontend_backend_full_suite_reexecuted": false,
+    "gui_modified": false,
+    "guard_relaxed": false
+  },
+  "static_pre_native_initial_failures": "A160 default S102/C402, then selector F401; corrected before any A160 native execution. Captured initial/ corrected actual outputs retained.",
+  "derived_projection": {
+    "report": "a161-strip-metrics.json",
+    "code": "scripts/a161-strip-metrics.cjs.txt.gz",
+    "native_runs": 0,
+    "exit_code": 0,
+    "tool_chunk_id": "09ca12",
+    "interpretation": "Actual A161 authored-geometry XZ projection, not whole 3D intersections, medical posture or user measurements."
+  },
+  "next_action": "Stop count-only boundary/SURFACE-versus-LINEAR parameter cycling. Establish actually nested posterior contours and geometric interval correspondence before the next native connection; preserve retained front/hands/rest rig and all existing QA.",
+  "archive_verification_observed": {
+    "initial_scope_scan": {
+      "chunk_id": "bd2ad0",
+      "wall_time_seconds": 0.0082485,
+      "exit_code": 1,
+      "original_token_count": 628,
+      "output": "[eval]:1\nconst fs=require(\"node:fs\"),path=require(\"node:path\"),zlib=require(\"node:zlib\"),assert=require(\"node:assert/strict\");const d=\"bodyguard/assets/blender/review/candidate-a159-a162-diagnosis\";const m=JSON.parse(fs.readFileSync(path.join(d,\"copy-manifest.json\")));const files=fs.readdirSync(d,{recursive:true}).filter(f=>fs.statSync(path.join(d,f)).isFile());assert.equal(files.length,29);assert.equal(m.copies.length,25);let textFiles=0,totalBytes=0,maximum=0,hits=0;const patterns=[/AKIA[0-9A-Z]{16}/g,/gh[pousr]_[A-Za-z0-9_]{20,}/g,/sk-[A-Za-z0-9_-]{24,}/g,/-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/g];for(const f of files){const raw=fs.readFileSync(path.join(d,f));totalBytes+=raw.length;maximum=Math.max(maximum,raw.length);if(f.endsWith(\".png\"))continue;const b=f.endsWith(\".gz\")?zlib.gunzipSync(raw):raw;const text=b.toString(\"utf8\");textFiles++;for(const p of patterns)hits+=(text.match(p)||[]).length;}assert.equal(hits,0);console.log(JSON.stringify({archive_files:files.length,protected_old_files:m.protected_old_file_count,total_bytes:totalBytes,maximum_file_bytes:maximum,decoded_text_files:textFiles,limited_secret_pattern_hits:hits,not_full_security_review:true}));}\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \nExpression expected\n\nSyntaxError: Unexpected token '}'\n    at makeContextifyScript (node:internal/vm:194:14)\n    at compileScript (node:internal/process/execution:388:10)\n    at evalTypeScript (node:internal/process/execution:260:22)\n    at node:internal/main/eval_string:71:3\n\nNode.js v24.20.0\n"
+    },
+    "corrected_scope_scan": {
+      "chunk_id": "593870",
+      "wall_time_seconds": 0.000010875,
+      "exit_code": 0,
+      "original_token_count": 47,
+      "output": "{\"archive_files\":29,\"protected_old_files\":646,\"total_bytes\":7719700,\"maximum_file_bytes\":870985,\"decoded_text_files\":21,\"limited_secret_pattern_hits\":0,\"not_full_security_review\":true}\n"
+    },
+    "integrity_terminal": {
+      "chunk_id": "4a63db",
+      "wall_time_seconds": 0.000018125,
+      "exit_code": 0,
+      "original_token_count": 443,
+      "output": "{\"integrity_passed\":true,\"copies\":110,\"gzip\":17,\"protected_old_files\":164,\"new_png\":74,\"directly_viewed\":32,\"native_exits\":[0,0,0,0,0,0,0],\"new_Chrome\":4,\"source_and_roundtrip_technical_pass\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":20,\"gzip\":16,\"protected_old_files\":278,\"native_exits\":[0,1,1,1,0,1],\"new_assets\":0,\"new_png\":0,\"new_browser\":0,\"geometry_or_appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":116,\"gzip\":24,\"protected_old_files\":302,\"native_exits\":[0,0,0,0,0,0,0,0,0,0],\"actual_png\":76,\"directly_viewed\":34,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":137,\"gzip\":33,\"protected_old_files\":422,\"native_exits\":[0,0,1,0,1,1,0,1,1,0,0,0,0,0,0],\"actual_png\":84,\"directly_viewed\":42,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":43,\"gzip\":22,\"protected_old_files\":563,\"native_exits\":[0,0,0,0,0,0,1,1,1],\"actual_png\":12,\"directly_viewed\":12,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"a154_fold_regression_resolved\":true,\"a154_female_guard_failed\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":32,\"gzip\":12,\"protected_old_files\":610,\"native_exits\":[1,0,0,0],\"actual_png\":16,\"directly_viewed\":16,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"a155_female_guard_failed\":true,\"a156_a157_guards_passed_but_appearance_failed\":true,\"a158_read_only\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":25,\"gzip\":12,\"protected_old_files\":646,\"native_exits\":[0,1,0,1],\"actual_png\":8,\"directly_viewed\":8,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"count_only_native_bridge_rejected\":true,\"correspondence_projection_not_anatomy\":true,\"appearance_passed\":false}\n"
+    },
+    "scope_scan_is_not_full_security_review": true
+  },
+  "review": {
+    "changes_only": "S2.4 diagnostic evidence and two existing avatar spec/Story update paragraphs; no adopted production model, frontend/backend, CI/ops or original file changes",
+    "unresolved_existing_P2": [
+      "A-02",
+      "A-08"
+    ],
+    "new_code_gate": "Actual five Python file default/isolated/format checks passed; native rejected geometry retained as failure",
+    "pr9_merge": "Not eligible while appearance P2 unresolved",
+    "latest_origin_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+    "checks": "NONE in latest PR #9 query"
+  }
+}
