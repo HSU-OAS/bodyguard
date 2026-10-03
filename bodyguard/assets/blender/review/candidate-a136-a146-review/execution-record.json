@@ -1,0 +1,343 @@
+{
+  "date_kst": "2026-10-03",
+  "story": "S2.4 appearance P2 continuation, not completion",
+  "repository_head_before": "578109a10dcfbb0b8b63eeb79808f7df28684ebc",
+  "main_before": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "latest_ceo_reference": {
+    "sha256": "45b313912dee5ae2218bfe76086abb35a9b948fab9e877f1a9d2b05f832de62",
+    "requirement": "smooth faceless head-neck continuity matching reference; unified unclothed neutral white male/female; retain anatomy and rig fidelity"
+  },
+  "native_runs": [
+    {
+      "phase": "a136",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' -b --factory-startup --disable-autoexec --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a136-cap-head-seam-probe.py' -- '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend' '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a130-a135-review/artist-candidate.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/a115-ordered-boundary.json' '/private/tmp/bodyguard-tailor.6b7Uvu/a136-cap-head-seam.json'",
+      "session": 39517,
+      "exit_code": 0,
+      "log": "logs/a136-observed.json.txt.gz",
+      "terminal_stdout_retained": false
+    },
+    {
+      "phase": "a137",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' -b --factory-startup --disable-autoexec '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a130-a135-review/artist-candidate.blend' --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a137-head-base-fairing-dryrun.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/a137-head-base-fairing-dryrun'",
+      "session": 16617,
+      "exit_code": 0,
+      "log": "logs/a137-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a138",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' -b --factory-startup --disable-autoexec '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a130-a135-review/artist-candidate.blend' --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a138-head-base-bounded-fairing.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/a138-head-base-bounded-fairing'",
+      "session": 32414,
+      "exit_code": 1,
+      "log": "logs/a138-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a139",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' -b --factory-startup --disable-autoexec '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a130-a135-review/artist-candidate.blend' --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a139-head-base-intermediate-fairing.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/a139-head-base-intermediate-fairing'",
+      "session": 73966,
+      "exit_code": 0,
+      "log": "logs/a139-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a140",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' -b --factory-startup --disable-autoexec --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a140-local-native-cleanup-probe.py' -- '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend' '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a130-a135-review/artist-candidate.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/a140-local-native-cleanup-probe'",
+      "session": 23443,
+      "exit_code": 1,
+      "log": "logs/a140-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a141",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' -b --factory-startup --disable-autoexec --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a141-local-native-cleanup-reproducer.py' -- '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend' '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a130-a135-review/artist-candidate.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/a141-local-native-cleanup-reproducer'",
+      "session": 29384,
+      "exit_code": 1,
+      "log": "logs/a141-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a142",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' -b --factory-startup --disable-autoexec --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a142-local-cleanup-retriangulation.py' -- '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend' '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a130-a135-review/artist-candidate.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/a142-local-cleanup-retriangulation'",
+      "session": 22825,
+      "exit_code": 0,
+      "log": "logs/a142-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a143",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' -b --factory-startup --disable-autoexec --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a143-generated-only-micro-merge.py' -- '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend' '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a130-a135-review/artist-candidate.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/a143-generated-only-micro-merge'",
+      "session": 70821,
+      "exit_code": 1,
+      "log": "logs/a143-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a144",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' -b --factory-startup --disable-autoexec --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a144-generated-wire-surface-guard.py' -- '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend' '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a130-a135-review/artist-candidate.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/a144-generated-wire-surface-guard'",
+      "session": 28603,
+      "exit_code": 1,
+      "log": "logs/a144-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a145",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' -b --factory-startup --disable-autoexec --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a145-coarse-cap-only-refinement.py' -- '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend' '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a130-a135-review/artist-candidate.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/a145-coarse-cap-only-refinement'",
+      "session": 27552,
+      "exit_code": 0,
+      "log": "logs/a145-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a146",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' -b --factory-startup --disable-autoexec --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a146-save-coarse-cap-candidate.py' -- '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend' '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a130-a135-review/artist-candidate.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/a146-coarse-cap-candidate'",
+      "session": 26813,
+      "exit_code": 0,
+      "log": "logs/a146-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a146Preservation",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' -b --factory-startup --disable-autoexec --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a146-saved-coarse-cap-preservation.py' -- '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend' '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a130-a135-review/artist-candidate.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/a146-coarse-cap-candidate/artist-candidate.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/a146-coarse-cap-candidate/density-report.json' '/private/tmp/bodyguard-tailor.6b7Uvu/a146-saved-preservation.json'",
+      "session": 31404,
+      "exit_code": 0,
+      "log": "logs/a146Preservation-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a146Source",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec /private/tmp/bodyguard-tailor.6b7Uvu/a146-coarse-cap-candidate/artist-candidate.blend --python-exit-code 1 --python bodyguard/assets/blender/review_avatar.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a146-source-review --candidate --mannequin",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "별도 저장·독립 보존 비교가 통과한 A146 원본의 기존 118개 변형과 실제 34PNG 렌더를 재실행합니다. 입력 원본·서비스 모델·카메라·배포는 변경하지 않습니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 2500
+      },
+      "session": 1532,
+      "exit_code": 0,
+      "log": "logs/a146Source-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a146Export",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec /private/tmp/bodyguard-tailor.6b7Uvu/a146-coarse-cap-candidate/artist-candidate.blend --python-exit-code 1 --python bodyguard/assets/blender/export_avatar_candidate.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a146-web-candidate.blend /private/tmp/bodyguard-tailor.6b7Uvu/a146-glb 1",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "원본 전체 변형 검사가 실제 통과한 A146을 별도 web 원본·남녀 GLB로 내보내 실제 재수입합니다. 입력 원본·서비스 모델·카메라·배포는 변경하지 않습니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 2500
+      },
+      "session": 65513,
+      "exit_code": 0,
+      "log": "logs/a146Export-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a146Roundtrip",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec /private/tmp/bodyguard-tailor.6b7Uvu/a146-web-candidate-roundtrip.blend --python-exit-code 1 --python bodyguard/assets/blender/review_avatar.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a146-roundtrip-review --candidate --mannequin",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "A146의 실제 GLB 재수입 원본에서 기존 118개 변형과 실제 34PNG 렌더를 재실행합니다. 입력 원본·서비스 모델·카메라·배포는 변경하지 않습니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 2500
+      },
+      "session": 65664,
+      "exit_code": 0,
+      "log": "logs/a146Roundtrip-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    }
+  ],
+  "native_actors_sequential": true,
+  "native_and_browser_actors_not_overlapped": true,
+  "blender": {
+    "version": "5.1.1",
+    "build": "b70da489d7f4",
+    "native_metal": true
+  },
+  "browser_run": {
+    "command": {
+      "cmd": "BODYGUARD_AVATAR_QA_DIRECTORY=/private/tmp/bodyguard-tailor.6b7Uvu/a146-glb PLAYWRIGHT_JSON_OUTPUT_NAME=/private/tmp/bodyguard-tailor.6b7Uvu/a146-browser-report.json .venv/bin/python -m tests.run_browser avatar",
+      "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/backend",
+      "sandbox_permissions": "require_escalated",
+      "justification": "승인된 아바타 Story의 새 GLB를 실제 Chrome·로컬 Vite에서 검증합니다. 외부 proxy를 차단하고 카메라 요청0을 강제하며 auth API·메일·SQL·배포·비용 작업은 없습니다.",
+      "yield_time_ms": 1000,
+      "max_output_tokens": 3000
+    },
+    "session": 82567,
+    "exit_code": 0,
+    "startTime": "2026-10-03T00:02:41.767Z",
+    "duration": 45449.489,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "log": "logs/browser-observed.json.txt.gz"
+  },
+  "browser_conditions": {
+    "macOS": "15.6",
+    "build": "24G84",
+    "chrome": "154.0.8037.93",
+    "version_read_chunk": "97f59a0",
+    "viewport": [
+      1440,
+      1080
+    ],
+    "device_ram_remeasured": false,
+    "camera_calls": 0,
+    "auth_api_smtp_sql": false,
+    "native_external_proxy_blocked": true,
+    "all_ten_meshes_visible_in_posterior": true
+  },
+  "synthetic_raf": [
+    {
+      "name": "남성-technical-render",
+      "data": {
+        "samples": 180,
+        "mean_ms": 16.673888888623978,
+        "p95_ms": 18.5,
+        "draw_calls": 21,
+        "triangles": 1053394,
+        "renderer": "WebKit WebGL",
+        "skeletons_independent": true,
+        "static_angle_max": 0,
+        "moving_angle_max": 0.20943904274044858,
+        "eight_weight_meshes": 2
+      }
+    },
+    {
+      "name": "여성-technical-render",
+      "data": {
+        "samples": 180,
+        "mean_ms": 16.657222221957312,
+        "p95_ms": 18.09999990463257,
+        "draw_calls": 21,
+        "triangles": 1043466,
+        "renderer": "WebKit WebGL",
+        "skeletons_independent": true,
+        "static_angle_max": 0,
+        "moving_angle_max": 0.2094383631603941,
+        "eight_weight_meshes": 2
+      }
+    }
+  ],
+  "source_and_roundtrip": {
+    "source": {
+      "passed": true,
+      "rendered": true,
+      "failures": [],
+      "checks": 121,
+      "stress": 118,
+      "max_edge_ratio": 2.9439303671031447,
+      "png": 34
+    },
+    "roundtrip": {
+      "passed": true,
+      "rendered": true,
+      "failures": [],
+      "checks": 121,
+      "stress": 118,
+      "max_edge_ratio": 2.94767980329051,
+      "png": 34
+    }
+  },
+  "actually_measured_assets": [
+    {
+      "file": "a146-coarse-cap-candidate/artist-candidate.blend",
+      "bytes": 29024314,
+      "sha256": "602de73537edcf24fd7fe92aed84d28c800e99f5125865c5f5d644657f85e1f9"
+    },
+    {
+      "file": "a146-web-candidate.blend",
+      "bytes": 30971294,
+      "sha256": "65cc891a5387b5b9a23c0fde5b51a4c533ce6c706d47639e2e3c7db2caa6009d"
+    },
+    {
+      "file": "a146-web-candidate-roundtrip.blend",
+      "bytes": 25311976,
+      "sha256": "bc91b2c8c871f54fc866327f7764a695020ce53cb6f31862ca91dee08de32f0e"
+    },
+    {
+      "file": "a146-glb/bodyguard-male-candidate.glb",
+      "bytes": 11561112,
+      "sha256": "1b034ee8e6e7eff9cc7c525ba34cfe7f7763d0566bd28cfae4d31c05097a2a8f"
+    },
+    {
+      "file": "a146-glb/bodyguard-female-candidate.glb",
+      "bytes": 11452080,
+      "sha256": "e6d06ddafe53afe4fbfc6243afa2400ad438e0bcab3ddb48ed3a4b54cff92c53"
+    }
+  ],
+  "copies": {
+    "count": 137,
+    "gzip": 33,
+    "png": 84,
+    "old_files_changed": 0,
+    "protected_old_files": 422
+  },
+  "directly_viewed": {
+    "weak": 4,
+    "intermediate": 4,
+    "cap": 4,
+    "source": 14,
+    "roundtrip": 12,
+    "browser": 4,
+    "total": 42,
+    "not_viewed": 42,
+    "scope": "All weak/intermediate/cap/browser PNG; source front/quarter/upper sides/back/hands/knees/4neck; roundtrip front/quarter/upper sides/back/hands/4neck. Other PNG exist but not visually inspected."
+  },
+  "static_verification": {
+    "actual_python_scripts": 12,
+    "default_ruff_exit": 0,
+    "isolated_ruff_exit": 0,
+    "format_exit": 0,
+    "temporary_frontend_tsc_biome_exit": 0,
+    "restored_frontend_tsc_biome_exit": 0,
+    "tracked_spec_byteexact_restored": true,
+    "own_temporary_client_removed": true,
+    "executed_spec_client_preserved": true,
+    "initial_a137_format_failure_fixed_before_native": true,
+    "full_build_and_backend_suite_run": false
+  },
+  "limits": {
+    "appearance_approved": false,
+    "service_asset_adopted": false,
+    "pr9_merge": false,
+    "stage1_6_completed": false,
+    "expert_approval": false,
+    "actual_webcam_human_trial": false,
+    "whole_body_collision_or_anatomy_proven": false,
+    "clinical_angles_or_prescription": false,
+    "operations_deployed": false,
+    "guard_relaxed": false,
+    "posthoc_coordinate_skin_restored": false,
+    "primary_source_reads_are_actual_candidate_validation": false
+  },
+  "outstanding_P2": [
+    "A-02 posterior head-base lip / neck-cap surface continuity",
+    "A-08 actual browser surface finish including joint boundaries"
+  ],
+  "next_safe_work": "Native local head-base silhouette/tangent editing, retaining anatomy/rig and previous evidence; selective density alone is not appearance completion.",
+  "warnings": [
+    "export male parent warnings5",
+    "NO_COLOR/FORCE_COLOR",
+    "THREE.Clock deprecation",
+    "intentional guest401 and recovery fixture503",
+    "context-loss extension/cleanup warning"
+  ],
+  "final_read_only_review": {
+    "artifact_check_chunk": "3168a2",
+    "artifact_files": 141,
+    "artifact_bytes": 178593853,
+    "limited_secret_pattern_text_files": 52,
+    "limited_secret_pattern_exit": 0,
+    "full_security_audit": false,
+    "all_new_files_below_100MB": true,
+    "working_diff_scope": "new A136-A146 review archive and two contract/status docs only",
+    "latest_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+    "manual_review": "Actual failure paths retain input assets; no guard relaxation, coordinate/skin restoration, development asset change or operations work. Appearance P2 remains unresolved."
+  },
+  "temporal_report_flags": "Diagnostic/candidate/saved/export reports freeze their phase; subsequent QA completion is established only by actual source/roundtrip/browser reports and observed exits."
+}
