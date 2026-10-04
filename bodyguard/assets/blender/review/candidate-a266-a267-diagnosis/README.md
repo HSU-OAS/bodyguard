@@ -46,3 +46,9 @@
 독립 S2.5a 개발 선택 준비는 [PR #14](https://github.com/HSU-OAS/bodyguard/pull/14)로 main merge commit4a00bb2에 병합됐으며 브랜치를 보존했다.
 Vitest138개·실제 Chrome5개(계정 응답 mock)·기존 가짜 카메라1개 통과, GitHub 체크 없음.
 이는 실제 동작/아바타/코칭/전체2단계·1~6 완료가 아니다. 기존 goal은 계속 진행한다.
+
+## 진행 브랜치의 최신 main 통합
+
+[통합/실패/회귀 기록](integration-record.md): 두 DEV 경로·모든 Story를 보존해 충돌을 해소하고151개·Biome65·tsc/build·mock 계정 실제 Chrome5개와 기존 A37 Chrome3개를 재실행했다.
+최초 proxy 오류와 GLB 비교 ENOBUFS를 보완해 재검사했다. 새 후보118변형/GLB/브라우저 QA로 표시하지 않는다.
+기존 A37 GLB는 변경 없고 PR #9은 Draft/외형 P2로 미병합 유지한다.
