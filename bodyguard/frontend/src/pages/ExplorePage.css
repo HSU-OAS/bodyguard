@@ -1,0 +1,36 @@
+/* FR-S-06/NFR-08: consistent controls and readable purpose selection. */
+.explore-screen > fieldset {
+  margin-top: 28px;
+}
+.explore-screen fieldset {
+  border: 0;
+  padding: 0;
+}
+.explore-screen legend {
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+.explore-screen .development-note .button {
+  margin-top: 20px;
+}
+.explore-screen > fieldset .button + .button {
+  margin-left: 12px;
+}
+.explore-screen [aria-pressed="true"] {
+  background: #163d36;
+  color: white;
+}
+.explore-screen .development-note fieldset {
+  margin-top: 24px;
+}
+.explore-screen label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-right: 24px;
+  cursor: pointer;
+}
+.explore-screen input {
+  accent-color: #163d36;
+}
