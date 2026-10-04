@@ -43,6 +43,35 @@ export type ResetInput = {
   password: string
 }
 
+export type StretchInput = {
+  id: string
+  motion_id: string
+  protocol_version: string
+  started_at: string
+  ended_at: string
+  outcome: 'completed' | 'interrupted' | 'skipped'
+  observed_ms: number
+  repetitions: number
+}
+
+export type StretchList = {
+  items: Array<StretchOut>
+  has_more: boolean
+}
+
+export type StretchOut = {
+  id: string
+  motion_id: string
+  protocol_version: string
+  started_at: string
+  ended_at: string
+  outcome: 'completed' | 'interrupted' | 'skipped'
+  observed_ms: number
+  repetitions: number
+  created_at: string
+  provenance?: 'client-reported'
+}
+
 export type UserOut = {
   id: string
   email: string
@@ -349,3 +378,88 @@ export type LogoutApiV1AuthLogoutPostResponses = {
 
 export type LogoutApiV1AuthLogoutPostResponse =
   LogoutApiV1AuthLogoutPostResponses[keyof LogoutApiV1AuthLogoutPostResponses]
+
+export type ListingApiV1RecordsStretchGetData = {
+  body?: never
+  path?: never
+  query?: {
+    limit?: number
+    offset?: number
+    start?: string | null
+    end?: string | null
+  }
+  url: '/api/v1/records/stretch'
+}
+
+export type ListingApiV1RecordsStretchGetErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type ListingApiV1RecordsStretchGetError =
+  ListingApiV1RecordsStretchGetErrors[keyof ListingApiV1RecordsStretchGetErrors]
+
+export type ListingApiV1RecordsStretchGetResponses = {
+  200: StretchList
+}
+
+export type ListingApiV1RecordsStretchGetResponse =
+  ListingApiV1RecordsStretchGetResponses[keyof ListingApiV1RecordsStretchGetResponses]
+
+export type SaveApiV1RecordsStretchPostData = {
+  body: StretchInput
+  path?: never
+  query?: never
+  url: '/api/v1/records/stretch'
+}
+
+export type SaveApiV1RecordsStretchPostErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type SaveApiV1RecordsStretchPostError =
+  SaveApiV1RecordsStretchPostErrors[keyof SaveApiV1RecordsStretchPostErrors]
+
+export type SaveApiV1RecordsStretchPostResponses = {
+  201: StretchOut
+}
+
+export type SaveApiV1RecordsStretchPostResponse =
+  SaveApiV1RecordsStretchPostResponses[keyof SaveApiV1RecordsStretchPostResponses]
+
+export type DetailApiV1RecordsStretchRecordIdGetData = {
+  body?: never
+  path: {
+    record_id: string
+  }
+  query?: never
+  url: '/api/v1/records/stretch/{record_id}'
+}
+
+export type DetailApiV1RecordsStretchRecordIdGetErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type DetailApiV1RecordsStretchRecordIdGetError =
+  DetailApiV1RecordsStretchRecordIdGetErrors[keyof DetailApiV1RecordsStretchRecordIdGetErrors]
+
+export type DetailApiV1RecordsStretchRecordIdGetResponses = {
+  200: StretchOut
+}
+
+export type DetailApiV1RecordsStretchRecordIdGetResponse =
+  DetailApiV1RecordsStretchRecordIdGetResponses[keyof DetailApiV1RecordsStretchRecordIdGetResponses]

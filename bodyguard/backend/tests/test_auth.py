@@ -818,10 +818,12 @@ def test_h21_migrated_constraints_and_restart(harness: Harness) -> None:
         "auth_limits",
         "password_resets",
         "google_flows",
+        "stretch_records",
     }
     with h.engine.connect() as connection:
         assert (
-            connection.scalar(text("SELECT version_num FROM alembic_version")) == "0003_google_auth"
+            connection.scalar(text("SELECT version_num FROM alembic_version"))
+            == "0004_stretch_records"
         )
     user_id = h.account()
     cookie = h.client.cookies.get(h.settings.cookie_name)

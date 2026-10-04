@@ -27,6 +27,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.config import Settings
 from app.db import challenges, google_flows, limits, resets, sessions, users
+from app.records import register_records
 from app.security import cleanup, code, digest, keyed, passwords, quota, token
 
 
@@ -931,4 +932,29 @@ def create_app(
         )
         return response
 
+    def record_owner(connection: Connection, request: Request, writing: bool) -> str:
+        # FR-R-03/FR-U-04: ownership comes only from the locked authenticated session.
+        now = now_fn()
+        row = (
+            protect(connection, request, now)
+            if writing
+            else session(
+                connection,
+                request,
+                now,
+                locked=True,
+            )
+        )
+        if row is None or not row["user_id"]:
+            raise HTTPException(401, "로그인이 필요합니다.")
+        connection.execute(
+            update(sessions)
+            .where(
+                sessions.c.token_hash == row["token_hash"],
+            )
+            .values(last_seen_at=now_fn())
+        )
+        return str(row["user_id"])
+
+    register_records(app, db, now_fn, record_owner)
     return app
