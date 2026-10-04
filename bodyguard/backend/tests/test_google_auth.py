@@ -586,7 +586,7 @@ def test_g07_local_downgrade_refuses_google_only_data_loss(google) -> None:
     with pytest.raises(RuntimeError, match="explicit data rollback"):
         command.downgrade(Config("alembic.ini"), "0002_password_recovery")
     with h.engine.connect() as c:
-        assert c.scalar(text("SELECT version_num FROM alembic_version")) == "0003_google_auth"
+        assert c.scalar(text("SELECT version_num FROM alembic_version")) == "0004_stretch_records"
     assert client.get("/api/v1/me").status_code == 200 and count(h, users) == 1
 
 

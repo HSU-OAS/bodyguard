@@ -53,7 +53,7 @@ it('PW-02 StrictMode clears the URL without losing the in-memory POST token', as
   fill()
   fireEvent.click(screen.getByRole('button', { name: '비밀번호 변경' }))
   const heading = await screen.findByRole('heading', { name: '비밀번호를 변경했습니다' })
-  expect(document.activeElement).toBe(heading)
+  await waitFor(() => expect(document.activeElement).toBe(heading))
   expect(fetcher.mock.calls.find(([url]) => url.endsWith('/password/reset'))).toEqual([
     '/api/v1/auth/password/reset',
     expect.objectContaining({

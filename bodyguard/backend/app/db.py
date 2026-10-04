@@ -5,6 +5,7 @@ from sqlalchemy import (
     Column,
     DateTime,
     ForeignKey,
+    Index,
     Integer,
     MetaData,
     String,
@@ -13,6 +14,33 @@ from sqlalchemy import (
 )
 
 metadata = MetaData()
+stretch_records = Table(
+    "stretch_records",
+    metadata,
+    Column("user_id", String(36), ForeignKey("users.id", ondelete="CASCADE"), primary_key=True),
+    Column("id", String(36), primary_key=True),
+    Column("motion_id", String(64), nullable=False),
+    Column("protocol_version", String(64), nullable=False),
+    Column("started_at", DateTime(timezone=True), nullable=False),
+    Column("ended_at", DateTime(timezone=True), nullable=False),
+    Column("outcome", String(16), nullable=False),
+    Column("observed_ms", Integer, nullable=False),
+    Column("repetitions", Integer, nullable=False),
+    Column("created_at", DateTime(timezone=True), nullable=False),
+    CheckConstraint("ended_at >= started_at", name="record_time_order"),
+    CheckConstraint("outcome IN ('completed', 'interrupted', 'skipped')", name="record_outcome"),
+    CheckConstraint("observed_ms >= 0 AND observed_ms <= 86400000", name="record_duration"),
+    CheckConstraint("repetitions >= 0 AND repetitions <= 10000", name="record_repetitions"),
+    CheckConstraint(
+        "outcome != 'skipped' OR (observed_ms = 0 AND repetitions = 0)", name="record_skipped_empty"
+    ),
+)
+Index(
+    "ix_stretch_records_owner_time",
+    stretch_records.c.user_id,
+    stretch_records.c.ended_at,
+    stretch_records.c.id,
+)
 users = Table(
     "users",
     metadata,

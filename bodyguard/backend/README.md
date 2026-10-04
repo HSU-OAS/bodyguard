@@ -1,6 +1,14 @@
-# BODYGUARD 계정 API
+# BODYGUARD 계정·기록 API
 
 S2.1 + S2.6a1/b1, FR-U-01~04·NFR-08. 이메일 확인/구글 계정, 서버 쿠키·CSRF, 본인 조회·로그아웃과 비밀번호 복구 API다. [복구 웹 화면](../docs/stories/stage2-password-recovery-web.md)은 PR #11 병합. [구글 API·로컬 보안 시험](../docs/stories/stage2-google-auth-api.md)은 실제 공급자 연결과 구분한다. 구글 웹·실제 Google/Gmail·기록·운영 배포는 미완료다.
+
+## 스트레칭 수행 요약 — S4.1
+
+로그인한 본인의 `/api/v1/records/stretch` POST 저장·GET 기간 목록과 `/{record_id}` GET 상세를 제공한다. 소유자는 쿠키 세션으로만 결정하고 쓰기는 Origin/CSRF를 검사한다. 원본 영상·관절 좌표·효과 점수는 받지 않는다. 반환의 `provenance: client-reported`는 수행 흐름 요약이며 올바른 자세·의학 효과 인증이 아니다.
+
+같은 본인 ID/내용 재전송은 200, 최초 저장은 201, 내용 충돌은 409다. 타인 상세와 없는 상세는 같은 404다. 목록은 기본 20/최대 100, offset 최대 10000이며 종료 시각/ID 최신 순서다. start 포함/end 제외의 aware timestamp 기간을 지원한다. 페이지 snapshot은 보장하지 않으므로 화면은 조회 기간을 고정해야 한다.
+
+새 `0004_stretch_records`는 계정 삭제에 연계 삭제되며 기록이 남은 downgrade를 거부한다. 운영 적용·rollback은 별도 승인이다. 실제 기록 화면·코칭 연동·기간 삭제·계정 삭제는 후속 Story이고 이번 API 구현만으로 전체 기록 서비스 완료를 뜻하지 않는다. 실제 검증과 실패/보완 이력은 [S4.1](../docs/stories/stage4-records-api.md)을 따른다.
 
 ## 로컬 실행
 
