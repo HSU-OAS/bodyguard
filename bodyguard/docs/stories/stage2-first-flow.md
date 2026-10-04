@@ -1,5 +1,7 @@
 # 2단계 — 첫 완성 흐름 실행 명세
 
+2026-10-04 추가 점검: [A303–A306 실제 경계 진단·저장 전 반려·native 무변화와 cutoff 가상 대조](../../assets/blender/review/candidate-a303-a306-diagnosis/README.md)는 native0/1/1/0·재현포함84048ray·이전1042파일 SHA 불변을 기록했습니다. C2 가중함수 시험은 전체 보호 PASS와 같은 원래 간선 곡률 FAIL을 분리했고, 원래 면 기반 native 시험은 변경0/0으로 반려했습니다. 단위128은 아직 읽기 전용 가상 계산이며 실제 보정·품질 검증이 아닙니다. 새 원본/GLB/PNG0·후속 변형/Chrome 미실행, A37·외형 P2·PR9 미병합·전체2단계 및1~6단계 미완료·별도 승인 기준을 유지합니다.
+
 2026-10-04 추가 점검: [A300–A302 면 분할/공간 이동장 진단과 단일 native 보완 시험](../../assets/blender/review/candidate-a300-a302-diagnosis/README.md)은 원래 삼각 연결에서도 실패를 재현했으며 새 시험의 p95 개선과 max 악화를 분리했습니다. native0/0/1·재현포함126072ray·이전1018파일 SHA 불변입니다. 새 blend/GLB/PNG0·후속 변형/Chrome 미실행, A37·외형 P2·PR9 미병합·전체2단계 및1~6단계 미완료·별도 승인 기준은 유지합니다.
 
 2026-10-04 추가 점검: [A295–A299 실제 표면 조형장 진단·두 저장 전 반려](../../assets/blender/review/candidate-a295-a299-diagnosis/README.md)는 native0/1/0/1·재현포함355104ray·기존991파일 SHA 보존을 기록했습니다. 새 원본/GLB/PNG0·후속 변형/Chrome 미실행이며 A37·외형 P2·PR9 미병합·전체2단계 및1~6단계 미완료를 유지합니다. 같은 전체 원래 간선으로 검사했으며 지원 부분의 보호 PASS를 전체 외형 통과로 바꾸지 않습니다.
