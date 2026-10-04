@@ -16,6 +16,11 @@
 Vitest138개·실제 Chrome5개(계정 응답 mock), production 후보/개발 진입0. [실제 PNG·기록](review/motion-selection/README.md).
 아바타 Draft PR #9 외형 P2·S2.3b 실제 수행·S2.4·전체 S2.5·2단계·1~6단계는 여전히 미완료다. 아래 오래된 PR 상태는 당시 기록으로 보존한다.
 
+2026-10-05 최신 상태: main 4a00bb2에 S2.5a PR #14까지 병합됐다.
+독립 [S2.5b 코칭 진행·중단 엔진](stories/stage2-coaching-engine.md)은 최신 main의 codex/stage2-coaching-engine에서 명세·하네스·구현·로컬 검증을 마쳤으며 PR 게이트 대기다.
+합성 엔진60개/전체 Vitest198개, 실제 Chrome 선택 회귀5개(계정 mock), production 엔진/후보/코칭 진입 차단을 확인했다.
+실제 코칭 분류·카메라/계정/두 아바타 adapter·운동 화면은 미연결이며 기존 단계 게이트를 낮추지 않는다. [실행·리뷰 증거](review/coaching-engine/README.md).
+
 | 1단계 Story | 산출물 | 완료 기준 | 상태 |
 |---|---|---|---|
 | 출시 계약 정합화 | 최신 PRD·설계·작업표·미정 목록, 단계별 게이트 | 게스트·아바타·동작 판정 충돌 해소, 기존 확정 요구 보존, 문서 링크·diff 검사 | PR #1 main 병합 |
