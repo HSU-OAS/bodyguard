@@ -60,6 +60,11 @@ export function MotionSelectionPage() {
                   {selected.title}
                 </h1>
                 <p className="motion-description">{selected.summary}</p>
+                <p className="small muted">
+                  {selected.reviewMode === 'guidance-candidate'
+                    ? '안내만 후보 · 자동 판정 없음'
+                    : '실시간 코칭 후보 · 촬영 검증 전'}
+                </p>
                 <section className="motion-steps" aria-labelledby="steps-heading">
                   <h2 id="steps-heading">수행 과정</h2>
                   <ol>
@@ -87,6 +92,7 @@ export function MotionSelectionPage() {
               <aside className="motion-preparation" aria-labelledby="prep-heading">
                 <h2 id="prep-heading">시작 전 확인</h2>
                 <p>{selected.framing}</p>
+                <p>{selected.observationLimit}</p>
                 <h3>편안한 범위에서 움직이세요</h3>
                 <ul>
                   {selected.cautions.map((caution) => (
