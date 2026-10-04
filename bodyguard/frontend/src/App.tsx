@@ -11,6 +11,13 @@ const Demo = import.meta.env.DEV
     )
   : null
 
+// FR-A-02/03: unapproved artist candidates and technical motions are development-only.
+const AvatarReview = import.meta.env.DEV
+  ? lazy(() =>
+      import('./pages/AvatarReviewPage').then((module) => ({ default: module.AvatarReviewPage })),
+    )
+  : null
+
 // FR-S-01/06: unvalidated candidates remain protected and development-only.
 const MotionSelection = import.meta.env.DEV
   ? lazy(() =>
@@ -250,6 +257,12 @@ function Shell() {
 // FR-M-01·07 라우트 이탈은 측정 화면을 실제로 해제하여 카메라를 끈다.
 function AppContent() {
   const location = useLocation()
+  if (AvatarReview && location.pathname === '/dev/avatar')
+    return (
+      <Suspense fallback={<p role="status">아바타 검수 도구를 여는 중입니다</p>}>
+        <AvatarReview />
+      </Suspense>
+    )
   return Demo && location.pathname === '/dev/measure' ? (
     <Suspense fallback={<p role="status">개발 도구를 여는 중입니다</p>}>
       <Demo />

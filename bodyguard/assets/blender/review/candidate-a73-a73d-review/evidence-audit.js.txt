@@ -1,0 +1,104 @@
+// FR-A-03/07: actual immutable native evidence; no clinical or release approval.
+const fs = require('node:fs'), path = require('node:path'), crypto = require('node:crypto');
+const assert = require('node:assert/strict'), { execFileSync } = require('node:child_process');
+const [root, tmp] = process.argv.slice(2);
+const base = 'bodyguard/assets/blender/', folder = base + 'review/candidate-a73-a73d-review/';
+const read = p => fs.readFileSync(path.join(root, p)), json = p => JSON.parse(read(p));
+const sha = b => crypto.createHash('sha256').update(b).digest('hex');
+let assertions = 0, png = 0, links = 0;
+const ok = (v, label) => { assert(v, label); assertions++; };
+const digest = '59ca68cdaef44b3a5945990e933d29be56f77c8ce388899e28d39af693cfd35b';
+const source = read(base + 'bodyguard_avatar_candidate_a73d_review.blend');
+ok(source.length === 28816624 && sha(source) === digest && source.equals(fs.readFileSync(path.join(tmp, 'draft-a73d-continuous-volume-head.blend'))), 'exact native source unchanged');
+const g = json(folder + 'a73d/generation-report.json');
+ok(g.length === 2 && g.every(r => r.retained_body_skin_hands_bones_rest_preserved && r.preserved_external_body_source.cut_closed_cavity_count === 0 && r.head_skin_correspondence.prepared_weights_preserved_during_registration), 'authored body/head skin retention');
+ok(g.every(r => r.head_volume_sculpt.cage_vertices === 266 && r.head_volume_sculpt.iterations === 100 && r.head_volume_sculpt.topology_and_closed_surface_preserved && r.head_volume_sculpt.native_volume_preserve_enabled && Number.isFinite(r.head_volume_sculpt.cage_volume_ratio) && r.head_volume_helper_sha256 === sha(read(folder + 'head-volume-sculpt.py.txt'))), 'actual native cage edit and closed volume only at its own stage');
+ok(g.every(r => r.head_cage_sculpt.iterations === 12 && r.head_cage_sculpt.selected_vertices === 151 && r.head_cage_sculpt.upper_cage_and_topology_preserved && r.head_cage_helper_sha256 === sha(read(folder + 'head-lower-cage-sculpt.py.txt'))), 'retained professional lower-cage edit');
+ok(g.every(r => r.artist_gap_m === 0.024 && r.head_authored_registration.final_cut_after_registration.final_plane_intercept_m === r.head_cut_m && Math.abs(r.head_authored_registration.registration_plane_intercept_change_m - r.head_authored_registration.reference_to_final_plane_delta_m) < 1e-7), 'fixed final cuts and actual section registration');
+ok(g.every(r => r.bridge_only_native_fairing.maximum_artist_displacement_m < 0.006 && r.bridge_only_native_fairing.authored_points_skin_and_topology_preserved), 'unchanged new-bridge-only6mm guard');
+const regression = json(folder + 'a73d/native-boundary-regression.json');
+ok(regression.passed && regression.artist_fixture_only && regression.checks.length === 16 && regression.checks.every(c => c.passed), 'actual16 native conditions, not body generation');
+for (const n of ['depth-0','depth-4','depth-8','volume-20','volume-40','volume-80','volume-100']) {
+  const d = json(folder + 'head-' + n + '/inspection-report.json');
+  ok(!d.source_saved && d.artist_inspection_only && !d.rig_deformation_or_release_approval && d.vertices === 67586 && d.head_cage_sculpt.upper_cage_and_topology_preserved, 'head-only native comparison');
+}
+for (const [p, native, rendered] of [
+  ['a73d/source/deformation-report.json','review-a73d-continuous-volume/deformation-report.json',true],
+  ['a73d/roundtrip-deformation-report.json','review-a73d-glb-roundtrip/deformation-report.json',false],
+]) {
+  const q = json(folder + p), poses = q.checks.filter(c => typeof c.edge_ratio_max === 'number');
+  ok(read(folder + p).equals(fs.readFileSync(path.join(tmp, native))), 'exact executed QA report');
+  ok(q.passed && !q.failures.length && q.rendered === rendered && q.checks.length === 121 && poses.length === 118, 'actual121/118 native technical QA');
+  ok(poses.every(c => Number.isFinite(c.edge_ratio_max) && c.edge_ratio_max < 3), 'unchanged deformation guard');
+  ok(q.checks[0].surface_style === 'unified-white-mannequin' && !q.checks[0].garments.length, 'no garments and shared finish');
+  ok(q.checks.filter(c => c.surface && c.pose === 'neutral').every(c => c.components === 1 && !c.non_manifold && !c.unnormalized), 'closed normalized complete bodies');
+}
+const preservation = json(folder + 'a73d/authored-body-preservation.json');
+ok(preservation.passed && !preservation.source_saved && preservation.rows[0].retained_authored_body_points_and_named_skin === 75915 && preservation.rows[1].retained_authored_body_points_and_named_skin === 75865 && preservation.rows.every(r => r.hands_163bones_rest_matrices_identical), 'independent actual retained body points/named skin/hands/163bones/rest/matrices');
+const seam = json(folder + 'a73d/actual-seam-diagnostic.json');
+ok(!seam.source_saved && seam.source_sha256 === digest && seam.rows.length === 2, 'actual read-only seam');
+for (const [i, edges] of [[0,413],[1,415]]) ok(seam.rows[i].rings.every(r => r.edges === edges) && Math.abs(seam.rows[i].actual_artist_vertical_gap_m - 0.024) < 1e-7, 'actual fixed24mm rings');
+const browser = json(folder + 'a73d/browser-report.json');
+ok(read(folder + 'a73d/browser-report.json').equals(fs.readFileSync(path.join(tmp,'a73d-browser-report.json'))), 'exact actual browser result');
+ok(browser.stats.expected === 3 && !browser.stats.unexpected && !browser.stats.flaky && !browser.stats.skipped && !browser.errors.length, 'three actual Chrome passes');
+const results = browser.suites.flatMap(s => s.specs || []).flatMap(s => s.tests || []).flatMap(t => t.results);
+ok(results.length === 3 && results.every(r => r.status === 'passed'), 'terminal browser tests');
+const attachments = results.flatMap(r => r.attachments || []);
+for (const gender of ['male','female']) {
+  const b = read(folder + 'a73d/bodyguard-' + gender + '-candidate.glb');
+  ok(b.equals(fs.readFileSync(path.join(tmp,'glb-a73d-continuous-volume/bodyguard-' + gender + '-candidate.glb'))), 'exact native GLB');
+  ok(b.toString('ascii',0,4) === 'glTF' && b.readUInt32LE(4) === 2 && b.readUInt32LE(8) === b.length, 'complete GLB2');
+  const gltf = JSON.parse(b.toString('utf8',20,20+b.readUInt32LE(12)));
+  ok(gltf.meshes.length === 5 && gltf.skins.length === 1 && gltf.skins[0].joints.length === 163 && !(gltf.images || []).length && !(gltf.cameras || []).length && !(gltf.animations || []).length, 'neutral GLB no references or coaching actions');
+  const body = gltf.nodes.find(n => n.name === 'BODYGUARD ' + (gender === 'male' ? 'Male' : 'Female') + ' sculpt WIP');
+  ok(body.skin !== undefined && gltf.meshes[body.mesh].primitives.every(p => p.attributes.JOINTS_1 !== undefined && p.attributes.WEIGHTS_1 !== undefined), 'native second weight set');
+  const assets = attachments.filter(a => a.name === gender + '-native-asset').map(a => JSON.parse(Buffer.from(a.body,'base64')));
+  ok(assets.length === 3 && assets.every(a => a.sha256 === sha(b) && a.bytes === b.length), 'Chrome loaded exact new bytes');
+}
+const renders = attachments.filter(a => a.name.endsWith('technical-render')).map(a => JSON.parse(Buffer.from(a.body,'base64')));
+ok(renders.length === 2 && renders.every(r => r.samples === 180 && r.skeletons_independent && r.static_angle_max === 0 && r.moving_angle_max > 0.1 && r.eight_weight_meshes === 2 && Number.isFinite(r.mean_ms) && Number.isFinite(r.p95_ms)), 'actual independent skeletons, not camera performance');
+const record = json(folder + 'execution-record.json');
+ok(record.native_all_terminal_before_browser && record.camera_requests === 0 && record.a73d.browser_exit_code === 0 && record.head_inspections.length === 7 && record.head_inspections.every(r => r.exit_code === 0 && !r.source_saved), 'actual terminal ordering and seven head inspections');
+ok(!record.appearance.default_adopted && record.appearance.unresolved_p2 && !record.appearance.merge_gate_satisfied && !record.appearance.stages_1_to_6_complete && record.appearance.development_default === 'A37 unchanged', 'no adoption/merge/stage skip');
+ok(record.unrun.some(r => r.startsWith('imported')) && record.unrun.some(r => r.startsWith('actual performer')) && record.device_read.explicit_three_fields_escalated_read_exit_code === 0 && record.device_read.initial_sandbox_sysctl_exit_codes.every(r => r === 1), 'real unrun and repaired restricted read');
+const files = [], markdown = ['bodyguard/docs/avatar-production.md','bodyguard/docs/stories/stage2-avatar-candidate.md'];
+function walk(relative) {
+  for (const e of fs.readdirSync(path.join(root,relative),{withFileTypes:true})) {
+    if (e.name === 'evidence-audit.json') continue;
+    const p = relative + e.name;
+    if (e.isDirectory()) { walk(p + '/'); continue; }
+    ok(e.isFile(),'regular evidence file');
+    const b = read(p); files.push({file:p,bytes:b.length,sha256:sha(b)});
+    if (e.name.endsWith('.md')) markdown.push(p);
+    if (!e.name.endsWith('.png')) continue;
+    ok(b.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])),'actual PNG bytes');
+    const rel = p.slice(folder.length);
+    let native;
+    if (rel.startsWith('head-depth-')) native = path.join(tmp,'head-a73-depth-' + rel.slice(11));
+    else if (rel.startsWith('head-volume-')) { const n = Number(rel.split('/')[0].slice(12)); native = path.join(tmp,'head-a73' + (n < 80 ? 'b' : 'c') + '-volume-' + rel.slice(12)); }
+    else if (rel.startsWith('a73d/source/')) native = path.join(tmp,'review-a73d-continuous-volume',e.name);
+    else if (rel.startsWith('a73d/browser/')) native = path.join(root,'bodyguard/frontend/test-results/avatar/avatar-A-06-실제-남녀-GLB-두-복제본을-로드하고-한쪽-기술-변형이-다른-뼈대를-바꾸지-않는다',(e.name.startsWith('male') ? '남성' : '여성') + '-two-models.png');
+    else throw Error('unexpected PNG origin');
+    ok(b.equals(fs.readFileSync(native)),'exact actual PNG copy'); png++;
+  }
+}
+walk(folder);
+ok(png === 50,'fourteen head plus34 native plus2 actual Chrome PNG');
+for (const file of markdown) for (const m of read(file).toString().matchAll(/!?\[[^\]]*\]\(([^\)]+)\)/g)) {
+  const target = m[1].split('#')[0];
+  if (!target || /^(https?:|codex:|mailto:)/.test(target)) continue;
+  const resolved = path.resolve(root,path.dirname(file),target);
+  if (resolved === path.join(root,folder,'evidence-audit.json')) continue;
+  ok(fs.existsSync(resolved),'local evidence link'); links++;
+}
+const prior = base + 'review/candidate-a72-a72c-review/evidence-audit.json';
+for (const f of json(prior).manifest) ok(read(f.file).length === f.bytes && sha(read(f.file)) === f.sha256,'prior evidence unchanged');
+ok(read(prior).equals(execFileSync('git',['show','3e5224c53c3b557def54d97241b48d5905c99f58:' + prior],{cwd:root})),'prior audit self unchanged');
+for (const [p,d] of [
+ ['bodyguard_avatar_candidate_a66_review.blend','03ac3629b76858ee7f55fc0ffa9e6118c5d64fcbf4ba29100889af1318a8b3b5'],
+ ['bodyguard_avatar_candidate_a72b_review.blend','1d0c0d70622b684cdad78dfecd60738bf8eaee312ba84228ce1c8fe83fb52d9c'],
+ ['bodyguard_avatar_candidate_a72c_review.blend','8e659fcfc983aae587044fd08e61c8253962259043753da7eb945aebf8d845c8'],
+ ['replace_neck_from_artist.py','774b34a1330548f9e6dfe087f0bd561bff5ba934577df9d0f07668b6a603f7d0'],
+]) ok(sha(read(base+p)) === d,'prior source/helper unchanged');
+ok(execFileSync('git',['diff','3e5224c53c3b557def54d97241b48d5905c99f58','--name-only','--',base+'bodyguard_avatar_candidate_a37.blend','bodyguard/frontend','bodyguard/backend','bodyguard/AGENTS.md','bodyguard/docs/operating-rules.md','bodyguard/docs/release-plan.md'],{cwd:root,encoding:'utf8'}).trim() === '','default/service/safety/approval gates unchanged');
+console.log(JSON.stringify({passed:true,assertions,actual_png:png,local_links:links,files:files.length,manifest:files},null,2));

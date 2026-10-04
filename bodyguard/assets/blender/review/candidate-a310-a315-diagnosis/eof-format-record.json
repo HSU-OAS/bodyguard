@@ -1,0 +1,19 @@
+{
+  "kind": "mechanical EOF format only; native helpers and report bytes unchanged",
+  "initial_staged_diff_check": {
+    "chunk_id": "bcf735",
+    "finding": "evidence-check.cjs:100: new blank line at EOF.",
+    "gate_passed": false
+  },
+  "initial_evidence_check": {
+    "chunk_id": "9d90b1",
+    "exit_code": 0,
+    "semantic_assertions_passed": true
+  },
+  "initial_checker_preserved": "initial-checker-before-eof-format.cjs.txt.gz",
+  "initial_checker_raw_sha256": "ce012306b98d867436a646ae98d0a3570d011ff7d10e83be4242e8444f75eab9",
+  "initial_checker_gzip_sha256": "ddb9423f1be089287f1aab951c03aef420733f127c71ad073eba9a7ad7a7a0df",
+  "repair": "Removed one empty final line only using apply_patch; semantic code unchanged; actual checker and staged diff check must rerun",
+  "native_models_saved": 0,
+  "native_scripts_or_reports_modified": false
+}

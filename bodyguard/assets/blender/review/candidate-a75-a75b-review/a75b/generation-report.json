@@ -1,0 +1,436 @@
+[
+  {
+    "body": "Male",
+    "professional_source": "human_base_meshes_bundle.blend",
+    "professional_sha256": "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137",
+    "helper_sha256": "6a96114e186b0db44a622beaef770dc58a193656344586f9f189783cc14018c4",
+    "head_source": "GEO-head_primitve",
+    "head_cage_sculpt": {
+      "method": "native lower professional head cage Y/Z smoothing",
+      "iterations": 12,
+      "factor": 0.45,
+      "selected_vertices": 151,
+      "cage_vertices": 266,
+      "upper_cage_and_topology_preserved": true,
+      "maximum_cage_displacement_m": 0.031244902455789817,
+      "artist_edit_only_not_anatomical_or_clinical_target": true
+    },
+    "head_volume_sculpt": {
+      "native_edit": "LAPLACIANSMOOTH / existing cage / normalized volume-preserving",
+      "iterations": 100,
+      "lambda_factor": 0.2,
+      "lambda_border": 0.1,
+      "native_volume_preserve_enabled": true,
+      "cage_vertices": 266,
+      "topology_and_closed_surface_preserved": true,
+      "cage_volume_before_native_units3": 0.0035623890776594223,
+      "cage_volume_after_native_units3": 0.0035642057086671696,
+      "cage_volume_ratio": 1.0005099473887173,
+      "maximum_artist_displacement_m": 0.0345892780207275,
+      "not_an_exercise_or_release_approval": true
+    },
+    "head_volume_helper_sha256": "8835873c7e756dbf81888af4fe6b3d0557163629926ff627f3c549222a3136e0",
+    "head_cage_helper_sha256": "45469e48971af27f75356372516a476c2484c618ff75ce977bb656f74c9ba176",
+    "head_rigid_artist_orientation": {
+      "native_edit": "bmesh rotate / rigid professional cage only",
+      "artist_angle_degrees": 30,
+      "axis": "X",
+      "pivot_native_m": [
+        -1.5748963244632819e-09,
+        -0.040024127811193466,
+        0.06900680810213089
+      ],
+      "cage_vertices": 266,
+      "topology_edge_lengths_and_volume_preserved": true,
+      "actual_volume_ratio": 1.000000024451242,
+      "rotation_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.8660253286361694,
+          -0.5000001192092896
+        ],
+        [
+          0.0,
+          0.5000001192092896,
+          0.8660253286361694
+        ]
+      ],
+      "not_an_exercise_or_clinical_target": true
+    },
+    "head_orientation_helper_sha256": "33a0c17f1c02b9b3f06939d2fff420ccbf89b0a62e2b7e736f2c30648dcf2418",
+    "head_world_matrix": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        2.291865348815918
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        -0.045136597007513046
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        -0.0032976099755614996
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "head_translation_m": [
+      -2.9718739986419678,
+      0.03227550536394119,
+      1.482693076133728
+    ],
+    "head_authored_registration": {
+      "reference_surface": "BODYGUARD Male sculpt WIP",
+      "reference_cervical_cut_m": 1.4933180799484254,
+      "authored_contour_points": 114,
+      "proven_inner_cut_edges_capped_for_diagnostic": 0,
+      "initial_head_translation_m": [
+        -2.97186279296875,
+        0.020362181589007378,
+        1.475545048713684
+      ],
+      "cut_ring_center_xy_before_m": [
+        2.6226043701171875e-06,
+        -0.04193534795194864
+      ],
+      "target_body_point_m": [
+        -8.596107363700867e-06,
+        -0.030022025108337402,
+        1.5173181295394897
+      ],
+      "native_head_translation_m": [
+        -1.1218711733818054e-05,
+        0.01191332284361124,
+        0.007147993892431259
+      ],
+      "initial_diagnostic_contour_points": 454,
+      "initial_projection_bounds_m": [
+        1.4543895423412323,
+        1.7151537910103798
+      ],
+      "artist_section_inset_m": 0.06292853760719308,
+      "initial_diagnostic_plane_intercept_m": 1.5173180799484254,
+      "reference_to_final_plane_delta_m": 0.0,
+      "contour_points": 454,
+      "final_cut_after_registration": {
+        "final_plane_intercept_m": 1.5173180799484254,
+        "final_contour_points": 454,
+        "retained_registered_head_points_and_skin": 52808
+      },
+      "registration_plane_intercept_change_m": 0.0,
+      "registered_head_crown_m": 1.6917750500142574,
+      "original_body_crown_m": 1.6846270561218262,
+      "purpose": "native artist contour registration only; no clinical target"
+    },
+    "head_skin_correspondence": {
+      "native_transfer": "POLYINTERP_NEAREST/NAME before rigid registration",
+      "prepared_weights_preserved_during_registration": true,
+      "reason": "avoid nearest donor neck/shoulder switching after head translation",
+      "full_deformation_and_visual_qa_required": true
+    },
+    "cut_m": 1.4933180799484254,
+    "jaw_cut_plane_normal": [
+      0.0,
+      -0.6000000238418579,
+      1.0
+    ],
+    "jaw_cut_plane_anchor": [
+      0.0,
+      0.0,
+      1.4933180809020996
+    ],
+    "retained_original_vertices": 75915,
+    "removed_head_original_vertices": 46594,
+    "head_cut_m": 1.5173180799484254,
+    "head_cut_plane_normal": [
+      0.0,
+      -0.6000000238418579,
+      1.0
+    ],
+    "artist_gap_m": 0.024,
+    "native_boundary_density": {
+      "before": [
+        114,
+        454
+      ],
+      "after": [
+        567,
+        567
+      ],
+      "method": "native ordered arc-length edge splits on distinct planar cuts",
+      "cut_plane_normals": [
+        [
+          -6.519062480947468e-07,
+          -0.5144954919815063,
+          0.8574930429458618
+        ],
+        [
+          8.421004622505279e-07,
+          -0.5144937634468079,
+          0.8574941754341125
+        ]
+      ]
+    },
+    "native_bridge": {
+      "interpolation": "SURFACE",
+      "cuts": 6,
+      "smoothness": 1
+    },
+    "bridge_only_native_fairing": {
+      "modifier": "CORRECTIVE_SMOOTH/LENGTH_WEIGHTED/only-smooth",
+      "factor": 0.5,
+      "iterations": 8,
+      "selected_new_vertices": 3402,
+      "maximum_artist_displacement_m": 0.0008224558091810027,
+      "authored_points_skin_and_topology_preserved": true,
+      "full_deformation_visual_browser_qa_required": true,
+      "reused": "preserved A59 native new-bridge-only refinement"
+    },
+    "boundary_normal_refresh_max_delta": 0.000925046420420242,
+    "source_vertices": 122509,
+    "candidate_vertices": 133261,
+    "professional_head_points": 53264,
+    "preserved_external_body_source": {
+      "source": "draft-a66-neutral-under-jaw-head.blend",
+      "sha256": "03ac3629b76858ee7f55fc0ffa9e6118c5d64fcbf4ba29100889af1318a8b3b5",
+      "method": "reuse A66 external surface/skin; no new donor or anatomy deletion",
+      "cut_closed_cavity_count": 0,
+      "old_source_and_qa_preserved": true
+    },
+    "retained_body_skin_hands_bones_rest_preserved": true,
+    "authored_cervical_ring_identifiers_saved_for_diagnostic": true,
+    "all_source_glb_deformation_browser_visual_checks_pending": true
+  },
+  {
+    "body": "Female",
+    "professional_source": "human_base_meshes_bundle.blend",
+    "professional_sha256": "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137",
+    "helper_sha256": "6a96114e186b0db44a622beaef770dc58a193656344586f9f189783cc14018c4",
+    "head_source": "GEO-head_primitve",
+    "head_cage_sculpt": {
+      "method": "native lower professional head cage Y/Z smoothing",
+      "iterations": 12,
+      "factor": 0.45,
+      "selected_vertices": 151,
+      "cage_vertices": 266,
+      "upper_cage_and_topology_preserved": true,
+      "maximum_cage_displacement_m": 0.031244902455789817,
+      "artist_edit_only_not_anatomical_or_clinical_target": true
+    },
+    "head_volume_sculpt": {
+      "native_edit": "LAPLACIANSMOOTH / existing cage / normalized volume-preserving",
+      "iterations": 100,
+      "lambda_factor": 0.2,
+      "lambda_border": 0.1,
+      "native_volume_preserve_enabled": true,
+      "cage_vertices": 266,
+      "topology_and_closed_surface_preserved": true,
+      "cage_volume_before_native_units3": 0.0035623890776594223,
+      "cage_volume_after_native_units3": 0.0035642057086671696,
+      "cage_volume_ratio": 1.0005099473887173,
+      "maximum_artist_displacement_m": 0.0345892780207275,
+      "not_an_exercise_or_release_approval": true
+    },
+    "head_volume_helper_sha256": "8835873c7e756dbf81888af4fe6b3d0557163629926ff627f3c549222a3136e0",
+    "head_cage_helper_sha256": "45469e48971af27f75356372516a476c2484c618ff75ce977bb656f74c9ba176",
+    "head_rigid_artist_orientation": {
+      "native_edit": "bmesh rotate / rigid professional cage only",
+      "artist_angle_degrees": 30,
+      "axis": "X",
+      "pivot_native_m": [
+        -1.5748963244632819e-09,
+        -0.040024127811193466,
+        0.06900680810213089
+      ],
+      "cage_vertices": 266,
+      "topology_edge_lengths_and_volume_preserved": true,
+      "actual_volume_ratio": 1.000000024451242,
+      "rotation_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.8660253286361694,
+          -0.5000001192092896
+        ],
+        [
+          0.0,
+          0.5000001192092896,
+          0.8660253286361694
+        ]
+      ],
+      "not_an_exercise_or_clinical_target": true
+    },
+    "head_orientation_helper_sha256": "33a0c17f1c02b9b3f06939d2fff420ccbf89b0a62e2b7e736f2c30648dcf2418",
+    "head_world_matrix": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        2.291865348815918
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        -0.045136597007513046
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        -0.0032976099755614996
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "head_translation_m": [
+      -1.6120543479919434,
+      0.02668439783155918,
+      1.4346895217895508
+    ],
+    "head_authored_registration": {
+      "reference_surface": "BODYGUARD Female sculpt WIP",
+      "reference_cervical_cut_m": 1.452558440208435,
+      "authored_contour_points": 116,
+      "proven_inner_cut_edges_capped_for_diagnostic": 0,
+      "initial_head_translation_m": [
+        -1.611838936805725,
+        0.018447980284690857,
+        1.4297477006912231
+      ],
+      "cut_ring_center_xy_before_m": [
+        2.6345252990722656e-05,
+        -0.04431456886231899
+      ],
+      "target_body_point_m": [
+        -0.00018902122974395752,
+        -0.03607815131545067,
+        1.4765584468841553
+      ],
+      "native_head_translation_m": [
+        -0.00021536648273468018,
+        0.008236417546868324,
+        0.004941850900650024
+      ],
+      "initial_diagnostic_contour_points": 472,
+      "initial_projection_bounds_m": [
+        1.4097407162189484,
+        1.6705049648880959
+      ],
+      "artist_section_inset_m": 0.06681772398948671,
+      "initial_diagnostic_plane_intercept_m": 1.476558440208435,
+      "reference_to_final_plane_delta_m": 0.0,
+      "contour_points": 472,
+      "final_cut_after_registration": {
+        "final_plane_intercept_m": 1.476558440208435,
+        "final_contour_points": 472,
+        "retained_registered_head_points_and_skin": 51713
+      },
+      "registration_plane_intercept_change_m": 0.0,
+      "registered_head_crown_m": 1.6437715590000153,
+      "original_body_crown_m": 1.6388297080993652,
+      "purpose": "native artist contour registration only; no clinical target"
+    },
+    "head_skin_correspondence": {
+      "native_transfer": "POLYINTERP_NEAREST/NAME before rigid registration",
+      "prepared_weights_preserved_during_registration": true,
+      "reason": "avoid nearest donor neck/shoulder switching after head translation",
+      "full_deformation_and_visual_qa_required": true
+    },
+    "cut_m": 1.452558440208435,
+    "jaw_cut_plane_normal": [
+      0.0,
+      -0.6000000238418579,
+      1.0
+    ],
+    "jaw_cut_plane_anchor": [
+      0.0,
+      0.0,
+      1.4525583982467651
+    ],
+    "retained_original_vertices": 75865,
+    "removed_head_original_vertices": 49153,
+    "head_cut_m": 1.476558440208435,
+    "head_cut_plane_normal": [
+      0.0,
+      -0.6000000238418579,
+      1.0
+    ],
+    "artist_gap_m": 0.024,
+    "native_boundary_density": {
+      "before": [
+        116,
+        472
+      ],
+      "after": [
+        587,
+        587
+      ],
+      "method": "native ordered arc-length edge splits on distinct planar cuts",
+      "cut_plane_normals": [
+        [
+          9.464983463658427e-07,
+          -0.5144989490509033,
+          0.8574910759925842
+        ],
+        [
+          1.3208564269007184e-06,
+          -0.5144941806793213,
+          0.8574938178062439
+        ]
+      ]
+    },
+    "native_bridge": {
+      "interpolation": "SURFACE",
+      "cuts": 6,
+      "smoothness": 1
+    },
+    "bridge_only_native_fairing": {
+      "modifier": "CORRECTIVE_SMOOTH/LENGTH_WEIGHTED/only-smooth",
+      "factor": 0.5,
+      "iterations": 8,
+      "selected_new_vertices": 3522,
+      "maximum_artist_displacement_m": 0.0010733408814392793,
+      "authored_points_skin_and_topology_preserved": true,
+      "full_deformation_visual_browser_qa_required": true,
+      "reused": "preserved A59 native new-bridge-only refinement"
+    },
+    "boundary_normal_refresh_max_delta": 0.0007350300378377203,
+    "source_vertices": 125018,
+    "candidate_vertices": 132274,
+    "professional_head_points": 52185,
+    "preserved_external_body_source": {
+      "source": "draft-a66-neutral-under-jaw-head.blend",
+      "sha256": "03ac3629b76858ee7f55fc0ffa9e6118c5d64fcbf4ba29100889af1318a8b3b5",
+      "method": "reuse A66 external surface/skin; no new donor or anatomy deletion",
+      "cut_closed_cavity_count": 0,
+      "old_source_and_qa_preserved": true
+    },
+    "retained_body_skin_hands_bones_rest_preserved": true,
+    "authored_cervical_ring_identifiers_saved_for_diagnostic": true,
+    "all_source_glb_deformation_browser_visual_checks_pending": true
+  }
+]

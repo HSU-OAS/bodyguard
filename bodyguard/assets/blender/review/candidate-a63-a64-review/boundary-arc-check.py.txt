@@ -1,0 +1,79 @@
+"""FR-A-03: tiny native boundary regression; fixtures are not human avatars."""
+
+import importlib.util
+import json
+import sys
+from pathlib import Path
+
+import bmesh
+
+
+def module(name, filename):
+    spec = importlib.util.spec_from_file_location(name, Path(__file__).with_name(filename))
+    value = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(value)
+    return value
+
+
+current = module("arc_candidate", "a64-continuous-jaw-neutral-head.py")
+prior = module("polar_candidate", "a62-linear-authored-contour-head-producer.py")
+helper = module("unchanged_boundary", "a49-density-producer.py")
+square = [(-2, -2), (2, -2), (2, 2), (-2, 2)]
+nonstar = [(-2, -2), (2, -2), (2, 2), (0.5, 2), (0.5, -0.5), (-0.5, -0.5), (-0.5, 2), (-2, 2)]
+output = Path(sys.argv[sys.argv.index("--") + 1])
+assert output.suffix == ".json" and not output.exists()
+checks = []
+
+
+def fixture(contours, planes):
+    mesh = bmesh.new()
+    original = mesh.verts.layers.int.new("Fixture original")
+    deform = mesh.verts.layers.deform.new()
+    edges = []
+    for points, z in zip(contours, planes, strict=True):
+        top = [mesh.verts.new((x * 0.01, y * 0.01, z)) for x, y in points]
+        bottom = [mesh.verts.new((x * 0.01, y * 0.01, z - 0.01)) for x, y in points]
+        for i, vertex in enumerate(top):
+            next_index = (i + 1) % len(top)
+            mesh.faces.new((vertex, top[next_index], bottom[next_index], bottom[i]))
+            edges.append(mesh.edges.get((vertex, top[next_index])))
+    mesh.verts.index_update()
+    for vertex in mesh.verts:
+        vertex[original] = vertex.index + 1
+        vertex[deform][0] = 1
+    return mesh, edges, original
+
+
+for name, contours, planes, expected_error in (
+    ("nonstar", [nonstar, square], [1, 1.04], False),
+    ("reverse-order", [list(reversed(nonstar)), square], [1, 1.04], False),
+    ("different-counts", [square, nonstar], [1, 1.04], False),
+    ("same-plane-rejected", [square, square], [1, 1], True),
+    ("third-ring-rejected", [square, square, square], [1, 1.04, 1.08], True),
+):
+    mesh, edges, original = fixture(contours, planes)
+    rejected = False
+    try:
+        result = current.align_neck_boundary_samples(mesh, edges, original, helper.closed_loops)
+        assert result["after"][0] == result["after"][1]
+        assert all(
+            abs(sum(v[mesh.verts.layers.deform.active].values()) - 1) < 1e-6 for v in mesh.verts
+        )
+    except AssertionError:
+        rejected = True
+    assert rejected == expected_error, name
+    checks.append({"name": name, "passed": True, "expected_rejection": rejected})
+    mesh.free()
+mesh, edges, original = fixture([nonstar, square], [1, 1.04])
+try:
+    prior.align_neck_boundary_samples(mesh, edges, original, helper.closed_loops)
+except AssertionError as error:
+    assert "star-shaped" in str(error)
+else:
+    raise AssertionError("Prior polar method must reproduce the non-star failure")
+checks.append({"name": "legacy-nonstar-failure-reproduced", "passed": True})
+mesh.free()
+output.write_text(
+    json.dumps({"passed": True, "artist_fixture_only": True, "checks": checks}, indent=2) + "\n"
+)
+print("ACTUAL NATIVE ARC REGRESSION", json.dumps(checks))

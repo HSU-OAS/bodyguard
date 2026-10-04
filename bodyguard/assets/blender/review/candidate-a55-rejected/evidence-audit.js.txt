@@ -1,0 +1,96 @@
+// FR-A-01~04/A-07: audit actual frozen authoring evidence, not people.
+const fs = require("node:fs");
+const path = require("node:path");
+const crypto = require("node:crypto");
+const assert = require("node:assert/strict");
+const [root, temporary] = process.argv.slice(2);
+let checks = 0;
+const ok = (condition, message) => { assert(condition, message); checks++; };
+const read = (relative) => fs.readFileSync(path.join(root, relative));
+const json = (relative) => JSON.parse(read(relative));
+const hash = (buffer) => crypto.createHash("sha256").update(buffer).digest("hex");
+const base = "bodyguard/assets/blender/";
+const archives = {
+  50: "candidate-a50-a51-rejected/a50/",
+  51: "candidate-a50-a51-rejected/a51/",
+  52: "candidate-a52-a53-rejected/a52/",
+  53: "candidate-a52-a53-rejected/a53/",
+  55: "candidate-a55-rejected/",
+};
+const expected = {
+  50: [26262554, "5301a4e8484fc7fe3f5fef09f647d629a79003f1399d54b18e22d91023af135e"],
+  51: [26573159, "cc12cf838ad31cbcd18a44e626b448bf634e3c9871a461a3f2bead77d34fbd10"],
+  52: [26574074, "fda0727423dd31bc098469d64d56e4eb96681d21ec21788cc83012038f852e5a"],
+  53: [26574438, "5dc24f852acccf4b077a7d4ecccfa3047c1c1992c216bf0c517c20769868fe54"],
+  55: [26539681, "12650fba6bd5a84ce44a33e5256ba3a8665af70916a0c10d809a85b7bcd2c58e"],
+};
+const tempNames = {
+  50: "draft-a50-authored-head.blend", 51: "draft-a51-aligned-head.blend",
+  52: "draft-a52-path-head.blend", 53: "draft-a53-normal-update-head.blend",
+  55: "draft-a55-linear-head.blend",
+};
+let images = 0, rows = 0, articulations = 0;
+const manifest = [];
+for (const [number, directory] of Object.entries(archives)) {
+  const buffer = read(base + "bodyguard_avatar_candidate_a" + number + "_rejected.blend");
+  ok(buffer.length === expected[number][0] && hash(buffer) === expected[number][1], "source hash A" + number);
+  ok(buffer.equals(fs.readFileSync(path.join(temporary, tempNames[number]))), "same native bytes A" + number);
+  const folder = base + "review/" + directory;
+  const q = json(folder + "source-preflight-report.json");
+  ok(q.passed && !q.rendered && q.failures.length === 0 && q.checks.length === 121, "actual preflight A" + number);
+  const motion = q.checks.filter(c => typeof c.edge_ratio_max === "number");
+  ok(motion.length === 118 && motion.every(c => Number.isFinite(c.edge_ratio_max) && c.edge_ratio_max < 3), "unchanged 118 articulation checks A" + number);
+  ok(q.checks[0].surface_style === "unified-white-mannequin" && q.checks[0].garments.length === 0, "unified surface A" + number);
+  const generation = json(folder + "generation-report.json");
+  ok(generation.length === 2 && generation.every(g => g.retained_body_skin_hands_bones_rest_preserved &&
+    g.helper_sha256 === "6a96114e186b0db44a622beaef770dc58a193656344586f9f189783cc14018c4" &&
+    g.professional_sha256 === "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137"), "generation guards A" + number);
+  const pngs = fs.readdirSync(path.join(root, folder)).filter(n => n.endsWith(".png"));
+  ok(pngs.length === 8, "eight actual PNG A" + number);
+  for (const name of pngs) {
+    ok(read(folder + name).subarray(0, 8).equals(Buffer.from([137,80,78,71,13,10,26,10])), "PNG signature " + name);
+  }
+  rows += q.checks.length; articulations += motion.length; images += pngs.length;
+  manifest.push({file: base + "bodyguard_avatar_candidate_a" + number + "_rejected.blend", bytes: buffer.length, sha256: hash(buffer)});
+}
+const source51 = read(base + "review/" + archives[51] + "producer-at-generation.py.txt").toString();
+const source52 = read(base + "review/" + archives[52] + "producer-at-generation.py.txt").toString();
+const source53 = read(base + "review/" + archives[53] + "producer-at-generation.py.txt").toString();
+const source55 = read(base + "review/" + archives[55] + "producer-at-generation.py.txt").toString();
+ok(source51.replaceAll('interpolation="SURFACE"', 'interpolation="PATH"').replaceAll('"interpolation": "SURFACE"', '"interpolation": "PATH"') === source52, "A52 PATH-only exact diff");
+ok(source53.replaceAll('interpolation="PATH"', 'interpolation="LINEAR"').replaceAll('"interpolation": "PATH"', '"interpolation": "LINEAR"') === source55, "A55 LINEAR-only exact diff");
+const regression = json(base + "review/candidate-a50-a51-rejected/native-regressions.json");
+ok(regression.a50.exit_code === 0 && regression.a50.checks === 7 &&
+  regression.a51.exit_code === 0 && regression.a51.checks === 6, "actual native regression 7+6");
+const failure = json(base + "review/candidate-a54-rejected/guard-failure.json");
+ok(failure.exit_code === 1 && failure.maximum_artist_displacement_m > failure.unchanged_budget_m &&
+  failure.unchanged_budget_m === 0.006 && !failure.source_saved, "A54 unchanged failure guard");
+ok(!fs.existsSync(path.join(temporary, "draft-a54-neck-fairing.blend")) &&
+  !fs.existsSync(path.join(temporary, "a54-local-preview")), "A54 no output");
+ok(hash(read(base + "bodyguard_avatar_candidate_a49_rejected.blend")) === "84eb04403d9b20edea5c017e10dcc3092cdf4c6f84ae95aca930efb6d29f1232", "A49 input unchanged");
+ok(hash(read(base + "replace_neck_from_artist.py")) === "774b34a1330548f9e6dfe087f0bd561bff5ba934577df9d0f07668b6a603f7d0", "canonical producer unchanged");
+const folders = ["candidate-a50-a51-rejected", "candidate-a52-a53-rejected", "candidate-a54-rejected", "candidate-a55-rejected"];
+const markdown = ["bodyguard/docs/stories/stage2-avatar-candidate.md", "bodyguard/docs/tasks.md", "bodyguard/docs/avatar-production.md", base + "README.md"];
+function walk(relative) {
+  for (const item of fs.readdirSync(path.join(root, relative), {withFileTypes:true})) {
+    const file = relative + "/" + item.name;
+    if (item.name === "evidence-audit.json") continue;
+    if (item.isDirectory()) walk(file);
+    else {
+      const buffer = read(file);
+      manifest.push({file, bytes:buffer.length, sha256:hash(buffer)});
+      if (item.name.endsWith(".md")) markdown.push(file);
+    }
+  }
+}
+folders.forEach(name => walk(base + "review/" + name));
+let links = 0;
+for (const file of markdown) {
+  for (const match of read(file).toString().matchAll(/!?\[[^\]]*\]\(([^\)]+)\)/g)) {
+    const target = match[1].split("#")[0];
+    if (!target || /^(https?:|codex:|mailto:)/.test(target)) continue;
+    ok(fs.existsSync(path.resolve(root, path.dirname(file), target)), "local link " + file + " -> " + target);
+    links++;
+  }
+}
+console.log(JSON.stringify({passed:true,assertions:checks,source_candidates:5,articulations,rows,actual_png:images,native_regressions:13,local_links:links,files:manifest.length,manifest},null,2));

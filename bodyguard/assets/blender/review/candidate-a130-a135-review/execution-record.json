@@ -1,0 +1,358 @@
+{
+  "date_kst": "2026-10-03",
+  "story": "S2.4 appearance P2 continuation, not completion",
+  "repository_head_before": "1c15f431055354a43c60f28c0fcc175aa392fbcd",
+  "main_before": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "latest_ceo_reference": {
+    "sha256": "45b313912dee5ae2218bfe76086abb35a9b948fab9e877f1a9d2b05f832de62",
+    "requirement": "smooth faceless head-neck continuity matching reference; unified unclothed neutral white male/female; retain anatomy and rig fidelity"
+  },
+  "native_runs": [
+    {
+      "phase": "a130",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a130-native-cap-stage-probe.py -- bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend bodyguard/assets/blender/review/candidate-a121-a123-review/artist-candidate.blend /private/tmp/bodyguard-tailor.6b7Uvu/a130-native-cap-stage-probe",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "승인된 아바타 Story에서 같은 cap 세분화의 단계별 tiny 면/열린 edge를 native 메모리로 대조합니다. 기존 source·GLB·서비스·카메라를 저장/변경하지 않고 원점/리그 보존과 동일 형상 기준을 확인합니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 4000
+      },
+      "session": 99410,
+      "exit_code": 0,
+      "log": "logs/a130-observed.json.txt.gz"
+    },
+    {
+      "phase": "a131",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a131-native-cap-earclip-probe.py -- bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend bodyguard/assets/blender/review/candidate-a121-a123-review/artist-candidate.blend /private/tmp/bodyguard-tailor.6b7Uvu/a131-native-cap-earclip-probe",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "승인된 아바타 제작 범위에서 보존된 원본을 읽고 Blender native 면 분할 방식을 검증합니다. 새 모델 저장·카메라·배포·비용 작업은 없습니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 2500
+      },
+      "session": 94733,
+      "exit_code": 0,
+      "log": "logs/a131-observed.json.txt.gz"
+    },
+    {
+      "phase": "a132",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a132-native-cap-grid-probe.py -- bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend bodyguard/assets/blender/review/candidate-a121-a123-review/artist-candidate.blend /private/tmp/bodyguard-tailor.6b7Uvu/a132-native-cap-grid-probe",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "승인된 아바타 제작 범위에서 보존된 원본을 읽고 Blender native 면 분할 방식을 검증합니다. 새 모델 저장·카메라·배포·비용 작업은 없습니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 2500
+      },
+      "session": 58644,
+      "exit_code": 0,
+      "log": "logs/a132-observed.json.txt.gz"
+    },
+    {
+      "phase": "a133",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a133-native-cap-area-probe.py -- bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend bodyguard/assets/blender/review/candidate-a121-a123-review/artist-candidate.blend /private/tmp/bodyguard-tailor.6b7Uvu/a133-native-cap-area-probe",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "승인된 아바타 제작 범위에서 보존된 원본을 읽고 Blender native 면 분할 방식을 검증합니다. 새 모델 저장·카메라·배포·비용 작업은 없습니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 2500
+      },
+      "session": 30314,
+      "exit_code": 0,
+      "log": "logs/a133-observed.json.txt.gz"
+    },
+    {
+      "phase": "a134",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a134-native-authored-cap-area-review.py -- bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend bodyguard/assets/blender/review/candidate-a121-a123-review/artist-candidate.blend /private/tmp/bodyguard-tailor.6b7Uvu/a134-native-authored-cap-area-review",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "승인된 아바타 제작 범위에서 보존된 원본을 읽고 Blender native 면 분할 방식을 검증합니다. 새 모델 저장·카메라·배포·비용 작업은 없습니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 2500
+      },
+      "session": 74651,
+      "exit_code": 0,
+      "log": "logs/a134-observed.json.txt.gz"
+    },
+    {
+      "phase": "producer",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a135-save-authored-cap-candidate.py -- bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend bodyguard/assets/blender/review/candidate-a121-a123-review/artist-candidate.blend /private/tmp/bodyguard-tailor.6b7Uvu/a135-authored-cap-candidate /private/tmp/bodyguard-tailor.6b7Uvu/a135-bodyguard-candidate.blend",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "승인된 아바타 제작 범위에서 보존된 원본을 읽고 Blender native 면 분할 방식을 검증합니다. 새 모델 저장·카메라·배포·비용 작업은 없습니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 2500
+      },
+      "session": 81855,
+      "exit_code": 0,
+      "log": "logs/producer-observed.json.txt.gz"
+    },
+    {
+      "phase": "preservation",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a135-saved-connectivity-preservation.py -- bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend bodyguard/assets/blender/review/candidate-a121-a123-review/artist-candidate.blend /private/tmp/bodyguard-tailor.6b7Uvu/a135-bodyguard-candidate.blend /private/tmp/bodyguard-tailor.6b7Uvu/a135-authored-cap-candidate/topology-report.json /private/tmp/bodyguard-tailor.6b7Uvu/a135-saved-preservation.json",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "승인된 아바타 제작 범위에서 보존된 원본을 읽고 Blender native 면 분할 방식을 검증합니다. 새 모델 저장·카메라·배포·비용 작업은 없습니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 2500
+      },
+      "session": 29084,
+      "exit_code": 0,
+      "log": "logs/preservation-observed.json.txt.gz"
+    },
+    {
+      "phase": "source",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec /private/tmp/bodyguard-tailor.6b7Uvu/a135-bodyguard-candidate.blend --python-exit-code 1 --python bodyguard/assets/blender/review_avatar.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a135-source-review --candidate --mannequin",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "승인된 Story의 별도 A135 원본 후보에서 기존 118개 관절 변형 하네스와 실제 34PNG 렌더를 재실행합니다. 원본/서비스 모델 저장·카메라·배포·비용 작업은 없습니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 2500
+      },
+      "session": 16652,
+      "exit_code": 0,
+      "log": "logs/source-observed.json.txt.gz"
+    },
+    {
+      "phase": "export",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec /private/tmp/bodyguard-tailor.6b7Uvu/a135-bodyguard-candidate.blend --python-exit-code 1 --python bodyguard/assets/blender/export_avatar_candidate.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a135-web-candidate.blend /private/tmp/bodyguard-tailor.6b7Uvu/a135-glb 1",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "승인된 동일 Story의 새 후보를 별도 web .blend/남녀 GLB로 내보내고 실제 재수입합니다. 기존 원본·개발 모델은 보존하며 카메라·배포·비용 작업은 없습니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 2500
+      },
+      "session": 65681,
+      "exit_code": 0,
+      "log": "logs/export-observed.json.txt.gz"
+    },
+    {
+      "phase": "roundtrip",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec /private/tmp/bodyguard-tailor.6b7Uvu/a135-web-candidate-roundtrip.blend --python-exit-code 1 --python bodyguard/assets/blender/review_avatar.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a135-roundtrip-review --candidate --mannequin",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "승인된 동일 Story에서 실제 GLB 재수입 원본의 기존 118개 변형 하네스와 34PNG 렌더를 재실행합니다. 원본·개발 모델·카메라·배포·비용 작업은 없습니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 2500
+      },
+      "session": 32449,
+      "exit_code": 0,
+      "log": "logs/roundtrip-observed.json.txt.gz"
+    }
+  ],
+  "native_actors_sequential": true,
+  "blender": {
+    "version": "5.1.1",
+    "build": "b70da489d7f4",
+    "native_metal": true
+  },
+  "browser_run": {
+    "command": {
+      "cmd": "BODYGUARD_AVATAR_QA_DIRECTORY=/private/tmp/bodyguard-tailor.6b7Uvu/a135-glb PLAYWRIGHT_JSON_OUTPUT_NAME=/private/tmp/bodyguard-tailor.6b7Uvu/a135-browser-report.json .venv/bin/python -m tests.run_browser avatar",
+      "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/backend",
+      "sandbox_permissions": "require_escalated",
+      "justification": "승인된 아바타 Story의 새 GLB를 실제 Chrome·로컬 Vite에서 검증합니다. 외부 proxy를 차단하고 카메라 요청0을 강제하며 auth API·메일·SQL·배포·비용 작업은 없습니다.",
+      "yield_time_ms": 1000,
+      "max_output_tokens": 3000
+    },
+    "session": 16916,
+    "exit_code": 0,
+    "startTime": "2026-10-02T23:07:13.706Z",
+    "duration": 44625.128,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "log": "logs/browser-observed.json.txt.gz"
+  },
+  "browser_conditions": {
+    "macOS": "15.6",
+    "build": "24G84",
+    "chrome": "154.0.8037.93",
+    "version_read_chunks": [
+      "5ccf48",
+      "5efaf9"
+    ],
+    "viewport": [
+      1440,
+      1080
+    ],
+    "device_ram_remeasured": false,
+    "camera_calls": 0,
+    "auth_api_smtp_sql": false,
+    "native_external_proxy_blocked": true,
+    "all_ten_meshes_visible_in_posterior": true
+  },
+  "synthetic_raf": [
+    {
+      "name": "남성-technical-render",
+      "data": {
+        "samples": 180,
+        "mean_ms": 16.666111110316383,
+        "p95_ms": 18.200000047683716,
+        "draw_calls": 21,
+        "triangles": 1004458,
+        "renderer": "WebKit WebGL",
+        "skeletons_independent": true,
+        "static_angle_max": 0,
+        "moving_angle_max": 0.20942972030481702,
+        "eight_weight_meshes": 2
+      }
+    },
+    {
+      "name": "여성-technical-render",
+      "data": {
+        "samples": 180,
+        "mean_ms": 16.664444443914626,
+        "p95_ms": 18.200000047683716,
+        "draw_calls": 21,
+        "triangles": 994506,
+        "renderer": "WebKit WebGL",
+        "skeletons_independent": true,
+        "static_angle_max": 0,
+        "moving_angle_max": 0.2094384523038492,
+        "eight_weight_meshes": 2
+      }
+    }
+  ],
+  "gpu_completion_or_live_camera_latency": false,
+  "actual_candidate_files": [
+    {
+      "file": "a135-bodyguard-candidate.blend",
+      "bytes": 26945176,
+      "sha256": "7108ceeba278f11d76a79382fc2c013366677ee931b7b3d6fa23d8f5bb4d4828"
+    },
+    {
+      "file": "a135-web-candidate.blend",
+      "bytes": 28859086,
+      "sha256": "9a2a15391e985a56026aace7aaf0720fae514358ffc509b5d3eef79907660c72"
+    },
+    {
+      "file": "a135-web-candidate-roundtrip.blend",
+      "bytes": 24181807,
+      "sha256": "f379efdb250edb92de8edeb1b4610ce6a4c4c191c7a9f97e0b90315abf1b08eb"
+    },
+    {
+      "file": "a135-glb/bodyguard-male-candidate.glb",
+      "bytes": 11022816,
+      "sha256": "29f9480ce671dc604cd62d0a01f144652cf868a6d0292b16445113e50a054814"
+    },
+    {
+      "file": "a135-glb/bodyguard-female-candidate.glb",
+      "bytes": 10913520,
+      "sha256": "c12c5377ee1bad4d7cd76cb5cd3b395b2fb9954d3b22dee871ab37294fa7625b"
+    }
+  ],
+  "full_deformation": [
+    {
+      "kind": "source",
+      "passed": true,
+      "stress": 118,
+      "rows": 121,
+      "png": 34,
+      "failures": [],
+      "max_edge_ratio": 2.9439303671031447
+    },
+    {
+      "kind": "roundtrip",
+      "passed": true,
+      "stress": 118,
+      "rows": 121,
+      "png": 34,
+      "failures": [],
+      "max_edge_ratio": 2.94767980329051
+    }
+  ],
+  "copies": 116,
+  "gzip": 24,
+  "actual_png": 76,
+  "directly_viewed": {
+    "cap": 4,
+    "source": 14,
+    "roundtrip": 12,
+    "browser": 4,
+    "total": 34,
+    "not_viewed": 42
+  },
+  "protected_old_files": 302,
+  "old_files_changed": 0,
+  "inputs_overwritten": false,
+  "development_a37_unchanged": true,
+  "native_findings": {
+    "a130_duplicate_edge_kind": "more-than-two-faces (4), not open boundary; introduced at triangulation",
+    "a130_degenerate_faces_after_triangulation": [
+      27,
+      33
+    ],
+    "a131_earclip_rejected": true,
+    "a132_grid_refinement_rejected": true,
+    "a133_dense_area_rejected": true,
+    "a134_a135_method": "reuse native AREA on existing cap triangles only; no added density, projection or coordinate/skin edits",
+    "cap_only_long_folds_before_after": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    "cap_only_metric_not_equivalent_to_previous_bbox": true,
+    "boundary_edges_exact": [
+      374,
+      363
+    ],
+    "all_retained_points_exact": [
+      123513,
+      122269
+    ],
+    "outside_faces_winding_exact": [
+      163732,
+      161970
+    ],
+    "changed_geometry_elements": [
+      1747,
+      1949
+    ],
+    "two_direction_sample_envelope_max_m": [
+      0.0007857891614548862,
+      0.0013525658287107944
+    ],
+    "not_whole_surface_hausdorff": true
+  },
+  "static_verification": {
+    "clean_files_default_isolated_ruff_format": 7,
+    "clean_reproducer_native_executed": false,
+    "historical_executed_raw_producer_unused_import_F401": 1,
+    "executed_bytes_preserved": true,
+    "initial_clean_reproducer_format_failed_then_corrected": true,
+    "frontend_restored_typecheck_chunk": "14600f",
+    "frontend_restored_biome_chunk": "1fc1ab",
+    "frontend_baseline_restored": true,
+    "copier_node_check_chunk": "c54932",
+    "restricted_secret_scan_not_full_audit": true
+  },
+  "limits": {
+    "appearance_approved": false,
+    "service_asset_adopted": false,
+    "pr9_merge": false,
+    "stage1_6_completed": false,
+    "full_body_adjacent_coplanar_intersection_qa": false,
+    "approved_coaching_clips": false,
+    "real_performer_or_user_retargeting": false,
+    "real_camera_accuracy_or_timing": false,
+    "other_devices_or_usability": false,
+    "production_migration_secrets_cost_accounts_deployment_release": false
+  },
+  "next": "retain sound authored cap connectivity; refine head-to-neck border tangency locally, then repeat saved source/GLB/browser appearance validation; no density increase or weaker guards"
+}

@@ -7,6 +7,7 @@ if (!proxy || !/^http:\/\/127\.0\.0\.1:\d+$/.test(proxy))
   throw new Error('Owned closed-port egress proxy required')
 export default defineConfig({
   testDir: 'e2e',
+  outputDir: 'test-results/account',
   testMatch: ['account.spec.ts', 'password.spec.ts', 'google.spec.ts'],
   workers: 1,
   timeout: 30_000,

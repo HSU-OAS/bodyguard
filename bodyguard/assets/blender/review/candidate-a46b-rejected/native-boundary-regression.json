@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-01",
+  "blender": "5.1.1",
+  "command": "Blender --factory-startup --disable-autoexec -b --python-exit-code 1 --python bodyguard/assets/blender/test_neck_cut.py",
+  "scope": "Synthetic boundary-only native regression; not an avatar/clinical pose/user-camera test",
+  "exit_code": 0,
+  "checks": 7,
+  "producer_sha256": "00c29c03d94b0c7964aaf09d80ad48aec7806a8d758b5cff134606bed0a06dfb",
+  "test_sha256": "be6367053f099de9976fb707fbe766254becd7af856ee9b8de86727278f71f7b",
+  "stdout": "NATIVE NECK CUT: 7 positive/negative checks passed; no files saved\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n",
+  "files_saved": false
+}

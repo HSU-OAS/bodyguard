@@ -1,0 +1,51 @@
+"""FR-A-02/03: native front-face editing on the existing licensed cage."""
+
+from math import isfinite
+
+import bmesh
+
+
+def refine_head_front(mesh, iterations):
+    if iterations not in (0, 6, 12):
+        raise ValueError("Explicit native front-surface comparison required")
+    vertices = list(mesh.verts)
+    assert len(vertices) == 266 and all(e.is_manifold for e in mesh.edges)
+    before = [(v, v.co.copy()) for v in vertices]
+    topology = (len(mesh.verts), len(mesh.edges), len(mesh.faces))
+    low, high = min(v.co.z for v in vertices), max(v.co.z for v in vertices)
+    middle_y = (min(v.co.y for v in vertices) + max(v.co.y for v in vertices)) / 2
+    selected = [
+        v for v in vertices if v.co.z < low + 0.7 * (high - low) and v.co.y < middle_y
+    ]
+    assert 3 < len(selected) < len(vertices)
+    protected = set(vertices) - set(selected)
+    volume_before = abs(mesh.calc_volume())
+    for _ in range(iterations):
+        bmesh.ops.smooth_vert(
+            mesh,
+            verts=selected,
+            factor=0.45,
+            use_axis_x=True,
+            use_axis_y=True,
+            use_axis_z=True,
+        )
+    mesh.normal_update()
+    assert topology == (len(mesh.verts), len(mesh.edges), len(mesh.faces))
+    assert all(e.is_manifold for e in mesh.edges)
+    assert all(all(isfinite(x) for x in v.co) for v, _ in before)
+    assert all(v.co == p for v, p in before if v in protected)
+    volume_after = abs(mesh.calc_volume())
+    assert isfinite(volume_after) and volume_after > 0
+    return {
+        "method": "native smooth_vert/front surface XYZ only; raw upper/rear points protected",
+        "iterations": iterations,
+        "factor": 0.45,
+        "selected_vertices": len(selected),
+        "cage_vertices": 266,
+        "upper_rear_points_and_all_topology_preserved": True,
+        "maximum_artist_displacement_m": max((v.co - p).length for v, p in before),
+        "native_volume_before": volume_before,
+        "native_volume_after": volume_after,
+        "volume_preservation_claimed": False,
+        "artist_edit_only_not_anatomical_or_clinical_target": True,
+    }

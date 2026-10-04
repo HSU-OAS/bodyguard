@@ -1,0 +1,247 @@
+{
+  "recorded_utc": "2026-10-03 01:38:42 UTC",
+  "reference_sha256": "45b313912dee5ae2218b1fe76086abb35a9b948fab9e877f1a9d2b05f832de62",
+  "input_source": "../candidate-a136-a146-review/artist-candidate.blend",
+  "input_source_sha256": "602de73537edcf24fd7fe92aed84d28c800e99f5125865c5f5d644657f85e1f9",
+  "native_build": "Blender 5.1.1 b70da489d7f4",
+  "professional_source": {
+    "file": "/private/tmp/bodyguard-base-meshes/human-base-meshes-bundle-v1.4.1/human_base_meshes_bundle.blend",
+    "sha256": "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137",
+    "archive_sha256": "811f43accbb31a88266d932f8f5563b2d13586fca0ba2693aad1f5fe582b3515",
+    "sha_check": {
+      "chunk_id": "5d7a48",
+      "exit_code": 0
+    },
+    "new_external_asset": false,
+    "alignment": "Same local axes and uniform height only; not anatomical registration or a replacement candidate.",
+    "current_vertices": [
+      129630,
+      128389
+    ],
+    "professional_vertices": [
+      42342,
+      42342
+    ],
+    "professional_not_faceless": true,
+    "professional_arm_pose_differs": true,
+    "license": "Existing Blender Foundation CC0 asset; provenance in assets/blender/README.md"
+  },
+  "native_runs": [
+    {
+      "phase": "a155",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a155-native-phase-peak-diagnostic.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a155-native-phase-peak-diagnostic",
+      "terminal_chunk_id": "f53fdc",
+      "exit_code": 1,
+      "log": "logs/a155-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a156",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a156-native-xy-tangent-fairing.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a156-native-xy-tangent-fairing",
+      "terminal_chunk_id": "7929fd",
+      "exit_code": 0,
+      "log": "logs/a156-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a157",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a157-native-neck-dominant-protection.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a157-native-neck-dominant-protection",
+      "terminal_chunk_id": "0f2808",
+      "exit_code": 0,
+      "log": "logs/a157-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a158",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --factory-startup --disable-autoexec -b bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a158-continuous-professional-comparison.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a158-continuous-professional-comparison",
+      "terminal_chunk_id": "88b86e",
+      "exit_code": 0,
+      "log": "logs/a158-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    }
+  ],
+  "native_actors_sequential": true,
+  "native_and_browser_actors_not_overlapped": true,
+  "new_assets": {
+    "artist_blend": 0,
+    "web_blend": 0,
+    "roundtrip_blend": 0,
+    "glb": 0
+  },
+  "new_verification": {
+    "native_runs": 4,
+    "actual_png": 16,
+    "directly_viewed": 16,
+    "not_viewed": 0,
+    "source_full_118": 0,
+    "glb_full_118": 0,
+    "actual_Chrome_tests": 0,
+    "actual_webcam_trials": 0
+  },
+  "directly_viewed": [
+    "a156/head-base-side-male.png",
+    "a156/head-base-back-male.png",
+    "a156/head-base-side-female.png",
+    "a156/head-base-back-female.png",
+    "a157/head-base-side-male.png",
+    "a157/head-base-back-male.png",
+    "a157/head-base-side-female.png",
+    "a157/head-base-back-female.png",
+    "a158/current-side-male.png",
+    "a158/current-back-male.png",
+    "a158/professional-side-male.png",
+    "a158/professional-back-male.png",
+    "a158/current-side-female.png",
+    "a158/current-back-female.png",
+    "a158/professional-side-female.png",
+    "a158/professional-back-female.png"
+  ],
+  "findings": {
+    "a155_female_peak_index": 96276,
+    "a155_female_peak_a123_id": 98463,
+    "a155_female_neck02_share": 0.5339486598968506,
+    "a155_female_fairing_delta_z_m": -0.004628658294677734,
+    "a155_female_control_only_maximum_displacement_m": 0.0037746689666884243,
+    "a155_female_total_displacement_m": 0.006074373162297005,
+    "a155_geometry_guards_passed": [
+      true,
+      false
+    ],
+    "a156_all_original_z_exact": true,
+    "a156_displacement_m": [
+      0.004118190412181643,
+      0.0039363408795349344
+    ],
+    "a156_p95_and_max_worse_both": true,
+    "a157_original_head_share_mask_not_skin_edit": true,
+    "a157_displacement_m": [
+      0.0037839207139941564,
+      0.0036619650168136695
+    ],
+    "a157_p95_worse_both_male_max_better_female_max_worse": true,
+    "a156_a157_long_folds": [
+      1,
+      0
+    ],
+    "a156_a157_guard_pass_not_appearance_pass": true,
+    "a158_read_only_professional_continuous_body_comparison": true,
+    "a158_current_upper_transition_sharper_in_actual_render": true,
+    "a158_current_largest_posterior_delta_mm": [
+      8.63699932030104,
+      12.676585254239255
+    ],
+    "source_full_118_and_Chrome_A146_not_reused_as_current_edit_pass": true,
+    "next_direction": "Preserve/refine the licensed continuous posterior neck rather than repeat scalar fairing; existing geometry guards, required structure, named skin/hands/rig and all completion gates remain unchanged."
+  },
+  "static_verification": {
+    "observed": "logs/static-observed.json.txt.gz",
+    "python_files": 4,
+    "default_isolated_format_exits": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "copier_syntax": {
+      "chunk_id": "b5faa7",
+      "wall_time_seconds": 0.000012417,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    "full_frontend_build_rerun": false,
+    "full_backend_suite_rerun": false,
+    "frontend_files_changed": false
+  },
+  "evidence_copy": {
+    "run": {
+      "chunk_id": "4fbf8f",
+      "wall_time_seconds": 1.003548084,
+      "session_id": 11018,
+      "original_token_count": 45,
+      "output": "{\"integrity_passed\":true,\"copies\":14,\"gzip\":5,\"protected_old_files\":137,\"new_png\":2,\"directly_viewed\":2,\"native_exits\":[0,0],\"new_Chrome\":0,\"geometry_or_appearance_passed\":false}\n"
+    },
+    "terminal": {
+      "chunk_id": "0e2c08",
+      "wall_time_seconds": 0.000037708,
+      "exit_code": 0,
+      "original_token_count": 652,
+      "output": "{\"integrity_passed\":true,\"copies\":110,\"gzip\":17,\"protected_old_files\":164,\"new_png\":74,\"directly_viewed\":32,\"native_exits\":[0,0,0,0,0,0,0],\"new_Chrome\":4,\"source_and_roundtrip_technical_pass\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":20,\"gzip\":16,\"protected_old_files\":278,\"native_exits\":[0,1,1,1,0,1],\"new_assets\":0,\"new_png\":0,\"new_browser\":0,\"geometry_or_appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":116,\"gzip\":24,\"protected_old_files\":302,\"native_exits\":[0,0,0,0,0,0,0,0,0,0],\"actual_png\":76,\"directly_viewed\":34,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":137,\"gzip\":33,\"protected_old_files\":422,\"native_exits\":[0,0,1,0,1,1,0,1,1,0,0,0,0,0,0],\"actual_png\":84,\"directly_viewed\":42,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":43,\"gzip\":22,\"protected_old_files\":563,\"native_exits\":[0,0,0,0,0,0,1,1,1],\"actual_png\":12,\"directly_viewed\":12,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"a154_fold_regression_resolved\":true,\"a154_female_guard_failed\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":14,\"gzip\":5,\"protected_old_files\":137,\"new_png\":2,\"directly_viewed\":2,\"native_exits\":[0,0],\"new_Chrome\":0,\"geometry_or_appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":110,\"gzip\":17,\"protected_old_files\":164,\"new_png\":74,\"directly_viewed\":32,\"native_exits\":[0,0,0,0,0,0,0],\"new_Chrome\":4,\"source_and_roundtrip_technical_pass\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":20,\"gzip\":16,\"protected_old_files\":278,\"native_exits\":[0,1,1,1,0,1],\"new_assets\":0,\"new_png\":0,\"new_browser\":0,\"geometry_or_appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":116,\"gzip\":24,\"protected_old_files\":302,\"native_exits\":[0,0,0,0,0,0,0,0,0,0],\"actual_png\":76,\"directly_viewed\":34,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":137,\"gzip\":33,\"protected_old_files\":422,\"native_exits\":[0,0,1,0,1,1,0,1,1,0,0,0,0,0,0],\"actual_png\":84,\"directly_viewed\":42,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":43,\"gzip\":22,\"protected_old_files\":563,\"native_exits\":[0,0,0,0,0,0,1,1,1],\"actual_png\":12,\"directly_viewed\":12,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"a154_fold_regression_resolved\":true,\"a154_female_guard_failed\":true,\"appearance_passed\":false}\n{\"copies\":32,\"gzip\":12,\"png\":16,\"protected_old_files\":610,\"old_files_changed\":0}\n"
+    },
+    "exit_code": 0
+  },
+  "archive_verification": {
+    "evidence_integrity_run": {
+      "chunk_id": "94c140",
+      "wall_time_seconds": 1.003859542,
+      "session_id": 62732,
+      "original_token_count": 101,
+      "output": "{\"integrity_passed\":true,\"copies\":14,\"gzip\":5,\"protected_old_files\":137,\"new_png\":2,\"directly_viewed\":2,\"native_exits\":[0,0],\"new_Chrome\":0,\"geometry_or_appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":110,\"gzip\":17,\"protected_old_files\":164,\"new_png\":74,\"directly_viewed\":32,\"native_exits\":[0,0,0,0,0,0,0],\"new_Chrome\":4,\"source_and_roundtrip_technical_pass\":true,\"appearance_passed\":false}\n"
+    },
+    "evidence_integrity_terminal": {
+      "chunk_id": "62e753",
+      "wall_time_seconds": 0.0000235,
+      "exit_code": 0,
+      "original_token_count": 315,
+      "output": "{\"integrity_passed\":true,\"copies\":20,\"gzip\":16,\"protected_old_files\":278,\"native_exits\":[0,1,1,1,0,1],\"new_assets\":0,\"new_png\":0,\"new_browser\":0,\"geometry_or_appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":116,\"gzip\":24,\"protected_old_files\":302,\"native_exits\":[0,0,0,0,0,0,0,0,0,0],\"actual_png\":76,\"directly_viewed\":34,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":137,\"gzip\":33,\"protected_old_files\":422,\"native_exits\":[0,0,1,0,1,1,0,1,1,0,0,0,0,0,0],\"actual_png\":84,\"directly_viewed\":42,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":43,\"gzip\":22,\"protected_old_files\":563,\"native_exits\":[0,0,0,0,0,0,1,1,1],\"actual_png\":12,\"directly_viewed\":12,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"a154_fold_regression_resolved\":true,\"a154_female_guard_failed\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":32,\"gzip\":12,\"protected_old_files\":610,\"native_exits\":[1,0,0,0],\"actual_png\":16,\"directly_viewed\":16,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"a155_female_guard_failed\":true,\"a156_a157_guards_passed_but_appearance_failed\":true,\"a158_read_only\":true,\"appearance_passed\":false}\n"
+    },
+    "diff_check": {
+      "chunk_id": "633e2a",
+      "exit_code": 0
+    },
+    "scope_scan": {
+      "cmd": "node -e 'const fs=require(\"node:fs\"),z=require(\"node:zlib\"),p=\"bodyguard/assets/blender/review/candidate-a155-a158-diagnosis/\";const m=JSON.parse(fs.readFileSync(p+\"copy-manifest.json\"));const files=[...m.copies.map(r=>r.file),\"README.md\",\"execution-record.json\",\"evidence-check.cjs\",\"copy-manifest.json\"];let n=0;for(const f of files){if(f.endsWith(\".png\"))continue;let b=fs.readFileSync(p+f);if(f.endsWith(\".gz\"))b=z.gunzipSync(b);if(/-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|github_pat_[A-Za-z0-9_]{30,}|ghp_[A-Za-z0-9]{30,}|AIza[A-Za-z0-9_-]{30,}/.test(b.toString()))throw Error(\"Potential secret pattern in \"+f);n++}console.log(JSON.stringify({limited_secret_pattern_scan:true,text_files:n,findings:0,copies:m.copies.length,copy_bytes:m.copies.reduce((s,r)=>s+r.bytes,0),max_copy_bytes:Math.max(...m.copies.map(r=>r.bytes))}))'",
+      "result": {
+        "chunk_id": "91f7b2",
+        "wall_time_seconds": 0.000010875,
+        "exit_code": 0,
+        "original_token_count": 31,
+        "output": "{\"limited_secret_pattern_scan\":true,\"text_files\":20,\"findings\":0,\"copies\":32,\"copy_bytes\":13755814,\"max_copy_bytes\":864194}\n"
+      },
+      "initial_parser_failure": {
+        "chunk_id": "61e6b5",
+        "exit_code": 1,
+        "model_or_file_changes": false
+      }
+    },
+    "self_review": {
+      "unresolved_story_findings": [
+        "A-02",
+        "A-08"
+      ],
+      "verdict": "Request changes; do not adopt or merge",
+      "new_archive_contradiction_found": false,
+      "independent_external_review": false
+    },
+    "full_security_audit": false
+  },
+  "limits": {
+    "appearance_approved": false,
+    "service_asset_adopted": false,
+    "pr9_merge": false,
+    "stage1_6_completed": false,
+    "expert_approval": false,
+    "actual_webcam_human_trial": false,
+    "operations_deployed": false,
+    "guard_relaxed": false,
+    "posthoc_coordinate_skin_restored": false,
+    "whole_body_remesh": false,
+    "anatomy_accuracy_proven": false
+  }
+}

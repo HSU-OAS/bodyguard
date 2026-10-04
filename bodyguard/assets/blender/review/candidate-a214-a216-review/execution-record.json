@@ -1,0 +1,570 @@
+{
+  "reference_sha256": "45b313912dee5ae2218b1fe76086abb35a9b948fab9e877f1a9d2b05f832de62",
+  "git_base": "6efdb2030d6175970fbe82c89d096566cae41d58",
+  "verified_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "native_runs": [
+    {
+      "name": "read-only authored overlay clearance",
+      "command": null,
+      "command_retained": false,
+      "chunks": [
+        {
+          "chunk_id": "38ebd9",
+          "wall_time_seconds": 1.00135,
+          "session_id": 17648,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "9764be",
+          "wall_time_seconds": 3.498741583,
+          "exit_code": 0,
+          "original_token_count": 2989,
+          "output": "00:01.043  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a196-a213-review/web-candidate.blend\"\nJOINT CLEARANCE Male neutral [{\"surface\": \"BODYGUARD Male joint edge lowerarm01.L\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.1230238558491692, \"max\": 0.9572573471814394, \"mean\": 0.5842547392944653}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Male joint edge lowerarm01.R\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.17260340973734856, \"max\": 0.9841871215030551, \"mean\": 0.5928274490543117}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Male joint edge lowerleg01.L\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.09178488835459575, \"max\": 1.4859986258670688, \"mean\": 0.6324967514643731}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Male joint edge lowerleg01.R\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.17401494551450014, \"max\": 1.2084791669622064, \"mean\": 0.6301808720365898}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}]\nJOINT CLEARANCE Male lowerarm01.L [{\"surface\": \"BODYGUARD Male joint edge lowerarm01.L\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": -0.3278258955106139, \"max\": 0.8616642444394529, \"mean\": 0.2804096074509044}, \"inside_body_vertices\": 47, \"within_10_micrometres_vertices\": 9, \"intersecting_triangle_pairs\": 142}, {\"surface\": \"BODYGUARD Male joint edge lowerarm01.R\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.17260340973734856, \"max\": 0.9841871215030551, \"mean\": 0.5928274490543117}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Male joint edge lowerleg01.L\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.09178488835459575, \"max\": 1.4859986258670688, \"mean\": 0.6324967514643731}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Male joint edge lowerleg01.R\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.17401494551450014, \"max\": 1.2084791669622064, \"mean\": 0.6301808720365898}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}]\nJOINT CLEARANCE Male lowerarm01.R [{\"surface\": \"BODYGUARD Male joint edge lowerarm01.L\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.1230238558491692, \"max\": 0.9572573471814394, \"mean\": 0.5842547392944653}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Male joint edge lowerarm01.R\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": -0.5211977404542267, \"max\": 0.8476004004478455, \"mean\": 0.2878459315969195}, \"inside_body_vertices\": 43, \"within_10_micrometres_vertices\": 6, \"intersecting_triangle_pairs\": 136}, {\"surface\": \"BODYGUARD Male joint edge lowerleg01.L\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.09178488835459575, \"max\": 1.4859986258670688, \"mean\": 0.6324967514643731}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Male joint edge lowerleg01.R\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.17401494551450014, \"max\": 1.2084791669622064, \"mean\": 0.6301808720365898}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}]\nJOINT CLEARANCE Male lowerleg01.L [{\"surface\": \"BODYGUARD Male joint edge lowerarm01.L\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.1230238558491692, \"max\": 0.9572573471814394, \"mean\": 0.5842547392944653}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Male joint edge lowerarm01.R\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.17260340973734856, \"max\": 0.9841871215030551, \"mean\": 0.5928274490543117}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Male joint edge lowerleg01.L\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.2406020648777485, \"max\": 1.8788940506055951, \"mean\": 0.9227618916156644}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Male joint edge lowerleg01.R\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.17401494551450014, \"max\": 1.2084791669622064, \"mean\": 0.6301808720365898}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}]\nJOINT CLEARANCE Male lowerleg01.R [{\"surface\": \"BODYGUARD Male joint edge lowerarm01.L\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.1230238558491692, \"max\": 0.9572573471814394, \"mean\": 0.5842547392944653}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Male joint edge lowerarm01.R\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.17260340973734856, \"max\": 0.9841871215030551, \"mean\": 0.5928274490543117}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Male joint edge lowerleg01.L\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.09178488835459575, \"max\": 1.4859986258670688, \"mean\": 0.6324967514643731}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Male joint edge lowerleg01.R\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.23225789482239634, \"max\": 1.8462149892002344, \"mean\": 0.9173872292365104}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}]\nJOINT CLEARANCE Female neutral [{\"surface\": \"BODYGUARD Female joint edge lowerarm01.L\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.14740128244739026, \"max\": 1.0076427133753896, \"mean\": 0.587689296651206}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Female joint edge lowerarm01.R\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.08551754581276327, \"max\": 1.1060978285968304, \"mean\": 0.5945267305378366}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Female joint edge lowerleg01.L\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.0707807412254624, \"max\": 1.2332270853221416, \"mean\": 0.6042297966217802}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Female joint edge lowerleg01.R\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": -0.017325284716207534, \"max\": 1.5230049612000585, \"mean\": 0.6275071157020307}, \"inside_body_vertices\": 1, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 8}]\nJOINT CLEARANCE Female lowerarm01.L [{\"surface\": \"BODYGUARD Female joint edge lowerarm01.L\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": -0.21802839182782918, \"max\": 0.7634810754097998, \"mean\": 0.2526138871884187}, \"inside_body_vertices\": 34, \"within_10_micrometres_vertices\": 23, \"intersecting_triangle_pairs\": 132}, {\"surface\": \"BODYGUARD Female joint edge lowerarm01.R\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.08551754581276327, \"max\": 1.1060978285968304, \"mean\": 0.5945267305378366}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Female joint edge lowerleg01.L\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.0707807412254624, \"max\": 1.2332270853221416, \"mean\": 0.6042297966217802}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Female joint edge lowerleg01.R\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": -0.017325284716207534, \"max\": 1.5230049612000585, \"mean\": 0.6275071157020307}, \"inside_body_vertices\": 1, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 8}]\nJOINT CLEARANCE Female lowerarm01.R [{\"surface\": \"BODYGUARD Female joint edge lowerarm01.L\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.14740128244739026, \"max\": 1.0076427133753896, \"mean\": 0.587689296651206}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Female joint edge lowerarm01.R\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": -0.4086324479430914, \"max\": 0.7768282666802406, \"mean\": 0.2615361298779484}, \"inside_body_vertices\": 42, \"within_10_micrometres_vertices\": 18, \"intersecting_triangle_pairs\": 150}, {\"surface\": \"BODYGUARD Female joint edge lowerleg01.L\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.0707807412254624, \"max\": 1.2332270853221416, \"mean\": 0.6042297966217802}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Female joint edge lowerleg01.R\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": -0.017325284716207534, \"max\": 1.5230049612000585, \"mean\": 0.6275071157020307}, \"inside_body_vertices\": 1, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 8}]\nJOINT CLEARANCE Female lowerleg01.L [{\"surface\": \"BODYGUARD Female joint edge lowerarm01.L\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.14740128244739026, \"max\": 1.0076427133753896, \"mean\": 0.587689296651206}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Female joint edge lowerarm01.R\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.08551754581276327, \"max\": 1.1060978285968304, \"mean\": 0.5945267305378366}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Female joint edge lowerleg01.L\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.2488026220817119, \"max\": 1.7065240535885096, \"mean\": 0.839991604266288}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Female joint edge lowerleg01.R\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": -0.017325284716207534, \"max\": 1.5230049612000585, \"mean\": 0.6275071157020307}, \"inside_body_vertices\": 1, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 8}]\nJOINT CLEARANCE Female lowerleg01.R [{\"surface\": \"BODYGUARD Female joint edge lowerarm01.L\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.14740128244739026, \"max\": 1.0076427133753896, \"mean\": 0.587689296651206}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Female joint edge lowerarm01.R\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.08551754581276327, \"max\": 1.1060978285968304, \"mean\": 0.5945267305378366}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Female joint edge lowerleg01.L\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.0707807412254624, \"max\": 1.2332270853221416, \"mean\": 0.6042297966217802}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}, {\"surface\": \"BODYGUARD Female joint edge lowerleg01.R\", \"vertices\": 512, \"signed_clearance_mm\": {\"min\": 0.23983657592907548, \"max\": 1.981599722057581, \"mean\": 0.8622872146588634}, \"inside_body_vertices\": 0, \"within_10_micrometres_vertices\": 0, \"intersecting_triangle_pairs\": 0}]\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ]
+    },
+    {
+      "name": "separate artist decorative overlay removal",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a193-a195-review/a195/artist-candidate.blend\" --python-exit-code 1 --python \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/remove_joint_overlays.py\" -- \"/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-candidate.blend\" \"/private/tmp/bodyguard-joint-boundary.pd8C8f/removal-report.json\"",
+      "command_retained": true,
+      "chunks": [
+        {
+          "chunk_id": "857c0d",
+          "wall_time_seconds": 1.002112959,
+          "session_id": 91940,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "cf6d6e",
+          "wall_time_seconds": 0.00000825,
+          "exit_code": 0,
+          "original_token_count": 592,
+          "output": "00:00.619  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a193-a195-review/a195/artist-candidate.blend\"\nInfo: Saved as \"artist-candidate.blend\"\nDECORATIVE OVERLAY REMOVAL {\"removed_decorative_overlays\": [\"BODYGUARD Female joint edge lowerarm01.L\", \"BODYGUARD Female joint edge lowerarm01.R\", \"BODYGUARD Female joint edge lowerleg01.L\", \"BODYGUARD Female joint edge lowerleg01.R\", \"BODYGUARD Male joint edge lowerarm01.L\", \"BODYGUARD Male joint edge lowerarm01.R\", \"BODYGUARD Male joint edge lowerleg01.L\", \"BODYGUARD Male joint edge lowerleg01.R\"], \"retained_mesh_signatures\": {\"BODYGUARD Male sculpt WIP\": \"82353be0f29e08333b228eb8d5c45a6e0c764e742982d98c6f471212d8cb9c8e\", \"BODYGUARD Female sculpt WIP\": \"c387f02d33db851ddc5d76fc9a5238f1b6ab4482fe76a3028286f21b82b29478\", \"BODYGUARD review ground\": \"3876c5c39beedde8481df80c4cdea855d9a5b67f5a489ed773bfd51b3f2a3ebf\"}, \"retained_rig_signatures\": {\"BODYGUARD Male rig WIP\": \"48af3549868185744a92404d7604eb4e757b6cc7b13f1520cbd54918d991e3d7\", \"BODYGUARD Female rig WIP\": \"cc067ff9154abc799f68a1c49f40fad04beeb0ddba9ee33cc97e44f694a4a7d5\"}, \"body_vertices\": {\"BODYGUARD Male sculpt WIP\": 131645, \"BODYGUARD Female sculpt WIP\": 130554}, \"all_retained_coordinates_skin_topology_groups_materials_world_exact\": true, \"all_163_rest_bones_pose_world_each_exact\": true, \"anatomical_body_or_rig_removed\": false, \"appearance_approved\": false, \"production_adopted\": false, \"source\": \"/Applications/\\u1112\\u1161\\u11a8\\u1100\\u116d \\u1102\\u1162\\u1107\\u116e/2026-2\\u1112\\u1161\\u11a8\\u1100\\u1175/\\u110b\\u1169\\u1111\\u1173\\u11ab\\u1109\\u1169\\u1109\\u1173 AI SW \\u110b\\u1172\\u11bc\\u1112\\u1161\\u11b8 \\u1111\\u1173\\u1105\\u1169\\u110c\\u1166\\u11a8\\u1110\\u1173/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a193-a195-review/a195/artist-candidate.blend\", \"source_sha256\": \"aba63129842e2bacbbe4cb8f9554ccf9bf123de2d1d6a152e3a2439fdd45618b\", \"output_sha256\": \"1bdb837b608b1a2994f26e0fa827c9a57065353d2d242a2efbb6363f45d32000\", \"source_file_unchanged\": true, \"camera_calls\": 0}\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ]
+    },
+    {
+      "name": "independent saved native regression creator version",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec --python-exit-code 1 --python \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/test_removed_joint_overlays.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/remove_joint_overlays.py\" \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a193-a195-review/a195/artist-candidate.blend\" \"/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-candidate.blend\" \"/private/tmp/bodyguard-joint-boundary.pd8C8f/saved-regression.json\"",
+      "command_retained": true,
+      "chunks": [
+        {
+          "chunk_id": "587373",
+          "wall_time_seconds": 1.001972166,
+          "session_id": 78297,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "2aa1d0",
+          "wall_time_seconds": 0.000017084,
+          "exit_code": 0,
+          "original_token_count": 686,
+          "output": "00:01.343  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a193-a195-review/a195/artist-candidate.blend\"\n00:12.996  blend            | Read blend: \"/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-candidate.blend\"\nSAVED JOINT OVERLAY REGRESSION {\"passed\": true, \"input_sha256\": {\"/Applications/\\u1112\\u1161\\u11a8\\u1100\\u116d \\u1102\\u1162\\u1107\\u116e/2026-2\\u1112\\u1161\\u11a8\\u1100\\u1175/\\u110b\\u1169\\u1111\\u1173\\u11ab\\u1109\\u1169\\u1109\\u1173 AI SW \\u110b\\u1172\\u11bc\\u1112\\u1161\\u11b8 \\u1111\\u1173\\u1105\\u1169\\u110c\\u1166\\u11a8\\u1110\\u1173/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/remove_joint_overlays.py\": \"ca43353a00306593651d6fcfc8e33e6a168ba2b177289139401c54c137ab7684\", \"/Applications/\\u1112\\u1161\\u11a8\\u1100\\u116d \\u1102\\u1162\\u1107\\u116e/2026-2\\u1112\\u1161\\u11a8\\u1100\\u1175/\\u110b\\u1169\\u1111\\u1173\\u11ab\\u1109\\u1169\\u1109\\u1173 AI SW \\u110b\\u1172\\u11bc\\u1112\\u1161\\u11b8 \\u1111\\u1173\\u1105\\u1169\\u110c\\u1166\\u11a8\\u1110\\u1173/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a193-a195-review/a195/artist-candidate.blend\": \"aba63129842e2bacbbe4cb8f9554ccf9bf123de2d1d6a152e3a2439fdd45618b\", \"/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-candidate.blend\": \"1bdb837b608b1a2994f26e0fa827c9a57065353d2d242a2efbb6363f45d32000\"}, \"negative_fixture\": \"Unexpected decorative overlay set rejected before deletion\", \"removed_objects\": [\"BODYGUARD Female joint edge lowerarm01.L\", \"BODYGUARD Female joint edge lowerarm01.R\", \"BODYGUARD Female joint edge lowerleg01.L\", \"BODYGUARD Female joint edge lowerleg01.R\", \"BODYGUARD Male joint edge lowerarm01.L\", \"BODYGUARD Male joint edge lowerarm01.R\", \"BODYGUARD Male joint edge lowerleg01.L\", \"BODYGUARD Male joint edge lowerleg01.R\"], \"retained_mesh_signatures\": {\"BODYGUARD Male sculpt WIP\": \"82353be0f29e08333b228eb8d5c45a6e0c764e742982d98c6f471212d8cb9c8e\", \"BODYGUARD Female sculpt WIP\": \"c387f02d33db851ddc5d76fc9a5238f1b6ab4482fe76a3028286f21b82b29478\", \"BODYGUARD review ground\": \"3876c5c39beedde8481df80c4cdea855d9a5b67f5a489ed773bfd51b3f2a3ebf\"}, \"retained_rig_signatures\": {\"BODYGUARD Male rig WIP\": \"48af3549868185744a92404d7604eb4e757b6cc7b13f1520cbd54918d991e3d7\", \"BODYGUARD Female rig WIP\": \"cc067ff9154abc799f68a1c49f40fad04beeb0ddba9ee33cc97e44f694a4a7d5\"}, \"independent_saved_reopen_body_and_163_rest_rigs_materials_exact\": true, \"source_and_candidate_files_unchanged\": true, \"saved_assets\": 0, \"camera_calls\": 0, \"appearance_approved\": false}\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ]
+    },
+    {
+      "name": "unchanged explicit web exporter",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-candidate.blend\" --python-exit-code 1 --python \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/export_avatar_candidate.py\" -- \"/private/tmp/bodyguard-joint-boundary.pd8C8f/web-candidate.blend\" \"/private/tmp/bodyguard-joint-boundary.pd8C8f/glb\" 1",
+      "command_retained": true,
+      "chunks": [
+        {
+          "chunk_id": "b3d565",
+          "wall_time_seconds": 1.002213208,
+          "session_id": 86565,
+          "original_token_count": 28,
+          "output": "00:00.442  blend            | Read blend: \"/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-candidate.blend\"\n"
+        },
+        {
+          "chunk_id": "09ef34",
+          "wall_time_seconds": 0.000020667,
+          "exit_code": 0,
+          "original_token_count": 768,
+          "output": "WEB FINAL TRIANGLES Male {\"vertices\": 131643, \"triangles\": 263282, \"repaired_bad_parents\": 31, \"explicit_good_parents\": 40, \"zero_triangles_before\": 11, \"zero_triangles_after\": 0, \"preserved_existing_tiny_triangles\": 1, \"minimum_triangle_area_m2\": 1.2350813602361031e-11, \"coordinates_skin_unrelated_triangles_exact\": true, \"appearance_approved\": false}\nWEB FIN REPAIR Male 2\nInfo: 289318 vertex weights limited\nINFO Draco mesh compression is available, use library at /Applications/Blender.app/Contents/Resources/5.1/scripts/addons_core/io_scene_gltf2/libextern_draco.dylib\n19:35:58 | INFO: Starting glTF 2.0 export\n19:35:58 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances\n19:35:58 | INFO: Extracting primitive: female_v006lowresUV.001\n19:35:59 | INFO: Primitives created: 1\n19:35:59 | INFO: Finished glTF 2.0 export in 1.2761058807373047 s\n\nWEB FINAL TRIANGLES Female {\"vertices\": 130552, \"triangles\": 261100, \"repaired_bad_parents\": 10, \"explicit_good_parents\": 33, \"zero_triangles_before\": 4, \"zero_triangles_after\": 0, \"preserved_existing_tiny_triangles\": 0, \"minimum_triangle_area_m2\": 1.4361803309828052e-10, \"coordinates_skin_unrelated_triangles_exact\": true, \"appearance_approved\": false}\nWEB FIN REPAIR Female 2\nInfo: 283333 vertex weights limited\n19:36:07 | INFO: Starting glTF 2.0 export\n19:36:07 | INFO: Extracting primitive: GEO-body_female_realistic.001\n19:36:09 | INFO: Primitives created: 1\n19:36:09 | INFO: Finished glTF 2.0 export in 1.3019578456878662 s\n\nInfo: Saved as \"web-candidate.blend\"\n19:36:09 | INFO: Data are loaded, start creating Blender stuff\n19:36:09 | INFO: Blender create Mesh node female_v006lowresUV.001\n19:36:10 | INFO: glTF import finished in 1.21s\n19:36:10 | INFO: Data are loaded, start creating Blender stuff\n19:36:10 | INFO: Blender create Mesh node GEO-body_female_realistic.001\n19:36:12 | INFO: glTF import finished in 1.39s\n00:23.218  blend            | Read blend: \"/private/tmp/bodyguard-joint-boundary.pd8C8f/web-candidate.blend\"\n19:36:12 | INFO: Data are loaded, start creating Blender stuff\n19:36:12 | INFO: Blender create Mesh node female_v006lowresUV.001\n19:36:14 | INFO: glTF import finished in 1.18s\n19:36:14 | INFO: Data are loaded, start creating Blender stuff\n19:36:14 | INFO: Blender create Mesh node GEO-body_female_realistic.001\n19:36:15 | INFO: glTF import finished in 1.17s\nInfo: Saved as \"web-candidate-roundtrip.blend\"\nWEB ROUNDTRIP [{\"gender\": \"Male\", \"bytes\": 11638276, \"meshes\": 1, \"bounds_m\": [[-0.2751196324825287, 0.2751199007034302], [-0.18425239622592926, 0.11133291572332382], [-0.0056211985647678375, 1.684626579284668]], \"animations\": 0, \"images\": 0}, {\"gender\": \"Female\", \"bytes\": 11542408, \"meshes\": 1, \"bounds_m\": [[-0.3038701117038727, 0.30387017130851746], [-0.15825755894184113, 0.1165170893073082], [0.0019709879998117685, 1.6388297080993652]], \"animations\": 0, \"images\": 0}]\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ]
+    },
+    {
+      "name": "complete artist native deformation/render QA",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-candidate.blend\" --python-exit-code 1 --python \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review_avatar.py\" -- \"/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review\" --candidate --mannequin",
+      "command_retained": true,
+      "chunks": [
+        {
+          "chunk_id": "41d66a",
+          "wall_time_seconds": 1.003551958,
+          "session_id": 17322,
+          "original_token_count": 28,
+          "output": "00:00.460  blend            | Read blend: \"/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-candidate.blend\"\n"
+        },
+        {
+          "chunk_id": "4c34c5",
+          "wall_time_seconds": 5.008261584,
+          "session_id": 17322,
+          "original_token_count": 371,
+          "output": "00:13.790  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/faceless-front.png'\n00:21.424  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/faceless-quarter.png'\n00:25.225  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/faceless-body-side-male.png'\n00:29.701  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/faceless-body-back-male.png'\n00:34.527  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/faceless-hand-male.png'\n00:42.208  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/faceless-knee-male.png'\n00:47.644  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/faceless-side-male.png'\n00:54.960  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/faceless-neck-male-left.png'\n01:02.101  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/faceless-neck-male-right.png'\n01:06.130  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/faceless-body-side-female.png'\n01:10.821  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/faceless-body-back-female.png'\n01:15.329  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/faceless-hand-female.png'\n"
+        },
+        {
+          "chunk_id": "4db7a8",
+          "wall_time_seconds": 5.00279375,
+          "session_id": 17322,
+          "original_token_count": 442,
+          "output": "01:23.464  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/faceless-knee-female.png'\n01:28.683  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/faceless-side-female.png'\n01:35.191  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/faceless-neck-female-left.png'\n01:41.623  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/faceless-neck-female-right.png'\n01:46.622  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/technical-male-clavicle.png'\n01:51.548  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/technical-male-upperarm01.png'\n01:56.448  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/technical-male-lowerarm01.png'\n02:01.365  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/technical-male-wrist.png'\n02:06.130  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/technical-male-upperleg01.png'\n02:11.009  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/technical-male-lowerleg01.png'\n02:16.073  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/technical-male-foot.png'\n02:23.412  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/technical-male-finger2-1.png'\n02:39.274  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/technical-male-spine02.png'\n02:44.542  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/technical-female-clavicle.png'\n"
+        },
+        {
+          "chunk_id": "830c35",
+          "wall_time_seconds": 5.013525083,
+          "session_id": 17322,
+          "original_token_count": 162,
+          "output": "02:49.369  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/technical-female-upperarm01.png'\n02:54.067  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/technical-female-lowerarm01.png'\n03:03.532  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/technical-female-wrist.png'\n03:15.112  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/technical-female-upperleg01.png'\n03:29.872  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/technical-female-lowerleg01.png'\n"
+        },
+        {
+          "chunk_id": "24786e",
+          "wall_time_seconds": 5.001861625,
+          "session_id": 17322,
+          "original_token_count": 64,
+          "output": "03:44.446  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/technical-female-foot.png'\n04:03.773  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/technical-female-finger2-1.png'\n"
+        },
+        {
+          "chunk_id": "ec0dda",
+          "wall_time_seconds": 0.000411334,
+          "exit_code": 0,
+          "original_token_count": 1722,
+          "output": "04:43.944  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-review/technical-female-spine02.png'\nAVATAR QC Male vertices 131645 bones 163 components 1 non_manifold 0 unnormalized 0\nAVATAR QC Female vertices 130554 bones 163 components 1 non_manifold 0 unnormalized 0\nNECK QC Male left rotation 20.0 axis (0.0, 1.0, 0.0)\nNECK QC Male right rotation 20.0 axis (0.0, -1.0, -0.0)\nNECK QC Female left rotation 20.0 axis (0.0, 1.0, 0.0)\nNECK QC Female right rotation 20.0 axis (0.0, -1.0, -0.0)\nARTICULATION QC Male clavicle L edge_ratio_max 1.281\nARTICULATION QC Male clavicle R edge_ratio_max 1.282\nARTICULATION QC Male upperarm01 L edge_ratio_max 1.978\nARTICULATION QC Male upperarm01 R edge_ratio_max 1.905\nARTICULATION QC Male lowerarm01 L edge_ratio_max 1.6\nARTICULATION QC Male lowerarm01 R edge_ratio_max 1.605\nARTICULATION QC Male wrist L edge_ratio_max 1.22\nARTICULATION QC Male wrist R edge_ratio_max 1.178\nARTICULATION QC Male upperleg01 L edge_ratio_max 1.525\nARTICULATION QC Male upperleg01 R edge_ratio_max 1.516\nARTICULATION QC Male lowerleg01 L edge_ratio_max 1.638\nARTICULATION QC Male lowerleg01 R edge_ratio_max 1.631\nARTICULATION QC Male foot L edge_ratio_max 1.183\nARTICULATION QC Male foot R edge_ratio_max 1.181\nARTICULATION QC Male finger1-1 L edge_ratio_max 1.955\nARTICULATION QC Male finger1-1 R edge_ratio_max 1.955\nARTICULATION QC Male finger1-2 L edge_ratio_max 1.53\nARTICULATION QC Male finger1-2 R edge_ratio_max 1.53\nARTICULATION QC Male finger1-3 L edge_ratio_max 1.394\nARTICULATION QC Male finger1-3 R edge_ratio_max 1.387\nARTICULATION QC Male finger2-1 L edge_ratio_max 1.459\nARTICULATION QC Male finger2-1 R edge_ratio_max 1.459\nARTICULATION QC Male finger2-2 L edge_ratio_max 1.242\nARTICULATION QC Male finger2-2 R edge_ratio_max 1.242\nARTICULATION QC Male finger2-3 L edge_ratio_max 1.24\nARTICULATION QC Male finger2-3 R edge_ratio_max 1.24\nARTICULATION QC Male finger3-1 L edge_ratio_max 1.493\nARTICULATION QC Male finger3-1 R edge_ratio_max 1.493\nARTICULATION QC Male finger3-2 L edge_ratio_max 1.221\nARTICULATION QC Male finger3-2 R edge_ratio_max 1.221\nARTICULATION QC Male finger3-3 L edge_ratio_max 1.163\nARTICULATION QC Male finger3-3 R edge_ratio_max 1.163\nARTICULATION QC Male finger4-1 L edge_ratio_max 1.493\nARTICULATION QC Male finger4-1 R edge_ratio_max 1.493\nARTICULATION QC Male finger4-2 L edge_ratio_max 1.19\nARTICULATION QC Male finger4-2 R edge_ratio_max 1.19\nARTICULATION QC Male finger4-3 L edge_ratio_max 1.219\nARTICULATION QC Male finger4-3 R edge_ratio_max 1.219\nARTICULATION QC Male finger5-1 L edge_ratio_max 1.279\nARTICULATION QC Male finger5-1 R edge_ratio_max 1.279\nARTICULATION QC Male finger5-2 L edge_ratio_max 1.206\nARTICULATION QC Male finger5-2 R edge_ratio_max 1.206\nARTICULATION QC Male finger5-3 L edge_ratio_max 1.13\nARTICULATION QC Male finger5-3 R edge_ratio_max 1.134\nARTICULATION QC Male metacarpal1 L edge_ratio_max 2.847\nARTICULATION QC Male metacarpal1 R edge_ratio_max 2.847\nARTICULATION QC Male metacarpal2 L edge_ratio_max 2.944\nARTICULATION QC Male metacarpal2 R edge_ratio_max 2.944\nARTICULATION QC Male metacarpal3 L edge_ratio_max 2.477\nARTICULATION QC Male metacarpal3 R edge_ratio_max 2.477\nARTICULATION QC Male metacarpal4 L edge_ratio_max 1.326\nARTICULATION QC Male metacarpal4 R edge_ratio_max 1.326\nARTICULATION QC Male spine01  edge_ratio_max 1.353\nARTICULATION QC Male spine02  edge_ratio_max 1.154\nARTICULATION QC Male spine03  edge_ratio_max 1.115\nARTICULATION QC Male spine04  edge_ratio_max 1.15\nARTICULATION QC Male spine05  edge_ratio_max 1.198\nARTICULATION QC Female clavicle L edge_ratio_max 1.238\nARTICULATION QC Female clavicle R edge_ratio_max 1.238\nARTICULATION QC Female upperarm01 L edge_ratio_max 2.218\nARTICULATION QC Female upperarm01 R edge_ratio_max 2.123\nARTICULATION QC Female lowerarm01 L edge_ratio_max 1.588\nARTICULATION QC Female lowerarm01 R edge_ratio_max 1.572\nARTICULATION QC Female wrist L edge_ratio_max 1.141\nARTICULATION QC Female wrist R edge_ratio_max 1.139\nARTICULATION QC Female upperleg01 L edge_ratio_max 1.599\nARTICULATION QC Female upperleg01 R edge_ratio_max 1.582\nARTICULATION QC Female lowerleg01 L edge_ratio_max 1.7\nARTICULATION QC Female lowerleg01 R edge_ratio_max 1.694\nARTICULATION QC Female foot L edge_ratio_max 1.179\nARTICULATION QC Female foot R edge_ratio_max 1.189\nARTICULATION QC Female finger1-1 L edge_ratio_max 2.058\nARTICULATION QC Female finger1-1 R edge_ratio_max 2.058\nARTICULATION QC Female finger1-2 L edge_ratio_max 1.55\nARTICULATION QC Female finger1-2 R edge_ratio_max 1.55\nARTICULATION QC Female finger1-3 L edge_ratio_max 1.318\nARTICULATION QC Female finger1-3 R edge_ratio_max 1.312\nARTICULATION QC Female finger2-1 L edge_ratio_max 1.412\nARTICULATION QC Female finger2-1 R edge_ratio_max 1.412\nARTICULATION QC Female finger2-2 L edge_ratio_max 1.189\nARTICULATION QC Female finger2-2 R edge_ratio_max 1.189\nARTICULATION QC Female finger2-3 L edge_ratio_max 1.152\nARTICULATION QC Female finger2-3 R edge_ratio_max 1.152\nARTICULATION QC Female finger3-1 L edge_ratio_max 1.427\nARTICULATION QC Female finger3-1 R edge_ratio_max 1.427\nARTICULATION QC Female finger3-2 L edge_ratio_max 1.184\nARTICULATION QC Female finger3-2 R edge_ratio_max 1.184\nARTICULATION QC Female finger3-3 L edge_ratio_max 1.122\nARTICULATION QC Female finger3-3 R edge_ratio_max 1.122\nARTICULATION QC Female finger4-1 L edge_ratio_max 1.386\nARTICULATION QC Female finger4-1 R edge_ratio_max 1.385\nARTICULATION QC Female finger4-2 L edge_ratio_max 1.154\nARTICULATION QC Female finger4-2 R edge_ratio_max 1.154\nARTICULATION QC Female finger4-3 L edge_ratio_max 1.158\nARTICULATION QC Female finger4-3 R edge_ratio_max 1.158\nARTICULATION QC Female finger5-1 L edge_ratio_max 1.296\nARTICULATION QC Female finger5-1 R edge_ratio_max 1.296\nARTICULATION QC Female finger5-2 L edge_ratio_max 1.103\nARTICULATION QC Female finger5-2 R edge_ratio_max 1.103\nARTICULATION QC Female finger5-3 L edge_ratio_max 1.101\nARTICULATION QC Female finger5-3 R edge_ratio_max 1.101\nARTICULATION QC Female metacarpal1 L edge_ratio_max 2.588\nARTICULATION QC Female metacarpal1 R edge_ratio_max 2.588\nARTICULATION QC Female metacarpal2 L edge_ratio_max 2.755\nARTICULATION QC Female metacarpal2 R edge_ratio_max 2.755\nARTICULATION QC Female metacarpal3 L edge_ratio_max 2.382\nARTICULATION QC Female metacarpal3 R edge_ratio_max 2.382\nARTICULATION QC Female metacarpal4 L edge_ratio_max 1.355\nARTICULATION QC Female metacarpal4 R edge_ratio_max 1.355\nARTICULATION QC Female spine01  edge_ratio_max 1.41\nARTICULATION QC Female spine02  edge_ratio_max 1.104\nARTICULATION QC Female spine03  edge_ratio_max 1.139\nARTICULATION QC Female spine04  edge_ratio_max 1.162\nARTICULATION QC Female spine05  edge_ratio_max 1.274\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ]
+    },
+    {
+      "name": "complete web native deformation/render QA",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/private/tmp/bodyguard-joint-boundary.pd8C8f/web-candidate.blend\" --python-exit-code 1 --python \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review_avatar.py\" -- \"/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review\" --candidate --mannequin",
+      "command_retained": true,
+      "chunks": [
+        {
+          "chunk_id": "fd0caf",
+          "wall_time_seconds": 1.001856875,
+          "session_id": 43142,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "065412",
+          "wall_time_seconds": 5.002495791,
+          "session_id": 43142,
+          "original_token_count": 56,
+          "output": "00:01.664  blend            | Read blend: \"/private/tmp/bodyguard-joint-boundary.pd8C8f/web-candidate.blend\"\n00:34.871  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/faceless-front.png'\n"
+        },
+        {
+          "chunk_id": "b26e99",
+          "wall_time_seconds": 5.002546,
+          "session_id": 43142,
+          "original_token_count": 91,
+          "output": "01:07.018  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/faceless-quarter.png'\n01:31.172  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/faceless-body-side-male.png'\n02:04.338  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/faceless-body-back-male.png'\n"
+        },
+        {
+          "chunk_id": "4d46ea",
+          "wall_time_seconds": 5.008843375,
+          "session_id": 43142,
+          "original_token_count": 89,
+          "output": "02:33.979  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/faceless-hand-male.png'\n03:12.241  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/faceless-knee-male.png'\n03:47.626  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/faceless-side-male.png'\n"
+        },
+        {
+          "chunk_id": "26fb56",
+          "wall_time_seconds": 5.001544875,
+          "session_id": 43142,
+          "original_token_count": 93,
+          "output": "04:25.759  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/faceless-neck-male-left.png'\n05:02.584  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/faceless-neck-male-right.png'\n05:15.206  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/faceless-body-side-female.png'\n"
+        },
+        {
+          "chunk_id": "6ac3ed",
+          "wall_time_seconds": 5.01298675,
+          "session_id": 43142,
+          "original_token_count": 153,
+          "output": "05:25.756  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/faceless-body-back-female.png'\n05:37.458  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/faceless-hand-female.png'\n05:56.444  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/faceless-knee-female.png'\n06:08.587  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/faceless-side-female.png'\n06:27.644  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/faceless-neck-female-left.png'\n"
+        },
+        {
+          "chunk_id": "ebbd3e",
+          "wall_time_seconds": 5.002137875,
+          "session_id": 43142,
+          "original_token_count": 32,
+          "output": "06:43.974  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/faceless-neck-female-right.png'\n"
+        },
+        {
+          "chunk_id": "2008c4",
+          "wall_time_seconds": 5.002726291,
+          "session_id": 43142,
+          "original_token_count": 186,
+          "output": "07:01.460  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/technical-male-clavicle.png'\n07:44.477  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/technical-male-upperarm01.png'\n08:04.809  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/technical-male-lowerarm01.png'\n08:21.834  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/technical-male-wrist.png'\n08:36.929  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/technical-male-upperleg01.png'\n08:57.848  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/technical-male-lowerleg01.png'\n"
+        },
+        {
+          "chunk_id": "8db1c7",
+          "wall_time_seconds": 5.002088542,
+          "session_id": 43142,
+          "original_token_count": 61,
+          "output": "09:23.338  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/technical-male-foot.png'\n09:44.073  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/technical-male-finger2-1.png'\n"
+        },
+        {
+          "chunk_id": "e2909a",
+          "wall_time_seconds": 5.002251625,
+          "session_id": 43142,
+          "original_token_count": 31,
+          "output": "10:30.854  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/technical-male-spine02.png'\n"
+        },
+        {
+          "chunk_id": "e58f34",
+          "wall_time_seconds": 5.000924375,
+          "session_id": 43142,
+          "original_token_count": 95,
+          "output": "10:48.189  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/technical-female-clavicle.png'\n11:02.997  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/technical-female-upperarm01.png'\n11:18.262  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/technical-female-lowerarm01.png'\n"
+        },
+        {
+          "chunk_id": "5c6cb4",
+          "wall_time_seconds": 5.002377791,
+          "session_id": 43142,
+          "original_token_count": 31,
+          "output": "11:36.903  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/technical-female-wrist.png'\n"
+        },
+        {
+          "chunk_id": "7bcca4",
+          "wall_time_seconds": 5.002726333,
+          "session_id": 43142,
+          "original_token_count": 126,
+          "output": "11:57.048  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/technical-female-upperleg01.png'\n12:15.828  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/technical-female-lowerleg01.png'\n12:31.947  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/technical-female-foot.png'\n13:00.170  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/technical-female-finger2-1.png'\n"
+        },
+        {
+          "chunk_id": "053eff",
+          "wall_time_seconds": 0.000023,
+          "exit_code": 0,
+          "original_token_count": 1722,
+          "output": "13:34.381  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/web-review/technical-female-spine02.png'\nAVATAR QC Male vertices 131643 bones 163 components 1 non_manifold 0 unnormalized 0\nAVATAR QC Female vertices 130552 bones 163 components 1 non_manifold 0 unnormalized 0\nNECK QC Male left rotation 20.0 axis (0.0, 1.0, 0.0)\nNECK QC Male right rotation 20.0 axis (0.0, -1.0, -0.0)\nNECK QC Female left rotation 20.0 axis (0.0, 1.0, 0.0)\nNECK QC Female right rotation 20.0 axis (0.0, -1.0, -0.0)\nARTICULATION QC Male clavicle L edge_ratio_max 1.281\nARTICULATION QC Male clavicle R edge_ratio_max 1.282\nARTICULATION QC Male upperarm01 L edge_ratio_max 1.978\nARTICULATION QC Male upperarm01 R edge_ratio_max 1.905\nARTICULATION QC Male lowerarm01 L edge_ratio_max 1.6\nARTICULATION QC Male lowerarm01 R edge_ratio_max 1.605\nARTICULATION QC Male wrist L edge_ratio_max 1.224\nARTICULATION QC Male wrist R edge_ratio_max 1.198\nARTICULATION QC Male upperleg01 L edge_ratio_max 1.525\nARTICULATION QC Male upperleg01 R edge_ratio_max 1.516\nARTICULATION QC Male lowerleg01 L edge_ratio_max 1.638\nARTICULATION QC Male lowerleg01 R edge_ratio_max 1.631\nARTICULATION QC Male foot L edge_ratio_max 1.183\nARTICULATION QC Male foot R edge_ratio_max 1.181\nARTICULATION QC Male finger1-1 L edge_ratio_max 2.151\nARTICULATION QC Male finger1-1 R edge_ratio_max 2.151\nARTICULATION QC Male finger1-2 L edge_ratio_max 1.584\nARTICULATION QC Male finger1-2 R edge_ratio_max 1.584\nARTICULATION QC Male finger1-3 L edge_ratio_max 1.394\nARTICULATION QC Male finger1-3 R edge_ratio_max 1.387\nARTICULATION QC Male finger2-1 L edge_ratio_max 1.459\nARTICULATION QC Male finger2-1 R edge_ratio_max 1.459\nARTICULATION QC Male finger2-2 L edge_ratio_max 1.242\nARTICULATION QC Male finger2-2 R edge_ratio_max 1.242\nARTICULATION QC Male finger2-3 L edge_ratio_max 1.24\nARTICULATION QC Male finger2-3 R edge_ratio_max 1.24\nARTICULATION QC Male finger3-1 L edge_ratio_max 1.537\nARTICULATION QC Male finger3-1 R edge_ratio_max 1.537\nARTICULATION QC Male finger3-2 L edge_ratio_max 1.221\nARTICULATION QC Male finger3-2 R edge_ratio_max 1.221\nARTICULATION QC Male finger3-3 L edge_ratio_max 1.163\nARTICULATION QC Male finger3-3 R edge_ratio_max 1.163\nARTICULATION QC Male finger4-1 L edge_ratio_max 1.494\nARTICULATION QC Male finger4-1 R edge_ratio_max 1.494\nARTICULATION QC Male finger4-2 L edge_ratio_max 1.19\nARTICULATION QC Male finger4-2 R edge_ratio_max 1.19\nARTICULATION QC Male finger4-3 L edge_ratio_max 1.219\nARTICULATION QC Male finger4-3 R edge_ratio_max 1.219\nARTICULATION QC Male finger5-1 L edge_ratio_max 1.279\nARTICULATION QC Male finger5-1 R edge_ratio_max 1.279\nARTICULATION QC Male finger5-2 L edge_ratio_max 1.206\nARTICULATION QC Male finger5-2 R edge_ratio_max 1.206\nARTICULATION QC Male finger5-3 L edge_ratio_max 1.13\nARTICULATION QC Male finger5-3 R edge_ratio_max 1.134\nARTICULATION QC Male metacarpal1 L edge_ratio_max 2.847\nARTICULATION QC Male metacarpal1 R edge_ratio_max 2.847\nARTICULATION QC Male metacarpal2 L edge_ratio_max 2.942\nARTICULATION QC Male metacarpal2 R edge_ratio_max 2.942\nARTICULATION QC Male metacarpal3 L edge_ratio_max 2.477\nARTICULATION QC Male metacarpal3 R edge_ratio_max 2.477\nARTICULATION QC Male metacarpal4 L edge_ratio_max 1.336\nARTICULATION QC Male metacarpal4 R edge_ratio_max 1.336\nARTICULATION QC Male spine01  edge_ratio_max 1.407\nARTICULATION QC Male spine02  edge_ratio_max 1.252\nARTICULATION QC Male spine03  edge_ratio_max 1.18\nARTICULATION QC Male spine04  edge_ratio_max 1.277\nARTICULATION QC Male spine05  edge_ratio_max 1.291\nARTICULATION QC Female clavicle L edge_ratio_max 1.238\nARTICULATION QC Female clavicle R edge_ratio_max 1.238\nARTICULATION QC Female upperarm01 L edge_ratio_max 2.218\nARTICULATION QC Female upperarm01 R edge_ratio_max 2.123\nARTICULATION QC Female lowerarm01 L edge_ratio_max 1.588\nARTICULATION QC Female lowerarm01 R edge_ratio_max 1.572\nARTICULATION QC Female wrist L edge_ratio_max 1.165\nARTICULATION QC Female wrist R edge_ratio_max 1.166\nARTICULATION QC Female upperleg01 L edge_ratio_max 1.599\nARTICULATION QC Female upperleg01 R edge_ratio_max 1.582\nARTICULATION QC Female lowerleg01 L edge_ratio_max 1.7\nARTICULATION QC Female lowerleg01 R edge_ratio_max 1.694\nARTICULATION QC Female foot L edge_ratio_max 1.179\nARTICULATION QC Female foot R edge_ratio_max 1.189\nARTICULATION QC Female finger1-1 L edge_ratio_max 2.185\nARTICULATION QC Female finger1-1 R edge_ratio_max 2.185\nARTICULATION QC Female finger1-2 L edge_ratio_max 1.55\nARTICULATION QC Female finger1-2 R edge_ratio_max 1.55\nARTICULATION QC Female finger1-3 L edge_ratio_max 1.318\nARTICULATION QC Female finger1-3 R edge_ratio_max 1.312\nARTICULATION QC Female finger2-1 L edge_ratio_max 1.412\nARTICULATION QC Female finger2-1 R edge_ratio_max 1.412\nARTICULATION QC Female finger2-2 L edge_ratio_max 1.189\nARTICULATION QC Female finger2-2 R edge_ratio_max 1.189\nARTICULATION QC Female finger2-3 L edge_ratio_max 1.152\nARTICULATION QC Female finger2-3 R edge_ratio_max 1.152\nARTICULATION QC Female finger3-1 L edge_ratio_max 1.501\nARTICULATION QC Female finger3-1 R edge_ratio_max 1.501\nARTICULATION QC Female finger3-2 L edge_ratio_max 1.184\nARTICULATION QC Female finger3-2 R edge_ratio_max 1.184\nARTICULATION QC Female finger3-3 L edge_ratio_max 1.122\nARTICULATION QC Female finger3-3 R edge_ratio_max 1.122\nARTICULATION QC Female finger4-1 L edge_ratio_max 1.385\nARTICULATION QC Female finger4-1 R edge_ratio_max 1.385\nARTICULATION QC Female finger4-2 L edge_ratio_max 1.154\nARTICULATION QC Female finger4-2 R edge_ratio_max 1.154\nARTICULATION QC Female finger4-3 L edge_ratio_max 1.157\nARTICULATION QC Female finger4-3 R edge_ratio_max 1.157\nARTICULATION QC Female finger5-1 L edge_ratio_max 1.296\nARTICULATION QC Female finger5-1 R edge_ratio_max 1.296\nARTICULATION QC Female finger5-2 L edge_ratio_max 1.139\nARTICULATION QC Female finger5-2 R edge_ratio_max 1.139\nARTICULATION QC Female finger5-3 L edge_ratio_max 1.103\nARTICULATION QC Female finger5-3 R edge_ratio_max 1.103\nARTICULATION QC Female metacarpal1 L edge_ratio_max 2.588\nARTICULATION QC Female metacarpal1 R edge_ratio_max 2.588\nARTICULATION QC Female metacarpal2 L edge_ratio_max 2.756\nARTICULATION QC Female metacarpal2 R edge_ratio_max 2.756\nARTICULATION QC Female metacarpal3 L edge_ratio_max 2.382\nARTICULATION QC Female metacarpal3 R edge_ratio_max 2.382\nARTICULATION QC Female metacarpal4 L edge_ratio_max 1.355\nARTICULATION QC Female metacarpal4 R edge_ratio_max 1.355\nARTICULATION QC Female spine01  edge_ratio_max 1.41\nARTICULATION QC Female spine02  edge_ratio_max 1.215\nARTICULATION QC Female spine03  edge_ratio_max 1.205\nARTICULATION QC Female spine04  edge_ratio_max 1.359\nARTICULATION QC Female spine05  edge_ratio_max 1.371\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ]
+    },
+    {
+      "name": "independent saved native regression final output guards",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec --python-exit-code 1 --python \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/test_removed_joint_overlays.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/remove_joint_overlays.py\" \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a193-a195-review/a195/artist-candidate.blend\" \"/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-candidate.blend\" \"/private/tmp/bodyguard-joint-boundary.pd8C8f/saved-regression-final.json\"",
+      "command_retained": true,
+      "chunks": [
+        {
+          "chunk_id": "fda47f",
+          "wall_time_seconds": 1.00192575,
+          "session_id": 25402,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "344b48",
+          "wall_time_seconds": 5.006077083,
+          "session_id": 25402,
+          "original_token_count": 78,
+          "output": "00:11.127  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a193-a195-review/a195/artist-candidate.blend\"\n"
+        },
+        {
+          "chunk_id": "855637",
+          "wall_time_seconds": 5.001403916,
+          "session_id": 25402,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "03e4d2",
+          "wall_time_seconds": 5.259926708,
+          "session_id": 25402,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "ed899f",
+          "wall_time_seconds": 0.000021875,
+          "exit_code": 0,
+          "original_token_count": 629,
+          "output": "02:09.290  blend            | Read blend: \"/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-candidate.blend\"\nSAVED JOINT OVERLAY REGRESSION {\"passed\": true, \"input_sha256\": {\"/Applications/\\u1112\\u1161\\u11a8\\u1100\\u116d \\u1102\\u1162\\u1107\\u116e/2026-2\\u1112\\u1161\\u11a8\\u1100\\u1175/\\u110b\\u1169\\u1111\\u1173\\u11ab\\u1109\\u1169\\u1109\\u1173 AI SW \\u110b\\u1172\\u11bc\\u1112\\u1161\\u11b8 \\u1111\\u1173\\u1105\\u1169\\u110c\\u1166\\u11a8\\u1110\\u1173/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/remove_joint_overlays.py\": \"3ec184f33465467c8c43c5899bf7d1a143e27e8791cde2b87edd28121b556552\", \"/Applications/\\u1112\\u1161\\u11a8\\u1100\\u116d \\u1102\\u1162\\u1107\\u116e/2026-2\\u1112\\u1161\\u11a8\\u1100\\u1175/\\u110b\\u1169\\u1111\\u1173\\u11ab\\u1109\\u1169\\u1109\\u1173 AI SW \\u110b\\u1172\\u11bc\\u1112\\u1161\\u11b8 \\u1111\\u1173\\u1105\\u1169\\u110c\\u1166\\u11a8\\u1110\\u1173/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a193-a195-review/a195/artist-candidate.blend\": \"aba63129842e2bacbbe4cb8f9554ccf9bf123de2d1d6a152e3a2439fdd45618b\", \"/private/tmp/bodyguard-joint-boundary.pd8C8f/artist-candidate.blend\": \"1bdb837b608b1a2994f26e0fa827c9a57065353d2d242a2efbb6363f45d32000\"}, \"negative_fixture\": \"Unexpected decorative overlay set rejected before deletion\", \"unsafe_output_path_fixtures_rejected\": 4, \"positive_output_path_created_files\": 0, \"removed_objects\": [\"BODYGUARD Female joint edge lowerarm01.L\", \"BODYGUARD Female joint edge lowerarm01.R\", \"BODYGUARD Female joint edge lowerleg01.L\", \"BODYGUARD Female joint edge lowerleg01.R\", \"BODYGUARD Male joint edge lowerarm01.L\", \"BODYGUARD Male joint edge lowerarm01.R\", \"BODYGUARD Male joint edge lowerleg01.L\", \"BODYGUARD Male joint edge lowerleg01.R\"], \"retained_mesh_signatures\": {\"BODYGUARD Male sculpt WIP\": \"82353be0f29e08333b228eb8d5c45a6e0c764e742982d98c6f471212d8cb9c8e\", \"BODYGUARD Female sculpt WIP\": \"c387f02d33db851ddc5d76fc9a5238f1b6ab4482fe76a3028286f21b82b29478\", \"BODYGUARD review ground\": \"3876c5c39beedde8481df80c4cdea855d9a5b67f5a489ed773bfd51b3f2a3ebf\"}, \"retained_rig_signatures\": {\"BODYGUARD Male rig WIP\": \"48af3549868185744a92404d7604eb4e757b6cc7b13f1520cbd54918d991e3d7\", \"BODYGUARD Female rig WIP\": \"cc067ff9154abc799f68a1c49f40fad04beeb0ddba9ee33cc97e44f694a4a7d5\"}, \"independent_saved_reopen_body_and_163_rest_rigs_materials_exact\": true, \"source_and_candidate_files_unchanged\": true, \"saved_assets\": 0, \"camera_calls\": 0, \"appearance_approved\": false}\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ]
+    },
+    {
+      "name": "complete GLB reimport deformation/render QA",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/private/tmp/bodyguard-joint-boundary.pd8C8f/web-candidate-roundtrip.blend\" --python-exit-code 1 --python \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review_avatar.py\" -- \"/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review\" --candidate --mannequin",
+      "command_retained": true,
+      "chunks": [
+        {
+          "chunk_id": "da613e",
+          "wall_time_seconds": 1.002540625,
+          "session_id": 62491,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "19acd7",
+          "wall_time_seconds": 5.085996209,
+          "session_id": 62491,
+          "original_token_count": 30,
+          "output": "00:00.983  blend            | Read blend: \"/private/tmp/bodyguard-joint-boundary.pd8C8f/web-candidate-roundtrip.blend\"\n"
+        },
+        {
+          "chunk_id": "857963",
+          "wall_time_seconds": 40.001370667,
+          "session_id": 62491,
+          "original_token_count": 30,
+          "output": "02:02.658  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/faceless-front.png'\n"
+        },
+        {
+          "chunk_id": "87007f",
+          "wall_time_seconds": 5.017774125,
+          "session_id": 62491,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "686543",
+          "wall_time_seconds": 40.701210583,
+          "session_id": 62491,
+          "original_token_count": 63,
+          "output": "03:51.423  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/faceless-quarter.png'\n04:42.657  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/faceless-body-side-male.png'\n"
+        },
+        {
+          "chunk_id": "fa2106",
+          "wall_time_seconds": 5.05151725,
+          "session_id": 62491,
+          "original_token_count": 33,
+          "output": "07:38.159  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/faceless-body-back-male.png'\n"
+        },
+        {
+          "chunk_id": "68af66",
+          "wall_time_seconds": 40.010260208,
+          "session_id": 62491,
+          "original_token_count": 62,
+          "output": "09:27.912  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/faceless-hand-male.png'\n11:58.318  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/faceless-knee-male.png'\n"
+        },
+        {
+          "chunk_id": "e77f5f",
+          "wall_time_seconds": 40.012095333,
+          "session_id": 62491,
+          "original_token_count": 96,
+          "output": "12:57.120  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/faceless-side-male.png'\n13:39.637  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/faceless-neck-male-left.png'\n14:22.803  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/faceless-neck-male-right.png'\n"
+        },
+        {
+          "chunk_id": "19cf32",
+          "wall_time_seconds": 5.001897,
+          "session_id": 62491,
+          "original_token_count": 33,
+          "output": "14:58.445  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/faceless-body-side-female.png'\n"
+        },
+        {
+          "chunk_id": "ab9879",
+          "wall_time_seconds": 40.02451725,
+          "session_id": 62491,
+          "original_token_count": 96,
+          "output": "15:48.128  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/faceless-body-back-female.png'\n16:34.606  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/faceless-hand-female.png'\n17:39.171  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/faceless-knee-female.png'\n"
+        },
+        {
+          "chunk_id": "f315fc",
+          "wall_time_seconds": 40.001349416,
+          "session_id": 62491,
+          "original_token_count": 65,
+          "output": "18:11.194  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/faceless-side-female.png'\n18:58.869  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/faceless-neck-female-left.png'\n"
+        },
+        {
+          "chunk_id": "981ed8",
+          "wall_time_seconds": 40.122586834,
+          "session_id": 62491,
+          "original_token_count": 98,
+          "output": "19:21.124  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/faceless-neck-female-right.png'\n19:42.331  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/technical-male-clavicle.png'\n19:58.613  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/technical-male-upperarm01.png'\n"
+        },
+        {
+          "chunk_id": "7bf5fd",
+          "wall_time_seconds": 40.00231275,
+          "session_id": 62491,
+          "original_token_count": 130,
+          "output": "21:48.448  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/technical-male-lowerarm01.png'\n23:01.786  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/technical-male-wrist.png'\n24:02.953  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/technical-male-upperleg01.png'\n24:26.887  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/technical-male-lowerleg01.png'\n"
+        },
+        {
+          "chunk_id": "09281a",
+          "wall_time_seconds": 40.211836583,
+          "session_id": 62491,
+          "original_token_count": 64,
+          "output": "24:54.409  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/technical-male-foot.png'\n26:01.316  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/technical-male-finger2-1.png'\n"
+        },
+        {
+          "chunk_id": "9b5744",
+          "wall_time_seconds": 40.005485459,
+          "session_id": 62491,
+          "original_token_count": 32,
+          "output": "30:15.926  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/technical-male-spine02.png'\n"
+        },
+        {
+          "chunk_id": "231067",
+          "wall_time_seconds": 40.786019125,
+          "session_id": 62491,
+          "original_token_count": 33,
+          "output": "35:39.216  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/technical-female-clavicle.png'\n"
+        },
+        {
+          "chunk_id": "3fddec",
+          "wall_time_seconds": 40.004888083,
+          "session_id": 62491,
+          "original_token_count": 165,
+          "output": "38:11.490  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/technical-female-upperarm01.png'\n39:34.447  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/technical-female-lowerarm01.png'\n40:07.837  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/technical-female-wrist.png'\n41:01.397  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/technical-female-upperleg01.png'\n41:37.811  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/technical-female-lowerleg01.png'\n"
+        },
+        {
+          "chunk_id": "3af5f2",
+          "wall_time_seconds": 0.000013875,
+          "exit_code": 0,
+          "original_token_count": 1788,
+          "output": "42:13.505  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/technical-female-foot.png'\n42:47.934  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/technical-female-finger2-1.png'\n43:46.727  render           | Saved: '/private/tmp/bodyguard-joint-boundary.pd8C8f/roundtrip-review/technical-female-spine02.png'\nAVATAR QC Male vertices 131643 bones 163 components 1 non_manifold 0 unnormalized 0\nAVATAR QC Female vertices 130552 bones 163 components 1 non_manifold 0 unnormalized 0\nNECK QC Male left rotation 20.0 axis (0.0, 1.0, 0.0)\nNECK QC Male right rotation 20.0 axis (0.0, -1.0, -0.0)\nNECK QC Female left rotation 20.0 axis (-0.0, 1.0, -0.0)\nNECK QC Female right rotation 20.0 axis (-0.0, -1.0, 0.0)\nARTICULATION QC Male clavicle L edge_ratio_max 1.281\nARTICULATION QC Male clavicle R edge_ratio_max 1.282\nARTICULATION QC Male upperarm01 L edge_ratio_max 1.978\nARTICULATION QC Male upperarm01 R edge_ratio_max 1.905\nARTICULATION QC Male lowerarm01 L edge_ratio_max 1.6\nARTICULATION QC Male lowerarm01 R edge_ratio_max 1.605\nARTICULATION QC Male wrist L edge_ratio_max 1.224\nARTICULATION QC Male wrist R edge_ratio_max 1.198\nARTICULATION QC Male upperleg01 L edge_ratio_max 1.525\nARTICULATION QC Male upperleg01 R edge_ratio_max 1.516\nARTICULATION QC Male lowerleg01 L edge_ratio_max 1.638\nARTICULATION QC Male lowerleg01 R edge_ratio_max 1.631\nARTICULATION QC Male foot L edge_ratio_max 1.183\nARTICULATION QC Male foot R edge_ratio_max 1.181\nARTICULATION QC Male finger1-1 L edge_ratio_max 2.151\nARTICULATION QC Male finger1-1 R edge_ratio_max 2.152\nARTICULATION QC Male finger1-2 L edge_ratio_max 1.584\nARTICULATION QC Male finger1-2 R edge_ratio_max 1.584\nARTICULATION QC Male finger1-3 L edge_ratio_max 1.41\nARTICULATION QC Male finger1-3 R edge_ratio_max 1.409\nARTICULATION QC Male finger2-1 L edge_ratio_max 1.459\nARTICULATION QC Male finger2-1 R edge_ratio_max 1.459\nARTICULATION QC Male finger2-2 L edge_ratio_max 1.242\nARTICULATION QC Male finger2-2 R edge_ratio_max 1.242\nARTICULATION QC Male finger2-3 L edge_ratio_max 1.24\nARTICULATION QC Male finger2-3 R edge_ratio_max 1.24\nARTICULATION QC Male finger3-1 L edge_ratio_max 1.537\nARTICULATION QC Male finger3-1 R edge_ratio_max 1.537\nARTICULATION QC Male finger3-2 L edge_ratio_max 1.221\nARTICULATION QC Male finger3-2 R edge_ratio_max 1.221\nARTICULATION QC Male finger3-3 L edge_ratio_max 1.163\nARTICULATION QC Male finger3-3 R edge_ratio_max 1.163\nARTICULATION QC Male finger4-1 L edge_ratio_max 1.493\nARTICULATION QC Male finger4-1 R edge_ratio_max 1.493\nARTICULATION QC Male finger4-2 L edge_ratio_max 1.19\nARTICULATION QC Male finger4-2 R edge_ratio_max 1.19\nARTICULATION QC Male finger4-3 L edge_ratio_max 1.219\nARTICULATION QC Male finger4-3 R edge_ratio_max 1.219\nARTICULATION QC Male finger5-1 L edge_ratio_max 1.279\nARTICULATION QC Male finger5-1 R edge_ratio_max 1.279\nARTICULATION QC Male finger5-2 L edge_ratio_max 1.217\nARTICULATION QC Male finger5-2 R edge_ratio_max 1.217\nARTICULATION QC Male finger5-3 L edge_ratio_max 1.137\nARTICULATION QC Male finger5-3 R edge_ratio_max 1.137\nARTICULATION QC Male metacarpal1 L edge_ratio_max 2.846\nARTICULATION QC Male metacarpal1 R edge_ratio_max 2.846\nARTICULATION QC Male metacarpal2 L edge_ratio_max 2.948\nARTICULATION QC Male metacarpal2 R edge_ratio_max 2.947\nARTICULATION QC Male metacarpal3 L edge_ratio_max 2.477\nARTICULATION QC Male metacarpal3 R edge_ratio_max 2.477\nARTICULATION QC Male metacarpal4 L edge_ratio_max 1.35\nARTICULATION QC Male metacarpal4 R edge_ratio_max 1.35\nARTICULATION QC Male spine01  edge_ratio_max 1.407\nARTICULATION QC Male spine02  edge_ratio_max 1.252\nARTICULATION QC Male spine03  edge_ratio_max 1.18\nARTICULATION QC Male spine04  edge_ratio_max 1.277\nARTICULATION QC Male spine05  edge_ratio_max 1.291\nARTICULATION QC Female clavicle L edge_ratio_max 1.238\nARTICULATION QC Female clavicle R edge_ratio_max 1.238\nARTICULATION QC Female upperarm01 L edge_ratio_max 2.218\nARTICULATION QC Female upperarm01 R edge_ratio_max 2.123\nARTICULATION QC Female lowerarm01 L edge_ratio_max 1.588\nARTICULATION QC Female lowerarm01 R edge_ratio_max 1.572\nARTICULATION QC Female wrist L edge_ratio_max 1.165\nARTICULATION QC Female wrist R edge_ratio_max 1.166\nARTICULATION QC Female upperleg01 L edge_ratio_max 1.599\nARTICULATION QC Female upperleg01 R edge_ratio_max 1.582\nARTICULATION QC Female lowerleg01 L edge_ratio_max 1.7\nARTICULATION QC Female lowerleg01 R edge_ratio_max 1.694\nARTICULATION QC Female foot L edge_ratio_max 1.179\nARTICULATION QC Female foot R edge_ratio_max 1.189\nARTICULATION QC Female finger1-1 L edge_ratio_max 2.185\nARTICULATION QC Female finger1-1 R edge_ratio_max 2.186\nARTICULATION QC Female finger1-2 L edge_ratio_max 1.544\nARTICULATION QC Female finger1-2 R edge_ratio_max 1.544\nARTICULATION QC Female finger1-3 L edge_ratio_max 1.296\nARTICULATION QC Female finger1-3 R edge_ratio_max 1.291\nARTICULATION QC Female finger2-1 L edge_ratio_max 1.402\nARTICULATION QC Female finger2-1 R edge_ratio_max 1.402\nARTICULATION QC Female finger2-2 L edge_ratio_max 1.188\nARTICULATION QC Female finger2-2 R edge_ratio_max 1.188\nARTICULATION QC Female finger2-3 L edge_ratio_max 1.147\nARTICULATION QC Female finger2-3 R edge_ratio_max 1.147\nARTICULATION QC Female finger3-1 L edge_ratio_max 1.497\nARTICULATION QC Female finger3-1 R edge_ratio_max 1.497\nARTICULATION QC Female finger3-2 L edge_ratio_max 1.184\nARTICULATION QC Female finger3-2 R edge_ratio_max 1.184\nARTICULATION QC Female finger3-3 L edge_ratio_max 1.12\nARTICULATION QC Female finger3-3 R edge_ratio_max 1.12\nARTICULATION QC Female finger4-1 L edge_ratio_max 1.369\nARTICULATION QC Female finger4-1 R edge_ratio_max 1.369\nARTICULATION QC Female finger4-2 L edge_ratio_max 1.154\nARTICULATION QC Female finger4-2 R edge_ratio_max 1.154\nARTICULATION QC Female finger4-3 L edge_ratio_max 1.155\nARTICULATION QC Female finger4-3 R edge_ratio_max 1.155\nARTICULATION QC Female finger5-1 L edge_ratio_max 1.293\nARTICULATION QC Female finger5-1 R edge_ratio_max 1.293\nARTICULATION QC Female finger5-2 L edge_ratio_max 1.139\nARTICULATION QC Female finger5-2 R edge_ratio_max 1.139\nARTICULATION QC Female finger5-3 L edge_ratio_max 1.095\nARTICULATION QC Female finger5-3 R edge_ratio_max 1.095\nARTICULATION QC Female metacarpal1 L edge_ratio_max 2.587\nARTICULATION QC Female metacarpal1 R edge_ratio_max 2.587\nARTICULATION QC Female metacarpal2 L edge_ratio_max 2.757\nARTICULATION QC Female metacarpal2 R edge_ratio_max 2.756\nARTICULATION QC Female metacarpal3 L edge_ratio_max 2.382\nARTICULATION QC Female metacarpal3 R edge_ratio_max 2.382\nARTICULATION QC Female metacarpal4 L edge_ratio_max 1.349\nARTICULATION QC Female metacarpal4 R edge_ratio_max 1.349\nARTICULATION QC Female spine01  edge_ratio_max 1.41\nARTICULATION QC Female spine02  edge_ratio_max 1.215\nARTICULATION QC Female spine03  edge_ratio_max 1.205\nARTICULATION QC Female spine04  edge_ratio_max 1.359\nARTICULATION QC Female spine05  edge_ratio_max 1.371\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ]
+    }
+  ],
+  "browser_runs": [
+    {
+      "name": "diagnostic immutable body-only GLB Chrome",
+      "command": null,
+      "command_retained": false,
+      "asset_directory": "/private/tmp/bodyguard-joint-boundary.pd8C8f/body-only-glb",
+      "chunks": [
+        {
+          "chunk_id": "b6bfcc",
+          "wall_time_seconds": 1.002685958,
+          "session_id": 47139,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "cd7145",
+          "wall_time_seconds": 4.559029916,
+          "exit_code": 0,
+          "original_token_count": 800,
+          "output": "[WebServer] (node:37061) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\nRunning 3 tests using 1 worker\n\n(node:37071) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n  ✓  1 e2e/avatar.spec.ts:81:1 › A-00 native proxy는 브라우저의 외부 연결을 차단한다 (8.3s)\n[WebServer] 7:31:03 PM [vite] (client) [console.warn] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\n[WebServer] 7:31:16 PM [vite] (client) [console.warn] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\n  ✓  2 e2e/avatar.spec.ts:85:1 › A-06 실제 남녀 GLB 두 복제본을 로드하고 한쪽 기술 변형이 다른 뼈대를 바꾸지 않는다 (26.8s)\n[WebServer] 7:31:30 PM [vite] (client) [console.warn] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\n[WebServer] 7:31:30 PM [vite] (client) [Unhandled error] Error: Could not load http://localhost:5182/src/avatar/models/bodyguard-male-candidate-a37.glb: fetch for \"http://localhost:5182/src/avatar/models/bodyguard-male-candidate-a37.glb\" responded with 503: Service Unavailable\n[WebServer]  > node_modules/.pnpm/@react-three+fiber@9.8.1_@types+react@19.3.0_react-dom@19.3.0_react@19.3.0__react@19.3.0_three@0.186.1/node_modules/@react-three/fiber/dist/events-9ce18a08.esm.js:1305:35\n[WebServer]  > Object._onError [as onError] node_modules/.pnpm/three-stdlib@2.36.1_three@0.186.1/node_modules/three-stdlib/loaders/GLTFLoader.js:82:8\n[WebServer]  > node_modules/.pnpm/three@0.186.1/node_modules/three/build/three.core.js:45285:38\n[WebServer] \n[WebServer] 7:31:30 PM [vite] (client) [console.error] Error: Could not load http://localhost:5182/src/avatar/models/bodyguard-male-candidate-a37.glb: fetch for \"http://localhost:5182/src/avatar/models/bodyguard-male-candidate-a37.glb\" responded with 503: Service Unavailable\n[WebServer]     at http://localhost:5182/node_modules/.vite/deps/react-three-fiber.esm-0ZlcBiTT.js?v=aab34aa9:1293:52\n[WebServer]     at Object._onError [as onError] (http://localhost:5182/node_modules/.vite/deps/@react-three_drei.js?v=aab34aa9:16622:17)\n[WebServer]     at http://localhost:5182/node_modules/.vite/deps/three.module-QAJAubfM.js?v=aab34aa9:31895:36\n[WebServer] \n[WebServer] The above error occurred in the <CanvasImpl> component.\n[WebServer] \n[WebServer] React will try to recreate this component tree from scratch using the error boundary you provided, ReviewBoundary.\n[WebServer] \n[WebServer] 7:31:30 PM [vite] (client) [console.warn] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\n[WebServer] 7:31:31 PM [vite] (client) [console.warn] THREE.WebGLRenderer: WEBGL_lose_context extension not supported.\n[WebServer] 7:31:31 PM [vite] (client) [console.warn] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\n  ✓  3 e2e/avatar.spec.ts:142:1 › A-06 GLB 실패와 WebGL 연결 상실에서 재시도하여 새 모델을 연다 (3.4s)\n\n  3 passed (40.8s)\n"
+        }
+      ]
+    },
+    {
+      "name": "final exported GLB Chrome",
+      "command": "BODYGUARD_AVATAR_QA_DIRECTORY=\"/private/tmp/bodyguard-joint-boundary.pd8C8f/glb\" PLAYWRIGHT_JSON_OUTPUT_FILE=\"/private/tmp/bodyguard-joint-boundary.pd8C8f/browser.json\" .venv/bin/python -m tests.run_browser avatar",
+      "command_retained": true,
+      "cwd": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/backend",
+      "asset_directory": "/private/tmp/bodyguard-joint-boundary.pd8C8f/glb",
+      "chunks": [
+        {
+          "chunk_id": "3ee18e",
+          "wall_time_seconds": 1.00076525,
+          "session_id": 4462,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "3563e4",
+          "wall_time_seconds": 5.003031667,
+          "session_id": 4462,
+          "original_token_count": 158,
+          "output": "[WebServer] (node:52630) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\nRunning 3 tests using 1 worker\n\n(node:52643) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n  ✓  1 e2e/avatar.spec.ts:81:1 › A-00 native proxy는 브라우저의 외부 연결을 차단한다 (10.9s)\n[WebServer] 8:45:41 PM [vite] (client) [console.warn] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\n"
+        },
+        {
+          "chunk_id": "15b892",
+          "wall_time_seconds": 0.000017,
+          "exit_code": 0,
+          "original_token_count": 643,
+          "output": "[WebServer] 8:45:58 PM [vite] (client) [console.warn] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\n  ✓  2 e2e/avatar.spec.ts:85:1 › A-06 실제 남녀 GLB 두 복제본을 로드하고 한쪽 기술 변형이 다른 뼈대를 바꾸지 않는다 (42.1s)\n[WebServer] 8:46:29 PM [vite] (client) [console.warn] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\n[WebServer] 8:46:31 PM [vite] (client) [Unhandled error] Error: Could not load http://localhost:5182/src/avatar/models/bodyguard-male-candidate-a37.glb: fetch for \"http://localhost:5182/src/avatar/models/bodyguard-male-candidate-a37.glb\" responded with 503: Service Unavailable\n[WebServer]  > node_modules/.pnpm/@react-three+fiber@9.8.1_@types+react@19.3.0_react-dom@19.3.0_react@19.3.0__react@19.3.0_three@0.186.1/node_modules/@react-three/fiber/dist/events-9ce18a08.esm.js:1305:35\n[WebServer]  > Object._onError [as onError] node_modules/.pnpm/three-stdlib@2.36.1_three@0.186.1/node_modules/three-stdlib/loaders/GLTFLoader.js:82:8\n[WebServer]  > node_modules/.pnpm/three@0.186.1/node_modules/three/build/three.core.js:45285:38\n[WebServer] \n[WebServer] 8:46:31 PM [vite] (client) [console.error] Error: Could not load http://localhost:5182/src/avatar/models/bodyguard-male-candidate-a37.glb: fetch for \"http://localhost:5182/src/avatar/models/bodyguard-male-candidate-a37.glb\" responded with 503: Service Unavailable\n[WebServer]     at http://localhost:5182/node_modules/.vite/deps/react-three-fiber.esm-0ZlcBiTT.js?v=aab34aa9:1293:52\n[WebServer]     at Object._onError [as onError] (http://localhost:5182/node_modules/.vite/deps/@react-three_drei.js?v=aab34aa9:16622:17)\n[WebServer]     at http://localhost:5182/node_modules/.vite/deps/three.module-QAJAubfM.js?v=aab34aa9:31895:36\n[WebServer] \n[WebServer] The above error occurred in the <CanvasImpl> component.\n[WebServer] \n[WebServer] React will try to recreate this component tree from scratch using the error boundary you provided, ReviewBoundary.\n[WebServer] \n[WebServer] 8:46:31 PM [vite] (client) [console.warn] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\n[WebServer] 8:46:39 PM [vite] (client) [console.warn] THREE.WebGLRenderer: WEBGL_lose_context extension not supported.\n[WebServer] 8:46:39 PM [vite] (client) [console.warn] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.\n  ✓  3 e2e/avatar.spec.ts:142:1 › A-06 GLB 실패와 WebGL 연결 상실에서 재시도하여 새 모델을 연다 (23.5s)\n\n  3 passed (1.7m)\n"
+        }
+      ]
+    }
+  ],
+  "native_and_browser_actors_sequential": true,
+  "legacy_evidence_checker": {
+    "chunk_id": "19d154",
+    "wall_time_seconds": 6.773615916,
+    "exit_code": 0,
+    "original_token_count": 120,
+    "output": "{\"local_links_checked\":204,\"limited_credential_scan_gzip\":76,\"not_full_security_audit\":true}\n{\"integrity_passed\":true,\"copies\":184,\"gzip\":76,\"PNG\":104,\"blend\":2,\"GLB\":2,\"protected_prior_targets\":1066,\"unchanged_live_prior_targets\":1065,\"intentional_exporter_change\":1,\"directly_viewed\":14,\"native_runs\":19,\"native_failures\":6,\"source118\":118,\"web118\":118,\"GLB118\":118,\"Chrome\":3,\"appearance_approved\":false,\"service_adopted\":false}\nAll checks passed!\n2 files already formatted\n"
+  },
+  "final_python_static": {
+    "chunk_id": "a04f5a",
+    "wall_time_seconds": 0.309790541,
+    "exit_code": 0,
+    "original_token_count": 16,
+    "output": "All checks passed!\nAll checks passed!\n2 files already formatted\n"
+  },
+  "frontend_static": [
+    {
+      "chunk_id": "53afc0",
+      "wall_time_seconds": 1.001462917,
+      "session_id": 17412,
+      "original_token_count": 16,
+      "output": "$ biome check .\nChecked 56 files in 187ms. No fixes applied.\n"
+    },
+    {
+      "chunk_id": "8f11de",
+      "wall_time_seconds": 0.000016792,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    }
+  ],
+  "directly_viewed": [
+    "artist-review/faceless-front.png",
+    "artist-review/faceless-side-male.png",
+    "artist-review/faceless-side-female.png",
+    "artist-review/faceless-knee-male.png",
+    "artist-review/faceless-knee-female.png",
+    "web-review/faceless-front.png",
+    "web-review/faceless-side-female.png",
+    "web-review/faceless-knee-male.png",
+    "web-review/technical-male-lowerarm01.png",
+    "web-review/technical-male-lowerleg01.png",
+    "diagnostic-browser/남성-two-models.png",
+    "diagnostic-browser/여성-two-models.png",
+    "roundtrip-review/faceless-front.png",
+    "roundtrip-review/faceless-side-male.png",
+    "roundtrip-review/faceless-side-female.png",
+    "roundtrip-review/faceless-neck-male-left.png",
+    "roundtrip-review/faceless-neck-female-left.png",
+    "roundtrip-review/faceless-knee-male.png",
+    "roundtrip-review/faceless-knee-female.png",
+    "roundtrip-review/technical-male-lowerarm01.png",
+    "roundtrip-review/technical-female-lowerarm01.png",
+    "roundtrip-review/technical-male-lowerleg01.png",
+    "roundtrip-review/technical-female-lowerleg01.png",
+    "browser/남성-two-models.png",
+    "browser/여성-two-models.png"
+  ],
+  "native_run_failures": 0,
+  "pre_execution_errors": [
+    {
+      "chunk_id": "f3cc11",
+      "exit_code": 127,
+      "reason": "Incorrect relative Python path from backend cwd; no browser tests executed; corrected before actual Chrome diagnostic run."
+    },
+    {
+      "chunk_id": "ca1169",
+      "exit_code": 1,
+      "reason": "Ruff FURB192 on sorted(excluded)[0]; changed to min(excluded), checks and actual native regression rerun."
+    }
+  ],
+  "creator_helper_sha256": "ca43353a00306593651d6fcfc8e33e6a168ba2b177289139401c54c137ab7684",
+  "final_helper_sha256": "3ec184f33465467c8c43c5899bf7d1a143e27e8791cde2b87edd28121b556552",
+  "provenance_note": "Saved artist was created by frozen creator helper. Final helper adds only output path preflight. Independent saved-file/body/rig/material regression was actually rerun against final helper; asset was not regenerated after this path-only patch.",
+  "review": {
+    "resolved": "Overlapping candidate/report paths could corrupt an export; distinct source/output/report and preserve-existing guards now tested by four actual native rejection fixtures.",
+    "open_P2": "A-02/A-08: faceted head profile and hard underside/posterior head-neck connection remain; female native neck preview low contrast. Authored anatomy was unchanged, this is not final face-neck appearance implementation.",
+    "decision": "Request changes; PR #9 remains Draft and cannot merge."
+  },
+  "limitations": [
+    "118 technical nonneutral cases per source/web/GLB stage are not clinical movement acceptance.",
+    "Two Chrome suites, three tests each, synthetic 180 frame rendering; no human webcam capture, end-to-end measurement latency or representative target laptop cohort.",
+    "Forced actual WebGL extension context loss and fixture 503 are not real GPU driver failure or production service outage.",
+    "One male armature-parent exporter warning and one existing nonzero-area tiny male triangle retained.",
+    "No animation clips exported; browser rotation is technical deformation, not correct stretch animation.",
+    "Not all 106 PNGs directly viewed: 25 actual images viewed.",
+    "Limited credential pattern check only; not a security audit.",
+    "Some preparatory shell errors and exploratory outputs are not full execution logs; retained actor stdout chunks are complete.",
+    "No external provider, paid/account/secret operations, operating DB migration, deployment, release or expert usability validation performed."
+  ],
+  "appearance_approved": false,
+  "service_adopted": false,
+  "stages_1_to_6_completed": false,
+  "camera_calls": 0,
+  "current_development_asset": "A37",
+  "pr_merge_allowed": false
+}

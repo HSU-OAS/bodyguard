@@ -1,0 +1,91 @@
+"""FR-A-03: actual native cut regression; tiny surfaces are not body generators."""
+
+import importlib.util
+import json
+import sys
+from pathlib import Path
+
+import bmesh
+
+
+def module(name, filename):
+    spec = importlib.util.spec_from_file_location(name, Path(__file__).with_name(filename))
+    value = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(value)
+    return value
+
+
+current = module("oblique_candidate", "a65-oblique-under-jaw-head.py")
+prior = module("horizontal_candidate", "a64-continuous-jaw-neutral-head.py")
+helper = module("unchanged_boundary", "a49-density-producer.py")
+square = [(-2, -2), (2, -2), (2, 2), (-2, 2)]
+nonstar = [(-2, -2), (2, -2), (2, 2), (0.5, 2), (0.5, -0.5), (-0.5, -0.5), (-0.5, 2), (-2, 2)]
+output = Path(sys.argv[sys.argv.index("--") + 1])
+assert output.suffix == ".json" and not output.exists()
+checks = []
+
+
+def fixture(contours, planes, slopes):
+    mesh = bmesh.new()
+    original = mesh.verts.layers.int.new("Fixture original")
+    deform = mesh.verts.layers.deform.new()
+    edges = []
+    for points, z, slope in zip(contours, planes, slopes, strict=True):
+        top = [mesh.verts.new((x * 0.01, y * 0.01, z + slope * y * 0.01)) for x, y in points]
+        bottom = [mesh.verts.new((v.co.x, v.co.y, v.co.z - 0.01)) for v in top]
+        for i, vertex in enumerate(top):
+            following = (i + 1) % len(top)
+            mesh.faces.new((vertex, top[following], bottom[following], bottom[i]))
+            edges.append(mesh.edges.get((vertex, top[following])))
+    mesh.verts.index_update()
+    for vertex in mesh.verts:
+        vertex[original] = vertex.index + 1
+        vertex[deform][0] = 1
+    return mesh, edges, original
+
+
+for name, contours, planes, slopes, expected_error in (
+    ("nonstar-horizontal", [nonstar, square], [1, 1.04], [0, 0], False),
+    ("reverse-order-oblique", [list(reversed(nonstar)), square], [1, 1.04], [0.22, 0], False),
+    ("different-counts", [square, nonstar], [1, 1.04], [0, 0], False),
+    ("parallel-oblique", [square, square], [1, 1.04], [0.22, 0.22], False),
+    ("same-plane-rejected", [square, square], [1, 1], [0, 0], True),
+    ("third-ring-rejected", [square, square, square], [1, 1.04, 1.08], [0, 0, 0], True),
+    ("crossing-planes-rejected", [square, square], [1, 1.001], [0.22, 0], True),
+):
+    mesh, edges, original = fixture(contours, planes, slopes)
+    rejected = False
+    try:
+        result = current.align_neck_boundary_samples(mesh, edges, original, helper.closed_loops)
+        assert result["after"][0] == result["after"][1]
+        assert all(
+            abs(sum(v[mesh.verts.layers.deform.active].values()) - 1) < 1e-6 for v in mesh.verts
+        )
+    except AssertionError:
+        rejected = True
+    assert rejected == expected_error, name
+    checks.append({"name": name, "passed": True, "expected_rejection": rejected})
+    mesh.free()
+
+mesh, edges, original = fixture([square, square], [1, 1.04], [0, 0])
+edges[0].verts[0].co.z += 0.002
+try:
+    current.align_neck_boundary_samples(mesh, edges, original, helper.closed_loops)
+except AssertionError:
+    checks.append({"name": "nonplanar-rejected", "passed": True, "expected_rejection": True})
+else:
+    raise AssertionError("Reject a nonplanar native contour")
+mesh.free()
+
+mesh, edges, original = fixture([nonstar, square], [1, 1.04], [0.22, 0])
+try:
+    prior.align_neck_boundary_samples(mesh, edges, original, helper.closed_loops)
+except AssertionError:
+    checks.append({"name": "legacy-oblique-failure-reproduced", "passed": True})
+else:
+    raise AssertionError("Prior constant-Z method must reject the actual oblique input")
+mesh.free()
+output.write_text(
+    json.dumps({"passed": True, "artist_fixture_only": True, "checks": checks}, indent=2) + "\n"
+)
+print("ACTUAL NATIVE OBLIQUE REGRESSION", json.dumps(checks))

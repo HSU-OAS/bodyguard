@@ -1,0 +1,652 @@
+{
+  "inputs_sha256": {
+    "bodyguard/assets/blender/bodyguard_avatar_candidate_a100_unapproved.blend": "abdb8ef2e2a09a0c3601b77e09b0393e590aa704d7f242cbf2f457b4bd2259b6",
+    "/private/tmp/bodyguard-tailor.6b7Uvu/draft-a100-web-roundtrip.blend": "3080760f2394cf6b7ea9df8a1aa183a7b1cd2b006e443fee23670f7a54535034"
+  },
+  "surfaces": [
+    {
+      "stage": "source",
+      "body": "Male",
+      "custom_normals": false,
+      "flat_faces": 0,
+      "vertices": 141691,
+      "corner_normals": 686956,
+      "nonidentity_pose_bones": 0
+    },
+    {
+      "stage": "source",
+      "body": "Female",
+      "custom_normals": false,
+      "flat_faces": 0,
+      "vertices": 139482,
+      "corner_normals": 674480,
+      "nonidentity_pose_bones": 0
+    },
+    {
+      "stage": "reimport",
+      "body": "Male",
+      "custom_normals": true,
+      "flat_faces": 10,
+      "vertices": 141685,
+      "corner_normals": 850098,
+      "nonidentity_pose_bones": 163
+    },
+    {
+      "stage": "reimport",
+      "body": "Female",
+      "custom_normals": true,
+      "flat_faces": 5,
+      "vertices": 139474,
+      "corner_normals": 836832,
+      "nonidentity_pose_bones": 163
+    }
+  ],
+  "rows": [
+    {
+      "stage": "source",
+      "body": "Male",
+      "side": "L",
+      "region": "forearm-context",
+      "faces": 357,
+      "vertices": 454,
+      "geometric_dihedral_degrees": {
+        "count": 811,
+        "min": 0.08418639707938469,
+        "median": 3.5210323131371544,
+        "p90": 11.568371651973344,
+        "p95": 12.953379482621958,
+        "max": 16.52607812140544
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 688,
+        "min": 0.08418639707938469,
+        "median": 3.6026041951775585,
+        "p90": 11.94994614637163,
+        "p95": 13.041629795566754,
+        "max": 16.52607812140544
+      },
+      "long_edges_over_one_radian": 0
+    },
+    {
+      "stage": "source",
+      "body": "Male",
+      "side": "L",
+      "region": "joined-band",
+      "faces": 672,
+      "vertices": 768,
+      "geometric_dihedral_degrees": {
+        "count": 1440,
+        "min": 0.0500986538245167,
+        "median": 4.445099064675346,
+        "p90": 11.72027932798266,
+        "p95": 16.409061612997487,
+        "max": 65.60922622363339
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 672,
+        "min": 0.0500986538245167,
+        "median": 4.507672135209125,
+        "p90": 14.007232421551674,
+        "p95": 20.82005754314696,
+        "max": 65.60922622363339
+      },
+      "long_edges_over_one_radian": 2
+    },
+    {
+      "stage": "source",
+      "body": "Male",
+      "side": "L",
+      "region": "hand-context",
+      "faces": 1872,
+      "vertices": 1989,
+      "geometric_dihedral_degrees": {
+        "count": 3861,
+        "min": 0.02012729349366481,
+        "median": 2.3712978189690337,
+        "p90": 7.874396174287116,
+        "p95": 9.82940036664622,
+        "max": 59.122213078278754
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 37,
+        "min": 1.0104224340402497,
+        "median": 7.365881760390497,
+        "p90": 12.646833762482617,
+        "p95": 12.691243652466039,
+        "max": 14.615711776593308
+      },
+      "long_edges_over_one_radian": 0
+    },
+    {
+      "stage": "source",
+      "body": "Male",
+      "side": "R",
+      "region": "forearm-context",
+      "faces": 357,
+      "vertices": 454,
+      "geometric_dihedral_degrees": {
+        "count": 811,
+        "min": 0.1997672917712702,
+        "median": 3.51243331841552,
+        "p90": 11.95460177406464,
+        "p95": 13.078052633089493,
+        "max": 51.989419207277756
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 688,
+        "min": 0.22908449140137477,
+        "median": 3.564468047390204,
+        "p90": 12.388217187296545,
+        "p95": 13.149979647691605,
+        "max": 16.19516911649666
+      },
+      "long_edges_over_one_radian": 0
+    },
+    {
+      "stage": "source",
+      "body": "Male",
+      "side": "R",
+      "region": "joined-band",
+      "faces": 672,
+      "vertices": 768,
+      "geometric_dihedral_degrees": {
+        "count": 1440,
+        "min": 0.017094482728874198,
+        "median": 4.457409199993824,
+        "p90": 12.239511162460674,
+        "p95": 16.5405273865946,
+        "max": 102.80860161348971
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 672,
+        "min": 0.017094482728874198,
+        "median": 4.38928532009894,
+        "p90": 14.207851299174228,
+        "p95": 20.74452931130496,
+        "max": 102.80860161348971
+      },
+      "long_edges_over_one_radian": 7
+    },
+    {
+      "stage": "source",
+      "body": "Male",
+      "side": "R",
+      "region": "hand-context",
+      "faces": 1871,
+      "vertices": 1988,
+      "geometric_dihedral_degrees": {
+        "count": 3859,
+        "min": 0.020193899510759006,
+        "median": 2.374639702463874,
+        "p90": 7.892168326507489,
+        "p95": 9.830560645031476,
+        "max": 63.0503641529798
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 37,
+        "min": 1.0116340455659865,
+        "median": 7.364903335791893,
+        "p90": 12.651349371297641,
+        "p95": 12.700089601214852,
+        "max": 14.623346220538089
+      },
+      "long_edges_over_one_radian": 0
+    },
+    {
+      "stage": "source",
+      "body": "Female",
+      "side": "L",
+      "region": "forearm-context",
+      "faces": 383,
+      "vertices": 478,
+      "geometric_dihedral_degrees": {
+        "count": 861,
+        "min": 0.003424350817015432,
+        "median": 2.6826291538390277,
+        "p90": 11.031151660542454,
+        "p95": 12.47447052368276,
+        "max": 17.87265333136804
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 555,
+        "min": 0.003424350817015432,
+        "median": 6.816986414347117,
+        "p90": 11.86463708363817,
+        "p95": 13.028304950269705,
+        "max": 17.87265333136804
+      },
+      "long_edges_over_one_radian": 0
+    },
+    {
+      "stage": "source",
+      "body": "Female",
+      "side": "L",
+      "region": "joined-band",
+      "faces": 658,
+      "vertices": 752,
+      "geometric_dihedral_degrees": {
+        "count": 1410,
+        "min": 0.07347650704835264,
+        "median": 4.12457920438098,
+        "p90": 11.281654824768195,
+        "p95": 15.364793990794238,
+        "max": 38.99542827362455
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 658,
+        "min": 0.10892716986238238,
+        "median": 5.561427317056346,
+        "p90": 14.255401368628563,
+        "p95": 19.165369084630502,
+        "max": 38.99542827362455
+      },
+      "long_edges_over_one_radian": 0
+    },
+    {
+      "stage": "source",
+      "body": "Female",
+      "side": "L",
+      "region": "hand-context",
+      "faces": 2062,
+      "vertices": 2184,
+      "geometric_dihedral_degrees": {
+        "count": 4246,
+        "min": 0.009240182065022744,
+        "median": 2.318004414196363,
+        "p90": 7.967365294174745,
+        "p95": 9.719757901220945,
+        "max": 31.62310308352579
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 13,
+        "min": 4.073915422438764,
+        "median": 8.644971286258786,
+        "p90": 12.577392082964742,
+        "p95": 14.28347942253284,
+        "max": 14.67725007346783
+      },
+      "long_edges_over_one_radian": 0
+    },
+    {
+      "stage": "source",
+      "body": "Female",
+      "side": "R",
+      "region": "forearm-context",
+      "faces": 382,
+      "vertices": 477,
+      "geometric_dihedral_degrees": {
+        "count": 859,
+        "min": 0.07128131493160095,
+        "median": 2.9220904634977973,
+        "p90": 10.719537086265316,
+        "p95": 12.238417478419827,
+        "max": 52.45713690126189
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 563,
+        "min": 0.1424693951129886,
+        "median": 7.089852898575949,
+        "p90": 11.580558416999938,
+        "p95": 12.841207285882838,
+        "max": 19.24610704326193
+      },
+      "long_edges_over_one_radian": 0
+    },
+    {
+      "stage": "source",
+      "body": "Female",
+      "side": "R",
+      "region": "joined-band",
+      "faces": 658,
+      "vertices": 752,
+      "geometric_dihedral_degrees": {
+        "count": 1410,
+        "min": 0.01426517858432224,
+        "median": 4.1677754551262565,
+        "p90": 10.93241871476898,
+        "p95": 16.42328548194404,
+        "max": 143.85103758136708
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 658,
+        "min": 0.01426517858432224,
+        "median": 5.490222594958962,
+        "p90": 14.920925609844497,
+        "p95": 19.578897765287046,
+        "max": 143.85103758136708
+      },
+      "long_edges_over_one_radian": 11
+    },
+    {
+      "stage": "source",
+      "body": "Female",
+      "side": "R",
+      "region": "hand-context",
+      "faces": 2063,
+      "vertices": 2185,
+      "geometric_dihedral_degrees": {
+        "count": 4248,
+        "min": 0.006779523040193008,
+        "median": 2.3169045402965796,
+        "p90": 7.892583260499568,
+        "p95": 9.73212225116596,
+        "max": 29.760035798715997
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 13,
+        "min": 4.078840415717167,
+        "median": 8.645969347651253,
+        "p90": 12.591692791539456,
+        "p95": 14.287966856817539,
+        "max": 14.681025460531554
+      },
+      "long_edges_over_one_radian": 0
+    },
+    {
+      "stage": "reimport",
+      "body": "Male",
+      "side": "L",
+      "region": "forearm-context",
+      "faces": 743,
+      "vertices": 441,
+      "geometric_dihedral_degrees": {
+        "count": 1184,
+        "min": 0.0,
+        "median": 2.059369269433487,
+        "p90": 10.837211000380881,
+        "p95": 12.466217093844445,
+        "max": 16.66379010299853
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 1036,
+        "min": 0.0,
+        "median": 2.050358328927536,
+        "p90": 11.227785122784304,
+        "p95": 12.665778145919292,
+        "max": 16.66379010299853
+      },
+      "long_edges_over_one_radian": 0
+    },
+    {
+      "stage": "reimport",
+      "body": "Male",
+      "side": "L",
+      "region": "joined-band",
+      "faces": 960,
+      "vertices": 576,
+      "geometric_dihedral_degrees": {
+        "count": 1536,
+        "min": 0.008412873734278296,
+        "median": 3.2373009189295354,
+        "p90": 9.61195104913511,
+        "p95": 13.637246196853962,
+        "max": 58.07790447494048
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 960,
+        "min": 0.01268957934080459,
+        "median": 2.747273692682025,
+        "p90": 11.447922973507461,
+        "p95": 17.164149271026155,
+        "max": 58.07790447494048
+      },
+      "long_edges_over_one_radian": 1
+    },
+    {
+      "stage": "reimport",
+      "body": "Male",
+      "side": "L",
+      "region": "hand-context",
+      "faces": 3569,
+      "vertices": 1891,
+      "geometric_dihedral_degrees": {
+        "count": 5460,
+        "min": 0.0001730213930184968,
+        "median": 1.4858929263408762,
+        "p90": 6.004635304090711,
+        "p95": 8.258730918883733,
+        "max": 15.666785682304475
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 78,
+        "min": 0.33856353921467286,
+        "median": 5.744312462272607,
+        "p90": 11.482841461865506,
+        "p95": 12.084792009834253,
+        "max": 15.666785682304475
+      },
+      "long_edges_over_one_radian": 0
+    },
+    {
+      "stage": "reimport",
+      "body": "Male",
+      "side": "R",
+      "region": "forearm-context",
+      "faces": 743,
+      "vertices": 441,
+      "geometric_dihedral_degrees": {
+        "count": 1184,
+        "min": 3.818191876892324e-06,
+        "median": 2.041788149066462,
+        "p90": 10.879600008143626,
+        "p95": 12.412677802261653,
+        "max": 15.855351837362894
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 1036,
+        "min": 3.818191876892324e-06,
+        "median": 2.0628054949162378,
+        "p90": 11.254468964324252,
+        "p95": 12.50512355890413,
+        "max": 15.855351837362894
+      },
+      "long_edges_over_one_radian": 0
+    },
+    {
+      "stage": "reimport",
+      "body": "Male",
+      "side": "R",
+      "region": "joined-band",
+      "faces": 960,
+      "vertices": 576,
+      "geometric_dihedral_degrees": {
+        "count": 1536,
+        "min": 8.200228416604507e-06,
+        "median": 3.229139910088428,
+        "p90": 10.127746444686961,
+        "p95": 13.767647314714198,
+        "max": 89.82198728414012
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 960,
+        "min": 8.200228416604507e-06,
+        "median": 2.7150300771576874,
+        "p90": 12.573057474162724,
+        "p95": 17.426771752160438,
+        "max": 89.82198728414012
+      },
+      "long_edges_over_one_radian": 4
+    },
+    {
+      "stage": "reimport",
+      "body": "Male",
+      "side": "R",
+      "region": "hand-context",
+      "faces": 3567,
+      "vertices": 1890,
+      "geometric_dihedral_degrees": {
+        "count": 5457,
+        "min": 0.00027535320461083776,
+        "median": 1.482402913118411,
+        "p90": 6.007557771281831,
+        "p95": 8.257731149943973,
+        "max": 15.672466692146633
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 78,
+        "min": 0.34005065282388447,
+        "median": 5.741753275767968,
+        "p90": 11.48018024941014,
+        "p95": 12.099454718434979,
+        "max": 15.672466692146633
+      },
+      "long_edges_over_one_radian": 0
+    },
+    {
+      "stage": "reimport",
+      "body": "Female",
+      "side": "L",
+      "region": "forearm-context",
+      "faces": 710,
+      "vertices": 397,
+      "geometric_dihedral_degrees": {
+        "count": 1107,
+        "min": 0.0006371830386825086,
+        "median": 1.5241278984277844,
+        "p90": 9.732542307799916,
+        "p95": 11.537207206337868,
+        "max": 16.756397222860148
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 896,
+        "min": 0.0006371830386825086,
+        "median": 2.097697089404425,
+        "p90": 10.558070560512569,
+        "p95": 11.985358115897208,
+        "max": 16.756397222860148
+      },
+      "long_edges_over_one_radian": 0
+    },
+    {
+      "stage": "reimport",
+      "body": "Female",
+      "side": "L",
+      "region": "joined-band",
+      "faces": 1344,
+      "vertices": 762,
+      "geometric_dihedral_degrees": {
+        "count": 2106,
+        "min": 0.0011597099671081309,
+        "median": 2.740953846709059,
+        "p90": 9.972969235452595,
+        "p95": 13.730184580890326,
+        "max": 49.67282736157912
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 1318,
+        "min": 0.0202301565427716,
+        "median": 3.10947435549957,
+        "p90": 12.457186729988042,
+        "p95": 16.75872631736712,
+        "max": 49.67282736157912
+      },
+      "long_edges_over_one_radian": 0
+    },
+    {
+      "stage": "reimport",
+      "body": "Female",
+      "side": "L",
+      "region": "hand-context",
+      "faces": 4257,
+      "vertices": 2239,
+      "geometric_dihedral_degrees": {
+        "count": 6496,
+        "min": 8.247758137231099e-05,
+        "median": 1.4463578704341382,
+        "p90": 6.350552369040122,
+        "p95": 8.683662600359614,
+        "max": 15.693959589917371
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 9,
+        "min": 0.8033270429806433,
+        "median": 6.660654483302926,
+        "p90": 14.386973863931459,
+        "p95": 14.386973863931459,
+        "max": 15.693959589917371
+      },
+      "long_edges_over_one_radian": 0
+    },
+    {
+      "stage": "reimport",
+      "body": "Female",
+      "side": "R",
+      "region": "forearm-context",
+      "faces": 702,
+      "vertices": 393,
+      "geometric_dihedral_degrees": {
+        "count": 1095,
+        "min": 0.0009743539576039244,
+        "median": 1.6561469173476684,
+        "p90": 9.480346110433658,
+        "p95": 11.273563611922668,
+        "max": 19.081753908811205
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 896,
+        "min": 0.0009743539576039244,
+        "median": 2.134483634500467,
+        "p90": 10.030096937670582,
+        "p95": 11.69920563307223,
+        "max": 19.081753908811205
+      },
+      "long_edges_over_one_radian": 0
+    },
+    {
+      "stage": "reimport",
+      "body": "Female",
+      "side": "R",
+      "region": "joined-band",
+      "faces": 1352,
+      "vertices": 766,
+      "geometric_dihedral_degrees": {
+        "count": 2118,
+        "min": 0.0007083275943338489,
+        "median": 2.7485259651776643,
+        "p90": 9.750842092133672,
+        "p95": 14.306100155290276,
+        "max": 121.86785517162761
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 1318,
+        "min": 0.0007083275943338489,
+        "median": 3.1478269349062495,
+        "p90": 12.448227229344278,
+        "p95": 17.757347785347175,
+        "max": 121.86785517162761
+      },
+      "long_edges_over_one_radian": 15
+    },
+    {
+      "stage": "reimport",
+      "body": "Female",
+      "side": "R",
+      "region": "hand-context",
+      "faces": 4255,
+      "vertices": 2238,
+      "geometric_dihedral_degrees": {
+        "count": 6493,
+        "min": 0.0008118017919589017,
+        "median": 1.4476323410445804,
+        "p90": 6.335578886832162,
+        "p95": 8.683582345636868,
+        "max": 15.69891147706563
+      },
+      "long_edge_dihedral_degrees": {
+        "count": 9,
+        "min": 0.8044901494911024,
+        "median": 6.667071872914976,
+        "p90": 14.406875327625583,
+        "p95": 14.406875327625583,
+        "max": 15.69891147706563
+      },
+      "long_edges_over_one_radian": 0
+    }
+  ],
+  "assets_saved": 0,
+  "coordinates_skin_changed": false,
+  "full_deformation_qa": false,
+  "new_browser_comparison": false,
+  "appearance_approved": false,
+  "note": "Source quads and web triangles have different edge sets; not a fixed-edge improvement rate or acceptance threshold."
+}

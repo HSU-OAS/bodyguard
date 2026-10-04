@@ -1,0 +1,422 @@
+{
+  "reference_sha256": "45b313912dee5ae2218b1fe76086abb35a9b948fab9e877f1a9d2b05f832de62",
+  "recorded_at_utc": "2026-10-03 13:12:28 UTC",
+  "git_base": "432a39012b70ed9869362440988f6a89f4d9b0c5",
+  "verified_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "native_runs": [
+    {
+      "name": "A217 raw normals and region geometry",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-head-curvature.BK8qp9/inspect_head_surface.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/remove_joint_overlays.py\" \"/private/tmp/bodyguard-head-curvature.BK8qp9/head-surface.json\"",
+      "executed_helper": "executed-helpers/inspect_head_surface-executed.py.txt.gz",
+      "chunks": [
+        {
+          "chunk_id": "b33f6c",
+          "wall_time_seconds": 1.002650667,
+          "session_id": 85567,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "81b948",
+          "wall_time_seconds": 5.002441833,
+          "session_id": 85567,
+          "original_token_count": 77,
+          "output": "00:06.044  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\n"
+        },
+        {
+          "chunk_id": "2dad6c",
+          "wall_time_seconds": 5.002924375,
+          "session_id": 85567,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "04c1a9",
+          "wall_time_seconds": 0.000014833,
+          "exit_code": 0,
+          "original_token_count": 2487,
+          "output": "HEAD SHADING GEOMETRY {\"source\": \"/Applications/\\u1112\\u1161\\u11a8\\u1100\\u116d \\u1102\\u1162\\u1107\\u116e/2026-2\\u1112\\u1161\\u11a8\\u1100\\u1175/\\u110b\\u1169\\u1111\\u1173\\u11ab\\u1109\\u1169\\u1109\\u1173 AI SW \\u110b\\u1172\\u11bc\\u1112\\u1161\\u11b8 \\u1111\\u1173\\u1105\\u1169\\u110c\\u1166\\u11a8\\u1110\\u1173/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\", \"source_sha256\": \"1bdb837b608b1a2994f26e0fa827c9a57065353d2d242a2efbb6363f45d32000\", \"rows\": [{\"gender\": \"Male\", \"authored_vertices\": 131645, \"authored_faces\": 181201, \"custom_normals\": false, \"sharp_edge_flags\": 0, \"global_flat_faces\": 0, \"modifiers\": [[\"Neutral-rest skin - QA required\", \"ARMATURE\"]], \"regions\": {\"head\": {\"faces\": 31468, \"flat_faces\": 0, \"long_manifold_edges\": 48828, \"dihedral_degrees\": {\"median\": 0.9343551508623464, \"p95\": 2.364683421088111, \"max\": 9.191558882136349}, \"worst_authored_edges\": [{\"degrees\": 9.191558882136349, \"length_mm\": 1.4195158146321774, \"center_local_m\": [5.173691897653043e-05, 0.05162185803055763, 1.6175293922424316]}, {\"degrees\": 8.706011833097543, \"length_mm\": 1.411859062500298, \"center_local_m\": [-0.0012556691654026508, 0.05167296901345253, 1.6172170639038086]}, {\"degrees\": 6.732917457834837, \"length_mm\": 2.46325321495533, \"center_local_m\": [0.0410713329911232, 0.038782235234975815, 1.5892713069915771]}, {\"degrees\": 6.652129126558281, \"length_mm\": 1.569385058246553, \"center_local_m\": [0.05657874792814255, -0.1133032739162445, 1.584830403327942]}, {\"degrees\": 6.555121657323882, \"length_mm\": 1.1727440869435668, \"center_local_m\": [0.05984430015087128, 0.012061440385878086, 1.6345736980438232]}, {\"degrees\": 6.523352313060037, \"length_mm\": 2.208248246461153, \"center_local_m\": [0.04126475751399994, 0.03892654925584793, 1.591526985168457]}, {\"degrees\": 6.4844624965864535, \"length_mm\": 1.2309865560382605, \"center_local_m\": [0.05932312831282616, 0.012216579169034958, 1.6355297565460205]}, {\"degrees\": 6.376932267162005, \"length_mm\": 1.676728017628193, \"center_local_m\": [-0.0680658370256424, 0.007238985970616341, 1.6144819259643555]}]}, \"posterior_interface\": {\"faces\": 6406, \"flat_faces\": 0, \"long_manifold_edges\": 9940, \"dihedral_degrees\": {\"median\": 1.0330465818922705, \"p95\": 2.618482365031795, \"max\": 12.763933086934253}, \"worst_authored_edges\": [{\"degrees\": 12.763933086934253, \"length_mm\": 1.7207989003509283, \"center_local_m\": [0.010102516040205956, 0.0035428970586508512, 1.501081109046936]}, {\"degrees\": 12.023343359192587, \"length_mm\": 1.170075498521328, \"center_local_m\": [-0.019448326900601387, 0.0002259127504657954, 1.5004258155822754]}, {\"degrees\": 11.81093813638353, \"length_mm\": 1.7187452176585793, \"center_local_m\": [-0.008734066970646381, 0.003794112242758274, 1.501023292541504]}, {\"degrees\": 11.741455475730637, \"length_mm\": 1.5280569205060601, \"center_local_m\": [0.018416138365864754, 0.0006153520080260932, 1.4994044303894043]}, {\"degrees\": 11.721737573370456, \"length_mm\": 1.9956838805228472, \"center_local_m\": [0.008269757963716984, 0.003814294468611479, 1.500959873199463]}, {\"degrees\": 11.484122976108528, \"length_mm\": 1.2647127732634544, \"center_local_m\": [-0.01705312542617321, 0.001536696101538837, 1.501223087310791]}, {\"degrees\": 11.323055162648581, \"length_mm\": 1.0576318018138409, \"center_local_m\": [-0.013787500560283661, 0.0024216491729021072, 1.5003494024276733]}, {\"degrees\": 11.30663794920481, \"length_mm\": 1.741149346344173, \"center_local_m\": [-0.010435517877340317, 0.0034979968331754208, 1.5010881423950195]}]}, \"posterior_lower_cap\": {\"faces\": 18022, \"flat_faces\": 0, \"long_manifold_edges\": 16828, \"dihedral_degrees\": {\"median\": 0.7299951972044774, \"p95\": 5.653668168023722, \"max\": 165.24646855264862}, \"worst_authored_edges\": [{\"degrees\": 165.24646855264862, \"length_mm\": 1.6653172206133604, \"center_local_m\": [-0.09794661402702332, 9.260329534299672e-05, 1.4234445095062256]}, {\"degrees\": 24.376250176027458, \"length_mm\": 8.261758834123611, \"center_local_m\": [0.07071013748645782, 0.027983635663986206, 1.4396075010299683]}, {\"degrees\": 24.375913789210838, \"length_mm\": 8.261682465672493, \"center_local_m\": [0.06566973030567169, 0.02402002364397049, 1.444817066192627]}, {\"degrees\": 22.92724944927135, \"length_mm\": 4.445229656994343, \"center_local_m\": [-0.06511814892292023, 0.013932404108345509, 1.4505928754806519]}, {\"degrees\": 22.927135043602753, \"length_mm\": 4.445292986929417, \"center_local_m\": [-0.06855976581573486, 0.012425497174263, 1.4482169151306152]}, {\"degrees\": 22.33155791590327, \"length_mm\": 8.150037378072739, \"center_local_m\": [-0.06676851958036423, 0.027719425037503242, 1.4415520429611206]}, {\"degrees\": 22.331539132883055, \"length_mm\": 8.150036446750164, \"center_local_m\": [-0.06184852868318558, 0.02377472072839737, 1.446714997291565]}, {\"degrees\": 21.51687856491354, \"length_mm\": 3.4685649443417788, \"center_local_m\": [-0.10306814312934875, 0.05826404690742493, 1.4069093465805054]}]}}, \"body_geometry_numeric_skin_groups_materials_world_unchanged\": true, \"all_163_rest_bones_pose_world_unchanged\": true}, {\"gender\": \"Female\", \"authored_vertices\": 130554, \"authored_faces\": 179438, \"custom_normals\": false, \"sharp_edge_flags\": 0, \"global_flat_faces\": 0, \"modifiers\": [[\"Neutral-rest skin - QA required\", \"ARMATURE\"]], \"regions\": {\"head\": {\"faces\": 30639, \"flat_faces\": 0, \"long_manifold_edges\": 47426, \"dihedral_degrees\": {\"median\": 1.0166030081871706, \"p95\": 2.5270397924236643, \"max\": 12.843654201152995}, \"worst_authored_edges\": [{\"degrees\": 12.843654201152995, \"length_mm\": 1.236958196386695, \"center_local_m\": [-0.03736429661512375, 0.03151451423764229, 1.5887079238891602]}, {\"degrees\": 12.366636350840244, \"length_mm\": 1.1122239520773292, \"center_local_m\": [-0.038334913551807404, 0.030902601778507233, 1.5886871814727783]}, {\"degrees\": 10.262469364744526, \"length_mm\": 2.295182319357991, \"center_local_m\": [-0.03778621554374695, 0.031164370477199554, 1.5888009071350098]}, {\"degrees\": 8.132224716397698, \"length_mm\": 1.1352774454280734, \"center_local_m\": [0.015151144936680794, 0.02695155143737793, 1.4955251216888428]}, {\"degrees\": 8.078512108764716, \"length_mm\": 1.0448253015056252, \"center_local_m\": [-0.004835495725274086, 0.019119471311569214, 1.4857263565063477]}, {\"degrees\": 7.960798067287778, \"length_mm\": 1.6146758571267128, \"center_local_m\": [0.01666880026459694, -0.02289205603301525, 1.6355972290039062]}, {\"degrees\": 7.77028872341049, \"length_mm\": 1.3250421034172177, \"center_local_m\": [0.005111058242619038, 0.0411616750061512, 1.5909701585769653]}, {\"degrees\": 7.748345033154531, \"length_mm\": 1.3529480202123523, \"center_local_m\": [0.004663189873099327, 0.04070771113038063, 1.5920157432556152]}]}, \"posterior_interface\": {\"faces\": 5467, \"flat_faces\": 0, \"long_manifold_edges\": 8577, \"dihedral_degrees\": {\"median\": 1.0688518209036526, \"p95\": 2.6772230591109625, \"max\": 24.256540865539232}, \"worst_authored_edges\": [{\"degrees\": 24.256540865539232, \"length_mm\": 2.2750573698431253, \"center_local_m\": [-0.004366619978100061, 0.0011187675409018993, 1.4728198051452637]}, {\"degrees\": 22.003731033857463, \"length_mm\": 1.8644151277840137, \"center_local_m\": [0.007411231752485037, 0.0006168490508571267, 1.4721705913543701]}, {\"degrees\": 21.970532899396616, \"length_mm\": 2.6232742238789797, \"center_local_m\": [-0.000998488161712885, 0.0010253498330712318, 1.47212553024292]}, {\"degrees\": 21.96666188968451, \"length_mm\": 2.2927578538656235, \"center_local_m\": [-0.006639957427978516, 0.0010504088131710887, 1.4730027914047241]}, {\"degrees\": 21.373676818775053, \"length_mm\": 1.811734400689602, \"center_local_m\": [0.007093800697475672, 0.0010153359035030007, 1.473158836364746]}, {\"degrees\": 21.23646173344408, \"length_mm\": 2.07372079603374, \"center_local_m\": [0.0051618339493870735, 0.001111574238166213, 1.4729828834533691]}, {\"degrees\": 21.01354997214425, \"length_mm\": 2.5591927114874125, \"center_local_m\": [0.0004039258637931198, 0.0012464566389098763, 1.4728875160217285]}, {\"degrees\": 20.85429386636165, \"length_mm\": 2.3672988172620535, \"center_local_m\": [-0.0020518833771348, 0.0012224388774484396, 1.4728655815124512]}]}, \"posterior_lower_cap\": {\"faces\": 18082, \"flat_faces\": 0, \"long_manifold_edges\": 17295, \"dihedral_degrees\": {\"median\": 0.8225297463061639, \"p95\": 6.6387364062563545, \"max\": 34.10303207303612}, \"worst_authored_edges\": [{\"degrees\": 34.10303207303612, \"length_mm\": 1.2692069867625833, \"center_local_m\": [0.04867278411984444, 0.05893293768167496, 1.3570897579193115]}, {\"degrees\": 28.057949242454235, \"length_mm\": 1.5000911662355065, \"center_local_m\": [-0.04902597516775131, 0.05865921452641487, 1.3562953472137451]}, {\"degrees\": 19.316461406807647, \"length_mm\": 1.4819001080468297, \"center_local_m\": [-0.053421903401613235, 0.05950396880507469, 1.3558330535888672]}, {\"degrees\": 18.749374705683582, \"length_mm\": 1.2651110300794244, \"center_local_m\": [-0.04828508943319321, 0.05864451080560684, 1.3562288284301758]}, {\"degrees\": 18.43460373023625, \"length_mm\": 3.4427796490490437, \"center_local_m\": [0.06289362907409668, 0.00611861702054739, 1.4079859256744385]}, {\"degrees\": 18.43459006985791, \"length_mm\": 3.4427812788635492, \"center_local_m\": [0.06440997123718262, 0.00829771626740694, 1.4057939052581787]}, {\"degrees\": 18.37852104696128, \"length_mm\": 4.956880584359169, \"center_local_m\": [-0.15061400830745697, 0.0027496451511979103, 1.3642784357070923]}, {\"degrees\": 18.377747528037773, \"length_mm\": 4.956857301294804, \"center_local_m\": [-0.15546666085720062, 0.003012741217389703, 1.363302230834961]}]}}, \"body_geometry_numeric_skin_groups_materials_world_unchanged\": true, \"all_163_rest_bones_pose_world_unchanged\": true}], \"source_file_unchanged\": true, \"saved_assets\": 0, \"camera_calls\": 0, \"appearance_approved\": false, \"scope\": \"Authored model geometry and normal diagnosis only; not user landmarks or clinical acceptance.\"}\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-01.json.txt.gz"
+    },
+    {
+      "name": "A218 native local fairing",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-head-curvature.BK8qp9/fair_head_interface.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/remove_joint_overlays.py\" \"/private/tmp/bodyguard-head-curvature.BK8qp9/a218\"",
+      "executed_helper": "executed-helpers/fair_head_interface.py.txt.gz",
+      "chunks": [
+        {
+          "chunk_id": "80ea77",
+          "wall_time_seconds": 1.002545333,
+          "session_id": 37657,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "3b6bb8",
+          "wall_time_seconds": 0.000011667,
+          "exit_code": 0,
+          "original_token_count": 811,
+          "output": "00:00.743  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\nA218 LOCAL HEAD INTERFACE {\"gender\": \"Male\", \"before\": {\"vertices\": 131645, \"faces\": 181201, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 2, \"long_folds\": 76, \"head_interface_long_edge_angles_deg\": {\"median\": 0.934824192759256, \"p95\": 2.3899164877596655, \"max\": 12.763933086934253}}, \"after\": {\"vertices\": 131645, \"faces\": 181201, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 2, \"long_folds\": 76, \"head_interface_long_edge_angles_deg\": {\"median\": 0.9353445677966463, \"p95\": 2.3132264834285277, \"max\": 12.786558088559921}}, \"selected_sharp_edges\": 218, \"selected_points\": 5542, \"zero_mask_coordinates_exact\": true, \"all_numeric_skin_faces_group_order_hands_163_rest_bones_world_materials_exact\": true, \"maximum_artist_displacement_m\": 0.0010133001837190894, \"artist_region\": [0.89, 0.995], \"selection_degrees\": 5, \"geodesic_radius_m\": 0.02, \"native\": \"CORRECTIVE_SMOOTH/LENGTH_WEIGHTED/only-smooth/.35/16\", \"existing_6mm_guard_and_geometry_passed\": true, \"appearance_approved\": false, \"whole_neck_remesh\": false}\nA218 LOCAL HEAD INTERFACE {\"gender\": \"Female\", \"before\": {\"vertices\": 130554, \"faces\": 179438, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 0, \"long_folds\": 107, \"head_interface_long_edge_angles_deg\": {\"median\": 1.0324455252453095, \"p95\": 2.7216818276356336, \"max\": 24.256540865539232}}, \"after\": {\"vertices\": 130554, \"faces\": 179438, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 0, \"long_folds\": 107, \"head_interface_long_edge_angles_deg\": {\"median\": 1.0305395823017585, \"p95\": 2.616572046498307, \"max\": 22.568727697095504}}, \"selected_sharp_edges\": 594, \"selected_points\": 8466, \"zero_mask_coordinates_exact\": true, \"all_numeric_skin_faces_group_order_hands_163_rest_bones_world_materials_exact\": true, \"maximum_artist_displacement_m\": 0.0007811132958972675, \"artist_region\": [0.89, 0.995], \"selection_degrees\": 5, \"geodesic_radius_m\": 0.02, \"native\": \"CORRECTIVE_SMOOTH/LENGTH_WEIGHTED/only-smooth/.35/16\", \"existing_6mm_guard_and_geometry_passed\": true, \"appearance_approved\": false, \"whole_neck_remesh\": false}\n00:22.679  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a218/head-front-male.png'\n00:29.088  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a218/head-side-male.png'\n00:36.343  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a218/head-back-male.png'\n00:43.614  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a218/head-front-female.png'\n00:50.397  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a218/head-side-female.png'\n00:58.219  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a218/head-back-female.png'\nInfo: Saved as \"artist-candidate.blend\"\nA218 actual6PNG; no adoption; full QA pending\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-02.json.txt.gz"
+    },
+    {
+      "name": "A219 bevel strict sparse representation failure",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-head-curvature.BK8qp9/bevel_head_interface.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/remove_joint_overlays.py\" \"/private/tmp/bodyguard-head-curvature.BK8qp9/a219\"",
+      "executed_helper": "executed-helpers/bevel_head_interface.py.txt.gz",
+      "chunks": [
+        {
+          "chunk_id": "396a38",
+          "wall_time_seconds": 1.001677458,
+          "session_id": 81632,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "19d326",
+          "wall_time_seconds": 0.000022958,
+          "exit_code": 1,
+          "original_token_count": 375,
+          "output": "00:00.825  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\nNATIVE BEVEL API BMeshOpFunc bmesh.ops.bevel(bmesh, geom=[], offset=0.0, offset_type='OFFSET', profile_type='SUPERELLIPSE', segments=0, profile=0.0, affect='VERTICES', clamp_overlap=False, material=0, loop_slide=False, mark_seam=False, mark_sharp=False, harden_normals=False, face_strength_mode='NONE', miter_outer='SHARP', miter_inner='SHARP', spread=0.0, custom_profile=None, vmesh_method='ADJ')\n  -> dict(faces=[], edges=[], verts=[])\nTraceback (most recent call last):\n  File \"/private/tmp/bodyguard-head-curvature.BK8qp9/bevel_head_interface.py\", line 132, in <module>\n    assert all(\n           ~~~^\n        v.is_valid and v.co == p and dict(v[deform]) == s\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        for v, p, s in zip(originals, coordinates, skin, strict=True)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        if v not in selected\n        ^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\nAssertionError\n\nError: script failed, file: '/private/tmp/bodyguard-head-curvature.BK8qp9/bevel_head_interface.py', exiting.\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-03.json.txt.gz"
+    },
+    {
+      "name": "A220 exact guard failure diagnosis",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-head-curvature.BK8qp9/diagnose_bevel_boundary.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/remove_joint_overlays.py\" \"/private/tmp/bodyguard-head-curvature.BK8qp9/a220\"",
+      "executed_helper": "executed-helpers/diagnose_bevel_boundary.py.txt.gz",
+      "chunks": [
+        {
+          "chunk_id": "1ce4a3",
+          "wall_time_seconds": 1.002165,
+          "session_id": 27900,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "b2ea7c",
+          "wall_time_seconds": 0.000013375,
+          "exit_code": 1,
+          "original_token_count": 450,
+          "output": "00:00.779  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\nNATIVE BEVEL API BMeshOpFunc bmesh.ops.bevel(bmesh, geom=[], offset=0.0, offset_type='OFFSET', profile_type='SUPERELLIPSE', segments=0, profile=0.0, affect='VERTICES', clamp_overlap=False, material=0, loop_slide=False, mark_seam=False, mark_sharp=False, harden_normals=False, face_strength_mode='NONE', miter_outer='SHARP', miter_inner='SHARP', spread=0.0, custom_profile=None, vmesh_method='ADJ')\n  -> dict(faces=[], edges=[], verts=[])\nA220 BEVEL GUARD FAILURE {\"gender\": \"Male\", \"outside_selected_vertices_failed\": 288, \"removed\": 0, \"coordinates_changed\": 0, \"numeric_skin_changed\": 288, \"failed_height_fraction_range\": [0.8793391526949811, 0.8920675084823626], \"source_saved\": false, \"guards_relaxed\": false, \"camera_calls\": 0}\nTraceback (most recent call last):\n  File \"/private/tmp/bodyguard-head-curvature.BK8qp9/diagnose_bevel_boundary.py\", line 176, in <module>\n    assert all(\n           ~~~^\n        v.is_valid and v.co == p and dict(v[deform]) == s\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        for v, p, s in zip(originals, coordinates, skin, strict=True)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        if v not in selected\n        ^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\nAssertionError\n\nError: script failed, file: '/private/tmp/bodyguard-head-curvature.BK8qp9/diagnose_bevel_boundary.py', exiting.\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-04.json.txt.gz"
+    },
+    {
+      "name": "A218 independent saved reopen",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec --python-exit-code 1 --python \"/private/tmp/bodyguard-head-curvature.BK8qp9/test_saved_head_fairing.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" \"/private/tmp/bodyguard-head-curvature.BK8qp9/a218/artist-candidate.blend\" \"/private/tmp/bodyguard-head-curvature.BK8qp9/a218-saved-native.json\"",
+      "executed_helper": "executed-helpers/test_saved_head_fairing.py.txt.gz",
+      "chunks": [
+        {
+          "chunk_id": "24187b",
+          "wall_time_seconds": 1.001498792,
+          "session_id": 61164,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "0016c9",
+          "wall_time_seconds": 0.000555834,
+          "exit_code": 0,
+          "original_token_count": 483,
+          "output": "00:01.473  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\n00:04.320  blend            | Read blend: \"/private/tmp/bodyguard-head-curvature.BK8qp9/a218/artist-candidate.blend\"\nA218 INDEPENDENT SAVED NATIVE {\"passed\": true, \"rows\": [{\"gender\": \"Male\", \"changed_points\": 5476, \"maximum_artist_displacement_m\": 0.0010133001837190894, \"all_numeric_skin_topology_group_order_hands_163_rest_bones_world_finish_exact\": true, \"all_original_points_outside_head_interface_artist_band_exact\": true, \"preserved_original_points\": 126169}, {\"gender\": \"Female\", \"changed_points\": 8366, \"maximum_artist_displacement_m\": 0.0007811133051448229, \"all_numeric_skin_topology_group_order_hands_163_rest_bones_world_finish_exact\": true, \"all_original_points_outside_head_interface_artist_band_exact\": true, \"preserved_original_points\": 122188}], \"input_sha256\": {\"/Applications/\\u1112\\u1161\\u11a8\\u1100\\u116d \\u1102\\u1162\\u1107\\u116e/2026-2\\u1112\\u1161\\u11a8\\u1100\\u1175/\\u110b\\u1169\\u1111\\u1173\\u11ab\\u1109\\u1169\\u1109\\u1173 AI SW \\u110b\\u1172\\u11bc\\u1112\\u1161\\u11b8 \\u1111\\u1173\\u1105\\u1169\\u110c\\u1166\\u11a8\\u1110\\u1173/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\": \"1bdb837b608b1a2994f26e0fa827c9a57065353d2d242a2efbb6363f45d32000\", \"/private/tmp/bodyguard-head-curvature.BK8qp9/a218/artist-candidate.blend\": \"77968702d9d521aeb09fa8880fd0bf07dc997ca5554a15860088cb1fe43e9c20\"}, \"independent_saved_native_reopen\": true, \"saved_assets\": 0, \"camera_calls\": 0, \"appearance_approved\": false, \"full_deformation_qa\": false, \"GLB_qa\": false, \"browser_qa\": false}\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-05.json.txt.gz"
+    },
+    {
+      "name": "A221 bevel exact numeric skin comparison",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-head-curvature.BK8qp9/bevel_head_numeric_skin.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/remove_joint_overlays.py\" \"/private/tmp/bodyguard-head-curvature.BK8qp9/a221\"",
+      "executed_helper": "executed-helpers/bevel_head_numeric_skin.py.txt.gz",
+      "chunks": [
+        {
+          "chunk_id": "916182",
+          "wall_time_seconds": 1.002654334,
+          "session_id": 19785,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "fbe728",
+          "wall_time_seconds": 0.000037209,
+          "exit_code": 1,
+          "original_token_count": 1137,
+          "output": "00:02.066  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\nNATIVE BEVEL API BMeshOpFunc bmesh.ops.bevel(bmesh, geom=[], offset=0.0, offset_type='OFFSET', profile_type='SUPERELLIPSE', segments=0, profile=0.0, affect='VERTICES', clamp_overlap=False, material=0, loop_slide=False, mark_seam=False, mark_sharp=False, harden_normals=False, face_strength_mode='NONE', miter_outer='SHARP', miter_inner='SHARP', spread=0.0, custom_profile=None, vmesh_method='ADJ')\n  -> dict(faces=[], edges=[], verts=[])\nA221 LOCAL NATIVE BEVEL {\"gender\": \"Male\", \"before\": {\"vertices\": 131645, \"faces\": 181201, \"components\": 1, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 2, \"long_folds\": 76, \"finite\": true}, \"after\": {\"vertices\": 132217, \"faces\": 181533, \"components\": 1, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 3, \"long_folds\": 76, \"finite\": true}, \"selected_edges\": 70, \"selected_original_vertices\": 116, \"new_vertices\": 688, \"deleted_selected_original_vertices\": 116, \"all_unselected_original_coordinates_skin_exact\": true, \"retained_original_numeric_skin_exact\": true, \"retained_sparse_entry_representation_differences\": 288, \"absent_vs_explicit_zero_positive_fixtures\": 2, \"any_tiny_positive_numeric_change_negative_fixtures\": 2, \"skin_values_written_back_after_bevel\": false, \"unrelated_face_winding_material_smooth_exact\": 180791, \"hands_remapped_coordinates_skin_exact\": 50689, \"all_163_rest_bones_groups_world_materials_exact\": true, \"maximum_new_to_original_surface_m\": 2.0462490283534862e-05, \"maximum_retained_original_displacement_m\": 0.0, \"skin_bad\": 0, \"existing_6mm_and_geometry_guards_passed\": false, \"native\": \"bmesh BEVEL/.5mm/3segments/profile.5/clamp-overlap\", \"appearance_approved\": false, \"whole_neck_body_remesh\": false}\nA221 LOCAL NATIVE BEVEL {\"gender\": \"Female\", \"before\": {\"vertices\": 130554, \"faces\": 179438, \"components\": 1, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 0, \"long_folds\": 107, \"finite\": true}, \"after\": {\"vertices\": 131404, \"faces\": 180062, \"components\": 1, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 1, \"long_folds\": 107, \"finite\": true}, \"selected_edges\": 145, \"selected_original_vertices\": 200, \"new_vertices\": 1050, \"deleted_selected_original_vertices\": 200, \"all_unselected_original_coordinates_skin_exact\": true, \"retained_original_numeric_skin_exact\": true, \"retained_sparse_entry_representation_differences\": 311, \"absent_vs_explicit_zero_positive_fixtures\": 2, \"any_tiny_positive_numeric_change_negative_fixtures\": 2, \"skin_values_written_back_after_bevel\": false, \"unrelated_face_winding_material_smooth_exact\": 178918, \"hands_remapped_coordinates_skin_exact\": 50673, \"all_163_rest_bones_groups_world_materials_exact\": true, \"maximum_new_to_original_surface_m\": 5.8616918977349997e-05, \"maximum_retained_original_displacement_m\": 0.0, \"skin_bad\": 0, \"existing_6mm_and_geometry_guards_passed\": false, \"native\": \"bmesh BEVEL/.5mm/3segments/profile.5/clamp-overlap\", \"appearance_approved\": false, \"whole_neck_body_remesh\": false}\n00:34.678  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a221/head-front-male.png'\n00:41.735  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a221/head-side-male.png'\n00:50.707  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a221/head-back-male.png'\n00:57.700  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a221/head-front-female.png'\n01:03.660  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a221/head-side-female.png'\n01:10.791  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a221/head-back-female.png'\nA221 actual6PNG; not adopted; full QA pending\nTraceback (most recent call last):\n  File \"/private/tmp/bodyguard-head-curvature.BK8qp9/bevel_head_numeric_skin.py\", line 298, in <module>\n    assert all(r[\"existing_6mm_and_geometry_guards_passed\"] for r in rows), (\n           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Existing guard failed; candidate not saved\n\nError: script failed, file: '/private/tmp/bodyguard-head-curvature.BK8qp9/bevel_head_numeric_skin.py', exiting.\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-06.json.txt.gz"
+    },
+    {
+      "name": "A222 ARC miter failed alternative",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-head-curvature.BK8qp9/bevel_head_arc_miter.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/remove_joint_overlays.py\" \"/private/tmp/bodyguard-head-curvature.BK8qp9/a222\"",
+      "executed_helper": "executed-helpers/bevel_head_arc_miter.py.txt.gz",
+      "chunks": [
+        {
+          "chunk_id": "d6ec02",
+          "wall_time_seconds": 1.001458959,
+          "session_id": 54051,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "733829",
+          "wall_time_seconds": 5.001333625,
+          "session_id": 54051,
+          "original_token_count": 961,
+          "output": "00:00.992  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\nNATIVE BEVEL API BMeshOpFunc bmesh.ops.bevel(bmesh, geom=[], offset=0.0, offset_type='OFFSET', profile_type='SUPERELLIPSE', segments=0, profile=0.0, affect='VERTICES', clamp_overlap=False, material=0, loop_slide=False, mark_seam=False, mark_sharp=False, harden_normals=False, face_strength_mode='NONE', miter_outer='SHARP', miter_inner='SHARP', spread=0.0, custom_profile=None, vmesh_method='ADJ')\n  -> dict(faces=[], edges=[], verts=[])\nA222 LOCAL NATIVE BEVEL {\"gender\": \"Male\", \"before\": {\"vertices\": 131645, \"faces\": 181201, \"components\": 1, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 2, \"long_folds\": 76, \"finite\": true}, \"after\": {\"vertices\": 132377, \"faces\": 181673, \"components\": 1, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 91, \"long_folds\": 76, \"finite\": true}, \"selected_edges\": 70, \"selected_original_vertices\": 116, \"new_vertices\": 848, \"deleted_selected_original_vertices\": 116, \"all_unselected_original_coordinates_skin_exact\": true, \"retained_original_numeric_skin_exact\": true, \"retained_sparse_entry_representation_differences\": 288, \"absent_vs_explicit_zero_positive_fixtures\": 2, \"any_tiny_positive_numeric_change_negative_fixtures\": 2, \"skin_values_written_back_after_bevel\": false, \"unrelated_face_winding_material_smooth_exact\": 180791, \"hands_remapped_coordinates_skin_exact\": 50689, \"all_163_rest_bones_groups_world_materials_exact\": true, \"maximum_new_to_original_surface_m\": 2.0504394342424348e-05, \"maximum_retained_original_displacement_m\": 0.0, \"skin_bad\": 0, \"existing_6mm_and_geometry_guards_passed\": false, \"native\": \"bmesh BEVEL/.5mm/3segments/profile.5/clamp-overlap/ARC outer-inner miter\", \"appearance_approved\": false, \"whole_neck_body_remesh\": false}\nA222 LOCAL NATIVE BEVEL {\"gender\": \"Female\", \"before\": {\"vertices\": 130554, \"faces\": 179438, \"components\": 1, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 0, \"long_folds\": 107, \"finite\": true}, \"after\": {\"vertices\": 132040, \"faces\": 180605, \"components\": 1, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 263, \"long_folds\": 107, \"finite\": true}, \"selected_edges\": 145, \"selected_original_vertices\": 200, \"new_vertices\": 1686, \"deleted_selected_original_vertices\": 200, \"all_unselected_original_coordinates_skin_exact\": true, \"retained_original_numeric_skin_exact\": true, \"retained_sparse_entry_representation_differences\": 311, \"absent_vs_explicit_zero_positive_fixtures\": 2, \"any_tiny_positive_numeric_change_negative_fixtures\": 2, \"skin_values_written_back_after_bevel\": false, \"unrelated_face_winding_material_smooth_exact\": 178918, \"hands_remapped_coordinates_skin_exact\": 50673, \"all_163_rest_bones_groups_world_materials_exact\": true, \"maximum_new_to_original_surface_m\": 5.8616918977349997e-05, \"maximum_retained_original_displacement_m\": 0.0, \"skin_bad\": 0, \"existing_6mm_and_geometry_guards_passed\": false, \"native\": \"bmesh BEVEL/.5mm/3segments/profile.5/clamp-overlap/ARC outer-inner miter\", \"appearance_approved\": false, \"whole_neck_body_remesh\": false}\n00:22.028  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a222/head-front-male.png'\n00:28.738  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a222/head-side-male.png'\n00:46.244  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a222/head-back-male.png'\n01:05.296  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a222/head-front-female.png'\n01:36.025  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a222/head-side-female.png'\n"
+        },
+        {
+          "chunk_id": "7d7dea",
+          "wall_time_seconds": 0.000025917,
+          "exit_code": 1,
+          "original_token_count": 187,
+          "output": "02:01.286  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a222/head-back-female.png'\nA222 actual6PNG; not adopted; full QA pending\nTraceback (most recent call last):\n  File \"/private/tmp/bodyguard-head-curvature.BK8qp9/bevel_head_arc_miter.py\", line 300, in <module>\n    assert all(r[\"existing_6mm_and_geometry_guards_passed\"] for r in rows), (\n           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Existing guard failed; candidate not saved\n\nError: script failed, file: '/private/tmp/bodyguard-head-curvature.BK8qp9/bevel_head_arc_miter.py', exiting.\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-07.json.txt.gz"
+    },
+    {
+      "name": "A223 generated-only dissolve found no targets",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-head-curvature.BK8qp9/bevel_head_repair_generated.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/remove_joint_overlays.py\" \"/private/tmp/bodyguard-head-curvature.BK8qp9/a223\"",
+      "executed_helper": "executed-helpers/bevel_head_repair_generated.py.txt.gz",
+      "chunks": [
+        {
+          "chunk_id": "391e27",
+          "wall_time_seconds": 1.003291625,
+          "session_id": 64425,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "1d359c",
+          "wall_time_seconds": 0.000027125,
+          "exit_code": 1,
+          "original_token_count": 1205,
+          "output": "00:01.882  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\nNATIVE BEVEL API BMeshOpFunc bmesh.ops.bevel(bmesh, geom=[], offset=0.0, offset_type='OFFSET', profile_type='SUPERELLIPSE', segments=0, profile=0.0, affect='VERTICES', clamp_overlap=False, material=0, loop_slide=False, mark_seam=False, mark_sharp=False, harden_normals=False, face_strength_mode='NONE', miter_outer='SHARP', miter_inner='SHARP', spread=0.0, custom_profile=None, vmesh_method='ADJ')\n  -> dict(faces=[], edges=[], verts=[])\nA223 LOCAL NATIVE BEVEL {\"gender\": \"Male\", \"before\": {\"vertices\": 131645, \"faces\": 181201, \"components\": 1, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 2, \"long_folds\": 76, \"finite\": true}, \"after\": {\"vertices\": 132217, \"faces\": 181533, \"components\": 1, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 3, \"long_folds\": 76, \"finite\": true}, \"selected_edges\": 70, \"selected_original_vertices\": 116, \"new_vertices\": 688, \"deleted_selected_original_vertices\": 116, \"all_unselected_original_coordinates_skin_exact\": true, \"retained_original_numeric_skin_exact\": true, \"retained_sparse_entry_representation_differences\": 288, \"absent_vs_explicit_zero_positive_fixtures\": 2, \"any_tiny_positive_numeric_change_negative_fixtures\": 2, \"skin_values_written_back_after_bevel\": false, \"generated_only_tiny_face_native_dissolves\": [], \"old_anatomical_faces_dissolved\": 0, \"unrelated_face_winding_material_smooth_exact\": 180791, \"hands_remapped_coordinates_skin_exact\": 50689, \"all_163_rest_bones_groups_world_materials_exact\": true, \"maximum_new_to_original_surface_m\": 2.0462490283534862e-05, \"maximum_retained_original_displacement_m\": 0.0, \"skin_bad\": 0, \"existing_6mm_and_geometry_guards_passed\": false, \"native\": \"bmesh BEVEL/.5mm/3segments/profile.5/clamp-overlap; generated-only DISSOLVE_EDGES/use_vertsFalse\", \"appearance_approved\": false, \"whole_neck_body_remesh\": false}\nA223 LOCAL NATIVE BEVEL {\"gender\": \"Female\", \"before\": {\"vertices\": 130554, \"faces\": 179438, \"components\": 1, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 0, \"long_folds\": 107, \"finite\": true}, \"after\": {\"vertices\": 131404, \"faces\": 180062, \"components\": 1, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 1, \"long_folds\": 107, \"finite\": true}, \"selected_edges\": 145, \"selected_original_vertices\": 200, \"new_vertices\": 1050, \"deleted_selected_original_vertices\": 200, \"all_unselected_original_coordinates_skin_exact\": true, \"retained_original_numeric_skin_exact\": true, \"retained_sparse_entry_representation_differences\": 311, \"absent_vs_explicit_zero_positive_fixtures\": 2, \"any_tiny_positive_numeric_change_negative_fixtures\": 2, \"skin_values_written_back_after_bevel\": false, \"generated_only_tiny_face_native_dissolves\": [], \"old_anatomical_faces_dissolved\": 0, \"unrelated_face_winding_material_smooth_exact\": 178918, \"hands_remapped_coordinates_skin_exact\": 50673, \"all_163_rest_bones_groups_world_materials_exact\": true, \"maximum_new_to_original_surface_m\": 5.8616918977349997e-05, \"maximum_retained_original_displacement_m\": 0.0, \"skin_bad\": 0, \"existing_6mm_and_geometry_guards_passed\": false, \"native\": \"bmesh BEVEL/.5mm/3segments/profile.5/clamp-overlap; generated-only DISSOLVE_EDGES/use_vertsFalse\", \"appearance_approved\": false, \"whole_neck_body_remesh\": false}\n00:43.760  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a223/head-front-male.png'\n00:53.968  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a223/head-side-male.png'\n01:00.606  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a223/head-back-male.png'\n01:07.908  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a223/head-front-female.png'\n01:14.305  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a223/head-side-female.png'\n01:21.508  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a223/head-back-female.png'\nA223 actual6PNG; not adopted; full QA pending\nTraceback (most recent call last):\n  File \"/private/tmp/bodyguard-head-curvature.BK8qp9/bevel_head_repair_generated.py\", line 332, in <module>\n    assert all(r[\"existing_6mm_and_geometry_guards_passed\"] for r in rows), (\n           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Existing guard failed; candidate not saved\n\nError: script failed, file: '/private/tmp/bodyguard-head-curvature.BK8qp9/bevel_head_repair_generated.py', exiting.\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-08.json.txt.gz"
+    },
+    {
+      "name": "A224 actual tiny face lineage",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-head-curvature.BK8qp9/diagnose_tiny_face_lineage.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/remove_joint_overlays.py\" \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/skin_coefficients.py\" \"/private/tmp/bodyguard-head-curvature.BK8qp9/a224-tiny-face-lineage.json\"",
+      "executed_helper": "executed-helpers/diagnose_tiny_face_lineage.py.txt.gz",
+      "chunks": [
+        {
+          "chunk_id": "312364",
+          "wall_time_seconds": 1.0020535,
+          "session_id": 29269,
+          "original_token_count": 77,
+          "output": "00:00.622  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\n"
+        },
+        {
+          "chunk_id": "57d118",
+          "wall_time_seconds": 0.000011042,
+          "exit_code": 0,
+          "original_token_count": 3105,
+          "output": "A224 TINY-FACE LINEAGE {\"gender\": \"Male\", \"selected_edges\": 70, \"baseline_tiny_faces\": 2, \"after_tiny_faces\": 3, \"new_tiny_regression_faces\": [{\"area_m2\": 2.9754692633388036e-12, \"original_face_ordinal\": null, \"original_area_m2\": null, \"originally_inside_predeclared_patch\": null, \"in_native_bevel_faces\": false, \"points\": [{\"original_vertex\": null, \"xyz\": [-0.030659472569823265, -0.008250602521002293, 1.499893069267273], \"normalized_height\": 0.8903413154957699, \"skin\": [[16, 0.057719141244888306], [31, 0.11324064433574677], [32, 0.3399568200111389], [33, 0.32959088683128357], [34, 0.15949252247810364]]}, {\"original_vertex\": null, \"xyz\": [-0.03021598979830742, -0.007831850089132786, 1.4999144077301025], \"normalized_height\": 0.8903539820754452, \"skin\": [[16, 0.05735889449715614], [31, 0.11293411999940872], [32, 0.34246766567230225], [33, 0.3284791111946106], [34, 0.15876005589962006]]}, {\"original_vertex\": 43299, \"xyz\": [-0.030215958133339882, -0.007831808179616928, 1.4999144077301025], \"normalized_height\": 0.8903539820754452, \"skin\": [[16, 0.05735885351896286], [31, 0.11293408274650574], [32, 0.34246787428855896], [33, 0.3284791111946106], [34, 0.15876004099845886]]}], \"edges\": [{\"length_m\": 0.0006103162304498255, \"manifold\": true, \"angle_deg\": 99.28808988883337, \"neighbors\": [{\"area_m2\": 1.2171726382348425e-07, \"original_face_ordinal\": null, \"in_native_bevel_faces\": true, \"inside_predeclared_patch\": true}]}, {\"length_m\": 5.252692503177059e-08, \"manifold\": true, \"angle_deg\": 88.66990512588822, \"neighbors\": [{\"area_m2\": 3.62014390020704e-07, \"original_face_ordinal\": null, \"in_native_bevel_faces\": false, \"inside_predeclared_patch\": true}]}, {\"length_m\": 0.0006103679770603776, \"manifold\": true, \"angle_deg\": 88.8995224254057, \"neighbors\": [{\"area_m2\": 3.736249141184089e-07, \"original_face_ordinal\": null, \"in_native_bevel_faces\": false, \"inside_predeclared_patch\": true}]}]}], \"all_tiny_faces\": [{\"area_m2\": 8.90263002206737e-11, \"original_face_ordinal\": 81593, \"original_area_m2\": 8.90263002206737e-11, \"originally_inside_predeclared_patch\": false, \"in_native_bevel_faces\": false, \"points\": [{\"original_vertex\": 108805, \"xyz\": [0.08304000645875931, -0.018578123301267624, 1.4176877737045288], \"normalized_height\": 0.8415439895451892, \"skin\": [[16, 0.12574708461761475], [17, 0.7131666541099548], [18, 0.13164710998535156], [31, 0.02943912148475647]]}, {\"original_vertex\": 105204, \"xyz\": [0.08299326151609421, -0.018653767183423042, 1.417598009109497], \"normalized_height\": 0.8414907049949348, \"skin\": [[16, 0.1251220703125], [17, 0.7144923806190491], [18, 0.13131561875343323], [31, 0.029069872573018074]]}, {\"original_vertex\": 109523, \"xyz\": [0.08295909315347672, -0.01870879717171192, 1.417534589767456], \"normalized_height\": 0.8414530590709836, \"skin\": [[16, 0.12507160007953644], [17, 0.7148357033729553], [18, 0.13102872669696808], [31, 0.0290639977902174]]}], \"edges\": [{\"length_m\": 0.00012635176244657487, \"manifold\": true, \"angle_deg\": 157.92487459261014, \"neighbors\": [{\"area_m2\": 1.4165825845680047e-08, \"original_face_ordinal\": 37790, \"in_native_bevel_faces\": false, \"inside_predeclared_patch\": false}]}, {\"length_m\": 9.065202175406739e-05, \"manifold\": true, \"angle_deg\": 158.0211392787723, \"neighbors\": [{\"area_m2\": 1.0213502044109646e-08, \"original_face_ordinal\": 88338, \"in_native_bevel_faces\": false, \"inside_predeclared_patch\": false}]}, {\"length_m\": 0.00021699756325688213, \"manifold\": true, \"angle_deg\": 21.616491751316296, \"neighbors\": [{\"area_m2\": 1.1074703820668219e-08, \"original_face_ordinal\": 81592, \"in_native_bevel_faces\": false, \"inside_predeclared_patch\": false}]}]}, {\"area_m2\": 1.2365141896508725e-11, \"original_face_ordinal\": 164873, \"original_area_m2\": 1.2365141896508725e-11, \"originally_inside_predeclared_patch\": false, \"in_native_bevel_faces\": false, \"points\": [{\"original_vertex\": 73590, \"xyz\": [0.23404797911643982, -0.09193599969148636, 0.8736231327056885], \"normalized_height\": 0.5185854812974767, \"skin\": [[21, 0.030730020254850388], [22, 0.36697494983673096], [23, 0.5498194098472595], [66, 0.037653952836990356], [67, 0.001436599181033671], [68, 1.066381054638396e-27], [69, 0.012920580804347992], [70, 1.5654990324909246e-13], [71, 1.0453515024931102e-37], [73, 0.00046451351954601705], [74, 1.3914461793331726e-14], [77, 2.624792294625422e-08], [78, 1.2829104799912548e-22], [81, 3.4524834546800776e-08]]}, {\"original_vertex\": 122077, \"xyz\": [0.2340470850467682, -0.09193409979343414, 0.8736263513565063], \"normalized_height\": 0.5185873918988803, \"skin\": [[21, 0.030727911740541458], [22, 0.36702460050582886], [23, 0.5498006343841553], [66, 0.03763360157608986], [67, 0.001435574609786272], [68, 1.0649742591105184e-27], [69, 0.012913520447909832], [70, 1.5635870419597464e-13], [71, 1.0439417962379994e-37], [73, 0.00046418336569331586], [74, 1.3897430501861284e-14], [77, 2.622230432791639e-08], [78, 1.2812365802592482e-22], [81, 3.448850804943504e-08]]}, {\"original_vertex\": 122052, \"xyz\": [0.23404140770435333, -0.09193206578493118, 0.8736240863800049], \"normalized_height\": 0.5185860474015962, \"skin\": [[21, 0.030726226046681404], [22, 0.36703601479530334], [23, 0.5497874617576599], [66, 0.03763972222805023], [67, 0.0014363998780027032], [68, 1.0721072295490481e-27], [69, 0.012910270132124424], [70, 1.5634703547009327e-13], [71, 1.0432186141265307e-37], [73, 0.00046390085481107235], [74, 1.388978094731463e-14], [77, 2.6185183799043443e-08], [78, 1.2781254390668014e-22], [81, 3.4773862012116297e-08], [82, 3.193278940503393e-41]]}], \"edges\": [{\"length_m\": 3.8430048334703315e-06, \"manifold\": true, \"angle_deg\": 5.185848874975685, \"neighbors\": [{\"area_m2\": 7.270543846971123e-07, \"original_face_ordinal\": 164893, \"in_native_bevel_faces\": false, \"inside_predeclared_patch\": false}]}, {\"length_m\": 6.44201236355002e-06, \"manifold\": true, \"angle_deg\": 11.316055072522964, \"neighbors\": [{\"area_m2\": 2.864580437744735e-06, \"original_face_ordinal\": 164990, \"in_native_bevel_faces\": false, \"inside_predeclared_patch\": false}]}, {\"length_m\": 7.718067536188755e-06, \"manifold\": true, \"angle_deg\": 2.1982129279946827, \"neighbors\": [{\"area_m2\": 3.991419362137094e-06, \"original_face_ordinal\": 164874, \"in_native_bevel_faces\": false, \"inside_predeclared_patch\": false}]}]}, {\"area_m2\": 2.9754692633388036e-12, \"original_face_ordinal\": null, \"original_area_m2\": null, \"originally_inside_predeclared_patch\": null, \"in_native_bevel_faces\": false, \"points\": [{\"original_vertex\": null, \"xyz\": [-0.030659472569823265, -0.008250602521002293, 1.499893069267273], \"normalized_height\": 0.8903413154957699, \"skin\": [[16, 0.057719141244888306], [31, 0.11324064433574677], [32, 0.3399568200111389], [33, 0.32959088683128357], [34, 0.15949252247810364]]}, {\"original_vertex\": null, \"xyz\": [-0.03021598979830742, -0.007831850089132786, 1.4999144077301025], \"normalized_height\": 0.8903539820754452, \"skin\": [[16, 0.05735889449715614], [31, 0.11293411999940872], [32, 0.34246766567230225], [33, 0.3284791111946106], [34, 0.15876005589962006]]}, {\"original_vertex\": 43299, \"xyz\": [-0.030215958133339882, -0.007831808179616928, 1.4999144077301025], \"normalized_height\": 0.8903539820754452, \"skin\": [[16, 0.05735885351896286], [31, 0.11293408274650574], [32, 0.34246787428855896], [33, 0.3284791111946106], [34, 0.15876004099845886]]}], \"edges\": [{\"length_m\": 0.0006103162304498255, \"manifold\": true, \"angle_deg\": 99.28808988883337, \"neighbors\": [{\"area_m2\": 1.2171726382348425e-07, \"original_face_ordinal\": null, \"in_native_bevel_faces\": true, \"inside_predeclared_patch\": true}]}, {\"length_m\": 5.252692503177059e-08, \"manifold\": true, \"angle_deg\": 88.66990512588822, \"neighbors\": [{\"area_m2\": 3.62014390020704e-07, \"original_face_ordinal\": null, \"in_native_bevel_faces\": false, \"inside_predeclared_patch\": true}]}, {\"length_m\": 0.0006103679770603776, \"manifold\": true, \"angle_deg\": 88.8995224254057, \"neighbors\": [{\"area_m2\": 3.736249141184089e-07, \"original_face_ordinal\": null, \"in_native_bevel_faces\": false, \"inside_predeclared_patch\": true}]}]}], \"protected_faces_exact\": 180791, \"retained_numeric_coefficients_exact\": true, \"absent_vs_explicit_zero_positive_fixtures\": 2, \"tiny_and_ulp_real_change_negative_fixtures\": 2, \"numeric_helper_sha256\": \"0c402c44bd0c4b1b7a3603d88b0b70dbc7a0676773079f58385331427e0c9bf0\", \"rest_rig_163_exact\": true, \"protected_original_coordinates_exact\": true, \"body_source_mesh_modified\": false}\nA224 TINY-FACE LINEAGE {\"gender\": \"Female\", \"selected_edges\": 145, \"baseline_tiny_faces\": 0, \"after_tiny_faces\": 1, \"new_tiny_regression_faces\": [{\"area_m2\": 6.231744720947008e-13, \"original_face_ordinal\": null, \"original_area_m2\": null, \"originally_inside_predeclared_patch\": null, \"in_native_bevel_faces\": false, \"points\": [{\"original_vertex\": null, \"xyz\": [-0.030081672593951225, -0.011480110697448254, 1.4724148511886597], \"normalized_height\": 0.8984550645571923, \"skin\": [[31, 0.05989854037761688], [32, 0.3682006597518921], [33, 0.2559826970100403], [34, 0.3159181475639343]]}, {\"original_vertex\": null, \"xyz\": [-0.03008240833878517, -0.011471597477793694, 1.4724234342575073], \"normalized_height\": 0.8984603018730678, \"skin\": [[31, 0.059872280806303024], [32, 0.3680690824985504], [33, 0.2559487223625183], [34, 0.31610995531082153]]}, {\"original_vertex\": null, \"xyz\": [-0.030081667006015778, -0.011480089277029037, 1.4724148511886597], \"normalized_height\": 0.8984550645571923, \"skin\": [[31, 0.059898532927036285], [32, 0.3682008385658264], [33, 0.2559826374053955], [34, 0.31591808795928955]]}], \"edges\": [{\"length_m\": 1.2111370779166464e-05, \"manifold\": true, \"angle_deg\": 17.223421652643523, \"neighbors\": [{\"area_m2\": 3.758837152645356e-08, \"original_face_ordinal\": null, \"in_native_bevel_faces\": true, \"inside_predeclared_patch\": true}]}, {\"length_m\": 1.2096664249838796e-05, \"manifold\": true, \"angle_deg\": 23.744952866516105, \"neighbors\": [{\"area_m2\": 3.2567182728371336e-08, \"original_face_ordinal\": null, \"in_native_bevel_faces\": false, \"inside_predeclared_patch\": true}]}, {\"length_m\": 2.213728400590753e-08, \"manifold\": true, \"angle_deg\": 21.34981213781503, \"neighbors\": [{\"area_m2\": 3.611286558680149e-08, \"original_face_ordinal\": null, \"in_native_bevel_faces\": true, \"inside_predeclared_patch\": true}]}]}], \"all_tiny_faces\": [{\"area_m2\": 6.231744720947008e-13, \"original_face_ordinal\": null, \"original_area_m2\": null, \"originally_inside_predeclared_patch\": null, \"in_native_bevel_faces\": false, \"points\": [{\"original_vertex\": null, \"xyz\": [-0.030081672593951225, -0.011480110697448254, 1.4724148511886597], \"normalized_height\": 0.8984550645571923, \"skin\": [[31, 0.05989854037761688], [32, 0.3682006597518921], [33, 0.2559826970100403], [34, 0.3159181475639343]]}, {\"original_vertex\": null, \"xyz\": [-0.03008240833878517, -0.011471597477793694, 1.4724234342575073], \"normalized_height\": 0.8984603018730678, \"skin\": [[31, 0.059872280806303024], [32, 0.3680690824985504], [33, 0.2559487223625183], [34, 0.31610995531082153]]}, {\"original_vertex\": null, \"xyz\": [-0.030081667006015778, -0.011480089277029037, 1.4724148511886597], \"normalized_height\": 0.8984550645571923, \"skin\": [[31, 0.059898532927036285], [32, 0.3682008385658264], [33, 0.2559826374053955], [34, 0.31591808795928955]]}], \"edges\": [{\"length_m\": 1.2111370779166464e-05, \"manifold\": true, \"angle_deg\": 17.223421652643523, \"neighbors\": [{\"area_m2\": 3.758837152645356e-08, \"original_face_ordinal\": null, \"in_native_bevel_faces\": true, \"inside_predeclared_patch\": true}]}, {\"length_m\": 1.2096664249838796e-05, \"manifold\": true, \"angle_deg\": 23.744952866516105, \"neighbors\": [{\"area_m2\": 3.2567182728371336e-08, \"original_face_ordinal\": null, \"in_native_bevel_faces\": false, \"inside_predeclared_patch\": true}]}, {\"length_m\": 2.213728400590753e-08, \"manifold\": true, \"angle_deg\": 21.34981213781503, \"neighbors\": [{\"area_m2\": 3.611286558680149e-08, \"original_face_ordinal\": null, \"in_native_bevel_faces\": true, \"inside_predeclared_patch\": true}]}]}], \"protected_faces_exact\": 178918, \"retained_numeric_coefficients_exact\": true, \"absent_vs_explicit_zero_positive_fixtures\": 2, \"tiny_and_ulp_real_change_negative_fixtures\": 2, \"numeric_helper_sha256\": \"0c402c44bd0c4b1b7a3603d88b0b70dbc7a0676773079f58385331427e0c9bf0\", \"rest_rig_163_exact\": true, \"protected_original_coordinates_exact\": true, \"body_source_mesh_modified\": false}\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-09.json.txt.gz"
+    },
+    {
+      "name": "A225 generated-only native weld candidate",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-head-curvature.BK8qp9/bevel_head_weld_generated.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/remove_joint_overlays.py\" \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/skin_coefficients.py\" \"/private/tmp/bodyguard-head-curvature.BK8qp9/a225\"",
+      "executed_helper": "executed-helpers/bevel_head_weld_generated.py.txt.gz",
+      "chunks": [
+        {
+          "chunk_id": "330a99",
+          "wall_time_seconds": 1.001417833,
+          "session_id": 36103,
+          "original_token_count": 77,
+          "output": "00:00.678  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\n"
+        },
+        {
+          "chunk_id": "58f6ab",
+          "wall_time_seconds": 5.002431333,
+          "session_id": 36103,
+          "original_token_count": 966,
+          "output": "NATIVE BEVEL API BMeshOpFunc bmesh.ops.bevel(bmesh, geom=[], offset=0.0, offset_type='OFFSET', profile_type='SUPERELLIPSE', segments=0, profile=0.0, affect='VERTICES', clamp_overlap=False, material=0, loop_slide=False, mark_seam=False, mark_sharp=False, harden_normals=False, face_strength_mode='NONE', miter_outer='SHARP', miter_inner='SHARP', spread=0.0, custom_profile=None, vmesh_method='ADJ')\n  -> dict(faces=[], edges=[], verts=[])\nA225 LOCAL NATIVE BEVEL {\"gender\": \"Male\", \"before\": {\"vertices\": 131645, \"faces\": 181201, \"components\": 1, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 2, \"long_folds\": 76, \"finite\": true}, \"after\": {\"vertices\": 132216, \"faces\": 181532, \"components\": 1, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 2, \"long_folds\": 76, \"finite\": true}, \"selected_edges\": 70, \"selected_original_vertices\": 116, \"new_vertices\": 687, \"deleted_selected_original_vertices\": 116, \"all_unselected_original_coordinates_skin_exact\": true, \"retained_original_numeric_skin_exact\": true, \"retained_sparse_entry_representation_differences\": 288, \"absent_vs_explicit_zero_positive_fixtures\": 2, \"any_tiny_positive_numeric_change_negative_fixtures\": 2, \"skin_values_written_back_after_bevel\": false, \"numeric_skin_helper_sha256\": \"0c402c44bd0c4b1b7a3603d88b0b70dbc7a0676773079f58385331427e0c9bf0\", \"generated_only_short_edge_native_welds\": [{\"tiny_area_m2\": 2.9754692633388036e-12, \"new_point_to_retained_point_m\": 5.252692503177059e-08, \"retained_existing_point\": 43299, \"existing_source_points_deleted\": 0}], \"old_anatomical_source_points_weld_deleted\": 0, \"unrelated_face_winding_material_smooth_exact\": 180791, \"hands_remapped_coordinates_skin_exact\": 50689, \"all_163_rest_bones_groups_world_materials_exact\": true, \"maximum_new_to_original_surface_m\": 2.0462490283534862e-05, \"maximum_retained_original_displacement_m\": 0.0, \"skin_bad\": 0, \"existing_6mm_and_geometry_guards_passed\": true, \"native\": \"bmesh BEVEL/.5mm/3segments/profile.5/clamp-overlap; WELD_VERTS generated-point-only <0.1micrometer\", \"appearance_approved\": false, \"whole_neck_body_remesh\": false}\nA225 LOCAL NATIVE BEVEL {\"gender\": \"Female\", \"before\": {\"vertices\": 130554, \"faces\": 179438, \"components\": 1, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 0, \"long_folds\": 107, \"finite\": true}, \"after\": {\"vertices\": 131403, \"faces\": 180061, \"components\": 1, \"nonmanifold\": 0, \"winding_errors\": 0, \"tiny_faces\": 0, \"long_folds\": 107, \"finite\": true}, \"selected_edges\": 145, \"selected_original_vertices\": 200, \"new_vertices\": 1049, \"deleted_selected_original_vertices\": 200, \"all_unselected_original_coordinates_skin_exact\": true, \"retained_original_numeric_skin_exact\": true, \"retained_sparse_entry_representation_differences\": 311, \"absent_vs_explicit_zero_positive_fixtures\": 2, \"any_tiny_positive_numeric_change_negative_fixtures\": 2, \"skin_values_written_back_after_bevel\": false, \"numeric_skin_helper_sha256\": \"0c402c44bd0c4b1b7a3603d88b0b70dbc7a0676773079f58385331427e0c9bf0\", \"generated_only_short_edge_native_welds\": [{\"tiny_area_m2\": 6.231744720947008e-13, \"new_point_to_retained_point_m\": 2.213728400590753e-08, \"retained_existing_point\": null, \"existing_source_points_deleted\": 0}], \"old_anatomical_source_points_weld_deleted\": 0, \"unrelated_face_winding_material_smooth_exact\": 178918, \"hands_remapped_coordinates_skin_exact\": 50673, \"all_163_rest_bones_groups_world_materials_exact\": true, \"maximum_new_to_original_surface_m\": 5.8616918977349997e-05, \"maximum_retained_original_displacement_m\": 0.0, \"skin_bad\": 0, \"existing_6mm_and_geometry_guards_passed\": true, \"native\": \"bmesh BEVEL/.5mm/3segments/profile.5/clamp-overlap; WELD_VERTS generated-point-only <0.1micrometer\", \"appearance_approved\": false, \"whole_neck_body_remesh\": false}\n00:19.948  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a225/head-front-male.png'\n"
+        },
+        {
+          "chunk_id": "354fc5",
+          "wall_time_seconds": 0.000015959,
+          "exit_code": 0,
+          "original_token_count": 192,
+          "output": "00:25.113  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a225/head-side-male.png'\n00:30.676  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a225/head-back-male.png'\n00:38.274  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a225/head-front-female.png'\n00:44.061  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a225/head-side-female.png'\n00:49.876  render           | Saved: '/private/tmp/bodyguard-head-curvature.BK8qp9/a225/head-back-female.png'\nInfo: Saved as \"artist-candidate.blend\"\nA225 actual6PNG; not adopted; full QA pending\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-10.json.txt.gz"
+    },
+    {
+      "name": "A225 saved reopen coefficient failure",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec --python-exit-code 1 --python \"/private/tmp/bodyguard-head-curvature.BK8qp9/test_saved_head_bevel.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" \"/private/tmp/bodyguard-head-curvature.BK8qp9/a225/artist-candidate.blend\" \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/skin_coefficients.py\" \"/private/tmp/bodyguard-head-curvature.BK8qp9/a225-saved-native.json\"",
+      "executed_helper": "executed-helpers/test_saved_head_bevel.py.txt.gz",
+      "chunks": [
+        {
+          "chunk_id": "ea684b",
+          "wall_time_seconds": 1.002646459,
+          "session_id": 73129,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "bd90eb",
+          "wall_time_seconds": 0.000012167,
+          "exit_code": 1,
+          "original_token_count": 349,
+          "output": "00:01.752  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\n00:09.835  blend            | Read blend: \"/private/tmp/bodyguard-head-curvature.BK8qp9/a225/artist-candidate.blend\"\nTraceback (most recent call last):\n  File \"/private/tmp/bodyguard-head-curvature.BK8qp9/test_saved_head_bevel.py\", line 102, in <module>\n    current = snapshot(label)\n  File \"/private/tmp/bodyguard-head-curvature.BK8qp9/test_saved_head_bevel.py\", line 40, in snapshot\n    numeric_skin({g.group: g.weight for g in v.groups}, len(body.vertex_groups))\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/skin_coefficients.py\", line 33, in exact_skin_coefficients\n    raise ValueError(\"Invalid skin coefficient\")\nValueError: Invalid skin coefficient\n\nError: script failed, file: '/private/tmp/bodyguard-head-curvature.BK8qp9/test_saved_head_bevel.py', exiting.\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-11.json.txt.gz"
+    },
+    {
+      "name": "A226 independent individual coefficient diagnosis",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec --python-exit-code 1 --python \"/private/tmp/bodyguard-head-curvature.BK8qp9/inspect_bevel_weights.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" \"/private/tmp/bodyguard-head-curvature.BK8qp9/a225/artist-candidate.blend\" \"/private/tmp/bodyguard-head-curvature.BK8qp9/a226-weight-diagnosis.json\"",
+      "executed_helper": "executed-helpers/inspect_bevel_weights.py.txt.gz",
+      "chunks": [
+        {
+          "chunk_id": "9189f6",
+          "wall_time_seconds": 1.002291917,
+          "session_id": 77088,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "cb2300",
+          "wall_time_seconds": 5.019095708,
+          "session_id": 77088,
+          "original_token_count": 242,
+          "output": "00:01.462  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\nA226 INDEPENDENT RAW SKIN {\"input\": \"original\", \"gender\": \"Male\", \"vertices\": 131645, \"invalid_individual_coefficients\": [], \"invalid_individual_count\": 0, \"sum_only_bad\": 0, \"minimum_coefficient\": 0.0, \"maximum_coefficient\": 1.0, \"saved_model_or_skin_mutation\": false}\nA226 INDEPENDENT RAW SKIN {\"input\": \"original\", \"gender\": \"Female\", \"vertices\": 130554, \"invalid_individual_coefficients\": [], \"invalid_individual_count\": 0, \"sum_only_bad\": 0, \"minimum_coefficient\": 0.0, \"maximum_coefficient\": 1.0, \"saved_model_or_skin_mutation\": false}\n00:33.470  blend            | Read blend: \"/private/tmp/bodyguard-head-curvature.BK8qp9/a225/artist-candidate.blend\"\n"
+        },
+        {
+          "chunk_id": "34daae",
+          "wall_time_seconds": 0.000011625,
+          "exit_code": 1,
+          "original_token_count": 376,
+          "output": "A226 INDEPENDENT RAW SKIN {\"input\": \"a225_candidate\", \"gender\": \"Male\", \"vertices\": 132216, \"invalid_individual_coefficients\": [{\"vertex\": 132069, \"original_parent_id\": 0, \"group\": 17, \"name\": \"clavicle.L\", \"weight\": -5.466188923719528e-08, \"xyz\": [0.03206395357847214, -0.009992481209337711, 1.4974806308746338], \"sum\": 0.9999999937668846}], \"invalid_individual_count\": 1, \"sum_only_bad\": 0, \"minimum_coefficient\": -5.466188923719528e-08, \"maximum_coefficient\": 1.0, \"saved_model_or_skin_mutation\": false}\nA226 INDEPENDENT RAW SKIN {\"input\": \"a225_candidate\", \"gender\": \"Female\", \"vertices\": 131403, \"invalid_individual_coefficients\": [{\"vertex\": 131265, \"original_parent_id\": 0, \"group\": 16, \"name\": \"spine01\", \"weight\": -1.748251654554167e-09, \"xyz\": [0.03829791396856308, -0.06840155273675919, 1.4376940727233887], \"sum\": 1.0000000112902643}], \"invalid_individual_count\": 1, \"sum_only_bad\": 0, \"minimum_coefficient\": -1.748251654554167e-09, \"maximum_coefficient\": 1.0, \"saved_model_or_skin_mutation\": false}\nTraceback (most recent call last):\n  File \"/private/tmp/bodyguard-head-curvature.BK8qp9/inspect_bevel_weights.py\", line 85, in <module>\n    assert report[\"coefficient_guard_passed\"], (\n           ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Invalid individual coefficients: candidate remains rejected\n\nError: script failed, file: '/private/tmp/bodyguard-head-curvature.BK8qp9/inspect_bevel_weights.py', exiting.\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-12.json.txt.gz"
+    },
+    {
+      "name": "A227 independent retained body and individual coefficient failure",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec --python-exit-code 1 --python \"/private/tmp/bodyguard-head-curvature.BK8qp9/test_saved_head_bevel_diagnostics.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" \"/private/tmp/bodyguard-head-curvature.BK8qp9/a225/artist-candidate.blend\" \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/skin_coefficients.py\" \"/private/tmp/bodyguard-head-curvature.BK8qp9/a227-independent-saved.json\"",
+      "executed_helper": "executed-helpers/test_saved_head_bevel_diagnostics.py.txt.gz",
+      "chunks": [
+        {
+          "chunk_id": "4cb372",
+          "wall_time_seconds": 1.002844875,
+          "session_id": 16993,
+          "original_token_count": 0,
+          "output": ""
+        },
+        {
+          "chunk_id": "143b95",
+          "wall_time_seconds": 0.000016833,
+          "exit_code": 1,
+          "original_token_count": 872,
+          "output": "00:03.362  blend            | Read blend: \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\"\n00:10.829  blend            | Read blend: \"/private/tmp/bodyguard-head-curvature.BK8qp9/a225/artist-candidate.blend\"\nA227 INDEPENDENT PRESERVATION AND INDIVIDUAL GUARD {\"passed\": false, \"rows\": [{\"gender\": \"Male\", \"retained_original_points_exact\": 131529, \"selected_original_points_replaced_by_native_bevel\": 116, \"native_added_points\": 687, \"maximum_new_to_original_surface_m\": 2.0462490283534862e-05, \"unrelated_faces_winding_material_smooth_exact\": 180791, \"hands_remapped_coordinates_numeric_skin_exact\": 50689, \"all_retained_numeric_skin_exact\": true, \"groups_163_rest_bones_world_finish_exact\": true, \"skin_values_or_coordinates_written_back\": false, \"invalid_individual_weights\": [{\"vertex\": 132069, \"group\": 17, \"weight\": -5.466188923719528e-08, \"original_parent_id\": 0}], \"sum_only_bad\": 0, \"individual_weight_guard_passed\": false}, {\"gender\": \"Female\", \"retained_original_points_exact\": 130354, \"selected_original_points_replaced_by_native_bevel\": 200, \"native_added_points\": 1049, \"maximum_new_to_original_surface_m\": 5.8616918977349997e-05, \"unrelated_faces_winding_material_smooth_exact\": 178918, \"hands_remapped_coordinates_numeric_skin_exact\": 50673, \"all_retained_numeric_skin_exact\": true, \"groups_163_rest_bones_world_finish_exact\": true, \"skin_values_or_coordinates_written_back\": false, \"invalid_individual_weights\": [{\"vertex\": 131265, \"group\": 16, \"weight\": -1.748251654554167e-09, \"original_parent_id\": 0}], \"sum_only_bad\": 0, \"individual_weight_guard_passed\": false}], \"input_sha256\": {\"/Applications/\\u1112\\u1161\\u11a8\\u1100\\u116d \\u1102\\u1162\\u1107\\u116e/2026-2\\u1112\\u1161\\u11a8\\u1100\\u1175/\\u110b\\u1169\\u1111\\u1173\\u11ab\\u1109\\u1169\\u1109\\u1173 AI SW \\u110b\\u1172\\u11bc\\u1112\\u1161\\u11b8 \\u1111\\u1173\\u1105\\u1169\\u110c\\u1166\\u11a8\\u1110\\u1173/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\": \"1bdb837b608b1a2994f26e0fa827c9a57065353d2d242a2efbb6363f45d32000\", \"/private/tmp/bodyguard-head-curvature.BK8qp9/a225/artist-candidate.blend\": \"da4bbef09054cadf880960c582b44848f323545941e27f29c8f765b793bde537\", \"/Applications/\\u1112\\u1161\\u11a8\\u1100\\u116d \\u1102\\u1162\\u1107\\u116e/2026-2\\u1112\\u1161\\u11a8\\u1100\\u1175/\\u110b\\u1169\\u1111\\u1173\\u11ab\\u1109\\u1169\\u1109\\u1173 AI SW \\u110b\\u1172\\u11bc\\u1112\\u1161\\u11b8 \\u1111\\u1173\\u1105\\u1169\\u110c\\u1166\\u11a8\\u1110\\u1173/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/skin_coefficients.py\": \"0c402c44bd0c4b1b7a3603d88b0b70dbc7a0676773079f58385331427e0c9bf0\"}, \"independent_saved_native_reopen\": true, \"saved_assets\": 0, \"camera_calls\": 0, \"appearance_approved\": false, \"full_deformation_qa\": false, \"GLB_qa\": false, \"browser_qa\": false}\nTraceback (most recent call last):\n  File \"/private/tmp/bodyguard-head-curvature.BK8qp9/test_saved_head_bevel_diagnostics.py\", line 181, in <module>\n    assert report[\"passed\"], (\n           ~~~~~~^^^^^^^^^^\nAssertionError: New coefficients invalid; no normalization or source skin restoration\n\nError: script failed, file: '/private/tmp/bodyguard-head-curvature.BK8qp9/test_saved_head_bevel_diagnostics.py', exiting.\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+        }
+      ],
+      "stdout_archive": "logs/native-13.json.txt.gz"
+    }
+  ],
+  "native_actors_sequential": true,
+  "initialization_failure": {
+    "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec -b \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a214-a216-review/artist-candidate.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-head-curvature.BK8qp9/diagnose_tiny_face_lineage.py\" -- \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/remove_joint_overlays.py\" \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/skin_coefficients.py\" \"/private/tmp/bodyguard-head-curvature.BK8qp9/a224-tiny-face-lineage.json\"",
+    "result": {
+      "chunk_id": "11d244",
+      "wall_time_seconds": 0.964174125,
+      "exit_code": 139,
+      "original_token_count": 108,
+      "output": " ArchWarn: ARCH_CACHE_LINE_SIZE != Arch_ObtainCacheLineSize()\n Function: Arch_ValidateAssumptions\n     File: /Users/jonas/blender-dev-deps/build_darwin/deps_arm64/build/usd/src/external_usd/pxr/base/arch/assumptions.cpp\n     Line: 140\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\nWriting: /var/folders/8z/d7p5k9352z75y68hl1l0x3mr0000gn/T/blender.crash.txt\n"
+    },
+    "script_executed": false,
+    "cause": "Metal backend device initialization before Python/source load; native authorized rerun terminal0",
+    "crash_archive": "logs/a224-metal-init-crash.txt.gz"
+  },
+  "static_verification": {
+    "chunk_id": "64e1ba",
+    "wall_time_seconds": 0.479808125,
+    "exit_code": 0,
+    "original_token_count": 395,
+    "output": "2 files already formatted\nAll checks passed!\nAll checks passed!\ntest_absent_and_explicit_zero_are_exactly_equal (__main__.SkinCoefficientTests.test_absent_and_explicit_zero_are_exactly_equal) ... ok\ntest_boolean_and_nonnumeric_coefficients_are_rejected (__main__.SkinCoefficientTests.test_boolean_and_nonnumeric_coefficients_are_rejected) ... ok\ntest_empty_zero_palette (__main__.SkinCoefficientTests.test_empty_zero_palette) ... ok\ntest_invalid_palette_size_is_rejected (__main__.SkinCoefficientTests.test_invalid_palette_size_is_rejected) ... ok\ntest_negative_and_boolean_groups_are_rejected (__main__.SkinCoefficientTests.test_negative_and_boolean_groups_are_rejected) ... ok\ntest_nonfinite_and_out_of_range_weights_are_rejected (__main__.SkinCoefficientTests.test_nonfinite_and_out_of_range_weights_are_rejected) ... ok\ntest_one_float32_ulp_difference_is_not_tolerated (__main__.SkinCoefficientTests.test_one_float32_ulp_difference_is_not_tolerated) ... ok\ntest_palette_order_is_numeric_not_insertion_order (__main__.SkinCoefficientTests.test_palette_order_is_numeric_not_insertion_order) ... ok\ntest_source_mapping_is_not_mutated_or_normalized (__main__.SkinCoefficientTests.test_source_mapping_is_not_mutated_or_normalized) ... ok\ntest_tiny_positive_weight_is_not_dropped (__main__.SkinCoefficientTests.test_tiny_positive_weight_is_not_dropped) ... ok\ntest_unknown_even_zero_group_is_rejected (__main__.SkinCoefficientTests.test_unknown_even_zero_group_is_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.001s\n\nOK\n"
+  },
+  "static_failures": [
+    {
+      "tool_chunk": "e7ee18",
+      "rules": [
+        "B023"
+      ],
+      "stage": "first A217 inspection; lambdas evaluated immediately; later formatted/bound variant not natively executed",
+      "full_stdout_archive_available": false
+    },
+    {
+      "tool_chunk": "e55f8f",
+      "rules": [
+        "TRY004"
+      ],
+      "stage": "before first new helper unit test; fixed TypeError, actual11tests rerun",
+      "full_stdout_archive_available": false
+    },
+    {
+      "tool_chunk": "385159",
+      "rules": [
+        "I001",
+        "B023"
+      ],
+      "stage": "A224 before native; bindings/import sorted then rerun",
+      "full_stdout_archive_available": false
+    },
+    {
+      "tool_chunk": "3b8687",
+      "rules": [
+        "I001"
+      ],
+      "stage": "independent A225 before native; import sorted then rerun",
+      "full_stdout_archive_available": false
+    }
+  ],
+  "directly_viewed": [
+    "a218/head-front-male.png",
+    "a218/head-side-male.png",
+    "a218/head-back-male.png",
+    "a218/head-front-female.png",
+    "a218/head-side-female.png",
+    "a218/head-back-female.png",
+    "a221/head-front-male.png",
+    "a221/head-side-male.png",
+    "a221/head-back-male.png",
+    "a221/head-front-female.png",
+    "a221/head-side-female.png",
+    "a221/head-back-female.png",
+    "a225/head-front-male.png",
+    "a225/head-side-male.png",
+    "a225/head-back-male.png",
+    "a225/head-front-female.png",
+    "a225/head-side-female.png",
+    "a225/head-back-female.png"
+  ],
+  "actual_renders": 30,
+  "new_blend_candidates": 2,
+  "browser_runs": [],
+  "GLB_files": 0,
+  "full_118_deformation_runs": 0,
+  "unexecuted_reason": "A218/A225 fail appearance; A225 also fails new individual coefficient guard. Early reject; GLB/full deformation/browser not claimed complete.",
+  "a220_field_interpretation": "numeric_skin_changed=288 is a historical sparse dictionary mismatch count. Actual numeric coefficient delta0; removed explicit zeros only. Original diagnosis report bytes are preserved.",
+  "a223_interpretation": "generated_only_tiny_face_native_dissolves=[] on both models; did not repair regression. A224 proves regression faces are NEW but not returned in bevel faces list, not old anatomy faces.",
+  "a225_interpretation": "producer geometry/sum-only checks terminal0; saved original/retained point preservation is independently confirmed A227, but new negative skin coefficients each1 fail A225/A226/A227. Not an overall pass.",
+  "current_development_asset": "A37",
+  "appearance_approved": false,
+  "service_adopted": false,
+  "pr_merge_allowed": false,
+  "stages_1_to_6_completed": false,
+  "camera_calls": 0,
+  "costs_accounts_secrets_production_DB_deploy_release": 0,
+  "next_safe_work": "Replace the unsupported bevel cap interpolation path with a local authored interface method; keep exact retained skin/coords/rig and require individual coefficients before saving. Reconstruct actual broad head-neck tangency/curvature rather than repeat bevel/smoothing or hide seam with lighting."
+}

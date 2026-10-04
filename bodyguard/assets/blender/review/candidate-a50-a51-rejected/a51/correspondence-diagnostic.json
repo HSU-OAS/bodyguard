@@ -1,0 +1,35 @@
+{
+  "blender": "5.1.1",
+  "source": "draft-a51-aligned-head.blend",
+  "read_only": true,
+  "source_saved": false,
+  "checks": [
+    {
+      "body": "Male",
+      "counts": [
+        809,
+        809
+      ],
+      "paired": 809,
+      "unresolved": 0,
+      "angles_mean": 0.0000011740822110257895,
+      "angles_p95": 0.0000033395074594045146,
+      "angles_max": 0.000008221244923995337,
+      "measurement": "Native loft-column azimuth mismatch relative ring centers; not joint/clinical targets"
+    },
+    {
+      "body": "Female",
+      "counts": [
+        706,
+        708
+      ],
+      "paired": 706,
+      "unresolved": 0,
+      "angles_mean": 0.00000143393226394224,
+      "angles_p95": 0.000003906389555125727,
+      "angles_max": 0.000007131671295686073,
+      "measurement": "Native loft-column azimuth mismatch relative ring centers; not joint/clinical targets"
+    }
+  ],
+  "note": "counts[1] includes near-plane non-boundary vertices; paired is the traced native boundary count"
+}

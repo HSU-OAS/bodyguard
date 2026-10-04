@@ -1,0 +1,105 @@
+// FR-A-03/07: actual artist/native evidence; not clinical or release approval.
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const assert=require('node:assert/strict'),{execFileSync}=require('node:child_process');
+const [root,tmp]=process.argv.slice(2),base='bodyguard/assets/blender/';
+const folder=base+'review/candidate-a70-a71-review/';
+const read=p=>fs.readFileSync(path.join(root,p)),json=p=>JSON.parse(read(p));
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+let assertions=0,png=0,links=0;
+const ok=(v,label)=>{assert(v,label);assertions++;};
+for(const [n,native,digest,bytes] of [
+['70b','draft-a70b-in-plane-registered-head.blend','d0c55dc6f25a034a9f1fac59e26022841e5598c2948e68947b46df60deb39058',29058002],
+['71','draft-a71-registered-surface-head.blend','6383829d3b631bf22c66bbce5472806f7fe9525dd3b6c554ad96ef4be3b5e0a5',29057410]
+]){
+ const b=read(base+'bodyguard_avatar_candidate_a'+n+'_review.blend');
+ ok(sha(b)===digest&&b.length===bytes&&b.equals(fs.readFileSync(path.join(tmp,native))),'exact native source '+n);
+ const g=json(folder+'a'+n+'/generation-report.json');
+ ok(g.length===2&&g.every(v=>v.retained_body_skin_hands_bones_rest_preserved&&v.preserved_external_body_source.cut_closed_cavity_count===0&&v.head_skin_correspondence.prepared_weights_preserved_during_registration),'actual body/skin/rig and cavity0');
+ ok(g.every(v=>v.head_authored_registration.final_cut_after_registration.final_plane_intercept_m===v.head_cut_m&&Math.abs(v.head_authored_registration.registration_plane_intercept_change_m)<1e-7&&v.artist_gap_m===0.024),'registered final plane no intercept drift');
+ ok(g.every(v=>v.head_authored_registration.registered_head_crown_m<v.head_authored_registration.original_body_crown_m),'explicit artist head crown change');
+ const q=json(folder+'a'+n+'/native-boundary-check.json');
+ ok(q.passed&&q.artist_fixture_only&&q.checks.length===13&&q.checks.every(c=>c.passed)&&q.checks.filter(c=>c.expected_rejection).length===4,'same13 native regressions');
+ const d=json(folder+'a'+n+'/final-seam-diagnostic.json');
+ ok(!d.source_saved&&d.source_sha256===digest,'read-only actual source diagnosis');
+ for(const [i,edges] of [[0,207],[1,267]]){
+  const v=d.rows[i];
+  ok(Math.abs(v.actual_artist_vertical_gap_m-0.024)<1e-7&&Math.abs(v.head_plane_intercept_change_from_xy_registration_m)<1e-7,'actual final gap24mm');
+  ok(v.rings.length===2&&v.rings.every(v=>v.edges===edges)&&v.artist_geometry_only_not_clinical_or_webcam_accuracy,'actual native artist edges not clinical');
+ }
+}
+const failure=json(folder+'a70/boundary-failure-diagnostic.json');
+ok(failure.native_boundary_edges===0&&failure.non_manifold_edges===0&&failure.mesh_vertices===67586,'actual failed head has no intersection');
+ok(!fs.existsSync(path.join(tmp,'draft-a70-registered-final-cut-head.blend'))&&!fs.existsSync(path.join(tmp,'a70-generation-report.json')),'failed A70 did not save candidate');
+ok(json(folder+'a70/native-boundary-check.json').checks.length===13,'A70 actual fixture only not source QA');
+for(const [file,rendered] of [['a70b/source-preflight-report.json',false],['a71/source/deformation-report.json',true],['a71/glb-deformation-report.json',false]]){
+ const q=json(folder+file),poses=q.checks.filter(c=>typeof c.edge_ratio_max==='number');
+ ok(q.passed&&!q.failures.length&&q.rendered===rendered&&q.checks.length===121&&poses.length===118,'actual QA '+file);
+ ok(poses.every(c=>Number.isFinite(c.edge_ratio_max)&&c.edge_ratio_max<3),'unchanged engineering guard');
+ ok(q.checks[0].surface_style==='unified-white-mannequin'&&!q.checks[0].garments.length,'no garments common finish');
+ ok(q.checks.filter(c=>c.surface&&c.pose==='neutral').every(c=>c.components===1&&!c.non_manifold&&!c.unnormalized),'closed normalized bodies');
+}
+const comparison=json(folder+'native-authored-comparison.json');
+ok(comparison.passed&&!comparison.source_saved&&comparison.artist_geometry_only,'independent actual comparison');
+ok(comparison.rows.length===2&&comparison.rows.every(v=>v.skin_hands_163bones_rest_matrices_identical),'all actual skin/hands/rig preserved');
+ok(comparison.rows[0].fixed_artist_points_and_skin===143493&&comparison.rows[1].fixed_artist_points_and_skin===142898,'actual retained coordinates+skin');
+ok(comparison.rows[0].changed_bridge_vertices===1242&&comparison.rows[1].changed_bridge_vertices===1602&&comparison.rows[0].added_surface_points_outside_cut_band===36,'native bridge-only edits and added overshoot not authored deletion');
+ok(JSON.stringify(comparison)===JSON.stringify(json(folder+'first-native-authored-comparison.json')),'formatted rerun identical actual outcome');
+const browser=json(folder+'a71/browser/playwright-report.json');
+ok(browser.stats.expected===3&&!browser.stats.unexpected&&!browser.stats.flaky&&!browser.stats.skipped,'three actual Chrome passes');
+const results=browser.suites.flatMap(s=>s.specs||[]).flatMap(s=>s.tests||[]).flatMap(t=>t.results);
+ok(results.length===3&&results.every(r=>r.status==='passed'),'actual browser results');
+const attachments=results.flatMap(r=>r.attachments||[]);
+for(const gender of ['male','female']){
+ const b=read(folder+'a71/glb/bodyguard-'+gender+'-candidate.glb');
+ ok(b.equals(fs.readFileSync(path.join(tmp,'glb-a71-registered-surface-head/bodyguard-'+gender+'-candidate.glb'))),'exact native GLB copy');
+ ok(b.toString('ascii',0,4)==='glTF'&&b.readUInt32LE(4)===2&&b.readUInt32LE(8)===b.length,'complete GLB2');
+ const g=JSON.parse(b.toString('utf8',20,20+b.readUInt32LE(12)));
+ ok(g.meshes.length===5&&g.skins.length===1&&g.skins[0].joints.length===163&&!(g.images||[]).length&&!(g.cameras||[]).length&&!(g.animations||[]).length,'neutral skin without references/coaching');
+ const node=g.nodes.find(v=>v.name==='BODYGUARD '+(gender==='male'?'Male':'Female')+' sculpt WIP');
+ ok(node.skin!==undefined&&g.meshes[node.mesh].primitives.every(p=>p.attributes.JOINTS_1!==undefined&&p.attributes.WEIGHTS_1!==undefined),'native second weight set');
+ const assets=attachments.filter(a=>a.name===gender+'-native-asset').map(a=>JSON.parse(Buffer.from(a.body,'base64')));
+ ok(assets.length===3&&assets.every(v=>v.sha256===sha(b)&&v.bytes===b.length),'Chrome loaded exact bytes');
+ const screenshot='bodyguard/frontend/test-results/avatar/avatar-A-06-실제-남녀-GLB-두-복제본을-로드하고-한쪽-기술-변형이-다른-뼈대를-바꾸지-않는다/'+(gender==='male'?'남성':'여성')+'-two-models.png';
+ ok(read(folder+'a71/browser/'+gender+'-two-models.png').equals(read(screenshot)),'actual Chrome screenshot bytes');
+}
+const renders=attachments.filter(a=>a.name.endsWith('technical-render')).map(a=>JSON.parse(Buffer.from(a.body,'base64')));
+ok(renders.length===2&&renders.every(v=>v.samples===180&&v.skeletons_independent&&v.static_angle_max===0&&v.moving_angle_max>0.1&&v.eight_weight_meshes===2),'independent skeletons not webcam accuracy');
+const execution=json(folder+'execution-record.json');
+ok(!execution.adopted_for_release&&execution.development_default==='A37'&&execution.invariants.story_appearance_p2_unresolved&&!execution.invariants.merge,'unresolved appearance not adopted/merged');
+ok(execution.observed_runs.find(r=>r.run==='A71 isolated actual Chrome').all_native_handles_terminal_before_browser,'ordered native then browser');
+ok(execution.observed_runs.filter(r=>r.exit_code===1).length===4&&execution.unrun.length===7&&execution.unrun.some(v=>v.startsWith('A70b'))&&execution.unrun.some(v=>v.includes('actual performer')),'failures/unrun not passed');
+const files=[],markdown=['bodyguard/docs/avatar-production.md','bodyguard/docs/stories/stage2-avatar-candidate.md'];
+function walk(relative){
+ for(const e of fs.readdirSync(path.join(root,relative),{withFileTypes:true})){
+  if(e.name==='evidence-audit.json')continue;
+  const p=relative+e.name;
+  if(e.isDirectory()){walk(p+'/');continue;}
+  const b=read(p);files.push({file:p,bytes:b.length,sha256:sha(b)});
+  if(e.name.endsWith('.md'))markdown.push(p);
+  if(e.name.endsWith('.png')){
+   ok(b.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])),'actual PNG');
+   if(p.includes('/a70b/first/'))ok(b.equals(fs.readFileSync(path.join(tmp,'a70b-first-preview',e.name))),'A70b native render copy');
+   else if(p.includes('/a71/source/'))ok(b.equals(fs.readFileSync(path.join(tmp,'a71-source-full-review',e.name))),'A71 full native render copy');
+   else ok(b.readUInt32BE(16)===1440&&b.readUInt32BE(20)===1080,'actual Chrome viewport');
+   png++;
+  }
+ }
+}
+walk(folder);ok(png===44,'eight+thirtyfour+two actual PNG');
+for(const file of markdown)for(const m of read(file).toString().matchAll(/!?\[[^\]]*\]\(([^\)]+)\)/g)){
+ const target=m[1].split('#')[0];
+ if(!target||/^(https?:|codex:|mailto:)/.test(target))continue;
+ const resolved=path.resolve(root,path.dirname(file),target);
+ if(resolved===path.join(root,folder,'evidence-audit.json'))continue;
+ ok(fs.existsSync(resolved),'local link '+target);links++;
+}
+const prev=base+'review/candidate-a68-a69-review/evidence-audit-post-format.json';
+for(const f of json(prev).manifest)ok(sha(read(f.file))===f.sha256,'prior evidence unchanged '+f.file);
+ok(read(prev).equals(execFileSync('git',['show','51593b43dd5a0ee8f1a6c3c19a0dd3fdd8f66a35:'+prev],{cwd:root})),'previous audit result unchanged too');
+for(const [file,digest] of [
+['bodyguard_avatar_candidate_a68_rejected.blend','90ae490e0161e07bc1dff31298cb1017749668b86524b48c746800712c24c0a0'],
+['bodyguard_avatar_candidate_a69_review.blend','8c31fbb8d40c81b45ad0b893de6f9837e7ee4f43165f73f20ce4f20f5c1a817c'],
+['replace_neck_from_artist.py','774b34a1330548f9e6dfe087f0bd561bff5ba934577df9d0f07668b6a603f7d0']
+])ok(sha(read(base+file))===digest,'prior source/helper unchanged');
+ok(execFileSync('git',['diff','HEAD','--name-only','--',base+'bodyguard_avatar_candidate_a37.blend','bodyguard/frontend','bodyguard/backend','bodyguard/AGENTS.md','bodyguard/docs/operating-rules.md','bodyguard/docs/release-plan.md'],{cwd:root,encoding:'utf8'}).trim()==='','default/service/approval/gates unchanged');
+console.log(JSON.stringify({passed:true,assertions,actual_png:png,local_links:links,generated_result_self_link:'verify after saving actual output',files:files.length,manifest:files},null,2));

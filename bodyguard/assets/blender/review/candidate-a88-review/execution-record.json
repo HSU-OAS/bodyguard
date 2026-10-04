@@ -1,0 +1,158 @@
+{
+  "date": "2026-10-02",
+  "branch": "codex/stage2-avatar-candidate",
+  "base_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "previous_head": "faa72ca23dd3b5df3de99305797098fa224adbe3",
+  "latest_ceo_reference": {
+    "sha256": "45b313912dee5ae2218b1fe76086abb35a9b948fab9e877f1a9d2b05f832de62",
+    "purpose": "modeling-only face/neck continuity reference; replaces female clothing request; not GLB/marketing redistribution",
+    "appearance_passed": false
+  },
+  "runs": [
+    {
+      "name": "root-probe-first-failed",
+      "exit": 1
+    },
+    {
+      "name": "root-probe-depsgraph-update",
+      "exit": 0
+    },
+    {
+      "name": "nearest-root-native-guard-failed",
+      "exit": 1
+    },
+    {
+      "name": "target-normal-surface-bridge-budget-failed",
+      "exit": 1
+    },
+    {
+      "name": "target-normal-linear-source",
+      "exit": 0
+    },
+    {
+      "name": "saved-body-compare",
+      "exit": 0
+    },
+    {
+      "name": "source118-and34png",
+      "exit": 0
+    },
+    {
+      "name": "native-export-import",
+      "exit": 0
+    },
+    {
+      "name": "import118",
+      "exit": 0
+    },
+    {
+      "name": "import-first8",
+      "exit": 0
+    },
+    {
+      "name": "isolated-chrome3",
+      "exit": 0
+    }
+  ],
+  "failures": [
+    {
+      "name": "root-probe-first-failed",
+      "exit": 1,
+      "observed_terminal_output": "00:00.635  blend            | Read blend: \"/private/tmp/bodyguard-tailor.6b7Uvu/draft-a87-clean-native-head.blend\"\nTraceback (most recent call last):\n  File \"/private/tmp/bodyguard-tailor.6b7Uvu/a88-head-root-correspondence.py\", line 31, in <module>\n    assert donor.matrix_world == body.matrix_world\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n\nError: script failed, file: '/private/tmp/bodyguard-tailor.6b7Uvu/a88-head-root-correspondence.py', exiting.\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+    },
+    {
+      "name": "nearest-root-native-guard-failed",
+      "exit": 1,
+      "observed_terminal_output": "00:00.820  blend            | Read blend: \"/private/tmp/bodyguard-tailor.6b7Uvu/draft-a81h-simple-facial-retopology.blend\"\nTraceback (most recent call last):\n  File \"/private/tmp/bodyguard-tailor.6b7Uvu/a88-authored-head-root-fitting.py\", line 891, in <module>\n    main()\n    ~~~~^^\n  File \"/private/tmp/bodyguard-tailor.6b7Uvu/a88-authored-head-root-fitting.py\", line 658, in main\n    density = align_neck_boundary_samples(bm, edges, original, helper.closed_loops)\n  File \"/private/tmp/bodyguard-tailor.6b7Uvu/a88-authored-head-root-fitting.py\", line 204, in align_neck_boundary_samples\n    assert all(isfinite(length) and length > 1e-10 for length in lengths)\n           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n\nError: script failed, file: '/private/tmp/bodyguard-tailor.6b7Uvu/a88-authored-head-root-fitting.py', exiting.\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+    },
+    {
+      "name": "target-normal-surface-bridge-budget-failed",
+      "exit": 1,
+      "observed_terminal_output": "00:00.624  blend            | Read blend: \"/private/tmp/bodyguard-tailor.6b7Uvu/draft-a81h-simple-facial-retopology.blend\"\nACTUAL NATIVE CUT EDGE LENGTHS 400 1.7376481924753936e-05 0.008083348029299326\nACTUAL NATIVE CUT EDGE LENGTHS 114 0.0014030172324141096 0.004467954549415204\nTraceback (most recent call last):\n  File \"/private/tmp/bodyguard-tailor.6b7Uvu/a88c-target-normal-head-root.py\", line 900, in <module>\n    main()\n    ~~~~^^\n  File \"/private/tmp/bodyguard-tailor.6b7Uvu/a88c-target-normal-head-root.py\", line 741, in main\n    assert isfinite(displacement) and displacement < 0.006, (\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Excessive anatomical surface change\nNEW BRIDGE ONLY ARTIST DISPLACEMENT Male 0.011458614199868449\n\nError: script failed, file: '/private/tmp/bodyguard-tailor.6b7Uvu/a88c-target-normal-head-root.py', exiting.\nBlender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)\n\nBlender quit\n"
+    }
+  ],
+  "all_native_actors_terminal_before_chrome": true,
+  "actual_source_png": 34,
+  "actual_import_png": 8,
+  "actual_browser_png": 2,
+  "source_png_viewed": [
+    "faceless-front.png",
+    "faceless-quarter.png",
+    "faceless-body-side-male.png",
+    "faceless-body-back-male.png",
+    "faceless-hand-male.png",
+    "faceless-knee-male.png",
+    "faceless-side-male.png",
+    "faceless-neck-male-left.png",
+    "faceless-neck-male-right.png",
+    "faceless-body-side-female.png",
+    "faceless-body-back-female.png",
+    "faceless-hand-female.png",
+    "faceless-knee-female.png",
+    "faceless-side-female.png",
+    "faceless-neck-female-left.png",
+    "faceless-neck-female-right.png"
+  ],
+  "import_png_viewed": [
+    "first-front.png",
+    "first-quarter.png",
+    "first-side-male.png",
+    "first-back-male.png",
+    "first-neck-male-left.png",
+    "first-side-female.png",
+    "first-back-female.png",
+    "first-neck-female-left.png"
+  ],
+  "browser_png_viewed": [
+    "male-two-models.png",
+    "female-two-models.png"
+  ],
+  "actual_png_viewed": 26,
+  "ceo_reference_png": 1,
+  "full34_import": "NOT RUN",
+  "native_source_sha256": "2ac97889b600c92a3519d2ae7dbc2f4834a9f350727a98a3f7706fd5d209e48b",
+  "script_checks": {
+    "six_native_files_full_ruff_exit": 0,
+    "six_native_files_format_check_exit": 0,
+    "preserver_node_syntax_exit": 0,
+    "whole_repository_style": "NOT RUN"
+  },
+  "browser": {
+    "device": "Mac16,12",
+    "cpu": "Apple M4",
+    "memory_bytes": 17179869184,
+    "chrome": "154.0.8037.93",
+    "headless": true,
+    "viewport": [
+      1440,
+      1080
+    ],
+    "dpr": 1,
+    "actual_tests": 3,
+    "duration_ms": 42240.925,
+    "camera_calls": 0,
+    "api_sql_smtp_google": "NOT RUN; guest401/model503 synthetic, WebGL loss/restore actual",
+    "external_egress": "owned non-listening native proxy A-00 actual PASS",
+    "raf_not_gpu_or_camera_latency": true
+  },
+  "appearance_passed": false,
+  "accepted_candidate": false,
+  "merge_allowed": false,
+  "stages1_to6_passed": false,
+  "release_approved": false,
+  "development_default": "A37 unchanged",
+  "next_safe_edit": "Use A37's professionally derived continuous face/neck form matching the new reference more closely; local posterior-neck refinement with preserved front/head/rig, then fresh source/GLB/deformation/browser/appearance checks. Do not restart whole-head graft smoothing.",
+  "notes": [
+    "Read-only historical evidence audit first used a nonexistent candidate-a83-a85-review/evidence-audit.cjs path (MODULE_NOT_FOUND/exit1), then the correct evidence-check.cjs without its required absolute root (AssertionError/exit1). After reading the auditor, the correct command with the absolute repository root actually passed/exit0. A86, A87 and new A88 integrity checks also actually passed; no old evidence was edited and these tooling errors are not native model failures.",
+    "Runs are grouped, not wall-clock chronology. Yielded native/browser actors were awaited to terminal, not restarted on timeout. Empty-scene Blender property enum query exited0, with no source loaded/saved.",
+    "The source retained A81h body75915/75865 points/named skin, hands and163rest bones/matrices in a saved-file independent comparison. Replacement head topology/binding/new cut/bridge are artist edits; no claim of identical whole-mesh source topology.",
+    "A88 first nearest fitting stopped at finite/nondegenerate cut-edge guard before saving; A88c target-normal cut lengths were nonzero but surface bridge fairing moved11.458614mm, failing unchanged6mm guard. Frozen scripts/errors preserved; no failed saved source exists.",
+    "A88d native TARGET_PROJECT lower-head fit artist changes39.871/36.840mm before cut/bridge; not an anatomical target. Upper head51285/51677 points exact at that native stage, not an independent whole saved upper-head comparison.",
+    "A88d LINEAR bridge-only native fairing maximum.849066/.834712mm below unchanged6mm guard. Whole old skin/rig preserved only for retained body; new head binding comes from continuous A60 coords with A63 TOPOLOGY/NAME skin. Source/import118 pass is not appearance/anatomical/exercise/clinical approval.",
+    "Rendered34source+8import+2browser; directly viewed16source+8import+2browser, not all44. User reference viewed separately and preserved as modeling-only.",
+    "Appearance failed: under-jaw notch/collar-like disconnect and head silhouette do not match latest reference. A37 archived actual front/side/neck previews compared read-only; not represented as a freshly modified or revalidated A37 model.",
+    "Native export limited1209933 male/1272531 female weights, five male parent warnings. Browser NO_COLOR/Clock/WebGL cleanup warnings and injected503 retained; not clean logs.",
+    "20-degree technical stress and180RAF are not clinical range, actual people/camera inference or target laptop acceptance. No new dependencies, framework, primitive body, whole body remesh, coordinate clamping, QA weakening, provider connections/accounts/secrets/cost/operating migrations/deploy/release.",
+    "Full import34, whole service/API/Vitest/typecheck/build/whole repository style, live people/camera/pose/video, demos/retarget/compound motions/multiple devices/long-duration/GPU timings/target laptop/provider/expert tests remain NOT RUN."
+  ]
+}

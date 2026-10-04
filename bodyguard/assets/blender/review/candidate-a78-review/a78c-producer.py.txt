@@ -1,0 +1,157 @@
+"""FR-A-02/03/04: native local cervical fairing, never an avatar generator.
+
+Run on preserved A77 with explicit new .blend/.json and 8 iterations.
+The old bridge pinned both cut rings: this edit includes both tangent bands.
+Coordinates outside the band, all skin/topology/hands/rig stay unchanged.
+The existing 6mm displacement guard and complete QA remain required.
+"""
+
+import json
+import sys
+from hashlib import file_digest
+from math import acos, degrees, isfinite
+from pathlib import Path
+
+import bmesh
+import bpy
+from mathutils import Vector
+
+
+def ramp(value):
+    """FR-A-03: finite smooth mask, not a medical or exercise threshold."""
+    if not isfinite(value):
+        raise ValueError("Non-finite artist mask")
+    if value <= 0:
+        return 0.0
+    if value >= 1:
+        return 1.0
+    return value * value * (3 - 2 * value)
+
+
+def ring_angles(body, rings):
+    bm = bmesh.new()
+    bm.from_mesh(body.data)
+    bm.normal_update()
+    bm.verts.ensure_lookup_table()
+    result = {}
+    for role, indices in rings.items():
+        ids = set(indices)
+        angles = sorted(
+            degrees(acos(max(-1.0, min(1.0, e.link_faces[0].normal.dot(e.link_faces[1].normal)))))
+            for e in bm.edges
+            if all(v.index in ids for v in e.verts) and len(e.link_faces) == 2
+        )
+        assert len(angles) == len(ids), "Use only saved actual authored cut rings"
+        result[role] = {
+            "edges": len(angles),
+            "median_degrees": angles[len(angles) // 2],
+            "p95_degrees": angles[int(0.95 * (len(angles) - 1))],
+            "max_degrees": angles[-1],
+        }
+    bm.free()
+    return result
+
+
+def main():
+    # FR-A-03: runnable mask/input boundary check before any native mutation.
+    assert [ramp(x) for x in (-1, 0, 0.5, 1, 2)] == [0, 0, 0.5, 1, 1]
+    for invalid in (float("nan"), float("inf")):
+        try:
+            ramp(invalid)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("Reject invalid mask")
+    args = sys.argv[sys.argv.index("--") + 1:]
+    if len(args) != 3 or args[2] != "8":
+        raise ValueError("Explicit new .blend/.json and 8 native iterations required")
+    output, report_path = map(Path, args[:2])
+    source = Path(bpy.data.filepath)
+    if output.suffix != ".blend" or report_path.suffix != ".json":
+        raise ValueError("Explicit output file types required")
+    if len({p.resolve() for p in (source, output, report_path)}) != 3:
+        raise ValueError("Never overwrite input/evidence")
+    if output.exists() or report_path.exists():
+        raise FileExistsError("Preserve previous evidence")
+    with source.open("rb") as file:
+        digest = file_digest(file, "sha256").hexdigest()
+    assert digest == "5f158d9ad9cbba42e6eaf143eed761d3eabdc3fc46c4f30b860799963999dcf3"
+    iterations = int(args[2])
+    reports = []
+    for label in ("Male", "Female"):
+        body = bpy.data.objects[f"BODYGUARD {label} sculpt WIP"]
+        rig = bpy.data.objects[f"BODYGUARD {label} rig WIP"]
+        assert len(body.modifiers) == 1 and body.modifiers[0].object == rig
+        assert len(rig.data.bones) == 163
+        assert all(b.matrix_basis.is_identity for b in rig.pose.bones)
+        rest = [(b.name, tuple(tuple(row) for row in b.matrix_local)) for b in rig.data.bones]
+        matrices = (body.matrix_world.copy(), rig.matrix_world.copy())
+        points = [v.co.copy() for v in body.data.vertices]
+        skin = [tuple((g.group, g.weight) for g in v.groups) for v in body.data.vertices]
+        edges = [tuple(e.vertices) for e in body.data.edges]
+        polygons = [tuple(p.vertices) for p in body.data.polygons]
+        rings = {role: list(body[f"bodyguard_authored_cervical_{role}_ring"]) for role in ("body", "head")}
+        normal = Vector((0, -0.6, 1))
+        planes = [sum(normal.dot(points[i]) for i in rings[role]) / len(rings[role]) for role in ("body", "head")]
+        assert abs(planes[1] - planes[0] - 0.024) < 1e-6
+        before_angles = ring_angles(body, rings)
+        mask = body.vertex_groups.new(name="Artist cervical tangent band QA required")
+        mask_name = mask.name
+        selected = set()
+        # FR-A-02/03: fade through the existing authored tangent neighborhood,
+        # not a newly synthesized body, global remesh or post-hoc coordinate clamp.
+        margin = 0.03
+        for v in body.data.vertices:
+            projection = normal.dot(v.co)
+            weight = ramp((projection - planes[0] + margin) / margin)
+            weight *= ramp((planes[1] + margin - projection) / margin)
+            if weight:
+                mask.add([v.index], weight, "REPLACE")
+                selected.add(v.index)
+        hands = set(body["bodyguard_distal_hand_vertices"])
+        assert selected and not (selected & hands)
+        assert set(rings["body"]) | set(rings["head"]) <= selected
+        bpy.ops.object.select_all(action="DESELECT")
+        body.select_set(True)
+        bpy.context.view_layer.objects.active = body
+        finish = body.modifiers.new("Native cross-cut tangent fairing QA required", "CORRECTIVE_SMOOTH")
+        finish.vertex_group = mask_name
+        finish.factor = 0.15
+        finish.iterations = iterations
+        finish.smooth_type = "LENGTH_WEIGHTED"
+        finish.use_only_smooth = True
+        bpy.ops.object.modifier_move_up(modifier=finish.name)
+        bpy.ops.object.modifier_apply(modifier=finish.name)
+        body.vertex_groups.remove(body.vertex_groups[mask_name])
+        assert len(points) == len(body.data.vertices)
+        assert skin == [tuple((g.group, g.weight) for g in v.groups) for v in body.data.vertices]
+        assert edges == [tuple(e.vertices) for e in body.data.edges]
+        assert polygons == [tuple(p.vertices) for p in body.data.polygons]
+        assert all(tuple(v.co) == tuple(points[v.index]) for v in body.data.vertices if v.index not in selected)
+        displacement = max((v.co - points[v.index]).length for v in body.data.vertices)
+        print("ACTUAL CERVICAL TANGENT DISPLACEMENT", label, displacement, flush=True)
+        assert isfinite(displacement) and displacement < 0.006, "Existing 6mm guard unchanged"
+        assert rest == [(b.name, tuple(tuple(row) for row in b.matrix_local)) for b in rig.data.bones]
+        assert matrices == (body.matrix_world, rig.matrix_world)
+        assert all(all(isfinite(c) for c in v.co) for v in body.data.vertices)
+        reports.append({
+            "body": label, "source_sha256": digest, "iterations": iterations,
+            "modifier": "CORRECTIVE_SMOOTH/LENGTH_WEIGHTED/only-smooth",
+            "factor": 0.15, "artist_mask_margin_m": margin,
+            "selected_vertices": len(selected),
+            "outside_band_exact_vertices": len(points) - len(selected),
+            "maximum_artist_displacement_m": displacement,
+            "all_skin_topology_hands_163_bones_rest_matrices_preserved": True,
+            "historical_cut_ring_angles_before": before_angles,
+            "historical_cut_ring_angles_after": ring_angles(body, rings),
+            "cut_ring_ids_are_historical_not_planar_after_edit": True,
+            "source_glb_full_deformation_browser_appearance_qa": "NOT RUN",
+        })
+    report_path.write_text(json.dumps(reports, indent=2) + "\n")
+    bpy.context.scene["bodyguard_stage"] = "S2.4 cervical tangent-band candidate; ALL QA pending; NOT release"
+    bpy.context.preferences.filepaths.save_version = 0
+    bpy.ops.wm.save_as_mainfile(filepath=str(output), compress=True)
+
+
+if __name__ == "__main__":
+    main()

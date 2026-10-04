@@ -1,0 +1,13 @@
+Observed tool-output excerpt, not a complete process stdout archive.
+
+ACTUAL FAILED BOUNDARY DIAGNOSIS {"read_only_boundary_probe": true, "body": "Male", "cage_delta_m": 0.053592334735057465, "selected_cage": 3429, "source_height_m": 1.684413194656372, "input_crown_m": 1.6846270561218262, "cut_m": 1.4336255388259886, "new_ring_points": 132, "saved_ring_points": 132, "ring_max_nearest_distance_m": 1.1872405593749136e-05, "ring_mean_nearest_distance_m": 1.2835829546728208e-06, "surface_deform_rna": ["rna_type", "name", "type", "show_viewport", "show_render", "show_in_editmode", "show_on_cage", "show_expanded", "is_active", "use_pin_to_last", "is_override_data", "use_apply_on_spline", "execution_time", "persistent_uid", "target", "falloff", "is_bound", "vertex_group", "invert_vertex_group", "use_sparse_bind", "strength"], "candidate_saved": false}
+Traceback (most recent call last):
+  File "/private/tmp/bodyguard-tailor.6b7Uvu/a79c-cage-boundary-probe.py", line 186, in <module>
+    assert len(upper) == len(boundary) and set(map(lambda v: key(v.co), upper)) == boundary.keys()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+Error: script failed, file: '/private/tmp/bodyguard-tailor.6b7Uvu/a79c-cage-boundary-probe.py', exiting.
+Blender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)
+
+Blender quit

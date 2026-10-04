@@ -1,0 +1,114 @@
+{
+  "date": "2026-10-03",
+  "story": "S2.4a/FR-A-02/03/08 existing Draft PR #9 appearance diagnosis",
+  "head_before": "f20b43239ef114f413313f7ad0a9bb1b4338d58e",
+  "origin_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "source": {
+    "file": "bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend",
+    "bytes": 29667488,
+    "sha256": "9191a2c1a0bd7bf4bb3ae3c358f911188052e9c204d4c4f74783806fb937b661"
+  },
+  "runs": [
+    {
+      "name": "A110 fixed fairing after repaired disk memory trial",
+      "session": 12190,
+      "exit_code": 0,
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec \"bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-tailor.6b7Uvu/a110-repaired-surface-dryrun.py\" -- \"/private/tmp/bodyguard-tailor.6b7Uvu/a110-repaired-surface-trial\""
+    },
+    {
+      "name": "A111 read-only boundary and native RNA probe",
+      "session": 80472,
+      "exit_code": 0,
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec \"bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-tailor.6b7Uvu/a111-grid-boundary-probe.py\" -- \"/private/tmp/bodyguard-tailor.6b7Uvu/a111-grid-boundary.json\""
+    },
+    {
+      "name": "A112 curved native Grid Fill; female boundary guard stopped before edit",
+      "session": 99390,
+      "exit_code": 1,
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec \"bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-tailor.6b7Uvu/a112-posterior-grid-dryrun.py\" -- \"/private/tmp/bodyguard-tailor.6b7Uvu/a112-posterior-grid-trial\""
+    },
+    {
+      "name": "A113 simple native grid plus original professional surface conformance",
+      "session": 19961,
+      "exit_code": 0,
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec \"bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-tailor.6b7Uvu/a113-simple-conformed-grid-dryrun.py\" -- \"/private/tmp/bodyguard-tailor.6b7Uvu/a113-simple-conformed-grid-trial\""
+    },
+    {
+      "name": "A114 explicit native span/corner plus simple grid and original surface conformance",
+      "session": 17162,
+      "exit_code": 0,
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec \"bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-tailor.6b7Uvu/a114-explicit-grid-dryrun.py\" -- \"/private/tmp/bodyguard-tailor.6b7Uvu/a114-explicit-grid-trial\""
+    }
+  ],
+  "copies": 42,
+  "gzip": 11,
+  "new_png": 17,
+  "directly_viewed_png": 11,
+  "observed_images": [
+    "curved-grid/female-before-posterior.png",
+    "curved-grid/male-before-posterior.png",
+    "curved-grid/male-grid-posterior.png",
+    "explicit-grid/female-grid-posterior.png",
+    "explicit-grid/male-grid-posterior.png",
+    "fairing/female-after-posterior.png",
+    "fairing/female-repaired-fairing-posterior.png",
+    "fairing/male-after-posterior.png",
+    "fairing/male-repaired-fairing-posterior.png",
+    "simple-grid/female-grid-posterior.png",
+    "simple-grid/male-grid-posterior.png"
+  ],
+  "source_saved": false,
+  "new_blend_files": 0,
+  "new_glb_files": 0,
+  "new_full_deformation_qa": false,
+  "new_browser_comparison": false,
+  "human_camera_capture": false,
+  "human_coordinate_collection": false,
+  "appearance_passed": false,
+  "adopted": false,
+  "release_approved": false,
+  "stages_1_to_6_complete": false,
+  "pr9_merge_allowed": false,
+  "limitations": [
+    "Native exit 0 records execution completion, NOT geometry, appearance or release approval. A110/A113/A114 geometry guards explicitly failed for both bodies.",
+    "A112 stopped with exit 1 at the female odd boundary before female editing. Only one male report row and three PNG exist; no female after image or completed female trial.",
+    "Envelope values are sampled, not exhaustive surface/Hausdorff, anatomy, collisions, deformation or clinical correctness. A114 female distance <6mm does NOT override its 2352 folds.",
+    "All retained coordinates/skin, protected hands, 163 rest/world matrices and unmodified face winding were asserted exact in memory. Grid trials remove local points and create new interpolated skin, so whole topology is NOT identical. Normalized skin is not correct deformation proof.",
+    "Only 11 of the 17 new PNG were directly opened; the other six are preserved unviewed before images. Do not claim all images reviewed.",
+    "Observed tool chunks only, not independently captured complete stdout. A110 replays exact historical A108 and applies fixed A89 fairing, not a newly saved source.",
+    "Existing A106 full source/GLB 118-pose and Chrome results are prior evidence, not rerun for A110-A114. No GLB/export/full deformation/browser/human/operational change in these trials."
+  ],
+  "static_verification": {
+    "default_ruff_exit": 0,
+    "isolated_E4_E7_E9_F_I_B_exit": 0,
+    "format_88_check_exit": 0,
+    "prior_a106_checker_exit": 0,
+    "prior_a107_a109_checker_exit": 0,
+    "historical_failures": "Mechanical formatting and A113 bound lambda default corrected before native execution. Historical A100 S102 remains separate, not cleared."
+  },
+  "review": {
+    "archive_checker_exit": 0,
+    "prior_a106_checker_exit": 0,
+    "prior_a107_a109_checker_exit": 0,
+    "node_syntax_checks_exit": 0,
+    "targeted_secret_text_files": 31,
+    "targeted_secret_findings": 0,
+    "exhaustive_security_audit": false,
+    "remote_read": {
+      "head": "f20b43239ef114f413313f7ad0a9bb1b4338d58e",
+      "main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+      "state": "OPEN",
+      "draft": true,
+      "mergeable": "MERGEABLE",
+      "merge_state": "CLEAN",
+      "checks": "none",
+      "is_before_this_commit_not_a_new_head_verification": true
+    },
+    "appearance_p2_open": [
+      "A-02",
+      "A-08"
+    ],
+    "merge_allowed": false,
+    "next": "Reject this broad bounding-box automatic grid strategy; inspect ordered anatomical boundary correspondence/quad flow before another edit. No smoothing-strength, arbitrary span/corner, normal or lighting workaround."
+  }
+}

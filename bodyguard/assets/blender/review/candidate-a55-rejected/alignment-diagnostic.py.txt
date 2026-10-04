@@ -1,0 +1,16 @@
+import bpy,bmesh,json
+report=json.load(open("/private/tmp/bodyguard-tailor.6b7Uvu/a55-generation.json"))
+for info in report:
+ body=bpy.data.objects["BODYGUARD "+info["body"]+" sculpt WIP"]
+ rig=bpy.data.objects["BODYGUARD "+info["body"]+" rig WIP"]
+ mesh=bmesh.new();mesh.from_mesh(body.data)
+ rows={}
+ for label,z in (("body_cut",info["cut_m"]),("head_cut",info["head_cut_m"])):
+  points={v for edge in mesh.edges if all(abs(v.co.z-z)<1e-6 for v in edge.verts) for v in edge.verts}
+  rows[label]={"vertices":len(points),"center_xy_m":[(min(v.co[a] for v in points)+max(v.co[a] for v in points))/2 for a in (0,1)],"bounds_xy_m":[[min(v.co[a] for v in points),max(v.co[a] for v in points)] for a in (0,1)]}
+ transform=body.matrix_world.inverted()@rig.matrix_world
+ rows["bone_heads_body_m"]={n:list(transform@rig.data.bones[n].head_local) for n in ("neck01","neck02","neck03","head")}
+ rows["head_minus_body_center_xy_m"]=[a-b for a,b in zip(rows["head_cut"]["center_xy_m"],rows["body_cut"]["center_xy_m"],strict=True)]
+ print("NATIVE CUT ALIGNMENT",info["body"],json.dumps(rows))
+ mesh.free()
+print("READ ONLY; SOURCE UNSAVED; ARTIST COORDINATES ONLY")

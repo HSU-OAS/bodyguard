@@ -1,0 +1,97 @@
+"""FR-A-02/03: read-only connected-surface diagnosis, no source save or body generation."""
+
+import json
+import sys
+from hashlib import file_digest
+from pathlib import Path
+
+import bmesh
+import bpy
+from mathutils import Vector
+from mathutils.bvhtree import BVHTree
+
+output = Path(sys.argv[sys.argv.index("--") + 1])
+assert output.suffix == ".json" and not output.exists()
+source = Path(bpy.data.filepath)
+with source.open("rb") as file:
+    digest = file_digest(file, "sha256").hexdigest()
+rows = []
+for label in ("Male", "Female"):
+    body = bpy.data.objects[f"BODYGUARD {label} sculpt WIP"]
+    bm = bmesh.new()
+    bm.from_mesh(body.data)
+    bm.verts.index_update()
+    unseen, components = set(bm.verts), []
+    while unseen:
+        stack, points = [unseen.pop()], set()
+        while stack:
+            vertex = stack.pop()
+            points.add(vertex)
+            for edge in vertex.link_edges:
+                for other in edge.verts:
+                    if other in unseen:
+                        unseen.remove(other)
+                        stack.append(other)
+        components.append(points)
+    components.sort(key=len, reverse=True)
+    outer = components[0]
+    indices = {v: i for i, v in enumerate(outer)}
+    faces = [f for f in bm.faces if f.verts[0] in outer]
+    tree = BVHTree.FromPolygons(
+        [v.co for v in outer], [[indices[v] for v in f.verts] for f in faces]
+    )
+    deform = bm.verts.layers.deform.active
+    component_rows = []
+    for position, points in enumerate(components):
+        record = {
+            "vertices": len(points),
+            "faces": sum(f.verts[0] in points for f in bm.faces),
+            "bounds_m": [
+                [min(v.co[i] for v in points), max(v.co[i] for v in points)] for i in range(3)
+            ],
+            "weights": sorted(
+                {
+                    body.vertex_groups[g].name
+                    for v in points
+                    for g, w in v[deform].items()
+                    if w > 0.01
+                }
+            ),
+        }
+        if position:
+            parity_rows = []
+            for direction in (
+                Vector((1, 0.137, 0.391)),
+                Vector((0.281, 1, 0.197)),
+                Vector((0.167, 0.193, 1)),
+            ):
+                direction.normalize()
+                inside = 0
+                for vertex in points:
+                    origin, crossings = vertex.co.copy(), 0
+                    for _ in range(200):
+                        hit, _, _, _ = tree.ray_cast(origin, direction, 3)
+                        if hit is None:
+                            break
+                        crossings += 1
+                        origin = hit + direction * 0.00001
+                    else:
+                        raise AssertionError("Unresolved component containment")
+                    inside += crossings % 2
+                parity_rows.append(inside)
+            record["outer_inside_vertices_three_directions"] = parity_rows
+            local_ids = {v: i for i, v in enumerate(points)}
+            inner_faces = [f for f in bm.faces if f.verts[0] in points]
+            inner = BVHTree.FromPolygons(
+                [v.co for v in points], [[local_ids[v] for v in f.verts] for f in inner_faces]
+            )
+            record["outer_surface_overlap_pairs"] = len(tree.overlap(inner))
+        component_rows.append(record)
+    rows.append({"body": label, "components": component_rows})
+    bm.free()
+with source.open("rb") as file:
+    assert file_digest(file, "sha256").hexdigest() == digest
+output.write_text(
+    json.dumps({"source_sha256": digest, "source_saved": False, "rows": rows}, indent=2) + "\n"
+)
+print("ACTUAL READ-ONLY CONNECTED-SURFACE DIAGNOSIS", json.dumps(rows))

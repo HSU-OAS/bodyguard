@@ -1,0 +1,89 @@
+"""FR-A-02/03: read-only artist head cut sections; no clinical targets."""
+
+import json
+import sys
+from pathlib import Path
+
+import bmesh
+import bpy
+from mathutils import Vector
+
+
+def section(mesh, plane):
+    copy = mesh.copy()
+    bmesh.ops.bisect_plane(
+        copy,
+        geom=list(copy.verts) + list(copy.edges) + list(copy.faces),
+        plane_co=(0, 0, plane),
+        plane_no=(0, 0, 1),
+        dist=1e-8,
+        clear_inner=True,
+    )
+    edges = [e for e in copy.edges if e.is_boundary]
+    ring = {v for e in edges for v in e.verts}
+    assert ring and all(abs(v.co.z - plane) < 1e-6 for v in ring)
+    ranges = [[min(v.co[a] for v in ring), max(v.co[a] for v in ring)] for a in (0, 1)]
+    result = {
+        "plane_m": plane,
+        "contour_vertices": len(ring),
+        "xy_range_m": ranges,
+        "width_depth_m": [high - low for low, high in ranges],
+        "center_xy_m": [(low + high) / 2 for low, high in ranges],
+    }
+    copy.free()
+    return result
+
+
+generation, professional, output = map(Path, sys.argv[sys.argv.index("--") + 1 :])
+if output.exists():
+    raise FileExistsError("Preserve prior diagnostic evidence")
+reports = []
+for info in json.loads(generation.read_text()):
+    body = bpy.data.objects[f"BODYGUARD {info['body']} sculpt WIP"]
+    with bpy.data.libraries.load(str(professional)) as (available, loaded):
+        assert info["head_source"] in available.objects
+        loaded.objects = [info["head_source"]]
+    head = loaded.objects[0]
+    bpy.context.scene.collection.objects.link(head)
+    bpy.context.view_layer.update()
+    authored_world = head.matrix_world.copy()
+    mesh = bmesh.new()
+    mesh.from_mesh(head.data)
+    face = [v for v in mesh.verts if v.co.y < -0.025]
+    for _ in range(18):
+        bmesh.ops.smooth_vert(
+            mesh, verts=face, factor=0.65, use_axis_x=False, use_axis_y=True, use_axis_z=False
+        )
+    mesh.to_mesh(head.data)
+    mesh.free()
+    assert len(head.modifiers) == 1 and head.modifiers[0].type == "SUBSURF"
+    head.modifiers[0].levels = head.modifiers[0].render_levels = 4
+    bpy.context.view_layer.update()
+    evaluated = bpy.data.meshes.new_from_object(
+        head.evaluated_get(bpy.context.evaluated_depsgraph_get())
+    )
+    inverse = body.matrix_world.inverted()
+    initial = Vector(info["head_cervical_registration"]["initial_head_translation_m"])
+    for vertex in evaluated.vertices:
+        vertex.co = inverse @ (authored_world @ vertex.co) + initial
+    mesh = bmesh.new()
+    mesh.from_mesh(evaluated)
+    ranges = [
+        [min(v.co[a] for v in mesh.verts), max(v.co[a] for v in mesh.verts)] for a in range(3)
+    ]
+    reports.append(
+        {
+            "body": info["body"],
+            "authored_head_bbox_m": ranges,
+            "sections": [
+                section(mesh, info["cut_m"] + gap) for gap in (0.012, 0.024, 0.032, 0.048)
+            ],
+            "purpose": "native source contour diagnosis only; not a correct exercise target",
+        }
+    )
+    mesh.free()
+output.write_text(
+    json.dumps({"source_saved": False, "artist_model_only": True, "reports": reports}, indent=2)
+    + "\n"
+)
+print("ACTUAL ARTIST HEAD SECTION PROBE", json.dumps(reports))

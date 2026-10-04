@@ -1,0 +1,86 @@
+"""FR-A-03: read-only native A58/A59 local fairing comparison."""
+
+import json
+import sys
+from collections import Counter
+from pathlib import Path
+
+import bpy
+
+previous, output = map(Path, sys.argv[sys.argv.index("--") + 1 :])
+if output.exists():
+    raise FileExistsError("Preserve prior diagnostic evidence")
+names = [
+    f"BODYGUARD {label} {kind} WIP" for label in ("Male", "Female") for kind in ("sculpt", "rig")
+]
+targets = [bpy.data.objects[name] for name in names]
+with bpy.data.libraries.load(str(previous)) as (available, loaded):
+    assert all(name in available.objects for name in names)
+    loaded.objects = names
+for obj in loaded.objects:
+    bpy.context.scene.collection.objects.link(obj)
+bpy.context.view_layer.update()
+
+
+def points_with_skin(obj, maximum_z):
+    return Counter(
+        (tuple(v.co), tuple(sorted((obj.vertex_groups[g.group].name, g.weight) for g in v.groups)))
+        for v in obj.data.vertices
+        if v.co.z <= maximum_z
+    )
+
+
+rows = []
+for offset, label in ((0, "Male"), (2, "Female")):
+    old, old_rig = loaded.objects[offset : offset + 2]
+    new, new_rig = targets[offset : offset + 2]
+    assert old.matrix_world == new.matrix_world and old_rig.matrix_world == new_rig.matrix_world
+    assert [(b.name, tuple(b.matrix_local)) for b in old_rig.data.bones] == [
+        (b.name, tuple(b.matrix_local)) for b in new_rig.data.bones
+    ]
+    assert len(new_rig.data.bones) == 163
+    coordinates = Counter(tuple(v.co) for v in old.data.vertices)
+    revised = Counter(tuple(v.co) for v in new.data.vertices)
+    assert coordinates != revised, "Native fairing must actually edit the new bridge"
+    old_points = points_with_skin(old, 2)
+    new_points = points_with_skin(new, 2)
+    shared = sum((old_points & new_points).values())
+    selected = 4854 if label == "Male" else 4236
+    assert len(old.data.vertices) == len(new.data.vertices)
+    assert len(old.data.edges) == len(new.data.edges)
+    assert len(old.data.polygons) == len(new.data.polygons)
+    assert shared >= len(old.data.vertices) - selected
+    assert Counter(
+        skin for (_, skin), count in old_points.items() for _ in range(count)
+    ) == Counter(skin for (_, skin), count in new_points.items() for _ in range(count)), (
+        "Native fairing changed named skin influences"
+    )
+    cut = max(v.co.z for v in new.data.vertices) * 0.87 - 0.012
+    for difference in (old_points - new_points, new_points - old_points):
+        assert all(cut - 0.006 < point[2] < cut + 0.032 + 0.006 for point, _ in difference)
+    rows.append(
+        {
+            "body": label,
+            "vertices": len(new.data.vertices),
+            "bones": 163,
+            "unchanged_coordinate_named_skin_points": shared,
+            "maximum_new_bridge_vertices": selected,
+            "geometry_actually_changed_only_in_bridge_band": True,
+            "vertex_edge_face_counts_identical": True,
+            "all_named_skin_influence_multisets_identical": True,
+            "rig_rest_matrices_identical": True,
+        }
+    )
+output.write_text(
+    json.dumps(
+        {
+            "source_saved": False,
+            "artist_model_only": True,
+            "blender": bpy.app.version_string,
+            "rows": rows,
+        },
+        indent=2,
+    )
+    + "\n"
+)
+print("NATIVE BRIDGE-ONLY FAIRING DIAGNOSTIC", json.dumps(rows))

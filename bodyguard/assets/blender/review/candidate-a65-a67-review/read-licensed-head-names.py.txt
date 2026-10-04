@@ -1,0 +1,4 @@
+import bpy
+from pathlib import Path
+with bpy.data.libraries.load("/private/tmp/bodyguard-base-meshes/human-base-meshes-bundle-v1.4.1/human_base_meshes_bundle.blend") as (available, loaded):
+    print("ACTUAL LICENSED HEAD OBJECTS", [n for n in available.objects if "head" in n.lower()])

@@ -1,0 +1,336 @@
+{
+  "recorded_utc": "2026-10-03 00:51:29 UTC",
+  "reference_sha256": "45b313912dee5ae2218b1fe76086abb35a9b948fab9e877f1a9d2b05f832de62",
+  "input_source": "../candidate-a136-a146-review/artist-candidate.blend",
+  "input_source_sha256": "602de73537edcf24fd7fe92aed84d28c800e99f5125865c5f5d644657f85e1f9",
+  "native_build": "Blender 5.1.1 b70da489d7f4",
+  "native_runs": [
+    {
+      "phase": "a147-raw",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a147-posterior-profile.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a147-posterior-profile.json",
+      "terminal_chunk_id": "5511b0",
+      "exit_code": 0,
+      "log": "logs/a147-raw-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a148",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a148-native-centerplane-section.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a148-native-centerplane-section.json",
+      "terminal_chunk_id": "51e1cb",
+      "exit_code": 0,
+      "log": "logs/a148-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a149",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a149-native-y-silhouette-fairing.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a149-native-y-silhouette-fairing",
+      "terminal_chunk_id": "39bacd",
+      "exit_code": 0,
+      "log": "logs/a149-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a150",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a150-measured-trough-native-displace.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a150-measured-trough-native-displace",
+      "terminal_chunk_id": "342e5d",
+      "exit_code": 0,
+      "log": "logs/a150-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a151",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a151-native-tangent-push-pull.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a151-native-tangent-push-pull",
+      "terminal_chunk_id": "d7d772",
+      "exit_code": 0,
+      "log": "logs/a151-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a147-clean",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a147-posterior-profile-clean.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a147-posterior-profile-clean.json",
+      "terminal_chunk_id": "ac2c27",
+      "exit_code": 0,
+      "log": "logs/a147-clean-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a152",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a152-native-tangent-local-fairing.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a152-native-tangent-local-fairing",
+      "terminal_chunk_id": "88b0cb",
+      "exit_code": 1,
+      "log": "logs/a152-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a153",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a153-rejected-fairing-fold-locator.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a153-rejected-fairing-fold-locator",
+      "terminal_chunk_id": "928b5a",
+      "exit_code": 1,
+      "log": "logs/a153-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a154",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a154-lower-cap-protected-fairing.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a154-lower-cap-protected-fairing",
+      "terminal_chunk_id": "c9695a",
+      "exit_code": 1,
+      "log": "logs/a154-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    }
+  ],
+  "native_actors_sequential": true,
+  "native_and_browser_actors_not_overlapped": true,
+  "new_assets": {
+    "artist_blend": 0,
+    "web_blend": 0,
+    "roundtrip_blend": 0,
+    "glb": 0
+  },
+  "new_verification": {
+    "native_runs": 9,
+    "actual_png": 12,
+    "directly_viewed": 12,
+    "not_viewed": 0,
+    "source_full_118": 0,
+    "glb_full_118": 0,
+    "actual_Chrome_tests": 0,
+    "actual_webcam_trials": 0
+  },
+  "directly_viewed": [
+    "a149/head-base-side-male.png",
+    "a149/head-base-back-male.png",
+    "a149/head-base-side-female.png",
+    "a149/head-base-back-female.png",
+    "a150/head-base-side-male.png",
+    "a150/head-base-back-male.png",
+    "a150/head-base-side-female.png",
+    "a150/head-base-back-female.png",
+    "a151/head-base-side-male.png",
+    "a151/head-base-back-male.png",
+    "a151/head-base-side-female.png",
+    "a151/head-base-back-female.png"
+  ],
+  "findings": {
+    "a147_vertex_samples_not_exact_sections": true,
+    "a147_clean_report_byteexact": true,
+    "a148_native_same_height_centerplane": true,
+    "a149_p95_and_max_worsened_both": true,
+    "a150_lifts_trough_not_enough_shape": true,
+    "a151_male_max_better_female_max_worse_p95_worse_both": true,
+    "a151_new_visible_horizontal_band_unaccepted": true,
+    "a152_rejected_displacement_m": [
+      0.0066911993063867164,
+      0.006484575262988592
+    ],
+    "a152_rejected_long_folds": [
+      14,
+      3
+    ],
+    "a153_new_folds": [
+      13,
+      3
+    ],
+    "a153_all_new_fold_points_normalized_z_below": 0.875,
+    "a154_fairing_mask_normalized_z": [
+      0.875,
+      0.945
+    ],
+    "a154_after_long_folds": [
+      1,
+      0
+    ],
+    "a154_geometry_guards_passed": [
+      true,
+      false
+    ],
+    "a154_displacement_m": [
+      0.004134343267315117,
+      0.006074373162297005
+    ],
+    "mask_field_note": "mask_normalized_z in A152/A153/A154 is the push-pull control support. fairing_mask_normalized_z is separate; the selected union is checked by exact unchanged outside coordinates.",
+    "source_full_118_and_Chrome_A146_not_reused_as_current_edit_pass": true
+  },
+  "static_verification": {
+    "observed": "logs/static-observed.json.txt.gz",
+    "raw_a147_default_and_isolated_ruff_exit": 1,
+    "raw_a147_format_check_exit": 1,
+    "corrected_and_new_native_python_files": 8,
+    "corrected_and_new_default_isolated_format_exit": 0,
+    "a153_pre_native_F401_fixed": true,
+    "copier_syntax": {
+      "chunk_id": "884547",
+      "wall_time_seconds": 0.0000125,
+      "exit_code": 0,
+      "original_token_count": 0,
+      "output": ""
+    },
+    "full_frontend_build_rerun": false,
+    "full_backend_suite_rerun": false,
+    "frontend_files_changed": false
+  },
+  "evidence_copy": {
+    "command": "node /private/tmp/bodyguard-tailor.6b7Uvu/a147-a154-copy-evidence.cjs '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate'",
+    "chunks": [
+      {
+        "chunk_id": "1ca231",
+        "wall_time_seconds": 1.00325,
+        "session_id": 93698,
+        "original_token_count": 101,
+        "output": "{\"integrity_passed\":true,\"copies\":14,\"gzip\":5,\"protected_old_files\":137,\"new_png\":2,\"directly_viewed\":2,\"native_exits\":[0,0],\"new_Chrome\":0,\"geometry_or_appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":110,\"gzip\":17,\"protected_old_files\":164,\"new_png\":74,\"directly_viewed\":32,\"native_exits\":[0,0,0,0,0,0,0],\"new_Chrome\":4,\"source_and_roundtrip_technical_pass\":true,\"appearance_passed\":false}\n"
+      },
+      {
+        "chunk_id": "711d31",
+        "wall_time_seconds": 0.000033709,
+        "exit_code": 0,
+        "original_token_count": 454,
+        "output": "{\"integrity_passed\":true,\"copies\":20,\"gzip\":16,\"protected_old_files\":278,\"native_exits\":[0,1,1,1,0,1],\"new_assets\":0,\"new_png\":0,\"new_browser\":0,\"geometry_or_appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":116,\"gzip\":24,\"protected_old_files\":302,\"native_exits\":[0,0,0,0,0,0,0,0,0,0],\"actual_png\":76,\"directly_viewed\":34,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":137,\"gzip\":33,\"protected_old_files\":422,\"native_exits\":[0,0,1,0,1,1,0,1,1,0,0,0,0,0,0],\"actual_png\":84,\"directly_viewed\":42,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":14,\"gzip\":5,\"protected_old_files\":137,\"new_png\":2,\"directly_viewed\":2,\"native_exits\":[0,0],\"new_Chrome\":0,\"geometry_or_appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":110,\"gzip\":17,\"protected_old_files\":164,\"new_png\":74,\"directly_viewed\":32,\"native_exits\":[0,0,0,0,0,0,0],\"new_Chrome\":4,\"source_and_roundtrip_technical_pass\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":20,\"gzip\":16,\"protected_old_files\":278,\"native_exits\":[0,1,1,1,0,1],\"new_assets\":0,\"new_png\":0,\"new_browser\":0,\"geometry_or_appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":116,\"gzip\":24,\"protected_old_files\":302,\"native_exits\":[0,0,0,0,0,0,0,0,0,0],\"actual_png\":76,\"directly_viewed\":34,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":137,\"gzip\":33,\"protected_old_files\":422,\"native_exits\":[0,0,1,0,1,1,0,1,1,0,0,0,0,0,0],\"actual_png\":84,\"directly_viewed\":42,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"copies\":43,\"gzip\":22,\"png\":12,\"protected_old_files\":563,\"old_files_changed\":0}\n"
+      }
+    ],
+    "exit_code": 0,
+    "copies": 43,
+    "gzip": 22,
+    "png": 12,
+    "protected_old_files": 563,
+    "old_files_changed": 0
+  },
+  "read_only_observations": {
+    "archive_measurement": {
+      "chunk_id": "8c91fd",
+      "wall_time_seconds": 0.000013375,
+      "exit_code": 0,
+      "original_token_count": 203,
+      "output": "{\"file\":\"a152-report.json\",\"rows\":[{\"body\":\"Male\",\"selected\":8686,\"fairing\":8686,\"displacement_mm\":6.691199306386716,\"pass\":false},{\"body\":\"Female\",\"selected\":7976,\"fairing\":7976,\"displacement_mm\":6.484575262988592,\"pass\":false}]}\n{\"file\":\"a153-report.json\",\"rows\":[{\"body\":\"Male\",\"selected\":8686,\"fairing\":8686,\"displacement_mm\":6.691199306386716,\"new_folds\":13,\"pass\":false},{\"body\":\"Female\",\"selected\":7976,\"fairing\":7976,\"displacement_mm\":6.484575262988592,\"new_folds\":3,\"pass\":false}]}\n{\"file\":\"a154-report.json\",\"rows\":[{\"body\":\"Male\",\"selected\":8023,\"fairing\":5076,\"displacement_mm\":4.134343267315117,\"pass\":true},{\"body\":\"Female\",\"selected\":6668,\"fairing\":4606,\"displacement_mm\":6.074373162297005,\"pass\":false}]}\n{\"copies\":43,\"gzip\":22,\"png\":12,\"bytes\":10451156,\"max_file_bytes\":864312,\"protected\":563}\n"
+    },
+    "reference_measurement": {
+      "chunk_id": "09eaf6",
+      "wall_time_seconds": 0.0000125,
+      "exit_code": 0,
+      "original_token_count": 43,
+      "output": "45b313912dee5ae2218b1fe76086abb35a9b948fab9e877f1a9d2b05f832de62  /var/folders/8z/d7p5k9352z75y68hl1l0x3mr0000gn/T/codex-clipboard-e9a0a972-eb70-4458-a588-138720038d28.png\n"
+    },
+    "initial_readonly_node_summary_syntax_error": {
+      "chunk_id": "2589a0",
+      "exit_code": 1,
+      "native_started": false,
+      "file_changed": false,
+      "full_output_retained": false
+    }
+  },
+  "archive_validation": {
+  "syntax": {
+    "chunk_id": "a12da3",
+    "wall_time_seconds": 0.000012667,
+    "exit_code": 0,
+    "original_token_count": 0,
+    "output": ""
+  },
+  "runs": [
+    {
+      "chunk_id": "1a1f74",
+      "wall_time_seconds": 1.003037125,
+      "session_id": 98885,
+      "original_token_count": 45,
+      "output": "{\"integrity_passed\":true,\"copies\":14,\"gzip\":5,\"protected_old_files\":137,\"new_png\":2,\"directly_viewed\":2,\"native_exits\":[0,0],\"new_Chrome\":0,\"geometry_or_appearance_passed\":false}\n"
+    },
+    {
+      "chunk_id": "936169",
+      "wall_time_seconds": 0.000019208,
+      "exit_code": 0,
+      "original_token_count": 294,
+      "output": "{\"integrity_passed\":true,\"copies\":110,\"gzip\":17,\"protected_old_files\":164,\"new_png\":74,\"directly_viewed\":32,\"native_exits\":[0,0,0,0,0,0,0],\"new_Chrome\":4,\"source_and_roundtrip_technical_pass\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":20,\"gzip\":16,\"protected_old_files\":278,\"native_exits\":[0,1,1,1,0,1],\"new_assets\":0,\"new_png\":0,\"new_browser\":0,\"geometry_or_appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":116,\"gzip\":24,\"protected_old_files\":302,\"native_exits\":[0,0,0,0,0,0,0,0,0,0],\"actual_png\":76,\"directly_viewed\":34,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":137,\"gzip\":33,\"protected_old_files\":422,\"native_exits\":[0,0,1,0,1,1,0,1,1,0,0,0,0,0,0],\"actual_png\":84,\"directly_viewed\":42,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":43,\"gzip\":22,\"protected_old_files\":563,\"native_exits\":[0,0,0,0,0,0,1,1,1],\"actual_png\":12,\"directly_viewed\":12,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"a154_fold_regression_resolved\":true,\"a154_female_guard_failed\":true,\"appearance_passed\":false}\n"
+    }
+  ],
+  "exit_code": 0,
+  "initial_document_patch_failed_without_changes": {
+    "actual_readback_chunk_id": "5f7c67",
+    "git_diff_numstat_empty": true
+  },
+  "reference_sha_typo_corrected_from_actual_measurement": {
+    "chunk_id": "09eaf6",
+    "sha256": "45b313912dee5ae2218b1fe76086abb35a9b948fab9e877f1a9d2b05f832de62"
+  }
+},
+  "final_review": {
+  "actual_checker": {
+    "command": "node bodyguard/assets/blender/review/candidate-a147-a154-diagnosis/evidence-check.cjs",
+    "chunks": [
+      {
+        "chunk_id": "9ab855",
+        "wall_time_seconds": 1.003598416,
+        "session_id": 7651,
+        "original_token_count": 45,
+        "output": "{\"integrity_passed\":true,\"copies\":14,\"gzip\":5,\"protected_old_files\":137,\"new_png\":2,\"directly_viewed\":2,\"native_exits\":[0,0],\"new_Chrome\":0,\"geometry_or_appearance_passed\":false}\n"
+      },
+      {
+        "chunk_id": "ee21b6",
+        "wall_time_seconds": 0.00001675,
+        "exit_code": 0,
+        "original_token_count": 294,
+        "output": "{\"integrity_passed\":true,\"copies\":110,\"gzip\":17,\"protected_old_files\":164,\"new_png\":74,\"directly_viewed\":32,\"native_exits\":[0,0,0,0,0,0,0],\"new_Chrome\":4,\"source_and_roundtrip_technical_pass\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":20,\"gzip\":16,\"protected_old_files\":278,\"native_exits\":[0,1,1,1,0,1],\"new_assets\":0,\"new_png\":0,\"new_browser\":0,\"geometry_or_appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":116,\"gzip\":24,\"protected_old_files\":302,\"native_exits\":[0,0,0,0,0,0,0,0,0,0],\"actual_png\":76,\"directly_viewed\":34,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":137,\"gzip\":33,\"protected_old_files\":422,\"native_exits\":[0,0,1,0,1,1,0,1,1,0,0,0,0,0,0],\"actual_png\":84,\"directly_viewed\":42,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":43,\"gzip\":22,\"protected_old_files\":563,\"native_exits\":[0,0,0,0,0,0,1,1,1],\"actual_png\":12,\"directly_viewed\":12,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"a154_fold_regression_resolved\":true,\"a154_female_guard_failed\":true,\"appearance_passed\":false}\n"
+      }
+    ],
+    "exit_code": 0
+  },
+  "actual_diff_check": {
+    "chunk_id": "7009f2",
+    "wall_time_seconds": 0.000010083,
+    "exit_code": 0,
+    "original_token_count": 0,
+    "output": ""
+  },
+  "scope_snapshot_before_adding_this_record": {
+    "command": "node -e \"const fs=require(\\\"node:fs\\\"),path=require(\\\"node:path\\\"),zlib=require(\\\"node:zlib\\\"),assert=require(\\\"node:assert/strict\\\");\\nconst d=\\\"bodyguard/assets/blender/review/candidate-a147-a154-diagnosis\\\";\\nconst walk=p=>fs.readdirSync(p,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(p,e.name)):[path.join(p,e.name)]);\\nconst files=walk(d),manifest=JSON.parse(fs.readFileSync(path.join(d,\\\"copy-manifest.json\\\")));\\nassert.equal(files.length,47);\\nassert.equal(manifest.copies.reduce((n,r)=>n+r.bytes,0),10451156);\\nlet textFiles=0;\\nfor(const f of files){\\n const b=fs.readFileSync(f);assert(b.length<100000000);\\n if(f.endsWith(\\\".png\\\"))continue;\\n const text=(f.endsWith(\\\".gz\\\")?zlib.gunzipSync(b):b).toString(\\\"utf8\\\");textFiles++;\\n assert(!/gh[pousr]_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}|-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/.test(text));\\n if(f.endsWith(\\\".json\\\"))JSON.parse(text);\\n}\\nconst preview=[\\\"a151/head-base-back-male.png\\\",\\\"a151/head-base-side-female.png\\\"];\\nassert(preview.every(f=>fs.existsSync(path.join(d,f))));\\nfor(const f of [\\\"bodyguard/docs/avatar-production.md\\\",\\\"bodyguard/docs/stories/stage2-avatar-candidate.md\\\"]){\\n const latest=fs.readFileSync(f,\\\"utf8\\\").split(\\\"\\\\n\\\")[2];const link=latest.match(/\\\\]\\\\(([^)]+)\\\\)/)[1];assert(fs.existsSync(path.resolve(path.dirname(f),link)));\\n}\\nconsole.log(JSON.stringify({archive_files:files.length,copied_bytes:10451156,text_files_scanned:textFiles,max_file_bytes:Math.max(...files.map(f=>fs.statSync(f).size)),archive_bytes:files.reduce((n,f)=>n+fs.statSync(f).size,0),limited_secret_pattern_matches:0,preview_and_new_doc_links_exist:true,full_security_audit:false}));\"",
+    "result": {
+      "chunk_id": "a9c094",
+      "wall_time_seconds": 0.000019792,
+      "exit_code": 0,
+      "original_token_count": 55,
+      "output": "{\"archive_files\":47,\"copied_bytes\":10451156,\"text_files_scanned\":35,\"max_file_bytes\":864312,\"archive_bytes\":10496178,\"limited_secret_pattern_matches\":0,\"preview_and_new_doc_links_exist\":true,\"full_security_audit\":false}\n"
+    },
+    "scope": "Only this new archive plus its new document links; not full security audit"
+  },
+  "actual_PR_readback": {
+    "chunks": [
+      {
+        "chunk_id": "3eb296",
+        "wall_time_seconds": 1.003300291,
+        "session_id": 1695,
+        "original_token_count": 22,
+        "output": "From https://github.com/HSU-OAS/bodyguard\n * branch            main       -> FETCH_HEAD\n"
+      },
+      {
+        "chunk_id": "adda55",
+        "wall_time_seconds": 0.000011,
+        "exit_code": 0,
+        "original_token_count": 71,
+        "output": "{\"baseRefName\":\"main\",\"headRefName\":\"codex/stage2-avatar-candidate\",\"headRefOid\":\"f09d7222274021b75fc4af7d92a4f44d3693cfed\",\"isDraft\":true,\"mergeStateStatus\":\"CLEAN\",\"mergeable\":\"MERGEABLE\",\"state\":\"OPEN\",\"statusCheckRollup\":[],\"url\":\"https://github.com/HSU-OAS/bodyguard/pull/9\"}\n"
+      }
+    ],
+    "origin_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+    "checks": "NONE",
+    "isDraft": true,
+    "merge_state": "CLEAN",
+    "head_before_this_commit": "f09d7222274021b75fc4af7d92a4f44d3693cfed"
+  },
+  "review": {
+    "implementation_scope": "Actual authored-manikin native diagnosis/evidence and two status paragraphs only; no product-runtime change",
+    "unresolved_appearance_P2": true,
+    "merge_allowed": false,
+    "new_asset_adopted": false,
+    "actual_source_GLB_Chrome_for_current_edits_not_executed": true
+  }
+},
+  "limits": {
+    "appearance_approved": false,
+    "service_asset_adopted": false,
+    "pr9_merge": false,
+    "stage1_6_completed": false,
+    "expert_approval": false,
+    "actual_webcam_human_trial": false,
+    "operations_deployed": false,
+    "guard_relaxed": false,
+    "posthoc_coordinate_skin_restored": false,
+    "whole_body_remesh": false,
+    "anatomy_accuracy_proven": false
+  }
+}

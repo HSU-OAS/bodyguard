@@ -1,5 +1,43 @@
 @import "tailwindcss";
 
+/* FR-A-02/03: development-only two-model native asset inspection. */
+.avatar-review {
+  padding-top: 32px;
+  padding-bottom: 40px;
+}
+.avatar-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+}
+.avatar-controls [aria-pressed="true"] {
+  outline: 2px solid #205f55;
+  outline-offset: 3px;
+}
+.avatar-stage {
+  margin: 0;
+  height: min(560px, 50vw);
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid #d9e1dd;
+}
+.avatar-labels {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  z-index: 1;
+  pointer-events: none;
+  font-size: 13px;
+}
+.avatar-labels span {
+  width: 50%;
+  text-align: center;
+}
+
 /* FR-U-04: shared public/account/protected screen system. */
 .website {
   --ink: #182c2a;

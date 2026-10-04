@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-02",
+  "branch": "codex/stage2-avatar-candidate",
+  "base_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "previous_head": "c27d5763d7b67e9b2e938cb2156edcb9f130d361",
+  "runs": [
+    {
+      "name": "a86-readonly-ring-probe",
+      "exit": 0
+    },
+    {
+      "name": "clean-native-base",
+      "exit": 0
+    },
+    {
+      "name": "local-cervical-fairing",
+      "exit": 0
+    },
+    {
+      "name": "saved-base-body-comparison",
+      "exit": 0
+    },
+    {
+      "name": "saved-local-comparison",
+      "exit": 0
+    },
+    {
+      "name": "source118",
+      "exit": 0
+    },
+    {
+      "name": "source-first8",
+      "exit": 0
+    },
+    {
+      "name": "export-roundtrip",
+      "exit": 0
+    },
+    {
+      "name": "import118",
+      "exit": 0
+    },
+    {
+      "name": "import-first8",
+      "exit": 0
+    },
+    {
+      "name": "clean-readonly-ring-probe",
+      "exit": 0
+    },
+    {
+      "name": "chrome",
+      "exit": 0
+    }
+  ],
+  "all_native_actors_terminal_before_chrome": true,
+  "actual_native_png": 16,
+  "actual_browser_png": 2,
+  "actual_png_viewed": 18,
+  "full34_source_import": "NOT RUN",
+  "script_checks": {
+    "full_ruff_clean_five_files_exit": 0,
+    "format_check_clean_five_files_exit": 0,
+    "original_readonly_probe_full_ruff_exit": 1,
+    "original_probe_finding": "I001 import spacing; executed unchanged despite preflight failure. New clean copy actually re-executed after lint pass; both preserved.",
+    "historical_A86_C402_changed_in_new_maker_only": true
+  },
+  "browser": {
+    "device": "Mac16,12",
+    "cpu": "Apple M4",
+    "memory_bytes": 17179869184,
+    "chrome": "154.0.8037.93",
+    "headless": true,
+    "viewport": [
+      1440,
+      1080
+    ],
+    "dpr": 1,
+    "actual_tests": 3,
+    "duration_ms": 41420.195,
+    "camera_calls": 0,
+    "api_sql_smtp_google": "NOT RUN; guest401/model503 synthetic, native WebGL loss/restore actual",
+    "external_egress": "owned non-listening native proxy A-00 PASS"
+  },
+  "appearance_passed": false,
+  "accepted_candidate": false,
+  "merge_allowed": false,
+  "stages1_to6_passed": false,
+  "release_approved": false,
+  "development_default": "A37 unchanged",
+  "notes": [
+    "Runs grouped, not a serial wall-clock chronology. Every yielded actor was awaited to terminal; no producer restarted on observation.",
+    "Whole topology/named skin/hands/163 rest bones/matrices preserved; final coordinates outside native local band126711/127054 exact against new base. Base-only retained old body75915/75865 exact; this is not a claim that all final neck artist coordinates are unchanged.",
+    "Native fairing reuses A78c factor.15/8iterations/margin.03; displacement3.161/2.800mm below unchanged6mm guard. Both cut tangents improve; rear crease, jaw/neck transition and head silhouette still fail appearance.",
+    "20-degree source/import stress, local artist mask and tangent angles are not medical/anatomical/exercise thresholds. RAF180 is not GPU completion/camera/inference/person latency or target-laptop performance acceptance.",
+    "Original probe Ruff I001 was mistakenly not made conditional before its read-only execution; frozen snapshot/report preserved, clean copy full Ruff passed and actual probe rerun yielded identical results. Never presented that original lint as pass.",
+    "One guessed helper read path and two guessed document paths returned missing; actual existing paths were found with rg --files. Initial sandbox sysctl failed read-only, approved read rerun returned actual device fields.",
+    "Native export limited1185660 male/1264715 female weights and warned five times about male armature parent. Actual import checks passed. Color/Clock/WebGL cleanup warnings and injected503 retained as warnings/controlled failures, not clean logs.",
+    "No whole-service regression/API/Vitest/typecheck/build, full repository style check, real people/camera/pose/video, demos/retarget/compound motions/multidevice/long-duration/GPU timings/target laptop, provider connections/accounts/secrets/cost/operating DB migrations/deployment/release.",
+    "First staged diff check returned2 for extra EOF blank lines in new README/execution record only; corrected metadata before commit. Immutable executed code/native evidence unchanged."
+  ]
+}

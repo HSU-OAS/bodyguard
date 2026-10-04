@@ -1,0 +1,133 @@
+{
+  "date_local": "2026-10-02",
+  "story": "S2.4/FR-A-01~04/A-07",
+  "before_head": "952bb1e8ae874f1b55aa441a259a0231fdea18b2",
+  "base_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "source_input_a66_sha256": "03ac3629b76858ee7f55fc0ffa9e6118c5d64fcbf4ba29100889af1318a8b3b5",
+  "head_inspections": {
+    "initial_runs": [
+      {
+        "iterations": 0,
+        "exit_code": 0,
+        "images": 2
+      },
+      {
+        "iterations": 6,
+        "exit_code": 0,
+        "images": 2
+      },
+      {
+        "iterations": 12,
+        "exit_code": 0,
+        "images": 2
+      }
+    ],
+    "initial_ruff_check_exit": 1,
+    "initial_import_issue": "I001; actual original snapshot negative rerun exit1 preserved",
+    "imports_fixed_after_native_actors_terminal": true,
+    "verified_run": {
+      "iterations": 12,
+      "exit_code": 0,
+      "images": 2,
+      "source_saved": false
+    }
+  },
+  "a72": {
+    "generation_exit_code": 1,
+    "reason": "initial head diagnostic cut did not intersect the sculpted head; native cut boundary0",
+    "diagnostic_rerun_exit_code": 1,
+    "source_saved": false,
+    "boundary_regression_exit_code": 0,
+    "boundary_checks": 13
+  },
+  "a72b": {
+    "generation_exit_code": 0,
+    "boundary_regression_exit_code": 0,
+    "boundary_checks": 16,
+    "source_qa_exit_code": 0,
+    "qa_rows": 121,
+    "technical_checks": 118,
+    "rendered_qa": false,
+    "first_preview_exit_code": 0,
+    "first_preview_images": 8,
+    "seam_diagnostic_exit_code": 0,
+    "source_sha256": "1d0c0d70622b684cdad78dfecd60738bf8eaee312ba84228ce1c8fe83fb52d9c"
+  },
+  "a72c": {
+    "generation_exit_code": 0,
+    "boundary_regression_exit_code": 0,
+    "boundary_checks": 16,
+    "source_qa_exit_code": 0,
+    "qa_rows": 121,
+    "technical_checks": 118,
+    "rendered_qa": true,
+    "source_preview_images": 34,
+    "export_exit_code": 0,
+    "glb_roundtrip_qa_exit_code": 0,
+    "glb_qa_rows": 121,
+    "glb_technical_checks": 118,
+    "glb_qa_rendered": false,
+    "body_preservation_comparison_exit_code": 0,
+    "seam_diagnostic_exit_code": 0,
+    "source_sha256": "8e659fcfc983aae587044fd08e61c8253962259043753da7eb945aebf8d845c8",
+    "browser_exit_code": 0,
+    "browser": {
+      "startTime": "2026-10-01T20:21:57.946Z",
+      "duration": 41060.903,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "browser_screenshots": 2
+  },
+  "device": {
+    "model": "Mac16,12",
+    "chip": "Apple M4",
+    "memory": "16 GB",
+    "chrome": "154.0.8037.58",
+    "headless": true,
+    "viewport": [
+      1440,
+      1080
+    ],
+    "dpr": 1
+  },
+  "native_all_terminal_before_browser": true,
+  "camera_requests": 0,
+  "actor_external_network": "isolated non-listening native proxy and actual A-00 check",
+  "api_sql_mail_oauth_actors": "not started",
+  "controlled_fixtures": [
+    "API401 guest",
+    "GLB503 failure/retry",
+    "WebGL context loss/retry"
+  ],
+  "warnings": [
+    "native armature parent5",
+    "native limit weights986029/1017025",
+    "NO_COLOR ignored by FORCE_COLOR",
+    "THREE.Clock deprecated",
+    "injected GLB503 error",
+    "WebGL context-loss extension warning after recovery"
+  ],
+  "unrun": [
+    "A72 source QA/GLB/render/browser (generation failed before save)",
+    "A72b full34PNG/GLB/export/roundtrip/browser",
+    "A72c imported GLB34PNG",
+    "actual performer/observer recordings or measurements",
+    "correct exercise demo/retarget/camera inference integration",
+    "real Gmail/Google providers",
+    "multi-device GPU/power/whole-system or actual coaching timing",
+    "API/Vitest/production build rerun this turn"
+  ],
+  "appearance": {
+    "adopted_as_default": false,
+    "unresolved_p2": "neutral head forehead/shallow face transition, jaw/neck boundary/silhouette and whole reference appearance",
+    "development_default": "A37 unchanged",
+    "pr9_draft": true,
+    "merge_gate_satisfied": false,
+    "stages_1_to_6_complete": false
+  },
+  "prior_files_or_evidence_deleted": false,
+  "scope_safety_privacy_operating_gates_unchanged": true
+}

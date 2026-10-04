@@ -1,0 +1,199 @@
+{
+  "date": "2026-10-02",
+  "story": "S2.4a/b; latest A-08 face-neck reference retained",
+  "parent_commit": "0e85e05bf3f3b2e5d08a8778a07536767da370ba",
+  "main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "input_sha256": "eeae7e32f6607b37009ecdf4e3a5942daa07d8ae598c3a6017e2914a0ffa8c91",
+  "artist_edit": "Native rotate_edges/use_ccw=False on existing professional posterior triangles only; both adjacent faces triangle and every vertex y>0, abs(x/height)<.12, .79<z/height<.87. No generated body, position edit, projection, smoothing, clamps or restoration.",
+  "runs": [
+    {
+      "name": "posterior-connectivity-probe",
+      "actor": 98865,
+      "exit_code": 0,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a90_rejected.blend' --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a91-posterior-connectivity-probe.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/a91-posterior-connectivity.json'",
+      "source_saved": false
+    },
+    {
+      "name": "native-beautify-dryrun",
+      "actor": 24922,
+      "exit_code": 0,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a90_rejected.blend' --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a91-local-connectivity-dryrun.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/a91-local-connectivity-dryrun.json'",
+      "source_saved": false,
+      "finding": "No folded-edge improvement; not saved or adopted."
+    },
+    {
+      "name": "native-edge-rotation-dryrun",
+      "actor": 77437,
+      "exit_code": 0,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a90_rejected.blend' --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a91-local-edge-rotation-dryrun.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/a91-local-edge-rotation-dryrun.json'",
+      "source_saved": false
+    },
+    {
+      "name": "native-maker",
+      "actor": 11148,
+      "exit_code": 0,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a90_rejected.blend' --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a91-posterior-connectivity-repair.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/draft-a91-posterior-connectivity.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/a91-first-preview'",
+      "png": 4
+    },
+    {
+      "name": "saved",
+      "actor": 5832,
+      "exit_code": 1,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a91-saved-connectivity-preservation.py' -- '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a90_rejected.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/draft-a91-posterior-connectivity.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/a91-saved-preservation.json'",
+      "failure": "Retained mathutils matrix row references became invalid across open_mainfile. No output JSON or scene save. Separate v2 freezes numeric nested tuples; equality checks and guards unchanged.",
+      "source_saved": false
+    },
+    {
+      "name": "source",
+      "actor": 31688,
+      "exit_code": 0,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec '/private/tmp/bodyguard-tailor.6b7Uvu/draft-a91-posterior-connectivity.blend' --python-exit-code 1 --python '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review_avatar.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/a91-source-review' --candidate --mannequin"
+    },
+    {
+      "name": "export",
+      "actor": 24440,
+      "exit_code": 0,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec '/private/tmp/bodyguard-tailor.6b7Uvu/draft-a91-posterior-connectivity.blend' --python-exit-code 1 --python '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/export_avatar_candidate.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/draft-a91-web.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/a91-glb' 1"
+    },
+    {
+      "name": "saved_v2",
+      "actor": 24817,
+      "exit_code": 0,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a91-saved-connectivity-preservation-v2.py' -- '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a90_rejected.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/draft-a91-posterior-connectivity.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/a91-saved-preservation-v2.json'"
+    },
+    {
+      "name": "import",
+      "actor": 65242,
+      "exit_code": 0,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec '/private/tmp/bodyguard-tailor.6b7Uvu/draft-a91-web-roundtrip.blend' --python-exit-code 1 --python '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review_avatar.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/a91-roundtrip-review' --candidate --mannequin"
+    },
+    {
+      "name": "browser-sandbox-preflight",
+      "actor": null,
+      "exit_code": 1,
+      "command": "BODYGUARD_AVATAR_QA_DIRECTORY='/private/tmp/bodyguard-tailor.6b7Uvu/a91-glb' PLAYWRIGHT_JSON_OUTPUT_NAME='/private/tmp/bodyguard-tailor.6b7Uvu/a91-browser-report.json' .venv/bin/python -m tests.run_browser avatar",
+      "failure": "PermissionError at local proxy bind; no Chrome launched or browser report generated."
+    },
+    {
+      "name": "actual-Chrome",
+      "actor": 11791,
+      "exit_code": 0,
+      "command": "BODYGUARD_AVATAR_QA_DIRECTORY='/private/tmp/bodyguard-tailor.6b7Uvu/a91-glb' PLAYWRIGHT_JSON_OUTPUT_NAME='/private/tmp/bodyguard-tailor.6b7Uvu/a91-browser-report.json' .venv/bin/python -m tests.run_browser avatar",
+      "cwd": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/backend",
+      "all_native_actors_terminal_before_browser": true
+    }
+  ],
+  "style": {
+    "historical_failed_style_snapshots_preserved": 4,
+    "formatted_before_native": true,
+    "final_full_ruff_six_files_exit": 0,
+    "final_format_six_files_exit": 0,
+    "node_copier_check_exit": 0
+  },
+  "device": {
+    "os": "macOS 15.6 / 24G84",
+    "model": "Mac16,12",
+    "cpu": "Apple M4",
+    "memory_bytes": 17179869184,
+    "chrome": "154.0.8037.93",
+    "headless": true,
+    "viewport": [
+      1440,
+      1080
+    ],
+    "dpr": 1
+  },
+  "actual_png": {
+    "first": 4,
+    "source": 34,
+    "import": 34,
+    "browser": 2,
+    "total": 74
+  },
+  "directly_viewed": {
+    "first": [
+      "male-neck-back.png",
+      "female-neck-back.png",
+      "male-front.png",
+      "female-front.png"
+    ],
+    "source": [
+      "faceless-front.png",
+      "faceless-quarter.png",
+      "faceless-side-male.png",
+      "faceless-side-female.png",
+      "faceless-body-side-male.png",
+      "faceless-body-side-female.png",
+      "faceless-body-back-male.png",
+      "faceless-body-back-female.png",
+      "faceless-neck-male-left.png",
+      "faceless-neck-male-right.png",
+      "faceless-neck-female-left.png",
+      "faceless-neck-female-right.png",
+      "faceless-hand-male.png",
+      "faceless-hand-female.png",
+      "faceless-knee-male.png",
+      "faceless-knee-female.png"
+    ],
+    "import": [
+      "faceless-front.png",
+      "faceless-quarter.png",
+      "faceless-side-male.png",
+      "faceless-side-female.png",
+      "faceless-body-side-male.png",
+      "faceless-body-side-female.png",
+      "faceless-body-back-male.png",
+      "faceless-body-back-female.png",
+      "faceless-neck-male-left.png",
+      "faceless-neck-male-right.png",
+      "faceless-neck-female-left.png",
+      "faceless-neck-female-right.png",
+      "faceless-hand-male.png",
+      "faceless-hand-female.png",
+      "faceless-knee-male.png",
+      "faceless-knee-female.png"
+    ],
+    "browser": [
+      "male-two-models.png",
+      "female-two-models.png"
+    ],
+    "total": 38,
+    "not_all_68_native_QA_png_individually_viewed": true
+  },
+  "browser": {
+    "startTime": "2026-10-02T05:57:26.072Z",
+    "duration": 41442.85,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "warnings": [
+    "Native male exporter produced five armature-parent warnings; actual saved/import full QA passed.",
+    "Web fin repair male7/female9 and eight-weight limiting male300407/female296607; distinct from exactly preserved artist source.",
+    "NO_COLOR/FORCE_COLOR and THREE.Clock deprecation warnings occurred.",
+    "Guest401 and model503 deliberately injected; native WebGL loss/retry used; cleanup extension unsupported warning occurred."
+  ],
+  "reused_unchanged_helpers": [
+    "bodyguard/assets/blender/review_avatar.py",
+    "bodyguard/assets/blender/export_avatar_candidate.py",
+    "bodyguard/backend/tests/run_browser.py",
+    "bodyguard/frontend/e2e/avatar.spec.ts",
+    "bodyguard/frontend/playwright.avatar.config.ts"
+  ],
+  "finding": "Local long folded edges male55->49/female52->50; all source positions/named skin/163 numeric rest bones/matrices/hands exactly preserved, outside face connectivity and winding exact, local faces changed male25/female17. Not the same edge-ID metric as A90. Posterior/forearm/wrist/web finish still appearance P2; not adopted.",
+  "next": "Inspect the remaining connected folded posterior patches before any further edit. Do not repeat whole-head grafts, projection or smoothing-strength variations; reuse native local topology tools and unchanged QA.",
+  "excluded": [
+    "Actual people/camera/pose recording or uploading",
+    "Clinical/anatomical validation or approved correct-motion demo",
+    "Actual coaching retarget and target-laptop webcam latency",
+    "Account/API/PostgreSQL/SMTP/OAuth regression reruns",
+    "Real Google/Gmail connection, secrets, operating DB migration, deployment or release"
+  ],
+  "appearance_passed": false,
+  "release_approved": false,
+  "stages_1_to_6_complete": false,
+  "development_default": "A37 unchanged",
+  "pr9_merge_allowed": false,
+  "old_evidence_changed": 0
+}

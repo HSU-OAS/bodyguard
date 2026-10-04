@@ -1,0 +1,292 @@
+{
+  "date": "2026-10-03",
+  "timezone": "Asia/Seoul",
+  "kind": "controlled native interpolation and separately saved candidate; actual QA complete but appearance unapproved",
+  "base_head": "9900cf4c7229a7f3bfc6a035c712431b6e1b1f7b",
+  "main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "input_file": "bodyguard/assets/blender/bodyguard_avatar_candidate_a100_unapproved.blend",
+  "input_sha256": "abdb8ef2e2a09a0c3601b77e09b0393e590aa704d7f242cbf2f457b4bd2259b6",
+  "candidate": {
+    "file": "bodyguard/assets/blender/bodyguard_avatar_candidate_a103_unapproved.blend",
+    "bytes": 29660726,
+    "sha256": "56766af46c8c5a1330d0d0c22c56ea9f287a9d871d8068afa0812a56e1fb9820"
+  },
+  "unchanged_files": [
+    {
+      "file": "bodyguard/assets/blender/bodyguard_avatar_candidate_a94_rejected.blend",
+      "sha256": "939b8f55d894fbb5f4d0a2e5023a7eb87a6b5a51c21780f5ffa1c706392acbae"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a94-review/bodyguard-male-candidate.glb",
+      "sha256": "6bd222341a622f10a68e766f6f5810d78806797367a88fcfe104b842338bfac9"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a94-review/bodyguard-female-candidate.glb",
+      "sha256": "c0de001ccba534c730f8e1a9870f883222ae5b901d54bb2351959f9f4935bd23"
+    },
+    {
+      "file": "bodyguard/assets/blender/review_avatar.py",
+      "sha256": "f712444c95cff9f56fbfb1a7d03580b2d9a3321fe7e11b93cf8f6448e0c83a39"
+    },
+    {
+      "file": "bodyguard/assets/blender/export_avatar_candidate.py",
+      "sha256": "890ba2eb8be9e107adc79554537bcdf7d5a6bdf9b536e1df217cc0b59aa0908f"
+    },
+    {
+      "file": "bodyguard/frontend/e2e/avatar.spec.ts",
+      "sha256": "01b035b555fb1ed610c38e0b6a8c0310b011178b2447ea5c51119192259aa367"
+    },
+    {
+      "file": "bodyguard/frontend/playwright.avatar.config.ts",
+      "sha256": "cf11a706fec036b1a8ac3c55b5b916372db5c79da8fc3d960e31fc4afa744299"
+    },
+    {
+      "file": "bodyguard/backend/tests/run_browser.py",
+      "sha256": "ab07d4313a4fa7e87ab0720450d6eaed82e9713f8e58f5861a7ea845fc384c2e"
+    },
+    {
+      "file": "bodyguard/assets/blender/bodyguard_avatar_candidate_a97_unapproved.blend",
+      "sha256": "8a2bcf7d74f10d084fd5551a9470a076c003de7ef7dfcb9a7348607cbd3e3618"
+    },
+    {
+      "file": "bodyguard/assets/blender/tailor_avatar_candidate.py",
+      "sha256": "8d9a29b0b75ed19caab25cd926e015b9ad786fd97adb50558d3bc1793e55cb39"
+    },
+    {
+      "file": "bodyguard/assets/blender/bodyguard_avatar_candidate_a100_unapproved.blend",
+      "sha256": "abdb8ef2e2a09a0c3601b77e09b0393e590aa704d7f242cbf2f457b4bd2259b6"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a100-review/bodyguard-male-candidate.glb",
+      "sha256": "7db7dc4b7dacdc97d0769378a5d09e7f54068394dc783e26e13e37b760188e50"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a100-review/bodyguard-female-candidate.glb",
+      "sha256": "d10caee92be45899abcc4d4091ae8fff3a1ca9bc8533135841260160a5e06e79"
+    }
+  ],
+  "glb": [
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a103-review/bodyguard-male-candidate.glb",
+      "bytes": 12622128,
+      "sha256": "49ce9e3e6221e9469f44793417c5bf5c896a5b61c1e9612d2abe266f0217060a"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a103-review/bodyguard-female-candidate.glb",
+      "bytes": 12427736,
+      "sha256": "90dc826e323802e4da4d930f7c45d9be31f3a3773d19767d251d2a5ed441779f"
+    }
+  ],
+  "runs": [
+    {
+      "name": "installed native interpolation API preflight",
+      "session": 93529,
+      "exit_code": 0,
+      "reused_preflight_from_previous_continuation": true,
+      "log": "logs/a102-interpolation-preflight.log.txt.gz",
+      "interpolations": [
+        "LINEAR",
+        "PATH",
+        "SURFACE"
+      ],
+      "default_interpolation": "PATH"
+    },
+    {
+      "name": "same contours SURFACE versus PATH, memory only",
+      "session": 15383,
+      "exit_code": 0,
+      "script": "scripts/a102-native-wrist-interpolation.py.txt.gz",
+      "report": "interpolation-comparison.json",
+      "assets_saved": 0,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec bodyguard/assets/blender/bodyguard_avatar_candidate_a100_unapproved.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a102-native-wrist-interpolation.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a102-memory-review"
+    },
+    {
+      "name": "saved separate PATH candidate",
+      "session": 71684,
+      "exit_code": 0,
+      "script": "scripts/a103-native-path-candidate.py.txt.gz",
+      "report": "native-path.json",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec bodyguard/assets/blender/bodyguard_avatar_candidate_a100_unapproved.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a103-native-path-candidate.py -- bodyguard/assets/blender/bodyguard_avatar_candidate_a103_unapproved.blend /private/tmp/bodyguard-tailor.6b7Uvu/a103-native-path.json"
+    },
+    {
+      "name": "source full deformation and 34 actual renders",
+      "session": 11119,
+      "exit_code": 0,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec bodyguard/assets/blender/bodyguard_avatar_candidate_a103_unapproved.blend --python-exit-code 1 --python bodyguard/assets/blender/review_avatar.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a103-source-review --candidate --mannequin",
+      "report": "source-deformation.json"
+    },
+    {
+      "name": "independent saved-source outside faces/winding/skin/hands/rest preservation",
+      "session": 14020,
+      "exit_code": 0,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a103-saved-preservation.py -- bodyguard/assets/blender/bodyguard_avatar_candidate_a100_unapproved.blend bodyguard/assets/blender/bodyguard_avatar_candidate_a103_unapproved.blend /private/tmp/bodyguard-tailor.6b7Uvu/a103-saved-preservation.json",
+      "report": "saved-preservation.json"
+    },
+    {
+      "name": "native GLB export and reimport",
+      "session": 90761,
+      "exit_code": 0,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec bodyguard/assets/blender/bodyguard_avatar_candidate_a103_unapproved.blend --python-exit-code 1 --python bodyguard/assets/blender/export_avatar_candidate.py -- /private/tmp/bodyguard-tailor.6b7Uvu/draft-a103-web.blend /private/tmp/bodyguard-tailor.6b7Uvu/a103-glb 1",
+      "report": "glb-roundtrip.json"
+    },
+    {
+      "name": "reimport full deformation and 34 actual renders",
+      "session": 47026,
+      "exit_code": 0,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec /private/tmp/bodyguard-tailor.6b7Uvu/draft-a103-web-roundtrip.blend --python-exit-code 1 --python bodyguard/assets/blender/review_avatar.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a103-roundtrip-review --candidate --mannequin",
+      "report": "roundtrip-deformation.json"
+    },
+    {
+      "name": "actual installed Chrome",
+      "session": 66113,
+      "exit_code": 0,
+      "command": "BODYGUARD_AVATAR_QA_DIRECTORY=/private/tmp/bodyguard-tailor.6b7Uvu/a103-glb PLAYWRIGHT_JSON_OUTPUT_NAME=/private/tmp/bodyguard-tailor.6b7Uvu/a103-browser-report.json .venv/bin/python -m tests.run_browser avatar",
+      "cwd": "bodyguard/backend",
+      "report": "browser-report.json",
+      "native_actors_terminal_before_browser": true,
+      "tests_passed": 4,
+      "camera_calls_asserted": 0
+    }
+  ],
+  "log_kind": "tool-observed output snapshots, not a claim to full process stdout",
+  "browser": {
+    "startTime": "2026-10-02T17:50:29.836Z",
+    "duration": 53416.115999999995,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "environment": {
+    "blender": "5.1.1",
+    "chrome": "154.0.8037.93",
+    "macOS": "15.6",
+    "macOS_build": "24G84",
+    "hardware": "Mac16,12 / Apple M4 / 16GiB",
+    "hardware_measurement_reused_from": "A94",
+    "viewport": [
+      1440,
+      1080
+    ],
+    "dpr": 1,
+    "headless": true,
+    "proxy_blocked": true,
+    "chrome_version_rechecked": true,
+    "macOS_version_rechecked": true
+  },
+  "deformation": {
+    "source_poses": 118,
+    "reimport_poses": 118,
+    "source_checks": 121,
+    "reimport_checks": 121,
+    "source_max_edge_ratio": 2.9439303671031447,
+    "reimport_max_edge_ratio": 2.94767980329051,
+    "guard_max_edge_ratio": 3,
+    "source_vertices": [
+      141691,
+      139482
+    ],
+    "web_vertices": [
+      141685,
+      139474
+    ],
+    "web_fin_repair": [
+      6,
+      8
+    ],
+    "web_weight_limited": [
+      297351,
+      293403
+    ]
+  },
+  "style": {
+    "first_preservation_format_check_exit": 1,
+    "format_corrected_before_native_run": true,
+    "ruff_check_exits": [
+      0,
+      0,
+      0
+    ],
+    "isolated_ruff_exit": 0,
+    "isolated_88_format_check_exits": [
+      0,
+      0,
+      0
+    ],
+    "temporary_typecheck_exit": 0,
+    "temporary_biome_check_exit": 0,
+    "restored_typecheck_exit": 0,
+    "restored_biome_check_exit": 0,
+    "copy_script_syntax_exit": 0,
+    "new_scripts_use_dynamic_exec": false,
+    "historical_A100_S102_repaired": false
+  },
+  "copied_files": 99,
+  "gzip": 14,
+  "actual_png": 76,
+  "source_png": 34,
+  "import_png": 34,
+  "comparison_png": 4,
+  "browser_png": 4,
+  "directly_viewed": [
+    "comparison/surface-male-forearms.png",
+    "comparison/path-male-forearms.png",
+    "comparison/surface-female-forearms.png",
+    "comparison/path-female-forearms.png",
+    "source/faceless-front.png",
+    "source/faceless-body-back-male.png",
+    "source/faceless-body-back-female.png",
+    "source/faceless-hand-male.png",
+    "source/faceless-hand-female.png",
+    "source/technical-male-wrist.png",
+    "source/technical-female-wrist.png",
+    "source/faceless-neck-male-left.png",
+    "source/faceless-neck-female-left.png",
+    "import/faceless-front.png",
+    "import/faceless-quarter.png",
+    "import/faceless-hand-male.png",
+    "import/faceless-hand-female.png",
+    "import/faceless-body-back-male.png",
+    "import/faceless-body-back-female.png",
+    "import/faceless-neck-male-left.png",
+    "import/faceless-neck-female-left.png",
+    "import/faceless-side-male.png",
+    "import/faceless-side-female.png",
+    "import/technical-male-wrist.png",
+    "import/technical-female-wrist.png",
+    "browser/avatar-A-06-실제-남녀-GLB-두-복제본을-로드하고-한쪽-기술-변형이-다른-뼈대를-바꾸지-않는다/남성-two-models.png",
+    "browser/avatar-A-06-실제-남녀-GLB-두-복제본을-로드하고-한쪽-기술-변형이-다른-뼈대를-바꾸지-않는다/여성-two-models.png",
+    "browser/avatar-A103-PATH-forearm-c-7e892-ces-in-close-browser-review/남성-forearm.png",
+    "browser/avatar-A103-PATH-forearm-c-7e892-ces-in-close-browser-review/여성-forearm.png"
+  ],
+  "previous_baseline_viewed": [
+    "bodyguard/assets/blender/review/candidate-a100-review/browser/avatar-A100-native-forearm-02ef1-ces-in-close-browser-review/남성-forearm.png",
+    "bodyguard/assets/blender/review/candidate-a100-review/browser/avatar-A100-native-forearm-02ef1-ces-in-close-browser-review/여성-forearm.png"
+  ],
+  "appearance_findings": [
+    "A100 abrupt longitudinal forearm striping visibly reduced in the same camera-only actual Chrome crop",
+    "broad wrist transition band and remaining posterior neck surface require further appearance review",
+    "whole reference/material/silhouette gate not passed"
+  ],
+  "temporary_test_helpers_restored": true,
+  "new_blend_files": 1,
+  "temporary_web_reimport_blend_files": 2,
+  "new_glb_files": 2,
+  "new_full_deformation_qa": true,
+  "new_browser_comparison": true,
+  "human_camera_capture": false,
+  "human_coordinate_collection": false,
+  "appearance_passed": false,
+  "adopted": false,
+  "release_approved": false,
+  "stages_1_to_6_complete": false,
+  "pr9_merge_allowed": false,
+  "not_executed": [
+    "approved coaching demonstration/user retarget",
+    "actual webcam accuracy/integrated latency",
+    "human and expert practical tests",
+    "API/auth/SQL/SMTP/Google regressions this change",
+    "external account/secret/operating migration/deployment/release"
+  ],
+  "next_action": "Preserve improved wrist candidate; local posterior neck join diagnosis with actual geometry and protected reference head/neck/rest; no full head graft/strength loop/guard relaxation"
+}

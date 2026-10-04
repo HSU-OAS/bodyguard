@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-02",
+  "scope": "FR-A-01~04/A-07 artist assets only; no people or clinical targets",
+  "observed_runs": [
+    {"name": "A60 continuity probe", "exit_code": 0, "source_saved": false},
+    {"name": "A60 first generation", "exit_code": 1, "stage": "before source/report save", "error": "RuntimeError: deformation group RNA handle invalid after native modifier application"},
+    {"name": "A60 generation after name lookup correction", "exit_code": 0},
+    {"name": "A60 source preflight", "exit_code": 1, "technical_cases": 118, "failed_neck_cases": 4, "rendered": false},
+    {"name": "A60 first preview", "exit_code": 0, "actual_png": 8, "source_saved": false},
+    {"name": "A60 read-only neck weight diagnostic", "exit_code": 0, "source_saved": false},
+    {"name": "A61 first generation", "exit_code": 1, "stage": "before source/report save", "error": "AssertionError: Unsupported professional cut contours", "candidate_file_created": false},
+    {"name": "A61 cervical contour generation", "exit_code": 0, "original_boundary_guard_relaxed": false},
+    {"name": "A61 source preflight", "exit_code": 0, "technical_cases": 118, "rendered": false},
+    {"name": "A61 first preview", "exit_code": 0, "actual_png": 8, "source_saved": false},
+    {"name": "A62 LINEAR-only generation", "exit_code": 0},
+    {"name": "A62 source preflight", "exit_code": 0, "technical_cases": 118, "rendered": false},
+    {"name": "A62 first preview", "exit_code": 0, "actual_png": 8, "source_saved": false}
+  ],
+  "unrun": ["A60/A61/A62 complete 34-image harness", "A60/A61/A62 GLB export and roundtrip QA", "A60/A61/A62 actual Chrome", "real people/verified exercise/retargeting/webcam integrated performance"],
+  "preserved": ["all prior source/GLB/evidence", "development A37 default", "canonical producer", "1~6 completion and approval gates"],
+  "adopted_for_release": false
+}

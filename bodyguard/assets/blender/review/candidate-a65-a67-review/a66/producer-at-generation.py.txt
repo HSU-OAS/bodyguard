@@ -1,0 +1,129 @@
+"""FR-A-02/03: remove only the proven enclosed, disconnected oral-shell remnant.
+
+Blender -b preserved A65 --python-exit-code 1 --python this.py --
+ new-source.blend new-report.json
+The external artist surface, named skin, hands, all bones/rest/matrices stay exact.
+"""
+
+import json
+import sys
+from collections import Counter
+from hashlib import file_digest
+from pathlib import Path
+
+import bmesh
+import bpy
+from mathutils import Vector
+from mathutils.bvhtree import BVHTree
+
+output, report_path = map(Path, sys.argv[sys.argv.index("--") + 1 :])
+assert output.suffix == ".blend" and report_path.suffix == ".json"
+assert output.resolve() != report_path.resolve()
+assert not output.exists() and not report_path.exists(), "Preserve prior source/evidence"
+source = Path(bpy.data.filepath)
+with source.open("rb") as file:
+    assert file_digest(file, "sha256").hexdigest() == (
+        "086fafa0332240ed5b7eb5e990020de4c545d59a7ab92204aa0dd1f7d463c5c3"
+    )
+reports = []
+for label, expected_inner in (("Male", 456), ("Female", 336)):
+    body = bpy.data.objects[f"BODYGUARD {label} sculpt WIP"]
+    rig = bpy.data.objects[f"BODYGUARD {label} rig WIP"]
+    assert len(rig.data.bones) == 163 and all(b.matrix_basis.is_identity for b in rig.pose.bones)
+    bones = [(b.name, tuple(b.matrix_local)) for b in rig.data.bones]
+    body_matrix, rig_matrix = body.matrix_world.copy(), rig.matrix_world.copy()
+    crown = max(v.co.z for v in body.data.vertices)
+    protected = {i + 1 for i in body["bodyguard_distal_hand_vertices"]}
+    bm = bmesh.new()
+    bm.from_mesh(body.data)
+    assert all(e.is_manifold for e in bm.edges)
+    bm.verts.index_update()
+    original = bm.verts.layers.int.new("Proven retained external surface")
+    deform = bm.verts.layers.deform.active
+    assert deform is not None
+    for vertex in bm.verts:
+        vertex[original] = vertex.index + 1
+    unseen, components = set(bm.verts), []
+    while unseen:
+        stack, points = [unseen.pop()], set()
+        while stack:
+            vertex = stack.pop()
+            points.add(vertex)
+            for edge in vertex.link_edges:
+                for other in edge.verts:
+                    if other in unseen:
+                        unseen.remove(other)
+                        stack.append(other)
+        components.append(points)
+    assert len(components) == 2, "Only the diagnosed enclosed oral remnant is supported"
+    outer, inner = sorted(components, key=len, reverse=True)
+    assert len(inner) == expected_inner and len(outer) > 100_000
+    assert protected <= {v[original] for v in outer}
+    assert all(crown * 0.85 < v.co.z < crown * 0.92 for v in inner)
+    indices = {v: i for i, v in enumerate(outer)}
+    faces = [f for f in bm.faces if f.verts[0] in outer]
+    tree = BVHTree.FromPolygons(
+        [v.co for v in outer], [[indices[v] for v in f.verts] for f in faces]
+    )
+    local_ids = {v: i for i, v in enumerate(inner)}
+    inner_faces = [f for f in bm.faces if f.verts[0] in inner]
+    inner_tree = BVHTree.FromPolygons(
+        [v.co for v in inner], [[local_ids[v] for v in f.verts] for f in inner_faces]
+    )
+    assert not tree.overlap(inner_tree), "Never delete a crossing/visible anatomy surface"
+    parities = []
+    for direction in (
+        Vector((1, 0.137, 0.391)),
+        Vector((0.281, 1, 0.197)),
+        Vector((0.167, 0.193, 1)),
+    ):
+        direction.normalize()
+        inside = 0
+        for vertex in inner:
+            origin, crossings = vertex.co.copy(), 0
+            for _ in range(200):
+                hit, _, _, _ = tree.ray_cast(origin, direction, 3)
+                if hit is None:
+                    break
+                crossings += 1
+                origin = hit + direction * 0.00001
+            else:
+                raise AssertionError("Unresolved oral remnant containment")
+            inside += crossings % 2
+        assert inside == len(inner), "Every remnant vertex must be enclosed in each direction"
+        parities.append(inside)
+    before = Counter((tuple(v.co), tuple(sorted(v[deform].items()))) for v in outer)
+    removed = len(inner)
+    removed_bounds = [[min(v.co[i] for v in inner), max(v.co[i] for v in inner)] for i in range(3)]
+    bmesh.ops.delete(bm, geom=list(inner), context="VERTS")
+    after = Counter((tuple(v.co), tuple(sorted(v[deform].items()))) for v in bm.verts)
+    assert before == after and all(e.is_manifold for e in bm.edges)
+    bm.verts.index_update()
+    remap = {v[original]: v.index for v in bm.verts}
+    body["bodyguard_distal_hand_vertices"] = [remap[i] for i in sorted(protected)]
+    assert bones == [(b.name, tuple(b.matrix_local)) for b in rig.data.bones]
+    assert body_matrix == body.matrix_world and rig_matrix == rig.matrix_world
+    bm.verts.layers.int.remove(original)
+    bm.to_mesh(body.data)
+    bm.free()
+    body.data.update()
+    reports.append(
+        {
+            "body": label,
+            "removed_enclosed_disconnected_oral_vertices": removed,
+            "removed_bounds_m": removed_bounds,
+            "three_direction_inside_vertices": parities,
+            "outer_surface_overlap_pairs": 0,
+            "external_surface_and_skin_exact": True,
+            "protected_hands_163_rest_bones_matrices_exact": True,
+            "candidate_vertices": len(body.data.vertices),
+            "all_source_glb_deformation_browser_appearance_checks_pending": True,
+        }
+    )
+report_path.write_text(json.dumps(reports, indent=2) + "\n")
+bpy.context.scene["bodyguard_stage"] = (
+    "S2.4 enclosed oral remnant removed; ALL QA pending; NOT release"
+)
+bpy.context.preferences.filepaths.save_version = 0
+bpy.ops.wm.save_as_mainfile(filepath=str(output), compress=True)
+print("ACTUAL ENCLOSED ORAL REMNANT REMOVAL", json.dumps(reports))

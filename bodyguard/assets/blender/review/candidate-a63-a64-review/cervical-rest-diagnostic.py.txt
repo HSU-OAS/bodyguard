@@ -1,0 +1,98 @@
+"""FR-A-03: read-only authored rig/surface correspondence; not clinical anatomy QA."""
+
+import json
+import sys
+from hashlib import file_digest
+from pathlib import Path
+
+import bmesh
+import bpy
+from mathutils import Vector
+from mathutils.bvhtree import BVHTree
+
+
+def digest(path):
+    with path.open("rb") as file:
+        return file_digest(file, "sha256").hexdigest()
+
+
+def inspect(tree, point):
+    surface, normal, _, distance = tree.find_nearest(point)
+    assert surface is not None and normal is not None
+    parities = []
+    for value in ((1, 0.137, 0.391), (0.281, 1, 0.197), (0.167, 0.193, 1)):
+        direction, origin, count = Vector(value).normalized(), point.copy(), 0
+        for _ in range(200):
+            hit, _, _, _ = tree.ray_cast(origin, direction, 3)
+            if hit is None:
+                break
+            count += 1
+            origin = hit + direction * 0.00001
+        else:
+            raise AssertionError("Unresolved authored surface intersections")
+        parities.append(count % 2)
+    return {"point_m": list(point), "nearest_distance_m": distance, "ray_parities": parities}
+
+
+professional, output = map(Path, sys.argv[sys.argv.index("--") + 1 :])
+assert output.suffix == ".json" and not output.exists()
+assert digest(professional) == "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137"
+source = Path(bpy.data.filepath)
+source_sha = digest(source)
+reports = []
+for label in ("Male", "Female"):
+    body = bpy.data.objects[f"BODYGUARD {label} sculpt WIP"]
+    rig = bpy.data.objects[f"BODYGUARD {label} rig WIP"]
+    assert all(b.matrix_basis.is_identity for b in rig.pose.bones)
+    matrix = body.matrix_world.inverted() @ rig.matrix_world
+    existing = bmesh.new()
+    existing.from_mesh(body.data)
+    existing_tree = BVHTree.FromBMesh(existing)
+    name = f"GEO-body_{label.lower()}_realistic"
+    with bpy.data.libraries.load(str(professional)) as (available, loaded):
+        assert name in available.objects
+        loaded.objects = [name]
+    reference = loaded.objects[0]
+    bpy.context.scene.collection.objects.link(reference)
+    assert len(reference.modifiers) == 1 and reference.modifiers[0].type == "MULTIRES"
+    reference.modifiers[0].levels = reference.modifiers[0].render_levels = 1
+    bpy.context.view_layer.update()
+    evaluated = bpy.data.meshes.new_from_object(
+        reference.evaluated_get(bpy.context.evaluated_depsgraph_get())
+    )
+    height = max(v.co.z for v in body.data.vertices)
+    ratio = height / max(v.co.z for v in evaluated.vertices)
+    for vertex in evaluated.vertices:
+        vertex.co *= ratio
+    authored = bmesh.new()
+    authored.from_mesh(evaluated)
+    authored_tree = BVHTree.FromBMesh(authored)
+    rows = []
+    for name in ("neck01", "neck02", "neck03", "head"):
+        bone = rig.data.bones[name]
+        rows.append(
+            {
+                "bone": name,
+                "head_existing": inspect(existing_tree, matrix @ bone.head_local),
+                "tail_existing": inspect(existing_tree, matrix @ bone.tail_local),
+                "head_professional": inspect(authored_tree, matrix @ bone.head_local),
+                "tail_professional": inspect(authored_tree, matrix @ bone.tail_local),
+            }
+        )
+    reports.append({"body": label, "bones": rows})
+    existing.free()
+    authored.free()
+assert digest(source) == source_sha
+output.write_text(
+    json.dumps(
+        {
+            "source_saved": False,
+            "artist_model_only": True,
+            "source_sha256": source_sha,
+            "reports": reports,
+        },
+        indent=2,
+    )
+    + "\n"
+)
+print("ACTUAL READ-ONLY CERVICAL REST CORRESPONDENCE", json.dumps(reports))

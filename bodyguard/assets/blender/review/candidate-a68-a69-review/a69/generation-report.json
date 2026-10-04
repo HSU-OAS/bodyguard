@@ -1,0 +1,266 @@
+[
+  {
+    "body": "Male",
+    "professional_source": "human_base_meshes_bundle.blend",
+    "professional_sha256": "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137",
+    "helper_sha256": "6a96114e186b0db44a622beaef770dc58a193656344586f9f189783cc14018c4",
+    "head_source": "GEO-head_primitve",
+    "head_world_matrix": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        2.291865348815918
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        -0.045136597007513046
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        -0.0032976099755614996
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "head_translation_m": [
+      -2.9718739986419678,
+      -0.038458824157714844,
+      1.4982802867889404
+    ],
+    "head_authored_registration": {
+      "reference_surface": "BODYGUARD Male sculpt WIP",
+      "reference_cervical_cut_m": 1.4933180799484254,
+      "authored_contour_points": 114,
+      "proven_inner_cut_edges_capped_for_diagnostic": 0,
+      "initial_head_translation_m": [
+        -2.97186279296875,
+        -0.012809760868549347,
+        1.4982802867889404
+      ],
+      "cut_ring_center_xy_before_m": [
+        2.6226043701171875e-06,
+        -0.004372959490865469
+      ],
+      "target_body_point_m": [
+        -8.596107363700867e-06,
+        -0.030022025108337402,
+        1.5173181295394897
+      ],
+      "native_head_translation_m": [
+        -1.1218711733818054e-05,
+        -0.025649065151810646,
+        0.0
+      ],
+      "contour_points": 94,
+      "purpose": "native artist contour registration only; no clinical target"
+    },
+    "head_skin_correspondence": {
+      "native_transfer": "POLYINTERP_NEAREST/NAME before rigid registration",
+      "prepared_weights_preserved_during_registration": true,
+      "reason": "avoid nearest donor neck/shoulder switching after head translation",
+      "full_deformation_and_visual_qa_required": true
+    },
+    "cut_m": 1.4933180799484254,
+    "jaw_cut_plane_normal": [
+      0.0,
+      -0.6000000238418579,
+      1.0
+    ],
+    "jaw_cut_plane_anchor": [
+      0.0,
+      0.0,
+      1.4933180809020996
+    ],
+    "retained_original_vertices": 75915,
+    "removed_head_original_vertices": 46594,
+    "head_cut_m": 1.5173180799484254,
+    "head_cut_plane_normal": [
+      0.0,
+      -0.6000000238418579,
+      1.0
+    ],
+    "artist_gap_m": 0.024,
+    "native_boundary_density": {
+      "before": [
+        114,
+        94
+      ],
+      "after": [
+        207,
+        207
+      ],
+      "method": "native ordered arc-length edge splits on distinct planar cuts",
+      "cut_plane_normals": [
+        [
+          -9.778591447684448e-07,
+          -0.514495849609375,
+          0.8574928045272827
+        ],
+        [
+          -1.8120816775990534e-06,
+          -0.5144945383071899,
+          0.8574935793876648
+        ]
+      ]
+    },
+    "native_bridge": {
+      "interpolation": "LINEAR",
+      "cuts": 6,
+      "smoothness": 1
+    },
+    "boundary_normal_refresh_max_delta": 0.00039836896658883324,
+    "source_vertices": 122509,
+    "candidate_vertices": 144735,
+    "professional_head_points": 67258,
+    "preserved_external_body_source": {
+      "source": "draft-a66-neutral-under-jaw-head.blend",
+      "sha256": "03ac3629b76858ee7f55fc0ffa9e6118c5d64fcbf4ba29100889af1318a8b3b5",
+      "method": "reuse A66 external surface/skin; no new donor or anatomy deletion",
+      "cut_closed_cavity_count": 0,
+      "old_source_and_qa_preserved": true
+    },
+    "retained_body_skin_hands_bones_rest_preserved": true,
+    "all_source_glb_deformation_browser_visual_checks_pending": true
+  },
+  {
+    "body": "Female",
+    "professional_source": "human_base_meshes_bundle.blend",
+    "professional_sha256": "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137",
+    "helper_sha256": "6a96114e186b0db44a622beaef770dc58a193656344586f9f189783cc14018c4",
+    "head_source": "GEO-head_primitve",
+    "head_world_matrix": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        2.291865348815918
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        -0.045136597007513046
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        -0.0032976099755614996
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "head_translation_m": [
+      -1.6120543479919434,
+      -0.042565956711769104,
+      1.4524829387664795
+    ],
+    "head_authored_registration": {
+      "reference_surface": "BODYGUARD Female sculpt WIP",
+      "reference_cervical_cut_m": 1.452558440208435,
+      "authored_contour_points": 116,
+      "proven_inner_cut_edges_capped_for_diagnostic": 0,
+      "initial_head_translation_m": [
+        -1.611838936805725,
+        -0.014723962172865868,
+        1.4524829387664795
+      ],
+      "cut_ring_center_xy_before_m": [
+        2.6345252990722656e-05,
+        -0.00823615724220872
+      ],
+      "target_body_point_m": [
+        -0.00018902122974395752,
+        -0.03607815131545067,
+        1.4765584468841553
+      ],
+      "native_head_translation_m": [
+        -0.00021536648273468018,
+        -0.027841994538903236,
+        0.0
+      ],
+      "contour_points": 152,
+      "purpose": "native artist contour registration only; no clinical target"
+    },
+    "head_skin_correspondence": {
+      "native_transfer": "POLYINTERP_NEAREST/NAME before rigid registration",
+      "prepared_weights_preserved_during_registration": true,
+      "reason": "avoid nearest donor neck/shoulder switching after head translation",
+      "full_deformation_and_visual_qa_required": true
+    },
+    "cut_m": 1.452558440208435,
+    "jaw_cut_plane_normal": [
+      0.0,
+      -0.6000000238418579,
+      1.0
+    ],
+    "jaw_cut_plane_anchor": [
+      0.0,
+      0.0,
+      1.4525583982467651
+    ],
+    "retained_original_vertices": 75865,
+    "removed_head_original_vertices": 49153,
+    "head_cut_m": 1.476558440208435,
+    "head_cut_plane_normal": [
+      0.0,
+      -0.6000000238418579,
+      1.0
+    ],
+    "artist_gap_m": 0.024,
+    "native_boundary_density": {
+      "before": [
+        116,
+        152
+      ],
+      "after": [
+        267,
+        267
+      ],
+      "method": "native ordered arc-length edge splits on distinct planar cuts",
+      "cut_plane_normals": [
+        [
+          1.2619979088412947e-06,
+          -0.5144986510276794,
+          0.857491135597229
+        ],
+        [
+          1.4387541114047053e-06,
+          -0.5144919753074646,
+          0.8574951887130737
+        ]
+      ]
+    },
+    "native_bridge": {
+      "interpolation": "LINEAR",
+      "cuts": 6,
+      "smoothness": 1
+    },
+    "boundary_normal_refresh_max_delta": 0.0003434510713516179,
+    "source_vertices": 125018,
+    "candidate_vertices": 144500,
+    "professional_head_points": 66651,
+    "preserved_external_body_source": {
+      "source": "draft-a66-neutral-under-jaw-head.blend",
+      "sha256": "03ac3629b76858ee7f55fc0ffa9e6118c5d64fcbf4ba29100889af1318a8b3b5",
+      "method": "reuse A66 external surface/skin; no new donor or anatomy deletion",
+      "cut_closed_cavity_count": 0,
+      "old_source_and_qa_preserved": true
+    },
+    "retained_body_skin_hands_bones_rest_preserved": true,
+    "all_source_glb_deformation_browser_visual_checks_pending": true
+  }
+]

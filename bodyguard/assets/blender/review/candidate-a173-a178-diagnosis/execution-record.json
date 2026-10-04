@@ -1,0 +1,155 @@
+{
+  "date": "2026-10-03",
+  "story": "S2.4 / FR-A-02, FR-A-03, FR-A-08",
+  "input_source": "../candidate-a136-a146-review/artist-candidate.blend",
+  "latest_reference_sha256": "45b313912dee5ae2218b1fe76086abb35a9b948fab9e877f1a9d2b05f832de62",
+  "blender": {
+    "version": "5.1.1",
+    "build": "b70da489d7f4"
+  },
+  "native_runs": [
+    {
+      "phase": "a173",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a173-native-boundary-surface-offset.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a173-native-boundary-surface-offset",
+      "exit_code": 0,
+      "terminal_chunk_id": "1844d8",
+      "log": "logs/a173-observed.json.txt.gz",
+      "terminal_stdout_retained": true,
+      "current_full_snapshot_check_completed": true,
+      "saved_source": false
+    },
+    {
+      "phase": "a174",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a174-native-posterior-plane-clip.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a174-native-posterior-plane-clip",
+      "exit_code": 0,
+      "terminal_chunk_id": "b0438e",
+      "log": "logs/a174-observed.json.txt.gz",
+      "terminal_stdout_retained": true,
+      "current_full_snapshot_check_completed": true,
+      "saved_source": false
+    },
+    {
+      "phase": "a175",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a175-native-head-mask-control.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a175-native-head-mask-control",
+      "exit_code": 1,
+      "terminal_chunk_id": "df694a",
+      "log": "logs/a175-observed.json.txt.gz",
+      "terminal_stdout_retained": true,
+      "current_full_snapshot_check_completed": false,
+      "saved_source": false
+    },
+    {
+      "phase": "a176",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a176-native-aligned-head-mask-control.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a176-native-aligned-head-mask-control",
+      "exit_code": 1,
+      "terminal_chunk_id": "b52b94",
+      "log": "logs/a176-observed.json.txt.gz",
+      "terminal_stdout_retained": true,
+      "current_full_snapshot_check_completed": false,
+      "saved_source": false
+    },
+    {
+      "phase": "a177",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a177-native-parented-head-mask-control.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a177-native-parented-head-mask-control",
+      "exit_code": 1,
+      "terminal_chunk_id": "f20bbc",
+      "log": "logs/a177-observed.json.txt.gz",
+      "terminal_stdout_retained": false,
+      "current_full_snapshot_check_completed": false,
+      "saved_source": false
+    },
+    {
+      "phase": "a178",
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec \"/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend\" --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a178-native-head-mask-control.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a178-native-head-mask-control",
+      "exit_code": 0,
+      "terminal_chunk_id": "1bb01a",
+      "log": "logs/a178-observed.json.txt.gz",
+      "terminal_stdout_retained": true,
+      "current_full_snapshot_check_completed": true,
+      "saved_source": false
+    }
+  ],
+  "projection": {
+    "initial_exit_code": 1,
+    "initial_terminal_chunk_id": "8c79ec",
+    "recheck_exit_code": 1,
+    "recheck_terminal_chunk_id": "e336d6",
+    "log": "logs/a174-projection-observed.json.txt.gz",
+    "scope": "XZ projected nesting only; not 3D collision/anatomy/appearance"
+  },
+  "evidence_copy": {
+    "exit_code": 0,
+    "terminal_chunk_id": "42b07a",
+    "copies": 37,
+    "gzip": 25,
+    "protected_old_files": 729,
+    "old_files_changed": 0
+  },
+  "directly_viewed": [
+    "a178/head-only-mask-back-female.png",
+    "a178/head-only-mask-back-male.png",
+    "a178/head-only-mask-front-female.png",
+    "a178/head-only-mask-front-male.png",
+    "a178/head-only-mask-side-female.png",
+    "a178/head-only-mask-side-male.png",
+    "a178/original-mask-back-female.png",
+    "a178/original-mask-back-male.png",
+    "a178/original-mask-front-female.png",
+    "a178/original-mask-front-male.png",
+    "a178/original-mask-side-female.png",
+    "a178/original-mask-side-male.png"
+  ],
+  "new_assets": {
+    "blend": 0,
+    "glb": 0
+  },
+  "new_verification": {
+    "source_full_118": 0,
+    "glb_full_118": 0,
+    "actual_Chrome_tests": 0,
+    "actual_webcam_trials": 0
+  },
+  "native_actors_sequential": true,
+  "native_and_browser_actors_not_overlapped": true,
+  "diagnosis_gate_results": {
+    "a174_source_projection_self_crossings": [
+      0,
+      0
+    ],
+    "a174_projection_mutual_crossings": [
+      4,
+      4
+    ],
+    "a174_projected_donor_outside": [
+      10,
+      12
+    ],
+    "a174_projected_nesting_passed": false,
+    "a178_lower_neck_preserved_exact": [
+      true,
+      true
+    ],
+    "a178_prior_mask_lower_neck_max_mm": [
+      47.50854482287851,
+      52.23291834811498
+    ],
+    "a178_new_mask_lower_neck_max_mm": [
+      0,
+      0
+    ]
+  },
+  "limitations": {
+    "a177_full_terminal_stdout_retained": false,
+    "complete_legacy_pipeline_reproduced": false,
+    "professional_copy_anatomically_registered_to_current_body": false,
+    "professional_copy_has_service_rig": false,
+    "full_avatar_replacement_completed": false,
+    "appearance_approved": false,
+    "deformation_approved": false,
+    "browser_approved": false,
+    "expert_or_clinical_approval": false,
+    "stage2_complete": false,
+    "stages1to6_complete": false
+  },
+  "next": "Continuous professional neck with isolated faceless head cleanup, then local splice to retained current lower body/skin/rest bones. Do not repeat detached posterior-rectangle/twist/global perimeter attempts, relax guards, adopt A178 A-pose comparisons or count old full118/browser evidence as new verification."
+}

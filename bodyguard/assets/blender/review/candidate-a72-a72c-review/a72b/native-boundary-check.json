@@ -1,0 +1,80 @@
+{
+  "passed": true,
+  "artist_fixture_only": true,
+  "checks": [
+    {
+      "name": "nonstar-horizontal",
+      "passed": true,
+      "expected_rejection": false
+    },
+    {
+      "name": "reverse-order-oblique",
+      "passed": true,
+      "expected_rejection": false
+    },
+    {
+      "name": "different-counts",
+      "passed": true,
+      "expected_rejection": false
+    },
+    {
+      "name": "parallel-oblique",
+      "passed": true,
+      "expected_rejection": false
+    },
+    {
+      "name": "steeper-parallel-oblique",
+      "passed": true,
+      "expected_rejection": false
+    },
+    {
+      "name": "same-plane-rejected",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "name": "third-ring-rejected",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "name": "crossing-planes-rejected",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "name": "nonplanar-rejected",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "name": "legacy-oblique-failure-reproduced",
+      "passed": true
+    },
+    {
+      "name": "registered-final-plane-0.6",
+      "passed": true
+    },
+    {
+      "name": "registered-final-plane-0.22",
+      "passed": true
+    },
+    {
+      "name": "early-cut-translation-plane-drift-reproduced",
+      "passed": true,
+      "artist_plane_drift_m": 0.018
+    },
+    {
+      "name": "artist-section-registration-0.6",
+      "passed": true
+    },
+    {
+      "name": "artist-section-registration-0.22",
+      "passed": true
+    },
+    {
+      "name": "invalid-artist-plane-rejected",
+      "passed": true
+    }
+  ]
+}

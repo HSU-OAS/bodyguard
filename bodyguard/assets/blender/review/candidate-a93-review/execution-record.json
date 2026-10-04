@@ -1,0 +1,252 @@
+{
+  "date": "2026-10-02",
+  "story": "S2.4a/b; latest A-08 face-neck reference retained",
+  "parent_commit": "a93079d0d603777ca44d16dd463d9fe865e3d72e",
+  "main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "input_sha256": "8424a1306b91e36b7db024987667ca4068a035bc11fe0abe78357216c34bbe9c",
+  "output_sha256": "a34bf65ce002306d6a33b16f6c38ce98d0c63a15a59ecdc34c7c27ffc59b0c1c",
+  "artist_edit": "Existing professional A91 native posterior n-gon triangulation with occupied quad diagonals excluded (ALTERNATE), then rotate_edges. Face/head/front neck/all original vertex coordinates, named skin, hands,163 numeric rest bones and matrices remain exact. Only diagnosed posterior connectivity/winding change; added edges/faces derive from polygon sizes (Male5/Female37). No anatomy deletion, skin change, primitive body, smoothing/projection/clamp, guard decrease.",
+  "runs": [
+    {
+      "name": "native-maker",
+      "actor": 74912,
+      "exit_code": 0,
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a91_rejected.blend' --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a93-free-diagonal-connectivity-repair.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/draft-a93-free-diagonal-joins.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/a93-first-preview'",
+      "png": 4
+    },
+    {
+      "name": "saved-checker",
+      "actor": 54352,
+      "exit_code": 0,
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python '/private/tmp/bodyguard-tailor.6b7Uvu/a93-saved-source-preservation.py' -- '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a91_rejected.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/draft-a93-free-diagonal-joins.blend' '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a92-diagnosis/constrained-dryrun.json' '/private/tmp/bodyguard-tailor.6b7Uvu/a93-saved-preservation.json'"
+    },
+    {
+      "name": "source-path-preflight",
+      "actor": null,
+      "exit_code": 1,
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec '/private/tmp/bodyguard-tailor.6b7Uvu/draft-a93-free-diagonal-joins.blend' --python-exit-code 1 --python '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/tools/blender/review_avatar.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/a93-source-review' --candidate --mannequin",
+      "qa_executed": false,
+      "reason": "Existing helper path incorrectly addressed as tools/blender; actual assets/blender rerun followed terminal1."
+    },
+    {
+      "name": "export-path-preflight",
+      "actor": 73362,
+      "exit_code": 1,
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec '/private/tmp/bodyguard-tailor.6b7Uvu/draft-a93-free-diagonal-joins.blend' --python-exit-code 1 --python '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/tools/blender/export_avatar_candidate.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/draft-a93-web.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/a93-glb' 1",
+      "qa_executed": false,
+      "reason": "Nonexistent helper path, no exporter invoked; terminal1 before corrected path rerun."
+    },
+    {
+      "name": "full-source",
+      "actor": 91571,
+      "exit_code": 0,
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec '/private/tmp/bodyguard-tailor.6b7Uvu/draft-a93-free-diagonal-joins.blend' --python-exit-code 1 --python '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review_avatar.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/a93-source-review' --candidate --mannequin",
+      "png": 34,
+      "deformations": 118
+    },
+    {
+      "name": "native-export-import",
+      "actor": 22486,
+      "exit_code": 0,
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec '/private/tmp/bodyguard-tailor.6b7Uvu/draft-a93-free-diagonal-joins.blend' --python-exit-code 1 --python '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/export_avatar_candidate.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/draft-a93-web.blend' '/private/tmp/bodyguard-tailor.6b7Uvu/a93-glb' 1"
+    },
+    {
+      "name": "full-import",
+      "actor": 85062,
+      "exit_code": 0,
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec '/private/tmp/bodyguard-tailor.6b7Uvu/draft-a93-web-roundtrip.blend' --python-exit-code 1 --python '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review_avatar.py' -- '/private/tmp/bodyguard-tailor.6b7Uvu/a93-roundtrip-review' --candidate --mannequin",
+      "png": 34,
+      "deformations": 118
+    },
+    {
+      "name": "browser-sandbox-preflight",
+      "actor": null,
+      "exit_code": 1,
+      "command": "BODYGUARD_AVATAR_QA_DIRECTORY='/private/tmp/bodyguard-tailor.6b7Uvu/a93-glb' PLAYWRIGHT_JSON_OUTPUT_NAME='/private/tmp/bodyguard-tailor.6b7Uvu/a93-browser-report.json' .venv/bin/python -m tests.run_browser avatar",
+      "chrome_launched": false,
+      "reason": "Owned localhost proxy bind denied before Chrome."
+    },
+    {
+      "name": "actual-Chrome",
+      "actor": 50417,
+      "exit_code": 0,
+      "command": "BODYGUARD_AVATAR_QA_DIRECTORY='/private/tmp/bodyguard-tailor.6b7Uvu/a93-glb' PLAYWRIGHT_JSON_OUTPUT_NAME='/private/tmp/bodyguard-tailor.6b7Uvu/a93-browser-report.json' .venv/bin/python -m tests.run_browser avatar",
+      "cwd": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/backend",
+      "all_native_actors_terminal_before_browser": true
+    }
+  ],
+  "style": {
+    "pre_native_default_format_passed": true,
+    "initial_maker_format_failed_snapshot_preserved": true,
+    "new_python_ruff_exit": 0,
+    "new_python_isolated_format_exit": 0,
+    "backend_cwd_format_exit": 1,
+    "context": "Executed native scripts were originally formatted outside backend pyproject config. Later backend-CWD format check failed1 due backend line-length100; isolated default88 repeat check passed0 without mutating executed script bytes. New Python Ruff check passed0. Do not describe backend-context check as passed.",
+    "copier_syntax_exit": 0
+  },
+  "unchanged_helpers": [
+    {
+      "file": "bodyguard/assets/blender/review_avatar.py",
+      "sha256": "f712444c95cff9f56fbfb1a7d03580b2d9a3321fe7e11b93cf8f6448e0c83a39"
+    },
+    {
+      "file": "bodyguard/assets/blender/export_avatar_candidate.py",
+      "sha256": "890ba2eb8be9e107adc79554537bcdf7d5a6bdf9b536e1df217cc0b59aa0908f"
+    },
+    {
+      "file": "bodyguard/frontend/e2e/avatar.spec.ts",
+      "sha256": "01b035b555fb1ed610c38e0b6a8c0310b011178b2447ea5c51119192259aa367"
+    },
+    {
+      "file": "bodyguard/frontend/playwright.avatar.config.ts",
+      "sha256": "cf11a706fec036b1a8ac3c55b5b916372db5c79da8fc3d960e31fc4afa744299"
+    },
+    {
+      "file": "bodyguard/backend/tests/run_browser.py",
+      "sha256": "ab07d4313a4fa7e87ab0720450d6eaed82e9713f8e58f5861a7ea845fc384c2e"
+    }
+  ],
+  "device": {
+    "os": "macOS15.6/24G84",
+    "model": "Mac16,12",
+    "cpu": "Apple M4",
+    "memory_bytes": 17179869184,
+    "chrome": "154.0.8037.93",
+    "headless": true,
+    "viewport": [
+      1440,
+      1080
+    ],
+    "device_scale_factor_config_default": 1,
+    "hardware_readonly_retried_after_sandbox_sysctl_denied": true
+  },
+  "browser": {
+    "startTime": "2026-10-02T07:20:07.261Z",
+    "duration": 41436.388,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "technical_render": [
+    {
+      "name": "남성-technical-render",
+      "decoded": {
+        "samples": 180,
+        "mean_ms": 16.65888888835907,
+        "p95_ms": 18.299999952316284,
+        "draw_calls": 21,
+        "triangles": 1153010,
+        "renderer": "WebKit WebGL",
+        "skeletons_independent": true,
+        "static_angle_max": 0,
+        "moving_angle_max": 0.2094350028983843,
+        "eight_weight_meshes": 2
+      }
+    },
+    {
+      "name": "여성-technical-render",
+      "decoded": {
+        "samples": 180,
+        "mean_ms": 16.66222222248713,
+        "p95_ms": 18.299999952316284,
+        "draw_calls": 21,
+        "triangles": 1135362,
+        "renderer": "WebKit WebGL",
+        "skeletons_independent": true,
+        "static_angle_max": 0,
+        "moving_angle_max": 0.20943811510947424,
+        "eight_weight_meshes": 2
+      }
+    }
+  ],
+  "deformation": {
+    "source": {
+      "rows": 121,
+      "poses": 118,
+      "worst_edge_ratio": 2.9439303671031447
+    },
+    "roundtrip": {
+      "rows": 121,
+      "poses": 118,
+      "worst_edge_ratio": 2.94767980329051
+    }
+  },
+  "actual_png": {
+    "first": 4,
+    "source": 34,
+    "import": 34,
+    "browser": 2,
+    "total": 74
+  },
+  "directly_viewed": {
+    "first": [
+      "male-neck-back.png",
+      "male-front.png",
+      "female-neck-back.png",
+      "female-front.png"
+    ],
+    "source": [
+      "faceless-front.png",
+      "faceless-quarter.png",
+      "faceless-side-male.png",
+      "faceless-side-female.png",
+      "faceless-body-side-male.png",
+      "faceless-body-side-female.png",
+      "faceless-body-back-male.png",
+      "faceless-body-back-female.png",
+      "faceless-neck-male-left.png",
+      "faceless-neck-male-right.png",
+      "faceless-neck-female-left.png",
+      "faceless-neck-female-right.png",
+      "faceless-hand-male.png",
+      "faceless-hand-female.png",
+      "faceless-knee-male.png",
+      "faceless-knee-female.png"
+    ],
+    "import": [
+      "faceless-front.png",
+      "faceless-quarter.png",
+      "faceless-side-male.png",
+      "faceless-side-female.png",
+      "faceless-body-side-male.png",
+      "faceless-body-side-female.png",
+      "faceless-body-back-male.png",
+      "faceless-body-back-female.png",
+      "faceless-neck-male-left.png",
+      "faceless-neck-male-right.png",
+      "faceless-neck-female-left.png",
+      "faceless-neck-female-right.png",
+      "faceless-hand-male.png",
+      "faceless-hand-female.png",
+      "faceless-knee-male.png",
+      "faceless-knee-female.png"
+    ],
+    "browser": [
+      "male-two-models.png",
+      "female-two-models.png"
+    ],
+    "total": 38
+  },
+  "copies": 89,
+  "warning_notes": [
+    "Male exporter armature-parent warning5",
+    "NO_COLOR/FORCE_COLOR",
+    "THREE.Clock deprecation",
+    "Intentionally injected guest401/model503/error-boundary and WebGL cleanup warning"
+  ],
+  "stdout_scope": "Reports/PNGs and command/terminal evidence preserved. Some tool stdout chunks truncated; not all stdout archived. Export path failure preserves an abbreviated observed excerpt, not full stdout.",
+  "appearance_passed": false,
+  "release_approved": false,
+  "stages_1_to_6_complete": false,
+  "pr9_merge_allowed": false,
+  "adopted": false,
+  "development_default": "A37 unchanged",
+  "unexecuted": [
+    "Actual person/camera/pose capture/storage/upload (zero)",
+    "Approved demonstration motion/user retarget/live-webcam accuracy and integrated latency",
+    "Account/API/PostgreSQL/SMTP/OAuth regressions and real Gmail/Google connection",
+    "Expert practical review, operating DB migration, secrets, deployment, release"
+  ],
+  "next_action": "Remaining posterior non-planar patch needs local native connectivity/shape repair while protecting latest face/head/front-neck and skin/bones. No repeat head graft, projection/strength sweep, coordinate restoration or reduced guard; no new appearance acceptance."
+}

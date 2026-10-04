@@ -1,0 +1,91 @@
+{
+  "date": "2026-10-03",
+  "story": "S2.4a/FR-A-02/03/08",
+  "head_before": "788803bcc425c6083cbe0749d71a36cd8d16c724",
+  "origin_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "source": {
+    "file": "bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend",
+    "bytes": 29667488,
+    "sha256": "9191a2c1a0bd7bf4bb3ae3c358f911188052e9c204d4c4f74783806fb937b661"
+  },
+  "profile": {
+    "file": "bodyguard/assets/blender/review/candidate-a115-diagnosis/ordered-boundary.json.gz",
+    "decoded_sha256": "156aa798c00e8b2b91a71d78c0b21dc8a9f55be62be0fb58551ceca03f60d765"
+  },
+  "runs": [
+    {
+      "name": "measured two-open-loop trial; male conformance context unverified",
+      "session": 25397,
+      "exit_code": 0,
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec \"bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-tailor.6b7Uvu/a116-known-two-loops-dryrun.py\" -- \"/private/tmp/bodyguard-tailor.6b7Uvu/a116-known-two-loops-trial\""
+    },
+    {
+      "name": "same loops with actual body binding and native FINISHED guard",
+      "session": 1450,
+      "exit_code": 0,
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec \"bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-tailor.6b7Uvu/a117-verified-two-loops-dryrun.py\" -- \"/private/tmp/bodyguard-tailor.6b7Uvu/a117-verified-two-loops-trial\""
+    },
+    {
+      "name": "same verified conformance plus native local web triangles",
+      "session": 9486,
+      "exit_code": 0,
+      "command": "\"/Applications/Blender.app/Contents/MacOS/Blender\" --background --factory-startup --disable-autoexec \"bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend\" --python-exit-code 1 --python \"/private/tmp/bodyguard-tailor.6b7Uvu/a118-local-web-triangles-dryrun.py\" -- \"/private/tmp/bodyguard-tailor.6b7Uvu/a118-local-web-triangles-trial\""
+    }
+  ],
+  "copies": 29,
+  "gzip": 7,
+  "new_png": 12,
+  "directly_viewed_png": 6,
+  "observed_images": [
+    "unverified-context/male-grid-posterior.png",
+    "unverified-context/female-grid-posterior.png",
+    "verified-context/male-grid-posterior.png",
+    "verified-context/female-grid-posterior.png",
+    "web-triangles/male-grid-posterior.png",
+    "web-triangles/female-grid-posterior.png"
+  ],
+  "source_saved": false,
+  "new_blend_files": 0,
+  "new_glb_files": 0,
+  "new_full_deformation_qa": false,
+  "new_browser_comparison": false,
+  "human_camera_capture": false,
+  "human_coordinate_collection": false,
+  "appearance_passed": false,
+  "adopted": false,
+  "release_approved": false,
+  "stages_1_to_6_complete": false,
+  "pr9_merge_allowed": false,
+  "limitations": [
+    "A116 native_conformance is requested configuration, NOT verified successful application. That derivative removed editor activation; native modifiers operate on active object. A117 measured initial active Female, explicitly bound each body and asserted FINISHED and only original rig modifier remaining. A116 male is not a valid successful-conformance comparison.",
+    "All native exits 0 are execution completion, not geometry/appearance approval. All six per-body geometry guards explicitly failed.",
+    "Source/skin/rest/world/hands/outside original face winding exact assertions cover retained geometry; local original vertices 19291/18293 were replaced, so whole topology is not identical. New weights normalized 0 errors does not prove correct deformation.",
+    "Distances are sampled, not exhaustive surface/Hausdorff, anatomy, clinical correctness, collision or deformation. A117/A118 sub-mm envelopes do not override increased folds/tiny faces.",
+    "Actual PNG12, directly opened after images6. Before images6 preserved but not directly reviewed. Observed tool chunks, not independently captured complete stdout.",
+    "No source save, GLB, full118 deformation, browser, human webcam/coordinate collection, deployment or changed gate. Earlier A106 full QA is prior evidence, not these trials."
+  ],
+  "static_verification": {
+    "producers": 3,
+    "default_ruff_exit": 0,
+    "isolated_E4_E7_E9_F_I_B_exit": 0,
+    "format_88_check_exit": 0,
+    "native_executed_bytes_unchanged": true,
+    "formatting": "A118 mechanical format before execution; A116/A117 already formatted. Historical A100 S102 separate, not cleared."
+  },
+  "review": {
+    "archive_checker_exit": 0,
+    "prior_a115_checker_exit": 0,
+    "prior_a110_a114_checker_exit": 0,
+    "prior_a106_checker_exit": 0,
+    "node_syntax_check_exit": 0,
+    "targeted_secret_text_files": 23,
+    "targeted_secret_findings": 0,
+    "exhaustive_security_audit": false,
+    "merge_allowed": false
+  },
+  "appearance_p2_open": [
+    "A-02",
+    "A-08"
+  ],
+  "next": "Inspect generated face chart and before/after conformance movement at actual folds before another edit. No arbitrary grid span, smoothing strength, lighting/normal override, guard relaxation or coordinate/skin restoration to conceal failures."
+}

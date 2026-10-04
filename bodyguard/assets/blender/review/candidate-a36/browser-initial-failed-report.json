@@ -1,0 +1,254 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/frontend/node_modules/.pnpm/@playwright+test@1.63.0/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "playwright.avatar.config.ts",
+      "--reporter",
+      "list,json"
+    ],
+    "configFile": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/frontend/playwright.avatar.config.ts",
+    "rootDir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/frontend/test-results/avatar",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "avatar.spec.ts"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 5,
+    "webServer": {
+      "command": "vite --host localhost --port 5182",
+      "url": "http://localhost:5182",
+      "reuseExistingServer": false,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "avatar.spec.ts",
+      "file": "avatar.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "A-00 native proxy는 브라우저의 외부 연결을 차단한다",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8305,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T06:34:12.395Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "male-native-asset",
+                      "contentType": "application/json",
+                      "body": "eyJmaWxlbmFtZSI6ImJvZHlndWFyZC1tYWxlLWNhbmRpZGF0ZS5nbGIiLCJieXRlcyI6MTI2NTY5NzYsInNoYTI1NiI6ImNjODViY2Q0NDlmM2YzMTM0N2U0ZjcxNzQ5ODZkNDFlNGFjYTMwNjc5OTBmNWQ4YTJlNmJhM2EwOTkxNzE5MjcifQ=="
+                    },
+                    {
+                      "name": "female-native-asset",
+                      "contentType": "application/json",
+                      "body": "eyJmaWxlbmFtZSI6ImJvZHlndWFyZC1mZW1hbGUtY2FuZGlkYXRlLmdsYiIsImJ5dGVzIjoxNTE3NDMxNiwic2hhMjU2IjoiY2MyMWQyMThlNjFhYmEzZGFhZGI5MGJjNmU3ZjU4Yjk2MjUwM2EyMmE5MTlhNmVjMWEzYzk3YWZjYjg1NGRhOCJ9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ff9102a4e72e10c10bde-919e1940a97f5fdd1b91",
+          "file": "avatar.spec.ts",
+          "line": 47,
+          "column": 1
+        },
+        {
+          "title": "A-06 실제 남녀 GLB 두 복제본을 로드하고 한쪽 기술 변형이 다른 뼈대를 바꾸지 않는다",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5664,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m4\u001b[39m\nReceived:    \u001b[31m2\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m4\u001b[39m\nReceived:    \u001b[31m2\u001b[39m\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/frontend/e2e/avatar.spec.ts:80:40",
+                    "location": {
+                      "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/frontend/e2e/avatar.spec.ts",
+                      "column": 40,
+                      "line": 80
+                    },
+                    "snippet": "  78 |     expect(result.triangles).toBeGreaterThan(100_000)\n  79 |     expect(result.skeletons_independent).toBe(true)\n> 80 |     expect(result.eight_weight_meshes).toBeGreaterThanOrEqual(4)\n     |                                        ^\n  81 |     expect(result.static_angle_max).toBeLessThan(0.00001)\n  82 |     expect(result.moving_angle_max).toBeLessThan(0.00001)\n  83 |     await page.getByRole('button', { name: '기술 변형 시작' }).click()"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/frontend/e2e/avatar.spec.ts",
+                        "column": 40,
+                        "line": 80
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m4\u001b[39m\nReceived:    \u001b[31m2\u001b[39m\n\n  78 |     expect(result.triangles).toBeGreaterThan(100_000)\n  79 |     expect(result.skeletons_independent).toBe(true)\n> 80 |     expect(result.eight_weight_meshes).toBeGreaterThanOrEqual(4)\n     |                                        ^\n  81 |     expect(result.static_angle_max).toBeLessThan(0.00001)\n  82 |     expect(result.moving_angle_max).toBeLessThan(0.00001)\n  83 |     await page.getByRole('button', { name: '기술 변형 시작' }).click()\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/frontend/e2e/avatar.spec.ts:80:40"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T06:34:29.290Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "male-native-asset",
+                      "contentType": "application/json",
+                      "body": "eyJmaWxlbmFtZSI6ImJvZHlndWFyZC1tYWxlLWNhbmRpZGF0ZS5nbGIiLCJieXRlcyI6MTI2NTY5NzYsInNoYTI1NiI6ImNjODViY2Q0NDlmM2YzMTM0N2U0ZjcxNzQ5ODZkNDFlNGFjYTMwNjc5OTBmNWQ4YTJlNmJhM2EwOTkxNzE5MjcifQ=="
+                    },
+                    {
+                      "name": "female-native-asset",
+                      "contentType": "application/json",
+                      "body": "eyJmaWxlbmFtZSI6ImJvZHlndWFyZC1mZW1hbGUtY2FuZGlkYXRlLmdsYiIsImJ5dGVzIjoxNTE3NDMxNiwic2hhMjU2IjoiY2MyMWQyMThlNjFhYmEzZGFhZGI5MGJjNmU3ZjU4Yjk2MjUwM2EyMmE5MTlhNmVjMWEzYzk3YWZjYjg1NGRhOCJ9"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/frontend/test-results/avatar/avatar-A-06-실제-남녀-GLB-두-복제본을-로드하고-한쪽-기술-변형이-다른-뼈대를-바꾸지-않는다/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/frontend/e2e/avatar.spec.ts",
+                    "column": 40,
+                    "line": 80
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "ff9102a4e72e10c10bde-efe3f480d4ab77614123",
+          "file": "avatar.spec.ts",
+          "line": 51,
+          "column": 1
+        },
+        {
+          "title": "A-06 GLB 실패와 WebGL 연결 상실에서 재시도하여 새 모델을 연다",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3649,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T06:34:35.425Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "male-native-asset",
+                      "contentType": "application/json",
+                      "body": "eyJmaWxlbmFtZSI6ImJvZHlndWFyZC1tYWxlLWNhbmRpZGF0ZS5nbGIiLCJieXRlcyI6MTI2NTY5NzYsInNoYTI1NiI6ImNjODViY2Q0NDlmM2YzMTM0N2U0ZjcxNzQ5ODZkNDFlNGFjYTMwNjc5OTBmNWQ4YTJlNmJhM2EwOTkxNzE5MjcifQ=="
+                    },
+                    {
+                      "name": "female-native-asset",
+                      "contentType": "application/json",
+                      "body": "eyJmaWxlbmFtZSI6ImJvZHlndWFyZC1mZW1hbGUtY2FuZGlkYXRlLmdsYiIsImJ5dGVzIjoxNTE3NDMxNiwic2hhMjU2IjoiY2MyMWQyMThlNjFhYmEzZGFhZGI5MGJjNmU3ZjU4Yjk2MjUwM2EyMmE5MTlhNmVjMWEzYzk3YWZjYjg1NGRhOCJ9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ff9102a4e72e10c10bde-d572642cca8d63704873",
+          "file": "avatar.spec.ts",
+          "line": 104,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-01T06:34:09.742Z",
+    "duration": 29829.626,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

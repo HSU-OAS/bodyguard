@@ -1,0 +1,130 @@
+{
+  "date": "2026-10-02",
+  "kind": "read-only authored surface diagnosis",
+  "base_head": "e442dc505754ee2281217fba35628377643ffd4b",
+  "main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "unchanged_files": [
+    {
+      "file": "bodyguard/assets/blender/bodyguard_avatar_candidate_a94_rejected.blend",
+      "sha256": "939b8f55d894fbb5f4d0a2e5023a7eb87a6b5a51c21780f5ffa1c706392acbae"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a94-review/bodyguard-male-candidate.glb",
+      "sha256": "6bd222341a622f10a68e766f6f5810d78806797367a88fcfe104b842338bfac9"
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a94-review/bodyguard-female-candidate.glb",
+      "sha256": "c0de001ccba534c730f8e1a9870f883222ae5b901d54bb2351959f9f4935bd23"
+    },
+    {
+      "file": "bodyguard/assets/blender/review_avatar.py",
+      "sha256": "f712444c95cff9f56fbfb1a7d03580b2d9a3321fe7e11b93cf8f6448e0c83a39"
+    },
+    {
+      "file": "bodyguard/assets/blender/export_avatar_candidate.py",
+      "sha256": "890ba2eb8be9e107adc79554537bcdf7d5a6bdf9b536e1df217cc0b59aa0908f"
+    },
+    {
+      "file": "bodyguard/frontend/e2e/avatar.spec.ts",
+      "sha256": "01b035b555fb1ed610c38e0b6a8c0310b011178b2447ea5c51119192259aa367"
+    },
+    {
+      "file": "bodyguard/frontend/playwright.avatar.config.ts",
+      "sha256": "cf11a706fec036b1a8ac3c55b5b916372db5c79da8fc3d960e31fc4afa744299"
+    },
+    {
+      "file": "bodyguard/backend/tests/run_browser.py",
+      "sha256": "ab07d4313a4fa7e87ab0720450d6eaed82e9713f8e58f5861a7ea845fc384c2e"
+    }
+  ],
+  "runs": [
+    {
+      "name": "first-actual-Chrome",
+      "exit_code": 0,
+      "report": "first-browser.json"
+    },
+    {
+      "name": "native-forearm-diagnosis",
+      "exit_code": 0,
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a95-forearm-diagnosis.py -- '/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a94_rejected.blend' /private/tmp/bodyguard-tailor.6b7Uvu/draft-a94-web-roundtrip.blend /private/tmp/bodyguard-tailor.6b7Uvu/a95-forearm-diagnosis.json"
+    },
+    {
+      "name": "corrected-actual-Chrome",
+      "exit_code": 0,
+      "report": "corrected-browser.json",
+      "command": "BODYGUARD_AVATAR_QA_DIRECTORY=/private/tmp/bodyguard-tailor.6b7Uvu/a94-glb PLAYWRIGHT_JSON_OUTPUT_NAME=/private/tmp/bodyguard-tailor.6b7Uvu/a95-corrected-browser-report.json .venv/bin/python -m tests.run_browser avatar",
+      "native_actor_terminal_before_browser": true
+    }
+  ],
+  "browser": {
+    "first": {
+      "startTime": "2026-10-02T08:22:47.458Z",
+      "duration": 52290.908,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "corrected": {
+      "startTime": "2026-10-02T08:32:17.086Z",
+      "duration": 52829.793,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "style": {
+    "initial_biome_check_exit": 1,
+    "formatted_check_exit": 0,
+    "initial_typecheck_exit": 2,
+    "initial_typescript_errors": 6,
+    "corrected_typecheck_exit": 0,
+    "restored_typecheck_exit": 0,
+    "native_ruff_check_exit": 0,
+    "native_isolated_format_check_exit": 0
+  },
+  "directly_viewed": [
+    "first/avatar-A95-authored-boundary-surfaces-versus-body-only/남성-close-baseline.png",
+    "first/avatar-A95-authored-boundary-surfaces-versus-body-only/남성-close-body-only.png",
+    "first/avatar-A95-authored-boundary-surfaces-versus-body-only/여성-close-baseline.png",
+    "first/avatar-A95-authored-boundary-surfaces-versus-body-only/여성-close-body-only.png",
+    "corrected/avatar-A95-authored-boundary-surfaces-versus-body-only/남성-full-baseline.png",
+    "corrected/avatar-A95-authored-boundary-surfaces-versus-body-only/남성-full-body-only.png",
+    "corrected/avatar-A95-authored-boundary-surfaces-versus-body-only/여성-full-baseline.png",
+    "corrected/avatar-A95-authored-boundary-surfaces-versus-body-only/여성-full-body-only.png",
+    "corrected/avatar-A95-authored-boundary-surfaces-versus-body-only/남성-close-baseline.png",
+    "corrected/avatar-A95-authored-boundary-surfaces-versus-body-only/남성-close-body-only.png",
+    "corrected/avatar-A95-authored-boundary-surfaces-versus-body-only/여성-close-baseline.png",
+    "corrected/avatar-A95-authored-boundary-surfaces-versus-body-only/여성-close-body-only.png",
+    "corrected/avatar-A-06-실제-남녀-GLB-두-복제본을-로드하고-한쪽-기술-변형이-다른-뼈대를-바꾸지-않는다/남성-two-models.png",
+    "corrected/avatar-A-06-실제-남녀-GLB-두-복제본을-로드하고-한쪽-기술-변형이-다른-뼈대를-바꾸지-않는다/여성-two-models.png"
+  ],
+  "actual_png": 20,
+  "copy_count": 30,
+  "gzip_count": 7,
+  "observations": {
+    "boundary_only_hiding_resolved_forearm_stripes": false,
+    "body_receive_shadow": false,
+    "flat_forearm_faces": 0,
+    "exact_geometry_normal_gpu_root_proven": false
+  },
+  "temporary_test_helpers_restored": true,
+  "new_blend_files": 0,
+  "new_glb_files": 0,
+  "new_full_deformation_qa": false,
+  "human_camera_capture": false,
+  "human_coordinate_collection": false,
+  "appearance_passed": false,
+  "adopted": false,
+  "release_approved": false,
+  "stages_1_to_6_complete": false,
+  "pr9_merge_allowed": false,
+  "not_run": [
+    "new source/GLB full 118-pose QA (assets unchanged)",
+    "actual performer/webcam/retarget/clinical evaluation",
+    "GPU timing or integrated webcam latency",
+    "account/API/DB/SMTP/OAuth regression",
+    "deployment/release/operating migration/secrets"
+  ]
+}

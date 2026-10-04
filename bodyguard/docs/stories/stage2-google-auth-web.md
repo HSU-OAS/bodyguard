@@ -1,6 +1,6 @@
 # S2.6b2 — 구글 로그인 웹·브라우저 하네스
 
-2026-10-01 · **로컬 구현·검증 통과 / PR 최종 게이트 대기** · 기준 main `d5cade78668105e3d9faf96b32f03490f9ce67ea`, S2.6b1 PR #12 merge commit·부모/트리·브랜치 유지 확인. [운영 규칙](../operating-rules.md)과 FR-U-01~04·NFR-08을 따른다. 2단계 전체·실제 공급자·사람·최종 아바타는 미완료다.
+2026-10-01 · **PR #13 merge commit 병합** `4bbb78416090bfd5a6b922e518fa74d680e479ab`(부모/트리·원격 브랜치 유지 확인) · 기준 main `d5cade78668105e3d9faf96b32f03490f9ce67ea`. [운영 규칙](../operating-rules.md)과 FR-U-01~04·NFR-08을 따른다. 2단계 전체·실제 공급자·사람·최종 아바타는 미완료다.
 
 ## 범위·화면 계약
 
@@ -43,7 +43,7 @@
 - [Chrome 화면 증거](../review/google-auth-web/README.md) 4장을 원본 PNG로 보존하고 직접 검사했다. 1440px/700px 데스크톱·키보드 초점·취소/충돌 안내의 줄바꿈을 확인했다. 화면에는 합성 계정 데이터만 있고 웹캠/신체 영상은 없다.
 - API에는 기존 asyncio deprecation1개, Chrome에는 NO_COLOR 경고, fake-camera에는 기존 Three/MediaPipe 및 API 미기동 proxy 경고가 있었다. 경고 없는 검증으로 표시하지 않는다. 직접 실행한 로컬 결과이며 GitHub 체크 완료가 아니다.
 
-Story 범위의 미해결 P1/P2는 없다. 네이티브 start/callback DB 오류는 공통 SQL 예외 경계에서 보완했고 최초 외부 요청 실패는 위에 공개 기록했다. exact HEAD·최신 diff·main·충돌·체크를 다시 확인해 조건부 merge commit 규칙을 적용한다. 실제 공급자·사람·최종 아바타 미완료를 이 로컬 Story의 성공으로 덮지 않는다.
+Story 범위의 미해결 P1/P2는 없었다. 네이티브 start/callback DB 오류는 공통 SQL 예외 경계에서 보완했고 최초 외부 요청 실패는 위에 공개 기록했다. exact HEAD `201f4abc99781425f5b107f5836d4e6d86404ec2`·최신 diff24파일/805+23−·main·CLEAN/MERGEABLE·브랜치 자동 삭제 false를 확인해 PR #13을 조건부 merge commit으로 병합했다. GitHub checks/reviews는0(**체크 없음**), 로컬 시험을 GitHub 통과로 표시하지 않았다. 실제 공급자·사람·최종 아바타 미완료를 이 로컬 Story의 성공으로 덮지 않는다.
 
 ## 제외·다음 게이트
 

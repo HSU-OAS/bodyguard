@@ -7,12 +7,11 @@ Run with Blender 5.1+ and four local paths after ``--``:
 This imports artist-made meshes; it does not generate body geometry or a rig.
 """
 
-from pathlib import Path
 import sys
+from pathlib import Path
 
 import bpy
 from mathutils import Vector
-
 
 source, female_reference, male_reference, output = map(Path, sys.argv[sys.argv.index("--") + 1 :])
 for path in (source, female_reference, male_reference):

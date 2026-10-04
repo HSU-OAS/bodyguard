@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "artist_fixture_only": true,
+  "checks": [
+    {
+      "name": "nonstar",
+      "passed": true,
+      "expected_rejection": false
+    },
+    {
+      "name": "reverse-order",
+      "passed": true,
+      "expected_rejection": false
+    },
+    {
+      "name": "different-counts",
+      "passed": true,
+      "expected_rejection": false
+    },
+    {
+      "name": "same-plane-rejected",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "name": "third-ring-rejected",
+      "passed": true,
+      "expected_rejection": true
+    },
+    {
+      "name": "legacy-nonstar-failure-reproduced",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+"""FR-A-03: actual retained A66 body/skin/hands/rig comparison; source unsaved."""
+
+import json
+import sys
+from collections import Counter
+from hashlib import file_digest
+from pathlib import Path
+
+import bpy
+from mathutils import Vector
+
+original, revised, generation, output = map(Path, sys.argv[sys.argv.index("--") + 1 :])
+assert output.suffix == ".json" and not output.exists()
+sources = [
+    (original, "03ac3629b76858ee7f55fc0ffa9e6118c5d64fcbf4ba29100889af1318a8b3b5"),
+    (revised, "59ca68cdaef44b3a5945990e933d29be56f77c8ce388899e28d39af693cfd35b"),
+]
+reports = json.loads(generation.read_text())
+snapshots = []
+for source, digest in sources:
+    with source.open("rb") as file:
+        assert file_digest(file, "sha256").hexdigest() == digest
+    bpy.ops.wm.open_mainfile(filepath=str(source))
+    rows = []
+    for report in reports:
+        label = report["body"]
+        body = bpy.data.objects[f"BODYGUARD {label} sculpt WIP"]
+        rig = bpy.data.objects[f"BODYGUARD {label} rig WIP"]
+        normal = Vector(report["jaw_cut_plane_normal"])
+        points = [tuple(v.co) for v in body.data.vertices]
+        skin = [
+            tuple(
+                sorted((body.vertex_groups[g.group].name, g.weight) for g in v.groups)
+            )
+            for v in body.data.vertices
+        ]
+        rows.append(
+            {
+                "all": Counter(zip(points, skin, strict=True)),
+                "retained": Counter(
+                    (point, weights)
+                    for point, weights in zip(points, skin, strict=True)
+                    if normal.dot(Vector(point)) < report["cut_m"] - 1e-6
+                ),
+                "hands": [
+                    (points[i], skin[i]) for i in body["bodyguard_distal_hand_vertices"]
+                ],
+                "bones": [
+                    (b.name, tuple(tuple(row) for row in b.matrix_local))
+                    for b in rig.data.bones
+                ],
+                "body_matrix": tuple(tuple(row) for row in body.matrix_world),
+                "rig_matrix": tuple(tuple(row) for row in rig.matrix_world),
+            }
+        )
+    snapshots.append(rows)
+rows = []
+for report, before, after in zip(reports, *snapshots, strict=True):
+    assert before["retained"] <= after["all"], (
+        "Retained authored body point/skin changed"
+    )
+    assert len(before["bones"]) == len(after["bones"]) == 163
+    for key in ("hands", "bones", "body_matrix", "rig_matrix"):
+        assert before[key] == after[key], key
+    assert sum(before["retained"].values()) == report["retained_original_vertices"]
+    rows.append(
+        {
+            "body": report["body"],
+            "retained_authored_body_points_and_named_skin": sum(
+                before["retained"].values()
+            ),
+            "hands_163bones_rest_matrices_identical": True,
+            "head_artist_edit_and_new_bridge_checked_by_generation_assertions_not_this_comparison": True,
+        }
+    )
+for source, digest in sources:
+    with source.open("rb") as file:
+        assert file_digest(file, "sha256").hexdigest() == digest
+output.write_text(
+    json.dumps(
+        {
+            "passed": True,
+            "source_saved": False,
+            "source_sha256": [digest for _, digest in sources],
+            "artist_geometry_only_not_motion_or_clinical_approval": True,
+            "rows": rows,
+        },
+        indent=2,
+    )
+    + "\n"
+)
+print("ACTUAL AUTHORED BODY PRESERVATION", json.dumps(rows))

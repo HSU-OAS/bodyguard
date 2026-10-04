@@ -1,0 +1,42 @@
+{
+  "initial_checker": {
+    "file": "evidence-check.initial.cjs",
+    "sha256": "1d1d4d731a4457ad0abed694db8f46c6fa542e903752efc99fefc7d477c42622",
+    "actual_run": [
+      {
+        "chunk_id": "ec7d03",
+        "wall_time_seconds": 1.002759833,
+        "session_id": 67063,
+        "original_token_count": 0,
+        "output": ""
+      },
+      {
+        "chunk_id": "18b495",
+        "wall_time_seconds": 0.0000235,
+        "exit_code": 1,
+        "original_token_count": 264,
+        "output": "node:assert:152\n  throw new AssertionError(obj);\n  ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n\nundefined !== []\n\n    at Object.<anonymous> (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a307-a309-diagnosis/evidence-check.cjs:26:73)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n    at Module.load (node:internal/modules/cjs/loader:1651:32)\n    at Module._load (node:internal/modules/cjs/loader:1443:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: undefined,\n  expected: [],\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v24.20.0\n"
+      }
+    ]
+  },
+  "reason": "A308 fails during first temporary triangulation before first native unit-row report flush; stored report omits native_unit_copy_results rather than containing an empty array. Original report and executed helpers were not modified. Fixed evidence assertion requires field absence, not invented execution.",
+  "repair_scope": "uncommitted evidence checker only; initial checker preserved exactly; no native rerun or model change",
+  "fixed_checker_actual_run": [
+    {
+      "chunk_id": "b5adec",
+      "wall_time_seconds": 1.00361025,
+      "session_id": 66457,
+      "original_token_count": 0,
+      "output": ""
+    },
+    {
+      "chunk_id": "1c28bb",
+      "wall_time_seconds": 0.000017333,
+      "exit_code": 0,
+      "original_token_count": 87,
+      "output": "{\"exact_copies\":16,\"protected_prior_unchanged\":1069,\"actual_native_exit_codes\":[1,1,0],\"actual_scaled_authoring\":true,\"max_improved_p95_worsened_not_saved\":true,\"temporary_triangle_count_failure_before_fairing\":true,\"female_selected_exceptional_faces\":4,\"new_models\":0,\"new_GLB\":0,\"new_PNG\":0,\"new_browser_QA\":false,\"appearance_approved\":false}\n"
+    }
+  ],
+  "old_native_reports_changed": false,
+  "stage_completion_changed": false
+}

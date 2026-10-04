@@ -1,0 +1,161 @@
+{
+  "date": "2026-10-02",
+  "base_head": "48baa611f47bafd0bd516f7ec77ab4cb5bf33c78",
+  "main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "native_version": "5.1.1",
+  "device": {
+    "model": "Mac16,12",
+    "memory_bytes": 17179869184,
+    "chip": "Apple M4",
+    "chrome": "154.0.8037.58",
+    "viewport": [
+      1440,
+      1080
+    ],
+    "dpr": 1,
+    "headless": true
+  },
+  "native_common_args": [
+    "--background",
+    "--factory-startup",
+    "--disable-autoexec",
+    "--python-exit-code",
+    "1"
+  ],
+  "runs": [
+    {
+      "purpose": "A78 native factor0.5/16 guard",
+      "script_snapshot_archive": "a78-producer.py.txt.gz",
+      "input": "A77",
+      "exit": 1,
+      "male_displacement_m": 0.011960510162865,
+      "saved": false,
+      "female_run": false,
+      "subsequent_qa_run": false
+    },
+    {
+      "purpose": "A78b native factor0.15/16 guard",
+      "script": "a78b-producer.py.txt",
+      "input": "A77",
+      "exit": 1,
+      "male_displacement_m": 0.0066876971570557445,
+      "saved": false,
+      "female_run": false,
+      "subsequent_qa_run": false
+    },
+    {
+      "purpose": "A78c native factor0.15/8",
+      "script": "a78c-producer.py.txt",
+      "input": "A77",
+      "exit": 0,
+      "saved": true
+    },
+    {
+      "purpose": "saved original/candidate independent native comparison",
+      "script_snapshot_archive": "saved-source-check.py.txt.gz",
+      "exit": 0,
+      "source_saved": false
+    },
+    {
+      "purpose": "full source native QC and Cycles24 render",
+      "script": "../../review_avatar.py",
+      "args": [
+        "--candidate",
+        "--mannequin"
+      ],
+      "exit": 0,
+      "technical_cases": 118,
+      "rows": 121,
+      "png": 34,
+      "source_saved": false
+    },
+    {
+      "purpose": "native8 GLB export/import",
+      "script": "../../export_avatar_candidate.py",
+      "args": [
+        "new-web.blend",
+        "new-GLB-dir",
+        "1"
+      ],
+      "exit": 0,
+      "parent_warnings": 5,
+      "fin_repairs": [
+        0,
+        0
+      ],
+      "weight_limits": [
+        925269,
+        972046
+      ],
+      "source_saved": false
+    },
+    {
+      "purpose": "roundtrip QC only",
+      "script": "../../review_avatar.py",
+      "args": [
+        "--candidate",
+        "--mannequin",
+        "--qc-only"
+      ],
+      "exit": 0,
+      "technical_cases": 118,
+      "rows": 121,
+      "png": 0,
+      "source_saved": false
+    },
+    {
+      "purpose": "actual isolated Chrome",
+      "command": "BODYGUARD_AVATAR_QA_DIRECTORY=<new-GLB-dir> PLAYWRIGHT_JSON_OUTPUT_NAME=<new-json> backend/.venv/bin/python -m tests.run_browser avatar",
+      "exit": 0,
+      "tests": 3,
+      "duration_ms": 41399.287,
+      "native_actors_terminal_before_run": 7
+    }
+  ],
+  "non_native_retries": [
+    {
+      "purpose": "temporary staged verifier binary buffer",
+      "exit": 1,
+      "failure": "ENOBUFS reading Blender staged blob; no source mutation",
+      "repair": "Git native hash-object/index object equality rather than buffering entire binary"
+    },
+    {
+      "purpose": "staged whitespace and dependent precommit checks",
+      "exit": [2, 1],
+      "repair": "lossless gzip of two verbatim snapshots; remove EOF blank from new human docs/audit/excerpt; restage",
+      "original_native_scripts_modified": false
+    },
+    {
+      "purpose": "Ruff invocation path quoting",
+      "exit": 127,
+      "ruff_started": false,
+      "repair": "quote executable with spaces",
+      "rerun_exit": 0
+    },
+    {
+      "purpose": "device four-field read sandbox",
+      "exit": 1,
+      "repair": "same authorized read with native permission",
+      "rerun_exit": 0
+    }
+  ],
+  "warnings": [
+    "NO_COLOR ignored with FORCE_COLOR",
+    "THREE.Clock deprecated",
+    "injected GLB503 and React error boundary recovery",
+    "post-loss WEBGL_lose_context unsupported warning"
+  ],
+  "unrun": [
+    "A78/A78b candidate QA/render/export/browser (no saved source)",
+    "GLB reimport34PNG",
+    "actual performer/webcam/inference/coaching/compound motion",
+    "multidevice/long-run/GPU timing",
+    "SMTP/OAuth/operating DB/deployment/release"
+  ],
+  "default_model": "A37 unchanged",
+  "appearance_passed": false,
+  "unresolved_p2": "A-02 neckline/head silhouette/finish",
+  "merge_allowed": false,
+  "stage2_passed": false,
+  "stages1_to6_passed": false
+}

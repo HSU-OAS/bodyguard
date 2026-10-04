@@ -1,0 +1,638 @@
+"""FR-A-01~04: fit a sculpted native head section onto the fixed cervical cuts.
+
+Use Blender -b existing A66 --python-exit-code 1 --python this.py --
+ new-source.blend new-report.json existing-CC0-bundle.blend [artist-gap-m]
+The existing A49 density helper is reused unchanged. All QA remains required.
+"""
+
+import importlib.util
+import json
+import sys
+from collections import Counter
+from hashlib import file_digest
+from math import isfinite
+from pathlib import Path
+
+import bmesh
+import bpy
+from mathutils import Vector
+
+
+def align_neck_boundary_samples(mesh, edges, original, closed_loops):
+    """FR-A-03: ordered native arc samples also support non-star artist contours."""
+    loops = closed_loops(edges)
+    assert len(loops) == 2
+    # FR-A-02/03: actual artist cuts can be oblique. Require two planar,
+    # strictly separated rings, never relax the deformation or preservation QA.
+    planes = []
+    for loop in loops:
+        normal = sum(
+            (a.co.cross(b.co) for a, b in zip(loop, loop[1:] + loop[:1], strict=True)),
+            Vector(),
+        )
+        assert normal.length > 1e-10
+        normal.normalize()
+        if normal.z < 0:
+            normal.negate()
+        assert normal.z > 0.5
+        anchor = loop[0].co.copy()
+        assert all(abs(normal.dot(v.co - anchor)) < 1e-6 for v in loop)
+        planes.append((normal, anchor))
+    for i, (normal, anchor) in enumerate(planes):
+        distances = [normal.dot(v.co - anchor) for v in loops[1 - i]]
+        assert min(distances) > 1e-6 or max(distances) < -1e-6, (
+            "Artist rings intersect or share a plane"
+        )
+    deform = mesh.verts.layers.deform.active
+    assert deform is not None
+    before = Counter(
+        (tuple(v.co), tuple(sorted(v[deform].items()))) for loop in loops for v in loop
+    )
+    rings = []
+    for loop in loops:
+        assert all(
+            mesh.edges.get((a, b)) in edges
+            for a, b in zip(loop, loop[1:] + loop[:1], strict=True)
+        )
+        area = sum(
+            a.co.x * b.co.y - b.co.x * a.co.y
+            for a, b in zip(loop, loop[1:] + loop[:1], strict=True)
+        )
+        assert isfinite(area) and abs(area) > 1e-12
+        if area < 0:
+            loop = list(reversed(loop))
+        start = min(range(len(loop)), key=lambda i: (loop[i].co.y, abs(loop[i].co.x)))
+        ordered = loop[start:] + loop[:start]
+        lengths = [
+            (b.co - a.co).length
+            for a, b in zip(ordered, ordered[1:] + ordered[:1], strict=True)
+        ]
+        assert all(isfinite(length) and length > 1e-10 for length in lengths)
+        total, cumulative = sum(lengths), 0.0
+        points = []
+        for vertex, length in zip(ordered, lengths, strict=True):
+            points.append((cumulative / total, vertex))
+            cumulative += length
+        assert points[0][0] == 0 and points[-1][0] < 1
+        rings.append(points)
+    knots = sorted({arc for ordered in rings for arc, _ in ordered})
+    assert 3 <= len(knots) <= 4096
+    for ordered in rings:
+        for i, (aa, start) in enumerate(ordered):
+            ab, end = ordered[i + 1] if i + 1 < len(ordered) else (1.0, ordered[0][1])
+            previous = 0.0
+            for arc in (k for k in knots if aa < k < ab):
+                fraction = (arc - aa) / (ab - aa)
+                assert previous < fraction < 1
+                edge = mesh.edges.get((start, end))
+                assert edge is not None and edge.is_boundary
+                _, vertex = bmesh.utils.edge_split(
+                    edge, start, (fraction - previous) / (1 - previous)
+                )
+                vertex[original] = 0
+                start, previous = vertex, fraction
+    after = Counter((tuple(v.co), tuple(sorted(v[deform].items()))) for v in mesh.verts)
+    assert before <= after, "Native arc alignment moved authored coordinates/skin"
+    aligned = closed_loops(
+        [
+            e
+            for e in mesh.edges
+            if e.is_boundary
+            and any(
+                all(abs(normal.dot(v.co - anchor)) < 1e-6 for v in e.verts)
+                for normal, anchor in planes
+            )
+        ]
+    )
+    assert len(aligned) == 2 and all(len(loop) == len(knots) for loop in aligned)
+    return {
+        "before": [len(loop) for loop in loops],
+        "after": [len(knots), len(knots)],
+        "method": "native ordered arc-length edge splits on distinct planar cuts",
+        "cut_plane_normals": [list(normal) for normal, _ in planes],
+    }
+
+
+def bisect_registered_head(mesh, normal, intercept, closed_loops):
+    """FR-A-03: fixed final artist plane with retained points/skin unchanged."""
+    deform = mesh.verts.layers.deform.active
+    assert deform is not None
+    retained = Counter(
+        (tuple(v.co), tuple(sorted(v[deform].items())))
+        for v in mesh.verts
+        if normal.dot(v.co) > intercept + 1e-6
+    )
+    bmesh.ops.bisect_plane(
+        mesh,
+        geom=list(mesh.verts) + list(mesh.edges) + list(mesh.faces),
+        plane_co=(0, 0, intercept),
+        plane_no=normal,
+        dist=1e-8,
+        clear_inner=True,
+    )
+    after = Counter((tuple(v.co), tuple(sorted(v[deform].items()))) for v in mesh.verts)
+    assert retained <= after, "Final bisect changed retained head coordinates/skin"
+    loops = closed_loops([e for e in mesh.edges if e.is_boundary])
+    assert len(loops) == 1
+    assert all(abs(normal.dot(v.co) - intercept) < 1e-6 for v in loops[0])
+    return {
+        "final_plane_intercept_m": intercept,
+        "final_contour_points": len(loops[0]),
+        "retained_registered_head_points_and_skin": sum(retained.values()),
+    }
+
+
+def register_artist_section(
+    normal, xy_translation, reference_intercept, final_intercept
+):
+    """FR-A-03: rigidly register an actual head section; final cuts stay fixed."""
+    assert normal.z > 0.5 and all(isfinite(c) for c in normal)
+    assert all(
+        isfinite(c) for c in (*xy_translation, reference_intercept, final_intercept)
+    )
+    translation = Vector((*xy_translation, 0))
+    translation.z = (
+        final_intercept
+        - reference_intercept
+        - normal.x * translation.x
+        - normal.y * translation.y
+    ) / normal.z
+    assert abs(normal.dot(translation) - (final_intercept - reference_intercept)) < 1e-7
+    return translation
+
+
+def main():
+    args = sys.argv[sys.argv.index("--") + 1 :]
+    if len(args) not in (3, 4):
+        raise ValueError(
+            "Expected new .blend/report, professional source and optional artist gap"
+        )
+    output, report_path, professional = map(Path, args[:3])
+    if output.suffix != ".blend" or report_path.suffix != ".json":
+        raise ValueError("Explicit .blend and .json outputs required")
+    if len({output.resolve(), report_path.resolve(), professional.resolve()}) != 3:
+        raise ValueError("Input and output paths must be distinct")
+    if output.exists() or report_path.exists():
+        raise FileExistsError("Preserve prior artist files/evidence")
+    if not professional.is_file():
+        raise FileNotFoundError(professional)
+    gap = float(args[3]) if len(args) == 4 else 0.024
+    if not isfinite(gap) or not 0.012 <= gap <= 0.048:
+        raise ValueError("Finite artist transition between 12 and 48mm required")
+    helper_path = Path(__file__).with_name("a49-density-producer.py")
+    with helper_path.open("rb") as file:
+        helper_sha = file_digest(file, "sha256").hexdigest()
+    if helper_sha != "6a96114e186b0db44a622beaef770dc58a193656344586f9f189783cc14018c4":
+        raise ValueError("Use the preserved A49 native boundary helper")
+    spec = importlib.util.spec_from_file_location("a49_native_boundary", helper_path)
+    helper = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(helper)
+    with professional.open("rb") as file:
+        professional_sha = file_digest(file, "sha256").hexdigest()
+    assert (
+        professional_sha
+        == "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137"
+    )
+    with Path(bpy.data.filepath).open("rb") as file:
+        assert file_digest(file, "sha256").hexdigest() == (
+            "03ac3629b76858ee7f55fc0ffa9e6118c5d64fcbf4ba29100889af1318a8b3b5"
+        )
+    reports = []
+    for label, name in (
+        ("Male", "GEO-head_primitve"),
+        ("Female", "GEO-head_primitve"),
+    ):
+        body = bpy.data.objects[f"BODYGUARD {label} sculpt WIP"]
+        rig = bpy.data.objects[f"BODYGUARD {label} rig WIP"]
+        assert len(body.modifiers) == 1 and body.modifiers[0].object == rig
+        assert len(rig.data.bones) == 163 and all(
+            b.matrix_basis.is_identity for b in rig.pose.bones
+        )
+        bones = [(b.name, tuple(b.matrix_local)) for b in rig.data.bones]
+        body_matrix, rig_matrix = body.matrix_world.copy(), rig.matrix_world.copy()
+        crown = max(v.co.z for v in body.data.vertices)
+        # FR-A-03: A66 already has continuous-jaw skin and a proven external
+        # shell. Reuse it directly; no face flattening or new donor transfer.
+        input_points = [tuple(v.co) for v in body.data.vertices]
+        input_skin = [
+            tuple((g.group, g.weight) for g in v.groups) for v in body.data.vertices
+        ]
+        cut, head_cut = crown * 0.89 - 0.006, crown * 0.89 - 0.006 + gap
+        jaw_normal = Vector((0, -0.6, 1))
+        jaw_anchor = Vector((0, 0, cut))
+        old_head = [v.co for v in body.data.vertices if v.co.z > crown * 0.87]
+        target_xy = [
+            (min(v[a] for v in old_head) + max(v[a] for v in old_head)) / 2
+            for a in (0, 1)
+        ]
+        protected = {i + 1 for i in body["bodyguard_distal_hand_vertices"]}
+        with bpy.data.libraries.load(str(professional)) as (available, loaded):
+            if name not in available.objects:
+                raise ValueError("Expected existing licensed professional blank head")
+            loaded.objects = [name]
+        head = loaded.objects[0]
+        bpy.context.scene.collection.objects.link(head)
+        bpy.context.view_layer.update()
+        authored_world = head.matrix_world.copy()
+        # Reuse the existing shallow-face edit; x/z outline is unchanged.
+        bm = bmesh.new()
+        bm.from_mesh(head.data)
+        face = [v for v in bm.verts if v.co.y < -0.025]
+        outline = [(v.co.x, v.co.z) for v in bm.verts]
+        for _ in range(18):
+            bmesh.ops.smooth_vert(
+                bm,
+                verts=face,
+                factor=0.65,
+                use_axis_x=False,
+                use_axis_y=True,
+                use_axis_z=False,
+            )
+        assert outline == [(v.co.x, v.co.z) for v in bm.verts]
+        cage_path = Path(__file__).with_name("a72-head-cage-sculpt.py")
+        cage_spec = importlib.util.spec_from_file_location(
+            "lower_artist_cage", cage_path
+        )
+        cage = importlib.util.module_from_spec(cage_spec)
+        cage_spec.loader.exec_module(cage)
+        with cage_path.open("rb") as file:
+            cage_sha = file_digest(file, "sha256").hexdigest()
+        # FR-A-02/03: native editing of the existing professional control cage.
+        # No generated body, topology loss or change to retained body/skin/rig.
+        head_cage_sculpt = cage.refine_head_cage(bm, 12)
+        bm.to_mesh(head.data)
+        bm.free()
+        assert len(head.modifiers) == 1 and head.modifiers[0].type == "SUBSURF"
+        head.modifiers[0].levels = head.modifiers[0].render_levels = 4
+        bpy.context.view_layer.update()
+        head.data = bpy.data.meshes.new_from_object(
+            head.evaluated_get(bpy.context.evaluated_depsgraph_get())
+        )
+        head.modifiers.clear()
+        # Resolve parent transforms before baking, then fit the artist head without
+        # body shrinkwrap, remesh, or coordinate-clamping to hide surface faults.
+        inverse = body_matrix.inverted()
+        points = [inverse @ (authored_world @ v.co) for v in head.data.vertices]
+        shift = Vector(
+            (
+                target_xy[0]
+                - (min(v.x for v in points) + max(v.x for v in points)) / 2,
+                target_xy[1]
+                - (min(v.y for v in points) + max(v.y for v in points)) / 2,
+                crown - max(v.z for v in points),
+            )
+        )
+        head.parent = None
+        head.matrix_world = body_matrix.copy()
+        for vertex, point in zip(head.data.vertices, points, strict=True):
+            vertex.co = point + shift
+        assert min(v.co.z for v in head.data.vertices) < head_cut < crown - 0.1
+        # FR-A-02/03: the edited artist head no longer intersects the old
+        # diagnostic plane. Select a real lower head section and rigidly
+        # register that section; never move the final body/head cuts.
+        projected_min = min(jaw_normal.dot(v.co) for v in head.data.vertices)
+        projected_max = max(jaw_normal.dot(v.co) for v in head.data.vertices)
+        artist_section_inset = 0.012  # artist fit only, not a clinical threshold
+        diagnostic_cut = projected_min + artist_section_inset
+        assert projected_min < diagnostic_cut < projected_max - 0.1
+        hm = bmesh.new()
+        hm.from_mesh(head.data)
+        bmesh.ops.bisect_plane(
+            hm,
+            geom=list(hm.verts) + list(hm.edges) + list(hm.faces),
+            plane_co=(0, 0, diagnostic_cut),
+            plane_no=jaw_normal,
+            dist=1e-8,
+            clear_inner=True,
+        )
+        head_loops = helper.closed_loops([e for e in hm.edges if e.is_boundary])
+        assert len(head_loops) == 1
+        ring = head_loops[0]
+        # FR-A-02/03: the actual retained continuous artist jaw is the target.
+        # The raw bundle cut has an exterior ear contour and must never be capped.
+        body_name = body.name
+        evaluated = body.data.copy()
+        native = bmesh.new()
+        native.from_mesh(evaluated)
+        bmesh.ops.bisect_plane(
+            native,
+            geom=list(native.verts) + list(native.edges) + list(native.faces),
+            plane_co=jaw_anchor,
+            plane_no=jaw_normal,
+            dist=1e-8,
+            clear_outer=True,
+        )
+        cavity = helper.cap_inner_cut(
+            native, [e for e in native.edges if e.is_boundary]
+        )
+        assert cavity == 0, "Diagnosed under-jaw cut must not include an oral cavity"
+        contours = helper.closed_loops([e for e in native.edges if e.is_boundary])
+        assert len(contours) == 1
+        authored_ring = contours[0]
+        assert all(abs(jaw_normal.dot(v.co - jaw_anchor)) < 1e-6 for v in authored_ring)
+        target = Vector(
+            tuple(
+                (
+                    min(v.co[a] for v in authored_ring)
+                    + max(v.co[a] for v in authored_ring)
+                )
+                / 2
+                for a in (0, 1)
+            )
+            + (head_cut,)
+        )
+        authored_contour_count = len(authored_ring)
+        native.free()
+        bpy.data.meshes.remove(evaluated)
+        ring_center = [
+            (min(v.co[a] for v in ring) + max(v.co[a] for v in ring)) / 2
+            for a in (0, 1)
+        ]
+        rig_fit = register_artist_section(
+            jaw_normal,
+            (target.x - ring_center[0], target.y - ring_center[1]),
+            diagnostic_cut,
+            head_cut,
+        )
+        registered_crown = crown + rig_fit.z
+        assert abs(max(v.co.z for v in hm.verts) - crown) < 1e-6
+        assert len(hm.faces) > 1000
+        # Initial bisect is only a registration diagnostic. Keep the full
+        # authored head for binding, rigid registration and the final bisect.
+        initial_contour_count = len(ring)
+        hm.free()
+        head.vertex_groups.clear()
+        for group in body.vertex_groups:
+            head.vertex_groups.new(name=group.name)
+        bpy.ops.object.select_all(action="DESELECT")
+        body.select_set(True)
+        head.select_set(True)
+        bpy.context.view_layer.objects.active = body
+        bpy.ops.object.data_transfer(
+            data_type="VGROUP_WEIGHTS",
+            use_create=True,
+            use_object_transform=True,
+            vert_mapping="POLYINTERP_NEAREST",
+            layers_select_src="ALL",
+            layers_select_dst="NAME",
+        )
+        bpy.ops.object.select_all(action="DESELECT")
+        head.select_set(True)
+        bpy.context.view_layer.objects.active = head
+        bpy.ops.object.vertex_group_normalize_all(lock_active=False)
+        assert [g.name for g in head.vertex_groups] == [
+            g.name for g in body.vertex_groups
+        ]
+        # Bind at the authored head correspondence, not against a different
+        # nearest neck/shoulder face after rig registration (A56 tearing).
+        before_registration = [v.co.copy() for v in head.data.vertices]
+        prepared_skin = [
+            tuple((g.group, g.weight) for g in v.groups) for v in head.data.vertices
+        ]
+        for vertex in head.data.vertices:
+            vertex.co += rig_fit
+        assert all(
+            (v.co - (point + rig_fit)).length < 1e-6
+            for v, point in zip(head.data.vertices, before_registration, strict=True)
+        )
+        assert prepared_skin == [
+            tuple((g.group, g.weight) for g in v.groups) for v in head.data.vertices
+        ]
+        assert abs(max(v.co.z for v in head.data.vertices) - registered_crown) < 1e-6
+        assert input_points == [tuple(v.co) for v in body.data.vertices]
+        assert input_skin == [
+            tuple((g.group, g.weight) for g in v.groups) for v in body.data.vertices
+        ]
+        hm = bmesh.new()
+        hm.from_mesh(head.data)
+        final_cut = bisect_registered_head(
+            hm, jaw_normal, head_cut, helper.closed_loops
+        )
+        hm.to_mesh(head.data)
+        hm.free()
+        assert abs((head_cut - cut) - gap) < 1e-6
+        authored_points = {tuple(v.co) for v in head.data.vertices}
+        head_skin = Counter(
+            (tuple(v.co), tuple(sorted((g.group, g.weight) for g in v.groups)))
+            for v in head.data.vertices
+        )
+        bm = bmesh.new()
+        bm.from_mesh(body.data)
+        bm.verts.ensure_lookup_table()
+        original = bm.verts.layers.int.new("Original authored head vertex")
+        deform = bm.verts.layers.deform.active
+        assert deform is not None
+        retained = {v.index + 1: (v.co.copy(), dict(v[deform])) for v in bm.verts}
+        for v in bm.verts:
+            v[original] = v.index + 1
+        before = set(bm.verts)
+        bmesh.ops.bisect_plane(
+            bm,
+            geom=list(bm.verts) + list(bm.edges) + list(bm.faces),
+            plane_co=jaw_anchor,
+            plane_no=jaw_normal,
+            dist=1e-8,
+            clear_outer=True,
+        )
+        for v in set(bm.verts) - before:
+            v[original] = 0
+        retained_cavity = helper.cap_inner_cut(
+            bm, [e for e in bm.edges if e.is_boundary]
+        )
+        assert retained_cavity == 0, "Do not cap the diagnosed single under-jaw contour"
+        assert len(helper.closed_loops([e for e in bm.edges if e.is_boundary])) == 1
+        bm.from_mesh(head.data)
+        edges = [e for e in bm.edges if e.is_boundary]
+        density = align_neck_boundary_samples(bm, edges, original, helper.closed_loops)
+        edges = [e for e in bm.edges if e.is_boundary]
+        loops = helper.closed_loops(edges)
+        assert len(loops) == 2 and len(loops[0]) == len(loops[1])
+        before = {}
+        for v in bm.verts:
+            before.setdefault(tuple(v.co), []).append(v[original])
+        for element in list(bm.verts) + list(bm.edges) + list(bm.faces):
+            element.select = False
+        for edge in edges:
+            edge.select_set(True)
+        boundary_faces = {face for edge in edges for face in edge.link_faces}
+        cached_normals = {face: face.normal.copy() for face in boundary_faces}
+        bm.normal_update()
+        normal_refresh_delta = max(
+            (face.normal - cached_normals[face]).length for face in boundary_faces
+        )
+        bm.to_mesh(body.data)
+        bm.free()
+        bpy.ops.object.select_all(action="DESELECT")
+        body.select_set(True)
+        bpy.context.view_layer.objects.active = body
+        bpy.context.scene.tool_settings.mesh_select_mode = (False, True, False)
+        bpy.ops.object.mode_set(mode="EDIT")
+        bpy.ops.mesh.bridge_edge_loops(
+            type="SINGLE", number_cuts=6, interpolation="SURFACE", smoothness=1.0
+        )
+        bpy.ops.object.mode_set(mode="OBJECT")
+        # FR-A-02/03: fair only newly bridged points; all authored cut/head/body
+        # coordinates and skin stay pinned. Never relax the existing 6mm guard.
+        joined_rest = [v.co.copy() for v in body.data.vertices]
+        joined_skin = [
+            tuple((g.group, g.weight) for g in v.groups) for v in body.data.vertices
+        ]
+        selected = {v.index for v in body.data.vertices if tuple(v.co) not in before}
+        assert selected and len(selected) <= 6 * len(loops[0])
+        mask = body.vertex_groups.new(name="Native new-bridge-only fairing")
+        mask_name = mask.name
+        mask.add(sorted(selected), 1.0, "REPLACE")
+        finish = body.modifiers.new(
+            "Native bridge-only fairing - QA required", "CORRECTIVE_SMOOTH"
+        )
+        finish.vertex_group = mask_name
+        finish.factor = 0.5
+        finish.iterations = 8
+        finish.smooth_type = "LENGTH_WEIGHTED"
+        finish.use_only_smooth = True
+        bpy.ops.object.modifier_move_up(modifier=finish.name)
+        bpy.ops.object.modifier_apply(modifier=finish.name)
+        body.vertex_groups.remove(body.vertex_groups[mask_name])
+        assert len(joined_rest) == len(body.data.vertices)
+        assert joined_skin == [
+            tuple((g.group, g.weight) for g in v.groups) for v in body.data.vertices
+        ]
+        assert all(
+            (v.co - joined_rest[v.index]).length < 1e-6
+            for v in body.data.vertices
+            if v.index not in selected
+        ), "Native fairing moved authored points outside the new bridge"
+        displacement = max(
+            (v.co - joined_rest[v.index]).length for v in body.data.vertices
+        )
+        print("NEW BRIDGE ONLY ARTIST DISPLACEMENT", label, displacement)
+        assert isfinite(displacement) and displacement < 0.006, (
+            "Excessive anatomical surface change"
+        )
+        bm = bmesh.new()
+        bm.from_mesh(body.data)
+        original = bm.verts.layers.int.get("Original authored head vertex")
+        deform = bm.verts.layers.deform.active
+        assert original is not None and deform is not None
+        for v in bm.verts:
+            ids = before.get(tuple(v.co))
+            v[original] = ids.pop() if ids else 0
+        assert all(e.is_manifold for e in bm.edges)
+        bm.verts.index_update()
+        remap = {v[original]: v.index for v in bm.verts if v[original]}
+        missing = retained.keys() - remap.keys()
+        assert missing and all(
+            jaw_normal.dot(retained[i][0] - jaw_anchor) > -1e-6 for i in missing
+        )
+        assert protected <= remap.keys()
+        assert all(
+            (v.co - retained[v[original]][0]).length < 1e-6
+            and dict(v[deform]) == retained[v[original]][1]
+            for v in bm.verts
+            if v[original]
+        ), "Do not alter retained authored body/skin"
+        assert authored_points <= {tuple(v.co) for v in bm.verts}
+        assert head_skin <= Counter(
+            (tuple(v.co), tuple(sorted(v[deform].items()))) for v in bm.verts
+        ), "Native bridge changed retained registered head skin"
+        assert all(
+            all(isfinite(c) for c in v.co)
+            and isfinite(total := sum(v[deform].values()))
+            and abs(total - 1) < 0.01
+            for v in bm.verts
+        )
+        assert abs(max(v.co.z for v in bm.verts) - registered_crown) < 1e-6
+        assert bones == [(b.name, tuple(b.matrix_local)) for b in rig.data.bones]
+        assert body_matrix == body.matrix_world and rig_matrix == rig.matrix_world
+        bmesh.ops.recalc_face_normals(bm, faces=list(bm.faces))
+        report = {
+            "body": label,
+            "professional_source": professional.name,
+            "professional_sha256": professional_sha,
+            "helper_sha256": helper_sha,
+            "head_source": name,
+            "head_cage_sculpt": head_cage_sculpt,
+            "head_cage_helper_sha256": cage_sha,
+            "head_world_matrix": [list(row) for row in authored_world],
+            "head_translation_m": list(shift + rig_fit),
+            "head_authored_registration": {
+                "reference_surface": body_name,
+                "reference_cervical_cut_m": cut,
+                "authored_contour_points": authored_contour_count,
+                "proven_inner_cut_edges_capped_for_diagnostic": cavity,
+                "initial_head_translation_m": list(shift),
+                "cut_ring_center_xy_before_m": ring_center,
+                "target_body_point_m": list(target),
+                "native_head_translation_m": list(rig_fit),
+                "initial_diagnostic_contour_points": initial_contour_count,
+                "initial_projection_bounds_m": [projected_min, projected_max],
+                "artist_section_inset_m": artist_section_inset,
+                "initial_diagnostic_plane_intercept_m": diagnostic_cut,
+                "reference_to_final_plane_delta_m": head_cut - diagnostic_cut,
+                "contour_points": final_cut["final_contour_points"],
+                "final_cut_after_registration": final_cut,
+                "registration_plane_intercept_change_m": jaw_normal.dot(rig_fit),
+                "registered_head_crown_m": registered_crown,
+                "original_body_crown_m": crown,
+                "purpose": "native artist contour registration only; no clinical target",
+            },
+            "head_skin_correspondence": {
+                "native_transfer": "POLYINTERP_NEAREST/NAME before rigid registration",
+                "prepared_weights_preserved_during_registration": True,
+                "reason": "avoid nearest donor neck/shoulder switching after head translation",
+                "full_deformation_and_visual_qa_required": True,
+            },
+            "cut_m": cut,
+            "jaw_cut_plane_normal": list(jaw_normal),
+            "jaw_cut_plane_anchor": list(jaw_anchor),
+            "retained_original_vertices": len(remap),
+            "removed_head_original_vertices": len(missing),
+            "head_cut_m": head_cut,
+            "head_cut_plane_normal": list(jaw_normal),
+            "artist_gap_m": gap,
+            "native_boundary_density": density,
+            "native_bridge": {"interpolation": "SURFACE", "cuts": 6, "smoothness": 1},
+            "bridge_only_native_fairing": {
+                "modifier": "CORRECTIVE_SMOOTH/LENGTH_WEIGHTED/only-smooth",
+                "factor": 0.5,
+                "iterations": 8,
+                "selected_new_vertices": len(selected),
+                "maximum_artist_displacement_m": displacement,
+                "authored_points_skin_and_topology_preserved": True,
+                "full_deformation_visual_browser_qa_required": True,
+                "reused": "preserved A59 native new-bridge-only refinement",
+            },
+            "boundary_normal_refresh_max_delta": normal_refresh_delta,
+            "source_vertices": len(retained),
+            "candidate_vertices": len(bm.verts),
+            "professional_head_points": len(authored_points),
+            "preserved_external_body_source": {
+                "source": Path(bpy.data.filepath).name,
+                "sha256": "03ac3629b76858ee7f55fc0ffa9e6118c5d64fcbf4ba29100889af1318a8b3b5",
+                "method": "reuse A66 external surface/skin; no new donor or anatomy deletion",
+                "cut_closed_cavity_count": retained_cavity,
+                "old_source_and_qa_preserved": True,
+            },
+            "retained_body_skin_hands_bones_rest_preserved": True,
+            "all_source_glb_deformation_browser_visual_checks_pending": True,
+        }
+        reports.append(report)
+        body["bodyguard_distal_hand_vertices"] = [remap[i] for i in sorted(protected)]
+        bm.verts.layers.int.remove(original)
+        bm.to_mesh(body.data)
+        bm.free()
+        bpy.data.objects.remove(head, do_unlink=True)
+        for polygon in body.data.polygons:
+            polygon.use_smooth = True
+        body.data.update()
+        print("AUTHORED HEAD REPLACEMENT", report)
+    report_path.write_text(json.dumps(reports, indent=2) + "\n")
+    bpy.context.scene["bodyguard_stage"] = (
+        "S2.4 sculpted artist-section/bridge-only refinement; ALL QA pending; NOT release"
+    )
+    bpy.context.preferences.filepaths.save_version = 0
+    bpy.ops.wm.save_as_mainfile(filepath=str(output), compress=True)
+
+
+if __name__ == "__main__":
+    main()

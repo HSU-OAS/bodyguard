@@ -1,0 +1,123 @@
+{
+  "story": "S2.4a / FR-A-02/03/08",
+  "status": "diagnosis_failed_not_adopted",
+  "input_source": "../candidate-a136-a146-review/artist-candidate.blend",
+  "reference_sha256": "45b313912dee5ae2218b1fe76086abb35a9b948fab9e877f1a9d2b05f832de62",
+  "native_runs": [
+    {
+      "phase": "a167",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a167-native-bridge-fold-trace.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a167-native-bridge-fold-trace",
+      "exit_code": 0,
+      "terminal_chunk_id": "3018df",
+      "log": "logs/a167-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a168",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a168-native-interval-correspondence.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a168-native-interval-correspondence",
+      "exit_code": 1,
+      "terminal_chunk_id": "c1512a",
+      "log": "logs/a168-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a169",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a169-native-open-interval-diagnosis.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a169-native-open-interval-diagnosis",
+      "exit_code": 1,
+      "terminal_chunk_id": "7a8c2d",
+      "log": "logs/a169-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a170",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a170-native-pinned-interval-fill.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a170-native-pinned-interval-fill",
+      "exit_code": 1,
+      "terminal_chunk_id": "e18ccb",
+      "log": "logs/a170-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a171",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a171-native-regional-boundary-diagnosis.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a171-native-regional-boundary-diagnosis",
+      "exit_code": 0,
+      "terminal_chunk_id": "46c0c4",
+      "log": "logs/a171-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a172",
+      "command": "'/Applications/Blender.app/Contents/MacOS/Blender' --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a172-native-professional-coverage.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a172-native-professional-coverage",
+      "exit_code": 0,
+      "terminal_chunk_id": "296fab",
+      "log": "logs/a172-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    }
+  ],
+  "native_actors_sequential": true,
+  "native_and_browser_actors_not_overlapped": true,
+  "directly_viewed": [
+    "a170/posterior-side-male.png",
+    "a170/posterior-back-male.png",
+    "a170/posterior-side-female.png",
+    "a170/posterior-back-female.png"
+  ],
+  "new_verification": {
+    "actual_png": 4,
+    "directly_viewed": 4,
+    "not_viewed": 0,
+    "source_full_118": 0,
+    "glb_full_118": 0,
+    "actual_Chrome_tests": 0,
+    "actual_webcam_trials": 0
+  },
+  "new_assets": {
+    "source_blend": 0,
+    "web_blend": 0,
+    "roundtrip_blend": 0,
+    "male_glb": 0,
+    "female_glb": 0
+  },
+  "evidence_copy": {
+    "start": {
+      "chunk_id": "97b425",
+      "wall_time_seconds": 1.002234625,
+      "session_id": 4230,
+      "original_token_count": 45,
+      "output": "{\"integrity_passed\":true,\"copies\":14,\"gzip\":5,\"protected_old_files\":137,\"new_png\":2,\"directly_viewed\":2,\"native_exits\":[0,0],\"new_Chrome\":0,\"geometry_or_appearance_passed\":false}\n"
+    },
+    "terminal": {
+      "chunk_id": "e523b4",
+      "wall_time_seconds": 0.000009916,
+      "exit_code": 0,
+      "original_token_count": 1085,
+      "output": "{\"integrity_passed\":true,\"copies\":110,\"gzip\":17,\"protected_old_files\":164,\"new_png\":74,\"directly_viewed\":32,\"native_exits\":[0,0,0,0,0,0,0],\"new_Chrome\":4,\"source_and_roundtrip_technical_pass\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":20,\"gzip\":16,\"protected_old_files\":278,\"native_exits\":[0,1,1,1,0,1],\"new_assets\":0,\"new_png\":0,\"new_browser\":0,\"geometry_or_appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":116,\"gzip\":24,\"protected_old_files\":302,\"native_exits\":[0,0,0,0,0,0,0,0,0,0],\"actual_png\":76,\"directly_viewed\":34,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":137,\"gzip\":33,\"protected_old_files\":422,\"native_exits\":[0,0,1,0,1,1,0,1,1,0,0,0,0,0,0],\"actual_png\":84,\"directly_viewed\":42,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":43,\"gzip\":22,\"protected_old_files\":563,\"native_exits\":[0,0,0,0,0,0,1,1,1],\"actual_png\":12,\"directly_viewed\":12,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"a154_fold_regression_resolved\":true,\"a154_female_guard_failed\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":32,\"gzip\":12,\"protected_old_files\":610,\"native_exits\":[1,0,0,0],\"actual_png\":16,\"directly_viewed\":16,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"a155_female_guard_failed\":true,\"a156_a157_guards_passed_but_appearance_failed\":true,\"a158_read_only\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":25,\"gzip\":12,\"protected_old_files\":646,\"native_exits\":[0,1,0,1],\"actual_png\":8,\"directly_viewed\":8,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"count_only_native_bridge_rejected\":true,\"correspondence_projection_not_anatomy\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":23,\"gzip\":13,\"protected_old_files\":675,\"native_exits\":[0,0,0,1],\"actual_png\":4,\"directly_viewed\":4,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"projection_gate_failed\":true,\"unequal_native_bridge_failed\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":14,\"gzip\":5,\"protected_old_files\":137,\"new_png\":2,\"directly_viewed\":2,\"native_exits\":[0,0],\"new_Chrome\":0,\"geometry_or_appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":110,\"gzip\":17,\"protected_old_files\":164,\"new_png\":74,\"directly_viewed\":32,\"native_exits\":[0,0,0,0,0,0,0],\"new_Chrome\":4,\"source_and_roundtrip_technical_pass\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":20,\"gzip\":16,\"protected_old_files\":278,\"native_exits\":[0,1,1,1,0,1],\"new_assets\":0,\"new_png\":0,\"new_browser\":0,\"geometry_or_appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":116,\"gzip\":24,\"protected_old_files\":302,\"native_exits\":[0,0,0,0,0,0,0,0,0,0],\"actual_png\":76,\"directly_viewed\":34,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":137,\"gzip\":33,\"protected_old_files\":422,\"native_exits\":[0,0,1,0,1,1,0,1,1,0,0,0,0,0,0],\"actual_png\":84,\"directly_viewed\":42,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":43,\"gzip\":22,\"protected_old_files\":563,\"native_exits\":[0,0,0,0,0,0,1,1,1],\"actual_png\":12,\"directly_viewed\":12,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"a154_fold_regression_resolved\":true,\"a154_female_guard_failed\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":32,\"gzip\":12,\"protected_old_files\":610,\"native_exits\":[1,0,0,0],\"actual_png\":16,\"directly_viewed\":16,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"a155_female_guard_failed\":true,\"a156_a157_guards_passed_but_appearance_failed\":true,\"a158_read_only\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":25,\"gzip\":12,\"protected_old_files\":646,\"native_exits\":[0,1,0,1],\"actual_png\":8,\"directly_viewed\":8,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"count_only_native_bridge_rejected\":true,\"correspondence_projection_not_anatomy\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":23,\"gzip\":13,\"protected_old_files\":675,\"native_exits\":[0,0,0,1],\"actual_png\":4,\"directly_viewed\":4,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"projection_gate_failed\":true,\"unequal_native_bridge_failed\":true,\"appearance_passed\":false}\n{\"copies\":23,\"gzip\":14,\"png\":4,\"protected_old_files\":702,\"old_files_changed\":0}\n"
+    },
+    "exit_code": 0
+  },
+  "diagnosis_gate_results": {
+    "a168_closed_mesh_guard_failed": true,
+    "a169_closed_mesh_guard_failed": true,
+    "a169_only_male_executed": true,
+    "a170_closed_mesh_guard_passed": true,
+    "a170_geometry_guard_failed": true,
+    "a171_a172_read_only_not_native_connections": true,
+    "previous_xz_failure_cleared": false
+  },
+  "limitations": {
+    "appearance_approved": false,
+    "full_deformation_qa": false,
+    "anatomy_registration": false,
+    "clinical_accuracy_verified": false,
+    "full_3d_collision_test": false,
+    "release_ready": false,
+    "production_model_changed": false,
+    "gui_changed": false,
+    "quality_guards_relaxed": false
+  },
+  "pre_native_authoring_notes": [
+    "A168 initial default Ruff RUF007 three occurrences were corrected with stdlib pairwise before native execution; actual initial/final outputs retained.",
+    "A170 Counter classification excludes explicit new native bridge faces even when all endpoints are old vertices. Before/after native face handles and vertex rings prove every actual original face remains exact; no guard relaxation.",
+    "A171 detached helper boundary precondition corrected during code review before native execution; no failed native attempt invented.",
+    "A170 and A172 terminal completion labels were inherited from earlier diagnostic scripts. Original actual stdout retained verbatim; labels do not establish approved assets or repeated source/GLB/browser QA."
+  ]
+}

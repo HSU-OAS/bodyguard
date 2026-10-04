@@ -1,0 +1,174 @@
+{
+  "recorded_date": "2026-10-02",
+  "result_kind": "observed actual tool outcomes; not a complete stdout transcript",
+  "artist_only": true,
+  "adopted_for_release": false,
+  "development_default": "A37 unchanged",
+  "sources": {
+    "a63": {
+      "bytes": 22471719,
+      "sha256": "07b120b2692a91dc36921f8e6198ddfaa268022130f059593d0b146a4fed88c4"
+    },
+    "a64": {
+      "bytes": 26778155,
+      "sha256": "4b3a5f97c120dadd4d11814e2c5f45d1c2a2a27dd2f809c6a384077a43a03077"
+    }
+  },
+  "observed_runs": [
+    {
+      "run": "A62 cervical rest correspondence",
+      "exit_code": 0,
+      "source_saved": false
+    },
+    {
+      "run": "A63 first generation",
+      "exit_code": 1,
+      "reason": "Native VGroup Smooth changed unselected skin; assertion stopped before save",
+      "producer": "a63/producer-first-failed.py.txt"
+    },
+    {
+      "run": "A63 bounded patch skin and Y depth generation",
+      "exit_code": 0,
+      "source": "a63",
+      "generation_producer": "a63/producer-at-generation.py.txt"
+    },
+    {
+      "run": "A63 source preflight",
+      "exit_code": 0,
+      "actual_poses": 118,
+      "rows": 121,
+      "rendered": false
+    },
+    {
+      "run": "A63 first preview invocation",
+      "exit_code": 1,
+      "reason": "Incorrect temporary preview script path; Python file could not be opened; no PNG from this invocation"
+    },
+    {
+      "run": "A63 preview rerun with frozen existing script",
+      "exit_code": 0,
+      "actual_png": 8,
+      "source_saved": false
+    },
+    {
+      "run": "A63 native GLB export and bounds roundtrip",
+      "exit_code": 0,
+      "ratio": 1,
+      "maximum_skin_influences": 8,
+      "source_saved": false,
+      "male_parent_warnings": 5
+    },
+    {
+      "run": "A63 imported GLB preflight",
+      "exit_code": 0,
+      "actual_poses": 118,
+      "rows": 121,
+      "rendered": false
+    },
+    {
+      "run": "A63 actual isolated Chrome",
+      "exit_code": 0,
+      "actual_tests": 3,
+      "duration_ms": 43037.429,
+      "camera_calls_asserted": 0,
+      "synthetic": "API guest401, deliberate GLB503/context loss, artist rig rotations; not a person or clinical motion"
+    },
+    {
+      "run": "A64 first generation",
+      "exit_code": 1,
+      "reason": "Raw professional cut has 3 contours including an exterior ear contour; unchanged strict cap guard rejected",
+      "producer": "a64/producer-first-failed.py.txt"
+    },
+    {
+      "run": "A64 read-only jaw contour diagnostic",
+      "exit_code": 0,
+      "source_saved": false
+    },
+    {
+      "run": "A64 second generation",
+      "exit_code": 1,
+      "reason": "Male in-memory edit passed; female non-star contour failed polar correspondence; no source/report saved",
+      "producer": "a64/producer-second-failed.py.txt"
+    },
+    {
+      "run": "A64 actual native arc boundary regression",
+      "exit_code": 0,
+      "actual_cases": 6,
+      "fixtures_only": true,
+      "legacy_failure_reproduced": true
+    },
+    {
+      "run": "A64 retained jaw/neutral head generation",
+      "exit_code": 0,
+      "source": "a64",
+      "generation_producer": "a64/producer-at-generation.py.txt"
+    },
+    {
+      "run": "A64 source preflight",
+      "exit_code": 0,
+      "actual_poses": 118,
+      "rows": 121,
+      "rendered": false
+    },
+    {
+      "run": "A64 actual first preview",
+      "exit_code": 0,
+      "actual_png": 8,
+      "source_saved": false
+    },
+    {
+      "run": "A64 read-only oblique jaw cut diagnostic",
+      "exit_code": 0,
+      "source_saved": false,
+      "geometry_adopted": false
+    },
+    {
+      "run": "A63 corrected import-order producer overwrite refusal",
+      "exit_code": 1,
+      "expected_negative": true,
+      "reason": "Preserve all prior files; existing source/report unchanged"
+    }
+  ],
+  "formatting": {
+    "actual_a63_generation_import_sort_warning": "I001 preserved in generation snapshot; corrected reproduction differs only by swapping bmesh/bpy imports",
+    "a64_F821": "Detected before native execution and fixed; not counted as verification PASS",
+    "actual_final_ruff": "Six current execution/probe files: ruff check PASS and format --check PASS"
+  },
+  "environment": {
+    "blender": "5.1.1",
+    "chrome": "154.0.8037.58",
+    "hardware": "Mac16,12 / Apple M4 / 17179869184 bytes",
+    "viewport": [
+      1440,
+      1080
+    ],
+    "dpr": 1,
+    "headless": true,
+    "owned_local_port": 5182,
+    "egress": "closed non-listening localhost proxy; actual A-00 rejected external URL",
+    "native_producers_finished_before_browser": true
+  },
+  "warnings": [
+    "NO_COLOR/FORCE_COLOR",
+    "THREE.Clock deprecated",
+    "male glTF armature-parent warnings x5",
+    "deliberate503 error and context-loss/recovery warnings; not unexpected failures"
+  ],
+  "discovery_failures_not_pass": [
+    "Incorrect preview path corrected",
+    "ps blocked by sandbox; not retried",
+    "sysctl read blocked by sandbox, authorized targeted read rerun"
+  ],
+  "appearance": {
+    "a63": "REJECTED: flattened/pointed head, remaining eyes/mouth/ears",
+    "a64": "REJECTED: mouth/nose remnants, horizontal head seam and dark mouth opening during female neck stress"
+  },
+  "unrun": [
+    "A63 and A64 full 34-image source harness",
+    "A64 GLB export / imported deformation / actual Chrome",
+    "Verified exercises, performer/observer, user retargeting and real webcam integrated performance",
+    "Actual Gmail/Google, deployment/release, complete service/security/usability regression for these candidates"
+  ],
+  "prior_evidence_preserved": true,
+  "stage_1_6_criteria_and_approval_rules_unchanged": true
+}

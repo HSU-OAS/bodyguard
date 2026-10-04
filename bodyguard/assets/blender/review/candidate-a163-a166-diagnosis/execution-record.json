@@ -1,0 +1,103 @@
+{
+  "story": "S2.4a / FR-A-02/03/08",
+  "status": "diagnosis_failed_not_adopted",
+  "input_source": "../candidate-a136-a146-review/artist-candidate.blend",
+  "reference_sha256": "45b313912dee5ae2218b1fe76086abb35a9b948fab9e877f1a9d2b05f832de62",
+  "native_runs": [
+    {
+      "phase": "a163",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a163-native-nested-disk.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a163-native-nested-disk.json",
+      "exit_code": 0,
+      "terminal_chunk_id": "08f09c",
+      "log": "logs/a163-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a164",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a164-native-expanded-nested-disk.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a164-native-expanded-nested-disk.json",
+      "exit_code": 0,
+      "terminal_chunk_id": "28c595",
+      "log": "logs/a164-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a165",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a165-native-posterior-chart-control.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a165-native-posterior-chart-control.json",
+      "exit_code": 0,
+      "terminal_chunk_id": "4e15e5",
+      "log": "logs/a165-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    },
+    {
+      "phase": "a166",
+      "command": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a136-a146-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a166-native-unequal-3d-control.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a166-native-unequal-3d-control",
+      "exit_code": 1,
+      "terminal_chunk_id": "68cc82",
+      "log": "logs/a166-observed.json.txt.gz",
+      "terminal_stdout_retained": true
+    }
+  ],
+  "native_actors_sequential": true,
+  "native_and_browser_actors_not_overlapped": true,
+  "directly_viewed": [
+    "a166/posterior-side-male.png",
+    "a166/posterior-back-male.png",
+    "a166/posterior-side-female.png",
+    "a166/posterior-back-female.png"
+  ],
+  "new_verification": {
+    "actual_png": 4,
+    "directly_viewed": 4,
+    "not_viewed": 0,
+    "source_full_118": 0,
+    "glb_full_118": 0,
+    "actual_Chrome_tests": 0,
+    "actual_webcam_trials": 0
+  },
+  "new_assets": {
+    "source_blend": 0,
+    "web_blend": 0,
+    "roundtrip_blend": 0,
+    "male_glb": 0,
+    "female_glb": 0
+  },
+  "evidence_copy": {
+    "start": {
+      "chunk_id": "2625da",
+      "wall_time_seconds": 1.002930208,
+      "session_id": 7125,
+      "original_token_count": 45,
+      "output": "{\"integrity_passed\":true,\"copies\":14,\"gzip\":5,\"protected_old_files\":137,\"new_png\":2,\"directly_viewed\":2,\"native_exits\":[0,0],\"new_Chrome\":0,\"geometry_or_appearance_passed\":false}\n"
+    },
+    "terminal": {
+      "chunk_id": "2bade7",
+      "wall_time_seconds": 0.00001875,
+      "exit_code": 0,
+      "original_token_count": 951,
+      "output": "{\"integrity_passed\":true,\"copies\":110,\"gzip\":17,\"protected_old_files\":164,\"new_png\":74,\"directly_viewed\":32,\"native_exits\":[0,0,0,0,0,0,0],\"new_Chrome\":4,\"source_and_roundtrip_technical_pass\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":20,\"gzip\":16,\"protected_old_files\":278,\"native_exits\":[0,1,1,1,0,1],\"new_assets\":0,\"new_png\":0,\"new_browser\":0,\"geometry_or_appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":116,\"gzip\":24,\"protected_old_files\":302,\"native_exits\":[0,0,0,0,0,0,0,0,0,0],\"actual_png\":76,\"directly_viewed\":34,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":137,\"gzip\":33,\"protected_old_files\":422,\"native_exits\":[0,0,1,0,1,1,0,1,1,0,0,0,0,0,0],\"actual_png\":84,\"directly_viewed\":42,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":43,\"gzip\":22,\"protected_old_files\":563,\"native_exits\":[0,0,0,0,0,0,1,1,1],\"actual_png\":12,\"directly_viewed\":12,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"a154_fold_regression_resolved\":true,\"a154_female_guard_failed\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":32,\"gzip\":12,\"protected_old_files\":610,\"native_exits\":[1,0,0,0],\"actual_png\":16,\"directly_viewed\":16,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"a155_female_guard_failed\":true,\"a156_a157_guards_passed_but_appearance_failed\":true,\"a158_read_only\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":25,\"gzip\":12,\"protected_old_files\":646,\"native_exits\":[0,1,0,1],\"actual_png\":8,\"directly_viewed\":8,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"count_only_native_bridge_rejected\":true,\"correspondence_projection_not_anatomy\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":14,\"gzip\":5,\"protected_old_files\":137,\"new_png\":2,\"directly_viewed\":2,\"native_exits\":[0,0],\"new_Chrome\":0,\"geometry_or_appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":110,\"gzip\":17,\"protected_old_files\":164,\"new_png\":74,\"directly_viewed\":32,\"native_exits\":[0,0,0,0,0,0,0],\"new_Chrome\":4,\"source_and_roundtrip_technical_pass\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":20,\"gzip\":16,\"protected_old_files\":278,\"native_exits\":[0,1,1,1,0,1],\"new_assets\":0,\"new_png\":0,\"new_browser\":0,\"geometry_or_appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":116,\"gzip\":24,\"protected_old_files\":302,\"native_exits\":[0,0,0,0,0,0,0,0,0,0],\"actual_png\":76,\"directly_viewed\":34,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":137,\"gzip\":33,\"protected_old_files\":422,\"native_exits\":[0,0,1,0,1,1,0,1,1,0,0,0,0,0,0],\"actual_png\":84,\"directly_viewed\":42,\"source_and_roundtrip_technical_pass\":true,\"actual_Chrome\":4,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":43,\"gzip\":22,\"protected_old_files\":563,\"native_exits\":[0,0,0,0,0,0,1,1,1],\"actual_png\":12,\"directly_viewed\":12,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"a154_fold_regression_resolved\":true,\"a154_female_guard_failed\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":32,\"gzip\":12,\"protected_old_files\":610,\"native_exits\":[1,0,0,0],\"actual_png\":16,\"directly_viewed\":16,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"a155_female_guard_failed\":true,\"a156_a157_guards_passed_but_appearance_failed\":true,\"a158_read_only\":true,\"appearance_passed\":false}\n{\"integrity_passed\":true,\"copies\":25,\"gzip\":12,\"protected_old_files\":646,\"native_exits\":[0,1,0,1],\"actual_png\":8,\"directly_viewed\":8,\"new_assets\":0,\"new_118\":0,\"new_Chrome\":0,\"count_only_native_bridge_rejected\":true,\"correspondence_projection_not_anatomy\":true,\"appearance_passed\":false}\n{\"copies\":23,\"gzip\":13,\"png\":4,\"protected_old_files\":675,\"old_files_changed\":0}\n"
+    },
+    "exit_code": 0
+  },
+  "diagnosis_gate_results": {
+    "a164_projection_exit": 1,
+    "a165_projection_exit": 1,
+    "a166_native_geometry_exit": 1,
+    "previous_xz_failure_cleared": false
+  },
+  "limitations": {
+    "appearance_approved": false,
+    "full_deformation_qa": false,
+    "anatomy_registration": false,
+    "clinical_accuracy_verified": false,
+    "full_3d_collision_test": false,
+    "release_ready": false,
+    "production_model_changed": false,
+    "gui_changed": false,
+    "quality_guards_relaxed": false
+  },
+  "pre_native_authoring_notes": [
+    "A163 initial default Ruff F401 Counter import was corrected before native execution; actual initial and final checks retained.",
+    "A164 first script-generation anchor expected multiline formatting; authoring aborted before file/native creation, then used inspected one-line anchor. This is an authoring note, not reconstructed terminal evidence.",
+    "Official 5.1 manual search lists unequal-count loop support; manual/API open attempts returned402. Installed native operation documentation and actual A166 operator result are the run evidence."
+  ]
+}

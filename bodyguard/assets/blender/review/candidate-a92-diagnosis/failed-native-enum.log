@@ -1,0 +1,10 @@
+00:00.634  blend            | Read blend: "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a91_rejected.blend"
+Traceback (most recent call last):
+  File "/private/tmp/bodyguard-tailor.6b7Uvu/a92-constrained-ngon-dryrun.py", line 68, in <module>
+    result = bmesh.ops.triangulate(bm, faces=[face], quad_method=method)
+ValueError: quad_method: 'FIXED_ALTERNATE' not found in (['BEAUTY', 'FIXED', 'ALTERNATE', 'SHORT_EDGE', 'LONG_EDGE'])
+
+Error: script failed, file: '/private/tmp/bodyguard-tailor.6b7Uvu/a92-constrained-ngon-dryrun.py', exiting.
+Blender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)
+
+Blender quit

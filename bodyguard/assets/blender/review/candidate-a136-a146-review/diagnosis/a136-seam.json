@@ -1,0 +1,806 @@
+{
+  "read_only": true,
+  "source_saved": false,
+  "blender": "5.1.1",
+  "input_hashes": {
+    "/Applications/\u1112\u1161\u11a8\u1100\u116d \u1102\u1162\u1107\u116e/2026-2\u1112\u1161\u11a8\u1100\u1175/\u110b\u1169\u1111\u1173\u11ab\u1109\u1169\u1109\u1173 AI SW \u110b\u1172\u11bc\u1112\u1161\u11b8 \u1111\u1173\u1105\u1169\u110c\u1166\u11a8\u1110\u1173/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend": "9191a2c1a0bd7bf4bb3ae3c358f911188052e9c204d4c4f74783806fb937b661",
+    "/Applications/\u1112\u1161\u11a8\u1100\u116d \u1102\u1162\u1107\u116e/2026-2\u1112\u1161\u11a8\u1100\u1175/\u110b\u1169\u1111\u1173\u11ab\u1109\u1169\u1109\u1173 AI SW \u110b\u1172\u11bc\u1112\u1161\u11b8 \u1111\u1173\u1105\u1169\u110c\u1166\u11a8\u1110\u1173/BODYGUARD-stage2-avatar-candidate/bodyguard/assets/blender/review/candidate-a130-a135-review/artist-candidate.blend": "7108ceeba278f11d76a79382fc2c013366677ee931b7b3d6fa23d8f5bb4d4828",
+    "/private/tmp/bodyguard-tailor.6b7Uvu/a115-ordered-boundary.json": "156aa798c00e8b2b91a71d78c0b21dc8a9f55be62be0fb58551ceca03f60d765"
+  },
+  "canonical_distribution_self_check": true,
+  "scope": "Authored rest cap and posterior head-base mesh; no human camera/clinical accuracy or whole-body collision test.",
+  "appearance_approved": false,
+  "full_deformation_qa": false,
+  "rows": [
+    {
+      "body": "Male",
+      "new_cap_faces": 2598,
+      "seam_edges": 374,
+      "original_seam": {
+        "count": 374,
+        "median_deg": 0.9911260824179058,
+        "p95_deg": 6.258175768062992,
+        "max_deg": 177.32507070354757,
+        "over_45_deg": 2,
+        "over_90_deg": 1
+      },
+      "candidate_seam": {
+        "count": 374,
+        "median_deg": 1.0499346515019503,
+        "p95_deg": 8.119942328722722,
+        "max_deg": 177.32649138289491,
+        "over_45_deg": 1,
+        "over_90_deg": 1
+      },
+      "segments": [
+        {
+          "segment": 0,
+          "original": {
+            "count": 56,
+            "median_deg": 4.525684197824095,
+            "p95_deg": 6.8564896671855315,
+            "max_deg": 8.288939991809054,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          },
+          "candidate": {
+            "count": 56,
+            "median_deg": 4.772700977365368,
+            "p95_deg": 8.119942328722722,
+            "max_deg": 8.816631869347777,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          }
+        },
+        {
+          "segment": 1,
+          "original": {
+            "count": 107,
+            "median_deg": 0.9681342782894676,
+            "p95_deg": 6.258175768062992,
+            "max_deg": 177.32507070354757,
+            "over_45_deg": 2,
+            "over_90_deg": 1
+          },
+          "candidate": {
+            "count": 107,
+            "median_deg": 1.1012339612020945,
+            "p95_deg": 9.065646052334456,
+            "max_deg": 177.32649138289491,
+            "over_45_deg": 1,
+            "over_90_deg": 1
+          }
+        },
+        {
+          "segment": 2,
+          "original": {
+            "count": 104,
+            "median_deg": 0.5429592713244051,
+            "p95_deg": 1.8540601862852504,
+            "max_deg": 3.305769509934094,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          },
+          "candidate": {
+            "count": 104,
+            "median_deg": 0.5550706908267188,
+            "p95_deg": 1.954273362117912,
+            "max_deg": 3.305906540604317,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          }
+        },
+        {
+          "segment": 3,
+          "original": {
+            "count": 107,
+            "median_deg": 0.8944575079602162,
+            "p95_deg": 6.961630611060945,
+            "max_deg": 13.126050933708111,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          },
+          "candidate": {
+            "count": 107,
+            "median_deg": 1.0525686499223421,
+            "p95_deg": 10.28880315908951,
+            "max_deg": 21.97546941861924,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          }
+        }
+      ],
+      "largest_boundary_angles": [
+        {
+          "ordered_boundary_edge": 109,
+          "segment": 1,
+          "original_ids": [
+            111052,
+            115567
+          ],
+          "length_mm": 0.2566513139754534,
+          "original_deg": 177.32507070354757,
+          "cap_deg": 177.32649138289491,
+          "center_normalized_xyz": [
+            0.06138208508491516,
+            8.639503357699141e-05,
+            0.8424208164215088
+          ],
+          "cap_neighbor_areas_mm2": [
+            0.004414618004489057
+          ]
+        },
+        {
+          "ordered_boundary_edge": 330,
+          "segment": 3,
+          "original_ids": [
+            106735,
+            132305
+          ],
+          "length_mm": 1.97386066429317,
+          "original_deg": 0.1998823377701026,
+          "cap_deg": 21.97546941861924,
+          "center_normalized_xyz": [
+            -0.0637398511171341,
+            0.00016913165745791048,
+            0.840639591217041
+          ],
+          "cap_neighbor_areas_mm2": [
+            22.149788492242806
+          ]
+        },
+        {
+          "ordered_boundary_edge": 341,
+          "segment": 3,
+          "original_ids": [
+            118256,
+            118258
+          ],
+          "length_mm": 0.6288592121563852,
+          "original_deg": 0.22790780455385495,
+          "cap_deg": 14.32593587841364,
+          "center_normalized_xyz": [
+            -0.06724201142787933,
+            0.0002282534696860239,
+            0.8383134603500366
+          ],
+          "cap_neighbor_areas_mm2": [
+            6.191208285599714
+          ]
+        },
+        {
+          "ordered_boundary_edge": 66,
+          "segment": 1,
+          "original_ids": [
+            41432,
+            55291
+          ],
+          "length_mm": 7.43497721850872,
+          "original_deg": 3.6840943283913345,
+          "cap_deg": 13.862121637540168,
+          "center_normalized_xyz": [
+            0.07916756719350815,
+            0.0019716795068234205,
+            0.833087146282196
+          ],
+          "cap_neighbor_areas_mm2": [
+            64.46184852393344
+          ]
+        },
+        {
+          "ordered_boundary_edge": 84,
+          "segment": 1,
+          "original_ids": [
+            130482,
+            130483
+          ],
+          "length_mm": 0.727722654119134,
+          "original_deg": 0.17845898253089482,
+          "cap_deg": 13.689398106261594,
+          "center_normalized_xyz": [
+            0.0693812370300293,
+            0.00031035314896143973,
+            0.8372339010238647
+          ],
+          "cap_neighbor_areas_mm2": [
+            6.896729246363975
+          ]
+        },
+        {
+          "ordered_boundary_edge": 363,
+          "segment": 3,
+          "original_ids": [
+            15790,
+            81686
+          ],
+          "length_mm": 7.566680666059256,
+          "original_deg": 7.739207093818701,
+          "cap_deg": 12.206267777996576,
+          "center_normalized_xyz": [
+            -0.07917575538158417,
+            0.001967103686183691,
+            0.8330056071281433
+          ],
+          "cap_neighbor_areas_mm2": [
+            60.88048030505888
+          ]
+        },
+        {
+          "ordered_boundary_edge": 329,
+          "segment": 3,
+          "original_ids": [
+            106735,
+            138479
+          ],
+          "length_mm": 1.9913418218493462,
+          "original_deg": 13.126050933708111,
+          "cap_deg": 11.962864595413063,
+          "center_normalized_xyz": [
+            -0.06277743726968765,
+            0.00015020974387880415,
+            0.8413165807723999
+          ],
+          "cap_neighbor_areas_mm2": [
+            22.308655388769694
+          ]
+        },
+        {
+          "ordered_boundary_edge": 362,
+          "segment": 3,
+          "original_ids": [
+            15790,
+            132386
+          ],
+          "length_mm": 3.9861765690147877,
+          "original_deg": 3.0942893508707505,
+          "cap_deg": 11.518974870122166,
+          "center_normalized_xyz": [
+            -0.0762358233332634,
+            0.0018762650433927774,
+            0.8345487117767334
+          ],
+          "cap_neighbor_areas_mm2": [
+            37.162648368394
+          ]
+        },
+        {
+          "ordered_boundary_edge": 65,
+          "segment": 1,
+          "original_ids": [
+            41447,
+            55291
+          ],
+          "length_mm": 10.365824215114117,
+          "original_deg": 5.210380353153432,
+          "cap_deg": 10.859655855767189,
+          "center_normalized_xyz": [
+            0.08380718529224396,
+            0.002012111945077777,
+            0.8305673003196716
+          ],
+          "cap_neighbor_areas_mm2": [
+            78.48427048884332
+          ]
+        },
+        {
+          "ordered_boundary_edge": 144,
+          "segment": 1,
+          "original_ids": [
+            102162,
+            113230
+          ],
+          "length_mm": 0.9795823134481907,
+          "original_deg": 1.370096780638536,
+          "cap_deg": 10.560628466356738,
+          "center_normalized_xyz": [
+            0.049512606114149094,
+            0.00028669030871242285,
+            0.8531692624092102
+          ],
+          "cap_neighbor_areas_mm2": [
+            1.7872594071377534
+          ]
+        },
+        {
+          "ordered_boundary_edge": 364,
+          "segment": 3,
+          "original_ids": [
+            15806,
+            81686
+          ],
+          "length_mm": 10.258186608552933,
+          "original_deg": 5.420144427187808,
+          "cap_deg": 10.28880315908951,
+          "center_normalized_xyz": [
+            -0.0837903618812561,
+            0.001863363548181951,
+            0.8304893374443054
+          ],
+          "cap_neighbor_areas_mm2": [
+            76.5522854635492
+          ]
+        },
+        {
+          "ordered_boundary_edge": 372,
+          "segment": 3,
+          "original_ids": [
+            10152,
+            69349
+          ],
+          "length_mm": 8.70097428560257,
+          "original_deg": 10.234328131590425,
+          "cap_deg": 10.281173837786605,
+          "center_normalized_xyz": [
+            -0.11906968057155609,
+            0.009224341250956059,
+            0.8117096424102783
+          ],
+          "cap_neighbor_areas_mm2": [
+            13.343054888537154
+          ]
+        }
+      ],
+      "head_base_bands": [
+        {
+          "normalized_z": [
+            0.84,
+            0.87
+          ],
+          "dihedral": {
+            "count": 1262,
+            "median_deg": 1.1304808312280892,
+            "p95_deg": 16.26349320631159,
+            "max_deg": 32.71890789811137,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          },
+          "all_neighbor_faces_original": false,
+          "all_edge_points_original_exact": false
+        },
+        {
+          "normalized_z": [
+            0.87,
+            0.89
+          ],
+          "dihedral": {
+            "count": 2297,
+            "median_deg": 1.0004842953544695,
+            "p95_deg": 3.323020006456607,
+            "max_deg": 9.197688976916435,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          },
+          "all_neighbor_faces_original": true,
+          "all_edge_points_original_exact": true
+        },
+        {
+          "normalized_z": [
+            0.89,
+            0.91
+          ],
+          "dihedral": {
+            "count": 2737,
+            "median_deg": 1.0811172398274087,
+            "p95_deg": 4.145525687018117,
+            "max_deg": 12.369099487809681,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          },
+          "all_neighbor_faces_original": true,
+          "all_edge_points_original_exact": true
+        },
+        {
+          "normalized_z": [
+            0.91,
+            0.94
+          ],
+          "dihedral": {
+            "count": 4535,
+            "median_deg": 0.9871800473466367,
+            "p95_deg": 2.1243542505179267,
+            "max_deg": 5.572080704614273,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          },
+          "all_neighbor_faces_original": true,
+          "all_edge_points_original_exact": true
+        }
+      ]
+    },
+    {
+      "body": "Female",
+      "new_cap_faces": 2521,
+      "seam_edges": 363,
+      "original_seam": {
+        "count": 363,
+        "median_deg": 1.1142309574189826,
+        "p95_deg": 11.207433720378605,
+        "max_deg": 174.48306997104027,
+        "over_45_deg": 1,
+        "over_90_deg": 1
+      },
+      "candidate_seam": {
+        "count": 363,
+        "median_deg": 1.3196048206426283,
+        "p95_deg": 15.037180552159992,
+        "max_deg": 27.788295081569423,
+        "over_45_deg": 0,
+        "over_90_deg": 0
+      },
+      "segments": [
+        {
+          "segment": 0,
+          "original": {
+            "count": 56,
+            "median_deg": 4.968933165993481,
+            "p95_deg": 7.9164530641014705,
+            "max_deg": 11.35437841018226,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          },
+          "candidate": {
+            "count": 56,
+            "median_deg": 5.296346394707681,
+            "p95_deg": 9.985296019357175,
+            "max_deg": 10.93651170562911,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          }
+        },
+        {
+          "segment": 1,
+          "original": {
+            "count": 103,
+            "median_deg": 0.9080917928431781,
+            "p95_deg": 13.73308058109841,
+            "max_deg": 174.48306997104027,
+            "over_45_deg": 1,
+            "over_90_deg": 1
+          },
+          "candidate": {
+            "count": 103,
+            "median_deg": 1.1636773648633494,
+            "p95_deg": 17.477284416167265,
+            "max_deg": 27.788295081569423,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          }
+        },
+        {
+          "segment": 2,
+          "original": {
+            "count": 81,
+            "median_deg": 0.6344161446411106,
+            "p95_deg": 3.424867518491606,
+            "max_deg": 5.2221026653164655,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          },
+          "candidate": {
+            "count": 81,
+            "median_deg": 0.5925825166352519,
+            "p95_deg": 4.0564809376954845,
+            "max_deg": 5.22462983530937,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          }
+        },
+        {
+          "segment": 3,
+          "original": {
+            "count": 123,
+            "median_deg": 1.0684975048404581,
+            "p95_deg": 12.923594735198826,
+            "max_deg": 15.475994593123923,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          },
+          "candidate": {
+            "count": 123,
+            "median_deg": 1.1913365360724335,
+            "p95_deg": 15.247282293671462,
+            "max_deg": 24.532535149521106,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          }
+        }
+      ],
+      "largest_boundary_angles": [
+        {
+          "ordered_boundary_edge": 89,
+          "segment": 1,
+          "original_ids": [
+            106165,
+            130955
+          ],
+          "length_mm": 1.1309129185974598,
+          "original_deg": 0.33994670588245335,
+          "cap_deg": 27.788295081569423,
+          "center_normalized_xyz": [
+            0.05771245062351227,
+            0.00017049774760380387,
+            0.8415114879608154
+          ],
+          "cap_neighbor_areas_mm2": [
+            11.928374078706838
+          ]
+        },
+        {
+          "ordered_boundary_edge": 295,
+          "segment": 3,
+          "original_ids": [
+            109403,
+            130023
+          ],
+          "length_mm": 0.6849797209724784,
+          "original_deg": 1.3754930569696693,
+          "cap_deg": 24.532535149521106,
+          "center_normalized_xyz": [
+            -0.05335445702075958,
+            0.00044216556125320494,
+            0.8447543978691101
+          ],
+          "cap_neighbor_areas_mm2": [
+            6.942083018657286
+          ]
+        },
+        {
+          "ordered_boundary_edge": 69,
+          "segment": 1,
+          "original_ids": [
+            81840,
+            92662
+          ],
+          "length_mm": 8.158600889146328,
+          "original_deg": 10.269528365251732,
+          "cap_deg": 20.916870351990013,
+          "center_normalized_xyz": [
+            0.07126366347074509,
+            0.0003996750747319311,
+            0.8355388045310974
+          ],
+          "cap_neighbor_areas_mm2": [
+            67.81469710404053
+          ]
+        },
+        {
+          "ordered_boundary_edge": 285,
+          "segment": 3,
+          "original_ids": [
+            68614,
+            112617
+          ],
+          "length_mm": 0.9926132624968886,
+          "original_deg": 1.1618086677951163,
+          "cap_deg": 20.24662218118937,
+          "center_normalized_xyz": [
+            -0.05129513517022133,
+            0.00028447332442738116,
+            0.8467072248458862
+          ],
+          "cap_neighbor_areas_mm2": [
+            10.128289432032034
+          ]
+        },
+        {
+          "ordered_boundary_edge": 353,
+          "segment": 3,
+          "original_ids": [
+            53740,
+            89124
+          ],
+          "length_mm": 9.913737885653973,
+          "original_deg": 15.475994593123923,
+          "cap_deg": 20.16905001523824,
+          "center_normalized_xyz": [
+            -0.09338391572237015,
+            0.001758079626597464,
+            0.8321732878684998
+          ],
+          "cap_neighbor_areas_mm2": [
+            61.11530092312023
+          ]
+        },
+        {
+          "ordered_boundary_edge": 352,
+          "segment": 3,
+          "original_ids": [
+            53740,
+            89084
+          ],
+          "length_mm": 9.372166357934475,
+          "original_deg": 13.852556811381213,
+          "cap_deg": 20.045485062963543,
+          "center_normalized_xyz": [
+            -0.08757855743169785,
+            0.0014505154686048627,
+            0.833022952079773
+          ],
+          "cap_neighbor_areas_mm2": [
+            58.16160773974843
+          ]
+        },
+        {
+          "ordered_boundary_edge": 68,
+          "segment": 1,
+          "original_ids": [
+            82923,
+            92662
+          ],
+          "length_mm": 9.158831089735031,
+          "original_deg": 9.897616880981722,
+          "cap_deg": 19.059999756304716,
+          "center_normalized_xyz": [
+            0.07637941092252731,
+            0.0007137618958950043,
+            0.8342824578285217
+          ],
+          "cap_neighbor_areas_mm2": [
+            64.72214590758085
+          ]
+        },
+        {
+          "ordered_boundary_edge": 351,
+          "segment": 3,
+          "original_ids": [
+            81634,
+            89084
+          ],
+          "length_mm": 8.694743737578392,
+          "original_deg": 10.569206330180627,
+          "cap_deg": 18.482561903493497,
+          "center_normalized_xyz": [
+            -0.08209200203418732,
+            0.0011526994640007615,
+            0.8334580063819885
+          ],
+          "cap_neighbor_areas_mm2": [
+            64.94610715890303
+          ]
+        },
+        {
+          "ordered_boundary_edge": 66,
+          "segment": 1,
+          "original_ids": [
+            75982,
+            95147
+          ],
+          "length_mm": 9.282884187996387,
+          "original_deg": 12.890189987515585,
+          "cap_deg": 17.942609836394602,
+          "center_normalized_xyz": [
+            0.08730387687683105,
+            0.0014315961161628366,
+            0.8326081037521362
+          ],
+          "cap_neighbor_areas_mm2": [
+            58.79514355910942
+          ]
+        },
+        {
+          "ordered_boundary_edge": 65,
+          "segment": 1,
+          "original_ids": [
+            75982,
+            95186
+          ],
+          "length_mm": 9.874623268842697,
+          "original_deg": 14.918553826655211,
+          "cap_deg": 17.937987505873796,
+          "center_normalized_xyz": [
+            0.09307308495044708,
+            0.0017117952229455113,
+            0.8317435383796692
+          ],
+          "cap_neighbor_areas_mm2": [
+            62.452207203023136
+          ]
+        },
+        {
+          "ordered_boundary_edge": 67,
+          "segment": 1,
+          "original_ids": [
+            82923,
+            95147
+          ],
+          "length_mm": 8.943350054323673,
+          "original_deg": 11.122982700159628,
+          "cap_deg": 17.477284416167265,
+          "center_normalized_xyz": [
+            0.0817972719669342,
+            0.0011293578427284956,
+            0.8333121538162231
+          ],
+          "cap_neighbor_areas_mm2": [
+            65.25484786834568
+          ]
+        },
+        {
+          "ordered_boundary_edge": 354,
+          "segment": 3,
+          "original_ids": [
+            76192,
+            89124
+          ],
+          "length_mm": 10.449394583702087,
+          "original_deg": 14.80139388427469,
+          "cap_deg": 17.246135446728402,
+          "center_normalized_xyz": [
+            -0.09933502227067947,
+            0.00208303052932024,
+            0.8304838538169861
+          ],
+          "cap_neighbor_areas_mm2": [
+            50.58970782556571
+          ]
+        }
+      ],
+      "head_base_bands": [
+        {
+          "normalized_z": [
+            0.84,
+            0.87
+          ],
+          "dihedral": {
+            "count": 1135,
+            "median_deg": 1.2315388160837168,
+            "p95_deg": 15.472555592876823,
+            "max_deg": 35.471709775152874,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          },
+          "all_neighbor_faces_original": false,
+          "all_edge_points_original_exact": false
+        },
+        {
+          "normalized_z": [
+            0.87,
+            0.89
+          ],
+          "dihedral": {
+            "count": 1783,
+            "median_deg": 0.6722805789655457,
+            "p95_deg": 2.3588792543974813,
+            "max_deg": 5.501930819856834,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          },
+          "all_neighbor_faces_original": true,
+          "all_edge_points_original_exact": true
+        },
+        {
+          "normalized_z": [
+            0.89,
+            0.91
+          ],
+          "dihedral": {
+            "count": 1814,
+            "median_deg": 1.1576036191439156,
+            "p95_deg": 4.31368878636524,
+            "max_deg": 22.888513738940915,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          },
+          "all_neighbor_faces_original": true,
+          "all_edge_points_original_exact": true
+        },
+        {
+          "normalized_z": [
+            0.91,
+            0.94
+          ],
+          "dihedral": {
+            "count": 4478,
+            "median_deg": 1.1626704455693015,
+            "p95_deg": 2.519709932227183,
+            "max_deg": 5.994067293897409,
+            "over_45_deg": 0,
+            "over_90_deg": 0
+          },
+          "all_neighbor_faces_original": true,
+          "all_edge_points_original_exact": true
+        }
+      ]
+    }
+  ]
+}

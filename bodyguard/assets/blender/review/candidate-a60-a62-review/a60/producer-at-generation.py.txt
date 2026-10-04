@@ -1,0 +1,223 @@
+"""FR-A-01~04: native continuous licensed head/neck replacement candidate.
+
+This is a local artist surface edit, never a generated human or clinical pose.
+Exact coincident authored boundaries are welded, not bridged or moved.
+The native blank-head polish has no effect on retained neck/body or its skin.
+"""
+
+import importlib.util
+import json
+import sys
+from hashlib import file_digest
+from math import isfinite
+from pathlib import Path
+
+import bmesh
+import bpy
+from mathutils import Vector
+
+
+def sha(path):
+    with path.open("rb") as file:
+        return file_digest(file, "sha256").hexdigest()
+
+
+def active(obj):
+    bpy.ops.object.select_all(action="DESELECT")
+    obj.select_set(True)
+    bpy.context.view_layer.objects.active = obj
+
+
+def key(point):
+    return tuple(round(c * 1e6) for c in point)
+
+
+def bisect(mesh, plane, upper):
+    before = set(mesh.verts)
+    bmesh.ops.bisect_plane(
+        mesh,
+        geom=list(mesh.verts) + list(mesh.edges) + list(mesh.faces),
+        plane_co=(0, 0, plane),
+        plane_no=(0, 0, 1),
+        dist=1e-8,
+        clear_inner=upper,
+        clear_outer=not upper,
+    )
+    return set(mesh.verts) - before
+
+
+output, report_path, professional = map(Path, sys.argv[sys.argv.index("--") + 1 :])
+assert output.suffix == ".blend" and report_path.suffix == ".json"
+assert not output.exists() and not report_path.exists(), "Preserve all prior files"
+assert output.resolve() != Path(bpy.data.filepath).resolve()
+assert sha(professional) == "3c121505651140ceb4d69fd1d8923f7788ffadd81672f5be14845a5f2c75c137"
+helper_path = Path(__file__).with_name("a49-density-producer.py")
+assert sha(helper_path) == "6a96114e186b0db44a622beaef770dc58a193656344586f9f189783cc14018c4"
+spec = importlib.util.spec_from_file_location("a49_native_boundary", helper_path)
+helper = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(helper)
+reports = []
+for label in ("Male", "Female"):
+    body = bpy.data.objects[f"BODYGUARD {label} sculpt WIP"]
+    rig = bpy.data.objects[f"BODYGUARD {label} rig WIP"]
+    assert len(body.modifiers) == 1 and body.modifiers[0].object == rig
+    assert len(rig.data.bones) == 163
+    assert all(b.matrix_basis.is_identity for b in rig.pose.bones)
+    rest = [(b.name, tuple(tuple(row) for row in b.matrix_local)) for b in rig.data.bones]
+    body_matrix = body.matrix_world.copy()
+    rig_matrix = rig.matrix_world.copy()
+    height = max(v.co.z for v in body.data.vertices)
+    plane = height * 0.87 - 0.032
+    blank_start = height * 0.89
+    blank_full = height * 0.92
+    protected = {i + 1 for i in body["bodyguard_distal_hand_vertices"]}
+    name = f"GEO-body_{label.lower()}_realistic"
+    with bpy.data.libraries.load(str(professional)) as (available, loaded):
+        assert name in available.objects
+        loaded.objects = [name]
+    patch = loaded.objects[0]
+    bpy.context.scene.collection.objects.link(patch)
+    assert len(patch.modifiers) == 1 and patch.modifiers[0].type == "MULTIRES"
+    patch.modifiers[0].levels = patch.modifiers[0].render_levels = 1
+    bpy.context.view_layer.update()
+    patch.data = bpy.data.meshes.new_from_object(
+        patch.evaluated_get(bpy.context.evaluated_depsgraph_get())
+    )
+    patch.modifiers.clear()
+    patch.parent = None
+    patch.matrix_world = body_matrix
+    source_height = max(v.co.z for v in patch.data.vertices)
+    assert isfinite(source_height) and source_height > 0
+    for vertex in patch.data.vertices:
+        vertex.co *= height / source_height
+    pm = bmesh.new()
+    pm.from_mesh(patch.data)
+    bisect(pm, plane, True)
+    ring = helper.closed_loops([e for e in pm.edges if e.is_boundary])
+    assert len(ring) == 1 and all(abs(v.co.z - plane) < 1e-6 for v in ring[0])
+    assert all(e.is_manifold or e.is_boundary for e in pm.edges)
+    pm.to_mesh(patch.data)
+    pm.free()
+    patch.vertex_groups.clear()
+    for group in body.vertex_groups:
+        patch.vertex_groups.new(name=group.name)
+    active(body)
+    patch.select_set(True)
+    bpy.ops.object.data_transfer(
+        data_type="VGROUP_WEIGHTS",
+        use_create=True,
+        use_object_transform=True,
+        vert_mapping="POLYINTERP_NEAREST",
+        layers_select_src="ALL",
+        layers_select_dst="NAME",
+    )
+    active(patch)
+    bpy.ops.object.vertex_group_normalize_all(lock_active=False)
+    before = [tuple(v.co) for v in patch.data.vertices]
+    before_skin = [tuple((g.group, g.weight) for g in v.groups) for v in patch.data.vertices]
+    mask = patch.vertex_groups.new(name="Native neutral cranial surface")
+    mask_name = mask.name
+    selected = set()
+    for vertex in patch.data.vertices:
+        # Artist mask only: preserve the entire cervical surface and crown.
+        weight = min(1, max(0, (vertex.co.z - blank_start) / (blank_full - blank_start)))
+        weight *= min(1, max(0, (height - vertex.co.z) / 0.020))
+        if weight:
+            mask.add([vertex.index], weight, "REPLACE")
+            selected.add(vertex.index)
+    finish = patch.modifiers.new("Native neutral mannequin head polish", "CORRECTIVE_SMOOTH")
+    finish.smooth_type = "LENGTH_WEIGHTED"
+    finish.use_only_smooth = True
+    finish.factor = 0.5
+    finish.iterations = 80
+    finish.vertex_group = mask_name
+    bpy.ops.object.modifier_apply(modifier=finish.name)
+    patch.vertex_groups.remove(patch.vertex_groups[mask_name])
+    assert len(before) == len(patch.data.vertices)
+    assert before_skin == [
+        tuple((g.group, g.weight) for g in v.groups) for v in patch.data.vertices
+    ], "Native head polish changed skin"
+    assert all(
+        tuple(v.co) == before[v.index] for v in patch.data.vertices if v.index not in selected
+    )
+    head_delta = max((v.co - Vector(before[v.index])).length for v in patch.data.vertices)
+    bm = bmesh.new()
+    bm.from_mesh(body.data)
+    original = bm.verts.layers.int.new("Continuous authored replacement original vertex")
+    deform = bm.verts.layers.deform.active
+    assert deform is not None
+    bm.verts.index_update()
+    retained = {v.index + 1: (tuple(v.co), dict(v[deform])) for v in bm.verts}
+    for vertex in bm.verts:
+        vertex[original] = vertex.index + 1
+    for vertex in bisect(bm, plane, False):
+        vertex[original] = 0
+    lower = helper.closed_loops([e for e in bm.edges if e.is_boundary])
+    assert len(lower) == 1
+    boundary = {key(v.co): v for v in lower[0]}
+    assert len(boundary) == len(lower[0])
+    before_append = set(bm.verts)
+    bm.from_mesh(patch.data)
+    appended = set(bm.verts) - before_append
+    upper = [v for v in appended if v.is_boundary]
+    assert len(upper) == len(boundary) and set(map(lambda v: key(v.co), upper)) == boundary.keys()
+    deform = bm.verts.layers.deform.active
+    targets = {}
+    for vertex in upper:
+        target = boundary[key(vertex.co)]
+        assert (vertex.co - target.co).length == 0, "Only exactly coincident artist points may weld"
+        # Native cut points are the same authored points: retain their original skin.
+        vertex[deform].clear()
+        for group, weight in target[deform].items():
+            vertex[deform][group] = weight
+        targets[vertex] = target
+    bmesh.ops.weld_verts(bm, targetmap=targets)
+    assert all(e.is_manifold for e in bm.edges), "No surface holes or generated joining strip"
+    bm.verts.index_update()
+    remap = {v[original]: v.index for v in bm.verts if v[original]}
+    assert protected <= remap.keys()
+    missing = retained.keys() - remap.keys()
+    assert all(retained[i][0][2] >= plane - 1e-6 for i in missing)
+    assert all(
+        tuple(v.co) == retained[v[original]][0] and dict(v[deform]) == retained[v[original]][1]
+        for v in bm.verts
+        if v[original]
+    ), "Retained body/neck/hands or skin changed"
+    assert all(
+        all(isfinite(c) for c in v.co) and abs(sum(v[deform].values()) - 1) < 0.01 for v in bm.verts
+    )
+    assert rest == [(b.name, tuple(tuple(row) for row in b.matrix_local)) for b in rig.data.bones]
+    assert body.matrix_world == body_matrix and rig.matrix_world == rig_matrix
+    body["bodyguard_distal_hand_vertices"] = [remap[i] for i in sorted(protected)]
+    bm.verts.layers.int.remove(original)
+    bmesh.ops.recalc_face_normals(bm, faces=list(bm.faces))
+    bm.to_mesh(body.data)
+    bm.free()
+    bpy.data.objects.remove(patch, do_unlink=True)
+    for polygon in body.data.polygons:
+        polygon.use_smooth = True
+    reports.append(
+        {
+            "body": label,
+            "professional_source": name,
+            "professional_sha256": sha(professional),
+            "continuous_authored_weld_vertices": len(boundary),
+            "cut_m": plane,
+            "blank_head_native_polish": {
+                "factor": 0.5,
+                "iterations": 80,
+                "maximum_delta_m": head_delta,
+            },
+            "candidate_vertices": len(body.data.vertices),
+            "retained_original_vertices_exact": len(remap),
+            "retained_skin_hands_rest_163_bones_exact": True,
+            "full_source_glb_deformation_browser_visual_qa": "NOT RUN",
+        }
+    )
+report_path.write_text(json.dumps(reports, indent=2) + "\n")
+bpy.context.scene["bodyguard_stage"] = (
+    "S2.4 continuous authored head candidate; ALL QA pending; NOT release"
+)
+bpy.context.preferences.filepaths.save_version = 0
+bpy.ops.wm.save_as_mainfile(filepath=str(output), compress=True)
+print("ACTUAL CONTINUOUS AUTHORED HEAD CANDIDATE", json.dumps(reports))

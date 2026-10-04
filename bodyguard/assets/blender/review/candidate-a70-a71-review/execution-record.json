@@ -1,0 +1,255 @@
+{
+  "story": "S2.4 review follow-up A70/A70b/A71",
+  "date": "2026-10-02 Asia/Seoul",
+  "base_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "parent_head": "51593b43dd5a0ee8f1a6c3c19a0dd3fdd8f66a35",
+  "development_default": "A37",
+  "adopted_for_release": false,
+  "invariants": {
+    "story_appearance_p2_unresolved": true,
+    "merge": false,
+    "source_video_pose_storage_or_upload": false,
+    "old_files_preserved": true,
+    "body_skin_hands_163bones_rest_preserved": true,
+    "clinical_targets_or_validated_motion": false,
+    "ceo_female_no_garments": true
+  },
+  "environment": {
+    "blender": "5.1.1",
+    "chrome": "154.0.8037.58",
+    "hardware_model": "Mac16,12",
+    "cpu": "Apple M4",
+    "memory_bytes": 17179869184,
+    "viewport": [
+      1440,
+      1080
+    ],
+    "dpr": 1,
+    "headless": true,
+    "gpu_and_power_conditions": "not independently verified",
+    "browser_raf_not_camera_inference_latency": true
+  },
+  "observed_runs": [
+    {
+      "run": "A70 native boundary regression",
+      "exit_code": 0,
+      "checks": 13,
+      "artist_fixture_only": true
+    },
+    {
+      "run": "A70 pure-XY final cut generation",
+      "exit_code": 1,
+      "source_saved": false,
+      "reason": "Cut boundary is not a set of simple closed rings; actual head has no intersection with the final plane"
+    },
+    {
+      "run": "A70 native failure diagnostic",
+      "exit_code": 1,
+      "native_boundary_edges": 0,
+      "head_vertices": 67586,
+      "non_manifold_edges": 0,
+      "source_saved": false,
+      "archive_script": "formatted reproduction snapshot; first failure preceded final formatting"
+    },
+    {
+      "run": "A70b in-plane registration generation",
+      "exit_code": 0,
+      "source_vertices": [
+        144735,
+        144500
+      ],
+      "head_crown_change_m": [
+        -0.015389439649879932,
+        -0.01670519821345806
+      ],
+      "artist_gap_m": 0.024,
+      "head_shape_fit_not_body_scaling": true
+    },
+    {
+      "run": "A70b native same-boundary regression",
+      "exit_code": 0,
+      "checks": 13
+    },
+    {
+      "run": "A70b source preflight",
+      "exit_code": 0,
+      "technical_poses": 118,
+      "rows": 121,
+      "rendered": false
+    },
+    {
+      "run": "A70b first preview",
+      "exit_code": 0,
+      "actual_png": 8,
+      "last_png_elapsed_seconds": 63.339
+    },
+    {
+      "run": "A70b read-only seam diagnostic",
+      "exit_code": 0,
+      "actual_artist_gap_m": [
+        0.02400000000000002,
+        0.02400000000000002
+      ]
+    },
+    {
+      "run": "A71 same fixed cuts/native SURFACE generation",
+      "exit_code": 0,
+      "source_vertices": [
+        144735,
+        144500
+      ]
+    },
+    {
+      "run": "A71 native same-boundary regression",
+      "exit_code": 0,
+      "checks": 13
+    },
+    {
+      "run": "A71 full source QA/render",
+      "exit_code": 0,
+      "technical_poses": 118,
+      "rows": 121,
+      "rendered": true,
+      "actual_png": 34,
+      "last_png_elapsed_seconds": 228.13
+    },
+    {
+      "run": "A71 GLB export/roundtrip",
+      "exit_code": 0,
+      "eight_weights": true,
+      "ratio": 1,
+      "fin_repair": [
+        0,
+        0
+      ],
+      "parent_warnings": 5,
+      "weights_limited": [
+        1125700,
+        1158939
+      ],
+      "transforms_only_not_complete_deformation": true
+    },
+    {
+      "run": "A71 imported GLB QA",
+      "exit_code": 0,
+      "technical_poses": 118,
+      "rows": 121,
+      "rendered": false
+    },
+    {
+      "run": "A71 read-only seam diagnostic",
+      "exit_code": 0,
+      "actual_artist_gap_m": [
+        0.02400000000000002,
+        0.02400000000000002
+      ]
+    },
+    {
+      "run": "first native source comparison",
+      "exit_code": 1,
+      "reason": "fixed band classifier counted 36 newly overshooting SURFACE bridge points as pre-existing geometry",
+      "source_saved": false,
+      "report_saved": false
+    },
+    {
+      "run": "corrected independent native source comparison",
+      "exit_code": 0,
+      "retained_artist_points_skin": [
+        143493,
+        142898
+      ],
+      "changed_bridge_vertices": [
+        1242,
+        1602
+      ],
+      "all_skin_hands_163bones_rest_matrices_identical": true,
+      "first_and_post_format_actual_reports_preserved": true
+    },
+    {
+      "run": "formatted native diagnostics rerun",
+      "exit_code": 0,
+      "new_output_files": true,
+      "source_saved": false
+    },
+    {
+      "run": "hardware/Chrome read",
+      "exit_code": 0,
+      "read_only": true
+    },
+    {
+      "run": "A71 isolated actual Chrome",
+      "exit_code": 0,
+      "startTime": "2026-10-01T19:41:59.864Z",
+      "duration": 42498.994000000006,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "all_native_handles_terminal_before_browser": true,
+      "actual_png": 2,
+      "camera_requests": 0,
+      "api_sql_smtp_oauth": "not connected; API401/503/context-loss fixture",
+      "renders": [
+        {
+          "name": "남성-technical-render",
+          "value": {
+            "samples": 180,
+            "mean_ms": 16.667777778042687,
+            "p95_ms": 17.5,
+            "draw_calls": 21,
+            "triangles": 1174250,
+            "renderer": "WebKit WebGL",
+            "skeletons_independent": true,
+            "static_angle_max": 0,
+            "moving_angle_max": 0.2094321697429077,
+            "eight_weight_meshes": 2
+          }
+        },
+        {
+          "name": "여성-technical-render",
+          "value": {
+            "samples": 180,
+            "mean_ms": 16.663888888888888,
+            "p95_ms": 17.40000009536743,
+            "draw_calls": 21,
+            "triangles": 1172370,
+            "renderer": "WebKit WebGL",
+            "skeletons_independent": true,
+            "static_angle_max": 0,
+            "moving_angle_max": 0.20942989465322978,
+            "eight_weight_meshes": 2
+          }
+        }
+      ]
+    },
+    {
+      "run": "Ruff check/format --check final",
+      "exit_code": 0,
+      "files": 11
+    },
+    {
+      "run": "temporary preview path lookup",
+      "exit_code": 1,
+      "reason": "a65-first-preview.py path absent; rg found unchanged actual a50-first-preview.py; no asset change"
+    },
+    {
+      "run": "comparison orchestration setup",
+      "error": "TypeError s.index is not a function",
+      "source_created": false,
+      "reason": "JS setup typo fixed before native comparator creation"
+    }
+  ],
+  "audit_preflight": {
+    "exit_code": 1,
+    "reason": "Initial auditor expected 8 unrun rows; actual explicitly documented rows were 7. Corrected row-count check, no native evidence changed."
+  },
+  "unrun": [
+    "A70 source QA/render/GLB/browser (generation stopped before saving)",
+    "A70b full 34PNG/GLB/imported QA/browser",
+    "A71 imported GLB 34PNG renders",
+    "actual performer/observer/camera framing and accuracy",
+    "correct motion clips/user retargeting/coaching timer/inference fps/feedback delay",
+    "actual Gmail/Google/provider connection",
+    "Stage3-6 service expansion/operations/deployment/release/expert practical review"
+  ]
+}

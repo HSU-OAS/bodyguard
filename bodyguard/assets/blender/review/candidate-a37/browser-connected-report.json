@@ -1,0 +1,235 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/frontend/node_modules/.pnpm/@playwright+test@1.63.0/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "playwright.avatar.config.ts",
+      "--reporter",
+      "list,json"
+    ],
+    "configFile": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/frontend/playwright.avatar.config.ts",
+    "rootDir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/frontend/test-results/avatar",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "avatar.spec.ts"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 5,
+    "webServer": {
+      "command": "vite --host localhost --port 5182",
+      "url": "http://localhost:5182",
+      "reuseExistingServer": false,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "avatar.spec.ts",
+      "file": "avatar.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "A-00 native proxy는 브라우저의 외부 연결을 차단한다",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8636,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T09:04:54.543Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "male-native-asset",
+                      "contentType": "application/json",
+                      "body": "eyJmaWxlbmFtZSI6ImJvZHlndWFyZC1tYWxlLWNhbmRpZGF0ZS1hMzcuZ2xiIiwiYnl0ZXMiOjEyNjU2OTc2LCJzaGEyNTYiOiJjYzg1YmNkNDQ5ZjNmMzEzNDdlNGY3MTc0OTg2ZDQxZTRhY2EzMDY3OTkwZjVkOGEyZTZiYTNhMDk5MTcxOTI3IiwiZWlnaHRXZWlnaHRQcmltaXRpdmVzIjoxfQ=="
+                    },
+                    {
+                      "name": "female-native-asset",
+                      "contentType": "application/json",
+                      "body": "eyJmaWxlbmFtZSI6ImJvZHlndWFyZC1mZW1hbGUtY2FuZGlkYXRlLWEzNy5nbGIiLCJieXRlcyI6MTI0NjI4NDgsInNoYTI1NiI6IjI3YzEwOTAyYWEzNzdlOTk1YmRiYzExNWFiNzczY2YyMmY4ZWEzODU4MmM0OTgyMDMwNGEzM2FkNzY4NWYyNWEiLCJlaWdodFdlaWdodFByaW1pdGl2ZXMiOjF9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ff9102a4e72e10c10bde-919e1940a97f5fdd1b91",
+          "file": "avatar.spec.ts",
+          "line": 81,
+          "column": 1
+        },
+        {
+          "title": "A-06 실제 남녀 GLB 두 복제본을 로드하고 한쪽 기술 변형이 다른 뼈대를 바꾸지 않는다",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 28839,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T09:05:04.134Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "male-native-asset",
+                      "contentType": "application/json",
+                      "body": "eyJmaWxlbmFtZSI6ImJvZHlndWFyZC1tYWxlLWNhbmRpZGF0ZS1hMzcuZ2xiIiwiYnl0ZXMiOjEyNjU2OTc2LCJzaGEyNTYiOiJjYzg1YmNkNDQ5ZjNmMzEzNDdlNGY3MTc0OTg2ZDQxZTRhY2EzMDY3OTkwZjVkOGEyZTZiYTNhMDk5MTcxOTI3IiwiZWlnaHRXZWlnaHRQcmltaXRpdmVzIjoxfQ=="
+                    },
+                    {
+                      "name": "female-native-asset",
+                      "contentType": "application/json",
+                      "body": "eyJmaWxlbmFtZSI6ImJvZHlndWFyZC1mZW1hbGUtY2FuZGlkYXRlLWEzNy5nbGIiLCJieXRlcyI6MTI0NjI4NDgsInNoYTI1NiI6IjI3YzEwOTAyYWEzNzdlOTk1YmRiYzExNWFiNzczY2YyMmY4ZWEzODU4MmM0OTgyMDMwNGEzM2FkNzY4NWYyNWEiLCJlaWdodFdlaWdodFByaW1pdGl2ZXMiOjF9"
+                    },
+                    {
+                      "name": "남성-technical-render",
+                      "contentType": "application/json",
+                      "body": "ewogICJzYW1wbGVzIjogMTgwLAogICJtZWFuX21zIjogMTYuNjY1NTU1NTU1MjkwNjQ1LAogICJwOTVfbXMiOiAxNi45MDAwMDAwOTUzNjc0MywKICAiZHJhd19jYWxscyI6IDIxLAogICJ0cmlhbmdsZXMiOiAxMTUzMDE4LAogICJyZW5kZXJlciI6ICJXZWJLaXQgV2ViR0wiLAogICJza2VsZXRvbnNfaW5kZXBlbmRlbnQiOiB0cnVlLAogICJzdGF0aWNfYW5nbGVfbWF4IjogMCwKICAibW92aW5nX2FuZ2xlX21heCI6IDAuMjA5NDM4MzEwMjE2Mzc3MjcsCiAgImVpZ2h0X3dlaWdodF9tZXNoZXMiOiAyCn0="
+                    },
+                    {
+                      "name": "여성-technical-render",
+                      "contentType": "application/json",
+                      "body": "ewogICJzYW1wbGVzIjogMTgwLAogICJtZWFuX21zIjogMTYuNjY1MDAwMDAwMjY0OTEsCiAgInA5NV9tcyI6IDE2Ljg5OTk5OTg1Njk0ODg1MywKICAiZHJhd19jYWxscyI6IDIxLAogICJ0cmlhbmdsZXMiOiAxMTM1MzU0LAogICJyZW5kZXJlciI6ICJXZWJLaXQgV2ViR0wiLAogICJza2VsZXRvbnNfaW5kZXBlbmRlbnQiOiB0cnVlLAogICJzdGF0aWNfYW5nbGVfbWF4IjogMCwKICAibW92aW5nX2FuZ2xlX21heCI6IDAuMjA5NDM4MTYyOTEwOTE2NSwKICAiZWlnaHRfd2VpZ2h0X21lc2hlcyI6IDIKfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ff9102a4e72e10c10bde-efe3f480d4ab77614123",
+          "file": "avatar.spec.ts",
+          "line": 85,
+          "column": 1
+        },
+        {
+          "title": "A-06 GLB 실패와 WebGL 연결 상실에서 재시도하여 새 모델을 연다",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3041,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-01T09:05:32.991Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "male-native-asset",
+                      "contentType": "application/json",
+                      "body": "eyJmaWxlbmFtZSI6ImJvZHlndWFyZC1tYWxlLWNhbmRpZGF0ZS1hMzcuZ2xiIiwiYnl0ZXMiOjEyNjU2OTc2LCJzaGEyNTYiOiJjYzg1YmNkNDQ5ZjNmMzEzNDdlNGY3MTc0OTg2ZDQxZTRhY2EzMDY3OTkwZjVkOGEyZTZiYTNhMDk5MTcxOTI3IiwiZWlnaHRXZWlnaHRQcmltaXRpdmVzIjoxfQ=="
+                    },
+                    {
+                      "name": "female-native-asset",
+                      "contentType": "application/json",
+                      "body": "eyJmaWxlbmFtZSI6ImJvZHlndWFyZC1mZW1hbGUtY2FuZGlkYXRlLWEzNy5nbGIiLCJieXRlcyI6MTI0NjI4NDgsInNoYTI1NiI6IjI3YzEwOTAyYWEzNzdlOTk1YmRiYzExNWFiNzczY2YyMmY4ZWEzODU4MmM0OTgyMDMwNGEzM2FkNzY4NWYyNWEiLCJlaWdodFdlaWdodFByaW1pdGl2ZXMiOjF9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ff9102a4e72e10c10bde-d572642cca8d63704873",
+          "file": "avatar.spec.ts",
+          "line": 142,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-01T09:04:52.790Z",
+    "duration": 43370.776999999995,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

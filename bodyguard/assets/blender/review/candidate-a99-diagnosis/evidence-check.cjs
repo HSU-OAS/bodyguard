@@ -1,0 +1,28 @@
+// A-02/A-08: technical memory diagnosis is not appearance or release approval.
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),zlib=require('node:zlib')
+const read=n=>JSON.parse(fs.readFileSync(path.join(__dirname,n))),sha=b=>crypto.createHash('sha256').update(b).digest('hex')
+const manifest=read('copy-manifest.json'),record=read('execution-record.json'),root=path.resolve(__dirname,'../../../../..')
+assert.equal(manifest.copies.length,19)
+assert.equal(manifest.old_files_changed,0)
+assert.equal(manifest.copies.filter(x=>x.file.endsWith('.gz')).length,16)
+for(const item of manifest.copies){const b=fs.readFileSync(path.join(__dirname,item.file));assert.equal(b.length,item.bytes);assert.equal(sha(b),item.sha256);assert.equal(sha(item.file.endsWith('.gz')?zlib.gunzipSync(b):b),item.decoded_sha256)}
+for(const item of [record.source,record.maker])assert.equal(sha(fs.readFileSync(path.join(root,item.file))),item.sha256)
+assert.deepEqual(record.runs.map(x=>x.exit_code),[1,1,1,1,1,0,1,0])
+const skin=read('skin-diagnosis.json')
+assert.equal(skin.changed_existing_skin,13)
+assert.equal(skin.changed_original_markers,0)
+assert.equal(skin.changed_protected_hands,0)
+assert.equal(skin.maximum_numeric_delta,5.960464477539063e-8)
+assert(skin.coordinates_preserved && skin.assets_saved===0 && !skin.appearance_approved)
+for(const [file,folds]of [['recut-memory.json',[1070,1033,500,539]],['existing-contours-memory.json',[133,123,9,11]]]){
+ const x=read(file);assert.equal(x.rows.length,4);assert.equal(x.assets_saved,0)
+ assert.equal(x.source_sha256,record.source.sha256);assert.equal(x.maker_sha256,record.maker.sha256)
+ assert.deepEqual(x.rows.map(r=>r.after.long_fold_edges),folds)
+ assert(x.rows.every(r=>r.retained_coordinates_skin_hands_guard_passed&&r.rest_bones_matrices_preserved&&r.after.global_nonmanifold===0))
+ for(const k of ['full_deformation_qa','browser_comparison_run','appearance_approved'])assert.equal(x[k],false)
+}
+const existing=read('existing-contours-memory.json')
+assert.equal(existing.cut_plane_reapplied,false)
+assert.deepEqual(existing.rows.slice(2).map(x=>x.after.narrow_faces),[0,0])
+for(const k of ['human_camera_capture','human_coordinate_collection','new_full_deformation_qa','new_browser_comparison','appearance_passed','adopted','release_approved','stages_1_to_6_complete','pr9_merge_allowed'])assert.equal(record[k],false)
+console.log(JSON.stringify({integrity_passed:true,copies:19,gzip:16,memory_comparisons:2,source_unchanged:true,new_assets:0,appearance_passed:false}))

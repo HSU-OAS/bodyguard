@@ -1,0 +1,138 @@
+"""FR-A-01~04: local native surface/skin edit on the continuous artist head.
+
+This is not an avatar generator or a clinical motion. The continuous cervical
+mesh, retained body/hands, rest rig and prior files must remain unchanged.
+"""
+
+import json
+import sys
+from hashlib import file_digest
+from math import isfinite
+from pathlib import Path
+
+import bpy
+from mathutils import Vector
+
+
+def sha(path):
+    with path.open("rb") as file:
+        return file_digest(file, "sha256").hexdigest()
+
+
+source = Path(bpy.data.filepath)
+output, report_path = map(Path, sys.argv[sys.argv.index("--") + 1 :])
+assert sha(source) == "7751f3a4ea79ba21bbfa44b22de533fb36037e5d6a0ed5e9d97bf44948042b86"
+assert output.suffix == ".blend" and report_path.suffix == ".json"
+assert not output.exists() and not report_path.exists(), "Preserve all prior files"
+assert output.resolve() != source.resolve()
+source_sha = sha(source)
+reports = []
+for label in ("Male", "Female"):
+    body = bpy.data.objects[f"BODYGUARD {label} sculpt WIP"]
+    rig = bpy.data.objects[f"BODYGUARD {label} rig WIP"]
+    assert len(body.modifiers) == 1 and body.modifiers[0].object == rig
+    assert len(rig.data.bones) == 163 and all(b.matrix_basis.is_identity for b in rig.pose.bones)
+    rest = [(b.name, tuple(tuple(row) for row in b.matrix_local)) for b in rig.data.bones]
+    matrices = body.matrix_world.copy(), rig.matrix_world.copy()
+    coordinates = [tuple(v.co) for v in body.data.vertices]
+    skin = [tuple((g.group, g.weight) for g in v.groups) for v in body.data.vertices]
+    groups = [g.name for g in body.vertex_groups]
+    topology = [tuple(p.vertices) for p in body.data.polygons]
+    height = max(v.co.z for v in body.data.vertices)
+    replacement_cut = height * 0.87 - 0.032
+    protected = set(body["bodyguard_distal_hand_vertices"])
+    bpy.ops.object.select_all(action="DESELECT")
+    body.select_set(True)
+    bpy.context.view_layer.objects.active = body
+    mask = body.vertex_groups.new(name="Native neutral face depth")
+    mask_name = mask.name
+    selected = set()
+    for vertex in body.data.vertices:
+        weight = min(1, max(0, (vertex.co.z - height * 0.89) / (height * 0.025)))
+        weight *= min(1, max(0, (height - vertex.co.z) / 0.020))
+        if weight:
+            mask.add([vertex.index], weight, "REPLACE")
+            selected.add(vertex.index)
+    finish = body.modifiers.new("Native faceless depth polish", "SMOOTH")
+    finish.use_x = finish.use_z = False
+    finish.use_y = True
+    finish.factor, finish.iterations = 0.65, 1200
+    finish.vertex_group = mask_name
+    bpy.ops.object.modifier_move_up(modifier=finish.name)
+    bpy.ops.object.modifier_apply(modifier=finish.name)
+    body.vertex_groups.remove(body.vertex_groups[mask_name])
+    assert [g.name for g in body.vertex_groups] == groups
+    assert skin == [tuple((g.group, g.weight) for g in v.groups) for v in body.data.vertices]
+    assert all(
+        v.co.x == coordinates[v.index][0] and v.co.z == coordinates[v.index][2]
+        for v in body.data.vertices
+    ), "Preserve authored width, crown and joint height"
+    assert all(
+        tuple(v.co) == coordinates[v.index] for v in body.data.vertices if v.index not in selected
+    ), "No cervical/body surface smoothing"
+    delta = max((v.co - Vector(coordinates[v.index])).length for v in body.data.vertices)
+    assert isfinite(delta)
+    # FR-A-03: native weight-paint averaging only within the replaced professional
+    # patch. Do not edit retained skin, move bones, or relax deformation QA.
+    skin_selected = set()
+    for vertex in body.data.vertices:
+        vertex.select = vertex.co.z > replacement_cut + 0.001
+        if vertex.select:
+            skin_selected.add(vertex.index)
+    bpy.ops.object.mode_set(mode="EDIT")
+    bpy.ops.object.vertex_group_smooth(group_select_mode="ALL", factor=0.5, repeat=32, expand=0)
+    bpy.ops.object.vertex_group_normalize_all(group_select_mode="ALL", lock_active=False)
+    bpy.ops.object.mode_set(mode="OBJECT")
+    assert all(
+        tuple((g.group, g.weight) for g in v.groups) == skin[v.index]
+        for v in body.data.vertices
+        if v.index not in skin_selected
+    )
+    assert all(
+        tuple(v.co) == coordinates[v.index]
+        and tuple((g.group, g.weight) for g in v.groups) == skin[v.index]
+        for v in body.data.vertices
+        if v.index in protected
+    )
+    assert all(
+        all(isfinite(c) for c in v.co) and abs(sum(g.weight for g in v.groups) - 1) < 0.01
+        for v in body.data.vertices
+    )
+    assert topology == [tuple(p.vertices) for p in body.data.polygons]
+    assert rest == [(b.name, tuple(tuple(row) for row in b.matrix_local)) for b in rig.data.bones]
+    assert matrices == (body.matrix_world, rig.matrix_world)
+    for vertex in body.data.vertices:
+        vertex.select = False
+    body.data.update()
+    reports.append(
+        {
+            "body": label,
+            "source_sha256": source_sha,
+            "native_face_depth": {
+                "method": "SMOOTH/Y only",
+                "factor": 0.65,
+                "iterations": 1200,
+                "maximum_delta_m": delta,
+                "vertices": len(selected),
+                "xz_exact": True,
+            },
+            "native_patch_skin": {
+                "method": "vertex_group_smooth/ALL + normalize",
+                "repeat": 32,
+                "factor": 0.5,
+                "vertices": len(skin_selected),
+            },
+            "candidate_vertices": len(body.data.vertices),
+            "continuous_cervical_topology_and_surface_preserved": True,
+            "retained_skin_hands_163_rest_bones_matrices_exact": True,
+            "all_source_glb_deformation_browser_visual_checks_pending": True,
+        }
+    )
+assert sha(source) == source_sha, "Never save the prior source"
+report_path.write_text(json.dumps(reports, indent=2) + "\n")
+bpy.context.scene["bodyguard_stage"] = (
+    "S2.4 continuous neutral head WIP; ALL QA pending; NOT release"
+)
+bpy.context.preferences.filepaths.save_version = 0
+bpy.ops.wm.save_as_mainfile(filepath=str(output), compress=True)
+print("ACTUAL LOCAL NATIVE CONTINUOUS HEAD", json.dumps(reports))

@@ -1,0 +1,230 @@
+{
+  "date_kst": "2026-10-03",
+  "story": "S2.4a/b appearance P2 continuation; not S2.4 or Stage 2 completion",
+  "head_before": "9753f5c6b34c3a0af72612fcb5a8986d7f75bd95",
+  "origin_main_before": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "pr_before": {
+    "number": 9,
+    "status": "OPEN",
+    "draft": true,
+    "merge_state": "CLEAN",
+    "mergeable": "MERGEABLE",
+    "checks": []
+  },
+  "latest_ceo_reference": {
+    "sha256": "45b313912dee5ae2218bfe76086abb35a9b948fab9e877f1a9d2b05f832de62",
+    "unchanged": true,
+    "requirement": "smooth faceless head-neck continuity; unified unclothed neutral white male/female mannequins; preserve anatomy and rig fidelity"
+  },
+  "inputs": [
+    {
+      "file": "bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend",
+      "sha256": "9191a2c1a0bd7bf4bb3ae3c358f911188052e9c204d4c4f74783806fb937b661",
+      "overwritten": false
+    },
+    {
+      "file": "bodyguard/assets/blender/review/candidate-a121-a123-review/artist-candidate.blend",
+      "sha256": "e44d0abb136a1d9e96d2b7ca7eb37cb2cd53e07fc7f73b4ba17dc98827a31bc8",
+      "overwritten": false
+    }
+  ],
+  "blender": {
+    "version": "5.1.1",
+    "build": "b70da489d7f4",
+    "native_metal": true
+  },
+  "native_runs": [
+    {
+      "prefix": "a124",
+      "phase": "cap seam comparison",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a124-cap-seam-probe.py -- bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend bodyguard/assets/blender/review/candidate-a121-a123-review/artist-candidate.blend /private/tmp/bodyguard-tailor.6b7Uvu/a115-ordered-boundary.json /private/tmp/bodyguard-tailor.6b7Uvu/a124-cap-seam.json",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "승인된 아바타 Story의 별도 Blender에서 개선 후보의 목 경계와 후두부 각도를 읽기 전용으로 대조합니다. 기존 원본 저장·서비스 변경·카메라 수집은 하지 않습니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 4000
+      },
+      "session": 25694,
+      "exit_code": 0,
+      "observed_chunks": [
+        "c5fd73",
+        "3540d6"
+      ],
+      "log": "logs/a124-observed.json.txt.gz"
+    },
+    {
+      "prefix": "a125",
+      "phase": "weighted fairing rejected",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a121-a123-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a125-cap-tangent-dryrun.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a125-cap-tangent-dryrun",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "승인된 동일 Story에서 기존 Blender 국소 스무딩을 재사용해 목 경계 양쪽을 메모리로 다듬고 실제 남녀 측면·뒤쪽 렌더를 대조합니다. 원본/GLB 저장·서비스 반영·카메라 수집 없이 리깅/형상 guard를 유지합니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 3500
+      },
+      "session": 93651,
+      "exit_code": 1,
+      "observed_chunks": [
+        "d6b9e3",
+        "1ad705"
+      ],
+      "log": "logs/a125-observed.json.txt.gz"
+    },
+    {
+      "prefix": "a126",
+      "phase": "Y-only fairing rejected",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec bodyguard/assets/blender/review/candidate-a121-a123-review/artist-candidate.blend --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a126-cap-depth-dryrun.py -- /private/tmp/bodyguard-tailor.6b7Uvu/a126-cap-depth-dryrun",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "승인된 Story에서 기존 native 깊이축 전용 표면 정제를 재사용해, 원래 폭·관절 높이·리그를 고정한 목 접선 대조와 실제 렌더를 수행합니다. 새 원본 저장·GLB·서비스 변경·인간 영상 수집은 없습니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 3500
+      },
+      "session": 62270,
+      "exit_code": 1,
+      "observed_chunks": [
+        "6d6832",
+        "4c205c"
+      ],
+      "log": "logs/a126-observed.json.txt.gz"
+    },
+    {
+      "prefix": "a127",
+      "phase": "stale BMVert guard stopped before conformance",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a127-cap-density-dryrun.py -- bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend bodyguard/assets/blender/review/candidate-a121-a123-review/artist-candidate.blend /private/tmp/bodyguard-tailor.6b7Uvu/a127-cap-density-dryrun",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "승인된 동일 Story에서 개선 cap 내부만 native 세분화하고 전문 원래 표면에 맞춰, 기존 좌표·skin·손·163 rest 리그를 보존한 국소 기하 및 실제 외형 대조를 합니다. 기존 source/GLB 저장·서비스 변경·카메라 수집 없이 실행합니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 4000
+      },
+      "session": 38759,
+      "exit_code": 1,
+      "observed_chunks": [
+        "2cfec0",
+        "1420d8"
+      ],
+      "log": "logs/a127-observed.json.txt.gz"
+    },
+    {
+      "prefix": "a128",
+      "phase": "exact parent data diagnosis",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a128-native-subdivision-probe.py -- bodyguard/assets/blender/review/candidate-a121-a123-review/artist-candidate.blend /private/tmp/bodyguard-tailor.6b7Uvu/a128-native-subdivision.json",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "승인된 Story의 새 국소 세분화가 멈춘 원인을 별도 native 메모리에서 확인합니다. 삭제/변경된 authored point 식별자만 대조하고 source·GLB·서비스 저장이나 카메라 수집은 하지 않습니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 3500
+      },
+      "session": 4567,
+      "exit_code": 0,
+      "observed_chunks": [
+        "9c3e5e",
+        "1e68cf"
+      ],
+      "log": "logs/a128-observed.json.txt.gz"
+    },
+    {
+      "prefix": "a129",
+      "phase": "numeric-parent subdivision rejected by geometry guards",
+      "command": {
+        "cmd": "/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python /private/tmp/bodyguard-tailor.6b7Uvu/a129-cap-density-parent-dryrun.py -- bodyguard/assets/blender/bodyguard_avatar_candidate_a106_unapproved.blend bodyguard/assets/blender/review/candidate-a121-a123-review/artist-candidate.blend /private/tmp/bodyguard-tailor.6b7Uvu/a129-cap-density-parent-dryrun",
+        "workdir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-avatar-candidate",
+        "sandbox_permissions": "require_escalated",
+        "justification": "승인된 Story의 같은 국소 세분화를 실제 원점 ID·좌표·skin 보존으로 대조해, 무효화된 Blender 메모리 참조 판정을 보완합니다. 기존 원본·GLB·서비스는 저장/변경하지 않고 동일 형상 guard와 실제 렌더를 유지합니다.",
+        "yield_time_ms": 1000,
+        "max_output_tokens": 4000
+      },
+      "session": 52608,
+      "exit_code": 1,
+      "observed_chunks": [
+        "ca2356",
+        "68bcdb"
+      ],
+      "log": "logs/a129-observed.json.txt.gz"
+    }
+  ],
+  "native_actors_sequential": true,
+  "read_only_or_memory_only": true,
+  "new_saved_sources": 0,
+  "new_glb": 0,
+  "new_png": 0,
+  "new_source_118": 0,
+  "new_roundtrip_118": 0,
+  "new_browser_tests": 0,
+  "camera_calls": 0,
+  "pre_existing_actual_images_viewed": [
+    "candidate-a121-a123-review/browser/male-posterior-neck.png",
+    "candidate-a121-a123-review/browser/female-posterior-neck.png",
+    "candidate-a121-a123-review/source/faceless-side-male.png",
+    "candidate-a121-a123-review/source/faceless-side-female.png"
+  ],
+  "static": {
+    "default_ruff_six_scripts": "exit 0",
+    "isolated_E4_E7_E9_F_I_B_six_scripts": {
+      "exit": 0,
+      "chunk": "9958a2"
+    },
+    "format_88_six_scripts": {
+      "exit": 0,
+      "chunk": "cb4b0f"
+    },
+    "copier_node_syntax": {
+      "exit": 0,
+      "chunk": "f9b58e"
+    }
+  },
+  "native_data_validation": {
+    "exit": 0,
+    "chunk": "9fb15e"
+  },
+  "limited_secret_scan": {
+    "text_and_gzip_files": 24,
+    "pattern_hits": 0,
+    "exit": 0,
+    "chunk": "b0f201",
+    "full_security_audit": false
+  },
+  "official_source_read": {
+    "url": "https://github.com/blender/blender/blob/b70da489d7f4/source/blender/modifiers/intern/MOD_correctivesmooth.cc",
+    "transport": "read-only curl stdout",
+    "chunk": "41b467",
+    "exit": 0,
+    "full_source_observed": true,
+    "web_open_failed": true,
+    "restricted_dns_curl_exit": 6,
+    "derived_inference_not_unique_geometry_cause": true
+  },
+  "preservation": {
+    "exclusive_copies": 20,
+    "gzip": 16,
+    "old_files_changed": 0,
+    "protected_old_files": 278,
+    "copy_exit": 0,
+    "copy_chunk": "5e896f"
+  },
+  "observed_logs": {
+    "whole_stdout_guaranteed": false,
+    "max_archive_prefix_chars": 16000,
+    "a128_archive_prefix_clipped": true,
+    "a128_tool_output_truncated": true,
+    "a128_complete_native_data_preserved": "native-point-retention.json.txt.gz"
+  },
+  "limits": {
+    "geometry_guards_passed": false,
+    "appearance_approved": false,
+    "whole_body_collision_passed": false,
+    "human_motion_or_clinical_passed": false,
+    "source_glb_browser_rechecks_for_new_saved_model": "NOT RUN: no saved new model",
+    "service_asset_adopted": false,
+    "development_a37_unchanged": true,
+    "pr9_merge": false,
+    "stage1_6_completed": false
+  },
+  "next": "Preserve A123 cap; localize tiny child faces and the single male nonmanifold edge before/after native subdivision/conformance, then use bounded native cleanup only if original parent data/boundary/skin/rig and geometry guards still pass. A129 is not adopted."
+}
