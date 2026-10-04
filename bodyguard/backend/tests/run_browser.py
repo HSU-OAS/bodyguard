@@ -28,7 +28,7 @@ from tests.test_google_auth import CLIENT_ID, Provider
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "suite", choices=("account", "password", "google"), nargs="?", default="account"
+        "suite", choices=("account", "password", "google", "records"), nargs="?", default="account"
     )
     args = parser.parse_args()
     # Bind before touching data; never reuse a user's server on this port.
@@ -140,6 +140,12 @@ def main() -> int:
                     time.sleep(0.05)
                 else:
                     raise RuntimeError("Browser harness server did not start")
+                # FR-R-03: each records run preserves earlier failure/screenshots/reports.
+                output = (
+                    f"test-results/records-{datetime.now(UTC).strftime('%Y%m%dT%H%M%S%fZ')}"
+                    if args.suite == "records"
+                    else f"test-results/{args.suite}"
+                )
                 result = subprocess.run(
                     [
                         "pnpm",
@@ -150,7 +156,7 @@ def main() -> int:
                         "--config",
                         "playwright.account.config.ts",
                         "--output",
-                        f"test-results/{args.suite}",
+                        output,
                     ],
                     cwd=Path(__file__).resolve().parents[2] / "frontend",
                     env={
@@ -158,6 +164,9 @@ def main() -> int:
                         "BODYGUARD_TEST_MAILBOX": str(mailbox),
                         "BODYGUARD_TEST_GOOGLE_FIXTURE": str(google_file),
                         "BODYGUARD_TEST_BLOCKED_PROXY": proxy_url,
+                        "BODYGUARD_TEST_RECORDS_REPORT": (
+                            f"{output}/report.json" if args.suite == "records" else ""
+                        ),
                     },
                     check=False,
                 )

@@ -4,6 +4,7 @@ import { AuthProvider, useAuth } from './auth'
 import { AccountPage } from './pages/AccountPage'
 import { ExplorePage } from './pages/ExplorePage'
 import { PasswordPage } from './pages/PasswordPage'
+import { RecordsPage } from './pages/RecordsPage'
 
 // FR-V-02/03: prototype camera/debug UI is compiled out of production.
 const Demo = import.meta.env.DEV
@@ -67,6 +68,11 @@ function SessionGate({ children }: { children?: ReactNode }) {
       <Link className="button primary" to="/explore">
         스트레칭 시작 경로 선택
       </Link>
+      <p>
+        <Link className="back-link" to="/records">
+          내 수행 기록 확인
+        </Link>
+      </p>
       <div className="development-note">
         <h2>첫 코칭 흐름을 준비하고 있습니다</h2>
         <p>
@@ -163,8 +169,12 @@ function Shell() {
   const { state } = useAuth()
   const location = useLocation()
   useEffect(() => {
-    // NFR-08: the development selection page owns its query-dependent title/focus.
-    if (MotionSelection && location.pathname === '/dev/select') return
+    // NFR-08: selection/records pages own their asynchronous title and focus.
+    if (
+      (MotionSelection && location.pathname === '/dev/select') ||
+      /^\/records(?:\/[^/]+)?$/.test(location.pathname)
+    )
+      return
     document.querySelector<HTMLElement>('main h1')?.focus({ preventScroll: true })
     document.title = `${
       location.pathname === '/login'
@@ -198,9 +208,18 @@ function Shell() {
         </Link>
         <nav aria-label="계정 메뉴">
           {state.status === 'ready' ? (
-            <Link className="nav-link" to="/start">
-              내 시작
-            </Link>
+            <>
+              <Link className="nav-link" to="/start">
+                내 시작
+              </Link>
+              <Link
+                className="nav-link"
+                to="/records"
+                aria-current={location.pathname.startsWith('/records') ? 'page' : undefined}
+              >
+                수행 기록
+              </Link>
+            </>
           ) : state.status === 'checking' || state.status === 'logging-out' ? (
             <span className="muted small" role="status">
               계정 확인 중
@@ -220,6 +239,22 @@ function Shell() {
           <Route path="/password/forgot" element={<PasswordPage key="forgot" mode="forgot" />} />
           <Route path="/password/reset" element={<PasswordPage key="reset" mode="reset" />} />
           <Route path="/start" element={<SessionGate />} />
+          <Route
+            path="/records"
+            element={
+              <SessionGate>
+                <RecordsPage />
+              </SessionGate>
+            }
+          />
+          <Route
+            path="/records/:recordId"
+            element={
+              <SessionGate>
+                <RecordsPage />
+              </SessionGate>
+            }
+          />
           <Route
             path="/explore"
             element={
