@@ -7,7 +7,10 @@ if (!proxy || !/^http:\/\/127\.0\.0\.1:\d+$/.test(proxy))
   throw new Error('Owned closed-port egress proxy required')
 export default defineConfig({
   testDir: 'e2e',
-  testMatch: ['account.spec.ts', 'password.spec.ts', 'google.spec.ts'],
+  testMatch: ['account.spec.ts', 'password.spec.ts', 'google.spec.ts', 'records.spec.ts'],
+  reporter: process.env.BODYGUARD_TEST_RECORDS_REPORT
+    ? [['list'], ['json', { outputFile: process.env.BODYGUARD_TEST_RECORDS_REPORT }]]
+    : 'list',
   workers: 1,
   timeout: 30_000,
   use: {
