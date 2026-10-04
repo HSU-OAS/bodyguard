@@ -9,6 +9,11 @@
 138개 합성·DOM 검사와 실제 Chrome5개(계정 응답 mock), production 차단·실제 PNG를 확인했다. PR 병합 게이트는 별도다.
 미검증 후보를 제품에 공개하지 않는 근거 계약을 유지하며 코칭·타이머·카메라·기록은 연결하지 않았다. 전체 S2.5 완료로 세지 않는다.
 
+2026-10-05 갱신: S2.5a PR #14는 main 4a00bb2에 병합됐다.
+독립 [S2.5b 진행·중단 엔진](stage2-coaching-engine.md)은 명세/하네스 뒤 순수 TypeScript 구현과 60개 합성 시험을 마쳤다.
+전체 Vitest198개·실제 Chrome 선택 회귀5개(계정 mock)·production 미연결 엔진/후보 차단을 확인했다. PR 게이트는 별도다.
+실제 촬영 판정기·카메라/두 모델 adapter·운동 화면·기록 API는 연결하지 않았으며 S2.3b/S2.4/전체 S2.5/2단계 게이트는 미통과다.
+
 ## Story 순서
 
 | Story | 구현 범위 | 완료 증거·의존 |
@@ -19,6 +24,7 @@
 | S2.4 남녀 아바타 첫 출시 후보 | 사진 대비 조형·의상·관절 표현, 축·변형, 웹용 최적화·권리·두 모델 비교 | [제작 계약](../avatar-production.md)의 실제 브라우저 컷. S2.3 근거 없이 시범 각도·유지시간 확정 금지 |
 | S2.5 첫 코칭·결과 연결 | 목록/상세·직접 선택, 준비·두 아바타·관찰 가능한 세밀한 피드백·중단·결과 | S2.3·S2.4 통과 전제. 정상/오류/가림/추론·자산 실패·중단·탭 이탈. 완료·중단·건너뜀 구분 |
 | S2.5a 탐색·선택 독립 준비 | 기존 첫 후보의 목록·검색·필터·상세·복구, 개발 전용/계정 보호 | [명세·결과](stage2-motion-selection.md)·[하네스](stage2-motion-selection-harness.md). production 후보0, 코칭 disabled. 전체 S2.5 선행 게이트를 건너뛰지 않음 |
+| S2.5b 진행·중단 엔진 독립 준비 | 관찰된 유지시간·시작/목표/복귀 반복·일시정지·중단·순서 있는 결과 | [명세·결과](stage2-coaching-engine.md)·[하네스](stage2-coaching-engine-harness.md). 합성 순수 검증. 실제 판정/아바타/브라우저 자원 adapter와 공개 코칭은 미연결 |
 | S2.6 구글 로그인·복구 | OAuth, 비밀번호 재설정, 기존 세션 무효화·안전한 복귀 | [a1 복구 API](stage2-password-recovery-api.md) PR #10·[a2 복구 웹](stage2-password-recovery-web.md) PR #11·[b1 Google API](stage2-google-auth-api.md) PR #12 병합 → [b2 웹](stage2-google-auth-web.md). 실제 공급자와 모의 시험 분리. 묵시적 계정 합치기 금지. 실제 Gmail/Google 연결은 별도 승인 |
 | S2.7 통합 게이트 | 실제 가입부터 선택·두 아바타·코칭·결과·로그아웃 | 남녀/정상/오류/가림/권한 거부/세션 만료를 실제 노트북에서 확인. 가짜 카메라·메일만으로 통과 금지 |
 
