@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from 'react'
+import { lazy, type ReactNode, Suspense, useEffect } from 'react'
 import { BrowserRouter, Link, Navigate, Route, Routes, useLocation } from 'react-router'
 import { AuthProvider, useAuth } from './auth'
 import { AccountPage } from './pages/AccountPage'
@@ -11,7 +11,16 @@ const Demo = import.meta.env.DEV
     )
   : null
 
-function SessionGate() {
+// FR-S-01/06: unvalidated candidates remain protected and development-only.
+const MotionSelection = import.meta.env.DEV
+  ? lazy(() =>
+      import('./pages/MotionSelectionPage').then((module) => ({
+        default: module.MotionSelectionPage,
+      })),
+    )
+  : null
+
+function SessionGate({ children }: { children?: ReactNode }) {
   const { state, refresh, signOut } = useAuth()
   if (state.status === 'guest') return <Navigate to="/login?next=%2Fstart" replace />
   if (state.status === 'offline' || state.status === 'logout-error')
@@ -48,6 +57,7 @@ function SessionGate() {
         <p>잠시만 기다려 주세요.</p>
       </section>
     )
+  if (children) return children
   return (
     <section className="start-screen">
       <p className="eyebrow">MY BODYGUARD</p>
@@ -60,6 +70,11 @@ function SessionGate() {
           계정 기능을 사용할 수 있습니다.
         </p>
         <p className="small muted">카메라는 켜지지 않았습니다.</p>
+        {MotionSelection && (
+          <Link className="back-link" to="/dev/select">
+            동작 선택 개발 검수
+          </Link>
+        )}
       </div>
       <button
         className="button secondary"
@@ -144,6 +159,8 @@ function Shell() {
   const { state } = useAuth()
   const location = useLocation()
   useEffect(() => {
+    // NFR-08: the development selection page owns its query-dependent title/focus.
+    if (MotionSelection && location.pathname === '/dev/select') return
     document.querySelector<HTMLElement>('main h1')?.focus({ preventScroll: true })
     document.title = `${
       location.pathname === '/login'
@@ -197,6 +214,18 @@ function Shell() {
           <Route path="/password/forgot" element={<PasswordPage key="forgot" mode="forgot" />} />
           <Route path="/password/reset" element={<PasswordPage key="reset" mode="reset" />} />
           <Route path="/start" element={<SessionGate />} />
+          {MotionSelection && (
+            <Route
+              path="/dev/select"
+              element={
+                <SessionGate>
+                  <Suspense fallback={<p role="status">동작 안내를 여는 중입니다</p>}>
+                    <MotionSelection />
+                  </Suspense>
+                </SessionGate>
+              }
+            />
+          )}
           <Route
             path="*"
             element={

@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-04",
+  "kind": "derived execution summary, not raw stdout",
+  "baseline_main": "4bbb78416090bfd5a6b922e518fa74d680e479ab",
+  "initial_red": {
+    "exit_code": 1,
+    "UI_tests_failed": 8,
+    "missing_catalog_module": true,
+    "stdout_truncated": true
+  },
+  "first_browser": {
+    "exit_code": 1,
+    "passed": 4,
+    "failed": 1,
+    "cause": "existing Google status request not anticipated by harness"
+  },
+  "review_red": {
+    "command": "pnpm exec vitest run src/pages/MotionSelectionPage.test.tsx",
+    "exit_code": 1,
+    "tests": 9,
+    "passed": 8,
+    "failed": 1,
+    "issue": "cached navigation receives generic Shell title instead of motion selection title",
+    "chunks": [
+      "7cc706",
+      "101d95"
+    ]
+  },
+  "final_verification": {
+    "command": "pnpm test && pnpm check && pnpm typecheck && pnpm test:selection",
+    "exit_code": 0,
+    "unit_tests": 138,
+    "unit_files": 15,
+    "static_files": 60,
+    "browser_tests": 5,
+    "browser_auth_mocked": true,
+    "real_camera": 0,
+    "build": "96 modules; JS 283.71 kB, gzip89.30 kB; CSS18.61 kB",
+    "stdout_chunks": [
+      "cb831d",
+      "fb4632"
+    ]
+  },
+  "final_PNG_directly_viewed": [
+    "catalog-desktop.png",
+    "detail-desktop.png",
+    "detail-narrow.png",
+    "missing-motion.png",
+    "account-unavailable.png",
+    "production-start.png"
+  ],
+  "demo_regression": {
+    "command": "pnpm test:e2e",
+    "exit_code": 0,
+    "synthetic_camera_tests": 1,
+    "duration_seconds": 24.4,
+    "actual_human": false,
+    "actual_auth_test": false,
+    "warnings": ["THREE.Clock deprecated", "MediaPipe runtime warnings", "/me proxy ECONNREFUSED: actual API not running"],
+    "stdout_chunks": ["9ee6aa", "11ce22"]
+  },
+  "document_link_check": {"documents": 6, "local_links_checked": 53, "exit_code": 0},
+  "full_stage2_pass": false,
+  "untested": [
+    "actual HTTP/SQL auth",
+    "real Gmail/Google",
+    "human webcam",
+    "avatar full QA",
+    "clinical correctness",
+    "HTTPS deployment",
+    "release"
+  ],
+  "review": {
+    "method": "CTO self review; no independent reviewer claimed",
+    "P1": 0,
+    "P2": 0,
+    "fixed": "cached selection title/focus owner conflict"
+  },
+  "lockfile_sha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+}
