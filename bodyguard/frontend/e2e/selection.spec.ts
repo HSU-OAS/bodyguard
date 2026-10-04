@@ -19,6 +19,21 @@ test('S3.2 protected production explore paths and purpose selection', async ({ p
 })
 
 let meStatus = 200
+
+test('S3.3 expanded library search, guidance detail and return', async ({ page }, info) => {
+  await page.goto('/dev/select')
+  await expect(page.getByRole('heading', { name: '원하는 동작을 골라보세요' })).toBeVisible()
+  await expect(page.getByRole('status')).toContainText('안내 5개')
+  await page.getByRole('button', { name: '어깨', exact: true }).click()
+  await page.getByRole('link', { name: '팔 교차 어깨 늘이기 안내 보기' }).click()
+  await expect(page.getByText('안내만 후보 · 자동 판정 없음')).toBeVisible()
+  await expect(page.getByRole('button', { name: '코칭 준비 중' })).toBeDisabled()
+  await page.screenshot({ path: info.outputPath('guidance-shoulder.png'), fullPage: true })
+  await page.getByRole('link', { name: '목록으로 돌아가기' }).click()
+  await page.getByRole('button', { name: '상체', exact: true }).click()
+  await expect(page.getByRole('status')).toContainText('안내 2개')
+  await page.screenshot({ path: info.outputPath('library-torso.png'), fullPage: true })
+})
 let cameraCalls = 0
 let requests: string[] = []
 let errors: string[] = []

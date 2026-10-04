@@ -11,6 +11,11 @@ for (const file of files) {
   const text = readFileSync(join(root, String(file)), 'utf8')
   for (const forbidden of [
     'neck-side',
+    'chin-retraction',
+    'cross-body-shoulder',
+    'lateral-trunk',
+    'seated-trunk-rotation',
+    '안내만 후보 · 자동 판정 없음',
     '목 옆으로 기울이기',
     'MotionSelectionPage',
     '동작 선택 개발 검수',

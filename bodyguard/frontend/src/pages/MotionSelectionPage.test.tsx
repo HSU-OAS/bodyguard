@@ -22,6 +22,20 @@ function open(path = '/dev/select', status = 200) {
   return fetcher
 }
 
+it.each([
+  ['chin-retraction', '턱 당기기'],
+  ['cross-body-shoulder', '팔 교차 어깨 늘이기'],
+  ['lateral-trunk', '옆구리 늘이기'],
+  ['seated-trunk-rotation', '상체 비틀기'],
+])('S3.3 opens guidance detail %s without automatic coaching', async (id, title) => {
+  const fetcher = open(`/dev/select?motion=${id}`)
+  await screen.findByRole('heading', { name: title, level: 1 })
+  expect(screen.getByText('안내만 후보 · 자동 판정 없음')).toBeTruthy()
+  expect(screen.getByRole('button', { name: '코칭 준비 중' }).hasAttribute('disabled')).toBe(true)
+  expect(screen.getByText(/자동 성공.*타이머|자동 교정.*타이머/)).toBeTruthy()
+  expect(fetcher.mock.calls.map((call) => call[0])).toEqual(['/api/v1/me'])
+})
+
 it('C-01 hides content while account confirmation is pending', async () => {
   window.history.replaceState(null, '', '/dev/select')
   vi.stubGlobal(
