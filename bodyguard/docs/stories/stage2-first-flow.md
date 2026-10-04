@@ -1,5 +1,7 @@
 # 2단계 — 첫 완성 흐름 실행 명세
 
+2026-10-04 추가 점검: [A295–A299 실제 표면 조형장 진단·두 저장 전 반려](../../assets/blender/review/candidate-a295-a299-diagnosis/README.md)는 native0/1/0/1·재현포함355104ray·기존991파일 SHA 보존을 기록했습니다. 새 원본/GLB/PNG0·후속 변형/Chrome 미실행이며 A37·외형 P2·PR9 미병합·전체2단계 및1~6단계 미완료를 유지합니다. 같은 전체 원래 간선으로 검사했으며 지원 부분의 보호 PASS를 전체 외형 통과로 바꾸지 않습니다.
+
 2026-10-04 현재 점검: 최신 main `4a00bb2`을 포함한 S2.4 PR #9에서 외형 P2를 보완 중입니다. S2.5a 독립 선택 준비 PR #14는 main에 병합됐지만 실제 코칭 완료가 아닙니다. [A293–A294 실제 동일 간선/4830ray와 국소 조형 실패](../../assets/blender/review/candidate-a293-a294-diagnosis/README.md)는 저장 전 중단·새 원본/GLB/PNG0·후속 검수 미실행이며 기존975파일을 보존했습니다. PR의 CLEAN/체크 없음은 외형 승인이나 병합 완료가 아닙니다. S2.3b 실제 사람·S2.4a~c·S2.5 코칭·S2.7 실제 공급자 및 전체2단계/1~6단계는 미완료이며 별도 승인 경계를 유지합니다. 아래 이전 점검 수치와 기록은 역사 증거입니다.
 
 2026-10-01 · **S2.1 PR #6·S2.2 PR #7·S2.3a PR #8·S2.6a1 PR #10·S2.6a2 PR #11·S2.6b1 PR #12·S2.6b2 PR #13 병합, 2단계 전체 미완료** · S2.4 [Draft PR #9](https://github.com/HSU-OAS/bodyguard/pull/9)는 최신 main `4bbb784`에서 리뷰 보완 중이다. CEO 외형 변경을 반영한 A37은 신체 좌표/가중치·각163bones를 보존하며 남녀 공통 무의상 백색 중성 마네킹으로 제작했고 원본/왕복 각각118개·121행, native38컷, 기본 연결 후 실제 Chrome3개를 검증했다. 기존 A27 파일/증거는 보존한다. 전체 외형 P2로 병합은 보류한다. [상세 결과](stage2-avatar-candidate.md)·[실제 A37 미리보기/미충족](../../assets/blender/review/candidate-a37/README.md). Google/메일 모의 로컬 Story 완료는 실제 공급자 검증이 아니다. 선행: [1단계 준비 게이트](../stage1-gate.md), [사전 승인 운영 규칙](../operating-rules.md).
