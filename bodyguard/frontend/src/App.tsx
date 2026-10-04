@@ -2,6 +2,7 @@ import { lazy, type ReactNode, Suspense, useEffect } from 'react'
 import { BrowserRouter, Link, Navigate, Route, Routes, useLocation } from 'react-router'
 import { AuthProvider, useAuth } from './auth'
 import { AccountPage } from './pages/AccountPage'
+import { ExplorePage } from './pages/ExplorePage'
 import { PasswordPage } from './pages/PasswordPage'
 
 // FR-V-02/03: prototype camera/debug UI is compiled out of production.
@@ -63,6 +64,9 @@ function SessionGate({ children }: { children?: ReactNode }) {
       <p className="eyebrow">MY BODYGUARD</p>
       <h1 tabIndex={-1}>내 몸을 위한 시작</h1>
       <p className="muted account-email">{state.user.email}</p>
+      <Link className="button primary" to="/explore">
+        스트레칭 시작 경로 선택
+      </Link>
       <div className="development-note">
         <h2>첫 코칭 흐름을 준비하고 있습니다</h2>
         <p>
@@ -169,9 +173,11 @@ function Shell() {
           ? '이메일 가입'
           : location.pathname.startsWith('/password/')
             ? '계정 복구'
-            : location.pathname === '/start'
-              ? '내 시작'
-              : '자세 코칭'
+            : location.pathname === '/explore'
+              ? '스트레칭 시작 경로'
+              : location.pathname === '/start'
+                ? '내 시작'
+                : '자세 코칭'
     } · BODYGUARD`
   }, [location.pathname])
   return (
@@ -214,6 +220,14 @@ function Shell() {
           <Route path="/password/forgot" element={<PasswordPage key="forgot" mode="forgot" />} />
           <Route path="/password/reset" element={<PasswordPage key="reset" mode="reset" />} />
           <Route path="/start" element={<SessionGate />} />
+          <Route
+            path="/explore"
+            element={
+              <SessionGate>
+                <ExplorePage />
+              </SessionGate>
+            }
+          />
           {MotionSelection && (
             <Route
               path="/dev/select"

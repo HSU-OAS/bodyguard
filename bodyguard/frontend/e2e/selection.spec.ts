@@ -1,6 +1,23 @@
 // FR-S-01/06, FR-U-04, FR-V-03: actual Chrome with mocked /me, not actual auth/clinical approval.
 import { expect, test } from '@playwright/test'
 
+// FR-S-06: production entry screen, mocked account, no body analysis claim.
+test('S3.2 protected production explore paths and purpose selection', async ({ page }, info) => {
+  await page.goto('http://localhost:4182/start')
+  await page.getByRole('link', { name: '스트레칭 시작 경로 선택' }).click()
+  await expect(page.getByRole('heading', { name: '스트레칭 시작 경로' })).toBeVisible()
+  await expect(page.getByRole('status')).toContainText('현재 이용 가능한 동작이 없습니다')
+  await page.getByRole('button', { name: '추천받기', exact: true }).click()
+  await page.getByRole('radio', { name: '어깨', exact: true }).check()
+  await expect(page.getByRole('status')).toContainText('신체 확인 정보가 없어')
+  await page.screenshot({ path: info.outputPath('explore-recommendation.png'), fullPage: true })
+  await page.getByRole('button', { name: '직접 선택으로 이동' }).click()
+  await expect(page.getByRole('status')).toContainText('현재 이용 가능한 동작이 없습니다')
+  await page.screenshot({ path: info.outputPath('explore-selection.png'), fullPage: true })
+  await page.getByRole('link', { name: '내 시작으로 돌아가기' }).click()
+  await expect(page).toHaveURL(/\/start$/)
+})
+
 let meStatus = 200
 let cameraCalls = 0
 let requests: string[] = []
