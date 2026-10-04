@@ -1,0 +1,164 @@
+{
+  "date": "2026-10-05",
+  "branch": "codex/stage2-coaching-engine",
+  "base_main": "4a00bb2bd0c5c6893e34bbaa64f5b0931c3027b6",
+  "stage_passed": false,
+  "story": "S2.5b independent progression kernel; no runtime adapters",
+  "commands": {
+    "initial_and_targeted": "pnpm exec vitest run src/stretch/progression.test.ts",
+    "initial_style": "pnpm exec biome check src/stretch/progression.ts src/stretch/progression.test.ts",
+    "safe_mechanical_format": "pnpm exec biome check --write src/stretch/progression.ts src/stretch/progression.test.ts scripts/check-selection-production.mjs",
+    "final_local": ["pnpm test", "pnpm check", "pnpm typecheck"],
+    "production_and_browser": "pnpm test:selection",
+    "archive": "node bodyguard/docs/review/coaching-engine/evidence-check.cjs",
+    "whitespace": "git diff --check"
+  },
+  "source_hashes": [
+    {
+      "path": "bodyguard/frontend/src/stretch/progression.ts",
+      "sha256": "830159eaad43dc34320232855573dff3009babbb6b6aa34e1cf4b06b79d0a93e"
+    },
+    {
+      "path": "bodyguard/frontend/src/stretch/progression.test.ts",
+      "sha256": "ff689fa412eebd2980a2b02acfd33fba3a498d053ad9e265d8ab944570eac0c1"
+    },
+    {
+      "path": "bodyguard/frontend/scripts/check-selection-production.mjs",
+      "sha256": "18723a6d3c7372c551c2ad3f47de492cddc5fb6477f95fe3a39a477418a245e1"
+    }
+  ],
+  "runs": {
+    "initial_missing_module": [
+      {
+        "chunk_id": "479b04",
+        "wall_time_seconds": 0.992115959,
+        "exit_code": 1,
+        "original_token_count": 287,
+        "output": "\n RUN  v5.0.2 /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend\n\n ❯ src/stretch/progression.test.ts (0 test)\n\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/stretch/progression.test.ts [ src/stretch/progression.test.ts ]\nError: Cannot find module './progression' imported from /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/src/stretch/progression.test.ts\n ❯ src/stretch/progression.test.ts:3:1\n      1| // FR-S-02/04, FR-M-07: synthetic clock/classification tests, not exer…\n      2| import { describe, expect, it } from 'vitest'\n      3| import {\n       | ^\n      4|   advanceCoaching,\n      5|   createCoaching,\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed (1)\n      Tests  no tests\n   Start at  00:51:54\n   Duration  178ms (worker 97%, environment 3%)\n\n"
+      }
+    ],
+    "first_43_tests_and_style_failure": [
+      {
+        "chunk_id": "ca8883",
+        "wall_time_seconds": 0.745680917,
+        "exit_code": 0,
+        "original_token_count": 91,
+        "output": "\n RUN  v5.0.2 /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend\n\n\n Test Files  1 passed (1)\n      Tests  43 passed (43)\n   Start at  00:58:50\n   Duration  187ms (transform 58%, import 20%, tests 16%, worker 5%)\n\n"
+      },
+      {
+        "chunk_id": "e53f30",
+        "wall_time_seconds": 0.285955167,
+        "exit_code": 1,
+        "original_token_count": 3712,
+        "output": "src/stretch/progression.ts:181:9 lint/complexity/useOptionalChain  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━\n\n  ! Change to an optional chain.\n  \n    179 │     if (!validNow || state.status !== (event.type === 'start' ? 'idle' : 'paused')) return unchanged()\n    180 │     const g = event.gates\n  > 181 │     if (!g || g.authenticated !== true || g.motionValidated !== true || g.referenceAvatarReady !== true || g.userAvatarReady !== true) return unchanged()\n        │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    182 │     state = { ...disarm(state), status: 'preparing', generation: state.generation + 1, lastSequence: -1, lastSampledAt: null }\n    183 │     effects = [{ type: 'request-camera', generation: state.generation }]\n  \n  i Unsafe fix: Change to an optional chain.\n  \n    179 179 │       if (!validNow || state.status !== (event.type === 'start' ? 'idle' : 'paused')) return unchanged()\n    180 180 │       const g = event.gates\n    181     │ - ····if·(!g·||·g.authenticated·!==·true·||·g.motionValidated·!==·true·||·g.referenceAvatarReady·!==·true·||·g.userAvatarReady·!==·true)·return·unchanged()\n        181 │ + ····if·(g?.authenticated·!==·true·||·g.motionValidated·!==·true·||·g.referenceAvatarReady·!==·true·||·g.userAvatarReady·!==·true)·return·unchanged()\n    182 182 │       state = { ...disarm(state), status: 'preparing', generation: state.generation + 1, lastSequence: -1, lastSampledAt: null }\n    183 183 │       effects = [{ type: 'request-camera', generation: state.generation }]\n  \n\nsrc/stretch/progression.test.ts:3:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━\n\n  × Sort the imported names.\n  \n     1 │ // FR-S-02/04, FR-M-07: synthetic clock/classification tests, not exercise prescriptions.\n     2 │ import { describe, expect, it } from 'vitest'\n   > 3 │ import {\n       │ ^^^^^^^^\n   > 4 │   advanceCoaching,\n        ...\n   > 9 │   type ObservationClass,\n  > 10 │ } from './progression'\n       │ ^^^^^^^^^^^^^^^^^^^^^^\n    11 │ \n    12 │ const gates = {\n  \n  i Safe fix: Organize imports and exports (Biome)\n  \n      3   3 │   import {\n      4   4 │     advanceCoaching,\n      5     │ - ··createCoaching,\n      6     │ - ··type·CoachingEvent,\n          5 │ + ··type·CoachingEvent,\n      7   6 │     type CoachingPlan,\n      8   7 │     type CoachingState,\n      9     │ - ··type·ObservationClass,\n          8 │ + ··createCoaching,\n          9 │ + ··type·ObservationClass,\n     10  10 │   } from './progression'\n     11  11 │   \n  \n\nsrc/stretch/progression.test.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n  × Formatter would have printed the following content:\n  \n     83  83 │     it('rejects empty, duplicated or incomplete steps', () => {\n     84  84 │       expect(() => createCoaching({ ...hold, steps: [] })).toThrow()\n     85     │ - ····expect(()·=>\n     86     │ - ······createCoaching({·...hold,·steps:·[hold.steps[0],·hold.steps[0]]·}),\n     87     │ - ····).toThrow()\n         85 │ + ····expect(()·=>·createCoaching({·...hold,·steps:·[hold.steps[0],·hold.steps[0]]·})).toThrow()\n     88  86 │       expect(() =>\n     89  87 │         createCoaching({\n    ······· │ \n    321 319 │       const done = finishHold()\n    322 320 │       const result = JSON.stringify(done.result)\n    323     │ - ····expect(result).not.toMatch(/sampledAt|sequence|personCount|generation|landmark|video|email|account/)\n        321 │ + ····expect(result).not.toMatch(\n        322 │ + ······/sampledAt|sequence|personCount|generation|landmark|video|email|account/,\n        323 │ + ····)\n    324 324 │       expect(Object.isFrozen(done.result)).toBe(true)\n    325 325 │       expect(Object.isFrozen(done.result?.steps)).toBe(true)\n  \n\nsrc/stretch/progression.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n  × Formatter would have printed the following content:\n  \n     83  83 │   type Transition = { state: CoachingState; effects: readonly Effect[] }\n     84  84 │   \n     85     │ - const·time·=·(value:·number)·=>·Number.isFinite(value)·&&·value·>=·0·&&·value·<=·Number.MAX_SAFE_INTEGER\n         85 │ + const·time·=·(value:·number)·=>\n         86 │ + ··Number.isFinite(value)·&&·value·>=·0·&&·value·<=·Number.MAX_SAFE_INTEGER\n     86  87 │   const positive = (value: number) => time(value) && value > 0\n     87  88 │   const named = (value: string) => typeof value === 'string' && value.trim().length > 0\n    ······· │ \n     96  97 │       !Array.isArray(input.steps) ||\n     97  98 │       input.steps.length === 0\n     98     │ - ··)·throw·new·Error('An·explicit·validated·coaching·plan·is·required')\n         99 │ + ··)\n        100 │ + ····throw·new·Error('An·explicit·validated·coaching·plan·is·required')\n     99 101 │     const ids = new Set<string>()\n    100 102 │     const steps = input.steps.map((step): CoachingStep => {\n    101     │ - ····if·(!step·||·!named(step.id)·||·ids.has(step.id))·throw·new·Error('Step·IDs·must·be·unique·and·nonempty')\n        103 │ + ····if·(!step·||·!named(step.id)·||·ids.has(step.id))\n        104 │ + ······throw·new·Error('Step·IDs·must·be·unique·and·nonempty')\n    102 105 │       ids.add(step.id)\n    103 106 │       if (step.kind === 'hold' && positive(step.targetMs)) {\n    ······· │ \n    105 108 │       }\n    106 109 │       if (\n    107     │ - ······step.kind·===·'repetitions'·&&·time(step.targetMs)·&&\n    108     │ - ······Number.isSafeInteger(step.repetitions)·&&·step.repetitions·>·0·&&\n        110 │ + ······step.kind·===·'repetitions'·&&\n        111 │ + ······time(step.targetMs)·&&\n        112 │ + ······Number.isSafeInteger(step.repetitions)·&&\n        113 │ + ······step.repetitions·>·0·&&\n    109 114 │         time(step.targetMs * step.repetitions)\n    110 115 │       ) {\n    111     │ - ······return·Object.freeze({·id:·step.id,·kind:·step.kind,·targetMs:·step.targetMs,·repetitions:·step.repetitions·})\n        116 │ + ······return·Object.freeze({\n        117 │ + ········id:·step.id,\n        118 │ + ········kind:·step.kind,\n        119 │ + ········targetMs:·step.targetMs,\n        120 │ + ········repetitions:·step.repetitions,\n        121 │ + ······})\n    112 122 │       }\n    113 123 │       throw new Error('Step duration and repetition count must be explicitly valid')\n    114 124 │     })\n    115 125 │     const plan = Object.freeze({\n    116     │ - ····motionId:·input.motionId,·version:·input.version,·source:·input.source,\n    117     │ - ····maxFrameGapMs:·input.maxFrameGapMs,·maxFrameAgeMs:·input.maxFrameAgeMs,\n        126 │ + ····motionId:·input.motionId,\n        127 │ + ····version:·input.version,\n        128 │ + ····source:·input.source,\n        129 │ + ····maxFrameGapMs:·input.maxFrameGapMs,\n        130 │ + ····maxFrameAgeMs:·input.maxFrameAgeMs,\n    118 131 │       steps: Object.freeze(steps),\n    119 132 │     })\n    120 133 │     return freeze({\n    121     │ - ····plan,·status:·'idle',·generation:·0,·stepIndex:·0,·lastSequence:·-1,\n    122     │ - ····phase:·'waiting-start',·result:·null,·lastNow:·0,·startedAt:·null,\n    123     │ - ····lastObservationAt:·null,·lastSampledAt:·null,·lastTargetAt:·null,\n    124     │ - ····progress:·steps.map(()·=>·({·holdMs:·0,·repetitions:·0,·verifiedMs:·0,·attempted:·false,·completed:·false·})),\n        134 │ + ····plan,\n        135 │ + ····status:·'idle',\n        136 │ + ····generation:·0,\n        137 │ + ····stepIndex:·0,\n        138 │ + ····lastSequence:·-1,\n        139 │ + ····phase:·'waiting-start',\n        140 │ + ····result:·null,\n        141 │ + ····lastNow:·0,\n        142 │ + ····startedAt:·null,\n        143 │ + ····lastObservationAt:·null,\n        144 │ + ····lastSampledAt:·null,\n        145 │ + ····lastTargetAt:·null,\n        146 │ + ····progress:·steps.map(()·=>·({\n        147 │ + ······holdMs:·0,\n        148 │ + ······repetitions:·0,\n        149 │ + ······verifiedMs:·0,\n        150 │ + ······attempted:·false,\n        151 │ + ······completed:·false,\n        152 │ + ····})),\n    125 153 │     })\n    126 154 │   }\n    127 155 │   \n    128 156 │   function freeze(state: CoachingState): CoachingState {\n    129     │ - ··return·Object.freeze({·...state,·progress:·Object.freeze(state.progress.map((value)·=>·Object.freeze({·...value·})))·})\n        157 │ + ··return·Object.freeze({\n        158 │ + ····...state,\n        159 │ + ····progress:·Object.freeze(state.progress.map((value)·=>·Object.freeze({·...value·}))),\n        160 │ + ··})\n    130 161 │   }\n    131 162 │   function updateProgress(state: CoachingState, changes: Partial<Progress>): CoachingState {\n    132     │ - ··return·{·...state,·progress:·state.progress.map((value,·index)·=>·index·===·state.stepIndex·?·{·...value,·...changes·}·:·value)·}\n        163 │ + ··return·{\n        164 │ + ····...state,\n        165 │ + ····progress:·state.progress.map((value,·index)·=>\n        166 │ + ······index·===·state.stepIndex·?·{·...value,·...changes·}·:·value,\n        167 │ + ····),\n        168 │ + ··}\n    133 169 │   }\n    134 170 │   function disarm(state: CoachingState): CoachingState {\n    ······· │ \n    136 172 │     return {\n    137 173 │       ...updateProgress(state, step.kind === 'repetitions' ? { holdMs: 0 } : {}),\n    138     │ - ····phase:·'waiting-start',·lastObservationAt:·null,·lastTargetAt:·null,\n        174 │ + ····phase:·'waiting-start',\n        175 │ + ····lastObservationAt:·null,\n        176 │ + ····lastTargetAt:·null,\n    139 177 │     }\n    140 178 │   }\n    141 179 │   function finish(state: CoachingState, reason?: EndReason): CoachingState {\n    142 180 │     const result: CoachingResult = Object.freeze({\n    143     │ - ····motionId:·state.plan.motionId,·version:·state.plan.version,·source:·state.plan.source,\n        181 │ + ····motionId:·state.plan.motionId,\n        182 │ + ····version:·state.plan.version,\n        183 │ + ····source:·state.plan.source,\n    144 184 │       outcome: reason === undefined ? 'completed' : reason === 'skip' ? 'skipped' : 'interrupted',\n    145 185 │       ...(reason === undefined ? {} : { reason }),\n    146 186 │       elapsedMs: state.startedAt === null ? 0 : state.lastNow - state.startedAt,\n    147     │ - ····steps:·Object.freeze(state.progress.map((value,·index)·=>·Object.freeze({\n    148     │ - ······id:·state.plan.steps[index].id,\n    149     │ - ······outcome:·value.completed·?·'completed'·as·const·:·value.attempted·?·'partial'·as·const·:·'pending'·as·const,\n    150     │ - ······verifiedMs:·value.verifiedMs,·repetitions:·value.repetitions,\n    151     │ - ····}))),\n        187 │ + ····steps:·Object.freeze(\n        188 │ + ······state.progress.map((value,·index)·=>\n        189 │ + ········Object.freeze({\n        190 │ + ··········id:·state.plan.steps[index].id,\n        191 │ + ··········outcome:·value.completed\n        192 │ + ············?·('completed'·as·const)\n        193 │ + ············:·value.attempted\n        194 │ + ··············?·('partial'·as·const)\n        195 │ + ··············:·('pending'·as·const),\n        196 │ + ··········verifiedMs:·value.verifiedMs,\n        197 │ + ··········repetitions:·value.repetitions,\n        198 │ + ········}),\n        199 │ + ······),\n        200 │ + ····),\n    152 201 │     })\n    153 202 │     return { ...disarm(state), status: 'ended', result }\n    ······· │ \n    155 204 │   const ownedGeneration = (state: CoachingState, generation: number) =>\n    156 205 │     Number.isSafeInteger(generation) && generation > 0 && generation <= state.generation\n    157     │ - const·release·=·(generation:·number):·readonly·Effect[]·=>·generation·>·0·?·[{·type:·'release-resources',·generation·}]·:·[]\n        206 │ + const·release·=·(generation:·number):·readonly·Effect[]·=>\n        207 │ + ··generation·>·0·?·[{·type:·'release-resources',·generation·}]·:·[]\n    158 208 │   \n    159 209 │   export function advanceCoaching(original: CoachingState, event: CoachingEvent): Transition {\n    ······· │ \n    162 212 │     // Late permission/model responses own only their generation, never the current one's resources.\n    163 213 │     if (event.type === 'ready' && ownedGeneration(original, event.generation)) {\n    164     │ - ····if·(event.generation·!==·original.generation·||·original.status·===·'paused'·||·original.status·===·'ended'·||·!validNow)·{\n        214 │ + ····if·(\n        215 │ + ······event.generation·!==·original.generation·||\n        216 │ + ······original.status·===·'paused'·||\n        217 │ + ······original.status·===·'ended'·||\n        218 │ + ······!validNow\n        219 │ + ····)·{\n    165 220 │         return { state: original, effects: release(event.generation) }\n    166 221 │       }\n    ······· │ \n    174 229 │     if (event.type === 'pause') {\n  154 more lines truncated\n  \n\nChecked 2 files in 50ms. No fixes applied.\nFound 3 errors.\nFound 1 warning.\ncheck ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n  × Some errors were emitted while running checks.\n  \n\n"
+      }
+    ],
+    "adversarial_red_55": {
+      "chunk_id": "d250b1",
+      "wall_time_seconds": 0.750460791,
+      "exit_code": 1,
+      "original_token_count": 964,
+      "output": "\n RUN  v5.0.2 /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend\n\n ❯ src/stretch/progression.test.ts (55 tests | 4 failed) 20ms\n   ❯ L-02/03 adversarial delivery boundaries (12)\n     × does not close the active camera on a duplicate malformed ready 7ms\n     × leaves preparation safely paused when its ready clock is invalid 1ms\n     × does not accept a timestamp captured before this camera became ready 1ms\n     × rejects pre-resume samples even if relabeled with the new generation 0ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/stretch/progression.test.ts > L-02/03 adversarial delivery boundaries > does not close the active camera on a duplicate malformed ready\nAssertionError: expected [ { type: 'release-resources', …(1) } ] to deeply equal []\n\n- Expected\n+ Received\n\n- []\n+ [\n+   {\n+     \"generation\": 1,\n+     \"type\": \"release-resources\",\n+   },\n+ ]\n\n ❯ src/stretch/progression.test.ts:334:31\n    332|     const duplicate = advanceCoaching(state, { type: 'ready', now: NaN…\n    333|     expect(duplicate.state).toBe(state)\n    334|     expect(duplicate.effects).toEqual([])\n       |                               ^\n    335|   })\n    336|   it('leaves preparation safely paused when its ready clock is invalid…\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯\n\n FAIL  src/stretch/progression.test.ts > L-02/03 adversarial delivery boundaries > leaves preparation safely paused when its ready clock is invalid\nAssertionError: expected 'preparing' to be 'paused' // Object.is equality\n\nExpected: \"paused\"\nReceived: \"preparing\"\n\n ❯ src/stretch/progression.test.ts:339:34\n    337|     const pending = act(createCoaching(hold), { type: 'start', now: 10…\n    338|     const invalid = advanceCoaching(pending, { type: 'ready', now: 9, …\n    339|     expect(invalid.state.status).toBe('paused')\n       |                                  ^\n    340|     expect(invalid.effects).toEqual([{ type: 'release-resources', gene…\n    341|     expect(frame(invalid.state, 11).progress[0].verifiedMs).toBe(0)\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯\n\n FAIL  src/stretch/progression.test.ts > L-02/03 adversarial delivery boundaries > does not accept a timestamp captured before this camera became ready\nAssertionError: expected 100 to be +0 // Object.is equality\n\n- Expected\n+ Received\n\n- 0\n+ 100\n\n ❯ src/stretch/progression.test.ts:349:42\n    347|     state = frame(state, 2, 'target', { now: 101 })\n    348|     state = frame(state, 102, 'target', { now: 102 })\n    349|     expect(state.progress[0].verifiedMs).toBe(0)\n       |                                          ^\n    350|     expect(state.phase).toBe('waiting-start')\n    351|   })\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯\n\n FAIL  src/stretch/progression.test.ts > L-02/03 adversarial delivery boundaries > rejects pre-resume samples even if relabeled with the new generation\nAssertionError: expected 100 to be +0 // Object.is equality\n\n- Expected\n+ Received\n\n- 0\n+ 100\n\n ❯ src/stretch/progression.test.ts:359:42\n    357|     state = frame(state, 4, 'target', { now: 52 })\n    358|     state = frame(state, 104, 'target', { now: 104 })\n    359|     expect(state.progress[0].verifiedMs).toBe(0)\n       |                                          ^\n    360|   })\n    361|   it('ignores never-requested ready generations without releasing fore…\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯\n\n\n Test Files  1 failed (1)\n      Tests  4 failed | 51 passed (55)\n   Start at  01:00:56\n   Duration  206ms (transform 52%, tests 25%, import 18%, worker 5%)\n\n"
+    },
+    "adversarial_green_55": {
+      "chunk_id": "41d648",
+      "wall_time_seconds": 0.5562655,
+      "exit_code": 0,
+      "original_token_count": 91,
+      "output": "\n RUN  v5.0.2 /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend\n\n\n Test Files  1 passed (1)\n      Tests  55 passed (55)\n   Start at  01:00:57\n   Duration  180ms (transform 58%, import 20%, tests 17%, worker 5%)\n\n"
+    },
+    "malformed_end_red_60": {
+      "chunk_id": "8fd185",
+      "wall_time_seconds": 0.670802167,
+      "exit_code": 1,
+      "original_token_count": 367,
+      "output": "\n RUN  v5.0.2 /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend\n\n ❯ src/stretch/progression.test.ts (60 tests | 1 failed) 102ms\n   ❯ L-02/03 adversarial delivery boundaries (17)\n     × cannot manufacture success or retain arbitrary data from a malformed end reason 6ms\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/stretch/progression.test.ts > L-02/03 adversarial delivery boundaries > cannot manufacture success or retain arbitrary data from a malformed end reason\nAssertionError: expected 'completed' to be 'interrupted' // Object.is equality\n\nExpected: \"interrupted\"\nReceived: \"completed\"\n\n ❯ src/stretch/progression.test.ts:408:37\n    406|     for (const reason of [undefined, null, 'synthetic-personal-data-no…\n    407|       const state = act(running(), { type: 'end', now: 1, reason } as …\n    408|       expect(state.result?.outcome).toBe('interrupted')\n       |                                     ^\n    409|       expect(state.result?.steps[0].outcome).toBe('pending')\n    410|       expect(state.result?.reason).toBeUndefined()\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed (1)\n      Tests  1 failed | 59 passed (60)\n   Start at  01:04:38\n   Duration  287ms (tests 62%, transform 26%, import 9%, worker 2%)\n\n"
+    },
+    "malformed_end_green_60": {
+      "chunk_id": "e06c9a",
+      "wall_time_seconds": 0.630062666,
+      "exit_code": 0,
+      "original_token_count": 91,
+      "output": "\n RUN  v5.0.2 /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend\n\n\n Test Files  1 passed (1)\n      Tests  60 passed (60)\n   Start at  01:04:40\n   Duration  275ms (tests 60%, transform 28%, import 10%, worker 2%)\n\n"
+    },
+    "final_local_198_biome_typecheck": [
+      {
+        "chunk_id": "8687ee",
+        "wall_time_seconds": 3.4823450830000002,
+        "exit_code": 0,
+        "original_token_count": 149,
+        "output": "$ vitest run\n\n RUN  v5.0.2 /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend\n\n\n Test Files  16 passed (16)\n      Tests  198 passed (198)\n   Start at  01:05:51\n   Duration  2.88s (environment 49%, tests 22%, import 18%, transform 11%, worker 1%)\n\n    Isolate  16 workers spawned · ~803ms startup each (spawn + environment, per file)\n             at least ~625ms faster with isolate: false — reuses workers across files instead of one per file\n\n"
+      },
+      {
+        "chunk_id": "d87568",
+        "wall_time_seconds": 0.312567917,
+        "exit_code": 0,
+        "original_token_count": 15,
+        "output": "$ biome check .\nChecked 62 files in 97ms. No fixes applied.\n"
+      },
+      {
+        "chunk_id": "64343b",
+        "wall_time_seconds": 5.266088666,
+        "exit_code": 0,
+        "original_token_count": 4,
+        "output": "$ tsc --noEmit\n"
+      }
+    ],
+    "final_production_and_chrome": [
+      {
+        "chunk_id": "dc0150",
+        "wall_time_seconds": 1.003952917,
+        "session_id": 25213,
+        "original_token_count": 42,
+        "output": "$ pnpm build && node scripts/check-selection-production.mjs && node scripts/test-selection-browser.mjs\n$ node scripts/prepare-assets.mjs && tsc --noEmit && vite build\n"
+      },
+      {
+        "chunk_id": "d7b300",
+        "wall_time_seconds": 0.000017459,
+        "exit_code": 0,
+        "original_token_count": 408,
+        "output": "vite v8.3.1 building client environment for production...\ntransforming...\n✓ 96 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.46 kB │ gzip:  0.29 kB\ndist/assets/index-B13MHotp.css   19.08 kB │ gzip:  5.15 kB\ndist/assets/index-iHOgqeD7.js   283.71 kB │ gzip: 89.30 kB\n\n✓ built in 301ms\n{\"production_JS_files_checked\":1,\"development_catalog_strings\":0,\"unconnected_coaching_engine_strings\":0}\n[WebServer] (node:41598) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] (node:41607) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\nRunning 5 tests using 1 worker\n\n(node:41622) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n  ✓  1 e2e/selection.spec.ts:91:1 › C-02/03/04/07 desktop selection, literal search, detail sources and Back (1.8s)\n  ✓  2 e2e/selection.spec.ts:123:1 › C-02/07 narrow laptop empty reset and keyboard operation (1.5s)\n  ✓  3 e2e/selection.spec.ts:139:1 › C-04 missing direct ID is recoverable and not an external navigation (1.3s)\n  ✓  4 e2e/selection.spec.ts:150:1 › C-01 guest and server failure close the preview without a candidate fallback (1.4s)\n  ✓  5 e2e/selection.spec.ts:166:1 › C-06 actual production hides the dev route, catalog and entry link (333ms)\n\n  5 passed (8.1s)\n"
+      }
+    ]
+  },
+  "actuals": {
+    "engine_tests": 60,
+    "total_vitest_tests": 198,
+    "vitest_files": 16,
+    "biome_files": 62,
+    "synthetic_invariant_events": 3840,
+    "chrome_tests": 5,
+    "camera_calls": 0,
+    "actual_human_trials": 0,
+    "actual_auth_server": false,
+    "real_providers": false,
+    "production_JS_files_checked": 1,
+    "engine_production_exposure": 0,
+    "raw_coordinates_retained": 0
+  },
+  "review": {
+    "method": "author self-review: security/performance/correctness/maintainability; not independent or clinical review",
+    "unresolved_story_P1_P2": 0,
+    "findings_fixed": [
+      "P1 malformed end reason could fabricate completion; explicit outcome and whitelisted reason now required",
+      "P2 duplicate malformed ready must not release running generation",
+      "P2 invalid preparing-ready clock must release and pause rather than leave preparing",
+      "P2 before-ready samples must not add hold time",
+      "P2 before-resume samples must not add hold time"
+    ]
+  },
+  "not_run": [
+    "actual camera/performer/observer",
+    "motion-specific validated classifiers, dosage or pressure",
+    "two-avatar runtime adapters/reference clips/user retargeting",
+    "actual account server/provider/DB integration",
+    "HTTPS/ops migration/deploy/release"
+  ],
+  "notes": [
+    "First missing-module run failed one suite; zero tests ran, not 43 failing tests.",
+    "27e354 first adversarial run reported four failures; tool orchestration then errored after output. d250b1 is the preserved actual repeated four-failure run.",
+    "Style failure preserved; no failed/skip test is recorded as passing.",
+    "Event clock/labels are synthetic technical fixtures, not exercise prescriptions.",
+    "elapsedMs is wall elapsed since first ready, including pause; only verifiedMs records accepted sample intervals."
+  ]
+}

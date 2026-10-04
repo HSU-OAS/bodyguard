@@ -16,10 +16,18 @@ for (const file of files) {
     '동작 선택 개발 검수',
     'pending-validation',
     '/dev/select',
+    'synthetic-algebra-only',
+    'fixture-not-release',
+    'An explicit validated coaching plan is required',
+    'Step duration and repetition count must be explicitly valid',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
 }
 console.log(
-  JSON.stringify({ production_JS_files_checked: files.length, development_catalog_strings: 0 }),
+  JSON.stringify({
+    production_JS_files_checked: files.length,
+    development_catalog_strings: 0,
+    unconnected_coaching_engine_strings: 0,
+  }),
 )
