@@ -214,7 +214,7 @@ def test_p05_actual_database_constraints_and_safe_migration(harness: Harness) ->
     with h.engine.begin() as connection:
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0006_notification_preferences"
+            == "0007_account_baselines"
         )
         # Only synthetic preferences in this exclusively guarded test DB are removed.
         connection.execute(delete(notification_preferences))

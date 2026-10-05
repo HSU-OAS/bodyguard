@@ -27,6 +27,7 @@ from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.exc import SQLAlchemyError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
+from app.baselines import register_baselines
 from app.config import Settings
 from app.db import challenges, google_flows, limits, resets, sessions, users
 from app.notification_preferences import register_notification_preferences
@@ -956,7 +957,9 @@ def create_app(
         )
         return response
 
-    def record_owner(connection: Connection, request: Request, writing: bool) -> str:
+    def record_owner(
+        connection: Connection, request: Request, writing: bool, renew: bool = True
+    ) -> str:
         # FR-R-03/FR-U-04: ownership comes only from the locked authenticated session.
         now = now_fn()
         row = (
@@ -971,13 +974,12 @@ def create_app(
         )
         if row is None or not row["user_id"]:
             raise HTTPException(401, "로그인이 필요합니다.")
-        connection.execute(
-            update(sessions)
-            .where(
-                sessions.c.token_hash == row["token_hash"],
+        if renew:
+            connection.execute(
+                update(sessions)
+                .where(sessions.c.token_hash == row["token_hash"])
+                .values(last_seen_at=now_fn())
             )
-            .values(last_seen_at=now_fn())
-        )
         return str(row["user_id"])
 
     def record_deletion_sign(user_id: str, request: Request, message: str) -> str:
@@ -990,6 +992,7 @@ def create_app(
 
     register_records(app, db, now_fn, record_owner, record_deletion_sign)
     register_notification_preferences(app, db, record_owner)
+    register_baselines(app, db, now_fn, record_owner, ErrorOut)
 
     def withdrawal_owner(connection: Connection, request: Request) -> tuple[RowMapping, str]:
         # FR-U-05: bound contention rolls back instead of waiting in opposing auth lock orders.

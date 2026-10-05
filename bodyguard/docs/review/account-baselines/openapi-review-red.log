@@ -1,0 +1,19 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____________ test_b07_openapi_matches_retry_conflict_and_missing ______________
+
+harness = <tests.conftest.Harness object at 0x10c35cd70>
+
+    def test_b07_openapi_matches_retry_conflict_and_missing(harness: Harness) -> None:
+        schema = harness.client.app.openapi()
+        post = schema["paths"][PATH]["post"]["responses"]
+        detail = schema["paths"][PATH + "/{baseline_id}"]["get"]["responses"]
+        for status in ("200", "201"):
+>           assert post[status]["content"]["application/json"]["schema"] == {"$ref": "#/components/schemas/BaselineOut"}
+                   ^^^^^^^^^^^^
+E           KeyError: '200'
+
+tests/test_baselines.py:91: KeyError
+=========================== short test summary info ============================
+FAILED tests/test_baselines.py::test_b07_openapi_matches_retry_conflict_and_missing
+1 failed in 0.46s

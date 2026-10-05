@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.482" timestamp="2026-10-06T03:27:55.731781+09:00" hostname="local-test-host"><testcase classname="tests.test_baselines" name="test_b01_unset_is_null_not_a_guessed_baseline" time="0.388"><failure message="assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code">harness = &lt;tests.conftest.Harness object at 0x10b9aa660&gt;
+
+    def test_b01_unset_is_null_not_a_guessed_baseline(harness: Harness) -&gt; None:
+        harness.account()
+        response = harness.client.get(PATH + "/active")
+&gt;       assert response.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+
+tests/test_baselines.py:11: AssertionError</failure></testcase></testsuite></testsuites>

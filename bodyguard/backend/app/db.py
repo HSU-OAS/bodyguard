@@ -5,6 +5,7 @@ from sqlalchemy import (
     CheckConstraint,
     Column,
     DateTime,
+    Double,
     ForeignKey,
     Index,
     Integer,
@@ -15,6 +16,55 @@ from sqlalchemy import (
 )
 
 metadata = MetaData()
+baselines = Table(
+    "baselines",
+    metadata,
+    Column("user_id", String(36), ForeignKey("users.id", ondelete="CASCADE"), primary_key=True),
+    Column("id", String(36), primary_key=True),
+    Column("client_version", String(64), nullable=False),
+    Column("created_at", DateTime(timezone=True), nullable=False),
+    Column("is_active", Boolean, nullable=False),
+    CheckConstraint(
+        "id ~ '^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$'",
+        name="baseline_uuid",
+    ),
+    CheckConstraint(
+        "client_version ~ '^[a-zA-Z0-9][a-zA-Z0-9._+-]{0,63}$'", name="baseline_version"
+    ),
+)
+for _metric in ("neck", "shoulder", "trunk"):
+    for _field, _type in (("method", String(64)), ("unit", String(64)), ("value", Double())):
+        baselines.append_column(
+            Column(f"{_metric}_{_field}", _type, nullable=_metric != "shoulder")
+        )
+    baselines.append_constraint(
+        CheckConstraint(
+            f"({_metric}_method IS NULL AND {_metric}_unit IS NULL AND {_metric}_value IS NULL) OR "
+            f"({_metric}_method IS NOT NULL AND {_metric}_unit IS NOT NULL "
+            f"AND {_metric}_value IS NOT NULL)",
+            name=f"baseline_{_metric}_complete",
+        )
+    )
+    for _field in ("method", "unit"):
+        baselines.append_constraint(
+            CheckConstraint(
+                f"{_metric}_{_field} ~ '^[a-zA-Z0-9][a-zA-Z0-9._+-]{{0,63}}$'",
+                name=f"baseline_{_metric}_{_field}",
+            )
+        )
+    baselines.append_constraint(
+        CheckConstraint(
+            f"{_metric}_value BETWEEN -9007199254740991 AND 9007199254740991",
+            name=f"baseline_{_metric}_finite",
+        )
+    )
+Index(
+    "ix_baselines_one_active_owner",
+    baselines.c.user_id,
+    unique=True,
+    postgresql_where=baselines.c.is_active,
+)
+
 notification_preferences = Table(
     "notification_preferences",
     metadata,

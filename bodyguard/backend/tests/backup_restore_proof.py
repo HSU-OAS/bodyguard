@@ -20,7 +20,7 @@ from sqlalchemy import URL, Engine, create_engine, delete, insert, select, text,
 from sqlalchemy.exc import IntegrityError
 
 from app.config import Settings
-from app.db import metadata, notification_preferences, stretch_records, users
+from app.db import baselines, metadata, notification_preferences, stretch_records, users
 from app.main import create_app
 from app.security import passwords
 
@@ -384,6 +384,40 @@ def _exercise_constraints(db: Engine, owner: str, record: dict[str, Any]) -> boo
     return True
 
 
+def _exercise_baseline_constraints(db: Engine, owner: str) -> bool:
+    with db.connect() as c:
+        row = dict(
+            c.execute(select(baselines).where(baselines.c.user_id == owner)).mappings().first()
+        )
+    for change, state in (
+        ({"user_id": str(uuid4())}, "23503"),
+        ({"is_active": True}, "23505"),
+        ({"shoulder_value": float("nan")}, "23514"),
+        ({"shoulder_value": float("inf")}, "23514"),
+        ({"neck_method": "partial"}, "23514"),
+        ({"shoulder_value": None}, "23502"),
+        ({"client_version": "bad\n"}, "23514"),
+    ):
+        with db.connect() as c:
+            transaction = c.begin()
+            try:
+                c.execute(
+                    insert(baselines).values(
+                        **{**row, "id": str(uuid4()), "is_active": False, **change}
+                    )
+                )
+            except IntegrityError as error:
+                _require(
+                    getattr(error.orig, "sqlstate", None) == state,
+                    "Wrong restored baseline constraint",
+                )
+            else:
+                raise RuntimeError("Restored baseline constraint accepted invalid data")
+            finally:
+                transaction.rollback()
+    return True
+
+
 def run_isolated_proof(*, _interrupt_before_restore: bool = False) -> dict[str, Any]:
     """No URL/path/archive input. Preserve private artifacts, stop only newly owned clusters."""
     pg_ctl = shutil.which("pg_ctl")
@@ -478,6 +512,31 @@ def run_isolated_proof(*, _interrupt_before_restore: bool = False) -> dict[str, 
             live = stack.enter_context(_client(original, key))
             _, csrf = _login(live, "owner@example.com", password)
             old_cookie = live.cookies.get("__Host-bodyguard_session")
+            baseline_bodies = [
+                {
+                    "id": str(uuid4()),
+                    "client_version": "fixture-not-release",
+                    "neck": None,
+                    "trunk": None,
+                    "shoulder": {"method": "fixture-shoulder", "unit": "deg", "value": 1.25},
+                }
+                for _ in range(3)
+            ]
+            saved_baselines = []
+            for body in baseline_bodies[:2]:
+                response = live.post(
+                    "/api/v1/baselines", headers={"Origin": ORIGIN, "X-CSRF-Token": csrf}, json=body
+                )
+                _require(response.status_code == 201, "Source baseline API save failed")
+                saved_baselines.append(response.json())
+            separate = stack.enter_context(_client(original, key))
+            _, other_csrf = _login(separate, "other@example.com", password)
+            response = separate.post(
+                "/api/v1/baselines",
+                headers={"Origin": ORIGIN, "X-CSRF-Token": other_csrf},
+                json=baseline_bodies[2],
+            )
+            _require(response.status_code == 201, "Source other baseline API save failed")
             snapshot_fingerprint, snapshot_schema = _fingerprint(original), _schema(original)
             (root / "source-schema.json").write_text(json.dumps(snapshot_schema))
             (root / "source-schema.json").chmod(0o600)
@@ -574,6 +633,7 @@ def run_isolated_proof(*, _interrupt_before_restore: bool = False) -> dict[str, 
             result["database_constraints_preserved"] = (
                 _schemas_equivalent(snapshot_schema, _schema(restored))
                 and _exercise_constraints(restored, owner, records[0])
+                and _exercise_baseline_constraints(restored, owner)
                 and _fingerprint(restored) == snapshot_fingerprint
             )
             replay = stack.enter_context(_client(restored, key))
@@ -605,6 +665,13 @@ def run_isolated_proof(*, _interrupt_before_restore: bool = False) -> dict[str, 
             result["other_owner_status"] = candidate.get(
                 "/api/v1/records/stretch/" + records[2]["id"]
             ).status_code
+            result["baseline_history_and_owner_restored"] = (
+                candidate.get("/api/v1/baselines/active").json() == saved_baselines[1]
+                and candidate.get("/api/v1/baselines/" + baseline_bodies[0]["id"]).json()
+                == {**saved_baselines[0], "is_active": False}
+                and candidate.get("/api/v1/baselines/" + baseline_bodies[2]["id"]).status_code
+                == 404
+            )
             corrupt = root / "corrupt.custom"
             corrupt.write_bytes(b"BODYGUARD-owned-invalid-archive\n" + archive.read_bytes()[32:])
             corrupt.chmod(0o600)
@@ -631,10 +698,11 @@ def run_isolated_proof(*, _interrupt_before_restore: bool = False) -> dict[str, 
             )
             result["proof_completed"] = all(
                 (
-                    result["revision"] == "0006_notification_preferences",
+                    result["revision"] == "0007_account_baselines",
                     result["restored_counts"] == result["source_counts"],
                     result["record_contents_match"],
                     result["notification_preferences_restored"],
+                    result["baseline_history_and_owner_restored"],
                     result["database_constraints_preserved"],
                     result["ready_status"] == 200,
                     result["login_status"] == 200,
