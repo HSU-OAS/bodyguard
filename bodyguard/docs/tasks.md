@@ -1,5 +1,9 @@
 # Bodyguard — Tasks
 
+최신: [실제 결과→본인 기록 계약·adapter](stories/coaching-result-record.md)를 구현하고 main의 session+합성 관찰→기존8필드→실제 API/격리 SQL→production Chrome 본인 기록 상세를 연결했다. 부분 수행 skip/일시정지의 수행 시간을 보존하고, 다른 쿠키의 과거 proof403·응답 단절 재시도 한 건·late owner 폐기 경계를 확인했다. [실제 화면·실패/리뷰·미완료 경계](review/coaching-result-record/README.md). 전체459 frontend/291 API·Chrome5+공개7/합성RAF1·정적/build/production private producer0 통과/조건부 PR 게이트 진행이다. 실제 owner/UTC capture·classifier/아바타/실측·Draft36 SDK 개인정보 P2·참여자/외부/운영·부가 기능/전체1~6단계는 미완료다. 웹 화이트/블루 유지·같은 아바타 부위 새 제작0·독립 개발 계속이다. 아래는 시점별 기록이다.
+
+직전 [PR #37](https://github.com/HSU-OAS/bodyguard/pull/37) source4ca8017e는 실제 scoped 검증·latest main/diff/CLEAN·체크 없음·미해결scope P1/P2 없음 후 merge6d7e78fd로 main에 포함되고 source 브랜치를 보존했다.
+
 최신: [관찰 전달·중단 루프](stories/coaching-observation-loop.md)는 provider를1개씩 처리하고 tick·pause/resume·old 결과/오류·예약 중복을 안전하게 연결했다. 실제 main 모듈+합성 관찰19건/전체430건·정적/build·실제 Chrome RAF(합성 자원)1개+공개 웹7개 통과, scope P2 두 건 재현/보완. [실패·실제 웹·증거](review/coaching-observation-loop/README.md). PR 게이트 진행이며 Draft36 SDK 계측/개인정보 P2·실제 camera/classifier/아바타·record producer·실측·외부/운영/전체1~6단계 미완료는 유지한다. 같은 아바타 부위 새 제작0·화이트/블루 웹 유지·승인 대기 독립 개발 계속이다. 아래는 시점별 기록이다.
 
 최신: [Draft PR #36](https://github.com/HSU-OAS/bodyguard/pull/36) sourcee4df4a9는 SDK 계측 외부 시도 P2/B-09 미해결·Story 미완료로 병합하지 않았다. 원본 실패·공개 stdout 형식 보완/원본 gzip/hash·실제 웹 PNG를 보존했다. 체크 없음/리뷰0·main1528e9eb를 확인했고 최신 main의 codex/coaching-observation-loop에서 [관찰 전달·중단 루프](stories/coaching-observation-loop.md)를 독립적으로 시작한다. 개인정보 정책 승인/참여자 연결 응답이 없으며 승인·실측 완료를 가정하지 않는다. 화이트/블루 웹 유지, 아바타 같은 부위 새 제작0·전체1~6단계 미완료다. 아래는 시점별 기록이다.

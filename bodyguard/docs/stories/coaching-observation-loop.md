@@ -1,6 +1,6 @@
 # S2.5f — 코칭 관찰 전달·중단 루프
 
-독립 구현·실제 scoped 검증 완료/PR 게이트 준비 · main1528e9eb · codex/coaching-observation-loop
+독립 Story PR #37 main 병합 · merge6d7e78fd · source4ca8017e · codex/coaching-observation-loop
 
 ## 범위/선행 상태
 
@@ -29,7 +29,7 @@ createObservationLoop({session,scheduler,readFrame})는 sync/close만 반환한�
 - [x] 첫 미구현 red·상세 실행 하네스/원본 보존.
 - [x] loop 구현·late/취소/고정 failure·상세 green·scope 리뷰.
 - [x] 전체/정적/build·공개 browser/production·증거 로컬 검증.
-- [ ] latest main/diff/exact HEAD/CLEAN/체크 확인·조건부 PR 게이트.
+- [x] latest main/diff/exact HEAD/CLEAN/체크 없음·scope 미해결P1/P2 없음 후 PR #37 merge commit 병합. 실제 부모/main 포함·source 브랜치 보존 확인.
 
 ## Dev Agent Record
 

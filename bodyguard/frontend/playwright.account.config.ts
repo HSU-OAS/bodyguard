@@ -17,6 +17,7 @@ export default defineConfig({
     'datahelp.spec.ts',
     'integration.spec.ts',
     'security.spec.ts',
+    'resultrecord.spec.ts',
   ],
   reporter: process.env.BODYGUARD_TEST_RECORDS_REPORT
     ? [['list'], ['json', { outputFile: process.env.BODYGUARD_TEST_RECORDS_REPORT }]]
@@ -30,7 +31,9 @@ export default defineConfig({
     proxy: { server: proxy, bypass: 'localhost,127.0.0.1,[::1]' },
   },
   webServer: {
-    command: 'pnpm build && vite preview --host localhost',
+    command: process.env.BODYGUARD_TEST_RESULT_PROBE
+      ? 'pnpm build && vite build --config e2e/fixtures/resultRecord.vite.ts && vite preview --host localhost'
+      : 'pnpm build && vite preview --host localhost',
     url: 'http://localhost:4173',
     reuseExistingServer: false,
     timeout: 180_000,

@@ -35,6 +35,10 @@ for (const file of files) {
     'Invalid observation scheduler',
     'PRIVATE_OBSERVATION_LOOP_COORDINATES',
     'probeObservationLoop',
+    'Invalid coaching result',
+    'Unable to save coaching record',
+    'PRIVATE_RESULT_COORDINATES_ACCOUNT',
+    'prepareResultProbe',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -47,5 +51,6 @@ console.log(
     unconnected_coaching_resource_strings: 0,
     unconnected_coaching_session_strings: 0,
     unconnected_observation_loop_strings: 0,
+    unconnected_result_record_producer_strings: 0,
   }),
 )
