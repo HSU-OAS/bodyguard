@@ -1,0 +1,20 @@
+[WebServer] (node:9361) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ node scripts/prepare-assets.mjs && tsc --noEmit && vite build
+[WebServer] (node:9433) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:9445) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:9456) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:9489) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/recordedsession.spec.ts:114:1 › A04 delayed ready pause/resume saves actual session summary to own record/detail (2.8s)
+  ✓  2 e2e/recordedsession.spec.ts:161:1 › A04 same-account authority replaced during preparation: late readiness cannot save (1.6s)
+  ✓  3 e2e/recordedsession.spec.ts:189:1 › A04 lost accepted response retries identical result and actual SQL contains one row (1.2s)
+  ✓  4 e2e/recordedsession.spec.ts:223:1 › A04 missed account notification keeps original proof; new cookie receives 403/no record (1.8s)
+
+  4 passed (28.6s)

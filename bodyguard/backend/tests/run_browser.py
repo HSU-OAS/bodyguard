@@ -41,6 +41,7 @@ def main() -> int:
             "security",
             "resultrecord",
             "ownercapture",
+            "recordedsession",
         ),
         nargs="?",
         default="account",
@@ -180,6 +181,7 @@ def main() -> int:
                         "security",
                         "resultrecord",
                         "ownercapture",
+                        "recordedsession",
                     )
                     else f"test-results/{args.suite}"
                 )
@@ -214,6 +216,7 @@ def main() -> int:
                                 "security",
                                 "resultrecord",
                                 "ownercapture",
+                                "recordedsession",
                             )
                             else ""
                         ),

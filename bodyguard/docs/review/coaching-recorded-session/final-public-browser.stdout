@@ -1,0 +1,32 @@
+$ pnpm build && node scripts/check-selection-production.mjs && node scripts/test-selection-browser.mjs
+$ node scripts/prepare-assets.mjs && tsc --noEmit && vite build
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 109 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:  0.29 kB
+dist/assets/index-D8USq_Sz.css   28.03 kB │ gzip:  6.79 kB
+dist/assets/index-D4aKUs5U.js   322.46 kB │ gzip: 98.48 kB
+
+✓ built in 1.17s
+{"production_JS_files_checked":1,"development_catalog_strings":0,"unconnected_coaching_engine_strings":0,"unconnected_coaching_resource_strings":0,"unconnected_coaching_session_strings":0,"unconnected_observation_loop_strings":0,"unconnected_result_record_producer_strings":0,"unconnected_record_owner_capture_strings":0,"unconnected_recorded_session_strings":0}
+[WebServer] (node:7700) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:7729) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 8 tests using 1 worker
+
+(node:7813) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/selection.spec.ts:4:1 › L08 actual RAF loop start-pause-resume-close with synthetic resources, no camera (6.0s)
+  ✓  2 e2e/selection.spec.ts:32:1 › S3.2 protected production explore paths and purpose selection (7.6s)
+  ✓  3 e2e/selection.spec.ts:50:1 › S3.3 expanded library search, guidance detail and return (10.3s)
+  ✓  4 e2e/selection.spec.ts:150:1 › C-02/03/04/07 desktop selection, literal search, detail sources and Back (7.7s)
+  ✓  5 e2e/selection.spec.ts:182:1 › C-02/07 narrow laptop empty reset and keyboard operation (4.5s)
+  ✓  6 e2e/selection.spec.ts:198:1 › C-04 missing direct ID is recoverable and not an external navigation (4.9s)
+  ✓  7 e2e/selection.spec.ts:209:1 › C-01 guest and server failure close the preview without a candidate fallback (4.4s)
+  ✓  8 e2e/selection.spec.ts:225:1 › C-06 actual production hides the dev route, catalog and entry link (2.1s)
+
+  8 passed (1.4m)
