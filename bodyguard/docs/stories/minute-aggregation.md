@@ -1,6 +1,6 @@
 # S4.12 — 개인정보 경계를 지키는 1분 집계
 
-review · 기준 mainf47dea17a7ec92ff62404c5624bc4c18cd0782a2 · codex/private-minute-aggregation · 2026-10-06
+완료(private 집계 범위만) · 기준 mainf47dea17a7ec92ff62404c5624bc4c18cd0782a2 · codex/private-minute-aggregation · 2026-10-06
 
 ## 범위
 
@@ -34,7 +34,7 @@ FR-R-01/06·NFR-07·ADR-0003. 알림·대시보드·PDF에 필요한 승인 범�
 - [x] 결정적인 red 하네스 작성.
 - [x] private 집계 엔진 및 경계 리뷰 보완.
 - [x] 전체 frontend/공개 웹 회귀·production·원본·작성자 scope 리뷰.
-- [ ] 최신 diff/HEAD/main/CLEAN·체크·충돌 후 조건부 PR/merge.
+- [x] 최신 diff/HEAD/main/CLEAN·체크·충돌 후 조건부 PR/merge.
 
 ## Dev Agent Record
 
@@ -51,6 +51,12 @@ engineering:code-review의 입력/시간/수치/버퍼·폐기/metadata 불변/p
 최신 main은 개발 중 PR42 알림 설정 API의 merge6ee4dce로 바뀌었다. 최초 검증/커밋dea748b를 보존하고 이를 branch에 통합했다. tasks.md 두 실행 기록이 충돌해 **양쪽 기록을 모두 보존**하여 merge0c32cc7로 해결했다. 제품 소스 충돌은 없고 main의 backend/생성 타입을 수정하지 않는다. 통합 후 frontend/타입·정적/build/공개 웹 회귀를 별도 재실행하고 초기 artifacts.json/원본은 유지한다. PR42 자체의 기능 완료/검증을 이 Story의 작업으로 재표시하지 않는다.
 
 통합본에서도 전체558 frontend/실패0·타입/Biome122/build/guard·공개8(13.0초)을 실제 실행하고 v2 source3/artifact7 SHA를 수집·재검증했다. 최초18개 artifacts·manifest는 변경하지 않았고 integrated 결과는 artifacts-v2.json/새 파일로 남겼다. 공개 JS/CSS byte는 동일하고 backend 회귀를 새로 실행한 것으로 세지 않는다.
+
+[PR43](https://github.com/HSU-OAS/bodyguard/pull/43)은 검증 source692c7e463604514ed744c17ea0878e6377c1cc20을 mergecf65132fa5be6d3000a9f0323cd1d4f4eee23fc8로 병합했다. 실제 부모6ee4dce/692c7e4·main 포함·브랜치 보존·clean을 확인했다. 병합 직전 35개 원격 Git blob/diff·latest main 통합/CLEAN·체크 없음·scope 미해결 P1/P2 없음과 source/초기18개·통합7개 artifact SHA를 재확인했다. [작성자 리뷰](https://github.com/HSU-OAS/bodyguard/pull/43#issuecomment-6000251778)는 외부 리뷰가 아니다.
+
+최초 원격 diff 비교 실패는 Git index 축약 길이7/8자리 차이였다. 원본을 유지하고 --abbrev=8 로컬 diff를 별도로 비교했다. hunk 함수명 표시만 정규화했으며 본문/좌표·35개 blob은 일치했다. 이는 제품 실패/통과 건수로 세지 않는다. 병합 후 BMAD on_complete resolver는 실제 absent exit2로 실행됐으며 default 후속 값은 빈 값이다. 새 도구 설치나 설정 변경은 하지 않았다.
+
+현재 요청한 의학 계열 화이트/블루 웹은 기존 토큰·컴포넌트를 유지하고 실제 production 화면으로 확인했다. 이번 집계 Story가 새 UI 디자인이나 추가 디자인 스킬 audit 수행을 의미하지 않는다. 공개 summary producer·계정/HTTP 연결·실측·전체4단계/1~6 완료를 선언하지 않으며 2단계 이월·SDK P2·외부/운영의 별도 승인 경계는 그대로다.
 
 ## File List
 
@@ -69,3 +75,4 @@ engineering:code-review의 입력/시간/수치/버퍼·폐기/metadata 불변/p
 
 2026-10-06: 최신 mainf47dea1에서 계약·하네스 시작. 빈 구간/미검증 지표를 성공 데이터로 만드는 consumer는 추가하지 않는다.
 2026-10-06: 시간가중/분 경계/보정 전·공백·폐기 집계 및 경합·정밀도 리뷰 보완 후 review.
+2026-10-06: 실제 PR43 조건부 병합·브랜치 보존을 확인하고 private 집계 범위만 완료 기록. 실행 증거와 남은 출시 게이트를 보존.
