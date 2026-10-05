@@ -28,6 +28,10 @@ for (const file of files) {
     'ownership-error',
     'cleanup-error',
     'PRIVATE_FRAME_coordinates_account_METADATA',
+    'clock-error',
+    'gate-error',
+    'callback-error',
+    'PRIVATE_COORDINATES_ACCOUNT_FAILURE',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -38,5 +42,6 @@ console.log(
     development_catalog_strings: 0,
     unconnected_coaching_engine_strings: 0,
     unconnected_coaching_resource_strings: 0,
+    unconnected_coaching_session_strings: 0,
   }),
 )
