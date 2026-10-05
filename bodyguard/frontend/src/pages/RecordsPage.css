@@ -17,9 +17,9 @@
   margin-top: 20px;
 }
 .website .button.destructive {
-  background: #943a32;
-  border-color: #943a32;
-  color: white;
+  background: var(--danger);
+  border-color: var(--danger);
+  color: var(--on-accent);
 }
 .records-screen {
   padding: 64px 0 80px;
@@ -42,16 +42,16 @@
 .records-filter label {
   display: grid;
   gap: 8px;
-  font-size: 14px;
+  font-size: var(--type-body);
   font-weight: 600;
 }
 .records-filter input {
   min-height: 48px;
   min-width: 180px;
   padding: 10px 12px;
-  border: 1px solid #b8c5be;
-  border-radius: 10px;
-  background: white;
+  border: 1px solid var(--control-line);
+  border-radius: 8px;
+  background: var(--surface);
   color: var(--ink);
 }
 .records-filter .form-error {
@@ -63,7 +63,7 @@
   padding-top: 24px;
 }
 .website .records-results h2 {
-  font-size: 20px;
+  font-size: var(--type-label);
 }
 .records-table-scroll {
   overflow-x: auto;
@@ -73,7 +73,7 @@
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  font-size: 14px;
+  font-size: var(--type-body);
 }
 .records-screen th,
 .records-screen td {
@@ -83,8 +83,8 @@
 }
 .records-screen thead th {
   color: var(--muted);
-  font-weight: 500;
-  background: #f2f5f1;
+  font-weight: 600;
+  background: var(--surface-soft);
   white-space: nowrap;
 }
 .records-screen tbody th {
@@ -103,7 +103,7 @@
 }
 .record-outcome {
   display: inline-block;
-  font-size: 13px;
+  font-size: var(--type-small);
   white-space: nowrap;
 }
 .records-state {
@@ -145,7 +145,7 @@
 }
 .record-detail dt {
   color: var(--muted);
-  font-size: 14px;
+  font-size: var(--type-body);
 }
 .record-detail dd {
   overflow-wrap: anywhere;
@@ -154,11 +154,6 @@
   display: flex;
   gap: 32px;
   flex-wrap: wrap;
-}
-.site-header nav {
-  display: flex;
-  gap: 24px;
-  align-items: center;
 }
 @media (max-width: 850px) {
   .records-screen {

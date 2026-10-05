@@ -7,7 +7,7 @@
 }
 .motion-preview-note {
   color: var(--muted);
-  font-size: 13px;
+  font-size: var(--type-small);
   margin-bottom: 40px;
   border-left: 2px solid var(--line);
   padding-left: 16px;
@@ -24,17 +24,17 @@
 .motion-controls label {
   display: block;
   font-weight: 600;
-  font-size: 14px;
+  font-size: var(--type-body);
   margin-bottom: 8px;
 }
 .motion-controls input {
   display: block;
   width: 100%;
   height: 48px;
-  border: 1px solid #b8c5be;
-  border-radius: 10px;
+  border: 1px solid var(--control-line);
+  border-radius: 8px;
   padding: 10px 14px;
-  background: #fff;
+  background: var(--surface);
   color: var(--ink);
 }
 .motion-filters {
@@ -48,7 +48,7 @@
 }
 .motion-filters [aria-pressed="true"] {
   border-color: var(--accent);
-  background: #edf2ef;
+  background: var(--surface-soft);
   color: var(--accent);
 }
 .motion-list {
@@ -69,17 +69,17 @@
   flex-shrink: 0;
 }
 .motion-list h2 {
-  font-size: 24px;
+  font-size: var(--type-section);
   margin: 6px 0 12px;
 }
 .motion-list p:not(.motion-region) {
   max-width: 640px;
-  font-size: 14px;
+  font-size: var(--type-body);
   color: var(--muted);
 }
 .motion-region {
   color: var(--accent);
-  font-size: 13px;
+  font-size: var(--type-small);
   font-weight: 600;
 }
 .motion-empty {
@@ -88,7 +88,7 @@
   margin-top: 16px;
 }
 .motion-empty h2 {
-  font-size: 22px;
+  font-size: var(--type-label);
 }
 .motion-empty p {
   margin: 12px 0 24px;
@@ -104,7 +104,7 @@
   gap: 64px;
 }
 .motion-detail-layout h1 {
-  font-size: clamp(30px, 3vw, 44px);
+  font-size: clamp(var(--type-title), 3vw, var(--type-intro));
   margin-top: 12px;
 }
 .motion-steps {
@@ -113,7 +113,7 @@
 }
 .motion-steps h2,
 .motion-preparation h2 {
-  font-size: 22px;
+  font-size: var(--type-label);
 }
 .motion-steps ol {
   list-style: decimal;
@@ -140,7 +140,7 @@
   margin-top: 8px;
 }
 .motion-sources a {
-  font-size: 14px;
+  font-size: var(--type-body);
   color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -150,11 +150,11 @@
   padding: 28px;
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: #f2f5f1;
+  background: var(--surface-soft);
 }
 .motion-preparation h2 + p {
   margin-top: 16px;
-  font-size: 14px;
+  font-size: var(--type-body);
 }
 .motion-preparation h3 {
   margin: 24px 0 12px;
@@ -162,7 +162,7 @@
 .motion-preparation ul {
   list-style: disc;
   padding-left: 20px;
-  font-size: 14px;
+  font-size: var(--type-body);
 }
 .motion-preparation li {
   margin-bottom: 12px;
@@ -174,7 +174,7 @@
   margin-top: 12px;
 }
 .motion-selection summary:focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--focus);
   outline-offset: 4px;
 }
 @media (max-width: 850px) {
