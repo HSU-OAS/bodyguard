@@ -2,6 +2,7 @@ import { lazy, type ReactNode, Suspense, useEffect } from 'react'
 import { BrowserRouter, Link, Navigate, Route, Routes, useLocation } from 'react-router'
 import { AuthProvider, useAuth } from './auth'
 import { AccountPage } from './pages/AccountPage'
+import { DataPage, HelpPage } from './pages/DataHelpPage'
 import { ExplorePage } from './pages/ExplorePage'
 import { MemberPage } from './pages/MemberPage'
 import { PasswordPage } from './pages/PasswordPage'
@@ -201,7 +202,11 @@ function Shell() {
                 ? '내 시작'
                 : location.pathname === '/account'
                   ? '내 계정'
-                  : '자세 코칭'
+                  : location.pathname === '/help'
+                    ? '도움말'
+                    : location.pathname === '/data'
+                      ? '카메라와 데이터 안내'
+                      : '자세 코칭'
     } · BODYGUARD`
   }, [location.pathname])
   return (
@@ -257,6 +262,8 @@ function Shell() {
       <main id="content" tabIndex={-1}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/help" element={<HelpPage />} />
+          <Route path="/data" element={<DataPage />} />
           <Route path="/login" element={<AccountPage key="login" mode="login" />} />
           <Route path="/signup" element={<AccountPage key="signup" mode="signup" />} />
           <Route path="/password/forgot" element={<PasswordPage key="forgot" mode="forgot" />} />
@@ -324,6 +331,22 @@ function Shell() {
       <footer className="site-footer">
         <span>BODYGUARD</span>
         <p>일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중</p>
+        <nav aria-label="서비스 안내">
+          <Link
+            className="footer-link"
+            to="/help"
+            aria-current={location.pathname === '/help' ? 'page' : undefined}
+          >
+            도움말
+          </Link>
+          <Link
+            className="footer-link"
+            to="/data"
+            aria-current={location.pathname === '/data' ? 'page' : undefined}
+          >
+            카메라·데이터 안내
+          </Link>
+        </nav>
       </footer>
     </div>
   )
