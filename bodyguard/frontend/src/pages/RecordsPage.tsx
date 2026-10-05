@@ -5,6 +5,7 @@ import { ApiError } from '../api/auth'
 import type { StretchList, StretchOut } from '../api/generated'
 import { dateRange, defaultPeriod, listRecords, localDay, readRecord } from '../api/records'
 import { useAuth } from '../auth'
+import { RecordDeletion } from './RecordDeletion'
 import './RecordsPage.css'
 
 const outcomes = { completed: '완료', interrupted: '중단', skipped: '건너뜀' }
@@ -40,6 +41,7 @@ export function RecordsPage() {
   const [draft, setDraft] = useState({ from, to })
   const [page, setPage] = useState(0)
   const [revision, setRevision] = useState(0)
+  const [selectionRevision, setSelectionRevision] = useState(0)
   const [formError, setFormError] = useState('')
   const [result, setResult] = useState<Result>({ key: '', status: 'loading' })
   const heading = useRef<HTMLHeadingElement>(null)
@@ -111,6 +113,7 @@ export function RecordsPage() {
       return
     }
     setFormError('')
+    setSelectionRevision((value) => value + 1)
     focusResults.current = true
     setPage(0)
     setCutoff(new Date())
@@ -160,6 +163,20 @@ export function RecordsPage() {
             </p>
           )}
         </form>
+      )}
+      {!id && range && (
+        <RecordDeletion
+          key={`${from}|${to}|${selectionRevision}`}
+          period={range}
+          from={from}
+          to={to}
+          onChanged={() => {
+            focusResults.current = true
+            setPage(0)
+            setCutoff(new Date())
+            setRevision((value) => value + 1)
+          }}
+        />
       )}
       {!range ? (
         <div className="records-state">

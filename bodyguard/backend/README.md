@@ -1,6 +1,6 @@
 # BODYGUARD 계정·기록 API
 
-S2.1 + S2.6a1/b1, FR-U-01~04·NFR-08. 이메일 확인/구글 계정, 서버 쿠키·CSRF, 본인 조회·로그아웃과 비밀번호 복구 API다. [복구 웹 화면](../docs/stories/stage2-password-recovery-web.md)은 PR #11 병합. [구글 API·로컬 보안 시험](../docs/stories/stage2-google-auth-api.md)은 실제 공급자 연결과 구분한다. 구글 웹·실제 Google/Gmail·기록·운영 배포는 미완료다.
+S2.1 + S2.6a1/b1, FR-U-01~05·NFR-08. 이메일 확인/구글 계정, 서버 쿠키·CSRF, 본인 조회·로그아웃·비밀번호 복구와 아래 본인 수행 기록 API다. [복구 웹 화면](../docs/stories/stage2-password-recovery-web.md)은 PR #11 병합. [구글 API·로컬 보안 시험](../docs/stories/stage2-google-auth-api.md)은 실제 공급자 연결과 구분한다. 실제 Google/Gmail·코칭 기록 생산·계정 탈퇴·운영 배포는 미완료다.
 
 ## 스트레칭 수행 요약 — S4.1
 
@@ -79,6 +79,8 @@ uv run mypy app
 ```
 
 pytest는 실제 FastAPI와 PostgreSQL 18 migration·제약·독립 연결 경쟁을 사용한다. 시간·코드 난수·메일을 시험에서 통제하고, Google 시험은 자체 RSA 키와 native SDK 검증을 사용하되 공급자 HTTPS는 MockTransport다. 실제 Google TLS·승인·로그인·Gmail 도착 증거가 아니다. test 설정은 환경 변수로 서버를 기동할 수 없고, production/development의 가짜 메일·clock·Google transport 주입도 거부한다. 공개 outbox/코드 조회/인증 우회 API는 없다.
+
+공통 하네스는 PostgreSQL 세션 advisory lock을 migration/reset 전에 확보하고 실행 전체에서 유지한다. 같은 DB의 두 번째 하네스는 초기화 전에 실패하며 skip/통과로 세지 않는다. 이전 버전 하네스와도 분리하려면 실행별 새 `mktemp -d /private/tmp/bodyguard-auth-test.XXXXXX`의 소유 Unix socket DB를 사용한다. 다른 시험 프로세스·DB를 임의로 종료하거나 초기화하지 않는다.
 
 `uv run python -m tests.run_browser`(기본/account), `... password`, `... google`은 실제 계정/복구/구글 API·SQL·production Chrome의 별도 시험이다. 소유한 시험 DB만 초기화하므로 동시에 실행하지 않는다. 메일/Google 응답은 원자적 비공개 IPC 파일이며 실제 공급자가 아니다. Google clock offset은 시험용이며 실제 기다린 시간으로 표시하지 않는다. 로컬 시작 응답을 redirect 0회로 캡처하고, 공통 브라우저의 외부 통신은 소유한 닫힌 포트 proxy로 강제 거부한다. 실제 차단·실패 실행/수정은 [b2 Story](../docs/stories/stage2-google-auth-web.md)에 기록한다. 계정/복구/구글 결과는 frontend/test-results/의 각 suite에 재현된다.
 

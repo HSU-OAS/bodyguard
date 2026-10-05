@@ -23,7 +23,7 @@ export function validPassword(value: string): boolean {
   return length >= 15 && length <= 128
 }
 
-async function request(
+export async function request(
   path: string,
   signal: AbortSignal,
   body?: unknown,

@@ -77,6 +77,17 @@ def main() -> int:
             google_file = Path(temporary) / "google.json"
             google_transport = None
             clock = None
+            record_clock_file = Path(temporary) / "record-clock.json"
+            if args.suite == "records":
+                # FR-U-05: private test IPC only; not a public clock-control endpoint.
+                record_clock_file.write_text('{"offset_seconds":0}')
+                record_clock_file.chmod(0o600)
+
+                def record_clock() -> datetime:
+                    offset = json.loads(record_clock_file.read_text())["offset_seconds"]
+                    return datetime.now(UTC) + timedelta(seconds=offset)
+
+                clock = record_clock
             if args.suite == "google":
                 # Test-only private IPC: synthetic responses/clock, never a public endpoint.
                 google_file.write_text('{"offset_seconds":0,"responses":{}}')
@@ -163,6 +174,7 @@ def main() -> int:
                         **os.environ,
                         "BODYGUARD_TEST_MAILBOX": str(mailbox),
                         "BODYGUARD_TEST_GOOGLE_FIXTURE": str(google_file),
+                        "BODYGUARD_TEST_RECORD_CLOCK": str(record_clock_file),
                         "BODYGUARD_TEST_BLOCKED_PROXY": proxy_url,
                         "BODYGUARD_TEST_RECORDS_REPORT": (
                             f"{output}/report.json" if args.suite == "records" else ""

@@ -1,6 +1,6 @@
 // FR-R-03/FR-U-04/NFR-08: real HTTP/SQL/production Chrome, synthetic summaries and mail.
 import { randomUUID } from 'node:crypto'
-import { readFileSync } from 'node:fs'
+import { readFileSync, renameSync, writeFileSync } from 'node:fs'
 import { type BrowserContext, expect, type Page, test } from '@playwright/test'
 
 const origin = 'http://localhost:4173'
@@ -59,6 +59,7 @@ async function join(context: BrowserContext) {
     code,
   })
   expect(verified.status()).toBe(201)
+  return email
 }
 async function seed(
   context: BrowserContext,
@@ -86,6 +87,206 @@ async function seed(
 function day(date: Date) {
   return `${date.getFullYear().toString().padStart(4, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
 }
+
+test('RD-05 record saved after preview is preserved even with an earlier end time', async ({
+  page,
+  context,
+}, info) => {
+  await join(context)
+  await seed(context)
+  await page.goto('/records')
+  await page.getByRole('button', { name: '이 기간 기록 삭제', exact: true }).click()
+  await expect(page.getByText('삭제 대상: 1건', { exact: true })).toBeVisible()
+  const later = await seed(context, 2)
+  await page.getByRole('button', { name: '기록 삭제', exact: true }).click()
+  await expect(page.getByText('1건의 수행 기록을 삭제했습니다.', { exact: true })).toBeVisible()
+  await expect(page.getByRole('link', { name: /^fixture-2 .*기록 상세/ })).toBeVisible()
+  expect(
+    (await (await context.request.get('/api/v1/records/stretch')).json()).items.map(
+      (item: { id: string }) => item.id,
+    ),
+  ).toEqual([later.id])
+  await page.screenshot({
+    path: info.outputPath('deletion-new-record-preserved.png'),
+    fullPage: true,
+  })
+})
+
+test('RD-04 foreign proof cannot delete another account and late deletion cannot reopen private UI', async ({
+  page,
+  context,
+}, info) => {
+  const originalEmail = await join(context)
+  const original = await seed(context)
+  const preview = await post(context, '/records/stretch/delete-preview', {
+    start: new Date(Date.parse(original.ended_at) - 1).toISOString(),
+    end: new Date(Date.parse(original.ended_at) + 1).toISOString(),
+  })
+  expect(preview.status()).toBe(200)
+  const proof = await preview.json()
+  expect((await post(context, '/auth/logout')).status()).toBe(204)
+  await join(context)
+  const own = await seed(context, 2)
+  const foreign = await post(context, '/records/stretch/delete', {
+    ...proof,
+    confirmation: 'delete-stretch-records',
+  })
+  expect(foreign.status()).toBe(403)
+  expect(
+    (await (await context.request.get('/api/v1/records/stretch')).json()).items.map(
+      (item: { id: string }) => item.id,
+    ),
+  ).toEqual([own.id])
+  await page.goto('/records')
+  await page.getByRole('button', { name: '이 기간 기록 삭제', exact: true }).click()
+  await expect(page.getByText('삭제 대상: 1건', { exact: true })).toBeVisible()
+  let release: (() => void) | undefined
+  const held = new Promise<void>((done) => {
+    release = done
+  })
+  let processed = false
+  await page.route('**/api/v1/records/stretch/delete', async (route) => {
+    const response = await route.fetch()
+    expect(response.status()).toBe(200)
+    processed = true
+    await held
+    await route.fulfill({ response }).catch(() => {})
+  })
+  await page.getByRole('button', { name: '기록 삭제', exact: true }).click()
+  await expect.poll(() => processed).toBe(true)
+  expect((await (await context.request.get('/api/v1/records/stretch')).json()).items).toHaveLength(
+    0,
+  )
+  try {
+    expect((await post(context, '/auth/logout')).status()).toBe(204)
+    await page.goto('/records')
+    await expect(page.getByRole('heading', { name: '다시 만나 반갑습니다' })).toBeVisible()
+    release?.()
+    await expect(page.getByText('1건의 수행 기록을 삭제했습니다.', { exact: true })).toHaveCount(0)
+    await page.screenshot({ path: info.outputPath('deletion-logout-boundary.png'), fullPage: true })
+    expect((await post(context, '/auth/login', { email: originalEmail, password })).status()).toBe(
+      200,
+    )
+    expect(
+      (await (await context.request.get('/api/v1/records/stretch')).json()).items.map(
+        (item: { id: string }) => item.id,
+      ),
+    ).toEqual([original.id])
+    expect(
+      (
+        await post(context, '/records/stretch/delete', {
+          ...proof,
+          confirmation: 'delete-stretch-records',
+        })
+      ).status(),
+    ).toBe(403)
+  } finally {
+    release?.()
+  }
+})
+
+test('RD-03 server confirmation expiry preserves record without an automatic retry', async ({
+  page,
+  context,
+}, info) => {
+  const clockFile = process.env.BODYGUARD_TEST_RECORD_CLOCK
+  if (
+    !clockFile?.startsWith('/private/tmp/bodyguard-browser-') ||
+    !clockFile.endsWith('/record-clock.json')
+  )
+    throw new Error('Owned test clock required')
+  function offset(seconds: number) {
+    writeFileSync(`${clockFile}.next`, JSON.stringify({ offset_seconds: seconds }), { mode: 0o600 })
+    renameSync(`${clockFile}.next`, clockFile as string)
+  }
+  await join(context)
+  await seed(context)
+  await page.goto('/records')
+  await page.getByRole('button', { name: '이 기간 기록 삭제', exact: true }).click()
+  await expect(page.getByText('삭제 대상: 1건', { exact: true })).toBeVisible()
+  try {
+    offset(601)
+    await page.getByRole('button', { name: '기록 삭제', exact: true }).click()
+    await expect(page.getByText(/삭제 확인이 만료되었거나 대상이 바뀌었습니다/)).toBeVisible()
+    expect(
+      (await (await context.request.get('/api/v1/records/stretch')).json()).items,
+    ).toHaveLength(1)
+    await expect(page.getByRole('button', { name: '기록 삭제', exact: true })).toHaveCount(0)
+    await page.screenshot({ path: info.outputPath('deletion-expired.png'), fullPage: true })
+  } finally {
+    offset(0)
+  }
+})
+
+test('RD-02 changed real SQL target requires another preview and preserves remaining record', async ({
+  page,
+  context,
+}, info) => {
+  await join(context)
+  const first = await seed(context, 1)
+  await seed(context, 2)
+  await page.goto('/records')
+  await expect(page.getByRole('table')).toBeVisible()
+  await page.getByRole('button', { name: '이 기간 기록 삭제', exact: true }).click()
+  await expect(page.getByText('삭제 대상: 2건', { exact: true })).toBeVisible()
+  const partial = await post(context, '/records/stretch/delete-preview', {
+    start: first.ended_at,
+    end: new Date(Date.parse(first.ended_at) + 1).toISOString(),
+  })
+  expect(partial.status()).toBe(200)
+  const proof = await partial.json()
+  expect(proof.count).toBe(1)
+  const removed = await post(context, '/records/stretch/delete', {
+    ...proof,
+    confirmation: 'delete-stretch-records',
+  })
+  expect(removed.status()).toBe(200)
+  await page.getByRole('button', { name: '기록 삭제', exact: true }).click()
+  await expect(page.getByText(/삭제 확인이 만료되었거나 대상이 바뀌었습니다/)).toBeVisible()
+  await expect(page.getByRole('button', { name: '기록 삭제', exact: true })).toHaveCount(0)
+  expect((await (await context.request.get('/api/v1/records/stretch')).json()).items).toHaveLength(
+    1,
+  )
+  await page.screenshot({ path: info.outputPath('deletion-target-changed.png'), fullPage: true })
+  await page.getByRole('button', { name: '삭제 대상 다시 확인', exact: true }).click()
+  await expect(page.getByText('삭제 대상: 1건', { exact: true })).toBeVisible()
+  await page.getByRole('button', { name: '취소', exact: true }).click()
+  expect((await (await context.request.get('/api/v1/records/stretch')).json()).items).toHaveLength(
+    1,
+  )
+})
+
+test('RD-01 actual preview cancel and confirmed period deletion preserve outside records', async ({
+  page,
+  context,
+}, info) => {
+  await join(context)
+  await seed(context)
+  const outside = await seed(context, 2, 'interrupted', 14)
+  await page.goto('/records')
+  await expect(page.getByRole('table')).toBeVisible()
+  await page.getByRole('button', { name: '이 기간 기록 삭제', exact: true }).click()
+  await expect(page.getByText('삭제 대상: 1건', { exact: true })).toBeVisible()
+  await page.screenshot({ path: info.outputPath('deletion-preview.png'), fullPage: true })
+  await page.getByRole('button', { name: '취소', exact: true }).click()
+  expect((await (await context.request.get('/api/v1/records/stretch')).json()).items).toHaveLength(
+    2,
+  )
+  await expect(page.getByRole('button', { name: '이 기간 기록 삭제', exact: true })).toBeFocused()
+  await page.keyboard.press('Enter')
+  await expect(page.getByText('삭제 대상: 1건', { exact: true })).toBeVisible()
+  await page.setViewportSize({ width: 700, height: 800 })
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+  await page.screenshot({ path: info.outputPath('deletion-preview-narrow.png'), fullPage: true })
+  await page.getByRole('button', { name: '기록 삭제', exact: true }).click()
+  await expect(page.getByText('1건의 수행 기록을 삭제했습니다.', { exact: true })).toBeVisible()
+  await expect(
+    page.getByRole('heading', { name: '이 기간에는 수행 기록이 없습니다' }),
+  ).toBeVisible()
+  const remaining = (await (await context.request.get('/api/v1/records/stretch')).json()).items
+  expect(remaining.map((item: { id: string }) => item.id)).toEqual([outside.id])
+  await page.screenshot({ path: info.outputPath('deletion-result.png'), fullPage: true })
+})
 async function filter(page: Page, from: string, to: string) {
   await page.getByLabel('시작일', { exact: true }).fill(from)
   await page.getByLabel('종료일', { exact: true }).fill(to)
