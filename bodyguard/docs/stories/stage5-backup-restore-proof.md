@@ -1,6 +1,6 @@
 # S5.3 — 네이티브 백업·복구 기초 검증
 
-구현·실제 로컬 검증 / PR 게이트 진행 · 시작 maincbfd07ff944c94de12674bd982bfe98f075616f0 · codex/stage5-backup-restore · NFR-08·FR-U-05/FR-R-03·release-plan5단계
+test-only 기초 Story PR #30 main 병합 · 시작 maincbfd07ff944c94de12674bd982bfe98f075616f0 · codex/stage5-backup-restore · NFR-08·FR-U-05/FR-R-03·release-plan5단계
 
 ## 목적·현재 상태
 
@@ -44,7 +44,7 @@ Docker 연결/필수 S5.2 runtime·2단계 아바타/실측/통합 이월·실�
 - [x] native 손상 archive 거부·target/source 내용 보존, 의도적 실행 중단 뒤 새 두 서버 종료와 경로 교체 거부를 확인했다.
 - [x] 실제 source의 기록/회원 삭제·로그아웃·비밀번호/credentials_version 변경 후 snapshot restore가 정보/세션/이전 비밀번호를 재생함을 확인했다. 이는 미해결 운영 공개 게이트이며 정상으로 처리하지 않는다.
 - [x] [시험/운영 공개 게이트](../stage5-backup-restore-runbook.md)를 작성했다. 별도 중요한 개인정보/사업 승인 없이 보관/운영 재적용 모델·기능을 변경하지 않았다.
-- [ ] exact source 검증·작성자 리뷰·PR 최신 diff/CLEAN/체크·merge commit과 브랜치 보존 확인.
+- [x] source8d077eb20bdd089e688a8ca972f4312cb039cf8c의 필수 검증·작성자 리뷰/P2 보완·최신 main/diff/CLEAN/MERGEABLE·체크 없음을 확인하고 [PR #30](https://github.com/HSU-OAS/bodyguard/pull/30)을 merge4599c7c830cdfee786d21df460976fc5efe1c46a로 main 병합했다. main 포함·로컬/원격 source 브랜치 보존을 확인했다. 다음 독립 Story는 S5.4이며 운영/전체5단계 완료가 아니다.
 
 testing-strategy로 native/단위/주입 경계를 나누고 documentation·code-review로 보안/정확성/운영 승인 경계를 검토했다. bmad-dev-story의 로컬 workflow resolver/config가 없으므로 전체 BMAD 실행을 했다고 주장하지 않고 기존 승인 Story의 실패→구현→검증 순서로 진행했다.
 
