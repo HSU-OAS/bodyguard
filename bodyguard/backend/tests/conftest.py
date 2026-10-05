@@ -53,21 +53,28 @@ def test_database() -> Iterator[Engine]:
     ):
         pytest.fail("Refusing unowned PostgreSQL socket")
     db = create_engine(raw, hide_parameters=True, pool_size=12, max_overflow=8)
-    with db.connect() as connection:
-        assert (
-            180000 <= int(connection.execute(text("SHOW server_version_num")).scalar_one()) < 190000
-        )
-        assert (
-            connection.execute(text("SELECT current_database()")).scalar_one() == "bodyguard_test"
-        )
-    # Migrate the fresh local DB using the same executable migration, not create_all().
-    os.environ["BODYGUARD_DATABASE_URL"] = raw
-    os.environ["BODYGUARD_SECURITY_KEY"] = secrets.token_urlsafe(32)
-    os.environ["BODYGUARD_ENVIRONMENT"] = "development"
-    os.environ["BODYGUARD_ORIGIN"] = ORIGIN
-    command.upgrade(Config("alembic.ini"), "head")
     try:
-        yield db
+        with db.connect() as guard:
+            assert (
+                180000 <= int(guard.execute(text("SHOW server_version_num")).scalar_one()) < 190000
+            )
+            assert guard.execute(text("SELECT current_database()")).scalar_one() == "bodyguard_test"
+            # FR-U-05/NFR-08: never let concurrent harnesses reset another live test's records.
+            lock = "hashtextextended('bodyguard.isolated-test-harness.v1', 0)"
+            if not guard.execute(text(f"SELECT pg_try_advisory_lock({lock})")).scalar_one():
+                pytest.fail("Dedicated test database is busy; refuse migration/reset (no skip)")
+            guard.commit()
+            try:
+                # Executable migration only after acquiring the shared harness ownership lock.
+                os.environ["BODYGUARD_DATABASE_URL"] = raw
+                os.environ["BODYGUARD_SECURITY_KEY"] = secrets.token_urlsafe(32)
+                os.environ["BODYGUARD_ENVIRONMENT"] = "development"
+                os.environ["BODYGUARD_ORIGIN"] = ORIGIN
+                command.upgrade(Config("alembic.ini"), "head")
+                yield db
+            finally:
+                guard.execute(text(f"SELECT pg_advisory_unlock({lock})"))
+                guard.commit()
     finally:
         db.dispose()
 

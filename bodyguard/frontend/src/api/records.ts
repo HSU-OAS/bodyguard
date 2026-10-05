@@ -30,7 +30,7 @@ export function dateRange(from: string, to: string, cutoff: Date) {
   }
 }
 
-function timestamp(value: unknown): value is string {
+export function timestamp(value: unknown): value is string {
   return (
     typeof value === 'string' &&
     validDay(value.slice(0, 10)) &&

@@ -1,0 +1,874 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/node_modules/.pnpm/@playwright+test@1.63.0/node_modules/@playwright/test/cli.js",
+      "test",
+      "records.spec.ts",
+      "--config",
+      "playwright.account.config.ts",
+      "--output",
+      "test-results/records-20261005T043849507838Z"
+    ],
+    "configFile": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/playwright.account.config.ts",
+    "rootDir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/test-results/records-20261005T043849507838Z",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "account.spec.ts",
+          "password.spec.ts",
+          "google.spec.ts",
+          "records.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/records-20261005T043849507838Z/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "pnpm build && vite preview --host localhost",
+      "url": "http://localhost:4173",
+      "reuseExistingServer": false,
+      "timeout": 180000
+    }
+  },
+  "suites": [
+    {
+      "title": "records.spec.ts",
+      "file": "records.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "RD-05 record saved after preview is preserved even with an earlier end time",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3394,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m\n    at join (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:61:29)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:95:3",
+                    "location": {
+                      "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                      "column": 29,
+                      "line": 61
+                    },
+                    "snippet": "  59 |     code,\n  60 |   })\n> 61 |   expect(verified.status()).toBe(201)\n     |                             ^\n  62 |   return email\n  63 | }\n  64 | async function seed("
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                        "column": 29,
+                        "line": 61
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m\n\n  59 |     code,\n  60 |   })\n> 61 |   expect(verified.status()).toBe(201)\n     |                             ^\n  62 |   return email\n  63 | }\n  64 | async function seed(\n    at join (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:61:29)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:95:3"
+                    },
+                    {
+                      "location": {
+                        "file": "<anonymous>",
+                        "column": 16,
+                        "line": 313
+                      },
+                      "message": "Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:37:21"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T04:39:13.196Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/test-results/records-20261005T043849507838Z/records-RD-05-record-saved-93a64-en-with-an-earlier-end-time/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                    "column": 29,
+                    "line": 61
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0b690fe42bbb47a0a0a7-00698d11d3ee913aec13",
+          "file": "records.spec.ts",
+          "line": 91,
+          "column": 1
+        },
+        {
+          "title": "RD-04 foreign proof cannot delete another account and late deletion cannot reopen private UI",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1935,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m401\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m401\u001b[39m\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:125:28",
+                    "location": {
+                      "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                      "column": 28,
+                      "line": 125
+                    },
+                    "snippet": "  123 |     end: new Date(Date.parse(original.ended_at) + 1).toISOString(),\n  124 |   })\n> 125 |   expect(preview.status()).toBe(200)\n      |                            ^\n  126 |   const proof = await preview.json()\n  127 |   expect((await post(context, '/auth/logout')).status()).toBe(204)\n  128 |   await join(context)"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                        "column": 28,
+                        "line": 125
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m401\u001b[39m\n\n  123 |     end: new Date(Date.parse(original.ended_at) + 1).toISOString(),\n  124 |   })\n> 125 |   expect(preview.status()).toBe(200)\n      |                            ^\n  126 |   const proof = await preview.json()\n  127 |   expect((await post(context, '/auth/logout')).status()).toBe(204)\n  128 |   await join(context)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:125:28"
+                    },
+                    {
+                      "location": {
+                        "file": "<anonymous>",
+                        "column": 16,
+                        "line": 313
+                      },
+                      "message": "Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:37:21"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T04:39:21.224Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/test-results/records-20261005T043849507838Z/records-RD-04-foreign-proo-f1966-on-cannot-reopen-private-UI/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                    "column": 28,
+                    "line": 125
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0b690fe42bbb47a0a0a7-774905d4fe80096b6811",
+          "file": "records.spec.ts",
+          "line": 115,
+          "column": 1
+        },
+        {
+          "title": "RD-03 server confirmation expiry preserves record without an automatic retry",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1898,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m\n    at join (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:61:29)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:202:3",
+                    "location": {
+                      "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                      "column": 29,
+                      "line": 61
+                    },
+                    "snippet": "  59 |     code,\n  60 |   })\n> 61 |   expect(verified.status()).toBe(201)\n     |                             ^\n  62 |   return email\n  63 | }\n  64 | async function seed("
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                        "column": 29,
+                        "line": 61
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m\n\n  59 |     code,\n  60 |   })\n> 61 |   expect(verified.status()).toBe(201)\n     |                             ^\n  62 |   return email\n  63 | }\n  64 | async function seed(\n    at join (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:61:29)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:202:3"
+                    },
+                    {
+                      "location": {
+                        "file": "<anonymous>",
+                        "column": 16,
+                        "line": 313
+                      },
+                      "message": "Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:37:21"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T04:39:25.671Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/test-results/records-20261005T043849507838Z/records-RD-03-server-confi-f6972--without-an-automatic-retry/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                    "column": 29,
+                    "line": 61
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0b690fe42bbb47a0a0a7-205d8585cfb4c57fd20b",
+          "file": "records.spec.ts",
+          "line": 188,
+          "column": 1
+        },
+        {
+          "title": "RD-02 changed real SQL target requires another preview and preserves remaining record",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1666,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m\n    at join (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:61:29)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:225:3",
+                    "location": {
+                      "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                      "column": 29,
+                      "line": 61
+                    },
+                    "snippet": "  59 |     code,\n  60 |   })\n> 61 |   expect(verified.status()).toBe(201)\n     |                             ^\n  62 |   return email\n  63 | }\n  64 | async function seed("
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                        "column": 29,
+                        "line": 61
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m\n\n  59 |     code,\n  60 |   })\n> 61 |   expect(verified.status()).toBe(201)\n     |                             ^\n  62 |   return email\n  63 | }\n  64 | async function seed(\n    at join (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:61:29)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:225:3"
+                    },
+                    {
+                      "location": {
+                        "file": "<anonymous>",
+                        "column": 16,
+                        "line": 313
+                      },
+                      "message": "Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:37:21"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T04:39:30.004Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/test-results/records-20261005T043849507838Z/records-RD-02-changed-real-226c7--preserves-remaining-record/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                    "column": 29,
+                    "line": 61
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0b690fe42bbb47a0a0a7-1f329c32b6e6195efb88",
+          "file": "records.spec.ts",
+          "line": 221,
+          "column": 1
+        },
+        {
+          "title": "RD-01 actual preview cancel and confirmed period deletion preserve outside records",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1317,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m202\u001b[39m\nReceived: \u001b[31m403\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m202\u001b[39m\nReceived: \u001b[31m403\u001b[39m\n    at join (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:49:27)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:263:3",
+                    "location": {
+                      "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                      "column": 27,
+                      "line": 49
+                    },
+                    "snippet": "  47 |   const email = `records-${randomUUID()}@example.com`\n  48 |   const signup = await post(context, '/auth/signup', { email, password })\n> 49 |   expect(signup.status()).toBe(202)\n     |                           ^\n  50 |   let code = ''\n  51 |   await expect\n  52 |     .poll(() => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                        "column": 27,
+                        "line": 49
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m202\u001b[39m\nReceived: \u001b[31m403\u001b[39m\n\n  47 |   const email = `records-${randomUUID()}@example.com`\n  48 |   const signup = await post(context, '/auth/signup', { email, password })\n> 49 |   expect(signup.status()).toBe(202)\n     |                           ^\n  50 |   let code = ''\n  51 |   await expect\n  52 |     .poll(() => {\n    at join (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:49:27)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:263:3"
+                    },
+                    {
+                      "location": {
+                        "file": "<anonymous>",
+                        "column": 16,
+                        "line": 313
+                      },
+                      "message": "Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:37:21"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T04:39:34.127Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/test-results/records-20261005T043849507838Z/records-RD-01-actual-previ-fd962-on-preserve-outside-records/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                    "column": 27,
+                    "line": 49
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0b690fe42bbb47a0a0a7-134ca2192edbe18a2278",
+          "file": "records.spec.ts",
+          "line": 259,
+          "column": 1
+        },
+        {
+          "title": "RW-01 protected entry and genuine empty record period",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2314,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m\n    at join (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:61:29)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:302:3",
+                    "location": {
+                      "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                      "column": 29,
+                      "line": 61
+                    },
+                    "snippet": "  59 |     code,\n  60 |   })\n> 61 |   expect(verified.status()).toBe(201)\n     |                             ^\n  62 |   return email\n  63 | }\n  64 | async function seed("
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                        "column": 29,
+                        "line": 61
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m\n\n  59 |     code,\n  60 |   })\n> 61 |   expect(verified.status()).toBe(201)\n     |                             ^\n  62 |   return email\n  63 | }\n  64 | async function seed(\n    at join (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:61:29)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:302:3"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T04:39:38.531Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/test-results/records-20261005T043849507838Z/records-RW-01-protected-en-1fdc8-genuine-empty-record-period/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                    "column": 29,
+                    "line": 61
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0b690fe42bbb47a0a0a7-5e30864f0bba82eda0c5",
+          "file": "records.spec.ts",
+          "line": 296,
+          "column": 1
+        },
+        {
+          "title": "RW-02 actual summaries, detail, Back period and long record narrow layout",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1669,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m\n    at join (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:61:29)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:319:3",
+                    "location": {
+                      "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                      "column": 29,
+                      "line": 61
+                    },
+                    "snippet": "  59 |     code,\n  60 |   })\n> 61 |   expect(verified.status()).toBe(201)\n     |                             ^\n  62 |   return email\n  63 | }\n  64 | async function seed("
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                        "column": 29,
+                        "line": 61
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m\n\n  59 |     code,\n  60 |   })\n> 61 |   expect(verified.status()).toBe(201)\n     |                             ^\n  62 |   return email\n  63 | }\n  64 | async function seed(\n    at join (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:61:29)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:319:3"
+                    },
+                    {
+                      "location": {
+                        "file": "<anonymous>",
+                        "column": 16,
+                        "line": 313
+                      },
+                      "message": "Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:37:21"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T04:39:43.422Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/test-results/records-20261005T043849507838Z/records-RW-02-actual-summa-0fd33-d-long-record-narrow-layout/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                    "column": 29,
+                    "line": 61
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0b690fe42bbb47a0a0a7-e0ba0bba8933fe1e7b44",
+          "file": "records.spec.ts",
+          "line": 315,
+          "column": 1
+        },
+        {
+          "title": "RW-03 actual period filter and invalid input recovery",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1430,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m202\u001b[39m\nReceived: \u001b[31m403\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m202\u001b[39m\nReceived: \u001b[31m403\u001b[39m\n    at join (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:49:27)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:348:3",
+                    "location": {
+                      "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                      "column": 27,
+                      "line": 49
+                    },
+                    "snippet": "  47 |   const email = `records-${randomUUID()}@example.com`\n  48 |   const signup = await post(context, '/auth/signup', { email, password })\n> 49 |   expect(signup.status()).toBe(202)\n     |                           ^\n  50 |   let code = ''\n  51 |   await expect\n  52 |     .poll(() => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                        "column": 27,
+                        "line": 49
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m202\u001b[39m\nReceived: \u001b[31m403\u001b[39m\n\n  47 |   const email = `records-${randomUUID()}@example.com`\n  48 |   const signup = await post(context, '/auth/signup', { email, password })\n> 49 |   expect(signup.status()).toBe(202)\n     |                           ^\n  50 |   let code = ''\n  51 |   await expect\n  52 |     .poll(() => {\n    at join (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:49:27)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:348:3"
+                    },
+                    {
+                      "location": {
+                        "file": "<anonymous>",
+                        "column": 16,
+                        "line": 313
+                      },
+                      "message": "Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:37:21"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T04:39:47.526Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/test-results/records-20261005T043849507838Z/records-RW-03-actual-perio-7ef3e--and-invalid-input-recovery/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                    "column": 27,
+                    "line": 49
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0b690fe42bbb47a0a0a7-8bfc5d03b254fb12bc09",
+          "file": "records.spec.ts",
+          "line": 347,
+          "column": 1
+        },
+        {
+          "title": "RW-04 actual bounded pagination uses one cutoff and keyboard",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1739,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m\n    at join (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:61:29)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:371:3",
+                    "location": {
+                      "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                      "column": 29,
+                      "line": 61
+                    },
+                    "snippet": "  59 |     code,\n  60 |   })\n> 61 |   expect(verified.status()).toBe(201)\n     |                             ^\n  62 |   return email\n  63 | }\n  64 | async function seed("
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                        "column": 29,
+                        "line": 61
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m\n\n  59 |     code,\n  60 |   })\n> 61 |   expect(verified.status()).toBe(201)\n     |                             ^\n  62 |   return email\n  63 | }\n  64 | async function seed(\n    at join (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:61:29)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:371:3"
+                    },
+                    {
+                      "location": {
+                        "file": "<anonymous>",
+                        "column": 16,
+                        "line": 313
+                      },
+                      "message": "Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:37:21"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T04:39:51.325Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/test-results/records-20261005T043849507838Z/records-RW-04-actual-bound-b641f-ses-one-cutoff-and-keyboard/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                    "column": 29,
+                    "line": 61
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0b690fe42bbb47a0a0a7-75b8e4e29662a34fffe7",
+          "file": "records.spec.ts",
+          "line": 367,
+          "column": 1
+        },
+        {
+          "title": "RW-05 read failure recovery and cancelled late response after real logout",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1717,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m\n    at join (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:61:29)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:398:3",
+                    "location": {
+                      "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                      "column": 29,
+                      "line": 61
+                    },
+                    "snippet": "  59 |     code,\n  60 |   })\n> 61 |   expect(verified.status()).toBe(201)\n     |                             ^\n  62 |   return email\n  63 | }\n  64 | async function seed("
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                        "column": 29,
+                        "line": 61
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m201\u001b[39m\nReceived: \u001b[31m400\u001b[39m\n\n  59 |     code,\n  60 |   })\n> 61 |   expect(verified.status()).toBe(201)\n     |                             ^\n  62 |   return email\n  63 | }\n  64 | async function seed(\n    at join (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:61:29)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:398:3"
+                    },
+                    {
+                      "location": {
+                        "file": "<anonymous>",
+                        "column": 16,
+                        "line": 313
+                      },
+                      "message": "Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:37:21"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T04:39:55.680Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/test-results/records-20261005T043849507838Z/records-RW-05-read-failure-1a7af--response-after-real-logout/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                    "column": 29,
+                    "line": 61
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0b690fe42bbb47a0a0a7-d506c837b790cc463f40",
+          "file": "records.spec.ts",
+          "line": 394,
+          "column": 1
+        },
+        {
+          "title": "RW-06 own-only detail, second account and Back after logout",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 10,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6931,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('fixture-not-release', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('fixture-not-release', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('fixture-not-release', { exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('fixture-not-release', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('fixture-not-release', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('fixture-not-release', { exact: true })\u001b[22m\n\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:444:72",
+                    "location": {
+                      "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                      "column": 72,
+                      "line": 444
+                    },
+                    "snippet": "  442 |   const record = await seed(context)\n  443 |   await page.goto(`/records/${record.id}`)\n> 444 |   await expect(page.getByText('fixture-not-release', { exact: true })).toBeVisible()\n      |                                                                        ^\n  445 |   expect((await post(context, '/auth/logout')).status()).toBe(204)\n  446 |   await page.evaluate(() => window.dispatchEvent(new Event('focus')))\n  447 |   await expect(page.getByRole('heading', { name: '다시 만나 반갑습니다' })).toBeVisible()"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                        "column": 72,
+                        "line": 444
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('fixture-not-release', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('fixture-not-release', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('fixture-not-release', { exact: true })\u001b[22m\n\n\n  442 |   const record = await seed(context)\n  443 |   await page.goto(`/records/${record.id}`)\n> 444 |   await expect(page.getByText('fixture-not-release', { exact: true })).toBeVisible()\n      |                                                                        ^\n  445 |   expect((await post(context, '/auth/logout')).status()).toBe(204)\n  446 |   await page.evaluate(() => window.dispatchEvent(new Event('focus')))\n  447 |   await expect(page.getByRole('heading', { name: '다시 만나 반갑습니다' })).toBeVisible()\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts:444:72"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T04:39:59.964Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/test-results/records-20261005T043849507838Z/records-RW-06-own-only-det-04442-count-and-Back-after-logout/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-stage2-motion-selection/bodyguard/frontend/e2e/records.spec.ts",
+                    "column": 72,
+                    "line": 444
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0b690fe42bbb47a0a0a7-97cb407ba9749bc46e11",
+          "file": "records.spec.ts",
+          "line": 437,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-05T04:38:51.060Z",
+    "duration": 77398.01800000001,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 11,
+    "flaky": 0
+  }
+}

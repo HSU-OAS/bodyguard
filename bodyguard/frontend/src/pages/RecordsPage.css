@@ -1,4 +1,26 @@
 /* FR-R-03/NFR-08: neutral comparative records, not medical score decoration. */
+/* FR-U-05: a distinct, restrained destructive action and wrapping confirmation. */
+.record-deletion {
+  margin: 24px 0;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+.record-deletion p {
+  margin-top: 12px;
+  max-width: 680px;
+}
+.record-deletion-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+.website .button.destructive {
+  background: #943a32;
+  border-color: #943a32;
+  color: white;
+}
 .records-screen {
   padding: 64px 0 80px;
   min-height: 620px;
