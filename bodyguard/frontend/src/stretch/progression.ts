@@ -18,6 +18,7 @@ type Gates = Readonly<{
   referenceAvatarReady: boolean
   userAvatarReady: boolean
 }>
+// FR-S-04/NFR-07/08: preserve bounded technical termination causes, never fabricate pose errors.
 type EndReason =
   | 'user-stop'
   | 'pain'
@@ -27,6 +28,11 @@ type EndReason =
   | 'inference-error'
   | 'asset-error'
   | 'motion-withdrawn'
+  | 'ownership-error'
+  | 'cleanup-error'
+  | 'clock-error'
+  | 'gate-error'
+  | 'callback-error'
   | 'skip'
 export type CoachingEvent =
   | { type: 'start' | 'resume'; now: number; gates: Gates }
@@ -245,6 +251,11 @@ export function advanceCoaching(original: CoachingState, event: CoachingEvent): 
       'inference-error',
       'asset-error',
       'motion-withdrawn',
+      'ownership-error',
+      'cleanup-error',
+      'clock-error',
+      'gate-error',
+      'callback-error',
       'skip',
     ].includes(event.reason)
       ? event.reason

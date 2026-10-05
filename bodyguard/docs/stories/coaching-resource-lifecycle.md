@@ -1,6 +1,6 @@
 # S2.5c — 코칭 자원 수명주기의 독립 연결 기초
 
-최종 통합 준비의 독립 기초 구현·회귀/작성자 검토 완료 · PR 게이트 진행 / main d348fb8b04d2d43572a0281f0e0e3e632f2ef90e · codex/coaching-resource-lifecycle
+최종 통합 준비의 독립 기초 main 병합 · PR #34 source daf09667f0f151fa79f48782c3cbf3cec8f769a4 / merge cf841070485c5ce777181a8b71b0426f55ecfbbe · codex/coaching-resource-lifecycle
 
 ## 선행 상태와 범위
 
@@ -27,7 +27,7 @@ FR-S-02/03/04·FR-M-07·FR-A-03·FR-U-04·NFR-07/08에 따라 순수 진행 엔�
 - [x] 실제 Vitest exit1/ERR_MODULE_NOT_FOUND의 [최초 XML/실행 경계](../review/coaching-resources/README.md)를 보존했다. 최초 수집 실패에서는 factory/자원 case가 미실행이었고 기능 통과가 아니었다.
 - [x] 나머지 결정적 하네스·controller/engine effect 연결 합성 구현/green 검증. 자원40건 포함 전체 Vitest367건 실패/오류/skip0이다.
 - [x] production 제외·정적/회귀·실패 보존·작성자 리뷰P2 두 건 보완/재검증. 실제 production build·정적 검사·Chrome7흐름 및 누출 감시 음성 시험을 실행했다.
-- [ ] exact source/최신 diff·main·CLEAN/체크·조건부 merge commit/main 포함·source 보존 확인.
+- [x] exact source daf09667·최신 main/diff·CLEAN/MERGEABLE·체크 없음·scope P1/P2 없음 후 merge cf841070으로 PR #34를 병합했다. 실제 부모/main 포함과 로컬/원격 source 브랜치 보존·working tree clean을 확인했다.
 
 Stage2 D2-A/M/T/R/I/P는 아직 해소되지 않았다. 외부 연결·참여자·Q-17/26/32·운영/라이선스·확정 부가 기능·전체1~6단계는 미완료다. 중요한 안전/개인정보·계정/secret/비용·운영 DB·배포/출시는 별도 승인이다.
 

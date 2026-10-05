@@ -1,0 +1,20 @@
+$ tsc --noEmit
+src/coaching/session.test.ts(129,47): error TS2322: Type 'Promise<{ dispose: Mock<Procedure | Constructable>; }>' is not assignable to type 'Promise<{ dispose: Mock<Procedure>; }>'.
+  Type '{ dispose: Mock<Procedure | Constructable>; }' is not assignable to type '{ dispose: Mock<Procedure>; }'.
+    Types of property 'dispose' are incompatible.
+      Type 'Mock<Procedure | Constructable>' is not assignable to type 'Mock<Procedure>'.
+        Type 'MockInstance<Procedure | Constructable> & { (...args: any[]): any; new (...args: any[]): any; } & {}' is not assignable to type 'Mock<Procedure>'.
+          The types returned by 'getMockImplementation()' are incompatible between these types.
+            Type '((...args: any[]) => any) | (new (...args: any[]) => any) | ((this: any, ...args: any[]) => void) | undefined' is not assignable to type '((...args: any[]) => any) | undefined'.
+              Type 'new (...args: any[]) => any' is not assignable to type '(...args: any[]) => any'.
+                Type 'new (...args: any[]) => any' provides no match for the signature '(...args: any[]): any'.
+src/coaching/session.test.ts(153,50): error TS2322: Type 'Promise<{ dispose: Mock<Procedure | Constructable>; }>' is not assignable to type 'Promise<{ dispose: Mock<Procedure>; }>'.
+  Type '{ dispose: Mock<Procedure | Constructable>; }' is not assignable to type '{ dispose: Mock<Procedure>; }'.
+    Types of property 'dispose' are incompatible.
+      Type 'Mock<Procedure | Constructable>' is not assignable to type 'Mock<Procedure>'.
+        Type 'MockInstance<Procedure | Constructable> & { (...args: any[]): any; new (...args: any[]): any; } & {}' is not assignable to type 'Mock<Procedure>'.
+          The types returned by 'getMockImplementation()' are incompatible between these types.
+            Type '((...args: any[]) => any) | (new (...args: any[]) => any) | ((this: any, ...args: any[]) => void) | undefined' is not assignable to type '((...args: any[]) => any) | undefined'.
+              Type 'new (...args: any[]) => any' is not assignable to type '(...args: any[]) => any'.
+                Type 'new (...args: any[]) => any' provides no match for the signature '(...args: any[]): any'.
+[ELIFECYCLE] Command failed with exit code 2.

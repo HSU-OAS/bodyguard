@@ -1,5 +1,9 @@
 # Bodyguard — Tasks
 
+최신: [세션·페이지 수명 연결](stories/coaching-session-bridge.md)은 실제 진행 엔진/자원 controller에 만료·중단·이탈과 관찰 입력을 연결했다. 합성 세션44건/전체411건·정적/build·공개 웹 Chrome7흐름을 검증했고 타입 실패·작성자P2의 종료 시각/즉시 listener 해제/gate getter 예외를 보존/보완했다. [실패·현재 화면](review/coaching-session/README.md). PR 게이트 진행이다. 다음 독립 연결은 실제 카메라/추론 자원의 소유 포트이며 실제 에셋/실측/공개 코칭·결과 저장·외부/운영·부가 기능·참여자/전체1~6단계는 미완료 유지한다. 실제 시험 참여 가능 여부만 요청했고 동의/실측 완료를 가정하지 않는다. 아래는 시점별 기록이다.
+
+최신: [PR #34](https://github.com/HSU-OAS/bodyguard/pull/34)는 실제 검증/작성자 P2 보완·latest main/diff/CLEAN·체크 없음 후 exact source daf09667의 merge cf841070으로 main에 반영됐다. 부모·main 포함/source 브랜치 보존을 확인했다. 최신 main의 codex/coaching-session-bridge에서 [세션·페이지 수명 연결 기초](stories/coaching-session-bridge.md) 명세·하네스를 진행한다. 실제 카메라/모델/에셋·코칭 공개/실측·이월·전체1~6단계는 미완료 유지한다. 화이트·블루 웹 디자인을 유지하고 UI 수정 시 지정된 web-design-studio를 적용한다. 아래는 시점별 기록이다.
+
 최신: [코칭 자원 연결 기초](stories/coaching-resource-lifecycle.md)는 준비/중단/교체/늦은 응답·1회 해제/소유권 재사용 방지를 구현했다. 합성40건 포함 전체367건·정적/build·실제 공개 웹 Chrome7흐름이 통과했고 작성자 리뷰P2 두 건은 red 재현 후 수정했다. [실패/원본 hash·현재 화면](review/coaching-resources/README.md). PR 게이트 진행이며 실제 카메라·모델/두 아바타/소유 track·worker·GPU·코칭/기록 producer·Stage2 이월·전체3~6단계 게이트는 미완료다. 다음 독립 작업은 세션/중단/페이지 수명과 진행 엔진의 실제 연결이며 공개 코칭은 선행 게이트 통과 전 활성화하지 않는다. 아래는 시점별 기록이다.
 
 최초 자원 Vitest는 모듈 수집 실패였고 당시 factory/자원 case는 미실행이었다. 그 원본/실패 기록은 삭제하거나 green으로 바꾸지 않고 보존했다.
