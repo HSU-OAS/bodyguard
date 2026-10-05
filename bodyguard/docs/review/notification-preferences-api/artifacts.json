@@ -1,0 +1,145 @@
+{
+  "actual_postgresql_http_migration_restore": true,
+  "synthetic_mail_clock": true,
+  "notification_ui_connected": false,
+  "notification_firing_verified": false,
+  "operational_migration_deployment_approved": false,
+  "artifacts": [
+    {
+      "name": "contract-red.xml",
+      "raw_sha256": "8ac269fe2d1d66e0dd82be00ee1eea7a6d8df6ee9c74a1c4b362945fd3e5802e",
+      "public_sha256": "2b5d4e57d8ae07cc3a27abef68e54b7a6932bde932a3c6275e153956659d1a00"
+    },
+    {
+      "name": "initial-green.xml",
+      "raw_sha256": "1a25c3255f18263560f696c9dcaf31abb0fd5e46757edae0bcafa6e6d1610f30",
+      "public_sha256": "3d05ace9564ea545ef8ae3d50b7929f903f1f0b2c3080113fbf2bc4447d0d0b5"
+    },
+    {
+      "name": "review-green.xml",
+      "raw_sha256": "2dfc6db0ea10cac9cb6ab102374fcf1688e17245f66d08b3b17c5660e2508346",
+      "public_sha256": "cc2e617cfd1df303709a6ebdc8a3beac8c494e4b060d11bd8840be5caffb8e05"
+    },
+    {
+      "name": "full-backend.xml",
+      "raw_sha256": "a139794642d80e104a6afd676da67a24ab8d80a142302fb2d5f33e5298f0fe09",
+      "public_sha256": "b1e11a8f686674bb596e127e8336bedbbd4870a93fab160422ab595fd677124b"
+    },
+    {
+      "name": "full-backend.stdout",
+      "raw_sha256": "45b4761ea0928375d3dc2b8d0aa5b4cd4303f7f8c589f41d11f9a73f8932ad52",
+      "public_sha256": "a42233d970865bdade083f5252cd3772f62bc01ba5e8d4e7257d051da35ef201"
+    },
+    {
+      "name": "full-frontend.xml",
+      "raw_sha256": "ef3c3f18597d85827d5b93741505ed2645c295a37d2a2af9feab2075e70b00bc",
+      "public_sha256": "c82abfd79a5c5754c2f554392bfe9dc1b18250ece8bb979013f1fca9c12bed85"
+    },
+    {
+      "name": "accepted-ruff.stdout",
+      "raw_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "public_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "name": "accepted-mypy.stdout",
+      "raw_sha256": "46984ca20bf69f7b14ec1fd9bd82101d56a4e109e68f016fd2a04f22481b09b3",
+      "public_sha256": "46984ca20bf69f7b14ec1fd9bd82101d56a4e109e68f016fd2a04f22481b09b3"
+    },
+    {
+      "name": "frontend-types.stdout",
+      "raw_sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92",
+      "public_sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92"
+    },
+    {
+      "name": "frontend-check.stdout",
+      "raw_sha256": "fdd3f16e6aefffabeca03053436ec0c54d6b64fd7a9ed5c835f850ff4f250d62",
+      "public_sha256": "fdd3f16e6aefffabeca03053436ec0c54d6b64fd7a9ed5c835f850ff4f250d62"
+    },
+    {
+      "name": "frontend-build.stdout",
+      "raw_sha256": "bcbb430c20ba97e2e2c5247df7ab398c19c1e140f2122146856e1fa0025a9ad9",
+      "public_sha256": "bcbb430c20ba97e2e2c5247df7ab398c19c1e140f2122146856e1fa0025a9ad9"
+    },
+    {
+      "name": "production-guard.stdout",
+      "raw_sha256": "794b9fa8ca181480df198fbb5c2e4fb7e6d4f7f34866a6e52612dda4527428c0",
+      "public_sha256": "794b9fa8ca181480df198fbb5c2e4fb7e6d4f7f34866a6e52612dda4527428c0"
+    },
+    {
+      "name": "offline-install.stdout",
+      "raw_sha256": "79a2e3a0158df239e2c2784abf7042636511a52730680809ec3f74029b9f4c67",
+      "public_sha256": "79a2e3a0158df239e2c2784abf7042636511a52730680809ec3f74029b9f4c67"
+    },
+    {
+      "name": "generated-repeat-check.stdout",
+      "raw_sha256": "347f58b4723406cb55c03059791a735431d42ec0fc92d9d96cf043d491a6a8a8",
+      "public_sha256": "347f58b4723406cb55c03059791a735431d42ec0fc92d9d96cf043d491a6a8a8"
+    }
+  ],
+  "sources": [
+    {
+      "name": "bodyguard/backend/app/notification_preferences.py",
+      "sha256": "3e611a2745045c635fa0c422bb42849cfa6605332c16931f17498ee292a17cd8"
+    },
+    {
+      "name": "bodyguard/backend/app/db.py",
+      "sha256": "7ac2cee0d8cbfa21348aaeb77775e1cb72aed8bdea0451ae1d73e3b55909c104"
+    },
+    {
+      "name": "bodyguard/backend/app/main.py",
+      "sha256": "e07d30147d3a5d556babe30e40cb156dc8f660ba9d5d6eebddea35e9c63e6cfd"
+    },
+    {
+      "name": "bodyguard/backend/app/readiness.py",
+      "sha256": "f6c9ad67cba99111f42ed28b4136e7f2e22af35b06b0147a6641e20ba4713d16"
+    },
+    {
+      "name": "bodyguard/backend/migrations/versions/0006_notification_preferences.py",
+      "sha256": "38cab62ddef4ebcff62508bd1c224fb021be0881f82dd172180de772332dcd8b"
+    },
+    {
+      "name": "bodyguard/backend/tests/test_notification_preferences.py",
+      "sha256": "929c7c8536361e0d5ffcecb474ba1bf9e5c14e5c041c7880157fe692f33fa4f1"
+    },
+    {
+      "name": "bodyguard/backend/tests/backup_restore_proof.py",
+      "sha256": "68796acaac6a4522b12f9f0f0e9ed7f2bb7e15d5e99b701b524a04cc7bc451f4"
+    },
+    {
+      "name": "bodyguard/backend/tests/test_backup_restore_proof.py",
+      "sha256": "5bafabc5661403acde324754079ab1ce1a1681053c4ac4b242ade519ddb06947"
+    },
+    {
+      "name": "bodyguard/backend/tests/test_account_withdrawal.py",
+      "sha256": "1a6ae1412b4466cee17d582fdb0946ab9894543cce72ec263c408a4eb60e7271"
+    },
+    {
+      "name": "bodyguard/backend/tests/test_auth.py",
+      "sha256": "c92aff6da09b0aff71e255ef03204713cbff4db5d83eb0fee952ffb40c96b175"
+    },
+    {
+      "name": "bodyguard/backend/tests/test_google_auth.py",
+      "sha256": "6aae979a31eff3948ce790d1f60e28667249ba75d6fc3b9def1c53b9f3256dca"
+    },
+    {
+      "name": "bodyguard/backend/tests/test_password_reset.py",
+      "sha256": "b5a63142fdbe5f8395601d8a11c2ba765b75e9bd079bbb2c6e12e78491b70ff2"
+    },
+    {
+      "name": "bodyguard/backend/tests/test_readiness.py",
+      "sha256": "a2d10358fdf02e601c685edfb2a5d1cd5ba7a44a311ac0ce590f2b1d4356b706"
+    },
+    {
+      "name": "bodyguard/backend/tests/test_records_integrity.py",
+      "sha256": "33d5c4faa0033d648fee9a2e655ec40b11787eb5c203e055826b60f7b63d2952"
+    },
+    {
+      "name": "bodyguard/frontend/src/api/generated/index.ts",
+      "sha256": "1d0dabd0a1e1e204b11aff005c7534fba0907112d1121e828c14c6840fffc026"
+    },
+    {
+      "name": "bodyguard/frontend/src/api/generated/types.gen.ts",
+      "sha256": "f3582699dab0dab34a96cd8b3ca4cee179026253732f96badf7b29bcbbe893a5"
+    }
+  ]
+}
