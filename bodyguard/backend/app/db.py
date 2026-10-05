@@ -72,6 +72,7 @@ google_flows = Table(
     Column("expires_at", DateTime(timezone=True), nullable=False, index=True),
     Column("used_at", DateTime(timezone=True)),
 )
+Index("ix_google_flows_session", google_flows.c.session_hash)
 challenges = Table(
     "signup_challenges",
     metadata,
@@ -101,6 +102,7 @@ sessions = Table(
         name="session_credentials_version_matches_user",
     ),
 )
+Index("ix_sessions_owner", sessions.c.user_id)
 resets = Table(
     "password_resets",
     metadata,
@@ -117,4 +119,18 @@ limits = Table(
     Column("count", Integer, nullable=False),
     Column("expires_at", DateTime(timezone=True), nullable=False, index=True),
     CheckConstraint("count >= 0", name="auth_limit_count_nonnegative"),
+)
+withdrawals = Table(
+    "account_withdrawals",
+    metadata,
+    Column("user_id", String(36), ForeignKey("users.id", ondelete="CASCADE"), primary_key=True),
+    Column("challenge_hash", String(64), nullable=False, unique=True),
+    Column("session_hash", String(64), nullable=False),
+    Column("credentials_version", Integer, nullable=False),
+    Column("code_hash", String(64)),
+    Column("created_at", DateTime(timezone=True), nullable=False),
+    Column("expires_at", DateTime(timezone=True), nullable=False),
+    Column("attempts", Integer, nullable=False),
+    CheckConstraint("attempts >= 0 AND attempts <= 5", name="withdrawal_attempts_range"),
+    CheckConstraint("credentials_version >= 0", name="withdrawal_credentials_version"),
 )

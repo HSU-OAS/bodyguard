@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="34" time="12.353" timestamp="2026-10-05T15:14:08.338724+09:00" hostname="MacBook-Air.local"><testcase classname="tests.test_account_withdrawal" name="test_w01_start_does_not_delete_and_explicit_confirmation_removes_owner" time="0.418" /><testcase classname="tests.test_account_withdrawal" name="test_w02_wrong_code_keeps_account_and_record" time="0.196" /><testcase classname="tests.test_account_withdrawal" name="test_w03_email_field_cannot_redirect_confirmation" time="0.163" /><testcase classname="tests.test_account_withdrawal" name="test_w04_expiry_and_clock_reversal[599.999-204]" time="0.167" /><testcase classname="tests.test_account_withdrawal" name="test_w04_expiry_and_clock_reversal[600-400]" time="0.190" /><testcase classname="tests.test_account_withdrawal" name="test_w04_expiry_and_clock_reversal[600.001-400]" time="0.268" /><testcase classname="tests.test_account_withdrawal" name="test_w04_expiry_and_clock_reversal[-1-400]" time="0.230" /><testcase classname="tests.test_account_withdrawal" name="test_w04_five_wrong_attempts_and_latest_proof_only" time="0.258" /><testcase classname="tests.test_account_withdrawal" name="test_w05_new_session_cannot_consume_old_proof" time="0.300" /><testcase classname="tests.test_account_withdrawal" name="test_w05_signup_code_not_a_withdrawal_proof" time="0.212" /><testcase classname="tests.test_account_withdrawal" name="test_w05_credentials_change_invalidates_withdrawal" time="0.335" /><testcase classname="tests.test_account_withdrawal" name="test_w06_failed_mail_revokes_previous_and_consumes_quota" time="0.298" /><testcase classname="tests.test_account_withdrawal" name="test_w07_origin_csrf_guest_get_never_delete[start]" time="0.241" /><testcase classname="tests.test_account_withdrawal" name="test_w07_origin_csrf_guest_get_never_delete[confirm]" time="0.242" /><testcase classname="tests.test_account_withdrawal" name="test_w07_invalid_payload_not_reflected_or_mutated[change0]" time="0.276" /><testcase classname="tests.test_account_withdrawal" name="test_w07_invalid_payload_not_reflected_or_mutated[change1]" time="0.262" /><testcase classname="tests.test_account_withdrawal" name="test_w07_invalid_payload_not_reflected_or_mutated[change2]" time="0.235" /><testcase classname="tests.test_account_withdrawal" name="test_w07_invalid_payload_not_reflected_or_mutated[change3]" time="0.227" /><testcase classname="tests.test_account_withdrawal" name="test_w07_invalid_payload_not_reflected_or_mutated[change4]" time="0.219" /><testcase classname="tests.test_account_withdrawal" name="test_w07_invalid_payload_not_reflected_or_mutated[change5]" time="0.215" /><testcase classname="tests.test_account_withdrawal" name="test_w08_other_account_cannot_consume_proof_and_survives" time="0.439" /><testcase classname="tests.test_account_withdrawal" name="test_w08_all_private_rows_and_stale_proofs_removed_rejoin_is_fresh" time="0.528" /><testcase classname="tests.test_account_withdrawal" name="test_w09_google_owned_account_uses_verified_email" time="0.188" /><testcase classname="tests.test_account_withdrawal" name="test_w10_post_cascade_failure_rolls_back_everything" time="0.203" /><testcase classname="tests.test_account_withdrawal" name="test_w11_actual_migration_preserves_records_and_refuses_pending_proof_loss" time="0.243" /><testcase classname="tests.test_account_withdrawal" name="test_w12_smtp_has_withdrawal_purpose_not_signup_or_reset" time="0.084" /><testcase classname="tests.test_account_withdrawal" name="test_w12_synthetic_mail_cannot_launch_real_server" time="0.255" /><testcase classname="tests.test_withdrawal_races" name="test_w13_opposing_sql_locks_preserve_then_explicit_retry[record]" time="0.496" /><testcase classname="tests.test_withdrawal_races" name="test_w13_opposing_sql_locks_preserve_then_explicit_retry[reset]" time="3.042" /><testcase classname="tests.test_withdrawal_races" name="test_w13_opposing_sql_locks_preserve_then_explicit_retry[cleanup]" time="0.631"><failure message="AssertionError: ('cleanup', '')&#10;assert 204 == 503&#10; +  where 204 = &lt;Response [204 No Content]&gt;.status_code">harness = &lt;tests.conftest.Harness object at 0x107abe2e0&gt;, operation = 'cleanup'
+
+    @pytest.mark.parametrize("operation", ["record", "reset", "cleanup", "signup-verify"])
+    def test_w13_opposing_sql_locks_preserve_then_explicit_retry(
+        harness: Harness,
+        operation: str,
+    ) -&gt; None:
+        h = harness
+        owner = h.account()
+        second = other_session(h)
+        headers = h.csrf(second)
+        record = payload(h)
+        reset_link = request_link(h) if operation == "reset" else None
+        pending, pending_code = None, None
+        anonymous = h.new_client(peer="independent-request")
+        anon_headers = h.csrf(anonymous)
+        if operation == "signup-verify":
+            old = h.client
+            try:
+                h.client = anonymous
+                pending = h.signup()
+                pending_code = h.mail.messages[-1][1]
+            finally:
+                h.client = old
+        if operation == "cleanup":
+            with h.engine.begin() as c:
+                c.execute(
+                    insert(sessions).values(
+                        token_hash=digest("synthetic-expired-session"),
+                        user_id=owner,
+                        credentials_version=0,
+                        created_at=h.clock.now - timedelta(hours=2),
+                        last_seen_at=h.clock.now - timedelta(hours=2),
+                        expires_at=h.clock.now - timedelta(hours=1),
+                    )
+                )
+        challenge, code = begin(h)
+        own_headers = h.csrf()
+        entered, release = threading.Event(), threading.Event()
+
+        def after_sql(*args: object) -&gt; None:
+            statement = str(args[2])
+            target = {
+                "record": statement.startswith("INSERT INTO stretch_records"),
+                "reset": statement.startswith("UPDATE users SET password_hash"),
+                "cleanup": statement.startswith("DELETE FROM sessions"),
+                "signup-verify": (
+                    statement.startswith("SELECT signup_challenges")
+                    and statement.endswith("FOR UPDATE")
+                ),
+            }[operation]
+            if target and not entered.is_set():
+                entered.set()
+                assert release.wait(5), "owned competing SQL transaction was not released"
+
+        def competing() -&gt; int:
+            if operation == "record":
+                return second.post("/api/v1/records/stretch", headers=headers, json=record).status_code
+            if operation == "reset":
+                return second.post(
+                    "/api/v1/auth/password/reset",
+                    headers=headers,
+                    json={"token": reset_link, "password": NEW_PASSWORD},
+                ).status_code
+            if operation == "signup-verify":
+                return anonymous.post(
+                    "/api/v1/auth/verify",
+                    headers=anon_headers,
+                    json={"challenge_id": pending, "code": pending_code},
+                ).status_code
+            return anonymous.get("/api/v1/auth/csrf").status_code
+
+        event.listen(h.engine, "after_cursor_execute", after_sql)
+        try:
+            with ThreadPoolExecutor(1) as pool:
+                work = pool.submit(competing)
+                try:
+                    assert entered.wait(3), operation
+                    result = h.client.post(
+                        "/api/v1/me/delete/confirm",
+                        headers=own_headers,
+                        json={
+                            "challenge_id": challenge,
+                            "code": code,
+                            "confirmation": "delete-my-account",
+                        },
+                    )
+                    # No partial deletion, deadlock victim or silent success is accepted.
+&gt;                   assert result.status_code == 503, (operation, result.text)
+E                   AssertionError: ('cleanup', '')
+E                   assert 204 == 503
+E                    +  where 204 = &lt;Response [204 No Content]&gt;.status_code
+
+tests/test_withdrawal_races.py:115: AssertionError</failure></testcase><testcase classname="tests.test_withdrawal_races" name="test_w13_opposing_sql_locks_preserve_then_explicit_retry[signup-verify]" time="0.453" /><testcase classname="tests.test_withdrawal_races" name="test_w13_concurrent_confirmation_never_deletes_twice" time="0.281" /><testcase classname="tests.test_withdrawal_races" name="test_w13_quota_recreated_after_actual_delete_between_snapshots" time="0.085" /><testcase classname="tests.test_withdrawal_races" name="test_w14_other_session_and_signup_locks_are_not_skipped" time="0.187" /></testsuite></testsuites>
