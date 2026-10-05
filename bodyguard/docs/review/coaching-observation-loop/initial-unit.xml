@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="15" failures="0" errors="0" time="0.953276083">
+    <testsuite name="src/coaching/observationLoop.test.ts" timestamp="2026-10-05T14:21:44.944Z" hostname="local-test-host" tests="15" failures="0" errors="0" skipped="0" time="0.953276083">
+        <testcase classname="src/coaching/observationLoop.test.ts" name="L01 constructor/idle never schedules or reads frames" time="0.003716417">
+        </testcase>
+        <testcase classname="src/coaching/observationLoop.test.ts" name="L01 pending preparation does not schedule until real session resource ready" time="0.001285667">
+        </testcase>
+        <testcase classname="src/coaching/observationLoop.test.ts" name="L02 null is not target and single pending provider still allows tick but no overlap" time="0.208726416">
+        </testcase>
+        <testcase classname="src/coaching/observationLoop.test.ts" name="L03 original observations reach real engine unmodified and start/target/return completes" time="0.206665333">
+        </testcase>
+        <testcase classname="src/coaching/observationLoop.test.ts" name="L03 generation remains withheld by the engine, not corrected by loop" time="0.053861584">
+        </testcase>
+        <testcase classname="src/coaching/observationLoop.test.ts" name="L03 step remains withheld by the engine, not corrected by loop" time="0.05257">
+        </testcase>
+        <testcase classname="src/coaching/observationLoop.test.ts" name="L03 multiple remains withheld by the engine, not corrected by loop" time="0.052997625">
+        </testcase>
+        <testcase classname="src/coaching/observationLoop.test.ts" name="L03 unobservable remains withheld by the engine, not corrected by loop" time="0.051998791">
+        </testcase>
+        <testcase classname="src/coaching/observationLoop.test.ts" name="L04 past provider resolve cannot affect resumed generation" time="0.054052459">
+        </testcase>
+        <testcase classname="src/coaching/observationLoop.test.ts" name="L04 past provider reject cannot affect resumed generation" time="0.052694334">
+        </testcase>
+        <testcase classname="src/coaching/observationLoop.test.ts" name="L04 permanent close cancels without waiting for an unresolved provider or restarting" time="0.053516">
+        </testcase>
+        <testcase classname="src/coaching/observationLoop.test.ts" name="L05 provider throw ends with fixed inference-error and frees actual session claims" time="0.052196958">
+        </testcase>
+        <testcase classname="src/coaching/observationLoop.test.ts" name="L05 provider reject ends with fixed inference-error and frees actual session claims" time="0.052992">
+        </testcase>
+        <testcase classname="src/coaching/observationLoop.test.ts" name="L05 scheduler request failure ends with callback-error without raw error escape" time="0.001512916">
+        </testcase>
+        <testcase classname="src/coaching/observationLoop.test.ts" name="L06 expiry on tick stops provider and queued work rather than restarting" time="0.052039167">
+        </testcase>
+    </testsuite>
+</testsuites>

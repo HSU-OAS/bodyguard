@@ -32,6 +32,9 @@ for (const file of files) {
     'gate-error',
     'callback-error',
     'PRIVATE_COORDINATES_ACCOUNT_FAILURE',
+    'Invalid observation scheduler',
+    'PRIVATE_OBSERVATION_LOOP_COORDINATES',
+    'probeObservationLoop',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -43,5 +46,6 @@ console.log(
     unconnected_coaching_engine_strings: 0,
     unconnected_coaching_resource_strings: 0,
     unconnected_coaching_session_strings: 0,
+    unconnected_observation_loop_strings: 0,
   }),
 )
