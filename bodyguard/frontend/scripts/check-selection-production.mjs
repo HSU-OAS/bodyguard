@@ -47,6 +47,8 @@ for (const file of files) {
     'prepareRecordedProbe',
     'mountAuthCoachingProbe',
     'preparation-error',
+    'Invalid minute aggregation',
+    'PRIVATE_SUMMARY_COORDINATES_ACCOUNT',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -63,5 +65,6 @@ console.log(
     unconnected_record_owner_capture_strings: 0,
     unconnected_recorded_session_strings: 0,
     unconnected_auth_coaching_hook_strings: 0,
+    unconnected_minute_aggregation_strings: 0,
   }),
 )
