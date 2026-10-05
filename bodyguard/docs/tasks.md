@@ -1,5 +1,9 @@
 # Bodyguard — Tasks
 
+최신: [S6.2 현재 웹 계정·기록 보안 경계](stories/stage6-web-security.md)의 실제 두 계정 소유권/독립 invalid 입력·다른 세션 CSRF/삭제 proof·로그아웃 cookie 재전송·Chrome CORS/origin 거부와 정상 기록 보존을 확인했다. [작동 화면·실패/작성자 리뷰](review/stage6-web-security/README.md). 제품/API·화이트·블루 디자인/안전·privacy 정책 변경 없이 검증했고 PR 게이트 진행이다. Docker는 socket 부재로 여전히 미연결이며 아바타·실측·실제 코칭/기록 producer·확정 부가 기능·실제 공급자/운영·백업 security replay/retention·라이선스/법무·실제 참여자·전체1~6단계/최종 통합은 미완료다. source/실패 원본을 유지하고 다음 독립 작업을 이어간다. 아래는 시점별 기록이다.
+
+최신: S6.1 [PR #32](https://github.com/HSU-OAS/bodyguard/pull/32)을 exact source515f323·필수 검증·scope 미해결P1/P2 없음·최신 diff/CLEAN/MERGEABLE·체크 없음 확인 후 merge2db3ceef41123db6689ec28b536c5b8dc5f840bf로 병합했다. 실제 main 포함·source 브랜치를 보존하고 최신 main의 codex/stage6-web-security에서 [S6.2 현재 웹의 계정·기록 보안 경계](stories/stage6-web-security.md) 명세·하네스를 시작한다. 실제 웹/HTTP/SQL·Chrome CORS 기초이며 운영 TLS/외부 감사·아바타/실측/코칭/기록 producer·Stage2 이월·전체1~6단계/최종 통합·라이선스/법무/참여자·확정 부가 기능은 미완료다. 화이트·블루 웹 디자인/원본 증거를 유지한다. 아래는 시점별 기록이다.
+
 최신: [S6.1 현재 웹 교차 흐름](stories/stage6-web-integration.md)에서 실제 production Chrome/API/SQL의 소개·안내→가입→탐색 준비→합성 기록 상세·취소/삭제→계정/로그아웃 흐름과 계정 장애 주입/공개 안내 보존을 확인했다. [실제 화면/실패·작성자 리뷰](review/stage6-web-integration/README.md). 기존 화이트·블루 UI/production API는 바꾸지 않았으며 PR 게이트 진행이다. 실제 코칭/아바타/실측/기록 producer·Docker/Draft #29·운영/공급자·라이선스/법무·부가 기능/참여자·전체6단계/최종 통합은 미완료로 유지하고 다음 독립 내부 검증을 진행한다. 아래는 시점별 기록이다.
 
 최신: S5.4 [PR #31](https://github.com/HSU-OAS/bodyguard/pull/31)을 exact source6236468·필수 검증·scope 미해결P1/P2 없음·최신 diff/CLEAN/MERGEABLE·체크 없음 확인 후 merge26d5e09541b92b33368ed2638eb307565909178a로 병합했다. source 브랜치를 보존하고 최신 main의 codex/stage6-web-integration에서 [S6.1 현재 웹의 교차 화면 통합 검증](stories/stage6-web-integration.md)의 명세·하네스를 시작한다. 실제 공개→가입→탐색 준비→기록/삭제→계정 흐름의 기초이며 미완성 코칭/실측·아바타를 통과시키지 않는다. Docker/Draft #29·운영/법무/라이선스 최종 고지·부가 기능/참여자·최종 통합은 그대로 미완료다. 아래는 시점별 기록이다.

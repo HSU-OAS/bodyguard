@@ -1,6 +1,6 @@
 # S6.1 — 현재 웹의 교차 화면 통합 검증
 
-현재 웹 교차 흐름 기초 구현·실제 검증 / PR 게이트 진행 · main26d5e09541b92b33368ed2638eb307565909178a · codex/stage6-web-integration · release-plan6·FR-U-02/04/05·FR-R-03·FR-V-03·NFR-08
+현재 웹 교차 흐름 기초 main 병합 · PR #32 source515f3239481c8959e399d962f78d468fe5ec2000 / merge2db3ceef41123db6689ec28b536c5b8dc5f840bf · codex/stage6-web-integration · release-plan6·FR-U-02/04/05·FR-R-03·FR-V-03·NFR-08
 
 ## 범위와 선행 상태
 
@@ -33,7 +33,7 @@ testing-strategy의 실제/모의 경계와 documentation/code-review를 사용�
 - [x] me 실패 주입 시 개인 화면 차단·공개 안내/직접 주소/새로고침 보존과 production 두 DEV 경로404를 확인했다. 카메라/GLB·MediaPipe·외부 요청/브라우저 저장/페이지 오류0·700px overflow0·keyboard logout/제목 focus를 확인했다.
 - [x] 최초/중간 dependency 환경 실패를 보존하고 최종 formatted source의 실제 두 case를 재실행했다. timestamp별 JSON/PNG·최종 stdout·DOM327/실제 SQL/API291·타입/Biome/Ruff/format/mypy·DEV bundle 차단/checksum/diff 검사를 확인했다.
 - [x] 작성자 code-review: test-only 최소 suite·고유 출력·mock/actual 경계/기존 서버 보존·private 메일 IPC·CSRF/실제 세션·미완성 판정 비공개를 점검했다. scope 내 미해결P1/P2 없음이며 독립 외부/전문가 리뷰는 아니다.
-- [ ] exact source/main·최신 diff/CLEAN/체크/리뷰·PR·merge commit과 source 브랜치 보존 확인.
+- [x] PR #32 exact tested source515f323·최신 diff/CLEAN/MERGEABLE·체크 없음·scope P1/P2 없음 확인 후 merge2db3cee로 병합했다. 실제 merge 부모/main 포함·로컬/원격 source 브랜치 보존을 확인했다.
 
 최종2개 browser case는9.8초·failure/skip/flaky0이며 source formatter 적용 전11.7초 결과도 별도 보존했다. backend291개는83.67초·failure/error/skip0·기존 asyncio warning1, DOM327개도 실패/skip0이다. [실제 화면·실패/한계](../review/stage6-web-integration/README.md)를 따른다. actual 운영 TLS·공급자/메일 도착·사람·체형/조명/성능·최종 아바타·정확한 코칭·기록 producer·부가 기능·법무/라이선스·전체6단계 완료가 아니다.
 

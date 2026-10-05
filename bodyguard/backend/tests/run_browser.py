@@ -38,6 +38,7 @@ def main() -> int:
             "withdrawal",
             "datahelp",
             "integration",
+            "security",
         ),
         nargs="?",
         default="account",
@@ -167,7 +168,8 @@ def main() -> int:
                 # FR-R-03/FR-V-01: records/design runs preserve every earlier result.
                 output = (
                     f"test-results/{args.suite}-{datetime.now(UTC).strftime('%Y%m%dT%H%M%S%fZ')}"
-                    if args.suite in ("records", "design", "withdrawal", "datahelp", "integration")
+                    if args.suite
+                    in ("records", "design", "withdrawal", "datahelp", "integration", "security")
                     else f"test-results/{args.suite}"
                 )
                 result = subprocess.run(
@@ -192,7 +194,14 @@ def main() -> int:
                         "BODYGUARD_TEST_RECORDS_REPORT": (
                             f"{output}/report.json"
                             if args.suite
-                            in ("records", "design", "withdrawal", "datahelp", "integration")
+                            in (
+                                "records",
+                                "design",
+                                "withdrawal",
+                                "datahelp",
+                                "integration",
+                                "security",
+                            )
                             else ""
                         ),
                     },

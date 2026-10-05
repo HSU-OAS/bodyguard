@@ -1,0 +1,45 @@
+[WebServer] (node:54582) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ node scripts/prepare-assets.mjs && tsc --noEmit && vite build
+[WebServer] (node:54606) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:54616) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:54639) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/security.spec.ts:151:1 › WEB-S01 타인 기록 차단·소유권 입력 거부·본인 웹 보존 (989ms)
+  ✘  2 e2e/security.spec.ts:201:1 › WEB-S02 다른 세션 CSRF·삭제 proof 거부·로그아웃 cookie 재전송 차단 (1.1s)
+(node:54666) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 e2e/security.spec.ts:273:1 › WEB-S03 실제 Chrome CORS·origin/CSRF 변경 거부·정상 계정 보존 (593ms)
+
+
+  1) e2e/security.spec.ts:201:1 › WEB-S02 다른 세션 CSRF·삭제 proof 거부·로그아웃 cookie 재전송 차단 ────────────────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "Cannot set properties of undefined (setting 'getUserMedia')",
+    + ]
+
+      79 |   expect(cameraCalls).toBe(0)
+      80 |   expect(unexpectedRequests).toEqual([])
+    > 81 |   expect(pageErrors).toEqual([])
+         |                      ^
+      82 |   expect(storageLengths).toEqual([0, 0])
+      83 | })
+      84 | async function check(response: APIResponse, status: number) {
+        at <workspace>/bodyguard/frontend/e2e/security.spec.ts:81:22
+
+    Error Context: test-results/security-20261005T115432073536Z/security-WEB-S02-다른-세션-CSRF·삭제-proof-거부·로그아웃-cookie-재전송-차단/error-context.md
+
+  1 failed
+    e2e/security.spec.ts:201:1 › WEB-S02 다른 세션 CSRF·삭제 proof 거부·로그아웃 cookie 재전송 차단 ─────────────────
+  2 passed (10.4s)
