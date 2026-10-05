@@ -78,7 +78,7 @@ Received: 400
   2   | import { randomUUID } from 'node:crypto'
   3   | import { readFileSync, renameSync, writeFileSync } from 'node:fs'
   4   | import { type BrowserContext, expect, type Page, test } from '@playwright/test'
-  5   | 
+  5   |
   6   | const origin = 'http://localhost:4173'
   7   | const password = '기록 브라우저 시험 전용 비밀번호 12345'
   8   | const mailbox = process.env.BODYGUARD_TEST_MAILBOX
@@ -164,7 +164,7 @@ Received: 400
   87  | function day(date: Date) {
   88  |   return `${date.getFullYear().toString().padStart(4, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
   89  | }
-  90  | 
+  90  |
   91  | test('RD-05 record saved after preview is preserved even with an earlier end time', async ({
   92  |   page,
   93  |   context,
@@ -188,7 +188,7 @@ Received: 400
   111 |     fullPage: true,
   112 |   })
   113 | })
-  114 | 
+  114 |
   115 | test('RD-04 foreign proof cannot delete another account and late deletion cannot reopen private UI', async ({
   116 |   page,
   117 |   context,

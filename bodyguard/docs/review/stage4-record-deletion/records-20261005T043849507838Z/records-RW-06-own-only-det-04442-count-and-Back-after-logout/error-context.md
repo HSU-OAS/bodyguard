@@ -192,5 +192,5 @@ Call log:
   461 |   await page.goto('/records/not-an-id')
   462 |   await expect(page.getByRole('heading', { name: '기록을 찾을 수 없습니다' })).toBeVisible()
   463 | })
-  464 | 
+  464 |
 ```

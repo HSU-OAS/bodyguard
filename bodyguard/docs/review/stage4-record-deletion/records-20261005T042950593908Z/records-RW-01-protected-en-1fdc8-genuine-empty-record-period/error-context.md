@@ -43,7 +43,7 @@ Error: page.evaluate: Execution context was destroyed, most likely because of a 
   2   | import { randomUUID } from 'node:crypto'
   3   | import { readFileSync, renameSync, writeFileSync } from 'node:fs'
   4   | import { type BrowserContext, expect, type Page, test } from '@playwright/test'
-  5   | 
+  5   |
   6   | const origin = 'http://localhost:4173'
   7   | const password = '기록 브라우저 시험 전용 비밀번호 12345'
   8   | const mailbox = process.env.BODYGUARD_TEST_MAILBOX
@@ -128,7 +128,7 @@ Error: page.evaluate: Execution context was destroyed, most likely because of a 
   86  | function day(date: Date) {
   87  |   return `${date.getFullYear().toString().padStart(4, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
   88  | }
-  89  | 
+  89  |
   90  | test('RD-03 server confirmation expiry preserves record without an automatic retry', async ({
   91  |   page,
   92  |   context,
@@ -161,7 +161,7 @@ Error: page.evaluate: Execution context was destroyed, most likely because of a 
   119 |     offset(0)
   120 |   }
   121 | })
-  122 | 
+  122 |
   123 | test('RD-02 changed real SQL target requires another preview and preserves remaining record', async ({
   124 |   page,
   125 |   context,

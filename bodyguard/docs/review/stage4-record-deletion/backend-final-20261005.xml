@@ -10,8 +10,8 @@ stuck = True
 &gt;       challenge = h.signup()
                     ^^^^^^^^^^
 
-tests/test_auth.py:250: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_auth.py:250:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 self = &lt;tests.conftest.Harness object at 0x10b2e42d0&gt;
 email = 'person@example.com', password = '가상 사용자 비밀번호 12345'
@@ -75,9 +75,9 @@ authenticated = False
                 )
 &gt;           assert snapshot(h) == before
 E           assert "[[{'key_hash...ne}], [], []]" == "[[{'key_hash...ne}], [], []]"
-E             
+E
 E             - [[{'key_hash': 'a3209307613cf11d73f2e5df50bc8055475d3f28e6a45375f6ecf4a34bd08dc7', 'count': 1, 'expires_at': datetime.datetime(2026, 10, 1, 9, 1, tzinfo=zoneinfo.ZoneInfo(key='Asia/Seoul'))}], [], [], [], [{'token_hash': '73146522b7cf31a83d6a278159a335f3053409635ce85176cfe979b271e915a6', 'user_id': None, 'created_at': datetime.datetime(2026, 10, 1, 9, 0, tzinfo=zoneinfo.ZoneInfo(key='Asia/Seoul')), 'last_seen_at': datetime.datetime(2026, 10, 1, 9, 0, tzinfo=zoneinfo.ZoneInfo(key='Asia/Seoul')), 'expires_at': datetime.datetime(2026, 10, 1, 9, 10, tzinfo=zoneinfo.ZoneIn...
-E             
+E
 E             ...Full output truncated (2 lines hidden), use '-vv' to show
 
 tests/test_auth.py:549: AssertionError</failure></testcase><testcase classname="tests.test_auth" name="test_h15_each_post_checks_origin_session_csrf_without_mutation[False-logout-payload4]" time="0.807" /><testcase classname="tests.test_auth" name="test_h15_each_post_checks_origin_session_csrf_without_mutation[True-signup-payload0]" time="0.982" /><testcase classname="tests.test_auth" name="test_h15_each_post_checks_origin_session_csrf_without_mutation[True-verify-payload1]" time="2.088" /><testcase classname="tests.test_auth" name="test_h15_each_post_checks_origin_session_csrf_without_mutation[True-resend-payload2]" time="0.908"><failure message="AssertionError: {&quot;detail&quot;:&quot;인증 코드를 다시 확인해 주세요.&quot;}&#10;assert 400 == 201&#10; +  where 400 = &lt;Response [400 Bad Request]&gt;.status_code">harness = &lt;tests.conftest.Harness object at 0x10b7744b0&gt;, path = 'resend'
@@ -102,8 +102,8 @@ authenticated = True
         if authenticated:
 &gt;           h.account()
 
-tests/test_auth.py:523: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_auth.py:523:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 self = &lt;tests.conftest.Harness object at 0x10b7744b0&gt;
 email = 'person@example.com', password = '가상 사용자 비밀번호 12345'
@@ -123,12 +123,12 @@ expected = 200
         h = harness
 &gt;       h.account()
 
-tests/test_auth.py:628: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_auth.py:628:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 tests/conftest.py:136: in account
     response = self.verify(self.signup(email, password))
                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 self = &lt;tests.conftest.Harness object at 0x10b20c670&gt;
 email = 'person@example.com', password = '가상 사용자 비밀번호 12345'
