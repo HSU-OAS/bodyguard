@@ -25,6 +25,9 @@ for (const file of files) {
     'fixture-not-release',
     'An explicit validated coaching plan is required',
     'Step duration and repetition count must be explicitly valid',
+    'ownership-error',
+    'cleanup-error',
+    'PRIVATE_FRAME_coordinates_account_METADATA',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -34,5 +37,6 @@ console.log(
     production_JS_files_checked: files.length,
     development_catalog_strings: 0,
     unconnected_coaching_engine_strings: 0,
+    unconnected_coaching_resource_strings: 0,
   }),
 )

@@ -1,5 +1,11 @@
 # Bodyguard — Tasks
 
+최신: [코칭 자원 연결 기초](stories/coaching-resource-lifecycle.md)는 준비/중단/교체/늦은 응답·1회 해제/소유권 재사용 방지를 구현했다. 합성40건 포함 전체367건·정적/build·실제 공개 웹 Chrome7흐름이 통과했고 작성자 리뷰P2 두 건은 red 재현 후 수정했다. [실패/원본 hash·현재 화면](review/coaching-resources/README.md). PR 게이트 진행이며 실제 카메라·모델/두 아바타/소유 track·worker·GPU·코칭/기록 producer·Stage2 이월·전체3~6단계 게이트는 미완료다. 다음 독립 작업은 세션/중단/페이지 수명과 진행 엔진의 실제 연결이며 공개 코칭은 선행 게이트 통과 전 활성화하지 않는다. 아래는 시점별 기록이다.
+
+최초 자원 Vitest는 모듈 수집 실패였고 당시 factory/자원 case는 미실행이었다. 그 원본/실패 기록은 삭제하거나 green으로 바꾸지 않고 보존했다.
+
+최신: S6.2 [PR #33](https://github.com/HSU-OAS/bodyguard/pull/33)은 exact source87aa4a2·필수 검증·scope P1/P2 없음·최신 main/diff/CLEAN·체크 없음 후 merge d348fb8로 병합됐고 실제 부모/main 포함·source 브랜치 보존을 확인했다. 독립3→4→5→6 구현/현재 웹 검증 기초 뒤 최신 main의 codex/coaching-resource-lifecycle에서 [코칭 자원 연결 기초](stories/coaching-resource-lifecycle.md)의 계약/첫 하네스를 착수한다. 미완성 에셋/실측에 독립적인 정리 계약이며 실제 카메라/모델/두 아바타/화면 통합·Stage2/전체3~6 게이트 통과가 아니다. 같은 아바타 부위 수정/검증 사이클은 시작하지 않고 모든 이월·외부/법무·부가 기능/참여자·전체1~6단계 필수 기준은 유지한다. 아래는 시점별 기록이다.
+
 최신: [S6.2 현재 웹 계정·기록 보안 경계](stories/stage6-web-security.md)의 실제 두 계정 소유권/독립 invalid 입력·다른 세션 CSRF/삭제 proof·로그아웃 cookie 재전송·Chrome CORS/origin 거부와 정상 기록 보존을 확인했다. [작동 화면·실패/작성자 리뷰](review/stage6-web-security/README.md). 제품/API·화이트·블루 디자인/안전·privacy 정책 변경 없이 검증했고 PR 게이트 진행이다. Docker는 socket 부재로 여전히 미연결이며 아바타·실측·실제 코칭/기록 producer·확정 부가 기능·실제 공급자/운영·백업 security replay/retention·라이선스/법무·실제 참여자·전체1~6단계/최종 통합은 미완료다. source/실패 원본을 유지하고 다음 독립 작업을 이어간다. 아래는 시점별 기록이다.
 
 최신: S6.1 [PR #32](https://github.com/HSU-OAS/bodyguard/pull/32)을 exact source515f323·필수 검증·scope 미해결P1/P2 없음·최신 diff/CLEAN/MERGEABLE·체크 없음 확인 후 merge2db3ceef41123db6689ec28b536c5b8dc5f840bf로 병합했다. 실제 main 포함·source 브랜치를 보존하고 최신 main의 codex/stage6-web-security에서 [S6.2 현재 웹의 계정·기록 보안 경계](stories/stage6-web-security.md) 명세·하네스를 시작한다. 실제 웹/HTTP/SQL·Chrome CORS 기초이며 운영 TLS/외부 감사·아바타/실측/코칭/기록 producer·Stage2 이월·전체1~6단계/최종 통합·라이선스/법무/참여자·확정 부가 기능은 미완료다. 화이트·블루 웹 디자인/원본 증거를 유지한다. 아래는 시점별 기록이다.
