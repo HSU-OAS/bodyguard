@@ -21,7 +21,7 @@
 
 ## 실패와 이전 실행 보존
 
-원본 pytest/XML·Playwright 오류 context의 줄 끝 공백은 저장소 diff 검사에서 발견됐다. 해당 원본7파일의 정확한 바이트를 같은 경로의 `.original.gz`로 먼저 보존하고 압축 해제 일치를 확인한 뒤 읽기용 XML/Markdown만 줄 끝 공백을 정규화했다. 실패/성공 내용은 바뀌지 않으며 증거 원본을 잃지 않는다. 저장소 최종 `git diff --check origin/main`을 다시 확인한다.
+원본 pytest/XML·Playwright 오류 context의 줄 끝 공백은 저장소 diff 검사에서 발견됐다. 해당 원본4파일의 정확한 바이트를 같은 경로의 `.original.gz`로 먼저 보존하고 압축 해제 일치를 확인한 뒤 읽기용 XML/Markdown만 줄 끝 공백을 정규화했다. 실패/성공 내용은 바뀌지 않으며 증거 원본을 잃지 않는다. 저장소 최종 `git diff --check origin/main`을 다시 확인한다.
 
 [042523](records-20261005T042523041911Z/report.json)은7통과, [042809](records-20261005T042809581544Z/report.json)은8통과다. [042950](records-20261005T042950593908Z/report.json)은8통과/1실패로 시작 페이지 HTTP 탐색 실패·error-context·화면을 그대로 보존했다. 별도 빌드와 Chrome이 겹친 실행이며 같은 산출물 검사 중 다른 빌드를 실행하지 않는 순서로 보완했다. 단독 [043122](records-20261005T043122888269Z/report.json)은9통과다. 실패를 통과로 재표시하지 않는다.
 
