@@ -17,7 +17,7 @@
 
 최종 기준선/경쟁48건·전체369 API(107.87초), frontend558·공개8·타입/Biome/Ruff/format/mypy/build를 통과했다. 별도 실제 native 복구의 aggregate도 baseline_history_and_owner_restored·owned_servers_stopped=true이며 운영 restore 승인=false/기존 replay 위험 관찰=true다. 보완 과정의 test 함수 배치 오류는1실패/368통과였으며 원본을 보존하고 수정 후 다시 전체를 검증했다. [artifacts.json](artifacts.json)은 실제 소스18개/출력36개를 SHA로 연결한다. 수집기 재실행2회는 원본 동일성을 검사하고 덮어쓰지 않았다.
 
-독립 리뷰는 **읽기 전용 소스 검토**이며 테스트 실행0이다. OpenAPI P2/실제 timeout 증거 공백 보완 후 미해결 scoped P1/P2 없음. 작성자도 owner/CSRF·대기 재확인·교체 불변성/rollback·DB 제약·native restore·OpenAPI/생성 타입을 재검토했다. 최신 main 통합과 원격 PR 게이트는 아직 진행 중이다. 체크 없음은 CI 통과로 표시하지 않는다.
+독립 리뷰는 **읽기 전용 소스 검토**이며 테스트 실행0이다. OpenAPI P2/실제 timeout 증거 공백 보완 후 미해결 scoped P1/P2 없음. 작성자도 owner/CSRF·대기 재확인·교체 불변성/rollback·DB 제약·native restore·OpenAPI/생성 타입을 재검토했다. 최신 main 통합과 PR46 조건부 병합은 아래 실제 결과로 확인했다. 체크 없음은 CI 통과로 표시하지 않는다.
 
 ## 최신 main 통합 / 실제 웹 흐름
 
@@ -26,6 +26,14 @@ PR45의 알림 설정 웹이maincc9870b에 병합돼 로컬 merge87b8966으로 �
 [통합 manifest](artifacts-v2.json)는 추가15개 실제 출력/PNG·source18 SHA를 연결한다. 수집기 재실행도 동일했다. UI는 PR45의 기여이며 이번 기준선 API가 새 화면을 만들거나 디자인을 바꾸었다고 주장하지 않는다. 기준선 화면은 아직 연결하지 않았다. 기존 white/blue 디자인·입력/오류/저장 흐름을 실제 브라우저로 확인한 결과다. Figma/axe/추가 외부 디자인 감사는 없다.
 
 ![통합본의 실제 알림 설정 저장 화면](integrated-notifications-saved.png)
+
+## 실제 병합 / 소스 보존
+
+[PR46](https://github.com/HSU-OAS/bodyguard/pull/46) · source8df7c8e8bbe9b4094d5e0e4738a276d2ee4b1fcd · merge4b1c8f2652166de5daab3be183b145952380fc1c · 2026-10-05T18:59:15Z. 실제 merge 부모는cc9870b2ea5cf0b4fba4203cccebd682cad87dc3/8df7c8e8bbe9b4094d5e0e4738a276d2ee4b1fcd다. 원격main 포함·기존 브랜치 보존·clean을 확인했다.
+
+병합 직전 최신 main/HEAD·CLEAN/MERGEABLE·체크 없음·GitHub 외부 리뷰0을 다시 읽었다. 변경75파일의 원격 old/new Git blob과 로컬 diff 본문/좌표, source18·초기36/통합15 증거 SHA와 git diff --check가 일치했다. index 표시용 약어/hunk 함수 라벨만 정규화하고 전체 blob은 별도 확인했다. [검토 기록](https://github.com/HSU-OAS/bodyguard/pull/46#issuecomment-6001085382)은 작성자 기록이며 외부 전문가 승인으로 표시하지 않는다.
+
+병합 결과 문서 정리는 제품 코드·기존 manifest·실패/통과 원본·PNG를 변경하지 않는다. 이 문서 정리에서 API/웹/카메라 시험을 새로 실행했다고 세지 않는다. 실제 보정·신체 정확성·아바타·전체 출시 게이트 및 운영 승인 경계는 그대로다.
 
 ## 남은 일
 
