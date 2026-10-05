@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="29" failures="1" errors="0" time="0.410929541">
+    <testsuite name="src/api/notificationPreferences.test.ts" timestamp="2026-10-05T18:03:48.262Z" hostname="local-test-host" tests="17" failures="0" errors="0" skipped="0" time="0.031439583">
+        <testcase classname="src/api/notificationPreferences.test.ts" name="strictly rejects a malformed preference DTO: null" time="0.001963208">
+        </testcase>
+        <testcase classname="src/api/notificationPreferences.test.ts" name="strictly rejects a malformed preference DTO: undefined" time="0.000195291">
+        </testcase>
+        <testcase classname="src/api/notificationPreferences.test.ts" name="strictly rejects a malformed preference DTO: {&quot;posture_enabled&quot;:true,&quot;posture_minutes&quot;:5,&quot;sitting_enabled&quot;:true,&quot;sitting_minutes&quot;:50,&quot;sound_enabled&quot;:false,&quot;extra&quot;:true}" time="0.0001475">
+        </testcase>
+        <testcase classname="src/api/notificationPreferences.test.ts" name="strictly rejects a malformed preference DTO: {&quot;posture_enabled&quot;:true,&quot;posture_minutes&quot;:true,&quot;sitting_enabled&quot;:true,&quot;sitting_minutes&quot;:50,&quot;sound_enabled&quot;:false}" time="0.000188708">
+        </testcase>
+        <testcase classname="src/api/notificationPreferences.test.ts" name="strictly rejects a malformed preference DTO: {&quot;posture_enabled&quot;:true,&quot;posture_minutes&quot;:5,&quot;sitting_enabled&quot;:true,&quot;sitting_minutes&quot;:&quot;50&quot;,&quot;sound_enabled&quot;:false}" time="0.000273292">
+        </testcase>
+        <testcase classname="src/api/notificationPreferences.test.ts" name="strictly rejects a malformed preference DTO: {&quot;posture_enabled&quot;:true,&quot;posture_minutes&quot;:1.5,&quot;sitting_enabled&quot;:true,&quot;sitting_minutes&quot;:50,&quot;sound_enabled&quot;:false}" time="0.00013925">
+        </testcase>
+        <testcase classname="src/api/notificationPreferences.test.ts" name="strictly rejects a malformed preference DTO: {&quot;posture_enabled&quot;:true,&quot;posture_minutes&quot;:0,&quot;sitting_enabled&quot;:true,&quot;sitting_minutes&quot;:50,&quot;sound_enabled&quot;:false}" time="0.000115917">
+        </testcase>
+        <testcase classname="src/api/notificationPreferences.test.ts" name="strictly rejects a malformed preference DTO: {&quot;posture_enabled&quot;:true,&quot;posture_minutes&quot;:5,&quot;sitting_enabled&quot;:true,&quot;sitting_minutes&quot;:1441,&quot;sound_enabled&quot;:false}" time="0.000135292">
+        </testcase>
+        <testcase classname="src/api/notificationPreferences.test.ts" name="strictly rejects a malformed preference DTO: {&quot;posture_enabled&quot;:true,&quot;posture_minutes&quot;:5,&quot;sitting_enabled&quot;:true,&quot;sitting_minutes&quot;:50,&quot;sound_enabled&quot;:&quot;false&quot;}" time="0.000449291">
+        </testcase>
+        <testcase classname="src/api/notificationPreferences.test.ts" name="strictly rejects a malformed preference DTO: {&quot;posture_enabled&quot;:true}" time="0.000330875">
+        </testcase>
+        <testcase classname="src/api/notificationPreferences.test.ts" name="copies only the exact validated values, including technical range boundaries" time="0.000756416">
+        </testcase>
+        <testcase classname="src/api/notificationPreferences.test.ts" name="prepares from real-shaped me/csrf/settings/me; save uses original proof without fresh credentials" time="0.022241917">
+        </testcase>
+        <testcase classname="src/api/notificationPreferences.test.ts" name="a committed same-ID new ready object retires the old form without POST" time="0.001424583">
+        </testcase>
+        <testcase classname="src/api/notificationPreferences.test.ts" name="a changed-cookie final me does not expose a form even when caller missed the authority change" time="0.000644792">
+        </testcase>
+        <testcase classname="src/api/notificationPreferences.test.ts" name="explicit close/abort and late responses cannot confirm a past save" time="0.000516208">
+        </testcase>
+        <testcase classname="src/api/notificationPreferences.test.ts" name="different or extra response values are not a save confirmation: {&quot;posture_enabled&quot;:true,&quot;posture_minutes&quot;:99,&quot;sitting_enabled&quot;:true,&quot;sitting_minutes&quot;:50,&quot;sound_enabled&quot;:false}" time="0.000380667">
+        </testcase>
+        <testcase classname="src/api/notificationPreferences.test.ts" name="different or extra response values are not a save confirmation: {&quot;posture_enabled&quot;:true,&quot;posture_minutes&quot;:5,&quot;sitting_enabled&quot;:true,&quot;sitting_minutes&quot;:50,&quot;sound_enabled&quot;:false,&quot;extra&quot;:1}" time="0.000298666">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/NotificationPreferencesPage.test.tsx" timestamp="2026-10-05T18:03:48.265Z" hostname="local-test-host" tests="12" failures="1" errors="0" skipped="0" time="0.379489958">
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W01 account entry links to the protected settings page" time="0.073183958">
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W01 auth gate blocks settings requests at 401" time="0.028004125">
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W01 auth gate blocks settings requests at 503" time="0.01631175">
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W01 read loading hides the form, then displays server values, not guessed defaults" time="0.025299041">
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W02 explicit save uses all fields, preserves the disabled interval and changes sound only on choice" time="0.042344875">
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W02 invalid minutes  focus the error summary without POST" time="0.026490084">
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W02 invalid minutes 0 focus the error summary without POST" time="0.026459083">
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W02 invalid minutes 1441 focus the error summary without POST" time="0.026925084">
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W02 invalid minutes 1.5 focus the error summary without POST" time="0.027792583">
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W03 failed reads require explicit retry and never show raw errors or a default form" time="0.021542375">
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W03 uncertain POST blocks editing and does not automatically repeat a possibly accepted save" time="0.028938375">
+            <failure message="expected false to be true // Object.is equality" type="AssertionError">
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/pages/NotificationPreferencesPage.test.tsx:138:66
+            </failure>
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W04 pending save is single-flight; auth refresh removes old drafts and ignores late responses" time="0.034967084">
+        </testcase>
+    </testsuite>
+</testsuites>

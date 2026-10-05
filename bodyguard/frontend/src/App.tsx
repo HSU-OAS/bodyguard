@@ -5,6 +5,7 @@ import { AccountPage } from './pages/AccountPage'
 import { DataPage, HelpPage } from './pages/DataHelpPage'
 import { ExplorePage } from './pages/ExplorePage'
 import { MemberPage } from './pages/MemberPage'
+import { NotificationPreferencesPage } from './pages/NotificationPreferencesPage'
 import { PasswordPage } from './pages/PasswordPage'
 import { RecordsPage } from './pages/RecordsPage'
 import { WithdrawalPage } from './pages/WithdrawalPage'
@@ -185,6 +186,7 @@ function Shell() {
     if (
       (MotionSelection && location.pathname === '/dev/select') ||
       location.pathname === '/account/delete' ||
+      location.pathname === '/account/notifications' ||
       /^\/records(?:\/[^/]+)?$/.test(location.pathname)
     )
       return
@@ -278,6 +280,14 @@ function Shell() {
             }
           />
           {/* FR-U-05: do not unmount the confirmation request when private UI closes. */}
+          <Route
+            path="/account/notifications"
+            element={
+              <SessionGate>
+                <NotificationPreferencesPage />
+              </SessionGate>
+            }
+          />
           <Route path="/account/delete" element={<WithdrawalPage />} />
           <Route
             path="/records"
