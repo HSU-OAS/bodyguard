@@ -48,6 +48,10 @@ BMAD dev-story 기본 workflow를 유지한다. 직전 on_complete resolver는 �
 
 engineering:code-review의 입력/시간/수치/버퍼·폐기/metadata 불변/public 누출을 작성자 검토했다. web-design-studio의 기존 토큰·실제 화면 기준을 유지하되 새 UI 디자인/추가 audit 수행 주장은 없다. 같은 아바타 부위 새 제작0·Draft36 SDK P2·단계2 이월·실측/참여자·Q32 알림/PDF/LLM/변화 탐지·외부/운영·전체1~6 미완료는 유지한다.
 
+최신 main은 개발 중 PR42 알림 설정 API의 merge6ee4dce로 바뀌었다. 최초 검증/커밋dea748b를 보존하고 이를 branch에 통합했다. tasks.md 두 실행 기록이 충돌해 **양쪽 기록을 모두 보존**하여 merge0c32cc7로 해결했다. 제품 소스 충돌은 없고 main의 backend/생성 타입을 수정하지 않는다. 통합 후 frontend/타입·정적/build/공개 웹 회귀를 별도 재실행하고 초기 artifacts.json/원본은 유지한다. PR42 자체의 기능 완료/검증을 이 Story의 작업으로 재표시하지 않는다.
+
+통합본에서도 전체558 frontend/실패0·타입/Biome122/build/guard·공개8(13.0초)을 실제 실행하고 v2 source3/artifact7 SHA를 수집·재검증했다. 최초18개 artifacts·manifest는 변경하지 않았고 integrated 결과는 artifacts-v2.json/새 파일로 남겼다. 공개 JS/CSS byte는 동일하고 backend 회귀를 새로 실행한 것으로 세지 않는다.
+
 ## File List
 
 - bodyguard/docs/stories/minute-aggregation.md
@@ -59,6 +63,7 @@ engineering:code-review의 입력/시간/수치/버퍼·폐기/metadata 불변/p
 - bodyguard/docs/review/minute-aggregation/README.md
 - bodyguard/docs/review/minute-aggregation/collect-proof.mjs
 - bodyguard/docs/review/minute-aggregation/artifacts.json 및18개 실행/실패/실제 공개 화면 증거
+- bodyguard/docs/review/minute-aggregation/artifacts-v2.json 및7개 최신 main 통합 검증 증거
 
 ## Change Log
 

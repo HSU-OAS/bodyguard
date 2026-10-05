@@ -28,3 +28,5 @@ engineering:code-review로 입력 schema/수치·시간/버퍼/폐기·metadata 
 최종 frontend558·타입/Biome122·build·공개7+합성 RAF1(8개,15.8초)·guard 음성exit1/양성exit0·source3/artifact18 SHA 및 수집기 byte-identical 재실행을 실제 확인했다. public JS/CSS byte SHA는 PR41과 동일하다. PR 조건부 게이트는 진행 중이며 임상적 판단이나 웹 전체 완성으로 표시하지 않는다.
 
 ![현재 화이트·블루 공개 시작 — 합성 계정](production-start.png)
+
+개발 중 main에 들어온 PR42의 계정 알림 설정 API/생성 타입을 branch에 통합했다. tasks.md만 충돌하여 양쪽 기록을 보존했다. 기존 backend/생성 타입에 별도 수정을 하지 않았으며 API 회귀를 새 실행한 것으로 세지 않는다. 통합 후558 frontend·타입/정적/build/guard·공개8(13.0초)·source3/artifact7 SHA와 수집기 재실행을 실제 확인했다. 초기 manifest/18개 원본을 그대로 두고 통합 증거는 artifacts-v2.json으로 추가했다.
