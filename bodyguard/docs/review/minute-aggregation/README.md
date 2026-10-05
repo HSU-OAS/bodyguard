@@ -30,3 +30,11 @@ engineering:code-review로 입력 schema/수치·시간/버퍼/폐기·metadata 
 ![현재 화이트·블루 공개 시작 — 합성 계정](production-start.png)
 
 개발 중 main에 들어온 PR42의 계정 알림 설정 API/생성 타입을 branch에 통합했다. tasks.md만 충돌하여 양쪽 기록을 보존했다. 기존 backend/생성 타입에 별도 수정을 하지 않았으며 API 회귀를 새 실행한 것으로 세지 않는다. 통합 후558 frontend·타입/정적/build/guard·공개8(13.0초)·source3/artifact7 SHA와 수집기 재실행을 실제 확인했다. 초기 manifest/18개 원본을 그대로 두고 통합 증거는 artifacts-v2.json으로 추가했다.
+
+## 실제 병합 확인
+
+[PR43](https://github.com/HSU-OAS/bodyguard/pull/43)은 source692c7e463604514ed744c17ea0878e6377c1cc20 → mergecf65132fa5be6d3000a9f0323cd1d4f4eee23fc8로 병합됐다. 실제 부모/latest main 포함·브랜치 보존을 확인했다. [작성자 리뷰](https://github.com/HSU-OAS/bodyguard/pull/43#issuecomment-6000251778)의 조건부 게이트를 충족했으며 체크 없음·외부 리뷰0이다. 위 '게이트 진행 중' 문단은 당시 기록으로 보존한다. 이번 완료는 private 순수 집계 범위이고 공개 요약 기능/실제 신체 검증/전체1~6 완료가 아니다.
+
+원격 diff의 최초 비교 실패는 index의 SHA 축약 길이 차이(로컬7자리/GitHub8자리)였다. 원본을 유지하고 --abbrev=8 로컬 diff로 재확인하여 hunk의 함수명 표시만 정규화한 본문/좌표 비교 및35개 실제 Git blob이 일치했다. source3개와 초기18개/통합7개 artifact SHA는 다시 검증했다. BMAD on_complete resolver 실제 absent exit2/default 빈 값은 별도 도구 설치나 성공으로 표시하지 않는다.
+
+최신 maincf65132의 독립 codex/minute-aggregation-closure에서 문서 상태와 실제 병합 증거만 추가한다. 제품 코드·원본·PNG·manifest/검증 출력은 수정하지 않으며 기존 테스트를 이번 문서 변경에서 새로 실행한 것처럼 표시하지 않는다.
