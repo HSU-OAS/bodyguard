@@ -1,0 +1,5448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="12" failures="12" errors="0" time="12.224564125">
+    <testsuite name="src/pages/NotificationPreferencesPage.test.tsx" timestamp="2026-10-05T18:00:06.897Z" hostname="local-test-host" tests="12" failures="12" errors="0" skipped="0" time="12.224564125">
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W01 account entry links to the protected settings page" time="1.0428635">
+            <failure message="Unable to find role=&quot;link&quot; and name &quot;알림 설정 관리&quot;
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/start&quot;[39m
+          [36m&gt;[39m
+            [0m내 시작[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/records&quot;[39m
+          [36m&gt;[39m
+            [0m수행 기록[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33maria-current[39m=[32m&quot;page&quot;[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/account&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;member-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;p[39m
+            [33mclass[39m=[32m&quot;eyebrow&quot;[39m
+          [36m&gt;[39m
+            [0mMY ACCOUNT[0m
+          [36m&lt;/p&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;p[39m
+            [33mclass[39m=[32m&quot;muted member-lead&quot;[39m
+          [36m&gt;[39m
+            [0m로그인 정보와 수행 기록을 관리합니다.[0m
+          [36m&lt;/p&gt;[39m
+          [36m&lt;section[39m
+            [33maria-labelledby[39m=[32m&quot;member-login&quot;[39m
+            [33mclass[39m=[32m&quot;member-section&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;h2[39m
+              [33mid[39m=[32m&quot;member-login&quot;[39m
+            [36m&gt;[39m
+              [0m로그인 정보[0m
+            [36m&lt;/h2&gt;[39m
+            [36m&lt;dl[39m
+              [33mclass[39m=[32m&quot;member-details&quot;[39m
+            [36m&gt;[39m
+              [36m&lt;dt&gt;[39m
+                [0m확인된 이메일[0m
+              [36m&lt;/dt&gt;[39m
+              [36m&lt;dd&gt;[39m
+                [0mfixture@example.com[0m
+              [36m&lt;/dd&gt;[39m
+            [36m&lt;/dl&gt;[39m
+            [36m&lt;button[39m
+              [33mclass[39m=[32m&quot;button secondary&quot;[39m
+              [33mtype[39m=[32m&quot;button&quot;[39m
+            [36m&gt;[39m
+              [0m로그아웃[0m
+            [36m&lt;/button&gt;[39m
+          [36m&lt;/section&gt;[39m
+          [36m&lt;section[39m
+            [33maria-labelledby[39m=[32m&quot;member-records&quot;[39m
+            [33mclass[39m=[32m&quot;member-section&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;h2[39m
+              [33mid[39m=[32m&quot;member-records&quot;[39m
+            [36m&gt;[39m
+              [0m수행 기록[0m
+            [36m&lt;/h2&gt;[39m
+            [36m&lt;p&gt;[39m
+              [0m기간별 기록을 확인하고, 선택한 기간의 기록을 삭제할 수 있습니다.[0m
+            [36m&lt;/p&gt;[39m
+            [36m&lt;a[39m
+              [33mclass[39m=[32m&quot;button primary&quot;[39m
+              [33mdata-discover[39m=[32m&quot;true&quot;[39m
+              [33mhref[39m=[32m&quot;/records&quot;[39m
+            [36m&gt;[39m
+              [0m수행 기록 관리[0m
+            [36m&lt;/a&gt;[39m
+          [36m&lt;/section&gt;[39m
+          [36m&lt;section[39m
+            [33maria-labelledby[39m=[32m&quot;member-withdrawal&quot;[39m
+            [33mclass[39m=[32m&quot;member-section&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;h2[39m
+              [33mid[39m=[32m&quot;member-withdrawal&quot;[39m
+            [36m&gt;[39m
+              [0m회원 탈퇴[0m
+            [36m&lt;/h2&gt;[39m
+            [36m&lt;p&gt;[39m
+              [0m계정과 수행 기록을 삭제합니다. 먼저 삭제 범위와 본인 확인 절차를 확인해 주세요.[0m
+            [36m&lt;/p&gt;[39m
+            [36m&lt;a[39m
+              [33mclass[39m=[32m&quot;button secondary&quot;[39m
+              [33mdata-discover[39m=[32m&quot;true&quot;[39m
+              [33mhref[39m=[32m&quot;/account/delete&quot;[39m
+            [36m&gt;[39m
+              [0m회원 탈퇴 안내[0m
+            [36m&lt;/a&gt;[39m
+          [36m&lt;/section&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/start&quot;[39m
+          [36m&gt;[39m
+            [0m내 시작[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/records&quot;[39m
+          [36m&gt;[39m
+            [0m수행 기록[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33maria-current[39m=[32m&quot;page&quot;[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/account&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;member-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;p[39m
+            [33mclass[39m=[32m&quot;eyebrow&quot;[39m
+          [36m&gt;[39m
+            [0mMY ACCOUNT[0m
+          [36m&lt;/p&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;p[39m
+            [33mclass[39m=[32m&quot;muted member-lead&quot;[39m
+          [36m&gt;[39m
+            [0m로그인 정보와 수행 기록을 관리합니다.[0m
+          [36m&lt;/p&gt;[39m
+          [36m&lt;section[39m
+            [33maria-labelledby[39m=[32m&quot;member-login&quot;[39m
+            [33mclass[39m=[32m&quot;member-section&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;h2[39m
+              [33mid[39m=[32m&quot;member-login&quot;[39m
+            [36m&gt;[39m
+              [0m로그인 정보[0m
+            [36m&lt;/h2&gt;[39m
+            [36m&lt;dl[39m
+              [33mclass[39m=[32m&quot;member-details&quot;[39m
+            [36m&gt;[39m
+              [36m&lt;dt&gt;[39m
+                [0m확인된 이메일[0m
+              [36m&lt;/dt&gt;[39m
+              [36m&lt;dd&gt;[39m
+                [0mfixture@example.com[0m
+              [36m&lt;/dd&gt;[39m
+            [36m&lt;/dl&gt;[39m
+            [36m&lt;button[39m
+              [33mclass[39m=[32m&quot;button secondary&quot;[39m
+              [33mtype[39m=[32m&quot;button&quot;[39m
+            [36m&gt;[39m
+              [0m로그아웃[0m
+            [36m&lt;/button&gt;[39m
+          [36m&lt;/section&gt;[39m
+          [36m&lt;section[39m
+            [33maria-labelledby[39m=[32m&quot;member-records&quot;[39m
+            [33mclass[39m=[32m&quot;member-section&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;h2[39m
+              [33mid[39m=[32m&quot;member-records&quot;[39m
+            [36m&gt;[39m
+              [0m수행 기록[0m
+            [36m&lt;/h2&gt;[39m
+            [36m&lt;p&gt;[39m
+              [0m기간별 기록을 확인하고, 선택한 기간의 기록을 삭제할 수 있습니다.[0m
+            [36m&lt;/p&gt;[39m
+            [36m&lt;a[39m
+              [33mclass[39m=[32m&quot;button primary&quot;[39m
+              [33mdata-discover[39m=[32m&quot;true&quot;[39m
+              [33mhref[39m=[32m&quot;/records&quot;[39m
+            [36m&gt;[39m
+              [0m수행 기록 관리[0m
+            [36m&lt;/a&gt;[39m
+          [36m&lt;/section&gt;[39m
+          [36m&lt;section[39m
+            [33maria-labelledby[39m=[32m&quot;member-withdrawal&quot;[39m
+            [33mclass[39m=[32m&quot;member-section&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;h2[39m
+              [33mid[39m=[32m&quot;member-withdrawal&quot;[39m
+            [36m&gt;[39m
+              [0m회원 탈퇴[0m
+            [36m&lt;/h2&gt;[39m
+            [36m&lt;p&gt;[39m
+              [0m계정과 수행 기록을 삭제합니다. 먼저 삭제 범위와 본인 확인 절차를 확인해 주세요.[0m
+            [36m&lt;/p&gt;[39m
+            [36m&lt;a[39m
+              [33mclass[39m=[32m&quot;button secondary&quot;[39m
+              [33mdata-discover[39m=[32m&quot;true&quot;[39m
+              [33mhref[39m=[32m&quot;/account/delete&quot;[39m
+            [36m&gt;[39m
+              [0m회원 탈퇴 안내[0m
+            [36m&lt;/a&gt;[39m
+          [36m&lt;/section&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m" type="TestingLibraryElementError">
+TestingLibraryElementError: Unable to find role=&quot;link&quot; and name &quot;알림 설정 관리&quot;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/start&quot;
+          &gt;
+            내 시작
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/records&quot;
+          &gt;
+            수행 기록
+          &lt;/a&gt;
+          &lt;a
+            aria-current=&quot;page&quot;
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/account&quot;
+          &gt;
+            내 계정
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;member-screen&quot;
+        &gt;
+          &lt;p
+            class=&quot;eyebrow&quot;
+          &gt;
+            MY ACCOUNT
+          &lt;/p&gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            내 계정
+          &lt;/h1&gt;
+          &lt;p
+            class=&quot;muted member-lead&quot;
+          &gt;
+            로그인 정보와 수행 기록을 관리합니다.
+          &lt;/p&gt;
+          &lt;section
+            aria-labelledby=&quot;member-login&quot;
+            class=&quot;member-section&quot;
+          &gt;
+            &lt;h2
+              id=&quot;member-login&quot;
+            &gt;
+              로그인 정보
+            &lt;/h2&gt;
+            &lt;dl
+              class=&quot;member-details&quot;
+            &gt;
+              &lt;dt&gt;
+                확인된 이메일
+              &lt;/dt&gt;
+              &lt;dd&gt;
+                fixture@example.com
+              &lt;/dd&gt;
+            &lt;/dl&gt;
+            &lt;button
+              class=&quot;button secondary&quot;
+              type=&quot;button&quot;
+            &gt;
+              로그아웃
+            &lt;/button&gt;
+          &lt;/section&gt;
+          &lt;section
+            aria-labelledby=&quot;member-records&quot;
+            class=&quot;member-section&quot;
+          &gt;
+            &lt;h2
+              id=&quot;member-records&quot;
+            &gt;
+              수행 기록
+            &lt;/h2&gt;
+            &lt;p&gt;
+              기간별 기록을 확인하고, 선택한 기간의 기록을 삭제할 수 있습니다.
+            &lt;/p&gt;
+            &lt;a
+              class=&quot;button primary&quot;
+              data-discover=&quot;true&quot;
+              href=&quot;/records&quot;
+            &gt;
+              수행 기록 관리
+            &lt;/a&gt;
+          &lt;/section&gt;
+          &lt;section
+            aria-labelledby=&quot;member-withdrawal&quot;
+            class=&quot;member-section&quot;
+          &gt;
+            &lt;h2
+              id=&quot;member-withdrawal&quot;
+            &gt;
+              회원 탈퇴
+            &lt;/h2&gt;
+            &lt;p&gt;
+              계정과 수행 기록을 삭제합니다. 먼저 삭제 범위와 본인 확인 절차를 확인해 주세요.
+            &lt;/p&gt;
+            &lt;a
+              class=&quot;button secondary&quot;
+              data-discover=&quot;true&quot;
+              href=&quot;/account/delete&quot;
+            &gt;
+              회원 탈퇴 안내
+            &lt;/a&gt;
+          &lt;/section&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/start&quot;
+          &gt;
+            내 시작
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/records&quot;
+          &gt;
+            수행 기록
+          &lt;/a&gt;
+          &lt;a
+            aria-current=&quot;page&quot;
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/account&quot;
+          &gt;
+            내 계정
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;member-screen&quot;
+        &gt;
+          &lt;p
+            class=&quot;eyebrow&quot;
+          &gt;
+            MY ACCOUNT
+          &lt;/p&gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            내 계정
+          &lt;/h1&gt;
+          &lt;p
+            class=&quot;muted member-lead&quot;
+          &gt;
+            로그인 정보와 수행 기록을 관리합니다.
+          &lt;/p&gt;
+          &lt;section
+            aria-labelledby=&quot;member-login&quot;
+            class=&quot;member-section&quot;
+          &gt;
+            &lt;h2
+              id=&quot;member-login&quot;
+            &gt;
+              로그인 정보
+            &lt;/h2&gt;
+            &lt;dl
+              class=&quot;member-details&quot;
+            &gt;
+              &lt;dt&gt;
+                확인된 이메일
+              &lt;/dt&gt;
+              &lt;dd&gt;
+                fixture@example.com
+              &lt;/dd&gt;
+            &lt;/dl&gt;
+            &lt;button
+              class=&quot;button secondary&quot;
+              type=&quot;button&quot;
+            &gt;
+              로그아웃
+            &lt;/button&gt;
+          &lt;/section&gt;
+          &lt;section
+            aria-labelledby=&quot;member-records&quot;
+            class=&quot;member-section&quot;
+          &gt;
+            &lt;h2
+              id=&quot;member-records&quot;
+            &gt;
+              수행 기록
+            &lt;/h2&gt;
+            &lt;p&gt;
+              기간별 기록을 확인하고, 선택한 기간의 기록을 삭제할 수 있습니다.
+            &lt;/p&gt;
+            &lt;a
+              class=&quot;button primary&quot;
+              data-discover=&quot;true&quot;
+              href=&quot;/records&quot;
+            &gt;
+              수행 기록 관리
+            &lt;/a&gt;
+          &lt;/section&gt;
+          &lt;section
+            aria-labelledby=&quot;member-withdrawal&quot;
+            class=&quot;member-section&quot;
+          &gt;
+            &lt;h2
+              id=&quot;member-withdrawal&quot;
+            &gt;
+              회원 탈퇴
+            &lt;/h2&gt;
+            &lt;p&gt;
+              계정과 수행 기록을 삭제합니다. 먼저 삭제 범위와 본인 확인 절차를 확인해 주세요.
+            &lt;/p&gt;
+            &lt;a
+              class=&quot;button secondary&quot;
+              data-discover=&quot;true&quot;
+              href=&quot;/account/delete&quot;
+            &gt;
+              회원 탈퇴 안내
+            &lt;/a&gt;
+          &lt;/section&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/NotificationPreferencesPage.test.tsx:34:30
+            </failure>
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W01 auth gate blocks settings requests at 401" time="1.0148435">
+            <failure message="Unable to find role=&quot;heading&quot; and name &quot;다시 만나 반갑습니다&quot;
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/login&quot;[39m
+          [36m&gt;[39m
+            [0m로그인[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/login&quot;[39m
+          [36m&gt;[39m
+            [0m로그인[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m" type="TestingLibraryElementError">
+TestingLibraryElementError: Unable to find role=&quot;heading&quot; and name &quot;다시 만나 반갑습니다&quot;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/login&quot;
+          &gt;
+            로그인
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/login&quot;
+          &gt;
+            로그인
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/NotificationPreferencesPage.test.tsx:46:16
+            </failure>
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W01 auth gate blocks settings requests at 503" time="1.017152208">
+            <failure message="Unable to find role=&quot;heading&quot; and name &quot;연결을 확인해 주세요&quot;
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/login&quot;[39m
+          [36m&gt;[39m
+            [0m로그인[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/login&quot;[39m
+          [36m&gt;[39m
+            [0m로그인[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m" type="TestingLibraryElementError">
+TestingLibraryElementError: Unable to find role=&quot;heading&quot; and name &quot;연결을 확인해 주세요&quot;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/login&quot;
+          &gt;
+            로그인
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/login&quot;
+          &gt;
+            로그인
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/NotificationPreferencesPage.test.tsx:46:16
+            </failure>
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W01 read loading hides the form, then displays server values, not guessed defaults" time="1.016494958">
+            <failure message="Unable to find an element with the text: 설정을 불러오고 있습니다.. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/start&quot;[39m
+          [36m&gt;[39m
+            [0m내 시작[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/records&quot;[39m
+          [36m&gt;[39m
+            [0m수행 기록[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33maria-current[39m=[32m&quot;page&quot;[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/account&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/start&quot;[39m
+          [36m&gt;[39m
+            [0m내 시작[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/records&quot;[39m
+          [36m&gt;[39m
+            [0m수행 기록[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33maria-current[39m=[32m&quot;page&quot;[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/account&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m" type="TestingLibraryElementError">
+TestingLibraryElementError: Unable to find an element with the text: 설정을 불러오고 있습니다.. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/start&quot;
+          &gt;
+            내 시작
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/records&quot;
+          &gt;
+            수행 기록
+          &lt;/a&gt;
+          &lt;a
+            aria-current=&quot;page&quot;
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/account&quot;
+          &gt;
+            내 계정
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/start&quot;
+          &gt;
+            내 시작
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/records&quot;
+          &gt;
+            수행 기록
+          &lt;/a&gt;
+          &lt;a
+            aria-current=&quot;page&quot;
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/account&quot;
+          &gt;
+            내 계정
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/NotificationPreferencesPage.test.tsx:54:16
+            </failure>
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W02 explicit save uses all fields, preserves the disabled interval and changes sound only on choice" time="1.016940625">
+            <failure message="Unable to find role=&quot;button&quot; and name &quot;설정 저장&quot;
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/start&quot;[39m
+          [36m&gt;[39m
+            [0m내 시작[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/records&quot;[39m
+          [36m&gt;[39m
+            [0m수행 기록[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33maria-current[39m=[32m&quot;page&quot;[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/account&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/start&quot;[39m
+          [36m&gt;[39m
+            [0m내 시작[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/records&quot;[39m
+          [36m&gt;[39m
+            [0m수행 기록[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33maria-current[39m=[32m&quot;page&quot;[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/account&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m" type="TestingLibraryElementError">
+TestingLibraryElementError: Unable to find role=&quot;button&quot; and name &quot;설정 저장&quot;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/start&quot;
+          &gt;
+            내 시작
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/records&quot;
+          &gt;
+            수행 기록
+          &lt;/a&gt;
+          &lt;a
+            aria-current=&quot;page&quot;
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/account&quot;
+          &gt;
+            내 계정
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/start&quot;
+          &gt;
+            내 시작
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/records&quot;
+          &gt;
+            수행 기록
+          &lt;/a&gt;
+          &lt;a
+            aria-current=&quot;page&quot;
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/account&quot;
+          &gt;
+            내 계정
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ loaded src/pages/NotificationPreferencesPage.test.tsx:27:17
+ ❯ src/pages/NotificationPreferencesPage.test.tsx:63:17
+            </failure>
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W02 invalid minutes  focus the error summary without POST" time="1.018396417">
+            <failure message="Unable to find role=&quot;button&quot; and name &quot;설정 저장&quot;
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/start&quot;[39m
+          [36m&gt;[39m
+            [0m내 시작[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/records&quot;[39m
+          [36m&gt;[39m
+            [0m수행 기록[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33maria-current[39m=[32m&quot;page&quot;[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/account&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/start&quot;[39m
+          [36m&gt;[39m
+            [0m내 시작[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/records&quot;[39m
+          [36m&gt;[39m
+            [0m수행 기록[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33maria-current[39m=[32m&quot;page&quot;[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/account&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m" type="TestingLibraryElementError">
+TestingLibraryElementError: Unable to find role=&quot;button&quot; and name &quot;설정 저장&quot;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/start&quot;
+          &gt;
+            내 시작
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/records&quot;
+          &gt;
+            수행 기록
+          &lt;/a&gt;
+          &lt;a
+            aria-current=&quot;page&quot;
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/account&quot;
+          &gt;
+            내 계정
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/start&quot;
+          &gt;
+            내 시작
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/records&quot;
+          &gt;
+            수행 기록
+          &lt;/a&gt;
+          &lt;a
+            aria-current=&quot;page&quot;
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/account&quot;
+          &gt;
+            내 계정
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ loaded src/pages/NotificationPreferencesPage.test.tsx:27:17
+ ❯ src/pages/NotificationPreferencesPage.test.tsx:76:68
+            </failure>
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W02 invalid minutes 0 focus the error summary without POST" time="1.013941416">
+            <failure message="Unable to find role=&quot;button&quot; and name &quot;설정 저장&quot;
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/start&quot;[39m
+          [36m&gt;[39m
+            [0m내 시작[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/records&quot;[39m
+          [36m&gt;[39m
+            [0m수행 기록[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33maria-current[39m=[32m&quot;page&quot;[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/account&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/start&quot;[39m
+          [36m&gt;[39m
+            [0m내 시작[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/records&quot;[39m
+          [36m&gt;[39m
+            [0m수행 기록[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33maria-current[39m=[32m&quot;page&quot;[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/account&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m" type="TestingLibraryElementError">
+TestingLibraryElementError: Unable to find role=&quot;button&quot; and name &quot;설정 저장&quot;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/start&quot;
+          &gt;
+            내 시작
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/records&quot;
+          &gt;
+            수행 기록
+          &lt;/a&gt;
+          &lt;a
+            aria-current=&quot;page&quot;
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/account&quot;
+          &gt;
+            내 계정
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/start&quot;
+          &gt;
+            내 시작
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/records&quot;
+          &gt;
+            수행 기록
+          &lt;/a&gt;
+          &lt;a
+            aria-current=&quot;page&quot;
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/account&quot;
+          &gt;
+            내 계정
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ loaded src/pages/NotificationPreferencesPage.test.tsx:27:17
+ ❯ src/pages/NotificationPreferencesPage.test.tsx:76:68
+            </failure>
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W02 invalid minutes 1441 focus the error summary without POST" time="1.015531166">
+            <failure message="Unable to find role=&quot;button&quot; and name &quot;설정 저장&quot;
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/start&quot;[39m
+          [36m&gt;[39m
+            [0m내 시작[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/records&quot;[39m
+          [36m&gt;[39m
+            [0m수행 기록[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33maria-current[39m=[32m&quot;page&quot;[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/account&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/start&quot;[39m
+          [36m&gt;[39m
+            [0m내 시작[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/records&quot;[39m
+          [36m&gt;[39m
+            [0m수행 기록[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33maria-current[39m=[32m&quot;page&quot;[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/account&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m" type="TestingLibraryElementError">
+TestingLibraryElementError: Unable to find role=&quot;button&quot; and name &quot;설정 저장&quot;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/start&quot;
+          &gt;
+            내 시작
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/records&quot;
+          &gt;
+            수행 기록
+          &lt;/a&gt;
+          &lt;a
+            aria-current=&quot;page&quot;
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/account&quot;
+          &gt;
+            내 계정
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/start&quot;
+          &gt;
+            내 시작
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/records&quot;
+          &gt;
+            수행 기록
+          &lt;/a&gt;
+          &lt;a
+            aria-current=&quot;page&quot;
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/account&quot;
+          &gt;
+            내 계정
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ loaded src/pages/NotificationPreferencesPage.test.tsx:27:17
+ ❯ src/pages/NotificationPreferencesPage.test.tsx:76:68
+            </failure>
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W02 invalid minutes 1.5 focus the error summary without POST" time="1.017176458">
+            <failure message="Unable to find role=&quot;button&quot; and name &quot;설정 저장&quot;
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/start&quot;[39m
+          [36m&gt;[39m
+            [0m내 시작[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/records&quot;[39m
+          [36m&gt;[39m
+            [0m수행 기록[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33maria-current[39m=[32m&quot;page&quot;[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/account&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/start&quot;[39m
+          [36m&gt;[39m
+            [0m내 시작[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/records&quot;[39m
+          [36m&gt;[39m
+            [0m수행 기록[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33maria-current[39m=[32m&quot;page&quot;[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/account&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m" type="TestingLibraryElementError">
+TestingLibraryElementError: Unable to find role=&quot;button&quot; and name &quot;설정 저장&quot;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/start&quot;
+          &gt;
+            내 시작
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/records&quot;
+          &gt;
+            수행 기록
+          &lt;/a&gt;
+          &lt;a
+            aria-current=&quot;page&quot;
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/account&quot;
+          &gt;
+            내 계정
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/start&quot;
+          &gt;
+            내 시작
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/records&quot;
+          &gt;
+            수행 기록
+          &lt;/a&gt;
+          &lt;a
+            aria-current=&quot;page&quot;
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/account&quot;
+          &gt;
+            내 계정
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ loaded src/pages/NotificationPreferencesPage.test.tsx:27:17
+ ❯ src/pages/NotificationPreferencesPage.test.tsx:76:68
+            </failure>
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W03 failed reads require explicit retry and never show raw errors or a default form" time="1.016934209">
+            <failure message="Unable to find an element with the text: 설정을 불러오지 못했습니다.. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/start&quot;[39m
+          [36m&gt;[39m
+            [0m내 시작[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/records&quot;[39m
+          [36m&gt;[39m
+            [0m수행 기록[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33maria-current[39m=[32m&quot;page&quot;[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/account&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/start&quot;[39m
+          [36m&gt;[39m
+            [0m내 시작[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/records&quot;[39m
+          [36m&gt;[39m
+            [0m수행 기록[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33maria-current[39m=[32m&quot;page&quot;[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/account&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m" type="TestingLibraryElementError">
+TestingLibraryElementError: Unable to find an element with the text: 설정을 불러오지 못했습니다.. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/start&quot;
+          &gt;
+            내 시작
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/records&quot;
+          &gt;
+            수행 기록
+          &lt;/a&gt;
+          &lt;a
+            aria-current=&quot;page&quot;
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/account&quot;
+          &gt;
+            내 계정
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/start&quot;
+          &gt;
+            내 시작
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/records&quot;
+          &gt;
+            수행 기록
+          &lt;/a&gt;
+          &lt;a
+            aria-current=&quot;page&quot;
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/account&quot;
+          &gt;
+            내 계정
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/NotificationPreferencesPage.test.tsx:87:24
+            </failure>
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W03 uncertain POST blocks editing and does not automatically repeat a possibly accepted save" time="1.016136417">
+            <failure message="Unable to find role=&quot;button&quot; and name &quot;설정 저장&quot;
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/start&quot;[39m
+          [36m&gt;[39m
+            [0m내 시작[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/records&quot;[39m
+          [36m&gt;[39m
+            [0m수행 기록[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33maria-current[39m=[32m&quot;page&quot;[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/account&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/start&quot;[39m
+          [36m&gt;[39m
+            [0m내 시작[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/records&quot;[39m
+          [36m&gt;[39m
+            [0m수행 기록[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33maria-current[39m=[32m&quot;page&quot;[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/account&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m" type="TestingLibraryElementError">
+TestingLibraryElementError: Unable to find role=&quot;button&quot; and name &quot;설정 저장&quot;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/start&quot;
+          &gt;
+            내 시작
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/records&quot;
+          &gt;
+            수행 기록
+          &lt;/a&gt;
+          &lt;a
+            aria-current=&quot;page&quot;
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/account&quot;
+          &gt;
+            내 계정
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/start&quot;
+          &gt;
+            내 시작
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/records&quot;
+          &gt;
+            수행 기록
+          &lt;/a&gt;
+          &lt;a
+            aria-current=&quot;page&quot;
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/account&quot;
+          &gt;
+            내 계정
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ loaded src/pages/NotificationPreferencesPage.test.tsx:27:17
+ ❯ src/pages/NotificationPreferencesPage.test.tsx:98:17
+            </failure>
+        </testcase>
+        <testcase classname="src/pages/NotificationPreferencesPage.test.tsx" name="W04 pending save is single-flight; auth refresh removes old drafts and ignores late responses" time="1.016404125">
+            <failure message="Unable to find role=&quot;button&quot; and name &quot;설정 저장&quot;
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/start&quot;[39m
+          [36m&gt;[39m
+            [0m내 시작[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/records&quot;[39m
+          [36m&gt;[39m
+            [0m수행 기록[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33maria-current[39m=[32m&quot;page&quot;[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/account&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/start&quot;[39m
+          [36m&gt;[39m
+            [0m내 시작[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/records&quot;[39m
+          [36m&gt;[39m
+            [0m수행 기록[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33maria-current[39m=[32m&quot;page&quot;[39m
+            [33mclass[39m=[32m&quot;nav-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/account&quot;[39m
+          [36m&gt;[39m
+            [0m내 계정[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;status-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m페이지를 찾을 수 없습니다[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;button secondary&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/&quot;[39m
+          [36m&gt;[39m
+            [0m서비스 소개로 돌아가기[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;서비스 안내&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/help&quot;[39m
+          [36m&gt;[39m
+            [0m도움말[0m
+          [36m&lt;/a&gt;[39m
+          [36m&lt;a[39m
+            [33mclass[39m=[32m&quot;footer-link&quot;[39m
+            [33mdata-discover[39m=[32m&quot;true&quot;[39m
+            [33mhref[39m=[32m&quot;/data&quot;[39m
+          [36m&gt;[39m
+            [0m카메라·데이터 안내[0m
+          [36m&lt;/a&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m" type="TestingLibraryElementError">
+TestingLibraryElementError: Unable to find role=&quot;button&quot; and name &quot;설정 저장&quot;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/start&quot;
+          &gt;
+            내 시작
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/records&quot;
+          &gt;
+            수행 기록
+          &lt;/a&gt;
+          &lt;a
+            aria-current=&quot;page&quot;
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/account&quot;
+          &gt;
+            내 계정
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/start&quot;
+          &gt;
+            내 시작
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/records&quot;
+          &gt;
+            수행 기록
+          &lt;/a&gt;
+          &lt;a
+            aria-current=&quot;page&quot;
+            class=&quot;nav-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/account&quot;
+          &gt;
+            내 계정
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;status-screen&quot;
+        &gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            페이지를 찾을 수 없습니다
+          &lt;/h1&gt;
+          &lt;a
+            class=&quot;button secondary&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/&quot;
+          &gt;
+            서비스 소개로 돌아가기
+          &lt;/a&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+        &lt;nav
+          aria-label=&quot;서비스 안내&quot;
+        &gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/help&quot;
+          &gt;
+            도움말
+          &lt;/a&gt;
+          &lt;a
+            class=&quot;footer-link&quot;
+            data-discover=&quot;true&quot;
+            href=&quot;/data&quot;
+          &gt;
+            카메라·데이터 안내
+          &lt;/a&gt;
+        &lt;/nav&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ loaded src/pages/NotificationPreferencesPage.test.tsx:27:17
+ ❯ src/pages/NotificationPreferencesPage.test.tsx:110:17
+            </failure>
+        </testcase>
+    </testsuite>
+</testsuites>

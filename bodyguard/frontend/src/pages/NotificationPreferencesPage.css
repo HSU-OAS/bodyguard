@@ -1,0 +1,136 @@
+/* FR-N-03/NFR-08: established clinical web tokens, no second design system. */
+.notification-screen {
+  max-width: 720px;
+  padding: 40px 0 80px;
+}
+.notification-back {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  color: var(--muted);
+  font-size: var(--type-small);
+}
+.notification-screen .eyebrow {
+  margin: 24px 0 16px;
+}
+.website .notification-screen h1 {
+  font-size: var(--type-title);
+}
+.notification-lead {
+  margin-top: 16px;
+}
+.notification-note {
+  margin-top: 28px;
+  padding: 20px 24px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-soft);
+}
+.notification-screen form {
+  margin-top: 32px;
+}
+.notification-group {
+  margin-top: 28px;
+  padding: 20px 0 28px;
+  border-bottom: 1px solid var(--line);
+  min-width: 0;
+}
+.notification-group legend {
+  font-size: var(--type-label);
+  font-weight: 600;
+}
+.notification-group legend span {
+  color: var(--accent);
+  font-size: var(--type-small);
+  margin-right: 16px;
+}
+.notification-group > p {
+  max-width: 560px;
+}
+.notification-note p + p {
+  margin-top: 8px;
+}
+.notification-choice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  margin-top: 12px;
+  width: fit-content;
+  cursor: pointer;
+}
+.notification-choice input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+  flex: 0 0 auto;
+}
+.notification-interval {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  margin-top: 12px;
+}
+.notification-interval label {
+  min-width: 224px;
+}
+.notification-interval input {
+  width: 120px;
+  height: 48px;
+  border: 1px solid var(--control-line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: var(--surface);
+}
+.notification-interval input:disabled {
+  background: var(--surface-soft);
+  color: var(--muted);
+}
+.notification-interval input[aria-invalid="true"] {
+  border-color: var(--error);
+}
+.notification-group:disabled .notification-choice {
+  cursor: not-allowed;
+  color: var(--muted);
+}
+.notification-range {
+  margin-top: 24px;
+}
+.notification-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+  margin-top: 32px;
+}
+.notification-actions a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  color: var(--muted);
+  font-size: var(--type-small);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.notification-state {
+  margin-top: 32px;
+}
+.notification-state .button {
+  margin-top: 16px;
+}
+.notification-errors {
+  border: 1px solid var(--error);
+  border-radius: 12px;
+  padding: 20px;
+}
+.notification-errors button {
+  display: block;
+  margin-top: 8px;
+  min-height: 48px;
+  text-align: left;
+}
+.notification-errors:focus {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+}

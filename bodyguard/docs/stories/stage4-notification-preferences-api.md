@@ -1,6 +1,6 @@
 # S4.N1 — 계정별 알림 설정 API
 
-review · baseline43b13f37efa5ed58a8d5898af213fb66ea374a0e · codex/notification-preferences-api · 2026-10-06
+done · baseline43b13f37efa5ed58a8d5898af213fb66ea374a0e · codex/notification-preferences-api · 2026-10-06
 
 ## 범위와 의존성
 
@@ -52,6 +52,8 @@ engineering:code-review로 허용5필드·본인 PK/잠긴 세션·cookie-bound 
 진행 중 PR41이 mergef47dea17a7ec92ff62404c5624bc4c18cd0782a2로 main에 포함된 것을 읽고 알림 설정 브랜치를 fast-forward했다. 해당 Story 파일·증거를 수정하지 않았다. API/SQL 관련 source16 SHA는 앞선321건 검증 소스와 동일하다. 새 hook20건을 포함한 최신 전체 frontend523건/실패0(19.81초)·타입·Biome120파일·build/production guard를 실제 재실행했다. 이전503건 결과와 artifacts.json을 보존하고 통합 결과는 artifacts-v2.json에 별도로 기록한다. artifact19/source16을 확인하고 같은 수집을 재실행해 기존 byte가 바뀌지 않았음을 검증했다.
 
 ## File List
+
+실제 post-merge: PR42 source85258323d0a220be21856eb65b881d0faf7f1f48는 필수 검증·작성자 scope 리뷰·remote41 blob/diff·latest main/CLEAN·체크 없음 뒤 merge6ee4dce33047fae2f33430ee88baf9e09bf76ff3로 main에 포함됐다. 부모f47dea1/8525832와 source ancestor·원격 브랜치 보존·clean을 실제 확인했다. API Story만 done이며 실제 알림/웹 UI/전체 단계 통과를 뜻하지 않는다.
 
 - bodyguard/docs/stories/stage4-notification-preferences-api.md
 - bodyguard/backend/app/notification_preferences.py

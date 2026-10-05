@@ -43,6 +43,7 @@ def main() -> int:
             "ownercapture",
             "recordedsession",
             "authcoaching",
+            "notifications",
         ),
         nargs="?",
         default="account",
@@ -184,6 +185,7 @@ def main() -> int:
                         "ownercapture",
                         "recordedsession",
                         "authcoaching",
+                        "notifications",
                     )
                     else f"test-results/{args.suite}"
                 )
@@ -220,6 +222,7 @@ def main() -> int:
                                 "ownercapture",
                                 "recordedsession",
                                 "authcoaching",
+                                "notifications",
                             )
                             else ""
                         ),

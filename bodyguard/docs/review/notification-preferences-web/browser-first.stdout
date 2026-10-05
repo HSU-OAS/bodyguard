@@ -1,0 +1,132 @@
+[WebServer] (node:34953) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ node scripts/prepare-assets.mjs && tsc --noEmit && vite build
+[WebServer] (node:34986) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:34999) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:35013) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 e2e/notifications.spec.ts:100:1 › N-W01 실제 가입→내 계정→설정 저장→새로고침·키보드·화이트 블루/920px (23.1s)
+(node:35199) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 e2e/notifications.spec.ts:164:1 › N-W02 실제 저장 수락 후 응답 단절·자동 재저장0·명시 재조회 (3.4s)
+(node:35269) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 e2e/notifications.spec.ts:196:1 › N-W03 기존 A 폼·쿠키 B 교체·실제 old-proof403·타인 설정 보존 (2.8s)
+(node:35344) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  4 e2e/notifications.spec.ts:235:1 › N-W04 loading·읽기 장애 복구·잘못된 시간 오류 초점·POST0 (3.2s)
+
+
+  1) e2e/notifications.spec.ts:100:1 › N-W01 실제 가입→내 계정→설정 저장→새로고침·키보드·화이트 블루/920px ────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: '이메일을 확인해 주세요' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: '이메일을 확인해 주세요' }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: '이메일을 확인해 주세요' })
+
+
+      107 |   await page.getByLabel('비밀번호', { exact: true }).fill(password)
+      108 |   await page.getByRole('button', { name: '인증 코드 받기', exact: true }).click()
+    > 109 |   await expect(page.getByRole('heading', { name: '이메일을 확인해 주세요' })).toBeVisible()
+          |                                                                     ^
+      110 |   await page.getByLabel('인증 코드', { exact: true }).fill(await code(email))
+      111 |   await page.getByRole('button', { name: '인증하고 시작하기' }).click()
+      112 |   await page.getByRole('link', { name: '내 계정', exact: true }).click()
+        at [workspace]/bodyguard/frontend/e2e/notifications.spec.ts:109:69
+
+    Error Context: test-results/notifications-20261005T180605813696Z/notifications-N-W01-실제-가입→내-계정→설정-저장→새로고침·키보드·화이트-블루-920px/error-context.md
+
+  2) e2e/notifications.spec.ts:164:1 › N-W02 실제 저장 수락 후 응답 단절·자동 재저장0·명시 재조회 ───────────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 201
+
+      45 |       })
+      46 |     ).status(),
+    > 47 |   ).toBe(200)
+         |     ^
+      48 |   return email
+      49 | }
+      50 | async function settings(page: Page) {
+        at register ([workspace]/bodyguard/frontend/e2e/notifications.spec.ts:47:5)
+        at [workspace]/bodyguard/frontend/e2e/notifications.spec.ts:168:3
+
+    Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+        at UtilityScript.evaluate (<anonymous>:313:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at UtilityScript.evaluate (<anonymous>:313:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at [workspace]/bodyguard/frontend/e2e/notifications.spec.ts:78:30
+
+    Error Context: test-results/notifications-20261005T180605813696Z/notifications-N-W02-실제-저장-수락-후-응답-단절·자동-재저장0·명시-재조회/error-context.md
+
+  3) e2e/notifications.spec.ts:196:1 › N-W03 기존 A 폼·쿠키 B 교체·실제 old-proof403·타인 설정 보존 ───────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 201
+
+      45 |       })
+      46 |     ).status(),
+    > 47 |   ).toBe(200)
+         |     ^
+      48 |   return email
+      49 | }
+      50 | async function settings(page: Page) {
+        at register ([workspace]/bodyguard/frontend/e2e/notifications.spec.ts:47:5)
+        at [workspace]/bodyguard/frontend/e2e/notifications.spec.ts:200:13
+
+    Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+        at UtilityScript.evaluate (<anonymous>:313:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at UtilityScript.evaluate (<anonymous>:313:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at [workspace]/bodyguard/frontend/e2e/notifications.spec.ts:78:30
+
+    Error Context: test-results/notifications-20261005T180605813696Z/notifications-N-W03-기존-A-폼·쿠키-B-교체·실제-old-proof403·타인-설정-보존/error-context.md
+
+  4) e2e/notifications.spec.ts:235:1 › N-W04 loading·읽기 장애 복구·잘못된 시간 오류 초점·POST0 ───────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 201
+
+      45 |       })
+      46 |     ).status(),
+    > 47 |   ).toBe(200)
+         |     ^
+      48 |   return email
+      49 | }
+      50 | async function settings(page: Page) {
+        at register ([workspace]/bodyguard/frontend/e2e/notifications.spec.ts:47:5)
+        at [workspace]/bodyguard/frontend/e2e/notifications.spec.ts:239:3
+
+    Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+        at UtilityScript.evaluate (<anonymous>:313:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at UtilityScript.evaluate (<anonymous>:313:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at [workspace]/bodyguard/frontend/e2e/notifications.spec.ts:78:30
+
+    Error Context: test-results/notifications-20261005T180605813696Z/notifications-N-W04-loading·읽기-장애-복구·잘못된-시간-오류-초점·POST0/error-context.md
+
+  4 failed
+    e2e/notifications.spec.ts:100:1 › N-W01 실제 가입→내 계정→설정 저장→새로고침·키보드·화이트 블루/920px ─────────────────
+    e2e/notifications.spec.ts:164:1 › N-W02 실제 저장 수락 후 응답 단절·자동 재저장0·명시 재조회 ────────────────────────
+    e2e/notifications.spec.ts:196:1 › N-W03 기존 A 폼·쿠키 B 교체·실제 old-proof403·타인 설정 보존 ────────────────
+    e2e/notifications.spec.ts:235:1 › N-W04 loading·읽기 장애 복구·잘못된 시간 오류 초점·POST0 ────────────────────

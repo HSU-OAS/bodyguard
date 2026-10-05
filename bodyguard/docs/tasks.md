@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+최신: PR42의 실제 source8525832→merge6ee4dce/main·부모·브랜치 보존·clean을 확인하고 [S4.N2 내 계정 알림 설정 웹](stories/stage4-notification-preferences-web.md)을 구현했다. 실제 가입→계정→설정 저장→새로고침, 수락 후 응답 단절/명시 재조회, 과거 A 폼의 B 쿠키403/타인 보존과920px·확대·키보드/대비를 확인했다. [실제 화면·실패 원본·합성 구분](review/notification-preferences-web/README.md). 최신 main e4265f5 통합 뒤 전체590 frontend/321 API·최종Chrome4·정적/build/guard 통과·조건부 PR 게이트 준비다. 알림 작동/SDK privacy·classifier/추천·아바타 이월·Q32/참여자/법무·외부/운영·전체1~6 미완료, 화이트·블루 웹·같은 아바타 부위 새 제작0을 유지한다. 아래는 시점별 기록이다.
+
 최신: [PR43](https://github.com/HSU-OAS/bodyguard/pull/43)의 source692c7e4는 scoped 검증·작성자 리뷰·35개 원격 blob/diff·latest main 통합/CLEAN·체크 없음 후 mergecf65132로 main에 포함됐다. 브랜치를 보존했으며 [S4.12](stories/minute-aggregation.md)는 **private 집계 범위만 완료**다. 최초/통합 검증 원본은 유지한다. 화이트·블루 웹 디자인은 지정 web-design-studio의 기존 토큰/실제 화면 기준으로 유지하며 새 UI/Figma/추가 audit으로 주장하지 않는다. 다음은 1분 요약의 owner/계정·서버 계약 연결과 확정 부가 기능의 독립 구현이며, 별도 실행 중인 알림 설정 웹을 중복 변경하지 않는다. 실제 classifier/기준선·공개 producer/두 아바타·SDK 개인정보 P2·단계2 이월·실측/참여자·Q32 나머지·법무/외부/운영·전체1~6 완료 기준은 그대로 미충족이다. 아래는 시점별 기록이다.
 
 최신: [S4.12 1분 시간가중 집계](stories/minute-aggregation.md)를 구현했다. 실제 관찰 구간만 분별/지표별로 집계하고 가림·공백을 정상 시간으로 채우지 않으며 동시 이탈을 중복 합산하지 않는다. [실패/모의 경계·실제 웹 화면 증거](review/minute-aggregation/README.md). 전체558 frontend·타입/정적/build·공개8·guard/private producer0·source3/artifact18 검증 후 조건부 PR 게이트 진행이다. 실제 classifier/기준선·측정/계정/HTTP 연결·Q32 알림/PDF/LLM/변화 탐지·단계2 이월/SDK P2/실측·참여자/외부·운영·전체1~6 미완료, 화이트·블루 웹·같은 아바타 부위 새 제작0을 유지한다. 아래는 시점별 기록이다.
