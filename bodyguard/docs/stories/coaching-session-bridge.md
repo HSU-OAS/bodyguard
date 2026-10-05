@@ -1,6 +1,6 @@
 # S2.5d — 코칭 세션·페이지 수명 연결 기초
 
-독립 기초 구현·회귀/작성자 검토 완료 · PR 게이트 진행 / main cf841070485c5ce777181a8b71b0426f55ecfbbe · codex/coaching-session-bridge
+독립 기초 main 병합 · PR #35 source0b71c2d3db05635701925693406b2630398b5fb0 / merge1528e9eb56425cc288f77d0b94721a19635a752c · codex/coaching-session-bridge
 
 ## 범위·선행 상태
 
@@ -26,7 +26,7 @@ T-01: 생성/각 gate false·unknown; T-02: ready/pause/resume/end; T-03: pendin
 - [x] 명세·결정적 하네스와 실제 미구현 red 보존. 수집 실패/시간0을 기능 실행 실패나 성공으로 표시하지 않았다.
 - [x] coordinator·고정 기술 사유·lifecycle binder·T-01~08 합성44건 실행/green.
 - [x] 전체411건·정적/build·public 미노출·실제 Chrome7흐름, 타입 실패/작성자 리뷰P2 세 항목 보존·보완·회귀. 현재 scope 미해결P1/P2 없음.
-- [ ] exact source·latest main/diff/CLEAN·체크·조건부 PR merge/main 포함·source 브랜치 보존 확인.
+- [x] PR #35 exact tested source0b71c2d3·필수 검증·scope P1/P2 없음·latest main/diff/CLEAN/MERGEABLE·체크 없음·외부reviews0 확인 후 merge1528e9eb로 병합했다. 실제 부모/main 포함·원본 로컬/원격 source 브랜치 보존·working tree clean을 확인했다.
 
 실제 ports/신체/동작 검증·두 아바타/3D·코칭 UI/결과 저장·Stage2 D2-A/M/T/R/I/P·확정 부가 기능·외부 계정/시크릿·Docker/TLS/운영·법무/라이선스·참여자/전문가·전체1~6단계는 미완료로 유지한다. 별도 승인 경계를 건너뛰지 않는다.
 

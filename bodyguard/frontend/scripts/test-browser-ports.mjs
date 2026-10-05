@@ -1,0 +1,45 @@
+// FR-M-07/NFR-08: runner-owned refusing proxy; never launches real user webcam.
+import { spawn } from 'node:child_process'
+import { createServer } from 'node:net'
+import { fileURLToPath } from 'node:url'
+
+const sink = createServer((socket) => socket.destroy())
+await new Promise((resolve, reject) => {
+  sink.once('error', reject)
+  sink.listen(0, '127.0.0.1', resolve)
+})
+const address = sink.address()
+if (!address || typeof address === 'string') throw new Error('Proxy address missing')
+const child = spawn(
+  'pnpm',
+  [
+    'exec',
+    'playwright',
+    'test',
+    '--config',
+    'playwright.browserPorts.config.ts',
+    '--output',
+    'test-results/browser-ports',
+    ...process.argv.slice(2),
+  ],
+  {
+    cwd: fileURLToPath(new URL('..', import.meta.url)),
+    env: { ...process.env, BODYGUARD_TEST_BLOCKED_PROXY: `http://127.0.0.1:${address.port}` },
+    stdio: 'inherit',
+  },
+)
+const stop = () => child.kill('SIGTERM')
+process.once('SIGINT', stop)
+process.once('SIGTERM', stop)
+try {
+  process.exitCode = Number(
+    await new Promise((resolve, reject) => {
+      child.once('error', reject)
+      child.once('exit', (code, signal) => resolve(signal ? 1 : (code ?? 1)))
+    }),
+  )
+} finally {
+  process.removeListener('SIGINT', stop)
+  process.removeListener('SIGTERM', stop)
+  await new Promise((resolve) => sink.close(resolve))
+}

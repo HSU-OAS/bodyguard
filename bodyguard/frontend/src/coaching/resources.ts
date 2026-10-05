@@ -9,6 +9,23 @@ type Failure =
   | 'asset-error'
   | 'ownership-error'
   | 'cleanup-error'
+  | 'callback-error'
+// FR-M-07/NFR-08: factories may fail after partial acquisition; do not hide cleanup failure.
+export class ResourceCleanupError extends Error {
+  constructor() {
+    super('Resource cleanup failed')
+  }
+}
+export class ResourceOwnershipError extends Error {
+  constructor() {
+    super('Resource ownership failed')
+  }
+}
+export class ResourceObserverError extends Error {
+  constructor() {
+    super('Resource observer failed')
+  }
+}
 export type ResourceNotice = Readonly<
   { type: 'ready'; generation: number } | { type: 'error'; generation: number; reason: Failure }
 >
@@ -39,6 +56,7 @@ export function createResourceController(ports: Ports, notify: Observer) {
   let poisoned = false
   let observerFailed = false
   let cleanupReported = false
+  let callbackReported = false
 
   const owns = (owner: Owner) => current === owner && !closed && !poisoned
 
@@ -76,18 +94,22 @@ export function createResourceController(ports: Ports, notify: Observer) {
     const task = Promise.resolve()
       .then(() => claim.dispose.call(claim.resource))
       .catch(() => {
-        poisoned = true
-        const owner = detach()
-        if (owner) void retire(owner)
-        if (!cleanupReported) {
-          cleanupReported = true
-          emit({ type: 'error', generation: claim.owner.generation, reason: 'cleanup-error' })
-        }
+        cleanupBroke(claim.owner.generation)
       })
     claim.disposal = task
     pendingCleanup.add(task)
     void task.then(() => pendingCleanup.delete(task))
     return task
+  }
+
+  function cleanupBroke(generation: number) {
+    poisoned = true
+    const owner = detach()
+    if (owner) void retire(owner)
+    if (!cleanupReported) {
+      cleanupReported = true
+      emit({ type: 'error', generation, reason: 'cleanup-error' })
+    }
   }
 
   async function retire(owner: Owner) {
@@ -129,8 +151,23 @@ export function createResourceController(ports: Ports, notify: Observer) {
         return false
       }
       cleanup = resource.dispose
-    } catch {
-      await fail(owner, reason)
+    } catch (error) {
+      if (error instanceof ResourceCleanupError) {
+        // Even a late old factory cleanup failure quarantines the current generation.
+        cleanupBroke(owner.generation)
+        await settleCleanup()
+      } else if (error instanceof ResourceObserverError) {
+        poisoned = true
+        const previous = detach()
+        if (previous) await retire(previous)
+        if (!callbackReported) {
+          callbackReported = true
+          emit({ type: 'error', generation: owner.generation, reason: 'callback-error' })
+        }
+        await settleCleanup()
+      } else {
+        await fail(owner, error instanceof ResourceOwnershipError ? 'ownership-error' : reason)
+      }
       return false
     }
     if (claims.has(resource)) {

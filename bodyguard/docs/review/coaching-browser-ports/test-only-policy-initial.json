@@ -1,0 +1,137 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "[workspace]/bodyguard/frontend/node_modules/.pnpm/@playwright+test@1.63.0/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "playwright.browserPorts.config.ts",
+      "--output",
+      "test-results/browser-ports",
+      "--grep",
+      "diagnostic local CSP"
+    ],
+    "configFile": "[workspace]/bodyguard/frontend/playwright.browserPorts.config.ts",
+    "rootDir": "[workspace]/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "[workspace]/bodyguard/frontend/test-results/browser-ports",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "[workspace]/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "browserPorts.spec.ts",
+          "browserPortsPolicy.spec.ts"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/browser-ports-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "vite --host localhost --port 5184 --strictPort",
+      "url": "http://localhost:5184",
+      "reuseExistingServer": false,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "browserPortsPolicy.spec.ts",
+      "file": "browserPortsPolicy.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "diagnostic local CSP blocks SDK telemetry while native tasks initialize and close",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2400,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T14:04:21.579Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "test-only-policy-observations.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJmYWtlX2NhbWVyYV9saXZlIjogdHJ1ZSwKICAidHJhY2tzX2VuZGVkIjogdHJ1ZSwKICAidmlkZW9fZGV0YWNoZWQiOiB0cnVlLAogICJpbml0aWFsaXplZF9uYXRpdmVfdGFza3MiOiAzLAogICJkZWxlZ2F0ZXMiOiBbCiAgICAiR1BVIiwKICAgICJHUFUiLAogICAgIkdQVSIKICBdLAogICJuYXRpdmVfY2xvc2VfYXBpX2NhbGxzIjogMywKICAibmF0aXZlX2Nsb3NlX2FwaV9lcnJvcnMiOiAwLAogICJub3RpY2VzIjogMCwKICAic3RvcmFnZV91bmNoYW5nZWQiOiB0cnVlLAogICJyZWFsX2h1bWFuX3Rlc3QiOiBmYWxzZSwKICAiZ3B1X3dvcmtlcl9tZW1vcnlfcmVsZWFzZV92ZXJpZmllZCI6IGZhbHNlLAogICJjc3BfYmxvY2tlZF9hdHRlbXB0cyI6IDMsCiAgIm91dGdvaW5nX3JlcXVlc3RzIjogMCwKICAicGFnZV9lcnJvcnMiOiAwLAogICJwcm9kdWN0X3BvbGljeV9hcHByb3ZlZCI6IGZhbHNlLAogICJkZXBsb3ltZW50X3Rlc3RlZCI6IGZhbHNlCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7479ddcd21617e702f28-bce44e7d89fa001f6257",
+          "file": "browserPortsPolicy.spec.ts",
+          "line": 4,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-05T14:04:20.797Z",
+    "duration": 3775.641,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

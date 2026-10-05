@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="34" failures="3" errors="0" time="0.781064083">
+    <testsuite name="src/coaching/browserPorts.test.ts" timestamp="2026-10-05T13:55:08.498Z" hostname="local-test-host" tests="34" failures="3" errors="0" skipped="0" time="0.781064083">
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 생성만으로 카메라를 요청하지 않고 실제 아바타 ready를 꾸미지 않는다" time="0.00277325">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 invalid model  initializes nothing" time="0.001221667">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 invalid model other initializes nothing" time="0.000469625">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 invalid model undefined initializes nothing" time="0.000370791">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 invalid model null initializes nothing" time="0.000291041">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 invalid model __proto__ initializes nothing" time="0.000272333">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 camera duplicate/past/invalid generation cannot request or replace a live lease" time="0.001667625">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-02 camera lease owns its stream and disposes once" time="0.000451458">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-02 denied permission initializes no model and emits no raw error" time="0.000428917">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-02 late permission after abort is stopped without attaching video" time="0.052654417">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-02 pending play abort stops immediately and eventual play rejection cannot stop twice" time="0.052106583">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-02 new generation is never detached by late old permission" time="0.053383333">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-03 inference without same current camera initializes nothing" time="0.000634292">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-03 all three tasks are ready in same lease before inference succeeds" time="0.052436084">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-03 pose partial failure closes already-created tasks, not ready" time="0.001857125">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-03 gesture partial failure closes already-created tasks, not ready" time="0.000605125">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-03 face partial failure closes already-created tasks, not ready" time="0.000548167">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-04 abort during pose closes known and late native handles once" time="0.052528542">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-04 abort during gesture closes known and late native handles once" time="0.104499583">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-04 abort during face closes known and late native handles once" time="0.105526542">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-04 native alias is rejected rather than shared or closed twice" time="0.000976">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-05 a close failure cannot prevent other native closes and permanently blocks new preparation" time="0.00131775">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-05 failed partial cleanup is tagged and controller cannot become ready again" time="0.000746166">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-05 camera cleanup attempts all tracks and detaches despite a stop failure" time="0.000649708">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-05 abort during play with stop failure is fixed cleanup fault, not uncaught abort-listener error" time="0.05400025">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-06 track ended stops all same-generation resources and emits a fixed notice once" time="0.054605917">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-06 ended from disposed old tracks never terminates the replacement" time="0.001678166">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-06 failed observer throw safely retires and blocks factories without raw notice" time="0.054003792">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-06 failed observer reject safely retires and blocks factories without raw notice" time="0.052473333">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-06 explicit session reporter rejects unknown/past failures but current ended stops session" time="0.003890875">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 concurrent camera preparations cannot allow an older actor to take over the newer one" time="0.00741175">
+            <failure message="expected &quot;vi.fn()&quot; to be called 1 times, but got 2 times" type="AssertionError">
+AssertionError: expected &quot;vi.fn()&quot; to be called 1 times, but got 2 times
+ ❯ src/coaching/browserPorts.test.ts:415:26
+            </failure>
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-03 inference must use the original camera ownership signal, not another actor token" time="0.006346625">
+            <failure message="promise resolved &quot;{ pose: { …(3) }, hand: { …(2) }, …(2) }&quot; instead of rejecting" type="AssertionError">
+AssertionError: promise resolved &quot;{ pose: { …(3) }, hand: { …(2) }, …(2) }&quot; instead of rejecting
+
+- Expected
++ Received
+
+- Error {
+-   &quot;message&quot;: &quot;rejected promise&quot;,
++ {
++   &quot;dispose&quot;: [Function dispose],
++   &quot;face&quot;: {
++     &quot;delegate&quot;: &quot;CPU&quot;,
++     &quot;landmarker&quot;: {
++       &quot;close&quot;: [Function Mock],
++     },
++     &quot;model&quot;: &quot;lite&quot;,
++   },
++   &quot;hand&quot;: {
++     &quot;delegate&quot;: &quot;CPU&quot;,
++     &quot;recognizer&quot;: {
++       &quot;close&quot;: [Function Mock],
++     },
++   },
++   &quot;pose&quot;: {
++     &quot;delegate&quot;: &quot;CPU&quot;,
++     &quot;landmarker&quot;: {
++       &quot;close&quot;: [Function Mock],
++     },
++     &quot;model&quot;: &quot;lite&quot;,
++   },
+  }
+
+ ❯ src/coaching/browserPorts.test.ts:425:4
+            </failure>
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 selected model cannot be mutated by the external options object after construction" time="0.001407875">
+            <failure message="expected &quot;vi.fn()&quot; to be called with arguments: [ &apos;lite&apos; ]
+
+Received:
+
+  1st vi.fn() call:
+
+  [
+-   &quot;lite&quot;,
++   &quot;full&quot;,
+  ]
+
+
+Number of calls: 1
+" type="AssertionError">
+AssertionError: expected &quot;vi.fn()&quot; to be called with arguments: [ &apos;lite&apos; ]
+
+Received:
+
+  1st vi.fn() call:
+
+  [
+-   &quot;lite&quot;,
++   &quot;full&quot;,
+  ]
+
+
+Number of calls: 1
+
+ ❯ src/coaching/browserPorts.test.ts:436:24
+            </failure>
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-05 late old task cleanup failure quarantines and closes the live newer actor" time="0.055114083">
+        </testcase>
+    </testsuite>
+</testsuites>

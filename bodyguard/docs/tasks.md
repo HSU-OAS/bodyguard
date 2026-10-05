@@ -1,5 +1,9 @@
 # Bodyguard — Tasks
 
+최신: [실제 카메라/추론 포트](stories/coaching-browser-ports.md)는 동일 세대 stream·모델3종의 취득/해제·교체/부분 실패를 구현했다. 실제 Chrome 가짜 카메라에서 native 준비/close·track 종료는 됐지만 Google SDK 계측 시도로 **B-09/P2 실패·Story 미완료**, 제품 개인정보 정책 승인 전 draft/병합 보류다. 시험-only CSP는 모델 동작 유지·외부 네트워크 차단을 확인했으나 제품 적용/운영 검증은 아니다. [실패·현재 화이트/블루 웹·증거](review/coaching-browser-ports/README.md). 기존 공개 웹7흐름·합성446건은 통과했다. 별도 승인은 요청했고 응답을 가정하지 않는다. 다음 독립 frame 계약을 진행하며 코칭/아바타/실측·외부/운영·전체1~6단계는 미완료 유지한다. 아래는 시점별 기록이다.
+
+최신: [PR #35](https://github.com/HSU-OAS/bodyguard/pull/35)는 exact tested source0b71c2d3·필수 검증·scope P1/P2 없음·latest main/diff/CLEAN·체크 없음 후 merge1528e9eb로 병합됐다. 실제 부모/main 포함·source 브랜치 보존을 확인했고 최신 main의 codex/coaching-browser-ports에서 [실제 카메라/추론 자원 소유 포트](stories/coaching-browser-ports.md) 명세·첫 하네스를 시작한다. 실제 카메라/모델·임상/관절/성능·아바타/코칭·전체1~6단계 완료로 세지 않고 기존 실패·외부/참여자 대기·이월 gate와 화이트·블루 웹 디자인을 유지한다. 아래는 시점별 기록이다.
+
 최신: [세션·페이지 수명 연결](stories/coaching-session-bridge.md)은 실제 진행 엔진/자원 controller에 만료·중단·이탈과 관찰 입력을 연결했다. 합성 세션44건/전체411건·정적/build·공개 웹 Chrome7흐름을 검증했고 타입 실패·작성자P2의 종료 시각/즉시 listener 해제/gate getter 예외를 보존/보완했다. [실패·현재 화면](review/coaching-session/README.md). PR 게이트 진행이다. 다음 독립 연결은 실제 카메라/추론 자원의 소유 포트이며 실제 에셋/실측/공개 코칭·결과 저장·외부/운영·부가 기능·참여자/전체1~6단계는 미완료 유지한다. 실제 시험 참여 가능 여부만 요청했고 동의/실측 완료를 가정하지 않는다. 아래는 시점별 기록이다.
 
 최신: [PR #34](https://github.com/HSU-OAS/bodyguard/pull/34)는 실제 검증/작성자 P2 보완·latest main/diff/CLEAN·체크 없음 후 exact source daf09667의 merge cf841070으로 main에 반영됐다. 부모·main 포함/source 브랜치 보존을 확인했다. 최신 main의 codex/coaching-session-bridge에서 [세션·페이지 수명 연결 기초](stories/coaching-session-bridge.md) 명세·하네스를 진행한다. 실제 카메라/모델/에셋·코칭 공개/실측·이월·전체1~6단계는 미완료 유지한다. 화이트·블루 웹 디자인을 유지하고 UI 수정 시 지정된 web-design-studio를 적용한다. 아래는 시점별 기록이다.

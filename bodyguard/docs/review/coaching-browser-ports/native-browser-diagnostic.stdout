@@ -1,0 +1,40 @@
+[WebServer] (node:76280) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:76305) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 11:00:14 PM [vite] (client) [console.warn] W1005 14:00:14.060999 2196592 gl_context.cc:1119] OpenGL error checking is disabled
+[WebServer] 11:00:14 PM [vite] (client) [console.warn] W1005 14:00:14.216000 2196592 gesture_recognizer_graph.cc:134] Hand Gesture Recognizer contains CPU only ops. Sets HandGestureRecognizerGraph acceleration to Xnnpack.
+[WebServer] 11:00:14 PM [vite] (client) [console.warn] W1005 14:00:14.249999 2196592 gl_context.cc:1119] OpenGL error checking is disabled
+[WebServer] 11:00:14 PM [vite] (client) [console.warn] W1005 14:00:14.369999 2196592 face_landmarker_graph.cc:180] Sets FaceBlendshapesGraph acceleration to xnnpack by default.
+[WebServer] 11:00:14 PM [vite] (client) [console.warn] W1005 14:00:14.395000 2196592 gl_context.cc:1119] OpenGL error checking is disabled
+[WebServer] 11:00:15 PM [vite] (client) [console.error] INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+[WebServer] 11:00:15 PM [vite] (client) [console.warn] W1005 14:00:15.444999 2196592 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+[WebServer] 11:00:15 PM [vite] (client) [console.warn] W1005 14:00:15.446000 2196592 inference_feedback_manager.cc:121] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+[WebServer] 11:00:15 PM [vite] (client) [console.warn] W1005 14:00:15.478000 2196592 landmark_projection_calculator.cc:81] Using NORM_RECT without IMAGE_DIMENSIONS is only supported for the square ROI. Provide IMAGE_DIMENSIONS or use PROJECTION_MATRIX.
+[WebServer] 11:00:15 PM [vite] (client) [console.error] INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+  ✘  1 e2e/browserPorts.spec.ts:4:1 › B-08 actual browser native three-task initialization and close APIs with fake camera (4.2s)
+
+
+  1) e2e/browserPorts.spec.ts:4:1 › B-08 actual browser native three-task initialization and close APIs with fake camera
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 2
+
+      58 |   expect(result.storage_unchanged).toBe(true)
+      59 |   expect(result.real_human_test).toBe(false)
+    > 60 |   expect(external).toBe(0)
+         |                    ^
+      61 |   expect(outbound).toBe(0)
+      62 |   expect(errors).toBe(0)
+      63 | })
+        at [workspace]/bodyguard/frontend/e2e/browserPorts.spec.ts:60:20
+
+    Error Context: test-results/browser-ports/browserPorts-B-08-actual-b-2fbac-close-APIs-with-fake-camera/error-context.md
+
+  1 failed
+    e2e/browserPorts.spec.ts:4:1 › B-08 actual browser native three-task initialization and close APIs with fake camera
