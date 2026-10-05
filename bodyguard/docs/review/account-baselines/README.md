@@ -19,6 +19,14 @@
 
 독립 리뷰는 **읽기 전용 소스 검토**이며 테스트 실행0이다. OpenAPI P2/실제 timeout 증거 공백 보완 후 미해결 scoped P1/P2 없음. 작성자도 owner/CSRF·대기 재확인·교체 불변성/rollback·DB 제약·native restore·OpenAPI/생성 타입을 재검토했다. 최신 main 통합과 원격 PR 게이트는 아직 진행 중이다. 체크 없음은 CI 통과로 표시하지 않는다.
 
+## 최신 main 통합 / 실제 웹 흐름
+
+PR45의 알림 설정 웹이maincc9870b에 병합돼 로컬 merge87b8966으로 통합했다(원본커밋7b32108 보존). baseline/API/생성 타입 source18은 기존 SHA와 동일하다. 통합본에서 전체369 API(108.72초)·590 frontend·타입/정적/build/guard·공개8·알림 설정 production Chrome4(11.1초)를 실제 재실행했다. 본인 설정 저장·새로고침, 수락 뒤 응답 단절/명시 재조회, A 폼에서 B 쿠키의 old-proof403·A 값 보존, loading/입력 오류/키보드·920px·CSS확대가 통과했다. 실제 알림/소리/운동·카메라·SMTP/TLS 검증은 아니다.
+
+[통합 manifest](artifacts-v2.json)는 추가15개 실제 출력/PNG·source18 SHA를 연결한다. 수집기 재실행도 동일했다. UI는 PR45의 기여이며 이번 기준선 API가 새 화면을 만들거나 디자인을 바꾸었다고 주장하지 않는다. 기준선 화면은 아직 연결하지 않았다. 기존 white/blue 디자인·입력/오류/저장 흐름을 실제 브라우저로 확인한 결과다. Figma/axe/추가 외부 디자인 감사는 없다.
+
+![통합본의 실제 알림 설정 저장 화면](integrated-notifications-saved.png)
+
 ## 남은 일
 
 실제 3초 보정/지표·classifier·public producer, 두 아바타/단계2 이월, 1분 요약 업로드·대시보드/알림·PDF/LLM/변화 탐지, 실제 참여자/노트북 실측·SDK 개인정보 P2·공급자/운영/라이선스/법무·전체1–6 완료 기준은 그대로 남아 있다. 이번 원본/이력 보존은 새로운 보관 정책이나 공개 출시 승인이 아니다.

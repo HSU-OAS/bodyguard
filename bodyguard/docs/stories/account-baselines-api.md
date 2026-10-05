@@ -1,13 +1,13 @@
 ---
 story: S4.13
-status: in-progress
+status: review
 baseline: e4265f5f58646e9774d5957e419e1ef80bdc58bf
 branch: codex/account-baselines
 ---
 
 # S4.13 — 계정별 기준선 저장·교체·과거 조회
 
-Status: in-progress
+Status: review
 
 ## Story
 
@@ -51,10 +51,11 @@ BMAD create/dev Story skill·template/checklist를 적용한다. 저장소 `_bma
 - 보완 중 신규 test를 잘못된 함수 중간에 넣어 테스트 배치 NameError로1실패/368통과였다. 원본과 static 실패를 보존하고 위치를 수정했다. 실제 API 결함/의학 검증 실패로 바꾸어 주장하지 않는다. 수정 후 기준선/경쟁48건을 다시 통과했다.
 - 독립 읽기 전용 최종 리뷰는 신규 P1/P2 없음. 독립 test 실행0이며 전체 회귀는 작성자가 실제 실행한다. 최종 결과와 SHA/화면은 [증거](../review/account-baselines/README.md)에 연결한다.
 - 최종 작성자 실행은 전체369 API/실제 owned native 복구·frontend558·공개8·타입/정적/build 통과. source18/artifact36 SHA·수집기 재실행 동일성을 확인했다. main PR45의 알림 설정 웹은 후속 통합/회귀 대상이며 현재 공개 CSS/JS는 이전main과 동일하다.
+- 이후 최신 maincc9870b(PR45)을 로컬 merge87b8966으로 통합했다. 모든 baseline/API/생성 타입 source18 SHA는 앞선 실제 검증본과 같고, 통합본에서 전체369 API/590 frontend·타입/Biome/Ruff/format/mypy/build·공개8·실제 알림 설정 Chrome4를 다시 통과했다. 초기 proof36/manifest를 보존하고 통합 proof15/manifest-v2를 추가했다. 알림 설정 UI는 PR45의 변경이며 이번 API PR에서 새로 만들거나 원본을 수정하지 않았다.
 
 ### Completion Notes
 
-- 기준선 API의 로컬 수용 기준은 통과했다. 최신 main 통합/PR 게이트는 진행 중이며 실제 보정·public 연결·전체1–6 완료를 뜻하지 않는다.
+- 기준선 API의 로컬 수용 기준과 최신 main 통합 회귀는 통과했다. 원격 PR/조건부 병합 게이트는 진행 중이며 실제 보정·public 연결·전체1–6 완료를 뜻하지 않는다.
 
 ### File List
 
@@ -68,3 +69,4 @@ BMAD create/dev Story skill·template/checklist를 적용한다. 저장소 `_bma
 
 - 2026-10-06: S4.13 명세·하네스 계약. 독립 검토의 인증 대기/rollback 보완 포함.
 - 2026-10-06: 실제 기준선/인증 경쟁·rollback·native 복구 및 OpenAPI 보완. test 배치 실패 보존/48건 재검증. 전체 회귀/최신 main/PR 게이트 진행 중.
+- 2026-10-06: 최신 main PR45 통합 후 전체369 API/590 웹·공개8/설정4 재검증. 원본 source/실패/manifest 보존, 원격 PR 리뷰 준비.
