@@ -1,0 +1,37 @@
+$ biome check .
+e2e/authcoaching.spec.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+
+     78  78 │   async function mount(page: Page, delayed = false) {
+     79  79 │     await page.goto('/start')
+     80     │ - ··await·expect(
+     81     │ - ····page.getByRole('heading',·{·name:·'내·몸을·위한·시작',·exact:·true·}),
+     82     │ - ··).toBeVisible()
+         80 │ + ··await·expect(page.getByRole('heading',·{·name:·'내·몸을·위한·시작',·exact:·true·})).toBeVisible()
+     83  81 │     const options = {
+     84  82 │       recordId: randomUUID(),
+
+
+src/coaching/useRecordedCoaching.test.tsx format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+
+    336 336 │     })
+    337 337 │     try {
+    338     │ - ····await·act(async·()·=>·{·fireEvent(window,·new·Event('pagehide'))·})
+        338 │ + ····await·act(async·()·=>·{
+        339 │ + ······fireEvent(window,·new·Event('pagehide'))
+        340 │ + ····})
+    339 341 │       expect(h.control.state.status).toBe('idle')
+    340 342 │     } finally {
+
+
+Checked 120 files in 211ms. No fixes applied.
+Found 2 errors.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.
+
+
+[ELIFECYCLE] Command failed with exit code 1.
