@@ -1,0 +1,18 @@
+[WebServer] (node:40485) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ node scripts/prepare-assets.mjs && tsc --noEmit && vite build
+[WebServer] (node:40550) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:40561) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:40573) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/notifications.spec.ts:125:1 › N-W01 실제 가입→내 계정→설정 저장→새로고침·키보드·화이트 블루/920px (47.6s)
+  ✓  2 e2e/notifications.spec.ts:197:1 › N-W02 실제 저장 수락 후 응답 단절·자동 재저장0·명시 재조회 (20.0s)
+  ✓  3 e2e/notifications.spec.ts:229:1 › N-W03 기존 A 폼·쿠키 B 교체·실제 old-proof403·타인 설정 보존 (17.9s)
+  ✓  4 e2e/notifications.spec.ts:268:1 › N-W04 loading·읽기 장애 복구·잘못된 시간 오류 초점·POST0 (18.1s)
+
+  4 passed (2.0m)

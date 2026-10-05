@@ -1,4 +1,4 @@
-// FR-U-04/05: real member management; unfinished coaching/settings are not advertised.
+// FR-U-04/05/FR-N-03: real account/settings; unfinished coaching is not advertised.
 import { Link } from 'react-router'
 import { useAuth } from '../auth'
 
@@ -31,6 +31,13 @@ export function MemberPage() {
         <p>기간별 기록을 확인하고, 선택한 기간의 기록을 삭제할 수 있습니다.</p>
         <Link className="button primary" to="/records">
           수행 기록 관리
+        </Link>
+      </section>
+      <section className="member-section" aria-labelledby="member-notifications">
+        <h2 id="member-notifications">알림 설정</h2>
+        <p>알림 시간과 소리 설정을 계정에 저장합니다. 실제 알림 연결은 준비 중입니다.</p>
+        <Link className="button secondary" to="/account/notifications">
+          알림 설정 관리
         </Link>
       </section>
       <section className="member-section" aria-labelledby="member-withdrawal">

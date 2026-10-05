@@ -21,6 +21,7 @@ export default defineConfig({
     'ownercapture.spec.ts',
     'recordedsession.spec.ts',
     'authcoaching.spec.ts',
+    'notifications.spec.ts',
   ],
   reporter: process.env.BODYGUARD_TEST_RECORDS_REPORT
     ? [['list'], ['json', { outputFile: process.env.BODYGUARD_TEST_RECORDS_REPORT }]]

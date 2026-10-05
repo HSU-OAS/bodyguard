@@ -1,0 +1,106 @@
+[WebServer] (node:36984) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ node scripts/prepare-assets.mjs && tsc --noEmit && vite build
+[WebServer] (node:37021) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:37031) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:37041) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 e2e/notifications.spec.ts:107:1 › N-W01 실제 가입→내 계정→설정 저장→새로고침·키보드·화이트 블루/920px (36.9s)
+(node:37274) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 e2e/notifications.spec.ts:179:1 › N-W02 실제 저장 수락 후 응답 단절·자동 재저장0·명시 재조회 (13.0s)
+(node:37386) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 e2e/notifications.spec.ts:211:1 › N-W03 기존 A 폼·쿠키 B 교체·실제 old-proof403·타인 설정 보존 (13.3s)
+(node:37485) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 e2e/notifications.spec.ts:250:1 › N-W04 loading·읽기 장애 복구·잘못된 시간 오류 초점·POST0 (23.1s)
+
+
+  1) e2e/notifications.spec.ts:107:1 › N-W01 실제 가입→내 계정→설정 저장→새로고침·키보드·화이트 블루/920px ────────────────
+
+    Error: expect(locator).toHaveValue(expected) failed
+
+    Locator: getByLabel('자세 알림 시간 (분)')
+    Expected: "7"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveValue" getByLabel('자세 알림 시간 (분)') with timeout 5000ms
+      - waiting for getByLabel('자세 알림 시간 (분)')
+
+
+      160 |   await page.screenshot({ path: info.outputPath('notifications-saved.png'), fullPage: true })
+      161 |   await page.reload()
+    > 162 |   await expect(page.getByLabel('자세 알림 시간 (분)')).toHaveValue('7')
+          |                                                 ^
+      163 |   await expect(page.getByLabel('장시간 앉음 알림 시간 (분)')).toHaveValue('60')
+      164 |   await expect(page.getByLabel('장시간 앉음 알림 시간 (분)')).toBeDisabled()
+      165 |   await expect(page.getByLabel('알림 소리 사용')).toBeChecked()
+        at [workspace]/bodyguard/frontend/e2e/notifications.spec.ts:162:49
+
+    Error Context: test-results/notifications-20261005T181125930403Z/notifications-N-W01-실제-가입→내-계정→설정-저장→새로고침·키보드·화이트-블루-920px/error-context.md
+
+  2) e2e/notifications.spec.ts:179:1 › N-W02 실제 저장 수락 후 응답 단절·자동 재저장0·명시 재조회 ───────────────────────
+
+    Error: expect(locator).toBeEnabled() failed
+
+    Locator: getByRole('button', { name: '설정 저장', exact: true })
+    Expected: enabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeEnabled" getByRole('button', { name: '설정 저장', exact: true }) with timeout 5000ms
+      - waiting for getByRole('button', { name: '설정 저장', exact: true })
+
+
+      56 |   ])
+      57 |   await page.evaluate(() => new Promise<void>((resolve) => requestAnimationFrame(() => resolve())))
+    > 58 |   await expect(page.getByRole('button', { name: '설정 저장', exact: true })).toBeEnabled()
+         |                                                                          ^
+      59 | }
+      60 | let cameraCalls = 0
+      61 | let unexpected: string[] = []
+        at settings ([workspace]/bodyguard/frontend/e2e/notifications.spec.ts:58:74)
+        at [workspace]/bodyguard/frontend/e2e/notifications.spec.ts:184:3
+
+    Error Context: test-results/notifications-20261005T181125930403Z/notifications-N-W02-실제-저장-수락-후-응답-단절·자동-재저장0·명시-재조회/error-context.md
+
+  3) e2e/notifications.spec.ts:211:1 › N-W03 기존 A 폼·쿠키 B 교체·실제 old-proof403·타인 설정 보존 ───────────────
+
+    Error: expect(locator).toBeEnabled() failed
+
+    Locator: getByRole('button', { name: '설정 저장', exact: true })
+    Expected: enabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeEnabled" getByRole('button', { name: '설정 저장', exact: true }) with timeout 5000ms
+      - waiting for getByRole('button', { name: '설정 저장', exact: true })
+
+
+      56 |   ])
+      57 |   await page.evaluate(() => new Promise<void>((resolve) => requestAnimationFrame(() => resolve())))
+    > 58 |   await expect(page.getByRole('button', { name: '설정 저장', exact: true })).toBeEnabled()
+         |                                                                          ^
+      59 | }
+      60 | let cameraCalls = 0
+      61 | let unexpected: string[] = []
+        at settings ([workspace]/bodyguard/frontend/e2e/notifications.spec.ts:58:74)
+        at [workspace]/bodyguard/frontend/e2e/notifications.spec.ts:219:3
+
+    Error Context: test-results/notifications-20261005T181125930403Z/notifications-N-W03-기존-A-폼·쿠키-B-교체·실제-old-proof403·타인-설정-보존/error-context.md
+
+  3 failed
+    e2e/notifications.spec.ts:107:1 › N-W01 실제 가입→내 계정→설정 저장→새로고침·키보드·화이트 블루/920px ─────────────────
+    e2e/notifications.spec.ts:179:1 › N-W02 실제 저장 수락 후 응답 단절·자동 재저장0·명시 재조회 ────────────────────────
+    e2e/notifications.spec.ts:211:1 › N-W03 기존 A 폼·쿠키 B 교체·실제 old-proof403·타인 설정 보존 ────────────────
+  1 passed (1.9m)
