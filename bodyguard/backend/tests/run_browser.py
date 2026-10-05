@@ -28,7 +28,10 @@ from tests.test_google_auth import CLIENT_ID, Provider
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "suite", choices=("account", "password", "google", "records"), nargs="?", default="account"
+        "suite",
+        choices=("account", "password", "google", "records", "design"),
+        nargs="?",
+        default="account",
     )
     args = parser.parse_args()
     # Bind before touching data; never reuse a user's server on this port.
@@ -151,10 +154,10 @@ def main() -> int:
                     time.sleep(0.05)
                 else:
                     raise RuntimeError("Browser harness server did not start")
-                # FR-R-03: each records run preserves earlier failure/screenshots/reports.
+                # FR-R-03/FR-V-01: records/design runs preserve every earlier result.
                 output = (
-                    f"test-results/records-{datetime.now(UTC).strftime('%Y%m%dT%H%M%S%fZ')}"
-                    if args.suite == "records"
+                    f"test-results/{args.suite}-{datetime.now(UTC).strftime('%Y%m%dT%H%M%S%fZ')}"
+                    if args.suite in ("records", "design")
                     else f"test-results/{args.suite}"
                 )
                 result = subprocess.run(
@@ -177,7 +180,7 @@ def main() -> int:
                         "BODYGUARD_TEST_RECORD_CLOCK": str(record_clock_file),
                         "BODYGUARD_TEST_BLOCKED_PROXY": proxy_url,
                         "BODYGUARD_TEST_RECORDS_REPORT": (
-                            f"{output}/report.json" if args.suite == "records" else ""
+                            f"{output}/report.json" if args.suite in ("records", "design") else ""
                         ),
                     },
                     check=False,

@@ -50,10 +50,14 @@ const deletions = (fetcher: ReturnType<typeof setup>) =>
   fetcher.mock.calls.filter(([url]) => url.endsWith('/delete'))
 
 async function openPreview() {
-  const button = await screen.findByRole('button', { name: '이 기간 기록 삭제' })
+  // FR-U-05: wait for the mounted list, not the first StrictMode commit where
+  // passive-effect cleanup can abort a synthetic click. No latency limit is relaxed.
+  await screen.findByRole('heading', { name: '이 기간에는 수행 기록이 없습니다' })
+  const button = screen.getByRole('button', { name: '이 기간 기록 삭제' })
   // FR-U-05: flush controlled immediate mock work; real timing is exercised in Chrome.
   await act(async () => fireEvent.click(button))
 }
+const previewText = (count: number) => screen.findByText(`삭제 대상: ${count}건`)
 
 it('blocks duplicate confirmation and discards deletion response after leaving', async () => {
   const fetcher = setup()
@@ -69,7 +73,12 @@ it('blocks duplicate confirmation and discards deletion response after leaving',
     })
   })
   await openPreview()
-  await screen.findByText('삭제 대상: 2건')
+  expect(
+    fetcher.mock.calls
+      .filter(([url]) => url.endsWith('/auth/csrf') || url.endsWith('/delete-preview'))
+      .map(([url, init]) => ({ path: url, aborted: init?.signal?.aborted })),
+  ).not.toContainEqual(expect.objectContaining({ aborted: true }))
+  await previewText(2)
   const button = screen.getByRole('button', { name: '기록 삭제' })
   fireEvent.click(button)
   fireEvent.click(button)
@@ -113,7 +122,7 @@ it.each(['cancel', 'period', 'leave'])('discards a late preview after %s', async
 it('shows scope and irreversible consequence, then cancels without deletion', async () => {
   const fetcher = setup()
   await openPreview()
-  await screen.findByText('삭제 대상: 2건')
+  await previewText(2)
   expect(screen.getByText(/복구할 수 없습니다/)).toBeTruthy()
   fireEvent.click(screen.getByRole('button', { name: '취소' }))
   expect(deletions(fetcher)).toHaveLength(0)
@@ -123,7 +132,7 @@ it('shows scope and irreversible consequence, then cancels without deletion', as
 it('posts only an explicit confirmation and reports the actual server count', async () => {
   const fetcher = setup()
   await openPreview()
-  await screen.findByText('삭제 대상: 2건')
+  await previewText(2)
   expect(deletions(fetcher)).toHaveLength(0)
   fireEvent.click(screen.getByRole('button', { name: '기록 삭제' }))
   await screen.findByText('2건의 수행 기록을 삭제했습니다.')
@@ -136,7 +145,7 @@ it('posts only an explicit confirmation and reports the actual server count', as
 it('does not allow deletion of an empty preview', async () => {
   const fetcher = setup(0)
   await openPreview()
-  await screen.findByText('삭제 대상: 0건')
+  await previewText(0)
   expect((screen.getByRole('button', { name: '기록 삭제' }) as HTMLButtonElement).disabled).toBe(
     true,
   )
@@ -146,7 +155,7 @@ it('does not allow deletion of an empty preview', async () => {
 it.each([409, 503])('does not silently retry or invent results after status %s', async (status) => {
   const fetcher = setup(2, status)
   await openPreview()
-  await screen.findByText('삭제 대상: 2건')
+  await previewText(2)
   fireEvent.click(screen.getByRole('button', { name: '기록 삭제' }))
   await screen.findByText(
     status === 409 ? /삭제 확인이 만료되었거나/ : /삭제 결과를 확인하지 못했습니다/,
@@ -155,7 +164,7 @@ it.each([409, 503])('does not silently retry or invent results after status %s',
   expect(screen.queryByRole('button', { name: '기록 삭제' })).toBeNull()
   await waitFor(() => expect(deletions(fetcher)).toHaveLength(1))
   fireEvent.click(screen.getByRole('button', { name: '삭제 대상 다시 확인' }))
-  await screen.findByText('삭제 대상: 2건')
+  await previewText(2)
   expect(deletions(fetcher)).toHaveLength(1)
 })
 

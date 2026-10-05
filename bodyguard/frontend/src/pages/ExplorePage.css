@@ -8,7 +8,7 @@
 }
 .explore-screen legend {
   margin-bottom: 12px;
-  font-size: 14px;
+  font-size: var(--type-body);
 }
 .explore-screen .development-note .button {
   margin-top: 20px;
@@ -17,8 +17,12 @@
   margin-left: 12px;
 }
 .explore-screen [aria-pressed="true"] {
-  background: #163d36;
-  color: white;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+.explore-screen [aria-pressed="true"]:hover:not(:disabled) {
+  background: var(--accent-hover);
 }
 .explore-screen .development-note fieldset {
   margin-top: 24px;
@@ -32,5 +36,5 @@
   cursor: pointer;
 }
 .explore-screen input {
-  accent-color: #163d36;
+  accent-color: var(--accent);
 }
