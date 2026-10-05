@@ -1,0 +1,369 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "[workspace]/bodyguard/frontend/node_modules/.pnpm/@playwright+test@1.63.0/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "playwright.selection.config.ts",
+      "--output",
+      "test-results/selection"
+    ],
+    "configFile": "[workspace]/bodyguard/frontend/playwright.selection.config.ts",
+    "rootDir": "[workspace]/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "[workspace]/bodyguard/frontend/test-results/selection",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "[workspace]/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "selection.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/selection-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "selection.spec.ts",
+      "file": "selection.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S3.2 protected production explore paths and purpose selection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 768,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T14:06:19.787Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "observations.json",
+                      "contentType": "application/json",
+                      "body": "eyJhcGlQYXRocyI6WyIvYXBpL3YxL21lIl0sImNhbWVyYUNhbGxzIjowLCJwYWdlRXJyb3JzIjpbXSwidmlld3BvcnQiOnsid2lkdGgiOjE0NDAsImhlaWdodCI6MTAwMH0sImJyb3dzZXJWZXJzaW9uIjoiMTU0LjAuODAzNy45MyIsInN0b3JhZ2VMZW5ndGhzIjpbMCwwXSwiYWN0dWFsQXV0aFNlcnZlciI6ZmFsc2UsImFjdHVhbEh1bWFuQ2FtZXJhIjpmYWxzZX0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3c1ccfa8f32b1efd3e53-4f57588aa3b87c8cd4d3",
+          "file": "selection.spec.ts",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "S3.3 expanded library search, guidance detail and return",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1588,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T14:06:21.097Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "observations.json",
+                      "contentType": "application/json",
+                      "body": "eyJhcGlQYXRocyI6WyIvYXBpL3YxL21lIiwiL2FwaS92MS9tZSJdLCJjYW1lcmFDYWxscyI6MCwicGFnZUVycm9ycyI6W10sInZpZXdwb3J0Ijp7IndpZHRoIjoxNDQwLCJoZWlnaHQiOjEwMDB9LCJicm93c2VyVmVyc2lvbiI6IjE1NC4wLjgwMzcuOTMiLCJzdG9yYWdlTGVuZ3RocyI6WzAsMF0sImFjdHVhbEF1dGhTZXJ2ZXIiOmZhbHNlLCJhY3R1YWxIdW1hbkNhbWVyYSI6ZmFsc2V9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3c1ccfa8f32b1efd3e53-809089cd3408cb1234df",
+          "file": "selection.spec.ts",
+          "line": 23,
+          "column": 1
+        },
+        {
+          "title": "C-02/03/04/07 desktop selection, literal search, detail sources and Back",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1661,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T14:06:22.697Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "observations.json",
+                      "contentType": "application/json",
+                      "body": "eyJhcGlQYXRocyI6WyIvYXBpL3YxL21lIiwiL2FwaS92MS9tZSJdLCJjYW1lcmFDYWxscyI6MCwicGFnZUVycm9ycyI6W10sInZpZXdwb3J0Ijp7IndpZHRoIjoxNDQwLCJoZWlnaHQiOjEwMDB9LCJicm93c2VyVmVyc2lvbiI6IjE1NC4wLjgwMzcuOTMiLCJzdG9yYWdlTGVuZ3RocyI6WzAsMF0sImFjdHVhbEF1dGhTZXJ2ZXIiOmZhbHNlLCJhY3R1YWxIdW1hbkNhbWVyYSI6ZmFsc2V9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3c1ccfa8f32b1efd3e53-beefefbd6e44447e6a9f",
+          "file": "selection.spec.ts",
+          "line": 123,
+          "column": 1
+        },
+        {
+          "title": "C-02/07 narrow laptop empty reset and keyboard operation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1454,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T14:06:24.373Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "observations.json",
+                      "contentType": "application/json",
+                      "body": "eyJhcGlQYXRocyI6WyIvYXBpL3YxL21lIiwiL2FwaS92MS9tZSJdLCJjYW1lcmFDYWxscyI6MCwicGFnZUVycm9ycyI6W10sInZpZXdwb3J0Ijp7IndpZHRoIjo3MDAsImhlaWdodCI6ODAwfSwiYnJvd3NlclZlcnNpb24iOiIxNTQuMC44MDM3LjkzIiwic3RvcmFnZUxlbmd0aHMiOlswLDBdLCJhY3R1YWxBdXRoU2VydmVyIjpmYWxzZSwiYWN0dWFsSHVtYW5DYW1lcmEiOmZhbHNlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3c1ccfa8f32b1efd3e53-95e030aab5200eb04515",
+          "file": "selection.spec.ts",
+          "line": 155,
+          "column": 1
+        },
+        {
+          "title": "C-04 missing direct ID is recoverable and not an external navigation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1367,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T14:06:25.837Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "observations.json",
+                      "contentType": "application/json",
+                      "body": "eyJhcGlQYXRocyI6WyIvYXBpL3YxL21lIiwiL2FwaS92MS9tZSJdLCJjYW1lcmFDYWxscyI6MCwicGFnZUVycm9ycyI6W10sInZpZXdwb3J0Ijp7IndpZHRoIjoxNDQwLCJoZWlnaHQiOjEwMDB9LCJicm93c2VyVmVyc2lvbiI6IjE1NC4wLjgwMzcuOTMiLCJzdG9yYWdlTGVuZ3RocyI6WzAsMF0sImFjdHVhbEF1dGhTZXJ2ZXIiOmZhbHNlLCJhY3R1YWxIdW1hbkNhbWVyYSI6ZmFsc2V9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3c1ccfa8f32b1efd3e53-10f45d9afd650f35e799",
+          "file": "selection.spec.ts",
+          "line": 171,
+          "column": 1
+        },
+        {
+          "title": "C-01 guest and server failure close the preview without a candidate fallback",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1451,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T14:06:27.214Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "observations.json",
+                      "contentType": "application/json",
+                      "body": "eyJhcGlQYXRocyI6WyIvYXBpL3YxL21lIiwiL2FwaS92MS9tZSIsIi9hcGkvdjEvYXV0aC9nb29nbGUvc3RhdHVzIiwiL2FwaS92MS9hdXRoL2dvb2dsZS9zdGF0dXMiLCIvYXBpL3YxL21lIiwiL2FwaS92MS9tZSIsIi9hcGkvdjEvbWUiXSwiY2FtZXJhQ2FsbHMiOjAsInBhZ2VFcnJvcnMiOltdLCJ2aWV3cG9ydCI6eyJ3aWR0aCI6MTQ0MCwiaGVpZ2h0IjoxMDAwfSwiYnJvd3NlclZlcnNpb24iOiIxNTQuMC44MDM3LjkzIiwic3RvcmFnZUxlbmd0aHMiOlswLDBdLCJhY3R1YWxBdXRoU2VydmVyIjpmYWxzZSwiYWN0dWFsSHVtYW5DYW1lcmEiOmZhbHNlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3c1ccfa8f32b1efd3e53-32b2346061682d12fca8",
+          "file": "selection.spec.ts",
+          "line": 182,
+          "column": 1
+        },
+        {
+          "title": "C-06 actual production hides the dev route, catalog and entry link",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 361,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T14:06:28.677Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "observations.json",
+                      "contentType": "application/json",
+                      "body": "eyJhcGlQYXRocyI6WyIvYXBpL3YxL21lIiwiL2FwaS92MS9tZSJdLCJjYW1lcmFDYWxscyI6MCwicGFnZUVycm9ycyI6W10sInZpZXdwb3J0Ijp7IndpZHRoIjoxNDQwLCJoZWlnaHQiOjEwMDB9LCJicm93c2VyVmVyc2lvbiI6IjE1NC4wLjgwMzcuOTMiLCJzdG9yYWdlTGVuZ3RocyI6WzAsMF0sImFjdHVhbEF1dGhTZXJ2ZXIiOmZhbHNlLCJhY3R1YWxIdW1hbkNhbWVyYSI6ZmFsc2V9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3c1ccfa8f32b1efd3e53-44c23b193c5543747e59",
+          "file": "selection.spec.ts",
+          "line": 198,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-05T14:06:18.549Z",
+    "duration": 10604.028,
+    "expected": 7,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

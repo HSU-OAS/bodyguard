@@ -174,6 +174,34 @@ export function createCoachingSession(options: Options) {
     return apply({ type: 'end', now, reason })
   }
 
+  // FR-M-07: explicit browser-port fault boundary; never restamp an old ended track as current.
+  function resourceFailed(notice: Extract<ResourceNotice, { type: 'error' }>): Promise<void> {
+    if (
+      notice?.type !== 'error' ||
+      !Number.isSafeInteger(notice.generation) ||
+      notice.generation <= 0 ||
+      notice.generation > state.generation ||
+      ![
+        'camera-error',
+        'inference-error',
+        'asset-error',
+        'ownership-error',
+        'cleanup-error',
+        'callback-error',
+      ].includes(notice.reason)
+    ) {
+      return Promise.resolve()
+    }
+    if (
+      notice.reason !== 'cleanup-error' &&
+      (closed ||
+        notice.generation !== state.generation ||
+        !['preparing', 'running'].includes(state.status))
+    )
+      return Promise.resolve()
+    return fail(notice.reason, sampleClock() ?? state.lastNow)
+  }
+
   return Object.freeze({
     getSnapshot,
     start: () => prepare('start'),
@@ -184,5 +212,6 @@ export function createCoachingSession(options: Options) {
     observe,
     end,
     close: end,
+    resourceFailed,
   })
 }

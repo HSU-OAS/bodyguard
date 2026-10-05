@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="118" failures="2" errors="0" time="1.701840751">
+    <testsuite name="src/coaching/browserPorts.test.ts" timestamp="2026-10-05T13:53:26.695Z" hostname="local-test-host" tests="30" failures="2" errors="0" skipped="0" time="0.60907375">
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 생성만으로 카메라를 요청하지 않고 실제 아바타 ready를 꾸미지 않는다" time="0.002637292">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 invalid model  initializes nothing" time="0.0011755">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 invalid model other initializes nothing" time="0.000460083">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 invalid model undefined initializes nothing" time="0.000358709">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 invalid model null initializes nothing" time="0.000303375">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 invalid model __proto__ initializes nothing" time="0.000290709">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 camera duplicate/past/invalid generation cannot request or replace a live lease" time="0.0018545">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-02 camera lease owns its stream and disposes once" time="0.000494291">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-02 denied permission initializes no model and emits no raw error" time="0.000443792">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-02 late permission after abort is stopped without attaching video" time="0.003896917">
+            <failure message="expected &quot;vi.fn()&quot; to be called 1 times, but got 0 times" type="AssertionError">
+AssertionError: expected &quot;vi.fn()&quot; to be called 1 times, but got 0 times
+ ❯ src/coaching/browserPorts.test.ts:116:24
+            </failure>
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-02 pending play abort stops immediately and eventual play rejection cannot stop twice" time="0.053717459">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-02 new generation is never detached by late old permission" time="0.002505208">
+            <failure message="expected null to be { getTracks: [Function getTracks] } // Object.is equality" type="AssertionError">
+AssertionError: expected null to be { getTracks: [Function getTracks] } // Object.is equality
+
+- Expected:
+{
+  &quot;getTracks&quot;: [Function getTracks],
+}
+
++ Received:
+null
+
+ ❯ src/coaching/browserPorts.test.ts:145:29
+            </failure>
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-03 inference without same current camera initializes nothing" time="0.000450292">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-03 all three tasks are ready in same lease before inference succeeds" time="0.052545167">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-03 pose partial failure closes already-created tasks, not ready" time="0.001120625">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-03 gesture partial failure closes already-created tasks, not ready" time="0.000375458">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-03 face partial failure closes already-created tasks, not ready" time="0.000340625">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-04 abort during pose closes known and late native handles once" time="0.052964041">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-04 abort during gesture closes known and late native handles once" time="0.105193666">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-04 abort during face closes known and late native handles once" time="0.104481917">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-04 native alias is rejected rather than shared or closed twice" time="0.001040125">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-05 a close failure cannot prevent other native closes and permanently blocks new preparation" time="0.001414459">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-05 failed partial cleanup is tagged and controller cannot become ready again" time="0.000843083">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-05 camera cleanup attempts all tracks and detaches despite a stop failure" time="0.00070175">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-05 abort during play with stop failure is fixed cleanup fault, not uncaught abort-listener error" time="0.052771667">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-06 track ended stops all same-generation resources and emits a fixed notice once" time="0.052871792">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-06 ended from disposed old tracks never terminates the replacement" time="0.001669375">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-06 failed observer throw safely retires and blocks factories without raw notice" time="0.054475666">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-06 failed observer reject safely retires and blocks factories without raw notice" time="0.052605792">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-06 explicit session reporter rejects unknown/past failures but current ended stops session" time="0.00362325">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/coaching/resources.test.ts" timestamp="2026-10-05T13:53:26.702Z" hostname="local-test-host" tests="40" failures="0" errors="0" skipped="0" time="0.752848">
+        <testcase classname="src/coaching/resources.test.ts" name="R-02 명시 요청만 camera→inference→avatars 준비하고 close에서 각1회 정리한다" time="0.004500917">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-01 잘못된 effect·세대는 준비를 시작하지 않는다" time="0.000827667">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-01/06 중복·과거 요청과 다른 세대 release는 현재 소유권을 바꾸지 않는다" time="0.000666792">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-02 camera 완료 전 ready가 없고 context는 해당 세대와 signal이다" time="0.054148375">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-02 inference 완료 전 ready가 없고 context는 해당 세대와 signal이다" time="0.051215916">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-02 avatars 완료 전 ready가 없고 context는 해당 세대와 signal이다" time="0.052827333">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 camera / throw : 부분 정리하고 고정 오류만 전달한다" time="0.001061208">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 camera / reject : 부분 정리하고 고정 오류만 전달한다" time="0.000327625">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 inference / throw : 부분 정리하고 고정 오류만 전달한다" time="0.000316958">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 inference / reject : 부분 정리하고 고정 오류만 전달한다" time="0.000365333">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 avatars / throw : 부분 정리하고 고정 오류만 전달한다" time="0.000345125">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 avatars / reject : 부분 정리하고 고정 오류만 전달한다" time="0.000239208">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 camera가 소유 자원이 아닌 값을 반환하면 통과하지 않는다" time="0.000267375">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 inference가 소유 자원이 아닌 값을 반환하면 통과하지 않는다" time="0.000162083">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 avatars가 소유 자원이 아닌 값을 반환하면 통과하지 않는다" time="0.0011925">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-04 camera 대기 중 release 뒤 늦은 반환은 정리하고 다음 준비하지 않는다" time="0.052275">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-04 inference 대기 중 release 뒤 늦은 반환은 정리하고 다음 준비하지 않는다" time="0.052595542">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-04 avatars 대기 중 release 뒤 늦은 반환은 정리하고 다음 준비하지 않는다" time="0.04979725">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-04/06 close는 응답하지 않는 factory를 기다리지 않고 늦은 rejection도 삼킨다" time="0.052702584">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-05 새 세대 완료 뒤 역순 반환은 현재 ready와 소유 자원에 영향이 없다" time="0.103958208">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-05 교체가 연달아 와도 앞선 비동기 dispose가 끝나기 전 새 factory를 시작하지 않는다" time="0.053116875">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-07 dispose throw는 다른 자원 정리를 막지 않고 새 준비를 차단한다" time="0.000531917">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-07 dispose reject는 다른 자원 정리를 막지 않고 새 준비를 차단한다" time="0.000401083">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-07 이미 교체된 factory의 늦은 dispose 실패도 현재 소유 자원을 정리하고 준비를 차단한다" time="0.052421334">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-08 동일 객체를 두 stage가 반환하면 ready 없이 소유권 오류와 정리1회이다" time="0.000969">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-08 앞선 세대에서 정리한 객체는 다음 세대가 재사용할 수 없다" time="0.000514917">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-08 늦은 과거 factory가 현재 소유 객체를 반환해도 현재 객체는 해제하지 않는다" time="0.0524545">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-09 callback throw는 모든 자원을 정리하고 unhandled rejection·재준비가 없다" time="0.000946042">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-09 callback reject는 모든 자원을 정리하고 unhandled rejection·재준비가 없다" time="0.000408083">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-09 부분 실패의 오류 callback 예외도 오류 전달을 재귀 호출하지 않는다" time="0.000480292">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-06/09 close 중 늦은 반환과 여러 cleanup 실패·callback 예외도 정리1회·재준비0이다" time="0.051494916">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-10 raw 오류·자원 metadata는 notice/console/network/storage에 전달하지 않는다" time="0.002519542">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-04 완료된 acquire와 다음 stage 사이에 release되면 다음 factory도0이다" time="0.000588625">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-09 cleanup-error callback가 close를 await해도 정리 promise와 교착하지 않는다" time="0.000368792">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-11 미확인 authenticated gate에서 engine effect와 자원 요청은0이다" time="0.001011959">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-11 미확인 motionValidated gate에서 engine effect와 자원 요청은0이다" time="0.00026025">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-11 미확인 referenceAvatarReady gate에서 engine effect와 자원 요청은0이다" time="0.000238417">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-11 미확인 userAvatarReady gate에서 engine effect와 자원 요청은0이다" time="0.0002625">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-11 실제 engine start/ready/pause/resume/end effects와 controller를 연결해도 성공 기록을 만들지 않는다" time="0.000903708">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-11 종료 뒤 이전 ready가 도착해도 engine은 부활하지 않고 해당 세대만 release한다" time="0.051293209">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/coaching/session.test.ts" timestamp="2026-10-05T13:53:26.706Z" hostname="local-test-host" tests="44" failures="0" errors="0" skipped="0" time="0.281660459">
+        <testcase classname="src/coaching/session.test.ts" name="T-01 생성/미확인 gate는 실제 coordinator에서도 factory0이다" time="0.003868666">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate authenticated / false 는 true가 아니면 준비0이다" time="0.00059725">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate authenticated / undefined 는 true가 아니면 준비0이다" time="0.00040775">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate authenticated / true 는 true가 아니면 준비0이다" time="0.000311">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate motionValidated / false 는 true가 아니면 준비0이다" time="0.000309208">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate motionValidated / undefined 는 true가 아니면 준비0이다" time="0.000527333">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate motionValidated / true 는 true가 아니면 준비0이다" time="0.000228958">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate referenceAvatarReady / false 는 true가 아니면 준비0이다" time="0.000237958">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate referenceAvatarReady / undefined 는 true가 아니면 준비0이다" time="0.000309541">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate referenceAvatarReady / true 는 true가 아니면 준비0이다" time="0.000526334">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate userAvatarReady / false 는 true가 아니면 준비0이다" time="0.000279458">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate userAvatarReady / undefined 는 true가 아니면 준비0이다" time="0.000241042">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate userAvatarReady / true 는 true가 아니면 준비0이다" time="0.000190834">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-02 실제 engine effect와 controller를 연결해 start→pause→resume→end를 진행한다" time="0.004612166">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-03 start의 권한 대기 Promise가 pause·resume·종료를 막지 않고 과거 반환도 정리한다" time="0.05317325">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 ready 전 authenticated 상실은 준비 성공이 아닌 해당 사유 종료다" time="0.052403167">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 ready 전 motionValidated 상실은 준비 성공이 아닌 해당 사유 종료다" time="0.050474">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 ready 전 referenceAvatarReady 상실은 준비 성공이 아닌 해당 사유 종료다" time="0.051363042">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 ready 전 userAvatarReady 상실은 준비 성공이 아닌 해당 사유 종료다" time="0.052711208">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 tick 전에 세션 만료를 재확인하여 유지·완료를 만들지 않는다" time="0.00039775">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 observation 전에 세션 만료를 재확인하여 유지·완료를 만들지 않는다" time="0.000244458">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 camera 오류는 고정 사유로 종료하고 자원과 원본 오류를 snapshot에 노출하지 않는다" time="0.000856833">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 inference 오류는 고정 사유로 종료하고 자원과 원본 오류를 snapshot에 노출하지 않는다" time="0.000239708">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 avatars 오류는 고정 사유로 종료하고 자원과 원본 오류를 snapshot에 노출하지 않는다" time="0.000236083">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 ownership-error는 실제 엔진 사유이며 asset/user-stop으로 꾸미지 않는다" time="0.000216083">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 cleanup-error는 단순 pause가 아니라 종료·재준비 금지로 처리한다" time="0.000288666">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 clock NaN 는 명시 clock-error로 종료·준비0이다" time="0.000139958">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 clock Infinity 는 명시 clock-error로 종료·준비0이다" time="0.000109875">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 clock -1 는 명시 clock-error로 종료·준비0이다" time="0.000093583">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 역행 clock 및 provider 예외는 raw 내용 없이 fail-closed이다" time="0.000332625">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-06 ready·tick·시간 경과만으로는 성공·관찰/반복/유지0이다" time="0.000627167">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-06 명시 관찰의 시작·목표·복귀만 성공으로 계산하고 종료 뒤 frame은 무시한다" time="0.00031975">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-06 과거 세대 frame·가림 입력은 현재 성공으로 계산하지 않는다" time="0.00025975">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-07 observer throw는 정리·callback-error·준비 재시작0이다" time="0.00029075">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-07 observer reject는 정리·callback-error·준비 재시작0이다" time="0.000184334">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-07 preparing observer의 reentrant pause가 이전 준비를 부활시키지 않는다" time="0.000171875">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-08 실제 EventTarget hidden/pagehide/dispose는 종료하고 visible 자동 재시작·listener 누수0이다" time="0.00059475">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 tick의 gate 상실 종료는 현재 유효 시각의 경과 시간을 보존한다" time="0.000180208">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 observation의 gate 상실 종료는 현재 유효 시각의 경과 시간을 보존한다" time="0.000130458">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-08 pagehide 자체가 즉시 종료·listener 제거를 수행한다" time="0.000257208">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-08 initial-hidden 자체가 즉시 종료·listener 제거를 수행한다" time="0.000182458">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-08 detach 자체가 즉시 종료·listener 제거를 수행한다" time="0.000201542">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 gate 속성 getter의 예외도 gate-error로 처리하고 준비를 시작하지 않는다" time="0.000617709">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 종료 뒤 cleanup 실패는 기존 종료 이유를 왜곡하지 않고 fixed failure를 별도로 남긴다" time="0.00026475">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pose/camera.test.ts" timestamp="2026-10-05T13:53:26.709Z" hostname="local-test-host" tests="4" failures="0" errors="0" skipped="0" time="0.058258542">
+        <testcase classname="src/pose/camera.test.ts" name="play 실패 시 이미 얻은 스트림을 끈다" time="0.003839417">
+        </testcase>
+        <testcase classname="src/pose/camera.test.ts" name="권한 대기 중 취소하면 뒤늦은 스트림을 화면에 붙이지 않고 끈다" time="0.00068">
+        </testcase>
+        <testcase classname="src/pose/camera.test.ts" name="play 대기 중 취소는 즉시 트랙을 끄고 늦은 재생으로 부활하지 않는다" time="0.051860334">
+        </testcase>
+        <testcase classname="src/pose/camera.test.ts" name="지난 스트림을 닫아도 새 스트림을 분리하지 않는다" time="0.000753667">
+        </testcase>
+    </testsuite>
+</testsuites>

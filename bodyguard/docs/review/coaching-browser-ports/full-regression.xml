@@ -1,0 +1,953 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="445" failures="0" errors="0" time="20.364322792">
+    <testsuite name="src/App.test.tsx" timestamp="2026-10-05T14:00:17.328Z" hostname="local-test-host" tests="3" failures="0" errors="0" skipped="0" time="0.712650291">
+        <testcase classname="src/App.test.tsx" name="B-01 공개 시작은 카메라·시제품 없이 서비스 소개와 계정 진입을 제공한다" time="0.286157792">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="B-01 보호 경로의 401은 로그인으로 이동하며 외부 목적지는 허용하지 않는다" time="0.147425708">
+        </testcase>
+        <testcase classname="src/App.test.tsx" name="B-02 서버 실패는 게스트 폴백 없이 보호 UI를 차단하고 재시도한다" time="0.2774545">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/api/recordDeletion.test.ts" timestamp="2026-10-05T14:00:17.329Z" hostname="local-test-host" tests="13" failures="0" errors="0" skipped="0" time="0.062586083">
+        <testcase classname="src/api/recordDeletion.test.ts" name="rejects malformed preview {&quot;count&quot;:true}" time="0.04976675">
+        </testcase>
+        <testcase classname="src/api/recordDeletion.test.ts" name="rejects malformed preview {&quot;count&quot;:-1}" time="0.001094208">
+        </testcase>
+        <testcase classname="src/api/recordDeletion.test.ts" name="rejects malformed preview {&quot;signature&quot;:&quot;bad&quot;}" time="0.000911875">
+        </testcase>
+        <testcase classname="src/api/recordDeletion.test.ts" name="rejects malformed preview {&quot;fingerprint&quot;:null}" time="0.0006">
+        </testcase>
+        <testcase classname="src/api/recordDeletion.test.ts" name="rejects malformed preview {&quot;start&quot;:&quot;2026-10-01&quot;}" time="0.000845041">
+        </testcase>
+        <testcase classname="src/api/recordDeletion.test.ts" name="rejects malformed preview {&quot;start&quot;:&quot;2026-09-30T00:00:00Z&quot;}" time="0.000548834">
+        </testcase>
+        <testcase classname="src/api/recordDeletion.test.ts" name="rejects malformed preview {&quot;cutoff&quot;:&quot;2026-02-30T00:00:00Z&quot;}" time="0.00042375">
+        </testcase>
+        <testcase classname="src/api/recordDeletion.test.ts" name="rejects malformed preview {&quot;expires_at&quot;:&quot;2026-10-05T00:11:00Z&quot;}" time="0.004260458">
+        </testcase>
+        <testcase classname="src/api/recordDeletion.test.ts" name="rejects uncertain deletion response null" time="0.000675167">
+        </testcase>
+        <testcase classname="src/api/recordDeletion.test.ts" name="rejects uncertain deletion response {&quot;deleted&quot;:true}" time="0.000525333">
+        </testcase>
+        <testcase classname="src/api/recordDeletion.test.ts" name="rejects uncertain deletion response {&quot;deleted&quot;:-1}" time="0.000316459">
+        </testcase>
+        <testcase classname="src/api/recordDeletion.test.ts" name="rejects uncertain deletion response {&quot;deleted&quot;:2}" time="0.000364209">
+        </testcase>
+        <testcase classname="src/api/recordDeletion.test.ts" name="rejects uncertain deletion response {&quot;deleted&quot;:0.5}" time="0.000268667">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/api/records.test.ts" timestamp="2026-10-05T14:00:17.331Z" hostname="local-test-host" tests="15" failures="0" errors="0" skipped="0" time="0.103172792">
+        <testcase classname="src/api/records.test.ts" name="validates real calendar dates and safe record identifiers" time="0.005504458">
+        </testcase>
+        <testcase classname="src/api/records.test.ts" name="converts local days to inclusive/exclusive aware bounds with a fixed cutoff" time="0.001137875">
+        </testcase>
+        <testcase classname="src/api/records.test.ts" name="uses calendar midnight rather than adding 24 hours across DST" time="0.00024275">
+        </testcase>
+        <testcase classname="src/api/records.test.ts" name="reads own bounded list without persistent credentials and rejects malformed results" time="0.085473958">
+        </testcase>
+        <testcase classname="src/api/records.test.ts" name="rejects malformed detail rather than rendering it: { observed_ms: true }" time="0.00109575">
+        </testcase>
+        <testcase classname="src/api/records.test.ts" name="rejects malformed detail rather than rendering it: { observed_ms: -1 }" time="0.000670583">
+        </testcase>
+        <testcase classname="src/api/records.test.ts" name="rejects malformed detail rather than rendering it: { repetitions: 1.5 }" time="0.00058025">
+        </testcase>
+        <testcase classname="src/api/records.test.ts" name="rejects malformed detail rather than rendering it: { ended_at: &apos;invalid&apos; }" time="0.000500125">
+        </testcase>
+        <testcase classname="src/api/records.test.ts" name="rejects malformed detail rather than rendering it: { ended_at: &apos;2026-02-30T00:00:40Z&apos; }" time="0.000481792">
+        </testcase>
+        <testcase classname="src/api/records.test.ts" name="rejects malformed detail rather than rendering it: { outcome: &apos;safe&apos; }" time="0.000822916">
+        </testcase>
+        <testcase classname="src/api/records.test.ts" name="rejects malformed detail rather than rendering it: { outcome: [ &apos;completed&apos; ] }" time="0.000740583">
+        </testcase>
+        <testcase classname="src/api/records.test.ts" name="rejects malformed detail rather than rendering it: { provenance: &apos;verified&apos; }" time="0.00058725">
+        </testcase>
+        <testcase classname="src/api/records.test.ts" name="rejects malformed detail rather than rendering it: { protocol_version: &apos;&lt;script&gt;&apos; }" time="0.000435208">
+        </testcase>
+        <testcase classname="src/api/records.test.ts" name="rejects malformed detail rather than rendering it: { id: &apos;../private&apos; }" time="0.000348709">
+        </testcase>
+        <testcase classname="src/api/records.test.ts" name="retains HTTP error status, not the raw error body" time="0.001080917">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/api/withdrawal.test.ts" timestamp="2026-10-05T14:00:17.332Z" hostname="local-test-host" tests="22" failures="0" errors="0" skipped="0" time="0.122411625">
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 sends same-origin CSRF-protected start with no identity supplied by the browser" time="0.049752791">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 malformed challenge is not actionable 0" time="0.007382792">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 malformed challenge is not actionable 1" time="0.027893958">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 malformed challenge is not actionable 2" time="0.001361792">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 malformed challenge is not actionable 3" time="0.000917792">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 malformed challenge is not actionable 4" time="0.000517958">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 malformed challenge is not actionable 5" time="0.0004835">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 malformed challenge is not actionable 6" time="0.014317125">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 malformed challenge is not actionable 7" time="0.002583583">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 start accepts only202, not200" time="0.00076575">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 start accepts only202, not201" time="0.0004375">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 start accepts only202, not204" time="0.0003335">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 confirm accepts actual204 and preserves external cancellation signal" time="0.000816875">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 ambiguous successful200 is not deletion completion" time="0.001024917">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 ambiguous successful201 is not deletion completion" time="0.00054325">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 ambiguous successful202 is not deletion completion" time="0.000401708">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 real failure400 remains failure" time="0.003007375">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 real failure401 remains failure" time="0.0035475">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 real failure403 remains failure" time="0.000603792">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 real failure422 remains failure" time="0.000846375">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 real failure429 remains failure" time="0.000430709">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 real failure503 remains failure" time="0.000312458">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/auth.test.tsx" timestamp="2026-10-05T14:00:17.334Z" hostname="local-test-host" tests="12" failures="0" errors="0" skipped="0" time="0.222617042">
+        <testcase classname="src/auth.test.tsx" name="PW-02 Unicode password policy boundary 0" time="0.005716125">
+        </testcase>
+        <testcase classname="src/auth.test.tsx" name="PW-02 Unicode password policy boundary 1" time="0.000239833">
+        </testcase>
+        <testcase classname="src/auth.test.tsx" name="PW-02 Unicode password policy boundary 2" time="0.000172875">
+        </testcase>
+        <testcase classname="src/auth.test.tsx" name="PW-02 Unicode password policy boundary 3" time="0.00017025">
+        </testcase>
+        <testcase classname="src/auth.test.tsx" name="B-03 aborted late /me cannot revive a logged-out account" time="0.085525125">
+        </testcase>
+        <testcase classname="src/auth.test.tsx" name="B-03 failed logout blocks private UI even if window focus rechecks" time="0.038675583">
+        </testcase>
+        <testcase classname="src/auth.test.tsx" name="B-02 malformed user and 503 are errors, only 401 is guest" time="0.005831583">
+        </testcase>
+        <testcase classname="src/auth.test.tsx" name="B-01 actual client sends credentials only in POST body with CSRF and same-origin cookies" time="0.003069791">
+        </testcase>
+        <testcase classname="src/auth.test.tsx" name="B-02 invalid CSRF response prevents any credential submission" time="0.000889917">
+        </testcase>
+        <testcase classname="src/auth.test.tsx" name="B-02 rate limit preserves Retry-After without exposing server input" time="0.000538834">
+        </testcase>
+        <testcase classname="src/auth.test.tsx" name="PW-03 late aborted reset cannot erase a newer authenticated session" time="0.068180708">
+        </testcase>
+        <testcase classname="src/auth.test.tsx" name="GW-06 cached pageshow rechecks the real session instead of restoring stale private UI" time="0.01157575">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/avatar/face.test.ts" timestamp="2026-10-05T14:00:17.335Z" hostname="local-test-host" tests="12" failures="0" errors="0" skipped="0" time="0.014584917">
+        <testcase classname="src/avatar/face.test.ts" name="headPose &gt; 코나 귀 하나라도 믿을 수 없으면 머리를 그리지 않는다" time="0.002198916">
+        </testcase>
+        <testcase classname="src/avatar/face.test.ts" name="headPose &gt; 눈과 입꼬리는 없어도 된다. 방향은 얼굴 모델이 정한다" time="0.000465917">
+        </testcase>
+        <testcase classname="src/avatar/face.test.ts" name="headPose &gt; 반지름은 귀 사이 거리에 비례하고, 중심은 머리 위쪽으로 조금 올라간다" time="0.00050775">
+        </testcase>
+        <testcase classname="src/avatar/face.test.ts" name="headPose &gt; 방향을 주지 않으면 정면을 보고, 주면 그 방향의 위쪽으로 올린다" time="0.000961542">
+        </testcase>
+        <testcase classname="src/avatar/face.test.ts" name="turnAxes &gt; 회전이 없으면 정면이다" time="0.001858334">
+        </testcase>
+        <testcase classname="src/avatar/face.test.ts" name="turnAxes &gt; 거울 화면에서는 좌우 돌림과 기울임만 반대가 되고 끄덕임은 그대로다" time="0.000500708">
+        </testcase>
+        <testcase classname="src/avatar/face.test.ts" name="turnAxes &gt; 어느 쪽이든 서로 수직인 단위 벡터이고 오른손 좌표계다" time="0.000651834">
+        </testcase>
+        <testcase classname="src/avatar/face.test.ts" name="turnAxes &gt; 옆으로 거의 다 돌리면 먼 쪽 눈은 뒤로 넘어가 그리지 않는다" time="0.000908166">
+        </testcase>
+        <testcase classname="src/avatar/face.test.ts" name="turnAxes &gt; 정면 좌표 (0, 0)은 머리 앞면 한가운데다" time="0.00052775">
+        </testcase>
+        <testcase classname="src/avatar/face.test.ts" name="눈과 입 &gt; 3D처럼 좌우를 뒤집은 화면에서는 반대쪽 눈을 쓴다" time="0.003145583">
+        </testcase>
+        <testcase classname="src/avatar/face.test.ts" name="눈과 입 &gt; 눈을 감으면 가는 선만 남고, 평소만큼 뜨면 원래 크기다" time="0.0002755">
+        </testcase>
+        <testcase classname="src/avatar/face.test.ts" name="눈과 입 &gt; 입을 벌린 만큼 벌린 입의 세로가 커진다" time="0.000164834">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/avatar/faceTracking.test.ts" timestamp="2026-10-05T14:00:17.336Z" hostname="local-test-host" tests="13" failures="0" errors="0" skipped="0" time="0.0176635">
+        <testcase classname="src/avatar/faceTracking.test.ts" name="faceRotation &gt; 열 우선 행렬에서 회전만 꺼낸다. 크기와 위치는 버린다" time="0.003591542">
+        </testcase>
+        <testcase classname="src/avatar/faceTracking.test.ts" name="faceRotation &gt; 행 우선으로 와도 알아보고 같은 회전을 꺼낸다" time="0.000445458">
+        </testcase>
+        <testcase classname="src/avatar/faceTracking.test.ts" name="faceRotation &gt; 16개가 아니면 버린다" time="0.000432958">
+        </testcase>
+        <testcase classname="src/avatar/faceTracking.test.ts" name="faceOpenness &gt; 눈꺼풀 사이 ÷ 눈 너비, 입술 사이 ÷ 입 너비를 잰다" time="0.000963208">
+        </testcase>
+        <testcase classname="src/avatar/faceTracking.test.ts" name="faceOpenness &gt; 어느 눈이 먼저인지는 번호가 아니라 화면 위치로 정한다" time="0.000633667">
+        </testcase>
+        <testcase classname="src/avatar/faceTracking.test.ts" name="faceOpenness &gt; 가로세로 비율을 맞춰 잰다" time="0.000334375">
+        </testcase>
+        <testcase classname="src/avatar/faceTracking.test.ts" name="faceOpenness &gt; 얼굴이 없거나 행렬이 없으면 읽지 않는다" time="0.00056675">
+        </testcase>
+        <testcase classname="src/avatar/faceTracking.test.ts" name="createFaceTracker &gt; 처음 2초 동안의 방향을 정면으로 삼는다. 카메라가 위에 있어 늘 숙여 보여도 정면이 된다" time="0.00248175">
+        </testcase>
+        <testcase classname="src/avatar/faceTracking.test.ts" name="createFaceTracker &gt; 정면 기준에서 돌린 만큼만 돈다" time="0.003161833">
+        </testcase>
+        <testcase classname="src/avatar/faceTracking.test.ts" name="createFaceTracker &gt; 2초가 지나면 정면 기준은 바뀌지 않는다" time="0.001028">
+        </testcase>
+        <testcase classname="src/avatar/faceTracking.test.ts" name="createFaceTracker &gt; 갑자기 돌려도 한 프레임에 다 따라가지 않고 부드럽게 따라간다" time="0.00064975">
+        </testcase>
+        <testcase classname="src/avatar/faceTracking.test.ts" name="createFaceTracker &gt; 얼굴을 놓쳤다가 다시 찾으면 바로 맞춘다" time="0.000405167">
+        </testcase>
+        <testcase classname="src/avatar/faceTracking.test.ts" name="createFaceTracker &gt; 눈은 처음 2초의 뜬 정도를 평소로 보고, 입은 벌린 만큼 0~1이다" time="0.000537375">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/avatar/skeleton.test.ts" timestamp="2026-10-05T14:00:17.337Z" hostname="local-test-host" tests="8" failures="0" errors="0" skipped="0" time="0.041436458">
+        <testcase classname="src/avatar/skeleton.test.ts" name="skeletonSegments &gt; 관절이 없으면 아무것도 그리지 않는다" time="0.005510125">
+        </testcase>
+        <testcase classname="src/avatar/skeleton.test.ts" name="skeletonSegments &gt; 모두 잘 보이면 뼈대 전부와 목을 그린다" time="0.004805625">
+        </testcase>
+        <testcase classname="src/avatar/skeleton.test.ts" name="skeletonSegments &gt; 책상에 가린 엉덩이 아래는 그리지 않는다" time="0.001585583">
+        </testcase>
+        <testcase classname="src/avatar/skeleton.test.ts" name="skeletonSegments &gt; 가시성이 높아도 화면 밖 관절은 그리지 않는다" time="0.000673">
+        </testcase>
+        <testcase classname="src/avatar/skeleton.test.ts" name="skeletonSegments &gt; 월드 좌표도 같은 프레임의 화면 좌표로 구한 신뢰 여부를 따른다" time="0.000569708">
+        </testcase>
+        <testcase classname="src/avatar/skeleton.test.ts" name="skeletonSegments &gt; 손가락이 붙은 쪽은 거친 손 선분을 빼고 팔뚝은 남긴다" time="0.000591041">
+        </testcase>
+        <testcase classname="src/avatar/skeleton.test.ts" name="skeletonSegments &gt; 얼굴 관절은 선으로 잇지 않는다" time="0.024574667">
+        </testcase>
+        <testcase classname="src/avatar/skeleton.test.ts" name="skeletonSegments &gt; 목은 귀 중점에서 어깨 중점까지다" time="0.000757041">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/catalog/motions.test.ts" timestamp="2026-10-05T14:00:17.338Z" hostname="local-test-host" tests="10" failures="0" errors="0" skipped="0" time="0.013981208">
+        <testcase classname="src/catalog/motions.test.ts" name="C-02/03/04 catalog contract &gt; keeps every candidate immutable, sourced and pending without clinical dosage" time="0.005532625">
+        </testcase>
+        <testcase classname="src/catalog/motions.test.ts" name="C-02/03/04 catalog contract &gt; contains sourced development candidates, not excluded W or beauty" time="0.000482292">
+        </testcase>
+        <testcase classname="src/catalog/motions.test.ts" name="C-02/03/04 catalog contract &gt; finds titles and multiple search words without treating text as regex" time="0.002208">
+        </testcase>
+        <testcase classname="src/catalog/motions.test.ts" name="C-02/03/04 catalog contract &gt; normalizes decomposed Korean search" time="0.000767875">
+        </testcase>
+        <testcase classname="src/catalog/motions.test.ts" name="C-02/03/04 catalog contract &gt; treats whitespace as all entries" time="0.000371083">
+        </testcase>
+        <testcase classname="src/catalog/motions.test.ts" name="C-02/03/04 catalog contract &gt; filters by body region and returns a real empty result" time="0.00073625">
+        </testcase>
+        <testcase classname="src/catalog/motions.test.ts" name="C-02/03/04 catalog contract &gt; does not mutate the authored list while searching" time="0.00049725">
+        </testcase>
+        <testcase classname="src/catalog/motions.test.ts" name="C-02/03/04 catalog contract &gt; uses only known internal IDs, not object prototype or external URLs" time="0.000307834">
+        </testcase>
+        <testcase classname="src/catalog/motions.test.ts" name="C-02/03/04 catalog contract &gt; unknown regions fall back to all" time="0.000209333">
+        </testcase>
+        <testcase classname="src/catalog/motions.test.ts" name="C-02/03/04 catalog contract &gt; has steps, stop guidance and reviewed primary sources without dose or outcome claims" time="0.000664167">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/catalog/recommendation.test.ts" timestamp="2026-10-05T14:00:17.339Z" hostname="local-test-host" tests="8" failures="0" errors="0" skipped="0" time="0.006605333">
+        <testcase classname="src/catalog/recommendation.test.ts" name="S3.1 recommendation readiness &gt; never releases development candidates" time="0.002705916">
+        </testcase>
+        <testcase classname="src/catalog/recommendation.test.ts" name="S3.1 recommendation readiness &gt; requires explicit purpose even with not-started body information" time="0.00030475">
+        </testcase>
+        <testcase classname="src/catalog/recommendation.test.ts" name="S3.1 recommendation readiness &gt; requires explicit purpose even with unavailable body information" time="0.000156833">
+        </testcase>
+        <testcase classname="src/catalog/recommendation.test.ts" name="S3.1 recommendation readiness &gt; requires explicit purpose even with observed body information" time="0.00012">
+        </testcase>
+        <testcase classname="src/catalog/recommendation.test.ts" name="S3.1 recommendation readiness &gt; does not infer body findings from the neck purpose" time="0.000248666">
+        </testcase>
+        <testcase classname="src/catalog/recommendation.test.ts" name="S3.1 recommendation readiness &gt; does not infer body findings from the shoulder purpose" time="0.0001635">
+        </testcase>
+        <testcase classname="src/catalog/recommendation.test.ts" name="S3.1 recommendation readiness &gt; does not infer body findings from the torso purpose" time="0.000167292">
+        </testcase>
+        <testcase classname="src/catalog/recommendation.test.ts" name="S3.1 recommendation readiness &gt; does not fabricate a recommendation when observations are supplied" time="0.000937709">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/coaching/browserPorts.test.ts" timestamp="2026-10-05T14:00:17.340Z" hostname="local-test-host" tests="34" failures="0" errors="0" skipped="0" time="0.8392505">
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 생성만으로 카메라를 요청하지 않고 실제 아바타 ready를 꾸미지 않는다" time="0.006579167">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 invalid model  initializes nothing" time="0.002743834">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 invalid model other initializes nothing" time="0.001746792">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 invalid model undefined initializes nothing" time="0.001438208">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 invalid model null initializes nothing" time="0.001016917">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 invalid model __proto__ initializes nothing" time="0.0008205">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 camera duplicate/past/invalid generation cannot request or replace a live lease" time="0.003395542">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-02 camera lease owns its stream and disposes once" time="0.00155575">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-02 denied permission initializes no model and emits no raw error" time="0.001201167">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-02 late permission after abort is stopped without attaching video" time="0.058637125">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-02 pending play abort stops immediately and eventual play rejection cannot stop twice" time="0.061743916">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-02 new generation is never detached by late old permission" time="0.065541958">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-03 inference without same current camera initializes nothing" time="0.0029335">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-03 all three tasks are ready in same lease before inference succeeds" time="0.055563375">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-03 pose partial failure closes already-created tasks, not ready" time="0.004874584">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-03 gesture partial failure closes already-created tasks, not ready" time="0.001505542">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-03 face partial failure closes already-created tasks, not ready" time="0.001284375">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-04 abort during pose closes known and late native handles once" time="0.056061291">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-04 abort during gesture closes known and late native handles once" time="0.106477375">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-04 abort during face closes known and late native handles once" time="0.104792834">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-04 native alias is rejected rather than shared or closed twice" time="0.001663667">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-05 a close failure cannot prevent other native closes and permanently blocks new preparation" time="0.001264417">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-05 failed partial cleanup is tagged and controller cannot become ready again" time="0.000648208">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-05 camera cleanup attempts all tracks and detaches despite a stop failure" time="0.000588792">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-05 abort during play with stop failure is fixed cleanup fault, not uncaught abort-listener error" time="0.06553225">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-06 track ended stops all same-generation resources and emits a fixed notice once" time="0.058818375">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-06 ended from disposed old tracks never terminates the replacement" time="0.001694292">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-06 failed observer throw safely retires and blocks factories without raw notice" time="0.053769583">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-06 failed observer reject safely retires and blocks factories without raw notice" time="0.052647667">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-06 explicit session reporter rejects unknown/past failures but current ended stops session" time="0.002728917">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 concurrent camera preparations cannot allow an older actor to take over the newer one" time="0.000694">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-03 inference must use the original camera ownership signal, not another actor token" time="0.001556916">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-01 selected model cannot be mutated by the external options object after construction" time="0.000656333">
+        </testcase>
+        <testcase classname="src/coaching/browserPorts.test.ts" name="B-05 late old task cleanup failure quarantines and closes the live newer actor" time="0.053756583">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/coaching/resources.test.ts" timestamp="2026-10-05T14:00:17.342Z" hostname="local-test-host" tests="40" failures="0" errors="0" skipped="0" time="0.827967125">
+        <testcase classname="src/coaching/resources.test.ts" name="R-02 명시 요청만 camera→inference→avatars 준비하고 close에서 각1회 정리한다" time="0.004854375">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-01 잘못된 effect·세대는 준비를 시작하지 않는다" time="0.001253">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-01/06 중복·과거 요청과 다른 세대 release는 현재 소유권을 바꾸지 않는다" time="0.000957167">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-02 camera 완료 전 ready가 없고 context는 해당 세대와 signal이다" time="0.05776875">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-02 inference 완료 전 ready가 없고 context는 해당 세대와 signal이다" time="0.061874666">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-02 avatars 완료 전 ready가 없고 context는 해당 세대와 signal이다" time="0.056655792">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 camera / throw : 부분 정리하고 고정 오류만 전달한다" time="0.003480667">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 camera / reject : 부분 정리하고 고정 오류만 전달한다" time="0.001266833">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 inference / throw : 부분 정리하고 고정 오류만 전달한다" time="0.000578792">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 inference / reject : 부분 정리하고 고정 오류만 전달한다" time="0.000714042">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 avatars / throw : 부분 정리하고 고정 오류만 전달한다" time="0.000610708">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 avatars / reject : 부분 정리하고 고정 오류만 전달한다" time="0.000406291">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 camera가 소유 자원이 아닌 값을 반환하면 통과하지 않는다" time="0.00047425">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 inference가 소유 자원이 아닌 값을 반환하면 통과하지 않는다" time="0.000265917">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 avatars가 소유 자원이 아닌 값을 반환하면 통과하지 않는다" time="0.002957625">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-04 camera 대기 중 release 뒤 늦은 반환은 정리하고 다음 준비하지 않는다" time="0.053450459">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-04 inference 대기 중 release 뒤 늦은 반환은 정리하고 다음 준비하지 않는다" time="0.055346791">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-04 avatars 대기 중 release 뒤 늦은 반환은 정리하고 다음 준비하지 않는다" time="0.051892583">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-04/06 close는 응답하지 않는 factory를 기다리지 않고 늦은 rejection도 삼킨다" time="0.052376917">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-05 새 세대 완료 뒤 역순 반환은 현재 ready와 소유 자원에 영향이 없다" time="0.108030041">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-05 교체가 연달아 와도 앞선 비동기 dispose가 끝나기 전 새 factory를 시작하지 않는다" time="0.065792458">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-07 dispose throw는 다른 자원 정리를 막지 않고 새 준비를 차단한다" time="0.002077292">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-07 dispose reject는 다른 자원 정리를 막지 않고 새 준비를 차단한다" time="0.000679792">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-07 이미 교체된 factory의 늦은 dispose 실패도 현재 소유 자원을 정리하고 준비를 차단한다" time="0.055391834">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-08 동일 객체를 두 stage가 반환하면 ready 없이 소유권 오류와 정리1회이다" time="0.002427667">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-08 앞선 세대에서 정리한 객체는 다음 세대가 재사용할 수 없다" time="0.001538">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-08 늦은 과거 factory가 현재 소유 객체를 반환해도 현재 객체는 해제하지 않는다" time="0.053891416">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-09 callback throw는 모든 자원을 정리하고 unhandled rejection·재준비가 없다" time="0.00115875">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-09 callback reject는 모든 자원을 정리하고 unhandled rejection·재준비가 없다" time="0.00082975">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-09 부분 실패의 오류 callback 예외도 오류 전달을 재귀 호출하지 않는다" time="0.000521958">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-06/09 close 중 늦은 반환과 여러 cleanup 실패·callback 예외도 정리1회·재준비0이다" time="0.054296375">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-10 raw 오류·자원 metadata는 notice/console/network/storage에 전달하지 않는다" time="0.002323083">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-04 완료된 acquire와 다음 stage 사이에 release되면 다음 factory도0이다" time="0.000987334">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-09 cleanup-error callback가 close를 await해도 정리 promise와 교착하지 않는다" time="0.000839875">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-11 미확인 authenticated gate에서 engine effect와 자원 요청은0이다" time="0.001724125">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-11 미확인 motionValidated gate에서 engine effect와 자원 요청은0이다" time="0.000406625">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-11 미확인 referenceAvatarReady gate에서 engine effect와 자원 요청은0이다" time="0.000644833">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-11 미확인 userAvatarReady gate에서 engine effect와 자원 요청은0이다" time="0.002340125">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-11 실제 engine start/ready/pause/resume/end effects와 controller를 연결해도 성공 기록을 만들지 않는다" time="0.001722208">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-11 종료 뒤 이전 ready가 도착해도 engine은 부활하지 않고 해당 세대만 release한다" time="0.060650125">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/coaching/session.test.ts" timestamp="2026-10-05T14:00:17.345Z" hostname="local-test-host" tests="44" failures="0" errors="0" skipped="0" time="0.345525417">
+        <testcase classname="src/coaching/session.test.ts" name="T-01 생성/미확인 gate는 실제 coordinator에서도 factory0이다" time="0.006807875">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate authenticated / false 는 true가 아니면 준비0이다" time="0.001208166">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate authenticated / undefined 는 true가 아니면 준비0이다" time="0.00125875">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate authenticated / true 는 true가 아니면 준비0이다" time="0.000794334">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate motionValidated / false 는 true가 아니면 준비0이다" time="0.000656916">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate motionValidated / undefined 는 true가 아니면 준비0이다" time="0.003357375">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate motionValidated / true 는 true가 아니면 준비0이다" time="0.000489541">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate referenceAvatarReady / false 는 true가 아니면 준비0이다" time="0.000367875">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate referenceAvatarReady / undefined 는 true가 아니면 준비0이다" time="0.000794208">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate referenceAvatarReady / true 는 true가 아니면 준비0이다" time="0.00063025">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate userAvatarReady / false 는 true가 아니면 준비0이다" time="0.000328">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate userAvatarReady / undefined 는 true가 아니면 준비0이다" time="0.000290459">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate userAvatarReady / true 는 true가 아니면 준비0이다" time="0.000288084">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-02 실제 engine effect와 controller를 연결해 start→pause→resume→end를 진행한다" time="0.014596791">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-03 start의 권한 대기 Promise가 pause·resume·종료를 막지 않고 과거 반환도 정리한다" time="0.055992292">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 ready 전 authenticated 상실은 준비 성공이 아닌 해당 사유 종료다" time="0.054176625">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 ready 전 motionValidated 상실은 준비 성공이 아닌 해당 사유 종료다" time="0.059567167">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 ready 전 referenceAvatarReady 상실은 준비 성공이 아닌 해당 사유 종료다" time="0.053574542">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 ready 전 userAvatarReady 상실은 준비 성공이 아닌 해당 사유 종료다" time="0.057602958">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 tick 전에 세션 만료를 재확인하여 유지·완료를 만들지 않는다" time="0.001610125">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 observation 전에 세션 만료를 재확인하여 유지·완료를 만들지 않는다" time="0.002011708">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 camera 오류는 고정 사유로 종료하고 자원과 원본 오류를 snapshot에 노출하지 않는다" time="0.0029275">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 inference 오류는 고정 사유로 종료하고 자원과 원본 오류를 snapshot에 노출하지 않는다" time="0.001220792">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 avatars 오류는 고정 사유로 종료하고 자원과 원본 오류를 snapshot에 노출하지 않는다" time="0.000816209">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 ownership-error는 실제 엔진 사유이며 asset/user-stop으로 꾸미지 않는다" time="0.000664917">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 cleanup-error는 단순 pause가 아니라 종료·재준비 금지로 처리한다" time="0.0012035">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 clock NaN 는 명시 clock-error로 종료·준비0이다" time="0.000470625">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 clock Infinity 는 명시 clock-error로 종료·준비0이다" time="0.000247917">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 clock -1 는 명시 clock-error로 종료·준비0이다" time="0.000226541">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 역행 clock 및 provider 예외는 raw 내용 없이 fail-closed이다" time="0.00083025">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-06 ready·tick·시간 경과만으로는 성공·관찰/반복/유지0이다" time="0.001645791">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-06 명시 관찰의 시작·목표·복귀만 성공으로 계산하고 종료 뒤 frame은 무시한다" time="0.002083625">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-06 과거 세대 frame·가림 입력은 현재 성공으로 계산하지 않는다" time="0.000717333">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-07 observer throw는 정리·callback-error·준비 재시작0이다" time="0.000738458">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-07 observer reject는 정리·callback-error·준비 재시작0이다" time="0.000471959">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-07 preparing observer의 reentrant pause가 이전 준비를 부활시키지 않는다" time="0.000363833">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-08 실제 EventTarget hidden/pagehide/dispose는 종료하고 visible 자동 재시작·listener 누수0이다" time="0.001397708">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 tick의 gate 상실 종료는 현재 유효 시각의 경과 시간을 보존한다" time="0.000499458">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 observation의 gate 상실 종료는 현재 유효 시각의 경과 시간을 보존한다" time="0.000294208">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-08 pagehide 자체가 즉시 종료·listener 제거를 수행한다" time="0.000645708">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-08 initial-hidden 자체가 즉시 종료·listener 제거를 수행한다" time="0.000683875">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-08 detach 자체가 즉시 종료·listener 제거를 수행한다" time="0.001104833">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 gate 속성 getter의 예외도 gate-error로 처리하고 준비를 시작하지 않는다" time="0.0033425">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 종료 뒤 cleanup 실패는 기존 종료 이유를 왜곡하지 않고 fixed failure를 별도로 남긴다" time="0.000740958">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/DataHelpPage.test.tsx" timestamp="2026-10-05T14:00:17.349Z" hostname="local-test-host" tests="5" failures="0" errors="0" skipped="0" time="0.79979475">
+        <testcase classname="src/pages/DataHelpPage.test.tsx" name="DH-01 real public route/help exposes도움말 without private data" time="0.184742167">
+        </testcase>
+        <testcase classname="src/pages/DataHelpPage.test.tsx" name="DH-01 real public route/data exposes카메라와 데이터 안내 without private data" time="0.087486292">
+        </testcase>
+        <testcase classname="src/pages/DataHelpPage.test.tsx" name="DH-02 public navigation while guest" time="0.132837708">
+        </testcase>
+        <testcase classname="src/pages/DataHelpPage.test.tsx" name="DH-02 public navigation while member" time="0.109164833">
+        </testcase>
+        <testcase classname="src/pages/DataHelpPage.test.tsx" name="DH-02 public navigation while offline" time="0.283432625">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/ExplorePage.test.tsx" timestamp="2026-10-05T14:00:17.349Z" hostname="local-test-host" tests="4" failures="0" errors="0" skipped="0" time="0.264006667">
+        <testcase classname="src/pages/ExplorePage.test.tsx" name="keeps the explore route protected for account status 401" time="0.1915555">
+        </testcase>
+        <testcase classname="src/pages/ExplorePage.test.tsx" name="keeps the explore route protected for account status 503" time="0.029093625">
+        </testcase>
+        <testcase classname="src/pages/ExplorePage.test.tsx" name="shows a genuine empty release catalog, not development candidates" time="0.008871042">
+        </testcase>
+        <testcase classname="src/pages/ExplorePage.test.tsx" name="selects a purpose without inventing body findings and returns to selection" time="0.032370708">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/GoogleAccount.test.tsx" timestamp="2026-10-05T14:00:17.350Z" hostname="local-test-host" tests="14" failures="0" errors="0" skipped="0" time="0.451339042">
+        <testcase classname="src/pages/GoogleAccount.test.tsx" name="GW-01 login unconfigured Google keeps email usable" time="0.109851542">
+        </testcase>
+        <testcase classname="src/pages/GoogleAccount.test.tsx" name="GW-01 signup unconfigured Google keeps email usable" time="0.056965917">
+        </testcase>
+        <testcase classname="src/pages/GoogleAccount.test.tsx" name="GW-02 configured Google navigates only to the fixed same-origin endpoint once" time="0.103955917">
+        </testcase>
+        <testcase classname="src/pages/GoogleAccount.test.tsx" name="GW-03/04 fixed failure cancelled never renders query secrets" time="0.017309083">
+        </testcase>
+        <testcase classname="src/pages/GoogleAccount.test.tsx" name="GW-03/04 fixed failure failed never renders query secrets" time="0.015286833">
+        </testcase>
+        <testcase classname="src/pages/GoogleAccount.test.tsx" name="GW-03/04 fixed failure account-conflict never renders query secrets" time="0.018268167">
+        </testcase>
+        <testcase classname="src/pages/GoogleAccount.test.tsx" name="GW-03/04 fixed failure unavailable never renders query secrets" time="0.00957175">
+        </testcase>
+        <testcase classname="src/pages/GoogleAccount.test.tsx" name="GW-03/04 fixed failure rate-limited never renders query secrets" time="0.020362584">
+        </testcase>
+        <testcase classname="src/pages/GoogleAccount.test.tsx" name="GW-03/04 fixed failure RAW-CODE-SECRET&amp;google=RAW-TOKEN-SECRET never renders query secrets" time="0.01799375">
+        </testcase>
+        <testcase classname="src/pages/GoogleAccount.test.tsx" name="GW-03/04 fixed failure toString never renders query secrets" time="0.007729875">
+        </testcase>
+        <testcase classname="src/pages/GoogleAccount.test.tsx" name="GW-03/04 fixed failure constructor never renders query secrets" time="0.00702825">
+        </testcase>
+        <testcase classname="src/pages/GoogleAccount.test.tsx" name="GW-03/04 fixed failure __proto__ never renders query secrets" time="0.006442708">
+        </testcase>
+        <testcase classname="src/pages/GoogleAccount.test.tsx" name="GW-01 malformed status fails closed and retries the native boolean contract" time="0.046660167">
+        </testcase>
+        <testcase classname="src/pages/GoogleAccount.test.tsx" name="GW-01 status reply after unmount cannot update the old form" time="0.010867">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/MeasureDemoPage.test.tsx" timestamp="2026-10-05T14:00:17.351Z" hostname="local-test-host" tests="3" failures="0" errors="0" skipped="0" time="1.888460459">
+        <testcase classname="src/pages/MeasureDemoPage.test.tsx" name="상반신 프레임은 머리·어깨 범위만 충족하며 전신·미검출 기록은 촬영 안내를 남긴다" time="0.191829">
+        </testcase>
+        <testcase classname="src/pages/MeasureDemoPage.test.tsx" name="첫 프레임 전·오래된 프레임·복수 포즈를 촬영 범위 충족으로 기록하지 않는다" time="0.066832">
+        </testcase>
+        <testcase classname="src/pages/MeasureDemoPage.test.tsx" name="최신 100개만 남기고 준비 중에도 취소할 수 있다" time="1.627643125">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/MemberPage.test.tsx" timestamp="2026-10-05T14:00:17.351Z" hostname="local-test-host" tests="1" failures="0" errors="0" skipped="0" time="0.041967125">
+        <testcase classname="src/pages/MemberPage.test.tsx" name="AW-01 verified account exposes records and a separate withdrawal entry" time="0.04096075">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/MotionSelectionPage.test.tsx" timestamp="2026-10-05T14:00:17.351Z" hostname="local-test-host" tests="13" failures="0" errors="0" skipped="0" time="1.919715958">
+        <testcase classname="src/pages/MotionSelectionPage.test.tsx" name="S3.3 opens guidance detail chin-retraction without automatic coaching" time="0.493211959">
+        </testcase>
+        <testcase classname="src/pages/MotionSelectionPage.test.tsx" name="S3.3 opens guidance detail cross-body-shoulder without automatic coaching" time="0.063532917">
+        </testcase>
+        <testcase classname="src/pages/MotionSelectionPage.test.tsx" name="S3.3 opens guidance detail lateral-trunk without automatic coaching" time="0.059601833">
+        </testcase>
+        <testcase classname="src/pages/MotionSelectionPage.test.tsx" name="S3.3 opens guidance detail seated-trunk-rotation without automatic coaching" time="0.061290167">
+        </testcase>
+        <testcase classname="src/pages/MotionSelectionPage.test.tsx" name="C-01 hides content while account confirmation is pending" time="0.013852167">
+        </testcase>
+        <testcase classname="src/pages/MotionSelectionPage.test.tsx" name="C-01 guest does not see the catalog and uses the unchanged login return" time="0.125176333">
+        </testcase>
+        <testcase classname="src/pages/MotionSelectionPage.test.tsx" name="C-01 server error stays closed and has retry" time="0.039481417">
+        </testcase>
+        <testcase classname="src/pages/MotionSelectionPage.test.tsx" name="C-02 filters a real empty list and restores it" time="0.25194725">
+        </testcase>
+        <testcase classname="src/pages/MotionSelectionPage.test.tsx" name="C-03/05 selected detail has sources and disabled coaching, without media or new API" time="0.085257625">
+        </testcase>
+        <testcase classname="src/pages/MotionSelectionPage.test.tsx" name="C-04 unknown ID is a recoverable missing detail, not a fallback motion" time="0.135053167">
+        </testcase>
+        <testcase classname="src/pages/MotionSelectionPage.test.tsx" name="C-04 selecting and returning preserves search and filters" time="0.221608792">
+        </testcase>
+        <testcase classname="src/pages/MotionSelectionPage.test.tsx" name="C-01 focus recheck removes selected content before the next account response" time="0.165311083">
+        </testcase>
+        <testcase classname="src/pages/MotionSelectionPage.test.tsx" name="C-07 cached navigation keeps the selection page title" time="0.201285041">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/PasswordPage.test.tsx" timestamp="2026-10-05T14:00:17.352Z" hostname="local-test-host" tests="18" failures="0" errors="0" skipped="0" time="2.701193209">
+        <testcase classname="src/pages/PasswordPage.test.tsx" name="PW-02 StrictMode clears the URL without losing the in-memory POST token" time="0.298392084">
+        </testcase>
+        <testcase classname="src/pages/PasswordPage.test.tsx" name="PW-03 rejects malformed/query/ambiguous links without POST: /password/reset" time="0.084836667">
+        </testcase>
+        <testcase classname="src/pages/PasswordPage.test.tsx" name="PW-03 rejects malformed/query/ambiguous links without POST: /password/reset?token=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" time="0.156617458">
+        </testcase>
+        <testcase classname="src/pages/PasswordPage.test.tsx" name="PW-03 rejects malformed/query/ambiguous links without POST: /password/reset#token=short" time="0.067021333">
+        </testcase>
+        <testcase classname="src/pages/PasswordPage.test.tsx" name="PW-03 rejects malformed/query/ambiguous links without POST: /password/reset#token=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&amp;token=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" time="0.115946666">
+        </testcase>
+        <testcase classname="src/pages/PasswordPage.test.tsx" name="PW-03 rejects malformed/query/ambiguous links without POST: /password/reset#token=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&amp;other=1" time="0.187520125">
+        </testcase>
+        <testcase classname="src/pages/PasswordPage.test.tsx" name="PW-03 rejects malformed/query/ambiguous links without POST: /password/reset?other=1#token=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" time="0.130197833">
+        </testcase>
+        <testcase classname="src/pages/PasswordPage.test.tsx" name="PW-03 mismatched confirmation focuses the field and never sends a password" time="0.174536708">
+        </testcase>
+        <testcase classname="src/pages/PasswordPage.test.tsx" name="PW-02 invalid password length is rejected before POST: 0" time="0.148234458">
+        </testcase>
+        <testcase classname="src/pages/PasswordPage.test.tsx" name="PW-02 invalid password length is rejected before POST: 1" time="0.148007708">
+        </testcase>
+        <testcase classname="src/pages/PasswordPage.test.tsx" name="PW-02 invalid password length is rejected before POST: 2" time="0.175900833">
+        </testcase>
+        <testcase classname="src/pages/PasswordPage.test.tsx" name="PW-01 request errors do not pretend delivery; 202 is only acceptance" time="0.143245708">
+        </testcase>
+        <testcase classname="src/pages/PasswordPage.test.tsx" name="PW-01 quota preserves a disabled wait instead of another submission" time="0.065258292">
+        </testcase>
+        <testcase classname="src/pages/PasswordPage.test.tsx" name="PW-03 held response blocks duplicates and is discarded after leaving" time="0.0795595">
+        </testcase>
+        <testcase classname="src/pages/PasswordPage.test.tsx" name="PW-03 a wrong 200 acknowledgement cannot complete reset or reveal private UI" time="0.159990875">
+        </testcase>
+        <testcase classname="src/pages/PasswordPage.test.tsx" name="PW-03 a consumed 400 link clears password fields and offers a fresh request" time="0.095327167">
+        </testcase>
+        <testcase classname="src/pages/PasswordPage.test.tsx" name="PW-03 a new same-page fragment replaces the consumed token without a reload" time="0.207408708">
+        </testcase>
+        <testcase classname="src/pages/PasswordPage.test.tsx" name="PW-03 a replacement link cancels a held reset and ignores its late completion" time="0.259229791">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/RecordDeletion.test.tsx" timestamp="2026-10-05T14:00:17.353Z" hostname="local-test-host" tests="10" failures="0" errors="0" skipped="0" time="2.108752958">
+        <testcase classname="src/pages/RecordDeletion.test.tsx" name="blocks duplicate confirmation and discards deletion response after leaving" time="0.365565459">
+        </testcase>
+        <testcase classname="src/pages/RecordDeletion.test.tsx" name="discards a late preview after cancel" time="0.062792417">
+        </testcase>
+        <testcase classname="src/pages/RecordDeletion.test.tsx" name="discards a late preview after period" time="0.241329084">
+        </testcase>
+        <testcase classname="src/pages/RecordDeletion.test.tsx" name="discards a late preview after leave" time="0.238388875">
+        </testcase>
+        <testcase classname="src/pages/RecordDeletion.test.tsx" name="shows scope and irreversible consequence, then cancels without deletion" time="0.154024084">
+        </testcase>
+        <testcase classname="src/pages/RecordDeletion.test.tsx" name="posts only an explicit confirmation and reports the actual server count" time="0.1460825">
+        </testcase>
+        <testcase classname="src/pages/RecordDeletion.test.tsx" name="does not allow deletion of an empty preview" time="0.235382375">
+        </testcase>
+        <testcase classname="src/pages/RecordDeletion.test.tsx" name="does not silently retry or invent results after status 409" time="0.28463775">
+        </testcase>
+        <testcase classname="src/pages/RecordDeletion.test.tsx" name="does not silently retry or invent results after status 503" time="0.216785334">
+        </testcase>
+        <testcase classname="src/pages/RecordDeletion.test.tsx" name="opens deletion preview separately from reading and requires explicit confirmation" time="0.161797625">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/RecordsPage.test.tsx" timestamp="2026-10-05T14:00:17.354Z" hostname="local-test-host" tests="12" failures="0" errors="0" skipped="0" time="2.4745335">
+        <testcase classname="src/pages/RecordsPage.test.tsx" name="blocks private records when account check returns 401" time="0.214615375">
+        </testcase>
+        <testcase classname="src/pages/RecordsPage.test.tsx" name="blocks private records when account check returns 503" time="0.04249075">
+        </testcase>
+        <testcase classname="src/pages/RecordsPage.test.tsx" name="shows loading, genuine empty period and start recovery without invented scores" time="0.069514417">
+        </testcase>
+        <testcase classname="src/pages/RecordsPage.test.tsx" name="opens real-shaped detail and preserves the selected period on return" time="0.341159584">
+        </testcase>
+        <testcase classname="src/pages/RecordsPage.test.tsx" name="changes pages using the same query cutoff and never appends duplicates" time="0.591796375">
+        </testcase>
+        <testcase classname="src/pages/RecordsPage.test.tsx" name="retries a failed read, keeps raw error out of the page and does not call it empty" time="0.188944042">
+        </testcase>
+        <testcase classname="src/pages/RecordsPage.test.tsx" name="handles unavailable/invalid detail safely: 00000000-0000-4000-8000-000000000001" time="0.196493708">
+        </testcase>
+        <testcase classname="src/pages/RecordsPage.test.tsx" name="handles unavailable/invalid detail safely: not-a-record" time="0.17427225">
+        </testcase>
+        <testcase classname="src/pages/RecordsPage.test.tsx" name="rechecks the account after a records 401 and discards private content" time="0.139915584">
+        </testcase>
+        <testcase classname="src/pages/RecordsPage.test.tsx" name="focus recheck hides loaded private data before its answer and ignores late data" time="0.216413416">
+        </testcase>
+        <testcase classname="src/pages/RecordsPage.test.tsx" name="rejects invalid query periods without reading and recovers to recent records" time="0.11253425">
+        </testcase>
+        <testcase classname="src/pages/RecordsPage.test.tsx" name="new period clears previous rows and returns to page one, without storing records" time="0.18262275">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/WithdrawalPage.test.tsx" timestamp="2026-10-05T14:00:17.355Z" hostname="local-test-host" tests="20" failures="0" errors="0" skipped="0" time="3.59720025">
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-03 private withdrawal is closed when /me returns401" time="0.236824833">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-03 private withdrawal is closed when /me returns503" time="0.033872917">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-04 explicit cancel sends no confirm request and clears memory proof" time="0.153043125">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-05 consent requires six ASCII digits and exact deliberate confirmation, not code alone" time="0.155459583">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-06 final pending stays mounted, closes private navigation and submits only once" time="0.283269958">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-07 rejected400 is retryable only after real-shaped fresh /me" time="0.222131833">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-07 rejected422 is retryable only after real-shaped fresh /me" time="0.298585083">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-07 rejected429 is retryable only after real-shaped fresh /me" time="0.277833959">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-08 rejected code cannot revive cached private account when fresh /me fails" time="0.249251542">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-09 newly checked different account never inherits old confirmation or code" time="0.128585958">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-10 uncertain200 does not claim deletion or automatically retry" time="0.152898">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-10 uncertain401 does not claim deletion or automatically retry" time="0.134835709">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-10 uncertain403 does not claim deletion or automatically retry" time="0.194643083">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-10 uncertain503 does not claim deletion or automatically retry" time="0.157482041">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-11 guest after uncertain result means login check, not completed withdrawal" time="0.153067">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-12 send failure429 is not a delivered code or deletion" time="0.06857775">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-12 send failure503 is not a delivered code or deletion" time="0.034776792">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-13 explicit reissue replaces old proof and clears code/consent" time="0.134264833">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-14 abandoned start late response is aborted and never becomes reused consent" time="0.177627583">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-15 leaving during confirmation cannot restore private account from late204" time="0.347025791">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pose/camera.test.ts" timestamp="2026-10-05T14:00:17.357Z" hostname="local-test-host" tests="4" failures="0" errors="0" skipped="0" time="0.064035833">
+        <testcase classname="src/pose/camera.test.ts" name="play 실패 시 이미 얻은 스트림을 끈다" time="0.006913208">
+        </testcase>
+        <testcase classname="src/pose/camera.test.ts" name="권한 대기 중 취소하면 뒤늦은 스트림을 화면에 붙이지 않고 끈다" time="0.001254375">
+        </testcase>
+        <testcase classname="src/pose/camera.test.ts" name="play 대기 중 취소는 즉시 트랙을 끄고 늦은 재생으로 부활하지 않는다" time="0.052637042">
+        </testcase>
+        <testcase classname="src/pose/camera.test.ts" name="지난 스트림을 닫아도 새 스트림을 분리하지 않는다" time="0.001295625">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pose/useMeasurement.test.tsx" timestamp="2026-10-05T14:00:17.357Z" hostname="local-test-host" tests="9" failures="0" errors="0" skipped="0" time="0.031989625">
+        <testcase classname="src/pose/useMeasurement.test.tsx" name="중복 시작은 루프 하나만 만들고 중지·재시작 뒤 지난 콜백은 실행하지 않는다" time="0.018004708">
+        </testcase>
+        <testcase classname="src/pose/useMeasurement.test.tsx" name="같은 영상은 재추론하지 않고 프레임 시각을 갱신하지 않는다" time="0.001791917">
+        </testcase>
+        <testcase classname="src/pose/useMeasurement.test.tsx" name="복수 결과는 첫 사람을 선택하지 않고 몸·손·얼굴을 즉시 비운다" time="0.0025915">
+        </testcase>
+        <testcase classname="src/pose/useMeasurement.test.tsx" name="트랙 종료는 루프와 최근 좌표를 즉시 비운다" time="0.001765667">
+        </testcase>
+        <testcase classname="src/pose/useMeasurement.test.tsx" name="늦은 모델은 새 측정 모델을 덮어쓰지 않고 닫힌다" time="0.002914666">
+        </testcase>
+        <testcase classname="src/pose/useMeasurement.test.tsx" name="이탈 후 늦은 얼굴 모델은 닫고 상태/루프를 되살리지 않는다" time="0.001018167">
+        </testcase>
+        <testcase classname="src/pose/useMeasurement.test.tsx" name="이탈 후 늦은 스트림은 닫고 모델을 불러오지 않는다" time="0.0007985">
+        </testcase>
+        <testcase classname="src/pose/useMeasurement.test.tsx" name="추론 실패는 지난 좌표와 프레임 루프를 남기지 않는다" time="0.000902666">
+        </testcase>
+        <testcase classname="src/pose/useMeasurement.test.tsx" name="영상 프레임 API가 없을 때도 RAF 콜백을 중지 시 취소한다" time="0.001015833">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/posture/framing.test.ts" timestamp="2026-10-05T14:00:17.358Z" hostname="local-test-host" tests="9" failures="0" errors="0" skipped="0" time="0.012542708">
+        <testcase classname="src/posture/framing.test.ts" name="framingHint &gt; 앉은 자세에서 머리·어깨가 보이면 안내하지 않는다" time="0.00279125">
+        </testcase>
+        <testcase classname="src/posture/framing.test.ts" name="framingHint &gt; 앉은 자세에서 어깨가 화면 밖이면 자리를 맞추게 한다" time="0.000380708">
+        </testcase>
+        <testcase classname="src/posture/framing.test.ts" name="framingHint &gt; 전신이 필요한데 다리가 화면 밖이면 일어나서 물러나게 한다" time="0.000208667">
+        </testcase>
+        <testcase classname="src/posture/framing.test.ts" name="framingHint &gt; 사람이 안 보이면 카메라 앞으로 오게 한다" time="0.000176125">
+        </testcase>
+        <testcase classname="src/posture/framing.test.ts" name="framingHint &gt; 앉은 자세는 엉덩이를 요구하지 않는다" time="0.000850167">
+        </testcase>
+        <testcase classname="src/posture/framing.test.ts" name="framingHint &gt; 상반신 동작은 전신이 나와도 허용하고, 필수 어깨가 가려지면 다시 멈춘다" time="0.0003695">
+        </testcase>
+        <testcase classname="src/posture/framing.test.ts" name="framingHint &gt; 전신 동작은 상반신만 보일 때 촬영 위치를 다시 안내한다" time="0.004900625">
+        </testcase>
+        <testcase classname="src/posture/framing.test.ts" name="createHintStabilizer &gt; 1.5초 이어져야 띄우고, 해결된 뒤 0.8초 지나야 내린다" time="0.000354875">
+        </testcase>
+        <testcase classname="src/posture/framing.test.ts" name="createHintStabilizer &gt; 잠깐 깜빡인 문제는 띄우지 않는다" time="0.000171917">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/posture/hands.test.ts" timestamp="2026-10-05T14:00:17.358Z" hostname="local-test-host" tests="7" failures="0" errors="0" skipped="0" time="0.006597042">
+        <testcase classname="src/posture/hands.test.ts" name="gestureLabel &gt; 엄지척을 우리말로 바꾼다" time="0.001915292">
+        </testcase>
+        <testcase classname="src/posture/hands.test.ts" name="gestureLabel &gt; 확신이 낮거나 제스처가 없으면 보여주지 않는다" time="0.000736875">
+        </testcase>
+        <testcase classname="src/posture/hands.test.ts" name="trustedHandPoints &gt; 화면 밖 손가락 점은 믿지 않는다" time="0.000573084">
+        </testcase>
+        <testcase classname="src/posture/hands.test.ts" name="matchHandToBody &gt; 손목이 가까운 쪽 손으로 맞춘다" time="0.000508875">
+        </testcase>
+        <testcase classname="src/posture/hands.test.ts" name="matchHandToBody &gt; 몸 손목과 너무 멀면 맞추지 않는다" time="0.000218292">
+        </testcase>
+        <testcase classname="src/posture/hands.test.ts" name="matchHandToBody &gt; 몸 손목을 믿을 수 없으면 맞추지 않는다" time="0.0001925">
+        </testcase>
+        <testcase classname="src/posture/hands.test.ts" name="attachHandToBody &gt; 손의 손목을 몸의 손목 위치로 옮기고 모양은 유지한다" time="0.000362959">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/posture/landmarks.test.ts" timestamp="2026-10-05T14:00:17.359Z" hostname="local-test-host" tests="8" failures="0" errors="0" skipped="0" time="0.006819334">
+        <testcase classname="src/posture/landmarks.test.ts" name="trustedJoints &gt; 화면 안에서 잘 보이는 관절만 믿는다" time="0.002176917">
+        </testcase>
+        <testcase classname="src/posture/landmarks.test.ts" name="trustedJoints &gt; 가시성이 높아도 화면 밖이면 믿지 않는다" time="0.000357917">
+        </testcase>
+        <testcase classname="src/posture/landmarks.test.ts" name="trustedJoints &gt; 관절이 없으면 전부 믿지 않는다" time="0.000275667">
+        </testcase>
+        <testcase classname="src/posture/landmarks.test.ts" name="trustedJoints &gt; NaN·무한·범위 밖 가시성·비정상 깊이·잘못된 기준을 신뢰하지 않는다" time="0.001109458">
+        </testcase>
+        <testcase classname="src/posture/landmarks.test.ts" name="isInFrame &gt; 0~1 밖이면 화면 밖이다" time="0.000256209">
+        </testcase>
+        <testcase classname="src/posture/landmarks.test.ts" name="headShoulderConfidence &gt; 코·귀·어깨 가시성의 평균이다" time="0.000255791">
+        </testcase>
+        <testcase classname="src/posture/landmarks.test.ts" name="headShoulderConfidence &gt; 화면 밖 관절은 0으로 센다" time="0.00017975">
+        </testcase>
+        <testcase classname="src/posture/landmarks.test.ts" name="headShoulderConfidence &gt; 팔꿈치·손목은 세지 않는다" time="0.000311541">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/stretch/progression.test.ts" timestamp="2026-10-05T14:00:17.360Z" hostname="local-test-host" tests="60" failures="0" errors="0" skipped="0" time="0.655493708">
+        <testcase classname="src/stretch/progression.test.ts" name="L-01 explicit immutable plan &gt; rejects invalid hold duration NaN without inventing a default" time="0.003965667">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-01 explicit immutable plan &gt; rejects invalid hold duration Infinity without inventing a default" time="0.000398958">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-01 explicit immutable plan &gt; rejects invalid hold duration -1 without inventing a default" time="0.000369916">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-01 explicit immutable plan &gt; rejects invalid hold duration 0 without inventing a default" time="0.000664041">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-01 explicit immutable plan &gt; rejects invalid hold duration 9007199254740992 without inventing a default" time="0.000476792">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-01 explicit immutable plan &gt; requires finite frame policies and explicit positive integer repetitions" time="0.002845291">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-01 explicit immutable plan &gt; rejects empty, duplicated or incomplete steps" time="0.000934667">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-01 explicit immutable plan &gt; copies and freezes the plan rather than trusting caller mutations" time="0.000930083">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02 explicit start and resource generation &gt; does not request a camera when authenticated is unconfirmed" time="0.00213175">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02 explicit start and resource generation &gt; does not request a camera when motionValidated is unconfirmed" time="0.000289583">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02 explicit start and resource generation &gt; does not request a camera when referenceAvatarReady is unconfirmed" time="0.000139542">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02 explicit start and resource generation &gt; does not request a camera when userAvatarReady is unconfirmed" time="0.000124541">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02 explicit start and resource generation &gt; requests only after start and does not start twice" time="0.000590125">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02 explicit start and resource generation &gt; releases a late ready from its old generation without reviving the session" time="0.000830375">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02 explicit start and resource generation &gt; requires a deliberate resume and all preparation gates again" time="0.000371833">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-03 observed hold time only &gt; needs a start and target, counts only fresh pairs, and requires verified return" time="0.000778125">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-03 observed hold time only &gt; never increments from timer ticks or wall-clock completion buttons" time="0.000260875">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-03 observed hold time only &gt; does not consume duplicate sequences or out-of-order sample time" time="0.000436041">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-03 observed hold time only &gt; does not count malformed, future or stale frames {&quot;sampledAt&quot;:500,&quot;now&quot;:102}" time="0.000245958">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-03 observed hold time only &gt; does not count malformed, future or stale frames {&quot;sampledAt&quot;:1,&quot;now&quot;:500}" time="0.000350083">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-03 observed hold time only &gt; does not count malformed, future or stale frames {&quot;sampledAt&quot;:null,&quot;now&quot;:102}" time="0.0001985">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-03 observed hold time only &gt; does not count malformed, future or stale frames {&quot;sampledAt&quot;:102,&quot;now&quot;:null}" time="0.00011425">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-03 observed hold time only &gt; breaks continuity across a missing-frame gap instead of filling it" time="0.000206625">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-03 observed hold time only &gt; preserves observed hold time without counting unmet or unobservable time" time="0.000154167">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-03 observed hold time only &gt; preserves verified time over pause while rejecting all old-generation frames" time="0.000241708">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-04 complete repetition cycles &gt; does not count a target alone, return alone, or repeated target frames" time="0.000467417">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-04 complete repetition cycles &gt; enforces an explicitly supplied per-repetition hold before return" time="0.000393792">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-04 complete repetition cycles &gt; disarms incomplete cycles for personCount 0" time="0.000238792">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-04 complete repetition cycles &gt; disarms incomplete cycles for personCount 2" time="0.000282916">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-04 complete repetition cycles &gt; discards a partial repetition on target changes and time gaps" time="0.000195667">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-05/06 terminal outcomes and ordered steps &gt; ends without success on user-stop and releases resources" time="0.000811417">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-05/06 terminal outcomes and ordered steps &gt; ends without success on pain and releases resources" time="0.000482583">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-05/06 terminal outcomes and ordered steps &gt; ends without success on page-hidden and releases resources" time="0.002400791">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-05/06 terminal outcomes and ordered steps &gt; ends without success on session-expired and releases resources" time="0.000225041">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-05/06 terminal outcomes and ordered steps &gt; ends without success on camera-error and releases resources" time="0.000182125">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-05/06 terminal outcomes and ordered steps &gt; ends without success on inference-error and releases resources" time="0.000322458">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-05/06 terminal outcomes and ordered steps &gt; ends without success on asset-error and releases resources" time="0.000432875">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-05/06 terminal outcomes and ordered steps &gt; ends without success on motion-withdrawn and releases resources" time="0.000452">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-05/06 terminal outcomes and ordered steps &gt; releases a camera that becomes ready after an early cancel" time="0.000342959">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-05/06 terminal outcomes and ordered steps &gt; distinguishes skip before any performance from completion" time="0.0005585">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-05/06 terminal outcomes and ordered steps &gt; requires the second side and ignores old-step observations" time="0.00464925">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-05/06 terminal outcomes and ordered steps &gt; does not relabel an untouched side when skipping after the first" time="0.000879917">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-05/06 terminal outcomes and ordered steps &gt; does not retain frames, coordinates, tracking or account data in the result" time="0.000915042">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02/03 adversarial delivery boundaries &gt; does not close the active camera on a duplicate malformed ready" time="0.000379959">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02/03 adversarial delivery boundaries &gt; leaves preparation safely paused when its ready clock is invalid" time="0.000477542">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02/03 adversarial delivery boundaries &gt; does not accept a timestamp captured before this camera became ready" time="0.0007785">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02/03 adversarial delivery boundaries &gt; rejects pre-resume samples even if relabeled with the new generation" time="0.000920791">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02/03 adversarial delivery boundaries &gt; ignores never-requested ready generations without releasing foreign resources" time="0.000616208">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02/03 adversarial delivery boundaries &gt; releases only its late old generation while the new one is running" time="0.000380083">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02/03 adversarial delivery boundaries &gt; interrupts target timing on a visible non-target movement" time="0.000290833">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02/03 adversarial delivery boundaries &gt; still stops and releases on invalid pause/end clocks" time="0.000579666">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02/03 adversarial delivery boundaries &gt; clamps the last verified interval to the prescribed goal, not the frame length" time="0.000477709">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02/03 adversarial delivery boundaries &gt; does not relabel a completed result with a subsequent skip" time="0.000196458">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02/03 adversarial delivery boundaries &gt; cannot manufacture success or retain arbitrary data from a malformed end reason" time="0.03252925">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02/03 adversarial delivery boundaries &gt; marks an observed zero-duration partial repetition as partial, not pending" time="0.000203625">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02/03 adversarial delivery boundaries &gt; projects input metadata rather than retaining arbitrary personal properties" time="0.000204208">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02/03 adversarial delivery boundaries &gt; uses sample intervals rather than delayed delivery time at the exact age limit" time="0.000117792">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02/03 adversarial delivery boundaries &gt; accepts the explicit gap boundary but not a gap one unit larger" time="0.000101667">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02/03 adversarial delivery boundaries &gt; fails closed on unknown classifications or non-integer person estimates" time="0.000175083">
+        </testcase>
+        <testcase classname="src/stretch/progression.test.ts" name="L-02/03 adversarial delivery boundaries &gt; preserves progression invariants across 3840 reproducible synthetic events" time="0.565012166">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/webDesign.test.ts" timestamp="2026-10-05T14:00:17.364Z" hostname="local-test-host" tests="14" failures="0" errors="0" skipped="0" time="0.009428333">
+        <testcase classname="src/webDesign.test.ts" name="화이트·블루 웹 계약 &gt; 백색 바탕과 단일 의료 블루를 사용한다" time="0.002269041">
+        </testcase>
+        <testcase classname="src/webDesign.test.ts" name="화이트·블루 웹 계약 &gt; ink / surface 텍스트 대비가 AA 기준을 만족한다" time="0.000584416">
+        </testcase>
+        <testcase classname="src/webDesign.test.ts" name="화이트·블루 웹 계약 &gt; muted / surface 텍스트 대비가 AA 기준을 만족한다" time="0.000207">
+        </testcase>
+        <testcase classname="src/webDesign.test.ts" name="화이트·블루 웹 계약 &gt; muted / surface-soft 텍스트 대비가 AA 기준을 만족한다" time="0.000170292">
+        </testcase>
+        <testcase classname="src/webDesign.test.ts" name="화이트·블루 웹 계약 &gt; accent / surface-soft 텍스트 대비가 AA 기준을 만족한다" time="0.000158792">
+        </testcase>
+        <testcase classname="src/webDesign.test.ts" name="화이트·블루 웹 계약 &gt; on-accent / accent 텍스트 대비가 AA 기준을 만족한다" time="0.000160541">
+        </testcase>
+        <testcase classname="src/webDesign.test.ts" name="화이트·블루 웹 계약 &gt; on-accent / accent-hover 텍스트 대비가 AA 기준을 만족한다" time="0.000143125">
+        </testcase>
+        <testcase classname="src/webDesign.test.ts" name="화이트·블루 웹 계약 &gt; danger / surface 텍스트 대비가 AA 기준을 만족한다" time="0.000193417">
+        </testcase>
+        <testcase classname="src/webDesign.test.ts" name="화이트·블루 웹 계약 &gt; on-accent / danger 텍스트 대비가 AA 기준을 만족한다" time="0.000425625">
+        </testcase>
+        <testcase classname="src/webDesign.test.ts" name="화이트·블루 웹 계약 &gt; error / surface 텍스트 대비가 AA 기준을 만족한다" time="0.000281">
+        </testcase>
+        <testcase classname="src/webDesign.test.ts" name="화이트·블루 웹 계약 &gt; control-line / surface 컨트롤·초점 대비가 3 이상이다" time="0.000182834">
+        </testcase>
+        <testcase classname="src/webDesign.test.ts" name="화이트·블루 웹 계약 &gt; focus / surface 컨트롤·초점 대비가 3 이상이다" time="0.000107541">
+        </testcase>
+        <testcase classname="src/webDesign.test.ts" name="화이트·블루 웹 계약 &gt; focus / surface-soft 컨트롤·초점 대비가 3 이상이다" time="0.000682416">
+        </testcase>
+        <testcase classname="src/webDesign.test.ts" name="화이트·블루 웹 계약 &gt; 동작 감소와 넓어진 헤더·공통 포커스 규칙을 포함한다" time="0.0002215">
+        </testcase>
+    </testsuite>
+</testsuites>

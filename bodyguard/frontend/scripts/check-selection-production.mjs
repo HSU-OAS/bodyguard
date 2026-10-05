@@ -32,6 +32,10 @@ for (const file of files) {
     'gate-error',
     'callback-error',
     'PRIVATE_COORDINATES_ACCOUNT_FAILURE',
+    'Explicit pose model required',
+    'PRIVATE_BROWSER_PORT_FRAME_COORDINATES',
+    'probeNativePorts',
+    'browserPortsProbe',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -43,5 +47,6 @@ console.log(
     unconnected_coaching_engine_strings: 0,
     unconnected_coaching_resource_strings: 0,
     unconnected_coaching_session_strings: 0,
+    unconnected_native_browser_port_strings: 0,
   }),
 )
