@@ -26,6 +26,36 @@ export type CsrfOut = {
   csrf_token: string
 }
 
+export type DeleteInput = {
+  start: string
+  end: string
+  cutoff: string
+  expires_at: string
+  count: number
+  fingerprint: string
+  signature: string
+  confirmation: 'delete-stretch-records'
+}
+
+export type DeletePeriod = {
+  start: string
+  end: string
+}
+
+export type DeleteProof = {
+  start: string
+  end: string
+  cutoff: string
+  expires_at: string
+  count: number
+  fingerprint: string
+  signature: string
+}
+
+export type DeletedOut = {
+  deleted: number
+}
+
 export type EmailInput = {
   email: string
 }
@@ -378,6 +408,59 @@ export type LogoutApiV1AuthLogoutPostResponses = {
 
 export type LogoutApiV1AuthLogoutPostResponse =
   LogoutApiV1AuthLogoutPostResponses[keyof LogoutApiV1AuthLogoutPostResponses]
+
+export type DeletionPreviewApiV1RecordsStretchDeletePreviewPostData = {
+  body: DeletePeriod
+  path?: never
+  query?: never
+  url: '/api/v1/records/stretch/delete-preview'
+}
+
+export type DeletionPreviewApiV1RecordsStretchDeletePreviewPostErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type DeletionPreviewApiV1RecordsStretchDeletePreviewPostError =
+  DeletionPreviewApiV1RecordsStretchDeletePreviewPostErrors[keyof DeletionPreviewApiV1RecordsStretchDeletePreviewPostErrors]
+
+export type DeletionPreviewApiV1RecordsStretchDeletePreviewPostResponses = {
+  200: DeleteProof
+}
+
+export type DeletionPreviewApiV1RecordsStretchDeletePreviewPostResponse =
+  DeletionPreviewApiV1RecordsStretchDeletePreviewPostResponses[keyof DeletionPreviewApiV1RecordsStretchDeletePreviewPostResponses]
+
+export type DeletionApiV1RecordsStretchDeletePostData = {
+  body: DeleteInput
+  path?: never
+  query?: never
+  url: '/api/v1/records/stretch/delete'
+}
+
+export type DeletionApiV1RecordsStretchDeletePostErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  409: unknown
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type DeletionApiV1RecordsStretchDeletePostError =
+  DeletionApiV1RecordsStretchDeletePostErrors[keyof DeletionApiV1RecordsStretchDeletePostErrors]
+
+export type DeletionApiV1RecordsStretchDeletePostResponses = {
+  200: DeletedOut
+}
+
+export type DeletionApiV1RecordsStretchDeletePostResponse =
+  DeletionApiV1RecordsStretchDeletePostResponses[keyof DeletionApiV1RecordsStretchDeletePostResponses]
 
 export type ListingApiV1RecordsStretchGetData = {
   body?: never

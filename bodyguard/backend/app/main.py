@@ -2,6 +2,7 @@
 
 import asyncio
 import hmac
+import json
 import logging
 import math
 import re
@@ -956,5 +957,13 @@ def create_app(
         )
         return str(row["user_id"])
 
-    register_records(app, db, now_fn, record_owner)
+    def record_deletion_sign(user_id: str, request: Request, message: str) -> str:
+        # FR-U-05: a proof cannot move to another user or a fresh authenticated session.
+        binding = json.dumps(
+            [user_id, digest(request.cookies.get(config.cookie_name, "")), message],
+            separators=(",", ":"),
+        )
+        return keyed(key, "record-deletion-preview", binding)
+
+    register_records(app, db, now_fn, record_owner, record_deletion_sign)
     return app
