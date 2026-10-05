@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="0.875" timestamp="2026-10-05T14:56:41.905471+09:00" hostname="MacBook-Air.local"><testcase classname="tests.test_account_withdrawal" name="test_w01_start_does_not_delete_and_explicit_confirmation_removes_owner" time="0.439"><failure message="AssertionError: {&quot;detail&quot;:&quot;Not Found&quot;}&#10;assert 404 == 202&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code">harness = &lt;tests.conftest.Harness object at 0x10653e270&gt;
+
+    def test_w01_start_does_not_delete_and_explicit_confirmation_removes_owner(harness: Harness):
+        h = harness
+        owner = h.account()
+        record = payload(h)
+        assert h.client.post("/api/v1/records/stretch", headers=h.csrf(), json=record).status_code == 201
+&gt;       challenge, code = begin(h)
+                          ^^^^^^^^
+
+tests/test_account_withdrawal.py:34:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+h = &lt;tests.conftest.Harness object at 0x10653e270&gt;
+
+    def begin(h: Harness) -&gt; tuple[str, str]:
+        response = h.client.post("/api/v1/me/delete/start", headers=h.csrf(), json={})
+&gt;       assert response.status_code == 202, response.text
+E       AssertionError: {"detail":"Not Found"}
+E       assert 404 == 202
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+
+tests/test_account_withdrawal.py:12: AssertionError</failure></testcase><testcase classname="tests.test_account_withdrawal" name="test_w02_wrong_code_keeps_account_and_record" time="0.190"><failure message="AssertionError: {&quot;detail&quot;:&quot;Not Found&quot;}&#10;assert 404 == 202&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code">harness = &lt;tests.conftest.Harness object at 0x10aa91310&gt;
+
+    def test_w02_wrong_code_keeps_account_and_record(harness: Harness):
+        h = harness
+        h.account()
+        record = payload(h)
+        assert h.client.post("/api/v1/records/stretch", headers=h.csrf(), json=record).status_code == 201
+&gt;       challenge, code = begin(h)
+                          ^^^^^^^^
+
+tests/test_account_withdrawal.py:52:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+h = &lt;tests.conftest.Harness object at 0x10aa91310&gt;
+
+    def begin(h: Harness) -&gt; tuple[str, str]:
+        response = h.client.post("/api/v1/me/delete/start", headers=h.csrf(), json={})
+&gt;       assert response.status_code == 202, response.text
+E       AssertionError: {"detail":"Not Found"}
+E       assert 404 == 202
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+
+tests/test_account_withdrawal.py:12: AssertionError</failure></testcase><testcase classname="tests.test_account_withdrawal" name="test_w03_email_field_cannot_redirect_confirmation" time="0.169"><failure message="assert 404 == 422&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code">harness = &lt;tests.conftest.Harness object at 0x10abbcf50&gt;
+
+    def test_w03_email_field_cannot_redirect_confirmation(harness: Harness):
+        h = harness
+        h.account()
+        response = h.client.post(
+            "/api/v1/me/delete/start", headers=h.csrf(), json={"email": "other@example.com"}
+        )
+&gt;       assert response.status_code == 422
+E       assert 404 == 422
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+
+tests/test_account_withdrawal.py:67: AssertionError</failure></testcase></testsuite></testsuites>

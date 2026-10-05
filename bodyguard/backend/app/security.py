@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 from pwdlib import PasswordHash
 from sqlalchemy import Connection, delete, select, update
 from sqlalchemy.dialects.postgresql import insert
+from sqlalchemy.exc import SQLAlchemyError
 
 from app.db import challenges, google_flows, limits, resets, sessions
 
@@ -42,16 +43,22 @@ def quota(
     """Returns Retry-After. Sorted independent row locks prevent quota races/deadlocks."""
     retry = 0
     for key, maximum in sorted(keys):
-        connection.execute(
-            insert(limits)
-            .values(key_hash=key, count=0, expires_at=now + window)
-            .on_conflict_do_nothing(index_elements=[limits.c.key_hash])
-        )
-        row = (
-            connection.execute(select(limits).where(limits.c.key_hash == key).with_for_update())
-            .mappings()
-            .one()
-        )
+        # FR-U-05: withdrawal/expiry cleanup can delete between INSERT and SELECT snapshots.
+        for _ in range(3):
+            connection.execute(
+                insert(limits)
+                .values(key_hash=key, count=0, expires_at=now + window)
+                .on_conflict_do_nothing(index_elements=[limits.c.key_hash])
+            )
+            row = (
+                connection.execute(select(limits).where(limits.c.key_hash == key).with_for_update())
+                .mappings()
+                .first()
+            )
+            if row is not None:
+                break
+        else:
+            raise SQLAlchemyError("Security quota changed; retry request")
         if row["expires_at"] <= now:
             connection.execute(
                 update(limits)

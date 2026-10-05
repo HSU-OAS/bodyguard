@@ -11,6 +11,7 @@ from collections.abc import Awaitable, Callable
 from datetime import UTC, datetime, timedelta
 from email.message import EmailMessage
 from http.cookies import SimpleCookie
+from typing import Literal
 from uuid import uuid4
 
 import aiosmtplib
@@ -21,7 +22,7 @@ from fastapi import BackgroundTasks, FastAPI, HTTPException, Request, Response
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse, RedirectResponse
 from pydantic import BaseModel, ConfigDict, Field, SecretStr, field_validator
-from sqlalchemy import Connection, Engine, RowMapping, create_engine, delete, select, update
+from sqlalchemy import Connection, Engine, RowMapping, create_engine, delete, select, text, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.exc import SQLAlchemyError
 from starlette.exceptions import HTTPException as StarletteHTTPException
@@ -30,6 +31,7 @@ from app.config import Settings
 from app.db import challenges, google_flows, limits, resets, sessions, users
 from app.records import register_records
 from app.security import cleanup, code, digest, keyed, passwords, quota, token
+from app.withdrawal import register_withdrawal
 
 
 class EmailInput(BaseModel):
@@ -105,19 +107,34 @@ def utcnow() -> datetime:
     return datetime.now(UTC)
 
 
-def smtp_mail(settings: Settings, email: str, value: str, *, reset: bool = False) -> None:
+def smtp_mail(
+    settings: Settings,
+    email: str,
+    value: str,
+    *,
+    purpose: Literal["signup", "reset", "withdrawal"] = "signup",
+) -> None:
     if not settings.mail_configured:
         raise RuntimeError("Mail unavailable")
     assert settings.smtp_username is not None and settings.smtp_password is not None
     message = EmailMessage()
     message["From"] = settings.smtp_username.get_secret_value()
     message["To"] = email
-    message["Subject"] = "BODYGUARD 비밀번호 재설정" if reset else "BODYGUARD 이메일 인증"
+    message["Subject"] = {
+        "signup": "BODYGUARD 이메일 인증",
+        "reset": "BODYGUARD 비밀번호 재설정",
+        "withdrawal": "BODYGUARD 회원 탈퇴 확인",
+    }[purpose]
     message.set_content(
         f"비밀번호 재설정 요청을 받았습니다.\n{value}\n"
         "30분 안에 새 비밀번호를 설정해 주세요. 본인이 요청하지 않았다면 무시해 주세요."
-        if reset
-        else f"인증 코드: {value}\n10분 이내에 가입 화면에서 입력해 주세요."
+        if purpose == "reset"
+        else (
+            f"탈퇴 확인 코드: {value}\n10분 이내에 현재 탈퇴 화면에서 입력해 주세요.\n"
+            "확인하면 계정과 저장된 수행 기록이 삭제됩니다."
+            if purpose == "withdrawal"
+            else f"인증 코드: {value}\n10분 이내에 가입 화면에서 입력해 주세요."
+        )
     )
     # ponytail: bounded synchronous delivery; durable outbox when provider throughput requires it.
     asyncio.run(
@@ -140,11 +157,12 @@ def create_app(
     clock: Callable[[], datetime] | None = None,
     *,
     reset_mail: Callable[[str, str], None] | None = None,
+    withdraw_mail: Callable[[str, str], None] | None = None,
     google_transport: httpx2.AsyncBaseTransport | None = None,
 ) -> FastAPI:
     config = settings or Settings.from_environment()
     if config.environment != "test" and any(
-        value is not None for value in (mail, clock, reset_mail, google_transport)
+        value is not None for value in (mail, clock, reset_mail, withdraw_mail, google_transport)
     ):
         raise RuntimeError("Test dependencies cannot launch a non-test server")
     db = engine or create_engine(
@@ -152,7 +170,10 @@ def create_app(
     )
     send = mail or (lambda address, value: smtp_mail(config, address, value))
     send_reset = reset_mail or (
-        lambda address, value: smtp_mail(config, address, value, reset=True)
+        lambda address, value: smtp_mail(config, address, value, purpose="reset")
+    )
+    send_withdraw = withdraw_mail or (
+        lambda address, value: smtp_mail(config, address, value, purpose="withdrawal")
     )
     now_fn = clock or utcnow
     key = config.security_key.get_secret_value()
@@ -966,4 +987,45 @@ def create_app(
         return keyed(key, "record-deletion-preview", binding)
 
     register_records(app, db, now_fn, record_owner, record_deletion_sign)
+
+    def withdrawal_owner(connection: Connection, request: Request) -> tuple[RowMapping, str]:
+        # FR-U-05: bound contention rolls back instead of waiting in opposing auth lock orders.
+        connection.execute(text("SET LOCAL lock_timeout = '2s'"))
+        old = session(connection, request, now_fn())
+        if old is None or not old["user_id"]:
+            raise HTTPException(401, "로그인이 필요합니다.")
+        user = (
+            connection.execute(
+                select(users).where(users.c.id == old["user_id"]).with_for_update(key_share=True)
+            )
+            .mappings()
+            .first()
+        )  # PostgreSQL FOR NO KEY UPDATE, compatible with record FK reads.
+        if user is None:
+            raise HTTPException(401, "로그인이 필요합니다.")
+        # Includes other tabs, expired sessions and reset requests; never SKIP LOCKED.
+        connection.execute(
+            select(sessions.c.token_hash)
+            .where(sessions.c.user_id == user["id"])
+            .order_by(sessions.c.token_hash)
+            .with_for_update(nowait=True)
+        ).all()
+        current = protect(connection, request, now_fn())
+        if current is None or current["user_id"] != user["id"]:
+            raise HTTPException(401, "로그인이 필요합니다.")
+        connection.execute(
+            update(sessions)
+            .where(sessions.c.token_hash == current["token_hash"])
+            .values(last_seen_at=now_fn())
+        )
+        return user, str(current["token_hash"])
+
+    def withdrawal_cookie(response: Response) -> None:
+        response.delete_cookie(
+            config.cookie_name, httponly=True, secure=config.secure_cookie, samesite="lax", path="/"
+        )
+
+    register_withdrawal(
+        app, db, now_fn, key, withdrawal_owner, send_withdraw, mail_keys, withdrawal_cookie
+    )
     return app

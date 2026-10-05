@@ -112,9 +112,32 @@ export type Verification = {
   code: string
 }
 
+export type WithdrawalChallenge = {
+  challenge_id: string
+}
+
+export type WithdrawalConfirm = {
+  challenge_id: string
+  confirmation: 'delete-my-account'
+}
+
+export type WithdrawalStart = {
+  [key: string]: never
+}
+
 export type CredentialsWritable = {
   email: string
   password: string
+}
+
+export type WithdrawalConfirmWritable = {
+  challenge_id: string
+  code: string
+  confirmation: 'delete-my-account'
+}
+
+export type WithdrawalStartWritable = {
+  [key: string]: never
 }
 
 export type GoogleStatusApiV1AuthGoogleStatusGetData = {
@@ -546,3 +569,55 @@ export type DetailApiV1RecordsStretchRecordIdGetResponses = {
 
 export type DetailApiV1RecordsStretchRecordIdGetResponse =
   DetailApiV1RecordsStretchRecordIdGetResponses[keyof DetailApiV1RecordsStretchRecordIdGetResponses]
+
+export type StartApiV1MeDeleteStartPostData = {
+  body: WithdrawalStartWritable
+  path?: never
+  query?: never
+  url: '/api/v1/me/delete/start'
+}
+
+export type StartApiV1MeDeleteStartPostErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type StartApiV1MeDeleteStartPostError =
+  StartApiV1MeDeleteStartPostErrors[keyof StartApiV1MeDeleteStartPostErrors]
+
+export type StartApiV1MeDeleteStartPostResponses = {
+  202: WithdrawalChallenge
+}
+
+export type StartApiV1MeDeleteStartPostResponse =
+  StartApiV1MeDeleteStartPostResponses[keyof StartApiV1MeDeleteStartPostResponses]
+
+export type ConfirmApiV1MeDeleteConfirmPostData = {
+  body: WithdrawalConfirmWritable
+  path?: never
+  query?: never
+  url: '/api/v1/me/delete/confirm'
+}
+
+export type ConfirmApiV1MeDeleteConfirmPostErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type ConfirmApiV1MeDeleteConfirmPostError =
+  ConfirmApiV1MeDeleteConfirmPostErrors[keyof ConfirmApiV1MeDeleteConfirmPostErrors]
+
+export type ConfirmApiV1MeDeleteConfirmPostResponses = {
+  204: void
+}
+
+export type ConfirmApiV1MeDeleteConfirmPostResponse =
+  ConfirmApiV1MeDeleteConfirmPostResponses[keyof ConfirmApiV1MeDeleteConfirmPostResponses]
