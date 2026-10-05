@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+최신: [S5.3 네이티브 백업·복구 기초](stories/stage5-backup-restore-proof.md)에서 새 시험 DB의 계정/기록·제약조건·로그인/본인 기록/타인404를 실제 복구하고, snapshot 이후 삭제·로그아웃·비밀번호 변경이 restore로 재생되는 위험을 확인했다. 원본/실패와 private archive를 보존하고 소유 자원·프로세스 정리까지 재검증했다. [실행과 한계](review/stage5-backup-restore/README.md)·[운영 공개 승인 게이트](stage5-backup-restore-runbook.md). PR 게이트 진행이며 운영 복구/retention 모델을 활성화하거나 전체5단계 완료로 표시하지 않는다. 웹 패키지 **Draft PR #29**는 실제 Docker/NGINX/TLS 필수 검증이 없어 여전히 병합하지 않는다. 다음 독립 준비는 라이선스/내부 검증이다. 기존 화이트·블루 웹과 아바타 원본/이월·전체1~6단계 게이트를 유지한다. 아래는 시점별 기록이다.
+
 최신: [S5.1 서버 생존·DB 준비 상태](stories/stage5-runtime-readiness.md)를 실제 구현했다. DB 준비/장애/복구를 구분하고 계정·세션·기록/메일 부작용 없이 응답한다. 최종 실제 API/SQL261건(새19)·DOM327건·production/정적/생성 타입과 소유 loopback HTTP를 통과했다. [실패 원본·주입/실제 구분·작성자 리뷰](review/stage5-readiness/README.md). PR 게이트 진행이며 **실제 운영/배포·5단계/1~6단계 완료는 아니다.** 다음은 배포 패키지/프록시·독립 운영 준비다. 현재 Docker daemon은 미연결이며 실제 컨테이너 검증으로 세지 않는다. 비용/계정/시크릿/운영 DB/배포 별도 승인과 아바타·실측·코칭·법무·부가 기능·참여자 게이트를 유지한다. 아래는 시점별 기록이다.
 
 최신: S4.7 PR #27을 merge34e433024bf8ceab059bb2071d440c4465aee37a로 main 병합하고 소스 브랜치를 보존했다. 공개 도움말/데이터 안내와 기존 계정·기록 웹은 화이트·블루 계약에서 실제 작동한다. 최신 main의 새 codex/stage5-runtime-readiness에서 [S5.1 서버 생존·준비 상태](stories/stage5-runtime-readiness.md) 명세/최초 실제 하네스를 작성했다. health2건은 실제404로 실패했고 [원본](review/stage5-readiness/README.md)을 보존했다. 아직 미구현이며 정상/준비 완료로 세지 않는다. 운영·시크릿·비용·배포 승인과2단계 이월·실측·코칭·법무·전체1~6단계 게이트는 그대로다. 아래는 시점별 기록이다.
