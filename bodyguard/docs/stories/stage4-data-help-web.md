@@ -1,6 +1,6 @@
 # S4.7 — 카메라·데이터 안내/도움말 웹
 
-공개 웹 구현·로컬 검증 완료/PR 게이트 진행 · 시작 main110e4fdb9f107958eb3f5a1f08a80ec7a1e204e0 · codex/stage4-data-help-web · FR-V-01/FR-U-04/05/NFR-08
+공개 웹 구현·로컬 검증 완료/PR #27 main 병합(merge34e4330) · 시작 main110e4fdb9f107958eb3f5a1f08a80ec7a1e204e0 · codex/stage4-data-help-web · FR-V-01/FR-U-04/05/NFR-08
 
 ## 범위·현재 사실
 
@@ -37,3 +37,7 @@ Q-26의 **법무 처리방침·동의는 막바지 별도 결정**을 유지한�
 공개 도움말/데이터 안내·5개 기본 FAQ·푸터·실제 가입/복구/기록/계정 링크를 구현했다. 게스트/회원/연결 실패에서도 공개 안내를 유지하며 안내만 읽는 동안 /me 이외의 API/카메라/저장/외부 요청이 없다. 실제 Chrome에서 가입→안내→기록/계정→복구 요청/돌아가기를 확인했다. 전문적인 화이트·블루 계약을 유지하고 작은 창 한글 줄바꿈을 보완했다.
 
 전체 DOM327·실제 SQL/API242·신규 Chrome3/관련 기록11·디자인3·탈퇴6과 production/정적 검사를 통과했다. 모든 기존 Chrome suite를 새로 실행한 것은 아니다. 최초 DOM 실패와2차례 브라우저 하네스 실패·보완 전 PNG/최종 PNG, 타입 실패·보완과 의존성 경고를 [증거](../review/stage4-data-help/README.md)에 구분했다. 작성자 디자인/코드 리뷰에서 이번 변경 범위의 미해결P1/P2 없음. 다음은 최신 diff/HEAD/main/CLEAN/체크 확인 후 한 목적 PR 게이트다. 법무 처리방침·운영/SMTP/Google·2단계 이월·실제 코칭·전체4단계/1~6단계 완료는 아니다.
+
+## 실제 병합과 다음 작업
+
+PR #27은2026-10-05T07:58:32Z에 merge34e433024bf8ceab059bb2071d440c4465aee37a로 병합됐다. 소스 c17e8393c4bc309a9d959bebfb6174a16bff1898·main110e4fd·CLEAN/MERGEABLE·체크 없음·외부review0·실제diff와 필수 로컬 검증/범위 내 미해결P1/P2 없음·로컬 clean을 재확인하고 exact HEAD/merge commit을 사용했다. main 포함과 원격 소스 브랜치 보존 확인. 다음은 이 최신 main의 새 codex/stage5-runtime-readiness에서 [S5.1](stage5-runtime-readiness.md)을 시작한다. 운영/배포는 하지 않았다.

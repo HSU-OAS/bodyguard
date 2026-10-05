@@ -29,6 +29,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.config import Settings
 from app.db import challenges, google_flows, limits, resets, sessions, users
+from app.readiness import register_readiness
 from app.records import register_records
 from app.security import cleanup, code, digest, keyed, passwords, quota, token
 from app.withdrawal import register_withdrawal
@@ -1028,4 +1029,5 @@ def create_app(
     register_withdrawal(
         app, db, now_fn, key, withdrawal_owner, send_withdraw, mail_keys, withdrawal_cookie
     )
+    register_readiness(app, db)
     return app
