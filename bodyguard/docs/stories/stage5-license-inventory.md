@@ -1,6 +1,6 @@
 # S5.4 — 라이선스·출처 증거 목록 기초
 
-구현·실제 설치 목록 추출 / 최종 회귀·PR 게이트 진행 · main4599c7c830cdfee786d21df460976fc5efe1c46a · codex/stage5-license-inventory · release-plan5단계·Q-11·FR-A-02/03
+evidence 기초 PR #31 main 병합 · 시작 main4599c7c830cdfee786d21df460976fc5efe1c46a · codex/stage5-license-inventory · release-plan5단계·Q-11·FR-A-02/03
 
 ## 목적·선행 상태
 
@@ -45,7 +45,7 @@ documentation/testing-strategy의 출처·실제/모의 분리로, 먼저 증거
 - [x] 프로젝트 MIT·Google brand 자료·Blender/MPFB 출처·역사적 제작 문서를 별도 범주/hash로 기록했다. .blend/GLB/이미지 제작·기존 LICENSE/원본/검증은 변경하거나 새 실행하지 않았다.
 - [x] 단위 fixture25건과 실제 npm194개 버전/Python57개 lock 항목의 추출을 구분했다. Python54개 metadata는 현재 설치됨,3개는 미설치다. 최종 JSON 두 실행은 byte 동일이며 전부 distribution_approved=false다.
 - [x] 최종 source의 fixture25개·실제 결정적 추출·전체291개 회귀·Ruff/format32파일·mypy app8파일·diff check·작성자 리뷰/P2 보완을 완료했다. 원본과 한계는 review에 보존한다.
-- [ ] 최신 main/diff/CLEAN/체크·exact HEAD의 PR/merge commit·브랜치 보존 확인.
+- [x] exact source6236468939da505bd271b1e8696c3505ce553121·최신 base4599c7c·diff17파일·CLEAN/MERGEABLE·체크 없음·review0·로컬 clean과 source 동등성을 확인하고 [PR #31](https://github.com/HSU-OAS/bodyguard/pull/31)을 merge26d5e09541b92b33368ed2638eb307565909178a로 병합했다. main 포함과 로컬/원격 source 브랜치 보존을 확인했다. 법무/최종 artifact·전체5단계 완료가 아니다.
 
 testing-strategy·documentation·code-review를 사용해 실제/합성 검증과 실패/미실행을 구분했다. BMAD resolver/config는 저장소에 없어 전체 BMAD 실행을 주장하지 않고 승인된 Story의 명세→실패→구현→검증 순서로 진행했다. web-design-studio의 UI 전용 경계에 따라 이번 백엔드 검증 Story에는 재설계/의존성 교체를 섞지 않았고 기존 화이트·블루 **웹**을 유지했다.
 
