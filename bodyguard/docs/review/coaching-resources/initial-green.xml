@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="37" failures="0" errors="0" time="0.706900917">
+    <testsuite name="src/coaching/resources.test.ts" timestamp="2026-10-05T12:34:15.740Z" hostname="local-test-host" tests="37" failures="0" errors="0" skipped="0" time="0.706900917">
+        <testcase classname="src/coaching/resources.test.ts" name="R-02 명시 요청만 camera→inference→avatars 준비하고 close에서 각1회 정리한다" time="0.00338675">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-01 잘못된 effect·세대는 준비를 시작하지 않는다" time="0.0008005">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-01/06 중복·과거 요청과 다른 세대 release는 현재 소유권을 바꾸지 않는다" time="0.000587917">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-02 camera 완료 전 ready가 없고 context는 해당 세대와 signal이다" time="0.053319167">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-02 inference 완료 전 ready가 없고 context는 해당 세대와 signal이다" time="0.052277125">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-02 avatars 완료 전 ready가 없고 context는 해당 세대와 signal이다" time="0.05273175">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 camera undefined 부분 정리하고 고정 오류만 전달한다" time="0.00109525">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 camera undefined 부분 정리하고 고정 오류만 전달한다" time="0.00030975">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 inference undefined 부분 정리하고 고정 오류만 전달한다" time="0.000312125">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 inference undefined 부분 정리하고 고정 오류만 전달한다" time="0.000360917">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 avatars undefined 부분 정리하고 고정 오류만 전달한다" time="0.000687125">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 avatars undefined 부분 정리하고 고정 오류만 전달한다" time="0.00039975">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 camera가 소유 자원이 아닌 값을 반환하면 통과하지 않는다" time="0.000440084">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 inference가 소유 자원이 아닌 값을 반환하면 통과하지 않는다" time="0.000187">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-03 avatars가 소유 자원이 아닌 값을 반환하면 통과하지 않는다" time="0.00018725">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-04 camera 대기 중 release 뒤 늦은 반환은 정리하고 다음 준비하지 않는다" time="0.052740709">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-04 inference 대기 중 release 뒤 늦은 반환은 정리하고 다음 준비하지 않는다" time="0.0526185">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-04 avatars 대기 중 release 뒤 늦은 반환은 정리하고 다음 준비하지 않는다" time="0.050172625">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-04/06 close는 응답하지 않는 factory를 기다리지 않고 늦은 rejection도 삼킨다" time="0.053747542">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-05 新세대 완료 뒤 역순 반환은 현재 ready와 소유 자원에 영향이 없다" time="0.105862791">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-05 교체가 연달아 와도 앞선 비동기 dispose가 끝나기 전 새 factory를 시작하지 않는다" time="0.054638958">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-07 dispose throw는 다른 자원 정리를 막지 않고 새 준비를 차단한다" time="0.000944167">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-07 dispose reject는 다른 자원 정리를 막지 않고 새 준비를 차단한다" time="0.000442334">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-07 이미 교체된 factory의 늦은 dispose 실패도 현재 소유 자원을 정리하고 준비를 차단한다" time="0.05207125">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-08 동일 객체를 두 stage가 반환하면 ready 없이 소유권 오류와 정리1회이다" time="0.000835208">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-08 앞선 세대에서 정리한 객체는 다음 세대가 재사용할 수 없다" time="0.000563917">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-08 늦은 과거 factory가 현재 소유 객체를 반환해도 현재 객체는 해제하지 않는다" time="0.052399542">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-09 callback throw는 모든 자원을 정리하고 unhandled rejection·재준비가 없다" time="0.001024208">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-09 callback reject는 모든 자원을 정리하고 unhandled rejection·재준비가 없다" time="0.000400708">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-09 오류 callback의 예외와 dispose 실패도 오류 전달을 재귀 호출하지 않는다" time="0.000509667">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-10 raw 오류·자원 metadata는 notice/console/network/storage에 전달하지 않는다" time="0.001506834">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-11 미확인 authenticated gate에서 engine effect와 자원 요청은0이다" time="0.001037417">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-11 미확인 motionValidated gate에서 engine effect와 자원 요청은0이다" time="0.00028525">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-11 미확인 referenceAvatarReady gate에서 engine effect와 자원 요청은0이다" time="0.0002615">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-11 미확인 userAvatarReady gate에서 engine effect와 자원 요청은0이다" time="0.00029375">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-11 실제 engine start/ready/pause/resume/end effects와 controller를 연결해도 성공 기록을 만들지 않는다" time="0.001262666">
+        </testcase>
+        <testcase classname="src/coaching/resources.test.ts" name="R-11 종료 뒤 이전 ready가 도착해도 engine은 부활하지 않고 해당 세대만 release한다" time="0.054434542">
+        </testcase>
+    </testsuite>
+</testsuites>

@@ -1,6 +1,6 @@
 # S6.2 — 현재 웹의 계정·기록 보안 경계 검증
 
-현재 웹 보안 기초 구현·실제 검증/작성자 리뷰 완료 · PR 게이트 진행 / main2db3ceef41123db6689ec28b536c5b8dc5f840bf · codex/stage6-web-security · release-plan6·FR-U-02/04/05·FR-R-03·NFR-07/08
+현재 웹 보안 기초 main 병합 · PR #33 source87aa4a2f285d8c4fb760398d9e08fceae6d7f389 / merge d348fb8b04d2d43572a0281f0e0e3e632f2ef90e · codex/stage6-web-security · release-plan6·FR-U-02/04/05·FR-R-03·NFR-07/08
 
 ## 범위 / 선행 상태
 
@@ -28,7 +28,7 @@ S6.1 PR #32의 merge commit/main 포함·source 브랜치 보존을 확인한 �
 - [x] 최초 미등록 실패/환경·타입/두 browser 실패를 보존하고 기존 runner/config에 최소 security 등록·고유 report를 연결했다.
 - [x] 실제 Chrome/HTTP/SQL의 두 계정/다른 세션 CSRF·삭제 proof/로그아웃 cookie 재전송/CORS·origin 경계와 현재 화이트·블루 화면을 확인했다. 성공 mock/실제 공급자·운동으로 대체하지 않았다.
 - [x] scope 작성자 리뷰P2의 invalid 입력 독립 검사를 보완하고 최종3흐름·기존2흐름·DOM327/실제 API/SQL291·정적/production DEV 차단/원본·사본 수집 보존·diff 검사를 통과했다. scope 미해결P1/P2 없음.
-- [ ] exact source/PR/merge commit/main 포함·source 브랜치 보존 확인.
+- [x] PR #33 exact tested source87aa4a2·필수 검증·scope P1/P2 없음·최신 diff/main/CLEAN/MERGEABLE·체크 없음·reviews0 확인 후 merge d348fb8로 병합했다. 실제 부모/main source 포함·로컬/원격 브랜치 보존·working tree clean을 확인했다.
 
 전체6단계/출시 후보판·운영/전문가 통과가 아니다.
 
