@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="5" skipped="0" tests="5" time="0.108" timestamp="2026-10-05T17:46:05.128697+09:00" hostname="MacBook-Air.local"><testcase classname="tests.test_web_runtime_package" name="test_web_runtime_required_package_files_exist[backend/Dockerfile]" time="0.001"><failure message="AssertionError: Missing runtime package file: backend/Dockerfile&#10;assert False&#10; +  where False = is_file()&#10; +    where is_file = (PosixPath('/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard') / 'backend/Dockerfile').is_file">relative = 'backend/Dockerfile'
+
+    @pytest.mark.parametrize(
+        "relative",
+        [
+            "backend/Dockerfile",
+            "backend/.dockerignore",
+            "frontend/Dockerfile",
+            "frontend/.dockerignore",
+            "deploy/nginx.conf",
+        ],
+    )
+    def test_web_runtime_required_package_files_exist(relative: str) -&gt; None:
+&gt;       assert (PACKAGE / relative).is_file(), f"Missing runtime package file: {relative}"
+E       AssertionError: Missing runtime package file: backend/Dockerfile
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (PosixPath('/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard') / 'backend/Dockerfile').is_file
+
+tests/test_web_runtime_package.py:21: AssertionError</failure></testcase><testcase classname="tests.test_web_runtime_package" name="test_web_runtime_required_package_files_exist[backend/.dockerignore]" time="0.001"><failure message="AssertionError: Missing runtime package file: backend/.dockerignore&#10;assert False&#10; +  where False = is_file()&#10; +    where is_file = (PosixPath('/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard') / 'backend/.dockerignore').is_file">relative = 'backend/.dockerignore'
+
+    @pytest.mark.parametrize(
+        "relative",
+        [
+            "backend/Dockerfile",
+            "backend/.dockerignore",
+            "frontend/Dockerfile",
+            "frontend/.dockerignore",
+            "deploy/nginx.conf",
+        ],
+    )
+    def test_web_runtime_required_package_files_exist(relative: str) -&gt; None:
+&gt;       assert (PACKAGE / relative).is_file(), f"Missing runtime package file: {relative}"
+E       AssertionError: Missing runtime package file: backend/.dockerignore
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (PosixPath('/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard') / 'backend/.dockerignore').is_file
+
+tests/test_web_runtime_package.py:21: AssertionError</failure></testcase><testcase classname="tests.test_web_runtime_package" name="test_web_runtime_required_package_files_exist[frontend/Dockerfile]" time="0.001"><failure message="AssertionError: Missing runtime package file: frontend/Dockerfile&#10;assert False&#10; +  where False = is_file()&#10; +    where is_file = (PosixPath('/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard') / 'frontend/Dockerfile').is_file">relative = 'frontend/Dockerfile'
+
+    @pytest.mark.parametrize(
+        "relative",
+        [
+            "backend/Dockerfile",
+            "backend/.dockerignore",
+            "frontend/Dockerfile",
+            "frontend/.dockerignore",
+            "deploy/nginx.conf",
+        ],
+    )
+    def test_web_runtime_required_package_files_exist(relative: str) -&gt; None:
+&gt;       assert (PACKAGE / relative).is_file(), f"Missing runtime package file: {relative}"
+E       AssertionError: Missing runtime package file: frontend/Dockerfile
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (PosixPath('/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard') / 'frontend/Dockerfile').is_file
+
+tests/test_web_runtime_package.py:21: AssertionError</failure></testcase><testcase classname="tests.test_web_runtime_package" name="test_web_runtime_required_package_files_exist[frontend/.dockerignore]" time="0.000"><failure message="AssertionError: Missing runtime package file: frontend/.dockerignore&#10;assert False&#10; +  where False = is_file()&#10; +    where is_file = (PosixPath('/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard') / 'frontend/.dockerignore').is_file">relative = 'frontend/.dockerignore'
+
+    @pytest.mark.parametrize(
+        "relative",
+        [
+            "backend/Dockerfile",
+            "backend/.dockerignore",
+            "frontend/Dockerfile",
+            "frontend/.dockerignore",
+            "deploy/nginx.conf",
+        ],
+    )
+    def test_web_runtime_required_package_files_exist(relative: str) -&gt; None:
+&gt;       assert (PACKAGE / relative).is_file(), f"Missing runtime package file: {relative}"
+E       AssertionError: Missing runtime package file: frontend/.dockerignore
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (PosixPath('/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard') / 'frontend/.dockerignore').is_file
+
+tests/test_web_runtime_package.py:21: AssertionError</failure></testcase><testcase classname="tests.test_web_runtime_package" name="test_web_runtime_required_package_files_exist[deploy/nginx.conf]" time="0.000"><failure message="AssertionError: Missing runtime package file: deploy/nginx.conf&#10;assert False&#10; +  where False = is_file()&#10; +    where is_file = (PosixPath('/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard') / 'deploy/nginx.conf').is_file">relative = 'deploy/nginx.conf'
+
+    @pytest.mark.parametrize(
+        "relative",
+        [
+            "backend/Dockerfile",
+            "backend/.dockerignore",
+            "frontend/Dockerfile",
+            "frontend/.dockerignore",
+            "deploy/nginx.conf",
+        ],
+    )
+    def test_web_runtime_required_package_files_exist(relative: str) -&gt; None:
+&gt;       assert (PACKAGE / relative).is_file(), f"Missing runtime package file: {relative}"
+E       AssertionError: Missing runtime package file: deploy/nginx.conf
+E       assert False
+E        +  where False = is_file()
+E        +    where is_file = (PosixPath('/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard') / 'deploy/nginx.conf').is_file
+
+tests/test_web_runtime_package.py:21: AssertionError</failure></testcase></testsuite></testsuites>

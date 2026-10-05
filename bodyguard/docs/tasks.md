@@ -1,5 +1,11 @@
 # Bodyguard — Tasks
 
+최신 구현: S5.2 현재 공개·계정·기록 웹4파일의 실제 선별 출력과 web/API 분리 이미지·로컬 TLS/프록시 후보 구성을 작성했다. 기존 화이트·블루 UI/공식 Google 아이콘·개발/아바타 원본을 보존했다. [실제 파일·parser·ASGI·계정/기록 회귀와 실패](review/stage5-web-runtime/README.md)는 통과했지만 Docker engine 미연결로 **실제 이미지/NGINX/TLS/패키지 브라우저·복구 게이트가 미충족**이다. Story/5단계 완료·PR 병합으로 세지 않는다. 로컬 Desktop 연결 요청은 유지하며 다음 독립 라이선스/백업·복구/6단계 준비를 계속한다. 새로운 아바타 수정 사이클을 시작하지 않고 전체2단계 이월·1~6단계 필수 게이트를 그대로 둔다. 아래는 시점별 기록이다.
+
+최신: S5.1 PR #28을 mergecbfd07ff944c94de12674bd982bfe98f075616f0로 main에 병합하고 소스 브랜치를 보존했다. 새 codex/stage5-web-runtime-package에서 [S5.2 웹/API 로컬 배포 패키지](stories/stage5-web-runtime-package.md) 명세·최초 미존재 하네스를 시작했다. Docker daemon은 연결 대기이며 실제 이미지 빌드/컨테이너/HTTPS로 세지 않는다. CEO에게 로컬 Desktop 연결 도움을 요청하고 독립 구성/검증은 계속한다. 전체5단계/1~6단계·2단계 이월·실측/코칭·운영·법무/사업 승인 경계는 그대로다. 아래는 시점별 기록이다.
+
+S5.2 첫 하네스의 실제 구성 파일 미존재5건 실패/0.11초를 [원본](review/stage5-web-runtime/README.md)으로 보존했다. 현재 branch의 전체 검증 완료가 아니다. 기존 dist에는 JS 코드에서 제외된 개발용 MediaPipe 파일도 복사됨을 확인해, 기존 원본을 지우지 않고 현재 index/JS/CSS/Google 아이콘만 별도 정적 출력으로 선별하는 다음 구현을 정했다. Docker 연결과 독립적으로 진행한다.
+
 최신: [S5.1 서버 생존·DB 준비 상태](stories/stage5-runtime-readiness.md)를 실제 구현했다. DB 준비/장애/복구를 구분하고 계정·세션·기록/메일 부작용 없이 응답한다. 최종 실제 API/SQL261건(새19)·DOM327건·production/정적/생성 타입과 소유 loopback HTTP를 통과했다. [실패 원본·주입/실제 구분·작성자 리뷰](review/stage5-readiness/README.md). PR 게이트 진행이며 **실제 운영/배포·5단계/1~6단계 완료는 아니다.** 다음은 배포 패키지/프록시·독립 운영 준비다. 현재 Docker daemon은 미연결이며 실제 컨테이너 검증으로 세지 않는다. 비용/계정/시크릿/운영 DB/배포 별도 승인과 아바타·실측·코칭·법무·부가 기능·참여자 게이트를 유지한다. 아래는 시점별 기록이다.
 
 최신: S4.7 PR #27을 merge34e433024bf8ceab059bb2071d440c4465aee37a로 main 병합하고 소스 브랜치를 보존했다. 공개 도움말/데이터 안내와 기존 계정·기록 웹은 화이트·블루 계약에서 실제 작동한다. 최신 main의 새 codex/stage5-runtime-readiness에서 [S5.1 서버 생존·준비 상태](stories/stage5-runtime-readiness.md) 명세/최초 실제 하네스를 작성했다. health2건은 실제404로 실패했고 [원본](review/stage5-readiness/README.md)을 보존했다. 아직 미구현이며 정상/준비 완료로 세지 않는다. 운영·시크릿·비용·배포 승인과2단계 이월·실측·코칭·법무·전체1~6단계 게이트는 그대로다. 아래는 시점별 기록이다.

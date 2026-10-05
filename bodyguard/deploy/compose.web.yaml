@@ -1,0 +1,74 @@
+# NFR-08/FR-U-04: local-only TLS/package candidate. Not an operational deployment.
+# No default credentials/DB, automatic migration, test providers or shared container names.
+services:
+  web:
+    image: ${BODYGUARD_WEB_IMAGE:?Explicit locally built web image required}
+    build:
+      context: ../frontend
+    ports:
+      - target: 8443
+        published: "${BODYGUARD_WEB_PORT:?Owned loopback test port required}"
+        host_ip: 127.0.0.1
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: ./nginx.conf
+        target: /etc/bodyguard/nginx.conf
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${BODYGUARD_TLS_CERT_FILE:?Owned TLS test certificate required}
+        target: /etc/bodyguard/tls/cert.pem
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${BODYGUARD_TLS_KEY_FILE:?Owned TLS test key required}
+        target: /etc/bodyguard/tls/key.pem
+        read_only: true
+        bind:
+          create_host_path: false
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16m
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+
+  api:
+    image: ${BODYGUARD_API_IMAGE:?Explicit locally built API image required}
+    build:
+      context: ../backend
+    network_mode: service:web
+    depends_on:
+      web:
+        condition: service_started
+        restart: true
+    env_file:
+      - path: ${BODYGUARD_RUNTIME_ENV_FILE:?Explicit owned runtime environment file required}
+        required: true
+    environment:
+      BODYGUARD_ENVIRONMENT: production
+      BODYGUARD_ORIGIN: https://bodyguard.test:${BODYGUARD_WEB_PORT:?Owned loopback test port required}
+    # This narrow exception is only for the bound-loopback proxy in the same namespace.
+    command:
+      - /opt/bodyguard/.venv/bin/python
+      - -m
+      - uvicorn
+      - app.main:create_app
+      - --factory
+      - --host
+      - 127.0.0.1
+      - --port
+      - "8000"
+      - --proxy-headers
+      - --forwarded-allow-ips=127.0.0.1
+      - --no-access-log
+      - --no-server-header
+      - --workers
+      - "1"
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16m
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
