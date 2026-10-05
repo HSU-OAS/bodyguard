@@ -9,10 +9,17 @@ import {
   useState,
 } from 'react'
 import * as api from './api/auth'
-import type { CredentialsWritable, ResetInput, UserOut, Verification } from './api/generated'
+import type {
+  CredentialsWritable,
+  ResetInput,
+  UserOut,
+  Verification,
+  WithdrawalConfirmWritable,
+} from './api/generated'
+import { confirmWithdrawal, WithdrawalRejected } from './api/withdrawal'
 
 type State =
-  | { status: 'checking' | 'guest' | 'offline' | 'logging-out' | 'logout-error' }
+  | { status: 'checking' | 'guest' | 'offline' | 'logging-out' | 'logout-error' | 'withdrawing' }
   | { status: 'ready'; user: UserOut }
 
 const Auth = createContext<{
@@ -25,6 +32,7 @@ const Auth = createContext<{
     signal: AbortSignal,
   ) => Promise<void>
   resetPassword: (body: ResetInput, signal: AbortSignal) => Promise<void>
+  withdrawAccount: (body: WithdrawalConfirmWritable, signal: AbortSignal) => Promise<void>
 } | null>(null)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -137,8 +145,44 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (current.current === operation) current.current = null
     }
   }
+  // FR-U-05: withdrawal blocks other private routes; only a fresh /me may restore them.
+  async function withdrawAccount(body: WithdrawalConfirmWritable, external: AbortSignal) {
+    const operation = begin('auth')
+    const signal = AbortSignal.any([operation.controller.signal, external])
+    setState({ status: 'withdrawing' })
+    try {
+      await confirmWithdrawal(body, signal)
+      if (signal.aborted) throw new DOMException('Aborted', 'AbortError')
+      setState({ status: 'guest' })
+      channel.current?.postMessage('changed')
+    } catch (error) {
+      let checkedUserId: string | null = null
+      if (!operation.controller.signal.aborted) {
+        if (
+          !signal.aborted &&
+          error instanceof api.ApiError &&
+          [400, 422, 429].includes(error.status)
+        ) {
+          try {
+            const user = await api.me(signal)
+            if (!signal.aborted) {
+              checkedUserId = user?.id ?? null
+              setState(user ? { status: 'ready', user } : { status: 'guest' })
+            } else if (!operation.controller.signal.aborted) setState({ status: 'offline' })
+          } catch {
+            if (!operation.controller.signal.aborted) setState({ status: 'offline' })
+          }
+        } else setState({ status: 'offline' })
+      }
+      if (checkedUserId && error instanceof api.ApiError)
+        throw new WithdrawalRejected(error, checkedUserId)
+      throw error
+    } finally {
+      if (current.current === operation) current.current = null
+    }
+  }
   return (
-    <Auth.Provider value={{ state, refresh, signIn, signOut, resetPassword }}>
+    <Auth.Provider value={{ state, refresh, signIn, signOut, resetPassword, withdrawAccount }}>
       {children}
     </Auth.Provider>
   )

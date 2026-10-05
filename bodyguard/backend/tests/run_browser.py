@@ -29,7 +29,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "suite",
-        choices=("account", "password", "google", "records", "design"),
+        choices=("account", "password", "google", "records", "design", "withdrawal"),
         nargs="?",
         default="account",
     )
@@ -81,7 +81,7 @@ def main() -> int:
             google_transport = None
             clock = None
             record_clock_file = Path(temporary) / "record-clock.json"
-            if args.suite == "records":
+            if args.suite in ("records", "withdrawal"):
                 # FR-U-05: private test IPC only; not a public clock-control endpoint.
                 record_clock_file.write_text('{"offset_seconds":0}')
                 record_clock_file.chmod(0o600)
@@ -133,6 +133,7 @@ def main() -> int:
                         db,
                         mail=mail,
                         reset_mail=mail,
+                        withdraw_mail=mail,
                         clock=clock,
                         google_transport=google_transport,
                     ),
@@ -157,7 +158,7 @@ def main() -> int:
                 # FR-R-03/FR-V-01: records/design runs preserve every earlier result.
                 output = (
                     f"test-results/{args.suite}-{datetime.now(UTC).strftime('%Y%m%dT%H%M%S%fZ')}"
-                    if args.suite in ("records", "design")
+                    if args.suite in ("records", "design", "withdrawal")
                     else f"test-results/{args.suite}"
                 )
                 result = subprocess.run(
@@ -180,7 +181,9 @@ def main() -> int:
                         "BODYGUARD_TEST_RECORD_CLOCK": str(record_clock_file),
                         "BODYGUARD_TEST_BLOCKED_PROXY": proxy_url,
                         "BODYGUARD_TEST_RECORDS_REPORT": (
-                            f"{output}/report.json" if args.suite in ("records", "design") else ""
+                            f"{output}/report.json"
+                            if args.suite in ("records", "design", "withdrawal")
+                            else ""
                         ),
                     },
                     check=False,

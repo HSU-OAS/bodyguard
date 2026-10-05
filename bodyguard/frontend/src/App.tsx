@@ -3,8 +3,10 @@ import { BrowserRouter, Link, Navigate, Route, Routes, useLocation } from 'react
 import { AuthProvider, useAuth } from './auth'
 import { AccountPage } from './pages/AccountPage'
 import { ExplorePage } from './pages/ExplorePage'
+import { MemberPage } from './pages/MemberPage'
 import { PasswordPage } from './pages/PasswordPage'
 import { RecordsPage } from './pages/RecordsPage'
+import { WithdrawalPage } from './pages/WithdrawalPage'
 
 // FR-V-02/03: prototype camera/debug UI is compiled out of production.
 const Demo = import.meta.env.DEV
@@ -54,7 +56,11 @@ function SessionGate({ children }: { children?: ReactNode }) {
     return (
       <section className="status-screen" role="status">
         <h1 tabIndex={-1}>
-          {state.status === 'logging-out' ? '로그아웃 중입니다' : '계정을 확인하고 있습니다'}
+          {state.status === 'logging-out'
+            ? '로그아웃 중입니다'
+            : state.status === 'withdrawing'
+              ? '탈퇴 결과를 확인하고 있습니다'
+              : '계정을 확인하고 있습니다'}
         </h1>
         <p>잠시만 기다려 주세요.</p>
       </section>
@@ -71,6 +77,11 @@ function SessionGate({ children }: { children?: ReactNode }) {
       <p>
         <Link className="back-link" to="/records">
           내 수행 기록 확인
+        </Link>
+      </p>
+      <p>
+        <Link className="back-link" to="/account">
+          계정 관리
         </Link>
       </p>
       <div className="development-note">
@@ -172,6 +183,7 @@ function Shell() {
     // NFR-08: selection/records pages own their asynchronous title and focus.
     if (
       (MotionSelection && location.pathname === '/dev/select') ||
+      location.pathname === '/account/delete' ||
       /^\/records(?:\/[^/]+)?$/.test(location.pathname)
     )
       return
@@ -187,7 +199,9 @@ function Shell() {
               ? '스트레칭 시작 경로'
               : location.pathname === '/start'
                 ? '내 시작'
-                : '자세 코칭'
+                : location.pathname === '/account'
+                  ? '내 계정'
+                  : '자세 코칭'
     } · BODYGUARD`
   }, [location.pathname])
   return (
@@ -219,8 +233,17 @@ function Shell() {
               >
                 수행 기록
               </Link>
+              <Link
+                className="nav-link"
+                to="/account"
+                aria-current={location.pathname.startsWith('/account') ? 'page' : undefined}
+              >
+                내 계정
+              </Link>
             </>
-          ) : state.status === 'checking' || state.status === 'logging-out' ? (
+          ) : state.status === 'checking' ||
+            state.status === 'logging-out' ||
+            state.status === 'withdrawing' ? (
             <span className="muted small" role="status">
               계정 확인 중
             </span>
@@ -239,6 +262,16 @@ function Shell() {
           <Route path="/password/forgot" element={<PasswordPage key="forgot" mode="forgot" />} />
           <Route path="/password/reset" element={<PasswordPage key="reset" mode="reset" />} />
           <Route path="/start" element={<SessionGate />} />
+          <Route
+            path="/account"
+            element={
+              <SessionGate>
+                <MemberPage />
+              </SessionGate>
+            }
+          />
+          {/* FR-U-05: do not unmount the confirmation request when private UI closes. */}
+          <Route path="/account/delete" element={<WithdrawalPage />} />
           <Route
             path="/records"
             element={

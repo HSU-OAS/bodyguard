@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="43" failures="1" errors="0" time="0.789167416">
+    <testsuite name="src/api/withdrawal.test.ts" timestamp="2026-10-05T06:57:26.667Z" hostname="MacBook-Air.local" tests="22" failures="0" errors="0" skipped="0" time="0.030825166">
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 sends same-origin CSRF-protected start with no identity supplied by the browser" time="0.021354667">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 malformed challenge is not actionable 0" time="0.000990583">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 malformed challenge is not actionable 1" time="0.000496042">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 malformed challenge is not actionable 2" time="0.000398708">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 malformed challenge is not actionable 3" time="0.00053675">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 malformed challenge is not actionable 4" time="0.000326958">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 malformed challenge is not actionable 5" time="0.000307708">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 malformed challenge is not actionable 6" time="0.001617">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 malformed challenge is not actionable 7" time="0.000374125">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 start accepts only202, not200" time="0.000399542">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 start accepts only202, not201" time="0.000245667">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 start accepts only202, not204" time="0.000221583">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 confirm accepts actual204 and preserves external cancellation signal" time="0.000486458">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 ambiguous successful200 is not deletion completion" time="0.000243375">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 ambiguous successful201 is not deletion completion" time="0.00017025">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 ambiguous successful202 is not deletion completion" time="0.000156">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 real failure400 remains failure" time="0.000596708">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 real failure401 remains failure" time="0.000169667">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 real failure403 remains failure" time="0.000161458">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 real failure422 remains failure" time="0.000158167">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 real failure429 remains failure" time="0.000159584">
+        </testcase>
+        <testcase classname="src/api/withdrawal.test.ts" name="AW-02 real failure503 remains failure" time="0.000143959">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/MemberPage.test.tsx" timestamp="2026-10-05T06:57:26.670Z" hostname="MacBook-Air.local" tests="1" failures="0" errors="0" skipped="0" time="0.036727292">
+        <testcase classname="src/pages/MemberPage.test.tsx" name="AW-01 verified account exposes records and a separate withdrawal entry" time="0.035788625">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/WithdrawalPage.test.tsx" timestamp="2026-10-05T06:57:26.670Z" hostname="MacBook-Air.local" tests="20" failures="1" errors="0" skipped="0" time="0.721614958">
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-03 private withdrawal is closed when /me returns401" time="0.058680542">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-03 private withdrawal is closed when /me returns503" time="0.012782916">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-04 explicit cancel sends no confirm request and clears memory proof" time="0.050724666">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-05 consent requires six ASCII digits and exact deliberate confirmation, not code alone" time="0.03505525">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-06 final pending stays mounted, closes private navigation and submits only once" time="0.045135583">
+            <failure message="Unable to find an accessible element with the role &quot;button&quot; and name &quot;계정과 기록 삭제&quot;
+
+Here are the accessible roles:
+
+  button:
+
+  Name &quot;본문으로 이동&quot;:
+  [36m&lt;button[39m
+    [33mclass[39m=[32m&quot;skip-link&quot;[39m
+    [33mtype[39m=[32m&quot;button&quot;[39m
+  [36m/&gt;[39m
+
+  Name &quot;삭제 결과 확인 중…&quot;:
+  [36m&lt;button[39m
+    [33mclass[39m=[32m&quot;button danger wide&quot;[39m
+    [33mdisabled[39m=[32m&quot;&quot;[39m
+    [33mtype[39m=[32m&quot;submit&quot;[39m
+  [36m/&gt;[39m
+
+  Name &quot;인증 코드 다시 받기&quot;:
+  [36m&lt;button[39m
+    [33mclass[39m=[32m&quot;text-button withdrawal-resend&quot;[39m
+    [33mdisabled[39m=[32m&quot;&quot;[39m
+    [33mtype[39m=[32m&quot;button&quot;[39m
+  [36m/&gt;[39m
+
+  --------------------------------------------------
+  banner:
+
+  Name &quot;&quot;:
+  [36m&lt;header[39m
+    [33mclass[39m=[32m&quot;site-header&quot;[39m
+  [36m/&gt;[39m
+
+  --------------------------------------------------
+  link:
+
+  Name &quot;BODYGUARD 서비스 소개&quot;:
+  [36m&lt;a[39m
+    [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+    [33mclass[39m=[32m&quot;wordmark&quot;[39m
+    [33mdata-discover[39m=[32m&quot;true&quot;[39m
+    [33mhref[39m=[32m&quot;/&quot;[39m
+  [36m/&gt;[39m
+
+  Name &quot;기록만 삭제하기&quot;:
+  [36m&lt;a[39m
+    [33mdata-discover[39m=[32m&quot;true&quot;[39m
+    [33mhref[39m=[32m&quot;/records&quot;[39m
+  [36m/&gt;[39m
+
+  --------------------------------------------------
+  navigation:
+
+  Name &quot;계정 메뉴&quot;:
+  [36m&lt;nav[39m
+    [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+  [36m/&gt;[39m
+
+  --------------------------------------------------
+  status:
+
+  Name &quot;&quot;:
+  [36m&lt;span[39m
+    [33mclass[39m=[32m&quot;muted small&quot;[39m
+    [33mrole[39m=[32m&quot;status&quot;[39m
+  [36m/&gt;[39m
+
+  Name &quot;&quot;:
+  [36m&lt;p[39m
+    [33mclass[39m=[32m&quot;form-notice&quot;[39m
+    [33mrole[39m=[32m&quot;status&quot;[39m
+  [36m/&gt;[39m
+
+  Name &quot;&quot;:
+  [36m&lt;p[39m
+    [33mclass[39m=[32m&quot;muted small&quot;[39m
+    [33mrole[39m=[32m&quot;status&quot;[39m
+  [36m/&gt;[39m
+
+  --------------------------------------------------
+  main:
+
+  Name &quot;&quot;:
+  [36m&lt;main[39m
+    [33mid[39m=[32m&quot;content&quot;[39m
+    [33mtabindex[39m=[32m&quot;-1&quot;[39m
+  [36m/&gt;[39m
+
+  --------------------------------------------------
+  paragraph:
+
+  Name &quot;&quot;:
+  [36m&lt;p[39m
+    [33mclass[39m=[32m&quot;eyebrow&quot;[39m
+  [36m/&gt;[39m
+
+  Name &quot;&quot;:
+  [36m&lt;p[39m
+    [33mclass[39m=[32m&quot;muted member-lead&quot;[39m
+  [36m/&gt;[39m
+
+  Name &quot;&quot;:
+  [36m&lt;p /&gt;[39m
+
+  Name &quot;&quot;:
+  [36m&lt;p[39m
+    [33mclass[39m=[32m&quot;muted small&quot;[39m
+    [33mid[39m=[32m&quot;withdrawal-agreement&quot;[39m
+  [36m/&gt;[39m
+
+  Name &quot;&quot;:
+  [36m&lt;p /&gt;[39m
+
+  --------------------------------------------------
+  heading:
+
+  Name &quot;회원 탈퇴&quot;:
+  [36m&lt;h1[39m
+    [33mtabindex[39m=[32m&quot;-1&quot;[39m
+  [36m/&gt;[39m
+
+  Name &quot;삭제되는 정보&quot;:
+  [36m&lt;h2 /&gt;[39m
+
+  --------------------------------------------------
+  list:
+
+  Name &quot;&quot;:
+  [36m&lt;ul /&gt;[39m
+
+  --------------------------------------------------
+  listitem:
+
+  Name &quot;&quot;:
+  [36m&lt;li /&gt;[39m
+
+  Name &quot;&quot;:
+  [36m&lt;li /&gt;[39m
+
+  --------------------------------------------------
+  textbox:
+
+  Name &quot;탈퇴 인증 코드&quot;:
+  [36m&lt;input[39m
+    [33maria-describedby[39m=[32m&quot;withdrawal-feedback&quot;[39m
+    [33mautocomplete[39m=[32m&quot;one-time-code&quot;[39m
+    [33mdisabled[39m=[32m&quot;&quot;[39m
+    [33minputmode[39m=[32m&quot;numeric&quot;[39m
+    [33mmaxlength[39m=[32m&quot;6&quot;[39m
+    [33mminlength[39m=[32m&quot;6&quot;[39m
+    [33mpattern[39m=[32m&quot;[0-9]{6}&quot;[39m
+    [33mrequired[39m=[32m&quot;&quot;[39m
+    [33mtype[39m=[32m&quot;text&quot;[39m
+    [33mvalue[39m=[32m&quot;123456&quot;[39m
+  [36m/&gt;[39m
+
+  Name &quot;확인문&quot;:
+  [36m&lt;input[39m
+    [33maria-describedby[39m=[32m&quot;withdrawal-agreement&quot;[39m
+    [33mautocomplete[39m=[32m&quot;off&quot;[39m
+    [33mdisabled[39m=[32m&quot;&quot;[39m
+    [33mrequired[39m=[32m&quot;&quot;[39m
+    [33mtype[39m=[32m&quot;text&quot;[39m
+    [33mvalue[39m=[32m&quot;탈퇴&quot;[39m
+  [36m/&gt;[39m
+
+  --------------------------------------------------
+  contentinfo:
+
+  Name &quot;&quot;:
+  [36m&lt;footer[39m
+    [33mclass[39m=[32m&quot;site-footer&quot;[39m
+  [36m/&gt;[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m&lt;body&gt;[39m
+  [36m&lt;div&gt;[39m
+    [36m&lt;div[39m
+      [33mclass[39m=[32m&quot;website&quot;[39m
+    [36m&gt;[39m
+      [36m&lt;button[39m
+        [33mclass[39m=[32m&quot;skip-link&quot;[39m
+        [33mtype[39m=[32m&quot;button&quot;[39m
+      [36m&gt;[39m
+        [0m본문으로 이동[0m
+      [36m&lt;/button&gt;[39m
+      [36m&lt;header[39m
+        [33mclass[39m=[32m&quot;site-header&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;a[39m
+          [33maria-label[39m=[32m&quot;BODYGUARD 서비스 소개&quot;[39m
+          [33mclass[39m=[32m&quot;wordmark&quot;[39m
+          [33mdata-discover[39m=[32m&quot;true&quot;[39m
+          [33mhref[39m=[32m&quot;/&quot;[39m
+        [36m&gt;[39m
+          [0mBODYGUARD[0m
+          [36m&lt;span[39m
+            [33maria-hidden[39m=[32m&quot;true&quot;[39m
+          [36m&gt;[39m
+            [0m.[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/a&gt;[39m
+        [36m&lt;nav[39m
+          [33maria-label[39m=[32m&quot;계정 메뉴&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;span[39m
+            [33mclass[39m=[32m&quot;muted small&quot;[39m
+            [33mrole[39m=[32m&quot;status&quot;[39m
+          [36m&gt;[39m
+            [0m계정 확인 중[0m
+          [36m&lt;/span&gt;[39m
+        [36m&lt;/nav&gt;[39m
+      [36m&lt;/header&gt;[39m
+      [36m&lt;main[39m
+        [33mid[39m=[32m&quot;content&quot;[39m
+        [33mtabindex[39m=[32m&quot;-1&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;section[39m
+          [33mclass[39m=[32m&quot;withdrawal-screen&quot;[39m
+        [36m&gt;[39m
+          [36m&lt;p[39m
+            [33mclass[39m=[32m&quot;eyebrow&quot;[39m
+          [36m&gt;[39m
+            [0mACCOUNT &amp; DATA[0m
+          [36m&lt;/p&gt;[39m
+          [36m&lt;h1[39m
+            [33mtabindex[39m=[32m&quot;-1&quot;[39m
+          [36m&gt;[39m
+            [0m회원 탈퇴[0m
+          [36m&lt;/h1&gt;[39m
+          [36m&lt;p[39m
+            [33mclass[39m=[32m&quot;muted member-lead&quot;[39m
+          [36m&gt;[39m
+            [0m계정과 수행 기록을 삭제합니다. 삭제 후에는 되돌릴 수 없습니다.[0m
+          [36m&lt;/p&gt;[39m
+          [36m&lt;div[39m
+            [33mclass[39m=[32m&quot;withdrawal-scope&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;h2&gt;[39m
+              [0m삭제되는 정보[0m
+            [36m&lt;/h2&gt;[39m
+            [36m&lt;ul&gt;[39m
+              [36m&lt;li&gt;[39m
+                [0mBODYGUARD 계정과 로그인 정보[0m
+              [36m&lt;/li&gt;[39m
+              [36m&lt;li&gt;[39m
+                [0m이 계정의 수행 기록[0m
+              [36m&lt;/li&gt;[39m
+            [36m&lt;/ul&gt;[39m
+            [36m&lt;p&gt;[39m
+              [0m모든 로그인 세션이 종료됩니다. 기록만 삭제하려면 수행 기록 관리에서 기간을 선택해 주세요.[0m
+            [36m&lt;/p&gt;[39m
+            [36m&lt;a[39m
+              [33mdata-discover[39m=[32m&quot;true&quot;[39m
+              [33mhref[39m=[32m&quot;/records&quot;[39m
+            [36m&gt;[39m
+              [0m기록만 삭제하기[0m
+            [36m&lt;/a&gt;[39m
+          [36m&lt;/div&gt;[39m
+          [36m&lt;div[39m
+            [33mclass[39m=[32m&quot;account-form withdrawal-form&quot;[39m
+          [36m&gt;[39m
+            [36m&lt;p[39m
+              [33mclass[39m=[32m&quot;form-notice&quot;[39m
+              [33mrole[39m=[32m&quot;status&quot;[39m
+            [36m&gt;[39m
+              [0m탈퇴 전용 인증 코드를 보냈습니다. 코드는 10분 동안 사용할 수 있습니다.[0m
+            [36m&lt;/p&gt;[39m
+            [36m&lt;form[39m
+              [33maria-busy[39m=[32m&quot;true&quot;[39m
+            [36m&gt;[39m
+              [36m&lt;label&gt;[39m
+                [0m탈퇴 인증 코드[0m
+                [36m&lt;input[39m
+                  [33maria-describedby[39m=[32m&quot;withdrawal-feedback&quot;[39m
+                  [33mautocomplete[39m=[32m&quot;one-time-code&quot;[39m
+                  [33mdisabled[39m=[32m&quot;&quot;[39m
+                  [33minputmode[39m=[32m&quot;numeric&quot;[39m
+                  [33mmaxlength[39m=[32m&quot;6&quot;[39m
+                  [33mminlength[39m=[32m&quot;6&quot;[39m
+                  [33mpattern[39m=[32m&quot;[0-9]{6}&quot;[39m
+                  [33mrequired[39m=[32m&quot;&quot;[39m
+                  [33mtype[39m=[32m&quot;text&quot;[39m
+                  [33mvalue[39m=[32m&quot;123456&quot;[39m
+                [36m/&gt;[39m
+              [36m&lt;/label&gt;[39m
+              [36m&lt;label&gt;[39m
+                [0m확인문[0m
+                [36m&lt;input[39m
+                  [33maria-describedby[39m=[32m&quot;withdrawal-agreement&quot;[39m
+                  [33mautocomplete[39m=[32m&quot;off&quot;[39m
+                  [33mdisabled[39m=[32m&quot;&quot;[39m
+                  [33mrequired[39m=[32m&quot;&quot;[39m
+                  [33mtype[39m=[32m&quot;text&quot;[39m
+                  [33mvalue[39m=[32m&quot;탈퇴&quot;[39m
+                [36m/&gt;[39m
+              [36m&lt;/label&gt;[39m
+              [36m&lt;p[39m
+                [33mclass[39m=[32m&quot;muted small&quot;[39m
+                [33mid[39m=[32m&quot;withdrawal-agreement&quot;[39m
+              [36m&gt;[39m
+                [0m계정과 기록의 삭제에 동의하면 “탈퇴”를 입력해 주세요.[0m
+              [36m&lt;/p&gt;[39m
+              [36m&lt;div[39m
+                [33mid[39m=[32m&quot;withdrawal-feedback&quot;[39m
+              [36m/&gt;[39m
+              [36m&lt;button[39m
+                [33mclass[39m=[32m&quot;button danger wide&quot;[39m
+                [33mdisabled[39m=[32m&quot;&quot;[39m
+                [33mtype[39m=[32m&quot;submit&quot;[39m
+              [36m&gt;[39m
+                [0m삭제 결과 확인 중…[0m
+              [36m&lt;/button&gt;[39m
+            [36m&lt;/form&gt;[39m
+            [36m&lt;button[39m
+              [33mclass[39m=[32m&quot;text-button withdrawal-resend&quot;[39m
+              [33mdisabled[39m=[32m&quot;&quot;[39m
+              [33mtype[39m=[32m&quot;button&quot;[39m
+            [36m&gt;[39m
+              [0m인증 코드 다시 받기[0m
+            [36m&lt;/button&gt;[39m
+            [36m&lt;p[39m
+              [33mclass[39m=[32m&quot;muted small&quot;[39m
+              [33mrole[39m=[32m&quot;status&quot;[39m
+            [36m&gt;[39m
+              [0m요청이 전송되었습니다. 삭제 결과를 확인할 때까지 기다려 주세요.[0m
+            [36m&lt;/p&gt;[39m
+          [36m&lt;/div&gt;[39m
+        [36m&lt;/section&gt;[39m
+      [36m&lt;/main&gt;[39m
+      [36m&lt;footer[39m
+        [33mclass[39m=[32m&quot;site-footer&quot;[39m
+      [36m&gt;[39m
+        [36m&lt;span&gt;[39m
+          [0mBODYGUARD[0m
+        [36m&lt;/span&gt;[39m
+        [36m&lt;p&gt;[39m
+          [0m일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중[0m
+        [36m&lt;/p&gt;[39m
+      [36m&lt;/footer&gt;[39m
+    [36m&lt;/div&gt;[39m
+  [36m&lt;/div&gt;[39m
+[36m&lt;/body&gt;[39m" type="TestingLibraryElementError">
+TestingLibraryElementError: Unable to find an accessible element with the role &quot;button&quot; and name &quot;계정과 기록 삭제&quot;
+
+Here are the accessible roles:
+
+  button:
+
+  Name &quot;본문으로 이동&quot;:
+  &lt;button
+    class=&quot;skip-link&quot;
+    type=&quot;button&quot;
+  /&gt;
+
+  Name &quot;삭제 결과 확인 중…&quot;:
+  &lt;button
+    class=&quot;button danger wide&quot;
+    disabled=&quot;&quot;
+    type=&quot;submit&quot;
+  /&gt;
+
+  Name &quot;인증 코드 다시 받기&quot;:
+  &lt;button
+    class=&quot;text-button withdrawal-resend&quot;
+    disabled=&quot;&quot;
+    type=&quot;button&quot;
+  /&gt;
+
+  --------------------------------------------------
+  banner:
+
+  Name &quot;&quot;:
+  &lt;header
+    class=&quot;site-header&quot;
+  /&gt;
+
+  --------------------------------------------------
+  link:
+
+  Name &quot;BODYGUARD 서비스 소개&quot;:
+  &lt;a
+    aria-label=&quot;BODYGUARD 서비스 소개&quot;
+    class=&quot;wordmark&quot;
+    data-discover=&quot;true&quot;
+    href=&quot;/&quot;
+  /&gt;
+
+  Name &quot;기록만 삭제하기&quot;:
+  &lt;a
+    data-discover=&quot;true&quot;
+    href=&quot;/records&quot;
+  /&gt;
+
+  --------------------------------------------------
+  navigation:
+
+  Name &quot;계정 메뉴&quot;:
+  &lt;nav
+    aria-label=&quot;계정 메뉴&quot;
+  /&gt;
+
+  --------------------------------------------------
+  status:
+
+  Name &quot;&quot;:
+  &lt;span
+    class=&quot;muted small&quot;
+    role=&quot;status&quot;
+  /&gt;
+
+  Name &quot;&quot;:
+  &lt;p
+    class=&quot;form-notice&quot;
+    role=&quot;status&quot;
+  /&gt;
+
+  Name &quot;&quot;:
+  &lt;p
+    class=&quot;muted small&quot;
+    role=&quot;status&quot;
+  /&gt;
+
+  --------------------------------------------------
+  main:
+
+  Name &quot;&quot;:
+  &lt;main
+    id=&quot;content&quot;
+    tabindex=&quot;-1&quot;
+  /&gt;
+
+  --------------------------------------------------
+  paragraph:
+
+  Name &quot;&quot;:
+  &lt;p
+    class=&quot;eyebrow&quot;
+  /&gt;
+
+  Name &quot;&quot;:
+  &lt;p
+    class=&quot;muted member-lead&quot;
+  /&gt;
+
+  Name &quot;&quot;:
+  &lt;p /&gt;
+
+  Name &quot;&quot;:
+  &lt;p
+    class=&quot;muted small&quot;
+    id=&quot;withdrawal-agreement&quot;
+  /&gt;
+
+  Name &quot;&quot;:
+  &lt;p /&gt;
+
+  --------------------------------------------------
+  heading:
+
+  Name &quot;회원 탈퇴&quot;:
+  &lt;h1
+    tabindex=&quot;-1&quot;
+  /&gt;
+
+  Name &quot;삭제되는 정보&quot;:
+  &lt;h2 /&gt;
+
+  --------------------------------------------------
+  list:
+
+  Name &quot;&quot;:
+  &lt;ul /&gt;
+
+  --------------------------------------------------
+  listitem:
+
+  Name &quot;&quot;:
+  &lt;li /&gt;
+
+  Name &quot;&quot;:
+  &lt;li /&gt;
+
+  --------------------------------------------------
+  textbox:
+
+  Name &quot;탈퇴 인증 코드&quot;:
+  &lt;input
+    aria-describedby=&quot;withdrawal-feedback&quot;
+    autocomplete=&quot;one-time-code&quot;
+    disabled=&quot;&quot;
+    inputmode=&quot;numeric&quot;
+    maxlength=&quot;6&quot;
+    minlength=&quot;6&quot;
+    pattern=&quot;[0-9]{6}&quot;
+    required=&quot;&quot;
+    type=&quot;text&quot;
+    value=&quot;123456&quot;
+  /&gt;
+
+  Name &quot;확인문&quot;:
+  &lt;input
+    aria-describedby=&quot;withdrawal-agreement&quot;
+    autocomplete=&quot;off&quot;
+    disabled=&quot;&quot;
+    required=&quot;&quot;
+    type=&quot;text&quot;
+    value=&quot;탈퇴&quot;
+  /&gt;
+
+  --------------------------------------------------
+  contentinfo:
+
+  Name &quot;&quot;:
+  &lt;footer
+    class=&quot;site-footer&quot;
+  /&gt;
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;website&quot;
+    &gt;
+      &lt;button
+        class=&quot;skip-link&quot;
+        type=&quot;button&quot;
+      &gt;
+        본문으로 이동
+      &lt;/button&gt;
+      &lt;header
+        class=&quot;site-header&quot;
+      &gt;
+        &lt;a
+          aria-label=&quot;BODYGUARD 서비스 소개&quot;
+          class=&quot;wordmark&quot;
+          data-discover=&quot;true&quot;
+          href=&quot;/&quot;
+        &gt;
+          BODYGUARD
+          &lt;span
+            aria-hidden=&quot;true&quot;
+          &gt;
+            .
+          &lt;/span&gt;
+        &lt;/a&gt;
+        &lt;nav
+          aria-label=&quot;계정 메뉴&quot;
+        &gt;
+          &lt;span
+            class=&quot;muted small&quot;
+            role=&quot;status&quot;
+          &gt;
+            계정 확인 중
+          &lt;/span&gt;
+        &lt;/nav&gt;
+      &lt;/header&gt;
+      &lt;main
+        id=&quot;content&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;section
+          class=&quot;withdrawal-screen&quot;
+        &gt;
+          &lt;p
+            class=&quot;eyebrow&quot;
+          &gt;
+            ACCOUNT &amp; DATA
+          &lt;/p&gt;
+          &lt;h1
+            tabindex=&quot;-1&quot;
+          &gt;
+            회원 탈퇴
+          &lt;/h1&gt;
+          &lt;p
+            class=&quot;muted member-lead&quot;
+          &gt;
+            계정과 수행 기록을 삭제합니다. 삭제 후에는 되돌릴 수 없습니다.
+          &lt;/p&gt;
+          &lt;div
+            class=&quot;withdrawal-scope&quot;
+          &gt;
+            &lt;h2&gt;
+              삭제되는 정보
+            &lt;/h2&gt;
+            &lt;ul&gt;
+              &lt;li&gt;
+                BODYGUARD 계정과 로그인 정보
+              &lt;/li&gt;
+              &lt;li&gt;
+                이 계정의 수행 기록
+              &lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;p&gt;
+              모든 로그인 세션이 종료됩니다. 기록만 삭제하려면 수행 기록 관리에서 기간을 선택해 주세요.
+            &lt;/p&gt;
+            &lt;a
+              data-discover=&quot;true&quot;
+              href=&quot;/records&quot;
+            &gt;
+              기록만 삭제하기
+            &lt;/a&gt;
+          &lt;/div&gt;
+          &lt;div
+            class=&quot;account-form withdrawal-form&quot;
+          &gt;
+            &lt;p
+              class=&quot;form-notice&quot;
+              role=&quot;status&quot;
+            &gt;
+              탈퇴 전용 인증 코드를 보냈습니다. 코드는 10분 동안 사용할 수 있습니다.
+            &lt;/p&gt;
+            &lt;form
+              aria-busy=&quot;true&quot;
+            &gt;
+              &lt;label&gt;
+                탈퇴 인증 코드
+                &lt;input
+                  aria-describedby=&quot;withdrawal-feedback&quot;
+                  autocomplete=&quot;one-time-code&quot;
+                  disabled=&quot;&quot;
+                  inputmode=&quot;numeric&quot;
+                  maxlength=&quot;6&quot;
+                  minlength=&quot;6&quot;
+                  pattern=&quot;[0-9]{6}&quot;
+                  required=&quot;&quot;
+                  type=&quot;text&quot;
+                  value=&quot;123456&quot;
+                /&gt;
+              &lt;/label&gt;
+              &lt;label&gt;
+                확인문
+                &lt;input
+                  aria-describedby=&quot;withdrawal-agreement&quot;
+                  autocomplete=&quot;off&quot;
+                  disabled=&quot;&quot;
+                  required=&quot;&quot;
+                  type=&quot;text&quot;
+                  value=&quot;탈퇴&quot;
+                /&gt;
+              &lt;/label&gt;
+              &lt;p
+                class=&quot;muted small&quot;
+                id=&quot;withdrawal-agreement&quot;
+              &gt;
+                계정과 기록의 삭제에 동의하면 “탈퇴”를 입력해 주세요.
+              &lt;/p&gt;
+              &lt;div
+                id=&quot;withdrawal-feedback&quot;
+              /&gt;
+              &lt;button
+                class=&quot;button danger wide&quot;
+                disabled=&quot;&quot;
+                type=&quot;submit&quot;
+              &gt;
+                삭제 결과 확인 중…
+              &lt;/button&gt;
+            &lt;/form&gt;
+            &lt;button
+              class=&quot;text-button withdrawal-resend&quot;
+              disabled=&quot;&quot;
+              type=&quot;button&quot;
+            &gt;
+              인증 코드 다시 받기
+            &lt;/button&gt;
+            &lt;p
+              class=&quot;muted small&quot;
+              role=&quot;status&quot;
+            &gt;
+              요청이 전송되었습니다. 삭제 결과를 확인할 때까지 기다려 주세요.
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/section&gt;
+      &lt;/main&gt;
+      &lt;footer
+        class=&quot;site-footer&quot;
+      &gt;
+        &lt;span&gt;
+          BODYGUARD
+        &lt;/span&gt;
+        &lt;p&gt;
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        &lt;/p&gt;
+      &lt;/footer&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+ ❯ Object.getElementError node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ consent src/pages/WithdrawalPage.test.tsx:11:30
+ ❯ src/pages/WithdrawalPage.test.tsx:100:19
+            </failure>
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-07 rejected400 is retryable only after real-shaped fresh /me" time="0.036320083">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-07 rejected422 is retryable only after real-shaped fresh /me" time="0.03639425">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-07 rejected429 is retryable only after real-shaped fresh /me" time="0.039684458">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-08 rejected code cannot revive cached private account when fresh /me fails" time="0.032099834">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-09 newly checked different account never inherits old confirmation or code" time="0.039925208">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-10 uncertain200 does not claim deletion or automatically retry" time="0.039958167">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-10 uncertain401 does not claim deletion or automatically retry" time="0.042669791">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-10 uncertain403 does not claim deletion or automatically retry" time="0.038865542">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-10 uncertain503 does not claim deletion or automatically retry" time="0.038878458">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-11 guest after uncertain result means login check, not completed withdrawal" time="0.019415792">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-12 send failure429 is not a delivered code or deletion" time="0.00757875">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-12 send failure503 is not a delivered code or deletion" time="0.006923459">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-13 explicit reissue replaces old proof and clears code/consent" time="0.011568833">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-14 abandoned start late response is aborted and never becomes reused consent" time="0.065044125">
+        </testcase>
+        <testcase classname="src/pages/WithdrawalPage.test.tsx" name="AW-15 leaving during confirmation cannot restore private account from late204" time="0.062488708">
+        </testcase>
+    </testsuite>
+</testsuites>
