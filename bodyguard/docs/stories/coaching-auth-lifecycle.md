@@ -1,6 +1,6 @@
 # S4.11 — 실제 로그인 권위·페이지 수명과 코칭 연결
 
-review · 기준 main43b13f37efa5ed58a8d5898af213fb66ea374a0e · codex/coaching-auth-lifecycle · 2026-10-06
+completed (private Story 범위만) · 기준 main43b13f37efa5ed58a8d5898af213fb66ea374a0e · codex/coaching-auth-lifecycle · 2026-10-06
 
 ## 범위/선행
 
@@ -32,7 +32,7 @@ FR-U-04·FR-S-04·FR-R-03/NFR-07/08. PR40 실제 merge43b13f3 부모faa5061/553b
 - [x] 먼저 실제 red/상세 하네스를 작성하고 실패 원본 보존.
 - [x] private hook/인증·페이지 수명 연결 및 리뷰 보완.
 - [x] 실제 Chrome/API/SQL·전체 회귀·production·증거·scope 작성자 리뷰.
-- [ ] 최신 main·실제 PR diff/HEAD/CLEAN·체크/충돌 재확인 후 조건부 merge.
+- [x] 최신 main·실제 PR diff/HEAD/CLEAN·체크/충돌 재확인 후 조건부 merge.
 
 ## Dev Agent Record
 
@@ -45,6 +45,8 @@ BMAD dev-story default workflow를 적용한다. 새 AGENTS 원문은 전체 읽
 최종 전체 frontend523/실패0(이번20개), API/SQL291/실패0(300.70초, 경고1), Chrome4/실패0(29.6초), 공개7+합성 RAF1/실패0(48.5초), 타입/Biome120/Ruff/format/mypy/build·guard 음성exit1/양성exit0을 실제 실행했다. 최종 전 기존 모의 화면 heading2건 대기 실패는 같은 소스/timeout/assertion 변경 없이 전체 재실행 통과했으며 원인 확정/출시 안정성 보증으로 간주하지 않는다. source8/artifact46 SHA를 수집하고 재검증했다. 수집기 재호출 중 wrong cwd module-not-found는 실행0인 보조 명령 실패였고 올바른 절대 경로 재호출로 byte-identical 보존을 확인했다.
 
 engineering:code-review로 상태 경합·자원/소유권·고정 오류·네트워크와 종료 분리·public bundle 누출을 작성자 검토했다. 새 hook과 모의 producer/fixture는 production0, JS/CSS byte SHA는 PR40과 동일하다. SDK 승인/실측·참여자·classifier·두 아바타·Q32/법무/외부/운영/전체1~6 완료가 아니다. 지정 web-design-studio의 기존 토큰/실제 화면 확인을 유지했지만 UI/추가 audit를 새로 완료했다고 주장하지 않는다.
+
+실제 원격 결과: [PR41](https://github.com/HSU-OAS/bodyguard/pull/41)은 source4265aae3bdaa13980ce6936a9e2f6e4d1f63b5f2·변경60개 remote blob/diff 일치·작성자 scope 리뷰·latest main43b13f3/CLEAN·MERGEABLE/CLEAN·체크 없음/외부 리뷰0 확인 후 2026-10-05T17:33:41Z mergef47dea17a7ec92ff62404c5624bc4c18cd0782a2로 병합됐다. 두 부모43b13f3/4265aae·main 포함·브랜치 보존·clean을 실제 확인했다. 기존 source/실패/증거는 변경하지 않으며 전체 단계 완료가 아니다.
 
 ## File List
 

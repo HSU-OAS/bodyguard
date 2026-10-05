@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="35" failures="0" errors="0" time="0.012266583">
+    <testsuite name="src/summary/minuteAggregation.test.ts" timestamp="2026-10-05T17:46:14.473Z" hostname="local-test-host" tests="35" failures="0" errors="0" skipped="0" time="0.012266583">
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M01 no observed interval means no summary and no invented value" time="0.00345275">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M02 irregular intervals weight each measured metric, not sample counts" time="0.001140083">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M02 simultaneous bad metrics count union time only once" time="0.000269208">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M03 UTC wall minute boundary splits observed time exactly" time="0.000340667">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M03 gaps and missing metrics never inflate the observed denominator" time="0.000287541">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M03 absence/background remain distinct and do not invent prior presence" time="0.000245167">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M04 copies clock/calibration/method/interval values and deeply freezes returned summaries" time="0.000358583">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M04 close destroys incomplete aggregates; later calls cannot resurrect values" time="0.000741417">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 invalid interval closes/discards without raw error: {&quot;startMs&quot;:-1}" time="0.000285375">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 invalid interval closes/discards without raw error: {&quot;startMs&quot;:100,&quot;endMs&quot;:100}" time="0.000283">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 invalid interval closes/discards without raw error: {&quot;endMs&quot;:1001}" time="0.00018075">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 invalid interval closes/discards without raw error: {&quot;endMs&quot;:null}" time="0.000177375">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 invalid interval closes/discards without raw error: {&quot;endMs&quot;:null}" time="0.000158875">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 invalid interval closes/discards without raw error: {&quot;neck&quot;:{&quot;deviation&quot;:11,&quot;bad&quot;:false}}" time="0.000147208">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 invalid interval closes/discards without raw error: {&quot;neck&quot;:{&quot;deviation&quot;:null,&quot;bad&quot;:false}}" time="0.000126375">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 invalid interval closes/discards without raw error: {&quot;neck&quot;:{&quot;deviation&quot;:2,&quot;bad&quot;:&quot;true&quot;}}" time="0.0001425">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 invalid interval closes/discards without raw error: {&quot;present&quot;:false}" time="0.000135333">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 invalid interval closes/discards without raw error: {&quot;background&quot;:true}" time="0.000125042">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 invalid interval closes/discards without raw error: {&quot;present&quot;:1}" time="0.000114167">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 invalid interval closes/discards without raw error: {&quot;coordinates&quot;:[1,2,3]}" time="0.000105084">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 invalid interval closes/discards without raw error: {&quot;accountId&quot;:&quot;PRIVATE_SUMMARY_ACCOUNT&quot;}" time="0.00010275">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 overlapping or stale-after-flush intervals terminally discard accumulators" time="0.00024375">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 a buffer overflow does not leak a partly accumulated result" time="0.000137667">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 bad raw getters are fixed failures, never included in output or log" time="0.000175625">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 no guessed config defaults or raw fields: {&quot;clock&quot;:{&quot;monotonicMs&quot;:0,&quot;utc&quot;:&quot;2026-02-30T00:00:00.000Z&quot;}}" time="0.000103">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 no guessed config defaults or raw fields: {&quot;clock&quot;:{&quot;monotonicMs&quot;:0,&quot;utc&quot;:&quot;0000-01-01T00:00:00.000Z&quot;}}" time="0.000070208">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 no guessed config defaults or raw fields: {&quot;clock&quot;:{&quot;monotonicMs&quot;:-1,&quot;utc&quot;:&quot;2026-10-06T00:00:00.000Z&quot;}}" time="0.000068334">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 no guessed config defaults or raw fields: {&quot;baselineId&quot;:&quot;invented&quot;}" time="0.000136667">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 no guessed config defaults or raw fields: {&quot;clientVersion&quot;:&quot;&quot;}" time="0.0000695">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 no guessed config defaults or raw fields: {&quot;maxIntervalMs&quot;:0}" time="0.000074">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 no guessed config defaults or raw fields: {&quot;maxBufferedMinutes&quot;:0}" time="0.00008425">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 no guessed config defaults or raw fields: {&quot;landmarks&quot;:[]}" time="0.000068917">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M05 a reverse flush terminally discards data rather than changing the wall anchor" time="0.000142709">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M04 captures the explicit clock and definitions source only once, never mixes clock pairs" time="0.000137709">
+        </testcase>
+        <testcase classname="src/summary/minuteAggregation.test.ts" name="M03 high-resolution monotonic intervals do not vanish in a large UTC timestamp addition" time="0.000575">
+        </testcase>
+    </testsuite>
+</testsuites>

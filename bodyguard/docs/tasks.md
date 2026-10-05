@@ -1,5 +1,9 @@
 # Bodyguard — Tasks
 
+최신: [S4.12 1분 시간가중 집계](stories/minute-aggregation.md)를 구현했다. 실제 관찰 구간만 분별/지표별로 집계하고 가림·공백을 정상 시간으로 채우지 않으며 동시 이탈을 중복 합산하지 않는다. [실패/모의 경계·실제 웹 화면 증거](review/minute-aggregation/README.md). 전체558 frontend·타입/정적/build·공개8·guard/private producer0·source3/artifact18 검증 후 조건부 PR 게이트 진행이다. 실제 classifier/기준선·측정/계정/HTTP 연결·Q32 알림/PDF/LLM/변화 탐지·단계2 이월/SDK P2/실측·참여자/외부·운영·전체1~6 미완료, 화이트·블루 웹·같은 아바타 부위 새 제작0을 유지한다. 아래는 시점별 기록이다.
+
+최신: [PR41](https://github.com/HSU-OAS/bodyguard/pull/41) source4265aae는 scoped 검증·리뷰·60개 원격 blob/diff·latest main/CLEAN·체크 없음 후 mergef47dea1로 main에 포함됐고 브랜치를 보존했다. 최신 main의 codex/private-minute-aggregation에서 [S4.12 1분 요약 집계](stories/minute-aggregation.md)를 시작한다. 측정/classifier에 의존하지 않는 private 시간가중/가림·공백 분모 경계부터 구현하며 공개 producer/임계값/업로드·실측/참여자·Q32 나머지/외부/운영/전체1~6 완료로 표시하지 않는다. 화이트/블루 웹·같은 아바타 부위 새 제작0을 유지한다. 아래는 시점별 기록이다.
+
 최신: [S4.11 실제 로그인 권위/페이지 수명 연결](stories/coaching-auth-lifecycle.md)을 구현했다. 실제 AuthProvider committed ready·명시 준비/수행/본인 기록과 계정 변경·로그아웃 실패·이탈 폐기를 연결했고 [작동 화면·실패 원본·미완료 증거](review/coaching-auth-lifecycle/README.md)를 보존했다. 최종 전체523 frontend/291 API·Chrome4/공개8·타입/정적/build/guard·source8/artifact46 검증 후 조건부 PR 게이트 진행이다. 공개 코칭 producer0·classifier/두 아바타/실측·Draft36 SDK 개인정보 P2·Q32/참여자/법무/외부/운영·전체1~6 미완료, 화이트·블루 웹·같은 아바타 부위 새 제작0을 유지한다. 아래는 시점별 기록이다.
 
 최신: [PR40](https://github.com/HSU-OAS/bodyguard/pull/40) source553b5b2는 scoped 검증·리뷰 보완·remote47 blob/diff·latest main/CLEAN·체크 없음 후 merge43b13f3로 main에 포함됐고 브랜치를 보존했다. 최신 main의 codex/coaching-auth-lifecycle에서 [S4.11 실제 로그인 권위/페이지 수명 연결](stories/coaching-auth-lifecycle.md)을 시작했다. 구현 전 계약/최초 하네스 단계이며 공개 코칭/실제 SDK/두 아바타/실측·참여자/외부/운영/Q32·전체1~6 미완료를 유지한다. 화이트·블루 웹·같은 아바타 부위 새 제작0이다. 아래는 시점별 기록이다.
