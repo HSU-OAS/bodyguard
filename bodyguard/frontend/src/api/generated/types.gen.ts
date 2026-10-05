@@ -68,6 +68,14 @@ export type GoogleStatusOut = {
   configured: boolean
 }
 
+export type LiveOut = {
+  status: 'alive'
+}
+
+export type ReadyOut = {
+  status: 'ready'
+}
+
 export type ResetInput = {
   token: string
   password: string
@@ -100,6 +108,10 @@ export type StretchOut = {
   repetitions: number
   created_at: string
   provenance?: 'client-reported'
+}
+
+export type UnavailableOut = {
+  status: 'unavailable'
 }
 
 export type UserOut = {
@@ -621,3 +633,55 @@ export type ConfirmApiV1MeDeleteConfirmPostResponses = {
 
 export type ConfirmApiV1MeDeleteConfirmPostResponse =
   ConfirmApiV1MeDeleteConfirmPostResponses[keyof ConfirmApiV1MeDeleteConfirmPostResponses]
+
+export type LiveApiV1HealthLiveGetData = {
+  body?: never
+  path?: never
+  query?: never
+  url: '/api/v1/health/live'
+}
+
+export type LiveApiV1HealthLiveGetErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type LiveApiV1HealthLiveGetError =
+  LiveApiV1HealthLiveGetErrors[keyof LiveApiV1HealthLiveGetErrors]
+
+export type LiveApiV1HealthLiveGetResponses = {
+  200: LiveOut
+}
+
+export type LiveApiV1HealthLiveGetResponse =
+  LiveApiV1HealthLiveGetResponses[keyof LiveApiV1HealthLiveGetResponses]
+
+export type ReadyApiV1HealthReadyGetData = {
+  body?: never
+  path?: never
+  query?: never
+  url: '/api/v1/health/ready'
+}
+
+export type ReadyApiV1HealthReadyGetErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: UnavailableOut
+}
+
+export type ReadyApiV1HealthReadyGetError =
+  ReadyApiV1HealthReadyGetErrors[keyof ReadyApiV1HealthReadyGetErrors]
+
+export type ReadyApiV1HealthReadyGetResponses = {
+  200: ReadyOut
+}
+
+export type ReadyApiV1HealthReadyGetResponse =
+  ReadyApiV1HealthReadyGetResponses[keyof ReadyApiV1HealthReadyGetResponses]

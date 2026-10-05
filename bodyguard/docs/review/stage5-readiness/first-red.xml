@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="0.425" timestamp="2026-10-05T17:04:22.457673+09:00" hostname="MacBook-Air.local"><testcase classname="tests.test_readiness" name="test_runtime_first_contract[/api/v1/health/live-alive]" time="0.257"><failure message="assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code">harness = &lt;tests.conftest.Harness object at 0x1181197f0&gt;
+path = '/api/v1/health/live', status = 'alive'
+
+    @pytest.mark.parametrize(
+        "path,status",
+        [
+            ("/api/v1/health/live", "alive"),
+            ("/api/v1/health/ready", "ready"),
+        ],
+    )
+    def test_runtime_first_contract(harness: Harness, path: str, status: str) -&gt; None:
+        response = harness.client.get(path)
+&gt;       assert response.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+
+tests/test_readiness.py:17: AssertionError</failure></testcase><testcase classname="tests.test_readiness" name="test_runtime_first_contract[/api/v1/health/ready-ready]" time="0.093"><failure message="assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code">harness = &lt;tests.conftest.Harness object at 0x118788a50&gt;
+path = '/api/v1/health/ready', status = 'ready'
+
+    @pytest.mark.parametrize(
+        "path,status",
+        [
+            ("/api/v1/health/live", "alive"),
+            ("/api/v1/health/ready", "ready"),
+        ],
+    )
+    def test_runtime_first_contract(harness: Harness, path: str, status: str) -&gt; None:
+        response = harness.client.get(path)
+&gt;       assert response.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+
+tests/test_readiness.py:17: AssertionError</failure></testcase></testsuite></testsuites>

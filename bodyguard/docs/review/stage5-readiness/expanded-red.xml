@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="5" skipped="0" tests="5" time="0.815" timestamp="2026-10-05T17:17:20.576200+09:00" hostname="MacBook-Air.local"><testcase classname="tests.test_readiness" name="test_runtime_first_contract[/api/v1/health/live-alive]" time="0.242"><failure message="assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code">harness = &lt;tests.conftest.Harness object at 0x108311940&gt;
+path = '/api/v1/health/live', status = 'alive'
+
+    @pytest.mark.parametrize(
+        "path,status",
+        [
+            ("/api/v1/health/live", "alive"),
+            ("/api/v1/health/ready", "ready"),
+        ],
+    )
+    def test_runtime_first_contract(harness: Harness, path: str, status: str) -&gt; None:
+        response = harness.client.get(path)
+&gt;       assert response.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+
+tests/test_readiness.py:22: AssertionError</failure></testcase><testcase classname="tests.test_readiness" name="test_runtime_first_contract[/api/v1/health/ready-ready]" time="0.089"><failure message="assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code">harness = &lt;tests.conftest.Harness object at 0x108674b90&gt;
+path = '/api/v1/health/ready', status = 'ready'
+
+    @pytest.mark.parametrize(
+        "path,status",
+        [
+            ("/api/v1/health/live", "alive"),
+            ("/api/v1/health/ready", "ready"),
+        ],
+    )
+    def test_runtime_first_contract(harness: Harness, path: str, status: str) -&gt; None:
+        response = harness.client.get(path)
+&gt;       assert response.status_code == 200
+E       assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+
+tests/test_readiness.py:22: AssertionError</failure></testcase><testcase classname="tests.test_readiness" name="test_runtime_authenticated_get_changes_no_account_state" time="0.167"><failure message="assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code">harness = &lt;tests.conftest.Harness object at 0x108677b10&gt;
+
+    def test_runtime_authenticated_get_changes_no_account_state(harness: Harness) -&gt; None:
+        harness.account()
+        before = snapshot(harness)
+        mail_count = len(harness.mail.messages)
+        harness.clock.now += timedelta(minutes=5)
+        for _ in range(3):
+            for path in ("live", "ready"):
+                response = harness.client.get(f"/api/v1/health/{path}")
+&gt;               assert response.status_code == 200
+E               assert 404 == 200
+E                +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+
+tests/test_readiness.py:48: AssertionError</failure></testcase><testcase classname="tests.test_readiness" name="test_runtime_actual_schema_failure_and_recovery[revision]" time="0.141"><failure message="assert 404 == 503&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code">harness = &lt;tests.conftest.Harness object at 0x1086d5a70&gt;, fault = 'revision'
+
+    @pytest.mark.parametrize("fault", ["revision", "column"])
+    def test_runtime_actual_schema_failure_and_recovery(harness: Harness, fault: str) -&gt; None:
+        try:
+            with harness.engine.begin() as connection:
+                if fault == "revision":
+                    connection.execute(text("UPDATE alembic_version SET version_num = 'not_ready'"))
+                else:
+                    connection.execute(
+                        text("ALTER TABLE users RENAME COLUMN email TO unavailable_email")
+                    )
+            response = harness.client.get("/api/v1/health/ready")
+&gt;           assert response.status_code == 503
+E           assert 404 == 503
+E            +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+
+tests/test_readiness.py:65: AssertionError</failure></testcase><testcase classname="tests.test_readiness" name="test_runtime_actual_schema_failure_and_recovery[column]" time="0.086"><failure message="assert 404 == 503&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code">harness = &lt;tests.conftest.Harness object at 0x1086d48a0&gt;, fault = 'column'
+
+    @pytest.mark.parametrize("fault", ["revision", "column"])
+    def test_runtime_actual_schema_failure_and_recovery(harness: Harness, fault: str) -&gt; None:
+        try:
+            with harness.engine.begin() as connection:
+                if fault == "revision":
+                    connection.execute(text("UPDATE alembic_version SET version_num = 'not_ready'"))
+                else:
+                    connection.execute(
+                        text("ALTER TABLE users RENAME COLUMN email TO unavailable_email")
+                    )
+            response = harness.client.get("/api/v1/health/ready")
+&gt;           assert response.status_code == 503
+E           assert 404 == 503
+E            +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+
+tests/test_readiness.py:65: AssertionError</failure></testcase></testsuite></testsuites>
