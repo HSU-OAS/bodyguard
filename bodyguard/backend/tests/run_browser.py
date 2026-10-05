@@ -39,6 +39,7 @@ def main() -> int:
             "datahelp",
             "integration",
             "security",
+            "resultrecord",
         ),
         nargs="?",
         default="account",
@@ -169,7 +170,15 @@ def main() -> int:
                 output = (
                     f"test-results/{args.suite}-{datetime.now(UTC).strftime('%Y%m%dT%H%M%S%fZ')}"
                     if args.suite
-                    in ("records", "design", "withdrawal", "datahelp", "integration", "security")
+                    in (
+                        "records",
+                        "design",
+                        "withdrawal",
+                        "datahelp",
+                        "integration",
+                        "security",
+                        "resultrecord",
+                    )
                     else f"test-results/{args.suite}"
                 )
                 result = subprocess.run(
@@ -201,6 +210,7 @@ def main() -> int:
                                 "datahelp",
                                 "integration",
                                 "security",
+                                "resultrecord",
                             )
                             else ""
                         ),

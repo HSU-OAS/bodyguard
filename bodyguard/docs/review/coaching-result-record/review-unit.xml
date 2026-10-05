@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="26" failures="0" errors="0" time="0.0401125">
+    <testsuite name="src/coaching/resultRecord.test.ts" timestamp="2026-10-05T15:03:26.961Z" hostname="local-test-host" tests="26" failures="0" errors="0" skipped="0" time="0.0401125">
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R01 construction, idle, preparing, running, paused and before-ready end never encode or POST" time="0.003015375">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R02 actual completed engine creates an immutable exact eight-field UTC summary" time="0.002627792">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R02 fractional observation is summed then floored; pause/resume preserves first-ready anchor" time="0.001037083">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R02 whole skipped remains skipped; partly performed skipped becomes interrupted without changing the engine" time="0.000558709">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R02 repetition result preserves count rather than deriving it from time" time="0.000261417">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R03 invalid identity or anchor: bad-id" time="0.000334417">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R03 invalid identity or anchor: 2026-02-30T00:00:00Z" time="0.0001385">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R03 invalid identity or anchor: 2026-10-05T00:00:00" time="0.00012125">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R03 invalid identity or anchor: 0000-01-01T00:00:00Z" time="0.000132792">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R03 malformed identity/steps/time/count/completion and accessors are fixed failure" time="0.001105833">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R04 captured proof posts eight fields same-origin/no-store, accepts 200" time="0.022381292">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R04 captured proof posts eight fields same-origin/no-store, accepts 201" time="0.000676916">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R04 status 401 fixed failure, no fresh CSRF/raw body" time="0.0005445">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R04 status 403 fixed failure, no fresh CSRF/raw body" time="0.000287125">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R04 status 409 fixed failure, no fresh CSRF/raw body" time="0.00027525">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R04 status 422 fixed failure, no fresh CSRF/raw body" time="0.000249833">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R04 status 503 fixed failure, no fresh CSRF/raw body" time="0.000240709">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R04 invalid proof/input or already aborted performs no request" time="0.000702625">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R04 foreign/different/malformed response or unexpected success status cannot succeed" time="0.00168975">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R05 inert constructor, duplicate shares write, conflicting summary cannot replace it" time="0.00069775">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R05 network failure has no auto retry; explicit retry keeps exact payload/id/proof" time="0.000510125">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R05 changed session lease aborts pending/late success, no retry for a new owner" time="0.00036625">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R05 disposal/provider failure rejects late data with fixed state" time="0.000357709">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R03 review: impossible clocks and a fraction beyond one day cannot be normalized into validity" time="0.00030925">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R04 review: context accessor throws fixed failure, not private raw error" time="0.000234917">
+        </testcase>
+        <testcase classname="src/coaching/resultRecord.test.ts" name="R05 review: constructor accessor throws fixed error without network" time="0.000154042">
+        </testcase>
+    </testsuite>
+</testsuites>

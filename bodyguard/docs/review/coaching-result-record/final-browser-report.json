@@ -1,0 +1,304 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "[workspace]/bodyguard/frontend/node_modules/.pnpm/@playwright+test@1.63.0/node_modules/@playwright/test/cli.js",
+      "test",
+      "resultrecord.spec.ts",
+      "--config",
+      "playwright.account.config.ts",
+      "--output",
+      "test-results/resultrecord-20261005T150945601996Z"
+    ],
+    "configFile": "[workspace]/bodyguard/frontend/playwright.account.config.ts",
+    "rootDir": "[workspace]/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "[workspace]/bodyguard/frontend/test-results/resultrecord-20261005T150945601996Z",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "[workspace]/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "account.spec.ts",
+          "password.spec.ts",
+          "google.spec.ts",
+          "records.spec.ts",
+          "design.spec.ts",
+          "withdrawal.spec.ts",
+          "datahelp.spec.ts",
+          "integration.spec.ts",
+          "security.spec.ts",
+          "resultrecord.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/resultrecord-20261005T150945601996Z/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "pnpm build && vite build --config e2e/fixtures/resultRecord.vite.ts && vite preview --host localhost",
+      "url": "http://localhost:4173",
+      "reuseExistingServer": false,
+      "timeout": 180000
+    }
+  },
+  "suites": [
+    {
+      "title": "resultrecord.spec.ts",
+      "file": "resultrecord.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "R06 real completed result saves once, same-content replay is safe and public record detail works",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1580,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T15:09:59.635Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "result-metadata.json",
+                      "contentType": "application/json",
+                      "body": "ewogICJzeW50aGV0aWNfb25seSI6IHRydWUsCiAgImh1bWFuX2FjY3VyYWN5X3ZlcmlmaWVkIjogZmFsc2UsCiAgIm9yaWdpbmFsX291dGNvbWUiOiAiY29tcGxldGVkIiwKICAicGVuZGluZ19zdGVwcyI6IDAsCiAgImRpc3Bvc2VkX3Jlc291cmNlcyI6IDMsCiAgInJlY29yZF9vdXRjb21lIjogImNvbXBsZXRlZCIsCiAgIm9ic2VydmVkX21zIjogMTAwLAogICJyZXBldGl0aW9ucyI6IDAsCiAgImR1cGxpY2F0ZV9icm93c2VyX3Bvc3RzIjogMQp9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d82340b3e54699a287f8-0a678fffcca3dd6381c5",
+          "file": "resultrecord.spec.ts",
+          "line": 116,
+          "column": 1
+        },
+        {
+          "title": "R06 partial skip and pause/resume preserve performed time; entire skip alone is skipped",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 868,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T15:10:01.808Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "result-metadata.json",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJzeW50aGV0aWNfb25seSI6IHRydWUsCiAgICAiaHVtYW5fYWNjdXJhY3lfdmVyaWZpZWQiOiBmYWxzZSwKICAgICJvcmlnaW5hbF9vdXRjb21lIjogInNraXBwZWQiLAogICAgInBlbmRpbmdfc3RlcHMiOiAxLAogICAgImRpc3Bvc2VkX3Jlc291cmNlcyI6IDMsCiAgICAia2luZCI6ICJwYXJ0aWFsLXNraXAiLAogICAgIm91dGNvbWUiOiAiaW50ZXJydXB0ZWQiLAogICAgIm9ic2VydmVkX21zIjogMTAwCiAgfSwKICB7CiAgICAic3ludGhldGljX29ubHkiOiB0cnVlLAogICAgImh1bWFuX2FjY3VyYWN5X3ZlcmlmaWVkIjogZmFsc2UsCiAgICAib3JpZ2luYWxfb3V0Y29tZSI6ICJpbnRlcnJ1cHRlZCIsCiAgICAicGVuZGluZ19zdGVwcyI6IDAsCiAgICAiZGlzcG9zZWRfcmVzb3VyY2VzIjogNiwKICAgICJraW5kIjogInBhdXNlZC1pbnRlcnJ1cHRlZCIsCiAgICAib3V0Y29tZSI6ICJpbnRlcnJ1cHRlZCIsCiAgICAib2JzZXJ2ZWRfbXMiOiA0MAogIH0sCiAgewogICAgInN5bnRoZXRpY19vbmx5IjogdHJ1ZSwKICAgICJodW1hbl9hY2N1cmFjeV92ZXJpZmllZCI6IGZhbHNlLAogICAgIm9yaWdpbmFsX291dGNvbWUiOiAic2tpcHBlZCIsCiAgICAicGVuZGluZ19zdGVwcyI6IDEsCiAgICAiZGlzcG9zZWRfcmVzb3VyY2VzIjogMywKICAgICJraW5kIjogInNraXBwZWQiLAogICAgIm91dGNvbWUiOiAic2tpcHBlZCIsCiAgICAib2JzZXJ2ZWRfbXMiOiAwCiAgfQpd"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d82340b3e54699a287f8-2893d3a182d726be0058",
+          "file": "resultrecord.spec.ts",
+          "line": 160,
+          "column": 1
+        },
+        {
+          "title": "R06 stale captured proof cannot write under a different cookie even if caller misses owner notification",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 920,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T15:10:02.696Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "result-metadata.json",
+                      "contentType": "application/json",
+                      "body": "eyJzdGFsZV9jb29raWVfd3JpdGVfc3RhdHVzIjo0MDMsIm5ld19hY2NvdW50X3Jvd3MiOjAsIm9yaWdpbmFsX2FjY291bnRfcm93cyI6MCwicG9zdF9vd25lcl9jaGFuZ2VfcmV0cnlfcG9zdHMiOjAsImh1bWFuX2FjY3VyYWN5X3ZlcmlmaWVkIjpmYWxzZX0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d82340b3e54699a287f8-43cb8092177e2e3e29bd",
+          "file": "resultrecord.spec.ts",
+          "line": 200,
+          "column": 1
+        },
+        {
+          "title": "R06 accepted write with lost response retries explicitly without duplicating SQL record",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 757,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T15:10:03.633Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "result-metadata.json",
+                      "contentType": "application/json",
+                      "body": "eyJsb3N0X3Jlc3BvbnNlX3NlcnZlcl9zdGF0dXMiOjIwMSwiZXhwbGljaXRfcmV0cnlfc3RhdHVzIjoyMDAsInNxbF9yb3dzIjoxLCJhdXRvbWF0aWNfcmV0cnkiOmZhbHNlLCJzeW50aGV0aWNfb25seSI6dHJ1ZX0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d82340b3e54699a287f8-62163a7a783ff8aa1e77",
+          "file": "resultrecord.spec.ts",
+          "line": 244,
+          "column": 1
+        },
+        {
+          "title": "R06 delayed accepted response cannot reopen writer after session lease disposal",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1053,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T15:10:04.426Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "result-metadata.json",
+                      "contentType": "application/json",
+                      "body": "eyJhY2NlcHRlZF9iZWZvcmVfZGlzcG9zYWwiOnRydWUsInJvbGxiYWNrX2NsYWltZWQiOmZhbHNlLCJjbG9zZWRfYWZ0ZXJfbGF0ZV9yZXNwb25zZSI6dHJ1ZSwib3JpZ2luYWxfYWNjb3VudF9yb3dzIjoxLCJvdGhlcl9hY2NvdW50X3Jvd3MiOjAsInN5bnRoZXRpY19vbmx5Ijp0cnVlfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d82340b3e54699a287f8-d4e33a7b71d329af5bf1",
+          "file": "resultrecord.spec.ts",
+          "line": 292,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-05T15:09:47.113Z",
+    "duration": 18615.217,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

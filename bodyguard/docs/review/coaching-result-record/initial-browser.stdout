@@ -1,0 +1,19 @@
+[WebServer] (node:90471) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ node scripts/prepare-assets.mjs && tsc --noEmit && vite build
+[WebServer] (node:90504) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:90515) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:90525) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:90537) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/resultrecord.spec.ts:107:1 › R06 real completed result saves once, same-content replay is safe and public record detail works (1.8s)
+  ✓  2 e2e/resultrecord.spec.ts:151:1 › R06 partial skip and pause/resume preserve performed time; entire skip alone is skipped (911ms)
+  ✓  3 e2e/resultrecord.spec.ts:191:1 › R06 stale captured proof cannot write under a different cookie even if caller misses owner notification (1.0s)
+
+  3 passed (15.9s)
