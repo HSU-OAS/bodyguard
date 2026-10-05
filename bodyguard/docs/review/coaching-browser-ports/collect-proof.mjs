@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto'
 import { lstatSync, readFileSync, realpathSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
+import { gzipSync } from 'node:zlib'
 
 const root = realpathSync(fileURLToPath(new URL('../../../../', import.meta.url)))
 const destination = fileURLToPath(new URL('.', import.meta.url))
@@ -31,7 +32,7 @@ function copy(source, name, binary = false) {
   const stat = lstatSync(source)
   assert(stat.isFile() && !stat.isSymbolicLink() && stat.size < 2 * 1024 * 1024)
   const raw = readFileSync(source)
-  const publicBytes = binary
+  const originalPublicBytes = binary
     ? raw
     : Buffer.from(
         raw
@@ -41,10 +42,22 @@ function copy(source, name, binary = false) {
           .replaceAll(scratch, '[private-scratch]')
           .replaceAll('hostname="MacBook-Air.local"', 'hostname="local-test-host"'),
       )
+  const publicBytes = name.endsWith('.stdout')
+    ? Buffer.from(
+        originalPublicBytes
+          .toString('utf8')
+          .replace(/[ \t]+$/gm, '')
+          .replace(/\n+$/, '\n'),
+      )
+    : originalPublicBytes
+  const originalProof = originalPublicBytes.equals(publicBytes) ? null : `${name}.original.gz`
+  if (originalProof) save(originalProof, gzipSync(originalPublicBytes))
   save(name, publicBytes)
   manifest.push({
     name,
     raw_sha256: digest(raw),
+    original_public_sha256: digest(originalPublicBytes),
+    original_proof: originalProof,
     public_sha256: digest(publicBytes),
     bytes: publicBytes.length,
   })
@@ -85,8 +98,8 @@ copy(
   true,
 )
 save(
-  'artifacts.json',
-  Buffer.from(`${JSON.stringify({ version: 1, artifacts: manifest }, null, 2)}\n`),
+  'artifacts-formatted.json',
+  Buffer.from(`${JSON.stringify({ version: 2, artifacts: manifest }, null, 2)}\n`),
 )
 console.log(
   JSON.stringify({

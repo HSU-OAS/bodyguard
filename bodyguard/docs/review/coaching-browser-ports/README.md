@@ -30,4 +30,6 @@ main1528e9eb · codex/coaching-browser-ports · [명세](../../stories/coaching-
 
 원본 report/stdout/XML·실제 웹 PNG를 소유 scratch/작업트리에 보존했다. [manifest](artifacts.json)는 원본/공개 SHA-256이다. collector는 고정 파일/경로·크기·일반파일만 허용하고 root/file URL·scratch/hostname만 치환하며 기존 byte가 다르면 덮어쓰기를 거부한다. 계수·시간·성패·SDK 시도는 치환하지 않는다. 영상 screenshot은0이며 PNG는 카메라가 켜지지 않은 공개 웹이다.
 
+Draft PR #36 생성 직전 diff check는 원본 도구 stdout의 줄끝 공백·EOF 빈줄로 exit2였으나 이어진 shell 명령이 멈추지 않아1ea0eb2 commit/푸시가 진행됐다. **그때 diff check 성공이라는 표현은 잘못이므로 정정한다.** 새 보완 commit에서 공개 stdout만 기계적으로 줄끝 공백을 정리하고, 변경 전 공개 byte는 각각 .original.gz에 그대로 보존했다. private 원본·이전 commit·manifest는 바꾸지 않았다. [별도 formatted manifest](artifacts-formatted.json)는 raw/변경 전 공개/현재 공개 SHA 및 원본 gzip 이름을 기록한다. gzip 복원 byte는 기존 manifest SHA와 실제 대조한다. whitespace 검사를 끄거나 범위 제외하지 않고 git diff --check를 다시 실행한다. SDK 개인정보 P2는 이 형식 보완과 무관하게 여전히 미해결이다.
+
 재현: frontend에서 pnpm exec vitest run, pnpm typecheck, pnpm check, pnpm build, node scripts/check-selection-production.mjs. node scripts/test-browser-ports.mjs의 일반 B-08/B-09 시험은 현재 외부 시도 때문에 실패해야 한다. --grep 'diagnostic local CSP'는 제품 아닌 시험 정책 진단이다. node scripts/test-selection-browser.mjs는 공개 웹/개발 선택 회귀다.

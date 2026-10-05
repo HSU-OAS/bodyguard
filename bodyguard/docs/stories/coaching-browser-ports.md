@@ -45,6 +45,8 @@ Stage2 D2-A/M/T/R/I/P·실제 인증/판정/아바타/코칭·confirmed 부가 �
 - frontend/e2e/browserPorts.spec.ts, browserPortsPolicy.spec.ts, fixtures/browserPortsProbe.ts; playwright.browserPorts.config.ts; scripts/test-browser-ports.mjs, check-selection-production.mjs.
 - docs/stories/coaching-browser-ports.md, coaching-session-bridge.md; tasks.md, stage2-carryover.md, open-questions.md; docs/review/coaching-browser-ports/의 collector/실제 증거.
 
+Draft [PR #36](https://github.com/HSU-OAS/bodyguard/pull/36) source1ea0eb2를 생성/연결했다. raw stdout 공백 때문에 첫 diff check exit2였으며 중단되지 않은 shell의 commit/푸시 진행도 기록했다. 별도 공개 형식 보완/원본 gzip/hash 보존 후 재검증하며 완료/병합으로 세지 않는다.
+
 ## Change Log
 
 2026-10-05: 최신 main의 카메라/추론 소유 포트 명세 시작. 아바타 보완·실측/출시 gate·별도 승인 경계 유지.

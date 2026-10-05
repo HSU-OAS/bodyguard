@@ -10,4 +10,3 @@ $ vitest run -- --reporter=junit --outputFile=[private-scratch]/initial-regressi
 
     Isolate  30 workers spawned · ~849ms startup each (spawn + environment, per file)
              at least ~1.98s faster with isolate: false — reuses workers across files instead of one per file
-
