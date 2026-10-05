@@ -1,13 +1,13 @@
 ---
 story: S4.13
-status: review
+status: done
 baseline: e4265f5f58646e9774d5957e419e1ef80bdc58bf
 branch: codex/account-baselines
 ---
 
 # S4.13 — 계정별 기준선 저장·교체·과거 조회
 
-Status: review
+Status: done (client-reported 기준선 API 범위만)
 
 ## Story
 
@@ -32,7 +32,7 @@ Status: review
 - [x] strict DTO·owner API·원자적 교체/멱등·DB/migration/readiness (B01–06)
 - [x] 실제 SQL/인증 경쟁·rollback·migration 하네스 (B03–06)
 - [x] native owned backup·타입 재생성·전체 회귀 (B07–08)
-- [ ] diff/리뷰 보완·최신 main·PR 조건부 게이트와 증거 보존 (B08)
+- [x] diff/리뷰 보완·최신 main·PR 조건부 게이트와 증거 보존 (B08)
 
 ## Dev Notes
 
@@ -52,10 +52,12 @@ BMAD create/dev Story skill·template/checklist를 적용한다. 저장소 `_bma
 - 독립 읽기 전용 최종 리뷰는 신규 P1/P2 없음. 독립 test 실행0이며 전체 회귀는 작성자가 실제 실행한다. 최종 결과와 SHA/화면은 [증거](../review/account-baselines/README.md)에 연결한다.
 - 최종 작성자 실행은 전체369 API/실제 owned native 복구·frontend558·공개8·타입/정적/build 통과. source18/artifact36 SHA·수집기 재실행 동일성을 확인했다. main PR45의 알림 설정 웹은 후속 통합/회귀 대상이며 현재 공개 CSS/JS는 이전main과 동일하다.
 - 이후 최신 maincc9870b(PR45)을 로컬 merge87b8966으로 통합했다. 모든 baseline/API/생성 타입 source18 SHA는 앞선 실제 검증본과 같고, 통합본에서 전체369 API/590 frontend·타입/Biome/Ruff/format/mypy/build·공개8·실제 알림 설정 Chrome4를 다시 통과했다. 초기 proof36/manifest를 보존하고 통합 proof15/manifest-v2를 추가했다. 알림 설정 UI는 PR45의 변경이며 이번 API PR에서 새로 만들거나 원본을 수정하지 않았다.
+- [PR46](https://github.com/HSU-OAS/bodyguard/pull/46)은 source8df7c8e8bbe9b4094d5e0e4738a276d2ee4b1fcd를 merge4b1c8f2652166de5daab3be183b145952380fc1c로 2026-10-05T18:59:15Z에 병합했다. 실제 부모cc9870b/8df7c8e, 원격main 포함, 원본 codex/account-baselines 브랜치 보존과 clean을 확인했다. 병합 직전 최신 main/HEAD·CLEAN/MERGEABLE·체크 없음·GitHub 외부 리뷰0, 원격/로컬 변경75파일의 전체 Git blob/diff, source18/artifact51 SHA와 git diff --check를 확인했다. [작성자 검토 기록](https://github.com/HSU-OAS/bodyguard/pull/46#issuecomment-6001085382)은 외부 전문가 검토가 아니다.
+- BMAD on_complete resolver는 실제 missing-file exit2였다. 기본 후속 값은 빈 값으로 처리하고 설치/설정 변경이나 성공 주장을 하지 않았다. 병합 결과 정리는 최신 main4b1c8f2의 별도 codex/account-baselines-closure 문서 브랜치에서 수행하며 제품 코드/원본 증거는 수정하지 않는다.
 
 ### Completion Notes
 
-- 기준선 API의 로컬 수용 기준과 최신 main 통합 회귀는 통과했다. 원격 PR/조건부 병합 게이트는 진행 중이며 실제 보정·public 연결·전체1–6 완료를 뜻하지 않는다.
+- 기준선 API의 수용 기준·최신 main 통합 회귀와 PR46 조건부 병합을 완료했다. 실제 보정 화면·public 연결·실제 신체 정확성·단계4 또는 전체1–6 완료를 뜻하지 않는다. 운영 migration·배포·출시는 실행하지 않았다.
 
 ### File List
 
@@ -70,3 +72,4 @@ BMAD create/dev Story skill·template/checklist를 적용한다. 저장소 `_bma
 - 2026-10-06: S4.13 명세·하네스 계약. 독립 검토의 인증 대기/rollback 보완 포함.
 - 2026-10-06: 실제 기준선/인증 경쟁·rollback·native 복구 및 OpenAPI 보완. test 배치 실패 보존/48건 재검증. 전체 회귀/최신 main/PR 게이트 진행 중.
 - 2026-10-06: 최신 main PR45 통합 후 전체369 API/590 웹·공개8/설정4 재검증. 원본 source/실패/manifest 보존, 원격 PR 리뷰 준비.
+- 2026-10-06: PR46 실제 merge commit·부모·브랜치 보존 확인. client-reported 기준선 API만 완료 기록, 미완료 출시 기준 유지.
