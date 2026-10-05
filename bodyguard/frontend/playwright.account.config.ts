@@ -15,6 +15,7 @@ export default defineConfig({
     'design.spec.ts',
     'withdrawal.spec.ts',
     'datahelp.spec.ts',
+    'integration.spec.ts',
   ],
   reporter: process.env.BODYGUARD_TEST_RECORDS_REPORT
     ? [['list'], ['json', { outputFile: process.env.BODYGUARD_TEST_RECORDS_REPORT }]]
