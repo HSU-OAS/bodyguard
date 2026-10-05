@@ -5,6 +5,8 @@ test('L08 actual RAF loop start-pause-resume-close with synthetic resources, no 
   page,
 }, info) => {
   await page.goto('/dev/select')
+  // FR-U-04: probing during the auth checking/navigation window is not a ready-page test.
+  await expect(page.getByRole('heading', { name: '원하는 동작을 골라보세요' })).toBeVisible()
   const result = await page.evaluate(async () => {
     const path = '/e2e/fixtures/observationLoopProbe.ts'
     const module = (await import(path)) as typeof import('./fixtures/observationLoopProbe')

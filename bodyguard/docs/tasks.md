@@ -1,5 +1,9 @@
 # Bodyguard — Tasks
 
+최신: [S4.9 인증 세션 기록 컨텍스트](stories/coaching-record-capture.md)를 구현했다. 실제 Chrome/API/SQL에서 원래 계정 me/CSRF/me 대조·본인 기록 저장과 캡처 중 계정 변경/old proof403/abort 경계를 확인했다. [화면·실패 원본·실제/모의 구분](review/coaching-record-capture/README.md). 기존 RAF 인증 준비 대기를 보완해 공개 회귀8건도 통과, frontend475/API291·정적/production capture0·로컬 리뷰 통과/PR 게이트 진행이다. 실제 AuthProvider hook/최초 ready UTC/session·classifier/아바타/실측·Draft36 SDK P2·참여자/외부/운영/Q32/전체1~6단계는 미완료다. 다음은 earliest-ready clock pair/result 연결이며 화이트/블루 웹·같은 아바타 부위 새 제작0을 유지한다. 아래는 시점별 기록이다.
+
+최신: [PR38](https://github.com/HSU-OAS/bodyguard/pull/38) source92a98ec6는 scoped 검증·review 보완·latest diff/HEAD/CLEAN·체크 없음 후 merge54227451로 main에 포함됐고 원본 브랜치를 보존했다. 최신 main의 새 codex/coaching-record-capture에서 [S4.9 인증 세션 기록 컨텍스트 확보](stories/coaching-record-capture.md)를 시작한다. guest/다른 계정·늦은 응답을 시작 권위로 쓰지 않고 원래 ready authority와 서버 /me/CSRF를 대조한다. 최초 ready UTC/session 연결은 후속 Story다. 화이트/블루 웹·단계2 이월·Draft36 SDK P2·Q32/참여자/외부/운영/전체1~6단계 미완료는 유지한다. 아래는 시점별 기록이다.
+
 최신: [실제 결과→본인 기록 계약·adapter](stories/coaching-result-record.md)를 구현하고 main의 session+합성 관찰→기존8필드→실제 API/격리 SQL→production Chrome 본인 기록 상세를 연결했다. 부분 수행 skip/일시정지의 수행 시간을 보존하고, 다른 쿠키의 과거 proof403·응답 단절 재시도 한 건·late owner 폐기 경계를 확인했다. [실제 화면·실패/리뷰·미완료 경계](review/coaching-result-record/README.md). 전체459 frontend/291 API·Chrome5+공개7/합성RAF1·정적/build/production private producer0 통과/조건부 PR 게이트 진행이다. 실제 owner/UTC capture·classifier/아바타/실측·Draft36 SDK 개인정보 P2·참여자/외부/운영·부가 기능/전체1~6단계는 미완료다. 웹 화이트/블루 유지·같은 아바타 부위 새 제작0·독립 개발 계속이다. 아래는 시점별 기록이다.
 
 직전 [PR #37](https://github.com/HSU-OAS/bodyguard/pull/37) source4ca8017e는 실제 scoped 검증·latest main/diff/CLEAN·체크 없음·미해결scope P1/P2 없음 후 merge6d7e78fd로 main에 포함되고 source 브랜치를 보존했다.
