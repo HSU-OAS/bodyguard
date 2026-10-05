@@ -72,6 +72,14 @@ export type LiveOut = {
   status: 'alive'
 }
 
+export type NotificationPreferences = {
+  posture_enabled: boolean
+  posture_minutes: number
+  sitting_enabled: boolean
+  sitting_minutes: number
+  sound_enabled: boolean
+}
+
 export type ReadyOut = {
   status: 'ready'
 }
@@ -581,6 +589,58 @@ export type DetailApiV1RecordsStretchRecordIdGetResponses = {
 
 export type DetailApiV1RecordsStretchRecordIdGetResponse =
   DetailApiV1RecordsStretchRecordIdGetResponses[keyof DetailApiV1RecordsStretchRecordIdGetResponses]
+
+export type ReadNotificationsApiV1SettingsNotificationsGetData = {
+  body?: never
+  path?: never
+  query?: never
+  url: '/api/v1/settings/notifications'
+}
+
+export type ReadNotificationsApiV1SettingsNotificationsGetErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type ReadNotificationsApiV1SettingsNotificationsGetError =
+  ReadNotificationsApiV1SettingsNotificationsGetErrors[keyof ReadNotificationsApiV1SettingsNotificationsGetErrors]
+
+export type ReadNotificationsApiV1SettingsNotificationsGetResponses = {
+  200: NotificationPreferences
+}
+
+export type ReadNotificationsApiV1SettingsNotificationsGetResponse =
+  ReadNotificationsApiV1SettingsNotificationsGetResponses[keyof ReadNotificationsApiV1SettingsNotificationsGetResponses]
+
+export type SaveNotificationsApiV1SettingsNotificationsPostData = {
+  body: NotificationPreferences
+  path?: never
+  query?: never
+  url: '/api/v1/settings/notifications'
+}
+
+export type SaveNotificationsApiV1SettingsNotificationsPostErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type SaveNotificationsApiV1SettingsNotificationsPostError =
+  SaveNotificationsApiV1SettingsNotificationsPostErrors[keyof SaveNotificationsApiV1SettingsNotificationsPostErrors]
+
+export type SaveNotificationsApiV1SettingsNotificationsPostResponses = {
+  200: NotificationPreferences
+}
+
+export type SaveNotificationsApiV1SettingsNotificationsPostResponse =
+  SaveNotificationsApiV1SettingsNotificationsPostResponses[keyof SaveNotificationsApiV1SettingsNotificationsPostResponses]
 
 export type StartApiV1MeDeleteStartPostData = {
   body: WithdrawalStartWritable

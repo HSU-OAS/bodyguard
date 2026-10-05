@@ -1,6 +1,7 @@
 """FR-U-02/03, NFR-08: PostgreSQL constraints and durable security state only."""
 
 from sqlalchemy import (
+    Boolean,
     CheckConstraint,
     Column,
     DateTime,
@@ -14,6 +15,18 @@ from sqlalchemy import (
 )
 
 metadata = MetaData()
+notification_preferences = Table(
+    "notification_preferences",
+    metadata,
+    Column("user_id", String(36), ForeignKey("users.id", ondelete="CASCADE"), primary_key=True),
+    Column("posture_enabled", Boolean, nullable=False, server_default="true"),
+    Column("posture_minutes", Integer, nullable=False, server_default="5"),
+    Column("sitting_enabled", Boolean, nullable=False, server_default="true"),
+    Column("sitting_minutes", Integer, nullable=False, server_default="50"),
+    Column("sound_enabled", Boolean, nullable=False, server_default="false"),
+    CheckConstraint("posture_minutes BETWEEN 1 AND 1440", name="notification_posture_minutes"),
+    CheckConstraint("sitting_minutes BETWEEN 1 AND 1440", name="notification_sitting_minutes"),
+)
 stretch_records = Table(
     "stretch_records",
     metadata,

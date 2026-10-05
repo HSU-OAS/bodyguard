@@ -20,7 +20,7 @@ from sqlalchemy import URL, Engine, create_engine, delete, insert, select, text,
 from sqlalchemy.exc import IntegrityError
 
 from app.config import Settings
-from app.db import metadata, stretch_records, users
+from app.db import metadata, notification_preferences, stretch_records, users
 from app.main import create_app
 from app.security import passwords
 
@@ -462,6 +462,16 @@ def run_isolated_proof(*, _interrupt_before_restore: bool = False) -> dict[str, 
                         )
                     )
                 connection.execute(insert(stretch_records), records)
+                connection.execute(
+                    insert(notification_preferences).values(
+                        user_id=owner,
+                        posture_enabled=False,
+                        posture_minutes=15,
+                        sitting_enabled=True,
+                        sitting_minutes=90,
+                        sound_enabled=False,
+                    )
+                )
                 result["revision"] = connection.scalar(
                     text("SELECT version_num FROM alembic_version")
                 )
@@ -549,6 +559,16 @@ def run_isolated_proof(*, _interrupt_before_restore: bool = False) -> dict[str, 
             )
             result["restored_counts"] = _counts(restored)
             result["record_contents_match"] = _fingerprint(restored) == snapshot_fingerprint
+            with restored.connect() as connection:
+                row = connection.execute(select(notification_preferences)).mappings().one()
+                result["notification_preferences_restored"] = dict(row) == {
+                    "user_id": owner,
+                    "posture_enabled": False,
+                    "posture_minutes": 15,
+                    "sitting_enabled": True,
+                    "sitting_minutes": 90,
+                    "sound_enabled": False,
+                }
             (root / "restored-schema.json").write_text(json.dumps(_schema(restored)))
             (root / "restored-schema.json").chmod(0o600)
             result["database_constraints_preserved"] = (
@@ -611,9 +631,10 @@ def run_isolated_proof(*, _interrupt_before_restore: bool = False) -> dict[str, 
             )
             result["proof_completed"] = all(
                 (
-                    result["revision"] == "0005_account_withdrawal",
+                    result["revision"] == "0006_notification_preferences",
                     result["restored_counts"] == result["source_counts"],
                     result["record_contents_match"],
+                    result["notification_preferences_restored"],
                     result["database_constraints_preserved"],
                     result["ready_status"] == 200,
                     result["login_status"] == 200,
