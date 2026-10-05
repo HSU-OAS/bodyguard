@@ -1,6 +1,6 @@
 # S4.5 — 본인 계정 탈퇴 API
 
-API 구현·필수 로컬 검증 완료 / PR 게이트 진행 · 시작 main2944e52 → PR #23/main143090b → PR #24/main7b95cfc로 fast-forward · FR-U-05 / FR-U-04 / NFR-08
+API 구현·필수 로컬 검증 완료 / PR #25 main 병합(merge20dcefc) · 시작 main2944e52 → PR #23/main143090b → PR #24/main7b95cfc로 fast-forward · FR-U-05 / FR-U-04 / NFR-08
 
 ## 범위와 의존성
 
@@ -76,3 +76,7 @@ PR #24 병합 뒤 main7b95cfc에서도 같은3건은 실제404로 실패했다(0
 작성자의 범위별 리뷰에서 인증/소유권·원자성·실제 경합·새 migration 자료 보존과 인덱스를 점검하고 이 Story 범위의 미해결P1/P2는 없다. 독립 리뷰/의료 전문가 승인·실제 공급자·운영 DB·HTTPS 배포 완료를 의미하지 않는다. 다음은 최신 main의 새 브랜치에서 **S4.6 계정·탈퇴 웹**을 같은 화이트·블루 디자인으로 구현하며, 취소/오류/불확실 결과·기존 세션 이탈까지 실제 Chrome으로 검증한다. 전체4단계·1~6단계·출시 후보판은 미완료다.
 
 staged diff 검사에서 원본 실패 traceback의 줄 끝 공백이 검출됐다. 읽기용 XML만 줄 끝 공백 정규화하고 원본 전체 바이트는 같은 이름의 .xml.original.gz로 보존했다. 복원 일치·원본 SHA-256과 실패 이력을 증거 README에 기록했다. 기존 아바타 자료나 기존 검증 실패를 폐기하지 않았으며 제품 기준/결과 수는 변경하지 않았다.
+
+## 병합 확인과 후속 웹
+
+PR #25는 CEO 사전 승인 조건의 필수 검증·최신diff/HEAD/main·CLEAN/MERGEABLE·체크 없음·범위 내 미해결P1/P2 없음 확인 뒤 merge commit20dcefce5fda9f51fadd524f5adc696c5db551a0으로 병합됐다. 소스81d2d6b의 main 포함과 원격 브랜치 보존을 실제 확인했다. 다음 최신 main에서 [S4.6 계정·탈퇴 웹](stage4-account-withdrawal-web.md)을 진행한다. 실제 SMTP/운영/전체 단계 완료를 의미하지 않는다.

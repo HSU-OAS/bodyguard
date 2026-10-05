@@ -1,6 +1,12 @@
 # BODYGUARD 계정·기록 API
 
-S2.1 + S2.6a1/b1, FR-U-01~05·NFR-08. 이메일 확인/구글 계정, 서버 쿠키·CSRF, 본인 조회·로그아웃·비밀번호 복구와 아래 본인 수행 기록 API다. [복구 웹 화면](../docs/stories/stage2-password-recovery-web.md)은 PR #11 병합. [구글 API·로컬 보안 시험](../docs/stories/stage2-google-auth-api.md)은 실제 공급자 연결과 구분한다. 실제 Google/Gmail·코칭 기록 생산·계정 탈퇴·운영 배포는 미완료다.
+S2.1 + S2.6a1/b1, FR-U-01~05·NFR-08. 이메일 확인/구글 계정, 서버 쿠키·CSRF, 본인 조회·로그아웃·비밀번호 복구와 아래 본인 수행 기록 API다. [복구 웹 화면](../docs/stories/stage2-password-recovery-web.md)은 PR #11 병합. [구글 API·로컬 보안 시험](../docs/stories/stage2-google-auth-api.md)은 실제 공급자 연결과 구분한다. 본인 탈퇴 API는 PR #25 병합됐고 [계정·탈퇴 웹](../docs/stories/stage4-account-withdrawal-web.md)은 별도로 검증한다. 실제 Google/Gmail·코칭 기록 생산·운영 적용/배포는 미완료다.
+
+## 본인 탈퇴 — S4.5/6
+
+`POST /api/v1/me/delete/start`는 엄격한 빈 body로 현재 검증된 이메일에 전용 코드를 보낸다(202/43자 challenge). `POST /api/v1/me/delete/confirm`은 challenge·6ASCII 코드·`confirmation: delete-my-account`를 검사하고 본인 계정/현재 구현된 수행 기록·모든 세션 등을 한 transaction에서 삭제한다. 실제 commit 뒤204/쿠키 제거다. 본인 재확인 실패·잠금 충돌/DB 실패는 부분 삭제하지 않는다. 10분·5회 오답·기존 메일 요청 제한을 유지하며 새 요청은 이전 확인을 대체한다. [전체 API 명세·SQL 경쟁/rollback 증거](../docs/stories/stage4-account-withdrawal-api.md).
+
+웹 하네스 `uv run python -m tests.run_browser withdrawal`은 소유한 합성 PostgreSQL/계정·기록과 실제 production Chrome을 쓰고, 메일/10분 경과만 비공개 시험 IPC로 재현한다. 실제 SMTP나 실제 기다린10분으로 표시하지 않는다. 운영 DB의0005 migration·실제 사용자 탈퇴·백업 보관/복구·법무 정책은 별도 승인/최종 게이트이며 이 로컬 구현만으로 전체 데이터 관리가 완성된 것은 아니다.
 
 ## 스트레칭 수행 요약 — S4.1
 

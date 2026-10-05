@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+현재 S4.6 [계정 관리·탈퇴 웹](stories/stage4-account-withdrawal-web.md)의 로컬 구현·검증을 마쳤고 PR 게이트를 진행한다. 화이트·블루 내 계정→수행 기록 관리/로그아웃→별도 본인 확인 탈퇴를 실제 production Chrome/API/SQL로 연결했다. 취소·오답·만료의 보존,204 뒤 기존 세션/열린 다른 탭 이탈과 타인 보존, 응답 단절의 완료 추정/자동 재삭제0을 확인했다. [실제 화면·실패와 제한](review/stage4-account-web/README.md). 직전 API PR #25는 merge20dcefc로 main 병합되고 브랜치가 보존됐다. 다음 독립 Story는 카메라·데이터 안내/도움말 웹이며 사업·법무 정책·실제 공급자/운영·2단계 이월·코칭 기록 생산·부가 기능·전체4단계/1~6단계/출시는 미완료다. 아래는 각 시점의 기록이다.
+
 현재 S4.5 [본인 계정 탈퇴 API](stories/stage4-account-withdrawal-api.md): 전용 재확인·명시 동의·본인만 transaction 삭제/실패 복구를 구현했다. 격리 실제 SQL의 전체242건·DOM279건·타입 생성 결정성·production 빌드와 정적 검사가 통과했고 실패 원본은 [증거](review/stage4-account-withdrawal/README.md)에 보존했다. 본인 모든 세션·가입 확인 NOWAIT와2초 한정 대기로 다른 탭/기록/복구/cleanup 충돌은 삭제0·명시 재시도로 처리한다. 범위 내 미해결P1/P2 없이 PR 게이트를 진행한다. 다음은 최신 main의 새 브랜치에서 **S4.6 계정·탈퇴 웹**이며 PR #24의 화이트·블루 디자인을 유지한다. 실제 탈퇴 Chrome/운영 적용·전체4단계·1~6단계 완료로 공개하지 않는다.
 
 2026-10-05 CEO 디자인 결정: BODYGUARD는 **웹**이며 화이트·블루의 전문적인 의학 계열 인상으로 통일한다. [공통 디자인 계약](web-design.md), [독립 Story](stories/stage4-medical-web-design.md), [실제 화면](review/medical-web-design/README.md). 공개·계정·시작·탐색·기록에 적용했고 실제 가입→시작→탐색→빈 기록과 기록 조회/상세/삭제를 production Chrome에서 확인했다. 좁은 창·키보드·대비·동작 감소를 점검하고 준비 전 클릭 경합 하네스를 수정해 전체 DOM도 통과했다. PR 게이트를 진행한다. 아바타 이월·실측·진짜 코칭 연결은 완료로 세지 않는다. 기록 삭제 웹 PR #23은 main143090b에 merge commit 병합되고 소스 브랜치는 보존했다. 다음 독립 제품 Story는 본인 계정 탈퇴 API(S4.5)이며 계정 삭제의 초기 하네스는 실제404 실패 상태다. 디자인 PR 이후 이어간다.
