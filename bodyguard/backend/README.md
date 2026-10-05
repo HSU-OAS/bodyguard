@@ -4,7 +4,7 @@ S2.1 + S2.6a1/b1, FR-U-01~05·NFR-08. 이메일 확인/구글 계정, 서버 쿠
 
 ## 서버 점검 — S5.1
 
-인증 없는 `GET /api/v1/health/live`는200 `{status: alive}`이며 DB를 사용하지 않는다. `GET /api/v1/health/ready`는 PostgreSQL18 primary·현재0005 revision·필수 테이블/열·API 역할의 SELECT/INSERT/UPDATE/DELETE 권한을 읽기만 하여 확인하고200 `{status: ready}` 또는503 `{status: unavailable}`만 반환한다. 별도 DB 연결이며 인증 pool·쿠키·세션 활동·cleanup·회원/기록 행 조회·쓰기·메일·자동 migration은 없다. 기존 no-store/no-referrer를 적용하고 SQL/DB 주소/오류 원문을 앱 로그에 내보내지 않는다.
+인증 없는 `GET /api/v1/health/live`는200 `{status: alive}`이며 DB를 사용하지 않는다. `GET /api/v1/health/ready`는 PostgreSQL18 primary·현재0007 revision·필수 테이블/열·API 역할의 SELECT/INSERT/UPDATE/DELETE 권한을 읽기만 하여 확인하고200 `{status: ready}` 또는503 `{status: unavailable}`만 반환한다. 별도 DB 연결이며 인증 pool·쿠키·세션 활동·cleanup·회원/기록 행 조회·쓰기·메일·자동 migration은 없다. 기존 no-store/no-referrer를 적용하고 SQL/DB 주소/오류 원문을 앱 로그에 내보내지 않는다.
 
 process별 점검1개·대기열0, 접속 timeout2초(대상별), 전체 작업 취소 deadline3초, SQL1초·잠금250ms·읽기 전용을 접속 때 적용한다. 기존 URL/PGOPTIONS의 search_path 등은 보존하되 이 한계는 뒤에서 강제한다.3초는 무조건 그 시각까지 HTTP 응답한다는 보장이 아니다. native psycopg 취소/정리가 추가로 걸릴 수 있으며 현재 고정3.3.6 소스의 취소/결과 대기는 각각5초 한계다. 무한 대기로 떨어지는 libpq17 미만은 ready503으로 거부한다. 이번 실제 client는 libpq18.6이다. 동시에 점검하면 busy도503이므로 운영 probe는 단일 worker별로 겹치지 않도록 구성/검증해야 한다.
 
@@ -25,6 +25,14 @@ ready200은 **API의 제한된 DB 준비만** 뜻한다. 모든 제약/인덱스
 새 `0004_stretch_records`는 계정 삭제에 연계 삭제되며 기록이 남은 downgrade를 거부한다. 운영 적용·rollback은 별도 승인이다. 실제 기록 화면·코칭 연동·기간 삭제·계정 삭제는 후속 Story이고 이번 API 구현만으로 전체 기록 서비스 완료를 뜻하지 않는다. 실제 검증과 실패/보완 이력은 [S4.1](../docs/stories/stage4-records-api.md)을 따른다.
 
 ## 로컬 실행
+
+### 본인 기준선 — S4.13
+
+`POST /api/v1/baselines`는 ID·client_version·neck/shoulder/trunk의 method/unit/value만 받는다. 어깨는 필수이며 관찰하지 못한 목/상체는 null이다. UUID를 소문자로 통일하고 엄격한 ASCII64 태그·유한 숫자 기술 범위를 검사한다. 태그와 값은 client-reported이며 계산법 채택/정자세·효과 검증이 아니다. 영상·좌표·샘플 목록·계정ID는 받지 않는다.
+
+신규201/동일 재전송200/내용 충돌409. 새 ID로 교체하면 이전 행은 비활성 이력으로 남고, 옛 ID 재전송은 현재 기준선을 바꾸지 않는다. `GET /baselines/active`는 본인 활성 또는 null, `GET /baselines/{id}`는 본인 이력만 조회한다. 타인/없는 ID는 같은404이고 응답에 user_id/email이 없다. 인증/Origin/CSRF·no-store·민감값 없는 고정 오류를 유지한다.
+
+동시 교체는 owner transaction advisory 잠금과 부분 unique로 직렬화한다. reset/FK 대기는 users KEY SHARE 뒤 인증을 다시 확인하고 세션 활동을 갱신한다. 잠금 충돌은2초 timeout 뒤503·전체 rollback이다. 새0007 migration은 계정 탈퇴에 연계 삭제되고, 저장된 기준선이 있는 downgrade는 잠금/검사 후 거부한다. **운영 적용/rollback은 별도 승인**이며 이번 실행은 소유한 격리 테스트 DB뿐이다. 실제 카메라 보정·웹 화면·1분 요약 연결은 후속 구현이다. [명세](../docs/stories/account-baselines-api.md)·[실행 증거/한계](../docs/review/account-baselines/README.md).
 
 ### 기간 삭제 API — S4.3
 

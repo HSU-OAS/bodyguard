@@ -1,0 +1,50 @@
+........................................................................ [ 19%]
+......................................F................................. [ 39%]
+........................................................................ [ 58%]
+........................................................................ [ 78%]
+........................................................................ [ 97%]
+.........                                                                [100%]
+=================================== FAILURES ===================================
+________________ test_b06_db_token_length_bounds_are_structural ________________
+
+harness = <tests.conftest.Harness object at 0x10a1f5320>
+
+    def test_b06_db_token_length_bounds_are_structural(harness: Harness) -> None:
+        h = harness
+        owner = h.account()
+        values = {
+            **_values(BaselineInput.model_validate(payload())),
+            "user_id": owner,
+            "created_at": h.clock.now,
+            "is_active": True,
+        }
+        for field in ("client_version", "shoulder_method", "shoulder_unit"):
+            with pytest.raises(SQLAlchemyError) as error, h.engine.begin() as c:
+                c.execute(insert(baselines).values(**{**values, field: "x" * 65}))
+            assert getattr(error.value.orig, "sqlstate", None) == "22001"
+        with h.engine.begin() as c:
+            c.execute(
+                insert(baselines).values(
+                    **{
+                        **values,
+                        "client_version": "x" * 64,
+                        "shoulder_method": "X" * 64,
+                        "shoulder_unit": "u" * 64,
+                    }
+                )
+            )
+        assert h.client.get(PATH + "/active").json()["client_version"] == "x" * 64
+>       same_id = save(h, {**body, "shoulder": {**body["shoulder"], "value": 3}})
+                             ^^^^
+E       NameError: name 'body' is not defined
+
+tests/test_baselines.py:139: NameError
+=============================== warnings summary ===============================
+tests/test_password_reset.py::test_r01_actual_http_ack_precedes_blocked_delivery
+  /opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/threads.py:26: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    return await loop.run_in_executor(None, func_call)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_baselines.py::test_b06_db_token_length_bounds_are_structural
+1 failed, 368 passed, 1 warning in 108.34s (0:01:48)

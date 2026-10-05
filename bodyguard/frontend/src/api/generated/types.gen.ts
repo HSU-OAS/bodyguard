@@ -10,6 +10,31 @@ export type AuthOut = {
   csrf_token: string
 }
 
+export type BaselineInput = {
+  id: string
+  client_version: string
+  neck: BaselineMetric | null
+  shoulder: BaselineMetric
+  trunk: BaselineMetric | null
+}
+
+export type BaselineMetric = {
+  method: string
+  unit: string
+  value: number
+}
+
+export type BaselineOut = {
+  id: string
+  client_version: string
+  neck: BaselineMetric | null
+  shoulder: BaselineMetric
+  trunk: BaselineMetric | null
+  created_at: string
+  is_active: boolean
+  provenance: 'client-reported'
+}
+
 export type ChallengeInput = {
   challenge_id: string
 }
@@ -641,6 +666,89 @@ export type SaveNotificationsApiV1SettingsNotificationsPostResponses = {
 
 export type SaveNotificationsApiV1SettingsNotificationsPostResponse =
   SaveNotificationsApiV1SettingsNotificationsPostResponses[keyof SaveNotificationsApiV1SettingsNotificationsPostResponses]
+
+export type ActiveApiV1BaselinesActiveGetData = {
+  body?: never
+  path?: never
+  query?: never
+  url: '/api/v1/baselines/active'
+}
+
+export type ActiveApiV1BaselinesActiveGetErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type ActiveApiV1BaselinesActiveGetError =
+  ActiveApiV1BaselinesActiveGetErrors[keyof ActiveApiV1BaselinesActiveGetErrors]
+
+export type ActiveApiV1BaselinesActiveGetResponses = {
+  200: BaselineOut | null
+}
+
+export type ActiveApiV1BaselinesActiveGetResponse =
+  ActiveApiV1BaselinesActiveGetResponses[keyof ActiveApiV1BaselinesActiveGetResponses]
+
+export type DetailApiV1BaselinesBaselineIdGetData = {
+  body?: never
+  path: {
+    baseline_id: string
+  }
+  query?: never
+  url: '/api/v1/baselines/{baseline_id}'
+}
+
+export type DetailApiV1BaselinesBaselineIdGetErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  404: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type DetailApiV1BaselinesBaselineIdGetError =
+  DetailApiV1BaselinesBaselineIdGetErrors[keyof DetailApiV1BaselinesBaselineIdGetErrors]
+
+export type DetailApiV1BaselinesBaselineIdGetResponses = {
+  200: BaselineOut
+}
+
+export type DetailApiV1BaselinesBaselineIdGetResponse =
+  DetailApiV1BaselinesBaselineIdGetResponses[keyof DetailApiV1BaselinesBaselineIdGetResponses]
+
+export type SaveApiV1BaselinesPostData = {
+  body: BaselineInput
+  path?: never
+  query?: never
+  url: '/api/v1/baselines'
+}
+
+export type SaveApiV1BaselinesPostErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  409: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type SaveApiV1BaselinesPostError =
+  SaveApiV1BaselinesPostErrors[keyof SaveApiV1BaselinesPostErrors]
+
+export type SaveApiV1BaselinesPostResponses = {
+  200: BaselineOut
+  201: BaselineOut
+}
+
+export type SaveApiV1BaselinesPostResponse =
+  SaveApiV1BaselinesPostResponses[keyof SaveApiV1BaselinesPostResponses]
 
 export type StartApiV1MeDeleteStartPostData = {
   body: WithdrawalStartWritable

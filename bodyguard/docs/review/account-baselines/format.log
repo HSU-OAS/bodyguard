@@ -1,0 +1,25 @@
+unformatted: File would be reformatted
+   --> tests/test_account_withdrawal.py:376:16
+    |
+375 |     with h.engine.connect() as c:
+    -         assert (
+    -             c.scalar(text("SELECT version_num FROM alembic_version"))
+    -             == "0007_account_baselines"
+    -         )
+376 +         assert c.scalar(text("SELECT version_num FROM alembic_version")) == "0007_account_baselines"
+377 |         assert c.scalar(select(withdrawals.c.user_id)) == owner
+    |
+
+unformatted: File would be reformatted
+   --> tests/test_google_auth.py:589:16
+    |
+588 |     with h.engine.connect() as c:
+    -         assert (
+    -             c.scalar(text("SELECT version_num FROM alembic_version"))
+    -             == "0007_account_baselines"
+    -         )
+589 +         assert c.scalar(text("SELECT version_num FROM alembic_version")) == "0007_account_baselines"
+590 |     assert client.get("/api/v1/me").status_code == 200 and count(h, users) == 1
+    |
+
+2 files would be reformatted, 37 files already formatted

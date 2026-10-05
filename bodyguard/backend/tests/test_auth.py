@@ -821,11 +821,12 @@ def test_h21_migrated_constraints_and_restart(harness: Harness) -> None:
         "stretch_records",
         "account_withdrawals",
         "notification_preferences",
+        "baselines",
     }
     with h.engine.connect() as connection:
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0006_notification_preferences"
+            == "0007_account_baselines"
         )
     user_id = h.account()
     cookie = h.client.cookies.get(h.settings.cookie_name)

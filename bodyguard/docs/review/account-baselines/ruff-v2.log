@@ -1,0 +1,70 @@
+F841 Local variable `original` is assigned to but never used
+  --> tests/test_baselines.py:74:5
+   |
+72 |     h.account()
+73 |     body = payload()
+74 |     original = save(h, body)
+   |     ^^^^^^^^
+75 |     other_id = payload()["id"]
+76 |     original_cookie = h.client.cookies.get(h.settings.cookie_name)
+   |
+help: Remove assignment to unused variable `original`
+
+F841 Local variable `original_cookie` is assigned to but never used
+  --> tests/test_baselines.py:76:5
+   |
+74 |     original = save(h, body)
+75 |     other_id = payload()["id"]
+76 |     original_cookie = h.client.cookies.get(h.settings.cookie_name)
+   |     ^^^^^^^^^^^^^^^
+77 |     assert h.client.post("/api/v1/auth/logout", headers=h.csrf()).status_code == 204
+78 |     h.account("other@example.com")
+   |
+help: Remove assignment to unused variable `original_cookie`
+
+F821 Undefined name `body`
+   --> tests/test_baselines.py:139:26
+    |
+137 |         )
+138 |     assert h.client.get(PATH + "/active").json()["client_version"] == "x" * 64
+139 |     same_id = save(h, {**body, "shoulder": {**body["shoulder"], "value": 3}})
+    |                          ^^^^
+140 |     assert same_id["shoulder"] != original["shoulder"]
+141 |     # A revoked old cookie cannot regain any owner's baseline.
+    |
+
+F821 Undefined name `body`
+   --> tests/test_baselines.py:139:47
+    |
+137 |         )
+138 |     assert h.client.get(PATH + "/active").json()["client_version"] == "x" * 64
+139 |     same_id = save(h, {**body, "shoulder": {**body["shoulder"], "value": 3}})
+    |                                               ^^^^
+140 |     assert same_id["shoulder"] != original["shoulder"]
+141 |     # A revoked old cookie cannot regain any owner's baseline.
+    |
+
+F821 Undefined name `original`
+   --> tests/test_baselines.py:140:35
+    |
+138 |     assert h.client.get(PATH + "/active").json()["client_version"] == "x" * 64
+139 |     same_id = save(h, {**body, "shoulder": {**body["shoulder"], "value": 3}})
+140 |     assert same_id["shoulder"] != original["shoulder"]
+    |                                   ^^^^^^^^
+141 |     # A revoked old cookie cannot regain any owner's baseline.
+142 |     with h.new_client() as stale:
+    |
+
+F821 Undefined name `original_cookie`
+   --> tests/test_baselines.py:144:37
+    |
+142 |     with h.new_client() as stale:
+143 |         stale.cookies.set(
+144 |             h.settings.cookie_name, original_cookie, domain="localhost.local", path="/"
+    |                                     ^^^^^^^^^^^^^^^
+145 |         )
+146 |         assert stale.get(PATH + "/active").status_code == 401
+    |
+
+Found 6 errors.
+No fixes available (2 hidden fixes can be enabled with the `--unsafe-fixes` option).
