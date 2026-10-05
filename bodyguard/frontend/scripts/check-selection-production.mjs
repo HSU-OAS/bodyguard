@@ -42,6 +42,9 @@ for (const file of files) {
     'Unable to capture coaching account',
     'PRIVATE_OWNER_COORDINATES_ACCOUNT',
     'prepareOwnerProbe',
+    'Invalid recorded coaching session',
+    'PRIVATE_RECORDED_CLOCK_COORDINATES',
+    'prepareRecordedProbe',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -56,5 +59,6 @@ console.log(
     unconnected_observation_loop_strings: 0,
     unconnected_result_record_producer_strings: 0,
     unconnected_record_owner_capture_strings: 0,
+    unconnected_recorded_session_strings: 0,
   }),
 )

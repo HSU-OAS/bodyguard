@@ -1,6 +1,6 @@
 # S4.9 — 인증 세션의 기록 소유 컨텍스트 확보
 
-review · 기준 main54227451e761f909dd950f821de3d54329e4b2f5 · codex/coaching-record-capture · 2026-10-06
+completed (private Story 범위만) · 기준 main54227451e761f909dd950f821de3d54329e4b2f5 · codex/coaching-record-capture · 2026-10-06
 
 ## 범위/선행
 
@@ -54,6 +54,10 @@ engineering:code-review의 보안/경합/성능/정확성 재검토: 첫 ready I
 source10개/실행 증거25개 raw·공개 SHA를 보존/수집하고 불변 재실행으로 확인한다. README의 실제/모의/미실행과 source/실패를 보존하며 운영 변경0·단계 완료0. 다음 응집된 Story는 최초 ready clock pair와 session/result/인증 caller 연결이다. 남은 SDK P2/이월/실측·Q32/참여자/외부/운영/전체1~6 게이트를 낮추지 않는다.
 
 O01의 비-ready6개 상태(checking/guest/offline/logging-out/logout-error/withdrawing)는 실제 private bundle을 Node에서 각 상태로 호출·assert해 전부 capture 실패·context0/GET/POST0을 추가 확인했다. 합성 authority runtime 경계이지 실제 계정 상태6건/브라우저6건으로 합산하지 않는다. parent manifest25개를 보존하고 별도 boundary-runtime.json/artifacts-extra.json SHA로 수집했다(전체 증거26).
+
+### 실제 원격 결과
+
+PR39 https://github.com/HSU-OAS/bodyguard/pull/39 는 scoped 검증/리뷰·최신 diff·MERGEABLE/CLEAN·exact d0f2dfc7a7ae702d293d29785c4bc9a876e07906·체크 없음 후 2026-10-05T15:53:13Z merge faa5061daf281ca2061d0efcb750df91633f080b로 병합됐다. 실제 부모5422745/d0f2df·main 포함·원격 소스 브랜치 보존·clean을 읽기 전용으로 확인했다. 외부 리뷰0이며 작성자 범위 리뷰다. owner capture private Story 완료이지 AuthProvider caller/UTC/코칭/단계4·1~6 완료가 아니다. 검증 원본/manifest는 변경하지 않는다. 다음 main의 S4.10에서 최초 ready clock pair/result 연결을 진행한다.
 
 ## File List
 

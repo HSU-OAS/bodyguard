@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="26" failures="1" errors="0" time="0.176418375">
+    <testsuite name="src/coaching/recordedSession.test.ts" timestamp="2026-10-05T16:17:57.776Z" hostname="local-test-host" tests="26" failures="1" errors="0" skipped="0" time="0.176418375">
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A01 construction/idle/never-ready termination never samples or posts" time="0.039483459">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A01 pending readiness samples the actual ready pair, not permission request or save time" time="0.058966792">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A02 completion uses actual engine summary and exact eight fields; never auto posts" time="0.002846292">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A02 pause/resume and UTC jumps preserve first anchor and verified time" time="0.001789416">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A02 partial skip preserves original engine steps and interrupted record counts" time="0.001141584">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A02 wholly skipped has zero observed counts and exact elapsed" time="0.000811583">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A03 failed save retries only explicitly with identical captured payload" time="0.0011915">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A03 pending network does not block cleanup; dispose rejects late local success" time="0.000916333">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A03 same-account authority replacement closes resources and drops anchor/writer" time="0.000717375">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A03 abort during readiness cannot capture late anchor or retain resources" time="0.052848291">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A01 missing authenticated never creates a record or resources" time="0.001257292">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A01 missing motionValidated never creates a record or resources" time="0.000332834">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A01 missing referenceAvatarReady never creates a record or resources" time="0.000294583">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A01 missing userAvatarReady never creates a record or resources" time="0.000307209">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A03 noncanonical clock 2026-02-30T00:00:00.000Z fails before readiness and no POST" time="0.000367583">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A03 noncanonical clock 2026-10-05T24:00:00.000Z fails before readiness and no POST" time="0.000271542">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A03 noncanonical clock 2026-10-05T00:00:00Z fails before readiness and no POST" time="0.000278292">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A03 noncanonical clock 2026-10-05T00:00:00.000+09:00 fails before readiness and no POST" time="0.000344209">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A03 clock/accessor exception returns fixed failure without raw provider values" time="0.000511625">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A03 backwards monotonic time cannot increase elapsed or upgrade clock-error to complete" time="0.000747792">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A03 UUID/config getters are required and fixed; never fallback to generated IDs" time="0.001064334">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A03 original observer failure still terminates actual session; no false completion" time="0.000402333">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A03 configuration plan/port accessors expose only fixed initialization failure" time="0.000355375">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A03 a captured context cannot own two recorded sessions or overwrite the first result" time="0.000653875">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A03 repeated dispose awaits the same pending cleanup, not a premature success" time="0.000468">
+        </testcase>
+        <testcase classname="src/coaching/recordedSession.test.ts" name="A03 previously bound context writer is not reused for a different coaching result" time="0.006100167">
+            <failure message="expected [Function] to throw an error" type="AssertionError">
+AssertionError: expected [Function] to throw an error
+
+- Expected:
+null
+
++ Received:
+undefined
+
+ ❯ src/coaching/recordedSession.test.ts:463:50
+            </failure>
+        </testcase>
+    </testsuite>
+</testsuites>

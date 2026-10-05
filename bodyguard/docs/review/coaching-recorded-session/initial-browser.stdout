@@ -1,0 +1,55 @@
+[WebServer] (node:6003) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ node scripts/prepare-assets.mjs && tsc --noEmit && vite build
+[WebServer] (node:6132) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:6169) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:6182) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:6193) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 e2e/recordedsession.spec.ts:109:1 › A04 delayed ready pause/resume saves actual session summary to own record/detail (2.9s)
+(node:6241) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 e2e/recordedsession.spec.ts:156:1 › A04 same-account authority replaced during preparation: late readiness cannot save (1.6s)
+  ✓  3 e2e/recordedsession.spec.ts:184:1 › A04 lost accepted response retries identical result and actual SQL contains one row (1.0s)
+  ✓  4 e2e/recordedsession.spec.ts:218:1 › A04 missed account notification keeps original proof; new cookie receives 403/no record (3.0s)
+
+
+  1) e2e/recordedsession.spec.ts:109:1 › A04 delayed ready pause/resume saves actual session summary to own record/detail
+
+    Error: expect(received).toMatchObject(expected)
+
+    - Expected  - 2
+    + Received  + 2
+
+      Object {
+    -   "ended_at": "2026-10-05T16:17:39.684Z",
+    +   "ended_at": "2026-10-05T16:17:39.684000Z",
+        "id": "6a46e22d-506d-4917-9be6-61b65f099e3c",
+        "observed_ms": 40,
+        "outcome": "interrupted",
+        "provenance": "client-reported",
+        "repetitions": 0,
+    -   "started_at": "2026-10-05T16:17:39.384Z",
+    +   "started_at": "2026-10-05T16:17:39.384000Z",
+      }
+
+      139 |   const records = await (await context.request.get('/api/v1/records/stretch')).json()
+      140 |   expect(records.items).toHaveLength(1)
+    > 141 |   expect(records.items[0]).toMatchObject({
+          |                            ^
+      142 |     id: data.recordId,
+      143 |     started_at: new Date(Date.parse(data.utc) + 500).toISOString(),
+      144 |     ended_at: new Date(Date.parse(data.utc) + 800).toISOString(),
+        at [workspace]/bodyguard/frontend/e2e/recordedsession.spec.ts:141:28
+
+    Error Context: test-results/recordedsession-20261005T161657542474Z/recordedsession-A04-delaye-a6771-ummary-to-own-record-detail/error-context.md
+
+  1 failed
+    e2e/recordedsession.spec.ts:109:1 › A04 delayed ready pause/resume saves actual session summary to own record/detail
+  3 passed (49.5s)
