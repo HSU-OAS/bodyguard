@@ -1,6 +1,6 @@
 # S4.10 — 최초 준비 완료 시각과 본인 수행 기록 연결
 
-review · 기준 main faa5061daf281ca2061d0efcb750df91633f080b · codex/coaching-recorded-session · 2026-10-06
+completed (private Story 범위만) · 기준 main faa5061daf281ca2061d0efcb750df91633f080b · codex/coaching-recorded-session · 2026-10-06
 
 ## 범위/선행
 
@@ -52,6 +52,10 @@ BMAD dev-story 기본 workflow를 사용한다. 기존 resolver/config/custom/pr
 실제 source8/증거33개 SHA와 수집기 불변 재실행을 확인했다. README/Story는 실제/모의/미실행·실패를 구분한다. 반환 DTO 기존8필드의 started_at/ended_at은 허용된 요약이고 별도 UTC pair/계정/좌표/원시 오류는 저장하지 않는다. owner 변경은 caller sync/dispose 또는 다음 action/ready gate에서 관찰되며 실제 AuthProvider hook/즉시 페이지 수명 통합은 후속 Story다. 공개 source/route·API/schema·CI/의존성/CSP/SDK/운영 변경0, scope 미해결 P1/P2 없음. 단계2/4·전체1~6 완료가 아니다.
 
 다음 독립 Story는 실제 AuthProvider 상태 객체·페이지 수명에 준비/capture/recorded session을 연결한다. Draft36 SDK 개인정보 P2·실제 camera/classifier/두 아바타·외형/실측·참여자/외부/운영/법무/Q32/전체 완료 기준은 미완료로 유지한다. 화이트·블루 웹·아바타 같은 부위 새 제작0이다.
+
+### 실제 원격 결과
+
+PR40 https://github.com/HSU-OAS/bodyguard/pull/40 는 작성자 scoped 리뷰/보완·필수 검증·최신 main faa5061/clean·MERGEABLE/CLEAN·체크 없음/외부 리뷰0·exact553b5b2a1a99a07634c83771b2e44574e0b9f5ab 후 2026-10-05T16:41:52Z merge43b13f37efa5ed58a8d5898af213fb66ea374a0e로 병합됐다. 실제 두 부모faa5061/553b5b2·main 포함·소스 브랜치 보존을 확인했다. 원격 diff CLI 필터 오류/인용되지 않은 API URL 글로브 오류는 읽기 실패였으며 재실행했다. raw diff 함수 label 차이만 정규화하고 좌표/본문을 그대로 대조한 source8, exact HEAD Git API의 변경47파일 blob ID 일치를 실제 확인했다. PR40 source/실패/manifest를 바꾸지 않는다. private Story 완료이지 실제 auth hook/SDK/아바타/참여자·단계4/전체1~6 완료가 아니다.
 
 ## File List
 

@@ -1,0 +1,347 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "[workspace]/bodyguard/frontend/node_modules/.pnpm/@playwright+test@1.63.0/node_modules/@playwright/test/cli.js",
+      "test",
+      "authcoaching.spec.ts",
+      "--config",
+      "playwright.account.config.ts",
+      "--output",
+      "test-results/authcoaching-20261005T171501024263Z"
+    ],
+    "configFile": "[workspace]/bodyguard/frontend/playwright.account.config.ts",
+    "rootDir": "[workspace]/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "[workspace]/bodyguard/frontend/test-results/authcoaching-20261005T171501024263Z",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "[workspace]/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "account.spec.ts",
+          "password.spec.ts",
+          "google.spec.ts",
+          "records.spec.ts",
+          "design.spec.ts",
+          "withdrawal.spec.ts",
+          "datahelp.spec.ts",
+          "integration.spec.ts",
+          "security.spec.ts",
+          "resultrecord.spec.ts",
+          "ownercapture.spec.ts",
+          "recordedsession.spec.ts",
+          "authcoaching.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/authcoaching-20261005T171501024263Z/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "pnpm build && vite build --config e2e/fixtures/authCoaching.vite.ts && vite preview --host localhost",
+      "url": "http://localhost:4173",
+      "reuseExistingServer": false,
+      "timeout": 180000
+    }
+  },
+  "suites": [
+    {
+      "title": "authcoaching.spec.ts",
+      "file": "authcoaching.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "H02 actual provider prepares inert; explicit synthetic performance saves to own public record",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 41172,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "[workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts",
+                        "column": 80,
+                        "line": 80
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('heading', { name: '내 몸을 위한 시작', exact: true })\nExpected: visible\nReceived: undefined\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '내 몸을 위한 시작', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '내 몸을 위한 시작', exact: true })\u001b[22m\n\n\n  78 | async function mount(page: Page, delayed = false) {\n  79 |   await page.goto('/start')\n> 80 |   await expect(page.getByRole('heading', { name: '내 몸을 위한 시작', exact: true })).toBeVisible()\n     |                                                                                ^\n  81 |   const options = {\n  82 |     recordId: randomUUID(),\n  83 |     utc: new Date(Date.now() - 2000).toISOString(),\n    at mount ([workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts:80:80)\n    at [workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts:105:16"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T17:15:26.693Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "[workspace]/bodyguard/frontend/test-results/authcoaching-20261005T171501024263Z/authcoaching-H02-actual-pr-46426--saves-to-own-public-record/error-context.md"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8b0ae80cbfc86dc873c9-f96bee2ecc286d630b28",
+          "file": "authcoaching.spec.ts",
+          "line": 100,
+          "column": 1
+        },
+        {
+          "title": "H03 actual same-account refresh revokes old running session; no automatic recreation",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 37657,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "[workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts",
+                        "column": 80,
+                        "line": 80
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '내 몸을 위한 시작', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '내 몸을 위한 시작', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '내 몸을 위한 시작', exact: true })\u001b[22m\n\n\n  78 | async function mount(page: Page, delayed = false) {\n  79 |   await page.goto('/start')\n> 80 |   await expect(page.getByRole('heading', { name: '내 몸을 위한 시작', exact: true })).toBeVisible()\n     |                                                                                ^\n  81 |   const options = {\n  82 |     recordId: randomUUID(),\n  83 |     utc: new Date(Date.now() - 2000).toISOString(),\n    at mount ([workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts:80:80)\n    at [workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts:136:3"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T17:16:38.667Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "[workspace]/bodyguard/frontend/test-results/authcoaching-20261005T171501024263Z/authcoaching-H03-actual-sa-e8b54-ion-no-automatic-recreation/error-context.md"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8b0ae80cbfc86dc873c9-7ab3a0cf56401bb4cd61",
+          "file": "authcoaching.spec.ts",
+          "line": 131,
+          "column": 1
+        },
+        {
+          "title": "H03 failed logout is not permission to keep coaching or save",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 15490,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '내 몸을 위한 시작', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '내 몸을 위한 시작', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '내 몸을 위한 시작', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '내 몸을 위한 시작', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '내 몸을 위한 시작', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '내 몸을 위한 시작', exact: true })\u001b[22m\n\n    at mount ([workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts:80:80)\n    at [workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts:154:3",
+                    "location": {
+                      "file": "[workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts",
+                      "column": 80,
+                      "line": 80
+                    },
+                    "snippet": "  78 | async function mount(page: Page, delayed = false) {\n  79 |   await page.goto('/start')\n> 80 |   await expect(page.getByRole('heading', { name: '내 몸을 위한 시작', exact: true })).toBeVisible()\n     |                                                                                ^\n  81 |   const options = {\n  82 |     recordId: randomUUID(),\n  83 |     utc: new Date(Date.now() - 2000).toISOString(),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "[workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts",
+                        "column": 80,
+                        "line": 80
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '내 몸을 위한 시작', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '내 몸을 위한 시작', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '내 몸을 위한 시작', exact: true })\u001b[22m\n\n\n  78 | async function mount(page: Page, delayed = false) {\n  79 |   await page.goto('/start')\n> 80 |   await expect(page.getByRole('heading', { name: '내 몸을 위한 시작', exact: true })).toBeVisible()\n     |                                                                                ^\n  81 |   const options = {\n  82 |     recordId: randomUUID(),\n  83 |     utc: new Date(Date.now() - 2000).toISOString(),\n    at mount ([workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts:80:80)\n    at [workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts:154:3"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T17:17:26.134Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "[workspace]/bodyguard/frontend/test-results/authcoaching-20261005T171501024263Z/authcoaching-H03-failed-lo-51897-on-to-keep-coaching-or-save/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "[workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts",
+                    "column": 80,
+                    "line": 80
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8b0ae80cbfc86dc873c9-b340fa21c524aa94e1cb",
+          "file": "authcoaching.spec.ts",
+          "line": 152,
+          "column": 1
+        },
+        {
+          "title": "H04 pagehide during synthetic pending permission reclaims late resource; pageshow never starts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "interrupted",
+                  "duration": 11378,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '내 몸을 위한 시작', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '내 몸을 위한 시작', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '내 몸을 위한 시작', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '내 몸을 위한 시작', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '내 몸을 위한 시작', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '내 몸을 위한 시작', exact: true })\u001b[22m\n\n    at mount ([workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts:80:80)\n    at [workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts:177:3",
+                    "location": {
+                      "file": "[workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts",
+                      "column": 80,
+                      "line": 80
+                    },
+                    "snippet": "  78 | async function mount(page: Page, delayed = false) {\n  79 |   await page.goto('/start')\n> 80 |   await expect(page.getByRole('heading', { name: '내 몸을 위한 시작', exact: true })).toBeVisible()\n     |                                                                                ^\n  81 |   const options = {\n  82 |     recordId: randomUUID(),\n  83 |     utc: new Date(Date.now() - 2000).toISOString(),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "[workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts",
+                        "column": 80,
+                        "line": 80
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '내 몸을 위한 시작', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '내 몸을 위한 시작', exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '내 몸을 위한 시작', exact: true })\u001b[22m\n\n\n  78 | async function mount(page: Page, delayed = false) {\n  79 |   await page.goto('/start')\n> 80 |   await expect(page.getByRole('heading', { name: '내 몸을 위한 시작', exact: true })).toBeVisible()\n     |                                                                                ^\n  81 |   const options = {\n  82 |     recordId: randomUUID(),\n  83 |     utc: new Date(Date.now() - 2000).toISOString(),\n    at mount ([workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts:80:80)\n    at [workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts:177:3"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T17:17:46.933Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "[workspace]/bodyguard/frontend/test-results/authcoaching-20261005T171501024263Z/authcoaching-H04-pagehide--acd4b-ource-pageshow-never-starts/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "[workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts",
+                    "column": 80,
+                    "line": 80
+                  }
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "8b0ae80cbfc86dc873c9-2c034101466077444a43",
+          "file": "authcoaching.spec.ts",
+          "line": 172,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-05T17:15:02.814Z",
+    "duration": 180290.292,
+    "expected": 0,
+    "skipped": 1,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

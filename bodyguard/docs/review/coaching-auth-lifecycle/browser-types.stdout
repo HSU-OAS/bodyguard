@@ -1,0 +1,12 @@
+$ tsc --noEmit
+e2e/fixtures/authCoachingProbe.ts(14,7): error TS2322: Type 'null' is not assignable to type 'never'.
+e2e/fixtures/authCoachingProbe.ts(47,7): error TS2322: Type 'Readonly<{ getSnapshot: () => Readonly<{ state: Readonly<{ plan: Readonly<{ motionId: string; version: string; source: "alert" | "direct" | "recommended"; maxFrameGapMs: number; maxFrameAgeMs: number; steps: readonly CoachingStep[]; }>; ... 12 more ...; lastTargetAt: number | null; }>; closed: boolean; failure: EndR...' is not assignable to type 'never'.
+  Type 'null' is not assignable to type 'never'.
+e2e/fixtures/authCoachingProbe.ts(81,26): error TS2339: Property 'start' does not exist on type 'never'.
+e2e/fixtures/authCoachingProbe.ts(94,23): error TS2339: Property 'observe' does not exist on type 'never'.
+e2e/fixtures/authCoachingProbe.ts(95,31): error TS2339: Property 'getSnapshot' does not exist on type 'never'.
+e2e/fixtures/authCoachingProbe.ts(108,26): error TS2339: Property 'save' does not exist on type 'never'.
+e2e/fixtures/authCoachingProbe.ts(109,28): error TS2339: Property 'resume' does not exist on type 'never'.
+e2e/fixtures/authCoachingProbe.ts(125,27): error TS2339: Property 'getSnapshot' does not exist on type 'never'.
+e2e/fixtures/authCoachingProbe.ts(126,26): error TS2339: Property 'getRecordSnapshot' does not exist on type 'never'.
+[ELIFECYCLE] Command failed with exit code 2.

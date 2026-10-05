@@ -1,5 +1,9 @@
 # Bodyguard — Tasks
 
+최신: [S4.11 실제 로그인 권위/페이지 수명 연결](stories/coaching-auth-lifecycle.md)을 구현했다. 실제 AuthProvider committed ready·명시 준비/수행/본인 기록과 계정 변경·로그아웃 실패·이탈 폐기를 연결했고 [작동 화면·실패 원본·미완료 증거](review/coaching-auth-lifecycle/README.md)를 보존했다. 최종 전체523 frontend/291 API·Chrome4/공개8·타입/정적/build/guard·source8/artifact46 검증 후 조건부 PR 게이트 진행이다. 공개 코칭 producer0·classifier/두 아바타/실측·Draft36 SDK 개인정보 P2·Q32/참여자/법무/외부/운영·전체1~6 미완료, 화이트·블루 웹·같은 아바타 부위 새 제작0을 유지한다. 아래는 시점별 기록이다.
+
+최신: [PR40](https://github.com/HSU-OAS/bodyguard/pull/40) source553b5b2는 scoped 검증·리뷰 보완·remote47 blob/diff·latest main/CLEAN·체크 없음 후 merge43b13f3로 main에 포함됐고 브랜치를 보존했다. 최신 main의 codex/coaching-auth-lifecycle에서 [S4.11 실제 로그인 권위/페이지 수명 연결](stories/coaching-auth-lifecycle.md)을 시작했다. 구현 전 계약/최초 하네스 단계이며 공개 코칭/실제 SDK/두 아바타/실측·참여자/외부/운영/Q32·전체1~6 미완료를 유지한다. 화이트·블루 웹·같은 아바타 부위 새 제작0이다. 아래는 시점별 기록이다.
+
 최신: [S4.10 최초 ready 시각·본인 수행 기록 연결](stories/coaching-recorded-session.md)을 구현했다. 실제 session/캡처 context로 준비 대기 제외·pause/resume 최초 anchor 유지·명시 save/동일 retry와 late/authority 폐기를 연결하고 실제 Chrome/API/SQL 본인 기록 상세·응답 단절 한 건·다른 계정403을 확인했다. [화면·실패/모의·미완료 증거](review/coaching-recorded-session/README.md). 최종 전체503 frontend/291 API·정적/build·Chrome4/공개8·production 연결부0·원본/SHA·작성자 리뷰 통과/PR 게이트 진행이다. 실제 AuthProvider hook/SDK/privacy P2·classifier/두 아바타/실측·Q32/참여자/외부/운영/전체1~6단계는 미완료이며 다음은 인증/페이지 수명 연결이다. 화이트·블루 웹·같은 아바타 부위 새 제작0을 유지한다. 아래는 시점별 기록이다.
 
 최신: [PR39](https://github.com/HSU-OAS/bodyguard/pull/39) source d0f2dfc7는 scoped 검증·작성자 리뷰·최신 diff/HEAD/CLEAN·체크 없음 후 merge faa5061로 main에 포함됐고 브랜치를 보존했다. 최신 main의 codex/coaching-recorded-session에서 [S4.10 최초 ready 시각/수행 기록 연결](stories/coaching-recorded-session.md)을 시작한다. 준비 대기를 운동 시작으로 쓰거나 pause/resume 때 시작 시각·계정을 바꾸지 않는다. 실제 auth hook/classifier/아바타/실측·Draft36 SDK P2·참여자/외부/운영/Q32/전체1~6단계는 미완료, 화이트·블루 웹 유지·같은 아바타 부위 새 제작0이다. 아래는 시점별 기록이다.

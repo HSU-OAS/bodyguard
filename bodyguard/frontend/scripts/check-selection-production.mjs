@@ -45,6 +45,8 @@ for (const file of files) {
     'Invalid recorded coaching session',
     'PRIVATE_RECORDED_CLOCK_COORDINATES',
     'prepareRecordedProbe',
+    'mountAuthCoachingProbe',
+    'preparation-error',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -60,5 +62,6 @@ console.log(
     unconnected_result_record_producer_strings: 0,
     unconnected_record_owner_capture_strings: 0,
     unconnected_recorded_session_strings: 0,
+    unconnected_auth_coaching_hook_strings: 0,
   }),
 )

@@ -1,0 +1,31 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: [workspace]/bodyguard/backend
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.15.1
+collected 291 items
+
+tests/test_account_withdrawal.py ...........................             [  9%]
+tests/test_auth.py ..................................................... [ 27%]
+...........                                                              [ 31%]
+tests/test_backup_restore_proof.py .....                                 [ 32%]
+tests/test_database_ownership.py .                                       [ 33%]
+tests/test_google_auth.py .............................................. [ 49%]
+........................                                                 [ 57%]
+tests/test_license_inventory.py .........................                [ 65%]
+tests/test_password_reset.py ..........................                  [ 74%]
+tests/test_readiness.py ...................                              [ 81%]
+tests/test_record_deletion.py .........................                  [ 90%]
+tests/test_records.py ...............                                    [ 95%]
+tests/test_records_integrity.py ....                                     [ 96%]
+tests/test_withdrawal_races.py ..........                                [100%]
+
+=============================== warnings summary ===============================
+tests/test_password_reset.py::test_r01_actual_http_ack_precedes_blocked_delivery
+  /opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/threads.py:26: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    return await loop.run_in_executor(None, func_call)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: [owned-auth-scratch]/accepted-backend.xml -
+================== 291 passed, 1 warning in 300.70s (0:05:00) ==================
