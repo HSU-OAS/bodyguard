@@ -1,0 +1,233 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard/frontend/node_modules/.pnpm/@playwright+test@1.63.0/node_modules/@playwright/test/cli.js",
+      "test",
+      "datahelp.spec.ts",
+      "--config",
+      "playwright.account.config.ts",
+      "--output",
+      "test-results/datahelp-20261005T074212414468Z"
+    ],
+    "configFile": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard/frontend/playwright.account.config.ts",
+    "rootDir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard/frontend/test-results/datahelp-20261005T074212414468Z",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "account.spec.ts",
+          "password.spec.ts",
+          "google.spec.ts",
+          "records.spec.ts",
+          "design.spec.ts",
+          "withdrawal.spec.ts",
+          "datahelp.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/datahelp-20261005T074212414468Z/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "pnpm build && vite preview --host localhost",
+      "url": "http://localhost:4173",
+      "reuseExistingServer": false,
+      "timeout": 180000
+    }
+  },
+  "suites": [
+    {
+      "title": "datahelp.spec.ts",
+      "file": "datahelp.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "DH-B01 공개 진입·FAQ 키보드·실제 스타일·좁은 웹·정보 조회 부작용0",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1563,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T07:42:20.767Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "adb83b412cadbb3a842d-8733b9886c35ecb546e3",
+          "file": "datahelp.spec.ts",
+          "line": 78,
+          "column": 1
+        },
+        {
+          "title": "DH-B02 도움말→실제 가입→데이터→기록→계정→복구와 돌아가기",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6038,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '비밀번호를 잊으셨나요?' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '비밀번호를 잊으셨나요?' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '비밀번호를 잊으셨나요?' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '비밀번호를 잊으셨나요?' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '비밀번호를 잊으셨나요?' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '비밀번호를 잊으셨나요?' })\u001b[22m\n\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard/frontend/e2e/datahelp.spec.ts:182:69",
+                    "location": {
+                      "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard/frontend/e2e/datahelp.spec.ts",
+                      "column": 69,
+                      "line": 182
+                    },
+                    "snippet": "  180 |   await expect(page.getByRole('heading', { level: 1, name: '도움말' })).toBeVisible()\n  181 |   await page.getByRole('link', { name: '계정 복구', exact: true }).click()\n> 182 |   await expect(page.getByRole('heading', { name: '비밀번호를 잊으셨나요?' })).toBeVisible()\n      |                                                                     ^\n  183 |   await page.goBack()\n  184 |   await expect(page.getByRole('heading', { level: 1, name: '도움말' })).toBeVisible()\n  185 |   await page.getByRole('link', { name: '계정 관리·탈퇴', exact: true }).click()"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard/frontend/e2e/datahelp.spec.ts",
+                        "column": 69,
+                        "line": 182
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '비밀번호를 잊으셨나요?' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '비밀번호를 잊으셨나요?' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '비밀번호를 잊으셨나요?' })\u001b[22m\n\n\n  180 |   await expect(page.getByRole('heading', { level: 1, name: '도움말' })).toBeVisible()\n  181 |   await page.getByRole('link', { name: '계정 복구', exact: true }).click()\n> 182 |   await expect(page.getByRole('heading', { name: '비밀번호를 잊으셨나요?' })).toBeVisible()\n      |                                                                     ^\n  183 |   await page.goBack()\n  184 |   await expect(page.getByRole('heading', { level: 1, name: '도움말' })).toBeVisible()\n  185 |   await page.getByRole('link', { name: '계정 관리·탈퇴', exact: true }).click()\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard/frontend/e2e/datahelp.spec.ts:182:69"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T07:42:22.934Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard/frontend/test-results/datahelp-20261005T074212414468Z/datahelp-DH-B02-도움말→실제-가입→데이터→기록→계정→복구와-돌아가기/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard/frontend/e2e/datahelp.spec.ts",
+                    "column": 69,
+                    "line": 182
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "adb83b412cadbb3a842d-8d75c234440ed198e725",
+          "file": "datahelp.spec.ts",
+          "line": 145,
+          "column": 1
+        },
+        {
+          "title": "DH-B03 계정 연결 실패 주입 중에도 공개 안내·FAQ·직접 주소 접근",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 774,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-05T07:42:29.415Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "adb83b412cadbb3a842d-05c93abba5a3cd36f634",
+          "file": "datahelp.spec.ts",
+          "line": 188,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-05T07:42:13.425Z",
+    "duration": 17216.251,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

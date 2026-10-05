@@ -1,0 +1,113 @@
+/* FR-V-01/NFR-08: reading-first public web, shared white/blue tokens. */
+.guide-screen {
+  max-width: 880px;
+  padding: 64px 0 80px;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.guide-intro {
+  max-width: 720px;
+}
+.guide-intro > p:last-child {
+  margin-top: 20px;
+  color: var(--muted);
+}
+.guide-section {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+.guide-section h2 {
+  font-size: var(--type-label);
+}
+.guide-section > p,
+.guide-note > p {
+  margin-top: 16px;
+}
+.guide-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+.guide-caption {
+  color: var(--muted);
+}
+.guide-faq details {
+  border-bottom: 1px solid var(--line);
+}
+.guide-faq details:first-of-type {
+  margin-top: 16px;
+}
+.guide-faq summary {
+  padding: 16px 0;
+  min-height: 56px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.guide-faq summary:hover {
+  color: var(--accent);
+}
+.guide-faq details > p {
+  padding-bottom: 24px;
+  color: var(--muted);
+  max-width: 720px;
+}
+.guide-data-list {
+  margin-top: 16px;
+}
+.guide-data-list > div {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+.guide-data-list dt {
+  font-weight: 600;
+}
+.guide-data-list dd {
+  color: var(--muted);
+}
+.guide-note {
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin-top: 40px;
+  padding: 24px;
+}
+.guide-note h2 {
+  font-size: var(--type-label);
+}
+.guide-link,
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 12px 0;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.guide-link {
+  margin-top: 12px;
+}
+.website .site-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  width: 100%;
+  font-size: var(--type-body);
+}
+.footer-link[aria-current="page"] {
+  font-weight: 600;
+}
+@media (max-width: 850px) {
+  .guide-screen {
+    padding: 48px 0 64px;
+  }
+  .guide-data-list > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+}
