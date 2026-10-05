@@ -58,16 +58,20 @@ it.each([401, 503])('blocks private records when account check returns %s', asyn
   expect(records).not.toHaveBeenCalled()
 })
 it('shows loading, genuine empty period and start recovery without invented scores', async () => {
-  let resolve: (value: Response) => void = () => {}
+  const pending: { signal?: AbortSignal | null; resolve: (value: Response) => void }[] = []
   stub(
-    () =>
+    (_url, init) =>
       new Promise((done) => {
-        resolve = done
+        pending.push({ signal: init?.signal, resolve: done })
       }),
   )
   open()
   await screen.findByText('기록을 불러오고 있습니다.')
-  await act(async () => resolve(json({ items: [], has_more: false })))
+  // FR-R-03: loading renders before fetch; resolve only a started, non-aborted request.
+  await waitFor(() => expect(pending.some((request) => !request.signal?.aborted)).toBe(true))
+  await act(async () => {
+    for (const request of pending) request.resolve(json({ items: [], has_more: false }))
+  })
   await screen.findByRole('heading', { name: '이 기간에는 수행 기록이 없습니다' })
   expect(screen.getByRole('link', { name: '스트레칭 시작 경로 선택' }).getAttribute('href')).toBe(
     '/explore',

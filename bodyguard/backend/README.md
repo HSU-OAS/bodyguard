@@ -12,6 +12,10 @@ S2.1 + S2.6a1/b1, FR-U-01~04·NFR-08. 이메일 확인/구글 계정, 서버 쿠
 
 ## 로컬 실행
 
+### 기간 삭제 API — S4.3
+
+본인 `POST /api/v1/records/stretch/delete-preview`에 aware start/end 기간을 보내면 삭제 수·cutoff·지문·10분 만료·세션에 묶인 서명을 반환한다. `POST /api/v1/records/stretch/delete`는 이 확인값 전체와 `confirmation: delete-stretch-records`를 요구한다. 둘 다 기존 Origin/CSRF와 인증을 검사한다. 미리보기는 삭제하지 않으며, 대상이 바뀌면409로 재확인을 요구한다. 이미 삭제된 대상의 재전송은 삭제0이다. cutoff 뒤 저장된 기록은 보존한다. 별도 키·DB migration·원시 정보 저장은 없다. [명세·실제 검증](../docs/stories/stage4-record-deletion-api.md). 삭제 화면·계정 탈퇴·운영 적용은 아직 완료되지 않았다.
+
 Python 3.14, uv, PostgreSQL 18이 필요하다. bodyguard/에서 docker compose up -d db를 실행하면 loopback 55439의 **로컬 전용** DB가 생긴다. trust 인증·테스트 역할을 운영에 사용하지 않는다. 기존 DB를 쓰지 말고 새 로컬 DB에만 아래 migration을 적용한다.
 
 backend/에서 uv sync --locked를 실행한다. .env.example의 변수 이름을 참고해 프로세스 환경을 설정한다. 앱은 .env를 자동으로 읽지 않는다. BODYGUARD_SECURITY_KEY는 32바이트 이상의 난수(hex 64자 등), 실제 메일 자격증명은 별도 승인 후 공급한다. 샘플 키·메일 성공 폴백은 없다.

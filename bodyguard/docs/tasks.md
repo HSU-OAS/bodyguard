@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+S4.3 [본인 수행 기록 기간 삭제 API](stories/stage4-record-deletion-api.md): 최신 main ddcf800에서 미리보기·세션 서명·대상 지문·명시 확인 삭제를 구현했다. 실제 격리 DB의 전체197건 통과 뒤 추가 입력/기간 경계까지 삭제25건 재실행 통과, 전체 DOM242건·production 빌드·정적 검사 통과다. PR 게이트 진행 중이며 다음은 삭제 취소·확인·만료/대상 변경 재확인 화면이다. 실제 Chrome 삭제·계정 탈퇴·전체4단계·아바타/실측 최종 통합은 미완료다.
+
 S4.2 [기록 목록·상세 웹](stories/stage4-records-web.md): 본인 API와 연결한 최근7일/기간 목록·페이지·상세·복귀·실패 복구를 구현했고 실제 격리 API/SQL/production Chrome으로 확인했다. [실제 화면 증거](review/stage4-records/README.md). S4.1 API는 PR #20(main afc044b) 병합. S4.2는 PR 게이트 진행이며 다음 독립 작업은 본인 기록 삭제·계정 데이터 관리다. 실제 코칭 기록 생산·출시 동작명 연결·1분 요약/부가 기능·Stage2/3 이월·전체4단계는 미완료다.
 
 S4.1 [본인 수행 기록 API](stories/stage4-records-api.md): 저장·기간 목록·상세, 소유권/CSRF, 중복·동시 요청, 데이터 보존 rollback을 구현하고 격리 DB로 검증 중이다. 기록 화면과 실제 코칭 결과 연결은 아직 없다. 다음 독립 Story는 S4.2 기록 목록·상세 웹 화면이며 Stage2 이월 게이트와 Stage3 실제 코칭 연결은 최종 통합에 남긴다. 4단계·전체 1~6단계 완료 아님.
