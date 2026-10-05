@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="27" skipped="0" tests="27" time="5.126" timestamp="2026-10-06T02:28:29.140204+09:00" hostname="local-test-host"><testcase classname="tests.test_notification_preferences" name="test_p01_defaults_read_without_settings_write" time="0.276"><failure message="assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code">harness = &lt;tests.conftest.Harness object at 0x1273a1a90&gt;
+
+    def test_p01_defaults_read_without_settings_write(harness: Harness) -&gt; None:
+        h = harness
+        h.account()
+        for _ in range(2):
+            response = h.client.get(PATH)
+&gt;           assert response.status_code == 200
+E           assert 404 == 200
+E            +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+
+tests/test_notification_preferences.py:29: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p02_persist_retry_one_row_and_other_account_isolation" time="0.166"><failure message="assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code">harness = &lt;tests.conftest.Harness object at 0x12771f390&gt;
+
+    def test_p02_persist_retry_one_row_and_other_account_isolation(harness: Harness) -&gt; None:
+        h = harness
+        owner = h.account()
+        proof = h.csrf()
+        for _ in range(2):
+            saved = h.client.post(PATH, headers=proof, json=CHANGED)
+&gt;           assert saved.status_code == 200
+E           assert 404 == 200
+E            +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+
+tests/test_notification_preferences.py:42: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_strict_input_preserves_previous_settings[change0]" time="0.163"><failure message="AssertionError: assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '69f29acb7cbf471cd0da31ee301ad22076748c4215df41bf769cc73893b027d4'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x12771d6d0&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x12771d6d0&gt; = &lt;tests.conftest.Harness object at 0x130df6850&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '69f29acb7cbf471cd0da31ee301ad22076748c4215df41bf769cc73893b027d4'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x130df6850&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x130df6850&gt;
+change = {'posture_minutes': 0}
+
+    @pytest.mark.parametrize(
+        "change",
+        [
+            {"posture_minutes": 0}, {"posture_minutes": 1441},
+            {"posture_minutes": True}, {"posture_minutes": "5"},
+            {"posture_minutes": 5.5}, {"sitting_minutes": -1},
+            {"sitting_minutes": 1441}, {"sitting_minutes": None},
+            {"posture_enabled": "false"}, {"posture_enabled": 1},
+            {"sitting_enabled": None}, {"sound_enabled": 0},
+            {"user_id": str(uuid4())}, {"sensitivity": 1}, {"email": "other@example.com"},
+        ],
+    )
+    def test_p03_strict_input_preserves_previous_settings(harness: Harness, change: dict[str, object]) -&gt; None:
+        h = harness
+        h.account()
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=CHANGED).status_code == 200
+E       AssertionError: assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '69f29acb7cbf471cd0da31ee301ad22076748c4215df41bf769cc73893b027d4'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x12771d6d0&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x12771d6d0&gt; = &lt;tests.conftest.Harness object at 0x130df6850&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '69f29acb7cbf471cd0da31ee301ad22076748c4215df41bf769cc73893b027d4'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x130df6850&gt;.csrf
+
+tests/test_notification_preferences.py:74: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_strict_input_preserves_previous_settings[change1]" time="0.164"><failure message="AssertionError: assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '8592d43ebabceb626ea1383fb97763aef0a75b82b199829578691dd5190a59b1'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x130c309d0&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x130c309d0&gt; = &lt;tests.conftest.Harness object at 0x127603950&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '8592d43ebabceb626ea1383fb97763aef0a75b82b199829578691dd5190a59b1'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x127603950&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x127603950&gt;
+change = {'posture_minutes': 1441}
+
+    @pytest.mark.parametrize(
+        "change",
+        [
+            {"posture_minutes": 0}, {"posture_minutes": 1441},
+            {"posture_minutes": True}, {"posture_minutes": "5"},
+            {"posture_minutes": 5.5}, {"sitting_minutes": -1},
+            {"sitting_minutes": 1441}, {"sitting_minutes": None},
+            {"posture_enabled": "false"}, {"posture_enabled": 1},
+            {"sitting_enabled": None}, {"sound_enabled": 0},
+            {"user_id": str(uuid4())}, {"sensitivity": 1}, {"email": "other@example.com"},
+        ],
+    )
+    def test_p03_strict_input_preserves_previous_settings(harness: Harness, change: dict[str, object]) -&gt; None:
+        h = harness
+        h.account()
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=CHANGED).status_code == 200
+E       AssertionError: assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '8592d43ebabceb626ea1383fb97763aef0a75b82b199829578691dd5190a59b1'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x130c309d0&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x130c309d0&gt; = &lt;tests.conftest.Harness object at 0x127603950&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '8592d43ebabceb626ea1383fb97763aef0a75b82b199829578691dd5190a59b1'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x127603950&gt;.csrf
+
+tests/test_notification_preferences.py:74: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_strict_input_preserves_previous_settings[change2]" time="0.165"><failure message="AssertionError: assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '75ce864ae77a1b6ae87252761eaf9d4dc931a32af07e62dba174305be4e0355c'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x130c322c0&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x130c322c0&gt; = &lt;tests.conftest.Harness object at 0x130c31ba0&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '75ce864ae77a1b6ae87252761eaf9d4dc931a32af07e62dba174305be4e0355c'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x130c31ba0&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x130c31ba0&gt;
+change = {'posture_minutes': True}
+
+    @pytest.mark.parametrize(
+        "change",
+        [
+            {"posture_minutes": 0}, {"posture_minutes": 1441},
+            {"posture_minutes": True}, {"posture_minutes": "5"},
+            {"posture_minutes": 5.5}, {"sitting_minutes": -1},
+            {"sitting_minutes": 1441}, {"sitting_minutes": None},
+            {"posture_enabled": "false"}, {"posture_enabled": 1},
+            {"sitting_enabled": None}, {"sound_enabled": 0},
+            {"user_id": str(uuid4())}, {"sensitivity": 1}, {"email": "other@example.com"},
+        ],
+    )
+    def test_p03_strict_input_preserves_previous_settings(harness: Harness, change: dict[str, object]) -&gt; None:
+        h = harness
+        h.account()
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=CHANGED).status_code == 200
+E       AssertionError: assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '75ce864ae77a1b6ae87252761eaf9d4dc931a32af07e62dba174305be4e0355c'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x130c322c0&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x130c322c0&gt; = &lt;tests.conftest.Harness object at 0x130c31ba0&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '75ce864ae77a1b6ae87252761eaf9d4dc931a32af07e62dba174305be4e0355c'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x130c31ba0&gt;.csrf
+
+tests/test_notification_preferences.py:74: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_strict_input_preserves_previous_settings[change3]" time="0.160"><failure message="AssertionError: assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': 'e32596184bd8af084fd245f1160a94280d35236340f43d27be4f90c177d7296d'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x13533ec30&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x13533ec30&gt; = &lt;tests.conftest.Harness object at 0x135293890&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': 'e32596184bd8af084fd245f1160a94280d35236340f43d27be4f90c177d7296d'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x135293890&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x135293890&gt;
+change = {'posture_minutes': '5'}
+
+    @pytest.mark.parametrize(
+        "change",
+        [
+            {"posture_minutes": 0}, {"posture_minutes": 1441},
+            {"posture_minutes": True}, {"posture_minutes": "5"},
+            {"posture_minutes": 5.5}, {"sitting_minutes": -1},
+            {"sitting_minutes": 1441}, {"sitting_minutes": None},
+            {"posture_enabled": "false"}, {"posture_enabled": 1},
+            {"sitting_enabled": None}, {"sound_enabled": 0},
+            {"user_id": str(uuid4())}, {"sensitivity": 1}, {"email": "other@example.com"},
+        ],
+    )
+    def test_p03_strict_input_preserves_previous_settings(harness: Harness, change: dict[str, object]) -&gt; None:
+        h = harness
+        h.account()
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=CHANGED).status_code == 200
+E       AssertionError: assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': 'e32596184bd8af084fd245f1160a94280d35236340f43d27be4f90c177d7296d'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x13533ec30&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x13533ec30&gt; = &lt;tests.conftest.Harness object at 0x135293890&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': 'e32596184bd8af084fd245f1160a94280d35236340f43d27be4f90c177d7296d'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x135293890&gt;.csrf
+
+tests/test_notification_preferences.py:74: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_strict_input_preserves_previous_settings[change4]" time="0.165"><failure message="AssertionError: assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '882743ba02242352ccd07586a5522405af1d54559edd607b6871f85fb1584398'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x13540ee00&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x13540ee00&gt; = &lt;tests.conftest.Harness object at 0x135386cf0&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '882743ba02242352ccd07586a5522405af1d54559edd607b6871f85fb1584398'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x135386cf0&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x135386cf0&gt;
+change = {'posture_minutes': 5.5}
+
+    @pytest.mark.parametrize(
+        "change",
+        [
+            {"posture_minutes": 0}, {"posture_minutes": 1441},
+            {"posture_minutes": True}, {"posture_minutes": "5"},
+            {"posture_minutes": 5.5}, {"sitting_minutes": -1},
+            {"sitting_minutes": 1441}, {"sitting_minutes": None},
+            {"posture_enabled": "false"}, {"posture_enabled": 1},
+            {"sitting_enabled": None}, {"sound_enabled": 0},
+            {"user_id": str(uuid4())}, {"sensitivity": 1}, {"email": "other@example.com"},
+        ],
+    )
+    def test_p03_strict_input_preserves_previous_settings(harness: Harness, change: dict[str, object]) -&gt; None:
+        h = harness
+        h.account()
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=CHANGED).status_code == 200
+E       AssertionError: assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '882743ba02242352ccd07586a5522405af1d54559edd607b6871f85fb1584398'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x13540ee00&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x13540ee00&gt; = &lt;tests.conftest.Harness object at 0x135386cf0&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '882743ba02242352ccd07586a5522405af1d54559edd607b6871f85fb1584398'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x135386cf0&gt;.csrf
+
+tests/test_notification_preferences.py:74: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_strict_input_preserves_previous_settings[change5]" time="0.161"><failure message="AssertionError: assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': 'ee1c7c6254729112a199c6847c4300ebf0981b5e38ec2434b34ab2de3e0d5de0'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x1354a8380&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x1354a8380&gt; = &lt;tests.conftest.Harness object at 0x13540ff00&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': 'ee1c7c6254729112a199c6847c4300ebf0981b5e38ec2434b34ab2de3e0d5de0'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x13540ff00&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x13540ff00&gt;
+change = {'sitting_minutes': -1}
+
+    @pytest.mark.parametrize(
+        "change",
+        [
+            {"posture_minutes": 0}, {"posture_minutes": 1441},
+            {"posture_minutes": True}, {"posture_minutes": "5"},
+            {"posture_minutes": 5.5}, {"sitting_minutes": -1},
+            {"sitting_minutes": 1441}, {"sitting_minutes": None},
+            {"posture_enabled": "false"}, {"posture_enabled": 1},
+            {"sitting_enabled": None}, {"sound_enabled": 0},
+            {"user_id": str(uuid4())}, {"sensitivity": 1}, {"email": "other@example.com"},
+        ],
+    )
+    def test_p03_strict_input_preserves_previous_settings(harness: Harness, change: dict[str, object]) -&gt; None:
+        h = harness
+        h.account()
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=CHANGED).status_code == 200
+E       AssertionError: assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': 'ee1c7c6254729112a199c6847c4300ebf0981b5e38ec2434b34ab2de3e0d5de0'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x1354a8380&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x1354a8380&gt; = &lt;tests.conftest.Harness object at 0x13540ff00&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': 'ee1c7c6254729112a199c6847c4300ebf0981b5e38ec2434b34ab2de3e0d5de0'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x13540ff00&gt;.csrf
+
+tests/test_notification_preferences.py:74: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_strict_input_preserves_previous_settings[change6]" time="0.160"><failure message="AssertionError: assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '547c681c1746ceedf9be52c00655ef271722de84945040c1315cb1c90f0bf86d'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x13551d370&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x13551d370&gt; = &lt;tests.conftest.Harness object at 0x127785c50&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '547c681c1746ceedf9be52c00655ef271722de84945040c1315cb1c90f0bf86d'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x127785c50&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x127785c50&gt;
+change = {'sitting_minutes': 1441}
+
+    @pytest.mark.parametrize(
+        "change",
+        [
+            {"posture_minutes": 0}, {"posture_minutes": 1441},
+            {"posture_minutes": True}, {"posture_minutes": "5"},
+            {"posture_minutes": 5.5}, {"sitting_minutes": -1},
+            {"sitting_minutes": 1441}, {"sitting_minutes": None},
+            {"posture_enabled": "false"}, {"posture_enabled": 1},
+            {"sitting_enabled": None}, {"sound_enabled": 0},
+            {"user_id": str(uuid4())}, {"sensitivity": 1}, {"email": "other@example.com"},
+        ],
+    )
+    def test_p03_strict_input_preserves_previous_settings(harness: Harness, change: dict[str, object]) -&gt; None:
+        h = harness
+        h.account()
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=CHANGED).status_code == 200
+E       AssertionError: assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '547c681c1746ceedf9be52c00655ef271722de84945040c1315cb1c90f0bf86d'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x13551d370&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x13551d370&gt; = &lt;tests.conftest.Harness object at 0x127785c50&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '547c681c1746ceedf9be52c00655ef271722de84945040c1315cb1c90f0bf86d'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x127785c50&gt;.csrf
+
+tests/test_notification_preferences.py:74: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_strict_input_preserves_previous_settings[change7]" time="0.162"><failure message="AssertionError: assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '0b8e0da1ca14b2da1d6afa15abe876a59c41f70fa9c656c4dbcafeffcb07d1a4'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x1355bd6a0&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x1355bd6a0&gt; = &lt;tests.conftest.Harness object at 0x130fa1550&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '0b8e0da1ca14b2da1d6afa15abe876a59c41f70fa9c656c4dbcafeffcb07d1a4'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x130fa1550&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x130fa1550&gt;
+change = {'sitting_minutes': None}
+
+    @pytest.mark.parametrize(
+        "change",
+        [
+            {"posture_minutes": 0}, {"posture_minutes": 1441},
+            {"posture_minutes": True}, {"posture_minutes": "5"},
+            {"posture_minutes": 5.5}, {"sitting_minutes": -1},
+            {"sitting_minutes": 1441}, {"sitting_minutes": None},
+            {"posture_enabled": "false"}, {"posture_enabled": 1},
+            {"sitting_enabled": None}, {"sound_enabled": 0},
+            {"user_id": str(uuid4())}, {"sensitivity": 1}, {"email": "other@example.com"},
+        ],
+    )
+    def test_p03_strict_input_preserves_previous_settings(harness: Harness, change: dict[str, object]) -&gt; None:
+        h = harness
+        h.account()
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=CHANGED).status_code == 200
+E       AssertionError: assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '0b8e0da1ca14b2da1d6afa15abe876a59c41f70fa9c656c4dbcafeffcb07d1a4'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x1355bd6a0&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x1355bd6a0&gt; = &lt;tests.conftest.Harness object at 0x130fa1550&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '0b8e0da1ca14b2da1d6afa15abe876a59c41f70fa9c656c4dbcafeffcb07d1a4'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x130fa1550&gt;.csrf
+
+tests/test_notification_preferences.py:74: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_strict_input_preserves_previous_settings[change8]" time="0.176"><failure message="AssertionError: assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '5e0e509a5eba03a983738ba85a9c7509c35e7ddbc4b5d458d2722a55c2d898b6'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x135659150&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x135659150&gt; = &lt;tests.conftest.Harness object at 0x130f875c0&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '5e0e509a5eba03a983738ba85a9c7509c35e7ddbc4b5d458d2722a55c2d898b6'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x130f875c0&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x130f875c0&gt;
+change = {'posture_enabled': 'false'}
+
+    @pytest.mark.parametrize(
+        "change",
+        [
+            {"posture_minutes": 0}, {"posture_minutes": 1441},
+            {"posture_minutes": True}, {"posture_minutes": "5"},
+            {"posture_minutes": 5.5}, {"sitting_minutes": -1},
+            {"sitting_minutes": 1441}, {"sitting_minutes": None},
+            {"posture_enabled": "false"}, {"posture_enabled": 1},
+            {"sitting_enabled": None}, {"sound_enabled": 0},
+            {"user_id": str(uuid4())}, {"sensitivity": 1}, {"email": "other@example.com"},
+        ],
+    )
+    def test_p03_strict_input_preserves_previous_settings(harness: Harness, change: dict[str, object]) -&gt; None:
+        h = harness
+        h.account()
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=CHANGED).status_code == 200
+E       AssertionError: assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '5e0e509a5eba03a983738ba85a9c7509c35e7ddbc4b5d458d2722a55c2d898b6'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x135659150&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x135659150&gt; = &lt;tests.conftest.Harness object at 0x130f875c0&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '5e0e509a5eba03a983738ba85a9c7509c35e7ddbc4b5d458d2722a55c2d898b6'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x130f875c0&gt;.csrf
+
+tests/test_notification_preferences.py:74: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_strict_input_preserves_previous_settings[change9]" time="0.164"><failure message="AssertionError: assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '5d12fabde5c93fa913162a8ccdc57060a6132ff9e705470ed44bfa6ea4bff7ff'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x1356f9370&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x1356f9370&gt; = &lt;tests.conftest.Harness object at 0x130f859a0&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '5d12fabde5c93fa913162a8ccdc57060a6132ff9e705470ed44bfa6ea4bff7ff'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x130f859a0&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x130f859a0&gt;
+change = {'posture_enabled': 1}
+
+    @pytest.mark.parametrize(
+        "change",
+        [
+            {"posture_minutes": 0}, {"posture_minutes": 1441},
+            {"posture_minutes": True}, {"posture_minutes": "5"},
+            {"posture_minutes": 5.5}, {"sitting_minutes": -1},
+            {"sitting_minutes": 1441}, {"sitting_minutes": None},
+            {"posture_enabled": "false"}, {"posture_enabled": 1},
+            {"sitting_enabled": None}, {"sound_enabled": 0},
+            {"user_id": str(uuid4())}, {"sensitivity": 1}, {"email": "other@example.com"},
+        ],
+    )
+    def test_p03_strict_input_preserves_previous_settings(harness: Harness, change: dict[str, object]) -&gt; None:
+        h = harness
+        h.account()
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=CHANGED).status_code == 200
+E       AssertionError: assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '5d12fabde5c93fa913162a8ccdc57060a6132ff9e705470ed44bfa6ea4bff7ff'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x1356f9370&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x1356f9370&gt; = &lt;tests.conftest.Harness object at 0x130f859a0&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '5d12fabde5c93fa913162a8ccdc57060a6132ff9e705470ed44bfa6ea4bff7ff'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x130f859a0&gt;.csrf
+
+tests/test_notification_preferences.py:74: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_strict_input_preserves_previous_settings[change10]" time="0.163"><failure message="AssertionError: assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '0130cdf104bac6ad09a44a611c9208662c90ce9221920134c0e1356f1dff5ab9'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x1357a1590&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x1357a1590&gt; = &lt;tests.conftest.Harness object at 0x1356f3150&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '0130cdf104bac6ad09a44a611c9208662c90ce9221920134c0e1356f1dff5ab9'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x1356f3150&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x1356f3150&gt;
+change = {'sitting_enabled': None}
+
+    @pytest.mark.parametrize(
+        "change",
+        [
+            {"posture_minutes": 0}, {"posture_minutes": 1441},
+            {"posture_minutes": True}, {"posture_minutes": "5"},
+            {"posture_minutes": 5.5}, {"sitting_minutes": -1},
+            {"sitting_minutes": 1441}, {"sitting_minutes": None},
+            {"posture_enabled": "false"}, {"posture_enabled": 1},
+            {"sitting_enabled": None}, {"sound_enabled": 0},
+            {"user_id": str(uuid4())}, {"sensitivity": 1}, {"email": "other@example.com"},
+        ],
+    )
+    def test_p03_strict_input_preserves_previous_settings(harness: Harness, change: dict[str, object]) -&gt; None:
+        h = harness
+        h.account()
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=CHANGED).status_code == 200
+E       AssertionError: assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '0130cdf104bac6ad09a44a611c9208662c90ce9221920134c0e1356f1dff5ab9'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x1357a1590&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x1357a1590&gt; = &lt;tests.conftest.Harness object at 0x1356f3150&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '0130cdf104bac6ad09a44a611c9208662c90ce9221920134c0e1356f1dff5ab9'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x1356f3150&gt;.csrf
+
+tests/test_notification_preferences.py:74: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_strict_input_preserves_previous_settings[change11]" time="0.163"><failure message="AssertionError: assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': 'fda4bac84247fcbc1fb474c7a1fb576d8ad6313f688fad1b76f11c2f7c766c03'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x1358497b0&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x1358497b0&gt; = &lt;tests.conftest.Harness object at 0x1357a7150&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': 'fda4bac84247fcbc1fb474c7a1fb576d8ad6313f688fad1b76f11c2f7c766c03'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x1357a7150&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x1357a7150&gt;
+change = {'sound_enabled': 0}
+
+    @pytest.mark.parametrize(
+        "change",
+        [
+            {"posture_minutes": 0}, {"posture_minutes": 1441},
+            {"posture_minutes": True}, {"posture_minutes": "5"},
+            {"posture_minutes": 5.5}, {"sitting_minutes": -1},
+            {"sitting_minutes": 1441}, {"sitting_minutes": None},
+            {"posture_enabled": "false"}, {"posture_enabled": 1},
+            {"sitting_enabled": None}, {"sound_enabled": 0},
+            {"user_id": str(uuid4())}, {"sensitivity": 1}, {"email": "other@example.com"},
+        ],
+    )
+    def test_p03_strict_input_preserves_previous_settings(harness: Harness, change: dict[str, object]) -&gt; None:
+        h = harness
+        h.account()
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=CHANGED).status_code == 200
+E       AssertionError: assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': 'fda4bac84247fcbc1fb474c7a1fb576d8ad6313f688fad1b76f11c2f7c766c03'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x1358497b0&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x1358497b0&gt; = &lt;tests.conftest.Harness object at 0x1357a7150&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': 'fda4bac84247fcbc1fb474c7a1fb576d8ad6313f688fad1b76f11c2f7c766c03'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x1357a7150&gt;.csrf
+
+tests/test_notification_preferences.py:74: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_strict_input_preserves_previous_settings[change12]" time="0.163"><failure message="AssertionError: assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': 'e2d85fcbecf514c58ad51bd0518b0f8a6c82fded1c51f042bcb3816b27ff79dd'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x1358f16a0&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x1358f16a0&gt; = &lt;tests.conftest.Harness object at 0x13582a820&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': 'e2d85fcbecf514c58ad51bd0518b0f8a6c82fded1c51f042bcb3816b27ff79dd'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x13582a820&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x13582a820&gt;
+change = {'user_id': '9e24dc1f-8743-4bab-ad78-3729d53e0c53'}
+
+    @pytest.mark.parametrize(
+        "change",
+        [
+            {"posture_minutes": 0}, {"posture_minutes": 1441},
+            {"posture_minutes": True}, {"posture_minutes": "5"},
+            {"posture_minutes": 5.5}, {"sitting_minutes": -1},
+            {"sitting_minutes": 1441}, {"sitting_minutes": None},
+            {"posture_enabled": "false"}, {"posture_enabled": 1},
+            {"sitting_enabled": None}, {"sound_enabled": 0},
+            {"user_id": str(uuid4())}, {"sensitivity": 1}, {"email": "other@example.com"},
+        ],
+    )
+    def test_p03_strict_input_preserves_previous_settings(harness: Harness, change: dict[str, object]) -&gt; None:
+        h = harness
+        h.account()
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=CHANGED).status_code == 200
+E       AssertionError: assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': 'e2d85fcbecf514c58ad51bd0518b0f8a6c82fded1c51f042bcb3816b27ff79dd'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x1358f16a0&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x1358f16a0&gt; = &lt;tests.conftest.Harness object at 0x13582a820&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': 'e2d85fcbecf514c58ad51bd0518b0f8a6c82fded1c51f042bcb3816b27ff79dd'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x13582a820&gt;.csrf
+
+tests/test_notification_preferences.py:74: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_strict_input_preserves_previous_settings[change13]" time="0.166"><failure message="AssertionError: assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '524b8db7c8a3611e6917c56046acdc37a07323e7160824a0d2eef8bc1049f5a4'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x1359918c0&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x1359918c0&gt; = &lt;tests.conftest.Harness object at 0x13571b290&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '524b8db7c8a3611e6917c56046acdc37a07323e7160824a0d2eef8bc1049f5a4'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x13571b290&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x13571b290&gt;
+change = {'sensitivity': 1}
+
+    @pytest.mark.parametrize(
+        "change",
+        [
+            {"posture_minutes": 0}, {"posture_minutes": 1441},
+            {"posture_minutes": True}, {"posture_minutes": "5"},
+            {"posture_minutes": 5.5}, {"sitting_minutes": -1},
+            {"sitting_minutes": 1441}, {"sitting_minutes": None},
+            {"posture_enabled": "false"}, {"posture_enabled": 1},
+            {"sitting_enabled": None}, {"sound_enabled": 0},
+            {"user_id": str(uuid4())}, {"sensitivity": 1}, {"email": "other@example.com"},
+        ],
+    )
+    def test_p03_strict_input_preserves_previous_settings(harness: Harness, change: dict[str, object]) -&gt; None:
+        h = harness
+        h.account()
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=CHANGED).status_code == 200
+E       AssertionError: assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '524b8db7c8a3611e6917c56046acdc37a07323e7160824a0d2eef8bc1049f5a4'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x1359918c0&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x1359918c0&gt; = &lt;tests.conftest.Harness object at 0x13571b290&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '524b8db7c8a3611e6917c56046acdc37a07323e7160824a0d2eef8bc1049f5a4'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x13571b290&gt;.csrf
+
+tests/test_notification_preferences.py:74: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_strict_input_preserves_previous_settings[change14]" time="0.162"><failure message="AssertionError: assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '9cb282ddd7795b98b1bab9072299f4882800d50088e8eae7efea92bb4e91c182'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x135a35ae0&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x135a35ae0&gt; = &lt;tests.conftest.Harness object at 0x135951010&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '9cb282ddd7795b98b1bab9072299f4882800d50088e8eae7efea92bb4e91c182'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x135951010&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x135951010&gt;
+change = {'email': 'other@example.com'}
+
+    @pytest.mark.parametrize(
+        "change",
+        [
+            {"posture_minutes": 0}, {"posture_minutes": 1441},
+            {"posture_minutes": True}, {"posture_minutes": "5"},
+            {"posture_minutes": 5.5}, {"sitting_minutes": -1},
+            {"sitting_minutes": 1441}, {"sitting_minutes": None},
+            {"posture_enabled": "false"}, {"posture_enabled": 1},
+            {"sitting_enabled": None}, {"sound_enabled": 0},
+            {"user_id": str(uuid4())}, {"sensitivity": 1}, {"email": "other@example.com"},
+        ],
+    )
+    def test_p03_strict_input_preserves_previous_settings(harness: Harness, change: dict[str, object]) -&gt; None:
+        h = harness
+        h.account()
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=CHANGED).status_code == 200
+E       AssertionError: assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '9cb282ddd7795b98b1bab9072299f4882800d50088e8eae7efea92bb4e91c182'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x135a35ae0&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x135a35ae0&gt; = &lt;tests.conftest.Harness object at 0x135951010&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '9cb282ddd7795b98b1bab9072299f4882800d50088e8eae7efea92bb4e91c182'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x135951010&gt;.csrf
+
+tests/test_notification_preferences.py:74: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_missing_field_is_not_an_implicit_partial_update[posture_enabled]" time="0.168"><failure message="AssertionError: assert 404 == 422&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '8c49a4dabfc254d42b8f7b2d6966ab32b0b5a3cb881595663f7317fcc2290448'}, json={'posture_minutes': 5, 'sitting_enabled': True, 'sitting_minutes': 50, 'sound_enabled': False})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x135addd00&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x135addd00&gt; = &lt;tests.conftest.Harness object at 0x135a40470&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '8c49a4dabfc254d42b8f7b2d6966ab32b0b5a3cb881595663f7317fcc2290448'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x135a40470&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x135a40470&gt;
+missing = 'posture_enabled'
+
+    @pytest.mark.parametrize("missing", list(DEFAULT))
+    def test_p03_missing_field_is_not_an_implicit_partial_update(harness: Harness, missing: str) -&gt; None:
+        h = harness
+        h.account()
+        body = {key: value for key, value in DEFAULT.items() if key != missing}
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=body).status_code == 422
+E       AssertionError: assert 404 == 422
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '8c49a4dabfc254d42b8f7b2d6966ab32b0b5a3cb881595663f7317fcc2290448'}, json={'posture_minutes': 5, 'sitting_enabled': True, 'sitting_minutes': 50, 'sound_enabled': False})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x135addd00&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x135addd00&gt; = &lt;tests.conftest.Harness object at 0x135a40470&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '8c49a4dabfc254d42b8f7b2d6966ab32b0b5a3cb881595663f7317fcc2290448'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x135a40470&gt;.csrf
+
+tests/test_notification_preferences.py:86: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_missing_field_is_not_an_implicit_partial_update[posture_minutes]" time="0.168"><failure message="AssertionError: assert 404 == 422&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '5fdb2f29ca4eddd64b8002995fd729ee923997d8ffef8645ff2043dc6663f629'}, json={'posture_enabled': True, 'sitting_enabled': True, 'sitting_minutes': 50, 'sound_enabled': False})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x135b81bf0&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x135b81bf0&gt; = &lt;tests.conftest.Harness object at 0x135ae5910&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '5fdb2f29ca4eddd64b8002995fd729ee923997d8ffef8645ff2043dc6663f629'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x135ae5910&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x135ae5910&gt;
+missing = 'posture_minutes'
+
+    @pytest.mark.parametrize("missing", list(DEFAULT))
+    def test_p03_missing_field_is_not_an_implicit_partial_update(harness: Harness, missing: str) -&gt; None:
+        h = harness
+        h.account()
+        body = {key: value for key, value in DEFAULT.items() if key != missing}
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=body).status_code == 422
+E       AssertionError: assert 404 == 422
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '5fdb2f29ca4eddd64b8002995fd729ee923997d8ffef8645ff2043dc6663f629'}, json={'posture_enabled': True, 'sitting_enabled': True, 'sitting_minutes': 50, 'sound_enabled': False})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x135b81bf0&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x135b81bf0&gt; = &lt;tests.conftest.Harness object at 0x135ae5910&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '5fdb2f29ca4eddd64b8002995fd729ee923997d8ffef8645ff2043dc6663f629'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x135ae5910&gt;.csrf
+
+tests/test_notification_preferences.py:86: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_missing_field_is_not_an_implicit_partial_update[sitting_enabled]" time="0.164"><failure message="AssertionError: assert 404 == 422&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '78ac87ed9e091c1bd56d7ebf19b9287766ca9132793baffc04bf8e5212bde2a9'}, json={'posture_enabled': True, 'posture_minutes': 5, 'sitting_minutes': 50, 'sound_enabled': False})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x135c1de10&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x135c1de10&gt; = &lt;tests.conftest.Harness object at 0x135872170&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '78ac87ed9e091c1bd56d7ebf19b9287766ca9132793baffc04bf8e5212bde2a9'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x135872170&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x135872170&gt;
+missing = 'sitting_enabled'
+
+    @pytest.mark.parametrize("missing", list(DEFAULT))
+    def test_p03_missing_field_is_not_an_implicit_partial_update(harness: Harness, missing: str) -&gt; None:
+        h = harness
+        h.account()
+        body = {key: value for key, value in DEFAULT.items() if key != missing}
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=body).status_code == 422
+E       AssertionError: assert 404 == 422
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '78ac87ed9e091c1bd56d7ebf19b9287766ca9132793baffc04bf8e5212bde2a9'}, json={'posture_enabled': True, 'posture_minutes': 5, 'sitting_minutes': 50, 'sound_enabled': False})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x135c1de10&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x135c1de10&gt; = &lt;tests.conftest.Harness object at 0x135872170&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '78ac87ed9e091c1bd56d7ebf19b9287766ca9132793baffc04bf8e5212bde2a9'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x135872170&gt;.csrf
+
+tests/test_notification_preferences.py:86: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_missing_field_is_not_an_implicit_partial_update[sitting_minutes]" time="0.193"><failure message="AssertionError: assert 404 == 422&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '952d49470b900d2116515c76b71b8ef4f42060cd0e7d678be4aaa70750c01528'}, json={'posture_enabled': True, 'posture_minutes': 5, 'sitting_enabled': True, 'sound_enabled': False})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x135cae030&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x135cae030&gt; = &lt;tests.conftest.Harness object at 0x1358704b0&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '952d49470b900d2116515c76b71b8ef4f42060cd0e7d678be4aaa70750c01528'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x1358704b0&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x1358704b0&gt;
+missing = 'sitting_minutes'
+
+    @pytest.mark.parametrize("missing", list(DEFAULT))
+    def test_p03_missing_field_is_not_an_implicit_partial_update(harness: Harness, missing: str) -&gt; None:
+        h = harness
+        h.account()
+        body = {key: value for key, value in DEFAULT.items() if key != missing}
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=body).status_code == 422
+E       AssertionError: assert 404 == 422
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '952d49470b900d2116515c76b71b8ef4f42060cd0e7d678be4aaa70750c01528'}, json={'posture_enabled': True, 'posture_minutes': 5, 'sitting_enabled': True, 'sound_enabled': False})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x135cae030&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x135cae030&gt; = &lt;tests.conftest.Harness object at 0x1358704b0&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '952d49470b900d2116515c76b71b8ef4f42060cd0e7d678be4aaa70750c01528'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x1358704b0&gt;.csrf
+
+tests/test_notification_preferences.py:86: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_missing_field_is_not_an_implicit_partial_update[sound_enabled]" time="0.169"><failure message="AssertionError: assert 404 == 422&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '787cb5b4e5ae8c940bfa9af304452861a61eb544d23e8446c825e34bdc936a95'}, json={'posture_enabled': True, 'posture_minutes': 5, 'sitting_enabled': True, 'sitting_minutes': 50})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x135d5a250&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x135d5a250&gt; = &lt;tests.conftest.Harness object at 0x135ccc320&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '787cb5b4e5ae8c940bfa9af304452861a61eb544d23e8446c825e34bdc936a95'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x135ccc320&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x135ccc320&gt;
+missing = 'sound_enabled'
+
+    @pytest.mark.parametrize("missing", list(DEFAULT))
+    def test_p03_missing_field_is_not_an_implicit_partial_update(harness: Harness, missing: str) -&gt; None:
+        h = harness
+        h.account()
+        body = {key: value for key, value in DEFAULT.items() if key != missing}
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=body).status_code == 422
+E       AssertionError: assert 404 == 422
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '787cb5b4e5ae8c940bfa9af304452861a61eb544d23e8446c825e34bdc936a95'}, json={'posture_enabled': True, 'posture_minutes': 5, 'sitting_enabled': True, 'sitting_minutes': 50})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x135d5a250&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x135d5a250&gt; = &lt;tests.conftest.Harness object at 0x135ccc320&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '787cb5b4e5ae8c940bfa9af304452861a61eb544d23e8446c825e34bdc936a95'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x135ccc320&gt;.csrf
+
+tests/test_notification_preferences.py:86: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_technical_bounds_and_both_opt_out[1]" time="0.168"><failure message="AssertionError: assert {'detail': 'Not Found'} == {'posture_ena...utes': 1, ...}&#10;  &#10;  Left contains 1 more item:&#10;  {'detail': 'Not Found'}&#10;  Right contains 5 more items:&#10;  {'posture_enabled': False,&#10;   'posture_minutes': 1,&#10;   'sitting_enabled': False,...&#10;  &#10;  ...Full output truncated (3 lines hidden), use '-vv' to show">harness = &lt;tests.conftest.Harness object at 0x135d629d0&gt;, minutes = 1
+
+    @pytest.mark.parametrize("minutes", [1, 1440])
+    def test_p03_technical_bounds_and_both_opt_out(harness: Harness, minutes: int) -&gt; None:
+        h = harness
+        h.account()
+        body = {**DEFAULT, "posture_enabled": False, "sitting_enabled": False, "posture_minutes": minutes, "sitting_minutes": minutes}
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=body).json() == body
+E       AssertionError: assert {'detail': 'Not Found'} == {'posture_ena...utes': 1, ...}
+E
+E         Left contains 1 more item:
+E         {'detail': 'Not Found'}
+E         Right contains 5 more items:
+E         {'posture_enabled': False,
+E          'posture_minutes': 1,
+E          'sitting_enabled': False,...
+E
+E         ...Full output truncated (3 lines hidden), use '-vv' to show
+
+tests/test_notification_preferences.py:95: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p03_technical_bounds_and_both_opt_out[1440]" time="0.164"><failure message="AssertionError: assert {'detail': 'Not Found'} == {'posture_ena...s': 1440, ...}&#10;  &#10;  Left contains 1 more item:&#10;  {'detail': 'Not Found'}&#10;  Right contains 5 more items:&#10;  {'posture_enabled': False,&#10;   'posture_minutes': 1440,&#10;   'sitting_enabled': False,...&#10;  &#10;  ...Full output truncated (3 lines hidden), use '-vv' to show">harness = &lt;tests.conftest.Harness object at 0x135cd44d0&gt;, minutes = 1440
+
+    @pytest.mark.parametrize("minutes", [1, 1440])
+    def test_p03_technical_bounds_and_both_opt_out(harness: Harness, minutes: int) -&gt; None:
+        h = harness
+        h.account()
+        body = {**DEFAULT, "posture_enabled": False, "sitting_enabled": False, "posture_minutes": minutes, "sitting_minutes": minutes}
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=body).json() == body
+E       AssertionError: assert {'detail': 'Not Found'} == {'posture_ena...s': 1440, ...}
+E
+E         Left contains 1 more item:
+E         {'detail': 'Not Found'}
+E         Right contains 5 more items:
+E         {'posture_enabled': False,
+E          'posture_minutes': 1440,
+E          'sitting_enabled': False,...
+E
+E         ...Full output truncated (3 lines hidden), use '-vv' to show
+
+tests/test_notification_preferences.py:95: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p04_guest_origin_csrf_and_revoked_account" time="0.091"><failure message="AssertionError: assert 404 == 401&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = get('/api/v1/settings/notifications')&#10; +      where get = &lt;starlette.testclient.TestClient object at 0x135288050&gt;.get&#10; +        where &lt;starlette.testclient.TestClient object at 0x135288050&gt; = &lt;tests.conftest.Harness object at 0x135c3dda0&gt;.client">harness = &lt;tests.conftest.Harness object at 0x135c3dda0&gt;
+
+    def test_p04_guest_origin_csrf_and_revoked_account(harness: Harness) -&gt; None:
+        h = harness
+&gt;       assert h.client.get(PATH).status_code == 401
+E       AssertionError: assert 404 == 401
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = get('/api/v1/settings/notifications')
+E        +      where get = &lt;starlette.testclient.TestClient object at 0x135288050&gt;.get
+E        +        where &lt;starlette.testclient.TestClient object at 0x135288050&gt; = &lt;tests.conftest.Harness object at 0x135c3dda0&gt;.client
+
+tests/test_notification_preferences.py:101: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p04_expired_session_cannot_read_or_write" time="0.163"><failure message="AssertionError: assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '7b616dabfe48a75640f497d7a38a03dbbe6b80f316e0c46410e2718cbff67999'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x135e03bd0&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x135e03bd0&gt; = &lt;tests.conftest.Harness object at 0x135be9080&gt;.client">harness = &lt;tests.conftest.Harness object at 0x135be9080&gt;
+
+    def test_p04_expired_session_cannot_read_or_write(harness: Harness) -&gt; None:
+        h = harness
+        h.account()
+        proof = h.csrf()
+&gt;       assert h.client.post(PATH, headers=proof, json=CHANGED).status_code == 200
+E       AssertionError: assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '7b616dabfe48a75640f497d7a38a03dbbe6b80f316e0c46410e2718cbff67999'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x135e03bd0&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x135e03bd0&gt; = &lt;tests.conftest.Harness object at 0x135be9080&gt;.client
+
+tests/test_notification_preferences.py:118: AssertionError</failure></testcase><testcase classname="tests.test_notification_preferences" name="test_p05_actual_withdrawal_cascades_only_owner_settings" time="0.164"><failure message="AssertionError: assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code&#10; +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '929148d0e4c00373a74d2e09d3b4d6428ae0889fb8eb4539ff976462a5bdfa8d'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})&#10; +      where post = &lt;starlette.testclient.TestClient object at 0x1277cbdf0&gt;.post&#10; +        where &lt;starlette.testclient.TestClient object at 0x1277cbdf0&gt; = &lt;tests.conftest.Harness object at 0x135af6c80&gt;.client&#10; +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '929148d0e4c00373a74d2e09d3b4d6428ae0889fb8eb4539ff976462a5bdfa8d'} = csrf()&#10; +        where csrf = &lt;tests.conftest.Harness object at 0x135af6c80&gt;.csrf">harness = &lt;tests.conftest.Harness object at 0x135af6c80&gt;
+
+    def test_p05_actual_withdrawal_cascades_only_owner_settings(harness: Harness) -&gt; None:
+        h = harness
+        owner = h.account()
+&gt;       assert h.client.post(PATH, headers=h.csrf(), json=CHANGED).status_code == 200
+E       AssertionError: assert 404 == 200
+E        +  where 404 = &lt;Response [404 Not Found]&gt;.status_code
+E        +    where &lt;Response [404 Not Found]&gt; = post('/api/v1/settings/notifications', headers={'Origin': 'http://localhost:5173', 'X-CSRF-Token': '929148d0e4c00373a74d2e09d3b4d6428ae0889fb8eb4539ff976462a5bdfa8d'}, json={'posture_enabled': False, 'posture_minutes': 15, 'sitting_enabled': True, 'sitting_minutes': 90, ...})
+E        +      where post = &lt;starlette.testclient.TestClient object at 0x1277cbdf0&gt;.post
+E        +        where &lt;starlette.testclient.TestClient object at 0x1277cbdf0&gt; = &lt;tests.conftest.Harness object at 0x135af6c80&gt;.client
+E        +      and   {'Origin': 'http://localhost:5173', 'X-CSRF-Token': '929148d0e4c00373a74d2e09d3b4d6428ae0889fb8eb4539ff976462a5bdfa8d'} = csrf()
+E        +        where csrf = &lt;tests.conftest.Harness object at 0x135af6c80&gt;.csrf
+
+tests/test_notification_preferences.py:127: AssertionError</failure></testcase></testsuite></testsuites>

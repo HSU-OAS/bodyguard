@@ -85,7 +85,7 @@ def test_runtime_actual_schema_failure_and_recovery(harness: Harness, fault: str
         with harness.engine.begin() as connection:
             if fault == "revision":
                 connection.execute(
-                    text("UPDATE alembic_version SET version_num = '0005_account_withdrawal'")
+                    text("UPDATE alembic_version SET version_num = '0006_notification_preferences'")
                 )
             else:
                 connection.execute(
@@ -436,7 +436,8 @@ def test_runtime_actual_production_http_routes_and_db_recovery(harness: Harness)
                     with harness.engine.begin() as connection:
                         connection.execute(
                             text(
-                                "UPDATE alembic_version SET version_num = '0005_account_withdrawal'"
+                                "UPDATE alembic_version "
+                                "SET version_num = '0006_notification_preferences'"
                             )
                         )
                 assert client.get("/api/v1/health/ready").status_code == 200

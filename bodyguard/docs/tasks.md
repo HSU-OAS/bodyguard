@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+최신: [S4.N1 계정별 알림 설정 API](stories/stage4-notification-preferences-api.md)를 별도 작업트리/전용 PostgreSQL에서 구현했다. 기본5분/50분·켜기/끄기·소리 설정의 본인 저장/조회, 타인/다른 세션 격리, 실패 시 이전 값 보존, 탈퇴 cascade/타인 보존과 실제 migration/복구를 확인했다. [실패·실제/합성·검증 증거](review/notification-preferences-api/README.md). 최신 mainf47dea1 통합 후 전체321 API/523 frontend·타입/정적/build/guard를 통과했고 조건부 PR 게이트 진행이다. 설정 화면/실제 알림은 아직 미연결이며 다음 독립 Story에서 화이트·블루 웹에 연결한다. SDK/privacy·실측/classifier·아바타 이월·Q32 나머지/참여자/법무/외부/운영·전체1~6 미완료를 유지한다. 아래는 시점별 기록이다.
+
 최신: [S4.11 실제 로그인 권위/페이지 수명 연결](stories/coaching-auth-lifecycle.md)을 구현했다. 실제 AuthProvider committed ready·명시 준비/수행/본인 기록과 계정 변경·로그아웃 실패·이탈 폐기를 연결했고 [작동 화면·실패 원본·미완료 증거](review/coaching-auth-lifecycle/README.md)를 보존했다. 최종 전체523 frontend/291 API·Chrome4/공개8·타입/정적/build/guard·source8/artifact46 검증 후 조건부 PR 게이트 진행이다. 공개 코칭 producer0·classifier/두 아바타/실측·Draft36 SDK 개인정보 P2·Q32/참여자/법무/외부/운영·전체1~6 미완료, 화이트·블루 웹·같은 아바타 부위 새 제작0을 유지한다. 아래는 시점별 기록이다.
 
 최신: [PR40](https://github.com/HSU-OAS/bodyguard/pull/40) source553b5b2는 scoped 검증·리뷰 보완·remote47 blob/diff·latest main/CLEAN·체크 없음 후 merge43b13f3로 main에 포함됐고 브랜치를 보존했다. 최신 main의 codex/coaching-auth-lifecycle에서 [S4.11 실제 로그인 권위/페이지 수명 연결](stories/coaching-auth-lifecycle.md)을 시작했다. 구현 전 계약/최초 하네스 단계이며 공개 코칭/실제 SDK/두 아바타/실측·참여자/외부/운영/Q32·전체1~6 미완료를 유지한다. 화이트·블루 웹·같은 아바타 부위 새 제작0이다. 아래는 시점별 기록이다.

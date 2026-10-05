@@ -29,6 +29,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.config import Settings
 from app.db import challenges, google_flows, limits, resets, sessions, users
+from app.notification_preferences import register_notification_preferences
 from app.readiness import register_readiness
 from app.records import register_records
 from app.security import cleanup, code, digest, keyed, passwords, quota, token
@@ -988,6 +989,7 @@ def create_app(
         return keyed(key, "record-deletion-preview", binding)
 
     register_records(app, db, now_fn, record_owner, record_deletion_sign)
+    register_notification_preferences(app, db, record_owner)
 
     def withdrawal_owner(connection: Connection, request: Request) -> tuple[RowMapping, str]:
         # FR-U-05: bound contention rolls back instead of waiting in opposing auth lock orders.
