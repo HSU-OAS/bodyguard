@@ -22,6 +22,9 @@ type State =
   | { status: 'checking' | 'guest' | 'offline' | 'logging-out' | 'logout-error' | 'withdrawing' }
   | { status: 'ready'; user: UserOut }
 
+// FR-U-04: type-only authority for private coaching ownership adapters, not a new UI gate.
+export type ReadyAccount = Extract<State, { status: 'ready' }>
+
 const Auth = createContext<{
   state: State
   refresh: () => Promise<void>

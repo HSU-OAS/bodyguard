@@ -1,0 +1,20 @@
+[WebServer] (node:96584) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ node scripts/prepare-assets.mjs && tsc --noEmit && vite build
+[WebServer] (node:96618) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:96633) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:96648) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:96666) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/ownercapture.spec.ts:109:1 › O05 real me/csrf/me captures authority and writes own record without exporting proof (2.3s)
+  ✓  2 e2e/ownercapture.spec.ts:133:1 › O05 account changes during capture: original ready authority cannot become new server account (1.4s)
+  ✓  3 e2e/ownercapture.spec.ts:160:1 › O05 missed caller account notification still cannot write with captured old proof under new cookie (1.5s)
+  ✓  4 e2e/ownercapture.spec.ts:184:1 › O05 abort during held real CSRF closes late capture, with no POST (976ms)
+
+  4 passed (21.6s)

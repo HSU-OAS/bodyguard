@@ -1,6 +1,6 @@
 # S4.8 — 실제 코칭 결과→본인 기록 계약·adapter
 
-review · 기준 main6d7e78fdc4c396707044f3e5d6d57268ebf3962d · codex/coaching-result-record
+완료(해당 private 기술 Story만) · 기준 main6d7e78fdc4c396707044f3e5d6d57268ebf3962d · codex/coaching-result-record
 
 ## 범위/선행 상태
 
@@ -57,6 +57,8 @@ R01~05 상세23건을 먼저 작성해 미구현 collection red를 실행한 뒤
 기존 API/실제 격리 SQL 전체291건(135.49초)·Ruff/format/mypy 통과. 기존 asyncio deprecated 경고1은 보존했다. 공개 Chrome 회귀7건+test RAF 합성1건 통과. 공개 JS/CSS는 이전 source와 SHA 동일하고 새로운 producer/합성 fixture0; guard에 누출 파일을 실제 넣어 exit1을 확인하고 해당 시험 파일만 제거한 뒤 exit0. CI·실제 HTTPS·운영·참여자·Figma/외부 디자인 audit는 실행하지 않았다. 화이트/블루 공개 UI 그대로다.
 
 README·원본/공개 SHA23증거·source SHA9파일을 수집하고 재실행 시 불변을 확인한다. 범위 내 미해결 P1/P2 없음. Draft36 SDK 계측 P2·아바타/실측·실제 owner/time capture·관찰 classifier·공개 coaching/자동 기록·Q32 부가 기능·참여자/운영/1~6단계 미완료는 그대로이며 후속 독립 작업을 이어간다.
+
+실제 PR38 https://github.com/HSU-OAS/bodyguard/pull/38의 source92a98ec62a9e44c84cc3471d36c1ca5211fc18a6에 대해 최신 main/diff39파일·scope/원격 HEAD/MERGEABLE/CLEAN·체크 없음·외부 리뷰 없음·작성자 보완/미해결scope P1/P2 없음·clean/SHA를 확인했다. merge54227451e761f909dd950f821de3d54329e4b2f5(2026-10-05T15:20:47Z) 실제 부모6d7e78fd+92a98ec6·main 포함/source 브랜치 유지까지 확인했다. 운영 변경0·전체 단계 완료 아님. 다음 S4.9에서 인증 컨텍스트를 확보한다.
 
 ## File List
 

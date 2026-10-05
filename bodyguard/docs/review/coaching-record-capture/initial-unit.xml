@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="13" failures="0" errors="0" time="0.144893708">
+    <testsuite name="src/coaching/recordOwner.test.ts" timestamp="2026-10-05T15:30:44.207Z" hostname="local-test-host" tests="13" failures="0" errors="0" skipped="0" time="0.144893708">
+        <testcase classname="src/coaching/recordOwner.test.ts" name="O02 captures original ready account through me/csrf/me; only one inert writer, no returned ID/proof" time="0.030745334">
+        </testcase>
+        <testcase classname="src/coaching/recordOwner.test.ts" name="O03 replacement during await 0 cannot capture a late response" time="0.003708083">
+        </testcase>
+        <testcase classname="src/coaching/recordOwner.test.ts" name="O03 replacement during await 1 cannot capture a late response" time="0.052353708">
+        </testcase>
+        <testcase classname="src/coaching/recordOwner.test.ts" name="O03 replacement during await 2 cannot capture a late response" time="0.051750125">
+        </testcase>
+        <testcase classname="src/coaching/recordOwner.test.ts" name="O03 server account differs from original authority at me 0: no captured writer" time="0.000957083">
+        </testcase>
+        <testcase classname="src/coaching/recordOwner.test.ts" name="O03 server account differs from original authority at me 2: no captured writer" time="0.000401916">
+        </testcase>
+        <testcase classname="src/coaching/recordOwner.test.ts" name="O03 actual API failure 401 exposes no raw body" time="0.000614">
+        </testcase>
+        <testcase classname="src/coaching/recordOwner.test.ts" name="O03 actual API failure 503 exposes no raw body" time="0.000275917">
+        </testcase>
+        <testcase classname="src/coaching/recordOwner.test.ts" name="O03 mutated user ID and provider/accessor exception cannot retain authority" time="0.000504666">
+        </testcase>
+        <testcase classname="src/coaching/recordOwner.test.ts" name="O04 external abort closes pending writer and its late response cannot reopen it" time="0.001035542">
+        </testcase>
+        <testcase classname="src/coaching/recordOwner.test.ts" name="O04 same-user new authority and close forbid new writer/retry" time="0.000330458">
+        </testcase>
+        <testcase classname="src/coaching/recordOwner.test.ts" name="O03 malformed proof and abort during capture have fixed failure with no later GET" time="0.000449792">
+        </testcase>
+        <testcase classname="src/coaching/recordOwner.test.ts" name="O01 guest and already aborted authority cannot request or create a writer" time="0.0003405">
+        </testcase>
+    </testsuite>
+</testsuites>
