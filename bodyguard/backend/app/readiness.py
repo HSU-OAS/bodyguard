@@ -14,7 +14,7 @@ from sqlalchemy import Engine, false, select
 
 from app.db import metadata
 
-EXPECTED_REVISION = "0007_account_baselines"
+EXPECTED_REVISION = "0008_minute_summaries"
 PROBE_TIMEOUT_SECONDS = 3
 
 

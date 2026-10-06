@@ -7,6 +7,7 @@ from sqlalchemy import (
     DateTime,
     Double,
     ForeignKey,
+    ForeignKeyConstraint,
     Index,
     Integer,
     MetaData,
@@ -16,6 +17,84 @@ from sqlalchemy import (
 )
 
 metadata = MetaData()
+minute_summaries = Table(
+    "minute_summaries",
+    metadata,
+    Column("user_id", String(36), ForeignKey("users.id", ondelete="CASCADE"), primary_key=True),
+    Column("minute_start", DateTime(timezone=True), primary_key=True),
+    Column("baseline_id", String(36)),
+    Column("client_version", String(64), nullable=False),
+    Column("created_at", DateTime(timezone=True), nullable=False),
+    ForeignKeyConstraint(
+        ["user_id", "baseline_id"], ["baselines.user_id", "baselines.id"], ondelete="CASCADE"
+    ),
+    CheckConstraint(
+        "isfinite(minute_start) AND "
+        "EXTRACT(SECOND FROM minute_start AT TIME ZONE 'UTC') = 0 AND "
+        "EXTRACT(YEAR FROM minute_start AT TIME ZONE 'UTC') BETWEEN 1 AND 9999",
+        name="summary_utc_minute",
+    ),
+    CheckConstraint(
+        "client_version ~ '^[a-zA-Z0-9][a-zA-Z0-9._+-]{0,63}$'", name="summary_version"
+    ),
+)
+for _field in (
+    "coverage_sec",
+    "measured_sec",
+    "unmeasurable_sec",
+    "present_sec",
+    "background_sec",
+    "any_bad_sec",
+):
+    minute_summaries.append_column(Column(_field, Double(), nullable=False))
+    minute_summaries.append_constraint(
+        CheckConstraint(f"{_field} BETWEEN 0 AND 60", name=f"summary_{_field}")
+    )
+for _metric in ("neck", "shoulder", "trunk"):
+    for _field in ("method", "unit"):
+        minute_summaries.append_column(Column(f"{_metric}_{_field}", String(64), nullable=False))
+        minute_summaries.append_constraint(
+            CheckConstraint(
+                f"{_metric}_{_field} ~ '^[a-zA-Z0-9][a-zA-Z0-9._+-]{{0,63}}$'",
+                name=f"summary_{_metric}_{_field}",
+            )
+        )
+    minute_summaries.append_column(Column(f"{_metric}_dev_mean", Double()))
+    for _field in ("measured_sec", "bad_sec"):
+        minute_summaries.append_column(Column(f"{_metric}_{_field}", Double(), nullable=False))
+        minute_summaries.append_constraint(
+            CheckConstraint(
+                f"{_metric}_{_field} BETWEEN 0 AND 60", name=f"summary_{_metric}_{_field}"
+            )
+        )
+    minute_summaries.append_constraint(
+        CheckConstraint(
+            f"(({_metric}_measured_sec = 0 AND {_metric}_dev_mean IS NULL "
+            f"AND {_metric}_bad_sec = 0) OR ({_metric}_measured_sec > 0 "
+            f"AND {_metric}_dev_mean IS NOT NULL AND {_metric}_dev_mean "
+            "BETWEEN -9007199254740991 AND 9007199254740991)) AND "
+            f"{_metric}_bad_sec <= {_metric}_measured_sec + 0.000001 AND "
+            f"{_metric}_measured_sec <= measured_sec + 0.000001",
+            name=f"summary_{_metric}_consistent",
+        )
+    )
+minute_summaries.append_constraint(
+    CheckConstraint(
+        "ABS(coverage_sec - measured_sec - unmeasurable_sec - background_sec) <= 0.000001 AND "
+        "measured_sec <= present_sec + 0.000001 AND "
+        "present_sec <= coverage_sec - background_sec + 0.000001 AND "
+        "measured_sec <= neck_measured_sec + shoulder_measured_sec "
+        "+ trunk_measured_sec + 0.000001 AND "
+        "GREATEST(neck_bad_sec, shoulder_bad_sec, trunk_bad_sec) <= any_bad_sec + 0.000001 AND "
+        "any_bad_sec <= measured_sec + 0.000001 AND "
+        "any_bad_sec <= neck_bad_sec + shoulder_bad_sec + trunk_bad_sec + 0.000001 AND "
+        "measured_sec - any_bad_sec <= neck_measured_sec - neck_bad_sec "
+        "+ shoulder_measured_sec - shoulder_bad_sec + trunk_measured_sec - trunk_bad_sec "
+        "+ 0.000001 AND "
+        "(baseline_id IS NOT NULL OR (neck_measured_sec = 0 AND trunk_measured_sec = 0))",
+        name="summary_consistent",
+    )
+)
 baselines = Table(
     "baselines",
     metadata,

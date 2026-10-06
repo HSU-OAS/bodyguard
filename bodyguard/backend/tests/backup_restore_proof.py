@@ -20,7 +20,14 @@ from sqlalchemy import URL, Engine, create_engine, delete, insert, select, text,
 from sqlalchemy.exc import IntegrityError
 
 from app.config import Settings
-from app.db import baselines, metadata, notification_preferences, stretch_records, users
+from app.db import (
+    baselines,
+    metadata,
+    minute_summaries,
+    notification_preferences,
+    stretch_records,
+    users,
+)
 from app.main import create_app
 from app.security import passwords
 
@@ -537,6 +544,43 @@ def run_isolated_proof(*, _interrupt_before_restore: bool = False) -> dict[str, 
                 json=baseline_bodies[2],
             )
             _require(response.status_code == 201, "Source other baseline API save failed")
+            summary_minute = now.replace(second=0, microsecond=0) - timedelta(minutes=2)
+            metric = {
+                "method": "fixture-shoulder",
+                "unit": "deg",
+                "dev_mean": None,
+                "measured_sec": 0,
+                "bad_sec": 0,
+            }
+            summary_bodies = [
+                {
+                    "minute_start": (summary_minute + timedelta(minutes=index % 2)).isoformat(),
+                    "baseline_id": baseline_bodies[index]["id"],
+                    "client_version": "fixture-not-release",
+                    "coverage_sec": 60,
+                    "measured_sec": 30,
+                    "unmeasurable_sec": 30,
+                    "present_sec": 60,
+                    "background_sec": 0,
+                    "any_bad_sec": 15,
+                    "neck": {**metric, "method": "fixture-neck"},
+                    "trunk": {**metric, "method": "fixture-trunk"},
+                    "shoulder": {**metric, "dev_mean": 1.25, "measured_sec": 30, "bad_sec": 15},
+                }
+                for index in range(3)
+            ]
+            saved_summaries = []
+            for client, token, bodies in (
+                (live, csrf, summary_bodies[:2]),
+                (separate, other_csrf, summary_bodies[2:]),
+            ):
+                response = client.post(
+                    "/api/v1/summaries/batch",
+                    headers={"Origin": ORIGIN, "X-CSRF-Token": token},
+                    json={"items": bodies},
+                )
+                _require(response.status_code == 201, "Source minute summary API save failed")
+                saved_summaries.append(response.json()["items"])
             snapshot_fingerprint, snapshot_schema = _fingerprint(original), _schema(original)
             (root / "source-schema.json").write_text(json.dumps(snapshot_schema))
             (root / "source-schema.json").chmod(0o600)
@@ -672,6 +716,72 @@ def run_isolated_proof(*, _interrupt_before_restore: bool = False) -> dict[str, 
                 and candidate.get("/api/v1/baselines/" + baseline_bodies[2]["id"]).status_code
                 == 404
             )
+            result["minute_summaries_restored"] = candidate.get("/api/v1/summaries").json() == {
+                "items": saved_summaries[0][::-1],
+                "has_more": False,
+            }
+            other_candidate = stack.enter_context(_client(restored, key))
+            _login(other_candidate, "other@example.com", password)
+            result["minute_summary_owner_isolation_restored"] = other_candidate.get(
+                "/api/v1/summaries"
+            ).json() == {
+                "items": saved_summaries[1],
+                "has_more": False,
+            }
+            target_before_summary_probe = _fingerprint(restored)
+            with restored.connect() as c:
+                summary_row = dict(
+                    c.execute(select(minute_summaries).where(minute_summaries.c.user_id == owner))
+                    .mappings()
+                    .first()
+                )
+            for change, state in (
+                ({"baseline_id": baseline_bodies[2]["id"]}, "23503"),
+                ({"coverage_sec": None}, "23502"),
+                ({"coverage_sec": float("nan")}, "23514"),
+                ({"shoulder_dev_mean": None}, "23514"),
+                (
+                    {
+                        "measured_sec": 60,
+                        "unmeasurable_sec": 0,
+                        "any_bad_sec": 20,
+                        **{
+                            f"{metric}_{field}": value
+                            for metric in ("neck", "shoulder", "trunk")
+                            for field, value in (
+                                ("measured_sec", 20),
+                                ("bad_sec", 20),
+                                ("dev_mean", 1),
+                            )
+                        },
+                    },
+                    "23514",
+                ),
+            ):
+                with restored.connect() as c:
+                    transaction = c.begin()
+                    try:
+                        c.execute(
+                            insert(minute_summaries).values(
+                                **{
+                                    **summary_row,
+                                    "minute_start": summary_minute - timedelta(minutes=1),
+                                    **change,
+                                }
+                            )
+                        )
+                    except IntegrityError as error:
+                        _require(
+                            getattr(error.orig, "sqlstate", None) == state,
+                            "Wrong restored summary constraint",
+                        )
+                    else:
+                        raise RuntimeError("Restored summary constraint accepted invalid data")
+                    finally:
+                        transaction.rollback()
+            result["minute_summary_constraints_restored"] = (
+                _fingerprint(restored) == target_before_summary_probe
+            )
             corrupt = root / "corrupt.custom"
             corrupt.write_bytes(b"BODYGUARD-owned-invalid-archive\n" + archive.read_bytes()[32:])
             corrupt.chmod(0o600)
@@ -698,11 +808,14 @@ def run_isolated_proof(*, _interrupt_before_restore: bool = False) -> dict[str, 
             )
             result["proof_completed"] = all(
                 (
-                    result["revision"] == "0007_account_baselines",
+                    result["revision"] == "0008_minute_summaries",
                     result["restored_counts"] == result["source_counts"],
                     result["record_contents_match"],
                     result["notification_preferences_restored"],
                     result["baseline_history_and_owner_restored"],
+                    result["minute_summaries_restored"],
+                    result["minute_summary_owner_isolation_restored"],
+                    result["minute_summary_constraints_restored"],
                     result["database_constraints_preserved"],
                     result["ready_status"] == 200,
                     result["login_status"] == 200,

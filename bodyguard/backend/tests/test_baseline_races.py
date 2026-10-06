@@ -183,6 +183,10 @@ def test_b06_downgrade_waits_for_concurrent_insert_then_preserves_it(harness: Ha
     # Alembic creates its own engine against the same ownership-guarded test DB.
     # Engine event observes the actual migration SQL; neither op nor SQL is mocked.
     config = Config("alembic.ini")
+    # Isolate the original 0007 guard: dropping the empty new child table otherwise
+    # needs parent relation locks before 0007's observed LOCK statement. This fixture
+    # has no summaries; the new 0008 guard has its own actual concurrent-insert test.
+    command.downgrade(config, "0007_account_baselines")
 
     def downgrade() -> None:
         command.downgrade(config, "0006_notification_preferences")
@@ -204,9 +208,10 @@ def test_b06_downgrade_waits_for_concurrent_insert_then_preserves_it(harness: Ha
     finally:
         event.remove(h.engine, "after_cursor_execute", after)
         event.remove(Engine, "before_cursor_execute", before)
+        command.upgrade(config, "head")
     assert h.client.get(PATH + "/active").status_code == 200
     with h.engine.connect() as c:
-        assert c.scalar(text("SELECT version_num FROM alembic_version")) == "0007_account_baselines"
+        assert c.scalar(text("SELECT version_num FROM alembic_version")) == "0008_minute_summaries"
 
 
 def test_b05_actual_owner_lock_timeout_preserves_active(harness: Harness) -> None:
