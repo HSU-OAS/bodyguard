@@ -1,0 +1,50 @@
+/* Calm medical white/blue; comparative data, not invented clinical status badges. */
+.minute-list-note {
+  margin-top: 16px;
+}
+.minute-detail-button {
+  color: var(--accent);
+  min-height: 48px;
+  padding: 8px 0;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+.minute-detail-button[aria-pressed="true"] {
+  color: var(--ink);
+}
+.minute-screen .record-detail {
+  max-width: none;
+}
+.minute-detail > p:not(.eyebrow) {
+  margin-top: 16px;
+  max-width: 760px;
+}
+.minute-screen .records-table-scroll:focus-visible,
+.minute-screen .minute-detail-button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+}
+.minute-screen .record-detail dl {
+  max-width: 760px;
+}
+.minute-screen .records-back {
+  margin-top: 32px;
+}
+@media (max-width: 500px) {
+  .minute-screen .records-filter label {
+    width: 100%;
+  }
+  .minute-screen .records-filter input {
+    width: 100%;
+    min-width: 0;
+  }
+  .minute-screen .record-detail dl > div {
+    grid-template-columns: 120px minmax(0, 1fr);
+  }
+}

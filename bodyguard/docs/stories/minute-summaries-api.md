@@ -1,6 +1,6 @@
 # S4.14 — 본인 계정의 1분 요약 저장·조회·기간 삭제
 
-Status: review
+Status: done (S4.14 API 범위만)
 baseline_commit: fccd5c4a46ee2f7695b502fb987fed091124e95e
 
 ## 사용자 가치와 범위
@@ -35,7 +35,7 @@ FR-R-01/02/04, FR-U-03, NFR-07/08, Q-32: 로그인한 사용자의 브라우저 
 - [x] red → API/DB/새 migration 구현
 - [x] 경계·삭제·경합·탈퇴·SQL·백업·타입 하네스 검증
 - [x] 전체 회귀·소스 리뷰·증거 보존
-- [ ] 커밋·PR·재검토·조건부 병합 및 결과 기록
+- [x] 커밋·PR·재검토·조건부 병합 및 결과 기록
 
 ## 근거와 기술 결정
 
@@ -48,6 +48,8 @@ FR-R-01/02/04, FR-U-03, NFR-07/08, Q-32: 로그인한 사용자의 브라우저 
 실제 전체457 API·590 frontend, production Chrome 공개8/알림 설정4와 native 복구를 통과했다. 마지막 추가 OpenAPI 시험은 전역 ErrorOut으로 최초부터 통과했으며 red 파일명만으로 실패라 부르지 않는다. 추가 전체 회귀의 sandbox DB 소켓/프로세스 차단 실패 원본을 보존하고 필요한 로컬 접근으로 전체458 API를 실제 재실행해 실패/오류/skip0(130.66초)을 확인했다. 기존 asyncio warning1은 별도다. 최종 Ruff/format/mypy도 통과했다. [실제 실패·통과·화면과 한계](../review/minute-summaries/README.md)에 결과를 기록한다.
 
 BMAD create/dev Story와 engineering:code-review를 적용했다. 저장소 `_bmad` resolver는 missing-file이며 설치/설정 성공을 주장하지 않는다. 독립 최종 읽기 전용 리뷰는 미해결 scoped P1/P2 없음이다. API/DB 회귀는 작성자가 실제 실행하고 임상 검증과 구분한다. web-design-studio의 기존 화이트·블루 웹 계약을 유지했으며 신규 UI·Figma/axe는 없다. 공개 측정 생산자0·출시 허용 동작0·전체1~6 미완료와 별도 승인 경계를 유지한다.
+
+[PR48](https://github.com/HSU-OAS/bodyguard/pull/48)의 실제 source36bbab52576e2d600b4750967547cf12706f2dfe를 merge654688be08ede24351491b687acae2b630dd674b로 2026-10-06T05:06:42Z 병합했다. 실제 부모fccd5c4/36bbab5·원격 main 포함·브랜치 보존·clean을 확인했다. 병합 직전80파일 원격/로컬 diff 본문·hunk 좌표, source20/artifact54 SHA·정확한 HEAD/CLEAN/MERGEABLE·체크 없음·외부 리뷰0을 확인했다. [작성자 검토](https://github.com/HSU-OAS/bodyguard/pull/48#issuecomment-6009724542)는 외부 전문가 승인으로 표시하지 않는다. 소유한 시험 DB4개 서버도 PID/data/command를 대조해 종료했고 원본/로그/DB 파일은 삭제하지 않았다. 다음 Story는 같은 API를 읽는 웹 화면이며 서버/임상/전체 출시 게이트 통과가 아니다.
 
 ## File List
 
@@ -63,3 +65,4 @@ BMAD create/dev Story와 engineering:code-review를 적용했다. 저장소 `_bm
 - 2026-10-06: S4.14 계약 확정. 덮어쓰기 대신 동일 재시도/충돌 거부, 지표별 분모·방법 보존, 별도 기간 삭제 포함.
 - 2026-10-06: 실제 요약/경합·SQL 제약·native 복구 구현, UTC/날짜/합집합·기존 guard 시험 보완과 실패 보존. 최종 추가 회귀·원격 PR 게이트 진행 중.
 - 2026-10-06: 추가 OpenAPI 시험/전체458 API 재실행 통과·실행 제한 실패 원본 보존. 로컬 검증 완료, 조건부 원격 PR 게이트 진행.
+- 2026-10-06: PR48 실제 merge commit·부모/main 포함·브랜치 보존 확인. API 범위만 완료, 후속 웹 화면과 전체 출시 미완료 유지.

@@ -22,6 +22,7 @@ export default defineConfig({
     'recordedsession.spec.ts',
     'authcoaching.spec.ts',
     'notifications.spec.ts',
+    'summaries.spec.ts',
   ],
   reporter: process.env.BODYGUARD_TEST_RECORDS_REPORT
     ? [['list'], ['json', { outputFile: process.env.BODYGUARD_TEST_RECORDS_REPORT }]]

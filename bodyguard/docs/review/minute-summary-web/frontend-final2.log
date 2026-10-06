@@ -1,0 +1,55 @@
+
+ RUN  v5.0.2 [workspace]/bodyguard/frontend
+
+ ✓ src/coaching/observationLoop.test.ts (19 tests) 1135ms
+ ✓ src/pages/MeasureDemoPage.test.tsx (3 tests) 920ms
+   ✓ 최신 100개만 남기고 준비 중에도 취소할 수 있다 786ms
+ ✓ src/pages/MotionSelectionPage.test.tsx (13 tests) 1042ms
+   ✓ S3.3 opens guidance detail chin-retraction without automatic coaching 434ms
+ ✓ src/coaching/resources.test.ts (40 tests) 799ms
+ ✓ src/pages/RecordDeletion.test.tsx (10 tests) 1153ms
+   ✓ blocks duplicate confirmation and discards deletion response after leaving 325ms
+ ✓ src/pages/NotificationPreferencesPage.test.tsx (14 tests) 1340ms
+ ✓ src/pages/RecordsPage.test.tsx (12 tests) 1342ms
+ ✓ src/pages/PasswordPage.test.tsx (18 tests) 1634ms
+ ✓ src/stretch/progression.test.ts (60 tests) 262ms
+ ✓ src/coaching/session.test.ts (44 tests) 312ms
+ ✓ src/pages/WithdrawalPage.test.tsx (20 tests) 2198ms
+ ✓ src/pages/MinuteSummaryPage.test.tsx (22 tests) 2227ms
+ ✓ src/coaching/recordedSession.test.ts (28 tests) 201ms
+ ✓ src/api/minuteSummaries.test.ts (40 tests) 62ms
+ ✓ src/coaching/recordOwner.test.ts (16 tests) 186ms
+ ✓ src/pages/DataHelpPage.test.tsx (5 tests) 494ms
+ ✓ src/pages/ExplorePage.test.tsx (4 tests) 291ms
+ ✓ src/pages/GoogleAccount.test.tsx (14 tests) 469ms
+ ✓ src/coaching/useRecordedCoaching.test.tsx (20 tests) 427ms
+ ✓ src/api/records.test.ts (15 tests) 67ms
+ ✓ src/api/notificationPreferences.test.ts (18 tests) 61ms
+ ✓ src/coaching/resultRecord.test.ts (29 tests) 106ms
+ ✓ src/auth.test.tsx (12 tests) 195ms
+ ✓ src/posture/landmarks.test.ts (8 tests) 8ms
+ ✓ src/api/recordDeletion.test.ts (13 tests) 88ms
+ ✓ src/api/withdrawal.test.ts (22 tests) 65ms
+ ✓ src/avatar/faceTracking.test.ts (13 tests) 19ms
+ ✓ src/summary/minuteAggregation.test.ts (35 tests) 26ms
+ ✓ src/webDesign.test.ts (14 tests) 9ms
+ ✓ src/catalog/motions.test.ts (10 tests) 13ms
+ ✓ src/avatar/face.test.ts (12 tests) 12ms
+ ✓ src/catalog/recommendation.test.ts (8 tests) 19ms
+ ✓ src/avatar/skeleton.test.ts (8 tests) 17ms
+ ✓ src/App.test.tsx (3 tests) 252ms
+ ✓ src/posture/hands.test.ts (7 tests) 7ms
+ ✓ src/posture/framing.test.ts (9 tests) 6ms
+ ✓ src/pose/camera.test.ts (4 tests) 60ms
+ ✓ src/pose/useMeasurement.test.tsx (9 tests) 30ms
+ ✓ src/pages/MemberPage.test.tsx (1 test) 40ms
+
+ Test Files  39 passed (39)
+      Tests  652 passed (652)
+   Start at  14:43:57
+   Duration  5.75s (tests 43%, environment 32%, import 16%, transform 9%, worker 1%)
+
+    Isolate  39 workers spawned · ~536ms startup each (spawn + environment, per file)
+             at least ~1.79s faster with isolate: false — reuses workers across files instead of one per file
+
+JUNIT report written to [owned-private-scratch]/frontend-final2.xml

@@ -1,0 +1,62 @@
+[WebServer] (node:48405) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ node scripts/prepare-assets.mjs && tsc --noEmit && vite build
+[WebServer] (node:48408) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:48449) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:48465) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:48476) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/summaries.spec.ts:135:1 › SW-W01 실제 계정→자세 기록→상세·페이지·취소·삭제와 화이트 블루 웹 (3.8s)
+  ✓  2 e2e/summaries.spec.ts:233:1 › SW-W02 실제 삭제 뒤 응답 단절은 불확실·명시 재조회이며 재삭제하지 않는다 (898ms)
+  ✘  3 e2e/summaries.spec.ts:259:1 › SW-W03 실제 GET에 다른 계정 쿠키가 섞여도 기록은 표시되지 않는다 (783ms)
+(node:48593) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 e2e/summaries.spec.ts:299:1 › SW-W04 실제 대상 변경409와 조회 오류 복구·invalid 기간 (1.4s)
+
+
+  1) e2e/summaries.spec.ts:259:1 › SW-W03 실제 GET에 다른 계정 쿠키가 섞여도 기록은 표시되지 않는다 ───────────────────────
+
+    Error: route.fulfill: Route is already handled!
+
+      277 |     })
+      278 |     rejection = response.status()
+    > 279 |     await route.fulfill({ response })
+          |                 ^
+      280 |   })
+      281 |   await open(page)
+      282 |   expect(rejection).toBe(403)
+        at [workspace]/bodyguard/frontend/e2e/summaries.spec.ts:279:17
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('button', { name: '삭제 대상 확인' })
+    Expected: visible
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('button', { name: '삭제 대상 확인' }) with timeout 5000ms
+      - waiting for getByRole('button', { name: '삭제 대상 확인' })
+      - Test ended.
+
+
+      56 | async function open(page: Page) {
+      57 |   await page.goto('/posture-records')
+    > 58 |   await expect(page.getByRole('button', { name: '삭제 대상 확인' })).toBeVisible()
+         |                                                                ^
+      59 | }
+      60 | function contrast(a: string, b: string) {
+      61 |   function luminance(value: string) {
+        at open ([workspace]/bodyguard/frontend/e2e/summaries.spec.ts:58:64)
+        at [workspace]/bodyguard/frontend/e2e/summaries.spec.ts:281:3
+
+    Error Context: test-results/summaries-20261006T053001319020Z/summaries-SW-W03-실제-GET에-다른-계정-쿠키가-섞여도-기록은-표시되지-않는다/error-context.md
+
+  1 failed
+    e2e/summaries.spec.ts:259:1 › SW-W03 실제 GET에 다른 계정 쿠키가 섞여도 기록은 표시되지 않는다 ────────────────────────
+  3 passed (17.8s)

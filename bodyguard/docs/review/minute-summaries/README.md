@@ -29,7 +29,9 @@ CEO의 `web-design-studio`와 기존 토큰을 따라 화이트·블루 디자�
 
 최종 전체 [API458](api-final4.xml)(130.66초)·frontend590·타입·Biome·production build/guard와 Ruff/format/mypy는 통과했다. 기존 asyncio DeprecationWarning1은 별도로 남았으며 실패로 세지 않는다. 실제 검증의 소스20개와 출력은 [manifest](artifacts.json)에 SHA로 연결하며 수집기는 기존 증거를 덮어쓰지 않는다.
 
-독립 읽기 전용 리뷰와 작성자 검토에서 보완 후 미해결 scoped P1/P2는 없다. 리뷰어의 DTO 직접 시험은 API/DB 전체 회귀나 임상 검토가 아니다. 정확한 tested HEAD·최신 main·원격 diff·CLEAN·체크를 병합 직전에 다시 확인한다. 현재 PR 병합은 아직 실행하지 않았다.
+병합 전 기록 시점에 독립 읽기 전용 리뷰와 작성자 검토에서 보완 후 미해결 scoped P1/P2는 없었다. 리뷰어의 DTO 직접 시험은 API/DB 전체 회귀나 임상 검토가 아니다. 정확한 tested HEAD·최신 main·원격 diff·CLEAN·체크를 병합 직전에 다시 확인했다. 아래는 이후 실제 병합 확인 기록이다.
+
+이후 [PR48](https://github.com/HSU-OAS/bodyguard/pull/48)을 source36bbab52576e2d600b4750967547cf12706f2dfe→merge654688be08ede24351491b687acae2b630dd674b로 2026-10-06T05:06:42Z 실제 병합했다. 부모fccd5c4/36bbab5·원격 main 포함·브랜치 보존/clean을 확인했다. 직전80파일 diff·동일 Git tree·source20/artifact54 SHA·CLEAN/MERGEABLE·체크 없음·외부 리뷰0 확인 결과는 [작성자 기록](https://github.com/HSU-OAS/bodyguard/pull/48#issuecomment-6009724542)에 있다. 이 후속 문서 기록에서 제품 소스·기존 manifest/실패/PNG는 변경하지 않으며 검증을 새로 실행한 것으로 세지 않는다.
 
 공개 측정 생산자0·출시 허용 동작0, 실제 classifier/보정·두 아바타·단계2 이월·SDK 개인정보 P2·실제 참여자/노트북·Q32 부가 기능·법무/라이선스/외부/운영·전체1~6 게이트는 미완료다. 다음은 본인 요약 업로드 재시도·계정 전환 연결이며, 미검증 판정은 공개하지 않는다.
 

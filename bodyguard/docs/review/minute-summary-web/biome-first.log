@@ -1,0 +1,136 @@
+src/api/minuteSummaries.test.ts:9:1 lint/suspicious/noExportsInTest ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Do not export from a test file.
+
+     7 │ const range = { start: '2026-10-01T00:00:00.000Z', end: '2026-10-02T00:00:00.000Z' }
+     8 │ const metric = { method: 'Fixture+V1', unit: 'deg', measured_sec: 0, bad_sec: 0, dev_mean: null }
+   > 9 │ export const minuteFixture = {
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 10 │   minute_start: '2026-10-01T12:00:00Z',
+        ...
+  > 23 │   provenance: 'client-reported',
+  > 24 │ }
+       │ ^
+    25 │ const signed = {
+    26 │   ...range,
+
+
+src/pages/MinuteSummaryPage.tsx:226:21 lint/a11y/useSemanticElements ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × The elements with this role can be changed to the following elements:
+    <section>
+
+    224 │                     className="records-table-scroll"
+    225 │                     tabIndex={0}
+  > 226 │                     role="region"
+        │                     ^^^^^^^^^^^^^
+    227 │                     aria-label="분별 자세 기록 표"
+    228 │                   >
+
+  i For examples and more information, see WAI-ARIA Roles
+
+  i Replace with one of these elements:
+
+  - <section>
+
+
+src/pages/MinuteSummaryPage.tsx:225:21 lint/a11y/noNoninteractiveTabindex  FIXABLE  ━━━━━━━━━━━━━━━━
+
+  × The HTML element div is non-interactive. Do not use tabIndex.
+
+    223 │                   <div
+    224 │                     className="records-table-scroll"
+  > 225 │                     tabIndex={0}
+        │                     ^^^^^^^^^^^^
+    226 │                     role="region"
+    227 │                     aria-label="분별 자세 기록 표"
+
+  i Adding non-interactive elements to the keyboard navigation flow can confuse users.
+
+  i Unsafe fix: Remove the tabIndex attribute.
+
+    223 223 │                     <div
+    224 224 │                       className="records-table-scroll"
+    225     │ - ····················tabIndex={0}
+    226 225 │                       role="region"
+    227 226 │                       aria-label="분별 자세 기록 표"
+
+
+src/pages/MinuteSummaryPage.tsx:346:9 lint/a11y/useSemanticElements ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × The elements with this role can be changed to the following elements:
+    <section>
+
+    344 │         className="records-table-scroll"
+    345 │         tabIndex={0}
+  > 346 │         role="region"
+        │         ^^^^^^^^^^^^^
+    347 │         aria-label="선택한 분의 부위별 지표"
+    348 │       >
+
+  i For examples and more information, see WAI-ARIA Roles
+
+  i Replace with one of these elements:
+
+  - <section>
+
+
+src/pages/MinuteSummaryPage.tsx:345:9 lint/a11y/noNoninteractiveTabindex  FIXABLE  ━━━━━━━━━━━━━━━━━
+
+  × The HTML element div is non-interactive. Do not use tabIndex.
+
+    343 │       <div
+    344 │         className="records-table-scroll"
+  > 345 │         tabIndex={0}
+        │         ^^^^^^^^^^^^
+    346 │         role="region"
+    347 │         aria-label="선택한 분의 부위별 지표"
+
+  i Adding non-interactive elements to the keyboard navigation flow can confuse users.
+
+  i Unsafe fix: Remove the tabIndex attribute.
+
+    343 343 │         <div
+    344 344 │           className="records-table-scroll"
+    345     │ - ········tabIndex={0}
+    346 345 │           role="region"
+    347 346 │           aria-label="선택한 분의 부위별 지표"
+
+
+src/pages/MinuteSummaryPage.tsx:77:3 lint/correctness/useExhaustiveDependencies  FIXABLE  ━━━━━━━━━━
+
+  × This hook specifies more dependencies than necessary: key.
+
+    75 │     }
+    76 │   }, [authority, key])
+  > 77 │   useEffect(() => {
+       │   ^^^^^^^^^
+    78 │     setDraft({ from, to })
+    79 │     setInvalid(false)
+
+  i This dependency can be removed from the list.
+
+    79 │     setInvalid(false)
+    80 │     setSelected(null)
+  > 81 │   }, [from, to, key])
+       │                 ^^^
+    82 │   useEffect(() => {
+    83 │     document.title = '내 자세 기록 · BODYGUARD'
+
+  i React relies on hook dependencies to determine when to re-compute Effects.
+    Specifying more dependencies than required can lead to unnecessary re-rendering
+    and degraded performance.
+
+  i Unsafe fix: Remove the extra dependencies from the list.
+
+    81 │ ··},·[from,·to,·key])
+       │               -----
+
+Skipped 3 suggested fixes.
+If you wish to apply the suggested (unsafe) fixes, use the command biome check --write --unsafe
+
+Checked 9 files in 31ms. Fixed 8 files.
+Found 6 errors.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while applying fixes.

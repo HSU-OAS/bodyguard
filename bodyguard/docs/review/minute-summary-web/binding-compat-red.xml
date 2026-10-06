@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.445" timestamp="2026-10-06T14:37:22.910826+09:00" hostname="local-test-host"><testcase classname="tests.test_summary_read_binding" name="test_valid_csrf_only_get_remains_compatible_without_origin" time="0.301"><failure message="assert 403 == 200&#10; +  where 403 = &lt;Response [403 Forbidden]&gt;.status_code">harness = &lt;tests.conftest.Harness object at 0x10b9b1160&gt;
+
+    def test_valid_csrf_only_get_remains_compatible_without_origin(harness):
+        h = harness
+        h.account()
+        response = h.client.get(PATH, headers={"X-CSRF-Token": h.csrf()["X-CSRF-Token"]})
+&gt;       assert response.status_code == 200
+E       assert 403 == 200
+E        +  where 403 = &lt;Response [403 Forbidden]&gt;.status_code
+
+tests/test_summary_read_binding.py:77: AssertionError</failure></testcase></testsuite></testsuites>

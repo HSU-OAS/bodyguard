@@ -1,0 +1,18 @@
+[WebServer] (node:55242) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ node scripts/prepare-assets.mjs && tsc --noEmit && vite build
+[WebServer] (node:55282) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:55304) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:55313) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/summaries.spec.ts:135:1 › SW-W01 실제 계정→자세 기록→상세·페이지·취소·삭제와 화이트 블루 웹 (3.1s)
+  ✓  2 e2e/summaries.spec.ts:239:1 › SW-W02 실제 삭제 뒤 응답 단절은 불확실·명시 재조회이며 재삭제하지 않는다 (880ms)
+  ✓  3 e2e/summaries.spec.ts:265:1 › SW-W03 실제 GET에 다른 계정 쿠키가 섞여도 기록은 표시되지 않는다 (765ms)
+  ✓  4 e2e/summaries.spec.ts:313:1 › SW-W04 실제 대상 변경409와 조회 오류 복구·invalid 기간 (1.8s)
+
+  4 passed (14.5s)

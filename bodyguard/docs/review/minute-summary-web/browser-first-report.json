@@ -1,0 +1,306 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "[workspace]/bodyguard/frontend/node_modules/.pnpm/@playwright+test@1.63.0/node_modules/@playwright/test/cli.js",
+      "test",
+      "summaries.spec.ts",
+      "--config",
+      "playwright.account.config.ts",
+      "--output",
+      "test-results/summaries-20261006T053001319020Z"
+    ],
+    "configFile": "[workspace]/bodyguard/frontend/playwright.account.config.ts",
+    "rootDir": "[workspace]/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "[workspace]/bodyguard/frontend/test-results/summaries-20261006T053001319020Z",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "[workspace]/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "account.spec.ts",
+          "password.spec.ts",
+          "google.spec.ts",
+          "records.spec.ts",
+          "design.spec.ts",
+          "withdrawal.spec.ts",
+          "datahelp.spec.ts",
+          "integration.spec.ts",
+          "security.spec.ts",
+          "resultrecord.spec.ts",
+          "ownercapture.spec.ts",
+          "recordedsession.spec.ts",
+          "authcoaching.spec.ts",
+          "notifications.spec.ts",
+          "summaries.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/summaries-20261006T053001319020Z/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "pnpm build && vite preview --host localhost",
+      "url": "http://localhost:4173",
+      "reuseExistingServer": false,
+      "timeout": 180000
+    }
+  },
+  "suites": [
+    {
+      "title": "summaries.spec.ts",
+      "file": "summaries.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "SW-W01 실제 계정→자세 기록→상세·페이지·취소·삭제와 화이트 블루 웹",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3842,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:30:11.495Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "summary-boundaries.json",
+                      "contentType": "application/json",
+                      "body": "eyJhY3R1YWxQcm9kdWN0aW9uQ2hyb21lSHR0cFNxbCI6dHJ1ZSwic3ludGhldGljQWdncmVnYXRlc01haWxGYXVsdHMiOnRydWUsImFjdHVhbFBlcnNvbkNhbWVyYUNsaW5pY2FsIjpmYWxzZSwiY2FtZXJhIjowLCJ1bmV4cGVjdGVkIjpbXSwiZXJyb3JzIjpbXSwidGltaW5nIjpbeyJwYXRoIjoiL2FwaS92MS9tZSIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6MzkuMjA4fSx7InBhdGgiOiIvYXBpL3YxL21lIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjoxMy4yNTh9LHsicGF0aCI6Ii9hcGkvdjEvYXV0aC9jc3JmIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjoxMi45MTd9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjguNTk5fSx7InBhdGgiOiIvYXBpL3YxL3N1bW1hcmllcyIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6MTUuNTg1fSx7InBhdGgiOiIvYXBpL3YxL21lIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjo4LjczNX0seyJwYXRoIjoiL2FwaS92MS9tZSIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6MTguNDU4fSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6Ny4wODl9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjcuNjkzfSx7InBhdGgiOiIvYXBpL3YxL3N1bW1hcmllcyIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6MTMuMzM1fSx7InBhdGgiOiIvYXBpL3YxL21lIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjo3Ljg5Nn0seyJwYXRoIjoiL2FwaS92MS9tZSIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6NC43MjZ9LHsicGF0aCI6Ii9hcGkvdjEvYXV0aC9jc3JmIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjo2LjY1NX0seyJwYXRoIjoiL2FwaS92MS9tZSIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6NC4xOTN9LHsicGF0aCI6Ii9hcGkvdjEvc3VtbWFyaWVzIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjo1LjczOX0seyJwYXRoIjoiL2FwaS92MS9tZSIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6NS4yNzR9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjguOTQ1fSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6My45MX0seyJwYXRoIjoiL2FwaS92MS9tZSIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6My4yNjN9LHsicGF0aCI6Ii9hcGkvdjEvc3VtbWFyaWVzIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjo0Ljc4NH0seyJwYXRoIjoiL2FwaS92MS9tZSIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6Mi41MzJ9LHsicGF0aCI6Ii9hcGkvdjEvc3VtbWFyaWVzL2RlbGV0ZS1wcmV2aWV3IiwibWV0aG9kIjoiUE9TVCIsIm1pbGxpc2Vjb25kcyI6MTIuMzQzfSx7InBhdGgiOiIvYXBpL3YxL3N1bW1hcmllcy9kZWxldGUtcHJldmlldyIsIm1ldGhvZCI6IlBPU1QiLCJtaWxsaXNlY29uZHMiOjExLjYwNn0seyJwYXRoIjoiL2FwaS92MS9zdW1tYXJpZXMvZGVsZXRlIiwibWV0aG9kIjoiUE9TVCIsIm1pbGxpc2Vjb25kcyI6MTUuMTc2fSx7InBhdGgiOiIvYXBpL3YxL21lIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjo0LjM3fSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6NC42MDZ9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjMuNTQxfSx7InBhdGgiOiIvYXBpL3YxL3N1bW1hcmllcyIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6NC42MDF9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjIuODE5fSx7InBhdGgiOiIvYXBpL3YxL21lIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjo1LjM5Mn0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjQuMDY4fSx7InBhdGgiOiIvYXBpL3YxL21lIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjozLjJ9LHsicGF0aCI6Ii9hcGkvdjEvc3VtbWFyaWVzIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjo1LjIzfSx7InBhdGgiOiIvYXBpL3YxL21lIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjozLjIyOX1dLCJzdG9yYWdlIjpbMCwwXSwiYnJvd3NlciI6IjE1NC4wLjgwMzcuOTgifQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e183148ecf145c73f3c2-6a0dff326a5c686c2aa0",
+          "file": "summaries.spec.ts",
+          "line": 135,
+          "column": 1
+        },
+        {
+          "title": "SW-W02 실제 삭제 뒤 응답 단절은 불확실·명시 재조회이며 재삭제하지 않는다",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 898,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:30:15.825Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "summary-boundaries.json",
+                      "contentType": "application/json",
+                      "body": "eyJhY3R1YWxQcm9kdWN0aW9uQ2hyb21lSHR0cFNxbCI6dHJ1ZSwic3ludGhldGljQWdncmVnYXRlc01haWxGYXVsdHMiOnRydWUsImFjdHVhbFBlcnNvbkNhbWVyYUNsaW5pY2FsIjpmYWxzZSwiY2FtZXJhIjowLCJ1bmV4cGVjdGVkIjpbXSwiZXJyb3JzIjpbXSwidGltaW5nIjpbeyJwYXRoIjoiL2FwaS92MS9tZSIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6NC43MDV9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjUuMTExfSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6NC4wMjF9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjMuNjc5fSx7InBhdGgiOiIvYXBpL3YxL3N1bW1hcmllcyIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6NC44NzF9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjMuMTc4fSx7InBhdGgiOiIvYXBpL3YxL3N1bW1hcmllcy9kZWxldGUtcHJldmlldyIsIm1ldGhvZCI6IlBPU1QiLCJtaWxsaXNlY29uZHMiOjEwLjMxOH0seyJwYXRoIjoiL2FwaS92MS9tZSIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6MTEuMTc1fSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6NS43MDd9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjYuMDIxfSx7InBhdGgiOiIvYXBpL3YxL3N1bW1hcmllcyIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6Ni4zMzN9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjYuNDUxfV0sInN0b3JhZ2UiOlswLDBdLCJicm93c2VyIjoiMTU0LjAuODAzNy45OCJ9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e183148ecf145c73f3c2-26bce1594e8ccf129a02",
+          "file": "summaries.spec.ts",
+          "line": 233,
+          "column": 1
+        },
+        {
+          "title": "SW-W03 실제 GET에 다른 계정 쿠키가 섞여도 기록은 표시되지 않는다",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 783,
+                  "error": {
+                    "message": "Error: route.fulfill: Route is already handled!",
+                    "stack": "Error: route.fulfill: Route is already handled!\n    at [workspace]/bodyguard/frontend/e2e/summaries.spec.ts:279:17",
+                    "location": {
+                      "file": "[workspace]/bodyguard/frontend/e2e/summaries.spec.ts",
+                      "column": 17,
+                      "line": 279
+                    },
+                    "snippet": "  277 |     })\n  278 |     rejection = response.status()\n> 279 |     await route.fulfill({ response })\n      |                 ^\n  280 |   })\n  281 |   await open(page)\n  282 |   expect(rejection).toBe(403)"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "[workspace]/bodyguard/frontend/e2e/summaries.spec.ts",
+                        "column": 17,
+                        "line": 279
+                      },
+                      "message": "Error: route.fulfill: Route is already handled!\n\n  277 |     })\n  278 |     rejection = response.status()\n> 279 |     await route.fulfill({ response })\n      |                 ^\n  280 |   })\n  281 |   await open(page)\n  282 |   expect(rejection).toBe(403)\n    at [workspace]/bodyguard/frontend/e2e/summaries.spec.ts:279:17"
+                    },
+                    {
+                      "location": {
+                        "file": "[workspace]/bodyguard/frontend/e2e/summaries.spec.ts",
+                        "column": 64,
+                        "line": 58
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: '삭제 대상 확인' })\nExpected: visible\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('button', { name: '삭제 대상 확인' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: '삭제 대상 확인' })\u001b[22m\n\u001b[2m  - Test ended.\u001b[22m\n\n\n  56 | async function open(page: Page) {\n  57 |   await page.goto('/posture-records')\n> 58 |   await expect(page.getByRole('button', { name: '삭제 대상 확인' })).toBeVisible()\n     |                                                                ^\n  59 | }\n  60 | function contrast(a: string, b: string) {\n  61 |   function luminance(value: string) {\n    at open ([workspace]/bodyguard/frontend/e2e/summaries.spec.ts:58:64)\n    at [workspace]/bodyguard/frontend/e2e/summaries.spec.ts:281:3"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:30:16.736Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "summary-boundaries.json",
+                      "contentType": "application/json",
+                      "body": "eyJhY3R1YWxQcm9kdWN0aW9uQ2hyb21lSHR0cFNxbCI6dHJ1ZSwic3ludGhldGljQWdncmVnYXRlc01haWxGYXVsdHMiOnRydWUsImFjdHVhbFBlcnNvbkNhbWVyYUNsaW5pY2FsIjpmYWxzZSwiY2FtZXJhIjowLCJ1bmV4cGVjdGVkIjpbXSwiZXJyb3JzIjpbXSwidGltaW5nIjpbeyJwYXRoIjoiL2FwaS92MS9tZSIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6MTUuODA4fSx7InBhdGgiOiIvYXBpL3YxL21lIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjo2Ljg3OX0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjcuNTE1fSx7InBhdGgiOiIvYXBpL3YxL21lIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjo1LjM4N30seyJwYXRoIjoiL2FwaS92MS9zdW1tYXJpZXMiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjEwLjc2OH0seyJwYXRoIjoiL2FwaS92MS9tZSIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6NC4zMzR9XSwic3RvcmFnZSI6WzAsMF0sImJyb3dzZXIiOiIxNTQuMC44MDM3Ljk4In0="
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "[workspace]/bodyguard/frontend/test-results/summaries-20261006T053001319020Z/summaries-SW-W03-실제-GET에-다른-계정-쿠키가-섞여도-기록은-표시되지-않는다/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "[workspace]/bodyguard/frontend/e2e/summaries.spec.ts",
+                    "column": 17,
+                    "line": 279
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e183148ecf145c73f3c2-c6fb06de27becc8f96b8",
+          "file": "summaries.spec.ts",
+          "line": 259,
+          "column": 1
+        },
+        {
+          "title": "SW-W04 실제 대상 변경409와 조회 오류 복구·invalid 기간",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1436,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T05:30:18.067Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "summary-boundaries.json",
+                      "contentType": "application/json",
+                      "body": "eyJhY3R1YWxQcm9kdWN0aW9uQ2hyb21lSHR0cFNxbCI6dHJ1ZSwic3ludGhldGljQWdncmVnYXRlc01haWxGYXVsdHMiOnRydWUsImFjdHVhbFBlcnNvbkNhbWVyYUNsaW5pY2FsIjpmYWxzZSwiY2FtZXJhIjowLCJ1bmV4cGVjdGVkIjpbXSwiZXJyb3JzIjpbXSwidGltaW5nIjpbeyJwYXRoIjoiL2FwaS92MS9tZSIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6OS45ODJ9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjYuNjI3fSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6OC4zfSx7InBhdGgiOiIvYXBpL3YxL21lIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjo2LjY1NX0seyJwYXRoIjoiL2FwaS92MS9zdW1tYXJpZXMiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjcuNDg3fSx7InBhdGgiOiIvYXBpL3YxL21lIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjo0LjY2NH0seyJwYXRoIjoiL2FwaS92MS9zdW1tYXJpZXMvZGVsZXRlLXByZXZpZXciLCJtZXRob2QiOiJQT1NUIiwibWlsbGlzZWNvbmRzIjoxMS4wMjN9LHsicGF0aCI6Ii9hcGkvdjEvc3VtbWFyaWVzL2RlbGV0ZS1wcmV2aWV3IiwibWV0aG9kIjoiUE9TVCIsIm1pbGxpc2Vjb25kcyI6OC42OTh9LHsicGF0aCI6Ii9hcGkvdjEvc3VtbWFyaWVzL2RlbGV0ZSIsIm1ldGhvZCI6IlBPU1QiLCJtaWxsaXNlY29uZHMiOjkuMjY0fSx7InBhdGgiOiIvYXBpL3YxL21lIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjo0Ljk4NH0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjQuNzk0fSx7InBhdGgiOiIvYXBpL3YxL21lIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjozLjQxMn0seyJwYXRoIjoiL2FwaS92MS9zdW1tYXJpZXMiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjUuNzc4fSx7InBhdGgiOiIvYXBpL3YxL21lIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjoyLjgzfSx7InBhdGgiOiIvYXBpL3YxL3N1bW1hcmllcy9kZWxldGUtcHJldmlldyIsIm1ldGhvZCI6IlBPU1QiLCJtaWxsaXNlY29uZHMiOjExLjA2NX0seyJwYXRoIjoiL2FwaS92MS9zdW1tYXJpZXMvZGVsZXRlIiwibWV0aG9kIjoiUE9TVCIsIm1pbGxpc2Vjb25kcyI6OS40NTh9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjguNTY2fSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6NC44NzJ9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjMuODAzfSx7InBhdGgiOiIvYXBpL3YxL21lIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjo3LjU1NX0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjQuODY1fSx7InBhdGgiOiIvYXBpL3YxL21lIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjozLjM1NX0seyJwYXRoIjoiL2FwaS92MS9zdW1tYXJpZXMiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjQuNjkyfSx7InBhdGgiOiIvYXBpL3YxL21lIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjoyLjg3N30seyJwYXRoIjoiL2FwaS92MS9tZSIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6NC44NTV9XSwic3RvcmFnZSI6WzAsMF0sImJyb3dzZXIiOiIxNTQuMC44MDM3Ljk4In0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e183148ecf145c73f3c2-914ac4dbd31c47697ed7",
+          "file": "summaries.spec.ts",
+          "line": 299,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-06T05:30:02.144Z",
+    "duration": 17817.609,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

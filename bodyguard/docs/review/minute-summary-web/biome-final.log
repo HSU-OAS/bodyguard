@@ -1,0 +1,38 @@
+$ biome check .
+src/pages/MinuteSummaryPage.tsx:96:3 lint/correctness/useExhaustiveDependencies  FIXABLE  ━━━━━━━━━━
+
+  × This hook specifies more dependencies than necessary: refresh.
+
+    94 │     if (document.hasFocus()) heading.current?.focus({ preventScroll: true })
+    95 │   }, [])
+  > 96 │   useEffect(() => {
+       │   ^^^^^^^^^
+    97 │     if (!authority || !range || !current.current) return
+    98 │     const operation = current.current
+
+  i This dependency can be removed from the list.
+
+    123 │       context?.close()
+    124 │     }
+  > 125 │   }, [authority, range, page, key, refresh])
+        │                                    ^^^^^^^
+    126 │   useEffect(() => {
+    127 │     if (selected && document.hasFocus()) detail.current?.focus()
+
+  i React relies on hook dependencies to determine when to re-compute Effects.
+    Specifying more dependencies than required can lead to unnecessary re-rendering
+    and degraded performance.
+
+  i Unsafe fix: Remove the extra dependencies from the list.
+
+    125 │ ··},·[authority,·range,·page,·key,·refresh])
+        │                                  ---------
+
+Checked 135 files in 230ms. No fixes applied.
+Found 1 error.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.
+
+
+[ELIFECYCLE] Command failed with exit code 1.

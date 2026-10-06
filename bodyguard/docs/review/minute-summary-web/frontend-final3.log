@@ -1,0 +1,58 @@
+$ vitest run --reporter=default --reporter=junit --outputFile.junit=[owned-private-scratch]/frontend-final3.xml
+
+ RUN  v5.0.2 [workspace]/bodyguard/frontend
+
+ ✓ src/coaching/resources.test.ts (40 tests) 804ms
+ ✓ src/coaching/observationLoop.test.ts (19 tests) 1148ms
+ ✓ src/pages/MeasureDemoPage.test.tsx (3 tests) 979ms
+   ✓ 최신 100개만 남기고 준비 중에도 취소할 수 있다 848ms
+ ✓ src/pages/RecordDeletion.test.tsx (10 tests) 1172ms
+   ✓ blocks duplicate confirmation and discards deletion response after leaving 323ms
+ ✓ src/pages/MotionSelectionPage.test.tsx (13 tests) 1207ms
+   ✓ S3.3 opens guidance detail chin-retraction without automatic coaching 504ms
+ ✓ src/pages/NotificationPreferencesPage.test.tsx (14 tests) 1367ms
+ ✓ src/pages/RecordsPage.test.tsx (12 tests) 1412ms
+ ✓ src/pages/PasswordPage.test.tsx (18 tests) 2025ms
+   ✓ PW-03 a new same-page fragment replaces the consumed token without a reload 406ms
+ ✓ src/stretch/progression.test.ts (60 tests) 252ms
+ ✓ src/coaching/session.test.ts (44 tests) 349ms
+ ✓ src/pages/DataHelpPage.test.tsx (5 tests) 512ms
+ ✓ src/pages/WithdrawalPage.test.tsx (20 tests) 2862ms
+   ✓ AW-10 uncertain200 does not claim deletion or automatically retry 439ms
+ ✓ src/coaching/recordOwner.test.ts (16 tests) 185ms
+ ✓ src/coaching/recordedSession.test.ts (28 tests) 246ms
+ ✓ src/pages/GoogleAccount.test.tsx (14 tests) 509ms
+ ✓ src/api/recordDeletion.test.ts (13 tests) 56ms
+ ✓ src/coaching/resultRecord.test.ts (29 tests) 109ms
+ ✓ src/coaching/useRecordedCoaching.test.tsx (20 tests) 365ms
+ ✓ src/api/records.test.ts (15 tests) 173ms
+ ✓ src/api/withdrawal.test.ts (22 tests) 117ms
+ ✓ src/pages/ExplorePage.test.tsx (4 tests) 309ms
+ ✓ src/api/notificationPreferences.test.ts (18 tests) 96ms
+ ✓ src/pages/MinuteSummaryPage.test.tsx (23 tests) 2844ms
+ ✓ src/api/minuteSummaries.test.ts (40 tests) 147ms
+ ✓ src/auth.test.tsx (12 tests) 243ms
+ ✓ src/summary/minuteAggregation.test.ts (35 tests) 27ms
+ ✓ src/App.test.tsx (3 tests) 353ms
+ ✓ src/avatar/faceTracking.test.ts (13 tests) 22ms
+ ✓ src/catalog/recommendation.test.ts (8 tests) 7ms
+ ✓ src/catalog/motions.test.ts (10 tests) 23ms
+ ✓ src/avatar/face.test.ts (12 tests) 10ms
+ ✓ src/avatar/skeleton.test.ts (8 tests) 23ms
+ ✓ src/webDesign.test.ts (14 tests) 19ms
+ ✓ src/posture/landmarks.test.ts (8 tests) 9ms
+ ✓ src/posture/hands.test.ts (7 tests) 6ms
+ ✓ src/posture/framing.test.ts (9 tests) 7ms
+ ✓ src/pose/camera.test.ts (4 tests) 69ms
+ ✓ src/pages/MemberPage.test.tsx (1 test) 38ms
+ ✓ src/pose/useMeasurement.test.tsx (9 tests) 30ms
+
+ Test Files  39 passed (39)
+      Tests  653 passed (653)
+   Start at  14:50:55
+   Duration  6.41s (tests 44%, environment 29%, import 17%, transform 9%, worker 1%)
+
+    Isolate  39 workers spawned · ~575ms startup each (spawn + environment, per file)
+             at least ~1.92s faster with isolate: false — reuses workers across files instead of one per file
+
+JUNIT report written to [owned-private-scratch]/frontend-final3.xml
