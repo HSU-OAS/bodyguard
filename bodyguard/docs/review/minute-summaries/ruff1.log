@@ -1,0 +1,53 @@
+I001 [*] Import block is un-sorted or un-formatted
+  --> app/main.py:3:1
+   |
+ 1 |   """FR-U-01~04: Google/email accounts and server-cookie sessions."""
+ 2 |
+ 3 | / import asyncio
+ 4 | | import hmac
+ 5 | | import json
+ 6 | | import logging
+ 7 | | import math
+ 8 | | import re
+ 9 | | import time
+10 | | from collections.abc import Awaitable, Callable
+11 | | from datetime import UTC, datetime, timedelta
+12 | | from email.message import EmailMessage
+13 | | from http.cookies import SimpleCookie
+14 | | from typing import Literal
+15 | | from uuid import uuid4
+16 | |
+17 | | import aiosmtplib
+18 | | import httpx2
+19 | | from authlib.integrations.starlette_client import OAuth  # type: ignore[import-untyped]
+20 | | from email_validator import EmailNotValidError, validate_email
+21 | | from fastapi import BackgroundTasks, FastAPI, HTTPException, Request, Response
+22 | | from fastapi.exceptions import RequestValidationError
+23 | | from fastapi.responses import JSONResponse, RedirectResponse
+24 | | from pydantic import BaseModel, ConfigDict, Field, SecretStr, field_validator
+25 | | from sqlalchemy import Connection, Engine, RowMapping, create_engine, delete, select, text, update
+26 | | from sqlalchemy.dialects.postgresql import insert
+27 | | from sqlalchemy.exc import SQLAlchemyError
+28 | | from starlette.exceptions import HTTPException as StarletteHTTPException
+29 | |
+30 | | from app.baselines import register_baselines
+31 | | from app.config import Settings
+32 | | from app.db import challenges, google_flows, limits, resets, sessions, users
+33 | | from app.notification_preferences import register_notification_preferences
+34 | | from app.readiness import register_readiness
+35 | | from app.records import register_records
+36 | | from app.summaries import register_summaries
+37 | | from app.security import cleanup, code, digest, keyed, passwords, quota, token
+38 | | from app.withdrawal import register_withdrawal
+   | |______________________________________________^
+help: Organize imports
+   |
+35 | from app.records import register_records
+36 + from app.security import cleanup, code, digest, keyed, passwords, quota, token
+37 | from app.summaries import register_summaries
+   - from app.security import cleanup, code, digest, keyed, passwords, quota, token
+38 | from app.withdrawal import register_withdrawal
+   |
+
+Found 1 error.
+[*] 1 fixable with the `--fix` option.

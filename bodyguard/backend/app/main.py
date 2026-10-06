@@ -34,6 +34,7 @@ from app.notification_preferences import register_notification_preferences
 from app.readiness import register_readiness
 from app.records import register_records
 from app.security import cleanup, code, digest, keyed, passwords, quota, token
+from app.summaries import register_summaries
 from app.withdrawal import register_withdrawal
 
 
@@ -993,6 +994,7 @@ def create_app(
     register_records(app, db, now_fn, record_owner, record_deletion_sign)
     register_notification_preferences(app, db, record_owner)
     register_baselines(app, db, now_fn, record_owner, ErrorOut)
+    register_summaries(app, db, now_fn, record_owner, record_deletion_sign, ErrorOut)
 
     def withdrawal_owner(connection: Connection, request: Request) -> tuple[RowMapping, str]:
         # FR-U-05: bound contention rolls back instead of waiting in opposing auth lock orders.

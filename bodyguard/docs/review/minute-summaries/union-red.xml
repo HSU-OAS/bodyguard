@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="0.738" timestamp="2026-10-06T13:49:18.940283+09:00" hostname="local-test-host"><testcase classname="tests.test_summaries" name="test_impossible_good_coverage_union_is422" time="0.287"><failure message="AssertionError: assert 201 == 422&#10; +  where 201 = &lt;Response [201 Created]&gt;.status_code&#10; +    where &lt;Response [201 Created]&gt; = post(&lt;tests.conftest.Harness object at 0x1144e5010&gt;, {'minute_start': '2026-09-30T23:58:00Z', 'baseline_id': '601e39b9-447c-4c81-b643-543c25e972c9', 'client_version': 'Fixture+V1', 'coverage_sec': 60, ...})">harness = &lt;tests.conftest.Harness object at 0x1144e5010&gt;
+
+    def test_impossible_good_coverage_union_is422(harness):
+        h = harness
+        h.account()
+        body = all_bad_payload(h)
+&gt;       assert post(h, {**body, "any_bad_sec": 20}).status_code == 422
+E       AssertionError: assert 201 == 422
+E        +  where 201 = &lt;Response [201 Created]&gt;.status_code
+E        +    where &lt;Response [201 Created]&gt; = post(&lt;tests.conftest.Harness object at 0x1144e5010&gt;, {'minute_start': '2026-09-30T23:58:00Z', 'baseline_id': '601e39b9-447c-4c81-b643-543c25e972c9', 'client_version': 'Fixture+V1', 'coverage_sec': 60, ...})
+
+tests/test_summaries.py:561: AssertionError</failure></testcase><testcase classname="tests.test_summaries" name="test_impossible_good_coverage_union_sql_is23514" time="0.195"><failure message="Failed: DID NOT RAISE IntegrityError">harness = &lt;tests.conftest.Harness object at 0x114c17b10&gt;
+
+    def test_impossible_good_coverage_union_sql_is23514(harness):
+        h = harness
+        owner = h.account()
+        body = all_bad_payload(h)
+        values = {
+            "user_id": owner,
+            "created_at": h.clock(),
+            **_values(MinuteInput.model_validate(body)),
+            "any_bad_sec": 20,
+        }
+&gt;       with pytest.raises(IntegrityError) as error, h.engine.begin() as c:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE IntegrityError
+
+tests/test_summaries.py:575: Failed</failure></testcase></testsuite></testsuites>

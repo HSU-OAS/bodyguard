@@ -90,7 +90,7 @@ def test_records_rollback_preserves_accounts_and_refuses_data_loss(harness: Harn
     with h.engine.connect() as connection:
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0007_account_baselines"
+            == "0008_minute_summaries"
         )
         assert len(connection.execute(select(stretch_records)).all()) == 1
     # Only synthetic rows in the already validated, exclusively used test DB.

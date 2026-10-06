@@ -323,7 +323,7 @@ def test_b06_actual_database_constraints_and_safe_downgrade(harness: Harness) ->
         command.downgrade(config, "0006_notification_preferences")
     assert h.client.get(PATH + "/active").json() == saved
     with h.engine.begin() as c:
-        assert c.scalar(text("SELECT version_num FROM alembic_version")) == "0007_account_baselines"
+        assert c.scalar(text("SELECT version_num FROM alembic_version")) == "0008_minute_summaries"
         c.execute(delete(baselines))  # Only this fixture's synthetic rows on guarded test DB.
     try:
         command.downgrade(config, "0006_notification_preferences")
