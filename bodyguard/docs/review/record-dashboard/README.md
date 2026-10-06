@@ -1,8 +1,10 @@
 # S4.17 — 본인 일·주 기록 대시보드 (진행 중)
 
-2026-10-06 · baseline `991ed2b33a1abc6158b3a177f8431a104c476ba0` · `codex/record-dashboard`
+2026-10-06 · baseline `991ed2b33a1abc6158b3a177f8431a104c476ba0` · `codex/record-dashboard` · [Draft PR #51](https://github.com/HSU-OAS/bodyguard/pull/51)
 
 **필수 브라우저 회귀 실패로 Story와 병합 게이트는 미완료다.** 작동한 화면·기능과 미충족 기준을 분리한다. 전체1~6단계 통과나 출시 후보판 선언이 아니다.
+
+실제 원격 기록: 구현 source6f26913의 Git tree9e68994b860eb340cbe08930e642a95be3364e91이 로컬과 일치했고 PR은 OPEN/Draft/CLEAN/MERGEABLE·체크 없음이다. CLEAN/체크 없음이 필수 검증 실패를 대체하지 않으며 병합0·브랜치 유지다. 후속 커밋은 이 PR 상태와 본문 기록만 담당한다.
 
 ## 실제로 작동하는 흐름
 

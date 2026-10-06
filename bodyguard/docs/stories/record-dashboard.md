@@ -79,6 +79,8 @@ run_browser.py/playwright.account.config.ts UPDATE: 기존 timestamp/report/priv
 
 Story를 CTO 사전 승인 범위에서 선택했다. resolver 실제 absent exit2·기본 customize prepend/append/on_complete 빈 값, config/team/sprint/project-context/epic/architecture/UX exact 파일 없음. 기존 전체 읽은 PRD/design은 unchanged이며 release-plan/web-design/이전 Story로 매핑한다. 명세·red·구현과 최초729 frontend/485 API, 중간735/490, 최종738 frontend/492 API·scoped56/26을 실제 실행했다. 마지막 수치 두 건의 API red와 파서 red를 보존하고3역할 재검토의 새로운 범위 내 코드 지적0을 확인했다. 다만 실제 필수 브라우저 회귀 실패·성능과 PR 게이트가 남아 Status in-progress다. scope 내의 메뉴·보완은 CEO 사전 승인으로 계속하며 실패를 통과로 세지 않는다.
 
+2026-10-06 원격: [Draft PR #51](https://github.com/HSU-OAS/bodyguard/pull/51), 구현 source6f26913·remote/local tree9e68994b860eb340cbe08930e642a95be3364e91 일치. 최신 main991ed2b·OPEN/Draft/CLEAN/MERGEABLE·체크 없음. 필수 회귀/성능 실패 때문에 병합하지 않는다. 문서 상태 후속 커밋만 진행하고 독립 초기 웹 응답 하네스는 최신 main의 새 Story로 진행한다.
+
 ## File List
 
 - NEW `backend/app/dashboard.py`, `backend/tests/test_dashboard.py`
@@ -89,9 +91,11 @@ Story를 CTO 사전 승인 범위에서 선택했다. resolver 실제 absent exi
 - UPDATE `frontend/src/App.tsx`, `frontend/src/pages/MemberPage.tsx`, `frontend/src/api/generated/index.ts`, `types.gen.ts`
 - UPDATE `frontend/playwright.account.config.ts`, `frontend/playwright.selection.config.ts`, `frontend/scripts/test-selection-browser.mjs`
 - NEW `docs/stories/record-dashboard.md`, `docs/review/record-dashboard/collect-proof.mjs`, `README.md`, immutable `runs/` evidence
+- NEW `docs/review/record-dashboard/pr-body.md` — 실제 Draft 본문/실패 게이트 기록
 - UPDATE `docs/tasks.md`; previous Story PR #50 actual merge metadata only: `docs/stories/owned-minute-upload.md`, `docs/review/owned-minute-upload/README.md`
 
 ## Change Log
 
 - 2026-10-06: 최신 main991ed2b의 codex/record-dashboard에서 S4.17 명세·화이트블루 화면 계약 확정. S4.16 실제 병합 metadata만 정리, 기존 증거 보존.
 - 2026-10-06: 실제 일/주 조회·오류 복구·계정 경계와 화이트/블루 화면 구현. 초기6보완 완료, 추가6경계 보완 및 실제 red/green. 기존 브라우저 회귀 지연은 미해결로 유지하고 전체 출시 게이트를 닫지 않음.
+- 2026-10-06: 최종2수치 보완·738/492 및 Chrome2 통과, 독립 증거 감사·첫 publication 실패 보존. Draft PR #51 생성, 체크 없음·CLEAN 확인. 회귀/성능 미충족으로 병합0.

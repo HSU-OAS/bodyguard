@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-06 원격 상태: 대시보드 [Draft PR #51](https://github.com/HSU-OAS/bodyguard/pull/51)을 생성했다. source6f26913 remote/local Git tree 일치, OPEN/Draft/CLEAN/MERGEABLE·체크 없음. **필수 회귀 실패로 병합하지 않았다.** 최신 main991ed2b는 그대로이며 다음 독립 Story는 초기 웹 응답 분리·준비 하네스다.
+
 최신: [S4.17 본인 일·주 기록 대시보드](stories/record-dashboard.md)는 실제 저장→기간 전체 집계→화이트·블루 화면→기록 관리/복귀·빈 기간/오류 재조회까지 구현했다. [실제 화면·실패·미완료 증거](review/record-dashboard/README.md). 최종738frontend/492실제API·대시보드Chrome2·타입/정적/build/guard 통과지만 기존 기록5초 회귀는 headless3실패/1통과·headed4실패, 공개8은6실패/2통과다. 변경 전 최신 main991ed2b의 격리 비교에서도 같은 공개 실패가 재현됐으나 원인은 미확정이며 **Story/병합 게이트는 미완료**다. source29/artifact141의 실제 SHA·길이/실패 flags를 독립 감사했고 첫 publication self-log 실패도 보존했다. Draft 증거로 남기고 다음 독립 Story는 최신 main의 초기 웹 응답 분리·준비 하네스다. PR #50 sourcec406154→merge991ed2b/main 포함·브랜치 보존은 실제 확인했다. 같은 아바타 부위 새 제작0·실제 classifier/두 아바타·SDK P2·참여자/실측·Q32/법무/외부·운영·전체1~6 미완료를 유지한다. 아래는 시점별 기록이다.
 
 최신: [S4.16 private 본인 분 업로드](stories/owned-minute-upload.md)를 실제 시간가중 집계→원래 로그인/CSRF/기대 소유자→실제 저장→본인 화이트·블루 기록 상세로 연결했다. 응답 단절 후 동일 재시도 한 분·계정 변경403/폐기·충돌409/기존 기록 보존을 실제 Chrome/API/SQL로 확인했다. [화면·예외·실패·실제/합성 구분](review/owned-minute-upload/README.md). source28/artifact54·전체682frontend/466API·privateChrome4/기록4/공개8·정적/build/guard·Node12 검증 후 조건부 PR 게이트 진행이다. 공개 producer/실제 신체/아바타·SDK P2/단계2 이월·참여자·Q32 나머지·외부/운영·전체1~6 완료는 아니다. 기존 디자인 스킬의 화이트·블루 웹을 유지하고 다음 독립 기능은 일/주 기록 집계·대시보드 연결이다. 아래는 시점별 기록이다.
