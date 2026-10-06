@@ -1,7 +1,14 @@
 // S4.15: session-bound, memory-only read/delete. No producer or clinical certification.
 import type { ReadyAccount } from '../auth'
 import { ApiError, request } from './auth'
-import type { DeletePeriod, MinuteList, MinuteMetric, MinuteOut, SummaryProof } from './generated'
+import type {
+  DeletePeriod,
+  MinuteInput,
+  MinuteList,
+  MinuteMetric,
+  MinuteOut,
+  SummaryProof,
+} from './generated'
 import { validDay } from './records'
 
 const token = /^[a-zA-Z0-9][a-zA-Z0-9._+-]{0,63}$/
@@ -61,20 +68,17 @@ function metric(value: unknown): MinuteMetric {
     throw new ApiError(503)
   return Object.freeze(row as MinuteMetric)
 }
-export function parseMinute(value: unknown): MinuteOut {
+// FR-R-01/06: shared strict snapshot; no fabricated server provenance for upload input.
+export function parseMinuteInput(value: unknown): MinuteInput {
   const row = object(value, [
     'minute_start',
     'baseline_id',
     'client_version',
     ...durations,
     ...names,
-    'created_at',
-    'provenance',
   ])
   if (
     instant(row.minute_start) % 60000000n !== 0n ||
-    instant(row.created_at) < -62135596800000000n ||
-    row.provenance !== 'client-reported' ||
     typeof row.client_version !== 'string' ||
     !token.test(row.client_version) ||
     (row.baseline_id !== null &&
@@ -87,7 +91,7 @@ export function parseMinute(value: unknown): MinuteOut {
     neck: metric(row.neck),
     shoulder: metric(row.shoulder),
     trunk: metric(row.trunk),
-  } as MinuteOut
+  } as MinuteInput
   const parts = names.map((name) => result[name])
   if (
     Math.abs(
@@ -111,6 +115,21 @@ export function parseMinute(value: unknown): MinuteOut {
   )
     throw new ApiError(503)
   return Object.freeze(result)
+}
+export function parseMinute(value: unknown): MinuteOut {
+  const row = object(value, [
+    'minute_start',
+    'baseline_id',
+    'client_version',
+    ...durations,
+    ...names,
+    'created_at',
+    'provenance',
+  ])
+  if (instant(row.created_at) < -62135596800000000n || row.provenance !== 'client-reported')
+    throw new ApiError(503)
+  const { created_at, provenance, ...source } = row
+  return Object.freeze({ ...parseMinuteInput(source), created_at, provenance } as MinuteOut)
 }
 export function parseMinutes(value: unknown, range: DeletePeriod): MinuteList {
   const row = object(value, ['items', 'has_more'])

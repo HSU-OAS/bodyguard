@@ -1,0 +1,270 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "[workspace]/bodyguard/frontend/node_modules/.pnpm/@playwright+test@1.63.0/node_modules/@playwright/test/cli.js",
+      "test",
+      "minuteupload.spec.ts",
+      "--config",
+      "playwright.account.config.ts",
+      "--output",
+      "test-results/minuteupload-20261006T061904525513Z"
+    ],
+    "configFile": "[workspace]/bodyguard/frontend/playwright.account.config.ts",
+    "rootDir": "[workspace]/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "[workspace]/bodyguard/frontend/test-results/minuteupload-20261006T061904525513Z",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "[workspace]/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "account.spec.ts",
+          "password.spec.ts",
+          "google.spec.ts",
+          "records.spec.ts",
+          "design.spec.ts",
+          "withdrawal.spec.ts",
+          "datahelp.spec.ts",
+          "integration.spec.ts",
+          "security.spec.ts",
+          "resultrecord.spec.ts",
+          "ownercapture.spec.ts",
+          "recordedsession.spec.ts",
+          "authcoaching.spec.ts",
+          "notifications.spec.ts",
+          "summaries.spec.ts",
+          "minuteupload.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/minuteupload-20261006T061904525513Z/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "pnpm build && vite build --config e2e/fixtures/minuteUpload.vite.ts && vite preview --host localhost",
+      "url": "http://localhost:4173",
+      "reuseExistingServer": false,
+      "timeout": 180000
+    }
+  },
+  "suites": [
+    {
+      "title": "minuteupload.spec.ts",
+      "file": "minuteupload.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "MU-W01 observed minute saves to own white-blue posture record",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1118,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T06:19:15.703Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "minute-upload-boundaries.json",
+                      "contentType": "application/json",
+                      "body": "eyJhY3R1YWxDaHJvbWVIdHRwU3FsIjp0cnVlLCJzeW50aGV0aWNBY2NvdW50c0ludGVydmFsc01haWwiOnRydWUsImFjdHVhbEJvZHlDYW1lcmFDbGluaWNhbCI6ZmFsc2UsImV4dGVybmFsIjowLCJjYW1lcmFzIjowLCJwb3N0cyI6MSwic3RvcmFnZSI6WzAsMF0sImJyb3dzZXIiOiIxNTQuMC44MDM3Ljk4In0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "00223f8e45af2d897408-a0d68460cbb91a7b73c3",
+          "file": "minuteupload.spec.ts",
+          "line": 128,
+          "column": 1
+        },
+        {
+          "title": "MU-W02 accepted then lost response: explicit identical retry saves one row",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 414,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T06:19:17.415Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "minute-upload-boundaries.json",
+                      "contentType": "application/json",
+                      "body": "eyJhY3R1YWxDaHJvbWVIdHRwU3FsIjp0cnVlLCJzeW50aGV0aWNBY2NvdW50c0ludGVydmFsc01haWwiOnRydWUsImFjdHVhbEJvZHlDYW1lcmFDbGluaWNhbCI6ZmFsc2UsImV4dGVybmFsIjowLCJjYW1lcmFzIjowLCJwb3N0cyI6Miwic3RvcmFnZSI6WzAsMF0sImJyb3dzZXIiOiIxNTQuMC44MDM3Ljk4In0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "00223f8e45af2d897408-c1a75dfe30c3e01f50ec",
+          "file": "minuteupload.spec.ts",
+          "line": 158,
+          "column": 1
+        },
+        {
+          "title": "MU-W03 authority replaced discards; missed notification cannot write other owner",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 534,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T06:19:17.842Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "minute-upload-boundaries.json",
+                      "contentType": "application/json",
+                      "body": "eyJhY3R1YWxDaHJvbWVIdHRwU3FsIjp0cnVlLCJzeW50aGV0aWNBY2NvdW50c0ludGVydmFsc01haWwiOnRydWUsImFjdHVhbEJvZHlDYW1lcmFDbGluaWNhbCI6ZmFsc2UsImV4dGVybmFsIjowLCJjYW1lcmFzIjowLCJwb3N0cyI6MSwic3RvcmFnZSI6WzAsMF0sImJyb3dzZXIiOiIxNTQuMC44MDM3Ljk4In0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "00223f8e45af2d897408-83e403b420c5f9690a99",
+          "file": "minuteupload.spec.ts",
+          "line": 189,
+          "column": 1
+        },
+        {
+          "title": "MU-W04 different payload for same minute is rejected without overwriting own or other record",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 613,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T06:19:18.387Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "minute-upload-boundaries.json",
+                      "contentType": "application/json",
+                      "body": "eyJhY3R1YWxDaHJvbWVIdHRwU3FsIjp0cnVlLCJzeW50aGV0aWNBY2NvdW50c0ludGVydmFsc01haWwiOnRydWUsImFjdHVhbEJvZHlDYW1lcmFDbGluaWNhbCI6ZmFsc2UsImV4dGVybmFsIjowLCJjYW1lcmFzIjowLCJwb3N0cyI6Miwic3RvcmFnZSI6WzAsMF0sImJyb3dzZXIiOiIxNTQuMC44MDM3Ljk4In0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "00223f8e45af2d897408-1a9de6a316a6fc66129d",
+          "file": "minuteupload.spec.ts",
+          "line": 208,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-06T06:19:05.358Z",
+    "duration": 13735.74,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

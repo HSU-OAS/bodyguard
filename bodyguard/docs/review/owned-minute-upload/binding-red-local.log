@@ -1,0 +1,29 @@
+F.                                                                       [100%]
+=================================== FAILURES ===================================
+_____________ test_post_cookie_b_proof_b_expected_a_cannot_write_b _____________
+
+harness = <tests.conftest.Harness object at 0x10b557cb0>
+
+    def test_post_cookie_b_proof_b_expected_a_cannot_write_b(harness):
+        h = harness
+        a = h.account("upload-a@example.com")
+        cookie_a = dict(h.client.cookies)
+        h.client.cookies.clear()
+        b = h.account("upload-b@example.com")
+        proof_b = h.csrf()
+        cookie_b = dict(h.client.cookies)
+        h.client.cookies.clear()
+        h.client.cookies.update(cookie_a)
+        assert h.client.get("/api/v1/me").json()["id"] == a
+        h.client.cookies.clear()
+        h.client.cookies.update(cookie_b)
+        response = h.client.post(PATH + "/batch",
+            headers={**proof_b, "X-Account-ID": a}, json={"items": [payload()]})
+>       assert response.status_code == 403
+E       assert 201 == 403
+E        +  where 201 = <Response [201 Created]>.status_code
+
+tests/test_summary_upload_binding.py:21: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_summary_upload_binding.py::test_post_cookie_b_proof_b_expected_a_cannot_write_b
+1 failed, 1 passed in 0.80s

@@ -1,6 +1,6 @@
 # S4.15 — 본인 자세 기록 조회·기간 삭제 웹
 
-Status: in-progress
+Status: done (S4.15 저장된 기록 웹 범위만)
 baseline_commit: 654688be08ede24351491b687acae2b630dd674b
 
 ## 가치와 범위
@@ -33,7 +33,7 @@ FR-R-01/03/06, FR-U-04/05, NFR-07/08. PR48의 실제 1분 요약 API를 웹에�
 - [x] 실제 App red와 parser/lease/DOM 하네스
 - [x] 본인 조회·상세·삭제·안전한 계정 수명 연결 구현
 - [x] 실제 HTTP/SQL/production Chrome·전체 회귀·디자인 critique/증거
-- [ ] 리뷰 보완·커밋/PR/조건부 병합·다음 독립 연결
+- [x] 리뷰 보완·커밋/PR/조건부 병합·다음 독립 연결
 
 ### Review Findings
 
@@ -68,6 +68,8 @@ React의 committed layout cleanup과 비동기 응답 폐기, AbortSignal.any �
 
 최종 세 역할 재검토는 미해결 scoped P1/P2 없음이다. Blind/Acceptance는 현재 source24/artifact93와 역사적 검증 소스 SHA를 직접 읽기 전용으로 대조했다. 테스트/Chrome/collector를 reviewer가 재실행한 것으로 세지 않으며 실제 작성자 실행은 위 증거에 구분한다. on_complete resolver를 실제 실행해 missing-file exit2를 확인했고 이미 읽은 default on_complete는 빈 값이다. 새 BMAD 설치/설정이나 custom 후속 행동은 없다. CEO의 사전 승인에 따라 원격 게이트 뒤 다음 독립 Story로 이어간다.
 
+이후 [PR49](https://github.com/HSU-OAS/bodyguard/pull/49)의 sourcefc49d0cab4fdaa5bbb1604e30615c37a8a14cc83를 merge37354aa4e074d86e862e5851352f917cc001b6fb로 2026-10-06T06:01:42Z 실제 병합했다. 부모654688b/fc49d0c·원격 main 포함·소스 tree 동일·브랜치 보존/clean을 확인했다. 직전118파일 local/remote diff 본문·hunk 좌표, Git tree00cf938a9076baf4137b8fe95c637bc6c889211b·source24/artifact93 SHA·정확한 HEAD/CLEAN/MERGEABLE·체크 없음·외부 리뷰/댓글0을 확인했다. [작성자 기록](https://github.com/HSU-OAS/bodyguard/pull/49#issuecomment-6010369645)은 전문가/외부 리뷰가 아니다. 다음 S4.16 private 업로드 연결은 새 main worktree에서 시작하고 원래 파일/증거는 보존한다. 전체1~6 완료로 세지 않는다.
+
 ## File List
 
 - backend: app/main.py, app/summaries.py (기존 인증 GET 호환을 유지한 요청 결속), tests/test_summary_read_binding.py, tests/run_browser.py.
@@ -78,3 +80,4 @@ React의 committed layout cleanup과 비동기 응답 폐기, AbortSignal.any �
 
 - 2026-10-06: PR48 최신 main에서 본인 자세 기록 웹 계약과 실제 화면/계정 경계 하네스 기준 확정.
 - 2026-10-06: 실제 화이트·블루 조회/상세/확인·취소·삭제/복구 구현, scope 리뷰 보완과 실제 회귀·검증 증거 보존. 원격 조건부 PR 게이트 진행.
+- 2026-10-06: PR49 실제 merge commit·main 포함/동일 tree·브랜치 보존 확인. 저장된 본인 기록 웹 범위만 완료.

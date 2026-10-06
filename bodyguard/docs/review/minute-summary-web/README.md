@@ -66,3 +66,5 @@
 ## 남은 필수 조건 / 다음 연결
 
 이 Story는 **저장된 본인 자세 기록의 조회·상세·삭제 웹 범위**다. private 시간가중 집계→계정/세션에 묶인 업로드·동일 재시도 연결은 다음 독립 Story다. 실제 classifier/카메라·신체 기준선·추천/동작별 판정·두 고품질 남녀 아바타·SDK 개인정보 P2·실측/참여자·Q32 알림 작동/PDF/LLM/변화 탐지·사업/법무·운영/HTTPS·전체1~6 완료 기준은 미충족이다. 아바타 같은 부위 새 제작0, 중요한 안전/개인정보 변경·비용·계정·시크릿·운영 migration/배포/출시는 별도 승인 경계를 유지한다.
+
+이후 [PR49](https://github.com/HSU-OAS/bodyguard/pull/49)을 sourcefc49d0cab4fdaa5bbb1604e30615c37a8a14cc83→merge37354aa4e074d86e862e5851352f917cc001b6fb로 2026-10-06T06:01:42Z 실제 병합했다. 부모/main 포함·동일 Git tree·브랜치 보존/clean을 확인했다. 직전118파일 원격 diff 본문/hunk 좌표·source24/artifact93 SHA·exact HEAD/latest main/CLEAN/MERGEABLE·체크 없음·외부 리뷰0 결과는 [작성자 검토](https://github.com/HSU-OAS/bodyguard/pull/49#issuecomment-6010369645)에 있다. 이 후속 결과 기록에서 기존 source/manifest/실패/PNG는 수정하지 않고 검증을 새 실행한 것으로 세지 않는다.
