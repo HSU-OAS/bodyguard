@@ -1,0 +1,10 @@
+✓ Lockfile passes supply-chain policies (verified 12h ago)
+Lockfile is up to date, resolution step is skipped
+Error: ERR_PNPM_NO_OFFLINE_TARBALL
+
+  × installing dependencies
+  ╰─▶ Failed to fetch tarball for @biomejs/biome@2.5.14 from https://
+      registry.npmjs.org/@biomejs/biome/-/biome-2.5.14.tgz in offline mode:
+      snapshot not present in local store
+  help: Drop `--offline` (or `offline=true` in pnpm-workspace.yaml) or run an
+        online install first to populate the store.

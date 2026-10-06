@@ -1,0 +1,12 @@
+$ vitest run
+
+ RUN  v5.0.2 [workspace]/bodyguard/frontend
+
+
+ Test Files  40 passed (40)
+      Tests  669 passed (669)
+   Start at  15:19:22
+   Duration  5.77s (tests 44%, environment 30%, import 17%, transform 8%, worker 1%)
+
+    Isolate  40 workers spawned · ~505ms startup each (spawn + environment, per file)
+             at least ~1.74s faster with isolate: false — reuses workers across files instead of one per file

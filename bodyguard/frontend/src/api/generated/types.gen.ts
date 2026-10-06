@@ -827,6 +827,9 @@ export type SaveApiV1BaselinesPostResponse =
 
 export type SaveApiV1SummariesBatchPostData = {
   body: MinuteBatch
+  headers?: {
+    'X-Account-ID'?: string | null
+  }
   path?: never
   query?: never
   url: '/api/v1/summaries/batch'

@@ -1,0 +1,175 @@
+
+ RUN  v5.0.2 [workspace]/bodyguard/frontend
+
+ ❯ src/summary/ownedMinuteUpload.test.ts (16 tests | 16 failed) 13ms
+   ❯ owned minute upload (16)
+     × MU01 complete observed minutes only; null denominators and original proof 5ms
+     × MU02 single flight; accepted batch does not erase newly completed minutes 0ms
+     × MU03 uncertain transmission requires exact explicit retry, no refreshed CSRF 0ms
+     × MU04 malformed ack partial keeps original batch 0ms
+     × MU04 malformed ack different keeps original batch 0ms
+     × MU04 malformed ack extra keeps original batch 0ms
+     × MU04 malformed ack more keeps original batch 0ms
+     × MU04 malformed ack duplicate keeps original batch 0ms
+     × MU05 401 clears account-owned memory 0ms
+     × MU05 403 clears account-owned memory 0ms
+     × MU06 409 is terminal rejection, no retry 0ms
+     × MU06 422 is terminal rejection, no retry 0ms
+     × MU07 even same-ID replacement ready authority discards pending data 0ms
+     × MU08 abort beats a late accepted fetch even if it ignores cancellation 0ms
+     × MU09 bounded memory overflow closes without partial transmission 0ms
+     × MU10 pre-calibration neck input is rejected, not silently rewritten 4ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 16 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/summary/ownedMinuteUpload.test.ts > owned minute upload > MU01 complete observed minutes only; null denominators and original proof
+Error: Owned minute upload not implemented
+ ❯ prepareOwnedMinuteUpload src/summary/ownedMinuteUpload.ts:3:9
+      1| // FR-R-01/06, FR-U-04: private upload contract; implementation follow…
+      2| export async function prepareOwnedMinuteUpload(_options: unknown) {
+      3|   throw new Error('Owned minute upload not implemented')
+       |         ^
+      4| }
+      5|
+ ❯ setup src/summary/ownedMinuteUpload.test.ts:41:24
+ ❯ src/summary/ownedMinuteUpload.test.ts:54:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/16]⎯
+
+ FAIL  src/summary/ownedMinuteUpload.test.ts > owned minute upload > MU02 single flight; accepted batch does not erase newly completed minutes
+Error: Owned minute upload not implemented
+ ❯ prepareOwnedMinuteUpload src/summary/ownedMinuteUpload.ts:3:9
+      1| // FR-R-01/06, FR-U-04: private upload contract; implementation follow…
+      2| export async function prepareOwnedMinuteUpload(_options: unknown) {
+      3|   throw new Error('Owned minute upload not implemented')
+       |         ^
+      4| }
+      5|
+ ❯ setup src/summary/ownedMinuteUpload.test.ts:41:24
+ ❯ src/summary/ownedMinuteUpload.test.ts:79:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/16]⎯
+
+ FAIL  src/summary/ownedMinuteUpload.test.ts > owned minute upload > MU03 uncertain transmission requires exact explicit retry, no refreshed CSRF
+Error: Owned minute upload not implemented
+ ❯ prepareOwnedMinuteUpload src/summary/ownedMinuteUpload.ts:3:9
+      1| // FR-R-01/06, FR-U-04: private upload contract; implementation follow…
+      2| export async function prepareOwnedMinuteUpload(_options: unknown) {
+      3|   throw new Error('Owned minute upload not implemented')
+       |         ^
+      4| }
+      5|
+ ❯ setup src/summary/ownedMinuteUpload.test.ts:41:24
+ ❯ src/summary/ownedMinuteUpload.test.ts:91:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/16]⎯
+
+ FAIL  src/summary/ownedMinuteUpload.test.ts > owned minute upload > MU04 malformed ack partial keeps original batch
+ FAIL  src/summary/ownedMinuteUpload.test.ts > owned minute upload > MU04 malformed ack different keeps original batch
+ FAIL  src/summary/ownedMinuteUpload.test.ts > owned minute upload > MU04 malformed ack extra keeps original batch
+ FAIL  src/summary/ownedMinuteUpload.test.ts > owned minute upload > MU04 malformed ack more keeps original batch
+ FAIL  src/summary/ownedMinuteUpload.test.ts > owned minute upload > MU04 malformed ack duplicate keeps original batch
+Error: Owned minute upload not implemented
+ ❯ prepareOwnedMinuteUpload src/summary/ownedMinuteUpload.ts:3:9
+      1| // FR-R-01/06, FR-U-04: private upload contract; implementation follow…
+      2| export async function prepareOwnedMinuteUpload(_options: unknown) {
+      3|   throw new Error('Owned minute upload not implemented')
+       |         ^
+      4| }
+      5|
+ ❯ setup src/summary/ownedMinuteUpload.test.ts:41:24
+ ❯ src/summary/ownedMinuteUpload.test.ts:108:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/16]⎯
+
+ FAIL  src/summary/ownedMinuteUpload.test.ts > owned minute upload > MU05 401 clears account-owned memory
+ FAIL  src/summary/ownedMinuteUpload.test.ts > owned minute upload > MU05 403 clears account-owned memory
+Error: Owned minute upload not implemented
+ ❯ prepareOwnedMinuteUpload src/summary/ownedMinuteUpload.ts:3:9
+      1| // FR-R-01/06, FR-U-04: private upload contract; implementation follow…
+      2| export async function prepareOwnedMinuteUpload(_options: unknown) {
+      3|   throw new Error('Owned minute upload not implemented')
+       |         ^
+      4| }
+      5|
+ ❯ setup src/summary/ownedMinuteUpload.test.ts:41:24
+ ❯ src/summary/ownedMinuteUpload.test.ts:121:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/16]⎯
+
+ FAIL  src/summary/ownedMinuteUpload.test.ts > owned minute upload > MU06 409 is terminal rejection, no retry
+ FAIL  src/summary/ownedMinuteUpload.test.ts > owned minute upload > MU06 422 is terminal rejection, no retry
+Error: Owned minute upload not implemented
+ ❯ prepareOwnedMinuteUpload src/summary/ownedMinuteUpload.ts:3:9
+      1| // FR-R-01/06, FR-U-04: private upload contract; implementation follow…
+      2| export async function prepareOwnedMinuteUpload(_options: unknown) {
+      3|   throw new Error('Owned minute upload not implemented')
+       |         ^
+      4| }
+      5|
+ ❯ setup src/summary/ownedMinuteUpload.test.ts:41:24
+ ❯ src/summary/ownedMinuteUpload.test.ts:127:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/16]⎯
+
+ FAIL  src/summary/ownedMinuteUpload.test.ts > owned minute upload > MU07 even same-ID replacement ready authority discards pending data
+Error: Owned minute upload not implemented
+ ❯ prepareOwnedMinuteUpload src/summary/ownedMinuteUpload.ts:3:9
+      1| // FR-R-01/06, FR-U-04: private upload contract; implementation follow…
+      2| export async function prepareOwnedMinuteUpload(_options: unknown) {
+      3|   throw new Error('Owned minute upload not implemented')
+       |         ^
+      4| }
+      5|
+ ❯ setup src/summary/ownedMinuteUpload.test.ts:41:24
+ ❯ src/summary/ownedMinuteUpload.test.ts:133:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/16]⎯
+
+ FAIL  src/summary/ownedMinuteUpload.test.ts > owned minute upload > MU08 abort beats a late accepted fetch even if it ignores cancellation
+Error: Owned minute upload not implemented
+ ❯ prepareOwnedMinuteUpload src/summary/ownedMinuteUpload.ts:3:9
+      1| // FR-R-01/06, FR-U-04: private upload contract; implementation follow…
+      2| export async function prepareOwnedMinuteUpload(_options: unknown) {
+      3|   throw new Error('Owned minute upload not implemented')
+       |         ^
+      4| }
+      5|
+ ❯ setup src/summary/ownedMinuteUpload.test.ts:41:24
+ ❯ src/summary/ownedMinuteUpload.test.ts:140:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/16]⎯
+
+ FAIL  src/summary/ownedMinuteUpload.test.ts > owned minute upload > MU09 bounded memory overflow closes without partial transmission
+Error: Owned minute upload not implemented
+ ❯ prepareOwnedMinuteUpload src/summary/ownedMinuteUpload.ts:3:9
+      1| // FR-R-01/06, FR-U-04: private upload contract; implementation follow…
+      2| export async function prepareOwnedMinuteUpload(_options: unknown) {
+      3|   throw new Error('Owned minute upload not implemented')
+       |         ^
+      4| }
+      5|
+ ❯ setup src/summary/ownedMinuteUpload.test.ts:41:24
+ ❯ src/summary/ownedMinuteUpload.test.ts:148:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/16]⎯
+
+ FAIL  src/summary/ownedMinuteUpload.test.ts > owned minute upload > MU10 pre-calibration neck input is rejected, not silently rewritten
+Error: Owned minute upload not implemented
+ ❯ prepareOwnedMinuteUpload src/summary/ownedMinuteUpload.ts:3:9
+      1| // FR-R-01/06, FR-U-04: private upload contract; implementation follow…
+      2| export async function prepareOwnedMinuteUpload(_options: unknown) {
+      3|   throw new Error('Owned minute upload not implemented')
+       |         ^
+      4| }
+      5|
+ ❯ setup src/summary/ownedMinuteUpload.test.ts:41:24
+ ❯ src/summary/ownedMinuteUpload.test.ts:154:21
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/16]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  16 failed (16)
+   Start at  15:14:42
+   Duration  195ms (transform 52%, tests 21%, import 20%, worker 6%)

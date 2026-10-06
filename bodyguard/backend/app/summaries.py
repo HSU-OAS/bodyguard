@@ -226,9 +226,16 @@ def register_summaries(
         status_code=201,
         responses={200: {"model": MinuteList}, 409: {"model": error_model}},
     )
-    def save(payload: MinuteBatch, request: Request, response: Response) -> MinuteList:
+    def save(
+        payload: MinuteBatch,
+        request: Request,
+        response: Response,
+        expected_owner: str | None = Header(None, alias="X-Account-ID"),
+    ) -> MinuteList:
         with db.begin() as connection:
             user_id = authenticate(connection, request, True)
+            # FR-U-04: a cookie/CSRF acquisition race cannot select another writer.
+            bind_read(request, user_id, request.headers.get("X-CSRF-Token"), expected_owner)
             now = clock()
             results: list[MinuteOut] = []
             created = False

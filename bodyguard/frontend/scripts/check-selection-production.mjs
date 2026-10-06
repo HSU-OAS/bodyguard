@@ -49,6 +49,9 @@ for (const file of files) {
     'preparation-error',
     'Invalid minute aggregation',
     'PRIVATE_SUMMARY_COORDINATES_ACCOUNT',
+    'Invalid owned minute upload',
+    'prepareMinuteUploadProbe',
+    'PRIVATE_RAW_FAILURE',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -66,5 +69,6 @@ console.log(
     unconnected_recorded_session_strings: 0,
     unconnected_auth_coaching_hook_strings: 0,
     unconnected_minute_aggregation_strings: 0,
+    unconnected_owned_minute_upload_strings: 0,
   }),
 )
