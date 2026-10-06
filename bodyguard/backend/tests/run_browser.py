@@ -28,6 +28,11 @@ from tests.test_google_auth import CLIENT_ID, Provider
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
+        "--headed",
+        action="store_true",
+        help="Compare visible Chrome without changing assertions or deadlines",
+    )
+    parser.add_argument(
         "suite",
         choices=(
             "account",
@@ -46,6 +51,7 @@ def main() -> int:
             "notifications",
             "summaries",
             "minuteupload",
+            "dashboard",
         ),
         nargs="?",
         default="account",
@@ -190,6 +196,7 @@ def main() -> int:
                         "notifications",
                         "summaries",
                         "minuteupload",
+                        "dashboard",
                     )
                     else f"test-results/{args.suite}"
                 )
@@ -204,6 +211,7 @@ def main() -> int:
                         "playwright.account.config.ts",
                         "--output",
                         output,
+                        *(["--headed"] if args.headed else []),
                     ],
                     cwd=Path(__file__).resolve().parents[2] / "frontend",
                     env={
@@ -229,6 +237,7 @@ def main() -> int:
                                 "notifications",
                                 "summaries",
                                 "minuteupload",
+                                "dashboard",
                             )
                             else ""
                         ),

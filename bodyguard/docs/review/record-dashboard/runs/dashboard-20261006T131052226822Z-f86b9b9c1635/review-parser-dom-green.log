@@ -1,0 +1,550 @@
+$ vitest run src/api/dashboard.test.ts src/pages/RecordDashboardPage.test.tsx
+
+ RUN  v5.0.2 [workspace]/bodyguard/frontend
+
+ ❯ src/pages/RecordDashboardPage.test.tsx (10 tests | 1 failed) 1358ms
+   × late dashboard after logout cannot restore old records 1029ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/pages/RecordDashboardPage.test.tsx > late dashboard after logout cannot restore old records
+TestingLibraryElementError: Unable to find role="heading" and name "다시 만나서 반가워요"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="website"
+    >
+      <button
+        class="skip-link"
+        type="button"
+      >
+        본문으로 이동
+      </button>
+      <header
+        class="site-header"
+      >
+        <a
+          aria-label="BODYGUARD 서비스 소개"
+          class="wordmark"
+          data-discover="true"
+          href="/"
+        >
+          BODYGUARD
+          <span
+            aria-hidden="true"
+          >
+            .
+          </span>
+        </a>
+        <nav
+          aria-label="계정 메뉴"
+        >
+          <a
+            class="nav-link"
+            data-discover="true"
+            href="/login"
+          >
+            로그인
+          </a>
+        </nav>
+      </header>
+      <main
+        id="content"
+        tabindex="-1"
+      >
+        <section
+          class="account-layout"
+        >
+          <aside
+            class="account-intro"
+          >
+            <p
+              class="eyebrow"
+            >
+              BODYGUARD / MY ACCOUNT
+            </p>
+            <h2>
+              일상에 맞춘
+              <br />
+              몸 돌보기.
+            </h2>
+            <p>
+              노트북 웹캠 한 대로 시작하는
+              <br />
+              스트레칭과 자세 코칭.
+            </p>
+            <div
+              class="privacy-note"
+            >
+              <span
+                class="section-number"
+              >
+                01
+              </span>
+              <p>
+                카메라는 직접 시작할 때만 켜집니다.
+                <br />
+                원본 영상은 저장하거나 전송하지 않습니다.
+              </p>
+            </div>
+            <p
+              class="muted small"
+            >
+              현재 개발 중인 웹입니다.
+              <br />
+              출시 전 기능·안전·개인정보 검증을 진행하고 있습니다.
+            </p>
+          </aside>
+          <div
+            class="account-form"
+          >
+            <p
+              class="eyebrow"
+            >
+              로그인
+            </p>
+            <h1
+              tabindex="-1"
+            >
+              다시 만나 반갑습니다
+            </h1>
+            <p
+              class="muted"
+            >
+              이메일로 내 계정에 로그인하세요.
+            </p>
+            <div
+              class="google-option"
+            >
+              <button
+                aria-describedby="google-feedback"
+                class="button google-button wide"
+                disabled=""
+                type="button"
+              >
+                <span
+                  aria-hidden="true"
+                  class="google-icon"
+                >
+                  <img
+                    alt=""
+                    height="40"
+                    src="/brand/google-icon.png"
+                    width="40"
+                  />
+                </span>
+                Google로 계속하기
+              </button>
+              <p
+                class="muted small google-feedback"
+                id="google-feedback"
+                role="status"
+              >
+                구글 연결을 확인하지 못했습니다. 이메일로 계속할 수 있습니다.
+              </p>
+              <button
+                class="text-button google-retry"
+                type="button"
+              >
+                구글 연결 다시 확인
+              </button>
+              <p
+                class="account-divider"
+              >
+                또는 이메일로
+              </p>
+            </div>
+            <form
+              aria-busy="false"
+            >
+              <label>
+                이메일
+                <input
+                  autocomplete="email"
+                  maxlength="254"
+                  name="email"
+                  required=""
+                  type="email"
+                  value=""
+                />
+              </label>
+              <label
+                for="account-password"
+              >
+                비밀번호
+              </label>
+              <div
+                class="password-input"
+              >
+                <input
+                  autocomplete="current-password"
+                  id="account-password"
+                  maxlength="256"
+                  name="password"
+                  required=""
+                  type="password"
+                  value=""
+                />
+                <button
+                  aria-label="비밀번호 표시"
+                  aria-pressed="false"
+                  class="text-button"
+                  type="button"
+                >
+                  표시
+                </button>
+              </div>
+              <div
+                id="account-feedback"
+              />
+              <button
+                class="button primary wide"
+                type="submit"
+              >
+                로그인
+              </button>
+            </form>
+            <p
+              class="form-secondary"
+            >
+              처음 오셨나요?
+
+              <a
+                data-discover="true"
+                href="/signup?next=%2Fstart"
+              >
+                이메일로 가입
+              </a>
+            </p>
+            <p
+              class="form-secondary"
+            >
+              <a
+                data-discover="true"
+                href="/password/forgot"
+              >
+                비밀번호를 잊으셨나요?
+              </a>
+            </p>
+            <a
+              class="back-link"
+              data-discover="true"
+              href="/"
+            >
+              서비스 소개로 돌아가기
+            </a>
+          </div>
+        </section>
+      </main>
+      <footer
+        class="site-footer"
+      >
+        <span>
+          BODYGUARD
+        </span>
+        <p>
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        </p>
+        <nav
+          aria-label="서비스 안내"
+        >
+          <a
+            class="footer-link"
+            data-discover="true"
+            href="/help"
+          >
+            도움말
+          </a>
+          <a
+            class="footer-link"
+            data-discover="true"
+            href="/data"
+          >
+            카메라·데이터 안내
+          </a>
+        </nav>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="website"
+    >
+      <button
+        class="skip-link"
+        type="button"
+      >
+        본문으로 이동
+      </button>
+      <header
+        class="site-header"
+      >
+        <a
+          aria-label="BODYGUARD 서비스 소개"
+          class="wordmark"
+          data-discover="true"
+          href="/"
+        >
+          BODYGUARD
+          <span
+            aria-hidden="true"
+          >
+            .
+          </span>
+        </a>
+        <nav
+          aria-label="계정 메뉴"
+        >
+          <a
+            class="nav-link"
+            data-discover="true"
+            href="/login"
+          >
+            로그인
+          </a>
+        </nav>
+      </header>
+      <main
+        id="content"
+        tabindex="-1"
+      >
+        <section
+          class="account-layout"
+        >
+          <aside
+            class="account-intro"
+          >
+            <p
+              class="eyebrow"
+            >
+              BODYGUARD / MY ACCOUNT
+            </p>
+            <h2>
+              일상에 맞춘
+              <br />
+              몸 돌보기.
+            </h2>
+            <p>
+              노트북 웹캠 한 대로 시작하는
+              <br />
+              스트레칭과 자세 코칭.
+            </p>
+            <div
+              class="privacy-note"
+            >
+              <span
+                class="section-number"
+              >
+                01
+              </span>
+              <p>
+                카메라는 직접 시작할 때만 켜집니다.
+                <br />
+                원본 영상은 저장하거나 전송하지 않습니다.
+              </p>
+            </div>
+            <p
+              class="muted small"
+            >
+              현재 개발 중인 웹입니다.
+              <br />
+              출시 전 기능·안전·개인정보 검증을 진행하고 있습니다.
+            </p>
+          </aside>
+          <div
+            class="account-form"
+          >
+            <p
+              class="eyebrow"
+            >
+              로그인
+            </p>
+            <h1
+              tabindex="-1"
+            >
+              다시 만나 반갑습니다
+            </h1>
+            <p
+              class="muted"
+            >
+              이메일로 내 계정에 로그인하세요.
+            </p>
+            <div
+              class="google-option"
+            >
+              <button
+                aria-describedby="google-feedback"
+                class="button google-button wide"
+                disabled=""
+                type="button"
+              >
+                <span
+                  aria-hidden="true"
+                  class="google-icon"
+                >
+                  <img
+                    alt=""
+                    height="40"
+                    src="/brand/google-icon.png"
+                    width="40"
+                  />
+                </span>
+                Google로 계속하기
+              </button>
+              <p
+                class="muted small google-feedback"
+                id="google-feedback"
+                role="status"
+              >
+                구글 연결을 확인하지 못했습니다. 이메일로 계속할 수 있습니다.
+              </p>
+              <button
+                class="text-button google-retry"
+                type="button"
+              >
+                구글 연결 다시 확인
+              </button>
+              <p
+                class="account-divider"
+              >
+                또는 이메일로
+              </p>
+            </div>
+            <form
+              aria-busy="false"
+            >
+              <label>
+                이메일
+                <input
+                  autocomplete="email"
+                  maxlength="254"
+                  name="email"
+                  required=""
+                  type="email"
+                  value=""
+                />
+              </label>
+              <label
+                for="account-password"
+              >
+                비밀번호
+              </label>
+              <div
+                class="password-input"
+              >
+                <input
+                  autocomplete="current-password"
+                  id="account-password"
+                  maxlength="256"
+                  name="password"
+                  required=""
+                  type="password"
+                  value=""
+                />
+                <button
+                  aria-label="비밀번호 표시"
+                  aria-pressed="false"
+                  class="text-button"
+                  type="button"
+                >
+                  표시
+                </button>
+              </div>
+              <div
+                id="account-feedback"
+              />
+              <button
+                class="button primary wide"
+                type="submit"
+              >
+                로그인
+              </button>
+            </form>
+            <p
+              class="form-secondary"
+            >
+              처음 오셨나요?
+
+              <a
+                data-discover="true"
+                href="/signup?next=%2Fstart"
+              >
+                이메일로 가입
+              </a>
+            </p>
+            <p
+              class="form-secondary"
+            >
+              <a
+                data-discover="true"
+                href="/password/forgot"
+              >
+                비밀번호를 잊으셨나요?
+              </a>
+            </p>
+            <a
+              class="back-link"
+              data-discover="true"
+              href="/"
+            >
+              서비스 소개로 돌아가기
+            </a>
+          </div>
+        </section>
+      </main>
+      <footer
+        class="site-footer"
+      >
+        <span>
+          BODYGUARD
+        </span>
+        <p>
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        </p>
+        <nav
+          aria-label="서비스 안내"
+        >
+          <a
+            class="footer-link"
+            data-discover="true"
+            href="/help"
+          >
+            도움말
+          </a>
+          <a
+            class="footer-link"
+            data-discover="true"
+            href="/data"
+          >
+            카메라·데이터 안내
+          </a>
+        </nav>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/RecordDashboardPage.test.tsx:115:41
+    113|     if (kind === 'logout') guest = true
+    114|     fireEvent(window, new Event('focus'))
+    115|     if (kind === 'logout') await screen.findByRole('heading', { name: …
+       |                                         ^
+    116|     else await screen.findByText('이 기간에는 저장된 기록이 없습니다')
+    117|     await act(async () => release?.(sample('/api/v1/records/dashboard?…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 46 passed (47)
+   Start at  16:33:28
+   Duration  2.24s (tests 65%, environment 15%, transform 10%, import 10%)
+
+[ELIFECYCLE] Test failed. See above for more details.

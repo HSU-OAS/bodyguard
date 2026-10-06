@@ -1,0 +1,27 @@
+$ vitest run src/api/dashboard.test.ts
+
+ RUN  v5.0.2 [workspace]/bodyguard/frontend
+
+ ❯ src/api/dashboard.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/api/dashboard.test.ts [ src/api/dashboard.test.ts ]
+Error: Cannot find module './dashboard' imported from [workspace]/bodyguard/frontend/src/api/dashboard.test.ts
+ ❯ src/api/dashboard.test.ts:5:1
+      3| import type { ReadyAccount } from '../auth'
+      4| import { ApiError } from './auth'
+      5| import { dashboardQuery, parseDashboard, readDashboard } from './dashb…
+       | ^
+      6|
+      7| const query = { date: '2026-10-01', period: 'day' as const, timezone: …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  16:12:42
+   Duration  197ms (worker 97%, environment 3%)
+
+[ELIFECYCLE] Test failed. See above for more details.

@@ -1,0 +1,53 @@
+
+ RUN  v5.0.2 [workspace]/bodyguard/frontend
+
+ ❯ src/api/dashboard.test.ts (40 tests | 3 failed) 171ms
+   × rejects positive duration for zero stored minutes 3ms
+   × requires every part within each baseline/version partition 1ms
+   × retains an unrepresentable ratio as precision null, never normal zero 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/api/dashboard.test.ts > rejects positive duration for zero stored minutes
+AssertionError: expected function to throw an error, but it didn't
+ ❯ src/api/dashboard.test.ts:115:65
+    113|   expect(() => parseDashboard({ ...fixture, totals: { minutes: 0, cove…
+    114|     measured_sec: 0.001, unmeasurable_sec: 0, present_sec: 0.001,
+    115|     background_sec: 0, any_bad_sec: 0 }, metrics: [] }, query)).toThro…
+       |                                                                 ^
+    116| })
+    117| it('requires every part within each baseline/version partition', () =>…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  src/api/dashboard.test.ts > requires every part within each baseline/version partition
+AssertionError: expected function to throw an error, but it didn't
+ ❯ src/api/dashboard.test.ts:120:71
+    118|   const mixed = fixture.metrics.map(part => part.part === 'shoulder' ?…
+    119|     { ...part, baseline_id: authority.user.id, client_version: 'Fixtur…
+    120|   expect(() => parseDashboard({ ...fixture, metrics: mixed }, query)).…
+       |                                                                       ^
+    121| })
+    122| it('retains an unrepresentable ratio as precision null, never normal z…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  src/api/dashboard.test.ts > retains an unrepresentable ratio as precision null, never normal zero
+Error: 계정 요청을 완료하지 못했습니다
+ ❯ src/api/dashboard.ts:232:13
+    230|       (item.baseline_id === null && item.part !== 'shoulder' && item.m…
+    231|     )
+    232|       throw new ApiError(503)
+       |             ^
+    233|     const key = JSON.stringify([
+    234|       item.part,
+ ❯ parseDashboard src/api/dashboard.ts:199:31
+ ❯ src/api/dashboard.test.ts:128:10
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 37 passed (40)
+   Start at  21:33:43
+   Duration  383ms (tests 67%, transform 25%, import 6%, worker 1%)

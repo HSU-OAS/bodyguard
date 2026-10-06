@@ -1,0 +1,106 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: [workspace]/bodyguard/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1
+collected 24 items
+
+tests/test_dashboard.py ....................FFFF                         [100%]
+
+=================================== FAILURES ===================================
+_____ test_subnormal_measurement_preserves_mean_and_unrepresentable_ratio ______
+
+harness = <tests.conftest.Harness object at 0x124036f30>
+
+    def test_subnormal_measurement_preserves_mean_and_unrepresentable_ratio(harness):
+        h = harness
+        h.account()
+        item = payload(58)
+        item.update(measured_sec=1e-320, unmeasurable_sec=60, present_sec=1e-320,
+                    background_sec=0, any_bad_sec=5e-7)
+        item["shoulder"].update(measured_sec=1e-320, bad_sec=5e-7)
+        assert post(h, item).status_code == 201
+        response = get(h)
+>       assert response.status_code == 200
+E       assert 503 == 200
+E        +  where 503 = <Response [503 Service Unavailable]>.status_code
+
+tests/test_dashboard.py:245: AssertionError
+___________ test_numeric_weighted_mean_stays_inside_accepted_domain ____________
+
+harness = <tests.conftest.Harness object at 0x1241c9010>
+
+    def test_numeric_weighted_mean_stays_inside_accepted_domain(harness):
+        h = harness
+        h.account()
+        items = [payload(index) for index in range(50, 56)]
+        for item in items:
+            item.update(measured_sec=0.1, unmeasurable_sec=59.9, present_sec=0.1,
+                        background_sec=0, any_bad_sec=0)
+            item["shoulder"].update(measured_sec=0.1, bad_sec=0, dev_mean=9007199254740991)
+        assert post(h, *items).status_code == 201
+        response = get(h)
+        assert response.status_code == 200
+        part = next(p for p in response.json()["metrics"] if p["part"] == "shoulder")
+>       assert part["dev_mean"] == 9007199254740991
+E       assert 9007199254740992.0 == 9007199254740991
+
+tests/test_dashboard.py:263: AssertionError
+_ test_repeated_local_date_includes_only_matching_calendar_minutes[1867-10-18] _
+
+harness = <tests.conftest.Harness object at 0x125831ed0>, date = '1867-10-18'
+
+    @pytest.mark.parametrize("date", ["1867-10-18", "1867-10-19"])
+    def test_repeated_local_date_includes_only_matching_calendar_minutes(harness, date):
+        from zoneinfo import ZoneInfo
+
+        h = harness
+        owner = h.account()
+        zone = ZoneInfo("America/Anchorage")
+        # The historical24h rollback creates a noncontiguous date; each stored
+        # UTC minute belongs to exactly its actual local calendar date.
+        base = _values(MinuteInput.model_validate(payload()))
+        start = datetime(1867, 10, 17, tzinfo=UTC)
+        instants = [start + timedelta(hours=index) for index in range(96)]
+        with h.engine.begin() as connection:
+            connection.execute(insert(minute_summaries), [{**base, "user_id": owner,
+                "minute_start": instant, "created_at": h.clock.now} for instant in instants])
+        response = get(h, date=date, timezone="America/Anchorage")
+        assert response.status_code == 200
+        expected = sum(instant.astimezone(zone).date().isoformat() == date for instant in instants)
+>       assert response.json()["totals"]["minutes"] == expected
+E       assert 24 == 33
+
+tests/test_dashboard.py:284: AssertionError
+_ test_repeated_local_date_includes_only_matching_calendar_minutes[1867-10-19] _
+
+harness = <tests.conftest.Harness object at 0x12434cd50>, date = '1867-10-19'
+
+    @pytest.mark.parametrize("date", ["1867-10-18", "1867-10-19"])
+    def test_repeated_local_date_includes_only_matching_calendar_minutes(harness, date):
+        from zoneinfo import ZoneInfo
+
+        h = harness
+        owner = h.account()
+        zone = ZoneInfo("America/Anchorage")
+        # The historical24h rollback creates a noncontiguous date; each stored
+        # UTC minute belongs to exactly its actual local calendar date.
+        base = _values(MinuteInput.model_validate(payload()))
+        start = datetime(1867, 10, 17, tzinfo=UTC)
+        instants = [start + timedelta(hours=index) for index in range(96)]
+        with h.engine.begin() as connection:
+            connection.execute(insert(minute_summaries), [{**base, "user_id": owner,
+                "minute_start": instant, "created_at": h.clock.now} for instant in instants])
+        response = get(h, date=date, timezone="America/Anchorage")
+        assert response.status_code == 200
+        expected = sum(instant.astimezone(zone).date().isoformat() == date for instant in instants)
+>       assert response.json()["totals"]["minutes"] == expected
+E       assert 48 == 39
+
+tests/test_dashboard.py:284: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_dashboard.py::test_subnormal_measurement_preserves_mean_and_unrepresentable_ratio
+FAILED tests/test_dashboard.py::test_numeric_weighted_mean_stays_inside_accepted_domain
+FAILED tests/test_dashboard.py::test_repeated_local_date_includes_only_matching_calendar_minutes[1867-10-18]
+FAILED tests/test_dashboard.py::test_repeated_local_date_includes_only_matching_calendar_minutes[1867-10-19]
+========================= 4 failed, 20 passed in 7.61s =========================

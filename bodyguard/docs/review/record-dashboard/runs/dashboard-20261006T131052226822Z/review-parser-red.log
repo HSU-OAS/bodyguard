@@ -1,0 +1,56 @@
+$ vitest run src/api/dashboard.test.ts
+
+ RUN  v5.0.2 [workspace]/bodyguard/frontend
+
+ ❯ src/api/dashboard.test.ts (34 tests | 3 failed) 146ms
+   × rejects numeric timezone and canonicalizes IANA case 4ms
+   × retains existing additive duration tolerance without turning accepted records into 503 3ms
+   × rejects missing parts and any-bad below a recorded part without another guard masking the test 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/api/dashboard.test.ts > rejects numeric timezone and canonicalizes IANA case
+AssertionError: expected function to throw an error, but it didn't
+ ❯ src/api/dashboard.test.ts:84:87
+     82| })
+     83| it('rejects numeric timezone and canonicalizes IANA case', () => {
+     84|   expect(() => dashboardQuery(new URLSearchParams({ ...query, timezone…
+       |                                                                                       ^
+     85|   expect(dashboardQuery(new URLSearchParams({ ...query, timezone: 'asi…
+     86| })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  src/api/dashboard.test.ts > retains existing additive duration tolerance without turning accepted records into 503
+Error: 계정 요청을 완료하지 못했습니다
+ ❯ src/api/dashboard.ts:207:13
+    205|       (item.baseline_id === null && item.part !== 'shoulder' && item.m…
+    206|     )
+    207|       throw new ApiError(503)
+       |             ^
+    208|     const key = JSON.stringify([
+    209|       item.part,
+ ❯ parseDashboard src/api/dashboard.ts:174:31
+ ❯ src/api/dashboard.test.ts:91:10
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  src/api/dashboard.test.ts > rejects missing parts and any-bad below a recorded part without another guard masking the test
+AssertionError: expected function to throw an error, but it didn't
+ ❯ src/api/dashboard.test.ts:96:64
+     94|   expect(() => parseDashboard({ ...fixture,totals:{...totals,any_bad_s…
+     95|   const dup = fixture.metrics.map(part=>part.part==='trunk'?{...part,p…
+     96|   expect(() => parseDashboard({...fixture,metrics:dup},query)).toThrow…
+       |                                                                ^
+     97| })
+     98| it.each([
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 31 passed (34)
+   Start at  16:28:49
+   Duration  322ms (tests 71%, transform 21%, import 7%, worker 2%)
+
+[ELIFECYCLE] Test failed. See above for more details.

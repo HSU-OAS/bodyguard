@@ -1,0 +1,75 @@
+[WebServer] (node:82223) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ node scripts/prepare-assets.mjs && tsc --noEmit && vite build
+[WebServer] (node:82232) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:82403) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:82419) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:82432) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 e2e/dashboard.spec.ts:144:1 › DW01 실제 저장→전체 하루/한 주 집계→기록 관리/복귀와 의료 화이트블루 웹 (15.8s)
+(node:83050) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 e2e/dashboard.spec.ts:214:1 › DW02 실제 빈 기간/잘못된 URL/503 복구/요청 시 계정 권위 경계 (13.6s)
+
+
+  1) e2e/dashboard.spec.ts:144:1 › DW01 실제 저장→전체 하루/한 주 집계→기록 관리/복귀와 의료 화이트블루 웹 ────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: '내 기록 대시보드' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: '내 기록 대시보드' }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: '내 기록 대시보드' })
+
+
+      140 | async function open(page: Page) {
+      141 |   await page.goto(query)
+    > 142 |   await expect(page.getByRole('heading', { name: '내 기록 대시보드' })).toBeVisible()
+          |                                                                  ^
+      143 | }
+      144 | test('DW01 실제 저장→전체 하루/한 주 집계→기록 관리/복귀와 의료 화이트블루 웹', async ({
+      145 |   page,
+        at open ([workspace]/bodyguard/frontend/e2e/dashboard.spec.ts:142:66)
+        at [workspace]/bodyguard/frontend/e2e/dashboard.spec.ts:159:3
+
+    Error Context: test-results/dashboard-20261006T072042434871Z/dashboard-DW01-실제-저장→전체-하루-한-주-집계→기록-관리-복귀와-의료-화이트블루-웹/error-context.md
+
+  2) e2e/dashboard.spec.ts:214:1 › DW02 실제 빈 기간/잘못된 URL/503 복구/요청 시 계정 권위 경계 ───────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: '내 기록 대시보드' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: '내 기록 대시보드' }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: '내 기록 대시보드' })
+
+
+      140 | async function open(page: Page) {
+      141 |   await page.goto(query)
+    > 142 |   await expect(page.getByRole('heading', { name: '내 기록 대시보드' })).toBeVisible()
+          |                                                                  ^
+      143 | }
+      144 | test('DW01 실제 저장→전체 하루/한 주 집계→기록 관리/복귀와 의료 화이트블루 웹', async ({
+      145 |   page,
+        at open ([workspace]/bodyguard/frontend/e2e/dashboard.spec.ts:142:66)
+        at [workspace]/bodyguard/frontend/e2e/dashboard.spec.ts:219:3
+
+    Error Context: test-results/dashboard-20261006T072042434871Z/dashboard-DW02-실제-빈-기간-잘못된-URL-503-복구-요청-시-계정-권위-경계/error-context.md
+
+  2 failed
+    e2e/dashboard.spec.ts:144:1 › DW01 실제 저장→전체 하루/한 주 집계→기록 관리/복귀와 의료 화이트블루 웹 ─────────────────────
+    e2e/dashboard.spec.ts:214:1 › DW02 실제 빈 기간/잘못된 URL/503 복구/요청 시 계정 권위 경계 ────────────────────────

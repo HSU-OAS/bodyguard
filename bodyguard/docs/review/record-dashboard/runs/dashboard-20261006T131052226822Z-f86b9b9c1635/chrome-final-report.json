@@ -1,0 +1,191 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "[workspace]/bodyguard/frontend/node_modules/@playwright/test/cli.js",
+      "test",
+      "dashboard.spec.ts",
+      "--config",
+      "playwright.account.config.ts",
+      "--output",
+      "test-results/dashboard-20261006T131052226822Z"
+    ],
+    "configFile": "[workspace]/bodyguard/frontend/playwright.account.config.ts",
+    "rootDir": "[workspace]/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "[workspace]/bodyguard/frontend/test-results/dashboard-20261006T131052226822Z",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "[workspace]/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "account.spec.ts",
+          "password.spec.ts",
+          "google.spec.ts",
+          "records.spec.ts",
+          "design.spec.ts",
+          "withdrawal.spec.ts",
+          "datahelp.spec.ts",
+          "integration.spec.ts",
+          "security.spec.ts",
+          "resultrecord.spec.ts",
+          "ownercapture.spec.ts",
+          "recordedsession.spec.ts",
+          "authcoaching.spec.ts",
+          "notifications.spec.ts",
+          "summaries.spec.ts",
+          "minuteupload.spec.ts",
+          "dashboard.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/dashboard-20261006T131052226822Z/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "pnpm build && vite preview --host localhost",
+      "url": "http://localhost:4173",
+      "reuseExistingServer": false,
+      "timeout": 180000
+    }
+  },
+  "suites": [
+    {
+      "title": "dashboard.spec.ts",
+      "file": "dashboard.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "DW01 실제 저장→전체 하루/한 주 집계→기록 관리/복귀와 의료 화이트블루 웹",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 38989,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T13:11:00.237Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "dashboard-boundaries.json",
+                      "contentType": "application/json",
+                      "body": "eyJhY3R1YWxQcm9kdWN0aW9uQ2hyb21lSHR0cFNxbCI6dHJ1ZSwic3ludGhldGljUmVjb3Jkc01haWxGYXVsdHMiOnRydWUsImFjdHVhbFBlcnNvbkNhbWVyYUNsaW5pY2FsIjpmYWxzZSwiY2FtZXJhIjowLCJ1bmV4cGVjdGVkIjpbXSwiZXJyb3JzIjpbXSwibmV0d29yayI6W3sicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvYXV0aC9jc3JmIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9yZWNvcmRzL2Rhc2hib2FyZCIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL3JlY29yZHMvZGFzaGJvYXJkIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvYXV0aC9jc3JmIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9yZWNvcmRzL2Rhc2hib2FyZCIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL3JlY29yZHMvc3RyZXRjaCIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvYXV0aC9jc3JmIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9yZWNvcmRzL2Rhc2hib2FyZCIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9XSwic3RvcmFnZSI6WzAsMF0sImJyb3dzZXIiOiIxNTQuMC44MDM3Ljk4IiwidGltaW5nIjp7ImJyb3dzZXJUYXNrcyI6eyJsb25nVGFza3MiOlsyNDAsNDEyLDY0LDcwLDQ2NCwyMzIsMTgyLDkzLDMyOSwyMDksMTE3LDI1NywxMzQsMTE0OCwxMzQsNzMsOTEsNjUsMTQxLDg4LDIzNV0sImZvY3VzIjowLCJ2aXNpYmlsaXR5IjpbInZpc2libGUiXX0sInJlcXVlc3RzIjpbeyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0Ijo5MDcuNzk5OTk5OTk3MDE5OCwiZHVyYXRpb24iOjkzLjgwMDAwMDAwNDQ3MDM1fSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhcnQiOjM5OTUuMTAwMDAwMDAxNDksImR1cmF0aW9uIjo3Ljg5OTk5OTk5ODUwOTg4NH0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJzdGFydCI6NTI5MS44OTk5OTk5OTg1MSwiZHVyYXRpb24iOjUuNzAwMDAwMDAyOTgwMjMyfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhcnQiOjU1MzcuMzk5OTk5OTk4NTEsImR1cmF0aW9uIjo2Ljc5OTk5OTk5NzAxOTc2OH0seyJwYXRoIjoiL2FwaS92MS9yZWNvcmRzL2Rhc2hib2FyZCIsInN0YXJ0Ijo1NjU4LjE5OTk5OTk5NTUzLCJkdXJhdGlvbiI6OC41fSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhcnQiOjU4OTQsImR1cmF0aW9uIjo0LjV9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGFydCI6ODI1Mi4xMDAwMDAwMDE0OSwiZHVyYXRpb24iOjEwLjM5OTk5OTk5ODUwOTg4NH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0Ijo5MjU1LjE5OTk5OTk5NTUzLCJkdXJhdGlvbiI6MTEuNX0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJzdGFydCI6OTgxNS42OTk5OTk5OTU1MywiZHVyYXRpb24iOjUuOTAwMDAwMDA1OTYwNDY0NX0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0IjoxMDEyNy4xOTk5OTk5OTU1MywiZHVyYXRpb24iOjcuNDAwMDAwMDA1OTYwNDY0NX0seyJwYXRoIjoiL2FwaS92MS9yZWNvcmRzL2Rhc2hib2FyZCIsInN0YXJ0IjoxMDMyMy42MDAwMDAwMDE0OSwiZHVyYXRpb24iOjguMzk5OTk5OTk4NTA5ODg0fSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhcnQiOjEwMzYwLjYwMDAwMDAwMTQ5LCJkdXJhdGlvbiI6NS4wOTk5OTk5OTQwMzk1MzU1fSx7InBhdGgiOiIvYXBpL3YxL3JlY29yZHMvc3RyZXRjaCIsInN0YXJ0IjoxMjMyMy41LCJkdXJhdGlvbiI6OC43OTk5OTk5OTcwMTk3Njh9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGFydCI6MTI2NjguMTAwMDAwMDAxNDksImR1cmF0aW9uIjo1LjE5OTk5OTk5NTUyOTY1Mn0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJzdGFydCI6MTI3OTYsImR1cmF0aW9uIjo2LjYwMDAwMDAwMTQ5MDExNn0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0IjoxMjg4MywiZHVyYXRpb24iOjV9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGFydCI6MTI5MDUsImR1cmF0aW9uIjo4Ljg5OTk5OTk5ODUwOTg4NH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0IjoxMjk4OC42MDAwMDAwMDE0OSwiZHVyYXRpb24iOjQuODk5OTk5OTk4NTA5ODg0fV19fQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "90cda532ab82d274b30b-22eb47a214e24b1fb3c9",
+          "file": "dashboard.spec.ts",
+          "line": 228,
+          "column": 1
+        },
+        {
+          "title": "DW02 실제 빈 기간/잘못된 URL/503 복구/요청 시 계정 권위 경계",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 30536,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T13:11:43.948Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "dashboard-boundaries.json",
+                      "contentType": "application/json",
+                      "body": "eyJhY3R1YWxQcm9kdWN0aW9uQ2hyb21lSHR0cFNxbCI6dHJ1ZSwic3ludGhldGljUmVjb3Jkc01haWxGYXVsdHMiOnRydWUsImFjdHVhbFBlcnNvbkNhbWVyYUNsaW5pY2FsIjpmYWxzZSwiY2FtZXJhIjowLCJ1bmV4cGVjdGVkIjpbXSwiZXJyb3JzIjpbXSwibmV0d29yayI6W3sicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL3JlY29yZHMvZGFzaGJvYXJkIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGF0dXMiOjUwM30seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvYXV0aC9jc3JmIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9yZWNvcmRzL2Rhc2hib2FyZCIsInN0YXR1cyI6NDAzfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL3JlY29yZHMvZGFzaGJvYXJkIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH1dLCJzdG9yYWdlIjpbMCwwXSwiYnJvd3NlciI6IjE1NC4wLjgwMzcuOTgiLCJ0aW1pbmciOnsiYnJvd3NlclRhc2tzIjp7ImxvbmdUYXNrcyI6WzYxMCwyNjQsNTMsMTk3LDg4LDM3OSwzNzYsODU2LDEwNCw2MiwxNzYsMTQxLDE4Niw5Niw2OTYsMTY1LDIwNSw5MywxODgsMTYwLDIyOCwxMTksNTAxLDg1LDI2Nyw1Miw1OSwxNzgsMTMzLDg4LDIwM10sImZvY3VzIjowLCJ2aXNpYmlsaXR5IjpbInZpc2libGUiXX0sInJlcXVlc3RzIjpbeyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0IjoxMDA2LjEwMDAwMDAwMTQ5MDEsImR1cmF0aW9uIjo3LjMwMDAwMDAwNDQ3MDM0OH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0Ijo3ODQyLjYwMDAwMDAwMTQ5LCJkdXJhdGlvbiI6OC4xMDAwMDAwMDE0OTAxMTZ9LHsicGF0aCI6Ii9hcGkvdjEvYXV0aC9jc3JmIiwic3RhcnQiOjg1MTQuNDAwMDAwMDA1OTYsImR1cmF0aW9uIjo4LjM5OTk5OTk5ODUwOTg4NH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0Ijo4Nzg0LjMwMDAwMDAwNDQ3LCJkdXJhdGlvbiI6Ny4xMDAwMDAwMDE0OTAxMTZ9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGFydCI6ODc5My45MDAwMDAwMDU5NiwiZHVyYXRpb24iOjEwLjE5OTk5OTk5NTUyOTY1Mn0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0Ijo4ODI4LjkwMDAwMDAwNTk2LCJkdXJhdGlvbiI6Ni42OTk5OTk5OTU1Mjk2NTJ9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGFydCI6MTAzMzcuNzAwMDAwMDAyOTgsImR1cmF0aW9uIjoyNzYuNzAwMDAwMDAyOTgwMjN9LHsicGF0aCI6Ii9hcGkvdjEvYXV0aC9jc3JmIiwic3RhcnQiOjEwODM0LCJkdXJhdGlvbiI6OS4yMDAwMDAwMDI5ODAyMzJ9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGFydCI6MTEwNjEuOTAwMDAwMDA1OTYsImR1cmF0aW9uIjo4LjY5OTk5OTk5NTUyOTY1Mn0seyJwYXRoIjoiL2FwaS92MS9yZWNvcmRzL2Rhc2hib2FyZCIsInN0YXJ0IjoxMTQ1MC4yMDAwMDAwMDI5OCwiZHVyYXRpb24iOjYuNX0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0IjoxMjU3MCwiZHVyYXRpb24iOjUuNzAwMDAwMDAyOTgwMjMyfSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsInN0YXJ0IjoxMjY5NS43MDAwMDAwMDI5OCwiZHVyYXRpb24iOjcuMTAwMDAwMDAxNDkwMTE2fSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhcnQiOjEyNzUyLjkwMDAwMDAwNTk2LCJkdXJhdGlvbiI6Ny44OTk5OTk5OTg1MDk4ODR9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGFydCI6MTI4NjYuNzAwMDAwMDAyOTgsImR1cmF0aW9uIjoxMC4yOTk5OTk5OTcwMTk3Njh9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGFydCI6MTMwMjQuMzAwMDAwMDA0NDcsImR1cmF0aW9uIjo3LjE5OTk5OTk5NTUyOTY1Mn0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0IjoxNDMwMS40MDAwMDAwMDU5NiwiZHVyYXRpb24iOjIxLjI5OTk5OTk5NzAxOTc2OH0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJzdGFydCI6MTQ0MjguNjAwMDAwMDAxNDksImR1cmF0aW9uIjo5fSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhcnQiOjE0ODI3LjYwMDAwMDAwMTQ5LCJkdXJhdGlvbiI6OC4zMDAwMDAwMDQ0NzAzNDh9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGFydCI6MTQ5OTQuMTAwMDAwMDAxNDksImR1cmF0aW9uIjoxMy4yMDAwMDAwMDI5ODAyMzJ9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGFydCI6MTU0OTIsImR1cmF0aW9uIjo4LjMwMDAwMDAwNDQ3MDM0OH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0IjoxNTgyNC44MDAwMDAwMDQ0NywiZHVyYXRpb24iOjUuMjk5OTk5OTk3MDE5NzY4fSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsInN0YXJ0IjoxNjA2Ny43MDAwMDAwMDI5OCwiZHVyYXRpb24iOjE1LjIwMDAwMDAwMjk4MDIzMn0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0IjoxNjExOS45MDAwMDAwMDU5NiwiZHVyYXRpb24iOjl9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGFydCI6MTYxMzcuODAwMDAwMDA0NDcsImR1cmF0aW9uIjoxMC41fSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhcnQiOjE2MjQ1LCJkdXJhdGlvbiI6Ny4zMDAwMDAwMDQ0NzAzNDh9XX19"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "90cda532ab82d274b30b-df703c3a613159fa6bfc",
+          "file": "dashboard.spec.ts",
+          "line": 301,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-06T13:10:52.947Z",
+    "duration": 81886.064,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

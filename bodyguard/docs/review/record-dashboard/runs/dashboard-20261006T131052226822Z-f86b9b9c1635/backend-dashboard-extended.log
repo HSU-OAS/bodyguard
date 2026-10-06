@@ -1,0 +1,31 @@
+...............F..                                                       [100%]
+=================================== FAILURES ===================================
+___________________ test_minute_range_is_owned_and_half_open ___________________
+
+harness = <tests.conftest.Harness object at 0x107b27950>
+
+    def test_minute_range_is_owned_and_half_open(harness):
+        h = harness
+        h.account()
+        h.clock.now = datetime(2026, 10, 2, tzinfo=UTC)
+        items = [payload(index) for index in range(50, 54)]
+        for item, at in zip(
+            items,
+            [
+                "2026-09-30T14:59:00Z",
+                "2026-09-30T15:00:00Z",
+                "2026-10-01T14:59:00Z",
+                "2026-10-01T15:00:00Z",
+            ],
+            strict=True,
+        ):
+            item["minute_start"] = at
+>       assert post(h, *items).status_code == 201
+E       AssertionError: assert 401 == 201
+E        +  where 401 = <Response [401 Unauthorized]>.status_code
+E        +    where <Response [401 Unauthorized]> = post(<tests.conftest.Harness object at 0x107b27950>, *[{'minute_start': '2026-09-30T14:59:00Z', 'baseline_id': None, 'client_version': 'Fixture+V1', 'coverage_sec': 60, ......{'minute_start': '2026-10-01T15:00:00Z', 'baseline_id': None, 'client_version': 'Fixture+V1', 'coverage_sec': 60, ...}])
+
+tests/test_dashboard.py:216: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_dashboard.py::test_minute_range_is_owned_and_half_open - As...
+1 failed, 17 passed in 6.11s

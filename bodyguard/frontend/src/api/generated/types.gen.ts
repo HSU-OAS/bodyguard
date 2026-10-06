@@ -51,6 +51,49 @@ export type CsrfOut = {
   csrf_token: string
 }
 
+export type DashboardMetric = {
+  part: 'neck' | 'shoulder' | 'trunk'
+  baseline_id: string | null
+  client_version: string
+  method: string
+  unit: string
+  measured_sec: number
+  bad_sec: number
+  dev_mean: number | null
+  bad_ratio: number | null
+}
+
+export type DashboardOut = {
+  date: string
+  period: 'day' | 'week'
+  timezone: string
+  local_start: string
+  local_end: string
+  start: string
+  end: string
+  totals: DashboardTotals
+  metrics: Array<DashboardMetric>
+  stretch: DashboardStretch
+  notifications: null
+  provenance: 'client-reported'
+}
+
+export type DashboardStretch = {
+  completed: number
+  interrupted: number
+  skipped: number
+}
+
+export type DashboardTotals = {
+  minutes: number
+  coverage_sec: number
+  measured_sec: number
+  unmeasurable_sec: number
+  present_sec: number
+  background_sec: number
+  any_bad_sec: number
+}
+
 export type DeleteInput = {
   start: string
   end: string
@@ -824,6 +867,40 @@ export type SaveApiV1BaselinesPostResponses = {
 
 export type SaveApiV1BaselinesPostResponse =
   SaveApiV1BaselinesPostResponses[keyof SaveApiV1BaselinesPostResponses]
+
+export type ReadApiV1RecordsDashboardGetData = {
+  body?: never
+  headers?: {
+    'X-CSRF-Token'?: string | null
+    'X-Account-ID'?: string | null
+  }
+  path?: never
+  query: {
+    date: string
+    period: 'day' | 'week'
+    timezone: string
+  }
+  url: '/api/v1/records/dashboard'
+}
+
+export type ReadApiV1RecordsDashboardGetErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type ReadApiV1RecordsDashboardGetError =
+  ReadApiV1RecordsDashboardGetErrors[keyof ReadApiV1RecordsDashboardGetErrors]
+
+export type ReadApiV1RecordsDashboardGetResponses = {
+  200: DashboardOut
+}
+
+export type ReadApiV1RecordsDashboardGetResponse =
+  ReadApiV1RecordsDashboardGetResponses[keyof ReadApiV1RecordsDashboardGetResponses]
 
 export type SaveApiV1SummariesBatchPostData = {
   body: MinuteBatch

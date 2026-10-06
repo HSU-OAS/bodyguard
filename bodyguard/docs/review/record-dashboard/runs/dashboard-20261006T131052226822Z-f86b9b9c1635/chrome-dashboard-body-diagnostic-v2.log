@@ -1,0 +1,105 @@
+[WebServer] (node:87056) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ node scripts/prepare-assets.mjs && tsc --noEmit && vite build
+[WebServer] (node:87089) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:87101) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:87120) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Owned synthetic browser auth diagnostic {
+  status: 200,
+  body: {
+    id: '624ae045-61f4-421a-a5c0-173c1653e5b9',
+    email: 'dashboard-33e7b114-c63b-4f9a-8baa-a3d996a90358@example.com'
+  },
+  visibility: 'visible'
+}
+  ✘  1 e2e/dashboard.spec.ts:160:1 › DW01 실제 저장→전체 하루/한 주 집계→기록 관리/복귀와 의료 화이트블루 웹 (33.5s)
+(node:87308) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Owned synthetic browser auth diagnostic {
+  status: 200,
+  body: {
+    id: '476bf336-1531-4718-a3d2-8d9bd6df3c98',
+    email: 'dashboard-a8b5fe30-c639-4766-a4c3-70bff3496ab5@example.com'
+  },
+  visibility: 'visible'
+}
+  ✘  2 e2e/dashboard.spec.ts:230:1 › DW02 실제 빈 기간/잘못된 URL/503 복구/요청 시 계정 권위 경계 (32.3s)
+
+
+  1) e2e/dashboard.spec.ts:160:1 › DW01 실제 저장→전체 하루/한 주 집계→기록 관리/복귀와 의료 화이트블루 웹 ────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('3.86 deg', { exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByText('3.86 deg', { exact: true }) with timeout 5000ms
+      - waiting for getByText('3.86 deg', { exact: true })
+
+
+      202 |   await page.screenshot({ path: info.outputPath('dashboard-week.png'), fullPage: true })
+      203 |   await page.reload()
+    > 204 |   await expect(page.getByText('3.86 deg', { exact: true })).toBeVisible()
+          |                                                             ^
+      205 |   await page.getByRole('link', { name: '자세 기록 관리', exact: true }).click()
+      206 |   await expect(page.getByRole('heading', { name: '내 자세 기록', exact: true })).toBeVisible()
+      207 |   await page.goBack()
+        at [workspace]/bodyguard/frontend/e2e/dashboard.spec.ts:204:61
+
+    Error Context: test-results/dashboard-20261006T073444670984Z/dashboard-DW01-실제-저장→전체-하루-한-주-집계→기록-관리-복귀와-의료-화이트블루-웹/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/dashboard-20261006T073444670984Z/dashboard-DW01-실제-저장→전체-하루-한-주-집계→기록-관리-복귀와-의료-화이트블루-웹/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/dashboard-20261006T073444670984Z/dashboard-DW01-실제-저장→전체-하루-한-주-집계→기록-관리-복귀와-의료-화이트블루-웹/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) e2e/dashboard.spec.ts:230:1 › DW02 실제 빈 기간/잘못된 URL/503 복구/요청 시 계정 권위 경계 ───────────────────────
+
+    Test timeout of 30000ms exceeded.
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('button', { name: '계정 다시 확인', exact: true })
+    Expected: visible
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('button', { name: '계정 다시 확인', exact: true }) with timeout 5000ms
+      - waiting for getByRole('button', { name: '계정 다시 확인', exact: true })
+      - Protocol error (Runtime.callFunctionOn): Internal server error, session closed.
+
+
+      265 |   )
+      266 |   await page.getByRole('button', { name: '기록 조회', exact: true }).click()
+    > 267 |   await expect(page.getByRole('button', { name: '계정 다시 확인', exact: true })).toBeVisible()
+          |                                                                             ^
+      268 |   await page.unroute('**/api/v1/records/dashboard?*')
+      269 |   await page.getByRole('button', { name: '계정 다시 확인', exact: true }).click()
+      270 |   await expect(page.getByText('이 기간에는 저장된 기록이 없습니다')).toBeVisible()
+        at [workspace]/bodyguard/frontend/e2e/dashboard.spec.ts:267:77
+
+    Error Context: test-results/dashboard-20261006T073444670984Z/dashboard-DW02-실제-빈-기간-잘못된-URL-503-복구-요청-시-계정-권위-경계/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/dashboard-20261006T073444670984Z/dashboard-DW02-실제-빈-기간-잘못된-URL-503-복구-요청-시-계정-권위-경계/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/dashboard-20261006T073444670984Z/dashboard-DW02-실제-빈-기간-잘못된-URL-503-복구-요청-시-계정-권위-경계/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    e2e/dashboard.spec.ts:160:1 › DW01 실제 저장→전체 하루/한 주 집계→기록 관리/복귀와 의료 화이트블루 웹 ─────────────────────
+    e2e/dashboard.spec.ts:230:1 › DW02 실제 빈 기간/잘못된 URL/503 복구/요청 시 계정 권위 경계 ────────────────────────

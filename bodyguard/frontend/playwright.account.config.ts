@@ -24,6 +24,7 @@ export default defineConfig({
     'notifications.spec.ts',
     'summaries.spec.ts',
     'minuteupload.spec.ts',
+    'dashboard.spec.ts',
   ],
   reporter: process.env.BODYGUARD_TEST_RECORDS_REPORT
     ? [['list'], ['json', { outputFile: process.env.BODYGUARD_TEST_RECORDS_REPORT }]]

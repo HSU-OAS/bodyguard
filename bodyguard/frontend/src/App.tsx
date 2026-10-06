@@ -8,6 +8,7 @@ import { MemberPage } from './pages/MemberPage'
 import { MinuteSummaryPage } from './pages/MinuteSummaryPage'
 import { NotificationPreferencesPage } from './pages/NotificationPreferencesPage'
 import { PasswordPage } from './pages/PasswordPage'
+import { RecordDashboardPage } from './pages/RecordDashboardPage'
 import { RecordsPage } from './pages/RecordsPage'
 import { WithdrawalPage } from './pages/WithdrawalPage'
 
@@ -77,6 +78,11 @@ function SessionGate({ children }: { children?: ReactNode }) {
       <Link className="button primary" to="/explore">
         스트레칭 시작 경로 선택
       </Link>
+      <p>
+        <Link className="back-link" to="/dashboard">
+          내 기록 대시보드 확인
+        </Link>
+      </p>
       <p>
         <Link className="back-link" to="/records">
           내 수행 기록 확인
@@ -194,6 +200,7 @@ function Shell() {
       location.pathname === '/account/delete' ||
       location.pathname === '/account/notifications' ||
       location.pathname === '/posture-records' ||
+      location.pathname === '/dashboard' ||
       /^\/records(?:\/[^/]+)?$/.test(location.pathname)
     )
       return
@@ -239,6 +246,13 @@ function Shell() {
             <>
               <Link className="nav-link" to="/start">
                 내 시작
+              </Link>
+              <Link
+                className="nav-link"
+                to="/dashboard"
+                aria-current={location.pathname === '/dashboard' ? 'page' : undefined}
+              >
+                기록 대시보드
               </Link>
               <Link
                 className="nav-link"
@@ -308,6 +322,14 @@ function Shell() {
             element={
               <SessionGate>
                 <RecordsPage />
+              </SessionGate>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <SessionGate>
+                <RecordDashboardPage />
               </SessionGate>
             }
           />

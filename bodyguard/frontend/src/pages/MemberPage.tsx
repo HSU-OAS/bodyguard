@@ -10,6 +10,9 @@ export function MemberPage() {
       <p className="eyebrow">MY ACCOUNT</p>
       <h1 tabIndex={-1}>내 계정</h1>
       <p className="muted member-lead">로그인 정보와 자세·수행 기록을 관리합니다.</p>
+      <Link className="back-link" to="/dashboard">
+        내 기록 대시보드 확인
+      </Link>
       <section className="member-section" aria-labelledby="member-login">
         <h2 id="member-login">로그인 정보</h2>
         <dl className="member-details">

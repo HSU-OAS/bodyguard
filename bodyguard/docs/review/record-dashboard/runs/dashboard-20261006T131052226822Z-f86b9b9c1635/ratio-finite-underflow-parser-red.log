@@ -1,0 +1,27 @@
+
+ RUN  v5.0.2 [workspace]/bodyguard/frontend
+
+ ❯ src/api/dashboard.test.ts (44 tests | 1 failed) 186ms
+   × retains an underflowed positive ratio as precision null instead of zero 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/api/dashboard.test.ts > retains an underflowed positive ratio as precision null instead of zero
+Error: 계정 요청을 완료하지 못했습니다
+ ❯ src/api/dashboard.ts:242:13
+    240|       (item.baseline_id === null && item.part !== 'shoulder' && item.m…
+    241|     )
+    242|       throw new ApiError(503)
+       |             ^
+    243|     const key = JSON.stringify([
+    244|       item.part,
+ ❯ parseDashboard src/api/dashboard.ts:205:31
+ ❯ src/api/dashboard.test.ts:191:10
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 43 passed (44)
+   Start at  22:05:00
+   Duration  378ms (tests 73%, transform 20%, import 6%, worker 1%)

@@ -1,0 +1,22 @@
+src/api/dashboard.test.ts:28:1 lint/suspicious/noExportsInTest ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Do not export from a test file.
+
+    26 │   bad_ratio: 0.5,
+    27 │ }
+  > 28 │ export const fixture = {
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^
+  > 29 │   ...query,
+        ...
+  > 49 │   provenance: 'client-reported',
+  > 50 │ }
+       │ ^
+    51 │ const authority: ReadyAccount = {
+    52 │   status: 'ready',
+
+
+Checked 7 files in 39ms. Fixed 7 files.
+Found 1 error.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while applying fixes.
