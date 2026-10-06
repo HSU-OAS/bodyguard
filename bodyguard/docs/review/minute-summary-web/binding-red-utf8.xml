@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="5" time="1.238" timestamp="2026-10-06T14:19:22.719088+09:00" hostname="local-test-host"><testcase classname="tests.test_summary_read_binding" name="test_cookie_aba_cannot_return_other_owner" time="0.427"><failure message="assert 200 == 403&#10; +  where 200 = &lt;Response [200 OK]&gt;.status_code">harness = &lt;tests.conftest.Harness object at 0x1094d4ec0&gt;
+
+    def test_cookie_aba_cannot_return_other_owner(harness):
+        h = harness
+        owner_a = h.account("a@example.com")
+        proof_a = h.csrf()["X-CSRF-Token"]
+        cookies_a = dict(h.client.cookies)
+        h.client.cookies.clear()
+        owner_b = h.account("b@example.com")
+        assert post(h, payload()).status_code == 201
+        proof_b = h.csrf()["X-CSRF-Token"]
+        cookies_b = dict(h.client.cookies)
+        h.client.cookies.clear()
+        h.client.cookies.update(cookies_a)
+        assert h.client.get("/api/v1/me").json()["id"] == owner_a
+        h.client.cookies.clear()
+        h.client.cookies.update(cookies_b)
+        # GETs normally omit Origin. Expected owner also binds CSRF-acquisition races.
+        for proof in (proof_a, proof_b):
+            response = h.client.get(PATH, headers={"X-CSRF-Token": proof, "X-Account-ID": owner_a})
+&gt;           assert response.status_code == 403
+E           assert 200 == 403
+E            +  where 200 = &lt;Response [200 OK]&gt;.status_code
+
+tests/test_summary_read_binding.py:28: AssertionError</failure></testcase><testcase classname="tests.test_summary_read_binding" name="test_invalid_read_binding_does_not_renew_session[headers0]" time="0.178"><failure message="assert 200 == 403&#10; +  where 200 = &lt;Response [200 OK]&gt;.status_code">harness = &lt;tests.conftest.Harness object at 0x1098051d0&gt;
+headers = {'X-CSRF-Token': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}
+
+    @pytest.mark.parametrize("headers", [{"X-CSRF-Token": "a" * 64}, {"X-Account-ID": "missing"},
+                                       {"X-CSRF-Token": "bad", "X-Account-ID": "missing"}])
+    def test_invalid_read_binding_does_not_renew_session(harness, headers):
+        h = harness
+        h.account()
+        with h.engine.connect() as connection:
+            before = connection.execute(select(sessions.c.last_seen_at)).scalars().all()
+        response = h.client.get(PATH, headers=headers)
+&gt;       assert response.status_code == 403
+E       assert 200 == 403
+E        +  where 200 = &lt;Response [200 OK]&gt;.status_code
+
+tests/test_summary_read_binding.py:49: AssertionError</failure></testcase><testcase classname="tests.test_summary_read_binding" name="test_invalid_read_binding_does_not_renew_session[headers1]" time="0.177"><failure message="assert 200 == 403&#10; +  where 200 = &lt;Response [200 OK]&gt;.status_code">harness = &lt;tests.conftest.Harness object at 0x109981e50&gt;
+headers = {'X-Account-ID': 'missing'}
+
+    @pytest.mark.parametrize("headers", [{"X-CSRF-Token": "a" * 64}, {"X-Account-ID": "missing"},
+                                       {"X-CSRF-Token": "bad", "X-Account-ID": "missing"}])
+    def test_invalid_read_binding_does_not_renew_session(harness, headers):
+        h = harness
+        h.account()
+        with h.engine.connect() as connection:
+            before = connection.execute(select(sessions.c.last_seen_at)).scalars().all()
+        response = h.client.get(PATH, headers=headers)
+&gt;       assert response.status_code == 403
+E       assert 200 == 403
+E        +  where 200 = &lt;Response [200 OK]&gt;.status_code
+
+tests/test_summary_read_binding.py:49: AssertionError</failure></testcase><testcase classname="tests.test_summary_read_binding" name="test_invalid_read_binding_does_not_renew_session[headers2]" time="0.183"><failure message="assert 200 == 403&#10; +  where 200 = &lt;Response [200 OK]&gt;.status_code">harness = &lt;tests.conftest.Harness object at 0x1096dab10&gt;
+headers = {'X-CSRF-Token': 'bad', 'X-Account-ID': 'missing'}
+
+    @pytest.mark.parametrize("headers", [{"X-CSRF-Token": "a" * 64}, {"X-Account-ID": "missing"},
+                                       {"X-CSRF-Token": "bad", "X-Account-ID": "missing"}])
+    def test_invalid_read_binding_does_not_renew_session(harness, headers):
+        h = harness
+        h.account()
+        with h.engine.connect() as connection:
+            before = connection.execute(select(sessions.c.last_seen_at)).scalars().all()
+        response = h.client.get(PATH, headers=headers)
+&gt;       assert response.status_code == 403
+E       assert 200 == 403
+E        +  where 200 = &lt;Response [200 OK]&gt;.status_code
+
+tests/test_summary_read_binding.py:49: AssertionError</failure></testcase><testcase classname="tests.test_summary_read_binding" name="test_read_binding_does_not_replace_authentication" time="0.113" /></testsuite></testsuites>

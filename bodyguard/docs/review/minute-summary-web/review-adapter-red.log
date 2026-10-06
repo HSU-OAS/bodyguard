@@ -1,0 +1,39 @@
+
+ RUN  v5.0.2 [workspace]/bodyguard/frontend
+
+ ❯ src/api/minuteSummaries.test.ts (40 tests | 2 failed) 40ms
+   × server-valid proof is not rejected solely because the browser clock is ahead 4ms
+   × absolute float tolerance cannot create a materially impossible percentage 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/api/minuteSummaries.test.ts > server-valid proof is not rejected solely because the browser clock is ahead
+Error: 계정 요청을 완료하지 못했습니다
+ ❯ Object.remove src/api/minuteSummaries.ts:267:17
+    265|         const snapshot = parseSummaryProof(input, input)
+    266|         if (snapshot.count === 0 || instant(snapshot.expires_at) <= Bi…
+    267|           throw new ApiError(409)
+       |                 ^
+    268|         busy = true
+    269|         try {
+ ❯ src/api/minuteSummaries.test.ts:202:24
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/api/minuteSummaries.test.ts > absolute float tolerance cannot create a materially impossible percentage
+AssertionError: expected function to throw an error, but it didn't
+ ❯ src/api/minuteSummaries.test.ts:207:35
+    205|   const tiny = { ...minuteFixture, measured_sec: 0.000001, present_sec…
+    206|     shoulder: { ...metric, measured_sec: 0.000001, bad_sec: 0.000002, …
+    207|   expect(() => parseMinute(tiny)).toThrow(ApiError)
+       |                                   ^
+    208| })
+    209|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 38 passed (40)
+   Start at  14:35:38
+   Duration  225ms (transform 44%, tests 38%, import 14%, worker 3%)

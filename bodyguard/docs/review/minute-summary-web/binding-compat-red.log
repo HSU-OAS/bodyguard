@@ -1,0 +1,18 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__________ test_valid_csrf_only_get_remains_compatible_without_origin __________
+
+harness = <tests.conftest.Harness object at 0x10b9b1160>
+
+    def test_valid_csrf_only_get_remains_compatible_without_origin(harness):
+        h = harness
+        h.account()
+        response = h.client.get(PATH, headers={"X-CSRF-Token": h.csrf()["X-CSRF-Token"]})
+>       assert response.status_code == 200
+E       assert 403 == 200
+E        +  where 403 = <Response [403 Forbidden]>.status_code
+
+tests/test_summary_read_binding.py:77: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_summary_read_binding.py::test_valid_csrf_only_get_remains_compatible_without_origin
+1 failed in 0.44s

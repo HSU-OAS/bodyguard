@@ -1,0 +1,43 @@
+src/pages/MinuteSummaryPage.tsx:232:20 suppressions/unused ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Suppression comment has no effect. Remove the suppression or make sure you are suppressing the correct rule.
+
+    230 │                     현재 페이지 {ready.data.items.length}건 · 평균 편차는 기록된 단위로 표시합니다.
+    231 │                   </p>
+  > 232 │                   {/* biome-ignore lint/a11y/noNoninteractiveTabindex: Keyboard users must be able to scroll the overflowing data table. */}
+        │                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    233 │                   <section
+    234 │                     className="records-table-scroll"
+
+
+src/pages/MinuteSummaryPage.tsx:235:21 lint/a11y/noNoninteractiveTabindex  FIXABLE  ━━━━━━━━━━━━━━━━
+
+  × The HTML element section is non-interactive. Do not use tabIndex.
+
+    233 │                   <section
+    234 │                     className="records-table-scroll"
+  > 235 │                     tabIndex={0}
+        │                     ^^^^^^^^^^^^
+    236 │                     aria-label="분별 자세 기록 표"
+    237 │                   >
+
+  i Adding non-interactive elements to the keyboard navigation flow can confuse users.
+
+  i Unsafe fix: Remove the tabIndex attribute.
+
+    233 233 │                     <section
+    234 234 │                       className="records-table-scroll"
+    235     │ - ····················tabIndex={0}
+    236 235 │                       aria-label="분별 자세 기록 표"
+    237 236 │                     >
+
+
+Skipped 2 suggested fixes.
+If you wish to apply the suggested (unsafe) fixes, use the command biome check --write --unsafe
+
+Checked 2 files in 21ms. Fixed 1 file.
+Found 1 error.
+Found 1 warning.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while applying fixes.

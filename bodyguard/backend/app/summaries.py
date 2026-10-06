@@ -6,7 +6,7 @@ from collections.abc import Callable
 from datetime import UTC, datetime, timedelta
 from typing import Annotated, Literal
 
-from fastapi import FastAPI, HTTPException, Query, Request, Response
+from fastapi import FastAPI, Header, HTTPException, Query, Request, Response
 from pydantic import (
     AwareDatetime,
     BaseModel,
@@ -201,6 +201,7 @@ def register_summaries(
     owner: Callable[[Connection, Request, bool, bool], str],
     sign: Callable[[str, Request, str], str],
     error_model: type[BaseModel],
+    bind_read: Callable[[Request, str, str | None, str | None], None],
 ) -> None:
     def authenticate(connection: Connection, request: Request, writing: bool) -> str:
         connection.execute(text("SET LOCAL lock_timeout = '2s'"))
@@ -295,11 +296,14 @@ def register_summaries(
         offset: int = Query(0, ge=0, le=10000),
         start: ExplicitTime | None = None,
         end: ExplicitTime | None = None,
+        read_csrf: str | None = Header(None, alias="X-CSRF-Token"),
+        expected_owner: str | None = Header(None, alias="X-Account-ID"),
     ) -> MinuteList:
         if start is not None and end is not None and start >= end:
             raise HTTPException(422, "조회 기간을 확인해 주세요.")
         with db.begin() as connection:
             user_id = authenticate(connection, request, False)
+            bind_read(request, user_id, read_csrf, expected_owner)
             query = select(minute_summaries).where(minute_summaries.c.user_id == user_id)
             if start is not None:
                 query = query.where(minute_summaries.c.minute_start >= start)

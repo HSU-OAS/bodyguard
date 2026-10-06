@@ -855,6 +855,10 @@ export type SaveApiV1SummariesBatchPostResponse =
 
 export type ListingApiV1SummariesGetData = {
   body?: never
+  headers?: {
+    'X-CSRF-Token'?: string | null
+    'X-Account-ID'?: string | null
+  }
   path?: never
   query?: {
     limit?: number

@@ -991,10 +991,29 @@ def create_app(
         )
         return keyed(key, "record-deletion-preview", binding)
 
+    def summary_read_binding(
+        request: Request, user_id: str, supplied: str | None, expected_owner: str | None
+    ) -> None:
+        # Optional for existing API callers; the web always sends both. A caller hint
+        # never selects an owner. Bind at this request, including CSRF acquisition ABA.
+        if supplied is None and expected_owner is None:
+            return
+        expected = keyed(key, "csrf", request.cookies.get(config.cookie_name, ""))
+        if (
+            (expected_owner is not None and expected_owner != user_id)
+            or supplied is None
+            or len(supplied) != 64
+            or not supplied.isascii()
+            or not hmac.compare_digest(supplied, expected)
+        ):
+            raise HTTPException(403, "요청을 확인할 수 없습니다.")
+
     register_records(app, db, now_fn, record_owner, record_deletion_sign)
     register_notification_preferences(app, db, record_owner)
     register_baselines(app, db, now_fn, record_owner, ErrorOut)
-    register_summaries(app, db, now_fn, record_owner, record_deletion_sign, ErrorOut)
+    register_summaries(
+        app, db, now_fn, record_owner, record_deletion_sign, ErrorOut, summary_read_binding
+    )
 
     def withdrawal_owner(connection: Connection, request: Request) -> tuple[RowMapping, str]:
         # FR-U-05: bound contention rolls back instead of waiting in opposing auth lock orders.
