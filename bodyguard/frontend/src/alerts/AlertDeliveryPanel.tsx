@@ -13,6 +13,15 @@ export function AlertDeliveryPanel({ delivery }: { delivery: AlertDelivery }) {
     if (!returnFocus.current) return
     returnFocus.current = false
     if (state.closed) return
+    // NFR-08: the owner may already focus its destination; never override it.
+    const active = document.activeElement
+    if (
+      active &&
+      active !== document.body &&
+      active !== document.documentElement &&
+      active.isConnected
+    )
+      return
     // NFR-08: only the user's removal relocates focus; arrivals never do.
     const next = host.current?.querySelector<HTMLButtonElement>('.alert-actions button')
     ;(next ?? heading.current)?.focus()

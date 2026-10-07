@@ -57,11 +57,14 @@ Controller 최초16건은 실제16실패, 첫 구현15통과/1실패는 합성 p
 
 비공개 부품이며 실제 classifier/로그인 producer·OS 표시·최종 디자인/아바타·전체1~6 완료가 아니다. 조건부 원격 PR 게이트는 아직 완료로 표시하지 않는다.
 
+PR 최종 재검토에서 선택 callback의 목적지 초점을 패널이 덮는1건을 실제 RED로 확인해 보완했다. 연결된 목적지는 유지하고, 제거된 버튼의 초점만 복구한다. [보존한 이전 증거와 현재 소스 SHA](../review/alert-delivery/focus-handoff-20261007.json)의 최종 부품37/frontend730·production Chrome5·타입/정적/build/guard를 통과했다. 기존36/729 기록을 덮지 않는다.
+
 ## File List
 
 - bodyguard/docs/stories/stage4-alert-delivery.md
 - bodyguard/docs/review/alert-delivery/README.md
 - bodyguard/docs/review/alert-delivery/summary.json
+- bodyguard/docs/review/alert-delivery/focus-handoff-20261007.json
 - bodyguard/docs/review/alert-delivery/private-preview.png
 - bodyguard/docs/tasks.md
 - bodyguard/backend/tests/run_browser.py

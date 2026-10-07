@@ -138,3 +138,13 @@ it('D05 a failed selection never schedules focus movement on a later arrival', (
   act(() => f.delivery.receive('sitting'))
   expect(document.activeElement).toBe(refresh)
 })
+it('D05 selection preserves the destination focus set by its owner callback', () => {
+  const f = fixture('denied')
+  act(() => f.delivery.receive('posture'))
+  const destination = screen.getByRole('button', { name: '권한 다시 확인' })
+  f.onChoose.mockImplementationOnce(() => destination.focus())
+  const choose = screen.getByRole('button', { name: '자세 안내 스트레칭 살펴보기' })
+  choose.focus()
+  fireEvent.click(choose)
+  expect(document.activeElement).toBe(destination)
+})
