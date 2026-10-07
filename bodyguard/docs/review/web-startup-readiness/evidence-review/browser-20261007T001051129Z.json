@@ -1,0 +1,43 @@
+{
+  "stats": {
+    "startTime": "2026-10-07T00:10:51.812Z",
+    "duration": 12099.788999999999,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "cases": [
+    {
+      "title": "startup boundary: only owned ports and exact fixture API",
+      "status": "passed",
+      "duration": 6671,
+      "observations": [
+        {
+          "name": "boundary-observations.json",
+          "value": {
+            "httpConnected": false,
+            "ws": {
+              "connected": false,
+              "timedOut": false
+            },
+            "apiStatuses": [
+              403,
+              403,
+              403,
+              403
+            ],
+            "meStatus": 200,
+            "wrongMethod": 403,
+            "trapConnections": 0,
+            "actualAuth": false
+          }
+        }
+      ]
+    }
+  ],
+  "finalHarnessSource": false,
+  "actualCameraOrHuman": false,
+  "actualAuth": false,
+  "productGatePassed": false
+}
