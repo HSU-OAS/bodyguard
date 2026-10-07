@@ -1,0 +1,19 @@
+[WebServer] (node:48882) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:48890) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 8 tests using 1 worker
+
+(node:48899) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/selection.spec.ts:4:1 › L08 actual RAF loop start-pause-resume-close with synthetic resources, no camera (1.5s)
+  ✓  2 e2e/selection.spec.ts:32:1 › S3.2 protected production explore paths and purpose selection (904ms)
+  ✓  3 e2e/selection.spec.ts:50:1 › S3.3 expanded library search, guidance detail and return (1.8s)
+  ✓  4 e2e/selection.spec.ts:150:1 › C-02/03/04/07 desktop selection, literal search, detail sources and Back (2.0s)
+  ✓  5 e2e/selection.spec.ts:182:1 › C-02/07 narrow laptop empty reset and keyboard operation (2.3s)
+  ✓  6 e2e/selection.spec.ts:198:1 › C-04 missing direct ID is recoverable and not an external navigation (1.6s)
+  ✓  7 e2e/selection.spec.ts:209:1 › C-01 guest and server failure close the preview without a candidate fallback (2.0s)
+  ✓  8 e2e/selection.spec.ts:225:1 › C-06 actual production hides the dev route, catalog and entry link (1.1s)
+
+  8 passed (15.7s)

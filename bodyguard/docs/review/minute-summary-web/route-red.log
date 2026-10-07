@@ -1,0 +1,241 @@
+
+ RUN  v5.0.2 [workspace]/bodyguard/frontend
+
+ ❯ src/pages/MinuteSummaryPage.test.tsx (1 test | 1 failed) 1037ms
+   × SW01 본인 자세 기록 웹의 빈 상태와 기간 조회를 제공한다 1036ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/pages/MinuteSummaryPage.test.tsx > SW01 본인 자세 기록 웹의 빈 상태와 기간 조회를 제공한다
+TestingLibraryElementError: Unable to find role="heading" and name "내 자세 기록"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="website"
+    >
+      <button
+        class="skip-link"
+        type="button"
+      >
+        본문으로 이동
+      </button>
+      <header
+        class="site-header"
+      >
+        <a
+          aria-label="BODYGUARD 서비스 소개"
+          class="wordmark"
+          data-discover="true"
+          href="/"
+        >
+          BODYGUARD
+          <span
+            aria-hidden="true"
+          >
+            .
+          </span>
+        </a>
+        <nav
+          aria-label="계정 메뉴"
+        >
+          <a
+            class="nav-link"
+            data-discover="true"
+            href="/start"
+          >
+            내 시작
+          </a>
+          <a
+            class="nav-link"
+            data-discover="true"
+            href="/records"
+          >
+            수행 기록
+          </a>
+          <a
+            class="nav-link"
+            data-discover="true"
+            href="/account"
+          >
+            내 계정
+          </a>
+        </nav>
+      </header>
+      <main
+        id="content"
+        tabindex="-1"
+      >
+        <section
+          class="status-screen"
+        >
+          <h1
+            tabindex="-1"
+          >
+            페이지를 찾을 수 없습니다
+          </h1>
+          <a
+            class="button secondary"
+            data-discover="true"
+            href="/"
+          >
+            서비스 소개로 돌아가기
+          </a>
+        </section>
+      </main>
+      <footer
+        class="site-footer"
+      >
+        <span>
+          BODYGUARD
+        </span>
+        <p>
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        </p>
+        <nav
+          aria-label="서비스 안내"
+        >
+          <a
+            class="footer-link"
+            data-discover="true"
+            href="/help"
+          >
+            도움말
+          </a>
+          <a
+            class="footer-link"
+            data-discover="true"
+            href="/data"
+          >
+            카메라·데이터 안내
+          </a>
+        </nav>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="website"
+    >
+      <button
+        class="skip-link"
+        type="button"
+      >
+        본문으로 이동
+      </button>
+      <header
+        class="site-header"
+      >
+        <a
+          aria-label="BODYGUARD 서비스 소개"
+          class="wordmark"
+          data-discover="true"
+          href="/"
+        >
+          BODYGUARD
+          <span
+            aria-hidden="true"
+          >
+            .
+          </span>
+        </a>
+        <nav
+          aria-label="계정 메뉴"
+        >
+          <a
+            class="nav-link"
+            data-discover="true"
+            href="/start"
+          >
+            내 시작
+          </a>
+          <a
+            class="nav-link"
+            data-discover="true"
+            href="/records"
+          >
+            수행 기록
+          </a>
+          <a
+            class="nav-link"
+            data-discover="true"
+            href="/account"
+          >
+            내 계정
+          </a>
+        </nav>
+      </header>
+      <main
+        id="content"
+        tabindex="-1"
+      >
+        <section
+          class="status-screen"
+        >
+          <h1
+            tabindex="-1"
+          >
+            페이지를 찾을 수 없습니다
+          </h1>
+          <a
+            class="button secondary"
+            data-discover="true"
+            href="/"
+          >
+            서비스 소개로 돌아가기
+          </a>
+        </section>
+      </main>
+      <footer
+        class="site-footer"
+      >
+        <span>
+          BODYGUARD
+        </span>
+        <p>
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        </p>
+        <nav
+          aria-label="서비스 안내"
+        >
+          <a
+            class="footer-link"
+            data-discover="true"
+            href="/help"
+          >
+            도움말
+          </a>
+          <a
+            class="footer-link"
+            data-discover="true"
+            href="/data"
+          >
+            카메라·데이터 안내
+          </a>
+        </nav>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/MinuteSummaryPage.test.tsx:25:16
+     23|   history.replaceState(null, '', '/posture-records')
+     24|   render(<App />)
+     25|   await screen.findByRole('heading', { name: '내 자세 기록' })
+       |                ^
+     26|   expect(screen.getByRole('button', { name: '기간 조회' })).toBeTruthy()
+     27|   await screen.findByText('이 기간에는 자세 기록이 없습니다')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  14:12:50
+   Duration  1.94s (tests 57%, environment 20%, import 11%, transform 11%)

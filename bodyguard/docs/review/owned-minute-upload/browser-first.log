@@ -1,0 +1,22 @@
+[WebServer] (node:63225) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ node scripts/prepare-assets.mjs && tsc --noEmit && vite build
+[WebServer] (node:63228) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:63267) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:63282) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:63290) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:63301) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/minuteupload.spec.ts:128:1 › MU-W01 observed minute saves to own white-blue posture record (1.1s)
+  ✓  2 e2e/minuteupload.spec.ts:158:1 › MU-W02 accepted then lost response: explicit identical retry saves one row (414ms)
+  ✓  3 e2e/minuteupload.spec.ts:189:1 › MU-W03 authority replaced discards; missed notification cannot write other owner (534ms)
+  ✓  4 e2e/minuteupload.spec.ts:208:1 › MU-W04 different payload for same minute is rejected without overwriting own or other record (613ms)
+
+  4 passed (13.7s)

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="1" failures="1" errors="0" time="0">
+    <testsuite name="src/coaching/recordOwner.test.ts" timestamp="2026-10-05T15:29:40.296Z" hostname="local-test-host" tests="1" failures="1" errors="0" skipped="0" time="0">
+        <testcase classname="src/coaching/recordOwner.test.ts" name="src/coaching/recordOwner.test.ts" time="0">
+            <failure message="Cannot find module &apos;./recordOwner&apos; imported from [workspace]/bodyguard/frontend/src/coaching/recordOwner.test.ts" type="Error">
+Error: Cannot find module &apos;./recordOwner&apos; imported from [workspace]/bodyguard/frontend/src/coaching/recordOwner.test.ts
+ ❯ src/coaching/recordOwner.test.ts:3:1
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { code: &apos;ERR_MODULE_NOT_FOUND&apos; }
+            </failure>
+        </testcase>
+    </testsuite>
+</testsuites>

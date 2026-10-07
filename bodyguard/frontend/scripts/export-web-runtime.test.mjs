@@ -110,6 +110,34 @@ test('rejects unvalidated coaching code in the supplied build', (t) => {
   assert(!readdirSync(owned).includes('package'))
 })
 
+// FR-V-03/NFR-08: main's newer private producers stay excluded after package integration.
+for (const token of [
+  '/dev/measure',
+  '/dev/avatar',
+  'Invalid observation scheduler',
+  'probeObservationLoop',
+  'Invalid coaching result',
+  'prepareResultProbe',
+  'Unable to capture coaching account',
+  'prepareOwnerProbe',
+  'Invalid recorded coaching session',
+  'prepareRecordedProbe',
+  'mountAuthCoachingProbe',
+  'Invalid minute aggregation',
+  'Invalid owned minute upload',
+  'prepareMinuteUploadProbe',
+  'PRIVATE_RAW_FAILURE',
+]) {
+  test(`rejects integrated private producer before output exists: ${token}`, (t) => {
+    const { owned, source, target } = fixture(t)
+    const body = `console.log(${JSON.stringify(token)})`
+    writeFileSync(join(source, 'assets/index-abc.js'), body)
+    assert.throws(() => exportWebRuntime(source, target), /Development candidate leaked/)
+    assert(!readdirSync(owned).includes('package'))
+    assert.equal(readFileSync(join(source, 'assets/index-abc.js'), 'utf8'), body)
+  })
+}
+
 test('rejects a substituted brand image before output exists', (t) => {
   const { owned, source, target } = fixture(t)
   writeFileSync(join(source, 'brand/google-icon.png'), 'not the approved brand source')

@@ -1,0 +1,354 @@
+[
+  {
+    "name": "boundary-observations.json",
+    "value": {
+      "httpConnected": false,
+      "ws": {
+        "connected": false,
+        "timedOut": false
+      },
+      "apiStatuses": [
+        403,
+        403,
+        403,
+        403
+      ],
+      "meStatus": 200,
+      "wrongMethod": 403,
+      "trapConnections": 0,
+      "actualAuth": false
+    }
+  },
+  {
+    "name": "startup-observations.json",
+    "value": {
+      "actualBrowser": true,
+      "actualAuth": false,
+      "actualCameraOrHuman": false,
+      "productPerformanceGatePassed": false,
+      "browserVersion": "154.0.8037.98",
+      "surface": "production",
+      "transport": "http",
+      "routingDisablesHttpCache": false,
+      "samples": [
+        {
+          "visit": "first",
+          "selectorPassed": true,
+          "twoRafObserved": true,
+          "gotoWallMs": 180.35562499999992,
+          "selectorWallMs": 67.71012500000006,
+          "observed": {
+            "probe": {
+              "initMs": 51.3999999910593,
+              "headingMs": 205.8999999910593,
+              "twoRafMs": 236.59999999403954,
+              "cameraCalls": 0
+            },
+            "navigation": {
+              "responseEndMs": 38,
+              "domContentLoadedMs": 152.5,
+              "loadMs": 152.59999999403954
+            },
+            "me": [
+              {
+                "startMs": 189.79999999701977,
+                "endMs": 191.8999999910593
+              }
+            ],
+            "resourceCount": 3,
+            "visible": true,
+            "localStorageCount": 0,
+            "sessionStorageCount": 0
+          }
+        },
+        {
+          "visit": "repeat",
+          "selectorPassed": true,
+          "twoRafObserved": true,
+          "gotoWallMs": 23.290541999999732,
+          "selectorWallMs": 21.110583000000133,
+          "observed": {
+            "probe": {
+              "initMs": 11.100000008940697,
+              "headingMs": 33.900000005960464,
+              "twoRafMs": 50.20000000298023,
+              "cameraCalls": 0
+            },
+            "navigation": {
+              "responseEndMs": 2.9000000059604645,
+              "domContentLoadedMs": 16.100000008940697,
+              "loadMs": 16.400000005960464
+            },
+            "me": [
+              {
+                "startMs": 22.5,
+                "endMs": 23.700000002980232
+              }
+            ],
+            "resourceCount": 3,
+            "visible": true,
+            "localStorageCount": 0,
+            "sessionStorageCount": 0
+          }
+        }
+      ],
+      "pageErrors": 0,
+      "externalRequests": 0,
+      "unexpectedApi": 0,
+      "modelRequests": 0
+    }
+  },
+  {
+    "name": "startup-observations.json",
+    "value": {
+      "actualBrowser": true,
+      "actualAuth": false,
+      "actualCameraOrHuman": false,
+      "productPerformanceGatePassed": false,
+      "browserVersion": "154.0.8037.98",
+      "surface": "production",
+      "transport": "route",
+      "routingDisablesHttpCache": true,
+      "samples": [
+        {
+          "visit": "first",
+          "selectorPassed": true,
+          "twoRafObserved": true,
+          "gotoWallMs": 73.24420899999996,
+          "selectorWallMs": 51.75475000000006,
+          "observed": {
+            "probe": {
+              "initMs": 14.900000005960464,
+              "headingMs": 107.90000000596046,
+              "twoRafMs": 126.90000000596046,
+              "cameraCalls": 0
+            },
+            "navigation": {
+              "responseEndMs": 9.100000008940697,
+              "domContentLoadedMs": 68.1000000089407,
+              "loadMs": 68.20000000298023
+            },
+            "me": [
+              {
+                "startMs": 93.90000000596046,
+                "endMs": 98.6000000089407
+              }
+            ],
+            "resourceCount": 3,
+            "visible": true,
+            "localStorageCount": 0,
+            "sessionStorageCount": 0
+          }
+        },
+        {
+          "visit": "repeat",
+          "selectorPassed": true,
+          "twoRafObserved": true,
+          "gotoWallMs": 108.47441600000002,
+          "selectorWallMs": 32.94787499999984,
+          "observed": {
+            "probe": {
+              "initMs": 24.700000002980232,
+              "headingMs": 128.90000000596046,
+              "twoRafMs": 158.20000000298023,
+              "cameraCalls": 0
+            },
+            "navigation": {
+              "responseEndMs": 8,
+              "domContentLoadedMs": 101.09999999403954,
+              "loadMs": 101.20000000298023
+            },
+            "me": [
+              {
+                "startMs": 105.09999999403954,
+                "endMs": 117
+              }
+            ],
+            "resourceCount": 3,
+            "visible": true,
+            "localStorageCount": 0,
+            "sessionStorageCount": 0
+          }
+        }
+      ],
+      "pageErrors": 0,
+      "externalRequests": 0,
+      "unexpectedApi": 0,
+      "modelRequests": 0
+    }
+  },
+  {
+    "name": "startup-observations.json",
+    "value": {
+      "actualBrowser": true,
+      "actualAuth": false,
+      "actualCameraOrHuman": false,
+      "productPerformanceGatePassed": false,
+      "browserVersion": "154.0.8037.98",
+      "surface": "dev",
+      "transport": "http",
+      "routingDisablesHttpCache": false,
+      "samples": [
+        {
+          "visit": "first",
+          "selectorPassed": true,
+          "twoRafObserved": true,
+          "gotoWallMs": 1099.8223749999997,
+          "selectorWallMs": 854.6299589999999,
+          "observed": {
+            "probe": {
+              "initMs": 177.5,
+              "headingMs": 1437.6000000089407,
+              "twoRafMs": 1465.1000000089407,
+              "cameraCalls": 0
+            },
+            "navigation": {
+              "responseEndMs": 110.70000000298023,
+              "domContentLoadedMs": 1060,
+              "loadMs": 1061.7999999970198
+            },
+            "me": [
+              {
+                "startMs": 1095.7999999970198,
+                "endMs": 1098.7000000029802
+              },
+              {
+                "startMs": 1097.2999999970198,
+                "endMs": 1098.1000000089407
+              }
+            ],
+            "resourceCount": 43,
+            "visible": true,
+            "localStorageCount": 0,
+            "sessionStorageCount": 0
+          }
+        },
+        {
+          "visit": "repeat",
+          "selectorPassed": true,
+          "twoRafObserved": true,
+          "gotoWallMs": 62.164708000000246,
+          "selectorWallMs": 820.7109999999993,
+          "observed": {
+            "probe": {
+              "initMs": 15.5,
+              "headingMs": 389.79999999701977,
+              "twoRafMs": 397.29999999701977,
+              "cameraCalls": 0
+            },
+            "navigation": {
+              "responseEndMs": 8.700000002980232,
+              "domContentLoadedMs": 46.599999994039536,
+              "loadMs": 47.400000005960464
+            },
+            "me": [
+              {
+                "startMs": 75.79999999701977,
+                "endMs": 76.59999999403954
+              },
+              {
+                "startMs": 76.29999999701977,
+                "endMs": 78
+              }
+            ],
+            "resourceCount": 42,
+            "visible": true,
+            "localStorageCount": 0,
+            "sessionStorageCount": 0
+          }
+        }
+      ],
+      "pageErrors": 0,
+      "externalRequests": 0,
+      "unexpectedApi": 0,
+      "modelRequests": 0
+    }
+  },
+  {
+    "name": "startup-observations.json",
+    "value": {
+      "actualBrowser": true,
+      "actualAuth": false,
+      "actualCameraOrHuman": false,
+      "productPerformanceGatePassed": false,
+      "browserVersion": "154.0.8037.98",
+      "surface": "dev",
+      "transport": "route",
+      "routingDisablesHttpCache": true,
+      "samples": [
+        {
+          "visit": "first",
+          "selectorPassed": true,
+          "twoRafObserved": true,
+          "gotoWallMs": 179.17320800000016,
+          "selectorWallMs": 832.9873339999995,
+          "observed": {
+            "probe": {
+              "initMs": 10.900000005960464,
+              "headingMs": 531.2000000029802,
+              "twoRafMs": 539.8000000119209,
+              "cameraCalls": 0
+            },
+            "navigation": {
+              "responseEndMs": 5.4000000059604645,
+              "domContentLoadedMs": 174.20000000298023,
+              "loadMs": 175.40000000596046
+            },
+            "me": [
+              {
+                "startMs": 214.5,
+                "endMs": 216.40000000596046
+              },
+              {
+                "startMs": 215.70000000298023,
+                "endMs": 220.20000000298023
+              }
+            ],
+            "resourceCount": 42,
+            "visible": true,
+            "localStorageCount": 0,
+            "sessionStorageCount": 0
+          }
+        },
+        {
+          "visit": "repeat",
+          "selectorPassed": true,
+          "twoRafObserved": true,
+          "gotoWallMs": 115.41387499999928,
+          "selectorWallMs": 804.0281250000007,
+          "observed": {
+            "probe": {
+              "initMs": 17.799999997019768,
+              "headingMs": 430.8999999910593,
+              "twoRafMs": 435.09999999403954,
+              "cameraCalls": 0
+            },
+            "navigation": {
+              "responseEndMs": 11.899999991059303,
+              "domContentLoadedMs": 111.29999999701977,
+              "loadMs": 111.8999999910593
+            },
+            "me": [
+              {
+                "startMs": 117.20000000298023,
+                "endMs": 123.79999999701977
+              },
+              {
+                "startMs": 117.59999999403954,
+                "endMs": 120.3999999910593
+              }
+            ],
+            "resourceCount": 42,
+            "visible": true,
+            "localStorageCount": 0,
+            "sessionStorageCount": 0
+          }
+        }
+      ],
+      "pageErrors": 0,
+      "externalRequests": 0,
+      "unexpectedApi": 0,
+      "modelRequests": 0
+    }
+  }
+]

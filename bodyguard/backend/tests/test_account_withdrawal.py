@@ -373,9 +373,7 @@ def test_w11_actual_migration_preserves_records_and_refuses_pending_proof_loss(
     with pytest.raises(RuntimeError, match="backup"):
         command.downgrade(config, "0004_stretch_records")
     with h.engine.connect() as c:
-        assert (
-            c.scalar(text("SELECT version_num FROM alembic_version")) == "0005_account_withdrawal"
-        )
+        assert c.scalar(text("SELECT version_num FROM alembic_version")) == "0008_minute_summaries"
         assert c.scalar(select(withdrawals.c.user_id)) == owner
     with h.engine.begin() as c:  # Synthetic confirmation only; not a production rollback.
         c.execute(delete(withdrawals))

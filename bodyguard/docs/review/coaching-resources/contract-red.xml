@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="1" failures="1" errors="0" time="0">
+    <testsuite name="src/coaching/resources.test.ts" timestamp="2026-10-05T12:32:43.527Z" hostname="local-test-host" tests="1" failures="1" errors="0" skipped="0" time="0">
+        <testcase classname="src/coaching/resources.test.ts" name="src/coaching/resources.test.ts" time="0">
+            <failure message="Cannot find module &apos;./resources&apos; imported from [workspace]/bodyguard/frontend/src/coaching/resources.test.ts" type="Error">
+Error: Cannot find module &apos;./resources&apos; imported from [workspace]/bodyguard/frontend/src/coaching/resources.test.ts
+ ❯ src/coaching/resources.test.ts:4:1
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { code: &apos;ERR_MODULE_NOT_FOUND&apos; }
+            </failure>
+        </testcase>
+    </testsuite>
+</testsuites>

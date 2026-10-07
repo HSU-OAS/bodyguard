@@ -1,0 +1,21 @@
+[WebServer] (node:90986) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ node scripts/prepare-assets.mjs && tsc --noEmit && vite build
+[WebServer] (node:91017) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:91030) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:91042) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:91053) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/resultrecord.spec.ts:116:1 › R06 real completed result saves once, same-content replay is safe and public record detail works (1.6s)
+  ✓  2 e2e/resultrecord.spec.ts:160:1 › R06 partial skip and pause/resume preserve performed time; entire skip alone is skipped (868ms)
+  ✓  3 e2e/resultrecord.spec.ts:200:1 › R06 stale captured proof cannot write under a different cookie even if caller misses owner notification (920ms)
+  ✓  4 e2e/resultrecord.spec.ts:244:1 › R06 accepted write with lost response retries explicitly without duplicating SQL record (757ms)
+  ✓  5 e2e/resultrecord.spec.ts:292:1 › R06 delayed accepted response cannot reopen writer after session lease disposal (1.1s)
+
+  5 passed (18.6s)

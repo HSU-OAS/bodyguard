@@ -1,0 +1,61 @@
+........................................................................ [ 16%]
+...............................F........................................ [ 32%]
+........................................................................ [ 49%]
+........................................................................ [ 65%]
+........................................................................ [ 82%]
+........................................................................ [ 98%]
+......                                                                   [100%]
+=================================== FAILURES ===================================
+_______ test_b06_downgrade_waits_for_concurrent_insert_then_preserves_it _______
+
+harness = <tests.conftest.Harness object at 0x10cfbca60>
+
+    def test_b06_downgrade_waits_for_concurrent_insert_then_preserves_it(harness: Harness) -> None:
+        h = harness
+        h.account()
+        proof = h.csrf()
+        inserted, dropping, release = Event(), Event(), Event()
+
+        def after(*args: object) -> None:
+            if str(args[2]).startswith("INSERT INTO baselines"):
+                inserted.set()
+                assert release.wait(5)
+
+        def before(*args: object) -> None:
+            if str(args[2]).startswith("LOCK TABLE baselines IN ACCESS EXCLUSIVE"):
+                dropping.set()
+
+        # Alembic creates its own engine against the same ownership-guarded test DB.
+        # Engine event observes the actual migration SQL; neither op nor SQL is mocked.
+        config = Config("alembic.ini")
+
+        def downgrade() -> None:
+            command.downgrade(config, "0006_notification_preferences")
+
+        event.listen(h.engine, "after_cursor_execute", after)
+        event.listen(Engine, "before_cursor_execute", before)
+        try:
+            with ThreadPoolExecutor(2) as pool:
+                writing = pool.submit(h.client.post, PATH, headers=proof, json=payload())
+                try:
+                    assert inserted.wait(3)
+                    migration = pool.submit(downgrade)
+>                   assert dropping.wait(3)
+E                   assert False
+E                    +  where False = wait(3)
+E                    +    where wait = <threading.Event at 0x10c9577d0: unset>.wait
+
+tests/test_baseline_races.py:198: AssertionError
+=============================== warnings summary ===============================
+tests/test_password_reset.py::test_r01_actual_http_ack_precedes_blocked_delivery
+  /opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/threads.py:26: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    return await loop.run_in_executor(None, func_call)
+
+tests/test_withdrawal_races.py::test_w15_concurrent_wrong_codes_cannot_exceed_attempt_limit
+  [pinned-backend-venv]/lib/python3.14/site-packages/pydantic/_internal/_generate_schema.py:2274: UnsupportedFieldAttributeWarning: The 'alias' attribute with value 'payload' was provided to the `Field()` function, which has no effect in the context it was used. 'alias' is field-specific metadata, and can only be attached to a model field using `Annotated` metadata or by assignment. This may have happened because an `Annotated` type alias using the `type` statement was used, or if the `Field()` function was attached to a single member of a union type.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_baseline_races.py::test_b06_downgrade_waits_for_concurrent_insert_then_preserves_it
+1 failed, 437 passed, 2 warnings in 148.73s (0:02:28)

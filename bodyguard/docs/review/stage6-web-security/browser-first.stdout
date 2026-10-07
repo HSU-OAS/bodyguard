@@ -1,0 +1,54 @@
+[WebServer] (node:54191) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ node scripts/prepare-assets.mjs && tsc --noEmit && vite build
+[WebServer] (node:54217) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:54231) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:54242) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/security.spec.ts:150:1 › WEB-S01 타인 기록 차단·소유권 입력 거부·본인 웹 보존 (1.2s)
+  ✘  2 e2e/security.spec.ts:200:1 › WEB-S02 다른 세션 CSRF·삭제 proof 거부·로그아웃 cookie 재전송 차단 (5.7s)
+(node:54282) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 e2e/security.spec.ts:274:1 › WEB-S03 실제 Chrome CORS·origin/CSRF 변경 거부·정상 계정 보존 (663ms)
+
+
+  1) e2e/security.spec.ts:200:1 › WEB-S02 다른 세션 CSRF·삭제 proof 거부·로그아웃 cookie 재전송 차단 ────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: '내 몸을 이해하는 스트레칭' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: '내 몸을 이해하는 스트레칭' }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: '내 몸을 이해하는 스트레칭' })
+
+
+      242 |     await expect(
+      243 |       secondPage.getByRole('heading', { name: '내 몸을 이해하는 스트레칭' }),
+    > 244 |     ).toBeVisible()
+          |       ^
+      245 |     const replayHeaders = { Cookie: `bodyguard_session=${cookie?.value}` }
+      246 |     await check(await second.request.get('/api/v1/me', { headers: replayHeaders }), 401)
+      247 |     await check(
+        at <workspace>/bodyguard/frontend/e2e/security.spec.ts:244:7
+
+    Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
+        at UtilityScript.evaluate (<anonymous>:313:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at UtilityScript.evaluate (<anonymous>:313:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at <workspace>/bodyguard/frontend/e2e/security.spec.ts:55:37
+
+    Error Context: test-results/security-20261005T115253010912Z/security-WEB-S02-다른-세션-CSRF·삭제-proof-거부·로그아웃-cookie-재전송-차단/error-context.md
+
+  1 failed
+    e2e/security.spec.ts:200:1 › WEB-S02 다른 세션 CSRF·삭제 proof 거부·로그아웃 cookie 재전송 차단 ─────────────────
+  2 passed (16.4s)

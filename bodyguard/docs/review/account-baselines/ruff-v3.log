@@ -1,0 +1,12 @@
+E501 Line too long (105 > 100)
+   --> tests/test_baseline_races.py:236:101
+    |
+234 |             transaction.rollback()
+235 |     with h.engine.connect() as c:
+236 |         assert c.scalar(select(sessions.c.last_seen_at).where(sessions.c.token_hash == cookie)) == before
+    |                                                                                                     ^^^^^
+237 |         assert len(c.execute(select(baselines)).all()) == 1
+238 |     assert h.client.get(PATH + "/active").json() == original
+    |
+
+Found 1 error.

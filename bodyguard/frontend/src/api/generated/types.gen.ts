@@ -10,6 +10,31 @@ export type AuthOut = {
   csrf_token: string
 }
 
+export type BaselineInput = {
+  id: string
+  client_version: string
+  neck: BaselineMetric | null
+  shoulder: BaselineMetric
+  trunk: BaselineMetric | null
+}
+
+export type BaselineMetric = {
+  method: string
+  unit: string
+  value: number
+}
+
+export type BaselineOut = {
+  id: string
+  client_version: string
+  neck: BaselineMetric | null
+  shoulder: BaselineMetric
+  trunk: BaselineMetric | null
+  created_at: string
+  is_active: boolean
+  provenance: 'client-reported'
+}
+
 export type ChallengeInput = {
   challenge_id: string
 }
@@ -72,6 +97,63 @@ export type LiveOut = {
   status: 'alive'
 }
 
+export type MinuteBatch = {
+  items: Array<MinuteInput>
+}
+
+export type MinuteInput = {
+  minute_start: string
+  baseline_id: string | null
+  client_version: string
+  coverage_sec: number
+  measured_sec: number
+  unmeasurable_sec: number
+  present_sec: number
+  background_sec: number
+  any_bad_sec: number
+  neck: MinuteMetric
+  shoulder: MinuteMetric
+  trunk: MinuteMetric
+}
+
+export type MinuteList = {
+  items: Array<MinuteOut>
+  has_more: boolean
+}
+
+export type MinuteMetric = {
+  method: string
+  unit: string
+  dev_mean: number | null
+  measured_sec: number
+  bad_sec: number
+}
+
+export type MinuteOut = {
+  minute_start: string
+  baseline_id: string | null
+  client_version: string
+  coverage_sec: number
+  measured_sec: number
+  unmeasurable_sec: number
+  present_sec: number
+  background_sec: number
+  any_bad_sec: number
+  neck: MinuteMetric
+  shoulder: MinuteMetric
+  trunk: MinuteMetric
+  created_at: string
+  provenance: 'client-reported'
+}
+
+export type NotificationPreferences = {
+  posture_enabled: boolean
+  posture_minutes: number
+  sitting_enabled: boolean
+  sitting_minutes: number
+  sound_enabled: boolean
+}
+
 export type ReadyOut = {
   status: 'ready'
 }
@@ -108,6 +190,32 @@ export type StretchOut = {
   repetitions: number
   created_at: string
   provenance?: 'client-reported'
+}
+
+export type SummaryDelete = {
+  start: string
+  end: string
+  cutoff: string
+  expires_at: string
+  count: number
+  fingerprint: string
+  signature: string
+  confirmation: 'delete-minute-summaries'
+}
+
+export type SummaryPeriod = {
+  start: string
+  end: string
+}
+
+export type SummaryProof = {
+  start: string
+  end: string
+  cutoff: string
+  expires_at: string
+  count: number
+  fingerprint: string
+  signature: string
 }
 
 export type UnavailableOut = {
@@ -581,6 +689,260 @@ export type DetailApiV1RecordsStretchRecordIdGetResponses = {
 
 export type DetailApiV1RecordsStretchRecordIdGetResponse =
   DetailApiV1RecordsStretchRecordIdGetResponses[keyof DetailApiV1RecordsStretchRecordIdGetResponses]
+
+export type ReadNotificationsApiV1SettingsNotificationsGetData = {
+  body?: never
+  path?: never
+  query?: never
+  url: '/api/v1/settings/notifications'
+}
+
+export type ReadNotificationsApiV1SettingsNotificationsGetErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type ReadNotificationsApiV1SettingsNotificationsGetError =
+  ReadNotificationsApiV1SettingsNotificationsGetErrors[keyof ReadNotificationsApiV1SettingsNotificationsGetErrors]
+
+export type ReadNotificationsApiV1SettingsNotificationsGetResponses = {
+  200: NotificationPreferences
+}
+
+export type ReadNotificationsApiV1SettingsNotificationsGetResponse =
+  ReadNotificationsApiV1SettingsNotificationsGetResponses[keyof ReadNotificationsApiV1SettingsNotificationsGetResponses]
+
+export type SaveNotificationsApiV1SettingsNotificationsPostData = {
+  body: NotificationPreferences
+  path?: never
+  query?: never
+  url: '/api/v1/settings/notifications'
+}
+
+export type SaveNotificationsApiV1SettingsNotificationsPostErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type SaveNotificationsApiV1SettingsNotificationsPostError =
+  SaveNotificationsApiV1SettingsNotificationsPostErrors[keyof SaveNotificationsApiV1SettingsNotificationsPostErrors]
+
+export type SaveNotificationsApiV1SettingsNotificationsPostResponses = {
+  200: NotificationPreferences
+}
+
+export type SaveNotificationsApiV1SettingsNotificationsPostResponse =
+  SaveNotificationsApiV1SettingsNotificationsPostResponses[keyof SaveNotificationsApiV1SettingsNotificationsPostResponses]
+
+export type ActiveApiV1BaselinesActiveGetData = {
+  body?: never
+  path?: never
+  query?: never
+  url: '/api/v1/baselines/active'
+}
+
+export type ActiveApiV1BaselinesActiveGetErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type ActiveApiV1BaselinesActiveGetError =
+  ActiveApiV1BaselinesActiveGetErrors[keyof ActiveApiV1BaselinesActiveGetErrors]
+
+export type ActiveApiV1BaselinesActiveGetResponses = {
+  200: BaselineOut | null
+}
+
+export type ActiveApiV1BaselinesActiveGetResponse =
+  ActiveApiV1BaselinesActiveGetResponses[keyof ActiveApiV1BaselinesActiveGetResponses]
+
+export type DetailApiV1BaselinesBaselineIdGetData = {
+  body?: never
+  path: {
+    baseline_id: string
+  }
+  query?: never
+  url: '/api/v1/baselines/{baseline_id}'
+}
+
+export type DetailApiV1BaselinesBaselineIdGetErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  404: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type DetailApiV1BaselinesBaselineIdGetError =
+  DetailApiV1BaselinesBaselineIdGetErrors[keyof DetailApiV1BaselinesBaselineIdGetErrors]
+
+export type DetailApiV1BaselinesBaselineIdGetResponses = {
+  200: BaselineOut
+}
+
+export type DetailApiV1BaselinesBaselineIdGetResponse =
+  DetailApiV1BaselinesBaselineIdGetResponses[keyof DetailApiV1BaselinesBaselineIdGetResponses]
+
+export type SaveApiV1BaselinesPostData = {
+  body: BaselineInput
+  path?: never
+  query?: never
+  url: '/api/v1/baselines'
+}
+
+export type SaveApiV1BaselinesPostErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  409: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type SaveApiV1BaselinesPostError =
+  SaveApiV1BaselinesPostErrors[keyof SaveApiV1BaselinesPostErrors]
+
+export type SaveApiV1BaselinesPostResponses = {
+  200: BaselineOut
+  201: BaselineOut
+}
+
+export type SaveApiV1BaselinesPostResponse =
+  SaveApiV1BaselinesPostResponses[keyof SaveApiV1BaselinesPostResponses]
+
+export type SaveApiV1SummariesBatchPostData = {
+  body: MinuteBatch
+  headers?: {
+    'X-Account-ID'?: string | null
+  }
+  path?: never
+  query?: never
+  url: '/api/v1/summaries/batch'
+}
+
+export type SaveApiV1SummariesBatchPostErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  409: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type SaveApiV1SummariesBatchPostError =
+  SaveApiV1SummariesBatchPostErrors[keyof SaveApiV1SummariesBatchPostErrors]
+
+export type SaveApiV1SummariesBatchPostResponses = {
+  200: MinuteList
+  201: MinuteList
+}
+
+export type SaveApiV1SummariesBatchPostResponse =
+  SaveApiV1SummariesBatchPostResponses[keyof SaveApiV1SummariesBatchPostResponses]
+
+export type ListingApiV1SummariesGetData = {
+  body?: never
+  headers?: {
+    'X-CSRF-Token'?: string | null
+    'X-Account-ID'?: string | null
+  }
+  path?: never
+  query?: {
+    limit?: number
+    offset?: number
+    start?: string | null
+    end?: string | null
+  }
+  url: '/api/v1/summaries'
+}
+
+export type ListingApiV1SummariesGetErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type ListingApiV1SummariesGetError =
+  ListingApiV1SummariesGetErrors[keyof ListingApiV1SummariesGetErrors]
+
+export type ListingApiV1SummariesGetResponses = {
+  200: MinuteList
+}
+
+export type ListingApiV1SummariesGetResponse =
+  ListingApiV1SummariesGetResponses[keyof ListingApiV1SummariesGetResponses]
+
+export type PreviewApiV1SummariesDeletePreviewPostData = {
+  body: SummaryPeriod
+  path?: never
+  query?: never
+  url: '/api/v1/summaries/delete-preview'
+}
+
+export type PreviewApiV1SummariesDeletePreviewPostErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type PreviewApiV1SummariesDeletePreviewPostError =
+  PreviewApiV1SummariesDeletePreviewPostErrors[keyof PreviewApiV1SummariesDeletePreviewPostErrors]
+
+export type PreviewApiV1SummariesDeletePreviewPostResponses = {
+  200: SummaryProof
+}
+
+export type PreviewApiV1SummariesDeletePreviewPostResponse =
+  PreviewApiV1SummariesDeletePreviewPostResponses[keyof PreviewApiV1SummariesDeletePreviewPostResponses]
+
+export type RemoveApiV1SummariesDeletePostData = {
+  body: SummaryDelete
+  path?: never
+  query?: never
+  url: '/api/v1/summaries/delete'
+}
+
+export type RemoveApiV1SummariesDeletePostErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  409: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type RemoveApiV1SummariesDeletePostError =
+  RemoveApiV1SummariesDeletePostErrors[keyof RemoveApiV1SummariesDeletePostErrors]
+
+export type RemoveApiV1SummariesDeletePostResponses = {
+  200: DeletedOut
+}
+
+export type RemoveApiV1SummariesDeletePostResponse =
+  RemoveApiV1SummariesDeletePostResponses[keyof RemoveApiV1SummariesDeletePostResponses]
 
 export type StartApiV1MeDeleteStartPostData = {
   body: WithdrawalStartWritable

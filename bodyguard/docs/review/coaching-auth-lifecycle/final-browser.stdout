@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "[workspace]/bodyguard/backend/tests/run_browser.py", line 238, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "[workspace]/bodyguard/backend/tests/run_browser.py", line 61, in main
+    test_database() as db,
+    ~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/contextlib.py", line 141, in __enter__
+    return next(self.gen)
+  File "[workspace]/bodyguard/backend/tests/conftest.py", line 65, in test_database
+    pytest.fail("Dedicated test database is busy; refuse migration/reset (no skip)")
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard/backend/.venv/lib/python3.14/site-packages/_pytest/outcomes.py", line 162, in __call__
+    raise Failed(msg=reason, pytrace=pytrace)
+Failed: Dedicated test database is busy; refuse migration/reset (no skip)

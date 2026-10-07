@@ -1,0 +1,75 @@
+{
+  "version": 2,
+  "synthetic_intervals_only": true,
+  "actual_public_web_regression": true,
+  "classifier_human_accuracy_verified": false,
+  "public_summary_producer": false,
+  "artifacts": [
+    {
+      "name": "integrated-frontend.xml",
+      "raw_sha256": "236894bedf6ad1d67f8b87bdca9adbe784909a6d7d3be7a63d5c21aa8151a548",
+      "public_sha256": "647c463d8c16a4321ebd6c94b6e2bb6b23c5698f6929489a32ed3df2ac625d0b",
+      "bytes": 112892
+    },
+    {
+      "name": "integrated-types.stdout",
+      "raw_sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92",
+      "public_sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92",
+      "bytes": 15
+    },
+    {
+      "name": "integrated-check.stdout",
+      "raw_sha256": "0677cb378deb7e882bed64a3e7cf2250cd3579d6eed42e33d16ef9104e06c1c7",
+      "public_sha256": "0677cb378deb7e882bed64a3e7cf2250cd3579d6eed42e33d16ef9104e06c1c7",
+      "bytes": 62
+    },
+    {
+      "name": "integrated-build.stdout",
+      "raw_sha256": "73d3d6499fea9ca27c8975ecdef774fd23826dfd506092e91a569085aa830832",
+      "public_sha256": "73d3d6499fea9ca27c8975ecdef774fd23826dfd506092e91a569085aa830832",
+      "bytes": 413
+    },
+    {
+      "name": "integrated-production.stdout",
+      "raw_sha256": "87af8d1e0c36f3fc149ff6d304f163612e314328920beeb479407f4ae4f71fe4",
+      "public_sha256": "87af8d1e0c36f3fc149ff6d304f163612e314328920beeb479407f4ae4f71fe4",
+      "bytes": 449
+    },
+    {
+      "name": "integrated-public-browser.stdout",
+      "raw_sha256": "24c0703fdb34ff3bb89fc119c128ee8f28093e3fb4da264c8ee761fb71fa28bd",
+      "public_sha256": "24c0703fdb34ff3bb89fc119c128ee8f28093e3fb4da264c8ee761fb71fa28bd",
+      "bytes": 1518
+    },
+    {
+      "name": "integrated-production-start.png",
+      "raw_sha256": "91aefe83e48b8c489397445a5d4015b141373451d41cfcb82c034369e7668a73",
+      "public_sha256": "91aefe83e48b8c489397445a5d4015b141373451d41cfcb82c034369e7668a73",
+      "bytes": 63004
+    }
+  ],
+  "sources": [
+    {
+      "name": "bodyguard/frontend/src/summary/minuteAggregation.ts",
+      "sha256": "fd6b1fcb3b0912a2641eeaa3586dc8ca22dc4a32b3bd95412097de3834b97550"
+    },
+    {
+      "name": "bodyguard/frontend/src/summary/minuteAggregation.test.ts",
+      "sha256": "f16ba0f85b5409df0342ab0f2eb28b8ef4a8bb25fc8289b2b65c92a2fa2737a9"
+    },
+    {
+      "name": "bodyguard/frontend/scripts/check-selection-production.mjs",
+      "sha256": "eca6ab4cb0b13366bbea88d9369e76ccc4987d46576a74abe76a7ab47b78f8e8"
+    }
+  ],
+  "output": [
+    {
+      "name": "index-D4aKUs5U.js",
+      "sha256": "deae9447e06341db59a98b407bb60f6a39eac0e4585b114ecfcafbc3f4aee061"
+    },
+    {
+      "name": "index-D8USq_Sz.css",
+      "sha256": "675af16091090e9ef85a99fcdd2acb179cd18d24c435ec78291caaf3cba86dfb"
+    }
+  ]
+}

@@ -27,6 +27,12 @@ engineering testing-strategy와 deploy-checklist의 승인/rollback 경계를 �
 - Docker 연결 뒤 native compose/parser·build·image/container·실제 HTTP/SQL/production browser를 실행한다. 새로운 base/OS 패키지와 TLS 구성은 공식 출처를 확인한 뒤 선택하고 실제 검증한다.
 - 명세→필요한 실제 하네스→구현/검증→작성자 보안/성능/오류 리뷰→최신 diff/HEAD/main/CLEAN/체크→한 목적 PR/merge commit·브랜치 보존이다. CI/.env/기존 migration을 고치지 않는다.
 
+## 최신 main 통합·독립 재검증 계획 (2026-10-07)
+
+기존 Draft #29의 source1336d3d에 main33a6e8b를 통합한다. 최신 공개 계정·알림 설정·분별 기록/삭제·기간 입력 복구는 main의 실제 코드 그대로이며 신규 화면 구성을 확장하지 않는다. main에 추가된 private 코칭/관찰/분 집계·업로드 producer와 test probe의 production 제외 검사도 기존 exporter 함수 경계에 보존한다. 기존 원본/실패·의상/머리·목 에셋은 수정하지 않는다.
+
+새 하네스는 main의 금지 문자열을 포함하는 synthetic JS를 exporter에 전달해 출력 생성 전 거부·원본 보존을 확인한다. 최신 production TS/build·실제 파일 hash 선별·DOM 회귀·native Compose parser/ASGI·정적 검사를 실제로 재실행하고 실행 HEAD/전후 source·보존 원본 SHA를 별도로 남긴다. 파일 선별과 native parser가 통과해도 이미지/컨테이너·NGINX/TLS·계정 쿠키/두 peer quota/장애·복구의 실제 패키지 검증을 대체하지 않는다. Docker engine이 없으면 그 게이트는 실패/대기로 기록하고 Draft를 유지한다.
+
 ## 현재 의존성·남은 게이트
 
 Docker CLI29.2.1·desktop-linux context는 있지만 daemon Unix socket이 없어 실제 engine이 미연결이다. CEO에게 Docker Desktop의 로컬 실행 도움을 요청했다. 새 계정/결제/운영 연결이 아니며 기다리는 동안 위 독립 구현을 계속한다. 연결 불가이면 해당 runtime gate를 보류하고 라이선스/백업·복구/6단계 하네스 등 다음 독립 작업으로 진행한다.

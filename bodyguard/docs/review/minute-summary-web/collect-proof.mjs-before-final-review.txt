@@ -1,0 +1,104 @@
+// FR-R-03/NFR-08: adapt the existing evidence collector; no DB archives or body samples.
+import assert from 'node:assert/strict'
+import { createHash } from 'node:crypto'
+import { lstatSync, readFileSync, realpathSync, writeFileSync } from 'node:fs'
+import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { gzipSync } from 'node:zlib'
+import { passingJUnit, passingPublicBrowser } from './verify-results.mjs'
+
+const root = realpathSync(fileURLToPath(new URL('../../../../', import.meta.url)))
+const destination = realpathSync(fileURLToPath(new URL('.', import.meta.url)))
+assert(root.endsWith('/BODYGUARD-minute-summary-web'))
+const scratch = process.argv[2]
+assert(/^\/private\/tmp\/bodyguard-summary-web-proof\.[A-Za-z0-9]+$/.test(scratch ?? ''))
+assert.equal(realpathSync(scratch), scratch)
+const digest = (value) => createHash('sha256').update(value).digest('hex')
+function save(name, value) {
+  const target = join(destination, name)
+  let stat
+  try { stat = lstatSync(target) } catch (error) { if (error.code !== 'ENOENT') throw error }
+  if (stat) {
+    assert(stat.isFile() && !stat.isSymbolicLink() && stat.nlink === 1)
+    assert(readFileSync(target).equals(value), 'Preserve prior evidence; never overwrite')
+  } else writeFileSync(target, value, { flag: 'wx' })
+}
+const artifacts = []
+const pending = new Map()
+function collect(name, source) {
+  const stat = lstatSync(source)
+  assert(stat.isFile() && !stat.isSymbolicLink() && stat.nlink === 1 && stat.size < 16 * 1024 * 1024)
+  assert.equal(realpathSync(source), source)
+  const raw = readFileSync(source)
+  const normalized = name.endsWith('.png') ? raw : Buffer.from(raw.toString('utf8')
+    .replaceAll(root, '[workspace]')
+    .replaceAll(/\/Applications\/[^\n"<>]*\/BODYGUARD-account-web\/bodyguard\/backend\/\.venv/g, '[pinned-backend-venv]')
+    .replaceAll('hostname="local-test-host"', 'hostname="local-test-host"')
+    .replaceAll(/\/private\/tmp\/bodyguard-[A-Za-z0-9-]+\.[A-Za-z0-9_-]+/g, '[owned-private-scratch]')
+    .replaceAll(/\u001b\[[0-9;]*m/g, '')
+    .split('\n').map((line) => line.trimEnd()).join('\n').replace(/\n+$/, '\n'))
+  const value = name.endsWith('.gz') ? gzipSync(normalized) : normalized
+  assert(!pending.has(name), 'Duplicate artifact name')
+  pending.set(name, value)
+  artifacts.push({ name, raw_sha256: digest(raw), public_sha256: digest(value), bytes: value.length })
+}
+for (const name of [
+  'route-red.log', 'install.log', 'install-online.log', 'db-init.log', 'db-init-utf8.log', 'db-initial-stop.log',
+  'binding-red-utf8.log', 'binding-red-utf8.xml', 'binding-green-utf8.log', 'binding-green-utf8.xml',
+  'binding-compat-red.log', 'binding-compat-red.xml', 'binding-review.log', 'binding-review.xml',
+  'adapter-first.log', 'ui-first.log', 'ui-second.log', 'ui-third.log',
+  'biome-first.log', 'biome-second.log', 'biome-third.log', 'type-first.log', 'type-second.log', 'type-third.log', 'type-fourth.log',
+  'generated.log', 'ruff-first.log', 'ruff-format-first.log', 'api-focused.log', 'api-focused.xml',
+  'browser-first.log', 'browser-second.log', 'browser-third.log', 'browser-fourth.log',
+  'frontend-all-first.log', 'frontend-check-first.log', 'api-all-first.log', 'api-all-first.xml',
+  'review-ui-red.log', 'review-ui-green.log', 'review-adapter-red.log', 'auth-loop-red.log',
+  'review-green2.log', 'review-green3.log', 'review-format.log', 'review-format2.log', 'type-review.log', 'type-review3.log',
+  'frontend-final.log', 'frontend-final.xml', 'type-final.log', 'biome-final.log',
+  'frontend-final2.log', 'frontend-final2.xml', 'type-final2.log', 'biome-final2.log', 'build-final.log', 'guard-final.log', 'public-browser-final.log',
+  'frontend-final3.log', 'frontend-final3.xml', 'type-final3.log', 'biome-final3.log', 'build-final3.log', 'guard-final3.log', 'collector-tests.log', 'boundary-ui.log', 'boundary-format.log',
+  'api-final2.log', 'api-final2.xml', 'ruff-final2.log', 'format-final2.log', 'mypy-final2.log', 'db-final-stop.log',
+]) collect(name, join(scratch, name))
+for (const name of ['binding-red.log', 'binding-red.xml', 'binding-green.log', 'binding-green.xml']) collect(name + '.gz', join(scratch, name))
+
+const first = process.argv[3], final = process.argv[4]
+for (const [name, report] of [['browser-first-report.json', first], ['browser-final-report.json', final]]) {
+  assert(/^test-results\/summaries-[0-9TZ]+\/report\.json$/.test(report ?? ''))
+  collect(name, join(root, 'bodyguard/frontend', report))
+}
+const finalReport = JSON.parse(pending.get('browser-final-report.json').toString('utf8'))
+assert.equal(finalReport.stats.expected, 4)
+assert.equal(finalReport.stats.unexpected, 0)
+assert.equal(finalReport.stats.skipped, 0)
+assert.equal(finalReport.stats.flaky, 0)
+const firstReport = JSON.parse(pending.get('browser-first-report.json').toString('utf8'))
+assert.equal(firstReport.stats.expected, 3)
+assert.equal(firstReport.stats.unexpected, 1)
+const screenshotRoot = join(root, 'bodyguard/frontend', final.slice(0, -'report.json'.length))
+const happy = 'summaries-SW-W01-실제-계정→자세-기록→상세·페이지·취소·삭제와-화이트-블루-웹'
+for (const name of ['summary-empty.png', 'summary-desktop.png', 'summary-desktop-viewport.png', 'summary-notebook.png', 'summary-narrow-web.png', 'summary-zoom.png', 'summary-confirmation.png']) collect(name, join(screenshotRoot, happy, name))
+collect('summary-uncertain.png', join(screenshotRoot, 'summaries-SW-W02-실제-삭제-뒤-응답-단절은-불확실·명시-재조회이며-재삭제하지-않는다/summary-uncertain.png'))
+collect('summary-query-error.png', join(screenshotRoot, 'summaries-SW-W04-실제-대상-변경409와-조회-오류-복구·invalid-기간/summary-query-error.png'))
+for (const [file, count] of [['frontend-final3.xml', 653], ['api-final2.xml', 464]])
+  passingJUnit(pending.get(file).toString('utf8'), count)
+assert.match(pending.get('binding-red-utf8.xml').toString('utf8'), /failures="4"/)
+passingPublicBrowser(pending.get('public-browser-final.log').toString('utf8'))
+const sources = [
+  'backend/app/main.py', 'backend/app/summaries.py', 'backend/tests/test_summary_read_binding.py', 'backend/tests/run_browser.py',
+  'frontend/src/App.tsx', 'frontend/src/auth.tsx', 'frontend/src/index.css', 'frontend/src/api/auth.ts', 'frontend/src/api/records.ts',
+  'frontend/src/api/generated/index.ts', 'frontend/src/api/generated/types.gen.ts',
+  'frontend/src/api/minuteSummaries.ts', 'frontend/src/api/minuteSummaries.test.ts',
+  'frontend/src/pages/MemberPage.tsx', 'frontend/src/pages/RecordsPage.css',
+  'frontend/src/pages/MinuteSummaryPage.tsx', 'frontend/src/pages/MinuteSummaryPage.test.tsx', 'frontend/src/pages/MinuteSummaryPage.css', 'frontend/src/pages/MinuteSummaryDeletion.tsx',
+  'frontend/e2e/summaries.spec.ts', 'frontend/playwright.account.config.ts', 'docs/review/minute-summary-web/collect-proof.mjs', 'docs/review/minute-summary-web/verify-results.mjs', 'docs/review/minute-summary-web/verify-results.test.mjs',
+].map((name) => ({ name: `bodyguard/${name}`, sha256: digest(readFileSync(join(root, 'bodyguard', name))) }))
+pending.set('artifacts.json', Buffer.from(JSON.stringify({ baseline_commit: '654688be08ede24351491b687acae2b630dd674b', sources, artifacts }, null, 2) + '\n'))
+// Preflight every assertion and existing destination before publishing any new file.
+for (const [name, value] of pending) {
+  try {
+    const target = join(destination, name), stat = lstatSync(target)
+    assert(stat.isFile() && !stat.isSymbolicLink() && stat.nlink === 1)
+    assert(readFileSync(target).equals(value), 'Preserve prior evidence; never overwrite')
+  } catch (error) { if (error.code !== 'ENOENT') throw error }
+}
+for (const [name, value] of pending) save(name, value)
+console.log(JSON.stringify({ sources: sources.length, artifacts: artifacts.length, api: 464, frontend: 653, actual_summary_web: 4, public_web: 8, actual_camera: false, operational_changes: false }))

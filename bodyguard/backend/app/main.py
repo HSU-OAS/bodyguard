@@ -27,11 +27,14 @@ from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.exc import SQLAlchemyError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
+from app.baselines import register_baselines
 from app.config import Settings
 from app.db import challenges, google_flows, limits, resets, sessions, users
+from app.notification_preferences import register_notification_preferences
 from app.readiness import register_readiness
 from app.records import register_records
 from app.security import cleanup, code, digest, keyed, passwords, quota, token
+from app.summaries import register_summaries
 from app.withdrawal import register_withdrawal
 
 
@@ -955,7 +958,9 @@ def create_app(
         )
         return response
 
-    def record_owner(connection: Connection, request: Request, writing: bool) -> str:
+    def record_owner(
+        connection: Connection, request: Request, writing: bool, renew: bool = True
+    ) -> str:
         # FR-R-03/FR-U-04: ownership comes only from the locked authenticated session.
         now = now_fn()
         row = (
@@ -970,13 +975,12 @@ def create_app(
         )
         if row is None or not row["user_id"]:
             raise HTTPException(401, "로그인이 필요합니다.")
-        connection.execute(
-            update(sessions)
-            .where(
-                sessions.c.token_hash == row["token_hash"],
+        if renew:
+            connection.execute(
+                update(sessions)
+                .where(sessions.c.token_hash == row["token_hash"])
+                .values(last_seen_at=now_fn())
             )
-            .values(last_seen_at=now_fn())
-        )
         return str(row["user_id"])
 
     def record_deletion_sign(user_id: str, request: Request, message: str) -> str:
@@ -987,7 +991,29 @@ def create_app(
         )
         return keyed(key, "record-deletion-preview", binding)
 
+    def summary_read_binding(
+        request: Request, user_id: str, supplied: str | None, expected_owner: str | None
+    ) -> None:
+        # Optional for existing API callers; the web always sends both. A caller hint
+        # never selects an owner. Bind at this request, including CSRF acquisition ABA.
+        if supplied is None and expected_owner is None:
+            return
+        expected = keyed(key, "csrf", request.cookies.get(config.cookie_name, ""))
+        if (
+            (expected_owner is not None and expected_owner != user_id)
+            or supplied is None
+            or len(supplied) != 64
+            or not supplied.isascii()
+            or not hmac.compare_digest(supplied, expected)
+        ):
+            raise HTTPException(403, "요청을 확인할 수 없습니다.")
+
     register_records(app, db, now_fn, record_owner, record_deletion_sign)
+    register_notification_preferences(app, db, record_owner)
+    register_baselines(app, db, now_fn, record_owner, ErrorOut)
+    register_summaries(
+        app, db, now_fn, record_owner, record_deletion_sign, ErrorOut, summary_read_binding
+    )
 
     def withdrawal_owner(connection: Connection, request: Request) -> tuple[RowMapping, str]:
         # FR-U-05: bound contention rolls back instead of waiting in opposing auth lock orders.

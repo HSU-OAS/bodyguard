@@ -38,7 +38,7 @@ export function timestamp(value: unknown): value is string {
     Number.isFinite(Date.parse(value))
   )
 }
-function parseRecord(value: unknown): StretchOut {
+export function parseRecord(value: unknown): StretchOut {
   if (!value || typeof value !== 'object') throw new ApiError(503)
   const row = value as Record<string, unknown>
   if (

@@ -1,0 +1,12 @@
+E501 Line too long (101 > 100)
+  --> tests/test_summary_read_binding.py:38:101
+   |
+36 |     assert h.client.get("/api/v1/me").json()["id"] == owner_a
+37 |     assert h.client.get(PATH).json() == {"items": [], "has_more": False}
+38 |     assert h.client.get(PATH, headers={"X-CSRF-Token": proof_a, "X-Account-ID": owner_a}).json() == {
+   |                                                                                                     ^
+39 |         "items": [], "has_more": False
+40 |     }
+   |
+
+Found 1 error.

@@ -4,7 +4,7 @@ S2.1 + S2.6a1/b1, FR-U-01~05·NFR-08. 이메일 확인/구글 계정, 서버 쿠
 
 ## 서버 점검 — S5.1
 
-인증 없는 `GET /api/v1/health/live`는200 `{status: alive}`이며 DB를 사용하지 않는다. `GET /api/v1/health/ready`는 PostgreSQL18 primary·현재0005 revision·필수 테이블/열·API 역할의 SELECT/INSERT/UPDATE/DELETE 권한을 읽기만 하여 확인하고200 `{status: ready}` 또는503 `{status: unavailable}`만 반환한다. 별도 DB 연결이며 인증 pool·쿠키·세션 활동·cleanup·회원/기록 행 조회·쓰기·메일·자동 migration은 없다. 기존 no-store/no-referrer를 적용하고 SQL/DB 주소/오류 원문을 앱 로그에 내보내지 않는다.
+인증 없는 `GET /api/v1/health/live`는200 `{status: alive}`이며 DB를 사용하지 않는다. `GET /api/v1/health/ready`는 PostgreSQL18 primary·현재0008 revision·필수 테이블/열·API 역할의 SELECT/INSERT/UPDATE/DELETE 권한을 읽기만 하여 확인하고200 `{status: ready}` 또는503 `{status: unavailable}`만 반환한다. 별도 DB 연결이며 인증 pool·쿠키·세션 활동·cleanup·회원/기록 행 조회·쓰기·메일·자동 migration은 없다. 기존 no-store/no-referrer를 적용하고 SQL/DB 주소/오류 원문을 앱 로그에 내보내지 않는다.
 
 process별 점검1개·대기열0, 접속 timeout2초(대상별), 전체 작업 취소 deadline3초, SQL1초·잠금250ms·읽기 전용을 접속 때 적용한다. 기존 URL/PGOPTIONS의 search_path 등은 보존하되 이 한계는 뒤에서 강제한다.3초는 무조건 그 시각까지 HTTP 응답한다는 보장이 아니다. native psycopg 취소/정리가 추가로 걸릴 수 있으며 현재 고정3.3.6 소스의 취소/결과 대기는 각각5초 한계다. 무한 대기로 떨어지는 libpq17 미만은 ready503으로 거부한다. 이번 실제 client는 libpq18.6이다. 동시에 점검하면 busy도503이므로 운영 probe는 단일 worker별로 겹치지 않도록 구성/검증해야 한다.
 
@@ -26,7 +26,25 @@ ready200은 **API의 제한된 DB 준비만** 뜻한다. 모든 제약/인덱스
 
 ## 로컬 실행
 
-### 기간 삭제 API — S4.3
+### 본인 기준선 — S4.13
+
+`POST /api/v1/baselines`는 ID·client_version·neck/shoulder/trunk의 method/unit/value만 받는다. 어깨는 필수이며 관찰하지 못한 목/상체는 null이다. UUID를 소문자로 통일하고 엄격한 ASCII64 태그·유한 숫자 기술 범위를 검사한다. 태그와 값은 client-reported이며 계산법 채택/정자세·효과 검증이 아니다. 영상·좌표·샘플 목록·계정ID는 받지 않는다.
+
+신규201/동일 재전송200/내용 충돌409. 새 ID로 교체하면 이전 행은 비활성 이력으로 남고, 옛 ID 재전송은 현재 기준선을 바꾸지 않는다. `GET /baselines/active`는 본인 활성 또는 null, `GET /baselines/{id}`는 본인 이력만 조회한다. 타인/없는 ID는 같은404이고 응답에 user_id/email이 없다. 인증/Origin/CSRF·no-store·민감값 없는 고정 오류를 유지한다.
+
+동시 교체는 owner transaction advisory 잠금과 부분 unique로 직렬화한다. reset/FK 대기는 users KEY SHARE 뒤 인증을 다시 확인하고 세션 활동을 갱신한다. 잠금 충돌은2초 timeout 뒤503·전체 rollback이다. 새0007 migration은 계정 탈퇴에 연계 삭제되고, 저장된 기준선이 있는 downgrade는 잠금/검사 후 거부한다. **운영 적용/rollback은 별도 승인**이며 이번 실행은 소유한 격리 테스트 DB뿐이다. 실제 카메라 보정·웹 화면·1분 요약 연결은 후속 구현이다. [명세](../docs/stories/account-baselines-api.md)·[실행 증거/한계](../docs/review/account-baselines/README.md).
+
+### 본인 1분 집계 — S4.14
+
+`POST /api/v1/summaries/batch`는 엄격한 `{items:[...]}` 1~60개, UTC 분·기준선/버전·관찰 시간과 지표별 방법/단위/평균/측정/이탈 시간만 받는다. 계정은 세션에서만 결정한다. 지표별 분모와 null을 보존하고 시간 합/union의 논리 정합성을 검사한다. 영상·관절·샘플·기본 정자세·임상 점수를 받거나 생성하지 않는다. 값은 `client-reported`이며 올바른 자세 인증이 아니다.
+
+새 분이 있으면201, 모두 같은 내용의 재전송은200, 같은 본인/UTC 분의 다른 내용은409·batch 전체 rollback이다. 본인의 역사적 기준선과 측정된 방법/단위/버전이 일치해야 하며 타인/없는 기준선은 같은422다. `GET /summaries`는 본인 UTC 분 내림차순·start 포함/end 제외, limit20/최대100·offset최대10000의 `{items,has_more}`를 반환한다. 평균을 다른 기준선/방법과 임의 합치지 않는다.
+
+`POST /summaries/delete-preview`와 `/delete`는 해당 분 기간만 별도 서명 도메인·`confirmation: delete-minute-summaries`·10분 TTL로 삭제한다. 기존 스트레칭 삭제 증명과 교환할 수 없다. 변경된 대상은409·삭제0, cutoff 후 행은 보존, 이미 삭제된 재시도는0이다. Origin/CSRF·owner 잠금·대기 후 세션 재확인·고정 오류·탈퇴 CASCADE를 유지한다. 새0008 migration은 데이터가 있으면 downgrade를 거부한다. **운영 migration/복구는 별도 승인**이다.
+
+같은 분의 재보정·재시작·다중 탭은 충돌할 수 있다. 후속 공개 producer는 분 경계 handoff와409 종결/재확인 정책을 구현해야 하며 덮어쓰기·임의 합산·무한 재시도는 하지 않는다. 현재 API는 아직 공개 측정/대시보드에 연결하지 않는다. [명세와 실행 구분](../docs/stories/minute-summaries-api.md).
+
+### 스트레칭 기간 삭제 API — S4.3
 
 본인 `POST /api/v1/records/stretch/delete-preview`에 aware start/end 기간을 보내면 삭제 수·cutoff·지문·10분 만료·세션에 묶인 서명을 반환한다. `POST /api/v1/records/stretch/delete`는 이 확인값 전체와 `confirmation: delete-stretch-records`를 요구한다. 둘 다 기존 Origin/CSRF와 인증을 검사한다. 미리보기는 삭제하지 않으며, 대상이 바뀌면409로 재확인을 요구한다. 이미 삭제된 대상의 재전송은 삭제0이다. cutoff 뒤 저장된 기록은 보존한다. 별도 키·DB migration·원시 정보 저장은 없다. [명세·실제 검증](../docs/stories/stage4-record-deletion-api.md). 삭제 화면·계정 탈퇴·운영 적용은 아직 완료되지 않았다.
 

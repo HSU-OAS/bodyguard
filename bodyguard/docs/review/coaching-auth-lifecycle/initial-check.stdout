@@ -1,0 +1,150 @@
+src/coaching/useRecordedCoaching.ts:66:3 lint/correctness/useExhaustiveDependencies  FIXABLE  ━━━━━━━━━━
+
+  × This hook specifies more dependencies than necessary: owner.
+
+    64 │   const owner = useRef<Lifecycle>({ mounted: false, authority: null, operation: null })
+    65 │   const [state, setState] = useState<State>(idle)
+  > 66 │   useLayoutEffect(() => {
+       │   ^^^^^^^^^^^^^^^
+    67 │     owner.current.mounted = true
+    68 │     return () => {
+
+  i This dependency can be removed from the list.
+
+    73 │       owner.current.authority = null
+    74 │     }
+  > 75 │   }, [owner])
+       │       ^^^^^
+    76 │   useLayoutEffect(() => {
+    77 │     owner.current.authority = authority
+
+  i React relies on hook dependencies to determine when to re-compute Effects.
+    Specifying more dependencies than required can lead to unnecessary re-rendering
+    and degraded performance.
+
+  i Unsafe fix: Remove the extra dependencies from the list.
+
+    75 │ ··},·[owner])
+       │       -----
+
+src/coaching/useRecordedCoaching.ts:76:3 lint/correctness/useExhaustiveDependencies  FIXABLE  ━━━━━━━━━━
+
+  × This hook specifies more dependencies than necessary: owner.
+
+    74 │     }
+    75 │   }, [owner])
+  > 76 │   useLayoutEffect(() => {
+       │   ^^^^^^^^^^^^^^^
+    77 │     owner.current.authority = authority
+    78 │     const op = owner.current.operation
+
+  i This dependency can be removed from the list.
+
+    82 │       setState(idle)
+    83 │     }
+  > 84 │   }, [authority, owner])
+       │                  ^^^^^
+    85 │
+    86 │   const cancel = useCallback((): Promise<void> => {
+
+  i React relies on hook dependencies to determine when to re-compute Effects.
+    Specifying more dependencies than required can lead to unnecessary re-rendering
+    and degraded performance.
+
+  i Unsafe fix: Remove the extra dependencies from the list.
+
+    84 │ ··},·[authority,·owner])
+       │                -------
+
+src/coaching/useRecordedCoaching.ts:86:18 lint/correctness/useExhaustiveDependencies  FIXABLE  ━━━━━━━━━━
+
+  × This hook specifies more dependencies than necessary: owner.
+
+    84 │   }, [authority, owner])
+    85 │
+  > 86 │   const cancel = useCallback((): Promise<void> => {
+       │                  ^^^^^^^^^^^
+    87 │     const op = owner.current.operation
+    88 │     owner.current.operation = null
+
+  i This dependency can be removed from the list.
+
+    90 │     if (owner.current.mounted) setState(idle)
+    91 │     return cleanup
+  > 92 │   }, [owner])
+       │       ^^^^^
+    93 │   const prepare = useCallback(
+    94 │     async (supplied: Options): Promise<Session | null> => {
+
+  i React relies on hook dependencies to determine when to re-compute Effects.
+    Specifying more dependencies than required can lead to unnecessary re-rendering
+    and degraded performance.
+
+  i Unsafe fix: Remove the extra dependencies from the list.
+
+    92 │ ··},·[owner])
+       │       -----
+
+src/coaching/useRecordedCoaching.ts:93:19 lint/correctness/useExhaustiveDependencies  FIXABLE  ━━━━━━━━━━
+
+  × This hook specifies more dependencies than necessary: owner.
+
+    91 │     return cleanup
+    92 │   }, [owner])
+  > 93 │   const prepare = useCallback(
+       │                   ^^^^^^^^^^^
+    94 │     async (supplied: Options): Promise<Session | null> => {
+    95 │       const authority = owner.current.authority
+
+  i This dependency can be removed from the list.
+
+    165 │       }
+    166 │     },
+  > 167 │     [owner],
+        │      ^^^^^
+    168 │   )
+    169 │   const getSession = useCallback((): Session | null => {
+
+  i React relies on hook dependencies to determine when to re-compute Effects.
+    Specifying more dependencies than required can lead to unnecessary re-rendering
+    and degraded performance.
+
+  i Unsafe fix: Remove the extra dependencies from the list.
+
+    167 │ ····[owner],
+        │      -----
+
+src/coaching/useRecordedCoaching.ts:169:22 lint/correctness/useExhaustiveDependencies  FIXABLE  ━━━━━━━━━━
+
+  × This hook specifies more dependencies than necessary: owner.
+
+    167 │     [owner],
+    168 │   )
+  > 169 │   const getSession = useCallback((): Session | null => {
+        │                      ^^^^^^^^^^^
+    170 │     const op = owner.current.operation
+    171 │     return op && current(op, owner.current) ? op.session : null
+
+  i This dependency can be removed from the list.
+
+    170 │     const op = owner.current.operation
+    171 │     return op && current(op, owner.current) ? op.session : null
+  > 172 │   }, [owner])
+        │       ^^^^^
+    173 │   return Object.freeze({ state, prepare, getSession, cancel })
+    174 │ }
+
+  i React relies on hook dependencies to determine when to re-compute Effects.
+    Specifying more dependencies than required can lead to unnecessary re-rendering
+    and degraded performance.
+
+  i Unsafe fix: Remove the extra dependencies from the list.
+
+    172 │ ··},·[owner])
+        │       -----
+
+Checked 2 files in 49ms. No fixes applied.
+Found 5 errors.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.

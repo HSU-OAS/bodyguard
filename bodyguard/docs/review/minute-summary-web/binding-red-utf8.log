@@ -1,0 +1,89 @@
+FFFF.                                                                    [100%]
+=================================== FAILURES ===================================
+__________________ test_cookie_aba_cannot_return_other_owner ___________________
+
+harness = <tests.conftest.Harness object at 0x1094d4ec0>
+
+    def test_cookie_aba_cannot_return_other_owner(harness):
+        h = harness
+        owner_a = h.account("a@example.com")
+        proof_a = h.csrf()["X-CSRF-Token"]
+        cookies_a = dict(h.client.cookies)
+        h.client.cookies.clear()
+        owner_b = h.account("b@example.com")
+        assert post(h, payload()).status_code == 201
+        proof_b = h.csrf()["X-CSRF-Token"]
+        cookies_b = dict(h.client.cookies)
+        h.client.cookies.clear()
+        h.client.cookies.update(cookies_a)
+        assert h.client.get("/api/v1/me").json()["id"] == owner_a
+        h.client.cookies.clear()
+        h.client.cookies.update(cookies_b)
+        # GETs normally omit Origin. Expected owner also binds CSRF-acquisition races.
+        for proof in (proof_a, proof_b):
+            response = h.client.get(PATH, headers={"X-CSRF-Token": proof, "X-Account-ID": owner_a})
+>           assert response.status_code == 403
+E           assert 200 == 403
+E            +  where 200 = <Response [200 OK]>.status_code
+
+tests/test_summary_read_binding.py:28: AssertionError
+__________ test_invalid_read_binding_does_not_renew_session[headers0] __________
+
+harness = <tests.conftest.Harness object at 0x1098051d0>
+headers = {'X-CSRF-Token': 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}
+
+    @pytest.mark.parametrize("headers", [{"X-CSRF-Token": "a" * 64}, {"X-Account-ID": "missing"},
+                                       {"X-CSRF-Token": "bad", "X-Account-ID": "missing"}])
+    def test_invalid_read_binding_does_not_renew_session(harness, headers):
+        h = harness
+        h.account()
+        with h.engine.connect() as connection:
+            before = connection.execute(select(sessions.c.last_seen_at)).scalars().all()
+        response = h.client.get(PATH, headers=headers)
+>       assert response.status_code == 403
+E       assert 200 == 403
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/test_summary_read_binding.py:49: AssertionError
+__________ test_invalid_read_binding_does_not_renew_session[headers1] __________
+
+harness = <tests.conftest.Harness object at 0x109981e50>
+headers = {'X-Account-ID': 'missing'}
+
+    @pytest.mark.parametrize("headers", [{"X-CSRF-Token": "a" * 64}, {"X-Account-ID": "missing"},
+                                       {"X-CSRF-Token": "bad", "X-Account-ID": "missing"}])
+    def test_invalid_read_binding_does_not_renew_session(harness, headers):
+        h = harness
+        h.account()
+        with h.engine.connect() as connection:
+            before = connection.execute(select(sessions.c.last_seen_at)).scalars().all()
+        response = h.client.get(PATH, headers=headers)
+>       assert response.status_code == 403
+E       assert 200 == 403
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/test_summary_read_binding.py:49: AssertionError
+__________ test_invalid_read_binding_does_not_renew_session[headers2] __________
+
+harness = <tests.conftest.Harness object at 0x1096dab10>
+headers = {'X-CSRF-Token': 'bad', 'X-Account-ID': 'missing'}
+
+    @pytest.mark.parametrize("headers", [{"X-CSRF-Token": "a" * 64}, {"X-Account-ID": "missing"},
+                                       {"X-CSRF-Token": "bad", "X-Account-ID": "missing"}])
+    def test_invalid_read_binding_does_not_renew_session(harness, headers):
+        h = harness
+        h.account()
+        with h.engine.connect() as connection:
+            before = connection.execute(select(sessions.c.last_seen_at)).scalars().all()
+        response = h.client.get(PATH, headers=headers)
+>       assert response.status_code == 403
+E       assert 200 == 403
+E        +  where 200 = <Response [200 OK]>.status_code
+
+tests/test_summary_read_binding.py:49: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_summary_read_binding.py::test_cookie_aba_cannot_return_other_owner
+FAILED tests/test_summary_read_binding.py::test_invalid_read_binding_does_not_renew_session[headers0]
+FAILED tests/test_summary_read_binding.py::test_invalid_read_binding_does_not_renew_session[headers1]
+FAILED tests/test_summary_read_binding.py::test_invalid_read_binding_does_not_renew_session[headers2]
+4 failed, 1 passed in 1.24s

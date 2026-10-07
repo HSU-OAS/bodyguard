@@ -1,0 +1,169 @@
+[WebServer] (node:19158) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ node scripts/prepare-assets.mjs && tsc --noEmit && vite build
+[WebServer] (node:19252) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:19280) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:19304) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:19322) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 e2e/authcoaching.spec.ts:100:1 › H02 actual provider prepares inert; explicit synthetic performance saves to own public record (41.2s)
+(node:19825) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 e2e/authcoaching.spec.ts:131:1 › H03 actual same-account refresh revokes old running session; no automatic recreation (37.7s)
+(node:20089) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 e2e/authcoaching.spec.ts:152:1 › H03 failed logout is not permission to keep coaching or save (15.5s)
+(node:20225) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "[workspace]/bodyguard/backend/tests/run_browser.py", line 238, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "[workspace]/bodyguard/backend/tests/run_browser.py", line 190, in main
+    result = subprocess.run(
+        [
+    ...<35 lines>...
+        check=False,
+    )
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 557, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1213, in communicate
+    self.wait()
+    ~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1279, in wait
+    return self._wait(timeout=timeout)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 2084, in _wait
+    (pid, sts) = self._try_wait(0)
+                 ~~~~~~~~~~~~~~^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 2042, in _try_wait
+    (pid, sts) = os.waitpid(self.pid, wait_flags)
+                 ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+  ✘  4 e2e/authcoaching.spec.ts:172:1 › H04 pagehide during synthetic pending permission reclaims late resource; pageshow never starts (11.4s)
+
+
+  1) e2e/authcoaching.spec.ts:100:1 › H02 actual provider prepares inert; explicit synthetic performance saves to own public record
+
+    Test timeout of 30000ms exceeded.
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  getByRole('heading', { name: '내 몸을 위한 시작', exact: true })
+    Expected: visible
+    Received: undefined
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: '내 몸을 위한 시작', exact: true }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: '내 몸을 위한 시작', exact: true })
+
+
+      78 | async function mount(page: Page, delayed = false) {
+      79 |   await page.goto('/start')
+    > 80 |   await expect(page.getByRole('heading', { name: '내 몸을 위한 시작', exact: true })).toBeVisible()
+         |                                                                                ^
+      81 |   const options = {
+      82 |     recordId: randomUUID(),
+      83 |     utc: new Date(Date.now() - 2000).toISOString(),
+        at mount ([workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts:80:80)
+        at [workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts:105:16
+
+    Error Context: test-results/authcoaching-20261005T171501024263Z/authcoaching-H02-actual-pr-46426--saves-to-own-public-record/error-context.md
+
+  2) e2e/authcoaching.spec.ts:131:1 › H03 actual same-account refresh revokes old running session; no automatic recreation
+
+    Test timeout of 30000ms exceeded.
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: '내 몸을 위한 시작', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: '내 몸을 위한 시작', exact: true }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: '내 몸을 위한 시작', exact: true })
+
+
+      78 | async function mount(page: Page, delayed = false) {
+      79 |   await page.goto('/start')
+    > 80 |   await expect(page.getByRole('heading', { name: '내 몸을 위한 시작', exact: true })).toBeVisible()
+         |                                                                                ^
+      81 |   const options = {
+      82 |     recordId: randomUUID(),
+      83 |     utc: new Date(Date.now() - 2000).toISOString(),
+        at mount ([workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts:80:80)
+        at [workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts:136:3
+
+    Error Context: test-results/authcoaching-20261005T171501024263Z/authcoaching-H03-actual-sa-e8b54-ion-no-automatic-recreation/error-context.md
+
+  3) e2e/authcoaching.spec.ts:152:1 › H03 failed logout is not permission to keep coaching or save ─
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: '내 몸을 위한 시작', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: '내 몸을 위한 시작', exact: true }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: '내 몸을 위한 시작', exact: true })
+
+
+      78 | async function mount(page: Page, delayed = false) {
+      79 |   await page.goto('/start')
+    > 80 |   await expect(page.getByRole('heading', { name: '내 몸을 위한 시작', exact: true })).toBeVisible()
+         |                                                                                ^
+      81 |   const options = {
+      82 |     recordId: randomUUID(),
+      83 |     utc: new Date(Date.now() - 2000).toISOString(),
+        at mount ([workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts:80:80)
+        at [workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts:154:3
+
+    Error Context: test-results/authcoaching-20261005T171501024263Z/authcoaching-H03-failed-lo-51897-on-to-keep-coaching-or-save/error-context.md
+
+  4) e2e/authcoaching.spec.ts:172:1 › H04 pagehide during synthetic pending permission reclaims late resource; pageshow never starts
+
+    Test was interrupted.
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: '내 몸을 위한 시작', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: '내 몸을 위한 시작', exact: true }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: '내 몸을 위한 시작', exact: true })
+
+
+      78 | async function mount(page: Page, delayed = false) {
+      79 |   await page.goto('/start')
+    > 80 |   await expect(page.getByRole('heading', { name: '내 몸을 위한 시작', exact: true })).toBeVisible()
+         |                                                                                ^
+      81 |   const options = {
+      82 |     recordId: randomUUID(),
+      83 |     utc: new Date(Date.now() - 2000).toISOString(),
+        at mount ([workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts:80:80)
+        at [workspace]/bodyguard/frontend/e2e/authcoaching.spec.ts:177:3
+
+    Error Context: test-results/authcoaching-20261005T171501024263Z/authcoaching-H04-pagehide--acd4b-ource-pageshow-never-starts/error-context.md
+
+  3 failed
+    e2e/authcoaching.spec.ts:100:1 › H02 actual provider prepares inert; explicit synthetic performance saves to own public record
+    e2e/authcoaching.spec.ts:131:1 › H03 actual same-account refresh revokes old running session; no automatic recreation
+    e2e/authcoaching.spec.ts:152:1 › H03 failed logout is not permission to keep coaching or save ──
+  1 interrupted
+    e2e/authcoaching.spec.ts:172:1 › H04 pagehide during synthetic pending permission reclaims late resource; pageshow never starts

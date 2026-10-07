@@ -1,6 +1,33 @@
 // FR-S-01/06, FR-U-04, FR-V-03: actual Chrome with mocked /me, not actual auth/clinical approval.
 import { expect, test } from '@playwright/test'
 
+test('L08 actual RAF loop start-pause-resume-close with synthetic resources, no camera', async ({
+  page,
+}, info) => {
+  await page.goto('/dev/select')
+  // FR-U-04: probing during the auth checking/navigation window is not a ready-page test.
+  await expect(page.getByRole('heading', { name: '원하는 동작을 골라보세요' })).toBeVisible()
+  const result = await page.evaluate(async () => {
+    const path = '/e2e/fixtures/observationLoopProbe.ts'
+    const module = (await import(path)) as typeof import('./fixtures/observationLoopProbe')
+    return module.probeObservationLoop()
+  })
+  await info.attach('observation-loop-browser.json', {
+    contentType: 'application/json',
+    body: Buffer.from(JSON.stringify(result, null, 2)),
+  })
+  expect(result.pause_stopped).toBe(true)
+  expect(result.old_signals_aborted).toBe(true)
+  expect(result.close_stopped).toBe(true)
+  expect(result.all_signals_aborted).toBe(true)
+  expect(result.resources_created).toBe(6)
+  expect(result.all_resources_disposed_once).toBe(true)
+  expect(result.generation).toBe(2)
+  expect(result.outcome).toBe('interrupted')
+  expect(result.reason).toBe('page-hidden')
+  expect(result.verified_ms).toBe(0)
+})
+
 // FR-S-06: production entry screen, mocked account, no body analysis claim.
 test('S3.2 protected production explore paths and purpose selection', async ({ page }, info) => {
   await page.goto('http://localhost:4182/start')

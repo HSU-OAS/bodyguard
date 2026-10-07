@@ -1,0 +1,38 @@
+
+ RUN  v5.0.2 [workspace]/bodyguard/frontend
+
+ ❯ src/summary/ownedMinuteUpload.test.ts (24 tests | 1 failed) 63ms
+   ❯ owned minute upload (24)
+     × MU11 timed-out request cannot accept a late mock response 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/summary/ownedMinuteUpload.test.ts > owned minute upload > MU11 timed-out request cannot accept a late mock response
+AssertionError: expected { status: 'ready', …(2) } to match object { status: 'uncertain', …(1) }
+(1 matching property omitted from actual)
+
+- Expected
++ Received
+
+  {
+-   "queuedMinutes": 1,
+-   "status": "uncertain",
++   "queuedMinutes": 0,
++   "status": "ready",
+  }
+
+ ❯ src/summary/ownedMinuteUpload.test.ts:266:36
+    264|     finish?.(Response.json(ack(sent as RequestInit), { status: 201 }))
+    265|     await pending
+    266|     expect(h.upload.getSnapshot()).toMatchObject({ status: 'uncertain'…
+       |                                    ^
+    267|   })
+    268|   it('MU12 real batch contract accepts 60 ascending minutes, not the 2…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 23 passed (24)
+   Start at  15:23:21
+   Duration  279ms (transform 45%, tests 41%, import 12%, worker 2%)

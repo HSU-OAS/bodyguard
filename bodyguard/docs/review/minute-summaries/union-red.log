@@ -1,0 +1,39 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+__________________ test_impossible_good_coverage_union_is422 ___________________
+
+harness = <tests.conftest.Harness object at 0x1144e5010>
+
+    def test_impossible_good_coverage_union_is422(harness):
+        h = harness
+        h.account()
+        body = all_bad_payload(h)
+>       assert post(h, {**body, "any_bad_sec": 20}).status_code == 422
+E       AssertionError: assert 201 == 422
+E        +  where 201 = <Response [201 Created]>.status_code
+E        +    where <Response [201 Created]> = post(<tests.conftest.Harness object at 0x1144e5010>, {'minute_start': '2026-09-30T23:58:00Z', 'baseline_id': '601e39b9-447c-4c81-b643-543c25e972c9', 'client_version': 'Fixture+V1', 'coverage_sec': 60, ...})
+
+tests/test_summaries.py:561: AssertionError
+_______________ test_impossible_good_coverage_union_sql_is23514 ________________
+
+harness = <tests.conftest.Harness object at 0x114c17b10>
+
+    def test_impossible_good_coverage_union_sql_is23514(harness):
+        h = harness
+        owner = h.account()
+        body = all_bad_payload(h)
+        values = {
+            "user_id": owner,
+            "created_at": h.clock(),
+            **_values(MinuteInput.model_validate(body)),
+            "any_bad_sec": 20,
+        }
+>       with pytest.raises(IntegrityError) as error, h.engine.begin() as c:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE IntegrityError
+
+tests/test_summaries.py:575: Failed
+=========================== short test summary info ============================
+FAILED tests/test_summaries.py::test_impossible_good_coverage_union_is422 - A...
+FAILED tests/test_summaries.py::test_impossible_good_coverage_union_sql_is23514
+2 failed, 76 deselected in 0.74s

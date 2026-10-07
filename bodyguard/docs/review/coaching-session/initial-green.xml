@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="37" failures="0" errors="0" time="0.287774584">
+    <testsuite name="src/coaching/session.test.ts" timestamp="2026-10-05T13:01:53.031Z" hostname="local-test-host" tests="37" failures="0" errors="0" skipped="0" time="0.287774584">
+        <testcase classname="src/coaching/session.test.ts" name="T-01 생성/미확인 gate는 실제 coordinator에서도 factory0이다" time="0.003013417">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate authenticated / false 는 true가 아니면 준비0이다" time="0.000528625">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate authenticated / undefined 는 true가 아니면 준비0이다" time="0.00038125">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate authenticated / true 는 true가 아니면 준비0이다" time="0.000292458">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate motionValidated / false 는 true가 아니면 준비0이다" time="0.000289458">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate motionValidated / undefined 는 true가 아니면 준비0이다" time="0.00026275">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate motionValidated / true 는 true가 아니면 준비0이다" time="0.000207417">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate referenceAvatarReady / false 는 true가 아니면 준비0이다" time="0.000247">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate referenceAvatarReady / undefined 는 true가 아니면 준비0이다" time="0.000875959">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate referenceAvatarReady / true 는 true가 아니면 준비0이다" time="0.000372291">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate userAvatarReady / false 는 true가 아니면 준비0이다" time="0.000236167">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate userAvatarReady / undefined 는 true가 아니면 준비0이다" time="0.000205209">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-01 gate userAvatarReady / true 는 true가 아니면 준비0이다" time="0.00016">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-02 실제 engine effect와 controller를 연결해 start→pause→resume→end를 진행한다" time="0.0040165">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-03 start의 권한 대기 Promise가 pause·resume·종료를 막지 않고 과거 반환도 정리한다" time="0.054293334">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 ready 전 authenticated 상실은 준비 성공이 아닌 해당 사유 종료다" time="0.053562458">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 ready 전 motionValidated 상실은 준비 성공이 아닌 해당 사유 종료다" time="0.052669166">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 ready 전 referenceAvatarReady 상실은 준비 성공이 아닌 해당 사유 종료다" time="0.051158041">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 ready 전 userAvatarReady 상실은 준비 성공이 아닌 해당 사유 종료다" time="0.053257958">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 tick 전에 세션 만료를 재확인하여 유지·완료를 만들지 않는다" time="0.001326">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-04 observation 전에 세션 만료를 재확인하여 유지·완료를 만들지 않는다" time="0.000784333">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 camera 오류는 고정 사유로 종료하고 자원과 원본 오류를 snapshot에 노출하지 않는다" time="0.002434125">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 inference 오류는 고정 사유로 종료하고 자원과 원본 오류를 snapshot에 노출하지 않는다" time="0.000712292">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 avatars 오류는 고정 사유로 종료하고 자원과 원본 오류를 snapshot에 노출하지 않는다" time="0.000329208">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 ownership-error는 실제 엔진 사유이며 asset/user-stop으로 꾸미지 않는다" time="0.00033875">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 cleanup-error는 단순 pause가 아니라 종료·재준비 금지로 처리한다" time="0.000354375">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 clock NaN 는 명시 clock-error로 종료·준비0이다" time="0.000164708">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 clock Infinity 는 명시 clock-error로 종료·준비0이다" time="0.000139875">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 clock -1 는 명시 clock-error로 종료·준비0이다" time="0.000117542">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-05 역행 clock 및 provider 예외는 raw 내용 없이 fail-closed이다" time="0.000449833">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-06 ready·tick·시간 경과만으로는 성공·관찰/반복/유지0이다" time="0.000822666">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-06 명시 관찰의 시작·목표·복귀만 성공으로 계산하고 종료 뒤 frame은 무시한다" time="0.000412417">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-06 과거 세대 frame·가림 입력은 현재 성공으로 계산하지 않는다" time="0.000304542">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-07 observer throw는 정리·callback-error·준비 재시작0이다" time="0.000370083">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-07 observer reject는 정리·callback-error·준비 재시작0이다" time="0.000220584">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-07 preparing observer의 reentrant pause가 이전 준비를 부활시키지 않는다" time="0.000204541">
+        </testcase>
+        <testcase classname="src/coaching/session.test.ts" name="T-08 실제 EventTarget hidden/pagehide/dispose는 종료하고 visible 자동 재시작·listener 누수0이다" time="0.000750292">
+        </testcase>
+    </testsuite>
+</testsuites>

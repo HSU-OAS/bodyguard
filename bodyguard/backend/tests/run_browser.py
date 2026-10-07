@@ -29,7 +29,24 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "suite",
-        choices=("account", "password", "google", "records", "design", "withdrawal", "datahelp"),
+        choices=(
+            "account",
+            "password",
+            "google",
+            "records",
+            "design",
+            "withdrawal",
+            "datahelp",
+            "integration",
+            "security",
+            "resultrecord",
+            "ownercapture",
+            "recordedsession",
+            "authcoaching",
+            "notifications",
+            "summaries",
+            "minuteupload",
+        ),
         nargs="?",
         default="account",
     )
@@ -158,7 +175,22 @@ def main() -> int:
                 # FR-R-03/FR-V-01: records/design runs preserve every earlier result.
                 output = (
                     f"test-results/{args.suite}-{datetime.now(UTC).strftime('%Y%m%dT%H%M%S%fZ')}"
-                    if args.suite in ("records", "design", "withdrawal", "datahelp")
+                    if args.suite
+                    in (
+                        "records",
+                        "design",
+                        "withdrawal",
+                        "datahelp",
+                        "integration",
+                        "security",
+                        "resultrecord",
+                        "ownercapture",
+                        "recordedsession",
+                        "authcoaching",
+                        "notifications",
+                        "summaries",
+                        "minuteupload",
+                    )
                     else f"test-results/{args.suite}"
                 )
                 result = subprocess.run(
@@ -182,7 +214,22 @@ def main() -> int:
                         "BODYGUARD_TEST_BLOCKED_PROXY": proxy_url,
                         "BODYGUARD_TEST_RECORDS_REPORT": (
                             f"{output}/report.json"
-                            if args.suite in ("records", "design", "withdrawal", "datahelp")
+                            if args.suite
+                            in (
+                                "records",
+                                "design",
+                                "withdrawal",
+                                "datahelp",
+                                "integration",
+                                "security",
+                                "resultrecord",
+                                "ownercapture",
+                                "recordedsession",
+                                "authcoaching",
+                                "notifications",
+                                "summaries",
+                                "minuteupload",
+                            )
                             else ""
                         ),
                     },
