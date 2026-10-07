@@ -31,6 +31,8 @@ main 9733e4c에는 PR #15의 순수 코칭 진행 엔진까지 병합됐다. 계
 
 ## 다음 실행 순서
 
+2026-10-08 D2-R/T 단일 결과 전달: [S2.T4](stories/owned-pose-frame.md)에서 원본 capture stamp와 한 SDK 결과의 image/world를 사용자 rig로 연결한다. 실제 SDK의 생성 blank 미검출로 기존 관찰을 해제하고, 긍정 움직임은 별도 합성으로 시험했다. 실제 Chrome/남녀 GLB의 중복·종료 차단은 통과했으나 실제 카메라/사람 정확도·목/체간/손·시범/교정·공개 연결·전체 GPU 수명은 미완료다. 시험 전용 CSP/거부 proxy이며 승인 대기 제품 SDK 통신 정책을 적용한 것이 아니다. 원본/GLB/조형·기존 완료 기준·별도 승인 경계를 유지한다. [실제 흐름·미완료](review/owned-pose-frame/README.md).
+
 2026-10-08 D2-R 독립 아바타 자원: [S2.T3](stories/owned-avatar-pair.md)은 소유 GLB→두 독립 복제→관찰 rig의 준비/실패/종료를 연결했다. 실제 Chrome의 기존 남녀 GLB에서 종료·명시 재시도·취소된 늦은 source·정리 실패 격리를 확인했지만 카메라/추론 포트·관찰은 합성이다. renderer PBR baseline cache1은 이 자원 밖이며 전체 GPU 해제 완료가 아니다. 실제 SDK/permission·worker/renderer·미관찰/검증된 동작·공개 코칭·D2-R/I/전체1~6 필수 완료 기준은 유지한다. 조형/GLB·새 제품 화면·SDK 정책 변경0. [실제 화면·남은 조건](review/owned-avatar-pair/README.md).
 
 2026-10-08 D2-T 관찰 결과 연결: [S2.T2](stories/observed-avatar-pose.md)은 동일 pose 결과의 image/world를 원본 generation/sequence/at와 함께 사용자 리그로 연결한다. 가림·여러 사람/불일치·만료는 관찰 재사용이나 정답 보정으로 통과하지 않는다. 실제 Chrome의 기존 남녀 GLB에 합성 결과를 전달하는 시험이며 실제 SDK/단일 웹캠 정확도·몸통/목/손·시범/적색 피드백·최종 외형·D2-T와 전체1~6 통과는 아니다. 원본·이월·별도 승인 기준은 유지한다.

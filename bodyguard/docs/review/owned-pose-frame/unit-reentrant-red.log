@@ -1,0 +1,26 @@
+
+ RUN  v5.0.2 /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-owned-pose-frame/bodyguard/frontend
+
+ ❯ src/pose/ownedPoseFrame.test.ts (13 tests | 1 failed) 14ms
+   ❯ owned pose frame (13)
+     × blocks synchronous reentrant capture before a promise has been returned 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/pose/ownedPoseFrame.test.ts > owned pose frame > blocks synchronous reentrant capture before a promise has been returned
+AssertionError: expected null not to be null
+ ❯ src/pose/ownedPoseFrame.test.ts:124:39
+    122|       return { generation: 1, sequence: 1, at: 10, input: 'borrowed' }
+    123|     })
+    124|     expect(await f.source.read()).not.toBeNull()
+       |                                       ^
+    125|     expect(await nested).toBeNull()
+    126|     expect(f.capture).toHaveBeenCalledTimes(1)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 12 passed (13)
+   Start at  04:23:08
+   Duration  195ms (transform 58%, tests 19%, import 18%, worker 5%)
