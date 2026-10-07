@@ -25,6 +25,7 @@
 - 공개 byte 비교는 처음 basename 가정으로 실패했다. 이후 새 unit 변수 이름이 Tailwind utility29byte를 추가하는 것을 확인했다. assertion/의미 변경 없이 변수 이름만 변경한 뒤 공개 JS/CSS가 기존 출력과 byte 동일함을 실제 재확인했다. 공개 GLB0이다. 비어 있는 첫 실패 출력도 보존했다.
 - guard에 소유한 합성 leak sentinel을 넣은 시험은 실제 실패했고, 그 임시 파일만 제거한 뒤 guard를 다시 통과했다.
 - runtime commit의 첫 최종 browser 명령은 sandbox의 `listen EPERM 127.0.0.1`로 브라우저 실행 전 실패했다(보고 JSON 없음). 로컬 서버/Chrome 시험 권한으로 같은 source를 재실행한 `accepted-native` 결과가 최종 통과다. 첫 Git fetch도 sandbox DNS로 실패했고 읽기 권한 재실행에서 최신 main을 확인했다.
+- 증거 추가 후 첫 diff-check는 원본 Biome/format 로그4개의 출력 공백 때문에 실패했다. 원본 byte/SHA를 변경하지 않도록 이4파일만 로컬 `.gitattributes`에서 출력 공백을 보존하고 diff-check를 실제 재통과했다. source·명세·다른 증거의 공백 검사는 그대로이며82증거 hash 검사도 재통과했다.
 
 ## 범위와 남은 조건
 

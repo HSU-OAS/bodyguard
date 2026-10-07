@@ -33,3 +33,5 @@ D2-A/M/T/R/I/P 및 전체1~6 기준은 그대로다. 실제 SDK와 카메라의 
 ## 최종 source 검증
 
 runtime `fea93b94f407433d631f0088f8be7945d43ee1e0`에서 frontend810·Biome·타입·원래 assets/build·guard를 실제 통과했다. 같은 source의 최종 남녀 Chrome/WebGL 모두7관찰 단계와 종료, source/비교 모델 불변·전신·외부/카메라/오류0을 확인했다. 처음 runtime browser 명령은 sandbox localhost EPERM으로 실행 전 실패해 로그를 보존했고 로컬 시험 권한의 `accepted-native`가 최종 결과다. guard RED는 소유한 임시 sentinel 제거 후 실제 복구 통과했다. 공개 JS/CSS byte 동일·공개 GLB0·82증거 SHA·source Git blob를 실제 대조했다. [실제 화면·실패·남은 조건](../review/observed-avatar-pose/README.md). D2-T와 전체1~6 완료를 의미하지 않는다.
+
+증거 commit 뒤 diff-check에서 원본 도구 출력4log의 trailing blanks를 발견했다. 이4개 불변 로그에만 공백 보존 attribute를 적용하고, source·나머지 파일의 검사와 모든 증거 SHA는 유지한다. 제품 코드 수정이나 CI 설정 변경은 없다.
