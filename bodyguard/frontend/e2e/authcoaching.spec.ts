@@ -124,6 +124,7 @@ test('H02 actual provider prepares inert; explicit synthetic performance saves t
     provenance: 'client-reported',
   })
   await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.unmount())
+  await expect.poll(() => state(page)).toMatchObject({ lifecycleClosed: 1 })
   await page.goto(`/records/${data.recordId}`)
   await expect(page.getByRole('heading', { name: '수행 기록 상세', exact: true })).toBeVisible()
   await page.screenshot({ path: info.outputPath('auth-coaching-record.png'), fullPage: true })
@@ -140,7 +141,14 @@ test('H03 actual same-account refresh revokes old running session; no automatic 
   await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.refresh())
   await expect
     .poll(() => state(page))
-    .toMatchObject({ auth: 'ready', hook: 'idle', owned: false, session: 'ended', disposed: 3 })
+    .toMatchObject({
+      auth: 'ready',
+      hook: 'idle',
+      owned: false,
+      session: 'ended',
+      disposed: 3,
+      lifecycleClosed: 1,
+    })
   await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.resume())
   await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.save())
   expect(posts).toBe(0)
@@ -161,7 +169,13 @@ test('H03 failed logout is not permission to keep coaching or save', async ({ pa
   await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.signOut())
   await expect
     .poll(() => state(page))
-    .toMatchObject({ auth: 'logout-error', hook: 'idle', owned: false, disposed: 3 })
+    .toMatchObject({
+      auth: 'logout-error',
+      hook: 'idle',
+      owned: false,
+      disposed: 3,
+      lifecycleClosed: 1,
+    })
   await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.save())
   expect(posts).toBe(0)
   expect((await (await context.request.get('/api/v1/records/stretch')).json()).items).toHaveLength(
@@ -179,7 +193,9 @@ test('H04 pagehide during synthetic pending permission reclaims late resource; p
   await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.start())
   await expect.poll(() => state(page)).toMatchObject({ waiting: true, session: 'preparing' })
   await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent('pagehide')))
-  await expect.poll(() => state(page)).toMatchObject({ hook: 'idle', owned: false })
+  await expect
+    .poll(() => state(page))
+    .toMatchObject({ hook: 'idle', owned: false, lifecycleClosed: 1 })
   await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.release())
   expect(await state(page)).toMatchObject({ acquired: 1, disposed: 1, session: 'ended' })
   await page.evaluate(() =>
@@ -188,6 +204,63 @@ test('H04 pagehide during synthetic pending permission reclaims late resource; p
   await expect
     .poll(() => state(page))
     .toMatchObject({ auth: 'ready', hook: 'idle', acquired: 1, disposed: 1, owned: false })
+  await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.save())
+  expect(posts).toBe(0)
+  await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.unmount())
+})
+
+test('H05 actual logout succeeds but never permits old session resume or save', async ({
+  page,
+  context,
+}) => {
+  await join(context)
+  await mount(page)
+  await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.prepare())
+  await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.start())
+  await expect.poll(() => state(page)).toMatchObject({ session: 'running', acquired: 3 })
+  await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.signOut())
+  await expect
+    .poll(() => state(page))
+    .toMatchObject({
+      auth: 'guest',
+      owned: false,
+      disposed: 3,
+      lifecycleClosed: 1,
+    })
+  expect((await context.request.get('/api/v1/me')).status()).toBe(401)
+  await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.resume())
+  await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.save())
+  expect(posts).toBe(0)
+  expect(await state(page)).toMatchObject({ acquired: 3, lifecycleClosed: 1 })
+  await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.unmount())
+})
+
+test('H05 actual server revoked account returns 401 and refresh retires the owned lifecycle', async ({
+  page,
+  context,
+}) => {
+  await join(context)
+  await mount(page)
+  await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.prepare())
+  await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.start())
+  await expect.poll(() => state(page)).toMatchObject({ session: 'running', acquired: 3 })
+  const csrf = (await (await context.request.get('/api/v1/auth/csrf')).json()).csrf_token
+  expect(
+    (
+      await context.request.post('/api/v1/auth/logout', {
+        headers: { Origin: origin, 'X-CSRF-Token': csrf },
+      })
+    ).status(),
+  ).toBe(204)
+  await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.refresh())
+  await expect
+    .poll(() => state(page))
+    .toMatchObject({
+      auth: 'guest',
+      owned: false,
+      disposed: 3,
+      lifecycleClosed: 1,
+    })
   await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.save())
   expect(posts).toBe(0)
   await page.evaluate(() => (window as unknown as PrivateWindow).authCoachingProbe.unmount())
