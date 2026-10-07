@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-08 한 추론 결과 전달: [S2.T4](stories/owned-pose-frame.md)는 실제 SDK의 생성 blank 미검출과 별도 합성 움직임을 같은 프레임 전달 경로로 남녀 GLB에 연결했다. 준비→관찰→미검출 추적 해제→중복 차단→종료가 작동하며 [실제 화면·실패·미완료](review/owned-pose-frame/README.md)를 보존했다. runtime682ea56·전체844/Chrome SDK·정적/build/guard·공개 byte 동일 통과 후 PR 게이트를 진행한다. 실제 웹캠/최종 외형·올바른 시범·피드백/공개 코칭은 미완료다. 텍스트 최소화·D2/디자인/SDK·운영·전체1~6 기준을 유지한다. 최신 PR66 merge d4d2987/main 동일 tree·브랜치 보존을 확인하고 시작했다. 아래는 시점별 기록이다.
+
 2026-10-08 두 아바타 준비·실패·종료: [S2.T3](stories/owned-avatar-pair.md)에서 실제 남녀 GLB 준비→합성 움직임→종료→실패→명시 재시도·취소된 늦은 반환과 정리 실패 차단을 연결했다. [실제 화면·원본 실패·범위/미완료](review/owned-avatar-pair/README.md). 비공개 자원 구현이고 최종 외형/올바른 시범·SDK/웹캠/공개 코칭은 아니다. frontend826·native남녀·정적/build/guard·공개 JS/CSS byte 동일·63증거/source SHA 통과 후 조건부 PR 게이트를 진행한다. source4369677이며 기존 조형/GLB·미승인 화면 변경0, 텍스트 최소화·D2/디자인/SDK/Docker/실측·전체1~6 기준은 유지한다. PR65의 실제 merge2c4ec7f/main 포함·같은 tree·브랜치 보존을 확인하고 그 최신 main에서 시작했다. 아래는 시점별 기록이다.
 
 2026-10-08 같은 관찰 결과→사용자 리그: [S2.T2](stories/observed-avatar-pose.md)에서 한 번의 image/world 결과와 원본 세대·시각을 기존 GLB에 연결했다. runtimefea93b9의 실제 Chrome 남녀 각각 움직임→가림/복수 보류→복구→만료/종료, 비교 모델·원본 불변과 전신 구도를 확인했다. [실제 화면·원본 실패·남은 조건](review/observed-avatar-pose/README.md). 합성 관찰이며 실제 SDK/카메라·올바른 시범/피드백·최종 외형은 아니다. frontend810·정적/build/guard·공개 byte 동일·82증거/source SHA를 실제 확인하고 PR 게이트를 진행한다. D2-A/M/T/R/I/P·디자인/SDK/외부/운영 및 전체1~6 기준은 유지한다. PR #64의 실제 merge48d3154·main 포함·브랜치 보존을 확인하고 그 최신 main에서 시작했다. 아래는 시점별 기록이다.

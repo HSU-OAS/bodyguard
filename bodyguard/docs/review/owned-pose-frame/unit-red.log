@@ -1,0 +1,219 @@
+
+ RUN  v5.0.2 /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-owned-pose-frame/bodyguard/frontend
+
+ ❯ src/pose/ownedPoseFrame.test.ts (12 tests | 10 failed) 16ms
+   ❯ owned pose frame (12)
+     × does not acquire on creation; returns one copied stamped result and closes it 5ms
+     × copies before native close can erase result values 2ms
+     × preserves no-person and multiple-person result instead of choosing one 1ms
+     × rejects foreign, repeated and non-increasing capture stamps before inference 1ms
+     × snapshots stamps once, not after delayed inference 1ms
+     × has at most one capture/inference in flight 0ms
+     × dispose waits for late result reclamation, delivers nothing and is idempotent 1ms
+     × sanitizes provider failure, closes source and does not auto-retry 1ms
+     × reclaims native result after malformed/accessor data and sanitizes errors 0ms
+     × late result close failure reaches both read and disposal as fixed cleanup error 0ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 10 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/pose/ownedPoseFrame.test.ts > owned pose frame > does not acquire on creation; returns one copied stamped result and closes it
+AssertionError: expected "vi.fn()" to be called with arguments: [ 'borrowed', 10 ]
+
+Number of calls: 0
+
+ ❯ src/pose/ownedPoseFrame.test.ts:33:22
+     31|     expect(f.capture).not.toHaveBeenCalled()
+     32|     const frame = await f.source.read()
+     33|     expect(f.detect).toHaveBeenCalledWith('borrowed', 10)
+       |                      ^
+     34|     expect(frame).toEqual({ generation: 1, sequence: 1, at: 10, result…
+     35|       landmarks: f.result.landmarks, worldLandmarks: f.result.worldLan…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/10]⎯
+
+ FAIL  src/pose/ownedPoseFrame.test.ts > owned pose frame > copies before native close can erase result values
+AssertionError: expected undefined to be 0.5 // Object.is equality
+
+- Expected:
+0.5
+
++ Received:
+undefined
+
+ ❯ src/pose/ownedPoseFrame.test.ts:45:63
+     43|     const f = fixture()
+     44|     vi.mocked(f.result.close).mockImplementation(() => { f.result.land…
+     45|     expect((await f.source.read())?.result.landmarks[0][0].x).toBe(0.5)
+       |                                                               ^
+     46|   })
+     47|   it('preserves no-person and multiple-person result instead of choosi…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/10]⎯
+
+ FAIL  src/pose/ownedPoseFrame.test.ts > owned pose frame > preserves no-person and multiple-person result instead of choosing one
+AssertionError: Target cannot be null or undefined.
+ ❯ src/pose/ownedPoseFrame.test.ts:52:39
+     50|       f.detect.mockReturnValue(native(count))
+     51|       const frame = await f.source.read()
+     52|       expect(frame?.result.landmarks).toHaveLength(count)
+       |                                       ^
+     53|       expect(frame?.result.worldLandmarks).toHaveLength(count)
+     54|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/10]⎯
+
+ FAIL  src/pose/ownedPoseFrame.test.ts > owned pose frame > rejects foreign, repeated and non-increasing capture stamps before inference
+AssertionError: expected "vi.fn()" to be called 1 times, but got 0 times
+ ❯ src/pose/ownedPoseFrame.test.ts:63:22
+     61|       expect(await f.source.read()).toBeNull()
+     62|     }
+     63|     expect(f.detect).toHaveBeenCalledTimes(1)
+       |                      ^
+     64|     f.capture.mockReturnValue({ generation: 1, sequence: 2, at: 20, in…
+     65|     expect((await f.source.read())?.at).toBe(20)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/10]⎯
+
+ FAIL  src/pose/ownedPoseFrame.test.ts > owned pose frame > snapshots stamps once, not after delayed inference
+AssertionError: expected null to match object { generation: 1, sequence: 1, at: 10 }
+
+- Expected:
+{
+  "at": 10,
+  "generation": 1,
+  "sequence": 1,
+}
+
++ Received:
+null
+
+ ❯ src/pose/ownedPoseFrame.test.ts:76:27
+     74|     captured.generation = 99; captured.sequence = 99; captured.at = 999
+     75|     gate.resolve(f.result)
+     76|     expect(await reading).toMatchObject({ generation: 1, sequence: 1, …
+       |                           ^
+     77|   })
+     78|   it('has at most one capture/inference in flight', async () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/10]⎯
+
+ FAIL  src/pose/ownedPoseFrame.test.ts > owned pose frame > has at most one capture/inference in flight
+AssertionError: expected "vi.fn()" to be called 1 times, but got 0 times
+ ❯ src/pose/ownedPoseFrame.test.ts:84:23
+     82|     await Promise.resolve()
+     83|     expect(await f.source.read()).toBeNull()
+     84|     expect(f.capture).toHaveBeenCalledTimes(1)
+       |                       ^
+     85|     expect(f.detect).toHaveBeenCalledTimes(1)
+     86|     gate.resolve(f.result)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/10]⎯
+
+ FAIL  src/pose/ownedPoseFrame.test.ts > owned pose frame > dispose waits for late result reclamation, delivers nothing and is idempotent
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ src/pose/ownedPoseFrame.test.ts:107:22
+    105|     const disposal = f.source.dispose().then(() => { disposed = true })
+    106|     await Promise.resolve()
+    107|     expect(disposed).toBe(false)
+       |                      ^
+    108|     gate.resolve(f.result)
+    109|     expect(await reading).toBeNull()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/10]⎯
+
+ FAIL  src/pose/ownedPoseFrame.test.ts > owned pose frame > sanitizes provider failure, closes source and does not auto-retry
+AssertionError: promise resolved "null" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+null
+
+ ❯ src/pose/ownedPoseFrame.test.ts:118:34
+    116|     const f = fixture()
+    117|     f.detect.mockImplementation(() => { throw new Error('PRIVATE_POSE_…
+    118|     await expect(f.source.read()).rejects.toThrow('Pose frame unavaila…
+       |                                  ^
+    119|     expect(await f.source.read()).toBeNull()
+    120|     expect(f.detect).toHaveBeenCalledTimes(1)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/10]⎯
+
+ FAIL  src/pose/ownedPoseFrame.test.ts > owned pose frame > reclaims native result after malformed/accessor data and sanitizes errors
+AssertionError: promise resolved "null" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+null
+
+ ❯ src/pose/ownedPoseFrame.test.ts:135:34
+    133|     const f = fixture()
+    134|     Object.defineProperty(f.result, 'landmarks', { get() { throw new E…
+    135|     await expect(f.source.read()).rejects.toThrow('Pose frame unavaila…
+       |                                  ^
+    136|     expect(f.result.close).toHaveBeenCalledTimes(1)
+    137|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/10]⎯
+
+ FAIL  src/pose/ownedPoseFrame.test.ts > owned pose frame > late result close failure reaches both read and disposal as fixed cleanup error
+AssertionError: promise resolved "null" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+null
+
+ ❯ src/pose/ownedPoseFrame.test.ts:145:38
+    143|     await Promise.resolve()
+    144|     const closing = f.source.dispose()
+    145|     const readCheck = expect(reading).rejects.toBeInstanceOf(ResourceC…
+       |                                      ^
+    146|     const closeCheck = expect(closing).rejects.toBeInstanceOf(Resource…
+    147|     gate.resolve(f.result)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/10]⎯
+
+⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯
+
+Vitest caught 1 unhandled error during the test run.
+This might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.
+
+⎯⎯⎯⎯ Unhandled Rejection ⎯⎯⎯⎯⎯
+Error: PRIVATE_POSE_FRAME_COORDINATES
+ ❯ src/pose/ownedPoseFrame.test.ts:128:17
+    126|     await Promise.resolve()
+    127|     const closing = f.source.dispose()
+    128|     gate.reject(new Error('PRIVATE_POSE_FRAME_COORDINATES'))
+       |                 ^
+    129|     expect(await reading).toBeNull()
+    130|     await closing
+ ❯ processTicksAndRejections node:internal/process/task_queues:104:5
+
+This error originated in "src/pose/ownedPoseFrame.test.ts" test file. It doesn't mean the error was thrown inside the file itself, but while it was running.
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+
+
+ Test Files  1 failed (1)
+      Tests  10 failed | 2 passed (12)
+     Errors  1 error
+   Start at  04:20:01
+   Duration  194ms (transform 54%, tests 23%, import 18%, worker 5%)
+
