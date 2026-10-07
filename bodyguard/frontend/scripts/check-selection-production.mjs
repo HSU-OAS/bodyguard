@@ -76,6 +76,9 @@ for (const file of files) {
     'Video capture unavailable',
     'mountVideoPoseProbe',
     'PRIVATE_VIDEO_POSE_INPUT',
+    'Invalid owned pose playback',
+    'createOwnedPosePlayback',
+    'PRIVATE_PLAYBACK_POINTS',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -101,5 +104,6 @@ console.log(
     unconnected_owned_avatar_pair_strings: 0,
     unconnected_owned_pose_frame_strings: 0,
     unconnected_owned_video_pose_strings: 0,
+    unconnected_owned_pose_playback_strings: 0,
   }),
 )

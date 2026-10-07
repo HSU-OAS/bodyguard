@@ -85,6 +85,10 @@ export async function mountVideoPoseProbe(canvas: HTMLCanvasElement, gender: 'ma
     return Object.freeze({
       snapshot,
       close,
+      startPlayback: (kind: 'synthetic' | 'video') => actor?.startPlayback(kind),
+      holdNextResult: () => actor?.holdNextResult(),
+      releaseHeldResult: () => actor?.releaseHeldResult(),
+      stopPlayback: () => actor?.stopPlayback(),
       read: async () => ({ ...(await actor?.readVideo()), ...snapshot() }),
       startPending: () => {
         video.pause()
