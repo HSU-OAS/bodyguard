@@ -1,8 +1,13 @@
 # Bodyguard — Tasks
 
+2026-10-07 S4.17 재검증: 최신 main의 PR #52·#53·#54를 기록 집계 작업에 통합한다. 필수 회귀를 같은 조건으로 다시 실행하며 이전 실패와 증거를 보존한다. 새 디자인 구조·텍스트 최소화 적용은 별도 검토 구간이다. 기존 대시보드 외형을 확정하거나 미승인 화면을 확장하지 않는다. 아래는 시점별 기록이다.
+
 2026-10-06 원격 상태: 대시보드 [Draft PR #51](https://github.com/HSU-OAS/bodyguard/pull/51)을 생성했다. source6f26913 remote/local Git tree 일치, OPEN/Draft/CLEAN/MERGEABLE·체크 없음. **필수 회귀 실패로 병합하지 않았다.** 최신 main991ed2b는 그대로이며 다음 독립 Story는 초기 웹 응답 분리·준비 하네스다.
 
 최신: [S4.17 본인 일·주 기록 대시보드](stories/record-dashboard.md)는 실제 저장→기간 전체 집계→화이트·블루 화면→기록 관리/복귀·빈 기간/오류 재조회까지 구현했다. [실제 화면·실패·미완료 증거](review/record-dashboard/README.md). 최종738frontend/492실제API·대시보드Chrome2·타입/정적/build/guard 통과지만 기존 기록5초 회귀는 headless3실패/1통과·headed4실패, 공개8은6실패/2통과다. 변경 전 최신 main991ed2b의 격리 비교에서도 같은 공개 실패가 재현됐으나 원인은 미확정이며 **Story/병합 게이트는 미완료**다. source29/artifact141의 실제 SHA·길이/실패 flags를 독립 감사했고 첫 publication self-log 실패도 보존했다. Draft 증거로 남기고 다음 독립 Story는 최신 main의 초기 웹 응답 분리·준비 하네스다. PR #50 sourcec406154→merge991ed2b/main 포함·브랜치 보존은 실제 확인했다. 같은 아바타 부위 새 제작0·실제 classifier/두 아바타·SDK P2·참여자/실측·Q32/법무/외부·운영·전체1~6 미완료를 유지한다. 아래는 시점별 기록이다.
+2026-10-07 독립 검증 최신: [S6.3 시작 준비 하네스](stories/web-startup-readiness.md)의 strict 시작·동작 선택·도움말·실제 본인 기록/삭제·기존 공개/계정 스타일 흐름을 검증했다. 실패 matcher에 보관된 ARIA 때문에 페이지 닫기만으로 원문 수집을 막지 못하는 문제를 실제 RED로 확인해 같은 visible/5000ms 조건의 boolean 검증으로 보완했다. [현재 실제 증거](review/web-startup-readiness/current-20261007/summary.json). 이전 실패 원본은 보존하고 시작 지연 원인은 미확정이다. 제품 판정/아바타·외부/운영·전체1~6은 미완료이며 S6.3 PR 병합 게이트를 진행한다. 다음 독립 작업은 Draft #51의 회귀 재검증이다. 디자인 구조 승인·텍스트 최소화 적용은 별도 검토 구간이며 미승인 화면을 확장하지 않는다.
+
+2026-10-07 디자인 최신: 기존 goal은 active이며 v4 의료·신체 케어 도구 분위기의 방향을 승인받았다. [S4.D2 클릭 가능한 코칭 시안](stories/coaching-design-prototype.md)을 **제품 밖의 독립 HTML**로 만들었다. 넓은 좌우 아바타·구도 변경·아바타 썸네일 후보·설정·단계 안내·종료 확인/취소/초기화가 작동하고, 중간 실패를 보존한 뒤 실제 Chrome에서 UI/오류 복구/키보드/경계 검사를 통과했다. [화면·실패·실제/미실행 구분](review/coaching-design-prototype/README.md). 정적 이미지이며 실제 카메라/시범/판정/기록은 아니다. 다음은 CEO의 클릭 가능한 구조 검토와 적용 범위 합의, 그동안 독립적인 시작 검증 등의 기존 개발을 계속한다. 기존 Draft PR·2단계 이월·전체 1~6단계 미완료 기준은 그대로다. 아래는 시점별 기존 기록이다.
 
 최신: [S4.16 private 본인 분 업로드](stories/owned-minute-upload.md)를 실제 시간가중 집계→원래 로그인/CSRF/기대 소유자→실제 저장→본인 화이트·블루 기록 상세로 연결했다. 응답 단절 후 동일 재시도 한 분·계정 변경403/폐기·충돌409/기존 기록 보존을 실제 Chrome/API/SQL로 확인했다. [화면·예외·실패·실제/합성 구분](review/owned-minute-upload/README.md). source28/artifact54·전체682frontend/466API·privateChrome4/기록4/공개8·정적/build/guard·Node12 검증 후 조건부 PR 게이트 진행이다. 공개 producer/실제 신체/아바타·SDK P2/단계2 이월·참여자·Q32 나머지·외부/운영·전체1~6 완료는 아니다. 기존 디자인 스킬의 화이트·블루 웹을 유지하고 다음 독립 기능은 일/주 기록 집계·대시보드 연결이다. 아래는 시점별 기록이다.
 

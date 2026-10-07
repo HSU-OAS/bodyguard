@@ -1,0 +1,73 @@
+{
+  "timestamp": "2026-10-07T05:15:18.410Z",
+  "sourceHashTiming": "end of this harness run",
+  "scope": "static design prototype UI only; not webcam/avatar/clinical/product verification",
+  "sources": [
+    {
+      "file": "index.html",
+      "sha256": "4c58b503150de2d98206e434451406734422f31799b54c61d3010cbf21468462"
+    },
+    {
+      "file": "style.css",
+      "sha256": "d31aa59242bc4421d7bbf86fc911855937283149440e4c8e117f69b1c1d8f527"
+    },
+    {
+      "file": "prototype.js",
+      "sha256": "ca26625269098dfad07f41346057fa195950f22e24c0a473e7aad9a073df3de8"
+    },
+    {
+      "file": "verify.mjs",
+      "sha256": "27e2476e0be70c54a0f37944056b6ac7c463ec8ebc64513b8d88bd88ae378a6e"
+    },
+    {
+      "file": "assets/approved-reference.png",
+      "sha256": "ea4677323030a5d4266aa8f32ff3bf74738f2d088871b5084038621f9a761377"
+    }
+  ],
+  "results": [
+    {
+      "name": "full-body initial boundary and roles",
+      "passed": true
+    },
+    {
+      "name": "upper and detail synchronized view",
+      "passed": true
+    },
+    {
+      "name": "motion dialog keyboard escape and selection",
+      "passed": true
+    },
+    {
+      "name": "settings view guidance and no persistence",
+      "passed": true
+    },
+    {
+      "name": "manual demonstration no real animation or completion",
+      "passed": true
+    },
+    {
+      "name": "end confirm cancel and reset",
+      "passed": true
+    },
+    {
+      "name": "menus explain scope instead of inventing pages",
+      "passed": true
+    },
+    {
+      "name": "narrow desktop and CSS zoom no horizontal clipping",
+      "passed": true
+    },
+    {
+      "name": "keyboard visible focus reduced motion and text contrast",
+      "passed": true
+    },
+    {
+      "name": "asset failure recover without fake live state",
+      "passed": true
+    },
+    {
+      "name": "no camera storage API egress or JS errors",
+      "passed": true
+    }
+  ]
+}

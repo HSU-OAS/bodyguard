@@ -1,0 +1,369 @@
+{
+  "stats": {
+    "startTime": "2026-10-06T13:38:35.657Z",
+    "duration": 88165.78899999999,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  },
+  "cases": [
+    {
+      "title": "startup production http: first and repeat navigation",
+      "status": "failed",
+      "duration": 12973,
+      "observations": [
+        {
+          "name": "startup-observations.json",
+          "value": {
+            "actualBrowser": true,
+            "actualAuth": false,
+            "actualCameraOrHuman": false,
+            "productPerformanceGatePassed": false,
+            "browserVersion": "154.0.8037.98",
+            "surface": "production",
+            "transport": "http",
+            "routingDisablesHttpCache": false,
+            "samples": [
+              {
+                "visit": "first",
+                "selectorPassed": false,
+                "gotoWallMs": 1303.568166,
+                "selectorWallMs": 5020.759042,
+                "observed": {
+                  "probe": {
+                    "initMs": 310.8999999985099,
+                    "headingMs": 6171.10000000149,
+                    "twoRafMs": 6660.39999999851,
+                    "cameraCalls": 0
+                  },
+                  "navigation": {
+                    "responseEndMs": 95.10000000149012,
+                    "domContentLoadedMs": 1280.2999999970198,
+                    "loadMs": 1284.2000000029802
+                  },
+                  "me": [
+                    {
+                      "startMs": 3061.39999999851,
+                      "endMs": 3074.10000000149
+                    }
+                  ],
+                  "resourceCount": 4,
+                  "visible": true,
+                  "localStorageCount": 0,
+                  "sessionStorageCount": 0
+                }
+              },
+              {
+                "visit": "repeat",
+                "selectorPassed": true,
+                "gotoWallMs": 700.3017920000002,
+                "selectorWallMs": 2059.639500000001,
+                "observed": {
+                  "probe": {
+                    "initMs": 308,
+                    "headingMs": 2594.10000000149,
+                    "twoRafMs": 2749.60000000149,
+                    "cameraCalls": 0
+                  },
+                  "navigation": {
+                    "responseEndMs": 18.5,
+                    "domContentLoadedMs": 657.1000000014901,
+                    "loadMs": 684.8000000044703
+                  },
+                  "me": [
+                    {
+                      "startMs": 1291.8000000044703,
+                      "endMs": 1294.2000000029802
+                    }
+                  ],
+                  "resourceCount": 3,
+                  "visible": true,
+                  "localStorageCount": 0,
+                  "sessionStorageCount": 0
+                }
+              }
+            ],
+            "pageErrors": 0,
+            "externalRequests": 0,
+            "unexpectedApi": 0,
+            "modelRequests": 0
+          }
+        }
+      ]
+    },
+    {
+      "title": "startup production route: first and repeat navigation",
+      "status": "failed",
+      "duration": 11973,
+      "observations": [
+        {
+          "name": "startup-observations.json",
+          "value": {
+            "actualBrowser": true,
+            "actualAuth": false,
+            "actualCameraOrHuman": false,
+            "productPerformanceGatePassed": false,
+            "browserVersion": "154.0.8037.98",
+            "surface": "production",
+            "transport": "route",
+            "routingDisablesHttpCache": true,
+            "samples": [
+              {
+                "visit": "first",
+                "selectorPassed": false,
+                "gotoWallMs": 1230.4233329999997,
+                "selectorWallMs": 5011.517042,
+                "observed": {
+                  "probe": {
+                    "initMs": 374.79999999701977,
+                    "headingMs": 5625.39999999851,
+                    "twoRafMs": 6418.69999999553,
+                    "cameraCalls": 0
+                  },
+                  "navigation": {
+                    "responseEndMs": 120.89999999850988,
+                    "domContentLoadedMs": 1217.7999999970198,
+                    "loadMs": 1220.3999999985099
+                  },
+                  "me": [
+                    {
+                      "startMs": 2530.7999999970198,
+                      "endMs": 2547.2999999970198
+                    }
+                  ],
+                  "resourceCount": 4,
+                  "visible": true,
+                  "localStorageCount": 0,
+                  "sessionStorageCount": 0
+                }
+              },
+              {
+                "visit": "repeat",
+                "selectorPassed": true,
+                "gotoWallMs": 524.9233330000006,
+                "selectorWallMs": 2317.4550419999996,
+                "observed": {
+                  "probe": {
+                    "initMs": 113,
+                    "headingMs": 2579.1999999955297,
+                    "twoRafMs": 2831.89999999851,
+                    "cameraCalls": 0
+                  },
+                  "navigation": {
+                    "responseEndMs": 16.100000001490116,
+                    "domContentLoadedMs": 479.5,
+                    "loadMs": 508.6000000014901
+                  },
+                  "me": [
+                    {
+                      "startMs": 1091.2999999970198,
+                      "endMs": 1116.5
+                    }
+                  ],
+                  "resourceCount": 4,
+                  "visible": true,
+                  "localStorageCount": 0,
+                  "sessionStorageCount": 0
+                }
+              }
+            ],
+            "pageErrors": 0,
+            "externalRequests": 0,
+            "unexpectedApi": 0,
+            "modelRequests": 0
+          }
+        }
+      ]
+    },
+    {
+      "title": "startup dev http: first and repeat navigation",
+      "status": "failed",
+      "duration": 20934,
+      "observations": [
+        {
+          "name": "startup-observations.json",
+          "value": {
+            "actualBrowser": true,
+            "actualAuth": false,
+            "actualCameraOrHuman": false,
+            "productPerformanceGatePassed": false,
+            "browserVersion": "154.0.8037.98",
+            "surface": "dev",
+            "transport": "http",
+            "routingDisablesHttpCache": false,
+            "samples": [
+              {
+                "visit": "first",
+                "selectorPassed": false,
+                "gotoWallMs": 2244.770792000001,
+                "selectorWallMs": 7070.067207999999,
+                "observed": {
+                  "probe": {
+                    "initMs": 401,
+                    "headingMs": null,
+                    "twoRafMs": null,
+                    "cameraCalls": 0
+                  },
+                  "navigation": {
+                    "responseEndMs": 138.70000000298023,
+                    "domContentLoadedMs": 1919.5,
+                    "loadMs": 2213.8000000044703
+                  },
+                  "me": [
+                    {
+                      "startMs": 5575.60000000149,
+                      "endMs": 5579.60000000149
+                    },
+                    {
+                      "startMs": 5809.5,
+                      "endMs": 5825.5
+                    }
+                  ],
+                  "resourceCount": 40,
+                  "visible": true,
+                  "localStorageCount": 0,
+                  "sessionStorageCount": 0
+                }
+              },
+              {
+                "visit": "repeat",
+                "selectorPassed": false,
+                "gotoWallMs": 1151.4824579999986,
+                "selectorWallMs": 5006.008916999999,
+                "observed": {
+                  "probe": {
+                    "initMs": 528.6000000014901,
+                    "headingMs": 5336.10000000149,
+                    "twoRafMs": 6294.79999999702,
+                    "cameraCalls": 0
+                  },
+                  "navigation": {
+                    "responseEndMs": 388.79999999701977,
+                    "domContentLoadedMs": 1129.6000000014901,
+                    "loadMs": 1137.2000000029802
+                  },
+                  "me": [
+                    {
+                      "startMs": 1732.1000000014901,
+                      "endMs": 1734.6000000014901
+                    },
+                    {
+                      "startMs": 1798.7999999970198,
+                      "endMs": 1800.7000000029802
+                    }
+                  ],
+                  "resourceCount": 42,
+                  "visible": true,
+                  "localStorageCount": 0,
+                  "sessionStorageCount": 0
+                }
+              }
+            ],
+            "pageErrors": 0,
+            "externalRequests": 0,
+            "unexpectedApi": 0,
+            "modelRequests": 0
+          }
+        }
+      ]
+    },
+    {
+      "title": "startup dev route: first and repeat navigation",
+      "status": "failed",
+      "duration": 20557,
+      "observations": [
+        {
+          "name": "startup-observations.json",
+          "value": {
+            "actualBrowser": true,
+            "actualAuth": false,
+            "actualCameraOrHuman": false,
+            "productPerformanceGatePassed": false,
+            "browserVersion": "154.0.8037.98",
+            "surface": "dev",
+            "transport": "route",
+            "routingDisablesHttpCache": true,
+            "samples": [
+              {
+                "visit": "first",
+                "selectorPassed": false,
+                "gotoWallMs": 2726.272708999999,
+                "selectorWallMs": 6256.862041,
+                "observed": {
+                  "probe": {
+                    "initMs": 596.6000000014901,
+                    "headingMs": null,
+                    "twoRafMs": null,
+                    "cameraCalls": 0
+                  },
+                  "navigation": {
+                    "responseEndMs": 180.29999999701977,
+                    "domContentLoadedMs": 2406.2999999970198,
+                    "loadMs": 2713.1999999955297
+                  },
+                  "me": [
+                    {
+                      "startMs": 5670.39999999851,
+                      "endMs": 5857
+                    },
+                    {
+                      "startMs": 5820.89999999851,
+                      "endMs": 5863.60000000149
+                    }
+                  ],
+                  "resourceCount": 40,
+                  "visible": true,
+                  "localStorageCount": 0,
+                  "sessionStorageCount": 0
+                }
+              },
+              {
+                "visit": "repeat",
+                "selectorPassed": true,
+                "gotoWallMs": 1559.804333,
+                "selectorWallMs": 4521.392250000001,
+                "observed": {
+                  "probe": {
+                    "initMs": 619,
+                    "headingMs": 5423.60000000149,
+                    "twoRafMs": 6040.30000000447,
+                    "cameraCalls": 0
+                  },
+                  "navigation": {
+                    "responseEndMs": 459.6000000014901,
+                    "domContentLoadedMs": 1508.3000000044703,
+                    "loadMs": 1518.3999999985099
+                  },
+                  "me": [
+                    {
+                      "startMs": 2049.89999999851,
+                      "endMs": 2126.8000000044703
+                    },
+                    {
+                      "startMs": 2093.8000000044703,
+                      "endMs": 2134.3000000044703
+                    }
+                  ],
+                  "resourceCount": 43,
+                  "visible": true,
+                  "localStorageCount": 0,
+                  "sessionStorageCount": 0
+                }
+              }
+            ],
+            "pageErrors": 0,
+            "externalRequests": 0,
+            "unexpectedApi": 0,
+            "modelRequests": 0
+          }
+        }
+      ]
+    }
+  ],
+  "selectedReviewRun": false,
+  "sourceAtRunVerified": false,
+  "actualCameraOrHuman": false,
+  "actualAuth": false,
+  "productGatePassed": false
+}
