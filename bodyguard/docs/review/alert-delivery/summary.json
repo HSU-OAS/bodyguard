@@ -1,0 +1,505 @@
+{
+  "executionBaseline": "db0b53a5a789960abccb191ce5a6d28ae63c728e",
+  "executionState": "latest main plus unchanged source files, before evidence commit",
+  "sourceSet": {
+    "capturedUtc": "2026-10-07T11:49:35.439Z",
+    "source": [
+      {
+        "path": "bodyguard/backend/tests/run_browser.py",
+        "bytes": 9960,
+        "sha256": "94357ea9d8c91e8017676da8bc81887f33a410a85fdd04434b70a29ddd0caacc"
+      },
+      {
+        "path": "bodyguard/frontend/playwright.account.config.ts",
+        "bytes": 2494,
+        "sha256": "3465fe906f4917dcb39ca45b9ffbba9ff006704d7e58025d2c90ec172f0996fa"
+      },
+      {
+        "path": "bodyguard/frontend/scripts/check-selection-production.mjs",
+        "bytes": 2890,
+        "sha256": "5e923c54d8d3cb6292669635d06dcbe187079fc73d79d58b3f96d4ff11ecd4a3"
+      },
+      {
+        "path": "bodyguard/frontend/e2e/alertdelivery.spec.ts",
+        "bytes": 10784,
+        "sha256": "c10b5455975456ec1b79a32a79d44426331b5f664f5d0faf6d6045157c75d08b"
+      },
+      {
+        "path": "bodyguard/frontend/e2e/fixtures/alertDeliveryProbe.ts",
+        "bytes": 2376,
+        "sha256": "17bd95b5212faf54dc49f82fa5e351a225c573f52efc35cc4553c515cf75fcd2"
+      },
+      {
+        "path": "bodyguard/frontend/e2e/fixtures/alertDelivery.vite.ts",
+        "bytes": 883,
+        "sha256": "55194dab182a59d4faa386b93a1daa9c3d920b51e3d93f362404ca9c330c40d7"
+      },
+      {
+        "path": "bodyguard/frontend/src/alerts/delivery.ts",
+        "bytes": 5969,
+        "sha256": "1b27b32b1fe4796efe9197f2ffc034cde98aeba751fd36fffda41ea318d14c5b"
+      },
+      {
+        "path": "bodyguard/frontend/src/alerts/delivery.test.ts",
+        "bytes": 9272,
+        "sha256": "a8575f64a7361fe40d4767daaa69ce6f6ffb97a244cb467bf7c8a025cbe5b811"
+      },
+      {
+        "path": "bodyguard/frontend/src/alerts/browserNotifications.ts",
+        "bytes": 1546,
+        "sha256": "2b6a157cfa42d863073b25214ebeea31137603326214372c5e386e675161a0e5"
+      },
+      {
+        "path": "bodyguard/frontend/src/alerts/browserNotifications.test.ts",
+        "bytes": 3360,
+        "sha256": "1d01d3159261d8d321bc8e4500d82c063992e442c5f9639eed46dfefafec90e7"
+      },
+      {
+        "path": "bodyguard/frontend/src/alerts/AlertDeliveryPanel.tsx",
+        "bytes": 4800,
+        "sha256": "805d66a81a0dd85f3d9f25dd502d94e2f845102d54477adc09ab9b867f12aded"
+      },
+      {
+        "path": "bodyguard/frontend/src/alerts/AlertDeliveryPanel.test.tsx",
+        "bytes": 6194,
+        "sha256": "334f0b4f246cecfa06e93c50ba631d3b3ddea1cc9c0de4c0cf3ea7744f42cfba"
+      },
+      {
+        "path": "bodyguard/frontend/src/alerts/AlertDeliveryPanel.css",
+        "bytes": 1356,
+        "sha256": "ede0123a2606b4c960aa7a0972afe8dc12f7595abdb4834c3bc64012c719250c"
+      }
+    ],
+    "sourceSetSha256": "affa1e67a95aadea809c09723fe6da9438e07394f917b6898ac78aded3c796ea",
+    "originalUnfinishedSource": {
+      "files": 11,
+      "allUnchanged": true,
+      "preserved": [
+        {
+          "path": "bodyguard/docs/stories/stage4-alert-delivery.md",
+          "bytes": 5720,
+          "sha256": "7cb48c8208d224d4d9c0f88be777651d619f0413e77d0df97a9878c9a5e8d3a8",
+          "unchanged": true
+        },
+        {
+          "path": "bodyguard/frontend/src/alerts/delivery.ts",
+          "bytes": 5694,
+          "sha256": "65d5d93bffbbb4ddef8f147752a070196eaf6f51517b8ebbbcee509a9bcbfe90",
+          "unchanged": true
+        },
+        {
+          "path": "bodyguard/frontend/src/alerts/delivery.test.ts",
+          "bytes": 8496,
+          "sha256": "b02363e97186f7dad2feb94de92dc925cfd6b6022812d193b15fc28470acb099",
+          "unchanged": true
+        },
+        {
+          "path": "bodyguard/frontend/src/alerts/browserNotifications.ts",
+          "bytes": 1546,
+          "sha256": "2b6a157cfa42d863073b25214ebeea31137603326214372c5e386e675161a0e5",
+          "unchanged": true
+        },
+        {
+          "path": "bodyguard/frontend/src/alerts/browserNotifications.test.ts",
+          "bytes": 3360,
+          "sha256": "1d01d3159261d8d321bc8e4500d82c063992e442c5f9639eed46dfefafec90e7",
+          "unchanged": true
+        },
+        {
+          "path": "bodyguard/frontend/src/alerts/AlertDeliveryPanel.tsx",
+          "bytes": 4170,
+          "sha256": "866378ed06d521c10907cb042cdb50540f927a62e5dc5cc7e1e58e37246276bd",
+          "unchanged": true
+        },
+        {
+          "path": "bodyguard/frontend/src/alerts/AlertDeliveryPanel.test.tsx",
+          "bytes": 4201,
+          "sha256": "5d65836e419f08d1b4492278ea8ded925b6456eeaad457cf170a42a78bc25f7a",
+          "unchanged": true
+        },
+        {
+          "path": "bodyguard/frontend/src/alerts/AlertDeliveryPanel.css",
+          "bytes": 1127,
+          "sha256": "7a222feba2d1e739c657b64cd314d2d08f4e305420c13143a6297ec81db8b8f3",
+          "unchanged": true
+        },
+        {
+          "path": "bodyguard/frontend/e2e/alertdelivery.spec.ts",
+          "bytes": 7671,
+          "sha256": "66a9a9b89ec433dc32821c8ef31823b66413232ab538101b9cb5419ec6326e7f",
+          "unchanged": true
+        },
+        {
+          "path": "bodyguard/frontend/e2e/fixtures/alertDeliveryProbe.ts",
+          "bytes": 2002,
+          "sha256": "aeff36738b0aebf2f312cece07e6870ee13ecefe60571ef7b9b82317ae4345f9",
+          "unchanged": true
+        },
+        {
+          "path": "bodyguard/frontend/e2e/fixtures/alertDelivery.vite.ts",
+          "bytes": 883,
+          "sha256": "55194dab182a59d4faa386b93a1daa9c3d920b51e3d93f362404ca9c330c40d7",
+          "unchanged": true
+        }
+      ]
+    }
+  },
+  "mainFinal": {
+    "browsers": [
+      {
+        "path": "bodyguard/frontend/test-results/alertdelivery-20261007T120653077273Z/report.json",
+        "sha256": "99f479d09ca0318e6fd2d9f87ec96f77cee4178a8798bc02ff53751b43d72297",
+        "startTime": "2026-10-07T12:06:53.832Z",
+        "duration": 22922.672000000002,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0,
+        "errors": 0
+      },
+      {
+        "path": "bodyguard/frontend/test-results/integration-20261007T120718558988Z/report.json",
+        "sha256": "1620436318f7593d7c4a8dfed0ca86a52284f07ab2bd08e9c291a313a0097557",
+        "startTime": "2026-10-07T12:07:19.397Z",
+        "duration": 12996.248,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0,
+        "errors": 0
+      }
+    ],
+    "dom": {
+      "path": "dom-main-final.xml",
+      "sha256": "1ea0bac3f5e9b7552c53567966a67ad87bb4f3ab3599c9759e6bfc0b725d8a6f",
+      "tests": 729,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 28.02681509
+    }
+  },
+  "earlierRegression": {
+    "source": {
+      "capturedUtc": "2026-10-07T11:49:35.439Z",
+      "source": [
+        {
+          "path": "bodyguard/backend/tests/run_browser.py",
+          "bytes": 9960,
+          "sha256": "94357ea9d8c91e8017676da8bc81887f33a410a85fdd04434b70a29ddd0caacc"
+        },
+        {
+          "path": "bodyguard/frontend/playwright.account.config.ts",
+          "bytes": 2494,
+          "sha256": "3465fe906f4917dcb39ca45b9ffbba9ff006704d7e58025d2c90ec172f0996fa"
+        },
+        {
+          "path": "bodyguard/frontend/scripts/check-selection-production.mjs",
+          "bytes": 2890,
+          "sha256": "5e923c54d8d3cb6292669635d06dcbe187079fc73d79d58b3f96d4ff11ecd4a3"
+        },
+        {
+          "path": "bodyguard/frontend/e2e/alertdelivery.spec.ts",
+          "bytes": 10784,
+          "sha256": "c10b5455975456ec1b79a32a79d44426331b5f664f5d0faf6d6045157c75d08b"
+        },
+        {
+          "path": "bodyguard/frontend/e2e/fixtures/alertDeliveryProbe.ts",
+          "bytes": 2376,
+          "sha256": "17bd95b5212faf54dc49f82fa5e351a225c573f52efc35cc4553c515cf75fcd2"
+        },
+        {
+          "path": "bodyguard/frontend/e2e/fixtures/alertDelivery.vite.ts",
+          "bytes": 883,
+          "sha256": "55194dab182a59d4faa386b93a1daa9c3d920b51e3d93f362404ca9c330c40d7"
+        },
+        {
+          "path": "bodyguard/frontend/src/alerts/delivery.ts",
+          "bytes": 5969,
+          "sha256": "1b27b32b1fe4796efe9197f2ffc034cde98aeba751fd36fffda41ea318d14c5b"
+        },
+        {
+          "path": "bodyguard/frontend/src/alerts/delivery.test.ts",
+          "bytes": 9272,
+          "sha256": "a8575f64a7361fe40d4767daaa69ce6f6ffb97a244cb467bf7c8a025cbe5b811"
+        },
+        {
+          "path": "bodyguard/frontend/src/alerts/browserNotifications.ts",
+          "bytes": 1546,
+          "sha256": "2b6a157cfa42d863073b25214ebeea31137603326214372c5e386e675161a0e5"
+        },
+        {
+          "path": "bodyguard/frontend/src/alerts/browserNotifications.test.ts",
+          "bytes": 3360,
+          "sha256": "1d01d3159261d8d321bc8e4500d82c063992e442c5f9639eed46dfefafec90e7"
+        },
+        {
+          "path": "bodyguard/frontend/src/alerts/AlertDeliveryPanel.tsx",
+          "bytes": 4800,
+          "sha256": "805d66a81a0dd85f3d9f25dd502d94e2f845102d54477adc09ab9b867f12aded"
+        },
+        {
+          "path": "bodyguard/frontend/src/alerts/AlertDeliveryPanel.test.tsx",
+          "bytes": 6194,
+          "sha256": "334f0b4f246cecfa06e93c50ba631d3b3ddea1cc9c0de4c0cf3ea7744f42cfba"
+        },
+        {
+          "path": "bodyguard/frontend/src/alerts/AlertDeliveryPanel.css",
+          "bytes": 1356,
+          "sha256": "ede0123a2606b4c960aa7a0972afe8dc12f7595abdb4834c3bc64012c719250c"
+        }
+      ],
+      "sourceSetSha256": "affa1e67a95aadea809c09723fe6da9438e07394f917b6898ac78aded3c796ea",
+      "originalUnfinishedSource": {
+        "files": 11,
+        "allUnchanged": true,
+        "preserved": [
+          {
+            "path": "bodyguard/docs/stories/stage4-alert-delivery.md",
+            "bytes": 5720,
+            "sha256": "7cb48c8208d224d4d9c0f88be777651d619f0413e77d0df97a9878c9a5e8d3a8",
+            "unchanged": true
+          },
+          {
+            "path": "bodyguard/frontend/src/alerts/delivery.ts",
+            "bytes": 5694,
+            "sha256": "65d5d93bffbbb4ddef8f147752a070196eaf6f51517b8ebbbcee509a9bcbfe90",
+            "unchanged": true
+          },
+          {
+            "path": "bodyguard/frontend/src/alerts/delivery.test.ts",
+            "bytes": 8496,
+            "sha256": "b02363e97186f7dad2feb94de92dc925cfd6b6022812d193b15fc28470acb099",
+            "unchanged": true
+          },
+          {
+            "path": "bodyguard/frontend/src/alerts/browserNotifications.ts",
+            "bytes": 1546,
+            "sha256": "2b6a157cfa42d863073b25214ebeea31137603326214372c5e386e675161a0e5",
+            "unchanged": true
+          },
+          {
+            "path": "bodyguard/frontend/src/alerts/browserNotifications.test.ts",
+            "bytes": 3360,
+            "sha256": "1d01d3159261d8d321bc8e4500d82c063992e442c5f9639eed46dfefafec90e7",
+            "unchanged": true
+          },
+          {
+            "path": "bodyguard/frontend/src/alerts/AlertDeliveryPanel.tsx",
+            "bytes": 4170,
+            "sha256": "866378ed06d521c10907cb042cdb50540f927a62e5dc5cc7e1e58e37246276bd",
+            "unchanged": true
+          },
+          {
+            "path": "bodyguard/frontend/src/alerts/AlertDeliveryPanel.test.tsx",
+            "bytes": 4201,
+            "sha256": "5d65836e419f08d1b4492278ea8ded925b6456eeaad457cf170a42a78bc25f7a",
+            "unchanged": true
+          },
+          {
+            "path": "bodyguard/frontend/src/alerts/AlertDeliveryPanel.css",
+            "bytes": 1127,
+            "sha256": "7a222feba2d1e739c657b64cd314d2d08f4e305420c13143a6297ec81db8b8f3",
+            "unchanged": true
+          },
+          {
+            "path": "bodyguard/frontend/e2e/alertdelivery.spec.ts",
+            "bytes": 7671,
+            "sha256": "66a9a9b89ec433dc32821c8ef31823b66413232ab538101b9cb5419ec6326e7f",
+            "unchanged": true
+          },
+          {
+            "path": "bodyguard/frontend/e2e/fixtures/alertDeliveryProbe.ts",
+            "bytes": 2002,
+            "sha256": "aeff36738b0aebf2f312cece07e6870ee13ecefe60571ef7b9b82317ae4345f9",
+            "unchanged": true
+          },
+          {
+            "path": "bodyguard/frontend/e2e/fixtures/alertDelivery.vite.ts",
+            "bytes": 883,
+            "sha256": "55194dab182a59d4faa386b93a1daa9c3d920b51e3d93f362404ca9c330c40d7",
+            "unchanged": true
+          }
+        ]
+      }
+    },
+    "dom": {
+      "path": "full-dom-stable.xml",
+      "bytes": 150000,
+      "sha256": "76dd62a98cc23aae0d1df20919e114c05b2cffe50a4013d32f4ae308f53e12ab",
+      "tests": 729,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 27.908120463
+    },
+    "api": {
+      "path": "api-final.xml",
+      "bytes": 59635,
+      "sha256": "8254c96401951dbabd0e7b37d7ea964209a46921d4a2830a7f7b5a3735243844",
+      "tests": 466,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 143.495
+    },
+    "controllerPanelNativeSynthetic": {
+      "path": "components-focus-green.xml",
+      "bytes": 7203,
+      "sha256": "3f7c50f90a0db97676ea838939e376f0bd0b51f2f19b309bba3bb23d8139daf8",
+      "tests": 36,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.095431625
+    },
+    "browser": {
+      "path": "bodyguard/frontend/test-results/alertdelivery-20261007T114605374082Z/report.json",
+      "bytes": 9031,
+      "sha256": "35acaa3be73a458e34c6a9cf70d4f7ffdce574e727a7e0dd2d11cd7962b7d9a7",
+      "startTime": "2026-10-07T11:46:05.973Z",
+      "duration": 10676.629,
+      "expected": 5,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "errors": 0
+    },
+    "publicSelection": {
+      "path": "bodyguard/frontend/test-results/selection-report.json",
+      "bytes": 16071,
+      "sha256": "b5998aea218f6519245ef718e0672f1155cda6dcd5e3741ef6b41628c9ac069e",
+      "startTime": "2026-10-07T11:47:19.411Z",
+      "duration": 19572.678,
+      "expected": 8,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "errors": 0
+    },
+    "productionGuard": {
+      "production_JS_files_checked": 1,
+      "development_catalog_strings": 0,
+      "unconnected_coaching_engine_strings": 0,
+      "unconnected_coaching_resource_strings": 0,
+      "unconnected_coaching_session_strings": 0,
+      "unconnected_observation_loop_strings": 0,
+      "unconnected_result_record_producer_strings": 0,
+      "unconnected_record_owner_capture_strings": 0,
+      "unconnected_recorded_session_strings": 0,
+      "unconnected_auth_coaching_hook_strings": 0,
+      "unconnected_minute_aggregation_strings": 0,
+      "unconnected_owned_minute_upload_strings": 0,
+      "unconnected_alert_delivery_strings": 0
+    },
+    "failuresPreserved": [
+      {
+        "path": "browser-eighth.log",
+        "bytes": 827,
+        "sha256": "f964e844220eb93636283f29ea8b9da99274c978debdd16a8e1833ec9325f76e"
+      },
+      {
+        "path": "browser-fifth.log",
+        "bytes": 4212,
+        "sha256": "de61a679defb5fadfcc5346a12ae12cdbc6652b73962a1d7ec1eac7200a523c5"
+      },
+      {
+        "path": "browser-first.log",
+        "bytes": 366,
+        "sha256": "515d64a80164612d2fa5c8fe08f5b32271ca5002a23bd97fd8b02211e7f1cd8b"
+      },
+      {
+        "path": "browser-fourth.log",
+        "bytes": 8254,
+        "sha256": "36d67ea5afabebf7ec5daec10479cdb2f111fa49f8a378e1a8d00684b5e2804b"
+      },
+      {
+        "path": "browser-ninth.log",
+        "bytes": 2858,
+        "sha256": "59a2a71196cd1781e42512aee12ac9fc21d95adf84904297488f172629f5a799"
+      },
+      {
+        "path": "browser-second.log",
+        "bytes": 8693,
+        "sha256": "88342657d7239f2f1a749d10e8ae980e603bfeb2f0c0fc1ca65546921717e5c2"
+      },
+      {
+        "path": "browser-seventh.log",
+        "bytes": 177,
+        "sha256": "3619999376e8fa6acbdcda90a0de85c70f0bbea63c67dbe4e473bb2be99d28db"
+      },
+      {
+        "path": "browser-sixth.log",
+        "bytes": 2859,
+        "sha256": "78d60fb8d8a62c1e956ac6677fbc61ececfdc7713165b5c6fe473a18c6b4e72e"
+      },
+      {
+        "path": "browser-tenth.log",
+        "bytes": 396,
+        "sha256": "913b5f59cc87f2468dedeecf195c4088c6fb9c4c0685124a9b3866ead410ce25"
+      },
+      {
+        "path": "browser-third.log",
+        "bytes": 8254,
+        "sha256": "f21e43db6fefe0629cffa4ed127ada5fb201c2711b082557d84484bd1a2d497e"
+      },
+      {
+        "path": "full-dom.xml",
+        "bytes": 157462,
+        "sha256": "43bb5cbd8b9e35b0cd055a35ae942f01049988a1180b0c309568901e1bf705b4"
+      },
+      {
+        "path": "integration-final.log",
+        "bytes": 2969,
+        "sha256": "ad9690972111be22059674cc698b504374aee8e890713e38792d9bad3263a1a5"
+      },
+      {
+        "path": "review-red.xml",
+        "bytes": 12594,
+        "sha256": "31a294c4aaaac73c2c9a1a91556c312397b83343819c06056e88e03c0c4d33e3"
+      },
+      {
+        "path": "selection-focus-red.xml",
+        "bytes": 4479,
+        "sha256": "884902874299140b155a2138cdaeb99fd52b2dbae18e9ccab62703c654bae55e"
+      },
+      {
+        "path": "semantic-green.xml",
+        "bytes": 7165,
+        "sha256": "e0d161c5f4e6acd296fd18f62795745c8961f5b19d543896a05a6d87c312bb6e"
+      }
+    ]
+  },
+  "apiRegressionContext": {
+    "executionBaseline": "885392cea785e4fc01d27a724dd8b24e3e3ce721",
+    "latestMainDoesNotChangeApplicationOrSqlSchema": true
+  },
+  "synthetic": {
+    "alertEventsAndAuthority": true,
+    "osGrantedPortAndDialog": true,
+    "mailAndRecordInput": true,
+    "cdpDeniedPolicy": true,
+    "pagehideUnitEvent": true
+  },
+  "actual": {
+    "productionReactChrome": true,
+    "nativeDeniedPermissionState": true,
+    "documentNavigationReclamation": true,
+    "loopbackClosureSignalOnlyEmptyGet": true,
+    "webHttpSqlIntegration": true
+  },
+  "notExecuted": {
+    "actualHumanCamera": true,
+    "actualOsDisplay": true,
+    "actualMailGoogle": true,
+    "avatarClinicalValidation": true,
+    "productionDockerTlsDeployment": true
+  },
+  "publicAlertProducer": 0,
+  "qualifiedLaunchMotions": 0,
+  "priorStory": {
+    "pr": 59,
+    "source": "72755f6b6c9f468c3955255f3f2079df4fdae460",
+    "merge": "db0b53a5a789960abccb191ce5a6d28ae63c728e",
+    "sameTreeAndBranchRetained": true
+  }
+}

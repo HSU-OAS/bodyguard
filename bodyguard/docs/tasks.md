@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-07 웹 알림 전달: [S4.N3](stories/stage4-alert-delivery.md)의 비공개 부품에서 권한 거부 후 화면 안내 유지·스트레칭 살펴보기/닫기·교체/끄기·실제 문서 이탈 폐기와 키보드 초점 복구를 구현했다. 짧은 문구와 기본 접힌 설명을 유지하며 [실제 화면·실패·SHA·미실행 구분](review/alert-delivery/README.md)을 보존했다. 별도 [PR #59](https://github.com/HSU-OAS/bodyguard/pull/59) source72755f6→mergedb0b53a/main 포함·같은 tree·브랜치 보존을 실제 확인하고 그 main에서 전달5/실제 통합2/frontend729·정적/build/guard를 통과했다. 이전 원본11개와 실패를 보존하며 조건부 PR 게이트를 진행한다. 공개 알림 producer·classifier/동작/시범·실제 OS 표시/소리·사진의 최종 아바타·SDK privacy·실측/참여자·디자인 구조/적용·Docker/TLS/외부/운영·전체1~6 완료는 아니다. 기존 승인/이월·같은 아바타 부위 새 제작0을 유지하며 미완료 연결은 후속 필수다. 아래는 시점별 기록이다.
+
 2026-10-07 로그아웃 시험 완료 경계: [S6.6](stories/logout-integration-completion.md)에서 Enter 입력을 서버 폐기 완료로 간주하지 않고 실제204·게스트 화면 확인 뒤 보호 주소를 이동하도록 기존 통합 시험만 보완했다. 초기1통과/1실패와 원본 순서 재실행2통과·이동 직전204 미확인을 모두 보존하고, [최종 실제 흐름·SHA·관측 한계](review/logout-integration-completion/README.md)를 남겼다. 제품 인증/화면/정책 변경0,임의 이탈 서버 폐기 보장/시작 원인 해결/전체1~6 완료가 아니다. 알림 전달 작업은 별도 목적·기존 원본을 보존하며 이 보완의 실제 통합 게이트와 최신 main 통합 후 PR을 진행한다. 기존 디자인 구조 승인·SDK privacy·Docker/외부·아바타/실측·운영 승인 경계는 그대로다. 아래는 시점별 기록이다.
 
 2026-10-07 웹 빌드 고지: [S5.5](stories/web-notice-evidence.md)에서 실제 bundled JS·별도 Tailwind CSS 고지와 누락 차단을 구현·native 검증했다. 기존 JS/CSS/index/brand 출력5개는 byte 동일하고 고지3개만 추가됐다. [실행·실패·한계](review/web-notice-evidence/README.md). PR 게이트를 진행하며 Draft #29 exporter/실제 브라우저 전달·Docker/HTTPS·전체 권리/법무·아바타/실측·최종 코칭·디자인 구조/적용·전체1~6단계는 미완료다. 기존 실패·이월·원본과 승인 규칙은 유지한다. 아래는 시점별 기록이다.

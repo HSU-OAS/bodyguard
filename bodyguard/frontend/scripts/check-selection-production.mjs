@@ -52,6 +52,10 @@ for (const file of files) {
     'Invalid owned minute upload',
     'prepareMinuteUploadProbe',
     'PRIVATE_RAW_FAILURE',
+    'Invalid alert delivery settings',
+    'mountAlertDeliveryProbe',
+    '__private-alert-delivery-probe',
+    'Notification permission requires explicit user activation',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -70,5 +74,6 @@ console.log(
     unconnected_auth_coaching_hook_strings: 0,
     unconnected_minute_aggregation_strings: 0,
     unconnected_owned_minute_upload_strings: 0,
+    unconnected_alert_delivery_strings: 0,
   }),
 )
