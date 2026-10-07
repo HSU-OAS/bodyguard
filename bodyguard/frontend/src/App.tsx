@@ -1,4 +1,4 @@
-import { lazy, type ReactNode, Suspense, useEffect } from 'react'
+import { lazy, type ReactNode, Suspense, useEffect, useRef } from 'react'
 import { BrowserRouter, Link, Navigate, Route, Routes, useLocation } from 'react-router'
 import { AuthProvider, useAuth } from './auth'
 import { AccountPage } from './pages/AccountPage'
@@ -187,7 +187,16 @@ function Home() {
 function Shell() {
   const { state } = useAuth()
   const location = useLocation()
+  const previousFocus = useRef<{ path: string; phase: string | null } | null>(null)
+  // FR-U-04 / release-plan4·6: these protected titles change after account checking.
+  // Public forms and pages with their own focus policy must not react to auth alone.
+  const focusState = /^\/(?:start|explore|account)\/*$/i.test(location.pathname)
+    ? state.status
+    : null
   useEffect(() => {
+    const navigated = previousFocus.current?.path !== location.pathname
+    const phaseChanged = previousFocus.current?.phase !== focusState
+    previousFocus.current = { path: location.pathname, phase: focusState }
     // NFR-08: selection/records pages own their asynchronous title and focus.
     if (
       (MotionSelection && location.pathname === '/dev/select') ||
@@ -197,7 +206,17 @@ function Shell() {
       /^\/records(?:\/[^/]+)?$/.test(location.pathname)
     )
       return
-    document.querySelector<HTMLElement>('main h1')?.focus({ preventScroll: true })
+    const heading = document.querySelector<HTMLElement>('main h1')
+    const active = document.activeElement
+    // Restore a removed/loading target, but preserve a live user-selected control.
+    // NFR-08: never activate an unfocused window and cause another /me refresh.
+    if (
+      document.hasFocus() &&
+      (navigated ||
+        (phaseChanged &&
+          (active === document.body || active === document.documentElement || active === heading)))
+    )
+      heading?.focus({ preventScroll: true })
     document.title = `${
       location.pathname === '/login'
         ? '로그인'
@@ -217,7 +236,7 @@ function Shell() {
                       ? '카메라와 데이터 안내'
                       : '자세 코칭'
     } · BODYGUARD`
-  }, [location.pathname])
+  }, [location.pathname, focusState])
   return (
     <div className="website">
       <button

@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-08 보호 화면 초점 복구: [S6.8](stories/web-focus-recovery.md)에서 계정 확인 뒤 시작·탐색·계정 제목의 초점 상실을 실제 DOM/production Chrome으로 재현·보완했다. 명시 재시도·주소 변형·살아 있는 헤더/본문·공개 입력/FAQ·기록 담당 경계를 확인하고 전체744 DOM/실제 Chrome11·기존 선택8/실제 API·SQL 통합2·정적/build/guard를 통과했다. [실패·원본·범위·작성자 리뷰](review/web-focus-recovery/README.md). 화면 구성·CSS/인증 정책/판정/SDK/아바타/운영 변경0이며 조건부 PR 게이트를 진행한다. 제품 시작 지연 P2의 원인 해결이나 전체1~6 통과가 아니며 디자인 구조/적용·외부 승인·2단계 이월 기준을 유지한다. 아래는 시점별 기록이다.
+
 2026-10-07 시작 회귀 후속 감사: [S6.7](stories/web-startup-recurrence.md)에서 PR #60의 실제 merge11ace02와 이후 선택2통과/6실패·실제 통합0통과/2실패의 보고 누락을 대조했다. 원본8개 비교6통과/2실패·후속 profile3통과/1실패를 보존하고, native Vite 대조로 확인한 helper 개발모드 오류만 보완해 같은 경계4개/730 DOM·정적/build/guard를 통과했다. [수치·원본·미실행/작성자 리뷰](review/web-startup-recurrence/README.md). 이는 별도 CLI 회귀나 제품4초 지연 원인 해결이 아니다. 제품 코드/미승인 UI/인증·판정/SDK·아바타/운영 변경0이며 조건부 PR 게이트를 진행한다. 제품 시작 P2·기존 Draft와 디자인/SDK/Docker·실측/참여자·1~6단계 미완료 기준은 유지한다. 아래는 시점별 기록이다.
 
 2026-10-07 알림 최종 초점 리뷰: S4.N3의 선택 callback이 지정한 목적지 초점을 보존하는 경계를 실제 RED로 확인·보완했다. [추가 증거](review/alert-delivery/focus-handoff-20261007.json)의 부품37/frontend730·실제 Chrome5·타입/정적/build/guard를 통과했으며 이전 실패·36/729 증거는 유지한다. 공개 제품/디자인/인증/판정 변경0·기존 미완료 단계 기준은 그대로이고 PR #60 최신 조건부 게이트를 진행한다.
