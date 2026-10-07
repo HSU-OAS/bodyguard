@@ -5,6 +5,12 @@ baseline_commit: 991ed2b33a1abc6158b3a177f8431a104c476ba0
 
 Status: in-progress
 
+## 2026-10-07 기록 입력 보완 실제 통합
+
+PR #55의 main merge `317cbd15902cc0c8322d318a238fe1f2cd197941`를 기존 작업에 통합했다. 실행 HEAD `43560fcfabd64984cf6c2c079737bfceb56f75cb`에서 기존 입력 유실을 방지하는 guard와 같은 결정적 start/end·StrictMode·URL/삭제 수명 회귀를 포함했다. 전체 frontend749·API492와 실제 production Chrome의 대시보드2/기존 자세 기록4/동작 선택8/strict 시작5, OpenAPI 변경 없음·정적/type/build/guard가 첫 실행에 통과했다. [새 불변 실행 증거](../review/record-dashboard/integrated-20261007/summary.json). 실행 전후 source199개가 같은 실제 결과이며 합성 계정/메일/기록이다.
+
+기존 최초 실패와 이전 불변 증거는 삭제/수정하지 않았다. 초기 effect가 수정 입력을 덮는 결정적 원인·최소 보완·RED/GREEN은 [별도 S6.4](../review/record-period-recovery/README.md)에 있다. 날짜 입력 P2는 이 보완의 통합과 필수 전체 회귀로 닫는다. **과거 시작 실패의 원인/실사용 성능과 디자인 구조/적용 범위는 여전히 미완료**다. PR #51·Story/전체1~6 완료는 선언하지 않는다. 새 화면 구성/제품 디자인 적용/아바타·판정/개인정보·외부/운영 변경0.
+
 ## 2026-10-07 재검증과 최신 디자인 경계
 
 최신 main `39a23ebf2157de2537da9ee6362f5f43c3215ceb`를 통합한 실제 실행 HEAD는 `52f73b2060c0c85d19e4329814ec5adf78a4e509`다. 원본·이전 실패를 보존했고 제품 구현·기존 assertion·시간 제한은 변경하지 않았다. [실행 시점 소스와 수치 증거](../review/record-dashboard/current-20261007/summary.json)를 기록한다.
@@ -50,7 +56,7 @@ Draft PR #51은 유지한다. 최초 간헐 단위 실패, 이전 시작 실패�
 - [x] [Review][Patch][P3] 유한 subnormal 비율도 JSON으로 보낸 float 시간과 동일하게 계산해 decimal/binary 불일치를 제거한다. 최종 blind. `dashboard.py`
 - [x] [Review][Patch][P3] 양수 비율의 underflow도 null·정밀도 안내로 보존하며0%로 바꾸지 않는다. 최종 auditor. API/파서/DOM.
 - [ ] [Verification][P2] 기존 기록/공개 Chrome의 화면 준비 시간 초과 해결 및 필수 회귀 통과. main 격리 비교에서도 공개6실패/2통과지만 원인은 미확정이며 병합 게이트를 열지 않는다. AC6.
-- [ ] [Verification][P2] 2026-10-07 전체 단위 회귀의 날짜 복구 간헐 실패 원인 확인·보완. 첫743 중1실패, 단독3/파일23/두 번째 전체743통과. 실패를 재시도 성공으로 덮지 않는다. AC6.
+- [x] [Verification][P2] 2026-10-07 기록 초기 effect의 날짜 입력 덮어쓰기를 별도 S6.4에서 결정적으로 재현·보완하고 main317cbd1을 실제 통합했다. 동일 입력 경계6/기존23 포함 전체749와 실제 기록 Chrome4 통과. 원본 첫743 중1실패와 단독/재실행 증거는 보존한다. 시작 지연·실사용 성능 게이트를 닫지 않는다. AC6.
 - [ ] [Design] 기존 대시보드의 새 구조/제품 적용 범위 합의와 텍스트 최소화·전체 상태 재검증. v4 분위기 승인을 전체 웹 구조 승인으로 해석하지 않는다. AC4/6.
 
 재검토 첫 실행의 auditor는 사용량 제한으로 실패했다. 제한 해제 후 새3역할로 다시 실행해 auditor는 새 위반0, blind1/edge5개의 경계 보완을 보고했다. 위 numeric 두 항목·빈 기간/partition 두 항목·역사 날짜·ZoneInfo를6개로 추적하며 실제 새 회귀를 먼저 실패시킨 뒤 보완한다. 초기 브라우저 지연 및 기존 기록/공개 회귀의5초 실패는 해결/성능 통과로 세지 않는다.
