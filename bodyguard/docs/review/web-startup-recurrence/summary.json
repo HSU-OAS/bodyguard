@@ -1,0 +1,1734 @@
+{
+  "story": "S6.7",
+  "execution": "main 11ace02 plus working diagnostic helper before evidence commit",
+  "objectiveComplete": false,
+  "productCodeChanges": 0,
+  "historicalRegression": {
+    "selection": {
+      "path": "/private/tmp/bodyguard-startup-recurrence.ayridM/selection-report.json",
+      "sha256": "e4049e7b4fb44d830eb1a9f55929f6dd29f816fee717c2917a1918d37529b9e9",
+      "counts": {
+        "passed": 2,
+        "failed": 6,
+        "skipped": 0
+      }
+    },
+    "integration": {
+      "path": "/private/tmp/bodyguard-startup-recurrence.ayridM/integration-20261007T121006602879Z__report.json",
+      "sha256": "8e60002acc4942793d597ea55248f1027be75309e58adb34f598147ff0a508a9",
+      "counts": {
+        "passed": 0,
+        "failed": 2,
+        "skipped": 0
+      }
+    }
+  },
+  "previousComparison": {
+    "path": "/private/tmp/bodyguard-startup-recurrence.ayridM/observations.json",
+    "sha256": "3d6fc8c2e07deb1daf8fe205081f188ac1c12a5679cced6da890cc9f6a2ade51",
+    "executedHead": "db0b53a5a789960abccb191ce5a6d28ae63c728e",
+    "browser": "154.0.8037.98",
+    "mode": "comparison",
+    "developmentIsProduction": null,
+    "profilingChangesTiming": false,
+    "actualBrowser": true,
+    "actualAuth": false,
+    "actualHuman": false,
+    "productGatePassed": false,
+    "sourceFiles": 125,
+    "sourceSetSha256": "277d12429cdbd6c2b384d2888e36f17b7ae60d169b44311f889aaaac180e835e",
+    "sourceUnchanged": true,
+    "headUnchanged": true,
+    "candidateCssUnchanged": true,
+    "normalCleanupCompleted": true,
+    "helper": {
+      "path": "scripts/probe-startup-recurrence.mjs",
+      "sha256": "f5f9d6e45ebc8def3644d74dfdbb3464a10007bf864a2ff4b2eb858c3b999101"
+    },
+    "dist": [
+      {
+        "path": "dist/assets/index-BZhaXPyN.js",
+        "sha256": "334736692ea127d229c8a1ead7e031ad0652c53e559cb2e4ae3eb95fd3dc8989"
+      },
+      {
+        "path": "dist/assets/index-FW13lazw.css",
+        "sha256": "3db1ea79a56892552afda1e0aba982f971b1f752e6647cd39a3be9441fc58686"
+      },
+      {
+        "path": "dist/brand/google-icon.png",
+        "sha256": "2bc2ae8e4c67de66d74bf1deed12cd8f22981270266a487576b671b0b4df361c"
+      },
+      {
+        "path": "dist/brand/README.md",
+        "sha256": "6a7c4f147ed207317f1445f2c1fd97ba2f66c7b298f4c278fc0f26a6b9d22a84"
+      },
+      {
+        "path": "dist/index.html",
+        "sha256": "05fc0c89e74f8a51c0039d0192ebba1d24303c27a70983758715fce380055b07"
+      },
+      {
+        "path": "dist/licenses/bundled-js.json",
+        "sha256": "19f0c9961dd082bcebb1ba8dfdde98ef58c843cdb0ea4973a47a91b46c940cd7"
+      },
+      {
+        "path": "dist/licenses/bundled-packages.json",
+        "sha256": "1c80ec2f6a9ad967f999232165821bf4d27ff55197ea21c4e049ff2f974efb54"
+      },
+      {
+        "path": "dist/licenses/tailwindcss.txt",
+        "sha256": "0045fac7ef9a1530b1e59eacde31c4823bfbc8881ad2e543bc82c70c38cfcfd8"
+      },
+      {
+        "path": "dist/mediapipe/VERSION",
+        "sha256": "d51e6ec94058554a84558a5b402ee6ef5fdf5455e35c902feda61cda8752943a"
+      },
+      {
+        "path": "dist/mediapipe/wasm/vision_wasm_internal.js",
+        "sha256": "e170ee67dd4e16c1a6fcd8840a206687e5a59b22c20e4a902bc445b095454d73"
+      },
+      {
+        "path": "dist/mediapipe/wasm/vision_wasm_internal.wasm",
+        "sha256": "8da277a733926eacd0474b8704b36742d6ec3231c57a860c5b889dff8f1df886"
+      },
+      {
+        "path": "dist/mediapipe/wasm/vision_wasm_module_internal.js",
+        "sha256": "da8934057f147b622e82cfb4c0dbd85461c598e268588b5a8ba9ca963a8ff82d"
+      },
+      {
+        "path": "dist/mediapipe/wasm/vision_wasm_module_internal.wasm",
+        "sha256": "2dabd8e23c60984628beb7bb338764c81a08e6837145273f59578684b5d53c1b"
+      },
+      {
+        "path": "dist/mediapipe/wasm/vision_wasm_nosimd_internal.js",
+        "sha256": "e81d715a3d42cc3373602eb2f7aff795d164934db680e32496b65dab537f9658"
+      },
+      {
+        "path": "dist/mediapipe/wasm/vision_wasm_nosimd_internal.wasm",
+        "sha256": "a28483cd42e74e855bf5ebdb6b40d9b66a5b49e35e95020bc97669e6822a3192"
+      },
+      {
+        "path": "dist/models/face_landmarker.task",
+        "sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff"
+      },
+      {
+        "path": "dist/models/gesture_recognizer.task",
+        "sha256": "97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482"
+      },
+      {
+        "path": "dist/models/pose_landmarker_full.task",
+        "sha256": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1"
+      },
+      {
+        "path": "dist/models/pose_landmarker_heavy.task",
+        "sha256": "64437af838a65d18e5ba7a0d39b465540069bc8aae8308de3e318aad31fcbc7b"
+      },
+      {
+        "path": "dist/models/pose_landmarker_lite.task",
+        "sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+      }
+    ],
+    "candidateCssSha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e",
+    "samples": [
+      {
+        "transport": "http",
+        "surface": "native",
+        "navigationPassed": true,
+        "selectorPassed": true,
+        "gotoMs": 433.3145829999994,
+        "observed": {
+          "probe": {
+            "headingMs": 436.69999998807907,
+            "fetch": [
+              {
+                "startMs": 283.09999999403954,
+                "responseMs": 422.59999999403954,
+                "jsonEndMs": 431.29999999701977,
+                "failed": false
+              }
+            ],
+            "longTasks": 0,
+            "longTaskTotalMs": 0,
+            "longTaskMaxMs": 0,
+            "timerCount": 3,
+            "timerMaxLateMs": 292.69999998807907,
+            "rafCount": 0,
+            "rafMaxGapMs": 0,
+            "cameraCalls": 0,
+            "headingFocused": false
+          },
+          "visible": true,
+          "localStorageCount": 0,
+          "sessionStorageCount": 0,
+          "observedMs": 1083.2999999970198,
+          "headingFocused": false
+        },
+        "boundary": {
+          "pageErrors": 0,
+          "external": 0,
+          "unexpectedApi": 0,
+          "models": 0
+        }
+      },
+      {
+        "transport": "http",
+        "surface": "baseline",
+        "navigationPassed": true,
+        "selectorPassed": true,
+        "gotoMs": 1273.359708,
+        "observed": {
+          "probe": {
+            "headingMs": 4970.9000000059605,
+            "fetch": [
+              {
+                "startMs": 2673.2000000029802,
+                "responseMs": 2734.4000000059605,
+                "jsonEndMs": 3682.5,
+                "failed": false
+              }
+            ],
+            "longTasks": 11,
+            "longTaskTotalMs": 4217,
+            "longTaskMaxMs": 1269,
+            "timerCount": 6,
+            "timerMaxLateMs": 1770,
+            "rafCount": 24,
+            "rafMaxGapMs": 1269.3999999910593,
+            "cameraCalls": 0,
+            "headingFocused": false
+          },
+          "visible": true,
+          "localStorageCount": 0,
+          "sessionStorageCount": 0,
+          "observedMs": 5813.800000011921,
+          "headingFocused": false
+        },
+        "boundary": {
+          "pageErrors": 0,
+          "external": 0,
+          "unexpectedApi": 0,
+          "models": 0
+        }
+      },
+      {
+        "transport": "http",
+        "surface": "candidate-css",
+        "navigationPassed": true,
+        "selectorPassed": true,
+        "gotoMs": 953.7384999999995,
+        "observed": {
+          "probe": {
+            "headingMs": 4443.70000000298,
+            "fetch": [
+              {
+                "startMs": 2259.300000011921,
+                "responseMs": 2305,
+                "jsonEndMs": 3278,
+                "failed": false
+              }
+            ],
+            "longTasks": 10,
+            "longTaskTotalMs": 3974,
+            "longTaskMaxMs": 1149,
+            "timerCount": 8,
+            "timerMaxLateMs": 1593.5,
+            "rafCount": 16,
+            "rafMaxGapMs": 1154.0999999940395,
+            "cameraCalls": 0,
+            "headingFocused": false
+          },
+          "visible": true,
+          "localStorageCount": 0,
+          "sessionStorageCount": 0,
+          "observedMs": 5239,
+          "headingFocused": false
+        },
+        "boundary": {
+          "pageErrors": 0,
+          "external": 0,
+          "unexpectedApi": 0,
+          "models": 0
+        }
+      },
+      {
+        "transport": "fulfill",
+        "surface": "native",
+        "navigationPassed": true,
+        "selectorPassed": true,
+        "gotoMs": 270.32329200000095,
+        "observed": {
+          "probe": {
+            "headingMs": 515,
+            "fetch": [
+              {
+                "startMs": 165.90000000596046,
+                "responseMs": 298.70000000298023,
+                "jsonEndMs": 511,
+                "failed": false
+              }
+            ],
+            "longTasks": 2,
+            "longTaskTotalMs": 132,
+            "longTaskMaxMs": 79,
+            "timerCount": 3,
+            "timerMaxLateMs": 305,
+            "rafCount": 7,
+            "rafMaxGapMs": 314.3999999910593,
+            "cameraCalls": 0,
+            "headingFocused": false
+          },
+          "visible": true,
+          "localStorageCount": 0,
+          "sessionStorageCount": 0,
+          "observedMs": 931.1000000089407,
+          "headingFocused": false
+        },
+        "boundary": {
+          "pageErrors": 0,
+          "external": 0,
+          "unexpectedApi": 0,
+          "models": 0
+        }
+      },
+      {
+        "transport": "fulfill",
+        "surface": "baseline",
+        "navigationPassed": true,
+        "selectorPassed": true,
+        "gotoMs": 923.8196250000001,
+        "observed": {
+          "probe": {
+            "headingMs": 4655,
+            "fetch": [
+              {
+                "startMs": 2262.2999999970198,
+                "responseMs": 3152.7999999970198,
+                "jsonEndMs": 3355.9000000059605,
+                "failed": false
+              }
+            ],
+            "longTasks": 12,
+            "longTaskTotalMs": 4134,
+            "longTaskMaxMs": 1280,
+            "timerCount": 7,
+            "timerMaxLateMs": 1703.2000000029802,
+            "rafCount": 26,
+            "rafMaxGapMs": 1281.2999999970198,
+            "cameraCalls": 0,
+            "headingFocused": false
+          },
+          "visible": true,
+          "localStorageCount": 0,
+          "sessionStorageCount": 0,
+          "observedMs": 5402.600000008941,
+          "headingFocused": false
+        },
+        "boundary": {
+          "pageErrors": 0,
+          "external": 0,
+          "unexpectedApi": 0,
+          "models": 0
+        }
+      },
+      {
+        "transport": "fulfill",
+        "surface": "candidate-css",
+        "navigationPassed": true,
+        "selectorPassed": true,
+        "gotoMs": 902.9524170000004,
+        "observed": {
+          "probe": {
+            "headingMs": 4308.79999999702,
+            "fetch": [
+              {
+                "startMs": 2147.4000000059605,
+                "responseMs": 2940.7999999970198,
+                "jsonEndMs": 3103.9000000059605,
+                "failed": false
+              }
+            ],
+            "longTasks": 11,
+            "longTaskTotalMs": 3857,
+            "longTaskMaxMs": 1190,
+            "timerCount": 6,
+            "timerMaxLateMs": 1716.5,
+            "rafCount": 25,
+            "rafMaxGapMs": 1190.9000000059605,
+            "cameraCalls": 0,
+            "headingFocused": false
+          },
+          "visible": true,
+          "localStorageCount": 0,
+          "sessionStorageCount": 0,
+          "observedMs": 5178.4000000059605,
+          "headingFocused": false
+        },
+        "boundary": {
+          "pageErrors": 0,
+          "external": 0,
+          "unexpectedApi": 0,
+          "models": 0
+        }
+      },
+      {
+        "transport": "fulfill",
+        "surface": "development-selection",
+        "navigationPassed": true,
+        "selectorPassed": false,
+        "gotoMs": 1533.0198750000054,
+        "failurePhase": "heading",
+        "observed": {
+          "probe": {
+            "headingMs": null,
+            "fetch": [
+              {
+                "startMs": 3166.3999999910593,
+                "responseMs": 4090.2999999970198,
+                "jsonEndMs": 4333.199999988079,
+                "failed": false
+              }
+            ],
+            "longTasks": 11,
+            "longTaskTotalMs": 4596,
+            "longTaskMaxMs": 1146,
+            "timerCount": 11,
+            "timerMaxLateMs": 2148.6000000089407,
+            "rafCount": 46,
+            "rafMaxGapMs": 1147.2000000029802,
+            "cameraCalls": 0,
+            "headingFocused": false
+          },
+          "visible": true,
+          "localStorageCount": 0,
+          "sessionStorageCount": 0,
+          "observedMs": 6587.699999988079,
+          "headingFocused": true
+        },
+        "boundary": {
+          "pageErrors": 0,
+          "external": 0,
+          "unexpectedApi": 0,
+          "models": 0
+        }
+      },
+      {
+        "transport": "fulfill",
+        "surface": "public-help",
+        "navigationPassed": true,
+        "selectorPassed": false,
+        "gotoMs": 975.3192909999998,
+        "failurePhase": "heading",
+        "observed": {
+          "probe": {
+            "headingMs": 3067.2999999970198,
+            "fetch": [
+              {
+                "startMs": 4222.4000000059605,
+                "responseMs": 5597.70000000298,
+                "jsonEndMs": 6007.4000000059605,
+                "failed": false
+              }
+            ],
+            "longTasks": 8,
+            "longTaskTotalMs": 4844,
+            "longTaskMaxMs": 2054,
+            "timerCount": 5,
+            "timerMaxLateMs": 3264.7999999970198,
+            "rafCount": 20,
+            "rafMaxGapMs": 2106.7000000029802,
+            "cameraCalls": 0,
+            "headingFocused": false
+          },
+          "visible": true,
+          "localStorageCount": 0,
+          "sessionStorageCount": 0,
+          "observedMs": 6046.5,
+          "headingFocused": true
+        },
+        "boundary": {
+          "pageErrors": 0,
+          "external": 0,
+          "unexpectedApi": 0,
+          "models": 0
+        }
+      }
+    ]
+  },
+  "firstProfile": {
+    "path": "/private/tmp/bodyguard-startup-profile.29lj4e/observations.json",
+    "sha256": "3228b8c03d2404219ee06a466730a5192e182bf4b1210b86a03597827e0a2a3f",
+    "executedHead": "11ace0279eff57ccf900375afcd242e9cf7af69b",
+    "browser": "154.0.8037.98",
+    "mode": "profile",
+    "developmentIsProduction": null,
+    "profilingChangesTiming": true,
+    "actualBrowser": true,
+    "actualAuth": false,
+    "actualHuman": false,
+    "productGatePassed": false,
+    "sourceFiles": 132,
+    "sourceSetSha256": "17aa8fd627fe5c2bf632df6e260e4288ec7f5b0849f79d068b27778230b46e43",
+    "sourceUnchanged": true,
+    "headUnchanged": true,
+    "candidateCssUnchanged": true,
+    "normalCleanupCompleted": true,
+    "helper": {
+      "path": "scripts/probe-startup-recurrence.mjs",
+      "sha256": "e558b9c8555f5bacd9e16d519db0a8251508a74b8d297a5d01b3b67c11417b52"
+    },
+    "dist": [
+      {
+        "path": "dist/assets/index-DMhBge-_.js",
+        "sha256": "334736692ea127d229c8a1ead7e031ad0652c53e559cb2e4ae3eb95fd3dc8989"
+      },
+      {
+        "path": "dist/assets/index-dNUNBpCv.css",
+        "sha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e"
+      },
+      {
+        "path": "dist/brand/google-icon.png",
+        "sha256": "2bc2ae8e4c67de66d74bf1deed12cd8f22981270266a487576b671b0b4df361c"
+      },
+      {
+        "path": "dist/brand/README.md",
+        "sha256": "6a7c4f147ed207317f1445f2c1fd97ba2f66c7b298f4c278fc0f26a6b9d22a84"
+      },
+      {
+        "path": "dist/index.html",
+        "sha256": "90aa5053001f64b880afc13c9c4563281459e617bc190f57bd241c0327e89d1e"
+      },
+      {
+        "path": "dist/licenses/bundled-js.json",
+        "sha256": "19f0c9961dd082bcebb1ba8dfdde98ef58c843cdb0ea4973a47a91b46c940cd7"
+      },
+      {
+        "path": "dist/licenses/bundled-packages.json",
+        "sha256": "1c80ec2f6a9ad967f999232165821bf4d27ff55197ea21c4e049ff2f974efb54"
+      },
+      {
+        "path": "dist/licenses/tailwindcss.txt",
+        "sha256": "0045fac7ef9a1530b1e59eacde31c4823bfbc8881ad2e543bc82c70c38cfcfd8"
+      },
+      {
+        "path": "dist/mediapipe/VERSION",
+        "sha256": "d51e6ec94058554a84558a5b402ee6ef5fdf5455e35c902feda61cda8752943a"
+      },
+      {
+        "path": "dist/mediapipe/wasm/vision_wasm_internal.js",
+        "sha256": "e170ee67dd4e16c1a6fcd8840a206687e5a59b22c20e4a902bc445b095454d73"
+      },
+      {
+        "path": "dist/mediapipe/wasm/vision_wasm_internal.wasm",
+        "sha256": "8da277a733926eacd0474b8704b36742d6ec3231c57a860c5b889dff8f1df886"
+      },
+      {
+        "path": "dist/mediapipe/wasm/vision_wasm_module_internal.js",
+        "sha256": "da8934057f147b622e82cfb4c0dbd85461c598e268588b5a8ba9ca963a8ff82d"
+      },
+      {
+        "path": "dist/mediapipe/wasm/vision_wasm_module_internal.wasm",
+        "sha256": "2dabd8e23c60984628beb7bb338764c81a08e6837145273f59578684b5d53c1b"
+      },
+      {
+        "path": "dist/mediapipe/wasm/vision_wasm_nosimd_internal.js",
+        "sha256": "e81d715a3d42cc3373602eb2f7aff795d164934db680e32496b65dab537f9658"
+      },
+      {
+        "path": "dist/mediapipe/wasm/vision_wasm_nosimd_internal.wasm",
+        "sha256": "a28483cd42e74e855bf5ebdb6b40d9b66a5b49e35e95020bc97669e6822a3192"
+      },
+      {
+        "path": "dist/models/face_landmarker.task",
+        "sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff"
+      },
+      {
+        "path": "dist/models/gesture_recognizer.task",
+        "sha256": "97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482"
+      },
+      {
+        "path": "dist/models/pose_landmarker_full.task",
+        "sha256": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1"
+      },
+      {
+        "path": "dist/models/pose_landmarker_heavy.task",
+        "sha256": "64437af838a65d18e5ba7a0d39b465540069bc8aae8308de3e318aad31fcbc7b"
+      },
+      {
+        "path": "dist/models/pose_landmarker_lite.task",
+        "sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+      }
+    ],
+    "candidateCssSha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e",
+    "samples": [
+      {
+        "transport": "http",
+        "surface": "native",
+        "navigationPassed": true,
+        "selectorPassed": true,
+        "gotoMs": 35.2192500000001,
+        "observed": {
+          "probe": {
+            "headingMs": 29.900000005960464,
+            "fetch": [
+              {
+                "startMs": 20.200000002980232,
+                "responseMs": 29.200000002980232,
+                "jsonEndMs": 29.600000008940697,
+                "failed": false
+              }
+            ],
+            "longTasks": 0,
+            "longTaskTotalMs": 0,
+            "longTaskMaxMs": 0,
+            "timerCount": 0,
+            "timerMaxLateMs": 0,
+            "rafCount": 0,
+            "rafMaxGapMs": 0,
+            "cameraCalls": 0,
+            "headingFocused": false
+          },
+          "visible": true,
+          "localStorageCount": 0,
+          "sessionStorageCount": 0,
+          "observedMs": 113.70000000298023,
+          "headingFocused": false
+        },
+        "boundary": {
+          "pageErrors": 0,
+          "external": 0,
+          "unexpectedApi": 0,
+          "models": 0
+        },
+        "metrics": {
+          "LayoutDuration": 0.032783,
+          "RecalcStyleDuration": 0.000201,
+          "ScriptDuration": 0.000789,
+          "TaskDuration": 0.056813,
+          "JSHeapUsedSize": 2154596
+        },
+        "profile": {
+          "durationMs": 102.882,
+          "samples": 83,
+          "top": [
+            {
+              "symbol": "computeBox",
+              "source": "browser-or-harness",
+              "sampledMs": 38.688
+            },
+            {
+              "symbol": "(program)",
+              "source": "browser-or-harness",
+              "sampledMs": 30.866
+            },
+            {
+              "symbol": "(idle)",
+              "source": "browser-or-harness",
+              "sampledMs": 25.938
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "browser-or-harness",
+              "sampledMs": 1.302
+            },
+            {
+              "symbol": "InjectedScript",
+              "source": "browser-or-harness",
+              "sampledMs": 1.274
+            },
+            {
+              "symbol": "computeElementStyleVisibilityVisible",
+              "source": "browser-or-harness",
+              "sampledMs": 1.271
+            },
+            {
+              "symbol": "getCSSContent",
+              "source": "browser-or-harness",
+              "sampledMs": 1.243
+            },
+            {
+              "symbol": "fetch",
+              "source": "browser-or-harness",
+              "sampledMs": 1.099
+            },
+            {
+              "symbol": "readIdentifier",
+              "source": "browser-or-harness",
+              "sampledMs": 1.009
+            }
+          ]
+        }
+      },
+      {
+        "transport": "http",
+        "surface": "baseline",
+        "navigationPassed": true,
+        "selectorPassed": true,
+        "gotoMs": 79.66224999999986,
+        "observed": {
+          "probe": {
+            "headingMs": 118.70000000298023,
+            "fetch": [
+              {
+                "startMs": 109.40000000596046,
+                "responseMs": 113,
+                "jsonEndMs": 116.6000000089407,
+                "failed": false
+              }
+            ],
+            "longTasks": 0,
+            "longTaskTotalMs": 0,
+            "longTaskMaxMs": 0,
+            "timerCount": 1,
+            "timerMaxLateMs": 0.7000000029802322,
+            "rafCount": 2,
+            "rafMaxGapMs": 32.8999999910593,
+            "cameraCalls": 0,
+            "headingFocused": false
+          },
+          "visible": true,
+          "localStorageCount": 0,
+          "sessionStorageCount": 0,
+          "observedMs": 151.40000000596046,
+          "headingFocused": false
+        },
+        "boundary": {
+          "pageErrors": 0,
+          "external": 0,
+          "unexpectedApi": 0,
+          "models": 0
+        },
+        "metrics": {
+          "LayoutDuration": 0.019508,
+          "RecalcStyleDuration": 0.002107,
+          "ScriptDuration": 0.031625,
+          "TaskDuration": 0.075414,
+          "JSHeapUsedSize": 3143948
+        },
+        "profile": {
+          "durationMs": 142.204,
+          "samples": 111,
+          "top": [
+            {
+              "symbol": "(idle)",
+              "source": "browser-or-harness",
+              "sampledMs": 54.993
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "product",
+              "sampledMs": 19.09
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "product",
+              "sampledMs": 18.728
+            },
+            {
+              "symbol": "(program)",
+              "source": "browser-or-harness",
+              "sampledMs": 15.251
+            },
+            {
+              "symbol": "computeBox",
+              "source": "browser-or-harness",
+              "sampledMs": 7.512
+            },
+            {
+              "symbol": "ff",
+              "source": "product",
+              "sampledMs": 2.526
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "product",
+              "sampledMs": 1.341
+            },
+            {
+              "symbol": "Rs",
+              "source": "product",
+              "sampledMs": 1.333
+            },
+            {
+              "symbol": "Fu",
+              "source": "product",
+              "sampledMs": 1.297
+            },
+            {
+              "symbol": "np",
+              "source": "product",
+              "sampledMs": 1.293
+            },
+            {
+              "symbol": "queryRole",
+              "source": "browser-or-harness",
+              "sampledMs": 1.287
+            },
+            {
+              "symbol": "(garbage collector)",
+              "source": "browser-or-harness",
+              "sampledMs": 1.278
+            },
+            {
+              "symbol": "Qo",
+              "source": "product",
+              "sampledMs": 1.273
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "product",
+              "sampledMs": 1.271
+            },
+            {
+              "symbol": "useState",
+              "source": "product",
+              "sampledMs": 1.263
+            }
+          ]
+        }
+      },
+      {
+        "transport": "fulfill",
+        "surface": "development-selection",
+        "navigationPassed": true,
+        "selectorPassed": false,
+        "gotoMs": 284.5864590000001,
+        "failurePhase": "heading",
+        "observed": {
+          "probe": {
+            "headingMs": null,
+            "fetch": [
+              {
+                "startMs": 313.79999999701977,
+                "responseMs": 320.79999999701977,
+                "jsonEndMs": 320.8999999910593,
+                "failed": false
+              }
+            ],
+            "longTasks": 0,
+            "longTaskTotalMs": 0,
+            "longTaskMaxMs": 0,
+            "timerCount": 50,
+            "timerMaxLateMs": 28.200000002980232,
+            "rafCount": 120,
+            "rafMaxGapMs": 384.5,
+            "cameraCalls": 0,
+            "headingFocused": false
+          },
+          "visible": true,
+          "localStorageCount": 0,
+          "sessionStorageCount": 0,
+          "observedMs": 5289.0999999940395,
+          "headingFocused": true
+        },
+        "boundary": {
+          "pageErrors": 0,
+          "external": 0,
+          "unexpectedApi": 0,
+          "models": 0
+        },
+        "metrics": {
+          "LayoutDuration": 0.011158,
+          "RecalcStyleDuration": 0.001039,
+          "ScriptDuration": 0.039837,
+          "TaskDuration": 0.116741,
+          "JSHeapUsedSize": 6876704
+        },
+        "profile": {
+          "durationMs": 5269.651,
+          "samples": 4183,
+          "top": [
+            {
+              "symbol": "(idle)",
+              "source": "browser-or-harness",
+              "sampledMs": 5105.985
+            },
+            {
+              "symbol": "(program)",
+              "source": "browser-or-harness",
+              "sampledMs": 92.518
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "product",
+              "sampledMs": 13.807
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "product",
+              "sampledMs": 10.044
+            },
+            {
+              "symbol": "requestAnimationFrame",
+              "source": "browser-or-harness",
+              "sampledMs": 2.522
+            },
+            {
+              "symbol": "setTimeout",
+              "source": "browser-or-harness",
+              "sampledMs": 2.514
+            },
+            {
+              "symbol": "createInvokeableTransport",
+              "source": "native-or-harness",
+              "sampledMs": 1.289
+            },
+            {
+              "symbol": "exports.useContext",
+              "source": "native-or-harness",
+              "sampledMs": 1.287
+            },
+            {
+              "symbol": "computeAriaRole",
+              "source": "browser-or-harness",
+              "sampledMs": 1.285
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "native-or-harness",
+              "sampledMs": 1.284
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "browser-or-harness",
+              "sampledMs": 1.276
+            },
+            {
+              "symbol": "getImplicitAriaRole",
+              "source": "browser-or-harness",
+              "sampledMs": 1.276
+            },
+            {
+              "symbol": "getComputedStyle",
+              "source": "browser-or-harness",
+              "sampledMs": 1.272
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "browser-or-harness",
+              "sampledMs": 1.272
+            },
+            {
+              "symbol": "performWorkUntilDeadline",
+              "source": "native-or-harness",
+              "sampledMs": 1.271
+            }
+          ]
+        }
+      },
+      {
+        "transport": "fulfill",
+        "surface": "public-help",
+        "navigationPassed": true,
+        "selectorPassed": true,
+        "gotoMs": 63.42566699999952,
+        "observed": {
+          "probe": {
+            "headingMs": 71.5,
+            "fetch": [
+              {
+                "startMs": 101.80000001192093,
+                "responseMs": 108.70000000298023,
+                "jsonEndMs": 108.80000001192093,
+                "failed": false
+              }
+            ],
+            "longTasks": 0,
+            "longTaskTotalMs": 0,
+            "longTaskMaxMs": 0,
+            "timerCount": 0,
+            "timerMaxLateMs": 0,
+            "rafCount": 5,
+            "rafMaxGapMs": 24.69999998807907,
+            "cameraCalls": 0,
+            "headingFocused": false
+          },
+          "visible": true,
+          "localStorageCount": 0,
+          "sessionStorageCount": 0,
+          "observedMs": 112.40000000596046,
+          "headingFocused": true
+        },
+        "boundary": {
+          "pageErrors": 0,
+          "external": 0,
+          "unexpectedApi": 0,
+          "models": 0
+        },
+        "metrics": {
+          "LayoutDuration": 0.013782,
+          "RecalcStyleDuration": 0.001785,
+          "ScriptDuration": 0.030181,
+          "TaskDuration": 0.067703,
+          "JSHeapUsedSize": 3160000
+        },
+        "profile": {
+          "durationMs": 103.734,
+          "samples": 82,
+          "top": [
+            {
+              "symbol": "(program)",
+              "source": "browser-or-harness",
+              "sampledMs": 36.472
+            },
+            {
+              "symbol": "(idle)",
+              "source": "browser-or-harness",
+              "sampledMs": 30.089
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "product",
+              "sampledMs": 12.704
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "product",
+              "sampledMs": 2.488
+            },
+            {
+              "symbol": "ef",
+              "source": "product",
+              "sampledMs": 1.28
+            },
+            {
+              "symbol": "queryAll",
+              "source": "browser-or-harness",
+              "sampledMs": 1.275
+            },
+            {
+              "symbol": "createElement",
+              "source": "browser-or-harness",
+              "sampledMs": 1.271
+            },
+            {
+              "symbol": "(redacted)",
+              "source": "browser-or-harness",
+              "sampledMs": 1.269
+            },
+            {
+              "symbol": "Zd",
+              "source": "product",
+              "sampledMs": 1.268
+            },
+            {
+              "symbol": "InjectedScript",
+              "source": "browser-or-harness",
+              "sampledMs": 1.263
+            },
+            {
+              "symbol": "fetch",
+              "source": "browser-or-harness",
+              "sampledMs": 1.262
+            },
+            {
+              "symbol": "e.createElement",
+              "source": "product",
+              "sampledMs": 1.26
+            },
+            {
+              "symbol": "ye",
+              "source": "product",
+              "sampledMs": 1.258
+            },
+            {
+              "symbol": "getImplicitAriaRole",
+              "source": "browser-or-harness",
+              "sampledMs": 1.256
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "product",
+              "sampledMs": 1.255
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "finalProfile": {
+    "path": "/private/tmp/bodyguard-startup-profile.G2ih79/observations.json",
+    "sha256": "c0b5cb396a0542426663490d1cc8ee75a0ce0e67921a833284816419775961b3",
+    "executedHead": "11ace0279eff57ccf900375afcd242e9cf7af69b",
+    "browser": "154.0.8037.98",
+    "mode": "profile",
+    "developmentIsProduction": false,
+    "profilingChangesTiming": true,
+    "actualBrowser": true,
+    "actualAuth": false,
+    "actualHuman": false,
+    "productGatePassed": false,
+    "sourceFiles": 132,
+    "sourceSetSha256": "3e9f1f01f64e18371c1ac8d101dcee3d7de4edcd0f8366254d9d1f6cdc45bc12",
+    "sourceUnchanged": true,
+    "headUnchanged": true,
+    "candidateCssUnchanged": true,
+    "normalCleanupCompleted": true,
+    "helper": {
+      "path": "scripts/probe-startup-recurrence.mjs",
+      "sha256": "584929dfdf8ca36ceab98be46a1680fdb31c6511d3213cb5efc1bb5a28f344cc"
+    },
+    "dist": [
+      {
+        "path": "dist/assets/index-DMhBge-_.js",
+        "sha256": "334736692ea127d229c8a1ead7e031ad0652c53e559cb2e4ae3eb95fd3dc8989"
+      },
+      {
+        "path": "dist/assets/index-dNUNBpCv.css",
+        "sha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e"
+      },
+      {
+        "path": "dist/brand/google-icon.png",
+        "sha256": "2bc2ae8e4c67de66d74bf1deed12cd8f22981270266a487576b671b0b4df361c"
+      },
+      {
+        "path": "dist/brand/README.md",
+        "sha256": "6a7c4f147ed207317f1445f2c1fd97ba2f66c7b298f4c278fc0f26a6b9d22a84"
+      },
+      {
+        "path": "dist/index.html",
+        "sha256": "90aa5053001f64b880afc13c9c4563281459e617bc190f57bd241c0327e89d1e"
+      },
+      {
+        "path": "dist/licenses/bundled-js.json",
+        "sha256": "19f0c9961dd082bcebb1ba8dfdde98ef58c843cdb0ea4973a47a91b46c940cd7"
+      },
+      {
+        "path": "dist/licenses/bundled-packages.json",
+        "sha256": "1c80ec2f6a9ad967f999232165821bf4d27ff55197ea21c4e049ff2f974efb54"
+      },
+      {
+        "path": "dist/licenses/tailwindcss.txt",
+        "sha256": "0045fac7ef9a1530b1e59eacde31c4823bfbc8881ad2e543bc82c70c38cfcfd8"
+      },
+      {
+        "path": "dist/mediapipe/VERSION",
+        "sha256": "d51e6ec94058554a84558a5b402ee6ef5fdf5455e35c902feda61cda8752943a"
+      },
+      {
+        "path": "dist/mediapipe/wasm/vision_wasm_internal.js",
+        "sha256": "e170ee67dd4e16c1a6fcd8840a206687e5a59b22c20e4a902bc445b095454d73"
+      },
+      {
+        "path": "dist/mediapipe/wasm/vision_wasm_internal.wasm",
+        "sha256": "8da277a733926eacd0474b8704b36742d6ec3231c57a860c5b889dff8f1df886"
+      },
+      {
+        "path": "dist/mediapipe/wasm/vision_wasm_module_internal.js",
+        "sha256": "da8934057f147b622e82cfb4c0dbd85461c598e268588b5a8ba9ca963a8ff82d"
+      },
+      {
+        "path": "dist/mediapipe/wasm/vision_wasm_module_internal.wasm",
+        "sha256": "2dabd8e23c60984628beb7bb338764c81a08e6837145273f59578684b5d53c1b"
+      },
+      {
+        "path": "dist/mediapipe/wasm/vision_wasm_nosimd_internal.js",
+        "sha256": "e81d715a3d42cc3373602eb2f7aff795d164934db680e32496b65dab537f9658"
+      },
+      {
+        "path": "dist/mediapipe/wasm/vision_wasm_nosimd_internal.wasm",
+        "sha256": "a28483cd42e74e855bf5ebdb6b40d9b66a5b49e35e95020bc97669e6822a3192"
+      },
+      {
+        "path": "dist/models/face_landmarker.task",
+        "sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff"
+      },
+      {
+        "path": "dist/models/gesture_recognizer.task",
+        "sha256": "97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482"
+      },
+      {
+        "path": "dist/models/pose_landmarker_full.task",
+        "sha256": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1"
+      },
+      {
+        "path": "dist/models/pose_landmarker_heavy.task",
+        "sha256": "64437af838a65d18e5ba7a0d39b465540069bc8aae8308de3e318aad31fcbc7b"
+      },
+      {
+        "path": "dist/models/pose_landmarker_lite.task",
+        "sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+      }
+    ],
+    "candidateCssSha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e",
+    "samples": [
+      {
+        "transport": "http",
+        "surface": "native",
+        "navigationPassed": true,
+        "selectorPassed": true,
+        "gotoMs": 39.42104200000017,
+        "observed": {
+          "probe": {
+            "headingMs": 30.700000002980232,
+            "fetch": [
+              {
+                "startMs": 19.5,
+                "responseMs": 29.399999991059303,
+                "jsonEndMs": 30.200000002980232,
+                "failed": false
+              }
+            ],
+            "longTasks": 1,
+            "longTaskTotalMs": 57,
+            "longTaskMaxMs": 57,
+            "timerCount": 1,
+            "timerMaxLateMs": 0.30000001192092896,
+            "rafCount": 4,
+            "rafMaxGapMs": 67.80000001192093,
+            "cameraCalls": 0,
+            "headingFocused": false
+          },
+          "visible": true,
+          "localStorageCount": 0,
+          "sessionStorageCount": 0,
+          "observedMs": 123.20000000298023,
+          "headingFocused": false,
+          "expectedHeadingPresent": true,
+          "notFoundHeadingPresent": false
+        },
+        "boundary": {
+          "pageErrors": 0,
+          "external": 0,
+          "unexpectedApi": 0,
+          "models": 0
+        },
+        "metrics": {
+          "LayoutDuration": 0.041156,
+          "RecalcStyleDuration": 0.000363,
+          "ScriptDuration": 0.001128,
+          "TaskDuration": 0.074374,
+          "JSHeapUsedSize": 2162220
+        },
+        "profile": {
+          "durationMs": 115.434,
+          "samples": 76,
+          "top": [
+            {
+              "symbol": "(program)",
+              "source": "browser-or-harness",
+              "sampledMs": 83.341
+            },
+            {
+              "symbol": "(idle)",
+              "source": "browser-or-harness",
+              "sampledMs": 20.908
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "browser-or-harness",
+              "sampledMs": 1.525
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "browser-or-harness",
+              "sampledMs": 1.51
+            },
+            {
+              "symbol": "computeAriaRole",
+              "source": "browser-or-harness",
+              "sampledMs": 1.505
+            },
+            {
+              "symbol": "fetch",
+              "source": "browser-or-harness",
+              "sampledMs": 1.49
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "browser-or-harness",
+              "sampledMs": 1.402
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "browser-or-harness",
+              "sampledMs": 1.278
+            },
+            {
+              "symbol": "computeAccessibleNameComposite",
+              "source": "browser-or-harness",
+              "sampledMs": 1.06
+            },
+            {
+              "symbol": "install",
+              "source": "browser-or-harness",
+              "sampledMs": 1.048
+            }
+          ]
+        }
+      },
+      {
+        "transport": "http",
+        "surface": "baseline",
+        "navigationPassed": true,
+        "selectorPassed": true,
+        "gotoMs": 92.82991600000014,
+        "observed": {
+          "probe": {
+            "headingMs": 159.20000000298023,
+            "fetch": [
+              {
+                "startMs": 148.29999999701977,
+                "responseMs": 152.70000000298023,
+                "jsonEndMs": 157,
+                "failed": false
+              }
+            ],
+            "longTasks": 0,
+            "longTaskTotalMs": 0,
+            "longTaskMaxMs": 0,
+            "timerCount": 1,
+            "timerMaxLateMs": 36.29999999701977,
+            "rafCount": 7,
+            "rafMaxGapMs": 48.099999994039536,
+            "cameraCalls": 0,
+            "headingFocused": false
+          },
+          "visible": true,
+          "localStorageCount": 0,
+          "sessionStorageCount": 0,
+          "observedMs": 187.59999999403954,
+          "headingFocused": false,
+          "expectedHeadingPresent": true,
+          "notFoundHeadingPresent": false
+        },
+        "boundary": {
+          "pageErrors": 0,
+          "external": 0,
+          "unexpectedApi": 0,
+          "models": 0
+        },
+        "metrics": {
+          "LayoutDuration": 0.026234,
+          "RecalcStyleDuration": 0.002362,
+          "ScriptDuration": 0.041159,
+          "TaskDuration": 0.105671,
+          "JSHeapUsedSize": 3148836
+        },
+        "profile": {
+          "durationMs": 183.169,
+          "samples": 116,
+          "top": [
+            {
+              "symbol": "(idle)",
+              "source": "browser-or-harness",
+              "sampledMs": 68.147
+            },
+            {
+              "symbol": "(program)",
+              "source": "browser-or-harness",
+              "sampledMs": 64.968
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "product",
+              "sampledMs": 16.213
+            },
+            {
+              "symbol": "$",
+              "source": "product",
+              "sampledMs": 2.554
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "product",
+              "sampledMs": 2.107
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "product",
+              "sampledMs": 1.693
+            },
+            {
+              "symbol": "install",
+              "source": "browser-or-harness",
+              "sampledMs": 1.603
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "product",
+              "sampledMs": 1.549
+            },
+            {
+              "symbol": "useState",
+              "source": "product",
+              "sampledMs": 1.541
+            },
+            {
+              "symbol": "qr",
+              "source": "product",
+              "sampledMs": 1.528
+            },
+            {
+              "symbol": "a",
+              "source": "product",
+              "sampledMs": 1.526
+            },
+            {
+              "symbol": "InjectedScript",
+              "source": "browser-or-harness",
+              "sampledMs": 1.521
+            },
+            {
+              "symbol": "(garbage collector)",
+              "source": "browser-or-harness",
+              "sampledMs": 1.52
+            },
+            {
+              "symbol": "xl",
+              "source": "product",
+              "sampledMs": 1.518
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "browser-or-harness",
+              "sampledMs": 1.516
+            }
+          ]
+        }
+      },
+      {
+        "transport": "fulfill",
+        "surface": "development-selection",
+        "navigationPassed": true,
+        "selectorPassed": true,
+        "gotoMs": 1020.103709,
+        "observed": {
+          "probe": {
+            "headingMs": 1395.4000000059605,
+            "fetch": [
+              {
+                "startMs": 1062.2999999970198,
+                "responseMs": null,
+                "jsonEndMs": null,
+                "failed": true
+              },
+              {
+                "startMs": 1064.2000000029802,
+                "responseMs": 1084.6000000089407,
+                "jsonEndMs": 1086.7999999970198,
+                "failed": false
+              }
+            ],
+            "longTasks": 0,
+            "longTaskTotalMs": 0,
+            "longTaskMaxMs": 0,
+            "timerCount": 18,
+            "timerMaxLateMs": 28.299999997019768,
+            "rafCount": 113,
+            "rafMaxGapMs": 37.79999999701977,
+            "cameraCalls": 0,
+            "headingFocused": false
+          },
+          "visible": true,
+          "localStorageCount": 0,
+          "sessionStorageCount": 0,
+          "observedMs": 1937.7000000029802,
+          "headingFocused": true,
+          "expectedHeadingPresent": true,
+          "notFoundHeadingPresent": false
+        },
+        "boundary": {
+          "pageErrors": 0,
+          "external": 0,
+          "unexpectedApi": 0,
+          "models": 0
+        },
+        "metrics": {
+          "LayoutDuration": 0.023944,
+          "RecalcStyleDuration": 0.002134,
+          "ScriptDuration": 0.087198,
+          "TaskDuration": 0.185203,
+          "JSHeapUsedSize": 9982088
+        },
+        "profile": {
+          "durationMs": 1906.581,
+          "samples": 982,
+          "top": [
+            {
+              "symbol": "(idle)",
+              "source": "browser-or-harness",
+              "sampledMs": 1723.008
+            },
+            {
+              "symbol": "(program)",
+              "source": "browser-or-harness",
+              "sampledMs": 82.818
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "product",
+              "sampledMs": 13.341
+            },
+            {
+              "symbol": "jsxDEVImpl",
+              "source": "native-or-harness",
+              "sampledMs": 7.836
+            },
+            {
+              "symbol": "exports.jsxDEV",
+              "source": "native-or-harness",
+              "sampledMs": 6.386
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "product",
+              "sampledMs": 5.285
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "native-or-harness",
+              "sampledMs": 3.957
+            },
+            {
+              "symbol": "getTaskName",
+              "source": "native-or-harness",
+              "sampledMs": 3.538
+            },
+            {
+              "symbol": "requestAnimationFrame",
+              "source": "browser-or-harness",
+              "sampledMs": 3.44
+            },
+            {
+              "symbol": "setInitialProperties",
+              "source": "native-or-harness",
+              "sampledMs": 3.264
+            },
+            {
+              "symbol": "readAttribute",
+              "source": "browser-or-harness",
+              "sampledMs": 2.988
+            },
+            {
+              "symbol": "exports.unstable_now",
+              "source": "native-or-harness",
+              "sampledMs": 2.75
+            },
+            {
+              "symbol": "createFiber",
+              "source": "native-or-harness",
+              "sampledMs": 2.548
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "browser-or-harness",
+              "sampledMs": 2.538
+            },
+            {
+              "symbol": "exports.createElement",
+              "source": "native-or-harness",
+              "sampledMs": 2.375
+            }
+          ]
+        }
+      },
+      {
+        "transport": "fulfill",
+        "surface": "public-help",
+        "navigationPassed": true,
+        "selectorPassed": true,
+        "gotoMs": 295.6084580000006,
+        "observed": {
+          "probe": {
+            "headingMs": 288.29999999701977,
+            "fetch": [
+              {
+                "startMs": 315.20000000298023,
+                "responseMs": 339.20000000298023,
+                "jsonEndMs": 339.70000000298023,
+                "failed": false
+              }
+            ],
+            "longTasks": 0,
+            "longTaskTotalMs": 0,
+            "longTaskMaxMs": 0,
+            "timerCount": 3,
+            "timerMaxLateMs": 33.5,
+            "rafCount": 11,
+            "rafMaxGapMs": 123.3999999910593,
+            "cameraCalls": 0,
+            "headingFocused": false
+          },
+          "visible": true,
+          "localStorageCount": 0,
+          "sessionStorageCount": 0,
+          "observedMs": 435.70000000298023,
+          "headingFocused": true,
+          "expectedHeadingPresent": true,
+          "notFoundHeadingPresent": false
+        },
+        "boundary": {
+          "pageErrors": 0,
+          "external": 0,
+          "unexpectedApi": 0,
+          "models": 0
+        },
+        "metrics": {
+          "LayoutDuration": 0.020245,
+          "RecalcStyleDuration": 0.002418,
+          "ScriptDuration": 0.046011,
+          "TaskDuration": 0.108034,
+          "JSHeapUsedSize": 3178820
+        },
+        "profile": {
+          "durationMs": 361.479,
+          "samples": 149,
+          "top": [
+            {
+              "symbol": "(idle)",
+              "source": "browser-or-harness",
+              "sampledMs": 252.67
+            },
+            {
+              "symbol": "(program)",
+              "source": "browser-or-harness",
+              "sampledMs": 30.122
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "product",
+              "sampledMs": 21.671
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "product",
+              "sampledMs": 15.369
+            },
+            {
+              "symbol": "fl",
+              "source": "product",
+              "sampledMs": 7.628
+            },
+            {
+              "symbol": "window.fetch",
+              "source": "browser-or-harness",
+              "sampledMs": 7.185
+            },
+            {
+              "symbol": "createElement",
+              "source": "browser-or-harness",
+              "sampledMs": 5.713
+            },
+            {
+              "symbol": "getExplicitAriaRole",
+              "source": "browser-or-harness",
+              "sampledMs": 4.147
+            },
+            {
+              "symbol": "Sa",
+              "source": "product",
+              "sampledMs": 4.055
+            },
+            {
+              "symbol": "Wf",
+              "source": "product",
+              "sampledMs": 3.504
+            },
+            {
+              "symbol": "getTextAlternativeInternal",
+              "source": "browser-or-harness",
+              "sampledMs": 1.747
+            },
+            {
+              "symbol": "(anonymous)",
+              "source": "browser-or-harness",
+              "sampledMs": 1.686
+            },
+            {
+              "symbol": "Xt",
+              "source": "product",
+              "sampledMs": 1.51
+            },
+            {
+              "symbol": "createTextNode",
+              "source": "browser-or-harness",
+              "sampledMs": 1.463
+            },
+            {
+              "symbol": "t",
+              "source": "product",
+              "sampledMs": 1.45
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "nativeModeControl": {
+    "path": "/private/tmp/bodyguard-startup-profile.29lj4e/vite-mode-control.log",
+    "sha256": "250fb8c0b80f04d6c51f4f12e2842a586b28ad3379dcbb5d60947144cce5f3ad",
+    "previewProduction": true,
+    "developmentProduction": true,
+    "developmentMode": "development"
+  },
+  "preservedOriginals": [
+    {
+      "path": "/private/tmp/bodyguard-startup-profile.29lj4e/probe-before.mjs",
+      "sha256": "f5f9d6e45ebc8def3644d74dfdbb3464a10007bf864a2ff4b2eb858c3b999101"
+    },
+    {
+      "path": "/private/tmp/bodyguard-startup-profile.29lj4e/story-before.md",
+      "sha256": "306429737a3ee8a9659b323ff2957f61fbf6b9300b366ea0f902dbd40e18b0ec"
+    },
+    {
+      "path": "/private/tmp/bodyguard-startup-recurrence.ayridM/inputs.json",
+      "sha256": "404ff54806eb6b11fa8b57077d5ebc63073c82d19201c4ba2e0bd7d46856fca9"
+    }
+  ],
+  "overwriteRejected": {
+    "path": "/private/tmp/bodyguard-startup-profile.29lj4e/overwrite-rejected.log",
+    "sha256": "03eb31ca854e77b4313b06c5469c23f258680cfbd42d2c089baf62a1a855512d",
+    "exitCode": 1,
+    "originalObservationUnchanged": true
+  },
+  "frontendDOM": {
+    "path": "/private/tmp/bodyguard-startup-profile.G2ih79/dom.xml",
+    "sha256": "13494c2d7aa9c21b0a287abf82c3472a70bb32e4573620de48f5eb3ba5f47b84",
+    "tests": 730,
+    "failures": 0,
+    "errors": 0,
+    "time": 17.45623987
+  },
+  "static": {
+    "typecheck": {
+      "path": "/private/tmp/bodyguard-startup-profile.29lj4e/typecheck.log",
+      "sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92",
+      "exitCode": 0
+    },
+    "biome": {
+      "path": "/private/tmp/bodyguard-startup-profile.G2ih79/biome.log",
+      "sha256": "db66a9ad96dc4f2241f590452379648c1ce9e75d94586be9628e6606865a99fe",
+      "exitCode": 0
+    },
+    "productionGuard": {
+      "production_JS_files_checked": 1,
+      "development_catalog_strings": 0,
+      "unconnected_coaching_engine_strings": 0,
+      "unconnected_coaching_resource_strings": 0,
+      "unconnected_coaching_session_strings": 0,
+      "unconnected_observation_loop_strings": 0,
+      "unconnected_result_record_producer_strings": 0,
+      "unconnected_record_owner_capture_strings": 0,
+      "unconnected_recorded_session_strings": 0,
+      "unconnected_auth_coaching_hook_strings": 0,
+      "unconnected_minute_aggregation_strings": 0,
+      "unconnected_owned_minute_upload_strings": 0,
+      "unconnected_alert_delivery_strings": 0
+    },
+    "syntaxExitCode": 0
+  },
+  "conclusion": {
+    "helperDevelopmentModeCause": "preview-before-createServer was natively observed to use production while mode was development; start development first and assert production false",
+    "historicalProductDelayCause": "unproven",
+    "earlierProductFailureFixed": false,
+    "timeoutChanged": false,
+    "automaticRetries": 0,
+    "notExecutedThisStory": [
+      "actual API/SQL authentication integration",
+      "original full selection regression on latest source",
+      "headed/human notebook performance",
+      "camera/avatar/coaching",
+      "provider/Docker/NGINX/TLS",
+      "deployment/expert/whole stages 1-6"
+    ]
+  }
+}

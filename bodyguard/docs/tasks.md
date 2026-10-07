@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-07 시작 회귀 후속 감사: [S6.7](stories/web-startup-recurrence.md)에서 PR #60의 실제 merge11ace02와 이후 선택2통과/6실패·실제 통합0통과/2실패의 보고 누락을 대조했다. 원본8개 비교6통과/2실패·후속 profile3통과/1실패를 보존하고, native Vite 대조로 확인한 helper 개발모드 오류만 보완해 같은 경계4개/730 DOM·정적/build/guard를 통과했다. [수치·원본·미실행/작성자 리뷰](review/web-startup-recurrence/README.md). 이는 별도 CLI 회귀나 제품4초 지연 원인 해결이 아니다. 제품 코드/미승인 UI/인증·판정/SDK·아바타/운영 변경0이며 조건부 PR 게이트를 진행한다. 제품 시작 P2·기존 Draft와 디자인/SDK/Docker·실측/참여자·1~6단계 미완료 기준은 유지한다. 아래는 시점별 기록이다.
+
 2026-10-07 알림 최종 초점 리뷰: S4.N3의 선택 callback이 지정한 목적지 초점을 보존하는 경계를 실제 RED로 확인·보완했다. [추가 증거](review/alert-delivery/focus-handoff-20261007.json)의 부품37/frontend730·실제 Chrome5·타입/정적/build/guard를 통과했으며 이전 실패·36/729 증거는 유지한다. 공개 제품/디자인/인증/판정 변경0·기존 미완료 단계 기준은 그대로이고 PR #60 최신 조건부 게이트를 진행한다.
 
 2026-10-07 웹 알림 전달: [S4.N3](stories/stage4-alert-delivery.md)의 비공개 부품에서 권한 거부 후 화면 안내 유지·스트레칭 살펴보기/닫기·교체/끄기·실제 문서 이탈 폐기와 키보드 초점 복구를 구현했다. 짧은 문구와 기본 접힌 설명을 유지하며 [실제 화면·실패·SHA·미실행 구분](review/alert-delivery/README.md)을 보존했다. 별도 [PR #59](https://github.com/HSU-OAS/bodyguard/pull/59) source72755f6→mergedb0b53a/main 포함·같은 tree·브랜치 보존을 실제 확인하고 그 main에서 전달5/실제 통합2/frontend729·정적/build/guard를 통과했다. 이전 원본11개와 실패를 보존하며 조건부 PR 게이트를 진행한다. 공개 알림 producer·classifier/동작/시범·실제 OS 표시/소리·사진의 최종 아바타·SDK privacy·실측/참여자·디자인 구조/적용·Docker/TLS/외부/운영·전체1~6 완료는 아니다. 기존 승인/이월·같은 아바타 부위 새 제작0을 유지하며 미완료 연결은 후속 필수다. 아래는 시점별 기록이다.
