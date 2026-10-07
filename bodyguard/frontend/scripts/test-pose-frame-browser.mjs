@@ -9,8 +9,14 @@ import { fileURLToPath } from 'node:url'
 import { chromium } from '@playwright/test'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const [scratch, label] = process.argv.slice(2)
-assert(/^\/private\/tmp\/bodyguard-pose-frame-proof\.[A-Za-z0-9]+$/.test(scratch ?? ''))
+const [scratch, label, mode = 'blank'] = process.argv.slice(2)
+assert(mode === 'blank' || mode === 'video')
+assert(
+  (mode === 'blank'
+    ? /^\/private\/tmp\/bodyguard-pose-frame-proof\.[A-Za-z0-9]+$/
+    : /^\/private\/tmp\/bodyguard-video-pose-proof\.[A-Za-z0-9]+$/
+  ).test(scratch ?? ''),
+)
 assert.equal(realpathSync(scratch), scratch)
 assert(/^[a-z][a-z0-9-]*$/.test(label ?? ''))
 const reportPath = join(scratch, `browser-${label}.json`)
@@ -18,6 +24,7 @@ assert(!existsSync(reportPath))
 const sha = (bytes) => createHash('sha256').update(bytes).digest('hex')
 const files = [
   'src/pose/ownedPoseFrame.ts',
+  'src/pose/videoPoseSource.ts',
   'src/pose/landmarker.ts',
   'src/pose/constants.ts',
   'src/avatar/ownedAvatarPair.ts',
@@ -26,6 +33,8 @@ const files = [
   'src/avatar/eightWeightSkin.ts',
   'e2e/fixtures/ownedPoseFrameProbe.ts',
   'e2e/fixtures/ownedPoseFrame.vite.ts',
+  'e2e/fixtures/ownedVideoPoseProbe.ts',
+  'e2e/fixtures/ownedVideoPose.vite.ts',
   'scripts/test-pose-frame-browser.mjs',
   'pnpm-lock.yaml',
 ]
@@ -84,7 +93,9 @@ const server = createServer((req, res) => {
     res.setHeader('Content-Security-Policy', "connect-src 'self'")
     res.setHeader('Content-Type', 'text/html')
     res.end(
-      '<!doctype html><html lang="ko"><meta charset="utf-8"><title>비공개 추론 전달 검증</title><body style="margin:0;background:white"><p>미완성 A37 · blank SDK 입력 · 긍정 동작 합성 · 코칭 아님</p><canvas id="avatar"></canvas><script type="module">import{mountPoseFrameProbe}from"/probe.js";window.openPoseFrame=async gender=>{await window.probe?.close();window.probe=await mountPoseFrameProbe(document.querySelector("#avatar"),gender);return window.probe.snapshot()};</script>',
+      mode === 'video'
+        ? '<!doctype html><html lang="ko"><meta charset="utf-8"><title>비공개 영상 전달 검증</title><body style="margin:0;background:white"><p>미완성 A37 · 가짜 카메라 · 실제 SDK · 코칭 아님</p><canvas id="avatar"></canvas><script type="module">import{mountVideoPoseProbe}from"/probe.js";window.openPoseFrame=async gender=>{await window.probe?.close();window.probe=await mountVideoPoseProbe(document.querySelector("#avatar"),gender);return window.probe.snapshot()};</script>'
+        : '<!doctype html><html lang="ko"><meta charset="utf-8"><title>비공개 추론 전달 검증</title><body style="margin:0;background:white"><p>미완성 A37 · blank SDK 입력 · 긍정 동작 합성 · 코칭 아님</p><canvas id="avatar"></canvas><script type="module">import{mountPoseFrameProbe}from"/probe.js";window.openPoseFrame=async gender=>{await window.probe?.close();window.probe=await mountPoseFrameProbe(document.querySelector("#avatar"),gender);return window.probe.snapshot()};</script>',
     )
   } else if (Object.hasOwn(resources, path)) {
     res.setHeader(
@@ -123,8 +134,10 @@ const report = {
   actualChrome: true,
   actualWebGL: true,
   actualCamera: false,
+  actualFakeCamera: mode === 'video',
+  actualVideoFrame: mode === 'video',
   actualHuman: false,
-  syntheticPositiveMovement: true,
+  syntheticPositiveMovement: mode === 'blank',
   releaseAvatar: false,
   productPolicyApproved: false,
   inputStored: false,
@@ -153,12 +166,17 @@ try {
   browser = await chromium.launch({
     channel: 'chrome',
     headless: true,
+    args:
+      mode === 'video'
+        ? ['--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream']
+        : [],
     proxy: { server: originOf(proxy), bypass: '127.0.0.1,localhost,[::1]' },
   })
   report.browser = browser.version()
   context = await browser.newContext({
     viewport: { width: 1440, height: 960 },
     serviceWorkers: 'block',
+    permissions: mode === 'video' ? ['camera'] : [],
   })
   await context.route('**/*', async (route) => {
     if (!route.request().url().startsWith(`${origin}/`)) {
@@ -168,18 +186,21 @@ try {
     }
     await route.continue()
   })
-  await context.addInitScript(() => {
+  await context.addInitScript((videoMode) => {
     window.__cameraCalls = 0
     window.__cspAttempts = 0
     document.addEventListener('securitypolicyviolation', (event) => {
       if (event.violatedDirective === 'connect-src') window.__cspAttempts++
     })
-    if (navigator.mediaDevices)
-      navigator.mediaDevices.getUserMedia = async () => {
+    if (navigator.mediaDevices) {
+      const native = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices)
+      navigator.mediaDevices.getUserMedia = async (constraints) => {
         window.__cameraCalls++
+        if (videoMode) return native(constraints)
         throw new Error('Camera forbidden in pose frame fixture')
       }
-  })
+    }
+  }, mode === 'video')
   page = await context.newPage()
   page.on('pageerror', (error) => errors.push(error.name))
   await page.goto(origin)
@@ -193,6 +214,59 @@ try {
     assert.equal(initial.nativeCalls, 0)
     assert.equal(initial.syntheticCalls, 0)
     sample.stages.push({ case: 'prepared', ...initial })
+    if (mode === 'video') {
+      assert(initial.cameraLive && initial.rawVideoHidden)
+      assert.equal(initial.frames, 0)
+      for (let index = 0; index < 6; index++) {
+        const frame = await page.evaluate(() => window.probe.read())
+        assert(frame.delivered)
+        assert.equal(frame.persons, 0)
+        assert.equal(frame.state.tracked, 0)
+        assert.equal(frame.nativeCalls, index + 1)
+        assert.equal(frame.nativeCloses, index + 1)
+        assert.equal(frame.frames, index + 1)
+        assert.equal(frame.frameCloseCalls, index + 1)
+        assert.equal(frame.frameCloseErrors, 0)
+        assert(frame.allFramesClosed)
+        assert(frame.referenceUnchanged && frame.framing.every(Boolean))
+        sample.stages.push({ case: `decoded-native-frame-${index + 1}`, ...frame })
+      }
+      await page.evaluate(() => {
+        window.pendingVideoRead = window.probe.startPending()
+      })
+      const stopped = await page.evaluate(() => window.probe.stopSource())
+      const cancelled = await page.evaluate(() => window.pendingVideoRead)
+      assert(!cancelled.delivered)
+      assert(stopped.cameraLive)
+      assert.equal(stopped.nativeCalls, 6)
+      assert.equal(stopped.frames, 6)
+      sample.stages.push({ case: 'paused-decoder-cancelled-read', ...stopped })
+      const after = await page.evaluate(() => window.probe.read())
+      assert(!after.delivered)
+      assert.equal(after.nativeCalls, 6)
+      await page.evaluate(() => window.probe.resume())
+      const resumed = await page.evaluate(() => window.probe.read())
+      assert(resumed.delivered && resumed.allFramesClosed)
+      assert.equal(resumed.nativeCalls, 7)
+      assert.equal(resumed.frameCloseCalls, 7)
+      sample.stages.push({ case: 'explicit-source-resume', ...resumed })
+      const preview = join(scratch, `${label}-${gender}.png`)
+      await page.locator('#avatar').screenshot({ path: preview })
+      sample.previewSha = sha(readFileSync(preview))
+      const closed = await page.evaluate(() => window.probe.close())
+      assert(closed.closed && closed.tracksEnded && closed.detached && closed.allFramesClosed)
+      assert.equal(closed.models, 0)
+      assert.equal(closed.attached, 0)
+      assert.equal(closed.detectorCloses, 1)
+      assert.equal(closed.frameCloseCalls, 7)
+      assert.deepEqual(closed.memory, closed.baseline)
+      const again = await page.evaluate(() => window.probe.close())
+      assert.equal(again.detectorCloses, 1)
+      assert.equal(again.frameCloseCalls, 7)
+      sample.stages.push({ case: 'camera-detached-native-closed', ...closed })
+      sample.passed = true
+      continue
+    }
     const blank = await page.evaluate(() => window.probe.read('native'))
     assert.equal(blank.persons, 0)
     assert.equal(blank.state.tracked, 0)
@@ -244,7 +318,7 @@ try {
     csp: window.__cspAttempts,
   }))
   report.boundary = { ...counts, routedExternal, proxyDenied, errors }
-  assert.equal(counts.camera, 0)
+  assert.equal(counts.camera, mode === 'video' ? 2 : 0)
   assert.equal(routedExternal, 0)
   assert.equal(errors.length, 0)
 } catch (error) {

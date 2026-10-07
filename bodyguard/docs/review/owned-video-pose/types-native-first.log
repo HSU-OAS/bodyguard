@@ -1,0 +1,4 @@
+e2e/fixtures/ownedVideoPoseProbe.ts(77,5): error TS2322: Type 'typeof TrackedFrame' is not assignable to type '{ new (image: CanvasImageSource, init?: VideoFrameInit | undefined): VideoFrame; new (data: AllowSharedBufferSource, init: VideoFrameBufferInit): VideoFrame; prototype: VideoFrame; }'.
+  Types of parameters 'input' and 'data' are incompatible.
+    Type 'AllowSharedBufferSource' is not assignable to type 'CanvasImageSource'.
+      Type 'ArrayBuffer' is not assignable to type 'CanvasImageSource'.

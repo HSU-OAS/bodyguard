@@ -106,8 +106,9 @@ export function createOwnedPoseFrame<T>(
           }),
         })
       }
-    } catch {
-      failed = true
+    } catch (error) {
+      if (error instanceof ResourceCleanupError) cleanupFailed = true
+      else failed = true
     } finally {
       if (result && release) {
         try {

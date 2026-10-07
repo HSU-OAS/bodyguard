@@ -19,6 +19,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { prepareOwnedAvatarPair } from '../../src/avatar/ownedAvatarPair'
 import { createPoseLandmarker } from '../../src/pose/landmarker'
 import { createOwnedPoseFrame, type OwnedPoseResult } from '../../src/pose/ownedPoseFrame'
+import { createVideoPoseSource } from '../../src/pose/videoPoseSource'
 import type { Point } from '../../src/posture/landmarks'
 
 const joints = [
@@ -80,6 +81,7 @@ export async function mountPoseFrameProbe(canvas: HTMLCanvasElement, gender: 'ma
   let pair: Awaited<ReturnType<typeof prepareOwnedAvatarPair>> | undefined
   let native: Awaited<ReturnType<typeof createPoseLandmarker>> | undefined
   let source: ReturnType<typeof createOwnedPoseFrame<OffscreenCanvas>> | undefined
+  let videoSource: ReturnType<typeof createVideoPoseSource> | undefined
   let closed = false,
     sequence = 0,
     at = 0,
@@ -99,7 +101,11 @@ export async function mountPoseFrameProbe(canvas: HTMLCanvasElement, gender: 'ma
       closed = true
       abort.abort()
       try {
-        await source?.dispose()
+        try {
+          await videoSource?.dispose()
+        } finally {
+          await source?.dispose()
+        }
       } finally {
         try {
           pair?.dispose()
@@ -201,6 +207,37 @@ export async function mountPoseFrameProbe(canvas: HTMLCanvasElement, gender: 'ma
       persons: frame?.result.landmarks.length ?? null,
     }
   }
+  async function attachVideo(video: HTMLVideoElement, stream: MediaStream) {
+    if (closed || !native) throw new Error('Private pose diagnostic failed')
+    await videoSource?.dispose()
+    videoSource = createVideoPoseSource(context, {
+      video,
+      stream,
+      detect: (input, timestamp) => {
+        if (!native) throw new Error('Private pose diagnostic failed')
+        nativeCalls++
+        const result = native.landmarker.detectForVideo(input, timestamp)
+        return {
+          landmarks: result.landmarks,
+          worldLandmarks: result.worldLandmarks,
+          close() {
+            try {
+              result.close()
+            } finally {
+              nativeCloses++
+            }
+          },
+        }
+      },
+    })
+  }
+  async function readVideo() {
+    const frame = await videoSource?.read()
+    const delivered = !!frame && !!pair?.observe(frame)
+    state = pair?.render(performance.now(), 0) ?? state
+    renderer.render(scene, camera)
+    return { ...snapshot(), delivered, persons: frame?.result.landmarks.length ?? null }
+  }
   try {
     pair = await prepareOwnedAvatarPair(context, {
       mirror: true,
@@ -247,7 +284,16 @@ export async function mountPoseFrameProbe(canvas: HTMLCanvasElement, gender: 'ma
     })
     state = pair.render(performance.now(), 0)
     renderer.render(scene, camera)
-    return Object.freeze({ read, snapshot, close })
+    return Object.freeze({
+      read,
+      snapshot,
+      close,
+      attachVideo,
+      readVideo,
+      disposeVideo: async () => {
+        await videoSource?.dispose()
+      },
+    })
   } catch {
     await close()
     throw new Error('Private pose diagnostic failed')

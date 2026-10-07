@@ -1,0 +1,206 @@
+
+ RUN  v5.0.2 /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-owned-video-pose/bodyguard/frontend
+
+ ❯ src/pose/videoPoseSource.test.ts (11 tests | 11 failed) 15ms
+   ❯ owned decoded video pose source (11)
+     × starts nothing until read, preserves decoded stamps and closes both owned values 8ms
+     × does not infer duplicate decoded sequence, time or mediaTime 1ms
+     × has one pending callback/inference, not an unbounded queue 1ms
+     × cancels pending decoded callback and ignores a manually delivered late callback 1ms
+     × abort after decoded capture reclaims frame without invoking inference 1ms
+     × waits for an in-flight result after abort before closing its input 0ms
+     × stream replacement before decode performs no inference and does not detach another owner 1ms
+     × track ending while awaiting decode settles failure, not a hanging successful source 0ms
+     × reclaims input on detector failure and sanitizes native errors 0ms
+     × continues input cleanup after result close failure, then quarantines 0ms
+     × does not hide input cleanup failure after a provider has thrown 0ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 11 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/pose/videoPoseSource.test.ts > owned decoded video pose source > starts nothing until read, preserves decoded stamps and closes both owned values
+AssertionError: expected null to match object { generation: 1, sequence: 1, at: 10 }
+
+- Expected:
+{
+  "at": 10,
+  "generation": 1,
+  "sequence": 1,
+}
+
++ Received:
+null
+
+ ❯ src/pose/videoPoseSource.test.ts:45:19
+     43|     const read=f.source.read();f.emit()
+     44|     const frame=await read
+     45|     expect(frame).toMatchObject({generation:1,sequence:1,at:10})
+       |                   ^
+     46|     expect(f.detect).toHaveBeenCalledTimes(1)
+     47|     expect(f.detect.mock.calls[0][0]).toBe(FakeFrame.made[0])
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/11]⎯
+
+ FAIL  src/pose/videoPoseSource.test.ts > owned decoded video pose source > does not infer duplicate decoded sequence, time or mediaTime
+AssertionError: expected "vi.fn()" to be called 1 times, but got 0 times
+ ❯ src/pose/videoPoseSource.test.ts:58:22
+     56|       const read=f.source.read();f.emit(now,seq,time);expect(await rea…
+     57|     }
+     58|     expect(f.detect).toHaveBeenCalledTimes(1)
+       |                      ^
+     59|     expect(FakeFrame.made).toHaveLength(1)
+     60|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/11]⎯
+
+ FAIL  src/pose/videoPoseSource.test.ts > owned decoded video pose source > has one pending callback/inference, not an unbounded queue
+AssertionError: expected "vi.fn()" to be called 1 times, but got 0 times
+ ❯ src/pose/videoPoseSource.test.ts:69:47
+     67|     await Promise.resolve()
+     68|     expect(await f.source.read()).toBeNull()
+     69|     expect(f.video.requestVideoFrameCallback).toHaveBeenCalledTimes(1)
+       |                                               ^
+     70|     gate.resolve(f.result)
+     71|     expect(await read).not.toBeNull()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/11]⎯
+
+ FAIL  src/pose/videoPoseSource.test.ts > owned decoded video pose source > cancels pending decoded callback and ignores a manually delivered late callback
+AssertionError: expected "vi.fn()" to be called with arguments: [ 1 ]
+
+Number of calls: 0
+
+ ❯ src/pose/videoPoseSource.test.ts:79:46
+     77|     expect(await read).toBeNull()
+     78|     old?.(10,{presentedFrames:1,mediaTime:0.1} as VideoFrameCallbackMe…
+     79|     expect(f.video.cancelVideoFrameCallback).toHaveBeenCalledWith(1)
+       |                                              ^
+     80|     expect(FakeFrame.made).toHaveLength(0)
+     81|     expect(f.detect).not.toHaveBeenCalled()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/11]⎯
+
+ FAIL  src/pose/videoPoseSource.test.ts > owned decoded video pose source > abort after decoded capture reclaims frame without invoking inference
+TypeError: Cannot read properties of undefined (reading 'close')
+ ❯ src/pose/videoPoseSource.test.ts:88:30
+     86|     expect(await read).toBeNull()
+     87|     await f.source.dispose()
+     88|     expect(FakeFrame.made[0].close).toHaveBeenCalledTimes(1)
+       |                              ^
+     89|     expect(f.detect).not.toHaveBeenCalled()
+     90|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/11]⎯
+
+ FAIL  src/pose/videoPoseSource.test.ts > owned decoded video pose source > waits for an in-flight result after abort before closing its input
+TypeError: Cannot read properties of undefined (reading 'close')
+ ❯ src/pose/videoPoseSource.test.ts:97:30
+     95|     await Promise.resolve()
+     96|     f.abort.abort()
+     97|     expect(FakeFrame.made[0].close).not.toHaveBeenCalled()
+       |                              ^
+     98|     gate.resolve(f.result)
+     99|     expect(await read).toBeNull()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/11]⎯
+
+ FAIL  src/pose/videoPoseSource.test.ts > owned decoded video pose source > stream replacement before decode performs no inference and does not detach another owner
+AssertionError: promise resolved "null" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+null
+
+ ❯ src/pose/videoPoseSource.test.ts:108:23
+    106|     const other={} as MediaStream
+    107|     f.video.srcObject=other;f.emit()
+    108|     await expect(read).rejects.toThrow('Video capture unavailable')
+       |                       ^
+    109|     expect(f.detect).not.toHaveBeenCalled()
+    110|     expect(f.video.srcObject).toBe(other)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/11]⎯
+
+ FAIL  src/pose/videoPoseSource.test.ts > owned decoded video pose source > track ending while awaiting decode settles failure, not a hanging successful source
+AssertionError: promise resolved "null" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+null
+
+ ❯ src/pose/videoPoseSource.test.ts:116:23
+    114|     const f=setup(),read=f.source.read()
+    115|     f.track.readyState='ended';f.track.dispatchEvent(new Event('ended'…
+    116|     await expect(read).rejects.toThrow('Video capture unavailable')
+       |                       ^
+    117|     expect(f.detect).not.toHaveBeenCalled()
+    118|     expect(f.video.cancelVideoFrameCallback).toHaveBeenCalledWith(1)
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/11]⎯
+
+ FAIL  src/pose/videoPoseSource.test.ts > owned decoded video pose source > reclaims input on detector failure and sanitizes native errors
+AssertionError: promise resolved "null" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+null
+
+ ❯ src/pose/videoPoseSource.test.ts:124:23
+    122|     f.detect.mockImplementation(()=> { throw new Error('PRIVATE_VIDEO_…
+    123|     const read=f.source.read();f.emit()
+    124|     await expect(read).rejects.toThrow('Video capture unavailable')
+       |                       ^
+    125|     expect(FakeFrame.made[0].close).toHaveBeenCalledTimes(1)
+    126|     expect(await f.source.read()).toBeNull()
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/11]⎯
+
+ FAIL  src/pose/videoPoseSource.test.ts > owned decoded video pose source > continues input cleanup after result close failure, then quarantines
+AssertionError: promise resolved "null" instead of rejecting
+
+- Expected:
+Error {
+  "message": "rejected promise",
+}
+
++ Received:
+null
+
+ ❯ src/pose/videoPoseSource.test.ts:132:23
+    130|     f.result.close.mockImplementation(()=> { throw new Error('PRIVATE_…
+    131|     const read=f.source.read();f.emit()
+    132|     await expect(read).rejects.toBeInstanceOf(ResourceCleanupError)
+       |                       ^
+    133|     expect(FakeFrame.made[0].close).toHaveBeenCalledTimes(1)
+    134|     await expect(f.source.dispose()).rejects.toBeInstanceOf(ResourceCl…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/11]⎯
+
+ FAIL  src/pose/videoPoseSource.test.ts > owned decoded video pose source > does not hide input cleanup failure after a provider has thrown
+TypeError: Cannot read properties of undefined (reading 'close')
+ ❯ src/pose/videoPoseSource.test.ts:140:23
+    138|     f.detect.mockImplementation(()=> { throw new Error('PRIVATE_VIDEO_…
+    139|     const read=f.source.read();f.emit()
+    140|     FakeFrame.made[0].close.mockImplementation(()=> { throw new Error(…
+       |                       ^
+    141|     await expect(read).rejects.toBeInstanceOf(ResourceCleanupError)
+    142|     await expect(f.source.dispose()).rejects.toBeInstanceOf(ResourceCl…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/11]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  11 failed (11)
+   Start at  04:54:10
+   Duration  198ms (transform 54%, tests 23%, import 17%, worker 5%)
