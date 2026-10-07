@@ -1,6 +1,6 @@
 # S2.T9 — 실제 계정·SDK·두 아바타 통합
 
-상태: 구현·초기 로컬 검증 / baseline `4adfe82353145fa819cc6d6ea254578be3dedeeb` / `codex/native-auth-playback`
+상태: 구현·runtime 검증 / baseline `4adfe82353145fa819cc6d6ea254578be3dedeeb` / runtime `5524b1df88b2a00b2be4f7215fd665578e0780a8` / `codex/native-auth-playback` / PR 게이트 대기
 
 FR-U-04·FR-S-02/04·FR-R-03·FR-M-07·FR-A-03·NFR-07/08. S2.T8의 실제 로그인 소유 hook에 S2.T7의 native 카메라/SDK/source/남녀 GLB 재생을 연결한다. 기존 부품을 실제 Chrome·HTTP·격리 SQL의 같은 흐름에서 실행하며 공개 제품 코칭을 활성화하지 않는다.
 
@@ -24,3 +24,5 @@ testing-strategy로 이전 모의 자원 검증과 실제 native/API 같은 흐�
 첫 타입 검사 실패와 sandbox의 임시 DB 공유 메모리/localhost bind 거부를 보존했다. 타입의 기록 ID 접근을 수정하고, 임시 Unix 소켓 DB/localhost 시험에만 승인된 실행 권한을 사용했다. 이전 resume/save Promise는 보류 native 결과가 닫힐 때까지 기다릴 수 있어, 시험은 먼저 호출하고 결과 해제 뒤 정착을 확인한다.
 
 connect-src self가 차단한 SDK 시도는 실제 관찰되었다. 외부 요청 route0·저장소0은 SDK 제품 정책 승인/무통신 보증이 아니다. 실제 사람/물리 webcam·권한 popup·자세 정확도·목/손/체간·올바른 시범/적색 교정·최종 외형·승인 디자인/SDK 정책·전체 GPU/worker/장시간/다장치·공급자/HTTPS 운영과 D2/전체1~6은 미완료다. 공개 코칭/출시 동작0을 유지한다.
+
+runtime의 실제 계정·native 흐름과 기존 계정 회귀, 전체 frontend·정적·build/guard를 통과했다. [작동 흐름·실패·한계](../review/native-auth-playback/README.md)와 [source/원본 SHA](../review/native-auth-playback/summary.json)를 보존했다. 최종 회귀 launcher 기록 이름 충돌은 실패로 남기고 고유 이름으로 재검증했다. 임시 DB 서버는 종료했고 데이터/증거는 보존했다.

@@ -1,0 +1,593 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "[workspace]/bodyguard/frontend/node_modules/@playwright/test/cli.js",
+      "test",
+      "nativeauth.spec.ts",
+      "--config",
+      "playwright.account.config.ts",
+      "--output",
+      "test-results/nativeauth-20261007T223820463597Z"
+    ],
+    "configFile": "[workspace]/bodyguard/frontend/playwright.account.config.ts",
+    "rootDir": "[workspace]/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "[workspace]/bodyguard/frontend/test-results/nativeauth-20261007T223820463597Z",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "[workspace]/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "account.spec.ts",
+          "password.spec.ts",
+          "google.spec.ts",
+          "records.spec.ts",
+          "design.spec.ts",
+          "withdrawal.spec.ts",
+          "datahelp.spec.ts",
+          "integration.spec.ts",
+          "security.spec.ts",
+          "resultrecord.spec.ts",
+          "ownercapture.spec.ts",
+          "recordedsession.spec.ts",
+          "authcoaching.spec.ts",
+          "nativeauth.spec.ts",
+          "notifications.spec.ts",
+          "alertdelivery.spec.ts",
+          "ownedalert.spec.ts",
+          "summaries.spec.ts",
+          "minuteupload.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/nativeauth-20261007T223820463597Z/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "pnpm build && vite build --config e2e/fixtures/nativeAuth.vite.ts && vite preview --host localhost",
+      "url": "http://localhost:4173",
+      "reuseExistingServer": false,
+      "timeout": 180000
+    }
+  },
+  "suites": [
+    {
+      "title": "nativeauth.spec.ts",
+      "file": "nativeauth.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "male native start→stop→own interrupted record",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3446,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T22:38:28.282Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativeauth-20261007T223820463597Z/nativeauth-male-native-start→stop→own-interrupted-record/attachments/native-summary-eb2437b0a7f11510292883191f61725b0a0d7266.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4e4a3930b6b5bdc98663-63a162d5055e7349dfe6",
+          "file": "nativeauth.spec.ts",
+          "line": 236,
+          "column": 3
+        },
+        {
+          "title": "male native held result→same-account refresh→new owner explicit restart",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5695,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T22:38:32.163Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativeauth-20261007T223820463597Z/nativeauth-male-native-hel-79494-→new-owner-explicit-restart/attachments/native-summary-e4898a85e2073cccc24c521cbcf6995e8e75b90f.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4e4a3930b6b5bdc98663-b1d7f47aecca0b645fd9",
+          "file": "nativeauth.spec.ts",
+          "line": 274,
+          "column": 3
+        },
+        {
+          "title": "male native held result→logout→no old resume/save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3544,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T22:38:37.873Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativeauth-20261007T223820463597Z/nativeauth-male-native-held-result→logout→no-old-resume-save/attachments/native-summary-169cdeb898750a8519d376f443ce29d3334cd8ce.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4e4a3930b6b5bdc98663-c2d246357469ec5ebe34",
+          "file": "nativeauth.spec.ts",
+          "line": 306,
+          "column": 5
+        },
+        {
+          "title": "male native held result→server401→no old resume/save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3530,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T22:38:41.431Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativeauth-20261007T223820463597Z/nativeauth-male-native-hel-a098f-erver401→no-old-resume-save/attachments/native-summary-d2eaf99eb574c76ddc9ffb31a256d9d84ea1b56b.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4e4a3930b6b5bdc98663-04bfe7eba2d0782c49a3",
+          "file": "nativeauth.spec.ts",
+          "line": 306,
+          "column": 5
+        },
+        {
+          "title": "male native held result→pagehide→no old resume/save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3492,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T22:38:44.973Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativeauth-20261007T223820463597Z/nativeauth-male-native-hel-6c1d8-pagehide→no-old-resume-save/attachments/native-summary-f433aeed66d66f32b2bf7e839da9b5779c7f55d5.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4e4a3930b6b5bdc98663-503d3985904b49cbbbfb",
+          "file": "nativeauth.spec.ts",
+          "line": 306,
+          "column": 5
+        },
+        {
+          "title": "male native held result→unmount→no old resume/save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3369,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T22:38:48.588Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativeauth-20261007T223820463597Z/nativeauth-male-native-hel-f9cf3-→unmount→no-old-resume-save/attachments/native-summary-8c255d7f78cd80b4cbacf067d6774828f2105a74.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4e4a3930b6b5bdc98663-59d344c7fb9930613916",
+          "file": "nativeauth.spec.ts",
+          "line": 306,
+          "column": 5
+        },
+        {
+          "title": "female native start→stop→own interrupted record",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2998,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T22:38:51.968Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativeauth-20261007T223820463597Z/nativeauth-female-native-start→stop→own-interrupted-record/attachments/native-summary-a383057a80a50b9317ab85a280632e4259588870.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4e4a3930b6b5bdc98663-2d6c33652508f5b11ea7",
+          "file": "nativeauth.spec.ts",
+          "line": 236,
+          "column": 3
+        },
+        {
+          "title": "female native held result→same-account refresh→new owner explicit restart",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5510,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T22:38:54.977Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativeauth-20261007T223820463597Z/nativeauth-female-native-h-2a8a4-→new-owner-explicit-restart/attachments/native-summary-53016268d3512fff0edcfa56dd022e0f9a2e9459.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4e4a3930b6b5bdc98663-fa19b309c2a7181b6a34",
+          "file": "nativeauth.spec.ts",
+          "line": 274,
+          "column": 3
+        },
+        {
+          "title": "female native held result→logout→no old resume/save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3507,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T22:39:00.499Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativeauth-20261007T223820463597Z/nativeauth-female-native-h-aad32-t→logout→no-old-resume-save/attachments/native-summary-bc8b1cb4cabb51a4c337c3d88b0231195950e521.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4e4a3930b6b5bdc98663-1cfc5013cbbdf95b9357",
+          "file": "nativeauth.spec.ts",
+          "line": 306,
+          "column": 5
+        },
+        {
+          "title": "female native held result→server401→no old resume/save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3520,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T22:39:04.019Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativeauth-20261007T223820463597Z/nativeauth-female-native-h-36aef-erver401→no-old-resume-save/attachments/native-summary-900b3b32f91a9404d16b94a71b26bd5102148def.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4e4a3930b6b5bdc98663-55cfd72f40d1a91238ee",
+          "file": "nativeauth.spec.ts",
+          "line": 306,
+          "column": 5
+        },
+        {
+          "title": "female native held result→pagehide→no old resume/save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3432,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T22:39:07.552Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativeauth-20261007T223820463597Z/nativeauth-female-native-h-87326-pagehide→no-old-resume-save/attachments/native-summary-536bb93d9ca6da6ae30c6eadeacad7c5da736353.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4e4a3930b6b5bdc98663-ddb1df1fa970c7726991",
+          "file": "nativeauth.spec.ts",
+          "line": 306,
+          "column": 5
+        },
+        {
+          "title": "female native held result→unmount→no old resume/save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3700,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T22:39:10.995Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativeauth-20261007T223820463597Z/nativeauth-female-native-h-dfb2a-→unmount→no-old-resume-save/attachments/native-summary-a4da0a6b8284b9213d050fcebd7f7e6ed043c604.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4e4a3930b6b5bdc98663-bbd21095f8aaac9d4602",
+          "file": "nativeauth.spec.ts",
+          "line": 306,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-07T22:38:20.977Z",
+    "duration": 53713.047999999995,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
