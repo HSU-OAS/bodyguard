@@ -1,0 +1,316 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "[workspace]/bodyguard/frontend/node_modules/@playwright/test/cli.js",
+      "test",
+      "authcoaching.spec.ts",
+      "--config",
+      "playwright.account.config.ts",
+      "--output",
+      "test-results/authcoaching-20261007T220430343527Z"
+    ],
+    "configFile": "[workspace]/bodyguard/frontend/playwright.account.config.ts",
+    "rootDir": "[workspace]/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "[workspace]/bodyguard/frontend/test-results/authcoaching-20261007T220430343527Z",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "[workspace]/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "account.spec.ts",
+          "password.spec.ts",
+          "google.spec.ts",
+          "records.spec.ts",
+          "design.spec.ts",
+          "withdrawal.spec.ts",
+          "datahelp.spec.ts",
+          "integration.spec.ts",
+          "security.spec.ts",
+          "resultrecord.spec.ts",
+          "ownercapture.spec.ts",
+          "recordedsession.spec.ts",
+          "authcoaching.spec.ts",
+          "notifications.spec.ts",
+          "alertdelivery.spec.ts",
+          "ownedalert.spec.ts",
+          "summaries.spec.ts",
+          "minuteupload.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/authcoaching-20261007T220430343527Z/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "pnpm build && vite build --config e2e/fixtures/authCoaching.vite.ts && vite preview --host localhost",
+      "url": "http://localhost:4173",
+      "reuseExistingServer": false,
+      "timeout": 180000
+    }
+  },
+  "suites": [
+    {
+      "title": "authcoaching.spec.ts",
+      "file": "authcoaching.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "H02 actual provider prepares inert; explicit synthetic performance saves to own public record",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 886,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T22:04:38.154Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b0ae80cbfc86dc873c9-f96bee2ecc286d630b28",
+          "file": "authcoaching.spec.ts",
+          "line": 100,
+          "column": 1
+        },
+        {
+          "title": "H03 actual same-account refresh revokes old running session; no automatic recreation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 522,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T22:04:39.498Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b0ae80cbfc86dc873c9-7ab3a0cf56401bb4cd61",
+          "file": "authcoaching.spec.ts",
+          "line": 132,
+          "column": 1
+        },
+        {
+          "title": "H03 failed logout is not permission to keep coaching or save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 531,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T22:04:40.033Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b0ae80cbfc86dc873c9-b340fa21c524aa94e1cb",
+          "file": "authcoaching.spec.ts",
+          "line": 160,
+          "column": 1
+        },
+        {
+          "title": "H04 pagehide during synthetic pending permission reclaims late resource; pageshow never starts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 646,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T22:04:40.576Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b0ae80cbfc86dc873c9-2c034101466077444a43",
+          "file": "authcoaching.spec.ts",
+          "line": 186,
+          "column": 1
+        },
+        {
+          "title": "H05 actual logout succeeds but never permits old session resume or save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 574,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T22:04:41.234Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b0ae80cbfc86dc873c9-a8999667d94473fee650",
+          "file": "authcoaching.spec.ts",
+          "line": 212,
+          "column": 1
+        },
+        {
+          "title": "H05 actual server revoked account returns 401 and refresh retires the owned lifecycle",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 532,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T22:04:41.820Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b0ae80cbfc86dc873c9-d95b37b37b29fe23ba63",
+          "file": "authcoaching.spec.ts",
+          "line": 238,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-07T22:04:30.860Z",
+    "duration": 11582.833,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

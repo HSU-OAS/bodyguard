@@ -1,6 +1,6 @@
 # S2.T8 — 로그인 소유 재생의 교체·종료 장벽
 
-상태: 비공개 구현·단위/실제 API 브라우저 검증 통과, 최종 source 재검증 진행 / baseline `907dbdf886d101bbda24b2068ede19fa0b65c71d` / `codex/owned-auth-playback`
+상태: 비공개 구현·단위/실제 API 브라우저 검증 통과, 조건부 PR 게이트 진행 / runtime `f6c47d76e6e40fcfd8bac297c7989bea6d63f78a` / baseline `907dbdf886d101bbda24b2068ede19fa0b65c71d` / `codex/owned-auth-playback`
 
 FR-U-04·FR-S-02/04·FR-R-03·NFR-07/08. 기존 로그인 소유 hook과 S2.T7 재생 자원을 연결한다. 한 기록 세션마다 새 bridge를 전달하며, 이전 native 자원의 종료가 끝나기 전에 새 세션을 준비 완료로 내보내지 않는다.
 
@@ -18,3 +18,5 @@ testing-strategy에 따라 로그인/소유권 단위와 실제 API 브라우저
 ## 진행 결과
 
 기존 hook에 fresh lifecycle 전송·정리 합류·교체 장벽·고정 실패 격리를 추가했다. 실제 AuthProvider+S2.T7 bridge의 pending camera/입력은 모의 자원 단위 시험이다. 실제 Chrome/API/격리 PostgreSQL에서 가입→합성 수행→명시 저장→본인 기록 상세, 같은 계정 재확인, 성공/실패 로그아웃, 서버 logout 후 실제 /me401, 이탈을 별도 확인했다. 브라우저 자원/동작/시계/메일은 합성이고 native SDK·GLB 통합·물리 webcam·실제 사람 시험은 아니다. 작성자 리뷰의 재진입 교체 누락을 RED로 재현·수정했으며 원본 실패를 보존한다.
+
+[최종 runtime의 실제 흐름·원본 실패·source SHA·작성자 리뷰·남은 조건](../review/owned-auth-playback/README.md). 공개 byte/모델·제품 정책/화면 변경0이며 native SDK/GLB/API 전체 통합과 D2/전체1~6을 완료로 표시하지 않는다.

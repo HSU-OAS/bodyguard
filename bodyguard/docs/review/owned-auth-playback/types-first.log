@@ -1,0 +1,6 @@
+src/coaching/useRecordedCoaching.test.tsx(612,17): error TS2339: Property 'start' does not exist on type 'never'.
+src/coaching/useRecordedCoaching.test.tsx(636,65): error TS2322: Type '() => boolean' is not assignable to type '(now: number, deltaMs: number) => Readonly<{ status: "tracking" | "partial" | "untracked" | "closed"; tracked: number; total: number; }>'.
+  Type 'boolean' is not assignable to type 'Readonly<{ status: "closed" | "tracking" | "partial" | "untracked"; tracked: number; total: number; }>'.
+src/coaching/useRecordedCoaching.test.tsx(637,46): error TS2322: Type '() => void' is not assignable to type '() => Promise<void>'.
+  Type 'void' is not assignable to type 'Promise<void>'.
+src/coaching/useRecordedCoaching.test.tsx(645,26): error TS2339: Property 'start' does not exist on type 'never'.
