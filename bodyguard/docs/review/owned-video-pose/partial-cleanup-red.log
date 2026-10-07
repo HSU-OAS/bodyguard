@@ -1,0 +1,26 @@
+
+ RUN  v5.0.2 /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-owned-video-pose/bodyguard/frontend
+
+ ❯ src/pose/ownedPoseFrame.test.ts (19 tests | 1 failed) 17ms
+   ❯ owned pose frame (19)
+     × preserves tagged partial-provider cleanup failure before a result is returned 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/pose/ownedPoseFrame.test.ts > owned pose frame > preserves tagged partial-provider cleanup failure before a result is returned
+AssertionError: expected Error: Pose frame unavailable to be an instance of ResourceCleanupError
+ ❯ src/pose/ownedPoseFrame.test.ts:41:34
+     39|     const f = fixture()
+     40|     f.detect.mockImplementation(() => { throw new ResourceCleanupError…
+     41|     await expect(f.source.read()).rejects.toBeInstanceOf(ResourceClean…
+       |                                  ^
+     42|     await expect(f.source.dispose()).rejects.toBeInstanceOf(ResourceCl…
+     43|   })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 18 passed (19)
+   Start at  04:57:36
+   Duration  202ms (transform 55%, tests 22%, import 17%, worker 5%)

@@ -1,6 +1,6 @@
 # S2.T5 — 새 영상 프레임 → 추론 → 사용자 아바타
 
-상태: 명세·하네스 작성 / baseline `d1743c49509d782a888e55ed4da406a270985ca4` / `codex/owned-video-pose`
+상태: 비공개 구현·검증 통과 / runtime `73a3e9961e91fa1ce59938ca24bb03606eaf7b1f` / baseline `d1743c49509d782a888e55ed4da406a270985ca4` / `codex/owned-video-pose`
 
 FR-M-01/02/07·FR-A-01/03·NFR-07/08. S2.T4의 동일 결과 전달 경로에 브라우저의 실제 decoded-frame 공급자를 연결한다. 공개 코칭/판정이나 실제 사람 정확도 완료를 뜻하지 않는다.
 
@@ -17,3 +17,7 @@ FR-M-01/02/07·FR-A-01/03·NFR-07/08. S2.T4의 동일 결과 전달 경로에 �
 testing-strategy로 unit(소유권/순서/취소)·native integration(실제 fake MediaStream·VideoFrame·SDK·GLB)·실제 참여자 검증을 분리한다. 관절/진단 수치·SDK 제품 통신 정책·외형/Blender·미승인 UI/공개 경로·API/SQL·CI/시크릿·운영은 변경하지 않는다. SDK의 현재 TexImageSource/displayWidth API를 로컬 설치 소스/타입에서 확인했고 실제 지원 여부는 native 시험으로 확인한다. 임의 fallback으로 품질 기준을 낮추지 않는다.
 
 D2-A/M/T/R/I/P·SDK/디자인 승인·Docker/외부·실제 참여자/운영과 전체1~6 완료 기준은 유지한다.
+
+## 실행 결과
+
+[실제 흐름·화면·원본 실패·미완료](../review/owned-video-pose/README.md). runtime73a3e99에서 실제 Chrome 가짜 카메라의 native VideoFrame·실제 SDK·남녀 GLB 연속 전달/대기 취소/명시 재준비/종료, 전체861 frontend·정적/타입/assets/build/guard를 통과했다. 물리 카메라/실제 사람·올바른 시범/적색 교정·공개 코칭은 아니며 기존 외형/SDK 정책/운영·전체1~6 기준을 유지한다. 작성자 리뷰 후 조건부 PR 게이트를 진행한다.
