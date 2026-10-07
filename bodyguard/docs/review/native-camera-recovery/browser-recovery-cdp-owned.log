@@ -1,0 +1,21 @@
+
+Running 8 tests using 1 worker
+
+  ✓  1 e2e/nativerecovery.spec.ts:282:3 › male browser permission denied→explicit retry (4.1s)
+  ✓  2 e2e/nativerecovery.spec.ts:311:3 › male delayed native camera→cancel→late reclaim→explicit retry (3.1s)
+  ✓  3 e2e/nativerecovery.spec.ts:351:3 › male native track lost→stop→explicit retry (5.2s)
+  ✓  4 e2e/nativerecovery.spec.ts:367:3 › male GLB HTTP404→native cleanup→explicit retry (3.5s)
+  ✓  5 e2e/nativerecovery.spec.ts:282:3 › female browser permission denied→explicit retry (3.0s)
+  ✓  6 e2e/nativerecovery.spec.ts:311:3 › female delayed native camera→cancel→late reclaim→explicit retry (2.9s)
+  ✓  7 e2e/nativerecovery.spec.ts:351:3 › female native track lost→stop→explicit retry (4.9s)
+  ✓  8 e2e/nativerecovery.spec.ts:367:3 › female GLB HTTP404→native cleanup→explicit retry (3.5s)
+
+  8 passed (40.2s)
+[WebServer] (node:19714) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:19727) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:19754) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:19783) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

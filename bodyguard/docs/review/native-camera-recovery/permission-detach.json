@@ -1,0 +1,74 @@
+{
+  "browser": "chrome",
+  "results": [
+    {
+      "mode": "cdp",
+      "state": {
+        "camera": "denied",
+        "ptz": "denied"
+      },
+      "native": "NotAllowedError",
+      "afterDetach": "prompt",
+      "actualCamera": false,
+      "actualPopup": false
+    },
+    {
+      "mode": "cdp-clear",
+      "state": {
+        "camera": "denied",
+        "ptz": "prompt"
+      },
+      "native": "NotAllowedError",
+      "afterDetach": "prompt",
+      "actualCamera": false,
+      "actualPopup": false
+    },
+    {
+      "mode": "cdp-ptz",
+      "state": {
+        "camera": "granted",
+        "ptz": "denied"
+      },
+      "native": "granted-then-stopped",
+      "afterDetach": "prompt",
+      "actualCamera": false,
+      "actualPopup": false
+    },
+    {
+      "mode": "cdp-no-ptz",
+      "state": {
+        "camera": "denied",
+        "ptz": "denied"
+      },
+      "native": "NotAllowedError",
+      "afterDetach": "prompt",
+      "actualCamera": false,
+      "actualPopup": false
+    },
+    {
+      "mode": "grant-empty",
+      "state": {
+        "camera": "denied",
+        "ptz": "denied"
+      },
+      "native": "NotAllowedError",
+      "afterDetach": "denied",
+      "actualCamera": false,
+      "actualPopup": false
+    },
+    {
+      "mode": "clear-empty",
+      "state": {
+        "camera": "denied",
+        "ptz": "denied"
+      },
+      "native": "NotAllowedError",
+      "afterDetach": "denied",
+      "actualCamera": false,
+      "actualPopup": false
+    }
+  ],
+  "actualHuman": false,
+  "physicalCamera": false,
+  "rawFramesExported": 0
+}

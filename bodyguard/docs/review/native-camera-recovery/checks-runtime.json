@@ -1,0 +1,94 @@
+{
+  "head": "9918072bbf5f6285be6510bee04b71289680f0a9",
+  "phase": "runtime",
+  "results": [
+    {
+      "name": "frontend",
+      "command": [
+        "node_modules/.bin/vitest",
+        "run",
+        "--reporter=json",
+        "--outputFile=[owned-test-scratch]/frontend-runtime.json"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "types",
+      "command": [
+        "node_modules/.bin/tsc",
+        "--noEmit"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "biome",
+      "command": [
+        "node_modules/.bin/biome",
+        "check",
+        "."
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "ruff",
+      "command": [
+        "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard/backend/.venv/bin/ruff",
+        "check",
+        "tests/run_browser.py"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "ruff-format",
+      "command": [
+        "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard/backend/.venv/bin/ruff",
+        "format",
+        "--check",
+        "tests/run_browser.py"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "assets",
+      "command": [
+        "node",
+        "scripts/prepare-assets.mjs"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "build",
+      "command": [
+        "node_modules/.bin/vite",
+        "build"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "guard",
+      "command": [
+        "node",
+        "scripts/check-selection-production.mjs"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "signal": null
+    }
+  ]
+}
