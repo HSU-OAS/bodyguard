@@ -61,6 +61,7 @@ export function MinuteSummaryPage() {
     }
   }, [from, to, cutoff, page])
   const [draft, setDraft] = useState({ from, to })
+  const draftRoute = useRef({ from, to, key })
   const [invalid, setInvalid] = useState(false)
   const [view, setView] = useState<View | null>(null)
   const [selected, setSelected] = useState<string | null>(null)
@@ -84,7 +85,10 @@ export function MinuteSummaryPage() {
     }
   }, [authority, key])
   useEffect(() => {
-    void key
+    // FR-R-03: initialization already owns the first URL; do not overwrite early input.
+    const previous = draftRoute.current
+    if (previous.from === from && previous.to === to && previous.key === key) return
+    draftRoute.current = { from, to, key }
     setDraft({ from, to })
     setInvalid(false)
     setSelected(null)
