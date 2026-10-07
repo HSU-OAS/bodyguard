@@ -20,7 +20,7 @@ compose에는 기본 키/메일/DB/운영 계정이나 기본 포트가 없다. 
 
 bodyguard.test용 TLS만 제공하며 host127.0.0.1에만 publish한다. API는 웹 network namespace의127.0.0.1:8000에 bind하고 밖으로 publish하지 않는다. default API 이미지 명령의 no-proxy-headers는 유지한다. 명시된 compose에서만127.0.0.1 peer 하나를 신뢰하고 NGINX가 외부 XFF를 실제 peer로 교체한다. 이는 인증 IP quota를 유지하기 위한 구성이지 신뢰할 외부 ingress/subnet을 정한 사업/배포 결정이 아니다.
 
-API 경로는 SPA로 fallback하지 않는다. 현재 공개/계정/기록 route만 index로 직접 진입하고 없는 에셋/개발/미등록 파일은404다. upstream 연결 실패는 고정503 JSON 후보 응답이다. URL/인증 입력을 access/error log에 저장하지 않는다. 공개 domain·외부 ingress·CA/HSTS·운영 관측/부하/복구는 별도 적용 승인과 실제 검증이 필요하다.
+API 경로는 SPA로 fallback하지 않는 구성이다. 현재 공개/계정/기록 route(알림 설정·자세 기록 포함)만 index로 직접 진입하도록 명시하며 없는 에셋/개발/미등록 파일은404 구성이다. 최신 route source 하네스는 간단한 pattern의 누락/과도한 허용을 검사하지만 실제 NGINX/PCRE·URI 정규화·HTTP/TLS 시험은 아니다. upstream 연결 실패는 고정503 JSON 후보 응답이다. URL/인증 입력을 access/error log에 저장하지 않는다. 공개 domain·외부 ingress·CA/HSTS·운영 관측/부하/복구는 별도 적용 승인과 실제 검증이 필요하다.
 
 웹 재생성 시 API가 오래된 namespace를 계속 쓰지 않도록 **소유 패키지의 두 서비스를 함께** 다룬다. compose의 restart 의존성만으로 재기동 검증을 통과 처리하지 않는다.
 
@@ -44,12 +44,13 @@ backend의 기존 시험 환경에서 다음을 실행한다.
 ```bash
 .venv/bin/pytest -q tests/test_web_runtime_package.py
 .venv/bin/pytest -q ../deploy/tests/test_local_package_contract.py
+.venv/bin/pytest -q ../deploy/tests/test_web_route_contract.py
 .venv/bin/ruff check . ../deploy/tests
 .venv/bin/ruff format --check . ../deploy/tests
 .venv/bin/mypy app
 ```
 
-파일 존재 시험은5개 파일의 존재만 확인한다. 별도7개 시험은 실제 Compose parser와 native Uvicorn ASGI forwarding 경계다. **둘 다 image/컨테이너/NGINX/TLS/브라우저 시험이 아니다.** 실제 DB 회귀는 별도의 소유 DB·기존 advisory ownership lock을 사용한다.
+파일 존재 시험은5개 파일의 존재만 확인한다. 별도7개 시험은 실제 Compose parser와 native Uvicorn ASGI forwarding 경계다. 추가31개는 현재15개 웹 route 목록·14개 SPA pattern·16개 제외 경로의 source 계약이다. **모두 image/컨테이너/NGINX/TLS/브라우저 시험이 아니다.** 실제 DB 회귀는 별도의 소유 DB·기존 advisory ownership lock을 사용한다.
 
 ## engine 연결 후 필수 실행·복구
 

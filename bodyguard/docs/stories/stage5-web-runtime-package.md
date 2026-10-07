@@ -33,6 +33,12 @@ engineering testing-strategy와 deploy-checklist의 승인/rollback 경계를 �
 
 새 하네스는 main의 금지 문자열을 포함하는 synthetic JS를 exporter에 전달해 출력 생성 전 거부·원본 보존을 확인한다. 최신 production TS/build·실제 파일 hash 선별·DOM 회귀·native Compose parser/ASGI·정적 검사를 실제로 재실행하고 실행 HEAD/전후 source·보존 원본 SHA를 별도로 남긴다. 파일 선별과 native parser가 통과해도 이미지/컨테이너·NGINX/TLS·계정 쿠키/두 peer quota/장애·복구의 실제 패키지 검증을 대체하지 않는다. Docker engine이 없으면 그 게이트는 실패/대기로 기록하고 Draft를 유지한다.
 
+통합 후 실제 App route와 기존 NGINX 구성을 대조해 `/account/notifications`·`/posture-records`가 SPA 직접 주소 규칙에 누락된 것을 발견했다. 먼저 현재15개 production route의 명시 목록·14개 SPA 경로·16개 API/개발/미등록 경로 제외를 source 하네스로 확인하고 누락만 보완한다. Python의 현재 간단한 정규식 부분집합 대조는 NGINX/PCRE의 실제 라우팅·정규화·TLS 실행을 대신하지 않으며 해당 실제 게이트는 남긴다.
+
+### 통합 후 실제 결과
+
+main33a6e8b 통합 source6cb4b31에서 최신 DOM/TS/정적·production build/선별 출력·native 계약을 통과했다. 이후 기존 직접 주소2개 누락을 source 하네스에서 실제 RED로 확인하고 최소 NGINX 규칙을 보완했다. 최종31개 route source 계약과 기존12개 native/파일 계약은43개 통과이며 format 중간 실패/기존 원본을 보존했다. [실제 수치·실패·실행 소스와 미실행](../review/stage5-web-runtime/README.md). frontend/API source·기존 계정/기록 화면과 실제 선별 출력은 바꾸지 않았다. 실제 engine 없음/exit1은 남고 이미지·NGINX/HTTPS/브라우저/복구를 검증 완료로 표시하지 않는다. 독립 native 통합 범위만 완료이며 Story 전체·5단계·1~6 완료/병합 조건은 미충족이다.
+
 ## 현재 의존성·남은 게이트
 
 Docker CLI29.2.1·desktop-linux context는 있지만 daemon Unix socket이 없어 실제 engine이 미연결이다. CEO에게 Docker Desktop의 로컬 실행 도움을 요청했다. 새 계정/결제/운영 연결이 아니며 기다리는 동안 위 독립 구현을 계속한다. 연결 불가이면 해당 runtime gate를 보류하고 라이선스/백업·복구/6단계 하네스 등 다음 독립 작업으로 진행한다.

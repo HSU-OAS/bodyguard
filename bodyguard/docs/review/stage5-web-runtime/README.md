@@ -1,5 +1,15 @@
 # 웹/API 패키지 — 최초 실패와 실행 경계
 
+## 2026-10-07 최신 main 통합 결과
+
+Draft #29의 기존 source1336d3d에 main33a6e8b(PR #57 merge)를 통합한 실행 HEAD는6cb4b3138931290ee964f720f3d0bbfa2903173a다. 두 충돌 파일에서 이전 실행 기록과 main의42개 private producer 제외 문자열을 보존했고 기존 exporter 함수와 추가 개발 경로2개 제외도 유지했다. 공개 frontend/src·backend/app·migration·dependency/lock은 latest main과 같다. 새 화면 구성/카메라/아바타/SDK 정책/계정·운영 변경은 없다.
+
+[첫 native 통합 실행·203개 source·기존 원본 SHA](integrated-20261007/summary.json): 기존 실패/실행 자료를 byte 보존하고 파일 exporter33개·DOM693개/42파일·파일 존재5개와 native Compose parser/ASGI7개·TS/Biome150파일·Ruff/format/mypy11source·실제 Vite production build·출력 guard를 통과했다. tsc와 Vite를 각각 실행했으며 prepare-assets/모델 다운로드·Docker build가 아니다. 선별된 index/JS/CSS/Google PNG4개가 실제 dist 원본과 byte/hash 동일하다. 이 시점 source의 테스트이며 이후 서버 직접 경로 보완은 아래 별도 증거다. 전체 API/SQL 회귀는 이번에 재실행하지 않았고 기존266개를 최신 회귀로 표시하지 않는다.
+
+실제 App 경로와 패키지 구성을 읽다가 `/account/notifications`·`/posture-records`의 SPA 직접 주소 누락을 발견했다. [직접 경로 RED→GREEN·204개 최종 source·실패 보존](routes-20261007/summary.json): source 계약31건 중 이2건이 실패했고 NGINX 규칙의 이2개 경로만 추가했다. 최종 계약43건은 파일 존재5·parser/ASGI7·route source31이며 실패/skip0이다. route 목록15개·SPA pattern14개·API/개발/미등록 제외16개를 확인했다. Python의 현재 단순 pattern 대조는 실제 NGINX/PCRE·URI 정규화·HTTP/TLS 실행 증거가 아니다. 새 테스트의 format 실패1개도 보존하고 최종 Ruff/check·format·mypy를 통과했다. 첫 XML preflight의 sourceAtRunVerified=false 한계와 이후 실행 전후 정확한 source/unstaged 변경 표시를 구분했다.
+
+직접 경로 보완 이후 source 차이는 deploy/nginx.conf와 신규 route test뿐이며 기존 frontend/API/build/선별 출력은 같다. 작성자 code-review에서 main 제외 목록·source/current 파일·원본 hash·직접 경로/API 구분·raw 개인정보 미게시·실제/미실행 표기를 확인했다. 별도 에이전트/전문가 리뷰는 하지 않았다. 실제 Docker CLI29.2.1 daemon 확인은 exit1/server 없음이며 켜거나 기존 컨테이너를 사용하지 않았다. **이미지/NGINX/TLS·패키지 계정/기록·두 peer quota·재기동/DB 장애 복구 검증은 여전히 미완료이며 Story 완료/PR 병합 불가**다. Draft #29·2단계 이월·디자인 구조 승인·SDK/실측/참여자·외부/운영·전체1~6 게이트는 그대로다. 아래 내용은 최초 작성 시점의 보존 기록이다.
+
 S5.2 시작 maincbfd07ff944c94de12674bd982bfe98f075616f0 · 독립 패키지/선별 출력·로컬 TLS 구성 후보를 구현했다. **실제 Docker 이미지 빌드/컨테이너·NGINX/HTTPS·패키지 브라우저 검증은 미완료**이며 Story 완료/병합·5단계 통과가 아니다.
 
 [최초 red](first-red.xml)5건은 backend/frontend Dockerfile·ignore와 deploy/nginx.conf가 실제 없어 실패했다(0.11초). 대체 파일/모의 성공을 만들지 않았다. 가독본은 줄 끝 공백만 정리하고 원본 gzip/기존 증거를 보존한다. 이 파일 존재 검사는 실제 이미지 빌드/서비스 실행/브라우저 검증이 아니다.
