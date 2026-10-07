@@ -1,0 +1,59 @@
+{
+  "head": "7e8a396ec7ace466382a05cd8d5ad3f775f33b6c",
+  "results": [
+    {
+      "mode": "video",
+      "scratch": "/private/tmp/bodyguard-video-pose-proof.dgO2Ih",
+      "name": "build",
+      "command": [
+        "node_modules/.bin/vite",
+        "build",
+        "--config",
+        "e2e/fixtures/ownedVideoPose.vite.ts"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "mode": "video",
+      "scratch": "/private/tmp/bodyguard-video-pose-proof.dgO2Ih",
+      "name": "native",
+      "command": [
+        "node",
+        "scripts/test-pose-frame-browser.mjs",
+        "/private/tmp/bodyguard-video-pose-proof.dgO2Ih",
+        "regression",
+        "video"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "mode": "blank",
+      "scratch": "/private/tmp/bodyguard-pose-frame-proof.VrlWSW",
+      "name": "build",
+      "command": [
+        "node_modules/.bin/vite",
+        "build",
+        "--config",
+        "e2e/fixtures/ownedPoseFrame.vite.ts"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "mode": "blank",
+      "scratch": "/private/tmp/bodyguard-pose-frame-proof.VrlWSW",
+      "name": "native",
+      "command": [
+        "node",
+        "scripts/test-pose-frame-browser.mjs",
+        "/private/tmp/bodyguard-pose-frame-proof.VrlWSW",
+        "regression",
+        "blank"
+      ],
+      "exit": 0,
+      "signal": null
+    }
+  ]
+}

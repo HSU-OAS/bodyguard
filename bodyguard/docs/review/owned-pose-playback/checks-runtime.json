@@ -1,0 +1,98 @@
+{
+  "head": "7e8a396ec7ace466382a05cd8d5ad3f775f33b6c",
+  "phase": "runtime",
+  "results": [
+    {
+      "name": "unit",
+      "command": [
+        "node_modules/.bin/vitest",
+        "run",
+        "src/avatar/ownedPosePlayback.test.ts",
+        "--reporter=json",
+        "--outputFile=/private/tmp/bodyguard-pose-playback-proof.x10nrd/unit-runtime-final.json"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "frontend",
+      "command": [
+        "node_modules/.bin/vitest",
+        "run",
+        "--reporter=json",
+        "--outputFile=/private/tmp/bodyguard-pose-playback-proof.x10nrd/frontend-runtime.json"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "types",
+      "command": [
+        "node_modules/.bin/tsc",
+        "--noEmit"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "biome",
+      "command": [
+        "node_modules/.bin/biome",
+        "check",
+        "."
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "assets",
+      "command": [
+        "node",
+        "scripts/prepare-assets.mjs"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "build",
+      "command": [
+        "node_modules/.bin/vite",
+        "build"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "guard",
+      "command": [
+        "node",
+        "scripts/check-selection-production.mjs"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "probe",
+      "command": [
+        "node_modules/.bin/vite",
+        "build",
+        "--config",
+        "e2e/fixtures/ownedPosePlayback.vite.ts"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "native",
+      "command": [
+        "node",
+        "scripts/test-pose-frame-browser.mjs",
+        "/private/tmp/bodyguard-pose-playback-proof.x10nrd",
+        "runtime",
+        "playback"
+      ],
+      "exit": 0,
+      "signal": null
+    }
+  ]
+}

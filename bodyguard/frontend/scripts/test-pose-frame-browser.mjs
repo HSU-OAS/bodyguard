@@ -10,11 +10,13 @@ import { chromium } from '@playwright/test'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const [scratch, label, mode = 'blank'] = process.argv.slice(2)
-assert(mode === 'blank' || mode === 'video')
+assert(mode === 'blank' || mode === 'video' || mode === 'playback')
 assert(
   (mode === 'blank'
     ? /^\/private\/tmp\/bodyguard-pose-frame-proof\.[A-Za-z0-9]+$/
-    : /^\/private\/tmp\/bodyguard-video-pose-proof\.[A-Za-z0-9]+$/
+    : mode === 'video'
+      ? /^\/private\/tmp\/bodyguard-video-pose-proof\.[A-Za-z0-9]+$/
+      : /^\/private\/tmp\/bodyguard-pose-playback-proof\.[A-Za-z0-9]+$/
   ).test(scratch ?? ''),
 )
 assert.equal(realpathSync(scratch), scratch)
@@ -28,6 +30,7 @@ const files = [
   'src/pose/landmarker.ts',
   'src/pose/constants.ts',
   'src/avatar/ownedAvatarPair.ts',
+  'src/avatar/ownedPosePlayback.ts',
   'src/avatar/observedPoseRig.ts',
   'src/avatar/directionalRig.ts',
   'src/avatar/eightWeightSkin.ts',
@@ -35,6 +38,8 @@ const files = [
   'e2e/fixtures/ownedPoseFrame.vite.ts',
   'e2e/fixtures/ownedVideoPoseProbe.ts',
   'e2e/fixtures/ownedVideoPose.vite.ts',
+  'e2e/fixtures/ownedPosePlaybackProbe.ts',
+  'e2e/fixtures/ownedPosePlayback.vite.ts',
   'scripts/test-pose-frame-browser.mjs',
   'pnpm-lock.yaml',
 ]
@@ -93,9 +98,11 @@ const server = createServer((req, res) => {
     res.setHeader('Content-Security-Policy', "connect-src 'self'")
     res.setHeader('Content-Type', 'text/html')
     res.end(
-      mode === 'video'
-        ? '<!doctype html><html lang="ko"><meta charset="utf-8"><title>비공개 영상 전달 검증</title><body style="margin:0;background:white"><p>미완성 A37 · 가짜 카메라 · 실제 SDK · 코칭 아님</p><canvas id="avatar"></canvas><script type="module">import{mountVideoPoseProbe}from"/probe.js";window.openPoseFrame=async gender=>{await window.probe?.close();window.probe=await mountVideoPoseProbe(document.querySelector("#avatar"),gender);return window.probe.snapshot()};</script>'
-        : '<!doctype html><html lang="ko"><meta charset="utf-8"><title>비공개 추론 전달 검증</title><body style="margin:0;background:white"><p>미완성 A37 · blank SDK 입력 · 긍정 동작 합성 · 코칭 아님</p><canvas id="avatar"></canvas><script type="module">import{mountPoseFrameProbe}from"/probe.js";window.openPoseFrame=async gender=>{await window.probe?.close();window.probe=await mountPoseFrameProbe(document.querySelector("#avatar"),gender);return window.probe.snapshot()};</script>',
+      mode === 'playback'
+        ? '<!doctype html><html lang="ko"><meta charset="utf-8"><title>비공개 연속 재생 검증</title><body style="margin:0;background:white"><p>미완성 A37 · native 미검출 / 긍정 움직임 합성 · 코칭 아님</p><canvas id="avatar"></canvas><script type="module">import{mountVideoPoseProbe,mountPoseFrameProbe}from"/probe.js";window.openPoseFrame=async(gender,kind="video")=>{await window.probe?.close();window.probe=kind==="video"?await mountVideoPoseProbe(document.querySelector("#avatar"),gender):await mountPoseFrameProbe(document.querySelector("#avatar"),gender);return window.probe.snapshot()};</script>'
+        : mode === 'video'
+          ? '<!doctype html><html lang="ko"><meta charset="utf-8"><title>비공개 영상 전달 검증</title><body style="margin:0;background:white"><p>미완성 A37 · 가짜 카메라 · 실제 SDK · 코칭 아님</p><canvas id="avatar"></canvas><script type="module">import{mountVideoPoseProbe}from"/probe.js";window.openPoseFrame=async gender=>{await window.probe?.close();window.probe=await mountVideoPoseProbe(document.querySelector("#avatar"),gender);return window.probe.snapshot()};</script>'
+          : '<!doctype html><html lang="ko"><meta charset="utf-8"><title>비공개 추론 전달 검증</title><body style="margin:0;background:white"><p>미완성 A37 · blank SDK 입력 · 긍정 동작 합성 · 코칭 아님</p><canvas id="avatar"></canvas><script type="module">import{mountPoseFrameProbe}from"/probe.js";window.openPoseFrame=async gender=>{await window.probe?.close();window.probe=await mountPoseFrameProbe(document.querySelector("#avatar"),gender);return window.probe.snapshot()};</script>',
     )
   } else if (Object.hasOwn(resources, path)) {
     res.setHeader(
@@ -134,10 +141,11 @@ const report = {
   actualChrome: true,
   actualWebGL: true,
   actualCamera: false,
-  actualFakeCamera: mode === 'video',
-  actualVideoFrame: mode === 'video',
+  actualFakeCamera: mode !== 'blank',
+  actualVideoFrame: mode !== 'blank',
+  actualRAF: mode === 'playback',
   actualHuman: false,
-  syntheticPositiveMovement: mode === 'blank',
+  syntheticPositiveMovement: mode !== 'video',
   releaseAvatar: false,
   productPolicyApproved: false,
   inputStored: false,
@@ -167,7 +175,7 @@ try {
     channel: 'chrome',
     headless: true,
     args:
-      mode === 'video'
+      mode !== 'blank'
         ? ['--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream']
         : [],
     proxy: { server: originOf(proxy), bypass: '127.0.0.1,localhost,[::1]' },
@@ -176,7 +184,7 @@ try {
   context = await browser.newContext({
     viewport: { width: 1440, height: 960 },
     serviceWorkers: 'block',
-    permissions: mode === 'video' ? ['camera'] : [],
+    permissions: mode !== 'blank' ? ['camera'] : [],
   })
   await context.route('**/*', async (route) => {
     if (!route.request().url().startsWith(`${origin}/`)) {
@@ -200,7 +208,7 @@ try {
         throw new Error('Camera forbidden in pose frame fixture')
       }
     }
-  }, mode === 'video')
+  }, mode !== 'blank')
   page = await context.newPage()
   page.on('pageerror', (error) => errors.push(error.name))
   await page.goto(origin)
@@ -214,6 +222,125 @@ try {
     assert.equal(initial.nativeCalls, 0)
     assert.equal(initial.syntheticCalls, 0)
     sample.stages.push({ case: 'prepared', ...initial })
+    if (mode === 'playback') {
+      assert(initial.cameraLive && initial.rawVideoHidden)
+      assert.equal(initial.renderFrames, 0)
+      assert.equal(initial.frames, 0)
+      assert(await page.evaluate(() => window.probe.startPlayback('video')))
+      await page.waitForFunction(() => window.probe.snapshot().nativeCloses >= 6)
+      await page.evaluate(() => window.probe.holdNextResult())
+      await page.waitForFunction(() => window.probe.snapshot().held)
+      const holding = await page.evaluate(() => window.probe.snapshot())
+      assert(holding.nativeCalls >= 7 && holding.playback.pending)
+      assert.equal(holding.nativeCloses, holding.nativeCalls - 1)
+      assert.equal(holding.frames, holding.nativeCalls)
+      assert.equal(holding.frameCloseCalls, holding.frames - 1)
+      assert.equal(holding.allFramesClosed, false)
+      assert.equal(holding.state.tracked, 0)
+      sample.stages.push({ case: 'native-video-result-held', ...holding })
+      await page.evaluate(
+        () =>
+          new Promise((resolve) =>
+            requestAnimationFrame(() =>
+              requestAnimationFrame(() => requestAnimationFrame(resolve)),
+            ),
+          ),
+      )
+      const rendering = await page.evaluate(() => window.probe.snapshot())
+      assert(rendering.renderFrames > holding.renderFrames)
+      assert.equal(rendering.nativeCalls, holding.nativeCalls)
+      assert(rendering.referenceUnchanged && rendering.framing.every(Boolean))
+      sample.stages.push({ case: 'raf-continues-during-native-pending', ...rendering })
+      await page.evaluate(() => {
+        window.heldDeadline = performance.now() + 300
+      })
+      await page.waitForFunction(() => performance.now() >= window.heldDeadline)
+      await page.evaluate(() => window.probe.releaseHeldResult())
+      await page.waitForFunction(
+        (minimum) => window.probe.snapshot().nativeCloses > minimum,
+        holding.nativeCalls,
+      )
+      const recovered = await page.evaluate(() => window.probe.snapshot())
+      assert.equal(recovered.playback.status, 'running')
+      assert.equal(recovered.playback.failure, null)
+      assert.equal(recovered.state.tracked, 0)
+      sample.stages.push({
+        case: 'expired-native-result-discarded-new-frame-continues',
+        ...recovered,
+      })
+      await page.evaluate(() => window.probe.holdNextResult())
+      await page.waitForFunction(() => window.probe.snapshot().held)
+      const heldClosing = await page.evaluate(() => window.probe.snapshot())
+      await page.evaluate(() => {
+        window.pendingRuntimeClose = window.probe.close()
+      })
+      const closing = await page.evaluate(() => window.probe.snapshot())
+      assert(closing.closed && closing.cameraLive && closing.playback.pending)
+      assert.equal(closing.nativeCloses, heldClosing.nativeCalls - 1)
+      assert.equal(closing.detectorCloses, 0)
+      assert.equal(closing.models, 2)
+      await page.evaluate(
+        () => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))),
+      )
+      const waiting = await page.evaluate(() => window.probe.snapshot())
+      assert.equal(waiting.renderFrames, closing.renderFrames)
+      await page.evaluate(() => window.probe.releaseHeldResult())
+      const stopped = await page.evaluate(() => window.pendingRuntimeClose)
+      assert(stopped.tracksEnded && stopped.detached && stopped.allFramesClosed)
+      assert.equal(stopped.models, 0)
+      assert.equal(stopped.nativeCloses, heldClosing.nativeCalls)
+      assert.equal(stopped.detectorCloses, 1)
+      assert.deepEqual(stopped.memory, stopped.baseline)
+      sample.stages.push({
+        case: 'late-native-result-reclaimed-before-sdk-camera-close',
+        ...stopped,
+      })
+      await page.evaluate((value) => window.openPoseFrame(value, 'synthetic'), gender)
+      await page.evaluate(() => {
+        window.pendingRuntimeClose = null
+      })
+      assert(await page.evaluate(() => window.probe.startPlayback('synthetic')))
+      await page.waitForFunction(() => {
+        const s = window.probe.snapshot()
+        return s.held && s.movingFrames >= 3
+      })
+      const moving = await page.evaluate(() => window.probe.snapshot())
+      assert(moving.userChanged && moving.referenceUnchanged && moving.framing.every(Boolean))
+      assert.equal(moving.syntheticCalls, 3)
+      assert.equal(moving.syntheticCloses, 2)
+      assert.equal(moving.nativeCalls, 0)
+      assert(moving.playback.pending)
+      sample.stages.push({ case: 'synthetic-positive-smoothed-while-source-pending', ...moving })
+      const preview = join(scratch, `${label}-${gender}.png`)
+      await page.locator('#avatar').screenshot({ path: preview })
+      sample.previewSha = sha(readFileSync(preview))
+      await page.waitForFunction(() => window.probe.snapshot().state.tracked === 0)
+      const expired = await page.evaluate(() => window.probe.snapshot())
+      assert(
+        expired.held &&
+          expired.playback.pending &&
+          expired.userChanged &&
+          expired.referenceUnchanged,
+      )
+      assert(expired.renderFrames > moving.renderFrames)
+      assert.equal(expired.syntheticCalls, 3)
+      sample.stages.push({ case: 'observation-expires-without-invented-correct-pose', ...expired })
+      await page.evaluate(() => {
+        window.pendingRuntimeClose = window.probe.close()
+      })
+      await page.evaluate(() => window.probe.releaseHeldResult())
+      const closed = await page.evaluate(() => window.pendingRuntimeClose)
+      assert.equal(closed.models, 0)
+      assert.equal(closed.syntheticCloses, 3)
+      assert.equal(closed.nativeCloses, 0)
+      assert.equal(closed.detectorCloses, 1)
+      assert.deepEqual(closed.memory, closed.baseline)
+      const again = await page.evaluate(() => window.probe.close())
+      assert.equal(again.syntheticCloses, 3)
+      sample.stages.push({ case: 'synthetic-source-and-pair-closed-idempotently', ...closed })
+      sample.passed = true
+      continue
+    }
     if (mode === 'video') {
       assert(initial.cameraLive && initial.rawVideoHidden)
       assert.equal(initial.frames, 0)
@@ -318,7 +445,7 @@ try {
     csp: window.__cspAttempts,
   }))
   report.boundary = { ...counts, routedExternal, proxyDenied, errors }
-  assert.equal(counts.camera, mode === 'video' ? 2 : 0)
+  assert.equal(counts.camera, mode !== 'blank' ? 2 : 0)
   assert.equal(routedExternal, 0)
   assert.equal(errors.length, 0)
 } catch (error) {
@@ -327,7 +454,10 @@ try {
 } finally {
   if (page && !page.isClosed()) {
     try {
-      report.lastCleanup = await page.evaluate(() => window.probe?.close())
+      report.lastCleanup = await page.evaluate(() => {
+        window.probe?.releaseHeldResult()
+        return window.pendingRuntimeClose ?? window.probe?.close()
+      })
     } catch {
       report.cleanupFailed = true
     }

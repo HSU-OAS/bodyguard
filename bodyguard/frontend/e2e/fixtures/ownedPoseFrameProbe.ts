@@ -17,6 +17,7 @@ import {
 } from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { prepareOwnedAvatarPair } from '../../src/avatar/ownedAvatarPair'
+import { createOwnedPosePlayback } from '../../src/avatar/ownedPosePlayback'
 import { createPoseLandmarker } from '../../src/pose/landmarker'
 import { createOwnedPoseFrame, type OwnedPoseResult } from '../../src/pose/ownedPoseFrame'
 import { createVideoPoseSource } from '../../src/pose/videoPoseSource'
@@ -82,6 +83,14 @@ export async function mountPoseFrameProbe(canvas: HTMLCanvasElement, gender: 'ma
   let native: Awaited<ReturnType<typeof createPoseLandmarker>> | undefined
   let source: ReturnType<typeof createOwnedPoseFrame<OffscreenCanvas>> | undefined
   let videoSource: ReturnType<typeof createVideoPoseSource> | undefined
+  let playback: ReturnType<typeof createOwnedPosePlayback> | undefined
+  let playbackSynthetic = false,
+    holdNext = false,
+    held = false
+  let releaseHeld: (() => void) | undefined
+  let renderFrames = 0,
+    movingFrames = 0,
+    previousTurns = ''
   let closed = false,
     sequence = 0,
     at = 0,
@@ -99,27 +108,31 @@ export async function mountPoseFrameProbe(canvas: HTMLCanvasElement, gender: 'ma
   async function close() {
     if (!closed) {
       closed = true
-      abort.abort()
       try {
-        try {
-          await videoSource?.dispose()
-        } finally {
-          await source?.dispose()
-        }
+        await playback?.dispose()
       } finally {
+        abort.abort()
         try {
-          pair?.dispose()
+          try {
+            await videoSource?.dispose()
+          } finally {
+            await source?.dispose()
+          }
         } finally {
           try {
-            if (native) {
-              native.landmarker.close()
-              detectorCloses++
-            }
+            pair?.dispose()
           } finally {
             try {
-              renderer.render(scene, camera)
+              if (native) {
+                native.landmarker.close()
+                detectorCloses++
+              }
             } finally {
-              renderer.dispose()
+              try {
+                renderer.render(scene, camera)
+              } finally {
+                renderer.dispose()
+              }
             }
           }
         }
@@ -138,6 +151,10 @@ export async function mountPoseFrameProbe(canvas: HTMLCanvasElement, gender: 'ma
       syntheticCalls,
       syntheticCloses,
       detectorCloses,
+      playback: playback?.getSnapshot() ?? null,
+      renderFrames,
+      movingFrames,
+      held,
       models: models?.length ?? 0,
       attached: models?.filter((model) => model.parent === scene).length ?? 0,
       referenceUnchanged: !!reference && turns(reference) === restReference,
@@ -169,7 +186,8 @@ export async function mountPoseFrameProbe(canvas: HTMLCanvasElement, gender: 'ma
     const world: Point[] = Array.from({ length: 33 }, () => ({ x: 0, y: 0, z: 0 }))
     const origin = restPoints.get(11)
     if (!origin) throw new Error('Private pose diagnostic failed')
-    const turn = new Quaternion().setFromAxisAngle(new Vector3(0, 0, 1), Math.PI / 12)
+    const angle = playbackSynthetic && syntheticCalls > 1 ? -Math.PI / 12 : Math.PI / 12
+    const turn = new Quaternion().setFromAxisAngle(new Vector3(0, 0, 1), angle)
     for (const [index, rest] of restPoints) {
       const p = rest.clone()
       if (index === 13 || index === 15) p.sub(origin).applyQuaternion(turn).add(origin)
@@ -182,6 +200,47 @@ export async function mountPoseFrameProbe(canvas: HTMLCanvasElement, gender: 'ma
         syntheticCloses++
       },
     }
+  }
+  function deferredResult(result: OwnedPoseResult) {
+    if (!holdNext) return result
+    holdNext = false
+    held = true
+    return new Promise<OwnedPoseResult>((resolve) => {
+      releaseHeld = () => {
+        held = false
+        releaseHeld = undefined
+        resolve(result)
+      }
+    })
+  }
+  function startPlayback(kind: 'synthetic' | 'video') {
+    const selectedSource = kind === 'video' ? videoSource : source
+    if (closed || playback || !pair || !selectedSource)
+      throw new Error('Private playback diagnostic failed')
+    playbackSynthetic = kind === 'synthetic'
+    mode = 'synthetic'
+    previousTurns = user ? turns(user) : ''
+    playback = createOwnedPosePlayback({
+      context,
+      source: selectedSource,
+      avatars: pair,
+      scheduler: {
+        request: (callback) => requestAnimationFrame(callback),
+        cancel: (handle) => cancelAnimationFrame(handle),
+      },
+      render() {
+        renderFrames++
+        if (!playback) throw new Error('Private playback diagnostic failed')
+        state = playback.getSnapshot().state
+        if (user) {
+          const current = turns(user)
+          if (current !== previousTurns) movingFrames++
+          previousTurns = current
+        }
+        renderer.render(scene, camera)
+      },
+    })
+    return playback.start()
   }
   async function read(next: 'synthetic' | 'native', duplicate = false) {
     if (closed || !source || !pair)
@@ -217,7 +276,7 @@ export async function mountPoseFrameProbe(canvas: HTMLCanvasElement, gender: 'ma
         if (!native) throw new Error('Private pose diagnostic failed')
         nativeCalls++
         const result = native.landmarker.detectForVideo(input, timestamp)
-        return {
+        return deferredResult({
           landmarks: result.landmarks,
           worldLandmarks: result.worldLandmarks,
           close() {
@@ -227,7 +286,7 @@ export async function mountPoseFrameProbe(canvas: HTMLCanvasElement, gender: 'ma
               nativeCloses++
             }
           },
-        }
+        })
       },
     })
   }
@@ -263,9 +322,19 @@ export async function mountPoseFrameProbe(canvas: HTMLCanvasElement, gender: 'ma
     // Explicit fixture choice only; not a release model decision.
     native = await createPoseLandmarker('lite')
     source = createOwnedPoseFrame(context, {
-      capture: () => ({ generation: context.generation, sequence, at, input: blank }),
+      capture: () => {
+        if (playbackSynthetic) {
+          sequence++
+          at = Math.max(performance.now(), at + 1)
+        }
+        return { generation: context.generation, sequence, at, input: blank }
+      },
       detect: (input, timestamp) => {
-        if (mode === 'synthetic') return synthetic()
+        if (mode === 'synthetic') {
+          const result = synthetic()
+          if (playbackSynthetic && syntheticCalls === 3) holdNext = true
+          return deferredResult(result)
+        }
         if (!native) throw new Error('Private pose diagnostic failed')
         nativeCalls++
         const result = native.landmarker.detectForVideo(input, timestamp)
@@ -292,6 +361,15 @@ export async function mountPoseFrameProbe(canvas: HTMLCanvasElement, gender: 'ma
       readVideo,
       disposeVideo: async () => {
         await videoSource?.dispose()
+      },
+      startPlayback,
+      holdNextResult: () => {
+        holdNext = true
+      },
+      releaseHeldResult: () => releaseHeld?.(),
+      stopPlayback: async () => {
+        await playback?.dispose()
+        return snapshot()
       },
     })
   } catch {
