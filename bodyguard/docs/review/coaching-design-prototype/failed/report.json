@@ -1,0 +1,79 @@
+{
+  "timestamp": "2026-10-07T05:09:14.935Z",
+  "sourceHashTiming": "end of this harness run",
+  "scope": "static design prototype UI only; not webcam/avatar/clinical/product verification",
+  "sources": [
+    {
+      "file": "index.html",
+      "sha256": "4c58b503150de2d98206e434451406734422f31799b54c61d3010cbf21468462"
+    },
+    {
+      "file": "style.css",
+      "sha256": "5b67676ba97b407ba7c4b2df294714d13c1b3cc66497c15a62ef3d25985edf37"
+    },
+    {
+      "file": "prototype.js",
+      "sha256": "2b298c5b9d56786b78a8c893ff185db75d3e3a4dc171df6482c3af6a882ff34b"
+    },
+    {
+      "file": "verify.mjs",
+      "sha256": "ef6f93c5942ecaa4f076d2d969b73484dcbf8aae2e25cb627e2880c0ad1417bd"
+    },
+    {
+      "file": "assets/approved-reference.png",
+      "sha256": "ea4677323030a5d4266aa8f32ff3bf74738f2d088871b5084038621f9a761377"
+    }
+  ],
+  "results": [
+    {
+      "name": "full-body initial boundary and roles",
+      "passed": true
+    },
+    {
+      "name": "upper and detail synchronized view",
+      "passed": true
+    },
+    {
+      "name": "motion dialog keyboard escape and selection",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(\n"
+    },
+    {
+      "name": "settings view guidance and no persistence",
+      "passed": false,
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.view-tools .settings-open')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" class=\"secondary settings-open\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" id=\"motion-dialog\" aria-labelledby=\"motion-dialog-title\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" id=\"motion-dialog\" aria-labelledby=\"motion-dialog-title\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    56 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <dialog open=\"\" id=\"motion-dialog\" aria-labelledby=\"motion-dialog-title\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n"
+    },
+    {
+      "name": "manual demonstration no real animation or completion",
+      "passed": false,
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '전체 시범', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" id=\"whole-demo\" class=\"secondary\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" id=\"motion-dialog\" aria-labelledby=\"motion-dialog-title\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" id=\"motion-dialog\" aria-labelledby=\"motion-dialog-title\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    56 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <dialog open=\"\" id=\"motion-dialog\" aria-labelledby=\"motion-dialog-title\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n"
+    },
+    {
+      "name": "end confirm cancel and reset",
+      "passed": false,
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#end')\u001b[22m\n\u001b[2m    - locator resolved to <button id=\"end\" class=\"quiet\" type=\"button\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" id=\"motion-dialog\" aria-labelledby=\"motion-dialog-title\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" id=\"motion-dialog\" aria-labelledby=\"motion-dialog-title\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    56 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <dialog open=\"\" id=\"motion-dialog\" aria-labelledby=\"motion-dialog-title\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n"
+    },
+    {
+      "name": "menus explain scope instead of inventing pages",
+      "passed": false,
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-info=\"home\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" data-info=\"home\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" id=\"motion-dialog\" aria-labelledby=\"motion-dialog-title\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <dialog open=\"\" id=\"motion-dialog\" aria-labelledby=\"motion-dialog-title\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    56 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <dialog open=\"\" id=\"motion-dialog\" aria-labelledby=\"motion-dialog-title\">…</dialog> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n"
+    },
+    {
+      "name": "narrow desktop and CSS zoom no horizontal clipping",
+      "passed": true
+    },
+    {
+      "name": "keyboard visible focus reduced motion and text contrast",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n'none' !== 'solid'\n"
+    },
+    {
+      "name": "asset failure recover without fake live state",
+      "passed": true
+    },
+    {
+      "name": "no camera storage API egress or JS errors",
+      "passed": true
+    }
+  ]
+}
