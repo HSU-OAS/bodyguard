@@ -10,13 +10,15 @@ import { chromium } from '@playwright/test'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const [scratch, label, mode = 'blank'] = process.argv.slice(2)
-assert(mode === 'blank' || mode === 'video' || mode === 'playback')
+assert(['blank', 'video', 'playback', 'resources'].includes(mode))
 assert(
   (mode === 'blank'
     ? /^\/private\/tmp\/bodyguard-pose-frame-proof\.[A-Za-z0-9]+$/
     : mode === 'video'
       ? /^\/private\/tmp\/bodyguard-video-pose-proof\.[A-Za-z0-9]+$/
-      : /^\/private\/tmp\/bodyguard-pose-playback-proof\.[A-Za-z0-9]+$/
+      : mode === 'resources'
+        ? /^\/private\/tmp\/bodyguard-playback-resources-proof\.[A-Za-z0-9]+$/
+        : /^\/private\/tmp\/bodyguard-pose-playback-proof\.[A-Za-z0-9]+$/
   ).test(scratch ?? ''),
 )
 assert.equal(realpathSync(scratch), scratch)
@@ -31,6 +33,9 @@ const files = [
   'src/pose/constants.ts',
   'src/avatar/ownedAvatarPair.ts',
   'src/avatar/ownedPosePlayback.ts',
+  'src/coaching/ownedPlaybackResources.ts',
+  'src/coaching/resources.ts',
+  'src/coaching/session.ts',
   'src/avatar/observedPoseRig.ts',
   'src/avatar/directionalRig.ts',
   'src/avatar/eightWeightSkin.ts',
@@ -40,6 +45,8 @@ const files = [
   'e2e/fixtures/ownedVideoPose.vite.ts',
   'e2e/fixtures/ownedPosePlaybackProbe.ts',
   'e2e/fixtures/ownedPosePlayback.vite.ts',
+  'e2e/fixtures/ownedPlaybackResourcesProbe.ts',
+  'e2e/fixtures/ownedPlaybackResources.vite.ts',
   'scripts/test-pose-frame-browser.mjs',
   'pnpm-lock.yaml',
 ]
@@ -98,11 +105,13 @@ const server = createServer((req, res) => {
     res.setHeader('Content-Security-Policy', "connect-src 'self'")
     res.setHeader('Content-Type', 'text/html')
     res.end(
-      mode === 'playback'
-        ? '<!doctype html><html lang="ko"><meta charset="utf-8"><title>비공개 연속 재생 검증</title><body style="margin:0;background:white"><p>미완성 A37 · native 미검출 / 긍정 움직임 합성 · 코칭 아님</p><canvas id="avatar"></canvas><script type="module">import{mountVideoPoseProbe,mountPoseFrameProbe}from"/probe.js";window.openPoseFrame=async(gender,kind="video")=>{await window.probe?.close();window.probe=kind==="video"?await mountVideoPoseProbe(document.querySelector("#avatar"),gender):await mountPoseFrameProbe(document.querySelector("#avatar"),gender);return window.probe.snapshot()};</script>'
-        : mode === 'video'
-          ? '<!doctype html><html lang="ko"><meta charset="utf-8"><title>비공개 영상 전달 검증</title><body style="margin:0;background:white"><p>미완성 A37 · 가짜 카메라 · 실제 SDK · 코칭 아님</p><canvas id="avatar"></canvas><script type="module">import{mountVideoPoseProbe}from"/probe.js";window.openPoseFrame=async gender=>{await window.probe?.close();window.probe=await mountVideoPoseProbe(document.querySelector("#avatar"),gender);return window.probe.snapshot()};</script>'
-          : '<!doctype html><html lang="ko"><meta charset="utf-8"><title>비공개 추론 전달 검증</title><body style="margin:0;background:white"><p>미완성 A37 · blank SDK 입력 · 긍정 동작 합성 · 코칭 아님</p><canvas id="avatar"></canvas><script type="module">import{mountPoseFrameProbe}from"/probe.js";window.openPoseFrame=async gender=>{await window.probe?.close();window.probe=await mountPoseFrameProbe(document.querySelector("#avatar"),gender);return window.probe.snapshot()};</script>',
+      mode === 'resources'
+        ? '<!doctype html><html lang="ko"><meta charset="utf-8"><title>비공개 세션 자원 검증</title><body style="margin:0;background:white"><p>미완성 A37 · 가짜 카메라/합성 세션 · 코칭 아님</p><canvas id="avatar"></canvas><script type="module">import{mountPlaybackResourcesProbe}from"/probe.js";window.openPoseFrame=async gender=>{await window.probe?.close();window.probe=mountPlaybackResourcesProbe(document.querySelector("#avatar"),gender);return window.probe.snapshot()};</script>'
+        : mode === 'playback'
+          ? '<!doctype html><html lang="ko"><meta charset="utf-8"><title>비공개 연속 재생 검증</title><body style="margin:0;background:white"><p>미완성 A37 · native 미검출 / 긍정 움직임 합성 · 코칭 아님</p><canvas id="avatar"></canvas><script type="module">import{mountVideoPoseProbe,mountPoseFrameProbe}from"/probe.js";window.openPoseFrame=async(gender,kind="video")=>{await window.probe?.close();window.probe=kind==="video"?await mountVideoPoseProbe(document.querySelector("#avatar"),gender):await mountPoseFrameProbe(document.querySelector("#avatar"),gender);return window.probe.snapshot()};</script>'
+          : mode === 'video'
+            ? '<!doctype html><html lang="ko"><meta charset="utf-8"><title>비공개 영상 전달 검증</title><body style="margin:0;background:white"><p>미완성 A37 · 가짜 카메라 · 실제 SDK · 코칭 아님</p><canvas id="avatar"></canvas><script type="module">import{mountVideoPoseProbe}from"/probe.js";window.openPoseFrame=async gender=>{await window.probe?.close();window.probe=await mountVideoPoseProbe(document.querySelector("#avatar"),gender);return window.probe.snapshot()};</script>'
+            : '<!doctype html><html lang="ko"><meta charset="utf-8"><title>비공개 추론 전달 검증</title><body style="margin:0;background:white"><p>미완성 A37 · blank SDK 입력 · 긍정 동작 합성 · 코칭 아님</p><canvas id="avatar"></canvas><script type="module">import{mountPoseFrameProbe}from"/probe.js";window.openPoseFrame=async gender=>{await window.probe?.close();window.probe=await mountPoseFrameProbe(document.querySelector("#avatar"),gender);return window.probe.snapshot()};</script>',
     )
   } else if (Object.hasOwn(resources, path)) {
     res.setHeader(
@@ -143,9 +152,10 @@ const report = {
   actualCamera: false,
   actualFakeCamera: mode !== 'blank',
   actualVideoFrame: mode !== 'blank',
-  actualRAF: mode === 'playback',
+  actualRAF: mode === 'playback' || mode === 'resources',
   actualHuman: false,
-  syntheticPositiveMovement: mode !== 'video',
+  syntheticPositiveMovement: mode === 'blank' || mode === 'playback',
+  syntheticSessionGates: mode === 'resources',
   releaseAvatar: false,
   productPolicyApproved: false,
   inputStored: false,
@@ -217,6 +227,85 @@ try {
     const sample = { gender, passed: false, stages: [] }
     report.samples.push(sample)
     const initial = await page.evaluate((value) => window.openPoseFrame(value), gender)
+    if (mode === 'resources') {
+      assert.equal(initial.models, 0)
+      assert.equal(initial.cameras, 0)
+      assert.equal(initial.nativeCalls, 0)
+      assert.equal(initial.renderFrames, 0)
+      sample.stages.push({ case: 'constructor-acquisition-zero', ...initial })
+      await page.evaluate(() => window.probe.start())
+      await page.waitForFunction(() => window.probe.snapshot().nativeCloses >= 4)
+      await page.evaluate(() => window.probe.holdNextResult())
+      await page.waitForFunction(() => window.probe.snapshot().held)
+      const held = await page.evaluate(() => window.probe.snapshot())
+      assert(held.cameraLive && held.rawVideoHidden && held.framing.every(Boolean))
+      assert.equal(held.models, 2)
+      assert.equal(held.nativeCloses, held.nativeCalls - 1)
+      sample.stages.push({ case: 'prepared-running-native-result-held', ...held })
+      const preview = join(scratch, `${label}-${gender}.png`)
+      await page.locator('#avatar').screenshot({ path: preview })
+      sample.previewSha = sha(readFileSync(preview))
+      await page.evaluate(() => {
+        window.pendingRuntimeClose = window.probe.pause()
+      })
+      const pausing = await page.evaluate(() => window.probe.snapshot())
+      assert.equal(pausing.session.status, 'paused')
+      assert(pausing.cameraLive && pausing.held)
+      assert.equal(pausing.detectorCloses, 0)
+      assert.equal(pausing.cameraCloses, 0)
+      await page.evaluate(
+        () => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))),
+      )
+      const waiting = await page.evaluate(() => window.probe.snapshot())
+      assert.equal(waiting.renderFrames, pausing.renderFrames)
+      assert.equal(waiting.nativeCalls, held.nativeCalls)
+      sample.stages.push({ case: 'paused-awaiting-result-native-still-owned', ...waiting })
+      await page.evaluate(() => window.probe.releaseHeldResult())
+      const paused = await page.evaluate(() => window.pendingRuntimeClose)
+      assert(paused.tracksEnded && paused.detached && paused.allFramesClosed)
+      assert.equal(paused.models, 0)
+      assert.equal(paused.detectorCloses, 1)
+      assert.equal(paused.cameraCloses, 1)
+      assert.equal(paused.nativeCloses, held.nativeCalls)
+      assert.equal(paused.frameCloses, paused.frames)
+      assert.deepEqual(paused.memory, paused.baseline)
+      sample.stages.push({ case: 'result-input-settled-sdk-camera-closed', ...paused })
+      await page.evaluate(() => {
+        window.pendingRuntimeClose = null
+      })
+      const resumed = await page.evaluate(() => window.probe.resume())
+      assert.equal(resumed.session.generation, 2)
+      assert.equal(resumed.resources.status, 'running')
+      assert.equal(resumed.cameras, 2)
+      await page.waitForFunction(
+        (minimum) => window.probe.snapshot().nativeCloses > minimum + 3,
+        paused.nativeCalls,
+      )
+      const running = await page.evaluate(() => window.probe.snapshot())
+      assert(running.cameraLive && running.framing.every(Boolean))
+      sample.stages.push({ case: 'explicit-resume-fresh-generation', ...running })
+      const expired = await page.evaluate(() => window.probe.expire())
+      assert.equal(expired.session.reason, 'session-expired')
+      assert.equal(expired.session.verifiedMs, 0)
+      assert(expired.tracksEnded && expired.detached && expired.allFramesClosed)
+      assert.equal(expired.models, 0)
+      assert.equal(expired.detectorCloses, 2)
+      assert.equal(expired.cameraCloses, 2)
+      assert.equal(expired.nativeCloses, expired.nativeCalls)
+      assert.equal(expired.frameCloses, expired.frames)
+      assert.equal(expired.frameErrors, 0)
+      assert.deepEqual(expired.memory, expired.baseline)
+      assert.deepEqual(expired.failures, [])
+      sample.stages.push({ case: 'synthetic-session-expiry-no-completion', ...expired })
+      const closed = await page.evaluate(() => window.probe.close())
+      const again = await page.evaluate(() => window.probe.close())
+      assert.equal(again.detectorCloses, 2)
+      assert.equal(again.cameraCloses, 2)
+      assert.equal(closed.models, 0)
+      sample.stages.push({ case: 'idempotent-whole-close', ...closed })
+      sample.passed = true
+      continue
+    }
     assert.equal(initial.models, 2)
     assert(initial.framing.every(Boolean))
     assert.equal(initial.nativeCalls, 0)
@@ -445,7 +534,7 @@ try {
     csp: window.__cspAttempts,
   }))
   report.boundary = { ...counts, routedExternal, proxyDenied, errors }
-  assert.equal(counts.camera, mode !== 'blank' ? 2 : 0)
+  assert.equal(counts.camera, mode === 'resources' ? 4 : mode !== 'blank' ? 2 : 0)
   assert.equal(routedExternal, 0)
   assert.equal(errors.length, 0)
 } catch (error) {

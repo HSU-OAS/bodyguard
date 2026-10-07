@@ -18,6 +18,7 @@ type Options = Readonly<{
     cancel(handle: number): void
   }>
   render(): unknown
+  onFailure?(reason: Failure): void | Promise<void>
 }>
 type Failure = 'inference-error' | 'callback-error' | 'ownership-error' | 'cleanup-error'
 const consumed = new WeakSet<object>()
@@ -32,9 +33,11 @@ export function createOwnedPosePlayback(options: Options) {
   let observe: Avatars['observe'], renderRig: Avatars['render'], closeAvatars: Avatars['dispose']
   let request: Options['scheduler']['request'], cancel: Options['scheduler']['cancel']
   let render: Options['render']
+  let onFailure: Options['onFailure']
   try {
     ;({ generation, signal } = options.context)
     ;({ source, avatars, render } = options)
+    onFailure = options.onFailure
     if (
       !Number.isSafeInteger(generation) ||
       generation <= 0 ||
@@ -45,7 +48,8 @@ export function createOwnedPosePlayback(options: Options) {
       source === (avatars as unknown) ||
       consumed.has(source) ||
       consumed.has(avatars) ||
-      typeof render !== 'function'
+      typeof render !== 'function' ||
+      (onFailure !== undefined && typeof onFailure !== 'function')
     )
       throw new Error()
     read = source.read.bind(source)
@@ -68,12 +72,30 @@ export function createOwnedPosePlayback(options: Options) {
   let reading: Promise<void> | null = null
   let disposal: Promise<void> | null = null
   let cleanupFailed = false
+  let reported: Failure | null = null,
+    observerFailed = false
+  function notifyFailure() {
+    if (!failure || failure === reported || observerFailed) return
+    reported = failure
+    const broke = () => {
+      observerFailed = true
+      if (!cleanupFailed) failure = 'callback-error'
+      status = 'failed'
+      void dispose().catch(() => {})
+    }
+    try {
+      void Promise.resolve(onFailure?.(failure)).catch(broke)
+    } catch {
+      broke()
+    }
+  }
   const active = () => status === 'running' && !signal.aborted
   function fail(reason: Failure) {
     if (reason === 'cleanup-error') cleanupFailed = true
     if (failure === null) failure = reason
     status = 'failed'
     void dispose().catch(() => {})
+    notifyFailure()
   }
   function dispose(): Promise<void> {
     if (disposal) return disposal
@@ -116,6 +138,7 @@ export function createOwnedPosePlayback(options: Options) {
       if (cleanupFailed) {
         failure = 'cleanup-error'
         status = 'failed'
+        notifyFailure()
         throw new ResourceCleanupError()
       }
     }
@@ -198,6 +221,7 @@ export function createOwnedPosePlayback(options: Options) {
           cleanupFailed = true
           failure = 'cleanup-error'
           status = 'failed'
+          notifyFailure()
         }
       }
     } catch {

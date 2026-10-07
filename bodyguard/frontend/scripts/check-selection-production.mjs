@@ -79,6 +79,9 @@ for (const file of files) {
     'Invalid owned pose playback',
     'createOwnedPosePlayback',
     'PRIVATE_PLAYBACK_POINTS',
+    'Playback resource unavailable',
+    'createOwnedPlaybackResources',
+    'mountPlaybackResourcesProbe',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -105,5 +108,6 @@ console.log(
     unconnected_owned_pose_frame_strings: 0,
     unconnected_owned_video_pose_strings: 0,
     unconnected_owned_pose_playback_strings: 0,
+    unconnected_owned_playback_resources_strings: 0,
   }),
 )
