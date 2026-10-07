@@ -1,0 +1,474 @@
+{
+  "runtime": "43696772a5dbd57d661ba24811fd1f6046d39ba4",
+  "baseline": "2c4ec7f581e847288acbb0b2ae32d3c0bb7e1d00",
+  "unit": {
+    "passed": 826,
+    "failed": 0,
+    "skipped": 0
+  },
+  "native": {
+    "browser": "154.0.8037.98",
+    "samples": 2,
+    "boundary": {
+      "external": 0,
+      "camera": 0,
+      "errors": []
+    },
+    "actualSDK": false,
+    "actualCamera": false,
+    "syntheticPorts": true,
+    "syntheticObservations": true,
+    "releaseAvatar": false,
+    "callerRendererPBRBaseline": {
+      "geometries": 0,
+      "textures": 1
+    }
+  },
+  "production": [
+    {
+      "extension": ".js",
+      "bytes": 355151,
+      "sha256": "b5d4f81164c8d3c196e853b3404382bc15077986aa626cd0c3c72571b6325ac0",
+      "identicalToPR65": true
+    },
+    {
+      "extension": ".css",
+      "bytes": 31199,
+      "sha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e",
+      "identicalToPR65": true
+    }
+  ],
+  "cachedModels": [
+    {
+      "file": "face_landmarker.task",
+      "bytes": 3758596,
+      "sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff"
+    },
+    {
+      "file": "gesture_recognizer.task",
+      "bytes": 8373440,
+      "sha256": "97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482"
+    },
+    {
+      "file": "pose_landmarker_full.task",
+      "bytes": 9398198,
+      "sha256": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1"
+    },
+    {
+      "file": "pose_landmarker_heavy.task",
+      "bytes": 30664242,
+      "sha256": "64437af838a65d18e5ba7a0d39b465540069bc8aae8308de3e318aad31fcbc7b"
+    },
+    {
+      "file": "pose_landmarker_lite.task",
+      "bytes": 5777746,
+      "sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+    }
+  ],
+  "sources": [
+    {
+      "path": "bodyguard/docs/stories/owned-avatar-pair.md",
+      "bytes": 3534,
+      "sha256": "56550f7906cc63e65e215b0ad411a1d71c0d1fbf371514d2dff4e24db6d9d84d",
+      "gitBlob": "7c4f03e44c92726ea6fba59d24dc4a74de70287c"
+    },
+    {
+      "path": "bodyguard/frontend/e2e/fixtures/ownedAvatarPair.vite.ts",
+      "bytes": 774,
+      "sha256": "89cde3ce584a7c0664120631fbe77432cd75ff32ed3a3c7d6d16d61c4b4f9e92",
+      "gitBlob": "f8a4d285c43370ffe5453fd05cb8d0633cb48e9c"
+    },
+    {
+      "path": "bodyguard/frontend/e2e/fixtures/ownedAvatarPairProbe.ts",
+      "bytes": 11842,
+      "sha256": "373fe39b64bc993045f0f54d1eb4502832a9b36e3c7ca574616b7a230b69252b",
+      "gitBlob": "bae6e3eb82c36096c900258cfb9685a287604551"
+    },
+    {
+      "path": "bodyguard/frontend/scripts/check-selection-production.mjs",
+      "bytes": 3449,
+      "sha256": "3b815e23edceb8fc4ad49be0424ce297d290f962df19d906567f36b3fa978271",
+      "gitBlob": "53add39f48d5ec6eab13c63239b08b7c11ff4a65"
+    },
+    {
+      "path": "bodyguard/frontend/scripts/test-owned-avatar-browser.mjs",
+      "bytes": 9805,
+      "sha256": "6f0ff9abb81aa13757e89c3ac57dc0d5433ace56d7b76c9d1e7640e7da7ef89b",
+      "gitBlob": "89586ece1d563e2727b2b8837d1730b522111584"
+    },
+    {
+      "path": "bodyguard/frontend/src/avatar/eightWeightSkin.test.ts",
+      "bytes": 7939,
+      "sha256": "204cb5095a4261c824dabbe578e3385046ef23f0f71cfc91c31c4c6fe925b0d8",
+      "gitBlob": "876f1cf528cf2d1ee9b05b985f0bc3edaaa48060"
+    },
+    {
+      "path": "bodyguard/frontend/src/avatar/eightWeightSkin.ts",
+      "bytes": 8158,
+      "sha256": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+      "gitBlob": "e5cb40016e5365ede3fec24546d1e440c5bd99d3"
+    },
+    {
+      "path": "bodyguard/frontend/src/avatar/ownedAvatarPair.test.ts",
+      "bytes": 12148,
+      "sha256": "20b594cec8c306ffc92af8be6a4337f1aeeaabb80b7065e802a4dce03087640a",
+      "gitBlob": "e8c42dae4d9e5a8298b89a4bd66166ee4adbe6c8"
+    },
+    {
+      "path": "bodyguard/frontend/src/avatar/ownedAvatarPair.ts",
+      "bytes": 7166,
+      "sha256": "d5de3204e7d3868ca3d9bd7e4a9636df111a7c4419c3c3bb326f993ddddcba83",
+      "gitBlob": "6e3e122a0fdefc1465ff0aa1c70b59eb568408ec"
+    },
+    {
+      "path": "bodyguard/frontend/src/coaching/resources.test.ts",
+      "bytes": 24583,
+      "sha256": "0274ddedcf57598aeaf063c05d1648cc7c14c9671638c129e595a3e25b73f4bc",
+      "gitBlob": "d4fb3f545b960f118244ea7493e28539f9b1c68d"
+    },
+    {
+      "path": "bodyguard/frontend/src/coaching/resources.ts",
+      "bytes": 6884,
+      "sha256": "0832d662b19b522153f7e13507147a7b33f264d0eee94f10e07e06758d1fa029",
+      "gitBlob": "25f4ba985d9202ae789d805d1c6c4f9985983112"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "assets-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "assets-full.log",
+      "bytes": 68,
+      "sha256": "fbcaf3f7c2a165853b0896e0abac07d0a0b8ba93c68a21048f7f223274ed9290"
+    },
+    {
+      "file": "biome-final.log",
+      "bytes": 46,
+      "sha256": "e9ab75060af059a40a7bcfbe7932d61862344f7722030683828c15d161ece60e"
+    },
+    {
+      "file": "biome-full.log",
+      "bytes": 46,
+      "sha256": "90eeb678ba192119624d9e95a0409b5f4d6f89e0737d5942e04ab50eb46c073e"
+    },
+    {
+      "file": "browser-native-alias.json",
+      "bytes": 47847,
+      "sha256": "e12aa7ea6de6c281bb2a0643b2d8470743a73a8791a78254679ebd7ecc92cb7a"
+    },
+    {
+      "file": "browser-native-alias.log",
+      "bytes": 114,
+      "sha256": "eb18cfe01f896e5263c55f4afd0c3df31d7ad1718897d9a8ea798a08cc968de5"
+    },
+    {
+      "file": "browser-native-calibrated.json",
+      "bytes": 47847,
+      "sha256": "fd8df71fc07335c9e2ece5899ab857321e2ea9221203a7ab3daa6b7950516634"
+    },
+    {
+      "file": "browser-native-calibrated.log",
+      "bytes": 119,
+      "sha256": "2408f70f42f29d67254d62f219cc933da1a594765cb66f8f13881b8a81f8f437"
+    },
+    {
+      "file": "browser-native-first.json",
+      "bytes": 6380,
+      "sha256": "900f5bfc05f95a5ce0f014c99e9b7f535fbefa713aa6eb0d7901f5bf8852396a"
+    },
+    {
+      "file": "browser-native-first.log",
+      "bytes": 114,
+      "sha256": "0c7be8a4d64a5781a0be6a301f0fbcf71125f1ebb7b38b6fda40420369833b20"
+    },
+    {
+      "file": "browser-runtime-accepted.json",
+      "bytes": 47847,
+      "sha256": "1640e9894e9d1ec8cdb1069b84b2a9d1f269835b9fe61e63631e83dcf56e4b72"
+    },
+    {
+      "file": "browser-runtime-accepted.log",
+      "bytes": 118,
+      "sha256": "4e0b9dbba7e9bbdf0c937ed2d7d2ef09a621ab38ee76ddb1059c904be3f4f9fd"
+    },
+    {
+      "file": "build-final.log",
+      "bytes": 568,
+      "sha256": "b94856f6b6ae4b77381082ed6581cebea7191355f3302d58e4b061ade9427958"
+    },
+    {
+      "file": "build-full.log",
+      "bytes": 568,
+      "sha256": "be58a01c41487d9a532d6d615ccbe7d2772cbd6732d4d34a309f1b6b68c19828"
+    },
+    {
+      "file": "format-alias-fixed.log",
+      "bytes": 38,
+      "sha256": "3797eaa2ef07e89f73b541905e5ec778467d118b4efe37fa2f469d09eccb4acf"
+    },
+    {
+      "file": "format-alias.log",
+      "bytes": 40,
+      "sha256": "5975f2025af8cb89f33c7affbffe8c5f4c68b2cee4676e316d695fcd1190dab6"
+    },
+    {
+      "file": "format-browser.log",
+      "bytes": 38,
+      "sha256": "2f93f32397ec492e1cc38ce5215e126d1d0bd2b9a8433f01747bac878f24658a"
+    },
+    {
+      "file": "format-calibration.log",
+      "bytes": 39,
+      "sha256": "a76fadf49391ed388bb5babe1f024a3833df7177125633d724dcc9736460a1bf"
+    },
+    {
+      "file": "format-final.log",
+      "bytes": 39,
+      "sha256": "98bfb01f7b2b8207131ff32f68519d243a9c248bf5d387bf08035a51bc411649"
+    },
+    {
+      "file": "format-first.log",
+      "bytes": 40,
+      "sha256": "3ed99a71329665b323d63ddd32888fce9d5999364456dc6ed1d8e74b06ae9e54"
+    },
+    {
+      "file": "format-probe-fixed.log",
+      "bytes": 43,
+      "sha256": "1f5dd0cdb030856c0f686e1d97c604c66ec2ac5a7bd5e9205d6d0b8986702d9e"
+    },
+    {
+      "file": "format-probe.log",
+      "bytes": 40,
+      "sha256": "9213ac2b9b4d823db63097d49c50dd2fdae4cd4b66d8d2be9ca7c184f43136ad"
+    },
+    {
+      "file": "green-alias.json",
+      "bytes": 25306,
+      "sha256": "c4c6efb52f0ba5b00971720ee6c691b1f6dd351844fb17bf777906a333a2d11e"
+    },
+    {
+      "file": "green-alias.log",
+      "bytes": 89,
+      "sha256": "f21c93c4655300c462402d3fb3055b4ffb9dc94d70d659bf41f17e0e5a765e0e"
+    },
+    {
+      "file": "green-cleanup.json",
+      "bytes": 23844,
+      "sha256": "4aa063527c6a1bb41544097d1633b7095dbb2e3db5ac4639ccbe66802e325bb5"
+    },
+    {
+      "file": "green-cleanup.log",
+      "bytes": 91,
+      "sha256": "f609c17579e33d408847e7a2f748b56d2cd6d557049719a7930070cdc495e86a"
+    },
+    {
+      "file": "green-first.json",
+      "bytes": 34197,
+      "sha256": "1ef6b6d2a0eb1126f7d9278ea36049cd13cde568789a9993c9821182591305eb"
+    },
+    {
+      "file": "green-first.log",
+      "bytes": 89,
+      "sha256": "d755d497bac18ac60e65bf5a801e52222d3290f93eaac1226b25e67989458242"
+    },
+    {
+      "file": "green-ownership-fixed.json",
+      "bytes": 24570,
+      "sha256": "e1539bf470a0866ab6d4cbc5ff6ca06ca9b316ff6cdb6450e1206de2fe770e28"
+    },
+    {
+      "file": "green-ownership-fixed.log",
+      "bytes": 99,
+      "sha256": "0b14ada03c8beaf3b57f824603f5a7f1d1d06b6ca56db98d08062e68adf70c85"
+    },
+    {
+      "file": "green-ownership.json",
+      "bytes": 25577,
+      "sha256": "b867b68c76ea6d9a42d03d9ef4a83da85e8b0a9919f042b195891d0a2c1455c7"
+    },
+    {
+      "file": "green-ownership.log",
+      "bytes": 93,
+      "sha256": "705f3dc11f2bfc38a77c49d583530622c7991854cf2776ef555d6abb5b4bceab"
+    },
+    {
+      "file": "guard-final.log",
+      "bytes": 708,
+      "sha256": "0952b6ff32f6bd215de76973cc2da32e85697582939c9f6b67f6a514ad1779f1"
+    },
+    {
+      "file": "guard-full.log",
+      "bytes": 708,
+      "sha256": "0952b6ff32f6bd215de76973cc2da32e85697582939c9f6b67f6a514ad1779f1"
+    },
+    {
+      "file": "guard-red.log",
+      "bytes": 1003,
+      "sha256": "0011fb3c65da73a1ea9732075f39a30e2300f9b57984c1149fba1a0df43224b0"
+    },
+    {
+      "file": "guard-restored.log",
+      "bytes": 708,
+      "sha256": "0952b6ff32f6bd215de76973cc2da32e85697582939c9f6b67f6a514ad1779f1"
+    },
+    {
+      "file": "native-alias-female.png",
+      "bytes": 172082,
+      "sha256": "c4a136e6af6db749227ae146c6926ff59fa922a8076b9cefb130ed3289b0ae79"
+    },
+    {
+      "file": "native-alias-male.png",
+      "bytes": 191132,
+      "sha256": "d6f734f5c9ce707f2ede41f01a0aca952a298c69e1a472abc3a0dab8ca53cae8"
+    },
+    {
+      "file": "native-calibrated-female.png",
+      "bytes": 172082,
+      "sha256": "c4a136e6af6db749227ae146c6926ff59fa922a8076b9cefb130ed3289b0ae79"
+    },
+    {
+      "file": "native-calibrated-male.png",
+      "bytes": 191132,
+      "sha256": "d6f734f5c9ce707f2ede41f01a0aca952a298c69e1a472abc3a0dab8ca53cae8"
+    },
+    {
+      "file": "native-first-male.png",
+      "bytes": 191132,
+      "sha256": "d6f734f5c9ce707f2ede41f01a0aca952a298c69e1a472abc3a0dab8ca53cae8"
+    },
+    {
+      "file": "probe-build-alias-fixed.log",
+      "bytes": 282,
+      "sha256": "07f239e59e0f1457c6771f96a4802af6ff43ad2c458622f46064cc916636a4db"
+    },
+    {
+      "file": "probe-build-calibration.log",
+      "bytes": 282,
+      "sha256": "e152f978254123c5b8caf8ff6429d28375e99f06fafc793257852fcffc057608"
+    },
+    {
+      "file": "probe-build-first.log",
+      "bytes": 282,
+      "sha256": "6aec865c7353ba361e1e4e5ed5700d201e5bf0fc4a349b47614c23162e4f9462"
+    },
+    {
+      "file": "probe-build-runtime.log",
+      "bytes": 282,
+      "sha256": "d761c372f5ac81930fc97a9f0c71080bbdbee9daf15fa5c8a25bb5d82e680d0a"
+    },
+    {
+      "file": "runtime-accepted-female.png",
+      "bytes": 172082,
+      "sha256": "c4a136e6af6db749227ae146c6926ff59fa922a8076b9cefb130ed3289b0ae79"
+    },
+    {
+      "file": "runtime-accepted-male.png",
+      "bytes": 191132,
+      "sha256": "d6f734f5c9ce707f2ede41f01a0aca952a298c69e1a472abc3a0dab8ca53cae8"
+    },
+    {
+      "file": "skin-failure-red.json",
+      "bytes": 16046,
+      "sha256": "389904a53ba56f8a11956f8dd6f7190fbf167cbb00cd219f7c8f3c77d5e84231"
+    },
+    {
+      "file": "skin-failure-red.log",
+      "bytes": 94,
+      "sha256": "ff7c4697887d70484cdd129a5e850bbf2fe23a607b2d50a27318c9ea26508ae8"
+    },
+    {
+      "file": "type-alias-fixed.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "type-alias.log",
+      "bytes": 277,
+      "sha256": "9d0f2b47c1247d53b69630865cc6993185df2b175f89b4377b06667651af9e63"
+    },
+    {
+      "file": "type-calibration.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "type-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "type-full.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "type-ownership.log",
+      "bytes": 127,
+      "sha256": "c13c19a582ee54e9880b68c16c0a83cb2c5bd5d37d582bd855f8a55d0c234390"
+    },
+    {
+      "file": "type-probe-fixed.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "type-probe.log",
+      "bytes": 772,
+      "sha256": "93fe2118955c9e2d8e573702edca631f81a03d0ff423eff821e6f9fd6549c464"
+    },
+    {
+      "file": "unit-final.json",
+      "bytes": 275428,
+      "sha256": "e9d150598bc6e76b2c96d0b6c9e71ec022e7ce71f66399c53b6b1cbdbdd11d55"
+    },
+    {
+      "file": "unit-final.log",
+      "bytes": 88,
+      "sha256": "57394da2a461000712259fef17dd00f285729d7b082812bbd69012f61ddbe089"
+    },
+    {
+      "file": "unit-full.json",
+      "bytes": 275055,
+      "sha256": "b30d6d2c19859ea159433b7efe3039dea9b6246cc9aff5cc2239cfd7f115371b"
+    },
+    {
+      "file": "unit-full.log",
+      "bytes": 87,
+      "sha256": "7efad6555a9923ad51c6b3eefd4f5478872dabd885784d5af81962d39609e6f5"
+    },
+    {
+      "file": "unit-red.json",
+      "bytes": 39643,
+      "sha256": "8b14839b300db0c4d8204ba91253bee3213123b7c7cb50bb59b38ddcffbd69d9"
+    },
+    {
+      "file": "unit-red.log",
+      "bytes": 86,
+      "sha256": "e00f2ead9830c1b917b8a25c82918b8253415d385f008d060e39422747de8bd8"
+    }
+  ],
+  "guardNegative": {
+    "exit": 1,
+    "restoredExit": 0,
+    "temporaryFileRemoved": true
+  },
+  "firstCSSObservation": {
+    "type": "captured-tool-output-before-rebuild",
+    "bytes": 31228,
+    "sha256": "51287243c1ef59242a988921a412edc29d0b0b1edd64c328ceded331dcc176bc",
+    "extraRule": ".invisible{visibility:hidden}",
+    "fixtureTitleChangedOnly": true
+  },
+  "exclusions": [
+    "public UI/coaching",
+    "camera/SDK/real participant",
+    "Blender/source GLB sculpting",
+    "fine head/neck/trunk/hand/twist retarget",
+    "expert/release quality",
+    "whole renderer GPU shutdown",
+    "Docker/HTTPS/provider/production operation"
+  ]
+}

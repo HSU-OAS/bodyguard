@@ -11,6 +11,7 @@ import {
   Vector4,
 } from 'three'
 import { clone } from 'three/addons/utils/SkeletonUtils.js'
+import { ResourceCleanupError } from '../coaching/resources'
 
 // FR-A-03/04: authored eight-weight GLBs; default Three skinning drops JOINTS_1.
 // Only the development asset review uses this path. No camera/clinical data.
@@ -57,56 +58,67 @@ function patchMaterial(material: Material) {
 
 export function eightWeightGeometry(source: BufferGeometry, boneCount: number) {
   const result = source.clone()
-  const first = result.getAttribute('skinWeight')
-  const extra = result.getAttribute('weights_1')
-  const indices = [result.getAttribute('skinIndex'), result.getAttribute('joints_1')]
-  if (
-    !first ||
-    !extra ||
-    indices.some((value) => !value) ||
-    [first, extra, ...indices].some(
-      (value) => value.itemSize !== 4 || value.count !== first.count,
-    ) ||
-    Object.keys(source.attributes).some((name) => /^(joints|weights)_(?:[2-9]|\d{2,})$/.test(name))
-  )
-    throw new Error('여덟 관절 가중치가 완전하지 않습니다')
-  for (let vertex = 0; vertex < first.count; vertex++) {
-    let firstSum = 0
-    let extraSum = 0
-    const seen = new Set<number>()
-    for (let set = 0; set < 2; set++) {
-      const weights = set === 0 ? first : extra
-      for (let component = 0; component < 4; component++) {
-        const weight = weights.getComponent(vertex, component)
-        const joint = indices[set].getComponent(vertex, component)
-        if (
-          !Number.isFinite(weight) ||
-          weight < 0 ||
-          !Number.isInteger(joint) ||
-          joint < 0 ||
-          joint >= boneCount ||
-          (weight > 0 && seen.has(joint))
-        )
-          throw new Error('잘못된 관절 가중치입니다')
-        if (weight > 0) seen.add(joint)
-        if (set === 0) firstSum += weight
-        else extraSum += weight
-      }
-    }
-    // GLTFLoader 0.186 normalizes WEIGHTS_0 alone. Recover its original share
-    // from untouched WEIGHTS_1; the native export orders descending weights.
-    if (Math.abs(firstSum - 1) > 0.00001 || extraSum > 0.50001)
-      throw new Error('지원하지 않는 GLB 가중치 정규화입니다')
-    for (let component = 0; component < 4; component++)
-      first.setComponent(
-        vertex,
-        component,
-        (first.getComponent(vertex, component) * (1 - extraSum)) / firstSum,
+  try {
+    const first = result.getAttribute('skinWeight')
+    const extra = result.getAttribute('weights_1')
+    const indices = [result.getAttribute('skinIndex'), result.getAttribute('joints_1')]
+    if (
+      !first ||
+      !extra ||
+      indices.some((value) => !value) ||
+      [first, extra, ...indices].some(
+        (value) => value.itemSize !== 4 || value.count !== first.count,
+      ) ||
+      Object.keys(source.attributes).some((name) =>
+        /^(joints|weights)_(?:[2-9]|\d{2,})$/.test(name),
       )
+    )
+      throw new Error('여덟 관절 가중치가 완전하지 않습니다')
+    for (let vertex = 0; vertex < first.count; vertex++) {
+      let firstSum = 0
+      let extraSum = 0
+      const seen = new Set<number>()
+      for (let set = 0; set < 2; set++) {
+        const weights = set === 0 ? first : extra
+        for (let component = 0; component < 4; component++) {
+          const weight = weights.getComponent(vertex, component)
+          const joint = indices[set].getComponent(vertex, component)
+          if (
+            !Number.isFinite(weight) ||
+            weight < 0 ||
+            !Number.isInteger(joint) ||
+            joint < 0 ||
+            joint >= boneCount ||
+            (weight > 0 && seen.has(joint))
+          )
+            throw new Error('잘못된 관절 가중치입니다')
+          if (weight > 0) seen.add(joint)
+          if (set === 0) firstSum += weight
+          else extraSum += weight
+        }
+      }
+      // GLTFLoader 0.186 normalizes WEIGHTS_0 alone. Recover its original share
+      // from untouched WEIGHTS_1; the native export orders descending weights.
+      if (Math.abs(firstSum - 1) > 0.00001 || extraSum > 0.50001)
+        throw new Error('지원하지 않는 GLB 가중치 정규화입니다')
+      for (let component = 0; component < 4; component++)
+        first.setComponent(
+          vertex,
+          component,
+          (first.getComponent(vertex, component) * (1 - extraSum)) / firstSum,
+        )
+    }
+    result.setAttribute('skinIndex1', indices[1])
+    result.setAttribute('skinWeight1', extra)
+    return result
+  } catch (error) {
+    try {
+      result.dispose()
+    } catch {
+      throw new ResourceCleanupError()
+    }
+    throw error
   }
-  result.setAttribute('skinIndex1', indices[1])
-  result.setAttribute('skinWeight1', extra)
-  return result
 }
 
 function patchCpuSkin(mesh: SkinnedMesh) {
@@ -150,52 +162,66 @@ export function cloneEightWeightPair(scene: Object3D) {
   const materials = new Map<Material, Material>()
   const depths: Material[] = []
   const skeletons = new Set<SkinnedMesh['skeleton']>()
-  for (const copy of copies)
-    copy.traverse((object) => {
-      const mesh = object as SkinnedMesh
-      if (!mesh.isSkinnedMesh) return
-      skeletons.add(mesh.skeleton)
-      mesh.castShadow = true
-      // Rest-pose bounds cannot cull animated limbs. Two private review avatars are intentionally
-      // always submitted; actual notebook performance remains a separate release gate.
-      mesh.frustumCulled = false
-      if (mesh.geometry.hasAttribute('joints_1') !== mesh.geometry.hasAttribute('weights_1'))
-        throw new Error('추가 관절 가중치가 누락됐습니다')
-      if (!mesh.geometry.hasAttribute('weights_1')) return
-      let geometry = geometries.get(mesh.geometry)
-      if (!geometry) {
-        geometry = eightWeightGeometry(mesh.geometry, mesh.skeleton.bones.length)
-        geometries.set(mesh.geometry, geometry)
-      }
-      mesh.geometry = geometry
-      patchCpuSkin(mesh)
-      const patched = (source: Material) => {
-        let result = materials.get(source)
-        if (!result) {
-          result = source.clone()
-          patchMaterial(result)
-          materials.set(source, result)
-        }
-        return result
-      }
-      mesh.material = Array.isArray(mesh.material)
-        ? mesh.material.map(patched)
-        : patched(mesh.material)
-      const depth = new MeshDepthMaterial({ depthPacking: RGBADepthPacking })
-      patchMaterial(depth)
-      mesh.customDepthMaterial = depth
-      depths.push(depth)
-    })
   let disposed = false
-  return {
-    copies,
-    dispose: () => {
-      if (disposed) return
+  let cleanupFailed = false
+  function dispose() {
+    if (!disposed) {
       disposed = true
-      for (const skeleton of skeletons) skeleton.dispose()
-      for (const geometry of geometries.values()) geometry.dispose()
-      for (const material of materials.values()) material.dispose()
-      for (const material of depths) material.dispose()
-    },
+      for (const resource of [
+        ...skeletons,
+        ...geometries.values(),
+        ...materials.values(),
+        ...depths,
+      ]) {
+        try {
+          resource.dispose()
+        } catch {
+          cleanupFailed = true
+        }
+      }
+    }
+    if (cleanupFailed) throw new ResourceCleanupError()
   }
+  try {
+    for (const copy of copies)
+      copy.traverse((object) => {
+        const mesh = object as SkinnedMesh
+        if (!mesh.isSkinnedMesh) return
+        skeletons.add(mesh.skeleton)
+        mesh.castShadow = true
+        // Rest-pose bounds cannot cull animated limbs. Two private review avatars are intentionally
+        // always submitted; actual notebook performance remains a separate release gate.
+        mesh.frustumCulled = false
+        if (mesh.geometry.hasAttribute('joints_1') !== mesh.geometry.hasAttribute('weights_1'))
+          throw new Error('추가 관절 가중치가 누락됐습니다')
+        if (!mesh.geometry.hasAttribute('weights_1')) return
+        let geometry = geometries.get(mesh.geometry)
+        if (!geometry) {
+          geometry = eightWeightGeometry(mesh.geometry, mesh.skeleton.bones.length)
+          geometries.set(mesh.geometry, geometry)
+        }
+        mesh.geometry = geometry
+        patchCpuSkin(mesh)
+        const patched = (source: Material) => {
+          let result = materials.get(source)
+          if (!result) {
+            result = source.clone()
+            patchMaterial(result)
+            materials.set(source, result)
+          }
+          return result
+        }
+        mesh.material = Array.isArray(mesh.material)
+          ? mesh.material.map(patched)
+          : patched(mesh.material)
+        const depth = new MeshDepthMaterial({ depthPacking: RGBADepthPacking })
+        patchMaterial(depth)
+        mesh.customDepthMaterial = depth
+        depths.push(depth)
+      })
+  } catch (error) {
+    dispose()
+    throw error
+  }
+  return { copies, dispose }
 }

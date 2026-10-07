@@ -139,4 +139,56 @@ describe('eight-weight asset skinning', () => {
     expect(originalDisposed).toBe(0)
     expect(meshes.every((mesh) => !mesh.frustumCulled)).toBe(true)
   })
+
+  it('reclaims a temporary geometry even when weight validation throws', () => {
+    const { geometry } = fixture()
+    geometry.getAttribute('weights_1').setX(0, -0.1)
+    const nativeClone = geometry.clone.bind(geometry)
+    let reclaimed = 0
+    geometry.clone = () => {
+      const copy = nativeClone()
+      copy.addEventListener('dispose', () => {
+        reclaimed++
+      })
+      return copy
+    }
+    expect(() => eightWeightGeometry(geometry, 8)).toThrow()
+    expect(reclaimed).toBe(1)
+  })
+
+  it('reclaims earlier patched geometry/material when a later mesh fails preparation', () => {
+    const f = fixture(),
+      invalid = fixture()
+    invalid.geometry.deleteAttribute('joints_1')
+    f.scene.add(invalid.mesh)
+    const nativeGeometryClone = f.geometry.clone.bind(f.geometry)
+    let geometryClosed = 0,
+      materialClosed = 0,
+      originalClosed = 0
+    f.geometry.clone = () => {
+      const copy = nativeGeometryClone()
+      copy.addEventListener('dispose', () => {
+        geometryClosed++
+      })
+      return copy
+    }
+    const material = f.mesh.material as MeshStandardMaterial
+    const nativeMaterialClone = material.clone.bind(material)
+    material.clone = () => {
+      const copy = nativeMaterialClone()
+      copy.addEventListener('dispose', () => {
+        materialClosed++
+      })
+      return copy
+    }
+    f.geometry.addEventListener('dispose', () => {
+      originalClosed++
+    })
+    expect(() => cloneEightWeightPair(f.scene)).toThrow()
+    expect({ geometryClosed, materialClosed, originalClosed }).toEqual({
+      geometryClosed: 1,
+      materialClosed: 1,
+      originalClosed: 0,
+    })
+  })
 })
