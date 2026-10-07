@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-08 세션·재생 자원: [S2.T7](stories/owned-playback-resources.md)는 기존 세션의 준비→일시정지→새 세대 재개→만료/종료를 실제 Chrome 가짜 카메라·SDK·남녀 GLB에 연결했다. pending 입력/결과를 정리한 뒤 native 자원을 닫고, 실패/원본과 [작동 흐름](review/owned-playback-resources/README.md)을 보존했다. runtime8ff7481·native/회귀·정적/build/guard·공개 byte 동일 후 조건부 PR 게이트를 진행한다. 계정/gate는 시험 주입이고 실제 사람·최종 외형/판정·공개 코칭·D2/전체1~6 완료가 아니다. 텍스트 최소화·미승인 UI/SDK·운영·이월 기준을 유지한다. PR69 실제 merge4a9c8f5와 main/브랜치 보존을 확인하고 시작했다. 아래는 시점별 기록이다.
+
 2026-10-08 연속 아바타 재생: [S2.T6](stories/owned-pose-playback.md)는 추론 pending 중에도 renderer/관찰 만료를 계속하고, 만료 결과는 버린 뒤 다음 프레임으로 진행한다. 실제 Chrome/RAF·가짜 카메라/SDK/남녀 GLB의 재생→지연→만료→종료와 별도 합성 긍정 보간이 작동한다. [실제 화면·실패·미완료](review/owned-pose-playback/README.md). runtime7e8a396·unit22/전체883·native 재생/기존 전달 회귀·정적/build/guard·공개 byte 동일 통과 후 PR 게이트를 진행한다. PR68 실제 merge141328f·main 동일 tree·브랜치 보존을 확인해 시작했다. 최종 외형·실제 사람·시범/판정/공개 코칭·SDK/디자인/외부/운영·전체1~6은 미완료이며 최소 문구 원칙과 기존 원본/이월 기준을 유지한다. 아래는 시점별 기록이다.
 
 2026-10-08 새 영상 프레임 연결: [S2.T5](stories/owned-video-pose.md)는 브라우저 decoded VideoFrame→동일 SDK 결과→사용자 rig를 연결했다. 실제 가짜 카메라에서 연속 전달→대기 취소→명시 재준비→track/SDK/model 종료가 작동하며 [화면·실패·미완료](review/owned-video-pose/README.md)를 보존했다. runtime73a3e99·전체861·native남녀·정적/build/guard·공개 byte 동일 통과 후 PR 게이트를 진행한다. 실제 사람 정확도/최종 아바타·시범/공개 코칭은 미완료다. D2/디자인/SDK·운영·전체1~6 기준과 최소 문구 원칙은 유지한다. PR67의 실제 merge d1743c4/main 동일 tree·브랜치 보존을 확인하고 시작했다. 아래는 시점별 기록이다.

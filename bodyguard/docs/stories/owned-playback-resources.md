@@ -1,6 +1,6 @@
 # S2.T7 — 세션·재생 자원의 순차 종료
 
-상태: 명세·최초 하네스 작성 / baseline `4a9c8f54eabd969c53bebc01d7d979cee457f1d7` / `codex/owned-playback-resources`
+상태: 비공개 구현·native 검증 통과 / runtime `8ff7481d9edbce9338f2cb298a95b4d5c881367b` / baseline `4a9c8f54eabd969c53bebc01d7d979cee457f1d7` / `codex/owned-playback-resources`
 
 FR-S-02/04·FR-M-07·FR-A-03·NFR-07/08. 기존 controller는 세 자원을 병렬 정리한다. S2.T6의 입력/결과 대기가 끝나기 전에 SDK나 카메라를 닫지 않도록, 한 세대의 세 포트를 하나의 종료 장벽으로 연결한다.
 
@@ -14,3 +14,7 @@ FR-S-02/04·FR-M-07·FR-A-03·NFR-07/08. 기존 controller는 세 자원을 병�
 6. 전체 frontend·타입/Biome/assets/build/공개 guard·공개 byte/GLB 동일·원본 실패/실행 source SHA·작성자 리뷰·최신 PR 게이트를 실제 확인한다. 물리 webcam/실제 참여자·최종 외형·fine joint/판정·승인 UI·전체 GPU/worker/장시간·D2 및 전체1~6 완료는 아니다.
 
 testing-strategy로 단위 경계·실제 browser/SDK 통합·실제 사람 시험을 구분하고 code-review로 순서/소유권/개인정보를 점검한다. 문구는 최소화하고 안전 안내/정적·합성 구분은 유지한다. 같은 아바타 부위 조형·제품 화면/SDK 정책/운영 변경0. 기존 원본·이월·별도 승인 경계를 보존한다.
+
+## 결과
+
+[작동 흐름·실제 아바타 화면·실패/미완료](../review/owned-playback-resources/README.md). 실제 가짜 카메라·SDK·남녀 GLB의 준비/중단/새 세대 재개/합성 세션 만료를 확인했다. 실제 사람/권한 popup/계정 만료·정답 시범/공개 코칭·전체 GPU/worker·최종 아바타·D2/전체1~6 기준은 미완료다. 작성자 리뷰 보완 후 조건부 PR 게이트를 진행한다.

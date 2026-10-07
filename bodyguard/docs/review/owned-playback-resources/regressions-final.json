@@ -1,0 +1,86 @@
+{
+  "head": "8ff7481d9edbce9338f2cb298a95b4d5c881367b",
+  "results": [
+    {
+      "mode": "playback",
+      "scratch": "/private/tmp/bodyguard-pose-playback-proof.JXQWMq",
+      "name": "build",
+      "command": [
+        "node_modules/.bin/vite",
+        "build",
+        "--config",
+        "e2e/fixtures/ownedPosePlayback.vite.ts"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "mode": "playback",
+      "scratch": "/private/tmp/bodyguard-pose-playback-proof.JXQWMq",
+      "name": "native",
+      "command": [
+        "node",
+        "scripts/test-pose-frame-browser.mjs",
+        "/private/tmp/bodyguard-pose-playback-proof.JXQWMq",
+        "final",
+        "playback"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "mode": "video",
+      "scratch": "/private/tmp/bodyguard-video-pose-proof.2KYmtM",
+      "name": "build",
+      "command": [
+        "node_modules/.bin/vite",
+        "build",
+        "--config",
+        "e2e/fixtures/ownedVideoPose.vite.ts"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "mode": "video",
+      "scratch": "/private/tmp/bodyguard-video-pose-proof.2KYmtM",
+      "name": "native",
+      "command": [
+        "node",
+        "scripts/test-pose-frame-browser.mjs",
+        "/private/tmp/bodyguard-video-pose-proof.2KYmtM",
+        "final",
+        "video"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "mode": "blank",
+      "scratch": "/private/tmp/bodyguard-pose-frame-proof.drPsLi",
+      "name": "build",
+      "command": [
+        "node_modules/.bin/vite",
+        "build",
+        "--config",
+        "e2e/fixtures/ownedPoseFrame.vite.ts"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "mode": "blank",
+      "scratch": "/private/tmp/bodyguard-pose-frame-proof.drPsLi",
+      "name": "native",
+      "command": [
+        "node",
+        "scripts/test-pose-frame-browser.mjs",
+        "/private/tmp/bodyguard-pose-frame-proof.drPsLi",
+        "final",
+        "blank"
+      ],
+      "exit": 0,
+      "signal": null
+    }
+  ]
+}
