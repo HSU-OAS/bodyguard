@@ -68,6 +68,10 @@ for (const file of files) {
     'Resource cleanup failed',
     'mountOwnedAvatarProbe',
     'PRIVATE_DISPOSE_ERROR',
+    'Invalid pose frame source',
+    'Pose frame unavailable',
+    'mountPoseFrameProbe',
+    'PRIVATE_POSE_FRAME_COORDINATES',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -91,5 +95,6 @@ console.log(
     unconnected_directional_avatar_strings: 0,
     unconnected_observed_pose_avatar_strings: 0,
     unconnected_owned_avatar_pair_strings: 0,
+    unconnected_owned_pose_frame_strings: 0,
   }),
 )
