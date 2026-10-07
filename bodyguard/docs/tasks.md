@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-07 독립 검증 최신: [S6.3 시작 준비 하네스](stories/web-startup-readiness.md)의 strict 시작·동작 선택·도움말·실제 본인 기록/삭제·기존 공개/계정 스타일 흐름을 검증했다. 실패 matcher에 보관된 ARIA 때문에 페이지 닫기만으로 원문 수집을 막지 못하는 문제를 실제 RED로 확인해 같은 visible/5000ms 조건의 boolean 검증으로 보완했다. [현재 실제 증거](review/web-startup-readiness/current-20261007/summary.json). 이전 실패 원본은 보존하고 시작 지연 원인은 미확정이다. 제품 판정/아바타·외부/운영·전체1~6은 미완료이며 S6.3 PR 병합 게이트를 진행한다. 다음 독립 작업은 Draft #51의 회귀 재검증이다. 디자인 구조 승인·텍스트 최소화 적용은 별도 검토 구간이며 미승인 화면을 확장하지 않는다.
+
 2026-10-07 디자인 최신: 기존 goal은 active이며 v4 의료·신체 케어 도구 분위기의 방향을 승인받았다. [S4.D2 클릭 가능한 코칭 시안](stories/coaching-design-prototype.md)을 **제품 밖의 독립 HTML**로 만들었다. 넓은 좌우 아바타·구도 변경·아바타 썸네일 후보·설정·단계 안내·종료 확인/취소/초기화가 작동하고, 중간 실패를 보존한 뒤 실제 Chrome에서 UI/오류 복구/키보드/경계 검사를 통과했다. [화면·실패·실제/미실행 구분](review/coaching-design-prototype/README.md). 정적 이미지이며 실제 카메라/시범/판정/기록은 아니다. 다음은 CEO의 클릭 가능한 구조 검토와 적용 범위 합의, 그동안 독립적인 시작 검증 등의 기존 개발을 계속한다. 기존 Draft PR·2단계 이월·전체 1~6단계 미완료 기준은 그대로다. 아래는 시점별 기존 기록이다.
 
 최신: [S4.16 private 본인 분 업로드](stories/owned-minute-upload.md)를 실제 시간가중 집계→원래 로그인/CSRF/기대 소유자→실제 저장→본인 화이트·블루 기록 상세로 연결했다. 응답 단절 후 동일 재시도 한 분·계정 변경403/폐기·충돌409/기존 기록 보존을 실제 Chrome/API/SQL로 확인했다. [화면·예외·실패·실제/합성 구분](review/owned-minute-upload/README.md). source28/artifact54·전체682frontend/466API·privateChrome4/기록4/공개8·정적/build/guard·Node12 검증 후 조건부 PR 게이트 진행이다. 공개 producer/실제 신체/아바타·SDK P2/단계2 이월·참여자·Q32 나머지·외부/운영·전체1~6 완료는 아니다. 기존 디자인 스킬의 화이트·블루 웹을 유지하고 다음 독립 기능은 일/주 기록 집계·대시보드 연결이다. 아래는 시점별 기록이다.
