@@ -56,6 +56,9 @@ for (const file of files) {
     'mountAlertDeliveryProbe',
     '__private-alert-delivery-probe',
     'Notification permission requires explicit user activation',
+    'mountOwnedAlertProbe',
+    '__private-owned-alert-probe',
+    'useOwnedAlertDelivery',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -75,5 +78,6 @@ console.log(
     unconnected_minute_aggregation_strings: 0,
     unconnected_owned_minute_upload_strings: 0,
     unconnected_alert_delivery_strings: 0,
+    unconnected_owned_alert_lifecycle_strings: 0,
   }),
 )

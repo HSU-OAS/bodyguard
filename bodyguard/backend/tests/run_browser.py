@@ -45,6 +45,7 @@ def main() -> int:
             "authcoaching",
             "notifications",
             "alertdelivery",
+            "ownedalert",
             "summaries",
             "minuteupload",
         ),
@@ -190,6 +191,7 @@ def main() -> int:
                         "authcoaching",
                         "notifications",
                         "alertdelivery",
+                        "ownedalert",
                         "summaries",
                         "minuteupload",
                     )
@@ -230,6 +232,7 @@ def main() -> int:
                                 "authcoaching",
                                 "notifications",
                                 "alertdelivery",
+                                "ownedalert",
                                 "summaries",
                                 "minuteupload",
                             )

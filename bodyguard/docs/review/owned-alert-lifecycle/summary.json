@@ -1,0 +1,542 @@
+{
+  "baselineCommit": "ddc35cf247b4d04cffb8dd435b1a3c99a0378fac",
+  "executedLocalUncommittedCandidateBoundBySourceHashes": true,
+  "scope": "private account/settings/alert delivery lifetime only",
+  "finalUnit": {
+    "name": "unit-accepted.json",
+    "sha256": "148d4a6adc2b4471f733efd0937981629accc0f97635d74f4180fea6bec6e768",
+    "total": 765,
+    "passed": 765,
+    "failed": 0,
+    "skipped": 0
+  },
+  "earlierUnit": [
+    {
+      "name": "unit-executed-first.json",
+      "sha256": "d089c9dfbc2b0ce30a0fe74d08cd918a098da442969bac0ae4014285e442104f",
+      "total": 16,
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "unit-reentrant-red.json",
+      "sha256": "d0c04234ea58604a1ec7b482e56eb78d2a17e4937272d9ae0425f94dd27a191a",
+      "total": 18,
+      "passed": 16,
+      "failed": 2,
+      "skipped": 0
+    },
+    {
+      "name": "unit-reentrant-green.json",
+      "sha256": "4609a492ecc73c7c6ad7c55479aa8ecc9f7ec021c245f58e7bf7dfc67e508c4f",
+      "total": 18,
+      "passed": 18,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "unit-full-first.json",
+      "sha256": "63d82c35c56d8eb3b924f49ce5f50447a581f4c2c1c8c94e7279646159b10db2",
+      "total": 762,
+      "passed": 762,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "unit-full-final.json",
+      "sha256": "bd9fd3997ffa772cd30d41a8edae490e831347623c1434d207455248b6f8df4c",
+      "total": 764,
+      "passed": 764,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "unit-handoff-red.json",
+      "sha256": "792a34047d4a2a7cd7cc4e4dc3a75306527efce58dc02515388db05638a70025",
+      "total": 21,
+      "passed": 20,
+      "failed": 1,
+      "skipped": 0
+    }
+  ],
+  "actualBrowserAuthApiSql": [
+    {
+      "name": "ownedalert-20261007T155922262144Z",
+      "sha256": "1a539dde8d49f70d0cd218bdaf42f2f1f70801171dc90eede26b740b585fe09b",
+      "expected": 0,
+      "unexpected": 3,
+      "skipped": 0,
+      "flaky": 0,
+      "durationMs": 13293.782,
+      "boundaries": [
+        {
+          "actualChromeAuthHttpSql": true,
+          "syntheticMailAndTriggers": true,
+          "actualCoachingOrGrantedOsDisplay": false,
+          "camera": 0,
+          "unexpected": 0,
+          "errors": 0,
+          "storage": [
+            0,
+            0
+          ],
+          "browser": "154.0.8037.98"
+        },
+        {
+          "actualChromeAuthHttpSql": true,
+          "syntheticMailAndTriggers": true,
+          "actualCoachingOrGrantedOsDisplay": false,
+          "camera": 0,
+          "unexpected": 0,
+          "errors": 0,
+          "storage": [
+            0,
+            0
+          ],
+          "browser": "154.0.8037.98"
+        },
+        {
+          "actualChromeAuthHttpSql": true,
+          "syntheticMailAndTriggers": true,
+          "actualCoachingOrGrantedOsDisplay": false,
+          "camera": 0,
+          "unexpected": 0,
+          "errors": 0,
+          "storage": [
+            0,
+            0
+          ],
+          "browser": "154.0.8037.98"
+        }
+      ]
+    },
+    {
+      "name": "ownedalert-20261007T160100248771Z",
+      "sha256": "46fe3a53743dbdabe5440bda7a4448dd1b114b91cb8c33466e5d74481bedef86",
+      "expected": 1,
+      "unexpected": 2,
+      "skipped": 0,
+      "flaky": 0,
+      "durationMs": 12428.911,
+      "boundaries": [
+        {
+          "actualChromeAuthHttpSql": true,
+          "syntheticMailAndTriggers": true,
+          "actualCoachingOrGrantedOsDisplay": false,
+          "camera": 0,
+          "unexpected": 0,
+          "errors": 0,
+          "storage": [
+            0,
+            0
+          ],
+          "browser": "154.0.8037.98"
+        },
+        {
+          "actualChromeAuthHttpSql": true,
+          "syntheticMailAndTriggers": true,
+          "actualCoachingOrGrantedOsDisplay": false,
+          "camera": 0,
+          "unexpected": 0,
+          "errors": 0,
+          "storage": [
+            0,
+            0
+          ],
+          "browser": "154.0.8037.98"
+        },
+        {
+          "actualChromeAuthHttpSql": true,
+          "syntheticMailAndTriggers": true,
+          "actualCoachingOrGrantedOsDisplay": false,
+          "camera": 0,
+          "unexpected": 0,
+          "errors": 0,
+          "storage": [
+            0,
+            0
+          ],
+          "browser": "154.0.8037.98"
+        }
+      ]
+    },
+    {
+      "name": "ownedalert-20261007T160229727712Z",
+      "sha256": "c3c00ebe9651565b36d3c26817adf2a2e83886f6ea12adb79c4b406474df63e7",
+      "expected": 3,
+      "unexpected": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "durationMs": 10949.103000000001,
+      "boundaries": [
+        {
+          "actualChromeAuthHttpSql": true,
+          "syntheticMailAndTriggers": true,
+          "actualCoachingOrGrantedOsDisplay": false,
+          "camera": 0,
+          "unexpected": 0,
+          "errors": 0,
+          "storage": [
+            0,
+            0
+          ],
+          "browser": "154.0.8037.98"
+        },
+        {
+          "actualChromeAuthHttpSql": true,
+          "syntheticMailAndTriggers": true,
+          "actualCoachingOrGrantedOsDisplay": false,
+          "camera": 0,
+          "unexpected": 0,
+          "errors": 0,
+          "storage": [
+            0,
+            0
+          ],
+          "browser": "154.0.8037.98"
+        },
+        {
+          "actualChromeAuthHttpSql": true,
+          "syntheticMailAndTriggers": true,
+          "actualCoachingOrGrantedOsDisplay": false,
+          "camera": 0,
+          "unexpected": 0,
+          "errors": 0,
+          "storage": [
+            0,
+            0
+          ],
+          "browser": "154.0.8037.98"
+        }
+      ]
+    },
+    {
+      "name": "ownedalert-20261007T160622016053Z",
+      "sha256": "0acebfa461bdd0cc607344c246348aa5b3bb0e4bf50204ae134fff438e0b88a4",
+      "expected": 3,
+      "unexpected": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "durationMs": 10646.062,
+      "boundaries": [
+        {
+          "actualChromeAuthHttpSql": true,
+          "syntheticMailAndTriggers": true,
+          "actualCoachingOrGrantedOsDisplay": false,
+          "camera": 0,
+          "unexpected": 0,
+          "errors": 0,
+          "storage": [
+            0,
+            0
+          ],
+          "browser": "154.0.8037.98"
+        },
+        {
+          "actualChromeAuthHttpSql": true,
+          "syntheticMailAndTriggers": true,
+          "actualCoachingOrGrantedOsDisplay": false,
+          "camera": 0,
+          "unexpected": 0,
+          "errors": 0,
+          "storage": [
+            0,
+            0
+          ],
+          "browser": "154.0.8037.98"
+        },
+        {
+          "actualChromeAuthHttpSql": true,
+          "syntheticMailAndTriggers": true,
+          "actualCoachingOrGrantedOsDisplay": false,
+          "camera": 0,
+          "unexpected": 0,
+          "errors": 0,
+          "storage": [
+            0,
+            0
+          ],
+          "browser": "154.0.8037.98"
+        }
+      ]
+    }
+  ],
+  "publicAndDevelopmentSelection": {
+    "stats": {
+      "startTime": "2026-10-07T16:04:27.836Z",
+      "duration": 12651.609,
+      "expected": 8,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "reportSha256": "dfcee459d6ec6f75c362ee49932a128ea19e471a3d218b504ac1d806d33a6a5f",
+    "actualAuthSql": false,
+    "syntheticAccountAndFrames": true,
+    "executedBeforeFinalPrivateHandoffOnlyChange": true
+  },
+  "verification": {
+    "typecheck": "passed",
+    "biome": "passed",
+    "ruffRunner": "passed",
+    "ruffFormatRunner": "passed",
+    "actualProductionBuild": "passed",
+    "productionGuardPositive": "passed",
+    "deliberateGeneratedLeakGuardNegative": "rejected exit1; injected file removed; restored exit0",
+    "gitDiffCheck": "passed",
+    "ownedNativePostgresStopped": true,
+    "fullBackendRegressionRerun": false,
+    "publicProductLogicUiAndPoliciesChanged": false
+  },
+  "publicFiles": [
+    {
+      "name": "index-dNUNBpCv.css",
+      "sha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e",
+      "byteIdenticalToPreviousMergedBuild": true
+    },
+    {
+      "name": "index-x57--wa1.js",
+      "sha256": "b5d4f81164c8d3c196e853b3404382bc15077986aa626cd0c3c72571b6325ac0",
+      "byteIdenticalToPreviousMergedBuild": true
+    }
+  ],
+  "sources": [
+    {
+      "name": "frontend/src/alerts/useOwnedAlertDelivery.ts",
+      "sha256": "6e3b4d61995cb45c374806c955e4b52080ce7c8e490539c38a93450839d2777a"
+    },
+    {
+      "name": "frontend/src/alerts/useOwnedAlertDelivery.test.tsx",
+      "sha256": "32b22016a8b2474f0c4e6b94f81e7cdc465d2311f94e588aa6b086127fcb799d"
+    },
+    {
+      "name": "frontend/src/alerts/delivery.ts",
+      "sha256": "1b27b32b1fe4796efe9197f2ffc034cde98aeba751fd36fffda41ea318d14c5b"
+    },
+    {
+      "name": "frontend/src/alerts/browserNotifications.ts",
+      "sha256": "2b6a157cfa42d863073b25214ebeea31137603326214372c5e386e675161a0e5"
+    },
+    {
+      "name": "frontend/src/alerts/AlertDeliveryPanel.tsx",
+      "sha256": "b21ec801cea97b8bf3c6fe0fc2df88e905b8a8d36410a4efaff91214c8f7ada3"
+    },
+    {
+      "name": "frontend/src/api/notificationPreferences.ts",
+      "sha256": "438fbc7e253551682662b658a7fb2af9a2215869862bf97345886a44fc416a40"
+    },
+    {
+      "name": "frontend/src/auth.tsx",
+      "sha256": "8357e10ad49a027eb2e5996ea5d5bcc55b9262aac5edc6ed10d0ff14cf6bae10"
+    },
+    {
+      "name": "frontend/src/App.tsx",
+      "sha256": "a18ca00c782e2e25d798511d6c7e7d158a34c2635e80005bcf30e4059c998e67"
+    },
+    {
+      "name": "frontend/e2e/fixtures/ownedAlertProbe.ts",
+      "sha256": "d8ccba08b10280482b08e67cdfe2a37e845b97f2a93c7603b21fad261f3635b6"
+    },
+    {
+      "name": "frontend/e2e/fixtures/ownedAlert.vite.ts",
+      "sha256": "1827a0bea462fce1123631b81fb5fdc080ed9970ffef5bc7c5ad1b32394f4539"
+    },
+    {
+      "name": "frontend/e2e/ownedalert.spec.ts",
+      "sha256": "94462dd9d10e81655920001c00f737f01b170197938f831f270f795e77749939"
+    },
+    {
+      "name": "frontend/playwright.account.config.ts",
+      "sha256": "b433774766fb6a7ed0f7f8b0d4c21908c62790ac0bcc0e4153f24b7cd340f894"
+    },
+    {
+      "name": "frontend/scripts/check-selection-production.mjs",
+      "sha256": "d81f29c00bcb599a9808a7fd6a8a1fe4e768c251dffd71a056010bb5feae49c0"
+    },
+    {
+      "name": "backend/tests/run_browser.py",
+      "sha256": "4dc52bdd51cc6dd22bee5416f96518f94d00133b5a858547dd99fa006e21ad06"
+    },
+    {
+      "name": "frontend/package.json",
+      "sha256": "fc5513803b158f0829f44e17a43335bcc0319d5476cb41abf8405656946363b7"
+    },
+    {
+      "name": "frontend/pnpm-lock.yaml",
+      "sha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+    }
+  ],
+  "preservedPrivateLogs": [
+    {
+      "name": "build-first.log",
+      "sha256": "a1dcbb3145ecd64daac99f2364c4d319dd3f27c279149f8bb7a088a0dd5ce62d"
+    },
+    {
+      "name": "check-accepted.log",
+      "sha256": "d81a7115dd5babc25217e4255761001a5eb60fe55ca701717d62b8b4c02821d1"
+    },
+    {
+      "name": "check-final.log",
+      "sha256": "7086f2b89f01b7dacb0a7a9d9c7483b4b769f980e40c3ee159e909d26a597991"
+    },
+    {
+      "name": "check-first.log",
+      "sha256": "efd50ec8875d6f603ec78e522baddc598e944558dd68656820b787a08dcf13b1"
+    },
+    {
+      "name": "check-last.log",
+      "sha256": "6558cceee6bc42d85572bdf4744d038b99cf3d987e0692be28684b1e5a390541"
+    },
+    {
+      "name": "format-browser-policy.log",
+      "sha256": "e38d2d5676e3834c9ba36b2b3f98ef3506af66f70f257ba04b40b6613ce4b19d"
+    },
+    {
+      "name": "format-browser-summary.log",
+      "sha256": "2f93f32397ec492e1cc38ce5215e126d1d0bd2b9a8433f01747bac878f24658a"
+    },
+    {
+      "name": "format-edge.log",
+      "sha256": "25312577d5102f3f80456e696ef3799598883da67ab1caed91e54b594a5a3526"
+    },
+    {
+      "name": "format-first.log",
+      "sha256": "be921bf86e616b634e1037c69b5dd00d06cce8149198edbdced13cab7a6db34a"
+    },
+    {
+      "name": "format-handoff.log",
+      "sha256": "cf4640fb31c3b7b33c42a180ad9b7a3ee58c52b14b0d88378ab0f9cc6078e883"
+    },
+    {
+      "name": "format-second.log",
+      "sha256": "589bee1c32a730e6e58a9d72844b68f1be14da075f5c9e75335372125b996e09"
+    },
+    {
+      "name": "guard-negative.log",
+      "sha256": "bed9d2c121f106ab3079cfaefd12af0b1e9949da2d9c3e7a7ef5348a3e5b36af"
+    },
+    {
+      "name": "guard-restored.log",
+      "sha256": "aeb9df554974b4a05056b8ad19a2bac37eb8bb32dad34c14408c99fe10f7d3f0"
+    },
+    {
+      "name": "install-offline.log",
+      "sha256": "a8d5dcfe3c976c1ff5b97120754c0547cb2308d5050765ed06865972ea2068eb"
+    },
+    {
+      "name": "install-owned-cache.log",
+      "sha256": "d7ca0e21d7a2b9426ce4d92d8f387601e118187ba23134c2d79286046961f0e4"
+    },
+    {
+      "name": "native-accepted.log",
+      "sha256": "a87bcc337e36b9d29e6b3886166d9440ceef112180ffe6a4c9ab6b90728135c0"
+    },
+    {
+      "name": "native-first.log",
+      "sha256": "84c1b4b82cb346063b897942c870543385d6b12d77a060924114c3c256b5a329"
+    },
+    {
+      "name": "native-second.log",
+      "sha256": "d0462103f0daf9ff2d4edbaca0976bc129fe3c7d372c47a59f4e0c7ad893ad7e"
+    },
+    {
+      "name": "native-third.log",
+      "sha256": "8f3c01109ef6fecf6c816ee57520799d44946d4eda63d2746cb7a407ebe5b07a"
+    },
+    {
+      "name": "pg-init.log",
+      "sha256": "2eb28d8e1031aa4d8ca7f2a0cd1887c5b529b37eda2d82c2a53078d8671a1dec"
+    },
+    {
+      "name": "pg-start.log",
+      "sha256": "66afd0411ccc09366e99fdd99b85f21899c8d2d064f5835126859618802153ad"
+    },
+    {
+      "name": "pg-stop.log",
+      "sha256": "ca19178a35ab4153b75b494963b66ce8243e1b94c173107c87b44d09db23652d"
+    },
+    {
+      "name": "production-guard.log",
+      "sha256": "aeb9df554974b4a05056b8ad19a2bac37eb8bb32dad34c14408c99fe10f7d3f0"
+    },
+    {
+      "name": "run-native-first.sh",
+      "sha256": "0c72e1924d2184666d1dc61a6ce94cc89297205038a449170dccf6c29bbd4dfd"
+    },
+    {
+      "name": "run-native-second.sh",
+      "sha256": "5705e8500b04f821b8f527623ec5cdfc89ab5e9f62b7a24263f2f8cc9e88f61b"
+    },
+    {
+      "name": "run-native-third.sh",
+      "sha256": "dfe8da1ddea4198689e9a18f638449f8b36e6b75d3e55e36b1a8ec244895fe35"
+    },
+    {
+      "name": "run-native.sh",
+      "sha256": "83ef6509c403291494c126d4001121db8c2cae4d64103a18eae9f6ed358a97af"
+    },
+    {
+      "name": "selection-final.log",
+      "sha256": "c3098dcf01eaaadf7b35279aa21b30d56245511f477673c94331754aab8f3434"
+    },
+    {
+      "name": "typecheck-accepted.log",
+      "sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92"
+    },
+    {
+      "name": "typecheck-final.log",
+      "sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92"
+    },
+    {
+      "name": "typecheck-first.log",
+      "sha256": "67a3bf3a12fa8d57214edd2e68f3e22b07e84d527a9ca5ff284d48d934d45366"
+    },
+    {
+      "name": "typecheck-last.log",
+      "sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92"
+    },
+    {
+      "name": "typecheck-second.log",
+      "sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92"
+    },
+    {
+      "name": "unit-accepted.log",
+      "sha256": "1295b1c392154cf4c22d6a45bd8c3bb427e36f927c9a5aa4714eb3b1bcdb52ca"
+    },
+    {
+      "name": "unit-executed-first.log",
+      "sha256": "a3916bc0bb2c016e825e7b0d1c2cb9188d95780c31af2acd86f583adc8e5496d"
+    },
+    {
+      "name": "unit-full-final.log",
+      "sha256": "cf373e58b0cf265f16c091ffccee2c7b4ff38da1f584a52f88d91eeaffd9bdbe"
+    },
+    {
+      "name": "unit-full-first.log",
+      "sha256": "1966c8b58c484c9e83f1ed23e563049dc527f5342453e68efed3265e26fd8f62"
+    },
+    {
+      "name": "unit-handoff-red.log",
+      "sha256": "1df37b6249b04a94f1a74e0daf130a152476a1e518264147314746888f544251"
+    },
+    {
+      "name": "unit-reentrant-green.log",
+      "sha256": "71eda42bd99f434da0ad23edd56e6bdf27b459213850488dee08dca02a6ac933"
+    },
+    {
+      "name": "unit-reentrant-red.log",
+      "sha256": "404e16ee3845407037226617575a112ddf218d180e13392c13e130dbeb968976"
+    }
+  ],
+  "notVerified": [
+    "actual granted OS notification display",
+    "actual webcam/classifier/motion",
+    "scheduler Q07/08/21",
+    "sound/reaction records",
+    "cross-tab settings synchronization",
+    "final avatars/real notebook performance",
+    "approved design application",
+    "Docker/HTTPS/external providers/participants/deployment/expert/full stages1-6"
+  ]
+}
