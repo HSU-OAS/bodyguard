@@ -1,0 +1,25 @@
+
+Running 12 tests using 1 worker
+
+  ✓   1 e2e/nativeauth.spec.ts:236:3 › male native start→stop→own interrupted record (3.5s)
+  ✓   2 e2e/nativeauth.spec.ts:274:3 › male native held result→same-account refresh→new owner explicit restart (5.5s)
+  ✓   3 e2e/nativeauth.spec.ts:306:5 › male native held result→logout→no old resume/save (3.6s)
+  ✓   4 e2e/nativeauth.spec.ts:306:5 › male native held result→server401→no old resume/save (3.5s)
+  ✓   5 e2e/nativeauth.spec.ts:306:5 › male native held result→pagehide→no old resume/save (3.5s)
+  ✓   6 e2e/nativeauth.spec.ts:306:5 › male native held result→unmount→no old resume/save (3.4s)
+  ✓   7 e2e/nativeauth.spec.ts:236:3 › female native start→stop→own interrupted record (3.0s)
+  ✓   8 e2e/nativeauth.spec.ts:274:3 › female native held result→same-account refresh→new owner explicit restart (5.5s)
+  ✓   9 e2e/nativeauth.spec.ts:306:5 › female native held result→logout→no old resume/save (3.5s)
+  ✓  10 e2e/nativeauth.spec.ts:306:5 › female native held result→server401→no old resume/save (3.5s)
+  ✓  11 e2e/nativeauth.spec.ts:306:5 › female native held result→pagehide→no old resume/save (3.5s)
+  ✓  12 e2e/nativeauth.spec.ts:306:5 › female native held result→unmount→no old resume/save (3.4s)
+
+  12 passed (53.6s)
+[WebServer] (node:20720) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:20729) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:20738) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:20747) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

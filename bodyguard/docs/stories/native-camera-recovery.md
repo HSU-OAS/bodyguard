@@ -1,6 +1,6 @@
 # S2.T10 — native 자원 연결과 카메라 복구
 
-상태: 구현·초기 native 복구 검증 / baseline708c6a0171d8719af4dce7f4834cb05a1558dc72 / codex/native-camera-recovery / runtime 회귀·리뷰/PR 게이트 대기
+상태: 구현·runtime 검증 / baseline708c6a0171d8719af4dce7f4834cb05a1558dc72 / runtime9918072bbf5f6285be6510bee04b71289680f0a9 / codex/native-camera-recovery / PR 게이트 대기
 
 FR-M-01/02/07·FR-A-01/03·FR-S-02/04·FR-U-04·NFR-07/08. 이전 S2.T9의 native 조합을 실제 재사용 adapter로 연결한다. 시작 전 native 획득0·명시 시작/취소·안전한 종료·명시 새 준비/재시작을 지원한다. 아직 공개 consumer는 없으며 미검증 에셋/판정·미승인 디자인/SDK 정책을 활성화하지 않는다.
 
@@ -22,3 +22,5 @@ FR-M-01/02/07·FR-A-01/03·FR-S-02/04·FR-U-04·NFR-07/08. 이전 S2.T9의 nativ
 첫 단위 시험은 module 미구현으로 suite 실패(실행 assertion0)였고, 구현 후에는 DOM 환경 누락으로13중12 실패였다. happy-dom을 명시하고13을 통과했다. 첫 브라우저8흐름 중4 실패는 권한 설정과 시험 snapshot의 종료 사유 접근 문제였다. 결과의 reason을 읽도록 고치고 fake UI 자동 허용을 제거했다. 다음 실행은 권한 설정용 CDP 연결을 너무 일찍 종료해 denied가 prompt로 초기화되면서2 실패했다. 별도 실제 Chrome 권한 시험에서 이 인과를 재현하고, native 요청/재시도까지 해당 연결을 유지해8을 통과했다. 테스트 조건을 낮추거나 가짜 NotAllowedError로 대체하지 않았다.
 
 재시작 검증은 누적 이전 frame이 아니라 **새 시작 이후** frame 증가를 기다린다. 카메라/input 스크린샷0이고 PNG는 기존 미완성 A37의 아바타 canvas만이다. 초기 launcher receipt의 nativeSdkOrGlb=false는 metadata 실수이며 실제 native 실행을 부정하거나 모의 통과로 바꾸지 않는다. 후속 receipt를 수정하고 잘못된 원본도 보존한다. 전체 회귀·정적/build/공개 byte/source SHA·리뷰/최신 PR 조건은 runtime에서 다시 검증한다.
+
+runtime의 복구8·기존 실제 계정/native12·adapter13/전체939, 타입/Biome·변경 runner Ruff·assets/build/guard와 공개 byte 동일을 실제 확인했다. [작동 흐름·아바타 canvas·실패/한계](../review/native-camera-recovery/README.md), [40소스/123증거와 원본 SHA](../review/native-camera-recovery/summary.json)를 보존했다. 작성자 리뷰이며 독립 리뷰/전체 backend 회귀로 표시하지 않는다. 격리 DB 서버는 종료했고 데이터/증거는 보존했다. 공개 코칭/실제 사람 검증·전체1~6단계 완료가 아니다.

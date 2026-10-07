@@ -1,0 +1,81 @@
+
+Running 8 tests using 1 worker
+
+  ✘  1 e2e/nativerecovery.spec.ts:280:3 › male browser permission denied→explicit retry (5.8s)
+  ✓  2 e2e/nativerecovery.spec.ts:304:3 › male delayed native camera→cancel→late reclaim→explicit retry (3.5s)
+  ✓  3 e2e/nativerecovery.spec.ts:344:3 › male native track lost→stop→explicit retry (5.0s)
+  ✓  4 e2e/nativerecovery.spec.ts:360:3 › male GLB HTTP404→native cleanup→explicit retry (3.5s)
+  ✘  5 e2e/nativerecovery.spec.ts:280:3 › female browser permission denied→explicit retry (5.6s)
+  ✓  6 e2e/nativerecovery.spec.ts:304:3 › female delayed native camera→cancel→late reclaim→explicit retry (3.4s)
+  ✓  7 e2e/nativerecovery.spec.ts:344:3 › female native track lost→stop→explicit retry (5.0s)
+  ✓  8 e2e/nativerecovery.spec.ts:360:3 › female GLB HTTP404→native cleanup→explicit retry (3.5s)
+
+
+  1) e2e/nativerecovery.spec.ts:280:3 › male browser permission denied→explicit retry ──────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "denied"
+    Received: "prompt"
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+      275 |       ),
+      276 |     )
+    > 277 |     .toBe(setting)
+          |      ^
+      278 | }
+      279 | for (const gender of ['male', 'female'] as const) {
+      280 |   test(`${gender} browser permission denied→explicit retry`, async ({ page, context }, info) => {
+        at setCameraPermission ([workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts:277:6)
+        at [workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts:283:5
+
+    attachment #1: native-recovery-summary (application/json) ──────────────────────────────────────
+    test-results/nativerecovery-20261007T230847019958Z/nativerecovery-male-browser-permission-denied→explicit-retry/attachments/native-recovery-summary-8e0f7c9e1ed9f8682ab415be8d0c35a5b99f1d7d.json
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/nativerecovery-20261007T230847019958Z/nativerecovery-male-browser-permission-denied→explicit-retry/error-context.md
+
+  2) e2e/nativerecovery.spec.ts:280:3 › female browser permission denied→explicit retry ────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "denied"
+    Received: "prompt"
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+      275 |       ),
+      276 |     )
+    > 277 |     .toBe(setting)
+          |      ^
+      278 | }
+      279 | for (const gender of ['male', 'female'] as const) {
+      280 |   test(`${gender} browser permission denied→explicit retry`, async ({ page, context }, info) => {
+        at setCameraPermission ([workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts:277:6)
+        at [workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts:283:5
+
+    attachment #1: native-recovery-summary (application/json) ──────────────────────────────────────
+    test-results/nativerecovery-20261007T230847019958Z/nativerecovery-female-brow-55678-ssion-denied→explicit-retry/attachments/native-recovery-summary-81b3462e6f5d722ea655171b5036ff7cc2786d7c.json
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/nativerecovery-20261007T230847019958Z/nativerecovery-female-brow-55678-ssion-denied→explicit-retry/error-context.md
+
+  2 failed
+    e2e/nativerecovery.spec.ts:280:3 › male browser permission denied→explicit retry ───────────────
+    e2e/nativerecovery.spec.ts:280:3 › female browser permission denied→explicit retry ─────────────
+  6 passed (45.8s)
+[WebServer] (node:18805) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:18818) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:18828) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:18840) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18909) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18998) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
