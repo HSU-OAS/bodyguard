@@ -1,0 +1,59 @@
+e2e/fixtures/observedPoseRigProbe.ts:78:7 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    76 │     joints.map(([name, index]) => [
+    77 │       index,
+  > 78 │       user.getObjectByName(name)!.getWorldPosition(new Vector3()),
+       │       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    79 │     ]),
+    80 │   )
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+     76  76 │       joints.map(([name, index]) => [
+     77  77 │         index,
+     78     │ - ······user.getObjectByName(name)!.getWorldPosition(new·Vector3()),
+         78 │ + ······user.getObjectByName(name)?.getWorldPosition(new·Vector3()),
+     79  79 │       ]),
+     80  80 │     )
+  
+
+e2e/fixtures/observedPoseRigProbe.ts:92:9 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    90 │     JSON.stringify(
+    91 │       ['upperleg01L', 'lowerleg01L', 'upperleg01R', 'lowerleg01R'].map((name) =>
+  > 92 │         user.getObjectByName(name)!.quaternion.toArray(),
+       │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    93 │       ),
+    94 │     )
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+     90  90 │       JSON.stringify(
+     91  91 │         ['upperleg01L', 'lowerleg01L', 'upperleg01R', 'lowerleg01R'].map((name) =>
+     92     │ - ········user.getObjectByName(name)!.quaternion.toArray(),
+         92 │ + ········user.getObjectByName(name)?.quaternion.toArray(),
+     93  93 │         ),
+     94  94 │       )
+  
+
+e2e/fixtures/observedPoseRigProbe.ts:113:20 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    111 │     }))
+    112 │     const world: Point[] = Array.from({ length: 33 }, () => ({ x: 0, y: 0, z: 0 }))
+  > 113 │     const origin = restPoints.get(11)!
+        │                    ^^^^^^^^^^^^^^^^^^^
+    114 │     const turn = new Quaternion().setFromAxisAngle(new Vector3(0, 0, 1), angle)
+    115 │     for (const [index, rest] of restPoints) {
+  
+
+Skipped 2 suggested fixes.
+If you wish to apply the suggested (unsafe) fixes, use the command biome check --write --unsafe
+
+Checked 7 files in 48ms. Fixed 3 files.
+Found 3 warnings.

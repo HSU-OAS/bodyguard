@@ -1,0 +1,973 @@
+{
+  "runtimeCommit": "fea93b94f407433d631f0088f8be7945d43ee1e0",
+  "baselineCommit": "48d315461720377f757f80d039a95a3b916ca2f2",
+  "acceptedBrowser": {
+    "head": "fea93b94f407433d631f0088f8be7945d43ee1e0",
+    "sourceBefore": {
+      "src/avatar/observedPoseRig.ts": "680235478e06efc111cc04515619f76668806bb64f0b2687f2144443c453c606",
+      "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+      "src/avatar/eightWeightSkin.ts": "8b318ddcb69fafee46c8d4fbe20b3beb82c90e64892ab2aed4934b3ccb16caec",
+      "e2e/fixtures/observedPoseRigProbe.ts": "85c0062ca4caedb52e482da49b768aff27391de5214f3d95b7d41cf1fb3c0113",
+      "scripts/test-observed-rig-browser.mjs": "c95616731e7fb71936ae59d3a4dc5afcadf8c002e7ca9d69acb2bff4f3133ba7",
+      "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+    },
+    "assetCommit": "25a9bd6c7392890e3b5d5d6ae1046bb7087d56ad",
+    "assetHashes": {
+      "male": "cc85bcd449f3f31347e4f7174986d41e4aca3067990f5d8a2e6ba3a099171927",
+      "female": "27c10902aa377e995bdbc115ab773cf22f8ea38582c49820304a33ad7685f25a"
+    },
+    "actualChrome": true,
+    "actualWebGL": true,
+    "syntheticObservations": true,
+    "actualSDK": false,
+    "actualCamera": false,
+    "releaseAvatar": false,
+    "samples": [
+      {
+        "gender": "male",
+        "passed": true,
+        "stages": [
+          {
+            "mode": "single",
+            "state": {
+              "status": "tracking",
+              "tracked": 8,
+              "total": 8
+            },
+            "sequence": 60,
+            "closed": false,
+            "independent": true,
+            "framing": [
+              {
+                "inside": true
+              },
+              {
+                "inside": true
+              }
+            ],
+            "referenceUnchanged": true,
+            "sourceUnchanged": true,
+            "userChanged": true,
+            "missingLegsFrozen": false,
+            "poseFrozen": false,
+            "userArmMoved": true,
+            "maxDirectionError": 0.000002827571411925953,
+            "calls": 10,
+            "triangles": 576508
+          },
+          {
+            "mode": "crop",
+            "state": {
+              "status": "partial",
+              "tracked": 4,
+              "total": 8
+            },
+            "sequence": 73,
+            "closed": false,
+            "independent": true,
+            "framing": [
+              {
+                "inside": true
+              },
+              {
+                "inside": true
+              }
+            ],
+            "referenceUnchanged": true,
+            "sourceUnchanged": true,
+            "userChanged": true,
+            "missingLegsFrozen": true,
+            "poseFrozen": false,
+            "userArmMoved": true,
+            "maxDirectionError": 9.305772182939053e-8,
+            "calls": 10,
+            "triangles": 576508
+          },
+          {
+            "mode": "multiple",
+            "state": {
+              "status": "untracked",
+              "tracked": 0,
+              "total": 8
+            },
+            "sequence": 80,
+            "closed": false,
+            "independent": true,
+            "framing": [
+              {
+                "inside": true
+              },
+              {
+                "inside": true
+              }
+            ],
+            "referenceUnchanged": true,
+            "sourceUnchanged": true,
+            "userChanged": false,
+            "missingLegsFrozen": true,
+            "poseFrozen": true,
+            "userArmMoved": true,
+            "maxDirectionError": 9.305772182939053e-8,
+            "calls": 10,
+            "triangles": 576508
+          },
+          {
+            "mode": "mismatch",
+            "state": {
+              "status": "untracked",
+              "tracked": 0,
+              "total": 8
+            },
+            "sequence": 87,
+            "closed": false,
+            "independent": true,
+            "framing": [
+              {
+                "inside": true
+              },
+              {
+                "inside": true
+              }
+            ],
+            "referenceUnchanged": true,
+            "sourceUnchanged": true,
+            "userChanged": false,
+            "missingLegsFrozen": true,
+            "poseFrozen": true,
+            "userArmMoved": true,
+            "maxDirectionError": 9.305772182939053e-8,
+            "calls": 10,
+            "triangles": 576508
+          },
+          {
+            "mode": "none",
+            "state": {
+              "status": "untracked",
+              "tracked": 0,
+              "total": 8
+            },
+            "sequence": 94,
+            "closed": false,
+            "independent": true,
+            "framing": [
+              {
+                "inside": true
+              },
+              {
+                "inside": true
+              }
+            ],
+            "referenceUnchanged": true,
+            "sourceUnchanged": true,
+            "userChanged": false,
+            "missingLegsFrozen": true,
+            "poseFrozen": true,
+            "userArmMoved": true,
+            "maxDirectionError": 9.305772182939053e-8,
+            "calls": 10,
+            "triangles": 576508
+          },
+          {
+            "mode": "recover",
+            "state": {
+              "status": "tracking",
+              "tracked": 8,
+              "total": 8
+            },
+            "sequence": 157,
+            "closed": false,
+            "independent": true,
+            "framing": [
+              {
+                "inside": true
+              },
+              {
+                "inside": true
+              }
+            ],
+            "referenceUnchanged": true,
+            "sourceUnchanged": true,
+            "userChanged": true,
+            "missingLegsFrozen": false,
+            "poseFrozen": false,
+            "userArmMoved": true,
+            "maxDirectionError": 0.000002205271170869924,
+            "calls": 10,
+            "triangles": 576508
+          },
+          {
+            "mode": "expire",
+            "state": {
+              "status": "untracked",
+              "tracked": 0,
+              "total": 8
+            },
+            "sequence": 159,
+            "closed": false,
+            "independent": true,
+            "framing": [
+              {
+                "inside": true
+              },
+              {
+                "inside": true
+              }
+            ],
+            "referenceUnchanged": true,
+            "sourceUnchanged": true,
+            "userChanged": true,
+            "missingLegsFrozen": false,
+            "poseFrozen": false,
+            "userArmMoved": true,
+            "maxDirectionError": 9.305772182939053e-8,
+            "calls": 10,
+            "triangles": 576508
+          }
+        ],
+        "initial": {
+          "mode": "single",
+          "state": {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          "sequence": 1,
+          "closed": false,
+          "independent": true,
+          "framing": [
+            {
+              "inside": true
+            },
+            {
+              "inside": true
+            }
+          ],
+          "referenceUnchanged": true,
+          "sourceUnchanged": true,
+          "userChanged": true,
+          "missingLegsFrozen": false,
+          "poseFrozen": false,
+          "userArmMoved": false,
+          "maxDirectionError": 9.305772182939053e-8,
+          "calls": 10,
+          "triangles": 576508
+        },
+        "previewSha": "1b50baf1d6b85f55a47a2b5e47a393bf5f5f9e3db9be43018fef0b848a0b2e93",
+        "closed": true
+      },
+      {
+        "gender": "female",
+        "passed": true,
+        "stages": [
+          {
+            "mode": "single",
+            "state": {
+              "status": "tracking",
+              "tracked": 8,
+              "total": 8
+            },
+            "sequence": 60,
+            "closed": false,
+            "independent": true,
+            "framing": [
+              {
+                "inside": true
+              },
+              {
+                "inside": true
+              }
+            ],
+            "referenceUnchanged": true,
+            "sourceUnchanged": true,
+            "userChanged": true,
+            "missingLegsFrozen": false,
+            "poseFrozen": false,
+            "userArmMoved": true,
+            "maxDirectionError": 0.0000027223895428818176,
+            "calls": 10,
+            "triangles": 567676
+          },
+          {
+            "mode": "crop",
+            "state": {
+              "status": "partial",
+              "tracked": 4,
+              "total": 8
+            },
+            "sequence": 73,
+            "closed": false,
+            "independent": true,
+            "framing": [
+              {
+                "inside": true
+              },
+              {
+                "inside": true
+              }
+            ],
+            "referenceUnchanged": true,
+            "sourceUnchanged": true,
+            "userChanged": true,
+            "missingLegsFrozen": true,
+            "poseFrozen": false,
+            "userArmMoved": true,
+            "maxDirectionError": 1.237783411580038e-7,
+            "calls": 10,
+            "triangles": 567676
+          },
+          {
+            "mode": "multiple",
+            "state": {
+              "status": "untracked",
+              "tracked": 0,
+              "total": 8
+            },
+            "sequence": 80,
+            "closed": false,
+            "independent": true,
+            "framing": [
+              {
+                "inside": true
+              },
+              {
+                "inside": true
+              }
+            ],
+            "referenceUnchanged": true,
+            "sourceUnchanged": true,
+            "userChanged": false,
+            "missingLegsFrozen": true,
+            "poseFrozen": true,
+            "userArmMoved": true,
+            "maxDirectionError": 1.237783411580038e-7,
+            "calls": 10,
+            "triangles": 567676
+          },
+          {
+            "mode": "mismatch",
+            "state": {
+              "status": "untracked",
+              "tracked": 0,
+              "total": 8
+            },
+            "sequence": 87,
+            "closed": false,
+            "independent": true,
+            "framing": [
+              {
+                "inside": true
+              },
+              {
+                "inside": true
+              }
+            ],
+            "referenceUnchanged": true,
+            "sourceUnchanged": true,
+            "userChanged": false,
+            "missingLegsFrozen": true,
+            "poseFrozen": true,
+            "userArmMoved": true,
+            "maxDirectionError": 1.237783411580038e-7,
+            "calls": 10,
+            "triangles": 567676
+          },
+          {
+            "mode": "none",
+            "state": {
+              "status": "untracked",
+              "tracked": 0,
+              "total": 8
+            },
+            "sequence": 94,
+            "closed": false,
+            "independent": true,
+            "framing": [
+              {
+                "inside": true
+              },
+              {
+                "inside": true
+              }
+            ],
+            "referenceUnchanged": true,
+            "sourceUnchanged": true,
+            "userChanged": false,
+            "missingLegsFrozen": true,
+            "poseFrozen": true,
+            "userArmMoved": true,
+            "maxDirectionError": 1.237783411580038e-7,
+            "calls": 10,
+            "triangles": 567676
+          },
+          {
+            "mode": "recover",
+            "state": {
+              "status": "tracking",
+              "tracked": 8,
+              "total": 8
+            },
+            "sequence": 157,
+            "closed": false,
+            "independent": true,
+            "framing": [
+              {
+                "inside": true
+              },
+              {
+                "inside": true
+              }
+            ],
+            "referenceUnchanged": true,
+            "sourceUnchanged": true,
+            "userChanged": true,
+            "missingLegsFrozen": false,
+            "poseFrozen": false,
+            "userArmMoved": true,
+            "maxDirectionError": 0.0000022654666182134243,
+            "calls": 10,
+            "triangles": 567676
+          },
+          {
+            "mode": "expire",
+            "state": {
+              "status": "untracked",
+              "tracked": 0,
+              "total": 8
+            },
+            "sequence": 159,
+            "closed": false,
+            "independent": true,
+            "framing": [
+              {
+                "inside": true
+              },
+              {
+                "inside": true
+              }
+            ],
+            "referenceUnchanged": true,
+            "sourceUnchanged": true,
+            "userChanged": true,
+            "missingLegsFrozen": false,
+            "poseFrozen": false,
+            "userArmMoved": true,
+            "maxDirectionError": 1.237783411580038e-7,
+            "calls": 10,
+            "triangles": 567676
+          }
+        ],
+        "initial": {
+          "mode": "single",
+          "state": {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          "sequence": 1,
+          "closed": false,
+          "independent": true,
+          "framing": [
+            {
+              "inside": true
+            },
+            {
+              "inside": true
+            }
+          ],
+          "referenceUnchanged": true,
+          "sourceUnchanged": true,
+          "userChanged": true,
+          "missingLegsFrozen": false,
+          "poseFrozen": false,
+          "userArmMoved": false,
+          "maxDirectionError": 1.237783411580038e-7,
+          "calls": 10,
+          "triangles": 567676
+        },
+        "previewSha": "b5ca43a785ccf5077ee88ef0e1c5c4daf9bb966904a235b5b52d5372eda17143",
+        "closed": true
+      }
+    ],
+    "browser": "154.0.8037.98",
+    "boundary": {
+      "external": 0,
+      "camera": 0,
+      "errors": []
+    },
+    "sourceAfter": {
+      "src/avatar/observedPoseRig.ts": "680235478e06efc111cc04515619f76668806bb64f0b2687f2144443c453c606",
+      "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+      "src/avatar/eightWeightSkin.ts": "8b318ddcb69fafee46c8d4fbe20b3beb82c90e64892ab2aed4934b3ccb16caec",
+      "e2e/fixtures/observedPoseRigProbe.ts": "85c0062ca4caedb52e482da49b768aff27391de5214f3d95b7d41cf1fb3c0113",
+      "scripts/test-observed-rig-browser.mjs": "c95616731e7fb71936ae59d3a4dc5afcadf8c002e7ca9d69acb2bff4f3133ba7",
+      "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+    }
+  },
+  "unit": {
+    "passed": 810,
+    "failed": 0,
+    "skipped": 0
+  },
+  "sourceFiles": {
+    "src/avatar/observedPoseRig.ts": {
+      "bytes": 3700,
+      "sha256": "680235478e06efc111cc04515619f76668806bb64f0b2687f2144443c453c606"
+    },
+    "src/avatar/directionalRig.ts": {
+      "bytes": 8861,
+      "sha256": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61"
+    },
+    "src/avatar/eightWeightSkin.ts": {
+      "bytes": 7618,
+      "sha256": "8b318ddcb69fafee46c8d4fbe20b3beb82c90e64892ab2aed4934b3ccb16caec"
+    },
+    "e2e/fixtures/observedPoseRigProbe.ts": {
+      "bytes": 8930,
+      "sha256": "85c0062ca4caedb52e482da49b768aff27391de5214f3d95b7d41cf1fb3c0113"
+    },
+    "scripts/test-observed-rig-browser.mjs": {
+      "bytes": 8524,
+      "sha256": "c95616731e7fb71936ae59d3a4dc5afcadf8c002e7ca9d69acb2bff4f3133ba7"
+    },
+    "pnpm-lock.yaml": {
+      "bytes": 80605,
+      "sha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+    },
+    "src/avatar/observedPoseRig.test.ts": {
+      "bytes": 8585,
+      "sha256": "1997f56988d62b8097ab766aa5beb609b2add83cf55c83ba46a8d57296371b85"
+    },
+    "e2e/fixtures/observedPoseRig.vite.ts": {
+      "bytes": 772,
+      "sha256": "fca659f87e64b66a786e3d4bfb2c4b16d3f14c334f63c45822d78a4bfbff36f0"
+    },
+    "scripts/check-selection-production.mjs": {
+      "bytes": 3282,
+      "sha256": "085e25638c9232bcaa1fc046c734fab09cc5e87477dac137d9799809f549d10f"
+    }
+  },
+  "publicBytes": {
+    "js": {
+      "bytes": 355151,
+      "sha256": "b5d4f81164c8d3c196e853b3404382bc15077986aa626cd0c3c72571b6325ac0"
+    },
+    "css": {
+      "bytes": 31199,
+      "sha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e"
+    }
+  },
+  "publicGLB": 0,
+  "localModels": {
+    "face_landmarker.task": {
+      "bytes": 3758596,
+      "sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff"
+    },
+    "gesture_recognizer.task": {
+      "bytes": 8373440,
+      "sha256": "97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482"
+    },
+    "pose_landmarker_full.task": {
+      "bytes": 9398198,
+      "sha256": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1"
+    },
+    "pose_landmarker_heavy.task": {
+      "bytes": 30664242,
+      "sha256": "64437af838a65d18e5ba7a0d39b465540069bc8aae8308de3e318aad31fcbc7b"
+    },
+    "pose_landmarker_lite.task": {
+      "bytes": 5777746,
+      "sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+    }
+  },
+  "artifacts": {
+    "accepted-native-female-single.png": {
+      "bytes": 172090,
+      "sha256": "b5ca43a785ccf5077ee88ef0e1c5c4daf9bb966904a235b5b52d5372eda17143"
+    },
+    "accepted-native-male-single.png": {
+      "bytes": 191143,
+      "sha256": "1b50baf1d6b85f55a47a2b5e47a393bf5f5f9e3db9be43018fef0b848a0b2e93"
+    },
+    "anchor-green.json": {
+      "bytes": 16276,
+      "sha256": "1981c6d42311e1b18832eff2e7f53d2b2b587b3bc82fb257ddd3564dd6c0293f"
+    },
+    "anchor-green.log": {
+      "bytes": 90,
+      "sha256": "90ac1e082a1d037f87abf0967a240baa4ed35d2aa8c3c4afb954f579c5b579f7"
+    },
+    "anchor-red.json": {
+      "bytes": 11668,
+      "sha256": "a3859251e40e1f27ce1d7452f10c4e268e2b1777d60f6089d54c60837645890f"
+    },
+    "anchor-red.log": {
+      "bytes": 88,
+      "sha256": "144fe8eb1618269798904bfb94a4216f0b8c53398f58621b84de23fb8762074a"
+    },
+    "assets-accepted.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "assets-final.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "assets-source.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "biome-accepted.log": {
+      "bytes": 46,
+      "sha256": "ebaf10b5f2ea0d08222eb0b9afbf0c3af146dd6bf483779dbafce6aa6d12dcb6"
+    },
+    "biome-final.log": {
+      "bytes": 46,
+      "sha256": "3ba03d82f4b3bc5e77c139eb8dd28c0202a8de8c80e804d6d07652eb3f127e4f"
+    },
+    "biome-first.log": {
+      "bytes": 2494,
+      "sha256": "9c4a1c36c67d2cc40dfa8db80a4957572605562e65796c469d0318b656d16a81"
+    },
+    "biome-source.log": {
+      "bytes": 46,
+      "sha256": "6decc8665f142a2f2d6dce7f497ab414ff5d30feb031aed292b3cf243721484e"
+    },
+    "browser-accepted-native.json": {
+      "bytes": 13593,
+      "sha256": "c94342e27d2032a8d5109bbec5d4d83f5876d4acd5876ad01de34a570ea1019e"
+    },
+    "browser-accepted-native.log": {
+      "bytes": 117,
+      "sha256": "9c598571965c6309e4de97ae8ed5c243d99d817b4ba72c04b17f91d240ea5c26"
+    },
+    "browser-accepted.log": {
+      "bytes": 593,
+      "sha256": "ef74f148d853bc17fde63669deaa0c417ba0f6103dc0393ee76b34cd4570554b"
+    },
+    "browser-clock-green.json": {
+      "bytes": 13595,
+      "sha256": "a44325e500b384bc1e88a949c5f541a5d6c088d7db3759a745a89ca1fc915c0d"
+    },
+    "browser-clock-green.log": {
+      "bytes": 113,
+      "sha256": "8937fba1623c6d4e4fde7f777a703437c538e3f8637ef15dce9093aee6f3839c"
+    },
+    "browser-clock-red.json": {
+      "bytes": 2899,
+      "sha256": "03be96c42b7e9e55983dca30a1de4dc380da4100974f6d0700bc210fdcf656ef"
+    },
+    "browser-clock-red.log": {
+      "bytes": 111,
+      "sha256": "fa7cdd07fed09925c8a9fcd68ebb60cdeb1b4a56e4cbe57cfa8eb767b519ac69"
+    },
+    "browser-compiled.json": {
+      "bytes": 2586,
+      "sha256": "d8828670cfaa7be085b22a39b580b94746f5eb779f73fa42a5118a0e91c685fe"
+    },
+    "browser-compiled.log": {
+      "bytes": 110,
+      "sha256": "af0fa25c965e8685f92ff84da7c95450370ec43b6e6d1a96018340175ad776ca"
+    },
+    "browser-first.log": {
+      "bytes": 1087,
+      "sha256": "13102dca1aff0afa12b54437714ed9cdb86be34c01f9d4ac05ca92c865fb33f7"
+    },
+    "browser-instrumented.json": {
+      "bytes": 2852,
+      "sha256": "d19be972f788b22992582bd88679f87a355a54a5cd99276a8951f0f5137ac11b"
+    },
+    "browser-instrumented.log": {
+      "bytes": 114,
+      "sha256": "b0caea9267c91cddab63ba0dcc9c36c2c41f654af3eec7ec24a04c6256efc3ee"
+    },
+    "build-accepted.log": {
+      "bytes": 568,
+      "sha256": "c47fe7d55f3362ce87363ccb9b4bf136a16b859ad461f35f248b6f30dfbf2848"
+    },
+    "build-final.log": {
+      "bytes": 568,
+      "sha256": "acef472e7f9ed1a6cf37b7b94e25a5b51c88d4ea4a4c5b44c83b7e91af8fdc8a"
+    },
+    "build-first.log": {
+      "bytes": 568,
+      "sha256": "dad4cf88120fbd8ad1b6d176603fd39869eb33808e817ee0bf631df3bbc9c851"
+    },
+    "build-source.log": {
+      "bytes": 568,
+      "sha256": "2891d8804ef197c32fef4a1b3bc815593eba011f48ac4b6b9a6a57c2161417e8"
+    },
+    "clock-green-female-single.png": {
+      "bytes": 172089,
+      "sha256": "120792f42f68fffaee9475dcf0696ee0935b1b0c7ee0aa4e203fcd714bc72fe9"
+    },
+    "clock-green-male-single.png": {
+      "bytes": 191138,
+      "sha256": "860e40b99bfb303fb4356506328db653e200293f268735f6f8e331f5480761ff"
+    },
+    "format-anchor.log": {
+      "bytes": 40,
+      "sha256": "6366402a3958ff1f4a0083e4666037adc35f61af1d72fd89527f8d557e18cafd"
+    },
+    "format-clock-diagnostic.log": {
+      "bytes": 39,
+      "sha256": "b831865927ec58359d1dc6940a758e943499876323e0b0f7d5290911e5f2d1e2"
+    },
+    "format-clock-fix.log": {
+      "bytes": 2266,
+      "sha256": "f3fa9a2a05a317edecd33ba2fe2c0ff133aee6171058329949866b2998631761"
+    },
+    "format-final-probe.log": {
+      "bytes": 38,
+      "sha256": "921754f718f3936071fa120f9770d301d92fa6ac31bfb6d06fb38ab43de7e4ac"
+    },
+    "format-first.log": {
+      "bytes": 40,
+      "sha256": "d71a717115be17cfb824d6507e447066a7b63a0decc276032c5f97a0d5ccb58f"
+    },
+    "format-numeric.log": {
+      "bytes": 40,
+      "sha256": "9754b2106ea3d203e76fb861de4c6c511358847410edb045e4cff834d63a170b"
+    },
+    "format-probe.log": {
+      "bytes": 2612,
+      "sha256": "bc835f309dfdb081c30eef7768810055ca885729807994212e3f92c4f34620cc"
+    },
+    "format-test-name.log": {
+      "bytes": 42,
+      "sha256": "f8c3dedbc887b43b1846ef362ca56e1c4317c047bf75261a7488a25307dd45b6"
+    },
+    "format-type-fix.log": {
+      "bytes": 2614,
+      "sha256": "95f6010e3b84478076a7c727f50a6085ade3a91b3dd95498af96445d17670d60"
+    },
+    "guard-accepted.log": {
+      "bytes": 666,
+      "sha256": "b7e73fe6e07a43600b64fc8962de26b384e04ed89c0d611fbdf18a60bbf74a28"
+    },
+    "guard-final.log": {
+      "bytes": 666,
+      "sha256": "b7e73fe6e07a43600b64fc8962de26b384e04ed89c0d611fbdf18a60bbf74a28"
+    },
+    "guard-first.log": {
+      "bytes": 666,
+      "sha256": "b7e73fe6e07a43600b64fc8962de26b384e04ed89c0d611fbdf18a60bbf74a28"
+    },
+    "guard-red.log": {
+      "bytes": 1005,
+      "sha256": "487f2fa8af6bf5d22625fe27f8d0d4d7ba5882b8ebb1dcf8703fd5affbda7e77"
+    },
+    "guard-restored.log": {
+      "bytes": 666,
+      "sha256": "b7e73fe6e07a43600b64fc8962de26b384e04ed89c0d611fbdf18a60bbf74a28"
+    },
+    "guard-source.log": {
+      "bytes": 666,
+      "sha256": "b7e73fe6e07a43600b64fc8962de26b384e04ed89c0d611fbdf18a60bbf74a28"
+    },
+    "numeric-green.json": {
+      "bytes": 16909,
+      "sha256": "ae69f6473cc07f4d7d2c8aaf6ff7a34fbdb2d84e86da856c7acbcd86e94b41cf"
+    },
+    "numeric-green.log": {
+      "bytes": 91,
+      "sha256": "ba24f2845f180df82090f753191bc67cb1bb0a03029edaf5588b62cec92d471e"
+    },
+    "numeric-red.json": {
+      "bytes": 16526,
+      "sha256": "5a1b784ede95048cc27d0ad8b6e35a45955a390c128353251cef61441fee22ff"
+    },
+    "numeric-red.log": {
+      "bytes": 89,
+      "sha256": "5e117805142bf746c5aca5c4cecf3f0999bc00f8161b6f36d0eb565796b60e31"
+    },
+    "prepare-assets.log": {
+      "bytes": 68,
+      "sha256": "fbcaf3f7c2a165853b0896e0abac07d0a0b8ba93c68a21048f7f223274ed9290"
+    },
+    "probe-build-clock-diagnostic.log": {
+      "bytes": 282,
+      "sha256": "ec5dadf18ea25bfea0d57ee3495825fca34d13b929aca177cab4de3362fad331"
+    },
+    "probe-build-clock-fix.log": {
+      "bytes": 282,
+      "sha256": "441e1b6cf5300c56a4c117e633ef5fc583282d3f695ebdc47ff82dc62a91fbf2"
+    },
+    "probe-build-final.log": {
+      "bytes": 282,
+      "sha256": "c29039a43f9d0cd9bbbae2455832a13ba2abd13c22f7783b15dd2db51c916af5"
+    },
+    "probe-build-green.log": {
+      "bytes": 282,
+      "sha256": "361c4005920d07c98fa1e8a682a3e8b76fba4ac8c09b3b457aa1fc46f919d61b"
+    },
+    "probe-build-numeric.log": {
+      "bytes": 282,
+      "sha256": "99bd32c9acbf437e0ca22b82cbaa95366c3b81444d25634c6391c0943fb1d6ba"
+    },
+    "probe-build-source.log": {
+      "bytes": 282,
+      "sha256": "a6104fc65149a8b242d300095e506ac19421edd1d91675d245a89845a28878af"
+    },
+    "public-byte-basename-failure.md": {
+      "bytes": 741,
+      "sha256": "94018d1c2ffac58f2eea962e69de6fe5d9ce5dd55aa9be5e69fcc2faf0ab22f7"
+    },
+    "public-bytes-accepted.json": {
+      "bytes": 815,
+      "sha256": "c8a2130d966cd5dc447e4712044430b79bd90850a11883abfe8924cf6ec860f3"
+    },
+    "public-bytes-before.json": {
+      "bytes": 798,
+      "sha256": "4c5c0a21233104507492fb21332d81ecf00e8abbf915230db45a3b0b7b8a62c7"
+    },
+    "public-bytes.json": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "type-accepted.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "type-build.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "type-clock-fix.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "type-final-probe.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "type-final.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "type-first.log": {
+      "bytes": 1733,
+      "sha256": "1fe116985942e9a9dfe7ba46ef364f9feb8284bd45d80dd217622c6e11de9534"
+    },
+    "type-green.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "type-numeric.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "type-source.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "unit-accepted.json": {
+      "bytes": 269610,
+      "sha256": "4ae866120c9cbe341f1ddf6c7bc859fdcc8ca7cb4c56949dd784e499997eaee1"
+    },
+    "unit-accepted.log": {
+      "bytes": 91,
+      "sha256": "67a59662669a8b3585bf46e66e469ce81518349e1d4d74cb5c43cf0a9b048a0c"
+    },
+    "unit-final.json": {
+      "bytes": 269575,
+      "sha256": "70ba0bc5c9a5503037dce90dab7cecade05118c20243adb05cd552fe260ce3bf"
+    },
+    "unit-final.log": {
+      "bytes": 88,
+      "sha256": "40df0a9e6158de9cd36d7ca3a68add7598c4392f52d4e0f4045764654128234c"
+    },
+    "unit-first-green.json": {
+      "bytes": 15907,
+      "sha256": "d998ff1f21ced64787e338f8f42174b81843f9d3e01273b13ff90790021b59a2"
+    },
+    "unit-first-green.log": {
+      "bytes": 94,
+      "sha256": "3543281118be8901fc50935e9e955b7443320b41bccf2a4db47daf40abf2c9e7"
+    },
+    "unit-full-first.json": {
+      "bytes": 269059,
+      "sha256": "3ec67a61ad944fcada19ebebcf7c5c99694c17e6f8f3846b5bfb944ac0f5f66a"
+    },
+    "unit-full-first.log": {
+      "bytes": 93,
+      "sha256": "c1c313402fa738397d9863e124b37bc1e716f3fff412b4ceb656b7043c06c89c"
+    },
+    "unit-red.json": {
+      "bytes": 69015,
+      "sha256": "cf1595c10f08da3f7175b6be15cb50c791323e06d8d3445723a695a6b0ffc551"
+    },
+    "unit-red.log": {
+      "bytes": 86,
+      "sha256": "ca7a70832365249b6785e9e1522dd90596ee13b2186adc3bbcb54471a71f865d"
+    },
+    "unit-source.json": {
+      "bytes": 269590,
+      "sha256": "ba33d7ef9d93d96339acf0bfde3f716ec1c78d294cd7e157b75035fac9a897c4"
+    },
+    "unit-source.log": {
+      "bytes": 89,
+      "sha256": "f773bcb1066971175ec51447659158b6e6759c2464f6ec746e446f06f678c99c"
+    }
+  },
+  "execution": {
+    "unitSourcePipeline": {
+      "exitCode": 0,
+      "steps": [
+        "Vitest run JSON",
+        "Biome check .",
+        "prepare-assets.mjs",
+        "tsc --noEmit",
+        "Vite build",
+        "check-selection-production.mjs"
+      ]
+    },
+    "probeBuildSource": {
+      "exitCode": 0,
+      "command": "BODYGUARD_TEST_OBSERVED_RIG=<proof>/probe vite build --config e2e/fixtures/observedPoseRig.vite.ts"
+    },
+    "finalNative": {
+      "exitCode": 0,
+      "command": "node scripts/test-observed-rig-browser.mjs <proof> accepted-native",
+      "permission": "local 127.0.0.1/Chrome only, no camera/external requests"
+    },
+    "acceptedStartup": {
+      "exitCode": 1,
+      "reason": "sandbox listen EPERM 127.0.0.1",
+      "actualBrowserStarted": false,
+      "reportWritten": false
+    },
+    "typeFirst": {
+      "result": "failed: TS2345 fixture Group/Object3D mismatch",
+      "probeBuildExecuted": false
+    },
+    "browserFirst": {
+      "exitCode": 1,
+      "reason": "missing probe.js, browser not started",
+      "actualBrowserStarted": false
+    },
+    "guardRed": {
+      "exitCode": 1,
+      "reason": "owned synthetic leak sentinel rejected"
+    },
+    "guardRestored": {
+      "exitCode": 0,
+      "ownedSentinelRemoved": true
+    }
+  },
+  "excluded": [
+    "real SDK/camera",
+    "clinical classifier/qualified motion",
+    "public coaching integration",
+    "new Blender/GLB exterior",
+    "actual participant/target notebook performance",
+    "API/SQL validation",
+    "deployment/prod DB/secrets/cost",
+    "stages 1–6 completion"
+  ],
+  "review": {
+    "kind": "author review",
+    "unresolvedScopedP1P2": 0,
+    "independentAgentReview": false,
+    "expertReview": false
+  }
+}
