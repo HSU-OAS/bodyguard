@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-07 로그아웃 시험 완료 경계: [S6.6](stories/logout-integration-completion.md)에서 Enter 입력을 서버 폐기 완료로 간주하지 않고 실제204·게스트 화면 확인 뒤 보호 주소를 이동하도록 기존 통합 시험만 보완했다. 초기1통과/1실패와 원본 순서 재실행2통과·이동 직전204 미확인을 모두 보존하고, [최종 실제 흐름·SHA·관측 한계](review/logout-integration-completion/README.md)를 남겼다. 제품 인증/화면/정책 변경0,임의 이탈 서버 폐기 보장/시작 원인 해결/전체1~6 완료가 아니다. 알림 전달 작업은 별도 목적·기존 원본을 보존하며 이 보완의 실제 통합 게이트와 최신 main 통합 후 PR을 진행한다. 기존 디자인 구조 승인·SDK privacy·Docker/외부·아바타/실측·운영 승인 경계는 그대로다. 아래는 시점별 기록이다.
+
 2026-10-07 웹 빌드 고지: [S5.5](stories/web-notice-evidence.md)에서 실제 bundled JS·별도 Tailwind CSS 고지와 누락 차단을 구현·native 검증했다. 기존 JS/CSS/index/brand 출력5개는 byte 동일하고 고지3개만 추가됐다. [실행·실패·한계](review/web-notice-evidence/README.md). PR 게이트를 진행하며 Draft #29 exporter/실제 브라우저 전달·Docker/HTTPS·전체 권리/법무·아바타/실측·최종 코칭·디자인 구조/적용·전체1~6단계는 미완료다. 기존 실패·이월·원본과 승인 규칙은 유지한다. 아래는 시점별 기록이다.
 
 2026-10-07 시작 원인 비교: 최신 main1a5fac7(PR #56 실제 merge commit)의 production 출력으로 headless/headed의 단순 화면/제품 /start를 동일 요청에서 비교했다. [S6.5 실제 수치·원본 SHA](review/web-startup-causal/README.md)의8개 탐색은 정상이고 과거 수 초 지연은 미재현이다. 성공 재실행을 원인 해결로 표시하지 않으며 제품 코드/기존5000ms 변경0·Draft #51/시작 P2 유지다. 같은 정상 진단의 반복 대신 실패 조건/반증 가설이 다음 입력이다. PR #56 source869e07f→merge1a5fac7의 main 포함·같은 tree·브랜치 보존을 확인했다. 코칭 구조/적용 범위·SDK 통신 승인·Docker 연결과 실제 신체/아바타·외부/운영·전체1~6 필수 기준은 남고 독립 작업을 계속한다. 아래는 시점별 기록이다.
