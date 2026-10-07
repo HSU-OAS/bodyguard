@@ -1,6 +1,8 @@
 # S4.16 — 본인 1분 요약의 private 업로드 연결
 
-2026-10-06 · baseline37354aa · codex/owned-minute-upload · PR 게이트 진행
+2026-10-06 · baseline37354aa · codex/owned-minute-upload · PR #50 실제 병합
+
+병합 결과: source `c406154981b7bd654cfa15960754671c47ed6040` → merge `991ed2b33a1abc6158b3a177f8431a104c476ba0`, 실제 부모/main 포함·source 브랜치 보존 확인. 병합 직전 CLEAN/MERGEABLE/exact tested HEAD/latest main/체크 없음·75파일 diff와 같은 Git tree를 확인했다. 위 상태 기록만 후속 Story에서 정정하며 기존 증거 manifest·원본은 보존한다.
 
 ## 실제로 연결된 흐름
 

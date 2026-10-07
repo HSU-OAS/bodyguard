@@ -1,0 +1,583 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "[workspace]/bodyguard/frontend/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "playwright.selection.config.ts",
+      "--output",
+      "test-results/selection-20261006T130141228Z"
+    ],
+    "configFile": "[workspace]/bodyguard/frontend/playwright.selection.config.ts",
+    "rootDir": "[workspace]/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "[workspace]/bodyguard/frontend/test-results/selection-20261006T130141228Z",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "[workspace]/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "selection.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/selection-20261006T130141228Z/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "selection.spec.ts",
+      "file": "selection.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "L08 actual RAF loop start-pause-resume-close with synthetic resources, no camera",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 11975,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '원하는 동작을 골라보세요' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '원하는 동작을 골라보세요' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '원하는 동작을 골라보세요' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '원하는 동작을 골라보세요' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '원하는 동작을 골라보세요' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '원하는 동작을 골라보세요' })\u001b[22m\n\n    at [workspace]/bodyguard/frontend/e2e/selection.spec.ts:9:70",
+                    "location": {
+                      "file": "[workspace]/bodyguard/frontend/e2e/selection.spec.ts",
+                      "column": 70,
+                      "line": 9
+                    },
+                    "snippet": "   7 |   await page.goto('/dev/select')\n   8 |   // FR-U-04: probing during the auth checking/navigation window is not a ready-page test.\n>  9 |   await expect(page.getByRole('heading', { name: '원하는 동작을 골라보세요' })).toBeVisible()\n     |                                                                      ^\n  10 |   const result = await page.evaluate(async () => {\n  11 |     const path = '/e2e/fixtures/observationLoopProbe.ts'\n  12 |     const module = (await import(path)) as typeof import('./fixtures/observationLoopProbe')"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "[workspace]/bodyguard/frontend/e2e/selection.spec.ts",
+                        "column": 70,
+                        "line": 9
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '원하는 동작을 골라보세요' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '원하는 동작을 골라보세요' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '원하는 동작을 골라보세요' })\u001b[22m\n\n\n   7 |   await page.goto('/dev/select')\n   8 |   // FR-U-04: probing during the auth checking/navigation window is not a ready-page test.\n>  9 |   await expect(page.getByRole('heading', { name: '원하는 동작을 골라보세요' })).toBeVisible()\n     |                                                                      ^\n  10 |   const result = await page.evaluate(async () => {\n  11 |     const path = '/e2e/fixtures/observationLoopProbe.ts'\n  12 |     const module = (await import(path)) as typeof import('./fixtures/observationLoopProbe')\n    at [workspace]/bodyguard/frontend/e2e/selection.spec.ts:9:70"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T13:01:44.071Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "observations.json",
+                      "contentType": "application/json",
+                      "body": "eyJhcGlQYXRocyI6WyIvYXBpL3YxL21lIiwiL2FwaS92MS9tZSJdLCJjYW1lcmFDYWxscyI6MCwicGFnZUVycm9ycyI6W10sInZpZXdwb3J0Ijp7IndpZHRoIjoxNDQwLCJoZWlnaHQiOjEwMDB9LCJicm93c2VyVmVyc2lvbiI6IjE1NC4wLjgwMzcuOTgiLCJzdG9yYWdlTGVuZ3RocyI6WzAsMF0sImFjdHVhbEF1dGhTZXJ2ZXIiOmZhbHNlLCJhY3R1YWxIdW1hbkNhbWVyYSI6ZmFsc2V9"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "[workspace]/bodyguard/frontend/test-results/selection-20261006T130141228Z/selection-L08-actual-RAF-l-ad204-nthetic-resources-no-camera/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "[workspace]/bodyguard/frontend/e2e/selection.spec.ts",
+                    "column": 70,
+                    "line": 9
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3c1ccfa8f32b1efd3e53-27fb7866f14ef90537fc",
+          "file": "selection.spec.ts",
+          "line": 4,
+          "column": 1
+        },
+        {
+          "title": "S3.2 protected production explore paths and purpose selection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16424,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T13:02:01.356Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "observations.json",
+                      "contentType": "application/json",
+                      "body": "eyJhcGlQYXRocyI6WyIvYXBpL3YxL21lIl0sImNhbWVyYUNhbGxzIjowLCJwYWdlRXJyb3JzIjpbXSwidmlld3BvcnQiOnsid2lkdGgiOjE0NDAsImhlaWdodCI6MTAwMH0sImJyb3dzZXJWZXJzaW9uIjoiMTU0LjAuODAzNy45OCIsInN0b3JhZ2VMZW5ndGhzIjpbMCwwXSwiYWN0dWFsQXV0aFNlcnZlciI6ZmFsc2UsImFjdHVhbEh1bWFuQ2FtZXJhIjpmYWxzZX0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3c1ccfa8f32b1efd3e53-4f57588aa3b87c8cd4d3",
+          "file": "selection.spec.ts",
+          "line": 32,
+          "column": 1
+        },
+        {
+          "title": "S3.3 expanded library search, guidance detail and return",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 11535,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '원하는 동작을 골라보세요' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '원하는 동작을 골라보세요' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '원하는 동작을 골라보세요' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '원하는 동작을 골라보세요' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '원하는 동작을 골라보세요' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '원하는 동작을 골라보세요' })\u001b[22m\n\n    at [workspace]/bodyguard/frontend/e2e/selection.spec.ts:52:70",
+                    "location": {
+                      "file": "[workspace]/bodyguard/frontend/e2e/selection.spec.ts",
+                      "column": 70,
+                      "line": 52
+                    },
+                    "snippet": "  50 | test('S3.3 expanded library search, guidance detail and return', async ({ page }, info) => {\n  51 |   await page.goto('/dev/select')\n> 52 |   await expect(page.getByRole('heading', { name: '원하는 동작을 골라보세요' })).toBeVisible()\n     |                                                                      ^\n  53 |   await expect(page.getByRole('status')).toContainText('안내 5개')\n  54 |   await page.getByRole('button', { name: '어깨', exact: true }).click()\n  55 |   await page.getByRole('link', { name: '팔 교차 어깨 늘이기 안내 보기' }).click()"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "[workspace]/bodyguard/frontend/e2e/selection.spec.ts",
+                        "column": 70,
+                        "line": 52
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '원하는 동작을 골라보세요' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '원하는 동작을 골라보세요' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '원하는 동작을 골라보세요' })\u001b[22m\n\n\n  50 | test('S3.3 expanded library search, guidance detail and return', async ({ page }, info) => {\n  51 |   await page.goto('/dev/select')\n> 52 |   await expect(page.getByRole('heading', { name: '원하는 동작을 골라보세요' })).toBeVisible()\n     |                                                                      ^\n  53 |   await expect(page.getByRole('status')).toContainText('안내 5개')\n  54 |   await page.getByRole('button', { name: '어깨', exact: true }).click()\n  55 |   await page.getByRole('link', { name: '팔 교차 어깨 늘이기 안내 보기' }).click()\n    at [workspace]/bodyguard/frontend/e2e/selection.spec.ts:52:70"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T13:02:22.035Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "observations.json",
+                      "contentType": "application/json",
+                      "body": "eyJhcGlQYXRocyI6WyIvYXBpL3YxL21lIiwiL2FwaS92MS9tZSJdLCJjYW1lcmFDYWxscyI6MCwicGFnZUVycm9ycyI6W10sInZpZXdwb3J0Ijp7IndpZHRoIjoxNDQwLCJoZWlnaHQiOjEwMDB9LCJicm93c2VyVmVyc2lvbiI6IjE1NC4wLjgwMzcuOTgiLCJzdG9yYWdlTGVuZ3RocyI6WzAsMF0sImFjdHVhbEF1dGhTZXJ2ZXIiOmZhbHNlLCJhY3R1YWxIdW1hbkNhbWVyYSI6ZmFsc2V9"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "[workspace]/bodyguard/frontend/test-results/selection-20261006T130141228Z/selection-S3-3-expanded-li-f82e9--guidance-detail-and-return/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "[workspace]/bodyguard/frontend/e2e/selection.spec.ts",
+                    "column": 70,
+                    "line": 52
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3c1ccfa8f32b1efd3e53-809089cd3408cb1234df",
+          "file": "selection.spec.ts",
+          "line": 50,
+          "column": 1
+        },
+        {
+          "title": "C-02/03/04/07 desktop selection, literal search, detail sources and Back",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 12260,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '원하는 동작을 골라보세요' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '원하는 동작을 골라보세요' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '원하는 동작을 골라보세요' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '원하는 동작을 골라보세요' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '원하는 동작을 골라보세요' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '원하는 동작을 골라보세요' })\u001b[22m\n\n    at [workspace]/bodyguard/frontend/e2e/selection.spec.ts:154:70",
+                    "location": {
+                      "file": "[workspace]/bodyguard/frontend/e2e/selection.spec.ts",
+                      "column": 70,
+                      "line": 154
+                    },
+                    "snippet": "  152 | }, info) => {\n  153 |   await page.goto('/dev/select')\n> 154 |   await expect(page.getByRole('heading', { name: '원하는 동작을 골라보세요' })).toBeVisible()\n      |                                                                      ^\n  155 |   await page.getByRole('link', { name: '내 시작', exact: true }).click()\n  156 |   await page.getByRole('link', { name: '동작 선택 개발 검수' }).click()\n  157 |   await expect(page).toHaveTitle('동작 선택 · BODYGUARD')"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "[workspace]/bodyguard/frontend/e2e/selection.spec.ts",
+                        "column": 70,
+                        "line": 154
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '원하는 동작을 골라보세요' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '원하는 동작을 골라보세요' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '원하는 동작을 골라보세요' })\u001b[22m\n\n\n  152 | }, info) => {\n  153 |   await page.goto('/dev/select')\n> 154 |   await expect(page.getByRole('heading', { name: '원하는 동작을 골라보세요' })).toBeVisible()\n      |                                                                      ^\n  155 |   await page.getByRole('link', { name: '내 시작', exact: true }).click()\n  156 |   await page.getByRole('link', { name: '동작 선택 개발 검수' }).click()\n  157 |   await expect(page).toHaveTitle('동작 선택 · BODYGUARD')\n    at [workspace]/bodyguard/frontend/e2e/selection.spec.ts:154:70"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T13:02:34.429Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "observations.json",
+                      "contentType": "application/json",
+                      "body": "eyJhcGlQYXRocyI6WyIvYXBpL3YxL21lIiwiL2FwaS92MS9tZSJdLCJjYW1lcmFDYWxscyI6MCwicGFnZUVycm9ycyI6W10sInZpZXdwb3J0Ijp7IndpZHRoIjoxNDQwLCJoZWlnaHQiOjEwMDB9LCJicm93c2VyVmVyc2lvbiI6IjE1NC4wLjgwMzcuOTgiLCJzdG9yYWdlTGVuZ3RocyI6WzAsMF0sImFjdHVhbEF1dGhTZXJ2ZXIiOmZhbHNlLCJhY3R1YWxIdW1hbkNhbWVyYSI6ZmFsc2V9"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "[workspace]/bodyguard/frontend/test-results/selection-20261006T130141228Z/selection-C-02-03-04-07-de-b9d7e-rch-detail-sources-and-Back/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "[workspace]/bodyguard/frontend/e2e/selection.spec.ts",
+                    "column": 70,
+                    "line": 154
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3c1ccfa8f32b1efd3e53-beefefbd6e44447e6a9f",
+          "file": "selection.spec.ts",
+          "line": 150,
+          "column": 1
+        },
+        {
+          "title": "C-02/07 narrow laptop empty reset and keyboard operation",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 22269,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('조건에 맞는 동작이 없습니다')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('조건에 맞는 동작이 없습니다') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('조건에 맞는 동작이 없습니다')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('조건에 맞는 동작이 없습니다')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('조건에 맞는 동작이 없습니다') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('조건에 맞는 동작이 없습니다')\u001b[22m\n\n    at [workspace]/bodyguard/frontend/e2e/selection.spec.ts:187:51",
+                    "location": {
+                      "file": "[workspace]/bodyguard/frontend/e2e/selection.spec.ts",
+                      "column": 51,
+                      "line": 187
+                    },
+                    "snippet": "  185 |   const input = page.getByLabel('동작 검색')\n  186 |   await input.fill('.*')\n> 187 |   await expect(page.getByText('조건에 맞는 동작이 없습니다')).toBeVisible()\n      |                                                   ^\n  188 |   await page.getByRole('button', { name: '검색과 필터 초기화' }).click()\n  189 |   await expect(input).toBeFocused()\n  190 |   await page.keyboard.press('Tab')"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "[workspace]/bodyguard/frontend/e2e/selection.spec.ts",
+                        "column": 51,
+                        "line": 187
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('조건에 맞는 동작이 없습니다')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('조건에 맞는 동작이 없습니다') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('조건에 맞는 동작이 없습니다')\u001b[22m\n\n\n  185 |   const input = page.getByLabel('동작 검색')\n  186 |   await input.fill('.*')\n> 187 |   await expect(page.getByText('조건에 맞는 동작이 없습니다')).toBeVisible()\n      |                                                   ^\n  188 |   await page.getByRole('button', { name: '검색과 필터 초기화' }).click()\n  189 |   await expect(input).toBeFocused()\n  190 |   await page.keyboard.press('Tab')\n    at [workspace]/bodyguard/frontend/e2e/selection.spec.ts:187:51"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T13:02:51.501Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "observations.json",
+                      "contentType": "application/json",
+                      "body": "eyJhcGlQYXRocyI6WyIvYXBpL3YxL21lIiwiL2FwaS92MS9tZSJdLCJjYW1lcmFDYWxscyI6MCwicGFnZUVycm9ycyI6W10sInZpZXdwb3J0Ijp7IndpZHRoIjo3MDAsImhlaWdodCI6ODAwfSwiYnJvd3NlclZlcnNpb24iOiIxNTQuMC44MDM3Ljk4Iiwic3RvcmFnZUxlbmd0aHMiOlswLDBdLCJhY3R1YWxBdXRoU2VydmVyIjpmYWxzZSwiYWN0dWFsSHVtYW5DYW1lcmEiOmZhbHNlfQ=="
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "[workspace]/bodyguard/frontend/test-results/selection-20261006T130141228Z/selection-C-02-07-narrow-l-18320-eset-and-keyboard-operation/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "[workspace]/bodyguard/frontend/e2e/selection.spec.ts",
+                    "column": 51,
+                    "line": 187
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3c1ccfa8f32b1efd3e53-95e030aab5200eb04515",
+          "file": "selection.spec.ts",
+          "line": 182,
+          "column": 1
+        },
+        {
+          "title": "C-04 missing direct ID is recoverable and not an external navigation",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 12185,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '동작을 찾을 수 없습니다' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '동작을 찾을 수 없습니다' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '동작을 찾을 수 없습니다' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '동작을 찾을 수 없습니다' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '동작을 찾을 수 없습니다' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '동작을 찾을 수 없습니다' })\u001b[22m\n\n    at [workspace]/bodyguard/frontend/e2e/selection.spec.ts:202:70",
+                    "location": {
+                      "file": "[workspace]/bodyguard/frontend/e2e/selection.spec.ts",
+                      "column": 70,
+                      "line": 202
+                    },
+                    "snippet": "  200 | }, info) => {\n  201 |   await page.goto('/dev/select?motion=https%3A%2F%2Fevil.example')\n> 202 |   await expect(page.getByRole('heading', { name: '동작을 찾을 수 없습니다' })).toBeVisible()\n      |                                                                      ^\n  203 |   await expect(page.getByRole('button', { name: '코칭 준비 중' })).toHaveCount(0)\n  204 |   await page.screenshot({ path: info.outputPath('missing-motion.png'), fullPage: true })\n  205 |   await page.getByRole('link', { name: '목록으로 돌아가기' }).click()"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "[workspace]/bodyguard/frontend/e2e/selection.spec.ts",
+                        "column": 70,
+                        "line": 202
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: '동작을 찾을 수 없습니다' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: '동작을 찾을 수 없습니다' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: '동작을 찾을 수 없습니다' })\u001b[22m\n\n\n  200 | }, info) => {\n  201 |   await page.goto('/dev/select?motion=https%3A%2F%2Fevil.example')\n> 202 |   await expect(page.getByRole('heading', { name: '동작을 찾을 수 없습니다' })).toBeVisible()\n      |                                                                      ^\n  203 |   await expect(page.getByRole('button', { name: '코칭 준비 중' })).toHaveCount(0)\n  204 |   await page.screenshot({ path: info.outputPath('missing-motion.png'), fullPage: true })\n  205 |   await page.getByRole('link', { name: '목록으로 돌아가기' }).click()\n    at [workspace]/bodyguard/frontend/e2e/selection.spec.ts:202:70"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T13:03:18.496Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "observations.json",
+                      "contentType": "application/json",
+                      "body": "eyJhcGlQYXRocyI6WyIvYXBpL3YxL21lIiwiL2FwaS92MS9tZSJdLCJjYW1lcmFDYWxscyI6MCwicGFnZUVycm9ycyI6W10sInZpZXdwb3J0Ijp7IndpZHRoIjoxNDQwLCJoZWlnaHQiOjEwMDB9LCJicm93c2VyVmVyc2lvbiI6IjE1NC4wLjgwMzcuOTgiLCJzdG9yYWdlTGVuZ3RocyI6WzAsMF0sImFjdHVhbEF1dGhTZXJ2ZXIiOmZhbHNlLCJhY3R1YWxIdW1hbkNhbWVyYSI6ZmFsc2V9"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "[workspace]/bodyguard/frontend/test-results/selection-20261006T130141228Z/selection-C-04-missing-dir-111e4--not-an-external-navigation/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "[workspace]/bodyguard/frontend/e2e/selection.spec.ts",
+                    "column": 70,
+                    "line": 202
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3c1ccfa8f32b1efd3e53-10f45d9afd650f35e799",
+          "file": "selection.spec.ts",
+          "line": 198,
+          "column": 1
+        },
+        {
+          "title": "C-01 guest and server failure close the preview without a candidate fallback",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 12019,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login\\?next=%2Fstart$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5182/dev/select?motion=neck-side\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login\\?next=%2Fstart$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5182/dev/select?motion=neck-side\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\n    at [workspace]/bodyguard/frontend/e2e/selection.spec.ts:214:22",
+                    "location": {
+                      "file": "[workspace]/bodyguard/frontend/e2e/selection.spec.ts",
+                      "column": 22,
+                      "line": 214
+                    },
+                    "snippet": "  212 |   meStatus = 401\n  213 |   await page.goto('/dev/select?motion=neck-side')\n> 214 |   await expect(page).toHaveURL(/\\/login\\?next=%2Fstart$/)\n      |                      ^\n  215 |   await expect(page.getByText('목 옆으로 기울이기', { exact: true })).toHaveCount(0)\n  216 |   meStatus = 503\n  217 |   await page.goto('/dev/select')"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "[workspace]/bodyguard/frontend/e2e/selection.spec.ts",
+                        "column": 22,
+                        "line": 214
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/login\\?next=%2Fstart$/\u001b[39m\nReceived string:  \u001b[31m\"http://localhost:5182/dev/select?motion=neck-side\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\n\n  212 |   meStatus = 401\n  213 |   await page.goto('/dev/select?motion=neck-side')\n> 214 |   await expect(page).toHaveURL(/\\/login\\?next=%2Fstart$/)\n      |                      ^\n  215 |   await expect(page.getByText('목 옆으로 기울이기', { exact: true })).toHaveCount(0)\n  216 |   meStatus = 503\n  217 |   await page.goto('/dev/select')\n    at [workspace]/bodyguard/frontend/e2e/selection.spec.ts:214:22"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T13:03:35.449Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "observations.json",
+                      "contentType": "application/json",
+                      "body": "eyJhcGlQYXRocyI6WyIvYXBpL3YxL21lIiwiL2FwaS92MS9tZSJdLCJjYW1lcmFDYWxscyI6MCwicGFnZUVycm9ycyI6W10sInZpZXdwb3J0Ijp7IndpZHRoIjoxNDQwLCJoZWlnaHQiOjEwMDB9LCJicm93c2VyVmVyc2lvbiI6IjE1NC4wLjgwMzcuOTgiLCJzdG9yYWdlTGVuZ3RocyI6WzAsMF0sImFjdHVhbEF1dGhTZXJ2ZXIiOmZhbHNlLCJhY3R1YWxIdW1hbkNhbWVyYSI6ZmFsc2V9"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "[workspace]/bodyguard/frontend/test-results/selection-20261006T130141228Z/selection-C-01-guest-and-s-0386f-ithout-a-candidate-fallback/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "[workspace]/bodyguard/frontend/e2e/selection.spec.ts",
+                    "column": 22,
+                    "line": 214
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3c1ccfa8f32b1efd3e53-32b2346061682d12fca8",
+          "file": "selection.spec.ts",
+          "line": 209,
+          "column": 1
+        },
+        {
+          "title": "C-06 actual production hides the dev route, catalog and entry link",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11292,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T13:03:52.131Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "observations.json",
+                      "contentType": "application/json",
+                      "body": "eyJhcGlQYXRocyI6WyIvYXBpL3YxL21lIiwiL2FwaS92MS9tZSJdLCJjYW1lcmFDYWxscyI6MCwicGFnZUVycm9ycyI6W10sInZpZXdwb3J0Ijp7IndpZHRoIjoxNDQwLCJoZWlnaHQiOjEwMDB9LCJicm93c2VyVmVyc2lvbiI6IjE1NC4wLjgwMzcuOTgiLCJzdG9yYWdlTGVuZ3RocyI6WzAsMF0sImFjdHVhbEF1dGhTZXJ2ZXIiOmZhbHNlLCJhY3R1YWxIdW1hbkNhbWVyYSI6ZmFsc2V9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3c1ccfa8f32b1efd3e53-44c23b193c5543747e59",
+          "file": "selection.spec.ts",
+          "line": 225,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-06T13:01:42.428Z",
+    "duration": 145575.126,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 6,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,35 @@
+I001 [*] Import block is un-sorted or un-formatted
+  --> app/dashboard.py:3:1
+   |
+ 1 |   """FR-R-03/06: one owned SQL snapshot; not a clinical correctness certificate."""
+ 2 |
+ 3 | / import re
+ 4 | | from math import isfinite
+ 5 | | from collections.abc import Callable
+ 6 | | from datetime import UTC, datetime, time, timedelta
+ 7 | | from datetime import date as CalendarDate
+ 8 | | from typing import Literal
+ 9 | | from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
+10 | |
+11 | | from fastapi import FastAPI, Header, HTTPException, Request
+12 | | from pydantic import BaseModel, ConfigDict, Field, field_validator
+13 | | from sqlalchemy import Connection, Engine, text
+14 | |
+15 | | from app.baselines import UUID_PATTERN, Token
+   | |_____________________________________________^
+16 |
+17 |   Period = Literal["day", "week"]
+   |
+help: Organize imports
+  |
+3 | import re
+  - from math import isfinite
+4 | from collections.abc import Callable
+5 | from datetime import UTC, datetime, time, timedelta
+6 | from datetime import date as CalendarDate
+7 + from math import isfinite
+8 | from typing import Literal
+  |
+
+Found 1 error.
+[*] 1 fixable with the `--fix` option.

@@ -1,0 +1,363 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "[workspace]/bodyguard/frontend/node_modules/.pnpm/@playwright+test@1.63.0/node_modules/@playwright/test/cli.js",
+      "test",
+      "summaries.spec.ts",
+      "--config",
+      "playwright.account.config.ts",
+      "--output",
+      "test-results/summaries-20261006T122446818710Z"
+    ],
+    "configFile": "[workspace]/bodyguard/frontend/playwright.account.config.ts",
+    "rootDir": "[workspace]/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "[workspace]/bodyguard/frontend/test-results/summaries-20261006T122446818710Z",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "[workspace]/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "account.spec.ts",
+          "password.spec.ts",
+          "google.spec.ts",
+          "records.spec.ts",
+          "design.spec.ts",
+          "withdrawal.spec.ts",
+          "datahelp.spec.ts",
+          "integration.spec.ts",
+          "security.spec.ts",
+          "resultrecord.spec.ts",
+          "ownercapture.spec.ts",
+          "recordedsession.spec.ts",
+          "authcoaching.spec.ts",
+          "notifications.spec.ts",
+          "summaries.spec.ts",
+          "minuteupload.spec.ts",
+          "dashboard.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/summaries-20261006T122446818710Z/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "pnpm build && vite preview --host localhost",
+      "url": "http://localhost:4173",
+      "reuseExistingServer": false,
+      "timeout": 180000
+    }
+  },
+  "suites": [
+    {
+      "title": "summaries.spec.ts",
+      "file": "summaries.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "SW-W01 실제 계정→자세 기록→상세·페이지·취소·삭제와 화이트 블루 웹",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 16324,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('이 기간에는 자세 기록이 없습니다')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('이 기간에는 자세 기록이 없습니다') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('이 기간에는 자세 기록이 없습니다')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('이 기간에는 자세 기록이 없습니다')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('이 기간에는 자세 기록이 없습니다') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('이 기간에는 자세 기록이 없습니다')\u001b[22m\n\n    at [workspace]/bodyguard/frontend/e2e/summaries.spec.ts:144:54",
+                    "location": {
+                      "file": "[workspace]/bodyguard/frontend/e2e/summaries.spec.ts",
+                      "column": 54,
+                      "line": 144
+                    },
+                    "snippet": "  142 |   await page.goto('/start')\n  143 |   await page.getByRole('link', { name: '내 자세 기록 확인' }).click()\n> 144 |   await expect(page.getByText('이 기간에는 자세 기록이 없습니다')).toBeVisible()\n      |                                                      ^\n  145 |   await expect(page.getByRole('heading', { level: 1, name: '내 자세 기록' })).toBeFocused()\n  146 |   await expect(page).toHaveTitle('내 자세 기록 · BODYGUARD')\n  147 |   await page.screenshot({ path: info.outputPath('summary-empty.png'), fullPage: true })"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "[workspace]/bodyguard/frontend/e2e/summaries.spec.ts",
+                        "column": 54,
+                        "line": 144
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('이 기간에는 자세 기록이 없습니다')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('이 기간에는 자세 기록이 없습니다') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('이 기간에는 자세 기록이 없습니다')\u001b[22m\n\n\n  142 |   await page.goto('/start')\n  143 |   await page.getByRole('link', { name: '내 자세 기록 확인' }).click()\n> 144 |   await expect(page.getByText('이 기간에는 자세 기록이 없습니다')).toBeVisible()\n      |                                                      ^\n  145 |   await expect(page.getByRole('heading', { level: 1, name: '내 자세 기록' })).toBeFocused()\n  146 |   await expect(page).toHaveTitle('내 자세 기록 · BODYGUARD')\n  147 |   await page.screenshot({ path: info.outputPath('summary-empty.png'), fullPage: true })\n    at [workspace]/bodyguard/frontend/e2e/summaries.spec.ts:144:54"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T12:24:54.875Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "summary-boundaries.json",
+                      "contentType": "application/json",
+                      "body": "eyJhY3R1YWxQcm9kdWN0aW9uQ2hyb21lSHR0cFNxbCI6dHJ1ZSwic3ludGhldGljQWdncmVnYXRlc01haWxGYXVsdHMiOnRydWUsImFjdHVhbFBlcnNvbkNhbWVyYUNsaW5pY2FsIjpmYWxzZSwiY2FtZXJhIjowLCJ1bmV4cGVjdGVkIjpbXSwiZXJyb3JzIjpbXSwidGltaW5nIjpbeyJwYXRoIjoiL2FwaS92MS9tZSIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6MjMuNzg0fSx7InBhdGgiOiIvYXBpL3YxL21lIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjo4LjMxOX1dLCJzdG9yYWdlIjpbMCwwXSwiYnJvd3NlciI6IjE1NC4wLjgwMzcuOTgifQ=="
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "[workspace]/bodyguard/frontend/test-results/summaries-20261006T122446818710Z/summaries-SW-W01-실제-계정→자세-기록→상세·페이지·취소·삭제와-화이트-블루-웹/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "[workspace]/bodyguard/frontend/e2e/summaries.spec.ts",
+                    "column": 54,
+                    "line": 144
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e183148ecf145c73f3c2-6a0dff326a5c686c2aa0",
+          "file": "summaries.spec.ts",
+          "line": 135,
+          "column": 1
+        },
+        {
+          "title": "SW-W02 실제 삭제 뒤 응답 단절은 불확실·명시 재조회이며 재삭제하지 않는다",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 11170,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: '삭제 대상 확인' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('button', { name: '삭제 대상 확인' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: '삭제 대상 확인' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: '삭제 대상 확인' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('button', { name: '삭제 대상 확인' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: '삭제 대상 확인' })\u001b[22m\n\n    at open ([workspace]/bodyguard/frontend/e2e/summaries.spec.ts:58:64)\n    at [workspace]/bodyguard/frontend/e2e/summaries.spec.ts:245:3",
+                    "location": {
+                      "file": "[workspace]/bodyguard/frontend/e2e/summaries.spec.ts",
+                      "column": 64,
+                      "line": 58
+                    },
+                    "snippet": "  56 | async function open(page: Page) {\n  57 |   await page.goto('/posture-records')\n> 58 |   await expect(page.getByRole('button', { name: '삭제 대상 확인' })).toBeVisible()\n     |                                                                ^\n  59 | }\n  60 | function contrast(a: string, b: string) {\n  61 |   function luminance(value: string) {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "[workspace]/bodyguard/frontend/e2e/summaries.spec.ts",
+                        "column": 64,
+                        "line": 58
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: '삭제 대상 확인' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('button', { name: '삭제 대상 확인' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: '삭제 대상 확인' })\u001b[22m\n\n\n  56 | async function open(page: Page) {\n  57 |   await page.goto('/posture-records')\n> 58 |   await expect(page.getByRole('button', { name: '삭제 대상 확인' })).toBeVisible()\n     |                                                                ^\n  59 | }\n  60 | function contrast(a: string, b: string) {\n  61 |   function luminance(value: string) {\n    at open ([workspace]/bodyguard/frontend/e2e/summaries.spec.ts:58:64)\n    at [workspace]/bodyguard/frontend/e2e/summaries.spec.ts:245:3"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T12:25:17.282Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "summary-boundaries.json",
+                      "contentType": "application/json",
+                      "body": "eyJhY3R1YWxQcm9kdWN0aW9uQ2hyb21lSHR0cFNxbCI6dHJ1ZSwic3ludGhldGljQWdncmVnYXRlc01haWxGYXVsdHMiOnRydWUsImFjdHVhbFBlcnNvbkNhbWVyYUNsaW5pY2FsIjpmYWxzZSwiY2FtZXJhIjowLCJ1bmV4cGVjdGVkIjpbXSwiZXJyb3JzIjpbXSwidGltaW5nIjpbeyJwYXRoIjoiL2FwaS92MS9tZSIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6MjMuODkxfV0sInN0b3JhZ2UiOlswLDBdLCJicm93c2VyIjoiMTU0LjAuODAzNy45OCJ9"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "[workspace]/bodyguard/frontend/test-results/summaries-20261006T122446818710Z/summaries-SW-W02-실제-삭제-뒤-응답-단절은-불확실·명시-재조회이며-재삭제하지-않는다/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "[workspace]/bodyguard/frontend/e2e/summaries.spec.ts",
+                    "column": 64,
+                    "line": 58
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e183148ecf145c73f3c2-26bce1594e8ccf129a02",
+          "file": "summaries.spec.ts",
+          "line": 239,
+          "column": 1
+        },
+        {
+          "title": "SW-W03 실제 GET에 다른 계정 쿠키가 섞여도 기록은 표시되지 않는다",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 18134,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T12:25:33.431Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "read-binding-result.json",
+                      "contentType": "application/json",
+                      "body": "eyJhY3R1YWxIdHRwQ29va2llTWlzbWF0Y2g0MDMiOnRydWUsIm90aGVyT3duZXJSb3dQcmVzZXJ2ZWQiOnRydWUsInN5bnRoZXRpY1NjaGVkdWxpbmciOnRydWV9"
+                    },
+                    {
+                      "name": "summary-boundaries.json",
+                      "contentType": "application/json",
+                      "body": "eyJhY3R1YWxQcm9kdWN0aW9uQ2hyb21lSHR0cFNxbCI6dHJ1ZSwic3ludGhldGljQWdncmVnYXRlc01haWxGYXVsdHMiOnRydWUsImFjdHVhbFBlcnNvbkNhbWVyYUNsaW5pY2FsIjpmYWxzZSwiY2FtZXJhIjowLCJ1bmV4cGVjdGVkIjpbXSwiZXJyb3JzIjpbXSwidGltaW5nIjpbeyJwYXRoIjoiL2FwaS92MS9tZSIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6MTYuNzM5fSx7InBhdGgiOiIvYXBpL3YxL21lIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjo3OC41NDh9LHsicGF0aCI6Ii9hcGkvdjEvYXV0aC9jc3JmIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjo4LjE3OH0seyJwYXRoIjoiL2FwaS92MS9tZSIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6Ni4yNzd9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjYyNS41N30seyJwYXRoIjoiL2FwaS92MS9tZSIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6MTcuNTAyfSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6MTEuMDF9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJtZXRob2QiOiJHRVQiLCJtaWxsaXNlY29uZHMiOjkuMDk2fSx7InBhdGgiOiIvYXBpL3YxL3N1bW1hcmllcyIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6MTUuMzc2fSx7InBhdGgiOiIvYXBpL3YxL21lIiwibWV0aG9kIjoiR0VUIiwibWlsbGlzZWNvbmRzIjozMS45fV0sInN0b3JhZ2UiOlswLDBdLCJicm93c2VyIjoiMTU0LjAuODAzNy45OCJ9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e183148ecf145c73f3c2-c6fb06de27becc8f96b8",
+          "file": "summaries.spec.ts",
+          "line": 265,
+          "column": 1
+        },
+        {
+          "title": "SW-W04 실제 대상 변경409와 조회 오류 복구·invalid 기간",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10482,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: '삭제 대상 확인' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('button', { name: '삭제 대상 확인' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: '삭제 대상 확인' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: '삭제 대상 확인' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('button', { name: '삭제 대상 확인' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: '삭제 대상 확인' })\u001b[22m\n\n    at open ([workspace]/bodyguard/frontend/e2e/summaries.spec.ts:58:64)\n    at [workspace]/bodyguard/frontend/e2e/summaries.spec.ts:316:3",
+                    "location": {
+                      "file": "[workspace]/bodyguard/frontend/e2e/summaries.spec.ts",
+                      "column": 64,
+                      "line": 58
+                    },
+                    "snippet": "  56 | async function open(page: Page) {\n  57 |   await page.goto('/posture-records')\n> 58 |   await expect(page.getByRole('button', { name: '삭제 대상 확인' })).toBeVisible()\n     |                                                                ^\n  59 | }\n  60 | function contrast(a: string, b: string) {\n  61 |   function luminance(value: string) {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "[workspace]/bodyguard/frontend/e2e/summaries.spec.ts",
+                        "column": 64,
+                        "line": 58
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: '삭제 대상 확인' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('button', { name: '삭제 대상 확인' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: '삭제 대상 확인' })\u001b[22m\n\n\n  56 | async function open(page: Page) {\n  57 |   await page.goto('/posture-records')\n> 58 |   await expect(page.getByRole('button', { name: '삭제 대상 확인' })).toBeVisible()\n     |                                                                ^\n  59 | }\n  60 | function contrast(a: string, b: string) {\n  61 |   function luminance(value: string) {\n    at open ([workspace]/bodyguard/frontend/e2e/summaries.spec.ts:58:64)\n    at [workspace]/bodyguard/frontend/e2e/summaries.spec.ts:316:3"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T12:25:55.598Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "summary-boundaries.json",
+                      "contentType": "application/json",
+                      "body": "eyJhY3R1YWxQcm9kdWN0aW9uQ2hyb21lSHR0cFNxbCI6dHJ1ZSwic3ludGhldGljQWdncmVnYXRlc01haWxGYXVsdHMiOnRydWUsImFjdHVhbFBlcnNvbkNhbWVyYUNsaW5pY2FsIjpmYWxzZSwiY2FtZXJhIjowLCJ1bmV4cGVjdGVkIjpbXSwiZXJyb3JzIjpbXSwidGltaW5nIjpbeyJwYXRoIjoiL2FwaS92MS9tZSIsIm1ldGhvZCI6IkdFVCIsIm1pbGxpc2Vjb25kcyI6MjcuMzMzfV0sInN0b3JhZ2UiOlswLDBdLCJicm93c2VyIjoiMTU0LjAuODAzNy45OCJ9"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "[workspace]/bodyguard/frontend/test-results/summaries-20261006T122446818710Z/summaries-SW-W04-실제-대상-변경409와-조회-오류-복구·invalid-기간/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "[workspace]/bodyguard/frontend/e2e/summaries.spec.ts",
+                    "column": 64,
+                    "line": 58
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e183148ecf145c73f3c2-914ac4dbd31c47697ed7",
+          "file": "summaries.spec.ts",
+          "line": 313,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-06T12:24:47.492Z",
+    "duration": 78875.39199999999,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

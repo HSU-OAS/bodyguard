@@ -1,0 +1,230 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "[workspace]/bodyguard/frontend/node_modules/.pnpm/@playwright+test@1.63.0/node_modules/@playwright/test/cli.js",
+      "test",
+      "dashboard.spec.ts",
+      "--config",
+      "playwright.account.config.ts",
+      "--output",
+      "test-results/dashboard-20261006T073855299366Z"
+    ],
+    "configFile": "[workspace]/bodyguard/frontend/playwright.account.config.ts",
+    "rootDir": "[workspace]/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "[workspace]/bodyguard/frontend/test-results/dashboard-20261006T073855299366Z",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "[workspace]/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "account.spec.ts",
+          "password.spec.ts",
+          "google.spec.ts",
+          "records.spec.ts",
+          "design.spec.ts",
+          "withdrawal.spec.ts",
+          "datahelp.spec.ts",
+          "integration.spec.ts",
+          "security.spec.ts",
+          "resultrecord.spec.ts",
+          "ownercapture.spec.ts",
+          "recordedsession.spec.ts",
+          "authcoaching.spec.ts",
+          "notifications.spec.ts",
+          "summaries.spec.ts",
+          "minuteupload.spec.ts",
+          "dashboard.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/dashboard-20261006T073855299366Z/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "pnpm build && vite preview --host localhost",
+      "url": "http://localhost:4173",
+      "reuseExistingServer": false,
+      "timeout": 180000
+    }
+  },
+  "suites": [
+    {
+      "title": "dashboard.spec.ts",
+      "file": "dashboard.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "DW01 실제 저장→전체 하루/한 주 집계→기록 관리/복귀와 의료 화이트블루 웹",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 36011,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('3.86 deg', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('3.86 deg', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('3.86 deg', { exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('3.86 deg', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('3.86 deg', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('3.86 deg', { exact: true })\u001b[22m\n\n    at [workspace]/bodyguard/frontend/e2e/dashboard.spec.ts:199:61",
+                    "location": {
+                      "file": "[workspace]/bodyguard/frontend/e2e/dashboard.spec.ts",
+                      "column": 61,
+                      "line": 199
+                    },
+                    "snippet": "  197 |   await page.screenshot({ path: info.outputPath('dashboard-week.png'), fullPage: true })\n  198 |   await page.reload()\n> 199 |   await expect(page.getByText('3.86 deg', { exact: true })).toBeVisible()\n      |                                                             ^\n  200 |   await page.getByRole('link', { name: '자세 기록 관리', exact: true }).click()\n  201 |   await expect(page.getByRole('heading', { name: '내 자세 기록', exact: true })).toBeVisible()\n  202 |   await page.goBack()"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "[workspace]/bodyguard/frontend/e2e/dashboard.spec.ts",
+                        "column": 61,
+                        "line": 199
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('3.86 deg', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('3.86 deg', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('3.86 deg', { exact: true })\u001b[22m\n\n\n  197 |   await page.screenshot({ path: info.outputPath('dashboard-week.png'), fullPage: true })\n  198 |   await page.reload()\n> 199 |   await expect(page.getByText('3.86 deg', { exact: true })).toBeVisible()\n      |                                                             ^\n  200 |   await page.getByRole('link', { name: '자세 기록 관리', exact: true }).click()\n  201 |   await expect(page.getByRole('heading', { name: '내 자세 기록', exact: true })).toBeVisible()\n  202 |   await page.goBack()\n    at [workspace]/bodyguard/frontend/e2e/dashboard.spec.ts:199:61"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T07:39:03.422Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "dashboard-boundaries.json",
+                      "contentType": "application/json",
+                      "body": "eyJhY3R1YWxQcm9kdWN0aW9uQ2hyb21lSHR0cFNxbCI6dHJ1ZSwic3ludGhldGljUmVjb3Jkc01haWxGYXVsdHMiOnRydWUsImFjdHVhbFBlcnNvbkNhbWVyYUNsaW5pY2FsIjpmYWxzZSwiY2FtZXJhIjowLCJ1bmV4cGVjdGVkIjpbXSwiZXJyb3JzIjpbXSwibmV0d29yayI6W3sicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjQwMX0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvYXV0aC9jc3JmIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9yZWNvcmRzL2Rhc2hib2FyZCIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL3JlY29yZHMvZGFzaGJvYXJkIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL3JlY29yZHMvZGFzaGJvYXJkIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH1dLCJzdG9yYWdlIjpbMCwwXSwiYnJvd3NlciI6IjE1NC4wLjgwMzcuOTgifQ=="
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "[workspace]/bodyguard/frontend/test-results/dashboard-20261006T073855299366Z/dashboard-DW01-실제-저장→전체-하루-한-주-집계→기록-관리-복귀와-의료-화이트블루-웹/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "[workspace]/bodyguard/frontend/test-results/dashboard-20261006T073855299366Z/dashboard-DW01-실제-저장→전체-하루-한-주-집계→기록-관리-복귀와-의료-화이트블루-웹/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "[workspace]/bodyguard/frontend/e2e/dashboard.spec.ts",
+                    "column": 61,
+                    "line": 199
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "90cda532ab82d274b30b-22eb47a214e24b1fb3c9",
+          "file": "dashboard.spec.ts",
+          "line": 155,
+          "column": 1
+        },
+        {
+          "title": "DW02 실제 빈 기간/잘못된 URL/503 복구/요청 시 계정 권위 경계",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 31249,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T07:39:44.881Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "dashboard-boundaries.json",
+                      "contentType": "application/json",
+                      "body": "eyJhY3R1YWxQcm9kdWN0aW9uQ2hyb21lSHR0cFNxbCI6dHJ1ZSwic3ludGhldGljUmVjb3Jkc01haWxGYXVsdHMiOnRydWUsImFjdHVhbFBlcnNvbkNhbWVyYUNsaW5pY2FsIjpmYWxzZSwiY2FtZXJhIjowLCJ1bmV4cGVjdGVkIjpbXSwiZXJyb3JzIjpbXSwibmV0d29yayI6W3sicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjQwMX0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvYXV0aC9jc3JmIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9yZWNvcmRzL2Rhc2hib2FyZCIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvYXV0aC9jc3JmIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9yZWNvcmRzL2Rhc2hib2FyZCIsInN0YXR1cyI6NTAzfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvYXV0aC9jc3JmIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9yZWNvcmRzL2Rhc2hib2FyZCIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL3JlY29yZHMvZGFzaGJvYXJkIiwic3RhdHVzIjo0MDN9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfV0sInN0b3JhZ2UiOlswLDBdLCJicm93c2VyIjoiMTU0LjAuODAzNy45OCJ9"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "[workspace]/bodyguard/frontend/test-results/dashboard-20261006T073855299366Z/dashboard-DW02-실제-빈-기간-잘못된-URL-503-복구-요청-시-계정-권위-경계/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "90cda532ab82d274b30b-df703c3a613159fa6bfc",
+          "file": "dashboard.spec.ts",
+          "line": 225,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-06T07:38:56.034Z",
+    "duration": 84457.808,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

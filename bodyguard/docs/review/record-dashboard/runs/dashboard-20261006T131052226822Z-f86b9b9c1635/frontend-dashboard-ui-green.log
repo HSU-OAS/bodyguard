@@ -1,0 +1,520 @@
+$ vitest run src/api/dashboard.test.ts src/pages/RecordDashboardPage.test.tsx
+
+ RUN  v5.0.2 [workspace]/bodyguard/frontend
+
+ ❯ src/pages/RecordDashboardPage.test.tsx (6 tests | 1 failed) 1279ms
+   × invalid URL makes no dashboard read and can recover with valid form 1033ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/pages/RecordDashboardPage.test.tsx > invalid URL makes no dashboard read and can recover with valid form
+TestingLibraryElementError: Unable to find an element with the text: 1.25 deg. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="website"
+    >
+      <button
+        class="skip-link"
+        type="button"
+      >
+        본문으로 이동
+      </button>
+      <header
+        class="site-header"
+      >
+        <a
+          aria-label="BODYGUARD 서비스 소개"
+          class="wordmark"
+          data-discover="true"
+          href="/"
+        >
+          BODYGUARD
+          <span
+            aria-hidden="true"
+          >
+            .
+          </span>
+        </a>
+        <nav
+          aria-label="계정 메뉴"
+        >
+          <a
+            class="nav-link"
+            data-discover="true"
+            href="/start"
+          >
+            내 시작
+          </a>
+          <a
+            aria-current="page"
+            class="nav-link"
+            data-discover="true"
+            href="/dashboard"
+          >
+            기록 대시보드
+          </a>
+          <a
+            class="nav-link"
+            data-discover="true"
+            href="/posture-records"
+          >
+            자세 기록
+          </a>
+          <a
+            class="nav-link"
+            data-discover="true"
+            href="/records"
+          >
+            수행 기록
+          </a>
+          <a
+            class="nav-link"
+            data-discover="true"
+            href="/account"
+          >
+            내 계정
+          </a>
+        </nav>
+      </header>
+      <main
+        id="content"
+        tabindex="-1"
+      >
+        <section
+          class="records-screen dashboard-screen"
+        >
+          <p
+            class="eyebrow"
+          >
+            MY RECORD OVERVIEW
+          </p>
+          <h1
+            tabindex="-1"
+          >
+            내 기록 대시보드
+          </h1>
+          <p
+            class="records-intro"
+          >
+            기록된 시간을 기준으로, 하루와 한 주의 움직임을 살펴보세요.
+          </p>
+          <p
+            class="records-explanation muted"
+          >
+            저장된 자세·수행 기록을 함께 확인합니다. 측정 연결은 준비 중이며, 기록의 값은 질환 진단이나 올바른 자세의 인증이 아닙니다.
+          </p>
+          <form
+            aria-label="대시보드 조회"
+            class="dashboard-filter"
+            novalidate=""
+          >
+            <fieldset>
+              <legend>
+                조회 기간
+              </legend>
+              <div
+                class="dashboard-period"
+              >
+                <label>
+                  <input
+                    checked=""
+                    name="dashboard-period"
+                    type="radio"
+                    value="day"
+                  />
+                  하루
+                </label>
+                <label>
+                  <input
+                    name="dashboard-period"
+                    type="radio"
+                    value="week"
+                  />
+                  한 주
+                </label>
+              </div>
+            </fieldset>
+            <label
+              class="dashboard-date"
+              for="dashboard-date"
+            >
+              기준 날짜
+              <input
+                aria-invalid="false"
+                id="dashboard-date"
+                type="date"
+                value="2026-10-01"
+              />
+            </label>
+            <button
+              class="button primary"
+              type="submit"
+            >
+              기록 조회
+            </button>
+            <p
+              class="dashboard-zone muted"
+            >
+              시간대 ·
+              Asia/Seoul
+              <br />
+              한 주는 월요일부터 일요일까지입니다.
+            </p>
+          </form>
+          <section
+            aria-busy="false"
+            aria-labelledby="dashboard-results"
+            class="records-results"
+          >
+            <h2
+              id="dashboard-results"
+              tabindex="-1"
+            >
+              2026-10-01
+               ·
+              하루
+
+              기록
+            </h2>
+            <div
+              class="records-state"
+            >
+              <p
+                role="alert"
+              >
+                기록을 조회하지 못했습니다. 연결을 확인하고 다시 조회하세요.
+              </p>
+              <button
+                class="button secondary"
+                type="button"
+              >
+                다시 조회
+              </button>
+            </div>
+          </section>
+          <nav
+            aria-label="상세 기록 관리"
+            class="dashboard-management"
+          >
+            <a
+              class="button secondary"
+              data-discover="true"
+              href="/posture-records"
+            >
+              자세 기록 관리
+            </a>
+            <a
+              class="back-link"
+              data-discover="true"
+              href="/records"
+            >
+              수행 기록 관리
+            </a>
+            <a
+              class="back-link"
+              data-discover="true"
+              href="/account"
+            >
+              계정 관리
+            </a>
+          </nav>
+        </section>
+      </main>
+      <footer
+        class="site-footer"
+      >
+        <span>
+          BODYGUARD
+        </span>
+        <p>
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        </p>
+        <nav
+          aria-label="서비스 안내"
+        >
+          <a
+            class="footer-link"
+            data-discover="true"
+            href="/help"
+          >
+            도움말
+          </a>
+          <a
+            class="footer-link"
+            data-discover="true"
+            href="/data"
+          >
+            카메라·데이터 안내
+          </a>
+        </nav>
+      </footer>
+    </div>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="website"
+    >
+      <button
+        class="skip-link"
+        type="button"
+      >
+        본문으로 이동
+      </button>
+      <header
+        class="site-header"
+      >
+        <a
+          aria-label="BODYGUARD 서비스 소개"
+          class="wordmark"
+          data-discover="true"
+          href="/"
+        >
+          BODYGUARD
+          <span
+            aria-hidden="true"
+          >
+            .
+          </span>
+        </a>
+        <nav
+          aria-label="계정 메뉴"
+        >
+          <a
+            class="nav-link"
+            data-discover="true"
+            href="/start"
+          >
+            내 시작
+          </a>
+          <a
+            aria-current="page"
+            class="nav-link"
+            data-discover="true"
+            href="/dashboard"
+          >
+            기록 대시보드
+          </a>
+          <a
+            class="nav-link"
+            data-discover="true"
+            href="/posture-records"
+          >
+            자세 기록
+          </a>
+          <a
+            class="nav-link"
+            data-discover="true"
+            href="/records"
+          >
+            수행 기록
+          </a>
+          <a
+            class="nav-link"
+            data-discover="true"
+            href="/account"
+          >
+            내 계정
+          </a>
+        </nav>
+      </header>
+      <main
+        id="content"
+        tabindex="-1"
+      >
+        <section
+          class="records-screen dashboard-screen"
+        >
+          <p
+            class="eyebrow"
+          >
+            MY RECORD OVERVIEW
+          </p>
+          <h1
+            tabindex="-1"
+          >
+            내 기록 대시보드
+          </h1>
+          <p
+            class="records-intro"
+          >
+            기록된 시간을 기준으로, 하루와 한 주의 움직임을 살펴보세요.
+          </p>
+          <p
+            class="records-explanation muted"
+          >
+            저장된 자세·수행 기록을 함께 확인합니다. 측정 연결은 준비 중이며, 기록의 값은 질환 진단이나 올바른 자세의 인증이 아닙니다.
+          </p>
+          <form
+            aria-label="대시보드 조회"
+            class="dashboard-filter"
+            novalidate=""
+          >
+            <fieldset>
+              <legend>
+                조회 기간
+              </legend>
+              <div
+                class="dashboard-period"
+              >
+                <label>
+                  <input
+                    checked=""
+                    name="dashboard-period"
+                    type="radio"
+                    value="day"
+                  />
+                  하루
+                </label>
+                <label>
+                  <input
+                    name="dashboard-period"
+                    type="radio"
+                    value="week"
+                  />
+                  한 주
+                </label>
+              </div>
+            </fieldset>
+            <label
+              class="dashboard-date"
+              for="dashboard-date"
+            >
+              기준 날짜
+              <input
+                aria-invalid="false"
+                id="dashboard-date"
+                type="date"
+                value="2026-10-01"
+              />
+            </label>
+            <button
+              class="button primary"
+              type="submit"
+            >
+              기록 조회
+            </button>
+            <p
+              class="dashboard-zone muted"
+            >
+              시간대 ·
+              Asia/Seoul
+              <br />
+              한 주는 월요일부터 일요일까지입니다.
+            </p>
+          </form>
+          <section
+            aria-busy="false"
+            aria-labelledby="dashboard-results"
+            class="records-results"
+          >
+            <h2
+              id="dashboard-results"
+              tabindex="-1"
+            >
+              2026-10-01
+               ·
+              하루
+
+              기록
+            </h2>
+            <div
+              class="records-state"
+            >
+              <p
+                role="alert"
+              >
+                기록을 조회하지 못했습니다. 연결을 확인하고 다시 조회하세요.
+              </p>
+              <button
+                class="button secondary"
+                type="button"
+              >
+                다시 조회
+              </button>
+            </div>
+          </section>
+          <nav
+            aria-label="상세 기록 관리"
+            class="dashboard-management"
+          >
+            <a
+              class="button secondary"
+              data-discover="true"
+              href="/posture-records"
+            >
+              자세 기록 관리
+            </a>
+            <a
+              class="back-link"
+              data-discover="true"
+              href="/records"
+            >
+              수행 기록 관리
+            </a>
+            <a
+              class="back-link"
+              data-discover="true"
+              href="/account"
+            >
+              계정 관리
+            </a>
+          </nav>
+        </section>
+      </main>
+      <footer
+        class="site-footer"
+      >
+        <span>
+          BODYGUARD
+        </span>
+        <p>
+          일상을 위한 스트레칭과 자세 코칭 · 출시 준비 중
+        </p>
+        <nav
+          aria-label="서비스 안내"
+        >
+          <a
+            class="footer-link"
+            data-discover="true"
+            href="/help"
+          >
+            도움말
+          </a>
+          <a
+            class="footer-link"
+            data-discover="true"
+            href="/data"
+          >
+            카메라·데이터 안내
+          </a>
+        </nav>
+      </footer>
+    </div>
+  </div>
+</body>
+ ❯ waitForWrapper node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/.pnpm/@testing-library+dom@10.4.2/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/pages/RecordDashboardPage.test.tsx:116:16
+    114|   fireEvent.change(screen.getByLabelText('기준 날짜'), { target: { value: …
+    115|   fireEvent.click(screen.getByRole('button', { name: '기록 조회' }))
+    116|   await screen.findByText('1.25 deg')
+       |                ^
+    117| })
+    118| it('error has explicit retry; empty does not invent normal values', as…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 36 passed (37)
+   Start at  16:18:09
+   Duration  2.23s (tests 61%, environment 16%, transform 12%, import 10%)
+
+[ELIFECYCLE] Test failed. See above for more details.

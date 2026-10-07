@@ -3,6 +3,11 @@ import { spawn } from 'node:child_process'
 import { createServer } from 'node:net'
 import { fileURLToPath } from 'node:url'
 
+const flags = process.argv.slice(2)
+if (flags.length > 1 || (flags.length === 1 && flags[0] !== '--headed'))
+  throw new Error('Only optional --headed is supported')
+const output = `test-results/selection-${new Date().toISOString().replaceAll(/[-:.]/g, '')}`
+
 const sink = createServer((socket) => socket.destroy())
 await new Promise((resolve, reject) => {
   sink.once('error', reject)
@@ -19,11 +24,16 @@ const child = spawn(
     '--config',
     'playwright.selection.config.ts',
     '--output',
-    'test-results/selection',
+    output,
+    ...flags,
   ],
   {
     cwd: fileURLToPath(new URL('..', import.meta.url)),
-    env: { ...process.env, BODYGUARD_TEST_BLOCKED_PROXY: `http://127.0.0.1:${address.port}` },
+    env: {
+      ...process.env,
+      BODYGUARD_TEST_BLOCKED_PROXY: `http://127.0.0.1:${address.port}`,
+      BODYGUARD_TEST_SELECTION_REPORT: `${output}/report.json`,
+    },
     stdio: 'inherit',
   },
 )

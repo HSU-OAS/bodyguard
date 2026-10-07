@@ -1,0 +1,85 @@
+$ vitest run --reporter=default --reporter=junit --outputFile.junit=[owned-private-scratch]/frontend-junit-first.xml
+
+ RUN  v5.0.2 [workspace]/bodyguard/frontend
+
+ ✓ src/stretch/progression.test.ts (60 tests) 149ms
+ ✓ src/coaching/resultRecord.test.ts (29 tests) 63ms
+ ✓ src/summary/ownedMinuteUpload.test.ts (29 tests) 129ms
+ ✓ src/coaching/recordedSession.test.ts (28 tests) 179ms
+ ✓ src/coaching/session.test.ts (44 tests) 293ms
+ ✓ src/coaching/recordOwner.test.ts (16 tests) 172ms
+ ✓ src/summary/minuteAggregation.test.ts (35 tests) 25ms
+ ✓ src/coaching/resources.test.ts (40 tests) 759ms
+ ✓ src/coaching/observationLoop.test.ts (19 tests) 1148ms
+ ✓ src/api/minuteSummaries.test.ts (40 tests) 126ms
+ ✓ src/coaching/useRecordedCoaching.test.tsx (20 tests) 434ms
+ ✓ src/api/notificationPreferences.test.ts (18 tests) 172ms
+ ✓ src/avatar/faceTracking.test.ts (13 tests) 27ms
+ ✓ src/pose/useMeasurement.test.tsx (9 tests) 132ms
+ ✓ src/api/dashboard.test.ts (31 tests) 391ms
+ ✓ src/auth.test.tsx (12 tests) 317ms
+ ✓ src/avatar/face.test.ts (12 tests) 16ms
+ ✓ src/pages/RecordsPage.test.tsx (12 tests) 2745ms
+   ✓ blocks private records when account check returns 401 481ms
+   ✓ changes pages using the same query cutoff and never appends duplicates 441ms
+   ✓ focus recheck hides loaded private data before its answer and ignores late data 307ms
+ ✓ src/pages/NotificationPreferencesPage.test.tsx (14 tests) 2739ms
+   ✓ W01 account entry links to the protected settings page 371ms
+   ✓ W02 invalid minutes 0 focus the error summary without POST 312ms
+   ✓ W02 disabling an invalid interval retains the last confirmed number rather than an uneditable error 303ms
+ ✓ src/pages/PasswordPage.test.tsx (18 tests) 3667ms
+   ✓ PW-02 StrictMode clears the URL without losing the in-memory POST token 596ms
+   ✓ PW-03 a wrong 200 acknowledgement cannot complete reset or reveal private UI 399ms
+   ✓ PW-03 a new same-page fragment replaces the consumed token without a reload 511ms
+   ✓ PW-03 a replacement link cancels a held reset and ignores its late completion 300ms
+ ✓ src/pages/RecordDeletion.test.tsx (10 tests) 2353ms
+   ✓ blocks duplicate confirmation and discards deletion response after leaving 403ms
+   ✓ discards a late preview after period 527ms
+ ✓ src/pages/MinuteSummaryPage.test.tsx (23 tests) 4993ms
+   ✓ SW02 list → keyboard-ready detail retains per-part denominators and no clinical score 616ms
+   ✓ SW03 invalid URL ?from=2026-02-30&to=2026-10-01 makes zero data requests and has a recovery path 326ms
+   ✓ SW10 later empty page is not an empty period; pagination restores results focus 491ms
+   ✓ SW13 offset10000 has an explicit narrowing path, never an out-of-bounds next request 408ms
+ ✓ src/catalog/motions.test.ts (10 tests) 16ms
+ ✓ src/api/records.test.ts (15 tests) 190ms
+ ✓ src/pages/WithdrawalPage.test.tsx (20 tests) 5029ms
+   ✓ AW-03 private withdrawal is closed when /me returns401 466ms
+   ✓ AW-04 explicit cancel sends no confirm request and clears memory proof 362ms
+   ✓ AW-10 uncertain200 does not claim deletion or automatically retry 329ms
+   ✓ AW-10 uncertain401 does not claim deletion or automatically retry 441ms
+   ✓ AW-10 uncertain503 does not claim deletion or automatically retry 330ms
+   ✓ AW-11 guest after uncertain result means login check, not completed withdrawal 333ms
+   ✓ AW-15 leaving during confirmation cannot restore private account from late204 348ms
+ ✓ src/avatar/skeleton.test.ts (8 tests) 23ms
+ ✓ src/api/withdrawal.test.ts (22 tests) 172ms
+ ✓ src/posture/framing.test.ts (9 tests) 16ms
+ ✓ src/posture/hands.test.ts (7 tests) 6ms
+ ✓ src/webDesign.test.ts (14 tests) 14ms
+ ✓ src/pages/RecordDashboardPage.test.tsx (6 tests) 1681ms
+   ✓ renders query → measured/group/null counts → management with owned navigation 423ms
+   ✓ day/week submit preserves URL and restores results focus 417ms
+ ✓ src/posture/landmarks.test.ts (8 tests) 65ms
+ ✓ src/catalog/recommendation.test.ts (8 tests) 25ms
+ ✓ src/api/recordDeletion.test.ts (13 tests) 217ms
+ ✓ src/pose/camera.test.ts (4 tests) 79ms
+ ✓ src/pages/GoogleAccount.test.tsx (14 tests) 1011ms
+   ✓ GW-01 login unconfigured Google keeps email usable 400ms
+ ✓ src/pages/MotionSelectionPage.test.tsx (13 tests) 1928ms
+   ✓ S3.3 opens guidance detail chin-retraction without automatic coaching 603ms
+ ✓ src/pages/MeasureDemoPage.test.tsx (3 tests) 1556ms
+   ✓ 상반신 프레임은 머리·어깨 범위만 충족하며 전신·미검출 기록은 촬영 안내를 남긴다 548ms
+   ✓ 최신 100개만 남기고 준비 중에도 취소할 수 있다 870ms
+ ✓ src/pages/DataHelpPage.test.tsx (5 tests) 593ms
+ ✓ src/pages/ExplorePage.test.tsx (4 tests) 326ms
+ ✓ src/pages/MemberPage.test.tsx (1 test) 93ms
+ ✓ src/App.test.tsx (3 tests) 268ms
+
+ Test Files  42 passed (42)
+      Tests  719 passed (719)
+   Start at  16:20:42
+   Duration  10.72s (tests 44%, environment 32%, import 18%, transform 5%, worker 1%)
+
+    Isolate  42 workers spawned · ~870ms startup each (spawn + environment, per file)
+             at least ~3.19s faster with isolate: false — reuses workers across files instead of one per file
+
+JUNIT report written to [owned-private-scratch]/frontend-junit-first.xml

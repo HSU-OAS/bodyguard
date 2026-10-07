@@ -3,7 +3,7 @@ baseline_commit: 37354aa4e074d86e862e5851352f917cc001b6fb
 ---
 # S4.16 — 본인 계정에 결속된 private 1분 요약 업로드
 
-Status: in-progress
+Status: done (private 업로드 연결 범위만)
 
 ## Story
 
@@ -27,7 +27,7 @@ FR-R-01/02/03/06·FR-U-04·NFR-07/08·ADR-0003. 기존 S4.12 실제 시간가중
 - [x] 기존 집계·DTO·원래 세션 proof/expected-owner·명시 single-flight/retry/폐기 연결 구현 (AC1–4)
 - [x] private 실제 Chrome/API/SQL 저장→기록·단절/동일 재시도/계정/거부 시험 (AC5)
 - [x] 전체 회귀·타입/정적/build/guard·화이트블루 기존 화면·원본/SHA 보존·scope 리뷰 (AC6)
-- [ ] 커밋/PR·최신 diff/HEAD/main/CLEAN/체크·조건부 merge와 결과 기록 (AC6)
+- [x] 커밋/PR·최신 diff/HEAD/main/CLEAN/체크·조건부 merge와 결과 기록 (AC6)
 
 ### Review Findings
 
@@ -64,6 +64,8 @@ BMAD3개 역할 최초 blind+edge 한 P2를 합쳐 보완했고 author timeout�
 최종 acceptance는 읽기 전용으로 source28·원본/public artifact54 SHA/크기/정규화, 전체 JUnit/Chrome 개별 결과·수치·실패 보존·PNG·DB 종료를 대조해 []를 반환했다. blind/edge/acceptance 전부 미해결 scoped P1/P2 없음. 작성자도 동일 SHA/원본과 diff --check를 확인했다. 실행/전문가/외부 검증으로 중복 계산하지 않는다. code-review on_complete resolver 실제 absent exit2/default 빈 값이며 추가 후속 실행0. 이제 최신 main/정확한 HEAD/원격 diff/tree/CLEAN/체크와 조건부 PR 병합을 진행한다.
 
 ## File List
+
+실제 PR #50 병합 확인: source `c406154981b7bd654cfa15960754671c47ed6040` → merge `991ed2b33a1abc6158b3a177f8431a104c476ba0` (2026-10-06T06:37:28Z). 병합 직전 exact HEAD/latest main/CLEAN/MERGEABLE·체크 없음·원격/로컬 75파일 diff와 동일 Git tree `28b8bf764470e8cd07ab871d588ed240fca1c4c8`을 확인했다. merge commit의 두 부모와 최신 origin/main 포함·source 브랜치 보존을 확인했다. 이전 원본과 manifest는 변경하지 않는다. 전체 단계 완료나 실제 자세 검증으로 확대하지 않는다.
 
 - backend/app/summaries.py, backend/tests/test_summary_upload_binding.py, backend/tests/run_browser.py
 - frontend/src/api/minuteSummaries.ts, frontend/src/api/generated/types.gen.ts

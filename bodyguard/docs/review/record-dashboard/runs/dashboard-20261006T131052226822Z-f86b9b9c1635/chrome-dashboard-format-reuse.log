@@ -1,0 +1,54 @@
+[WebServer] (node:88294) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ node scripts/prepare-assets.mjs && tsc --noEmit && vite build
+[WebServer] (node:88324) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:88342) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:88358) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 e2e/dashboard.spec.ts:155:1 › DW01 실제 저장→전체 하루/한 주 집계→기록 관리/복귀와 의료 화이트블루 웹 (36.0s)
+(node:88554) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 e2e/dashboard.spec.ts:225:1 › DW02 실제 빈 기간/잘못된 URL/503 복구/요청 시 계정 권위 경계 (31.2s)
+
+
+  1) e2e/dashboard.spec.ts:155:1 › DW01 실제 저장→전체 하루/한 주 집계→기록 관리/복귀와 의료 화이트블루 웹 ────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('3.86 deg', { exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByText('3.86 deg', { exact: true }) with timeout 5000ms
+      - waiting for getByText('3.86 deg', { exact: true })
+
+
+      197 |   await page.screenshot({ path: info.outputPath('dashboard-week.png'), fullPage: true })
+      198 |   await page.reload()
+    > 199 |   await expect(page.getByText('3.86 deg', { exact: true })).toBeVisible()
+          |                                                             ^
+      200 |   await page.getByRole('link', { name: '자세 기록 관리', exact: true }).click()
+      201 |   await expect(page.getByRole('heading', { name: '내 자세 기록', exact: true })).toBeVisible()
+      202 |   await page.goBack()
+        at [workspace]/bodyguard/frontend/e2e/dashboard.spec.ts:199:61
+
+    Error Context: test-results/dashboard-20261006T073855299366Z/dashboard-DW01-실제-저장→전체-하루-한-주-집계→기록-관리-복귀와-의료-화이트블루-웹/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/dashboard-20261006T073855299366Z/dashboard-DW01-실제-저장→전체-하루-한-주-집계→기록-관리-복귀와-의료-화이트블루-웹/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/dashboard-20261006T073855299366Z/dashboard-DW01-실제-저장→전체-하루-한-주-집계→기록-관리-복귀와-의료-화이트블루-웹/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    e2e/dashboard.spec.ts:155:1 › DW01 실제 저장→전체 하루/한 주 집계→기록 관리/복귀와 의료 화이트블루 웹 ─────────────────────
+  1 passed (1.4m)

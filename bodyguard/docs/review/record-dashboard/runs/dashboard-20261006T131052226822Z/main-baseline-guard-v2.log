@@ -1,0 +1,19 @@
+node:fs:1536
+    const readdirResult = binding.readdir(
+                                  ^
+
+Error: ENOENT: no such file or directory, scandir '[owned-private-scratch]/bodyguard/frontend/dist/assets/'
+    at read (node:fs:1536:35)
+    at readdirSyncRecursive (node:fs:1554:5)
+    at readdirSync (node:fs:1628:12)
+    at file://[owned-private-scratch]/bodyguard/frontend/scripts/check-selection-production.mjs:8:15
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'scandir',
+  path: '[owned-private-scratch]/bodyguard/frontend/dist/assets/'
+}
+
+Node.js v24.20.0

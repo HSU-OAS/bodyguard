@@ -1,0 +1,43 @@
+✓ Lockfile passes supply-chain policies (verified 18h ago)
+Lockfile is up to date, resolution step is skipped
+Packages: +194
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 194, reused 194, downloaded 0, added 194, done
+
+dependencies:
++ @mediapipe/tasks-vision 1.0.1
++ @react-three/drei 10.7.8
++ @react-three/fiber 9.8.1
++ react 19.3.0
++ react-dom 19.3.0
++ react-router 8.4.0
++ three 0.186.1
+
+devDependencies:
++ @biomejs/biome 2.5.14
++ @hey-api/openapi-ts 0.99.0
++ @playwright/test 1.63.0
++ @tailwindcss/vite 4.3.3
++ @testing-library/dom 10.4.2
++ @testing-library/react 16.3.3
++ @types/node 24.13.6
++ @types/react 19.3.0
++ @types/react-dom 19.3.0
++ @types/three 0.186.0
++ @vitejs/plugin-react 6.1.1
++ happy-dom 20.14.5
++ tailwindcss 4.3.3
++ typescript 6.0.3
++ vite 8.3.1
++ vitest 5.0.2
+
+Done in 733ms using pnpm v12.6.0
+[WebServer] (node:65237) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:65256) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] error when starting preview server:
+[WebServer] Error: The directory "dist" does not exist. Did you build your project?
+[WebServer]     at preview (file://[owned-private-scratch]/bodyguard/frontend/node_modules/.pnpm/vite@8.3.1_@types+node@24.13.6_jiti@2.7.0/node_modules/vite/dist/node/chunks/node.js:35374:198)
+[WebServer]     at async CAC.<anonymous> (file://[owned-private-scratch]/bodyguard/frontend/node_modules/.pnpm/vite@8.3.1_@types+node@24.13.6_jiti@2.7.0/node_modules/vite/dist/node/cli.js:811:18)
+Error: Process from config.webServer was not able to start. Exit code: 1

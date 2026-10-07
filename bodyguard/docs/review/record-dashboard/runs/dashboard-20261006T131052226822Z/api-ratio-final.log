@@ -1,0 +1,40 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: [workspace]/bodyguard/backend
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.15.1
+collected 492 items
+
+tests/test_account_withdrawal.py ...........................             [  5%]
+tests/test_auth.py ..................................................... [ 16%]
+...........                                                              [ 18%]
+tests/test_backup_restore_proof.py .....                                 [ 19%]
+tests/test_baseline_races.py .........                                   [ 21%]
+tests/test_baselines.py .......................................          [ 29%]
+tests/test_dashboard.py ..........................                       [ 34%]
+tests/test_database_ownership.py .                                       [ 34%]
+tests/test_google_auth.py .............................................. [ 44%]
+........................                                                 [ 48%]
+tests/test_license_inventory.py .........................                [ 54%]
+tests/test_notification_preferences.py ..............................    [ 60%]
+tests/test_password_reset.py ..........................                  [ 65%]
+tests/test_readiness.py ...................                              [ 69%]
+tests/test_record_deletion.py .........................                  [ 74%]
+tests/test_records.py ...............                                    [ 77%]
+tests/test_records_integrity.py ....                                     [ 78%]
+tests/test_summaries.py ................................................ [ 88%]
+...............................                                          [ 94%]
+tests/test_summary_races.py ..........                                   [ 96%]
+tests/test_summary_read_binding.py ......                                [ 97%]
+tests/test_summary_upload_binding.py ..                                  [ 97%]
+tests/test_withdrawal_races.py ..........                                [100%]
+
+=============================== warnings summary ===============================
+tests/test_password_reset.py::test_r01_actual_http_ack_precedes_blocked_delivery
+  /opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/threads.py:26: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    return await loop.run_in_executor(None, func_call)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: [owned-private-scratch]/api-ratio-final.xml -
+================== 492 passed, 1 warning in 156.54s (0:02:36) ==================

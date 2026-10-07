@@ -1,0 +1,191 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "[workspace]/bodyguard/frontend/node_modules/.pnpm/@playwright+test@1.63.0/node_modules/@playwright/test/cli.js",
+      "test",
+      "dashboard.spec.ts",
+      "--config",
+      "playwright.account.config.ts",
+      "--output",
+      "test-results/dashboard-20261006T074814536969Z"
+    ],
+    "configFile": "[workspace]/bodyguard/frontend/playwright.account.config.ts",
+    "rootDir": "[workspace]/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "[workspace]/bodyguard/frontend/test-results/dashboard-20261006T074814536969Z",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "[workspace]/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "account.spec.ts",
+          "password.spec.ts",
+          "google.spec.ts",
+          "records.spec.ts",
+          "design.spec.ts",
+          "withdrawal.spec.ts",
+          "datahelp.spec.ts",
+          "integration.spec.ts",
+          "security.spec.ts",
+          "resultrecord.spec.ts",
+          "ownercapture.spec.ts",
+          "recordedsession.spec.ts",
+          "authcoaching.spec.ts",
+          "notifications.spec.ts",
+          "summaries.spec.ts",
+          "minuteupload.spec.ts",
+          "dashboard.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/dashboard-20261006T074814536969Z/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "pnpm build && vite preview --host localhost",
+      "url": "http://localhost:4173",
+      "reuseExistingServer": false,
+      "timeout": 180000
+    }
+  },
+  "suites": [
+    {
+      "title": "dashboard.spec.ts",
+      "file": "dashboard.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "DW01 실제 저장→전체 하루/한 주 집계→기록 관리/복귀와 의료 화이트블루 웹",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 42582,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T07:48:23.694Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "dashboard-boundaries.json",
+                      "contentType": "application/json",
+                      "body": "eyJhY3R1YWxQcm9kdWN0aW9uQ2hyb21lSHR0cFNxbCI6dHJ1ZSwic3ludGhldGljUmVjb3Jkc01haWxGYXVsdHMiOnRydWUsImFjdHVhbFBlcnNvbkNhbWVyYUNsaW5pY2FsIjpmYWxzZSwiY2FtZXJhIjowLCJ1bmV4cGVjdGVkIjpbXSwiZXJyb3JzIjpbXSwibmV0d29yayI6W3sicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvYXV0aC9jc3JmIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9yZWNvcmRzL2Rhc2hib2FyZCIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL3JlY29yZHMvZGFzaGJvYXJkIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvYXV0aC9jc3JmIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9yZWNvcmRzL2Rhc2hib2FyZCIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL3JlY29yZHMvc3RyZXRjaCIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvYXV0aC9jc3JmIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9yZWNvcmRzL2Rhc2hib2FyZCIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9XSwic3RvcmFnZSI6WzAsMF0sImJyb3dzZXIiOiIxNTQuMC44MDM3Ljk4IiwidGltaW5nIjp7ImJyb3dzZXJUYXNrcyI6eyJsb25nVGFza3MiOlsyOTIsNjIyLDYzLDk1LDU0NCwxMzEsMjUyLDEzMyw0MzEsMTYzLDIyNSw2OCw1MiwxNTEsNzQsMTEyOSw1NywxODMsMTA4LDE3MSw2OCwxMjIsMTI3LDY2LDUxMV0sImZvY3VzIjowLCJ2aXNpYmlsaXR5IjpbInZpc2libGUiXX0sInJlcXVlc3RzIjpbeyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0IjoxMTE2LjE5OTk5OTk5OTI1NSwiZHVyYXRpb24iOjgyLjgwMDAwMDAwMDc0NTA2fSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhcnQiOjUyOTYuMzAwMDAwMDAwNzQ1LCJkdXJhdGlvbiI6Ny4xMDAwMDAwMDE0OTAxMTZ9LHsicGF0aCI6Ii9hcGkvdjEvYXV0aC9jc3JmIiwic3RhcnQiOjU3NzguNjk5OTk5OTk5MjU1LCJkdXJhdGlvbiI6MTIuNDAwMDAwMDAyMjM1MTc0fSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhcnQiOjY3NTYuODAwMDAwMDAwNzQ1LCJkdXJhdGlvbiI6NS42MDAwMDAwMDE0OTAxMTZ9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGFydCI6NzI1My42OTk5OTk5OTkyNTUsImR1cmF0aW9uIjo5LjcwMDAwMDAwMjk4MDIzMn0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0Ijo3NTg1LjkwMDAwMDAwMjIzNSwiZHVyYXRpb24iOjYuODk5OTk5OTk4NTA5ODg0fSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhcnQiOjEwMTkzLjMwMDAwMDAwMDc0NSwiZHVyYXRpb24iOjExLjE5OTk5OTk5OTI1NDk0Mn0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0IjoxMTIxNy42OTk5OTk5OTkyNTUsImR1cmF0aW9uIjo2LjIwMDAwMDAwMjk4MDIzMn0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJzdGFydCI6MTE2NjAuMTk5OTk5OTk5MjU1LCJkdXJhdGlvbiI6MTAuNjAwMDAwMDAxNDkwMTE2fSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhcnQiOjExNzM1LjUsImR1cmF0aW9uIjo2LjMwMDAwMDAwMDc0NTA1OH0seyJwYXRoIjoiL2FwaS92MS9yZWNvcmRzL2Rhc2hib2FyZCIsInN0YXJ0IjoxMTc1OS45MDAwMDAwMDIyMzUsImR1cmF0aW9uIjo3LjM5OTk5OTk5ODUwOTg4NH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0IjoxMTg1NiwiZHVyYXRpb24iOjUuOTAwMDAwMDAyMjM1MTc0fSx7InBhdGgiOiIvYXBpL3YxL3JlY29yZHMvc3RyZXRjaCIsInN0YXJ0IjoxNDE3MiwiZHVyYXRpb24iOjEwLjYwMDAwMDAwMTQ5MDExNn0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0IjoxNDU5Mi44MDAwMDAwMDA3NDUsImR1cmF0aW9uIjo2Ljg5OTk5OTk5ODUwOTg4NH0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJzdGFydCI6MTQ4OTIuMzAwMDAwMDAwNzQ1LCJkdXJhdGlvbiI6OC41fSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhcnQiOjE0OTg3LjYwMDAwMDAwMTQ5LCJkdXJhdGlvbiI6NS4xOTk5OTk5OTkyNTQ5NDJ9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGFydCI6MTUwMzIuOTAwMDAwMDAyMjM1LCJkdXJhdGlvbiI6OC44OTk5OTk5OTg1MDk4ODR9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGFydCI6MTUwOTguODAwMDAwMDAwNzQ1LCJkdXJhdGlvbiI6Ny4zMDAwMDAwMDA3NDUwNTh9XX19"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "90cda532ab82d274b30b-22eb47a214e24b1fb3c9",
+          "file": "dashboard.spec.ts",
+          "line": 185,
+          "column": 1
+        },
+        {
+          "title": "DW02 실제 빈 기간/잘못된 URL/503 복구/요청 시 계정 권위 경계",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 33229,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-06T07:49:10.909Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "dashboard-boundaries.json",
+                      "contentType": "application/json",
+                      "body": "eyJhY3R1YWxQcm9kdWN0aW9uQ2hyb21lSHR0cFNxbCI6dHJ1ZSwic3ludGhldGljUmVjb3Jkc01haWxGYXVsdHMiOnRydWUsImFjdHVhbFBlcnNvbkNhbWVyYUNsaW5pY2FsIjpmYWxzZSwiY2FtZXJhIjowLCJ1bmV4cGVjdGVkIjpbXSwiZXJyb3JzIjpbXSwibmV0d29yayI6W3sicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL3JlY29yZHMvZGFzaGJvYXJkIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGF0dXMiOjUwM30seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvYXV0aC9jc3JmIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9yZWNvcmRzL2Rhc2hib2FyZCIsInN0YXR1cyI6NDAzfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJzdGF0dXMiOjIwMH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXR1cyI6MjAwfSx7InBhdGgiOiIvYXBpL3YxL3JlY29yZHMvZGFzaGJvYXJkIiwic3RhdHVzIjoyMDB9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGF0dXMiOjIwMH1dLCJzdG9yYWdlIjpbMCwwXSwiYnJvd3NlciI6IjE1NC4wLjgwMzcuOTgiLCJ0aW1pbmciOnsiYnJvd3NlclRhc2tzIjp7ImxvbmdUYXNrcyI6WzU1MiwzMDYsNTQsNzAsMjM4LDExMiwzNjYsMzg3LDExMDksNjYsMTA5LDIyNSwxNTYsMjA2LDYxLDE5OSw2NCw5MTcsMTYzLDM5MCw2NSw4MywyMTcsMjA3LDMyOSw5Myw3OCwxMjAsNTM3LDYzLDY1LDQ0MSwxMTMsNTgsODMsNDU5LDIwMyw1MywxNTldLCJmb2N1cyI6MCwidmlzaWJpbGl0eSI6WyJ2aXNpYmxlIl19LCJyZXF1ZXN0cyI6W3sicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGFydCI6OTY2LjMwMDAwMDAwMDc0NTEsImR1cmF0aW9uIjo3LjYwMDAwMDAwMTQ5MDExNn0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0Ijo4NTY3LjUsImR1cmF0aW9uIjo2LjYwMDAwMDAwMTQ5MDExNn0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJzdGFydCI6OTA0NS44MDAwMDAwMDA3NDUsImR1cmF0aW9uIjo4fSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhcnQiOjkwNjUuNSwiZHVyYXRpb24iOjUuNjAwMDAwMDAxNDkwMTE2fSx7InBhdGgiOiIvYXBpL3YxL3JlY29yZHMvZGFzaGJvYXJkIiwic3RhcnQiOjkwNzMuMTAwMDAwMDAxNDksImR1cmF0aW9uIjo3LjU5OTk5OTk5Nzc2NDgyNn0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0Ijo5MTQzLjEwMDAwMDAwMTQ5LCJkdXJhdGlvbiI6OC4zMDAwMDAwMDA3NDUwNTh9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGFydCI6MTEyNjEuNSwiZHVyYXRpb24iOjI4MS40MDAwMDAwMDIyMzUyfSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsInN0YXJ0IjoxMTg2Mi40MDAwMDAwMDIyMzUsImR1cmF0aW9uIjo3LjV9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGFydCI6MTIyMTkuNSwiZHVyYXRpb24iOjE4fSx7InBhdGgiOiIvYXBpL3YxL3JlY29yZHMvZGFzaGJvYXJkIiwic3RhcnQiOjEyNzgxLjE5OTk5OTk5OTI1NSwiZHVyYXRpb24iOjUuOTAwMDAwMDAyMjM1MTc0fSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhcnQiOjE0MjQ3LjYwMDAwMDAwMTQ5LCJkdXJhdGlvbiI6MTAuMDk5OTk5OTk3NzY0ODI2fSx7InBhdGgiOiIvYXBpL3YxL2F1dGgvY3NyZiIsInN0YXJ0IjoxNDQ5NS4xOTk5OTk5OTkyNTUsImR1cmF0aW9uIjo2LjQwMDAwMDAwMjIzNTE3NH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0IjoxNDU3Ny41LCJkdXJhdGlvbiI6Ny4xOTk5OTk5OTkyNTQ5NDJ9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGFydCI6MTQ2MzAsImR1cmF0aW9uIjo3LjMwMDAwMDAwMDc0NTA1OH0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0IjoxNDgxNC40MDAwMDAwMDIyMzUsImR1cmF0aW9uIjo3LjA5OTk5OTk5Nzc2NDgyNn0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0IjoxNjQxOC4xOTk5OTk5OTkyNTUsImR1cmF0aW9uIjozMC43MDAwMDAwMDI5ODAyMzJ9LHsicGF0aCI6Ii9hcGkvdjEvYXV0aC9jc3JmIiwic3RhcnQiOjE2NzI2LjQwMDAwMDAwMjIzNSwiZHVyYXRpb24iOjguNjk5OTk5OTk5MjU0OTQyfSx7InBhdGgiOiIvYXBpL3YxL21lIiwic3RhcnQiOjE3MTc1LjEwMDAwMDAwMTQ5LCJkdXJhdGlvbiI6Ny44OTk5OTk5OTg1MDk4ODR9LHsicGF0aCI6Ii9hcGkvdjEvcmVjb3Jkcy9kYXNoYm9hcmQiLCJzdGFydCI6MTczODEuNSwiZHVyYXRpb24iOjEwLjYwMDAwMDAwMTQ5MDExNn0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0IjoxODEwMS4zMDAwMDAwMDA3NDUsImR1cmF0aW9uIjo5LjV9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGFydCI6MTg4MTcuNjAwMDAwMDAxNDksImR1cmF0aW9uIjo4LjM5OTk5OTk5ODUwOTg4NH0seyJwYXRoIjoiL2FwaS92MS9hdXRoL2NzcmYiLCJzdGFydCI6MTg5OTguMTk5OTk5OTk5MjU1LCJkdXJhdGlvbiI6Ny4yMDAwMDAwMDI5ODAyMzJ9LHsicGF0aCI6Ii9hcGkvdjEvbWUiLCJzdGFydCI6MTkwMjkuNjAwMDAwMDAxNDksImR1cmF0aW9uIjo1LjA5OTk5OTk5Nzc2NDgyNn0seyJwYXRoIjoiL2FwaS92MS9yZWNvcmRzL2Rhc2hib2FyZCIsInN0YXJ0IjoxOTAzNS42OTk5OTk5OTkyNTUsImR1cmF0aW9uIjo3LjEwMDAwMDAwMTQ5MDExNn0seyJwYXRoIjoiL2FwaS92MS9tZSIsInN0YXJ0IjoxOTEwMC45MDAwMDAwMDIyMzUsImR1cmF0aW9uIjo1LjV9XX19"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "90cda532ab82d274b30b-df703c3a613159fa6bfc",
+          "file": "dashboard.spec.ts",
+          "line": 258,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-06T07:48:15.318Z",
+    "duration": 89161.032,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

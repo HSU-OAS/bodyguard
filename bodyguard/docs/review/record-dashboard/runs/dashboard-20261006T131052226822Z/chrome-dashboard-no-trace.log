@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "[workspace]/bodyguard/backend/tests/run_browser.py", line 250, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "[workspace]/bodyguard/backend/tests/run_browser.py", line 59, in main
+    listener.bind(("127.0.0.1", 8000))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 1] Operation not permitted

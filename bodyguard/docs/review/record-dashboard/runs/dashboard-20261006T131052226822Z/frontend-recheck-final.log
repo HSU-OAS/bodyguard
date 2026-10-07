@@ -1,0 +1,57 @@
+$ vitest run --maxWorkers=1 --reporter=default --reporter=junit --outputFile.junit=[owned-private-scratch]/frontend-recheck-final.xml
+
+ RUN  v5.0.2 [workspace]/bodyguard/frontend
+
+ ✓ src/coaching/observationLoop.test.ts (19 tests) 1089ms
+ ✓ src/pages/MinuteSummaryPage.test.tsx (23 tests) 858ms
+ ✓ src/pages/NotificationPreferencesPage.test.tsx (14 tests) 665ms
+ ✓ src/coaching/resources.test.ts (40 tests) 742ms
+ ✓ src/pages/WithdrawalPage.test.tsx (20 tests) 895ms
+ ✓ src/pages/PasswordPage.test.tsx (18 tests) 546ms
+ ✓ src/pages/RecordDeletion.test.tsx (10 tests) 417ms
+ ✓ src/pages/RecordsPage.test.tsx (12 tests) 475ms
+ ✓ src/pages/MotionSelectionPage.test.tsx (13 tests) 577ms
+   ✓ S3.3 opens guidance detail chin-retraction without automatic coaching 355ms
+ ✓ src/pages/MeasureDemoPage.test.tsx (3 tests) 355ms
+ ✓ src/pages/RecordDashboardPage.test.tsx (11 tests) 362ms
+ ✓ src/coaching/session.test.ts (44 tests) 284ms
+ ✓ src/coaching/useRecordedCoaching.test.tsx (20 tests) 204ms
+ ✓ src/pages/DataHelpPage.test.tsx (5 tests) 174ms
+ ✓ src/auth.test.tsx (12 tests) 113ms
+ ✓ src/api/dashboard.test.ts (42 tests) 162ms
+ ✓ src/pages/GoogleAccount.test.tsx (14 tests) 153ms
+ ✓ src/coaching/recordedSession.test.ts (28 tests) 149ms
+ ✓ src/coaching/recordOwner.test.ts (16 tests) 137ms
+ ✓ src/App.test.tsx (3 tests) 90ms
+ ✓ src/summary/ownedMinuteUpload.test.ts (29 tests) 96ms
+ ✓ src/stretch/progression.test.ts (60 tests) 91ms
+ ✓ src/pages/ExplorePage.test.tsx (4 tests) 84ms
+ ✓ src/coaching/resultRecord.test.ts (29 tests) 39ms
+ ✓ src/pose/camera.test.ts (4 tests) 58ms
+ ✓ src/api/minuteSummaries.test.ts (40 tests) 36ms
+ ✓ src/api/records.test.ts (15 tests) 30ms
+ ✓ src/pages/MemberPage.test.tsx (1 test) 39ms
+ ✓ src/posture/landmarks.test.ts (8 tests) 4ms
+ ✓ src/api/recordDeletion.test.ts (13 tests) 28ms
+ ✓ src/pose/useMeasurement.test.tsx (9 tests) 29ms
+ ✓ src/api/withdrawal.test.ts (22 tests) 30ms
+ ✓ src/api/notificationPreferences.test.ts (18 tests) 33ms
+ ✓ src/summary/minuteAggregation.test.ts (35 tests) 12ms
+ ✓ src/avatar/faceTracking.test.ts (13 tests) 9ms
+ ✓ src/avatar/face.test.ts (12 tests) 6ms
+ ✓ src/posture/framing.test.ts (9 tests) 4ms
+ ✓ src/webDesign.test.ts (14 tests) 4ms
+ ✓ src/avatar/skeleton.test.ts (8 tests) 6ms
+ ✓ src/catalog/recommendation.test.ts (8 tests) 4ms
+ ✓ src/catalog/motions.test.ts (10 tests) 6ms
+ ✓ src/posture/hands.test.ts (7 tests) 4ms
+
+ Test Files  42 passed (42)
+      Tests  735 passed (735)
+   Start at  21:43:55
+   Duration  22.92s (tests 50%, environment 28%, import 18%, transform 4%, worker 1%)
+
+    Isolate  42 workers spawned · ~226ms startup each (spawn + environment, per file)
+             at least ~9.27s faster with isolate: false — reuses workers across files instead of one per file
+
+JUNIT report written to [owned-private-scratch]/frontend-recheck-final.xml

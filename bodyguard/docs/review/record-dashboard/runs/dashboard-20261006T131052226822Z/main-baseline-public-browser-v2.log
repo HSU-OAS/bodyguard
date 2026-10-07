@@ -1,0 +1,187 @@
+[WebServer] (node:65772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:65797) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 8 tests using 1 worker
+
+(node:65807) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 e2e/selection.spec.ts:4:1 › L08 actual RAF loop start-pause-resume-close with synthetic resources, no camera (13.4s)
+(node:65890) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 e2e/selection.spec.ts:32:1 › S3.2 protected production explore paths and purpose selection (15.7s)
+  ✘  3 e2e/selection.spec.ts:50:1 › S3.3 expanded library search, guidance detail and return (11.0s)
+(node:66017) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  4 e2e/selection.spec.ts:150:1 › C-02/03/04/07 desktop selection, literal search, detail sources and Back (12.0s)
+(node:66090) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  5 e2e/selection.spec.ts:182:1 › C-02/07 narrow laptop empty reset and keyboard operation (19.9s)
+(node:66179) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  6 e2e/selection.spec.ts:198:1 › C-04 missing direct ID is recoverable and not an external navigation (12.4s)
+(node:66305) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  7 e2e/selection.spec.ts:209:1 › C-01 guest and server failure close the preview without a candidate fallback (12.9s)
+(node:66443) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  8 e2e/selection.spec.ts:225:1 › C-06 actual production hides the dev route, catalog and entry link (9.7s)
+
+
+  1) e2e/selection.spec.ts:4:1 › L08 actual RAF loop start-pause-resume-close with synthetic resources, no camera
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: '원하는 동작을 골라보세요' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: '원하는 동작을 골라보세요' }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: '원하는 동작을 골라보세요' })
+
+
+       7 |   await page.goto('/dev/select')
+       8 |   // FR-U-04: probing during the auth checking/navigation window is not a ready-page test.
+    >  9 |   await expect(page.getByRole('heading', { name: '원하는 동작을 골라보세요' })).toBeVisible()
+         |                                                                      ^
+      10 |   const result = await page.evaluate(async () => {
+      11 |     const path = '/e2e/fixtures/observationLoopProbe.ts'
+      12 |     const module = (await import(path)) as typeof import('./fixtures/observationLoopProbe')
+        at [owned-private-scratch]/bodyguard/frontend/e2e/selection.spec.ts:9:70
+
+    Error Context: test-results/selection/selection-L08-actual-RAF-l-ad204-nthetic-resources-no-camera/error-context.md
+
+  2) e2e/selection.spec.ts:50:1 › S3.3 expanded library search, guidance detail and return ─────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: '원하는 동작을 골라보세요' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: '원하는 동작을 골라보세요' }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: '원하는 동작을 골라보세요' })
+
+
+      50 | test('S3.3 expanded library search, guidance detail and return', async ({ page }, info) => {
+      51 |   await page.goto('/dev/select')
+    > 52 |   await expect(page.getByRole('heading', { name: '원하는 동작을 골라보세요' })).toBeVisible()
+         |                                                                      ^
+      53 |   await expect(page.getByRole('status')).toContainText('안내 5개')
+      54 |   await page.getByRole('button', { name: '어깨', exact: true }).click()
+      55 |   await page.getByRole('link', { name: '팔 교차 어깨 늘이기 안내 보기' }).click()
+        at [owned-private-scratch]/bodyguard/frontend/e2e/selection.spec.ts:52:70
+
+    Error Context: test-results/selection/selection-S3-3-expanded-li-f82e9--guidance-detail-and-return/error-context.md
+
+  3) e2e/selection.spec.ts:150:1 › C-02/03/04/07 desktop selection, literal search, detail sources and Back
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: '원하는 동작을 골라보세요' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: '원하는 동작을 골라보세요' }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: '원하는 동작을 골라보세요' })
+
+
+      152 | }, info) => {
+      153 |   await page.goto('/dev/select')
+    > 154 |   await expect(page.getByRole('heading', { name: '원하는 동작을 골라보세요' })).toBeVisible()
+          |                                                                      ^
+      155 |   await page.getByRole('link', { name: '내 시작', exact: true }).click()
+      156 |   await page.getByRole('link', { name: '동작 선택 개발 검수' }).click()
+      157 |   await expect(page).toHaveTitle('동작 선택 · BODYGUARD')
+        at [owned-private-scratch]/bodyguard/frontend/e2e/selection.spec.ts:154:70
+
+    Error Context: test-results/selection/selection-C-02-03-04-07-de-b9d7e-rch-detail-sources-and-Back/error-context.md
+
+  4) e2e/selection.spec.ts:182:1 › C-02/07 narrow laptop empty reset and keyboard operation ────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('조건에 맞는 동작이 없습니다')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByText('조건에 맞는 동작이 없습니다') with timeout 5000ms
+      - waiting for getByText('조건에 맞는 동작이 없습니다')
+
+
+      185 |   const input = page.getByLabel('동작 검색')
+      186 |   await input.fill('.*')
+    > 187 |   await expect(page.getByText('조건에 맞는 동작이 없습니다')).toBeVisible()
+          |                                                   ^
+      188 |   await page.getByRole('button', { name: '검색과 필터 초기화' }).click()
+      189 |   await expect(input).toBeFocused()
+      190 |   await page.keyboard.press('Tab')
+        at [owned-private-scratch]/bodyguard/frontend/e2e/selection.spec.ts:187:51
+
+    Error Context: test-results/selection/selection-C-02-07-narrow-l-18320-eset-and-keyboard-operation/error-context.md
+
+  5) e2e/selection.spec.ts:198:1 › C-04 missing direct ID is recoverable and not an external navigation
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: '동작을 찾을 수 없습니다' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: '동작을 찾을 수 없습니다' }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: '동작을 찾을 수 없습니다' })
+
+
+      200 | }, info) => {
+      201 |   await page.goto('/dev/select?motion=https%3A%2F%2Fevil.example')
+    > 202 |   await expect(page.getByRole('heading', { name: '동작을 찾을 수 없습니다' })).toBeVisible()
+          |                                                                      ^
+      203 |   await expect(page.getByRole('button', { name: '코칭 준비 중' })).toHaveCount(0)
+      204 |   await page.screenshot({ path: info.outputPath('missing-motion.png'), fullPage: true })
+      205 |   await page.getByRole('link', { name: '목록으로 돌아가기' }).click()
+        at [owned-private-scratch]/bodyguard/frontend/e2e/selection.spec.ts:202:70
+
+    Error Context: test-results/selection/selection-C-04-missing-dir-111e4--not-an-external-navigation/error-context.md
+
+  6) e2e/selection.spec.ts:209:1 › C-01 guest and server failure close the preview without a candidate fallback
+
+    Error: expect(page).toHaveURL(expected) failed
+
+    Expected pattern: /\/login\?next=%2Fstart$/
+    Received string:  "http://localhost:5182/dev/select?motion=neck-side"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toHaveURL" with timeout 5000ms
+
+
+      212 |   meStatus = 401
+      213 |   await page.goto('/dev/select?motion=neck-side')
+    > 214 |   await expect(page).toHaveURL(/\/login\?next=%2Fstart$/)
+          |                      ^
+      215 |   await expect(page.getByText('목 옆으로 기울이기', { exact: true })).toHaveCount(0)
+      216 |   meStatus = 503
+      217 |   await page.goto('/dev/select')
+        at [owned-private-scratch]/bodyguard/frontend/e2e/selection.spec.ts:214:22
+
+    Error Context: test-results/selection/selection-C-01-guest-and-s-0386f-ithout-a-candidate-fallback/error-context.md
+
+  6 failed
+    e2e/selection.spec.ts:4:1 › L08 actual RAF loop start-pause-resume-close with synthetic resources, no camera
+    e2e/selection.spec.ts:50:1 › S3.3 expanded library search, guidance detail and return ──────────
+    e2e/selection.spec.ts:150:1 › C-02/03/04/07 desktop selection, literal search, detail sources and Back
+    e2e/selection.spec.ts:182:1 › C-02/07 narrow laptop empty reset and keyboard operation ─────────
+    e2e/selection.spec.ts:198:1 › C-04 missing direct ID is recoverable and not an external navigation
+    e2e/selection.spec.ts:209:1 › C-01 guest and server failure close the preview without a candidate fallback
+  2 passed (2.4m)

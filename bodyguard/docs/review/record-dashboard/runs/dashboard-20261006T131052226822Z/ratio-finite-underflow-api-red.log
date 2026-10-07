@@ -1,0 +1,68 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: [workspace]/bodyguard/backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1
+collected 26 items / 24 deselected / 2 selected
+
+tests/test_dashboard.py FF                                               [100%]
+
+=================================== FAILURES ===================================
+_ test_ratio_matches_emitted_float_durations_or_precision_null[1e-320-4e-321] __
+
+harness = <tests.conftest.Harness object at 0x108dea510>, measured = 1e-320
+bad = 4e-321
+
+    @pytest.mark.parametrize("measured,bad", [(1e-320, 4e-321), (60.0, 5e-324)])
+    def test_ratio_matches_emitted_float_durations_or_precision_null(harness, measured, bad):
+        h = harness
+        h.account()
+        item = payload(59)
+        item.update(
+            measured_sec=measured,
+            unmeasurable_sec=60 - measured,
+            present_sec=measured,
+            background_sec=0,
+            any_bad_sec=bad,
+        )
+        item["shoulder"].update(measured_sec=measured, bad_sec=bad)
+        assert post(h, item).status_code == 201
+        response = get(h)
+        assert response.status_code == 200
+        part = next(p for p in response.json()["metrics"] if p["part"] == "shoulder")
+        quotient = part["bad_sec"] / part["measured_sec"]
+>       assert part["bad_ratio"] == (None if quotient == 0 and bad > 0 else quotient)
+E       assert 0.4 == 0.40019762845849804
+
+tests/test_dashboard.py:294: AssertionError
+__ test_ratio_matches_emitted_float_durations_or_precision_null[60.0-5e-324] ___
+
+harness = <tests.conftest.Harness object at 0x1091ca490>, measured = 60.0
+bad = 5e-324
+
+    @pytest.mark.parametrize("measured,bad", [(1e-320, 4e-321), (60.0, 5e-324)])
+    def test_ratio_matches_emitted_float_durations_or_precision_null(harness, measured, bad):
+        h = harness
+        h.account()
+        item = payload(59)
+        item.update(
+            measured_sec=measured,
+            unmeasurable_sec=60 - measured,
+            present_sec=measured,
+            background_sec=0,
+            any_bad_sec=bad,
+        )
+        item["shoulder"].update(measured_sec=measured, bad_sec=bad)
+        assert post(h, item).status_code == 201
+        response = get(h)
+        assert response.status_code == 200
+        part = next(p for p in response.json()["metrics"] if p["part"] == "shoulder")
+        quotient = part["bad_sec"] / part["measured_sec"]
+>       assert part["bad_ratio"] == (None if quotient == 0 and bad > 0 else quotient)
+E       assert 0.0 == None
+
+tests/test_dashboard.py:294: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_dashboard.py::test_ratio_matches_emitted_float_durations_or_precision_null[1e-320-4e-321]
+FAILED tests/test_dashboard.py::test_ratio_matches_emitted_float_durations_or_precision_null[60.0-5e-324]
+======================= 2 failed, 24 deselected in 0.75s =======================
