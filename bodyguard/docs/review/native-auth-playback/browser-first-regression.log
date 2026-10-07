@@ -1,0 +1,19 @@
+
+Running 6 tests using 1 worker
+
+  ✓  1 e2e/authcoaching.spec.ts:100:1 › H02 actual provider prepares inert; explicit synthetic performance saves to own public record (832ms)
+  ✓  2 e2e/authcoaching.spec.ts:132:1 › H03 actual same-account refresh revokes old running session; no automatic recreation (526ms)
+  ✓  3 e2e/authcoaching.spec.ts:160:1 › H03 failed logout is not permission to keep coaching or save (518ms)
+  ✓  4 e2e/authcoaching.spec.ts:186:1 › H04 pagehide during synthetic pending permission reclaims late resource; pageshow never starts (629ms)
+  ✓  5 e2e/authcoaching.spec.ts:212:1 › H05 actual logout succeeds but never permits old session resume or save (554ms)
+  ✓  6 e2e/authcoaching.spec.ts:238:1 › H05 actual server revoked account returns 401 and refresh retires the owned lifecycle (544ms)
+
+  6 passed (11.6s)
+[WebServer] (node:11039) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:11053) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:11060) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:11068) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
