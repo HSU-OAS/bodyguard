@@ -366,7 +366,7 @@ export function createOwnedPlaybackResources<
       try {
         await retire(current)
       } catch {
-        /* Fixed sticky error below. */
+        /* Persistent cleanup failure is reported below. */
       }
     }
     await settle()
