@@ -1,5 +1,7 @@
 # S4.D2 — 클릭 가능한 코칭 시안의 실제 검증
 
+최신: [S4.D3 텍스트 최소화 보완](../coaching-prototype-minimal-copy/README.md)의 실제 화면·12건 검증을 현재 소스 근거로 사용한다. 아래 S4.D2는 당시 실행 기록이며 원본 증거를 덮어쓰지 않는다. 클릭 가능한 구조/제품 적용 범위는 여전히 CEO 검토 전이다.
+
 2026-10-07 · 기준 main `991ed2b33a1abc6158b3a177f8431a104c476ba0` · 독립 브랜치 `codex/coaching-design-prototype`
 
 ## 실제 작동하는 화면과 범위

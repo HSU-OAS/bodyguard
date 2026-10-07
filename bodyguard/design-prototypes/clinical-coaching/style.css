@@ -61,6 +61,10 @@ a:focus-visible {
 	outline: 3px solid var(--accent);
 	outline-offset: 4px;
 }
+summary:focus-visible {
+	outline: 3px solid var(--accent);
+	outline-offset: 4px;
+}
 body [hidden] {
 	display: none;
 }
@@ -357,9 +361,16 @@ p {
 	color: var(--muted);
 	font-size: 14px;
 }
-.note-divider {
+.coaching-details {
 	border-top: 1px solid var(--line);
-	margin: 20px 0;
+	margin: 16px 0 8px;
+}
+.coaching-details summary {
+	cursor: pointer;
+	color: var(--accent);
+	font-size: 14px;
+	min-height: 44px;
+	padding: 8px 0;
 }
 .coaching-note .example-note {
 	font-size: 12px;

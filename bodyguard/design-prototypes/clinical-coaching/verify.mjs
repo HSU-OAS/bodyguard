@@ -1,5 +1,6 @@
 // S4.D2 / NFR-08: 실제 Chrome 구조 검증. 제품 코칭·실측 검증이 아님.
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { createServer } from "node:http";
 import path from "node:path";
@@ -12,6 +13,31 @@ assert.ok(
 	"Provide a new, empty evidence directory; previous evidence must not be overwritten",
 );
 const out = path.resolve(process.argv[3]);
+const sourceFiles = [
+	"index.html",
+	"style.css",
+	"prototype.js",
+	"verify.mjs",
+	"assets/approved-reference.png",
+];
+const { createHash } = await import("node:crypto");
+const snapshot = () =>
+	Promise.all(
+		sourceFiles.map(async (file) => ({
+			file,
+			sha256: createHash("sha256")
+				.update(await readFile(path.join(root, file)))
+				.digest("hex"),
+		})),
+	);
+const sourcesBefore = await snapshot();
+// S4.D3 / NFR-08: 실제 실행 커밋과 시작·종료의 동일 소스를 함께 기록한다.
+const gitHead = () =>
+	execFileSync("git", ["rev-parse", "HEAD"], {
+		cwd: root,
+		encoding: "utf8",
+	}).trim();
+const executedHead = gitHead();
 const { chromium } = await import(
 	pathToFileURL(path.join(runtime, "node_modules/@playwright/test/index.mjs"))
 		.href
@@ -61,6 +87,7 @@ const url = `http://127.0.0.1:${server.address().port}`;
 const results = [];
 const requests = [];
 const cumulativeProof = { camera: 0, storageWrites: 0, errors: [] };
+let initialVisibleTextCharacters = null;
 let browser;
 let page;
 async function caseOf(name, run) {
@@ -146,6 +173,10 @@ try {
 		),
 	);
 	await caseOf("full-body initial boundary and roles", async () => {
+		initialVisibleTextCharacters = await page
+			.locator("body")
+			.innerText()
+			.then((text) => text.replace(/\s+/g, "").length);
 		assert.equal(await page.title(), "코칭 구조 시안 · BODYGUARD");
 		await page
 			.getByRole("button", { name: "전신", exact: true })
@@ -189,6 +220,47 @@ try {
 		);
 		await capture("full-1440.png");
 	});
+	await caseOf(
+		"auxiliary explanation collapsed keyboard toggle and reset",
+		async () => {
+			assert.equal(await page.locator(".coaching-details").count(), 1);
+			assert.equal(
+				await page.locator(".coaching-details").evaluate((node) => node.open),
+				false,
+			);
+			assert.ok(await page.locator("#note-description").isHidden());
+			assert.ok(await page.locator(".example-note").isVisible());
+			const summary = page.locator(".coaching-details summary");
+			await summary.focus();
+			await page.keyboard.press("Enter");
+			assert.ok(await page.locator("#note-description").isVisible());
+			assert.equal(
+				await summary.evaluate((node) => getComputedStyle(node).outlineWidth),
+				"3px",
+			);
+			await capture("explanation-open.png");
+			await page.keyboard.press("Space");
+			assert.ok(await page.locator("#note-description").isHidden());
+			assert.ok(
+				await summary.evaluate((node) => node === document.activeElement),
+			);
+			await summary.click();
+			await page.locator("#end").click();
+			await page
+				.getByRole("button", { name: "계속 검토", exact: true })
+				.click();
+			assert.equal(
+				await page.locator(".coaching-details").evaluate((node) => node.open),
+				true,
+			);
+			await page.locator("#end").click();
+			await page.locator("#confirm-end").click();
+			assert.equal(
+				await page.locator(".coaching-details").evaluate((node) => node.open),
+				false,
+			);
+		},
+	);
 	await caseOf("upper and detail synchronized view", async () => {
 		await page.getByRole("button", { name: "상반신", exact: true }).click();
 		assert.equal(
@@ -366,7 +438,12 @@ try {
 			assert.equal(styles.outlineWidth, "3px");
 			assert.equal(styles.transition, "0s");
 			const computed = await page.evaluate(() => {
-				const nodes = ["#pause", ".prototype-label", ".stage-caption"];
+				const nodes = [
+					"#pause",
+					".prototype-label",
+					".stage-caption",
+					".coaching-details summary",
+				];
 				return nodes.map((q) => {
 					const s = getComputedStyle(document.querySelector(q));
 					return { q, color: s.color, background: s.backgroundColor };
@@ -452,25 +529,21 @@ try {
 } finally {
 	await browser?.close();
 	await new Promise((resolve) => server.close(resolve));
-	const sourceFiles = [
-		"index.html",
-		"style.css",
-		"prototype.js",
-		"verify.mjs",
-		"assets/approved-reference.png",
-	];
-	const { createHash } = await import("node:crypto");
-	const sources = await Promise.all(
-		sourceFiles.map(async (file) => ({
-			file,
-			sha256: createHash("sha256")
-				.update(await readFile(path.join(root, file)))
-				.digest("hex"),
-		})),
+	const sources = await snapshot();
+	assert.equal(gitHead(), executedHead, "Git HEAD changed during browser run");
+	assert.deepEqual(
+		sources,
+		sourcesBefore,
+		"Source changed during actual browser run",
 	);
 	const report = {
 		timestamp: new Date().toISOString(),
-		sourceHashTiming: "end of this harness run",
+		executedHead,
+		sourceHashTiming:
+			"captured before server/browser startup and after teardown",
+		sourcesBefore,
+		sourceUnchangedAcrossExecution: true,
+		initialVisibleTextCharacters,
 		scope:
 			"static design prototype UI only; not webcam/avatar/clinical/product verification",
 		sources,

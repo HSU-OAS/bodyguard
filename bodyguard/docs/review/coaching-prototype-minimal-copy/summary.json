@@ -1,0 +1,196 @@
+{
+  "timestamp": "2026-10-07T07:39:42.848Z",
+  "status": "scoped-prototype-tests-passed",
+  "executedHead": "eebd9f19061972ed97321ac0f854c5f1f00e7e34",
+  "sourceManifest": [
+    {
+      "file": "index.html",
+      "sha256": "9a79943c2ceb5269d1d933a49214e4dabe67595c2e1cc0aa9d27a5ae53e7b678"
+    },
+    {
+      "file": "style.css",
+      "sha256": "21c825d0a9e8da958344ecd20d8fae905d90255fa3d18afb6142f16bd82d2312"
+    },
+    {
+      "file": "prototype.js",
+      "sha256": "f86b5f4ebc1e4e4b7643430225e3cc98b8c8be870dca24a8b7f1e02fdfaad429"
+    },
+    {
+      "file": "verify.mjs",
+      "sha256": "5336cb0abf40d95d3b00998e9e8da1ac19bcca59720ea4f81e1091f1892d6d69"
+    },
+    {
+      "file": "assets/approved-reference.png",
+      "sha256": "ea4677323030a5d4266aa8f32ff3bf74738f2d088871b5084038621f9a761377"
+    }
+  ],
+  "sourceUnchangedAcrossExecution": true,
+  "initialBootstrap": {
+    "failed": true,
+    "reason": "missing-local-playwright-runtime",
+    "browserChecksExecuted": false
+  },
+  "runs": {
+    "baseline-runnable": {
+      "timestamp": "2026-10-07T07:29:12.872Z",
+      "passed": 11,
+      "failed": 0,
+      "sourceHashTiming": "end of this harness run",
+      "executedHead": null
+    },
+    "red": {
+      "timestamp": "2026-10-07T07:31:11.750Z",
+      "passed": 11,
+      "failed": 1,
+      "sourceHashTiming": "captured before server/browser startup and after teardown",
+      "executedHead": null
+    },
+    "green": {
+      "timestamp": "2026-10-07T07:32:36.601Z",
+      "passed": 12,
+      "failed": 0,
+      "sourceHashTiming": "captured before server/browser startup and after teardown",
+      "executedHead": null
+    },
+    "final": {
+      "timestamp": "2026-10-07T07:39:42.848Z",
+      "passed": 12,
+      "failed": 0,
+      "sourceHashTiming": "captured before server/browser startup and after teardown",
+      "executedHead": "eebd9f19061972ed97321ac0f854c5f1f00e7e34"
+    }
+  },
+  "initialVisibleDOMTextCharacters": {
+    "before": 291,
+    "after": 182,
+    "excludesWhitespaceAndImageText": true
+  },
+  "runtimeContract": [
+    {
+      "file": "package.json",
+      "sha256": "fc5513803b158f0829f44e17a43335bcc0319d5476cb41abf8405656946363b7",
+      "sameAsPrototype": true
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "sha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+      "sameAsPrototype": true
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "baseline-runnable/report.json",
+      "sha256": "dc72afff232b90aaf22199faa1789a80425e7abba2f63f567bcc2c14641301db",
+      "bytes": 1910
+    },
+    {
+      "path": "red/report.json",
+      "sha256": "20bc710d8e3af58451b1857e6d1bb6a51cb4f97f0492061d8e815f9a7e8aeea9",
+      "bytes": 2901
+    },
+    {
+      "path": "green/report.json",
+      "sha256": "52edc121ca733b1b6bd3a90fc71efd1a32879194e44b36bbb23670fc1e38255c",
+      "bytes": 2799
+    },
+    {
+      "path": "final/report.json",
+      "sha256": "20be65fad8db8c103c0cbc56c2fd6c92d3476c829fe90dc763c5477c908d21bf",
+      "bytes": 2861
+    },
+    {
+      "path": "final/asset-failure.png",
+      "sha256": "9f38354aa6fe63b6b35f235b37d16717fbeea9f4d5b37f81b04fc8f6c32ca1d4",
+      "bytes": 64415
+    },
+    {
+      "path": "final/boundary.json",
+      "sha256": "7d1f0f5a5b93eea1512d4781459b5a0ae3c1c742811016d71f1e29db835da3df",
+      "bytes": 292
+    },
+    {
+      "path": "final/contrast.json",
+      "sha256": "dce73d858fb022c6908ba9dc9f45f82c166689ce479e142af486dd762dfd7779",
+      "bytes": 722
+    },
+    {
+      "path": "final/css-zoom-200.png",
+      "sha256": "d9759474ede7c6ec3527675f9e6067b6a5c9270f3e7f7c587c32ea1a7338a75a",
+      "bytes": 547987
+    },
+    {
+      "path": "final/detail-1440.png",
+      "sha256": "6912ff3edc73b68164ff964ef8483b5c83b583a2daf904b5d2bbe2684c1793db",
+      "bytes": 244680
+    },
+    {
+      "path": "final/explanation-open.png",
+      "sha256": "ec2b74bd97e8ca0a1e2b97cd1ea33c958635a36ef22abc03b698dd613acef56b",
+      "bytes": 270304
+    },
+    {
+      "path": "final/full-1024.png",
+      "sha256": "46d0f9d8e2175d215759673ae829c4ad136dc6e50b1353a4a86dc21474d806a1",
+      "bytes": 189322
+    },
+    {
+      "path": "final/full-1280.png",
+      "sha256": "173089c2193515f632d3deb1ead358c1ed40f6dafa0a98388ab52c24d291b621",
+      "bytes": 194816
+    },
+    {
+      "path": "final/full-1440.png",
+      "sha256": "ccfe99e576ad88f4deb91ddf8e6dd15f9c138baa8327f031bd58b39fa6356b14",
+      "bytes": 256678
+    },
+    {
+      "path": "final/full-820.png",
+      "sha256": "07fabe3b82d26d3316b880640e0c5d70ca6078f4557bcc728379c3c6271f3399",
+      "bytes": 211410
+    },
+    {
+      "path": "final/upper-1440.png",
+      "sha256": "c957dce8d49e77a1847bfffe60074e58902e7a2384d22cb176983442fcd7af37",
+      "bytes": 310577
+    }
+  ],
+  "privateLogs": [
+    {
+      "name": "baseline.log",
+      "sha256": "8cdd46362cea6d3972e97ae9a82d0b9dc09f51382fdf149c901cee37265c0c8b",
+      "bytes": 1867,
+      "rawPublished": false
+    },
+    {
+      "name": "baseline-runnable.log",
+      "sha256": "2e1f23a798dcbbd8a702438db6b7e3a2a82f20e1887732bafd20a0285f721ffe",
+      "bytes": 2974,
+      "rawPublished": false
+    },
+    {
+      "name": "red.log",
+      "sha256": "bf50ace7b1bc83c02d7e5566eafc3c950e94851642c67cc9eba4b6d8d5f70f6f",
+      "bytes": 4161,
+      "rawPublished": false
+    },
+    {
+      "name": "green.log",
+      "sha256": "4a12f63ff72ee6b3c99b09ce6fa5932a8b62e8eb0f21547f08f12284df6df4d4",
+      "bytes": 3988,
+      "rawPublished": false
+    },
+    {
+      "name": "final.log",
+      "sha256": "34d6144a918a0540f4506623d1156c78fa1b3526f9f69094e506e956f9312232",
+      "bytes": 4050,
+      "rawPublished": false
+    }
+  ],
+  "scopedTestsPassed": true,
+  "structureApproved": false,
+  "productDesignApplied": false,
+  "avatarFinalAppearanceVerified": false,
+  "actualCameraClinicalParticipantVerification": false,
+  "operationalChanges": false,
+  "allStagesComplete": false
+}

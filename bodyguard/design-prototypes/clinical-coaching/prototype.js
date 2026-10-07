@@ -33,16 +33,13 @@
 		return: "복귀: 실제 코칭에서는 검증된 복귀 과정을 보여줍니다.",
 	};
 	const views = {
-		full: [
-			"전신이 보이는 구도",
-			"두 아바타를 머리부터 발끝까지 함께 보여줍니다.",
-		],
+		full: ["전신 구도", "두 아바타를 머리부터 발끝까지 함께 보여줍니다."],
 		upper: [
-			"상반신을 크게",
+			"상반신 구도",
 			"두 아바타의 머리·목·어깨·몸통을 같은 배율로 보여줍니다.",
 		],
 		detail: [
-			"같은 부위를 자세히",
+			"어깨 자세히",
 			"두 아바타의 어깨 주변을 함께 확대합니다. 화면 확대는 촬영 가능 범위를 바꾸지 않습니다.",
 		],
 	};
@@ -64,8 +61,7 @@
 		find("#default-view").value = view;
 		find("#note-title").textContent = views[view][0];
 		find("#note-description").textContent = views[view][1];
-		if (announce)
-			status(`${views[view][0]}로 바꿨습니다. 정적 이미지의 구도만 바뀝니다.`);
+		if (announce) status(`${views[view][0]} · 정적 이미지`);
 	}
 	function setStage(next) {
 		stage = next;
@@ -81,9 +77,7 @@
 			);
 		});
 		find("#guide-description").textContent = explanations[stage];
-		status(
-			`${states[stage]} 단계의 안내 예시입니다. 실제 동작 재생·수행 판정은 없습니다.`,
-		);
+		status(`${states[stage]} 단계 안내 예시 · 실제 판정 없음`);
 	}
 	function openDialog(id, trigger) {
 		dialogTrigger = trigger;
@@ -210,12 +204,11 @@
 			"실제 코칭에서는 동작에 필요한 관절이 보이는지 먼저 확인합니다.";
 		find("#show-guidance").checked = true;
 		find(".coaching-note").hidden = false;
+		find(".coaching-details").open = false;
 		setView("full", false);
 		setStage("prepare");
 		find("#end-dialog").close();
-		status(
-			"시안 조작을 종료하고 시작 상태로 돌아왔습니다. 저장된 데이터는 없습니다.",
-		);
+		status("처음으로 돌아왔습니다. 저장된 데이터는 없습니다.");
 	});
 	let failed = false;
 	let retryCleanup = () => {};
@@ -267,6 +260,5 @@
 	});
 	setStage(stage);
 	setView("full", false);
-	if (!failed)
-		status("보기와 버튼 구조만 작동합니다. 카메라는 사용하지 않습니다.");
+	if (!failed) status("정적 시안입니다. 카메라는 사용하지 않습니다.");
 })();
