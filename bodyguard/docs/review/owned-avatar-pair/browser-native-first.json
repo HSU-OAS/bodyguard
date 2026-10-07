@@ -1,0 +1,211 @@
+{
+  "head": "2c4ec7f581e847288acbb0b2ae32d3c0bb7e1d00",
+  "sourceBefore": {
+    "src/avatar/ownedAvatarPair.ts": "40524dcd51ff455a90abd4cd75e33c645cca31e99f02e477b0a1f34ae11e6845",
+    "src/avatar/observedPoseRig.ts": "680235478e06efc111cc04515619f76668806bb64f0b2687f2144443c453c606",
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "src/coaching/resources.ts": "0832d662b19b522153f7e13507147a7b33f264d0eee94f10e07e06758d1fa029",
+    "e2e/fixtures/ownedAvatarPairProbe.ts": "bac061ee72902a719278e9616821a306f076f104eb688fc94a33e768b290a32d",
+    "e2e/fixtures/ownedAvatarPair.vite.ts": "89cde3ce584a7c0664120631fbe77432cd75ff32ed3a3c7d6d16d61c4b4f9e92",
+    "scripts/test-owned-avatar-browser.mjs": "3d316e74f02cc9f4b2914063ccde0042597cef65caeddb6fbda329990019f893",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "assetCommit": "25a9bd6c7392890e3b5d5d6ae1046bb7087d56ad",
+  "assetHashes": {
+    "male": "cc85bcd449f3f31347e4f7174986d41e4aca3067990f5d8a2e6ba3a099171927",
+    "female": "27c10902aa377e995bdbc115ab773cf22f8ea38582c49820304a33ad7685f25a"
+  },
+  "actualChrome": true,
+  "actualWebGL": true,
+  "syntheticPorts": true,
+  "syntheticObservations": true,
+  "actualSDK": false,
+  "actualCamera": false,
+  "releaseAvatar": false,
+  "samples": [
+    {
+      "gender": "male",
+      "passed": false,
+      "stages": [
+        {
+          "case": "prepared",
+          "gender": "male",
+          "generation": 1,
+          "closed": false,
+          "lateReady": false,
+          "models": 2,
+          "independent": true,
+          "framing": [
+            true,
+            true
+          ],
+          "state": {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 8
+          },
+          "userChanged": false,
+          "referenceUnchanged": true,
+          "attached": 2,
+          "sources": [
+            {
+              "generation": 1,
+              "mode": "valid",
+              "geometry": 0,
+              "material": 0,
+              "skeleton": 0,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            }
+          ],
+          "notices": [
+            {
+              "type": "ready",
+              "generation": 1
+            }
+          ],
+          "fakeDisposed": {
+            "camera": 0,
+            "inference": 0
+          },
+          "clonesReleased": 0,
+          "cloneTotal": 19,
+          "releaseEvent": false,
+          "memory": {
+            "geometries": 5,
+            "textures": 11
+          },
+          "calls": 10,
+          "triangles": 576508
+        },
+        {
+          "case": "observed-move",
+          "gender": "male",
+          "generation": 1,
+          "closed": false,
+          "lateReady": false,
+          "models": 2,
+          "independent": true,
+          "framing": [
+            true,
+            true
+          ],
+          "state": {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          "userChanged": true,
+          "referenceUnchanged": true,
+          "attached": 2,
+          "sources": [
+            {
+              "generation": 1,
+              "mode": "valid",
+              "geometry": 0,
+              "material": 0,
+              "skeleton": 0,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            }
+          ],
+          "notices": [
+            {
+              "type": "ready",
+              "generation": 1
+            }
+          ],
+          "fakeDisposed": {
+            "camera": 0,
+            "inference": 0
+          },
+          "clonesReleased": 0,
+          "cloneTotal": 19,
+          "releaseEvent": false,
+          "memory": {
+            "geometries": 5,
+            "textures": 11
+          },
+          "calls": 10,
+          "triangles": 576508
+        }
+      ],
+      "previewSha": "d6f734f5c9ce707f2ede41f01a0aca952a298c69e1a472abc3a0dab8ca53cae8"
+    }
+  ],
+  "browser": "154.0.8037.98",
+  "failure": {
+    "name": "AssertionError",
+    "message": "Expected values to be strictly equal:\n\n1 !== 0\n"
+  },
+  "failureState": {
+    "gender": "male",
+    "generation": 1,
+    "closed": false,
+    "lateReady": false,
+    "models": 0,
+    "independent": true,
+    "framing": [],
+    "state": {
+      "status": "closed",
+      "tracked": 0,
+      "total": 8
+    },
+    "userChanged": true,
+    "referenceUnchanged": true,
+    "attached": 0,
+    "sources": [
+      {
+        "generation": 1,
+        "mode": "valid",
+        "geometry": 5,
+        "material": 2,
+        "skeleton": 1,
+        "geometryTotal": 5,
+        "materialTotal": 2,
+        "skeletonTotal": 1,
+        "unchanged": true
+      }
+    ],
+    "notices": [
+      {
+        "type": "ready",
+        "generation": 1
+      }
+    ],
+    "fakeDisposed": {
+      "camera": 1,
+      "inference": 1
+    },
+    "clonesReleased": 19,
+    "cloneTotal": 19,
+    "releaseEvent": true,
+    "memory": {
+      "geometries": 0,
+      "textures": 1
+    },
+    "calls": 0,
+    "triangles": 0
+  },
+  "boundary": {
+    "external": 0,
+    "camera": 0,
+    "errors": []
+  },
+  "sourceAfter": {
+    "src/avatar/ownedAvatarPair.ts": "40524dcd51ff455a90abd4cd75e33c645cca31e99f02e477b0a1f34ae11e6845",
+    "src/avatar/observedPoseRig.ts": "680235478e06efc111cc04515619f76668806bb64f0b2687f2144443c453c606",
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "src/coaching/resources.ts": "0832d662b19b522153f7e13507147a7b33f264d0eee94f10e07e06758d1fa029",
+    "e2e/fixtures/ownedAvatarPairProbe.ts": "bac061ee72902a719278e9616821a306f076f104eb688fc94a33e768b290a32d",
+    "e2e/fixtures/ownedAvatarPair.vite.ts": "89cde3ce584a7c0664120631fbe77432cd75ff32ed3a3c7d6d16d61c4b4f9e92",
+    "scripts/test-owned-avatar-browser.mjs": "3d316e74f02cc9f4b2914063ccde0042597cef65caeddb6fbda329990019f893",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  }
+}

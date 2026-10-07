@@ -1,6 +1,6 @@
 # S2.T3 — 두 아바타의 준비·실패·종료 소유권
 
-상태: 명세·최초 하네스 / baseline `2c4ec7f581e847288acbb0b2ae32d3c0bb7e1d00` / `codex/owned-avatar-pair`
+상태: 비공개 구현·검증 통과 / runtime `43696772a5dbd57d661ba24811fd1f6046d39ba4` / baseline `2c4ec7f581e847288acbb0b2ae32d3c0bb7e1d00` / `codex/owned-avatar-pair`
 
 FR-A-01/02/03·FR-M-07·NFR-07/08. S2.T2의 관찰 연결을 실제 소유권이 있는 아바타 준비 자원으로 묶는다. loader가 반환한 새 소유 GLB scene·두 cloned skeleton·사용자 rig를 함께 관리한다. 준비 실패·abort·종료·뒤늦은 load에서 원본/복제 자원을 정리하고 과거 모델을 준비 완료로 쓰지 않는다. 이 자원 준비는 **외형·시범·카메라·판정·코칭의 출시 적격성 증거가 아니다**.
 
@@ -17,3 +17,7 @@ FR-A-01/02/03·FR-M-07·NFR-07/08. S2.T2의 관찰 연결을 실제 소유권이
 testing-strategy로 결정적 경계 시험과 실제 GLB/native 시험을 분리한다. code-review의 자원 누수·중복/재진입 dispose·늦은 응답·정리 실패·source 격리를 검사한다. 공개 HTML/제품 디자인/판정·에셋/Blender 조형·API/SQL·SDK 통신·CI·시크릿·운영/배포는 변경하지 않는다. 남녀 A37은 미완성 검수용이며 올바른 시범이 아니다.
 
 D2-A/M/T/R/I/P·디자인/SDK 승인·Docker·실측/참여자·외부/운영 및 전체1~6 필수 조건은 유지한다. PR65 실제 merge2c4ec7f/main 포함·source와 같은 tree·브랜치 보존을 확인하고 그 최신 main에서 시작했다. 현재 Docker 읽기 확인은 daemon socket 없음으로 실패했으며 연결/실행 완료로 표시하지 않는다.
+
+## 실행 결과
+
+[실제 흐름·미리보기·실패·남은 조건](../review/owned-avatar-pair/README.md). frontend826·실제 Chrome 남녀2개 자원 흐름·정적/타입/assets/build/guard·공개 byte 동일/source/63증거 SHA를 통과했다. 최소 문구 원칙과 미승인 제품 UI 경계는 유지했다. 엔진 PBR 공용 캐시1은 별도 renderer baseline이며 전체 GPU 종료를 완료로 세지 않는다. 추가 alias/재진입/controller 시험은 최초 RED8과 구분한다. 원본·GLB/Blender·같은 부위 조형 변경0. 출시 적격 동작0·D2-A/M/T/R/I/P·전체1~6과 실제 웹캠/최종 아바타/공개 코칭은 미완료다. 조건부 PR 게이트를 진행하며 비용/계정/시크릿/운영 migration·배포/출시는 하지 않는다.
