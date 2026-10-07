@@ -13,6 +13,7 @@ runtime `682ea56cff27d6238702beea9467c925f7c65f1f` · baseline PR #66 merge `d4d
 - 최종18 단위/전체844 frontend·타입/Biome·기존 캐시 assets·Vite build·공개 guard 통과. guard의 시험 sentinel은 실제 실패1 뒤 그 시험 파일만 제거하고 통과0을 확인했다. 공개 JS355151/CSS31199 bytes와 SHA는 PR #66 출력과 같다. 공개 GLB0.
 - native 최종: 실제 SDK 호출/결과 close는 남녀 각2, detector close 각1. 입력 보존/전송·카메라 호출·외부 routed 요청·pageerror0. 시험 전용 CSP에서 connect 시도2를 막았고 거부 proxy에서11건을 거절했다. 요청 주소/내용은 수집하지 않았으므로 proxy 요청의 원인을 분류하지 않는다. **제품 SDK 통신 정책은 여전히 승인 대기**다.
 - renderer는 아바타 전 측정한 baseline(geometry0/공용 PBR texture1)로 복귀했다. 전체 GPU/worker 메모리 해제 증거는 아니다. SDK/GLB/lock 변경0. native source 전후13개와 보존36개 원본 증거 SHA를 검증했다.
+- 원본 로그의 끝 빈 줄9건 때문에 [문서 diff 검사](diff-raw-evidence-red.log)가 exit2로 실패했다. 최초 원본36개는 commit96171d5에 보존한다. 해당9개는 현재 폴더에도 byte 동일한 `.raw.gz`로 보존하고 읽기용 로그의 EOF만 정리했다. SHA/압축 해제를 재확인하며 코드·Git 공백 검사 정책은 변경하지 않는다.
 
 code-review는 작성자 검토이며 독립 리뷰가 아니다. 순서/재진입·abort/late·close 누락/실패·복사 격리·입력/renderer/서버 정리·개인정보·공개 경계를 확인했다. 범위 내 미해결 P1/P2는0이다. 초기 렌더러 준비/최종 서버 정리 보완은 정적 검토에 따른 방어 코드이며 실제 실패 재현으로 표기하지 않는다.
 
