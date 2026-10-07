@@ -9,6 +9,12 @@ type Failure =
   | 'asset-error'
   | 'ownership-error'
   | 'cleanup-error'
+// FR-A-02/NFR-08: partial/late factory cleanup is not an ordinary asset failure.
+export class ResourceCleanupError extends Error {
+  constructor() {
+    super('Resource cleanup failed')
+  }
+}
 export type ResourceNotice = Readonly<
   { type: 'ready'; generation: number } | { type: 'error'; generation: number; reason: Failure }
 >
@@ -76,18 +82,22 @@ export function createResourceController(ports: Ports, notify: Observer) {
     const task = Promise.resolve()
       .then(() => claim.dispose.call(claim.resource))
       .catch(() => {
-        poisoned = true
-        const owner = detach()
-        if (owner) void retire(owner)
-        if (!cleanupReported) {
-          cleanupReported = true
-          emit({ type: 'error', generation: claim.owner.generation, reason: 'cleanup-error' })
-        }
+        cleanupBroke(claim.owner.generation)
       })
     claim.disposal = task
     pendingCleanup.add(task)
     void task.then(() => pendingCleanup.delete(task))
     return task
+  }
+
+  function cleanupBroke(generation: number) {
+    poisoned = true
+    const owner = detach()
+    if (owner) void retire(owner)
+    if (!cleanupReported) {
+      cleanupReported = true
+      emit({ type: 'error', generation, reason: 'cleanup-error' })
+    }
   }
 
   async function retire(owner: Owner) {
@@ -129,8 +139,11 @@ export function createResourceController(ports: Ports, notify: Observer) {
         return false
       }
       cleanup = resource.dispose
-    } catch {
-      await fail(owner, reason)
+    } catch (error) {
+      if (error instanceof ResourceCleanupError) {
+        cleanupBroke(owner.generation)
+        await settleCleanup()
+      } else await fail(owner, reason)
       return false
     }
     if (claims.has(resource)) {
