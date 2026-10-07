@@ -20,15 +20,19 @@ type State = Readonly<{
 
 // Explicit GLTFLoader names for the existing MPFB rig. Not guessed from substring matches.
 const LIMBS = [
-  ['upperarm01L', 11, 13],
-  ['lowerarm01L', 13, 15],
-  ['upperarm01R', 12, 14],
-  ['lowerarm01R', 14, 16],
-  ['upperleg01L', 23, 25],
-  ['lowerleg01L', 25, 27],
-  ['upperleg01R', 24, 26],
-  ['lowerleg01R', 26, 28],
+  ['upperarm01L', 'lowerarm01L', 11, 13],
+  ['lowerarm01L', 'wristL', 13, 15],
+  ['upperarm01R', 'lowerarm01R', 12, 14],
+  ['lowerarm01R', 'wristR', 14, 16],
+  ['upperleg01L', 'lowerleg01L', 23, 25],
+  ['lowerleg01L', 'footL', 25, 27],
+  ['upperleg01R', 'lowerleg01R', 24, 26],
+  ['lowerleg01R', 'footR', 26, 28],
 ] as const
+
+export const OBSERVED_LIMB_BINDINGS = Object.freeze(
+  LIMBS.map(([bone, anchor]) => Object.freeze({ bone, anchor })),
+)
 
 /** Both arrays must be from one provider observation. This only converts accepted limb endpoints;
  * trust scores are model estimates, not proof of real camera accuracy. No head/twist is inferred.
@@ -40,10 +44,11 @@ export function observedLimbDirections(
 ): Directions {
   const trusted = trustedJoints(image)
   const result: Record<string, readonly number[]> = {}
-  for (const [name, from, to] of LIMBS) {
+  for (const [name, , from, to] of LIMBS) {
     const a = world?.[from]
     const b = world?.[to]
     if (!trusted[from] || !trusted[to] || !a || !b) continue
+    if (![a.x, a.y, a.z, b.x, b.y, b.z].every(Number.isFinite)) continue
     const value = [(b.x - a.x) * (mirror ? -1 : 1), -(b.y - a.y), -(b.z - a.z)]
     if (value.every(Number.isFinite) && Math.hypot(...value) > 0)
       result[name] = Object.freeze(value)

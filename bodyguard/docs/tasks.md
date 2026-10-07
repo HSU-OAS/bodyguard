@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-08 같은 관찰 결과→사용자 리그: [S2.T2](stories/observed-avatar-pose.md)에서 한 번의 image/world 결과와 원본 세대·시각을 기존 GLB에 연결했다. 첫 실제 Chrome 남녀 각각 움직임→가림/복수 보류→복구→만료/종료, 비교 모델·원본 불변과 전신 구도를 확인했다. 합성 관찰이며 실제 SDK/카메라·올바른 시범/피드백·최종 외형은 아니다. source·최종 증거·PR 게이트를 진행하며 D2-A/M/T/R/I/P·디자인/SDK/외부/운영 및 전체1~6 기준은 유지한다. PR #64의 실제 merge48d3154·main 포함·브랜치 보존을 확인하고 그 최신 main에서 시작했다. 아래는 시점별 기록이다.
+
 2026-10-08 두 아바타 움직임 연결: [S2.T1](stories/avatar-directional-rig.md)에서 기존 남녀 GLB의 두 독립 리그에 서로 다른 사지 방향을 전달하고 발끝까지의 실제 WebGL 구도를 확인했다. [검증 화면·남은 문제](review/avatar-directional-rig/README.md). 비공개 합성 입력이며 공개 코칭/외형 수정·카메라·목/손 추적·올바른 시범/피드백은 아직 아니다. D2-T와 전체1~6은 미완료이고 PR 게이트를 진행한다. 기존 모델/실패·원본·승인·디자인/SDK/운영 경계는 유지한다.
 
 2026-10-08 계정·설정·알림 수명 연결: [S4.N4](stories/owned-alert-lifecycle.md)에서 실제 계정 권위/본인 설정 조회를 비공개 전달 부품에 연결했다. 실제 웹 설정 저장→enabled 종류 안내→선택/닫기→재조회·명시 재준비→로그아웃204/guest/API401을 production Chrome·API·격리 SQL로 확인했다(안내/메일 합성). 재진입/이탈 경계를 보완했고 [실패·현재 소스·작성자 리뷰](review/owned-alert-lifecycle/README.md)를 보존했다. 최종765 DOM/실제 계정 Chrome3·정적/build/guard 통과, 기존 선택8은 최종 private handoff 직전 동일 공개 JS/CSS에서 확인했다. 공개 화면/정책/SDK/아바타/운영 변경0이며 조건부 PR 게이트를 진행한다. 공개 코칭/스케줄러/소리/반응 기록·동시 설정 동기화·디자인 승인/실측/외부/2단계 이월/전체1~6 완료는 아니다. PR62의 실제 merged ddc35cf·브랜치 보존을 확인하고 그 최신 main에서 시작했다. 아래는 시점별 기록이다.

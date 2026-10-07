@@ -62,6 +62,8 @@ for (const file of files) {
     'Invalid directional avatar rig',
     'mountRigProbe',
     'bodyguard-eight-weight-v1',
+    'Invalid observed pose rig',
+    'mountObservedRigProbe',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -83,5 +85,6 @@ console.log(
     unconnected_alert_delivery_strings: 0,
     unconnected_owned_alert_lifecycle_strings: 0,
     unconnected_directional_avatar_strings: 0,
+    unconnected_observed_pose_avatar_strings: 0,
   }),
 )
