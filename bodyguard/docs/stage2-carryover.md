@@ -31,6 +31,8 @@ main 9733e4c에는 PR #15의 순수 코칭 진행 엔진까지 병합됐다. 계
 
 ## 다음 실행 순서
 
+2026-10-08 D2-R 세션 연결: [S2.T7](stories/owned-playback-resources.md)은 controller의 병렬 release를 입력/결과 정리 장벽과 연결했다. 실제 Chrome 가짜 카메라·SDK·남녀 GLB의 준비→지연 결과 중 pause→정리→새 세대 resume→합성 session expiry/종료를 확인했다. 실제 계정·사람/권한 popup·전체 body/hand/face/worker/GPU 수명·SDK 정책·승인 디자인/공개 코칭·외형과 D2/전체1~6 기준은 미완료다. 기존 실패/원본·같은 부위 새 조형0·최소 문구·별도 승인 경계를 유지한다. [실제 흐름·한계](review/owned-playback-resources/README.md).
+
 2026-10-08 D2-R/T 재생: [S2.T6](stories/owned-pose-playback.md)는 이미 소유된 source/pair를 실제 RAF에 연결했다. native 가짜 영상/SDK pending 중 render·만료가 계속되고 늦은 결과 폐기 후 새 프레임으로 진행하며, dispose가 입력/결과 정리를 기다린 뒤 caller SDK/camera를 해제한다. 긍정 움직임/보간은 별도 합성이다. 물리 카메라/실제 사람·최종 외형·목/손/체간·올바른 시범/판정·공개 코칭·전체 GPU/worker/장시간/노트북 품질·SDK 정책/디자인/운영 및 D2/전체1~6 완료 조건은 그대로 미완료다. [실제 흐름·원본 실패](review/owned-pose-playback/README.md).
 
 2026-10-08 D2-R/T decoded source: [S2.T5](stories/owned-video-pose.md)는 열린 caller video/stream의 새 프레임을 native VideoFrame으로 고정하고 기존 동일 결과 경계→user rig로 전달한다. 실제 Chrome 가짜 MediaStream·SDK·남녀 GLB에서 연속 전달·대기 취소·명시 재준비·전체 종료를 확인했다. 실제 물리 webcam/참여자·가림/촬영 범위/자세 정확도·목/손/체간/시범/피드백·공개 코칭·전체 GPU 수명·SDK 제품 정책은 미완료다. 권한 popup은 fake UI로 대체한 시험이며 실제 권한 검증이 아니다. 기존 원본/외형·이월 및 전체1~6 기준을 유지한다. [실제 흐름·미완료](review/owned-video-pose/README.md).

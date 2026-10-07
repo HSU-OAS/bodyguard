@@ -1,0 +1,59 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
+  [
+    {
++     bytes: 31223,
++     name: 'index-C3GbNWbT.css',
++     sha: '78a266dc1b866221e96b9bf48720b046ec5837f59e85abfd69a2b2871def60f7'
+-     bytes: 31199,
+-     name: 'index-dNUNBpCv.css',
+-     sha: '043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e'
+    },
+    {
+      bytes: 355151,
++     name: 'index-ChVh13WD.js',
+-     name: 'index-x57--wa1.js',
+      sha: 'b5d4f81164c8d3c196e853b3404382bc15077986aa626cd0c3c72571b6325ac0'
+    }
+  ]
+
+    at file:///private/tmp/bodyguard-playback-resources-proof.BVDC4p/collect-proof.mjs:18:245
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: [
+    {
+      name: 'index-C3GbNWbT.css',
+      bytes: 31223,
+      sha: '78a266dc1b866221e96b9bf48720b046ec5837f59e85abfd69a2b2871def60f7'
+    },
+    {
+      name: 'index-ChVh13WD.js',
+      bytes: 355151,
+      sha: 'b5d4f81164c8d3c196e853b3404382bc15077986aa626cd0c3c72571b6325ac0'
+    }
+  ],
+  expected: [
+    {
+      name: 'index-dNUNBpCv.css',
+      bytes: 31199,
+      sha: '043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e'
+    },
+    {
+      name: 'index-x57--wa1.js',
+      bytes: 355151,
+      sha: 'b5d4f81164c8d3c196e853b3404382bc15077986aa626cd0c3c72571b6325ac0'
+    }
+  ],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0

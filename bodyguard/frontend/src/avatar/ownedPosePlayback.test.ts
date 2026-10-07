@@ -62,6 +62,38 @@ function setup() {
   return { ...options, options, abort, callbacks, fire, frame }
 }
 describe('owned continuous pose playback', () => {
+  it('publishes only the fixed failure and lets its observer await dispose without deadlock', async () => {
+    const f = setup(),
+      observer = vi.fn<(reason: string) => void | Promise<void>>()
+    const playback = createOwnedPosePlayback({ ...f.options, onFailure: observer })
+    observer.mockImplementation(() => playback.dispose())
+    f.source.read.mockRejectedValueOnce(new Error('PRIVATE_CALLBACK_POINTS'))
+    playback.start()
+    await f.fire(10)
+    await playback.dispose()
+    expect(observer).toHaveBeenCalledExactlyOnceWith('inference-error')
+  })
+  it.each(['throw', 'reject'] as const)(
+    'quarantines a %s observer without calling it recursively',
+    async (kind) => {
+      const f = setup(),
+        observer = vi.fn<(reason: string) => void | Promise<void>>()
+      if (kind === 'throw')
+        observer.mockImplementation(() => {
+          throw new Error('PRIVATE_OBSERVER')
+        })
+      else observer.mockRejectedValue(new Error('PRIVATE_OBSERVER'))
+      const playback = createOwnedPosePlayback({ ...f.options, onFailure: observer })
+      f.source.read.mockRejectedValueOnce(new Error('PRIVATE_CALLBACK_POINTS'))
+      playback.start()
+      await f.fire(10)
+      await playback.dispose()
+      await drain()
+      expect(observer).toHaveBeenCalledTimes(1)
+      expect(playback.getSnapshot().failure).toBe('callback-error')
+      expect(f.avatars.dispose).toHaveBeenCalledTimes(1)
+    },
+  )
   it('preserves a tagged partial cleanup failure even if source disposal later resolves', async () => {
     const f = setup()
     f.source.read.mockRejectedValueOnce(new ResourceCleanupError())
