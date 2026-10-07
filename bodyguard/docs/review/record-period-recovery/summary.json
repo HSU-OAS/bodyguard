@@ -1,0 +1,199 @@
+{
+  "story": "S6.4",
+  "baseline": "39a23ebf2157de2537da9ee6362f5f43c3215ceb",
+  "testedHead": "33f690c6a4a29cc83da243ee76ba63fb293264c6",
+  "worktree": "codex/record-period-recovery",
+  "sourceManifestSha256": "ac2c85c71ef48a43cf11dc40855cc1a4829e8c79eb1ef37a42145cd4610970c7",
+  "sourceCount": 194,
+  "productModuleSha256": "422ce916a6f7bf576fe7cf84b8932bee2f10aec6518977fc9fd883785dafd968",
+  "harnessSha256": "1aa490340e0526546759e02b5814ebbe9ad9e5167b39ab7f7096a921bdb9296d",
+  "originalRed": {
+    "tag": "focused",
+    "head": "39a23ebf2157de2537da9ee6362f5f43c3215ceb",
+    "startedAt": "2026-10-07T07:06:12.395Z",
+    "finishedAt": "2026-10-07T07:06:14.539Z",
+    "exit": 1,
+    "sourceCount": 194,
+    "sourceBeforeSha256": "42237d7d75c74d2c9c6ba967de158e81698cc6446625fa7225ae0652c30373a4",
+    "sourceAfterSha256": "42237d7d75c74d2c9c6ba967de158e81698cc6446625fa7225ae0652c30373a4",
+    "sourceUnchanged": true,
+    "logSha256": "80fe054e198987974e4bd41848fc06d5c8daba285460b346aa8605cd675fc1c3",
+    "junitSha256": "2a010113356098363802bf75371d9377826dada029d72fc222378db7b7734219",
+    "failed": 4,
+    "passed": 25,
+    "total": 29,
+    "testingEnvironmentWarnings": 0
+  },
+  "setupDiagnostics": [
+    {
+      "name": "first",
+      "logSha256": "9cbb11541fa673931460d314e3b2a935d455b3db08324d224fe9eace47eb409c",
+      "junitSha256": "53300a2fe544c3dc68c122d6aa5044f447736b53c9f66bd29aa874df6e1036f2",
+      "captureSourceAtStartVerified": false
+    },
+    {
+      "name": "red",
+      "logSha256": "1326d30753ed49a4348b096079aefd4a891fd1a8fdafa73e15c2c479b7d7e219",
+      "junitSha256": "6dde9aa59f3aa6f169b557f86ba6fd88679823a3213e71174e8755aa1caf9cdb",
+      "captureSourceAtStartVerified": false
+    },
+    {
+      "name": "red-clean",
+      "logSha256": "8f905ce2f576cf59515116c5276de11530987aec6eac23759a2ede33c323ae6b",
+      "junitSha256": "fe881f7ca89f9225be56d5dfb99b7ba4a9f8b1f700c74ceb5d03ee7b003dc4c3",
+      "captureSourceAtStartVerified": false
+    },
+    {
+      "name": "red-root",
+      "logSha256": "8e99b6afc14a7bf30258820a7745a275ce317b32931a856da36addd9993fa8ef",
+      "junitSha256": "674de83f9cfa4373c1d13dff8f22950da9d658924ae37ecc6b3ad74f62120ef5",
+      "captureSourceAtStartVerified": false
+    },
+    {
+      "name": "red-native",
+      "logSha256": "4da288ac11149cc10856c3c3f1ad6660ec4df795399982034e66f6b39b3bf181",
+      "junitSha256": "de97f0e6a5e5440ad448c1ff99aa0ea413324ed141dcf538f2a171dd2642ec15",
+      "captureSourceAtStartVerified": false
+    },
+    {
+      "name": "green-first",
+      "logSha256": "493606dd6064281b143df3408d876bbd1ea3ad1fb7814dd403af771b1520aa57",
+      "junitSha256": "0680a64172e8d7e02db6eb9b061ee593dbad1e63a034e715578f05571b925d5a",
+      "captureSourceAtStartVerified": false
+    },
+    {
+      "name": "targeted",
+      "logSha256": "6e32f623f3f7d57af334b33b2570c68e026470d0a6000008ab475849db839936",
+      "junitSha256": "03295ef12d722c77ef0ef1b6d5a6452e8dc5e8e6ab2913843d934cf21965691e",
+      "captureSourceAtStartVerified": false
+    }
+  ],
+  "verification": [
+    {
+      "tag": "build",
+      "head": "33f690c6a4a29cc83da243ee76ba63fb293264c6",
+      "startedAt": "2026-10-07T07:06:59.044Z",
+      "finishedAt": "2026-10-07T07:07:09.671Z",
+      "exit": 0,
+      "sourceCount": 194,
+      "sourceBeforeSha256": "ac2c85c71ef48a43cf11dc40855cc1a4829e8c79eb1ef37a42145cd4610970c7",
+      "sourceAfterSha256": "ac2c85c71ef48a43cf11dc40855cc1a4829e8c79eb1ef37a42145cd4610970c7",
+      "sourceUnchanged": true,
+      "logSha256": "74531377da54f266dd1f26d9a05ee6bfc2027ae732b11698d0a8debf6153d20d"
+    },
+    {
+      "tag": "check",
+      "head": "33f690c6a4a29cc83da243ee76ba63fb293264c6",
+      "startedAt": "2026-10-07T07:07:00.187Z",
+      "finishedAt": "2026-10-07T07:07:01.020Z",
+      "exit": 0,
+      "sourceCount": 194,
+      "sourceBeforeSha256": "ac2c85c71ef48a43cf11dc40855cc1a4829e8c79eb1ef37a42145cd4610970c7",
+      "sourceAfterSha256": "ac2c85c71ef48a43cf11dc40855cc1a4829e8c79eb1ef37a42145cd4610970c7",
+      "sourceUnchanged": true,
+      "logSha256": "ce3e4bb75900aa867dd32e8702b67c3a8ac6da8662bbdce5bbb9055ade4af221"
+    },
+    {
+      "tag": "focused",
+      "head": "33f690c6a4a29cc83da243ee76ba63fb293264c6",
+      "startedAt": "2026-10-07T07:10:44.551Z",
+      "finishedAt": "2026-10-07T07:10:46.693Z",
+      "exit": 0,
+      "sourceCount": 194,
+      "sourceBeforeSha256": "ac2c85c71ef48a43cf11dc40855cc1a4829e8c79eb1ef37a42145cd4610970c7",
+      "sourceAfterSha256": "ac2c85c71ef48a43cf11dc40855cc1a4829e8c79eb1ef37a42145cd4610970c7",
+      "sourceUnchanged": true,
+      "logSha256": "dfc0261659839d079308f5c4625311e4fbb6b38cc28af1df4f2f18e0ea8e998f",
+      "junitSha256": "f5e1512c5da12f1fed5f48b92c89f6526927d91eb6972f1bfe43f4570521a4cd"
+    },
+    {
+      "tag": "guard",
+      "head": "33f690c6a4a29cc83da243ee76ba63fb293264c6",
+      "startedAt": "2026-10-07T07:07:29.888Z",
+      "finishedAt": "2026-10-07T07:07:29.951Z",
+      "exit": 0,
+      "sourceCount": 194,
+      "sourceBeforeSha256": "ac2c85c71ef48a43cf11dc40855cc1a4829e8c79eb1ef37a42145cd4610970c7",
+      "sourceAfterSha256": "ac2c85c71ef48a43cf11dc40855cc1a4829e8c79eb1ef37a42145cd4610970c7",
+      "sourceUnchanged": true,
+      "logSha256": "b4464da94ef1bc3218566f5daacbd59c0e58d99425d8f0afe531d7ffe2ca0105"
+    },
+    {
+      "tag": "summaries",
+      "head": "33f690c6a4a29cc83da243ee76ba63fb293264c6",
+      "startedAt": "2026-10-07T07:07:45.418Z",
+      "finishedAt": "2026-10-07T07:08:01.607Z",
+      "exit": 0,
+      "sourceCount": 194,
+      "sourceBeforeSha256": "ac2c85c71ef48a43cf11dc40855cc1a4829e8c79eb1ef37a42145cd4610970c7",
+      "sourceAfterSha256": "ac2c85c71ef48a43cf11dc40855cc1a4829e8c79eb1ef37a42145cd4610970c7",
+      "sourceUnchanged": true,
+      "logSha256": "92b41657dee7e91ef147f8e9f5d5a70f8bcf02bc48822e5c3f3051e8a61b8fcc"
+    },
+    {
+      "tag": "type",
+      "head": "33f690c6a4a29cc83da243ee76ba63fb293264c6",
+      "startedAt": "2026-10-07T07:07:25.132Z",
+      "finishedAt": "2026-10-07T07:07:29.797Z",
+      "exit": 0,
+      "sourceCount": 194,
+      "sourceBeforeSha256": "ac2c85c71ef48a43cf11dc40855cc1a4829e8c79eb1ef37a42145cd4610970c7",
+      "sourceAfterSha256": "ac2c85c71ef48a43cf11dc40855cc1a4829e8c79eb1ef37a42145cd4610970c7",
+      "sourceUnchanged": true,
+      "logSha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92"
+    },
+    {
+      "tag": "unit",
+      "head": "33f690c6a4a29cc83da243ee76ba63fb293264c6",
+      "startedAt": "2026-10-07T07:06:57.740Z",
+      "finishedAt": "2026-10-07T07:07:06.065Z",
+      "exit": 0,
+      "sourceCount": 194,
+      "sourceBeforeSha256": "ac2c85c71ef48a43cf11dc40855cc1a4829e8c79eb1ef37a42145cd4610970c7",
+      "sourceAfterSha256": "ac2c85c71ef48a43cf11dc40855cc1a4829e8c79eb1ef37a42145cd4610970c7",
+      "sourceUnchanged": true,
+      "logSha256": "8dc47fd2e8d8901cbf2787a46771095980a24f9cae0ab58141557591e986ceb4",
+      "junitSha256": "1a879312000f988191749aeaa182a57ff38a07f4dd1aafb73791ea774d3e290f"
+    }
+  ],
+  "unit": {
+    "passed": 693,
+    "failed": 0
+  },
+  "focused": {
+    "passed": 29,
+    "failed": 0
+  },
+  "browser": {
+    "reportSha256": "53eef9ed57a3d9f05fdd4c53df313a2e9a4d765d76d6660de0483dac1ae5d19d",
+    "expected": 4,
+    "unexpected": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "errors": 0,
+    "startTime": "2026-10-07T07:07:47.954Z",
+    "durationMs": 13162.679,
+    "scenarioIds": [
+      "SW-W01",
+      "SW-W02",
+      "SW-W03",
+      "SW-W04"
+    ],
+    "chrome": true,
+    "actualHttp": true,
+    "actualIsolatedSql": true,
+    "syntheticAccounts": true,
+    "syntheticMail": true,
+    "syntheticRecords": true,
+    "syntheticFaultScheduling": true,
+    "actualPeople": false,
+    "actualCamera": false
+  },
+  "scopeGatesPassed": true,
+  "allStagesPassed": false,
+  "designApplied": false,
+  "rawArtifactsPublished": false,
+  "previousFailuresPreserved": true,
+  "externalDeploy": false,
+  "productionDatabase": false
+}
