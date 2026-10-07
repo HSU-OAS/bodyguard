@@ -4,7 +4,9 @@
 
 ## 포함한 것과 보존한 것
 
-현재 공개·계정·기록 웹의 index/JS/CSS·공식 Google PNG만 출력한다. 기존 화이트·블루 디자인·로그인/복구/계정/기록 흐름을 변경하지 않는다. 미완성 카메라·코칭·아바타/개발 파일은 이번 패키지에 들어가지 않지만 원본/증거는 삭제하지 않는다. 최종 통합에서 검증한 파일을 명시적으로 추가해야 하며3D 필수 기능을 없앤 결정이 아니다.
+현재 공개·계정·기록 웹의 index/JS/CSS·공식 Google PNG와 아래 고지 파일을 출력한다. 기존 화이트·블루 디자인·로그인/복구/계정/기록 흐름을 변경하지 않는다. 미완성 카메라·코칭·아바타/개발 파일은 이번 패키지에 들어가지 않지만 원본/증거는 삭제하지 않는다. 최종 통합에서 검증한 파일을 명시적으로 추가해야 하며3D 필수 기능을 없앤 결정이 아니다.
+
+최신 main PR #58 통합 후 고지3개(bundled-js.json/bundled-packages.json/tailwindcss.txt)도 설치 원문 대조를 통과해야 선별한다. 현재7파일의 실제 Vite→package byte/hash와 Chrome/소유 HTTP 시험 서버의 고지 전달을 확인했다. 이 HTTP 시험은 NGINX·HTTPS·API/계정/제품 CSP가 아니며 전체 image/runtime·권리/법무 완료도 아니다. [실행 범위와 원본](../docs/review/stage5-web-runtime/README.md).
 
 API 이미지에는 기존 production app·고정 런타임 dependency·migration 원본만 있다. migration을 자동 실행하지 않는다. test provider/entrypoint·가짜 성공·가입 시드·운영 환경 변수·DB를 넣지 않는다. 정적 context 검사만으로 실제 이미지 내용을 보증하지 않는다.
 
@@ -30,11 +32,13 @@ frontend에서 다음 exporter 시험을 실행한다. 기존 출력 경로는 �
 
 ```bash
 node --test scripts/export-web-runtime.test.mjs
+node --test scripts/runtime-notice-boundary.test.mjs scripts/check-build-notices.test.mjs
 pnpm typecheck
 pnpm check
 pnpm build
 node scripts/check-selection-production.mjs
 node scripts/export-web-runtime.mjs /private/tmp/<새-소유-폴더>/package
+node scripts/test-runtime-notices-browser.mjs /private/tmp/<새-소유-폴더>/package
 ```
 
 Dockerfile 빌드는 기존 prepare-assets를 실행하지 않으며 카메라 모델 다운로드가 필요 없는 현재 웹만 빌드한다. 개발 환경의 pnpm build/모델 원본은 그대로다. 실제 빌드에서 frozen lockfile·pnpm 정책·Linux dependency/출력을 검사해야 한다.

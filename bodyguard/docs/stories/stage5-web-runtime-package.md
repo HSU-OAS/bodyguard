@@ -41,6 +41,17 @@ main33a6e8b 통합 source6cb4b31에서 최신 DOM/TS/정적·production build/�
 
 ## 현재 의존성·남은 게이트
 
+### 고지 패키지 연결 보완 — 2026-10-07
+
+PR #58 source4524097·merge885392c를 현재 Draft #29에 통합한다. 현재 exporter는 새 고지3개를 누락하고 frontend Docker context는 새 TS build helper를 제외하므로 먼저 source/실제 파일 RED로 재현한다. 기존 S5.2의 연속 보완이며 별도 기능·화면·SDK 정책·아바타/법무 결정을 추가하지 않는다.
+
+1. 실제 generated bundled JS JSON·chunk package JSON·Tailwind TXT를 설치 원문 checker로 대조한 뒤 명시된 파일3개만 선별한다. 누락/변조·symlink·미등록 legal 파일은 출력 생성 전에 거부하고 기존 목적지/source/실패를 보존한다.
+2. Docker context에 필요한 build helper 한 파일만 추가하고 test/browser helper·.env/개발 에셋 제외는 유지한다. NGINX는 고지3개 exact 경로/404·content-type의 source 계약을 추가한다. 이것을 실제 Docker context/image/NGINX 기동 검증으로 세지 않는다.
+3. 실제 Vite 출력→선별 package byte/hash→소유 loopback HTTP 시험 서버→설치된 Chrome의 고지 응답/본문 hash를 연결한다. 서버·browser·sink를 이번 실행 소유 자원으로만 정리하고 외부 요청은 막는다. HTTP 브라우저 전달은 실제 실행이지만 NGINX/TLS·제품 계정/기록·임상/공개 배포 완료는 아니다.
+4. 기존 exporter/route/native parser·ASGI·DOM/TS/정적/build guard와 새 경계를 실제 재실행한다. 실행 HEAD/전후 source·도움 script·출력·실패 SHA를 기록한다. Docker engine 연결과 전체 S5.2/1~6 게이트는 그대로 미충족이면 Draft/병합 보류다.
+
+실제 보완 결과: source68130f6에서 고지 누락·context/직접 주소 RED를 확인하고 설치 원문 대조 뒤7파일을 선별했다. 기존 화면 출력4개는 byte 동일이며 실제 Chrome으로 고지3개의 MIME/원문/200 전달을 확인했다. 소유 loopback 시험 서버의 결과이고 NGINX/TLS·API/계정 검증은 아니다. [실패/합성/native 구분·원문 보존·리뷰](../review/stage5-web-runtime/README.md). 기존 회귀와 필수 독립 검사를 재실행했지만 Docker engine 없음·실제 runtime 게이트 미충족으로 Draft #29/Story 미완료·병합 보류를 유지한다.
+
 Docker CLI29.2.1·desktop-linux context는 있지만 daemon Unix socket이 없어 실제 engine이 미연결이다. CEO에게 Docker Desktop의 로컬 실행 도움을 요청했다. 새 계정/결제/운영 연결이 아니며 기다리는 동안 위 독립 구현을 계속한다. 연결 불가이면 해당 runtime gate를 보류하고 라이선스/백업·복구/6단계 하네스 등 다음 독립 작업으로 진행한다.
 
 미정 Q-04 실제 호스팅, Q-17 보관/백업 정책, Q-26 법무/동의, Q-32 부가 기능 및2단계 이월·실제 코칭/기록 생산·실측/참여자 검증·SMTP/Google/HTTPS·최종 통합은 그대로 남는다. 운영 적용 전에는 대상/비용/위험/복구 계획을 묶어 별도 승인을 요청한다.

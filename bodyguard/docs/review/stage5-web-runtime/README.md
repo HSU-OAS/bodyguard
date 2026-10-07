@@ -1,3 +1,21 @@
+## 2026-10-07 고지 패키지 연결 결과
+
+Draft #29에 PR #58의 main885392c를 통합한 실행 HEAD는 `68130f67f59f1eb7d9d3fb27ad0b2204f6fe146a`다. exporter에 설치 원문 대조를 연결해 실제 JS/CSS/index/Google PNG4개와 고지3개를 선별한다. 실제 Vite 출력→새 package7개는 byte/hash 동일하며 기존 화면 출력4개도 전과 동일하다. Docker ignore에 필요한 TS build helper 하나만 추가했고 시험/브라우저/개발 파일 제외와 기존 SDK/CSP 정책은 변경하지 않았다.
+
+[이번 원본·source/output/hash](notices-20261007/summary.json). 새 source/파일 하네스는 누락된 고지 선별·Docker 입력·NGINX exact 경로를 먼저 RED로 확인했다. 최초 symlink fixture는 다른 파일도 link로 만들어 고지 자체 경계를 분리하지 못했다. 원본을 보존하고 고지 한 파일만 link인 입력으로 좁혀 실제10건 RED 후 구현했다. 최종64건은 기존 export33·고지18·새 notice/source13의 **합성 filesystem/source 검사**이며 실제 image/context/NGINX 시험이 아니다.
+
+실제 설치 Chrome154.0.8037.98은 새 package의 고지3개를 소유 loopback HTTP 시험 서버에서200으로 받았다. JSON/text MIME·nosniff·원문 SHA가 같고 고지 파일은 실행 중 변하지 않았다. 미등록 고지/추가 하위 경로/.env/API4개가404인 것은 **이 고지 전용 시험 서버**의 결과이며 NGINX·실제 API 권한/계정·제품 CSP·HTTPS를 검증한 것이 아니다. 외부 요청은 차단했고 browser/server/sink 종료를 실제 확인했다. SDK/카메라는 실행하지 않았다.
+
+NGINX에는3개 exact 경로와 `try_files ... =404`·기본 MIME source만 추가했다. [NGINX 공식 core 문서](https://nginx.org/en/docs/http/ngx_http_core_module.html#default_type)의 default_type/types 구분을 확인했지만 실제 image mime.types·NGINX/PCRE·URI 정규화·TLS는 엔진 연결 후 재검증해야 한다. source assertion이나 시험 서버를 실제 NGINX 응답으로 표시하지 않는다.
+
+기존 DOM/순수693개·TS/Biome·43개 파일/native parser/ASGI/route 계약·Ruff/format/mypy를 실제 실행했다. production guard는 실제 exporter 호출에서 실행됐다. dependency/lock·frontend/src·backend/app/migration·LICENSE는 최신 main과 같다. API/SQL 전체·pnpm assets 모델 준비·최종 avatar는 이번에 실행하지 않았다. source/hash는 기록된 HEAD의 당시 uncommitted 구현을 검증하며 이후 증거 커밋 자체가 실행됐다고 주장하지 않는다.
+
+기존 검증30개 자료는 수정 전 실제 이전 Draft source05c2d55와 byte 대조했다.29개 immutable 파일은 그대로 두고 이 README index의 원문은 private `previous-review.md`에 보존해 아래에 그대로 이어 붙였다. 기존 실패·원본 아바타·private 출력은 삭제하지 않았다. raw 실행/실패·출력·helper는 `/private/tmp/bodyguard-runtime-notices.WzFnZh`에 보존하며 공개본은 상대 경로/hash·범위 결과만 있다.
+
+작성자 code-review로 고지 누락/원문/경로·before-output 거부, 기존 destination/개발 제외 유지, build-only I/O와 browser 자원 정리, UI/API 변경0을 확인했다. 별도 에이전트/전문가 리뷰는 아니다. Docker desktop-linux의 소유 Unix endpoint/socket 부재와 실제 server:null/exit1을 다시 확인했다. **Docker/NGINX/HTTPS·실제 package 계정/기록·quota/재기동/DB 장애·전체 권리/법무·최종 아바타/실측·1~6단계는 미완료이며 Draft/병합 보류**다. 아래는 기존 원문이다.
+
+---
+
 # 웹/API 패키지 — 최초 실패와 실행 경계
 
 ## 2026-10-07 최신 main 통합 결과

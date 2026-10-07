@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-07 고지 전달 보완: Draft #29에 PR #58 main885392c를 통합하고 고지3개 누락·필수 TS build helper 제외를 보완했다. 기존 화면 출력4개와 새 package7개 byte/hash를 실제 대조하고 Chrome에서 고지 원문 전달을 확인했다. [실행/실패·리뷰](review/stage5-web-runtime/README.md). 소유 HTTP 시험 서버의 결과이며 NGINX/HTTPS·계정/기록 package 실행 검증은 아니다. Docker engine이 없어 필수 runtime/복구·법무/전체 권리·아바타/실측·디자인 구조/SDK 승인·전체1~6은 미완료, Draft #29 병합 보류다. PR #58 source4524097→merge885392c/main 포함·같은 tree·원격 브랜치 보존은 확인했다. 아래는 기존 시점별 기록이다.
+
 2026-10-07 로컬 패키지 통합: Draft #29에 최신 main33a6e8b의 계정·알림 설정·분별 기록·기간 입력 복구를 통합하고 실제 빌드·파일 선별·native parser/ASGI·DOM을 재검증했다. 미완성 코칭/관찰·기록 producer의 main 제외 검사와 기존 exporter 함수는 보존했다. 서버 구성에 알림 설정·자세 기록 직접 주소가 누락된 source RED2개를 확인해 그 경로만 보완했으며 [최신 원본 SHA·실패·미실행](review/stage5-web-runtime/README.md)을 남겼다. 화면 구성/판정·SDK 통신 정책·아바타 제작 변경0이다. Docker engine·실제 이미지/HTTPS/패키지 계정·기록 브라우저·재기동/DB 장애 복구 게이트는 미완료이므로 Draft/전체1~6 미완료를 유지한다. PR #57은 sourceecf59d6→merge33a6e8b/main 포함·같은 tree·브랜치 보존 확인이며 과거 시작 원인 해결이 아니다. 다음은 Docker 연결 후 실제 패키지 실행 또는 디자인/SDK 승인 뒤 해당 독립 작업이다. 아래는 시점별 기록이다.
 
 최신 구현: S5.2 현재 공개·계정·기록 웹4파일의 실제 선별 출력과 web/API 분리 이미지·로컬 TLS/프록시 후보 구성을 작성했다. 기존 화이트·블루 UI/공식 Google 아이콘·개발/아바타 원본을 보존했다. [실제 파일·parser·ASGI·계정/기록 회귀와 실패](review/stage5-web-runtime/README.md)는 통과했지만 Docker engine 미연결로 **실제 이미지/NGINX/TLS/패키지 브라우저·복구 게이트가 미충족**이다. Story/5단계 완료·PR 병합으로 세지 않는다. 로컬 Desktop 연결 요청은 유지하며 다음 독립 라이선스/백업·복구/6단계 준비를 계속한다. 새로운 아바타 수정 사이클을 시작하지 않고 전체2단계 이월·1~6단계 필수 게이트를 그대로 둔다. 아래는 시점별 기록이다.

@@ -12,6 +12,8 @@ import {
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import test from 'node:test'
+import { fileURLToPath } from 'node:url'
+import { cssNotice } from './check-build-notices.ts'
 import { exportWebRuntime } from './export-web-runtime.mjs'
 
 function fixture(t) {
@@ -21,6 +23,7 @@ function fixture(t) {
   const target = join(owned, 'package')
   mkdirSync(join(source, 'assets'), { recursive: true })
   mkdirSync(join(source, 'brand'))
+  mkdirSync(join(source, 'licenses'))
   writeFileSync(
     join(source, 'index.html'),
     '<script type="module" src="/assets/index-abc.js"></script><link rel="stylesheet" href="/assets/index-def.css">',
@@ -30,6 +33,25 @@ function fixture(t) {
   writeFileSync(
     join(source, 'brand/google-icon.png'),
     readFileSync(new URL('../public/brand/google-icon.png', import.meta.url)),
+  )
+  // 합성 JS fixture에 현재 설치 고지 원문만 사용한다. 실제 bundle 증거는 아니다.
+  const metadata = JSON.parse(
+    readFileSync(new URL('../node_modules/react/package.json', import.meta.url), 'utf8'),
+  )
+  const entry = {
+    name: metadata.name,
+    version: metadata.version,
+    identifier: metadata.license,
+    text: readFileSync(new URL('../node_modules/react/LICENSE', import.meta.url), 'utf8').trim(),
+  }
+  writeFileSync(join(source, 'licenses/bundled-js.json'), JSON.stringify([entry]))
+  writeFileSync(
+    join(source, 'licenses/bundled-packages.json'),
+    JSON.stringify([{ name: entry.name, version: entry.version }]),
+  )
+  writeFileSync(
+    join(source, 'licenses/tailwindcss.txt'),
+    cssNotice(fileURLToPath(new URL('../', import.meta.url))),
   )
   return { owned, source, target }
 }
@@ -44,6 +66,9 @@ test('exports only current web files and preserves unselected source evidence', 
     'assets/index-def.css',
     'brand/google-icon.png',
     'index.html',
+    'licenses/bundled-js.json',
+    'licenses/bundled-packages.json',
+    'licenses/tailwindcss.txt',
   ]
   assert.deepEqual(exportWebRuntime(source, target), expected)
   assert.deepEqual(
