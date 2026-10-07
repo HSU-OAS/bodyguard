@@ -72,6 +72,10 @@ for (const file of files) {
     'Pose frame unavailable',
     'mountPoseFrameProbe',
     'PRIVATE_POSE_FRAME_COORDINATES',
+    'Invalid video pose source',
+    'Video capture unavailable',
+    'mountVideoPoseProbe',
+    'PRIVATE_VIDEO_POSE_INPUT',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -96,5 +100,6 @@ console.log(
     unconnected_observed_pose_avatar_strings: 0,
     unconnected_owned_avatar_pair_strings: 0,
     unconnected_owned_pose_frame_strings: 0,
+    unconnected_owned_video_pose_strings: 0,
   }),
 )

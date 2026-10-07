@@ -35,6 +35,14 @@ function fixture() {
 }
 
 describe('owned pose frame', () => {
+  it('preserves tagged partial-provider cleanup failure before a result is returned', async () => {
+    const f = fixture()
+    f.detect.mockImplementation(() => {
+      throw new ResourceCleanupError()
+    })
+    await expect(f.source.read()).rejects.toBeInstanceOf(ResourceCleanupError)
+    await expect(f.source.dispose()).rejects.toBeInstanceOf(ResourceCleanupError)
+  })
   it('does not acquire on creation; returns one copied stamped result and closes it', async () => {
     const f = fixture()
     expect(f.capture).not.toHaveBeenCalled()
