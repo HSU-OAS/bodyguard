@@ -59,6 +59,9 @@ for (const file of files) {
     'mountOwnedAlertProbe',
     '__private-owned-alert-probe',
     'useOwnedAlertDelivery',
+    'Invalid directional avatar rig',
+    'mountRigProbe',
+    'bodyguard-eight-weight-v1',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -79,5 +82,6 @@ console.log(
     unconnected_owned_minute_upload_strings: 0,
     unconnected_alert_delivery_strings: 0,
     unconnected_owned_alert_lifecycle_strings: 0,
+    unconnected_directional_avatar_strings: 0,
   }),
 )
