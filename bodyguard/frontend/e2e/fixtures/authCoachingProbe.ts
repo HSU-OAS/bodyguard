@@ -16,6 +16,7 @@ export function mountAuthCoachingProbe(options: {
   let disposed = 0
   let acquired = 0
   let waiting = false
+  let lifecycleClosed = 0
   let release!: () => void
   let pending: Promise<void> | null = null
   const permission = new Promise<void>((resolve) => {
@@ -47,6 +48,11 @@ export function mountAuthCoachingProbe(options: {
       session =
         (await hook?.prepare({
           recordId: options.recordId,
+          ownedResources: {
+            close() {
+              lifecycleClosed++
+            },
+          },
           readClockPair: () => ({
             monotonicMs,
             utc: new Date(Date.parse(options.utc) + monotonicMs).toISOString(),
@@ -122,6 +128,7 @@ export function mountAuthCoachingProbe(options: {
         acquired,
         disposed,
         waiting,
+        lifecycleClosed,
         session: session?.getSnapshot().state.status ?? null,
         record: session?.getRecordSnapshot().status ?? null,
         synthetic_clock_ports_frames: true,

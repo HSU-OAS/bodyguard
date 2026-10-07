@@ -1,0 +1,18 @@
+{
+  "head": "907dbdf886d101bbda24b2068ede19fa0b65c71d",
+  "phase": "red",
+  "results": [
+    {
+      "name": "unit",
+      "command": [
+        "node_modules/.bin/vitest",
+        "run",
+        "src/coaching/useRecordedCoaching.test.tsx",
+        "--reporter=json",
+        "--outputFile=[owned-test-scratch]/unit-red.json"
+      ],
+      "exit": 1,
+      "signal": null
+    }
+  ]
+}
