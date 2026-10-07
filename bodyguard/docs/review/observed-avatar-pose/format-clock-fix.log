@@ -1,0 +1,50 @@
+e2e/fixtures/observedPoseRigProbe.ts:195:11 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    193 │       userArmMoved:
+    194 │         boneDirection('upperarm01L', 'lowerarm01L').angleTo(
+  > 195 │           restPoints.get(13)!.clone().sub(restPoints.get(11)!).normalize(),
+        │           ^^^^^^^^^^^^^^^^^^^
+    196 │         ) >
+    197 │         Math.PI / 24,
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+    193 193 │         userArmMoved:
+    194 194 │           boneDirection('upperarm01L', 'lowerarm01L').angleTo(
+    195     │ - ··········restPoints.get(13)!.clone().sub(restPoints.get(11)!).normalize(),
+        195 │ + ··········restPoints.get(13)?.clone().sub(restPoints.get(11)!).normalize(),
+    196 196 │           ) >
+    197 197 │           Math.PI / 24,
+  
+
+e2e/fixtures/observedPoseRigProbe.ts:195:43 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    193 │       userArmMoved:
+    194 │         boneDirection('upperarm01L', 'lowerarm01L').angleTo(
+  > 195 │           restPoints.get(13)!.clone().sub(restPoints.get(11)!).normalize(),
+        │                                           ^^^^^^^^^^^^^^^^^^^
+    196 │         ) >
+    197 │         Math.PI / 24,
+  
+
+e2e/fixtures/observedPoseRigProbe.ts:200:47 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    198 │       maxDirectionError: Math.max(
+    199 │         ...OBSERVED_LIMB_BINDINGS.map(({ bone, anchor }) =>
+  > 200 │           boneDirection(bone, anchor).angleTo(expectedDirections.get(bone)!),
+        │                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    201 │         ),
+    202 │       ),
+  
+
+Skipped 1 suggested fixes.
+If you wish to apply the suggested (unsafe) fixes, use the command biome check --write --unsafe
+
+Checked 2 files in 54ms. Fixed 1 file.
+Found 3 warnings.

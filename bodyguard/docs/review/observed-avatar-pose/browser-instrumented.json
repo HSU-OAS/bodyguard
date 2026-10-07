@@ -1,0 +1,85 @@
+{
+  "head": "48d315461720377f757f80d039a95a3b916ca2f2",
+  "sourceBefore": {
+    "src/avatar/observedPoseRig.ts": "680235478e06efc111cc04515619f76668806bb64f0b2687f2144443c453c606",
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/eightWeightSkin.ts": "8b318ddcb69fafee46c8d4fbe20b3beb82c90e64892ab2aed4934b3ccb16caec",
+    "e2e/fixtures/observedPoseRigProbe.ts": "3ff68e70fa038b2f82bbfc5177a52c88afea59c2011a1043164a17ec79bf1622",
+    "scripts/test-observed-rig-browser.mjs": "3fc0c884ebce809d81f2f69f62d9c6ba12297afb1748b856a97fdd7d674fe523",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "assetCommit": "25a9bd6c7392890e3b5d5d6ae1046bb7087d56ad",
+  "assetHashes": {
+    "male": "cc85bcd449f3f31347e4f7174986d41e4aca3067990f5d8a2e6ba3a099171927",
+    "female": "27c10902aa377e995bdbc115ab773cf22f8ea38582c49820304a33ad7685f25a"
+  },
+  "actualChrome": true,
+  "actualWebGL": true,
+  "syntheticObservations": true,
+  "actualSDK": false,
+  "actualCamera": false,
+  "releaseAvatar": false,
+  "samples": [
+    {
+      "gender": "male",
+      "passed": false,
+      "stages": [],
+      "initial": {
+        "mode": "single",
+        "state": {
+          "status": "tracking",
+          "tracked": 8,
+          "total": 8
+        },
+        "sequence": 1,
+        "closed": false,
+        "independent": true,
+        "framing": [
+          {
+            "inside": true
+          },
+          {
+            "inside": true
+          }
+        ],
+        "referenceUnchanged": true,
+        "sourceUnchanged": true,
+        "userChanged": true,
+        "missingLegsFrozen": false,
+        "poseFrozen": false,
+        "calls": 10,
+        "triangles": 576508
+      }
+    }
+  ],
+  "browser": "154.0.8037.98",
+  "failure": {
+    "name": "TimeoutError",
+    "message": "page.waitForFunction: Timeout 10000ms exceeded."
+  },
+  "failureState": {
+    "mode": "single",
+    "state": {
+      "status": "tracking",
+      "tracked": 8,
+      "total": 8
+    },
+    "sequence": 3,
+    "closed": false
+  },
+  "boundary": {
+    "external": 0,
+    "camera": 0,
+    "errors": [
+      "Error"
+    ]
+  },
+  "sourceAfter": {
+    "src/avatar/observedPoseRig.ts": "680235478e06efc111cc04515619f76668806bb64f0b2687f2144443c453c606",
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/eightWeightSkin.ts": "8b318ddcb69fafee46c8d4fbe20b3beb82c90e64892ab2aed4934b3ccb16caec",
+    "e2e/fixtures/observedPoseRigProbe.ts": "3ff68e70fa038b2f82bbfc5177a52c88afea59c2011a1043164a17ec79bf1622",
+    "scripts/test-observed-rig-browser.mjs": "3fc0c884ebce809d81f2f69f62d9c6ba12297afb1748b856a97fdd7d674fe523",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  }
+}

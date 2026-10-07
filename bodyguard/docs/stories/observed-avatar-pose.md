@@ -1,6 +1,6 @@
 # S2.T2 — 같은 관찰 결과에서 사용자 리그로 연결
 
-상태: 비공개 구현·첫 실제 Chrome 통과 / 최종 source·PR 게이트 진행 / baseline `48d315461720377f757f80d039a95a3b916ca2f2` / `codex/observed-avatar-pose`
+상태: 비공개 구현·runtime 최종 검증 통과 / PR 게이트 진행 / baseline `48d315461720377f757f80d039a95a3b916ca2f2` / `codex/observed-avatar-pose`
 
 FR-A-01/03·FR-M-02/07·NFR-07/08. S2.T1의 실제 GLB driver 앞에 세대·원본 timestamp/sequence와 한 번의 pose 결과를 받는 비공개 adapter를 연결한다. pose image/world를 서로 다른 최신 저장소에서 읽지 않는다. 영상/좌표를 저장·업로드·로그에 넣지 않는다. 공개 화면·SDK 통신 정책·실제 판정·Blender/GLB 외형은 변경하지 않는다.
 
@@ -26,6 +26,10 @@ D2-A/M/T/R/I/P 및 전체1~6 기준은 그대로다. 실제 SDK와 카메라의 
 - 첫 typecheck는 fixture의 Group/Object3D 타입 오류로 실패했고 probe build는 미실행이었다. 이어진 첫 browser 명령은 bundle 없음으로 브라우저 실행 전 실패(검증0). 타입을 실제 Object3D 계약으로 수정했으며 원본 실패를 보존했다.
 - 첫 실제 Chrome과 후속 진단은 남성 초기 로드 뒤10초 대기 초과, 여성 미실행이었다. clock RED에서 `captureRegressed:true`와 고정 `private-frame-rejected`를 실제 확인했다. fixture가 RAF frame-start 시각과 중간 performance.now capture를 섞어 원본 시간 검사를 위반했다. 새로 생성하는 합성 결과의 capture clock만 통일했다. adapter의 시간/세대 검사는 그대로이며 제한을 늘리지 않았다. 진행 대기에는 저비용 peek를 쓰고 실제 skinned 전신 정점은 단계별 snapshot에서 계속 검사한다.
 - 첫 정상 Chrome에서 남녀 각각 단일8방향 움직임·crop4방향/하체 local 동결·복수/불일치/없음0·복구8·만료0·종료를 통과했다. source/비교 모델 불변·실제 목표 방향·전신 발끝·독립 뼈대도 확인했다. 15°/50ms/250ms와0.002rad는 **합성 그래픽 fixture 입력/오차**이며 운동 정답·실측 성능이 아니다. 비교 모델은 중립 배치이지 검증된 시범이 아니다.
-- 공개 출력의 첫 대조는 worktree마다 다른 basename을 같다고 가정해 파일 읽기 전 실패했다. 확장자/SHA로 실제 비교하니 JS는 같지만 새 unit의 변수 이름 때문에 Tailwind utility29byte가 추가됐다. assertion/의미 변경 없이 그 변수 이름만 바꾸고 build/대조를 다시 실행한다. CSS 설정이나 공개 화면을 변경하지 않는다.
+- 공개 출력의 첫 대조는 worktree마다 다른 basename을 같다고 가정해 파일 읽기 전 실패했다. 확장자/SHA로 실제 비교하니 JS는 같지만 새 unit의 변수 이름 때문에 Tailwind utility29byte가 추가됐다. assertion/의미 변경 없이 그 변수 이름만 바꾸고 build/대조를 실제 다시 통과했다. CSS 설정이나 공개 화면을 변경하지 않았다.
 - 원본 A37 남녀 GLB는 PR9 Git blob에서 임시로 읽고 hash를 대조했다. 기존 Blender/GLB/실패 증거·후보 작업트리 삭제 상태를 수정하지 않는다. 같은 부위 조형0이며 외형 P2는 그대로다. API/SQL·운영·SDK/카메라를 이번 증거로 세지 않는다.
 - graphify는 legacy camera/useMeasurement 경로를 보여 현재 source와 대조했다. testing-strategy/code-review로 원본 보존·프레임/가림/세대·문자 변환/수치·정확한 binding·종료·공개 차단을 작성자 검토했다. 독립 에이전트/전문가/디자인 검토가 아니며 전체 출시 기준은 미완료다.
+
+## 최종 source 검증
+
+runtime `fea93b94f407433d631f0088f8be7945d43ee1e0`에서 frontend810·Biome·타입·원래 assets/build·guard를 실제 통과했다. 같은 source의 최종 남녀 Chrome/WebGL 모두7관찰 단계와 종료, source/비교 모델 불변·전신·외부/카메라/오류0을 확인했다. 처음 runtime browser 명령은 sandbox localhost EPERM으로 실행 전 실패해 로그를 보존했고 로컬 시험 권한의 `accepted-native`가 최종 결과다. guard RED는 소유한 임시 sentinel 제거 후 실제 복구 통과했다. 공개 JS/CSS byte 동일·공개 GLB0·82증거 SHA·source Git blob를 실제 대조했다. [실제 화면·실패·남은 조건](../review/observed-avatar-pose/README.md). D2-T와 전체1~6 완료를 의미하지 않는다.

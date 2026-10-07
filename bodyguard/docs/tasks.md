@@ -1,6 +1,6 @@
 # Bodyguard — Tasks
 
-2026-10-08 같은 관찰 결과→사용자 리그: [S2.T2](stories/observed-avatar-pose.md)에서 한 번의 image/world 결과와 원본 세대·시각을 기존 GLB에 연결했다. 첫 실제 Chrome 남녀 각각 움직임→가림/복수 보류→복구→만료/종료, 비교 모델·원본 불변과 전신 구도를 확인했다. 합성 관찰이며 실제 SDK/카메라·올바른 시범/피드백·최종 외형은 아니다. source·최종 증거·PR 게이트를 진행하며 D2-A/M/T/R/I/P·디자인/SDK/외부/운영 및 전체1~6 기준은 유지한다. PR #64의 실제 merge48d3154·main 포함·브랜치 보존을 확인하고 그 최신 main에서 시작했다. 아래는 시점별 기록이다.
+2026-10-08 같은 관찰 결과→사용자 리그: [S2.T2](stories/observed-avatar-pose.md)에서 한 번의 image/world 결과와 원본 세대·시각을 기존 GLB에 연결했다. runtimefea93b9의 실제 Chrome 남녀 각각 움직임→가림/복수 보류→복구→만료/종료, 비교 모델·원본 불변과 전신 구도를 확인했다. [실제 화면·원본 실패·남은 조건](review/observed-avatar-pose/README.md). 합성 관찰이며 실제 SDK/카메라·올바른 시범/피드백·최종 외형은 아니다. frontend810·정적/build/guard·공개 byte 동일·82증거/source SHA를 실제 확인하고 PR 게이트를 진행한다. D2-A/M/T/R/I/P·디자인/SDK/외부/운영 및 전체1~6 기준은 유지한다. PR #64의 실제 merge48d3154·main 포함·브랜치 보존을 확인하고 그 최신 main에서 시작했다. 아래는 시점별 기록이다.
 
 2026-10-08 두 아바타 움직임 연결: [S2.T1](stories/avatar-directional-rig.md)에서 기존 남녀 GLB의 두 독립 리그에 서로 다른 사지 방향을 전달하고 발끝까지의 실제 WebGL 구도를 확인했다. [검증 화면·남은 문제](review/avatar-directional-rig/README.md). 비공개 합성 입력이며 공개 코칭/외형 수정·카메라·목/손 추적·올바른 시범/피드백은 아직 아니다. D2-T와 전체1~6은 미완료이고 PR 게이트를 진행한다. 기존 모델/실패·원본·승인·디자인/SDK/운영 경계는 유지한다.
 
