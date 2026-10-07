@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-07 웹 빌드 고지: [S5.5](stories/web-notice-evidence.md)에서 실제 bundled JS·별도 Tailwind CSS 고지와 누락 차단을 구현·native 검증했다. 기존 JS/CSS/index/brand 출력5개는 byte 동일하고 고지3개만 추가됐다. [실행·실패·한계](review/web-notice-evidence/README.md). PR 게이트를 진행하며 Draft #29 exporter/실제 브라우저 전달·Docker/HTTPS·전체 권리/법무·아바타/실측·최종 코칭·디자인 구조/적용·전체1~6단계는 미완료다. 기존 실패·이월·원본과 승인 규칙은 유지한다. 아래는 시점별 기록이다.
+
 2026-10-07 시작 원인 비교: 최신 main1a5fac7(PR #56 실제 merge commit)의 production 출력으로 headless/headed의 단순 화면/제품 /start를 동일 요청에서 비교했다. [S6.5 실제 수치·원본 SHA](review/web-startup-causal/README.md)의8개 탐색은 정상이고 과거 수 초 지연은 미재현이다. 성공 재실행을 원인 해결로 표시하지 않으며 제품 코드/기존5000ms 변경0·Draft #51/시작 P2 유지다. 같은 정상 진단의 반복 대신 실패 조건/반증 가설이 다음 입력이다. PR #56 source869e07f→merge1a5fac7의 main 포함·같은 tree·브랜치 보존을 확인했다. 코칭 구조/적용 범위·SDK 통신 승인·Docker 연결과 실제 신체/아바타·외부/운영·전체1~6 필수 기준은 남고 독립 작업을 계속한다. 아래는 시점별 기록이다.
 
 2026-10-07 텍스트 최소화 최신: [S4.D3 독립 코칭 시안](stories/coaching-prototype-minimal-copy.md)의 보조 설명을 기본 접힌 “설명 보기”로 옮기고 중복 문구를 줄였다. 구도 전환·동작 후보·설정·단계 안내·종료 흐름과 안전/정적 시안 구분은 유지하며 [실제 최종 Chrome·화면·실패 원본](review/coaching-prototype-minimal-copy/README.md)을 보존했다. 제품 코드/화면 확장·카메라/판정·최종 아바타·전체1~6 완료가 아니다. 다음 디자인 작업은 CEO의 클릭 가능한 구조 검토와 제품 적용 범위 합의이며 독립 개발은 계속한다. Draft #51은 main317cbd1 입력 guard 통합·현재 회귀 통과 뒤에도 과거 시작 원인/실사용 성능과 미승인 디자인 구조 게이트로 유지한다. 아래는 시점별 기록이다.

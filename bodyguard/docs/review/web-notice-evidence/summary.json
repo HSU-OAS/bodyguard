@@ -1,0 +1,253 @@
+{
+  "date": "2026-10-07",
+  "startingMain": "33a6e8b5d24f6d9635bb1605d148ed6d30ba4f42",
+  "execution": "Starting HEAD with recorded uncommitted implementation; code hashes below match reviewed execution. Not a test of the later evidence commit.",
+  "codeSHA256": {
+    "scripts/check-build-notices.ts": "14a60cf1cb7585310e3a0820a04bece3537d904faa4a3c95dcfd234e54eaab56",
+    "scripts/check-build-notices.test.mjs": "541175af4e8facbe73deac479441790d20e7557178f2e1a0edd854eed2e10e5a",
+    "vite.config.ts": "1200b2bf814fbd9ab7a34a922fc5c7a924a17f85a1890356436b778a25887473",
+    "tsconfig.json": "4f3410ab4cb9ef4870c0d940ac8cf3465c2c4aed86a18994ec7430bdcad22fd2"
+  },
+  "versions": {
+    "node": "24.20.0",
+    "pnpm": "12.6.0",
+    "vite": "8.3.1"
+  },
+  "unchangedInputs": {
+    "package.json": "fc5513803b158f0829f44e17a43335bcc0319d5476cb41abf8405656946363b7",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "installedLockMatchesExistingReference": true,
+  "installedLockSHA256": "19fe347142fb8c0c2739126ed4518358a9137287d7e0a8ced914d086028a7a6d",
+  "install": {
+    "frozen": true,
+    "newDependencyVersions": 0,
+    "downloadedPackages": 0,
+    "offlineAttempt": "ERR_PNPM_NO_OFFLINE_TARBALL",
+    "actualInstallExitCode": 0,
+    "actualInstallLogSHA256": "97b4d094ef9dc38b28d18f883236e2f21e2c74ff36ee04c39f00a994a81d0856"
+  },
+  "runs": [
+    {
+      "label": "baseline-build",
+      "head": "33a6e8b5d24f6d9635bb1605d148ed6d30ba4f42",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFiles": 153,
+      "sourceManifestSHA256": "2b25202e0d7f83ab5ee496b6612a21210e377b3ba42adc170f6deb0b83231ec6",
+      "helperSHA256": "27037873791b55fb35eb01660a89339811907535e20b25cb58a776d4e2c85d60",
+      "originalReportSHA256": "0bfbe9846c27404d2fbdf92359f635d990f15c7bd5d688860b897a79ecf3bdc2",
+      "logSHA256": "91827cd57581ea576ef1faaf288a9c0c0ed3619fdc76a84ed279edc38d363fec"
+    },
+    {
+      "label": "baseline-notice-red",
+      "head": "33a6e8b5d24f6d9635bb1605d148ed6d30ba4f42",
+      "exitCode": 1,
+      "sourceUnchanged": true,
+      "sourceFiles": 155,
+      "sourceManifestSHA256": "5fe83d08b5d0c709ef369448354da7fb7dfaa64b6a6ddbd9c2baceaeb3596911",
+      "helperSHA256": "27037873791b55fb35eb01660a89339811907535e20b25cb58a776d4e2c85d60",
+      "originalReportSHA256": "4d8bce2a38e5fd248798fc1fe163d4f7a201fa13dc06e0689d656765baeea6ce",
+      "logSHA256": "31e879197f4b602b9833aabe22f8142b83f95caaf1c1222619012467b7586db3"
+    },
+    {
+      "label": "notice-fixtures-first",
+      "head": "33a6e8b5d24f6d9635bb1605d148ed6d30ba4f42",
+      "exitCode": 1,
+      "sourceUnchanged": true,
+      "sourceFiles": 155,
+      "sourceManifestSHA256": "766161a784c325465bd22c68159dd70b6040a60787c1dd8bc82aaf86776d02fe",
+      "helperSHA256": "27037873791b55fb35eb01660a89339811907535e20b25cb58a776d4e2c85d60",
+      "originalReportSHA256": "bf276c712de00caca5cf57629f1a7c4d08f5f35825f5b44e9a37331a8d51b9d5",
+      "logSHA256": "a878296d323bf3271c57704ad0e4c84a27bb3e17d0497db0028aa18d90317b2e"
+    },
+    {
+      "label": "notice-fixtures-final",
+      "head": "33a6e8b5d24f6d9635bb1605d148ed6d30ba4f42",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFiles": 155,
+      "sourceManifestSHA256": "2edf90e0b6ab1cd9ca9dd1e158fc2de318b956d797d6fcef7ca4f541f5f0903a",
+      "helperSHA256": "27037873791b55fb35eb01660a89339811907535e20b25cb58a776d4e2c85d60",
+      "originalReportSHA256": "d07706706cfb864538d5d756aeb2bbda5986ef0f81934e5f6645650985268eb5",
+      "logSHA256": "11fdfd91fdd7bb3f51dd7ee19988f209fc1c672593e5266f5af02bf1a3f9bfba"
+    },
+    {
+      "label": "reviewed-fixtures",
+      "head": "33a6e8b5d24f6d9635bb1605d148ed6d30ba4f42",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFiles": 155,
+      "sourceManifestSHA256": "90805d9a4faad500a26a71b2d7547fdc15235aca15e01ddcdf29fdf1b959a2e4",
+      "helperSHA256": "27037873791b55fb35eb01660a89339811907535e20b25cb58a776d4e2c85d60",
+      "originalReportSHA256": "1f9edbe89e9f7c8207d2fb6d0a3cbd1473239f108ce470f0c193316350ef4761",
+      "logSHA256": "b8315a6f86ea96374369de2211f58c5ed7b956b0466abe5d349fa265764bf8a7"
+    },
+    {
+      "label": "reviewed-types",
+      "head": "33a6e8b5d24f6d9635bb1605d148ed6d30ba4f42",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFiles": 155,
+      "sourceManifestSHA256": "90805d9a4faad500a26a71b2d7547fdc15235aca15e01ddcdf29fdf1b959a2e4",
+      "helperSHA256": "27037873791b55fb35eb01660a89339811907535e20b25cb58a776d4e2c85d60",
+      "originalReportSHA256": "add644c0dc16f166356e267e7e6c83d058eb5fcc9213ba830c2da82a739f8570",
+      "logSHA256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92"
+    },
+    {
+      "label": "reviewed-biome",
+      "head": "33a6e8b5d24f6d9635bb1605d148ed6d30ba4f42",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFiles": 155,
+      "sourceManifestSHA256": "90805d9a4faad500a26a71b2d7547fdc15235aca15e01ddcdf29fdf1b959a2e4",
+      "helperSHA256": "27037873791b55fb35eb01660a89339811907535e20b25cb58a776d4e2c85d60",
+      "originalReportSHA256": "b0d668fb9be82ca3ebef6e8233d5da8faf3a46b55cca78231d13b28485cc7e3b",
+      "logSHA256": "427db8846dd7e7724453d46555644ea251609bec5ec51855566d0c0a48e3ec6f"
+    },
+    {
+      "label": "reviewed-build",
+      "head": "33a6e8b5d24f6d9635bb1605d148ed6d30ba4f42",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFiles": 155,
+      "sourceManifestSHA256": "90805d9a4faad500a26a71b2d7547fdc15235aca15e01ddcdf29fdf1b959a2e4",
+      "helperSHA256": "27037873791b55fb35eb01660a89339811907535e20b25cb58a776d4e2c85d60",
+      "originalReportSHA256": "03e0a1358d7d1a758784ac3d6d475293b46b9829e7a42a95251cf30aa4466061",
+      "logSHA256": "95de927b0fe75690662b0c358071787fe46c58e09bffe9c4219a8c66bddd24a7"
+    },
+    {
+      "label": "reviewed-negative-build",
+      "head": "33a6e8b5d24f6d9635bb1605d148ed6d30ba4f42",
+      "exitCode": 1,
+      "sourceUnchanged": true,
+      "sourceFiles": 155,
+      "sourceManifestSHA256": "90805d9a4faad500a26a71b2d7547fdc15235aca15e01ddcdf29fdf1b959a2e4",
+      "helperSHA256": "27037873791b55fb35eb01660a89339811907535e20b25cb58a776d4e2c85d60",
+      "originalReportSHA256": "33aa609cd27ed557922a16b7bd404c9b613dd262877a8d1f0217cbdc127cdd2e",
+      "logSHA256": "7a04850b56a81b2c48cbc0263fb2e754ed277c0cb5145af0d1d14c1d592026cf"
+    },
+    {
+      "label": "reviewed-regression",
+      "head": "33a6e8b5d24f6d9635bb1605d148ed6d30ba4f42",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFiles": 155,
+      "sourceManifestSHA256": "90805d9a4faad500a26a71b2d7547fdc15235aca15e01ddcdf29fdf1b959a2e4",
+      "helperSHA256": "27037873791b55fb35eb01660a89339811907535e20b25cb58a776d4e2c85d60",
+      "originalReportSHA256": "5b069dc4dd84bd928888ab5985f48aeb39d97718d2a16de47c2ec988ea5c544e",
+      "logSHA256": "0a679ac41bf38698747f290e78fce91cbf5b868155f382c1b6627c1360812bbf"
+    },
+    {
+      "label": "reviewed-notices",
+      "head": "33a6e8b5d24f6d9635bb1605d148ed6d30ba4f42",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFiles": 155,
+      "sourceManifestSHA256": "90805d9a4faad500a26a71b2d7547fdc15235aca15e01ddcdf29fdf1b959a2e4",
+      "helperSHA256": "27037873791b55fb35eb01660a89339811907535e20b25cb58a776d4e2c85d60",
+      "originalReportSHA256": "b4daaf831f224d03e3e8635867e9ca043cd6cc4ead68366998e4a42c8e930ba8",
+      "logSHA256": "ff018cda60e90fea84f20f03b1cf7909871e43c095f75263155d0050ca7b47d4"
+    },
+    {
+      "label": "production-exclusion-final",
+      "head": "33a6e8b5d24f6d9635bb1605d148ed6d30ba4f42",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFiles": 155,
+      "sourceManifestSHA256": "2edf90e0b6ab1cd9ca9dd1e158fc2de318b956d797d6fcef7ca4f541f5f0903a",
+      "helperSHA256": "27037873791b55fb35eb01660a89339811907535e20b25cb58a776d4e2c85d60",
+      "originalReportSHA256": "3d4d0ecbb51c0c7f3916c0371769d92b8a1ad7e33f0a3cc4cf895e3e29952192",
+      "logSHA256": "b4464da94ef1bc3218566f5daacbd59c0e58d99425d8f0afe531d7ffe2ca0105"
+    }
+  ],
+  "baselineOutput": {
+    "assets/index-BZhaXPyN.js": "334736692ea127d229c8a1ead7e031ad0652c53e559cb2e4ae3eb95fd3dc8989",
+    "assets/index-FW13lazw.css": "3db1ea79a56892552afda1e0aba982f971b1f752e6647cd39a3be9441fc58686",
+    "brand/README.md": "6a7c4f147ed207317f1445f2c1fd97ba2f66c7b298f4c278fc0f26a6b9d22a84",
+    "brand/google-icon.png": "2bc2ae8e4c67de66d74bf1deed12cd8f22981270266a487576b671b0b4df361c",
+    "index.html": "05fc0c89e74f8a51c0039d0192ebba1d24303c27a70983758715fce380055b07"
+  },
+  "reviewedOutput": {
+    "assets/index-BZhaXPyN.js": "334736692ea127d229c8a1ead7e031ad0652c53e559cb2e4ae3eb95fd3dc8989",
+    "assets/index-FW13lazw.css": "3db1ea79a56892552afda1e0aba982f971b1f752e6647cd39a3be9441fc58686",
+    "brand/README.md": "6a7c4f147ed207317f1445f2c1fd97ba2f66c7b298f4c278fc0f26a6b9d22a84",
+    "brand/google-icon.png": "2bc2ae8e4c67de66d74bf1deed12cd8f22981270266a487576b671b0b4df361c",
+    "index.html": "05fc0c89e74f8a51c0039d0192ebba1d24303c27a70983758715fce380055b07",
+    "licenses/bundled-js.json": "19f0c9961dd082bcebb1ba8dfdde98ef58c843cdb0ea4973a47a91b46c940cd7",
+    "licenses/bundled-packages.json": "1c80ec2f6a9ad967f999232165821bf4d27ff55197ea21c4e049ff2f974efb54",
+    "licenses/tailwindcss.txt": "0045fac7ef9a1530b1e59eacde31c4823bfbc8881ad2e543bc82c70c38cfcfd8"
+  },
+  "unchangedPreviousOutputFiles": [
+    "assets/index-BZhaXPyN.js",
+    "assets/index-FW13lazw.css",
+    "brand/README.md",
+    "brand/google-icon.png",
+    "index.html"
+  ],
+  "addedOutputFiles": [
+    "licenses/bundled-js.json",
+    "licenses/bundled-packages.json",
+    "licenses/tailwindcss.txt"
+  ],
+  "notices": {
+    "jsNotices": [
+      {
+        "name": "react-dom",
+        "version": "19.3.0",
+        "identifier": "MIT",
+        "textSHA256": "cf9b17822d1fcd4ff32ccbe14183386fb3adf6f2ff92dc184130823f7fc28173"
+      },
+      {
+        "name": "react-router",
+        "version": "8.4.0",
+        "identifier": "MIT",
+        "textSHA256": "9bd42e9ab2f84a397e8efd7ba4feedd4956198c0ff6ea6f886fd47fcf8e53df2"
+      },
+      {
+        "name": "react",
+        "version": "19.3.0",
+        "identifier": "MIT",
+        "textSHA256": "cf9b17822d1fcd4ff32ccbe14183386fb3adf6f2ff92dc184130823f7fc28173"
+      },
+      {
+        "name": "scheduler",
+        "version": "0.28.0",
+        "identifier": "MIT",
+        "textSHA256": "cf9b17822d1fcd4ff32ccbe14183386fb3adf6f2ff92dc184130823f7fc28173"
+      }
+    ],
+    "css": {
+      "package": "tailwindcss",
+      "version": "4.3.3",
+      "noticeSHA256": "0045fac7ef9a1530b1e59eacde31c4823bfbc8881ad2e543bc82c70c38cfcfd8",
+      "bannerPresent": false
+    },
+    "scope": "Vite bundled-JS root license files and configured Tailwind CSS pipeline only",
+    "fullArtifactInventoryVerified": false,
+    "ancillaryNoticesVerified": false,
+    "distributionApproved": false
+  },
+  "fixtureTests": {
+    "passed": 18,
+    "failed": 0,
+    "synthetic": true
+  },
+  "frontendRegression": {
+    "passed": 693,
+    "files": 42
+  },
+  "realNegativeBuild": {
+    "exitCode": 1,
+    "failedForMissingNotice": true,
+    "privateConfigSHA256": "1e5138ee0d0283590714761ab898c06aee1f89cee84c0451b9892a2842be64aa"
+  },
+  "nativeBuild": "Vite production build and TypeScript checked separately; pnpm assets/model preparation was not invoked.",
+  "packageDeliveryVerified": false,
+  "dockerVerified": false,
+  "httpsVerified": false,
+  "clinicalVerified": false,
+  "avatarVerified": false,
+  "legalApproved": false,
+  "stages1To6Complete": false
+}
