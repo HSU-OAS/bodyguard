@@ -82,6 +82,9 @@ for (const file of files) {
     'Playback resource unavailable',
     'createOwnedPlaybackResources',
     'mountPlaybackResourcesProbe',
+    'mountNativeAuthProbe',
+    '__private-native-auth-probe',
+    'Private native fixture unavailable',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -109,5 +112,6 @@ console.log(
     unconnected_owned_video_pose_strings: 0,
     unconnected_owned_pose_playback_strings: 0,
     unconnected_owned_playback_resources_strings: 0,
+    unconnected_native_auth_playback_strings: 0,
   }),
 )
