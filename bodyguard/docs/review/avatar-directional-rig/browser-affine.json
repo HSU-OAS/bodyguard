@@ -1,0 +1,150 @@
+{
+  "label": "affine",
+  "head": "979f5e639877d69e4a7e9bfec7edb98edbbb01d2",
+  "sourceBefore": {
+    "src/avatar/directionalRig.ts": "be1728162f21b1a56954372d119b1ed089f307ab3f1e7ba6a8b8da90afd661ba",
+    "src/avatar/eightWeightSkin.ts": "70bea47c7747d8c4771df3fb082a072eb1726e0e8053c5d8dacec5b797bcef9d",
+    "e2e/fixtures/avatarRigProbe.ts": "9ca7ac7aeb1b5fc13fde2611aaf917c0acacdb4e6293e1732324a15bb81f35eb",
+    "scripts/test-avatar-rig-browser.mjs": "47a259ad3efe634ed8c4700fae7bc0dbec5bec74e5acd2ef7c804487a73962ff",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "assetCommit": "25a9bd6c7392890e3b5d5d6ae1046bb7087d56ad",
+  "assetHashes": {
+    "male": "cc85bcd449f3f31347e4f7174986d41e4aca3067990f5d8a2e6ba3a099171927",
+    "female": "27c10902aa377e995bdbc115ab773cf22f8ea38582c49820304a33ad7685f25a"
+  },
+  "actualChrome": true,
+  "actualWebGL": true,
+  "actualCamera": false,
+  "syntheticDirections": true,
+  "releaseAvatar": false,
+  "samples": [
+    {
+      "gender": "male",
+      "passed": true,
+      "initial": {
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          }
+        ],
+        "sourceUnchanged": true,
+        "independent": true,
+        "eightWeightMeshes": [
+          1,
+          1
+        ],
+        "sequence": 1,
+        "calls": 6,
+        "triangles": 572412,
+        "maxDirectionError": 0,
+        "closed": false
+      },
+      "beforeSha": "0e3bdea17ce0337ba7d754da3b7dc9f3b2ae4bf1e9314c306a227fe7520d03ab",
+      "settled": {
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          }
+        ],
+        "sourceUnchanged": true,
+        "independent": true,
+        "eightWeightMeshes": [
+          1,
+          1
+        ],
+        "sequence": 61,
+        "calls": 6,
+        "triangles": 572412,
+        "maxDirectionError": 0.00013252287210400117,
+        "closed": false
+      },
+      "afterSha": "8371114cab91aa68a25ed256247d7ff27433a0003dc6b28ad6259d2143b4859e",
+      "closed": true
+    },
+    {
+      "gender": "female",
+      "passed": true,
+      "initial": {
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          }
+        ],
+        "sourceUnchanged": true,
+        "independent": true,
+        "eightWeightMeshes": [
+          1,
+          1
+        ],
+        "sequence": 1,
+        "calls": 6,
+        "triangles": 563580,
+        "maxDirectionError": 0,
+        "closed": false
+      },
+      "beforeSha": "42c557ab896453dbbf53d4aa201d4efda3a6bf7e812c19e31abae7d47cd36774",
+      "settled": {
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          }
+        ],
+        "sourceUnchanged": true,
+        "independent": true,
+        "eightWeightMeshes": [
+          1,
+          1
+        ],
+        "sequence": 61,
+        "calls": 6,
+        "triangles": 563580,
+        "maxDirectionError": 0.0001999384017272397,
+        "closed": false
+      },
+      "afterSha": "172d2deb57998024ee5687a59343f4f63e680500289bed75d8ca26f62077afa8",
+      "closed": true
+    }
+  ],
+  "browser": "154.0.8037.98",
+  "boundary": {
+    "external": 0,
+    "camera": 0,
+    "errors": []
+  },
+  "sourceAfter": {
+    "src/avatar/directionalRig.ts": "be1728162f21b1a56954372d119b1ed089f307ab3f1e7ba6a8b8da90afd661ba",
+    "src/avatar/eightWeightSkin.ts": "70bea47c7747d8c4771df3fb082a072eb1726e0e8053c5d8dacec5b797bcef9d",
+    "e2e/fixtures/avatarRigProbe.ts": "9ca7ac7aeb1b5fc13fde2611aaf917c0acacdb4e6293e1732324a15bb81f35eb",
+    "scripts/test-avatar-rig-browser.mjs": "47a259ad3efe634ed8c4700fae7bc0dbec5bec74e5acd2ef7c804487a73962ff",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  }
+}
