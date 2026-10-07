@@ -1,5 +1,17 @@
 # S4.17 — 본인 일·주 기록 대시보드 (진행 중)
 
+## 2026-10-07 현재 상태
+
+최신 main `39a23eb`를 통합한 실행 HEAD `52f73b2`에서 실제 저장→일·주 조회→관리/복귀, 빈 기간·잘못된 URL·503 복구·다른 기대 계정 차단과 기존 자세 기록/삭제 흐름을 다시 확인했다. API492·대시보드Chrome2·기존 자세 기록Chrome4·동작 선택/공개 진입Chrome8·strict 시작Chrome5·OpenAPI 재생성 변경 없음·정적/build/guard 통과다. 이들은 합성 계정/메일/기록이며 사람·카메라·외부·의료 정확도 검증이 아니다.
+
+전체 frontend는 최초742통과/1실패 뒤 소스 변경 없이743통과했다. 단독 날짜 복구3건/해당 파일23건도 통과했으나 **간헐 실패의 원인은 미확정**이다. 첫 실행을 없애거나 단순 재실행으로 해결 처리하지 않는다. OpenAPI 최초 sandbox 캐시 실패와 private 증거 수집기의 ENOTDIR 실패도 별도로 기록한다. 원본 로그/XML/report/PNG와 전용 DB는 보존하고 검증 서버만 정상 종료했다.
+
+[현재 수치·실행 시각·원본 SHA·실행 소스198개](current-20261007/summary.json)는 raw DOM/실패 메시지/계정 값 없이 게시했다. `latestCommandsPassed=true`는 마지막 명령들만의 결과이며 `allRequiredGatesPassed=false`, `storyComplete=false`, `mergeAuthorized=false`다. private 수집기는 실행 전/후 소스 SHA를 실제 비교했다. 초기 수집기 자체의 시작 SHA 미기록은 `captureSourceAtStartVerified=false`로 구분하며 시작 SHA를 사후 추정하지 않는다. 공개 증거는 16개 수집 실행·19개 성공 브라우저 case와 최초 전체 단위 실패를 함께 남긴다.
+
+새 디자인 구조/제품 적용 범위는 미승인이다. 현재 대시보드는 기능 검증용이며 기존 HTML·메뉴·많은 상시 설명을 최종 디자인으로 채택하지 않는다. [화이트·블루 v4와 텍스트 최소화 결정](../../coaching-design-decision-20261007.md)을 다음 승인된 UI 수정 구간에 적용하고 오류/빈 상태·안전/개인정보·키보드/접근성을 재검증한다. Draft PR #51은 병합하지 않는다. 이전 시작 실패 원인과 실제 성능도 해결됐다고 선언하지 않는다.
+
+아래 2026-10-06 기록과 기존 증거는 그 시점의 원본이다.
+
 2026-10-06 · baseline `991ed2b33a1abc6158b3a177f8431a104c476ba0` · `codex/record-dashboard` · [Draft PR #51](https://github.com/HSU-OAS/bodyguard/pull/51)
 
 **필수 브라우저 회귀 실패로 Story와 병합 게이트는 미완료다.** 작동한 화면·기능과 미충족 기준을 분리한다. 전체1~6단계 통과나 출시 후보판 선언이 아니다.
