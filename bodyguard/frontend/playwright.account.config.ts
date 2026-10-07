@@ -22,6 +22,7 @@ export default defineConfig({
     'recordedsession.spec.ts',
     'authcoaching.spec.ts',
     'notifications.spec.ts',
+    'alertdelivery.spec.ts',
     'summaries.spec.ts',
     'minuteupload.spec.ts',
   ],
@@ -37,17 +38,19 @@ export default defineConfig({
     proxy: { server: proxy, bypass: 'localhost,127.0.0.1,[::1]' },
   },
   webServer: {
-    command: process.env.BODYGUARD_TEST_MINUTE_UPLOAD_PROBE
-      ? 'pnpm build && vite build --config e2e/fixtures/minuteUpload.vite.ts && vite preview --host localhost'
-      : process.env.BODYGUARD_TEST_COACHING_AUTH_PROBE
-        ? 'pnpm build && vite build --config e2e/fixtures/authCoaching.vite.ts && vite preview --host localhost'
-        : process.env.BODYGUARD_TEST_RECORDED_PROBE
-          ? 'pnpm build && vite build --config e2e/fixtures/recordedSession.vite.ts && vite preview --host localhost'
-          : process.env.BODYGUARD_TEST_OWNER_PROBE
-            ? 'pnpm build && vite build --config e2e/fixtures/recordOwner.vite.ts && vite preview --host localhost'
-            : process.env.BODYGUARD_TEST_RESULT_PROBE
-              ? 'pnpm build && vite build --config e2e/fixtures/resultRecord.vite.ts && vite preview --host localhost'
-              : 'pnpm build && vite preview --host localhost',
+    command: process.env.BODYGUARD_TEST_ALERT_DELIVERY_PROBE
+      ? 'pnpm build && vite build --config e2e/fixtures/alertDelivery.vite.ts && vite preview --host localhost'
+      : process.env.BODYGUARD_TEST_MINUTE_UPLOAD_PROBE
+        ? 'pnpm build && vite build --config e2e/fixtures/minuteUpload.vite.ts && vite preview --host localhost'
+        : process.env.BODYGUARD_TEST_COACHING_AUTH_PROBE
+          ? 'pnpm build && vite build --config e2e/fixtures/authCoaching.vite.ts && vite preview --host localhost'
+          : process.env.BODYGUARD_TEST_RECORDED_PROBE
+            ? 'pnpm build && vite build --config e2e/fixtures/recordedSession.vite.ts && vite preview --host localhost'
+            : process.env.BODYGUARD_TEST_OWNER_PROBE
+              ? 'pnpm build && vite build --config e2e/fixtures/recordOwner.vite.ts && vite preview --host localhost'
+              : process.env.BODYGUARD_TEST_RESULT_PROBE
+                ? 'pnpm build && vite build --config e2e/fixtures/resultRecord.vite.ts && vite preview --host localhost'
+                : 'pnpm build && vite preview --host localhost',
     url: 'http://localhost:4173',
     reuseExistingServer: false,
     timeout: 180_000,

@@ -44,6 +44,7 @@ def main() -> int:
             "recordedsession",
             "authcoaching",
             "notifications",
+            "alertdelivery",
             "summaries",
             "minuteupload",
         ),
@@ -188,6 +189,7 @@ def main() -> int:
                         "recordedsession",
                         "authcoaching",
                         "notifications",
+                        "alertdelivery",
                         "summaries",
                         "minuteupload",
                     )
@@ -227,6 +229,7 @@ def main() -> int:
                                 "recordedsession",
                                 "authcoaching",
                                 "notifications",
+                                "alertdelivery",
                                 "summaries",
                                 "minuteupload",
                             )
