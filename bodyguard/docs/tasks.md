@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-08 계정·설정·알림 수명 연결: [S4.N4](stories/owned-alert-lifecycle.md)에서 실제 계정 권위/본인 설정 조회를 비공개 전달 부품에 연결했다. 실제 웹 설정 저장→enabled 종류 안내→선택/닫기→재조회·명시 재준비→로그아웃204/guest/API401을 production Chrome·API·격리 SQL로 확인했다(안내/메일 합성). 재진입/이탈 경계를 보완했고 [실패·현재 소스·작성자 리뷰](review/owned-alert-lifecycle/README.md)를 보존했다. 최종765 DOM/실제 계정 Chrome3·정적/build/guard 통과, 기존 선택8은 최종 private handoff 직전 동일 공개 JS/CSS에서 확인했다. 공개 화면/정책/SDK/아바타/운영 변경0이며 조건부 PR 게이트를 진행한다. 공개 코칭/스케줄러/소리/반응 기록·동시 설정 동기화·디자인 승인/실측/외부/2단계 이월/전체1~6 완료는 아니다. PR62의 실제 merged ddc35cf·브랜치 보존을 확인하고 그 최신 main에서 시작했다. 아래는 시점별 기록이다.
+
 2026-10-08 보호 화면 초점 복구: [S6.8](stories/web-focus-recovery.md)에서 계정 확인 뒤 시작·탐색·계정 제목의 초점 상실을 실제 DOM/production Chrome으로 재현·보완했다. 명시 재시도·주소 변형·살아 있는 헤더/본문·공개 입력/FAQ·기록 담당 경계를 확인하고 전체744 DOM/실제 Chrome11·기존 선택8/실제 API·SQL 통합2·정적/build/guard를 통과했다. [실패·원본·범위·작성자 리뷰](review/web-focus-recovery/README.md). 화면 구성·CSS/인증 정책/판정/SDK/아바타/운영 변경0이며 조건부 PR 게이트를 진행한다. 제품 시작 지연 P2의 원인 해결이나 전체1~6 통과가 아니며 디자인 구조/적용·외부 승인·2단계 이월 기준을 유지한다. 아래는 시점별 기록이다.
 
 2026-10-07 시작 회귀 후속 감사: [S6.7](stories/web-startup-recurrence.md)에서 PR #60의 실제 merge11ace02와 이후 선택2통과/6실패·실제 통합0통과/2실패의 보고 누락을 대조했다. 원본8개 비교6통과/2실패·후속 profile3통과/1실패를 보존하고, native Vite 대조로 확인한 helper 개발모드 오류만 보완해 같은 경계4개/730 DOM·정적/build/guard를 통과했다. [수치·원본·미실행/작성자 리뷰](review/web-startup-recurrence/README.md). 이는 별도 CLI 회귀나 제품4초 지연 원인 해결이 아니다. 제품 코드/미승인 UI/인증·판정/SDK·아바타/운영 변경0이며 조건부 PR 게이트를 진행한다. 제품 시작 P2·기존 Draft와 디자인/SDK/Docker·실측/참여자·1~6단계 미완료 기준은 유지한다. 아래는 시점별 기록이다.
