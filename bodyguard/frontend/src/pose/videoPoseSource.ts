@@ -117,7 +117,9 @@ export function createVideoPoseSource(
               }
               const input = new VideoFrame(video, { timestamp: Math.round(mediaTime * 1e6) })
               inputs.add(input)
-              if (input.displayWidth <= 0 || input.displayHeight <= 0) {
+              const width = input.displayWidth,
+                height = input.displayHeight
+              if (![width, height].every((n) => Number.isSafeInteger(n) && n > 0)) {
                 release(input)
                 if (cleanupFailed) throw new ResourceCleanupError()
                 throw new Error('Video capture unavailable')
@@ -125,7 +127,13 @@ export function createVideoPoseSource(
               lastSequence = sequence
               lastAt = now
               lastMedia = mediaTime
-              resolve({ generation, sequence, at: now, input })
+              resolve({
+                generation,
+                sequence,
+                at: now,
+                input,
+                image: Object.freeze({ width, height }),
+              })
             } catch (error) {
               reject(
                 error instanceof ResourceCleanupError

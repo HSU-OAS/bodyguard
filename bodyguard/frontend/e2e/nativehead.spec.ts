@@ -7,6 +7,7 @@ import type { mountNativeHeadAuthProbe } from './fixtures/nativeHeadAuthProbe'
 const origin = 'http://localhost:4173'
 const mailbox = process.env.BODYGUARD_TEST_MAILBOX
 const withFeedback = Boolean(process.env.BODYGUARD_TEST_NATIVE_FEEDBACK_PROBE)
+const withNeck = process.env.BODYGUARD_TEST_NATIVE_NECK === '1'
 const withReference = withFeedback || Boolean(process.env.BODYGUARD_TEST_NATIVE_REFERENCE_PROBE)
 const withHands = withReference || Boolean(process.env.BODYGUARD_TEST_NATIVE_HANDS_PROBE)
 const bundle =
@@ -19,7 +20,7 @@ if (
   !bundle ||
   !(
     withFeedback
-      ? /^\/private\/tmp\/bodyguard-native-feedback-proof\.[A-Za-z0-9]+\/probe-[a-z0-9-]+$/
+      ? /^\/private\/tmp\/bodyguard-native-(?:feedback|neck)-proof\.[A-Za-z0-9]+\/probe-[a-z0-9-]+$/
       : withReference
         ? /^\/private\/tmp\/bodyguard-native-reference-proof\.[A-Za-z0-9]+\/probe-[a-z0-9-]+$/
         : withHands
@@ -117,6 +118,8 @@ test.afterEach(async ({ page, browser }, info) => {
     return { cameraCalls: w.cameraCalls, cspAttempts: w.cspAttempts }
   })
   if (final) {
+    if (withNeck)
+      expect(final).toMatchObject({ neckStatus: 'unavailable', neckCurrentGeneration: true })
     expect(final.tracksEnded && final.detached && final.allFramesClosed).toBe(true)
     expect(final.frameErrors).toBe(0)
     expect(final.frameCloses).toBe(final.frames)
@@ -208,6 +211,7 @@ async function mount(
       withAdaptive,
       withTiming,
       withTrunk,
+      withNeck,
     }) => {
       const path = '/__private-native-head-probe.js'
       const module = (await import(path)) as {
@@ -234,9 +238,19 @@ async function mount(
         withAdaptive,
         withTiming,
         withTrunk,
+        withNeck,
       )
     },
-    { gender, withHands, withReference, withFeedback, withAdaptive, withTiming, withTrunk },
+    {
+      gender,
+      withHands,
+      withReference,
+      withFeedback,
+      withAdaptive,
+      withTiming,
+      withTrunk,
+      withNeck,
+    },
   )
   await expect
     .poll(() => state(page))
@@ -262,6 +276,7 @@ async function running(page: Page) {
   expect(value.handsConfigured).toBe(withHands)
   expect(value.handCalls).toBe(withHands ? value.nativeCalls : 0)
   expect(value.nativeHandsMax).toBe(0)
+  if (withNeck) expect(value.neckStatus).toBe('unavailable')
 }
 async function hold(page: Page) {
   await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.holdNextResult())
@@ -275,6 +290,7 @@ async function hold(page: Page) {
 async function revokedWhileHeld(page: Page) {
   const value = await mark(page, 'authority-revoked-while-native-held')
   expect(value.owned).toBe(false)
+  if (withNeck) expect(value.neckStatus).toBe('unavailable')
   expect(value.cameraLive && value.held).toBe(true)
   if (withReference)
     expect(
@@ -318,6 +334,90 @@ async function release(page: Page) {
   expect(posts).toBe(0)
 }
 for (const gender of ['male', 'female'] as const) {
+  if (withNeck)
+    test(`${gender} native neck captured aspect→presence→retirement→new generation`, async ({
+      page,
+      context,
+    }) => {
+      await join(context)
+      await mount(page, gender)
+      await running(page)
+      expect(await state(page)).toMatchObject({
+        neckConfigured: true,
+        neckStatus: 'unavailable',
+        nativePeopleMax: 0,
+      })
+      await mark(page, 'native-blank-no-observation')
+      const mode = (mode: 'error' | 'crop' | 'multiple' | 'none') =>
+        page.evaluate(
+          (mode) => (window as unknown as PrivateWindow).nativeAuthProbe.setFeedbackMode(mode),
+          mode,
+        )
+      await mode('error')
+      await expect
+        .poll(() => state(page))
+        .toMatchObject({
+          neckStatus: 'available',
+          neckMatchesAuthoredAspect: true,
+          neckCurrentGeneration: true,
+          verifiedMs: 0,
+        })
+      await mark(page, 'authored-positive-same-captured-aspect-not-clinical')
+      await page.evaluate(() =>
+        (window as unknown as PrivateWindow).nativeAuthProbe.setNeckPresenceHidden(true),
+      )
+      await expect
+        .poll(() => state(page))
+        .toMatchObject({ neckStatus: 'unavailable', verifiedMs: 0 })
+      await mark(page, 'low-presence-not-removed-in-native-handoff')
+      await page.evaluate(() =>
+        (window as unknown as PrivateWindow).nativeAuthProbe.setNeckPresenceHidden(false),
+      )
+      for (const value of ['crop', 'multiple', 'none'] as const) {
+        await mode(value)
+        await expect
+          .poll(() => state(page))
+          .toMatchObject({ neckStatus: 'unavailable', verifiedMs: 0 })
+        await mark(page, `generated-${value}-no-old-observation`)
+        await mode('error')
+        await expect
+          .poll(() => state(page))
+          .toMatchObject({
+            neckStatus: 'available',
+            neckMatchesAuthoredAspect: true,
+            verifiedMs: 0,
+          })
+      }
+      await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.pause())
+      expect(await state(page)).toMatchObject({
+        session: 'paused',
+        neckStatus: 'unavailable',
+        tracksEnded: true,
+        models: 0,
+      })
+      await mark(page, 'pause-removes-current-observation')
+      await mode('none')
+      await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.resume())
+      await expect
+        .poll(() => state(page))
+        .toMatchObject({
+          session: 'running',
+          sessionGeneration: 2,
+          neckStatus: 'unavailable',
+          cameras: 2,
+        })
+      await mode('error')
+      await expect
+        .poll(() => state(page))
+        .toMatchObject({
+          neckStatus: 'available',
+          neckMatchesAuthoredAspect: true,
+          neckCurrentGeneration: true,
+          verifiedMs: 0,
+        })
+      await mark(page, 'fresh-generation-new-input-only')
+      expect(posts).toBe(0)
+    })
   if (withFeedback)
     test(`${gender} native first-start stage timing without raw input`, async ({
       page,

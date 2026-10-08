@@ -35,6 +35,51 @@ function fixture() {
 }
 
 describe('owned pose frame', () => {
+  // FR-M-02/07: immutable capture aspect and confidence, synthetic ports only.
+  it('copies image geometry before an awaited detector or later capture can change it', async () => {
+    const f = fixture(),
+      gate = deferred<OwnedPoseResult>()
+    const image = { width: 1600, height: 900 }
+    f.capture.mockReturnValue({
+      generation: 1,
+      sequence: 1,
+      at: 10,
+      input: 'borrowed',
+      image,
+    } as never)
+    f.detect.mockReturnValue(gate.promise)
+    const reading = f.source.read()
+    await Promise.resolve()
+    image.width = 900
+    image.height = 1600
+    gate.resolve(f.result)
+    const frame = await reading
+    expect((frame as unknown as { image: unknown }).image).toEqual({ width: 1600, height: 900 })
+    expect(Object.isFrozen((frame as unknown as { image: unknown }).image)).toBe(true)
+  })
+  it.each([0, -1, NaN, Infinity, 1.5])(
+    'rejects capture width=%s before inference',
+    async (width) => {
+      const f = fixture()
+      f.capture.mockReturnValue({
+        generation: 1,
+        sequence: 1,
+        at: 10,
+        input: 'borrowed',
+        image: { width, height: 900 },
+      } as never)
+      await expect(f.source.read()).rejects.toThrow('Pose frame unavailable')
+      expect(f.detect).not.toHaveBeenCalled()
+    },
+  )
+  it('preserves low presence instead of silently removing its confidence gate', async () => {
+    const f = fixture()
+    Object.assign(f.result.landmarks[0][0], { presence: 0.1 })
+    const frame = await f.source.read()
+    expect(frame?.result.landmarks[0][0]).toHaveProperty('presence', 0.1)
+    Object.assign(f.result.landmarks[0][0], { presence: 1 })
+    expect(frame?.result.landmarks[0][0]).toHaveProperty('presence', 0.1)
+  })
   it('preserves tagged partial-provider cleanup failure before a result is returned', async () => {
     const f = fixture()
     f.detect.mockImplementation(() => {

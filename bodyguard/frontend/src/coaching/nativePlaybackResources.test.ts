@@ -14,6 +14,7 @@ import { createFaceLandmarker } from '../pose/face'
 import { createGestureRecognizer } from '../pose/hands'
 import { createPoseLandmarker } from '../pose/landmarker'
 import { createVideoPoseSource } from '../pose/videoPoseSource'
+import { observeNeckSide } from '../posture/neckSideObservation'
 import { advanceCoaching, createCoaching } from '../stretch/progression'
 import { createNativePlaybackResources } from './nativePlaybackResources'
 import { createResourceController, ResourceCleanupError } from './resources'
@@ -56,6 +57,7 @@ function setup(
   reference?: ReferenceProgram,
   feedback?: Parameters<typeof createNativePlaybackResources>[0]['feedback'],
   trunk?: boolean,
+  neck?: { imageIsMirrored: boolean; minimumConfidence: number },
 ) {
   const stream = { getTracks: () => [] } as unknown as MediaStream
   const native = {
@@ -105,6 +107,7 @@ function setup(
     halfLifeMs: 50,
     maxAgeMs: 250,
     ...(trunk === undefined ? {} : { trunk }),
+    ...(neck === undefined ? {} : { neck }),
     loadAvatar: vi.fn(),
     render: vi.fn(),
     onFailure: vi.fn(),
@@ -151,6 +154,179 @@ function setup(
   }
 }
 beforeEach(() => vi.resetAllMocks())
+// FR-M-02/07: fixture observations are projected geometry, never a clinical verdict.
+function neckFrame(sequence = 1, at = 100) {
+  const points = Array.from({ length: 33 }, () => ({
+    x: 0.5,
+    y: 0.5,
+    z: 0,
+    visibility: 0.9,
+    presence: 0.9,
+  }))
+  points[0] = { ...points[0], x: 0.5, y: 0.2 }
+  points[7] = { ...points[7], x: 0.45, y: 0.2 }
+  points[8] = { ...points[8], x: 0.55, y: 0.25 }
+  points[11] = { ...points[11], x: 0.35, y: 0.5 }
+  points[12] = { ...points[12], x: 0.65, y: 0.5 }
+  return {
+    generation: 1,
+    sequence,
+    at,
+    image: { width: 1600, height: 900 },
+    result: { landmarks: [points], worldLandmarks: [points] },
+  }
+}
+describe('native optional neck observation', () => {
+  it('cannot overwrite a newer observation through a reentrant captured image getter', async () => {
+    const f = setup(undefined, undefined, undefined, undefined, undefined, {
+      imageIsMirrored: false,
+      minimumConfidence: 0.8,
+    })
+    vi.mocked(f.pair.observe).mockReturnValue(true)
+    f.source.read.mockResolvedValueOnce(neckFrame() as never)
+    await f.prepare()
+    f.actor.start(1)
+    await f.fire(100)
+    await f.fire(102)
+    const retained = f.options.render.mock.calls.at(-1)?.[0] as typeof f.pair
+    const older = neckFrame(2, 110)
+    Object.defineProperty(older, 'image', {
+      get() {
+        retained.observe(neckFrame(3, 120))
+        return { width: 1600, height: 900 }
+      },
+    })
+    retained.observe(older)
+    expect(f.actor.getNeckObservation(120)).toMatchObject({
+      status: 'available',
+      sequence: 3,
+      at: 120,
+    })
+    await f.actor.close()
+    await f.controller.close()
+  })
+  it('expires by the supplied current clock even without a new render or observation', async () => {
+    const f = setup(undefined, undefined, undefined, undefined, undefined, {
+      imageIsMirrored: false,
+      minimumConfidence: 0.8,
+    })
+    vi.mocked(f.pair.observe).mockReturnValue(true)
+    f.source.read.mockResolvedValueOnce(neckFrame() as never)
+    await f.prepare()
+    f.actor.start(1)
+    await f.fire(100)
+    expect(f.actor.getNeckObservation(102).status).toBe('available')
+    for (const now of [99, 351, NaN, Infinity, -1])
+      expect(f.actor.getNeckObservation(now).status).toBe('unavailable')
+    await f.controller.run({ type: 'release-resources', generation: 1 })
+    expect(f.actor.getNeckObservation(102).status).toBe('unavailable')
+    await f.actor.close()
+    await f.controller.close()
+  })
+  it.each([0, 2])('does not choose a person from count=%s', async (count) => {
+    const f = setup(undefined, undefined, undefined, undefined, undefined, {
+      imageIsMirrored: false,
+      minimumConfidence: 0.8,
+    })
+    vi.mocked(f.pair.observe).mockReturnValue(true)
+    const frame = neckFrame()
+    frame.result.landmarks = Array.from({ length: count }, () => frame.result.landmarks[0])
+    f.source.read.mockResolvedValueOnce(frame as never)
+    await f.prepare()
+    f.actor.start(1)
+    await f.fire(100)
+    expect(f.actor.getNeckObservation(102).status).toBe('unavailable')
+    await f.actor.close()
+    await f.controller.close()
+  })
+  it('does not invent missing captured metadata from avatar display size', async () => {
+    const f = setup(undefined, undefined, undefined, undefined, undefined, {
+      imageIsMirrored: false,
+      minimumConfidence: 0.8,
+    })
+    vi.mocked(f.pair.observe).mockReturnValue(true)
+    const { image: _, ...frame } = neckFrame()
+    f.source.read.mockResolvedValueOnce(frame as never)
+    await f.prepare()
+    f.actor.start(1)
+    await f.fire(100)
+    expect(f.actor.getNeckObservation(102).status).toBe('unavailable')
+    await f.actor.close()
+    await f.controller.close()
+  })
+  it('uses explicit input mirror and captured aspect, independent of avatar mirror', async () => {
+    const neck = { imageIsMirrored: false, minimumConfidence: 0.8 }
+    const f = setup(undefined, undefined, undefined, undefined, undefined, neck)
+    const frame = neckFrame()
+    neck.imageIsMirrored = true
+    neck.minimumConfidence = 1
+    vi.mocked(f.pair.observe).mockReturnValue(true)
+    f.source.read.mockResolvedValueOnce(frame as never)
+    await f.prepare()
+    expect(f.actor.start(1)).toBe(true)
+    await f.fire(100)
+    await f.fire(102)
+    expect(f.actor.getNeckObservation(102)).toEqual(
+      observeNeckSide({
+        frame,
+        width: 1600,
+        height: 900,
+        imageIsMirrored: false,
+        minimumConfidence: 0.8,
+        maxAgeMs: 250,
+        now: 102,
+      }),
+    )
+    expect(f.pair.updateFeedback).not.toHaveBeenCalled()
+    await f.actor.close()
+    await f.controller.close()
+    expect(f.actor.getNeckObservation(102)).toEqual({ status: 'unavailable' })
+  })
+  it('clears on expiry and a new hidden required point, never borrows old geometry', async () => {
+    const f = setup(undefined, undefined, undefined, undefined, undefined, {
+      imageIsMirrored: false,
+      minimumConfidence: 0.8,
+    })
+    vi.mocked(f.pair.observe).mockReturnValue(true)
+    f.source.read.mockResolvedValueOnce(neckFrame() as never)
+    await f.prepare()
+    f.actor.start(1)
+    await f.fire(100)
+    await f.fire(102)
+    expect(f.actor.getNeckObservation(102).status).toBe('available')
+    await f.fire(351)
+    expect(f.actor.getNeckObservation(351).status).toBe('unavailable')
+    const hidden = neckFrame(2, 400)
+    hidden.result.landmarks[0][7].presence = 0
+    f.source.read.mockResolvedValueOnce(hidden as never)
+    await f.fire(400)
+    await f.fire(402)
+    expect(f.actor.getNeckObservation(402).status).toBe('unavailable')
+    await f.actor.close()
+    await f.controller.close()
+  })
+  it('leaves existing callers without a new observation or classifier', async () => {
+    const f = setup()
+    expect(f.actor.getSnapshot()).not.toHaveProperty('neckObservation')
+    await f.actor.close()
+    await f.controller.close()
+  })
+  it.each([
+    { minimumConfidence: 0.8 },
+    { imageIsMirrored: false },
+    { imageIsMirrored: 'false', minimumConfidence: 0.8 },
+    { imageIsMirrored: false, minimumConfidence: 0 },
+    { imageIsMirrored: false, minimumConfidence: 1.1 },
+  ])('rejects malformed opt-in before acquisition: %j', async (neck) => {
+    const f = setup()
+    expect(() => createNativePlaybackResources({ ...f.options, neck } as never)).toThrow(
+      'Invalid native playback resources',
+    )
+    expect(openCamera).not.toHaveBeenCalled()
+    await f.actor.close()
+    await f.controller.close()
+  })
+})
 // FR-A-01/03: explicit aggregate display option, copied before async resources.
 describe('native optional trunk display', () => {
   it('rejects a trunk error program before camera/SDK access when display is disabled', () => {

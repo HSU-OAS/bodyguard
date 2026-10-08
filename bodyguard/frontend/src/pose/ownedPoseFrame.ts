@@ -5,11 +5,15 @@ import type { PoseRigFrame } from '../avatar/observedPoseRig'
 import { ResourceCleanupError, type ResourceContext } from '../coaching/resources'
 import { JOINT_COUNT, type Point } from '../posture/landmarks'
 
+// FR-M-02: the same detector input's display geometry; never CSS/video dimensions later.
+export type CapturedImage = Readonly<{ width: number; height: number }>
+export type OwnedPoseFrame = PoseRigFrame & Readonly<{ image?: CapturedImage }>
 export type CapturedPoseInput<T> = Readonly<{
   generation: number
   sequence: number
   at: number
   input: T
+  image?: CapturedImage
 }>
 export type OwnedPoseResult = PoseRigFrame['result'] & Readonly<{ close(): void }>
 // FR-M-02/NFR-07: snapshot bounded body arrays before another provider can reuse memory.
@@ -20,19 +24,27 @@ export function copyPosePoints(poses: readonly (readonly Point[])[]) {
       if (!Array.isArray(points) || points.length > JOINT_COUNT) throw new Error()
       return Object.freeze(
         points.map((point) => {
-          const { x, y, z, visibility } = point
+          const { x, y, z, visibility, presence } = point
           if (typeof x !== 'number' || typeof y !== 'number' || typeof z !== 'number')
             throw new Error()
+          if (presence !== undefined && typeof presence !== 'number') throw new Error()
           return Object.freeze({
             x,
             y,
             z,
             ...(typeof visibility === 'number' ? { visibility } : {}),
+            ...(presence === undefined ? {} : { presence }),
           })
         }),
       )
     }),
   )
+}
+export function copyCapturedImage(value: CapturedImage | undefined) {
+  if (value === undefined) return undefined
+  const { width, height } = value
+  if (![width, height].every((n) => Number.isSafeInteger(n) && n > 0)) throw new Error()
+  return Object.freeze({ width, height })
 }
 function copyHead(value: readonly number[] | null | undefined) {
   if (value === undefined) return {}
@@ -72,17 +84,17 @@ export function createOwnedPoseFrame<T>(
   let cleanupFailed = false
   let lastSequence = 0,
     lastAt = -Infinity
-  let pending: Promise<PoseRigFrame | null> | undefined
+  let pending: Promise<OwnedPoseFrame | null> | undefined
   const alive = () => !closed && !signal.aborted
   function close() {
     closed = true
     signal.removeEventListener('abort', close)
   }
   if (!closed) signal.addEventListener('abort', close, { once: true })
-  async function acquire(): Promise<PoseRigFrame | null> {
+  async function acquire(): Promise<OwnedPoseFrame | null> {
     let result: OwnedPoseResult | undefined
     let release: OwnedPoseResult['close'] | undefined
-    let frame: PoseRigFrame | null = null
+    let frame: OwnedPoseFrame | null = null
     let failed = false
     try {
       const captured = await ports.capture()
@@ -100,6 +112,7 @@ export function createOwnedPoseFrame<T>(
       )
         return null
       const input = captured.input
+      const image = copyCapturedImage(captured.image)
       if (!alive()) return null
       // Reserve before calling foreign inference; neither a repeated input nor a late
       // result may be re-stamped to appear fresh. Input and detector stay caller-owned.
@@ -118,6 +131,7 @@ export function createOwnedPoseFrame<T>(
           generation: suppliedGeneration,
           sequence,
           at,
+          ...(image === undefined ? {} : { image }),
           result: Object.freeze({
             landmarks: copyPosePoints(result.landmarks),
             worldLandmarks: copyPosePoints(result.worldLandmarks),
@@ -148,9 +162,9 @@ export function createOwnedPoseFrame<T>(
     }
     return alive() ? frame : null
   }
-  function read(): Promise<PoseRigFrame | null> {
+  function read(): Promise<OwnedPoseFrame | null> {
     if (!alive() || pending) return Promise.resolve(null)
-    let resolve!: (frame: PoseRigFrame | null) => void
+    let resolve!: (frame: OwnedPoseFrame | null) => void
     let reject!: (error: unknown) => void
     // Publish ownership before capture can synchronously reenter read/dispose.
     pending = new Promise((yes, no) => {

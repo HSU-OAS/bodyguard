@@ -1,7 +1,7 @@
 // MediaPipe 관절을 믿고 쓸 수 있는지 가리는 순수 함수.
 // 브라우저 API를 쓰지 않아서 카메라 없이 테스트한다 (ADR-0012)
 
-export type Point = { x: number; y: number; z: number; visibility?: number }
+export type Point = { x: number; y: number; z: number; visibility?: number; presence?: number }
 
 export const JOINT_COUNT = 33
 

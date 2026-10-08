@@ -34,7 +34,7 @@ type Hook = ReturnType<typeof useRecordedCoaching>
 type Session = NonNullable<ReturnType<Hook['getSession']>>
 type Actor = Pick<
   ReturnType<typeof createNativePlaybackResources>,
-  'close' | 'getSnapshot' | 'synchronize'
+  'close' | 'getSnapshot' | 'synchronize' | 'getNeckObservation'
 >
 export function mountNativeHeadAuthProbe(
   canvas: HTMLCanvasElement,
@@ -45,6 +45,7 @@ export function mountNativeHeadAuthProbe(
   withAdaptive = false,
   withTiming = false,
   withTrunk = false,
+  withNeck = false,
 ) {
   if (withTrunk && !withFeedback) throw new Error('Private trunk feedback fixture unavailable')
   if (withAdaptive && (!withFeedback || !withReference))
@@ -136,6 +137,9 @@ export function mountNativeHeadAuthProbe(
     ['footR', 28],
   ] as const
   let feedbackCode: 'raised' | 'direction' | 'unknown' = 'raised'
+  // Authored TEST pixels only. No physical camera points or per-frame values escape.
+  let neckPresenceHidden = false,
+    capturedAspect = { width: 0, height: 0 }
   // FR-M-07/FR-A-03: generated avatar-bone input only, never a native/clinical positive.
   let trunkPose: 'side' | 'forward' = 'side',
     trunkHiddenEndpoint: 11 | 12 | 23 | 24 | null = null,
@@ -257,6 +261,7 @@ export function mountNativeHeadAuthProbe(
     writable: true,
     value(this: PoseLandmarker, input: VideoFrame, at: number) {
       nativeCalls++
+      if (withNeck) capturedAspect = { width: input.displayWidth, height: input.displayHeight }
       bodyStamps.set(input, at)
       const resultToken = timing?.begin('result') ?? null,
         bodyToken = timing?.begin('body') ?? null
@@ -282,6 +287,22 @@ export function mountNativeHeadAuthProbe(
           presence: 1,
         }))
         const count = feedbackMode === 'multiple' ? 2 : 1
+        if (withNeck) {
+          for (const [index, x, y] of [
+            [0, 0.5, 0.2],
+            [7, 0.45, 0.2],
+            [8, 0.55, 0.25],
+            [11, 0.35, 0.5],
+            [12, 0.65, 0.5],
+          ]) {
+            points[index] = {
+              ...points[index],
+              x,
+              y,
+              presence: neckPresenceHidden && index === 7 ? 0 : 1,
+            }
+          }
+        }
         const nativeResult = result
         if (restJoints.size !== jointNames.length)
           throw new Error('Private body fixture unavailable')
@@ -455,6 +476,7 @@ export function mountNativeHeadAuthProbe(
       halfLifeMs: 50,
       maxAgeMs: 250,
       ...(withTrunk ? { trunk: true } : {}),
+      ...(withNeck ? { neck: { imageIsMirrored: false, minimumConfidence: 0.8 } } : {}),
       head: {
         bone: 'head',
         matrixLayout: 'column-major',
@@ -589,6 +611,13 @@ export function mountNativeHeadAuthProbe(
     }
   }
   function snapshot() {
+    const neck = withNeck ? currentActor?.getNeckObservation(performance.now()) : undefined
+    const neckMatchesAuthoredAspect =
+      neck?.status === 'available' &&
+      Math.abs(
+        neck.headShoulderLineAngleRad -
+          Math.atan2(-0.05 * capturedAspect.height, 0.1 * capturedAspect.width),
+      ) < 1e-12
     const models = pair?.models
     const [ref, user] = turns(models ?? null)
     let highlighted = false
@@ -650,6 +679,11 @@ export function mountNativeHeadAuthProbe(
       feedbackConfigured: withFeedback,
       adaptiveConfigured: withAdaptive,
       trunkConfigured: withTrunk,
+      neckConfigured: withNeck,
+      neckStatus: neck?.status ?? null,
+      neckMatchesAuthoredAspect,
+      neckCurrentGeneration:
+        neck?.status !== 'available' || neck.generation === session?.getSnapshot().state.generation,
       trunkDirectionError,
       protectedTrunkStructureUnchanged:
         !withTrunk ||
@@ -751,6 +785,11 @@ export function mountNativeHeadAuthProbe(
       if (!withFeedback || !['off', 'error', 'crop', 'multiple', 'none'].includes(mode))
         throw new Error('Invalid private feedback mode')
       feedbackMode = mode
+    },
+    setNeckPresenceHidden(hidden: boolean) {
+      if (!withNeck || typeof hidden !== 'boolean')
+        throw new Error('Private neck fixture unavailable')
+      neckPresenceHidden = hidden
     },
     setFeedbackCode(code: typeof feedbackCode) {
       if (!withAdaptive || !['raised', 'direction', 'unknown'].includes(code))

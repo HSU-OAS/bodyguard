@@ -22,7 +22,13 @@ import { POSE_MODELS, type PoseModel } from '../pose/constants'
 import { createFaceLandmarker } from '../pose/face'
 import { createGestureRecognizer } from '../pose/hands'
 import { createPoseLandmarker } from '../pose/landmarker'
+import { copyCapturedImage, copyPosePoints, type OwnedPoseFrame } from '../pose/ownedPoseFrame'
 import { createVideoPoseSource } from '../pose/videoPoseSource'
+import {
+  type NeckObservationInput,
+  type NeckSideObservation,
+  observeNeckSide,
+} from '../posture/neckSideObservation'
 import type { CoachingState } from '../stretch/progression'
 import { createOwnedPlaybackResources } from './ownedPlaybackResources'
 import { ResourceCleanupError, type ResourceContext, type ResourceNotice } from './resources'
@@ -42,6 +48,7 @@ type Options = Readonly<{
   halfLifeMs: number
   maxAgeMs: number
   trunk?: boolean
+  neck?: Readonly<{ imageIsMirrored: boolean; minimumConfidence: number }>
   head?: HeadDisplayAlignment & Readonly<{ matrixLayout: 'column-major' | 'row-major' }>
   hands?: HandDisplayAlignment
   reference?: ReferenceProgram
@@ -99,7 +106,20 @@ export function createNativePlaybackResources(options: Options) {
   let feedback: FeedbackProgram | undefined
   let evaluateFeedback: NonNullable<Options['feedback']>['evaluate'] | undefined
   let trunk = false
+  let neck: Options['neck']
   try {
+    const requestedNeck = options.neck
+    if (requestedNeck !== undefined) {
+      const { imageIsMirrored, minimumConfidence } = requestedNeck
+      if (
+        typeof imageIsMirrored !== 'boolean' ||
+        !Number.isFinite(minimumConfidence) ||
+        minimumConfidence <= 0 ||
+        minimumConfidence > 1
+      )
+        throw new Error()
+      neck = Object.freeze({ imageIsMirrored, minimumConfidence })
+    }
     const requestedTrunk = options.trunk
     if (requestedTrunk !== undefined && typeof requestedTrunk !== 'boolean') throw new Error()
     trunk = requestedTrunk === true
@@ -167,6 +187,8 @@ export function createNativePlaybackResources(options: Options) {
   )
     throw new Error('Invalid native playback resources')
   let cameraError: CameraErrorKind | null = null
+  const unavailableNeck: NeckSideObservation = Object.freeze({ status: 'unavailable' })
+  let currentNeck: Pick<NeckObservationInput, 'frame' | 'width' | 'height'> | undefined
   let pendingCue: ReferenceCue | undefined
   const adaptive = reference?.steps.some((step) => step.corrections?.length) ?? false
   let currentObservation:
@@ -277,25 +299,54 @@ export function createNativePlaybackResources(options: Options) {
             }
           : {}),
       })
-      if (!reference && !feedback) return owned
+      if (!reference && !feedback && !neck) return owned
       let lastRendered: ReturnType<Pair['render']> | undefined
       let observationToken: object | undefined
+      let neckToken: object | undefined
       // FR-M-07·FR-S-03/04: the same accepted native delivery feeds the current owner session.
       // No evaluator default, background async classifier, raw logging or fresh stamp synthesis.
       function observe(frame: PoseRigFrame): boolean {
-        if (!feedback) return issueCommand(context.generation, () => owned.observe(frame))
+        // FR-M-02/07: a single current copied frame, no derived history or classifier.
+        function accept(delivery: OwnedPoseFrame): boolean {
+          const token = {}
+          if (neck) neckToken = token
+          const accepted = owned.observe(delivery)
+          if (accepted && neck) {
+            const image = copyCapturedImage(delivery.image)
+            const input = Object.freeze({
+              frame: Object.freeze({
+                generation: delivery.generation,
+                sequence: delivery.sequence,
+                at: delivery.at,
+                result: Object.freeze({ landmarks: copyPosePoints(delivery.result.landmarks) }),
+              }),
+              width: image?.width ?? NaN,
+              height: image?.height ?? NaN,
+            })
+            // Foreign getters/observe may retire the cohort. Recheck before publishing.
+            issueCommand(context.generation, () => {
+              if (neckToken !== token) return false
+              currentNeck = input
+              return true
+            })
+          }
+          return accepted
+        }
+        if (!feedback) return issueCommand(context.generation, () => accept(frame))
         const evaluator = evaluateFeedback
         if (!evaluator) return false
         if (!issueCommand(context.generation, () => true)) return false
         const token = {}
         observationToken = token
-        let delivery: PoseRigFrame
+        let delivery: OwnedPoseFrame
         try {
+          const image = neck ? copyCapturedImage((frame as OwnedPoseFrame).image) : undefined
           delivery = Object.freeze({
             generation: frame.generation,
             sequence: frame.sequence,
             at: frame.at,
             result: frame.result,
+            ...(image === undefined ? {} : { image }),
           })
         } catch {
           return issueCommand(context.generation, () => {
@@ -306,7 +357,7 @@ export function createNativePlaybackResources(options: Options) {
         if (
           observationToken !== token ||
           !issueCommand(context.generation, () => {
-            const accepted = owned.observe(delivery)
+            const accepted = accept(delivery)
             if (accepted && observationToken === token && adaptive) {
               currentObservation = undefined
               pendingCue = undefined
@@ -465,6 +516,8 @@ export function createNativePlaybackResources(options: Options) {
           return result
         },
         dispose() {
+          if (currentNeck?.frame.generation === context.generation) currentNeck = undefined
+          neckToken = undefined
           observationToken = undefined
           if (currentObservation?.generation === context.generation) currentObservation = undefined
           if (pendingCue?.generation === context.generation) pendingCue = undefined
@@ -589,10 +642,31 @@ export function createNativePlaybackResources(options: Options) {
     start: bridge.start,
     synchronize,
     close: () => {
+      currentNeck = undefined
       pendingCue = undefined
       currentObservation = undefined
       return bridge.close()
     },
     getSnapshot: () => Object.freeze({ ...bridge.getSnapshot(), cameraError }),
+    // FR-M-02/07: caller supplies a current same-origin RAF/performance timestamp.
+    // No timeless cache: hidden tabs/retirement cannot expose an earlier available value.
+    getNeckObservation(now: number): NeckSideObservation {
+      const snapshot = bridge.getSnapshot(),
+        input = currentNeck
+      if (
+        !neck ||
+        !input ||
+        snapshot.status !== 'running' ||
+        snapshot.generation !== input.frame.generation
+      )
+        return unavailableNeck
+      let value: NeckSideObservation = unavailableNeck
+      const accepted = bridge.command(input.frame.generation, () => {
+        if (currentNeck !== input) return false
+        value = observeNeckSide({ ...input, ...neck, now, maxAgeMs })
+        return true
+      })
+      return accepted ? value : unavailableNeck
+    },
   })
 }

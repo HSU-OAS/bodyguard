@@ -75,6 +75,47 @@ function setup() {
   }
 }
 describe('owned decoded video pose source', () => {
+  it('uses the captured VideoFrame aspect, not decoded metadata, CSS or later input changes', async () => {
+    vi.stubGlobal(
+      'VideoFrame',
+      class extends FakeFrame {
+        displayWidth = 320
+        displayHeight = 960
+      },
+    )
+    const f = setup(),
+      gate = deferred<typeof f.result>()
+    Object.assign(f.video, { videoWidth: 1600, videoHeight: 900, width: 200, height: 200 })
+    f.detect.mockReturnValue(gate.promise)
+    const reading = f.source.read()
+    f.emit()
+    await Promise.resolve()
+    Object.assign(f.video, { videoWidth: 900, videoHeight: 1600 })
+    FakeFrame.made[0].displayWidth = 900
+    FakeFrame.made[0].displayHeight = 1600
+    gate.resolve(f.result)
+    expect((await reading)?.image).toEqual({ width: 320, height: 960 })
+    expect(FakeFrame.made[0].close).toHaveBeenCalledTimes(1)
+    expect(f.result.close).toHaveBeenCalledTimes(1)
+  })
+  it.each([0, -1, NaN, Infinity, 1.5])(
+    'rejects captured height=%s and closes input before inference',
+    async (height) => {
+      vi.stubGlobal(
+        'VideoFrame',
+        class extends FakeFrame {
+          displayHeight = height
+        },
+      )
+      const f = setup(),
+        reading = f.source.read()
+      f.emit()
+      await expect(reading).rejects.toThrow('Video capture unavailable')
+      expect(f.detect).not.toHaveBeenCalled()
+      expect(FakeFrame.made[0].close).toHaveBeenCalledTimes(1)
+      await f.source.dispose()
+    },
+  )
   it('starts nothing until read, preserves decoded stamps and closes both owned values', async () => {
     const f = setup()
     expect(f.video.requestVideoFrameCallback).not.toHaveBeenCalled()
@@ -83,6 +124,8 @@ describe('owned decoded video pose source', () => {
     f.emit()
     const frame = await read
     expect(frame).toMatchObject({ generation: 1, sequence: 1, at: 10 })
+    expect(frame).toHaveProperty('image', { width: 640, height: 480 })
+    expect(Object.isFrozen((frame as unknown as { image: unknown }).image)).toBe(true)
     expect(f.detect).toHaveBeenCalledTimes(1)
     expect(f.detect.mock.calls[0][0]).toBe(FakeFrame.made[0])
     expect(f.detect.mock.calls[0][1]).toBe(10)

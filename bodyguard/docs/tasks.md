@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-08 [S2.M2 native 목 관찰 연결](stories/native-neck-observation.md): 촬영 비율과 낮은 presence를 유지하고 현재 소유/시각·중단/새 세대의 관찰을 연결했다. [실제 흐름·실패/보완·남은 조건](review/native-neck/README.md). FE1327·정적/type/build/guard·공개 byte 불변은 확인했으나 native 시작 회귀 실패로 **Draft·Story 미완료·병합 불가**다. 다음은 최신 main과 현재 소스의 시작 계측 대조·근본 원인 분리와 필요한 보완이다. 원본 실패/제한값을 보존하고 성공 재실행만으로 P2를 닫지 않는다. PR89의 실제 merge5a1a3d8/main 포함·브랜치 보존/[결과 기록](https://github.com/HSU-OAS/bodyguard/pull/89#issuecomment-6061111928)을 확인한 최신 main에서 시작했다. 출시 동작0·실제 사람/판정·시범/외형/권리·승인 UI/SDK/외부/운영·D2/전체1~6은 미완료다. 최소 문구·같은 부위 새 조형0·기존 사전/별도 승인 기준을 유지하며 아래는 시점별 기록이다.
+
 2026-10-08 [S2.M1 목 옆 기울이기 관찰값](stories/neck-side-observation.md): 실제 영상 비율·명시적 반전의 이미지 평면 귀/어깨 상대 기하를 구현했다. [실행·실패·한계](review/neck-observation/README.md). 새87/FE1301·정적/type/build/guard·공개 byte 동일을 확인하고 조건부 PR gate를 진행한다. 실제 source/개발 관찰·사람 라벨/임계값·올바른 동작/교정·최종 외형/승인 UI·SDK/외부/운영·기존 시작 P2·출시0과 전체1~6은 미완료다. PR88의 실제 mergeda32cf5/main·브랜치 보존을 확인하고 그 최신 main에서 시작했으며 최소 문구·원본/실패·별도 승인 경계는 유지한다. 아래는 시점별 기록이다.
 
 2026-10-08 [S2.T23](stories/native-trunk-feedback.md): 로그인 소유 native 흐름의 몸통 축·supplied 오류 강조·가림/복구·pause/새 세대·본인 중단 기록을 연결했다. [실제 화면·실패/보완·증거](review/native-trunk/README.md). 최종 Chrome 남녀24·FE1214·정적/type/build/guard·공개 byte/GLB 불변을 확인하고 조건부 PR gate를 진행한다. 실제 사람/올바른 동작·최종 외형/권리·승인 공개 UI·SDK/외부/운영·기존 시작 P2·출시 동작0과 D2/전체1~6 미완료를 유지한다. 최소 텍스트·원본/실패·새 조형0·별도 승인 경계는 그대로다. 아래는 시점별 기록이다.
