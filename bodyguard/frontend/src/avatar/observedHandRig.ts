@@ -49,7 +49,7 @@ const unit = (value: readonly number[]) => {
   if (!Array.isArray(value) || value.length !== 4) throw invalid()
   const copy = Array.from(value)
   if (!copy.every(Number.isFinite) || Math.abs(Math.hypot(...copy) - 1) > 1e-5) throw invalid()
-  return Object.freeze(copy)
+  return Object.freeze(new Quaternion().fromArray(copy).normalize().toArray())
 }
 export function copyHandAlignment(value: HandDisplayAlignment): HandDisplayAlignment {
   try {

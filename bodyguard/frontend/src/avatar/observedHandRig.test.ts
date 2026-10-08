@@ -98,6 +98,13 @@ function body(value: HandObservation[], sequence = 1, at = 100) {
 }
 
 describe('owned hand display', () => {
+  it('normalizes accepted Float32 quaternion roundoff without changing the supplied calibration', () => {
+    const supplied = alignment()
+    supplied.sceneFromCamera[3] = 1.000005
+    const copied = copyHandAlignment(supplied)
+    expect(Math.hypot(...copied.sceneFromCamera)).toBe(1)
+    expect(supplied.sceneFromCamera[3]).toBe(1.000005)
+  })
   it('moves both wrists and all thirty segments including distal leaves; keeps shape and unrelated bones', () => {
     const f = setup(),
       pose = hands(0.4, 0.3),
