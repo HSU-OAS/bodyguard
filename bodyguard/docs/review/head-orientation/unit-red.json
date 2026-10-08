@@ -1,0 +1,19 @@
+{
+  "label": "unit-red",
+  "cwd": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-head-orientation/bodyguard/frontend",
+  "command": "./node_modules/.bin/vitest",
+  "args": [
+    "run",
+    "src/avatar/headOrientationRig.test.ts"
+  ],
+  "exit": 1,
+  "elapsedMs": 797,
+  "stdout": "\n RUN  v5.0.2 /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-head-orientation/bodyguard/frontend\n\n ❯ src/avatar/headOrientationRig.test.ts (0 test)\n\n Test Files  1 failed (1)\n      Tests  no tests\n   Start at  09:02:59\n   Duration  211ms (worker 97%, environment 3%)\n\n",
+  "stderr": "\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/avatar/headOrientationRig.test.ts [ src/avatar/headOrientationRig.test.ts ]\nError: Cannot find module './headOrientationRig' imported from /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-head-orientation/bodyguard/frontend/src/avatar/headOrientationRig.test.ts\n ❯ src/avatar/headOrientationRig.test.ts:4:1\n      2| import { Bone, Group, Matrix4, Quaternion, Vector3 } from 'three'\n      3| import { describe, expect, it } from 'vitest'\n      4| import { createHeadOrientationRig, readHeadOrientation } from './headO…\n       | ^\n      5|\n      6| const axis = new Vector3(0, 1, 0)\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n",
+  "source": {
+    "src/avatar/headOrientationRig.ts": null,
+    "src/avatar/headOrientationRig.test.ts": "4fd1d0e5f38ba6c24b268eff08c8b0d7ff84823620cd479aaafe9e9c2a9cc62b",
+    "e2e/fixtures/headOrientationProbe.ts": null,
+    "scripts/test-head-orientation-browser.mjs": null
+  }
+}

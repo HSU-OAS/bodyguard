@@ -1,0 +1,20 @@
+{
+  "label": "biome-first",
+  "cwd": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-head-orientation/bodyguard/frontend",
+  "command": "./node_modules/.bin/biome",
+  "args": [
+    "check",
+    "src/avatar/headOrientationRig.ts",
+    "src/avatar/headOrientationRig.test.ts"
+  ],
+  "exit": 1,
+  "elapsedMs": 179,
+  "stdout": "Checked 2 files in 45ms. No fixes applied.\nFound 1 error.\nFound 3 warnings.\n",
+  "stderr": "src/avatar/headOrientationRig.test.ts:53:34 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n  ! Forbidden non-null assertion.\n  \n    51 │     const q = turn(0.6)\n    52 │     expect(\n  > 53 │       new Quaternion().fromArray(readHeadOrientation(face(q), 'column-major')!).angleTo(q),\n       │                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    54 │     ).toBeLessThan(1e-6)\n    55 │     expect(\n  \n\nsrc/avatar/headOrientationRig.test.ts:56:34 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n  ! Forbidden non-null assertion.\n  \n    54 │     ).toBeLessThan(1e-6)\n    55 │     expect(\n  > 56 │       new Quaternion().fromArray(readHeadOrientation(face(q, true), 'row-major')!).angleTo(q),\n       │                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    57 │     ).toBeLessThan(1e-6)\n    58 │     expect(\n  \n\nsrc/avatar/headOrientationRig.test.ts:59:34 lint/style/noNonNullAssertion ━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n  ! Forbidden non-null assertion.\n  \n    57 │     ).toBeLessThan(1e-6)\n    58 │     expect(\n  > 59 │       new Quaternion().fromArray(readHeadOrientation(face(q, true), 'column-major')!).angleTo(q),\n       │                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    60 │     ).toBeGreaterThan(1)\n    61 │   })\n  \n\nsrc/avatar/headOrientationRig.ts:49:8 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━━━━━━━━━━━\n\n  × This callback passed to forEach() iterable method should not return a value.\n  \n    47 │   if (sizes.some((s) => !Number.isFinite(s) || s <= 0)) return null\n    48 │   if (sizes.some((s) => Math.abs(s / sizes[0] - 1) > ROUND_OFF)) return null\n  > 49 │   axes.forEach((v, i) => v.divideScalar(sizes[i]))\n       │        ^^^^^^^\n    50 │   const [x, y, z] = axes\n    51 │   if (\n  \n  i Either remove this return or remove the returned value.\n  \n    47 │   if (sizes.some((s) => !Number.isFinite(s) || s <= 0)) return null\n    48 │   if (sizes.some((s) => Math.abs(s / sizes[0] - 1) > ROUND_OFF)) return null\n  > 49 │   axes.forEach((v, i) => v.divideScalar(sizes[i]))\n       │                          ^^^^^^^^^^^^^^^^^^^^^^^^\n    50 │   const [x, y, z] = axes\n    51 │   if (\n  \n\ncheck ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n  × Some errors were emitted while running checks.\n  \n\n",
+  "source": {
+    "src/avatar/headOrientationRig.ts": "4f7b782dc48b9ac7b636132e1623d5ccd4f1d50ddb2db015bf2d1d8010571050",
+    "src/avatar/headOrientationRig.test.ts": "2c6ccfb41f2628a7078426a9e1c9747822f8f0062dda134d7e6dbf68903398b0",
+    "e2e/fixtures/headOrientationProbe.ts": null,
+    "scripts/test-head-orientation-browser.mjs": null
+  }
+}

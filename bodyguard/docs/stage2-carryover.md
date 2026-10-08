@@ -31,6 +31,8 @@ main 9733e4c에는 PR #15의 순수 코칭 진행 엔진까지 병합됐다. 계
 
 ## 다음 실행 순서
 
+2026-10-08 D2-T 머리 표시: [S2.T11](stories/head-orientation.md)은 기존 남녀 A37의 head bone에 명시 기준의 합성 머리 방향을 실제 Chrome/WebGL로 연결했다. 원본/추가 여덟 가중치·다른 bone·position/scale·전신을 보존하고 미검출/만료/종료를 처리했다. [실제 흐름·실패·남은 조건](review/head-orientation/README.md). 조형·공개 UI/SDK 정책/판정·운영 변경0. **native face/몸의 동일 프레임·동일 사람 연결이나 실제 경추 분절 코칭/D2-T 통과가 아니다.** 이월/전체1~6 게이트·최소 문구·원본 보존·별도 승인 경계를 유지한다.
+
 2026-10-08 D2-R native 계정 통합: [S2.T9](stories/native-auth-playback.md)는 실제 Chrome/AuthProvider/API/격리 SQL과 native 가짜 카메라·SDK·남녀 두 GLB에서 시작/본인 중단 기록, 실제 refresh/logout204/서버401/pagehide/unmount의 즉시 재생 차단·pending 정리 장벽·fresh bridge 명시 재시작을 확인했다. [실제 흐름·실패·남은 조건](review/native-auth-playback/README.md). SDK의 시험 CSP 차단 시도는 관찰되었으며 제품 SDK 정책 승인/무통신 증거가 아니다. 물리 webcam/실제 사람/권한 popup·목/손/체간/판정·최종 외형/권리·승인 디자인/SDK 정책·전체 GPU/worker/장시간/다장치·운영 및 D2/전체1~6 완료 기준은 그대로 남는다. 공개 byte/후보 GLB0·동일 부위 새 조형0·최소 문구·기존 원본/실패·별도 승인을 유지한다.
 
 2026-10-08 D2-R 로그인 소유 장벽: [S2.T8](stories/owned-auth-playback.md)은 기존 AuthProvider hook에 fresh lifecycle을 전송하고, 이전 정리 완료 뒤에만 새 세션을 준비 완료로 내보낸다. 실제 API/Chrome/격리 SQL의 기록·logout204·/me401과 모의 자원의 pending/late/재진입을 분리해 확인했다. native SDK·GLB·실제 API 동시 통합은 다음이며 물리 webcam/실제 사람·권한 popup·외형/판정·승인 UI/SDK 정책/운영·D2/전체1~6은 그대로 미완료다. [흐름·원본 실패·남은 조건](review/owned-auth-playback/README.md). 공개 화면/byte·동일 부위 새 조형 변경0, 기존 원본·최소 문구·별도 승인 기준을 유지한다.

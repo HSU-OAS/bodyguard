@@ -1,0 +1,20 @@
+{
+  "label": "unit-runtime",
+  "cwd": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-head-orientation/bodyguard/frontend",
+  "command": "./node_modules/.bin/vitest",
+  "args": [
+    "run",
+    "--reporter=json",
+    "--outputFile=/private/tmp/bodyguard-head-proof.szy9tB/frontend-runtime.json"
+  ],
+  "exit": 0,
+  "elapsedMs": 9175,
+  "stdout": "JSON report written to /private/tmp/bodyguard-head-proof.szy9tB/frontend-runtime.json\n",
+  "stderr": "",
+  "source": {
+    "src/avatar/headOrientationRig.ts": "b23ab8ecdd5ac9cfc8a6baaa0beca82ac97d5453281ade9e258db57e827e7b85",
+    "src/avatar/headOrientationRig.test.ts": "c6eae1cbcad739ddde615dbc7c4eb62fe9d0f4fdf2a0ebe0ca79d0108fed4a58",
+    "e2e/fixtures/headOrientationProbe.ts": "c1b555b960e4baae446a442d3cdea5c37b13bd81c6739ef3033eb6e35b656d34",
+    "scripts/test-head-orientation-browser.mjs": "9192326350227945eac850cebcb168cabed3be5c9f3f54985a46acd69b04c9ce"
+  }
+}

@@ -89,6 +89,8 @@ for (const file of files) {
     'Invalid native playback resources',
     'mountNativeRecoveryProbe',
     '__private-native-recovery-probe',
+    'Invalid head avatar rig',
+    'mountHeadProbe',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -118,5 +120,6 @@ console.log(
     unconnected_owned_playback_resources_strings: 0,
     unconnected_native_auth_playback_strings: 0,
     unconnected_native_playback_adapter_strings: 0,
+    unconnected_head_orientation_strings: 0,
   }),
 )

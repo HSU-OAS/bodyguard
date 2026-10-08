@@ -1,0 +1,18 @@
+{
+  "label": "type-first",
+  "cwd": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-head-orientation/bodyguard/frontend",
+  "command": "./node_modules/.bin/tsc",
+  "args": [
+    "--noEmit"
+  ],
+  "exit": 2,
+  "elapsedMs": 6307,
+  "stdout": "src/avatar/headOrientationRig.test.ts(193,21): error TS2345: Argument of type '{ generation: number; sequence: number; at: number; readonly result: void; }' is not assignable to parameter of type 'Readonly<{ generation: number; sequence: number; at: number; result: Readonly<{ faceLandmarks: readonly (readonly Readonly<{ x: number; y: number; z: number; }>[])[]; facialTransformationMatrixes: readonly Readonly<{ rows: number; columns: number; data: readonly number[]; }>[]; }> | null; }>'.\n  Types of property 'result' are incompatible.\n    Type 'void' is not assignable to type 'Readonly<{ faceLandmarks: readonly (readonly Readonly<{ x: number; y: number; z: number; }>[])[]; facialTransformationMatrixes: readonly Readonly<{ rows: number; columns: number; data: readonly number[]; }>[]; }> | null'.\nsrc/avatar/headOrientationRig.test.ts(308,13): error TS2322: Type 'void' is not assignable to type 'Readonly<{ faceLandmarks: readonly (readonly Readonly<{ x: number; y: number; z: number; }>[])[]; facialTransformationMatrixes: readonly Readonly<{ rows: number; columns: number; data: readonly number[]; }>[]; }> | null'.\nsrc/avatar/headOrientationRig.ts(200,25): error TS18047: 'basis' is possibly 'null'.\nsrc/avatar/headOrientationRig.ts(204,19): error TS2345: Argument of type 'Quaternion | null' is not assignable to parameter of type 'Quaternion'.\n  Type 'null' is not assignable to type 'Quaternion'.\n",
+  "stderr": "",
+  "source": {
+    "src/avatar/headOrientationRig.ts": "17c50c110103e7fc37147b6650ebe707a590e26efe7a37140e696e43ae8c9383",
+    "src/avatar/headOrientationRig.test.ts": "a90b1793d885b7e05a7229228286a7cc0b0b975a8dd1c5d0e764f98856ccd639",
+    "e2e/fixtures/headOrientationProbe.ts": "3d49e0960334768ca788627236575b263f92cc7e4ca521fb427ff09425f07312",
+    "scripts/test-head-orientation-browser.mjs": "0258a956cc78584336d1ffef734c5725b8f4405b9057f733e8d96c16550261e7"
+  }
+}
