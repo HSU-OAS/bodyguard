@@ -74,9 +74,9 @@ export async function mountBodyFaceProbe() {
           inputOpen(frame)
           faceCalls++
           if (frame === bodyInput && at === bodyAt) coherent++
-        const result = face.landmarker.detectForVideo(frame, at)
-        if (result.faceLandmarks.length === 0) emptyFaces++
-        plainFaceResults &&= !('close' in result)
+          const result = face.landmarker.detectForVideo(frame, at)
+          if (result.faceLandmarks.length === 0) emptyFaces++
+          plainFaceResults &&= !('close' in result)
           if (hold) {
             hold = false
             facePending = true
@@ -94,8 +94,13 @@ export async function mountBodyFaceProbe() {
   function snapshot() {
     let heldInputOpen = false
     if (bodyInput) {
-      try { const copy = bodyInput.clone(); copy.close(); heldInputOpen = true }
-      catch { /* Only the fixed open/closed predicate escapes. */ }
+      try {
+        const copy = bodyInput.clone()
+        copy.close()
+        heldInputOpen = true
+      } catch {
+        /* Only the fixed open/closed predicate escapes. */
+      }
     }
     return {
       closed,
