@@ -68,6 +68,21 @@ function axis(from: Bone, to: Bone) {
 }
 
 describe('observed aggregate trunk swing', () => {
+  it.each([11, 12, 23, 24])('removes trunk coverage for low presence endpoint %s', (index) => {
+    const f = fixture()
+    f.adapter.observe(observation())
+    f.adapter.render(100, 0)
+    const old = f.spine.quaternion.toArray()
+    const next = observation(2, 110)
+    Object.assign(next.result.landmarks[0][index], { presence: 0 })
+    expect(f.adapter.observe(next)).toBe(true)
+    f.adapter.render(110, 10)
+    expect(f.adapter.getCoverage()?.bones).not.toContain('spine05')
+    expect(f.spine.quaternion.toArray()).toEqual(old)
+    f.adapter.observe(observation(3, 120))
+    expect(f.adapter.render(120, 10).tracked).toBe(3)
+    f.adapter.dispose()
+  })
   it('keeps explicit head world orientation after the observed torso parent moves', () => {
     const f = fixture(),
       head = new Bone()
