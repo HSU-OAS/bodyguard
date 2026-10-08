@@ -21,6 +21,9 @@ const sha = (b) => createHash('sha256').update(b).digest('hex'),
     'src/avatar/ownedAvatarPair.ts',
     'src/avatar/observedPoseRig.ts',
     'src/avatar/eightWeightSkin.ts',
+    'src/avatar/directionalRig.ts',
+    'src/avatar/observedTrunk.ts',
+    'src/posture/landmarks.ts',
     'e2e/fixtures/surfaceFeedbackProbe.ts',
     'e2e/fixtures/surfaceFeedback.vite.ts',
     'scripts/test-surface-feedback-browser.mjs',
@@ -152,6 +155,48 @@ try {
     state = check('moving-highlight', await page.evaluate(() => window.rig.feed('moved')))
     assert(state.userMoved)
     assert(state.redPixels.left > baseline.redPixels.left + 200)
+    // FR-M-07: the same authored observation loses only untrusted coverage;
+    // an unrelated trusted limb remains available, and a fresh observation recovers.
+    for (const [mode, region] of [
+      ['arm-low-presence', 'arm-left'],
+      ['arm-invalid-presence', 'arm-left'],
+      ['leg-low-presence', 'leg-left'],
+    ]) {
+      state = check(
+        `${mode}-setup`,
+        await page.evaluate((value) => window.rig.feed('single', 'deviation', value), region),
+      )
+      assert(state.lastAccepted)
+      assert.deepEqual(state.state.feedback.activeRegionIds, [region])
+      assert(state.redPixels.left > baseline.redPixels.left + 200)
+      state = check(
+        mode,
+        await page.evaluate(
+          ([value, target]) => window.rig.feed(value, 'deviation', target),
+          [mode, region],
+        ),
+      )
+      assert(!state.lastAccepted)
+      assert.deepEqual(state.state.feedback.activeRegionIds, [])
+      assert.equal(state.redPixels.left, baseline.redPixels.left)
+      state = check(
+        `${mode}-unaffected-region`,
+        await page.evaluate(
+          ([value, target]) => window.rig.feed(value, 'deviation', target),
+          [mode, region === 'arm-left' ? 'leg-left' : 'arm-left'],
+        ),
+      )
+      assert(state.lastAccepted)
+      assert.deepEqual(state.state.feedback.activeRegionIds, [
+        region === 'arm-left' ? 'leg-left' : 'arm-left',
+      ])
+      state = check(
+        `${mode}-fresh-recovery`,
+        await page.evaluate((value) => window.rig.feed('single', 'deviation', value), region),
+      )
+      assert(state.lastAccepted)
+      assert.deepEqual(state.state.feedback.activeRegionIds, [region])
+    }
     for (const mode of ['crop', 'multiple', 'none']) {
       state = check(mode, await page.evaluate((value) => window.rig.feed(value), mode))
       assert(!state.lastAccepted)

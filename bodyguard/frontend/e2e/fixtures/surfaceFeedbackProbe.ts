@@ -165,6 +165,10 @@ export async function mountSurfaceFeedbackProbe(
       world[index] = { x: -point.x, y: -point.y, z: -point.z }
     }
     if (mode === 'crop') image[13].y = 2
+    // FR-M-07: high visibility cannot repair provided low/invalid presence.
+    if (mode === 'arm-low-presence') image[13].presence = 0
+    if (mode === 'arm-invalid-presence') image[13].presence = Number.NaN
+    if (mode === 'leg-low-presence') image[25].presence = 0
     if (mode === 'none') return { landmarks: [], worldLandmarks: [] }
     if (mode === 'multiple') return { landmarks: [image, image], worldLandmarks: [world, world] }
     return { landmarks: [image], worldLandmarks: [world] }

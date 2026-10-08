@@ -12,6 +12,8 @@ main 9733e4c에는 PR #15의 순수 코칭 진행 엔진까지 병합됐다. 계
 
 ## 최종 통합에서 반드시 닫을 항목
 
+2026-10-09 [S2.M3](stories/pose-presence-guard.md)는 기존 trustedJoints의 제공된 presence 확인 누락을 보완했다. [남녀 강조 해제/복구·실패·증거](review/pose-presence-guard/README.md). 팔/몸통 coverage와 합성 오류 강조의 기술 경계이며 실제 SDK/사람 정확도·올바른 시범·최종 외형·시작P2/D2/전체1~6 통과가 아니다. 추가 조형/GLB·공개 byte/문구·판정 수치/SDK 정책·운영 변경0, 기존 필수 조건과 별도 승인 경계를 유지한다.
+
 2026-10-09 [S6.12 응답 없는 Worker 복구](stories/native-worker-recovery.md)는 비공개 요청의 유한 실패·카메라/프레임/렌더러 회수·중단 기록만 보완했다. [실제 소유 흐름/실패·한계](review/native-worker-recovery/README.md). 강제 종료의 native ACK 부재는 cleanup 실패로 남기며 정상 SDK close·실제 사람/카메라·외형/시범·기존 간헐적 시작 P2·D2/전체1~6 통과가 아니다. GLB/모델·공개 UI/문구/기본 경로·품질/승인 경계는 유지한다.
 
 담당은 CTO다. 실제 참여자·계정·운영 연결이 필요한 부분만 별도 CEO 승인을 요청한다.

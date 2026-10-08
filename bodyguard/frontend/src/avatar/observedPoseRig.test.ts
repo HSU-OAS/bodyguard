@@ -43,6 +43,24 @@ function axis(a: Bone, b: Bone) {
 }
 
 describe('same-result pose rig', () => {
+  it.each([0, 0.49, NaN, Infinity, 1.1])(
+    'revokes presence %s at the shared elbow without reusing coverage, then recovers',
+    (presence) => {
+      const h = setup()
+      h.adapter.observe(frame())
+      h.adapter.render(100, 0)
+      const before = [h.shoulder.quaternion.toArray(), h.elbow.quaternion.toArray()]
+      const missing = frame(2, 110)
+      Object.assign(missing.result.landmarks[0][13], { presence })
+      expect(h.adapter.observe(missing)).toBe(true)
+      expect(h.adapter.render(110, 10)).toEqual({ status: 'untracked', tracked: 0, total: 2 })
+      expect(h.adapter.getCoverage()?.bones).toEqual([])
+      expect([h.shoulder.quaternion.toArray(), h.elbow.quaternion.toArray()]).toEqual(before)
+      h.adapter.observe(frame(3, 120))
+      expect(h.adapter.render(120, 10).tracked).toBe(2)
+      h.adapter.dispose()
+    },
+  )
   it('refuses a semantically wrong descendant anchor instead of rotating to the wrong joint', () => {
     const h = setup()
     expect(() =>
