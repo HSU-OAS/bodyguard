@@ -31,6 +31,8 @@ main 9733e4c에는 PR #15의 순수 코칭 진행 엔진까지 병합됐다. 계
 
 ## 다음 실행 순서
 
+2026-10-08 D2-R/T 계정 소유 native 몸·머리: [S2.T14](stories/native-body-head.md)은 명시 head 설정에만 Face SDK·같은 입력 source를 열고 기존 body-only 경계를 유지한다. 실제 로그인/API/격리 SQL·가짜 장치에서 중단 기록, 얼굴 대기 중 logout/401/이탈/교체의 저장·재개 차단과 명시 새 시작을 확인했다. [흐름·원본/실패·미완성 canvas](review/native-body-head/README.md). 실제 사람/동일인/native 양성·경추/체간/손·시범/판정·외형·승인 디자인·SDK/장시간/노트북·D2/전체1~6 게이트는 남는다. 공개 화면/문구·byte·새 조형/GLB·운영 변경0이며 최소 문구·기존 원본과 별도 승인 조건을 유지한다.
+
 2026-10-08 D2-T/R 머리·사지 통합: [S2.T13](stories/observed-body-head.md)은 명시 head 정렬/복사 회전을 같은 capture stamp로 owned 사용자 모델의 사지와 연결하고 비교 모델은 보존했다. [실제 흐름·실패·미완성 canvas](review/observed-body-head/README.md). native 가짜 장치의 미검출/정리와 합성 긍정/누락·복수 body를 구분하며 공개 UI/byte·원본/GLB/조형·SDK 제품 정책·운영 변경0이다. 실제 사람/동일인·native 머리 긍정/실측·경추/손/체간·시범/판정·외형/디자인/SDK/노트북·D2-A/M/T/R/I/P 및 전체1~6 완료 조건은 그대로 남는다. 다음 비공개 adapter 통합과 별도 외부/참여자 검증을 분리하고 최소 문구·기존 원본/실패·별도 승인 경계를 유지한다.
 
 2026-10-08 D2-R/T 같은 입력: [S2.T12](stories/body-face-frame.md)은 한 frozen VideoFrame의 body/face 결과를 원래 stamp로 전달하고 pending 종료 뒤 native result/input을 정리한다. [실제 흐름·실패/원본](review/body-face-frame/README.md). 실제 Chrome/가짜 장치·Pose/Face SDK의 미검출/새 세대·종료와 합성 긍정을 구분했다. head 후보는 같은 사람 검증이나 사용자 rig/판정 연결이 아니며 D2-M/T/R/I·전체1~6 완료 조건은 그대로 남는다. 공개 UI/byte·원본/GLB/조형·SDK 제품 정책·운영 변경0, 최소 문구·별도 승인 경계를 유지한다.

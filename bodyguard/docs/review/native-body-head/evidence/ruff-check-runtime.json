@@ -1,0 +1,40 @@
+{
+  "label": "ruff-check-runtime",
+  "cwd": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-body-head/bodyguard/backend",
+  "head": "c39a853664581e7b7b4ae00657488c4f8df9fc30",
+  "command": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-account-web/bodyguard/backend/.venv/bin/python",
+  "args": [
+    "-m",
+    "ruff",
+    "check",
+    "tests/run_browser.py"
+  ],
+  "exit": 0,
+  "elapsedMs": 77,
+  "sourceBefore": {
+    "src/coaching/nativePlaybackResources.ts": null,
+    "src/coaching/nativePlaybackResources.test.ts": null,
+    "src/avatar/headOrientationRig.ts": null,
+    "src/avatar/observedPoseRig.ts": null,
+    "src/avatar/ownedAvatarPair.ts": null,
+    "src/pose/bodyFaceVideoSource.ts": null,
+    "e2e/fixtures/nativeHeadAuthProbe.ts": null,
+    "e2e/nativehead.spec.ts": null,
+    "playwright.account.config.ts": null,
+    "scripts/check-selection-production.mjs": null
+  },
+  "sourceAfter": {
+    "src/coaching/nativePlaybackResources.ts": null,
+    "src/coaching/nativePlaybackResources.test.ts": null,
+    "src/avatar/headOrientationRig.ts": null,
+    "src/avatar/observedPoseRig.ts": null,
+    "src/avatar/ownedAvatarPair.ts": null,
+    "src/pose/bodyFaceVideoSource.ts": null,
+    "e2e/fixtures/nativeHeadAuthProbe.ts": null,
+    "e2e/nativehead.spec.ts": null,
+    "playwright.account.config.ts": null,
+    "scripts/check-selection-production.mjs": null
+  },
+  "stdout": "All checks passed!\n",
+  "stderr": ""
+}

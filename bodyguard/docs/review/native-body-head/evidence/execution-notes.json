@@ -1,0 +1,25 @@
+{
+  "actualFailure": "db-init.log exit 1: sandbox shmget Operation not permitted; original log preserved",
+  "recovery": "same owned empty test directory, reviewed local-only permission; db-approved-{init,start,create,identity}.log",
+  "initialTypesToolExit": 1,
+  "initialTypesToolOutput": "e2e/fixtures/nativeHeadAuthProbe.ts(130,33): error TS2554: Expected 4 arguments, but got 3.",
+  "initialTypesStandaloneReceiptCreated": false,
+  "fix": "Actual SDK overloaded body detect call declares empty image-processing options; actual native wrappers still call original SDK method",
+  "initialLintWarning": "noNonNullAssertion on face!.landmarker.close; replaced by captured ownedFace, no optional cleanup skip",
+  "initialLintStandaloneReceiptCreated": false,
+  "orchestrationErrors": [
+    "functions exec ReferenceError w is not defined after unit patch, before RED command; later actual RED report preserved",
+    "backend suite anchor assertion expected 4 but actual 3, before runner patch; corrected explicit three suite lists"
+  ],
+  "reviewClarifications": [
+    "Public record navigation destroys private probe before afterEach final snapshot; explicit closed-stage assertions now verify Face cleanup and shared input before navigating",
+    "Both row/column layouts, body init failure before Face, and partial init body cleanup failure have actual additional unit coverage",
+    "Head quaternion lengths checked before copying; numeric roundoff remains 1e-5, not clinical tolerance"
+  ],
+  "nativeFirstRunExit": 0,
+  "noUnexecutedValidationClaim": true,
+  "newAvatarProduction": false,
+  "actualHuman": false,
+  "actualPhysicalCamera": false,
+  "actualNativePositiveHead": false
+}

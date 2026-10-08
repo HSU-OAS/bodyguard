@@ -88,6 +88,8 @@ for (const file of files) {
     'createNativePlaybackResources',
     'Invalid native playback resources',
     'mountNativeRecoveryProbe',
+    'mountNativeHeadAuthProbe',
+    '__private-native-head-probe',
     '__private-native-recovery-probe',
     'Invalid head avatar rig',
     'mountHeadProbe',
@@ -128,5 +130,6 @@ console.log(
     unconnected_native_playback_adapter_strings: 0,
     unconnected_head_orientation_strings: 0,
     unconnected_body_face_frame_strings: 0,
+    unconnected_native_head_auth_strings: 0,
   }),
 )

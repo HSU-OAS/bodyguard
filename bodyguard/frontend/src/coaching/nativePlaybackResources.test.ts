@@ -2,7 +2,9 @@
 // FR-M-01/02/07·FR-S-02/04/NFR-08: native adapter ownership; native APIs mocked here.
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { prepareOwnedAvatarPair } from '../avatar/ownedAvatarPair'
+import { createBodyFaceVideoSource } from '../pose/bodyFaceVideoSource'
 import { closeCamera, openCamera } from '../pose/camera'
+import { createFaceLandmarker } from '../pose/face'
 import { createPoseLandmarker } from '../pose/landmarker'
 import { createVideoPoseSource } from '../pose/videoPoseSource'
 import { createNativePlaybackResources } from './nativePlaybackResources'
@@ -14,6 +16,8 @@ vi.mock('../pose/camera', async (original) => ({
   closeCamera: vi.fn(),
 }))
 vi.mock('../pose/landmarker', () => ({ createPoseLandmarker: vi.fn() }))
+vi.mock('../pose/face', () => ({ createFaceLandmarker: vi.fn() }))
+vi.mock('../pose/bodyFaceVideoSource', () => ({ createBodyFaceVideoSource: vi.fn() }))
 vi.mock('../avatar/ownedAvatarPair', () => ({ prepareOwnedAvatarPair: vi.fn() }))
 vi.mock('../pose/videoPoseSource', () => ({ createVideoPoseSource: vi.fn() }))
 function deferred<T>() {
@@ -26,7 +30,13 @@ function deferred<T>() {
 const drain = async () => {
   for (let i = 0; i < 50; i++) await Promise.resolve()
 }
-function setup() {
+const headAlignment = (matrixLayout: 'column-major' | 'row-major' = 'column-major') => ({
+  bone: 'head',
+  matrixLayout,
+  cameraReference: [0, 0, 0, 1],
+  sceneFromCamera: [0, 0, 0, 1],
+})
+function setup(head?: ReturnType<typeof headAlignment>) {
   const stream = { getTracks: () => [] } as unknown as MediaStream
   const native = {
     close: vi.fn(),
@@ -42,10 +52,19 @@ function setup() {
     dispose: vi.fn(),
   } as unknown as Awaited<ReturnType<typeof prepareOwnedAvatarPair>>
   const source = { read: vi.fn(async () => null), dispose: vi.fn(async () => {}) }
+  const face = {
+    close: vi.fn(),
+    detectForVideo: vi.fn(() => ({ faceLandmarks: [], facialTransformationMatrixes: [] })),
+  }
+  const loadedFace = { landmarker: face, delegate: 'CPU' } as unknown as Awaited<
+    ReturnType<typeof createFaceLandmarker>
+  >
   vi.mocked(openCamera).mockResolvedValue(stream)
   vi.mocked(createPoseLandmarker).mockResolvedValue(loaded)
+  vi.mocked(createFaceLandmarker).mockResolvedValue(loadedFace)
   vi.mocked(prepareOwnedAvatarPair).mockResolvedValue(pair)
   vi.mocked(createVideoPoseSource).mockReturnValue(source)
+  vi.mocked(createBodyFaceVideoSource).mockReturnValue(source)
   const callbacks = new Map<number, (at: number) => void>()
   let id = 0
   const options = {
@@ -56,6 +75,7 @@ function setup() {
     loadAvatar: vi.fn(),
     render: vi.fn(),
     onFailure: vi.fn(),
+    ...(head ? { head } : {}),
     scheduler: {
       request: vi.fn((cb: (at: number) => void) => {
         callbacks.set(++id, cb)
@@ -76,6 +96,8 @@ function setup() {
     options,
     loaded,
     native,
+    face,
+    loadedFace,
     stream,
     pair,
     source,
@@ -89,6 +111,7 @@ describe('native playback adapter', () => {
     const f = setup()
     expect(openCamera).not.toHaveBeenCalled()
     expect(createPoseLandmarker).not.toHaveBeenCalled()
+    expect(createFaceLandmarker).not.toHaveBeenCalled()
     expect(f.actor.getSnapshot().cameraError).toBeNull()
     for (const change of [
       { model: 'constructor' },
@@ -125,6 +148,8 @@ describe('native playback adapter', () => {
     const f = setup()
     await f.prepare()
     expect(createPoseLandmarker).toHaveBeenCalledWith('lite')
+    expect(createFaceLandmarker).not.toHaveBeenCalled()
+    expect(createBodyFaceVideoSource).not.toHaveBeenCalled()
     const [video] = vi.mocked(openCamera).mock.calls[0]
     expect(video.hidden && video.muted && video.playsInline).toBe(true)
     expect(video.isConnected).toBe(false)
@@ -227,5 +252,145 @@ describe('native playback adapter', () => {
     expect(next.actor.start(1)).toBe(true)
     await next.controller.close()
     await next.actor.close()
+  })
+  it('rejects invalid explicit head configuration before acquiring resources', () => {
+    const f = setup()
+    for (const change of [
+      { bone: 'upperarm_l' },
+      { matrixLayout: 'automatic' },
+      { cameraReference: [0, 0, 0, 0] },
+      { cameraReference: [NaN, 0, 0, 1] },
+      { cameraReference: null },
+      { sceneFromCamera: [0, 1, 1, 1] },
+      { sceneFromCamera: [0, 0, 1] },
+    ])
+      expect(() =>
+        createNativePlaybackResources({
+          ...f.options,
+          head: { ...headAlignment(), ...change },
+        } as never),
+      ).toThrow('Invalid native playback resources')
+    expect(openCamera).not.toHaveBeenCalled()
+    expect(createFaceLandmarker).not.toHaveBeenCalled()
+  })
+  it.each(['column-major', 'row-major'] as const)(
+    'copies %s head alignment before any await and binds both native detectors',
+    async (layout) => {
+      const head = headAlignment(layout),
+        f = setup(head)
+      head.cameraReference[3] = 0
+      head.sceneFromCamera[1] = 1
+      head.bone = 'upperarm_l'
+      await f.prepare()
+      expect(prepareOwnedAvatarPair).toHaveBeenCalledWith(expect.anything(), {
+        load: f.options.loadAvatar,
+        mirror: true,
+        halfLifeMs: 50,
+        maxAgeMs: 250,
+        head: { bone: 'head', cameraReference: [0, 0, 0, 1], sceneFromCamera: [0, 0, 0, 1] },
+      })
+      expect(f.actor.start(1)).toBe(true)
+      const ports = vi.mocked(createBodyFaceVideoSource).mock.calls[0][1],
+        input = {} as VideoFrame
+      ports.detectBody(input, 100)
+      ports.detectFace(input, 100)
+      expect(ports.matrixLayout).toBe(layout)
+      expect(f.native.detectForVideo).toHaveBeenCalledWith(input, 100)
+      expect(f.face.detectForVideo).toHaveBeenCalledWith(input, 100)
+      expect(f.native.detectForVideo.mock.contexts[0]).toBe(f.native)
+      expect(f.face.detectForVideo.mock.contexts[0]).toBe(f.face)
+      expect(createVideoPoseSource).not.toHaveBeenCalled()
+      await f.controller.close()
+      await f.actor.close()
+      expect(f.native.close).toHaveBeenCalledTimes(1)
+      expect(f.face.close).toHaveBeenCalledTimes(1)
+      expect(closeCamera).toHaveBeenCalledTimes(1)
+      expect(() => ports.detectFace(input, 101)).toThrow()
+    },
+  )
+  it('reclaims the earlier body SDK and camera when face initialization fails', async () => {
+    const f = setup(headAlignment())
+    vi.mocked(createFaceLandmarker).mockRejectedValueOnce(new Error('PRIVATE_FACE_FAILURE'))
+    await f.prepare()
+    await f.actor.close()
+    expect(f.native.close).toHaveBeenCalledTimes(1)
+    expect(closeCamera).toHaveBeenCalledTimes(1)
+    expect(prepareOwnedAvatarPair).not.toHaveBeenCalled()
+    expect(f.notices).toEqual([{ type: 'error', generation: 1, reason: 'inference-error' }])
+    expect(JSON.stringify(f.actor.getSnapshot())).not.toContain('PRIVATE_FACE_FAILURE')
+  })
+  it('does not initialize face after body initialization failure', async () => {
+    const f = setup(headAlignment())
+    vi.mocked(createPoseLandmarker).mockRejectedValueOnce(new Error('PRIVATE_BODY_FAILURE'))
+    await f.prepare()
+    await f.actor.close()
+    expect(createFaceLandmarker).not.toHaveBeenCalled()
+    expect(closeCamera).toHaveBeenCalledTimes(1)
+    expect(f.notices).toEqual([{ type: 'error', generation: 1, reason: 'inference-error' }])
+  })
+  it('keeps a partial initialization cleanup failure fixed and still releases camera', async () => {
+    const f = setup(headAlignment())
+    vi.mocked(createFaceLandmarker).mockRejectedValueOnce(new Error('PRIVATE_FACE_FAILURE'))
+    f.native.close.mockImplementation(() => {
+      throw new Error('PRIVATE_BODY_CLOSE_FAILURE')
+    })
+    await f.prepare()
+    await expect(f.actor.close()).rejects.toBeInstanceOf(ResourceCleanupError)
+    expect(f.native.close).toHaveBeenCalledTimes(1)
+    expect(closeCamera).toHaveBeenCalledTimes(1)
+    expect(f.actor.getSnapshot().poisoned).toBe(true)
+    expect(JSON.stringify(f.actor.getSnapshot())).not.toContain('PRIVATE_BODY_CLOSE_FAILURE')
+  })
+  it('reclaims both SDKs once when face initialization returns after cancellation', async () => {
+    const f = setup(headAlignment()),
+      gate = deferred<typeof f.loadedFace>()
+    vi.mocked(createFaceLandmarker).mockReturnValueOnce(gate.promise)
+    const preparing = f.prepare()
+    await drain()
+    const closing = f.actor.close()
+    await drain()
+    expect(f.native.close).toHaveBeenCalledTimes(1)
+    gate.resolve(f.loadedFace)
+    await preparing
+    await closing
+    expect(f.native.close).toHaveBeenCalledTimes(1)
+    expect(f.face.close).toHaveBeenCalledTimes(1)
+    expect(closeCamera).toHaveBeenCalledTimes(1)
+    expect(prepareOwnedAvatarPair).not.toHaveBeenCalled()
+  })
+  it.each(['face', 'body'] as const)(
+    'preserves %s cleanup failure while releasing all resources',
+    async (stage) => {
+      const f = setup(headAlignment())
+      await f.prepare()
+      const closingNative = stage === 'face' ? f.face : f.native
+      closingNative.close.mockImplementation(() => {
+        throw new Error('PRIVATE_CLOSE_FAILURE')
+      })
+      await expect(f.actor.close()).rejects.toBeInstanceOf(ResourceCleanupError)
+      await expect(f.actor.close()).rejects.toBeInstanceOf(ResourceCleanupError)
+      expect(f.face.close).toHaveBeenCalledTimes(1)
+      expect(f.native.close).toHaveBeenCalledTimes(1)
+      expect(closeCamera).toHaveBeenCalledTimes(1)
+      expect(f.actor.getSnapshot().poisoned).toBe(true)
+    },
+  )
+  it('keeps both SDKs alive until the pending source has returned its borrowed input', async () => {
+    const f = setup(headAlignment()),
+      gate = deferred<void>()
+    f.source.dispose.mockReturnValueOnce(gate.promise)
+    await f.prepare()
+    expect(f.actor.start(1)).toBe(true)
+    const closing = f.actor.close()
+    await drain()
+    expect(f.source.dispose).toHaveBeenCalledTimes(1)
+    expect(f.face.close).not.toHaveBeenCalled()
+    expect(f.native.close).not.toHaveBeenCalled()
+    expect(closeCamera).not.toHaveBeenCalled()
+    gate.resolve()
+    await closing
+    expect(f.face.close).toHaveBeenCalledTimes(1)
+    expect(f.native.close).toHaveBeenCalledTimes(1)
+    expect(closeCamera).toHaveBeenCalledTimes(1)
   })
 })

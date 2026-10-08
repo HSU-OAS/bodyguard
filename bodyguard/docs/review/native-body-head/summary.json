@@ -1,0 +1,1172 @@
+{
+  "runtime": "c39a853664581e7b7b4ae00657488c4f8df9fc30",
+  "baseline": "7f3c8bcd88b1a77cf3b872a240f73ecbad0b1bb8",
+  "source": {
+    "bodyguard/frontend/src/coaching/nativePlaybackResources.ts": "f0a52a712185c1ca4c0a706ba0140756ff54b506bf769b31c45582f776aad083",
+    "bodyguard/frontend/src/coaching/nativePlaybackResources.test.ts": "31af1a1995e654b67e18da4f75db0317ffe33eb8b0bdf92204291365e07c9da4",
+    "bodyguard/frontend/src/coaching/ownedPlaybackResources.ts": "6b89bf440e80d539a0a14e6e6f2c3c2735c8baa863019c7794fedaf1fe4432f9",
+    "bodyguard/frontend/src/coaching/resources.ts": "0832d662b19b522153f7e13507147a7b33f264d0eee94f10e07e06758d1fa029",
+    "bodyguard/frontend/src/coaching/useRecordedCoaching.ts": "d830bfb9a7b583cd93e193e2c8b0a62e0279e56df8fe8623d8dfad2eb987efb7",
+    "bodyguard/frontend/src/avatar/ownedPosePlayback.ts": "cecd8b5e05f705f6eb04844a1c975c44ee96b64dae1507f8c2d0731693826daa",
+    "bodyguard/frontend/src/avatar/headOrientationRig.ts": "5283baad2b9e0e3e5e05b3e86a2190088d5eb88f285378af1d31a981bfd79ea5",
+    "bodyguard/frontend/src/avatar/observedPoseRig.ts": "a696f4d216d9b26d4801aaa2533df64b2c10e112f0a3b1e4f2aac40deced26d8",
+    "bodyguard/frontend/src/avatar/ownedAvatarPair.ts": "afcc039b7db85f133786848ec6595750fa8f814658862765ce28ab3d7c963d04",
+    "bodyguard/frontend/src/pose/bodyFaceVideoSource.ts": "5413e493faf08498d3d5ca4d53c6e4bcc7f8b82aa4dffb2ea353f6174042e05a",
+    "bodyguard/frontend/src/pose/videoPoseSource.ts": "57d53b123f0ebb14926880883ce5fe5bbde2c05a98da44abfb6cf6f465e26619",
+    "bodyguard/frontend/src/pose/ownedPoseFrame.ts": "d5721c653087251add5d9a665577d54f1f0f6846fcf99fe29d44c088b4176a98",
+    "bodyguard/frontend/src/pose/face.ts": "0d08fce5139fe974a870059fd6fbda24bff0248d1c2c512e3841c05c29916dd5",
+    "bodyguard/frontend/src/pose/landmarker.ts": "57c31241fb995442b4c60adb75849576483fbd32bf6c8412b5d3282f96625d7d",
+    "bodyguard/frontend/src/pose/camera.ts": "38b900cc43f6d19516ccb69542a0c77e810a20e75bbd3dd16a423f78f148f66d",
+    "bodyguard/frontend/e2e/fixtures/nativeHeadAuthProbe.ts": "0e4ccd7036f77296d3edafcb9dc83de5365c3ebb987e664b81ed01fa1acc7ae3",
+    "bodyguard/frontend/e2e/fixtures/nativeHead.vite.ts": "5e8e96858de14581a722102c8136d97930638d7f918707c7ae30c5bfd8ce0dc4",
+    "bodyguard/frontend/e2e/nativehead.spec.ts": "da10cd2554de7caf97726e952c62738196580d5fcf02ab0b627d5901e1ee77a2",
+    "bodyguard/frontend/e2e/fixtures/nativeRecoveryProbe.ts": "255174aee2f1b9803c1a9efbfd3f0e375675438347744f5cda18ad8fa7895fe2",
+    "bodyguard/frontend/e2e/nativerecovery.spec.ts": "c6ec1ab26547d4e959682d4f01e97365b5a91bf6103fda4aefa8a43893c1a459",
+    "bodyguard/frontend/playwright.account.config.ts": "419fd48be8450211c7a5e92901a6f61dfff02f3e62dbfa4889ad8e95d7a3705e",
+    "bodyguard/frontend/scripts/check-selection-production.mjs": "44f7ed5fd0535cc519b7cf1d5b7ab4c9af3e38edd4e563c85eebe535c7de06b2",
+    "bodyguard/backend/tests/run_browser.py": "10b05c587825fed390cd10bd9e11dba676451172d591b68f28379a514fd7c0b2",
+    "bodyguard/backend/tests/conftest.py": "327b2fbb658626d0e44beecaff746adb5a9662bf3453aa4bc7049009a4bc79bf"
+  },
+  "evidence": [
+    {
+      "file": "asset-receipt.json",
+      "bytes": 1287,
+      "sha256": "cb7a567c85e41381da92f05e1d093f2ed59c8b5b47f029f3db1f33560657bc53"
+    },
+    {
+      "file": "assets-initial.json",
+      "bytes": 2714,
+      "sha256": "a09bb3a73e465e4c2e1097d53d762b912b879a6ee5d2661bdc0a1ac6d7235412"
+    },
+    {
+      "file": "assets-reviewed.json",
+      "bytes": 2646,
+      "sha256": "25a0bb12e049df0d3f887ddd86f5be36cef1c65334a2e70e92cab61e5027d243"
+    },
+    {
+      "file": "assets-runtime.json",
+      "bytes": 2645,
+      "sha256": "605c050a6280a59f67e74981ec47f4659b89139aa38f2a7b1b0e0bbb3a8e378d"
+    },
+    {
+      "file": "biome-initial.json",
+      "bytes": 2701,
+      "sha256": "18b37c79b10422f5241e35cfa5d6662fbf2b92fe0a60e01b412bd530f06cf5c0"
+    },
+    {
+      "file": "biome-prebrowser.json",
+      "bytes": 2704,
+      "sha256": "536ed7c2966762cad911b8cf5abc7771b7ca2fa2f9d2844b8aae98508b76a106"
+    },
+    {
+      "file": "biome-reviewed.json",
+      "bytes": 2702,
+      "sha256": "11a63c5fbd398068e2dce926f4731084e0072646e81d0dc1a48b4b8e50e8b899"
+    },
+    {
+      "file": "biome-runtime.json",
+      "bytes": 2701,
+      "sha256": "44bb1aac4b8ab7830092ed8dd70c52850c30dfe095c1833df14c3120dac6836e"
+    },
+    {
+      "file": "browser-initial-receipt.json",
+      "bytes": 2346,
+      "sha256": "313135198ae00a1443b091434079d8b9784e5ed780fa8f817a994eba98879811"
+    },
+    {
+      "file": "browser-initial.log",
+      "bytes": 2090,
+      "sha256": "0768b4f250b38c1358dcb7260064cd3a818ee641c0093586ab67eeaa30e17d92"
+    },
+    {
+      "file": "browser-recovery-reviewed-receipt.json",
+      "bytes": 820,
+      "sha256": "5dfa5fec58a20652bdeaa1398e19e53043428eddac49725998ca19b0fc505f2e"
+    },
+    {
+      "file": "browser-recovery-reviewed.log",
+      "bytes": 1641,
+      "sha256": "ffee3442b98b620a9a2d42c883bbf16a481f5007dcf4888663e4c20ee039a095"
+    },
+    {
+      "file": "browser-recovery-runtime-receipt.json",
+      "bytes": 820,
+      "sha256": "10b93629624a37e27f70e8cf79eb1c63f1dc88b9935762f149cdc57acb5b947b"
+    },
+    {
+      "file": "browser-recovery-runtime.log",
+      "bytes": 1641,
+      "sha256": "f339a924049bfc5fe6160b5880863840ec1c01aa7d32662a96edbb7e4ab83881"
+    },
+    {
+      "file": "browser-runtime-receipt.json",
+      "bytes": 2346,
+      "sha256": "a89b95470ce99c925655fe5b9972130121ce51bd40d8f1beb2a4990233d938b8"
+    },
+    {
+      "file": "browser-runtime.log",
+      "bytes": 2090,
+      "sha256": "de94e13df6fc2fe57e2f3c3f9c7897b2c8d14af63c903d99b175433862755535"
+    },
+    {
+      "file": "build-initial.json",
+      "bytes": 3225,
+      "sha256": "8cf384b63bc37693bb69d5a0bca3140e27d81fab1dfc9012c355d5ab9a908307"
+    },
+    {
+      "file": "build-reviewed.json",
+      "bytes": 3226,
+      "sha256": "8943199ad58e2ad25bc5bfbb36cc0607349db31a628f72e841c67cdb7a1d9b8e"
+    },
+    {
+      "file": "build-runtime.json",
+      "bytes": 3225,
+      "sha256": "643a5f77178415b9e748bff9a1bbeda19d49cac283512778be53ada6b629e354"
+    },
+    {
+      "file": "collect.mjs",
+      "bytes": 7383,
+      "sha256": "a12244b969b79250e943b83a9e871fdbda5cdeec437190e9178b713926f46941"
+    },
+    {
+      "file": "db-approved-create.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "db-approved-identity.log",
+      "bytes": 47,
+      "sha256": "faa073edbd0b7926f3db96ce66886ed4745ddd436c5116ffeed8df8c846e30a0"
+    },
+    {
+      "file": "db-approved-init.log",
+      "bytes": 885,
+      "sha256": "f66719b46f0a5b54fc78c3be00fccce32d35d5185099c89061e6e37ff72b5fda"
+    },
+    {
+      "file": "db-approved-start.log",
+      "bytes": 52,
+      "sha256": "66afd0411ccc09366e99fdd99b85f21899c8d2d064f5835126859618802153ad"
+    },
+    {
+      "file": "db-init.log",
+      "bytes": 964,
+      "sha256": "39ed4f3c5f7d0a6874858a06bd58cfd2414058eb2868c3d285fa1ec50dfd9983"
+    },
+    {
+      "file": "db-stop-receipt.json",
+      "bytes": 79,
+      "sha256": "f0fe10ec4f6adb6f51f85efafd2595cebeb4ac616c5e8ee429954de98dba8bb9"
+    },
+    {
+      "file": "db-stop.log",
+      "bytes": 56,
+      "sha256": "ca19178a35ab4153b75b494963b66ce8243e1b94c173107c87b44d09db23652d"
+    },
+    {
+      "file": "diff-initial.json",
+      "bytes": 2635,
+      "sha256": "0b7eebcd12e6531075eaf9d72af8470697caf50b6c3e14a662f8a0a8d81a0211"
+    },
+    {
+      "file": "diff-reviewed.json",
+      "bytes": 2636,
+      "sha256": "9b238ff133e9c7851d6317f54d89ce9e843e3c5b31e80e62ee5dee30e03e893f"
+    },
+    {
+      "file": "diff-runtime.json",
+      "bytes": 2635,
+      "sha256": "3ec9ebcc272d05933267c0c919efdb22d222d6ab66578418522654bfee1061be"
+    },
+    {
+      "file": "execution-notes.json",
+      "bytes": 1689,
+      "sha256": "4645ebb9bf2d71fa2ec10f2773ae2b0f01088cb087675c81433b45b266007f93"
+    },
+    {
+      "file": "final-checks-initial.json",
+      "bytes": 501,
+      "sha256": "f6e4cd92a48d3341e8ba28d758b12430163430aa6dc67344549149c1ce337ff0"
+    },
+    {
+      "file": "final-checks-reviewed.json",
+      "bytes": 508,
+      "sha256": "b217e1dc2ae2b9ae526508fdb42c1c26a42698e07b9e95bba86f5b7a07120a89"
+    },
+    {
+      "file": "final-checks-runtime.json",
+      "bytes": 501,
+      "sha256": "b6847b4da55ad2ee1e98738433282ff32289aeb84477ffad7dc12e63a390ae93"
+    },
+    {
+      "file": "final-checks.mjs",
+      "bytes": 1286,
+      "sha256": "7335e6c2f83e64e7886efd2065e74c189f555dd88c4b3cf350791e11a1df37d8"
+    },
+    {
+      "file": "format-expanded-tests.json",
+      "bytes": 2759,
+      "sha256": "09a672c17b9b38db74c692067bc4b4380395bb5d60a5e24c7cfdaa6e73acd5b6"
+    },
+    {
+      "file": "format-first-recorded.json",
+      "bytes": 2956,
+      "sha256": "0bd6991936c267066ad1c5dc237197a118b7978ce3e4cef744c00f3fba24a6d5"
+    },
+    {
+      "file": "format-review-fix.json",
+      "bytes": 2785,
+      "sha256": "83b77b69ed02ccf78cefaca42adee951d8ee2cde27fdfcc1ab356a6aec115379"
+    },
+    {
+      "file": "frontend-initial.json.gz",
+      "bytes": 43905,
+      "sha256": "3289b0f6135640fea4199376725d8050f4e7a9e04dd0f16907877ab9a1fafb17",
+      "originalSha256": "0ebc2f0b27494d42e613910f782a651eb0414256a5977aa97fe6510fc94e44c7"
+    },
+    {
+      "file": "frontend-reviewed.json.gz",
+      "bytes": 44586,
+      "sha256": "a5896d82d3c4921db0517bc4abd409340357ff485ee7cc40b4e4c67c97d6d3d7",
+      "originalSha256": "11c07b20edf5aa1744af84cf932dfb7fe74e5a0071d7343d81e135ecf5af2455"
+    },
+    {
+      "file": "frontend-runtime.json.gz",
+      "bytes": 44198,
+      "sha256": "709814ce94f7cb757ba8105f605f2b2685f132765f2ec5e0f3cfac886fa170d1",
+      "originalSha256": "950b69a8f5d5a47abf2fdc3add05cb4f6f771444ebe6ff8061c20794ec0996ca"
+    },
+    {
+      "file": "guard-initial.json",
+      "bytes": 3807,
+      "sha256": "2d03f7178bf8c071dc585952e9ea61b4cdbd6c0c73c183c4b766d077a8edcd4f"
+    },
+    {
+      "file": "guard-owned-red.json",
+      "bytes": 3677,
+      "sha256": "0c6cc2bc621eb27410e023a95bef0c653234c0f1d0a13345d48b8079d4ca9cfc"
+    },
+    {
+      "file": "guard-restored-green.json",
+      "bytes": 3815,
+      "sha256": "19aa218317096a17e0b9459e072e821b9e45ff1bfe6fa2c4744863c8d6cfb9fa"
+    },
+    {
+      "file": "guard-reviewed.json",
+      "bytes": 3808,
+      "sha256": "d84e503a94fb0b112cd27322a364435e864b8a5e52ef604664fc45f05fa27745"
+    },
+    {
+      "file": "guard-runtime.json",
+      "bytes": 3807,
+      "sha256": "8daca08f1c41cd7e6b8c75bf97d6627109c88f4ee859664a63a61ae71df1efd6"
+    },
+    {
+      "file": "ruff-check-initial.json",
+      "bytes": 1656,
+      "sha256": "ddae9a0dad46d38f50dce418867efe0e691ee49096753c1158770f643218c0be"
+    },
+    {
+      "file": "ruff-check-runtime.json",
+      "bytes": 1655,
+      "sha256": "2d06bfc1ff6f22713e061e72fc2470fa3ff727092817d04c89545d6646d5f91a"
+    },
+    {
+      "file": "ruff-format-prebrowser.json",
+      "bytes": 1682,
+      "sha256": "69d0ff0b391adaa98625279cbc2e52587d117c791f89dbe640096c375144652c"
+    },
+    {
+      "file": "ruff-format-runtime.json",
+      "bytes": 1678,
+      "sha256": "a7f53c26ea0ca7becf45525c3d51a09873bee2f0e9b848d938bf2bd331397ae5"
+    },
+    {
+      "file": "run-browser.mjs",
+      "bytes": 2467,
+      "sha256": "c10f97575e062978137a5f6b20025a5b5cd9112dc9eac549908e468fe1d78173"
+    },
+    {
+      "file": "run-recovery.mjs",
+      "bytes": 1983,
+      "sha256": "757ea0e90a9ba881dc6475e12e32b178bf7af4a7eacd38169cca4ae7a7b491f4"
+    },
+    {
+      "file": "run.mjs",
+      "bytes": 1596,
+      "sha256": "48b63b24501ea8d02c62b0a37a426ee7b64ba5193b7c81f4f12e985a3214fc49"
+    },
+    {
+      "file": "setup-assets.mjs",
+      "bytes": 2156,
+      "sha256": "a3900f374a754952120fc21f9e60d8daeee9e56b13e0b86de046396fa86c844e"
+    },
+    {
+      "file": "setup-db-approved.mjs",
+      "bytes": 1263,
+      "sha256": "b43ec580b9ade75b73b16941da7ff5d1fcd7fc19702c96e3308d283b995a1711"
+    },
+    {
+      "file": "setup-db.mjs",
+      "bytes": 1254,
+      "sha256": "2ae4b6fca4035081c9b444ca9237b95ec1fb5d649f6b34144a05e566d8ad473e"
+    },
+    {
+      "file": "setup-recovery-assets.mjs",
+      "bytes": 2155,
+      "sha256": "e6e1faeb5e7064f1e284740dcb0b187fc09feb087dd20eac1a37a7eccdea1b31"
+    },
+    {
+      "file": "stop-db.mjs",
+      "bytes": 801,
+      "sha256": "3435e9ae6d6da17619345f0c3581851214f04427676e52b2f1a9c349bcc30805"
+    },
+    {
+      "file": "types-first-recorded.json",
+      "bytes": 2648,
+      "sha256": "20ae1d88f1ac2c6b9a556b927b7dc8ed73978f7a88cf380e842ff63bba396ec1"
+    },
+    {
+      "file": "types-initial.json",
+      "bytes": 2647,
+      "sha256": "9cbcaaa909401ac3ec1367efdc5cb92ebc2d2459ee4ef7544199a2daddcb33c5"
+    },
+    {
+      "file": "types-reviewed.json",
+      "bytes": 2648,
+      "sha256": "2e43aecaa0783e1be921ec4ad29e20018099f2675171abc2b95265ee051372f3"
+    },
+    {
+      "file": "types-runtime.json",
+      "bytes": 2647,
+      "sha256": "f988f45d3b54d0129a467b32fb987d653a95217e6c21c9e20a7ef0da36041a80"
+    },
+    {
+      "file": "unit-first-green.json.gz",
+      "bytes": 1376,
+      "sha256": "da3cbe63acef17139ca4aeca7baa1f529d5c64fb2c5f2b2cbcfd649ffba8a507",
+      "originalSha256": "e9178a04b46268626ac34ad0850772895cbc0d1873f416b347a215cc678c19fa"
+    },
+    {
+      "file": "unit-initial.json.gz",
+      "bytes": 1061,
+      "sha256": "6493b8c3d7c0d76be058404eb24cd60e41e3d4927f44580a8d2e95d51b429ae4",
+      "originalSha256": "39b465798ab44c645518c9fd7f19428f0cdace9dfc5530dd56d4ed01338731e2"
+    },
+    {
+      "file": "unit-red.json.gz",
+      "bytes": 2785,
+      "sha256": "00c1cb0eb193e2403f6b4a9203751044f629fc13ff9ea3695984c1f1ee5aa920",
+      "originalSha256": "dc414a8546408ba25ac0c2e6a9f59d1a8ae3ce0d7fd3065fab0831846d0b59e1"
+    },
+    {
+      "file": "unit-reviewed.json.gz",
+      "bytes": 1063,
+      "sha256": "505c0f4f40e74ada6edcbb889d2649994cfdf2c6c38a103ba2b474cd1fc3dca1",
+      "originalSha256": "0ca407f47d0e2251213a4ed502cab1980bbf83416e912c5968ba594d3ba820ee"
+    },
+    {
+      "file": "unit-runtime.json.gz",
+      "bytes": 1064,
+      "sha256": "7d09fa09d86f8451243a40f9a05298d693566aca1c061dfe6c56e45d1e355da2",
+      "originalSha256": "6c7ec33da55d1788312790660fc6539d45a373cd63c2b3ff24be12a2e1add473"
+    },
+    {
+      "file": "native-head-initial-probe.js.gz",
+      "bytes": 477059,
+      "sha256": "3d865cb2d463b9b34d15e80418b4676e60db2d4aa6fa547ec6c6e19244867f8a",
+      "originalSha256": "f66aacbd90460337dbc025f2079e79ffa74df15bb492e174754ec8c0d32aa0d3"
+    },
+    {
+      "file": "native-head-runtime-probe.js.gz",
+      "bytes": 477072,
+      "sha256": "454cc625300dbfa24b34f63707fc72db680cf81ab201c20c35d2706bde008f1e",
+      "originalSha256": "e16df3b997a98a24a2a4c7845bd327be5894c13cbdf40919b7523285ceacd76b"
+    },
+    {
+      "file": "body-only-reviewed-probe.js.gz",
+      "bytes": 476587,
+      "sha256": "a392a2d71ad1e13e807adc6a2a28d94908e87e947a9f51b36794055210708bcf",
+      "originalSha256": "a2737fb0f02d9e7d2edba758b6bbade458a5fba19076ce30d41602f1bccea304"
+    },
+    {
+      "file": "body-only-runtime-probe.js.gz",
+      "bytes": 476599,
+      "sha256": "1e78ca318e244e2fd75d2ed86c617c665d7cc2c996ddcfcb4a17a6c20b262e90",
+      "originalSha256": "00ef794474054bc56467b87ca482ed2cb53c7fd140e5133b56c656c80057b441"
+    },
+    {
+      "file": "nativehead-20261008T015033262215Z-report.json.gz",
+      "bytes": 2529,
+      "sha256": "fef24970a567097aa2046dd2827c868bae39909e69314702b969c0658dac1934",
+      "originalSha256": "243336a358730e2b7887705877359c8d0274fd8a7011cc16d78dd014bcfe7502"
+    },
+    {
+      "file": "nativehead-20261008T015033262215Z-nativehead-female-native-h-0bb32-t→logout→no-old-resume-save-native-head-summary.json",
+      "bytes": 11188,
+      "sha256": "96f0619b48e4060795a80faf4c065816491a746090d0e7a78789249d99f9e2ac"
+    },
+    {
+      "file": "nativehead-20261008T015033262215Z-nativehead-female-native-h-17814-pagehide→no-old-resume-save-native-head-summary.json",
+      "bytes": 11215,
+      "sha256": "7c3994b9cfad051bcfaceb97749d97d76dc813a8cde2e1938a27be5575d3cc3b"
+    },
+    {
+      "file": "nativehead-20261008T015033262215Z-nativehead-female-native-h-4e76e-erver401→no-old-resume-save-native-head-summary.json",
+      "bytes": 11188,
+      "sha256": "eaecad6e776ab75a1295ae553be1f00d362acccd07b3bab83d5ba8ef76c7570c"
+    },
+    {
+      "file": "nativehead-20261008T015033262215Z-nativehead-female-native-h-df878-→new-owner-explicit-restart-native-head-summary.json",
+      "bytes": 11868,
+      "sha256": "6dc1398baeb308a0e2d00c4a6d8338a08f69aa5a1479ee32850908996ca95d17"
+    },
+    {
+      "file": "nativehead-20261008T015033262215Z-nativehead-female-native-h-f781f-→unmount→no-old-resume-save-native-head-summary.json",
+      "bytes": 11204,
+      "sha256": "6df6ef0f3052f985c3a29fda91d75fc781c8e996e3ea98365d33cc3e6ed23882"
+    },
+    {
+      "file": "nativehead-20261008T015033262215Z-nativehead-female-native-start→stop→own-interrupted-record-native-head-summary.json",
+      "bytes": 5881,
+      "sha256": "14a508e1f9063325545c6ad22d093afd7e85f138b29257b0925582e46f20a080"
+    },
+    {
+      "file": "nativehead-20261008T015033262215Z-nativehead-female-native-start→stop→own-interrupted-record-avatar-female.png",
+      "bytes": 165319,
+      "sha256": "c8db993fd12d2abf091ce1955ac8e63212d86856c848d057e829cc16e9bee14d"
+    },
+    {
+      "file": "nativehead-20261008T015033262215Z-nativehead-female-native-start→stop→own-interrupted-record-native-record-female.png",
+      "bytes": 76643,
+      "sha256": "bf5961c9bd43f5ece0be088ddf27d3e3eb084a017807a61cc03a103a795eecf0"
+    },
+    {
+      "file": "nativehead-20261008T015033262215Z-nativehead-male-native-hel-287c5-→unmount→no-old-resume-save-native-head-summary.json",
+      "bytes": 11204,
+      "sha256": "766ccbc25710c85a902818fb4adb90033b4669a197175720701c79cd98149b03"
+    },
+    {
+      "file": "nativehead-20261008T015033262215Z-nativehead-male-native-hel-4297d-→new-owner-explicit-restart-native-head-summary.json",
+      "bytes": 11857,
+      "sha256": "7e810e066702f4f611647728d9f1b063db8f66e42c6cd704c9ee3efc2358b560"
+    },
+    {
+      "file": "nativehead-20261008T015033262215Z-nativehead-male-native-hel-69f6f-erver401→no-old-resume-save-native-head-summary.json",
+      "bytes": 11209,
+      "sha256": "e0d61af10db168e105397c7e5dedc67675a51b51a6cee7cd0df5d880e5966035"
+    },
+    {
+      "file": "nativehead-20261008T015033262215Z-nativehead-male-native-hel-d7f23-pagehide→no-old-resume-save-native-head-summary.json",
+      "bytes": 11194,
+      "sha256": "13aa2cd4432fc9cca0ac64770a05727ecb7f9a95db6e727cd87f84640f9951ec"
+    },
+    {
+      "file": "nativehead-20261008T015033262215Z-nativehead-male-native-held-result→logout→no-old-resume-save-native-head-summary.json",
+      "bytes": 11188,
+      "sha256": "835a98e4c61d19cbe826cc388101ab6ada141d4199f36ea254b871c3d43d3c37"
+    },
+    {
+      "file": "nativehead-20261008T015033262215Z-nativehead-male-native-start→stop→own-interrupted-record-native-head-summary.json",
+      "bytes": 5881,
+      "sha256": "f1cb70742445ca0e3e9353b7098f8247972ed1b678ac8d573d044456efc406f7"
+    },
+    {
+      "file": "nativehead-20261008T015033262215Z-nativehead-male-native-start→stop→own-interrupted-record-avatar-male.png",
+      "bytes": 183808,
+      "sha256": "16215b67de69a2c40f63092b23fce9808c68c65cd1c09f52d2dd46dc836d2b61"
+    },
+    {
+      "file": "nativehead-20261008T015033262215Z-nativehead-male-native-start→stop→own-interrupted-record-native-record-male.png",
+      "bytes": 76668,
+      "sha256": "b78dbe8369156ceb35e7d670cba34a6941eac982d980689b16aa29c6ce286c62"
+    },
+    {
+      "file": "nativehead-20261008T015548776247Z-report.json.gz",
+      "bytes": 2521,
+      "sha256": "f4aedd0ecce984e2359889d27882f88d4ee71ffd2752b61524e0dbc06eeddd7c",
+      "originalSha256": "3ce03de4d0085473af629b4de2a104bb70b9fe56802a111ac041be52051d0c64"
+    },
+    {
+      "file": "nativehead-20261008T015548776247Z-nativehead-female-native-h-0bb32-t→logout→no-old-resume-save-native-head-summary.json",
+      "bytes": 11188,
+      "sha256": "afb28d63eb7cb9bf57a5b870c1e0d3e0131c2cc72ffbc8393d380da7e4665c06"
+    },
+    {
+      "file": "nativehead-20261008T015548776247Z-nativehead-female-native-h-17814-pagehide→no-old-resume-save-native-head-summary.json",
+      "bytes": 11194,
+      "sha256": "1b5c30638e9d1393b64717d69f665c3bcd064e16df2f5bd9c46af501a28bc78c"
+    },
+    {
+      "file": "nativehead-20261008T015548776247Z-nativehead-female-native-h-4e76e-erver401→no-old-resume-save-native-head-summary.json",
+      "bytes": 11188,
+      "sha256": "8dd7f774abe374af13fbfdbdb6760d49b3f8d1d177106558ffbe0e52d8f12a4a"
+    },
+    {
+      "file": "nativehead-20261008T015548776247Z-nativehead-female-native-h-df878-→new-owner-explicit-restart-native-head-summary.json",
+      "bytes": 11857,
+      "sha256": "60dad01247cf76af5c5a291693692d7e08a3b36b777db254c8349bd69ed742a2"
+    },
+    {
+      "file": "nativehead-20261008T015548776247Z-nativehead-female-native-h-f781f-→unmount→no-old-resume-save-native-head-summary.json",
+      "bytes": 11204,
+      "sha256": "93260fd563e074c1880ef5768284edf554457c239dec613b13e791a6d7bbf02d"
+    },
+    {
+      "file": "nativehead-20261008T015548776247Z-nativehead-female-native-start→stop→own-interrupted-record-native-head-summary.json",
+      "bytes": 5881,
+      "sha256": "53c4b6536865bedb76e84633e652466da57b644b62b250f1eb81244543e0c617"
+    },
+    {
+      "file": "nativehead-20261008T015548776247Z-nativehead-female-native-start→stop→own-interrupted-record-avatar-female.png",
+      "bytes": 165319,
+      "sha256": "c8db993fd12d2abf091ce1955ac8e63212d86856c848d057e829cc16e9bee14d"
+    },
+    {
+      "file": "nativehead-20261008T015548776247Z-nativehead-female-native-start→stop→own-interrupted-record-native-record-female.png",
+      "bytes": 77190,
+      "sha256": "4da44cc2d6b6e888b318befab078e7df5d20cb2a29b8832433d4ab1b5abde8d0"
+    },
+    {
+      "file": "nativehead-20261008T015548776247Z-nativehead-male-native-hel-287c5-→unmount→no-old-resume-save-native-head-summary.json",
+      "bytes": 11204,
+      "sha256": "3bada334dd5c4bcceedfc26e7e60bb7e936bd2deb59e2b2c82758fc05978776c"
+    },
+    {
+      "file": "nativehead-20261008T015548776247Z-nativehead-male-native-hel-4297d-→new-owner-explicit-restart-native-head-summary.json",
+      "bytes": 11857,
+      "sha256": "eff815622ce45e209b160e96b038e007ee40bfe791e64f52fec36bcda8260ba7"
+    },
+    {
+      "file": "nativehead-20261008T015548776247Z-nativehead-male-native-hel-69f6f-erver401→no-old-resume-save-native-head-summary.json",
+      "bytes": 11188,
+      "sha256": "37217a04fd77702003ab6c3d5e39bfb4bdc2ade3cfb908ba9a224be5e6ef57d5"
+    },
+    {
+      "file": "nativehead-20261008T015548776247Z-nativehead-male-native-hel-d7f23-pagehide→no-old-resume-save-native-head-summary.json",
+      "bytes": 11194,
+      "sha256": "c04ce89171e2d3d2900df93f78705aed3042a68e39d424bdb059a30ec1f85e98"
+    },
+    {
+      "file": "nativehead-20261008T015548776247Z-nativehead-male-native-held-result→logout→no-old-resume-save-native-head-summary.json",
+      "bytes": 11188,
+      "sha256": "a5cc67270dcc12f192003bcdb75915f75fe85c0da21640d07d238185097544f0"
+    },
+    {
+      "file": "nativehead-20261008T015548776247Z-nativehead-male-native-start→stop→own-interrupted-record-native-head-summary.json",
+      "bytes": 5881,
+      "sha256": "b3fdbe61c8aaeb4352ee203bf9392cd17131311dacc54301ac293852d39ebbb8"
+    },
+    {
+      "file": "nativehead-20261008T015548776247Z-nativehead-male-native-start→stop→own-interrupted-record-avatar-male.png",
+      "bytes": 183808,
+      "sha256": "16215b67de69a2c40f63092b23fce9808c68c65cd1c09f52d2dd46dc836d2b61"
+    },
+    {
+      "file": "nativehead-20261008T015548776247Z-nativehead-male-native-start→stop→own-interrupted-record-native-record-male.png",
+      "bytes": 77190,
+      "sha256": "4da44cc2d6b6e888b318befab078e7df5d20cb2a29b8832433d4ab1b5abde8d0"
+    },
+    {
+      "file": "nativerecovery-20261008T015415250177Z-report.json.gz",
+      "bytes": 2353,
+      "sha256": "d020d6182515e661b75adeaecae811e953346e4a6d86ff0f44df47c54d63bf40",
+      "originalSha256": "990b7c7647115ce11f636c0ee35252c1cf68cbabc658daad0a8bee086c166a69"
+    },
+    {
+      "file": "nativerecovery-20261008T015415250177Z-nativerecovery-female-GLB--baa12-tive-cleanup→explicit-retry-native-recovery-summary.json",
+      "bytes": 4717,
+      "sha256": "cb4590a47469bf0066148ed601a8d26a8139d0eb30113acf84c03c254476dbef"
+    },
+    {
+      "file": "nativerecovery-20261008T015415250177Z-nativerecovery-female-brow-55678-ssion-denied→explicit-retry-native-recovery-summary.json",
+      "bytes": 4845,
+      "sha256": "8421fd42c23cf3c3496a538f5f0fd73cf274e717b59398ee220a347110e10ce7"
+    },
+    {
+      "file": "nativerecovery-20261008T015415250177Z-nativerecovery-female-brow-55678-ssion-denied→explicit-retry-female-restarted-avatar-only.png",
+      "bytes": 165319,
+      "sha256": "c8db993fd12d2abf091ce1955ac8e63212d86856c848d057e829cc16e9bee14d"
+    },
+    {
+      "file": "nativerecovery-20261008T015415250177Z-nativerecovery-female-dela-3806e-late-reclaim→explicit-retry-native-recovery-summary.json",
+      "bytes": 6977,
+      "sha256": "b7345132da4c1c91c38795d74729dfa42a608dac5195589b5e535c1f81541a08"
+    },
+    {
+      "file": "nativerecovery-20261008T015415250177Z-nativerecovery-female-native-track-lost→stop→explicit-retry-native-recovery-summary.json",
+      "bytes": 7347,
+      "sha256": "982d234ef09dac53a8ad5e128be4d32515f211fec4ec0f7988ac7b5589d69270"
+    },
+    {
+      "file": "nativerecovery-20261008T015415250177Z-nativerecovery-male-GLB-HT-f0652-tive-cleanup→explicit-retry-native-recovery-summary.json",
+      "bytes": 4715,
+      "sha256": "6753dbefc16fb1bdd12472dff1cb26359a24eb87900f28e57641f0284288b2ee"
+    },
+    {
+      "file": "nativerecovery-20261008T015415250177Z-nativerecovery-male-browser-permission-denied→explicit-retry-native-recovery-summary.json",
+      "bytes": 4845,
+      "sha256": "098d8bf1ee88e139d53f2875cbb561b7c1189e99649cfa4628cadd3a0b2d6966"
+    },
+    {
+      "file": "nativerecovery-20261008T015415250177Z-nativerecovery-male-browser-permission-denied→explicit-retry-male-restarted-avatar-only.png",
+      "bytes": 183808,
+      "sha256": "16215b67de69a2c40f63092b23fce9808c68c65cd1c09f52d2dd46dc836d2b61"
+    },
+    {
+      "file": "nativerecovery-20261008T015415250177Z-nativerecovery-male-delaye-b3434-late-reclaim→explicit-retry-native-recovery-summary.json",
+      "bytes": 6979,
+      "sha256": "16700ce878f7fb7cbf28c9841c777946dd0055fc421ce38d4c2a1af1de8f2d28"
+    },
+    {
+      "file": "nativerecovery-20261008T015415250177Z-nativerecovery-male-native-track-lost→stop→explicit-retry-native-recovery-summary.json",
+      "bytes": 7345,
+      "sha256": "cbb720ce6c88482be7534d2f87d4d3a8d83ac78876fcb710b5b3536847b847cd"
+    },
+    {
+      "file": "nativerecovery-20261008T015844239171Z-report.json.gz",
+      "bytes": 2356,
+      "sha256": "2bb544e84a06b86989719491426aac243a95d1a017a83c40815dd81ade9f0e65",
+      "originalSha256": "a960a532820aa885d55bc132b0eed4143c07bec53690ceb07e659a13e28f1b17"
+    },
+    {
+      "file": "nativerecovery-20261008T015844239171Z-nativerecovery-female-GLB--baa12-tive-cleanup→explicit-retry-native-recovery-summary.json",
+      "bytes": 4717,
+      "sha256": "cb4590a47469bf0066148ed601a8d26a8139d0eb30113acf84c03c254476dbef"
+    },
+    {
+      "file": "nativerecovery-20261008T015844239171Z-nativerecovery-female-brow-55678-ssion-denied→explicit-retry-native-recovery-summary.json",
+      "bytes": 4845,
+      "sha256": "25449fc174a8e2f29982e6f98bdcd3da9107e26601d0dabc29ee76d70e96b889"
+    },
+    {
+      "file": "nativerecovery-20261008T015844239171Z-nativerecovery-female-brow-55678-ssion-denied→explicit-retry-female-restarted-avatar-only.png",
+      "bytes": 165319,
+      "sha256": "c8db993fd12d2abf091ce1955ac8e63212d86856c848d057e829cc16e9bee14d"
+    },
+    {
+      "file": "nativerecovery-20261008T015844239171Z-nativerecovery-female-dela-3806e-late-reclaim→explicit-retry-native-recovery-summary.json",
+      "bytes": 6977,
+      "sha256": "7f6a23394060d1a680ed4e273d56d8e3bb7d2af8ce130f28d23af8adfa88ea0f"
+    },
+    {
+      "file": "nativerecovery-20261008T015844239171Z-nativerecovery-female-native-track-lost→stop→explicit-retry-native-recovery-summary.json",
+      "bytes": 7343,
+      "sha256": "7bd29033e4b1b1580431037ea6bf5b80083ee2a1b309f6c655b1e1e1e2c5c38b"
+    },
+    {
+      "file": "nativerecovery-20261008T015844239171Z-nativerecovery-male-GLB-HT-f0652-tive-cleanup→explicit-retry-native-recovery-summary.json",
+      "bytes": 4717,
+      "sha256": "8bd82fc1326e76cb3c5bcc025c92575e8b2e59112cd0898a1b539c4ac4cb52e9"
+    },
+    {
+      "file": "nativerecovery-20261008T015844239171Z-nativerecovery-male-browser-permission-denied→explicit-retry-native-recovery-summary.json",
+      "bytes": 4845,
+      "sha256": "a5c8be089a8f6d4a93914d655c5754e3dae970307736c941bc450c3eb1e8ea96"
+    },
+    {
+      "file": "nativerecovery-20261008T015844239171Z-nativerecovery-male-browser-permission-denied→explicit-retry-male-restarted-avatar-only.png",
+      "bytes": 183808,
+      "sha256": "16215b67de69a2c40f63092b23fce9808c68c65cd1c09f52d2dd46dc836d2b61"
+    },
+    {
+      "file": "nativerecovery-20261008T015844239171Z-nativerecovery-male-delaye-b3434-late-reclaim→explicit-retry-native-recovery-summary.json",
+      "bytes": 6977,
+      "sha256": "7f6a23394060d1a680ed4e273d56d8e3bb7d2af8ce130f28d23af8adfa88ea0f"
+    },
+    {
+      "file": "nativerecovery-20261008T015844239171Z-nativerecovery-male-native-track-lost→stop→explicit-retry-native-recovery-summary.json",
+      "bytes": 7343,
+      "sha256": "622965511737f27075f0148d2113e7e109239e46596967dfdd565ac981396d35"
+    }
+  ],
+  "browsers": [
+    {
+      "folder": "nativehead-20261008T015033262215Z",
+      "stats": {
+        "startTime": "2026-10-08T01:50:34.287Z",
+        "duration": 67791.03,
+        "expected": 12,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "flows": [
+        {
+          "name": "nativehead-female-native-h-0bb32-t→logout→no-old-resume-save",
+          "stages": 5,
+          "posts": 0,
+          "external": 0,
+          "bodyCalls": 8,
+          "faceCalls": 8,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativehead-female-native-h-17814-pagehide→no-old-resume-save",
+          "stages": 5,
+          "posts": 0,
+          "external": 0,
+          "bodyCalls": 10,
+          "faceCalls": 10,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativehead-female-native-h-4e76e-erver401→no-old-resume-save",
+          "stages": 5,
+          "posts": 0,
+          "external": 0,
+          "bodyCalls": 9,
+          "faceCalls": 9,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativehead-female-native-h-df878-→new-owner-explicit-restart",
+          "stages": 5,
+          "posts": 0,
+          "external": 0,
+          "bodyCalls": 19,
+          "faceCalls": 19,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 4
+        },
+        {
+          "name": "nativehead-female-native-h-f781f-→unmount→no-old-resume-save",
+          "stages": 5,
+          "posts": 0,
+          "external": 0,
+          "bodyCalls": 9,
+          "faceCalls": 9,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativehead-female-native-start→stop→own-interrupted-record",
+          "stages": 3,
+          "posts": 1,
+          "external": 0,
+          "bodyCalls": 12,
+          "faceCalls": 12,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 0
+        },
+        {
+          "name": "nativehead-male-native-hel-287c5-→unmount→no-old-resume-save",
+          "stages": 5,
+          "posts": 0,
+          "external": 0,
+          "bodyCalls": 9,
+          "faceCalls": 9,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativehead-male-native-hel-4297d-→new-owner-explicit-restart",
+          "stages": 5,
+          "posts": 0,
+          "external": 0,
+          "bodyCalls": 18,
+          "faceCalls": 18,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 4
+        },
+        {
+          "name": "nativehead-male-native-hel-69f6f-erver401→no-old-resume-save",
+          "stages": 5,
+          "posts": 0,
+          "external": 0,
+          "bodyCalls": 10,
+          "faceCalls": 10,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativehead-male-native-hel-d7f23-pagehide→no-old-resume-save",
+          "stages": 5,
+          "posts": 0,
+          "external": 0,
+          "bodyCalls": 9,
+          "faceCalls": 9,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativehead-male-native-held-result→logout→no-old-resume-save",
+          "stages": 5,
+          "posts": 0,
+          "external": 0,
+          "bodyCalls": 8,
+          "faceCalls": 8,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativehead-male-native-start→stop→own-interrupted-record",
+          "stages": 3,
+          "posts": 1,
+          "external": 0,
+          "bodyCalls": 15,
+          "faceCalls": 15,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 0
+        }
+      ]
+    },
+    {
+      "folder": "nativehead-20261008T015548776247Z",
+      "stats": {
+        "startTime": "2026-10-08T01:55:49.315Z",
+        "duration": 66465.007,
+        "expected": 12,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "flows": [
+        {
+          "name": "nativehead-female-native-h-0bb32-t→logout→no-old-resume-save",
+          "stages": 5,
+          "posts": 0,
+          "external": 0,
+          "bodyCalls": 9,
+          "faceCalls": 9,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativehead-female-native-h-17814-pagehide→no-old-resume-save",
+          "stages": 5,
+          "posts": 0,
+          "external": 0,
+          "bodyCalls": 9,
+          "faceCalls": 9,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativehead-female-native-h-4e76e-erver401→no-old-resume-save",
+          "stages": 5,
+          "posts": 0,
+          "external": 0,
+          "bodyCalls": 9,
+          "faceCalls": 9,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativehead-female-native-h-df878-→new-owner-explicit-restart",
+          "stages": 5,
+          "posts": 0,
+          "external": 0,
+          "bodyCalls": 16,
+          "faceCalls": 16,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 4
+        },
+        {
+          "name": "nativehead-female-native-h-f781f-→unmount→no-old-resume-save",
+          "stages": 5,
+          "posts": 0,
+          "external": 0,
+          "bodyCalls": 9,
+          "faceCalls": 9,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativehead-female-native-start→stop→own-interrupted-record",
+          "stages": 3,
+          "posts": 1,
+          "external": 0,
+          "bodyCalls": 13,
+          "faceCalls": 13,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 0
+        },
+        {
+          "name": "nativehead-male-native-hel-287c5-→unmount→no-old-resume-save",
+          "stages": 5,
+          "posts": 0,
+          "external": 0,
+          "bodyCalls": 9,
+          "faceCalls": 9,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativehead-male-native-hel-4297d-→new-owner-explicit-restart",
+          "stages": 5,
+          "posts": 0,
+          "external": 0,
+          "bodyCalls": 19,
+          "faceCalls": 19,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 4
+        },
+        {
+          "name": "nativehead-male-native-hel-69f6f-erver401→no-old-resume-save",
+          "stages": 5,
+          "posts": 0,
+          "external": 0,
+          "bodyCalls": 9,
+          "faceCalls": 9,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativehead-male-native-hel-d7f23-pagehide→no-old-resume-save",
+          "stages": 5,
+          "posts": 0,
+          "external": 0,
+          "bodyCalls": 9,
+          "faceCalls": 9,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativehead-male-native-held-result→logout→no-old-resume-save",
+          "stages": 5,
+          "posts": 0,
+          "external": 0,
+          "bodyCalls": 7,
+          "faceCalls": 7,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativehead-male-native-start→stop→own-interrupted-record",
+          "stages": 3,
+          "posts": 1,
+          "external": 0,
+          "bodyCalls": 10,
+          "faceCalls": 10,
+          "sameInput": true,
+          "physicalCamera": false,
+          "observedCspAttemptsInRetainedCounters": 0
+        }
+      ]
+    },
+    {
+      "folder": "nativerecovery-20261008T015415250177Z",
+      "stats": {
+        "startTime": "2026-10-08T01:54:15.806Z",
+        "duration": 43255.594000000005,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "flows": [
+        {
+          "name": "nativerecovery-female-GLB--baa12-tive-cleanup→explicit-retry",
+          "stages": 2,
+          "posts": 0,
+          "external": 0,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativerecovery-female-brow-55678-ssion-denied→explicit-retry",
+          "stages": 2,
+          "posts": 0,
+          "external": 0,
+          "observedCspAttemptsInRetainedCounters": 1
+        },
+        {
+          "name": "nativerecovery-female-dela-3806e-late-reclaim→explicit-retry",
+          "stages": 3,
+          "posts": 0,
+          "external": 0,
+          "observedCspAttemptsInRetainedCounters": 1
+        },
+        {
+          "name": "nativerecovery-female-native-track-lost→stop→explicit-retry",
+          "stages": 3,
+          "posts": 0,
+          "external": 0,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativerecovery-male-GLB-HT-f0652-tive-cleanup→explicit-retry",
+          "stages": 2,
+          "posts": 0,
+          "external": 0,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativerecovery-male-browser-permission-denied→explicit-retry",
+          "stages": 2,
+          "posts": 0,
+          "external": 0,
+          "observedCspAttemptsInRetainedCounters": 1
+        },
+        {
+          "name": "nativerecovery-male-delaye-b3434-late-reclaim→explicit-retry",
+          "stages": 3,
+          "posts": 0,
+          "external": 0,
+          "observedCspAttemptsInRetainedCounters": 1
+        },
+        {
+          "name": "nativerecovery-male-native-track-lost→stop→explicit-retry",
+          "stages": 3,
+          "posts": 0,
+          "external": 0,
+          "observedCspAttemptsInRetainedCounters": 2
+        }
+      ]
+    },
+    {
+      "folder": "nativerecovery-20261008T015844239171Z",
+      "stats": {
+        "startTime": "2026-10-08T01:58:44.809Z",
+        "duration": 42001.714,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "flows": [
+        {
+          "name": "nativerecovery-female-GLB--baa12-tive-cleanup→explicit-retry",
+          "stages": 2,
+          "posts": 0,
+          "external": 0,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativerecovery-female-brow-55678-ssion-denied→explicit-retry",
+          "stages": 2,
+          "posts": 0,
+          "external": 0,
+          "observedCspAttemptsInRetainedCounters": 1
+        },
+        {
+          "name": "nativerecovery-female-dela-3806e-late-reclaim→explicit-retry",
+          "stages": 3,
+          "posts": 0,
+          "external": 0,
+          "observedCspAttemptsInRetainedCounters": 1
+        },
+        {
+          "name": "nativerecovery-female-native-track-lost→stop→explicit-retry",
+          "stages": 3,
+          "posts": 0,
+          "external": 0,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativerecovery-male-GLB-HT-f0652-tive-cleanup→explicit-retry",
+          "stages": 2,
+          "posts": 0,
+          "external": 0,
+          "observedCspAttemptsInRetainedCounters": 2
+        },
+        {
+          "name": "nativerecovery-male-browser-permission-denied→explicit-retry",
+          "stages": 2,
+          "posts": 0,
+          "external": 0,
+          "observedCspAttemptsInRetainedCounters": 1
+        },
+        {
+          "name": "nativerecovery-male-delaye-b3434-late-reclaim→explicit-retry",
+          "stages": 3,
+          "posts": 0,
+          "external": 0,
+          "observedCspAttemptsInRetainedCounters": 1
+        },
+        {
+          "name": "nativerecovery-male-native-track-lost→stop→explicit-retry",
+          "stages": 3,
+          "posts": 0,
+          "external": 0,
+          "observedCspAttemptsInRetainedCounters": 2
+        }
+      ]
+    }
+  ],
+  "frontend": {
+    "passed": 1011,
+    "failed": 0,
+    "pending": 0
+  },
+  "checks": [
+    {
+      "label": "unit-runtime",
+      "exit": 0
+    },
+    {
+      "label": "assets-runtime",
+      "exit": 0
+    },
+    {
+      "label": "types-runtime",
+      "exit": 0
+    },
+    {
+      "label": "biome-runtime",
+      "exit": 0
+    },
+    {
+      "label": "build-runtime",
+      "exit": 0
+    },
+    {
+      "label": "guard-runtime",
+      "exit": 0
+    },
+    {
+      "label": "diff-runtime",
+      "exit": 0
+    }
+  ],
+  "publicAssets": [
+    {
+      "name": "index-dNUNBpCv.css",
+      "bytes": 31199,
+      "sha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e"
+    },
+    {
+      "name": "index-x57--wa1.js",
+      "bytes": 355151,
+      "sha256": "b5d4f81164c8d3c196e853b3404382bc15077986aa626cd0c3c72571b6325ac0"
+    }
+  ],
+  "unfinishedA37": true,
+  "newSculptOrGlb": false,
+  "publicUiChanged": false,
+  "productionSdkPolicyChanged": false,
+  "nativeBlankInput": true,
+  "actualNativePositive": false,
+  "actualHuman": false,
+  "actualPhysicalCamera": false,
+  "heldFaceResultIsTestWrapper": true,
+  "clinicalThresholdsChanged": false,
+  "qualifiedReleaseMotions": 0,
+  "stagesComplete": false
+}
