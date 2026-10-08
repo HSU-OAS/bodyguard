@@ -1,0 +1,22 @@
+{
+  "reviewer": "author-only",
+  "independentAgentReview": false,
+  "expertReview": false,
+  "runtime": "245508ce92a7c722ae1f6b94c7d1600db54e0839",
+  "sources": {
+    "bodyguard/docs/stories/native-startup-timing.md": "f51548834fab65ec561fd0a2abb5c51e0ef9e2a481a72fc65dd7207a174e1a44",
+    "bodyguard/frontend/e2e/fixtures/nativeHeadAuthProbe.ts": "c417291de230bc50ff8b6ee631b20de8a857d6e9ff3915cf484d78914fa80b51",
+    "bodyguard/frontend/e2e/fixtures/nativeStartupTiming.ts": "2026335d26d05488f1bac0fa20e24f812c572bf2eaacc672c70976408330e073",
+    "bodyguard/frontend/e2e/nativehead.spec.ts": "f4ddad58415fed82c5482d0cac6f948c711b06fbf400c2010842a256d86ad7b8",
+    "bodyguard/frontend/src/native-startup-timing.test.ts": "79cbad38f75297cf50176857b69a5033d016a06e22a0b6ed06afef60e9175a16"
+  },
+  "security": "Fixed stages/relative numbers only; no input/URL/identity/raw error retention; descriptor restoration; public bytes unchanged",
+  "performance": "At most30 timing events; test clock/await overhead disclosed, not a product benchmark",
+  "correctness": "Clock close reentry RED→GREEN; native detector/capture call/close assertions and same input; no timeout/retry weakening; settled end is not success",
+  "maintainability": "Optional disabled-by-default fixture instrumentation; no new dependencies or product routing",
+  "unresolvedStoryDiffP1": 0,
+  "unresolvedStoryDiffP2": 0,
+  "productStartupP2Resolved": false,
+  "releaseGatesPassed": false,
+  "reviewedAt": "2026-10-08T10:52:29.173Z"
+}

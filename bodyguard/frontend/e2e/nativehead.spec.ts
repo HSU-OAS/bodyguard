@@ -190,11 +190,16 @@ async function mark(page: Page, name: string) {
   stages.push({ name, snapshot })
   return snapshot
 }
-async function mount(page: Page, gender: 'male' | 'female', withAdaptive = false) {
+async function mount(
+  page: Page,
+  gender: 'male' | 'female',
+  withAdaptive = false,
+  withTiming = false,
+) {
   await page.goto('/start')
   await expect(page.getByRole('heading', { name: '내 몸을 위한 시작', exact: true })).toBeVisible()
   await page.evaluate(
-    async ({ gender, withHands, withReference, withFeedback, withAdaptive }) => {
+    async ({ gender, withHands, withReference, withFeedback, withAdaptive, withTiming }) => {
       const path = '/__private-native-head-probe.js'
       const module = (await import(path)) as {
         mountNativeHeadAuthProbe: typeof mountNativeHeadAuthProbe
@@ -218,9 +223,10 @@ async function mount(page: Page, gender: 'male' | 'female', withAdaptive = false
         withReference,
         withFeedback,
         withAdaptive,
+        withTiming,
       )
     },
-    { gender, withHands, withReference, withFeedback, withAdaptive },
+    { gender, withHands, withReference, withFeedback, withAdaptive, withTiming },
   )
   await expect
     .poll(() => state(page))
@@ -302,6 +308,49 @@ async function release(page: Page) {
   expect(posts).toBe(0)
 }
 for (const gender of ['male', 'female'] as const) {
+  if (withFeedback)
+    test(`${gender} native first-start stage timing without raw input`, async ({
+      page,
+      context,
+    }, info) => {
+      await join(context)
+      await mount(page, gender, false, true)
+      await running(page)
+      const timing = (await mark(page, 'native-startup-timed')).startupTiming
+      expect(timing).not.toBeNull()
+      if (!timing) throw new Error('Native startup timing unavailable')
+      writeFileSync(info.outputPath('native-startup-timing.json'), JSON.stringify(timing, null, 2))
+      expect(timing.invalid).toBe(false)
+      expect(timing.events.length).toBeLessThanOrEqual(30)
+      for (const stage of [
+        'camera',
+        'body-sdk',
+        'face-sdk',
+        'hands-sdk',
+        'avatar',
+        'render',
+        'body',
+        'face',
+        'hands',
+        'result',
+      ]) {
+        const rows = timing.events.filter((row) => row.stage === stage)
+        expect(rows.length).toBeGreaterThan(0)
+        expect(rows.length).toBeLessThanOrEqual(3)
+        for (const row of rows) {
+          expect(row.startMs).toBeGreaterThanOrEqual(0)
+          expect(row.endMs).not.toBeNull()
+          expect(row.endMs).toBeGreaterThanOrEqual(row.startMs)
+        }
+      }
+      const first = (stage: string) => timing.events.find((row) => row.stage === stage)
+      expect(first('body-sdk')?.startMs).toBeGreaterThanOrEqual(first('camera')?.endMs ?? Infinity)
+      expect(first('avatar')?.startMs).toBeGreaterThanOrEqual(first('hands-sdk')?.endMs ?? Infinity)
+      expect(first('render')?.startMs).toBeGreaterThanOrEqual(first('avatar')?.endMs ?? Infinity)
+      expect(first('body')?.startMs).toBeGreaterThanOrEqual(first('render')?.endMs ?? Infinity)
+      expect(timing.events.filter((row) => row.stage === 'result')).toHaveLength(3)
+      expect(posts).toBe(0)
+    })
   if (withFeedback)
     test(`${gender} native current error code→authored correction→different cause→occlusion`, async ({
       page,
