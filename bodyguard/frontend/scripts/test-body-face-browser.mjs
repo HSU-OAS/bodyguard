@@ -4,6 +4,7 @@ import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { existsSync, readFileSync, realpathSync, writeFileSync } from 'node:fs'
 import { createServer } from 'node:http'
+import { createConnection } from 'node:net'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { chromium } from '@playwright/test'
@@ -56,6 +57,8 @@ const resources = Object.fromEntries([
   ]),
 ])
 let proxyDenied = 0,
+  proxySocketErrors = 0,
+  injectedResetHandled = 0,
   external = 0,
   cspBlocked = 0,
   browser,
@@ -66,8 +69,16 @@ const proxy = createServer((_req, res) => {
   res.writeHead(403)
   res.end()
 })
-proxy.on('connect', (_req, socket) => {
+proxy.on('connect', (req, socket) => {
   proxyDenied++
+  // Chrome may reset an already refused CONNECT socket. This remains denied, not a
+  // process-wide uncaught exception. No URL/native error content is logged.
+  const injected = new Error('Closed proxy fixture reset')
+  socket.on('error', (error) => {
+    if (error === injected) injectedResetHandled++
+    else proxySocketErrors++
+  })
+  if (req.url === 'closed-proxy-probe.invalid:443') socket.emit('error', injected)
   socket.end('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n')
 })
 const server = createServer((req, res) => {
@@ -131,6 +142,28 @@ try {
   assert(proxyAddress && typeof proxyAddress !== 'string')
   assert(address && typeof address !== 'string')
   const origin = `http://127.0.0.1:${address.port}`
+  // Deterministic TEST ONLY reset on a local refused socket; no remote connection.
+  const refused = await new Promise((resolve, reject) => {
+    const socket = createConnection({ host: '127.0.0.1', port: proxyAddress.port })
+    let response = ''
+    socket.setTimeout(5000, () => {
+      socket.destroy()
+      reject(new Error('Closed proxy probe timeout'))
+    })
+    socket.on('error', reject)
+    socket.on('connect', () =>
+      socket.write(
+        'CONNECT closed-proxy-probe.invalid:443 HTTP/1.1\r\nHost: closed-proxy-probe.invalid:443\r\n\r\n',
+      ),
+    )
+    socket.on('data', (bytes) => {
+      response += bytes.toString()
+    })
+    socket.on('end', () => resolve(response.startsWith('HTTP/1.1 403 Forbidden')))
+  })
+  assert(refused)
+  assert.equal(injectedResetHandled, 1)
+  report.proxyResetInjection = { synthetic: true, refused: true, handled: true }
   browser = await chromium.launch({
     channel: 'chrome',
     headless: true,
@@ -268,6 +301,8 @@ try {
   report.sourceAfter = snapshot()
   report.externalRoutes = external
   report.proxyDenied = proxyDenied
+  report.proxySocketErrors = proxySocketErrors
+  report.injectedResetHandled = injectedResetHandled
   report.cspBlockedAttempts = cspBlocked
   report.pageErrorNames = errors
   assert.deepEqual(report.sourceBefore, report.sourceAfter)
