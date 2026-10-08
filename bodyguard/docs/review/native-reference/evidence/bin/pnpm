@@ -1,0 +1,11 @@
+#!/opt/homebrew/bin/node
+// FR-S-03/04: owned local test shim, installed bins only, no install/security bypass.
+import {spawnSync} from 'node:child_process'
+const cwd=process.cwd()
+if(cwd!=="/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-reference/bodyguard/frontend")throw Error('Unexpected test scope')
+const[command,...args]=process.argv.slice(2)
+const steps=command==='build'&&args.length===0
+ ? [['node',['scripts/prepare-assets.mjs']],['node_modules/.bin/tsc',['--noEmit']],['node_modules/.bin/vite',['build']]]
+ : command==='exec'&&args[0]==='playwright' ? [['node_modules/.bin/playwright',args.slice(1)]] : null
+if(!steps)throw Error('Unsupported test command')
+for(const[cmd,options]of steps){const r=spawnSync(cmd,options,{cwd,env:process.env,stdio:'inherit'});if(r.status!==0)process.exit(r.status??1)}

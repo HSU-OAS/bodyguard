@@ -1,6 +1,6 @@
 # S2.T18 — 로그인 소유 세션의 비공개 시범 연결
 
-Status: 강화 native 검증에서 시각2건 실패 보존·시간/권한 보완 / 실제 재검증·PR 게이트 전 / 단계 완료 아님
+Status: 실제 강화 검증·리뷰 보완 완료 / PR 게이트 진행 / 단계 완료 아님
 
 ## 목적·범위
 
@@ -55,3 +55,10 @@ S2.T17의 단계별 시범을 실제 recorded session과 native 소유 pair에 �
 승인된 공개 디자인과 사용자 흐름, 올바른 시범 자료, 실측 판정/적응형 피드백,
 신체 대응 정확도, 최종 외형·리깅 변형·실제 노트북·참여자·SDK 정책·운영은 이월 조건이다.
 0 qualified release motions 유지. 이 Story 통과로 2단계 또는 전체 1~6을 완료하지 않는다.
+
+## 실제 결과
+
+수정 runtime7dfc3bf의 실제14흐름/head12/hands12·전체FE1113/정적/build/guard/Ruff/diff
+통과. 약한 최초 pass/정확한 자세2실패·시간/retained 권한 RED와 보완 결과를
+[실제 화면·실패·남은 조건](../review/native-reference/README.md)에 구분해 보존했다.
+최소 텍스트 방향의 비공개 기반이며 공개 디자인/판정/원본/GLB/운영 변경0, 출시 동작0이다.
