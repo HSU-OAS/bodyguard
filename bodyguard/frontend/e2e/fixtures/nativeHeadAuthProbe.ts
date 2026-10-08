@@ -1,5 +1,5 @@
 // FR-U-04/FR-S-02/04·FR-R-03/NFR-07/08: TEST ONLY native/account composition.
-import { FaceLandmarker, PoseLandmarker } from '@mediapipe/tasks-vision'
+import { FaceLandmarker, GestureRecognizer, PoseLandmarker } from '@mediapipe/tasks-vision'
 import { createElement, useLayoutEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import {
@@ -16,6 +16,7 @@ import {
 } from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { AuthProvider, useAuth } from '../../src/auth'
+import type { HandDisplayAlignment } from '../../src/avatar/observedHandRig'
 import type { prepareOwnedAvatarPair } from '../../src/avatar/ownedAvatarPair'
 import { createNativePlaybackResources } from '../../src/coaching/nativePlaybackResources'
 import { useRecordedCoaching } from '../../src/coaching/useRecordedCoaching'
@@ -23,7 +24,11 @@ import { useRecordedCoaching } from '../../src/coaching/useRecordedCoaching'
 type Hook = ReturnType<typeof useRecordedCoaching>
 type Session = NonNullable<ReturnType<Hook['getSession']>>
 type Actor = Pick<ReturnType<typeof createNativePlaybackResources>, 'close' | 'getSnapshot'>
-export function mountNativeHeadAuthProbe(canvas: HTMLCanvasElement, gender: 'male' | 'female') {
+export function mountNativeHeadAuthProbe(
+  canvas: HTMLCanvasElement,
+  gender: 'male' | 'female',
+  handAlignment?: HandDisplayAlignment,
+) {
   const scene = new Scene()
   scene.background = new Color('#ffffff')
   scene.add(new HemisphereLight('#ffffff', '#8b97a6', 2))
@@ -57,6 +62,9 @@ export function mountNativeHeadAuthProbe(canvas: HTMLCanvasElement, gender: 'mal
     cameraCloses = 0,
     faceCalls = 0,
     faceDetectorCloses = 0,
+    handCalls = 0,
+    handDetectorCloses = 0,
+    nativeHandsMax = 0,
     nativeFacesMax = 0,
     sameInput = true,
     nativePeopleMax = 0,
@@ -97,12 +105,14 @@ export function mountNativeHeadAuthProbe(canvas: HTMLCanvasElement, gender: 'mal
     }
   }
   globalThis.VideoFrame = TrackedFrame
-  // TEST ONLY wrappers call actual SDK methods. Holding the returned Face result
+  // TEST ONLY wrappers call actual SDK methods. Holding the returned final JS result
   // simulates an async cancellation boundary, not the native SDK's latency contract.
   const bodyDetect = PoseLandmarker.prototype.detectForVideo,
     bodyClose = PoseLandmarker.prototype.close,
     faceDetect = FaceLandmarker.prototype.detectForVideo,
     faceClose = FaceLandmarker.prototype.close,
+    handDetect = GestureRecognizer.prototype.recognizeForVideo,
+    handClose = GestureRecognizer.prototype.close,
     bodyStamps = new WeakMap<VideoFrame, number>(),
     media = navigator.mediaDevices,
     camera = media.getUserMedia.bind(media),
@@ -155,7 +165,7 @@ export function mountNativeHeadAuthProbe(canvas: HTMLCanvasElement, gender: 'mal
       sameInput = sameInput && bodyStamps.get(input) === at
       const result = faceDetect.call(this, input, at)
       nativeFacesMax = Math.max(nativeFacesMax, result.faceLandmarks.length)
-      if (!holdNext) return result
+      if (!holdNext || handAlignment) return result
       holdNext = false
       held = true
       return new Promise((resolve) => {
@@ -173,6 +183,34 @@ export function mountNativeHeadAuthProbe(canvas: HTMLCanvasElement, gender: 'mal
     value(this: FaceLandmarker) {
       faceDetectorCloses++
       return faceClose.call(this)
+    },
+  })
+  Object.defineProperty(GestureRecognizer.prototype, 'recognizeForVideo', {
+    configurable: true,
+    writable: true,
+    value(this: GestureRecognizer, input: VideoFrame, at: number) {
+      handCalls++
+      sameInput = sameInput && bodyStamps.get(input) === at
+      const result = handDetect.call(this, input, at)
+      nativeHandsMax = Math.max(nativeHandsMax, result.landmarks.length)
+      if (!holdNext) return result
+      holdNext = false
+      held = true
+      return new Promise((resolve) => {
+        releaseHeld = () => {
+          held = false
+          releaseHeld = undefined
+          resolve(result)
+        }
+      })
+    },
+  })
+  Object.defineProperty(GestureRecognizer.prototype, 'close', {
+    configurable: true,
+    writable: true,
+    value(this: GestureRecognizer) {
+      handDetectorCloses++
+      return handClose.call(this)
     },
   })
   function View() {
@@ -205,6 +243,7 @@ export function mountNativeHeadAuthProbe(canvas: HTMLCanvasElement, gender: 'mal
         cameraReference: [0, 0, 0, 1],
         sceneFromCamera: [0, 0, 0, 1],
       },
+      ...(handAlignment ? { hands: handAlignment } : {}),
       loadAvatar: async () =>
         (await new GLTFLoader().loadAsync(`/__private-native-${gender}.glb`)).scene,
       scheduler: {
@@ -288,9 +327,13 @@ export function mountNativeHeadAuthProbe(canvas: HTMLCanvasElement, gender: 'mal
       faceCalls,
       faceDetectorCloses,
       nativeFacesMax,
+      handCalls,
+      handDetectorCloses,
+      nativeHandsMax,
       sameInput,
       productionAdapter: true,
-      heldStage: held ? 'face' : null,
+      heldStage: held ? (handAlignment ? 'hands' : 'face') : null,
+      handsConfigured: Boolean(handAlignment),
       detectorCloses,
       cameraCloses,
       failures: [...failures],
@@ -377,6 +420,8 @@ export function mountNativeHeadAuthProbe(canvas: HTMLCanvasElement, gender: 'mal
           PoseLandmarker.prototype.close = bodyClose
           FaceLandmarker.prototype.detectForVideo = faceDetect
           FaceLandmarker.prototype.close = faceClose
+          GestureRecognizer.prototype.recognizeForVideo = handDetect
+          GestureRecognizer.prototype.close = handClose
         }
       }
       return snapshot()
