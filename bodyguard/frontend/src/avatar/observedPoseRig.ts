@@ -7,6 +7,12 @@ import {
   observedLimbDirections,
 } from './directionalRig'
 import { createHeadRotationRig, type HeadDisplayAlignment } from './headOrientationRig'
+import {
+  copyHandObservations,
+  createObservedHandRig,
+  type HandDisplayAlignment,
+  type HandObservation,
+} from './observedHandRig'
 
 export type PoseRigFrame = Readonly<{
   generation: number
@@ -17,10 +23,11 @@ export type PoseRigFrame = Readonly<{
     worldLandmarks: readonly (readonly Point[])[]
     // Optional private face orientation from the same input, NOT matched identity/neck pose.
     headOrientation?: readonly number[] | null
+    hands?: readonly HandObservation[]
   }>
 }>
 type Options = Parameters<typeof createDirectionalRig>[1] &
-  Readonly<{ mirror: boolean; head?: HeadDisplayAlignment }>
+  Readonly<{ mirror: boolean; head?: HeadDisplayAlignment; hands?: HandDisplayAlignment }>
 /** One detectForVideo result owns both arrays. Caller preserves its capture stamps;
  * this adapter does not verify a detector, turn coverage into success, or own GPU resources.
  * A fresh empty/ambiguous result revokes coverage immediately, without resetting to a correct pose.
@@ -41,6 +48,7 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
     throw new Error('Invalid observed pose rig')
   const driver = createDirectionalRig(model, options)
   let head: ReturnType<typeof createHeadRotationRig> | undefined
+  let hands: ReturnType<typeof createObservedHandRig> | undefined
   try {
     if (options.head)
       head = createHeadRotationRig(model, {
@@ -50,8 +58,17 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
         halfLifeMs: options.halfLifeMs,
         maxAgeMs,
       })
+    if (options.hands)
+      hands = createObservedHandRig(model, {
+        ...options.hands,
+        context: options.context,
+        mirror,
+        halfLifeMs: options.halfLifeMs,
+        maxAgeMs,
+      })
   } catch {
     driver.dispose()
+    head?.dispose()
     throw new Error('Invalid observed pose rig')
   }
   const permitted = new Set(options.bindings.map(({ bone }) => bone))
@@ -67,6 +84,7 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
     pending = undefined
     driver.dispose()
     head?.dispose()
+    hands?.dispose()
   }
   function observe(frame: PoseRigFrame): boolean {
     if (closed || signal.aborted) return false
@@ -82,7 +100,7 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
         !Number.isFinite(at) ||
         at < 0 ||
         at < lastAt ||
-        (head && at === lastAt) ||
+        ((head || hands) && at === lastAt) ||
         lastNow - at > maxAgeMs
       )
         return false
@@ -112,7 +130,7 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
           selected[name] = value.map((component) => component / length)
       }
       const completeBody =
-        !!head &&
+        !!(head || hands) &&
         single &&
         [images[0], worlds[0]].every((points) =>
           Array.from<Point>(points).every(
@@ -123,6 +141,7 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
       // a face for an ambiguous body; even a valid tuple is not identity proof.
       const supplied = head && completeBody ? result.headOrientation : null
       const rotation = Array.isArray(supplied) ? Array.from(supplied) : null
+      const copiedHands = hands && completeBody ? copyHandObservations(result.hands) : []
       if (closed || signal.aborted || pending !== token) return false
       const accepted = driver.push({
         generation: suppliedGeneration,
@@ -133,6 +152,14 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
       if (
         head &&
         (!accepted || !head.push({ generation: suppliedGeneration, sequence, at, rotation }))
+      ) {
+        dispose()
+        return false
+      }
+      if (
+        hands &&
+        (!accepted ||
+          !hands.push({ generation: suppliedGeneration, sequence, at, hands: copiedHands }))
       ) {
         dispose()
         return false
@@ -148,7 +175,11 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
     if (Number.isFinite(now) && now >= lastNow && Number.isFinite(deltaMs) && deltaMs >= 0)
       lastNow = now
     const body = driver.render(now, deltaMs)
-    return Object.freeze({ ...body, ...(head ? { head: head.render(now, deltaMs) } : {}) })
+    return Object.freeze({
+      ...body,
+      ...(head ? { head: head.render(now, deltaMs) } : {}),
+      ...(hands ? { hands: hands.render(now, deltaMs) } : {}),
+    })
   }
   return Object.freeze({ observe, render, dispose })
 }

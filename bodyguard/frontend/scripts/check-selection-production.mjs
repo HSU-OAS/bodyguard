@@ -99,6 +99,10 @@ for (const file of files) {
     'mountObservedBodyHead',
     'createHeadRotationRig',
     'Private observed body head fixture unavailable',
+    'Invalid hand avatar rig',
+    'createObservedHandRig',
+    'mountHandsProbe',
+    'Private hand fixture unavailable',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }

@@ -4,6 +4,7 @@ import { ResourceCleanupError, type ResourceContext } from '../coaching/resource
 import { createDirectionalRig, OBSERVED_LIMB_BINDINGS } from './directionalRig'
 import { cloneEightWeightPair } from './eightWeightSkin'
 import type { HeadDisplayAlignment } from './headOrientationRig'
+import { copyHandAlignment, HAND_RIG_BINDINGS, type HandDisplayAlignment } from './observedHandRig'
 import { createObservedPoseRig, type PoseRigFrame } from './observedPoseRig'
 
 type Options = Readonly<{
@@ -12,6 +13,7 @@ type Options = Readonly<{
   halfLifeMs: number
   maxAgeMs: number
   head?: HeadDisplayAlignment
+  hands?: HandDisplayAlignment
 }>
 // Never free a loader alias already owned by another call, including a disposed call.
 const consumed = new WeakSet<object>()
@@ -86,6 +88,7 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
   const { generation, signal } = context
   const { load, mirror, halfLifeMs, maxAgeMs } = options
   let head: HeadDisplayAlignment | undefined
+  let hands: HandDisplayAlignment | undefined
   try {
     const supplied = options.head
     if (supplied)
@@ -94,6 +97,8 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
         cameraReference: Object.freeze(Array.from(supplied.cameraReference)),
         sceneFromCamera: Object.freeze(Array.from(supplied.sceneFromCamera)),
       })
+    const suppliedHands = options.hands
+    if (suppliedHands) hands = copyHandAlignment(suppliedHands)
   } catch {
     throw unavailable()
   }
@@ -180,7 +185,11 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
           !boundBones.has(source.getObjectByName(bone) as Object3D) ||
           !boundBones.has(source.getObjectByName(anchor) as Object3D),
       ) ||
-      (head && !boundBones.has(source.getObjectByName(head.bone) as Object3D))
+      (head && !boundBones.has(source.getObjectByName(head.bone) as Object3D)) ||
+      (hands &&
+        [...HAND_RIG_BINDINGS.map((b) => b.bone), 'wristL', 'wristR'].some(
+          (name) => !boundBones.has(source.getObjectByName(name) as Object3D),
+        ))
     )
       throw unavailable()
     pair = cloneEightWeightPair(source)
@@ -192,7 +201,7 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
     }
     const rig = { context: owner, bindings: OBSERVED_LIMB_BINDINGS, halfLifeMs, maxAgeMs }
     reference = createDirectionalRig(pair.copies[0], rig)
-    user = createObservedPoseRig(pair.copies[1], { ...rig, mirror, head })
+    user = createObservedPoseRig(pair.copies[1], { ...rig, mirror, head, hands })
     signal.addEventListener('abort', aborted, { once: true })
     if (signal.aborted) throw unavailable()
   } catch (error) {
