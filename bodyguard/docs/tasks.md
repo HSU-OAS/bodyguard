@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-09 [S6.9 시작 기준선 분리](stories/native-startup-isolation.md): 기존 main/목 입력 Draft의 실제 로그인→카메라/SDK→두 아바타→첫 결과를 제한된 순서 대조로 확인하고 오프라인 원본 검증 명령을 구현했다. [작동 흐름·실패/한계·증거](review/native-startup-isolation/README.md). 대조6건은 미재현이며 이전 PR90 필수26건13실패를 대체하지 않는다. FE1336·정적/build/guard·공개byte 불변과 동일 byte 정상/누락/변조 거부를 확인했지만 **원인 입증/제품 보완·시작P2는 미완료/Draft**다. 실제 사람/동작·최종 외형/권리·승인 공개 UI·SDK/외부/운영·D2/전체1~6·출시 적격0과 최소 문구·원본/실패·별도 승인 경계를 유지한다. 다음은 정상 반복이 아닌 SDK 생성/첫 추론·환경/누적 상태 분리 진단이다. 아래는 시점별 기록이다.
+
 2026-10-08 [S2.M1 목 옆 기울이기 관찰값](stories/neck-side-observation.md): 실제 영상 비율·명시적 반전의 이미지 평면 귀/어깨 상대 기하를 구현했다. [실행·실패·한계](review/neck-observation/README.md). 새87/FE1301·정적/type/build/guard·공개 byte 동일을 확인하고 조건부 PR gate를 진행한다. 실제 source/개발 관찰·사람 라벨/임계값·올바른 동작/교정·최종 외형/승인 UI·SDK/외부/운영·기존 시작 P2·출시0과 전체1~6은 미완료다. PR88의 실제 mergeda32cf5/main·브랜치 보존을 확인하고 그 최신 main에서 시작했으며 최소 문구·원본/실패·별도 승인 경계는 유지한다. 아래는 시점별 기록이다.
 
 2026-10-08 [S2.T23](stories/native-trunk-feedback.md): 로그인 소유 native 흐름의 몸통 축·supplied 오류 강조·가림/복구·pause/새 세대·본인 중단 기록을 연결했다. [실제 화면·실패/보완·증거](review/native-trunk/README.md). 최종 Chrome 남녀24·FE1214·정적/type/build/guard·공개 byte/GLB 불변을 확인하고 조건부 PR gate를 진행한다. 실제 사람/올바른 동작·최종 외형/권리·승인 공개 UI·SDK/외부/운영·기존 시작 P2·출시 동작0과 D2/전체1~6 미완료를 유지한다. 최소 텍스트·원본/실패·새 조형0·별도 승인 경계는 그대로다. 아래는 시점별 기록이다.
