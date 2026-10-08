@@ -1,0 +1,12 @@
+{
+  "failed": true,
+  "browser": "browser-first.json",
+  "compiledOriginal": "probe-first/probe.js",
+  "nativeInputCaptured": false,
+  "wrapperExitReceiptCreated": false,
+  "wrapperFailure": "EEXIST: browser-first.json was also selected as the command receipt path. Browser receipt is preserved, not overwritten.",
+  "formattingInitial": "Tool transcript only: Biome exited 1 because generated browser script contained literal newline escape tokens. Invalid source is preserved in browser-preformat-invalid.mjs.",
+  "positiveFailure": "Combined native/synthetic Chrome showed body 8 but head 0 after the owned model was attached to Scene. Head driver treated the model external parent change as internal bone reparenting.",
+  "coverage": "The incomplete flow did not pass, and its unexecuted later cases are not completion evidence.",
+  "sourceAlignment": "probe-build-first.json and browser-first.json each record their source hashes. They differ only by the later completeBody head-enabled guard; no claim that they are one exact final source."
+}

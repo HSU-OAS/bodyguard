@@ -20,3 +20,7 @@ S2.T11의 명시 머리 정렬과 S2.T12의 같은 frozen 프레임을 기존 ow
 ## 후속 필수 조건
 
 몸-얼굴 동일 사용자 연결과 실측 좌표계/오차·실제 긍정 및 가림/복수 사람, 목 분절·체간/손·시범/적색 피드백, 최종 외형/권리·승인 디자인·SDK 정책·노트북/HTTPS/운영은 미완료다. 본 Story 통과는 전체 D2나 출시 선언이 아니다.
+
+## 실행 결과
+
+runtime e29342b에서 실제 Chrome/가짜 장치·SDK·남녀 GLB의 합성 머리+사지→누락/native 미검출→pending 종료2흐름/20상태, 전체1001unit/type/Biome/assets/build/guard/diff를 실행했다. raw face 경로도 실제 Chrome 합성 남녀 회귀를 실행하고 현재 source SHA와 비교했다. Scene 배치 문제와 freeze 측정 시점 실패·원본을 보존하고 수정 후 재실행했다. [실제 흐름/미완성 canvas·실패·남은 조건](../review/observed-body-head/README.md). 공개 byte/5모델 동일, GLB/조형/입력 캡처/운영 변경0이며 전체1~6은 미완료다.

@@ -31,6 +31,8 @@ main 9733e4c에는 PR #15의 순수 코칭 진행 엔진까지 병합됐다. 계
 
 ## 다음 실행 순서
 
+2026-10-08 D2-T/R 머리·사지 통합: [S2.T13](stories/observed-body-head.md)은 명시 head 정렬/복사 회전을 같은 capture stamp로 owned 사용자 모델의 사지와 연결하고 비교 모델은 보존했다. [실제 흐름·실패·미완성 canvas](review/observed-body-head/README.md). native 가짜 장치의 미검출/정리와 합성 긍정/누락·복수 body를 구분하며 공개 UI/byte·원본/GLB/조형·SDK 제품 정책·운영 변경0이다. 실제 사람/동일인·native 머리 긍정/실측·경추/손/체간·시범/판정·외형/디자인/SDK/노트북·D2-A/M/T/R/I/P 및 전체1~6 완료 조건은 그대로 남는다. 다음 비공개 adapter 통합과 별도 외부/참여자 검증을 분리하고 최소 문구·기존 원본/실패·별도 승인 경계를 유지한다.
+
 2026-10-08 D2-R/T 같은 입력: [S2.T12](stories/body-face-frame.md)은 한 frozen VideoFrame의 body/face 결과를 원래 stamp로 전달하고 pending 종료 뒤 native result/input을 정리한다. [실제 흐름·실패/원본](review/body-face-frame/README.md). 실제 Chrome/가짜 장치·Pose/Face SDK의 미검출/새 세대·종료와 합성 긍정을 구분했다. head 후보는 같은 사람 검증이나 사용자 rig/판정 연결이 아니며 D2-M/T/R/I·전체1~6 완료 조건은 그대로 남는다. 공개 UI/byte·원본/GLB/조형·SDK 제품 정책·운영 변경0, 최소 문구·별도 승인 경계를 유지한다.
 
 2026-10-08 D2-T 머리 표시: [S2.T11](stories/head-orientation.md)은 기존 남녀 A37의 head bone에 명시 기준의 합성 머리 방향을 실제 Chrome/WebGL로 연결했다. 원본/추가 여덟 가중치·다른 bone·position/scale·전신을 보존하고 미검출/만료/종료를 처리했다. [실제 흐름·실패·남은 조건](review/head-orientation/README.md). 조형·공개 UI/SDK 정책/판정·운영 변경0. **native face/몸의 동일 프레임·동일 사람 연결이나 실제 경추 분절 코칭/D2-T 통과가 아니다.** 이월/전체1~6 게이트·최소 문구·원본 보존·별도 승인 경계를 유지한다.

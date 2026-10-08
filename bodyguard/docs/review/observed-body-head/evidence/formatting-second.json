@@ -1,0 +1,42 @@
+{
+  "label": "formatting-second",
+  "cwd": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-observed-body-head/bodyguard/frontend",
+  "head": "2bc3cd96670108f9db923ab81a7ca1282aec32f6",
+  "command": "./node_modules/.bin/biome",
+  "args": [
+    "check",
+    "--write",
+    "src/avatar/headOrientationRig.ts",
+    "src/avatar/observedPoseRig.ts",
+    "src/avatar/ownedAvatarPair.ts",
+    "src/avatar/observedBodyHead.test.ts",
+    "src/pose/bodyFaceVideoSource.ts",
+    "e2e/fixtures/observedBodyHeadProbe.ts",
+    "e2e/fixtures/observedBodyHead.vite.ts",
+    "scripts/test-observed-body-head-browser.mjs"
+  ],
+  "exit": 1,
+  "elapsedMs": 113,
+  "sourceBefore": {
+    "src/avatar/headOrientationRig.ts": "aa7442ef121db2072e12834674b0d67627580102f0259d1733ae48199099e836",
+    "src/avatar/observedPoseRig.ts": "48035f458f069dce8659981b38c50e896e46b25e7e94bdb13208089c1364a790",
+    "src/avatar/ownedAvatarPair.ts": "afcc039b7db85f133786848ec6595750fa8f814658862765ce28ab3d7c963d04",
+    "src/avatar/observedBodyHead.test.ts": "00a67e05100753738aa635c4997fcf2ca4c342eac9d85bc4667364d70774361f",
+    "src/pose/bodyFaceVideoSource.ts": "5413e493faf08498d3d5ca4d53c6e4bcc7f8b82aa4dffb2ea353f6174042e05a",
+    "e2e/fixtures/observedBodyHeadProbe.ts": "9710edc20d43c881cbb572d787e63eac980cdc481e407781019134eaafef0250",
+    "scripts/test-observed-body-head-browser.mjs": "869457ef500c49c924c9e5f0d30a4086d88206c25c15fd40b351d3ae89e84db1",
+    "scripts/check-selection-production.mjs": "b2c12c3eefe9bf4e4529a48b8f15ee6174132cc9efa6856da2f52e9713963b63"
+  },
+  "sourceAfter": {
+    "src/avatar/headOrientationRig.ts": "aa7442ef121db2072e12834674b0d67627580102f0259d1733ae48199099e836",
+    "src/avatar/observedPoseRig.ts": "48035f458f069dce8659981b38c50e896e46b25e7e94bdb13208089c1364a790",
+    "src/avatar/ownedAvatarPair.ts": "afcc039b7db85f133786848ec6595750fa8f814658862765ce28ab3d7c963d04",
+    "src/avatar/observedBodyHead.test.ts": "00a67e05100753738aa635c4997fcf2ca4c342eac9d85bc4667364d70774361f",
+    "src/pose/bodyFaceVideoSource.ts": "5413e493faf08498d3d5ca4d53c6e4bcc7f8b82aa4dffb2ea353f6174042e05a",
+    "e2e/fixtures/observedBodyHeadProbe.ts": "9710edc20d43c881cbb572d787e63eac980cdc481e407781019134eaafef0250",
+    "scripts/test-observed-body-head-browser.mjs": "b13bf417a63fa1225ec5d260542dd339adc25ae3d37a936f378b1f0b66559edd",
+    "scripts/check-selection-production.mjs": "b2c12c3eefe9bf4e4529a48b8f15ee6174132cc9efa6856da2f52e9713963b63"
+  },
+  "stdout": "Skipped 5 suggested fixes.\nIf you wish to apply the suggested (unsafe) fixes, use the command biome check --write --unsafe\n\nChecked 8 files in 24ms. Fixed 1 file.\nFound 1 error.\nFound 4 infos.\n",
+  "stderr": "e2e/fixtures/observedBodyHeadProbe.ts:281:52 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━\n\n  i Template literals are preferred over string concatenation.\n  \n    279 │     pair = await prepareOwnedAvatarPair(context, {\n    280 │       async load() {\n  > 281 │         loaded = (await new GLTFLoader().loadAsync('/' + gender + '.glb')).scene\n        │                                                    ^^^^^^^^^^^^^^^^^^^^^\n    282 │         sourceBones = JSON.stringify(bones(loaded))\n    283 │         sourceWeights = JSON.stringify(await weights(loaded))\n  \n  i Unsafe fix: Use a template literal.\n  \n    279 279 │       pair = await prepareOwnedAvatarPair(context, {\n    280 280 │         async load() {\n    281     │ - ········loaded·=·(await·new·GLTFLoader().loadAsync('/'·+·gender·+·'.glb')).scene\n        281 │ + ········loaded·=·(await·new·GLTFLoader().loadAsync(`/${gender}.glb`)).scene\n    282 282 │           sourceBones = JSON.stringify(bones(loaded))\n    283 283 │           sourceWeights = JSON.stringify(await weights(loaded))\n  \n\nscripts/test-observed-body-head-browser.mjs:53:44 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━\n\n  i Template literals are preferred over string concatenation.\n  \n    51 │ ]\n    52 │ const resources = Object.fromEntries([\n  > 53 │   ['/probe.js', readFileSync(join(scratch, 'probe-' + label + '/probe.js'))],\n       │                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    54 │   ...['male', 'female'].map((gender) => {\n    55 │     const bytes = execFileSync(\n  \n  i Unsafe fix: Use a template literal.\n  \n     51  51 │   ]\n     52  52 │   const resources = Object.fromEntries([\n     53     │ - ··['/probe.js',·readFileSync(join(scratch,·'probe-'·+·label·+·'/probe.js'))],\n         53 │ + ··['/probe.js',·readFileSync(join(scratch,·`probe-${label}/probe.js`))],\n     54  54 │     ...['male', 'female'].map((gender) => {\n     55  55 │       const bytes = execFileSync(\n  \n\nscripts/test-observed-body-head-browser.mjs:71:13 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━\n\n  i Template literals are preferred over string concatenation.\n  \n    69 │         : '27c10902aa377e995bdbc115ab773cf22f8ea38582c49820304a33ad7685f25a',\n    70 │     )\n  > 71 │     return ['/' + gender + '.glb', bytes]\n       │             ^^^^^^^^^^^^^^^^^^^^^\n    72 │   }),\n    73 │   ...['pose_landmarker_lite.task', 'face_landmarker.task'].map((n) => [\n  \n  i Unsafe fix: Use a template literal.\n  \n     69  69 │           : '27c10902aa377e995bdbc115ab773cf22f8ea38582c49820304a33ad7685f25a',\n     70  70 │       )\n     71     │ - ····return·['/'·+·gender·+·'.glb',·bytes]\n         71 │ + ····return·[`/${gender}.glb`,·bytes]\n     72  72 │     }),\n     73  73 │     ...['pose_landmarker_lite.task', 'face_landmarker.task'].map((n) => [\n  \n\nscripts/test-observed-body-head-browser.mjs:256:21 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━\n\n  i Template literals are preferred over string concatenation.\n  \n    254 │     states.push({ case: 'actual-webgl-raf-synthetic', ...animated })\n    255 │     const image = await page.locator('canvas').screenshot()\n  > 256 │     const preview = gender + '-' + label + '.png'\n        │                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    257 │     writeFileSync(join(scratch, preview), image, { flag: 'wx' })\n    258 │     report.previews.push({\n  \n  i Unsafe fix: Use a template literal.\n  \n    254 254 │       states.push({ case: 'actual-webgl-raf-synthetic', ...animated })\n    255 255 │       const image = await page.locator('canvas').screenshot()\n    256     │ - ····const·preview·=·gender·+·'-'·+·label·+·'.png'\n        256 │ + ····const·preview·=·`${gender}-${label}.png`\n    257 257 │       writeFileSync(join(scratch, preview), image, { flag: 'wx' })\n    258 258 │       report.previews.push({\n  \n\nsrc/avatar/observedBodyHead.test.ts:306:19 lint/correctness/noUnsafeOptionalChaining ━━━━━━━━━━━━━━━\n\n  × Unsafe usage of optional chaining.\n  \n    304 │     pair.observe(frame())\n    305 │     expect(pair.render(100, 0).head?.tracked).toBe(1)\n  > 306 │     expect((models?.[0].getObjectByName('head') as Bone).quaternion.toArray()).toEqual(turn(0))\n        │                   ^^\n    307 │     expect((f.model.getObjectByName('head') as Bone).quaternion.toArray()).toEqual(turn(0))\n    308 │     pair.dispose()\n  \n  i If it short-circuits with 'undefined' the evaluation will throw TypeError here:\n  \n    304 │     pair.observe(frame())\n    305 │     expect(pair.render(100, 0).head?.tracked).toBe(1)\n  > 306 │     expect((models?.[0].getObjectByName('head') as Bone).quaternion.toArray()).toEqual(turn(0))\n        │                                                          ^^^^^^^^^^\n    307 │     expect((f.model.getObjectByName('head') as Bone).quaternion.toArray()).toEqual(turn(0))\n    308 │     pair.dispose()\n  \n\ncheck ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n  × Some errors were emitted while applying fixes.\n  \n\n"
+}
