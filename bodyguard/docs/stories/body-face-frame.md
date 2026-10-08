@@ -1,6 +1,6 @@
 # S2.T12 — 같은 고정 영상 프레임의 몸·얼굴 결과 전달
 
-상태: 명세·첫 하네스 / baseline `62b837539833f177e66b96d5bfc4fbab57fa148c` / `codex/body-face-frame`
+상태: 구현·native 가짜 카메라 검증·작성자 리뷰 / runtime `98097cab36298a06cfe23835dccf114b646ef371` / baseline `62b837539833f177e66b96d5bfc4fbab57fa148c` / `codex/body-face-frame` / PR 게이트
 
 FR-M-01/02/07·FR-A-01/03·NFR-07/08. 열린 caller video/stream의 한 decoded VideoFrame을 몸·얼굴 추론에 차례로 전달한다. original generation/sequence/at를 유지하고 SDK result와 입력을 모두 정리한 뒤 복사된 몸 좌표와 머리 회전만 반환한다. 같은 시각은 같은 사람이라는 증거가 아니므로 이 묶음을 사용자 head bone이나 판정에 자동 적용하지 않는다.
 
@@ -16,3 +16,7 @@ FR-M-01/02/07·FR-A-01/03·NFR-07/08. 열린 caller video/stream의 한 decoded 
 ## 후속 필수 조건
 
 몸-얼굴 동일 사용자 연결과 실측 좌표계, head rig 전달·camera 정렬의 명시 기준, 목 분절·체간/손·시범/적색 피드백, D2-A/M/R/I/P·승인 디자인/SDK 정책·실제 노트북/운영 및 전체1~6 완료 기준을 유지한다. 최소 문구·기존 원본 보존·동일 부위 새 조형 금지·별도 승인 경계도 유지한다.
+
+## 실행 결과
+
+현재 커밋의 native Chrome9상태/같은 입력5회와 종료·새 세대·정리, 전체976unit/type/Biome/assets/build/guard/diff를 실행했다. native는 body/face 미검출, 긍정은 합성이다. 명시 dispose의 face 호출 방지와 실제 입력 open/FaceResult shape 검증을 보강했고 proxy socket reset 실패를 원인 수정·합성403 회귀 뒤 재실행했다. [실제 흐름·원본 실패·미실행 조건](../review/body-face-frame/README.md), [16소스/67증거 SHA](../review/body-face-frame/summary.json). 공개 byte/5모델 동일·GLB/입력 캡처0이며 SDK 정책/실측/최종 외형·전체1~6 완료가 아니다.

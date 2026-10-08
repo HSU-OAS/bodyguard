@@ -1,0 +1,9 @@
+{
+  "kind": "tool-transcript-note-not-command-exit-receipt",
+  "command": "./node_modules/.bin/biome check --write src/pose/bodyFaceVideoSource.ts src/pose/bodyFaceVideoSource.test.ts src/pose/ownedPoseFrame.ts e2e/fixtures/bodyFaceFrame.vite.ts e2e/fixtures/bodyFaceFrameProbe.ts",
+  "reportedErrors": 1,
+  "rule": "lint/suspicious/useIterableCallbackReturn",
+  "detail": "forEach callback returned the assertion result; corrected to a block callback. Subsequent standalone biome receipt and final checks verify the fix.",
+  "standaloneExitReceipt": false,
+  "originalTranscriptPreservedInChat": true
+}

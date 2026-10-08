@@ -1,0 +1,30 @@
+{
+  "label": "guard-prereview",
+  "cwd": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-body-face-frame/bodyguard/frontend",
+  "command": "node",
+  "args": [
+    "scripts/check-selection-production.mjs"
+  ],
+  "exit": 0,
+  "elapsedMs": 67,
+  "sourceBefore": {
+    "src/pose/bodyFaceVideoSource.ts": "c75253d0183446b6f36a0edbcb10bee048783f261c0667d1ca0d10fb029cee67",
+    "src/pose/bodyFaceVideoSource.test.ts": "942bfe12046f6317dc0bd5dfa90945acc6474887e8dc09381a494ddfdf9648b4",
+    "src/pose/ownedPoseFrame.ts": "d5721c653087251add5d9a665577d54f1f0f6846fcf99fe29d44c088b4176a98",
+    "src/pose/videoPoseSource.ts": "57d53b123f0ebb14926880883ce5fe5bbde2c05a98da44abfb6cf6f465e26619",
+    "src/avatar/observedPoseRig.ts": "aef8a8c03646da5affe5b1a859ba486d021d765f9104049e29afbd22eb14ac9f",
+    "e2e/fixtures/bodyFaceFrameProbe.ts": "6dac5ed421f0f98c7211c2701ba038226b9c585bda9181f59b678663c03221d5",
+    "scripts/test-body-face-browser.mjs": "6ae583debcc9e27bcf24c7d91c9c14756e7922cb6afd90f40cd9c11bc20cfca5"
+  },
+  "sourceAfter": {
+    "src/pose/bodyFaceVideoSource.ts": "c75253d0183446b6f36a0edbcb10bee048783f261c0667d1ca0d10fb029cee67",
+    "src/pose/bodyFaceVideoSource.test.ts": "942bfe12046f6317dc0bd5dfa90945acc6474887e8dc09381a494ddfdf9648b4",
+    "src/pose/ownedPoseFrame.ts": "d5721c653087251add5d9a665577d54f1f0f6846fcf99fe29d44c088b4176a98",
+    "src/pose/videoPoseSource.ts": "57d53b123f0ebb14926880883ce5fe5bbde2c05a98da44abfb6cf6f465e26619",
+    "src/avatar/observedPoseRig.ts": "aef8a8c03646da5affe5b1a859ba486d021d765f9104049e29afbd22eb14ac9f",
+    "e2e/fixtures/bodyFaceFrameProbe.ts": "6dac5ed421f0f98c7211c2701ba038226b9c585bda9181f59b678663c03221d5",
+    "scripts/test-body-face-browser.mjs": "6ae583debcc9e27bcf24c7d91c9c14756e7922cb6afd90f40cd9c11bc20cfca5"
+  },
+  "stdout": "{\"production_JS_files_checked\":1,\"development_catalog_strings\":0,\"unconnected_coaching_engine_strings\":0,\"unconnected_coaching_resource_strings\":0,\"unconnected_coaching_session_strings\":0,\"unconnected_observation_loop_strings\":0,\"unconnected_result_record_producer_strings\":0,\"unconnected_record_owner_capture_strings\":0,\"unconnected_recorded_session_strings\":0,\"unconnected_auth_coaching_hook_strings\":0,\"unconnected_minute_aggregation_strings\":0,\"unconnected_owned_minute_upload_strings\":0,\"unconnected_alert_delivery_strings\":0,\"unconnected_owned_alert_lifecycle_strings\":0,\"unconnected_directional_avatar_strings\":0,\"unconnected_observed_pose_avatar_strings\":0,\"unconnected_owned_avatar_pair_strings\":0,\"unconnected_owned_pose_frame_strings\":0,\"unconnected_owned_video_pose_strings\":0,\"unconnected_owned_pose_playback_strings\":0,\"unconnected_owned_playback_resources_strings\":0,\"unconnected_native_auth_playback_strings\":0,\"unconnected_native_playback_adapter_strings\":0,\"unconnected_head_orientation_strings\":0,\"unconnected_body_face_frame_strings\":0}\n",
+  "stderr": ""
+}

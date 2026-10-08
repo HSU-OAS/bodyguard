@@ -1,0 +1,31 @@
+{
+  "label": "unit-initial",
+  "cwd": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-body-face-frame/bodyguard/frontend",
+  "command": "./node_modules/.bin/vitest",
+  "args": [
+    "run",
+    "src/pose/bodyFaceVideoSource.test.ts"
+  ],
+  "exit": 1,
+  "elapsedMs": 709,
+  "sourceBefore": {
+    "src/pose/bodyFaceVideoSource.ts": null,
+    "src/pose/bodyFaceVideoSource.test.ts": "718be1bbf08d7ff0f22aacac0447184b4d38bc6447b7dc27712da471c6571d0e",
+    "src/pose/ownedPoseFrame.ts": "9fa164b94d8f92bda910fc75a8d191fb97e730f79f9505e6457c23cf9ad31bc0",
+    "src/pose/videoPoseSource.ts": "69b96d9bb71369a57e3f3678f6e55cf02ad4d982f70cf3db72d573de27d7bfd2",
+    "src/avatar/observedPoseRig.ts": "680235478e06efc111cc04515619f76668806bb64f0b2687f2144443c453c606",
+    "e2e/fixtures/bodyFaceFrameProbe.ts": null,
+    "scripts/test-body-face-browser.mjs": null
+  },
+  "sourceAfter": {
+    "src/pose/bodyFaceVideoSource.ts": null,
+    "src/pose/bodyFaceVideoSource.test.ts": "718be1bbf08d7ff0f22aacac0447184b4d38bc6447b7dc27712da471c6571d0e",
+    "src/pose/ownedPoseFrame.ts": "9fa164b94d8f92bda910fc75a8d191fb97e730f79f9505e6457c23cf9ad31bc0",
+    "src/pose/videoPoseSource.ts": "69b96d9bb71369a57e3f3678f6e55cf02ad4d982f70cf3db72d573de27d7bfd2",
+    "src/avatar/observedPoseRig.ts": "680235478e06efc111cc04515619f76668806bb64f0b2687f2144443c453c606",
+    "e2e/fixtures/bodyFaceFrameProbe.ts": null,
+    "scripts/test-body-face-browser.mjs": null
+  },
+  "stdout": "\n RUN  v5.0.2 /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-body-face-frame/bodyguard/frontend\n\n ❯ src/pose/bodyFaceVideoSource.test.ts (0 test)\n\n Test Files  1 failed (1)\n      Tests  no tests\n   Start at  09:33:19\n   Duration  210ms (worker 97%, environment 3%)\n\n",
+  "stderr": "\n⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/pose/bodyFaceVideoSource.test.ts [ src/pose/bodyFaceVideoSource.test.ts ]\nError: Cannot find module './bodyFaceVideoSource' imported from /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-body-face-frame/bodyguard/frontend/src/pose/bodyFaceVideoSource.test.ts\n ❯ src/pose/bodyFaceVideoSource.test.ts:5:1\n      3| import { afterEach, beforeEach, describe, expect, it, vi } from 'vites…\n      4| import { ResourceCleanupError } from '../coaching/resources'\n      5| import { createBodyFaceVideoSource } from './bodyFaceVideoSource'\n       | ^\n      6|\n      7| class FakeFrame {\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n"
+}
