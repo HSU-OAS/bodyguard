@@ -1,11 +1,14 @@
 // FR-A-01/02/03·FR-M-07: owned synthetic objects, not webcam/clinical validation.
 import {
+  AnimationClip,
   Bone,
   BufferGeometry,
   Float32BufferAttribute,
   Group,
   Mesh,
   MeshStandardMaterial,
+  type Object3D,
+  QuaternionKeyframeTrack,
   Skeleton,
   SkinnedMesh,
   Texture,
@@ -20,6 +23,110 @@ import {
 import { OBSERVED_LIMB_BINDINGS } from './directionalRig'
 import { HAND_RIG_BINDINGS } from './observedHandRig'
 import { prepareOwnedAvatarPair } from './ownedAvatarPair'
+import type { ReferenceProgram } from './referencePlayback'
+
+function requireFixtureNode(model: Object3D, name: string) {
+  const node = model.getObjectByName(name)
+  if (!node) throw new Error('Fixture node unavailable')
+  return node
+}
+
+function referenceProgram(): ReferenceProgram {
+  const clips = Object.fromEntries(
+    ['waiting-start', 'seeking-target', 'holding', 'waiting-return'].map((phase) => [
+      phase,
+      new AnimationClip(phase, 1, [
+        new QuaternionKeyframeTrack(
+          'upperarm01L.quaternion',
+          [0, 1],
+          [0, 0, 0, 1, 0, 0, Math.sin(0.3), Math.cos(0.3)],
+        ),
+      ]),
+    ]),
+  ) as ReferenceProgram['steps'][number]['clips']
+  return {
+    motionId: 'fixture-not-release',
+    version: '1',
+    blendMs: 100,
+    maxAgeMs: 250,
+    steps: [{ id: 'left', clips }],
+  }
+}
+
+describe('optional reference display ownership', () => {
+  it('copies before async load, drives only reference and returns bounded display status', async () => {
+    const f = fixture(),
+      c = context(),
+      p = referenceProgram(),
+      d = deferred<Group>()
+    const supplied = { ...options(f.scene, () => d.promise), reference: p }
+    const pending = prepareOwnedAvatarPair(c.context, supplied)
+    p.steps[0].clips['seeking-target'].tracks[0].values.fill(0)
+    supplied.reference = referenceProgram()
+    d.resolve(f.scene)
+    const lease = await pending
+    const models = lease.models
+    if (!models) throw new Error('Fixture models unavailable')
+    const [reference, user] = models
+    const cue = {
+      generation: 1,
+      sequence: 1,
+      at: 0,
+      motionId: 'fixture-not-release',
+      version: '1',
+      stepId: 'left',
+      phase: 'seeking-target' as const,
+      status: 'running' as const,
+    }
+    const sourceBefore = requireFixtureNode(f.scene, 'upperarm01L').quaternion.clone()
+    const userBefore = requireFixtureNode(user, 'upperarm01L').quaternion.clone()
+    expect(lease.updateReference(cue)).toBe(true)
+    lease.render(0, 0)
+    lease.updateReference({ ...cue, sequence: 2, at: 200 })
+    const result = lease.render(200, 200)
+    expect(result.reference?.status).toBe('playing')
+    expect(
+      requireFixtureNode(reference, 'upperarm01L').quaternion.angleTo(sourceBefore),
+    ).toBeGreaterThan(0)
+    expect(requireFixtureNode(user, 'upperarm01L').quaternion.equals(userBefore)).toBe(true)
+    expect(requireFixtureNode(f.scene, 'upperarm01L').quaternion.equals(sourceBefore)).toBe(true)
+    c.abort.abort()
+    expect(lease.updateReference({ ...cue, sequence: 3, at: 210 })).toBe(false)
+    expect(lease.render(210, 10).reference?.status).toBe('closed')
+    expect(lease.models).toBeNull()
+    expect(f.count).toEqual({ geometry: 1, material: 1, skeleton: 1 })
+    lease.dispose()
+  })
+  it('does not load malformed reference configuration and keeps absent callers unchanged', async () => {
+    const f = fixture(),
+      p = referenceProgram()
+    let loads = 0
+    const bad = { ...p, steps: [] }
+    await expect(
+      prepareOwnedAvatarPair(context().context, {
+        ...options(f.scene, async () => {
+          loads++
+          return f.scene
+        }),
+        reference: bad,
+      }),
+    ).rejects.toThrow('Avatar asset unavailable')
+    expect(loads).toBe(0)
+    const lease = await prepareOwnedAvatarPair(context().context, options(f.scene))
+    expect(lease.updateReference({} as never)).toBe(false)
+    expect(lease.render(0, 0)).not.toHaveProperty('reference')
+    lease.dispose()
+  })
+  it('rejects a non-bound reference track and cleans the fresh source and both copies', async () => {
+    const f = fixture(),
+      p = referenceProgram()
+    p.steps[0].clips.holding.tracks[0].name = 'head.quaternion'
+    await expect(
+      prepareOwnedAvatarPair(context().context, { ...options(f.scene), reference: p }),
+    ).rejects.toThrow('Avatar asset unavailable')
+    expect(f.count).toEqual({ geometry: 1, material: 1, skeleton: 1 })
+  })
+})
 
 function fixture() {
   const scene = new Group()

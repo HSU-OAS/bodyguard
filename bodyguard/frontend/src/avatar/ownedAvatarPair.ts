@@ -6,6 +6,12 @@ import { cloneEightWeightPair } from './eightWeightSkin'
 import type { HeadDisplayAlignment } from './headOrientationRig'
 import { copyHandAlignment, HAND_RIG_BINDINGS, type HandDisplayAlignment } from './observedHandRig'
 import { createObservedPoseRig, type PoseRigFrame } from './observedPoseRig'
+import {
+  copyReferenceProgram,
+  createReferencePlayback,
+  type ReferenceCue,
+  type ReferenceProgram,
+} from './referencePlayback'
 
 type Options = Readonly<{
   load(context: ResourceContext): Object3D | Promise<Object3D>
@@ -14,6 +20,7 @@ type Options = Readonly<{
   maxAgeMs: number
   head?: HeadDisplayAlignment
   hands?: HandDisplayAlignment
+  reference?: ReferenceProgram
 }>
 // Never free a loader alias already owned by another call, including a disposed call.
 const consumed = new WeakSet<object>()
@@ -89,6 +96,7 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
   const { load, mirror, halfLifeMs, maxAgeMs } = options
   let head: HeadDisplayAlignment | undefined
   let hands: HandDisplayAlignment | undefined
+  let referenceProgram: ReferenceProgram | undefined
   try {
     const supplied = options.head
     if (supplied)
@@ -99,6 +107,8 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
       })
     const suppliedHands = options.hands
     if (suppliedHands) hands = copyHandAlignment(suppliedHands)
+    const suppliedReference = options.reference
+    if (suppliedReference !== undefined) referenceProgram = copyReferenceProgram(suppliedReference)
   } catch {
     throw unavailable()
   }
@@ -129,6 +139,7 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
   let pair: ReturnType<typeof cloneEightWeightPair> | undefined
   let user: ReturnType<typeof createObservedPoseRig> | undefined
   let reference: ReturnType<typeof createDirectionalRig> | undefined
+  let playback: ReturnType<typeof createReferencePlayback> | undefined
   let closed = false,
     cleanupFailed = false
   function dispose() {
@@ -138,6 +149,7 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
       for (const action of [
         () => user?.dispose(),
         () => reference?.dispose(),
+        () => playback?.dispose(),
         ...(pair?.copies.map((model) => () => model.removeFromParent()) ?? []),
         () => pair?.dispose(),
         sourceOwner.dispose,
@@ -201,6 +213,11 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
     }
     const rig = { context: owner, bindings: OBSERVED_LIMB_BINDINGS, halfLifeMs, maxAgeMs }
     reference = createDirectionalRig(pair.copies[0], rig)
+    if (referenceProgram)
+      playback = createReferencePlayback(pair.copies[0], {
+        context: owner,
+        program: referenceProgram,
+      })
     user = createObservedPoseRig(pair.copies[1], { ...rig, mirror, head, hands })
     signal.addEventListener('abort', aborted, { once: true })
     if (signal.aborted) throw unavailable()
@@ -216,7 +233,20 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
       return closed || signal.aborted ? null : models
     },
     observe: (frame: PoseRigFrame) => !closed && !signal.aborted && driver.observe(frame),
-    render: (now: number, deltaMs: number) => driver.render(now, deltaMs),
+    updateReference: (cue: ReferenceCue) =>
+      !closed && !signal.aborted && Boolean(playback?.update(cue)),
+    render: (
+      now: number,
+      deltaMs: number,
+    ): ReturnType<typeof driver.render> &
+      Readonly<{
+        reference?: ReturnType<NonNullable<typeof playback>['render']>
+      }> => {
+      const result = driver.render(now, deltaMs)
+      return playback
+        ? Object.freeze({ ...result, reference: playback.render(now, deltaMs) })
+        : result
+    },
     dispose,
   })
 }

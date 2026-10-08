@@ -108,6 +108,9 @@ for (const file of files) {
     'Hand inference unavailable',
     'readNativeHands',
     'createBodyHandVideoSource',
+    'Invalid reference playback',
+    'createReferencePlayback',
+    'mountReferenceProbe',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
