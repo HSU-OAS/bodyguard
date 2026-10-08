@@ -3,6 +3,7 @@ import { FaceLandmarker, GestureRecognizer, PoseLandmarker } from '@mediapipe/ta
 import { createElement, useLayoutEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import {
+  type Bone,
   Box3,
   Color,
   DirectionalLight,
@@ -11,6 +12,7 @@ import {
   MeshStandardMaterial,
   OrthographicCamera,
   PlaneGeometry,
+  Quaternion,
   Scene,
   WebGLRenderer,
 } from 'three'
@@ -18,16 +20,23 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { AuthProvider, useAuth } from '../../src/auth'
 import type { HandDisplayAlignment } from '../../src/avatar/observedHandRig'
 import type { prepareOwnedAvatarPair } from '../../src/avatar/ownedAvatarPair'
+import type { ReferenceProgram } from '../../src/avatar/referencePlayback'
 import { createNativePlaybackResources } from '../../src/coaching/nativePlaybackResources'
 import { useRecordedCoaching } from '../../src/coaching/useRecordedCoaching'
+import type { CoachingState, ObservationClass } from '../../src/stretch/progression'
+import { nativeReferenceProgram } from './nativeReferenceProgram'
 
 type Hook = ReturnType<typeof useRecordedCoaching>
 type Session = NonNullable<ReturnType<Hook['getSession']>>
-type Actor = Pick<ReturnType<typeof createNativePlaybackResources>, 'close' | 'getSnapshot'>
+type Actor = Pick<
+  ReturnType<typeof createNativePlaybackResources>,
+  'close' | 'getSnapshot' | 'synchronize'
+>
 export function mountNativeHeadAuthProbe(
   canvas: HTMLCanvasElement,
   gender: 'male' | 'female',
   handAlignment?: HandDisplayAlignment,
+  withReference = false,
 ) {
   const scene = new Scene()
   scene.background = new Color('#ffffff')
@@ -83,6 +92,19 @@ export function mountNativeHeadAuthProbe(
     staleActions: Promise<void> | null = null,
     pair: Awaited<ReturnType<typeof prepareOwnedAvatarPair>> | undefined
   const failures: { generation: number; reason: string }[] = []
+  let currentReference: ReferenceProgram | undefined
+  let oldState: CoachingState | null = null,
+    referenceRest = '',
+    userRest = '',
+    markedReference = ''
+  const turns = (model: NonNullable<typeof pair>['models']) =>
+    model?.map((root) => {
+      const rotations: number[][] = []
+      root.traverse((node) => {
+        if ((node as Bone).isBone) rotations.push((node as Bone).quaternion.toArray())
+      })
+      return JSON.stringify(rotations)
+    }) ?? []
   class TrackedFrame extends NativeFrame {
     constructor(input: CanvasImageSource, options?: VideoFrameInit)
     constructor(input: AllowSharedBufferSource, options: VideoFrameBufferInit)
@@ -232,6 +254,8 @@ export function mountNativeHeadAuthProbe(
     prepareFinished = false
     let ownedSession: Session | null = null
     const nextId = crypto.randomUUID()
+    const reference = withReference ? await nativeReferenceProgram(gender) : undefined
+    currentReference = reference
     const actor = createNativePlaybackResources({
       model: 'lite',
       mirror: true,
@@ -244,6 +268,7 @@ export function mountNativeHeadAuthProbe(
         sceneFromCamera: [0, 0, 0, 1],
       },
       ...(handAlignment ? { hands: handAlignment } : {}),
+      ...(reference ? { reference } : {}),
       loadAvatar: async () =>
         (await new GLTFLoader().loadAsync(`/__private-native-${gender}.glb`)).scene,
       scheduler: {
@@ -253,6 +278,12 @@ export function mountNativeHeadAuthProbe(
       render(ownedPair) {
         pair = ownedPair
         if (!pair.models) throw new Error('Private native fixture unavailable')
+        if (pair.models[0].parent !== scene) {
+          const [ref, user] = turns(pair.models)
+          referenceRest = ref
+          userRest = user
+          markedReference = ref
+        }
         pair.models.forEach((model, index) => {
           if (model.parent !== scene) {
             model.position.x = index === 0 ? -0.75 : 0.75
@@ -280,9 +311,9 @@ export function mountNativeHeadAuthProbe(
           motionId: 'fixture-not-release',
           version: 'synthetic-session-only',
           source: 'direct',
-          maxFrameAgeMs: 100,
-          maxFrameGapMs: 200,
-          steps: [{ id: 'synthetic-hold', kind: 'hold', targetMs: 100 }],
+          maxFrameAgeMs: withReference ? 1000 : 100,
+          maxFrameGapMs: withReference ? 5000 : 200,
+          steps: [{ id: 'synthetic-hold', kind: 'hold', targetMs: withReference ? 2000 : 100 }],
         },
         readGates: () => ({
           authenticated: true,
@@ -291,6 +322,7 @@ export function mountNativeHeadAuthProbe(
           userAvatarReady: true,
         }),
         onChange(snapshot) {
+          if (withReference) actor.synchronize(snapshot.state)
           if (snapshot.state.status === 'running') actor.start(snapshot.state.generation)
         },
       })
@@ -305,6 +337,20 @@ export function mountNativeHeadAuthProbe(
   }
   function snapshot() {
     const models = pair?.models
+    const [ref, user] = turns(models ?? null)
+    let referenceTargetError: number | null = null
+    const phase = session?.getSnapshot().state.phase
+    const clip = phase ? currentReference?.steps[0].clips[phase] : undefined
+    if (models && clip) {
+      referenceTargetError = 0
+      for (const track of clip.tracks) {
+        const node = models[0].getObjectByName(track.name.replace(/\.quaternion$/, '')) as Bone
+        const expected = new Quaternion()
+          .fromArray(track.values, track.values.length - 4)
+          .normalize()
+        referenceTargetError = Math.max(referenceTargetError, node.quaternion.angleTo(expected))
+      }
+    }
     return {
       auth: auth?.state.status ?? 'unmounted',
       hook: hook?.state.status ?? 'unmounted',
@@ -314,6 +360,12 @@ export function mountNativeHeadAuthProbe(
       session: session?.getSnapshot().state.status ?? null,
       sessionGeneration: session?.getSnapshot().state.generation ?? null,
       verifiedMs: session?.getSnapshot().state.progress[0].verifiedMs ?? 0,
+      phase: session?.getSnapshot().state.phase ?? null,
+      referenceConfigured: withReference,
+      referenceMoved: Boolean(ref && ref !== referenceRest),
+      userUnchanged: Boolean(user && user === userRest),
+      referenceFrozen: Boolean(ref && ref === markedReference),
+      referenceTargetError,
       record: session?.getRecordSnapshot().status ?? null,
       recordId,
       prepared: prepared && Boolean(hook?.getSession()),
@@ -387,6 +439,25 @@ export function mountNativeHeadAuthProbe(
     stop: () => session?.end('user-stop'),
     save: () => session?.save(),
     resume: () => session?.resume(),
+    pause: () => session?.pause(),
+    tick: () => session?.tick(),
+    async observe(classification: ObservationClass) {
+      const state = session?.getSnapshot().state
+      if (!state) return
+      // Independent synthetic progression input, never the blank SDK result.
+      return session?.observe({
+        generation: state.generation,
+        sequence: state.lastSequence + 1,
+        sampledAt: performance.now(),
+        personCount: 1,
+        stepId: 'synthetic-hold',
+        classification,
+      })
+    },
+    markReference() {
+      markedReference = turns(pair?.models ?? null)[0] ?? ''
+    },
+    oldCommand: () => (oldState ? (currentActor?.synchronize(oldState) ?? false) : false),
     beginOldActions() {
       staleActions = Promise.all([session?.resume(), session?.save()]).then(() => undefined)
     },
@@ -394,6 +465,7 @@ export function mountNativeHeadAuthProbe(
     refresh: () => auth?.refresh(),
     signOut: () => auth?.signOut(),
     holdNextResult() {
+      oldState = session?.getSnapshot().state ?? null
       holdNext = true
     },
     releaseHeldResult: () => releaseHeld?.(),

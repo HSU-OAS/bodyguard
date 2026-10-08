@@ -111,6 +111,8 @@ for (const file of files) {
     'Invalid reference playback',
     'createReferencePlayback',
     'mountReferenceProbe',
+    'Private native reference fixture unavailable',
+    'Invalid native reference state',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }

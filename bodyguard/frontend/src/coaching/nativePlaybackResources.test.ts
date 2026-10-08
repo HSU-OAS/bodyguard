@@ -1,7 +1,10 @@
 // @vitest-environment happy-dom
 // FR-M-01/02/07·FR-S-02/04/NFR-08: native adapter ownership; native APIs mocked here.
+
+import { AnimationClip, QuaternionKeyframeTrack } from 'three'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { prepareOwnedAvatarPair } from '../avatar/ownedAvatarPair'
+import type { ReferenceProgram } from '../avatar/referencePlayback'
 import { createBodyFaceVideoSource } from '../pose/bodyFaceVideoSource'
 import { createBodyHandVideoSource } from '../pose/bodyHandVideoSource'
 import { closeCamera, openCamera } from '../pose/camera'
@@ -9,6 +12,7 @@ import { createFaceLandmarker } from '../pose/face'
 import { createGestureRecognizer } from '../pose/hands'
 import { createPoseLandmarker } from '../pose/landmarker'
 import { createVideoPoseSource } from '../pose/videoPoseSource'
+import { advanceCoaching, createCoaching } from '../stretch/progression'
 import { createNativePlaybackResources } from './nativePlaybackResources'
 import { createResourceController, ResourceCleanupError } from './resources'
 
@@ -44,7 +48,11 @@ const handAlignment = () => ({
   cameraReferences: { left: [0, 0, 0, 1], right: [0, 0, 0, 1] },
   sceneFromCamera: [0, 0, 0, 1],
 })
-function setup(head?: ReturnType<typeof headAlignment>, hands?: ReturnType<typeof handAlignment>) {
+function setup(
+  head?: ReturnType<typeof headAlignment>,
+  hands?: ReturnType<typeof handAlignment>,
+  reference?: ReferenceProgram,
+) {
   const stream = { getTracks: () => [] } as unknown as MediaStream
   const native = {
     close: vi.fn(),
@@ -58,6 +66,7 @@ function setup(head?: ReturnType<typeof headAlignment>, hands?: ReturnType<typeo
     observe: vi.fn(),
     render: vi.fn(() => ({ status: 'untracked', tracked: 0, total: 8 })),
     dispose: vi.fn(),
+    updateReference: vi.fn(() => true),
   } as unknown as Awaited<ReturnType<typeof prepareOwnedAvatarPair>>
   const source = { read: vi.fn(async () => null), dispose: vi.fn(async () => {}) }
   const face = {
@@ -94,6 +103,7 @@ function setup(head?: ReturnType<typeof headAlignment>, hands?: ReturnType<typeo
     onFailure: vi.fn(),
     ...(head ? { head } : {}),
     ...(hands ? { hands } : {}),
+    ...(reference ? { reference } : {}),
     scheduler: {
       request: vi.fn((cb: (at: number) => void) => {
         callbacks.set(++id, cb)
@@ -122,10 +132,256 @@ function setup(head?: ReturnType<typeof headAlignment>, hands?: ReturnType<typeo
     pair,
     source,
     callbacks,
+    async fire(at: number) {
+      const entry = callbacks.entries().next().value
+      if (!entry) throw new Error('No callback')
+      callbacks.delete(entry[0])
+      entry[1](at)
+      await drain()
+    },
     prepare: () => controller.run({ type: 'request-camera', generation: 1 }),
   }
 }
 beforeEach(() => vi.resetAllMocks())
+// FR-S-03/04: authored program + actual progression state, no clinical defaults.
+function referenceProgram(): ReferenceProgram {
+  const clip = () =>
+    new AnimationClip('test-not-release', 1, [
+      new QuaternionKeyframeTrack('head.quaternion', [0, 1], [0, 0, 0, 1, 0, 0, 0, 1]),
+    ])
+  return {
+    motionId: 'synthetic',
+    version: '1',
+    blendMs: 100,
+    maxAgeMs: 250,
+    steps: [
+      {
+        id: 'hold',
+        clips: {
+          'waiting-start': clip(),
+          'seeking-target': clip(),
+          holding: clip(),
+          'waiting-return': clip(),
+        },
+      },
+    ],
+  }
+}
+function referenceState(generation = 1) {
+  return {
+    ...createCoaching({
+      motionId: 'synthetic',
+      version: '1',
+      source: 'direct',
+      maxFrameAgeMs: 100,
+      maxFrameGapMs: 200,
+      steps: [{ id: 'hold', kind: 'hold', targetMs: 100 }],
+    }),
+    status: 'running' as const,
+    generation,
+    lastNow: 100,
+    readyAt: 100,
+  }
+}
+describe('optional native reference session binding', () => {
+  it('does not let a retained renderer pair bypass controller cancellation during a borrow', async () => {
+    const f = setup(undefined, undefined, referenceProgram()),
+      gate = deferred<void>()
+    await f.prepare()
+    f.actor.start(1)
+    await f.fire(100)
+    const retained = f.options.render.mock.calls.at(-1)?.[0] as typeof f.pair | undefined
+    expect(retained).toBeDefined()
+    f.source.dispose.mockReturnValueOnce(gate.promise)
+    const closing = f.controller.close()
+    await drain()
+    const before = vi.mocked(f.pair.render).mock.calls.length
+    expect(
+      retained?.updateReference({
+        generation: 1,
+        sequence: 99,
+        at: 110,
+        motionId: 'synthetic',
+        version: '1',
+        stepId: 'hold',
+        phase: 'holding',
+        status: 'running',
+      }),
+    ).toBe(false)
+    retained?.render(110, 10)
+    expect(f.pair.render).toHaveBeenCalledTimes(before)
+    expect(f.pair.updateReference).not.toHaveBeenCalled()
+    gate.resolve()
+    await closing
+    await f.actor.close()
+  })
+  it('defers a future session cue to its first eligible original render stamp and keeps newer pending input', async () => {
+    const f = setup(undefined, undefined, referenceProgram())
+    await f.prepare()
+    f.actor.start(1)
+    expect(f.actor.synchronize(referenceState())).toBe(true)
+    expect(f.pair.updateReference).not.toHaveBeenCalled()
+    await f.fire(90)
+    expect(f.pair.updateReference).not.toHaveBeenCalled()
+    await f.fire(100)
+    expect(f.pair.updateReference).toHaveBeenCalledWith(
+      expect.objectContaining({ at: 100, sequence: 1 }),
+    )
+    expect(
+      f.actor.synchronize({ ...referenceState(), lastNow: 110, phase: 'seeking-target' }),
+    ).toBe(true)
+    expect(f.actor.synchronize(referenceState())).toBe(false)
+    await f.fire(105)
+    expect(f.pair.updateReference).toHaveBeenCalledOnce()
+    await f.fire(110)
+    expect(f.pair.updateReference).toHaveBeenLastCalledWith(
+      expect.objectContaining({ at: 110, sequence: 2, phase: 'seeking-target' }),
+    )
+    await f.actor.close()
+  })
+  it('rechecks authority after input getters and never forwards during getter-triggered abort', async () => {
+    const f = setup(undefined, undefined, referenceProgram())
+    await f.prepare()
+    const state = referenceState()
+    Object.defineProperty(state, 'phase', {
+      get() {
+        void f.controller.close()
+        return 'holding'
+      },
+    })
+    expect(f.actor.synchronize(state)).toBe(false)
+    expect(f.pair.updateReference).not.toHaveBeenCalled()
+    await f.actor.close()
+  })
+  it('bounds a malformed current state and never invokes the pair with partial identity', async () => {
+    const f = setup(undefined, undefined, referenceProgram())
+    await f.prepare()
+    const state = referenceState()
+    Object.defineProperty(state, 'plan', {
+      get() {
+        throw new Error('PRIVATE_REFERENCE_STATE')
+      },
+    })
+    expect(f.actor.synchronize(state)).toBe(false)
+    expect(f.pair.updateReference).not.toHaveBeenCalled()
+    await f.actor.close()
+    expect(f.options.onFailure).toHaveBeenCalledWith({
+      type: 'error',
+      generation: 1,
+      reason: 'asset-error',
+    })
+    expect(JSON.stringify(f.actor.getSnapshot())).not.toContain('PRIVATE_REFERENCE_STATE')
+  })
+  it('resets cue sequence for a fresh generation and ignores the retired one', async () => {
+    const f = setup(undefined, undefined, referenceProgram())
+    await f.prepare()
+    f.actor.start(1)
+    expect(f.actor.synchronize(referenceState())).toBe(true)
+    await f.fire(100)
+    const next = { ...f.pair, dispose: vi.fn(), updateReference: vi.fn(() => true) }
+    vi.mocked(prepareOwnedAvatarPair).mockResolvedValueOnce(next)
+    vi.mocked(createVideoPoseSource).mockReturnValueOnce({
+      read: async () => null,
+      dispose: async () => {},
+    })
+    await f.controller.run({ type: 'request-camera', generation: 2 })
+    expect(f.actor.synchronize(referenceState())).toBe(false)
+    expect(f.actor.synchronize(referenceState(2))).toBe(true)
+    f.actor.start(2)
+    await f.fire(100)
+    expect(next.updateReference).toHaveBeenCalledWith(
+      expect.objectContaining({ generation: 2, sequence: 1 }),
+    )
+    expect(f.pair.updateReference).toHaveBeenCalledOnce()
+    await f.actor.close()
+  })
+  it('remains inert when absent, invalid or not yet ready', async () => {
+    const f = setup()
+    expect(f.actor.synchronize(referenceState())).toBe(false)
+    await f.prepare()
+    expect(f.actor.synchronize(referenceState())).toBe(false)
+    await f.actor.close()
+    const g = setup(undefined, undefined, referenceProgram())
+    expect(g.actor.synchronize(referenceState())).toBe(false)
+    expect(() =>
+      createNativePlaybackResources({
+        ...g.options,
+        reference: { ...referenceProgram(), version: '' },
+      }),
+    ).toThrow('Invalid native playback resources')
+    expect(g.pair.updateReference).not.toHaveBeenCalled()
+    await g.actor.close()
+  })
+  it('copies reference data before awaits and forwards original state time with monotonic cue sequences', async () => {
+    const program = referenceProgram(),
+      f = setup(undefined, undefined, program)
+    ;(program as { version: string }).version = 'changed'
+    program.steps[0].clips.holding.tracks[0].values[3] = 99
+    await f.prepare()
+    const supplied = vi.mocked(prepareOwnedAvatarPair).mock.calls[0][1].reference
+    expect(supplied?.version).toBe('1')
+    expect(supplied?.steps[0].clips.holding.tracks[0].values[3]).toBe(1)
+    const state = referenceState()
+    f.actor.start(1)
+    expect(f.actor.synchronize(state)).toBe(true)
+    await f.fire(100)
+    const progressed = advanceCoaching(state, {
+      type: 'frame',
+      now: 110,
+      generation: 1,
+      sampledAt: 110,
+      sequence: 1,
+      personCount: 1,
+      stepId: 'hold',
+      classification: 'start',
+    }).state
+    const before = JSON.stringify(progressed)
+    expect(f.actor.synchronize(progressed)).toBe(true)
+    await f.fire(110)
+    expect(JSON.stringify(progressed)).toBe(before)
+    expect(vi.mocked(f.pair.updateReference).mock.calls.map(([cue]) => cue)).toEqual([
+      {
+        generation: 1,
+        sequence: 1,
+        at: 100,
+        motionId: 'synthetic',
+        version: '1',
+        stepId: 'hold',
+        status: 'running',
+        phase: 'waiting-start',
+      },
+      {
+        generation: 1,
+        sequence: 2,
+        at: 110,
+        motionId: 'synthetic',
+        version: '1',
+        stepId: 'hold',
+        status: 'running',
+        phase: 'seeking-target',
+      },
+    ])
+    expect(f.actor.synchronize({ ...state, generation: 2 })).toBe(false)
+    expect(f.pair.updateReference).toHaveBeenCalledTimes(2)
+    await f.actor.close()
+  })
+  it('rejects old cues during retirement while keeping native borrowed handles alive', async () => {
+    const f = setup(headAlignment(), handAlignment(), referenceProgram()),
+      gate = deferred<void>()
+    await f.prepare()
+    f.actor.start(1)
+    f.source.dispose.mockReturnValueOnce(gate.promise)
+    const closing = f.controller.close()
+    await drain()
+    expect(f.actor.synchronize(referenceState())).toBe(false)
+    expect(f.pair.updateReference).not.toHaveBeenCalled()
+    for (const sdk of [f.native, f.face, f.gesture]) expect(sdk.close).not.toHaveBeenCalled()
+    gate.resolve()
+    await closing
+    await f.actor.close()
+    for (const sdk of [f.native, f.face, f.gesture]) expect(sdk.close).toHaveBeenCalledOnce()
+  })
+})
 describe('native playback adapter', () => {
   it('is inert and requires explicit model/rig configuration', () => {
     const f = setup()

@@ -25,6 +25,7 @@ export default defineConfig({
     'nativerecovery.spec.ts',
     'nativehead.spec.ts',
     'nativehands.spec.ts',
+    'nativereference.spec.ts',
     'notifications.spec.ts',
     'alertdelivery.spec.ts',
     'ownedalert.spec.ts',
@@ -44,7 +45,8 @@ export default defineConfig({
     ...(process.env.BODYGUARD_TEST_NATIVE_AUTH_PROBE ||
     process.env.BODYGUARD_TEST_NATIVE_RECOVERY_PROBE ||
     process.env.BODYGUARD_TEST_NATIVE_HEAD_PROBE ||
-    process.env.BODYGUARD_TEST_NATIVE_HANDS_PROBE
+    process.env.BODYGUARD_TEST_NATIVE_HANDS_PROBE ||
+    process.env.BODYGUARD_TEST_NATIVE_REFERENCE_PROBE
       ? {
           serviceWorkers: 'block' as const,
           permissions: ['camera'],
@@ -58,7 +60,9 @@ export default defineConfig({
   },
   webServer: {
     command:
-      process.env.BODYGUARD_TEST_NATIVE_HEAD_PROBE || process.env.BODYGUARD_TEST_NATIVE_HANDS_PROBE
+      process.env.BODYGUARD_TEST_NATIVE_HEAD_PROBE ||
+      process.env.BODYGUARD_TEST_NATIVE_HANDS_PROBE ||
+      process.env.BODYGUARD_TEST_NATIVE_REFERENCE_PROBE
         ? 'pnpm build && vite build --config e2e/fixtures/nativeHead.vite.ts && vite preview --host localhost'
         : process.env.BODYGUARD_TEST_NATIVE_RECOVERY_PROBE
           ? 'pnpm build && vite build --config e2e/fixtures/nativeRecovery.vite.ts && vite preview --host localhost'

@@ -115,6 +115,62 @@ function setup() {
   }
 }
 describe('owned playback resource cohort', () => {
+  it('commands only the live ready/running cohort and never a raw retained pair', async () => {
+    const f = setup(),
+      command = vi.fn(() => true)
+    expect(f.actor.command(1, command)).toBe(false)
+    await f.prepare()
+    expect(f.actor.command(2, command)).toBe(false)
+    expect(f.actor.command(1, command)).toBe(true)
+    expect(command).toHaveBeenLastCalledWith(f.pairs[0])
+    expect(f.actor.start(1)).toBe(true)
+    expect(f.actor.command(1, command)).toBe(true)
+    await f.controller.close()
+    expect(f.actor.command(1, command)).toBe(false)
+    await f.actor.close()
+    expect(command).toHaveBeenCalledTimes(2)
+  })
+  it('blocks commands immediately while a borrowed native source prevents lifetime abort', async () => {
+    const f = setup(),
+      gate = deferred<void>(),
+      command = vi.fn(() => true)
+    await f.prepare()
+    f.actor.start(1)
+    f.sources[0].dispose.mockReturnValueOnce(gate.promise)
+    const closing = f.controller.close()
+    await drain()
+    expect(f.cameras[0].context.signal.aborted).toBe(false)
+    expect(f.actor.command(1, command)).toBe(false)
+    expect(command).not.toHaveBeenCalled()
+    gate.resolve()
+    await closing
+    await f.actor.close()
+  })
+  it('rechecks command reentry and bounds thrown command failures', async () => {
+    const f = setup()
+    await f.prepare()
+    expect(
+      f.actor.command(1, () => {
+        void f.controller.close()
+        return true
+      }),
+    ).toBe(false)
+    await f.actor.close()
+    const g = setup()
+    await g.prepare()
+    expect(
+      g.actor.command(1, () => {
+        throw new Error('PRIVATE_COMMAND')
+      }),
+    ).toBe(false)
+    await g.actor.close()
+    expect(g.options.onFailure).toHaveBeenCalledWith({
+      type: 'error',
+      generation: 1,
+      reason: 'asset-error',
+    })
+    expect(JSON.stringify(g.actor.getSnapshot())).not.toContain('PRIVATE_COMMAND')
+  })
   it('rejects the shared barrier for a tagged late partial cleanup failure', async () => {
     const f = setup(),
       abort = new AbortController(),

@@ -3,6 +3,11 @@
 import type { HeadDisplayAlignment } from '../avatar/headOrientationRig'
 import { copyHandAlignment, type HandDisplayAlignment } from '../avatar/observedHandRig'
 import { prepareOwnedAvatarPair } from '../avatar/ownedAvatarPair'
+import {
+  copyReferenceProgram,
+  type ReferenceCue,
+  type ReferenceProgram,
+} from '../avatar/referencePlayback'
 import { createBodyFaceVideoSource } from '../pose/bodyFaceVideoSource'
 import { createBodyHandVideoSource } from '../pose/bodyHandVideoSource'
 import { type CameraErrorKind, cameraErrorKind, closeCamera, openCamera } from '../pose/camera'
@@ -11,6 +16,7 @@ import { createFaceLandmarker } from '../pose/face'
 import { createGestureRecognizer } from '../pose/hands'
 import { createPoseLandmarker } from '../pose/landmarker'
 import { createVideoPoseSource } from '../pose/videoPoseSource'
+import type { CoachingState } from '../stretch/progression'
 import { createOwnedPlaybackResources } from './ownedPlaybackResources'
 import { ResourceCleanupError, type ResourceContext, type ResourceNotice } from './resources'
 
@@ -25,6 +31,7 @@ type Options = Readonly<{
   maxAgeMs: number
   head?: HeadDisplayAlignment & Readonly<{ matrixLayout: 'column-major' | 'row-major' }>
   hands?: HandDisplayAlignment
+  reference?: ReferenceProgram
   scheduler: Bridge['scheduler']
   render(pair: Pair): unknown
   onFailure(notice: Extract<ResourceNotice, { type: 'error' }>): void | Promise<void>
@@ -71,7 +78,10 @@ export function createNativePlaybackResources(options: Options) {
   // not a neutral-pose detector, anatomical angle or clinical acceptance threshold.
   let head: Options['head']
   let hands: HandDisplayAlignment | undefined
+  let reference: ReferenceProgram | undefined
   try {
+    const requestedReference = options.reference
+    if (requestedReference !== undefined) reference = copyReferenceProgram(requestedReference)
     const requestedHands = options.hands
     if (requestedHands !== undefined) hands = copyHandAlignment(requestedHands)
     const requested = options.head
@@ -113,6 +123,8 @@ export function createNativePlaybackResources(options: Options) {
   )
     throw new Error('Invalid native playback resources')
   let cameraError: CameraErrorKind | null = null
+  let pendingCue: ReferenceCue | undefined
+  let issueCommand: (generation: number, action: (pair: Pair) => boolean) => boolean = () => false
   const bridge = createOwnedPlaybackResources({
     async camera(context) {
       cameraError = null
@@ -190,13 +202,14 @@ export function createNativePlaybackResources(options: Options) {
         },
       }
     },
-    avatars: (context) =>
-      prepareOwnedAvatarPair(context, {
+    async avatars(context): Promise<Pair> {
+      const owned = await prepareOwnedAvatarPair(context, {
         load: loadAvatar,
         mirror,
         halfLifeMs,
         maxAgeMs,
         ...(hands ? { hands } : {}),
+        ...(reference ? { reference } : {}),
         ...(head
           ? {
               head: {
@@ -206,7 +219,48 @@ export function createNativePlaybackResources(options: Options) {
               },
             }
           : {}),
-      }),
+      })
+      if (!reference) return owned
+      let lastRendered: ReturnType<Pair['render']> | undefined
+      // FR-S-03/04: session clocks may follow the current RAF stamp. Apply only when
+      // the original render time reaches the cue; never restamp either input.
+      return Object.freeze({
+        get models(): Pair['models'] {
+          let models: Pair['models'] = null
+          issueCommand(context.generation, () => {
+            models = owned.models
+            return true
+          })
+          return models
+        },
+        observe: (frame) => issueCommand(context.generation, () => owned.observe(frame)),
+        updateReference: (cue) =>
+          issueCommand(context.generation, () => owned.updateReference(cue)),
+        render(now: number, deltaMs: number) {
+          // FR-U-04: retained renderer handles cannot revive a retired cohort.
+          let result: ReturnType<Pair['render']> = Object.freeze({
+            status: 'untracked',
+            tracked: 0,
+            total: lastRendered?.total ?? 8,
+          })
+          issueCommand(context.generation, () => {
+            const cue = pendingCue
+            if (cue && cue.generation === context.generation && cue.at <= now) {
+              pendingCue = undefined
+              owned.updateReference(cue)
+            }
+            result = owned.render(now, deltaMs)
+            lastRendered = result
+            return true
+          })
+          return result
+        },
+        dispose() {
+          if (pendingCue?.generation === context.generation) pendingCue = undefined
+          owned.dispose()
+        },
+      })
+    },
     source: (context, camera, inference) =>
       hands
         ? createBodyHandVideoSource(context, {
@@ -235,10 +289,62 @@ export function createNativePlaybackResources(options: Options) {
     render,
     onFailure,
   })
+  issueCommand = bridge.command
+  // FR-S-03/04·FR-U-04: called with the current immutable state from this owner's session.
+  // Snapshot before the final authority check; no animation observation/progress synthesis.
+  let referenceGeneration = 0,
+    sequence = 0,
+    lastCueAt = -Infinity
+  function synchronize(state: CoachingState): boolean {
+    if (!reference) return false
+    let generation: number, cue: Omit<ReferenceCue, 'sequence'>
+    try {
+      generation = state.generation
+    } catch {
+      return false
+    }
+    try {
+      cue = {
+        generation,
+        at: state.lastNow,
+        motionId: state.plan.motionId,
+        version: state.plan.version,
+        stepId: state.plan.steps[state.stepIndex]?.id ?? '',
+        phase: state.phase,
+        status: state.status,
+      }
+    } catch {
+      return bridge.command(generation, () => {
+        throw new Error('Invalid native reference state')
+      })
+    }
+    return bridge.command(generation, () => {
+      if (referenceGeneration !== generation) {
+        referenceGeneration = generation
+        sequence = 0
+        lastCueAt = -Infinity
+      }
+      if (
+        !Number.isFinite(cue.at) ||
+        cue.at < 0 ||
+        cue.at > Number.MAX_SAFE_INTEGER ||
+        sequence >= Number.MAX_SAFE_INTEGER
+      )
+        throw new Error('Invalid native reference state')
+      if (cue.at < lastCueAt) return false
+      lastCueAt = cue.at
+      pendingCue = Object.freeze({ ...cue, sequence: ++sequence })
+      return true
+    })
+  }
   return Object.freeze({
     ports: bridge.ports,
     start: bridge.start,
-    close: bridge.close,
+    synchronize,
+    close: () => {
+      pendingCue = undefined
+      return bridge.close()
+    },
     getSnapshot: () => Object.freeze({ ...bridge.getSnapshot(), cameraError }),
   })
 }

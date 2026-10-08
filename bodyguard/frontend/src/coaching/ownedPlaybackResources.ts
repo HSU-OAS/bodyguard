@@ -360,6 +360,27 @@ export function createOwnedPlaybackResources<
       return false
     }
   }
+
+  // FR-S-03/04·FR-U-04: use controller authority, not the delayed borrowed-frame lifetime.
+  function command(generation: number, action: (avatars: A) => boolean): boolean {
+    const cohort = current
+    if (
+      !cohort ||
+      !live(cohort) ||
+      cohort.context.generation !== generation ||
+      (cohort.status !== 'ready' && cohort.status !== 'running') ||
+      !cohort.avatars ||
+      typeof action !== 'function'
+    )
+      return false
+    try {
+      const accepted = action(cohort.avatars)
+      return accepted === true && live(cohort)
+    } catch {
+      if (live(cohort)) report(cohort, 'asset-error')
+      return false
+    }
+  }
   async function close() {
     closed = true
     if (current) {
@@ -375,6 +396,7 @@ export function createOwnedPlaybackResources<
   return Object.freeze({
     ports,
     start,
+    command,
     close,
     getSnapshot: () =>
       Object.freeze({

@@ -6,16 +6,21 @@ import type { mountNativeHeadAuthProbe } from './fixtures/nativeHeadAuthProbe'
 
 const origin = 'http://localhost:4173'
 const mailbox = process.env.BODYGUARD_TEST_MAILBOX
-const withHands = Boolean(process.env.BODYGUARD_TEST_NATIVE_HANDS_PROBE)
+const withReference = Boolean(process.env.BODYGUARD_TEST_NATIVE_REFERENCE_PROBE)
+const withHands = withReference || Boolean(process.env.BODYGUARD_TEST_NATIVE_HANDS_PROBE)
 const bundle =
-  process.env.BODYGUARD_TEST_NATIVE_HANDS_PROBE ?? process.env.BODYGUARD_TEST_NATIVE_HEAD_PROBE
+  process.env.BODYGUARD_TEST_NATIVE_REFERENCE_PROBE ??
+  process.env.BODYGUARD_TEST_NATIVE_HANDS_PROBE ??
+  process.env.BODYGUARD_TEST_NATIVE_HEAD_PROBE
 if (
   !mailbox?.startsWith('/private/tmp/bodyguard-browser-') ||
   !bundle ||
   !(
-    withHands
-      ? /^\/private\/tmp\/bodyguard-native-hands-proof\.[A-Za-z0-9]+\/probe$/
-      : /^\/private\/tmp\/bodyguard-native-body-head-proof\.[A-Za-z0-9]+\/probe$/
+    withReference
+      ? /^\/private\/tmp\/bodyguard-native-reference-proof\.[A-Za-z0-9]+\/probe-[a-z0-9-]+$/
+      : withHands
+        ? /^\/private\/tmp\/bodyguard-native-hands-proof\.[A-Za-z0-9]+\/probe$/
+        : /^\/private\/tmp\/bodyguard-native-body-head-proof\.[A-Za-z0-9]+\/probe$/
   ).test(bundle)
 )
   throw new Error('Owned native auth harness required')
@@ -59,6 +64,13 @@ test.beforeEach(async ({ context, page }) => {
       }),
     )
   }
+  if (withReference)
+    await page.route('**/__private-native-reference-fixture.json', (route) =>
+      route.fulfill({
+        contentType: 'application/json',
+        body: readFileSync(`${bundle}/../authored-fixture.json`),
+      }),
+    )
   await page.route('**/start', async (route) => {
     const response = await route.fetch()
     await route.fulfill({
@@ -170,7 +182,7 @@ async function mount(page: Page, gender: 'male' | 'female') {
   await page.goto('/start')
   await expect(page.getByRole('heading', { name: '내 몸을 위한 시작', exact: true })).toBeVisible()
   await page.evaluate(
-    async ({ gender, withHands }) => {
+    async ({ gender, withHands, withReference }) => {
       const path = '/__private-native-head-probe.js'
       const module = (await import(path)) as {
         mountNativeHeadAuthProbe: typeof mountNativeHeadAuthProbe
@@ -191,9 +203,10 @@ async function mount(page: Page, gender: 'male' | 'female') {
               sceneFromCamera: [0, 0, 0, 1],
             }
           : undefined,
+        withReference,
       )
     },
-    { gender, withHands },
+    { gender, withHands, withReference },
   )
   await expect
     .poll(() => state(page))
@@ -233,6 +246,10 @@ async function revokedWhileHeld(page: Page) {
   const value = await mark(page, 'authority-revoked-while-native-held')
   expect(value.owned).toBe(false)
   expect(value.cameraLive && value.held).toBe(true)
+  if (withReference)
+    expect(
+      await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.oldCommand()),
+    ).toBe(false)
   const renders = value.renderFrames,
     calls = value.nativeCalls
   await page.evaluate(
@@ -271,6 +288,77 @@ async function release(page: Page) {
   expect(posts).toBe(0)
 }
 for (const gender of ['male', 'female'] as const) {
+  if (withReference)
+    test(`${gender} actual owned phase→pause→fresh generation reference`, async ({
+      page,
+      context,
+    }, info) => {
+      await join(context)
+      await mount(page, gender)
+      await running(page)
+      const pulse = async (ms: number) => {
+        const end = Date.now() + ms
+        while (Date.now() < end) {
+          await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.tick())
+          await page.waitForTimeout(80)
+        }
+      }
+      await page.evaluate(() =>
+        (window as unknown as PrivateWindow).nativeAuthProbe.observe('start'),
+      )
+      await pulse(1300)
+      const seeking = await mark(page, 'owned-seeking-target-guide')
+      expect(seeking).toMatchObject({
+        phase: 'seeking-target',
+        verifiedMs: 0,
+        referenceMoved: true,
+        userUnchanged: true,
+      })
+      expect(seeking.referenceTargetError).not.toBeNull()
+      expect(seeking.referenceTargetError as number).toBeLessThan(2e-6)
+      await page
+        .locator('#native-avatar')
+        .screenshot({ path: info.outputPath(`reference-${gender}-seeking.png`) })
+      await page.evaluate(() =>
+        (window as unknown as PrivateWindow).nativeAuthProbe.observe('target'),
+      )
+      await pulse(1300)
+      const holding = await mark(page, 'owned-holding-guide-with-no-synthesized-progress')
+      expect(holding).toMatchObject({ phase: 'holding', verifiedMs: 0, userUnchanged: true })
+      expect(holding.referenceTargetError as number).toBeLessThan(2e-6)
+      await page.waitForTimeout(700)
+      await page.evaluate(() =>
+        (window as unknown as PrivateWindow).nativeAuthProbe.markReference(),
+      )
+      await page.waitForTimeout(300)
+      await expect.poll(() => state(page)).toMatchObject({ referenceFrozen: true, verifiedMs: 0 })
+      await mark(page, 'cue-expired-guide-frozen')
+      await page.evaluate(() =>
+        (window as unknown as PrivateWindow).nativeAuthProbe.observe('target'),
+      )
+      expect(await state(page)).toMatchObject({ phase: 'waiting-return', verifiedMs: 2000 })
+      await pulse(1300)
+      const returned = await mark(page, 'owned-return-guide')
+      expect(returned.referenceTargetError as number).toBeLessThan(2e-6)
+      await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.pause())
+      expect(await state(page)).toMatchObject({
+        session: 'paused',
+        models: 0,
+        tracksEnded: true,
+        verifiedMs: 2000,
+      })
+      await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.resume())
+      await expect
+        .poll(() => state(page))
+        .toMatchObject({ session: 'running', sessionGeneration: 2, cameras: 2 })
+      await pulse(300)
+      expect(await state(page)).toMatchObject({
+        phase: 'waiting-start',
+        verifiedMs: 2000,
+        userUnchanged: true,
+      })
+      await mark(page, 'fresh-generation-no-old-clip-resume')
+    })
   test(`${gender} native start→stop→own interrupted record`, async ({ page, context }, info) => {
     await join(context)
     await mount(page, gender)
