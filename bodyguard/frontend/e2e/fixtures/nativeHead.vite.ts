@@ -13,7 +13,7 @@ if (
   !outDir ||
   !(
     withFeedback
-      ? /^\/private\/tmp\/bodyguard-native-feedback-proof\.[A-Za-z0-9]+\/probe-[a-z0-9-]+$/
+      ? /^\/private\/tmp\/bodyguard-native-(?:feedback|neck)-proof\.[A-Za-z0-9]+\/probe-[a-z0-9-]+$/
       : withReference
         ? /^\/private\/tmp\/bodyguard-native-reference-proof\.[A-Za-z0-9]+\/probe-[a-z0-9-]+$/
         : withHands
