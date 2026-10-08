@@ -13,6 +13,7 @@ import {
   type HandDisplayAlignment,
   type HandObservation,
 } from './observedHandRig'
+import { OBSERVED_TRUNK_BINDING, observedTrunkDirection } from './observedTrunk'
 
 export type PoseRigFrame = Readonly<{
   generation: number
@@ -47,7 +48,7 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
     (options.head && options.head.bone !== 'head') ||
     options.bindings.some(
       ({ bone, anchor }) =>
-        !OBSERVED_LIMB_BINDINGS.some(
+        ![...OBSERVED_LIMB_BINDINGS, OBSERVED_TRUNK_BINDING].some(
           (binding) => binding.bone === bone && binding.anchor === anchor,
         ),
     )
@@ -131,7 +132,14 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
         Array.isArray(worlds[0]) &&
         images[0].length === JOINT_COUNT &&
         worlds[0].length === JOINT_COUNT
-      const directions = single ? observedLimbDirections(images[0], worlds[0], mirror) : {}
+      const directions = single
+        ? {
+            ...observedLimbDirections(images[0], worlds[0], mirror),
+            ...(permitted.has(OBSERVED_TRUNK_BINDING.bone)
+              ? observedTrunkDirection(images[0], worlds[0], mirror)
+              : {}),
+          }
+        : {}
       const selected: Record<string, readonly number[]> = {}
       for (const [name, value] of Object.entries(directions)) {
         const length = Math.hypot(...value)

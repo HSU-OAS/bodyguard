@@ -1,0 +1,166 @@
+{
+  "head": "864dcf2f3cefd75f479cd3b34d1ab9ee92af934b",
+  "sourceBefore": {
+    "src/avatar/observedTrunk.ts": "6bd375da89d52fd93d4d164a6e9a656e15c740a0dc9c4c9597b742e02b42cc60",
+    "src/avatar/observedTrunk.test.ts": "30dbde98ed6e6003b46b7ed6f46469a70c36f9ba08b567a98da5a283dce42bf1",
+    "src/avatar/observedPoseRig.ts": "198708100002203f22645b82611e8c4ea6ab3fd13289d0b480c270612c83cc2f",
+    "src/avatar/ownedAvatarPair.ts": "b6df1fdb10d3b06595a272429342e56e1f4fefd219c9ebcc30dfcd72d3859db9",
+    "src/avatar/ownedAvatarPair.test.ts": "5f82c2cc23ede04f688ea1fa6f805e5d0f8ef7844ceb50df456318aa6038a699",
+    "src/coaching/nativePlaybackResources.ts": "799eab24e27b63a5a5105b6dbeb4434a60bc0d5e250adcf4c26c7841b5531bfa",
+    "src/coaching/nativePlaybackResources.test.ts": "0e29ca34f8316a842f368783313bf58b1a6db900e7a9972dd433cbef0a7b0075",
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "e2e/fixtures/observedTrunkProbe.ts": "a40d309be8e6f5cc69c4a57e71b144bf3c616c5b572725d1b8ecd501817c6ed8",
+    "e2e/fixtures/observedTrunk.vite.ts": "9b478905fd8aebf5fa1c3605a9b0f3cd3d354b37ce06ab91c98047176f3cd077",
+    "scripts/test-observed-trunk-browser.mjs": "5226c544c4df6ee8427154793c51c801b80df66d05efe148c0c453f3705f4530",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "assetCommit": "25a9bd6c7392890e3b5d5d6ae1046bb7087d56ad",
+  "assetHashes": {
+    "male": "cc85bcd449f3f31347e4f7174986d41e4aca3067990f5d8a2e6ba3a099171927",
+    "female": "27c10902aa377e995bdbc115ab773cf22f8ea38582c49820304a33ad7685f25a"
+  },
+  "actualChrome": true,
+  "actualWebGL": true,
+  "syntheticObservations": true,
+  "actualSDK": false,
+  "actualCamera": false,
+  "finalAvatar": false,
+  "samples": [
+    {
+      "gender": "male",
+      "passed": false,
+      "stages": [
+        {
+          "state": {
+            "status": "tracking",
+            "tracked": 9,
+            "total": 9
+          },
+          "mode": "side",
+          "sequence": 67,
+          "closed": false,
+          "sourceUnchanged": true,
+          "referenceUnchanged": true,
+          "positionsScalesPreserved": true,
+          "authoredAnatomyPreserved": true,
+          "trunkChanged": true,
+          "trunkFrozen": false,
+          "poseFrozen": false,
+          "maxDirectionError": 9.305772182939053e-8,
+          "fullBodyInside": true,
+          "calls": 10,
+          "triangles": 576508
+        },
+        {
+          "state": {
+            "status": "tracking",
+            "tracked": 9,
+            "total": 9
+          },
+          "mode": "forward",
+          "sequence": 162,
+          "closed": false,
+          "sourceUnchanged": true,
+          "referenceUnchanged": true,
+          "positionsScalesPreserved": true,
+          "authoredAnatomyPreserved": true,
+          "trunkChanged": true,
+          "trunkFrozen": false,
+          "poseFrozen": false,
+          "maxDirectionError": 0.000003059749446843875,
+          "fullBodyInside": true,
+          "calls": 10,
+          "triangles": 576508
+        },
+        {
+          "state": {
+            "status": "partial",
+            "tracked": 7,
+            "total": 9
+          },
+          "mode": "hidden",
+          "sequence": 245,
+          "closed": false,
+          "sourceUnchanged": true,
+          "referenceUnchanged": true,
+          "positionsScalesPreserved": true,
+          "authoredAnatomyPreserved": true,
+          "trunkChanged": true,
+          "trunkFrozen": true,
+          "poseFrozen": false,
+          "maxDirectionError": 0.3502235910639843,
+          "fullBodyInside": true,
+          "calls": 10,
+          "triangles": 576508
+        },
+        {
+          "state": {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 9
+          },
+          "mode": "multiple",
+          "sequence": 311,
+          "closed": false,
+          "sourceUnchanged": true,
+          "referenceUnchanged": true,
+          "positionsScalesPreserved": true,
+          "authoredAnatomyPreserved": true,
+          "trunkChanged": true,
+          "trunkFrozen": true,
+          "poseFrozen": true,
+          "maxDirectionError": 0.3502235910639843,
+          "fullBodyInside": true,
+          "calls": 10,
+          "triangles": 576508
+        },
+        {
+          "state": {
+            "status": "tracking",
+            "tracked": 9,
+            "total": 9
+          },
+          "mode": "recover",
+          "sequence": 374,
+          "closed": false,
+          "sourceUnchanged": true,
+          "referenceUnchanged": true,
+          "positionsScalesPreserved": true,
+          "authoredAnatomyPreserved": true,
+          "trunkChanged": true,
+          "trunkFrozen": false,
+          "poseFrozen": false,
+          "maxDirectionError": 0.000004473253140843072,
+          "fullBodyInside": true,
+          "calls": 10,
+          "triangles": 576508
+        }
+      ],
+      "sidePreviewSha": "1f2a1551721e758d2d7c74bb4f5778985624e7dfe618c758a95dc6289643e9d9",
+      "forwardPreviewSha": "0c9a30d7ffb57786bdedde0d9997c9fe924798f0e894063045a689b4abf7167e"
+    }
+  ],
+  "browser": "154.0.8037.98",
+  "failure": {
+    "name": "AssertionError",
+    "message": "The expression evaluated to a falsy value:\n\n  assert(state.poseFrozen)\n"
+  },
+  "external": 0,
+  "errors": [],
+  "sourceAfter": {
+    "src/avatar/observedTrunk.ts": "6bd375da89d52fd93d4d164a6e9a656e15c740a0dc9c4c9597b742e02b42cc60",
+    "src/avatar/observedTrunk.test.ts": "30dbde98ed6e6003b46b7ed6f46469a70c36f9ba08b567a98da5a283dce42bf1",
+    "src/avatar/observedPoseRig.ts": "198708100002203f22645b82611e8c4ea6ab3fd13289d0b480c270612c83cc2f",
+    "src/avatar/ownedAvatarPair.ts": "b6df1fdb10d3b06595a272429342e56e1f4fefd219c9ebcc30dfcd72d3859db9",
+    "src/avatar/ownedAvatarPair.test.ts": "5f82c2cc23ede04f688ea1fa6f805e5d0f8ef7844ceb50df456318aa6038a699",
+    "src/coaching/nativePlaybackResources.ts": "799eab24e27b63a5a5105b6dbeb4434a60bc0d5e250adcf4c26c7841b5531bfa",
+    "src/coaching/nativePlaybackResources.test.ts": "0e29ca34f8316a842f368783313bf58b1a6db900e7a9972dd433cbef0a7b0075",
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "e2e/fixtures/observedTrunkProbe.ts": "a40d309be8e6f5cc69c4a57e71b144bf3c616c5b572725d1b8ecd501817c6ed8",
+    "e2e/fixtures/observedTrunk.vite.ts": "9b478905fd8aebf5fa1c3605a9b0f3cd3d354b37ce06ab91c98047176f3cd077",
+    "scripts/test-observed-trunk-browser.mjs": "5226c544c4df6ee8427154793c51c801b80df66d05efe148c0c453f3705f4530",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  }
+}

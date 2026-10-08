@@ -210,6 +210,95 @@ const handAlignment = () => ({
   cameraReferences: { left: [0, 0, 0, 1], right: [0, 0, 0, 1] },
   sceneFromCamera: [0, 0, 0, 1],
 })
+// FR-A-01/03: synthetic bound skeleton, not a measured anatomical model.
+function withTrunk() {
+  const f = fixture(),
+    root = new Bone(),
+    spine = new Bone(),
+    neck = new Bone()
+  root.name = 'root'
+  spine.name = 'spine05'
+  spine.position.y = 0.1
+  neck.name = 'neck01'
+  neck.position.y = 0.5
+  for (const bone of f.mesh.skeleton.bones)
+    if (bone.parent === f.mesh) (bone.name.startsWith('upperarm') ? spine : root).add(bone)
+  f.mesh.add(root)
+  root.add(spine)
+  spine.add(neck)
+  f.mesh.skeleton.bones.push(root, spine, neck)
+  f.scene.updateWorldMatrix(true, true)
+  f.mesh.skeleton.calculateInverses()
+  return f
+}
+function trunkFrame() {
+  const image = Array.from({ length: 33 }, () => ({ x: 0.5, y: 0.5, z: 0, visibility: 1 })),
+    world = Array.from({ length: 33 }, () => ({ x: 0, y: 0, z: 0 }))
+  for (const index of [11, 12]) world[index] = { x: 0.2, y: -0.5, z: -0.1 }
+  for (const index of [13, 14]) world[index] = { x: 0.2, y: -0.2, z: -0.1 }
+  for (const index of [15, 16]) world[index] = { x: 0.2, y: 0.1, z: -0.1 }
+  for (const index of [25, 26]) world[index] = { x: 0, y: 0.3, z: 0 }
+  for (const index of [27, 28]) world[index] = { x: 0, y: 0.6, z: 0 }
+  return {
+    generation: 1,
+    sequence: 1,
+    at: 100,
+    result: { landmarks: [image], worldLandmarks: [world] },
+  }
+}
+describe('owned optional trunk display', () => {
+  it('copies before delayed load and moves only user while missing hip revokes trunk', async () => {
+    const f = withTrunk(),
+      c = context(),
+      d = deferred<Group>(),
+      supplied = { ...options(f.scene, () => d.promise), trunk: true }
+    const pending = prepareOwnedAvatarPair(c.context, supplied)
+    supplied.trunk = false
+    d.resolve(f.scene)
+    const lease = await pending,
+      models = lease.models
+    if (!models) throw new Error('Fixture models unavailable')
+    const source = requireFixtureNode(f.scene, 'spine05').quaternion.toArray(),
+      reference = requireFixtureNode(models[0], 'spine05').quaternion.toArray(),
+      frame = trunkFrame()
+    expect(lease.observe(frame)).toBe(true)
+    expect(lease.render(100, 0).tracked).toBe(9)
+    const user = requireFixtureNode(models[1], 'spine05').quaternion.toArray()
+    expect(user).not.toEqual(source)
+    frame.result.landmarks[0][23].visibility = 0
+    expect(lease.observe({ ...frame, sequence: 2, at: 110 })).toBe(true)
+    // Hidden left hip revokes both the trunk and the left thigh; seven remain.
+    expect(lease.render(110, 10).tracked).toBe(7)
+    expect(requireFixtureNode(models[1], 'spine05').quaternion.toArray()).toEqual(user)
+    expect(requireFixtureNode(models[0], 'spine05').quaternion.toArray()).toEqual(reference)
+    expect(requireFixtureNode(f.scene, 'spine05').quaternion.toArray()).toEqual(source)
+    c.abort.abort()
+    expect(lease.render(120, 10).status).toBe('closed')
+    lease.dispose()
+    expect(f.count).toEqual({ geometry: 1, material: 1, skeleton: 1 })
+  })
+  it('rejects absent bound trunk bones and closes the fresh source', async () => {
+    const f = fixture()
+    await expect(
+      prepareOwnedAvatarPair(context().context, { ...options(f.scene), trunk: true }),
+    ).rejects.toThrow('Avatar asset unavailable')
+    expect(f.count).toEqual({ geometry: 1, material: 1, skeleton: 1 })
+  })
+  it.each([null, 'true', 1])('rejects trunk=%s before loading', async (trunk) => {
+    const f = fixture()
+    let loads = 0
+    await expect(
+      prepareOwnedAvatarPair(context().context, {
+        ...options(f.scene, async () => {
+          loads++
+          return f.scene
+        }),
+        trunk: trunk as never,
+      }),
+    ).rejects.toThrow('Avatar asset unavailable')
+    expect(loads).toBe(0)
+  })
+})
 
 describe('owned GLB avatar preparation', () => {
   it('copies optional hand alignment before a delayed source and disposes both owned hand rigs', async () => {

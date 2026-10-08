@@ -6,6 +6,7 @@ import { cloneEightWeightPair } from './eightWeightSkin'
 import type { HeadDisplayAlignment } from './headOrientationRig'
 import { copyHandAlignment, HAND_RIG_BINDINGS, type HandDisplayAlignment } from './observedHandRig'
 import { createObservedPoseRig, type PoseRigFrame } from './observedPoseRig'
+import { OBSERVED_TRUNK_BINDING } from './observedTrunk'
 import {
   copyReferenceProgram,
   createReferencePlayback,
@@ -24,6 +25,7 @@ type Options = Readonly<{
   mirror: boolean
   halfLifeMs: number
   maxAgeMs: number
+  trunk?: boolean
   head?: HeadDisplayAlignment
   hands?: HandDisplayAlignment
   reference?: ReferenceProgram
@@ -105,7 +107,11 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
   let hands: HandDisplayAlignment | undefined
   let referenceProgram: ReferenceProgram | undefined
   let feedbackProgram: FeedbackProgram | undefined
+  let trunk = false
   try {
+    const requestedTrunk = options.trunk
+    if (requestedTrunk !== undefined && typeof requestedTrunk !== 'boolean') throw unavailable()
+    trunk = requestedTrunk === true
     const supplied = options.head
     if (supplied)
       head = Object.freeze({
@@ -210,6 +216,10 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
           !boundBones.has(source.getObjectByName(anchor) as Object3D),
       ) ||
       (head && !boundBones.has(source.getObjectByName(head.bone) as Object3D)) ||
+      (trunk &&
+        [OBSERVED_TRUNK_BINDING.bone, OBSERVED_TRUNK_BINDING.anchor].some(
+          (name) => !boundBones.has(source.getObjectByName(name) as Object3D),
+        )) ||
       (hands &&
         [...HAND_RIG_BINDINGS.map((b) => b.bone), 'wristL', 'wristR'].some(
           (name) => !boundBones.has(source.getObjectByName(name) as Object3D),
@@ -230,7 +240,13 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
         context: owner,
         program: referenceProgram,
       })
-    user = createObservedPoseRig(pair.copies[1], { ...rig, mirror, head, hands })
+    user = createObservedPoseRig(pair.copies[1], {
+      ...rig,
+      mirror,
+      head,
+      hands,
+      bindings: trunk ? [...OBSERVED_LIMB_BINDINGS, OBSERVED_TRUNK_BINDING] : rig.bindings,
+    })
     if (feedbackProgram)
       feedback = createSurfaceFeedback(pair.copies[1], {
         context: owner,
