@@ -190,11 +190,11 @@ async function mark(page: Page, name: string) {
   stages.push({ name, snapshot })
   return snapshot
 }
-async function mount(page: Page, gender: 'male' | 'female') {
+async function mount(page: Page, gender: 'male' | 'female', withAdaptive = false) {
   await page.goto('/start')
   await expect(page.getByRole('heading', { name: '내 몸을 위한 시작', exact: true })).toBeVisible()
   await page.evaluate(
-    async ({ gender, withHands, withReference, withFeedback }) => {
+    async ({ gender, withHands, withReference, withFeedback, withAdaptive }) => {
       const path = '/__private-native-head-probe.js'
       const module = (await import(path)) as {
         mountNativeHeadAuthProbe: typeof mountNativeHeadAuthProbe
@@ -217,9 +217,10 @@ async function mount(page: Page, gender: 'male' | 'female') {
           : undefined,
         withReference,
         withFeedback,
+        withAdaptive,
       )
     },
-    { gender, withHands, withReference, withFeedback },
+    { gender, withHands, withReference, withFeedback, withAdaptive },
   )
   await expect
     .poll(() => state(page))
@@ -301,6 +302,61 @@ async function release(page: Page) {
   expect(posts).toBe(0)
 }
 for (const gender of ['male', 'female'] as const) {
+  if (withFeedback)
+    test(`${gender} native current error code→authored correction→different cause→occlusion`, async ({
+      page,
+      context,
+    }, info) => {
+      await join(context)
+      await mount(page, gender, true)
+      await running(page)
+      await page.evaluate(() =>
+        (window as unknown as PrivateWindow).nativeAuthProbe.setFeedbackMode('error'),
+      )
+      await expect
+        .poll(() => state(page))
+        .toMatchObject({
+          adaptiveConfigured: true,
+          highlighted: true,
+          phase: 'seeking-target',
+          verifiedMs: 0,
+        })
+      // Wait for many actual deliveries so the unchanged neutral pose cannot falsely pass
+      // before an incorrectly selected ordinary phase clip has had time to move.
+      const before = (await state(page)).feedbackEvaluations
+      await expect
+        .poll(async () => (await state(page)).feedbackEvaluations)
+        .toBeGreaterThan(before + 20)
+      await expect.poll(async () => (await state(page)).referenceTargetError).toBeLessThan(2e-6)
+      await mark(page, 'synthetic-raised-code-authored-neutral-guide')
+      await page
+        .locator('#native-avatar')
+        .screenshot({ path: info.outputPath(`adaptive-${gender}-raised.png`) })
+      await page.evaluate(() =>
+        (window as unknown as PrivateWindow).nativeAuthProbe.setFeedbackCode('direction'),
+      )
+      await expect.poll(async () => (await state(page)).referenceTargetError).toBeLessThan(2e-6)
+      expect(await state(page)).toMatchObject({
+        expectedCorrectionId: 'fixture-align',
+        verifiedMs: 0,
+        highlighted: true,
+        referenceMoved: true,
+      })
+      await mark(page, 'synthetic-other-code-authored-different-guide')
+      await page
+        .locator('#native-avatar')
+        .screenshot({ path: info.outputPath(`adaptive-${gender}-direction.png`) })
+      await page.evaluate(() =>
+        (window as unknown as PrivateWindow).nativeAuthProbe.setFeedbackMode('crop'),
+      )
+      await expect
+        .poll(() => state(page))
+        .toMatchObject({ highlighted: false, verifiedMs: 0, expectedCorrectionId: null })
+      await mark(page, 'synthetic-occluded-current-error-cleared-not-success')
+      await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.pause())
+      expect(await state(page)).toMatchObject({ models: 0, tracksEnded: true, verifiedMs: 0 })
+      await mark(page, 'current-guide-pause-resources-closed')
+    })
   if (withFeedback)
     test(`${gender} native delivery→current session→surface feedback→crop/multiple/none→recovery`, async ({
       page,
