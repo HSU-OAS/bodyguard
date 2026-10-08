@@ -86,10 +86,7 @@ export async function mountHandsProbe(
       .normalize()
       .toArray()
   }
-  const references = Object.fromEntries(restHands.map((h) => [h.side, palm(h.points)])) as Record<
-    'left' | 'right',
-    number[]
-  >
+  const references = { left: palm(restHands[0].points), right: palm(restHands[1].points) }
   const abort = new AbortController()
   const lease = await prepareOwnedAvatarPair(
     { generation: 1, signal: abort.signal },
@@ -102,8 +99,9 @@ export async function mountHandsProbe(
       head: { bone: 'head', cameraReference: [0, 0, 0, 1], sceneFromCamera: [0, 0, 0, 1] },
     },
   )
-  const models = lease.models
-  if (!models) throw new Error('Private owned hand models unavailable')
+  const loadedModels = lease.models
+  if (!loadedModels) throw new Error('Private owned hand models unavailable')
+  const models = [loadedModels[0], loadedModels[1]] as const
   const [reference, user] = models,
     referenceRest = turns(reference),
     userShape = shape(user)
