@@ -40,6 +40,7 @@ type Options = Readonly<{
   mirror: boolean
   halfLifeMs: number
   maxAgeMs: number
+  trunk?: boolean
   head?: HeadDisplayAlignment & Readonly<{ matrixLayout: 'column-major' | 'row-major' }>
   hands?: HandDisplayAlignment
   reference?: ReferenceProgram
@@ -96,7 +97,11 @@ export function createNativePlaybackResources(options: Options) {
   let reference: ReferenceProgram | undefined
   let feedback: FeedbackProgram | undefined
   let evaluateFeedback: NonNullable<Options['feedback']>['evaluate'] | undefined
+  let trunk = false
   try {
+    const requestedTrunk = options.trunk
+    if (requestedTrunk !== undefined && typeof requestedTrunk !== 'boolean') throw new Error()
+    trunk = requestedTrunk === true
     const requestedFeedback = options.feedback
     if (requestedFeedback !== undefined) {
       feedback = copyFeedbackProgram(requestedFeedback.program)
@@ -252,6 +257,7 @@ export function createNativePlaybackResources(options: Options) {
         mirror,
         halfLifeMs,
         maxAgeMs,
+        ...(trunk ? { trunk: true } : {}),
         ...(hands ? { hands } : {}),
         ...(reference ? { reference } : {}),
         ...(feedback ? { feedback } : {}),
@@ -438,7 +444,7 @@ export function createNativePlaybackResources(options: Options) {
           let result: ReturnType<Pair['render']> = Object.freeze({
             status: 'untracked',
             tracked: 0,
-            total: lastRendered?.total ?? 8,
+            total: lastRendered?.total ?? (trunk ? 9 : 8),
           })
           issueCommand(context.generation, () => {
             const cue = pendingCue

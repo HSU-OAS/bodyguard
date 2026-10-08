@@ -55,6 +55,7 @@ function setup(
   hands?: ReturnType<typeof handAlignment>,
   reference?: ReferenceProgram,
   feedback?: Parameters<typeof createNativePlaybackResources>[0]['feedback'],
+  trunk?: boolean,
 ) {
   const stream = { getTracks: () => [] } as unknown as MediaStream
   const native = {
@@ -103,6 +104,7 @@ function setup(
     mirror: true,
     halfLifeMs: 50,
     maxAgeMs: 250,
+    ...(trunk === undefined ? {} : { trunk }),
     loadAvatar: vi.fn(),
     render: vi.fn(),
     onFailure: vi.fn(),
@@ -149,6 +151,32 @@ function setup(
   }
 }
 beforeEach(() => vi.resetAllMocks())
+// FR-A-01/03: explicit aggregate display option, copied before async resources.
+describe('native optional trunk display', () => {
+  it.each([true, false, undefined])(
+    'passes only explicit trunk=%s to the owned pair',
+    async (trunk) => {
+      const f = setup(undefined, undefined, undefined, undefined, trunk)
+      f.options.trunk = trunk !== true
+      await f.prepare()
+      const requested = vi.mocked(prepareOwnedAvatarPair).mock.calls[0]?.[1]
+      if (trunk === true) expect(requested?.trunk).toBe(true)
+      else expect(requested).not.toHaveProperty('trunk')
+      await f.actor.close()
+      await f.controller.close()
+    },
+  )
+  it.each([null, 'true', 1])('rejects malformed trunk=%s before resource access', async (trunk) => {
+    const f = setup()
+    expect(() => createNativePlaybackResources({ ...f.options, trunk: trunk as never })).toThrow(
+      'Invalid native playback resources',
+    )
+    expect(openCamera).not.toHaveBeenCalled()
+    expect(prepareOwnedAvatarPair).not.toHaveBeenCalled()
+    await f.actor.close()
+    await f.controller.close()
+  })
+})
 // FR-S-03/04: error codes distinguish causes at the same region; this is synthetic.
 function correctiveProgram(): ReferenceProgram {
   const p = referenceProgram()
