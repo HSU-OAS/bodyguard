@@ -1,3 +1,4 @@
+import type { CapturedImage } from './capturedImage'
 import { isInFrame, JOINT_COUNT, type Point } from './landmarks'
 
 // FR-M-01/02/07: projected geometry only; no anatomical/clinical verdict or defaults.
@@ -36,6 +37,34 @@ const unavailable: NeckSideObservation = Object.freeze({ status: 'unavailable' }
 const clock = (value: number) =>
   Number.isFinite(value) && value >= 0 && value <= Number.MAX_SAFE_INTEGER
 const dimension = (value: number) => Number.isSafeInteger(value) && value > 0
+
+// FR-M-02/07: same-frame projection adapter. No inference, camera, fallback or verdict.
+export function observeCapturedNeckSide(
+  input: Readonly<{
+    frame: NeckObservationInput['frame'] & Readonly<{ image?: CapturedImage }>
+    now: number
+    minimumConfidence: number
+    maxAgeMs: number
+  }>,
+): NeckSideObservation {
+  try {
+    const { frame, now, minimumConfidence, maxAgeMs } = input
+    const image = frame.image
+    if (image === undefined) return unavailable
+    const { width, height, imageIsMirrored } = image
+    return observeNeckSide({
+      frame,
+      now,
+      minimumConfidence,
+      maxAgeMs,
+      width,
+      height,
+      imageIsMirrored,
+    })
+  } catch {
+    return unavailable
+  }
+}
 
 export function observeNeckSide(input: NeckObservationInput): NeckSideObservation {
   try {

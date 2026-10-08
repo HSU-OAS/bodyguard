@@ -1,0 +1,2183 @@
+{
+  "base": "d3be7addecf4c1107b6b39f026b7a369cbe9f25a",
+  "sources": {
+    "bodyguard/frontend/src/posture/capturedImage.ts": "bd876addda83167ff67db5e536eb1ce9c82fd6d91dd1c8d78a2e82275feaf0e2",
+    "bodyguard/frontend/src/posture/capturedNeckObservation.test.ts": "4f529e96a2111b6bf8fd11fdce38a0b466a5b93bd8ac33535c1454a9d745a8e5",
+    "bodyguard/frontend/src/posture/neckSideObservation.ts": "945eaacf24a24c907dbc91d6e04fcb272d2863b57e1162ed69288803c3ee65da",
+    "bodyguard/frontend/src/posture/landmarks.ts": "d0f5e51672543fa35fb3d8d35ed090c0ee79195b4885c42ff09d4e96d96741b7",
+    "bodyguard/frontend/src/avatar/observedPoseRig.ts": "ad4284793795ea40e85ea1f3aa0a4504daa3a93655064656b49d361adb662362",
+    "bodyguard/frontend/src/pose/ownedPoseFrame.ts": "58c978a3b012e8bc7a6cd256200200c434066f8e26d96462de4913e353f9002d",
+    "bodyguard/frontend/src/pose/ownedPoseFrame.test.ts": "55b93d280d35ee42052aa09161e0ea65e9ccb04d339b1bb3e64306349759688e",
+    "bodyguard/frontend/src/pose/videoPoseSource.ts": "d17532edfa2afd2906e065f017c62da99fa7fd34c59a7bff31464e1742a447f5",
+    "bodyguard/frontend/src/pose/videoPoseSource.test.ts": "f4b9e361f0c36b6d9421fd806c34b2a9786991582b1a87dd63170b48290ec660",
+    "bodyguard/frontend/src/coaching/nativePlaybackResources.ts": "8df4e16d9b6bcfc3e9bf15c0e76721e002e9d75f40b522cf70373a1715408153",
+    "bodyguard/frontend/src/coaching/nativePlaybackResources.test.ts": "ea82c7d3ce24bce12f28bc44e5d7cf6d27764892c5dbc2402f5e710b21dded0a",
+    "bodyguard/frontend/e2e/fixtures/nativeHeadAuthProbe.ts": "9c8f1cda944c45218bd5fc1edc062b342fa63e810dbb4ffbd7078599b7a8d358",
+    "bodyguard/frontend/e2e/fixtures/capturedNeckProbe.ts": "ed11fbcd8f15f53ec4a366860ec4745ca21e28cc27b46a9c1bfca4cff42ed462",
+    "bodyguard/frontend/e2e/nativeworker.spec.ts": "47a31fc7d55f6addded1b0f98edad3e71a06e9f26801afc21bc7efcde8ebfe62",
+    "bodyguard/frontend/e2e/nativehead.spec.ts": "1a8c347c14cb1e29c3c66678ca713a9e17ab427c35cdf714960768617813d0c1"
+  },
+  "files": [
+    {
+      "file": "evidence/browser-final.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/browser-final.json",
+      "sha256": "31cc892f7bbb6c1782d4ac3d5dffb816f1fb0f7c81cc1f5c2c8102bc10bda0fd",
+      "originalSha256": "4de57d2342c6c0ea81d6f6fc7de811e5beaf9225883e36484753286b1952937d",
+      "originalBytes": 3846
+    },
+    {
+      "file": "evidence/browser-final.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/browser-final.receipt.json",
+      "sha256": "eabec02a0ddb1217b936da55968ee3f1759dc1da08163a3a193064797b5c2eb5",
+      "originalSha256": "0a4f9ed6689c5db827a71c3adfc945962f77ddfb555571b438d43f029495873c",
+      "originalBytes": 1739
+    },
+    {
+      "file": "evidence/browser-final.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/browser-final.stderr.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/browser-final.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/browser-final.stdout.txt",
+      "sha256": "30aa5d7093493194ec70e119c57ab92d47cb5f22c4dd8d634ad585b7a24a2e5b",
+      "originalSha256": "a38270db4914e792dd6a62704514ef1d0b1f5d68668cb89fb492ca67805bb97e",
+      "originalBytes": 2983
+    },
+    {
+      "file": "evidence/browser-first.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/browser-first.json",
+      "sha256": "b6caf4042f64b2e995bf8170accebcced985f4c651e6dbddc14142cc52457b0a",
+      "originalSha256": "8a3506da119e774c751befd6953ec9148f1fb0447e0df237d53b0b266a11ecd6",
+      "originalBytes": 2920
+    },
+    {
+      "file": "evidence/browser.mjs.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/browser.mjs",
+      "sha256": "07e2d8b40ffa975572720ceeb031d8a226d177bf2a553900fa7b3a52b216c6ef",
+      "originalSha256": "3ba1e7a7c174f45a963120eda0ec137ed6dfc3ae56edf5373f0f8f56554efc94",
+      "originalBytes": 4661
+    },
+    {
+      "file": "evidence/build-final.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/build-final.receipt.json",
+      "sha256": "5b2d27989800bd9a9208290ac484e43f6f18a9569b5298231bb408a6d293ff9b",
+      "originalSha256": "d46d7c91ca24bf6778e1688cbf80e814b09e3dcc43d2e0eca998ed3f3916b79b",
+      "originalBytes": 1679
+    },
+    {
+      "file": "evidence/build-final.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/build-final.stderr.txt",
+      "sha256": "b630a7e2c34e39418c0cab83251bd5f7243bb36b9ec2f99d9eba4c00c755933d",
+      "originalSha256": "c15e88ea3d3b4b4189815c6ec31f7b8512312aec5c79adfe87dd10261aa3e58b",
+      "originalBytes": 8536
+    },
+    {
+      "file": "evidence/build-final.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/build-final.stdout.txt",
+      "sha256": "d525f37a5b0ace69eb46d075087ffaa5c90fce7702a75a7d510eb1a6299aa600",
+      "originalSha256": "62c66ae780bb51d2e9a4476f595ccfa411f629d8c218844e9ac98a38d70b9752",
+      "originalBytes": 123
+    },
+    {
+      "file": "evidence/build-reviewed.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/build-reviewed.receipt.json",
+      "sha256": "b0a600bdb0413a87972b5d527972cf42c9fa6f9951c2bb905628b7720a1a0f7a",
+      "originalSha256": "f0d70b09e0026477205c66861406383cd80a684f736437718327163ce9954f99",
+      "originalBytes": 1971
+    },
+    {
+      "file": "evidence/build-reviewed.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/build-reviewed.stderr.txt",
+      "sha256": "1b42efa6bff18414e3b5f8bdd034073bcefbe4b36206ecde3350c9ac311cc3c9",
+      "originalSha256": "744002d6d69a79eb7f04b4633e0768598505352eae83334f23e64b7f708dfd8e",
+      "originalBytes": 64
+    },
+    {
+      "file": "evidence/build-reviewed.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/build-reviewed.stdout.txt",
+      "sha256": "dae4eac3ae7b946a1fd303fb9dcf90ad467f487f3c30593282d059d827c78859",
+      "originalSha256": "76c7c7a0f4c81085d9a251d439bfe3584f2a3cc7d8a043f6cd66758604afa2b1",
+      "originalBytes": 568
+    },
+    {
+      "file": "evidence/db-create.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/db-create.receipt.json",
+      "sha256": "60dae568147e86d7b19a51e4d4b10612980fe46110252e186dbb79ace01e4441",
+      "originalSha256": "e6a9d007e3ff33f4351c831bb8959abab341e062055f60296dd34c4d7d8a81f5",
+      "originalBytes": 2017
+    },
+    {
+      "file": "evidence/db-create.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/db-create.stderr.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/db-create.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/db-create.stdout.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/db-identity.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/db-identity.receipt.json",
+      "sha256": "258f5bb1179ff42bb6a283717cb26b8dbee9fd2b27aa7b2d1037af973b961f63",
+      "originalSha256": "3ddcff39e999caca23238821418e3f2277c532b8b7443f6cecfe4989e2961052",
+      "originalBytes": 2139
+    },
+    {
+      "file": "evidence/db-identity.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/db-identity.stderr.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/db-identity.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/db-identity.stdout.txt",
+      "sha256": "00d473237d1388ab2790109e53382f806eac1ebc694681762064411bd40823ab",
+      "originalSha256": "77383846342d28983573447f26db2781f38f707374fcc73eb665c2e8b3c6bdb2",
+      "originalBytes": 38
+    },
+    {
+      "file": "evidence/db-init.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/db-init.receipt.json",
+      "sha256": "331c4c9a6d0c039dd4cdd57915d38bd7b0b1c111401d841063d9c7c58f3b2c15",
+      "originalSha256": "8c8a3509ea6c6df5a339452a22312679f8abd498c062f58ec3c41a8c66c99556",
+      "originalBytes": 2061
+    },
+    {
+      "file": "evidence/db-init.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/db-init.stderr.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/db-init.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/db-init.stdout.txt",
+      "sha256": "85d225eaa0cba448478a2584eb004b2fb3b39c3a30af61170bb8bda1e487853d",
+      "originalSha256": "f872210b5d4414ebde6a8b10fa1828a15485dae7c6e4fc1e25acfa393790b7eb",
+      "originalBytes": 885
+    },
+    {
+      "file": "evidence/db-start.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/db-start.receipt.json",
+      "sha256": "adc0dacc8447b3e7f2d924a5172d3f4201d9098bbb2416c7253cd6fa837a50d9",
+      "originalSha256": "24ef7c7927eb480e415370762de7196f0535b5a9f6f3963f3492dde3d71df96a",
+      "originalBytes": 2148
+    },
+    {
+      "file": "evidence/db-start.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/db-start.stderr.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/db-start.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/db-start.stdout.txt",
+      "sha256": "832ddd3f081a377ef33282d1a5873958de655de6e168f2d235890df2ae8f4b9a",
+      "originalSha256": "66afd0411ccc09366e99fdd99b85f21899c8d2d064f5835126859618802153ad",
+      "originalBytes": 52
+    },
+    {
+      "file": "evidence/db-stop.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/db-stop.receipt.json",
+      "sha256": "874d312695507ecf809ed79d31fe4184d32e2a107178c47aa7bfc1e8a06c75ea",
+      "originalSha256": "9a6f3a29add281b1a63e94598becdd5258c030fd69fbd96e9e4bb8759ae91bd7",
+      "originalBytes": 2010
+    },
+    {
+      "file": "evidence/db-stop.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/db-stop.stderr.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/db-stop.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/db-stop.stdout.txt",
+      "sha256": "6e4a66decd63b73b127911f41584fa554bbc70d3060c4bc91f65565b8598fef4",
+      "originalSha256": "ca19178a35ab4153b75b494963b66ce8243e1b94c173107c87b44d09db23652d",
+      "originalBytes": 56
+    },
+    {
+      "file": "evidence/focused-first.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/focused-first.json",
+      "sha256": "1bbde9e00be265050a012a04f85101fb28ace62cdf0773c710a0f5ae4b0b43d6",
+      "originalSha256": "44218190be7f76b0623b167b0d6baf759df887c45b1df74a342de9a35c9d0e74",
+      "originalBytes": 54872
+    },
+    {
+      "file": "evidence/focused-first.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/focused-first.receipt.json",
+      "sha256": "426ceab9ba81600edff21201e48cf4192eab6d88fd01ac760621dc9451889690",
+      "originalSha256": "529fd9096a73fd510a034099cbf9f8e1bb782fe335b18ff90d772ce9acb1ee8c",
+      "originalBytes": 1399
+    },
+    {
+      "file": "evidence/focused-first.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/focused-first.stderr.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/focused-first.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/focused-first.stdout.txt",
+      "sha256": "8983a3fe548ee5c06526c17790e07852cfe9bb05002120b637ad44872b59a8c0",
+      "originalSha256": "22be2ee0174db6ca9dd8c0f0dbafd8f09399b4975345296618c0512f09ce9dff",
+      "originalBytes": 83
+    },
+    {
+      "file": "evidence/focused-green.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/focused-green.json",
+      "sha256": "d05630c883c7631118394b87adad50d046640bbbbe6c85392d9b826924a34ab7",
+      "originalSha256": "bf1a91c5b1b5c7a3c8c2f328c05b8c4dfe4a20d9ce1fb42f59fc120c9f64625b",
+      "originalBytes": 50087
+    },
+    {
+      "file": "evidence/focused-green.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/focused-green.receipt.json",
+      "sha256": "5e25dbc498edcdccc9bd157397a6879834b9b67c58d9b7ccdc95e2ed4bb1a3ed",
+      "originalSha256": "ee49066eb16b0e6ad274ec5b50ffa0d8477213db1fed2f2b881cb68a5dbd5e39",
+      "originalBytes": 1399
+    },
+    {
+      "file": "evidence/focused-green.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/focused-green.stderr.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/focused-green.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/focused-green.stdout.txt",
+      "sha256": "6918375d065be0def639638fed84013b76ba2c7cd01a788b75533b5b9b749055",
+      "originalSha256": "5df7434c8f4d2b2f42bef2d3c3f75a5e5e6f27866f7fa68da515cb2fea0009c6",
+      "originalBytes": 83
+    },
+    {
+      "file": "evidence/focused-red.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/focused-red.json",
+      "sha256": "2a2de3f34ebf43b1b11720cdf6348a0425ffe0d7288b10a474577f1c27e42458",
+      "originalSha256": "7fb4fdef372d1e4544216242fcee59d29a1fa07a88fd7326c897d8ecd395f0e0",
+      "originalBytes": 142753
+    },
+    {
+      "file": "evidence/focused-red.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/focused-red.receipt.json",
+      "sha256": "207cbcfc59076b1106193dea9138caa167a4bef1ba6244160ce2dc5620bf781c",
+      "originalSha256": "473a80fb8b025f39b0c835e63c76e27855b9f2451975a2447ac69e6af4321994",
+      "originalBytes": 1397
+    },
+    {
+      "file": "evidence/focused-red.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/focused-red.stderr.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/focused-red.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/focused-red.stdout.txt",
+      "sha256": "952349bbdd5872baccddf5570164bd9cea38c96453f73039114bc5e2ad57f823",
+      "originalSha256": "0fd481ef70feee127ffd6692843e6db4d3fb08b2afd0631bb0139b7cd09ca42a",
+      "originalBytes": 81
+    },
+    {
+      "file": "evidence/focused-reviewed.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/focused-reviewed.json",
+      "sha256": "7a1c68c198350bf626a26e38100d17e5d63a4575235ec524c114433dbf2bf4a4",
+      "originalSha256": "c721fe0d3740195e9ec1663d23a346e015e0a485362df998944f6378db20fa4b",
+      "originalBytes": 52671
+    },
+    {
+      "file": "evidence/focused-reviewed.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/focused-reviewed.receipt.json",
+      "sha256": "9bdbf5b52a2690d92db7ba8b018a7ffe3e5724931c945b6295c32f8500c81caa",
+      "originalSha256": "c62b86e56a6c14ec2e67259a43c3cc324ca835b535a40feabf1504fed05a13f6",
+      "originalBytes": 2020
+    },
+    {
+      "file": "evidence/focused-reviewed.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/focused-reviewed.stderr.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/focused-reviewed.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/focused-reviewed.stdout.txt",
+      "sha256": "89241b3bc7cb30942422e6f6606540378d38fd7b2239c8fae39b9aab7b0903f3",
+      "originalSha256": "5d1198cf2f9f9053d59579a9652a74c294de484b71e4fd6e6fb5d560cda9b775",
+      "originalBytes": 86
+    },
+    {
+      "file": "evidence/guard-final.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/guard-final.receipt.json",
+      "sha256": "c44b85eb37d260fa43285e963c01dd384e510db2b06488d61e184c71bfc3709f",
+      "originalSha256": "da79be99dccc944bc4a9c0cc3b121accfcaa9de3e499fc7589868ebf54eabf2c",
+      "originalBytes": 1712
+    },
+    {
+      "file": "evidence/guard-final.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/guard-final.stderr.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/guard-final.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/guard-final.stdout.txt",
+      "sha256": "63699d5599b90894fe2b94df5a549dd92e3a366d9fd7e12c09d055096bb53da6",
+      "originalSha256": "536b676e3bef45465f1b9e967df72b8300fe14bb4925d59b0a07f5ceeb264ddc",
+      "originalBytes": 1140
+    },
+    {
+      "file": "evidence/guard-reviewed.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/guard-reviewed.receipt.json",
+      "sha256": "aee371531849a156573971b2a2a5a405995e51d9e5924aa6c0a4c7d85bae6f7a",
+      "originalSha256": "a0659dbe317e0b6e017e2908b8eea70037def2c8f0e70ae5c0b458e2464ef7d5",
+      "originalBytes": 1712
+    },
+    {
+      "file": "evidence/guard-reviewed.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/guard-reviewed.stderr.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/guard-reviewed.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/guard-reviewed.stdout.txt",
+      "sha256": "63699d5599b90894fe2b94df5a549dd92e3a366d9fd7e12c09d055096bb53da6",
+      "originalSha256": "536b676e3bef45465f1b9e967df72b8300fe14bb4925d59b0a07f5ceeb264ddc",
+      "originalBytes": 1140
+    },
+    {
+      "file": "evidence/lint-final.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/lint-final.receipt.json",
+      "sha256": "0f713f143aa11146b3332c2b219d6cb1d4a8128ed4e587dc1eaeb2fa0a803800",
+      "originalSha256": "8ce5726574bc438fa481e3dae9542d280982ee64fe5f2262c58aa413ab104a4d",
+      "originalBytes": 1679
+    },
+    {
+      "file": "evidence/lint-final.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/lint-final.stderr.txt",
+      "sha256": "c232d8c5000b0fcdb08b3d20db6312ae30a634a7b229c8eb2497eae0dc872a55",
+      "originalSha256": "bc2f32db81a9c840e767407aa31deff3b6d3df5e5388f721e9489867b535d47d",
+      "originalBytes": 16
+    },
+    {
+      "file": "evidence/lint-final.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/lint-final.stdout.txt",
+      "sha256": "3ef5ce5917d4eaef79852c4bd8e61b3b5d9e2616b69bbd0d531c5d532de69a79",
+      "originalSha256": "f8ca3fe7b374e1514d860f8ec2b6881b89e2b4caca1931da66876293e672c2e5",
+      "originalBytes": 46
+    },
+    {
+      "file": "evidence/lint-reviewed.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/lint-reviewed.receipt.json",
+      "sha256": "391f236fb5ef5f51e27eb854e1c22eb3f2cea74e9ced6c95ab0df026bca72c27",
+      "originalSha256": "e657e5d4d2e1bb56240db2a1fdffe5c3ca2919b9dfe666068083b617da94fe4e",
+      "originalBytes": 1679
+    },
+    {
+      "file": "evidence/lint-reviewed.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/lint-reviewed.stderr.txt",
+      "sha256": "c232d8c5000b0fcdb08b3d20db6312ae30a634a7b229c8eb2497eae0dc872a55",
+      "originalSha256": "bc2f32db81a9c840e767407aa31deff3b6d3df5e5388f721e9489867b535d47d",
+      "originalBytes": 16
+    },
+    {
+      "file": "evidence/lint-reviewed.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/lint-reviewed.stdout.txt",
+      "sha256": "4edac9428f32d745d4eedfc7b378216a581adaab3463fb951c36fca706eb04dc",
+      "originalSha256": "3a69dfe6b78173bdb1f89388c1b1daee710ff8eb527776729ed72361d4b534d7",
+      "originalBytes": 46
+    },
+    {
+      "file": "evidence/owner-nativefeedback-female-final.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/owner-nativefeedback-female-final.receipt.json",
+      "sha256": "78b56d4aa3ce65159484eda41ce1b2b80e037cc92c413a2e33f174099697815a",
+      "originalSha256": "d7c48f8f6d7b65dc856578012ce86aca5dd60ff9c6827ba5bbd5941e165b7b43",
+      "originalBytes": 2139
+    },
+    {
+      "file": "evidence/owner-nativefeedback-female-final.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/owner-nativefeedback-female-final.stderr.txt",
+      "sha256": "e6bf415c57213d606b460f15fa28eb7acabb83f9b0cca2f4976f298628acd40e",
+      "originalSha256": "ab551057248b899ff059a3e83e213b2d26f838f3ad855c4f58c8507f10b59ad0",
+      "originalBytes": 1180
+    },
+    {
+      "file": "evidence/owner-nativefeedback-female-final.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/owner-nativefeedback-female-final.stdout.txt",
+      "sha256": "9e7d05aa867e6055e7a0b067b4468635f8d1fee5c8e617f2b657101e61a70116",
+      "originalSha256": "376a6c69a39afc9e7b1e518b4655eb10e951da861ad2c62ef9f1ee8a3a7af547",
+      "originalBytes": 1477
+    },
+    {
+      "file": "evidence/owner-nativefeedback-male-final.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/owner-nativefeedback-male-final.receipt.json",
+      "sha256": "b1c82e5b1a65312e154ea603fab05e50c73d69a4624b1c437de08ba69369d970",
+      "originalSha256": "748f3796f63585d460274ba953c62d15fdb1ec3bf9e905cbcc0c4eeb8ebe9a94",
+      "originalBytes": 2139
+    },
+    {
+      "file": "evidence/owner-nativefeedback-male-final.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/owner-nativefeedback-male-final.stderr.txt",
+      "sha256": "3ba84123ca93380091cf0650fa8d91bcf0fcb472a3ef6aa7af7cab05de44d567",
+      "originalSha256": "5be5b50f0898936add16edc6de497d907be3a26eed48aecf374d19a73ebe7e1b",
+      "originalBytes": 1180
+    },
+    {
+      "file": "evidence/owner-nativefeedback-male-final.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/owner-nativefeedback-male-final.stdout.txt",
+      "sha256": "e32dd7bc729e312b54ca79d875ad2ad7bf3f8d148aae2d43b5af4bdd4916442a",
+      "originalSha256": "c3db856e0ec2c6dddbd75802e1ceb8a5309a9dd1d43cbfa0878056df7962b497",
+      "originalBytes": 1453
+    },
+    {
+      "file": "evidence/owner-nativefeedback-reviewed.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/owner-nativefeedback-reviewed.receipt.json",
+      "sha256": "6c5afb8dbe05b4375a09ab1a4400e1953e4a88d20c315dfef286790a216c8c7f",
+      "originalSha256": "ac4380541ba06b0eddb2821303aaa6cc001ea854ead29097f75461390e92b13c",
+      "originalBytes": 2139
+    },
+    {
+      "file": "evidence/owner-nativefeedback-reviewed.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/owner-nativefeedback-reviewed.stderr.txt",
+      "sha256": "b41c030939bce1963760a2f03c016ca0b1bd0198d506ce7d89e23a1e62d3a9b3",
+      "originalSha256": "843b9393a2c520b5ae323f1a1178e4ee9bb9a3d30451d468832fc9edf89f9478",
+      "originalBytes": 4764
+    },
+    {
+      "file": "evidence/owner-nativefeedback-reviewed.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/owner-nativefeedback-reviewed.stdout.txt",
+      "sha256": "c9b6ec3ef32d92840f5d7aff3256e0e81ccbecdc431ae060927f08596b97c76b",
+      "originalSha256": "e9b2cb543a7390839b002e3bd1856d8ed5418917b7e5db50394e59d07e8fcc60",
+      "originalBytes": 63613
+    },
+    {
+      "file": "evidence/owner-nativefeedback.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/owner-nativefeedback.receipt.json",
+      "sha256": "bf21b0bbbbf53587613a9eaae37c9af39f191c17a15321756fe7237f42763d5a",
+      "originalSha256": "5f851b53b223b90756202e98df3bfbb633c4ffbdf6789e0467a5410df4fba934",
+      "originalBytes": 2139
+    },
+    {
+      "file": "evidence/owner-nativefeedback.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/owner-nativefeedback.stderr.txt",
+      "sha256": "b06babb79fd2652cc7f255f1eeecffa6c4bd15289238aae5a6e0c15e4dd3fbd7",
+      "originalSha256": "2edc082ba87ee330016d85f10fa4a58111ef9f13db9de9b70132e860368a555c",
+      "originalBytes": 5275
+    },
+    {
+      "file": "evidence/owner-nativefeedback.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/owner-nativefeedback.stdout.txt",
+      "sha256": "b7be43d4cd21b31762231210f37b4b0ac47a7794ad099c5046a3156ad63ae03f",
+      "originalSha256": "39972a72dff0d728110d581ae471d57c5448aec843a34524fadab46d24a94310",
+      "originalBytes": 74
+    },
+    {
+      "file": "evidence/owner-nativeworker.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/owner-nativeworker.receipt.json",
+      "sha256": "b5ab644ca139c1cf2b2dfd84255bcaed6b1bc1fca035e21fc4efc72235154179",
+      "originalSha256": "8a319eca3fdb5751c181f3b5cb521bf1661a81b2248790746b65cf210d8ceb82",
+      "originalBytes": 2137
+    },
+    {
+      "file": "evidence/owner-nativeworker.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/owner-nativeworker.stderr.txt",
+      "sha256": "cf015c7b811090ec654ce8c2a2d4fd61517772fda5e946da53a8b324fe1032ec",
+      "originalSha256": "4748c8e036eb0ca12fb9ffb568095d8a717a04f5aed2578cc96ba0c100c2a8ec",
+      "originalBytes": 992
+    },
+    {
+      "file": "evidence/owner-nativeworker.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/owner-nativeworker.stdout.txt",
+      "sha256": "338813c273532d9433c711d4c83c65e17ef5cd0c9e146d2dca7e234146b71b86",
+      "originalSha256": "42a373c6d44352e3c30daf51d0cc48672b0b195e01faf07ba3e193cbabc8c094",
+      "originalBytes": 1234
+    },
+    {
+      "file": "evidence/owner.mjs.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/owner.mjs",
+      "sha256": "b2ac4d28e1080b6e0b84ba95eedd471c8a6ab12003f7f2b8920319384156ee3a",
+      "originalSha256": "9517183f0dee4cb75661f083dda461c5202db1dbc1d861be55ec3ab2f2ea8d36",
+      "originalBytes": 4264
+    },
+    {
+      "file": "evidence/privatebuild-final.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/privatebuild-final.receipt.json",
+      "sha256": "c1918073b2b44a5c6654b2a1509b6d20b85dfa63e722b1180f2bf88649bb8fff",
+      "originalSha256": "9c2053884ec2e95299d4120df3a84238e579db79ccfcbb45c52d463b00e3f669",
+      "originalBytes": 1783
+    },
+    {
+      "file": "evidence/privatebuild-final.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/privatebuild-final.stderr.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/privatebuild-final.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/privatebuild-final.stdout.txt",
+      "sha256": "3eaa5128736daeb3d8faf669c4e27d88acdeb1eadf143f7b238c9c9197550aba",
+      "originalSha256": "f337cf27eb65c0fdbb230f5dd7dafee64e8e6ad81749e3804192c7d3500aebcc",
+      "originalBytes": 424
+    },
+    {
+      "file": "evidence/run.mjs.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/run.mjs",
+      "sha256": "ee50dd491a03c3813f43e471cafd81512728532dc11ded75b921e4011fb98112",
+      "originalSha256": "a5eb658bcffd93c15258e3f2007af4dfc72a51cb82ba4155c7820276df11e1c3",
+      "originalBytes": 2614
+    },
+    {
+      "file": "evidence/types-final.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/types-final.receipt.json",
+      "sha256": "ce9e0d04ef9fef18dd6e5500d191b2d9df36a83a1f4a04c97db13478120b7890",
+      "originalSha256": "4c305aa24fee19b8d85e4e25d7307837e32d45297da4625d5866e3083c502e6e",
+      "originalBytes": 1683
+    },
+    {
+      "file": "evidence/types-final.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/types-final.stderr.txt",
+      "sha256": "65d8fd1041d19e4d6bba4253b80fab1cf36076152f49a2ba1aa0ea35ba3dfe4f",
+      "originalSha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92",
+      "originalBytes": 15
+    },
+    {
+      "file": "evidence/types-final.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/types-final.stdout.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/types-first.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/types-first.receipt.json",
+      "sha256": "943b5b3f3667ab3467c972fcabd3f377896b76c87de5bb550a1c0d4217e3820c",
+      "originalSha256": "9bb26f3c9fb979b13c4b15e21e4064b6ee493cd1cff4400841597aa9c440ac3b",
+      "originalBytes": 1065
+    },
+    {
+      "file": "evidence/types-first.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/types-first.stderr.txt",
+      "sha256": "de8a56108ed0501ba840f0f2081591bc708003dbae803e212d804fff35e3a15c",
+      "originalSha256": "85ee58ee56fdde4dc8c10022b5e6e15d791696928267ba2e827b88f7594b9dc5",
+      "originalBytes": 61
+    },
+    {
+      "file": "evidence/types-first.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/types-first.stdout.txt",
+      "sha256": "92a333b6f80aa17eb15261c01e02f0bff223951760bf0fc60b6e6f0bf201d8b1",
+      "originalSha256": "e3d10c947955ff833252449a73d3223eb0bce989dd4c1383c0bc2d800470370c",
+      "originalBytes": 526
+    },
+    {
+      "file": "evidence/units-final.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/units-final.json",
+      "sha256": "b3377d38b1adc7235bea9d5fa9480a4e885a2df75f4a096078309ea46e27775e",
+      "originalSha256": "6a495e8f7a8d4ca3ed7ad14957ea8ded4ec7df5cd4154688f04e2700ae03140f",
+      "originalBytes": 468554
+    },
+    {
+      "file": "evidence/units-final.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/units-final.receipt.json",
+      "sha256": "880b1dfb30ed2e6e9cd58253072d3365f6c600da302797a769f52d5eeb550d95",
+      "originalSha256": "e20db6c9c2a7f9e4377506d234f25d80c753fde6eca656f68610277fb9be343a",
+      "originalBytes": 1215
+    },
+    {
+      "file": "evidence/units-final.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/units-final.stderr.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/units-final.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/units-final.stdout.txt",
+      "sha256": "386d97011c4895c9ed854a8bc64df2109fb64171ca5b794f9d2599c4dc3d76c7",
+      "originalSha256": "dd97887ed484c30dbec8170bd7075118da9d9098f73646a137a6dfc502b37368",
+      "originalBytes": 81
+    },
+    {
+      "file": "evidence/units-reviewed.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/units-reviewed.json",
+      "sha256": "fe7dbc6e036d46197eceeb1e284d8926834ad0cfbbd1ffaa72b1f501f608e12a",
+      "originalSha256": "4d11588e7523b04960ce1be7facb72d9c2386c6db3a730d9028775b664ce9f90",
+      "originalBytes": 471133
+    },
+    {
+      "file": "evidence/units-reviewed.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/units-reviewed.receipt.json",
+      "sha256": "803a7cd341a7656de2f35f3f07fd0d58ed46e5065be3351cb7574b8099210822",
+      "originalSha256": "822989d3c4782492cacbb554612e16b01b6d97535200e83f69a9df8c7a916015",
+      "originalBytes": 1836
+    },
+    {
+      "file": "evidence/units-reviewed.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/units-reviewed.stderr.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/units-reviewed.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/units-reviewed.stdout.txt",
+      "sha256": "944c2e2ae7c49c570c037424189b492bb115a7526a9f0ebe86cbd496c18bc151",
+      "originalSha256": "0cc0492780eaef47d85d7b74bb01cc03d5032959c170e6dde58efca66f331ecd",
+      "originalBytes": 84
+    },
+    {
+      "file": "evidence/vite.config.mjs.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/vite.config.mjs",
+      "sha256": "e3a86d80e3d818da56a731e85b9b17edb8f11235cdc5789a200b546614e9bf0a",
+      "originalSha256": "398aeb90ccda41968d98e0c5baf65e77194a417c097126d3f7b48d7081655bda",
+      "originalBytes": 396
+    },
+    {
+      "file": "evidence/cli-partition.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/bin/pnpm",
+      "sha256": "bf75928f27e5c36bc3d63648c19254f4ceba5c796c793618e9a3848cd4c85fe0",
+      "originalSha256": "be1649b8d294cdae854eedd7b4a3ae3afddc3289797df2d6330026909b9882c3",
+      "originalBytes": 551
+    },
+    {
+      "file": "evidence/graph-query_20261008_184932_7f2e20d3_촬영_프레임_기하와_신뢰도를_목_관찰_및_코칭_입력에_연결하는_경계.md.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/graph-memory/query_20261008_184932_7f2e20d3_촬영_프레임_기하와_신뢰도를_목_관찰_및_코칭_입력에_연결하는_경계.md",
+      "sha256": "7d3faad770f73204f3db077936e141c9fcf6d86ae1a95f7bb7420ed8904c6022",
+      "originalSha256": "a067a0dcb10815ef96ecd16583f6d7586faea986a8cf169efe03a09cf2b1983e",
+      "originalBytes": 833
+    },
+    {
+      "file": "evidence/probe--probe.js.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/probe/probe.js",
+      "sha256": "925a9a66cb8d03dc0e7852dbb0c1fb9afb9d017a3c452896ec3525108ac57f63",
+      "originalSha256": "ebdb514c884183be8f6d55466169b90fc95305730a222c1665863f525359ef15",
+      "originalBytes": 226097
+    },
+    {
+      "file": "evidence/probe--assets--nativeInference.worker-0PTDJHAy.js.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/probe/assets/nativeInference.worker-0PTDJHAy.js",
+      "sha256": "f1fa507cef6108163ba4c0d97c8874e1a79064c44bace78e705c6cf38a2f035b",
+      "originalSha256": "d8d826654f27c265506dce5238d9280f8be94d3e777b3c9fcc2b9053cc5a0eae",
+      "originalBytes": 526094
+    },
+    {
+      "file": "evidence/reused-authored-fixture.json.gz",
+      "source": "/private/tmp/bodyguard-native-feedback-proof.haIAU9/authored-fixture.json",
+      "sha256": "86e82bb6b54cbe5ec7b9bc2cf63492b769d5c3f8f1149073dd067f620f21faf9",
+      "originalSha256": "d91a93e39f09005097db58a50d27dd2db0e35382a19d755bd56515f9d4e2ddf6",
+      "originalBytes": 44132
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T184807246259Z--.last-run.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T184807246259Z/.last-run.json",
+      "sha256": "a631f2c283bb44b91a65619605d0423862179362c4f9e9d07fd006e82bb9a376",
+      "originalSha256": "e22df5d0991eb28c09093b1e678b3fa8cd1fab48185d38e67cf79fb6e63ad5ea",
+      "originalBytes": 45
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T184807246259Z--report.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T184807246259Z/report.json",
+      "sha256": "8875cb957fde72024da49b603c271edba5767d49a77635c515745bfb9c40f990",
+      "originalSha256": "77372f7808c5c1c7a785c6fee2970cc3208699d631f998e2a76629a55b5221b9",
+      "originalBytes": 3933
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--.last-run.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/.last-run.json",
+      "sha256": "2ff349f1447eea381a94eb56ea662bdcca854ee7ef6fe669fb46f03145f98f71",
+      "originalSha256": "433d1d7d576aea0d7e23206a948bac52da238d999932b28484f4e34f713b4f1e",
+      "originalBytes": 1223
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-actu-f9642-→fresh-generation-reference--attachments--native-head-summary-ef45b8c4927d1628061b1174047b579ffa02b9a7.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-actu-f9642-→fresh-generation-reference/attachments/native-head-summary-ef45b8c4927d1628061b1174047b579ffa02b9a7.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-actu-f9642-→fresh-generation-reference--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-actu-f9642-→fresh-generation-reference/before-close.json",
+      "sha256": "cd3ae095e97c3792018eed3d877db8c4b321d41ec5bfccef6567e7c71df023d6",
+      "originalSha256": "24e6fe6d93e354270420bf133910eb6ecd1049261a7c6c735a94522e132310b4",
+      "originalBytes": 1959
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-actu-f9642-→fresh-generation-reference--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-actu-f9642-→fresh-generation-reference/error-context.md",
+      "sha256": "67aa511b17f7faa82c4b3aaa7d2f2f7321790c5d52b45e11c76af144edeb8615",
+      "originalSha256": "f303959ab38aee53862033caebed14d7b29067eda158774eb618e08e3c71a66a",
+      "originalBytes": 11572
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-actu-f9642-→fresh-generation-reference--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-actu-f9642-→fresh-generation-reference/native-hands-summary.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-186f8-fresh-generation→own-record--attachments--native-head-summary-f9aedf4f7b4aa0e99dedb30052aa53d6ec2b841a.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-186f8-fresh-generation→own-record/attachments/native-head-summary-f9aedf4f7b4aa0e99dedb30052aa53d6ec2b841a.json",
+      "sha256": "73bd3184e8998afc175233faddbb395c1ef6218eac84bbdd66fd1feaa0db097b",
+      "originalSha256": "5116d3dcc740815bde6c28e0131dc854a6f386fe0fc04805487a223fe56b5832",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-186f8-fresh-generation→own-record--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-186f8-fresh-generation→own-record/before-close.json",
+      "sha256": "a5a9c200acb8352c28518a179eb5a26c7275975b6966ba8d39696e2b97e525a5",
+      "originalSha256": "8788a9f639d97fd69d0a4687f8836fa70ea0b67287af03e4ec3ffffda0fc7ad7",
+      "originalBytes": 1959
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-186f8-fresh-generation→own-record--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-186f8-fresh-generation→own-record/error-context.md",
+      "sha256": "734e977fd50762c96438a524d60ccdf674831c13a78a9b1c3d4705d9eb474f86",
+      "originalSha256": "6073462404a945d4a2897571ecc3160845e7f112f4cd443024a0f438708920e5",
+      "originalBytes": 11592
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-186f8-fresh-generation→own-record--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-186f8-fresh-generation→own-record/native-hands-summary.json",
+      "sha256": "73bd3184e8998afc175233faddbb395c1ef6218eac84bbdd66fd1feaa0db097b",
+      "originalSha256": "5116d3dcc740815bde6c28e0131dc854a6f386fe0fc04805487a223fe56b5832",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-5f706-crop-multiple-none→recovery--attachments--native-head-summary-0d388d9a7f7271583366e4c15fb29a0f30fb86b3.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-5f706-crop-multiple-none→recovery/attachments/native-head-summary-0d388d9a7f7271583366e4c15fb29a0f30fb86b3.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-5f706-crop-multiple-none→recovery--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-5f706-crop-multiple-none→recovery/before-close.json",
+      "sha256": "cd3ae095e97c3792018eed3d877db8c4b321d41ec5bfccef6567e7c71df023d6",
+      "originalSha256": "24e6fe6d93e354270420bf133910eb6ecd1049261a7c6c735a94522e132310b4",
+      "originalBytes": 1959
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-5f706-crop-multiple-none→recovery--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-5f706-crop-multiple-none→recovery/error-context.md",
+      "sha256": "fd5735f7891c6f598616e7be75e2858dbb6c122d3e9ef678c7ad28dca077cbbb",
+      "originalSha256": "90984b82f53492c6632e32e9ff6969f3624f4e4f55ad6447792f173ff3f0e13f",
+      "originalBytes": 11601
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-5f706-crop-multiple-none→recovery--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-5f706-crop-multiple-none→recovery/native-hands-summary.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-5ffc0-→new-owner-explicit-restart--attachments--native-head-summary-666b64419ee1c0909990f669dea3328cb043af70.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-5ffc0-→new-owner-explicit-restart/attachments/native-head-summary-666b64419ee1c0909990f669dea3328cb043af70.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-5ffc0-→new-owner-explicit-restart--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-5ffc0-→new-owner-explicit-restart/before-close.json",
+      "sha256": "cd3ae095e97c3792018eed3d877db8c4b321d41ec5bfccef6567e7c71df023d6",
+      "originalSha256": "24e6fe6d93e354270420bf133910eb6ecd1049261a7c6c735a94522e132310b4",
+      "originalBytes": 1959
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-5ffc0-→new-owner-explicit-restart--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-5ffc0-→new-owner-explicit-restart/error-context.md",
+      "sha256": "0fa3fe646aa4eb5887068f074bc6665572fa560f56ff386b8cff66368d6d83fa",
+      "originalSha256": "538686f16673d13ba09938af7d0f624a3f404f3848a199f5ba72e9a071129d74",
+      "originalBytes": 11587
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-5ffc0-→new-owner-explicit-restart--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-5ffc0-→new-owner-explicit-restart/native-hands-summary.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-7324c-erver401→no-old-resume-save--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-7324c-erver401→no-old-resume-save/before-close.json",
+      "sha256": "ed49faa87a8ff8cfe5bd636c59723b4d4853f21ae10ebbd274834001d8050d0f",
+      "originalSha256": "5dad42b5a6ee0cf0e8809ad1bc5eb1ebfa3f23e915e508f27c1587fd155cde55",
+      "originalBytes": 41
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-7324c-erver401→no-old-resume-save--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-7324c-erver401→no-old-resume-save/error-context.md",
+      "sha256": "02d12725b2d6c82dcd3e82940320786c8bf51f6a7947725a7341c9665e05d820",
+      "originalSha256": "5479b9d4b676db6a74d8f2d923b841ca408aab9bf96c3b81dfc7f6b4674767cc",
+      "originalBytes": 675
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-88804-t-cannot-revive-colour-save--attachments--native-head-summary-41a6a92e21705605cce695ad5368fbbe46e05a70.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-88804-t-cannot-revive-colour-save/attachments/native-head-summary-41a6a92e21705605cce695ad5368fbbe46e05a70.json",
+      "sha256": "73bd3184e8998afc175233faddbb395c1ef6218eac84bbdd66fd1feaa0db097b",
+      "originalSha256": "5116d3dcc740815bde6c28e0131dc854a6f386fe0fc04805487a223fe56b5832",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-88804-t-cannot-revive-colour-save--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-88804-t-cannot-revive-colour-save/before-close.json",
+      "sha256": "a5a9c200acb8352c28518a179eb5a26c7275975b6966ba8d39696e2b97e525a5",
+      "originalSha256": "8788a9f639d97fd69d0a4687f8836fa70ea0b67287af03e4ec3ffffda0fc7ad7",
+      "originalBytes": 1959
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-88804-t-cannot-revive-colour-save--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-88804-t-cannot-revive-colour-save/error-context.md",
+      "sha256": "faccbac5e2b8a1a313587d79141b242438a73acd5691fd99210cfd1a68883749",
+      "originalSha256": "7ff767813e496379b4123b9398a2a8998a2181a1a29e5d7a307611aa96277ebc",
+      "originalBytes": 11588
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-88804-t-cannot-revive-colour-save--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-88804-t-cannot-revive-colour-save/native-hands-summary.json",
+      "sha256": "73bd3184e8998afc175233faddbb395c1ef6218eac84bbdd66fd1feaa0db097b",
+      "originalSha256": "5116d3dcc740815bde6c28e0131dc854a6f386fe0fc04805487a223fe56b5832",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-9208a-ge-timing-without-raw-input--attachments--native-head-summary-ccb3cbe73225381f828fb55366ee70830efa7dad.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-9208a-ge-timing-without-raw-input/attachments/native-head-summary-ccb3cbe73225381f828fb55366ee70830efa7dad.json",
+      "sha256": "6f39a70bd30d5204248fda563e1196e1ee440c2652c68884effec966d3a856eb",
+      "originalSha256": "e35a019079f4d6202039323bb8f8dd8fdd6a7a229306a32b0a992655b941211b",
+      "originalBytes": 2245
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-9208a-ge-timing-without-raw-input--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-9208a-ge-timing-without-raw-input/before-close.json",
+      "sha256": "3c190826e27f8c32e905f440fe847dac7d2e1b571733c491dcb006fad0cc3b45",
+      "originalSha256": "f40be63a97883995a46b5f3d4d215987d69bc73180d201a2a6b8d15743e0ab8c",
+      "originalBytes": 2028
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-9208a-ge-timing-without-raw-input--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-9208a-ge-timing-without-raw-input/error-context.md",
+      "sha256": "1ae827553c62eb67682bcd3b0077c1e3c23a0e9ddda9491f9ddf63f4e267bb92",
+      "originalSha256": "97cbf580846030bfe9ffe89b38f478795469b9f9d532557e5055ec032032557a",
+      "originalBytes": 11566
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-9208a-ge-timing-without-raw-input--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-9208a-ge-timing-without-raw-input/native-hands-summary.json",
+      "sha256": "6f39a70bd30d5204248fda563e1196e1ee440c2652c68884effec966d3a856eb",
+      "originalSha256": "e35a019079f4d6202039323bb8f8dd8fdd6a7a229306a32b0a992655b941211b",
+      "originalBytes": 2245
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-9e9bf-→unmount→no-old-resume-save--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-9e9bf-→unmount→no-old-resume-save/before-close.json",
+      "sha256": "ed49faa87a8ff8cfe5bd636c59723b4d4853f21ae10ebbd274834001d8050d0f",
+      "originalSha256": "5dad42b5a6ee0cf0e8809ad1bc5eb1ebfa3f23e915e508f27c1587fd155cde55",
+      "originalBytes": 41
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-9e9bf-→unmount→no-old-resume-save--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-9e9bf-→unmount→no-old-resume-save/error-context.md",
+      "sha256": "32dc460a25a43d329463d0675ec3e98402a0178ad5051a0c48f5d755ab97396c",
+      "originalSha256": "61195d84a61b1bbf79b8a6fffaa10d593043b261fadb09c3d92279c4aa6db266",
+      "originalBytes": 673
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-ba422-t→logout→no-old-resume-save--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-ba422-t→logout→no-old-resume-save/before-close.json",
+      "sha256": "ed49faa87a8ff8cfe5bd636c59723b4d4853f21ae10ebbd274834001d8050d0f",
+      "originalSha256": "5dad42b5a6ee0cf0e8809ad1bc5eb1ebfa3f23e915e508f27c1587fd155cde55",
+      "originalBytes": 41
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-ba422-t→logout→no-old-resume-save--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-ba422-t→logout→no-old-resume-save/error-context.md",
+      "sha256": "ca99a307a4aebb721ca794c781e95d3da96eaba201b0859cb2ed080e726d1927",
+      "originalSha256": "16bbc28d2262ba91c08c61c75937c1f79816370998687921344d97f7d3e025cd",
+      "originalBytes": 672
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-e4eb3-stop→own-interrupted-record--attachments--native-head-summary-74e660cbcab01ff75ec086776648105d1e77c40d.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-e4eb3-stop→own-interrupted-record/attachments/native-head-summary-74e660cbcab01ff75ec086776648105d1e77c40d.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-e4eb3-stop→own-interrupted-record--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-e4eb3-stop→own-interrupted-record/before-close.json",
+      "sha256": "cd3ae095e97c3792018eed3d877db8c4b321d41ec5bfccef6567e7c71df023d6",
+      "originalSha256": "24e6fe6d93e354270420bf133910eb6ecd1049261a7c6c735a94522e132310b4",
+      "originalBytes": 1959
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-e4eb3-stop→own-interrupted-record--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-e4eb3-stop→own-interrupted-record/error-context.md",
+      "sha256": "e155480800caaeaa75be2f697c09b90afbe6631bdbd2ca48e1cfe6fec3dc91ea",
+      "originalSha256": "d3e0ab09b3997067886a58a02129ca63ed2c2fd5d31eb154d02011932e1b5b25",
+      "originalBytes": 11561
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-e4eb3-stop→own-interrupted-record--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-e4eb3-stop→own-interrupted-record/native-hands-summary.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-fc9f5-n→different-cause→occlusion--attachments--native-head-summary-435365eb25750d2a668734d711f1b91d04989760.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-fc9f5-n→different-cause→occlusion/attachments/native-head-summary-435365eb25750d2a668734d711f1b91d04989760.json",
+      "sha256": "1df958d82a2d3f60b04deb31b7213ac1cb99b674322b27e9b6e2d7fcf4e7e085",
+      "originalSha256": "160d6f8b4938aeeb5671b329d117e4530826b58221920115cf7c9e81f34094b8",
+      "originalBytes": 2176
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-fc9f5-n→different-cause→occlusion--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-fc9f5-n→different-cause→occlusion/before-close.json",
+      "sha256": "c28eea952eace4048649b125e84753dd8ba0d5067e2c211b3dc6047791859178",
+      "originalSha256": "5e35d431d4bfa79d12be027939984dbe0348c72a8f13c2c62c65576e604ec446",
+      "originalBytes": 1958
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-fc9f5-n→different-cause→occlusion--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-fc9f5-n→different-cause→occlusion/error-context.md",
+      "sha256": "4037d1e5c1bd3300d7d8d5b0da042b397a3684fc415809b7d4057fcf6729b271",
+      "originalSha256": "d8f5cc5a985e3aff966b39bbebd251d4435ab925610e32f33cac36f328438630",
+      "originalBytes": 11594
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-fc9f5-n→different-cause→occlusion--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-fc9f5-n→different-cause→occlusion/native-hands-summary.json",
+      "sha256": "1df958d82a2d3f60b04deb31b7213ac1cb99b674322b27e9b6e2d7fcf4e7e085",
+      "originalSha256": "160d6f8b4938aeeb5671b329d117e4530826b58221920115cf7c9e81f34094b8",
+      "originalBytes": 2176
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-ff689-pagehide→no-old-resume-save--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-ff689-pagehide→no-old-resume-save/before-close.json",
+      "sha256": "ed49faa87a8ff8cfe5bd636c59723b4d4853f21ae10ebbd274834001d8050d0f",
+      "originalSha256": "5dad42b5a6ee0cf0e8809ad1bc5eb1ebfa3f23e915e508f27c1587fd155cde55",
+      "originalBytes": 41
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-female-nati-ff689-pagehide→no-old-resume-save--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-female-nati-ff689-pagehide→no-old-resume-save/error-context.md",
+      "sha256": "483f6a663997eb0502ef87b1981947c9722cf297f2ce72ad972b33eb4b639737",
+      "originalSha256": "204290ded6c9212444e0d352e84fb457d3fff3223d63642e69946f80a5b61d27",
+      "originalBytes": 674
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-actual-aca99-→fresh-generation-reference--attachments--native-head-summary-5e3415cf18929bb48d79cc566b34815b0ce93001.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-actual-aca99-→fresh-generation-reference/attachments/native-head-summary-5e3415cf18929bb48d79cc566b34815b0ce93001.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-actual-aca99-→fresh-generation-reference--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-actual-aca99-→fresh-generation-reference/before-close.json",
+      "sha256": "cd3ae095e97c3792018eed3d877db8c4b321d41ec5bfccef6567e7c71df023d6",
+      "originalSha256": "24e6fe6d93e354270420bf133910eb6ecd1049261a7c6c735a94522e132310b4",
+      "originalBytes": 1959
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-actual-aca99-→fresh-generation-reference--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-actual-aca99-→fresh-generation-reference/error-context.md",
+      "sha256": "13f9a5df398fe36a0696ef3cf11e42958e5b1b579b471bef05852e4c25ae6375",
+      "originalSha256": "8a5e62571834dda8d53d980d3f37729e2b838d030daf9596904e6858d449d123",
+      "originalBytes": 11570
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-actual-aca99-→fresh-generation-reference--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-actual-aca99-→fresh-generation-reference/native-hands-summary.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-15cb2-erver401→no-old-resume-save--attachments--native-head-summary-4075b399e09f9fc35b7784aaff44588d36014d59.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-15cb2-erver401→no-old-resume-save/attachments/native-head-summary-4075b399e09f9fc35b7784aaff44588d36014d59.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-15cb2-erver401→no-old-resume-save--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-15cb2-erver401→no-old-resume-save/before-close.json",
+      "sha256": "cd3ae095e97c3792018eed3d877db8c4b321d41ec5bfccef6567e7c71df023d6",
+      "originalSha256": "24e6fe6d93e354270420bf133910eb6ecd1049261a7c6c735a94522e132310b4",
+      "originalBytes": 1959
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-15cb2-erver401→no-old-resume-save--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-15cb2-erver401→no-old-resume-save/error-context.md",
+      "sha256": "8d54ee531b27bd24d368ed09ac255fa21d608014f37ee07d47c461e72b75ccde",
+      "originalSha256": "aadb8189ab6a4474b6a40ccaf58915e1bff9e985668fc6a1c2f35c24f93943ff",
+      "originalBytes": 11566
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-15cb2-erver401→no-old-resume-save--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-15cb2-erver401→no-old-resume-save/native-hands-summary.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-23045-ge-timing-without-raw-input--attachments--native-head-summary-e949d482e2fa2100da7e1f44b2f5ac7a7f582d6c.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-23045-ge-timing-without-raw-input/attachments/native-head-summary-e949d482e2fa2100da7e1f44b2f5ac7a7f582d6c.json",
+      "sha256": "6f39a70bd30d5204248fda563e1196e1ee440c2652c68884effec966d3a856eb",
+      "originalSha256": "e35a019079f4d6202039323bb8f8dd8fdd6a7a229306a32b0a992655b941211b",
+      "originalBytes": 2245
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-23045-ge-timing-without-raw-input--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-23045-ge-timing-without-raw-input/before-close.json",
+      "sha256": "3c190826e27f8c32e905f440fe847dac7d2e1b571733c491dcb006fad0cc3b45",
+      "originalSha256": "f40be63a97883995a46b5f3d4d215987d69bc73180d201a2a6b8d15743e0ab8c",
+      "originalBytes": 2028
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-23045-ge-timing-without-raw-input--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-23045-ge-timing-without-raw-input/error-context.md",
+      "sha256": "1baecbf25b774991916f258cc8a3cbc7494d4785e538fe4346b2818dfed428b0",
+      "originalSha256": "a147f114c5eb0c2783c9478e99cdb3f91f73b355ddaee2ea5c6d13ae49c3417c",
+      "originalBytes": 11564
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-23045-ge-timing-without-raw-input--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-23045-ge-timing-without-raw-input/native-hands-summary.json",
+      "sha256": "6f39a70bd30d5204248fda563e1196e1ee440c2652c68884effec966d3a856eb",
+      "originalSha256": "e35a019079f4d6202039323bb8f8dd8fdd6a7a229306a32b0a992655b941211b",
+      "originalBytes": 2245
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-4e236-fresh-generation→own-record--attachments--native-head-summary-4a6aa5aab0ec184bbff22d1793ca9b094c53c1a4.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-4e236-fresh-generation→own-record/attachments/native-head-summary-4a6aa5aab0ec184bbff22d1793ca9b094c53c1a4.json",
+      "sha256": "73bd3184e8998afc175233faddbb395c1ef6218eac84bbdd66fd1feaa0db097b",
+      "originalSha256": "5116d3dcc740815bde6c28e0131dc854a6f386fe0fc04805487a223fe56b5832",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-4e236-fresh-generation→own-record--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-4e236-fresh-generation→own-record/before-close.json",
+      "sha256": "a5a9c200acb8352c28518a179eb5a26c7275975b6966ba8d39696e2b97e525a5",
+      "originalSha256": "8788a9f639d97fd69d0a4687f8836fa70ea0b67287af03e4ec3ffffda0fc7ad7",
+      "originalBytes": 1959
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-4e236-fresh-generation→own-record--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-4e236-fresh-generation→own-record/error-context.md",
+      "sha256": "193c2284696dd8183b3450bd51e1e46b747bfe8da062fceab9f17fdb46a9ddea",
+      "originalSha256": "c5f457ea9ae9bc91bece8707f3bb44389f1680ab136a614f0b7d8458c56d028c",
+      "originalBytes": 11590
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-4e236-fresh-generation→own-record--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-4e236-fresh-generation→own-record/native-hands-summary.json",
+      "sha256": "73bd3184e8998afc175233faddbb395c1ef6218eac84bbdd66fd1feaa0db097b",
+      "originalSha256": "5116d3dcc740815bde6c28e0131dc854a6f386fe0fc04805487a223fe56b5832",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-50471-pagehide→no-old-resume-save--attachments--native-head-summary-6c5a60a6a5aabe0297e83cb133c836dcebe16f09.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-50471-pagehide→no-old-resume-save/attachments/native-head-summary-6c5a60a6a5aabe0297e83cb133c836dcebe16f09.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-50471-pagehide→no-old-resume-save--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-50471-pagehide→no-old-resume-save/before-close.json",
+      "sha256": "cd3ae095e97c3792018eed3d877db8c4b321d41ec5bfccef6567e7c71df023d6",
+      "originalSha256": "24e6fe6d93e354270420bf133910eb6ecd1049261a7c6c735a94522e132310b4",
+      "originalBytes": 1959
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-50471-pagehide→no-old-resume-save--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-50471-pagehide→no-old-resume-save/error-context.md",
+      "sha256": "f9162d73dbc368c8afc8a0475cc1e45495711dec03df82714892e7452a456375",
+      "originalSha256": "4d0497ac7229bcbd147728868074f38a30925124b0169b6e4e1028dd0dd20763",
+      "originalBytes": 11565
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-50471-pagehide→no-old-resume-save--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-50471-pagehide→no-old-resume-save/native-hands-summary.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-8f399-→unmount→no-old-resume-save--attachments--native-head-summary-ef365150f000d9acf11638f2bb59210913080fda.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-8f399-→unmount→no-old-resume-save/attachments/native-head-summary-ef365150f000d9acf11638f2bb59210913080fda.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-8f399-→unmount→no-old-resume-save--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-8f399-→unmount→no-old-resume-save/before-close.json",
+      "sha256": "cd3ae095e97c3792018eed3d877db8c4b321d41ec5bfccef6567e7c71df023d6",
+      "originalSha256": "24e6fe6d93e354270420bf133910eb6ecd1049261a7c6c735a94522e132310b4",
+      "originalBytes": 1959
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-8f399-→unmount→no-old-resume-save--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-8f399-→unmount→no-old-resume-save/error-context.md",
+      "sha256": "27b3910dc597857c06513376e29f8623bf5a9d5a3524596b462f45b4609be16e",
+      "originalSha256": "4f7845dc501cd66bd583c6ac5355277b05ab32d32adcd2ff1c90e96445c49038",
+      "originalBytes": 11564
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-8f399-→unmount→no-old-resume-save--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-8f399-→unmount→no-old-resume-save/native-hands-summary.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-a17a9-crop-multiple-none→recovery--attachments--native-head-summary-6e41b6ce01cf1a657eb125189950e87de9703bb6.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-a17a9-crop-multiple-none→recovery/attachments/native-head-summary-6e41b6ce01cf1a657eb125189950e87de9703bb6.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-a17a9-crop-multiple-none→recovery--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-a17a9-crop-multiple-none→recovery/before-close.json",
+      "sha256": "cd3ae095e97c3792018eed3d877db8c4b321d41ec5bfccef6567e7c71df023d6",
+      "originalSha256": "24e6fe6d93e354270420bf133910eb6ecd1049261a7c6c735a94522e132310b4",
+      "originalBytes": 1959
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-a17a9-crop-multiple-none→recovery--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-a17a9-crop-multiple-none→recovery/error-context.md",
+      "sha256": "424cdb70daae48f87759739a2481bf00fbfe48e06cf0b38c12b2f05dca87f944",
+      "originalSha256": "1bd985b0be882aadb1c8e21121db67e4095208583383a6f7dcc9b8931e86435f",
+      "originalBytes": 11599
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-a17a9-crop-multiple-none→recovery--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-a17a9-crop-multiple-none→recovery/native-hands-summary.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-b59bb-t→logout→no-old-resume-save--attachments--native-head-summary-908b5f28d1abe9d79d238127aaeb02922a74de9b.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-b59bb-t→logout→no-old-resume-save/attachments/native-head-summary-908b5f28d1abe9d79d238127aaeb02922a74de9b.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-b59bb-t→logout→no-old-resume-save--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-b59bb-t→logout→no-old-resume-save/before-close.json",
+      "sha256": "cd3ae095e97c3792018eed3d877db8c4b321d41ec5bfccef6567e7c71df023d6",
+      "originalSha256": "24e6fe6d93e354270420bf133910eb6ecd1049261a7c6c735a94522e132310b4",
+      "originalBytes": 1959
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-b59bb-t→logout→no-old-resume-save--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-b59bb-t→logout→no-old-resume-save/error-context.md",
+      "sha256": "418f93e817f47b4b2b441a99dab45f533ec16dba94f78fa95bb93de67f4c850d",
+      "originalSha256": "941d199219a39fbe0cb0e58964c266f4b5c1f4a932fe4ce37dc6f8d42cf07c66",
+      "originalBytes": 11563
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-b59bb-t→logout→no-old-resume-save--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-b59bb-t→logout→no-old-resume-save/native-hands-summary.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-b949f-t-cannot-revive-colour-save--attachments--native-head-summary-1ad032ba7f9e37787de6abce0c62d5be499888ef.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-b949f-t-cannot-revive-colour-save/attachments/native-head-summary-1ad032ba7f9e37787de6abce0c62d5be499888ef.json",
+      "sha256": "73bd3184e8998afc175233faddbb395c1ef6218eac84bbdd66fd1feaa0db097b",
+      "originalSha256": "5116d3dcc740815bde6c28e0131dc854a6f386fe0fc04805487a223fe56b5832",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-b949f-t-cannot-revive-colour-save--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-b949f-t-cannot-revive-colour-save/before-close.json",
+      "sha256": "a5a9c200acb8352c28518a179eb5a26c7275975b6966ba8d39696e2b97e525a5",
+      "originalSha256": "8788a9f639d97fd69d0a4687f8836fa70ea0b67287af03e4ec3ffffda0fc7ad7",
+      "originalBytes": 1959
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-b949f-t-cannot-revive-colour-save--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-b949f-t-cannot-revive-colour-save/error-context.md",
+      "sha256": "aa78a0d2dfa8d56a5244a3be01ef2035fc2d5213ae61f0802f28a3e1e67455db",
+      "originalSha256": "aba43412360eac2aa44f1917359e61c462a5ba6b2c01a054b71b3a5f4cd1c1ab",
+      "originalBytes": 11586
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-b949f-t-cannot-revive-colour-save--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-b949f-t-cannot-revive-colour-save/native-hands-summary.json",
+      "sha256": "73bd3184e8998afc175233faddbb395c1ef6218eac84bbdd66fd1feaa0db097b",
+      "originalSha256": "5116d3dcc740815bde6c28e0131dc854a6f386fe0fc04805487a223fe56b5832",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-bd827-→new-owner-explicit-restart--attachments--native-head-summary-376d284e4ffd4260005f8a96a2ac316a3ef91004.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-bd827-→new-owner-explicit-restart/attachments/native-head-summary-376d284e4ffd4260005f8a96a2ac316a3ef91004.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-bd827-→new-owner-explicit-restart--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-bd827-→new-owner-explicit-restart/before-close.json",
+      "sha256": "cd3ae095e97c3792018eed3d877db8c4b321d41ec5bfccef6567e7c71df023d6",
+      "originalSha256": "24e6fe6d93e354270420bf133910eb6ecd1049261a7c6c735a94522e132310b4",
+      "originalBytes": 1959
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-bd827-→new-owner-explicit-restart--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-bd827-→new-owner-explicit-restart/error-context.md",
+      "sha256": "8b3af684d5206cbedba257268d9aa151a61f9072abe0428631a2391064bc7556",
+      "originalSha256": "29daa248f01d8c1146caed65ebe11b8914122c1cee8b4e2847daed07a4677a5b",
+      "originalBytes": 11585
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-bd827-→new-owner-explicit-restart--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-bd827-→new-owner-explicit-restart/native-hands-summary.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-c6da6-n→different-cause→occlusion--attachments--native-head-summary-d6fd46d56ddb23fb46d7790181d6b73ebcc53eb4.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-c6da6-n→different-cause→occlusion/attachments/native-head-summary-d6fd46d56ddb23fb46d7790181d6b73ebcc53eb4.json",
+      "sha256": "1df958d82a2d3f60b04deb31b7213ac1cb99b674322b27e9b6e2d7fcf4e7e085",
+      "originalSha256": "160d6f8b4938aeeb5671b329d117e4530826b58221920115cf7c9e81f34094b8",
+      "originalBytes": 2176
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-c6da6-n→different-cause→occlusion--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-c6da6-n→different-cause→occlusion/before-close.json",
+      "sha256": "c28eea952eace4048649b125e84753dd8ba0d5067e2c211b3dc6047791859178",
+      "originalSha256": "5e35d431d4bfa79d12be027939984dbe0348c72a8f13c2c62c65576e604ec446",
+      "originalBytes": 1958
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-c6da6-n→different-cause→occlusion--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-c6da6-n→different-cause→occlusion/error-context.md",
+      "sha256": "b60dd32f739c711c09e314afd0c082d5b9660f9734c28319dfa044d6b205ad7e",
+      "originalSha256": "060f05e59306546736e779bab48aca0e0c460e43dfb324f6c24deaad40346e40",
+      "originalBytes": 11592
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-c6da6-n→different-cause→occlusion--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-c6da6-n→different-cause→occlusion/native-hands-summary.json",
+      "sha256": "1df958d82a2d3f60b04deb31b7213ac1cb99b674322b27e9b6e2d7fcf4e7e085",
+      "originalSha256": "160d6f8b4938aeeb5671b329d117e4530826b58221920115cf7c9e81f34094b8",
+      "originalBytes": 2176
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-start→stop→own-interrupted-record--attachments--native-head-summary-d966dc48508a47379ffd35b786d9a1728053b6cf.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-start→stop→own-interrupted-record/attachments/native-head-summary-d966dc48508a47379ffd35b786d9a1728053b6cf.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-start→stop→own-interrupted-record--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-start→stop→own-interrupted-record/before-close.json",
+      "sha256": "cd3ae095e97c3792018eed3d877db8c4b321d41ec5bfccef6567e7c71df023d6",
+      "originalSha256": "24e6fe6d93e354270420bf133910eb6ecd1049261a7c6c735a94522e132310b4",
+      "originalBytes": 1959
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-start→stop→own-interrupted-record--error-context.md.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-start→stop→own-interrupted-record/error-context.md",
+      "sha256": "884833446534b2c24588676c83a180e3e39fb63ad49d588440b8dc4278b84665",
+      "originalSha256": "becce08bfe36583a34dca97b86dd7c8028f436f8d949cbedd231181f70ffdfc0",
+      "originalBytes": 11559
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--nativefeedback-male-native-start→stop→own-interrupted-record--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/nativefeedback-male-native-start→stop→own-interrupted-record/native-hands-summary.json",
+      "sha256": "33b3ab9d9b4ca313223629a18c340008d90f7d848d7dc9616a2cf8e62fe1b244",
+      "originalSha256": "59ac068e75d2ff55cba68b71a5e4159c244ae6c08a1f699094e7414a514f7ee2",
+      "originalBytes": 2177
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185011894518Z--report.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185011894518Z/report.json",
+      "sha256": "3350cf027afd6038e461dd81885971126cb526f71765e56a762286cc97a82e31",
+      "originalSha256": "9380e236ea7dba8b5eee4a8b62abd149e51f7d6f30cd719eddd0473b682d4b8e",
+      "originalBytes": 154148
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--.last-run.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/.last-run.json",
+      "sha256": "891cd7c3ed24e1eb8ee0770e6d3d2544ff30e0338483c5aac9c633da41f090be",
+      "originalSha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "originalBytes": 45
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-actual-aca99-→fresh-generation-reference--attachments--native-head-summary-746e56f5afa8c2094eb12298d5b8e9e164ab26e9.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-actual-aca99-→fresh-generation-reference/attachments/native-head-summary-746e56f5afa8c2094eb12298d5b8e9e164ab26e9.json",
+      "sha256": "8639226f3430a5fa9f6dd93a8d47dd7ed02c1d691db588e0503e36326ce25b59",
+      "originalSha256": "b2202f5c912733491eb5d4eec9ab8e9911f99b1c90b90ca8f96e5638028f2389",
+      "originalBytes": 19428
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-actual-aca99-→fresh-generation-reference--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-actual-aca99-→fresh-generation-reference/before-close.json",
+      "sha256": "4a84e57ea111e9a00e22bf24910cfd84b4509d8d701850ba4d6c3ad786ede092",
+      "originalSha256": "a90a6a1fb963e4ca1431880e42b832ec307a9c3e221e92ae0b387abafc2d54fc",
+      "originalBytes": 19239
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-actual-aca99-→fresh-generation-reference--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-actual-aca99-→fresh-generation-reference/native-hands-summary.json",
+      "sha256": "8639226f3430a5fa9f6dd93a8d47dd7ed02c1d691db588e0503e36326ce25b59",
+      "originalSha256": "b2202f5c912733491eb5d4eec9ab8e9911f99b1c90b90ca8f96e5638028f2389",
+      "originalBytes": 19428
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-15cb2-erver401→no-old-resume-save--attachments--native-head-summary-a7f19757ad114222c389b4862e56df35fc2e8d13.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-15cb2-erver401→no-old-resume-save/attachments/native-head-summary-a7f19757ad114222c389b4862e56df35fc2e8d13.json",
+      "sha256": "755a8979efe8fd6b3ecac6d6b6640ba60f25e3a3f9e554f6c23ad78f997278fe",
+      "originalSha256": "cbe174db0ff4d005c07e1ae1159cd6c4e283bec146f0b1a649d5f58f2da779be",
+      "originalBytes": 16474
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-15cb2-erver401→no-old-resume-save--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-15cb2-erver401→no-old-resume-save/before-close.json",
+      "sha256": "ebb88f8aecd7ae0d46f0af91926a665a3ee88f6ea4f29057949b09d29ad83883",
+      "originalSha256": "6e5195c7c5d0415e61e483cf1407775cb73be9f2a1cad2b9f33400ee4945db86",
+      "originalBytes": 16256
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-15cb2-erver401→no-old-resume-save--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-15cb2-erver401→no-old-resume-save/native-hands-summary.json",
+      "sha256": "755a8979efe8fd6b3ecac6d6b6640ba60f25e3a3f9e554f6c23ad78f997278fe",
+      "originalSha256": "cbe174db0ff4d005c07e1ae1159cd6c4e283bec146f0b1a649d5f58f2da779be",
+      "originalBytes": 16474
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-23045-ge-timing-without-raw-input--attachments--native-head-summary-8dfae3f0a4340be985ea73dcee26ffe189b63f45.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-23045-ge-timing-without-raw-input/attachments/native-head-summary-8dfae3f0a4340be985ea73dcee26ffe189b63f45.json",
+      "sha256": "bbc4c78890b5d459e5a578a1787da183ad6e8c5ce64a727512ff63da5e396b3a",
+      "originalSha256": "44db86fe779c5d895cb3b3ffdafd60fc034ec9e104b920ee1c1525ba9ae1cf84",
+      "originalBytes": 16437
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-23045-ge-timing-without-raw-input--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-23045-ge-timing-without-raw-input/before-close.json",
+      "sha256": "c01886d331e902f7da9472dc148f4db5e8c24bb4f12098e35fc2e7f28c0d1b99",
+      "originalSha256": "4e06b5baaeb5d935295bec62e713beb29b7d60895c2a875f11ca0f18005b1189",
+      "originalBytes": 16249
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-23045-ge-timing-without-raw-input--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-23045-ge-timing-without-raw-input/native-hands-summary.json",
+      "sha256": "bbc4c78890b5d459e5a578a1787da183ad6e8c5ce64a727512ff63da5e396b3a",
+      "originalSha256": "44db86fe779c5d895cb3b3ffdafd60fc034ec9e104b920ee1c1525ba9ae1cf84",
+      "originalBytes": 16437
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-23045-ge-timing-without-raw-input--native-startup-timing.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-23045-ge-timing-without-raw-input/native-startup-timing.json",
+      "sha256": "598b42b483066aa4726a22d873fd8a2b2e326c7277174454efdb0e9f3ddcbc69",
+      "originalSha256": "b3b4f93d2c9d12e61104a2caceb7c65f8191d3b670c403163043c8b0040805c2",
+      "originalBytes": 2074
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-4e236-fresh-generation→own-record--attachments--native-head-summary-926f39873f652268ecf46960cb8cbab630aa4b9a.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-4e236-fresh-generation→own-record/attachments/native-head-summary-926f39873f652268ecf46960cb8cbab630aa4b9a.json",
+      "sha256": "3a23ad1254cd7a14a2cde4e23ee4292e970c9f91343b0e1b3aee98130a5c28e9",
+      "originalSha256": "f34e9798301994292ec6a64c197a3123637e08b3600ef4de0316c78cedb41788",
+      "originalBytes": 36482
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-4e236-fresh-generation→own-record--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-4e236-fresh-generation→own-record/before-close.json",
+      "sha256": "30a5f22b026af6b0d20589d8298b898f0e3d4ca0f3a99d1e0384a297eeff688c",
+      "originalSha256": "b45bde83684846428789533381b38b0a1b0add26330731509e5555ff628997d1",
+      "originalBytes": 36264
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-4e236-fresh-generation→own-record--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-4e236-fresh-generation→own-record/native-hands-summary.json",
+      "sha256": "3a23ad1254cd7a14a2cde4e23ee4292e970c9f91343b0e1b3aee98130a5c28e9",
+      "originalSha256": "f34e9798301994292ec6a64c197a3123637e08b3600ef4de0316c78cedb41788",
+      "originalBytes": 36482
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-50471-pagehide→no-old-resume-save--attachments--native-head-summary-6be08917f14f1cc6d67eeee115f02b107ee382da.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-50471-pagehide→no-old-resume-save/attachments/native-head-summary-6be08917f14f1cc6d67eeee115f02b107ee382da.json",
+      "sha256": "a73888c1e0ae1b9bdfee00cea7b7cd5b33c6cdfc2c83706badb2baa80a774f4f",
+      "originalSha256": "792f60f585e0d7d2a4d17dfc5cfa1749ae500d3f2873fbef0b09703c50a728b7",
+      "originalBytes": 16479
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-50471-pagehide→no-old-resume-save--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-50471-pagehide→no-old-resume-save/before-close.json",
+      "sha256": "56ba9c643d7817f123aaed13b2d256349c4df47c61af45110f9da10901b58b80",
+      "originalSha256": "d65fe1ee9c2956d9570ba61d782f8458a4db456276a9c618ebef2fa379bb2334",
+      "originalBytes": 16261
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-50471-pagehide→no-old-resume-save--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-50471-pagehide→no-old-resume-save/native-hands-summary.json",
+      "sha256": "a73888c1e0ae1b9bdfee00cea7b7cd5b33c6cdfc2c83706badb2baa80a774f4f",
+      "originalSha256": "792f60f585e0d7d2a4d17dfc5cfa1749ae500d3f2873fbef0b09703c50a728b7",
+      "originalBytes": 16479
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-8f399-→unmount→no-old-resume-save--attachments--native-head-summary-1124abf83abb83b40bbfbd533c91c9ba5cd4bde6.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-8f399-→unmount→no-old-resume-save/attachments/native-head-summary-1124abf83abb83b40bbfbd533c91c9ba5cd4bde6.json",
+      "sha256": "683428a3e100594d15f06cd91d18cca51d9b758427b0688fdef19b42f62c505d",
+      "originalSha256": "664dfff52b0161437c93967e2d54d4d265ff3cf2ab43841344d2f08af3e15088",
+      "originalBytes": 16490
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-8f399-→unmount→no-old-resume-save--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-8f399-→unmount→no-old-resume-save/before-close.json",
+      "sha256": "fbe953b1629e9c9be0d92f7ee8970a47e02b042757163e7aa39b1cd6a049c0e6",
+      "originalSha256": "8d5ca7ff9bf96a55a4c4a55bced8b130abcd0199d97eec930516f74f74d36316",
+      "originalBytes": 16272
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-8f399-→unmount→no-old-resume-save--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-8f399-→unmount→no-old-resume-save/native-hands-summary.json",
+      "sha256": "683428a3e100594d15f06cd91d18cca51d9b758427b0688fdef19b42f62c505d",
+      "originalSha256": "664dfff52b0161437c93967e2d54d4d265ff3cf2ab43841344d2f08af3e15088",
+      "originalBytes": 16490
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-a17a9-crop-multiple-none→recovery--attachments--native-head-summary-1f85478e775e5de470e1bae15f26f61b748a4b24.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-a17a9-crop-multiple-none→recovery/attachments/native-head-summary-1f85478e775e5de470e1bae15f26f61b748a4b24.json",
+      "sha256": "4939a39385283400a91b145c412b41188b457afa315442f2c88f9805a07175ed",
+      "originalSha256": "71ef607225db4cd02659189cf8e7be49f5a4b772c2ea3e1f0d76c2e620233fb4",
+      "originalBytes": 19547
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-a17a9-crop-multiple-none→recovery--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-a17a9-crop-multiple-none→recovery/before-close.json",
+      "sha256": "6fa18c6b8983f3df1d405396995ca9acdaacb20e8e1e3fd6940617fcf3c069fa",
+      "originalSha256": "837c12fc8279ad1642ef3aaadbecdc272801daf66fc5a16f9e6d10eefa9e2ae4",
+      "originalBytes": 19377
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-a17a9-crop-multiple-none→recovery--feedback-pixels.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-a17a9-crop-multiple-none→recovery/feedback-pixels.json",
+      "sha256": "c3be0620b46e8f978f31a403e765164c3d0fe7f0261a7198de3be26eca534546",
+      "originalSha256": "4295a8f2ac4d0ba0a87a7b264e58a27702d368a994ddc559bd3fad177779a382",
+      "originalBytes": 48
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-a17a9-crop-multiple-none→recovery--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-a17a9-crop-multiple-none→recovery/native-hands-summary.json",
+      "sha256": "4939a39385283400a91b145c412b41188b457afa315442f2c88f9805a07175ed",
+      "originalSha256": "71ef607225db4cd02659189cf8e7be49f5a4b772c2ea3e1f0d76c2e620233fb4",
+      "originalBytes": 19547
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-b59bb-t→logout→no-old-resume-save--attachments--native-head-summary-69af66b5419e594c9f7f1d0813e07c8ea116aaa4.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-b59bb-t→logout→no-old-resume-save/attachments/native-head-summary-69af66b5419e594c9f7f1d0813e07c8ea116aaa4.json",
+      "sha256": "8fe7fea235f14770657744e3cb71bbc7704a62e0fb81b6f20140855ecc1f6080",
+      "originalSha256": "4a1118ca09727b8144f068d7f734e152cb1aaae3cdc390cf366745b62689eb1d",
+      "originalBytes": 16473
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-b59bb-t→logout→no-old-resume-save--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-b59bb-t→logout→no-old-resume-save/before-close.json",
+      "sha256": "4a96e49b2702241ecb63e931595d82352a5945922f32d48922ab05f05ce389b5",
+      "originalSha256": "93ff14dada0234c2ac9a2029ffd057b923222dccb48389bba2d7b9b82575cf65",
+      "originalBytes": 16255
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-b59bb-t→logout→no-old-resume-save--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-b59bb-t→logout→no-old-resume-save/native-hands-summary.json",
+      "sha256": "8fe7fea235f14770657744e3cb71bbc7704a62e0fb81b6f20140855ecc1f6080",
+      "originalSha256": "4a1118ca09727b8144f068d7f734e152cb1aaae3cdc390cf366745b62689eb1d",
+      "originalBytes": 16473
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-b949f-t-cannot-revive-colour-save--attachments--native-head-summary-4293fa8349126db116bdea183417b5ad20ab8281.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-b949f-t-cannot-revive-colour-save/attachments/native-head-summary-4293fa8349126db116bdea183417b5ad20ab8281.json",
+      "sha256": "20165e8d3408c4064b7ab084732f07020e6510fce86beb64fae9b08a0f9fa39e",
+      "originalSha256": "c35fc851da3ef33a81288b60d85b5c113ac62960793aa8554097d4c9f69ed73f",
+      "originalBytes": 16515
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-b949f-t-cannot-revive-colour-save--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-b949f-t-cannot-revive-colour-save/before-close.json",
+      "sha256": "f41dff049f5e5280cf12799f0cbf9fee9bee43cb5fc125ff71a55cb2a12237ef",
+      "originalSha256": "0fb263769db650382b6c828ad44c8c049b68b2b1e4188d22b405bbbda0435b63",
+      "originalBytes": 16297
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-b949f-t-cannot-revive-colour-save--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-b949f-t-cannot-revive-colour-save/native-hands-summary.json",
+      "sha256": "20165e8d3408c4064b7ab084732f07020e6510fce86beb64fae9b08a0f9fa39e",
+      "originalSha256": "c35fc851da3ef33a81288b60d85b5c113ac62960793aa8554097d4c9f69ed73f",
+      "originalBytes": 16515
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-bd827-→new-owner-explicit-restart--attachments--native-head-summary-f7d1ecae01d273440d3585091804e4da8cea699b.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-bd827-→new-owner-explicit-restart/attachments/native-head-summary-f7d1ecae01d273440d3585091804e4da8cea699b.json",
+      "sha256": "0cc5dc7f188d66ce2a0fc8651ba688699a05aec7cd95993af135f2f4089e9d9a",
+      "originalSha256": "87fdde17aa86b6a1bf628c937ae0e9ffe89d2a578ddbae9f731eb732257f111d",
+      "originalBytes": 17080
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-bd827-→new-owner-explicit-restart--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-bd827-→new-owner-explicit-restart/before-close.json",
+      "sha256": "beb4b4ab46e098552202870a4d878b278c4a11fe65b14d8a1fcc606450d3a7ef",
+      "originalSha256": "54af78d786c6590d995ded97196f4e421fd8bc200cd9b661aa0b7a40ea6dac36",
+      "originalBytes": 16891
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-bd827-→new-owner-explicit-restart--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-bd827-→new-owner-explicit-restart/native-hands-summary.json",
+      "sha256": "0cc5dc7f188d66ce2a0fc8651ba688699a05aec7cd95993af135f2f4089e9d9a",
+      "originalSha256": "87fdde17aa86b6a1bf628c937ae0e9ffe89d2a578ddbae9f731eb732257f111d",
+      "originalBytes": 17080
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-c6da6-n→different-cause→occlusion--attachments--native-head-summary-2a06969c16b8b59a4991819ce987f69f48c00e82.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-c6da6-n→different-cause→occlusion/attachments/native-head-summary-2a06969c16b8b59a4991819ce987f69f48c00e82.json",
+      "sha256": "52ffcba538a0e5482b764fe755df9e5403c214548194b9f2fa13a2313517a54d",
+      "originalSha256": "4d671938882fa9c1294a00deddfff95da0e1c5d22e5169f4fc5007e138c6889d",
+      "originalBytes": 16684
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-c6da6-n→different-cause→occlusion--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-c6da6-n→different-cause→occlusion/before-close.json",
+      "sha256": "589d336f992fee14e76464035cbc145cd348e79cbf714de91ad8afa53e193af7",
+      "originalSha256": "d9a7de861c4071f5a11b154eabbbe97ae99ff98834e0637cc2f4e5d92af9abdd",
+      "originalBytes": 16466
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-c6da6-n→different-cause→occlusion--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-c6da6-n→different-cause→occlusion/native-hands-summary.json",
+      "sha256": "52ffcba538a0e5482b764fe755df9e5403c214548194b9f2fa13a2313517a54d",
+      "originalSha256": "4d671938882fa9c1294a00deddfff95da0e1c5d22e5169f4fc5007e138c6889d",
+      "originalBytes": 16684
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-start→stop→own-interrupted-record--attachments--native-head-summary-7399ccbe023cf9c36f88c11726be5d4adb2c8b84.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-start→stop→own-interrupted-record/attachments/native-head-summary-7399ccbe023cf9c36f88c11726be5d4adb2c8b84.json",
+      "sha256": "556519883802166a52865a49a1120da26e69e18862fc0af22a1872c8b3436770",
+      "originalSha256": "9d11f11bae7e442dafadb0e77cf46a3e2f213de4c6cea0bd7e48dcacfc108999",
+      "originalBytes": 8548
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-start→stop→own-interrupted-record--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-start→stop→own-interrupted-record/before-close.json",
+      "sha256": "03cc6f5fc1b95f3d0c980cd6e5d6a85402acdb23555f0d4d4fd659dcec0c69c3",
+      "originalSha256": "8299579d673fe48d0d76570b61e76fbc7cb2a9233f00d6399eb18342125393f9",
+      "originalBytes": 8329
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--nativefeedback-male-native-start→stop→own-interrupted-record--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/nativefeedback-male-native-start→stop→own-interrupted-record/native-hands-summary.json",
+      "sha256": "556519883802166a52865a49a1120da26e69e18862fc0af22a1872c8b3436770",
+      "originalSha256": "9d11f11bae7e442dafadb0e77cf46a3e2f213de4c6cea0bd7e48dcacfc108999",
+      "originalBytes": 8548
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185357507575Z--report.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185357507575Z/report.json",
+      "sha256": "b044ea72566b7b529e87968957aa88cebe0c5a669db4c12c7767b2c6b35fb445",
+      "originalSha256": "041a5003d358a56b92105e44efe4a2859f15551a4087fe7355fd4d861f88b994",
+      "originalBytes": 23746
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--.last-run.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/.last-run.json",
+      "sha256": "891cd7c3ed24e1eb8ee0770e6d3d2544ff30e0338483c5aac9c633da41f090be",
+      "originalSha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "originalBytes": 45
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-actu-f9642-→fresh-generation-reference--attachments--native-head-summary-e2ad1e226421642bab17dea8bf5ae3b3c653307e.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-actu-f9642-→fresh-generation-reference/attachments/native-head-summary-e2ad1e226421642bab17dea8bf5ae3b3c653307e.json",
+      "sha256": "8843ae21d8da5210dae5868ad85de485aeb7ef85f56895d3b399fd7482056a74",
+      "originalSha256": "92a83260089d2bbab42e40329ae36b865ee9ce5e7f3d3890703b02441f7da7e7",
+      "originalBytes": 19494
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-actu-f9642-→fresh-generation-reference--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-actu-f9642-→fresh-generation-reference/before-close.json",
+      "sha256": "f678a6aa332e8f2f4e9538c6286862d6e7ae3f179ca9b3605c7b9cc27f62fc02",
+      "originalSha256": "081089d77b9c511a6b0607162eb05b814939e5d777d9a4ab93b2309f256204f3",
+      "originalBytes": 19325
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-actu-f9642-→fresh-generation-reference--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-actu-f9642-→fresh-generation-reference/native-hands-summary.json",
+      "sha256": "8843ae21d8da5210dae5868ad85de485aeb7ef85f56895d3b399fd7482056a74",
+      "originalSha256": "92a83260089d2bbab42e40329ae36b865ee9ce5e7f3d3890703b02441f7da7e7",
+      "originalBytes": 19494
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-186f8-fresh-generation→own-record--attachments--native-head-summary-f9b63fafbb194a62346629ca2ce46124b1c8f2ca.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-186f8-fresh-generation→own-record/attachments/native-head-summary-f9b63fafbb194a62346629ca2ce46124b1c8f2ca.json",
+      "sha256": "d34304d0cd3b608641c98d32f37d4f0e543b34c259614db4bcd817ff11209a55",
+      "originalSha256": "55d7cc5b255175596dccccff25c73abde2dd6f5b486a839094de6768cb37d604",
+      "originalBytes": 36610
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-186f8-fresh-generation→own-record--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-186f8-fresh-generation→own-record/before-close.json",
+      "sha256": "8e762f2f8626b72d2477a9a7f41257f649a089ec786e23eb44e533c3b6e0d46b",
+      "originalSha256": "b89bfa84b6334ae1a55192fc56c9fcd1063d34f90d10acdbea898e7f7b676d5b",
+      "originalBytes": 36392
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-186f8-fresh-generation→own-record--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-186f8-fresh-generation→own-record/native-hands-summary.json",
+      "sha256": "d34304d0cd3b608641c98d32f37d4f0e543b34c259614db4bcd817ff11209a55",
+      "originalSha256": "55d7cc5b255175596dccccff25c73abde2dd6f5b486a839094de6768cb37d604",
+      "originalBytes": 36610
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-5f706-crop-multiple-none→recovery--attachments--native-head-summary-27fa1bbf774f8ef0752c08d36370452290016bb2.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-5f706-crop-multiple-none→recovery/attachments/native-head-summary-27fa1bbf774f8ef0752c08d36370452290016bb2.json",
+      "sha256": "c72b8073f9852e6987317c524f5e35a1ba7e8fd915c4d8b12a55288bd5e37444",
+      "originalSha256": "11423b3c49671aeb9331d74479e3d69fc16c1d6ae0efcb125bbc13bd6c9167a8",
+      "originalBytes": 19570
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-5f706-crop-multiple-none→recovery--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-5f706-crop-multiple-none→recovery/before-close.json",
+      "sha256": "28cdb2e3a13210011234818ca7b182701770fcca830f40e0e685cd7982e895fb",
+      "originalSha256": "d0ed6f3cea0bbe51432ce9f5ea4dcde91298e3dcfa9b4b4a258a5bd610f36747",
+      "originalBytes": 19400
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-5f706-crop-multiple-none→recovery--feedback-pixels.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-5f706-crop-multiple-none→recovery/feedback-pixels.json",
+      "sha256": "7f5dd6da97abbc32a7a4a6e853f135790766a07d49feba4c7ca58a32db98835e",
+      "originalSha256": "c2e748a18ce9539c6a7401b7016ca5e80698899dcee3cfce770b7357d73702a0",
+      "originalBytes": 48
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-5f706-crop-multiple-none→recovery--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-5f706-crop-multiple-none→recovery/native-hands-summary.json",
+      "sha256": "c72b8073f9852e6987317c524f5e35a1ba7e8fd915c4d8b12a55288bd5e37444",
+      "originalSha256": "11423b3c49671aeb9331d74479e3d69fc16c1d6ae0efcb125bbc13bd6c9167a8",
+      "originalBytes": 19570
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-5ffc0-→new-owner-explicit-restart--attachments--native-head-summary-3995d01ee425f518519a54b08cf2f0803a5e5d0c.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-5ffc0-→new-owner-explicit-restart/attachments/native-head-summary-3995d01ee425f518519a54b08cf2f0803a5e5d0c.json",
+      "sha256": "54db195af68a88f43af258be78129bd8d1e13bf252a1e418bada67ae29cd5a48",
+      "originalSha256": "328ebfdddd36b03d01eab675b92957c6886070a0e091330d9eefdb65ade6af76",
+      "originalBytes": 17140
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-5ffc0-→new-owner-explicit-restart--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-5ffc0-→new-owner-explicit-restart/before-close.json",
+      "sha256": "085b3d631573cd01c04bc4f98f72077ac0dba229909102225eb6ce43158169bf",
+      "originalSha256": "f57706697873b3477dbf86868485af8f29072366eeef04307d2ccd7d152dd509",
+      "originalBytes": 16971
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-5ffc0-→new-owner-explicit-restart--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-5ffc0-→new-owner-explicit-restart/native-hands-summary.json",
+      "sha256": "54db195af68a88f43af258be78129bd8d1e13bf252a1e418bada67ae29cd5a48",
+      "originalSha256": "328ebfdddd36b03d01eab675b92957c6886070a0e091330d9eefdb65ade6af76",
+      "originalBytes": 17140
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-7324c-erver401→no-old-resume-save--attachments--native-head-summary-cae4a3e30075eb7cd9f648c210474ef09c6136fc.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-7324c-erver401→no-old-resume-save/attachments/native-head-summary-cae4a3e30075eb7cd9f648c210474ef09c6136fc.json",
+      "sha256": "8e64fbccf2044fe02f80690c60c0af4734fb2540a3513bdf00ef43310664701c",
+      "originalSha256": "d5551211b4f34599e4b6049a57b3b263f83f4d80cfcacca806f0790cc7102101",
+      "originalBytes": 16494
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-7324c-erver401→no-old-resume-save--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-7324c-erver401→no-old-resume-save/before-close.json",
+      "sha256": "9b1050194b0fe827a924ce66f37cc49b73748d1a351fe4747317d6a4a7231a5a",
+      "originalSha256": "3505f479b9b455d595515d09c12ff6fee6c50f12afec7e80e53d3b89b1fcb9ac",
+      "originalBytes": 16276
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-7324c-erver401→no-old-resume-save--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-7324c-erver401→no-old-resume-save/native-hands-summary.json",
+      "sha256": "8e64fbccf2044fe02f80690c60c0af4734fb2540a3513bdf00ef43310664701c",
+      "originalSha256": "d5551211b4f34599e4b6049a57b3b263f83f4d80cfcacca806f0790cc7102101",
+      "originalBytes": 16494
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-88804-t-cannot-revive-colour-save--attachments--native-head-summary-3e9c0ab1f93f6eecb203c58508f17415e38ed8b6.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-88804-t-cannot-revive-colour-save/attachments/native-head-summary-3e9c0ab1f93f6eecb203c58508f17415e38ed8b6.json",
+      "sha256": "5fb87f3370e9bc4a5dec7e50e6f5201a7cc57ed4799c2f82492d1d1b8847f6f4",
+      "originalSha256": "36c7bcd24ef0b49b5f632f14752c467bbefc85adcb16b6b072dce24036e61567",
+      "originalBytes": 16514
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-88804-t-cannot-revive-colour-save--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-88804-t-cannot-revive-colour-save/before-close.json",
+      "sha256": "04c4f82dc07acaa3696fe2b56a118c819dd8cc72641e8e26cf51c8e4940b5a6d",
+      "originalSha256": "7c4dab82ca44a1aadee47e4a9ff2b14dcb29ad00252beadfd3a5f73c82e1b167",
+      "originalBytes": 16296
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-88804-t-cannot-revive-colour-save--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-88804-t-cannot-revive-colour-save/native-hands-summary.json",
+      "sha256": "5fb87f3370e9bc4a5dec7e50e6f5201a7cc57ed4799c2f82492d1d1b8847f6f4",
+      "originalSha256": "36c7bcd24ef0b49b5f632f14752c467bbefc85adcb16b6b072dce24036e61567",
+      "originalBytes": 16514
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-9208a-ge-timing-without-raw-input--attachments--native-head-summary-797bcb34edaeab7f71cce94def9a46c8fc43cc3f.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-9208a-ge-timing-without-raw-input/attachments/native-head-summary-797bcb34edaeab7f71cce94def9a46c8fc43cc3f.json",
+      "sha256": "297b9ebb63f0d60da553ece62e479c7989558470b260d4b3f6d5e366752bd5e5",
+      "originalSha256": "dcb8e4940e932f64426e74ed6cb2efd265a9177d4606b803c6ce94dc1ef5dcb7",
+      "originalBytes": 16765
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-9208a-ge-timing-without-raw-input--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-9208a-ge-timing-without-raw-input/before-close.json",
+      "sha256": "12f3b092c35f0e08cb5c6b27e0bba433d94d712104883eb0de32e149f189e994",
+      "originalSha256": "1d0f96ee289d4efc465d82d9f2ad03244f045d1b817e587d0d78c77cd8305f76",
+      "originalBytes": 16597
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-9208a-ge-timing-without-raw-input--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-9208a-ge-timing-without-raw-input/native-hands-summary.json",
+      "sha256": "297b9ebb63f0d60da553ece62e479c7989558470b260d4b3f6d5e366752bd5e5",
+      "originalSha256": "dcb8e4940e932f64426e74ed6cb2efd265a9177d4606b803c6ce94dc1ef5dcb7",
+      "originalBytes": 16765
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-9208a-ge-timing-without-raw-input--native-startup-timing.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-9208a-ge-timing-without-raw-input/native-startup-timing.json",
+      "sha256": "04c35cfbf3e5bbc24a48b0e90f57f96d6596b1eb55e82e52414baa6e1a27203a",
+      "originalSha256": "c64233c0fefd937aa4d59eb857d2944ced0eebe2731087043fa66914b530a321",
+      "originalBytes": 2170
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-9e9bf-→unmount→no-old-resume-save--attachments--native-head-summary-c47efb9034b4a400c75cf0680117cead2706f173.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-9e9bf-→unmount→no-old-resume-save/attachments/native-head-summary-c47efb9034b4a400c75cf0680117cead2706f173.json",
+      "sha256": "3bdcc96d2230b4e52717a2d18a40c242e81e2dd8c5cd324ce9848f1459dac9fe",
+      "originalSha256": "7278e43ea13a488ad1405f8167c6580c5b40f5e01f18e3bb4f9545b19750db46",
+      "originalBytes": 16510
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-9e9bf-→unmount→no-old-resume-save--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-9e9bf-→unmount→no-old-resume-save/before-close.json",
+      "sha256": "5965559733fddd71c762aabfa6eadd9b05239d2ace286a8115b9e9365a382615",
+      "originalSha256": "18c1ba91003a6c7dcac763afb9456af57fff2d45e0b99987f9852a33ae69bbdb",
+      "originalBytes": 16292
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-9e9bf-→unmount→no-old-resume-save--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-9e9bf-→unmount→no-old-resume-save/native-hands-summary.json",
+      "sha256": "3bdcc96d2230b4e52717a2d18a40c242e81e2dd8c5cd324ce9848f1459dac9fe",
+      "originalSha256": "7278e43ea13a488ad1405f8167c6580c5b40f5e01f18e3bb4f9545b19750db46",
+      "originalBytes": 16510
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-ba422-t→logout→no-old-resume-save--attachments--native-head-summary-d72623e9cd56d213684bdc7b6d675f448c804b05.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-ba422-t→logout→no-old-resume-save/attachments/native-head-summary-d72623e9cd56d213684bdc7b6d675f448c804b05.json",
+      "sha256": "afc0dce892ab5cffb726417d3ef5a96655cdd5cf64d4dea3bd68576881cc92b4",
+      "originalSha256": "117fd78e32a4935fb286ecc00d9b558eb21a7eb1717178c70ccfab6e08e5dd98",
+      "originalBytes": 16494
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-ba422-t→logout→no-old-resume-save--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-ba422-t→logout→no-old-resume-save/before-close.json",
+      "sha256": "413c166e4735efa20c108285483aff03497c8f8f458611d3f6c27c4869930fa7",
+      "originalSha256": "75af4f5019213f9ef66914dbe319b15ab75d5a1d266a7750eff7527bd3780653",
+      "originalBytes": 16276
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-ba422-t→logout→no-old-resume-save--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-ba422-t→logout→no-old-resume-save/native-hands-summary.json",
+      "sha256": "afc0dce892ab5cffb726417d3ef5a96655cdd5cf64d4dea3bd68576881cc92b4",
+      "originalSha256": "117fd78e32a4935fb286ecc00d9b558eb21a7eb1717178c70ccfab6e08e5dd98",
+      "originalBytes": 16494
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-e4eb3-stop→own-interrupted-record--attachments--native-head-summary-3fbc5e50cc7e0d38f8014514bc04112d22626e37.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-e4eb3-stop→own-interrupted-record/attachments/native-head-summary-3fbc5e50cc7e0d38f8014514bc04112d22626e37.json",
+      "sha256": "290f757071d503eae45eff74edc3cb62061805a564e545717b3468b04ec4a711",
+      "originalSha256": "78b837a7059f15a52d75ebfe9d0ca29963c51bf97edb823c67bb3242bbc08ed7",
+      "originalBytes": 8586
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-e4eb3-stop→own-interrupted-record--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-e4eb3-stop→own-interrupted-record/before-close.json",
+      "sha256": "8221b1498bf0b74d976641d697186d1d95201c9928a7c5534b0f04a050199956",
+      "originalSha256": "7a27b9e3f1173f554ade9a656fcbaaec032283e4f470adf72c28fd225a5cad7a",
+      "originalBytes": 8367
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-e4eb3-stop→own-interrupted-record--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-e4eb3-stop→own-interrupted-record/native-hands-summary.json",
+      "sha256": "290f757071d503eae45eff74edc3cb62061805a564e545717b3468b04ec4a711",
+      "originalSha256": "78b837a7059f15a52d75ebfe9d0ca29963c51bf97edb823c67bb3242bbc08ed7",
+      "originalBytes": 8586
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-fc9f5-n→different-cause→occlusion--attachments--native-head-summary-daa2cf071974c0725ef5dc447aeada54461d7395.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-fc9f5-n→different-cause→occlusion/attachments/native-head-summary-daa2cf071974c0725ef5dc447aeada54461d7395.json",
+      "sha256": "9af3492cc0794fb0035f459949d2d473dd91cb7c47b144fa78e68d2abdb92640",
+      "originalSha256": "b381e998ad86d9dd88d86aff8b824be60c55500d245b0239c9cad4f28d6c72e7",
+      "originalBytes": 16706
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-fc9f5-n→different-cause→occlusion--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-fc9f5-n→different-cause→occlusion/before-close.json",
+      "sha256": "79fa074ab95792f24ecf4f1c9da8e1de18315442ad470303aee945003fda8676",
+      "originalSha256": "9aa00fe4d01bd17eb98220aaac0f3f433d806a327932106f104d359e3c33a2a4",
+      "originalBytes": 16488
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-fc9f5-n→different-cause→occlusion--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-fc9f5-n→different-cause→occlusion/native-hands-summary.json",
+      "sha256": "9af3492cc0794fb0035f459949d2d473dd91cb7c47b144fa78e68d2abdb92640",
+      "originalSha256": "b381e998ad86d9dd88d86aff8b824be60c55500d245b0239c9cad4f28d6c72e7",
+      "originalBytes": 16706
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-ff689-pagehide→no-old-resume-save--attachments--native-head-summary-ef38130466af4b6ae66f3d88bad76d97284d1008.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-ff689-pagehide→no-old-resume-save/attachments/native-head-summary-ef38130466af4b6ae66f3d88bad76d97284d1008.json",
+      "sha256": "ffb7697e7b16c181b3b5adc67566fcc80eb32a08f13bbb49e4e92bd7f0fc1f53",
+      "originalSha256": "2bb6c5d68755397f8d8b1c97769063c11c136c55876cb192a7e459c7ca71b750",
+      "originalBytes": 16500
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-ff689-pagehide→no-old-resume-save--before-close.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-ff689-pagehide→no-old-resume-save/before-close.json",
+      "sha256": "b1fb0c91749674d48bb3de6f6c0bb441630cf46c2f8101396625c15d89d837bb",
+      "originalSha256": "76307e1a5089f67d6eca59eceac01fdcfa8cabff514bff01417ecedc86bc1452",
+      "originalBytes": 16282
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--nativefeedback-female-nati-ff689-pagehide→no-old-resume-save--native-hands-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/nativefeedback-female-nati-ff689-pagehide→no-old-resume-save/native-hands-summary.json",
+      "sha256": "ffb7697e7b16c181b3b5adc67566fcc80eb32a08f13bbb49e4e92bd7f0fc1f53",
+      "originalSha256": "2bb6c5d68755397f8d8b1c97769063c11c136c55876cb192a7e459c7ca71b750",
+      "originalBytes": 16500
+    },
+    {
+      "file": "evidence/nativefeedback-20261008T185724985916Z--report.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativefeedback-20261008T185724985916Z/report.json",
+      "sha256": "4938f1853d819d52f113811de4f96b403fac89eb124515a83b3b2aab52b735bf",
+      "originalSha256": "867b009059be29ffc003229b3dbe545157a7ead2d6b5586e44cf962f22688597",
+      "originalBytes": 23770
+    },
+    {
+      "file": "evidence/nativeworker-20261008T184502487484Z--.last-run.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativeworker-20261008T184502487484Z/.last-run.json",
+      "sha256": "891cd7c3ed24e1eb8ee0770e6d3d2544ff30e0338483c5aac9c633da41f090be",
+      "originalSha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "originalBytes": 45
+    },
+    {
+      "file": "evidence/nativeworker-20261008T184502487484Z--nativeworker-female-silent-1413b-g→bounded-failure→no-record--worker-owner-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativeworker-20261008T184502487484Z/nativeworker-female-silent-1413b-g→bounded-failure→no-record/worker-owner-summary.json",
+      "sha256": "83177c8480a93f6ccfb964f6c003b0778baf9ba0918d895b4448a48c1ec4f52f",
+      "originalSha256": "37165ad67c1573d39e5d3ccb8c08df917835226dff7b18ee02b3fa652f08561e",
+      "originalBytes": 5112
+    },
+    {
+      "file": "evidence/nativeworker-20261008T184502487484Z--nativeworker-female-silent-43541-errupted-only→camera-closed--worker-owner-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativeworker-20261008T184502487484Z/nativeworker-female-silent-43541-errupted-only→camera-closed/worker-owner-summary.json",
+      "sha256": "0c58c007b496ab2d46ba81d821b6b364fe30f681cbea84ac03c238faadcb3a5b",
+      "originalSha256": "916f9e385767b5f4b22c2641cf191d3f470b5b6e3ab40b94df28c4ee2d141872",
+      "originalBytes": 5283
+    },
+    {
+      "file": "evidence/nativeworker-20261008T184502487484Z--nativeworker-female-worker-20e7c--refresh→explicit-new-owner--worker-owner-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativeworker-20261008T184502487484Z/nativeworker-female-worker-20e7c--refresh→explicit-new-owner/worker-owner-summary.json",
+      "sha256": "5a3b3fb62baeb8936c9e00aea98ee6fcdf3f09b3573f48cb88cf1fb2dab951d6",
+      "originalSha256": "22ba7db366f7e46774d2f51aa444976cabe95bf1efcc53a94bf04672d17e5563",
+      "originalBytes": 5303
+    },
+    {
+      "file": "evidence/nativeworker-20261008T184502487484Z--nativeworker-female-worker-a8d66-stop→own-interrupted-record--worker-owner-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativeworker-20261008T184502487484Z/nativeworker-female-worker-a8d66-stop→own-interrupted-record/worker-owner-summary.json",
+      "sha256": "629d6393e4218765b562ed11b5894f70986cd94cb6ca9a0e5c31380e708b783f",
+      "originalSha256": "3a5ab0f9de973a1200fedbdfa6e74bbd955323b2a4cfa22737c692b982a79538",
+      "originalBytes": 4917
+    },
+    {
+      "file": "evidence/nativeworker-20261008T184502487484Z--nativeworker-female-worker-cdfc0-logout→no-stale-resume-save--worker-owner-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativeworker-20261008T184502487484Z/nativeworker-female-worker-cdfc0-logout→no-stale-resume-save/worker-owner-summary.json",
+      "sha256": "ae633fe9006cd4b76df38fce304b7df3334b8fae4d3e557756b7c2d9f1d7ad4d",
+      "originalSha256": "0f8c1c8b8ef0fb738ca5c0ff4fefdc8130ddbcc1dce39ae9c81116935d546c51",
+      "originalBytes": 4907
+    },
+    {
+      "file": "evidence/nativeworker-20261008T184502487484Z--nativeworker-male-silent-w-1f4e3-errupted-only→camera-closed--worker-owner-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativeworker-20261008T184502487484Z/nativeworker-male-silent-w-1f4e3-errupted-only→camera-closed/worker-owner-summary.json",
+      "sha256": "5ffb36e76ee2bde3ecaf8e593893accff2bb0269de002d36aa127134427b64e9",
+      "originalSha256": "16d0067ecb832e6f7bedacfe9e25a0311547bee2d35780a7fd75ad85fa002dad",
+      "originalBytes": 5283
+    },
+    {
+      "file": "evidence/nativeworker-20261008T184502487484Z--nativeworker-male-silent-w-4ca0e-g→bounded-failure→no-record--worker-owner-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativeworker-20261008T184502487484Z/nativeworker-male-silent-w-4ca0e-g→bounded-failure→no-record/worker-owner-summary.json",
+      "sha256": "55e25a9344c04e775f7b901dddb755c981587ac33c395f09ee9b09b4a1852968",
+      "originalSha256": "87f03b34450f4395e35ad60ed7648442d9dde4842fda033754c9a87fa3e289b5",
+      "originalBytes": 5112
+    },
+    {
+      "file": "evidence/nativeworker-20261008T184502487484Z--nativeworker-male-worker-p-0857a-logout→no-stale-resume-save--worker-owner-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativeworker-20261008T184502487484Z/nativeworker-male-worker-p-0857a-logout→no-stale-resume-save/worker-owner-summary.json",
+      "sha256": "f4539f7c70c4f4a21a1927a8a1d6272dc575fa182a56847cd9f4140d575b1375",
+      "originalSha256": "8081f1d894723a9887313bdd58cbd862b0b796740e7a4f117ee93c90236f9529",
+      "originalBytes": 4907
+    },
+    {
+      "file": "evidence/nativeworker-20261008T184502487484Z--nativeworker-male-worker-r-b5676--refresh→explicit-new-owner--worker-owner-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativeworker-20261008T184502487484Z/nativeworker-male-worker-r-b5676--refresh→explicit-new-owner/worker-owner-summary.json",
+      "sha256": "96e9b24cb6ce548712163f91a345d19fff64f5128a342f8695f49c1878013105",
+      "originalSha256": "ff702b907fdfd65384a927c6bb79e444a9ac77e095514390fdfeed37b529c90e",
+      "originalBytes": 5303
+    },
+    {
+      "file": "evidence/nativeworker-20261008T184502487484Z--nativeworker-male-worker→t-2cd02-stop→own-interrupted-record--worker-owner-summary.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativeworker-20261008T184502487484Z/nativeworker-male-worker→t-2cd02-stop→own-interrupted-record/worker-owner-summary.json",
+      "sha256": "b56a2c4970c77e3513dc904931928699f1fede6a10072915ccaa121093316684",
+      "originalSha256": "fcd506bef3c76869fa78f68c5773c5f3b0349df25a6493b9105554bd6f8c6cbb",
+      "originalBytes": 4917
+    },
+    {
+      "file": "evidence/nativeworker-20261008T184502487484Z--report.json.gz",
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-captured-neck-input/bodyguard/frontend/test-results/nativeworker-20261008T184502487484Z/report.json",
+      "sha256": "ee268b36f98e882e4f58063a88b577a268b52c1aa5656fefb7831ab19049a6e9",
+      "originalSha256": "dd9e8d0d7789f936d37d3fdc299aa1ae1e01a4226136c501b3bf75622a2cbaf8",
+      "originalBytes": 14490
+    },
+    {
+      "file": "evidence/browser-byte-corrected.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/browser-byte-corrected.json",
+      "sha256": "e726a1c07996863f392824bb7aea2a908a1344d1a6e470bab36d3730537f0bc6",
+      "originalSha256": "6dd03ff2922f713f19f632400831920b232fc0e722598519f08cbebddc235530",
+      "originalBytes": 3846
+    },
+    {
+      "file": "evidence/browser-byte-corrected.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/browser-byte-corrected.receipt.json",
+      "sha256": "e04a0c26cd97682cd79ed4122fd74eb406fe755bbfc690c679a5b2c4f0fee14b",
+      "originalSha256": "04692690755b389f075761b805f414d178adb90ac3a19b32f6ce65d4a3a9f6ac",
+      "originalBytes": 1748
+    },
+    {
+      "file": "evidence/browser-byte-corrected.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/browser-byte-corrected.stderr.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/browser-byte-corrected.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/browser-byte-corrected.stdout.txt",
+      "sha256": "83ebf92fb5ae03ff13545d7729c48b87aaf78d0257651032ccfb7f3fd9f3f819",
+      "originalSha256": "d7a39e98e2df5aca91fcb4c63d017e899092635be7795406018501a0b80c178f",
+      "originalBytes": 2983
+    },
+    {
+      "file": "evidence/build-byte-corrected.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/build-byte-corrected.receipt.json",
+      "sha256": "34c271603ae09b2b80b0871f109dee76f8f0fe0e96aa8624e079977356c54372",
+      "originalSha256": "c8d718f21e3f227ad152cc5992b7da20811ae554b70d6c1a630abcce2efc228e",
+      "originalBytes": 1971
+    },
+    {
+      "file": "evidence/build-byte-corrected.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/build-byte-corrected.stderr.txt",
+      "sha256": "1b42efa6bff18414e3b5f8bdd034073bcefbe4b36206ecde3350c9ac311cc3c9",
+      "originalSha256": "744002d6d69a79eb7f04b4633e0768598505352eae83334f23e64b7f708dfd8e",
+      "originalBytes": 64
+    },
+    {
+      "file": "evidence/build-byte-corrected.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/build-byte-corrected.stdout.txt",
+      "sha256": "c682ad4ef9c8eeadcdd1080efa07407cb1bf2d4ccf0290b6dfa3a4dd34fdac1b",
+      "originalSha256": "e4d3ecfc051853b214f6cb3bbe84591976f42675bba6068e63f14e5750dc21ac",
+      "originalBytes": 568
+    },
+    {
+      "file": "evidence/equality-byte-corrected.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/equality-byte-corrected.receipt.json",
+      "sha256": "e44bf809b2f5279417c4822754a9f49b54cf00df08823ab45f761f2f75625bb9",
+      "originalSha256": "1b7dbc93b182e7f215c065e6ccd8417564862e701b500b8ce55f4d1c95d487e3",
+      "originalBytes": 1749
+    },
+    {
+      "file": "evidence/equality-byte-corrected.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/equality-byte-corrected.stderr.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/equality-byte-corrected.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/equality-byte-corrected.stdout.txt",
+      "sha256": "002c7a9a6dee0cd474cfa5409bf5658d806425d2c1546e9f63aa4cf235ee4c04",
+      "originalSha256": "017f2ba4f9ea1820df00b0070787f5716bf7b9ebc7cf48c766553dbe9e40f2e6",
+      "originalBytes": 532
+    },
+    {
+      "file": "evidence/equality-failed.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/equality-failed.receipt.json",
+      "sha256": "3fb9994db656a3b5752f0adb39be0aac5df238a22f0a231f15000d7f97a39722",
+      "originalSha256": "2cbef98b2d8535ce609cc18c14257af974fbd7d4fa201ffedef142c0cd1a91a0",
+      "originalBytes": 1741
+    },
+    {
+      "file": "evidence/equality-failed.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/equality-failed.stderr.txt",
+      "sha256": "31edfcd035ae1ff4b95758f7c17f081effc66b33a2f5c80eac352ac7979d3324",
+      "originalSha256": "7e0431a8761bc3e71d1a5681be468e135f7ef9b965868b01c761240269461b3d",
+      "originalBytes": 561
+    },
+    {
+      "file": "evidence/equality-failed.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/equality-failed.stdout.txt",
+      "sha256": "6bbe544d4425c4daed98a0fd6009c8752aff88a566e7aed4f9831b206b485933",
+      "originalSha256": "5fde0eec44f8790d7215812d223c9bf9d58eb5433334fe7f57686bf622f9b343",
+      "originalBytes": 533
+    },
+    {
+      "file": "evidence/equality.mjs.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/equality.mjs",
+      "sha256": "72c3d253bf6a54b71d4457b0147655fa688eec39562349659e7e190616d68851",
+      "originalSha256": "ca70615fb1db4e6cce5d1ec40fdea7dcd099ab38852f91797c73fdfb6bb7cbb7",
+      "originalBytes": 1245
+    },
+    {
+      "file": "evidence/guard-byte-corrected.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/guard-byte-corrected.receipt.json",
+      "sha256": "3cb919c3c1b0d45e2bddc650618d7b197799d4a8c620835715a97b5f25f8d685",
+      "originalSha256": "8e9f4fabcd1ad9fed0537ccca0a2272cc2934514963cfaf6ee68ef3b26d76e92",
+      "originalBytes": 1712
+    },
+    {
+      "file": "evidence/guard-byte-corrected.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/guard-byte-corrected.stderr.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/guard-byte-corrected.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/guard-byte-corrected.stdout.txt",
+      "sha256": "63699d5599b90894fe2b94df5a549dd92e3a366d9fd7e12c09d055096bb53da6",
+      "originalSha256": "536b676e3bef45465f1b9e967df72b8300fe14bb4925d59b0a07f5ceeb264ddc",
+      "originalBytes": 1140
+    },
+    {
+      "file": "evidence/privatebuild-byte-corrected.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/privatebuild-byte-corrected.receipt.json",
+      "sha256": "8fd52949c977b55a0cfc56cb327e70f766c30f6194d370366508c34474ce78fe",
+      "originalSha256": "6b27838659361795ffcc46c2b2bac02bb5387201eb57df66bc5ccfd9b7cc8dbd",
+      "originalBytes": 1783
+    },
+    {
+      "file": "evidence/privatebuild-byte-corrected.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/privatebuild-byte-corrected.stderr.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/privatebuild-byte-corrected.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/privatebuild-byte-corrected.stdout.txt",
+      "sha256": "a8eee3803b2bd6cac0778c61dae5c65fc53ee87852cf07425c8ac90c7d67d1d7",
+      "originalSha256": "dc7d433ce9f50a57d53cc29c6196fcdb77ddb18cd639e09ff8ef0361f18aed1d",
+      "originalBytes": 424
+    },
+    {
+      "file": "evidence/public-byte-byte-corrected.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/public-byte-byte-corrected.json",
+      "sha256": "4381ac9d0a1c9e4ba55c67ed8d3eda6a2721fb7cf464236b16bfbaebbf8afd06",
+      "originalSha256": "869c6870f59f738d4b3936d72378834bb5d3456728f30742907e0a4511539280",
+      "originalBytes": 743
+    },
+    {
+      "file": "evidence/public-byte-failed.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/public-byte-failed.json",
+      "sha256": "a7e6eba58602d0cb780f2ac9467b5d96bfee6b50b326d9caa6850060edff7853",
+      "originalSha256": "6518c8813a2b7bd895417688d4e32ad73e70331d5e476bbff78531f85825725b",
+      "originalBytes": 744
+    },
+    {
+      "file": "evidence/public-css-mismatch.css.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/public-css-mismatch.css",
+      "sha256": "ecc8d72231eadc51aec1ba9413073236623020841dc54f88d479e91185a7cd59",
+      "originalSha256": "5e477a6d93e0fa00fce8e170f58b11b5c834d3bfdd371eb483d4b2da25cd3fad",
+      "originalBytes": 31668
+    },
+    {
+      "file": "evidence/run.mjs.revision-9a14f7df3d151da6.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/run.mjs",
+      "sha256": "9a14f7df3d151da6784d62ba8454762c0be3a35eb2ef52dc674792acc256a748",
+      "originalSha256": "d9df9a0a2805bf2dcf55978024f0d816b1475ae7e12d1a5bacb31ac3783a24f7",
+      "originalBytes": 2664
+    },
+    {
+      "file": "evidence/units-byte-corrected.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/units-byte-corrected.json",
+      "sha256": "61c59f7ffdd58659d042be61ff598ec83944d71b558dd287df09a604a4792697",
+      "originalSha256": "2f218f9c893db9c435cfb570df0baa43714fb32ff7f637e11fb3abffe20e1efc",
+      "originalBytes": 471090
+    },
+    {
+      "file": "evidence/units-byte-corrected.receipt.json.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/units-byte-corrected.receipt.json",
+      "sha256": "026018fa683b728b7d346b9bd74a59e14aca918e6747aa9f8a9f75c4051a7026",
+      "originalSha256": "8020ce500ffd5ecfe416f0c22aa47958b232caafc618bdfdf15ef1853238112e",
+      "originalBytes": 1842
+    },
+    {
+      "file": "evidence/units-byte-corrected.stderr.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/units-byte-corrected.stderr.txt",
+      "sha256": "f1b651238a58fe290baec6c5e32f3bdb1943dd2bd582f02569231f7a757c7837",
+      "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "originalBytes": 0
+    },
+    {
+      "file": "evidence/units-byte-corrected.stdout.txt.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/units-byte-corrected.stdout.txt",
+      "sha256": "0006ae3a918ee8f392c3b61f00ed551ec7defc90d34409d7ebaa8de3911c6e26",
+      "originalSha256": "df8f4f25036e819667a3b33d802971fa17c2ce257e78ac6ed20b5cc759ff83fb",
+      "originalBytes": 90
+    },
+    {
+      "file": "evidence/probe--probe.js.revision-798e24ce8660d2ca.gz",
+      "source": "/private/tmp/bodyguard-neck-input.0FrXPy/probe/probe.js",
+      "sha256": "798e24ce8660d2caebaf112b35181125d1ee3b37f7547941ae908555e98f5ff6",
+      "originalSha256": "53164b964f34f2869a9910ad458493228085656e7391c38c48d99da53ecc0ab7",
+      "originalBytes": 226087
+    }
+  ],
+  "actualPeople": 0,
+  "physicalCameras": 0,
+  "syntheticPositiveOnly": true,
+  "productPolicyApproved": false,
+  "immutablePacking": true
+}

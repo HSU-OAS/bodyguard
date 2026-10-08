@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-09 [S2.M2 촬영 기하·목 관찰 입력](stories/captured-neck-input.md): 실제 촬영 크기와 original stamp/presence를 보존해 비공개 코칭 evaluator로 연결했다. [작동 흐름·실패·실제/합성 구분](review/captured-neck-input/README.md). 남녀 native 계정/두 모델/기록 회귀와 main/worker 기하 연결을 확인했으며, 공개 byte/최소 문구·GLB·판정/SDK 정책·운영은 유지한다. 실제 사람/올바른 시범/classifier·최종 외형/권리·승인 UI/외부/운영·기존 시작 P2·D2/전체1~6 및 출시 동작0은 여전히 미완료다. PR #94는 실제 merge d3be7ad에서 확인한 기준선이며 그 최신 main에서 별도 Story를 시작했다.
+
 2026-10-09 [S6.12 응답 없는 Worker 복구](stories/native-worker-recovery.md): 실제 준비 고장→기록0, 수행 고장→카메라 종료/본인 interrupted만 저장과 기존 남녀 정상 소유 흐름을 확인했다. [실패·증거·한계](review/native-worker-recovery/README.md). 공개 byte/문구·GLB/모델·기본 main 추론 유지, 실제 사람/물리 카메라0·기존 시작 P2/D2/전체1~6 미완료. PR #93은 main f26c7b9에 실제 병합됐고 그 최신 main에서 새 Story를 시작했다. 아래는 시점별 기록이다.
 
 2026-10-09 [S6.11 비공개 Worker 추론](stories/native-worker-inference.md): 실제 Chrome/SDK/API/격리 SQL의 로그인→두 아바타→중단/본인 기록·준비 중 로그아웃·세션 갱신/새 시작을 확인했다. [실패·최종 증거·한계](review/native-worker-inference/README.md). 가짜 카메라/메일/동작 gate·미완성 A37이며 기본 main/공개 byte·모델/GLB·최소 문구·판정/SDK 정책/운영은 유지한다. PR 게이트 진행, 기존 시작 P2·실측/외형·D2/전체1~6 미완료. 아래는 시점별 기록이다.
