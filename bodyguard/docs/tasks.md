@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-08 [S2.T19](stories/avatar-surface-feedback.md): 사용자 모델의 관찰에 결합한 표면 강조→가림/미검출/만료 해제→복구/종료를 실제 남녀 WebGL로 검증했다. [실제 화면·실패·남은 조건](review/surface-feedback/README.md). 합성 오류 표시 기반이며 native classifier/적응형 시범·실제 자세 정확도·최종 외형·승인 공개 UI·전체1~6은 미완료/출시 동작0이다. 다음은 같은 native 관측·현재 코칭 판정과 표시/시범 안내의 비공개 통합이다. 공개 byte/디자인·조형/GLB·임상 기준·운영 변경0, 최소 텍스트·원본/실패·기존 승인 기준 유지. PR81 실제 merge b9eb40b 이후 최신 main에서 시작했고 아래는 시점별 기록이다.
+
 2026-10-08 [S2.T18](stories/native-reference.md): 실제 로그인 소유 pair의 단계 시범·pause/새 세대 resume·권한 회수 연결을 검증했다. 강화 비교에서 발견된 정지·retained 핸들 문제를 보완하고 [작동 흐름/실제 미리보기·실패·이월](review/native-reference/README.md)을 보존했다. 공개 디자인/byte·판정·조형/GLB·운영 변경0, 최종 외형·실측·승인 UI·전체1~6은 미완료/출시 동작0이다. 다음은 검증된 오류 안내/시범 비교의 독립 연결이며 선행 실측·외부/디자인 승인을 건너뛰지 않는다. 최소 텍스트·기존 사전/별도 승인 기준 유지. 아래는 시점별 기록이다.
 
 2026-10-08 단계 시범 재생: [S2.T17](stories/reference-playback.md)은 owned pair의 시범 모델을 준비→수행→유지→복귀에 반응하도록 연결했다. 현재 자세의 부드러운 전환·정지/만료/재개·해제, 관찰/source와 독립성이 실제 남녀 WebGL에서 작동한다. [화면·실패·남은 조건](review/reference-playback/README.md). Blender 메모리 제작 fixture이며 올바른 스트레칭/실제 사람 검증은 아니다. 다음은 로그인 native session과 단계 전달의 비공개 통합이다. 공개 byte/문구·같은 부위 새 조형/GLB·임상/SDK 정책/운영 변경0. 최소 텍스트·0 qualified motions·D2/전체1~6 및 별도 승인 기준은 유지한다. 아래는 시점별 기록이다.

@@ -31,6 +31,8 @@ main 9733e4c에는 PR #15의 순수 코칭 진행 엔진까지 병합됐다. 계
 
 ## 다음 실행 순서
 
+2026-10-08 [S2.T19](stories/avatar-surface-feedback.md)은 copied pose coverage와 같은 세대/sequence/stamp의 합성 오류만 사용자 표면에 표시한다. [실제 남녀 WebGL·가림/복구·실패](review/surface-feedback/README.md). 실제 classifier/native 오류 전달·시범 적응·목/체간/손·실측·최종 외형/권리·승인 공개 UI·참여자/SDK/다장치/운영 및 전체1~6은 미충족이다. 다음 비공개 native/현재 판정 연결과 실제 검증 조건을 분리한다. 같은 부위 조형/GLB·공개 byte/디자인·임상/운영 변경0, 최소 텍스트·출시 동작0·이월/별도 승인 기준을 유지한다.
+
 2026-10-08 [S2.T18](stories/native-reference.md)은 로그인 native 세션과 단계별 시범을 연결했다. 정확한 자세 검증의 실패를 보존하고 시간/권한을 보완했으며 [실제 시범/중단·새 세대/권한 회수와 미완료](review/native-reference/README.md)를 기록했다. 검증된 실제 동작/오류 강조·신체 대응·최종 외형/권리·승인 공개 디자인·참여자/SDK/노트북/외부·운영 및 전체1~6은 미충족이며 출시 동작0이다. 다음 독립 오류 안내/비교 계약·연결과 별도 실측/공개 UI 조건을 분리한다. 공개 byte/문구·판정·원본/GLB/조형·운영 변경0, 최소 텍스트·실패/원본 보존·기존 승인 기준 유지.
 
 2026-10-08 D2-T 시범 단계 재생: [S2.T17](stories/reference-playback.md)의 owned pair에는 단계별 clip·정지/만료/재개·현재 자세 전환이 연결됐다. [실제 남녀 화면·실패/증거](review/reference-playback/README.md). 원본 GLB에 Blender 메모리 fixture를 재생한 기술 시험으로 실제 수행법·사용자/동일인·판정 증거가 아니다. 다음은 native 로그인 소유 세션과 단계 전달이며, 검증된 시범/오류 강조·최종 외형/권리·승인 디자인·실측/SDK/다장치/HTTPS와 D2/전체1~6은 미충족이다. 공개 byte/화면·원본/GLB/새 조형·운영 변경0, 최소 문구·실패/원본 보존·기존 별도 승인 조건을 유지한다.
