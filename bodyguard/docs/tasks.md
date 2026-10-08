@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-08 [S6.8 시작 단계 계측](stories/native-startup-timing.md): 실제 로그인/SDK/두 아바타 흐름의 카메라·모델 생성·GLB·렌더·추론/반환을 시험에서 구분한다. [작동 흐름·실패·미확정 원인](review/native-startup-timing/README.md). runtime245508c의 실제 Chrome20/FE1177·정적/build/guard·public byte 동일을 확인했지만 과거 지연은 재현되지 않아 시작 P2를 유지한다. PR84 실제 merge258f741과 [원격 기록](https://github.com/HSU-OAS/bodyguard/pull/84#issuecomment-6057781090)을 확인한 최신 기준선이다. 조건부 PR 게이트 다음이며 실제 사람/판정·최종 외형/승인 UI·외부/운영 및 전체1~6은 미완료다. 최소 텍스트·아바타 중심·출시 동작0·원본/실패/추가 조형 보류·별도 승인 경계를 유지한다. 아래는 시점별 기록이다.
+
 2026-10-08 [S2.T21](stories/adaptive-reference.md): 같은 현재 오류 코드/부위/단계에 맞는 저작 시범으로 전환하고 가림/만료의 이전 안내를 중단한다. [실제 남녀 흐름·미완성 외형·실패/합성 구분](review/adaptive-reference/README.md). runtime3c8ce1a의 Chrome18/FE1169·정적/build/guard·공개 byte 동일을 확인했다. PR83은 실제 merge36ed814와 [원격 결과 기록](https://github.com/HSU-OAS/bodyguard/pull/83#issuecomment-6055527680)을 확인한 기준선이다. 이번 Story 조건부 PR gate는 다음이며 실제 classifier/교정 콘텐츠·실측·최종 외형/승인 UI·SDK/외부/운영·시작 P2와 전체1~6은 미완료/출시 동작0이다. 최소 텍스트·아바타/미리보기 중심·원본/실패·같은 부위 조형 보류·기존 승인 기준 유지. 아래는 시점별 기록이다.
 
 2026-10-08 [S2.T20](stories/native-feedback.md): 같은 native delivery→현재 로그인 소유 코칭 상태→사용자 오류 강조·시범 phase를 연결했다. 남녀 강조/가림·복수·미검출 해제/복구·pause/새 세대·권한 회수·본인 중단 기록의 [실제 화면·실패·합성 구분](review/native-feedback/README.md)을 보존했다. runtime d4f475c의 통합16/비교14·FE1145·정적/build/guard는 통과했고 조건부 PR gate를 진행한다. 초기 시작·재준비 실패와 간헐적 시작 원인/출시 P2는 유지한다. 최종 외형·실제 오류 판정/적응형 교정 시범·실측·승인 공개 구조/UI·전체1~6은 미완료/출시 동작0이다. 다음은 실제 동작 기준/오류 분류·오류별 교정 시범 연결과 실측 조건을 분리한 독립 작업이다. 공개 byte/디자인·조형/GLB·안전/SDK/운영 변경0, 최소 텍스트·원본/실패·기존 승인 기준 유지. 아래는 시점별 기록이다.
