@@ -9,6 +9,7 @@ import {
 import { ResourceCleanupError, type ResourceContext } from '../coaching/resources'
 import { OBSERVED_LIMB_BINDINGS } from './directionalRig'
 import type { PoseCoverage } from './observedPoseRig'
+import { OBSERVED_TRUNK_BINDING } from './observedTrunk'
 
 export type FeedbackProgram = Readonly<{
   motionId: string
@@ -64,8 +65,14 @@ export function copyFeedbackProgram(input: FeedbackProgram): FeedbackProgram {
         throw invalid()
       ids.add(id)
       const bones = Array.from(supplied)
+      if (bones.includes(OBSERVED_TRUNK_BINDING.bone) && bones.length !== 1) throw invalid()
       for (const bone of bones) {
-        if (!OBSERVED_LIMB_BINDINGS.some((binding) => binding.bone === bone) || usedBones.has(bone))
+        // FR-A-03/FR-M-07: only the observed aggregate axis; no inferred spine/pelvis coverage.
+        if (
+          (!OBSERVED_LIMB_BINDINGS.some((binding) => binding.bone === bone) &&
+            bone !== OBSERVED_TRUNK_BINDING.bone) ||
+          usedBones.has(bone)
+        )
           throw invalid()
         usedBones.add(bone)
       }
@@ -131,6 +138,7 @@ export function createSurfaceFeedback(
   }[] = []
   let closed = false,
     failed = false,
+    trunkPeak = 0,
     coverage: PoseCoverage | null = null,
     consumedSequence = -1,
     lastNow = -Infinity
@@ -239,6 +247,16 @@ export function createSurfaceFeedback(
           }
         if (Math.abs(sum - 1) > 1e-5) throw invalid()
       }
+      // FR-A-03: unequal authored influence peaks must not hide this aggregate region.
+      // Normalize its colour only; preserve exact nonzero membership and all skin weights.
+      for (const region of program.regions) {
+        if (region.bones[0] !== OBSERVED_TRUNK_BINDING.bone) continue
+        const values = influence.get(region.id)
+        if (!values) throw invalid()
+        let peak = 0
+        for (const value of values) peak = Math.max(peak, value)
+        trunkPeak = Math.max(trunkPeak, peak)
+      }
       const geometry = originalGeometry.clone(),
         materials: Material[] = []
       const weights = new Float32BufferAttribute(new Float32Array(position.count), 1),
@@ -279,7 +297,23 @@ export function createSurfaceFeedback(
       mesh.geometry = geometry
       mesh.material = entry.material
     })
-    if (!owned.length) throw invalid()
+    if (
+      !owned.length ||
+      (program.regions.some((region) => region.bones[0] === OBSERVED_TRUNK_BINDING.bone) &&
+        trunkPeak <= 0)
+    )
+      throw invalid()
+    // One model-wide colour scale preserves relative influence across submeshes.
+    // Exact zero weights remain neutral; a tiny share is never amplified independently.
+    const trunkId = program.regions.find(
+      (region) => region.bones[0] === OBSERVED_TRUNK_BINDING.bone,
+    )?.id
+    if (trunkId)
+      for (const entry of owned) {
+        const values = entry.influence.get(trunkId)
+        if (!values) throw invalid()
+        for (let vertex = 0; vertex < values.length; vertex++) values[vertex] /= trunkPeak
+      }
     signal.addEventListener('abort', aborted, { once: true })
     if (signal.aborted) throw invalid()
   } catch (error) {

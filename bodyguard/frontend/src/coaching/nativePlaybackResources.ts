@@ -3,6 +3,7 @@
 import type { HeadDisplayAlignment } from '../avatar/headOrientationRig'
 import { copyHandAlignment, type HandDisplayAlignment } from '../avatar/observedHandRig'
 import type { PoseRigFrame } from '../avatar/observedPoseRig'
+import { OBSERVED_TRUNK_BINDING } from '../avatar/observedTrunk'
 import { prepareOwnedAvatarPair } from '../avatar/ownedAvatarPair'
 import {
   copyReferenceProgram,
@@ -108,6 +109,11 @@ export function createNativePlaybackResources(options: Options) {
       evaluateFeedback = requestedFeedback.evaluate
       if (typeof evaluateFeedback !== 'function') throw new Error()
     }
+    if (
+      !trunk &&
+      feedback?.regions.some((region) => region.bones.includes(OBSERVED_TRUNK_BINDING.bone))
+    )
+      throw new Error()
     const requestedReference = options.reference
     if (requestedReference !== undefined) reference = copyReferenceProgram(requestedReference)
     if (

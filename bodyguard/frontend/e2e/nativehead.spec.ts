@@ -195,11 +195,20 @@ async function mount(
   gender: 'male' | 'female',
   withAdaptive = false,
   withTiming = false,
+  withTrunk = false,
 ) {
   await page.goto('/start')
   await expect(page.getByRole('heading', { name: '내 몸을 위한 시작', exact: true })).toBeVisible()
   await page.evaluate(
-    async ({ gender, withHands, withReference, withFeedback, withAdaptive, withTiming }) => {
+    async ({
+      gender,
+      withHands,
+      withReference,
+      withFeedback,
+      withAdaptive,
+      withTiming,
+      withTrunk,
+    }) => {
       const path = '/__private-native-head-probe.js'
       const module = (await import(path)) as {
         mountNativeHeadAuthProbe: typeof mountNativeHeadAuthProbe
@@ -224,9 +233,10 @@ async function mount(
         withFeedback,
         withAdaptive,
         withTiming,
+        withTrunk,
       )
     },
-    { gender, withHands, withReference, withFeedback, withAdaptive, withTiming },
+    { gender, withHands, withReference, withFeedback, withAdaptive, withTiming, withTrunk },
   )
   await expect
     .poll(() => state(page))
@@ -351,6 +361,131 @@ for (const gender of ['male', 'female'] as const) {
       expect(timing.events.filter((row) => row.stage === 'result')).toHaveLength(3)
       expect(posts).toBe(0)
     })
+  if (withFeedback) {
+    test(`${gender} native aggregate trunk→required endpoints→fresh generation→own record`, async ({
+      page,
+      context,
+    }, info) => {
+      await join(context)
+      await mount(page, gender, false, false, true)
+      await running(page)
+      expect(await state(page)).toMatchObject({
+        trunkConfigured: true,
+        highlighted: false,
+        nativePeopleMax: 0,
+      })
+      await mark(page, 'native-blank-miss-not-generated-positive')
+      for (const pose of ['side', 'forward'] as const) {
+        await page.evaluate((pose) => {
+          const p = (window as unknown as PrivateWindow).nativeAuthProbe
+          p.setTrunkPose(pose)
+          p.setFeedbackMode('error')
+        }, pose)
+        await expect.poll(async () => (await state(page)).trunkDirectionError).toBeLessThan(0.002)
+        expect(await state(page)).toMatchObject({
+          highlighted: true,
+          verifiedMs: 0,
+          nativePeopleMax: 0,
+          protectedTrunkStructureUnchanged: true,
+        })
+        // Preserve an avatar-only preview even if the following pixel assertion fails.
+        await page.locator('#native-avatar').screenshot({
+          path: info.outputPath(`trunk-${gender}-${pose}.png`),
+        })
+        await expect
+          .poll(() =>
+            page.evaluate(
+              () => (window as unknown as PrivateWindow).nativeAuthProbe.pixelCounts().right,
+            ),
+          )
+          .toBeGreaterThan(0)
+        expect(
+          await page.evaluate(() =>
+            (window as unknown as PrivateWindow).nativeAuthProbe.pixelCounts(),
+          ),
+        ).toMatchObject({ sampled: true, left: 0, error: 0 })
+        await mark(page, `generated-trunk-${pose}-current-colour-not-correctness`)
+      }
+      for (const endpoint of [11, 12, 23, 24] as const) {
+        await page.evaluate(
+          (endpoint) =>
+            (window as unknown as PrivateWindow).nativeAuthProbe.setTrunkHiddenEndpoint(endpoint),
+          endpoint,
+        )
+        await expect.poll(() => state(page)).toMatchObject({ highlighted: false, verifiedMs: 0 })
+        await expect
+          .poll(() =>
+            page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.pixelCounts()),
+          )
+          .toMatchObject({ sampled: true, left: 0, right: 0, error: 0 })
+        await mark(page, `generated-hidden-${endpoint}-no-trunk-colour-or-success`)
+        await page.evaluate(() =>
+          (window as unknown as PrivateWindow).nativeAuthProbe.setTrunkHiddenEndpoint(null),
+        )
+        await expect.poll(() => state(page)).toMatchObject({ highlighted: true, verifiedMs: 0 })
+      }
+      for (const mode of ['multiple', 'none'] as const) {
+        await page.evaluate(
+          (mode) => (window as unknown as PrivateWindow).nativeAuthProbe.setFeedbackMode(mode),
+          mode,
+        )
+        await expect.poll(() => state(page)).toMatchObject({ highlighted: false, verifiedMs: 0 })
+        await mark(page, `generated-${mode}-trunk-cleared`)
+        await page.evaluate(() =>
+          (window as unknown as PrivateWindow).nativeAuthProbe.setFeedbackMode('error'),
+        )
+        await expect.poll(() => state(page)).toMatchObject({ highlighted: true, verifiedMs: 0 })
+      }
+      await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.pause())
+      expect(await state(page)).toMatchObject({ models: 0, tracksEnded: true, verifiedMs: 0 })
+      await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.resume())
+      await expect
+        .poll(() => state(page))
+        .toMatchObject({ sessionGeneration: 2, highlighted: true, verifiedMs: 0 })
+      await expect.poll(async () => (await state(page)).trunkDirectionError).toBeLessThan(0.002)
+      await mark(page, 'fresh-trunk-owner-and-current-observation')
+      await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.stop())
+      await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.save())
+      const stopped = await mark(page, 'explicit-trunk-stop-own-record')
+      expect(stopped.record).toBe('saved')
+      expect(posts).toBe(1)
+      const rows = (await (await context.request.get('/api/v1/records/stretch')).json()).items
+      expect(rows).toHaveLength(1)
+      expect(rows[0]).toMatchObject({
+        id: stopped.recordId,
+        outcome: 'interrupted',
+        observed_ms: 0,
+        repetitions: 0,
+        provenance: 'client-reported',
+      })
+    })
+    test(`${gender} native aggregate trunk→held result→logout cannot revive colour/save`, async ({
+      page,
+      context,
+    }) => {
+      await join(context)
+      await mount(page, gender, false, false, true)
+      await running(page)
+      await page.evaluate(() =>
+        (window as unknown as PrivateWindow).nativeAuthProbe.setFeedbackMode('error'),
+      )
+      await expect.poll(() => state(page)).toMatchObject({ highlighted: true, verifiedMs: 0 })
+      await hold(page)
+      await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.signOut())
+      await expect
+        .poll(() => state(page))
+        .toMatchObject({
+          owned: false,
+          highlighted: false,
+          canvasHidden: true,
+          verifiedMs: 0,
+        })
+      await revokedWhileHeld(page)
+      await release(page)
+      expect(posts).toBe(0)
+      await mark(page, 'retired-trunk-generation-no-old-render-or-save')
+    })
+  }
   if (withFeedback)
     test(`${gender} native current error code→authored correction→different cause→occlusion`, async ({
       page,

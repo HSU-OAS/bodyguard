@@ -12,6 +12,7 @@ import {
 import { describe, expect, it } from 'vitest'
 import { OBSERVED_LIMB_BINDINGS } from './directionalRig'
 import { prepareOwnedAvatarPair } from './ownedAvatarPair'
+import { copyFeedbackProgram } from './surfaceFeedback'
 
 const program = () => ({
   motionId: 'fixture-not-release',
@@ -21,9 +22,12 @@ const program = () => ({
     { id: 'forearm-right', bones: ['lowerarm01R'] },
   ],
 })
-function fixture() {
+function fixture(withTrunk = false) {
   const scene = new Group(),
-    names = [...new Set(OBSERVED_LIMB_BINDINGS.flatMap((b) => [b.bone, b.anchor]))]
+    names = [
+      ...new Set(OBSERVED_LIMB_BINDINGS.flatMap((b) => [b.bone, b.anchor])),
+      ...(withTrunk ? ['spine05', 'neck01'] : []),
+    ]
   const bones = names.map((name) => {
     const bone = new Bone()
     bone.name = name
@@ -32,6 +36,7 @@ function fixture() {
   const geometry = new BufferGeometry()
   geometry.setAttribute('position', new Float32BufferAttribute([0, 0, 0, 0, 0.2, 0], 3))
   geometry.setAttribute('skinIndex', new Uint16BufferAttribute([0, 1, 2, 3, 0, 1, 2, 3], 4))
+  if (withTrunk) geometry.getAttribute('skinIndex').setX(0, names.indexOf('spine05'))
   geometry.setAttribute(
     'skinWeight',
     new Float32BufferAttribute([0.4, 0.3, 0.2, 0.1, 0.4, 0.3, 0.2, 0.1], 4),
@@ -49,6 +54,12 @@ function fixture() {
       child = bones[names.indexOf(anchor)]
     parent.add(child)
     child.position.y = -0.3
+  }
+  if (withTrunk) {
+    const trunk = bones[names.indexOf('spine05')],
+      neck = bones[names.indexOf('neck01')]
+    trunk.add(neck)
+    neck.position.y = 0.5
   }
   mesh.bind(new Skeleton(bones))
   scene.add(mesh)
@@ -107,6 +118,139 @@ function firstMesh(
   return found
 }
 describe('owned user surface feedback', () => {
+  // FR-A-03/FR-M-07: aggregate observed axis only; never all spine/pelvis bones.
+  it('copies only the explicit aggregate trunk region, rejecting unobserved structures', () => {
+    const p = { ...program(), regions: [{ id: 'trunk', bones: ['spine05'] }] }
+    const copied = copyFeedbackProgram(p)
+    p.regions[0].bones[0] = 'spine04'
+    expect(copied.regions[0].bones).toEqual(['spine05'])
+    expect(Object.isFrozen(copied.regions[0].bones)).toBe(true)
+    for (const bone of ['spine04', 'spine01', 'pelvisL', 'neck01', 'head'])
+      expect(() =>
+        copyFeedbackProgram({ ...p, regions: [{ id: 'trunk', bones: [bone] }] }),
+      ).toThrow('Invalid avatar feedback')
+    expect(() =>
+      copyFeedbackProgram({
+        ...p,
+        regions: [{ id: 'trunk', bones: ['spine05', 'upperarm01L'] }],
+      }),
+    ).toThrow('Invalid avatar feedback')
+  })
+  it('requires enabled trunk before loading a trunk feedback source', async () => {
+    const f = fixture(true)
+    let loads = 0
+    await expect(
+      prepareOwnedAvatarPair(f.context, {
+        ...f.options,
+        feedback: { ...program(), regions: [{ id: 'trunk', bones: ['spine05'] }] },
+        load: async () => {
+          loads++
+          return f.scene
+        },
+      }),
+    ).rejects.toThrow('Avatar asset unavailable')
+    expect(loads).toBe(0)
+  })
+  it('keeps zero-influence submeshes neutral without rejecting a valid trunk model', async () => {
+    const f = fixture(true),
+      extra = f.mesh.clone(false)
+    extra.geometry = f.geometry.clone()
+    extra.geometry.getAttribute('skinIndex').setX(0, 0)
+    f.scene.add(extra)
+    const lease = await prepareOwnedAvatarPair(f.context, {
+      ...f.options,
+      trunk: true,
+      feedback: { ...program(), regions: [{ id: 'trunk', bones: ['spine05'] }] },
+    })
+    lease.observe(pose())
+    expect(
+      lease.updateFeedback({
+        ...error(),
+        errors: [{ regionId: 'trunk', severity: 'deviation' }],
+      }),
+    ).toBe(true)
+    expect(lease.render(100, 0).feedback?.activeRegionIds).toEqual(['trunk'])
+    const masks: number[][] = []
+    lease.models?.[1].traverse((node) => {
+      const mesh = node as SkinnedMesh
+      if (mesh.isSkinnedMesh)
+        masks.push(Array.from(mesh.geometry.getAttribute('bodyguardFeedbackWeight').array))
+    })
+    expect(masks).toHaveLength(2)
+    expect(masks[0][0]).toBe(1)
+    expect(masks[1].every((value) => value === 0)).toBe(true)
+    lease.dispose()
+  })
+  it('preserves relative influence across meshes instead of amplifying a tiny share', async () => {
+    const f = fixture(true),
+      extra = f.mesh.clone(false)
+    extra.geometry = f.geometry.clone()
+    extra.geometry.getAttribute('skinWeight').setX(0, 0.01)
+    extra.geometry.getAttribute('skinWeight').setY(0, 0.69)
+    f.scene.add(extra)
+    const lease = await prepareOwnedAvatarPair(f.context, {
+      ...f.options,
+      trunk: true,
+      feedback: { ...program(), regions: [{ id: 'trunk', bones: ['spine05'] }] },
+    })
+    lease.observe(pose())
+    expect(
+      lease.updateFeedback({
+        ...error(),
+        errors: [{ regionId: 'trunk', severity: 'deviation' }],
+      }),
+    ).toBe(true)
+    lease.render(100, 0)
+    const peaks: number[] = []
+    lease.models?.[1].traverse((node) => {
+      const mesh = node as SkinnedMesh
+      if (mesh.isSkinnedMesh)
+        peaks.push(mesh.geometry.getAttribute('bodyguardFeedbackWeight').getX(0))
+    })
+    expect(peaks[0]).toBe(1)
+    expect(peaks[1]).toBeCloseTo(0.025, 5)
+    lease.dispose()
+  })
+  for (const index of [11, 12, 23, 24])
+    it(`removes aggregate trunk colour when required endpoint ${index} is hidden`, async () => {
+      const f = fixture(true),
+        p = { ...program(), regions: [{ id: 'trunk', bones: ['spine05'] }] }
+      const sourceWeights = Array.from(f.geometry.getAttribute('skinWeight').array)
+      const lease = await prepareOwnedAvatarPair(f.context, {
+        ...f.options,
+        trunk: true,
+        feedback: p,
+      })
+      const currentError = (sequence: number, at: number) => ({
+        ...error(sequence, at),
+        errors: [{ regionId: 'trunk', severity: 'deviation' as const }],
+      })
+      lease.observe(pose())
+      expect(lease.updateFeedback(currentError(1, 100))).toBe(true)
+      expect(lease.render(100, 0).feedback?.activeRegionIds).toEqual(['trunk'])
+      const models = lease.models
+      if (!models) throw new Error('Missing synthetic pair')
+      const user = firstMesh(models[1]),
+        ref = firstMesh(models[0])
+      // Relative colour prominence only; no change to skinning, region membership or verdict.
+      expect(user.geometry.getAttribute('bodyguardFeedbackWeight').getX(0)).toBe(1)
+      expect(ref.geometry.hasAttribute('bodyguardFeedbackWeight')).toBe(false)
+      const cropped = pose(2, 120)
+      cropped.result.landmarks[0][index].visibility = 0
+      lease.observe(cropped)
+      expect(lease.updateFeedback(currentError(2, 120))).toBe(false)
+      expect(lease.render(120, 20).feedback?.activeRegionIds).toEqual([])
+      expect(user.geometry.getAttribute('bodyguardFeedbackWeight').getX(0)).toBe(0)
+      lease.observe(pose(3, 140))
+      expect(lease.updateFeedback(currentError(3, 140))).toBe(true)
+      expect(lease.render(140, 20).feedback?.activeRegionIds).toEqual(['trunk'])
+      expect(lease.render(391, 251).feedback?.activeRegionIds).toEqual([])
+      expect(Array.from(f.geometry.getAttribute('skinWeight').array)).toEqual(sourceWeights)
+      f.abort.abort()
+      expect(lease.updateFeedback(currentError(4, 400))).toBe(false)
+      expect(lease.models).toBeNull()
+      lease.dispose()
+    })
   it('rejects sparse region configuration before requesting its source', async () => {
     const f = fixture()
     let loads = 0
