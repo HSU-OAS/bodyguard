@@ -12,7 +12,11 @@ for (const file of files) {
   for (const forbidden of [
     'neck-side',
     'chin-retraction',
+    'shoulder-shrug',
+    '어깨 으쓱·이완',
     'cross-body-shoulder',
+    'arm-overhead',
+    '팔 위로 뻗기',
     'lateral-trunk',
     'seated-trunk-rotation',
     '안내만 후보 · 자동 판정 없음',
