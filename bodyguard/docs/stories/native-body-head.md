@@ -1,6 +1,6 @@
 # S2.T14 — 로그인 소유 native 몸·머리 재생 연결
 
-상태: 진행 중 (2026-10-08). 기준 main `7f3c8bcd88b1a77cf3b872a240f73ecbad0b1bb8`.
+상태: 비공개 Story 구현·검증 완료, 조건부 PR 게이트 진행 (2026-10-08). 기준 main `7f3c8bcd88b1a77cf3b872a240f73ecbad0b1bb8`.
 
 ## 목적 / 범위
 
@@ -19,4 +19,4 @@ S2.T13의 같은 입력 몸·머리 복사 경계를 실제 `createNativePlaybac
 
 ## 현재 결과
 
-아직 구현·native 브라우저 검증 완료 아님. 전체 1~6단계 완료 아님.
+runtime `c39a853664581e7b7b4ae00657488c4f8df9fc30`: 실제 Chrome/AuthProvider/API/격리 SQL의 머리 포함 소유 흐름12 및 기존 body-only 복구8 통과. 전체 frontend1011/타입/Biome/assets/build/guard/diff와 변경 Python Ruff 통과. 가짜 장치·합성 gate이며 실제 사람/물리 카메라/native 양성 머리·동일인 검증은 아니다. 공개 byte·5모델 동일, source24/evidence127 원본 SHA·gzip과 실패·DB 종료 증거를 보존했다. [작동 흐름/원본/남은 조건](../review/native-body-head/README.md). 전체 1~6단계 완료 아님.

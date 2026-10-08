@@ -1,0 +1,595 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-body-head/bodyguard/frontend/node_modules/@playwright/test/cli.js",
+      "test",
+      "nativehead.spec.ts",
+      "--config",
+      "playwright.account.config.ts",
+      "--output",
+      "test-results/nativehead-20261008T015548776247Z"
+    ],
+    "configFile": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-body-head/bodyguard/frontend/playwright.account.config.ts",
+    "rootDir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-body-head/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-body-head/bodyguard/frontend/test-results/nativehead-20261008T015548776247Z",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-body-head/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "account.spec.ts",
+          "password.spec.ts",
+          "google.spec.ts",
+          "records.spec.ts",
+          "design.spec.ts",
+          "withdrawal.spec.ts",
+          "datahelp.spec.ts",
+          "integration.spec.ts",
+          "security.spec.ts",
+          "resultrecord.spec.ts",
+          "ownercapture.spec.ts",
+          "recordedsession.spec.ts",
+          "authcoaching.spec.ts",
+          "nativeauth.spec.ts",
+          "nativerecovery.spec.ts",
+          "nativehead.spec.ts",
+          "notifications.spec.ts",
+          "alertdelivery.spec.ts",
+          "ownedalert.spec.ts",
+          "summaries.spec.ts",
+          "minuteupload.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/nativehead-20261008T015548776247Z/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "pnpm build && vite build --config e2e/fixtures/nativeHead.vite.ts && vite preview --host localhost",
+      "url": "http://localhost:4173",
+      "reuseExistingServer": false,
+      "timeout": 180000
+    }
+  },
+  "suites": [
+    {
+      "title": "nativehead.spec.ts",
+      "file": "nativehead.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "male native start→stop→own interrupted record",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4693,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T01:55:57.738Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-head-summary",
+                      "contentType": "application/json",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-body-head/bodyguard/frontend/test-results/nativehead-20261008T015548776247Z/nativehead-male-native-start→stop→own-interrupted-record/attachments/native-head-summary-d2a88a5398c6ff2019a6bb196a0675d3e842540a.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f82b24c60bb4e8d5d5d0-683d7b95122d00ab09f5",
+          "file": "nativehead.spec.ts",
+          "line": 248,
+          "column": 3
+        },
+        {
+          "title": "male native held result→same-account refresh→new owner explicit restart",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7038,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T01:56:02.930Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-head-summary",
+                      "contentType": "application/json",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-body-head/bodyguard/frontend/test-results/nativehead-20261008T015548776247Z/nativehead-male-native-hel-4297d-→new-owner-explicit-restart/attachments/native-head-summary-3c86d083da1ac349bcaeaaa301b8d98a9ab2d5ac.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f82b24c60bb4e8d5d5d0-95b69ad3e7497fd035a1",
+          "file": "nativehead.spec.ts",
+          "line": 291,
+          "column": 3
+        },
+        {
+          "title": "male native held result→logout→no old resume/save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4086,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T01:56:09.982Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-head-summary",
+                      "contentType": "application/json",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-body-head/bodyguard/frontend/test-results/nativehead-20261008T015548776247Z/nativehead-male-native-held-result→logout→no-old-resume-save/attachments/native-head-summary-3e0d7d40421a28545d5f2a50cdfed5b394399b82.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f82b24c60bb4e8d5d5d0-2acf47973d9a47d506ba",
+          "file": "nativehead.spec.ts",
+          "line": 323,
+          "column": 5
+        },
+        {
+          "title": "male native held result→server401→no old resume/save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4726,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T01:56:14.082Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-head-summary",
+                      "contentType": "application/json",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-body-head/bodyguard/frontend/test-results/nativehead-20261008T015548776247Z/nativehead-male-native-hel-69f6f-erver401→no-old-resume-save/attachments/native-head-summary-28530460fea4caf7ebb218e21c84d4421e35f976.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f82b24c60bb4e8d5d5d0-0ba92f95bc45f17a666d",
+          "file": "nativehead.spec.ts",
+          "line": 323,
+          "column": 5
+        },
+        {
+          "title": "male native held result→pagehide→no old resume/save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4228,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T01:56:18.822Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-head-summary",
+                      "contentType": "application/json",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-body-head/bodyguard/frontend/test-results/nativehead-20261008T015548776247Z/nativehead-male-native-hel-d7f23-pagehide→no-old-resume-save/attachments/native-head-summary-243d8e410fe5f5217b60e2c252ab129d4fa6d456.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f82b24c60bb4e8d5d5d0-c395735c521c3921c9b6",
+          "file": "nativehead.spec.ts",
+          "line": 323,
+          "column": 5
+        },
+        {
+          "title": "male native held result→unmount→no old resume/save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4238,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T01:56:23.064Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-head-summary",
+                      "contentType": "application/json",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-body-head/bodyguard/frontend/test-results/nativehead-20261008T015548776247Z/nativehead-male-native-hel-287c5-→unmount→no-old-resume-save/attachments/native-head-summary-c25eac87e6f6a86cdda3758665f7a8cb19373765.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f82b24c60bb4e8d5d5d0-99ecfa5a12a513d83db8",
+          "file": "nativehead.spec.ts",
+          "line": 323,
+          "column": 5
+        },
+        {
+          "title": "female native start→stop→own interrupted record",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3933,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T01:56:27.314Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-head-summary",
+                      "contentType": "application/json",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-body-head/bodyguard/frontend/test-results/nativehead-20261008T015548776247Z/nativehead-female-native-start→stop→own-interrupted-record/attachments/native-head-summary-aff16c49ed25c229ac2abd7b301e7aa2ac7f164c.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f82b24c60bb4e8d5d5d0-990692d622131cfe7261",
+          "file": "nativehead.spec.ts",
+          "line": 248,
+          "column": 3
+        },
+        {
+          "title": "female native held result→same-account refresh→new owner explicit restart",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6660,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T01:56:31.261Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-head-summary",
+                      "contentType": "application/json",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-body-head/bodyguard/frontend/test-results/nativehead-20261008T015548776247Z/nativehead-female-native-h-df878-→new-owner-explicit-restart/attachments/native-head-summary-8657aa7b3c7b7a7e4f3d0b2e18d8cc49010efd29.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f82b24c60bb4e8d5d5d0-15f7932d0c41fef3db9b",
+          "file": "nativehead.spec.ts",
+          "line": 291,
+          "column": 3
+        },
+        {
+          "title": "female native held result→logout→no old resume/save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4735,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T01:56:37.936Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-head-summary",
+                      "contentType": "application/json",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-body-head/bodyguard/frontend/test-results/nativehead-20261008T015548776247Z/nativehead-female-native-h-0bb32-t→logout→no-old-resume-save/attachments/native-head-summary-da0066f73f161014a453557f4bd1eb4928d22034.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f82b24c60bb4e8d5d5d0-c4385652a192460d2692",
+          "file": "nativehead.spec.ts",
+          "line": 323,
+          "column": 5
+        },
+        {
+          "title": "female native held result→server401→no old resume/save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4367,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T01:56:42.690Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-head-summary",
+                      "contentType": "application/json",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-body-head/bodyguard/frontend/test-results/nativehead-20261008T015548776247Z/nativehead-female-native-h-4e76e-erver401→no-old-resume-save/attachments/native-head-summary-99770232fc73c211b096634718d382333de7c988.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f82b24c60bb4e8d5d5d0-996343cb7b3dfbcf0119",
+          "file": "nativehead.spec.ts",
+          "line": 323,
+          "column": 5
+        },
+        {
+          "title": "female native held result→pagehide→no old resume/save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4308,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T01:56:47.074Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-head-summary",
+                      "contentType": "application/json",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-body-head/bodyguard/frontend/test-results/nativehead-20261008T015548776247Z/nativehead-female-native-h-17814-pagehide→no-old-resume-save/attachments/native-head-summary-4a0b9695aec8760557061cc4e158638118b1dafd.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f82b24c60bb4e8d5d5d0-e2d22e71bdcb6b0a7f06",
+          "file": "nativehead.spec.ts",
+          "line": 323,
+          "column": 5
+        },
+        {
+          "title": "female native held result→unmount→no old resume/save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4259,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T01:56:51.395Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-head-summary",
+                      "contentType": "application/json",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-body-head/bodyguard/frontend/test-results/nativehead-20261008T015548776247Z/nativehead-female-native-h-f781f-→unmount→no-old-resume-save/attachments/native-head-summary-9bb526e2201ca057ed8754e37ecd8224021fd5ef.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f82b24c60bb4e8d5d5d0-0aaa8c762b0f7570b609",
+          "file": "nativehead.spec.ts",
+          "line": 323,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-08T01:55:49.315Z",
+    "duration": 66465.007,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

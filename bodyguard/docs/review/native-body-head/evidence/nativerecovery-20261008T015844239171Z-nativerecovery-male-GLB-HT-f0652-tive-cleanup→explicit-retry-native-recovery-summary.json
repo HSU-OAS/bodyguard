@@ -1,0 +1,209 @@
+{
+  "browser": "154.0.8037.98",
+  "stages": [
+    {
+      "name": "asset-http404-no-ready-or-record",
+      "state": {
+        "auth": "ready",
+        "hook": "prepared",
+        "owned": true,
+        "resources": {
+          "generation": 1,
+          "status": "closed",
+          "failure": null,
+          "closed": false,
+          "poisoned": false,
+          "cameraError": null
+        },
+        "actors": [
+          {
+            "generation": 1,
+            "status": "closed",
+            "failure": null,
+            "closed": false,
+            "poisoned": false,
+            "cameraError": null
+          }
+        ],
+        "session": "ended",
+        "reason": "asset-error",
+        "verifiedMs": 0,
+        "renderFrames": 0,
+        "frames": 0,
+        "frameCloses": 0,
+        "allFramesClosed": true,
+        "models": 0,
+        "framing": [],
+        "memory": {
+          "geometries": 0,
+          "textures": 1
+        },
+        "baseline": {
+          "geometries": 0,
+          "textures": 1
+        },
+        "prepareFinished": true,
+        "failures": [],
+        "closed": false,
+        "actualHuman": false,
+        "actualPhysicalCamera": false,
+        "syntheticMotionGates": true,
+        "releaseAvatar": false
+      },
+      "native": {
+        "calls": 1,
+        "streams": 1,
+        "held": false,
+        "tracksEnded": true,
+        "detached": true,
+        "hidden": true,
+        "connected": false,
+        "cspAttempts": 1
+      }
+    },
+    {
+      "name": "explicit-native-restart",
+      "state": {
+        "auth": "ready",
+        "hook": "prepared",
+        "owned": true,
+        "resources": {
+          "generation": 1,
+          "status": "running",
+          "failure": null,
+          "closed": false,
+          "poisoned": false,
+          "cameraError": null
+        },
+        "actors": [
+          {
+            "generation": 1,
+            "status": "closed",
+            "failure": null,
+            "closed": true,
+            "poisoned": false,
+            "cameraError": null
+          },
+          {
+            "generation": 1,
+            "status": "running",
+            "failure": null,
+            "closed": false,
+            "poisoned": false,
+            "cameraError": null
+          }
+        ],
+        "session": "running",
+        "reason": null,
+        "verifiedMs": 0,
+        "renderFrames": 26,
+        "frames": 9,
+        "frameCloses": 9,
+        "allFramesClosed": true,
+        "models": 2,
+        "framing": [
+          true,
+          true
+        ],
+        "memory": {
+          "geometries": 5,
+          "textures": 11
+        },
+        "baseline": {
+          "geometries": 0,
+          "textures": 1
+        },
+        "prepareFinished": true,
+        "failures": [],
+        "closed": false,
+        "actualHuman": false,
+        "actualPhysicalCamera": false,
+        "syntheticMotionGates": true,
+        "releaseAvatar": false
+      },
+      "native": {
+        "calls": 2,
+        "streams": 2,
+        "held": false,
+        "tracksEnded": false,
+        "detached": false,
+        "hidden": true,
+        "connected": false,
+        "cspAttempts": 1
+      }
+    }
+  ],
+  "final": {
+    "auth": "ready",
+    "hook": "prepared",
+    "owned": false,
+    "resources": {
+      "generation": 1,
+      "status": "closed",
+      "failure": null,
+      "closed": true,
+      "poisoned": false,
+      "cameraError": null
+    },
+    "actors": [
+      {
+        "generation": 1,
+        "status": "closed",
+        "failure": null,
+        "closed": true,
+        "poisoned": false,
+        "cameraError": null
+      },
+      {
+        "generation": 1,
+        "status": "closed",
+        "failure": null,
+        "closed": true,
+        "poisoned": false,
+        "cameraError": null
+      }
+    ],
+    "session": "ended",
+    "reason": "page-hidden",
+    "verifiedMs": 0,
+    "renderFrames": 29,
+    "frames": 10,
+    "frameCloses": 10,
+    "allFramesClosed": true,
+    "models": 0,
+    "framing": [],
+    "memory": {
+      "geometries": 0,
+      "textures": 1
+    },
+    "baseline": {
+      "geometries": 0,
+      "textures": 1
+    },
+    "prepareFinished": true,
+    "failures": [],
+    "closed": true,
+    "actualHuman": false,
+    "actualPhysicalCamera": false,
+    "syntheticMotionGates": true,
+    "releaseAvatar": false
+  },
+  "native": {
+    "calls": 2,
+    "streams": 2,
+    "held": false,
+    "tracksEnded": true,
+    "detached": true,
+    "hidden": true,
+    "connected": false,
+    "cspAttempts": 2
+  },
+  "posts": 0,
+  "external": 0,
+  "errors": [],
+  "actualHuman": false,
+  "actualCamera": false,
+  "actualPermissionPopup": false,
+  "actualUnplug": false,
+  "productPolicyApproved": false
+}
