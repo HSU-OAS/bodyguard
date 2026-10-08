@@ -1,0 +1,41 @@
+{
+  "scope": "S6.9 private SDK attempt and bounded long-task diagnostic",
+  "reviewer": "author only; no independent/delegated review",
+  "security": {
+    "productUIOrPrivacyPolicyChanged": false,
+    "humanVideoLandmarksPerFrameMetricsAdded": false,
+    "errorArgumentsURLsAttributionNamesRecorded": false,
+    "finding": "an object could coerce to a valid literal stage and retain its payload",
+    "red": { "tests": 16, "passed": 15, "failed": 1 },
+    "fix": "require a primitive string before stage membership; no coercion",
+    "negativeVerification": "synthetic foreign payload excluded; no person data used"
+  },
+  "performance": {
+    "productHotPathChanged": false,
+    "eventsMax": 30,
+    "longTasksMax": 64,
+    "observerDrainedAndDisconnected": true,
+    "notACausalOrHostGPUProfiler": true
+  },
+  "correctness": {
+    "originalSDKArgumentsResultsErrorsAndOrderPreservedByWrapper": true,
+    "actualNativeCPUFallbackOrRejectPathTested": false,
+    "firstBatch": { "passed": 20, "failedSignup429": 4, "skipped": 0, "retry": 0 },
+    "previouslyUnexecutedSDKCases": { "passed": 4, "failed": 0, "freshTestSchema": true },
+    "postBoundaryFixNativeRepresentativeOnly": { "passed": 1, "failed": 0 },
+    "finalFrontend": { "tests": 1352, "newDiagnostic": 16, "failed": 0, "skipped": 0 },
+    "previousPr90Mandatory": { "passed": 13, "failed": 13, "replaced": false },
+    "signupRateLimitAndNativeTimeoutsUnchanged": true,
+    "fullFinalNativeRegressionTested": false,
+    "rootCauseEstablished": false
+  },
+  "maintainability": {
+    "originalTimingAndOfflineEvidenceReplayStillWork": true,
+    "dependenciesModelsGLBAndPublicByteUnchanged": true,
+    "originalFilesAndFailuresPreserved": true
+  },
+  "unresolvedDiffP1P2": 0,
+  "unresolvedRequiredStartupP2": 1,
+  "mergeEligible": false,
+  "allStagesComplete": false
+}

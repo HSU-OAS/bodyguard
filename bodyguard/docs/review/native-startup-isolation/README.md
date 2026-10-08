@@ -37,3 +37,14 @@ node scripts/verify-native-startup-isolation.mjs
 구현 전 import 실패(개별 테스트0), 첫32건의 배열 matcher 오류4건, 후속35건의 미종료 SDK 계산 오류1건은 모두 보존했다. 마지막 오류는 보완 후 전체 FE1336과 실제 오프라인 정상/누락/변조로 재검증했다. SDK 준비의 모든 시도와 원래 실패를 빠뜨리지 않는 검증 장치이며 native 지연 자체를 고친 것이 아니다.
 
 필수 시작P2·PR90 회귀 실패/병합 보류·실제 사람/관찰자·동작별 검증/올바른 시범·최종 남녀 외형/권리·승인 공개 구조·SDK 정책·외부/운영 및 D2/전체1~6은 그대로 남는다. 출시 적격 동작0, 출시 후보판 선언0이다. 최소 텍스트·아바타 중심 요구와 별도 승인 경계를 유지한다.
+
+## SDK 시도·메인 스레드 진단 후속
+
+비공개 fixture의 준비 성공·거부·미종료/요청 delegate와 bounded long-task를 구분한다. 제품 UI·개인정보/SDK 정책은 바꾸지 않는다. 로그인→두 아바타→중단/본인 기록, 가림/만료·권한 회수/새 세대가 실제 Chrome/SDK/API/격리 SQL에서 작동했다. 가짜 카메라/메일·생성 동작이며 실제 사람/올바른 자세 정확도 검증은 아니다.
+
+- 최초 남녀24건20통과/4가입429 실패, 카메라 이전에 실패한4건만 새 시험 schema에서4통과. 기존 보안 한도와 poll5000/case60000/retry0 유지. 최초 실패/cleanup SecurityError는 보존한다.
+- 두 실행의 준비32회/SDK96시도는 모두 GPU 성공, 실제 CPU 전환/거부는 미검증이다. 첫 SDK1353.1~1712.0ms/첫 반환2752.3~3290.7ms·long task 최대949ms이며 시작 실패는 미재현이다. FilesetResolver 호출이 WASM 준비 전체는 아니며 동시 관찰은 인과 입증이 아니다.
+- stage로 위장한 외부 객체 보관을 단위 실패로 확인해 보완했다. 최종 FE1352/새16·정적/build/guard·공개byte 불변과 남성 첫 시작1건의 대표 연결을 실제 재검증했다. 최종 전체 native/PR90 필수26건 재검증은 미실행이다.
+- 기존145개 artifact/세 manifest byte 보존. [새195개 원문/SHA·임시 compiled probe SHA](diagnostic/manifest.json), [집계/실제 범위](diagnostic/execution/diagnostic-result.json.gz), [작성자 검토](diagnostic-author-review.json). PG 정지·데이터/GLB/실패 보존. 첫 PG의 shared-memory 샌드박스 실패를 SDK 실패로 세지 않는다.
+
+원래 시작P2·Draft·D2/전체1~6 미완료를 유지한다. 정상 반복/제한 완화로 해결 처리하지 않는다. UI 텍스트 최소화는 실패·미실행 증거를 삭제한다는 뜻이 아니다.

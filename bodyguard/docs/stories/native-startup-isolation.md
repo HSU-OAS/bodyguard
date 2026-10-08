@@ -50,3 +50,27 @@ UTC2026-10-08 14:57:30~14:58:41에 같은 원래 source·모델·Chrome/SDK·제
 - [실제 흐름·남은 조건](../review/native-startup-isolation/README.md), [대조 원본](../review/native-startup-isolation/controlled-comparison/manifest.json). 첫 비교의 기존34개 파일/manifest는 변경하지 않았다.
 
 **원인 확정·제품 지연 해결은 미완료다.** 정상6건은 이전 필수26건13실패의 대체 증거가 아니다. S6.9도 해결 조건 미달로 Draft/병합 보류를 유지하며 기존 시작P2·PR90 Draft·D2/전체1~6·출시 적격0을 유지한다. 다음은 실패 시 SDK 생성/첫 추론과 환경·누적의 기술 상태를 구분하는 제한된 진단이며, 정상 반복이나 대기시간 확대만으로 해결하지 않는다.
+
+## 후속 진단 계약 — 구현·실행 전
+
+- ISOLATE-N06: 비공개 시험에만 FilesetResolver 준비와 SDK 생성 시도의 시작/종료·GPU/CPU 요청·성공/실패를 추가한다. 원래 인수·반환 객체·예외·호출 순서·제한은 유지하고 예외 내용·모델 URL·계정·신체 데이터는 기록하지 않는다. 기존 timing과 원본 증거 형식은 보존한다.
+- ISOLATE-N07: Long Tasks API가 지원되면 카메라 시작 이후 상대 시각/지속 시간만 최대64개 보관한다. attribution·name·URL은 읽지 않는다. 미지원/실패/상한 도달을 구분하며 동시 발생만으로 원인이나 전체 host 부하를 확정하지 않는다. observer는 fixture 종료 시 pending entries를 읽고 반드시 해제한다.
+- ISOLATE-N08: 단위 하네스로 실패·미종료·후속 CPU 시도·시간 오류·상한·해제를 검증한다. 실제 실행은 한 번의 기존 남녀 native 회귀 범위로 제한한다. 추가 계측이 있는 baseline 시험이며 PR90의 원래26건 실패를 대체하거나 새 neck 구현의 통과 증거로 세지 않는다. 재현되지 않으면 그 사실과 다음 의존성을 기록하고 정상 재시험만 반복하지 않는다.
+
+기술 참고: 설치된 SDK1.0.1의 `vision.d.ts`와 실제 생성 경로를 확인했다. [Google Web 가이드](https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker/web_js), [Long Tasks API 초안](https://w3c.github.io/longtasks/)을 참고한다. 후자는 2026-03-19 Editor’s Draft이며 완료된 표준/전체 GPU·OS profiler로 표현하지 않는다. 제품·개인정보 정책·공개 UI 변경은 없다.
+
+## 후속 진단 실제 결과
+
+카메라 시작에 observer를 열고 종료 시 pending entries를 읽어 해제한다. SDK의 원래 인수/반환/예외를 유지하는 시험 wrapper와 최대30개 시도·64개 long-task 기록을 구현했다. 상대 기술 시각·고정 상태·GPU/CPU 요청만 보관하며 오류 내용/attribution/name/URL·신체 입력은 수집하지 않는다. FilesetResolver 호출 시간은 WASM 모듈 초기화 전체나 factory 내부의 모델/모듈 준비를 분리한 시간이 아니다.
+
+| UTC2026-10-08 실제 실행 | 결과 | 범위·한계 |
+|---|---|---|
+|15:42:25 남녀 기존24건|20통과/4실패|마지막 여성4건은 가입202 예상/실제429, 카메라 이전. about:blank cleanup의 SecurityError도 원문 보존|
+|15:47:17 위4건만 별도 실행|4통과|새 본인 시험 schema·원래 rate limit/제한 유지, 이전 실패를 지우지 않음|
+|15:49:49 경계 보완 후 남성 첫 시작|1통과|최종 코드의 대표 연결 검증만. 전체 native/PR90 최종26건 재검증 아님|
+
+최초20건/보완4건은 준비32회·SDK96시도 모두 GPU 요청이 성공했다. 실제 CPU 전환/실패 경로 검증은 아니다. 첫 SDK1353.1~1712.0ms/첫 반환2752.3~3290.7ms, long task 최대949ms를 관찰했고 상한/invalid은 없었다. 시작 실패는 미재현이며 동시 관찰만으로 SDK 지연·host 부하의 인과나 이전 실패 원인을 확정하지 않는다. 마지막 대표 실행은 전체 품질 검증과 일부 겹친 비통제 환경으로 성능 대조가 아니다.
+
+작성자 검토에서 객체가 문자열 stage처럼 강제 변환되어 payload를 보관할 수 있는 경계를 실제 단위16건15통과/1실패로 재현했다. 문자열 여부를 먼저 검사해 coercion/보관을 차단했다. 보완 뒤 전체 FE1352/새 진단16·Biome/type/assets/build/guard/diff 실제 통과, 공개 JS/CSS byte·SHA 동일이다. 첫 import 실패는 개별 테스트0이며 observer mock 인수 수 오류(type exit2)도 보존/보완했다. 기존 오프라인 원본 검증도 실제exit0이다. [후속195개 원문/SHA](../review/native-startup-isolation/diagnostic/manifest.json), [작성자 검토](../review/native-startup-isolation/diagnostic-author-review.json).
+
+격리 PG는 정지했고 데이터/모델/GLB·실패·기존145개 artifact를 보존했다. 원래 시작P2·PR90 Draft/필수13실패·S6.9 원인 입증/제품 보완·전체1~6은 미완료다. 정상 SDK 실행을 반복해 해결 처리하지 않는다. 미분리 factory 내부 준비/첫 추론·실제 노트북 조건은 의존성으로 관리하고, 선행 승인/실측과 독립인 필수 통합 작업을 이어간다.
