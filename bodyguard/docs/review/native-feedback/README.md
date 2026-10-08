@@ -76,6 +76,11 @@ source/시범 독립·8가중치·cleanup·개인정보·실제 화면을 점검
 truncated tool output/비파괴 경로 조회 원문을 보존했다고 주장하지 않는다.
 수집 후 문서·PR/commit/merge receipt는 이 manifest에 있다고 주장하지 않는다.
 
+마지막 리뷰에서 검증 번들의 의존성 고지 누락을 보완했다. 실제 포함된 React/
+React DOM/scheduler의 설치 LICENSE와 MediaPipe package.json·기존 canonical
+Apache 원문 및 [별도 추가 고지 SHA](notices/README.md)를 보존한다. 최초413파일
+manifest는 그대로이며 전체 SDK/WASM/model 권리·제품 배포 승인의 뜻이 아니다.
+
 다음은 실제 동작 기준/오류 분류와 오류별 교정 시범 연결이며 선행 실측은 별도다.
 같은 사람/깊이·목/체간/손/축 회전·실제 webcam/참여자/다장치·최종 남녀 얼굴/목/
 표면/Blender·변형/권리·승인 공개 디자인/구조·SDK 정책·외부 계정·HTTPS/운영/
