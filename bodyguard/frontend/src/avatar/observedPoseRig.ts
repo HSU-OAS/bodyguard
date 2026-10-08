@@ -26,6 +26,13 @@ export type PoseRigFrame = Readonly<{
     hands?: readonly HandObservation[]
   }>
 }>
+// FR-A-01: copied technical coverage, not a pose-error or same-person verdict.
+export type PoseCoverage = Readonly<{
+  generation: number
+  sequence: number
+  at: number
+  bones: readonly string[]
+}>
 type Options = Parameters<typeof createDirectionalRig>[1] &
   Readonly<{ mirror: boolean; head?: HeadDisplayAlignment; hands?: HandDisplayAlignment }>
 /** One detectForVideo result owns both arrays. Caller preserves its capture stamps;
@@ -77,11 +84,13 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
   let lastAt = -Infinity
   let lastNow = -Infinity
   let pending: object | undefined
+  let coverage: PoseCoverage | null = null
 
   function dispose() {
     if (closed) return
     closed = true
     pending = undefined
+    coverage = null
     driver.dispose()
     head?.dispose()
     hands?.dispose()
@@ -164,6 +173,13 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
         dispose()
         return false
       }
+      if (accepted && !closed && !signal.aborted && pending === token)
+        coverage = Object.freeze({
+          generation: suppliedGeneration,
+          sequence,
+          at,
+          bones: Object.freeze(Object.keys(selected)),
+        })
       return accepted
     } catch {
       // No provider/native exception or point data escapes this boundary.
@@ -181,5 +197,10 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
       ...(hands ? { hands: hands.render(now, deltaMs) } : {}),
     })
   }
-  return Object.freeze({ observe, render, dispose })
+  return Object.freeze({
+    observe,
+    render,
+    getCoverage: () => (closed || signal.aborted ? null : coverage),
+    dispose,
+  })
 }

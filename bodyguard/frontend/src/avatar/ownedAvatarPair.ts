@@ -12,6 +12,12 @@ import {
   type ReferenceCue,
   type ReferenceProgram,
 } from './referencePlayback'
+import {
+  copyFeedbackProgram,
+  createSurfaceFeedback,
+  type FeedbackFrame,
+  type FeedbackProgram,
+} from './surfaceFeedback'
 
 type Options = Readonly<{
   load(context: ResourceContext): Object3D | Promise<Object3D>
@@ -21,6 +27,7 @@ type Options = Readonly<{
   head?: HeadDisplayAlignment
   hands?: HandDisplayAlignment
   reference?: ReferenceProgram
+  feedback?: FeedbackProgram
 }>
 // Never free a loader alias already owned by another call, including a disposed call.
 const consumed = new WeakSet<object>()
@@ -97,6 +104,7 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
   let head: HeadDisplayAlignment | undefined
   let hands: HandDisplayAlignment | undefined
   let referenceProgram: ReferenceProgram | undefined
+  let feedbackProgram: FeedbackProgram | undefined
   try {
     const supplied = options.head
     if (supplied)
@@ -109,6 +117,8 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
     if (suppliedHands) hands = copyHandAlignment(suppliedHands)
     const suppliedReference = options.reference
     if (suppliedReference !== undefined) referenceProgram = copyReferenceProgram(suppliedReference)
+    const suppliedFeedback = options.feedback
+    if (suppliedFeedback !== undefined) feedbackProgram = copyFeedbackProgram(suppliedFeedback)
   } catch {
     throw unavailable()
   }
@@ -140,6 +150,7 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
   let user: ReturnType<typeof createObservedPoseRig> | undefined
   let reference: ReturnType<typeof createDirectionalRig> | undefined
   let playback: ReturnType<typeof createReferencePlayback> | undefined
+  let feedback: ReturnType<typeof createSurfaceFeedback> | undefined
   let closed = false,
     cleanupFailed = false
   function dispose() {
@@ -148,6 +159,7 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
       signal.removeEventListener('abort', aborted)
       for (const action of [
         () => user?.dispose(),
+        () => feedback?.dispose(),
         () => reference?.dispose(),
         () => playback?.dispose(),
         ...(pair?.copies.map((model) => () => model.removeFromParent()) ?? []),
@@ -219,6 +231,12 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
         program: referenceProgram,
       })
     user = createObservedPoseRig(pair.copies[1], { ...rig, mirror, head, hands })
+    if (feedbackProgram)
+      feedback = createSurfaceFeedback(pair.copies[1], {
+        context: owner,
+        program: feedbackProgram,
+        maxAgeMs,
+      })
     signal.addEventListener('abort', aborted, { once: true })
     if (signal.aborted) throw unavailable()
   } catch (error) {
@@ -232,7 +250,15 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
     get models() {
       return closed || signal.aborted ? null : models
     },
-    observe: (frame: PoseRigFrame) => !closed && !signal.aborted && driver.observe(frame),
+    observe: (frame: PoseRigFrame) => {
+      if (closed || signal.aborted) return false
+      const accepted = driver.observe(frame)
+      if (accepted) feedback?.observe(driver.getCoverage())
+      else if (driver.getCoverage() === null) feedback?.observe(null)
+      return accepted
+    },
+    updateFeedback: (frame: FeedbackFrame) =>
+      !closed && !signal.aborted && Boolean(feedback?.update(frame)),
     updateReference: (cue: ReferenceCue) =>
       !closed && !signal.aborted && Boolean(playback?.update(cue)),
     render: (
@@ -241,10 +267,22 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
     ): ReturnType<typeof driver.render> &
       Readonly<{
         reference?: ReturnType<NonNullable<typeof playback>['render']>
+        feedback?: ReturnType<NonNullable<typeof feedback>['render']>
       }> => {
       const result = driver.render(now, deltaMs)
-      return playback
-        ? Object.freeze({ ...result, reference: playback.render(now, deltaMs) })
+      return playback || feedback
+        ? Object.freeze({
+            ...result,
+            ...(playback ? { reference: playback.render(now, deltaMs) } : {}),
+            ...(feedback
+              ? {
+                  feedback: feedback.render(
+                    now,
+                    result.status === 'tracking' || result.status === 'partial',
+                  ),
+                }
+              : {}),
+          })
         : result
     },
     dispose,

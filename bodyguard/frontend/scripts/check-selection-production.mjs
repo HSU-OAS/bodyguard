@@ -113,6 +113,9 @@ for (const file of files) {
     'mountReferenceProbe',
     'Private native reference fixture unavailable',
     'Invalid native reference state',
+    'Invalid avatar feedback',
+    'bodyguard-surface-feedback-v1',
+    'mountSurfaceFeedbackProbe',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }

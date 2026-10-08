@@ -67,6 +67,7 @@ function setup(
     render: vi.fn(() => ({ status: 'untracked', tracked: 0, total: 8 })),
     dispose: vi.fn(),
     updateReference: vi.fn(() => true),
+    updateFeedback: vi.fn(() => true),
   } as unknown as Awaited<ReturnType<typeof prepareOwnedAvatarPair>>
   const source = { read: vi.fn(async () => null), dispose: vi.fn(async () => {}) }
   const face = {
@@ -192,6 +193,16 @@ describe('optional native reference session binding', () => {
     await f.fire(100)
     const retained = f.options.render.mock.calls.at(-1)?.[0] as typeof f.pair | undefined
     expect(retained).toBeDefined()
+    const feedback = {
+      generation: 1,
+      sequence: 1,
+      at: 100,
+      motionId: 'synthetic',
+      version: '1',
+      errors: [],
+    }
+    expect(retained?.updateFeedback(feedback)).toBe(true)
+    expect(f.pair.updateFeedback).toHaveBeenCalledOnce()
     f.source.dispose.mockReturnValueOnce(gate.promise)
     const closing = f.controller.close()
     await drain()
@@ -208,6 +219,8 @@ describe('optional native reference session binding', () => {
         status: 'running',
       }),
     ).toBe(false)
+    expect(retained?.updateFeedback({ ...feedback, sequence: 2, at: 110 })).toBe(false)
+    expect(f.pair.updateFeedback).toHaveBeenCalledOnce()
     retained?.render(110, 10)
     expect(f.pair.render).toHaveBeenCalledTimes(before)
     expect(f.pair.updateReference).not.toHaveBeenCalled()

@@ -236,6 +236,8 @@ export function createNativePlaybackResources(options: Options) {
         observe: (frame) => issueCommand(context.generation, () => owned.observe(frame)),
         updateReference: (cue) =>
           issueCommand(context.generation, () => owned.updateReference(cue)),
+        updateFeedback: (frame) =>
+          issueCommand(context.generation, () => owned.updateFeedback(frame)),
         render(now: number, deltaMs: number) {
           // FR-U-04: retained renderer handles cannot revive a retired cohort.
           let result: ReturnType<Pair['render']> = Object.freeze({
