@@ -30,9 +30,9 @@ function deferred<T>() {
 const drain = async () => {
   for (let i = 0; i < 50; i++) await Promise.resolve()
 }
-const headAlignment = () => ({
+const headAlignment = (matrixLayout: 'column-major' | 'row-major' = 'column-major') => ({
   bone: 'head',
-  matrixLayout: 'column-major' as const,
+  matrixLayout,
   cameraReference: [0, 0, 0, 1],
   sceneFromCamera: [0, 0, 0, 1],
 })
@@ -260,6 +260,7 @@ describe('native playback adapter', () => {
       { matrixLayout: 'automatic' },
       { cameraReference: [0, 0, 0, 0] },
       { cameraReference: [NaN, 0, 0, 1] },
+      { cameraReference: null },
       { sceneFromCamera: [0, 1, 1, 1] },
       { sceneFromCamera: [0, 0, 1] },
     ])
@@ -272,38 +273,41 @@ describe('native playback adapter', () => {
     expect(openCamera).not.toHaveBeenCalled()
     expect(createFaceLandmarker).not.toHaveBeenCalled()
   })
-  it('copies head alignment before any await and binds both native detectors', async () => {
-    const head = headAlignment(),
-      f = setup(head)
-    head.cameraReference[3] = 0
-    head.sceneFromCamera[1] = 1
-    head.bone = 'upperarm_l'
-    await f.prepare()
-    expect(prepareOwnedAvatarPair).toHaveBeenCalledWith(expect.anything(), {
-      load: f.options.loadAvatar,
-      mirror: true,
-      halfLifeMs: 50,
-      maxAgeMs: 250,
-      head: { bone: 'head', cameraReference: [0, 0, 0, 1], sceneFromCamera: [0, 0, 0, 1] },
-    })
-    expect(f.actor.start(1)).toBe(true)
-    const ports = vi.mocked(createBodyFaceVideoSource).mock.calls[0][1],
-      input = {} as VideoFrame
-    ports.detectBody(input, 100)
-    ports.detectFace(input, 100)
-    expect(ports.matrixLayout).toBe('column-major')
-    expect(f.native.detectForVideo).toHaveBeenCalledWith(input, 100)
-    expect(f.face.detectForVideo).toHaveBeenCalledWith(input, 100)
-    expect(f.native.detectForVideo.mock.contexts[0]).toBe(f.native)
-    expect(f.face.detectForVideo.mock.contexts[0]).toBe(f.face)
-    expect(createVideoPoseSource).not.toHaveBeenCalled()
-    await f.controller.close()
-    await f.actor.close()
-    expect(f.native.close).toHaveBeenCalledTimes(1)
-    expect(f.face.close).toHaveBeenCalledTimes(1)
-    expect(closeCamera).toHaveBeenCalledTimes(1)
-    expect(() => ports.detectFace(input, 101)).toThrow()
-  })
+  it.each(['column-major', 'row-major'] as const)(
+    'copies %s head alignment before any await and binds both native detectors',
+    async (layout) => {
+      const head = headAlignment(layout),
+        f = setup(head)
+      head.cameraReference[3] = 0
+      head.sceneFromCamera[1] = 1
+      head.bone = 'upperarm_l'
+      await f.prepare()
+      expect(prepareOwnedAvatarPair).toHaveBeenCalledWith(expect.anything(), {
+        load: f.options.loadAvatar,
+        mirror: true,
+        halfLifeMs: 50,
+        maxAgeMs: 250,
+        head: { bone: 'head', cameraReference: [0, 0, 0, 1], sceneFromCamera: [0, 0, 0, 1] },
+      })
+      expect(f.actor.start(1)).toBe(true)
+      const ports = vi.mocked(createBodyFaceVideoSource).mock.calls[0][1],
+        input = {} as VideoFrame
+      ports.detectBody(input, 100)
+      ports.detectFace(input, 100)
+      expect(ports.matrixLayout).toBe(layout)
+      expect(f.native.detectForVideo).toHaveBeenCalledWith(input, 100)
+      expect(f.face.detectForVideo).toHaveBeenCalledWith(input, 100)
+      expect(f.native.detectForVideo.mock.contexts[0]).toBe(f.native)
+      expect(f.face.detectForVideo.mock.contexts[0]).toBe(f.face)
+      expect(createVideoPoseSource).not.toHaveBeenCalled()
+      await f.controller.close()
+      await f.actor.close()
+      expect(f.native.close).toHaveBeenCalledTimes(1)
+      expect(f.face.close).toHaveBeenCalledTimes(1)
+      expect(closeCamera).toHaveBeenCalledTimes(1)
+      expect(() => ports.detectFace(input, 101)).toThrow()
+    },
+  )
   it('reclaims the earlier body SDK and camera when face initialization fails', async () => {
     const f = setup(headAlignment())
     vi.mocked(createFaceLandmarker).mockRejectedValueOnce(new Error('PRIVATE_FACE_FAILURE'))
@@ -314,6 +318,28 @@ describe('native playback adapter', () => {
     expect(prepareOwnedAvatarPair).not.toHaveBeenCalled()
     expect(f.notices).toEqual([{ type: 'error', generation: 1, reason: 'inference-error' }])
     expect(JSON.stringify(f.actor.getSnapshot())).not.toContain('PRIVATE_FACE_FAILURE')
+  })
+  it('does not initialize face after body initialization failure', async () => {
+    const f = setup(headAlignment())
+    vi.mocked(createPoseLandmarker).mockRejectedValueOnce(new Error('PRIVATE_BODY_FAILURE'))
+    await f.prepare()
+    await f.actor.close()
+    expect(createFaceLandmarker).not.toHaveBeenCalled()
+    expect(closeCamera).toHaveBeenCalledTimes(1)
+    expect(f.notices).toEqual([{ type: 'error', generation: 1, reason: 'inference-error' }])
+  })
+  it('keeps a partial initialization cleanup failure fixed and still releases camera', async () => {
+    const f = setup(headAlignment())
+    vi.mocked(createFaceLandmarker).mockRejectedValueOnce(new Error('PRIVATE_FACE_FAILURE'))
+    f.native.close.mockImplementation(() => {
+      throw new Error('PRIVATE_BODY_CLOSE_FAILURE')
+    })
+    await f.prepare()
+    await expect(f.actor.close()).rejects.toBeInstanceOf(ResourceCleanupError)
+    expect(f.native.close).toHaveBeenCalledTimes(1)
+    expect(closeCamera).toHaveBeenCalledTimes(1)
+    expect(f.actor.getSnapshot().poisoned).toBe(true)
+    expect(JSON.stringify(f.actor.getSnapshot())).not.toContain('PRIVATE_BODY_CLOSE_FAILURE')
   })
   it('reclaims both SDKs once when face initialization returns after cancellation', async () => {
     const f = setup(headAlignment()),

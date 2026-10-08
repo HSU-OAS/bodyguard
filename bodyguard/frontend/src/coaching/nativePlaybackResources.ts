@@ -72,7 +72,9 @@ export function createNativePlaybackResources(options: Options) {
       if (
         !requested ||
         !Array.isArray(requested.cameraReference) ||
-        !Array.isArray(requested.sceneFromCamera)
+        !Array.isArray(requested.sceneFromCamera) ||
+        requested.cameraReference.length !== 4 ||
+        requested.sceneFromCamera.length !== 4
       )
         throw new Error()
       head = Object.freeze({
