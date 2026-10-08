@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-08 머리·사지 통합: [S2.T13](stories/observed-body-head.md)은 같은 입력/원래 stamp의 머리 후보와 사지를 사용자 모델에 연결했다. [실제 흐름·미완성 canvas·실패/남은 조건](review/observed-body-head/README.md). 남녀 준비→합성 움직임→얼굴 누락/사지 지속→native 미검출→pending 종료가 실제 Chrome에서 작동하며 비교/source·8가중치·전신과 공개 byte를 보존했다. 실제 사람/동일인·세밀한 판정/시범·외형·승인 디자인/SDK 정책·전체1~6은 미완료다. 다음은 계정 소유 재생의 native 준비 adapter에 body/face와 명시 head 정렬을 연결하는 비공개 통합이며 외부/실측 승인은 별도로 남긴다. PR75 실제 merge2bc3cd9/main·브랜치 보존을 확인하고 최신 main에서 시작했다. 조형/공개 문구/운영 변경0·최소 문구/원본/실패·기존 승인 경계를 유지한다. 아래는 시점별 기록이다.
+
 2026-10-08 동일 프레임 연결: [S2.T12](stories/body-face-frame.md)은 frozen VideoFrame/원래 stamp의 body→face·사전 body 복사·회전 후보 전달과 종료 장벽을 연결했다. [실제 흐름·실패·한계](review/body-face-frame/README.md). native Chrome 가짜 장치의 대기 종료/새 세대·정리와 전체976/정적/build/guard를 실제 확인했고 공개 JS/CSS·5모델 byte는 동일하다. 같은 입력은 동일인 검증이 아니며 실제 사람/머리 긍정·head rig/경추 분절·시범/판정·외형/디자인/SDK 정책·전체1~6은 미완료다. PR74 실제 merge62b8375·main/source/브랜치 보존을 확인한 최신 main에서 시작했으며 최소 문구·조형0·원본/실패·별도 승인 경계를 유지한다. 아래는 시점별 기록이다.
 
 2026-10-08 머리 방향 연결: [S2.T11](stories/head-orientation.md)은 명시 camera 기준/행렬 순서·거울·수명으로 기존 남녀 GLB의 독립 head bone을 연결했다. [실제 검수 화면·실패·남은 조건](review/head-orientation/README.md). runtime2dd5d9e의 실제 Chrome 합성2흐름/전체960·정적/build/guard·공개 byte 동일을 확인했다. 자동2초 정면/조형/공개 UI·SDK 정책·판정·운영 변경0. 다음은 native pose/face 동일 frozen 프레임·소유 수명 통합이며 실제 사람/경추 분절·시범/피드백·외형/디자인 및 전체1~6은 미완료다. 최소 문구와 기존 원본/실패·별도 승인을 유지한다. PR73의 실제 merge01b97db/main·source1281bbe 포함·브랜치 보존을 확인하고 최신 main에서 시작했다. 아래는 시점별 기록이다.

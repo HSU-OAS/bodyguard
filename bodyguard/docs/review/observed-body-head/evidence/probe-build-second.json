@@ -1,0 +1,35 @@
+{
+  "label": "probe-build-second",
+  "cwd": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-observed-body-head/bodyguard/frontend",
+  "head": "2bc3cd96670108f9db923ab81a7ca1282aec32f6",
+  "command": "./node_modules/.bin/vite",
+  "args": [
+    "build",
+    "--config",
+    "e2e/fixtures/observedBodyHead.vite.ts"
+  ],
+  "exit": 0,
+  "elapsedMs": 502,
+  "sourceBefore": {
+    "src/avatar/headOrientationRig.ts": "5283baad2b9e0e3e5e05b3e86a2190088d5eb88f285378af1d31a981bfd79ea5",
+    "src/avatar/observedPoseRig.ts": "a696f4d216d9b26d4801aaa2533df64b2c10e112f0a3b1e4f2aac40deced26d8",
+    "src/avatar/ownedAvatarPair.ts": "afcc039b7db85f133786848ec6595750fa8f814658862765ce28ab3d7c963d04",
+    "src/avatar/observedBodyHead.test.ts": "e397b3ad69c2eb0de940b1123f398e935279a9ca9d1ac4774ef4918c718e474d",
+    "src/pose/bodyFaceVideoSource.ts": "5413e493faf08498d3d5ca4d53c6e4bcc7f8b82aa4dffb2ea353f6174042e05a",
+    "e2e/fixtures/observedBodyHeadProbe.ts": "36748848f898ff6d7869b720bd7e0bd32221f2582d4e09c7bba1710a897c6af3",
+    "scripts/test-observed-body-head-browser.mjs": "d411c404653afb3a6db740f785485cd2b101f560975c05202be675b0d2339860",
+    "scripts/check-selection-production.mjs": "4eae5a0ee63631595ff9b012d78e9510e4ff3f99347fa879b9cb753225ab92b9"
+  },
+  "sourceAfter": {
+    "src/avatar/headOrientationRig.ts": "5283baad2b9e0e3e5e05b3e86a2190088d5eb88f285378af1d31a981bfd79ea5",
+    "src/avatar/observedPoseRig.ts": "a696f4d216d9b26d4801aaa2533df64b2c10e112f0a3b1e4f2aac40deced26d8",
+    "src/avatar/ownedAvatarPair.ts": "afcc039b7db85f133786848ec6595750fa8f814658862765ce28ab3d7c963d04",
+    "src/avatar/observedBodyHead.test.ts": "e397b3ad69c2eb0de940b1123f398e935279a9ca9d1ac4774ef4918c718e474d",
+    "src/pose/bodyFaceVideoSource.ts": "5413e493faf08498d3d5ca4d53c6e4bcc7f8b82aa4dffb2ea353f6174042e05a",
+    "e2e/fixtures/observedBodyHeadProbe.ts": "36748848f898ff6d7869b720bd7e0bd32221f2582d4e09c7bba1710a897c6af3",
+    "scripts/test-observed-body-head-browser.mjs": "d411c404653afb3a6db740f785485cd2b101f560975c05202be675b0d2339860",
+    "scripts/check-selection-production.mjs": "4eae5a0ee63631595ff9b012d78e9510e4ff3f99347fa879b9cb753225ab92b9"
+  },
+  "stdout": "vite v8.3.1 building client environment for production...\ntransforming...\n✓ 22 modules transformed.\nrendering chunks...\ncomputing gzip size...\n../../../../../../../private/tmp/bodyguard-body-head-proof.Q4Okwz/probe-second/probe.js  1,690.61 kB │ gzip: 356.08 kB\n\n✓ built in 294ms\n",
+  "stderr": ""
+}

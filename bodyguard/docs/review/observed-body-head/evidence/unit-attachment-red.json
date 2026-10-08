@@ -1,0 +1,36 @@
+{
+  "label": "unit-attachment-red",
+  "cwd": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-observed-body-head/bodyguard/frontend",
+  "head": "2bc3cd96670108f9db923ab81a7ca1282aec32f6",
+  "command": "./node_modules/.bin/vitest",
+  "args": [
+    "run",
+    "src/avatar/observedBodyHead.test.ts",
+    "--reporter=json",
+    "--outputFile=/private/tmp/bodyguard-body-head-proof.Q4Okwz/unit-attachment-red-report.json"
+  ],
+  "exit": 1,
+  "elapsedMs": 751,
+  "sourceBefore": {
+    "src/avatar/headOrientationRig.ts": "aa7442ef121db2072e12834674b0d67627580102f0259d1733ae48199099e836",
+    "src/avatar/observedPoseRig.ts": "a696f4d216d9b26d4801aaa2533df64b2c10e112f0a3b1e4f2aac40deced26d8",
+    "src/avatar/ownedAvatarPair.ts": "afcc039b7db85f133786848ec6595750fa8f814658862765ce28ab3d7c963d04",
+    "src/avatar/observedBodyHead.test.ts": "2399227bd272f8d61d64a9cee8a98fa9c774660cb4dfb0b25248e2bfd4ca254c",
+    "src/pose/bodyFaceVideoSource.ts": "5413e493faf08498d3d5ca4d53c6e4bcc7f8b82aa4dffb2ea353f6174042e05a",
+    "e2e/fixtures/observedBodyHeadProbe.ts": "36748848f898ff6d7869b720bd7e0bd32221f2582d4e09c7bba1710a897c6af3",
+    "scripts/test-observed-body-head-browser.mjs": "d411c404653afb3a6db740f785485cd2b101f560975c05202be675b0d2339860",
+    "scripts/check-selection-production.mjs": "4eae5a0ee63631595ff9b012d78e9510e4ff3f99347fa879b9cb753225ab92b9"
+  },
+  "sourceAfter": {
+    "src/avatar/headOrientationRig.ts": "aa7442ef121db2072e12834674b0d67627580102f0259d1733ae48199099e836",
+    "src/avatar/observedPoseRig.ts": "a696f4d216d9b26d4801aaa2533df64b2c10e112f0a3b1e4f2aac40deced26d8",
+    "src/avatar/ownedAvatarPair.ts": "afcc039b7db85f133786848ec6595750fa8f814658862765ce28ab3d7c963d04",
+    "src/avatar/observedBodyHead.test.ts": "2399227bd272f8d61d64a9cee8a98fa9c774660cb4dfb0b25248e2bfd4ca254c",
+    "src/pose/bodyFaceVideoSource.ts": "5413e493faf08498d3d5ca4d53c6e4bcc7f8b82aa4dffb2ea353f6174042e05a",
+    "e2e/fixtures/observedBodyHeadProbe.ts": "36748848f898ff6d7869b720bd7e0bd32221f2582d4e09c7bba1710a897c6af3",
+    "scripts/test-observed-body-head-browser.mjs": "d411c404653afb3a6db740f785485cd2b101f560975c05202be675b0d2339860",
+    "scripts/check-selection-production.mjs": "4eae5a0ee63631595ff9b012d78e9510e4ff3f99347fa879b9cb753225ab92b9"
+  },
+  "stdout": "JSON report written to /private/tmp/bodyguard-body-head-proof.Q4Okwz/unit-attachment-red-report.json\n",
+  "stderr": ""
+}

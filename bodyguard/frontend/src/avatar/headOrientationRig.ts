@@ -12,12 +12,15 @@ type FaceResult = Readonly<{
     data: readonly number[]
   }>[]
 }>
-type Frame = Readonly<{
+type Stamp = Readonly<{
   generation: number
   sequence: number
   at: number
-  result: FaceResult | null
 }>
+type Frame = Stamp &
+  Readonly<{
+    result: FaceResult | null
+  }>
 type Options = Readonly<{
   context: ResourceContext
   bone: string
@@ -28,6 +31,8 @@ type Options = Readonly<{
   halfLifeMs: number
   maxAgeMs: number
 }>
+export type HeadDisplayAlignment = Pick<Options, 'bone' | 'cameraReference' | 'sceneFromCamera'>
+type RotationOptions = Omit<Options, 'matrixLayout'>
 // Float32 affine/orthogonality roundoff only, not an anatomical angle or quality threshold.
 const ROUND_OFF = 1e-5
 function similarityRotation(matrix: Matrix4): Quaternion | null {
@@ -96,9 +101,11 @@ export function readHeadOrientation(result: FaceResult, layout: Layout): Rotatio
 }
 
 function unit(value: Rotation): Quaternion | null {
-  if (!Array.isArray(value) || value.length !== 4 || !value.every(Number.isFinite)) return null
-  const length = Math.hypot(...value)
-  return Math.abs(length - 1) <= ROUND_OFF ? new Quaternion().fromArray(value).normalize() : null
+  if (!Array.isArray(value) || value.length !== 4) return null
+  const copied = Array.from(value)
+  if (!copied.every(Number.isFinite)) return null
+  const length = Math.hypot(...copied)
+  return Math.abs(length - 1) <= ROUND_OFF ? new Quaternion().fromArray(copied).normalize() : null
 }
 const mirrorX = (q: Quaternion) => new Quaternion(q.x, -q.y, -q.z, q.w)
 
@@ -108,8 +115,35 @@ const mirrorX = (q: Quaternion) => new Quaternion(q.x, -q.y, -q.z, q.w)
  * Missing input freezes local pose. A parent's movement is not a head observation.
  */
 export function createHeadOrientationRig(model: Object3D, options: Options) {
+  if (options.matrixLayout !== 'column-major' && options.matrixLayout !== 'row-major')
+    throw new Error('Invalid head avatar rig')
+  const layout = options.matrixLayout
+  const driver = createHeadDriver(model, options)
+  return Object.freeze({
+    ...driver,
+    push: (frame: Frame) =>
+      driver.push(frame, () => {
+        const result = frame.result
+        return result ? readHeadOrientation(result, layout) : null
+      }),
+  })
+}
+
+/** Same-input copied rotation only. No fabricated face points, implicit neutral reference,
+ * identity matching, or neck segment estimation. Caller preserves the capture stamp.
+ */
+export function createHeadRotationRig(model: Object3D, options: RotationOptions) {
+  const driver = createHeadDriver(model, options)
+  return Object.freeze({
+    ...driver,
+    push: (frame: Stamp & Readonly<{ rotation: Rotation | null }>) =>
+      driver.push(frame, () => frame.rotation),
+  })
+}
+
+function createHeadDriver(model: Object3D, options: RotationOptions) {
   const { generation, signal } = options.context
-  const { matrixLayout, mirror, halfLifeMs, maxAgeMs } = options
+  const { mirror, halfLifeMs, maxAgeMs } = options
   const invalid = () => new Error('Invalid head avatar rig')
   const reference = unit(options.cameraReference)
   const basis = unit(options.sceneFromCamera)
@@ -119,7 +153,6 @@ export function createHeadOrientationRig(model: Object3D, options: Options) {
     !signal ||
     typeof options.bone !== 'string' ||
     !options.bone ||
-    (matrixLayout !== 'column-major' && matrixLayout !== 'row-major') ||
     typeof mirror !== 'boolean' ||
     !reference ||
     !basis ||
@@ -136,12 +169,18 @@ export function createHeadOrientationRig(model: Object3D, options: Options) {
   if (found.length !== 1 || !(found[0] as Bone).isBone) throw invalid()
   const head = found[0] as Bone
   const ancestors: Object3D[] = []
-  for (let node: Object3D | null = head; node; node = node.parent) ancestors.push(node)
+  // The caller may attach its owned model to a scene after preparation. Lock the
+  // internal hierarchy, not that external attachment; runtime world similarity
+  // still rejects unsupported external scale/shear before rotating any bone.
+  for (let node: Object3D | null = head; node; node = node.parent) {
+    ancestors.push(node)
+    if (node === model) break
+  }
   const parents = ancestors.map((node) => node.parent)
   const validTransforms = () =>
     ancestors.every(
       (node, i) =>
-        node.parent === parents[i] &&
+        (node === model || node.parent === parents[i]) &&
         node.matrixAutoUpdate &&
         [...node.position.toArray(), ...node.scale.toArray(), ...node.quaternion.toArray()].every(
           Number.isFinite,
@@ -170,7 +209,7 @@ export function createHeadOrientationRig(model: Object3D, options: Options) {
   }
   signal.addEventListener('abort', dispose, { once: true })
   if (signal.aborted) dispose()
-  function push(frame: Frame): boolean {
+  function push(frame: Stamp, read: () => Rotation | null): boolean {
     if (closed || signal.aborted || !frame) return false
     try {
       const suppliedGeneration = frame.generation,
@@ -190,14 +229,14 @@ export function createHeadOrientationRig(model: Object3D, options: Options) {
       // the old observation instead of retaining a previous person's face.
       const accepted = { sequence, at, target: null as Quaternion | null }
       latest = accepted
-      const result = frame.result
-      const rotation = result ? readHeadOrientation(result, matrixLayout) : null
+      const supplied = read()
+      const rotation = supplied ? unit(supplied) : null
       if (closed || signal.aborted || latest !== accepted) return false
       if (!rotation) {
         initialized = false
         return true
       }
-      const camera = new Quaternion().fromArray(rotation)
+      const camera = rotation
       const delta = (mirror ? mirrorX(camera) : camera).multiply(referenceInverse)
       accepted.target = sceneBasis
         .clone()

@@ -3,6 +3,7 @@ import { type Material, type Mesh, Object3D, type SkinnedMesh, type Texture } fr
 import { ResourceCleanupError, type ResourceContext } from '../coaching/resources'
 import { createDirectionalRig, OBSERVED_LIMB_BINDINGS } from './directionalRig'
 import { cloneEightWeightPair } from './eightWeightSkin'
+import type { HeadDisplayAlignment } from './headOrientationRig'
 import { createObservedPoseRig, type PoseRigFrame } from './observedPoseRig'
 
 type Options = Readonly<{
@@ -10,6 +11,7 @@ type Options = Readonly<{
   mirror: boolean
   halfLifeMs: number
   maxAgeMs: number
+  head?: HeadDisplayAlignment
 }>
 // Never free a loader alias already owned by another call, including a disposed call.
 const consumed = new WeakSet<object>()
@@ -83,6 +85,18 @@ function ownedSourceCleanup(scene: Object3D) {
 export async function prepareOwnedAvatarPair(context: ResourceContext, options: Options) {
   const { generation, signal } = context
   const { load, mirror, halfLifeMs, maxAgeMs } = options
+  let head: HeadDisplayAlignment | undefined
+  try {
+    const supplied = options.head
+    if (supplied)
+      head = Object.freeze({
+        bone: supplied.bone,
+        cameraReference: Object.freeze(Array.from(supplied.cameraReference)),
+        sceneFromCamera: Object.freeze(Array.from(supplied.sceneFromCamera)),
+      })
+  } catch {
+    throw unavailable()
+  }
   if (
     !Number.isSafeInteger(generation) ||
     generation <= 0 ||
@@ -165,7 +179,8 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
         ({ bone, anchor }) =>
           !boundBones.has(source.getObjectByName(bone) as Object3D) ||
           !boundBones.has(source.getObjectByName(anchor) as Object3D),
-      )
+      ) ||
+      (head && !boundBones.has(source.getObjectByName(head.bone) as Object3D))
     )
       throw unavailable()
     pair = cloneEightWeightPair(source)
@@ -177,7 +192,7 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
     }
     const rig = { context: owner, bindings: OBSERVED_LIMB_BINDINGS, halfLifeMs, maxAgeMs }
     reference = createDirectionalRig(pair.copies[0], rig)
-    user = createObservedPoseRig(pair.copies[1], { ...rig, mirror })
+    user = createObservedPoseRig(pair.copies[1], { ...rig, mirror, head })
     signal.addEventListener('abort', aborted, { once: true })
     if (signal.aborted) throw unavailable()
   } catch (error) {

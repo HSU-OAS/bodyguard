@@ -1,0 +1,33 @@
+{
+  "label": "types-second",
+  "cwd": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-observed-body-head/bodyguard/frontend",
+  "head": "2bc3cd96670108f9db923ab81a7ca1282aec32f6",
+  "command": "./node_modules/.bin/tsc",
+  "args": [
+    "--noEmit"
+  ],
+  "exit": 2,
+  "elapsedMs": 7568,
+  "sourceBefore": {
+    "src/avatar/headOrientationRig.ts": "2861ed099e4efd6e508378f8b07f01f8cbd95b54e559c18f33d9f04b7e709b31",
+    "src/avatar/observedPoseRig.ts": "df8433f02030408167002b52dd00d708e796389c93fd9b8e47b540983bf7e037",
+    "src/avatar/ownedAvatarPair.ts": "6d4baa1e2b186d1b931e641d81ea1620249fea6ae938ca8a91b82c0dd675e728",
+    "src/avatar/observedBodyHead.test.ts": "9f22f01ec732ed3d6b42c018469b52960a962171224a4ce9f21eae1aba46ab65",
+    "src/pose/bodyFaceVideoSource.ts": "5413e493faf08498d3d5ca4d53c6e4bcc7f8b82aa4dffb2ea353f6174042e05a",
+    "e2e/fixtures/observedBodyHeadProbe.ts": "b7221d909d001cdbaf8790c10399b6d780a45b2425b61e8baba83510970a2b97",
+    "scripts/test-observed-body-head-browser.mjs": "584da10cde3b60f8938c59f645dba057f7518ff96ded0cb283318a66725212f1",
+    "scripts/check-selection-production.mjs": "b2c12c3eefe9bf4e4529a48b8f15ee6174132cc9efa6856da2f52e9713963b63"
+  },
+  "sourceAfter": {
+    "src/avatar/headOrientationRig.ts": "aa7442ef121db2072e12834674b0d67627580102f0259d1733ae48199099e836",
+    "src/avatar/observedPoseRig.ts": "48035f458f069dce8659981b38c50e896e46b25e7e94bdb13208089c1364a790",
+    "src/avatar/ownedAvatarPair.ts": "afcc039b7db85f133786848ec6595750fa8f814658862765ce28ab3d7c963d04",
+    "src/avatar/observedBodyHead.test.ts": "00a67e05100753738aa635c4997fcf2ca4c342eac9d85bc4667364d70774361f",
+    "src/pose/bodyFaceVideoSource.ts": "5413e493faf08498d3d5ca4d53c6e4bcc7f8b82aa4dffb2ea353f6174042e05a",
+    "e2e/fixtures/observedBodyHeadProbe.ts": "9710edc20d43c881cbb572d787e63eac980cdc481e407781019134eaafef0250",
+    "scripts/test-observed-body-head-browser.mjs": "584da10cde3b60f8938c59f645dba057f7518ff96ded0cb283318a66725212f1",
+    "scripts/check-selection-production.mjs": "b2c12c3eefe9bf4e4529a48b8f15ee6174132cc9efa6856da2f52e9713963b63"
+  },
+  "stdout": "e2e/fixtures/observedBodyHeadProbe.ts(217,29): error TS18048: 'models' is possibly 'undefined'.\n",
+  "stderr": ""
+}
