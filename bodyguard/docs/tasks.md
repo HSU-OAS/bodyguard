@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-08 머리 방향 연결: [S2.T11](stories/head-orientation.md)은 명시 camera 기준/행렬 순서·거울·수명으로 기존 남녀 GLB의 독립 head bone을 연결했다. [실제 검수 화면·실패·남은 조건](review/head-orientation/README.md). runtime2dd5d9e의 실제 Chrome 합성2흐름/전체960·정적/build/guard·공개 byte 동일을 확인했다. 자동2초 정면/조형/공개 UI·SDK 정책·판정·운영 변경0. 다음은 native pose/face 동일 frozen 프레임·소유 수명 통합이며 실제 사람/경추 분절·시범/피드백·외형/디자인 및 전체1~6은 미완료다. 최소 문구와 기존 원본/실패·별도 승인을 유지한다. PR73의 실제 merge01b97db/main·source1281bbe 포함·브랜치 보존을 확인하고 최신 main에서 시작했다. 아래는 시점별 기록이다.
+
 2026-10-08 native 카메라 복구: [S2.T10](stories/native-camera-recovery.md)은 실제 재사용 adapter로 명시 카메라/SDK/두 GLB 연결과 권한 거부·늦은 반환 취소·track/GLB 실패 뒤 새 준비/재시작을 연결했다. [작동 흐름·아바타 canvas·실패/한계](review/native-camera-recovery/README.md). runtime9918072의 실제 Chrome/API/격리 SQL 복구와 기존 계정 흐름을 재검증했으며 가짜 장치/시험 이벤트를 물리 webcam 검증으로 세지 않는다. 공개 JS/CSS byte 동일·GLB0·미승인 디자인/조형/SDK 제품 정책/운영 변경0이며 Story PR 게이트를 진행한다. 원본 실패·이월/전체1~6 기준·최소 문구 원칙은 유지한다. 공개 코칭·최종 외형/세밀한 판정·실제 사람/노트북·HTTPS 및 SDK 정책은 미완료다. PR72 실제 merge708c6a0/main·브랜치 보존을 확인하고 그 최신 main에서 시작했다. 아래는 시점별 기록이다.
 
 2026-10-08 native 계정 통합: [S2.T9](stories/native-auth-playback.md)는 실제 AuthProvider/API/격리 SQL과 가짜 카메라의 native SDK·남녀 두 GLB를 같은 Chrome 흐름에 연결했다. 시작→중단→본인 기록, 같은 계정 갱신·logout204·/me401·pagehide·unmount의 재생 차단/정리 대기/명시 새 시작을 확인했다. [실제 흐름·실패·한계](review/native-auth-playback/README.md). runtime5524b1d의 증거·최신 PR 게이트를 확인하며 공개 byte/GLB0·조형/미승인 디자인·SDK 제품 정책/운영 변경0을 유지한다. 실제 사람/물리 webcam·최종 외형/세밀한 판정·승인 디자인·B09·다장치/HTTPS 및 전체1~6은 미완료다. 최소 문구/원본 보존/별도 승인 기준을 유지한다. 아래는 시점별 기록이다.

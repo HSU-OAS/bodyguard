@@ -1,6 +1,6 @@
 # S2.T11 — 명시 기준의 머리 방향 리그 연결
 
-상태: 명세·하네스 / baseline `01b97dbecfe2a9a37ee7165e98c8f1e5730f7be4` / `codex/head-orientation`
+상태: 구현·실제 Chrome/GLB 검증·작성자 리뷰 / runtime `2dd5d9e27c7b7309f18849ff15f12ac429b5234c` / baseline `01b97dbecfe2a9a37ee7165e98c8f1e5730f7be4` / `codex/head-orientation` / PR 게이트
 
 FR-A-01/03·FR-M-02/07·NFR-07/08. 사지 연결에 없던 머리 방향을 기존 Blender 유래 A37의 정확한 `head` bone에 비공개로 연결한다. 자동 첫2초 정면·행렬 순서 추측을 재사용하지 않는다. 이는 표시 연결이며 경추 분절 측정·자세 판정·정답 시범·출시 아바타가 아니다. 같은 부위 조형/원본·GLB 수정0, 공개 디자인·SDK 정책·판정·계정/운영 변경0이다.
 
@@ -22,3 +22,5 @@ FR-A-01/03·FR-M-02/07·NFR-07/08. 사지 연결에 없던 머리 방향을 기�
 ## 남은 조건
 
 같은 frozen video frame의 pose/face 결과 묶음·동일 사용자 연결·native SDK 소유 수명, 실제 사람의 좌표계/단일 카메라 오차, 체간/경추 여러 분절·손·축 비틀림, 검증된 시범/적색 피드백·D2-A 외형/권리·승인 디자인/SDK 정책·실제 노트북/다양한 조건 및 전체1~6은 미완료다. 머리 한 bone 연결을 세밀한 목 코칭 완료로 표시하지 않는다. 공개 UI는 핵심 행동만 간결히, 안전 안내는 짧게, 상세는 요청 시 원칙을 유지한다.
+
+runtime의 실제 남녀2흐름·순수21/전체960·타입/Biome·assets/build·공개 guard/diff와 공개 byte 동일을 확인했다. [화면·실패·작성자 리뷰·남은 조건](../review/head-orientation/README.md), [8소스/61원본 증거 SHA](../review/head-orientation/summary.json). 입력은 합성이며 native SDK/실제 사람 정확도 통과로 세지 않는다. 이전2초 정면 시제품은 유지하고 공개 consumer를 추가하지 않는다.
