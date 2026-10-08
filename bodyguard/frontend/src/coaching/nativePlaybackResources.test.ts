@@ -443,6 +443,8 @@ describe('native feedback observation and session binding', () => {
     const program = feedbackProgram(),
       frame = feedbackFrame(),
       evaluate = vi.fn((_frame: PoseRigFrame) => feedbackDecision(frame))
+    const image = { width: 1280, height: 720, imageIsMirrored: false }
+    Object.assign(frame, { image })
     const f = setup(undefined, undefined, referenceProgram(), { program, evaluate })
     ;(program.regions as { id: string; bones: string[] }[])[0].id = 'mutated'
     vi.mocked(f.pair.observe).mockReturnValue(true)
@@ -453,6 +455,8 @@ describe('native feedback observation and session binding', () => {
     expect(vi.mocked(prepareOwnedAvatarPair).mock.calls[0][1].feedback).toEqual(feedbackProgram())
     expect(evaluate).toHaveBeenCalledOnce()
     expect(evaluate.mock.calls[0]?.[0]).toEqual(frame)
+    expect(evaluate.mock.calls[0]?.[0].image).not.toBe(image)
+    expect(Object.isFrozen(evaluate.mock.calls[0]?.[0].image)).toBe(true)
     expect(f.pair.updateFeedback).toHaveBeenCalledWith({
       generation: 1,
       sequence: 1,

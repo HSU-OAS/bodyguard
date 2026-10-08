@@ -119,6 +119,9 @@ test.afterEach(async ({ page, browser }, info) => {
   expect(final.faceCalls).toBe(0)
   expect(final.handCalls).toBe(0)
   expect(final.verifiedMs).toBe(0)
+  expect(final.capturedImageFailures).toBe(0)
+  expect(final.capturedNeckChecks).toBe(final.feedbackEvaluations)
+  expect(final.unavailableNeckChecks).toBe(final.capturedNeckChecks)
   expect(external).toBe(0)
   expect(errors).toEqual([])
   expect(await page.evaluate(() => [localStorage.length, sessionStorage.length])).toEqual([0, 0])
@@ -194,6 +197,7 @@ async function mount(page: Page, gender: 'male' | 'female') {
       false,
       false,
       true,
+      true,
     )
   }, gender)
   await expect
@@ -205,6 +209,7 @@ async function mount(page: Page, gender: 'male' | 'female') {
 async function running(page: Page, before = 0) {
   await page.evaluate(() => (window as unknown as WindowProbe).nativeAuthProbe.start())
   await expect.poll(async () => (await state(page)).frameCloses).toBeGreaterThanOrEqual(before + 3)
+  await expect.poll(async () => (await state(page)).capturedNeckChecks).toBeGreaterThan(0)
   expect(await state(page)).toMatchObject({
     session: 'running',
     models: 2,

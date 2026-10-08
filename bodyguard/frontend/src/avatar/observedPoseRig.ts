@@ -1,5 +1,6 @@
 // FR-A-01/03·FR-M-02/07: one provider result, private directional display only.
 import type { Object3D } from 'three'
+import type { CapturedImage } from '../posture/capturedImage'
 import { JOINT_COUNT, type Point } from '../posture/landmarks'
 import {
   createDirectionalRig,
@@ -19,6 +20,8 @@ export type PoseRigFrame = Readonly<{
   generation: number
   sequence: number
   at: number
+  // Optional original input geometry; never CSS dimensions or avatar display mirroring.
+  image?: CapturedImage
   result: Readonly<{
     landmarks: readonly (readonly Point[])[]
     worldLandmarks: readonly (readonly Point[])[]

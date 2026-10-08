@@ -75,6 +75,46 @@ function setup() {
   }
 }
 describe('owned decoded video pose source', () => {
+  it.each([0, NaN, Infinity, 1.5])(
+    'reclaims malformed VideoFrame dimension %s without inference',
+    async (dimension) => {
+      vi.stubGlobal(
+        'VideoFrame',
+        class extends FakeFrame {
+          displayWidth = dimension
+        },
+      )
+      const f = setup(),
+        read = f.source.read()
+      f.emit()
+      await expect(read).rejects.toThrow('Video capture unavailable')
+      expect(f.detect).not.toHaveBeenCalled()
+      expect(FakeFrame.made[0].close).toHaveBeenCalledOnce()
+      expect(await f.source.read()).toBeNull()
+      await f.source.dispose()
+    },
+  )
+  it('uses owned VideoFrame dimensions, not callback metadata/current video/CSS dimensions or avatar mirroring', async () => {
+    const f = setup(),
+      gate = deferred<typeof f.result>()
+    f.detect.mockReturnValue(gate.promise)
+    Object.defineProperties(f.video, {
+      videoWidth: { value: 1920, configurable: true },
+      videoHeight: { value: 1080, configurable: true },
+    })
+    Object.assign(f.video, { style: { width: '200px', height: '200px', scale: '-1 1' } })
+    const read = f.source.read()
+    f.emit()
+    await Promise.resolve()
+    FakeFrame.made[0].displayWidth = 320
+    FakeFrame.made[0].displayHeight = 320
+    gate.resolve(f.result)
+    const frame = await read
+    expect(frame?.image).toEqual({ width: 640, height: 480, imageIsMirrored: false })
+    expect(Object.isFrozen(frame?.image)).toBe(true)
+    expect(FakeFrame.made[0].close).toHaveBeenCalledOnce()
+    await f.source.dispose()
+  })
   it('starts nothing until read, preserves decoded stamps and closes both owned values', async () => {
     const f = setup()
     expect(f.video.requestVideoFrameCallback).not.toHaveBeenCalled()

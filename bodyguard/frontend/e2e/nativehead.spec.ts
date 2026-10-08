@@ -135,6 +135,8 @@ test.afterEach(async ({ page, browser }, info) => {
     expect(final.models).toBe(0)
     expect(final.failures).toEqual([])
     expect(final.memory).toEqual(final.baseline)
+    expect(final.capturedImageFailures).toBe(0)
+    expect(final.capturedNeckChecks).toBe(final.feedbackEvaluations)
   }
   const file = info.outputPath(withHands ? 'native-hands-summary.json' : 'native-head-summary.json')
   writeFileSync(

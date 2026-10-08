@@ -26,6 +26,7 @@ import type { prepareOwnedAvatarPair } from '../../src/avatar/ownedAvatarPair'
 import type { ReferenceProgram } from '../../src/avatar/referencePlayback'
 import { createNativePlaybackResources } from '../../src/coaching/nativePlaybackResources'
 import { useRecordedCoaching } from '../../src/coaching/useRecordedCoaching'
+import { observeCapturedNeckSide } from '../../src/posture/neckSideObservation'
 import type { CoachingState, ObservationClass } from '../../src/stretch/progression'
 import { nativeReferenceProgram } from './nativeReferenceProgram'
 import { nativeStartupTiming } from './nativeStartupTiming'
@@ -46,6 +47,7 @@ export function mountNativeHeadAuthProbe(
   withTiming = false,
   withTrunk = false,
   withWorker = false,
+  withCapturedNeck = false,
 ) {
   if (withTrunk && !withFeedback) throw new Error('Private trunk feedback fixture unavailable')
   if (withAdaptive && (!withFeedback || !withReference))
@@ -157,6 +159,9 @@ export function mountNativeHeadAuthProbe(
   let feedbackMode: 'off' | 'error' | 'crop' | 'multiple' | 'none' = 'off',
     syntheticBodyDeliveries = 0,
     feedbackEvaluations = 0
+  let capturedNeckChecks = 0,
+    capturedImageFailures = 0,
+    unavailableNeckChecks = 0
   let oldState: CoachingState | null = null,
     referenceRest = '',
     userRest = '',
@@ -465,7 +470,7 @@ export function mountNativeHeadAuthProbe(
       },
       ...(handAlignment ? { hands: handAlignment } : {}),
       ...(reference ? { reference } : {}),
-      ...(withFeedback
+      ...(withFeedback || withCapturedNeck
         ? {
             feedback: {
               program: {
@@ -475,6 +480,27 @@ export function mountNativeHeadAuthProbe(
               },
               evaluate(frame: PoseRigFrame) {
                 feedbackEvaluations++
+                // Test receipt counts only. No projected values or clinical decision escape.
+                capturedNeckChecks++
+                if (
+                  !frame.image ||
+                  !Object.isFrozen(frame.image) ||
+                  !Number.isSafeInteger(frame.image.width) ||
+                  frame.image.width <= 0 ||
+                  !Number.isSafeInteger(frame.image.height) ||
+                  frame.image.height <= 0 ||
+                  frame.image.imageIsMirrored !== false
+                )
+                  capturedImageFailures++
+                if (
+                  observeCapturedNeckSide({
+                    frame,
+                    now: performance.now(),
+                    minimumConfidence: 0.8,
+                    maxAgeMs: 250,
+                  }).status === 'unavailable'
+                )
+                  unavailableNeckChecks++
                 if (!ownedSession || feedbackMode === 'off') return null
                 // Independent TEST classification and true-shaped gates; never a release rule.
                 const observable =
@@ -660,6 +686,9 @@ export function mountNativeHeadAuthProbe(
       feedbackMode,
       syntheticBodyDeliveries,
       feedbackEvaluations,
+      capturedNeckChecks,
+      capturedImageFailures,
+      unavailableNeckChecks,
       highlighted,
       canvasHidden: canvas.hidden,
       referenceMoved: Boolean(ref && ref !== referenceRest),

@@ -3,6 +3,7 @@
 import { copyHandObservations } from '../avatar/observedHandRig'
 import type { PoseRigFrame } from '../avatar/observedPoseRig'
 import { ResourceCleanupError, type ResourceContext } from '../coaching/resources'
+import { type CapturedImage, copyCapturedImage } from '../posture/capturedImage'
 import { JOINT_COUNT, type Point } from '../posture/landmarks'
 
 export type CapturedPoseInput<T> = Readonly<{
@@ -10,6 +11,7 @@ export type CapturedPoseInput<T> = Readonly<{
   sequence: number
   at: number
   input: T
+  image?: CapturedImage
 }>
 export type OwnedPoseResult = PoseRigFrame['result'] & Readonly<{ close(): void }>
 // FR-M-02/NFR-07: snapshot bounded body arrays before another provider can reuse memory.
@@ -20,14 +22,16 @@ export function copyPosePoints(poses: readonly (readonly Point[])[]) {
       if (!Array.isArray(points) || points.length > JOINT_COUNT) throw new Error()
       return Object.freeze(
         points.map((point) => {
-          const { x, y, z, visibility } = point
+          const { x, y, z, visibility, presence } = point
           if (typeof x !== 'number' || typeof y !== 'number' || typeof z !== 'number')
             throw new Error()
+          if (presence !== undefined && typeof presence !== 'number') throw new Error()
           return Object.freeze({
             x,
             y,
             z,
             ...(typeof visibility === 'number' ? { visibility } : {}),
+            ...(presence === undefined ? {} : { presence }),
           })
         }),
       )
@@ -100,6 +104,7 @@ export function createOwnedPoseFrame<T>(
       )
         return null
       const input = captured.input
+      const image = copyCapturedImage(captured.image)
       if (!alive()) return null
       // Reserve before calling foreign inference; neither a repeated input nor a late
       // result may be re-stamped to appear fresh. Input and detector stay caller-owned.
@@ -118,6 +123,7 @@ export function createOwnedPoseFrame<T>(
           generation: suppliedGeneration,
           sequence,
           at,
+          ...(image === undefined ? {} : { image }),
           result: Object.freeze({
             landmarks: copyPosePoints(result.landmarks),
             worldLandmarks: copyPosePoints(result.worldLandmarks),

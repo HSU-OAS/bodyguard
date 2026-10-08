@@ -24,6 +24,7 @@ import { createGestureRecognizer } from '../pose/hands'
 import { createPoseLandmarker } from '../pose/landmarker'
 import { createVideoPoseSource } from '../pose/videoPoseSource'
 import { createWorkerPoseInference } from '../pose/workerInference'
+import { copyCapturedImage } from '../posture/capturedImage'
 import type { CoachingState } from '../stretch/progression'
 import { createOwnedPlaybackResources } from './ownedPlaybackResources'
 import { ResourceCleanupError, type ResourceContext, type ResourceNotice } from './resources'
@@ -307,10 +308,12 @@ export function createNativePlaybackResources(options: Options) {
         observationToken = token
         let delivery: PoseRigFrame
         try {
+          const image = copyCapturedImage(frame.image)
           delivery = Object.freeze({
             generation: frame.generation,
             sequence: frame.sequence,
             at: frame.at,
+            ...(image === undefined ? {} : { image }),
             result: frame.result,
           })
         } catch {

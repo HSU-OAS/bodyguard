@@ -1,6 +1,7 @@
 // FR-M-02/07·FR-A-01/03/NFR-07/08: synthetic ports; no camera or actual inference.
 import { describe, expect, it, vi } from 'vitest'
 import { ResourceCleanupError } from '../coaching/resources'
+import { observeCapturedNeckSide } from '../posture/neckSideObservation'
 import {
   type CapturedPoseInput,
   createOwnedPoseFrame,
@@ -35,6 +36,112 @@ function fixture() {
 }
 
 describe('owned pose frame', () => {
+  it('snapshots capture geometry before delayed inference without retaining the supplied object', async () => {
+    const f = fixture(),
+      gate = deferred<OwnedPoseResult>()
+    const image = { width: 1280, height: 720, imageIsMirrored: false }
+    f.capture.mockReturnValue({ generation: 1, sequence: 1, at: 10, input: 'borrowed', image })
+    f.detect.mockReturnValue(gate.promise)
+    const reading = f.source.read()
+    await Promise.resolve()
+    image.width = 320
+    image.height = 320
+    image.imageIsMirrored = true
+    gate.resolve(f.result)
+    const frame = await reading
+    expect(frame?.image).toEqual({ width: 1280, height: 720, imageIsMirrored: false })
+    expect(frame?.image).not.toBe(image)
+    expect(Object.isFrozen(frame?.image)).toBe(true)
+    expect(f.result.close).toHaveBeenCalledOnce()
+    await f.source.dispose()
+  })
+  it.each([0, -1, NaN, Infinity, 1.5, Number.MAX_VALUE])(
+    'rejects malformed supplied width/height %s before inference',
+    async (dimension) => {
+      for (const key of ['width', 'height'] as const) {
+        const f = fixture()
+        f.capture.mockReturnValue({
+          generation: 1,
+          sequence: 1,
+          at: 10,
+          input: 'borrowed',
+          image: { width: 1280, height: 720, imageIsMirrored: false, [key]: dimension },
+        })
+        await expect(f.source.read()).rejects.toThrow('Pose frame unavailable')
+        expect(f.detect).not.toHaveBeenCalled()
+        await f.source.dispose()
+      }
+    },
+  )
+  it.each([0, 0.79, NaN, Infinity, 1.1])(
+    'preserves presence %s through copies instead of promoting a hidden point',
+    async (presence) => {
+      const f = fixture()
+      const points = Array.from({ length: 33 }, () => ({
+        x: 0.5,
+        y: 0.5,
+        z: 0,
+        visibility: 1,
+        presence: 1,
+      }))
+      points[7] = { x: 0.4, y: 0.2, z: 0, visibility: 1, presence }
+      points[8] = { x: 0.6, y: 0.2, z: 0, visibility: 1, presence: 1 }
+      points[11] = { x: 0.3, y: 0.4, z: 0, visibility: 1, presence: 1 }
+      points[12] = { x: 0.7, y: 0.4, z: 0, visibility: 1, presence: 1 }
+      f.capture.mockReturnValue({
+        generation: 1,
+        sequence: 1,
+        at: 10,
+        input: 'borrowed',
+        image: { width: 1280, height: 720, imageIsMirrored: false },
+      })
+      f.detect.mockReturnValue({
+        landmarks: [points],
+        worldLandmarks: [points],
+        close: f.result.close,
+      })
+      const frame = await f.source.read()
+      if (!frame) throw new Error('Synthetic frame unavailable')
+      expect(frame?.result.landmarks[0][7].presence).toBe(presence)
+      expect(
+        observeCapturedNeckSide({ frame, now: 20, minimumConfidence: 0.8, maxAgeMs: 250 }),
+      ).toEqual({ status: 'unavailable' })
+      expect(f.result.close).toHaveBeenCalledOnce()
+      await f.source.dispose()
+    },
+  )
+  it('does not erase a malformed optional presence to make it absent', async () => {
+    const f = fixture()
+    Object.assign(f.result.landmarks[0][0], { presence: 'untrusted' })
+    await expect(f.source.read()).rejects.toThrow('Pose frame unavailable')
+    expect(f.result.close).toHaveBeenCalledOnce()
+    await f.source.dispose()
+  })
+  it.each([undefined, 'false', 0])(
+    'rejects malformed explicit mirror %s rather than guessing',
+    async (mirror) => {
+      const f = fixture()
+      const image = { width: 1280, height: 720, imageIsMirrored: false }
+      Object.assign(image, { imageIsMirrored: mirror })
+      f.capture.mockReturnValue({ generation: 1, sequence: 1, at: 10, input: 'borrowed', image })
+      await expect(f.source.read()).rejects.toThrow('Pose frame unavailable')
+      expect(f.detect).not.toHaveBeenCalled()
+      await f.source.dispose()
+    },
+  )
+  it('sanitizes a foreign image getter error before inference', async () => {
+    const f = fixture()
+    const image = { width: 1280, height: 720, imageIsMirrored: false }
+    Object.defineProperty(image, 'width', {
+      get() {
+        throw new Error('PRIVATE_IMAGE')
+      },
+    })
+    f.capture.mockReturnValue({ generation: 1, sequence: 1, at: 10, input: 'borrowed', image })
+    await expect(f.source.read()).rejects.toThrow('Pose frame unavailable')
+    expect(f.detect).not.toHaveBeenCalled()
+    await f.source.dispose()
+  })
   it('preserves tagged partial-provider cleanup failure before a result is returned', async () => {
     const f = fixture()
     f.detect.mockImplementation(() => {
