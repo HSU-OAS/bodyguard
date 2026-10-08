@@ -14,6 +14,8 @@ export type PoseRigFrame = Readonly<{
   result: Readonly<{
     landmarks: readonly (readonly Point[])[]
     worldLandmarks: readonly (readonly Point[])[]
+    // Optional private face orientation from the same input, NOT matched identity/neck pose.
+    headOrientation?: readonly number[] | null
   }>
 }>
 type Options = Parameters<typeof createDirectionalRig>[1] & Readonly<{ mirror: boolean }>

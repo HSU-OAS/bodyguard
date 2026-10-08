@@ -91,6 +91,9 @@ for (const file of files) {
     '__private-native-recovery-probe',
     'Invalid head avatar rig',
     'mountHeadProbe',
+    'Invalid body face source',
+    'Body face frame unavailable',
+    'mountBodyFaceProbe',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -121,5 +124,6 @@ console.log(
     unconnected_native_auth_playback_strings: 0,
     unconnected_native_playback_adapter_strings: 0,
     unconnected_head_orientation_strings: 0,
+    unconnected_body_face_frame_strings: 0,
   }),
 )

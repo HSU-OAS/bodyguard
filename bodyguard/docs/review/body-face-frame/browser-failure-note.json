@@ -1,0 +1,10 @@
+{
+  "label": "launch-browser-reviewed",
+  "exit": 1,
+  "reportedError": "Unhandled socket read ECONNRESET",
+  "browserReceiptCreated": false,
+  "reason": "The refused CONNECT socket had no error listener; process terminated before finally/report creation.",
+  "completedFlowClaim": false,
+  "cleanupAudit": "Read-only escalated ps after termination showed no remaining playwright_chromiumdev_profile, native browser probe or remote-debugging-pipe process; only the audit commands matched.",
+  "fix": "Handle owned CONNECT socket errors as fixed counters while retaining denial; add deterministic localhost-only reset injection and verify 403 plus the native flow."
+}

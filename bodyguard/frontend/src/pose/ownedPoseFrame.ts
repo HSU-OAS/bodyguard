@@ -10,6 +10,42 @@ export type CapturedPoseInput<T> = Readonly<{
   input: T
 }>
 export type OwnedPoseResult = PoseRigFrame['result'] & Readonly<{ close(): void }>
+// FR-M-02/NFR-07: snapshot bounded body arrays before another provider can reuse memory.
+export function copyPosePoints(poses: readonly (readonly Point[])[]) {
+  if (!Array.isArray(poses) || poses.length > 2) throw new Error()
+  return Object.freeze(
+    poses.map((points) => {
+      if (!Array.isArray(points) || points.length > JOINT_COUNT) throw new Error()
+      return Object.freeze(
+        points.map((point) => {
+          const { x, y, z, visibility } = point
+          if (typeof x !== 'number' || typeof y !== 'number' || typeof z !== 'number')
+            throw new Error()
+          return Object.freeze({
+            x,
+            y,
+            z,
+            ...(typeof visibility === 'number' ? { visibility } : {}),
+          })
+        }),
+      )
+    }),
+  )
+}
+function copyHead(value: readonly number[] | null | undefined) {
+  if (value === undefined) return {}
+  if (value === null) return { headOrientation: null }
+  if (!Array.isArray(value)) throw new Error()
+  const copied = Array.from(value)
+  // Quaternion Float32 roundoff only; not a clinical angle or identity threshold.
+  if (
+    copied.length !== 4 ||
+    !copied.every(Number.isFinite) ||
+    Math.abs(Math.hypot(...copied) - 1) > 1e-5
+  )
+    throw new Error()
+  return { headOrientation: Object.freeze(copied) }
+}
 /** Private frame boundary. Capture supplies borrowed input with original stamps.
  * Detect must return a fresh exclusively owned result; partial failure cleanup stays
  * provider-owned. Caller owns the detector/camera and must retire its session on a
@@ -41,27 +77,6 @@ export function createOwnedPoseFrame<T>(
     signal.removeEventListener('abort', close)
   }
   if (!closed) signal.addEventListener('abort', close, { once: true })
-  function copy(poses: readonly (readonly Point[])[]) {
-    if (!Array.isArray(poses) || poses.length > 2) throw new Error()
-    return Object.freeze(
-      poses.map((points) => {
-        if (!Array.isArray(points) || points.length > JOINT_COUNT) throw new Error()
-        return Object.freeze(
-          points.map((point) => {
-            const { x, y, z, visibility } = point
-            if (typeof x !== 'number' || typeof y !== 'number' || typeof z !== 'number')
-              throw new Error()
-            return Object.freeze({
-              x,
-              y,
-              z,
-              ...(typeof visibility === 'number' ? { visibility } : {}),
-            })
-          }),
-        )
-      }),
-    )
-  }
   async function acquire(): Promise<PoseRigFrame | null> {
     let result: OwnedPoseResult | undefined
     let release: OwnedPoseResult['close'] | undefined
@@ -101,8 +116,9 @@ export function createOwnedPoseFrame<T>(
           sequence,
           at,
           result: Object.freeze({
-            landmarks: copy(result.landmarks),
-            worldLandmarks: copy(result.worldLandmarks),
+            landmarks: copyPosePoints(result.landmarks),
+            worldLandmarks: copyPosePoints(result.worldLandmarks),
+            ...copyHead(result.headOrientation),
           }),
         })
       }

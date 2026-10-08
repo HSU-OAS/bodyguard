@@ -175,7 +175,13 @@ export function createVideoPoseSource(
         result = await detect(frame, at)
         resultClose = result.close
         if (!owns()) throw new Error('Video capture unavailable')
-        return { landmarks: result.landmarks, worldLandmarks: result.worldLandmarks, close: finish }
+        const headOrientation = result.headOrientation
+        return {
+          landmarks: result.landmarks,
+          worldLandmarks: result.worldLandmarks,
+          ...(headOrientation === undefined ? {} : { headOrientation }),
+          close: finish,
+        }
       } catch (error) {
         finish()
         throw error instanceof ResourceCleanupError ? error : new Error('Video capture unavailable')
