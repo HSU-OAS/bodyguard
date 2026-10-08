@@ -1,6 +1,6 @@
 # S2.T21 현재 오류에 대응하는 시범 연결
 
-상태: 구현·최초 실제 Chrome 검증 / 최종 재검증·PR 게이트 진행 중 · 2026-10-08
+상태: 구현·최종 실제 Chrome/로컬 검증·author-only 리뷰 완료 / PR 게이트 대기 · 2026-10-08
 
 기준 main `36ed81463418a3749d026cba8aa579db8ef07fbe`는 PR #83의 실제 merge다. source/merge tree·원격 main·브랜치 보존 확인과 [실제 결과 기록](https://github.com/HSU-OAS/bodyguard/pull/83#issuecomment-6055527680)을 읽었다. 최신 main의 `codex/adaptive-reference`에서 하나의 목적으로 시작한다.
 
@@ -30,4 +30,6 @@ FR-S-03/04·FR-A-01/03·FR-M-07: 기준 아바타가 같은 동작만 반복하�
 
 ## 실제 진행
 
-최초 Chrome18흐름은 남녀 오류 코드별 시범 전환·가림 해제와 기존 phase/pause/새 세대·중단/본인 기록·refresh/logout401/이탈 경계를 통과했다. 실제 AuthProvider/API/새 격리 SQL·가짜 장치/실제 SDK/기존 A37 GLB이며 양성/오류는 합성 대체다. 실패14·4·2건과 테스트 문법/타입 오류, 리뷰 보완 중 선언 순서 오류·기록 파일명 충돌·DB 초기화 sandbox 거부는 보존한다. 중복 cause/region/phase 매핑과 오래된 getter 재진입을 보완했고 Three/native mock133·전체 FE1169·type·Biome가 통과했다. 마지막 보완 source의 Chrome 재실행·공개 build/guard와 최종 리뷰/PR 게이트는 아직 완료로 세지 않는다.
+runtime3c8ce1a의 남녀 오류별 시범 전환·가림 해제와 기존 phase/pause/새 세대·중단/본인 기록·refresh/logout401/이탈 경계18흐름을 최종 Chrome에서 통과했다. FE1169·type·Biome248(경고/info0)·assets/build/guard와 소스 안정성·공개 PR83 byte 동일을 실제 확인했다. [작동 흐름·실제 미리보기·실패·남은 조건](../review/adaptive-reference/README.md). 실제 AuthProvider/API/새 격리 SQL·가짜 장치/실제 SDK/기존 A37 GLB이며 양성/오류는 합성 대체다. 원문 실패/중간 오류·기존 원본을 보존했고 자체 DB는 정상 종료했다.
+
+중복 cause/region/phase와 오래된 getter 재진입을 보완했다. author-only 리뷰의 이 연결 diff P1/P2는0이지만 실제 자세/콘텐츠·최종 외형/공개 UI·간헐적 시작 원인 및 D2/전체1~6의 미완료를 해결한 것은 아니다. 실제 PR/원격/체크/병합 결과는 최종 게이트 뒤 별도로 기록한다.
