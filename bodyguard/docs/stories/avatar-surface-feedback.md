@@ -1,6 +1,6 @@
 # S2.T19 — 관찰에 연결된 사용자 표면 오류 강조
 
-Status: 소유 pair 구현·리뷰 보완·실제 WebGL 확인 / 커밋 고정 재검증·PR 전 / 단계 완료 아님
+Status: 실제 재검증·Story 리뷰 보완 완료 / PR 게이트 전 / 단계 완료 아님
 
 ## 목적
 
@@ -55,3 +55,7 @@ source/reference와8가중치·전신 구도는 보존했고 추가 GPU 자원�
 실패 receipt·초기/보완 번들을 보존한다. 초기 미커밋 소스는 hash·로그만 남은 부분이 있으며
 전체 원문을 보존했다고 주장하지 않는다. 최종 커밋과 실제 재실행의 증거는 후속 정리에 연결한다.
 공개 JS/CSS는 baseline과 동일하며 공개 디자인·조형·판정·운영 변경은0이다.
+
+최종 runtime e61870a에서 남녀 WebGL·전체FE1126/정적/build/guard/diff를 실제 재실행했다.
+[실제 화면·실패·남은 조건](../review/surface-feedback/README.md)에 원문/압축 SHA와 한계를 보존한다.
+Story 통과는 실제 오류 판정·native feedback/적응형 시범·전체1~6 완료가 아니다.
