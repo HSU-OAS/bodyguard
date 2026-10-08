@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-09 [S6.11 비공개 Worker 추론](stories/native-worker-inference.md): 실제 Chrome/SDK/API/격리 SQL의 로그인→두 아바타→중단/본인 기록·준비 중 로그아웃·세션 갱신/새 시작을 확인했다. [실패·최종 증거·한계](review/native-worker-inference/README.md). 가짜 카메라/메일/동작 gate·미완성 A37이며 기본 main/공개 byte·모델/GLB·최소 문구·판정/SDK 정책/운영은 유지한다. PR 게이트 진행, 기존 시작 P2·실측/외형·D2/전체1~6 미완료. 아래는 시점별 기록이다.
+
 2026-10-09 [S6.10 출시 통합 경계 기록](stories/release-readiness-gates.md): [현재 흐름·필수 미완료·요청한 결정/연결](release-readiness-gates.md)을 최신 main/열린 Draft와 대조한다. 기존 정적 시안의 구도·선택·설정·설명 접기·종료만 독립 Chrome으로 재확인했으며 제품/최종 아바타·임상/실측 검증은 아니다. 코칭 구조 적용·SDK 제품 차단 정책·실제 수행자/관찰자 연결의 답변은 미수신, Docker 미연결·Q13/27/32·기존 P2/D2/전체1~6 미완료다. 이번 목적은 문서/증거이며 구현 범위·품질 기준·승인을 바꾸지 않는다. 아래는 시점별 기록이다.
 
 2026-10-08 [S2.M1 목 옆 기울이기 관찰값](stories/neck-side-observation.md): 실제 영상 비율·명시적 반전의 이미지 평면 귀/어깨 상대 기하를 구현했다. [실행·실패·한계](review/neck-observation/README.md). 새87/FE1301·정적/type/build/guard·공개 byte 동일을 확인하고 조건부 PR gate를 진행한다. 실제 source/개발 관찰·사람 라벨/임계값·올바른 동작/교정·최종 외형/승인 UI·SDK/외부/운영·기존 시작 P2·출시0과 전체1~6은 미완료다. PR88의 실제 mergeda32cf5/main·브랜치 보존을 확인하고 그 최신 main에서 시작했으며 최소 문구·원본/실패·별도 승인 경계는 유지한다. 아래는 시점별 기록이다.

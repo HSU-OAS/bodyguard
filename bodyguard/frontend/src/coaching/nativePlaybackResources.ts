@@ -23,6 +23,7 @@ import { createFaceLandmarker } from '../pose/face'
 import { createGestureRecognizer } from '../pose/hands'
 import { createPoseLandmarker } from '../pose/landmarker'
 import { createVideoPoseSource } from '../pose/videoPoseSource'
+import { createWorkerPoseInference } from '../pose/workerInference'
 import type { CoachingState } from '../stretch/progression'
 import { createOwnedPlaybackResources } from './ownedPlaybackResources'
 import { ResourceCleanupError, type ResourceContext, type ResourceNotice } from './resources'
@@ -37,6 +38,8 @@ export type NativeFeedbackDecision = Readonly<{
 }>
 type Options = Readonly<{
   model: PoseModel
+  /** Private explicit opt-in until actual SDK/browser and integration gates pass. */
+  inferenceThread?: 'main' | 'worker'
   loadAvatar: Rig['load']
   mirror: boolean
   halfLifeMs: number
@@ -99,7 +102,12 @@ export function createNativePlaybackResources(options: Options) {
   let feedback: FeedbackProgram | undefined
   let evaluateFeedback: NonNullable<Options['feedback']>['evaluate'] | undefined
   let trunk = false
+  let inferenceThread: 'main' | 'worker' = 'main'
   try {
+    const requestedThread = options.inferenceThread
+    if (requestedThread !== undefined && requestedThread !== 'main' && requestedThread !== 'worker')
+      throw new Error()
+    inferenceThread = requestedThread ?? 'main'
     const requestedTrunk = options.trunk
     if (requestedTrunk !== undefined && typeof requestedTrunk !== 'boolean') throw new Error()
     trunk = requestedTrunk === true
@@ -204,6 +212,13 @@ export function createNativePlaybackResources(options: Options) {
       }
     },
     async inference(context) {
+      if (inferenceThread === 'worker')
+        return createWorkerPoseInference(context, {
+          model,
+          face: Boolean(head),
+          hands: Boolean(hands),
+          matrixLayout: head?.matrixLayout ?? 'column-major',
+        })
       const native = await createPoseLandmarker(model)
       const disposeBody = ownNative(context, () => native.landmarker.close())
       let face: Awaited<ReturnType<typeof createFaceLandmarker>> | undefined
@@ -242,6 +257,7 @@ export function createNativePlaybackResources(options: Options) {
         return native.landmarker.detectForVideo(frame, at)
       }
       return {
+        thread: 'main' as const,
         dispose: disposeInference,
         detect: detectBody,
         detectBody,
@@ -473,29 +489,35 @@ export function createNativePlaybackResources(options: Options) {
       })
     },
     source: (context, camera, inference) =>
-      hands
-        ? createBodyHandVideoSource(context, {
+      inference.thread === 'worker'
+        ? createVideoPoseSource(context, {
             video: camera.video,
             stream: camera.stream,
-            detectBody: inference.detectBody,
-            detectHands: inference.detectHands,
-            ...(head
-              ? { face: { detectFace: inference.detectFace, matrixLayout: head.matrixLayout } }
-              : {}),
+            detect: inference.detect,
           })
-        : head
-          ? createBodyFaceVideoSource(context, {
+        : hands
+          ? createBodyHandVideoSource(context, {
               video: camera.video,
               stream: camera.stream,
               detectBody: inference.detectBody,
-              detectFace: inference.detectFace,
-              matrixLayout: head.matrixLayout,
+              detectHands: inference.detectHands,
+              ...(head
+                ? { face: { detectFace: inference.detectFace, matrixLayout: head.matrixLayout } }
+                : {}),
             })
-          : createVideoPoseSource(context, {
-              video: camera.video,
-              stream: camera.stream,
-              detect: inference.detect,
-            }),
+          : head
+            ? createBodyFaceVideoSource(context, {
+                video: camera.video,
+                stream: camera.stream,
+                detectBody: inference.detectBody,
+                detectFace: inference.detectFace,
+                matrixLayout: head.matrixLayout,
+              })
+            : createVideoPoseSource(context, {
+                video: camera.video,
+                stream: camera.stream,
+                detect: inference.detect,
+              }),
     scheduler,
     render,
     onFailure,
