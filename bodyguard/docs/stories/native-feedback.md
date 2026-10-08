@@ -1,6 +1,6 @@
 # S2.T20 — native 관찰·현재 코칭과 사용자 오류 표시 연결
 
-Status: 비공개 연결 구현·실제 브라우저 검증 중 / 시작 실패 보존 / 단계 완료 아님
+Status: 비공개 통합 검증 / 조건부 PR gate / 시작 원인 미확정·단계 완료 아님
 
 PR82 실제 merge3190c4e/main·같은 tree·브랜치 보존을 확인한 최신 origin/main에서
 새 codex/native-feedback로 시작한다. 목적은 기존 카메라→같은 SDK frame→소유
@@ -66,9 +66,14 @@ fixture caller의 canvas 숨김은 권한 회수 화면 시험용이며 공개 U
 추가 커밋 소스/브라우저 회귀·PR gate는 아직 남아 있다.
 
 실행 원문은 `/private/tmp/bodyguard-native-feedback-proof.QfzMIt`에 보존한다.
-최종 기록은 같은 runtime commit의 실제 재검증 및 manifest로 연결한다. 일부
+최종 기록은 [같은 runtime commit의 실제 재검증·manifest](../review/native-feedback/README.md)로 연결한다. 일부
 초기 소스는 snapshot, 나머지는 hash/로그/Git 기준선으로만 추적하며 모든
 실패 당시 소스 전체를 보존했다고 주장하지 않는다.
+
+위 숫자는 runtime 작성 시점 중간 기록이다. 이후 runtime d4f475c의 전체FE1145·
+types/Biome/assets/build/guard/Ruff/diff와 실제 통합16, 옵션 없는 비교14를 통과했다.
+간헐적 시작 원인을 해결했다고 표시하지 않고 기존 출시 P2를 유지한다. public
+byte·source/GLB·실제/합성 및 미실행 경계는 review에 명시한다.
 
 ## 미충족 출시 조건
 
