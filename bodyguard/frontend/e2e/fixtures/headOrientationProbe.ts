@@ -35,7 +35,14 @@ async function weights(model: Parameters<typeof cloneEightWeightPair>[0]) {
   model.traverse((node) => {
     const mesh = node as SkinnedMesh
     if (!mesh.isSkinnedMesh) return
-    for (const name of ['skinWeight', 'skinIndex', 'skinWeight1', 'skinIndex1']) {
+    for (const name of [
+      'skinWeight',
+      'skinIndex',
+      'skinWeight1',
+      'skinIndex1',
+      'weights_1',
+      'joints_1',
+    ]) {
       const attribute = mesh.geometry.getAttribute(name)
       if (!attribute) continue
       const array = attribute.array
