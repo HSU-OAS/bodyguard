@@ -34,10 +34,126 @@ function frame() {
 }
 const points = () => ({ landmarks: [], worldLandmarks: [], headOrientation: null, hands: [] })
 afterEach(() => {
+  vi.restoreAllMocks()
   vi.unstubAllGlobals()
   vi.useRealTimers()
 })
 describe('worker inference owner', () => {
+  it('rejects late ready even when its timer callback has not been scheduled yet', async () => {
+    vi.useFakeTimers()
+    let now = 0
+    vi.spyOn(performance, 'now').mockImplementation(() => now)
+    const f = fixture(),
+      outcome = f.pending.then(
+        () => 'ready',
+        () => 'failed',
+      )
+    now = 5001
+    f.ready()
+    f.worker.reply({ type: 'closed', generation: 3, clean: true })
+    expect(await outcome).toBe('failed')
+    expect(vi.getTimerCount()).toBe(0)
+  })
+  it('rejects late result before a delayed timer callback can promote it', async () => {
+    vi.useFakeTimers()
+    let now = 0
+    vi.spyOn(performance, 'now').mockImplementation(() => now)
+    const f = fixture()
+    f.ready()
+    const inference = await f.pending
+    const outcome = inference.detect(frame().input, 2).then(
+      () => 'accepted',
+      () => 'rejected',
+    )
+    now = 5001
+    f.worker.reply({ type: 'result', generation: 3, id: 1, at: 2, result: points() })
+    const disposal = inference.dispose()
+    f.worker.reply({ type: 'closed', generation: 3, clean: true })
+    await disposal
+    expect(await outcome).toBe('rejected')
+    expect(vi.getTimerCount()).toBe(0)
+  })
+  it('bounds a silently closed preparing worker and preserves missing cleanup acknowledgement', async () => {
+    vi.useFakeTimers()
+    const f = fixture()
+    const assertion = expect(f.pending).rejects.toThrow('Resource cleanup failed')
+    await vi.advanceTimersByTimeAsync(5000)
+    expect(f.worker.sent.at(-1)?.data).toEqual({ type: 'close', generation: 3 })
+    f.ready()
+    await vi.advanceTimersByTimeAsync(5000)
+    await assertion
+    expect(f.worker.terminate).toHaveBeenCalledOnce()
+    expect(vi.getTimerCount()).toBe(0)
+  })
+  it('bounds a missing inference response, never accepts its late result and observes cleanup', async () => {
+    vi.useFakeTimers()
+    const f = fixture()
+    f.ready()
+    const inference = await f.pending,
+      a = frame()
+    const job = inference.detect(a.input, 2)
+    const assertion = expect(job).rejects.toThrow('Worker inference unavailable')
+    await vi.advanceTimersByTimeAsync(5000)
+    await assertion
+    f.worker.reply({ type: 'result', generation: 3, id: 1, at: 2, result: points() })
+    const cleanup = expect(inference.dispose()).rejects.toThrow('Resource cleanup failed')
+    await vi.advanceTimersByTimeAsync(5000)
+    await cleanup
+    expect(a.clone.close).toHaveBeenCalledOnce()
+    expect(f.worker.terminate).toHaveBeenCalledOnce()
+    expect(vi.getTimerCount()).toBe(0)
+  })
+  it('does not spend a new frame deadline on preparation or an earlier successful frame', async () => {
+    vi.useFakeTimers()
+    const f = fixture()
+    await vi.advanceTimersByTimeAsync(4999)
+    f.ready()
+    const inference = await f.pending
+    expect(vi.getTimerCount()).toBe(0)
+    for (const [id, at] of [
+      [1, 2],
+      [2, 3],
+    ]) {
+      const job = inference.detect(frame().input, at)
+      await vi.advanceTimersByTimeAsync(4999)
+      f.worker.reply({ type: 'result', generation: 3, id, at, result: points() })
+      ;(await job).close()
+      expect(vi.getTimerCount()).toBe(0)
+    }
+    const disposal = inference.dispose()
+    f.worker.reply({ type: 'closed', generation: 3, clean: true })
+    await disposal
+    expect(vi.getTimerCount()).toBe(0)
+  })
+  it('rejects preparation at its deadline even if late ready precedes a clean acknowledgement', async () => {
+    vi.useFakeTimers()
+    const f = fixture(),
+      assertion = expect(f.pending).rejects.toThrow('Worker inference unavailable')
+    await vi.advanceTimersByTimeAsync(5000)
+    f.ready()
+    f.worker.reply({ type: 'closed', generation: 3, clean: true })
+    await assertion
+    expect(f.worker.terminate).toHaveBeenCalledOnce()
+    expect(vi.getTimerCount()).toBe(0)
+  })
+  it('clears an in-flight response deadline immediately on cancellation', async () => {
+    vi.useFakeTimers()
+    const f = fixture()
+    f.ready()
+    const inference = await f.pending,
+      job = inference.detect(frame().input, 2)
+    const assertion = expect(job).rejects.toThrow('Worker inference unavailable')
+    await vi.advanceTimersByTimeAsync(1000)
+    f.abort.abort()
+    await assertion
+    expect(vi.getTimerCount()).toBe(1)
+    const disposal = inference.dispose()
+    f.worker.reply({ type: 'closed', generation: 3, clean: true })
+    await disposal
+    await vi.advanceTimersByTimeAsync(10000)
+    expect(f.worker.terminate).toHaveBeenCalledOnce()
+    expect(vi.getTimerCount()).toBe(0)
+  })
   it('uses a fixed same-origin worker and explicit model/features only', async () => {
     const f = fixture()
     expect(f.worker.url.pathname).toMatch(/nativeInference\.worker\.ts$/)

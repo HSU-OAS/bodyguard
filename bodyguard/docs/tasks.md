@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-09 [S6.12 응답 없는 Worker 복구](stories/native-worker-recovery.md): 실제 준비 고장→기록0, 수행 고장→카메라 종료/본인 interrupted만 저장과 기존 남녀 정상 소유 흐름을 확인했다. [실패·증거·한계](review/native-worker-recovery/README.md). 공개 byte/문구·GLB/모델·기본 main 추론 유지, 실제 사람/물리 카메라0·기존 시작 P2/D2/전체1~6 미완료. PR #93은 main f26c7b9에 실제 병합됐고 그 최신 main에서 새 Story를 시작했다. 아래는 시점별 기록이다.
+
 2026-10-09 [S6.11 비공개 Worker 추론](stories/native-worker-inference.md): 실제 Chrome/SDK/API/격리 SQL의 로그인→두 아바타→중단/본인 기록·준비 중 로그아웃·세션 갱신/새 시작을 확인했다. [실패·최종 증거·한계](review/native-worker-inference/README.md). 가짜 카메라/메일/동작 gate·미완성 A37이며 기본 main/공개 byte·모델/GLB·최소 문구·판정/SDK 정책/운영은 유지한다. PR 게이트 진행, 기존 시작 P2·실측/외형·D2/전체1~6 미완료. 아래는 시점별 기록이다.
 
 2026-10-09 [S6.10 출시 통합 경계 기록](stories/release-readiness-gates.md): [현재 흐름·필수 미완료·요청한 결정/연결](release-readiness-gates.md)을 최신 main/열린 Draft와 대조한다. 기존 정적 시안의 구도·선택·설정·설명 접기·종료만 독립 Chrome으로 재확인했으며 제품/최종 아바타·임상/실측 검증은 아니다. 코칭 구조 적용·SDK 제품 차단 정책·실제 수행자/관찰자 연결의 답변은 미수신, Docker 미연결·Q13/27/32·기존 P2/D2/전체1~6 미완료다. 이번 목적은 문서/증거이며 구현 범위·품질 기준·승인을 바꾸지 않는다. 아래는 시점별 기록이다.

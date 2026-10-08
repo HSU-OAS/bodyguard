@@ -13,6 +13,8 @@ export type WorkerPoseData = Omit<OwnedPoseResult, 'close'>
 const unavailable = () => new Error('Worker inference unavailable')
 // Technical disposal bound, NOT a motion/clinical timer or the native start test limit.
 const CLEANUP_LIMIT_MS = 5000
+// FR-M-07/NFR-07: bounded technical wait for each request; no clinical/time gate changes.
+const RESPONSE_LIMIT_MS = 5000
 
 export async function createWorkerPoseInference(
   context: ResourceContext,
@@ -67,6 +69,21 @@ export async function createWorkerPoseInference(
   let disposal: Promise<void> | undefined
   let finishDisposal: ((clean: boolean) => void) | undefined
   let cleanupTimer: ReturnType<typeof setTimeout> | undefined
+  let responseTimer: ReturnType<typeof setTimeout> | undefined
+  let responseDeadline: number | undefined
+  function clearResponseTimer() {
+    if (responseTimer !== undefined) clearTimeout(responseTimer)
+    responseTimer = undefined
+    responseDeadline = undefined
+  }
+  function awaitResponse() {
+    clearResponseTimer()
+    responseDeadline = performance.now() + RESPONSE_LIMIT_MS
+    responseTimer = setTimeout(() => {
+      responseTimer = undefined
+      failed()
+    }, RESPONSE_LIMIT_MS)
+  }
   function terminate() {
     if (terminated) return
     terminated = true
@@ -75,9 +92,11 @@ export async function createWorkerPoseInference(
     worker.removeEventListener('error', failed)
     worker.removeEventListener('messageerror', failed)
     if (cleanupTimer !== undefined) clearTimeout(cleanupTimer)
+    clearResponseTimer()
     worker.terminate()
   }
   function rejectWork() {
+    clearResponseTimer()
     const current = pending
     pending = undefined
     current?.reject(unavailable())
@@ -99,7 +118,11 @@ export async function createWorkerPoseInference(
         if (data.type === 'closed') finishDisposal?.(data.clean === true)
         return
       }
+      // A delayed timer callback cannot make an overdue response timely.
+      if (responseDeadline !== undefined && performance.now() >= responseDeadline)
+        throw unavailable()
       if (data.type === 'ready' && data.id === 0 && !ready && !pending) {
+        clearResponseTimer()
         ready = true
         resolveReady()
         return
@@ -115,6 +138,7 @@ export async function createWorkerPoseInference(
       )
         throw unavailable()
       const current = pending
+      clearResponseTimer()
       pending = undefined
       // Downstream owned-frame boundary copies/validates all bounded body/head/hand fields.
       const result = data.result as WorkerPoseData
@@ -161,6 +185,7 @@ export async function createWorkerPoseInference(
       aborted()
       throw unavailable()
     }
+    awaitResponse()
     worker.postMessage({ type: 'init', generation, id: 0, config })
     await prepared
     if (retiring || signal.aborted) throw unavailable()
@@ -193,6 +218,7 @@ export async function createWorkerPoseInference(
           pending = { id, at, resolve, reject }
         })
         try {
+          awaitResponse()
           worker.postMessage({ type: 'frame', generation, id, at, frame: input }, [input])
         } catch {
           failed()
