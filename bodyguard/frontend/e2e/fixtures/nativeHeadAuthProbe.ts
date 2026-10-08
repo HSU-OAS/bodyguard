@@ -1,5 +1,10 @@
 // FR-U-04/FR-S-02/04·FR-R-03/NFR-07/08: TEST ONLY native/account composition.
-import { FaceLandmarker, GestureRecognizer, PoseLandmarker } from '@mediapipe/tasks-vision'
+import {
+  FaceLandmarker,
+  FilesetResolver,
+  GestureRecognizer,
+  PoseLandmarker,
+} from '@mediapipe/tasks-vision'
 import { createElement, useLayoutEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import {
@@ -28,6 +33,7 @@ import { createNativePlaybackResources } from '../../src/coaching/nativePlayback
 import { useRecordedCoaching } from '../../src/coaching/useRecordedCoaching'
 import type { CoachingState, ObservationClass } from '../../src/stretch/progression'
 import { nativeReferenceProgram } from './nativeReferenceProgram'
+import { nativeStartupDiagnostic, observeNativeStartupLongTasks } from './nativeStartupDiagnostic'
 import { nativeStartupTiming } from './nativeStartupTiming'
 
 type Hook = ReturnType<typeof useRecordedCoaching>
@@ -50,6 +56,9 @@ export function mountNativeHeadAuthProbe(
   if (withAdaptive && (!withFeedback || !withReference))
     throw new Error('Private adaptive reference fixture unavailable')
   const timing = withTiming ? nativeStartupTiming(() => performance.now()) : null
+  const diagnostic = withTiming ? nativeStartupDiagnostic(() => performance.now()) : null
+  let longTasks: ReturnType<typeof observeNativeStartupLongTasks> | null = null
+  const resolverDescriptor = Object.getOwnPropertyDescriptor(FilesetResolver, 'forVisionTasks')
   const factoryDescriptors = [
     [PoseLandmarker, Object.getOwnPropertyDescriptor(PoseLandmarker, 'createFromOptions')],
     [FaceLandmarker, Object.getOwnPropertyDescriptor(FaceLandmarker, 'createFromOptions')],
@@ -206,27 +215,57 @@ export function mountNativeHeadAuthProbe(
   if (timing) {
     const bodyFactory = PoseLandmarker.createFromOptions,
       faceFactory = FaceLandmarker.createFromOptions,
-      handsFactory = GestureRecognizer.createFromOptions
+      handsFactory = GestureRecognizer.createFromOptions,
+      resolver = FilesetResolver.forVisionTasks
+    FilesetResolver.forVisionTasks = async (...args) => {
+      const attempt = diagnostic?.begin('fileset') ?? null
+      try {
+        const result = await resolver.apply(FilesetResolver, args)
+        diagnostic?.end(attempt, 'resolved')
+        return result
+      } catch (error) {
+        diagnostic?.end(attempt, 'rejected')
+        throw error
+      }
+    }
     PoseLandmarker.createFromOptions = async (...args) => {
       const token = timing.begin('body-sdk')
+      const attempt = diagnostic?.begin('body-sdk', args[1].baseOptions?.delegate ?? null) ?? null
       try {
-        return await bodyFactory.apply(PoseLandmarker, args)
+        const result = await bodyFactory.apply(PoseLandmarker, args)
+        diagnostic?.end(attempt, 'resolved')
+        return result
+      } catch (error) {
+        diagnostic?.end(attempt, 'rejected')
+        throw error
       } finally {
         timing.end(token)
       }
     }
     FaceLandmarker.createFromOptions = async (...args) => {
       const token = timing.begin('face-sdk')
+      const attempt = diagnostic?.begin('face-sdk', args[1].baseOptions?.delegate ?? null) ?? null
       try {
-        return await faceFactory.apply(FaceLandmarker, args)
+        const result = await faceFactory.apply(FaceLandmarker, args)
+        diagnostic?.end(attempt, 'resolved')
+        return result
+      } catch (error) {
+        diagnostic?.end(attempt, 'rejected')
+        throw error
       } finally {
         timing.end(token)
       }
     }
     GestureRecognizer.createFromOptions = async (...args) => {
       const token = timing.begin('hands-sdk')
+      const attempt = diagnostic?.begin('hands-sdk', args[1].baseOptions?.delegate ?? null) ?? null
       try {
-        return await handsFactory.apply(GestureRecognizer, args)
+        const result = await handsFactory.apply(GestureRecognizer, args)
+        diagnostic?.end(attempt, 'resolved')
+        return result
+      } catch (error) {
+        diagnostic?.end(attempt, 'rejected')
+        throw error
       } finally {
         timing.end(token)
       }
@@ -235,10 +274,16 @@ export function mountNativeHeadAuthProbe(
   const setter = descriptor.set
   media.getUserMedia = async (constraints) => {
     const token = timing?.begin('camera') ?? null
+    const attempt = diagnostic?.begin('camera') ?? null
+    if (diagnostic && !longTasks) longTasks = observeNativeStartupLongTasks(diagnostic)
     try {
       const stream = await camera(constraints)
       streams.push(stream)
+      diagnostic?.end(attempt, 'resolved')
       return stream
+    } catch (error) {
+      diagnostic?.end(attempt, 'rejected')
+      throw error
     } finally {
       timing?.end(token)
     }
@@ -725,6 +770,7 @@ export function mountNativeHeadAuthProbe(
       syntheticMotionGates: true,
       releaseAvatar: false,
       startupTiming: timing?.snapshot() ?? null,
+      startupDiagnostic: diagnostic?.snapshot() ?? null,
     }
   }
   return Object.freeze({
@@ -832,7 +878,12 @@ export function mountNativeHeadAuthProbe(
           GestureRecognizer.prototype.recognizeForVideo = handDetect
           GestureRecognizer.prototype.close = handClose
           if (timing) {
+            longTasks?.close()
+            diagnostic?.close()
             timing.close()
+            if (resolverDescriptor)
+              Object.defineProperty(FilesetResolver, 'forVisionTasks', resolverDescriptor)
+            else Reflect.deleteProperty(FilesetResolver, 'forVisionTasks')
             for (const [factory, saved] of factoryDescriptors) {
               if (saved) Object.defineProperty(factory, 'createFromOptions', saved)
               else Reflect.deleteProperty(factory, 'createFromOptions')

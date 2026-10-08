@@ -7,6 +7,8 @@ import type { mountNativeHeadAuthProbe } from './fixtures/nativeHeadAuthProbe'
 const origin = 'http://localhost:4173'
 const mailbox = process.env.BODYGUARD_TEST_MAILBOX
 const withFeedback = Boolean(process.env.BODYGUARD_TEST_NATIVE_FEEDBACK_PROBE)
+// TEST ONLY: include technical preparation state in one bounded diagnostic regression run.
+const withDiagnostic = Boolean(process.env.BODYGUARD_TEST_NATIVE_STARTUP_DIAGNOSTICS)
 const withReference = withFeedback || Boolean(process.env.BODYGUARD_TEST_NATIVE_REFERENCE_PROBE)
 const withHands = withReference || Boolean(process.env.BODYGUARD_TEST_NATIVE_HANDS_PROBE)
 const bundle =
@@ -236,7 +238,15 @@ async function mount(
         withTrunk,
       )
     },
-    { gender, withHands, withReference, withFeedback, withAdaptive, withTiming, withTrunk },
+    {
+      gender,
+      withHands,
+      withReference,
+      withFeedback,
+      withAdaptive,
+      withTiming: withTiming || withDiagnostic,
+      withTrunk,
+    },
   )
   await expect
     .poll(() => state(page))
@@ -327,6 +337,19 @@ for (const gender of ['male', 'female'] as const) {
       await mount(page, gender, false, true)
       await running(page)
       const timing = (await mark(page, 'native-startup-timed')).startupTiming
+      const diagnostic = (await state(page)).startupDiagnostic
+      expect(diagnostic).not.toBeNull()
+      if (!diagnostic) throw new Error('Native startup diagnostic unavailable')
+      expect(diagnostic).toMatchObject({ invalid: false, closed: false, eventsTruncated: false })
+      for (const stage of ['fileset', 'body-sdk', 'face-sdk', 'hands-sdk']) {
+        const attempts = diagnostic.events.filter((row) => row.stage === stage)
+        expect(attempts.length).toBeGreaterThan(0)
+        expect(attempts.at(-1)?.outcome).toBe('resolved')
+        for (const attempt of attempts) {
+          expect(attempt.outcome).not.toBe('pending')
+          expect(attempt.endMs).toBeGreaterThanOrEqual(attempt.startMs)
+        }
+      }
       expect(timing).not.toBeNull()
       if (!timing) throw new Error('Native startup timing unavailable')
       writeFileSync(info.outputPath('native-startup-timing.json'), JSON.stringify(timing, null, 2))

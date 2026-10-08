@@ -1,0 +1,40 @@
+{
+  "scope": "S6.9 offline startup evidence analysis and baseline comparison",
+  "reviewer": "author only; no independent or delegated review",
+  "security": {
+    "rawHumanDataAdded": false,
+    "publicConsumerAdded": false,
+    "fixedErrorsDoNotEchoInput": true,
+    "pathsAndGitReadOnlyObjectsBounded": true,
+    "artifactExpandedByteBudget": 67108864,
+    "deploymentSecretsAccountsOrProductSDKPolicyChanged": false
+  },
+  "performance": {
+    "productHotPathChanged": false,
+    "analysisRunsMax": 16,
+    "timingEventsMax": 30,
+    "eventsPerStageMax": 3,
+    "artifactManifestMax": 128
+  },
+  "correctness": {
+    "priorMandatoryFailedReportsPreserved": true,
+    "normalRecheckDoesNotCloseGate": true,
+    "finding": "unfinished SDK attempt incorrectly allowed a prepared milestone",
+    "red": {"tests": 35, "passed": 34, "failed": 1},
+    "fix": "every SDK attempt before first avatar must have a completed end",
+    "recheck": {"frontend": 1336, "newAnalysis": 35, "failed": 0, "skipped": 0},
+    "offlineSameBytePositiveAndNegativeVerification": true
+  },
+  "maintainability": {
+    "replayCommandInRepository": true,
+    "dependenciesOrPublicDesignChanged": false,
+    "provenanceIdentifiersAreNotSignatures": true,
+    "nativeRechecksAndOfflineReplayDistinguished": true
+  },
+  "unresolvedDiffP1P2": 0,
+  "unresolvedRequiredStartupP2": 1,
+  "rootCauseEstablished": false,
+  "pr90MandatoryGatePassed": false,
+  "mergeEligible": false,
+  "allStagesComplete": false
+}
