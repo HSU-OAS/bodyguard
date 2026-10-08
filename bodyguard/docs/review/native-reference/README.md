@@ -58,9 +58,11 @@ author-only 검토: 권한·시각·경계/재진입·해제·성능/불필요 �
 ## 증거와 남은 조건
 
 [manifest](summary.json)은 runtime7dfc3bf의 source26, 실패 runtime8c24d5b source13,
-증거349개의 원본/압축 SHA와 실행 receipt를 포함한다. gzip을 풀어 원본 SHA를 검증했다.
+증거352개의 원본/압축 SHA와 실행 receipt를 포함한다. gzip을 풀어 원본 SHA를 검증했다.
 대용량 GLB는 이전 Git25a9bd6/보존 경로와 SHA로 연결하며 새 복제물을 PR에 넣지 않는다.
 private probe.js는 보존하지만 그 옆에 재복제된 SDK 정적 배포물은 다시 아카이브하지 않는다.
+최초 증거 커밋의 원시 DB 초기화 로그는 빈 EOF 때문에 diff 검사에서 실패했다.
+원본 byte를 바꾸지 않고 gzip 보관으로 전환하고 실제 실패 receipt도 추가했다.
 모델5 SHA는 assets.json, 실제 외형/임상 권리는 D2-A/P에 남는다. Three의 실제 MIT 고지 포함.
 
 최종 외형/변형/권리, 실제 참여자의 시작·목표·복귀·보상/가림 오판정, 신체 대응/경추·체간,
