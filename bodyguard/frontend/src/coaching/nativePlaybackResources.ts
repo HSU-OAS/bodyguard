@@ -2,12 +2,18 @@
 
 import type { HeadDisplayAlignment } from '../avatar/headOrientationRig'
 import { copyHandAlignment, type HandDisplayAlignment } from '../avatar/observedHandRig'
+import type { PoseRigFrame } from '../avatar/observedPoseRig'
 import { prepareOwnedAvatarPair } from '../avatar/ownedAvatarPair'
 import {
   copyReferenceProgram,
   type ReferenceCue,
   type ReferenceProgram,
 } from '../avatar/referencePlayback'
+import {
+  copyFeedbackProgram,
+  type FeedbackFrame,
+  type FeedbackProgram,
+} from '../avatar/surfaceFeedback'
 import { createBodyFaceVideoSource } from '../pose/bodyFaceVideoSource'
 import { createBodyHandVideoSource } from '../pose/bodyHandVideoSource'
 import { type CameraErrorKind, cameraErrorKind, closeCamera, openCamera } from '../pose/camera'
@@ -23,6 +29,11 @@ import { ResourceCleanupError, type ResourceContext, type ResourceNotice } from 
 type Pair = Awaited<ReturnType<typeof prepareOwnedAvatarPair>>
 type Rig = Parameters<typeof prepareOwnedAvatarPair>[1]
 type Bridge = Parameters<typeof createOwnedPlaybackResources>[0]
+// FR-S-03/04: the evaluator owns a real session state. Supplying it is not clinical validation.
+export type NativeFeedbackDecision = Readonly<{
+  state: CoachingState
+  errors: FeedbackFrame['errors']
+}>
 type Options = Readonly<{
   model: PoseModel
   loadAvatar: Rig['load']
@@ -32,6 +43,10 @@ type Options = Readonly<{
   head?: HeadDisplayAlignment & Readonly<{ matrixLayout: 'column-major' | 'row-major' }>
   hands?: HandDisplayAlignment
   reference?: ReferenceProgram
+  feedback?: Readonly<{
+    program: FeedbackProgram
+    evaluate(frame: PoseRigFrame): NativeFeedbackDecision | null
+  }>
   scheduler: Bridge['scheduler']
   render(pair: Pair): unknown
   onFailure(notice: Extract<ResourceNotice, { type: 'error' }>): void | Promise<void>
@@ -79,9 +94,23 @@ export function createNativePlaybackResources(options: Options) {
   let head: Options['head']
   let hands: HandDisplayAlignment | undefined
   let reference: ReferenceProgram | undefined
+  let feedback: FeedbackProgram | undefined
+  let evaluateFeedback: NonNullable<Options['feedback']>['evaluate'] | undefined
   try {
+    const requestedFeedback = options.feedback
+    if (requestedFeedback !== undefined) {
+      feedback = copyFeedbackProgram(requestedFeedback.program)
+      evaluateFeedback = requestedFeedback.evaluate
+      if (typeof evaluateFeedback !== 'function') throw new Error()
+    }
     const requestedReference = options.reference
     if (requestedReference !== undefined) reference = copyReferenceProgram(requestedReference)
+    if (
+      reference &&
+      feedback &&
+      (reference.motionId !== feedback.motionId || reference.version !== feedback.version)
+    )
+      throw new Error()
     const requestedHands = options.hands
     if (requestedHands !== undefined) hands = copyHandAlignment(requestedHands)
     const requested = options.head
@@ -210,6 +239,7 @@ export function createNativePlaybackResources(options: Options) {
         maxAgeMs,
         ...(hands ? { hands } : {}),
         ...(reference ? { reference } : {}),
+        ...(feedback ? { feedback } : {}),
         ...(head
           ? {
               head: {
@@ -220,8 +250,109 @@ export function createNativePlaybackResources(options: Options) {
             }
           : {}),
       })
-      if (!reference) return owned
+      if (!reference && !feedback) return owned
       let lastRendered: ReturnType<Pair['render']> | undefined
+      let observationToken: object | undefined
+      // FR-M-07·FR-S-03/04: the same accepted native delivery feeds the current owner session.
+      // No evaluator default, background async classifier, raw logging or fresh stamp synthesis.
+      function observe(frame: PoseRigFrame): boolean {
+        if (!feedback) return issueCommand(context.generation, () => owned.observe(frame))
+        const evaluator = evaluateFeedback
+        if (!evaluator) return false
+        if (!issueCommand(context.generation, () => true)) return false
+        const token = {}
+        observationToken = token
+        let delivery: PoseRigFrame
+        try {
+          delivery = Object.freeze({
+            generation: frame.generation,
+            sequence: frame.sequence,
+            at: frame.at,
+            result: frame.result,
+          })
+        } catch {
+          return issueCommand(context.generation, () => {
+            if (observationToken !== token) return false
+            throw new Error('Invalid native feedback state')
+          })
+        }
+        if (
+          observationToken !== token ||
+          !issueCommand(context.generation, () => owned.observe(delivery))
+        )
+          return false
+        try {
+          const supplied = evaluator(delivery)
+          if (supplied === null)
+            return issueCommand(context.generation, () => observationToken === token)
+          if (typeof (supplied as unknown as PromiseLike<unknown>).then === 'function') {
+            void Promise.resolve(supplied).catch(() => {})
+            throw new Error()
+          }
+          const state = supplied.state,
+            plan = state.plan
+          const cue: Omit<ReferenceCue, 'sequence'> = {
+            generation: state.generation,
+            at: state.lastNow,
+            motionId: plan.motionId,
+            version: plan.version,
+            stepId: plan.steps[state.stepIndex]?.id ?? '',
+            phase: state.phase,
+            status: state.status,
+          }
+          const sequence = state.lastSequence,
+            at = state.lastSampledAt,
+            observedAt = state.lastObservationAt,
+            ageLimit = plan.maxFrameAgeMs
+          if (
+            cue.generation !== context.generation ||
+            delivery.generation !== cue.generation ||
+            cue.status !== 'running' ||
+            cue.motionId !== feedback.motionId ||
+            cue.version !== feedback.version ||
+            !cue.stepId ||
+            !['waiting-start', 'seeking-target', 'holding', 'waiting-return'].includes(cue.phase) ||
+            !Number.isFinite(ageLimit) ||
+            ageLimit <= 0 ||
+            ageLimit > Number.MAX_SAFE_INTEGER ||
+            sequence !== delivery.sequence ||
+            at !== delivery.at ||
+            observedAt !== cue.at ||
+            !Number.isFinite(cue.at) ||
+            cue.at < delivery.at ||
+            cue.at > Number.MAX_SAFE_INTEGER ||
+            cue.at - delivery.at > Math.min(maxAgeMs, ageLimit)
+          )
+            return issueCommand(context.generation, () => observationToken === token)
+          const errors = supplied.errors
+          if (!Array.isArray(errors) || errors.length > feedback.regions.length) throw new Error()
+          const copied = Object.freeze(
+            Array.from(errors, (error) =>
+              Object.freeze({ regionId: error.regionId, severity: error.severity }),
+            ),
+          )
+          return issueCommand(context.generation, () => {
+            if (observationToken !== token) return false
+            const accepted = owned.updateFeedback(
+              Object.freeze({
+                generation: cue.generation,
+                sequence,
+                at: delivery.at,
+                motionId: cue.motionId,
+                version: cue.version,
+                errors: copied,
+              }),
+            )
+            if (accepted && reference) queueReference(cue)
+            return true
+          })
+        } catch {
+          return issueCommand(context.generation, () => {
+            if (observationToken !== token) return false
+            throw new Error('Invalid native feedback state')
+          })
+        }
+      }
       // FR-S-03/04: session clocks may follow the current RAF stamp. Apply only when
       // the original render time reaches the cue; never restamp either input.
       return Object.freeze({
@@ -233,11 +364,11 @@ export function createNativePlaybackResources(options: Options) {
           })
           return models
         },
-        observe: (frame) => issueCommand(context.generation, () => owned.observe(frame)),
+        observe,
         updateReference: (cue) =>
           issueCommand(context.generation, () => owned.updateReference(cue)),
         updateFeedback: (frame) =>
-          issueCommand(context.generation, () => owned.updateFeedback(frame)),
+          !feedback && issueCommand(context.generation, () => owned.updateFeedback(frame)),
         render(now: number, deltaMs: number) {
           // FR-U-04: retained renderer handles cannot revive a retired cohort.
           let result: ReturnType<Pair['render']> = Object.freeze({
@@ -258,6 +389,7 @@ export function createNativePlaybackResources(options: Options) {
           return result
         },
         dispose() {
+          observationToken = undefined
           if (pendingCue?.generation === context.generation) pendingCue = undefined
           owned.dispose()
         },
@@ -320,6 +452,11 @@ export function createNativePlaybackResources(options: Options) {
         throw new Error('Invalid native reference state')
       })
     }
+    return queueReference(cue)
+  }
+  function queueReference(cue: Omit<ReferenceCue, 'sequence'>): boolean {
+    if (!reference) return false
+    const generation = cue.generation
     return bridge.command(generation, () => {
       if (referenceGeneration !== generation) {
         referenceGeneration = generation
