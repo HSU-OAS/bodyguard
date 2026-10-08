@@ -70,6 +70,7 @@ function setup(
     render: vi.fn(() => ({ status: 'untracked', tracked: 0, total: 8 })),
     dispose: vi.fn(),
     updateReference: vi.fn(() => true),
+    suspendReference: vi.fn(() => true),
     updateFeedback: vi.fn(() => true),
   } as unknown as Awaited<ReturnType<typeof prepareOwnedAvatarPair>>
   const source = { read: vi.fn(async () => null), dispose: vi.fn(async () => {}) }
@@ -148,6 +149,168 @@ function setup(
   }
 }
 beforeEach(() => vi.resetAllMocks())
+// FR-S-03/04: error codes distinguish causes at the same region; this is synthetic.
+function correctiveProgram(): ReferenceProgram {
+  const p = referenceProgram()
+  return {
+    ...p,
+    steps: p.steps.map((step) => ({
+      ...step,
+      corrections: [
+        {
+          id: 'relax',
+          errorCode: 'raised',
+          regionId: 'arm',
+          phases: ['waiting-start'],
+          clip: step.clips.holding,
+        },
+        {
+          id: 'align',
+          errorCode: 'direction',
+          regionId: 'arm',
+          phases: ['waiting-start'],
+          clip: step.clips['waiting-return'],
+        },
+      ],
+    })),
+  }
+}
+describe('native current-error corrective reference binding', () => {
+  it.each(['raised', 'direction', 'unknown', undefined] as const)(
+    'matches exact %s code, not region alone',
+    async (code) => {
+      const frame = feedbackFrame(),
+        decision = feedbackDecision(frame)
+      const f = setup(undefined, undefined, correctiveProgram(), {
+        program: feedbackProgram(),
+        evaluate: () => ({
+          ...decision,
+          errors: decision.errors.map((error) => ({ ...error, ...(code ? { code } : {}) })),
+        }),
+      })
+      vi.mocked(f.pair.observe).mockReturnValue(true)
+      f.source.read.mockResolvedValueOnce(frame as never)
+      await f.prepare()
+      f.actor.start(1)
+      await f.fire(100)
+      await f.fire(102)
+      const delivered = vi.mocked(f.pair.updateReference).mock.calls.at(-1)?.[0]
+      expect(delivered?.correction).toEqual(
+        code === 'raised' || code === 'direction'
+          ? { id: code === 'raised' ? 'relax' : 'align', sampledAt: 100 }
+          : undefined,
+      )
+      await f.actor.close()
+      await f.controller.close()
+    },
+  )
+  it('keeps original capture stamp under state synchronization and clears on a new no-decision observation', async () => {
+    const frame = feedbackFrame(),
+      decision = feedbackDecision(frame)
+    const evaluate = vi.fn<
+      NonNullable<Parameters<typeof createNativePlaybackResources>[0]['feedback']>['evaluate']
+    >(() => ({ ...decision, errors: [{ regionId: 'arm', severity: 'deviation', code: 'raised' }] }))
+    const f = setup(undefined, undefined, correctiveProgram(), {
+      program: feedbackProgram(),
+      evaluate,
+    })
+    vi.mocked(f.pair.observe).mockReturnValue(true)
+    f.source.read.mockResolvedValueOnce(frame as never)
+    await f.prepare()
+    f.actor.start(1)
+    await f.fire(100)
+    await f.fire(102)
+    f.actor.synchronize({ ...decision.state, lastNow: 150 })
+    await f.fire(150)
+    expect(vi.mocked(f.pair.updateReference).mock.calls.at(-1)?.[0].correction).toEqual({
+      id: 'relax',
+      sampledAt: 100,
+    })
+    evaluate.mockReturnValueOnce(null)
+    f.source.read.mockResolvedValueOnce(feedbackFrame(2, 160) as never)
+    await f.fire(160)
+    const before = vi.mocked(f.pair.updateReference).mock.calls.length
+    f.actor.synchronize({ ...decision.state, lastNow: 170 })
+    await f.fire(170)
+    expect(f.pair.updateReference).toHaveBeenCalledTimes(before)
+    expect(f.pair.suspendReference).toHaveBeenCalled()
+    await f.actor.close()
+    await f.controller.close()
+  })
+  it('cannot replace a newer correction through a reentrant old state getter', async () => {
+    const evaluate = vi.fn<
+      NonNullable<Parameters<typeof createNativePlaybackResources>[0]['feedback']>['evaluate']
+    >((frame) => ({
+      ...feedbackDecision(frame),
+      errors: [
+        {
+          regionId: 'arm',
+          severity: 'deviation',
+          code: frame.sequence === 1 ? 'raised' : 'direction',
+        },
+      ],
+    }))
+    const f = setup(undefined, undefined, correctiveProgram(), {
+      program: feedbackProgram(),
+      evaluate,
+    })
+    vi.mocked(f.pair.observe).mockReturnValue(true)
+    f.source.read.mockResolvedValueOnce(feedbackFrame() as never)
+    await f.prepare()
+    f.actor.start(1)
+    await f.fire(100)
+    await f.fire(102)
+    const retained = f.options.render.mock.calls.at(-1)?.[0] as typeof f.pair
+    const state = { ...feedbackDecision().state, lastNow: 120 }
+    Object.defineProperty(state, 'lastSampledAt', {
+      get() {
+        retained.observe(feedbackFrame(2, 110))
+        return 100
+      },
+    })
+    expect(f.actor.synchronize(state)).toBe(false)
+    await f.fire(120)
+    expect(vi.mocked(f.pair.updateReference).mock.calls.at(-1)?.[0].correction).toEqual({
+      id: 'align',
+      sampledAt: 110,
+    })
+    await f.actor.close()
+    await f.controller.close()
+  })
+  it('ignores old observation state and suspends a current guide after capture expiry', async () => {
+    const frame = feedbackFrame(),
+      decision = feedbackDecision(frame)
+    const f = setup(undefined, undefined, correctiveProgram(), {
+      program: feedbackProgram(),
+      evaluate: () => ({
+        ...decision,
+        errors: [{ regionId: 'arm', severity: 'deviation', code: 'raised' }],
+      }),
+    })
+    vi.mocked(f.pair.observe).mockReturnValue(true)
+    f.source.read.mockResolvedValueOnce(frame as never)
+    await f.prepare()
+    f.actor.start(1)
+    await f.fire(100)
+    await f.fire(102)
+    expect(f.actor.synchronize({ ...decision.state, lastSequence: 0, lastNow: 150 })).toBe(false)
+    expect(f.pair.suspendReference).not.toHaveBeenCalled()
+    f.actor.synchronize({ ...decision.state, lastNow: 201 })
+    expect(f.pair.suspendReference).toHaveBeenCalledOnce()
+    await f.actor.close()
+    await f.controller.close()
+  })
+  it('rejects correction mappings for an undeclared feedback region before opening a camera', () => {
+    const p = correctiveProgram()
+    const correction = p.steps[0].corrections?.[0]
+    if (!correction) throw new Error('Fixture correction missing')
+    ;(correction as { regionId: string }).regionId = 'unknown'
+    expect(() =>
+      setup(undefined, undefined, p, { program: feedbackProgram(), evaluate: () => null }),
+    ).toThrow('Invalid native playback resources')
+    expect(openCamera).not.toHaveBeenCalled()
+  })
+})
 // FR-A-01/03·FR-S-03/04: synthetic accepted observations and supplied errors, not clinical rules.
 function feedbackProgram(): FeedbackProgram {
   return {

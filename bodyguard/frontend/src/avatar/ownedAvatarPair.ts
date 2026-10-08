@@ -261,6 +261,7 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
       !closed && !signal.aborted && Boolean(feedback?.update(frame)),
     updateReference: (cue: ReferenceCue) =>
       !closed && !signal.aborted && Boolean(playback?.update(cue)),
+    suspendReference: () => !closed && !signal.aborted && Boolean(playback?.suspend()),
     render: (
       now: number,
       deltaMs: number,

@@ -21,7 +21,11 @@ export type FeedbackFrame = Readonly<{
   at: number
   motionId: string
   version: string
-  errors: readonly Readonly<{ regionId: string; severity: 'attention' | 'deviation' }>[]
+  errors: readonly Readonly<{
+    regionId: string
+    severity: 'attention' | 'deviation'
+    code?: string
+  }>[]
 }>
 const invalid = () => new Error('Invalid avatar feedback')
 const named = (value: unknown): value is string =>

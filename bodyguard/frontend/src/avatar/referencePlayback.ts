@@ -16,12 +16,23 @@ import type { CoachingState } from '../stretch/progression'
 
 const phases = ['waiting-start', 'seeking-target', 'holding', 'waiting-return'] as const
 type Phase = CoachingState['phase']
+export type ReferenceCorrection = Readonly<{
+  id: string
+  errorCode: string
+  regionId: string
+  phases: readonly Phase[]
+  clip: AnimationClip
+}>
 export type ReferenceProgram = Readonly<{
   motionId: string
   version: string
   blendMs: number
   maxAgeMs: number
-  steps: readonly Readonly<{ id: string; clips: Readonly<Record<Phase, AnimationClip>> }>[]
+  steps: readonly Readonly<{
+    id: string
+    clips: Readonly<Record<Phase, AnimationClip>>
+    corrections?: readonly ReferenceCorrection[]
+  }>[]
 }>
 export type ReferenceCue = Readonly<{
   generation: number
@@ -32,6 +43,7 @@ export type ReferenceCue = Readonly<{
   stepId: string
   phase: Phase
   status: CoachingState['status']
+  correction?: Readonly<{ id: string; sampledAt: number }>
 }>
 type Status = 'waiting' | 'playing' | 'paused' | 'stale' | 'unavailable' | 'ended' | 'closed'
 type FactoryTrack = KeyframeTrack & {
@@ -44,6 +56,11 @@ const clock = (value: number) =>
   Number.isFinite(value) && value >= 0 && value <= Number.MAX_SAFE_INTEGER
 const positive = (value: number) => clock(value) && value > 0
 const path = /^([A-Za-z0-9_-]+)\.(position|quaternion|scale)$/
+const correctionName = (value: unknown): value is string =>
+  id(value) &&
+  value.trim() === value &&
+  value.trim().length > 0 &&
+  !Array.from(value).some((character) => character.charCodeAt(0) < 32)
 
 /** Local Three/GLTFLoader clips, not arbitrary executable animation plugins. */
 export function copyReferenceProgram(input: ReferenceProgram): ReferenceProgram {
@@ -63,89 +80,134 @@ export function copyReferenceProgram(input: ReferenceProgram): ReferenceProgram 
       const stepId = step.id
       if (!id(stepId) || ids.has(stepId)) throw invalid()
       ids.add(stepId)
-      const clips = Object.fromEntries(
-        phases.map((phase) => {
-          const clip = step.clips[phase]
+      const copyClip = (clip: AnimationClip, label: string) => {
+        if (
+          !(clip instanceof AnimationClip) ||
+          !positive(clip.duration * 1000) ||
+          !clip.tracks.length
+        )
+          throw invalid()
+        const names = new Set<string>()
+        const tracks = clip.tracks.map((source) => {
+          const name = source.name,
+            match = path.exec(name)
+          if (!match || names.has(name)) throw invalid()
+          names.add(name)
+          const quaternion = match[2] === 'quaternion'
           if (
-            !(clip instanceof AnimationClip) ||
-            !positive(clip.duration * 1000) ||
-            !clip.tracks.length
+            quaternion
+              ? !(source instanceof QuaternionKeyframeTrack)
+              : !(source instanceof VectorKeyframeTrack)
           )
             throw invalid()
-          const names = new Set<string>()
-          const tracks = clip.tracks.map((source) => {
-            const name = source.name,
-              match = path.exec(name)
-            if (!match || names.has(name)) throw invalid()
-            names.add(name)
-            const quaternion = match[2] === 'quaternion'
+          const factory = (source as FactoryTrack).createInterpolant
+          const cubic = Boolean(
+            (factory as unknown as { isInterpolantFactoryMethodGLTFCubicSpline?: boolean })
+              ?.isInterpolantFactoryMethodGLTFCubicSpline,
+          )
+          const native: readonly unknown[] = [
+            source.InterpolantFactoryMethodDiscrete,
+            source.InterpolantFactoryMethodLinear,
+            source.InterpolantFactoryMethodSmooth,
+            source.InterpolantFactoryMethodBezier,
+          ]
+          if (typeof factory !== 'function' || (!cubic && !native.includes(factory)))
+            throw invalid()
+          if (factory === source.InterpolantFactoryMethodBezier && !source.settings) throw invalid()
+          const times = Array.from(source.times),
+            values = Array.from(source.values),
+            size = quaternion ? 4 : 3
+          if (
+            !times.length ||
+            times.some(
+              (t, i) =>
+                !Number.isFinite(t) || t < 0 || t > clip.duration || (i > 0 && t <= times[i - 1]),
+            ) ||
+            values.length !== times.length * size * (cubic ? 3 : 1) ||
+            values.some((v) => !Number.isFinite(v))
+          )
+            throw invalid()
+          for (let i = 0; i < times.length; i++) {
+            const offset = i * size * (cubic ? 3 : 1) + (cubic ? size : 0)
+            if (quaternion && Math.hypot(...values.slice(offset, offset + 4)) < 1e-12)
+              throw invalid()
             if (
-              quaternion
-                ? !(source instanceof QuaternionKeyframeTrack)
-                : !(source instanceof VectorKeyframeTrack)
+              match[2] === 'scale' &&
+              values.slice(offset, offset + 3).some((v) => Math.abs(v) < 1e-12)
             )
               throw invalid()
-            const factory = (source as FactoryTrack).createInterpolant
-            const cubic = Boolean(
-              (factory as unknown as { isInterpolantFactoryMethodGLTFCubicSpline?: boolean })
-                ?.isInterpolantFactoryMethodGLTFCubicSpline,
-            )
-            const native: readonly unknown[] = [
-              source.InterpolantFactoryMethodDiscrete,
-              source.InterpolantFactoryMethodLinear,
-              source.InterpolantFactoryMethodSmooth,
-              source.InterpolantFactoryMethodBezier,
-            ]
-            if (typeof factory !== 'function' || (!cubic && !native.includes(factory)))
-              throw invalid()
-            if (factory === source.InterpolantFactoryMethodBezier && !source.settings)
-              throw invalid()
-            const times = Array.from(source.times),
-              values = Array.from(source.values),
-              size = quaternion ? 4 : 3
+          }
+          const copy = quaternion
+            ? new QuaternionKeyframeTrack(name, times, values)
+            : new VectorKeyframeTrack(name, times, values)
+          ;(copy as FactoryTrack).createInterpolant = factory
+          if (source.settings) {
+            const inTangents = Array.from(source.settings.inTangents),
+              outTangents = Array.from(source.settings.outTangents)
             if (
-              !times.length ||
-              times.some(
-                (t, i) =>
-                  !Number.isFinite(t) || t < 0 || t > clip.duration || (i > 0 && t <= times[i - 1]),
-              ) ||
-              values.length !== times.length * size * (cubic ? 3 : 1) ||
-              values.some((v) => !Number.isFinite(v))
+              inTangents.length !== times.length * size * 2 ||
+              outTangents.length !== inTangents.length ||
+              [...inTangents, ...outTangents].some((v) => !Number.isFinite(v))
             )
               throw invalid()
-            for (let i = 0; i < times.length; i++) {
-              const offset = i * size * (cubic ? 3 : 1) + (cubic ? size : 0)
-              if (quaternion && Math.hypot(...values.slice(offset, offset + 4)) < 1e-12)
-                throw invalid()
-              if (
-                match[2] === 'scale' &&
-                values.slice(offset, offset + 3).some((v) => Math.abs(v) < 1e-12)
-              )
-                throw invalid()
-            }
-            const copy = quaternion
-              ? new QuaternionKeyframeTrack(name, times, values)
-              : new VectorKeyframeTrack(name, times, values)
-            ;(copy as FactoryTrack).createInterpolant = factory
-            if (source.settings) {
-              const inTangents = Array.from(source.settings.inTangents),
-                outTangents = Array.from(source.settings.outTangents)
-              if (
-                inTangents.length !== times.length * size * 2 ||
-                outTangents.length !== inTangents.length ||
-                [...inTangents, ...outTangents].some((v) => !Number.isFinite(v))
-              )
-                throw invalid()
-              copy.settings = { inTangents, outTangents }
-            }
-            // Float32 conversion must keep distinct frame times separate.
-            if (copy.times.some((t, i) => i > 0 && t <= copy.times[i - 1])) throw invalid()
-            return copy
-          })
-          return [phase, new AnimationClip(phase, clip.duration, tracks)]
-        }),
+            copy.settings = { inTangents, outTangents }
+          }
+          // Float32 conversion must keep distinct frame times separate.
+          if (copy.times.some((t, i) => i > 0 && t <= copy.times[i - 1])) throw invalid()
+          return copy
+        })
+        return new AnimationClip(label, clip.duration, tracks)
+      }
+      const clips = Object.fromEntries(
+        phases.map((phase) => [phase, copyClip(step.clips[phase], phase)]),
       ) as Record<Phase, AnimationClip>
-      return Object.freeze({ id: stepId, clips: Object.freeze(clips) })
+      const supplied = step.corrections
+      let corrections: readonly ReferenceCorrection[] | undefined
+      if (supplied !== undefined) {
+        if (!Array.isArray(supplied) || supplied.length > 32) throw invalid()
+        const correctionIds = new Set<string>(),
+          matchKeys = new Set<string>()
+        corrections = Object.freeze(
+          Array.from(supplied, (item) => {
+            const { id: correctionId, errorCode, regionId } = item
+            const permitted = item.phases
+            if (
+              !correctionName(correctionId) ||
+              !correctionName(errorCode) ||
+              !correctionName(regionId) ||
+              correctionIds.has(correctionId) ||
+              !Array.isArray(permitted) ||
+              !permitted.length ||
+              permitted.length > phases.length
+            )
+              throw invalid()
+            correctionIds.add(correctionId)
+            const copiedPhases = Array.from(permitted)
+            if (
+              new Set(copiedPhases).size !== copiedPhases.length ||
+              copiedPhases.some((phase) => !phases.includes(phase))
+            )
+              throw invalid()
+            for (const phase of copiedPhases) {
+              const key = JSON.stringify([errorCode, regionId, phase])
+              if (matchKeys.has(key)) throw invalid()
+              matchKeys.add(key)
+            }
+            return Object.freeze({
+              id: correctionId,
+              errorCode,
+              regionId,
+              phases: Object.freeze(copiedPhases),
+              clip: copyClip(item.clip, correctionId),
+            })
+          }),
+        )
+      }
+      return Object.freeze({
+        id: stepId,
+        clips: Object.freeze(clips),
+        ...(corrections ? { corrections } : {}),
+      })
     })
     return Object.freeze({ motionId, version, blendMs, maxAgeMs, steps: Object.freeze(steps) })
   } catch {
@@ -182,7 +244,7 @@ export function createReferencePlayback(
       maxAgeMs,
       steps: configured,
     } = copyReferenceProgram(options.program),
-    steps = new Map(configured.map((s) => [s.id, s.clips]))
+    steps = new Map(configured.map((s) => [s.id, s]))
   const bound = new Set<Bone>(),
     names = new Map<string, Bone>(),
     all = new Map<string, number>()
@@ -216,14 +278,19 @@ export function createReferencePlayback(
       candidate: pose(bone),
     }
   })
-  for (const clips of steps.values())
-    for (const clip of Object.values(clips))
+  for (const step of steps.values())
+    for (const clip of [
+      ...Object.values(step.clips),
+      ...(step.corrections ?? []).map((item) => item.clip),
+    ])
       for (const track of clip.tracks)
         if (!names.has(path.exec(track.name)?.[1] ?? '')) throw invalid()
   const mixer = new AnimationMixer(sampleRoot)
   let status: Status = 'waiting',
     phase: Phase | null = null,
     stepId: string | null = null,
+    correctionId: string | null = null,
+    correctionAt: number | null = null,
     clip: AnimationClip | undefined,
     clipMs = 0,
     blendElapsed = 0,
@@ -232,12 +299,14 @@ export function createReferencePlayback(
     lastNow: number | null = null,
     skipDelta = true,
     released = false
+  let updateToken: object | undefined
   function snapshot() {
-    return Object.freeze({ status, phase, stepId, clipMs })
+    return Object.freeze({ status, phase, stepId, clipMs, correctionId })
   }
   function release() {
     if (released) return
     released = true
+    updateToken = undefined
     signal.removeEventListener('abort', dispose)
     mixer.stopAllAction()
     mixer.uncacheRoot(sampleRoot)
@@ -259,8 +328,11 @@ export function createReferencePlayback(
   }
   function update(input: ReferenceCue) {
     if (released || signal.aborted) return false
+    const token = {}
+    updateToken = token
     let cue: ReferenceCue
     try {
+      const suppliedCorrection = input.correction
       cue = {
         generation: input.generation,
         sequence: input.sequence,
@@ -270,12 +342,20 @@ export function createReferencePlayback(
         stepId: input.stepId,
         phase: input.phase,
         status: input.status,
+        ...(suppliedCorrection !== undefined
+          ? {
+              correction: Object.freeze({
+                id: suppliedCorrection.id,
+                sampledAt: suppliedCorrection.sampledAt,
+              }),
+            }
+          : {}),
       }
     } catch {
-      if (!released && !signal.aborted) freeze('unavailable')
+      if (!released && !signal.aborted && updateToken === token) freeze('unavailable')
       return false
     }
-    if (released || signal.aborted) return false
+    if (released || signal.aborted || updateToken !== token) return false
     if (
       cue.generation !== generation ||
       !Number.isSafeInteger(cue.sequence) ||
@@ -286,13 +366,22 @@ export function createReferencePlayback(
       return false
     lastSequence = cue.sequence
     lastAt = cue.at
-    const clips = steps.get(cue.stepId)
+    const step = steps.get(cue.stepId)
+    const selected =
+      cue.correction === undefined
+        ? undefined
+        : step?.corrections?.find((item) => item.id === cue.correction?.id)
     if (
       cue.motionId !== motionId ||
       cue.version !== version ||
-      !clips ||
+      !step ||
       !phases.includes(cue.phase) ||
-      !['idle', 'preparing', 'running', 'paused', 'ended'].includes(cue.status)
+      !['idle', 'preparing', 'running', 'paused', 'ended'].includes(cue.status) ||
+      (cue.correction !== undefined &&
+        (!selected?.phases.includes(cue.phase) ||
+          !clock(cue.correction.sampledAt) ||
+          cue.correction.sampledAt > cue.at ||
+          cue.at - cue.correction.sampledAt > maxAgeMs))
     ) {
       freeze('unavailable')
       return false
@@ -306,7 +395,8 @@ export function createReferencePlayback(
       freeze(cue.status === 'paused' ? 'paused' : 'waiting')
       return true
     }
-    if (phase !== cue.phase || stepId !== cue.stepId) {
+    const nextCorrection = selected?.id ?? null
+    if (phase !== cue.phase || stepId !== cue.stepId || correctionId !== nextCorrection) {
       // Native stop/uncache never touches the displayed reference.
       mixer.stopAllAction()
       for (const b of bindings) {
@@ -317,7 +407,8 @@ export function createReferencePlayback(
       }
       phase = cue.phase
       stepId = cue.stepId
-      clip = clips[phase]
+      correctionId = nextCorrection
+      clip = selected?.clip ?? step.clips[phase]
       clipMs = 0
       blendElapsed = 0
       skipDelta = true
@@ -327,8 +418,9 @@ export function createReferencePlayback(
       action.clampWhenFinished = true
       action.play()
       mixer.update(0)
-      if (released || signal.aborted) return false
+      if (released || signal.aborted || updateToken !== token) return false
     }
+    correctionAt = cue.correction?.sampledAt ?? null
     status = 'playing'
     return true
   }
@@ -342,7 +434,12 @@ export function createReferencePlayback(
     const elapsed = lastNow === null ? 0 : Math.min(deltaMs, now - lastNow)
     lastNow = now
     if (status === 'paused' || status === 'waiting') return snapshot()
-    if (lastAt > now || now - lastAt > maxAgeMs) return freeze('stale')
+    if (
+      lastAt > now ||
+      now - lastAt > maxAgeMs ||
+      (correctionAt !== null && (correctionAt > now || now - correctionAt > maxAgeMs))
+    )
+      return freeze('stale')
     if (status !== 'playing' || !clip) return snapshot()
     const current = new Map<string, Bone>()
     let duplicate = false
@@ -390,5 +487,12 @@ export function createReferencePlayback(
   }
   signal.addEventListener('abort', dispose, { once: true })
   if (signal.aborted) dispose()
-  return Object.freeze({ update, render, snapshot, dispose })
+  // FR-M-07: owner can stop an obsolete guide without manufacturing a new session cue.
+  const suspend = () => {
+    if (released || signal.aborted) return false
+    updateToken = undefined
+    freeze('unavailable')
+    return true
+  }
+  return Object.freeze({ update, render, snapshot, suspend, dispose })
 }

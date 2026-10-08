@@ -111,6 +111,10 @@ export function createNativePlaybackResources(options: Options) {
       (reference.motionId !== feedback.motionId || reference.version !== feedback.version)
     )
       throw new Error()
+    for (const step of reference?.steps ?? [])
+      for (const correction of step.corrections ?? [])
+        if (!feedback?.regions.some((region) => region.id === correction.regionId))
+          throw new Error()
     const requestedHands = options.hands
     if (requestedHands !== undefined) hands = copyHandAlignment(requestedHands)
     const requested = options.head
@@ -153,6 +157,17 @@ export function createNativePlaybackResources(options: Options) {
     throw new Error('Invalid native playback resources')
   let cameraError: CameraErrorKind | null = null
   let pendingCue: ReferenceCue | undefined
+  const adaptive = reference?.steps.some((step) => step.corrections?.length) ?? false
+  let currentObservation:
+    | Readonly<{
+        generation: number
+        sequence: number
+        sampledAt: number
+        stepId: string
+        phase: ReferenceCue['phase']
+        correction?: NonNullable<ReferenceCue['correction']>
+      }>
+    | undefined
   let issueCommand: (generation: number, action: (pair: Pair) => boolean) => boolean = () => false
   const bridge = createOwnedPlaybackResources({
     async camera(context) {
@@ -278,13 +293,25 @@ export function createNativePlaybackResources(options: Options) {
         }
         if (
           observationToken !== token ||
-          !issueCommand(context.generation, () => owned.observe(delivery))
+          !issueCommand(context.generation, () => {
+            const accepted = owned.observe(delivery)
+            if (accepted && observationToken === token && adaptive) {
+              currentObservation = undefined
+              pendingCue = undefined
+            }
+            return accepted
+          })
         )
           return false
         try {
+          const rejectDecision = () =>
+            issueCommand(context.generation, () => {
+              if (observationToken !== token) return false
+              if (adaptive) owned.suspendReference()
+              return true
+            })
           const supplied = evaluator(delivery)
-          if (supplied === null)
-            return issueCommand(context.generation, () => observationToken === token)
+          if (supplied === null) return rejectDecision()
           if (typeof (supplied as unknown as PromiseLike<unknown>).then === 'function') {
             void Promise.resolve(supplied).catch(() => {})
             throw new Error()
@@ -323,13 +350,25 @@ export function createNativePlaybackResources(options: Options) {
             cue.at > Number.MAX_SAFE_INTEGER ||
             cue.at - delivery.at > Math.min(maxAgeMs, ageLimit)
           )
-            return issueCommand(context.generation, () => observationToken === token)
+            return rejectDecision()
           const errors = supplied.errors
           if (!Array.isArray(errors) || errors.length > feedback.regions.length) throw new Error()
           const copied = Object.freeze(
-            Array.from(errors, (error) =>
-              Object.freeze({ regionId: error.regionId, severity: error.severity }),
-            ),
+            Array.from(errors, (error) => {
+              const regionId = error.regionId,
+                severity = error.severity,
+                code = error.code
+              if (
+                code !== undefined &&
+                (typeof code !== 'string' ||
+                  code.trim() !== code ||
+                  !code ||
+                  code.length > 200 ||
+                  Array.from(code).some((c) => c.charCodeAt(0) < 32))
+              )
+                throw new Error()
+              return Object.freeze({ regionId, severity, ...(code !== undefined ? { code } : {}) })
+            }),
           )
           return issueCommand(context.generation, () => {
             if (observationToken !== token) return false
@@ -343,7 +382,31 @@ export function createNativePlaybackResources(options: Options) {
                 errors: copied,
               }),
             )
-            if (accepted && reference) queueReference(cue)
+            if (accepted && reference) {
+              // Exact supplied cause + region + phase, in authored presentation order only.
+              const correction = reference.steps
+                .find((step) => step.id === cue.stepId)
+                ?.corrections?.find(
+                  (item) =>
+                    item.phases.includes(cue.phase) &&
+                    copied.some(
+                      (error) => error.code === item.errorCode && error.regionId === item.regionId,
+                    ),
+                )
+              const guide = correction
+                ? Object.freeze({ id: correction.id, sampledAt: delivery.at })
+                : undefined
+              if (adaptive)
+                currentObservation = Object.freeze({
+                  generation: cue.generation,
+                  sequence,
+                  sampledAt: delivery.at,
+                  stepId: cue.stepId,
+                  phase: cue.phase,
+                  ...(guide ? { correction: guide } : {}),
+                })
+              queueReference({ ...cue, ...(guide ? { correction: guide } : {}) })
+            } else if (adaptive) owned.suspendReference()
             return true
           })
         } catch {
@@ -366,7 +429,8 @@ export function createNativePlaybackResources(options: Options) {
         },
         observe,
         updateReference: (cue) =>
-          issueCommand(context.generation, () => owned.updateReference(cue)),
+          !adaptive && issueCommand(context.generation, () => owned.updateReference(cue)),
+        suspendReference: () => issueCommand(context.generation, () => owned.suspendReference()),
         updateFeedback: (frame) =>
           !feedback && issueCommand(context.generation, () => owned.updateFeedback(frame)),
         render(now: number, deltaMs: number) {
@@ -390,6 +454,7 @@ export function createNativePlaybackResources(options: Options) {
         },
         dispose() {
           observationToken = undefined
+          if (currentObservation?.generation === context.generation) currentObservation = undefined
           if (pendingCue?.generation === context.generation) pendingCue = undefined
           owned.dispose()
         },
@@ -431,6 +496,7 @@ export function createNativePlaybackResources(options: Options) {
     lastCueAt = -Infinity
   function synchronize(state: CoachingState): boolean {
     if (!reference) return false
+    const expectedObservation = currentObservation
     let generation: number, cue: Omit<ReferenceCue, 'sequence'>
     try {
       generation = state.generation
@@ -447,11 +513,41 @@ export function createNativePlaybackResources(options: Options) {
         phase: state.phase,
         status: state.status,
       }
+      if (adaptive && cue.status === 'running') {
+        const observed = expectedObservation
+        if (
+          !observed ||
+          observed.generation !== generation ||
+          observed.sequence !== state.lastSequence ||
+          observed.sampledAt !== state.lastSampledAt ||
+          observed.stepId !== cue.stepId ||
+          observed.phase !== cue.phase
+        )
+          return false
+        const age = state.plan.maxFrameAgeMs
+        if (currentObservation !== expectedObservation) return false
+        if (
+          !Number.isFinite(age) ||
+          age <= 0 ||
+          !Number.isFinite(cue.at) ||
+          cue.at < observed.sampledAt ||
+          cue.at - observed.sampledAt > Math.min(maxAgeMs, age, reference.maxAgeMs)
+        ) {
+          return bridge.command(generation, (pair) => {
+            if (currentObservation !== expectedObservation) return false
+            pendingCue = undefined
+            return pair.suspendReference()
+          })
+        }
+        if (observed.correction) cue = { ...cue, correction: observed.correction }
+      }
     } catch {
       return bridge.command(generation, () => {
+        if (adaptive && currentObservation !== expectedObservation) return false
         throw new Error('Invalid native reference state')
       })
     }
+    if (adaptive && currentObservation !== expectedObservation) return false
     return queueReference(cue)
   }
   function queueReference(cue: Omit<ReferenceCue, 'sequence'>): boolean {
@@ -482,6 +578,7 @@ export function createNativePlaybackResources(options: Options) {
     synchronize,
     close: () => {
       pendingCue = undefined
+      currentObservation = undefined
       return bridge.close()
     },
     getSnapshot: () => Object.freeze({ ...bridge.getSnapshot(), cameraError }),

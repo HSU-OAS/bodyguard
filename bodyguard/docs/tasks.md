@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-08 [S2.T21](stories/adaptive-reference.md): 같은 현재 오류 코드/부위/단계에 맞는 저작 시범으로 전환하고 가림/만료의 이전 안내를 중단한다. [실제 남녀 흐름·미완성 외형·실패/합성 구분](review/adaptive-reference/README.md). runtime3c8ce1a의 Chrome18/FE1169·정적/build/guard·공개 byte 동일을 확인했다. PR83은 실제 merge36ed814와 [원격 결과 기록](https://github.com/HSU-OAS/bodyguard/pull/83#issuecomment-6055527680)을 확인한 기준선이다. 이번 Story 조건부 PR gate는 다음이며 실제 classifier/교정 콘텐츠·실측·최종 외형/승인 UI·SDK/외부/운영·시작 P2와 전체1~6은 미완료/출시 동작0이다. 최소 텍스트·아바타/미리보기 중심·원본/실패·같은 부위 조형 보류·기존 승인 기준 유지. 아래는 시점별 기록이다.
+
 2026-10-08 [S2.T20](stories/native-feedback.md): 같은 native delivery→현재 로그인 소유 코칭 상태→사용자 오류 강조·시범 phase를 연결했다. 남녀 강조/가림·복수·미검출 해제/복구·pause/새 세대·권한 회수·본인 중단 기록의 [실제 화면·실패·합성 구분](review/native-feedback/README.md)을 보존했다. runtime d4f475c의 통합16/비교14·FE1145·정적/build/guard는 통과했고 조건부 PR gate를 진행한다. 초기 시작·재준비 실패와 간헐적 시작 원인/출시 P2는 유지한다. 최종 외형·실제 오류 판정/적응형 교정 시범·실측·승인 공개 구조/UI·전체1~6은 미완료/출시 동작0이다. 다음은 실제 동작 기준/오류 분류·오류별 교정 시범 연결과 실측 조건을 분리한 독립 작업이다. 공개 byte/디자인·조형/GLB·안전/SDK/운영 변경0, 최소 텍스트·원본/실패·기존 승인 기준 유지. 아래는 시점별 기록이다.
 
 2026-10-08 [S2.T19](stories/avatar-surface-feedback.md): 사용자 모델의 관찰에 결합한 표면 강조→가림/미검출/만료 해제→복구/종료를 실제 남녀 WebGL로 검증했다. [실제 화면·실패·남은 조건](review/surface-feedback/README.md). 합성 오류 표시 기반이며 native classifier/적응형 시범·실제 자세 정확도·최종 외형·승인 공개 UI·전체1~6은 미완료/출시 동작0이다. 다음은 같은 native 관측·현재 코칭 판정과 표시/시범 안내의 비공개 통합이다. 공개 byte/디자인·조형/GLB·임상 기준·운영 변경0, 최소 텍스트·원본/실패·기존 승인 기준 유지. PR81 실제 merge b9eb40b 이후 최신 main에서 시작했고 아래는 시점별 기록이다.

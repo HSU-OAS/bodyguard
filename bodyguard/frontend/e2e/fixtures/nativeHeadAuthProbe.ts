@@ -41,7 +41,10 @@ export function mountNativeHeadAuthProbe(
   handAlignment?: HandDisplayAlignment,
   withReference = false,
   withFeedback = false,
+  withAdaptive = false,
 ) {
+  if (withAdaptive && (!withFeedback || !withReference))
+    throw new Error('Private adaptive reference fixture unavailable')
   const scene = new Scene()
   scene.background = new Color('#ffffff')
   scene.add(new HemisphereLight('#ffffff', '#8b97a6', 2))
@@ -117,6 +120,7 @@ export function mountNativeHeadAuthProbe(
     ['lowerleg01R', 26],
     ['footR', 28],
   ] as const
+  let feedbackCode: 'raised' | 'direction' | 'unknown' = 'raised'
   let feedbackMode: 'off' | 'error' | 'crop' | 'multiple' | 'none' = 'off',
     syntheticBodyDeliveries = 0,
     feedbackEvaluations = 0
@@ -313,9 +317,32 @@ export function mountNativeHeadAuthProbe(
     prepareFinished = false
     let ownedSession: Session | null = null
     const nextId = crypto.randomUUID()
-    const reference = withReference
+    let reference = withReference
       ? (currentReference ?? (await nativeReferenceProgram(gender)))
       : undefined
+    if (withAdaptive && reference)
+      reference = {
+        ...reference,
+        steps: reference.steps.map((step) => ({
+          ...step,
+          corrections: [
+            {
+              id: 'fixture-relax',
+              errorCode: 'raised',
+              regionId: 'left-arm',
+              phases: ['waiting-start', 'seeking-target', 'holding', 'waiting-return'],
+              clip: step.clips['waiting-start'],
+            },
+            {
+              id: 'fixture-align',
+              errorCode: 'direction',
+              regionId: 'left-arm',
+              phases: ['waiting-start', 'seeking-target', 'holding', 'waiting-return'],
+              clip: step.clips['seeking-target'],
+            },
+          ],
+        })),
+      }
     currentReference = reference
     const actor = createNativePlaybackResources({
       model: 'lite',
@@ -353,7 +380,15 @@ export function mountNativeHeadAuthProbe(
                 })
                 return {
                   state: ownedSession.getSnapshot().state,
-                  errors: observable ? [{ regionId: 'left-arm', severity: 'deviation' }] : [],
+                  errors: observable
+                    ? [
+                        {
+                          regionId: 'left-arm',
+                          severity: 'deviation',
+                          ...(withAdaptive ? { code: feedbackCode } : {}),
+                        },
+                      ]
+                    : [],
                 }
               },
             },
@@ -447,7 +482,11 @@ export function mountNativeHeadAuthProbe(
     })
     let referenceTargetError: number | null = null
     const phase = session?.getSnapshot().state.phase
-    const clip = phase ? currentReference?.steps[0].clips[phase] : undefined
+    const intended =
+      withAdaptive && feedbackMode === 'error'
+        ? currentReference?.steps[0].corrections?.find((item) => item.errorCode === feedbackCode)
+        : undefined
+    const clip = intended?.clip ?? (phase ? currentReference?.steps[0].clips[phase] : undefined)
     if (models && clip) {
       referenceTargetError = 0
       for (const track of clip.tracks) {
@@ -470,6 +509,8 @@ export function mountNativeHeadAuthProbe(
       phase: session?.getSnapshot().state.phase ?? null,
       referenceConfigured: withReference,
       feedbackConfigured: withFeedback,
+      adaptiveConfigured: withAdaptive,
+      expectedCorrectionId: intended?.id ?? null,
       feedbackMode,
       syntheticBodyDeliveries,
       feedbackEvaluations,
@@ -565,6 +606,11 @@ export function mountNativeHeadAuthProbe(
       if (!withFeedback || !['off', 'error', 'crop', 'multiple', 'none'].includes(mode))
         throw new Error('Invalid private feedback mode')
       feedbackMode = mode
+    },
+    setFeedbackCode(code: typeof feedbackCode) {
+      if (!withAdaptive || !['raised', 'direction', 'unknown'].includes(code))
+        throw new Error('Private adaptive reference fixture unavailable')
+      feedbackCode = code
     },
     prepare,
     beginPrepare() {
