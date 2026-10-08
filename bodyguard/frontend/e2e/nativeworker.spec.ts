@@ -21,6 +21,7 @@ let posts = 0,
   workerCloses = 0
 let errors: string[] = []
 let delayedPreparation = false
+let faultInjected = false
 const state = (page: Page) =>
   page.evaluate(() => (window as unknown as WindowProbe).nativeAuthProbe.snapshot())
 test.setTimeout(60_000)
@@ -28,6 +29,7 @@ test.beforeEach(async ({ context, page }) => {
   posts = external = workerStarts = workerCloses = 0
   errors = []
   delayedPreparation = false
+  faultInjected = false
   page.on('pageerror', (e) => errors.push(e.name))
   page.on('worker', (worker) => {
     workerStarts++
@@ -84,13 +86,33 @@ test.beforeEach(async ({ context, page }) => {
 })
 test.afterEach(async ({ page, browser }, info) => {
   const before = await state(page),
-    final = await page.evaluate(() => (window as unknown as WindowProbe).nativeAuthProbe.close())
+    closed = await page.evaluate(async () => {
+      const probe = (window as unknown as WindowProbe).nativeAuthProbe
+      try {
+        return { final: await probe.close(), cleanupError: false }
+      } catch (error) {
+        if (!(error instanceof Error) || error.message !== 'Resource cleanup failed') throw error
+        return { final: probe.snapshot(), cleanupError: true }
+      }
+    }),
+    final = closed.final
+  expect(closed.cleanupError).toBe(faultInjected)
   await expect.poll(() => workerCloses).toBe(workerStarts)
   expect(final.tracksEnded && final.detached && final.allFramesClosed).toBe(true)
   expect(final.frameCloses).toBe(final.frames)
   expect(final.frameErrors).toBe(0)
   expect(final.models).toBe(0)
-  expect(final.failures).toEqual([])
+  if (faultInjected) {
+    expect(final.failures.length).toBeGreaterThan(0)
+    expect(final.failures.map((failure) => failure.reason)).toContain('cleanup-error')
+    expect(
+      final.failures.every(
+        (failure) =>
+          failure.generation === before.sessionGeneration &&
+          ['inference-error', 'cleanup-error'].includes(failure.reason),
+      ),
+    ).toBe(true)
+  } else expect(final.failures).toEqual([])
   expect(final.memory).toEqual(final.baseline)
   // Main realm instrumentation MUST NOT count actual SDK inference in the worker realm.
   expect(final.nativeCalls).toBe(0)
@@ -113,6 +135,8 @@ test.afterEach(async ({ page, browser }, info) => {
         workerStarts,
         workerCloses,
         delayedPreparation,
+        faultInjected,
+        cleanupError: closed.cleanupError,
         actualHuman: false,
         actualCamera: false,
         productPolicyApproved: false,
@@ -191,6 +215,70 @@ async function running(page: Page, before = 0) {
   expect(page.workers()).toHaveLength(1)
 }
 for (const gender of ['male', 'female'] as const) {
+  test(`${gender} silent worker death while preparing→bounded failure→no record`, async ({
+    page,
+    context,
+  }) => {
+    await join(context)
+    await mount(page, gender)
+    faultInjected = true
+    // Only the test response kills this owned Worker; no public fault control.
+    await page.route('**/assets/nativeInference.worker-*.js', (route) =>
+      route.fulfill({ contentType: 'application/javascript', body: 'self.close()' }),
+    )
+    await page.evaluate(() => {
+      void (window as unknown as WindowProbe).nativeAuthProbe.start()
+    })
+    await expect.poll(() => workerCloses).toBe(1)
+    // Fault-response5s + missing-cleanup5s, not a widened normal start gate.
+    await expect
+      .poll(() => state(page), { timeout: 12_000 })
+      .toMatchObject({ session: 'ended', tracksEnded: true, detached: true, models: 0 })
+    await page.evaluate(async () => {
+      await (window as unknown as WindowProbe).nativeAuthProbe.resume()
+      await (window as unknown as WindowProbe).nativeAuthProbe.save()
+    })
+    expect(posts).toBe(0)
+    expect((await (await context.request.get('/api/v1/records/stretch')).json()).items).toEqual([])
+  })
+  test(`${gender} silent worker death while running→interrupted only→camera closed`, async ({
+    page,
+    context,
+  }) => {
+    await join(context)
+    await mount(page, gender)
+    await running(page)
+    faultInjected = true
+    await page.workers()[0].evaluate(() => self.close())
+    await expect.poll(() => workerCloses).toBe(1)
+    await expect
+      .poll(() => state(page), { timeout: 7000 })
+      .toMatchObject({ session: 'ended', tracksEnded: true, detached: true })
+    await expect
+      .poll(() => state(page), { timeout: 12_000 })
+      .toMatchObject({
+        session: 'ended',
+        tracksEnded: true,
+        detached: true,
+        models: 0,
+        verifiedMs: 0,
+      })
+    const cameras = (await state(page)).cameras
+    await page.evaluate(async () => {
+      await (window as unknown as WindowProbe).nativeAuthProbe.resume()
+      await (window as unknown as WindowProbe).nativeAuthProbe.save()
+    })
+    expect((await state(page)).cameras).toBe(cameras)
+    expect(posts).toBe(1)
+    const rows = (await (await context.request.get('/api/v1/records/stretch')).json()).items
+    expect(rows).toHaveLength(1)
+    expect(rows[0]).toMatchObject({
+      outcome: 'interrupted',
+      observed_ms: 0,
+      repetitions: 0,
+      provenance: 'client-reported',
+    })
+  })
   test(`${gender} worker→two avatars→stop→own interrupted record`, async ({ page, context }) => {
     await join(context)
     await mount(page, gender)
