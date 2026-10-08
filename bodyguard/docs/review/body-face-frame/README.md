@@ -22,6 +22,8 @@ native 5회는 body/face 미검출이다. 실제 얼굴 결과는 close 없는 J
 
 ## 작성자 검토·남은 조건
 
+PR 후검에서 새로 보관한 시험 번들의 고지를 보완했다. [인접 원문 고지·실제 bundler 확인](notices/README.md). Three 설치 MIT 원문과 공식 Apache2 원문을 제공하고 SDK의 설치 LICENSE/NOTICE 누락을 정해진 것으로 덮지 않았다. 별도 고지 build의 최초 byte 동일 실패/region 경로 주석 차이는 [원본 기록](notice-build-first-failure.json)이며 canonical native 시험 artifact/core code는 그대로다. 배포/법무 승인으로 세지 않는다.
+
 공유 body copy의 기존 모양·불변 복사, original stamp, 취소 후 face 호출 방지, pending input/body 회수와 고정 cleanup 오류, FaceResult.close 미발명, body0/복수·불완전/invalid face의 head null, 공개 비노출·소스/증거 SHA를 검토했다. input 실제 open/close 및 native face0 관찰을 보강했고 위 proxy P2 원인·회귀를 해결했다. 독립 리뷰어/전문가 시험이 아니며 미해결 **Story 범위** P1/P2 없음이다. 최신 remote diff/HEAD/main/CLEAN/체크는 별도 조건부 PR 게이트에서 확인한다.
 
 body-face 동일 사용자·실측 좌표계, 명시 정렬 기준과 head rig 연결, 목 분절/체간/손·검증된 시범/적색 피드백, 최종 외형/권리·승인 디자인/SDK 정책·실제 노트북·HTTPS/운영 및 전체1~6 필수 기준은 유지한다. 이번에 API/SQL·물리 카메라·참여자·GLB/Blender·배포 시험을 했다고 주장하지 않는다. 공개 코칭/출시 동작 적격0이며 전체1~6/RC 완료가 아니다.
