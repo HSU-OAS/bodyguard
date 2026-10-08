@@ -28,6 +28,7 @@ import { createNativePlaybackResources } from '../../src/coaching/nativePlayback
 import { useRecordedCoaching } from '../../src/coaching/useRecordedCoaching'
 import type { CoachingState, ObservationClass } from '../../src/stretch/progression'
 import { nativeReferenceProgram } from './nativeReferenceProgram'
+import { nativeStartupTiming } from './nativeStartupTiming'
 
 type Hook = ReturnType<typeof useRecordedCoaching>
 type Session = NonNullable<ReturnType<Hook['getSession']>>
@@ -42,9 +43,16 @@ export function mountNativeHeadAuthProbe(
   withReference = false,
   withFeedback = false,
   withAdaptive = false,
+  withTiming = false,
 ) {
   if (withAdaptive && (!withFeedback || !withReference))
     throw new Error('Private adaptive reference fixture unavailable')
+  const timing = withTiming ? nativeStartupTiming(() => performance.now()) : null
+  const factoryDescriptors = [
+    [PoseLandmarker, Object.getOwnPropertyDescriptor(PoseLandmarker, 'createFromOptions')],
+    [FaceLandmarker, Object.getOwnPropertyDescriptor(FaceLandmarker, 'createFromOptions')],
+    [GestureRecognizer, Object.getOwnPropertyDescriptor(GestureRecognizer, 'createFromOptions')],
+  ] as const
   const scene = new Scene()
   scene.background = new Color('#ffffff')
   scene.add(new HemisphereLight('#ffffff', '#8b97a6', 2))
@@ -171,11 +179,45 @@ export function mountNativeHeadAuthProbe(
     camera = media.getUserMedia.bind(media),
     descriptor = Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'srcObject')
   if (!descriptor?.get || !descriptor.set) throw new Error('Owned media descriptor required')
+  if (timing) {
+    const bodyFactory = PoseLandmarker.createFromOptions,
+      faceFactory = FaceLandmarker.createFromOptions,
+      handsFactory = GestureRecognizer.createFromOptions
+    PoseLandmarker.createFromOptions = async (...args) => {
+      const token = timing.begin('body-sdk')
+      try {
+        return await bodyFactory.apply(PoseLandmarker, args)
+      } finally {
+        timing.end(token)
+      }
+    }
+    FaceLandmarker.createFromOptions = async (...args) => {
+      const token = timing.begin('face-sdk')
+      try {
+        return await faceFactory.apply(FaceLandmarker, args)
+      } finally {
+        timing.end(token)
+      }
+    }
+    GestureRecognizer.createFromOptions = async (...args) => {
+      const token = timing.begin('hands-sdk')
+      try {
+        return await handsFactory.apply(GestureRecognizer, args)
+      } finally {
+        timing.end(token)
+      }
+    }
+  }
   const setter = descriptor.set
   media.getUserMedia = async (constraints) => {
-    const stream = await camera(constraints)
-    streams.push(stream)
-    return stream
+    const token = timing?.begin('camera') ?? null
+    try {
+      const stream = await camera(constraints)
+      streams.push(stream)
+      return stream
+    } finally {
+      timing?.end(token)
+    }
   }
   Object.defineProperty(HTMLMediaElement.prototype, 'srcObject', {
     ...descriptor,
@@ -192,7 +234,14 @@ export function mountNativeHeadAuthProbe(
     value(this: PoseLandmarker, input: VideoFrame, at: number) {
       nativeCalls++
       bodyStamps.set(input, at)
-      let result = bodyDetect.call(this, input, at, {})
+      const resultToken = timing?.begin('result') ?? null,
+        bodyToken = timing?.begin('body') ?? null
+      let result: ReturnType<typeof bodyDetect>
+      try {
+        result = bodyDetect.call(this, input, at, {})
+      } finally {
+        timing?.end(bodyToken)
+      }
       nativePeopleMax = Math.max(nativePeopleMax, result.landmarks.length)
       // TEST ONLY: native blank stays separately counted. Replace final JS arrays with generated
       // positive/cropped/multiple inputs; not actual SDK detection, human tracking or clinical proof.
@@ -222,7 +271,11 @@ export function mountNativeHeadAuthProbe(
       const release = result.close.bind(result)
       result.close = () => {
         nativeCloses++
-        release()
+        try {
+          release()
+        } finally {
+          timing?.end(resultToken)
+        }
       }
       return result
     },
@@ -241,7 +294,13 @@ export function mountNativeHeadAuthProbe(
     value(this: FaceLandmarker, input: VideoFrame, at: number) {
       faceCalls++
       sameInput = sameInput && bodyStamps.get(input) === at
-      const result = faceDetect.call(this, input, at)
+      const token = timing?.begin('face') ?? null
+      let result: ReturnType<typeof faceDetect>
+      try {
+        result = faceDetect.call(this, input, at)
+      } finally {
+        timing?.end(token)
+      }
       nativeFacesMax = Math.max(nativeFacesMax, result.faceLandmarks.length)
       if (!holdNext || handAlignment) return result
       holdNext = false
@@ -269,7 +328,13 @@ export function mountNativeHeadAuthProbe(
     value(this: GestureRecognizer, input: VideoFrame, at: number) {
       handCalls++
       sameInput = sameInput && bodyStamps.get(input) === at
-      const result = handDetect.call(this, input, at)
+      const token = timing?.begin('hands') ?? null
+      let result: ReturnType<typeof handDetect>
+      try {
+        result = handDetect.call(this, input, at)
+      } finally {
+        timing?.end(token)
+      }
       nativeHandsMax = Math.max(nativeHandsMax, result.landmarks.length)
       if (!holdNext) return result
       holdNext = false
@@ -394,8 +459,14 @@ export function mountNativeHeadAuthProbe(
             },
           }
         : {}),
-      loadAvatar: async () =>
-        (await new GLTFLoader().loadAsync(`/__private-native-${gender}.glb`)).scene,
+      loadAvatar: async () => {
+        const token = timing?.begin('avatar') ?? null
+        try {
+          return (await new GLTFLoader().loadAsync(`/__private-native-${gender}.glb`)).scene
+        } finally {
+          timing?.end(token)
+        }
+      },
       scheduler: {
         request: (callback) => requestAnimationFrame(callback),
         cancel: (handle) => cancelAnimationFrame(handle),
@@ -425,7 +496,12 @@ export function mountNativeHeadAuthProbe(
           }
         })
         renderFrames++
-        renderer.render(scene, view)
+        const token = timing?.begin('render') ?? null
+        try {
+          renderer.render(scene, view)
+        } finally {
+          timing?.end(token)
+        }
       },
       onFailure(notice) {
         failures.push({ generation: notice.generation, reason: notice.reason })
@@ -580,6 +656,7 @@ export function mountNativeHeadAuthProbe(
       fakeCamera: true,
       syntheticMotionGates: true,
       releaseAvatar: false,
+      startupTiming: timing?.snapshot() ?? null,
     }
   }
   return Object.freeze({
@@ -676,6 +753,13 @@ export function mountNativeHeadAuthProbe(
           FaceLandmarker.prototype.close = faceClose
           GestureRecognizer.prototype.recognizeForVideo = handDetect
           GestureRecognizer.prototype.close = handClose
+          if (timing) {
+            timing.close()
+            for (const [factory, saved] of factoryDescriptors) {
+              if (saved) Object.defineProperty(factory, 'createFromOptions', saved)
+              else Reflect.deleteProperty(factory, 'createFromOptions')
+            }
+          }
         }
       }
       return snapshot()
