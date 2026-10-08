@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-08 손목·손가락 표시: [S2.T15](stories/observed-hands.md)에서 owned 사용자 모델32관절을 연결했다. 실제 남녀 GLB의 굽힘/회전→클리핑/누락→복구→만료/종료와 비교/source·전신/8가중치 보존이 작동한다. [흐름·실패·미완성 미리보기](review/observed-hands/README.md). 생성21점/실제WebGL이며 실제 카메라/SDK/사람 검증은 아니다. 다음은 native 손 결과의 같은 입력·소유권 연결이다. 공개 UI/문구/byte·조형·판정/SDK 정책·운영 변경0, 최소 문구·이월/전체1~6 기준·별도 승인 유지.
+
 2026-10-08 로그인 소유 몸·머리: [S2.T14](stories/native-body-head.md)에서 재사용 native adapter에 선택적인 Face/head와 같은 입력 source를 연결했다. 비공개 웹의 준비→두 GLB→중단→본인 기록, 얼굴 결과 대기 중 logout/401/세션 교체의 이전 저장·재개 차단과 새 소유자 명시 시작이 작동한다. [실제 흐름·미완성 canvas·실패/남은 조건](review/native-body-head/README.md). 공개 화면/문구·byte·조형·판정·SDK 제품 정책/운영 변경0. 실제 사람/native 양성·목/체간/손·시범/외형/승인 디자인·이월/전체1~6은 미완료이며 최소 문구·기존 원본/실패·별도 승인 기준을 유지한다. 다음 독립 연결은 사용자 손 관찰/리그와 시범 단계의 선행 조건을 검토하고 미승인 공개 UI는 확장하지 않는다.
 
 2026-10-08 머리·사지 통합: [S2.T13](stories/observed-body-head.md)은 같은 입력/원래 stamp의 머리 후보와 사지를 사용자 모델에 연결했다. [실제 흐름·미완성 canvas·실패/남은 조건](review/observed-body-head/README.md). 남녀 준비→합성 움직임→얼굴 누락/사지 지속→native 미검출→pending 종료가 실제 Chrome에서 작동하며 비교/source·8가중치·전신과 공개 byte를 보존했다. 실제 사람/동일인·세밀한 판정/시범·외형·승인 디자인/SDK 정책·전체1~6은 미완료다. 다음은 계정 소유 재생의 native 준비 adapter에 body/face와 명시 head 정렬을 연결하는 비공개 통합이며 외부/실측 승인은 별도로 남긴다. PR75 실제 merge2bc3cd9/main·브랜치 보존을 확인하고 최신 main에서 시작했다. 조형/공개 문구/운영 변경0·최소 문구/원본/실패·기존 승인 경계를 유지한다. 아래는 시점별 기록이다.

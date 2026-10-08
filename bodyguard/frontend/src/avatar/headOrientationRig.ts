@@ -35,7 +35,7 @@ export type HeadDisplayAlignment = Pick<Options, 'bone' | 'cameraReference' | 's
 type RotationOptions = Omit<Options, 'matrixLayout'>
 // Float32 affine/orthogonality roundoff only, not an anatomical angle or quality threshold.
 const ROUND_OFF = 1e-5
-function similarityRotation(matrix: Matrix4): Quaternion | null {
+export function similarityRotation(matrix: Matrix4): Quaternion | null {
   const e = matrix.elements
   if (
     !e.every(Number.isFinite) ||

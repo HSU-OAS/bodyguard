@@ -18,6 +18,7 @@ import {
   type ResourceNotice,
 } from '../coaching/resources'
 import { OBSERVED_LIMB_BINDINGS } from './directionalRig'
+import { HAND_RIG_BINDINGS } from './observedHandRig'
 import { prepareOwnedAvatarPair } from './ownedAvatarPair'
 
 function fixture() {
@@ -74,7 +75,89 @@ function deferred<T>() {
   return { promise, resolve }
 }
 
+function withHands(f = fixture()) {
+  const bones = [...f.mesh.skeleton.bones]
+  function add(name: string, parent: Bone) {
+    const bone = new Bone()
+    bone.name = name
+    bone.position.y = 0.03
+    parent.add(bone)
+    bones.push(bone)
+    return bone
+  }
+  for (const suffix of ['L', 'R']) {
+    const wrist = f.mesh.getObjectByName(`wrist${suffix}`) as Bone
+    const forearm = add(`lowerarm02${suffix}`, wrist.parent as Bone)
+    forearm.add(wrist)
+    for (let digit = 1; digit <= 5; digit++) {
+      let parent = digit === 1 ? wrist : add(`metacarpal${digit - 1}${suffix}`, wrist)
+      for (let joint = 1; joint <= 3; joint++)
+        parent = add(`finger${digit}-${joint}${suffix}`, parent)
+    }
+  }
+  f.mesh.skeleton.bones = bones
+  f.mesh.skeleton.calculateInverses()
+  return f
+}
+const handAlignment = () => ({
+  cameraReferences: { left: [0, 0, 0, 1], right: [0, 0, 0, 1] },
+  sceneFromCamera: [0, 0, 0, 1],
+})
+
 describe('owned GLB avatar preparation', () => {
+  it('copies optional hand alignment before a delayed source and disposes both owned hand rigs', async () => {
+    const f = withHands(),
+      c = context(),
+      d = deferred<Group>(),
+      supplied = handAlignment()
+    let reads = 0
+    const pending = prepareOwnedAvatarPair(c.context, {
+      ...options(f.scene, () => d.promise),
+      get hands() {
+        reads++
+        return supplied
+      },
+    })
+    supplied.cameraReferences.left.fill(0)
+    supplied.sceneFromCamera.fill(0)
+    d.resolve(f.scene)
+    const pair = await pending
+    expect(reads).toBe(1)
+    expect(pair.render(100, 0).hands?.total).toBe(32)
+    for (const binding of HAND_RIG_BINDINGS)
+      expect(pair.models?.[0].getObjectByName(binding.bone)).not.toBe(
+        pair.models?.[1].getObjectByName(binding.bone),
+      )
+    pair.dispose()
+    pair.dispose()
+    expect(pair.render(110, 10).hands?.status).toBe('closed')
+    expect(f.count).toEqual({ geometry: 1, material: 1, skeleton: 1 })
+  })
+  it('refuses invalid hand calibration before starting the owned loader', async () => {
+    let calls = 0
+    const f = withHands(),
+      supplied = handAlignment()
+    supplied.cameraReferences.left.length = 3
+    await expect(
+      prepareOwnedAvatarPair(context().context, {
+        ...options(f.scene, async () => {
+          calls++
+          return f.scene
+        }),
+        hands: supplied,
+      }),
+    ).rejects.toThrow('Avatar asset unavailable')
+    expect(calls).toBe(0)
+    expect(f.count.geometry).toBe(0)
+  })
+  it('rejects an unbound distal finger even when its bone node exists and cleans the source', async () => {
+    const f = withHands()
+    f.mesh.skeleton.bones = f.mesh.skeleton.bones.filter((b) => b.name !== 'finger1-3L')
+    await expect(
+      prepareOwnedAvatarPair(context().context, { ...options(f.scene), hands: handAlignment() }),
+    ).rejects.toThrow('Avatar asset unavailable')
+    expect(f.count).toEqual({ geometry: 1, material: 1, skeleton: 1 })
+  })
   it('returns distinct clones and owns source cleanup without changing its shape', async () => {
     const f = fixture(),
       c = context(),

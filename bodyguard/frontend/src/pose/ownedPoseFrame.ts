@@ -1,4 +1,6 @@
 // FR-M-02/07·FR-A-01/03: private single-result handoff, not classification.
+
+import { copyHandObservations } from '../avatar/observedHandRig'
 import type { PoseRigFrame } from '../avatar/observedPoseRig'
 import { ResourceCleanupError, type ResourceContext } from '../coaching/resources'
 import { JOINT_COUNT, type Point } from '../posture/landmarks'
@@ -111,6 +113,7 @@ export function createOwnedPoseFrame<T>(
         cleanupFailed = true
       }
       if (!cleanupFailed && alive()) {
+        const suppliedHands = result.hands
         frame = Object.freeze({
           generation: suppliedGeneration,
           sequence,
@@ -119,6 +122,7 @@ export function createOwnedPoseFrame<T>(
             landmarks: copyPosePoints(result.landmarks),
             worldLandmarks: copyPosePoints(result.worldLandmarks),
             ...copyHead(result.headOrientation),
+            ...(suppliedHands === undefined ? {} : { hands: copyHandObservations(suppliedHands) }),
           }),
         })
       }

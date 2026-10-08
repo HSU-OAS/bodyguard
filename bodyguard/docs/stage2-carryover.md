@@ -31,6 +31,8 @@ main 9733e4c에는 PR #15의 순수 코칭 진행 엔진까지 병합됐다. 계
 
 ## 다음 실행 순서
 
+2026-10-08 D2-T 손목·손가락 표시: [S2.T15](stories/observed-hands.md)는 손목2개·손가락30개를 owned 사용자 모델에 연결했다. [실제 Chrome 흐름·실패/원본·미완성 미리보기](review/observed-hands/README.md).32관절의 합성 굽힘/회전·클리핑/누락/복구·만료/종료와 source/비교/전신/8가중치를 확인했다. native 같은 입력/소유권 연결은 다음이며 실제 사람/가시성/동일인·축 비틀림/중수골·시범/판정·최종 외형/권리·승인 디자인·SDK/노트북/운영 및 D2/전체1~6 완료 조건은 미충족이다. 공개 문구/byte·조형/GLB·운영 변경0, 최소 문구·원본/실패·별도 승인 경계를 유지한다.
+
 2026-10-08 D2-R/T 계정 소유 native 몸·머리: [S2.T14](stories/native-body-head.md)은 명시 head 설정에만 Face SDK·같은 입력 source를 열고 기존 body-only 경계를 유지한다. 실제 로그인/API/격리 SQL·가짜 장치에서 중단 기록, 얼굴 대기 중 logout/401/이탈/교체의 저장·재개 차단과 명시 새 시작을 확인했다. [흐름·원본/실패·미완성 canvas](review/native-body-head/README.md). 실제 사람/동일인/native 양성·경추/체간/손·시범/판정·외형·승인 디자인·SDK/장시간/노트북·D2/전체1~6 게이트는 남는다. 공개 화면/문구·byte·새 조형/GLB·운영 변경0이며 최소 문구·기존 원본과 별도 승인 조건을 유지한다.
 
 2026-10-08 D2-T/R 머리·사지 통합: [S2.T13](stories/observed-body-head.md)은 명시 head 정렬/복사 회전을 같은 capture stamp로 owned 사용자 모델의 사지와 연결하고 비교 모델은 보존했다. [실제 흐름·실패·미완성 canvas](review/observed-body-head/README.md). native 가짜 장치의 미검출/정리와 합성 긍정/누락·복수 body를 구분하며 공개 UI/byte·원본/GLB/조형·SDK 제품 정책·운영 변경0이다. 실제 사람/동일인·native 머리 긍정/실측·경추/손/체간·시범/판정·외형/디자인/SDK/노트북·D2-A/M/T/R/I/P 및 전체1~6 완료 조건은 그대로 남는다. 다음 비공개 adapter 통합과 별도 외부/참여자 검증을 분리하고 최소 문구·기존 원본/실패·별도 승인 경계를 유지한다.
