@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-09 [S6.13 시작·화면 경합 조사](stories/native-main-thread-contention.md): 실제 비공개 native 자원·두 원본 GLB의 main/Worker 흐름을 제한된 Chrome/CDP 조건에서 비교했다. [작동 흐름·실패·한계](review/native-main-thread-contention/README.md). Worker도 첫 화면 공백이 남으며 과거 시작 실패13건은 재현되지 않았다. 기존 통합26건은 미실행/시작P2 유지다. 공개 byte/최소 문구·원본/기본 경로/모델·판정/SDK/운영은 변경0이며 실제 사람·승인 공개 구조·최종 외형·D2/전체1~6은 미완료다. 다음은 첫 렌더/SDK 비용의 제한된 분리 조사다.
+
 2026-10-09 [S2.M3 관절 존재 신뢰도 소비](stories/pose-presence-guard.md): 낮은/비정상 presence의 팔·몸통 관찰을 거부하고 남녀 기존 3D의 해당 강조 해제→다른 부위 유지→새 관찰 복구를 확인했다. [실패·작동 흐름·한계](review/pose-presence-guard/README.md). 합성 시험이며 실제 사람 정확도·최종 외형·승인 UI/SDK·시작P2·D2/전체1~6/출시 동작0은 미완료다. 최소 문구·공개 byte/GLB·기존 승인 경계는 유지한다. PR95 실제 merge42cfa7d의 최신 main에서 새 Story를 시작했다. 아래는 시점별 기록이다.
 
 2026-10-09 [S2.M2 촬영 기하·목 관찰 입력](stories/captured-neck-input.md): 실제 촬영 크기와 original stamp/presence를 보존해 비공개 코칭 evaluator로 연결했다. [작동 흐름·실패·실제/합성 구분](review/captured-neck-input/README.md). 남녀 native 계정/두 모델/기록 회귀와 main/worker 기하 연결을 확인했으며, 공개 byte/최소 문구·GLB·판정/SDK 정책·운영은 유지한다. 실제 사람/올바른 시범/classifier·최종 외형/권리·승인 UI/외부/운영·기존 시작 P2·D2/전체1~6 및 출시 동작0은 여전히 미완료다. PR #94는 실제 merge d3be7ad에서 확인한 기준선이며 그 최신 main에서 별도 Story를 시작했다.
