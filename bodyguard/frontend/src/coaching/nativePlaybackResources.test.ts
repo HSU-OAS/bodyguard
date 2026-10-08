@@ -132,6 +132,13 @@ function setup(
     pair,
     source,
     callbacks,
+    async fire(at: number) {
+      const entry = callbacks.entries().next().value
+      if (!entry) throw new Error('No callback')
+      callbacks.delete(entry[0])
+      entry[1](at)
+      await drain()
+    },
     prepare: () => controller.run({ type: 'request-camera', generation: 1 }),
   }
 }
@@ -177,6 +184,61 @@ function referenceState(generation = 1) {
   }
 }
 describe('optional native reference session binding', () => {
+  it('does not let a retained renderer pair bypass controller cancellation during a borrow', async () => {
+    const f = setup(undefined, undefined, referenceProgram()),
+      gate = deferred<void>()
+    await f.prepare()
+    f.actor.start(1)
+    await f.fire(100)
+    const retained = f.options.render.mock.calls.at(-1)?.[0] as typeof f.pair | undefined
+    expect(retained).toBeDefined()
+    f.source.dispose.mockReturnValueOnce(gate.promise)
+    const closing = f.controller.close()
+    await drain()
+    const before = vi.mocked(f.pair.render).mock.calls.length
+    expect(
+      retained?.updateReference({
+        generation: 1,
+        sequence: 99,
+        at: 110,
+        motionId: 'synthetic',
+        version: '1',
+        stepId: 'hold',
+        phase: 'holding',
+        status: 'running',
+      }),
+    ).toBe(false)
+    retained?.render(110, 10)
+    expect(f.pair.render).toHaveBeenCalledTimes(before)
+    expect(f.pair.updateReference).not.toHaveBeenCalled()
+    gate.resolve()
+    await closing
+    await f.actor.close()
+  })
+  it('defers a future session cue to its first eligible original render stamp and keeps newer pending input', async () => {
+    const f = setup(undefined, undefined, referenceProgram())
+    await f.prepare()
+    f.actor.start(1)
+    expect(f.actor.synchronize(referenceState())).toBe(true)
+    expect(f.pair.updateReference).not.toHaveBeenCalled()
+    await f.fire(90)
+    expect(f.pair.updateReference).not.toHaveBeenCalled()
+    await f.fire(100)
+    expect(f.pair.updateReference).toHaveBeenCalledWith(
+      expect.objectContaining({ at: 100, sequence: 1 }),
+    )
+    expect(
+      f.actor.synchronize({ ...referenceState(), lastNow: 110, phase: 'seeking-target' }),
+    ).toBe(true)
+    expect(f.actor.synchronize(referenceState())).toBe(false)
+    await f.fire(105)
+    expect(f.pair.updateReference).toHaveBeenCalledOnce()
+    await f.fire(110)
+    expect(f.pair.updateReference).toHaveBeenLastCalledWith(
+      expect.objectContaining({ at: 110, sequence: 2, phase: 'seeking-target' }),
+    )
+    await f.actor.close()
+  })
   it('rechecks authority after input getters and never forwards during getter-triggered abort', async () => {
     const f = setup(undefined, undefined, referenceProgram())
     await f.prepare()
@@ -213,12 +275,20 @@ describe('optional native reference session binding', () => {
   it('resets cue sequence for a fresh generation and ignores the retired one', async () => {
     const f = setup(undefined, undefined, referenceProgram())
     await f.prepare()
+    f.actor.start(1)
     expect(f.actor.synchronize(referenceState())).toBe(true)
+    await f.fire(100)
     const next = { ...f.pair, dispose: vi.fn(), updateReference: vi.fn(() => true) }
     vi.mocked(prepareOwnedAvatarPair).mockResolvedValueOnce(next)
+    vi.mocked(createVideoPoseSource).mockReturnValueOnce({
+      read: async () => null,
+      dispose: async () => {},
+    })
     await f.controller.run({ type: 'request-camera', generation: 2 })
     expect(f.actor.synchronize(referenceState())).toBe(false)
     expect(f.actor.synchronize(referenceState(2))).toBe(true)
+    f.actor.start(2)
+    await f.fire(100)
     expect(next.updateReference).toHaveBeenCalledWith(
       expect.objectContaining({ generation: 2, sequence: 1 }),
     )
@@ -252,7 +322,9 @@ describe('optional native reference session binding', () => {
     expect(supplied?.version).toBe('1')
     expect(supplied?.steps[0].clips.holding.tracks[0].values[3]).toBe(1)
     const state = referenceState()
+    f.actor.start(1)
     expect(f.actor.synchronize(state)).toBe(true)
+    await f.fire(100)
     const progressed = advanceCoaching(state, {
       type: 'frame',
       now: 110,
@@ -265,6 +337,7 @@ describe('optional native reference session binding', () => {
     }).state
     const before = JSON.stringify(progressed)
     expect(f.actor.synchronize(progressed)).toBe(true)
+    await f.fire(110)
     expect(JSON.stringify(progressed)).toBe(before)
     expect(vi.mocked(f.pair.updateReference).mock.calls.map(([cue]) => cue)).toEqual([
       {

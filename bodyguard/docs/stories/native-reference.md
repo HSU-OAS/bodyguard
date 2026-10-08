@@ -1,6 +1,6 @@
 # S2.T18 — 로그인 소유 세션의 비공개 시범 연결
 
-Status: 로컬 구현·전체 정적/단위·최초 native14흐름 확인 / 강화 검증·PR 게이트 전 / 단계 완료 아님
+Status: 강화 native 검증에서 시각2건 실패 보존·시간/권한 보완 / 실제 재검증·PR 게이트 전 / 단계 완료 아님
 
 ## 목적·범위
 
@@ -16,6 +16,9 @@ S2.T17의 단계별 시범을 실제 recorded session과 native 소유 pair에 �
 - 실제 세션 onChange의 현재 immutable state에서 generation, motion/version,
   step, phase, status, 원본 lastNow를 전달한다. cue sequence는 세대별 증가한다.
   애니메이션은 관측 시간·성공·기록·반복 횟수·판정을 생성하지 않는다.
+  cue는 현재 RAF보다 늦을 수 있으므로 원본 render 시간이 cue에 도달할 때 전달한다.
+  대기 중 최신 명령을 보존하고 더 오래된 state 시간으로 덮어쓰지 않는다. 두 시각을
+  새로 찍거나 미래 cue 때문에 매 프레임 stale로 재설정하지 않는다.
 - bridge의 현재 controller 권한으로만 pair 명령을 받는다. ready/running만 허용하며
   오래된 세대·준비 중·retiring·abort·closed·poisoned이면 아무 명령도 전달하지 않는다.
   native SDK borrowed frame 회수를 기다리는 lifetime 신호를 권한으로 쓰지 않는다.
@@ -24,6 +27,7 @@ S2.T17의 단계별 시범을 실제 recorded session과 native 소유 pair에 �
 - pause/종료/로그아웃/401/계정 refresh/pagehide/unmount는 즉시 렌더·명령을 차단한다.
   이미 빌린 native frame은 반환 후 닫고, 이후 SDK/카메라/pair를 정확히 한 번 해제한다.
   resume은 새 generation/pair이며 이전 renderer/cue/소유자를 되살리지 않는다.
+  reference 옵션의 renderer에 남은 pair 핸들도 현재 controller 권한으로 재확인한다.
 
 ## 수용 기준·검증 계획
 
@@ -39,8 +43,11 @@ S2.T17의 단계별 시범을 실제 recorded session과 native 소유 pair에 �
    최신 diff/main/충돌/체크/author review 후 조건부 merge commit. 실패 증거 보존.
 
 현재 단위 RED는53통과/6실패, 구현 후59통과, author 경계 보강 후62통과다.
-최초 Chrome14흐름은 통과했으나 시범의 마지막 관절 자세와 제작 클립의 일치 기준을
-추가한 강화 하네스·기존 head/hands 회귀는 아직 재실행 전이다. 수치2e-6은
+최초 Chrome14흐름은 약한 이동 여부 기준으로 통과했지만, 시범의 마지막 관절 자세와
+제작 클립의 일치 기준을 추가하니 runtime8c24d5b에서12통과/2실패했다.
+실제 화면은 시범이 거의 rest에 머물렀다. 미래 cue/RAF 간 정지 반복을 보완했으며
+단위 시간 RED62/1실패→63통과, retained pair 권한 RED63/1실패→64통과다.
+실제 강화 브라우저·기존 head/hands 회귀는 재실행 전이다. 수치2e-6은
 제작 quaternion 부동소수점 비교 허용 오차이며 신체/임상 판정 기준이 아니다.
 
 ## 제외·최종 완료 조건

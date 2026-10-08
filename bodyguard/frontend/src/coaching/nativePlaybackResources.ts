@@ -123,6 +123,8 @@ export function createNativePlaybackResources(options: Options) {
   )
     throw new Error('Invalid native playback resources')
   let cameraError: CameraErrorKind | null = null
+  let pendingCue: ReferenceCue | undefined
+  let issueCommand: (generation: number, action: (pair: Pair) => boolean) => boolean = () => false
   const bridge = createOwnedPlaybackResources({
     async camera(context) {
       cameraError = null
@@ -200,8 +202,8 @@ export function createNativePlaybackResources(options: Options) {
         },
       }
     },
-    avatars: (context) =>
-      prepareOwnedAvatarPair(context, {
+    async avatars(context): Promise<Pair> {
+      const owned = await prepareOwnedAvatarPair(context, {
         load: loadAvatar,
         mirror,
         halfLifeMs,
@@ -217,7 +219,48 @@ export function createNativePlaybackResources(options: Options) {
               },
             }
           : {}),
-      }),
+      })
+      if (!reference) return owned
+      let lastRendered: ReturnType<Pair['render']> | undefined
+      // FR-S-03/04: session clocks may follow the current RAF stamp. Apply only when
+      // the original render time reaches the cue; never restamp either input.
+      return Object.freeze({
+        get models(): Pair['models'] {
+          let models: Pair['models'] = null
+          issueCommand(context.generation, () => {
+            models = owned.models
+            return true
+          })
+          return models
+        },
+        observe: (frame) => issueCommand(context.generation, () => owned.observe(frame)),
+        updateReference: (cue) =>
+          issueCommand(context.generation, () => owned.updateReference(cue)),
+        render(now: number, deltaMs: number) {
+          // FR-U-04: retained renderer handles cannot revive a retired cohort.
+          let result: ReturnType<Pair['render']> = Object.freeze({
+            status: 'untracked',
+            tracked: 0,
+            total: lastRendered?.total ?? 8,
+          })
+          issueCommand(context.generation, () => {
+            const cue = pendingCue
+            if (cue && cue.generation === context.generation && cue.at <= now) {
+              pendingCue = undefined
+              owned.updateReference(cue)
+            }
+            result = owned.render(now, deltaMs)
+            lastRendered = result
+            return true
+          })
+          return result
+        },
+        dispose() {
+          if (pendingCue?.generation === context.generation) pendingCue = undefined
+          owned.dispose()
+        },
+      })
+    },
     source: (context, camera, inference) =>
       hands
         ? createBodyHandVideoSource(context, {
@@ -246,10 +289,12 @@ export function createNativePlaybackResources(options: Options) {
     render,
     onFailure,
   })
+  issueCommand = bridge.command
   // FR-S-03/04·FR-U-04: called with the current immutable state from this owner's session.
   // Snapshot before the final authority check; no animation observation/progress synthesis.
   let referenceGeneration = 0,
-    sequence = 0
+    sequence = 0,
+    lastCueAt = -Infinity
   function synchronize(state: CoachingState): boolean {
     if (!reference) return false
     let generation: number, cue: Omit<ReferenceCue, 'sequence'>
@@ -273,19 +318,33 @@ export function createNativePlaybackResources(options: Options) {
         throw new Error('Invalid native reference state')
       })
     }
-    return bridge.command(generation, (pair) => {
+    return bridge.command(generation, () => {
       if (referenceGeneration !== generation) {
         referenceGeneration = generation
         sequence = 0
+        lastCueAt = -Infinity
       }
-      return pair.updateReference({ ...cue, sequence: ++sequence })
+      if (
+        !Number.isFinite(cue.at) ||
+        cue.at < 0 ||
+        cue.at > Number.MAX_SAFE_INTEGER ||
+        sequence >= Number.MAX_SAFE_INTEGER
+      )
+        throw new Error('Invalid native reference state')
+      if (cue.at < lastCueAt) return false
+      lastCueAt = cue.at
+      pendingCue = Object.freeze({ ...cue, sequence: ++sequence })
+      return true
     })
   }
   return Object.freeze({
     ports: bridge.ports,
     start: bridge.start,
     synchronize,
-    close: bridge.close,
+    close: () => {
+      pendingCue = undefined
+      return bridge.close()
+    },
     getSnapshot: () => Object.freeze({ ...bridge.getSnapshot(), cameraError }),
   })
 }
