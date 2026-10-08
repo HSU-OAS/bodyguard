@@ -1,7 +1,11 @@
 // FR-M-01/02/07·FR-A-01/03·FR-S-02/04/NFR-07/08: native ownership, no public consumer.
+
+import type { HeadDisplayAlignment } from '../avatar/headOrientationRig'
 import { prepareOwnedAvatarPair } from '../avatar/ownedAvatarPair'
+import { createBodyFaceVideoSource } from '../pose/bodyFaceVideoSource'
 import { type CameraErrorKind, cameraErrorKind, closeCamera, openCamera } from '../pose/camera'
 import { POSE_MODELS, type PoseModel } from '../pose/constants'
+import { createFaceLandmarker } from '../pose/face'
 import { createPoseLandmarker } from '../pose/landmarker'
 import { createVideoPoseSource } from '../pose/videoPoseSource'
 import { createOwnedPlaybackResources } from './ownedPlaybackResources'
@@ -16,6 +20,7 @@ type Options = Readonly<{
   mirror: boolean
   halfLifeMs: number
   maxAgeMs: number
+  head?: HeadDisplayAlignment & Readonly<{ matrixLayout: 'column-major' | 'row-major' }>
   scheduler: Bridge['scheduler']
   render(pair: Pair): unknown
   onFailure(notice: Extract<ResourceNotice, { type: 'error' }>): void | Promise<void>
@@ -58,6 +63,28 @@ function ownNative(context: ResourceContext, close: () => void) {
  */
 export function createNativePlaybackResources(options: Options) {
   const { model, loadAvatar, mirror, halfLifeMs, maxAgeMs, scheduler, render, onFailure } = options
+  // Snapshot caller-owned alignment before camera/SDK awaits. Numeric roundoff only,
+  // not a neutral-pose detector, anatomical angle or clinical acceptance threshold.
+  let head: Options['head']
+  try {
+    const requested = options.head
+    if (requested !== undefined) {
+      if (
+        !requested ||
+        !Array.isArray(requested.cameraReference) ||
+        !Array.isArray(requested.sceneFromCamera)
+      )
+        throw new Error()
+      head = Object.freeze({
+        bone: requested.bone,
+        matrixLayout: requested.matrixLayout,
+        cameraReference: Object.freeze(Array.from(requested.cameraReference)),
+        sceneFromCamera: Object.freeze(Array.from(requested.sceneFromCamera)),
+      })
+    }
+  } catch {
+    throw new Error('Invalid native playback resources')
+  }
   if (
     typeof model !== 'string' ||
     !Object.hasOwn(POSE_MODELS, model) ||
@@ -66,7 +93,14 @@ export function createNativePlaybackResources(options: Options) {
     !Number.isFinite(halfLifeMs) ||
     halfLifeMs <= 0 ||
     !Number.isFinite(maxAgeMs) ||
-    maxAgeMs <= 0
+    maxAgeMs <= 0 ||
+    (head &&
+      (head.bone !== 'head' ||
+        (head.matrixLayout !== 'column-major' && head.matrixLayout !== 'row-major') ||
+        [head.cameraReference, head.sceneFromCamera].some(
+          (q) =>
+            q.length !== 4 || !q.every(Number.isFinite) || Math.abs(Math.hypot(...q) - 1) > 1e-5,
+        )))
   )
     throw new Error('Invalid native playback resources')
   let cameraError: CameraErrorKind | null = null
@@ -95,23 +129,75 @@ export function createNativePlaybackResources(options: Options) {
     },
     async inference(context) {
       const native = await createPoseLandmarker(model)
-      const dispose = ownNative(context, () => native.landmarker.close())
+      const disposeBody = ownNative(context, () => native.landmarker.close())
+      let face: Awaited<ReturnType<typeof createFaceLandmarker>> | undefined
+      let disposeFace: (() => void) | undefined
+      try {
+        if (head) {
+          const ownedFace = await createFaceLandmarker()
+          face = ownedFace
+          disposeFace = ownNative(context, () => ownedFace.landmarker.close())
+        }
+      } catch (error) {
+        // Partial initialization still owns the earlier body SDK.
+        disposeBody()
+        throw error
+      }
+      const detectBody = (frame: VideoFrame, at: number) => {
+        context.signal.throwIfAborted()
+        return native.landmarker.detectForVideo(frame, at)
+      }
       return {
-        dispose,
-        detect(frame: VideoFrame, at: number) {
+        dispose() {
+          let failed = false
+          for (const release of [disposeFace, disposeBody]) {
+            try {
+              release?.()
+            } catch {
+              failed = true
+            }
+          }
+          if (failed) throw new ResourceCleanupError()
+        },
+        detect: detectBody,
+        detectBody,
+        detectFace(frame: VideoFrame, at: number) {
           context.signal.throwIfAborted()
-          return native.landmarker.detectForVideo(frame, at)
+          if (!face) throw new Error('Face inference unavailable')
+          return face.landmarker.detectForVideo(frame, at)
         },
       }
     },
     avatars: (context) =>
-      prepareOwnedAvatarPair(context, { load: loadAvatar, mirror, halfLifeMs, maxAgeMs }),
-    source: (context, camera, inference) =>
-      createVideoPoseSource(context, {
-        video: camera.video,
-        stream: camera.stream,
-        detect: inference.detect,
+      prepareOwnedAvatarPair(context, {
+        load: loadAvatar,
+        mirror,
+        halfLifeMs,
+        maxAgeMs,
+        ...(head
+          ? {
+              head: {
+                bone: head.bone,
+                cameraReference: head.cameraReference,
+                sceneFromCamera: head.sceneFromCamera,
+              },
+            }
+          : {}),
       }),
+    source: (context, camera, inference) =>
+      head
+        ? createBodyFaceVideoSource(context, {
+            video: camera.video,
+            stream: camera.stream,
+            detectBody: inference.detectBody,
+            detectFace: inference.detectFace,
+            matrixLayout: head.matrixLayout,
+          })
+        : createVideoPoseSource(context, {
+            video: camera.video,
+            stream: camera.stream,
+            detect: inference.detect,
+          }),
     scheduler,
     render,
     onFailure,
