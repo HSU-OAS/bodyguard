@@ -45,6 +45,7 @@ export function mountNativeHeadAuthProbe(
   withAdaptive = false,
   withTiming = false,
   withTrunk = false,
+  withWorker = false,
 ) {
   if (withTrunk && !withFeedback) throw new Error('Private trunk feedback fixture unavailable')
   if (withAdaptive && (!withFeedback || !withReference))
@@ -451,6 +452,7 @@ export function mountNativeHeadAuthProbe(
     currentReference = reference
     const actor = createNativePlaybackResources({
       model: 'lite',
+      ...(withWorker ? { inferenceThread: 'worker' } : {}),
       mirror: true,
       halfLifeMs: 50,
       maxAgeMs: 250,
@@ -684,6 +686,7 @@ export function mountNativeHeadAuthProbe(
       productionAdapter: true,
       heldStage: held ? (handAlignment ? 'hands' : 'face') : null,
       handsConfigured: Boolean(handAlignment),
+      workerConfigured: withWorker,
       detectorCloses,
       cameraCloses,
       failures: [...failures],

@@ -31,6 +31,8 @@ main 9733e4c에는 PR #15의 순수 코칭 진행 엔진까지 병합됐다. 계
 
 ## 다음 실행 순서
 
+2026-10-09 [S6.11 비공개 Worker 추론](stories/native-worker-inference.md)은 같은 입력의 몸·얼굴·손 처리를 main 밖으로 분리했다. [실제 소유 흐름·실패/한계](review/native-worker-inference/README.md). 기본 main·공개 byte·모델/GLB·최소 문구·판정/SDK 정책/운영 유지. 가짜 카메라/동작 gate를 실제 사람·올바른 시범·최종 외형/권리·D2 통과로 세지 않는다. 기존 시작 P2·승인 공개 구조·참여자/실측·외부/운영·전체1~6 기준을 유지한다.
+
 2026-10-08 [S2.M1](stories/neck-side-observation.md)의 목 동작 관찰 기초는 [실제 비율·반전·가림/신선도·실패/한계](review/neck-observation/README.md)를 검증했다. 이미지 평면 계산값이며 source/현재 소유·실제 사람/관찰자 대조·classifier/임계값·올바른 시범/교정·Q05/06·D2와 전체1~6 통과가 아니다. native/공개 consumer·공개 byte/GLB·조형·SDK/운영 변경0, 출시0·기존 시작 P2·최소 문구·원본/실패·별도 승인 기준을 유지한다. 실제 동작 검증에 필요한 관찰 연결과 참여자 의존성을 다음 작업으로 분리한다.
 
 2026-10-08 [S2.T23](stories/native-trunk-feedback.md)의 비공개 몸통 표시·강조 통합은 [최종 남녀24건 흐름·실패 보존](review/native-trunk/README.md)을 확인했다. spine05 단독의 저작 영향 범위만 표시하며 모델 전체의 한 색상 기준·0기여 중립·가림/만료 해제와 기존 사지 기본 호출을 유지한다. 실제 classifier/사람·개별 척추/골반·최종 외형/권리·승인 공개 UI·SDK/외부/운영·시작 P2·D2/전체1~6은 미완료/출시 동작0이다. 공개 byte·GLB/새 조형·의료 판정·운영 변경0, 최소 문구·원본/실패·별도 승인 기준 유지.

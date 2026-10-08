@@ -121,6 +121,10 @@ for (const file of files) {
     'Invalid avatar feedback',
     'bodyguard-surface-feedback-v1',
     'mountSurfaceFeedbackProbe',
+    'Worker inference unavailable',
+    'createWorkerPoseInference',
+    'mountWorkerPoseProbe',
+    'nativeInference.worker',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }

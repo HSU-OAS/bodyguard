@@ -14,6 +14,7 @@ import { createFaceLandmarker } from '../pose/face'
 import { createGestureRecognizer } from '../pose/hands'
 import { createPoseLandmarker } from '../pose/landmarker'
 import { createVideoPoseSource } from '../pose/videoPoseSource'
+import { createWorkerPoseInference } from '../pose/workerInference'
 import { advanceCoaching, createCoaching } from '../stretch/progression'
 import { createNativePlaybackResources } from './nativePlaybackResources'
 import { createResourceController, ResourceCleanupError } from './resources'
@@ -30,6 +31,7 @@ vi.mock('../pose/bodyFaceVideoSource', () => ({ createBodyFaceVideoSource: vi.fn
 vi.mock('../pose/bodyHandVideoSource', () => ({ createBodyHandVideoSource: vi.fn() }))
 vi.mock('../avatar/ownedAvatarPair', () => ({ prepareOwnedAvatarPair: vi.fn() }))
 vi.mock('../pose/videoPoseSource', () => ({ createVideoPoseSource: vi.fn() }))
+vi.mock('../pose/workerInference', () => ({ createWorkerPoseInference: vi.fn() }))
 function deferred<T>() {
   let resolve!: (value: T) => void
   const promise = new Promise<T>((yes) => {
@@ -56,6 +58,7 @@ function setup(
   reference?: ReferenceProgram,
   feedback?: Parameters<typeof createNativePlaybackResources>[0]['feedback'],
   trunk?: boolean,
+  inferenceThread?: 'main' | 'worker',
 ) {
   const stream = { getTracks: () => [] } as unknown as MediaStream
   const native = {
@@ -75,6 +78,12 @@ function setup(
     updateFeedback: vi.fn(() => true),
   } as unknown as Awaited<ReturnType<typeof prepareOwnedAvatarPair>>
   const source = { read: vi.fn(async () => null), dispose: vi.fn(async () => {}) }
+  const worker = {
+    thread: 'worker' as const,
+    detect: vi.fn(async () => ({ landmarks: [], worldLandmarks: [], close: vi.fn() })),
+    dispose: vi.fn(async () => {}),
+  }
+  vi.mocked(createWorkerPoseInference).mockResolvedValue(worker)
   const face = {
     close: vi.fn(),
     detectForVideo: vi.fn(() => ({ faceLandmarks: [], facialTransformationMatrixes: [] })),
@@ -101,6 +110,7 @@ function setup(
   let id = 0
   const options = {
     model: 'lite' as const,
+    ...(inferenceThread === undefined ? {} : { inferenceThread }),
     mirror: true,
     halfLifeMs: 50,
     maxAgeMs: 250,
@@ -139,6 +149,7 @@ function setup(
     stream,
     pair,
     source,
+    worker,
     callbacks,
     async fire(at: number) {
       const entry = callbacks.entries().next().value
@@ -151,6 +162,49 @@ function setup(
   }
 }
 beforeEach(() => vi.resetAllMocks())
+describe('explicit private worker inference', () => {
+  it.each([false, true])(
+    'snapshots the worker choice with head/hands enabled=%s',
+    async (enabled) => {
+      const f = setup(
+        enabled ? headAlignment('row-major') : undefined,
+        enabled ? handAlignment() : undefined,
+        undefined,
+        undefined,
+        undefined,
+        'worker',
+      )
+      f.options.inferenceThread = 'main'
+      await f.prepare()
+      expect(createWorkerPoseInference).toHaveBeenCalledOnce()
+      expect(vi.mocked(createWorkerPoseInference).mock.calls[0][1]).toEqual({
+        model: 'lite',
+        face: enabled,
+        hands: enabled,
+        matrixLayout: enabled ? 'row-major' : 'column-major',
+      })
+      expect(createPoseLandmarker).not.toHaveBeenCalled()
+      expect(createFaceLandmarker).not.toHaveBeenCalled()
+      expect(createGestureRecognizer).not.toHaveBeenCalled()
+      expect(f.actor.start(1)).toBe(true)
+      const sourceOptions = vi.mocked(createVideoPoseSource).mock.calls[0]?.[1]
+      expect(sourceOptions?.detect).toBe(f.worker.detect)
+      await f.actor.close()
+      await f.controller.close()
+      expect(f.worker.dispose).toHaveBeenCalledOnce()
+    },
+  )
+  it('rejects malformed thread selection before camera or model work', async () => {
+    const f = setup()
+    expect(() =>
+      createNativePlaybackResources({ ...f.options, inferenceThread: 'automatic' as never }),
+    ).toThrow('Invalid native playback resources')
+    expect(openCamera).not.toHaveBeenCalled()
+    expect(createWorkerPoseInference).not.toHaveBeenCalled()
+    await f.actor.close()
+    await f.controller.close()
+  })
+})
 // FR-A-01/03: explicit aggregate display option, copied before async resources.
 describe('native optional trunk display', () => {
   it('rejects a trunk error program before camera/SDK access when display is disabled', () => {

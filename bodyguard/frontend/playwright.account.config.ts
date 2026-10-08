@@ -27,6 +27,7 @@ export default defineConfig({
     'nativehands.spec.ts',
     'nativereference.spec.ts',
     'nativefeedback.spec.ts',
+    'nativeworker.spec.ts',
     'notifications.spec.ts',
     'alertdelivery.spec.ts',
     'ownedalert.spec.ts',
