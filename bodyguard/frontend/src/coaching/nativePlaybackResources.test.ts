@@ -153,6 +153,27 @@ function setup(
 beforeEach(() => vi.resetAllMocks())
 // FR-A-01/03: explicit aggregate display option, copied before async resources.
 describe('native optional trunk display', () => {
+  it('rejects a trunk error program before camera/SDK access when display is disabled', () => {
+    const f = setup()
+    const feedback = {
+      program: {
+        motionId: 'fixture-not-release',
+        version: 'test',
+        regions: [{ id: 'trunk', bones: ['spine05'] }],
+      },
+      evaluate: () => null,
+    }
+    for (const trunk of [false, undefined])
+      expect(() => createNativePlaybackResources({ ...f.options, trunk, feedback })).toThrow(
+        'Invalid native playback resources',
+      )
+    expect(openCamera).not.toHaveBeenCalled()
+    expect(createPoseLandmarker).not.toHaveBeenCalled()
+    expect(prepareOwnedAvatarPair).not.toHaveBeenCalled()
+    expect(() =>
+      createNativePlaybackResources({ ...f.options, trunk: true, feedback }),
+    ).not.toThrow()
+  })
   it.each([true, false, undefined])(
     'passes only explicit trunk=%s to the owned pair',
     async (trunk) => {

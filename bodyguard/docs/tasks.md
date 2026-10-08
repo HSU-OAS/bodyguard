@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-08 [S2.T23](stories/native-trunk-feedback.md): 로그인 소유 native 흐름의 몸통 축·supplied 오류 강조·가림/복구·pause/새 세대·본인 중단 기록을 연결했다. [실제 화면·실패/보완·증거](review/native-trunk/README.md). 최종 Chrome 남녀24·FE1214·정적/type/build/guard·공개 byte/GLB 불변을 확인하고 조건부 PR gate를 진행한다. 실제 사람/올바른 동작·최종 외형/권리·승인 공개 UI·SDK/외부/운영·기존 시작 P2·출시 동작0과 D2/전체1~6 미완료를 유지한다. 최소 텍스트·원본/실패·새 조형0·별도 승인 경계는 그대로다. 아래는 시점별 기록이다.
+
 2026-10-08 [S2.T22 몸통 방향 연결](stories/observed-trunk-swing.md): 같은 어깨·골반 관찰로 사용자 모델의 집계 축 기울기를 연결하고 원본/시범·중간 구조를 보존했다. [실제 남녀 화면·가림/복구·실패·증거](review/observed-trunk/README.md). 개별 척추/골반/비틀림·실제 사람 정확도나 최종 외형이 아니다. 전체 FE1205·Chrome 남녀·정적/build/guard·공개 byte 동일을 확인했고 조건부 PR gate를 진행한다. 출시 동작0·D2/전체1~6·시작P2/승인 UI/실측/SDK/외부·운영 게이트는 미완료다. 최소 텍스트·원본/실패·같은 부위 새 조형0·기존 승인 기준을 유지한다. 아래는 시점별 기록이다.
 
 2026-10-08 [S3.4 보류 동작 자료·검수 목록 연결](stories/motion-source-recovery.md): 어깨 으쓱·이완과 팔 위로 뻗기의 원문을 실제 확인하고 기존 검수 목록 검색→상세/자료→복귀에 연결했다. [실제 화면·실패·증거](review/motion-source-recovery/README.md). 출시 적격0·공개byte/구조·조형/GLB·판정/SDK/운영 변경0이다. PR85는 실제 merge7516c641/[원격 결과](https://github.com/HSU-OAS/bodyguard/pull/85#issuecomment-6058364965)를 확인한 기준선이며 S3.4 조건부 PR gate를 진행한다. 실제 동작별 실측/시범·최종 아바타·승인 공개 UI·참여자/다장치·외부/운영·시작P2 및 전체1~6은 미완료다. 최소 텍스트·기존 원본/실패·같은 부위 새 조형 보류·별도 승인 경계를 유지한다. 아래는 시점별 기록이다.

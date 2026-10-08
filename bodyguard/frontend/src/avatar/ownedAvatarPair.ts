@@ -125,6 +125,11 @@ export async function prepareOwnedAvatarPair(context: ResourceContext, options: 
     if (suppliedReference !== undefined) referenceProgram = copyReferenceProgram(suppliedReference)
     const suppliedFeedback = options.feedback
     if (suppliedFeedback !== undefined) feedbackProgram = copyFeedbackProgram(suppliedFeedback)
+    if (
+      !trunk &&
+      feedbackProgram?.regions.some((region) => region.bones.includes(OBSERVED_TRUNK_BINDING.bone))
+    )
+      throw unavailable()
   } catch {
     throw unavailable()
   }

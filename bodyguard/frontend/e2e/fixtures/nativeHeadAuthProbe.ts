@@ -44,7 +44,9 @@ export function mountNativeHeadAuthProbe(
   withFeedback = false,
   withAdaptive = false,
   withTiming = false,
+  withTrunk = false,
 ) {
+  if (withTrunk && !withFeedback) throw new Error('Private trunk feedback fixture unavailable')
   if (withAdaptive && (!withFeedback || !withReference))
     throw new Error('Private adaptive reference fixture unavailable')
   const timing = withTiming ? nativeStartupTiming(() => performance.now()) : null
@@ -114,6 +116,11 @@ export function mountNativeHeadAuthProbe(
   let currentReference: ReferenceProgram | undefined
   // Generated body fixture comes from authored rest bones, never camera/person data.
   const restJoints = new Map<number, Vector3>()
+  function restPoint(index: number) {
+    const point = restJoints.get(index)
+    if (!point) throw new Error('Private body fixture unavailable')
+    return point
+  }
   const jointNames = [
     ['upperarm01L', 11],
     ['lowerarm01L', 13],
@@ -129,6 +136,23 @@ export function mountNativeHeadAuthProbe(
     ['footR', 28],
   ] as const
   let feedbackCode: 'raised' | 'direction' | 'unknown' = 'raised'
+  // FR-M-07/FR-A-03: generated avatar-bone input only, never a native/clinical positive.
+  let trunkPose: 'side' | 'forward' = 'side',
+    trunkHiddenEndpoint: 11 | 12 | 23 | 24 | null = null,
+    protectedTrunkRest = ''
+  const feedbackRegion = withTrunk ? 'trunk' : 'left-arm'
+  const protectedTrunk = (root: NonNullable<typeof pair>['models']) => {
+    const model = root?.[1]
+    if (!model) return ''
+    const names = ['root', 'pelvisL', 'pelvisR', 'spine04', 'spine03', 'spine02', 'spine01']
+    return JSON.stringify(
+      names.map((name) => {
+        const bone = model.getObjectByName(name) as Bone
+        if (!bone?.isBone) throw new Error('Private trunk structure unavailable')
+        return [bone.position.toArray(), bone.scale.toArray(), bone.quaternion.toArray()]
+      }),
+    )
+  }
   let feedbackMode: 'off' | 'error' | 'crop' | 'multiple' | 'none' = 'off',
     syntheticBodyDeliveries = 0,
     feedbackEvaluations = 0
@@ -250,7 +274,11 @@ export function mountNativeHeadAuthProbe(
           x: 0.5,
           y: 0.5,
           z: 0,
-          visibility: feedbackMode === 'crop' && index === 11 ? 0 : 1,
+          visibility:
+            (feedbackMode === 'crop' && index === (trunkHiddenEndpoint ?? 11)) ||
+            (withTrunk && index === trunkHiddenEndpoint)
+              ? 0
+              : 1,
           presence: 1,
         }))
         const count = feedbackMode === 'multiple' ? 2 : 1
@@ -258,8 +286,20 @@ export function mountNativeHeadAuthProbe(
         if (restJoints.size !== jointNames.length)
           throw new Error('Private body fixture unavailable')
         const world = points.map((point) => ({ ...point, x: 0, y: 0, z: 0 }))
-        for (const [index, position] of restJoints)
-          world[index] = { ...world[index], x: -position.x, y: -position.y, z: -position.z }
+        const origin = withTrunk
+          ? restPoint(23).clone().add(restPoint(24)).multiplyScalar(0.5)
+          : new Vector3()
+        const turn = new Quaternion().setFromAxisAngle(
+          trunkPose === 'side' ? new Vector3(0, 0, 1) : new Vector3(1, 0, 0),
+          0.28,
+        )
+        for (const [index, position] of restJoints) {
+          const value =
+            withTrunk && index < 23
+              ? position.clone().sub(origin).applyQuaternion(turn).add(origin)
+              : position
+          world[index] = { ...world[index], x: -value.x, y: -value.y, z: -value.z }
+        }
         result = {
           landmarks: Array.from({ length: count }, () => points.map((point) => ({ ...point }))),
           worldLandmarks: Array.from({ length: count }, () => world.map((point) => ({ ...point }))),
@@ -394,14 +434,14 @@ export function mountNativeHeadAuthProbe(
             {
               id: 'fixture-relax',
               errorCode: 'raised',
-              regionId: 'left-arm',
+              regionId: feedbackRegion,
               phases: ['waiting-start', 'seeking-target', 'holding', 'waiting-return'],
               clip: step.clips['waiting-start'],
             },
             {
               id: 'fixture-align',
               errorCode: 'direction',
-              regionId: 'left-arm',
+              regionId: feedbackRegion,
               phases: ['waiting-start', 'seeking-target', 'holding', 'waiting-return'],
               clip: step.clips['seeking-target'],
             },
@@ -414,6 +454,7 @@ export function mountNativeHeadAuthProbe(
       mirror: true,
       halfLifeMs: 50,
       maxAgeMs: 250,
+      ...(withTrunk ? { trunk: true } : {}),
       head: {
         bone: 'head',
         matrixLayout: 'column-major',
@@ -428,13 +469,14 @@ export function mountNativeHeadAuthProbe(
               program: {
                 motionId: 'fixture-not-release',
                 version: 'synthetic-session-only',
-                regions: [{ id: 'left-arm', bones: ['upperarm01L'] }],
+                regions: [{ id: feedbackRegion, bones: [withTrunk ? 'spine05' : 'upperarm01L'] }],
               },
               evaluate(frame: PoseRigFrame) {
                 feedbackEvaluations++
                 if (!ownedSession || feedbackMode === 'off') return null
                 // Independent TEST classification and true-shaped gates; never a release rule.
-                const observable = feedbackMode === 'error'
+                const observable =
+                  feedbackMode === 'error' && (!withTrunk || trunkHiddenEndpoint === null)
                 void ownedSession.observe({
                   generation: frame.generation,
                   sequence: frame.sequence,
@@ -448,7 +490,7 @@ export function mountNativeHeadAuthProbe(
                   errors: observable
                     ? [
                         {
-                          regionId: 'left-arm',
+                          regionId: feedbackRegion,
                           severity: 'deviation',
                           ...(withAdaptive ? { code: feedbackCode } : {}),
                         },
@@ -488,6 +530,7 @@ export function mountNativeHeadAuthProbe(
           referenceRest = ref
           userRest = user
           markedReference = ref
+          if (withTrunk) protectedTrunkRest = protectedTrunk(pair.models)
         }
         pair.models.forEach((model, index) => {
           if (model.parent !== scene) {
@@ -573,6 +616,26 @@ export function mountNativeHeadAuthProbe(
         referenceTargetError = Math.max(referenceTargetError, node.quaternion.angleTo(expected))
       }
     }
+    let trunkDirectionError: number | null = null
+    if (withTrunk && models && feedbackMode === 'error' && trunkHiddenEndpoint === null) {
+      const trunkBone = models[1].getObjectByName('spine05'),
+        neckBone = models[1].getObjectByName('neck01')
+      if (!trunkBone || !neckBone) throw new Error('Private trunk structure unavailable')
+      const shoulder = restPoint(11).clone().add(restPoint(12)).multiplyScalar(0.5),
+        hip = restPoint(23).clone().add(restPoint(24)).multiplyScalar(0.5),
+        expected = shoulder
+          .sub(hip)
+          .normalize()
+          .applyQuaternion(
+            new Quaternion().setFromAxisAngle(
+              trunkPose === 'side' ? new Vector3(0, 0, 1) : new Vector3(1, 0, 0),
+              0.28,
+            ),
+          ),
+        base = trunkBone.getWorldPosition(new Vector3()),
+        actual = neckBone.getWorldPosition(new Vector3()).sub(base).normalize()
+      trunkDirectionError = actual.distanceTo(expected)
+    }
     return {
       auth: auth?.state.status ?? 'unmounted',
       hook: hook?.state.status ?? 'unmounted',
@@ -586,6 +649,11 @@ export function mountNativeHeadAuthProbe(
       referenceConfigured: withReference,
       feedbackConfigured: withFeedback,
       adaptiveConfigured: withAdaptive,
+      trunkConfigured: withTrunk,
+      trunkDirectionError,
+      protectedTrunkStructureUnchanged:
+        !withTrunk ||
+        Boolean(models && protectedTrunkRest && protectedTrunk(models) === protectedTrunkRest),
       expectedCorrectionId: intended?.id ?? null,
       feedbackMode,
       syntheticBodyDeliveries,
@@ -688,6 +756,16 @@ export function mountNativeHeadAuthProbe(
       if (!withAdaptive || !['raised', 'direction', 'unknown'].includes(code))
         throw new Error('Private adaptive reference fixture unavailable')
       feedbackCode = code
+    },
+    setTrunkPose(pose: typeof trunkPose) {
+      if (!withTrunk || !['side', 'forward'].includes(pose))
+        throw new Error('Private trunk fixture unavailable')
+      trunkPose = pose
+    },
+    setTrunkHiddenEndpoint(index: typeof trunkHiddenEndpoint) {
+      if (!withTrunk || (index !== null && ![11, 12, 23, 24].includes(index)))
+        throw new Error('Private trunk fixture unavailable')
+      trunkHiddenEndpoint = index
     },
     prepare,
     beginPrepare() {
