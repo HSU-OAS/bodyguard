@@ -156,6 +156,34 @@ describe('bounded native hand candidates', () => {
   })
 })
 describe('same frozen body face and hands input', () => {
+  it('snapshots optional face ports before decoding and rejects a supplied null configuration', async () => {
+    const f = fixture(false)
+    await f.source.dispose()
+    const face = { detectFace: f.detectFace, matrixLayout: 'column-major' as const }
+    const ports = {
+      video: f.video,
+      stream: f.video.srcObject as MediaStream,
+      detectBody: f.detectBody,
+      detectHands: f.detectHands,
+      face,
+    }
+    const source = createBodyHandVideoSource({ generation: 7, signal: f.abort.signal }, ports)
+    face.detectFace = vi.fn(() => {
+      throw new Error('PRIVATE_MUTATED_CALLBACK')
+    })
+    const reading = source.read()
+    f.emit()
+    expect((await reading)?.result.headOrientation).toEqual([0, 0, 0, 1])
+    expect(f.detectFace).toHaveBeenCalledOnce()
+    expect(face.detectFace).not.toHaveBeenCalled()
+    await source.dispose()
+    expect(() =>
+      createBodyHandVideoSource({ generation: 7, signal: f.abort.signal }, {
+        ...ports,
+        face: null,
+      } as never),
+    ).toThrow('Invalid body hand source')
+  })
   it('is inert then copies in order with original stamps before borrowed values are released', async () => {
     const f = fixture(),
       order: string[] = []

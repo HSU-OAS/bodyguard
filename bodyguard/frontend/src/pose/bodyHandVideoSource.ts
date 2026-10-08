@@ -72,14 +72,25 @@ export function readNativeHands(value: NativeHands): readonly HandObservation[] 
  * Body is copied before face, face orientation before hands, hands before body close.
  * JS Face/Gesture results have no close. Raw face matrix/categories never leave here. */
 export function createBodyHandVideoSource(context: ResourceContext, ports: Ports) {
-  const { video, stream, detectBody, detectHands, face } = ports
-  if (
-    typeof detectBody !== 'function' ||
-    typeof detectHands !== 'function' ||
-    (face &&
-      (typeof face.detectFace !== 'function' ||
-        (face.matrixLayout !== 'column-major' && face.matrixLayout !== 'row-major')))
-  )
+  const { video, stream, detectBody, detectHands } = ports
+  let face: Ports['face']
+  try {
+    const requestedFace = ports.face
+    if (requestedFace !== undefined) {
+      if (!requestedFace) throw new Error()
+      const detectFace = requestedFace.detectFace,
+        matrixLayout = requestedFace.matrixLayout
+      if (
+        typeof detectFace !== 'function' ||
+        (matrixLayout !== 'column-major' && matrixLayout !== 'row-major')
+      )
+        throw new Error()
+      face = Object.freeze({ detectFace, matrixLayout })
+    }
+  } catch {
+    throw new Error('Invalid body hand source')
+  }
+  if (typeof detectBody !== 'function' || typeof detectHands !== 'function')
     throw new Error('Invalid body hand source')
   const { signal } = context
   let retiring = false
