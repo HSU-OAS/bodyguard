@@ -31,6 +31,8 @@ export async function mountBodyFaceProbe() {
     increasing = true,
     nullHeads = 0,
     emptyBodies = 0,
+    emptyFaces = 0,
+    plainFaceResults = true,
     headOnlyFields = true
   let bodyInput: VideoFrame | undefined,
     bodyAt = -Infinity,
@@ -72,7 +74,9 @@ export async function mountBodyFaceProbe() {
           inputOpen(frame)
           faceCalls++
           if (frame === bodyInput && at === bodyAt) coherent++
-          const result = face.landmarker.detectForVideo(frame, at)
+        const result = face.landmarker.detectForVideo(frame, at)
+        if (result.faceLandmarks.length === 0) emptyFaces++
+        plainFaceResults &&= !('close' in result)
           if (hold) {
             hold = false
             facePending = true
@@ -88,6 +92,11 @@ export async function mountBodyFaceProbe() {
     )
   }
   function snapshot() {
+    let heldInputOpen = false
+    if (bodyInput) {
+      try { const copy = bodyInput.clone(); copy.close(); heldInputOpen = true }
+      catch { /* Only the fixed open/closed predicate escapes. */ }
+    }
     return {
       closed,
       generation,
@@ -103,6 +112,9 @@ export async function mountBodyFaceProbe() {
       increasing,
       nullHeads,
       emptyBodies,
+      emptyFaces,
+      plainFaceResults,
+      heldInputOpen,
       headOnlyFields,
       facePending,
       cameraLive: stream?.getVideoTracks().every((t) => t.readyState === 'live') ?? false,

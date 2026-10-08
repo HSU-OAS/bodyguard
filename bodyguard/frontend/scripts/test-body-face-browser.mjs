@@ -175,6 +175,8 @@ try {
     assert.equal(state.allInputsClosed, state.bodyCalls)
     assert.equal(state.nullHeads, state.delivered)
     assert.equal(state.emptyBodies, state.delivered)
+    assert.equal(state.emptyFaces, state.faceCalls)
+    assert(state.plainFaceResults && !state.heldInputOpen)
     report.stages.push({ case: 'native-same-frame-missing', ...state })
   }
   await page.evaluate(() => {
@@ -197,7 +199,7 @@ try {
     retired: window.retired,
     ...window.probe.snapshot(),
   }))
-  assert(!pending.retired && pending.facePending && pending.cameraLive)
+  assert(!pending.retired && pending.facePending && pending.cameraLive && pending.heldInputOpen)
   assert.equal(pending.bodyCloses, before.bodyCloses)
   assert.equal(pending.poseCloses, 0)
   assert.equal(pending.faceCloses, 0)
@@ -211,6 +213,7 @@ try {
   assert(!late.accepted)
   assert.equal(late.bodyCloses, late.bodyCalls)
   assert.equal(late.allInputsClosed, late.bodyCalls)
+  assert(!late.heldInputOpen)
   assert.equal(late.delivered, 3)
   report.stages.push({ case: 'late-result-discarded', ...late })
   const resumed = await page.evaluate(() => window.probe.resume())
@@ -224,6 +227,8 @@ try {
   assert.equal(next.bodyCloses, next.bodyCalls)
   assert.equal(next.allInputsClosed, next.bodyCalls)
   assert.equal(next.nullHeads, 4)
+  assert.equal(next.emptyFaces, next.faceCalls)
+  assert(next.plainFaceResults && !next.heldInputOpen)
   report.stages.push({ case: 'native-new-generation', ...next })
   const closed = await page.evaluate(() => window.probe.close())
   assert(closed.closed && closed.tracksEnded && closed.videoDetached)
