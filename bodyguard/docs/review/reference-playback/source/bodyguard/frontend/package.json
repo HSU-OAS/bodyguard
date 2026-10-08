@@ -1,0 +1,50 @@
+{
+  "name": "bodyguard-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@12.6.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "assets": "node scripts/prepare-assets.mjs",
+    "dev": "node scripts/prepare-assets.mjs && vite",
+    "build": "node scripts/prepare-assets.mjs && tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "gen:api": "node scripts/generate-api.mjs",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:selection": "pnpm build && node scripts/check-selection-production.mjs && node scripts/test-selection-browser.mjs",
+    "check": "biome check .",
+    "format": "biome check --write ."
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "~1.0.1",
+    "@react-three/drei": "^10.7.0",
+    "@react-three/fiber": "~9.8.1",
+    "react": "~19.3.0",
+    "react-dom": "~19.3.0",
+    "react-router": "~8.4.0",
+    "three": "~0.186.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.14",
+    "@hey-api/openapi-ts": "0.99.0",
+    "@playwright/test": "^1.63.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.3.3",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@types/three": "~0.186.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "happy-dom": "^20.14.5",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~6.0.3",
+    "vite": "^8.3.1",
+    "vitest": "^5.0.2"
+  }
+}

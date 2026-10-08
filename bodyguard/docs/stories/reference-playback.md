@@ -1,6 +1,6 @@
 # S2.T17 — 단계에 반응하는 비공개 시범 재생
 
-Status: 구현 전 계약·하네스 작성 / 단계 완료 아님
+Status: Story 로컬 구현·검증·author 보완 완료 / PR 게이트 확인 / 단계 완료 아님
 
 ## 목적·범위
 
@@ -54,3 +54,12 @@ S2.T16 이후 최신 main에서 시작한다. 사용자의 관찰 리그와 별�
 최종 외형 승인·원본 재제작·GLB 변형 검수, 실제 캠/참여자·성능·SDK egress,
 승인된 공개 레이아웃과 최종 세로 흐름은 D2 후속 조건으로 남는다.
 0 qualified release motions를 유지한다. 이 Story 통과는 2단계/1~6단계 완료가 아니다.
+
+## 실제 결과
+
+runtime2c24b65의 전체 FE1102·정적/build/guard/Ruff/diff, 실제 Chrome 남녀2흐름,
+Blender 메모리 fixture 재실행을 통과했다. 초기 실패·약한 회귀의 pass·보완 결과를
+[실제 화면/미완료/증거](../review/reference-playback/README.md)에 구분하여 기록했다.
+원본·GLB·공개 JS/CSS·5모델 bytes 동일, 외형/공개 디자인/SDK/임상/운영 변경0.
+다음은 로그인 native 소유 pair에 실제 progression 단계 전달을 비공개로 연결한다.
+출시 시범 근거·사용자/판정/전체1~6 필수 조건을 건너뛰지 않는다.
