@@ -18,8 +18,8 @@ type Ports = Readonly<{
 /** Caller owns both initialized detectors and camera. One decoded VideoFrame remains
  * borrowed through both invocations; dispose is the barrier before closing detectors.
  * FaceResult is plain JS (no close). Raw face points/matrix never leave this boundary.
- * A shared input is NOT evidence of matching people. No head rig/classifier consumes
- * this candidate yet. Explicit layout is a provider contract, not inferred calibration.
+ * A shared input is NOT evidence of matching people. Private display may consume
+ * the copied candidate; no clinical classifier does. Layout is not inferred calibration.
  */
 export function createBodyFaceVideoSource(context: ResourceContext, ports: Ports) {
   const { video, stream, detectBody, detectFace, matrixLayout } = ports

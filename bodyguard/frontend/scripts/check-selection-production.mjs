@@ -94,6 +94,9 @@ for (const file of files) {
     'Invalid body face source',
     'Body face frame unavailable',
     'mountBodyFaceProbe',
+    'mountObservedBodyHead',
+    'createHeadRotationRig',
+    'Private observed body head fixture unavailable',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
