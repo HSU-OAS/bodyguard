@@ -19,4 +19,6 @@
 
 ## 미완료 조건
 
+실행 결과: runtime `af6656e9a8b1345c7e9dafc7fb52d2b3a789b12c`에서 비공개 native 손 start/stop/기록·권한 회수12, 손 비활성 머리 회귀12, 별도 생성 손 표시 남녀2가 작동했다. 전체frontend1068·정적/build/guard/Ruff/diff 통과. [실제 흐름·실패/원본·미완성 미리보기](../review/native-hands/README.md). Story 작성자 리뷰P1/P2=0이며 전체 출시 게이트가 아니다.
+
 실제 손 양성 인식·동일인 연결·신체/얼굴/손 가림/좌표계·물리 카메라·참가자/노트북·최종 외형/권리·승인 디자인·제품 SDK egress·HTTPS/운영은 별도 필수 게이트다. 단계2 및 전체1~6 완료로 표시하지 않는다.
