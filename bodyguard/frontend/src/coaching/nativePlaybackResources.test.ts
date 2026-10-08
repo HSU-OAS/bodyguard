@@ -3,8 +3,10 @@
 
 import { AnimationClip, QuaternionKeyframeTrack } from 'three'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import type { PoseRigFrame } from '../avatar/observedPoseRig'
 import { prepareOwnedAvatarPair } from '../avatar/ownedAvatarPair'
 import type { ReferenceProgram } from '../avatar/referencePlayback'
+import type { FeedbackProgram } from '../avatar/surfaceFeedback'
 import { createBodyFaceVideoSource } from '../pose/bodyFaceVideoSource'
 import { createBodyHandVideoSource } from '../pose/bodyHandVideoSource'
 import { closeCamera, openCamera } from '../pose/camera'
@@ -52,6 +54,7 @@ function setup(
   head?: ReturnType<typeof headAlignment>,
   hands?: ReturnType<typeof handAlignment>,
   reference?: ReferenceProgram,
+  feedback?: Parameters<typeof createNativePlaybackResources>[0]['feedback'],
 ) {
   const stream = { getTracks: () => [] } as unknown as MediaStream
   const native = {
@@ -105,6 +108,7 @@ function setup(
     ...(head ? { head } : {}),
     ...(hands ? { hands } : {}),
     ...(reference ? { reference } : {}),
+    ...(feedback ? { feedback } : {}),
     scheduler: {
       request: vi.fn((cb: (at: number) => void) => {
         callbacks.set(++id, cb)
@@ -144,6 +148,286 @@ function setup(
   }
 }
 beforeEach(() => vi.resetAllMocks())
+// FR-A-01/03·FR-S-03/04: synthetic accepted observations and supplied errors, not clinical rules.
+function feedbackProgram(): FeedbackProgram {
+  return {
+    motionId: 'synthetic',
+    version: '1',
+    regions: [{ id: 'arm', bones: ['upperarm01L'] }],
+  }
+}
+function feedbackFrame(sequence = 1, at = 100): PoseRigFrame {
+  return { generation: 1, sequence, at, result: { landmarks: [], worldLandmarks: [] } }
+}
+function feedbackDecision(frame = feedbackFrame()) {
+  const state = advanceCoaching(referenceState(frame.generation), {
+    type: 'frame',
+    now: frame.at + 1,
+    generation: frame.generation,
+    sampledAt: frame.at,
+    sequence: frame.sequence,
+    personCount: 1,
+    stepId: 'hold',
+    classification: 'unmet',
+  }).state
+  return { state, errors: [{ regionId: 'arm', severity: 'deviation' as const }] }
+}
+describe('native feedback observation and session binding', () => {
+  it('copies settings before awaits and forwards original accepted capture plus current coaching phase', async () => {
+    const program = feedbackProgram(),
+      frame = feedbackFrame(),
+      evaluate = vi.fn((_frame: PoseRigFrame) => feedbackDecision(frame))
+    const f = setup(undefined, undefined, referenceProgram(), { program, evaluate })
+    ;(program.regions as { id: string; bones: string[] }[])[0].id = 'mutated'
+    vi.mocked(f.pair.observe).mockReturnValue(true)
+    f.source.read.mockResolvedValueOnce(frame as never)
+    await f.prepare()
+    f.actor.start(1)
+    await f.fire(100)
+    expect(vi.mocked(prepareOwnedAvatarPair).mock.calls[0][1].feedback).toEqual(feedbackProgram())
+    expect(evaluate).toHaveBeenCalledOnce()
+    expect(evaluate.mock.calls[0]?.[0]).toEqual(frame)
+    expect(f.pair.updateFeedback).toHaveBeenCalledWith({
+      generation: 1,
+      sequence: 1,
+      at: 100,
+      motionId: 'synthetic',
+      version: '1',
+      errors: [{ regionId: 'arm', severity: 'deviation' }],
+    })
+    await f.fire(102)
+    expect(f.pair.updateReference).toHaveBeenLastCalledWith(
+      expect.objectContaining({ at: 101, phase: 'waiting-start' }),
+    )
+    await f.actor.close()
+    await f.controller.close()
+  })
+  it.each(['generation', 'sequence', 'at', 'version', 'status', 'unobservable'] as const)(
+    'rejects %s session mismatch without fabricating progress or errors',
+    async (kind) => {
+      const frame = feedbackFrame(),
+        decision = feedbackDecision(frame)
+      const state = {
+        ...decision.state,
+        ...(kind === 'generation' ? { generation: 2 } : {}),
+        ...(kind === 'sequence' ? { lastSequence: 2 } : {}),
+        ...(kind === 'at' ? { lastSampledAt: 99 } : {}),
+        ...(kind === 'status' ? { status: 'paused' as const } : {}),
+        ...(kind === 'unobservable' ? { lastObservationAt: null } : {}),
+        ...(kind === 'version' ? { plan: { ...decision.state.plan, version: 'old' } } : {}),
+      }
+      const evaluate = vi.fn(() => ({ ...decision, state })),
+        f = setup(undefined, undefined, referenceProgram(), {
+          program: feedbackProgram(),
+          evaluate,
+        })
+      vi.mocked(f.pair.observe).mockReturnValue(true)
+      f.source.read.mockResolvedValueOnce(frame as never)
+      await f.prepare()
+      f.actor.start(1)
+      await f.fire(100)
+      await f.fire(102)
+      expect(evaluate).toHaveBeenCalledOnce()
+      expect(f.pair.updateFeedback).not.toHaveBeenCalled()
+      expect(f.pair.updateReference).not.toHaveBeenCalled()
+      await f.actor.close()
+      await f.controller.close()
+    },
+  )
+  it('does not evaluate a rejected observation and accepts null without synthesizing errors', async () => {
+    const evaluate = vi.fn(() => null),
+      f = setup(undefined, undefined, undefined, { program: feedbackProgram(), evaluate })
+    f.source.read.mockResolvedValueOnce(feedbackFrame() as never)
+    await f.prepare()
+    f.actor.start(1)
+    await f.fire(100)
+    expect(evaluate).not.toHaveBeenCalled()
+    vi.mocked(f.pair.observe).mockReturnValue(true)
+    f.source.read.mockResolvedValueOnce(feedbackFrame(2, 110) as never)
+    await f.fire(110)
+    expect(evaluate).toHaveBeenCalledOnce()
+    expect(f.pair.updateFeedback).not.toHaveBeenCalled()
+    await f.actor.close()
+    await f.controller.close()
+  })
+  it('guards feedback-only retained commands while source disposal is still borrowed', async () => {
+    const evaluate = vi.fn(() => null),
+      f = setup(undefined, undefined, undefined, { program: feedbackProgram(), evaluate }),
+      gate = deferred<void>()
+    await f.prepare()
+    f.actor.start(1)
+    await f.fire(100)
+    const retained = f.options.render.mock.calls.at(-1)?.[0] as typeof f.pair
+    f.source.dispose.mockReturnValueOnce(gate.promise)
+    const closing = f.controller.close()
+    await drain()
+    expect(
+      retained.updateFeedback({
+        generation: 1,
+        sequence: 1,
+        at: 100,
+        motionId: 'synthetic',
+        version: '1',
+        errors: [],
+      }),
+    ).toBe(false)
+    expect(retained.observe(feedbackFrame())).toBe(false)
+    expect(evaluate).not.toHaveBeenCalled()
+    expect(f.pair.updateFeedback).not.toHaveBeenCalled()
+    gate.resolve()
+    await closing
+    await f.actor.close()
+  })
+  it('drops a decision whose callback retires the controller', async () => {
+    let cancel = () => {},
+      evaluate = vi.fn(() => {
+        cancel()
+        return feedbackDecision()
+      })
+    const f = setup(undefined, undefined, referenceProgram(), {
+      program: feedbackProgram(),
+      evaluate,
+    })
+    cancel = () => {
+      void f.controller.close()
+    }
+    vi.mocked(f.pair.observe).mockReturnValue(true)
+    f.source.read.mockResolvedValueOnce(feedbackFrame() as never)
+    await f.prepare()
+    f.actor.start(1)
+    await f.fire(100)
+    expect(evaluate).toHaveBeenCalledOnce()
+    expect(f.pair.updateFeedback).not.toHaveBeenCalled()
+    expect(f.pair.updateReference).not.toHaveBeenCalled()
+    await f.controller.close()
+    await f.actor.close()
+  })
+  it('keeps a newer reentrant observation instead of the older supplied decision', async () => {
+    let retained: typeof f.pair | undefined
+    const evaluate = vi.fn((frame: PoseRigFrame) => {
+      if (frame.sequence === 1) retained?.observe(feedbackFrame(2, 101))
+      return feedbackDecision(frame)
+    })
+    const f = setup(undefined, undefined, referenceProgram(), {
+      program: feedbackProgram(),
+      evaluate,
+    })
+    f.options.render.mockImplementation((pair: unknown) => {
+      retained = pair as typeof f.pair
+    })
+    vi.mocked(f.pair.observe).mockReturnValue(true)
+    f.source.read.mockResolvedValueOnce(feedbackFrame() as never)
+    await f.prepare()
+    f.actor.start(1)
+    await f.fire(100)
+    expect(evaluate).toHaveBeenCalledTimes(2)
+    expect(f.pair.updateFeedback).toHaveBeenCalledOnce()
+    expect(f.pair.updateFeedback).toHaveBeenLastCalledWith(
+      expect.objectContaining({ sequence: 2, at: 101 }),
+    )
+    await f.actor.close()
+    await f.controller.close()
+  })
+  it.each(['throw', 'promise'] as const)(
+    'bounds %s evaluation and closes rather than forwarding native/private errors',
+    async (kind) => {
+      const evaluate = vi.fn(() => {
+        if (kind === 'throw') throw new Error('PRIVATE_FEEDBACK')
+        return Promise.reject(new Error('PRIVATE_FEEDBACK'))
+      })
+      const f = setup(undefined, undefined, undefined, {
+        program: feedbackProgram(),
+        evaluate: evaluate as never,
+      })
+      vi.mocked(f.pair.observe).mockReturnValue(true)
+      f.source.read.mockResolvedValueOnce(feedbackFrame() as never)
+      await f.prepare()
+      f.actor.start(1)
+      await f.fire(100)
+      expect(f.options.onFailure).toHaveBeenCalledWith(
+        expect.objectContaining({ type: 'error', reason: 'asset-error' }),
+      )
+      expect(JSON.stringify(f.options.onFailure.mock.calls)).not.toContain('PRIVATE_FEEDBACK')
+      expect(f.pair.updateFeedback).not.toHaveBeenCalled()
+      await f.actor.close()
+      await f.controller.close()
+      expect(f.native.close).toHaveBeenCalledOnce()
+    },
+  )
+  it.each(['callback', 'errors-getter'] as const)(
+    'does not retire a newer reentrant observation when the older %s throws',
+    async (kind) => {
+      let retained: typeof f.pair | undefined
+      const evaluate = vi.fn((frame: PoseRigFrame) => {
+        const decision = feedbackDecision(frame)
+        if (frame.sequence !== 1) return decision
+        const replaced = () => {
+          retained?.observe(feedbackFrame(2, 101))
+          throw new Error('PRIVATE_OLD_DECISION')
+        }
+        if (kind === 'callback') return replaced()
+        Object.defineProperty(decision, 'errors', { get: replaced })
+        return decision
+      })
+      const f = setup(undefined, undefined, referenceProgram(), {
+        program: feedbackProgram(),
+        evaluate,
+      })
+      f.options.render.mockImplementation((pair: unknown) => {
+        retained = pair as typeof f.pair
+      })
+      vi.mocked(f.pair.observe).mockReturnValue(true)
+      f.source.read.mockResolvedValueOnce(feedbackFrame() as never)
+      await f.prepare()
+      f.actor.start(1)
+      await f.fire(100)
+      expect(f.options.onFailure).not.toHaveBeenCalled()
+      expect(f.actor.getSnapshot().status).toBe('running')
+      expect(f.pair.updateFeedback).toHaveBeenCalledOnce()
+      expect(f.pair.updateFeedback).toHaveBeenLastCalledWith(
+        expect.objectContaining({ sequence: 2, at: 101 }),
+      )
+      await f.actor.close()
+      await f.controller.close()
+    },
+  )
+  it('rejects malformed feedback settings before touching any camera', async () => {
+    const f = setup()
+    expect(() =>
+      createNativePlaybackResources({
+        ...f.options,
+        feedback: { program: { ...feedbackProgram(), version: '' }, evaluate: () => null },
+      }),
+    ).toThrow('Invalid native playback resources')
+    expect(openCamera).not.toHaveBeenCalled()
+  })
+  it.each(['phase', 'step', 'age'] as const)(
+    'never highlights with an invalid current %s field',
+    async (kind) => {
+      const frame = feedbackFrame(),
+        decision = feedbackDecision(frame)
+      const state = {
+        ...decision.state,
+        ...(kind === 'phase' ? { phase: 'invalid' as never } : {}),
+        ...(kind === 'step' ? { stepIndex: -1 } : {}),
+        ...(kind === 'age' ? { plan: { ...decision.state.plan, maxFrameAgeMs: NaN } } : {}),
+      }
+      const f = setup(undefined, undefined, referenceProgram(), {
+        program: feedbackProgram(),
+        evaluate: () => ({ ...decision, state }),
+      })
+      vi.mocked(f.pair.observe).mockReturnValue(true)
+      f.source.read.mockResolvedValueOnce(frame as never)
+      await f.prepare()
+      f.actor.start(1)
+      await f.fire(100)
+      expect(f.pair.updateFeedback).not.toHaveBeenCalled()
+      expect(f.pair.updateReference).not.toHaveBeenCalled()
+      await f.actor.close()
+      await f.controller.close()
+    },
+  )
+})
 // FR-S-03/04: authored program + actual progression state, no clinical defaults.
 function referenceProgram(): ReferenceProgram {
   const clip = () =>

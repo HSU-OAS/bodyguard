@@ -6,9 +6,11 @@ import type { mountNativeHeadAuthProbe } from './fixtures/nativeHeadAuthProbe'
 
 const origin = 'http://localhost:4173'
 const mailbox = process.env.BODYGUARD_TEST_MAILBOX
-const withReference = Boolean(process.env.BODYGUARD_TEST_NATIVE_REFERENCE_PROBE)
+const withFeedback = Boolean(process.env.BODYGUARD_TEST_NATIVE_FEEDBACK_PROBE)
+const withReference = withFeedback || Boolean(process.env.BODYGUARD_TEST_NATIVE_REFERENCE_PROBE)
 const withHands = withReference || Boolean(process.env.BODYGUARD_TEST_NATIVE_HANDS_PROBE)
 const bundle =
+  process.env.BODYGUARD_TEST_NATIVE_FEEDBACK_PROBE ??
   process.env.BODYGUARD_TEST_NATIVE_REFERENCE_PROBE ??
   process.env.BODYGUARD_TEST_NATIVE_HANDS_PROBE ??
   process.env.BODYGUARD_TEST_NATIVE_HEAD_PROBE
@@ -16,11 +18,13 @@ if (
   !mailbox?.startsWith('/private/tmp/bodyguard-browser-') ||
   !bundle ||
   !(
-    withReference
-      ? /^\/private\/tmp\/bodyguard-native-reference-proof\.[A-Za-z0-9]+\/probe-[a-z0-9-]+$/
-      : withHands
-        ? /^\/private\/tmp\/bodyguard-native-hands-proof\.[A-Za-z0-9]+\/probe$/
-        : /^\/private\/tmp\/bodyguard-native-body-head-proof\.[A-Za-z0-9]+\/probe$/
+    withFeedback
+      ? /^\/private\/tmp\/bodyguard-native-feedback-proof\.[A-Za-z0-9]+\/probe-[a-z0-9-]+$/
+      : withReference
+        ? /^\/private\/tmp\/bodyguard-native-reference-proof\.[A-Za-z0-9]+\/probe-[a-z0-9-]+$/
+        : withHands
+          ? /^\/private\/tmp\/bodyguard-native-hands-proof\.[A-Za-z0-9]+\/probe$/
+          : /^\/private\/tmp\/bodyguard-native-body-head-proof\.[A-Za-z0-9]+\/probe$/
   ).test(bundle)
 )
   throw new Error('Owned native auth harness required')
@@ -93,6 +97,14 @@ test.beforeEach(async ({ context, page }) => {
   })
 })
 test.afterEach(async ({ page, browser }, info) => {
+  const beforeClose = await page.evaluate(() => {
+    const p = (window as unknown as PrivateWindow).nativeAuthProbe
+    return p ? p.snapshot() : null
+  })
+  writeFileSync(
+    info.outputPath('before-close.json'),
+    JSON.stringify({ stages, beforeClose }, null, 2),
+  )
   const final = await page.evaluate(async () => {
     const p = (window as unknown as PrivateWindow).nativeAuthProbe
     return p ? await p.close() : null
@@ -182,7 +194,7 @@ async function mount(page: Page, gender: 'male' | 'female') {
   await page.goto('/start')
   await expect(page.getByRole('heading', { name: '내 몸을 위한 시작', exact: true })).toBeVisible()
   await page.evaluate(
-    async ({ gender, withHands, withReference }) => {
+    async ({ gender, withHands, withReference, withFeedback }) => {
       const path = '/__private-native-head-probe.js'
       const module = (await import(path)) as {
         mountNativeHeadAuthProbe: typeof mountNativeHeadAuthProbe
@@ -204,9 +216,10 @@ async function mount(page: Page, gender: 'male' | 'female') {
             }
           : undefined,
         withReference,
+        withFeedback,
       )
     },
-    { gender, withHands, withReference },
+    { gender, withHands, withReference, withFeedback },
   )
   await expect
     .poll(() => state(page))
@@ -288,6 +301,73 @@ async function release(page: Page) {
   expect(posts).toBe(0)
 }
 for (const gender of ['male', 'female'] as const) {
+  if (withFeedback)
+    test(`${gender} native delivery→current session→surface feedback→crop/multiple/none→recovery`, async ({
+      page,
+      context,
+    }, info) => {
+      await join(context)
+      await mount(page, gender)
+      await running(page)
+      await page.evaluate(() =>
+        (window as unknown as PrivateWindow).nativeAuthProbe.setFeedbackMode('error'),
+      )
+      await expect
+        .poll(() => state(page))
+        .toMatchObject({
+          highlighted: true,
+          feedbackConfigured: true,
+          canvasHidden: false,
+          verifiedMs: 0,
+          phase: 'seeking-target',
+        })
+      const highlighted = await mark(page, 'generated-native-error-with-current-owner-state')
+      expect(highlighted.syntheticBodyDeliveries).toBeGreaterThan(0)
+      expect(highlighted.feedbackEvaluations).toBeGreaterThan(0)
+      await expect
+        .poll(() =>
+          page.evaluate(
+            () => (window as unknown as PrivateWindow).nativeAuthProbe.pixelCounts().right,
+          ),
+        )
+        .toBeGreaterThan(0)
+      const pixels = await page.evaluate(() =>
+        (window as unknown as PrivateWindow).nativeAuthProbe.pixelCounts(),
+      )
+      expect(pixels).toMatchObject({ sampled: true, left: 0, error: 0 })
+      writeFileSync(info.outputPath('feedback-pixels.json'), JSON.stringify(pixels))
+      await page
+        .locator('#native-avatar')
+        .screenshot({ path: info.outputPath(`feedback-${gender}-error.png`) })
+      for (const mode of ['crop', 'multiple', 'none'] as const) {
+        const previous = (await state(page)).feedbackEvaluations
+        await page.evaluate(
+          (mode) => (window as unknown as PrivateWindow).nativeAuthProbe.setFeedbackMode(mode),
+          mode,
+        )
+        await expect
+          .poll(async () => (await state(page)).feedbackEvaluations)
+          .toBeGreaterThan(previous)
+        await expect.poll(() => state(page)).toMatchObject({ highlighted: false, verifiedMs: 0 })
+        await expect
+          .poll(() =>
+            page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.pixelCounts()),
+          )
+          .toMatchObject({ sampled: true, left: 0, right: 0, error: 0 })
+        await mark(page, `generated-${mode}-no-highlight-or-pass`)
+        await page.evaluate(() =>
+          (window as unknown as PrivateWindow).nativeAuthProbe.setFeedbackMode('error'),
+        )
+        await expect.poll(() => state(page)).toMatchObject({ highlighted: true, verifiedMs: 0 })
+      }
+      await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.pause())
+      expect(await state(page)).toMatchObject({ models: 0, tracksEnded: true, verifiedMs: 0 })
+      await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.resume())
+      await expect
+        .poll(() => state(page))
+        .toMatchObject({ sessionGeneration: 2, highlighted: true, verifiedMs: 0 })
+      await mark(page, 'fresh-native-generation-new-error-not-old-frame')
+    })
   if (withReference)
     test(`${gender} actual owned phase→pause→fresh generation reference`, async ({
       page,
@@ -444,6 +524,14 @@ for (const gender of ['male', 'female'] as const) {
       await join(context)
       await mount(page, gender)
       await running(page)
+      if (withFeedback) {
+        await page.evaluate(() =>
+          (window as unknown as PrivateWindow).nativeAuthProbe.setFeedbackMode('error'),
+        )
+        await expect
+          .poll(() => state(page))
+          .toMatchObject({ highlighted: true, canvasHidden: false, verifiedMs: 0 })
+      }
       await hold(page)
       if (revocation === 'logout')
         await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.signOut())
@@ -461,6 +549,8 @@ for (const gender of ['male', 'female'] as const) {
         await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.unmount())
       else await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent('pagehide')))
       await expect.poll(() => state(page)).toMatchObject({ owned: false })
+      if (withFeedback)
+        expect(await state(page)).toMatchObject({ canvasHidden: true, highlighted: false })
       if (revocation !== 'unmount') expect((await state(page)).hook).toBe('idle')
       await revokedWhileHeld(page)
       await release(page)

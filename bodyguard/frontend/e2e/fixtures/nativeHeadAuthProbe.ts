@@ -14,11 +14,14 @@ import {
   PlaneGeometry,
   Quaternion,
   Scene,
+  type SkinnedMesh,
+  Vector3,
   WebGLRenderer,
 } from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { AuthProvider, useAuth } from '../../src/auth'
 import type { HandDisplayAlignment } from '../../src/avatar/observedHandRig'
+import type { PoseRigFrame } from '../../src/avatar/observedPoseRig'
 import type { prepareOwnedAvatarPair } from '../../src/avatar/ownedAvatarPair'
 import type { ReferenceProgram } from '../../src/avatar/referencePlayback'
 import { createNativePlaybackResources } from '../../src/coaching/nativePlaybackResources'
@@ -37,6 +40,7 @@ export function mountNativeHeadAuthProbe(
   gender: 'male' | 'female',
   handAlignment?: HandDisplayAlignment,
   withReference = false,
+  withFeedback = false,
 ) {
   const scene = new Scene()
   scene.background = new Color('#ffffff')
@@ -44,7 +48,11 @@ export function mountNativeHeadAuthProbe(
   const light = new DirectionalLight('#ffffff', 2)
   light.position.set(-2, 3, 3)
   scene.add(light)
-  const renderer = new WebGLRenderer({ canvas, antialias: true })
+  const renderer = new WebGLRenderer({
+    canvas,
+    antialias: true,
+    preserveDrawingBuffer: withFeedback,
+  })
   renderer.setSize(1440, 900, false)
   const view = new OrthographicCamera(-1.65, 1.65, 1.03, -1.03, 0.1, 10)
   view.position.set(0, 0.8, 4)
@@ -93,6 +101,25 @@ export function mountNativeHeadAuthProbe(
     pair: Awaited<ReturnType<typeof prepareOwnedAvatarPair>> | undefined
   const failures: { generation: number; reason: string }[] = []
   let currentReference: ReferenceProgram | undefined
+  // Generated body fixture comes from authored rest bones, never camera/person data.
+  const restJoints = new Map<number, Vector3>()
+  const jointNames = [
+    ['upperarm01L', 11],
+    ['lowerarm01L', 13],
+    ['wristL', 15],
+    ['upperarm01R', 12],
+    ['lowerarm01R', 14],
+    ['wristR', 16],
+    ['upperleg01L', 23],
+    ['lowerleg01L', 25],
+    ['footL', 27],
+    ['upperleg01R', 24],
+    ['lowerleg01R', 26],
+    ['footR', 28],
+  ] as const
+  let feedbackMode: 'off' | 'error' | 'crop' | 'multiple' | 'none' = 'off',
+    syntheticBodyDeliveries = 0,
+    feedbackEvaluations = 0
   let oldState: CoachingState | null = null,
     referenceRest = '',
     userRest = '',
@@ -161,8 +188,33 @@ export function mountNativeHeadAuthProbe(
     value(this: PoseLandmarker, input: VideoFrame, at: number) {
       nativeCalls++
       bodyStamps.set(input, at)
-      const result = bodyDetect.call(this, input, at, {})
+      let result = bodyDetect.call(this, input, at, {})
       nativePeopleMax = Math.max(nativePeopleMax, result.landmarks.length)
+      // TEST ONLY: native blank stays separately counted. Replace final JS arrays with generated
+      // positive/cropped/multiple inputs; not actual SDK detection, human tracking or clinical proof.
+      if (withFeedback && ['error', 'crop', 'multiple'].includes(feedbackMode)) {
+        const points = Array.from({ length: 33 }, (_, index) => ({
+          x: 0.5,
+          y: 0.5,
+          z: 0,
+          visibility: feedbackMode === 'crop' && index === 11 ? 0 : 1,
+          presence: 1,
+        }))
+        const count = feedbackMode === 'multiple' ? 2 : 1
+        const nativeResult = result
+        if (restJoints.size !== jointNames.length)
+          throw new Error('Private body fixture unavailable')
+        const world = points.map((point) => ({ ...point, x: 0, y: 0, z: 0 }))
+        for (const [index, position] of restJoints)
+          world[index] = { ...world[index], x: -position.x, y: -position.y, z: -position.z }
+        result = {
+          landmarks: Array.from({ length: count }, () => points.map((point) => ({ ...point }))),
+          worldLandmarks: Array.from({ length: count }, () => world.map((point) => ({ ...point }))),
+          segmentationMasks: nativeResult.segmentationMasks,
+          close: () => nativeResult.close(),
+        }
+        syntheticBodyDeliveries++
+      }
       const release = result.close.bind(result)
       result.close = () => {
         nativeCloses++
@@ -241,6 +293,13 @@ export function mountNativeHeadAuthProbe(
     useLayoutEffect(() => {
       hook = latestHook
       auth = latestAuth
+      // Fixture caller hides its canvas on authority loss immediately, before borrowed cleanup.
+      if (withFeedback)
+        canvas.hidden =
+          latestAuth.state.status !== 'ready' || latestHook.state.status !== 'prepared'
+      return () => {
+        if (withFeedback) canvas.hidden = true
+      }
     })
     return null
   }
@@ -254,7 +313,9 @@ export function mountNativeHeadAuthProbe(
     prepareFinished = false
     let ownedSession: Session | null = null
     const nextId = crypto.randomUUID()
-    const reference = withReference ? await nativeReferenceProgram(gender) : undefined
+    const reference = withReference
+      ? (currentReference ?? (await nativeReferenceProgram(gender)))
+      : undefined
     currentReference = reference
     const actor = createNativePlaybackResources({
       model: 'lite',
@@ -269,6 +330,35 @@ export function mountNativeHeadAuthProbe(
       },
       ...(handAlignment ? { hands: handAlignment } : {}),
       ...(reference ? { reference } : {}),
+      ...(withFeedback
+        ? {
+            feedback: {
+              program: {
+                motionId: 'fixture-not-release',
+                version: 'synthetic-session-only',
+                regions: [{ id: 'left-arm', bones: ['upperarm01L'] }],
+              },
+              evaluate(frame: PoseRigFrame) {
+                feedbackEvaluations++
+                if (!ownedSession || feedbackMode === 'off') return null
+                // Independent TEST classification and true-shaped gates; never a release rule.
+                const observable = feedbackMode === 'error'
+                void ownedSession.observe({
+                  generation: frame.generation,
+                  sequence: frame.sequence,
+                  sampledAt: frame.at,
+                  personCount: frame.result.landmarks?.length ?? 0,
+                  stepId: 'synthetic-hold',
+                  classification: observable ? 'start' : 'unobservable',
+                })
+                return {
+                  state: ownedSession.getSnapshot().state,
+                  errors: observable ? [{ regionId: 'left-arm', severity: 'deviation' }] : [],
+                }
+              },
+            },
+          }
+        : {}),
       loadAvatar: async () =>
         (await new GLTFLoader().loadAsync(`/__private-native-${gender}.glb`)).scene,
       scheduler: {
@@ -279,6 +369,15 @@ export function mountNativeHeadAuthProbe(
         pair = ownedPair
         if (!pair.models) throw new Error('Private native fixture unavailable')
         if (pair.models[0].parent !== scene) {
+          if (withFeedback) {
+            restJoints.clear()
+            pair.models[1].updateWorldMatrix(true, true)
+            for (const [name, index] of jointNames) {
+              const bone = pair.models[1].getObjectByName(name) as Bone
+              if (!bone?.isBone) throw new Error('Private body fixture unavailable')
+              restJoints.set(index, bone.getWorldPosition(new Vector3()))
+            }
+          }
           const [ref, user] = turns(pair.models)
           referenceRest = ref
           userRest = user
@@ -338,6 +437,14 @@ export function mountNativeHeadAuthProbe(
   function snapshot() {
     const models = pair?.models
     const [ref, user] = turns(models ?? null)
+    let highlighted = false
+    models?.[1].traverse((node) => {
+      const mesh = node as SkinnedMesh
+      if (mesh.isSkinnedMesh) {
+        const mask = mesh.geometry.getAttribute('bodyguardFeedbackWeight')
+        if (mask && Array.from(mask.array).some((value) => value > 0)) highlighted = true
+      }
+    })
     let referenceTargetError: number | null = null
     const phase = session?.getSnapshot().state.phase
     const clip = phase ? currentReference?.steps[0].clips[phase] : undefined
@@ -362,6 +469,12 @@ export function mountNativeHeadAuthProbe(
       verifiedMs: session?.getSnapshot().state.progress[0].verifiedMs ?? 0,
       phase: session?.getSnapshot().state.phase ?? null,
       referenceConfigured: withReference,
+      feedbackConfigured: withFeedback,
+      feedbackMode,
+      syntheticBodyDeliveries,
+      feedbackEvaluations,
+      highlighted,
+      canvasHidden: canvas.hidden,
       referenceMoved: Boolean(ref && ref !== referenceRest),
       userUnchanged: Boolean(user && user === userRest),
       referenceFrozen: Boolean(ref && ref === markedReference),
@@ -430,6 +543,29 @@ export function mountNativeHeadAuthProbe(
   }
   return Object.freeze({
     snapshot,
+    pixelCounts() {
+      // Test-only authored avatar canvas. Return counts, never raw pixels or camera imagery.
+      if (!withFeedback || canvas.hidden || !pair?.models)
+        return { sampled: false, left: 0, right: 0, error: 0 }
+      const gl = renderer.getContext(),
+        bytes = new Uint8Array(1440 * 900 * 4)
+      gl.readPixels(0, 0, 1440, 900, gl.RGBA, gl.UNSIGNED_BYTE, bytes)
+      let left = 0,
+        right = 0
+      for (let pixel = 0; pixel < 1440 * 900; pixel++) {
+        const i = pixel * 4
+        if (bytes[i] > bytes[i + 1] + 10 && bytes[i] > bytes[i + 2] + 5) {
+          if (pixel % 1440 < 720) left++
+          else right++
+        }
+      }
+      return { sampled: true, left, right, error: gl.getError() }
+    },
+    setFeedbackMode(mode: typeof feedbackMode) {
+      if (!withFeedback || !['off', 'error', 'crop', 'multiple', 'none'].includes(mode))
+        throw new Error('Invalid private feedback mode')
+      feedbackMode = mode
+    },
     prepare,
     beginPrepare() {
       pendingPreparation = prepare()

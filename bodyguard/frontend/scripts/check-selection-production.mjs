@@ -113,6 +113,7 @@ for (const file of files) {
     'mountReferenceProbe',
     'Private native reference fixture unavailable',
     'Invalid native reference state',
+    'Invalid native feedback state',
     'Invalid avatar feedback',
     'bodyguard-surface-feedback-v1',
     'mountSurfaceFeedbackProbe',
