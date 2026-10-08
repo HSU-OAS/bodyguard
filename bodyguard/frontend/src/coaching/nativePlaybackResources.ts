@@ -1,11 +1,14 @@
 // FR-M-01/02/07·FR-A-01/03·FR-S-02/04/NFR-07/08: native ownership, no public consumer.
 
 import type { HeadDisplayAlignment } from '../avatar/headOrientationRig'
+import { copyHandAlignment, type HandDisplayAlignment } from '../avatar/observedHandRig'
 import { prepareOwnedAvatarPair } from '../avatar/ownedAvatarPair'
 import { createBodyFaceVideoSource } from '../pose/bodyFaceVideoSource'
+import { createBodyHandVideoSource } from '../pose/bodyHandVideoSource'
 import { type CameraErrorKind, cameraErrorKind, closeCamera, openCamera } from '../pose/camera'
 import { POSE_MODELS, type PoseModel } from '../pose/constants'
 import { createFaceLandmarker } from '../pose/face'
+import { createGestureRecognizer } from '../pose/hands'
 import { createPoseLandmarker } from '../pose/landmarker'
 import { createVideoPoseSource } from '../pose/videoPoseSource'
 import { createOwnedPlaybackResources } from './ownedPlaybackResources'
@@ -21,6 +24,7 @@ type Options = Readonly<{
   halfLifeMs: number
   maxAgeMs: number
   head?: HeadDisplayAlignment & Readonly<{ matrixLayout: 'column-major' | 'row-major' }>
+  hands?: HandDisplayAlignment
   scheduler: Bridge['scheduler']
   render(pair: Pair): unknown
   onFailure(notice: Extract<ResourceNotice, { type: 'error' }>): void | Promise<void>
@@ -66,7 +70,10 @@ export function createNativePlaybackResources(options: Options) {
   // Snapshot caller-owned alignment before camera/SDK awaits. Numeric roundoff only,
   // not a neutral-pose detector, anatomical angle or clinical acceptance threshold.
   let head: Options['head']
+  let hands: HandDisplayAlignment | undefined
   try {
+    const requestedHands = options.hands
+    if (requestedHands !== undefined) hands = copyHandAlignment(requestedHands)
     const requested = options.head
     if (requested !== undefined) {
       if (
@@ -134,15 +141,33 @@ export function createNativePlaybackResources(options: Options) {
       const disposeBody = ownNative(context, () => native.landmarker.close())
       let face: Awaited<ReturnType<typeof createFaceLandmarker>> | undefined
       let disposeFace: (() => void) | undefined
+      let gesture: Awaited<ReturnType<typeof createGestureRecognizer>> | undefined
+      let disposeHands: (() => void) | undefined
+      function disposeInference() {
+        let failed = false
+        for (const release of [disposeHands, disposeFace, disposeBody]) {
+          try {
+            release?.()
+          } catch {
+            failed = true
+          }
+        }
+        if (failed) throw new ResourceCleanupError()
+      }
       try {
         if (head) {
           const ownedFace = await createFaceLandmarker()
           face = ownedFace
           disposeFace = ownNative(context, () => ownedFace.landmarker.close())
         }
+        if (hands) {
+          const ownedHands = await createGestureRecognizer()
+          gesture = ownedHands
+          disposeHands = ownNative(context, () => ownedHands.recognizer.close())
+        }
       } catch (error) {
-        // Partial initialization still owns the earlier body SDK.
-        disposeBody()
+        // Attempt every earlier release, even when one close failed.
+        disposeInference()
         throw error
       }
       const detectBody = (frame: VideoFrame, at: number) => {
@@ -150,23 +175,18 @@ export function createNativePlaybackResources(options: Options) {
         return native.landmarker.detectForVideo(frame, at)
       }
       return {
-        dispose() {
-          let failed = false
-          for (const release of [disposeFace, disposeBody]) {
-            try {
-              release?.()
-            } catch {
-              failed = true
-            }
-          }
-          if (failed) throw new ResourceCleanupError()
-        },
+        dispose: disposeInference,
         detect: detectBody,
         detectBody,
         detectFace(frame: VideoFrame, at: number) {
           context.signal.throwIfAborted()
           if (!face) throw new Error('Face inference unavailable')
           return face.landmarker.detectForVideo(frame, at)
+        },
+        detectHands(frame: VideoFrame, at: number) {
+          context.signal.throwIfAborted()
+          if (!gesture) throw new Error('Hand inference unavailable')
+          return gesture.recognizer.recognizeForVideo(frame, at)
         },
       }
     },
@@ -176,6 +196,7 @@ export function createNativePlaybackResources(options: Options) {
         mirror,
         halfLifeMs,
         maxAgeMs,
+        ...(hands ? { hands } : {}),
         ...(head
           ? {
               head: {
@@ -187,19 +208,29 @@ export function createNativePlaybackResources(options: Options) {
           : {}),
       }),
     source: (context, camera, inference) =>
-      head
-        ? createBodyFaceVideoSource(context, {
+      hands
+        ? createBodyHandVideoSource(context, {
             video: camera.video,
             stream: camera.stream,
             detectBody: inference.detectBody,
-            detectFace: inference.detectFace,
-            matrixLayout: head.matrixLayout,
+            detectHands: inference.detectHands,
+            ...(head
+              ? { face: { detectFace: inference.detectFace, matrixLayout: head.matrixLayout } }
+              : {}),
           })
-        : createVideoPoseSource(context, {
-            video: camera.video,
-            stream: camera.stream,
-            detect: inference.detect,
-          }),
+        : head
+          ? createBodyFaceVideoSource(context, {
+              video: camera.video,
+              stream: camera.stream,
+              detectBody: inference.detectBody,
+              detectFace: inference.detectFace,
+              matrixLayout: head.matrixLayout,
+            })
+          : createVideoPoseSource(context, {
+              video: camera.video,
+              stream: camera.stream,
+              detect: inference.detect,
+            }),
     scheduler,
     render,
     onFailure,

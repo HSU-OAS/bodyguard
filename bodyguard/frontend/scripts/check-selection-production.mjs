@@ -103,6 +103,11 @@ for (const file of files) {
     'createObservedHandRig',
     'mountHandsProbe',
     'Private hand fixture unavailable',
+    'Invalid body hand source',
+    'Body hand frame unavailable',
+    'Hand inference unavailable',
+    'readNativeHands',
+    'createBodyHandVideoSource',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -135,5 +140,6 @@ console.log(
     unconnected_head_orientation_strings: 0,
     unconnected_body_face_frame_strings: 0,
     unconnected_native_head_auth_strings: 0,
+    unconnected_native_hand_frame_strings: 0,
   }),
 )

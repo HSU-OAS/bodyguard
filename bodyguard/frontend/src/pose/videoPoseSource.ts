@@ -176,10 +176,12 @@ export function createVideoPoseSource(
         resultClose = result.close
         if (!owns()) throw new Error('Video capture unavailable')
         const headOrientation = result.headOrientation
+        const hands = result.hands
         return {
           landmarks: result.landmarks,
           worldLandmarks: result.worldLandmarks,
           ...(headOrientation === undefined ? {} : { headOrientation }),
+          ...(hands === undefined ? {} : { hands }),
           close: finish,
         }
       } catch (error) {

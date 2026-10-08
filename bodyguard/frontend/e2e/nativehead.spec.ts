@@ -6,11 +6,17 @@ import type { mountNativeHeadAuthProbe } from './fixtures/nativeHeadAuthProbe'
 
 const origin = 'http://localhost:4173'
 const mailbox = process.env.BODYGUARD_TEST_MAILBOX
-const bundle = process.env.BODYGUARD_TEST_NATIVE_HEAD_PROBE
+const withHands = Boolean(process.env.BODYGUARD_TEST_NATIVE_HANDS_PROBE)
+const bundle =
+  process.env.BODYGUARD_TEST_NATIVE_HANDS_PROBE ?? process.env.BODYGUARD_TEST_NATIVE_HEAD_PROBE
 if (
   !mailbox?.startsWith('/private/tmp/bodyguard-browser-') ||
   !bundle ||
-  !/^\/private\/tmp\/bodyguard-native-body-head-proof\.[A-Za-z0-9]+\/probe$/.test(bundle)
+  !(
+    withHands
+      ? /^\/private\/tmp\/bodyguard-native-hands-proof\.[A-Za-z0-9]+\/probe$/
+      : /^\/private\/tmp\/bodyguard-native-body-head-proof\.[A-Za-z0-9]+\/probe$/
+  ).test(bundle)
 )
   throw new Error('Owned native auth harness required')
 type Probe = ReturnType<typeof mountNativeHeadAuthProbe>
@@ -96,6 +102,9 @@ test.afterEach(async ({ page, browser }, info) => {
     expect(final.sameInput).toBe(true)
     expect(final.faceCalls).toBe(final.nativeCalls)
     expect(final.faceDetectorCloses).toBe(final.cameras)
+    expect(final.handCalls).toBe(withHands ? final.nativeCalls : 0)
+    expect(final.handDetectorCloses).toBe(withHands ? final.cameras : 0)
+    expect(final.nativeHandsMax).toBe(0)
     expect(final.productionAdapter).toBe(true)
     expect(final.cameraCloses).toBe(final.cameras)
     expect(final.detectorCloses).toBe(final.cameras)
@@ -103,7 +112,7 @@ test.afterEach(async ({ page, browser }, info) => {
     expect(final.failures).toEqual([])
     expect(final.memory).toEqual(final.baseline)
   }
-  const file = info.outputPath('native-head-summary.json')
+  const file = info.outputPath(withHands ? 'native-hands-summary.json' : 'native-head-summary.json')
   writeFileSync(
     file,
     `${JSON.stringify(
@@ -160,22 +169,32 @@ async function mark(page: Page, name: string) {
 async function mount(page: Page, gender: 'male' | 'female') {
   await page.goto('/start')
   await expect(page.getByRole('heading', { name: '내 몸을 위한 시작', exact: true })).toBeVisible()
-  await page.evaluate(async (gender) => {
-    const path = '/__private-native-head-probe.js'
-    const module = (await import(path)) as {
-      mountNativeHeadAuthProbe: typeof mountNativeHeadAuthProbe
-    }
-    const text = document.createElement('p')
-    text.textContent = '미완성 A37 · 가짜 카메라 · native 계정 시험 · 코칭 아님'
-    document.body.append(text)
-    const canvas = document.createElement('canvas')
-    canvas.id = 'native-avatar'
-    document.body.append(canvas)
-    ;(window as unknown as PrivateWindow).nativeAuthProbe = module.mountNativeHeadAuthProbe(
-      canvas,
-      gender,
-    )
-  }, gender)
+  await page.evaluate(
+    async ({ gender, withHands }) => {
+      const path = '/__private-native-head-probe.js'
+      const module = (await import(path)) as {
+        mountNativeHeadAuthProbe: typeof mountNativeHeadAuthProbe
+      }
+      const text = document.createElement('p')
+      text.textContent = '미완성 A37 · 가짜 카메라 · native 계정 시험 · 코칭 아님'
+      document.body.append(text)
+      const canvas = document.createElement('canvas')
+      canvas.id = 'native-avatar'
+      document.body.append(canvas)
+      ;(window as unknown as PrivateWindow).nativeAuthProbe = module.mountNativeHeadAuthProbe(
+        canvas,
+        gender,
+        // Synthetic display basis only. A blank fake camera cannot calibrate anatomy.
+        withHands
+          ? {
+              cameraReferences: { left: [0, 0, 0, 1], right: [0, 0, 0, 1] },
+              sceneFromCamera: [0, 0, 0, 1],
+            }
+          : undefined,
+      )
+    },
+    { gender, withHands },
+  )
   await expect
     .poll(() => state(page))
     .toMatchObject({ auth: 'ready', hook: 'idle', cameras: 0, nativeCalls: 0, renderFrames: 0 })
@@ -197,14 +216,18 @@ async function running(page: Page) {
   expect(value.models).toBe(2)
   expect(value.framing).toEqual([true, true])
   expect(value.cameraLive && value.rawVideoHidden).toBe(true)
+  expect(value.handsConfigured).toBe(withHands)
+  expect(value.handCalls).toBe(withHands ? value.nativeCalls : 0)
+  expect(value.nativeHandsMax).toBe(0)
 }
 async function hold(page: Page) {
   await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.holdNextResult())
   await expect.poll(() => state(page)).toMatchObject({ held: true })
   const value = await mark(page, 'native-result-held')
   expect(value.nativeCloses).toBe(value.nativeCalls - 1)
-  expect(value.heldStage).toBe('face')
+  expect(value.heldStage).toBe(withHands ? 'hands' : 'face')
   expect(value.faceCalls).toBe(value.nativeCalls)
+  expect(value.handCalls).toBe(withHands ? value.nativeCalls : 0)
 }
 async function revokedWhileHeld(page: Page) {
   const value = await mark(page, 'authority-revoked-while-native-held')
@@ -220,6 +243,8 @@ async function revokedWhileHeld(page: Page) {
     nativeCalls: calls,
     detectorCloses: 0,
     faceDetectorCloses: 0,
+    handDetectorCloses: 0,
+    handCalls: value.handCalls,
     faceCalls: value.faceCalls,
     cameraCloses: 0,
   })
@@ -237,6 +262,7 @@ async function release(page: Page) {
       tracksEnded: true,
       detectorCloses: 1,
       faceDetectorCloses: 1,
+      handDetectorCloses: withHands ? 1 : 0,
       cameraCloses: 1,
       models: 0,
     })
@@ -277,6 +303,9 @@ for (const gender of ['male', 'female'] as const) {
     expect(closed.sameInput).toBe(true)
     expect(closed.faceCalls).toBe(closed.nativeCalls)
     expect(closed.faceDetectorCloses).toBe(closed.cameras)
+    expect(closed.handCalls).toBe(withHands ? closed.nativeCalls : 0)
+    expect(closed.handDetectorCloses).toBe(withHands ? closed.cameras : 0)
+    expect(closed.nativeHandsMax).toBe(0)
     expect(closed.nativeFacesMax).toBe(0)
     expect(closed.productionAdapter).toBe(true)
     expect(closed.memory).toEqual(closed.baseline)

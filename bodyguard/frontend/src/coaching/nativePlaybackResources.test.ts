@@ -3,8 +3,10 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { prepareOwnedAvatarPair } from '../avatar/ownedAvatarPair'
 import { createBodyFaceVideoSource } from '../pose/bodyFaceVideoSource'
+import { createBodyHandVideoSource } from '../pose/bodyHandVideoSource'
 import { closeCamera, openCamera } from '../pose/camera'
 import { createFaceLandmarker } from '../pose/face'
+import { createGestureRecognizer } from '../pose/hands'
 import { createPoseLandmarker } from '../pose/landmarker'
 import { createVideoPoseSource } from '../pose/videoPoseSource'
 import { createNativePlaybackResources } from './nativePlaybackResources'
@@ -17,7 +19,9 @@ vi.mock('../pose/camera', async (original) => ({
 }))
 vi.mock('../pose/landmarker', () => ({ createPoseLandmarker: vi.fn() }))
 vi.mock('../pose/face', () => ({ createFaceLandmarker: vi.fn() }))
+vi.mock('../pose/hands', () => ({ createGestureRecognizer: vi.fn() }))
 vi.mock('../pose/bodyFaceVideoSource', () => ({ createBodyFaceVideoSource: vi.fn() }))
+vi.mock('../pose/bodyHandVideoSource', () => ({ createBodyHandVideoSource: vi.fn() }))
 vi.mock('../avatar/ownedAvatarPair', () => ({ prepareOwnedAvatarPair: vi.fn() }))
 vi.mock('../pose/videoPoseSource', () => ({ createVideoPoseSource: vi.fn() }))
 function deferred<T>() {
@@ -36,7 +40,11 @@ const headAlignment = (matrixLayout: 'column-major' | 'row-major' = 'column-majo
   cameraReference: [0, 0, 0, 1],
   sceneFromCamera: [0, 0, 0, 1],
 })
-function setup(head?: ReturnType<typeof headAlignment>) {
+const handAlignment = () => ({
+  cameraReferences: { left: [0, 0, 0, 1], right: [0, 0, 0, 1] },
+  sceneFromCamera: [0, 0, 0, 1],
+})
+function setup(head?: ReturnType<typeof headAlignment>, hands?: ReturnType<typeof handAlignment>) {
   const stream = { getTracks: () => [] } as unknown as MediaStream
   const native = {
     close: vi.fn(),
@@ -59,12 +67,21 @@ function setup(head?: ReturnType<typeof headAlignment>) {
   const loadedFace = { landmarker: face, delegate: 'CPU' } as unknown as Awaited<
     ReturnType<typeof createFaceLandmarker>
   >
+  const gesture = {
+    close: vi.fn(),
+    recognizeForVideo: vi.fn(() => ({ landmarks: [], worldLandmarks: [], handedness: [] })),
+  }
+  const loadedHands = { recognizer: gesture, delegate: 'CPU' } as unknown as Awaited<
+    ReturnType<typeof createGestureRecognizer>
+  >
   vi.mocked(openCamera).mockResolvedValue(stream)
   vi.mocked(createPoseLandmarker).mockResolvedValue(loaded)
   vi.mocked(createFaceLandmarker).mockResolvedValue(loadedFace)
+  vi.mocked(createGestureRecognizer).mockResolvedValue(loadedHands)
   vi.mocked(prepareOwnedAvatarPair).mockResolvedValue(pair)
   vi.mocked(createVideoPoseSource).mockReturnValue(source)
   vi.mocked(createBodyFaceVideoSource).mockReturnValue(source)
+  vi.mocked(createBodyHandVideoSource).mockReturnValue(source)
   const callbacks = new Map<number, (at: number) => void>()
   let id = 0
   const options = {
@@ -76,6 +93,7 @@ function setup(head?: ReturnType<typeof headAlignment>) {
     render: vi.fn(),
     onFailure: vi.fn(),
     ...(head ? { head } : {}),
+    ...(hands ? { hands } : {}),
     scheduler: {
       request: vi.fn((cb: (at: number) => void) => {
         callbacks.set(++id, cb)
@@ -98,6 +116,8 @@ function setup(head?: ReturnType<typeof headAlignment>) {
     native,
     face,
     loadedFace,
+    gesture,
+    loadedHands,
     stream,
     pair,
     source,
@@ -112,6 +132,7 @@ describe('native playback adapter', () => {
     expect(openCamera).not.toHaveBeenCalled()
     expect(createPoseLandmarker).not.toHaveBeenCalled()
     expect(createFaceLandmarker).not.toHaveBeenCalled()
+    expect(createGestureRecognizer).not.toHaveBeenCalled()
     expect(f.actor.getSnapshot().cameraError).toBeNull()
     for (const change of [
       { model: 'constructor' },
@@ -150,6 +171,8 @@ describe('native playback adapter', () => {
     expect(createPoseLandmarker).toHaveBeenCalledWith('lite')
     expect(createFaceLandmarker).not.toHaveBeenCalled()
     expect(createBodyFaceVideoSource).not.toHaveBeenCalled()
+    expect(createBodyHandVideoSource).not.toHaveBeenCalled()
+    expect(createGestureRecognizer).not.toHaveBeenCalled()
     const [video] = vi.mocked(openCamera).mock.calls[0]
     expect(video.hidden && video.muted && video.playsInline).toBe(true)
     expect(video.isConnected).toBe(false)
@@ -392,5 +415,128 @@ describe('native playback adapter', () => {
     expect(f.face.close).toHaveBeenCalledTimes(1)
     expect(f.native.close).toHaveBeenCalledTimes(1)
     expect(closeCamera).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe('optional native hand ownership', () => {
+  it.each([false, true])(
+    'copies hands before awaits and binds all configured instances (face=%s)',
+    async (withFace) => {
+      const hands = handAlignment(),
+        f = setup(withFace ? headAlignment() : undefined, hands)
+      hands.cameraReferences.left[3] = 99
+      hands.cameraReferences.right[0] = 99
+      hands.sceneFromCamera[1] = 99
+      await f.prepare()
+      expect(createGestureRecognizer).toHaveBeenCalledOnce()
+      expect(createFaceLandmarker).toHaveBeenCalledTimes(withFace ? 1 : 0)
+      expect(prepareOwnedAvatarPair).toHaveBeenCalledWith(
+        expect.anything(),
+        expect.objectContaining({ hands: handAlignment() }),
+      )
+      expect(f.actor.start(1)).toBe(true)
+      const ports = vi.mocked(createBodyHandVideoSource).mock.calls[0][1],
+        input = {} as VideoFrame
+      ports.detectBody(input, 100)
+      ports.detectHands(input, 100)
+      expect(f.gesture.recognizeForVideo).toHaveBeenCalledWith(input, 100)
+      expect(f.gesture.recognizeForVideo.mock.contexts[0]).toBe(f.gesture)
+      if (withFace) {
+        ports.face?.detectFace(input, 100)
+        expect(ports.face?.matrixLayout).toBe('column-major')
+        expect(f.face.detectForVideo.mock.contexts[0]).toBe(f.face)
+      } else expect(ports).not.toHaveProperty('face')
+      expect(createBodyFaceVideoSource).not.toHaveBeenCalled()
+      await f.actor.close()
+      expect(f.gesture.close).toHaveBeenCalledOnce()
+      expect(f.native.close).toHaveBeenCalledOnce()
+      expect(f.face.close).toHaveBeenCalledTimes(withFace ? 1 : 0)
+      expect(closeCamera).toHaveBeenCalledOnce()
+      expect(() => ports.detectHands(input, 101)).toThrow()
+    },
+  )
+  it('rejects invalid hand alignment without acquiring camera or SDK', () => {
+    const f = setup()
+    for (const hands of [
+      null,
+      {},
+      { ...handAlignment(), sceneFromCamera: [0, 0, 0, 0] },
+      { ...handAlignment(), cameraReferences: { left: [0, NaN, 0, 1] } },
+    ])
+      expect(() => createNativePlaybackResources({ ...f.options, hands } as never)).toThrow(
+        'Invalid native playback resources',
+      )
+    expect(openCamera).not.toHaveBeenCalled()
+    expect(createGestureRecognizer).not.toHaveBeenCalled()
+  })
+  it('reclaims both earlier SDKs after hand initialization fails even when face close throws', async () => {
+    const f = setup(headAlignment(), handAlignment())
+    vi.mocked(createGestureRecognizer).mockRejectedValueOnce(new Error('PRIVATE_HAND_INIT'))
+    f.face.close.mockImplementation(() => {
+      throw new Error('PRIVATE_FACE_CLOSE')
+    })
+    await f.prepare()
+    await expect(f.actor.close()).rejects.toBeInstanceOf(ResourceCleanupError)
+    expect(f.face.close).toHaveBeenCalledOnce()
+    expect(f.native.close).toHaveBeenCalledOnce()
+    expect(closeCamera).toHaveBeenCalledOnce()
+    expect(prepareOwnedAvatarPair).not.toHaveBeenCalled()
+    expect(f.actor.getSnapshot().poisoned).toBe(true)
+  })
+  it('does not initialize hands after face failure', async () => {
+    const f = setup(headAlignment(), handAlignment())
+    vi.mocked(createFaceLandmarker).mockRejectedValueOnce(new Error('PRIVATE_FACE_INIT'))
+    await f.prepare()
+    await f.actor.close()
+    expect(createGestureRecognizer).not.toHaveBeenCalled()
+    expect(f.native.close).toHaveBeenCalledOnce()
+  })
+  it('closes a late hand SDK once after cancellation and keeps camera cleanup', async () => {
+    const f = setup(headAlignment(), handAlignment()),
+      gate = deferred<typeof f.loadedHands>()
+    vi.mocked(createGestureRecognizer).mockReturnValueOnce(gate.promise)
+    const preparing = f.prepare()
+    await drain()
+    const closing = f.actor.close()
+    await drain()
+    expect(f.native.close).toHaveBeenCalledOnce()
+    expect(f.face.close).toHaveBeenCalledOnce()
+    gate.resolve(f.loadedHands)
+    await preparing
+    await closing
+    expect(f.gesture.close).toHaveBeenCalledOnce()
+    expect(closeCamera).toHaveBeenCalledOnce()
+    expect(prepareOwnedAvatarPair).not.toHaveBeenCalled()
+  })
+  it.each(['body', 'face', 'hands'] as const)(
+    'attempts all release operations after %s close failure',
+    async (stage) => {
+      const f = setup(headAlignment(), handAlignment())
+      await f.prepare()
+      const native = stage === 'body' ? f.native : stage === 'face' ? f.face : f.gesture
+      native.close.mockImplementation(() => {
+        throw new Error('PRIVATE_SDK_CLOSE')
+      })
+      await expect(f.actor.close()).rejects.toBeInstanceOf(ResourceCleanupError)
+      await expect(f.actor.close()).rejects.toBeInstanceOf(ResourceCleanupError)
+      for (const sdk of [f.native, f.face, f.gesture]) expect(sdk.close).toHaveBeenCalledOnce()
+      expect(closeCamera).toHaveBeenCalledOnce()
+      expect(f.actor.getSnapshot().poisoned).toBe(true)
+    },
+  )
+  it('holds three SDKs and camera until pending source disposal returns', async () => {
+    const f = setup(headAlignment(), handAlignment()),
+      gate = deferred<void>()
+    f.source.dispose.mockReturnValueOnce(gate.promise)
+    await f.prepare()
+    expect(f.actor.start(1)).toBe(true)
+    const closing = f.actor.close()
+    await drain()
+    for (const sdk of [f.native, f.face, f.gesture]) expect(sdk.close).not.toHaveBeenCalled()
+    expect(closeCamera).not.toHaveBeenCalled()
+    gate.resolve()
+    await closing
+    for (const sdk of [f.native, f.face, f.gesture]) expect(sdk.close).toHaveBeenCalledOnce()
+    expect(closeCamera).toHaveBeenCalledOnce()
   })
 })
