@@ -3,6 +3,11 @@
 import type { HeadDisplayAlignment } from '../avatar/headOrientationRig'
 import { copyHandAlignment, type HandDisplayAlignment } from '../avatar/observedHandRig'
 import { prepareOwnedAvatarPair } from '../avatar/ownedAvatarPair'
+import {
+  copyReferenceProgram,
+  type ReferenceCue,
+  type ReferenceProgram,
+} from '../avatar/referencePlayback'
 import { createBodyFaceVideoSource } from '../pose/bodyFaceVideoSource'
 import { createBodyHandVideoSource } from '../pose/bodyHandVideoSource'
 import { type CameraErrorKind, cameraErrorKind, closeCamera, openCamera } from '../pose/camera'
@@ -11,6 +16,7 @@ import { createFaceLandmarker } from '../pose/face'
 import { createGestureRecognizer } from '../pose/hands'
 import { createPoseLandmarker } from '../pose/landmarker'
 import { createVideoPoseSource } from '../pose/videoPoseSource'
+import type { CoachingState } from '../stretch/progression'
 import { createOwnedPlaybackResources } from './ownedPlaybackResources'
 import { ResourceCleanupError, type ResourceContext, type ResourceNotice } from './resources'
 
@@ -25,6 +31,7 @@ type Options = Readonly<{
   maxAgeMs: number
   head?: HeadDisplayAlignment & Readonly<{ matrixLayout: 'column-major' | 'row-major' }>
   hands?: HandDisplayAlignment
+  reference?: ReferenceProgram
   scheduler: Bridge['scheduler']
   render(pair: Pair): unknown
   onFailure(notice: Extract<ResourceNotice, { type: 'error' }>): void | Promise<void>
@@ -71,7 +78,10 @@ export function createNativePlaybackResources(options: Options) {
   // not a neutral-pose detector, anatomical angle or clinical acceptance threshold.
   let head: Options['head']
   let hands: HandDisplayAlignment | undefined
+  let reference: ReferenceProgram | undefined
   try {
+    const requestedReference = options.reference
+    if (requestedReference !== undefined) reference = copyReferenceProgram(requestedReference)
     const requestedHands = options.hands
     if (requestedHands !== undefined) hands = copyHandAlignment(requestedHands)
     const requested = options.head
@@ -197,6 +207,7 @@ export function createNativePlaybackResources(options: Options) {
         halfLifeMs,
         maxAgeMs,
         ...(hands ? { hands } : {}),
+        ...(reference ? { reference } : {}),
         ...(head
           ? {
               head: {
@@ -235,9 +246,45 @@ export function createNativePlaybackResources(options: Options) {
     render,
     onFailure,
   })
+  // FR-S-03/04·FR-U-04: called with the current immutable state from this owner's session.
+  // Snapshot before the final authority check; no animation observation/progress synthesis.
+  let referenceGeneration = 0,
+    sequence = 0
+  function synchronize(state: CoachingState): boolean {
+    if (!reference) return false
+    let generation: number, cue: Omit<ReferenceCue, 'sequence'>
+    try {
+      generation = state.generation
+    } catch {
+      return false
+    }
+    try {
+      cue = {
+        generation,
+        at: state.lastNow,
+        motionId: state.plan.motionId,
+        version: state.plan.version,
+        stepId: state.plan.steps[state.stepIndex]?.id ?? '',
+        phase: state.phase,
+        status: state.status,
+      }
+    } catch {
+      return bridge.command(generation, () => {
+        throw new Error('Invalid native reference state')
+      })
+    }
+    return bridge.command(generation, (pair) => {
+      if (referenceGeneration !== generation) {
+        referenceGeneration = generation
+        sequence = 0
+      }
+      return pair.updateReference({ ...cue, sequence: ++sequence })
+    })
+  }
   return Object.freeze({
     ports: bridge.ports,
     start: bridge.start,
+    synchronize,
     close: bridge.close,
     getSnapshot: () => Object.freeze({ ...bridge.getSnapshot(), cameraError }),
   })
