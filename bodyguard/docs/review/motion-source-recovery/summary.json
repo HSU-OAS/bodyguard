@@ -1,0 +1,85 @@
+{
+  "date": "2026-10-08",
+  "base": "7516c641c011a752413368dd14006a16254655c4",
+  "unit": {
+    "passed": 1179,
+    "failed": 0,
+    "pending": 0
+  },
+  "browser": {
+    "startTime": "2026-10-08T11:18:35.312Z",
+    "duration": 17405.85,
+    "expected": 10,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "actualAuth": false,
+  "actualHumanCamera": false,
+  "qualifiedReleaseMotions": 0,
+  "developmentCandidates": 7,
+  "publicAssets": [
+    {
+      "name": "index-dNUNBpCv.css",
+      "bytes": 31199,
+      "sha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e",
+      "identicalToPR85": true
+    },
+    {
+      "name": "index-x57--wa1.js",
+      "bytes": 355151,
+      "sha256": "b5d4f81164c8d3c196e853b3404382bc15077986aa626cd0c3c72571b6325ac0",
+      "identicalToPR85": true
+    }
+  ],
+  "sourceHashes": {
+    "bodyguard/frontend/src/catalog/motions.ts": "e64c9c8548090ab4922e467f80d25ef5dd879dc26b18021655e47a73ef4499c9",
+    "bodyguard/frontend/src/catalog/motions.test.ts": "6138659162542e2908fc3fc60a7ac035e4e0da5b625f43e9639793ea7fcb8abd",
+    "bodyguard/frontend/e2e/selection.spec.ts": "79fc3931195943f5068c5481cae12334a5901bb20bd9f2a13439cda1facc5094",
+    "bodyguard/frontend/scripts/check-selection-production.mjs": "53166358796a4f413c2930eb3575387f2db9cefd182eeabf510192095c8bd7f1"
+  },
+  "checks": {
+    "unit-green": {
+      "exit": 0,
+      "started": "2026-10-08T11:17:11.428Z",
+      "finished": "2026-10-08T11:17:12.102Z"
+    },
+    "unit-final": {
+      "exit": 0,
+      "started": "2026-10-08T11:18:56.950Z",
+      "finished": "2026-10-08T11:19:07.168Z"
+    },
+    "types-final": {
+      "exit": 0,
+      "started": "2026-10-08T11:18:59.287Z",
+      "finished": "2026-10-08T11:19:10.420Z"
+    },
+    "code-check-final": {
+      "exit": 0,
+      "started": "2026-10-08T11:18:58.228Z",
+      "finished": "2026-10-08T11:18:59.093Z"
+    },
+    "production-build-final": {
+      "exit": 0,
+      "started": "2026-10-08T11:18:04.213Z",
+      "finished": "2026-10-08T11:18:04.887Z"
+    },
+    "production-guard": {
+      "exit": 0,
+      "started": "2026-10-08T11:18:29.763Z",
+      "finished": "2026-10-08T11:18:29.828Z"
+    },
+    "browser-first": {
+      "exit": 0,
+      "started": "2026-10-08T11:18:34.015Z",
+      "finished": "2026-10-08T11:18:52.752Z"
+    }
+  },
+  "browserObservations": {
+    "count": 10,
+    "cameraCalls": 0,
+    "storageWrites": 0,
+    "actualAuth": false,
+    "actualHumanCamera": false
+  }
+}

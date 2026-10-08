@@ -1,4 +1,4 @@
-// FR-S-01/06: first documented candidate; development-only, not a released exercise.
+// FR-S-01/06: source-matched development candidates, never released by source access alone.
 export type Region = 'all' | 'neck' | 'shoulder' | 'torso'
 export type Motion = Readonly<{
   id: string
@@ -87,6 +87,31 @@ export const previewMotions: readonly Motion[] = Object.freeze([
     observationLimit:
       '정면에서 깊이 방향 이동과 숙임을 구별하기 어렵습니다. 측면 실측 전 자동 교정·성공·타이머를 제공하지 않습니다.',
   }),
+  // FR-S-01: CUH neck-sprain advice, shrug/relax only; no rehab prescription copied.
+  freezeMotion({
+    id: 'shoulder-shrug',
+    title: '어깨 으쓱·이완',
+    region: 'shoulder',
+    regionLabel: '어깨',
+    summary: '양쪽 어깨를 부드럽게 올렸다가 편하게 내리는 동작입니다.',
+    steps: [
+      '양쪽 어깨와 팔을 편하게 둡니다.',
+      '편안한 범위에서 양쪽 어깨를 귀 방향으로 부드럽게 올립니다.',
+      '어깨의 힘을 풀고 편하게 내립니다.',
+    ],
+    cautions: [...commonCautions, '힘주어 높이 올리거나 통증이 생기는 범위까지 움직이지 마세요.'],
+    framing: '머리와 양쪽 어깨, 몸통이 보이도록 준비합니다.',
+    sources: [
+      {
+        title: 'Cambridge University Hospitals · Shoulder shrug',
+        url: 'https://www.cuh.nhs.uk/patient-information/neck-sprain-advice/',
+      },
+    ],
+    coachingStatus: 'pending-validation',
+    reviewMode: 'coaching-candidate',
+    observationLimit:
+      '화면상 어깨 상승·복귀는 촬영 검증 대상입니다. 힘·통증·깊이 방향은 측정하지 않습니다. 실측 전 자동 교정·성공·타이머를 제공하지 않습니다.',
+  }),
   freezeMotion({
     id: 'cross-body-shoulder',
     title: '팔 교차 어깨 늘이기',
@@ -110,6 +135,31 @@ export const previewMotions: readonly Motion[] = Object.freeze([
     reviewMode: 'guidance-candidate',
     observationLimit:
       '손으로 잡는 정확한 위치와 압력은 웹캠으로 확인하지 못합니다. 자동 성공·교정·타이머를 제공하지 않습니다.',
+  }),
+  // FR-S-01: NBT exercise 5 overhead portion, seated/one arm at a time only.
+  freezeMotion({
+    id: 'arm-overhead',
+    title: '팔 위로 뻗기',
+    region: 'shoulder',
+    regionLabel: '어깨',
+    summary: '바르게 앉아 한 팔씩 번갈아 편안한 범위에서 머리 위로 올렸다가 내립니다.',
+    steps: [
+      '단단한 의자에 바르게 앉아 시작 위치를 편하게 유지합니다.',
+      '한 팔을 편안한 범위에서 천천히 머리 위로 올립니다.',
+      '팔을 천천히 내린 뒤 반대쪽도 같은 과정으로 움직입니다.',
+    ],
+    cautions: [...commonCautions, '통증을 참고 더 높이 뻗으려고 무리하지 마세요.'],
+    framing: '머리 위로 올리는 손과 양쪽 어깨·팔꿈치·손목·골반이 보이도록 준비합니다.',
+    sources: [
+      {
+        title: 'North Bristol NHS · Exercise 5 (팔 올림 부분)',
+        url: 'https://www.nbt.nhs.uk/our-services/a-z-services/emergency-zone/ed-miu-patient-information/neck-injuries',
+      },
+    ],
+    coachingStatus: 'pending-validation',
+    reviewMode: 'coaching-candidate',
+    observationLimit:
+      '팔 올림·복귀의 큰 움직임만 촬영 검증 대상입니다. 견갑 움직임·어깨 안쪽 회전·허리 과신전은 정면만으로 확정하지 못합니다. 실측 전 자동 교정·성공·타이머를 제공하지 않습니다.',
   }),
   freezeMotion({
     id: 'lateral-trunk',
