@@ -16,6 +16,8 @@ type Options<C extends OwnedResource, I extends OwnedResource, A extends Avatars
   inference(context: ResourceContext, camera: C): I | Promise<I>
   avatars(context: ResourceContext): A | Promise<A>
   source(context: ResourceContext, camera: C, inference: I): Source
+  // Private readiness work only. No avatar observation, progress or renderer authority.
+  prepareSource?(source: Source): void | Promise<void>
   scheduler: PlaybackOptions['scheduler']
   render(avatars: A): unknown
   onFailure(notice: Extract<ResourceNotice, { type: 'error' }>): void | Promise<void>
@@ -38,7 +40,8 @@ export function createOwnedPlaybackResources<
       (key) => typeof options?.[key as keyof typeof options] !== 'function',
     ) ||
     typeof options.scheduler?.request !== 'function' ||
-    typeof options.scheduler?.cancel !== 'function'
+    typeof options.scheduler?.cancel !== 'function' ||
+    (options.prepareSource !== undefined && typeof options.prepareSource !== 'function')
   )
     throw unavailable()
   type Cohort = {
@@ -52,6 +55,8 @@ export function createOwnedPlaybackResources<
     inference?: I
     avatars?: A
     pairClaim?: Claim
+    source?: Source
+    sourceClaim?: Claim
     playback?: ReturnType<typeof createOwnedPosePlayback>
     retirement?: Promise<void>
     status: 'preparing' | 'ready' | 'running' | 'retiring' | 'closed' | 'failed'
@@ -139,6 +144,13 @@ export function createOwnedPlaybackResources<
       // Abort cannot dismiss a permission popup; reclaim its late owned return. Replacement
       // waits instead of opening a second camera while the old native factory is pending.
       while (cohort.pending.size) await Promise.all([...cohort.pending])
+      if (cohort.sourceClaim) {
+        try {
+          await release(cohort, cohort.sourceClaim)
+        } catch {
+          failed = true
+        }
+      }
       cohort.lifetime.abort()
       for (const owned of [...cohort.claims].reverse()) {
         try {
@@ -157,6 +169,8 @@ export function createOwnedPlaybackResources<
       cohort.avatars = undefined
       cohort.playback = undefined
       cohort.pairClaim = undefined
+      cohort.source = undefined
+      cohort.sourceClaim = undefined
       cohort.claims.length = 0
       cohort.status = cohort.failure ? 'failed' : 'closed'
       if (failed || cohort.failure === 'cleanup-error') {
@@ -171,7 +185,8 @@ export function createOwnedPlaybackResources<
     )
     // Invalidate saved callbacks in the same abort turn, not in a later microtask.
     cohort.capture.abort()
-    if (!cohort.playback) cohort.lifetime.abort()
+    // A preparation read also borrows native tasks until its source releases the frame.
+    if (!cohort.playback && !cohort.source) cohort.lifetime.abort()
     return cohort.retirement
   }
   async function settle() {
@@ -219,6 +234,42 @@ export function createOwnedPlaybackResources<
       throw unavailable()
     }
     return Object.freeze({ dispose: () => retire(cohort) })
+  }
+  function sourceFor(cohort: Cohort): Source {
+    if (!live(cohort) || !cohort.camera || !cohort.inference) throw unavailable()
+    if (cohort.source) return cohort.source
+    const source = options.source(
+      Object.freeze({ generation: cohort.context.generation, signal: cohort.capture.signal }),
+      cohort.camera,
+      cohort.inference,
+    )
+    const owned = claim(source)
+    cohort.claims.push(owned)
+    cohort.source = source
+    cohort.sourceClaim = owned
+    return source
+  }
+  async function prepareSource(cohort: Cohort) {
+    const pending = Promise.resolve()
+      .then(async () => {
+        if (!live(cohort)) throw unavailable()
+        const source = sourceFor(cohort)
+        if (!live(cohort)) throw unavailable()
+        await options.prepareSource?.(source)
+      })
+      .catch((error) => {
+        if (error instanceof ResourceCleanupError) report(cohort, 'cleanup-error')
+        else void retire(cohort).catch(() => {})
+        throw error instanceof ResourceCleanupError ? error : unavailable()
+      })
+    const settled = pending.then(
+      () => {},
+      () => {},
+    )
+    cohort.pending.add(settled)
+    void settled.then(() => cohort.pending.delete(settled))
+    await pending
+    if (!live(cohort)) throw unavailable()
   }
   const ports = Object.freeze({
     async camera(context: ResourceContext) {
@@ -304,6 +355,7 @@ export function createOwnedPlaybackResources<
           cohort.pairClaim = owned
         },
       )
+      if (options.prepareSource) await prepareSource(cohort)
       if (live(cohort)) cohort.status = 'ready'
       return wrapper
     },
@@ -324,13 +376,9 @@ export function createOwnedPlaybackResources<
     const avatars = cohort.avatars,
       pairClaim = cohort.pairClaim
     try {
-      const source = options.source(
-        Object.freeze({ generation, signal: cohort.capture.signal }),
-        cohort.camera,
-        cohort.inference,
-      )
-      const sourceClaim = claim(source)
-      cohort.claims.push(sourceClaim)
+      const source = sourceFor(cohort),
+        sourceClaim = cohort.sourceClaim
+      if (!sourceClaim) throw unavailable()
       const read = source.read.bind(source),
         observe = avatars.observe.bind(avatars),
         render = avatars.render.bind(avatars)

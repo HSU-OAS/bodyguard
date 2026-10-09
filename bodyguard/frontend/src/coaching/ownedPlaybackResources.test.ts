@@ -16,7 +16,9 @@ function deferred<T>() {
 const drain = async () => {
   for (let i = 0; i < 40; i++) await Promise.resolve()
 }
-function setup() {
+function setup(
+  prepareSource?: (source: { read(): Promise<PoseRigFrame | null> }) => Promise<void>,
+) {
   const events: string[] = [],
     callbacks = new Map<number, (at: number) => void>()
   let next = 0
@@ -39,6 +41,7 @@ function setup() {
   }[] = []
   const sources: { read: ReturnType<typeof vi.fn>; dispose: ReturnType<typeof vi.fn> }[] = []
   const options = {
+    ...(prepareSource ? { prepareSource } : {}),
     camera: vi.fn(async (context: ResourceContext) => {
       const camera = {
         context,
@@ -115,6 +118,139 @@ function setup() {
   }
 }
 describe('owned playback resource cohort', () => {
+  it('reclaims all owners after ordinary preparation rejection without private error leakage', async () => {
+    const f = setup(async () => {
+      throw new Error('PRIVATE_PREPARATION')
+    })
+    await f.prepare()
+    await f.actor.close()
+    expect(f.notices).toEqual([{ type: 'error', generation: 1, reason: 'asset-error' }])
+    expect(JSON.stringify(f.actor.getSnapshot())).not.toContain('PRIVATE_PREPARATION')
+    for (const value of [f.cameras[0], f.detectors[0], f.pairs[0], f.sources[0]])
+      expect(value.dispose).toHaveBeenCalledTimes(1)
+    expect(f.options.render).not.toHaveBeenCalled()
+  })
+  it('retains a preparation source disposal failure and still closes native owners', async () => {
+    const gate = deferred<void>(),
+      f = setup(async () => gate.promise)
+    const preparing = f.prepare()
+    await drain()
+    f.sources[0].dispose.mockRejectedValueOnce(new Error('PRIVATE_SOURCE_DISPOSE'))
+    const closing = f.controller.close()
+    gate.resolve()
+    await preparing
+    await closing
+    await expect(f.actor.close()).rejects.toBeInstanceOf(ResourceCleanupError)
+    expect(f.options.onFailure).toHaveBeenCalledWith({
+      type: 'error',
+      generation: 1,
+      reason: 'cleanup-error',
+    })
+    expect(f.detectors[0].dispose).toHaveBeenCalledTimes(1)
+    expect(f.cameras[0].dispose).toHaveBeenCalledTimes(1)
+    expect(f.notices.some((notice) => (notice as { type: string }).type === 'ready')).toBe(false)
+  })
+  it('waits for the old preparation read before acquiring a replacement camera', async () => {
+    const gate = deferred<void>(),
+      warm = vi.fn(async () => {})
+    warm.mockReturnValueOnce(gate.promise)
+    const f = setup(warm),
+      first = f.prepare(1)
+    await drain()
+    const second = f.prepare(2)
+    await drain()
+    expect(f.cameras).toHaveLength(1)
+    expect(f.options.source.mock.calls[0][0].signal.aborted).toBe(true)
+    gate.resolve()
+    await first
+    await second
+    expect(f.cameras).toHaveLength(2)
+    expect(f.sources).toHaveLength(2)
+    expect(f.notices).toEqual([{ type: 'ready', generation: 2 }])
+    expect(f.actor.start(1)).toBe(false)
+    expect(f.actor.start(2)).toBe(true)
+    await f.actor.close()
+    await f.controller.close()
+    for (const source of f.sources) expect(source.dispose).toHaveBeenCalledTimes(1)
+  })
+  it('blocks preparation after a source factory reenters close', async () => {
+    const warm = vi.fn(async () => {}),
+      f = setup(warm)
+    const original = f.options.source.getMockImplementation()
+    f.options.source.mockImplementationOnce((context) => {
+      const source = original?.(context)
+      if (!source) throw new Error('Missing fixture source')
+      void f.controller.close()
+      return source
+    })
+    await f.prepare()
+    await f.actor.close()
+    expect(warm).not.toHaveBeenCalled()
+    expect(f.notices).toEqual([])
+    expect(f.sources[0].dispose).toHaveBeenCalledTimes(1)
+  })
+  it('keeps ready and rendering closed while the same owned source prepares', async () => {
+    const gate = deferred<void>()
+    const prepared = vi.fn(async (source: { read(): Promise<PoseRigFrame | null> }) => {
+      await source.read()
+      await gate.promise
+    })
+    const f = setup(prepared),
+      preparing = f.prepare()
+    await drain()
+    expect(prepared).toHaveBeenCalledTimes(1)
+    expect(f.actor.getSnapshot().status).toBe('preparing')
+    expect(f.actor.start(1)).toBe(false)
+    expect(f.notices).toEqual([])
+    expect(f.callbacks.size).toBe(0)
+    expect(f.pairs[0].observe).not.toHaveBeenCalled()
+    expect(f.options.render).not.toHaveBeenCalled()
+    gate.resolve()
+    await preparing
+    expect(f.notices).toEqual([{ type: 'ready', generation: 1 }])
+    expect(f.actor.start(1)).toBe(true)
+    await f.fire(100)
+    expect(f.options.source).toHaveBeenCalledTimes(1)
+    expect(f.sources[0].read).toHaveBeenCalledTimes(2)
+    expect(f.pairs[0].observe).not.toHaveBeenCalled()
+    await f.controller.close()
+    await f.actor.close()
+    expect(f.sources[0].dispose).toHaveBeenCalledTimes(1)
+  })
+  it('invalidates capture on cancellation but waits for preparation before native close', async () => {
+    const gate = deferred<void>()
+    const f = setup(async (source) => {
+      await source.read()
+      await gate.promise
+    })
+    const preparing = f.prepare()
+    await drain()
+    const captureSignal = f.options.source.mock.calls[0][0].signal
+    const closing = f.controller.close()
+    await drain()
+    expect(captureSignal.aborted).toBe(true)
+    expect(f.detectors[0].context.signal.aborted).toBe(false)
+    expect(f.detectors[0].dispose).not.toHaveBeenCalled()
+    expect(f.actor.start(1)).toBe(false)
+    gate.resolve()
+    await preparing
+    await closing
+    await f.actor.close()
+    expect(f.notices).toEqual([])
+    expect(f.sources[0].dispose).toHaveBeenCalledTimes(1)
+    expect(f.detectors[0].dispose).toHaveBeenCalledTimes(1)
+    expect(f.cameras[0].dispose).toHaveBeenCalledTimes(1)
+  })
+  it('preserves cleanup failure from source preparation instead of emitting ready', async () => {
+    const f = setup(async () => {
+      throw new ResourceCleanupError()
+    })
+    await f.prepare()
+    await expect(f.actor.close()).rejects.toBeInstanceOf(ResourceCleanupError)
+    expect(f.notices).toContainEqual({ type: 'error', generation: 1, reason: 'cleanup-error' })
+    expect(f.notices.some((notice) => (notice as { type: string }).type === 'ready')).toBe(false)
+    expect(f.sources[0].dispose).toHaveBeenCalledTimes(1)
+  })
   it('commands only the live ready/running cohort and never a raw retained pair', async () => {
     const f = setup(),
       command = vi.fn(() => true)
