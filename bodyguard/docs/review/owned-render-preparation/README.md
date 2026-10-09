@@ -26,7 +26,7 @@
 
 최종 전체 FE1411/72파일·타입·Biome272·backend Ruff/변경 파일 format을 실제 통과했다. 실제 Chrome prepared28과 **기본12+12건**의 external/pageerror/storage0·모델0·카메라/입력/SDK 회수·memory baseline을 확인했다. 모든 분할 retries0/skip0/flaky0이며 제품 signup 제한을 변경하지 않았다. 기존5초 nativeCloses 기준을 유지했다. Node의 asset 준비·타입 확인·직렬 Vite public build/guard를 실행했고 공개 JS355151/CSS31199 byte·SHA는 base와 동일하다. 실제 Worker 통합·전체 backend 단위 suite·실제 사람/물리 장치 시험은 이번 미실행이다.
 
-원시 영상·몸/얼굴/손 배열·행렬·신체 per-frame 수치를 저장/로그/스크린샷하지 않는다. 보존 PNG는 기존 제작 fixture의 **아바타 canvas만**이며 미완성 외형/생성 오류·타이밍의 기술 증거다. 실제 카메라나 완성 디자인 미리보기가 아니다. 원본 GLB hash는 기존25a9bd6과 동일하며 새 Blender 제작/원본/GLB 변경0이다.
+원시 영상·몸/얼굴/손 배열·행렬·신체 per-frame 수치를 저장/로그/스크린샷하지 않는다. 보존 PNG는 기존 제작 fixture의 **아바타 canvas와 합성 계정의 본인 중단 기록 화면**이다. 아바타는 미완성 외형/생성 오류·타이밍의 기술 증거이며 실제 카메라나 완성 디자인 미리보기가 아니다. 원본 GLB hash는 기존25a9bd6과 동일하며 새 Blender 제작/원본/GLB 변경0이다.
 
 engineering:debug의 실패 원인 분리와 engineering:code-review의 취소/이전 세대/차용 자원·부분 정리·개인정보 경계를 작성자가 검토했다. prepare 호출의 signal·순서·실패 전파, 준비와 관찰/적립 분리, 취소 후 owner/자원 회수, 새 세대의 rest/배치 초기화·기본 parameter 유지, CLI 목록 전달/시험 격리·제품 제한 불변을 확인했다. 이 좁은 helper/통합 보완 범위의 미해결 P1/P2는 발견하지 않았다. **기존 시작P2를 닫는 판정이 아니다.** graphify의 vocab 확장 `[auth, native, prepare, lifecycle]` 지도는 관련 경로 탐색에만 유용했으며 최신 GPU helper/성능 원인의 근거가 아니다. 전문가/독립 리뷰가 아니다.
 
