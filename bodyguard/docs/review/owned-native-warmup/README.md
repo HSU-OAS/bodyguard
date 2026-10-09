@@ -14,6 +14,8 @@ Chrome155.0.8059.40·native SDK1.0.1·Three0.186.1·AuthProvider/useRecordedCoac
 
 ## 실패·리뷰 보완 보존
 
+첫 로컬 커밋125fb0d에 보존한 stderr 원문의 trailing whitespace로 Git diff 검사가 실패했다. 명령 묶음이 실패 뒤 커밋을 계속한 문제도 확인했으며 이후 필수 게이트는 fail-closed로 실행한다. 원문을 바꾸지 않고 gzip으로 보존하고 최초 커밋/실패 receipt와 원문을 유지했다. 원격 푸시/PR/병합 전 최종 diff와 증거를 다시 검사한다.
+
 중복 제거 대조의 후속 note는 최초 정적 검사에서 import 뒤 공백/formatter2오류로 실패했다. 원본 source와 실패 receipt/log를 notes/에 보존하고 표면 형식만 수정해 정적 검사·954항목 대조를 다시 실행했다. 이 후속 note는 973항목 색인 외에 별도로 보존한다.
 
 문서 패치 두 번은 표제/전체 문단의 context 불일치로 실패했고 파일 변경 전에 거부됐다. 본문/표제를 확인해 재적용했다. 실행 회귀나 제품 실패로 합산하지 않으며 원문은 대화에만 있다.
