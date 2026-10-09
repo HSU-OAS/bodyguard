@@ -74,6 +74,28 @@ Native skin 전송의 보호점 literal0 항목 추가를 발견했다. 모든 �
 
 ## 실제 결과
 
+### 구간별 제작 계약 — 2026-10-10
+
+앞선 단일 Grid Fill 실패를 보존한 뒤 구간 경계를 읽기 전용으로 검사했다. 첫 검사에서 rig-local과 body-local 좌표를 바로 비교한 배치를 사용했으나, 실제 world matrix의 남성0.974273/여성1.029914 축척 차이를 확인했다. 후속 검사는 `body.world.inverse × rig.world`로 같은 메시 공간에 옮겼다. 원본 rest bone/pose/world는 변경하지 않았다. 첫 검사도 보존하며 경계 배치나 전체 리깅 승인 증거로 사용하지 않는다.
+
+후속 구간은 이 메시 공간의 neck01 시작점과 neck02 끝점을 제작용 기준으로 삼아 상부 연결·목·좌/우 어깨 연결을 분리한다. 이는 올바른 운동 각도나 실제 사람의 해부학 판정이 아니다. 각 구간의 경계점과 새 quad의 시작 모서리·열 수는 실제 기하에서 정하며, 기본 vertex index에서 임의로 시작하지 않는다. [Blender 공식 Grid Fill](https://docs.blender.org/manual/en/5.0/modeling/meshes/editing/face/grid_fill.html)의 모서리·span 설명과 설치5.1.1 동작을 대조한다.
+
+구간별 새 파일은 앞선 검사를 실제 통과한 입력 SHA에만 이어서 만든다. 원본/이전 파일 덮어쓰기, 전신 생성·remesh, 접힌 원래 표면으로 재투영해 숫자를 맞추는 방식, smooth/ratio sweep은 하지 않는다. Native quad interpolation으로 만든 새 표면의 원본 거리6mm·가중치 합0.01·외부 좌표/polygon/raw skin·rest rig/PBR·손 보존과닫힘/winding/tiny 악화 방지를 그대로 강제한다. 한 구간에서 실패하면 전체 후보로 채택하지 않고 해당 실행 구간의 실패를 정리한다.
+
+모든 구간을 통과한 뒤에만 독립 재열기·118 기술 pose·GLB/왕복·동일 조명 실제 렌더·Chrome·외형을 판단한다. 부분 원본 저장이나 하나의 구간 성공은 최종 외형/코칭/D2/전체1~6 완료가 아니다. Blender MCP addon 상태 조회는 연결 오류였으며 live 사용자 작업은 건드리지 않고 독립 native 실행을 사용한다. UI 최소 문구·실측/시범·SDK/개인정보/운영·별도 승인 경계는 유지한다.
+
+#### 안쪽 경계 연결띠의 제작 계약
+
+상부 연결의 첫 native curvature 실행은 원래 표면에서7.0775mm 이탈해 저장 전 실패했다. 같은 실패 상태를 중립 조명에서 실제 렌더한 결과 남성 뒤쪽에 굴곡이 남았다. 여성은 이 실행에서 편집하지 않은 비교 원본이며, 성공 후보가 아니다. 후속 simple interpolation도6.1030mm로 실패했다. 허용 거리6mm를 높이지 않았다. 모서리 검사에서 지정한4개 중2개 대신 다른 점이 native quad 모서리로 쓰였으며, 맞은편 경계의 점 수 차이를 확인했다. 실행 소스/실패/진단 렌더를 보존한다.
+
+후속은 원래 불균등 경계를 그대로 둔 채 **새 안쪽 경계만 맞은편 점 수가 같은 구조**로 만들고 Blender native Bridge로 연결띠를 잇는다. [공식 Bridge Edge Loops](https://docs.blender.org/manual/en/5.1/modeling/meshes/editing/edge/bridge_edge_loops.html)의 서로 다른 경계 점 수 연결을 참고하되 실제 설치 결과로 판정한다. 연결띠는 원래 깨끗한 경계의 누적 길이를 따르는 새 점에만 제한하고, 안쪽 native simple grid의 모서리 표식4개가 실제 모두 일치해야 한다. 새 grid 전체를 접힌 원래 면으로 재투영하거나 smoothing으로 거리 검사를 맞추지 않는다. 보호점·6mm·skin·tiny·닫힘·리그 등 이전 조건은 그대로다. 실패하면 해당 제작 구간을 종료·보존하며 새 원본/GLB/전체 변형/Chrome 미실행을 구별한다.
+
+#### 이 실행 구간의 종료 결과
+
+[실제 구간별 실패·진단 렌더·보존](../review/avatar-neck-integration/segmented-attempt/README.md). 마지막 연결띠 실행은 원래 경계218점·안쪽36/55/36/55를 구성했으나 native 실제 모서리 표식0/0/1/3이 지정1/2/3/4와 달라 exit1이었다. 저장0·여성 제작/새 GLB/독립재열기/전체 변형/Chrome/이 연결띠 렌더 미실행이다. 기존 curvature 상태의 진단8컷을 새 후보의 성공/외형으로 쓰지 않는다. 거리/tiny/raw skin/rig 기준은 그대로이며 Draft #108의 외형 P2는 미해결이다.
+
+설치5.1.1의 `bmesh.ops.grid_fill`·`bridge_loops` API를 별도 native에서 읽기 전용 확인했다. 닫힌 경계의 자동 순회 방향은 [동일 버전 native 구현](https://github.com/blender/blender/blob/v5.1.1/source/blender/editors/mesh/editmesh_tools.cc)과 대조했다. 다음은 두 열린 맞은편 경계를 직접 지정하는 제작 설계이며 이번에는 미실행이다. 같은 span/offset을 반복하거나 모서리 guard를 삭제하지 않는다. 보호·실제 외형/실측/시범·공개 UI·SDK/운영 및 전체1~6 필수 조건은 유지한다.
+
 [Draft PR #108](https://github.com/HSU-OAS/bodyguard/pull/108)에 source d93e0b5와 실제 검증·새 편집 원본/GLB를 기록했다. 외형 P2 때문에 병합하지 않는다. 새 worktree는 app 호출의 Not a git repository/수동 worktree 미관리 판정으로 일반 Git worktree를 사용했고, PR 앱 첨부는 기존100개 한도 때문에 실패했다. 기존 첨부를 지우거나 등록 성공으로 표시하지 않는다.
 
 [실제 원본/GLB·미리보기·기술 성공/외형 실패·보존 증거](../review/avatar-neck-integration/README.md)에 기록했다. 원본 보호/독립 재열기·원본과 GLB 왕복 각각118 기술 pose/121행·34PNG, Chrome155 남녀 두 rig/전신 움직임/종료를 실제 실행했다. 같은 조건 전후 검수에서 뒤 목–어깨 패치/관절 마감은 미달이므로 **외형 P2·Story 미완료·새 후보 미채택·Draft PR/병합 보류**다. 모델링/리깅 정답·원본/실제 사람의 자세 정확도나 출시 완료를 증명하지 않는다.

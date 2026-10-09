@@ -10,6 +10,8 @@
 
 ## 이전 후보 실제 미리보기
 
+최신 [구간별 제작 결과](segmented-attempt/README.md)는 저장 전 실패·미채택이다. 실제 진단 렌더는 curvature 실패 상태에만 해당하며, 후속 연결띠의 외형·변형 검증은 미실행이다. 아래 이전 후보의 기술 성공과 구별한다.
+
 ![제작 후보의 실제 Blender 정면: 최종 외형 아님](source-render-qa/faceless-front.png)
 
 [남성 뒤 목 전](before-render/male-back.png)·[후](after-render/male-back.png), [여성 뒤 목 전](before-render/female-back.png)·[후](after-render/female-back.png), [남성 실제 Chrome 두 rig](browser/reviewed-male-after.png)·[여성](browser/reviewed-female-after.png)를 비교한다. 같은 조명/재질/카메라의 전후8컷씩이며 흐림·이미지 편집·AI 생성으로 수정하지 않았다. 앞 목은 보존했고 뒤 접합의 국소 개선은 최종 마감에 미달한다.
