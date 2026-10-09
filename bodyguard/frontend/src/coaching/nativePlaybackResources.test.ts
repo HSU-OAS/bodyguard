@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
 // FR-M-01/02/07·FR-S-02/04/NFR-08: native adapter ownership; native APIs mocked here.
 
-import { AnimationClip, QuaternionKeyframeTrack } from 'three'
+import { AnimationClip, Object3D, QuaternionKeyframeTrack } from 'three'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import type { PoseRigFrame } from '../avatar/observedPoseRig'
 import { prepareOwnedAvatarPair } from '../avatar/ownedAvatarPair'
@@ -52,6 +52,9 @@ const handAlignment = () => ({
   cameraReferences: { left: [0, 0, 0, 1], right: [0, 0, 0, 1] },
   sceneFromCamera: [0, 0, 0, 1],
 })
+type PrepareAvatar = NonNullable<
+  Parameters<typeof createNativePlaybackResources>[0]['prepareAvatar']
+>
 function setup(
   head?: ReturnType<typeof headAlignment>,
   hands?: ReturnType<typeof handAlignment>,
@@ -59,6 +62,10 @@ function setup(
   feedback?: Parameters<typeof createNativePlaybackResources>[0]['feedback'],
   trunk?: boolean,
   inferenceThread?: 'main' | 'worker',
+  prepareAvatar?: (
+    models: NonNullable<Awaited<ReturnType<typeof prepareOwnedAvatarPair>>['models']>,
+    context: Readonly<{ generation: number; signal: AbortSignal }>,
+  ) => void | Promise<void>,
 ) {
   const stream = { getTracks: () => [] } as unknown as MediaStream
   const native = {
@@ -77,6 +84,8 @@ function setup(
     suspendReference: vi.fn(() => true),
     updateFeedback: vi.fn(() => true),
   } as unknown as Awaited<ReturnType<typeof prepareOwnedAvatarPair>>
+  if (prepareAvatar)
+    Object.defineProperty(pair, 'models', { value: [new Object3D(), new Object3D()] })
   const source = { read: vi.fn(async () => null), dispose: vi.fn(async () => {}) }
   const worker = {
     thread: 'worker' as const,
@@ -111,6 +120,7 @@ function setup(
   const options = {
     model: 'lite' as const,
     ...(inferenceThread === undefined ? {} : { inferenceThread }),
+    ...(prepareAvatar ? { prepareAvatar } : {}),
     mirror: true,
     halfLifeMs: 50,
     maxAgeMs: 250,
@@ -162,6 +172,124 @@ function setup(
   }
 }
 beforeEach(() => vi.resetAllMocks())
+describe('renderer-owned avatar preparation', () => {
+  it('waits for the captured renderer preparation before ready/start', async () => {
+    const gate = deferred<void>(),
+      prepareAvatar = vi.fn<PrepareAvatar>(() => gate.promise)
+    const f = setup(undefined, undefined, undefined, undefined, undefined, undefined, prepareAvatar)
+    const later = vi.fn()
+    f.options.prepareAvatar = later
+    const preparing = f.prepare()
+    await drain()
+    expect(prepareAvatar).toHaveBeenCalledOnce()
+    expect(later).not.toHaveBeenCalled()
+    expect(f.notices).not.toContainEqual({ type: 'ready', generation: 1 })
+    expect(f.actor.start(1)).toBe(false)
+    const [models, context] = prepareAvatar.mock.calls[0] ?? []
+    expect(models).toEqual(f.pair.models)
+    expect(context?.generation).toBe(1)
+    expect(context?.signal.aborted).toBe(false)
+    gate.resolve()
+    await preparing
+    expect(f.notices).toContainEqual({ type: 'ready', generation: 1 })
+    expect(f.actor.start(1)).toBe(true)
+    await f.actor.close()
+    await f.controller.close()
+  })
+  it.each(['sync', 'async'] as const)(
+    'reclaims the pair on %s preparation rejection',
+    async (mode) => {
+      const prepareAvatar =
+        mode === 'sync'
+          ? () => {
+              throw new Error('private failure')
+            }
+          : async () => {
+              throw new Error('private failure')
+            }
+      const f = setup(
+        headAlignment(),
+        handAlignment(),
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        prepareAvatar,
+      )
+      await f.prepare()
+      await drain()
+      expect(f.pair.dispose).toHaveBeenCalledOnce()
+      expect(f.native.close).toHaveBeenCalledOnce()
+      expect(f.face.close).toHaveBeenCalledOnce()
+      expect(f.gesture.close).toHaveBeenCalledOnce()
+      expect(closeCamera).toHaveBeenCalledOnce()
+      expect(f.notices).not.toContainEqual({ type: 'ready', generation: 1 })
+      expect(f.actor.start(1)).toBe(false)
+      await f.actor.close()
+      await f.controller.close()
+    },
+  )
+  it('awaits late preparation on cancel without late ready or rendering', async () => {
+    const gate = deferred<void>(),
+      callback = vi.fn<PrepareAvatar>(() => gate.promise)
+    const f = setup(undefined, undefined, undefined, undefined, undefined, 'worker', callback)
+    const preparing = f.prepare()
+    await drain()
+    expect(callback).toHaveBeenCalledOnce()
+    const context = callback.mock.calls[0]?.[1]
+    const closing = f.controller.close()
+    await drain()
+    expect(context?.signal.aborted).toBe(true)
+    gate.resolve()
+    await preparing
+    await closing
+    await f.actor.close()
+    expect(f.pair.dispose).toHaveBeenCalledOnce()
+    expect(f.worker.dispose).toHaveBeenCalledOnce()
+    expect(closeCamera).toHaveBeenCalledOnce()
+    expect(f.options.render).not.toHaveBeenCalled()
+    expect(f.notices).not.toContainEqual({ type: 'ready', generation: 1 })
+    expect(f.actor.start(1)).toBe(false)
+  })
+  it('rejects an invalid preparation callback before camera acquisition', () => {
+    const f = setup()
+    expect(() =>
+      createNativePlaybackResources({ ...f.options, prepareAvatar: 7 } as never),
+    ).toThrow()
+    expect(openCamera).not.toHaveBeenCalled()
+  })
+  it('rejects a missing pair instead of reporting ready', async () => {
+    const callback = vi.fn<PrepareAvatar>()
+    const f = setup(undefined, undefined, undefined, undefined, undefined, undefined, callback)
+    vi.mocked(prepareOwnedAvatarPair).mockResolvedValueOnce({ ...f.pair, models: null })
+    await f.prepare()
+    await drain()
+    expect(callback).not.toHaveBeenCalled()
+    expect(f.pair.dispose).toHaveBeenCalledOnce()
+    expect(f.notices).not.toContainEqual({ type: 'ready', generation: 1 })
+    await f.actor.close()
+    await f.controller.close()
+  })
+  it('preserves cleanup failure and still reclaims earlier camera/SDK resources', async () => {
+    const f = setup(undefined, undefined, undefined, undefined, undefined, undefined, () => {
+      throw new Error('preparation failed')
+    })
+    vi.mocked(f.pair.dispose).mockImplementation(() => {
+      throw new Error('cleanup failed')
+    })
+    await f.prepare()
+    await drain()
+    expect(f.notices).toContainEqual({ type: 'error', generation: 1, reason: 'cleanup-error' })
+    expect(f.native.close).toHaveBeenCalledOnce()
+    expect(closeCamera).toHaveBeenCalledOnce()
+    await expect(f.actor.close()).rejects.toBeInstanceOf(ResourceCleanupError)
+    // The actual actor is an independent owner. Its cleanup failure remains
+    // observable even after the outer controller has closed its own claims.
+    await f.controller.close()
+    await expect(f.actor.close()).rejects.toBeInstanceOf(ResourceCleanupError)
+    expect(f.notices).not.toContainEqual({ type: 'ready', generation: 1 })
+  })
+})
 describe('explicit private worker inference', () => {
   it.each([false, true])(
     'snapshots the worker choice with head/hands enabled=%s',
