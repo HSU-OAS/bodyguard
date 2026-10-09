@@ -171,6 +171,10 @@ export function mountNativeHeadAuthProbe(
   let capturedNeckChecks = 0,
     capturedImageFailures = 0,
     unavailableNeckChecks = 0
+  // FR-M-02/07: TEST observer of accepted input only, bounded temporary memory.
+  let capturedNeckFrame: PoseRigFrame | undefined,
+    neckPresenceHidden = false
+  let capturedAspect = { width: 0, height: 0 }
   let oldState: CoachingState | null = null,
     referenceRest = '',
     userRest = '',
@@ -295,6 +299,8 @@ export function mountNativeHeadAuthProbe(
     writable: true,
     value(this: PoseLandmarker, input: VideoFrame, at: number) {
       nativeCalls++
+      if (withCapturedNeck)
+        capturedAspect = { width: input.displayWidth, height: input.displayHeight }
       bodyStamps.set(input, at)
       const resultToken = timing?.begin('result') ?? null,
         bodyToken = timing?.begin('body') ?? null
@@ -320,6 +326,22 @@ export function mountNativeHeadAuthProbe(
           presence: 1,
         }))
         const count = feedbackMode === 'multiple' ? 2 : 1
+        if (withCapturedNeck) {
+          // Original PR90 authored image geometry; not a native positive or clinical pose.
+          for (const [index, x, y] of [
+            [0, 0.5, 0.2],
+            [7, 0.45, 0.2],
+            [8, 0.55, 0.25],
+            [11, 0.35, 0.5],
+            [12, 0.65, 0.5],
+          ])
+            points[index] = {
+              ...points[index],
+              x,
+              y,
+              presence: neckPresenceHidden && index === 7 ? 0 : 1,
+            }
+        }
         const nativeResult = result
         if (restJoints.size !== jointNames.length)
           throw new Error('Private body fixture unavailable')
@@ -440,6 +462,8 @@ export function mountNativeHeadAuthProbe(
     useLayoutEffect(() => {
       hook = latestHook
       auth = latestAuth
+      if (latestAuth.state.status !== 'ready' || latestHook.state.status !== 'prepared')
+        capturedNeckFrame = undefined
       // Fixture caller hides its canvas on authority loss immediately, before borrowed cleanup.
       if (withFeedback)
         canvas.hidden =
@@ -456,6 +480,7 @@ export function mountNativeHeadAuthProbe(
   root.render(createElement(AuthProvider, null, createElement(View)))
   async function prepare() {
     if (closed || !hook || auth?.state.status !== 'ready') return
+    capturedNeckFrame = undefined
     prepared = false
     prepareFinished = false
     let ownedSession: Session | null = null
@@ -546,6 +571,7 @@ export function mountNativeHeadAuthProbe(
               },
               evaluate(frame: PoseRigFrame) {
                 feedbackEvaluations++
+                if (withCapturedNeck) capturedNeckFrame = frame
                 // Test receipt counts only. No projected values or clinical decision escape.
                 capturedNeckChecks++
                 if (
@@ -648,6 +674,7 @@ export function mountNativeHeadAuthProbe(
           userAvatarReady: true,
         }),
         onChange(snapshot) {
+          if (snapshot.state.status !== 'running') capturedNeckFrame = undefined
           if (withReference) actor.synchronize(snapshot.state)
           if (snapshot.state.status === 'running') actor.start(snapshot.state.generation)
         },
@@ -662,6 +689,35 @@ export function mountNativeHeadAuthProbe(
     }
   }
   function snapshot() {
+    // The production evaluator is called after owned.observe accepts this frame. Never
+    // export frame/angles; recompute now and reject retirement, authority loss or old cohort.
+    const actorState = currentActor?.getSnapshot(),
+      sessionState = session?.getSnapshot().state,
+      current = capturedNeckFrame
+    if (
+      closed ||
+      !hook?.getSession() ||
+      actorState?.status !== 'running' ||
+      sessionState?.status !== 'running' ||
+      current?.generation !== actorState.generation ||
+      current?.generation !== sessionState.generation
+    )
+      capturedNeckFrame = undefined
+    const neck =
+      withCapturedNeck && capturedNeckFrame
+        ? observeCapturedNeckSide({
+            frame: capturedNeckFrame,
+            now: performance.now(),
+            minimumConfidence: 0.8,
+            maxAgeMs: 250,
+          })
+        : undefined
+    const neckMatchesAuthoredAspect =
+      neck?.status === 'available' &&
+      Math.abs(
+        neck.headShoulderLineAngleRad -
+          Math.atan2(-0.05 * capturedAspect.height, 0.1 * capturedAspect.width),
+      ) < 1e-12
     const models = pair?.models
     const [ref, user] = turns(models ?? null)
     let highlighted = false
@@ -723,6 +779,12 @@ export function mountNativeHeadAuthProbe(
       feedbackConfigured: withFeedback,
       adaptiveConfigured: withAdaptive,
       trunkConfigured: withTrunk,
+      neckConfigured: withCapturedNeck,
+      neckStatus: withCapturedNeck ? (neck?.status ?? 'unavailable') : null,
+      neckMatchesAuthoredAspect,
+      neckCurrentGeneration:
+        neck?.status !== 'available' || neck.generation === sessionState?.generation,
+      neckObserverEmpty: capturedNeckFrame === undefined,
       trunkDirectionError,
       protectedTrunkStructureUnchanged:
         !withTrunk ||
@@ -834,6 +896,11 @@ export function mountNativeHeadAuthProbe(
         throw new Error('Invalid private feedback mode')
       feedbackMode = mode
     },
+    setNeckPresenceHidden(hidden: boolean) {
+      if (!withCapturedNeck || typeof hidden !== 'boolean')
+        throw new Error('Private neck fixture unavailable')
+      neckPresenceHidden = hidden
+    },
     setFeedbackCode(code: typeof feedbackCode) {
       if (!withAdaptive || !['raised', 'direction', 'unknown'].includes(code))
         throw new Error('Private adaptive reference fixture unavailable')
@@ -904,6 +971,7 @@ export function mountNativeHeadAuthProbe(
     async close() {
       if (!closed) {
         closed = true
+        capturedNeckFrame = undefined
         root.unmount()
         host.remove()
         releaseHeld?.()
