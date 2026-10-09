@@ -16,7 +16,7 @@ function deferred<T>() {
 const drain = async () => {
   for (let i = 0; i < 40; i++) await Promise.resolve()
 }
-function setup(parallelPreparation = false) {
+function setup(parallelPreparation = false, earlyCameraRelease = false) {
   const events: string[] = [],
     callbacks = new Map<number, (at: number) => void>()
   let next = 0
@@ -86,7 +86,11 @@ function setup(parallelPreparation = false) {
     }),
     onFailure: vi.fn(),
   }
-  const actor = createOwnedPlaybackResources({ ...options, parallelPreparation })
+  const actor = createOwnedPlaybackResources({
+    ...options,
+    parallelPreparation,
+    earlyCameraRelease,
+  })
   const notices: unknown[] = []
   const controller = createResourceController(actor.ports, (notice) => {
     notices.push(notice)
@@ -115,6 +119,82 @@ function setup(parallelPreparation = false) {
   }
 }
 describe('owned playback resource cohort', () => {
+  it('aborts an explicit decoded-frame camera before SDK quiescence without accepting late input', async () => {
+    const f = setup(true, true)
+    await f.prepare()
+    expect(f.cameras[0].context.signal).not.toBe(f.detectors[0].context.signal)
+    expect(f.actor.start(1)).toBe(true)
+    const read = deferred<PoseRigFrame | null>(),
+      barrier = deferred<void>()
+    f.sources[0].read.mockReturnValueOnce(read.promise)
+    f.sources[0].dispose.mockReturnValueOnce(barrier.promise)
+    await f.fire(10)
+    const closing = f.controller.close()
+    expect(f.cameras[0].context.signal.aborted).toBe(true)
+    expect(f.detectors[0].context.signal.aborted).toBe(false)
+    await drain()
+    expect(f.detectors[0].dispose).not.toHaveBeenCalled()
+    expect(f.pairs[0].dispose).not.toHaveBeenCalled()
+    expect(f.callbacks.size).toBe(0)
+    expect(f.actor.start(1)).toBe(false)
+    read.resolve({
+      generation: 1,
+      sequence: 1,
+      at: 10,
+      result: { landmarks: [], worldLandmarks: [] },
+    })
+    barrier.resolve()
+    await closing
+    expect(f.pairs[0].observe).not.toHaveBeenCalled()
+    expect(f.detectors[0].context.signal.aborted).toBe(true)
+    for (const resource of [f.sources[0], f.pairs[0], f.detectors[0], f.cameras[0]])
+      expect(resource.dispose).toHaveBeenCalledTimes(1)
+    await f.actor.close()
+  })
+  it('aborts the early camera during permission preparation and reclaims its late return', async () => {
+    const f = setup(true, true),
+      gate = deferred<Awaited<ReturnType<typeof f.options.camera>>>()
+    f.options.camera.mockReturnValueOnce(gate.promise)
+    const preparing = f.prepare()
+    await drain()
+    const context = f.options.camera.mock.calls[0][0]
+    const closing = f.controller.close()
+    expect(context.signal.aborted).toBe(true)
+    const old = { context, dispose: vi.fn() }
+    gate.resolve(old)
+    await preparing
+    await closing
+    await f.actor.close()
+    expect(old.dispose).toHaveBeenCalledOnce()
+    expect(f.options.inference).not.toHaveBeenCalled()
+    expect(f.notices).toEqual([])
+  })
+  it('rejects malformed early camera opt-in before any resource work', () => {
+    const f = setup()
+    expect(() =>
+      createOwnedPlaybackResources({ ...f.options, earlyCameraRelease: 'true' as never }),
+    ).toThrow('Playback resource unavailable')
+    expect(f.options.camera).not.toHaveBeenCalled()
+  })
+  it('does not abort another cohort camera when an early-release factory aliases it', async () => {
+    const first = setup(true, true)
+    await first.prepare()
+    const second = setup(true, true)
+    second.options.camera.mockResolvedValueOnce(
+      first.cameras[0] as Awaited<ReturnType<typeof second.options.camera>>,
+    )
+    await second.prepare()
+    expect(first.cameras[0].context.signal.aborted).toBe(false)
+    expect(first.cameras[0].dispose).not.toHaveBeenCalled()
+    expect(second.options.inference).not.toHaveBeenCalled()
+    expect(second.notices).toEqual([{ type: 'error', generation: 1, reason: 'camera-error' }])
+    await second.controller.close()
+    await second.actor.close()
+    expect(first.cameras[0].context.signal.aborted).toBe(false)
+    await first.controller.close()
+    await first.actor.close()
+    expect(first.cameras[0].dispose).toHaveBeenCalledOnce()
+  })
   it('parallel replacement waits for both old native factories and rejects old ready', async () => {
     const f = setup(true),
       sdk = deferred<Awaited<ReturnType<typeof f.options.inference>>>(),

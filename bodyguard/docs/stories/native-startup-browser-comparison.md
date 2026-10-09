@@ -62,3 +62,30 @@ CTO 권장안은 **native의 독립 SDK·avatar 준비를 camera 소유권 확�
 [독립 준비 중첩 결과](../review/native-startup-browser-comparison/parallel-preparation/README.md): final 일반154/155 각각26·전체 계측15426·renderer 추가4의 실제 SDK/API/격리 SQL 흐름/정리를 확인했다. FE1432·타입·Biome·build/guard·정확한 계약·증거·diff를 확인했고 공개 JS/CSS와 GLB/fixture hash는 동일하다. 정상/허위 상태의 복사본으로 계약5·증거8 거부도 실제 실행했지만 제품/임상 시험으로 세지 않는다. 기존 실패와9실행/457개 baseline은 그대로다.
 
 준비 구간이 실제 중첩됐지만 camera-ready→첫 render와third-result 중앙값은 거의 변하지 않았다. SDK chain은 길어졌고 첫 native result 약806ms도 남았다. 환경/캐시/순서가 통제되지 않아 원인/효과를 단정하지 않는다. **시작 P2 해결·전체 성능 개선·Story 완료·병합/출시를 선언하지 않는다.** 다음은 같은 미완료 Story의 main-thread 복합 추론 병목이며 타이머 확대/재시도/사례 삭제/더 약한 판정을 대안으로 쓰지 않는다. 실제 사람·장치·최종 외형/권리·승인 공개 구조/SDK·외부/운영 및 D2/전체1~6 완료 기준은 유지한다.
+
+### 다음 검증 계약 — 실제 Worker 추론 중 중단
+
+기존 Worker는 이미 몸·얼굴·손을 같은 decoded 입력에서 처리한다. 동일 구현을 다시 만들거나 main 기본값을 바꾸지 않는다. 기존10개 Worker 인증/기록 회귀의 본문·guard와 기존26개 main 시험은 보존한다. 추가 시험2개(남녀)는 TEST ONLY worker entry의 최초 실제 복합 추론 시작/종료 상대시각만 관찰한다. 실제 SDK를 지연/대체하지 않고 시작 메시지 수신 즉시 main에서 현재 세션을 중단한다.
+
+- Worker의 실제 추론 종료 전에 main의 중단 요청·카메라 해제가 수행되는지 확인한다. 완료된 추론을 추론 중 취소로 표시하지 않도록 두 realm의 `performance.timeOrigin + performance.now()` 시각을 비교한다. 이후 SDK/Worker/입력/아바타 해제와 이전 결과 권위·성공/기록 생성 금지를 확인한다.
+- 시험 전용2개 고정 marker에는 시작/종료와 기술 시각만 있다. raw 입력/좌표/얼굴·손 배열을 관찰·로그·저장하지 않는다. 실제 engine/runtime과 동일 모델·config를 재사용하고 정상 SDK의 종료 후 결과는 기존 abort 경계가 처리한다. 공개 build에 marker/시험 entry가 들어가면 실패다.
+- 실제 Chrome154/155·가짜 카메라·실제 API/격리 SQL의 결과와 실패·미실행을 보존한다. 기존5초 poll/60초 시험/retry0은 유지한다. marker 비용·새 context/캐시/장치 한계를 표시하며 기존 시작P2 원인·전체 지연 개선·실제 사람 검증으로 환산하지 않는다.
+- 전체 FE/type/Biome/public build/guard·diff와 작성자 리뷰를 실제 실행한다. 좁은 수명 증거가 통과해도 이 Story는 시작P2 해결 전까지 Draft/미완료다.
+
+실제 첫 추가 시험은 `releaseMs=null`로 실패했다. 이는 중단 직후 동기 snapshot만 봤으므로 정확한 카메라 종료 시각의 증거는 아니다. 원문/소스를 보존하고 다음 시험에는 실제 `MediaStreamTrack.stop` 호출 관측을 추가했다. 현재 코드에서는 capture 권위는 즉시 철회하지만, camera와 SDK에 같은 lifetime을 사용해 진행 중 read가 끝난 뒤에야 camera lifetime을 abort한다. 이미 캡처·복사한 VideoFrame을 처리하는 native 경로는 카메라를 그 전에 끌 수 있다.
+
+수정 계약: 일반 caller의 borrowed-camera 정리 순서는 유지한다. `earlyCameraRelease: true`라는 명시적 private opt-in만 camera 전용 abort lifetime을 사용하며, capture 철회와 같은 중단 turn에 이를 abort한다. native adapter만 이 옵션을 선택한다. SDK/진행 중 입력/Worker/아바타는 기존 quiescence barrier를 그대로 기다린다. 준비 중 취소·늦은 camera 반환·다음 세대·별칭·중복 회수·정리 실패를 검증하고, 실패를 숨기거나 새 카메라를 이전 해제보다 먼저 열지 않는다. 이는 중단 시 수집을 앞서 종료하는 기존 사용자 의도의 구현 보완이며 새 수집/저장/외부 통신 정책은 아니다.
+
+계측 검토에서 초기 marker가 production Worker의 알 수 없는 protocol 메시지로 전달되어 실패/해제를 유발하는 시험 결함을 발견했다. 초기 두 실행은 정상 추론 중단의 증거로 쓰지 않는다. TEST listener에서 marker만 `stopImmediatePropagation`으로 분리하고 SDK/runtime 메시지는 그대로 전달한다. epoch-sized realm 시각 합산의 Float64 반올림(관측−0.000244ms)은 `4 * Number.EPSILON * epoch`의 계산 오차만 허용하며 실제 overlap에는 그 오차보다 큰 간격을 요구한다. 5초/60초/임상 기준은 바꾸지 않는다. 수정된 하네스의 첫 대조는 새 옵션을 `false`로 고정하여 기존 camera/SDK lifetime 경로를 사용한다. 새 코드 전체가 a59와 byte-identical하다는 주장은 하지 않는다. 원래 a59에서의 초기 계측 결함·unit116pass/2fail도 보존한다. unit2실패는 native의 기존 카메라 대기 assertion이며, 일반 caller의 기본 정리 순서는 바꾸지 않는다.
+
+marker 분리 후 opt-in=false 실제 대조는1fail이다. 실제 복합 추론915.0ms, camera stop918.3ms로 `camera stop < worker end` 계약을 위반했다. 실행 중 소스 전후 동일성과 실패 원문/소스를 보존한다. 초기 결함 시험과 달리 실제 대조 근거다. 그 후 native opt-in=true를 적용한다. native unit2건은 camera만 대기하지 않도록 assertion을 교체하며 기존2/3 SDK 대기·회수 조건은 유지한다. 일반 caller의 기존 정리 순서 시험은 그대로다.
+
+추가 main 경로의 첫 실제 남성13건은7pass/6fail이다. 공통 `revokedWhileHeld`의 `cameraLive && held === true`가 실패했으며 camera를 즉시 끈 구현 변경과 이전 camera lifetime 계약의 차이다. 실패/소스를 보존하고 공통 helper의 이 조건만 `cameraLive === false`, `held === true` 두 assertion으로 개정한다. 남녀12건(몸통 권한 철회1·same-account refresh1·logout/401/pagehide/unmount4씩)이 이 helper를 사용한다. 기존 body/loop/타이머와 권위 철회·held 결과/SDK 회수·이전 재개/저장 차단·기록 조건은 유지한다. 카메라를 끄기 위해 늦은 SDK 결과의 정리/반환을 생략하지 않는다. 이전 비교기는 그대로 보존하고 a59 원문 대비 이 helper의 정확한 assertion 분리만 허용하는 새 비교기를 추가한다. 이번의26건 전체 guard가 불변이라고 주장하지 않는다.
+
+같은 helper의 cameraCloses0도 카메라 대기 계약이다. 이를 `cameraCloses === cameras`로 개정하고 tracksEnded/detached 및 즉시 cameraCloses 일치를 추가로 요구한다. held 중 detector/face/hands close0·call/render 증가0·기록0과 release 이후 각 SDK close1은 그대로다. 새 비교기는 정확히 이 camera 관련 교체/추가만 허용한다. 나머지 test 본문·helper·SDK/held/owner/기록·시간·반복/재시도는 변경하지 않는다.
+
+### 중단 보완 실제 결과 — Story 완료 아님
+
+[카메라 종료 결과](../review/native-startup-browser-comparison/early-camera/README.md)에15실행/34bundle과 원문 SHA를 별도 보존했다. final Worker24·main52에서 실제 SDK/API/격리 SQL의 중단·소유/기록 경계와 회수를 확인했다. 첫 올바른 대조는 camera stop918.3ms/worker915.0ms로 실패했고, 수정 후 four final의 camera stop은1.9~6.0ms/worker907.1~1068.4ms였다. programmatic probe.stop·가짜 카메라/합성 동작/미완성 GLB의 제한된 기술 관측이며 실제 UI 버튼·기본 main의 동기 입력 반응·전체 시작 지연 개선·사람/임상/외형 승인 시험이 아니다.
+
+전체 FE1439/type/Biome·정확한 계약·자산/build/공개 guard·포장 및 의미 변조 거부8건을 실제 실행했다. 이전 고정 증거/원본/GLB/public byte는 보존했고 새 TEST marker는 공개 bundle에 없다. DB는 종료했고 추가 renderer4·백엔드 전체·물리 장치/참여자·Docker/HTTPS/운영은 이 구간에서 재실행하지 않았다. 본 Story의 시작 P2는 미해결/Request changes·Draft101 유지·병합 불가이며 D2/전체1~6 필수 기준과 최소 텍스트·별도 승인 경계는 그대로다.

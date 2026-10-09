@@ -15,6 +15,8 @@ type Failure = Extract<ResourceNotice, { type: 'error' }>['reason']
 type Options<C extends OwnedResource, I extends OwnedResource, A extends Avatars> = Readonly<{
   /** FR-M-01/NFR-07: avatar factory must not depend on completed inference. */
   parallelPreparation?: boolean
+  /** FR-M-01/NFR-08: explicit decoded-frame caller only; camera can stop before SDK quiescence. */
+  earlyCameraRelease?: boolean
   camera(context: ResourceContext): C | Promise<C>
   inference(context: ResourceContext, camera: C): I | Promise<I>
   avatars(context: ResourceContext): A | Promise<A>
@@ -28,7 +30,8 @@ const consumed = new WeakSet<object>()
 const unavailable = () => new Error('Playback resource unavailable')
 
 /** Native factories transfer distinct fresh ownership and reclaim partial failures themselves.
- * Their lifetime signal is NOT controller cancellation: active inference must settle first.
+ * SDK lifetime is NOT controller cancellation: active inference must settle first.
+ * Only an explicit decoded-frame caller may abort its separate camera lifetime earlier.
  * Source/pair/rendering stay in browser memory. This is not a release gate or SDK policy.
  */
 export function createOwnedPlaybackResources<
@@ -36,11 +39,16 @@ export function createOwnedPlaybackResources<
   I extends OwnedResource,
   A extends Avatars,
 >(options: Options<C, I, A>) {
-  let parallelPreparation = false
+  let parallelPreparation = false,
+    earlyCameraRelease = false
   try {
     const requested = options.parallelPreparation
     if (requested !== undefined && typeof requested !== 'boolean') throw new Error()
     parallelPreparation = requested === true
+    const requestedEarlyRelease = options.earlyCameraRelease
+    if (requestedEarlyRelease !== undefined && typeof requestedEarlyRelease !== 'boolean')
+      throw new Error()
+    earlyCameraRelease = requestedEarlyRelease === true
   } catch {
     throw unavailable()
   }
@@ -55,6 +63,7 @@ export function createOwnedPlaybackResources<
   type Cohort = {
     context: ResourceContext
     lifetime: AbortController
+    cameraLifetime: AbortController
     capture: AbortController
     claims: Claim[]
     pending: Set<Promise<void>>
@@ -186,6 +195,9 @@ export function createOwnedPlaybackResources<
     )
     // Invalidate saved callbacks in the same abort turn, not in a later microtask.
     cohort.capture.abort()
+    // FR-M-01/NFR-08: a decoded VideoFrame no longer borrows the live camera. Stop capture
+    // synchronously, but do not abort/close the SDK while its invocation is still running.
+    if (earlyCameraRelease) cohort.cameraLifetime.abort()
     if (!cohort.playback) cohort.lifetime.abort()
     return cohort.retirement
   }
@@ -283,6 +295,7 @@ export function createOwnedPlaybackResources<
       const cohort: Cohort = {
         context: Object.freeze({ generation: context.generation, signal: context.signal }),
         lifetime: new AbortController(),
+        cameraLifetime: new AbortController(),
         capture: new AbortController(),
         claims: [],
         pending: new Set(),
@@ -301,7 +314,10 @@ export function createOwnedPlaybackResources<
         cohort,
         () =>
           options.camera(
-            Object.freeze({ generation: context.generation, signal: cohort.lifetime.signal }),
+            Object.freeze({
+              generation: context.generation,
+              signal: earlyCameraRelease ? cohort.cameraLifetime.signal : cohort.lifetime.signal,
+            }),
           ),
         (value) => {
           cohort.camera = value

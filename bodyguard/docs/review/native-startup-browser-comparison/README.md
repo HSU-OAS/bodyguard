@@ -1,5 +1,9 @@
 # 코칭 시작 실패 재현 · S6.17 진행 중
 
+## 최신: 중단 시 카메라와 SDK 수명 분리
+
+[실제 흐름·개정 계약·실패·남은 문제](early-camera/README.md): 비공개 native 중단 요청과 같은 turn에 카메라를 끄고 처리 중 입력/SDK/Worker는 기존 반환 장벽 뒤 회수한다. actual 남녀 Worker24/main52에서 늦은 결과·권한·기록·회수 경계를 확인했다. 일반 caller·기본 main은 유지한다. camera helper12건의 정확한 계약 변경과 실패 원문을 별도34bundle로 보존했다. 실제 사용자 버튼 지연/전체 시작 P2 해결·제품/단계 완료로 세지 않으며 Draft101 병합 불가다. 현재 검증은 `early-camera/verify.mjs --current`로 수행하고 이전 두 verifier는 `--current` 없이 고정 과거 증거만 검증한다.
+
 ## 후속 제품 수정 · 병렬 준비 검증 중
 
 카메라 이후 독립 SDK/아바타 준비를 중첩하고 양쪽 소유권 이전에는 ready/재생을 금지하도록 구현했다. 최초 asset 실패가 다른 factory의 abort로 덮이는 문제도 고정 stage 원인 보존으로 수정했다. 일반 factory의 직렬 기본값, 취소/late 회수·정리 실패 격리·새 세대 장벽·출시 동작0은 유지한다.

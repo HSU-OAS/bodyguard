@@ -308,7 +308,10 @@ async function hold(page: Page) {
 async function revokedWhileHeld(page: Page) {
   const value = await mark(page, 'authority-revoked-while-native-held')
   expect(value.owned).toBe(false)
-  expect(value.cameraLive && value.held).toBe(true)
+  expect(value.cameraLive).toBe(false)
+  expect(value.held).toBe(true)
+  expect(value.tracksEnded && value.detached).toBe(true)
+  expect(value.cameraCloses).toBe(value.cameras)
   if (withNeck) expect(value.neckStatus).toBe('unavailable')
   if (withReference)
     expect(
@@ -327,7 +330,7 @@ async function revokedWhileHeld(page: Page) {
     handDetectorCloses: 0,
     handCalls: value.handCalls,
     faceCalls: value.faceCalls,
-    cameraCloses: 0,
+    cameraCloses: value.cameras,
   })
   await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.beginOldActions())
   expect(posts).toBe(0)
