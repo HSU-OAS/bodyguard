@@ -26,4 +26,4 @@ S6.18의 기본 false 준비용 추론을 실제 AuthProvider/useRecordedCoachin
 - [x] 최신 main에서 독립 Story와 구현 전 검증 계약 작성.
 - [x] 실제 기본26/opt-in 기존30/새 준비12를 단일5초 기준으로 최종 재실행. 최초 실패1·이전 source/bundle/report 보존. [실제 흐름과 검증 경계](../review/owned-native-warmup/README.md).
 - [x] 전체 FE1479/타입/Biome/assets/build/guard·공개 byte/GLB 불변·현재 source18/증거973 검증·scoped 작성자 리뷰. 최초 archive 보존/중복 제거, 최초954 원문/압축 SHA 유지 확인.
-- [ ] commit/push/PR/exact HEAD 조건부 merge.
+- [x] commit/push/PR/exact HEAD 조건부 merge. PR106 source9e1ea57c·mergea44e7130, 실제 main 포함/브랜치 보존 확인. [병합 후 원격 기록](https://github.com/HSU-OAS/bodyguard/pull/106#issuecomment-6082793645). 이것은 S6.19의 좁은 범위이며 전체1~6 완료가 아니다.

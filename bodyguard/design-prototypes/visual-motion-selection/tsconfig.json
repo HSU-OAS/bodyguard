@@ -1,0 +1,18 @@
+{
+	"compilerOptions": {
+		"target": "ES2022",
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"lib": ["ES2022", "DOM"],
+		"skipLibCheck": true,
+		"strict": true,
+		"noEmit": true,
+		"paths": {
+			"three": ["../../frontend/node_modules/@types/three/index.d.ts"],
+			"three/addons/*": [
+				"../../frontend/node_modules/@types/three/examples/jsm/*"
+			]
+		}
+	},
+	"include": ["preview.ts"]
+}
