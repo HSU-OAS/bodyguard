@@ -150,6 +150,20 @@ CEO의 최소 문구 요구도 유지한다. 제품 화면은 아바타 중심, 
 
 읽기 전용 원래 경계의 최종 native 재실행은 exit0이고 남녀37/32행의 공통 내부를 확인했다. 이 관찰과 private mesh native probe를 인체/외형 성공으로 세지 않는다. 처음 검사의 lint 변수 바인딩 오류와 첫 보고서/소스는 보존했다. MCP 연결은 이번에도 실제 오류이고 사용자 장면/계정/비용/시크릿/telemetry 변경0이다. 다음은 원래 투영 경계와 설치 native 제약 삼각분할의 보존 조건을 확인하는 설계이며 이번에는 미실행이다. 동일 허용치/원본·품질 보호·최소 UI 문구·외형 P2/전체1~6/별도 승인 경계를 유지하며 Draft 병합은 하지 않는다.
 
+#### Native 제약 연결띠 계약 — 2026-10-10
+
+읽기 전용 `inspect_projected_constraints.py`의 실제 Blender5.1.1 실행은 남녀 원래 선택 영역의 비인접 X/-Z 경계 교차0·원래 선택 면 Y음수0·원본 body/rig snapshot exact를 확인했다. Native CDT는 원래218/230점을 삽입·병합·좌표 이동 없이1:1로 돌려주고 모든 경계 edge를 유지했다. 이는 새 조형이나 외형 합격이 아니라, 원래 경계의 겹침이라는 가설을 분리하는 증거다. 기존 채움의12개 음수 면은 원래 경계 자체 때문에 필연적인 것으로 판단하지 않는다.
+
+별도의 private 비인체 오목 annulus probe가 설치된 `mathutils.geometry.delaunay_2d_cdt`로 경계·안쪽 구멍·면적·입력3D 좌표 exact·뒤 방향을 실제 확인했다. [공식5.1 API](https://docs.blender.org/api/5.1/mathutils.geometry.html#mathutils.geometry.delaunay_2d_cdt)의 origin/이동·병합 가능성 설명과 설치된 actual doc을 대조했고, 직접 웹 열기402 오류는 성공으로 세지 않는다. 원래 실패한 `triangle_fill` 저작기는 바꾸지 않는다.
+
+별도 `author_projected_ribbon.py`는 기존 실제 전문 단면/공통 내부 높이/core native Grid Fill을 유지하고 **연결띠의 연결만** 검증된 native2D 제약 인덱스로 정한다. 원래 경계·안쪽 점의 실제3D 좌표는 이동하지 않고, CDT의 새 점/병합/미세 이동/경계 분할·추가/손실을 거부한다. Core 내부의 CDT 삼각형만 구별해 제외하고 원래 안쪽 edge·annulus 면적·edge incidence·외부 보호·6mm/skin/raw rig/history/tiny/닫힘/winding/내부 포함/추가 뒤 교차 금지를 모두 유지한다. 이는 전신 코드 생성·remesh·의료 임계값 변경이 아니다.
+
+실제 저작/독립 재열기·전체118 pose/GLB/Chrome/같은 조건 렌더와 외형·실측을 따로 판단한다. 국소 성공만으로 기존 목–어깨·D2/전체1~6을 통과시키지 않는다. 실패 시 새 파일 저장 전 중단하고 원래 파일과 실제 실패·미실행을 보존한다. 공개 제품·UI/카메라/SDK/개인정보·운영 변경0·최소 문구·별도 승인 경계와 Draft #108 병합 보류는 유지한다.
+
+#### 제약 연결띠의 실제 결과
+
+[새 부분 원본·실제8컷·남은 외형/미실행](../review/avatar-neck-integration/projected-attempt/README.md). 남녀 저작과 독립 재열기는 실제 exit0로 새 부분 원본2932e63d를 저장했다. 보호 영역/raw skin/history/rig/PBR/손·닫힘/winding/tiny 조건을 유지했고 전체 연결띠Y음수/원래 투영 밖 점·면 중심/추가 뒤 교차0을 확인했다. 실제 모든8컷에서 이전 검은 틈은 사라졌지만 목 아래·어깨의 거친 표면은 남아 외형 P2·미채택이다. 새 원본의GLB/전체118변형/Chrome/실측·전체1~6은 미실행/미완료이며 과거 QA를 복사하지 않는다. 원래 입력·모든 frozen 실패·부분 후보/증거를 보존하고 다음 목–어깨 구간 설계로 이어간다. 공개 웹/운영 변경0·Draft 유지다.
+
 #### 단면 제작 구간의 실제 결과
 
 [부분 원본·실제 외형·성공/실패·검증 미실행](../review/avatar-neck-integration/sectioned-attempt/README.md). 남녀 각각37/32개 native 단면 행의 부분 제작과 독립 재열기는 실제 exit0였다. 새 점의 원래 선택 표면 거리 최대1.122/1.255mm·앞면/손/외부 좌표/polygon/raw skin/history/rest rig/world/PBR exact·닫힘0/winding0/tiny2→2/0→0을 확인하고 새 부분 후보7481c5f를 저장했다. 기존 입력/모든 실패 증거는 불변이며 전체 아바타 저작 완료가 아니다.

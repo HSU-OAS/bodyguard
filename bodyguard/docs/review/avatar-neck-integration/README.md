@@ -20,6 +20,8 @@
 
 [연결띠의 실제 후속 결과](ribbon-attempt/README.md)는 새 점의 원래 내부 포함을 확인했지만 면의 접힘/틈으로 **저장 전 실패**했다. 새 후보 저장/여성 제작·GLB/변형/Chrome0이며 실제16컷은 실패 남성과 편집하지 않은 여성 비교다. 앞선 부분 후보·실패·증거는 변경하지 않는다.
 
+[제약 연결띠의 새 부분 후보](projected-attempt/README.md)는 남녀 저작/독립 재열기·원본 보호와 연결부 접힘·추가 교차 방지를 실제 통과했다. 실제8컷에서 검은 연결 틈은 사라졌으나 목–어깨와 전체 관절 마감의 외형 P2는 남아 미채택이다. 새 원본2932e63d의GLB/118변형/Chrome는 아직 미실행이며 아래 ce8887d 기술 성공을 복사하지 않는다.
+
 ![제작 후보의 실제 Blender 정면: 최종 외형 아님](source-render-qa/faceless-front.png)
 
 [남성 뒤 목 전](before-render/male-back.png)·[후](after-render/male-back.png), [여성 뒤 목 전](before-render/female-back.png)·[후](after-render/female-back.png), [남성 실제 Chrome 두 rig](browser/reviewed-male-after.png)·[여성](browser/reviewed-female-after.png)를 비교한다. 같은 조명/재질/카메라의 전후8컷씩이며 흐림·이미지 편집·AI 생성으로 수정하지 않았다. 앞 목은 보존했고 뒤 접합의 국소 개선은 최종 마감에 미달한다.
