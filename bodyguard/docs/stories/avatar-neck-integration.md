@@ -30,6 +30,8 @@ testing-strategy로 보호/실패·기술/실제 사용 경계를 먼저 정하�
 
 ## 실제 결과
 
+[Draft PR #108](https://github.com/HSU-OAS/bodyguard/pull/108)에 source d93e0b5와 실제 검증·새 편집 원본/GLB를 기록했다. 외형 P2 때문에 병합하지 않는다. 새 worktree는 app 호출의 Not a git repository/수동 worktree 미관리 판정으로 일반 Git worktree를 사용했고, PR 앱 첨부는 기존100개 한도 때문에 실패했다. 기존 첨부를 지우거나 등록 성공으로 표시하지 않는다.
+
 [실제 원본/GLB·미리보기·기술 성공/외형 실패·보존 증거](../review/avatar-neck-integration/README.md)에 기록했다. 원본 보호/독립 재열기·원본과 GLB 왕복 각각118 기술 pose/121행·34PNG, Chrome155 남녀 두 rig/전신 움직임/종료를 실제 실행했다. 같은 조건 전후 검수에서 뒤 목–어깨 패치/관절 마감은 미달이므로 **외형 P2·Story 미완료·새 후보 미채택·Draft PR/병합 보류**다. 모델링/리깅 정답·원본/실제 사람의 자세 정확도나 출시 완료를 증명하지 않는다.
 
 기존 최신 참조/여성 무의상 요구를 원래 제작 계약에 기록했다. 공개 JS/CSS/문구와 운영은 unchanged, 기존 Draft #9 HEAD/1959개 작업 상태/입력 SHA를 보존했다. 미실행 API/SQL/전체 DOM/실제 사람/공급자/HTTPS·새 파일 원본의 expert 검토는 명시했다. 다음 보완은 같은 smooth 강도 반복이 아니라 실제 남은 접합·변형 결함의 전문 메시 연결/표면 설계여야 한다.
