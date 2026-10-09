@@ -134,6 +134,8 @@ for (const file of files) {
     'reduceFramingTrial',
     'readFramingSample',
     'warmupInference',
+    'inferenceWarmupConfigured',
+    'readyReceipts',
     'Native preparation frame unavailable',
     'mountNativeContentionProbe',
   ]) {

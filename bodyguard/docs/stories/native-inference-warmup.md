@@ -28,4 +28,4 @@ source를 만든 뒤 취소하면 capture를 즉시 무효화하고, 진행 중 
 - [x] 구현 전 명세와 합성 소유권 하네스 작성.
 - [x] 최초 RED3/23 원문 보존 → 준비 결과 비전달·cancel/native close·교체/재진입·실패 회귀15건. 최초 test source는 별도 미보존.
 - [x] 실제 Chrome154/155의 최종 normal16/취소4·FE1479·타입/Biome/assets/build/guard·공개 byte/GLB 불변·실패와 미보존 한계 정리. [증거와 작성자 리뷰](../review/native-inference-warmup/README.md).
-- [ ] scoped 리뷰·commit/push/PR·정확한 HEAD 조건부 merge.
+- [x] scoped 리뷰·commit/push/PR·정확한 HEAD 조건부 merge: [PR105](https://github.com/HSU-OAS/bodyguard/pull/105), source5f6884c1·mergece137244. 기본 opt-in false·시작 P2/전체1~6 미완료 유지.

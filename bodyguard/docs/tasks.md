@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-09 [S6.19 로그인 소유 첫 추론 준비](stories/owned-native-warmup.md): 준비 입력을 판정/기록에서 분리하고 준비 중 권한 취소·늦은 결과·명시적 새 소유자 재시작과 본인 중단 기록 흐름을 실제 Chrome/API/격리 SQL로 검증했다. [작동 흐름·실패/리뷰 보완·실제/합성 경계](review/owned-native-warmup/README.md). 단일5초의 최종 기본26/opt-in42·로컬 품질 검사가 통과했고 증거·조건부 PR 게이트를 진행한다. 공개 구조/문구 최소화·기본 경로/모델/화질·신체 판정·원본/GLB/조형·운영 변경0. SDK CSP 차단 시도·기존 시작P2·실측/최종 외형/시범·승인 UI/SDK·D2/전체1~6 미완료 유지. PR105는 source5f6884c1·mergece137244로 main에 포함됐고 원본 브랜치를 보존했다.
+
 2026-10-09 [S6.18 준비용 첫 추론](stories/native-inference-warmup.md): 재생 전에 실제 첫 입력을 처리/폐기하고 동일 source의 새 입력으로 재생한다. 준비 결과 적립0·취소/늦은 완료·source retirement/SDK close·새 소유자 경계를 구현했다. [실제 흐름·비용 이동/실패/한계](review/native-inference-warmup/README.md). 최종 Chrome154/155 normal16/취소4와 로컬 검증을 통과했으나 준비 시간이 늘고 전체 시작은 일관된 개선이 아니다. 원래26/Auth/SQL/실제 사람·시작P2·최종 외형/시범·승인 공개 UI/SDK·D2/전체1~6은 미완료다. 공개 byte/최소 문구·기본 경로/화질/판정·원본/GLB/조형·운영 유지, 조건부 PR 게이트를 진행한다.
 
 2026-10-09 [S2.M4 관찰자 촬영 범위 대조](stories/observer-framing-comparison.md): 기존 개발 도구에서 관찰자/인식 결과를 분리하고 튜닝 동결·새 프레임 검증·설정 변경/복원 차단·초점 복귀를 구현했다. [작동 패널·실패·실제/합성 구분](review/observer-framing/README.md). 공개 JS/CSS byte 동일·최소 문구/구조·SDK/판정/아바타/운영 유지. 실제 참여자/독립 조건·classifier/정확도·최종 외형/시범·원래 시작P2/승인 UI/SDK·D2/전체1~6은 미완료, 출시 동작0이다. 제한된 Story의 로컬 검증/작성자 리뷰를 마치고 조건부 PR 게이트를 진행한다. 아래의 시점별 기록은 보존한다.
