@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-10 [S2.A1 얼굴–목 통합 보완](stories/avatar-neck-integration.md): PR #107 실제 merge a466528/main 포함·브랜치 보존을 확인하고 최신 main의 새 codex/avatar-neck-integration에서 시작했다. 3→4→5→6의 독립 구현 뒤 이월 D2-A를 새 전문 Blender 후보로 보완한다. 기존 Draft #9의1959개 로컬 변경/삭제·보존 원본을 건드리지 않았다. 단순 반복 시안이 아니라 새 원본·GLB·전체 변형·실제 두 rig를 검증하되 미완성 외형을 채택하지 않는다. 외형 P2/실측·시범·승인 공개 구조/SDK·외부/운영과 전체1~6 게이트는 미완료이며 텍스트 최소화와 별도 승인 규칙은 그대로다.
+
 2026-10-09 [S4.D5 최소 문구·움직이는 선택 시안](stories/visual-motion-selection-prototype.md): 기존 정적 코칭→남녀 같은 제작 시험 동작 미리보기→재생/정지→배치 복귀를 별도 HTML로 연결했다. [실제 화면·실패·한계](review/visual-motion-selection/README.md). 제품 구조/공개 번들·카메라/API/판정·원본/GLB/조형 변경0. 구조 승인·출시 동작0/실측·최종 외형·기존 시작P2·SDK/외부/운영·전체1~6/D2 미완료. 좁은 시안 범위의 조건부 PR 게이트를 진행한다. PR106은 source9e1ea57·mergea44e713의 실제 main 포함/브랜치 보존을 확인했다. 이전 시점 기록은 보존한다.
 
 2026-10-09 [S6.19 로그인 소유 첫 추론 준비](stories/owned-native-warmup.md): 준비 입력을 판정/기록에서 분리하고 준비 중 권한 취소·늦은 결과·명시적 새 소유자 재시작과 본인 중단 기록 흐름을 실제 Chrome/API/격리 SQL로 검증했다. [작동 흐름·실패/리뷰 보완·실제/합성 경계](review/owned-native-warmup/README.md). 단일5초의 최종 기본26/opt-in42·로컬 품질 검사가 통과했고 증거·조건부 PR 게이트를 진행한다. 공개 구조/문구 최소화·기본 경로/모델/화질·신체 판정·원본/GLB/조형·운영 변경0. SDK CSP 차단 시도·기존 시작P2·실측/최종 외형/시범·승인 UI/SDK·D2/전체1~6 미완료 유지. PR105는 source5f6884c1·mergece137244로 main에 포함됐고 원본 브랜치를 보존했다.
