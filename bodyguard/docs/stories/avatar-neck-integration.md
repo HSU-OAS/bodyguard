@@ -1,6 +1,6 @@
 # S2.A1 — 최종 통합의 얼굴–목 표면 보완
 
-2026-10-10 · 시작 main a466528 · FR-A-02/03/08 · codex/avatar-neck-integration · 기술 검증 완료/외형 P2 미해결·미채택
+2026-10-10 · 시작 main a466528 · FR-A-02/03/08 · codex/avatar-neck-integration · 이전 후보 기술 성공/추가 위상 보완 실패/외형 P2 미해결·미채택
 
 ## 순서와 범위
 
@@ -27,6 +27,28 @@ CEO의 10-05 지시대로 3단계 검수 목록/추천 입구, 4단계 계정·�
 이 Story는 국소 원본·GLB·변형·브라우저 보완이다. 외형 결함/새 P1/P2가 남으면 병합하지 않는다. 실제 사람·독립 관찰자·목표 노트북 정확도/부드러움·올바른 시범·웹 전체 코칭·권리/법무·외부 공급자/HTTPS·배포가 충족되지 않으면 D2-A와 전체1~6은 미완료다. 비용/계정/시크릿/운영 DB/배포/출시와 중요한 안전·개인정보 변경은 별도 승인이다.
 
 testing-strategy로 보호/실패·기술/실제 사용 경계를 먼저 정하고, code-review로 저장·보호 영역·리소스·diff를 재검토한다. 결과는 실제 미리보기·완료 기능·남은 문제 중심으로 기록한다.
+
+## 접합부 위상 보완 계약 — 2026-10-10
+
+같은 Story의 미해결 P2 보완이며 처음 후보와 검증을 대체하지 않는다. 최신 main a466528/현재 Draft #108 HEAD 6acabc7을 읽기 전용 확인했다. 체크 없음·리뷰 없음·CLEAN/MERGEABLE이지만 외형 미달로 병합 불가다. 새 후보 ce8887d를 읽기 전용 검사한 결과 뒤 목 아래에 120°를 넘는 접힌 면이 존재하고, custom normals는 없었다. 첫 sandbox Blender 실행은 exit139, 별도 허용된 독립 native 실행은 exit0이었다. 실패/크래시 로그와 원본은 보존한다.
+
+native Decimate collapse로 기존 전문 메시의 뒤쪽 국소 연결만 정리하는 후보를 만든다. 해당 vertex mask는 신장 기준 y>0, |x|<0.10, 0.82<z<0.94다. 고정 제거 예산은 해당 영역 triangle 수의30%이며 전신 ratio로 환산한다. 얼굴/앞면/손·나머지 신체의 좌표·raw skin·polygon 연결과 재질·163 rest bone/pose/world를 exact 보호하고, 원래 손 점은 삭제 없이 index만 재매핑한다. 이는 신규 단순 인체 생성이나 전체 remesh가 아니다. native 공식 구현의 zero-weight edge 보호를 확인하되 실제 설치 결과로 다시 검사한다: [Blender native 구현](https://github.com/blender/blender/blob/main/source/blender/bmesh/tools/bmesh_decimate_collapse.cc), [공식 API](https://docs.blender.org/api/5.0/bpy.types.DecimateModifier.html).
+
+하네스는 origin point ledger의 모호함/보호 영역 삭제, 비유한 값, 기존 표면에서6mm 이상 이탈, skin 합 오차0.01 이상, 보호 polygon 변경, 열린 면/뒤집힘/작은 면 증가 또는 접힌 면 감소 없음에서 실패한다. 위상 수가 달라지므로 예전 exact 전체 vertex 수를 통과 주장하지 않는다. 그 이후 독립 재열기·기존118 기술 pose·GLB export/왕복·같은 조건 실제 렌더·Chrome를 재실행한다. 실제 외형 평가는 별도다. 필수 검사나 외형 실패 시 미채택/미완료/Draft 유지, 공개 제품/의료 판정/운영 변경0이다.
+
+Native collapse의 INT point 속성은 index 유지가 아니라 보간이다. 첫 저장 전 검사에서 전체 ledger 중복을 발견하고 실패했다. 이를 원본 점으로 반올림하지 않는다. 보완된 저작기는 native 작업 마스크의0인 점만 exact origin ID로 검증하고 재구성 점은 -1로 명시한다. 보호점 origin의 중복/누락·좌표/skin/polygon 변경 검사는 그대로 강제한다. 재구성점의 변위는 실제 원본 표면 BVH로 검사하며 이전 실패 로그/실행 소스를 유지한다. 첫 그룹 wrapper 오류도 저장 전 실패로 보존했다.
+
+보호 면 비교는 male의90개 원래 다각형이182개 삼각형으로 남은 native 내부 triangulation을 검출했다. 실패와 상세 차이를 보존한다. 보완은 두 인접 면의 모든 점이 보호점이고 원래 edge 집합에 없는 native 추가 diagonal만 BMesh dissolve로 제거한다. 원래 edge/점은 제거하지 않으며 원래 polygon/material/shading exact 검사를 유지한다. 결과 없이 성공으로 간주하지 않는다.
+
+그 뒤 남은 native 추가 보호 면2개는 원래 면 집합에 없는 면만 제거했다. 작은 면적 가정으로 제거한 중간 시도는 실패했고 기록을 보존했다. 보호점/skin/원래 polygon exact는 통과했으나 첫 male의nonmanifold6/tiny3에서 저장 전 실패했다. 다음 보완은 기존 exporter와 동일한 fin 조건(삼각형·boundary2·다른 edge의face3·면적<1e-6)을 **재구성 영역 origin -1 점으로만 이루어진 면**에 제한 적용하고, 원래 보호점과닫힘·winding·작은 면 증가 방지 조건을 다시 강제한다. native added 보호 면/edge의 원본 복원과 국소 fin 제거는 전체 remesh나 임의 hole-fill이 아니다.
+
+원래 polygon 보호는 원래 전체 보호 면의 provenance로 비교해야 한다. Collapse 후 모든 점이 보호점인 새 삼각형2개는 원래 일부 점이 편집 영역이던 경계 면에서 나온 것으로, 이를 보호 면의 추가로 오분류해 지운 중간 실행이nonmanifold6을 만들었다. 실패는 유지하고 native FACE 원본 ID를 추가해 원래 전체 보호 면은exact 복원·비교하고 경계 면은 국소 편집 범위로 구별했다. 결과nonmanifold0/winding0, 원래 보호 polygon exact였으나 tiny2→3에서 실패했다. 다음 보완은 기존 exporter의 native dissolve_degenerate를 origin -1 국소 edge에만 dist1µm로 적용한다. 작은 면 증가 guard/나머지 보호 조건은 유지한다.
+
+### 위상 보완의 종료 결과
+
+[실제 실패/실행 소스/검증 미실행](../review/avatar-neck-integration/topology-attempt/README.md)을 보존했다. 마지막 실행은 male의보호점/raw skin/원래 보호 면·rest rig/PBR/손 index/닫힘0/winding0/tiny2를 통과하고 접힌 edge21→9를 관찰했다. **Female 보호 면 비교에서3개 누락으로 exit1**이었다. 그 누락이 실제 연결 변경인지 native FACE provenance 처리 문제인지 아직 분리 검증하지 않았으며 임의로 정상 처리하지 않는다. 전체남녀 제작 실패·새원본 저장0·새GLB/독립재열기/전체변형/렌더/Chrome 미실행이다. 이전 ce8887d 후보의 실제 성공을 이번 통과로 복사하지 않는다.
+
+자동 collapse/같은ratio sweep은 채택하지 않고 종료한다. 다음 보완은 참조를 기준으로 접합부의 표면과 연속 edge 흐름을 전문 도구에서 직접 재설계하는 국소 retopology다. 기존 원본을 고치는 대신 별도 원본에서 보호 영역/skin/rig·목과어깨 변형·GLB/Chrome/실제외형 검사를 다시 강제한다. 접힌 면 관찰이 전체 눈에 보이는 patch의 원인을 모두 입증한 것은 아니다. 외형 P2/전체1~6 조건과 별도 승인 경계는 그대로다.
 
 ## 실제 결과
 

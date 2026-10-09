@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-10 [S2.A1 위상 보완 실패](review/avatar-neck-integration/topology-attempt/README.md): native 국소 메시 정리를 실제 실행했으나 female 보호 면 검사3개 누락으로 실패·새후보 저장0·GLB/변형/Chrome 미실행이다. 원본/실행 소스/실패 증거를 보존하고 Draft #108/미채택/외형P2·D2/전체1~6 미완료를 유지한다. 자동collapse 반복은 종료하고 후속은 전문 도구의 접합부 국소 표면/edge 재설계다. 공개UI/최소문구·판정·운영 변경0, 기존 별도 승인 경계는 그대로다.
+
 2026-10-10 [S2.A1 얼굴–목 통합 보완](stories/avatar-neck-integration.md): PR #107 실제 merge a466528/main 포함·브랜치 보존을 확인하고 최신 main의 새 codex/avatar-neck-integration에서 시작했다. 3→4→5→6의 독립 구현 뒤 이월 D2-A를 새 전문 Blender 후보로 보완한다. 기존 Draft #9의1959개 로컬 변경/삭제·보존 원본을 건드리지 않았다. 단순 반복 시안이 아니라 새 원본·GLB·전체 변형·실제 두 rig를 검증하되 미완성 외형을 채택하지 않는다. 외형 P2/실측·시범·승인 공개 구조/SDK·외부/운영과 전체1~6 게이트는 미완료이며 텍스트 최소화와 별도 승인 규칙은 그대로다.
 
 2026-10-09 [S4.D5 최소 문구·움직이는 선택 시안](stories/visual-motion-selection-prototype.md): 기존 정적 코칭→남녀 같은 제작 시험 동작 미리보기→재생/정지→배치 복귀를 별도 HTML로 연결했다. [실제 화면·실패·한계](review/visual-motion-selection/README.md). 제품 구조/공개 번들·카메라/API/판정·원본/GLB/조형 변경0. 구조 승인·출시 동작0/실측·최종 외형·기존 시작P2·SDK/외부/운영·전체1~6/D2 미완료. 좁은 시안 범위의 조건부 PR 게이트를 진행한다. PR106은 source9e1ea57·mergea44e713의 실제 main 포함/브랜치 보존을 확인했다. 이전 시점 기록은 보존한다.
