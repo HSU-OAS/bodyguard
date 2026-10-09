@@ -18,6 +18,8 @@
 
 [단면 기반 새 부분 후보](sectioned-attempt/README.md)는 남녀 저작/원본 보호·독립 재열기를 통과했지만 실제 연결띠의 겹침/점상 접합선으로 외형 미달이다. 새 원본/8컷은 미승인 후보로 보존하며, 전체 구간·GLB/118변형/Chrome·실측 완료가 아니다.
 
+[연결띠의 실제 후속 결과](ribbon-attempt/README.md)는 새 점의 원래 내부 포함을 확인했지만 면의 접힘/틈으로 **저장 전 실패**했다. 새 후보 저장/여성 제작·GLB/변형/Chrome0이며 실제16컷은 실패 남성과 편집하지 않은 여성 비교다. 앞선 부분 후보·실패·증거는 변경하지 않는다.
+
 ![제작 후보의 실제 Blender 정면: 최종 외형 아님](source-render-qa/faceless-front.png)
 
 [남성 뒤 목 전](before-render/male-back.png)·[후](after-render/male-back.png), [여성 뒤 목 전](before-render/female-back.png)·[후](after-render/female-back.png), [남성 실제 Chrome 두 rig](browser/reviewed-male-after.png)·[여성](browser/reviewed-female-after.png)를 비교한다. 같은 조명/재질/카메라의 전후8컷씩이며 흐림·이미지 편집·AI 생성으로 수정하지 않았다. 앞 목은 보존했고 뒤 접합의 국소 개선은 최종 마감에 미달한다.
