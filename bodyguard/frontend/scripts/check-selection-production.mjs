@@ -133,6 +133,9 @@ for (const file of files) {
     '관찰자 판단을 먼저 선택하세요.',
     'reduceFramingTrial',
     'readFramingSample',
+    'warmupInference',
+    'Native preparation frame unavailable',
+    'mountNativeContentionProbe',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }

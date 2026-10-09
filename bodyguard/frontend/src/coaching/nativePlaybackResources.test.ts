@@ -66,6 +66,7 @@ function setup(
     models: NonNullable<Awaited<ReturnType<typeof prepareOwnedAvatarPair>>['models']>,
     context: Readonly<{ generation: number; signal: AbortSignal }>,
   ) => void | Promise<void>,
+  warmupInference?: boolean,
 ) {
   const stream = { getTracks: () => [] } as unknown as MediaStream
   const native = {
@@ -86,7 +87,10 @@ function setup(
   } as unknown as Awaited<ReturnType<typeof prepareOwnedAvatarPair>>
   if (prepareAvatar)
     Object.defineProperty(pair, 'models', { value: [new Object3D(), new Object3D()] })
-  const source = { read: vi.fn(async () => null), dispose: vi.fn(async () => {}) }
+  const source = {
+    read: vi.fn(async (): Promise<PoseRigFrame | null> => null),
+    dispose: vi.fn(async () => {}),
+  }
   const worker = {
     thread: 'worker' as const,
     detect: vi.fn(async () => ({ landmarks: [], worldLandmarks: [], close: vi.fn() })),
@@ -121,6 +125,7 @@ function setup(
     model: 'lite' as const,
     ...(inferenceThread === undefined ? {} : { inferenceThread }),
     ...(prepareAvatar ? { prepareAvatar } : {}),
+    ...(warmupInference === undefined ? {} : { warmupInference }),
     mirror: true,
     halfLifeMs: 50,
     maxAgeMs: 250,
@@ -172,6 +177,138 @@ function setup(
   }
 }
 beforeEach(() => vi.resetAllMocks())
+describe('native preparation frame isolation', () => {
+  it.each(['body', 'face', 'hands', 'worker'] as const)(
+    'discards the warm frame and reuses the same %s source for a fresh live frame',
+    async (mode) => {
+      const f = setup(
+        mode === 'face' || mode === 'hands' ? headAlignment() : undefined,
+        mode === 'hands' ? handAlignment() : undefined,
+        undefined,
+        undefined,
+        undefined,
+        mode === 'worker' ? 'worker' : undefined,
+        undefined,
+        true,
+      )
+      const warm = {
+        generation: 1,
+        sequence: 1,
+        at: 10,
+        result: { landmarks: [], worldLandmarks: [] },
+      }
+      const live = { ...warm, sequence: 2, at: 20 }
+      f.source.read.mockResolvedValueOnce(warm).mockResolvedValueOnce(live)
+      await f.prepare()
+      expect(f.notices).toEqual([{ type: 'ready', generation: 1 }])
+      expect(f.source.read).toHaveBeenCalledTimes(1)
+      expect(f.pair.observe).not.toHaveBeenCalled()
+      expect(f.options.render).not.toHaveBeenCalled()
+      expect(f.callbacks.size).toBe(0)
+      expect(f.actor.start(1)).toBe(true)
+      await f.fire(30)
+      expect(f.source.read).toHaveBeenCalledTimes(2)
+      expect(f.pair.observe).toHaveBeenCalledTimes(1)
+      expect(f.pair.observe).toHaveBeenCalledWith(live)
+      const factory =
+        mode === 'hands'
+          ? createBodyHandVideoSource
+          : mode === 'face'
+            ? createBodyFaceVideoSource
+            : createVideoPoseSource
+      expect(factory).toHaveBeenCalledTimes(1)
+      await f.actor.close()
+      await f.controller.close()
+      expect(f.source.dispose).toHaveBeenCalledTimes(1)
+    },
+  )
+  it('keeps the default source lazy and snapshots the opt-in before awaits', async () => {
+    const f = setup(
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      false,
+    )
+    f.options.warmupInference = true
+    await f.prepare()
+    expect(createVideoPoseSource).not.toHaveBeenCalled()
+    expect(f.source.read).not.toHaveBeenCalled()
+    expect(f.actor.start(1)).toBe(true)
+    expect(createVideoPoseSource).toHaveBeenCalledTimes(1)
+    await f.actor.close()
+    await f.controller.close()
+  })
+  it('rejects a non-boolean opt-in before camera acquisition', async () => {
+    const f = setup()
+    expect(() =>
+      createNativePlaybackResources({ ...f.options, warmupInference: 'yes' } as never),
+    ).toThrow('Invalid native playback resources')
+    expect(openCamera).not.toHaveBeenCalled()
+    await f.actor.close()
+  })
+  it('cannot become ready after a missing preparation frame', async () => {
+    const f = setup(
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      true,
+    )
+    await f.prepare()
+    expect(f.notices).toEqual([{ type: 'error', generation: 1, reason: 'asset-error' }])
+    expect(f.actor.start(1)).toBe(false)
+    expect(f.pair.observe).not.toHaveBeenCalled()
+    expect(f.source.dispose).toHaveBeenCalledTimes(1)
+    expect(f.native.close).toHaveBeenCalledTimes(1)
+    await f.actor.close()
+    await f.controller.close()
+  })
+  it('holds native close through a cancelled warm read and source retirement', async () => {
+    const f = setup(
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      true,
+    )
+    const gate = deferred<PoseRigFrame | null>(),
+      sourceClosed = deferred<void>()
+    f.source.read.mockReturnValueOnce(gate.promise)
+    f.source.dispose.mockReturnValueOnce(sourceClosed.promise)
+    const preparing = f.prepare()
+    await drain()
+    const closing = f.controller.close()
+    await drain()
+    expect(vi.mocked(createVideoPoseSource).mock.calls[0][0].signal.aborted).toBe(true)
+    expect(f.native.close).not.toHaveBeenCalled()
+    gate.resolve({
+      generation: 1,
+      sequence: 1,
+      at: 10,
+      result: { landmarks: [], worldLandmarks: [] },
+    })
+    await drain()
+    expect(f.source.dispose).toHaveBeenCalledTimes(1)
+    expect(f.native.close).not.toHaveBeenCalled()
+    sourceClosed.resolve()
+    await preparing
+    await closing
+    await f.actor.close()
+    expect(f.notices).toEqual([])
+    expect(f.pair.observe).not.toHaveBeenCalled()
+    expect(f.native.close).toHaveBeenCalledTimes(1)
+  })
+})
 describe('renderer-owned avatar preparation', () => {
   it('waits for the captured renderer preparation before ready/start', async () => {
     const gate = deferred<void>(),

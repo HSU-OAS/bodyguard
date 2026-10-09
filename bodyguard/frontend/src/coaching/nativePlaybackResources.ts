@@ -41,6 +41,8 @@ type Options = Readonly<{
   model: PoseModel
   /** Private explicit opt-in until actual SDK/browser and integration gates pass. */
   inferenceThread?: 'main' | 'worker'
+  // Private opt-in: discard one actual frame before playback becomes ready.
+  warmupInference?: boolean
   loadAvatar: Rig['load']
   /** Renderer-owned readiness before replay; explicit private opt-in, no capture/clinical cue. */
   prepareAvatar?: (
@@ -110,6 +112,7 @@ export function createNativePlaybackResources(options: Options) {
   let prepareAvatar: Options['prepareAvatar']
   let trunk = false
   let inferenceThread: 'main' | 'worker' = 'main'
+  let warmupInference = false
   try {
     const requestedThread = options.inferenceThread
     prepareAvatar = options.prepareAvatar
@@ -117,6 +120,9 @@ export function createNativePlaybackResources(options: Options) {
     if (requestedThread !== undefined && requestedThread !== 'main' && requestedThread !== 'worker')
       throw new Error()
     inferenceThread = requestedThread ?? 'main'
+    const requestedWarmup = options.warmupInference
+    if (requestedWarmup !== undefined && typeof requestedWarmup !== 'boolean') throw new Error()
+    warmupInference = requestedWarmup === true
     const requestedTrunk = options.trunk
     if (requestedTrunk !== undefined && typeof requestedTrunk !== 'boolean') throw new Error()
     trunk = requestedTrunk === true
@@ -547,6 +553,13 @@ export function createNativePlaybackResources(options: Options) {
                 stream: camera.stream,
                 detect: inference.detect,
               }),
+    ...(warmupInference
+      ? {
+          async prepareSource(source: ReturnType<typeof createVideoPoseSource>) {
+            if (!(await source.read())) throw new Error('Native preparation frame unavailable')
+          },
+        }
+      : {}),
     scheduler,
     render,
     onFailure,

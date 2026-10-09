@@ -17,7 +17,13 @@ export function mountNativeContentionProbe(
   thread: 'main' | 'worker',
   precompile = false,
   holdPreparation = false,
+  warmup = false,
+  holdWarmup = false,
 ) {
+  if (holdWarmup && (!warmup || thread !== 'main'))
+    throw new Error('Private warmup hold unavailable')
+  let releaseWarmup: (() => void) | undefined,
+    warmupHeld = false
   const scene = new Scene()
   scene.background = new Color('#ffffff')
   scene.add(new HemisphereLight('#ffffff', '#8b97a6', 2))
@@ -48,6 +54,7 @@ export function mountNativeContentionProbe(
   let deliveries = 0,
     renders = 0,
     paired = false
+  let atReady: Readonly<{ deliveries: number; renders: number }> | null = null
   let firstMs: number | null = null,
     thirdMs: number | null = null
   let lastBeatRunning = false
@@ -60,18 +67,19 @@ export function mountNativeContentionProbe(
     closing: Promise<void> | undefined
   const stages: { stage: string; startMs: number; endMs: number | null }[] = []
   // Bound the trace to first three calls/stage. No arguments or SDK result inspection.
-  const costs: { stage: string; startMs: number; endMs: number }[] = []
+  const costs: { stage: string; phase: string; startMs: number; endMs: number }[] = []
   const costCounts = new Map<string, number>()
   const restorers: (() => void)[] = []
   function timed<T>(name: string, call: () => T): T {
     const count = costCounts.get(name) ?? 0
     costCounts.set(name, Math.min(count + 1, 3))
     if (count >= 3) return call()
-    const startMs = performance.now() - epoch
+    const startMs = performance.now() - epoch,
+      phase = state
     try {
       return call()
     } finally {
-      costs.push({ stage: name, startMs, endMs: performance.now() - epoch })
+      costs.push({ stage: name, phase, startMs, endMs: performance.now() - epoch })
     }
   }
   if (thread === 'main') {
@@ -87,7 +95,17 @@ export function mountNativeContentionProbe(
       Object.defineProperty(prototype, method, {
         ...descriptor,
         value: function (this: unknown, ...args: unknown[]) {
-          return timed(name, () => Reflect.apply(original, this, args))
+          const value = timed(name, () => Reflect.apply(original, this, args))
+          if (holdWarmup && name === 'body' && !warmupHeld && state === 'preparing') {
+            warmupHeld = true
+            return new Promise((resolve) => {
+              releaseWarmup = () => {
+                releaseWarmup = undefined
+                resolve(value)
+              }
+            })
+          }
+          return value
         },
       })
       restorers.push(() => Object.defineProperty(prototype, method, descriptor))
@@ -98,7 +116,10 @@ export function mountNativeContentionProbe(
     if (lastBeat) {
       const gap = now - lastBeat
       maxGapMs = Math.max(maxGapMs, gap)
-      if (lastBeatRunning && state === 'running') runningMaxGapMs = Math.max(runningMaxGapMs, gap)
+      // RAF may deliver a pre-ready stamp after synchronous preparation returns.
+      // Only pairs of stamps wholly after ready belong to this running-gap measure.
+      if (lastBeatRunning && state === 'running' && lastBeat >= runningAt && now >= runningAt)
+        runningMaxGapMs = Math.max(runningMaxGapMs, gap)
     }
     lastBeat = now
     lastBeatRunning = state === 'running'
@@ -137,6 +158,7 @@ export function mountNativeContentionProbe(
         }
       : {}),
     inferenceThread: thread,
+    ...(warmup ? { warmupInference: true } : {}),
     mirror: true,
     halfLifeMs: 50,
     maxAgeMs: 250,
@@ -203,6 +225,7 @@ export function mountNativeContentionProbe(
         event.endMs = performance.now() - epoch
         abort.signal.throwIfAborted()
       }
+      atReady = Object.freeze({ deliveries, renders })
       readyAt = performance.now()
       runningAt = readyAt
       if (!actor.start(1)) throw new Error()
@@ -221,6 +244,8 @@ export function mountNativeContentionProbe(
       failure,
       thread,
       precompile,
+      warmup,
+      warmupHeld: warmupHeld && Boolean(releaseWarmup),
       gender,
       deliveries,
       renders,
@@ -231,6 +256,7 @@ export function mountNativeContentionProbe(
       firstMs,
       thirdMs,
       readyMs: readyAt ? readyAt - epoch : null,
+      atReady,
       stages: stages.map((value) => ({ ...value })),
       costs: costs.map((value) => ({ ...value })),
       resourceStatus: actor.getSnapshot().status,
@@ -264,6 +290,7 @@ export function mountNativeContentionProbe(
     },
     snapshot,
     releasePreparation: () => releasePreparation?.(),
+    releaseWarmup: () => releaseWarmup?.(),
     close: async () => {
       await close()
       await preparing
