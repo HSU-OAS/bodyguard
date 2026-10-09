@@ -125,6 +125,10 @@ for (const file of files) {
     'createWorkerPoseInference',
     'mountWorkerPoseProbe',
     'nativeInference.worker',
+    'createOwnedMotionPreview',
+    'Motion preview cleanup failed',
+    'Invalid motion preview selection',
+    'mountMotionPreviewProbe',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
@@ -158,5 +162,6 @@ console.log(
     unconnected_body_face_frame_strings: 0,
     unconnected_native_head_auth_strings: 0,
     unconnected_native_hand_frame_strings: 0,
+    unconnected_motion_preview_strings: 0,
   }),
 )

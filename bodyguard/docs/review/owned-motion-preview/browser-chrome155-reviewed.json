@@ -1,0 +1,148 @@
+{
+  "fixtureNotRelease": true,
+  "label": "chrome155-reviewed",
+  "browser": "155.0.8059.40",
+  "assets": {
+    "/probe.js": "4dfd61407f91ec3b2c8af2f7b2d0615539349d948c3bb82688bf17cccb3c000d",
+    "/__private-native-male.glb": "cc85bcd449f3f31347e4f7174986d41e4aca3067990f5d8a2e6ba3a099171927",
+    "/__private-native-female.glb": "27c10902aa377e995bdbc115ab773cf22f8ea38582c49820304a33ad7685f25a",
+    "/__private-native-reference-fixture.json": "d91a93e39f09005097db58a50d27dd2db0e35382a19d755bd56515f9d4e2ddf6"
+  },
+  "cases": [
+    {
+      "name": "male: no input no load",
+      "passed": true
+    },
+    {
+      "name": "male: hover actual authored motion",
+      "passed": true
+    },
+    {
+      "name": "male: leave reset release",
+      "passed": true
+    },
+    {
+      "name": "male: keyboard focus equivalent",
+      "passed": true
+    },
+    {
+      "name": "male: focused pointer leave continues",
+      "passed": true
+    },
+    {
+      "name": "male: reduced motion no autoplay",
+      "passed": true
+    },
+    {
+      "name": "male: explicit reduced-motion play",
+      "passed": true
+    },
+    {
+      "name": "male: synthetic hidden state stops",
+      "passed": true
+    },
+    {
+      "name": "male: failed load no animation",
+      "passed": true
+    },
+    {
+      "name": "male: replacement single owned asset",
+      "passed": true
+    },
+    {
+      "name": "male: removal settles all assets",
+      "passed": true
+    },
+    {
+      "name": "male: no page error or external request",
+      "passed": true
+    },
+    {
+      "name": "male: actual browser counters",
+      "counters": {
+        "status": "closed",
+        "selection": "female",
+        "failure": null,
+        "frames": 28,
+        "loads": 6,
+        "releases": 5,
+        "live": 0,
+        "peak": 1,
+        "queued": 0,
+        "positionMs": 99.90000000000009,
+        "poseIsPoster": false,
+        "removed": true,
+        "reducedMotion": false
+      },
+      "passed": true
+    },
+    {
+      "name": "female: no input no load",
+      "passed": true
+    },
+    {
+      "name": "female: hover actual authored motion",
+      "passed": true
+    },
+    {
+      "name": "female: leave reset release",
+      "passed": true
+    },
+    {
+      "name": "female: keyboard focus equivalent",
+      "passed": true
+    },
+    {
+      "name": "female: focused pointer leave continues",
+      "passed": true
+    },
+    {
+      "name": "female: reduced motion no autoplay",
+      "passed": true
+    },
+    {
+      "name": "female: explicit reduced-motion play",
+      "passed": true
+    },
+    {
+      "name": "female: synthetic hidden state stops",
+      "passed": true
+    },
+    {
+      "name": "female: failed load no animation",
+      "passed": true
+    },
+    {
+      "name": "female: replacement single owned asset",
+      "passed": true
+    },
+    {
+      "name": "female: removal settles all assets",
+      "passed": true
+    },
+    {
+      "name": "female: no page error or external request",
+      "passed": true
+    },
+    {
+      "name": "female: actual browser counters",
+      "counters": {
+        "status": "closed",
+        "selection": "male",
+        "failure": null,
+        "frames": 28,
+        "loads": 6,
+        "releases": 5,
+        "live": 0,
+        "peak": 1,
+        "queued": 0,
+        "positionMs": 99.89999999999986,
+        "poseIsPoster": false,
+        "removed": true,
+        "reducedMotion": false
+      },
+      "passed": true
+    }
+  ],
+  "failed": false
+}
