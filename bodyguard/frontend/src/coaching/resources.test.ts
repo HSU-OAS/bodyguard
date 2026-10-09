@@ -6,6 +6,7 @@ import {
   ResourceCleanupError,
   type ResourceContext,
   type ResourceNotice,
+  ResourcePreparationError,
 } from './resources'
 
 afterEach(() => {
@@ -37,6 +38,140 @@ function setup() {
   return { resources, ports, notice }
 }
 const privateFailure = () => new Error('PRIVATE_FRAME_coordinates_account_METADATA')
+
+it.each(['camera-error', 'inference-error', 'asset-error'] as const)(
+  'preparation failure preserves the fixed %s cause without mutable/raw error fields',
+  (reason) => {
+    const error = new ResourcePreparationError(reason)
+    expect(error.reason).toBe(reason)
+    expect(Object.isFrozen(error)).toBe(true)
+    expect(error.message).toBe('Resource preparation failed')
+    expect(error).not.toHaveProperty('cause')
+    expect(Reflect.set(error, 'reason', 'PRIVATE_METADATA')).toBe(false)
+    expect(error.reason).toBe(reason)
+  },
+)
+it('preparation failure rejects an unknown reason rather than publishing it', () => {
+  expect(() => new ResourcePreparationError('PRIVATE_METADATA' as never)).toThrow(
+    'Invalid preparation failure',
+  )
+})
+
+// FR-M-01/NFR-07/08: explicit independence never grants early ready or abandons late claims.
+it('parallel preparation overlaps distinct factories but waits for both before ready', async () => {
+  const f = setup(),
+    sdk = deferred<ReturnType<typeof fresh>>(),
+    avatar = deferred<ReturnType<typeof fresh>>()
+  f.ports.inference.mockReturnValueOnce(sdk.promise)
+  f.ports.avatars.mockReturnValueOnce(avatar.promise)
+  const controller = createResourceController({ ...f.ports, parallelPreparation: true }, f.notice)
+  const preparing = controller.run(request(1))
+  await vi.waitFor(() => expect(f.ports.avatars).toHaveBeenCalledTimes(1))
+  expect(f.ports.inference).toHaveBeenCalledTimes(1)
+  expect(f.notice).not.toHaveBeenCalled()
+  avatar.resolve(f.resources[2])
+  await Promise.resolve()
+  expect(f.notice).not.toHaveBeenCalled()
+  sdk.resolve(f.resources[1])
+  await preparing
+  expect(f.notice.mock.calls).toEqual([[{ type: 'ready', generation: 1 }]])
+  await controller.close()
+  for (const resource of f.resources) expect(resource.dispose).toHaveBeenCalledTimes(1)
+})
+
+it('parallel close aborts both pending factories and reclaims both late returns without ready', async () => {
+  const f = setup(),
+    sdk = deferred<ReturnType<typeof fresh>>(),
+    avatar = deferred<ReturnType<typeof fresh>>()
+  f.ports.inference.mockReturnValueOnce(sdk.promise)
+  f.ports.avatars.mockReturnValueOnce(avatar.promise)
+  const controller = createResourceController({ ...f.ports, parallelPreparation: true }, f.notice)
+  const preparing = controller.run(request(1))
+  await vi.waitFor(() => expect(f.ports.avatars).toHaveBeenCalledTimes(1))
+  await controller.close()
+  for (const stage of ['inference', 'avatars'] as const)
+    expect(f.ports[stage].mock.calls[0][0].signal.aborted).toBe(true)
+  avatar.resolve(f.resources[2])
+  sdk.resolve(f.resources[1])
+  await preparing
+  expect(f.notice).not.toHaveBeenCalled()
+  for (const resource of f.resources) expect(resource.dispose).toHaveBeenCalledTimes(1)
+})
+
+it('parallel factories cannot claim the same resource twice or publish ready', async () => {
+  const f = setup(),
+    shared = fresh()
+  f.ports.inference.mockResolvedValueOnce(shared)
+  f.ports.avatars.mockResolvedValueOnce(shared)
+  const controller = createResourceController({ ...f.ports, parallelPreparation: true }, f.notice)
+  await controller.run(request(1))
+  await controller.close()
+  expect(shared.dispose).toHaveBeenCalledOnce()
+  expect(f.resources[0].dispose).toHaveBeenCalledOnce()
+  expect(f.notice.mock.calls).toEqual([
+    [{ type: 'error', generation: 1, reason: 'ownership-error' }],
+  ])
+})
+
+it.each(['inference', 'avatars'] as const)(
+  'parallel %s failure reclaims the other late claim and cannot publish ready',
+  async (stage) => {
+    const f = setup(),
+      gate = deferred<ReturnType<typeof fresh>>()
+    const other = stage === 'inference' ? 'avatars' : 'inference'
+    const resource = f.resources[other === 'avatars' ? 2 : 1]
+    f.ports[other].mockReturnValueOnce(gate.promise)
+    f.ports[stage].mockRejectedValueOnce(privateFailure())
+    const controller = createResourceController({ ...f.ports, parallelPreparation: true }, f.notice)
+    const preparing = controller.run(request(1))
+    await vi.waitFor(() => expect(f.ports[other]).toHaveBeenCalledTimes(1))
+    gate.resolve(resource)
+    await preparing
+    expect(f.notice.mock.calls).toEqual([
+      [
+        {
+          type: 'error',
+          generation: 1,
+          reason: stage === 'inference' ? 'inference-error' : 'asset-error',
+        },
+      ],
+    ])
+    expect(f.resources[0].dispose).toHaveBeenCalledTimes(1)
+    expect(resource.dispose).toHaveBeenCalledTimes(1)
+    expect(f.resources[stage === 'inference' ? 1 : 2].dispose).not.toHaveBeenCalled()
+    await controller.close()
+  },
+)
+
+it('ordinary callers keep inference→avatar serial dependency when inference is pending', async () => {
+  const f = setup(),
+    sdk = deferred<ReturnType<typeof fresh>>()
+  f.ports.inference.mockReturnValueOnce(sdk.promise)
+  const controller = createResourceController(f.ports, f.notice)
+  const preparing = controller.run(request(1))
+  await vi.waitFor(() => expect(f.ports.inference).toHaveBeenCalledTimes(1))
+  expect(f.ports.avatars).not.toHaveBeenCalled()
+  sdk.resolve(f.resources[1])
+  await preparing
+  expect(f.notice.mock.calls).toEqual([[{ type: 'ready', generation: 1 }]])
+  await controller.close()
+})
+
+it.each([null, 1, 'true', {}])(
+  'invalid parallelPreparation=%s fails before resource access',
+  (value) => {
+    const f = setup()
+    expect(() =>
+      createResourceController(
+        { ...f.ports, parallelPreparation: value } as unknown as Parameters<
+          typeof createResourceController
+        >[0],
+        f.notice,
+      ),
+    ).toThrow('Invalid resource preparation order')
+    for (const port of Object.values(f.ports)) expect(port).not.toHaveBeenCalled()
+  },
+)
 
 it('R-07 factory 반환 전 정리 실패도 다른 소유 자원을 정리하고 재준비를 차단한다', async () => {
   const { resources, ports, notice } = setup()

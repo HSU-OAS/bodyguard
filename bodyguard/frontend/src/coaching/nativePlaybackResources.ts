@@ -198,6 +198,12 @@ export function createNativePlaybackResources(options: Options) {
     | undefined
   let issueCommand: (generation: number, action: (pair: Pair) => boolean) => boolean = () => false
   const bridge = createOwnedPlaybackResources({
+    // FR-M-01/NFR-07: SDK and owned avatar use camera lifetime but not each other's output.
+    // The cohort/controller still require both before any replay or accepted observation.
+    parallelPreparation: true,
+    // FR-M-01/NFR-08: inference owns a decoded VideoFrame, not the live camera stream.
+    // Revoke capture on stop immediately; SDK/frame release still waits for quiescence.
+    earlyCameraRelease: true,
     async camera(context) {
       cameraError = null
       const video = document.createElement('video')

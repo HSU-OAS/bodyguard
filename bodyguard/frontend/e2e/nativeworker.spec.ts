@@ -6,13 +6,19 @@ import type { mountNativeHeadAuthProbe } from './fixtures/nativeHeadAuthProbe'
 
 const origin = 'http://localhost:4173',
   mailbox = process.env.BODYGUARD_TEST_MAILBOX,
-  bundle = process.env.BODYGUARD_TEST_NATIVE_FEEDBACK_PROBE
+  bundle = process.env.BODYGUARD_TEST_NATIVE_FEEDBACK_PROBE,
+  busyBundle = process.env.BODYGUARD_TEST_WORKER_BUSY_BUNDLE
 if (
   !mailbox?.startsWith('/private/tmp/bodyguard-browser-') ||
   !bundle ||
   !/^\/private\/tmp\/bodyguard-native-feedback-proof\.[A-Za-z0-9]+\/probe-worker$/.test(bundle)
 )
   throw new Error('Owned worker auth harness required')
+if (
+  busyBundle !== undefined &&
+  !/^\/private\/tmp\/bodyguard-worker-busy-proof\.[A-Za-z0-9]+\/bundle$/.test(busyBundle)
+)
+  throw new Error('Owned worker busy harness required')
 type Probe = ReturnType<typeof mountNativeHeadAuthProbe>
 type WindowProbe = Window & { nativeAuthProbe: Probe }
 let posts = 0,
@@ -220,6 +226,169 @@ async function running(page: Page, before = 0) {
   expect(page.workers()).toHaveLength(1)
 }
 for (const gender of ['male', 'female'] as const) {
+  if (busyBundle)
+    test(`${gender} actual worker inference→immediate stop→no late acceptance`, async ({
+      page,
+      context,
+    }, info) => {
+      await join(context)
+      await mount(page, gender)
+      // S6.17: only this test response adds two timing markers around the actual engine.
+      // No delayed/synthetic detector or broader production telemetry is introduced.
+      await page.route('**/assets/nativeInference.worker-*.js', (route) =>
+        route.fulfill({
+          contentType: 'application/javascript',
+          body: readFileSync(`${busyBundle}/worker-busy.js`),
+          headers: { 'Content-Security-Policy': "connect-src 'self'" },
+        }),
+      )
+      await page.evaluate(() => {
+        const NativeWorker = globalThis.Worker
+        const stopTrack = MediaStreamTrack.prototype.stop
+        let start = 0,
+          end = 0,
+          stopAt = 0,
+          releasedAt = 0,
+          settledAt = 0,
+          markers = 0,
+          invalid = false,
+          clean = false,
+          inferenceCompleted = false
+        const clock = () => performance.timeOrigin + performance.now()
+        const probe = (window as unknown as WindowProbe).nativeAuthProbe
+        // Observe the actual camera stop call, not only a synchronous snapshot of an async teardown.
+        MediaStreamTrack.prototype.stop = function () {
+          stopTrack.call(this)
+          if (start > 0 && releasedAt === 0 && probe.snapshot().tracksEnded) releasedAt = clock()
+        }
+        globalThis.Worker = new Proxy(NativeWorker, {
+          construct(target, args) {
+            const worker = Reflect.construct(target, args) as Worker
+            worker.addEventListener('message', (event: MessageEvent<unknown>) => {
+              const message = event.data as {
+                type?: string
+                phase?: string
+                at?: number
+                clean?: boolean
+                completed?: boolean
+              }
+              if (message?.type === 'closed') clean = message.clean === true
+              if (message?.type !== 'test-only-worker-busy') return
+              // The production protocol rejects unknown messages. Keep TEST markers outside it.
+              event.stopImmediatePropagation()
+              markers++
+              if (
+                Object.keys(message).sort().join(',') !== 'at,completed,phase,type' ||
+                markers > 2 ||
+                typeof message.completed !== 'boolean' ||
+                typeof message.at !== 'number' ||
+                !Number.isFinite(message.at)
+              ) {
+                invalid = true
+                return
+              }
+              if (message.phase === 'start' && message.completed === false && start === 0) {
+                start = message.at
+                stopAt = clock()
+                const stopping = probe.stop()
+                if (probe.snapshot().tracksEnded) releasedAt = clock()
+                void Promise.resolve(stopping).then(
+                  () => {
+                    settledAt = clock()
+                  },
+                  () => {
+                    invalid = true
+                  },
+                )
+              } else if (message.phase === 'end' && start > 0 && end === 0) {
+                end = message.at
+                inferenceCompleted = message.completed
+              } else invalid = true
+            })
+            return worker
+          },
+        })
+        ;(window as unknown as Window & { workerBusy: unknown }).workerBusy = {
+          snapshot: () => ({
+            markers,
+            invalid,
+            clean,
+            inferenceCompleted,
+            roundoffMs: 4 * Number.EPSILON * clock(),
+            workerMs: end > 0 ? end - start : null,
+            stopMs: stopAt > 0 ? stopAt - start : null,
+            releaseMs: releasedAt > 0 ? releasedAt - start : null,
+            settledMs: settledAt > 0 ? settledAt - start : null,
+          }),
+          restore: () => {
+            globalThis.Worker = NativeWorker
+            MediaStreamTrack.prototype.stop = stopTrack
+          },
+        }
+      })
+      const busy = () =>
+        page.evaluate(() =>
+          (
+            window as unknown as Window & {
+              workerBusy: {
+                snapshot(): {
+                  markers: number
+                  invalid: boolean
+                  clean: boolean
+                  inferenceCompleted: boolean
+                  roundoffMs: number
+                  workerMs: number | null
+                  stopMs: number | null
+                  releaseMs: number | null
+                  settledMs: number | null
+                }
+              }
+            }
+          ).workerBusy.snapshot(),
+        )
+      try {
+        await page.evaluate(() => {
+          void (window as unknown as WindowProbe).nativeAuthProbe.start()
+        })
+        await expect
+          .poll(busy)
+          .toMatchObject({ markers: 2, invalid: false, clean: true, inferenceCompleted: true })
+        await expect
+          .poll(() => state(page))
+          .toMatchObject({
+            session: 'ended',
+            tracksEnded: true,
+            detached: true,
+            models: 0,
+            capturedNeckChecks: 0,
+            feedbackEvaluations: 0,
+            verifiedMs: 0,
+          })
+        const times = await busy()
+        writeFileSync(info.outputPath('worker-busy-timing.json'), JSON.stringify(times, null, 2))
+        if (
+          [times.workerMs, times.stopMs, times.releaseMs, times.settledMs].some((v) => v === null)
+        )
+          throw new Error('Actual inference cancellation timing unavailable')
+        expect(times.workerMs).toBeGreaterThan(0)
+        // Adding two epoch-sized clocks can introduce a few Float64 ULPs, not elapsed delay.
+        expect(times.stopMs).toBeGreaterThanOrEqual(-times.roundoffMs)
+        expect(times.releaseMs).toBeGreaterThanOrEqual(times.stopMs as number)
+        // Prove actual overlap; success between reads is not inference-in-progress cancellation.
+        expect(times.releaseMs).toBeLessThan((times.workerMs as number) - times.roundoffMs)
+        expect(times.settledMs).toBeGreaterThanOrEqual(times.workerMs as number)
+        expect(workerStarts).toBe(1)
+        expect(workerCloses).toBe(1)
+        expect(posts).toBe(0)
+        expect((await (await context.request.get('/api/v1/records/stretch')).json()).items).toEqual(
+          [],
+        )
+      } finally {
+        await page.evaluate(() =>
+          (window as unknown as Window & { workerBusy: { restore(): void } }).workerBusy.restore(),
+        )
+      }
+    })
   test(`${gender} silent worker death while preparing→bounded failure→no record`, async ({
     page,
     context,

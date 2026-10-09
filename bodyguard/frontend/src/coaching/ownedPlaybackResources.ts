@@ -5,6 +5,7 @@ import {
   ResourceCleanupError,
   type ResourceContext,
   type ResourceNotice,
+  ResourcePreparationError,
 } from './resources'
 
 type PlaybackOptions = Parameters<typeof createOwnedPosePlayback>[0]
@@ -12,6 +13,10 @@ type Source = PlaybackOptions['source']
 type Avatars = PlaybackOptions['avatars']
 type Failure = Extract<ResourceNotice, { type: 'error' }>['reason']
 type Options<C extends OwnedResource, I extends OwnedResource, A extends Avatars> = Readonly<{
+  /** FR-M-01/NFR-07: avatar factory must not depend on completed inference. */
+  parallelPreparation?: boolean
+  /** FR-M-01/NFR-08: explicit decoded-frame caller only; camera can stop before SDK quiescence. */
+  earlyCameraRelease?: boolean
   camera(context: ResourceContext): C | Promise<C>
   inference(context: ResourceContext, camera: C): I | Promise<I>
   avatars(context: ResourceContext): A | Promise<A>
@@ -25,7 +30,8 @@ const consumed = new WeakSet<object>()
 const unavailable = () => new Error('Playback resource unavailable')
 
 /** Native factories transfer distinct fresh ownership and reclaim partial failures themselves.
- * Their lifetime signal is NOT controller cancellation: active inference must settle first.
+ * SDK lifetime is NOT controller cancellation: active inference must settle first.
+ * Only an explicit decoded-frame caller may abort its separate camera lifetime earlier.
  * Source/pair/rendering stay in browser memory. This is not a release gate or SDK policy.
  */
 export function createOwnedPlaybackResources<
@@ -33,6 +39,19 @@ export function createOwnedPlaybackResources<
   I extends OwnedResource,
   A extends Avatars,
 >(options: Options<C, I, A>) {
+  let parallelPreparation = false,
+    earlyCameraRelease = false
+  try {
+    const requested = options.parallelPreparation
+    if (requested !== undefined && typeof requested !== 'boolean') throw new Error()
+    parallelPreparation = requested === true
+    const requestedEarlyRelease = options.earlyCameraRelease
+    if (requestedEarlyRelease !== undefined && typeof requestedEarlyRelease !== 'boolean')
+      throw new Error()
+    earlyCameraRelease = requestedEarlyRelease === true
+  } catch {
+    throw unavailable()
+  }
   if (
     ['camera', 'inference', 'avatars', 'source', 'render', 'onFailure'].some(
       (key) => typeof options?.[key as keyof typeof options] !== 'function',
@@ -44,6 +63,7 @@ export function createOwnedPlaybackResources<
   type Cohort = {
     context: ResourceContext
     lifetime: AbortController
+    cameraLifetime: AbortController
     capture: AbortController
     claims: Claim[]
     pending: Set<Promise<void>>
@@ -72,6 +92,10 @@ export function createOwnedPlaybackResources<
     current === cohort &&
     !cohort.context.signal.aborted &&
     !cohort.retirement
+  function ready(cohort: Cohort) {
+    if (live(cohort) && cohort.status === 'preparing' && cohort.inference && cohort.avatars)
+      cohort.status = 'ready'
+  }
   function report(cohort: Cohort, reason: Failure) {
     if (reason === 'cleanup-error') {
       cleanupFailed = true
@@ -171,6 +195,9 @@ export function createOwnedPlaybackResources<
     )
     // Invalidate saved callbacks in the same abort turn, not in a later microtask.
     cohort.capture.abort()
+    // FR-M-01/NFR-08: a decoded VideoFrame no longer borrows the live camera. Stop capture
+    // synchronously, but do not abort/close the SDK while its invocation is still running.
+    if (earlyCameraRelease) cohort.cameraLifetime.abort()
     if (!cohort.playback) cohort.lifetime.abort()
     return cohort.retirement
   }
@@ -191,6 +218,7 @@ export function createOwnedPlaybackResources<
     cohort: Cohort,
     factory: () => T | Promise<T>,
     assign: (value: T, owned: Claim) => void,
+    reason: ResourcePreparationError['reason'],
   ): Promise<OwnedResource> {
     if (!live(cohort)) throw unavailable()
     let value: T | undefined
@@ -203,9 +231,18 @@ export function createOwnedPlaybackResources<
         assign(resource, owned)
       })
       .catch((error) => {
-        if (error instanceof ResourceCleanupError) report(cohort, 'cleanup-error')
-        else void retire(cohort).catch(() => {})
-        throw error instanceof ResourceCleanupError ? error : unavailable()
+        if (error instanceof ResourceCleanupError) {
+          report(cohort, 'cleanup-error')
+          throw new ResourceCleanupError()
+        }
+        // Save the original stage before retirement aborts the other pending factory.
+        // The outer controller reports it once; onFailure is reserved for runtime/cleanup.
+        if (live(cohort) && cohort.failure === null) {
+          cohort.failure = reason
+          cohort.status = 'failed'
+        }
+        void retire(cohort).catch(() => {})
+        throw preparationFailure(cohort)
       })
     const settled = pending.then(
       () => {},
@@ -216,11 +253,22 @@ export function createOwnedPlaybackResources<
     await pending
     if (!value || !live(cohort)) {
       void retire(cohort).catch(() => {})
-      throw unavailable()
+      throw preparationFailure(cohort)
     }
     return Object.freeze({ dispose: () => retire(cohort) })
   }
+  function preparationFailure(cohort: Cohort): Error {
+    if (cohort.failure === 'cleanup-error') return new ResourceCleanupError()
+    if (
+      cohort.failure === 'camera-error' ||
+      cohort.failure === 'inference-error' ||
+      cohort.failure === 'asset-error'
+    )
+      return new ResourcePreparationError(cohort.failure)
+    return unavailable()
+  }
   const ports = Object.freeze({
+    parallelPreparation,
     async camera(context: ResourceContext) {
       if (
         !context ||
@@ -247,6 +295,7 @@ export function createOwnedPlaybackResources<
       const cohort: Cohort = {
         context: Object.freeze({ generation: context.generation, signal: context.signal }),
         lifetime: new AbortController(),
+        cameraLifetime: new AbortController(),
         capture: new AbortController(),
         claims: [],
         pending: new Set(),
@@ -265,11 +314,15 @@ export function createOwnedPlaybackResources<
         cohort,
         () =>
           options.camera(
-            Object.freeze({ generation: context.generation, signal: cohort.lifetime.signal }),
+            Object.freeze({
+              generation: context.generation,
+              signal: earlyCameraRelease ? cohort.cameraLifetime.signal : cohort.lifetime.signal,
+            }),
           ),
         (value) => {
           cohort.camera = value
         },
+        'camera-error',
       )
     },
     inference(context: ResourceContext) {
@@ -286,12 +339,18 @@ export function createOwnedPlaybackResources<
           ),
         (value) => {
           cohort.inference = value
+          ready(cohort)
         },
+        'inference-error',
       )
     },
     async avatars(context: ResourceContext) {
       const cohort = matches(context)
-      if (!cohort.inference || cohort.requested.has('avatars')) throw unavailable()
+      if (
+        !(parallelPreparation ? cohort.camera : cohort.inference) ||
+        cohort.requested.has('avatars')
+      )
+        throw unavailable()
       cohort.requested.add('avatars')
       const wrapper = await acquire(
         cohort,
@@ -302,9 +361,10 @@ export function createOwnedPlaybackResources<
         (value, owned) => {
           cohort.avatars = value
           cohort.pairClaim = owned
+          ready(cohort)
         },
+        'asset-error',
       )
-      if (live(cohort)) cohort.status = 'ready'
       return wrapper
     },
   })
