@@ -1,6 +1,6 @@
 # Bodyguard — Tasks
 
-2026-10-09 [S6.17 시작 지연 재현·전체 단계 관측](stories/native-startup-browser-comparison.md) 진행 중: 현재 원래26 계약을 별도 Chrome154에서 실행해 남성 첫 시작의 기존5초/3결과 조건 실패를 실제 재현했다. [대조·관측·실패 보존과 다음 수정](review/native-startup-browser-comparison/README.md). 155 대조와154 계측의 정상 흐름은 원인/해결의 증거가 아니며 시작P2·원인과 제품 보완은 미완료다. 기본 동작·5초/60초/retry0·모델/원본/GLB·공개 byte/최소 문구·SDK/운영을 유지한다. 이 Story는 Draft/병합 불가이고 전체1~6은 미완료다. 이전 시점 기록은 아래에 보존한다.
+2026-10-09 [S6.17 시작 지연 재현·제품 준비 중첩](stories/native-startup-browser-comparison.md) 진행 중: 첫 시작 실패를 보존하고 camera 이후 SDK/아바타를 병렬 준비하되 양쪽 준비 전 재생 금지를 구현했다. [실제 흐름·계약 개정·실패 보존](review/native-startup-browser-comparison/README.md). 최초 실패 원인과 late/cancel/새 세대/정리 격리를 보완했고 실제 브라우저 회귀를 진행한다. 순서 변경은 타이밍2건/추가 renderer4건과 실제 생성·회수 guard에 명시하며 나머지24건·5초/60초/retry0·모델/GLB·최소 문구·SDK/운영은 유지한다. 시작P2의 과거 원인과 전체 해결은 미확정이다. Draft PR101/병합 불가·전체1~6 미완료이며 이전 고정 증거/시점 기록을 보존한다.
 
 2026-10-09 [S6.16 촬영 목 전체 회귀 복원](stories/native-neck-full-regression.md): 현재 비공개 accepted frame에 원래26개 test body/guard/loop 구성을 복원했다. [실제 촬영 비율/presence·가림·pause/새 세대·권한 회수·기록 흐름과 한계](review/native-neck-full-regression/README.md). actual Chrome155/SDK/API/격리 SQL의 목26·기본24와 FE/타입/정적/build/guard·공개/원본 불변은 통과했다. 과거 Chrome154/PR90의13실패 원인·기존 시작P2 해결이 아니다. 공개 구조/최소 문구·원본/GLB/새 조형·SDK/판정·운영 변경0, 실제 사람·최종 외형/시범·승인 공개 UI/SDK·D2/전체1~6은 미완료다. 좁은 회귀 복원 Story의 조건부 PR 게이트를 진행하며 이전 기록은 보존한다.
 

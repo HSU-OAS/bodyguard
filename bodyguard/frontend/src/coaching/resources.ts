@@ -2,13 +2,31 @@
 export type OwnedResource = Readonly<{ dispose(): void | Promise<void> }>
 export type ResourceContext = Readonly<{ generation: number; signal: AbortSignal }>
 type Factory = (context: ResourceContext) => OwnedResource | Promise<OwnedResource>
-type Ports = Readonly<{ camera: Factory; inference: Factory; avatars: Factory }>
+type Ports = Readonly<{
+  camera: Factory
+  inference: Factory
+  avatars: Factory
+  /** FR-M-01/NFR-07: only independently owned factories may overlap after camera. */
+  parallelPreparation?: boolean
+}>
 type Failure =
   | 'camera-error'
   | 'inference-error'
   | 'asset-error'
   | 'ownership-error'
   | 'cleanup-error'
+type PreparationFailure = 'camera-error' | 'inference-error' | 'asset-error'
+// FR-M-01/NFR-08: concurrent preparation preserves its first fixed cause, never SDK metadata.
+export class ResourcePreparationError extends Error {
+  readonly reason: PreparationFailure
+  constructor(reason: PreparationFailure) {
+    super('Resource preparation failed')
+    if (!['camera-error', 'inference-error', 'asset-error'].includes(reason))
+      throw new Error('Invalid preparation failure')
+    this.reason = reason
+    Object.freeze(this)
+  }
+}
 // FR-A-02/NFR-08: partial/late factory cleanup is not an ordinary asset failure.
 export class ResourceCleanupError extends Error {
   constructor() {
@@ -37,6 +55,14 @@ type Claim = {
  * Neither an effect nor ready establishes authentication, clinical validity, or avatar quality.
  */
 export function createResourceController(ports: Ports, notify: Observer) {
+  let parallelPreparation = false
+  try {
+    const requested = ports.parallelPreparation
+    if (requested !== undefined && typeof requested !== 'boolean') throw new Error()
+    parallelPreparation = requested === true
+  } catch {
+    throw new Error('Invalid resource preparation order')
+  }
   const claims = new WeakMap<object, Claim>()
   const pendingCleanup = new Set<Promise<void>>()
   let current: Owner | null = null
@@ -143,7 +169,7 @@ export function createResourceController(ports: Ports, notify: Observer) {
       if (error instanceof ResourceCleanupError) {
         cleanupBroke(owner.generation)
         await settleCleanup()
-      } else await fail(owner, reason)
+      } else await fail(owner, error instanceof ResourcePreparationError ? error.reason : reason)
       return false
     }
     if (claims.has(resource)) {
@@ -187,8 +213,18 @@ export function createResourceController(ports: Ports, notify: Observer) {
     await settleCleanup()
     if (!owns(owner)) return
     if (!(await acquire(owner, ports.camera, 'camera-error'))) return
-    if (!(await acquire(owner, ports.inference, 'inference-error'))) return
-    if (!(await acquire(owner, ports.avatars, 'asset-error'))) return
+    if (parallelPreparation) {
+      // FR-M-01/NFR-07/08: no capture/ready before both distinct claims settle.
+      // Late values retain the same generation-bound reclamation on either failure.
+      const prepared = await Promise.all([
+        acquire(owner, ports.inference, 'inference-error'),
+        acquire(owner, ports.avatars, 'asset-error'),
+      ])
+      if (!prepared.every(Boolean)) return
+    } else {
+      if (!(await acquire(owner, ports.inference, 'inference-error'))) return
+      if (!(await acquire(owner, ports.avatars, 'asset-error'))) return
+    }
     if (owns(owner)) await emit({ type: 'ready', generation: owner.generation })
     await settleCleanup()
   }

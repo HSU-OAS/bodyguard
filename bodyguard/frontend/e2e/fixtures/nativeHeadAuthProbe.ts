@@ -93,6 +93,9 @@ export function mountNativeHeadAuthProbe(
     renderFrames = 0,
     nativeCalls = 0,
     nativeCloses = 0,
+    detectorInitializations = 0,
+    faceDetectorInitializations = 0,
+    handDetectorInitializations = 0,
     detectorCloses = 0,
     cameraCloses = 0,
     faceCalls = 0,
@@ -245,32 +248,38 @@ export function mountNativeHeadAuthProbe(
     camera = media.getUserMedia.bind(media),
     descriptor = Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype, 'srcObject')
   if (!descriptor?.get || !descriptor.set) throw new Error('Owned media descriptor required')
-  if (timing) {
+  if (timing || withRenderPreparation) {
     const bodyFactory = PoseLandmarker.createFromOptions,
       faceFactory = FaceLandmarker.createFromOptions,
       handsFactory = GestureRecognizer.createFromOptions
     PoseLandmarker.createFromOptions = async (...args) => {
-      const token = timing.begin('body-sdk')
+      const token = timing?.begin('body-sdk') ?? null
       try {
-        return await bodyFactory.apply(PoseLandmarker, args)
+        const owned = await bodyFactory.apply(PoseLandmarker, args)
+        detectorInitializations++
+        return owned
       } finally {
-        timing.end(token)
+        timing?.end(token)
       }
     }
     FaceLandmarker.createFromOptions = async (...args) => {
-      const token = timing.begin('face-sdk')
+      const token = timing?.begin('face-sdk') ?? null
       try {
-        return await faceFactory.apply(FaceLandmarker, args)
+        const owned = await faceFactory.apply(FaceLandmarker, args)
+        faceDetectorInitializations++
+        return owned
       } finally {
-        timing.end(token)
+        timing?.end(token)
       }
     }
     GestureRecognizer.createFromOptions = async (...args) => {
-      const token = timing.begin('hands-sdk')
+      const token = timing?.begin('hands-sdk') ?? null
       try {
-        return await handsFactory.apply(GestureRecognizer, args)
+        const owned = await handsFactory.apply(GestureRecognizer, args)
+        handDetectorInitializations++
+        return owned
       } finally {
-        timing.end(token)
+        timing?.end(token)
       }
     }
   }
@@ -818,9 +827,11 @@ export function mountNativeHeadAuthProbe(
       nativeCloses,
       nativePeopleMax,
       faceCalls,
+      faceDetectorInitializations,
       faceDetectorCloses,
       nativeFacesMax,
       handCalls,
+      handDetectorInitializations,
       handDetectorCloses,
       nativeHandsMax,
       sameInput,
@@ -829,6 +840,7 @@ export function mountNativeHeadAuthProbe(
       handsConfigured: Boolean(handAlignment),
       workerConfigured: withWorker,
       detectorCloses,
+      detectorInitializations,
       cameraCloses,
       failures: [...failures],
       models: models?.length ?? 0,

@@ -17,7 +17,7 @@ import { createVideoPoseSource } from '../pose/videoPoseSource'
 import { createWorkerPoseInference } from '../pose/workerInference'
 import { advanceCoaching, createCoaching } from '../stretch/progression'
 import { createNativePlaybackResources } from './nativePlaybackResources'
-import { createResourceController, ResourceCleanupError } from './resources'
+import { createResourceController, ResourceCleanupError, type ResourceNotice } from './resources'
 
 vi.mock('../pose/camera', async (original) => ({
   ...(await original<typeof import('../pose/camera')>()),
@@ -141,7 +141,7 @@ function setup(
     },
   }
   const actor = createNativePlaybackResources(options)
-  const notices: unknown[] = []
+  const notices: ResourceNotice[] = []
   const controller = createResourceController(actor.ports, (n) => {
     notices.push(n)
   })
@@ -172,6 +172,32 @@ function setup(
   }
 }
 beforeEach(() => vi.resetAllMocks())
+describe('independent native preparation', () => {
+  // FR-M-01/NFR-07/08: no fabricated warm-up observations or early ready/capture.
+  it('starts avatar work while SDK preparation is pending and requires both to publish ready', async () => {
+    const f = setup(),
+      sdk = deferred<typeof f.loaded>()
+    vi.mocked(createPoseLandmarker).mockReturnValueOnce(sdk.promise)
+    const preparing = f.prepare()
+    await vi.waitFor(() => expect(prepareOwnedAvatarPair).toHaveBeenCalledTimes(1))
+    await drain()
+    expect(f.actor.ports.parallelPreparation).toBe(true)
+    expect(f.actor.getSnapshot().status).toBe('preparing')
+    expect(f.actor.start(1)).toBe(false)
+    expect(f.options.render).not.toHaveBeenCalled()
+    expect(createVideoPoseSource).not.toHaveBeenCalled()
+    expect(f.notices).toEqual([])
+    sdk.resolve(f.loaded)
+    await preparing
+    expect(f.actor.getSnapshot().status).toBe('ready')
+    expect(f.notices).toEqual([{ type: 'ready', generation: 1 }])
+    await f.controller.close()
+    await f.actor.close()
+    expect(f.pair.dispose).toHaveBeenCalledTimes(1)
+    expect(f.native.close).toHaveBeenCalledTimes(1)
+    expect(closeCamera).toHaveBeenCalledTimes(1)
+  })
+})
 describe('renderer-owned avatar preparation', () => {
   it('waits for the captured renderer preparation before ready/start', async () => {
     const gate = deferred<void>(),
@@ -1161,7 +1187,7 @@ describe('native playback adapter', () => {
     expect(f.actor.getSnapshot().cameraError).toBeNull()
     expect(f.notices.some((n) => (n as { type: string }).type === 'ready')).toBe(false)
   })
-  it('closes a late SDK once after cancellation before avatar preparation', async () => {
+  it('closes a late SDK and concurrent avatar once after cancellation without ready', async () => {
     const f = setup(),
       gate = deferred<typeof f.loaded>()
     vi.mocked(createPoseLandmarker).mockReturnValueOnce(gate.promise)
@@ -1174,7 +1200,10 @@ describe('native playback adapter', () => {
     await closing
     expect(f.native.close).toHaveBeenCalledTimes(1)
     expect(closeCamera).toHaveBeenCalledTimes(1)
-    expect(prepareOwnedAvatarPair).not.toHaveBeenCalled()
+    expect(prepareOwnedAvatarPair).toHaveBeenCalledOnce()
+    expect(f.pair.dispose).toHaveBeenCalledOnce()
+    expect(f.notices.some((notice) => notice.type === 'ready')).toBe(false)
+    expect(f.source.read).not.toHaveBeenCalled()
   })
   it('preserves a late SDK cleanup failure and still closes the camera', async () => {
     const f = setup(),
@@ -1289,7 +1318,9 @@ describe('native playback adapter', () => {
     await f.actor.close()
     expect(f.native.close).toHaveBeenCalledTimes(1)
     expect(closeCamera).toHaveBeenCalledTimes(1)
-    expect(prepareOwnedAvatarPair).not.toHaveBeenCalled()
+    expect(prepareOwnedAvatarPair).toHaveBeenCalledOnce()
+    expect(f.pair.dispose).toHaveBeenCalledOnce()
+    expect(f.source.read).not.toHaveBeenCalled()
     expect(f.notices).toEqual([{ type: 'error', generation: 1, reason: 'inference-error' }])
     expect(JSON.stringify(f.actor.getSnapshot())).not.toContain('PRIVATE_FACE_FAILURE')
   })
@@ -1330,7 +1361,10 @@ describe('native playback adapter', () => {
     expect(f.native.close).toHaveBeenCalledTimes(1)
     expect(f.face.close).toHaveBeenCalledTimes(1)
     expect(closeCamera).toHaveBeenCalledTimes(1)
-    expect(prepareOwnedAvatarPair).not.toHaveBeenCalled()
+    expect(prepareOwnedAvatarPair).toHaveBeenCalledOnce()
+    expect(f.pair.dispose).toHaveBeenCalledOnce()
+    expect(f.notices.some((notice) => notice.type === 'ready')).toBe(false)
+    expect(f.source.read).not.toHaveBeenCalled()
   })
   it.each(['face', 'body'] as const)(
     'preserves %s cleanup failure while releasing all resources',
@@ -1431,7 +1465,10 @@ describe('optional native hand ownership', () => {
     expect(f.face.close).toHaveBeenCalledOnce()
     expect(f.native.close).toHaveBeenCalledOnce()
     expect(closeCamera).toHaveBeenCalledOnce()
-    expect(prepareOwnedAvatarPair).not.toHaveBeenCalled()
+    expect(prepareOwnedAvatarPair).toHaveBeenCalledOnce()
+    expect(f.pair.dispose).toHaveBeenCalledOnce()
+    expect(f.notices.some((notice) => notice.type === 'ready')).toBe(false)
+    expect(f.source.read).not.toHaveBeenCalled()
     expect(f.actor.getSnapshot().poisoned).toBe(true)
   })
   it('does not initialize hands after face failure', async () => {
@@ -1457,7 +1494,10 @@ describe('optional native hand ownership', () => {
     await closing
     expect(f.gesture.close).toHaveBeenCalledOnce()
     expect(closeCamera).toHaveBeenCalledOnce()
-    expect(prepareOwnedAvatarPair).not.toHaveBeenCalled()
+    expect(prepareOwnedAvatarPair).toHaveBeenCalledOnce()
+    expect(f.pair.dispose).toHaveBeenCalledOnce()
+    expect(f.notices.some((notice) => notice.type === 'ready')).toBe(false)
+    expect(f.source.read).not.toHaveBeenCalled()
   })
   it.each(['body', 'face', 'hands'] as const)(
     'attempts all release operations after %s close failure',

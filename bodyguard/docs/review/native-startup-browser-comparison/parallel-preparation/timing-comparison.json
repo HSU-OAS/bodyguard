@@ -1,0 +1,551 @@
+{
+  "beforeCases": 26,
+  "afterCases": 26,
+  "before": {
+    "sdkChainMs": {
+      "min": 1292.7,
+      "median": 1305.6,
+      "max": 1863.3
+    },
+    "avatarMs": {
+      "min": 239.1,
+      "median": 255.7,
+      "max": 288.7
+    },
+    "overlapMs": {
+      "min": 0,
+      "median": 0,
+      "max": 0
+    },
+    "cameraReadyToRenderMs": {
+      "min": 1695.8,
+      "median": 1714.2,
+      "max": 2268.2
+    },
+    "cameraReadyToThirdResultMs": {
+      "min": 2977.7,
+      "median": 2997.5,
+      "max": 3545.3
+    },
+    "firstResultMs": {
+      "min": 785.4,
+      "median": 807,
+      "max": 1142.1
+    }
+  },
+  "after": {
+    "sdkChainMs": {
+      "min": 1609.7,
+      "median": 1641,
+      "max": 1719.3
+    },
+    "avatarMs": {
+      "min": 249.8,
+      "median": 257.7,
+      "max": 275.6
+    },
+    "overlapMs": {
+      "min": 248.3,
+      "median": 256.2,
+      "max": 273.1
+    },
+    "cameraReadyToRenderMs": {
+      "min": 1675.9,
+      "median": 1706.5,
+      "max": 1813
+    },
+    "cameraReadyToThirdResultMs": {
+      "min": 2934.7,
+      "median": 2992.2,
+      "max": 3253.1
+    },
+    "firstResultMs": {
+      "min": 788.9,
+      "median": 806.2,
+      "max": 901.5
+    }
+  },
+  "observedOverlapCasesBefore": 0,
+  "observedOverlapCasesAfter": 26,
+  "timingInstrumented": true,
+  "controlledCausalComparison": false,
+  "actualCamera": false,
+  "actualHuman": false,
+  "modelQualityChanged": false,
+  "historicalRootCauseProven": false,
+  "startupP2Resolved": false,
+  "rows": {
+    "before": [
+      {
+        "title": "male actual owned phase→pause→fresh generation reference",
+        "sdkChainMs": 1305.4000000059605,
+        "avatarMs": 254.90000000596046,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1714.0999999940395,
+        "cameraReadyToThirdResultMs": 3001.699999988079,
+        "firstResultMs": 804
+      },
+      {
+        "title": "male native held result→server401→no old resume/save",
+        "sdkChainMs": 1319.1000000238419,
+        "avatarMs": 265.7999999821186,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1736.5999999940395,
+        "cameraReadyToThirdResultMs": 3033.5,
+        "firstResultMs": 815.6999999880791
+      },
+      {
+        "title": "male native first-start stage timing without raw input",
+        "sdkChainMs": 1305.7999999821186,
+        "avatarMs": 259.89999997615814,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1720.2000000178814,
+        "cameraReadyToThirdResultMs": 3042.7000000178814,
+        "firstResultMs": 820.5
+      },
+      {
+        "title": "male native aggregate trunk→required endpoints→fresh generation→own record",
+        "sdkChainMs": 1302,
+        "avatarMs": 263.80000001192093,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1713,
+        "cameraReadyToThirdResultMs": 3041.4000000059605,
+        "firstResultMs": 834.9000000059605
+      },
+      {
+        "title": "male native held result→pagehide→no old resume/save",
+        "sdkChainMs": 1299,
+        "avatarMs": 255.10000002384186,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1702.5,
+        "cameraReadyToThirdResultMs": 2982.0999999940395,
+        "firstResultMs": 803.5
+      },
+      {
+        "title": "male native neck captured aspect→presence→retirement→new generation",
+        "sdkChainMs": 1380.9000000059605,
+        "avatarMs": 288.69999998807907,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1862.5,
+        "cameraReadyToThirdResultMs": 3539.2000000178814,
+        "firstResultMs": 1142.0999999940395
+      },
+      {
+        "title": "male native held result→unmount→no old resume/save",
+        "sdkChainMs": 1298,
+        "avatarMs": 257.40000000596046,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1705.199999988079,
+        "cameraReadyToThirdResultMs": 2979,
+        "firstResultMs": 814.3000000119209
+      },
+      {
+        "title": "male native delivery→current session→surface feedback→crop/multiple/none→recovery",
+        "sdkChainMs": 1302.7999999821186,
+        "avatarMs": 257.90000000596046,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1710.2000000178814,
+        "cameraReadyToThirdResultMs": 2988.5999999940395,
+        "firstResultMs": 806.8999999761581
+      },
+      {
+        "title": "male native held result→logout→no old resume/save",
+        "sdkChainMs": 1296,
+        "avatarMs": 255.10000002384186,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1703.800000011921,
+        "cameraReadyToThirdResultMs": 2981.5,
+        "firstResultMs": 806.2000000178814
+      },
+      {
+        "title": "male native aggregate trunk→held result→logout cannot revive colour/save",
+        "sdkChainMs": 1314.9000000059605,
+        "avatarMs": 263.69999998807907,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1726.5,
+        "cameraReadyToThirdResultMs": 3034.0999999940395,
+        "firstResultMs": 815.2999999821186
+      },
+      {
+        "title": "male native held result→same-account refresh→new owner explicit restart",
+        "sdkChainMs": 1298.5,
+        "avatarMs": 251.89999997615814,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1701.699999988079,
+        "cameraReadyToThirdResultMs": 3011.2999999821186,
+        "firstResultMs": 785.4000000059605
+      },
+      {
+        "title": "male native current error code→authored correction→different cause→occlusion",
+        "sdkChainMs": 1295.800000011921,
+        "avatarMs": 252.40000000596046,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1700.2999999821186,
+        "cameraReadyToThirdResultMs": 2984.5,
+        "firstResultMs": 807.1000000238419
+      },
+      {
+        "title": "male native start→stop→own interrupted record",
+        "sdkChainMs": 1302,
+        "avatarMs": 260.7000000178814,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1713.4000000059605,
+        "cameraReadyToThirdResultMs": 2993.2000000178814,
+        "firstResultMs": 803.7000000178814
+      },
+      {
+        "title": "female actual owned phase→pause→fresh generation reference",
+        "sdkChainMs": 1304.2000000178814,
+        "avatarMs": 254,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1710,
+        "cameraReadyToThirdResultMs": 2997.7000000178814,
+        "firstResultMs": 786.8000000119209
+      },
+      {
+        "title": "female native aggregate trunk→required endpoints→fresh generation→own record",
+        "sdkChainMs": 1555.300000011921,
+        "avatarMs": 248.40000000596046,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1951.4000000059605,
+        "cameraReadyToThirdResultMs": 3441.699999988079,
+        "firstResultMs": 982.0999999940395
+      },
+      {
+        "title": "female native neck captured aspect→presence→retirement→new generation",
+        "sdkChainMs": 1364.699999988079,
+        "avatarMs": 270.7999999821186,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1813.0999999940395,
+        "cameraReadyToThirdResultMs": 3261.199999988079,
+        "firstResultMs": 903.0999999940395
+      },
+      {
+        "title": "female native delivery→current session→surface feedback→crop/multiple/none→recovery",
+        "sdkChainMs": 1306.699999988079,
+        "avatarMs": 258.69999998807907,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1714.300000011921,
+        "cameraReadyToThirdResultMs": 2985.5999999940395,
+        "firstResultMs": 805.1999999880791
+      },
+      {
+        "title": "female native held result→same-account refresh→new owner explicit restart",
+        "sdkChainMs": 1328.300000011921,
+        "avatarMs": 246.5,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1727.0999999940395,
+        "cameraReadyToThirdResultMs": 3035.5,
+        "firstResultMs": 815.2000000178814
+      },
+      {
+        "title": "female native held result→server401→no old resume/save",
+        "sdkChainMs": 1311.199999988079,
+        "avatarMs": 257.09999999403954,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1722,
+        "cameraReadyToThirdResultMs": 2982.199999988079,
+        "firstResultMs": 800.9000000059605
+      },
+      {
+        "title": "female native aggregate trunk→held result→logout cannot revive colour/save",
+        "sdkChainMs": 1418.5999999940395,
+        "avatarMs": 239.09999999403954,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1803.9000000059605,
+        "cameraReadyToThirdResultMs": 3096.699999988079,
+        "firstResultMs": 802.0999999940395
+      },
+      {
+        "title": "female native first-start stage timing without raw input",
+        "sdkChainMs": 1308.5999999940395,
+        "avatarMs": 256.19999998807907,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1716.300000011921,
+        "cameraReadyToThirdResultMs": 2986.800000011921,
+        "firstResultMs": 801.5999999940395
+      },
+      {
+        "title": "female native held result→unmount→no old resume/save",
+        "sdkChainMs": 1299.5999999940395,
+        "avatarMs": 251.40000000596046,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1698.5999999940395,
+        "cameraReadyToThirdResultMs": 2977.7000000178814,
+        "firstResultMs": 806.5999999940395
+      },
+      {
+        "title": "female native held result→logout→no old resume/save",
+        "sdkChainMs": 1298.5,
+        "avatarMs": 246.89999997615814,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1696,
+        "cameraReadyToThirdResultMs": 2985.5,
+        "firstResultMs": 809.1999999880791
+      },
+      {
+        "title": "female native start→stop→own interrupted record",
+        "sdkChainMs": 1308.2000000178814,
+        "avatarMs": 259.40000000596046,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1715.300000011921,
+        "cameraReadyToThirdResultMs": 2980.9000000059605,
+        "firstResultMs": 804.6999999880791
+      },
+      {
+        "title": "female native current error code→authored correction→different cause→occlusion",
+        "sdkChainMs": 1863.2999999821186,
+        "avatarMs": 252.59999999403954,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 2268.2000000178814,
+        "cameraReadyToThirdResultMs": 3545.300000011921,
+        "firstResultMs": 825
+      },
+      {
+        "title": "female native held result→pagehide→no old resume/save",
+        "sdkChainMs": 1292.699999988079,
+        "avatarMs": 253.30000001192093,
+        "overlapMs": 0,
+        "cameraReadyToRenderMs": 1695.800000011921,
+        "cameraReadyToThirdResultMs": 2997.300000011921,
+        "firstResultMs": 811.0999999940395
+      }
+    ],
+    "after": [
+      {
+        "title": "male actual owned phase→pause→fresh generation reference",
+        "sdkChainMs": 1658.199999988079,
+        "avatarMs": 269.10000002384186,
+        "overlapMs": 267.40000000596046,
+        "cameraReadyToRenderMs": 1725.2999999821186,
+        "cameraReadyToThirdResultMs": 2991,
+        "firstResultMs": 805.9000000059605
+      },
+      {
+        "title": "male native held result→server401→no old resume/save",
+        "sdkChainMs": 1644.0999999940395,
+        "avatarMs": 257.60000002384186,
+        "overlapMs": 256.2000000178814,
+        "cameraReadyToRenderMs": 1707.0999999940395,
+        "cameraReadyToThirdResultMs": 2992.800000011921,
+        "firstResultMs": 788.8999999761581
+      },
+      {
+        "title": "male native first-start stage timing without raw input",
+        "sdkChainMs": 1640.5999999940395,
+        "avatarMs": 262.39999997615814,
+        "overlapMs": 260.89999997615814,
+        "cameraReadyToRenderMs": 1705.9000000059605,
+        "cameraReadyToThirdResultMs": 2994.300000011921,
+        "firstResultMs": 797.5999999940395
+      },
+      {
+        "title": "male native aggregate trunk→required endpoints→fresh generation→own record",
+        "sdkChainMs": 1644.7999999821186,
+        "avatarMs": 265.7999999821186,
+        "overlapMs": 264.2999999821186,
+        "cameraReadyToRenderMs": 1710.699999988079,
+        "cameraReadyToThirdResultMs": 2992,
+        "firstResultMs": 812.0999999940395
+      },
+      {
+        "title": "male native held result→pagehide→no old resume/save",
+        "sdkChainMs": 1643.4000000059605,
+        "avatarMs": 259.7999999821186,
+        "overlapMs": 258.5,
+        "cameraReadyToRenderMs": 1707.1000000238419,
+        "cameraReadyToThirdResultMs": 2986.7000000178814,
+        "firstResultMs": 812.6999999880791
+      },
+      {
+        "title": "male native neck captured aspect→presence→retirement→new generation",
+        "sdkChainMs": 1719.2999999821186,
+        "avatarMs": 275.59999999403954,
+        "overlapMs": 273.09999999403954,
+        "cameraReadyToRenderMs": 1813,
+        "cameraReadyToThirdResultMs": 3253.0999999940395,
+        "firstResultMs": 901.5
+      },
+      {
+        "title": "male native held result→unmount→no old resume/save",
+        "sdkChainMs": 1650.4000000059605,
+        "avatarMs": 262.69999998807907,
+        "overlapMs": 261,
+        "cameraReadyToRenderMs": 1716.5,
+        "cameraReadyToThirdResultMs": 3002.5,
+        "firstResultMs": 818.5
+      },
+      {
+        "title": "male native delivery→current session→surface feedback→crop/multiple/none→recovery",
+        "sdkChainMs": 1652.6000000238419,
+        "avatarMs": 264,
+        "overlapMs": 262.60000002384186,
+        "cameraReadyToRenderMs": 1716.7999999821186,
+        "cameraReadyToThirdResultMs": 2984.7999999821186,
+        "firstResultMs": 802.5
+      },
+      {
+        "title": "male native held result→logout→no old resume/save",
+        "sdkChainMs": 1646,
+        "avatarMs": 258.7999999821186,
+        "overlapMs": 257.40000000596046,
+        "cameraReadyToRenderMs": 1708,
+        "cameraReadyToThirdResultMs": 2985.800000011921,
+        "firstResultMs": 802.9000000059605
+      },
+      {
+        "title": "male native aggregate trunk→held result→logout cannot revive colour/save",
+        "sdkChainMs": 1635.9000000059605,
+        "avatarMs": 263.80000001192093,
+        "overlapMs": 262.09999999403954,
+        "cameraReadyToRenderMs": 1701.8999999761581,
+        "cameraReadyToThirdResultMs": 2992.399999976158,
+        "firstResultMs": 806
+      },
+      {
+        "title": "male native held result→same-account refresh→new owner explicit restart",
+        "sdkChainMs": 1633,
+        "avatarMs": 260.7999999821186,
+        "overlapMs": 259.09999999403954,
+        "cameraReadyToRenderMs": 1698.9000000059605,
+        "cameraReadyToThirdResultMs": 2981.4000000059605,
+        "firstResultMs": 811.7000000178814
+      },
+      {
+        "title": "male native current error code→authored correction→different cause→occlusion",
+        "sdkChainMs": 1623.0999999940395,
+        "avatarMs": 267.90000000596046,
+        "overlapMs": 266.40000000596046,
+        "cameraReadyToRenderMs": 1687.4000000059605,
+        "cameraReadyToThirdResultMs": 2988.5999999940395,
+        "firstResultMs": 807.7999999821186
+      },
+      {
+        "title": "male native start→stop→own interrupted record",
+        "sdkChainMs": 1627.0999999940395,
+        "avatarMs": 264.69999998807907,
+        "overlapMs": 263.09999999403954,
+        "cameraReadyToRenderMs": 1694.9000000059605,
+        "cameraReadyToThirdResultMs": 2978,
+        "firstResultMs": 812.3000000119209
+      },
+      {
+        "title": "female actual owned phase→pause→fresh generation reference",
+        "sdkChainMs": 1624.5,
+        "avatarMs": 252.7999999821186,
+        "overlapMs": 251.19999998807907,
+        "cameraReadyToRenderMs": 1693.1000000238419,
+        "cameraReadyToThirdResultMs": 2977.7000000178814,
+        "firstResultMs": 809.1999999880791
+      },
+      {
+        "title": "female native aggregate trunk→required endpoints→fresh generation→own record",
+        "sdkChainMs": 1641.4000000059605,
+        "avatarMs": 256.40000000596046,
+        "overlapMs": 254.90000000596046,
+        "cameraReadyToRenderMs": 1707,
+        "cameraReadyToThirdResultMs": 2987.699999988079,
+        "firstResultMs": 805.9000000059605
+      },
+      {
+        "title": "female native neck captured aspect→presence→retirement→new generation",
+        "sdkChainMs": 1703.4000000059605,
+        "avatarMs": 256,
+        "overlapMs": 254.5,
+        "cameraReadyToRenderMs": 1794.7000000178814,
+        "cameraReadyToThirdResultMs": 3210.7000000178814,
+        "firstResultMs": 885.0999999940395
+      },
+      {
+        "title": "female native delivery→current session→surface feedback→crop/multiple/none→recovery",
+        "sdkChainMs": 1623.9000000059605,
+        "avatarMs": 252.40000000596046,
+        "overlapMs": 250.7000000178814,
+        "cameraReadyToRenderMs": 1691,
+        "cameraReadyToThirdResultMs": 2985.5999999940395,
+        "firstResultMs": 805.0999999940395
+      },
+      {
+        "title": "female native held result→same-account refresh→new owner explicit restart",
+        "sdkChainMs": 1629.7999999821186,
+        "avatarMs": 256.60000002384186,
+        "overlapMs": 254.90000000596046,
+        "cameraReadyToRenderMs": 1695.5,
+        "cameraReadyToThirdResultMs": 2934.699999988079,
+        "firstResultMs": 798.2000000178814
+      },
+      {
+        "title": "female native held result→server401→no old resume/save",
+        "sdkChainMs": 1636.0999999940395,
+        "avatarMs": 253.80000001192093,
+        "overlapMs": 252.5,
+        "cameraReadyToRenderMs": 1698.2999999821186,
+        "cameraReadyToThirdResultMs": 3017.399999976158,
+        "firstResultMs": 805.4000000059605
+      },
+      {
+        "title": "female native aggregate trunk→held result→logout cannot revive colour/save",
+        "sdkChainMs": 1619.2999999821186,
+        "avatarMs": 249.7999999821186,
+        "overlapMs": 248.2999999821186,
+        "cameraReadyToRenderMs": 1685.199999988079,
+        "cameraReadyToThirdResultMs": 3003.2999999821186,
+        "firstResultMs": 808.5
+      },
+      {
+        "title": "female native first-start stage timing without raw input",
+        "sdkChainMs": 1649.199999988079,
+        "avatarMs": 256.2999999821186,
+        "overlapMs": 254.69999998807907,
+        "cameraReadyToRenderMs": 1716.9000000059605,
+        "cameraReadyToThirdResultMs": 2993.5999999940395,
+        "firstResultMs": 802.9000000059605
+      },
+      {
+        "title": "female native held result→unmount→no old resume/save",
+        "sdkChainMs": 1687.4000000059605,
+        "avatarMs": 257.69999998807907,
+        "overlapMs": 256.09999999403954,
+        "cameraReadyToRenderMs": 1752,
+        "cameraReadyToThirdResultMs": 3036,
+        "firstResultMs": 803.1999999880791
+      },
+      {
+        "title": "female native held result→logout→no old resume/save",
+        "sdkChainMs": 1646,
+        "avatarMs": 257.7000000178814,
+        "overlapMs": 255.7000000178814,
+        "cameraReadyToRenderMs": 1710.5999999940395,
+        "cameraReadyToThirdResultMs": 2992.800000011921,
+        "firstResultMs": 806.3000000119209
+      },
+      {
+        "title": "female native start→stop→own interrupted record",
+        "sdkChainMs": 1628.5,
+        "avatarMs": 254.69999998807907,
+        "overlapMs": 253.09999999403954,
+        "cameraReadyToRenderMs": 1694.5,
+        "cameraReadyToThirdResultMs": 2993.399999976158,
+        "firstResultMs": 809.2999999821186
+      },
+      {
+        "title": "female native current error code→authored correction→different cause→occlusion",
+        "sdkChainMs": 1628.7999999821186,
+        "avatarMs": 255.7999999821186,
+        "overlapMs": 254.2999999821186,
+        "cameraReadyToRenderMs": 1694.5,
+        "cameraReadyToThirdResultMs": 3005.899999976158,
+        "firstResultMs": 808.6999999880791
+      },
+      {
+        "title": "female native held result→pagehide→no old resume/save",
+        "sdkChainMs": 1609.699999988079,
+        "avatarMs": 253.59999999403954,
+        "overlapMs": 251.90000000596046,
+        "cameraReadyToRenderMs": 1675.9000000059605,
+        "cameraReadyToThirdResultMs": 2947.300000011921,
+        "firstResultMs": 802.4000000059605
+      }
+    ]
+  }
+}

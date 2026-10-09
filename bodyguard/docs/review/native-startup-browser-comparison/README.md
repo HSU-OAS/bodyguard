@@ -1,5 +1,19 @@
 # 코칭 시작 실패 재현 · S6.17 진행 중
 
+## 후속 제품 수정 · 병렬 준비 검증 중
+
+카메라 이후 독립 SDK/아바타 준비를 중첩하고 양쪽 소유권 이전에는 ready/재생을 금지하도록 구현했다. 최초 asset 실패가 다른 factory의 abort로 덮이는 문제도 고정 stage 원인 보존으로 수정했다. 일반 factory의 직렬 기본값, 취소/late 회수·정리 실패 격리·새 세대 장벽·출시 동작0은 유지한다.
+
+초기156pass/6fail, 첫 브라우저12pass/1fail, renderer 추가0pass/2fail와 실행 전 DB sandbox 실패를 보존했다. 병렬 준비에 따라 기존 타이밍2건의 순서 계약과 renderer 추가4건의 실제 생성/회수 guard를 [Story](../../stories/native-startup-browser-comparison.md)에 명시했다. 원래26건 모두 불변으로 표시하지 않으며 나머지24건 및 poll/timeout/retry는 그대로다. [별도 정확한 계약 비교](compare-parallel-contract.mjs)는 baseline의 명시한 변경만 허용한다.
+
+기존 `manifest.json`/457개 증거와 아래 조사 기록은 이전 시점의 고정 baseline이며 덮어쓰지 않는다. 기존 `verify.mjs --current`는 그 시점 소스 대조이므로 후속 소스 검증에 사용하지 않는다. 새 제품 수정의 실제 회귀·시간·정리 증거는 별도 구간에 추가한다. **시작 P2/Story/전체1~6은 미완료이며 Draft PR101 병합 불가다.**
+
+[후속 실제 결과](parallel-preparation/README.md): 두 Chrome 실행본 각각 남녀26·전체 계측26·renderer 취소4건의 흐름/회수를 확인했다. 준비는 실제 중첩됐지만 전체 지연은 거의 줄지 않았다. 성능 개선/과거 원인 해결로 주장하지 않으며 동일 Draft에서 main-thread 추론 병목을 이어간다. 최초 실패/개정 계약과17개 새 bundle은 기존 증거와 분리했다.
+
+---
+
+아래는 제품 수정 전 재현·계측 결과다.
+
 [Story](../../stories/native-startup-browser-comparison.md). 최신 main85885c4d에서 원래26개 회귀의 본문/guard/loop를 유지해 시작 지연을 다시 확인했다. **시작 P2는 미해결이고 이 Story는 완료/병합 불가다.**
 
 ## 실제 흐름과 발견

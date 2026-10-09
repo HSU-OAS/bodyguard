@@ -129,13 +129,19 @@ test.afterEach(async ({ page, browser }, info) => {
     expect(final.nativeFacesMax).toBe(0)
     expect(final.sameInput).toBe(true)
     expect(final.faceCalls).toBe(final.nativeCalls)
-    expect(final.faceDetectorCloses).toBe(final.cameras)
+    expect(final.faceDetectorCloses).toBe(
+      withRenderPreparation ? final.faceDetectorInitializations : final.cameras,
+    )
     expect(final.handCalls).toBe(withHands ? final.nativeCalls : 0)
-    expect(final.handDetectorCloses).toBe(withHands ? final.cameras : 0)
+    expect(final.handDetectorCloses).toBe(
+      withRenderPreparation ? final.handDetectorInitializations : withHands ? final.cameras : 0,
+    )
     expect(final.nativeHandsMax).toBe(0)
     expect(final.productionAdapter).toBe(true)
     expect(final.cameraCloses).toBe(final.cameras)
-    expect(final.detectorCloses).toBe(final.cameras)
+    expect(final.detectorCloses).toBe(
+      withRenderPreparation ? final.detectorInitializations : final.cameras,
+    )
     expect(final.models).toBe(0)
     expect(final.failures).toEqual([])
     expect(final.memory).toEqual(final.baseline)
@@ -471,9 +477,6 @@ for (const gender of ['male', 'female'] as const) {
             renderFrames: 0,
             nativeCalls: 0,
             cameraCloses: 1,
-            detectorCloses: 1,
-            faceDetectorCloses: 1,
-            handDetectorCloses: 1,
             tracksEnded: true,
             models: 0,
           })
@@ -527,7 +530,8 @@ for (const gender of ['male', 'female'] as const) {
       }
       const first = (stage: string) => timing.events.find((row) => row.stage === stage)
       expect(first('body-sdk')?.startMs).toBeGreaterThanOrEqual(first('camera')?.endMs ?? Infinity)
-      expect(first('avatar')?.startMs).toBeGreaterThanOrEqual(first('hands-sdk')?.endMs ?? Infinity)
+      expect(first('avatar')?.startMs).toBeGreaterThanOrEqual(first('camera')?.endMs ?? Infinity)
+      expect(first('render')?.startMs).toBeGreaterThanOrEqual(first('hands-sdk')?.endMs ?? Infinity)
       expect(first('render')?.startMs).toBeGreaterThanOrEqual(first('avatar')?.endMs ?? Infinity)
       expect(first('body')?.startMs).toBeGreaterThanOrEqual(first('render')?.endMs ?? Infinity)
       expect(timing.events.filter((row) => row.stage === 'result')).toHaveLength(3)
