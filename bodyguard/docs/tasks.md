@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-09 [S6.15 로그인 소유 렌더 준비](stories/owned-render-preparation.md): GPU 준비 helper를 실제 로그인 소유 코칭에 연결해 준비 중 logout/이탈·늦은 완료의 재생/기록 차단과 남녀 정상·pause/새 세대/본인 기록을 확인했다. [실제 흐름·실패2건·보완·한계](review/owned-render-preparation/README.md). actual Chrome prepared28/default24·FE1411·타입/정적/build/guard·공개 byte 불변을 확인하고 증거/조건부 PR 게이트를 진행한다. PR98 실제 mergec15608a의 최신 main에서 시작했다. 기본 경로·SDK 정책/모델/화질·원본/GLB/새 조형·최소 문구·운영 유지, 원래26/기존 시작P2·실측/최종 외형·승인 공개 구조/SDK·D2/전체1~6은 미완료다. 이전 시점 기록은 아래에 보존한다.
+
 2026-10-09 [S6.14 렌더 준비 장벽](stories/native-first-render-isolation.md): 두 아바타의 shader/GPU 업로드를 ready 이전에 마치고 취소·실패 때 늦은 재생을 막는다. [실제 흐름·실패·한계](review/native-first-render-isolation/README.md). 최종 준비 후 첫 render1.0~5.8ms지만 비용은 준비로 이동했으며 추론/화면 공백·중간 대조군6047ms와 기존 시작P2는 남는다. 공개 byte/문구·원본/GLB·모델/화질·기본 main/SDK/운영 유지, 실제 사람/승인 공개 구조·최종 외형·D2/전체1~6은 미완료다. 현재 Story 결과 정리·조건부 PR 게이트를 진행한다. 다음 신규 Story/외부/디자인 적용을 이 기록으로 승인된 것으로 만들지 않는다. 텍스트는 짧은 제목·버튼·현재 코칭, 펼쳐 보는 설명·간결한 필수 안전 안내로 제한한다.
 
 2026-10-09 [S6.13 시작·화면 경합 조사](stories/native-main-thread-contention.md): 실제 비공개 native 자원·두 원본 GLB의 main/Worker 흐름을 제한된 Chrome/CDP 조건에서 비교했다. [작동 흐름·실패·한계](review/native-main-thread-contention/README.md). Worker도 첫 화면 공백이 남으며 과거 시작 실패13건은 재현되지 않았다. 기존 통합26건은 미실행/시작P2 유지다. 공개 byte/최소 문구·원본/기본 경로/모델·판정/SDK/운영은 변경0이며 실제 사람·승인 공개 구조·최종 외형·D2/전체1~6은 미완료다. 다음은 첫 렌더/SDK 비용의 제한된 분리 조사다.

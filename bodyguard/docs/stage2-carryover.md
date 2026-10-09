@@ -4,6 +4,8 @@
 
 ## 기준선과 보존
 
+2026-10-09 [S6.15](stories/owned-render-preparation.md)의 [로그인 소유 GPU 준비·취소 통합](review/owned-render-preparation/README.md)을 기록했다. actual Chrome/API/격리 SQL에서 prepared28/default24·본인 중단 기록·늦은 준비 완료의 재생/기록 차단을 확인했다. 준비 취소 하네스2실패와 보완 소스/증거를 보존한다. 원래 PR90의26/시작P2 해결·실제 사람/노트북·최종 외형/시범·승인 공개 구조/SDK·D2/전체1~6 완료가 아니다. 공개 byte·최소 문구·GLB/조형·기본 thread/모델/화질·SDK 정책·운영/승인 경계를 유지한다.
+
 2026-10-09 [S6.14](stories/native-first-render-isolation.md)의 [두 모델 GPU 준비·취소 회수](review/native-first-render-isolation/README.md)는 명시적 renderer readiness를 보완했다. 최종 준비 후 첫 render1.0~5.8ms로 관찰했으나 준비122.4~546.4ms·main 추론/Worker 화면 공백·중간 대조군6047ms 실패와 PR90 시작P2를 남긴다. 공개 byte/최소 문구·원본/GLB·모델/화질·기본 thread/SDK/안전/개인정보/운영은 유지한다. 실제 사람/노트북·통합26·최종 외형·승인 공개 구조·D2/전체1~6 완료 증거가 아니다.
 
 2026-10-09 [S6.13](stories/native-main-thread-contention.md)의 [비공개 main/Worker 화면 경합 비교](review/native-main-thread-contention/README.md)를 기록했다. normal/4× CDP의 상대 관찰이며 실제 OS 부하/노트북·원래 통합26건·PR90 실패13건의 원인/해결 검증은 아니다. Worker도 화면 공백이 남아 시작P2/부드러움·D2/전체1~6 기준을 유지한다. 다음은 첫 렌더/SDK 비용 분리이며 공개 byte/최소 문구·GLB/새 조형·모델·기본 경로/SDK 정책·안전/개인정보/운영 변경0이다.

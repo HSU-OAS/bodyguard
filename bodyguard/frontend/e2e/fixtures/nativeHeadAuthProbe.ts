@@ -23,6 +23,7 @@ import { AuthProvider, useAuth } from '../../src/auth'
 import type { HandDisplayAlignment } from '../../src/avatar/observedHandRig'
 import type { PoseRigFrame } from '../../src/avatar/observedPoseRig'
 import type { prepareOwnedAvatarPair } from '../../src/avatar/ownedAvatarPair'
+import { prepareAvatarStage } from '../../src/avatar/prepareAvatarStage'
 import type { ReferenceProgram } from '../../src/avatar/referencePlayback'
 import { createNativePlaybackResources } from '../../src/coaching/nativePlaybackResources'
 import { useRecordedCoaching } from '../../src/coaching/useRecordedCoaching'
@@ -48,6 +49,7 @@ export function mountNativeHeadAuthProbe(
   withTrunk = false,
   withWorker = false,
   withCapturedNeck = false,
+  withRenderPreparation = false,
 ) {
   if (withTrunk && !withFeedback) throw new Error('Private trunk feedback fixture unavailable')
   if (withAdaptive && (!withFeedback || !withReference))
@@ -108,11 +110,18 @@ export function mountNativeHeadAuthProbe(
     prepareFinished = true
   let releaseHeld: (() => void) | undefined,
     recordId: string | null = null
+  let holdRenderPreparation = false,
+    renderPreparationHeld = false
+  let releaseRenderPreparation: (() => void) | undefined
+  let rendererPreparations = 0,
+    rendererReady = 0,
+    gpuPreparationDraws = 0
   let hook: Hook | null = null,
     auth: ReturnType<typeof useAuth> | null = null,
     session: Session | null = null,
     currentActor: Actor | null = null,
     pendingPreparation: Promise<void> | null = null,
+    pendingStart: Promise<void> | null = null,
     staleActions: Promise<void> | null = null,
     pair: Awaited<ReturnType<typeof prepareOwnedAvatarPair>> | undefined
   const failures: { generation: number; reason: string }[] = []
@@ -174,6 +183,29 @@ export function mountNativeHeadAuthProbe(
       })
       return JSON.stringify(rotations)
     }) ?? []
+  const initialized = new WeakSet<NonNullable<NonNullable<typeof pair>['models']>[number]>()
+  function initializeModels(models: NonNullable<NonNullable<typeof pair>['models']>) {
+    if (initialized.has(models[0])) return
+    if (withFeedback) {
+      restJoints.clear()
+      models[1].updateWorldMatrix(true, true)
+      for (const [name, index] of jointNames) {
+        const bone = models[1].getObjectByName(name) as Bone
+        if (!bone?.isBone) throw new Error('Private body fixture unavailable')
+        restJoints.set(index, bone.getWorldPosition(new Vector3()))
+      }
+    }
+    const [ref, user] = turns(models)
+    referenceRest = ref
+    userRest = user
+    markedReference = ref
+    if (withTrunk) protectedTrunkRest = protectedTrunk(models)
+    models.forEach((model, index) => {
+      model.position.x = index === 0 ? -0.75 : 0.75
+      scene.add(model)
+    })
+    initialized.add(models[0])
+  }
   class TrackedFrame extends NativeFrame {
     constructor(input: CanvasImageSource, options?: VideoFrameInit)
     constructor(input: AllowSharedBufferSource, options: VideoFrameBufferInit)
@@ -457,6 +489,40 @@ export function mountNativeHeadAuthProbe(
     currentReference = reference
     const actor = createNativePlaybackResources({
       model: 'lite',
+      ...(withRenderPreparation
+        ? {
+            async prepareAvatar(models, context) {
+              context.signal.throwIfAborted()
+              initializeModels(models)
+              await prepareAvatarStage(
+                {
+                  async compileAsync(stage, camera) {
+                    rendererPreparations++
+                    const compiling = renderer.compileAsync(stage, camera)
+                    if (holdRenderPreparation) {
+                      holdRenderPreparation = false
+                      renderPreparationHeld = true
+                      await new Promise<void>((resolve) => {
+                        releaseRenderPreparation = resolve
+                      })
+                      renderPreparationHeld = false
+                      releaseRenderPreparation = undefined
+                    }
+                    await compiling
+                  },
+                  render(stage, camera) {
+                    renderer.render(stage, camera)
+                    gpuPreparationDraws++
+                  },
+                },
+                scene,
+                view,
+                context.signal,
+              )
+              rendererReady++
+            },
+          }
+        : {}),
       ...(withWorker ? { inferenceThread: 'worker' } : {}),
       mirror: true,
       halfLifeMs: 50,
@@ -544,28 +610,7 @@ export function mountNativeHeadAuthProbe(
       render(ownedPair) {
         pair = ownedPair
         if (!pair.models) throw new Error('Private native fixture unavailable')
-        if (pair.models[0].parent !== scene) {
-          if (withFeedback) {
-            restJoints.clear()
-            pair.models[1].updateWorldMatrix(true, true)
-            for (const [name, index] of jointNames) {
-              const bone = pair.models[1].getObjectByName(name) as Bone
-              if (!bone?.isBone) throw new Error('Private body fixture unavailable')
-              restJoints.set(index, bone.getWorldPosition(new Vector3()))
-            }
-          }
-          const [ref, user] = turns(pair.models)
-          referenceRest = ref
-          userRest = user
-          markedReference = ref
-          if (withTrunk) protectedTrunkRest = protectedTrunk(pair.models)
-        }
-        pair.models.forEach((model, index) => {
-          if (model.parent !== scene) {
-            model.position.x = index === 0 ? -0.75 : 0.75
-            scene.add(model)
-          }
-        })
+        initializeModels(pair.models)
         renderFrames++
         const token = timing?.begin('render') ?? null
         try {
@@ -687,6 +732,11 @@ export function mountNativeHeadAuthProbe(
       syntheticBodyDeliveries,
       feedbackEvaluations,
       capturedNeckChecks,
+      renderPreparationConfigured: withRenderPreparation,
+      renderPreparationHeld,
+      rendererPreparations,
+      rendererReady,
+      gpuPreparationDraws,
       capturedImageFailures,
       unavailableNeckChecks,
       highlighted,
@@ -805,6 +855,10 @@ export function mountNativeHeadAuthProbe(
     },
     finishPrepare: () => pendingPreparation,
     start: () => session?.start(),
+    beginStart() {
+      pendingStart = session?.start() ?? null
+    },
+    finishStart: () => pendingStart,
     stop: () => session?.end('user-stop'),
     save: () => session?.save(),
     resume: () => session?.resume(),
@@ -838,6 +892,11 @@ export function mountNativeHeadAuthProbe(
       holdNext = true
     },
     releaseHeldResult: () => releaseHeld?.(),
+    holdNextRenderPreparation() {
+      if (!withRenderPreparation) throw new Error('Private renderer preparation unavailable')
+      holdRenderPreparation = true
+    },
+    releaseHeldRenderPreparation: () => releaseRenderPreparation?.(),
     unmount() {
       root.unmount()
       host.remove()
@@ -848,6 +907,7 @@ export function mountNativeHeadAuthProbe(
         root.unmount()
         host.remove()
         releaseHeld?.()
+        releaseRenderPreparation?.()
         try {
           await hook?.cancel()
           await Promise.all(actors.map((actor) => actor.close()))
