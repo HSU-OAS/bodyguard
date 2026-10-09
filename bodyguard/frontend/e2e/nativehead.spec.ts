@@ -253,7 +253,8 @@ async function mount(
       withReference,
       withFeedback,
       withAdaptive,
-      withTiming,
+      // FR-M-07/NFR-08: a global TEST opt-in includes callers that pass false explicitly.
+      withTiming: withTiming || process.env.BODYGUARD_TEST_NATIVE_STARTUP_TIMING === '1',
       withTrunk,
       withNeck,
       withRenderPreparation,

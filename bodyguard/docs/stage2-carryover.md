@@ -4,6 +4,8 @@
 
 ## 기준선과 보존
 
+2026-10-09 [S6.17](stories/native-startup-browser-comparison.md)의 [첫 시작 실패 재현과 전체 단계 관측](review/native-startup-browser-comparison/README.md): 현재 원래26 계약을 별도 Chrome154에서 실행해 기존5초/3결과 조건 실패1건을 재현했다. 155 대조/154 계측의 성공과 실패 후 자원 회수는 시작 원인/해결의 증거가 아니다. 소유권 경로 오류와 이전 실패를 보존하며 같은 predicate 재현과 과거 동일 원인 입증을 구분한다. 시작P2·실제 수정/필수 검증과 D2/전체1~6은 미완료이며 Draft를 유지한다. 기본 thread/조건·공개 byte/최소 문구·원본/GLB·SDK 정책·새 조형·운영·승인 경계 변경0이다.
+
 2026-10-09 [S6.16](stories/native-neck-full-regression.md)의 [목 관찰 전체 회귀 복원](review/native-neck-full-regression/README.md)을 기록했다. 원래26개의 test body/guard/loop와 현재 실제 실행 목록을 대조하고 current Chrome155의 목26·기본24를 통과했다. 기존 Chrome154/PR90의13실패·함수 경계/환경 차이·시작P2를 유지한다. 실제 사람·최종 외형/시범·승인 공개 구조/SDK·D2/전체1~6 완료 증거가 아니며 공개 byte/최소 문구·원본/GLB·새 조형/판정/SDK·운영/승인 경계는 유지한다.
 
 2026-10-09 [S6.15](stories/owned-render-preparation.md)의 [로그인 소유 GPU 준비·취소 통합](review/owned-render-preparation/README.md)을 기록했다. actual Chrome/API/격리 SQL에서 prepared28/default24·본인 중단 기록·늦은 준비 완료의 재생/기록 차단을 확인했다. 준비 취소 하네스2실패와 보완 소스/증거를 보존한다. 원래 PR90의26/시작P2 해결·실제 사람/노트북·최종 외형/시범·승인 공개 구조/SDK·D2/전체1~6 완료가 아니다. 공개 byte·최소 문구·GLB/조형·기본 thread/모델/화질·SDK 정책·운영/승인 경계를 유지한다.
