@@ -96,6 +96,28 @@ Native skin 전송의 보호점 literal0 항목 추가를 발견했다. 모든 �
 
 설치5.1.1의 `bmesh.ops.grid_fill`·`bridge_loops` API를 별도 native에서 읽기 전용 확인했다. 닫힌 경계의 자동 순회 방향은 [동일 버전 native 구현](https://github.com/blender/blender/blob/v5.1.1/source/blender/editors/mesh/editmesh_tools.cc)과 대조했다. 다음은 두 열린 맞은편 경계를 직접 지정하는 제작 설계이며 이번에는 미실행이다. 같은 span/offset을 반복하거나 모서리 guard를 삭제하지 않는다. 보호·실제 외형/실측/시범·공개 UI·SDK/운영 및 전체1~6 필수 조건은 유지한다.
 
+### 명시적 두 경계 제작 계약 — 2026-10-10
+
+기존 구간별 실패와42개 증거는 동결한다. 별도 `author_explicit_patch.py`에서 native `grid_fill`에 맞은편의 열린 두 경계를 직접 지정한다. 자동 span/offset·선택 순회에 의존하지 않고 새 안쪽 경계의 나머지 두 면만 연결 경로여야 한다. [설치 버전의 공식 native 구현](https://github.com/blender/blender/blob/v5.1.1/source/blender/bmesh/operators/bmo_fill_grid.cc)을 GitHub API로 읽기 전용 확인했다. web 직접 요청은 cache miss였으며 성공으로 세지 않는다.
+
+같은 네 모서리1/2/3/4·6mm·가중치 합·tiny·닫힘/winding·보호점/원래 면/손/raw skin·rest rig/PBR 조건을 유지한다. 격자 전체의 원래 접힌 표면 재투영/전체 인체 생성·remesh·스무딩 sweep은 하지 않는다. 남녀 저장 전 통과 뒤에도 독립 재열기·전체118 기술 pose·GLB 왕복·동일 조명 실제 외형/Chrome·실측/시범과 전체1~6 기준은 별도로 충족해야 한다. 실패 시 새 원본을 저장하지 않고 source/로그/JSON을 보존한다. 공개 웹/카메라·임상 판정·SDK·개인정보·운영 변경0·UI 최소 문구 원칙을 유지한다.
+
+명시적 simple 격자는 실제 네 모서리1/2/3/4를 따랐지만 첫 거리6.031mm에서 실패했다. 저장 금지 진단 모드에서 전체 새 점을 읽은 결과 최대22.502mm·6mm 이상1416점이었고, 실제 뒤/측면 렌더에서도 후두부의 부피가 평탄화됐다. 첫 실패값은 전체 최대가 아니다. 단순 허용치 상향이나 core 재투영으로 해결하지 않는다.
+
+후속 `author_curved_patch.py`는 경계/모서리 연결과 보호 조건을 고정한 채 native의 경계 곡률을 사용하는 보간 알고리즘을 적용한다. 공식 구현은 simple의4방향 가중 평균과 경계 단면 변환 보간을 구별한다. 실제 후두부 부피가 유지되는지는 가설이므로 별도 원본 저장 전 검사와 외형으로 확인한다. 이 bounded 알고리즘 비교는 강도/span/offset/허용치 sweep이나 이전 실패 반전이 아니다. 기존 실행 소스·진단 렌더와 모든 실패를 보존하며 최종1~6/별도 승인 기준은 유지한다.
+
+#### 명시적 두 경계 구간의 종료
+
+[실제 형상·실패·보존](../review/avatar-neck-integration/explicit-attempt/README.md). 곡률 실행은 남성 최대4.243mm·앞면/손/외부/raw skin/rest rig/PBR·닫힘0/winding0을 확인했으나 tiny2→3으로exit1이었다. core 면180개의 뒤틀림 관찰과 실제 뒤/측면 접합 주름도 남는다. 두 진단의 실제16PNG는 실패 상태이며 여성은 편집하지 않은 원본이다. 저장 금지 진단/원래 실패 exit1·원본 보존을 확인했고, 새 Blender 저장/여성 제작/GLB/독립재열기/118 기술 pose/Chrome는미실행이다. Draft/외형P2/Story/D2/전체1~6미완료다.
+
+두 경계만의 simple/curvature 보간은 여기서 종료한다. 다음은 내부 단면·접선·전문 원래 형상의 표면 흐름을 기준으로 조형하기 위한 읽기 전용 확인이다. 거리 검사만으로 새 격자를 채택하거나 tiny 하나만 지워 외형을 통과시키지 않는다. 로컬 addon 연결은 실제 오류로 비차단 요청했으며 사용자 장면·비용/새 계정/시크릿/telemetry를 변경하지 않았다. 독립 작업·최소 문구·전체1~6 필수 기준과 별도 승인 경계는 유지한다.
+
+#### 원래 전문 형상의 내부 단면 확인
+
+[읽기 전용 실행·보존](../review/avatar-neck-integration/reference-sections/README.md). 별도 private BMesh의 native plane cut으로 남녀 각각5개 내부 단면을 검사했고 모든10개에서 하나의 닫힌 단순 loop를 확인했다. 실제 native exit0·입력 SHA 불변이며 원래 장면 되쓰기/저장·새 표면 저작0이다. 같은 메시 공간의 뒤쪽 깊이는 남성20.368~48.955mm/여성5.305~45.604mm였다. 이 원본 기하 관찰은 내부 부피를 참고하는 다음 설계의 자료이며 사용자 좌표·정상 범위·코칭 각도·외형/제작 승인이 아니다. 이전 실패/42개 manifest는 변경하지 않고 새5개 증거를 별도 보존한다. 내부 단면 기반 저작·원본/GLB/변형/Chrome·실측/시범은 여전히 미실행이고 외형 P2/전체1~6 완료 조건은 유지한다.
+
+CEO의 최소 문구 요구도 유지한다. 제품 화면은 아바타 중심, 동작명·핵심 피드백·명확한 버튼 문구만 짧게 두고 자세한 설명은 펼쳐보기로 제공한다. 안전·카메라 권한·개인정보 고지는 생략하거나 모호하게 줄이지 않는다. 이번 저작 보완은 공개 화면을 변경하거나 미승인 화면 구성을 확장하지 않는다.
+
 [Draft PR #108](https://github.com/HSU-OAS/bodyguard/pull/108)에 source d93e0b5와 실제 검증·새 편집 원본/GLB를 기록했다. 외형 P2 때문에 병합하지 않는다. 새 worktree는 app 호출의 Not a git repository/수동 worktree 미관리 판정으로 일반 Git worktree를 사용했고, PR 앱 첨부는 기존100개 한도 때문에 실패했다. 기존 첨부를 지우거나 등록 성공으로 표시하지 않는다.
 
 [실제 원본/GLB·미리보기·기술 성공/외형 실패·보존 증거](../review/avatar-neck-integration/README.md)에 기록했다. 원본 보호/독립 재열기·원본과 GLB 왕복 각각118 기술 pose/121행·34PNG, Chrome155 남녀 두 rig/전신 움직임/종료를 실제 실행했다. 같은 조건 전후 검수에서 뒤 목–어깨 패치/관절 마감은 미달이므로 **외형 P2·Story 미완료·새 후보 미채택·Draft PR/병합 보류**다. 모델링/리깅 정답·원본/실제 사람의 자세 정확도나 출시 완료를 증명하지 않는다.
