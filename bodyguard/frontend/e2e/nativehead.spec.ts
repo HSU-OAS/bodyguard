@@ -9,6 +9,7 @@ const mailbox = process.env.BODYGUARD_TEST_MAILBOX
 const withFeedback = Boolean(process.env.BODYGUARD_TEST_NATIVE_FEEDBACK_PROBE)
 const withNeck = process.env.BODYGUARD_TEST_NATIVE_NECK === '1'
 const withRenderPreparation = process.env.BODYGUARD_TEST_RENDER_PREPARATION === '1'
+const withInferenceWarmup = process.env.BODYGUARD_TEST_INFERENCE_WARMUP === '1'
 const withReference = withFeedback || Boolean(process.env.BODYGUARD_TEST_NATIVE_REFERENCE_PROBE)
 const withHands = withReference || Boolean(process.env.BODYGUARD_TEST_NATIVE_HANDS_PROBE)
 const bundle =
@@ -128,6 +129,7 @@ test.afterEach(async ({ page, browser }, info) => {
     expect(final.nativePeopleMax).toBe(0)
     expect(final.nativeFacesMax).toBe(0)
     expect(final.sameInput).toBe(true)
+    expect(final.freshStamps).toBe(true)
     expect(final.faceCalls).toBe(final.nativeCalls)
     expect(final.faceDetectorCloses).toBe(final.cameras)
     expect(final.handCalls).toBe(withHands ? final.nativeCalls : 0)
@@ -216,6 +218,7 @@ async function mount(
       withTrunk,
       withNeck,
       withRenderPreparation,
+      withInferenceWarmup,
     }) => {
       const path = '/__private-native-head-probe.js'
       const module = (await import(path)) as {
@@ -245,6 +248,7 @@ async function mount(
         false,
         withNeck,
         withRenderPreparation,
+        withInferenceWarmup,
       )
     },
     {
@@ -257,6 +261,7 @@ async function mount(
       withTrunk,
       withNeck,
       withRenderPreparation,
+      withInferenceWarmup,
     },
   )
   await expect
@@ -271,9 +276,12 @@ async function mount(
   })
   expect(posts).toBe(0)
 }
-async function running(page: Page) {
+async function running(page: Page, expectedNeck: 'unavailable' | 'available' = 'unavailable') {
   await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.start())
-  await expect.poll(async () => (await state(page)).nativeCloses).toBeGreaterThanOrEqual(3)
+  // One unchanged five-second poll: warm read must not count as one of three LIVE results.
+  await expect
+    .poll(async () => (await state(page)).nativeCloses)
+    .toBeGreaterThanOrEqual(withInferenceWarmup ? 4 : 3)
   const value = await mark(page, 'native-running')
   expect(value.session).toBe('running')
   expect(value.resources?.status).toBe('running')
@@ -283,7 +291,19 @@ async function running(page: Page) {
   expect(value.handsConfigured).toBe(withHands)
   expect(value.handCalls).toBe(withHands ? value.nativeCalls : 0)
   expect(value.nativeHandsMax).toBe(0)
-  if (withNeck) expect(value.neckStatus).toBe('unavailable')
+  expect(value.inferenceWarmupConfigured).toBe(withInferenceWarmup)
+  expect(value.readyReceipts[0]).toMatchObject({
+    cameras: 1,
+    generation: 1,
+    nativeCalls: withInferenceWarmup ? 1 : 0,
+    nativeCloses: withInferenceWarmup ? 1 : 0,
+    frames: withInferenceWarmup ? 1 : 0,
+    frameCloses: withInferenceWarmup ? 1 : 0,
+    feedbackEvaluations: 0,
+    renderFrames: 0,
+  })
+  expect(value.freshStamps).toBe(true)
+  if (withNeck) expect(value.neckStatus).toBe(expectedNeck)
   if (withRenderPreparation) {
     expect(value.rendererReady).toBeGreaterThan(0)
     expect(value.gpuPreparationDraws).toBe(value.rendererReady)
@@ -344,7 +364,179 @@ async function release(page: Page) {
   await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.finishOldActions())
   expect(posts).toBe(0)
 }
+async function holdWarmup(page: Page) {
+  await page.evaluate(() => {
+    const p = (window as unknown as PrivateWindow).nativeAuthProbe
+    p.setFeedbackMode('error')
+    p.holdNextResult()
+    p.beginStart()
+  })
+  await expect
+    .poll(() => state(page))
+    .toMatchObject({
+      session: 'preparing',
+      held: true,
+      heldStage: 'hands',
+      nativeCalls: 1,
+      nativeCloses: 0,
+      frames: 1,
+      frameCloses: 0,
+      feedbackEvaluations: 0,
+      syntheticBodyDeliveries: 1,
+      renderFrames: 0,
+      verifiedMs: 0,
+      readyReceipts: [],
+      rendererReady: 1,
+      gpuPreparationDraws: 1,
+    })
+  expect(posts).toBe(0)
+  await mark(page, 'warm-actual-return-test-barrier-generated-positive-not-delivered')
+}
+async function revoke(
+  page: Page,
+  context: BrowserContext,
+  reason: 'logout' | 'server401' | 'pagehide' | 'unmount',
+) {
+  if (reason === 'logout')
+    await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.signOut())
+  else if (reason === 'server401') {
+    const csrf = (await (await context.request.get('/api/v1/auth/csrf')).json()).csrf_token
+    expect(
+      (
+        await context.request.post('/api/v1/auth/logout', {
+          headers: { Origin: origin, 'X-CSRF-Token': csrf },
+        })
+      ).status(),
+    ).toBe(204)
+    await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.refresh())
+  } else if (reason === 'unmount')
+    await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.unmount())
+  else await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent('pagehide')))
+  await expect.poll(() => state(page)).toMatchObject({ owned: false })
+}
 for (const gender of ['male', 'female'] as const) {
+  if (withInferenceWarmup && withFeedback && withRenderPreparation) {
+    test(`${gender} warmup positive→ready no observation→fresh live→explicit interrupted record`, async ({
+      page,
+      context,
+    }) => {
+      await join(context)
+      await mount(page, gender)
+      await page.evaluate(() => {
+        const p = (window as unknown as PrivateWindow).nativeAuthProbe
+        p.setFeedbackMode('error')
+      })
+      await running(page, 'available')
+      await expect.poll(() => state(page)).toMatchObject({ highlighted: true, verifiedMs: 0 })
+      const runningState = await mark(page, 'warm-positive-discarded-live-only-current-feedback')
+      expect(runningState.readyReceipts).toHaveLength(1)
+      expect(runningState.syntheticBodyDeliveries).toBeGreaterThan(1)
+      expect(runningState.feedbackEvaluations).toBe(runningState.syntheticBodyDeliveries - 1)
+      expect(posts).toBe(0)
+      await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.stop())
+      expect(await state(page)).toMatchObject({ tracksEnded: true, verifiedMs: 0 })
+      await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.save())
+      const saved = await mark(page, 'explicit-save-only-no-warm-progress')
+      expect(saved.record).toBe('saved')
+      expect(posts).toBe(1)
+      const rows = (await (await context.request.get('/api/v1/records/stretch')).json()).items
+      expect(rows).toHaveLength(1)
+      expect(rows[0]).toMatchObject({
+        id: saved.recordId,
+        outcome: 'interrupted',
+        observed_ms: 0,
+        repetitions: 0,
+        provenance: 'client-reported',
+      })
+    })
+    for (const reason of ['logout', 'server401', 'pagehide', 'unmount'] as const)
+      test(`${gender} warmup held first return→${reason}→no ready/start/save`, async ({
+        page,
+        context,
+      }) => {
+        await join(context)
+        await mount(page, gender)
+        await holdWarmup(page)
+        await revoke(page, context, reason)
+        await revokedWhileHeld(page)
+        await release(page)
+        await page.evaluate(() =>
+          (window as unknown as PrivateWindow).nativeAuthProbe.finishStart(),
+        )
+        await page.evaluate(() =>
+          window.dispatchEvent(new PageTransitionEvent('pageshow', { persisted: true })),
+        )
+        expect(await state(page)).toMatchObject({
+          owned: false,
+          cameras: 1,
+          readyReceipts: [],
+          feedbackEvaluations: 0,
+          renderFrames: 0,
+          nativeCalls: 1,
+          nativeCloses: 1,
+          verifiedMs: 0,
+          highlighted: false,
+          canvasHidden: true,
+        })
+        if (reason === 'logout' || reason === 'server401')
+          expect((await context.request.get('/api/v1/me')).status()).toBe(401)
+        else
+          expect(
+            (await (await context.request.get('/api/v1/records/stretch')).json()).items,
+          ).toEqual([])
+        expect(posts).toBe(0)
+        await mark(page, 'late-warm-return-closed-no-ready-observation-or-record')
+      })
+    test(`${gender} warmup held first return→refresh→explicit fresh-owner restart`, async ({
+      page,
+      context,
+    }) => {
+      await join(context)
+      await mount(page, gender)
+      await holdWarmup(page)
+      await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.refresh())
+      await expect
+        .poll(() => state(page))
+        .toMatchObject({ auth: 'ready', hook: 'idle', owned: false })
+      await revokedWhileHeld(page)
+      await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.beginPrepare())
+      await expect
+        .poll(() => state(page))
+        .toMatchObject({ hook: 'preparing', prepareFinished: false })
+      expect(await state(page)).toMatchObject({ cameras: 1, readyReceipts: [], held: true })
+      await release(page)
+      await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.finishStart())
+      await page.evaluate(() =>
+        (window as unknown as PrivateWindow).nativeAuthProbe.finishPrepare(),
+      )
+      expect(await state(page)).toMatchObject({ hook: 'prepared', cameras: 1, readyReceipts: [] })
+      await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.start())
+      await expect.poll(async () => (await state(page)).nativeCloses).toBeGreaterThanOrEqual(5)
+      const fresh = await mark(page, 'new-owner-new-warm-source-after-old-disposal')
+      expect(fresh).toMatchObject({
+        session: 'running',
+        sessionGeneration: 1,
+        cameras: 2,
+        verifiedMs: 0,
+      })
+      expect(fresh.readyReceipts).toEqual([
+        {
+          cameras: 2,
+          generation: 1,
+          nativeCalls: 2,
+          nativeCloses: 2,
+          frames: 2,
+          frameCloses: 2,
+          feedbackEvaluations: 0,
+          renderFrames: 0,
+        },
+      ])
+      expect(posts).toBe(0)
+      expect((await (await context.request.get('/api/v1/records/stretch')).json()).items).toEqual(
+        [],
+      )
+    })
+  }
   if (withNeck)
     test(`${gender} native neck captured aspect→presence→retirement→new generation`, async ({
       page,
@@ -528,7 +720,11 @@ for (const gender of ['male', 'female'] as const) {
       expect(first('body-sdk')?.startMs).toBeGreaterThanOrEqual(first('camera')?.endMs ?? Infinity)
       expect(first('avatar')?.startMs).toBeGreaterThanOrEqual(first('hands-sdk')?.endMs ?? Infinity)
       expect(first('render')?.startMs).toBeGreaterThanOrEqual(first('avatar')?.endMs ?? Infinity)
-      expect(first('body')?.startMs).toBeGreaterThanOrEqual(first('render')?.endMs ?? Infinity)
+      if (withInferenceWarmup) {
+        expect(first('body')?.startMs).toBeGreaterThanOrEqual(first('avatar')?.endMs ?? Infinity)
+        expect(first('render')?.startMs).toBeGreaterThanOrEqual(first('result')?.endMs ?? Infinity)
+      } else
+        expect(first('body')?.startMs).toBeGreaterThanOrEqual(first('render')?.endMs ?? Infinity)
       expect(timing.events.filter((row) => row.stage === 'result')).toHaveLength(3)
       expect(posts).toBe(0)
     })

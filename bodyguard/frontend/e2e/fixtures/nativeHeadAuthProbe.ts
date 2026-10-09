@@ -50,6 +50,7 @@ export function mountNativeHeadAuthProbe(
   withWorker = false,
   withCapturedNeck = false,
   withRenderPreparation = false,
+  withInferenceWarmup = false,
 ) {
   if (withTrunk && !withFeedback) throw new Error('Private trunk feedback fixture unavailable')
   if (withAdaptive && (!withFeedback || !withReference))
@@ -88,6 +89,18 @@ export function mountNativeHeadAuthProbe(
     streams: MediaStream[] = [],
     videos: HTMLVideoElement[] = []
   const actors: Actor[] = []
+  const readyReceipts: {
+    cameras: number
+    generation: number
+    nativeCalls: number
+    nativeCloses: number
+    frames: number
+    frameCloses: number
+    feedbackEvaluations: number
+    renderFrames: number
+  }[] = []
+  const lastStamp = new WeakMap<PoseLandmarker, number>()
+  let freshStamps = true
   let frameCloses = 0,
     frameErrors = 0,
     renderFrames = 0,
@@ -299,6 +312,8 @@ export function mountNativeHeadAuthProbe(
     writable: true,
     value(this: PoseLandmarker, input: VideoFrame, at: number) {
       nativeCalls++
+      freshStamps = freshStamps && at > (lastStamp.get(this) ?? -Infinity)
+      lastStamp.set(this, at)
       if (withCapturedNeck)
         capturedAspect = { width: input.displayWidth, height: input.displayHeight }
       bodyStamps.set(input, at)
@@ -514,6 +529,7 @@ export function mountNativeHeadAuthProbe(
     currentReference = reference
     const actor = createNativePlaybackResources({
       model: 'lite',
+      ...(withInferenceWarmup ? { warmupInference: true } : {}),
       ...(withRenderPreparation
         ? {
             async prepareAvatar(models, context) {
@@ -676,7 +692,25 @@ export function mountNativeHeadAuthProbe(
         onChange(snapshot) {
           if (snapshot.state.status !== 'running') capturedNeckFrame = undefined
           if (withReference) actor.synchronize(snapshot.state)
-          if (snapshot.state.status === 'running') actor.start(snapshot.state.generation)
+          if (snapshot.state.status === 'running') {
+            if (
+              !readyReceipts.some(
+                (row) =>
+                  row.cameras === streams.length && row.generation === snapshot.state.generation,
+              )
+            )
+              readyReceipts.push({
+                cameras: streams.length,
+                generation: snapshot.state.generation,
+                nativeCalls,
+                nativeCloses,
+                frames: frames.length,
+                frameCloses,
+                feedbackEvaluations,
+                renderFrames,
+              })
+            actor.start(snapshot.state.generation)
+          }
         },
       })
       if (ownedSession) {
@@ -795,6 +829,9 @@ export function mountNativeHeadAuthProbe(
       feedbackEvaluations,
       capturedNeckChecks,
       renderPreparationConfigured: withRenderPreparation,
+      inferenceWarmupConfigured: withInferenceWarmup,
+      readyReceipts: readyReceipts.map((row) => ({ ...row })),
+      freshStamps,
       renderPreparationHeld,
       rendererPreparations,
       rendererReady,
