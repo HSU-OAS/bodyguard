@@ -24,6 +24,7 @@ PR90/884700e의 원래26건은 목 관찰을 켠 기존 남녀24건과 새 목2�
 - 첫 DB 준비는 생성 전 bodyguard_test에 접속해 identity/exit2로 실패했다. 카메라/시험 실행 전 실패다. 서버는 정상 종료했고 새 DB를 만든 뒤 전체 흐름을 실행했다. 당시 driver/psql 원문·receipt를 보존했다. outer Node assertion은 대화 출력이며 별도 stderr 파일이 있다고 하지 않는다.
 - 마지막 guard 명령은 존재하지 않는 파일명으로 module-not-found/exit1이었다. 실제 저장소의 check-selection-production.mjs로 바로잡아 실행했다. 잘못된 명령/원문/receipt를 보존하며 성공으로 세지 않는다.
 - 시작 시 존재하지 않는 원래 문서 경로·Unicode workdir 오타·큰 도구 출력의 잘림은 대화의 조회/도구 오류다. 제품 RED/브라우저 실패 또는 별도 receipt가 있는 것으로 표시하지 않는다. 올바른 git 경로와 작은 출력으로 대조했다.
+- PR 검토 중 full GitHub repo 응답의 임시 인증값이 도구에 출력됐다. 시험 증거 수집은 그 **이전에** 끝났고 해당 응답은 manifest/커밋/PR 본문에 없다. 로컬 원문은 전용700폴더/600파일로 제한하고 이후 repo 조회는 필요한 설정만 선택한다. collector를 명시적 시험 파일 허용 목록으로 보완해 이후 메타데이터의 자동 포장을 차단했다. 기존 증거/이전 collector는 보존했으며 제품 개인정보 정책/영상 경계 변경0이다. 허용 목록은 기존 포장 파일 목록과 실제 대조한다.
 
 전체 FE1411·타입·Biome272·Node asset 준비/직렬 Vite public build·실제 public guard·diff를 통과했다. pnpm을 직접 호출한 통과가 아니라 기존 잠긴 설치본을 자체 복사한 **Node CLI/시험 dispatcher** 실행이다. 설치/보안 정책은 변경하지 않았다. API/DB 계약 변경0으로 전체 backend 단위 suite는 미실행이다. DB는 정상 종료하고 파일을 보존했다.
 

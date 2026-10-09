@@ -13,6 +13,27 @@ const base = 'e2360f6989c4454f0b320c70eb0578217dfacb77'
 const historical = '884700e3cebfce2b1c0c51fdca2cce4788e6dc4b'
 const sha = b => createHash('sha256').update(b).digest('hex')
 const files = [], sources = []
+// FR-R-03/NFR-08: explicit test artifacts only. Later GitHub metadata may contain
+// temporary credentials; never sweep the proof directory into repository evidence.
+const labels = [
+  'assets-final', 'biome-final', 'biome-first', 'build-final', 'db-create-start',
+  'db-create-stop', 'db-create', 'db-init', 'frontend-unit', 'guard-corrected',
+  'guard-final', 'missing-neck-contract', 'original-contract', 'typecheck-final', 'typecheck-first',
+  ...['neck-final-male', 'neck-final-female', 'default-male', 'default-female'].flatMap(label =>
+    ['browser', 'db-start', 'db-stop', 'identity'].map(suffix => label + '-' + suffix)),
+  'neck-male-db-start', 'neck-male-db-stop', 'neck-male-identity',
+]
+const allowed = new Set([
+  'base-probe.ts', 'browser-before-db-order-fix.mjs', 'browser.mjs',
+  'missing-neck-contract.spec.ts', 'run.mjs', 'unit-results.json',
+  ...labels.flatMap(label => ['.receipt.json', '.stderr.txt', '.stdout.txt'].map(suffix => label + suffix)),
+  ...['neck-final-male', 'neck-final-female', 'default-male', 'default-female'].flatMap(label =>
+    ['-source-before.json', '-source-after.json'].map(suffix => label + suffix)),
+])
+const selected = readdirSync(proof).sort().filter(name => allowed.has(name))
+if (process.argv.includes('--list')) {
+  console.log(JSON.stringify(selected)); process.exit(0)
+}
 function save(name, bytes, collection, extra = {}) {
   assert(/^[A-Za-z0-9_.-]+$/.test(name))
   const file = name + '.gz', compressed = gzipSync(bytes, { level: 9 }), path = resolve(out, file)
@@ -20,8 +41,7 @@ function save(name, bytes, collection, extra = {}) {
   else writeFileSync(path, compressed, { flag: 'wx' })
   collection.push({ file, bytes: bytes.length, sha256: sha(bytes), compressedSha256: sha(compressed), ...extra })
 }
-for (const name of readdirSync(proof).sort()) {
-  if (!/\.(json|mjs|txt|ts)$/.test(name) || name === 'authored-fixture.json') continue
+for (const name of selected) {
   save('local-' + name, readFileSync(resolve(proof, name)), files, { origin: proof + '/' + name })
 }
 save('test-cli-dispatcher', readFileSync(resolve(proof, 'bin/pnpm')), files)
