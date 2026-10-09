@@ -42,6 +42,11 @@ type Options = Readonly<{
   /** Private explicit opt-in until actual SDK/browser and integration gates pass. */
   inferenceThread?: 'main' | 'worker'
   loadAvatar: Rig['load']
+  /** Renderer-owned readiness before replay; explicit private opt-in, no capture/clinical cue. */
+  prepareAvatar?: (
+    models: NonNullable<Pair['models']>,
+    context: ResourceContext,
+  ) => void | Promise<void>
   mirror: boolean
   halfLifeMs: number
   maxAgeMs: number
@@ -102,10 +107,13 @@ export function createNativePlaybackResources(options: Options) {
   let reference: ReferenceProgram | undefined
   let feedback: FeedbackProgram | undefined
   let evaluateFeedback: NonNullable<Options['feedback']>['evaluate'] | undefined
+  let prepareAvatar: Options['prepareAvatar']
   let trunk = false
   let inferenceThread: 'main' | 'worker' = 'main'
   try {
     const requestedThread = options.inferenceThread
+    prepareAvatar = options.prepareAvatar
+    if (prepareAvatar !== undefined && typeof prepareAvatar !== 'function') throw new Error()
     if (requestedThread !== undefined && requestedThread !== 'main' && requestedThread !== 'worker')
       throw new Error()
     inferenceThread = requestedThread ?? 'main'
@@ -294,6 +302,24 @@ export function createNativePlaybackResources(options: Options) {
             }
           : {}),
       })
+      // FR-A-02/NFR-07/08: the factory owns a partial pair until renderer preparation
+      // settles. Cancellation cannot publish late ready or lose an unclaimed model.
+      if (prepareAvatar) {
+        try {
+          context.signal.throwIfAborted()
+          const models = owned.models
+          if (!models) throw new Error('Avatar preparation unavailable')
+          await prepareAvatar(models, context)
+          context.signal.throwIfAborted()
+        } catch (error) {
+          try {
+            owned.dispose()
+          } catch {
+            throw new ResourceCleanupError()
+          }
+          throw error
+        }
+      }
       if (!reference && !feedback) return owned
       let lastRendered: ReturnType<Pair['render']> | undefined
       let observationToken: object | undefined

@@ -1,4 +1,5 @@
 // FR-M-01/02/07·FR-A-01/03/NFR-07/08: TEST ONLY. No body values or frame export.
+import { FaceLandmarker, GestureRecognizer, PoseLandmarker } from '@mediapipe/tasks-vision'
 import {
   Color,
   DirectionalLight,
@@ -14,6 +15,8 @@ export function mountNativeContentionProbe(
   canvas: HTMLCanvasElement,
   gender: 'male' | 'female',
   thread: 'main' | 'worker',
+  precompile = false,
+  holdPreparation = false,
 ) {
   const scene = new Scene()
   scene.background = new Color('#ffffff')
@@ -29,6 +32,12 @@ export function mountNativeContentionProbe(
   renderer.render(scene, view)
   const abort = new AbortController()
   const context = Object.freeze({ generation: 1, signal: abort.signal })
+  let releasePreparation: (() => void) | undefined
+  const preparationGate = holdPreparation
+    ? new Promise<void>((resolve) => {
+        releasePreparation = resolve
+      })
+    : null
   let state = 'idle',
     stage = 'idle',
     failure: string | null = null
@@ -50,6 +59,40 @@ export function mountNativeContentionProbe(
     preparing: Promise<void> | undefined,
     closing: Promise<void> | undefined
   const stages: { stage: string; startMs: number; endMs: number | null }[] = []
+  // Bound the trace to first three calls/stage. No arguments or SDK result inspection.
+  const costs: { stage: string; startMs: number; endMs: number }[] = []
+  const costCounts = new Map<string, number>()
+  const restorers: (() => void)[] = []
+  function timed<T>(name: string, call: () => T): T {
+    const count = costCounts.get(name) ?? 0
+    costCounts.set(name, Math.min(count + 1, 3))
+    if (count >= 3) return call()
+    const startMs = performance.now() - epoch
+    try {
+      return call()
+    } finally {
+      costs.push({ stage: name, startMs, endMs: performance.now() - epoch })
+    }
+  }
+  if (thread === 'main') {
+    for (const [prototype, method, name] of [
+      [PoseLandmarker.prototype, 'detectForVideo', 'body'],
+      [FaceLandmarker.prototype, 'detectForVideo', 'face'],
+      [GestureRecognizer.prototype, 'recognizeForVideo', 'hands'],
+    ] as const) {
+      const descriptor = Object.getOwnPropertyDescriptor(prototype, method)
+      if (!descriptor || typeof descriptor.value !== 'function')
+        throw new Error('Private timing unavailable')
+      const original = descriptor.value
+      Object.defineProperty(prototype, method, {
+        ...descriptor,
+        value: function (this: unknown, ...args: unknown[]) {
+          return timed(name, () => Reflect.apply(original, this, args))
+        },
+      })
+      restorers.push(() => Object.defineProperty(prototype, method, descriptor))
+    }
+  }
   const beat = (now: number) => {
     if (stopped) return
     if (lastBeat) {
@@ -64,6 +107,35 @@ export function mountNativeContentionProbe(
   }
   const actor = createNativePlaybackResources({
     model: 'lite',
+    ...(precompile
+      ? {
+          prepareAvatar: async (
+            models: readonly import('three').Object3D[],
+            context: { signal: AbortSignal },
+          ) => {
+            context.signal.throwIfAborted()
+            models.forEach((model, index) => {
+              model.position.x = index === 0 ? -0.75 : 0.75
+              scene.add(model)
+            })
+            const event = {
+              stage: 'shader-prepare',
+              startMs: performance.now() - epoch,
+              endMs: null as number | null,
+            }
+            stages.push(event)
+            const compiled = renderer.compileAsync(scene, view)
+            if (preparationGate) await preparationGate
+            await compiled
+            context.signal.throwIfAborted()
+            // Finish actual buffer/texture upload before coaching is ready. No native
+            // frame capture, progress, screenshot or accepted motion is synthesized.
+            timed('render-prepare', () => renderer.render(scene, view))
+            event.endMs = performance.now() - epoch
+            context.signal.throwIfAborted()
+          },
+        }
+      : {}),
     inferenceThread: thread,
     mirror: true,
     halfLifeMs: 50,
@@ -106,7 +178,7 @@ export function mountNativeContentionProbe(
         }
       })
       paired = true
-      renderer.render(scene, view)
+      timed('render', () => renderer.render(scene, view))
       renders++
     },
     onFailure(notice) {
@@ -137,7 +209,7 @@ export function mountNativeContentionProbe(
       state = 'running'
       stage = 'running'
     } catch {
-      failure ??= abort.signal.aborted ? 'cancelled' : 'prepare-error'
+      failure ??= stopped || abort.signal.aborted ? 'cancelled' : 'prepare-error'
       state = 'failed'
       await close()
     }
@@ -148,6 +220,7 @@ export function mountNativeContentionProbe(
       stage,
       failure,
       thread,
+      precompile,
       gender,
       deliveries,
       renders,
@@ -159,6 +232,7 @@ export function mountNativeContentionProbe(
       thirdMs,
       readyMs: readyAt ? readyAt - epoch : null,
       stages: stages.map((value) => ({ ...value })),
+      costs: costs.map((value) => ({ ...value })),
       resourceStatus: actor.getSnapshot().status,
       closed: stopped,
     }
@@ -175,6 +249,7 @@ export function mountNativeContentionProbe(
         failure ??= 'cleanup-error'
       }
       abort.abort()
+      for (const restore of restorers) restore()
       renderer.dispose()
       renderer.forceContextLoss()
       if (!failure) state = 'closed'
@@ -188,6 +263,7 @@ export function mountNativeContentionProbe(
       return preparing
     },
     snapshot,
+    releasePreparation: () => releasePreparation?.(),
     close: async () => {
       await close()
       await preparing

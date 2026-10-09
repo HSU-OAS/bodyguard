@@ -4,6 +4,8 @@
 
 ## 기준선과 보존
 
+2026-10-09 [S6.14](stories/native-first-render-isolation.md)의 [두 모델 GPU 준비·취소 회수](review/native-first-render-isolation/README.md)는 명시적 renderer readiness를 보완했다. 최종 준비 후 첫 render1.0~5.8ms로 관찰했으나 준비122.4~546.4ms·main 추론/Worker 화면 공백·중간 대조군6047ms 실패와 PR90 시작P2를 남긴다. 공개 byte/최소 문구·원본/GLB·모델/화질·기본 thread/SDK/안전/개인정보/운영은 유지한다. 실제 사람/노트북·통합26·최종 외형·승인 공개 구조·D2/전체1~6 완료 증거가 아니다.
+
 2026-10-09 [S6.13](stories/native-main-thread-contention.md)의 [비공개 main/Worker 화면 경합 비교](review/native-main-thread-contention/README.md)를 기록했다. normal/4× CDP의 상대 관찰이며 실제 OS 부하/노트북·원래 통합26건·PR90 실패13건의 원인/해결 검증은 아니다. Worker도 화면 공백이 남아 시작P2/부드러움·D2/전체1~6 기준을 유지한다. 다음은 첫 렌더/SDK 비용 분리이며 공개 byte/최소 문구·GLB/새 조형·모델·기본 경로/SDK 정책·안전/개인정보/운영 변경0이다.
 
 main 9733e4c에는 PR #15의 순수 코칭 진행 엔진까지 병합됐다. 계정 화면과 개발 전용 동작 선택 화면은 있으나, 실제 신체 분석·두 아바타 코칭·결과 연결은 완성되지 않았다. 공급자 mock과 합성 관절 시험은 실제 사용자 시험이 아니다.
