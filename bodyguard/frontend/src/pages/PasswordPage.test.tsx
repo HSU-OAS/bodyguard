@@ -41,6 +41,36 @@ afterEach(() => {
   window.history.replaceState(null, '', '/')
 })
 
+// S4.D4 / FR-U-03/NFR-08: essential recovery guidance cannot live only in hidden aside.
+it.each([
+  ['/password/forgot', '비밀번호 재설정 요청'],
+  [`/password/reset#token=${token}`, '새 비밀번호 설정'],
+  ['/password/reset', '새 링크가 필요합니다'],
+])('MC-02 keeps security guidance in the form at %s', async (path, title) => {
+  stub(async () => response(202))
+  open(path)
+  await screen.findByRole('heading', { name: title })
+  const form = document.querySelector('.account-form')
+  expect(form?.textContent).toContain('변경하면 기존 로그인은 모두 종료됩니다.')
+  expect(form?.textContent).toContain('카메라는 켜지지 않습니다.')
+  const descriptions = [
+    ...document.querySelectorAll('.account-layout p:not(.eyebrow):not(.form-secondary)'),
+  ]
+    .map((element) => element.textContent)
+    .join('')
+    .replace(/\s/g, '')
+  expect(descriptions.length).toBeLessThanOrEqual(120)
+  if (path.includes('forgot')) {
+    expect(screen.getByText(/가입 여부는 공개하지 않습니다/)).toBeTruthy()
+    expect(screen.getByLabelText('이메일')).toBeTruthy()
+  } else if (path.includes('#')) {
+    expect(screen.getByText(/15~128자 · 한글·공백 가능/)).toBeTruthy()
+    expect(screen.getByText(/링크는 30분 내 1회만 사용/)).toBeTruthy()
+    expect(screen.getByLabelText('새 비밀번호', { exact: true })).toBeTruthy()
+    expect(screen.getByLabelText('새 비밀번호 확인', { exact: true })).toBeTruthy()
+  }
+})
+
 it('PW-02 StrictMode clears the URL without losing the in-memory POST token', async () => {
   const fetcher = stub(async () => response(204))
   open(`/password/reset#token=${token}`)

@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-09 [S4.D4 기존 계정·복구 최소 문구](stories/account-minimal-copy.md): 내 계정의 중복 설명을 줄이고 복구의 세션 종료·카메라 미사용 안내를 좁은 창에서도 유지했다. [실제 전후 화면·흐름·실패·한계](review/account-minimal-copy/README.md). 기존 메뉴/구조·인증/API/CSS·임상/아바타·운영 정책은 유지하며 코칭 확장0이다. 실제 Chrome의 API는 합성이고 실제 메일/SQL 검증이 아니다. 조건부 PR 게이트를 진행한다. 구조 승인·D2/실측/최종 외형·기존 시작P2·외부/운영과 전체1~6은 여전히 미완료다. 이전 기록은 보존한다.
+
 2026-10-09 [S3.P1 선택용 동작 미리보기 재생기](stories/owned-motion-preview.md): 보존 남녀 GLB·Blender 시험 클립으로 마우스/키보드 재생→이탈/숨김 정지→명시 재생/오류 복구→교체·제거를 실제 Chrome154/155에서 확인했다. [실제 화면·실패/보완·검증 경계](review/owned-motion-preview/README.md). 재생기만 완료하며 공개 선택 화면/미승인 구조 확장0·원본/GLB/새 조형0·카메라/판정/SDK/운영 변경0이다. 기존 최소 문구 원칙은 유지하고 이미지/움직임이 동작 설명을 대신하도록 준비했다. 구조 승인·출시 동작/최종 외형·실측/참여자·기존 시작P2/Draft101·D2/전체1~6 완료 기준은 미충족이다. 조건부 PR 게이트를 진행하며 이전 기록은 보존한다.
 
 2026-10-09 [S6.16 촬영 목 전체 회귀 복원](stories/native-neck-full-regression.md): 현재 비공개 accepted frame에 원래26개 test body/guard/loop 구성을 복원했다. [실제 촬영 비율/presence·가림·pause/새 세대·권한 회수·기록 흐름과 한계](review/native-neck-full-regression/README.md). actual Chrome155/SDK/API/격리 SQL의 목26·기본24와 FE/타입/정적/build/guard·공개/원본 불변은 통과했다. 과거 Chrome154/PR90의13실패 원인·기존 시작P2 해결이 아니다. 공개 구조/최소 문구·원본/GLB/새 조형·SDK/판정·운영 변경0, 실제 사람·최종 외형/시범·승인 공개 UI/SDK·D2/전체1~6은 미완료다. 좁은 회귀 복원 Story의 조건부 PR 게이트를 진행하며 이전 기록은 보존한다.

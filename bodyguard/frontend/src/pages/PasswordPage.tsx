@@ -117,17 +117,8 @@ export function PasswordPage({ mode }: { mode: 'forgot' | 'reset' }) {
     <section className="account-layout">
       <aside className="account-intro">
         <p className="eyebrow">BODYGUARD / ACCOUNT RECOVERY</p>
-        <h2>
-          내 계정으로
-          <br />
-          안전하게 돌아가기.
-        </h2>
-        <p>이메일의 일회용 링크로 비밀번호를 바꿉니다. 변경 후에는 다시 로그인해 주세요.</p>
-        <p className="muted small">
-          비밀번호가 바뀌면 기존 로그인은 모두 종료됩니다.
-          <br />
-          카메라는 켜지지 않습니다.
-        </p>
+        <h2>안전한 계정 복구</h2>
+        <p>이메일의 일회용 링크로 재설정합니다.</p>
       </aside>
       <div className="account-form">
         <p className="eyebrow">계정 복구</p>
@@ -142,16 +133,14 @@ export function PasswordPage({ mode }: { mode: 'forgot' | 'reset' }) {
         </h1>
         {complete ? (
           <>
-            <p role="status">기존 로그인은 종료했습니다. 새 비밀번호로 로그인해 주세요.</p>
+            <p role="status">기존 로그인은 종료했습니다. 새 비밀번호로 로그인하세요.</p>
             <Link className="button primary wide" to="/login">
               로그인으로 돌아가기
             </Link>
           </>
         ) : invalid ? (
           <>
-            <p role="alert">
-              링크가 만료되었거나 사용할 수 없습니다. 이메일로 새 안내를 요청해 주세요.
-            </p>
+            <p role="alert">만료됐거나 사용할 수 없는 링크입니다. 새 안내를 요청하세요.</p>
             <Link className="button primary wide" to="/password/forgot">
               재설정 다시 요청
             </Link>
@@ -160,8 +149,8 @@ export function PasswordPage({ mode }: { mode: 'forgot' | 'reset' }) {
           <>
             <p className="muted">
               {mode === 'forgot'
-                ? '가입한 이메일을 입력해 주세요. 가입 여부는 화면에 표시하지 않습니다.'
-                : '링크는 발급 후 30분 동안 한 번만 사용할 수 있습니다. 15~128자, 공백과 한글을 사용할 수 있습니다.'}
+                ? '가입한 이메일을 입력하세요. 가입 여부는 공개하지 않습니다.'
+                : '15~128자 · 한글·공백 가능. 링크는 30분 내 1회만 사용합니다.'}
             </p>
             <form
               aria-busy={pending}
@@ -233,8 +222,8 @@ export function PasswordPage({ mode }: { mode: 'forgot' | 'reset' }) {
               )}
               {acknowledged && (
                 <p className="form-notice" role="status">
-                  요청을 접수했습니다. 등록된 이메일이면 재설정 안내를 받을 수 있습니다. 받지
-                  못했다면 스팸함을 확인하거나 다시 요청해 주세요.
+                  요청을 접수했습니다. 등록된 이메일이면 안내를 받을 수 있습니다. 받지 못했다면
+                  스팸함 확인 후 다시 요청하세요.
                 </p>
               )}
               <button
@@ -258,6 +247,10 @@ export function PasswordPage({ mode }: { mode: 'forgot' | 'reset' }) {
             </form>
           </>
         )}
+        {/* FR-U-03/NFR-08: essential notice stays visible when the aside is hidden. */}
+        <p className="form-notice muted small">
+          변경하면 기존 로그인은 모두 종료됩니다. 카메라는 켜지지 않습니다.
+        </p>
         <p className="form-secondary">
           <Link to="/login">로그인</Link>
           {mode === 'reset' && !invalid && !complete && (
