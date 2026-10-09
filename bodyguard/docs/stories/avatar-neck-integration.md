@@ -50,6 +50,28 @@ Native collapse의 INT point 속성은 index 유지가 아니라 보간이다. �
 
 자동 collapse/같은ratio sweep은 채택하지 않고 종료한다. 다음 보완은 참조를 기준으로 접합부의 표면과 연속 edge 흐름을 전문 도구에서 직접 재설계하는 국소 retopology다. 기존 원본을 고치는 대신 별도 원본에서 보호 영역/skin/rig·목과어깨 변형·GLB/Chrome/실제외형 검사를 다시 강제한다. 접힌 면 관찰이 전체 눈에 보이는 patch의 원인을 모두 입증한 것은 아니다. 외형 P2/전체1~6 조건과 별도 승인 경계는 그대로다.
 
+## 국소 quad 표면 재설계 계약 — 2026-10-10
+
+자동 collapse는 종료한 상태로 유지한다. 후속은 기존 ce8887d 전문 body/head에서 뒤 목–어깨 면만 native Grid Fill의 사각형 위주 edge 흐름으로 재구성한다. [Blender5.1 BMesh API](https://docs.blender.org/api/5.1/bmesh.ops.html)·설치된 native operator를 확인한다. 전신을 primitive로 만들거나 전체 remesh/원본 덮어쓰기를 하지 않는다. 앞면의모든점/손·patch밖 polygon/좌표/raw skin·rest rig/world/PBR를exact 보호한다. 교체되는 점의skin은 기존 전문 표면의triangle/barycentric field로 전송하고, 보호점과손은 삭제하지 않고index만 재매핑한다. 새점의역사ID는-1, 기존point ledger와history 배열은새index에 맞추되이전 원본은보존한다.
+
+읽기 전용 경계검사는뒤쪽의모든점이범위안인면만사용했다. 남성685점의단일loop, 여성717점/719edge의두접촉점을확인했다. 접촉점주변은선택면을줄이는방식으로정리하며앞면으로확장하지않는다. 홀수loop에는native 한triangle transition을두고나머지를quad로만든다. 새regular grid를원래뒤표면에맞춘뒤고정12회의nativefairing을적용한다. 기존접힌삼각형의smooth강도/ratio를반복하지않는다.
+
+저작하네스는불규칙/복수경계·nativefill실패·새표면의기존표면에서6mm이상이탈·sourcepoint보호누락·비유한값/skin합오류·원래외부polygon/리그/손변경·닫힘/winding/tiny악화에서실패한다. 피부전송이나숫자성공만으로해부학/외형을통과시키지않는다. 새원본독립재열기/118기술변형·GLB/왕복·동일조명실제렌더/Chrome와외형검수는후속필수다. 실패시저장전중단/미실행기록·Draft유지하며임상판정·공개웹·운영은변경하지않는다. 사진/웹캠실측/올바른시범·D2/전체1~6완료기준과별도승인경계는그대로다.
+
+### Quad 제작의 저장 전 검사와 가중치 전송
+
+초기 네 번의 native 실행은 모두 저장 전 실패했다. CustomData 생성 뒤의 BMesh 참조 유효성, 보호 경계 유지, Grid Fill의 명시적 span을 각각 확인했으며 이전 실패 소스와 로그는 보존했다. 명시적 span171의 남성 표면은 생성됐으나 자체 barycentric 가중치 검사에서 중단됐다. 이 실패를 통과로 바꾸거나 오차 허용치를 높이지 않는다.
+
+후속은 Blender native Data Transfer의 POLYINTERP_NEAREST로 읽기 전용 전문 원본의139개 그룹을 새 점에만 전송한다. 임시 복제 원본과 새 점 전용 mask는 저장 전 제거한다. 기존 점의 raw skin·좌표·외부 polygon·163 rest bone·PBR exact 검사는 그대로 유지하며 새 점의 원본 표면 거리6mm와 skin 합0.01 조건도 바꾸지 않는다. 기존 자체 전송 실패를 보존하며 native 전송의 실제 결과와 후속 변형/외형 검사를 별도로 판단한다. [Blender5.1 공식 Data Transfer API](https://docs.blender.org/api/5.1/bpy.types.DataTransferModifier.html)
+
+### Quad 실행 구간의 종료 결과
+
+[실제 실패·소스·미실행 경계](../review/avatar-neck-integration/quad-attempt/README.md)를 보존한다. unbound fairing의6mm 이탈과 전신 Shrinkwrap 대상의 국소 거리 실패를 기록한 뒤, 기존 선택 면만 참조하는 native surface fit을 적용했다. 맞추기 전28.1mm/맞춘 후2.45µm는 다른 제작 상태이며 첫 실패나 외형을 통과 처리하지 않는다. [공식 Shrinkwrap API](https://docs.blender.org/api/main/bpy.types.ShrinkwrapModifier.html)를 확인했고5.1 직접 웹 요청의402 실패도 구별한다. 실제 설치5.1.1 실행 결과로 판단했다.
+
+Native skin 전송의 보호점 literal0 항목 추가를 발견했다. 모든 보호점의0 아닌 값 exact를 먼저 확인한 뒤 기존에 없던0만 제거했고 최종 raw 배열 exact는 유지했다. 마지막 남성 실행은 앞면·손·외부 좌표/polygon/raw skin·rest rig/PBR와닫힘0/winding0을 확인했지만 tiny2→610으로exit1이었다. 여성 제작·새원본 저장·GLB/독립재열기/전체변형/렌더/Chrome는미실행이다. 전체 제작 실패·미채택·Draft #108/Story/D2/전체1~6 미완료다.
+
+단일 복잡한 경계의Grid Fill은 이 구간에서 종료한다. 다음은 후두부·목·승모근 구간별edge 연결/경계 간격을 전문 도구에서 설계하는 보완이며, 자동smooth/ratio/tiny 허용치 완화로 반복하지 않는다. 작은 면 증가의 원인을 해당설계로 추정하는 것은 가설이므로 실제 형상·변형으로 확인해야 한다. 기존 모든파일/실패·실측/올바른시범/승인공개UI·SDK/외부운영과 별도승인 경계는 유지한다.
+
 ## 실제 결과
 
 [Draft PR #108](https://github.com/HSU-OAS/bodyguard/pull/108)에 source d93e0b5와 실제 검증·새 편집 원본/GLB를 기록했다. 외형 P2 때문에 병합하지 않는다. 새 worktree는 app 호출의 Not a git repository/수동 worktree 미관리 판정으로 일반 Git worktree를 사용했고, PR 앱 첨부는 기존100개 한도 때문에 실패했다. 기존 첨부를 지우거나 등록 성공으로 표시하지 않는다.

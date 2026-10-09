@@ -1,5 +1,7 @@
 # 2단계 필수 보완 이월 및 후속 실행 순서
 
+2026-10-10 [S2.A1 국소 quad 실패](review/avatar-neck-integration/quad-attempt/README.md): 마지막 남성의 앞면·손·외부 좌표/raw skin/polygon·rest rig/PBR 보호와닫힘0/winding0을 확인했으나 tiny2→610으로저장전실패했다. 여성 제작·새원본/GLB/118변형/렌더/Chrome는미실행, 기존파일/실패보존·Draft #108/미채택·D2-A/전체1~6 미완료다. 단일Grid Fill 반복은종료하며 다음은후두부/목/승모근구간별표면/edge설계다. 실측·시범·승인공개구조/SDK·운영/별도승인과최소문구기준은유지한다.
+
 2026-10-10 [S2.A1 후속 위상 실패](review/avatar-neck-integration/topology-attempt/README.md): male 일부 보호/닫힘 검사는 통과했으나 female 보호 면 검사3개 누락으로 남녀 전체 제작 실패다. 새원본 저장0·GLB/변형/Chrome 미실행, 기존후보/실패 보존·Draft #108/미채택·D2-A/전체1~6 미완료다. 자동collapse 반복은 종료한다. 다음은 접합부 국소 표면/연속 edge 재설계이며 원본·리깅/실측·올바른시범·공개UI/SDK·운영 완료 기준과 별도 승인 경계를 유지한다.
 
 2026-10-10 최종 통합·수정의 [S2.A1 얼굴–목 표면 보완](stories/avatar-neck-integration.md)을 시작했다. 3→4→5→6의 독립 구현/검증 뒤 D2-A의 새 후보를 별도로 제작한다. 실제 단계3~6/전체1~6 통과 선언은 아니다. 원본·GLB·변형·Chrome 기술 검사는 외형 승인/실제 사람 정확도의 대체물이 아니며, 마감 P2·실측·올바른 시범·승인 공개 UI/SDK·외부 운영 조건이 남는다. 기존 Draft #9/원본·실패·A37 기본값과 별도 승인 경계를 유지한다.

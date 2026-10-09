@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-10 [S2.A1 국소 quad 실패](review/avatar-neck-integration/quad-attempt/README.md): 기존 앞면/손/외부 raw skin·좌표/polygon·rest rig/PBR를 보호했으나 작은면2→610으로저장전실패했다. 여성제작/새원본/GLB/변형/렌더/Chrome는미실행·원본/실패보존·Draft #108/외형P2/D2/전체1~6미완료다. 단일Grid Fill은종료하고 다음은후두부/목/승모근구간별표면/edge연결설계다. 공개UI/최소문구/판정/운영/별도승인기준은유지한다.
+
 2026-10-10 [S2.A1 위상 보완 실패](review/avatar-neck-integration/topology-attempt/README.md): native 국소 메시 정리를 실제 실행했으나 female 보호 면 검사3개 누락으로 실패·새후보 저장0·GLB/변형/Chrome 미실행이다. 원본/실행 소스/실패 증거를 보존하고 Draft #108/미채택/외형P2·D2/전체1~6 미완료를 유지한다. 자동collapse 반복은 종료하고 후속은 전문 도구의 접합부 국소 표면/edge 재설계다. 공개UI/최소문구·판정·운영 변경0, 기존 별도 승인 경계는 그대로다.
 
 2026-10-10 [S2.A1 얼굴–목 통합 보완](stories/avatar-neck-integration.md): PR #107 실제 merge a466528/main 포함·브랜치 보존을 확인하고 최신 main의 새 codex/avatar-neck-integration에서 시작했다. 3→4→5→6의 독립 구현 뒤 이월 D2-A를 새 전문 Blender 후보로 보완한다. 기존 Draft #9의1959개 로컬 변경/삭제·보존 원본을 건드리지 않았다. 단순 반복 시안이 아니라 새 원본·GLB·전체 변형·실제 두 rig를 검증하되 미완성 외형을 채택하지 않는다. 외형 P2/실측·시범·승인 공개 구조/SDK·외부/운영과 전체1~6 게이트는 미완료이며 텍스트 최소화와 별도 승인 규칙은 그대로다.
