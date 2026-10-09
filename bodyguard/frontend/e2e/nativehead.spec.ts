@@ -7,6 +7,7 @@ import type { mountNativeHeadAuthProbe } from './fixtures/nativeHeadAuthProbe'
 const origin = 'http://localhost:4173'
 const mailbox = process.env.BODYGUARD_TEST_MAILBOX
 const withFeedback = Boolean(process.env.BODYGUARD_TEST_NATIVE_FEEDBACK_PROBE)
+const withRenderPreparation = process.env.BODYGUARD_TEST_RENDER_PREPARATION === '1'
 const withReference = withFeedback || Boolean(process.env.BODYGUARD_TEST_NATIVE_REFERENCE_PROBE)
 const withHands = withReference || Boolean(process.env.BODYGUARD_TEST_NATIVE_HANDS_PROBE)
 const bundle =
@@ -210,6 +211,7 @@ async function mount(
       withAdaptive,
       withTiming,
       withTrunk,
+      withRenderPreparation,
     }) => {
       const path = '/__private-native-head-probe.js'
       const module = (await import(path)) as {
@@ -236,9 +238,21 @@ async function mount(
         withAdaptive,
         withTiming,
         withTrunk,
+        false,
+        false,
+        withRenderPreparation,
       )
     },
-    { gender, withHands, withReference, withFeedback, withAdaptive, withTiming, withTrunk },
+    {
+      gender,
+      withHands,
+      withReference,
+      withFeedback,
+      withAdaptive,
+      withTiming,
+      withTrunk,
+      withRenderPreparation,
+    },
   )
   await expect
     .poll(() => state(page))
@@ -264,6 +278,10 @@ async function running(page: Page) {
   expect(value.handsConfigured).toBe(withHands)
   expect(value.handCalls).toBe(withHands ? value.nativeCalls : 0)
   expect(value.nativeHandsMax).toBe(0)
+  if (withRenderPreparation) {
+    expect(value.rendererReady).toBeGreaterThan(0)
+    expect(value.gpuPreparationDraws).toBe(value.rendererReady)
+  }
 }
 async function hold(page: Page) {
   await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.holdNextResult())
@@ -320,6 +338,66 @@ async function release(page: Page) {
   expect(posts).toBe(0)
 }
 for (const gender of ['male', 'female'] as const) {
+  if (withRenderPreparation)
+    for (const revocation of ['logout', 'pagehide'] as const)
+      test(`${gender} renderer preparation→${revocation}→late compile cannot start/save`, async ({
+        page,
+        context,
+      }) => {
+        await join(context)
+        await mount(page, gender)
+        await page.evaluate(() => {
+          const p = (window as unknown as PrivateWindow).nativeAuthProbe
+          p.holdNextRenderPreparation()
+          p.beginStart()
+        })
+        await expect
+          .poll(() => state(page))
+          .toMatchObject({
+            renderPreparationHeld: true,
+            rendererPreparations: 1,
+            rendererReady: 0,
+            gpuPreparationDraws: 0,
+            renderFrames: 0,
+            nativeCalls: 0,
+            cameras: 1,
+          })
+        await mark(page, 'actual-compile-started-test-barrier-not-gpu-hang')
+        if (revocation === 'logout')
+          await page.evaluate(() => (window as unknown as PrivateWindow).nativeAuthProbe.signOut())
+        else await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent('pagehide')))
+        await expect.poll(() => state(page)).toMatchObject({ owned: false })
+        await page.evaluate(() =>
+          (window as unknown as PrivateWindow).nativeAuthProbe.releaseHeldRenderPreparation(),
+        )
+        await expect
+          .poll(() => state(page))
+          .toMatchObject({
+            renderPreparationHeld: false,
+            rendererReady: 0,
+            gpuPreparationDraws: 0,
+            renderFrames: 0,
+            nativeCalls: 0,
+            cameraCloses: 1,
+            detectorCloses: 1,
+            faceDetectorCloses: 1,
+            handDetectorCloses: 1,
+            tracksEnded: true,
+            models: 0,
+          })
+        await page.evaluate(() =>
+          (window as unknown as PrivateWindow).nativeAuthProbe.finishStart(),
+        )
+        expect(posts).toBe(0)
+        await page.evaluate(() =>
+          (window as unknown as PrivateWindow).nativeAuthProbe.beginOldActions(),
+        )
+        await page.evaluate(() =>
+          (window as unknown as PrivateWindow).nativeAuthProbe.finishOldActions(),
+        )
+        expect(posts).toBe(0)
+        await mark(page, 'no-late-ready-render-observation-record-or-automatic-restart')
+      })
   if (withFeedback)
     test(`${gender} native first-start stage timing without raw input`, async ({
       page,

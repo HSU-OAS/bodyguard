@@ -59,6 +59,10 @@ def main() -> int:
         nargs="?",
         default="account",
     )
+    parser.add_argument(
+        "--grep",
+        help="Test-name regex for explicit partitions; no retries or rate-limit changes",
+    )
     args = parser.parse_args()
     # Bind before touching data; never reuse a user's server on this port.
     with socket.socket() as listener, socket.socket() as blocked_proxy:
@@ -222,6 +226,7 @@ def main() -> int:
                         "playwright.account.config.ts",
                         "--output",
                         output,
+                        *(["--grep", args.grep] if args.grep else []),
                     ],
                     cwd=Path(__file__).resolve().parents[2] / "frontend",
                     env={
