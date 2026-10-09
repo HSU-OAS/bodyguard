@@ -16,6 +16,8 @@
 
 [전문 원본 내부 단면](reference-sections/README.md)은 읽기 전용 검사다. 남녀 각5개 단면의 연결 조건을 확인했지만 새 표면 저작·외형/변형/GLB/Chrome 통과는 아니다. 이전 실행 증거는 변경하지 않는다.
 
+[단면 기반 새 부분 후보](sectioned-attempt/README.md)는 남녀 저작/원본 보호·독립 재열기를 통과했지만 실제 연결띠의 겹침/점상 접합선으로 외형 미달이다. 새 원본/8컷은 미승인 후보로 보존하며, 전체 구간·GLB/118변형/Chrome·실측 완료가 아니다.
+
 ![제작 후보의 실제 Blender 정면: 최종 외형 아님](source-render-qa/faceless-front.png)
 
 [남성 뒤 목 전](before-render/male-back.png)·[후](after-render/male-back.png), [여성 뒤 목 전](before-render/female-back.png)·[후](after-render/female-back.png), [남성 실제 Chrome 두 rig](browser/reviewed-male-after.png)·[여성](browser/reviewed-female-after.png)를 비교한다. 같은 조명/재질/카메라의 전후8컷씩이며 흐림·이미지 편집·AI 생성으로 수정하지 않았다. 앞 목은 보존했고 뒤 접합의 국소 개선은 최종 마감에 미달한다.
