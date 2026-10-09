@@ -129,6 +129,10 @@ for (const file of files) {
     'Motion preview cleanup failed',
     'Invalid motion preview selection',
     'mountMotionPreviewProbe',
+    '튜닝 마치고 검증 시작',
+    '관찰자 판단을 먼저 선택하세요.',
+    'reduceFramingTrial',
+    'readFramingSample',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }

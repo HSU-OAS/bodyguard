@@ -20,7 +20,10 @@ test('시작·중지·재시작·화면 이탈 시 가짜 카메라 트랙과 �
     .toBeGreaterThan(0)
 
   // 가짜 카메라 화면에는 사람이 없어서 자리를 맞추라는 안내가 떠야 한다 (FR-M-07)
-  await expect(page.getByRole('status')).toHaveText('카메라 앞에 앉아 주세요', { timeout: 15_000 })
+  await expect(page.getByRole('status', { name: '촬영 안내' })).toHaveText(
+    '카메라 앞에 앉아 주세요',
+    { timeout: 15_000 },
+  )
 
   const tracks = await page.evaluateHandle(currentTracks)
   await page.getByRole('button', { name: '측정 중지' }).click()
