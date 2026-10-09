@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-09 [S3.P1 선택용 동작 미리보기 재생기](stories/owned-motion-preview.md): 보존 남녀 GLB·Blender 시험 클립으로 마우스/키보드 재생→이탈/숨김 정지→명시 재생/오류 복구→교체·제거를 실제 Chrome154/155에서 확인했다. [실제 화면·실패/보완·검증 경계](review/owned-motion-preview/README.md). 재생기만 완료하며 공개 선택 화면/미승인 구조 확장0·원본/GLB/새 조형0·카메라/판정/SDK/운영 변경0이다. 기존 최소 문구 원칙은 유지하고 이미지/움직임이 동작 설명을 대신하도록 준비했다. 구조 승인·출시 동작/최종 외형·실측/참여자·기존 시작P2/Draft101·D2/전체1~6 완료 기준은 미충족이다. 조건부 PR 게이트를 진행하며 이전 기록은 보존한다.
+
 2026-10-09 [S6.16 촬영 목 전체 회귀 복원](stories/native-neck-full-regression.md): 현재 비공개 accepted frame에 원래26개 test body/guard/loop 구성을 복원했다. [실제 촬영 비율/presence·가림·pause/새 세대·권한 회수·기록 흐름과 한계](review/native-neck-full-regression/README.md). actual Chrome155/SDK/API/격리 SQL의 목26·기본24와 FE/타입/정적/build/guard·공개/원본 불변은 통과했다. 과거 Chrome154/PR90의13실패 원인·기존 시작P2 해결이 아니다. 공개 구조/최소 문구·원본/GLB/새 조형·SDK/판정·운영 변경0, 실제 사람·최종 외형/시범·승인 공개 UI/SDK·D2/전체1~6은 미완료다. 좁은 회귀 복원 Story의 조건부 PR 게이트를 진행하며 이전 기록은 보존한다.
 
 2026-10-09 [S6.15 로그인 소유 렌더 준비](stories/owned-render-preparation.md): GPU 준비 helper를 실제 로그인 소유 코칭에 연결해 준비 중 logout/이탈·늦은 완료의 재생/기록 차단과 남녀 정상·pause/새 세대/본인 기록을 확인했다. [실제 흐름·실패2건·보완·한계](review/owned-render-preparation/README.md). actual Chrome prepared28/default24·FE1411·타입/정적/build/guard·공개 byte 불변을 확인하고 증거/조건부 PR 게이트를 진행한다. PR98 실제 mergec15608a의 최신 main에서 시작했다. 기본 경로·SDK 정책/모델/화질·원본/GLB/새 조형·최소 문구·운영 유지, 원래26/기존 시작P2·실측/최종 외형·승인 공개 구조/SDK·D2/전체1~6은 미완료다. 이전 시점 기록은 아래에 보존한다.
