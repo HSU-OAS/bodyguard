@@ -32,6 +32,7 @@ def main() -> int:
         "suite",
         choices=(
             "account",
+            "restore",
             "password",
             "google",
             "records",
@@ -192,6 +193,7 @@ def main() -> int:
                     if args.suite
                     in (
                         "account",
+                        "restore",
                         "records",
                         "design",
                         "withdrawal",
@@ -241,11 +243,13 @@ def main() -> int:
                         "BODYGUARD_TEST_GOOGLE_FIXTURE": str(google_file),
                         "BODYGUARD_TEST_RECORD_CLOCK": str(record_clock_file),
                         "BODYGUARD_TEST_BLOCKED_PROXY": proxy_url,
+                        "BODYGUARD_TEST_PAGE_RESTORE": "1" if args.suite == "restore" else "",
                         "BODYGUARD_TEST_RECORDS_REPORT": (
                             f"{output}/report.json"
                             if args.suite
                             in (
                                 "account",
+                                "restore",
                                 "records",
                                 "design",
                                 "withdrawal",
