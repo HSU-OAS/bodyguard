@@ -54,6 +54,8 @@ npm194개의 name/version, runtime 후보69·dev 후보144(19는 둘 다)를 확
 
 각 version의 공식 원문/동봉 NOTICE·의존 부품/저작권·실제 배포 범위를 재확인한다. 하위 의존성을 상위 패키지 라이선스로 임의 통합하지 않는다. webgl-constants1.1.1은 선언 없이 텍스트만 있으며 자동 MIT 판정하지 않는다.
 
+2026-10-10 [S5.6의 공식 source 증거](review/upstream-license-evidence/README.md): 위8개 version의 registry/integrity를 source lock과 실제 대조했고 R3F·Draco·Biome·Rolldown4개 version의 불변 source 원문5개를 별도 보존했다. 설치 root 누락 상태/기존 inventory는 그대로이며, MediaPipe2개·maath·stats-gl4개 version 원문 연결과 전체 NOTICE/하위 부품/배포 artifact는 여전히 미확인이다. upstream source 증거를 설치 파일/최종 권리 승인으로 바꾸지 않는다.
+
 Python57 lock 항목 중54 metadata를 실제 읽었다.52는 선언+텍스트, pathspec1.1.1/pwdlib0.3.1은 텍스트만, colorama0.4.6/httpx2-jsfetch1.0/tzdata2026.4는 현재 미설치로 증거 미확인이다. License-File의 AUTHORS 등도 실제 파일/hash를 읽지만 내용이나 작성자 정보를 공개 출력하지 않는다. LGPL-3.0-only·MPL-2.0·PSF-2.0·복합 표현 등 실제 선언을 프로젝트 MIT로 대체하지 않는다.
 
 ## 완료 조건을 구분한다
