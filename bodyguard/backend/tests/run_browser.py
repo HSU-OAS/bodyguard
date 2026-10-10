@@ -59,6 +59,7 @@ def main() -> int:
             "minuteupload",
             "dashboardclient",
             "authdashboard",
+            "recordjourney",
         ),
         nargs="?",
         default="account",
@@ -220,6 +221,7 @@ def main() -> int:
                         "minuteupload",
                         "dashboardclient",
                         "authdashboard",
+                        "recordjourney",
                     )
                     else f"test-results/{args.suite}"
                 )
@@ -278,6 +280,7 @@ def main() -> int:
                                 "minuteupload",
                                 "dashboardclient",
                                 "authdashboard",
+                                "recordjourney",
                             )
                             else ""
                         ),
