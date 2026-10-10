@@ -1,5 +1,17 @@
 # Bodyguard — Tasks
 
+## 현재 실행 지점 — 2026-10-10
+
+[S2.A1 목 중앙 후보의 실제 검증](review/avatar-neck-integration/lower-verification/README.md): 저장be038c04의 별도 Blender 재열기와 실제 남녀8컷 검수를 마쳤다. 원본/리깅 보호는 통과했지만 목 아래·어깨 외형P2는 남아 미채택이다. 새GLB·전체변형·브라우저는 미실행이다. 이전 원본·실패·검증 대기37개 체크포인트는 그대로 보존한다.
+
+다음은 앞면을 보호하는 목 좌/우·어깨 연결 설계와 새 최종 원본 전체 검증이다. 같은 중앙 저작을 반복하지 않는다. 자동 승인 검토는 현재 같은 정상 절차를 통과해 위 검증을 실행했고, 이전 사용량 제한은 과거 기록으로 남긴다. [남은 보완](review/avatar-neck-integration/lower-verification/README.md#남은-보완)을 따른다.
+
+기존 웹의 로그인·선택 준비·비공개 코칭/기록 adapter 구현과 실제 출시 사용 흐름은 다르다. 검증된 출시 동작0, 외형/시작/SDK P2·실측·승인 UI·외부 공급자/HTTPS/운영과 전체1~6은 미완료다. 공개 웹·문구 최소화·안전/개인정보·별도 승인 경계를 유지한다.
+
+이전 DNS/API 실패 후 정상 승인 절차로 실제fetch와PR 조회가 성공했다. origin/main a466528, PR #108 OPEN/Draft·HEAD d734b0f·체크 없음·MERGEABLE/CLEAN을 확인한 시점이다. 새 증거·본문/리뷰·exact HEAD/diff를 후속 갱신하며 외형P2 때문에 병합하지 않는다. 새 독립 Story는 다시 최신main을 확인하고 새codex/*에서 시작한다.
+
+## 이전 시점 기록 — 보존
+
 2026-10-10 [S2.A1 국소 quad 실패](review/avatar-neck-integration/quad-attempt/README.md): 기존 앞면/손/외부 raw skin·좌표/polygon·rest rig/PBR를 보호했으나 작은면2→610으로저장전실패했다. 여성제작/새원본/GLB/변형/렌더/Chrome는미실행·원본/실패보존·Draft #108/외형P2/D2/전체1~6미완료다. 단일Grid Fill은종료하고 다음은후두부/목/승모근구간별표면/edge연결설계다. 공개UI/최소문구/판정/운영/별도승인기준은유지한다.
 
 2026-10-10 [S2.A1 위상 보완 실패](review/avatar-neck-integration/topology-attempt/README.md): native 국소 메시 정리를 실제 실행했으나 female 보호 면 검사3개 누락으로 실패·새후보 저장0·GLB/변형/Chrome 미실행이다. 원본/실행 소스/실패 증거를 보존하고 Draft #108/미채택/외형P2·D2/전체1~6 미완료를 유지한다. 자동collapse 반복은 종료하고 후속은 전문 도구의 접합부 국소 표면/edge 재설계다. 공개UI/최소문구·판정·운영 변경0, 기존 별도 승인 경계는 그대로다.
