@@ -2,6 +2,8 @@
 
 ## 현재 실행 지점 — 2026-10-10
 
+[전문 원본 대조](review/avatar-neck-integration/lateral-origin/README.md)는 원래A318의6면 연결/winding·9점 raw skin/one-ring exact와 현재좌표0.140~2.127mm변화를확인했다. A318의해당면은normalY양수/edge최대5.705°이며현재접힘은그대로상속된것이아니다. 진단exit0·원본/남녀snapshot불변·4개증거/새모델0이다. 이어진 [전문 배치 복원](review/avatar-neck-integration/lateral-restore/README.md)은남성4149점/최대3.769mm·보호통과·접힘14→1이지만0기준미달로exit1/저장0이었다. 여성제작/새원본·렌더/GLB/전체변형/Chrome·실측은미실행이며8개증거와이전실패를보존했다. 다음은남은1개edge의국소연결·선택/보호경계대조다. 정확한원인은아직미확정이며동일복원/스무딩·값sweep을반복하지않는다. 외형P2/Draft #108·D2/전체1~6미완료·최소문구/별도승인기준은유지한다.
+
 [S2.A1 옆 목·어깨 실제 보완](review/avatar-neck-integration/lateral-attempt/README.md): 세 native 저작 모두 남성 접힘 검사에서 저장 전 실패했다. 마지막 접힘14→4와 원래 앞면/좌표·위상/raw skin/rig 보호를 확인했지만 실제 마감은 미달이다. 남성 반려 상태+변경하지 않은 여성 입력의8컷과39개 증거를 보존했다. 여성 저작·새 후보·GLB/전체변형/브라우저는 미실행이다. 입력be038c04·과거 원본/실패·37개 체크포인트/17개 검증은 유지한다.
 
 [남은6면 실제 비교](review/avatar-neck-integration/lateral-faces/README.md)는 원래부터 접힌 삼각면/quad와 계산용 삼각화만으로 해소되지 않는 것을 확인했다. 최초 API 가정 실패exit1·별도 native API probe/후속 진단exit0를12개로 보존했다. 동결 반려 row와 원본/여성/private probe 보호는 exact·새 후보0이다. 다음은 원래 전문 원본의 국소 점 출처/배치·연결/표면 연속성 대조와 보완 설계다. 같은 중앙/Laplacian·단위·계산 삼각화를 반복하지 않는다. 새 최종 원본에서 외형·원본/GLB/전체변형/Chrome/실측을 실제 재실행해야 한다. [남은 보완](review/avatar-neck-integration/lateral-faces/README.md#실제-확인)을 따른다.

@@ -2,6 +2,8 @@
 
 ## 현재 D2-A 실행 지점 — 2026-10-10
 
+[A318 대조](review/avatar-neck-integration/lateral-origin/README.md)에서6면/9점의연결·skin/one-ring을유지한현재좌표변화와전문원본의정상방향을구별했다. 읽기전용exit0·4개보존증거다. [원래 전문 배치 복원](review/avatar-neck-integration/lateral-restore/README.md)은남성접힘14→1/전체보호통과에도0기준미달로exit1·저장0, 여성/새렌더/GLB/전체변형/Chrome미실행이다. 8개실패증거를보존하고다음은남은1개edge의국소연결·선택/보호경계대조로이어간다. 정확한원인미확정·같은복원/스무딩·값sweep반복0·원본/이전실패보존·P2/Draft/미채택·D2/전체1~6완료기준은그대로다. 최소문구·안전/개인정보/별도승인경계를유지한다.
+
 [옆 목·어깨 실제 보완 실패](review/avatar-neck-integration/lateral-attempt/README.md)를 기준으로 이어간다. 세 저작 모두 남성 접힘 검사에서 저장 전 실패했고 마지막14→4·원본 보호 통과와 실제 외형 미달을 구분한다. 반려 남성/변경 없는 여성8컷과39개 증거를 별도 보존했다. 여성 저작·새 후보/GLB/전체변형/브라우저는 미실행이다. 입력be038c04·이전37개 체크포인트와17개 독립 검증·모든 과거 원본/실패를 보존하며 이전 기술 성공을 복사하지 않는다.
 
 [남은6면 실제 진단](review/avatar-neck-integration/lateral-faces/README.md)은 원래부터 접힌 삼각면/quad·삼각화 미해결을 확인했다. 초기 API 가정 오류exit1을 지우지 않고 별도 설치 API probe/후속 진단exit0·원본/여성/private probe exact·새 후보0의12개를 구분한다. 다음은 원래 전문 원본의 국소점 출처/배치·연결/표면 연속성 대조와 보완 설계다. 동일 중앙/Laplacian·단위·계산 삼각화 반복은 하지 않는다. 새 최종 원본/GLB·변형/브라우저/외형·실측 통과가 필요하다. 이전 main a466528/PR3baf61e의 CLEAN·체크 없음 관찰을 새 HEAD 검증으로 대신하지 않는다. 외형P2로Draft #108은 병합하지 않는다. D2-M/T/R/I/P·1~6 필수 기준·최소 문구는 그대로다. 새 독립 Story는 최신main 확인부터 한다. 비용/계정/시크릿/운영DB/배포/출시·중요 안전/개인정보 변경은 별도 승인이다.
