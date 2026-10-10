@@ -22,6 +22,8 @@
 
 [제약 연결띠의 새 부분 후보](projected-attempt/README.md)는 남녀 저작/독립 재열기·원본 보호와 연결부 접힘·추가 교차 방지를 실제 통과했다. 실제8컷에서 검은 연결 틈은 사라졌으나 목–어깨와 전체 관절 마감의 외형 P2는 남아 미채택이다. 새 원본2932e63d의GLB/118변형/Chrome는 아직 미실행이며 아래 ce8887d 기술 성공을 복사하지 않는다.
 
+[앞면을 보호한 목 중앙 후보](lower-attempt/README.md)는 새be038c04 부분 원본의 native 저장·제작 중 보호 검사를 통과했다. **새 미리보기·독립 재열기/변형/GLB/브라우저는 아직 미실행**이다. 자동 승인 검토의 사용량 제한으로 렌더 프로세스가 시작되지 않았으며, 과거 사진·QA를 새 후보 성공으로 사용하지 않는다. 목 좌/우·어깨의 외형 P2와 전체 완료 기준은 유지한다.
+
 ![제작 후보의 실제 Blender 정면: 최종 외형 아님](source-render-qa/faceless-front.png)
 
 [남성 뒤 목 전](before-render/male-back.png)·[후](after-render/male-back.png), [여성 뒤 목 전](before-render/female-back.png)·[후](after-render/female-back.png), [남성 실제 Chrome 두 rig](browser/reviewed-male-after.png)·[여성](browser/reviewed-female-after.png)를 비교한다. 같은 조명/재질/카메라의 전후8컷씩이며 흐림·이미지 편집·AI 생성으로 수정하지 않았다. 앞 목은 보존했고 뒤 접합의 국소 개선은 최종 마감에 미달한다.
