@@ -58,6 +58,7 @@ def main() -> int:
             "summaries",
             "minuteupload",
             "dashboardclient",
+            "authdashboard",
         ),
         nargs="?",
         default="account",
@@ -218,6 +219,7 @@ def main() -> int:
                         "summaries",
                         "minuteupload",
                         "dashboardclient",
+                        "authdashboard",
                     )
                     else f"test-results/{args.suite}"
                 )
@@ -275,6 +277,7 @@ def main() -> int:
                                 "summaries",
                                 "minuteupload",
                                 "dashboardclient",
+                                "authdashboard",
                             )
                             else ""
                         ),
