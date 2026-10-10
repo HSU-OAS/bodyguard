@@ -123,7 +123,8 @@ export async function resend(challenge_id: string, signal: AbortSignal): Promise
 }
 
 export async function logout(signal: AbortSignal): Promise<void> {
-  await request('/auth/logout', signal)
+  // FR-U-04: other2xx is not confirmation of server-side session revocation.
+  await request('/auth/logout', signal, undefined, 204)
 }
 
 // FR-U-03: request acceptance is not mail delivery; exact reset acknowledgement required.
