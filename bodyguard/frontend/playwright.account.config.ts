@@ -34,6 +34,7 @@ export default defineConfig({
     'ownedalert.spec.ts',
     'summaries.spec.ts',
     'minuteupload.spec.ts',
+    'dashboardclient.spec.ts',
   ],
   reporter: process.env.BODYGUARD_TEST_RECORDS_REPORT
     ? [['list'], ['json', { outputFile: process.env.BODYGUARD_TEST_RECORDS_REPORT }]]
@@ -67,11 +68,12 @@ export default defineConfig({
       : {}),
   },
   webServer: {
-    command:
-      process.env.BODYGUARD_TEST_NATIVE_HEAD_PROBE ||
-      process.env.BODYGUARD_TEST_NATIVE_HANDS_PROBE ||
-      process.env.BODYGUARD_TEST_NATIVE_REFERENCE_PROBE ||
-      process.env.BODYGUARD_TEST_NATIVE_FEEDBACK_PROBE
+    command: process.env.BODYGUARD_TEST_DASHBOARD_PROBE
+      ? 'pnpm build && vite build --config e2e/fixtures/dashboardClient.vite.ts && vite preview --host localhost'
+      : process.env.BODYGUARD_TEST_NATIVE_HEAD_PROBE ||
+          process.env.BODYGUARD_TEST_NATIVE_HANDS_PROBE ||
+          process.env.BODYGUARD_TEST_NATIVE_REFERENCE_PROBE ||
+          process.env.BODYGUARD_TEST_NATIVE_FEEDBACK_PROBE
         ? 'pnpm build && vite build --config e2e/fixtures/nativeHead.vite.ts && vite preview --host localhost'
         : process.env.BODYGUARD_TEST_NATIVE_RECOVERY_PROBE
           ? 'pnpm build && vite build --config e2e/fixtures/nativeRecovery.vite.ts && vite preview --host localhost'

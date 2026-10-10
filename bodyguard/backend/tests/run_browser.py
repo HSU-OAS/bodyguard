@@ -57,6 +57,7 @@ def main() -> int:
             "ownedalert",
             "summaries",
             "minuteupload",
+            "dashboardclient",
         ),
         nargs="?",
         default="account",
@@ -216,6 +217,7 @@ def main() -> int:
                         "ownedalert",
                         "summaries",
                         "minuteupload",
+                        "dashboardclient",
                     )
                     else f"test-results/{args.suite}"
                 )
@@ -272,6 +274,7 @@ def main() -> int:
                                 "ownedalert",
                                 "summaries",
                                 "minuteupload",
+                                "dashboardclient",
                             )
                             else ""
                         ),
