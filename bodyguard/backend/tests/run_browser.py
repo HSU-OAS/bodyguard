@@ -191,6 +191,7 @@ def main() -> int:
                     f"test-results/{args.suite}-{datetime.now(UTC).strftime('%Y%m%dT%H%M%S%fZ')}"
                     if args.suite
                     in (
+                        "account",
                         "records",
                         "design",
                         "withdrawal",
@@ -244,6 +245,7 @@ def main() -> int:
                             f"{output}/report.json"
                             if args.suite
                             in (
+                                "account",
                                 "records",
                                 "design",
                                 "withdrawal",
