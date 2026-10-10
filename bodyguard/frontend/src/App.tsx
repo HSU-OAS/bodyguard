@@ -1,6 +1,7 @@
 import { lazy, type ReactNode, Suspense, useEffect, useRef } from 'react'
 import { BrowserRouter, Link, Navigate, Route, Routes, useLocation } from 'react-router'
 import { AuthProvider, useAuth } from './auth'
+import { personalDestination } from './authDestination'
 import { AccountPage } from './pages/AccountPage'
 import { DataPage, HelpPage } from './pages/DataHelpPage'
 import { ExplorePage } from './pages/ExplorePage'
@@ -29,7 +30,11 @@ const MotionSelection = import.meta.env.DEV
 
 function SessionGate({ children }: { children?: ReactNode }) {
   const { state, refresh, signOut } = useAuth()
-  if (state.status === 'guest') return <Navigate to="/login?next=%2Fstart" replace />
+  const location = useLocation()
+  if (state.status === 'guest') {
+    const next = personalDestination(location.pathname + location.search) ?? '/start'
+    return <Navigate to={`/login?${new URLSearchParams({ next }).toString()}`} replace />
+  }
   if (state.status === 'offline' || state.status === 'logout-error')
     return (
       <section className="status-screen">

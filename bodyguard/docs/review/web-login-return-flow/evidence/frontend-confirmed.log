@@ -1,0 +1,12 @@
+$ vitest run -- --maxWorkers=4
+
+ RUN  v5.0.2 /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend
+
+
+ Test Files  80 passed (80)
+      Tests  1639 passed (1639)
+   Start at  01:15:23
+   Duration  9.08s (tests 40%, environment 29%, import 19%, transform 11%, worker 1%)
+
+    Isolate  80 workers spawned · ~429ms startup each (spawn + environment, per file)
+             at least ~3.39s faster with isolate: false — reuses workers across files instead of one per file

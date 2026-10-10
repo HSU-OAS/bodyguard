@@ -1,0 +1,100 @@
+{
+  "story": "S4.23",
+  "scope": "Existing authenticated web destination return; not full service/release",
+  "baseMain": "32e18a01c15e89ae4e321d372165abed29b0f506",
+  "workingSourceHashes": {
+    "bodyguard/frontend/src/App.tsx": "643547ac6d4e29dbd7bc8dfd7877481ffa489df02dcc81fb7d58e52665514deb",
+    "bodyguard/frontend/src/pages/AccountPage.tsx": "b0aab33b8accb34dcda76859539e2ff07222ece3ba947449abce7faecd964b89",
+    "bodyguard/frontend/src/authDestination.ts": "653e82ee5f8ce44cbf7a08282a9626cc4ef45fdda211313552e8f409f6c4bd6d",
+    "bodyguard/frontend/src/authDestination.test.ts": "dc9b6401b40a234f9d900e4f1b459748a3da684540754a9fc3392245909eab32",
+    "bodyguard/frontend/src/loginReturn.test.tsx": "d357c46188a1e942b519838fb3cfbfb0596170fe02c5d0b43242d4777c2b615d",
+    "bodyguard/frontend/e2e/account.spec.ts": "7bfa9f10446cd765717bb0e1fb45f46d94a8b9712cd899e3e663a96ee745b0af"
+  },
+  "actualFlows": [
+    "Records period → login → signup → mail-code verification → same records period → reload",
+    "Existing email login: wrong password rejected, same account destination retained, successful retry → account at 1024px",
+    "Authenticated external/duplicate next → safe start, no external navigation"
+  ],
+  "browser": {
+    "implementation": "Installed Chrome, original tests.run_browser SQL/API/auth/mail guards, private production preview/config selection only",
+    "stats": {
+      "startTime": "2026-10-10T16:15:11.702Z",
+      "duration": 6263.938,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cameraCalls": 0,
+    "mail": "Synthetic test-process IPC, not Gmail/SMTP",
+    "accounts": "Synthetic accounts in newly owned PostgreSQL18 cluster",
+    "responses": "Actual auth/record HTTP and PostgreSQL, not success stubs"
+  },
+  "checks": {
+    "unitAndDOM": "80 files / 1639 passed; auth mocks and pure route fixtures are synthetic",
+    "typecheck": "passed",
+    "scopedBiome": "passed",
+    "productionBuild": "Original Vite/rights helper with canonical root, empty owned envDir/new output; no assets preparation/3D",
+    "privateGuard": "Original current main guard, only input root changed to owned build",
+    "notices": "Actual generated build checked against installed originals",
+    "CSSSameAsMain": true,
+    "diffCheck": "passed before evidence commit"
+  },
+  "failures": [
+    "Initial DOM4 actual destination failures before implementation",
+    "Initial Biome regex control-character lint and DOM-test role typing failed, then repaired without suppressions",
+    "Initial interpreter-relative path missing, no API/browser execution",
+    "Initial grep ^RETURN selected 0 tests; actual process stayed live; exact owned preview PID terminated normally",
+    "Next premature start rejected because previous owned API still occupied port; no success claimed; prior handle verified terminal before confirmed run"
+  ],
+  "preservation": {
+    "previousFilesAndEvidence": "No deletion or replacement of existing user/avatar evidence",
+    "scratch": "/private/tmp/bodyguard-login-return.hMIhQq",
+    "ownedPG": "/private/tmp/bodyguard-auth-test.TErRUq",
+    "ownedPGStopped": true,
+    "ownedAPIAndPreviewStopped": true,
+    "rawHashes": {
+      "dom-red.log": "ab76716416c4b65715f6b3442299de12857e3ba191c64837479455be9975ac4f",
+      "browser.log": "c0e2892bf9622f2375915595a4b70b18e70c7febb8ab8ee4aeb6a3b6d97e4c07",
+      "browser-real.log": "d1614b0a975d22b1295cc26eba6b40a589342dace03fcd67b60cc0f01a3e7d7c",
+      "browser-final.log": "080ed84cf0b6eaa98ae0c9017bb9e7f08b1e6baab7e40511683e744225545c11",
+      "browser-confirmed.log": "6820e92926fffe5ae59d6eb225973d696db1564b95c97bc9130c6f1c619b2ca6",
+      "frontend-confirmed.log": "d900f2140f93460db0722f91bb0838da8f16188b0bbb035183881fc490e82671",
+      "types.log": "dc476cf0e14969ebf1dc8a1d8e846cb62e841d1ca78405dddbb6db20da2bc1a5",
+      "types-confirmed.log": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92",
+      "static-confirmed.log": "8dffde74798d42fc0ae3e7a908fb73f03e60be6e161d24d8b007ef3731753a11",
+      "build.log": "b9ed18a9be86dbe11e66bcd4dc7956a8d7466cd83f6b7f34e3416b4715bc2fd9",
+      "notices.json": "ff018cda60e90fea84f20f03b1cf7909871e43c095f75263155d0050ca7b47d4",
+      "production-guard.json": "d5427256c3d39b8ef3179c600682ef3f6ab1d94a986c761e0c8dd02ea436f0cb",
+      "build.vite.mts": "3704ec311ca8b06599b69247bc18cf8473125ec28722439818a89cea78127d6f",
+      "browser.config.mts": "590f47eda01f473da766e09459d39e8505bdf8f3e76d4fd16907a854126be032",
+      "run-browser.py": "926c00608cb698b8cd408734d33e6a8fee41b5c0d60783b72429aa6d635be0b7",
+      "browser-report-confirmed.json": "8a8ad0125bb60dcca96cb70db41c7680cf0c39863768130ef39d249633b2fcc3"
+    }
+  },
+  "unchanged": {
+    "backend": true,
+    "authAuthority": true,
+    "apiContracts": true,
+    "recordAccountScreens": true,
+    "avatarAndGLB": true,
+    "dependencies": true,
+    "CSS": true
+  },
+  "authorReview": {
+    "independentReviewer": false,
+    "verdict": "Scoped local gates passed, no unresolved Story P1/P2; conditional PR gate next",
+    "security": "Explicit personal paths/UUID/date/page only; unknown/duplicate query discarded; duplicate next/external/encoded path/control/hash/overlong rejected; authority/server ownership/CSRF and destructive confirmations unchanged",
+    "performance": "Bounded 512-character parser, no new requests or persistent cache",
+    "correctness": "Guest origin, signup/login switch, actual verification/login/reload/failure and 503 blocking preserved",
+    "maintainability": "One helper shared by SessionGate and AccountPage; existing ID/date validators reused"
+  },
+  "unexecuted": [
+    "Real SMTP/Google callback destination/provider proof",
+    "Whole backend SQL regression (backend source unchanged)",
+    "Physical participants/motion accuracy/camera/avatars",
+    "NGINX/Docker/HTTPS/deployment/production migration/operational recovery"
+  ],
+  "stage4Complete": false,
+  "allStages1To6Complete": false
+}

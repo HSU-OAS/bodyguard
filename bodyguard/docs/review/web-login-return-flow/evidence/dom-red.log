@@ -1,0 +1,80 @@
+
+ RUN  v5.0.2 /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend
+
+ ❯ src/loginReturn.test.tsx (4 tests | 4 failed) 121ms
+   × 개인 주소 /records?from=2026-10-01&to=2026-10-09의 로그인 목적은 이미 구현된 동일 화면이다 62ms
+   × 개인 주소 /posture-records?from=2026-10-01&to=2026-10-09&page=2의 로그인 목적은 이미 구현된 동일 화면이다 15ms
+   × 개인 주소 /ACCOUNT/NOTIFICATIONS/의 로그인 목적은 이미 구현된 동일 화면이다 17ms
+   × 기록 진입→가입/로그인 전환→이메일 로그인 뒤 원래 기간으로 복귀한다 27ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/loginReturn.test.tsx > 개인 주소 /records?from=2026-10-01&to=2026-10-09의 로그인 목적은 이미 구현된 동일 화면이다
+AssertionError: expected '/start' to be '/records?from=2026-10-01&to=2026-10-09' // Object.is equality
+
+Expected: "/records?from=2026-10-01&to=2026-10-09"
+Received: "/start"
+
+ ❯ src/loginReturn.test.tsx:37:67
+     35|   render(<App />)
+     36|   await screen.findByRole('heading', { name: '다시 만나 반갑습니다' })
+     37|   expect(new URLSearchParams(window.location.search).get('next')).toBe…
+       |                                                                   ^
+     38| })
+     39| it('기록 진입→가입/로그인 전환→이메일 로그인 뒤 원래 기간으로 복귀한다', async () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  src/loginReturn.test.tsx > 개인 주소 /posture-records?from=2026-10-01&to=2026-10-09&page=2의 로그인 목적은 이미 구현된 동일 화면이다
+AssertionError: expected '/start' to be '/posture-records?from=2026-10-01&to=2…' // Object.is equality
+
+Expected: "/posture-records?from=2026-10-01&to=2026-10-09&page=2"
+Received: "/start"
+
+ ❯ src/loginReturn.test.tsx:37:67
+     35|   render(<App />)
+     36|   await screen.findByRole('heading', { name: '다시 만나 반갑습니다' })
+     37|   expect(new URLSearchParams(window.location.search).get('next')).toBe…
+       |                                                                   ^
+     38| })
+     39| it('기록 진입→가입/로그인 전환→이메일 로그인 뒤 원래 기간으로 복귀한다', async () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  src/loginReturn.test.tsx > 개인 주소 /ACCOUNT/NOTIFICATIONS/의 로그인 목적은 이미 구현된 동일 화면이다
+AssertionError: expected '/start' to be '/account/notifications' // Object.is equality
+
+Expected: "/account/notifications"
+Received: "/start"
+
+ ❯ src/loginReturn.test.tsx:37:67
+     35|   render(<App />)
+     36|   await screen.findByRole('heading', { name: '다시 만나 반갑습니다' })
+     37|   expect(new URLSearchParams(window.location.search).get('next')).toBe…
+       |                                                                   ^
+     38| })
+     39| it('기록 진입→가입/로그인 전환→이메일 로그인 뒤 원래 기간으로 복귀한다', async () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  src/loginReturn.test.tsx > 기록 진입→가입/로그인 전환→이메일 로그인 뒤 원래 기간으로 복귀한다
+AssertionError: expected '/start' to be '/records?from=2026-10-01&to=2026-10-09' // Object.is equality
+
+Expected: "/records?from=2026-10-01&to=2026-10-09"
+Received: "/start"
+
+ ❯ src/loginReturn.test.tsx:47:67
+     45|   fireEvent.click(screen.getByRole('link', { name: '이메일로 가입', exact: t…
+     46|   await screen.findByRole('heading', { name: '나를 위한 움직임의 시작' })
+     47|   expect(new URLSearchParams(window.location.search).get('next')).toBe…
+       |                                                                   ^
+     48|   fireEvent.click(screen.getAllByRole('link', { name: '로그인', exact: tr…
+     49|   await screen.findByRole('heading', { name: '다시 만나 반갑습니다' })
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed (4)
+   Start at  01:04:51
+   Duration  1.14s (environment 40%, import 24%, transform 23%, tests 12%)

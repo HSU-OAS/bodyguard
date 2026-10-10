@@ -1,0 +1,12 @@
+[WebServer] (node:68072) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:68075) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/account.spec.ts:142:1 › RETURN 기록 기간→가입 전환→인증 후 같은 기간과 빈 기록을 연다 (1.4s)
+  ✓  2 e2e/account.spec.ts:164:1 › RETURN 기존 이메일 로그인은 내 계정 목적과 narrow 화면을 유지한다 (1.9s)
+  ✓  3 e2e/account.spec.ts:188:1 › RETURN 외부 목적과 중복 next는 실제 로그인 세션을 외부로 보내지 않는다 (869ms)
+
+  3 passed (6.3s)

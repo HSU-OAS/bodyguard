@@ -138,6 +138,63 @@ async function join(page: Page, email: string) {
   await expect(page.getByRole('heading', { name: '내 몸을 위한 시작' })).toBeVisible()
 }
 
+// FR-U-04: real HTTP/SQL, synthetic accounts and test-process mail only.
+test('RETURN 기록 기간→가입 전환→인증 후 같은 기간과 빈 기록을 연다', async ({ page }, info) => {
+  const email = address()
+  const destination = '/records?from=2026-10-01&to=2026-10-09'
+  await page.goto(destination)
+  await expect(page.getByRole('heading', { name: '다시 만나 반갑습니다' })).toBeVisible()
+  expect(new URL(page.url()).searchParams.get('next')).toBe(destination)
+  await page.getByRole('link', { name: '이메일로 가입', exact: true }).click()
+  expect(new URL(page.url()).searchParams.get('next')).toBe(destination)
+  await fillCredentials(page, email)
+  await page.getByRole('button', { name: '인증 코드 받기', exact: true }).click()
+  await expect(page.getByRole('heading', { name: '이메일을 확인해 주세요' })).toBeVisible()
+  await page.getByLabel('인증 코드', { exact: true }).fill(await codeFor(email))
+  await page.getByRole('button', { name: '인증하고 시작하기' }).click()
+  await expect(page).toHaveURL(`http://localhost:4173${destination}`)
+  await expect(page.getByRole('heading', { name: '내 수행 기록', exact: true })).toBeVisible()
+  await expect(page.getByLabel('시작일', { exact: true })).toHaveValue('2026-10-01')
+  await expect(page.getByLabel('종료일', { exact: true })).toHaveValue('2026-10-09')
+  await page.reload()
+  await expect(page.getByRole('heading', { name: '내 수행 기록', exact: true })).toBeVisible()
+  await page.screenshot({ path: info.outputPath('returned-records.png'), fullPage: true })
+})
+
+test('RETURN 기존 이메일 로그인은 내 계정 목적과 narrow 화면을 유지한다', async ({
+  page,
+}, info) => {
+  const email = address()
+  await join(page, email)
+  await page.getByRole('button', { name: '로그아웃', exact: true }).click()
+  await expect(page.getByRole('heading', { name: '다시 만나 반갑습니다' })).toBeVisible()
+  await page.goto('/ACCOUNT/')
+  await expect(page.getByRole('heading', { name: '다시 만나 반갑습니다' })).toBeVisible()
+  expect(new URL(page.url()).searchParams.get('next')).toBe('/account')
+  await page.setViewportSize({ width: 1024, height: 900 })
+  await fillCredentials(page, email)
+  await page.getByLabel('비밀번호', { exact: true }).fill('wrong-password-for-test-123')
+  await page.getByRole('button', { name: '로그인', exact: true }).click()
+  await expect(page.getByRole('alert')).toBeVisible()
+  expect(new URL(page.url()).searchParams.get('next')).toBe('/account')
+  await fillCredentials(page, email)
+  await page.getByRole('button', { name: '로그인', exact: true }).click()
+  await expect(page).toHaveURL('http://localhost:4173/account')
+  await expect(page.getByRole('heading', { name: '내 계정', exact: true })).toBeVisible()
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+  await page.screenshot({ path: info.outputPath('returned-account.png'), fullPage: true })
+})
+
+test('RETURN 외부 목적과 중복 next는 실제 로그인 세션을 외부로 보내지 않는다', async ({ page }) => {
+  const email = address()
+  await join(page, email)
+  for (const query of ['next=https%3A%2F%2Fevil.invalid', 'next=%2Frecords&next=%2Faccount']) {
+    await page.goto(`/login?${query}`)
+    await expect(page).toHaveURL('http://localhost:4173/start')
+    await expect(page.getByRole('heading', { name: '내 몸을 위한 시작' })).toBeVisible()
+  }
+})
+
 test('B-01 공개·제품 개발 경로·카메라 0·좁은 창·키보드', async ({ page }, info) => {
   const errors: string[] = [],
     requests: string[] = []

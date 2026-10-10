@@ -10,6 +10,7 @@ import {
   validPassword,
 } from '../api/auth'
 import { useAuth } from '../auth'
+import { loginDestination } from '../authDestination'
 
 const googleErrors: Record<string, string> = {
   cancelled: '구글 로그인을 취소했습니다. 다시 시작하거나 이메일로 계속해 주세요.',
@@ -23,6 +24,7 @@ const googleErrors: Record<string, string> = {
 export function AccountPage({ mode }: { mode: 'login' | 'signup' }) {
   const auth = useAuth()
   const [query] = useSearchParams()
+  const destination = loginDestination(query)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [visible, setVisible] = useState(false)
@@ -143,7 +145,7 @@ export function AccountPage({ mode }: { mode: 'login' | 'signup' }) {
     }
   }
 
-  if (auth.state.status === 'ready') return <Navigate to="/start" replace />
+  if (auth.state.status === 'ready') return <Navigate to={destination} replace />
   const heading = verify
     ? '이메일을 확인해 주세요'
     : mode === 'signup'
@@ -365,7 +367,12 @@ export function AccountPage({ mode }: { mode: 'login' | 'signup' }) {
         ) : (
           <p className="form-secondary">
             {mode === 'signup' ? '이미 계정이 있나요?' : '처음 오셨나요?'}{' '}
-            <Link to={mode === 'signup' ? '/login?next=%2Fstart' : '/signup?next=%2Fstart'}>
+            <Link
+              to={
+                (mode === 'signup' ? '/login?' : '/signup?') +
+                new URLSearchParams({ next: destination }).toString()
+              }
+            >
               {mode === 'signup' ? '로그인' : '이메일로 가입'}
             </Link>
           </p>
