@@ -2,7 +2,11 @@
 
 ## 현재 실행 지점 — 2026-10-10
 
-[전문 원본 대조](review/avatar-neck-integration/lateral-origin/README.md)는 원래A318의6면 연결/winding·9점 raw skin/one-ring exact와 현재좌표0.140~2.127mm변화를확인했다. A318의해당면은normalY양수/edge최대5.705°이며현재접힘은그대로상속된것이아니다. 진단exit0·원본/남녀snapshot불변·4개증거/새모델0이다. 이어진 [전문 배치 복원](review/avatar-neck-integration/lateral-restore/README.md)은남성4149점/최대3.769mm·보호통과·접힘14→1이지만0기준미달로exit1/저장0이었다. 여성제작/새원본·렌더/GLB/전체변형/Chrome·실측은미실행이며8개증거와이전실패를보존했다. 다음은남은1개edge의국소연결·선택/보호경계대조다. 정확한원인은아직미확정이며동일복원/스무딩·값sweep을반복하지않는다. 외형P2/Draft #108·D2/전체1~6미완료·최소문구/별도승인기준은유지한다.
+[복원 경계 대조](review/avatar-neck-integration/restored-boundary/README.md)는 실제 exit0·저장0이며, 원본이 아닌 선택 안/밖 점의 혼합 배치에서 남은 접힘이 생겼음을 확인했다. 다음은 원래 전문 위치의 연속 전이 설계다. 보호 범위/위상/rig·6mm·접힘0을 완화하지 않는다. 첫 중단의 미확정 종료와 후속 실제 종료/증거를 구별했으며 새 렌더/GLB/변형/Chrome·실측은 미실행이다. 외형P2·Draft #108·D2/전체1~6/최소 문구·별도 승인 경계는 유지한다.
+
+### 이전 기준선 — 보존
+
+[전문 원본 대조](review/avatar-neck-integration/lateral-origin/README.md)는 원래A318의6면 연결/winding·9점 raw skin/one-ring exact와 현재좌표0.140~2.127mm변화를확인했다. A318의해당면은normalY양수/edge최대5.705°이며현재접힘은그대로상속된것이아니다. 진단exit0·원본/남녀snapshot불변·4개증거/새모델0이다. 이어진 [전문 배치 복원](review/avatar-neck-integration/lateral-restore/README.md)은남성4149점/최대3.769mm·보호통과·접힘14→1이지만0기준미달로exit1/저장0이었다. 여성제작/새원본·렌더/GLB/전체변형/Chrome·실측은미실행이며8개증거와이전실패를보존했다. 당시 다음은남은1개edge의국소연결·선택/보호경계대조였으며 현재 결과는 위에 기록했다. 외형P2/Draft #108·D2/전체1~6미완료·최소문구/별도승인기준은유지한다.
 
 [S2.A1 옆 목·어깨 실제 보완](review/avatar-neck-integration/lateral-attempt/README.md): 세 native 저작 모두 남성 접힘 검사에서 저장 전 실패했다. 마지막 접힘14→4와 원래 앞면/좌표·위상/raw skin/rig 보호를 확인했지만 실제 마감은 미달이다. 남성 반려 상태+변경하지 않은 여성 입력의8컷과39개 증거를 보존했다. 여성 저작·새 후보·GLB/전체변형/브라우저는 미실행이다. 입력be038c04·과거 원본/실패·37개 체크포인트/17개 검증은 유지한다.
 

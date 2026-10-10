@@ -2,7 +2,11 @@
 
 ## 현재 D2-A 실행 지점 — 2026-10-10
 
-[A318 대조](review/avatar-neck-integration/lateral-origin/README.md)에서6면/9점의연결·skin/one-ring을유지한현재좌표변화와전문원본의정상방향을구별했다. 읽기전용exit0·4개보존증거다. [원래 전문 배치 복원](review/avatar-neck-integration/lateral-restore/README.md)은남성접힘14→1/전체보호통과에도0기준미달로exit1·저장0, 여성/새렌더/GLB/전체변형/Chrome미실행이다. 8개실패증거를보존하고다음은남은1개edge의국소연결·선택/보호경계대조로이어간다. 정확한원인미확정·같은복원/스무딩·값sweep반복0·원본/이전실패보존·P2/Draft/미채택·D2/전체1~6완료기준은그대로다. 최소문구·안전/개인정보/별도승인경계를유지한다.
+[복원 경계 대조](review/avatar-neck-integration/restored-boundary/README.md)는 동결 반려 exact·실제 진단exit0/새 저장0이다. 원래 정상 연결에서 선택 밖 점은 그대로 남고 세 선택점만 전문 원본으로 복원돼 경계가 뒤집혔다. 다음은 동일 보호 범위 안의 연속 전이 설계이며 아직 새 저작하지 않았다. 첫 중단 exit미확정/null과 재실행 terminal/소스·실제 증거를 분리 보존했다. 외형P2·Draft/미채택·새 GLB/변형/브라우저/실측·D2/전체1~6 미완료와 최소 문구/별도 승인 기준은 그대로다.
+
+### 이전 기준선 — 보존
+
+[A318 대조](review/avatar-neck-integration/lateral-origin/README.md)에서6면/9점의연결·skin/one-ring을유지한현재좌표변화와전문원본의정상방향을구별했다. 읽기전용exit0·4개보존증거다. [원래 전문 배치 복원](review/avatar-neck-integration/lateral-restore/README.md)은남성접힘14→1/전체보호통과에도0기준미달로exit1·저장0, 여성/새렌더/GLB/전체변형/Chrome미실행이다. 8개실패증거를보존했으며 당시 다음은남은1개edge의국소연결·선택/보호경계대조였다. 현재 결과는 위에 기록했다. 같은복원/스무딩·값sweep반복0·원본/이전실패보존·P2/Draft/미채택·D2/전체1~6완료기준은그대로다. 최소문구·안전/개인정보/별도승인경계를유지한다.
 
 [옆 목·어깨 실제 보완 실패](review/avatar-neck-integration/lateral-attempt/README.md)를 기준으로 이어간다. 세 저작 모두 남성 접힘 검사에서 저장 전 실패했고 마지막14→4·원본 보호 통과와 실제 외형 미달을 구분한다. 반려 남성/변경 없는 여성8컷과39개 증거를 별도 보존했다. 여성 저작·새 후보/GLB/전체변형/브라우저는 미실행이다. 입력be038c04·이전37개 체크포인트와17개 독립 검증·모든 과거 원본/실패를 보존하며 이전 기술 성공을 복사하지 않는다.
 
