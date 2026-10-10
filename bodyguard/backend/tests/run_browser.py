@@ -6,6 +6,7 @@ import os
 import secrets
 import socket
 import subprocess
+import sys
 import tempfile
 import threading
 import time
@@ -232,6 +233,10 @@ def main() -> int:
                     env={
                         **os.environ,
                         "BODYGUARD_TEST_MAILBOX": str(mailbox),
+                        # FR-U-05: private test-process SQL reader, not browser/product state.
+                        "BODYGUARD_TEST_BACKEND_PYTHON": sys.executable
+                        if args.suite == "withdrawal"
+                        else "",
                         "BODYGUARD_TEST_GOOGLE_FIXTURE": str(google_file),
                         "BODYGUARD_TEST_RECORD_CLOCK": str(record_clock_file),
                         "BODYGUARD_TEST_BLOCKED_PROXY": proxy_url,

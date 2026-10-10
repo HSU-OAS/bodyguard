@@ -1,6 +1,9 @@
 // FR-U-04/05/NFR-08: real production Chrome + HTTP/SQL, synthetic test-only mail/clock.
+
+import { execFileSync } from 'node:child_process'
 import { randomUUID } from 'node:crypto'
 import { readFileSync, renameSync, writeFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import { type BrowserContext, expect, type Locator, type Page, test } from '@playwright/test'
 
 const origin = 'http://localhost:4173'
@@ -96,6 +99,103 @@ async function consent(page: Page, code: string) {
   await page.getByLabel('확인문').fill('탈퇴')
   await page.getByRole('button', { name: '계정과 기록 삭제', exact: true }).click()
 }
+
+// FR-U-05: process-private read-only SQL oracle; never exposed to the browser.
+function storedCounts(owners: Record<string, string>) {
+  const python = process.env.BODYGUARD_TEST_BACKEND_PYTHON
+  if (!python?.startsWith('/')) throw new Error('Owned backend interpreter required')
+  return JSON.parse(
+    execFileSync(python, ['-m', 'tests.withdrawal_data_probe'], {
+      cwd: fileURLToPath(new URL('../../backend/', import.meta.url)),
+      input: JSON.stringify(owners),
+      encoding: 'utf8',
+      timeout: 5000,
+      maxBuffer: 4096,
+    }),
+  ) as Record<string, Record<string, number>>
+}
+const preferenceDefaults = {
+  posture_enabled: true,
+  posture_minutes: 5,
+  sitting_enabled: true,
+  sitting_minutes: 50,
+  sound_enabled: false,
+}
+async function readOwned(context: BrowserContext, path: string) {
+  const response = await context.request.get(`${origin}/api/v1${path}`)
+  expect(response.status()).toBe(200)
+  return response.json()
+}
+async function seedAll(context: BrowserContext, deviation: number) {
+  const owner = (await readOwned(context, '/me')).id as string
+  const record = await seed(context)
+  const baselines: string[] = []
+  for (const value of [deviation, deviation + 1]) {
+    const id = randomUUID()
+    expect(
+      (
+        await post(context, '/baselines', {
+          id,
+          client_version: 'Fixture+V1',
+          neck: null,
+          trunk: null,
+          shoulder: { method: 'fixture-shoulder', unit: 'deg', value },
+        })
+      ).status(),
+    ).toBe(201)
+    baselines.push(id)
+  }
+  const empty = { unit: 'deg', dev_mean: null, measured_sec: 0, bad_sec: 0 }
+  expect(
+    (
+      await post(context, '/summaries/batch', {
+        items: [
+          {
+            minute_start: new Date(
+              Math.floor(Date.now() / 60000) * 60000 - 5 * 60000,
+            ).toISOString(),
+            baseline_id: baselines[0],
+            client_version: 'Fixture+V1',
+            coverage_sec: 60,
+            measured_sec: 30,
+            unmeasurable_sec: 20,
+            present_sec: 45,
+            background_sec: 10,
+            any_bad_sec: 15,
+            neck: { ...empty, method: 'fixture-neck' },
+            trunk: { ...empty, method: 'fixture-trunk' },
+            shoulder: {
+              ...empty,
+              method: 'fixture-shoulder',
+              dev_mean: deviation,
+              measured_sec: 30,
+              bad_sec: 15,
+            },
+          },
+        ],
+      })
+    ).status(),
+  ).toBe(201)
+  const preferences = {
+    ...preferenceDefaults,
+    posture_enabled: false,
+    posture_minutes: 15,
+    sitting_minutes: deviation === 1.25 ? 90 : 75,
+    sound_enabled: true,
+  }
+  expect((await post(context, '/settings/notifications', preferences)).status()).toBe(200)
+  return { owner, record, baselines, preferences }
+}
+async function snapshotAll(context: BrowserContext, ids: Awaited<ReturnType<typeof seedAll>>) {
+  return {
+    records: await readOwned(context, '/records/stretch'),
+    summaries: await readOwned(context, '/summaries'),
+    active: await readOwned(context, '/baselines/active'),
+    past: await readOwned(context, `/baselines/${ids.baselines[0]}`),
+    current: await readOwned(context, `/baselines/${ids.baselines[1]}`),
+    preferences: await readOwned(context, '/settings/notifications'),
+  }
+}
 async function noOverflow(page: Page) {
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
 }
@@ -128,6 +228,140 @@ async function contrast(element: Locator, property: 'color' | 'borderTopColor' |
     return (Math.max(front, back) + 0.05) / (Math.min(front, back) + 0.05)
   }, property)
 }
+
+test('AW-B07 전체 데이터 취소·본인만 탈퇴·동일 이메일 웹 재가입', async ({
+  page,
+  context,
+  browser,
+}, info) => {
+  const email = await join(context)
+  const owner = await seedAll(context, 1.25)
+  const other = await browser.newContext({ baseURL: origin })
+  const oldSession = await browser.newContext({ baseURL: origin })
+  other.on('request', (request) => requests.push(request.url()))
+  oldSession.on('request', (request) => requests.push(request.url()))
+  try {
+    await join(other)
+    const otherData = await seedAll(other, 2.5)
+    expect((await post(oldSession, '/auth/login', { email, password })).status()).toBe(200)
+    const identities = { owner: owner.owner, other: otherData.owner }
+    const before = storedCounts(identities)
+    const expectedData = {
+      users: 1,
+      stretch_records: 1,
+      baselines: 2,
+      minute_summaries: 1,
+      notification_preferences: 1,
+    }
+    expect(before.owner).toEqual({ ...expectedData, sessions: 2 })
+    expect(before.other).toEqual({ ...expectedData, sessions: 1 })
+    const ownerSnapshot = await snapshotAll(context, owner)
+    const otherSnapshot = await snapshotAll(other, otherData)
+    expect(ownerSnapshot.preferences).toEqual(owner.preferences)
+    expect(otherSnapshot.preferences).toEqual(otherData.preferences)
+    expect(ownerSnapshot.past.is_active).toBe(false)
+    expect(ownerSnapshot.current.is_active).toBe(true)
+    await begin(page, email)
+    await page.getByRole('link', { name: '탈퇴 취소하고 돌아가기' }).click()
+    await expect(page.getByRole('heading', { name: '내 계정' })).toBeVisible()
+    expect(requests.filter((url) => url.endsWith('/me/delete/confirm'))).toHaveLength(0)
+    const cancelled = storedCounts(identities)
+    expect(cancelled).toEqual(before)
+    expect(await snapshotAll(context, owner)).toEqual(ownerSnapshot)
+    expect(await snapshotAll(other, otherData)).toEqual(otherSnapshot)
+
+    const code = await begin(page, email)
+    const confirmation = page.waitForResponse((response) =>
+      response.url().endsWith('/me/delete/confirm'),
+    )
+    await consent(page, code)
+    expect((await confirmation).status()).toBe(204)
+    await expect(page.getByRole('heading', { name: '회원 탈퇴가 완료되었습니다' })).toBeVisible()
+    await page.screenshot({
+      path: info.outputPath('all-data-withdrawal-complete.png'),
+      fullPage: true,
+    })
+    expect((await oldSession.request.get(`${origin}/api/v1/me`)).status()).toBe(401)
+    const removed = storedCounts(identities)
+    const zero = {
+      users: 0,
+      sessions: 0,
+      stretch_records: 0,
+      baselines: 0,
+      minute_summaries: 0,
+      notification_preferences: 0,
+    }
+    expect(removed.owner).toEqual(zero)
+    expect(removed.other).toEqual(before.other)
+    expect(await snapshotAll(other, otherData)).toEqual(otherSnapshot)
+
+    // Actual unchanged signup web, not a simulated login or direct verify response.
+    await page.goto('/signup')
+    await page.getByLabel('이메일', { exact: true }).fill(email)
+    await page.getByLabel('비밀번호', { exact: true }).fill(password)
+    await page.getByRole('button', { name: '인증 코드 받기', exact: true }).click()
+    await expect(page.getByRole('heading', { name: '이메일을 확인해 주세요' })).toBeVisible()
+    await page.getByLabel('인증 코드', { exact: true }).fill(await mailCode(email))
+    await page.getByRole('button', { name: '인증하고 시작하기' }).click()
+    await expect(page.getByText(email, { exact: true })).toBeVisible()
+    const fresh = (await readOwned(context, '/me')).id as string
+    expect(fresh).not.toBe(owner.owner)
+    expect((await readOwned(context, '/records/stretch')).items).toEqual([])
+    expect((await readOwned(context, '/summaries')).items).toEqual([])
+    expect(await readOwned(context, '/baselines/active')).toBeNull()
+    for (const id of owner.baselines)
+      expect((await context.request.get(`${origin}/api/v1/baselines/${id}`)).status()).toBe(404)
+    expect(
+      (await context.request.get(`${origin}/api/v1/records/stretch/${owner.record}`)).status(),
+    ).toBe(404)
+    expect(await readOwned(context, '/settings/notifications')).toEqual(preferenceDefaults)
+    const rejoined = storedCounts({ ...identities, fresh })
+    expect(rejoined.owner).toEqual(zero)
+    expect(rejoined.fresh).toEqual({ ...zero, users: 1, sessions: 1 })
+    expect(rejoined.other).toEqual(before.other)
+    expect(await snapshotAll(other, otherData)).toEqual(otherSnapshot)
+    await page.goto('/records')
+    await expect(
+      page.getByRole('heading', { name: '이 기간에는 수행 기록이 없습니다' }),
+    ).toBeVisible()
+    await page.screenshot({ path: info.outputPath('rejoined-stretch-empty.png'), fullPage: true })
+    await page.goto('/posture-records')
+    await expect(
+      page.getByRole('heading', { name: '이 기간에는 자세 기록이 없습니다' }),
+    ).toBeVisible()
+    await page.screenshot({ path: info.outputPath('rejoined-minutes-empty.png'), fullPage: true })
+    const storage = await page.evaluate(() => [localStorage.length, sessionStorage.length])
+    expect(storage).toEqual([0, 0])
+    expect(cameraCalls).toBe(0)
+    expect(errors).toEqual([])
+    expect(requests.every((url) => new URL(url).origin === origin)).toBe(true)
+    expect(requests.some((url) => /\.glb|\.task|\.wasm|mediapipe/.test(url))).toBe(false)
+    await info.attach('all-data-private-sql-boundary', {
+      body: JSON.stringify({
+        before,
+        cancelled,
+        removed,
+        rejoined,
+        browser: browser.version(),
+        cameraCalls,
+        storage,
+        pageErrors: errors.length,
+        allRequestsLocal: true,
+        modelRequests: 0,
+        cancelDeleteRequests: 0,
+        confirmedDeleteRequests: 1,
+        actualSqlReadOnly: true,
+        synthetic: ['accounts', 'mailbox', 'summaries', 'baselines', 'preferences'],
+        actual: ['browser', 'HTTP', 'FastAPI', 'PostgreSQL', 'signup-web', 'withdrawal-web'],
+      }),
+      contentType: 'application/json',
+    })
+    expect(requests.filter((url) => url.endsWith('/me/delete/confirm'))).toHaveLength(1)
+  } finally {
+    await oldSession.close()
+    await other.close()
+  }
+})
 
 test('AW-B01 계정·취소·기록 보존·좁은 웹·키보드·대비', async ({ page, context }, info) => {
   const email = await join(context),

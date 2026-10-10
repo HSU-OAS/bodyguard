@@ -1,0 +1,920 @@
+{
+  "baselineHead": "8ab7f151f0cc51d78b2d22c17650cc3d2e65e612",
+  "unchangedProductFiles": 187,
+  "publicBundleByteIdentical": true,
+  "actualWebHttpSql": true,
+  "syntheticMailData": true,
+  "actualHumanCamera": false,
+  "actualExternalMail": false,
+  "startupP2Resolved": false,
+  "source": {
+    "frontend/e2e/withdrawal.spec.ts": "5c07432f28c42ac944a2e51fa69586a2159d1bb75396c045c3bb8a8550d694e8",
+    "frontend/e2e/password.spec.ts": "acffcafb0a1494719a4d81db89770c2241c05aa8f5ef00a77afa5fa667958539",
+    "frontend/playwright.account.config.ts": "ad421d236f7ae1cbefd7fa3c49d78fdf25c72d5b4aeb542fb2aa9b61568884c3",
+    "frontend/vite.config.ts": "1200b2bf814fbd9ab7a34a922fc5c7a924a17f85a1890356436b778a25887473",
+    "frontend/package.json": "fc5513803b158f0829f44e17a43335bcc0319d5476cb41abf8405656946363b7",
+    "frontend/pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+    "backend/uv.lock": "e87c2c0aba0ddf3c8bb54ea8d7e2f187ccaf694366199f8b70ae8566591f5fa0",
+    "backend/tests/run_browser.py": "ac2c40b6be319a86de42c61cbd2d9127ffa1f5689c24ce99558e10982174e96b",
+    "backend/tests/conftest.py": "327b2fbb658626d0e44beecaff746adb5a9662bf3453aa4bc7049009a4bc79bf",
+    "backend/tests/withdrawal_data_probe.py": "c7a689c19279e02cdac5a4acf2160469701f85db2d04ece7fc016e513aaa507e",
+    "backend/tests/test_withdrawal_data_probe.py": "ad4e4b7d73b273f4197afde21bce2b96ae7030088e9f3e01fadc3935925bed97",
+    "docs/review/account-data-web-lifecycle/collect.mjs": "b747707875501f02e7271300bac7f5a0eb60ce41c1f72c474eb2a3b28bcd0b26"
+  },
+  "artifacts": {
+    "evidence/scratch/before-web/backend/tests/conftest.py.gz": {
+      "rawSha256": "327b2fbb658626d0e44beecaff746adb5a9662bf3453aa4bc7049009a4bc79bf",
+      "gzipSha256": "4ad40dbb5e6c82911e9ef71e02497a64158d7328eec0a7e51ebcc7304e0a81ed",
+      "rawBytes": 5954
+    },
+    "evidence/scratch/before-web/backend/tests/run_browser.py.gz": {
+      "rawSha256": "ac2c40b6be319a86de42c61cbd2d9127ffa1f5689c24ce99558e10982174e96b",
+      "gzipSha256": "3d0ab045df58dc1bf0e8c50ba233cc55a71d5e0ba90f17a8178eb75cbc2334e0",
+      "rawBytes": 11363
+    },
+    "evidence/scratch/before-web/backend/tests/test_withdrawal_data_probe.py.gz": {
+      "rawSha256": "32d6c07d822597ad8902f3dbb8a254905c4347a5c0a488db0582598810d938ff",
+      "gzipSha256": "f9788fb547086b739464e29866f8a4ea5c9dd0d427548e02bb600c9758a2c826",
+      "rawBytes": 2543
+    },
+    "evidence/scratch/before-web/backend/tests/withdrawal_data_probe.py.gz": {
+      "rawSha256": "c7a689c19279e02cdac5a4acf2160469701f85db2d04ece7fc016e513aaa507e",
+      "gzipSha256": "89e43dfa91474e8b21f376debb4667c4df54bb8ba54ebb68055e84315f99508c",
+      "rawBytes": 5253
+    },
+    "evidence/scratch/before-web/backend/uv.lock.gz": {
+      "rawSha256": "e87c2c0aba0ddf3c8bb54ea8d7e2f187ccaf694366199f8b70ae8566591f5fa0",
+      "gzipSha256": "982e2af1aa2e14ed80ea71bc47b866d6ec7fa4dc803098ce23bfc4a123959731",
+      "rawBytes": 173136
+    },
+    "evidence/scratch/before-web/docs/review/account-data-web-lifecycle/collect.mjs.gz": {
+      "rawSha256": "b747707875501f02e7271300bac7f5a0eb60ce41c1f72c474eb2a3b28bcd0b26",
+      "gzipSha256": "a8f934e1463f5a4dc4a450f109218ea5a4a6961f3eaa6289708f4514461431be",
+      "rawBytes": 8072
+    },
+    "evidence/scratch/before-web/frontend/e2e/password.spec.ts.gz": {
+      "rawSha256": "acffcafb0a1494719a4d81db89770c2241c05aa8f5ef00a77afa5fa667958539",
+      "gzipSha256": "7828d580031ccdf56f35a8c46d2deeabf1fd6bdb8c58549a66d256c26dec063a",
+      "rawBytes": 14385
+    },
+    "evidence/scratch/before-web/frontend/e2e/withdrawal.spec.ts.gz": {
+      "rawSha256": "5c07432f28c42ac944a2e51fa69586a2159d1bb75396c045c3bb8a8550d694e8",
+      "gzipSha256": "9751d9b9732a418f5abe55537612c737d6365c599c2e71e065252911bdd7246d",
+      "rawBytes": 27072
+    },
+    "evidence/scratch/before-web/frontend/package.json.gz": {
+      "rawSha256": "fc5513803b158f0829f44e17a43335bcc0319d5476cb41abf8405656946363b7",
+      "gzipSha256": "e82e918f1288d6279173b652c496f61d942e638b7785125caf463a8646d519a6",
+      "rawBytes": 1527
+    },
+    "evidence/scratch/before-web/frontend/playwright.account.config.ts.gz": {
+      "rawSha256": "ad421d236f7ae1cbefd7fa3c49d78fdf25c72d5b4aeb542fb2aa9b61568884c3",
+      "gzipSha256": "ba32edf9968b64278a91f7eaeb8a654834224122827123eea227e672da9a0126",
+      "rawBytes": 4403
+    },
+    "evidence/scratch/before-web/frontend/pnpm-lock.yaml.gz": {
+      "rawSha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+      "gzipSha256": "e32689fae2471a7e180c5afee7d3e2eefa98a83c4addcae2b2e3ba811559eb13",
+      "rawBytes": 80605
+    },
+    "evidence/scratch/before-web/frontend/vite.config.ts.gz": {
+      "rawSha256": "1200b2bf814fbd9ab7a34a922fc5c7a924a17f85a1890356436b778a25887473",
+      "gzipSha256": "a2edf371c635db0157a0146d20f0e30abb29fd4d5cb54abe84c5280bf0e17d8c",
+      "rawBytes": 821
+    },
+    "evidence/scratch/before-web/state.json.gz": {
+      "rawSha256": "5e6f6435389c8d6d7ca7324dde6f000bb4377894a32f2186e7b5b0b1dcdabe22",
+      "gzipSha256": "a37d200f8b5d1033e48764ca214d48f89b5f35fb6a5c7e006817c78d1a91ebda",
+      "rawBytes": 24830
+    },
+    "evidence/scratch/biome.log.gz": {
+      "rawSha256": "f818391723964b157ed3712c7e1fa4f868bf38593c0f6d729ce9c4dc722afdaa",
+      "gzipSha256": "dbe9ef0f53b434b6998a8c4f3bf21cb81703e17a37ce9616fa0a5ed29abde0bc",
+      "rawBytes": 15028
+    },
+    "evidence/scratch/build-final.log.gz": {
+      "rawSha256": "0148202a8c32f33160bd98685872bf849e8b97e92e7d1354f4d53ef5d9e4b99e",
+      "gzipSha256": "e1b38ad083896731fef38f25bf6bb47c1e0288e65013557212c3a587191c16e6",
+      "rawBytes": 632
+    },
+    "evidence/scratch/database-identity.log.gz": {
+      "rawSha256": "3f93ea4db3a429467c50cdfd98271a024700ad9f2c3306162aba82d3686b058d",
+      "gzipSha256": "ec3456f7b6e4024e4bf2fbdb870556e4cfd23a1f8c065de732034726ee4df975",
+      "rawBytes": 399
+    },
+    "evidence/scratch/final-web/backend/tests/conftest.py.gz": {
+      "rawSha256": "327b2fbb658626d0e44beecaff746adb5a9662bf3453aa4bc7049009a4bc79bf",
+      "gzipSha256": "4ad40dbb5e6c82911e9ef71e02497a64158d7328eec0a7e51ebcc7304e0a81ed",
+      "rawBytes": 5954
+    },
+    "evidence/scratch/final-web/backend/tests/run_browser.py.gz": {
+      "rawSha256": "ac2c40b6be319a86de42c61cbd2d9127ffa1f5689c24ce99558e10982174e96b",
+      "gzipSha256": "3d0ab045df58dc1bf0e8c50ba233cc55a71d5e0ba90f17a8178eb75cbc2334e0",
+      "rawBytes": 11363
+    },
+    "evidence/scratch/final-web/backend/tests/test_withdrawal_data_probe.py.gz": {
+      "rawSha256": "ad4e4b7d73b273f4197afde21bce2b96ae7030088e9f3e01fadc3935925bed97",
+      "gzipSha256": "74ad6409d6cae687a01c4340b4ad513d50f1f85de62fe10a191556b8306816d5",
+      "rawBytes": 3023
+    },
+    "evidence/scratch/final-web/backend/tests/withdrawal_data_probe.py.gz": {
+      "rawSha256": "c7a689c19279e02cdac5a4acf2160469701f85db2d04ece7fc016e513aaa507e",
+      "gzipSha256": "89e43dfa91474e8b21f376debb4667c4df54bb8ba54ebb68055e84315f99508c",
+      "rawBytes": 5253
+    },
+    "evidence/scratch/final-web/backend/uv.lock.gz": {
+      "rawSha256": "e87c2c0aba0ddf3c8bb54ea8d7e2f187ccaf694366199f8b70ae8566591f5fa0",
+      "gzipSha256": "982e2af1aa2e14ed80ea71bc47b866d6ec7fa4dc803098ce23bfc4a123959731",
+      "rawBytes": 173136
+    },
+    "evidence/scratch/final-web/docs/review/account-data-web-lifecycle/collect.mjs.gz": {
+      "rawSha256": "b747707875501f02e7271300bac7f5a0eb60ce41c1f72c474eb2a3b28bcd0b26",
+      "gzipSha256": "a8f934e1463f5a4dc4a450f109218ea5a4a6961f3eaa6289708f4514461431be",
+      "rawBytes": 8072
+    },
+    "evidence/scratch/final-web/frontend/e2e/password.spec.ts.gz": {
+      "rawSha256": "acffcafb0a1494719a4d81db89770c2241c05aa8f5ef00a77afa5fa667958539",
+      "gzipSha256": "7828d580031ccdf56f35a8c46d2deeabf1fd6bdb8c58549a66d256c26dec063a",
+      "rawBytes": 14385
+    },
+    "evidence/scratch/final-web/frontend/e2e/withdrawal.spec.ts.gz": {
+      "rawSha256": "5c07432f28c42ac944a2e51fa69586a2159d1bb75396c045c3bb8a8550d694e8",
+      "gzipSha256": "9751d9b9732a418f5abe55537612c737d6365c599c2e71e065252911bdd7246d",
+      "rawBytes": 27072
+    },
+    "evidence/scratch/final-web/frontend/package.json.gz": {
+      "rawSha256": "fc5513803b158f0829f44e17a43335bcc0319d5476cb41abf8405656946363b7",
+      "gzipSha256": "e82e918f1288d6279173b652c496f61d942e638b7785125caf463a8646d519a6",
+      "rawBytes": 1527
+    },
+    "evidence/scratch/final-web/frontend/playwright.account.config.ts.gz": {
+      "rawSha256": "ad421d236f7ae1cbefd7fa3c49d78fdf25c72d5b4aeb542fb2aa9b61568884c3",
+      "gzipSha256": "ba32edf9968b64278a91f7eaeb8a654834224122827123eea227e672da9a0126",
+      "rawBytes": 4403
+    },
+    "evidence/scratch/final-web/frontend/pnpm-lock.yaml.gz": {
+      "rawSha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+      "gzipSha256": "e32689fae2471a7e180c5afee7d3e2eefa98a83c4addcae2b2e3ba811559eb13",
+      "rawBytes": 80605
+    },
+    "evidence/scratch/final-web/frontend/vite.config.ts.gz": {
+      "rawSha256": "1200b2bf814fbd9ab7a34a922fc5c7a924a17f85a1890356436b778a25887473",
+      "gzipSha256": "a2edf371c635db0157a0146d20f0e30abb29fd4d5cb54abe84c5280bf0e17d8c",
+      "rawBytes": 821
+    },
+    "evidence/scratch/final-web/state.json.gz": {
+      "rawSha256": "44014e3a0015f6a62b28913bffa30420319ad72cbd656c90b2c24c3efc0c8f8e",
+      "gzipSha256": "cd5a68841bd57254a34fc8d70595bd60be4ed218f47cab8014cbd0d1964aef29",
+      "rawBytes": 22678
+    },
+    "evidence/scratch/mypy-final.log.gz": {
+      "rawSha256": "049f51b850512be193c74d3fbb731e25fbc6374a66560d8ec0d6569d79c88ea6",
+      "gzipSha256": "6900eb62794e84d82cc2d8338f60d79cd98033fff0bd98b3a929a68b8689f561",
+      "rawBytes": 44
+    },
+    "evidence/scratch/password-final.log.gz": {
+      "rawSha256": "60b47527b203977bbf79a75ff196e2cc5ced0d702a1b17bdd7ce162ea989d028",
+      "gzipSha256": "d6b58feaf886954e6db0e440a7fd9f5f1f917bf058ce5d8099f12d898a55e6f1",
+      "rawBytes": 1476
+    },
+    "evidence/scratch/probe-first.log.gz": {
+      "rawSha256": "e45e197695caa5110a52d67c5e38715614c78a2e6e56b3f4132544729a05a9e6",
+      "gzipSha256": "54984a332b1450913bb02dd710128d5d05cea03596c331956c40953be7df9035",
+      "rawBytes": 1581
+    },
+    "evidence/scratch/probe-second.log.gz": {
+      "rawSha256": "0d3282ec369e6b6cb3c354128aa9793e61292c30481c3516cca74ad2e8f5e622",
+      "gzipSha256": "3a898292a634c3b422dd87e56ba954b0e5bb5b074e8a18af255d1c286b205f15",
+      "rawBytes": 99
+    },
+    "evidence/scratch/production-guard.log.gz": {
+      "rawSha256": "d5427256c3d39b8ef3179c600682ef3f6ab1d94a986c761e0c8dd02ea436f0cb",
+      "gzipSha256": "4e5371c802338a1173b3fd8a330c3f96b588b966f06e6d3330a8385dd6ea1b3f",
+      "rawBytes": 1179
+    },
+    "evidence/scratch/ruff-final.log.gz": {
+      "rawSha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "gzipSha256": "015047cfb42239ae3bda1838a71cda9cd9c9a2193044fdc633e2f0b32574a0cf",
+      "rawBytes": 19
+    },
+    "evidence/scratch/sql-final.log.gz": {
+      "rawSha256": "17d2de1cdeda14be1f4f4277aca3776adbb7962ae896d013b20ece148a2de5a7",
+      "gzipSha256": "bb812451a283a8b10a1f5adce9c9d84808a950b0c6efd11d26c73551e706ae8e",
+      "rawBytes": 99
+    },
+    "evidence/scratch/typecheck.log.gz": {
+      "rawSha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92",
+      "gzipSha256": "4d5a0c23c9ecddf5ae14f132b0345c3788269435548b9568b882d38b627def51",
+      "rawBytes": 15
+    },
+    "evidence/scratch/unit.json.gz": {
+      "rawSha256": "b9cffa7fca6a5cb1d438e5dd93a7e9c79293d18ddb2044de8633be8a3a0a764c",
+      "gzipSha256": "c73ffa7c260e4013a6ed432a4ba0af5beb515ac9eb491c6c74d033f25b59d86f",
+      "rawBytes": 510235
+    },
+    "evidence/scratch/unit.log.gz": {
+      "rawSha256": "0f19bf2c919dbb6135b5a382a873dd2e86ed05457e8f9f0e8e4c2bf8e14e4a7c",
+      "gzipSha256": "97b9085ad1a62682ced9fda3e8f15e545a442d259c90614d5b60b45114b743c2",
+      "rawBytes": 187
+    },
+    "evidence/scratch/withdrawal-concurrent-failure.log.gz": {
+      "rawSha256": "b8aceb97d53363cf506aab0ab91ebfe7362e16a791da33a13a5dc696c1b4eb9c",
+      "gzipSha256": "f709b6e3de2b37c78c6f12a00574d9ca8379833ec8ba8f0c1a46491c661d12f8",
+      "rawBytes": 3656
+    },
+    "evidence/scratch/withdrawal-final.log.gz": {
+      "rawSha256": "fa95fd8ff7cbb6f9e713d7c74f50bfb018340bf3695fe13a8c69603bf8a94e5c",
+      "gzipSha256": "981dea21ddf27fce18a9d2ce1763d59f52e0be5f8936ec23a50f3b2beaec1e70",
+      "rawBytes": 1764
+    },
+    "evidence/scratch/withdrawal-first.log.gz": {
+      "rawSha256": "c2c351b93c4f2e61407b15860b78a81f48133b444e9df1fe6cd89deeccb2c82c",
+      "gzipSha256": "e361f5c319bf732b4ec095bdd724d5e686e6d2b8ce24ed37da8b8160d9c4bd85",
+      "rawBytes": 986
+    },
+    "evidence/withdrawal-20261010T081026942126Z/.last-run.json.gz": {
+      "rawSha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "gzipSha256": "1192e21d9c0e3eb952afd8d3e74333b99b8bf5aea64138d3262e079129e57154",
+      "rawBytes": 45
+    },
+    "evidence/withdrawal-20261010T081026942126Z/report.json.gz": {
+      "rawSha256": "2b0c90882b3c77ff95e1460531b2fc74fd2eb5f01ea409043832b6b0a5c0694f",
+      "gzipSha256": "39c9f139c6e1f9d51d43dc3b7700d4c1702bbc0edebdd009e1a75be4b0fe39a7",
+      "rawBytes": 7159
+    },
+    "evidence/withdrawal-20261010T081026942126Z/withdrawal-AW-B07-전체-데이터-취소·본인만-탈퇴·동일-이메일-웹-재가입/all-data-withdrawal-complete.png.gz": {
+      "rawSha256": "b7189ed2832eafd42031eb6c4f3236b9276a6cabef040e577f0fd98ff27e6d44",
+      "gzipSha256": "71dc92ac211476a97007ae7ebc39910aa9fafdd94f47be3006be5460ddf3a744",
+      "rawBytes": 40246
+    },
+    "evidence/withdrawal-20261010T081026942126Z/withdrawal-AW-B07-전체-데이터-취소·본인만-탈퇴·동일-이메일-웹-재가입/rejoined-minutes-empty.png.gz": {
+      "rawSha256": "5013f2db6a72401d61eeb1eddf54515cd79613d756b082f3e14583008bb44e36",
+      "gzipSha256": "695496bce2b9e10c51e68e93224308b0d439f6359bfe4c1febc804fd90172587",
+      "rawBytes": 105418
+    },
+    "evidence/withdrawal-20261010T081026942126Z/withdrawal-AW-B07-전체-데이터-취소·본인만-탈퇴·동일-이메일-웹-재가입/rejoined-stretch-empty.png.gz": {
+      "rawSha256": "06f46681f116ea4a06dcd6341bd5d92f9a60c5a2c6b56a19740081ba3575fa25",
+      "gzipSha256": "1d54f589dc74902f1823ab2bb7420f1c3edaa0a7cbc81d50a5ed4e83bb777eb8",
+      "rawBytes": 67736
+    },
+    "evidence/withdrawal-20261010T081154385064Z/.last-run.json.gz": {
+      "rawSha256": "f95e3e1d7537b4d176f844d8b8afd88a83078a86fc5c422e7d9439b6e84a2b6a",
+      "gzipSha256": "edb892d17e5ef60725b3b97da2ab588c09f0a2fe6b3495a12309ec1c3002e757",
+      "rawBytes": 96
+    },
+    "evidence/withdrawal-20261010T081154385064Z/report.json.gz": {
+      "rawSha256": "1e26452bbedcd8342d95fd4e4a45550e11d242dff43f985407dcf28798c70868",
+      "gzipSha256": "4c768c9e716bace86ac0e28c1e06e98a507a915a7d441964c015a72f004d734e",
+      "rawBytes": 15782
+    },
+    "evidence/withdrawal-20261010T081154385064Z/withdrawal-AW-B01-계정·취소·기록-보존·좁은-웹·키보드·대비/account-375.png.gz": {
+      "rawSha256": "821e7d4391f4cc4749b36df5c4453a3d0cfa38181c1601ce336af8dbaf490002",
+      "gzipSha256": "872477b1669706300d61d04783f0b62fe475bb9eac99d4915777bc243fbf61ee",
+      "rawBytes": 69614
+    },
+    "evidence/withdrawal-20261010T081154385064Z/withdrawal-AW-B01-계정·취소·기록-보존·좁은-웹·키보드·대비/account-768.png.gz": {
+      "rawSha256": "a3da1fd576de464c586998fa9a9536793cc1920f7a788a5581e2c529d32c461e",
+      "gzipSha256": "82174965ac394cdb16de61e28f23c37a75b2b22648c28b599dd81b830558d88a",
+      "rawBytes": 74088
+    },
+    "evidence/withdrawal-20261010T081154385064Z/withdrawal-AW-B01-계정·취소·기록-보존·좁은-웹·키보드·대비/account-desktop.png.gz": {
+      "rawSha256": "1bd2ea0c2a919113bd5750903a4ebb9f52979aa6f101cad955f1e1914068b929",
+      "gzipSha256": "6ae688e792949b9c747f446ca854985942f34bd57c22d93c2ea60d3cfb95f072",
+      "rawBytes": 81308
+    },
+    "evidence/withdrawal-20261010T081154385064Z/withdrawal-AW-B01-계정·취소·기록-보존·좁은-웹·키보드·대비/withdrawal-confirm-375.png.gz": {
+      "rawSha256": "5d9f029161022f089888b5e4b0ba14d4cfb75f694b2273b9b648518d4b7ee4ab",
+      "gzipSha256": "b9e8277de1b534730499becbc81d99ed347cbefac6018b2378e5a0fe94d6b5ce",
+      "rawBytes": 84533
+    },
+    "evidence/withdrawal-20261010T081154385064Z/withdrawal-AW-B01-계정·취소·기록-보존·좁은-웹·키보드·대비/withdrawal-confirm-desktop.png.gz": {
+      "rawSha256": "48a412eeb8e447b615eb4b26dd021fc91e587a8829fd9303330246085299fd59",
+      "gzipSha256": "a148361466efc16ab8b9bd75cbab1bae2d22e07b921ef75b6775f217084b2956",
+      "rawBytes": 97039
+    },
+    "evidence/withdrawal-20261010T081154385064Z/withdrawal-AW-B01-계정·취소·기록-보존·좁은-웹·키보드·대비/withdrawal-css-zoom-200.png.gz": {
+      "rawSha256": "86f225d3cbc1dcccdacde6d072f87ecae05c17781d62aa800bfb69005307c35e",
+      "gzipSha256": "83e58472d070e2d03bdd8b3165d44915842fb5dfd333b5f31a8ad1953e7a7b25",
+      "rawBytes": 182509
+    },
+    "evidence/withdrawal-20261010T081154385064Z/withdrawal-AW-B01-계정·취소·기록-보존·좁은-웹·키보드·대비/withdrawal-intro-375.png.gz": {
+      "rawSha256": "5f9b9619a359784c6327293e5fc1d4bdc53e0d29593583682b7c3d063ff1ebf6",
+      "gzipSha256": "071524960edd36a754b5b6d7e15c77ff336b374e9a0b8966438134af643bea0b",
+      "rawBytes": 73463
+    },
+    "evidence/withdrawal-20261010T081154385064Z/withdrawal-AW-B02-오답·최종-동의·204·기존-세션-이탈·타-계정-보존/withdrawal-completed-375.png.gz": {
+      "rawSha256": "5d13e796f45564e653ff7495d04749886a1655b062db56ba0324d1dc0d9b7a95",
+      "gzipSha256": "c96cf1695ee819fcc15b267f6767517293597d66f77a889d003f7bcc09cbcaa8",
+      "rawBytes": 31018
+    },
+    "evidence/withdrawal-20261010T081154385064Z/withdrawal-AW-B02-오답·최종-동의·204·기존-세션-이탈·타-계정-보존/withdrawal-pending.png.gz": {
+      "rawSha256": "a281e92d4e43bcd301e72c2799149c9c53c6428854ef6141616369f44c889ed0",
+      "gzipSha256": "6d266d639812171e938daf51604603abf4e04efd5d3662a488254a60f629a0cb",
+      "rawBytes": 83239
+    },
+    "evidence/withdrawal-20261010T081154385064Z/withdrawal-AW-B02-오답·최종-동의·204·기존-세션-이탈·타-계정-보존/withdrawal-wrong-code.png.gz": {
+      "rawSha256": "f674d3501fe66550e7173e0af79f121230f6a3d0618439889fca3981239df6f2",
+      "gzipSha256": "cca816f0cc5ee077c99e96b310a4b9af3d8431e7c61a6d7d510fe9728fb13421",
+      "rawBytes": 105237
+    },
+    "evidence/withdrawal-20261010T081154385064Z/withdrawal-AW-B03-실제10분-확인-만료·새-발송·이전-확인-거부·기록-보존/withdrawal-expired.png.gz": {
+      "rawSha256": "8f5e1ccec2e24e3cfc8b6075cdeea01bace87143fb88758a799e881012dd2995",
+      "gzipSha256": "14bb6a63a6b4f887e5ea21c093e46b3167df35cc5d93c341865f68bf884767d0",
+      "rawBytes": 106135
+    },
+    "evidence/withdrawal-20261010T081154385064Z/withdrawal-AW-B04-서버-삭제-후-응답-단절은-완료-추정·자동-삭제-재시도0/withdrawal-response-lost.png.gz": {
+      "rawSha256": "0434bf759e48babef1a9c77df9ed9d8264e18463445206d423fa260408f890c2",
+      "gzipSha256": "e02346dc08686d3548e740c8308dde02e2f4777f0ef8bc2129d358c49fe34860",
+      "rawBytes": 57072
+    },
+    "evidence/withdrawal-20261010T081154385064Z/withdrawal-AW-B05-서버-전-미전송-실패·결과-불확실-복구는-실제-계정·기록-보존/withdrawal-failure-restored-account.png.gz": {
+      "rawSha256": "a1941e1900dde828a7394f4ea7d5c857a5bc3e8d6f4a90ff34a92b2c00ff343c",
+      "gzipSha256": "f00da3e34d1dd73d2d78ba7eb9b36134d388c62d77a73d796c062e2fd9293e98",
+      "rawBytes": 81424
+    },
+    "evidence/withdrawal-20261010T081154385064Z/withdrawal-AW-B06-429·메일-실패-응답-UI는-전송-완료·삭제로-표시하지-않음/withdrawal-rate-limited-375.png.gz": {
+      "rawSha256": "391af643c763db8bfea415d8b6fec7f0eb265122859a89f44cd69aa197df2e5c",
+      "gzipSha256": "9a3d8380b018ce372278e46b75278a4b21cab6a3c9660a3b2c8422c72ef8eaea",
+      "rawBytes": 79645
+    },
+    "evidence/withdrawal-20261010T081154385064Z/withdrawal-AW-B06-429·메일-실패-응답-UI는-전송-완료·삭제로-표시하지-않음/withdrawal-send-error.png.gz": {
+      "rawSha256": "7e6d5dd9d6c658b1c48c70ed31719ab9362c031aebbcacd2ae780715e5d1c98d",
+      "gzipSha256": "a6d431b30342b7896d2e6824f68c141d34d84e8afe1146e86494031346330647",
+      "rawBytes": 91921
+    },
+    "evidence/withdrawal-20261010T081154385064Z/withdrawal-AW-B07-전체-데이터-취소·본인만-탈퇴·동일-이메일-웹-재가입/error-context.md.gz": {
+      "rawSha256": "5926cb1ca38fb47e99ccb72655564dfe822ffdcd5c93e0b550a01cbae16b4902",
+      "gzipSha256": "f624d0c42bb99ca3dab95f0d38346073ebfd8248d2bd7699901fdf0e440b77ff",
+      "rawBytes": 12421
+    },
+    "evidence/withdrawal-20261010T081436057403Z/.last-run.json.gz": {
+      "rawSha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "gzipSha256": "1192e21d9c0e3eb952afd8d3e74333b99b8bf5aea64138d3262e079129e57154",
+      "rawBytes": 45
+    },
+    "evidence/withdrawal-20261010T081436057403Z/report.json.gz": {
+      "rawSha256": "b3d29395d05159173d491356933ea52d0c18c28acfc3b47113f3b0a501cd7a4d",
+      "gzipSha256": "46500318d0947085f8589c4ecc17c6c765b5d83abd0ad49123e577ebcd25743a",
+      "rawBytes": 13532
+    },
+    "evidence/withdrawal-20261010T081436057403Z/withdrawal-AW-B01-계정·취소·기록-보존·좁은-웹·키보드·대비/account-375.png.gz": {
+      "rawSha256": "e6494f237c165a47b67939e46985e4c10fa27f2baeb627d56ddb446bb80a3319",
+      "gzipSha256": "8dcae3b0cf098482189e7dea067cc4225d68716e0f8a52d36b8c3f7461230059",
+      "rawBytes": 69503
+    },
+    "evidence/withdrawal-20261010T081436057403Z/withdrawal-AW-B01-계정·취소·기록-보존·좁은-웹·키보드·대비/account-768.png.gz": {
+      "rawSha256": "1b752247b2d9b6b0bf7dc79e20c64ff111d4e03d5d36a2d7bf9342c076fcfffd",
+      "gzipSha256": "bc6ca191ed953846b608027c00a66d282b0d30d246ccc77dc340133706780508",
+      "rawBytes": 73931
+    },
+    "evidence/withdrawal-20261010T081436057403Z/withdrawal-AW-B01-계정·취소·기록-보존·좁은-웹·키보드·대비/account-desktop.png.gz": {
+      "rawSha256": "15d6cf254d14efe775885ed4809d996249d7b77d680e53b5324a0d88196edda5",
+      "gzipSha256": "6d0bf6ff996beca96ab51602bd7e62cf2cd1e2ccf5880895c5643ae047d38925",
+      "rawBytes": 81168
+    },
+    "evidence/withdrawal-20261010T081436057403Z/withdrawal-AW-B01-계정·취소·기록-보존·좁은-웹·키보드·대비/withdrawal-confirm-375.png.gz": {
+      "rawSha256": "2f1387aa339763d3ac64aa05cf5fd10299744fe35875a4de71457f0c2a10151a",
+      "gzipSha256": "502b4398ca1b82825bd4095f2ba1ddc882262d87caa9326c7646f494d9a809a5",
+      "rawBytes": 83627
+    },
+    "evidence/withdrawal-20261010T081436057403Z/withdrawal-AW-B01-계정·취소·기록-보존·좁은-웹·키보드·대비/withdrawal-confirm-desktop.png.gz": {
+      "rawSha256": "661028c70cbb85f98f968d42da4d0df38e6b90d9a569997b9d30334ac11ea98d",
+      "gzipSha256": "b663cde53cdf341b863b1f02fbc27dc5cfac354412b1ecc74f6e389c2d92533d",
+      "rawBytes": 96515
+    },
+    "evidence/withdrawal-20261010T081436057403Z/withdrawal-AW-B01-계정·취소·기록-보존·좁은-웹·키보드·대비/withdrawal-css-zoom-200.png.gz": {
+      "rawSha256": "f3d2e364360dcb69db606c11bd353976557c9b763794069f19fe80ea7fb85c36",
+      "gzipSha256": "f773481496e84f81fb9348576bf05b105febf5f58dc92177da5fd8f264ac9cff",
+      "rawBytes": 181391
+    },
+    "evidence/withdrawal-20261010T081436057403Z/withdrawal-AW-B01-계정·취소·기록-보존·좁은-웹·키보드·대비/withdrawal-intro-375.png.gz": {
+      "rawSha256": "7a9a0e110931bf86272b38e5cf2684449e9ae3d32cb69d58737397a84dcfb866",
+      "gzipSha256": "a78a0030ab8c7614028bbaa34dc2939a877bed8bba9ffdff571033a2eee12f07",
+      "rawBytes": 72588
+    },
+    "evidence/withdrawal-20261010T081436057403Z/withdrawal-AW-B02-오답·최종-동의·204·기존-세션-이탈·타-계정-보존/withdrawal-completed-375.png.gz": {
+      "rawSha256": "5d13e796f45564e653ff7495d04749886a1655b062db56ba0324d1dc0d9b7a95",
+      "gzipSha256": "c96cf1695ee819fcc15b267f6767517293597d66f77a889d003f7bcc09cbcaa8",
+      "rawBytes": 31018
+    },
+    "evidence/withdrawal-20261010T081436057403Z/withdrawal-AW-B02-오답·최종-동의·204·기존-세션-이탈·타-계정-보존/withdrawal-pending.png.gz": {
+      "rawSha256": "a281e92d4e43bcd301e72c2799149c9c53c6428854ef6141616369f44c889ed0",
+      "gzipSha256": "6d266d639812171e938daf51604603abf4e04efd5d3662a488254a60f629a0cb",
+      "rawBytes": 83239
+    },
+    "evidence/withdrawal-20261010T081436057403Z/withdrawal-AW-B02-오답·최종-동의·204·기존-세션-이탈·타-계정-보존/withdrawal-wrong-code.png.gz": {
+      "rawSha256": "8a5c42557ca5dbafb5ab8fe6655710df39c6e8acffc21feb1e56a170eb532763",
+      "gzipSha256": "de608132980988bf8afd57b5af3d3bf7e25fe7346ba93cc7d63604ad07f05f1f",
+      "rawBytes": 105720
+    },
+    "evidence/withdrawal-20261010T081436057403Z/withdrawal-AW-B03-실제10분-확인-만료·새-발송·이전-확인-거부·기록-보존/withdrawal-expired.png.gz": {
+      "rawSha256": "18e0c4e51c8892e1263213d6208946af81a84e53f6ef49794aacf8883654aa02",
+      "gzipSha256": "ef2d0ab5484da0dc26c17f663492a6973ebc92d66893d6a5f29a861741c8518f",
+      "rawBytes": 105632
+    },
+    "evidence/withdrawal-20261010T081436057403Z/withdrawal-AW-B04-서버-삭제-후-응답-단절은-완료-추정·자동-삭제-재시도0/withdrawal-response-lost.png.gz": {
+      "rawSha256": "0434bf759e48babef1a9c77df9ed9d8264e18463445206d423fa260408f890c2",
+      "gzipSha256": "e02346dc08686d3548e740c8308dde02e2f4777f0ef8bc2129d358c49fe34860",
+      "rawBytes": 57072
+    },
+    "evidence/withdrawal-20261010T081436057403Z/withdrawal-AW-B05-서버-전-미전송-실패·결과-불확실-복구는-실제-계정·기록-보존/withdrawal-failure-restored-account.png.gz": {
+      "rawSha256": "784a1c0068326658545d1b1d118709e570c73374c93f23022263065413069f2b",
+      "gzipSha256": "ef0c300a1aa1e0ce3d745890f1bbe57212197ceb80d8ec9dfe0a488b9846bb14",
+      "rawBytes": 81311
+    },
+    "evidence/withdrawal-20261010T081436057403Z/withdrawal-AW-B06-429·메일-실패-응답-UI는-전송-완료·삭제로-표시하지-않음/withdrawal-rate-limited-375.png.gz": {
+      "rawSha256": "96202f49333c177a9d7cfc5739c458faad93c2962249e48f483eb8ba3cd8789a",
+      "gzipSha256": "c4d89ce2e6fb6a67d6e37971377565d8fd0db02022b97c0c6ca4046e84eb3d25",
+      "rawBytes": 79587
+    },
+    "evidence/withdrawal-20261010T081436057403Z/withdrawal-AW-B06-429·메일-실패-응답-UI는-전송-완료·삭제로-표시하지-않음/withdrawal-send-error.png.gz": {
+      "rawSha256": "c2190d8937ec001d2873d5e0ecbf01e4350223aed8b7a9f4965887ebae4e2f2a",
+      "gzipSha256": "323f5ee40b82517ec8daebcae501267826a94478c30b7fdde119de8c1929677a",
+      "rawBytes": 91496
+    },
+    "evidence/withdrawal-20261010T081436057403Z/withdrawal-AW-B07-전체-데이터-취소·본인만-탈퇴·동일-이메일-웹-재가입/all-data-withdrawal-complete.png.gz": {
+      "rawSha256": "b7189ed2832eafd42031eb6c4f3236b9276a6cabef040e577f0fd98ff27e6d44",
+      "gzipSha256": "71dc92ac211476a97007ae7ebc39910aa9fafdd94f47be3006be5460ddf3a744",
+      "rawBytes": 40246
+    },
+    "evidence/withdrawal-20261010T081436057403Z/withdrawal-AW-B07-전체-데이터-취소·본인만-탈퇴·동일-이메일-웹-재가입/rejoined-minutes-empty.png.gz": {
+      "rawSha256": "5013f2db6a72401d61eeb1eddf54515cd79613d756b082f3e14583008bb44e36",
+      "gzipSha256": "695496bce2b9e10c51e68e93224308b0d439f6359bfe4c1febc804fd90172587",
+      "rawBytes": 105418
+    },
+    "evidence/withdrawal-20261010T081436057403Z/withdrawal-AW-B07-전체-데이터-취소·본인만-탈퇴·동일-이메일-웹-재가입/rejoined-stretch-empty.png.gz": {
+      "rawSha256": "06f46681f116ea4a06dcd6341bd5d92f9a60c5a2c6b56a19740081ba3575fa25",
+      "gzipSha256": "1d54f589dc74902f1823ab2bb7420f1c3edaa0a7cbc81d50a5ed4e83bb777eb8",
+      "rawBytes": 67736
+    },
+    "evidence/password/.last-run.json.gz": {
+      "rawSha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "gzipSha256": "1192e21d9c0e3eb952afd8d3e74333b99b8bf5aea64138d3262e079129e57154",
+      "rawBytes": 45
+    },
+    "evidence/password/password-PW-01-02-04-actua-9bd4e-ial-revocation-and-keyboard/forgot-desktop.png.gz": {
+      "rawSha256": "8bb12085267083a6d951a1944bb717724498f9efe723cf49db007b625b92289a",
+      "gzipSha256": "51fe50ba2d5223dc2fa8ea320ba2ef24bc59a5075714e71fdc925f7127a8941d",
+      "rawBytes": 78608
+    },
+    "evidence/password/password-PW-01-02-04-actua-9bd4e-ial-revocation-and-keyboard/reset-complete.png.gz": {
+      "rawSha256": "b1d24da1a36a1d5a6e504cef287389e3ca47d49db25ba55934c33f44acc64eb4",
+      "gzipSha256": "f29f33130c78dfa3d1650b6fc82407926f09129791b5c0e4910ce8f64176101a",
+      "rawBytes": 39793
+    },
+    "evidence/password/password-PW-01-02-04-actua-9bd4e-ial-revocation-and-keyboard/reset-desktop.png.gz": {
+      "rawSha256": "0c93f79a2854b3bb7ac87f9d7be21dddcc4c4294b996c3489a1b08d053d4dcf5",
+      "gzipSha256": "542bd29eb901892498295ebe74323d057e6074e8c6c33333af4d6fdb1eb001d1",
+      "rawBytes": 70871
+    },
+    "evidence/password/password-PW-01-02-04-actua-9bd4e-ial-revocation-and-keyboard/reset-narrow.png.gz": {
+      "rawSha256": "7bbd87fed3324a1c7a292aa6b6d2107bb73ee508ebe92dc0ecb3552c20770e27",
+      "gzipSha256": "b9d0ec335c42c2fcc7061fb3a3b79fd1710b2181aa71de6d9821df8601b57dfd",
+      "rawBytes": 52457
+    },
+    "evidence/password/password-PW-03-actual-late-f59c7-d-and-missing-link-handling/invalid-link.png.gz": {
+      "rawSha256": "cd2ecaaf05cf872b3ef3a645810a1a677fdaffb34240adad314878d56c51d414",
+      "gzipSha256": "a1bfbc831302e2633577a18513f5b7143c6eabc8748f908f11d49e1cbd12707e",
+      "rawBytes": 57967
+    }
+  },
+  "runs": [
+    {
+      "folder": "withdrawal-20261010T081026942126Z",
+      "passed": 1,
+      "failed": 0,
+      "cases": [
+        {
+          "title": "AW-B07 전체 데이터 취소·본인만 탈퇴·동일 이메일 웹 재가입",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 7124,
+              "boundary": [
+                {
+                  "name": "all-data-private-sql-boundary",
+                  "value": {
+                    "before": {
+                      "other": {
+                        "baselines": 2,
+                        "minute_summaries": 1,
+                        "notification_preferences": 1,
+                        "sessions": 1,
+                        "stretch_records": 1,
+                        "users": 1
+                      },
+                      "owner": {
+                        "baselines": 2,
+                        "minute_summaries": 1,
+                        "notification_preferences": 1,
+                        "sessions": 2,
+                        "stretch_records": 1,
+                        "users": 1
+                      }
+                    },
+                    "cancelled": {
+                      "other": {
+                        "baselines": 2,
+                        "minute_summaries": 1,
+                        "notification_preferences": 1,
+                        "sessions": 1,
+                        "stretch_records": 1,
+                        "users": 1
+                      },
+                      "owner": {
+                        "baselines": 2,
+                        "minute_summaries": 1,
+                        "notification_preferences": 1,
+                        "sessions": 2,
+                        "stretch_records": 1,
+                        "users": 1
+                      }
+                    },
+                    "removed": {
+                      "other": {
+                        "baselines": 2,
+                        "minute_summaries": 1,
+                        "notification_preferences": 1,
+                        "sessions": 1,
+                        "stretch_records": 1,
+                        "users": 1
+                      },
+                      "owner": {
+                        "baselines": 0,
+                        "minute_summaries": 0,
+                        "notification_preferences": 0,
+                        "sessions": 0,
+                        "stretch_records": 0,
+                        "users": 0
+                      }
+                    },
+                    "rejoined": {
+                      "fresh": {
+                        "baselines": 0,
+                        "minute_summaries": 0,
+                        "notification_preferences": 0,
+                        "sessions": 1,
+                        "stretch_records": 0,
+                        "users": 1
+                      },
+                      "other": {
+                        "baselines": 2,
+                        "minute_summaries": 1,
+                        "notification_preferences": 1,
+                        "sessions": 1,
+                        "stretch_records": 1,
+                        "users": 1
+                      },
+                      "owner": {
+                        "baselines": 0,
+                        "minute_summaries": 0,
+                        "notification_preferences": 0,
+                        "sessions": 0,
+                        "stretch_records": 0,
+                        "users": 0
+                      }
+                    },
+                    "browser": "155.0.8059.40",
+                    "cameraCalls": 0,
+                    "storage": [
+                      0,
+                      0
+                    ],
+                    "pageErrors": 0,
+                    "allRequestsLocal": true,
+                    "modelRequests": 0,
+                    "cancelDeleteRequests": 0,
+                    "confirmedDeleteRequests": 1,
+                    "actualSqlReadOnly": true,
+                    "synthetic": [
+                      "accounts",
+                      "mailbox",
+                      "summaries",
+                      "baselines",
+                      "preferences"
+                    ],
+                    "actual": [
+                      "browser",
+                      "HTTP",
+                      "FastAPI",
+                      "PostgreSQL",
+                      "signup-web",
+                      "withdrawal-web"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "folder": "withdrawal-20261010T081154385064Z",
+      "passed": 6,
+      "failed": 1,
+      "cases": [
+        {
+          "title": "AW-B07 전체 데이터 취소·본인만 탈퇴·동일 이메일 웹 재가입",
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "retry": 0,
+              "durationMs": 19391,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "AW-B01 계정·취소·기록 보존·좁은 웹·키보드·대비",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 4223,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "AW-B02 오답·최종 동의·204·기존 세션 이탈·타 계정 보존",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 2962,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "AW-B03 실제10분 확인 만료·새 발송·이전 확인 거부·기록 보존",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1645,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "AW-B04 서버 삭제 후 응답 단절은 완료 추정·자동 삭제 재시도0",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1422,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "AW-B05 서버 전 미전송 실패·결과 불확실 복구는 실제 계정·기록 보존",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1538,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "AW-B06 429·메일 실패 응답 UI는 전송 완료·삭제로 표시하지 않음",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1623,
+              "boundary": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "folder": "withdrawal-20261010T081436057403Z",
+      "passed": 7,
+      "failed": 0,
+      "cases": [
+        {
+          "title": "AW-B07 전체 데이터 취소·본인만 탈퇴·동일 이메일 웹 재가입",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 5237,
+              "boundary": [
+                {
+                  "name": "all-data-private-sql-boundary",
+                  "value": {
+                    "before": {
+                      "other": {
+                        "baselines": 2,
+                        "minute_summaries": 1,
+                        "notification_preferences": 1,
+                        "sessions": 1,
+                        "stretch_records": 1,
+                        "users": 1
+                      },
+                      "owner": {
+                        "baselines": 2,
+                        "minute_summaries": 1,
+                        "notification_preferences": 1,
+                        "sessions": 2,
+                        "stretch_records": 1,
+                        "users": 1
+                      }
+                    },
+                    "cancelled": {
+                      "other": {
+                        "baselines": 2,
+                        "minute_summaries": 1,
+                        "notification_preferences": 1,
+                        "sessions": 1,
+                        "stretch_records": 1,
+                        "users": 1
+                      },
+                      "owner": {
+                        "baselines": 2,
+                        "minute_summaries": 1,
+                        "notification_preferences": 1,
+                        "sessions": 2,
+                        "stretch_records": 1,
+                        "users": 1
+                      }
+                    },
+                    "removed": {
+                      "other": {
+                        "baselines": 2,
+                        "minute_summaries": 1,
+                        "notification_preferences": 1,
+                        "sessions": 1,
+                        "stretch_records": 1,
+                        "users": 1
+                      },
+                      "owner": {
+                        "baselines": 0,
+                        "minute_summaries": 0,
+                        "notification_preferences": 0,
+                        "sessions": 0,
+                        "stretch_records": 0,
+                        "users": 0
+                      }
+                    },
+                    "rejoined": {
+                      "fresh": {
+                        "baselines": 0,
+                        "minute_summaries": 0,
+                        "notification_preferences": 0,
+                        "sessions": 1,
+                        "stretch_records": 0,
+                        "users": 1
+                      },
+                      "other": {
+                        "baselines": 2,
+                        "minute_summaries": 1,
+                        "notification_preferences": 1,
+                        "sessions": 1,
+                        "stretch_records": 1,
+                        "users": 1
+                      },
+                      "owner": {
+                        "baselines": 0,
+                        "minute_summaries": 0,
+                        "notification_preferences": 0,
+                        "sessions": 0,
+                        "stretch_records": 0,
+                        "users": 0
+                      }
+                    },
+                    "browser": "155.0.8059.40",
+                    "cameraCalls": 0,
+                    "storage": [
+                      0,
+                      0
+                    ],
+                    "pageErrors": 0,
+                    "allRequestsLocal": true,
+                    "modelRequests": 0,
+                    "cancelDeleteRequests": 0,
+                    "confirmedDeleteRequests": 1,
+                    "actualSqlReadOnly": true,
+                    "synthetic": [
+                      "accounts",
+                      "mailbox",
+                      "summaries",
+                      "baselines",
+                      "preferences"
+                    ],
+                    "actual": [
+                      "browser",
+                      "HTTP",
+                      "FastAPI",
+                      "PostgreSQL",
+                      "signup-web",
+                      "withdrawal-web"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "AW-B01 계정·취소·기록 보존·좁은 웹·키보드·대비",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 2197,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "AW-B02 오답·최종 동의·204·기존 세션 이탈·타 계정 보존",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 2829,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "AW-B03 실제10분 확인 만료·새 발송·이전 확인 거부·기록 보존",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 2107,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "AW-B04 서버 삭제 후 응답 단절은 완료 추정·자동 삭제 재시도0",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1609,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "AW-B05 서버 전 미전송 실패·결과 불확실 복구는 실제 계정·기록 보존",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1279,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "AW-B06 429·메일 실패 응답 UI는 전송 완료·삭제로 표시하지 않음",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1236,
+              "boundary": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "unit": {
+    "passed": 1481,
+    "failed": 0,
+    "skipped": 0
+  },
+  "password": {
+    "passed": 5,
+    "reporter": "unchanged-list",
+    "jsonReport": false
+  }
+}
