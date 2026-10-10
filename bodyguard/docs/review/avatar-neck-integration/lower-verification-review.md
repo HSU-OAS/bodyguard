@@ -23,6 +23,10 @@
 
 GitHub fetch/PR 조회는 이전 DNS/API 실패 뒤 정상 승인 절차로 재개됐다. main a466528/PR108 d734b0f·OPEN/Draft·체크 없음, 최초 UNKNOWN 이후 새 조회에서 MERGEABLE/CLEAN을 확인했다. 이 관찰을 후속 HEAD의 diff/CLEAN 증거로 재사용하지 않는다.
 
+검증 보존e47bd748c5b72b467e670201561be49d86e4f1af의 실제 커밋·원격 푸시와588개 PR파일 상태/Git blob 일치·로컬/원격0/0·작업트리clean을 확인했다. 새HEAD 최초 UNKNOWN 이후 별도 최종 조회는OPEN/Draft·MERGEABLE/CLEAN·체크 없음이었다. [본문](https://github.com/HSU-OAS/bodyguard/pull/108)을 실제 갱신한 뒤 제출 원문과 동일함을 다시 읽었고 [작성자 검토](https://github.com/HSU-OAS/bodyguard/pull/108#issuecomment-6093381678)를 남겼다. P2 때문에 병합하지 않았다.
+
+archive 중복 실행은 예상exit1로 거부됐고 README/manifest/증거 포함19개 바이트는 불변·후속byte audit 통과였다. GitHub CLI --slurp/--jq 동시 옵션은 설치 버전에서 지원되지 않아 첫 파일 조회가 실패했다. 첫 빈 출력은 증거로 쓰지 않고 지원되는 --paginate/--slurp의 새 원본으로588개를 대조했다. 초기 실패 메시지는 도구 transcript에 남고 별도 stderr 파일은 캡처하지 않았다. Codex 검증 문서 열기는queued 응답이며 사용자가 실제 화면을 봤다는 뜻이 아니다.
+
 ## 판정
 
 **Request Changes / Draft 유지 / 병합 보류.** P2가 남아 Story·D2-A·전체1~6 미완료다. 승인되지 않은 외형/판정을 공개하지 않는다. 비용/계정/시크릿/운영DB/배포/출시·중요한 안전 및 개인정보 변경은 별도 승인이다.

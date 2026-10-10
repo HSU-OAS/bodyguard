@@ -8,7 +8,7 @@
 
 기존 웹의 로그인·선택 준비·비공개 코칭/기록 adapter 구현과 실제 출시 사용 흐름은 다르다. 검증된 출시 동작0, 외형/시작/SDK P2·실측·승인 UI·외부 공급자/HTTPS/운영과 전체1~6은 미완료다. 공개 웹·문구 최소화·안전/개인정보·별도 승인 경계를 유지한다.
 
-이전 DNS/API 실패 후 정상 승인 절차로 실제fetch와PR 조회가 성공했다. origin/main a466528, PR #108 OPEN/Draft·HEAD d734b0f·체크 없음·MERGEABLE/CLEAN을 확인한 시점이다. 새 증거·본문/리뷰·exact HEAD/diff를 후속 갱신하며 외형P2 때문에 병합하지 않는다. 새 독립 Story는 다시 최신main을 확인하고 새codex/*에서 시작한다.
+검증 보존e47bd74를 실제 커밋/푸시하고 origin/main a466528·PR #108의 전체588파일 상태/Git blob 일치·clean·OPEN/Draft·MERGEABLE/CLEAN·체크 없음을 재확인했다. [PR 본문](https://github.com/HSU-OAS/bodyguard/pull/108)과 [작성자 재검토](https://github.com/HSU-OAS/bodyguard/pull/108#issuecomment-6093381678)를 실제 반영했다. 외형P2 때문에 병합하지 않으며 이 관찰을 후속 HEAD 검증으로 재사용하지 않는다. 새 독립 Story는 다시 최신main을 확인하고 새codex/*에서 시작한다.
 
 ## 이전 시점 기록 — 보존
 
