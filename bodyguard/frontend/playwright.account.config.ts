@@ -9,6 +9,7 @@ export default defineConfig({
   testDir: 'e2e',
   testMatch: [
     'account.spec.ts',
+    'restore.spec.ts',
     'password.spec.ts',
     'google.spec.ts',
     'records.spec.ts',
@@ -59,6 +60,10 @@ export default defineConfig({
               : ['--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream'],
           },
         }
+      : {}),
+    // FR-U-04: actual cache restore only in this isolated suite; other launches unchanged.
+    ...(process.env.BODYGUARD_TEST_PAGE_RESTORE === '1'
+      ? { launchOptions: { ignoreDefaultArgs: ['--disable-back-forward-cache'] } }
       : {}),
   },
   webServer: {
