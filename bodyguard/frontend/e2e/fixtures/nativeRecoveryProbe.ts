@@ -93,6 +93,7 @@ export function mountNativeRecoveryProbe(canvas: HTMLCanvasElement, gender: 'mal
     let owned: Session | null = null
     const actor = createNativePlaybackResources({
       model: 'lite',
+      inferenceThread: 'main', // Preserve this pre-existing main-thread recovery contract.
       mirror: true,
       halfLifeMs: 50,
       maxAgeMs: 250,

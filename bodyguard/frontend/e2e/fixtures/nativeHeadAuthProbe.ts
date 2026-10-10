@@ -564,7 +564,7 @@ export function mountNativeHeadAuthProbe(
             },
           }
         : {}),
-      ...(withWorker ? { inferenceThread: 'worker' } : {}),
+      inferenceThread: withWorker ? 'worker' : 'main',
       mirror: true,
       halfLifeMs: 50,
       maxAgeMs: 250,

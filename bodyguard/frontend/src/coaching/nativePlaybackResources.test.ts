@@ -61,7 +61,7 @@ function setup(
   reference?: ReferenceProgram,
   feedback?: Parameters<typeof createNativePlaybackResources>[0]['feedback'],
   trunk?: boolean,
-  inferenceThread?: 'main' | 'worker',
+  inferenceThread: 'main' | 'worker' = 'main',
   prepareAvatar?: (
     models: NonNullable<Awaited<ReturnType<typeof prepareOwnedAvatarPair>>['models']>,
     context: Readonly<{ generation: number; signal: AbortSignal }>,
@@ -123,7 +123,7 @@ function setup(
   let id = 0
   const options = {
     model: 'lite' as const,
-    ...(inferenceThread === undefined ? {} : { inferenceThread }),
+    inferenceThread,
     ...(prepareAvatar ? { prepareAvatar } : {}),
     ...(warmupInference === undefined ? {} : { warmupInference }),
     mirror: true,
@@ -427,7 +427,59 @@ describe('renderer-owned avatar preparation', () => {
     expect(f.notices).not.toContainEqual({ type: 'ready', generation: 1 })
   })
 })
-describe('explicit private worker inference', () => {
+describe('private worker inference', () => {
+  it.each([false, true])('uses Worker when thread is omitted, head/hands=%s', async (enabled) => {
+    const f = setup(
+      enabled ? headAlignment('row-major') : undefined,
+      enabled ? handAlignment() : undefined,
+    )
+    const { inferenceThread: _thread, ...options } = f.options
+    const actor = createNativePlaybackResources(options)
+    const controller = createResourceController(actor.ports, () => {})
+    try {
+      await controller.run({ type: 'request-camera', generation: 1 })
+      expect(createWorkerPoseInference).toHaveBeenCalledOnce()
+      expect(vi.mocked(createWorkerPoseInference).mock.calls[0][1]).toEqual({
+        model: 'lite',
+        face: enabled,
+        hands: enabled,
+        matrixLayout: enabled ? 'row-major' : 'column-major',
+      })
+      expect(createPoseLandmarker).not.toHaveBeenCalled()
+      expect(createFaceLandmarker).not.toHaveBeenCalled()
+      expect(createGestureRecognizer).not.toHaveBeenCalled()
+    } finally {
+      await actor.close()
+      await controller.close()
+      await f.actor.close()
+      await f.controller.close()
+    }
+    expect(f.worker.dispose).toHaveBeenCalledOnce()
+  })
+  it('does not silently fall back to main after default Worker preparation fails', async () => {
+    const f = setup()
+    const { inferenceThread: _thread, ...options } = f.options
+    vi.mocked(createWorkerPoseInference).mockRejectedValueOnce(new Error('Worker unavailable'))
+    const actor = createNativePlaybackResources(options)
+    const notices: unknown[] = []
+    const controller = createResourceController(actor.ports, (notice) => {
+      notices.push(notice)
+    })
+    try {
+      await controller.run({ type: 'request-camera', generation: 1 })
+      expect(createWorkerPoseInference).toHaveBeenCalledOnce()
+      expect(createPoseLandmarker).not.toHaveBeenCalled()
+      expect(notices).not.toContainEqual({ type: 'ready', generation: 1 })
+      expect(notices).toContainEqual({ type: 'error', generation: 1, reason: 'inference-error' })
+      expect(prepareOwnedAvatarPair).not.toHaveBeenCalled()
+      expect(closeCamera).toHaveBeenCalledOnce()
+    } finally {
+      await actor.close()
+      await controller.close()
+      await f.actor.close()
+      await f.controller.close()
+    }
+  })
   it.each([false, true])(
     'snapshots the worker choice with head/hands enabled=%s',
     async (enabled) => {

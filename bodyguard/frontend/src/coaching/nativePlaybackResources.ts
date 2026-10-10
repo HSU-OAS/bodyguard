@@ -39,7 +39,7 @@ export type NativeFeedbackDecision = Readonly<{
 }>
 type Options = Readonly<{
   model: PoseModel
-  /** Private explicit opt-in until actual SDK/browser and integration gates pass. */
+  /** Same-browser Worker by default; main is an explicit private comparison path. */
   inferenceThread?: 'main' | 'worker'
   // Private opt-in: discard one actual frame before playback becomes ready.
   warmupInference?: boolean
@@ -111,7 +111,7 @@ export function createNativePlaybackResources(options: Options) {
   let evaluateFeedback: NonNullable<Options['feedback']>['evaluate'] | undefined
   let prepareAvatar: Options['prepareAvatar']
   let trunk = false
-  let inferenceThread: 'main' | 'worker' = 'main'
+  let inferenceThread: 'main' | 'worker' = 'worker'
   let warmupInference = false
   try {
     const requestedThread = options.inferenceThread
@@ -119,7 +119,7 @@ export function createNativePlaybackResources(options: Options) {
     if (prepareAvatar !== undefined && typeof prepareAvatar !== 'function') throw new Error()
     if (requestedThread !== undefined && requestedThread !== 'main' && requestedThread !== 'worker')
       throw new Error()
-    inferenceThread = requestedThread ?? 'main'
+    inferenceThread = requestedThread ?? 'worker'
     const requestedWarmup = options.warmupInference
     if (requestedWarmup !== undefined && typeof requestedWarmup !== 'boolean') throw new Error()
     warmupInference = requestedWarmup === true
