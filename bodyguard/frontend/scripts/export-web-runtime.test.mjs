@@ -152,6 +152,15 @@ for (const token of [
   'Invalid owned minute upload',
   'prepareMinuteUploadProbe',
   'PRIVATE_RAW_FAILURE',
+  // FR-V-03/NFR-08: latest main candidates/workers stay private after package refresh.
+  'shoulder-shrug',
+  'arm-overhead',
+  'mountNativeAuthProbe',
+  'Worker inference unavailable',
+  'createWorkerPoseInference',
+  'nativeInference.worker',
+  'createOwnedMotionPreview',
+  'mountNativeContentionProbe',
 ]) {
   test(`rejects integrated private producer before output exists: ${token}`, (t) => {
     const { owned, source, target } = fixture(t)

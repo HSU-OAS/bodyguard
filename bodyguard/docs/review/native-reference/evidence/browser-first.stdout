@@ -1,0 +1,19 @@
+
+Running 14 tests using 1 worker
+
+  ✓   1 e2e/nativehead.spec.ts:292:5 › male actual owned phase→pause→fresh generation reference (14.6s)
+  ✓   2 e2e/nativehead.spec.ts:358:3 › male native start→stop→own interrupted record (5.1s)
+  ✓   3 e2e/nativehead.spec.ts:404:3 › male native held result→same-account refresh→new owner explicit restart (9.3s)
+  ✓   4 e2e/nativehead.spec.ts:436:5 › male native held result→logout→no old resume/save (5.4s)
+  ✓   5 e2e/nativehead.spec.ts:436:5 › male native held result→server401→no old resume/save (5.4s)
+  ✓   6 e2e/nativehead.spec.ts:436:5 › male native held result→pagehide→no old resume/save (5.5s)
+  ✓   7 e2e/nativehead.spec.ts:436:5 › male native held result→unmount→no old resume/save (5.2s)
+  ✓   8 e2e/nativehead.spec.ts:292:5 › female actual owned phase→pause→fresh generation reference (13.9s)
+  ✓   9 e2e/nativehead.spec.ts:358:3 › female native start→stop→own interrupted record (5.1s)
+  ✓  10 e2e/nativehead.spec.ts:404:3 › female native held result→same-account refresh→new owner explicit restart (9.1s)
+  ✓  11 e2e/nativehead.spec.ts:436:5 › female native held result→logout→no old resume/save (5.5s)
+  ✓  12 e2e/nativehead.spec.ts:436:5 › female native held result→server401→no old resume/save (5.5s)
+  ✓  13 e2e/nativehead.spec.ts:436:5 › female native held result→pagehide→no old resume/save (5.4s)
+  ✓  14 e2e/nativehead.spec.ts:436:5 › female native held result→unmount→no old resume/save (5.5s)
+
+  14 passed (1.8m)

@@ -1,0 +1,21 @@
+{
+  "label": "launch-browser-wait-fixed",
+  "cwd": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-head-orientation/bodyguard/frontend",
+  "command": "node",
+  "args": [
+    "scripts/test-head-orientation-browser.mjs",
+    "/private/tmp/bodyguard-head-proof.szy9tB",
+    "wait-fixed",
+    "/private/tmp/bodyguard-native-recovery-proof.xs1wqq"
+  ],
+  "exit": 1,
+  "elapsedMs": 19106,
+  "stdout": "vite v8.3.1 building client environment for production...\ntransforming...\n✓ 10 modules transformed.\nrendering chunks...\ncomputing gzip size...\n../../../../../../../private/tmp/bodyguard-head-proof.szy9tB/probe-wait-fixed/probe.js  738.17 kB │ gzip: 168.53 kB\n\n✓ built in 230ms\n{\"passed\":0,\"failed\":1,\"result\":\"/private/tmp/bodyguard-head-proof.szy9tB/browser-wait-fixed.json\"}\n",
+  "stderr": "",
+  "source": {
+    "src/avatar/headOrientationRig.ts": "b23ab8ecdd5ac9cfc8a6baaa0beca82ac97d5453281ade9e258db57e827e7b85",
+    "src/avatar/headOrientationRig.test.ts": "b6ac231d09c330191c7dd39eecd2eb618de8e94ef203db06a744d76e11cbfde2",
+    "e2e/fixtures/headOrientationProbe.ts": "7fdb733b66a19544e1e91199728a564cb79da6736aa790da5cdb7dcc7213c701",
+    "scripts/test-head-orientation-browser.mjs": "75d3e7e244f35f38037a0ccbda6d4090b638989086356102b1f5a6c2801a068e"
+  }
+}

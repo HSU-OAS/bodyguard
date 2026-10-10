@@ -41,6 +41,8 @@ export async function preparePreferences(options: {
   signal: AbortSignal
 }) {
   const { authority, readAuthority } = options
+  // FR-U-04: pin the primitive identity as well as the committed ready object.
+  const ownerId = authority.user.id
   const abort = new AbortController()
   const signal = AbortSignal.any([abort.signal, options.signal])
   let proof = ''
@@ -53,7 +55,12 @@ export async function preparePreferences(options: {
     options.signal.removeEventListener('abort', close)
   }
   function check() {
-    if (closed || signal.aborted || readAuthority() !== authority) {
+    if (
+      closed ||
+      signal.aborted ||
+      readAuthority() !== authority ||
+      authority.user.id !== ownerId
+    ) {
       close()
       throw new ApiError(401)
     }
@@ -62,7 +69,7 @@ export async function preparePreferences(options: {
     check()
     const user = await request('/me', signal, undefined, 200)
     check()
-    if (!user || typeof user !== 'object' || !('id' in user) || user.id !== authority.user.id)
+    if (!user || typeof user !== 'object' || !('id' in user) || user.id !== ownerId)
       throw new ApiError(401)
   }
   options.signal.addEventListener('abort', close, { once: true })
@@ -80,9 +87,23 @@ export async function preparePreferences(options: {
     )
       throw new ApiError(503)
     proof = csrf.csrf_token
-    let value = Object.freeze(
-      parsePreferences(await request('/settings/notifications', signal, undefined, 200)),
-    )
+    // FR-N-03/NFR-08: bookend /me checks alone cannot bind the intervening read.
+    const response = await fetch('/api/v1/settings/notifications', {
+      method: 'GET',
+      credentials: 'same-origin',
+      cache: 'no-store',
+      signal: AbortSignal.any([signal, AbortSignal.timeout(15_000)]),
+      headers: { 'X-CSRF-Token': proof, 'X-Account-ID': ownerId },
+    })
+    check()
+    if (!response.ok) {
+      const delay = Number(response.headers.get('Retry-After'))
+      throw new ApiError(response.status, Number.isFinite(delay) ? Math.max(0, delay) : 0)
+    }
+    if (response.status !== 200) throw new ApiError(503)
+    const loaded: unknown = await response.json()
+    check()
+    let value = Object.freeze(parsePreferences(loaded))
     check()
     await sameAccount()
     return Object.freeze({

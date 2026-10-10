@@ -1,0 +1,25 @@
+
+Running 12 tests using 1 worker
+
+  ✓   1 e2e/nativehead.spec.ts:248:3 › male native start→stop→own interrupted record (4.7s)
+  ✓   2 e2e/nativehead.spec.ts:291:3 › male native held result→same-account refresh→new owner explicit restart (7.0s)
+  ✓   3 e2e/nativehead.spec.ts:323:5 › male native held result→logout→no old resume/save (4.1s)
+  ✓   4 e2e/nativehead.spec.ts:323:5 › male native held result→server401→no old resume/save (4.7s)
+  ✓   5 e2e/nativehead.spec.ts:323:5 › male native held result→pagehide→no old resume/save (4.2s)
+  ✓   6 e2e/nativehead.spec.ts:323:5 › male native held result→unmount→no old resume/save (4.2s)
+  ✓   7 e2e/nativehead.spec.ts:248:3 › female native start→stop→own interrupted record (3.9s)
+  ✓   8 e2e/nativehead.spec.ts:291:3 › female native held result→same-account refresh→new owner explicit restart (6.7s)
+  ✓   9 e2e/nativehead.spec.ts:323:5 › female native held result→logout→no old resume/save (4.7s)
+  ✓  10 e2e/nativehead.spec.ts:323:5 › female native held result→server401→no old resume/save (4.4s)
+  ✓  11 e2e/nativehead.spec.ts:323:5 › female native held result→pagehide→no old resume/save (4.3s)
+  ✓  12 e2e/nativehead.spec.ts:323:5 › female native held result→unmount→no old resume/save (4.3s)
+
+  12 passed (1.1m)
+[WebServer] (node:60137) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:60145) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:60153) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:60162) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

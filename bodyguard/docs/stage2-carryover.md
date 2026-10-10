@@ -1,8 +1,20 @@
 # 2단계 필수 보완 이월 및 후속 실행 순서
 
+2026-10-09 [S6.19](stories/owned-native-warmup.md)는 로그인 소유 첫 추론 준비를 실제 Auth/API/SQL에 연결해 준비 판정/적립/기록0·권한 취소/늦은 결과·새 소유자·기존 코칭/본인 기록 경계를 확인했다. [실제 흐름과 실패/미완료](review/owned-native-warmup/README.md). 단일5초의 기본26/준비42와 로컬 품질 검사는 통과했으나 SDK CSP 차단 시도·기존 시작P2·실제 참여자/정확도·최종 외형/시범·승인 공개 UI/SDK·D2 및 전체1~6은 미완료다. 공개 byte/최소 문구·기본 thread/모델/화질·원본/GLB/조형·운영과 별도 승인 경계 유지.
+
 2026-10-05 · CEO 우선순위 변경 · 2단계 미완료 유지
 
 ## 기준선과 보존
+
+2026-10-09 [S6.18](stories/native-inference-warmup.md)의 [첫 추론 준비·새 frame 재생](review/native-inference-warmup/README.md)을 기록했다. 최종 실제 Chrome154/155의 private normal16/취소4에서 재생 전 비용 이동·준비 결과 비전달·회수를 확인했다. 전체 시작 개선/기존 시작P2·Auth26/실제 사람·최종 외형/시범·승인 공개 UI/SDK·D2/전체1~6 완료가 아니다. 공개 byte/최소 문구·원본/GLB/새 조형·기본 thread/모델/화질·판정/개인정보/운영 경계를 유지한다.
+
+2026-10-09 [S6.16](stories/native-neck-full-regression.md)의 [목 관찰 전체 회귀 복원](review/native-neck-full-regression/README.md)을 기록했다. 원래26개의 test body/guard/loop와 현재 실제 실행 목록을 대조하고 current Chrome155의 목26·기본24를 통과했다. 기존 Chrome154/PR90의13실패·함수 경계/환경 차이·시작P2를 유지한다. 실제 사람·최종 외형/시범·승인 공개 구조/SDK·D2/전체1~6 완료 증거가 아니며 공개 byte/최소 문구·원본/GLB·새 조형/판정/SDK·운영/승인 경계는 유지한다.
+
+2026-10-09 [S6.15](stories/owned-render-preparation.md)의 [로그인 소유 GPU 준비·취소 통합](review/owned-render-preparation/README.md)을 기록했다. actual Chrome/API/격리 SQL에서 prepared28/default24·본인 중단 기록·늦은 준비 완료의 재생/기록 차단을 확인했다. 준비 취소 하네스2실패와 보완 소스/증거를 보존한다. 원래 PR90의26/시작P2 해결·실제 사람/노트북·최종 외형/시범·승인 공개 구조/SDK·D2/전체1~6 완료가 아니다. 공개 byte·최소 문구·GLB/조형·기본 thread/모델/화질·SDK 정책·운영/승인 경계를 유지한다.
+
+2026-10-09 [S6.14](stories/native-first-render-isolation.md)의 [두 모델 GPU 준비·취소 회수](review/native-first-render-isolation/README.md)는 명시적 renderer readiness를 보완했다. 최종 준비 후 첫 render1.0~5.8ms로 관찰했으나 준비122.4~546.4ms·main 추론/Worker 화면 공백·중간 대조군6047ms 실패와 PR90 시작P2를 남긴다. 공개 byte/최소 문구·원본/GLB·모델/화질·기본 thread/SDK/안전/개인정보/운영은 유지한다. 실제 사람/노트북·통합26·최종 외형·승인 공개 구조·D2/전체1~6 완료 증거가 아니다.
+
+2026-10-09 [S6.13](stories/native-main-thread-contention.md)의 [비공개 main/Worker 화면 경합 비교](review/native-main-thread-contention/README.md)를 기록했다. normal/4× CDP의 상대 관찰이며 실제 OS 부하/노트북·원래 통합26건·PR90 실패13건의 원인/해결 검증은 아니다. Worker도 화면 공백이 남아 시작P2/부드러움·D2/전체1~6 기준을 유지한다. 다음은 첫 렌더/SDK 비용 분리이며 공개 byte/최소 문구·GLB/새 조형·모델·기본 경로/SDK 정책·안전/개인정보/운영 변경0이다.
 
 main 9733e4c에는 PR #15의 순수 코칭 진행 엔진까지 병합됐다. 계정 화면과 개발 전용 동작 선택 화면은 있으나, 실제 신체 분석·두 아바타 코칭·결과 연결은 완성되지 않았다. 공급자 mock과 합성 관절 시험은 실제 사용자 시험이 아니다.
 
@@ -11,6 +23,12 @@ main 9733e4c에는 PR #15의 순수 코칭 진행 엔진까지 병합됐다. 계
 자원 수명주기 Story 초안은 로컬 codex/stage2-coaching-resources의 6f57aa1에 보존했다. 명세 초안일 뿐 구현·실행형 하네스·검증 완료가 아니다.
 
 ## 최종 통합에서 반드시 닫을 항목
+
+2026-10-09 [S2.M4](stories/observer-framing-comparison.md)는 개발 촬영 도구에 관찰자 범위 라벨/대조, 튜닝 집계·설정 동결과 새 프레임 검증을 연결했다. [작동 패널·실패·실제/합성 경계](review/observer-framing/README.md). 실제 참여자/독립 조건·올바른 동작 classifier/시범·정확도/임계값·최종 외형·기존 시작P2·승인 공개 UI/SDK·D2와 전체1~6의 통과가 아니다. 공개 byte/최소 문구·카메라/SDK·판정·원본/GLB/조형·운영 및 기존 별도 승인 경계를 유지한다.
+
+2026-10-09 [S2.M3](stories/pose-presence-guard.md)는 기존 trustedJoints의 제공된 presence 확인 누락을 보완했다. [남녀 강조 해제/복구·실패·증거](review/pose-presence-guard/README.md). 팔/몸통 coverage와 합성 오류 강조의 기술 경계이며 실제 SDK/사람 정확도·올바른 시범·최종 외형·시작P2/D2/전체1~6 통과가 아니다. 추가 조형/GLB·공개 byte/문구·판정 수치/SDK 정책·운영 변경0, 기존 필수 조건과 별도 승인 경계를 유지한다.
+
+2026-10-09 [S6.12 응답 없는 Worker 복구](stories/native-worker-recovery.md)는 비공개 요청의 유한 실패·카메라/프레임/렌더러 회수·중단 기록만 보완했다. [실제 소유 흐름/실패·한계](review/native-worker-recovery/README.md). 강제 종료의 native ACK 부재는 cleanup 실패로 남기며 정상 SDK close·실제 사람/카메라·외형/시범·기존 간헐적 시작 P2·D2/전체1~6 통과가 아니다. GLB/모델·공개 UI/문구/기본 경로·품질/승인 경계는 유지한다.
 
 담당은 CTO다. 실제 참여자·계정·운영 연결이 필요한 부분만 별도 CEO 승인을 요청한다.
 
@@ -25,9 +43,63 @@ main 9733e4c에는 PR #15의 순수 코칭 진행 엔진까지 병합됐다. 계
 
 미완료 판정과 아바타를 제품의 완성된 코칭처럼 공개하지 않는다. 내부 판정 보류·개인정보 경계와 기존 품질 기준은 유지한다.
 
+2026-10-08 D2-T 독립 연결: [S2.T1](stories/avatar-directional-rig.md)은 기존 A37 남녀 GLB의 두 리그에 서로 다른 합성 사지 방향을 실제 WebGL로 연결했다. 부모 affine 변환·관측 누락/만료·source/GPU 소유권·전신 구도를 검증했지만 **실제 사용자 리타게팅/올바른 시범/교정·외형·D2-T 통과가 아니다.** 목·체간·손·축 비틀림과 실제 카메라 좌표계/오차·검증된 동작 연결은 남는다. 원본·GLB·같은 부위 조형 변경0이며 이월 완료 기준은 그대로다.
+
 3단계에서 추가로 추적할 최종 통합 항목: 신체 확인 결과 adapter·실측 근거에 맞는 추천 규칙/사유, 동작별 판정·오류/가림 및 시범 애니메이션 검증, 남은 후보의 자료 재확인. S3.1~S3.3 준비 계약·입구·검수 목록 구현은 이 완료 조건의 대체물이 아니다. D2-M/T/I와 연결하여 각 출시 동작의 실제 시험을 마친 뒤에만 제품 목록으로 승격한다.
 
 ## 다음 실행 순서
+
+2026-10-09 [S2.M2](stories/captured-neck-input.md)는 실제 VideoFrame 기하와 신뢰도 복사·동일 프레임 목 관찰 adapter를 비공개 코칭 입력에 연결했다. [실제 흐름·실패·한계](review/captured-neck-input/README.md). actual Chrome/SDK/API/격리 SQL의 정상/중단/가림/권한·새 세대 회귀이며 실제 사람의 정확도·올바른 시범/classifier·추천 승격·최종 외형/승인 UI 검증은 아니다. 공개 byte/최소 문구·원본/GLB·SDK 정책/기본 main·운영 유지, 기존 시작 P2와 D2-M/T/I/전체1~6 필수 조건은 그대로 남는다.
+
+2026-10-09 [S6.11 비공개 Worker 추론](stories/native-worker-inference.md)은 같은 입력의 몸·얼굴·손 처리를 main 밖으로 분리했다. [실제 소유 흐름·실패/한계](review/native-worker-inference/README.md). 기본 main·공개 byte·모델/GLB·최소 문구·판정/SDK 정책/운영 유지. 가짜 카메라/동작 gate를 실제 사람·올바른 시범·최종 외형/권리·D2 통과로 세지 않는다. 기존 시작 P2·승인 공개 구조·참여자/실측·외부/운영·전체1~6 기준을 유지한다.
+
+2026-10-08 [S2.M1](stories/neck-side-observation.md)의 목 동작 관찰 기초는 [실제 비율·반전·가림/신선도·실패/한계](review/neck-observation/README.md)를 검증했다. 이미지 평면 계산값이며 source/현재 소유·실제 사람/관찰자 대조·classifier/임계값·올바른 시범/교정·Q05/06·D2와 전체1~6 통과가 아니다. native/공개 consumer·공개 byte/GLB·조형·SDK/운영 변경0, 출시0·기존 시작 P2·최소 문구·원본/실패·별도 승인 기준을 유지한다. 실제 동작 검증에 필요한 관찰 연결과 참여자 의존성을 다음 작업으로 분리한다.
+
+2026-10-08 [S2.T23](stories/native-trunk-feedback.md)의 비공개 몸통 표시·강조 통합은 [최종 남녀24건 흐름·실패 보존](review/native-trunk/README.md)을 확인했다. spine05 단독의 저작 영향 범위만 표시하며 모델 전체의 한 색상 기준·0기여 중립·가림/만료 해제와 기존 사지 기본 호출을 유지한다. 실제 classifier/사람·개별 척추/골반·최종 외형/권리·승인 공개 UI·SDK/외부/운영·시작 P2·D2/전체1~6은 미완료/출시 동작0이다. 공개 byte·GLB/새 조형·의료 판정·운영 변경0, 최소 문구·원본/실패·별도 승인 기준 유지.
+
+2026-10-08 [S2.T22](stories/observed-trunk-swing.md)은 명시적 사용자 몸통 집계 방향과 기존 사지/머리 연결을 비공개로 보완했다. [실제 화면·가림/복구·실패·범위](review/observed-trunk/README.md). 골반/root·중간 척추의 local 구조와 원본/시범·GLB는 그대로이며 개별 척추/골반 회전·비틀림/전체 이동·실제 사람 정확도는 검증하지 않았다. 몸통 관찰 누락은 보류하고 출시 동작0·D2/전체1~6·최종 외형/권리·승인 공개 UI·참여자/다장치·SDK/외부/운영·시작P2 기준은 유지한다. 최소 텍스트·원본/실패·새 조형0·별도 승인 경계를 유지한다.
+
+2026-10-08 [S3.4](stories/motion-source-recovery.md)는 S3.3에서 보류한 #3/#6의 원문 확인과 개발 목록 안내를 연결했다. [실제 흐름·실패·증거](review/motion-source-recovery/README.md). 출처 접근은 실제 동작/코칭 정확도/일반인 적합성 검증이 아니며 후보7·출시 적격0이다. 동작별 수행/보상/가림·실측·시범 콘텐츠와 D2-M/T/I, 최종 외형/권리·승인 공개 UI·참여자/다장치·SDK/외부/운영·시작P2 및 전체1~6 완료 조건은 유지한다. 공개byte/구조·새 조형/GLB·판정/운영 변경0·최소 텍스트·원본/실패·별도 승인 유지.
+
+2026-10-08 [S6.8](stories/native-startup-timing.md)은 비공개 native 시작의 단계 기록을 추가했다. [실제 시작·실패/미확정 원인](review/native-startup-timing/README.md). 정상 Chrome20을 과거 지연 해결로 세지 않으며 기존 시작 P2·D2/전체1~6 완료 기준은 유지한다. 제품 판정/SDK 정책·공개 byte/구조·GLB/새 조형·운영 변경0이다. 이후 실제 실패 당시 시간/조건 대조와 독립 기능·동작 기준/실측 의존성을 분리한다. 최소 텍스트·출시 동작0·원본/실패·기존 별도 승인 경계를 유지한다.
+
+2026-10-08 [S2.T21](stories/adaptive-reference.md)은 현재 오류 코드/부위/단계→저작된 교정 시범을 연결했다. [남녀 실제 흐름·실패·합성 구분](review/adaptive-reference/README.md). runtime3c8ce1a의 Chrome18/전체FE1169·정적/build/guard는 통과했지만 실제 classifier/올바른 교정 콘텐츠와 사람 정확도는 검증하지 않았다. D2-M/T/A/I/R/P·최종 외형/권리·목/체간/손/동일인·승인 공개 UI/SDK·참여자/다장치/외부/운영·시작 P2 및 전체1~6 완료 조건은 미충족이다. 다음 동작 기준/오류 분류·실측과 독립 작업을 분리한다. 공개 byte/구조·조형/GLB·임상/운영 변경0, 최소 텍스트·출시 동작0·원본/실패·별도 승인 경계를 유지한다.
+
+2026-10-08 [S2.T20](stories/native-feedback.md)은 같은 native 관찰·현재 소유 상태·사용자 표면 강조·단계 시범을 연결했다. [실제 남녀 흐름·실패/합성 구분](review/native-feedback/README.md). 실제 SDK 양성/사람 판정은0이며 원래 native 미검출에 합성 JS 결과를 분리 주입한 기술 시험이다. 최종 통합16/비교14는 통과했으나 간헐적 시작 원인은 미확정/출시 P2 유지다. 실제 classifier/오류별 교정 시범·동일인/깊이·목/체간/손·외형/변형/권리·승인 UI/SDK·참여자/다장치/외부/운영 및 D2/전체1~6은 미충족이다. 다음 실제 기준/연결·실측 의존성을 분리한다. 공개 byte/구조·조형/GLB·임상/운영 변경0, 최소 문구·출시 동작0·원본/실패/별도 승인 기준을 유지한다.
+
+2026-10-08 [S2.T19](stories/avatar-surface-feedback.md)은 copied pose coverage와 같은 세대/sequence/stamp의 합성 오류만 사용자 표면에 표시한다. [실제 남녀 WebGL·가림/복구·실패](review/surface-feedback/README.md). 실제 classifier/native 오류 전달·시범 적응·목/체간/손·실측·최종 외형/권리·승인 공개 UI·참여자/SDK/다장치/운영 및 전체1~6은 미충족이다. 다음 비공개 native/현재 판정 연결과 실제 검증 조건을 분리한다. 같은 부위 조형/GLB·공개 byte/디자인·임상/운영 변경0, 최소 텍스트·출시 동작0·이월/별도 승인 기준을 유지한다.
+
+2026-10-08 [S2.T18](stories/native-reference.md)은 로그인 native 세션과 단계별 시범을 연결했다. 정확한 자세 검증의 실패를 보존하고 시간/권한을 보완했으며 [실제 시범/중단·새 세대/권한 회수와 미완료](review/native-reference/README.md)를 기록했다. 검증된 실제 동작/오류 강조·신체 대응·최종 외형/권리·승인 공개 디자인·참여자/SDK/노트북/외부·운영 및 전체1~6은 미충족이며 출시 동작0이다. 다음 독립 오류 안내/비교 계약·연결과 별도 실측/공개 UI 조건을 분리한다. 공개 byte/문구·판정·원본/GLB/조형·운영 변경0, 최소 텍스트·실패/원본 보존·기존 승인 기준 유지.
+
+2026-10-08 D2-T 시범 단계 재생: [S2.T17](stories/reference-playback.md)의 owned pair에는 단계별 clip·정지/만료/재개·현재 자세 전환이 연결됐다. [실제 남녀 화면·실패/증거](review/reference-playback/README.md). 원본 GLB에 Blender 메모리 fixture를 재생한 기술 시험으로 실제 수행법·사용자/동일인·판정 증거가 아니다. 다음은 native 로그인 소유 세션과 단계 전달이며, 검증된 시범/오류 강조·최종 외형/권리·승인 디자인·실측/SDK/다장치/HTTPS와 D2/전체1~6은 미충족이다. 공개 byte/화면·원본/GLB/새 조형·운영 변경0, 최소 문구·실패/원본 보존·기존 별도 승인 조건을 유지한다.
+
+2026-10-08 D2-R/T 몸·얼굴·손: [S2.T16](stories/native-hands.md)은 같은 frozen 입력/원래 시각과 Gesture 후보·선택적 손 리그를 재사용 native adapter에 연결했다. [로그인 시작/중단·본인 기록·권한 회수·실제 증거](review/native-hands/README.md). 손 활성/비활성 흐름을 따로 재검증했고 원본/GLB·공개 byte/문구·임상 판정·운영 정책 변경0이다. 가짜 장치 미검출/생성 손 양성과 실제 사람/동일인/가림 정확도를 구분한다. 시범·교정 진행·경추/체간/축 비틀림·실측·최종 외형/권리·승인 디자인·SDK/노트북·외부/운영 및 D2/전체1~6은 미충족이다. 미완성 코칭을 공개하지 않으며 최소 문구·실패/원본 보존·별도 승인 조건을 유지한다.
+
+2026-10-08 D2-T 손목·손가락 표시: [S2.T15](stories/observed-hands.md)는 손목2개·손가락30개를 owned 사용자 모델에 연결했다. [실제 Chrome 흐름·실패/원본·미완성 미리보기](review/observed-hands/README.md).32관절의 합성 굽힘/회전·클리핑/누락/복구·만료/종료와 source/비교/전신/8가중치를 확인했다. native 같은 입력/소유권 연결은 다음이며 실제 사람/가시성/동일인·축 비틀림/중수골·시범/판정·최종 외형/권리·승인 디자인·SDK/노트북/운영 및 D2/전체1~6 완료 조건은 미충족이다. 공개 문구/byte·조형/GLB·운영 변경0, 최소 문구·원본/실패·별도 승인 경계를 유지한다.
+
+2026-10-08 D2-R/T 계정 소유 native 몸·머리: [S2.T14](stories/native-body-head.md)은 명시 head 설정에만 Face SDK·같은 입력 source를 열고 기존 body-only 경계를 유지한다. 실제 로그인/API/격리 SQL·가짜 장치에서 중단 기록, 얼굴 대기 중 logout/401/이탈/교체의 저장·재개 차단과 명시 새 시작을 확인했다. [흐름·원본/실패·미완성 canvas](review/native-body-head/README.md). 실제 사람/동일인/native 양성·경추/체간/손·시범/판정·외형·승인 디자인·SDK/장시간/노트북·D2/전체1~6 게이트는 남는다. 공개 화면/문구·byte·새 조형/GLB·운영 변경0이며 최소 문구·기존 원본과 별도 승인 조건을 유지한다.
+
+2026-10-08 D2-T/R 머리·사지 통합: [S2.T13](stories/observed-body-head.md)은 명시 head 정렬/복사 회전을 같은 capture stamp로 owned 사용자 모델의 사지와 연결하고 비교 모델은 보존했다. [실제 흐름·실패·미완성 canvas](review/observed-body-head/README.md). native 가짜 장치의 미검출/정리와 합성 긍정/누락·복수 body를 구분하며 공개 UI/byte·원본/GLB/조형·SDK 제품 정책·운영 변경0이다. 실제 사람/동일인·native 머리 긍정/실측·경추/손/체간·시범/판정·외형/디자인/SDK/노트북·D2-A/M/T/R/I/P 및 전체1~6 완료 조건은 그대로 남는다. 다음 비공개 adapter 통합과 별도 외부/참여자 검증을 분리하고 최소 문구·기존 원본/실패·별도 승인 경계를 유지한다.
+
+2026-10-08 D2-R/T 같은 입력: [S2.T12](stories/body-face-frame.md)은 한 frozen VideoFrame의 body/face 결과를 원래 stamp로 전달하고 pending 종료 뒤 native result/input을 정리한다. [실제 흐름·실패/원본](review/body-face-frame/README.md). 실제 Chrome/가짜 장치·Pose/Face SDK의 미검출/새 세대·종료와 합성 긍정을 구분했다. head 후보는 같은 사람 검증이나 사용자 rig/판정 연결이 아니며 D2-M/T/R/I·전체1~6 완료 조건은 그대로 남는다. 공개 UI/byte·원본/GLB/조형·SDK 제품 정책·운영 변경0, 최소 문구·별도 승인 경계를 유지한다.
+
+2026-10-08 D2-T 머리 표시: [S2.T11](stories/head-orientation.md)은 기존 남녀 A37의 head bone에 명시 기준의 합성 머리 방향을 실제 Chrome/WebGL로 연결했다. 원본/추가 여덟 가중치·다른 bone·position/scale·전신을 보존하고 미검출/만료/종료를 처리했다. [실제 흐름·실패·남은 조건](review/head-orientation/README.md). 조형·공개 UI/SDK 정책/판정·운영 변경0. **native face/몸의 동일 프레임·동일 사람 연결이나 실제 경추 분절 코칭/D2-T 통과가 아니다.** 이월/전체1~6 게이트·최소 문구·원본 보존·별도 승인 경계를 유지한다.
+
+2026-10-08 D2-R native 계정 통합: [S2.T9](stories/native-auth-playback.md)는 실제 Chrome/AuthProvider/API/격리 SQL과 native 가짜 카메라·SDK·남녀 두 GLB에서 시작/본인 중단 기록, 실제 refresh/logout204/서버401/pagehide/unmount의 즉시 재생 차단·pending 정리 장벽·fresh bridge 명시 재시작을 확인했다. [실제 흐름·실패·남은 조건](review/native-auth-playback/README.md). SDK의 시험 CSP 차단 시도는 관찰되었으며 제품 SDK 정책 승인/무통신 증거가 아니다. 물리 webcam/실제 사람/권한 popup·목/손/체간/판정·최종 외형/권리·승인 디자인/SDK 정책·전체 GPU/worker/장시간/다장치·운영 및 D2/전체1~6 완료 기준은 그대로 남는다. 공개 byte/후보 GLB0·동일 부위 새 조형0·최소 문구·기존 원본/실패·별도 승인을 유지한다.
+
+2026-10-08 D2-R 로그인 소유 장벽: [S2.T8](stories/owned-auth-playback.md)은 기존 AuthProvider hook에 fresh lifecycle을 전송하고, 이전 정리 완료 뒤에만 새 세션을 준비 완료로 내보낸다. 실제 API/Chrome/격리 SQL의 기록·logout204·/me401과 모의 자원의 pending/late/재진입을 분리해 확인했다. native SDK·GLB·실제 API 동시 통합은 다음이며 물리 webcam/실제 사람·권한 popup·외형/판정·승인 UI/SDK 정책/운영·D2/전체1~6은 그대로 미완료다. [흐름·원본 실패·남은 조건](review/owned-auth-playback/README.md). 공개 화면/byte·동일 부위 새 조형 변경0, 기존 원본·최소 문구·별도 승인 기준을 유지한다.
+
+2026-10-08 D2-R 세션 연결: [S2.T7](stories/owned-playback-resources.md)은 controller의 병렬 release를 입력/결과 정리 장벽과 연결했다. 실제 Chrome 가짜 카메라·SDK·남녀 GLB의 준비→지연 결과 중 pause→정리→새 세대 resume→합성 session expiry/종료를 확인했다. 실제 계정·사람/권한 popup·전체 body/hand/face/worker/GPU 수명·SDK 정책·승인 디자인/공개 코칭·외형과 D2/전체1~6 기준은 미완료다. 기존 실패/원본·같은 부위 새 조형0·최소 문구·별도 승인 경계를 유지한다. [실제 흐름·한계](review/owned-playback-resources/README.md).
+
+2026-10-08 D2-R/T 재생: [S2.T6](stories/owned-pose-playback.md)는 이미 소유된 source/pair를 실제 RAF에 연결했다. native 가짜 영상/SDK pending 중 render·만료가 계속되고 늦은 결과 폐기 후 새 프레임으로 진행하며, dispose가 입력/결과 정리를 기다린 뒤 caller SDK/camera를 해제한다. 긍정 움직임/보간은 별도 합성이다. 물리 카메라/실제 사람·최종 외형·목/손/체간·올바른 시범/판정·공개 코칭·전체 GPU/worker/장시간/노트북 품질·SDK 정책/디자인/운영 및 D2/전체1~6 완료 조건은 그대로 미완료다. [실제 흐름·원본 실패](review/owned-pose-playback/README.md).
+
+2026-10-08 D2-R/T decoded source: [S2.T5](stories/owned-video-pose.md)는 열린 caller video/stream의 새 프레임을 native VideoFrame으로 고정하고 기존 동일 결과 경계→user rig로 전달한다. 실제 Chrome 가짜 MediaStream·SDK·남녀 GLB에서 연속 전달·대기 취소·명시 재준비·전체 종료를 확인했다. 실제 물리 webcam/참여자·가림/촬영 범위/자세 정확도·목/손/체간/시범/피드백·공개 코칭·전체 GPU 수명·SDK 제품 정책은 미완료다. 권한 popup은 fake UI로 대체한 시험이며 실제 권한 검증이 아니다. 기존 원본/외형·이월 및 전체1~6 기준을 유지한다. [실제 흐름·미완료](review/owned-video-pose/README.md).
+
+2026-10-08 D2-R/T 단일 결과 전달: [S2.T4](stories/owned-pose-frame.md)에서 원본 capture stamp와 한 SDK 결과의 image/world를 사용자 rig로 연결한다. 실제 SDK의 생성 blank 미검출로 기존 관찰을 해제하고, 긍정 움직임은 별도 합성으로 시험했다. 실제 Chrome/남녀 GLB의 중복·종료 차단은 통과했으나 실제 카메라/사람 정확도·목/체간/손·시범/교정·공개 연결·전체 GPU 수명은 미완료다. 시험 전용 CSP/거부 proxy이며 승인 대기 제품 SDK 통신 정책을 적용한 것이 아니다. 원본/GLB/조형·기존 완료 기준·별도 승인 경계를 유지한다. [실제 흐름·미완료](review/owned-pose-frame/README.md).
+
+2026-10-08 D2-R 독립 아바타 자원: [S2.T3](stories/owned-avatar-pair.md)은 소유 GLB→두 독립 복제→관찰 rig의 준비/실패/종료를 연결했다. 실제 Chrome의 기존 남녀 GLB에서 종료·명시 재시도·취소된 늦은 source·정리 실패 격리를 확인했지만 카메라/추론 포트·관찰은 합성이다. renderer PBR baseline cache1은 이 자원 밖이며 전체 GPU 해제 완료가 아니다. 실제 SDK/permission·worker/renderer·미관찰/검증된 동작·공개 코칭·D2-R/I/전체1~6 필수 완료 기준은 유지한다. 조형/GLB·새 제품 화면·SDK 정책 변경0. [실제 화면·남은 조건](review/owned-avatar-pair/README.md).
+
+2026-10-08 D2-T 관찰 결과 연결: [S2.T2](stories/observed-avatar-pose.md)은 동일 pose 결과의 image/world를 원본 generation/sequence/at와 함께 사용자 리그로 연결한다. 가림·여러 사람/불일치·만료는 관찰 재사용이나 정답 보정으로 통과하지 않는다. 실제 Chrome의 기존 남녀 GLB에 합성 결과를 전달하는 시험이며 실제 SDK/단일 웹캠 정확도·몸통/목/손·시범/적색 피드백·최종 외형·D2-T와 전체1~6 통과는 아니다. 원본·이월·별도 승인 기준은 유지한다.
 
 | 구간 | 독립적으로 먼저 구현할 사용자 가치 | 선행 문제에 의존해 보류할 부분 |
 |---|---|---|

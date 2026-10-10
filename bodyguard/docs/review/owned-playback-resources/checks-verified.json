@@ -1,0 +1,99 @@
+{
+  "head": "2a00bbf781f5244c624b649d0f1e4199fb16859c",
+  "phase": "verified",
+  "results": [
+    {
+      "name": "unit",
+      "command": [
+        "node_modules/.bin/vitest",
+        "run",
+        "src/coaching/ownedPlaybackResources.test.ts",
+        "src/avatar/ownedPosePlayback.test.ts",
+        "--reporter=json",
+        "--outputFile=/private/tmp/bodyguard-playback-resources-proof.BVDC4p/unit-verified-final.json"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "frontend",
+      "command": [
+        "node_modules/.bin/vitest",
+        "run",
+        "--reporter=json",
+        "--outputFile=/private/tmp/bodyguard-playback-resources-proof.BVDC4p/frontend-verified.json"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "types",
+      "command": [
+        "node_modules/.bin/tsc",
+        "--noEmit"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "biome",
+      "command": [
+        "node_modules/.bin/biome",
+        "check",
+        "."
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "assets",
+      "command": [
+        "node",
+        "scripts/prepare-assets.mjs"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "build",
+      "command": [
+        "node_modules/.bin/vite",
+        "build"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "guard",
+      "command": [
+        "node",
+        "scripts/check-selection-production.mjs"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "probe",
+      "command": [
+        "node_modules/.bin/vite",
+        "build",
+        "--config",
+        "e2e/fixtures/ownedPlaybackResources.vite.ts"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "native",
+      "command": [
+        "node",
+        "scripts/test-pose-frame-browser.mjs",
+        "/private/tmp/bodyguard-playback-resources-proof.BVDC4p",
+        "verified",
+        "resources"
+      ],
+      "exit": 0,
+      "signal": null
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "label": "formatting-third",
+  "cwd": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-observed-body-head/bodyguard/frontend",
+  "head": "2bc3cd96670108f9db923ab81a7ca1282aec32f6",
+  "command": "./node_modules/.bin/biome",
+  "args": [
+    "check",
+    "--write",
+    "src/avatar/headOrientationRig.ts",
+    "src/avatar/observedPoseRig.ts",
+    "src/avatar/ownedAvatarPair.ts",
+    "src/avatar/observedBodyHead.test.ts",
+    "src/pose/bodyFaceVideoSource.ts",
+    "e2e/fixtures/observedBodyHeadProbe.ts",
+    "e2e/fixtures/observedBodyHead.vite.ts",
+    "scripts/test-observed-body-head-browser.mjs",
+    "scripts/check-selection-production.mjs"
+  ],
+  "exit": 0,
+  "elapsedMs": 163,
+  "sourceBefore": {
+    "src/avatar/headOrientationRig.ts": "aa7442ef121db2072e12834674b0d67627580102f0259d1733ae48199099e836",
+    "src/avatar/observedPoseRig.ts": "48035f458f069dce8659981b38c50e896e46b25e7e94bdb13208089c1364a790",
+    "src/avatar/ownedAvatarPair.ts": "afcc039b7db85f133786848ec6595750fa8f814658862765ce28ab3d7c963d04",
+    "src/avatar/observedBodyHead.test.ts": "ba25072f3e53eb578b915a2f3e00bb54c4198fd3b6b48332aad8387568e63217",
+    "src/pose/bodyFaceVideoSource.ts": "5413e493faf08498d3d5ca4d53c6e4bcc7f8b82aa4dffb2ea353f6174042e05a",
+    "e2e/fixtures/observedBodyHeadProbe.ts": "947014b783eb14f0f916afa6b2e0b691b048308b1291d84b83f44301eb44d087",
+    "scripts/test-observed-body-head-browser.mjs": "d411c404653afb3a6db740f785485cd2b101f560975c05202be675b0d2339860",
+    "scripts/check-selection-production.mjs": "4eae5a0ee63631595ff9b012d78e9510e4ff3f99347fa879b9cb753225ab92b9"
+  },
+  "sourceAfter": {
+    "src/avatar/headOrientationRig.ts": "aa7442ef121db2072e12834674b0d67627580102f0259d1733ae48199099e836",
+    "src/avatar/observedPoseRig.ts": "48035f458f069dce8659981b38c50e896e46b25e7e94bdb13208089c1364a790",
+    "src/avatar/ownedAvatarPair.ts": "afcc039b7db85f133786848ec6595750fa8f814658862765ce28ab3d7c963d04",
+    "src/avatar/observedBodyHead.test.ts": "ba25072f3e53eb578b915a2f3e00bb54c4198fd3b6b48332aad8387568e63217",
+    "src/pose/bodyFaceVideoSource.ts": "5413e493faf08498d3d5ca4d53c6e4bcc7f8b82aa4dffb2ea353f6174042e05a",
+    "e2e/fixtures/observedBodyHeadProbe.ts": "36748848f898ff6d7869b720bd7e0bd32221f2582d4e09c7bba1710a897c6af3",
+    "scripts/test-observed-body-head-browser.mjs": "d411c404653afb3a6db740f785485cd2b101f560975c05202be675b0d2339860",
+    "scripts/check-selection-production.mjs": "4eae5a0ee63631595ff9b012d78e9510e4ff3f99347fa879b9cb753225ab92b9"
+  },
+  "stdout": "Checked 9 files in 42ms. Fixed 1 file.\n",
+  "stderr": ""
+}

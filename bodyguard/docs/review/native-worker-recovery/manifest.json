@@ -1,0 +1,703 @@
+{
+  "at": "2026-10-08T18:18:21.224Z",
+  "base": "f26c7b901d4c31fdbf26c4fbebf360417c6cfab4",
+  "sources": {
+    "src/pose/workerInference.ts": "291a6a5aea6f5edf638e5243b1076ebdf57fe42c0a12e99cada169d848aafc62",
+    "src/pose/workerInference.test.ts": "feb6a9fe00349ebb4b3c26bc111c54395b8fe06e7f40b8ad904c956a6395dbd5",
+    "e2e/nativeworker.spec.ts": "b4daff22f61dd24e2e5dbece38a2cf86befa657017360cbbce728831fd24a7b7",
+    "e2e/fixtures/nativeHeadAuthProbe.ts": "13f7516c76fec78436cd40b79c9e3c12474d5436091a729436879915deba51a0",
+    "src/coaching/nativePlaybackResources.ts": "80f60dc8e6563dd0d5bce8578bab3a7608da463727900d8b8d9f63d3b5fec891"
+  },
+  "files": [
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/browser-green.receipt.json",
+      "file": "run__browser-green.receipt.json.gz",
+      "bytes": 547,
+      "sha256": "14e90252643440f25b460f7b346d828d0a9292e8f99094236ddfaa2d6800d222",
+      "gzipSha256": "504c1dfe0594745c8efbce14f421741fdb477cd3f542aa4642485cf2e46c927e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/browser-green.stderr.txt",
+      "file": "run__browser-green.stderr.txt.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzipSha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/browser-green.stdout.txt",
+      "file": "run__browser-green.stdout.txt.gz",
+      "bytes": 1137,
+      "sha256": "6bbde1a7b75d82f0d4d3577a731643363e9868ee360dfd1ddd47f5de20da2b9a",
+      "gzipSha256": "ea0f005effb593430d159e0cf64575d8e2dd8df2eec98455610204b84da21590"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/browser-red.receipt.json",
+      "file": "run__browser-red.receipt.json.gz",
+      "bytes": 545,
+      "sha256": "a5b98fddbeeada866da35a00404f502266eaab98ad6058c736816888f36b6304",
+      "gzipSha256": "9897cd48a260ee89cb7280d706196728ce6937e66004f37c2c6ae6434735ffbb"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/browser-red.stderr.txt",
+      "file": "run__browser-red.stderr.txt.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzipSha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/browser-red.stdout.txt",
+      "file": "run__browser-red.stdout.txt.gz",
+      "bytes": 1140,
+      "sha256": "f7166a63e700ad494c61c60194c4d462ba22d84945e10506b7568f8ba813c24c",
+      "gzipSha256": "bf64554b0d5169a60879610f983f5df8eac41039131d5c44374c45a12b85f035"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/build-final.receipt.json",
+      "file": "run__build-final.receipt.json.gz",
+      "bytes": 772,
+      "sha256": "1c93d280ef59bf1a3b835eeea17ca954b7ee9d7551d708df9b882986c27d5104",
+      "gzipSha256": "4e7429e55a208e9c78196f45035e0b7193184b651df68cc7d97847df4f43c9c1"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/build-final.stderr.txt",
+      "file": "run__build-final.stderr.txt.gz",
+      "bytes": 64,
+      "sha256": "744002d6d69a79eb7f04b4633e0768598505352eae83334f23e64b7f708dfd8e",
+      "gzipSha256": "9653fd644562110e7ce8e9a591754df976ae10b4a6bfb772a36e6d2c1bfc749e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/build-final.stdout.txt",
+      "file": "run__build-final.stdout.txt.gz",
+      "bytes": 568,
+      "sha256": "c2395ee222612aaca8b9226e18610c17f3606f83db45dfaa48e4029b9ed30189",
+      "gzipSha256": "5655587f2d9fa66af4bbca8d50ef2456e8ef35dca31c2684adf8fa098f254205"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/db-create.receipt.json",
+      "file": "run__db-create.receipt.json.gz",
+      "bytes": 1193,
+      "sha256": "211844c95f11305bbb5696e55c0306c76593de515abf534e14386561b78d6639",
+      "gzipSha256": "a742e3a7d58dbc0068d0e47cdad715173b1c65cad8d290c07006be2452db9bb0"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/db-create.stderr.txt",
+      "file": "run__db-create.stderr.txt.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzipSha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/db-create.stdout.txt",
+      "file": "run__db-create.stdout.txt.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzipSha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/db-identity.receipt.json",
+      "file": "run__db-identity.receipt.json.gz",
+      "bytes": 1315,
+      "sha256": "1663c5b540f4e2277b1648630524df658788bdbacca1b68fad5f946b58c32484",
+      "gzipSha256": "05af765f897527461257999981824d30efb6f07696b8d336543ccc8ee8e1f966"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/db-identity.stderr.txt",
+      "file": "run__db-identity.stderr.txt.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzipSha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/db-identity.stdout.txt",
+      "file": "run__db-identity.stdout.txt.gz",
+      "bytes": 38,
+      "sha256": "77383846342d28983573447f26db2781f38f707374fcc73eb665c2e8b3c6bdb2",
+      "gzipSha256": "8230e6d9b5840547e2ec8ae87f08f1bcde71b3208bb0e60d5ab63c0ec68f9b65"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/db-init.receipt.json",
+      "file": "run__db-init.receipt.json.gz",
+      "bytes": 1237,
+      "sha256": "04a402b813666e2235d74c97d2373b650b533b156196ce67eb57da9b0b8fa4be",
+      "gzipSha256": "6680ae65c6578f7b62b798d7eca5a29cf424f2727612d1521db79be70aab4907"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/db-init.stderr.txt",
+      "file": "run__db-init.stderr.txt.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzipSha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/db-init.stdout.txt",
+      "file": "run__db-init.stdout.txt.gz",
+      "bytes": 885,
+      "sha256": "fab1c3f5ff6a5ec875f00b887592eb2fe64fe8334d607c314871268b44fb16f3",
+      "gzipSha256": "0332ed8faf6985147dc40970997792c57b195d53972a921f780666be56be5b82"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/db-start.receipt.json",
+      "file": "run__db-start.receipt.json.gz",
+      "bytes": 1324,
+      "sha256": "ba08fa35831fe53299ce92eb4f92049f74cb00c21cc400d84141b2fe13075c2d",
+      "gzipSha256": "45718d1c897d17824f4e91349f0a6a6b6fdee446bc370001c0b14ae83bd35af3"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/db-start.stderr.txt",
+      "file": "run__db-start.stderr.txt.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzipSha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/db-start.stdout.txt",
+      "file": "run__db-start.stdout.txt.gz",
+      "bytes": 52,
+      "sha256": "66afd0411ccc09366e99fdd99b85f21899c8d2d064f5835126859618802153ad",
+      "gzipSha256": "f6be72271e138bca4ca451db72b495bb3b5f03e146a0d76ffc40d666aabf8516"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/db-stop-final.receipt.json",
+      "file": "run__db-stop-final.receipt.json.gz",
+      "bytes": 1186,
+      "sha256": "a33266b04bdaf25ee143dd2dedb71c738887d1fa688a4eb4710625fa84e3cb87",
+      "gzipSha256": "437a4d1d26d2c6cf064574cef37a739611e935d7427594063d00220e4c4e525b"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/db-stop-final.stderr.txt",
+      "file": "run__db-stop-final.stderr.txt.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzipSha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/db-stop-final.stdout.txt",
+      "file": "run__db-stop-final.stdout.txt.gz",
+      "bytes": 56,
+      "sha256": "ca19178a35ab4153b75b494963b66ce8243e1b94c173107c87b44d09db23652d",
+      "gzipSha256": "ec0a1619956c756fee2c688e6f9e3dbabe01491cad916dff5db450e4803769ea"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/focused-deadline-green.json",
+      "file": "run__focused-deadline-green.json.gz",
+      "bytes": 8271,
+      "sha256": "6b0da90706a6c74daf4176ef6d027c340883770d01be7c618ebefc38d0472674",
+      "gzipSha256": "9ee7ec961000493fdd4b6b122e54f3da6f60dffa90dbac74d26ea0c63a105931"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/focused-deadline-green.receipt.json",
+      "file": "run__focused-deadline-green.receipt.json.gz",
+      "bytes": 661,
+      "sha256": "4cbd6e28023e259b0007ca8e013b17a6b03ad95a623037638a1d33ac0af912cc",
+      "gzipSha256": "44fc2d6b61ed764d9eace13791093b811ba5f9f6607ef492790df03a094fc7c5"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/focused-deadline-green.stderr.txt",
+      "file": "run__focused-deadline-green.stderr.txt.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzipSha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/focused-deadline-green.stdout.txt",
+      "file": "run__focused-deadline-green.stdout.txt.gz",
+      "bytes": 97,
+      "sha256": "8f700b3a6b8947aa8971f900bb4ea3b629f035edd8aea65ba1a9be04fe22b86a",
+      "gzipSha256": "5aa11f067fcc06329db26e0c1292609fb73e87fb9abe6f2d51fbaa9774351c04"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/focused-deadline-red.json",
+      "file": "run__focused-deadline-red.json.gz",
+      "bytes": 14749,
+      "sha256": "6b74c8b353fb194969f02a613360839074f2126c578a29bf8259d395983ca7f8",
+      "gzipSha256": "e1fcd02754a589f57e19f843b89a7d41650314821eea6e0aacd7bb53120ad99e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/focused-deadline-red.receipt.json",
+      "file": "run__focused-deadline-red.receipt.json.gz",
+      "bytes": 659,
+      "sha256": "9c53e08929dc78e95851f9640425baae6d8fbfe3edea61136c9b13d36ab5edf8",
+      "gzipSha256": "85b5fc34b8e6aab4d5eee628bada186f22ba67f73a7c71371644a87244bb94b8"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/focused-deadline-red.stderr.txt",
+      "file": "run__focused-deadline-red.stderr.txt.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzipSha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/focused-deadline-red.stdout.txt",
+      "file": "run__focused-deadline-red.stdout.txt.gz",
+      "bytes": 95,
+      "sha256": "bebbb21f23b4f076067980f2adc6bef1efb90524b063a70c9c7b566a72651836",
+      "gzipSha256": "d85b75555a4966be14a77c41233c0f11173abc6fa08b085f26afcb31ae896292"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/focused-green.json",
+      "file": "run__focused-green.json.gz",
+      "bytes": 7592,
+      "sha256": "70ea9edcaccbb2ada9f5618695ab92e5f31a139936a0b20dbd10891241a7dbb2",
+      "gzipSha256": "fc158ebf7f7f4fa039ee858ca6c80ffd9e6e805f71011df76a4c5f3f22cd010f"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/focused-green.receipt.json",
+      "file": "run__focused-green.receipt.json.gz",
+      "bytes": 652,
+      "sha256": "f8a4a52c737cef9d051410afadfc1250760068d7526e61eaa07a2c9547c8aaf7",
+      "gzipSha256": "45dc22075f5ee78e62d0b3e9fdb27b585c9a70ff6524873bbfd47bd935864a12"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/focused-green.stderr.txt",
+      "file": "run__focused-green.stderr.txt.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzipSha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/focused-green.stdout.txt",
+      "file": "run__focused-green.stdout.txt.gz",
+      "bytes": 88,
+      "sha256": "f3f4a02aa0bc9a5447fe0243d4ba635a9e6c824932db5f81d356d537a5403730",
+      "gzipSha256": "4c54a07598291126a38e96cdfe250fe4c958b38c2721ba95046aeb75d0cc77b2"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/focused-red.json",
+      "file": "run__focused-red.json.gz",
+      "bytes": 24444,
+      "sha256": "105fec509d14edaeb39870265614504a17f498ae36fea4e5bf47a02d4bb184fb",
+      "gzipSha256": "de640af8155fb4109733a3670dd5133d028a6e5a235b957f37e61c26b69582f1"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/focused-red.receipt.json",
+      "file": "run__focused-red.receipt.json.gz",
+      "bytes": 650,
+      "sha256": "60e43e0bec0cc254b8f5a520eae49d9b30161b7ec4e80b8377a0ea1db61ed499",
+      "gzipSha256": "a0fcd22a22bff4a6fbdb856eb5b59c5d36444a8b02798934e6a3df61aca6b793"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/focused-red.stderr.txt",
+      "file": "run__focused-red.stderr.txt.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzipSha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/focused-red.stdout.txt",
+      "file": "run__focused-red.stdout.txt.gz",
+      "bytes": 86,
+      "sha256": "42c400686a2010b8600e0edf7a28648d6ca82398a79a27f1e9adbead0349321e",
+      "gzipSha256": "baf8c6cf5cd8ba493a07a528e79f5cae90889be00a5d9f456de1eac711856cbb"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/guard-final.receipt.json",
+      "file": "run__guard-final.receipt.json.gz",
+      "bytes": 513,
+      "sha256": "7ff3e692d983739e274cb8e097727d362a63f8f5833996e2296dd263a5b8bc4d",
+      "gzipSha256": "c08edc7014397a01f84ff76ca958fff027db63400e9b861ac6e1317447b48466"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/guard-final.stderr.txt",
+      "file": "run__guard-final.stderr.txt.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzipSha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/guard-final.stdout.txt",
+      "file": "run__guard-final.stdout.txt.gz",
+      "bytes": 1140,
+      "sha256": "536b676e3bef45465f1b9e967df72b8300fe14bb4925d59b0a07f5ceeb264ddc",
+      "gzipSha256": "f42e30174aa0934e730136eb9689c86d26a9569199a4246784461b4b2b91ae9a"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/lint-final.receipt.json",
+      "file": "run__lint-final.receipt.json.gz",
+      "bytes": 480,
+      "sha256": "a4efd1af479ea0e10b5eb0ce55ad019eefb8582ec1d50d9bf65f1f16d6be9a76",
+      "gzipSha256": "b33f7f1d940ccf7255bc3a23947622bef167e01fde94ce85dd93ef1525c7f5f6"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/lint-final.stderr.txt",
+      "file": "run__lint-final.stderr.txt.gz",
+      "bytes": 16,
+      "sha256": "bc2f32db81a9c840e767407aa31deff3b6d3df5e5388f721e9489867b535d47d",
+      "gzipSha256": "68222f722d00e3444a547d3dd57d950933e64b39c5a555b92e1820b6070bd6ef"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/lint-final.stdout.txt",
+      "file": "run__lint-final.stdout.txt.gz",
+      "bytes": 46,
+      "sha256": "e29142ea1a9f83a17fee783a0728e7a806a095fe91f67b82b6f28038af273db6",
+      "gzipSha256": "613502a462ff652e983c82596ff3760657c7f54ea9eb3ed81300d85fd28e1f31"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/lint-first.receipt.json",
+      "file": "run__lint-first.receipt.json.gz",
+      "bytes": 480,
+      "sha256": "96510c7e276d2fd7deaf2323256cf1ef41584d9e1bb328d348ced98f0cef1713",
+      "gzipSha256": "e456957fb802b16d896d5eb85a848e9e1d115a27501466e7f2fea725d8d2a719"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/lint-first.stderr.txt",
+      "file": "run__lint-first.stderr.txt.gz",
+      "bytes": 16,
+      "sha256": "bc2f32db81a9c840e767407aa31deff3b6d3df5e5388f721e9489867b535d47d",
+      "gzipSha256": "68222f722d00e3444a547d3dd57d950933e64b39c5a555b92e1820b6070bd6ef"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/lint-first.stdout.txt",
+      "file": "run__lint-first.stdout.txt.gz",
+      "bytes": 46,
+      "sha256": "1addcc1332096865ac15d97d07a93482dac7ffadbc361c26293d95853aade06b",
+      "gzipSha256": "596d090d761775b6a0152d72a6575004f2135a1ab2cac043ce9cbc19dc5c4ee0"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/owner-final.receipt.json",
+      "file": "run__owner-final.receipt.json.gz",
+      "bytes": 1313,
+      "sha256": "f2082e8212b007416efc2c0f3cbd0b990099e23a11c8ec1ca290b060d84fc29d",
+      "gzipSha256": "a6d7718013cb34ac8bb485b5c7c8509b2dc8eb17fa7a18aacbcd4259e50532e4"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/owner-final.stderr.txt",
+      "file": "run__owner-final.stderr.txt.gz",
+      "bytes": 992,
+      "sha256": "0b063acd0b23acb6736912c67a1fa4be4ae8ca686faf8459d3056e16fadb23d2",
+      "gzipSha256": "92d1d40993b3082c21f477fd69d503056a018b9dd61640b6c75b5a035d3fca0c"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/owner-final.stdout.txt",
+      "file": "run__owner-final.stdout.txt.gz",
+      "bytes": 1234,
+      "sha256": "073538a7de13e2e716f1897ae976d78984c154f14f1896418f8ff106386d8c21",
+      "gzipSha256": "eec26db756a014cb4cdde4c6a0802505c25d2abe5ff50a46245edd0fdcf8174b"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/owner-first.receipt.json",
+      "file": "run__owner-first.receipt.json.gz",
+      "bytes": 1313,
+      "sha256": "10fa8c9e5b9585033150166351d955653287e47e7a942367daa6b2e6f4df1563",
+      "gzipSha256": "ab29ee3a75ec16707143cfd7233f5b7bf3db95a5464eec98297c502693294431"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/owner-first.stderr.txt",
+      "file": "run__owner-first.stderr.txt.gz",
+      "bytes": 1648,
+      "sha256": "03082f029649a04954575ce5e483ac225de697c1a1b0da7e6e4b77a53722cdcd",
+      "gzipSha256": "9d2242d71f3c0e94e5382d51874aabeab641ff3a59c8585a6b62b1f2f8cac2eb"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/owner-first.stdout.txt",
+      "file": "run__owner-first.stdout.txt.gz",
+      "bytes": 4597,
+      "sha256": "382a5dc02514c46217e82e69b9d424f2cc81db61304e38cd45cbda50f548f9b9",
+      "gzipSha256": "de72d3a7638ab716d0b54c82d6d1de32776522d0a17dbc34a1b7881d93d62516"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/owner.mjs",
+      "file": "run__owner.mjs.gz",
+      "bytes": 3992,
+      "sha256": "c2031235c1dcf6a5185e7ba33bd2e38a32761a66424e32b698f05e4ee3f238de",
+      "gzipSha256": "666f589f95acbd66e4491ba6ae5411cb9586d0e6ca60f80615d187adee1599c1"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/privatebuild-green.receipt.json",
+      "file": "run__privatebuild-green.receipt.json.gz",
+      "bytes": 589,
+      "sha256": "bfaaf79b01962f9a7a6f6046a8972ca10f155168ad4a548f13a33941741cb249",
+      "gzipSha256": "1172ad99cd91eedfb0f0d718f140441567a1a4cdf3d4f3f741284b6e936adc3e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/privatebuild-green.stderr.txt",
+      "file": "run__privatebuild-green.stderr.txt.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzipSha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/privatebuild-green.stdout.txt",
+      "file": "run__privatebuild-green.stdout.txt.gz",
+      "bytes": 433,
+      "sha256": "dc0145a4ea389745feba4805379d159886037e21c6de5469dd083c302b8c99ca",
+      "gzipSha256": "2241dd1020ba7e1f9eebdd608d520ff16094113e8144c707748472369d72299a"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/reproduce.mjs",
+      "file": "run__reproduce.mjs.gz",
+      "bytes": 4551,
+      "sha256": "18e95aa3294f4cf28ab1aa0ba388319a73366d4312295aef71e47d7f41633748",
+      "gzipSha256": "d176387fd6fdc33d3d4e8e9cb1fd30b0e9d513136e72be663d4348f27089b26d"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/reproduction-green.json",
+      "file": "run__reproduction-green.json.gz",
+      "bytes": 1532,
+      "sha256": "c9fd27ea4a9df805da0000ff42480dd8c7b97a5e84115162c17b17e5ea0016b2",
+      "gzipSha256": "1e7293e251aeb06231ddfc7fcd29d33e76e5046522298ea38049d906d6ea8c37"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/reproduction-red.json",
+      "file": "run__reproduction-red.json.gz",
+      "bytes": 1535,
+      "sha256": "88537cc6c9beffedafbbec7746a71ff6ff5a6c4f59ac7bfa3f593bd202bf1744",
+      "gzipSha256": "85e0a3de57cd9e2af495866bd45aff58d08099ddc57b3118283c6253fa71047a"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/run.mjs",
+      "file": "run__run.mjs.gz",
+      "bytes": 2214,
+      "sha256": "78833c1486ef094595fe2a480d3566f86a8d340596d1d767935d1f1982251f2f",
+      "gzipSha256": "a98518b1e54ea42204abd9bda8c53f3f75ed4ced4eae86173571f4e27b703d9c"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/types-final.receipt.json",
+      "file": "run__types-final.receipt.json.gz",
+      "bytes": 506,
+      "sha256": "8aec9d32fb0764c6d376eb5b1ca534dad486e2c991b7881788ab8ee093cdd5e2",
+      "gzipSha256": "c623e2af22be565b937052e86b980b5b4ff4b26755c32e65fa231e7d4a563193"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/types-final.stderr.txt",
+      "file": "run__types-final.stderr.txt.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzipSha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/types-final.stdout.txt",
+      "file": "run__types-final.stdout.txt.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzipSha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/types-first.receipt.json",
+      "file": "run__types-first.receipt.json.gz",
+      "bytes": 506,
+      "sha256": "b4f2464432e30e48a30672821adf4a3b3b5e30fa163508f91890db3ffbb36c47",
+      "gzipSha256": "900370130101d566e236ec473b4cc72f468a7f428e0b2b5d79625fbf3180b286"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/types-first.stderr.txt",
+      "file": "run__types-first.stderr.txt.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzipSha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/types-first.stdout.txt",
+      "file": "run__types-first.stdout.txt.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzipSha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/units-final.json",
+      "file": "run__units-final.json.gz",
+      "bytes": 459771,
+      "sha256": "e6a97fa7903e8a193cedb97e3c7082f9de6c57db2dcd938ff65e1d2d2537df66",
+      "gzipSha256": "689bb902b1cd7ec363b0cdde9fdf0fc42ec61c369dea0f9335fa7fde3e616600"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/units-final.receipt.json",
+      "file": "run__units-final.receipt.json.gz",
+      "bytes": 639,
+      "sha256": "d8a0de90547a74f18134e987fc32fbacee79b57bd7af42b86bd371123e42a90c",
+      "gzipSha256": "4d63aa0fb38080aa30f4a82309c02f0ab8aaf8ef81087fdfa6c86da8f4a7d984"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/units-final.stderr.txt",
+      "file": "run__units-final.stderr.txt.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzipSha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/units-final.stdout.txt",
+      "file": "run__units-final.stdout.txt.gz",
+      "bytes": 86,
+      "sha256": "e9414a7ae342783b26a7f1c26ff25f351747269e30eee282462176e83fae6b29",
+      "gzipSha256": "4c6df9bcc40995c1835c0cbc45281136f7f5413e01ff2d02e2a1076e76f6b038"
+    },
+    {
+      "source": "/private/tmp/bodyguard-worker-recovery.VIP1ge/vite.config.mjs",
+      "file": "run__vite.config.mjs.gz",
+      "bytes": 489,
+      "sha256": "1c912a7d4377f34d9774907edf7ab337f53a95fd319f9387cb5df6b0d770bafb",
+      "gzipSha256": "694ab2cd2fdb6f2385f65b53dd07424f555adbaf77d4d20b04ad2d1a9aeba2c3"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181126661435Z/.last-run.json",
+      "file": "nativeworker-20261008T181126661435Z__.last-run.json.gz",
+      "bytes": 243,
+      "sha256": "cc0e41007768b5e65a9e26583f349226bc0adc985ff4f1f120d67d5c199a8e60",
+      "gzipSha256": "22cd1bcca61f53b863ee463269e1ebf7ffe7e96388cfa73d7ee709fc80ced1c4"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181126661435Z/nativeworker-female-silent-1413b-g→bounded-failure→no-record/error-context.md",
+      "file": "nativeworker-20261008T181126661435Z__nativeworker-female-silent-1413b-g→bounded-failure→no-record__error-context.md.gz",
+      "bytes": 2818,
+      "sha256": "7cc37b596e2006ec69ca6110df49e08d774be56191a96e5211842bf74e5748ba",
+      "gzipSha256": "d1edd5f00c6feb18627dbf71e977f141d284d6d502c67fed0aef9e789797465a"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181126661435Z/nativeworker-female-silent-43541-errupted-only→camera-closed/error-context.md",
+      "file": "nativeworker-20261008T181126661435Z__nativeworker-female-silent-43541-errupted-only→camera-closed__error-context.md.gz",
+      "bytes": 2821,
+      "sha256": "04739637f1c2bde978af5bec823a1e781df3ff69c2f5a09dbbf06f8dd1150cf4",
+      "gzipSha256": "fe8b617839df189f962eb4fb06a1344b6b1046aa8fd468dc035cfa2541f359e8"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181126661435Z/nativeworker-female-worker-20e7c--refresh→explicit-new-owner/worker-owner-summary.json",
+      "file": "nativeworker-20261008T181126661435Z__nativeworker-female-worker-20e7c--refresh→explicit-new-owner__worker-owner-summary.json.gz",
+      "bytes": 5092,
+      "sha256": "f665f57b55ffd912457f0ef64fceb7d93ccb6367dad47bdd3c5c85a3db84fad9",
+      "gzipSha256": "92845161f8044eed407bed7f9e4a26c27945ba0287bd0a8bc43555e6bde0b3dc"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181126661435Z/nativeworker-female-worker-a8d66-stop→own-interrupted-record/worker-owner-summary.json",
+      "file": "nativeworker-20261008T181126661435Z__nativeworker-female-worker-a8d66-stop→own-interrupted-record__worker-owner-summary.json.gz",
+      "bytes": 4712,
+      "sha256": "49c7502cca615b6c809203ed2a6c3b2d8fde325b627dd40e9b5eec8dd3548246",
+      "gzipSha256": "9f94c51b4099ebca48eb054b14f6cbbe55e2e1a2d2c703c1acaa4d30dda53503"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181126661435Z/nativeworker-female-worker-cdfc0-logout→no-stale-resume-save/worker-owner-summary.json",
+      "file": "nativeworker-20261008T181126661435Z__nativeworker-female-worker-cdfc0-logout→no-stale-resume-save__worker-owner-summary.json.gz",
+      "bytes": 4696,
+      "sha256": "a09cb7fd909d6c10dd95f6f42d769d9cdcddc1658e4b16df0c4167af5a4241fa",
+      "gzipSha256": "fb038fa33515930f7f27bf00dcb748548a2e95c6dcd9b3e877b3666ff2f062fd"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181126661435Z/nativeworker-male-silent-w-1f4e3-errupted-only→camera-closed/error-context.md",
+      "file": "nativeworker-20261008T181126661435Z__nativeworker-male-silent-w-1f4e3-errupted-only→camera-closed__error-context.md.gz",
+      "bytes": 2819,
+      "sha256": "b76c0856e036dda2941e756b805f63f1cbb1eb25e94c4801625cfad04db862d2",
+      "gzipSha256": "3530ec57fa5d80ccb9563643a478f9a88d3a0212ea0dc21084d39428ddab76e6"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181126661435Z/nativeworker-male-silent-w-4ca0e-g→bounded-failure→no-record/error-context.md",
+      "file": "nativeworker-20261008T181126661435Z__nativeworker-male-silent-w-4ca0e-g→bounded-failure→no-record__error-context.md.gz",
+      "bytes": 2816,
+      "sha256": "d63ff16e10fb1322c6c9137eb06b08fca655103acf4192e255a9419fc6bf3aa9",
+      "gzipSha256": "7b6ec2bbec07f48724a36e45c2253c40e343b3da92225f958ec7a6024eb1df40"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181126661435Z/nativeworker-male-worker-p-0857a-logout→no-stale-resume-save/worker-owner-summary.json",
+      "file": "nativeworker-20261008T181126661435Z__nativeworker-male-worker-p-0857a-logout→no-stale-resume-save__worker-owner-summary.json.gz",
+      "bytes": 4696,
+      "sha256": "aa60388e05543e352b9561ea428fe72239bc83fe67d78a873ac0d465cd7ef65a",
+      "gzipSha256": "8d3780df74be33c1f12ef77116edebbc7123e45e786a4140e78b21a6f022ecbf"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181126661435Z/nativeworker-male-worker-r-b5676--refresh→explicit-new-owner/worker-owner-summary.json",
+      "file": "nativeworker-20261008T181126661435Z__nativeworker-male-worker-r-b5676--refresh→explicit-new-owner__worker-owner-summary.json.gz",
+      "bytes": 5091,
+      "sha256": "6ca3830a60d99a19a1424645a3ddac75bb9580841a74a551bdaef78507d4ab92",
+      "gzipSha256": "e11aaa0a9ea1b734012c1515b93f0d853a05cbc7f5fbefbca634b817cc91e1b7"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181126661435Z/nativeworker-male-worker→t-2cd02-stop→own-interrupted-record/worker-owner-summary.json",
+      "file": "nativeworker-20261008T181126661435Z__nativeworker-male-worker→t-2cd02-stop→own-interrupted-record__worker-owner-summary.json.gz",
+      "bytes": 4706,
+      "sha256": "ffb0d070d2466ba9e06e0e3e598dd660c5237fa0af0ce57d3f1414eb1d9dd9cf",
+      "gzipSha256": "fd2927b2282b35f80d19a55bccbd0c5910a2b495e67912d15cddbf484363413b"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181126661435Z/report.json",
+      "file": "nativeworker-20261008T181126661435Z__report.json.gz",
+      "bytes": 24184,
+      "sha256": "8c822172d6f0880c193834c93ae022621a114e9bd313086554f8d277f9889272",
+      "gzipSha256": "f6d8128799464112cda64f2b824cac0b1b157b8be767af1cf9d487697b43960b"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181415549404Z/.last-run.json",
+      "file": "nativeworker-20261008T181415549404Z__.last-run.json.gz",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "gzipSha256": "1192e21d9c0e3eb952afd8d3e74333b99b8bf5aea64138d3262e079129e57154"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181415549404Z/nativeworker-female-silent-1413b-g→bounded-failure→no-record/worker-owner-summary.json",
+      "file": "nativeworker-20261008T181415549404Z__nativeworker-female-silent-1413b-g→bounded-failure→no-record__worker-owner-summary.json.gz",
+      "bytes": 4926,
+      "sha256": "0eb436f42f115572af3bf9b632ab0b9b46a74f549a4c5ce21f0ff34b3b20e5d7",
+      "gzipSha256": "ce49aad4f74718ad9b959bba41e2905257f945a1e708b7f86b02bbac444668b5"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181415549404Z/nativeworker-female-silent-43541-errupted-only→camera-closed/worker-owner-summary.json",
+      "file": "nativeworker-20261008T181415549404Z__nativeworker-female-silent-43541-errupted-only→camera-closed__worker-owner-summary.json.gz",
+      "bytes": 5087,
+      "sha256": "208903401b0a4b1d4d7e71f6be674b0b7c275a3002b31487ebdd9bda1377536a",
+      "gzipSha256": "6cfabc7f7d03e628b23ce983e6dd1ac7a918de1eadc0481fc5a12b0c01aa87ba"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181415549404Z/nativeworker-female-worker-20e7c--refresh→explicit-new-owner/worker-owner-summary.json",
+      "file": "nativeworker-20261008T181415549404Z__nativeworker-female-worker-20e7c--refresh→explicit-new-owner__worker-owner-summary.json.gz",
+      "bytes": 5116,
+      "sha256": "f53be48fb5f9396230981c91b23fab65f8b42712469e708bd7e8d65843ca4ee7",
+      "gzipSha256": "d0a45f2636a11731e23b32bf23379dad05af123dc0f27ac897de3a2a36bb1536"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181415549404Z/nativeworker-female-worker-a8d66-stop→own-interrupted-record/worker-owner-summary.json",
+      "file": "nativeworker-20261008T181415549404Z__nativeworker-female-worker-a8d66-stop→own-interrupted-record__worker-owner-summary.json.gz",
+      "bytes": 4731,
+      "sha256": "e72ed5039b6981a1fc7d7dffc75aaf815ba15693fef3106ea2319381efaea912",
+      "gzipSha256": "7919d8025ab7794ac5cebe4d7eebe1815a9709b3a92243fb48b40a59a7ea7b15"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181415549404Z/nativeworker-female-worker-cdfc0-logout→no-stale-resume-save/worker-owner-summary.json",
+      "file": "nativeworker-20261008T181415549404Z__nativeworker-female-worker-cdfc0-logout→no-stale-resume-save__worker-owner-summary.json.gz",
+      "bytes": 4721,
+      "sha256": "9382c0b27b14ecc6060cae4ea37bbde8872861671248c83ba3fbbf7e187bad9b",
+      "gzipSha256": "0f1375ce488815e9620fb0e6e00e0eb9f3d0e08d444c755cafee0db0a3d65d46"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181415549404Z/nativeworker-male-silent-w-1f4e3-errupted-only→camera-closed/worker-owner-summary.json",
+      "file": "nativeworker-20261008T181415549404Z__nativeworker-male-silent-w-1f4e3-errupted-only→camera-closed__worker-owner-summary.json.gz",
+      "bytes": 5091,
+      "sha256": "63130c73464b423d05f31178b3dcd2fcdec33e1c8783d0b90791a0ad24e426f6",
+      "gzipSha256": "7818bfa3431540ad78b8e80f1e851cdd5fd67ca45b7bb03577eda963615db22b"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181415549404Z/nativeworker-male-silent-w-4ca0e-g→bounded-failure→no-record/worker-owner-summary.json",
+      "file": "nativeworker-20261008T181415549404Z__nativeworker-male-silent-w-4ca0e-g→bounded-failure→no-record__worker-owner-summary.json.gz",
+      "bytes": 4926,
+      "sha256": "c06284ea53dabefcc0415882fb96da702beb469a661aff32e0616eaf027ad5f0",
+      "gzipSha256": "477e9a7f792969737e4b2e8cc3b33ec7932352bf7ff9eef8c08e296bbd2a885b"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181415549404Z/nativeworker-male-worker-p-0857a-logout→no-stale-resume-save/worker-owner-summary.json",
+      "file": "nativeworker-20261008T181415549404Z__nativeworker-male-worker-p-0857a-logout→no-stale-resume-save__worker-owner-summary.json.gz",
+      "bytes": 4721,
+      "sha256": "ace8cb06f8550ef467d0738d99e51eb58de68395673ca7c73cbcb68cebf8d176",
+      "gzipSha256": "68ddd2e36504e84e9492e0d8a4cc47c29d325733d59fcd50d5f0ffa4dfb695be"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181415549404Z/nativeworker-male-worker-r-b5676--refresh→explicit-new-owner/worker-owner-summary.json",
+      "file": "nativeworker-20261008T181415549404Z__nativeworker-male-worker-r-b5676--refresh→explicit-new-owner__worker-owner-summary.json.gz",
+      "bytes": 5116,
+      "sha256": "71c277071a8f9c8d9ab883292ad6e6a663371bab0bce871e9bd848c4576d2449",
+      "gzipSha256": "c34e2b026b2cc155b94df94c1210681eace813d4993c4c1476184607303fa43d"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181415549404Z/nativeworker-male-worker→t-2cd02-stop→own-interrupted-record/worker-owner-summary.json",
+      "file": "nativeworker-20261008T181415549404Z__nativeworker-male-worker→t-2cd02-stop→own-interrupted-record__worker-owner-summary.json.gz",
+      "bytes": 4731,
+      "sha256": "f4185420c106ea7cf95c7ac99066e805267f158f8111e293709cb839cd7bf323",
+      "gzipSha256": "05297ba370d3e929655f17cb7276b4b5abe85d5bd8a6332f452d64998be0d174"
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-worker-recovery/bodyguard/frontend/test-results/nativeworker-20261008T181415549404Z/report.json",
+      "file": "nativeworker-20261008T181415549404Z__report.json.gz",
+      "bytes": 14505,
+      "sha256": "23a2d6ac4d7b5bebb2025c258f4f19cd0f686cb40e53fe87555101da4e884edf",
+      "gzipSha256": "33d058641cff91bfd971b2b54ec1e1b894769941db88d7f1e483ba2c7e122f74"
+    }
+  ],
+  "publicBytesEqual": true,
+  "actualPeople": 0,
+  "physicalCameras": 0,
+  "productionChanges": false
+}

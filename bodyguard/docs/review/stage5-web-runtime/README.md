@@ -1,3 +1,21 @@
+## 2026-10-11 현재 웹 패키지·공개 흐름 통합
+
+Draft PR29의 이전 HEAD b623584에 main32e18a01을 로컬 통합했다. 기존 소개·로그인·가입·복구·안내와 개인 화면 코드는 main 그대로다. 새 화면이나 코칭을 추가하지 않고 오래된 패키지 계약만 현재 웹에 맞췄다. [실행 경계·SHA·보존·리뷰](current-main-20261011/summary.json).
+
+기존 Router가 허용하는 대소문자·마지막 슬래시 주소10개가 패키지 SPA 규칙에서 거부되는 source RED를 확인했다. 동일 경로의 case-insensitive/terminal slash만 보완하고 API·개발·미등록·추가 하위 경로의 제외를 유지했다. Python 정규식과 Node 시험 서버는 실제 NGINX/PCRE·URI 정규화 증거가 아니다.
+
+실제 production Vite 출력에서7파일을 선별했고 JS/CSS는 이전 main 출력과 byte 동일하다. 설치 Chrome155에서1440/1024 폭의 소개→시작→게스트 로그인→복구·가입·안내, 혼합 대소문자 주소 직접 진입/새로고침, 비밀번호 표시/숨기기, 재설정 토큰 없음→재요청을 확인했다. [실제 browser 원본](current-main-20261011/public-flow-final.json)·[재실행 하네스](current-main-20261011/public-flow-browser.mjs). API는 명시적인 guest/Google-unavailable fixture이며 POST·실제 계정/SMTP/Google 인증 성공을 만들지 않았다. 카메라·storage write·page error·외부 요청0, 소유 browser/server/sink 종료를 확인했다. 고지3개도 실제 HTTP/Chrome의 MIME·200·SHA 일치를 재확인했다.
+
+첫 브라우저 하네스는 기존 가입 제목을 잘못 기대해 실패했다. 제품은 바꾸지 않고 기대값만 바로잡아 별도 결과에 재실행했다. [실패 원본](current-main-20261011/public-flow-failure.json). 첫 NFC-root 빌드의 metadata 누락 실패는 보존했고 canonical-root의 별도 wrapper로 같은 원래 Vite config/권리 checker를 실행해 통과했다. checker를 약화하지 않았으며 metadata 실패의 일반 원인이 해결됐다는 주장도 아니다. 최초 route·format 실패와 모든 raw 로그는 /private/tmp/bodyguard-runtime-current-main.SntevM에 보존했다.
+
+공개 source/API/app·lock/migration/AGENTS는 main과 동일하고 이전 review의 immutable30파일은 byte 보존했다. 현재1600 unit/DOM·72 filesystem/source·53 deploy source/native parser/ASGI·TS·범위 Biome/Ruff/format·실제 production guard/원문 고지를 확인했다. API/SQL 전체·pnpm assets·Blender/GLB/아바타/물리 참여자 시험은 실행하지 않았다. 작성자 code-review는 최신 제외 목록 보존·before-output 거부·기존 경로/보안/자원 경계를 점검했으며 독립 전문가 리뷰가 아니다.
+
+Docker 소켓과 native nginx는 없다. 실제 이미지/NGINX/TLS·패키지 인증/기록·quota·재기동/DB 장애 복구는 미실행이다. **Draft29 병합 조건·S5.2/5단계·1~6단계 완료는 미충족**이다. 기존 SDK/디자인/아바타 보류·실측/법무/운영 승인 경계도 유지한다. 아래 이전 기록은 그대로 보존한다.
+
+추가 보존 확인: 전체 merge index의 diff-check는 이미 main에 커밋된 기존 아바타 evidence5파일의 EOF blank 경고로 실패했다. 이전 Draft HEAD→main만 대조해 같은5경고를 재현했으며 이번 편집이 아니다. immutable 기존 증거는 고치지 않았다. 이번 PR의 실제 base인 최신 main→현재 전체 diff-check는 통과했다. 증거 복사3개의 새 EOF blank는 제거하고 원본 byte와 다시 대조해 같음을 확인했다. 전체 merge index 검사 실패를 통과로 바꾸지 않는다.
+
+---
+
 ## 2026-10-07 고지 패키지 연결 결과
 
 Draft #29에 PR #58의 main885392c를 통합한 실행 HEAD는 `68130f67f59f1eb7d9d3fb27ad0b2204f6fe146a`다. exporter에 설치 원문 대조를 연결해 실제 JS/CSS/index/Google PNG4개와 고지3개를 선별한다. 실제 Vite 출력→새 package7개는 byte/hash 동일하며 기존 화면 출력4개도 전과 동일하다. Docker ignore에 필요한 TS build helper 하나만 추가했고 시험/브라우저/개발 파일 제외와 기존 SDK/CSP 정책은 변경하지 않았다.

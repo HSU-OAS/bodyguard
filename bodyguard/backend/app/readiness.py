@@ -17,6 +17,34 @@ from app.db import metadata
 EXPECTED_REVISION = "0008_minute_summaries"
 PROBE_TIMEOUT_SECONDS = 3
 
+# FR-U-04/05: required ownership/cascade semantics, not constraint names or user rows.
+FK_QUERY = """
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_constraint c
+    WHERE c.contype = 'f' AND c.conrelid = pg_catalog.to_regclass(%s)
+    AND c.conkey = ARRAY(
+        SELECT a.attnum FROM unnest(%s::text[]) WITH ORDINALITY k(name, pos)
+        JOIN pg_catalog.pg_attribute a ON a.attrelid = c.conrelid AND a.attname = k.name
+        WHERE a.attnum > 0 AND NOT a.attisdropped ORDER BY k.pos
+    )
+    AND c.confrelid = pg_catalog.to_regclass(%s)
+    AND c.confkey = ARRAY(
+        SELECT a.attnum FROM unnest(%s::text[]) WITH ORDINALITY k(name, pos)
+        JOIN pg_catalog.pg_attribute a ON a.attrelid = c.confrelid AND a.attname = k.name
+        WHERE a.attnum > 0 AND NOT a.attisdropped ORDER BY k.pos
+    )
+    AND c.confdeltype = %s AND c.confupdtype = %s AND c.confmatchtype = %s
+    AND c.condeferrable = %s AND c.condeferred = %s AND c.convalidated AND c.conenforced
+    AND EXISTS (SELECT 1 FROM pg_catalog.pg_trigger t WHERE t.tgconstraint = c.oid)
+    AND NOT EXISTS (
+        SELECT 1 FROM pg_catalog.pg_trigger t
+        WHERE t.tgconstraint = c.oid AND t.tgenabled NOT IN ('O', 'A')
+    )
+)
+"""
+FK_ACTION = {"NO ACTION": "a", "RESTRICT": "r", "CASCADE": "c", "SET NULL": "n", "SET DEFAULT": "d"}
+FK_MATCH = {"SIMPLE": "s", "FULL": "f", "PARTIAL": "p"}
+
 
 class LiveOut(BaseModel):
     status: Literal["alive"]
@@ -52,6 +80,24 @@ class ReadinessProbe:
             )
             for table in metadata.tables.values()
         )
+        self._foreign_keys = tuple(
+            (
+                table.fullname,
+                [element.parent.name for element in fk.elements],
+                fk.referred_table.fullname,
+                [element.column.name for element in fk.elements],
+                FK_ACTION[(fk.ondelete or "NO ACTION").upper()],
+                FK_ACTION[(fk.onupdate or "NO ACTION").upper()],
+                FK_MATCH[(fk.match or "SIMPLE").upper()],
+                bool(fk.deferrable),
+                (fk.initially or "IMMEDIATE").upper() == "DEFERRED",
+            )
+            for table in sorted(metadata.tables.values(), key=lambda table: table.fullname)
+            for fk in sorted(
+                table.foreign_key_constraints,
+                key=lambda fk: tuple(element.parent.name for element in fk.elements),
+            )
+        )
         self._lock = Lock()
 
     async def check(self) -> bool:
@@ -76,6 +122,8 @@ class ReadinessProbe:
                         return False
                     await cursor.execute(
                         "SELECT NOT pg_catalog.pg_is_in_recovery() AND "
+                        "pg_catalog.current_setting('session_replication_role') "
+                        "IN ('origin', 'local') AND "
                         "bool_and(pg_catalog.has_table_privilege(t, p)) "
                         "FROM unnest(%s::text[]) AS t CROSS JOIN "
                         "unnest(ARRAY['SELECT', 'INSERT', 'UPDATE', 'DELETE']) AS p",
@@ -86,6 +134,10 @@ class ReadinessProbe:
                     for query in self._queries:
                         # Resolves every required table/column/SELECT permission, reads zero rows.
                         await cursor.execute(query)
+                    for foreign_key in self._foreign_keys:
+                        await cursor.execute(FK_QUERY, foreign_key)
+                        if await cursor.fetchone() != (True,):
+                            return False
                 return True
         except TimeoutError, Error:
             return False

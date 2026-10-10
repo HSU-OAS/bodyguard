@@ -1,0 +1,48 @@
+{
+  "head": "907dbdf886d101bbda24b2068ede19fa0b65c71d",
+  "phase": "reviewed",
+  "results": [
+    {
+      "name": "unit",
+      "command": [
+        "node_modules/.bin/vitest",
+        "run",
+        "src/coaching/useRecordedCoaching.test.tsx",
+        "--reporter=json",
+        "--outputFile=[owned-test-scratch]/unit-reviewed.json"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "frontend",
+      "command": [
+        "node_modules/.bin/vitest",
+        "run",
+        "--reporter=json",
+        "--outputFile=[owned-test-scratch]/frontend-reviewed.json"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "types",
+      "command": [
+        "node_modules/.bin/tsc",
+        "--noEmit"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "biome",
+      "command": [
+        "node_modules/.bin/biome",
+        "check",
+        "."
+      ],
+      "exit": 1,
+      "signal": null
+    }
+  ]
+}

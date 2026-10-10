@@ -1,0 +1,105 @@
+{
+  "label": "local",
+  "head": "01b97dbecfe2a9a37ee7165e98c8f1e5730f7be4",
+  "sourceBefore": {
+    "src/avatar/headOrientationRig.ts": "17c50c110103e7fc37147b6650ebe707a590e26efe7a37140e696e43ae8c9383",
+    "src/avatar/headOrientationRig.test.ts": "a90b1793d885b7e05a7229228286a7cc0b0b975a8dd1c5d0e764f98856ccd639",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "e2e/fixtures/headOrientationProbe.ts": "3d49e0960334768ca788627236575b263f92cc7e4ca521fb427ff09425f07312",
+    "scripts/test-head-orientation-browser.mjs": "0258a956cc78584336d1ffef734c5725b8f4405b9057f733e8d96c16550261e7",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "assetCommit": "25a9bd6c7392890e3b5d5d6ae1046bb7087d56ad",
+  "assetHashes": {
+    "male": "cc85bcd449f3f31347e4f7174986d41e4aca3067990f5d8a2e6ba3a099171927",
+    "female": "27c10902aa377e995bdbc115ab773cf22f8ea38582c49820304a33ad7685f25a"
+  },
+  "actualChrome": true,
+  "actualWebGL": true,
+  "actualCamera": false,
+  "nativeInference": false,
+  "syntheticInput": true,
+  "releaseAvatar": false,
+  "samples": [
+    {
+      "gender": "male",
+      "passed": false,
+      "initial": {
+        "frames": 0,
+        "closed": false,
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 1,
+            "total": 1
+          },
+          {
+            "status": "tracking",
+            "tracked": 1,
+            "total": 1
+          }
+        ],
+        "sourceUnchanged": true,
+        "otherBonesUnchanged": true,
+        "weightsUnchanged": true,
+        "independent": true,
+        "errors": [
+          5.470979139413201e-7,
+          5.470979139413201e-7
+        ],
+        "framing": [
+          true,
+          true
+        ],
+        "calls": 10,
+        "triangles": 576508
+      },
+      "beforeSha": "cd8988188d75ec329283b53dfe8222f119f823afc688f1b7f0695f4cb3499744",
+      "moving": {
+        "frames": 0,
+        "closed": false,
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 1,
+            "total": 1
+          },
+          {
+            "status": "tracking",
+            "tracked": 1,
+            "total": 1
+          }
+        ],
+        "sourceUnchanged": true,
+        "otherBonesUnchanged": true,
+        "weightsUnchanged": true,
+        "independent": true,
+        "errors": [
+          0.4957096425174074,
+          0.3692267717996966
+        ],
+        "framing": [
+          true,
+          true
+        ],
+        "calls": 10,
+        "triangles": 576508
+      },
+      "afterSha": "cd8988188d75ec329283b53dfe8222f119f823afc688f1b7f0695f4cb3499744"
+    }
+  ],
+  "probeHash": "4dc23a05354325be654253a4f3f7722df96a9a441897fc6ea1aad8eb48e33afc",
+  "browser": "154.0.8037.98",
+  "failure": {
+    "name": "AssertionError",
+    "message": "Expected \"actual\" to be strictly unequal to:\n\n'cd8988188d75ec329283b53dfe8222f119f823afc688f1b7f0695f4cb3499744'"
+  },
+  "sourceAfter": {
+    "src/avatar/headOrientationRig.ts": "17c50c110103e7fc37147b6650ebe707a590e26efe7a37140e696e43ae8c9383",
+    "src/avatar/headOrientationRig.test.ts": "a90b1793d885b7e05a7229228286a7cc0b0b975a8dd1c5d0e764f98856ccd639",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "e2e/fixtures/headOrientationProbe.ts": "3d49e0960334768ca788627236575b263f92cc7e4ca521fb427ff09425f07312",
+    "scripts/test-head-orientation-browser.mjs": "0258a956cc78584336d1ffef734c5725b8f4405b9057f733e8d96c16550261e7",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  }
+}

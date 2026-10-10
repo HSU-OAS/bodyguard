@@ -1,0 +1,59 @@
+Checked 202 files in 177ms. No fixes applied.
+Found 1 error.
+scripts/test-pose-frame-browser.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+
+    109 109 │   ...gender);return window.probe.snapshot()};</script>'
+    110 110 │           : mode === 'playback'
+    111     │ - ········?·'<!doctype·html><html·lang="ko"><meta·charset="utf-8"><title>비공개·연속·재생·검증</title>...
+    112     │ - ········:·mode·===·'video'
+    113     │ - ··········?·'<!doctype·html><html·lang="ko"><meta·charset="utf-8"><title>비공개·영상·전달·검증</titl...
+    114     │ - ··········:·'<!doctype·html><html·lang="ko"><meta·charset="utf-8"><title>비공개·추론·전달·검증</titl...
+        111 │ + ··········?·'<!doctype·html><html·lang="ko"><meta·charset="utf-8"><title>비공개·연속·재생·검증</titl...
+        112 │ + ··········:·mode·===·'video'
+        113 │ + ············?·'<!doctype·html><html·lang="ko"><meta·charset="utf-8"><title>비공개·영상·전달·검증</ti...
+        114 │ + ············:·'<!doctype·html><html·lang="ko"><meta·charset="utf-8"><title>비공개·추론·전달·검증</ti...
+    115 115 │       )
+    116 116 │     } else if (Object.hasOwn(resources, path)) {
+    ······· │
+    246 246 │         await page.locator('#avatar').screenshot({ path: preview })
+    247 247 │         sample.previewSha = sha(readFileSync(preview))
+    248     │ - ······await·page.evaluate(()·=>·{·window.pendingRuntimeClose·=·window.probe.pause()·})
+        248 │ + ······await·page.evaluate(()·=>·{
+        249 │ + ········window.pendingRuntimeClose·=·window.probe.pause()
+        250 │ + ······})
+    249 251 │         const pausing = await page.evaluate(() => window.probe.snapshot())
+    250 252 │         assert.equal(pausing.session.status, 'paused')
+    ······· │
+    252 254 │         assert.equal(pausing.detectorCloses, 0)
+    253 255 │         assert.equal(pausing.cameraCloses, 0)
+    254     │ - ······await·page.evaluate(()·=>·new·Promise(resolve·=>·requestAnimationFrame(()·=>·requestAnimationFrame(resolve))))
+        256 │ + ······await·page.evaluate(
+        257 │ + ········()·=>·new·Promise((resolve)·=>·requestAnimationFrame(()·=>·requestAnimationFrame(resolve))),
+        258 │ + ······)
+    255 259 │         const waiting = await page.evaluate(() => window.probe.snapshot())
+    256 260 │         assert.equal(waiting.renderFrames, pausing.renderFrames)
+    ······· │
+    267 271 │         assert.deepEqual(paused.memory, paused.baseline)
+    268 272 │         sample.stages.push({ case: 'result-input-settled-sdk-camera-closed', ...paused })
+    269     │ - ······await·page.evaluate(()·=>·{·window.pendingRuntimeClose·=·null·})
+        273 │ + ······await·page.evaluate(()·=>·{
+        274 │ + ········window.pendingRuntimeClose·=·null
+        275 │ + ······})
+    270 276 │         const resumed = await page.evaluate(() => window.probe.resume())
+    271 277 │         assert.equal(resumed.session.generation, 2)
+    272 278 │         assert.equal(resumed.resources.status, 'running')
+    273 279 │         assert.equal(resumed.cameras, 2)
+    274     │ - ······await·page.waitForFunction((minimum)·=>·window.probe.snapshot().nativeCloses·>·minimum·+·3,·paused.nativeCalls)
+        280 │ + ······await·page.waitForFunction(
+        281 │ + ········(minimum)·=>·window.probe.snapshot().nativeCloses·>·minimum·+·3,
+        282 │ + ········paused.nativeCalls,
+        283 │ + ······)
+    275 284 │         const running = await page.evaluate(() => window.probe.snapshot())
+    276 285 │         assert(running.cameraLive && running.framing.every(Boolean))
+
+
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.

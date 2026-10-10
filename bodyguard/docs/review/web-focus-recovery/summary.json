@@ -1,0 +1,640 @@
+{
+  "schemaVersion": 1,
+  "collectedAt": "2026-10-07T15:35:35.994Z",
+  "baseHead": "9f2e76fea919f37f7aae8164278ebc5b53c64e03",
+  "localModifiedCandidate": true,
+  "rootCauseScope": "Same-path account phase can replace the focused heading; not historical startup delay cause.",
+  "firstDom": {
+    "tests": 11,
+    "failures": 6,
+    "errors": 0,
+    "time": 4.253038958
+  },
+  "contractRedDom": {
+    "tests": 12,
+    "failures": 6,
+    "errors": 0,
+    "time": 4.259084417
+  },
+  "reviewAliasRedDom": {
+    "tests": 14,
+    "failures": 2,
+    "errors": 0,
+    "time": 2.283778708
+  },
+  "beforeBrowser": {
+    "label": "red",
+    "executedHead": "9f2e76fea919f37f7aae8164278ebc5b53c64e03",
+    "actualProductionChrome": true,
+    "actualAuthSql": false,
+    "actualHumanCamera": false,
+    "actualInactiveWindow": false,
+    "inactiveConditionInjected": true,
+    "retries": 0,
+    "deadlineMs": 5000,
+    "before": {
+      "src/App.tsx": "6ee68d0b2e687fd683104f2178b74a4b8d811272f58d0577088251b884a748e4",
+      "scripts/test-focus-browser.mjs": "2c3d7b056076f806d0354afb526f8366a2cc2217b975db20b26e8d070ae92c85",
+      "dist/assets/index-DMhBge-_.js": "334736692ea127d229c8a1ead7e031ad0652c53e559cb2e4ae3eb95fd3dc8989",
+      "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+    },
+    "samples": [
+      {
+        "name": "F01 /start",
+        "passed": false,
+        "failed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F01 /explore",
+        "passed": false,
+        "failed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F01 /account",
+        "passed": false,
+        "failed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F02 retry",
+        "passed": false,
+        "failed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F03 header",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F03 main",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F04 public input",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F04 public FAQ",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F05 inactive condition",
+        "passed": false,
+        "failed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      }
+    ],
+    "browserVersion": "154.0.8037.98",
+    "after": {
+      "src/App.tsx": "6ee68d0b2e687fd683104f2178b74a4b8d811272f58d0577088251b884a748e4",
+      "scripts/test-focus-browser.mjs": "2c3d7b056076f806d0354afb526f8366a2cc2217b975db20b26e8d070ae92c85",
+      "dist/assets/index-DMhBge-_.js": "334736692ea127d229c8a1ead7e031ad0652c53e559cb2e4ae3eb95fd3dc8989",
+      "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+    },
+    "sourceUnchanged": true,
+    "cleanupCompleted": true,
+    "completed": true
+  },
+  "firstGreenBrowser": {
+    "label": "green",
+    "executedHead": "9f2e76fea919f37f7aae8164278ebc5b53c64e03",
+    "actualProductionChrome": true,
+    "actualAuthSql": false,
+    "actualHumanCamera": false,
+    "actualInactiveWindow": false,
+    "inactiveConditionInjected": true,
+    "retries": 0,
+    "deadlineMs": 5000,
+    "before": {
+      "src/App.tsx": "891ce9b6e17422cd63ca22b192dd143b96e4397a2636c775c64e2bdf8831f1b3",
+      "scripts/test-focus-browser.mjs": "2c3d7b056076f806d0354afb526f8366a2cc2217b975db20b26e8d070ae92c85",
+      "dist/assets/index-B2zW9gjD.js": "e336e191ceb223a7fa88e6897493970d911359f1adb81a183a7d1dfc98b644fb",
+      "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+    },
+    "samples": [
+      {
+        "name": "F01 /start",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F01 /explore",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F01 /account",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F02 retry",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F03 header",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F03 main",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F04 public input",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F04 public FAQ",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F05 inactive condition",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      }
+    ],
+    "browserVersion": "154.0.8037.98",
+    "after": {
+      "src/App.tsx": "891ce9b6e17422cd63ca22b192dd143b96e4397a2636c775c64e2bdf8831f1b3",
+      "scripts/test-focus-browser.mjs": "2c3d7b056076f806d0354afb526f8366a2cc2217b975db20b26e8d070ae92c85",
+      "dist/assets/index-B2zW9gjD.js": "e336e191ceb223a7fa88e6897493970d911359f1adb81a183a7d1dfc98b644fb",
+      "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+    },
+    "sourceUnchanged": true,
+    "cleanupCompleted": true,
+    "completed": true
+  },
+  "finalDom": {
+    "tests": 744,
+    "failures": 0,
+    "errors": 0,
+    "time": 8.981035334
+  },
+  "finalBrowser": {
+    "label": "green",
+    "executedHead": "9f2e76fea919f37f7aae8164278ebc5b53c64e03",
+    "actualProductionChrome": true,
+    "actualAuthSql": false,
+    "actualHumanCamera": false,
+    "actualInactiveWindow": false,
+    "inactiveConditionInjected": true,
+    "retries": 0,
+    "deadlineMs": 5000,
+    "before": {
+      "src/App.tsx": "a18ca00c782e2e25d798511d6c7e7d158a34c2635e80005bcf30e4059c998e67",
+      "scripts/test-focus-browser.mjs": "5bad914748e7d9ad27d49d0de4d8ad43f8b19071a45544e140add19b1729934a",
+      "dist/assets/index-x57--wa1.js": "b5d4f81164c8d3c196e853b3404382bc15077986aa626cd0c3c72571b6325ac0",
+      "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+    },
+    "samples": [
+      {
+        "name": "F01 /start",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F01 /explore",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F01 /account",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F01 /start/",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F01 /EXPLORE",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F02 retry",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F03 header",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F03 main",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F04 public input",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F04 public FAQ",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      },
+      {
+        "name": "F05 inactive condition",
+        "passed": true,
+        "boundary": {
+          "camera": 0,
+          "errors": 0,
+          "external": 0,
+          "models": 0,
+          "unexpectedApi": 0,
+          "storage": 0
+        },
+        "boundaryPassed": true
+      }
+    ],
+    "browserVersion": "154.0.8037.98",
+    "after": {
+      "src/App.tsx": "a18ca00c782e2e25d798511d6c7e7d158a34c2635e80005bcf30e4059c998e67",
+      "scripts/test-focus-browser.mjs": "5bad914748e7d9ad27d49d0de4d8ad43f8b19071a45544e140add19b1729934a",
+      "dist/assets/index-x57--wa1.js": "b5d4f81164c8d3c196e853b3404382bc15077986aa626cd0c3c72571b6325ac0",
+      "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+    },
+    "sourceUnchanged": true,
+    "cleanupCompleted": true,
+    "completed": true
+  },
+  "finalSelectionStats": {
+    "startTime": "2026-10-07T15:31:46.500Z",
+    "duration": 12683.675000000001,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "finalNativeIntegrationStats": {
+    "startTime": "2026-10-07T15:32:59.969Z",
+    "duration": 10627.52,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "rawEvidence": [
+    {
+      "path": "/private/tmp/bodyguard-focus-recovery.SCPngq/dom-red.xml",
+      "sha256": "f6b08dc36040fb08d499d8d5663cd943b76c7e9ca39fc381a5753c852ac471e1"
+    },
+    {
+      "path": "/private/tmp/bodyguard-focus-recovery.SCPngq/dom-contract-red.xml",
+      "sha256": "4c99424c932e52b8fe7a2cb2ea741816aae37aa5d41974af04e4c5becebcc8e9"
+    },
+    {
+      "path": "/private/tmp/bodyguard-focus-recovery.SCPngq/dom-alias-red.xml",
+      "sha256": "c464974c218a2b02d7271c28b8958fa6d699f528443945215e3125b712442a8e"
+    },
+    {
+      "path": "/private/tmp/bodyguard-focus-recovery.SCPngq/build-red.log",
+      "sha256": "5b1655b0af0cb19b0f35c8c86ea38db5f185744d8f6f898b60abc6f64c2caa2c"
+    },
+    {
+      "path": "/private/tmp/bodyguard-focus-recovery.SCPngq/build-baseline.log",
+      "sha256": "0c54c84e927f9657fba00f4904b556971aadfb93971e73a86080123d6d3df5c3"
+    },
+    {
+      "path": "/private/tmp/bodyguard-focus-recovery.SCPngq/browser-runner-before-build.log",
+      "sha256": "0ea4e30181a13983cfdb6daab9682b5e9192b888426aa50300cd7eea0a2aa358"
+    },
+    {
+      "path": "/private/tmp/bodyguard-focus-recovery.SCPngq/browser-red.json",
+      "sha256": "fd68cf09188ec1cc7d9806526d5026bdbe14fd286fa53307d35e1cfaddd8f0b7"
+    },
+    {
+      "path": "/private/tmp/bodyguard-focus-recovery.SCPngq/browser-green.json",
+      "sha256": "71bca315fe6771c8ab7e0904066d27fc5609abd92583cb61f2554bea5304c14e"
+    },
+    {
+      "path": "/private/tmp/bodyguard-focus-recovery.SCPngq/biome-final.log",
+      "sha256": "f3c69aa584c4519a86fb5c91c57fc910e3a66f34552ac54b9a5a928a69a77e3c"
+    },
+    {
+      "path": "/private/tmp/bodyguard-focus-recovery.SCPngq/selection.log",
+      "sha256": "6e966fca62a1c927869dc31495207019507ef0e0a9654b615647a54bfab5f21d"
+    },
+    {
+      "path": "/private/tmp/bodyguard-focus-recovery.SCPngq/integration.log",
+      "sha256": "260bb32f243d595273d0a53367bf332aad6382e55566af0522d472f153b46cdf"
+    },
+    {
+      "path": "/private/tmp/bodyguard-focus-recovery.Q6ZkLZ/dom.xml",
+      "sha256": "024f45ea0793a177637291caab0c5ae530a4764e41478717e504f13546a3bf63"
+    },
+    {
+      "path": "/private/tmp/bodyguard-focus-recovery.Q6ZkLZ/browser-green.json",
+      "sha256": "1d52e86ce44299e059fe65aff1432ee708f5e0ce52819495fb7c9341f775b1f6"
+    },
+    {
+      "path": "/private/tmp/bodyguard-focus-recovery.Q6ZkLZ/biome.log",
+      "sha256": "f78f688697fe8305fd20aa0746c70655b0cdc1310f1de78a0f443c30254fe433"
+    },
+    {
+      "path": "/private/tmp/bodyguard-focus-recovery.Q6ZkLZ/build.log",
+      "sha256": "88bf29929ca363da6b183995038f638924b3a4148597e4d96221d71420e41d6c"
+    },
+    {
+      "path": "/private/tmp/bodyguard-focus-recovery.Q6ZkLZ/typecheck.log",
+      "sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92"
+    },
+    {
+      "path": "/private/tmp/bodyguard-focus-recovery.Q6ZkLZ/selection.log",
+      "sha256": "3825bea5dd08a85b7a67a17c7b205340eef45ef2affa83784e925b2108fedcb1"
+    },
+    {
+      "path": "/private/tmp/bodyguard-focus-recovery.Q6ZkLZ/integration.log",
+      "sha256": "39e0d30ee5f75f0ab3f431916cfa0d924e3e1e817fb81b442a6c28ca633cd2b9"
+    },
+    {
+      "path": "/private/tmp/bodyguard-focus-recovery.Q6ZkLZ/guard.json",
+      "sha256": "3f70f7c3214b64d7208dcfdb9cfbbe76c09adf839dc4a145a0ac391c377dc5a5"
+    },
+    {
+      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-web-focus-recovery/bodyguard/frontend/test-results/selection-report.json",
+      "sha256": "56aa442b5d130ad9659988503dc77867f0cf1b8ae5628cc8b7324be61fc1034c"
+    },
+    {
+      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-web-focus-recovery/bodyguard/frontend/test-results/integration-20261007T153259391290Z/report.json",
+      "sha256": "66a400135a2d9397ccf3301cf4fc3ede0d4181d4406b10cab5f416a59f9a6bec"
+    }
+  ],
+  "source": [
+    {
+      "path": "src/App.tsx",
+      "sha256": "a18ca00c782e2e25d798511d6c7e7d158a34c2635e80005bcf30e4059c998e67"
+    },
+    {
+      "path": "src/AppFocus.test.tsx",
+      "sha256": "0c01f2de75c658fbd0932b590e81008b438f08321b77089735ce50505ad19939"
+    },
+    {
+      "path": "scripts/test-focus-browser.mjs",
+      "sha256": "5bad914748e7d9ad27d49d0de4d8ad43f8b19071a45544e140add19b1729934a"
+    },
+    {
+      "path": "src/auth.tsx",
+      "sha256": "8357e10ad49a027eb2e5996ea5d5bcc55b9262aac5edc6ed10d0ff14cf6bae10"
+    },
+    {
+      "path": "src/index.css",
+      "sha256": "580ca04512309f462342380a861d28e1f1370447bc1b0aab2420bd859216da59"
+    },
+    {
+      "path": "package.json",
+      "sha256": "fc5513803b158f0829f44e17a43335bcc0319d5476cb41abf8405656946363b7"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "sha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+    }
+  ],
+  "notVerified": [
+    "Historical startup latency cause",
+    "Native inactive browser window",
+    "Actual participant camera/coaching/avatar performance",
+    "SDK privacy approval",
+    "Provider/Docker/NGINX/TLS/deployment",
+    "All release stages 1–6"
+  ]
+}

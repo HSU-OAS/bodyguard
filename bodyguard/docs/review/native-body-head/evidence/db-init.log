@@ -1,0 +1,19 @@
+The files belonging to this database system will be owned by user "gongman".
+This user must also own the server process.
+
+The database cluster will be initialized with locale "C".
+The default text search configuration will be set to "english".
+
+Data page checksums are enabled.
+
+creating directory /private/tmp/bodyguard-auth-test.wVYFCW/data ... ok
+creating subdirectories ... ok
+selecting dynamic shared memory implementation ... sysv
+selecting default "max_connections" ... 20
+selecting default "shared_buffers" ... 400kB
+selecting default time zone ... Asia/Seoul
+creating configuration files ... ok
+running bootstrap script ... 2026-10-08 10:48:56.941 KST [58028] FATAL:  could not create shared memory segment: Operation not permitted
+2026-10-08 10:48:56.941 KST [58028] DETAIL:  Failed system call was shmget(key=57217609, size=56, 03600).
+child process exited with exit code 1
+initdb: removing data directory "/private/tmp/bodyguard-auth-test.wVYFCW/data"

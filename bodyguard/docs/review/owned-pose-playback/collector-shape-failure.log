@@ -1,0 +1,102 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ [
++   {
+- {
+-   'public/models/face_landmarker.task': {
+      bytes: 3758596,
++     name: 'face_landmarker.task',
+      sha: '64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff'
+    },
++   {
+-   'public/models/gesture_recognizer.task': {
+      bytes: 8373440,
++     name: 'gesture_recognizer.task',
+      sha: '97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482'
+    },
++   {
+-   'public/models/pose_landmarker_full.task': {
+      bytes: 9398198,
++     name: 'pose_landmarker_full.task',
+      sha: '5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1'
+    },
++   {
+-   'public/models/pose_landmarker_heavy.task': {
+      bytes: 30664242,
++     name: 'pose_landmarker_heavy.task',
+      sha: '64437af838a65d18e5ba7a0d39b465540069bc8aae8308de3e318aad31fcbc7b'
+    },
++   {
+-   'public/models/pose_landmarker_lite.task': {
+      bytes: 5777746,
++     name: 'pose_landmarker_lite.task',
+      sha: '59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a'
+    }
++ ]
+- }
+
+    at file:///private/tmp/bodyguard-pose-playback-proof.x10nrd/collect-proof.mjs:46:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: [
+    {
+      name: 'face_landmarker.task',
+      bytes: 3758596,
+      sha: '64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff'
+    },
+    {
+      name: 'gesture_recognizer.task',
+      bytes: 8373440,
+      sha: '97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482'
+    },
+    {
+      name: 'pose_landmarker_full.task',
+      bytes: 9398198,
+      sha: '5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1'
+    },
+    {
+      name: 'pose_landmarker_heavy.task',
+      bytes: 30664242,
+      sha: '64437af838a65d18e5ba7a0d39b465540069bc8aae8308de3e318aad31fcbc7b'
+    },
+    {
+      name: 'pose_landmarker_lite.task',
+      bytes: 5777746,
+      sha: '59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a'
+    }
+  ],
+  expected: {
+    'public/models/face_landmarker.task': {
+      bytes: 3758596,
+      sha: '64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff'
+    },
+    'public/models/gesture_recognizer.task': {
+      bytes: 8373440,
+      sha: '97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482'
+    },
+    'public/models/pose_landmarker_full.task': {
+      bytes: 9398198,
+      sha: '5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1'
+    },
+    'public/models/pose_landmarker_heavy.task': {
+      bytes: 30664242,
+      sha: '64437af838a65d18e5ba7a0d39b465540069bc8aae8308de3e318aad31fcbc7b'
+    },
+    'public/models/pose_landmarker_lite.task': {
+      bytes: 5777746,
+      sha: '59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a'
+    }
+  },
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.20.0

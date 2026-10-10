@@ -1,0 +1,74 @@
+{
+  "label": "wait-fixed",
+  "head": "01b97dbecfe2a9a37ee7165e98c8f1e5730f7be4",
+  "sourceBefore": {
+    "src/avatar/headOrientationRig.ts": "b23ab8ecdd5ac9cfc8a6baaa0beca82ac97d5453281ade9e258db57e827e7b85",
+    "src/avatar/headOrientationRig.test.ts": "b6ac231d09c330191c7dd39eecd2eb618de8e94ef203db06a744d76e11cbfde2",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "e2e/fixtures/headOrientationProbe.ts": "7fdb733b66a19544e1e91199728a564cb79da6736aa790da5cdb7dcc7213c701",
+    "scripts/test-head-orientation-browser.mjs": "75d3e7e244f35f38037a0ccbda6d4090b638989086356102b1f5a6c2801a068e",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "assetCommit": "25a9bd6c7392890e3b5d5d6ae1046bb7087d56ad",
+  "assetHashes": {
+    "male": "cc85bcd449f3f31347e4f7174986d41e4aca3067990f5d8a2e6ba3a099171927",
+    "female": "27c10902aa377e995bdbc115ab773cf22f8ea38582c49820304a33ad7685f25a"
+  },
+  "actualChrome": true,
+  "actualWebGL": true,
+  "actualCamera": false,
+  "nativeInference": false,
+  "syntheticInput": true,
+  "releaseAvatar": false,
+  "samples": [
+    {
+      "gender": "male",
+      "passed": false,
+      "initial": {
+        "frames": 0,
+        "closed": false,
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 1,
+            "total": 1
+          },
+          {
+            "status": "tracking",
+            "tracked": 1,
+            "total": 1
+          }
+        ],
+        "sourceUnchanged": true,
+        "otherBonesUnchanged": true,
+        "weightsUnchanged": true,
+        "independent": true,
+        "errors": [
+          5.470979139413201e-7,
+          5.470979139413201e-7
+        ],
+        "framing": [
+          true,
+          true
+        ],
+        "calls": 10,
+        "triangles": 576508
+      },
+      "beforeSha": "cd8988188d75ec329283b53dfe8222f119f823afc688f1b7f0695f4cb3499744"
+    }
+  ],
+  "probeHash": "db242e0d1c768775ef00df778a432227221c50820ec51520a8b703a931762808",
+  "browser": "154.0.8037.98",
+  "failure": {
+    "name": "TimeoutError",
+    "message": "page.waitForFunction: Timeout 15000ms exceeded."
+  },
+  "sourceAfter": {
+    "src/avatar/headOrientationRig.ts": "b23ab8ecdd5ac9cfc8a6baaa0beca82ac97d5453281ade9e258db57e827e7b85",
+    "src/avatar/headOrientationRig.test.ts": "b6ac231d09c330191c7dd39eecd2eb618de8e94ef203db06a744d76e11cbfde2",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "e2e/fixtures/headOrientationProbe.ts": "7fdb733b66a19544e1e91199728a564cb79da6736aa790da5cdb7dcc7213c701",
+    "scripts/test-head-orientation-browser.mjs": "75d3e7e244f35f38037a0ccbda6d4090b638989086356102b1f5a6c2801a068e",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  }
+}

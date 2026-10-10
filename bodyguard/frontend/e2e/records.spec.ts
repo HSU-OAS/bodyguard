@@ -359,7 +359,9 @@ test('RW-03 actual period filter and invalid input recovery', async ({ page, con
   const tomorrowFromOld = new Date(historical.ended_at)
   tomorrowFromOld.setDate(tomorrowFromOld.getDate() + 1)
   await filter(page, day(tomorrowFromOld), old)
-  await expect(page.getByRole('alert')).toContainText('올바른 날짜')
+  await expect(page.getByRole('alert')).toHaveText(
+    '오늘까지의 날짜로 시작일·종료일 순서를 확인해 주세요.',
+  )
   await filter(page, old, old)
   await expect(page.getByRole('alert')).toHaveCount(0)
   await expect(page.getByRole('link', { name: /^fixture-7 .*기록 상세/ })).toBeVisible()

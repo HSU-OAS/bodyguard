@@ -1,7 +1,7 @@
 // MediaPipe 관절을 믿고 쓸 수 있는지 가리는 순수 함수.
 // 브라우저 API를 쓰지 않아서 카메라 없이 테스트한다 (ADR-0012)
 
-export type Point = { x: number; y: number; z: number; visibility?: number }
+export type Point = { x: number; y: number; z: number; visibility?: number; presence?: number }
 
 export const JOINT_COUNT = 33
 
@@ -30,8 +30,14 @@ const visibility = (p: Point): number => {
   return Number.isFinite(value) && value >= 0 && value <= 1 ? value : 0
 }
 
+// FR-M-07: 제공된 존재 신뢰도도 같은 기준을 만족해야 한다. 생략은 기존 입력 계약을 유지한다.
+const present = (p: Point, min: number): boolean => {
+  const value = p.presence
+  return value === undefined || (Number.isFinite(value) && value >= min && value <= 1)
+}
+
 /**
- * 관절마다 믿고 쓸 수 있는지. 가시성이 충분하고 화면 안에 있어야 한다.
+ * 관절마다 믿고 쓸 수 있는지. 가시성·제공된 존재 신뢰도가 충분하고 화면 안에 있어야 한다.
  * 화면 밖 관절도 가시성이 높게 나올 때가 있어서 둘 다 본다 (2026-09-26 데모에서 확인)
  */
 export function trustedJoints(
@@ -46,6 +52,7 @@ export function trustedJoints(
       min > 0 &&
       min <= 1 &&
       visibility(p) >= min &&
+      present(p, min) &&
       isInFrame(p)
     )
   })

@@ -1,0 +1,227 @@
+{
+  "label": "unit-quaternions",
+  "head": "01b97dbecfe2a9a37ee7165e98c8f1e5730f7be4",
+  "sourceBefore": {
+    "src/avatar/headOrientationRig.ts": "b23ab8ecdd5ac9cfc8a6baaa0beca82ac97d5453281ade9e258db57e827e7b85",
+    "src/avatar/headOrientationRig.test.ts": "c6eae1cbcad739ddde615dbc7c4eb62fe9d0f4fdf2a0ebe0ca79d0108fed4a58",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "e2e/fixtures/headOrientationProbe.ts": "c1b555b960e4baae446a442d3cdea5c37b13bd81c6739ef3033eb6e35b656d34",
+    "scripts/test-head-orientation-browser.mjs": "9192326350227945eac850cebcb168cabed3be5c9f3f54985a46acd69b04c9ce",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "assetCommit": "25a9bd6c7392890e3b5d5d6ae1046bb7087d56ad",
+  "assetHashes": {
+    "male": "cc85bcd449f3f31347e4f7174986d41e4aca3067990f5d8a2e6ba3a099171927",
+    "female": "27c10902aa377e995bdbc115ab773cf22f8ea38582c49820304a33ad7685f25a"
+  },
+  "actualChrome": true,
+  "actualWebGL": true,
+  "actualCamera": false,
+  "nativeInference": false,
+  "syntheticInput": true,
+  "releaseAvatar": false,
+  "samples": [
+    {
+      "gender": "male",
+      "passed": true,
+      "initial": {
+        "frames": 0,
+        "closed": false,
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 1,
+            "total": 1
+          },
+          {
+            "status": "tracking",
+            "tracked": 1,
+            "total": 1
+          }
+        ],
+        "sourceUnchanged": true,
+        "otherBonesUnchanged": true,
+        "weightsUnchanged": true,
+        "independent": true,
+        "errors": [
+          1.0745380149674385e-7,
+          1.0745380149674385e-7
+        ],
+        "framing": [
+          true,
+          true
+        ],
+        "calls": 10,
+        "triangles": 576508
+      },
+      "beforeSha": "cd8988188d75ec329283b53dfe8222f119f823afc688f1b7f0695f4cb3499744",
+      "moving": {
+        "frames": 60,
+        "closed": false,
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 1,
+            "total": 1
+          },
+          {
+            "status": "tracking",
+            "tracked": 1,
+            "total": 1
+          }
+        ],
+        "sourceUnchanged": true,
+        "otherBonesUnchanged": true,
+        "weightsUnchanged": true,
+        "independent": true,
+        "errors": [
+          0.000006020437951641872,
+          0.0000045332849320366234
+        ],
+        "framing": [
+          true,
+          true
+        ],
+        "calls": 10,
+        "triangles": 576508
+      },
+      "afterSha": "84060c472505e285afebcb291c6838a2e28cf207ed1b7b88c04386bcce352540",
+      "revoked": {
+        "states": [
+          {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 1
+          },
+          {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 1
+          }
+        ],
+        "frozen": true
+      },
+      "closed": [
+        {
+          "status": "closed",
+          "tracked": 0,
+          "total": 1
+        },
+        {
+          "status": "closed",
+          "tracked": 0,
+          "total": 1
+        }
+      ]
+    },
+    {
+      "gender": "female",
+      "passed": true,
+      "initial": {
+        "frames": 0,
+        "closed": false,
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 1,
+            "total": 1
+          },
+          {
+            "status": "tracking",
+            "tracked": 1,
+            "total": 1
+          }
+        ],
+        "sourceUnchanged": true,
+        "otherBonesUnchanged": true,
+        "weightsUnchanged": true,
+        "independent": true,
+        "errors": [
+          0,
+          0
+        ],
+        "framing": [
+          true,
+          true
+        ],
+        "calls": 10,
+        "triangles": 567676
+      },
+      "beforeSha": "5d4fd16657b52f1983d99214d8974cd34b12c5fc91c66e34d6a50a58456df6bf",
+      "moving": {
+        "frames": 60,
+        "closed": false,
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 1,
+            "total": 1
+          },
+          {
+            "status": "tracking",
+            "tracked": 1,
+            "total": 1
+          }
+        ],
+        "sourceUnchanged": true,
+        "otherBonesUnchanged": true,
+        "weightsUnchanged": true,
+        "independent": true,
+        "errors": [
+          0.0000037773782326485065,
+          0.0000028140715680393816
+        ],
+        "framing": [
+          true,
+          true
+        ],
+        "calls": 10,
+        "triangles": 567676
+      },
+      "afterSha": "613ccfab66e4c5f65beec0aac6717acef3e5a2d06cfe47da081b3629b450570a",
+      "revoked": {
+        "states": [
+          {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 1
+          },
+          {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 1
+          }
+        ],
+        "frozen": true
+      },
+      "closed": [
+        {
+          "status": "closed",
+          "tracked": 0,
+          "total": 1
+        },
+        {
+          "status": "closed",
+          "tracked": 0,
+          "total": 1
+        }
+      ]
+    }
+  ],
+  "probeHash": "13feccb6256c1f78db46d411bcf0f4bab093e96e195d4fea80013c28fef289c2",
+  "browser": "154.0.8037.98",
+  "pageErrors": [],
+  "boundary": {
+    "external": 0,
+    "camera": 0,
+    "errors": []
+  },
+  "sourceAfter": {
+    "src/avatar/headOrientationRig.ts": "b23ab8ecdd5ac9cfc8a6baaa0beca82ac97d5453281ade9e258db57e827e7b85",
+    "src/avatar/headOrientationRig.test.ts": "c6eae1cbcad739ddde615dbc7c4eb62fe9d0f4fdf2a0ebe0ca79d0108fed4a58",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "e2e/fixtures/headOrientationProbe.ts": "c1b555b960e4baae446a442d3cdea5c37b13bd81c6739ef3033eb6e35b656d34",
+    "scripts/test-head-orientation-browser.mjs": "9192326350227945eac850cebcb168cabed3be5c9f3f54985a46acd69b04c9ce",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  }
+}

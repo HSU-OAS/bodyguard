@@ -74,6 +74,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     window.addEventListener('focus', onFocus)
     const onPageShow = (event: PageTransitionEvent) => {
       if (!event.persisted) return
+      // FR-U-04: cache restoration must not cancel auth/logout or reopen a failed logout.
+      if (current.current && current.current.kind !== 'refresh') return
       current.current?.controller.abort()
       current.current = null
       void refresh()

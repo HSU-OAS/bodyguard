@@ -1,0 +1,30 @@
+{
+  "label": "build-prereview",
+  "cwd": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-body-face-frame/bodyguard/frontend",
+  "command": "./node_modules/.bin/vite",
+  "args": [
+    "build"
+  ],
+  "exit": 0,
+  "elapsedMs": 646,
+  "sourceBefore": {
+    "src/pose/bodyFaceVideoSource.ts": "c75253d0183446b6f36a0edbcb10bee048783f261c0667d1ca0d10fb029cee67",
+    "src/pose/bodyFaceVideoSource.test.ts": "942bfe12046f6317dc0bd5dfa90945acc6474887e8dc09381a494ddfdf9648b4",
+    "src/pose/ownedPoseFrame.ts": "d5721c653087251add5d9a665577d54f1f0f6846fcf99fe29d44c088b4176a98",
+    "src/pose/videoPoseSource.ts": "57d53b123f0ebb14926880883ce5fe5bbde2c05a98da44abfb6cf6f465e26619",
+    "src/avatar/observedPoseRig.ts": "aef8a8c03646da5affe5b1a859ba486d021d765f9104049e29afbd22eb14ac9f",
+    "e2e/fixtures/bodyFaceFrameProbe.ts": "6dac5ed421f0f98c7211c2701ba038226b9c585bda9181f59b678663c03221d5",
+    "scripts/test-body-face-browser.mjs": "6ae583debcc9e27bcf24c7d91c9c14756e7922cb6afd90f40cd9c11bc20cfca5"
+  },
+  "sourceAfter": {
+    "src/pose/bodyFaceVideoSource.ts": "c75253d0183446b6f36a0edbcb10bee048783f261c0667d1ca0d10fb029cee67",
+    "src/pose/bodyFaceVideoSource.test.ts": "942bfe12046f6317dc0bd5dfa90945acc6474887e8dc09381a494ddfdf9648b4",
+    "src/pose/ownedPoseFrame.ts": "d5721c653087251add5d9a665577d54f1f0f6846fcf99fe29d44c088b4176a98",
+    "src/pose/videoPoseSource.ts": "57d53b123f0ebb14926880883ce5fe5bbde2c05a98da44abfb6cf6f465e26619",
+    "src/avatar/observedPoseRig.ts": "aef8a8c03646da5affe5b1a859ba486d021d765f9104049e29afbd22eb14ac9f",
+    "e2e/fixtures/bodyFaceFrameProbe.ts": "6dac5ed421f0f98c7211c2701ba038226b9c585bda9181f59b678663c03221d5",
+    "scripts/test-body-face-browser.mjs": "6ae583debcc9e27bcf24c7d91c9c14756e7922cb6afd90f40cd9c11bc20cfca5"
+  },
+  "stdout": "vite v8.3.1 building client environment for production...\ntransforming...\n✓ 116 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/licenses/bundled-packages.json    0.23 kB │ gzip:   0.11 kB\ndist/index.html                        0.46 kB │ gzip:   0.29 kB\ndist/licenses/tailwindcss.txt          1.11 kB │ gzip:   0.67 kB\ndist/licenses/bundled-js.json          4.91 kB │ gzip:   0.87 kB\ndist/assets/index-dNUNBpCv.css        31.19 kB │ gzip:   7.26 kB\ndist/assets/index-x57--wa1.js        355.15 kB │ gzip: 106.47 kB\n\n✓ built in 378ms\n",
+  "stderr": ""
+}

@@ -1,0 +1,40 @@
+{
+  "method": "fresh context ABBA; lite body+face+hand; synthetic blank 640x480; timer-dispatched click; no camera/avatar",
+  "executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  "bundle": "d1d672d47b7e02507e102e277741ae9a5d29d5179b968002a0d3b11b9ad27171",
+  "worker": "d8d826654f27c265506dce5238d9280f8be94d3e777b3c9fcc2b9053cc5a0eae",
+  "assetHashes": {
+    "/probe.js": "d1d672d47b7e02507e102e277741ae9a5d29d5179b968002a0d3b11b9ad27171",
+    "/assets/nativeInference.worker-0PTDJHAy.js": "d8d826654f27c265506dce5238d9280f8be94d3e777b3c9fcc2b9053cc5a0eae",
+    "/mediapipe/wasm/vision_wasm_internal.js": "e170ee67dd4e16c1a6fcd8840a206687e5a59b22c20e4a902bc445b095454d73",
+    "/mediapipe/wasm/vision_wasm_internal.wasm": "8da277a733926eacd0474b8704b36742d6ec3231c57a860c5b889dff8f1df886",
+    "/mediapipe/wasm/vision_wasm_module_internal.js": "da8934057f147b622e82cfb4c0dbd85461c598e268588b5a8ba9ca963a8ff82d",
+    "/mediapipe/wasm/vision_wasm_module_internal.wasm": "2dabd8e23c60984628beb7bb338764c81a08e6837145273f59578684b5d53c1b",
+    "/mediapipe/wasm/vision_wasm_nosimd_internal.js": "e81d715a3d42cc3373602eb2f7aff795d164934db680e32496b65dab537f9658",
+    "/mediapipe/wasm/vision_wasm_nosimd_internal.wasm": "a28483cd42e74e855bf5ebdb6b40d9b66a5b49e35e95020bc97669e6822a3192",
+    "/models/pose_landmarker_lite.task": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a",
+    "/models/face_landmarker.task": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+    "/models/gesture_recognizer.task": "97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482"
+  },
+  "results": [
+    {
+      "thread": "main",
+      "passed": false,
+      "failure": {
+        "name": "Error",
+        "message": "page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:54578/\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:54578/\", waiting until \"load\"\u001b[22m\n"
+      },
+      "cleanupFailed": true
+    }
+  ],
+  "requested": [],
+  "blocked": 0,
+  "proxyAttempts": 11,
+  "pageErrors": [
+    "TypeError"
+  ],
+  "failure": {
+    "name": "Error",
+    "message": "page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:54578/\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:54578/\", waiting until \"load\"\u001b[22m\n"
+  }
+}

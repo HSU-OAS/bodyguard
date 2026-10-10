@@ -50,7 +50,7 @@ let meStatus = 200
 test('S3.3 expanded library search, guidance detail and return', async ({ page }, info) => {
   await page.goto('/dev/select')
   await expect(page.getByRole('heading', { name: '원하는 동작을 골라보세요' })).toBeVisible()
-  await expect(page.getByRole('status')).toContainText('안내 5개')
+  await expect(page.getByRole('status')).toContainText('안내 7개')
   await page.getByRole('button', { name: '어깨', exact: true }).click()
   await page.getByRole('link', { name: '팔 교차 어깨 늘이기 안내 보기' }).click()
   await expect(page.getByText('안내만 후보 · 자동 판정 없음')).toBeVisible()
@@ -61,6 +61,54 @@ test('S3.3 expanded library search, guidance detail and return', async ({ page }
   await expect(page.getByRole('status')).toContainText('안내 2개')
   await page.screenshot({ path: info.outputPath('library-torso.png'), fullPage: true })
 })
+// FR-S-01/06: recovered authored content; account mock, no positive camera/clinical claim.
+for (const motion of [
+  {
+    id: 'shoulder-shrug',
+    title: '어깨 으쓱·이완',
+    search: '으쓱',
+    source: 'Cambridge University Hospitals · Shoulder shrug · 원문',
+    url: 'https://www.cuh.nhs.uk/patient-information/neck-sprain-advice/',
+    instruction: '편안한 범위에서 양쪽 어깨를 귀 방향으로 부드럽게 올립니다.',
+  },
+  {
+    id: 'arm-overhead',
+    title: '팔 위로 뻗기',
+    search: '위로 뻗기',
+    source: 'North Bristol NHS · Exercise 5 (팔 올림 부분) · 원문',
+    url: 'https://www.nbt.nhs.uk/our-services/a-z-services/emergency-zone/ed-miu-patient-information/neck-injuries',
+    instruction: '한 팔을 편안한 범위에서 천천히 머리 위로 올립니다.',
+  },
+]) {
+  test(`S3.4 ${motion.id} search-detail-source-keyboard-return, coaching blocked`, async ({
+    page,
+  }, info) => {
+    await page.goto('/dev/select')
+    await expect(page.getByRole('heading', { name: '원하는 동작을 골라보세요' })).toBeVisible()
+    await page.getByRole('button', { name: '어깨', exact: true }).click()
+    await expect(page.getByRole('status')).toContainText('안내 3개')
+    await page.getByLabel('동작 검색').fill(motion.search)
+    await expect(page.getByRole('status')).toContainText('안내 1개')
+    await page.getByRole('link', { name: `${motion.title} 안내 보기` }).click()
+    await expect(page.getByRole('heading', { name: motion.title, level: 1 })).toBeFocused()
+    await expect(page.getByText(motion.instruction, { exact: true })).toBeVisible()
+    await expect(page.getByText('실시간 코칭 후보 · 촬영 검증 전')).toBeVisible()
+    await expect(page.getByRole('button', { name: '코칭 준비 중' })).toBeDisabled()
+    const sourceToggle = page.getByText('참고 자료', { exact: true })
+    await sourceToggle.focus()
+    await page.keyboard.press('Enter')
+    const source = page.getByRole('link', { name: motion.source })
+    await expect(source).toHaveAttribute('href', motion.url)
+    await expect(source).toHaveAttribute('rel', 'noopener noreferrer')
+    await page.screenshot({ path: info.outputPath(`${motion.id}-detail.png`), fullPage: true })
+    await page.getByRole('link', { name: '목록으로 돌아가기' }).click()
+    await expect(page.getByLabel('동작 검색')).toHaveValue(motion.search)
+    await expect(page.getByRole('button', { name: '어깨', exact: true })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    )
+  })
+}
 let cameraCalls = 0
 let requests: string[] = []
 let errors: string[] = []
@@ -210,9 +258,13 @@ test('C-01 guest and server failure close the preview without a candidate fallba
   page,
 }, info) => {
   meStatus = 401
-  await page.goto('/dev/select?motion=neck-side')
-  await expect(page).toHaveURL(/\/login\?next=%2Fstart$/)
-  await expect(page.getByText('목 옆으로 기울이기', { exact: true })).toHaveCount(0)
+  for (const id of ['neck-side', 'shoulder-shrug', 'arm-overhead']) {
+    await page.goto(`/dev/select?motion=${id}`)
+    await expect(page).toHaveURL(/\/login\?next=%2Fstart$/)
+    await expect(page.getByRole('button', { name: '코칭 준비 중' })).toHaveCount(0)
+    for (const title of ['목 옆으로 기울이기', '어깨 으쓱·이완', '팔 위로 뻗기'])
+      await expect(page.getByText(title, { exact: true })).toHaveCount(0)
+  }
   meStatus = 503
   await page.goto('/dev/select')
   await expect(page.getByRole('heading', { name: '연결을 확인해 주세요' })).toBeVisible()
@@ -225,9 +277,13 @@ test('C-01 guest and server failure close the preview without a candidate fallba
 test('C-06 actual production hides the dev route, catalog and entry link', async ({
   page,
 }, info) => {
-  await page.goto('http://localhost:4182/dev/select?motion=neck-side')
-  await expect(page.getByRole('heading', { name: '페이지를 찾을 수 없습니다' })).toBeVisible()
-  await expect(page.getByText('목 옆으로 기울이기', { exact: true })).toHaveCount(0)
+  for (const id of ['neck-side', 'shoulder-shrug', 'arm-overhead']) {
+    await page.goto(`http://localhost:4182/dev/select?motion=${id}`)
+    await expect(page.getByRole('heading', { name: '페이지를 찾을 수 없습니다' })).toBeVisible()
+    await expect(page.getByRole('button', { name: '코칭 준비 중' })).toHaveCount(0)
+    for (const title of ['목 옆으로 기울이기', '어깨 으쓱·이완', '팔 위로 뻗기'])
+      await expect(page.getByText(title, { exact: true })).toHaveCount(0)
+  }
   await page.goto('http://localhost:4182/start')
   await expect(page.getByRole('heading', { name: '내 몸을 위한 시작' })).toBeVisible()
   await expect(page.getByRole('link', { name: '동작 선택 개발 검수' })).toHaveCount(0)

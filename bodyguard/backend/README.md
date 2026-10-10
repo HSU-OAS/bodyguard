@@ -2,13 +2,15 @@
 
 S2.1 + S2.6a1/b1, FR-U-01~05·NFR-08. 이메일 확인/구글 계정, 서버 쿠키·CSRF, 본인 조회·로그아웃·비밀번호 복구와 아래 본인 수행 기록 API다. [복구 웹 화면](../docs/stories/stage2-password-recovery-web.md)은 PR #11 병합. [구글 API·로컬 보안 시험](../docs/stories/stage2-google-auth-api.md)은 실제 공급자 연결과 구분한다. 본인 탈퇴 API는 PR #25 병합됐고 [계정·탈퇴 웹](../docs/stories/stage4-account-withdrawal-web.md)은 별도로 검증한다. 실제 Google/Gmail·코칭 기록 생산·운영 적용/배포는 미완료다.
 
-## 서버 점검 — S5.1
+## 서버 점검 — S5.1 / S5.6
 
-인증 없는 `GET /api/v1/health/live`는200 `{status: alive}`이며 DB를 사용하지 않는다. `GET /api/v1/health/ready`는 PostgreSQL18 primary·현재0008 revision·필수 테이블/열·API 역할의 SELECT/INSERT/UPDATE/DELETE 권한을 읽기만 하여 확인하고200 `{status: ready}` 또는503 `{status: unavailable}`만 반환한다. 별도 DB 연결이며 인증 pool·쿠키·세션 활동·cleanup·회원/기록 행 조회·쓰기·메일·자동 migration은 없다. 기존 no-store/no-referrer를 적용하고 SQL/DB 주소/오류 원문을 앱 로그에 내보내지 않는다.
+인증 없는 `GET /api/v1/health/live`는200 `{status: alive}`이며 DB를 사용하지 않는다. `GET /api/v1/health/ready`는 PostgreSQL18 primary·현재0008 revision·필수 테이블/열·API 역할의 SELECT/INSERT/UPDATE/DELETE 권한·metadata의 필수 소유/삭제 FK 9개를 읽기만 하여 확인하고200 `{status: ready}` 또는503 `{status: unavailable}`만 반환한다. FK 이름이 아니라 앱과 같은 search_path의 relation·컬럼 순서·삭제/갱신·MATCH·지연 속성·validated/enforced·활성 trigger를 확인하며 FK를 우회하는 replica 연결은 준비 실패다. 별도 DB 연결이며 인증 pool·쿠키·세션 활동·cleanup·회원/기록 행 조회·쓰기·메일·자동 migration은 없다. 기존 no-store/no-referrer를 적용하고 SQL/DB 주소/오류 원문을 앱 로그에 내보내지 않는다.
 
 process별 점검1개·대기열0, 접속 timeout2초(대상별), 전체 작업 취소 deadline3초, SQL1초·잠금250ms·읽기 전용을 접속 때 적용한다. 기존 URL/PGOPTIONS의 search_path 등은 보존하되 이 한계는 뒤에서 강제한다.3초는 무조건 그 시각까지 HTTP 응답한다는 보장이 아니다. native psycopg 취소/정리가 추가로 걸릴 수 있으며 현재 고정3.3.6 소스의 취소/결과 대기는 각각5초 한계다. 무한 대기로 떨어지는 libpq17 미만은 ready503으로 거부한다. 이번 실제 client는 libpq18.6이다. 동시에 점검하면 busy도503이므로 운영 probe는 단일 worker별로 겹치지 않도록 구성/검증해야 한다.
 
 ready200은 **API의 제한된 DB 준비만** 뜻한다. 모든 제약/인덱스/보안 설정 감사, 실제 SMTP/Google·HTTPS·백업·코칭/아바타/실측·법무·전문가 승인이나 출시 가능을 보증하지 않는다. DB 장애 때 live를 재시작 기준으로 실패시키지 않는다. 실제 운영 점검 연결·프록시·DB migration·시크릿·배포는 별도 승인이다. [Story와 실제 SQL/loopback HTTP·주입 구분](../docs/stories/stage5-runtime-readiness.md).
+
+[S5.6 제약 손상·복원 증거](../docs/review/readiness-owned-constraints/README.md)는 새 소유 PostgreSQL 18의 실제 FK 결함과 loopback HTTP 검증이다. 실제 브라우저·공급자·HTTPS·운영 DB 검증이나 백업 복원 후 삭제 데이터/세션 재등장 방지의 완료 증거가 아니다.
 
 ## 본인 탈퇴 — S4.5/6
 

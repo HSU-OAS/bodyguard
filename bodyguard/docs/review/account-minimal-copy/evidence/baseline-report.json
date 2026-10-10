@@ -1,0 +1,335 @@
+{
+  "phase": "baseline",
+  "head": "0cdacb03972c16ac7b3ddcd914172d444141dfa1",
+  "source": {
+    "src/pages/MemberPage.tsx": "e5e9ade287c3d03e8020144b1f4d902a1f84604cd43583b29ad6ac48a6182711",
+    "src/pages/PasswordPage.tsx": "d499ec4f6cd4d27e2f225f1184dd0b547837f1acd65f80be4e13a7624fe17504",
+    "src/App.tsx": "a18ca00c782e2e25d798511d6c7e7d158a34c2635e80005bcf30e4059c998e67",
+    "src/auth.tsx": "8357e10ad49a027eb2e5996ea5d5bcc55b9262aac5edc6ed10d0ff14cf6bae10",
+    "src/api/auth.ts": "b467901215b027c14db34e9b6f5ed3ad48504d692adad7aa6d8df9afd2bb2a09",
+    "src/index.css": "580ca04512309f462342380a861d28e1f1370447bc1b0aab2420bd859216da59",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+    "scripts/test-account-copy-browser.mjs": "0314905e7d9ebff69d2394823f02eccbe2a3ea936d0b414c4b8b999ce7bbfa8b"
+  },
+  "provenance": "Production Vite output / actual Chrome / synthetic API and credentials. No real provider, mail, SQL, webcam or participant.",
+  "screens": [
+    {
+      "name": "member",
+      "width": 1440,
+      "charsWithoutSpace": 250,
+      "securityVisible": false,
+      "labels": [],
+      "links": [
+        [
+          "수행 기록 관리",
+          "/records"
+        ],
+        [
+          "자세 기록 관리",
+          "/posture-records"
+        ],
+        [
+          "알림 설정 관리",
+          "/account/notifications"
+        ],
+        [
+          "회원 탈퇴 안내",
+          "/account/delete"
+        ]
+      ]
+    },
+    {
+      "name": "forgot",
+      "width": 1440,
+      "charsWithoutSpace": 173,
+      "securityVisible": true,
+      "labels": [
+        "이메일"
+      ],
+      "links": [
+        [
+          "로그인",
+          "/login"
+        ],
+        [
+          "서비스 소개로 돌아가기",
+          "/"
+        ]
+      ]
+    },
+    {
+      "name": "reset",
+      "width": 1440,
+      "charsWithoutSpace": 206,
+      "securityVisible": true,
+      "labels": [
+        "새 비밀번호",
+        "새 비밀번호 확인"
+      ],
+      "links": [
+        [
+          "로그인",
+          "/login"
+        ],
+        [
+          "재설정 다시 요청",
+          "/password/forgot"
+        ],
+        [
+          "서비스 소개로 돌아가기",
+          "/"
+        ]
+      ]
+    },
+    {
+      "name": "member",
+      "width": 1024,
+      "charsWithoutSpace": 250,
+      "securityVisible": false,
+      "labels": [],
+      "links": [
+        [
+          "수행 기록 관리",
+          "/records"
+        ],
+        [
+          "자세 기록 관리",
+          "/posture-records"
+        ],
+        [
+          "알림 설정 관리",
+          "/account/notifications"
+        ],
+        [
+          "회원 탈퇴 안내",
+          "/account/delete"
+        ]
+      ]
+    },
+    {
+      "name": "forgot",
+      "width": 1024,
+      "charsWithoutSpace": 173,
+      "securityVisible": true,
+      "labels": [
+        "이메일"
+      ],
+      "links": [
+        [
+          "로그인",
+          "/login"
+        ],
+        [
+          "서비스 소개로 돌아가기",
+          "/"
+        ]
+      ]
+    },
+    {
+      "name": "reset",
+      "width": 1024,
+      "charsWithoutSpace": 206,
+      "securityVisible": true,
+      "labels": [
+        "새 비밀번호",
+        "새 비밀번호 확인"
+      ],
+      "links": [
+        [
+          "로그인",
+          "/login"
+        ],
+        [
+          "재설정 다시 요청",
+          "/password/forgot"
+        ],
+        [
+          "서비스 소개로 돌아가기",
+          "/"
+        ]
+      ]
+    },
+    {
+      "name": "member",
+      "width": 800,
+      "charsWithoutSpace": 250,
+      "securityVisible": false,
+      "labels": [],
+      "links": [
+        [
+          "수행 기록 관리",
+          "/records"
+        ],
+        [
+          "자세 기록 관리",
+          "/posture-records"
+        ],
+        [
+          "알림 설정 관리",
+          "/account/notifications"
+        ],
+        [
+          "회원 탈퇴 안내",
+          "/account/delete"
+        ]
+      ]
+    },
+    {
+      "name": "forgot",
+      "width": 800,
+      "charsWithoutSpace": 65,
+      "securityVisible": false,
+      "labels": [
+        "이메일"
+      ],
+      "links": [
+        [
+          "로그인",
+          "/login"
+        ],
+        [
+          "서비스 소개로 돌아가기",
+          "/"
+        ]
+      ]
+    },
+    {
+      "name": "reset",
+      "width": 800,
+      "charsWithoutSpace": 98,
+      "securityVisible": false,
+      "labels": [
+        "새 비밀번호",
+        "새 비밀번호 확인"
+      ],
+      "links": [
+        [
+          "로그인",
+          "/login"
+        ],
+        [
+          "재설정 다시 요청",
+          "/password/forgot"
+        ],
+        [
+          "서비스 소개로 돌아가기",
+          "/"
+        ]
+      ]
+    },
+    {
+      "name": "forgot-dark",
+      "width": 1024,
+      "charsWithoutSpace": 173,
+      "securityVisible": true,
+      "labels": [
+        "이메일"
+      ],
+      "links": [
+        [
+          "로그인",
+          "/login"
+        ],
+        [
+          "서비스 소개로 돌아가기",
+          "/"
+        ]
+      ]
+    },
+    {
+      "name": "forgot-reduced",
+      "width": 1024,
+      "charsWithoutSpace": 173,
+      "securityVisible": true,
+      "labels": [
+        "이메일"
+      ],
+      "links": [
+        [
+          "로그인",
+          "/login"
+        ],
+        [
+          "서비스 소개로 돌아가기",
+          "/"
+        ]
+      ]
+    },
+    {
+      "name": "ack",
+      "width": 1440,
+      "charsWithoutSpace": 230,
+      "securityVisible": true,
+      "labels": [
+        "이메일"
+      ],
+      "links": [
+        [
+          "로그인",
+          "/login"
+        ],
+        [
+          "서비스 소개로 돌아가기",
+          "/"
+        ]
+      ]
+    },
+    {
+      "name": "invalid",
+      "width": 1440,
+      "charsWithoutSpace": 174,
+      "securityVisible": true,
+      "labels": [],
+      "links": [
+        [
+          "재설정 다시 요청",
+          "/password/forgot"
+        ],
+        [
+          "로그인",
+          "/login"
+        ],
+        [
+          "서비스 소개로 돌아가기",
+          "/"
+        ]
+      ]
+    },
+    {
+      "name": "complete",
+      "width": 1440,
+      "charsWithoutSpace": 172,
+      "securityVisible": true,
+      "labels": [],
+      "links": [
+        [
+          "로그인으로 돌아가기",
+          "/login"
+        ],
+        [
+          "로그인",
+          "/login"
+        ],
+        [
+          "서비스 소개로 돌아가기",
+          "/"
+        ]
+      ]
+    }
+  ],
+  "flows": [
+    "dark-preference-keyboard",
+    "reduced-motion-keyboard",
+    "service-error-retry-conditional-ack",
+    "quota-disabled-countdown",
+    "pending-leave-no-late-ack",
+    "mismatch-no-post-complete-cleared-focused",
+    "logout-hides-account"
+  ],
+  "failures": [],
+  "chrome": "154.0.8037.57",
+  "passed": true,
+  "cameraCalls": 0,
+  "externalOrigins": [],
+  "pageErrors": []
+}

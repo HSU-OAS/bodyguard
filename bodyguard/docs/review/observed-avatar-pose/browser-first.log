@@ -1,0 +1,18 @@
+node:fs:622
+  return binding.open(
+                 ^
+
+Error: ENOENT: no such file or directory, open '/private/tmp/bodyguard-observed-rig-proof.RCV2v2/probe/probe.js'
+    at Object.openSync (node:fs:622:18)
+    at readFileSync (node:fs:488:35)
+    at file:///Applications/%E1%84%92%E1%85%A1%E1%86%A8%E1%84%80%E1%85%AD%20%E1%84%82%E1%85%A2%E1%84%87%E1%85%AE/2026-2%E1%84%92%E1%85%A1%E1%86%A8%E1%84%80%E1%85%B5/%E1%84%8B%E1%85%A9%E1%84%91%E1%85%B3%E1%86%AB%E1%84%89%E1%85%A9%E1%84%89%E1%85%B3%20AI%20SW%20%E1%84%8B%E1%85%B2%E1%86%BC%E1%84%92%E1%85%A1%E1%86%B8%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3/BODYGUARD-observed-avatar-pose/bodyguard/frontend/scripts/test-observed-rig-browser.mjs:45:15
+    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+    at async node:internal/modules/esm/loader:647:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/private/tmp/bodyguard-observed-rig-proof.RCV2v2/probe/probe.js'
+}
+
+Node.js v24.20.0

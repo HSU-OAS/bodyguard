@@ -1,0 +1,67 @@
+
+Running 14 tests using 1 worker
+
+  ✘   1 e2e/nativehead.spec.ts:292:5 › male actual owned phase→pause→fresh generation reference (6.5s)
+  ✓   2 e2e/nativehead.spec.ts:362:3 › male native start→stop→own interrupted record (5.2s)
+  ✓   3 e2e/nativehead.spec.ts:408:3 › male native held result→same-account refresh→new owner explicit restart (8.9s)
+  ✓   4 e2e/nativehead.spec.ts:440:5 › male native held result→logout→no old resume/save (5.2s)
+  ✓   5 e2e/nativehead.spec.ts:440:5 › male native held result→server401→no old resume/save (5.2s)
+  ✓   6 e2e/nativehead.spec.ts:440:5 › male native held result→pagehide→no old resume/save (5.2s)
+  ✓   7 e2e/nativehead.spec.ts:440:5 › male native held result→unmount→no old resume/save (5.1s)
+  ✘   8 e2e/nativehead.spec.ts:292:5 › female actual owned phase→pause→fresh generation reference (5.8s)
+  ✓   9 e2e/nativehead.spec.ts:362:3 › female native start→stop→own interrupted record (5.2s)
+  ✓  10 e2e/nativehead.spec.ts:408:3 › female native held result→same-account refresh→new owner explicit restart (9.0s)
+  ✓  11 e2e/nativehead.spec.ts:440:5 › female native held result→logout→no old resume/save (5.2s)
+  ✓  12 e2e/nativehead.spec.ts:440:5 › female native held result→server401→no old resume/save (5.2s)
+  ✓  13 e2e/nativehead.spec.ts:440:5 › female native held result→pagehide→no old resume/save (5.2s)
+  ✓  14 e2e/nativehead.spec.ts:440:5 › female native held result→unmount→no old resume/save (5.1s)
+
+
+  1) e2e/nativehead.spec.ts:292:5 › male actual owned phase→pause→fresh generation reference ───────
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 0.000002
+    Received:   0.32553397148372515
+
+      316 |       })
+      317 |       expect(seeking.referenceTargetError).not.toBeNull()
+    > 318 |       expect(seeking.referenceTargetError as number).toBeLessThan(2e-6)
+          |                                                      ^
+      319 |       await page
+      320 |         .locator('#native-avatar')
+      321 |         .screenshot({ path: info.outputPath(`reference-${gender}-seeking.png`) })
+        at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-reference/bodyguard/frontend/e2e/nativehead.spec.ts:318:54
+
+    attachment #1: native-head-summary (application/json) ──────────────────────────────────────────
+    test-results/nativereference-20261008T043555930578Z/nativereference-male-actua-aac11-→fresh-generation-reference/attachments/native-head-summary-7d8f869a7c97ad8a01ee2ba1cd2bd58315a61c73.json
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/nativereference-20261008T043555930578Z/nativereference-male-actua-aac11-→fresh-generation-reference/error-context.md
+
+  2) e2e/nativehead.spec.ts:292:5 › female actual owned phase→pause→fresh generation reference ─────
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 0.000002
+    Received:   0.38881529027959577
+
+      316 |       })
+      317 |       expect(seeking.referenceTargetError).not.toBeNull()
+    > 318 |       expect(seeking.referenceTargetError as number).toBeLessThan(2e-6)
+          |                                                      ^
+      319 |       await page
+      320 |         .locator('#native-avatar')
+      321 |         .screenshot({ path: info.outputPath(`reference-${gender}-seeking.png`) })
+        at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-reference/bodyguard/frontend/e2e/nativehead.spec.ts:318:54
+
+    attachment #1: native-head-summary (application/json) ──────────────────────────────────────────
+    test-results/nativereference-20261008T043555930578Z/nativereference-female-act-1812d-→fresh-generation-reference/attachments/native-head-summary-6ba8b1cfd2c6b5950f372b596baa6f7715de08ff.json
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/nativereference-20261008T043555930578Z/nativereference-female-act-1812d-→fresh-generation-reference/error-context.md
+
+  2 failed
+    e2e/nativehead.spec.ts:292:5 › male actual owned phase→pause→fresh generation reference ────────
+    e2e/nativehead.spec.ts:292:5 › female actual owned phase→pause→fresh generation reference ──────
+  12 passed (1.6m)

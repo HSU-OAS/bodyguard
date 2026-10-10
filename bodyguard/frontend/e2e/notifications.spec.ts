@@ -16,6 +16,52 @@ const defaults = {
 }
 const password = '격리된 설정 브라우저 시험 비밀번호 12345'
 const address = () => `notifications-${randomUUID()}@example.com`
+
+test('N-W05 A bookends cannot accept settings read with B cookies', async ({
+  page,
+  context,
+  browser,
+}) => {
+  await register(context)
+  const owner = (await (await context.request.get('/api/v1/me')).json()).id
+  expect(
+    (await post(context, '/settings/notifications', { ...defaults, posture_minutes: 8 })).status(),
+  ).toBe(200)
+  const other = await browser.newContext({
+    baseURL: origin,
+    proxy: {
+      server: process.env.BODYGUARD_TEST_BLOCKED_PROXY as string,
+      bypass: 'localhost,127.0.0.1,[::1]',
+    },
+  })
+  try {
+    await register(other)
+    expect(
+      (await post(other, '/settings/notifications', { ...defaults, posture_minutes: 23 })).status(),
+    ).toBe(200)
+    const cookie = (await other.cookies()).map((value) => `${value.name}=${value.value}`).join('; ')
+    let status = 0
+    await page.route('**/api/v1/settings/notifications', async (route) => {
+      // Fault only the initial read. A rejected read uses the existing provider refresh
+      // and then performs a fresh, normally authenticated A read.
+      if (route.request().method() !== 'GET' || status !== 0) return route.continue()
+      const response = await route.fetch({ headers: { ...route.request().headers(), cookie } })
+      status = response.status()
+      await route.fulfill({ response })
+    })
+    await page.goto('/account/notifications')
+    await expect.poll(() => status).not.toBe(0)
+    expect(status).toBe(403)
+    expect((await (await context.request.get('/api/v1/me')).json()).id).toBe(owner)
+    await formRendered(page)
+    await expect(page.getByLabel('자세 알림 시간 (분)', { exact: true })).toHaveValue('8')
+    expect(
+      (await (await other.request.get('/api/v1/settings/notifications')).json()).posture_minutes,
+    ).toBe(23)
+  } finally {
+    await other.close()
+  }
+})
 function contrast(a: string, b: string) {
   const luminance = (color: string) => {
     const rgb = color

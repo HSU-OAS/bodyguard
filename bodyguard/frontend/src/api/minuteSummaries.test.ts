@@ -213,3 +213,57 @@ it('absolute float tolerance cannot create a materially impossible percentage', 
   }
   expect(() => parseMinute(tiny)).toThrow(ApiError)
 })
+
+// FR-U-04/NFR-08: controlled caller mutation, not a naturally occurring cookie bypass.
+it.each(['csrf', 'json', 'before-list', 'before-preview', 'before-remove'] as const)(
+  'never transfers the same recorded-minute context to a changed ID in %s',
+  async (phase) => {
+    const original: ReadyAccount = { ...authority, user: { ...authority.user } }
+    let serverOwner = original.user.id
+    function mutate() {
+      original.user.id = serverOwner = '00000000-0000-4000-8000-000000000002'
+    }
+    const fetch = vi.fn(async (path: string) => {
+      if (path === '/api/v1/me')
+        return new Response(JSON.stringify({ ...original.user, id: serverOwner }))
+      if (path === '/api/v1/auth/csrf') {
+        if (phase === 'csrf') mutate()
+        return new Response(JSON.stringify({ csrf_token: 'a'.repeat(64) }))
+      }
+      const value = path.endsWith('/delete')
+        ? { deleted: 3 }
+        : path.endsWith('/delete-preview')
+          ? signed
+          : { items: [minuteFixture], has_more: false }
+      const response = new Response(JSON.stringify(value))
+      if (phase === 'json')
+        vi.spyOn(response, 'json').mockImplementation(async () => {
+          mutate()
+          return value
+        })
+      return response
+    })
+    vi.stubGlobal('fetch', fetch)
+    const prepared = prepareSummaries({
+      authority: original,
+      readAuthority: () => original,
+      signal: new AbortController().signal,
+    })
+    if (phase === 'csrf') {
+      await expect(prepared).rejects.toMatchObject({ status: 401 })
+    } else {
+      const context = await prepared
+      if (phase.startsWith('before-')) mutate()
+      const operation =
+        phase === 'before-preview'
+          ? context.preview(range, new AbortController().signal)
+          : phase === 'before-remove'
+            ? context.remove(signed, new AbortController().signal)
+            : context.list(range, 0, new AbortController().signal)
+      await expect(operation).rejects.toMatchObject({ status: 401 })
+      context.close()
+    }
+    if (phase !== 'json')
+      expect(fetch.mock.calls.some(([path]) => path.startsWith('/api/v1/summaries'))).toBe(false)
+  },
+)

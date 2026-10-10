@@ -1,11 +1,20 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useReducer, useRef, useState } from 'react'
 import { Link } from 'react-router'
 import { drawSkeleton2D } from '../avatar/drawSkeleton2D'
 import { Skeleton3D } from '../avatar/Skeleton3D'
 import { StatsPanel } from '../components/StatsPanel'
 import { type LatestPose, type MeasureError, useMeasurement } from '../pose/useMeasurement'
-import { framingHint, REQUIRED_JOINTS } from '../posture/framing'
-import { trustedJoints } from '../posture/landmarks'
+import {
+  createFramingTrial,
+  type ObserverFraming,
+  readFramingSample,
+  reduceFramingTrial,
+  summarizeFramingTrials,
+  TRIAL_SCENARIOS,
+  type TrialScenario,
+  type TrialSettings,
+  trialProfileKey,
+} from '../posture/framingTrial'
 
 // prd §4 오류·예외 처리
 const ERROR_TEXT: Record<MeasureError, string> = {
@@ -17,28 +26,19 @@ const ERROR_TEXT: Record<MeasureError, string> = {
   model: '포즈 모델을 불러오지 못했어요. 개발 서버를 pnpm dev로 켰는지 확인해 주세요.',
 }
 
-// FR-S-01·FR-M-07 동작 후보의 촬영 범위 검증용. 코칭 판정은 하지 않는다.
-const TRIAL_SCENARIOS = [
-  '정상 좌측',
-  '정상 우측',
-  '중앙 복귀',
-  '어깨 으쓱 보상',
-  '몸통 옆 기울임',
-  '머리 회전',
-  '상반신만 보임',
-  '한쪽 어깨 가림',
-  '전신 보임',
-  '얼굴 가림',
-  '두 사람 보임',
-  '대상 전환',
-  '사선·역광·어두움',
-  '카메라 중단',
-] as const
+const OBSERVER_LABELS = {
+  unrated: '판단 보류',
+  sufficient: '필수 부위 충분',
+  insufficient: '필수 부위 부족',
+  multiple: '복수 인물',
+} as const
+const RESULT_LABELS = { ...OBSERVER_LABELS, unavailable: '대조 보류' }
 
 // 스켈레톤이 내 몸을 따라 움직이는지 확인하는 데모 화면. 자세 판정·알림은 아직 없다
 export function MeasureDemoPage() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const observerRef = useRef<HTMLSelectElement>(null)
 
   const draw = useCallback((pose: LatestPose) => {
     const canvas = canvasRef.current
@@ -74,9 +74,21 @@ export function MeasureDemoPage() {
   // 안내·제스처가 사라질 때도 글자가 남아 있어야 부드럽게 흐려진다
   const [hintText, setHintText] = useState('')
   const [gestureText, setGestureText] = useState('')
-  const [trialScenario, setTrialScenario] = useState<string>(TRIAL_SCENARIOS[0])
-  const [trialRows, setTrialRows] = useState<{ id: number; text: string }[]>([])
-  const trialId = useRef(0)
+  const [trialScenario, setTrialScenario] = useState<TrialScenario>(TRIAL_SCENARIOS[0])
+  const [trial, trialAction] = useReducer(reduceFramingTrial, undefined, createFramingTrial)
+  const [unusedCondition, setUnusedCondition] = useState(false)
+  const trialSettings: TrialSettings = { model, framingMode, fpsLimit, handsEnabled, faceEnabled }
+  const profile = trialProfileKey(trialSettings)
+  const tuningCounts =
+    trial.frozen?.tuning ??
+    summarizeFramingTrials(trial.rows.filter((row) => row.profile === profile))
+  const validationCounts = summarizeFramingTrials(
+    trial.rows.filter((row) => row.phase === 'validation'),
+  )
+  useEffect(() => {
+    if (trial.phase === 'validation' && trial.frozen?.profile !== profile)
+      trialAction({ type: 'invalidate-settings' })
+  }, [profile, trial.phase, trial.frozen?.profile])
   useEffect(() => {
     if (stats.hint) setHintText(stats.hint)
   }, [stats.hint])
@@ -86,29 +98,19 @@ export function MeasureDemoPage() {
 
   const captureTrial = () => {
     const pose = poseRef.current
-    // FR-M-07 개발 관찰용 1초 상한. 동작 판정/유지 시간의 검증된 수치가 아니다.
-    const age = pose.sampledAt === null ? null : performance.now() - pose.sampledAt
-    const fresh = age !== null && Number.isFinite(age) && age >= 0 && age <= 1000
-    const points = running && fresh && pose.personCount === 1 ? pose.image : null
-    const trusted = trustedJoints(points)
-    const required = REQUIRED_JOINTS[framingMode]
-    const visible = required.filter((joint) => trusted[joint]).length
-    const hint = !running
-      ? '측정 중 아님'
-      : !fresh
-        ? '새 프레임 대기 (촬영 범위 충족 아님)'
-        : pose.personCount > 1
-          ? '복수 포즈 — 한 사람만 화면에 들어오게 해 주세요'
-          : framingHint(points !== null, trusted, framingMode)
-    const scope = framingMode === 'seated' ? '머리·어깨' : '전신'
-    const id = ++trialId.current
-    setTrialRows((rows) => [
-      ...rows.slice(-99),
-      {
-        id,
-        text: `${trialScenario} / ${scope}: 필수 관절 ${visible}/${required.length} · ${hint ?? '촬영 범위 충족 (동작 성공 아님)'}`,
-      },
-    ])
+    trialAction({
+      type: 'capture',
+      scenario: trialScenario,
+      settings: trialSettings,
+      sample: readFramingSample({
+        running,
+        sampledAt: pose.sampledAt,
+        personCount: pose.personCount,
+        image: pose.image,
+        mode: framingMode,
+        now: performance.now(),
+      }),
+    })
   }
 
   return (
@@ -176,6 +178,7 @@ export function MeasureDemoPage() {
             {/* FR-M-07 필요한 관절이 화면 밖이면 부드럽게 안내해 그 자세를 하도록 유도한다 */}
             <output
               aria-live="polite"
+              aria-label="촬영 안내"
               className={`pointer-events-none absolute inset-x-0 top-4 mx-auto w-fit rounded-full bg-sky-400/15 px-4 py-2 text-sm text-sky-100 backdrop-blur-sm transition-opacity duration-700 ${
                 stats.hint ? 'opacity-100' : 'opacity-0'
               }`}
@@ -200,30 +203,57 @@ export function MeasureDemoPage() {
         stats={stats}
         running={running}
         fpsLimit={fpsLimit}
-        onFpsLimitChange={setFpsLimit}
+        onFpsLimitChange={(value) => {
+          if (value !== fpsLimit) trialAction({ type: 'invalidate-settings' })
+          setFpsLimit(value)
+        }}
         framingMode={framingMode}
-        onFramingModeChange={setFramingMode}
+        onFramingModeChange={(value) => {
+          if (value !== framingMode) trialAction({ type: 'invalidate-settings' })
+          setFramingMode(value)
+        }}
         model={model}
-        onModelChange={setModel}
+        onModelChange={(value) => {
+          if (value !== model) trialAction({ type: 'invalidate-settings' })
+          setModel(value)
+        }}
         handsEnabled={handsEnabled}
-        onHandsEnabledChange={setHandsEnabled}
+        onHandsEnabledChange={(value) => {
+          if (value !== handsEnabled) trialAction({ type: 'invalidate-settings' })
+          setHandsEnabled(value)
+        }}
         faceEnabled={faceEnabled}
-        onFaceEnabledChange={setFaceEnabled}
+        onFaceEnabledChange={(value) => {
+          if (value !== faceEnabled) trialAction({ type: 'invalidate-settings' })
+          setFaceEnabled(value)
+        }}
       />
 
       {import.meta.env.DEV && (
         <section aria-label="동작 촬영 검증" className="mt-4 rounded-xl bg-slate-900 p-4 text-sm">
           <h2 className="font-semibold">동작 촬영 검증 · 개발 전용</h2>
           <p className="mt-1 text-slate-400">
-            관찰자가 상황을 선택한 뒤 현재 프레임의 필수 관절만 기록합니다. 자세의 옳음·통증·성공은
-            판정하지 않습니다. 최신 100개 요약만 이 화면의 메모리에 있고 새로고침하면 사라집니다.
+            촬영 범위만 대조합니다. 자세·통증·성공은 판정하지 않습니다. 최신 100개 요약은 이 화면의
+            메모리에만 있습니다.
+          </p>
+          <p className="mt-1 text-slate-400" aria-live="polite">
+            {trial.phase === 'tuning' ? '튜닝' : '별도 검증 · 설정 동결'} · 튜닝 대조{' '}
+            {tuningCounts.matched} 일치 / {tuningCounts.mismatched} 불일치 /{' '}
+            {tuningCounts.overAccepted} 범위 과인식 / {tuningCounts.held} 보류
+            {trial.phase === 'validation' && (
+              <>
+                {' '}
+                · 검증(현재 기록 창) {validationCounts.matched} 일치 / {validationCounts.mismatched}{' '}
+                불일치 / {validationCounts.overAccepted} 범위 과인식 / {validationCounts.held} 보류
+              </>
+            )}
           </p>
           <div className="mt-3 flex flex-wrap items-end gap-3">
             <label className="flex flex-col gap-1">
               연기한 상황
               <select
                 value={trialScenario}
-                onChange={(event) => setTrialScenario(event.target.value)}
+                onChange={(event) => setTrialScenario(event.target.value as TrialScenario)}
                 className="rounded bg-slate-800 px-2 py-2"
               >
                 {TRIAL_SCENARIOS.map((scenario) => (
@@ -231,26 +261,96 @@ export function MeasureDemoPage() {
                 ))}
               </select>
             </label>
+            <label className="flex flex-col gap-1">
+              관찰자 판단
+              <select
+                ref={observerRef}
+                value={trial.observer}
+                onChange={(event) =>
+                  trialAction({ type: 'observer', observer: event.target.value as ObserverFraming })
+                }
+                className="rounded bg-slate-800 px-2 py-2"
+              >
+                {Object.entries(OBSERVER_LABELS).map(([value, label]) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+            </label>
             <button
               type="button"
               onClick={captureTrial}
-              disabled={!running}
+              disabled={!running || trial.invalidated}
               className="rounded bg-sky-500 px-3 py-2 text-slate-950 disabled:opacity-50"
             >
               현재 프레임 기록
             </button>
             <button
               type="button"
-              onClick={() => setTrialRows([])}
-              disabled={trialRows.length === 0}
+              onClick={() => {
+                trialAction({ type: 'clear' })
+                setUnusedCondition(false)
+                observerRef.current?.focus()
+              }}
+              disabled={trial.rows.length === 0 && trial.phase === 'tuning'}
               className="rounded border border-slate-600 px-3 py-2 disabled:opacity-50"
             >
               기록 지우기
             </button>
           </div>
+          {trial.phase === 'tuning' && (
+            <div className="mt-3 flex flex-wrap items-end gap-3">
+              <label className="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  checked={unusedCondition}
+                  onChange={(event) => setUnusedCondition(event.target.checked)}
+                />
+                튜닝에 쓰지 않은 촬영 조건
+              </label>
+              <button
+                type="button"
+                onClick={() => {
+                  trialAction({
+                    type: 'begin-validation',
+                    settings: trialSettings,
+                    now: performance.now(),
+                    unusedCondition,
+                  })
+                  observerRef.current?.focus()
+                }}
+                disabled={!unusedCondition || tuningCounts.matched + tuningCounts.mismatched === 0}
+                className="rounded border border-slate-600 px-3 py-2 disabled:opacity-50"
+              >
+                튜닝 마치고 검증 시작
+              </button>
+            </div>
+          )}
+          <p role="status" aria-label="촬영 대조 상태" className="mt-1 text-slate-400">
+            {trial.invalidated
+              ? '설정이 바뀌었습니다. 기록 지우기로 새 튜닝을 시작하세요.'
+              : trial.message}
+          </p>
           <ol className="mt-3 list-inside list-decimal space-y-1 text-slate-300" aria-live="polite">
-            {trialRows.map((row) => (
-              <li key={row.id}>{row.text}</li>
+            {trial.rows.map((row) => (
+              <li key={row.id}>
+                {row.scenario} / {row.profile.split('/')[1] === 'seated' ? '머리·어깨' : '전신'}:
+                필수 관절 {row.sample.visible}/{row.sample.total} ·{' '}
+                {row.sample.hint ?? '촬영 범위 충족 (동작 성공 아님)'}
+                {row.observer !== 'unrated' && (
+                  <>
+                    {' '}
+                    · {row.phase === 'tuning' ? '튜닝' : '검증'} · 관찰자:{' '}
+                    {OBSERVER_LABELS[row.observer]} / 인식: {RESULT_LABELS[row.sample.result]} ·{' '}
+                    {row.sample.result === 'unavailable'
+                      ? '대조 보류'
+                      : row.observer === row.sample.result
+                        ? '일치'
+                        : '불일치'}
+                  </>
+                )}
+              </li>
             ))}
           </ol>
         </section>

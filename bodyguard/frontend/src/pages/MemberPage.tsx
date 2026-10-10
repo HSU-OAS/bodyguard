@@ -9,7 +9,6 @@ export function MemberPage() {
     <section className="member-screen">
       <p className="eyebrow">MY ACCOUNT</p>
       <h1 tabIndex={-1}>내 계정</h1>
-      <p className="muted member-lead">로그인 정보와 자세·수행 기록을 관리합니다.</p>
       <section className="member-section" aria-labelledby="member-login">
         <h2 id="member-login">로그인 정보</h2>
         <dl className="member-details">
@@ -28,30 +27,28 @@ export function MemberPage() {
       </section>
       <section className="member-section" aria-labelledby="member-records">
         <h2 id="member-records">수행 기록</h2>
-        <p>기간별 기록을 확인하고, 선택한 기간의 기록을 삭제할 수 있습니다.</p>
+        <p>기간별로 조회·삭제합니다.</p>
         <Link className="button primary" to="/records">
           수행 기록 관리
         </Link>
       </section>
       <section className="member-section" aria-labelledby="member-posture-records">
         <h2 id="member-posture-records">자세 기록</h2>
-        <p>
-          저장된 1분 기록의 측정 시간과 부위별 편차를 확인하고, 선택한 기간의 기록을 삭제합니다.
-        </p>
+        <p>1분별 측정 시간·부위별 편차 조회와 기간별 삭제.</p>
         <Link className="button secondary" to="/posture-records">
           자세 기록 관리
         </Link>
       </section>
       <section className="member-section" aria-labelledby="member-notifications">
         <h2 id="member-notifications">알림 설정</h2>
-        <p>알림 시간과 소리 설정을 계정에 저장합니다. 실제 알림 연결은 준비 중입니다.</p>
+        <p>시간·소리를 저장합니다. 실제 알림은 연결 전입니다.</p>
         <Link className="button secondary" to="/account/notifications">
           알림 설정 관리
         </Link>
       </section>
       <section className="member-section" aria-labelledby="member-withdrawal">
         <h2 id="member-withdrawal">회원 탈퇴</h2>
-        <p>계정과 자세·수행 기록을 삭제합니다. 먼저 삭제 범위와 본인 확인 절차를 확인해 주세요.</p>
+        <p>본인 확인 후 계정과 자세·수행 기록을 삭제합니다.</p>
         <Link className="button secondary" to="/account/delete">
           회원 탈퇴 안내
         </Link>

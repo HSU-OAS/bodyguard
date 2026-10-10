@@ -1,0 +1,10 @@
+{
+  "kind": "tool-transcript-note-not-command-exit-receipt",
+  "command": "node notice-proof.mjs WORK CACHE PROOF",
+  "exitInToolResult": 1,
+  "failure": "canonical.equals(compiled) assertion",
+  "actualBuildSucceeded": true,
+  "actualByteIdentity": false,
+  "cause": "The programmatic build has a different process cwd; source region path comments differ. This was not an executable source change or a license banner difference.",
+  "preserved": "Original helper and notice-build output remain in the private proof folder; diff and failed command remain in chat. verify-notices separately verifies only //#region lines differ, retains bytesIdentical=false, and preserves the canonical native-tested artifact."
+}

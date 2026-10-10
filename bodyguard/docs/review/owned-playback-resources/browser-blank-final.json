@@ -1,0 +1,649 @@
+{
+  "head": "8ff7481d9edbce9338f2cb298a95b4d5c881367b",
+  "sourceBefore": {
+    "src/pose/ownedPoseFrame.ts": "9fa164b94d8f92bda910fc75a8d191fb97e730f79f9505e6457c23cf9ad31bc0",
+    "src/pose/videoPoseSource.ts": "69b96d9bb71369a57e3f3678f6e55cf02ad4d982f70cf3db72d573de27d7bfd2",
+    "src/pose/landmarker.ts": "57c31241fb995442b4c60adb75849576483fbd32bf6c8412b5d3282f96625d7d",
+    "src/pose/constants.ts": "18857d436d4cb1f4279a4bc01357d0b13d20d51c1fa13d33eaf4cb6332a63a60",
+    "src/avatar/ownedAvatarPair.ts": "d5de3204e7d3868ca3d9bd7e4a9636df111a7c4419c3c3bb326f993ddddcba83",
+    "src/avatar/ownedPosePlayback.ts": "cecd8b5e05f705f6eb04844a1c975c44ee96b64dae1507f8c2d0731693826daa",
+    "src/coaching/ownedPlaybackResources.ts": "6b89bf440e80d539a0a14e6e6f2c3c2735c8baa863019c7794fedaf1fe4432f9",
+    "src/coaching/resources.ts": "0832d662b19b522153f7e13507147a7b33f264d0eee94f10e07e06758d1fa029",
+    "src/coaching/session.ts": "3799bfdce8e829899f986b97770ce82a7bf4dd2932d0607060a513f23e080598",
+    "src/avatar/observedPoseRig.ts": "680235478e06efc111cc04515619f76668806bb64f0b2687f2144443c453c606",
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "e2e/fixtures/ownedPoseFrameProbe.ts": "316c0637229cca51ee4fdb29eea3702f4ba64666b2d4184ac9e8ed2bfe05da88",
+    "e2e/fixtures/ownedPoseFrame.vite.ts": "db8b2323c728bc3034e0307e65307096f70af8eccf6332412932deb4a4224194",
+    "e2e/fixtures/ownedVideoPoseProbe.ts": "bfb7c68e3b011080a8349d3492b3520772712baddc81c68694177793c1065726",
+    "e2e/fixtures/ownedVideoPose.vite.ts": "4fd7c802f447466a01e53a90327a0a95ad7e9986a05871cc9b849a804802d513",
+    "e2e/fixtures/ownedPosePlaybackProbe.ts": "877fc566a499dc41f56d1e37267b849723dc38e2300098c0c439829dfe0e6938",
+    "e2e/fixtures/ownedPosePlayback.vite.ts": "5d1420b39023da7c324028f74f9135075b50bc340b2d4296f75cedcc816cbb0c",
+    "e2e/fixtures/ownedPlaybackResourcesProbe.ts": "88385cb9888ea98d2fc354277e6bffdb34f60a5080929da9d3599e8f1f629be0",
+    "e2e/fixtures/ownedPlaybackResources.vite.ts": "6a1ca3a1a5e8558370969706d819b3d23764955fff7392e38fe82bdaa27249a6",
+    "scripts/test-pose-frame-browser.mjs": "40c5ac11270d2eb8860440ed2eca6272b9b37c7b22f63c9ec059907c668a4dfc",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "assetCommit": "25a9bd6c7392890e3b5d5d6ae1046bb7087d56ad",
+  "assetHashes": {
+    "male": "cc85bcd449f3f31347e4f7174986d41e4aca3067990f5d8a2e6ba3a099171927",
+    "female": "27c10902aa377e995bdbc115ab773cf22f8ea38582c49820304a33ad7685f25a"
+  },
+  "sdk": "1.0.1",
+  "resources": {
+    "/probe.js": {
+      "bytes": 1682749,
+      "sha": "9f9c7d6816ed5a6edcc89ad968e53d0e228caa6bfeccb6811acb7eaf6a9d5259"
+    },
+    "/models/pose_landmarker_lite.task": {
+      "bytes": 5777746,
+      "sha": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+    },
+    "/mediapipe/wasm/vision_wasm_internal.js": {
+      "bytes": 323377,
+      "sha": "e170ee67dd4e16c1a6fcd8840a206687e5a59b22c20e4a902bc445b095454d73"
+    },
+    "/mediapipe/wasm/vision_wasm_internal.wasm": {
+      "bytes": 11756954,
+      "sha": "8da277a733926eacd0474b8704b36742d6ec3231c57a860c5b889dff8f1df886"
+    },
+    "/mediapipe/wasm/vision_wasm_nosimd_internal.js": {
+      "bytes": 323180,
+      "sha": "e81d715a3d42cc3373602eb2f7aff795d164934db680e32496b65dab537f9658"
+    },
+    "/mediapipe/wasm/vision_wasm_nosimd_internal.wasm": {
+      "bytes": 10960242,
+      "sha": "a28483cd42e74e855bf5ebdb6b40d9b66a5b49e35e95020bc97669e6822a3192"
+    },
+    "/mediapipe/wasm/vision_wasm_module_internal.js": {
+      "bytes": 323415,
+      "sha": "da8934057f147b622e82cfb4c0dbd85461c598e268588b5a8ba9ca963a8ff82d"
+    },
+    "/mediapipe/wasm/vision_wasm_module_internal.wasm": {
+      "bytes": 11756972,
+      "sha": "2dabd8e23c60984628beb7bb338764c81a08e6837145273f59578684b5d53c1b"
+    },
+    "/male.glb": {
+      "bytes": 12656976,
+      "sha": "cc85bcd449f3f31347e4f7174986d41e4aca3067990f5d8a2e6ba3a099171927"
+    },
+    "/female.glb": {
+      "bytes": 12462848,
+      "sha": "27c10902aa377e995bdbc115ab773cf22f8ea38582c49820304a33ad7685f25a"
+    }
+  },
+  "actualSDK": true,
+  "actualChrome": true,
+  "actualWebGL": true,
+  "actualCamera": false,
+  "actualFakeCamera": false,
+  "actualVideoFrame": false,
+  "actualRAF": false,
+  "actualHuman": false,
+  "syntheticPositiveMovement": true,
+  "syntheticSessionGates": false,
+  "releaseAvatar": false,
+  "productPolicyApproved": false,
+  "inputStored": false,
+  "rawPointsLogged": false,
+  "samples": [
+    {
+      "gender": "male",
+      "passed": true,
+      "stages": [
+        {
+          "case": "prepared",
+          "state": {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 8
+          },
+          "closed": false,
+          "nativeCalls": 0,
+          "nativeCloses": 0,
+          "syntheticCalls": 0,
+          "syntheticCloses": 0,
+          "detectorCloses": 0,
+          "playback": null,
+          "renderFrames": 0,
+          "movingFrames": 0,
+          "held": false,
+          "models": 2,
+          "attached": 2,
+          "referenceUnchanged": true,
+          "userChanged": false,
+          "framing": [
+            true,
+            true
+          ],
+          "memory": {
+            "geometries": 5,
+            "textures": 11
+          },
+          "baseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "delegate": "GPU",
+          "actualCamera": false,
+          "actualHuman": false,
+          "releaseAvatar": false
+        },
+        {
+          "case": "actual-sdk-generated-blank",
+          "state": {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 8
+          },
+          "closed": false,
+          "nativeCalls": 1,
+          "nativeCloses": 1,
+          "syntheticCalls": 0,
+          "syntheticCloses": 0,
+          "detectorCloses": 0,
+          "playback": null,
+          "renderFrames": 0,
+          "movingFrames": 0,
+          "held": false,
+          "models": 2,
+          "attached": 2,
+          "referenceUnchanged": true,
+          "userChanged": false,
+          "framing": [
+            true,
+            true
+          ],
+          "memory": {
+            "geometries": 5,
+            "textures": 11
+          },
+          "baseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "delegate": "GPU",
+          "actualCamera": false,
+          "actualHuman": false,
+          "releaseAvatar": false,
+          "delivered": true,
+          "stampsPreserved": true,
+          "persons": 0
+        },
+        {
+          "case": "synthetic-positive-handoff",
+          "state": {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          "closed": false,
+          "nativeCalls": 1,
+          "nativeCloses": 1,
+          "syntheticCalls": 1,
+          "syntheticCloses": 1,
+          "detectorCloses": 0,
+          "playback": null,
+          "renderFrames": 0,
+          "movingFrames": 0,
+          "held": false,
+          "models": 2,
+          "attached": 2,
+          "referenceUnchanged": true,
+          "userChanged": true,
+          "framing": [
+            true,
+            true
+          ],
+          "memory": {
+            "geometries": 5,
+            "textures": 11
+          },
+          "baseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "delegate": "GPU",
+          "actualCamera": false,
+          "actualHuman": false,
+          "releaseAvatar": false,
+          "delivered": true,
+          "stampsPreserved": true,
+          "persons": 1
+        },
+        {
+          "case": "actual-sdk-no-person-revokes-synthetic-coverage",
+          "state": {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 8
+          },
+          "closed": false,
+          "nativeCalls": 2,
+          "nativeCloses": 2,
+          "syntheticCalls": 1,
+          "syntheticCloses": 1,
+          "detectorCloses": 0,
+          "playback": null,
+          "renderFrames": 0,
+          "movingFrames": 0,
+          "held": false,
+          "models": 2,
+          "attached": 2,
+          "referenceUnchanged": true,
+          "userChanged": true,
+          "framing": [
+            true,
+            true
+          ],
+          "memory": {
+            "geometries": 5,
+            "textures": 11
+          },
+          "baseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "delegate": "GPU",
+          "actualCamera": false,
+          "actualHuman": false,
+          "releaseAvatar": false,
+          "delivered": true,
+          "stampsPreserved": true,
+          "persons": 0
+        },
+        {
+          "case": "repeated-capture-no-inference",
+          "state": {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 8
+          },
+          "closed": false,
+          "nativeCalls": 2,
+          "nativeCloses": 2,
+          "syntheticCalls": 1,
+          "syntheticCloses": 1,
+          "detectorCloses": 0,
+          "playback": null,
+          "renderFrames": 0,
+          "movingFrames": 0,
+          "held": false,
+          "models": 2,
+          "attached": 2,
+          "referenceUnchanged": true,
+          "userChanged": true,
+          "framing": [
+            true,
+            true
+          ],
+          "memory": {
+            "geometries": 5,
+            "textures": 11
+          },
+          "baseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "delegate": "GPU",
+          "actualCamera": false,
+          "actualHuman": false,
+          "releaseAvatar": false,
+          "delivered": false,
+          "stampsPreserved": false,
+          "persons": null
+        },
+        {
+          "case": "closed-idempotent-no-delivery",
+          "state": {
+            "status": "closed",
+            "tracked": 0,
+            "total": 8
+          },
+          "closed": true,
+          "nativeCalls": 2,
+          "nativeCloses": 2,
+          "syntheticCalls": 1,
+          "syntheticCloses": 1,
+          "detectorCloses": 1,
+          "playback": null,
+          "renderFrames": 0,
+          "movingFrames": 0,
+          "held": false,
+          "models": 0,
+          "attached": 0,
+          "referenceUnchanged": true,
+          "userChanged": true,
+          "framing": [],
+          "memory": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "baseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "delegate": "GPU",
+          "actualCamera": false,
+          "actualHuman": false,
+          "releaseAvatar": false,
+          "delivered": false,
+          "stampsPreserved": false
+        }
+      ],
+      "previewSha": "c1398c0e1abcd556c68d53b74a0adb2971e416661f6b69c85a48b4b9a6dc2df2"
+    },
+    {
+      "gender": "female",
+      "passed": true,
+      "stages": [
+        {
+          "case": "prepared",
+          "state": {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 8
+          },
+          "closed": false,
+          "nativeCalls": 0,
+          "nativeCloses": 0,
+          "syntheticCalls": 0,
+          "syntheticCloses": 0,
+          "detectorCloses": 0,
+          "playback": null,
+          "renderFrames": 0,
+          "movingFrames": 0,
+          "held": false,
+          "models": 2,
+          "attached": 2,
+          "referenceUnchanged": true,
+          "userChanged": false,
+          "framing": [
+            true,
+            true
+          ],
+          "memory": {
+            "geometries": 5,
+            "textures": 11
+          },
+          "baseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "delegate": "GPU",
+          "actualCamera": false,
+          "actualHuman": false,
+          "releaseAvatar": false
+        },
+        {
+          "case": "actual-sdk-generated-blank",
+          "state": {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 8
+          },
+          "closed": false,
+          "nativeCalls": 1,
+          "nativeCloses": 1,
+          "syntheticCalls": 0,
+          "syntheticCloses": 0,
+          "detectorCloses": 0,
+          "playback": null,
+          "renderFrames": 0,
+          "movingFrames": 0,
+          "held": false,
+          "models": 2,
+          "attached": 2,
+          "referenceUnchanged": true,
+          "userChanged": false,
+          "framing": [
+            true,
+            true
+          ],
+          "memory": {
+            "geometries": 5,
+            "textures": 11
+          },
+          "baseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "delegate": "GPU",
+          "actualCamera": false,
+          "actualHuman": false,
+          "releaseAvatar": false,
+          "delivered": true,
+          "stampsPreserved": true,
+          "persons": 0
+        },
+        {
+          "case": "synthetic-positive-handoff",
+          "state": {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          "closed": false,
+          "nativeCalls": 1,
+          "nativeCloses": 1,
+          "syntheticCalls": 1,
+          "syntheticCloses": 1,
+          "detectorCloses": 0,
+          "playback": null,
+          "renderFrames": 0,
+          "movingFrames": 0,
+          "held": false,
+          "models": 2,
+          "attached": 2,
+          "referenceUnchanged": true,
+          "userChanged": true,
+          "framing": [
+            true,
+            true
+          ],
+          "memory": {
+            "geometries": 5,
+            "textures": 11
+          },
+          "baseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "delegate": "GPU",
+          "actualCamera": false,
+          "actualHuman": false,
+          "releaseAvatar": false,
+          "delivered": true,
+          "stampsPreserved": true,
+          "persons": 1
+        },
+        {
+          "case": "actual-sdk-no-person-revokes-synthetic-coverage",
+          "state": {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 8
+          },
+          "closed": false,
+          "nativeCalls": 2,
+          "nativeCloses": 2,
+          "syntheticCalls": 1,
+          "syntheticCloses": 1,
+          "detectorCloses": 0,
+          "playback": null,
+          "renderFrames": 0,
+          "movingFrames": 0,
+          "held": false,
+          "models": 2,
+          "attached": 2,
+          "referenceUnchanged": true,
+          "userChanged": true,
+          "framing": [
+            true,
+            true
+          ],
+          "memory": {
+            "geometries": 5,
+            "textures": 11
+          },
+          "baseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "delegate": "GPU",
+          "actualCamera": false,
+          "actualHuman": false,
+          "releaseAvatar": false,
+          "delivered": true,
+          "stampsPreserved": true,
+          "persons": 0
+        },
+        {
+          "case": "repeated-capture-no-inference",
+          "state": {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 8
+          },
+          "closed": false,
+          "nativeCalls": 2,
+          "nativeCloses": 2,
+          "syntheticCalls": 1,
+          "syntheticCloses": 1,
+          "detectorCloses": 0,
+          "playback": null,
+          "renderFrames": 0,
+          "movingFrames": 0,
+          "held": false,
+          "models": 2,
+          "attached": 2,
+          "referenceUnchanged": true,
+          "userChanged": true,
+          "framing": [
+            true,
+            true
+          ],
+          "memory": {
+            "geometries": 5,
+            "textures": 11
+          },
+          "baseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "delegate": "GPU",
+          "actualCamera": false,
+          "actualHuman": false,
+          "releaseAvatar": false,
+          "delivered": false,
+          "stampsPreserved": false,
+          "persons": null
+        },
+        {
+          "case": "closed-idempotent-no-delivery",
+          "state": {
+            "status": "closed",
+            "tracked": 0,
+            "total": 8
+          },
+          "closed": true,
+          "nativeCalls": 2,
+          "nativeCloses": 2,
+          "syntheticCalls": 1,
+          "syntheticCloses": 1,
+          "detectorCloses": 1,
+          "playback": null,
+          "renderFrames": 0,
+          "movingFrames": 0,
+          "held": false,
+          "models": 0,
+          "attached": 0,
+          "referenceUnchanged": true,
+          "userChanged": true,
+          "framing": [],
+          "memory": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "baseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "delegate": "GPU",
+          "actualCamera": false,
+          "actualHuman": false,
+          "releaseAvatar": false,
+          "delivered": false,
+          "stampsPreserved": false
+        }
+      ],
+      "previewSha": "ae36da55ae9bce0a5540a79395e6ffa02173dc94c8c938f267b145b909cb673d"
+    }
+  ],
+  "browser": "154.0.8037.98",
+  "boundary": {
+    "camera": 0,
+    "csp": 2,
+    "routedExternal": 0,
+    "proxyDenied": 10,
+    "errors": []
+  },
+  "lastCleanup": {
+    "state": {
+      "status": "closed",
+      "tracked": 0,
+      "total": 8
+    },
+    "closed": true,
+    "nativeCalls": 2,
+    "nativeCloses": 2,
+    "syntheticCalls": 1,
+    "syntheticCloses": 1,
+    "detectorCloses": 1,
+    "playback": null,
+    "renderFrames": 0,
+    "movingFrames": 0,
+    "held": false,
+    "models": 0,
+    "attached": 0,
+    "referenceUnchanged": true,
+    "userChanged": true,
+    "framing": [],
+    "memory": {
+      "geometries": 0,
+      "textures": 1
+    },
+    "baseline": {
+      "geometries": 0,
+      "textures": 1
+    },
+    "delegate": "GPU",
+    "actualCamera": false,
+    "actualHuman": false,
+    "releaseAvatar": false
+  },
+  "sourceAfter": {
+    "src/pose/ownedPoseFrame.ts": "9fa164b94d8f92bda910fc75a8d191fb97e730f79f9505e6457c23cf9ad31bc0",
+    "src/pose/videoPoseSource.ts": "69b96d9bb71369a57e3f3678f6e55cf02ad4d982f70cf3db72d573de27d7bfd2",
+    "src/pose/landmarker.ts": "57c31241fb995442b4c60adb75849576483fbd32bf6c8412b5d3282f96625d7d",
+    "src/pose/constants.ts": "18857d436d4cb1f4279a4bc01357d0b13d20d51c1fa13d33eaf4cb6332a63a60",
+    "src/avatar/ownedAvatarPair.ts": "d5de3204e7d3868ca3d9bd7e4a9636df111a7c4419c3c3bb326f993ddddcba83",
+    "src/avatar/ownedPosePlayback.ts": "cecd8b5e05f705f6eb04844a1c975c44ee96b64dae1507f8c2d0731693826daa",
+    "src/coaching/ownedPlaybackResources.ts": "6b89bf440e80d539a0a14e6e6f2c3c2735c8baa863019c7794fedaf1fe4432f9",
+    "src/coaching/resources.ts": "0832d662b19b522153f7e13507147a7b33f264d0eee94f10e07e06758d1fa029",
+    "src/coaching/session.ts": "3799bfdce8e829899f986b97770ce82a7bf4dd2932d0607060a513f23e080598",
+    "src/avatar/observedPoseRig.ts": "680235478e06efc111cc04515619f76668806bb64f0b2687f2144443c453c606",
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "e2e/fixtures/ownedPoseFrameProbe.ts": "316c0637229cca51ee4fdb29eea3702f4ba64666b2d4184ac9e8ed2bfe05da88",
+    "e2e/fixtures/ownedPoseFrame.vite.ts": "db8b2323c728bc3034e0307e65307096f70af8eccf6332412932deb4a4224194",
+    "e2e/fixtures/ownedVideoPoseProbe.ts": "bfb7c68e3b011080a8349d3492b3520772712baddc81c68694177793c1065726",
+    "e2e/fixtures/ownedVideoPose.vite.ts": "4fd7c802f447466a01e53a90327a0a95ad7e9986a05871cc9b849a804802d513",
+    "e2e/fixtures/ownedPosePlaybackProbe.ts": "877fc566a499dc41f56d1e37267b849723dc38e2300098c0c439829dfe0e6938",
+    "e2e/fixtures/ownedPosePlayback.vite.ts": "5d1420b39023da7c324028f74f9135075b50bc340b2d4296f75cedcc816cbb0c",
+    "e2e/fixtures/ownedPlaybackResourcesProbe.ts": "88385cb9888ea98d2fc354277e6bffdb34f60a5080929da9d3599e8f1f629be0",
+    "e2e/fixtures/ownedPlaybackResources.vite.ts": "6a1ca3a1a5e8558370969706d819b3d23764955fff7392e38fe82bdaa27249a6",
+    "scripts/test-pose-frame-browser.mjs": "40c5ac11270d2eb8860440ed2eca6272b9b37c7b22f63c9ec059907c668a4dfc",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  }
+}

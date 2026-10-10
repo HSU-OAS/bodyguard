@@ -33,6 +33,7 @@ from sqlalchemy.dialects.postgresql import aggregate_order_by
 from sqlalchemy.sql.selectable import CTE
 
 from app.baselines import UUID_PATTERN, Token
+from app.dashboard import register_dashboard
 from app.db import baselines, minute_summaries, users
 from app.records import DeletedOut, DeletePeriod, DeleteProof
 
@@ -219,6 +220,8 @@ def register_summaries(
         if pinned is None or owner(connection, request, writing, True) != user_id:
             raise HTTPException(401, "로그인이 필요합니다.")
         return user_id
+
+    register_dashboard(app, db, authenticate, bind_read)
 
     @app.post(
         "/api/v1/summaries/batch",

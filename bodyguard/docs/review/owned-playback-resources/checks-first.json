@@ -1,0 +1,49 @@
+{
+  "head": "4a9c8f54eabd969c53bebc01d7d979cee457f1d7",
+  "phase": "first",
+  "results": [
+    {
+      "name": "unit",
+      "command": [
+        "node_modules/.bin/vitest",
+        "run",
+        "src/coaching/ownedPlaybackResources.test.ts",
+        "src/avatar/ownedPosePlayback.test.ts",
+        "--reporter=json",
+        "--outputFile=/private/tmp/bodyguard-playback-resources-proof.BVDC4p/unit-first-final.json"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "frontend",
+      "command": [
+        "node_modules/.bin/vitest",
+        "run",
+        "--reporter=json",
+        "--outputFile=/private/tmp/bodyguard-playback-resources-proof.BVDC4p/frontend-first.json"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "types",
+      "command": [
+        "node_modules/.bin/tsc",
+        "--noEmit"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "name": "biome",
+      "command": [
+        "node_modules/.bin/biome",
+        "check",
+        "."
+      ],
+      "exit": 1,
+      "signal": null
+    }
+  ]
+}

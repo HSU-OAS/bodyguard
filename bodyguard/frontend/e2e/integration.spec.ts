@@ -127,9 +127,9 @@ test('WEB-I01 공개→가입→탐색 준비→기록 상세·취소·삭제→
   await page.getByRole('link', { name: /^fixture-web-integration .*기록 상세/ }).click()
   await expect(page.getByRole('heading', { name: '수행 기록 상세' })).toBeVisible()
   await expect(
-    page.getByText(
-      '완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.',
-    ),
+    page.getByText('‘완료’는 수행 종료입니다. 자세 정확성·효과를 보장하지 않습니다.', {
+      exact: true,
+    }),
   ).toBeVisible()
   await page.screenshot({ path: info.outputPath('integration-record-detail.png'), fullPage: true })
   await page.getByRole('link', { name: '기록 목록으로 돌아가기' }).click()
@@ -150,11 +150,44 @@ test('WEB-I01 공개→가입→탐색 준비→기록 상세·취소·삭제→
   await page.setViewportSize({ width: 700, height: 900 })
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
   await page.screenshot({ path: info.outputPath('integration-account-700.png'), fullPage: true })
+  // FR-U-04/NFR-08: bounded test-only operation boundary; never credentials or bodies.
+  let logoutConfirmed = 0
+  let logoutFailed = 0
+  let csrfFailed = 0
+  page.on('response', (response) => {
+    if (new URL(response.url()).pathname === '/api/v1/auth/logout' && response.status() === 204)
+      logoutConfirmed++
+  })
+  page.on('requestfailed', (request) => {
+    const path = new URL(request.url()).pathname
+    if (path === '/api/v1/auth/logout') logoutFailed++
+    if (path === '/api/v1/auth/csrf') csrfFailed++
+  })
+  const confirmedLogout = page.waitForResponse(
+    (response) =>
+      new URL(response.url()).origin === origin &&
+      new URL(response.url()).pathname === '/api/v1/auth/logout' &&
+      response.request().method() === 'POST',
+    { timeout: 5000 },
+  )
   await page.getByRole('button', { name: '로그아웃', exact: true }).focus()
   await page.keyboard.press('Enter')
-  await page.goto('/records')
+  expect((await confirmedLogout).status()).toBe(204)
   await expect(page.getByRole('heading', { name: '다시 만나 반갑습니다' })).toBeVisible()
-  expect((await context.request.get('/api/v1/me')).status()).toBe(401)
+  const movedBeforeConfirmation = logoutConfirmed === 0
+  try {
+    expect(movedBeforeConfirmation).toBe(false)
+    await page.goto('/records')
+    await expect(page.getByRole('heading', { name: '다시 만나 반갑습니다' })).toBeVisible()
+    expect((await context.request.get('/api/v1/me')).status()).toBe(401)
+  } finally {
+    await info.attach('logout-completion-boundary.json', {
+      contentType: 'application/json',
+      body: Buffer.from(
+        JSON.stringify({ movedBeforeConfirmation, logoutConfirmed, logoutFailed, csrfFailed }),
+      ),
+    })
+  }
 })
 
 test('WEB-I02 계정 장애 주입·공개 안내 보존·production 개발 경로 차단', async ({ page }, info) => {

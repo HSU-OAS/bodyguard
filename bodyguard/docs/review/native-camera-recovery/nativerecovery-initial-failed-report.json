@@ -1,0 +1,550 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "[workspace]/bodyguard/frontend/node_modules/@playwright/test/cli.js",
+      "test",
+      "nativerecovery.spec.ts",
+      "--config",
+      "playwright.account.config.ts",
+      "--output",
+      "test-results/nativerecovery-20261007T230317036368Z"
+    ],
+    "configFile": "[workspace]/bodyguard/frontend/playwright.account.config.ts",
+    "rootDir": "[workspace]/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T230317036368Z",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "[workspace]/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "account.spec.ts",
+          "password.spec.ts",
+          "google.spec.ts",
+          "records.spec.ts",
+          "design.spec.ts",
+          "withdrawal.spec.ts",
+          "datahelp.spec.ts",
+          "integration.spec.ts",
+          "security.spec.ts",
+          "resultrecord.spec.ts",
+          "ownercapture.spec.ts",
+          "recordedsession.spec.ts",
+          "authcoaching.spec.ts",
+          "nativeauth.spec.ts",
+          "nativerecovery.spec.ts",
+          "notifications.spec.ts",
+          "alertdelivery.spec.ts",
+          "ownedalert.spec.ts",
+          "summaries.spec.ts",
+          "minuteupload.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/nativerecovery-20261007T230317036368Z/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "pnpm build && vite build --config e2e/fixtures/nativeRecovery.vite.ts && vite preview --host localhost",
+      "url": "http://localhost:4173",
+      "reuseExistingServer": false,
+      "timeout": 180000
+    }
+  },
+  "suites": [
+    {
+      "title": "nativerecovery.spec.ts",
+      "file": "nativerecovery.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "male browser permission denied→explicit retry",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 844,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mdeni\u001b[27med\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mgrant\u001b[27med\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mdeni\u001b[27med\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mgrant\u001b[27med\"\u001b[39m\n    at [workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts:261:7",
+                    "location": {
+                      "file": "[workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts",
+                      "column": 7,
+                      "line": 261
+                    },
+                    "snippet": "  259 |         async () => (await navigator.permissions.query({ name: 'camera' as PermissionName })).state,\n  260 |       ),\n> 261 |     ).toBe('denied')\n      |       ^\n  262 |     await page.evaluate(() => (window as unknown as PrivateWindow).nativeRecoveryProbe.start())\n  263 |     await expect\n  264 |       .poll(() => state(page))"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "[workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts",
+                        "column": 7,
+                        "line": 261
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mdeni\u001b[27med\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mgrant\u001b[27med\"\u001b[39m\n\n  259 |         async () => (await navigator.permissions.query({ name: 'camera' as PermissionName })).state,\n  260 |       ),\n> 261 |     ).toBe('denied')\n      |       ^\n  262 |     await page.evaluate(() => (window as unknown as PrivateWindow).nativeRecoveryProbe.start())\n  263 |     await expect\n  264 |       .poll(() => state(page))\n    at [workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts:261:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:03:25.319Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-recovery-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T230317036368Z/nativerecovery-male-browser-permission-denied→explicit-retry/attachments/native-recovery-summary-bb897a5835830cddc1e296f58fe70241e1d86a14.json"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T230317036368Z/nativerecovery-male-browser-permission-denied→explicit-retry/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "[workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts",
+                    "column": 7,
+                    "line": 261
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8c8af69bad1d103297e7-d866e7987e1fbeb2909b",
+          "file": "nativerecovery.spec.ts",
+          "line": 253,
+          "column": 3
+        },
+        {
+          "title": "male delayed native camera→cancel→late reclaim→explicit retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3375,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:03:27.091Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-recovery-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T230317036368Z/nativerecovery-male-delaye-b3434-late-reclaim→explicit-retry/attachments/native-recovery-summary-9880061394a596519930bc78714d094386c62b56.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8c8af69bad1d103297e7-6b027f00644764323f2f",
+          "file": "nativerecovery.spec.ts",
+          "line": 279,
+          "column": 3
+        },
+        {
+          "title": "male native track lost→stop→explicit retry",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7738,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"models\": 0,\u001b[22m\n\u001b[32m-   \"reason\": \"inference-error\",\u001b[39m\n\u001b[31m+   \"reason\": null,\u001b[39m\n\u001b[2m    \"session\": \"ended\",\u001b[22m\n\u001b[2m  }\u001b[22m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"models\": 0,\u001b[22m\n\u001b[32m-   \"reason\": \"inference-error\",\u001b[39m\n\u001b[31m+   \"reason\": null,\u001b[39m\n\u001b[2m    \"session\": \"ended\",\u001b[22m\n\u001b[2m  }\u001b[22m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at [workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts:328:8",
+                    "location": {
+                      "file": "[workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts",
+                      "column": 8,
+                      "line": 328
+                    },
+                    "snippet": "  326 |     await expect\n  327 |       .poll(() => state(page))\n> 328 |       .toMatchObject({ session: 'ended', reason: 'inference-error', models: 0 })\n      |        ^\n  329 |     await expect.poll(() => camera(page)).toMatchObject({ tracksEnded: true, detached: true })\n  330 |     await mark(page, 'native-track-stop-synthetic-ended-event')\n  331 |     const frames = (await state(page)).frames"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "[workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts",
+                        "column": 8,
+                        "line": 328
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"models\": 0,\u001b[22m\n\u001b[32m-   \"reason\": \"inference-error\",\u001b[39m\n\u001b[31m+   \"reason\": null,\u001b[39m\n\u001b[2m    \"session\": \"ended\",\u001b[22m\n\u001b[2m  }\u001b[22m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n  326 |     await expect\n  327 |       .poll(() => state(page))\n> 328 |       .toMatchObject({ session: 'ended', reason: 'inference-error', models: 0 })\n      |        ^\n  329 |     await expect.poll(() => camera(page)).toMatchObject({ tracksEnded: true, detached: true })\n  330 |     await mark(page, 'native-track-stop-synthetic-ended-event')\n  331 |     const frames = (await state(page)).frames\n    at [workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts:328:8"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:03:30.798Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-recovery-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T230317036368Z/nativerecovery-male-native-track-lost→stop→explicit-retry/attachments/native-recovery-summary-79e0770329d99e71daaf6eb15164f05e7096fe51.json"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T230317036368Z/nativerecovery-male-native-track-lost→stop→explicit-retry/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "[workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts",
+                    "column": 8,
+                    "line": 328
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8c8af69bad1d103297e7-2a84cae3a8277c82fedc",
+          "file": "nativerecovery.spec.ts",
+          "line": 319,
+          "column": 3
+        },
+        {
+          "title": "male GLB HTTP404→native cleanup→explicit retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3738,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:03:38.966Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-recovery-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T230317036368Z/nativerecovery-male-GLB-HT-f0652-tive-cleanup→explicit-retry/attachments/native-recovery-summary-14eacd94b2324c736443b8334e98eac14d2f551a.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8c8af69bad1d103297e7-244f05f19fe83631919f",
+          "file": "nativerecovery.spec.ts",
+          "line": 335,
+          "column": 3
+        },
+        {
+          "title": "female browser permission denied→explicit retry",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 641,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mdeni\u001b[27med\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mgrant\u001b[27med\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mdeni\u001b[27med\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mgrant\u001b[27med\"\u001b[39m\n    at [workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts:261:7",
+                    "location": {
+                      "file": "[workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts",
+                      "column": 7,
+                      "line": 261
+                    },
+                    "snippet": "  259 |         async () => (await navigator.permissions.query({ name: 'camera' as PermissionName })).state,\n  260 |       ),\n> 261 |     ).toBe('denied')\n      |       ^\n  262 |     await page.evaluate(() => (window as unknown as PrivateWindow).nativeRecoveryProbe.start())\n  263 |     await expect\n  264 |       .poll(() => state(page))"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "[workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts",
+                        "column": 7,
+                        "line": 261
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mdeni\u001b[27med\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mgrant\u001b[27med\"\u001b[39m\n\n  259 |         async () => (await navigator.permissions.query({ name: 'camera' as PermissionName })).state,\n  260 |       ),\n> 261 |     ).toBe('denied')\n      |       ^\n  262 |     await page.evaluate(() => (window as unknown as PrivateWindow).nativeRecoveryProbe.start())\n  263 |     await expect\n  264 |       .poll(() => state(page))\n    at [workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts:261:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:03:43.049Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-recovery-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T230317036368Z/nativerecovery-female-brow-55678-ssion-denied→explicit-retry/attachments/native-recovery-summary-57addceb594e594fda23528fec61ca45ec7f3961.json"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T230317036368Z/nativerecovery-female-brow-55678-ssion-denied→explicit-retry/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "[workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts",
+                    "column": 7,
+                    "line": 261
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8c8af69bad1d103297e7-134bc9b363fa027e0376",
+          "file": "nativerecovery.spec.ts",
+          "line": 253,
+          "column": 3
+        },
+        {
+          "title": "female delayed native camera→cancel→late reclaim→explicit retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3322,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:03:44.133Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-recovery-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T230317036368Z/nativerecovery-female-dela-3806e-late-reclaim→explicit-retry/attachments/native-recovery-summary-d5aba80b793ea09b20ae3a1fa0477b51cb352dec.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8c8af69bad1d103297e7-547efd38ec100b7e1ec3",
+          "file": "nativerecovery.spec.ts",
+          "line": 279,
+          "column": 3
+        },
+        {
+          "title": "female native track lost→stop→explicit retry",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7700,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"models\": 0,\u001b[22m\n\u001b[32m-   \"reason\": \"inference-error\",\u001b[39m\n\u001b[31m+   \"reason\": null,\u001b[39m\n\u001b[2m    \"session\": \"ended\",\u001b[22m\n\u001b[2m  }\u001b[22m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"models\": 0,\u001b[22m\n\u001b[32m-   \"reason\": \"inference-error\",\u001b[39m\n\u001b[31m+   \"reason\": null,\u001b[39m\n\u001b[2m    \"session\": \"ended\",\u001b[22m\n\u001b[2m  }\u001b[22m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at [workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts:328:8",
+                    "location": {
+                      "file": "[workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts",
+                      "column": 8,
+                      "line": 328
+                    },
+                    "snippet": "  326 |     await expect\n  327 |       .poll(() => state(page))\n> 328 |       .toMatchObject({ session: 'ended', reason: 'inference-error', models: 0 })\n      |        ^\n  329 |     await expect.poll(() => camera(page)).toMatchObject({ tracksEnded: true, detached: true })\n  330 |     await mark(page, 'native-track-stop-synthetic-ended-event')\n  331 |     const frames = (await state(page)).frames"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "[workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts",
+                        "column": 8,
+                        "line": 328
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatchObject\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"models\": 0,\u001b[22m\n\u001b[32m-   \"reason\": \"inference-error\",\u001b[39m\n\u001b[31m+   \"reason\": null,\u001b[39m\n\u001b[2m    \"session\": \"ended\",\u001b[22m\n\u001b[2m  }\u001b[22m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n  326 |     await expect\n  327 |       .poll(() => state(page))\n> 328 |       .toMatchObject({ session: 'ended', reason: 'inference-error', models: 0 })\n      |        ^\n  329 |     await expect.poll(() => camera(page)).toMatchObject({ tracksEnded: true, detached: true })\n  330 |     await mark(page, 'native-track-stop-synthetic-ended-event')\n  331 |     const frames = (await state(page)).frames\n    at [workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts:328:8"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:03:47.797Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-recovery-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T230317036368Z/nativerecovery-female-native-track-lost→stop→explicit-retry/attachments/native-recovery-summary-a7a11123523396ba11db097c2d2854d6c00409ea.json"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T230317036368Z/nativerecovery-female-native-track-lost→stop→explicit-retry/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "[workspace]/bodyguard/frontend/e2e/nativerecovery.spec.ts",
+                    "column": 8,
+                    "line": 328
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8c8af69bad1d103297e7-34f1f0ca79cea11418a6",
+          "file": "nativerecovery.spec.ts",
+          "line": 319,
+          "column": 3
+        },
+        {
+          "title": "female GLB HTTP404→native cleanup→explicit retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3707,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:03:55.940Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-recovery-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T230317036368Z/nativerecovery-female-GLB--baa12-tive-cleanup→explicit-retry/attachments/native-recovery-summary-325baa4469df7dc55ecff76d333d9089e784b893.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8c8af69bad1d103297e7-99791b035f222a484a99",
+          "file": "nativerecovery.spec.ts",
+          "line": 335,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-07T23:03:17.994Z",
+    "duration": 42087.638,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

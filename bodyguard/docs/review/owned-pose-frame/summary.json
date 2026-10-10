@@ -1,0 +1,355 @@
+{
+  "runtime": "682ea56cff27d6238702beea9467c925f7c65f1f",
+  "baseline": "d4d298780ab3ecb2356cb82ca6c2f76833342b48",
+  "sources": {
+    "src/pose/ownedPoseFrame.ts": "1db8308deff3a4a81f90fb2d93edee7cb4e42291e3645b548a76307b11951027",
+    "src/pose/landmarker.ts": "57c31241fb995442b4c60adb75849576483fbd32bf6c8412b5d3282f96625d7d",
+    "src/pose/constants.ts": "18857d436d4cb1f4279a4bc01357d0b13d20d51c1fa13d33eaf4cb6332a63a60",
+    "src/avatar/ownedAvatarPair.ts": "d5de3204e7d3868ca3d9bd7e4a9636df111a7c4419c3c3bb326f993ddddcba83",
+    "src/avatar/observedPoseRig.ts": "680235478e06efc111cc04515619f76668806bb64f0b2687f2144443c453c606",
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "e2e/fixtures/ownedPoseFrameProbe.ts": "60db722d36d927ee9703832cd365bb52097d5da12d3df076eca38ced7b9cf04e",
+    "e2e/fixtures/ownedPoseFrame.vite.ts": "db8b2323c728bc3034e0307e65307096f70af8eccf6332412932deb4a4224194",
+    "scripts/test-pose-frame-browser.mjs": "5432d759f77724f9aefc9ca4c33b177a098dbb6fa913814719c04c24762289c4",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+    "src/pose/ownedPoseFrame.test.ts": "2ce3973d1feb1cc7268b2139c3646a497ae309aadfb1a99496bf5a9b695e63cf",
+    "scripts/check-selection-production.mjs": "5fafa1ed3465977f740bb65a5ab90a1f4176a26df1502d89d31a957eb5c5a175"
+  },
+  "artifacts": {
+    "assets-first.log": {
+      "bytes": 68,
+      "sha": "fbcaf3f7c2a165853b0896e0abac07d0a0b8ba93c68a21048f7f223274ed9290"
+    },
+    "assets-runtime.log": {
+      "bytes": 0,
+      "sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "biome-final-precommit.log": {
+      "bytes": 46,
+      "sha": "1c0a3c60799d2faa3b70a75d93f677a675090fe4a0423513015df07197fc4c42"
+    },
+    "biome-first.log": {
+      "bytes": 46,
+      "sha": "601b163ec57c9761382e97cec826f5c44c87137b1fc29bac3fb081ec06439f29"
+    },
+    "biome-runtime.log": {
+      "bytes": 46,
+      "sha": "a49be96bbbd77e0471ad5070d4b959b4eefcb7b3b84c0dc6d92106e43a3a53b2"
+    },
+    "browser-first.json": {
+      "bytes": 16705,
+      "sha": "d6669206129933602a299952865f772aec3ce944e9e75e82f517686382a79d91"
+    },
+    "browser-first.log": {
+      "bytes": 105,
+      "sha": "6554ec01bcde77f8cde2d5e5a27bacf5df234fe20a84dc22da1b58377051018c"
+    },
+    "browser-runtime.json": {
+      "bytes": 16705,
+      "sha": "1e20def0fddb6b194ac2a09a7a513be5e35ce9e1ccaa2de7da2dee5a41b84f27"
+    },
+    "browser-runtime.log": {
+      "bytes": 107,
+      "sha": "ec659b4acae002b422a13c54d38334240cc42c25dcc2a866131cc45113d96097"
+    },
+    "build-first.log": {
+      "bytes": 568,
+      "sha": "a401cf555dda714c9c8148fe14429127a3f0a7f1ab6fbb0fb90df9ba46bd82f2"
+    },
+    "build-runtime.log": {
+      "bytes": 568,
+      "sha": "5f9316f176ea9ae20cc1192fc575bf934246e3cdf8661eeb0b22df00734ae454"
+    },
+    "first-female.png": {
+      "bytes": 167184,
+      "sha": "ae36da55ae9bce0a5540a79395e6ffa02173dc94c8c938f267b145b909cb673d"
+    },
+    "first-male.png": {
+      "bytes": 186316,
+      "sha": "c1398c0e1abcd556c68d53b74a0adb2971e416661f6b69c85a48b4b9a6dc2df2"
+    },
+    "format-final.log": {
+      "bytes": 40,
+      "sha": "ec0c474c9bba63d37cf1e88950df213bccae96e8968c0187936093d4fc0c48cf"
+    },
+    "frontend-first.log": {
+      "bytes": 573,
+      "sha": "3a519b9f54408c4c8c09ea1dbb74439a2ed6621b9b5e012539c60620e817e425"
+    },
+    "frontend-review.log": {
+      "bytes": 573,
+      "sha": "ffc32c2b35bd45e28fa255dc7e25e708924630f2f9213c7ffe32093032a7775b"
+    },
+    "frontend-runtime.log": {
+      "bytes": 574,
+      "sha": "87422979c0878118b8823ef5d2713db751328f3b954de0616e0b11aa99419e8e"
+    },
+    "guard-deliberate-red.log": {
+      "bytes": 1011,
+      "sha": "e3085cad963f25cde392ab8202a989a8812c76da36c65c4f5af9beef3816a505"
+    },
+    "guard-first.log": {
+      "bytes": 749,
+      "sha": "5deecf8983e1b229fb6aecf620366f87c0b35180b8d1399ebcc1e08fc7ea5dca"
+    },
+    "guard-restored.log": {
+      "bytes": 749,
+      "sha": "5deecf8983e1b229fb6aecf620366f87c0b35180b8d1399ebcc1e08fc7ea5dca"
+    },
+    "guard-runtime.log": {
+      "bytes": 749,
+      "sha": "5deecf8983e1b229fb6aecf620366f87c0b35180b8d1399ebcc1e08fc7ea5dca"
+    },
+    "probe-build-first.log": {
+      "bytes": 280,
+      "sha": "8bfa5f35f86b836b8f2d9c9fd1bf65c9d0301435baf11ef775153ec6edfb1ee3"
+    },
+    "probe-build-runtime.log": {
+      "bytes": 280,
+      "sha": "1b5cac99637365ce0bdbbb6359fbaa0573c035380bc5007335882dfc55815070"
+    },
+    "runtime-female.png": {
+      "bytes": 167184,
+      "sha": "ae36da55ae9bce0a5540a79395e6ffa02173dc94c8c938f267b145b909cb673d"
+    },
+    "runtime-male.png": {
+      "bytes": 186316,
+      "sha": "c1398c0e1abcd556c68d53b74a0adb2971e416661f6b69c85a48b4b9a6dc2df2"
+    },
+    "types-final-precommit.log": {
+      "bytes": 0,
+      "sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "types-initial.log": {
+      "bytes": 0,
+      "sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "types-probe.log": {
+      "bytes": 0,
+      "sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "types-review.log": {
+      "bytes": 0,
+      "sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "types-runtime.log": {
+      "bytes": 0,
+      "sha": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "unit-green-final-initial.log": {
+      "bytes": 353,
+      "sha": "09f2b3c1d92cca8be57bfabfa154b35c1187a5952840b397f03ac9bc6692337b"
+    },
+    "unit-green1.log": {
+      "bytes": 353,
+      "sha": "0cc2a84c51a156aaa1c555a7d84a6be0d88798e4c975b44cee4ecaf586d366af"
+    },
+    "unit-red.log": {
+      "bytes": 9073,
+      "sha": "18099b62ee2c6785c7a1003719e34ce9f9cd6fd587e1a0d1b3299825611d520d"
+    },
+    "unit-reentrant-green.log": {
+      "bytes": 353,
+      "sha": "b0eaa0f30b067e43788f34bacd49c7fdf151eae797ea2e08e11b62a05b16b9d7"
+    },
+    "unit-reentrant-red.log": {
+      "bytes": 1210,
+      "sha": "8cc251475df7c712a371c50a831c1fddc87cb4818360bba3230792e9d7c62662"
+    },
+    "unit-review.log": {
+      "bytes": 353,
+      "sha": "82db8988ae8682d6801af04a2a50a5da187e92c3e11e5ce464289b52d22b708a"
+    },
+    "frontend-first.log.raw.gz": {
+      "bytes": 424,
+      "sha": "29cd6f041bda95cab8f9f6a2c3221d877714bf6d451d0cd0131bf2d2a7bd0964"
+    },
+    "frontend-review.log.raw.gz": {
+      "bytes": 424,
+      "sha": "3a4d4b653d8b3f5376d19cc1181e11393fc68288ce67e02cdfd9089bed4a0fbe"
+    },
+    "frontend-runtime.log.raw.gz": {
+      "bytes": 426,
+      "sha": "998901dce534103fec16457651f3d0ac8048a5c1e7379416100737319267b343"
+    },
+    "unit-green-final-initial.log.raw.gz": {
+      "bytes": 295,
+      "sha": "73fab9f3965c4b0365366b0e2d8494b071447e9f46bbe3ea4f6a880d03d642a7"
+    },
+    "unit-green1.log.raw.gz": {
+      "bytes": 295,
+      "sha": "167080f7b980aca5d984e8e746c40b8d8645688a4bd4d20d6615d889a1ce8050"
+    },
+    "unit-red.log.raw.gz": {
+      "bytes": 2353,
+      "sha": "07c9158384c91c9c32eabd3800c64b3cb6292aa288c1f998710104fac25a90ef"
+    },
+    "unit-reentrant-green.log.raw.gz": {
+      "bytes": 295,
+      "sha": "950a4084bb04472d868606715f4cce3eb65edfd4b43d861dacafc5807057fc4e"
+    },
+    "unit-reentrant-red.log.raw.gz": {
+      "bytes": 635,
+      "sha": "53da9ec006fb3c328cdd82efe9ae11c047e51c8396e7cce021577b9a33ce7c6f"
+    },
+    "unit-review.log.raw.gz": {
+      "bytes": 294,
+      "sha": "1ff59a5fced768b63598d116b161591662024eaeb77e62e21c30af2d81dd0e92"
+    },
+    "diff-raw-evidence-red.log": {
+      "bytes": 773,
+      "sha": "1f85367aabc995102d43f57dc8715cd104970cdce1ad6aafd5937c24a7c78000"
+    }
+  },
+  "unitTests": 18,
+  "frontendTests": 844,
+  "frontendSkipped": 0,
+  "native": {
+    "browser": "154.0.8037.98",
+    "sdk": "1.0.1",
+    "passed": 2,
+    "actualCamera": false,
+    "actualHuman": false,
+    "generatedBlank": true,
+    "syntheticPositive": true,
+    "boundary": {
+      "camera": 0,
+      "csp": 2,
+      "routedExternal": 0,
+      "proxyDenied": 11,
+      "errors": []
+    },
+    "testOnlyEgressBlock": true,
+    "productPolicyApproved": false,
+    "GPUWorkerMemoryReleaseVerified": false
+  },
+  "models": {
+    "public/models/face_landmarker.task": {
+      "bytes": 3758596,
+      "sha": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff"
+    },
+    "public/models/gesture_recognizer.task": {
+      "bytes": 8373440,
+      "sha": "97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482"
+    },
+    "public/models/pose_landmarker_full.task": {
+      "bytes": 9398198,
+      "sha": "5134a3aad27a58b93da0088d431f366da362b44e3ccfbe3462b3827a839011b1"
+    },
+    "public/models/pose_landmarker_heavy.task": {
+      "bytes": 30664242,
+      "sha": "64437af838a65d18e5ba7a0d39b465540069bc8aae8308de3e318aad31fcbc7b"
+    },
+    "public/models/pose_landmarker_lite.task": {
+      "bytes": 5777746,
+      "sha": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+    }
+  },
+  "assetCommit": "25a9bd6c7392890e3b5d5d6ae1046bb7087d56ad",
+  "assetHashes": {
+    "male": "cc85bcd449f3f31347e4f7174986d41e4aca3067990f5d8a2e6ba3a099171927",
+    "female": "27c10902aa377e995bdbc115ab773cf22f8ea38582c49820304a33ad7685f25a"
+  },
+  "publicAssets": [
+    {
+      "name": "index-dNUNBpCv.css",
+      "bytes": 31199,
+      "sha": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e"
+    },
+    {
+      "name": "index-x57--wa1.js",
+      "bytes": 355151,
+      "sha": "b5d4f81164c8d3c196e853b3404382bc15077986aa626cd0c3c72571b6325ac0"
+    }
+  ],
+  "publicBytesUnchanged": true,
+  "publicGLB": 0,
+  "guard": {
+    "deliberateSentinel": "mountPoseFrameProbe",
+    "redExit": 1,
+    "restoredExit": 0
+  },
+  "review": {
+    "kind": "author-only",
+    "scopedUnresolvedP1": 0,
+    "scopedUnresolvedP2": 0,
+    "reproducedFixed": [
+      "synchronous capture reentry"
+    ],
+    "staticHardening": [
+      "fixture input before renderer acquisition",
+      "renderer/server cleanup continuation"
+    ],
+    "independentReviewer": false
+  },
+  "notCompleted": [
+    "real webcam or human movement accuracy",
+    "qualified release motions",
+    "final Blender appearance/deformation",
+    "neck/trunk/hand/twist tracking",
+    "verified examples and correction feedback",
+    "public coaching/results integration",
+    "SDK product egress approval",
+    "complete GPU/worker release",
+    "Docker/TLS/runtime deployment",
+    "Gmail/Google/provider validation",
+    "real participant notebook usability",
+    "all stages 1-6"
+  ],
+  "qualifiedReleaseMotions": 0,
+  "originalRawLogs": {
+    "frontend-first.log": {
+      "gzipFile": "frontend-first.log.raw.gz",
+      "bytes": 574,
+      "sha": "ed602f36f64c480d03593ccdf2b45b5ab14ccec9adde4171c964ac455b8d8b81"
+    },
+    "frontend-review.log": {
+      "gzipFile": "frontend-review.log.raw.gz",
+      "bytes": 574,
+      "sha": "860e751600a8345b2e19399ef5adf54d9d6da089c9b51a0d2b0d544a747459e8"
+    },
+    "frontend-runtime.log": {
+      "gzipFile": "frontend-runtime.log.raw.gz",
+      "bytes": 575,
+      "sha": "b78f50ba94603599c11978aa002a794e64cda0301bbecaa88ab30ec780378195"
+    },
+    "unit-green-final-initial.log": {
+      "gzipFile": "unit-green-final-initial.log.raw.gz",
+      "bytes": 354,
+      "sha": "8ae7e86cfea057aac5cb2a2b9e6c9a5e77b2f95ac738945fbfa797988fea8038"
+    },
+    "unit-green1.log": {
+      "gzipFile": "unit-green1.log.raw.gz",
+      "bytes": 354,
+      "sha": "f37c5d96e71bc58476e6ed387b85406de724b2b6e0659facec51ce373ed5f59c"
+    },
+    "unit-red.log": {
+      "gzipFile": "unit-red.log.raw.gz",
+      "bytes": 9074,
+      "sha": "c25545a2bd6b07e0dd311b6ddc56acaff2c39e2cbeb218e5f6886d9923993de4"
+    },
+    "unit-reentrant-green.log": {
+      "gzipFile": "unit-reentrant-green.log.raw.gz",
+      "bytes": 354,
+      "sha": "5b7fea004ff1070a6a4504e4065bdf3c5735e84abcc0fe6dc7bc35419c1174b6"
+    },
+    "unit-reentrant-red.log": {
+      "gzipFile": "unit-reentrant-red.log.raw.gz",
+      "bytes": 1211,
+      "sha": "eb8ac0f5f6233a02057a1d73b13731e72ef16a4c7df755235ef2c9b6a1a4c7a0"
+    },
+    "unit-review.log": {
+      "gzipFile": "unit-review.log.raw.gz",
+      "bytes": 354,
+      "sha": "a495e09fed549e5f38e31f73e94ed19c7a351b89881abec23d10f92c35b05136"
+    }
+  },
+  "evidenceFormat": {
+    "rawDiffCheckExit": 2,
+    "originalCommit": "96171d5bf50804cf1dfe5092a167b69c5f136363",
+    "losslessRawGzipFiles": 9,
+    "normalizedReadableLogs": true,
+    "sourceAndGitWhitespacePolicyUnchanged": true
+  }
+}

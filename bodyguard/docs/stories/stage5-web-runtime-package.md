@@ -4,6 +4,14 @@
 
 ## 목표·승인 경계
 
+2026-10-11 기존 Draft PR29의 연속 보완: 최신 main32e18a01을 깨끗한 기존 작업트리에 통합한다. main의 실제 계정/기록/페이지 보완·SDK Worker 등 비공개 source와 원본 증거를 보존하고, exporter 공용 함수/CLI와 최신 production 제외 목록의 두 버전을 합친다. tasks의 양쪽 진행 기록을 모두 유지한다. 화면/API/schema/의존성·미승인 코칭 구조·SDK 통신 정책·아바타 제작/검증·운영은 바꾸지 않는다.
+
+새 검증은 최신 App route의 case-insensitive/terminal slash 계약을 패키지 SPA 규칙에 대조하고 기존 공개 경로만 보완한다. API/개발/미등록/추가 하위 경로를 SPA로 허용하지 않는다. source 정규식 시험은 실제 NGINX/PCRE·URI 정규화 시험이 아니다. 직접 Vite를 새 소유 outDir에 빌드해 기존 에셋을 변경하지 않고 index/JS/CSS/brand/고지7파일을 선별·byte/hash 대조한다. production Chrome/소유 HTTP 서버의 기존 소개→로그인/복구·안내 직접 진입과 고지 전달만 재검증하며 합성 계정 응답·SQL/SMTP/Google·NGINX/TLS는 분리한다. 원본/실패는 새 `/private/tmp/bodyguard-runtime-current-main.SntevM`에 보존한다.
+
+Docker 소켓은 현재도 없고 native nginx도 없다. 실제 image/container/TLS·패키지 계정/기록·재기동/복구의 필수 검증은 미실행이다. 모든 필수 게이트 충족 전에는 PR29를 병합하지 않는다. 좁은 native/HTTP 통합 결과로 전체 S5.2/5단계·1~6 완료를 선언하거나 지연/임상·아바타를 정상 처리하지 않는다.
+
+실제 결과: 기존 case/slash 주소10개 거부 RED 후 동일 Router 경로만 보완했다. 현재 공개 source/API/lock/migration은 main과 동일하며 production package7파일·JS/CSS byte 보존, Chrome155/1440·1024에서 소개·게스트 로그인·가입·복구·안내 이동/직접 주소/새로고침을 확인했다. 인증은 합성 guest 응답이며 실제 인증·NGINX/TLS 증거가 아니다. 최초 잘못된 기대 제목·metadata/format 실패와 이전30개 immutable 자료를 보존했다. [완료 범위·원본·남은 필수 게이트](../review/stage5-web-runtime/README.md). Story 전체와 병합 조건은 미충족이다.
+
 PR #28의 제한된 서버 생존/DB 준비 경로를 실제 main 포함·브랜치 보존까지 확인했다. 다음 독립 작업은 현재 완성된 공개/계정/기록 웹과 API를 재현 가능한 패키지로 실행하는 구성이다. 앱/새 프레임워크/호스팅 사업 결정이나 실제 출시가 아니다. white/blue 웹 디자인을 유지하며 미검증 코칭/아바타를 출시 기능처럼 켜지 않는다.
 
 CTO 권장안은 기존 Docker/Compose 스택의 빌드·API 기동·same-origin 정적 웹/프록시를 분리하는 것이다. 실제 호스팅/국가/도메인·유료 서비스·외부 계정·운영 키·DB migration/DB 위치·배포는 아직 결정/승인하지 않는다. 운영 secrets를 포함하거나 자동 migration/DB 초기화를 넣지 않는다. 기존 trust 인증 compose는 로컬 시험 전용으로 보존하고 운영 구성으로 승격하지 않는다.

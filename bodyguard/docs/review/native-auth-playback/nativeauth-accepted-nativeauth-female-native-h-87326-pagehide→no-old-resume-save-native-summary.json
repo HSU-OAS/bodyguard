@@ -1,0 +1,405 @@
+{
+  "browser": "154.0.8037.98",
+  "stages": [
+    {
+      "name": "native-running",
+      "snapshot": {
+        "auth": "ready",
+        "hook": "prepared",
+        "owned": true,
+        "resources": {
+          "generation": 1,
+          "status": "running",
+          "failure": null,
+          "closed": false,
+          "poisoned": false
+        },
+        "actors": [
+          {
+            "generation": 1,
+            "status": "running",
+            "failure": null,
+            "closed": false,
+            "poisoned": false
+          }
+        ],
+        "session": "running",
+        "sessionGeneration": 1,
+        "verifiedMs": 0,
+        "record": "idle",
+        "recordId": "909c80f8-0087-452e-8b0a-3199df9c7df5",
+        "prepared": true,
+        "prepareFinished": true,
+        "closed": false,
+        "held": false,
+        "renderFrames": 22,
+        "nativeCalls": 7,
+        "nativeCloses": 7,
+        "nativePeopleMax": 0,
+        "detectorCloses": 0,
+        "cameraCloses": 0,
+        "failures": [],
+        "models": 2,
+        "framing": [
+          true,
+          true
+        ],
+        "cameras": 1,
+        "cameraLive": true,
+        "tracksEnded": false,
+        "detached": false,
+        "rawVideoHidden": true,
+        "frames": 7,
+        "frameCloses": 7,
+        "frameErrors": 0,
+        "allFramesClosed": true,
+        "memory": {
+          "geometries": 5,
+          "textures": 11
+        },
+        "baseline": {
+          "geometries": 0,
+          "textures": 1
+        },
+        "actualHuman": false,
+        "actualCamera": false,
+        "fakeCamera": true,
+        "syntheticMotionGates": true,
+        "releaseAvatar": false
+      }
+    },
+    {
+      "name": "native-result-held",
+      "snapshot": {
+        "auth": "ready",
+        "hook": "prepared",
+        "owned": true,
+        "resources": {
+          "generation": 1,
+          "status": "running",
+          "failure": null,
+          "closed": false,
+          "poisoned": false
+        },
+        "actors": [
+          {
+            "generation": 1,
+            "status": "running",
+            "failure": null,
+            "closed": false,
+            "poisoned": false
+          }
+        ],
+        "session": "running",
+        "sessionGeneration": 1,
+        "verifiedMs": 0,
+        "record": "idle",
+        "recordId": "909c80f8-0087-452e-8b0a-3199df9c7df5",
+        "prepared": true,
+        "prepareFinished": true,
+        "closed": false,
+        "held": true,
+        "renderFrames": 35,
+        "nativeCalls": 9,
+        "nativeCloses": 8,
+        "nativePeopleMax": 0,
+        "detectorCloses": 0,
+        "cameraCloses": 0,
+        "failures": [],
+        "models": 2,
+        "framing": [
+          true,
+          true
+        ],
+        "cameras": 1,
+        "cameraLive": true,
+        "tracksEnded": false,
+        "detached": false,
+        "rawVideoHidden": true,
+        "frames": 9,
+        "frameCloses": 8,
+        "frameErrors": 0,
+        "allFramesClosed": false,
+        "memory": {
+          "geometries": 5,
+          "textures": 11
+        },
+        "baseline": {
+          "geometries": 0,
+          "textures": 1
+        },
+        "actualHuman": false,
+        "actualCamera": false,
+        "fakeCamera": true,
+        "syntheticMotionGates": true,
+        "releaseAvatar": false
+      }
+    },
+    {
+      "name": "authority-revoked-while-native-held",
+      "snapshot": {
+        "auth": "ready",
+        "hook": "idle",
+        "owned": false,
+        "resources": {
+          "generation": 1,
+          "status": "retiring",
+          "failure": null,
+          "closed": true,
+          "poisoned": false
+        },
+        "actors": [
+          {
+            "generation": 1,
+            "status": "retiring",
+            "failure": null,
+            "closed": true,
+            "poisoned": false
+          }
+        ],
+        "session": "ended",
+        "sessionGeneration": 1,
+        "verifiedMs": 0,
+        "record": "closed",
+        "recordId": "909c80f8-0087-452e-8b0a-3199df9c7df5",
+        "prepared": false,
+        "prepareFinished": true,
+        "closed": false,
+        "held": true,
+        "renderFrames": 37,
+        "nativeCalls": 9,
+        "nativeCloses": 8,
+        "nativePeopleMax": 0,
+        "detectorCloses": 0,
+        "cameraCloses": 0,
+        "failures": [],
+        "models": 2,
+        "framing": [
+          true,
+          true
+        ],
+        "cameras": 1,
+        "cameraLive": true,
+        "tracksEnded": false,
+        "detached": false,
+        "rawVideoHidden": true,
+        "frames": 9,
+        "frameCloses": 8,
+        "frameErrors": 0,
+        "allFramesClosed": false,
+        "memory": {
+          "geometries": 5,
+          "textures": 11
+        },
+        "baseline": {
+          "geometries": 0,
+          "textures": 1
+        },
+        "actualHuman": false,
+        "actualCamera": false,
+        "fakeCamera": true,
+        "syntheticMotionGates": true,
+        "releaseAvatar": false
+      }
+    },
+    {
+      "name": "native-input-result-and-resources-closed",
+      "snapshot": {
+        "auth": "ready",
+        "hook": "idle",
+        "owned": false,
+        "resources": {
+          "generation": 1,
+          "status": "closed",
+          "failure": null,
+          "closed": true,
+          "poisoned": false
+        },
+        "actors": [
+          {
+            "generation": 1,
+            "status": "closed",
+            "failure": null,
+            "closed": true,
+            "poisoned": false
+          }
+        ],
+        "session": "ended",
+        "sessionGeneration": 1,
+        "verifiedMs": 0,
+        "record": "closed",
+        "recordId": "909c80f8-0087-452e-8b0a-3199df9c7df5",
+        "prepared": false,
+        "prepareFinished": true,
+        "closed": false,
+        "held": false,
+        "renderFrames": 37,
+        "nativeCalls": 9,
+        "nativeCloses": 9,
+        "nativePeopleMax": 0,
+        "detectorCloses": 1,
+        "cameraCloses": 1,
+        "failures": [],
+        "models": 0,
+        "framing": [],
+        "cameras": 1,
+        "cameraLive": false,
+        "tracksEnded": true,
+        "detached": true,
+        "rawVideoHidden": true,
+        "frames": 9,
+        "frameCloses": 9,
+        "frameErrors": 0,
+        "allFramesClosed": true,
+        "memory": {
+          "geometries": 0,
+          "textures": 1
+        },
+        "baseline": {
+          "geometries": 0,
+          "textures": 1
+        },
+        "actualHuman": false,
+        "actualCamera": false,
+        "fakeCamera": true,
+        "syntheticMotionGates": true,
+        "releaseAvatar": false
+      }
+    },
+    {
+      "name": "no-automatic-restart",
+      "snapshot": {
+        "auth": "checking",
+        "hook": "idle",
+        "owned": false,
+        "resources": {
+          "generation": 1,
+          "status": "closed",
+          "failure": null,
+          "closed": true,
+          "poisoned": false
+        },
+        "actors": [
+          {
+            "generation": 1,
+            "status": "closed",
+            "failure": null,
+            "closed": true,
+            "poisoned": false
+          }
+        ],
+        "session": "ended",
+        "sessionGeneration": 1,
+        "verifiedMs": 0,
+        "record": "closed",
+        "recordId": "909c80f8-0087-452e-8b0a-3199df9c7df5",
+        "prepared": false,
+        "prepareFinished": true,
+        "closed": false,
+        "held": false,
+        "renderFrames": 37,
+        "nativeCalls": 9,
+        "nativeCloses": 9,
+        "nativePeopleMax": 0,
+        "detectorCloses": 1,
+        "cameraCloses": 1,
+        "failures": [],
+        "models": 0,
+        "framing": [],
+        "cameras": 1,
+        "cameraLive": false,
+        "tracksEnded": true,
+        "detached": true,
+        "rawVideoHidden": true,
+        "frames": 9,
+        "frameCloses": 9,
+        "frameErrors": 0,
+        "allFramesClosed": true,
+        "memory": {
+          "geometries": 0,
+          "textures": 1
+        },
+        "baseline": {
+          "geometries": 0,
+          "textures": 1
+        },
+        "actualHuman": false,
+        "actualCamera": false,
+        "fakeCamera": true,
+        "syntheticMotionGates": true,
+        "releaseAvatar": false
+      }
+    }
+  ],
+  "final": {
+    "auth": "checking",
+    "hook": "idle",
+    "owned": false,
+    "resources": {
+      "generation": 1,
+      "status": "closed",
+      "failure": null,
+      "closed": true,
+      "poisoned": false
+    },
+    "actors": [
+      {
+        "generation": 1,
+        "status": "closed",
+        "failure": null,
+        "closed": true,
+        "poisoned": false
+      }
+    ],
+    "session": "ended",
+    "sessionGeneration": 1,
+    "verifiedMs": 0,
+    "record": "closed",
+    "recordId": "909c80f8-0087-452e-8b0a-3199df9c7df5",
+    "prepared": false,
+    "prepareFinished": true,
+    "closed": true,
+    "held": false,
+    "renderFrames": 37,
+    "nativeCalls": 9,
+    "nativeCloses": 9,
+    "nativePeopleMax": 0,
+    "detectorCloses": 1,
+    "cameraCloses": 1,
+    "failures": [],
+    "models": 0,
+    "framing": [],
+    "cameras": 1,
+    "cameraLive": false,
+    "tracksEnded": true,
+    "detached": true,
+    "rawVideoHidden": true,
+    "frames": 9,
+    "frameCloses": 9,
+    "frameErrors": 0,
+    "allFramesClosed": true,
+    "memory": {
+      "geometries": 0,
+      "textures": 1
+    },
+    "baseline": {
+      "geometries": 0,
+      "textures": 1
+    },
+    "actualHuman": false,
+    "actualCamera": false,
+    "fakeCamera": true,
+    "syntheticMotionGates": true,
+    "releaseAvatar": false
+  },
+  "counters": {
+    "cameraCalls": 1,
+    "cspAttempts": 1
+  },
+  "posts": 0,
+  "external": 0,
+  "errors": [],
+  "actualHuman": false,
+  "actualCamera": false,
+  "productPolicyApproved": false
+}

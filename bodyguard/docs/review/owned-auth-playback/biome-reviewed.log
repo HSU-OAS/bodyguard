@@ -1,0 +1,242 @@
+Checked 202 files in 162ms. No fixes applied.
+Found 3 errors.
+src/coaching/useRecordedCoaching.test.tsx:3:1 assist/source/organizeImports  FIXABLE  ━━━━━━━━━━━━━━
+
+  × Sort these imports.
+
+     1 │ // @vitest-environment happy-dom
+     2 │ // FR-U-04/FR-S-04/NFR-08: initial private contract, no camera/user body inputs.
+   > 3 │ import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   > 4 │ import { StrictMode } from 'react'
+   > 5 │ import { afterEach, expect, it, vi } from 'vitest'
+   > 6 │ import { AuthProvider, useAuth } from '../auth'
+   > 7 │ import { useRecordedCoaching } from './useRecordedCoaching'
+   > 8 │ import { createOwnedPlaybackResources } from './ownedPlaybackResources'
+       │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     9 │
+    10 │ afterEach(() => {
+
+  i Safe fix: Organize imports and exports (Biome)
+
+      5   5 │   import { afterEach, expect, it, vi } from 'vitest'
+      6   6 │   import { AuthProvider, useAuth } from '../auth'
+      7     │ - import·{·useRecordedCoaching·}·from·'./useRecordedCoaching'
+      8     │ - import·{·createOwnedPlaybackResources·}·from·'./ownedPlaybackResources'
+          7 │ + import·{·createOwnedPlaybackResources·}·from·'./ownedPlaybackResources'
+          8 │ + import·{·useRecordedCoaching·}·from·'./useRecordedCoaching'
+      9   9 │
+     10  10 │   afterEach(() => {
+
+
+src/coaching/useRecordedCoaching.test.tsx format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+
+    468 468 │     })
+    469 469 │     try {
+    470     │ - ····await·act(async·()·=>·{·await·h.control.cancel()·})
+        470 │ + ····await·act(async·()·=>·{
+        471 │ + ······await·h.control.cancel()
+        472 │ + ····})
+    471 473 │       expect(h.control.getSession()).toBeNull()
+    472 474 │       expect(ownedResources.close).toHaveBeenCalledTimes(1)
+    ······· │
+    481 483 │   })
+    482 484 │
+    483     │ - it.each(['pagehide',·'unmount'])('H05·%s·reclaims·an·inert·lifecycle·during·held·capture',·async·(event)·=>·{
+    484     │ - ··const·h·=·setup()
+    485     │ - ··await·h.ready()
+    486     │ - ··const·held·=·deferred<Response>()
+    487     │ - ··h.fetch.mockReturnValueOnce(held.promise)
+    488     │ - ··const·ownedResources·=·{·close:·vi.fn(()·=>·undefined)·}
+    489     │ - ··let·pending!:·ReturnType<Control['prepare']>
+    490     │ - ··await·act(async·()·=>·{
+    491     │ - ····pending·=·h.control.prepare({·...h.options,·ownedResources·})
+    492     │ - ··})
+    493     │ - ··try·{
+    494     │ - ····await·act(async·()·=>·{
+    495     │ - ······if·(event·===·'unmount')·h.rendered.unmount()
+    496     │ - ······else·fireEvent(window,·new·Event('pagehide'))
+    497     │ - ····})
+    498     │ - ····expect(ownedResources.close).toHaveBeenCalledTimes(1)
+    499     │ - ··}·finally·{
+    500     │ - ····await·act(async·()·=>·{
+    501     │ - ······held.resolve(response(user))
+    502     │ - ······expect(await·pending).toBeNull()
+    503     │ - ····})
+    504     │ - ··}
+    505     │ - ··expect(h.options.ports.camera).not.toHaveBeenCalled()
+    506     │ - })
+        485 │ + it.each(['pagehide',·'unmount'])(
+        486 │ + ··'H05·%s·reclaims·an·inert·lifecycle·during·held·capture',
+        487 │ + ··async·(event)·=>·{
+        488 │ + ····const·h·=·setup()
+        489 │ + ····await·h.ready()
+        490 │ + ····const·held·=·deferred<Response>()
+        491 │ + ····h.fetch.mockReturnValueOnce(held.promise)
+        492 │ + ····const·ownedResources·=·{·close:·vi.fn(()·=>·undefined)·}
+        493 │ + ····let·pending!:·ReturnType<Control['prepare']>
+        494 │ + ····await·act(async·()·=>·{
+        495 │ + ······pending·=·h.control.prepare({·...h.options,·ownedResources·})
+        496 │ + ····})
+        497 │ + ····try·{
+        498 │ + ······await·act(async·()·=>·{
+        499 │ + ········if·(event·===·'unmount')·h.rendered.unmount()
+        500 │ + ········else·fireEvent(window,·new·Event('pagehide'))
+        501 │ + ······})
+        502 │ + ······expect(ownedResources.close).toHaveBeenCalledTimes(1)
+        503 │ + ····}·finally·{
+        504 │ + ······await·act(async·()·=>·{
+        505 │ + ········held.resolve(response(user))
+        506 │ + ········expect(await·pending).toBeNull()
+        507 │ + ······})
+        508 │ + ····}
+        509 │ + ····expect(h.options.ports.camera).not.toHaveBeenCalled()
+        510 │ + ··},
+        511 │ + )
+    507 512 │
+    508 513 │   it('H05 guest and invalid pure configuration never take lifecycle ownership', async () => {
+    ······· │
+    516 521 │     })
+    517 522 │     await act(async () => {
+    518     │ - ····expect(await·h.control.prepare({·...h.options,·recordId:·'invalid',·ownedResources·})).toBeNull()
+        523 │ + ····expect(
+        524 │ + ······await·h.control.prepare({·...h.options,·recordId:·'invalid',·ownedResources·}),
+        525 │ + ····).toBeNull()
+    519 526 │       await h.control.cancel()
+    520 527 │     })
+    ······· │
+    531 538 │     let value = original
+    532 539 │     const readClose = vi.fn(() => value)
+    533     │ - ··const·ownedResources·=·{·get·close()·{·return·readClose()·}·}
+        540 │ + ··const·ownedResources·=·{
+        541 │ + ····get·close()·{
+        542 │ + ······return·readClose()
+        543 │ + ····},
+        544 │ + ··}
+    534 545 │     const readLifecycle = vi.fn(() => ownedResources)
+    535 546 │     let pending!: ReturnType<Control['prepare']>
+    536 547 │     await act(async () => {
+    537     │ - ····pending·=·h.control.prepare({·...h.options,·get·ownedResources()·{·return·readLifecycle()·}·})
+        548 │ + ····pending·=·h.control.prepare({
+        549 │ + ······...h.options,
+        550 │ + ······get·ownedResources()·{
+        551 │ + ········return·readLifecycle()
+        552 │ + ······},
+        553 │ + ····})
+    538 554 │     })
+    539 555 │     value = replacement
+    ······· │
+    554 570 │     const ownedResources = { close: vi.fn(() => undefined) }
+    555 571 │     let session: Awaited<ReturnType<Control['prepare']>> = null
+    556     │ - ··await·act(async·()·=>·{·session·=·await·first.control.prepare({·...first.options,·ownedResources·})·})
+        572 │ + ··await·act(async·()·=>·{
+        573 │ + ····session·=·await·first.control.prepare({·...first.options,·ownedResources·})
+        574 │ + ··})
+    557 575 │     expect(session).not.toBeNull()
+    558 576 │     const second = setup()
+    ······· │
+    563 581 │     expect(first.control.getSession()).toBe(session)
+    564 582 │     expect(ownedResources.close).not.toHaveBeenCalled()
+    565     │ - ··await·act(async·()·=>·{·await·first.control.cancel()·})
+        583 │ + ··await·act(async·()·=>·{
+        584 │ + ····await·first.control.cancel()
+        585 │ + ··})
+    566 586 │     expect(ownedResources.close).toHaveBeenCalledTimes(1)
+    567 587 │   })
+    ······· │
+    580 600 │     await act(async () => {
+    581 601 │       replacement = h.control.prepare({ ...h.options, ownedResources: nextOwned })
+    582     │ - ····void·replacement.then(()·=>·{·returned·=·true·})
+        602 │ + ····void·replacement.then(()·=>·{
+        603 │ + ······returned·=·true
+        604 │ + ····})
+    583 605 │     })
+    584 606 │     try {
+    ······· │
+    595 617 │     }
+    596 618 │     expect(h.control.state.status).toBe('prepared')
+    597     │ - ··await·act(async·()·=>·{·await·h.control.cancel()·})
+        619 │ + ··await·act(async·()·=>·{
+        620 │ + ····await·h.control.cancel()
+        621 │ + ··})
+    598 622 │     expect(nextOwned.close).toHaveBeenCalledTimes(1)
+    599 623 │   })
+    600 624 │
+    601     │ - it.each(['throw',·'reject'])('H06·%s·in·lifecycle·cleanup·is·fixed,·continues·session·disposal·and·forbids·replacement',·async·(kind)·=>·{
+    602     │ - ··const·h·=·setup()
+    603     │ - ··await·h.ready()
+    604     │ - ··const·ownedResources·=·{·close:·vi.fn(()·=>·{
+    605     │ - ····const·error·=·new·Error('PRIVATE_OWNED_AUTH_CLEANUP')
+    606     │ - ····if·(kind·===·'throw')·throw·error
+    607     │ - ····return·Promise.reject(error)
+    608     │ - ··})·}
+    609     │ - ··const·session·=·await·prepare(h,·{·...h.options,·ownedResources·})
+    610     │ - ··await·session.start()
+    611     │ - ··await·act(async·()·=>·{
+    612     │ - ····await·expect(h.control.cancel()).rejects.toThrow('Resource·cleanup·failed')
+    613     │ - ··})
+    614     │ - ··expect(h.control.state).toEqual({·status:·'failed',·failure:·'cleanup-error'·})
+    615     │ - ··expect(h.resources).toHaveLength(3)
+    616     │ - ··expect(h.resources.every((r)·=>·r.dispose.mock.calls.length·===·1)).toBe(true)
+    617     │ - ··const·nextOwned·=·{·close:·vi.fn()·}
+    618     │ - ··await·act(async·()·=>·{
+    619     │ - ····expect(await·h.control.prepare({·...h.options,·ownedResources:·nextOwned·})).toBeNull()
+    620     │ - ··})
+    621     │ - ··expect(nextOwned.close).not.toHaveBeenCalled()
+    622     │ - ··expect(JSON.stringify(h.control.state)).not.toContain('PRIVATE_OWNED')
+    623     │ - })
+        625 │ + it.each(['throw',·'reject'])(
+        626 │ + ··'H06·%s·in·lifecycle·cleanup·is·fixed,·continues·session·disposal·and·forbids·replacement',
+        627 │ + ··async·(kind)·=>·{
+  199 more lines truncated
+
+
+src/coaching/useRecordedCoaching.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+
+     66  66 │     if (op.cleanup) return op.cleanup
+     67  67 │     let done!: () => void, failed!: (error: ResourceCleanupError) => void
+     68     │ - ··op.cleanup·=·new·Promise<void>((resolve,·reject)·=>·{·done·=·resolve;·failed·=·reject·})
+         68 │ + ··op.cleanup·=·new·Promise<void>((resolve,·reject)·=>·{
+         69 │ + ····done·=·resolve
+         70 │ + ····failed·=·reject
+         71 │ + ··})
+     69  72 │     // Publish before invoking foreign callbacks. Every action runs even if another throws.
+     70  73 │     const tasks: Promise<unknown>[] = []
+     71  74 │     const attempt = (action: () => unknown) => {
+     72     │ - ····try·{·tasks.push(Promise.resolve(action()))·}
+     73     │ - ····catch·{·tasks.push(Promise.reject(new·ResourceCleanupError()))·}
+         75 │ + ····try·{
+         76 │ + ······tasks.push(Promise.resolve(action()))
+         77 │ + ····}·catch·{
+         78 │ + ······tasks.push(Promise.reject(new·ResourceCleanupError()))
+         79 │ + ····}
+     74  80 │     }
+     75  81 │     const detach = op.detach
+    ······· │
+     97 103 │     const previous = owner.cleanup
+     98 104 │     let done!: () => void, failed!: (error: ResourceCleanupError) => void
+     99     │ - ··const·task·=·new·Promise<void>((resolve,·reject)·=>·{·done·=·resolve;·failed·=·reject·})
+        105 │ + ··const·task·=·new·Promise<void>((resolve,·reject)·=>·{
+        106 │ + ····done·=·resolve
+        107 │ + ····failed·=·reject
+        108 │ + ··})
+    100 109 │     owner.cleanup = task
+    101 110 │     void Promise.allSettled([previous, retire(op, reason)]).then(async (results) => {
+    ······· │
+    113 122 │     })
+    114 123 │     void task.then(
+    115     │ - ····()·=>·{·if·(owner.cleanup·===·task)·owner.cleanup·=·null·},
+        124 │ + ····()·=>·{
+        125 │ + ······if·(owner.cleanup·===·task)·owner.cleanup·=·null
+        126 │ + ····},
+    116 127 │       () => {},
+    117 128 │     )
+
+
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.

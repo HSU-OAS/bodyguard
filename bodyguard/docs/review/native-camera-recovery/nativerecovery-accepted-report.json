@@ -1,0 +1,444 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "[workspace]/bodyguard/frontend/node_modules/@playwright/test/cli.js",
+      "test",
+      "nativerecovery.spec.ts",
+      "--config",
+      "playwright.account.config.ts",
+      "--output",
+      "test-results/nativerecovery-20261007T231144102772Z"
+    ],
+    "configFile": "[workspace]/bodyguard/frontend/playwright.account.config.ts",
+    "rootDir": "[workspace]/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T231144102772Z",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "[workspace]/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "account.spec.ts",
+          "password.spec.ts",
+          "google.spec.ts",
+          "records.spec.ts",
+          "design.spec.ts",
+          "withdrawal.spec.ts",
+          "datahelp.spec.ts",
+          "integration.spec.ts",
+          "security.spec.ts",
+          "resultrecord.spec.ts",
+          "ownercapture.spec.ts",
+          "recordedsession.spec.ts",
+          "authcoaching.spec.ts",
+          "nativeauth.spec.ts",
+          "nativerecovery.spec.ts",
+          "notifications.spec.ts",
+          "alertdelivery.spec.ts",
+          "ownedalert.spec.ts",
+          "summaries.spec.ts",
+          "minuteupload.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/nativerecovery-20261007T231144102772Z/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "pnpm build && vite build --config e2e/fixtures/nativeRecovery.vite.ts && vite preview --host localhost",
+      "url": "http://localhost:4173",
+      "reuseExistingServer": false,
+      "timeout": 180000
+    }
+  },
+  "suites": [
+    {
+      "title": "nativerecovery.spec.ts",
+      "file": "nativerecovery.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "male browser permission denied→explicit retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4068,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:11:54.091Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "WIP-avatar-only-no-camera",
+                      "contentType": "image/png",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T231144102772Z/nativerecovery-male-browser-permission-denied→explicit-retry/attachments/WIP-avatar-only-no-camera-5bbf6eeb70d9d583d8280ac8f85784aaa9e07653.png"
+                    },
+                    {
+                      "name": "native-recovery-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T231144102772Z/nativerecovery-male-browser-permission-denied→explicit-retry/attachments/native-recovery-summary-33ea2eda79aa4127982d85851b3b04286ccf8de5.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8c8af69bad1d103297e7-d866e7987e1fbeb2909b",
+          "file": "nativerecovery.spec.ts",
+          "line": 282,
+          "column": 3
+        },
+        {
+          "title": "male delayed native camera→cancel→late reclaim→explicit retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3120,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:11:58.527Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-recovery-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T231144102772Z/nativerecovery-male-delaye-b3434-late-reclaim→explicit-retry/attachments/native-recovery-summary-cd6d16fc70da1d65c9bd488d575f26129c226d45.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8c8af69bad1d103297e7-6b027f00644764323f2f",
+          "file": "nativerecovery.spec.ts",
+          "line": 311,
+          "column": 3
+        },
+        {
+          "title": "male native track lost→stop→explicit retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5163,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:12:01.673Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-recovery-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T231144102772Z/nativerecovery-male-native-track-lost→stop→explicit-retry/attachments/native-recovery-summary-f57a3f7e82923676fa88b1ec673630125f385943.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8c8af69bad1d103297e7-2a84cae3a8277c82fedc",
+          "file": "nativerecovery.spec.ts",
+          "line": 351,
+          "column": 3
+        },
+        {
+          "title": "male GLB HTTP404→native cleanup→explicit retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3546,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:12:06.852Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-recovery-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T231144102772Z/nativerecovery-male-GLB-HT-f0652-tive-cleanup→explicit-retry/attachments/native-recovery-summary-4e9d1dc30e011315859d4a55299b4a4ba56a9246.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8c8af69bad1d103297e7-244f05f19fe83631919f",
+          "file": "nativerecovery.spec.ts",
+          "line": 367,
+          "column": 3
+        },
+        {
+          "title": "female browser permission denied→explicit retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3001,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:12:10.412Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "WIP-avatar-only-no-camera",
+                      "contentType": "image/png",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T231144102772Z/nativerecovery-female-brow-55678-ssion-denied→explicit-retry/attachments/WIP-avatar-only-no-camera-28006d2ce0f8163833e72e1dd8515de925f5d157.png"
+                    },
+                    {
+                      "name": "native-recovery-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T231144102772Z/nativerecovery-female-brow-55678-ssion-denied→explicit-retry/attachments/native-recovery-summary-17f0071d03a5ce40c4a7e4feb5193379d7fcb4ce.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8c8af69bad1d103297e7-134bc9b363fa027e0376",
+          "file": "nativerecovery.spec.ts",
+          "line": 282,
+          "column": 3
+        },
+        {
+          "title": "female delayed native camera→cancel→late reclaim→explicit retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2927,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:12:13.425Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-recovery-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T231144102772Z/nativerecovery-female-dela-3806e-late-reclaim→explicit-retry/attachments/native-recovery-summary-22981398f5b28038737438a499591bb4156c3698.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8c8af69bad1d103297e7-547efd38ec100b7e1ec3",
+          "file": "nativerecovery.spec.ts",
+          "line": 311,
+          "column": 3
+        },
+        {
+          "title": "female native track lost→stop→explicit retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4901,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:12:16.363Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-recovery-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T231144102772Z/nativerecovery-female-native-track-lost→stop→explicit-retry/attachments/native-recovery-summary-d9d2ffdfc0f85371b347ac0d2759b858eabf8228.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8c8af69bad1d103297e7-34f1f0ca79cea11418a6",
+          "file": "nativerecovery.spec.ts",
+          "line": 351,
+          "column": 3
+        },
+        {
+          "title": "female GLB HTTP404→native cleanup→explicit retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3473,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T23:12:21.274Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "native-recovery-summary",
+                      "contentType": "application/json",
+                      "path": "[workspace]/bodyguard/frontend/test-results/nativerecovery-20261007T231144102772Z/nativerecovery-female-GLB--baa12-tive-cleanup→explicit-retry/attachments/native-recovery-summary-56a7a8957a867fdce077145c5edcf62315b7e595.json"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8c8af69bad1d103297e7-99791b035f222a484a99",
+          "file": "nativerecovery.spec.ts",
+          "line": 367,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-07T23:11:44.629Z",
+    "duration": 40233.989,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

@@ -1,7 +1,12 @@
 // FR-S-02/04·FR-M-07/NFR-07/08: synthetic disposable factories, never real camera/model proof.
 import { afterEach, expect, it, vi } from 'vitest'
 import { advanceCoaching, type CoachingEvent, createCoaching } from '../stretch/progression'
-import { createResourceController, type ResourceContext, type ResourceNotice } from './resources'
+import {
+  createResourceController,
+  ResourceCleanupError,
+  type ResourceContext,
+  type ResourceNotice,
+} from './resources'
 
 afterEach(() => {
   vi.restoreAllMocks()
@@ -32,6 +37,42 @@ function setup() {
   return { resources, ports, notice }
 }
 const privateFailure = () => new Error('PRIVATE_FRAME_coordinates_account_METADATA')
+
+it('R-07 factory 반환 전 정리 실패도 다른 소유 자원을 정리하고 재준비를 차단한다', async () => {
+  const { resources, ports, notice } = setup()
+  ports.avatars.mockRejectedValueOnce(new ResourceCleanupError())
+  const controller = createResourceController(ports, notice)
+  await controller.run(request(1))
+  await controller.run(request(2))
+  await controller.close()
+  expect(resources[0].dispose).toHaveBeenCalledTimes(1)
+  expect(resources[1].dispose).toHaveBeenCalledTimes(1)
+  expect(resources[2].dispose).not.toHaveBeenCalled()
+  expect(ports.camera).toHaveBeenCalledTimes(1)
+  expect(notice.mock.calls).toEqual([[{ type: 'error', generation: 1, reason: 'cleanup-error' }]])
+})
+
+it('R-07 이전 factory의 늦은 정리 실패는 현재 세대도 정리하고 오류를 한 번만 보고한다', async () => {
+  const { resources, ports, notice } = setup()
+  const pending = deferred<ReturnType<typeof fresh>>()
+  ports.avatars.mockImplementationOnce(() => pending.promise)
+  for (const stage of ['camera', 'inference'] as const)
+    ports[stage].mockImplementationOnce(async () => fresh())
+  const controller = createResourceController(ports, notice)
+  const old = controller.run(request(1))
+  await vi.waitFor(() => expect(ports.avatars).toHaveBeenCalledTimes(1))
+  await controller.run(request(2))
+  pending.reject(new ResourceCleanupError())
+  await old
+  await controller.run(request(3))
+  await controller.close()
+  for (const resource of resources) expect(resource.dispose).toHaveBeenCalledTimes(1)
+  expect(ports.camera).toHaveBeenCalledTimes(2)
+  expect(notice.mock.calls).toEqual([
+    [{ type: 'ready', generation: 2 }],
+    [{ type: 'error', generation: 1, reason: 'cleanup-error' }],
+  ])
+})
 
 it('R-02 명시 요청만 camera→inference→avatars 준비하고 close에서 각1회 정리한다', async () => {
   const order: string[] = []

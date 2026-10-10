@@ -1,0 +1,86 @@
+{
+  "head": "2a00bbf781f5244c624b649d0f1e4199fb16859c",
+  "results": [
+    {
+      "mode": "playback",
+      "scratch": "/private/tmp/bodyguard-pose-playback-proof.5JGzFZ",
+      "name": "build",
+      "command": [
+        "node_modules/.bin/vite",
+        "build",
+        "--config",
+        "e2e/fixtures/ownedPosePlayback.vite.ts"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "mode": "playback",
+      "scratch": "/private/tmp/bodyguard-pose-playback-proof.5JGzFZ",
+      "name": "native",
+      "command": [
+        "node",
+        "scripts/test-pose-frame-browser.mjs",
+        "/private/tmp/bodyguard-pose-playback-proof.5JGzFZ",
+        "regression",
+        "playback"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "mode": "video",
+      "scratch": "/private/tmp/bodyguard-video-pose-proof.6zFwFq",
+      "name": "build",
+      "command": [
+        "node_modules/.bin/vite",
+        "build",
+        "--config",
+        "e2e/fixtures/ownedVideoPose.vite.ts"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "mode": "video",
+      "scratch": "/private/tmp/bodyguard-video-pose-proof.6zFwFq",
+      "name": "native",
+      "command": [
+        "node",
+        "scripts/test-pose-frame-browser.mjs",
+        "/private/tmp/bodyguard-video-pose-proof.6zFwFq",
+        "regression",
+        "video"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "mode": "blank",
+      "scratch": "/private/tmp/bodyguard-pose-frame-proof.vRExCy",
+      "name": "build",
+      "command": [
+        "node_modules/.bin/vite",
+        "build",
+        "--config",
+        "e2e/fixtures/ownedPoseFrame.vite.ts"
+      ],
+      "exit": 0,
+      "signal": null
+    },
+    {
+      "mode": "blank",
+      "scratch": "/private/tmp/bodyguard-pose-frame-proof.vRExCy",
+      "name": "native",
+      "command": [
+        "node",
+        "scripts/test-pose-frame-browser.mjs",
+        "/private/tmp/bodyguard-pose-frame-proof.vRExCy",
+        "regression",
+        "blank"
+      ],
+      "exit": 0,
+      "signal": null
+    }
+  ]
+}

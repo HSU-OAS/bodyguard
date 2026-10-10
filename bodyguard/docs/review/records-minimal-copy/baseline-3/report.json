@@ -1,0 +1,458 @@
+{
+  "phase": "baseline-3",
+  "head": "a46652833ce7380c6298d1a9d122a7b9e6db2cdd",
+  "provenance": "Actual production Chrome; synthetic account, HTTP records and delete proofs. No real SQL, provider, participant, camera or avatar validation.",
+  "source": {
+    "src/pages/RecordsPage.tsx": "0ccfd3bf8e3f8473797fe6e25d2403b5822a3694cf7615d3be4699a9b1224419",
+    "src/pages/RecordDeletion.tsx": "9ad189ad45f6cb1bd657b3852e4bcbe43a935d5a6a1c587f995e4dd829b976f6",
+    "src/pages/RecordsPage.css": "e4d6314012d9dc9df7e939926c98165122b533cbccf3f03762b9574123e966c4",
+    "src/index.css": "580ca04512309f462342380a861d28e1f1370447bc1b0aab2420bd859216da59",
+    "src/api/records.ts": "d2d3c373868db6de90e40fbfc550f22681cdaf695d98ac1a1cad7be38e683985",
+    "src/api/recordDeletion.ts": "d58aa264f494de3a869446eb613ca470c1ac841db3a399ea110b0c298140c20f",
+    "src/App.tsx": "a18ca00c782e2e25d798511d6c7e7d158a34c2635e80005bcf30e4059c998e67",
+    "src/auth.tsx": "8357e10ad49a027eb2e5996ea5d5bcc55b9262aac5edc6ed10d0ff14cf6bae10",
+    "scripts/test-records-copy-ui-browser.mjs": "633e8852c273393a65133528d6378c736af33f11bef2b96417236f0f1e65deb2",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "screens": [
+    {
+      "filename": "1-list-1440.png",
+      "name": "list",
+      "width": 1440,
+      "charsWithoutSpace": 219,
+      "notice": "완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.",
+      "labels": [
+        "시작일",
+        "종료일"
+      ],
+      "buttons": [
+        "기간 조회",
+        "이 기간 기록 삭제"
+      ],
+      "links": [
+        [
+          "synthetic-motion",
+          "/records/00000000-0000-4000-8000-000000000001?from=2026-10-04&to=2026-10-10"
+        ],
+        [
+          "내 시작으로 돌아가기",
+          "/start"
+        ]
+      ]
+    },
+    {
+      "filename": "2-detail-1440.png",
+      "name": "detail",
+      "width": 1440,
+      "charsWithoutSpace": 231,
+      "notice": "완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.",
+      "labels": [],
+      "buttons": [],
+      "links": [
+        [
+          "기록 목록으로 돌아가기",
+          "/records?from=2026-10-04&to=2026-10-10"
+        ],
+        [
+          "내 시작으로 돌아가기",
+          "/start"
+        ]
+      ]
+    },
+    {
+      "filename": "3-delete-confirm-1440.png",
+      "name": "delete-confirm",
+      "width": 1440,
+      "charsWithoutSpace": 307,
+      "notice": "완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.",
+      "labels": [
+        "시작일",
+        "종료일"
+      ],
+      "buttons": [
+        "기간 조회",
+        "취소",
+        "기록 삭제"
+      ],
+      "links": [
+        [
+          "synthetic-motion",
+          "/records/00000000-0000-4000-8000-000000000001?from=2026-10-04&to=2026-10-10"
+        ],
+        [
+          "내 시작으로 돌아가기",
+          "/start"
+        ]
+      ]
+    },
+    {
+      "filename": "4-list-1024.png",
+      "name": "list",
+      "width": 1024,
+      "charsWithoutSpace": 219,
+      "notice": "완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.",
+      "labels": [
+        "시작일",
+        "종료일"
+      ],
+      "buttons": [
+        "기간 조회",
+        "이 기간 기록 삭제"
+      ],
+      "links": [
+        [
+          "synthetic-motion",
+          "/records/00000000-0000-4000-8000-000000000001?from=2026-10-04&to=2026-10-10"
+        ],
+        [
+          "내 시작으로 돌아가기",
+          "/start"
+        ]
+      ]
+    },
+    {
+      "filename": "5-detail-1024.png",
+      "name": "detail",
+      "width": 1024,
+      "charsWithoutSpace": 231,
+      "notice": "완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.",
+      "labels": [],
+      "buttons": [],
+      "links": [
+        [
+          "기록 목록으로 돌아가기",
+          "/records?from=2026-10-04&to=2026-10-10"
+        ],
+        [
+          "내 시작으로 돌아가기",
+          "/start"
+        ]
+      ]
+    },
+    {
+      "filename": "6-delete-confirm-1024.png",
+      "name": "delete-confirm",
+      "width": 1024,
+      "charsWithoutSpace": 307,
+      "notice": "완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.",
+      "labels": [
+        "시작일",
+        "종료일"
+      ],
+      "buttons": [
+        "기간 조회",
+        "취소",
+        "기록 삭제"
+      ],
+      "links": [
+        [
+          "synthetic-motion",
+          "/records/00000000-0000-4000-8000-000000000001?from=2026-10-04&to=2026-10-10"
+        ],
+        [
+          "내 시작으로 돌아가기",
+          "/start"
+        ]
+      ]
+    },
+    {
+      "filename": "7-list-800.png",
+      "name": "list",
+      "width": 800,
+      "charsWithoutSpace": 219,
+      "notice": "완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.",
+      "labels": [
+        "시작일",
+        "종료일"
+      ],
+      "buttons": [
+        "기간 조회",
+        "이 기간 기록 삭제"
+      ],
+      "links": [
+        [
+          "synthetic-motion",
+          "/records/00000000-0000-4000-8000-000000000001?from=2026-10-04&to=2026-10-10"
+        ],
+        [
+          "내 시작으로 돌아가기",
+          "/start"
+        ]
+      ]
+    },
+    {
+      "filename": "8-detail-800.png",
+      "name": "detail",
+      "width": 800,
+      "charsWithoutSpace": 231,
+      "notice": "완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.",
+      "labels": [],
+      "buttons": [],
+      "links": [
+        [
+          "기록 목록으로 돌아가기",
+          "/records?from=2026-10-04&to=2026-10-10"
+        ],
+        [
+          "내 시작으로 돌아가기",
+          "/start"
+        ]
+      ]
+    },
+    {
+      "filename": "9-delete-confirm-800.png",
+      "name": "delete-confirm",
+      "width": 800,
+      "charsWithoutSpace": 307,
+      "notice": "완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.",
+      "labels": [
+        "시작일",
+        "종료일"
+      ],
+      "buttons": [
+        "기간 조회",
+        "취소",
+        "기록 삭제"
+      ],
+      "links": [
+        [
+          "synthetic-motion",
+          "/records/00000000-0000-4000-8000-000000000001?from=2026-10-04&to=2026-10-10"
+        ],
+        [
+          "내 시작으로 돌아가기",
+          "/start"
+        ]
+      ]
+    },
+    {
+      "filename": "10-loading-800.png",
+      "name": "loading",
+      "width": 800,
+      "charsWithoutSpace": 121,
+      "notice": "완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.",
+      "labels": [
+        "시작일",
+        "종료일"
+      ],
+      "buttons": [
+        "기간 조회",
+        "이 기간 기록 삭제"
+      ],
+      "links": [
+        [
+          "내 시작으로 돌아가기",
+          "/start"
+        ]
+      ]
+    },
+    {
+      "filename": "11-empty-800.png",
+      "name": "empty",
+      "width": 800,
+      "charsWithoutSpace": 196,
+      "notice": "완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.",
+      "labels": [
+        "시작일",
+        "종료일"
+      ],
+      "buttons": [
+        "기간 조회",
+        "이 기간 기록 삭제"
+      ],
+      "links": [
+        [
+          "스트레칭 시작 경로 선택",
+          "/explore"
+        ],
+        [
+          "내 시작으로 돌아가기",
+          "/start"
+        ]
+      ]
+    },
+    {
+      "filename": "12-error-800.png",
+      "name": "error",
+      "width": 800,
+      "charsWithoutSpace": 162,
+      "notice": "완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.",
+      "labels": [
+        "시작일",
+        "종료일"
+      ],
+      "buttons": [
+        "기간 조회",
+        "이 기간 기록 삭제",
+        "다시 조회"
+      ],
+      "links": [
+        [
+          "내 시작으로 돌아가기",
+          "/start"
+        ]
+      ]
+    },
+    {
+      "filename": "13-page-two-800.png",
+      "name": "page-two",
+      "width": 800,
+      "charsWithoutSpace": 235,
+      "notice": "완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.",
+      "labels": [
+        "시작일",
+        "종료일"
+      ],
+      "buttons": [
+        "기간 조회",
+        "이 기간 기록 삭제",
+        "이전 페이지",
+        "다음 페이지"
+      ],
+      "links": [
+        [
+          "synthetic-page-two",
+          "/records/00000000-0000-4000-8000-000000000021?from=2026-10-04&to=2026-10-10"
+        ],
+        [
+          "내 시작으로 돌아가기",
+          "/start"
+        ]
+      ]
+    },
+    {
+      "filename": "14-missing-800.png",
+      "name": "missing",
+      "width": 800,
+      "charsWithoutSpace": 132,
+      "notice": "완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.",
+      "labels": [],
+      "buttons": [],
+      "links": [
+        [
+          "기록 목록으로 돌아가기",
+          "/records?from=2026-10-04&to=2026-10-10"
+        ],
+        [
+          "내 시작으로 돌아가기",
+          "/start"
+        ]
+      ]
+    },
+    {
+      "filename": "15-long-800.png",
+      "name": "long",
+      "width": 800,
+      "charsWithoutSpace": 267,
+      "notice": "완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.",
+      "labels": [
+        "시작일",
+        "종료일"
+      ],
+      "buttons": [
+        "기간 조회",
+        "이 기간 기록 삭제"
+      ],
+      "links": [
+        [
+          "synthetic-long-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "/records/00000000-0000-4000-8000-000000000001?from=2026-10-04&to=2026-10-10"
+        ],
+        [
+          "내 시작으로 돌아가기",
+          "/start"
+        ]
+      ]
+    },
+    {
+      "filename": "16-invalid-period-800.png",
+      "name": "invalid-period",
+      "width": 800,
+      "charsWithoutSpace": 296,
+      "notice": "완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.",
+      "labels": [
+        "시작일",
+        "종료일"
+      ],
+      "buttons": [
+        "기간 조회",
+        "이 기간 기록 삭제"
+      ],
+      "links": [
+        [
+          "synthetic-long-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "/records/00000000-0000-4000-8000-000000000001?from=2026-10-04&to=2026-10-10"
+        ],
+        [
+          "내 시작으로 돌아가기",
+          "/start"
+        ]
+      ]
+    },
+    {
+      "filename": "17-dark-1024.png",
+      "name": "dark",
+      "width": 1024,
+      "charsWithoutSpace": 219,
+      "notice": "완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.",
+      "labels": [
+        "시작일",
+        "종료일"
+      ],
+      "buttons": [
+        "기간 조회",
+        "이 기간 기록 삭제"
+      ],
+      "links": [
+        [
+          "synthetic-motion",
+          "/records/00000000-0000-4000-8000-000000000001?from=2026-10-04&to=2026-10-10"
+        ],
+        [
+          "내 시작으로 돌아가기",
+          "/start"
+        ]
+      ]
+    },
+    {
+      "filename": "18-reduced-motion-1024.png",
+      "name": "reduced-motion",
+      "width": 1024,
+      "charsWithoutSpace": 219,
+      "notice": "완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.",
+      "labels": [
+        "시작일",
+        "종료일"
+      ],
+      "buttons": [
+        "기간 조회",
+        "이 기간 기록 삭제"
+      ],
+      "links": [
+        [
+          "synthetic-motion",
+          "/records/00000000-0000-4000-8000-000000000001?from=2026-10-04&to=2026-10-10"
+        ],
+        [
+          "내 시작으로 돌아가기",
+          "/start"
+        ]
+      ]
+    }
+  ],
+  "flows": [
+    "list-detail-period-return-delete-cancel-1440",
+    "list-detail-period-return-delete-cancel-1024",
+    "list-detail-period-return-delete-cancel-800",
+    "loading-empty-error-retry-page-no-stale-records",
+    "missing-detail-long-content-date-recovery",
+    "dark-and-reduced-preference-keyboard-focus",
+    "logout-private-records-closed"
+  ],
+  "failures": [],
+  "chrome": "154.0.8037.57",
+  "passed": true,
+  "cameraCalls": 0,
+  "externalOrigins": [],
+  "pageErrors": []
+}

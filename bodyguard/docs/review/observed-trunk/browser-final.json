@@ -1,0 +1,325 @@
+{
+  "head": "864dcf2f3cefd75f479cd3b34d1ab9ee92af934b",
+  "sourceBefore": {
+    "src/avatar/observedTrunk.ts": "6bd375da89d52fd93d4d164a6e9a656e15c740a0dc9c4c9597b742e02b42cc60",
+    "src/avatar/observedTrunk.test.ts": "f702be1092a13858aa722060539e2157fa3ef633205d5f6d52031f16b6695998",
+    "src/avatar/observedPoseRig.ts": "198708100002203f22645b82611e8c4ea6ab3fd13289d0b480c270612c83cc2f",
+    "src/avatar/ownedAvatarPair.ts": "b6df1fdb10d3b06595a272429342e56e1f4fefd219c9ebcc30dfcd72d3859db9",
+    "src/avatar/ownedAvatarPair.test.ts": "5f82c2cc23ede04f688ea1fa6f805e5d0f8ef7844ceb50df456318aa6038a699",
+    "src/coaching/nativePlaybackResources.ts": "799eab24e27b63a5a5105b6dbeb4434a60bc0d5e250adcf4c26c7841b5531bfa",
+    "src/coaching/nativePlaybackResources.test.ts": "0e29ca34f8316a842f368783313bf58b1a6db900e7a9972dd433cbef0a7b0075",
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "e2e/fixtures/observedTrunkProbe.ts": "5f8caddcf711f10aec1205b0d6babf10bb9e2b90313134d2aa0d02eec9976691",
+    "e2e/fixtures/observedTrunk.vite.ts": "9b478905fd8aebf5fa1c3605a9b0f3cd3d354b37ce06ab91c98047176f3cd077",
+    "scripts/test-observed-trunk-browser.mjs": "fa489b8ddda2beb0be358467e12f634fa5943ac6d272561a75c10cdccd36f8b8",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "assetCommit": "25a9bd6c7392890e3b5d5d6ae1046bb7087d56ad",
+  "assetHashes": {
+    "male": "cc85bcd449f3f31347e4f7174986d41e4aca3067990f5d8a2e6ba3a099171927",
+    "female": "27c10902aa377e995bdbc115ab773cf22f8ea38582c49820304a33ad7685f25a"
+  },
+  "actualChrome": true,
+  "actualWebGL": true,
+  "syntheticObservations": true,
+  "actualSDK": false,
+  "actualCamera": false,
+  "finalAvatar": false,
+  "samples": [
+    {
+      "gender": "male",
+      "passed": true,
+      "stages": [
+        {
+          "state": {
+            "status": "tracking",
+            "tracked": 9,
+            "total": 9
+          },
+          "mode": "side",
+          "sequence": 67,
+          "closed": false,
+          "sourceUnchanged": true,
+          "referenceUnchanged": true,
+          "positionsScalesPreserved": true,
+          "authoredAnatomyPreserved": true,
+          "trunkChanged": true,
+          "trunkFrozen": false,
+          "poseFrozen": false,
+          "maxDirectionError": 9.305772182939053e-8,
+          "fullBodyInside": true,
+          "calls": 10,
+          "triangles": 576508
+        },
+        {
+          "state": {
+            "status": "tracking",
+            "tracked": 9,
+            "total": 9
+          },
+          "mode": "forward",
+          "sequence": 154,
+          "closed": false,
+          "sourceUnchanged": true,
+          "referenceUnchanged": true,
+          "positionsScalesPreserved": true,
+          "authoredAnatomyPreserved": true,
+          "trunkChanged": true,
+          "trunkFrozen": false,
+          "poseFrozen": false,
+          "maxDirectionError": 0.000002446015510929551,
+          "fullBodyInside": true,
+          "calls": 10,
+          "triangles": 576508
+        },
+        {
+          "state": {
+            "status": "partial",
+            "tracked": 7,
+            "total": 9
+          },
+          "mode": "hidden",
+          "sequence": 230,
+          "closed": false,
+          "sourceUnchanged": true,
+          "referenceUnchanged": true,
+          "positionsScalesPreserved": true,
+          "authoredAnatomyPreserved": true,
+          "trunkChanged": true,
+          "trunkFrozen": true,
+          "poseFrozen": false,
+          "maxDirectionError": 0.3502235910125146,
+          "fullBodyInside": true,
+          "calls": 10,
+          "triangles": 576508
+        },
+        {
+          "state": {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 9
+          },
+          "mode": "multiple",
+          "sequence": 293,
+          "closed": false,
+          "sourceUnchanged": true,
+          "referenceUnchanged": true,
+          "positionsScalesPreserved": true,
+          "authoredAnatomyPreserved": true,
+          "trunkChanged": true,
+          "trunkFrozen": true,
+          "poseFrozen": true,
+          "maxDirectionError": 0.3502235910125146,
+          "fullBodyInside": true,
+          "calls": 10,
+          "triangles": 576508
+        },
+        {
+          "state": {
+            "status": "tracking",
+            "tracked": 9,
+            "total": 9
+          },
+          "mode": "recover",
+          "sequence": 356,
+          "closed": false,
+          "sourceUnchanged": true,
+          "referenceUnchanged": true,
+          "positionsScalesPreserved": true,
+          "authoredAnatomyPreserved": true,
+          "trunkChanged": true,
+          "trunkFrozen": false,
+          "poseFrozen": false,
+          "maxDirectionError": 0.000005090071771254642,
+          "fullBodyInside": true,
+          "calls": 10,
+          "triangles": 576508
+        },
+        {
+          "state": {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 9
+          },
+          "mode": "expired",
+          "sequence": 358,
+          "closed": false,
+          "sourceUnchanged": true,
+          "referenceUnchanged": true,
+          "positionsScalesPreserved": true,
+          "authoredAnatomyPreserved": true,
+          "trunkChanged": true,
+          "trunkFrozen": false,
+          "poseFrozen": true,
+          "maxDirectionError": 9.305772182939053e-8,
+          "fullBodyInside": true,
+          "calls": 10,
+          "triangles": 576508
+        }
+      ],
+      "sidePreviewSha": "1f2a1551721e758d2d7c74bb4f5778985624e7dfe618c758a95dc6289643e9d9",
+      "forwardPreviewSha": "e431a1abe6659ddbeb9b4429446312539b35df804f0bc4f21e2db3355e233667",
+      "weightsPreserved": true,
+      "closed": true
+    },
+    {
+      "gender": "female",
+      "passed": true,
+      "stages": [
+        {
+          "state": {
+            "status": "tracking",
+            "tracked": 9,
+            "total": 9
+          },
+          "mode": "side",
+          "sequence": 64,
+          "closed": false,
+          "sourceUnchanged": true,
+          "referenceUnchanged": true,
+          "positionsScalesPreserved": true,
+          "authoredAnatomyPreserved": true,
+          "trunkChanged": true,
+          "trunkFrozen": true,
+          "poseFrozen": false,
+          "maxDirectionError": 1.237783411580038e-7,
+          "fullBodyInside": true,
+          "calls": 10,
+          "triangles": 567676
+        },
+        {
+          "state": {
+            "status": "tracking",
+            "tracked": 9,
+            "total": 9
+          },
+          "mode": "forward",
+          "sequence": 135,
+          "closed": false,
+          "sourceUnchanged": true,
+          "referenceUnchanged": true,
+          "positionsScalesPreserved": true,
+          "authoredAnatomyPreserved": true,
+          "trunkChanged": true,
+          "trunkFrozen": false,
+          "poseFrozen": false,
+          "maxDirectionError": 0.000009043654556319505,
+          "fullBodyInside": true,
+          "calls": 10,
+          "triangles": 567676
+        },
+        {
+          "state": {
+            "status": "partial",
+            "tracked": 7,
+            "total": 9
+          },
+          "mode": "hidden",
+          "sequence": 206,
+          "closed": false,
+          "sourceUnchanged": true,
+          "referenceUnchanged": true,
+          "positionsScalesPreserved": true,
+          "authoredAnatomyPreserved": true,
+          "trunkChanged": true,
+          "trunkFrozen": true,
+          "poseFrozen": false,
+          "maxDirectionError": 0.3527726636290567,
+          "fullBodyInside": true,
+          "calls": 10,
+          "triangles": 567676
+        },
+        {
+          "state": {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 9
+          },
+          "mode": "multiple",
+          "sequence": 269,
+          "closed": false,
+          "sourceUnchanged": true,
+          "referenceUnchanged": true,
+          "positionsScalesPreserved": true,
+          "authoredAnatomyPreserved": true,
+          "trunkChanged": true,
+          "trunkFrozen": true,
+          "poseFrozen": true,
+          "maxDirectionError": 0.3527726636290567,
+          "fullBodyInside": true,
+          "calls": 10,
+          "triangles": 567676
+        },
+        {
+          "state": {
+            "status": "tracking",
+            "tracked": 9,
+            "total": 9
+          },
+          "mode": "recover",
+          "sequence": 332,
+          "closed": false,
+          "sourceUnchanged": true,
+          "referenceUnchanged": true,
+          "positionsScalesPreserved": true,
+          "authoredAnatomyPreserved": true,
+          "trunkChanged": true,
+          "trunkFrozen": false,
+          "poseFrozen": false,
+          "maxDirectionError": 0.000008374280244802379,
+          "fullBodyInside": true,
+          "calls": 10,
+          "triangles": 567676
+        },
+        {
+          "state": {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 9
+          },
+          "mode": "expired",
+          "sequence": 334,
+          "closed": false,
+          "sourceUnchanged": true,
+          "referenceUnchanged": true,
+          "positionsScalesPreserved": true,
+          "authoredAnatomyPreserved": true,
+          "trunkChanged": true,
+          "trunkFrozen": false,
+          "poseFrozen": true,
+          "maxDirectionError": 1.237783411580038e-7,
+          "fullBodyInside": true,
+          "calls": 10,
+          "triangles": 567676
+        }
+      ],
+      "sidePreviewSha": "0d52d31ca9bb45e8da02d88aabe65a9effc551e5f05f0ce28dc7a965569231e0",
+      "forwardPreviewSha": "589ed80d43b72e9734d84609782f37c58629d05b7fd680b4f634beae695b8442",
+      "weightsPreserved": true,
+      "closed": true
+    }
+  ],
+  "browser": "154.0.8037.98",
+  "boundary": {
+    "cameraCalls": 0,
+    "storageEntries": 0
+  },
+  "external": 0,
+  "errors": [],
+  "sourceAfter": {
+    "src/avatar/observedTrunk.ts": "6bd375da89d52fd93d4d164a6e9a656e15c740a0dc9c4c9597b742e02b42cc60",
+    "src/avatar/observedTrunk.test.ts": "f702be1092a13858aa722060539e2157fa3ef633205d5f6d52031f16b6695998",
+    "src/avatar/observedPoseRig.ts": "198708100002203f22645b82611e8c4ea6ab3fd13289d0b480c270612c83cc2f",
+    "src/avatar/ownedAvatarPair.ts": "b6df1fdb10d3b06595a272429342e56e1f4fefd219c9ebcc30dfcd72d3859db9",
+    "src/avatar/ownedAvatarPair.test.ts": "5f82c2cc23ede04f688ea1fa6f805e5d0f8ef7844ceb50df456318aa6038a699",
+    "src/coaching/nativePlaybackResources.ts": "799eab24e27b63a5a5105b6dbeb4434a60bc0d5e250adcf4c26c7841b5531bfa",
+    "src/coaching/nativePlaybackResources.test.ts": "0e29ca34f8316a842f368783313bf58b1a6db900e7a9972dd433cbef0a7b0075",
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "e2e/fixtures/observedTrunkProbe.ts": "5f8caddcf711f10aec1205b0d6babf10bb9e2b90313134d2aa0d02eec9976691",
+    "e2e/fixtures/observedTrunk.vite.ts": "9b478905fd8aebf5fa1c3605a9b0f3cd3d354b37ce06ab91c98047176f3cd077",
+    "scripts/test-observed-trunk-browser.mjs": "fa489b8ddda2beb0be358467e12f634fa5943ac6d272561a75c10cdccd36f8b8",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  }
+}

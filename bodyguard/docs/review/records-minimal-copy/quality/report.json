@@ -1,0 +1,79 @@
+{
+  "commands": [
+    {
+      "name": "biome",
+      "command": [
+        "/opt/homebrew/bin/pnpm",
+        "exec",
+        "biome",
+        "check",
+        ".",
+        "--reporter=json"
+      ],
+      "status": 0,
+      "signal": null,
+      "error": null,
+      "outputSHA256": "f3ff30335281c93b082d66fc56fb6bb454fcb3f8ae36fe977d76d71d3b407e39"
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "/opt/homebrew/bin/pnpm",
+        "typecheck"
+      ],
+      "status": 0,
+      "signal": null,
+      "error": null,
+      "outputSHA256": "d72642e5d1c51eaf41a86b5709d94805011de6c9545fab5e1fab5e33f853c64b"
+    },
+    {
+      "name": "build",
+      "command": [
+        "/opt/homebrew/bin/pnpm",
+        "build"
+      ],
+      "status": 0,
+      "signal": null,
+      "error": null,
+      "outputSHA256": "4467418164e898d9e04a4a23d5db1da20033141fd09155335a0ad3abf1cd98c8"
+    },
+    {
+      "name": "production-guard",
+      "command": [
+        "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+        "scripts/check-selection-production.mjs"
+      ],
+      "status": 0,
+      "signal": null,
+      "error": null,
+      "outputSHA256": "4d90e5f67e13394f64b27331fae68a02ba655bfd4ab0fa52442798c3a7724ad3"
+    },
+    {
+      "name": "proof-check",
+      "command": [
+        "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+        "scripts/verify-records-copy-proof.mjs",
+        "--check"
+      ],
+      "status": 0,
+      "signal": null,
+      "error": null,
+      "outputSHA256": "4c77d695aa804a49b5b7c95b14e25375eb8bd4f113944b074b3e19499d0769ce"
+    },
+    {
+      "name": "diff-check",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "status": 0,
+      "signal": null,
+      "error": null,
+      "outputSHA256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    }
+  ],
+  "syntheticBrowserHTTP": true,
+  "stages1To6Complete": false,
+  "passed": true
+}

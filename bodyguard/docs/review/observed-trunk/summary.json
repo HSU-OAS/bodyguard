@@ -1,0 +1,66 @@
+{
+  "base": "864dcf2f3cefd75f479cd3b34d1ab9ee92af934b",
+  "sourceHashes": {
+    "src/avatar/observedTrunk.ts": "6bd375da89d52fd93d4d164a6e9a656e15c740a0dc9c4c9597b742e02b42cc60",
+    "src/avatar/observedTrunk.test.ts": "f702be1092a13858aa722060539e2157fa3ef633205d5f6d52031f16b6695998",
+    "src/avatar/observedPoseRig.ts": "198708100002203f22645b82611e8c4ea6ab3fd13289d0b480c270612c83cc2f",
+    "src/avatar/ownedAvatarPair.ts": "b6df1fdb10d3b06595a272429342e56e1f4fefd219c9ebcc30dfcd72d3859db9",
+    "src/avatar/ownedAvatarPair.test.ts": "5f82c2cc23ede04f688ea1fa6f805e5d0f8ef7844ceb50df456318aa6038a699",
+    "src/coaching/nativePlaybackResources.ts": "799eab24e27b63a5a5105b6dbeb4434a60bc0d5e250adcf4c26c7841b5531bfa",
+    "src/coaching/nativePlaybackResources.test.ts": "0e29ca34f8316a842f368783313bf58b1a6db900e7a9972dd433cbef0a7b0075",
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "e2e/fixtures/observedTrunkProbe.ts": "5f8caddcf711f10aec1205b0d6babf10bb9e2b90313134d2aa0d02eec9976691",
+    "e2e/fixtures/observedTrunk.vite.ts": "9b478905fd8aebf5fa1c3605a9b0f3cd3d354b37ce06ab91c98047176f3cd077",
+    "scripts/test-observed-trunk-browser.mjs": "fa489b8ddda2beb0be358467e12f634fa5943ac6d272561a75c10cdccd36f8b8",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "unit": {
+    "passed": 1205,
+    "failed": 0
+  },
+  "browser": {
+    "samples": [
+      {
+        "gender": "male",
+        "passed": true,
+        "closed": true,
+        "weightsPreserved": true
+      },
+      {
+        "gender": "female",
+        "passed": true,
+        "closed": true,
+        "weightsPreserved": true
+      }
+    ],
+    "boundary": {
+      "cameraCalls": 0,
+      "storageEntries": 0
+    },
+    "errors": [],
+    "external": 0
+  },
+  "actualPeople": 0,
+  "actualCamera": false,
+  "actualNativePositive": false,
+  "qualifiedMotions": 0,
+  "finalAvatar": false,
+  "stages1to6Complete": false,
+  "publicAssets": {
+    "index-dNUNBpCv.css": {
+      "bytes": 31199,
+      "sha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e"
+    },
+    "index-x57--wa1.js": {
+      "bytes": 355151,
+      "sha256": "b5d4f81164c8d3c196e853b3404382bc15077986aa626cd0c3c72571b6325ac0"
+    }
+  },
+  "review": {
+    "authorOnly": true,
+    "storyUnresolvedP1P2": 0,
+    "globalStartupP2Unresolved": true,
+    "remoteGatePending": true
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "label": "format-first-recorded",
+  "cwd": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-native-body-head/bodyguard/frontend",
+  "head": "7f3c8bcd88b1a77cf3b872a240f73ecbad0b1bb8",
+  "command": "./node_modules/.bin/biome",
+  "args": [
+    "check",
+    "--write",
+    "src/coaching/nativePlaybackResources.ts",
+    "src/coaching/nativePlaybackResources.test.ts",
+    "e2e/nativehead.spec.ts",
+    "e2e/fixtures/nativeHeadAuthProbe.ts",
+    "e2e/fixtures/nativeHead.vite.ts",
+    "playwright.account.config.ts"
+  ],
+  "exit": 0,
+  "elapsedMs": 230,
+  "sourceBefore": {
+    "src/coaching/nativePlaybackResources.ts": "9a8b145308b351f0a58c3d07988ecfe8d258c0609c648b02fcb62c1bd79b9a1b",
+    "src/coaching/nativePlaybackResources.test.ts": "5aa63b24af04a97eadf385c57c1e18d51e20cecfb85e374c0b95929c2354d83e",
+    "src/avatar/headOrientationRig.ts": "5283baad2b9e0e3e5e05b3e86a2190088d5eb88f285378af1d31a981bfd79ea5",
+    "src/avatar/observedPoseRig.ts": "a696f4d216d9b26d4801aaa2533df64b2c10e112f0a3b1e4f2aac40deced26d8",
+    "src/avatar/ownedAvatarPair.ts": "afcc039b7db85f133786848ec6595750fa8f814658862765ce28ab3d7c963d04",
+    "src/pose/bodyFaceVideoSource.ts": "5413e493faf08498d3d5ca4d53c6e4bcc7f8b82aa4dffb2ea353f6174042e05a",
+    "e2e/fixtures/nativeHeadAuthProbe.ts": "0e4ccd7036f77296d3edafcb9dc83de5365c3ebb987e664b81ed01fa1acc7ae3",
+    "e2e/nativehead.spec.ts": "f02db5b280ef1c8d012bec5e74671b25fd0a0d397b7943d2a3cd38645f984dd1",
+    "playwright.account.config.ts": "1c92172b5ccabc54dab459617c6877ed2b46edd163f60b61e6fa37aeafe8d5ca",
+    "scripts/check-selection-production.mjs": "4eae5a0ee63631595ff9b012d78e9510e4ff3f99347fa879b9cb753225ab92b9"
+  },
+  "sourceAfter": {
+    "src/coaching/nativePlaybackResources.ts": "7c06d12a0ebb5d71f5b6baf1f469f9f399a0f8e2402247712c3f85477161133b",
+    "src/coaching/nativePlaybackResources.test.ts": "5aa63b24af04a97eadf385c57c1e18d51e20cecfb85e374c0b95929c2354d83e",
+    "src/avatar/headOrientationRig.ts": "5283baad2b9e0e3e5e05b3e86a2190088d5eb88f285378af1d31a981bfd79ea5",
+    "src/avatar/observedPoseRig.ts": "a696f4d216d9b26d4801aaa2533df64b2c10e112f0a3b1e4f2aac40deced26d8",
+    "src/avatar/ownedAvatarPair.ts": "afcc039b7db85f133786848ec6595750fa8f814658862765ce28ab3d7c963d04",
+    "src/pose/bodyFaceVideoSource.ts": "5413e493faf08498d3d5ca4d53c6e4bcc7f8b82aa4dffb2ea353f6174042e05a",
+    "e2e/fixtures/nativeHeadAuthProbe.ts": "0e4ccd7036f77296d3edafcb9dc83de5365c3ebb987e664b81ed01fa1acc7ae3",
+    "e2e/nativehead.spec.ts": "f02db5b280ef1c8d012bec5e74671b25fd0a0d397b7943d2a3cd38645f984dd1",
+    "playwright.account.config.ts": "419fd48be8450211c7a5e92901a6f61dfff02f3e62dbfa4889ad8e95d7a3705e",
+    "scripts/check-selection-production.mjs": "4eae5a0ee63631595ff9b012d78e9510e4ff3f99347fa879b9cb753225ab92b9"
+  },
+  "stdout": "Checked 6 files in 59ms. Fixed 2 files.\n",
+  "stderr": ""
+}

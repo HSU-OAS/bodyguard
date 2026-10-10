@@ -4,6 +4,7 @@ import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-libra
 import { StrictMode } from 'react'
 import { afterEach, expect, it, vi } from 'vitest'
 import { AuthProvider, useAuth } from '../auth'
+import { createOwnedPlaybackResources } from './ownedPlaybackResources'
 import { useRecordedCoaching } from './useRecordedCoaching'
 
 afterEach(() => {
@@ -105,10 +106,10 @@ function setup(initialGuest = false, strict = false) {
   }
 }
 type Harness = ReturnType<typeof setup>
-async function prepare(h: Harness) {
+async function prepare(h: Harness, options: Parameters<Control['prepare']>[0] = h.options) {
   let value: Awaited<ReturnType<Control['prepare']>> = null
   await act(async () => {
-    value = await h.control.prepare(h.options)
+    value = await h.control.prepare(options)
   })
   if (!value) throw new Error('Synthetic hook preparation missing')
   return value as NonNullable<Awaited<ReturnType<Control['prepare']>>>
@@ -451,6 +452,500 @@ it('H04 cancellation never serializes an unresolved permission factory; late res
   await pending
   expect(late.dispose).toHaveBeenCalledTimes(1)
   expect(h.options.ports.inference).not.toHaveBeenCalled()
+  await session.save()
+  expect(h.rows).toHaveLength(0)
+})
+
+it('H05 explicit lifecycle closes even when authentication capture has not returned', async () => {
+  const h = setup()
+  await h.ready()
+  const held = deferred<Response>()
+  h.fetch.mockReturnValueOnce(held.promise)
+  const ownedResources = { close: vi.fn(() => undefined) }
+  let pending!: ReturnType<Control['prepare']>
+  await act(async () => {
+    pending = h.control.prepare({ ...h.options, ownedResources })
+  })
+  try {
+    await act(async () => {
+      await h.control.cancel()
+    })
+    expect(h.control.getSession()).toBeNull()
+    expect(ownedResources.close).toHaveBeenCalledTimes(1)
+  } finally {
+    await act(async () => {
+      held.resolve(response(user))
+      expect(await pending).toBeNull()
+    })
+  }
+  expect(ownedResources.close).toHaveBeenCalledTimes(1)
+  expect(h.options.ports.camera).not.toHaveBeenCalled()
+})
+
+it.each(['pagehide', 'unmount'])(
+  'H05 %s reclaims an inert lifecycle during held capture',
+  async (event) => {
+    const h = setup()
+    await h.ready()
+    const held = deferred<Response>()
+    h.fetch.mockReturnValueOnce(held.promise)
+    const ownedResources = { close: vi.fn(() => undefined) }
+    let pending!: ReturnType<Control['prepare']>
+    await act(async () => {
+      pending = h.control.prepare({ ...h.options, ownedResources })
+    })
+    try {
+      await act(async () => {
+        if (event === 'unmount') h.rendered.unmount()
+        else fireEvent(window, new Event('pagehide'))
+      })
+      expect(ownedResources.close).toHaveBeenCalledTimes(1)
+    } finally {
+      await act(async () => {
+        held.resolve(response(user))
+        expect(await pending).toBeNull()
+      })
+    }
+    expect(h.options.ports.camera).not.toHaveBeenCalled()
+  },
+)
+
+it('H05 guest and invalid pure configuration never take lifecycle ownership', async () => {
+  const h = setup(true)
+  await h.ready()
+  const ownedResources = { close: vi.fn(() => undefined) }
+  await act(async () => {
+    expect(await h.control.prepare({ ...h.options, ownedResources })).toBeNull()
+    h.state.guest = false
+    await h.auth.refresh()
+  })
+  await act(async () => {
+    expect(
+      await h.control.prepare({ ...h.options, recordId: 'invalid', ownedResources }),
+    ).toBeNull()
+    await h.control.cancel()
+  })
+  expect(ownedResources.close).not.toHaveBeenCalled()
+})
+
+it('H05 supplied lifecycle getter and close are captured once before awaiting capture', async () => {
+  const h = setup()
+  await h.ready()
+  const held = deferred<Response>()
+  h.fetch.mockReturnValueOnce(held.promise)
+  const original = vi.fn(() => undefined)
+  const replacement = vi.fn(() => undefined)
+  let value = original
+  const readClose = vi.fn(() => value)
+  const ownedResources = {
+    get close() {
+      return readClose()
+    },
+  }
+  const readLifecycle = vi.fn(() => ownedResources)
+  let pending!: ReturnType<Control['prepare']>
+  await act(async () => {
+    pending = h.control.prepare({
+      ...h.options,
+      get ownedResources() {
+        return readLifecycle()
+      },
+    })
+  })
+  value = replacement
+  await act(async () => {
+    await h.control.cancel()
+    held.resolve(response(user))
+    expect(await pending).toBeNull()
+  })
+  expect(readLifecycle).toHaveBeenCalledTimes(1)
+  expect(readClose).toHaveBeenCalledTimes(1)
+  expect(original).toHaveBeenCalledTimes(1)
+  expect(replacement).not.toHaveBeenCalled()
+})
+
+it('H05 lifecycle alias in another mounted owner cannot close or adopt the first owner', async () => {
+  const first = setup()
+  await first.ready()
+  const ownedResources = { close: vi.fn(() => undefined) }
+  let session: Awaited<ReturnType<Control['prepare']>> = null
+  await act(async () => {
+    session = await first.control.prepare({ ...first.options, ownedResources })
+  })
+  expect(session).not.toBeNull()
+  const second = setup()
+  await waitFor(() => expect(second.auth.state.status).toBe('ready'))
+  await act(async () => {
+    expect(await second.control.prepare({ ...second.options, ownedResources })).toBeNull()
+  })
+  expect(first.control.getSession()).toBe(session)
+  expect(ownedResources.close).not.toHaveBeenCalled()
+  await act(async () => {
+    await first.control.cancel()
+  })
+  expect(ownedResources.close).toHaveBeenCalledTimes(1)
+})
+
+it('H06 replacement waits for the old lifecycle before publishing prepared', async () => {
+  const h = setup()
+  await h.ready()
+  const held = deferred<void>()
+  const firstOwned = { close: vi.fn(() => held.promise) }
+  await act(async () => {
+    expect(await h.control.prepare({ ...h.options, ownedResources: firstOwned })).not.toBeNull()
+  })
+  const nextOwned = { close: vi.fn(() => undefined) }
+  let replacement!: ReturnType<Control['prepare']>
+  let returned = false
+  await act(async () => {
+    replacement = h.control.prepare({ ...h.options, ownedResources: nextOwned })
+    void replacement.then(() => {
+      returned = true
+    })
+  })
+  try {
+    await waitFor(() => expect(firstOwned.close).toHaveBeenCalledTimes(1))
+    expect(returned).toBe(false)
+    expect(h.control.state.status).toBe('preparing')
+    expect(h.control.getSession()).toBeNull()
+    expect(h.options.ports.camera).not.toHaveBeenCalled()
+  } finally {
+    await act(async () => {
+      held.resolve()
+      await replacement
+    })
+  }
+  expect(h.control.state.status).toBe('prepared')
+  await act(async () => {
+    await h.control.cancel()
+  })
+  expect(nextOwned.close).toHaveBeenCalledTimes(1)
+})
+
+it.each(['throw', 'reject'])(
+  'H06 %s in lifecycle cleanup is fixed, continues session disposal and forbids replacement',
+  async (kind) => {
+    const h = setup()
+    await h.ready()
+    const ownedResources = {
+      close: vi.fn(() => {
+        const error = new Error('PRIVATE_OWNED_AUTH_CLEANUP')
+        if (kind === 'throw') throw error
+        return Promise.reject(error)
+      }),
+    }
+    const session = await prepare(h, { ...h.options, ownedResources })
+    await session.start()
+    await act(async () => {
+      await expect(h.control.cancel()).rejects.toThrow('Resource cleanup failed')
+    })
+    expect(h.control.state).toEqual({ status: 'failed', failure: 'cleanup-error' })
+    expect(h.resources).toHaveLength(3)
+    expect(h.resources.every((r) => r.dispose.mock.calls.length === 1)).toBe(true)
+    const nextOwned = { close: vi.fn() }
+    await act(async () => {
+      expect(await h.control.prepare({ ...h.options, ownedResources: nextOwned })).toBeNull()
+    })
+    expect(nextOwned.close).not.toHaveBeenCalled()
+    expect(JSON.stringify(h.control.state)).not.toContain('PRIVATE_OWNED')
+  },
+)
+
+it('H06 actual playback bridge keeps replacement inert until a late camera return is reclaimed', async () => {
+  const h = setup()
+  await h.ready()
+  const late = { dispose: vi.fn(() => undefined) }
+  const held = deferred<typeof late>()
+  const camera = vi.fn(() => held.promise)
+  const inference = vi.fn(() => ({ dispose: vi.fn() }))
+  const bridge = createOwnedPlaybackResources({
+    camera,
+    inference,
+    avatars: () => ({
+      dispose() {},
+      observe() {
+        return false
+      },
+      render() {
+        return { status: 'untracked' as const, tracked: 0, total: 8 }
+      },
+    }),
+    source: () => ({ read: async () => null, async dispose() {} }),
+    scheduler: { request: () => 1, cancel() {} },
+    render() {},
+    onFailure() {},
+  })
+  const first = await prepare(h, { ...h.options, ports: bridge.ports, ownedResources: bridge })
+  const starting = first.start()
+  await waitFor(() => expect(camera).toHaveBeenCalledTimes(1))
+  let replacement!: ReturnType<Control['prepare']>
+  let returned = false
+  const fresh = { close: vi.fn(() => undefined) }
+  await act(async () => {
+    replacement = h.control.prepare({ ...h.options, ownedResources: fresh })
+    void replacement.then(() => {
+      returned = true
+    })
+  })
+  try {
+    expect(returned).toBe(false)
+    expect(h.control.getSession()).toBeNull()
+    expect(h.control.state.status).toBe('preparing')
+    expect(inference).not.toHaveBeenCalled()
+  } finally {
+    await act(async () => {
+      held.resolve(late)
+      await starting
+      await replacement
+    })
+  }
+  expect(late.dispose).toHaveBeenCalledTimes(1)
+  expect(inference).not.toHaveBeenCalled()
+  expect(bridge.getSnapshot().closed).toBe(true)
+  expect(h.control.state.status).toBe('prepared')
+  await act(async () => {
+    await h.control.cancel()
+  })
+  expect(h.rows).toHaveLength(0)
+})
+
+it('H06 reentrant cancel in lifecycle close invokes owned close only once', async () => {
+  const h = setup()
+  await h.ready()
+  const ownedResources = {
+    close: vi.fn(() => {
+      void h.control.cancel().catch(() => {})
+    }),
+  }
+  await prepare(h, { ...h.options, ownedResources })
+  await act(async () => {
+    await h.control.cancel()
+    await h.control.cancel()
+  })
+  expect(ownedResources.close).toHaveBeenCalledTimes(1)
+  expect(h.control.getSession()).toBeNull()
+})
+
+it.each(['lifecycle', 'close'])(
+  'H05 reentrant %s getter before transfer leaves lifecycle with caller',
+  async (kind) => {
+    const h = setup()
+    await h.ready()
+    const close = vi.fn(() => undefined)
+    const ownedResources =
+      kind === 'close'
+        ? {
+            get close() {
+              void h.control.cancel().catch(() => {})
+              return close
+            },
+          }
+        : { close }
+    await act(async () => {
+      expect(
+        await h.control.prepare({
+          ...h.options,
+          get ownedResources() {
+            if (kind === 'lifecycle') void h.control.cancel().catch(() => {})
+            return ownedResources
+          },
+        }),
+      ).toBeNull()
+    })
+    expect(close).not.toHaveBeenCalled()
+    expect(h.control.getSession()).toBeNull()
+    expect(h.options.ports.camera).not.toHaveBeenCalled()
+  },
+)
+
+it('H06 a late earlier cleanup failure quarantines and reclaims a replacement already waiting', async () => {
+  const h = setup()
+  await h.ready()
+  const held = deferred<void>()
+  const old = {
+    close: vi.fn(async () => {
+      await held.promise
+      throw new Error('PRIVATE_LATE_AUTH_CLOSE')
+    }),
+  }
+  await prepare(h, { ...h.options, ownedResources: old })
+  const fresh = { close: vi.fn(() => undefined) }
+  let next!: ReturnType<Control['prepare']>
+  await act(async () => {
+    next = h.control.prepare({ ...h.options, ownedResources: fresh })
+  })
+  expect(h.control.state.status).toBe('preparing')
+  await act(async () => {
+    held.resolve()
+    expect(await next).toBeNull()
+  })
+  expect(fresh.close).toHaveBeenCalledTimes(1)
+  expect(h.control.state).toEqual({ status: 'failed', failure: 'cleanup-error' })
+  expect(h.control.getSession()).toBeNull()
+  expect(h.options.ports.camera).not.toHaveBeenCalled()
+})
+
+it.each(['refresh', 'pagehide', 'unmount'])(
+  'H06 failing close on %s stays handled and cannot revive authority',
+  async (event) => {
+    const h = setup()
+    await h.ready()
+    const ownedResources = {
+      close: vi.fn(async () => {
+        throw new Error('PRIVATE_LIFECYCLE_FAILED')
+      }),
+    }
+    await prepare(h, { ...h.options, ownedResources })
+    await act(async () => {
+      if (event === 'refresh') await h.auth.refresh()
+      else if (event === 'unmount') h.rendered.unmount()
+      else fireEvent(window, new Event('pagehide'))
+    })
+    await waitFor(() => expect(ownedResources.close).toHaveBeenCalledTimes(1))
+    if (event !== 'unmount') {
+      await waitFor(() => expect(h.control.state.failure).toBe('cleanup-error'))
+      await act(async () => {
+        await h.auth.refresh()
+      })
+      expect(h.control.state.failure).toBe('cleanup-error')
+    }
+    expect(h.control.getSession()).toBeNull()
+    expect(h.options.ports.camera).not.toHaveBeenCalled()
+  },
+)
+
+it('H06 replacement cannot overwrite a newer prepare invoked reentrantly by old close', async () => {
+  const h = setup()
+  await h.ready()
+  const newerOwned = { close: vi.fn(() => undefined) }
+  let newer!: ReturnType<Control['prepare']>
+  const old = {
+    close: vi.fn(() => {
+      newer = h.control.prepare({ ...h.options, ownedResources: newerOwned })
+    }),
+  }
+  await prepare(h, { ...h.options, ownedResources: old })
+  const outerOwned = { close: vi.fn(() => undefined) }
+  let values!: Awaited<ReturnType<Control['prepare']>>[]
+  await act(async () => {
+    const outer = h.control.prepare({ ...h.options, ownedResources: outerOwned })
+    values = await Promise.all([outer, newer])
+  })
+  expect(values[0]).toBeNull()
+  expect(values[1]).not.toBeNull()
+  expect(h.control.getSession()).toBe(values[1])
+  expect(outerOwned.close).not.toHaveBeenCalled()
+  await act(async () => {
+    await h.control.cancel()
+  })
+  expect(newerOwned.close).toHaveBeenCalledTimes(1)
+})
+
+it('H06 cancel does not overwrite a newer preparing UI created by a close callback', async () => {
+  const h = setup()
+  await h.ready()
+  const held = deferred<Response>()
+  let newer!: ReturnType<Control['prepare']>
+  const old = {
+    close: vi.fn(() => {
+      h.fetch.mockReturnValueOnce(held.promise)
+      newer = h.control.prepare(h.options)
+    }),
+  }
+  await prepare(h, { ...h.options, ownedResources: old })
+  await act(async () => {
+    await h.control.cancel()
+  })
+  try {
+    expect(h.control.state.status).toBe('preparing')
+  } finally {
+    await act(async () => {
+      held.resolve(response(user))
+      expect(await newer).not.toBeNull()
+    })
+  }
+  expect(h.control.state.status).toBe('prepared')
+  await act(async () => {
+    await h.control.cancel()
+  })
+})
+
+it('H07 actual provider refresh stops owned playback immediately and joins held source before native-shaped disposal', async () => {
+  const h = setup()
+  await h.ready()
+  const held = deferred<null>()
+  const order: string[] = []
+  const camera = {
+    dispose: vi.fn(() => {
+      order.push('camera')
+    }),
+  }
+  const inference = {
+    dispose: vi.fn(() => {
+      order.push('inference')
+    }),
+  }
+  const pair = {
+    dispose: vi.fn(() => {
+      order.push('pair')
+    }),
+    observe: vi.fn(() => false),
+    render: vi.fn(() => ({ status: 'untracked' as const, tracked: 0, total: 8 })),
+  }
+  const source = {
+    read: vi.fn(() => held.promise),
+    dispose: vi.fn(async () => {
+      order.push('source')
+    }),
+  }
+  let savedFrame!: (at: number) => void
+  const renderPair = vi.fn()
+  const bridge = createOwnedPlaybackResources({
+    camera: () => camera,
+    inference: () => inference,
+    avatars: () => pair,
+    source: () => source,
+    scheduler: {
+      request(callback) {
+        savedFrame = callback
+        return 1
+      },
+      cancel: vi.fn(),
+    },
+    render: renderPair,
+    onFailure: vi.fn(),
+  })
+  const session = await prepare(h, {
+    ...h.options,
+    ports: bridge.ports,
+    ownedResources: bridge,
+    onChange(snapshot) {
+      if (snapshot.state.status === 'running') bridge.start(snapshot.state.generation)
+    },
+  })
+  await session.start()
+  savedFrame(1)
+  await waitFor(() => expect(source.read).toHaveBeenCalledTimes(1))
+  await act(async () => {
+    await h.auth.refresh()
+  })
+  const renders = renderPair.mock.calls.length
+  savedFrame(1)
+  expect(renderPair).toHaveBeenCalledTimes(renders)
+  expect(h.control.getSession()).toBeNull()
+  expect(camera.dispose).not.toHaveBeenCalled()
+  expect(inference.dispose).not.toHaveBeenCalled()
+  await act(async () => {
+    held.resolve(null)
+    await h.control.cancel()
+  })
+  expect(order).toEqual(['source', 'pair', 'inference', 'camera'])
+  expect(source.dispose).toHaveBeenCalledTimes(1)
+  expect(pair.dispose).toHaveBeenCalledTimes(1)
+  expect(camera.dispose).toHaveBeenCalledTimes(1)
+  expect(inference.dispose).toHaveBeenCalledTimes(1)
+  expect(bridge.getSnapshot()).toMatchObject({ closed: true, failure: null })
+  await session.resume()
   await session.save()
   expect(h.rows).toHaveLength(0)
 })

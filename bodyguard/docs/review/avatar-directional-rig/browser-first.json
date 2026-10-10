@@ -1,0 +1,39 @@
+{
+  "label": "first",
+  "head": "979f5e639877d69e4a7e9bfec7edb98edbbb01d2",
+  "sourceBefore": {
+    "src/avatar/directionalRig.ts": "932b7f19d451932bbb3cf1f46b9195d81eabdee3ce14b07692cc30b59b33330c",
+    "src/avatar/eightWeightSkin.ts": "70bea47c7747d8c4771df3fb082a072eb1726e0e8053c5d8dacec5b797bcef9d",
+    "e2e/fixtures/avatarRigProbe.ts": "9ca7ac7aeb1b5fc13fde2611aaf917c0acacdb4e6293e1732324a15bb81f35eb",
+    "scripts/test-avatar-rig-browser.mjs": "47a259ad3efe634ed8c4700fae7bc0dbec5bec74e5acd2ef7c804487a73962ff",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "assetCommit": "25a9bd6c7392890e3b5d5d6ae1046bb7087d56ad",
+  "assetHashes": {
+    "male": "cc85bcd449f3f31347e4f7174986d41e4aca3067990f5d8a2e6ba3a099171927",
+    "female": "27c10902aa377e995bdbc115ab773cf22f8ea38582c49820304a33ad7685f25a"
+  },
+  "actualChrome": true,
+  "actualWebGL": true,
+  "actualCamera": false,
+  "syntheticDirections": true,
+  "releaseAvatar": false,
+  "samples": [
+    {
+      "gender": "male",
+      "passed": false
+    }
+  ],
+  "browser": "154.0.8037.98",
+  "failure": {
+    "name": "Error",
+    "message": "page.evaluate: Error: Invalid directional avatar rig\n    at invalid (http://127.0.0.1:61638/probe.js:37559:40)\n    at http://127.0.0.1:61638/probe.js:37590:98\n    at Array.map (<anonymous>)\n    at createDirectionalRig (http://127.0.0.1:61638/probe.js:37575:36)\n    at http://127.0.0.1:61638/probe.js:37853:48\n    at Array.map (<anonymous>)\n    at mountRigProbe (http://127.0.0.1:61638/probe.js:37853:30)\n    at async window.openRig (http://127.0.0.1:61638/:1:407)\n    at async <anonymous>:337:30"
+  },
+  "sourceAfter": {
+    "src/avatar/directionalRig.ts": "932b7f19d451932bbb3cf1f46b9195d81eabdee3ce14b07692cc30b59b33330c",
+    "src/avatar/eightWeightSkin.ts": "70bea47c7747d8c4771df3fb082a072eb1726e0e8053c5d8dacec5b797bcef9d",
+    "e2e/fixtures/avatarRigProbe.ts": "9ca7ac7aeb1b5fc13fde2611aaf917c0acacdb4e6293e1732324a15bb81f35eb",
+    "scripts/test-avatar-rig-browser.mjs": "47a259ad3efe634ed8c4700fae7bc0dbec5bec74e5acd2ef7c804487a73962ff",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  }
+}

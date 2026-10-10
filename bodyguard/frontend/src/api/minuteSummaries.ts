@@ -185,6 +185,8 @@ export async function prepareSummaries(options: {
   signal: AbortSignal
 }) {
   const { authority, readAuthority } = options
+  // FR-U-04: the same ready object must not transfer this lease to a mutated ID.
+  const ownerId = authority.user.id
   const abort = new AbortController()
   const signal = AbortSignal.any([abort.signal, options.signal])
   let proof = '',
@@ -197,7 +199,12 @@ export async function prepareSummaries(options: {
     options.signal.removeEventListener('abort', close)
   }
   function check() {
-    if (closed || signal.aborted || readAuthority() !== authority) {
+    if (
+      closed ||
+      signal.aborted ||
+      readAuthority() !== authority ||
+      authority.user.id !== ownerId
+    ) {
       close()
       throw new ApiError(401)
     }
@@ -206,7 +213,7 @@ export async function prepareSummaries(options: {
     check()
     const user = await request('/me', signal, undefined, 200)
     check()
-    if (!user || typeof user !== 'object' || !('id' in user) || user.id !== authority.user.id)
+    if (!user || typeof user !== 'object' || !('id' in user) || user.id !== ownerId)
       throw new ApiError(401)
   }
   async function call(
@@ -222,7 +229,7 @@ export async function prepareSummaries(options: {
       signal: AbortSignal.any([signal, external, AbortSignal.timeout(15_000)]),
       headers: {
         'X-CSRF-Token': proof,
-        'X-Account-ID': authority.user.id,
+        'X-Account-ID': ownerId,
         ...(body === undefined ? {} : { 'Content-Type': 'application/json' }),
       },
       body: body === undefined ? undefined : JSON.stringify(body),

@@ -9,6 +9,8 @@ describe('C-02/03/04 catalog contract', () => {
       expect(Object.isFrozen(motion)).toBe(true)
       expect(Object.isFrozen(motion.steps)).toBe(true)
       expect(Object.isFrozen(motion.cautions)).toBe(true)
+      expect(Object.isFrozen(motion.sources)).toBe(true)
+      expect(motion.sources.every(Object.isFrozen)).toBe(true)
       expect(motion.sources.length).toBeGreaterThan(0)
       expect(motion.sources.every((source) => new URL(source.url).protocol === 'https:')).toBe(true)
       expect(motion.coachingStatus).toBe('pending-validation')
@@ -26,7 +28,9 @@ describe('C-02/03/04 catalog contract', () => {
     expect(previewMotions.map((motion) => motion.id)).toEqual([
       'neck-side',
       'chin-retraction',
+      'shoulder-shrug',
       'cross-body-shoulder',
+      'arm-overhead',
       'lateral-trunk',
       'seated-trunk-rotation',
     ])
@@ -41,11 +45,11 @@ describe('C-02/03/04 catalog contract', () => {
     )
   })
   it('treats whitespace as all entries', () => {
-    expect(findMotions('   ', 'all')).toHaveLength(5)
+    expect(findMotions('   ', 'all')).toHaveLength(7)
   })
   it('filters by body region and returns a real empty result', () => {
     expect(findMotions('', 'neck')).toHaveLength(2)
-    expect(findMotions('', 'shoulder')).toHaveLength(1)
+    expect(findMotions('', 'shoulder')).toHaveLength(3)
     expect(findMotions('', 'torso')).toHaveLength(2)
   })
   it('does not mutate the authored list while searching', () => {
@@ -63,6 +67,38 @@ describe('C-02/03/04 catalog contract', () => {
     expect(parseRegion('neck')).toBe('neck')
     expect(parseRegion('untrusted')).toBe('all')
     expect(parseRegion(null)).toBe('all')
+  })
+  // FR-S-01: source-matched variants only, not clinical or camera validation.
+  it('restores the documented shoulder shrug without invented dosage or release', () => {
+    const motion = motionById('shoulder-shrug')
+    expect(motion).toBeDefined()
+    expect(motion?.steps.join(' ')).toContain('양쪽 어깨')
+    expect(motion?.steps.join(' ')).toContain('내립니다')
+    expect(motion?.sources.map((source) => source.url)).toContain(
+      'https://www.cuh.nhs.uk/patient-information/neck-sprain-advice/',
+    )
+    expect(motion?.coachingStatus).toBe('pending-validation')
+    expect(motion?.observationLimit).toContain('타이머')
+    expect(motion?.framing).toContain('몸통')
+    expect(findMotions('으쓱', 'shoulder').map((candidate) => candidate.id)).toEqual([
+      'shoulder-shrug',
+    ])
+  })
+  it('uses the seated one-arm-at-a-time overhead variant, not the behind-back exercise', () => {
+    const motion = motionById('arm-overhead')
+    expect(motion).toBeDefined()
+    expect(motion?.steps.join(' ')).toContain('한 팔')
+    expect(motion?.steps.join(' ')).toContain('반대쪽')
+    expect(motion?.steps.join(' ')).not.toMatch(/뒤로|동시에|양팔/)
+    expect(motion?.sources.map((source) => source.url)).toContain(
+      'https://www.nbt.nhs.uk/our-services/a-z-services/emergency-zone/ed-miu-patient-information/neck-injuries',
+    )
+    expect(motion?.coachingStatus).toBe('pending-validation')
+    expect(motion?.observationLimit).toContain('타이머')
+    expect(motion?.framing).toContain('골반')
+    expect(findMotions('위로 뻗기', 'shoulder').map((candidate) => candidate.id)).toEqual([
+      'arm-overhead',
+    ])
   })
   it('has steps, stop guidance and reviewed primary sources without dose or outcome claims', () => {
     const motion = previewMotions[0]

@@ -256,3 +256,123 @@ test('B-01/03 삭제된 실제 세션 쿠키는 보호 화면을 열지 않는�
   await expect(page).toHaveURL(/\/login/)
   await expect(page.getByText(email, { exact: true })).toHaveCount(0)
 })
+
+// FR-U-04: wrong wire is injected; real account/old cookie/retry API remain native.
+for (const status of [200, 202]) {
+  test(`LA-WEB wrong${status} blocks private UI; real204 retry revokes old cookie/tabs`, async ({
+    page,
+    context,
+  }, info) => {
+    const unexpected: string[] = [],
+      errors: string[] = []
+    context.on('request', (request) => {
+      const url = new URL(request.url())
+      if (
+        url.origin !== 'http://localhost:4173' ||
+        /\.glb|\.task|\.wasm|mediapipe/i.test(url.pathname)
+      )
+        unexpected.push(url.origin + url.pathname)
+    })
+    page.on('pageerror', (error) => errors.push(error.message))
+    const email = address()
+    await join(page, email)
+    const other = await context.newPage()
+    try {
+      await other.goto('/start')
+      await expect(other.getByText(email, { exact: true })).toBeVisible()
+      await page.bringToFront()
+      const old = (await context.cookies()).find((cookie) => cookie.name === 'bodyguard_session')
+      expect(old?.httpOnly).toBe(true)
+      let intercepted = 0
+      await page.route('**/api/v1/auth/logout', (route) => {
+        intercepted++
+        return route.fulfill({ status, json: { logged_out: true } })
+      })
+      await page.getByRole('button', { name: '로그아웃', exact: true }).click()
+      await expect.poll(() => intercepted).toBe(1)
+      const beforeStatus = (await context.request.get('/api/v1/me')).status()
+      expect(beforeStatus).toBe(200)
+      await info.attach('logout-injected-state.json', {
+        body: Buffer.from(
+          JSON.stringify({
+            statusInjected: status,
+            intercepted,
+            nativeSessionStatus: beforeStatus,
+            responseInjected: true,
+            serverLogoutExecuted: false,
+            currentPath: new URL(page.url()).pathname,
+            browserVersion: context.browser()?.version(),
+          }),
+        ),
+        contentType: 'application/json',
+      })
+      await page.screenshot({
+        path: info.outputPath(`wrong-${status}-response.png`),
+        fullPage: true,
+      })
+      await expect(
+        page.getByRole('heading', { name: '로그아웃을 확인하지 못했습니다' }),
+      ).toBeVisible()
+      expect(intercepted).toBe(1)
+      await expect(page.getByText(email, { exact: true })).toHaveCount(0)
+      expect((await context.request.get('/api/v1/me')).status()).toBe(200)
+      await page.evaluate(() => window.dispatchEvent(new Event('focus')))
+      await page.evaluate(() => {
+        const channel = new BroadcastChannel('bodyguard-account-change')
+        channel.postMessage('changed')
+        channel.close()
+      })
+      await expect(
+        page.getByRole('heading', { name: '로그아웃을 확인하지 못했습니다' }),
+      ).toBeVisible()
+      await expect(page.getByText(email, { exact: true })).toHaveCount(0)
+      await page.screenshot({
+        path: info.outputPath(`wrong-${status}-blocked.png`),
+        fullPage: true,
+      })
+      await page.unroute('**/api/v1/auth/logout')
+      const actual = page.waitForResponse(
+        (response) =>
+          new URL(response.url()).pathname === '/api/v1/auth/logout' &&
+          response.request().method() === 'POST',
+      )
+      await page.getByRole('button', { name: '로그아웃 다시 시도' }).click()
+      expect((await actual).status()).toBe(204)
+      await expect(page).toHaveURL(/\/login/)
+      await expect(other).toHaveURL(/\/login/)
+      await expect(other.getByText(email, { exact: true })).toHaveCount(0)
+      expect((await context.request.get('/api/v1/me')).status()).toBe(401)
+      expect(old).toBeDefined()
+      const replay = await context.request.get('/api/v1/me', {
+        headers: { Cookie: `bodyguard_session=${old?.value}` },
+      })
+      expect(replay.status()).toBe(401)
+      const storage = await page.evaluate(() => [localStorage.length, sessionStorage.length])
+      await info.attach('logout-boundary.json', {
+        body: Buffer.from(
+          JSON.stringify({
+            statusInjected: status,
+            intercepted,
+            actualRetry204: true,
+            nativeSessionBefore200: true,
+            oldCookieAfter401: true,
+            actualWebHttpSql: true,
+            actualProvider: false,
+            actualCamera: false,
+            cameraCalls,
+            unexpected,
+            errors,
+            storage,
+            browserVersion: context.browser()?.version(),
+          }),
+        ),
+        contentType: 'application/json',
+      })
+      expect(unexpected).toEqual([])
+      expect(errors).toEqual([])
+      expect(storage).toEqual([0, 0])
+    } finally {
+      await other.close()
+    }
+  })
+}

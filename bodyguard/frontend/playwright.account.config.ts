@@ -9,6 +9,7 @@ export default defineConfig({
   testDir: 'e2e',
   testMatch: [
     'account.spec.ts',
+    'restore.spec.ts',
     'password.spec.ts',
     'google.spec.ts',
     'records.spec.ts',
@@ -21,9 +22,21 @@ export default defineConfig({
     'ownercapture.spec.ts',
     'recordedsession.spec.ts',
     'authcoaching.spec.ts',
+    'nativeauth.spec.ts',
+    'nativerecovery.spec.ts',
+    'nativehead.spec.ts',
+    'nativehands.spec.ts',
+    'nativereference.spec.ts',
+    'nativefeedback.spec.ts',
+    'nativeworker.spec.ts',
     'notifications.spec.ts',
+    'alertdelivery.spec.ts',
+    'ownedalert.spec.ts',
     'summaries.spec.ts',
     'minuteupload.spec.ts',
+    'dashboardclient.spec.ts',
+    'authdashboard.spec.ts',
+    'recordjourney.spec.ts',
   ],
   reporter: process.env.BODYGUARD_TEST_RECORDS_REPORT
     ? [['list'], ['json', { outputFile: process.env.BODYGUARD_TEST_RECORDS_REPORT }]]
@@ -35,19 +48,58 @@ export default defineConfig({
     channel: 'chrome',
     viewport: { width: 1440, height: 1000 },
     proxy: { server: proxy, bypass: 'localhost,127.0.0.1,[::1]' },
+    ...(process.env.BODYGUARD_TEST_NATIVE_AUTH_PROBE ||
+    process.env.BODYGUARD_TEST_NATIVE_RECOVERY_PROBE ||
+    process.env.BODYGUARD_TEST_NATIVE_HEAD_PROBE ||
+    process.env.BODYGUARD_TEST_NATIVE_HANDS_PROBE ||
+    process.env.BODYGUARD_TEST_NATIVE_REFERENCE_PROBE ||
+    process.env.BODYGUARD_TEST_NATIVE_FEEDBACK_PROBE
+      ? {
+          serviceWorkers: 'block' as const,
+          permissions: ['camera'],
+          launchOptions: {
+            args: process.env.BODYGUARD_TEST_NATIVE_RECOVERY_PROBE
+              ? ['--use-fake-device-for-media-stream']
+              : ['--use-fake-device-for-media-stream', '--use-fake-ui-for-media-stream'],
+          },
+        }
+      : {}),
+    // FR-U-04: actual cache restore only in this isolated suite; other launches unchanged.
+    ...(process.env.BODYGUARD_TEST_PAGE_RESTORE === '1'
+      ? { launchOptions: { ignoreDefaultArgs: ['--disable-back-forward-cache'] } }
+      : {}),
   },
   webServer: {
-    command: process.env.BODYGUARD_TEST_MINUTE_UPLOAD_PROBE
-      ? 'pnpm build && vite build --config e2e/fixtures/minuteUpload.vite.ts && vite preview --host localhost'
-      : process.env.BODYGUARD_TEST_COACHING_AUTH_PROBE
-        ? 'pnpm build && vite build --config e2e/fixtures/authCoaching.vite.ts && vite preview --host localhost'
-        : process.env.BODYGUARD_TEST_RECORDED_PROBE
-          ? 'pnpm build && vite build --config e2e/fixtures/recordedSession.vite.ts && vite preview --host localhost'
-          : process.env.BODYGUARD_TEST_OWNER_PROBE
-            ? 'pnpm build && vite build --config e2e/fixtures/recordOwner.vite.ts && vite preview --host localhost'
-            : process.env.BODYGUARD_TEST_RESULT_PROBE
-              ? 'pnpm build && vite build --config e2e/fixtures/resultRecord.vite.ts && vite preview --host localhost'
-              : 'pnpm build && vite preview --host localhost',
+    command: process.env.BODYGUARD_TEST_RECORD_JOURNEY_PROBE
+      ? 'pnpm build && vite build --config e2e/fixtures/recordJourney.vite.ts && vite preview --host localhost'
+      : process.env.BODYGUARD_TEST_AUTH_DASHBOARD_PROBE
+        ? 'pnpm build && vite build --config e2e/fixtures/authDashboard.vite.ts && vite preview --host localhost'
+        : process.env.BODYGUARD_TEST_DASHBOARD_PROBE
+          ? 'pnpm build && vite build --config e2e/fixtures/dashboardClient.vite.ts && vite preview --host localhost'
+          : process.env.BODYGUARD_TEST_NATIVE_HEAD_PROBE ||
+              process.env.BODYGUARD_TEST_NATIVE_HANDS_PROBE ||
+              process.env.BODYGUARD_TEST_NATIVE_REFERENCE_PROBE ||
+              process.env.BODYGUARD_TEST_NATIVE_FEEDBACK_PROBE
+            ? 'pnpm build && vite build --config e2e/fixtures/nativeHead.vite.ts && vite preview --host localhost'
+            : process.env.BODYGUARD_TEST_NATIVE_RECOVERY_PROBE
+              ? 'pnpm build && vite build --config e2e/fixtures/nativeRecovery.vite.ts && vite preview --host localhost'
+              : process.env.BODYGUARD_TEST_NATIVE_AUTH_PROBE
+                ? 'pnpm build && vite build --config e2e/fixtures/nativeAuth.vite.ts && vite preview --host localhost'
+                : process.env.BODYGUARD_TEST_OWNED_ALERT_PROBE
+                  ? 'pnpm build && vite build --config e2e/fixtures/ownedAlert.vite.ts && vite preview --host localhost'
+                  : process.env.BODYGUARD_TEST_ALERT_DELIVERY_PROBE
+                    ? 'pnpm build && vite build --config e2e/fixtures/alertDelivery.vite.ts && vite preview --host localhost'
+                    : process.env.BODYGUARD_TEST_MINUTE_UPLOAD_PROBE
+                      ? 'pnpm build && vite build --config e2e/fixtures/minuteUpload.vite.ts && vite preview --host localhost'
+                      : process.env.BODYGUARD_TEST_COACHING_AUTH_PROBE
+                        ? 'pnpm build && vite build --config e2e/fixtures/authCoaching.vite.ts && vite preview --host localhost'
+                        : process.env.BODYGUARD_TEST_RECORDED_PROBE
+                          ? 'pnpm build && vite build --config e2e/fixtures/recordedSession.vite.ts && vite preview --host localhost'
+                          : process.env.BODYGUARD_TEST_OWNER_PROBE
+                            ? 'pnpm build && vite build --config e2e/fixtures/recordOwner.vite.ts && vite preview --host localhost'
+                            : process.env.BODYGUARD_TEST_RESULT_PROBE
+                              ? 'pnpm build && vite build --config e2e/fixtures/resultRecord.vite.ts && vite preview --host localhost'
+                              : 'pnpm build && vite preview --host localhost',
     url: 'http://localhost:4173',
     reuseExistingServer: false,
     timeout: 180_000,

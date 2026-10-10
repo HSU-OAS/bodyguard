@@ -1,0 +1,1791 @@
+{
+  "head": "2c4ec7f581e847288acbb0b2ae32d3c0bb7e1d00",
+  "sourceBefore": {
+    "src/avatar/ownedAvatarPair.ts": "40524dcd51ff455a90abd4cd75e33c645cca31e99f02e477b0a1f34ae11e6845",
+    "src/avatar/observedPoseRig.ts": "680235478e06efc111cc04515619f76668806bb64f0b2687f2144443c453c606",
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "src/coaching/resources.ts": "0832d662b19b522153f7e13507147a7b33f264d0eee94f10e07e06758d1fa029",
+    "e2e/fixtures/ownedAvatarPairProbe.ts": "373fe39b64bc993045f0f54d1eb4502832a9b36e3c7ca574616b7a230b69252b",
+    "e2e/fixtures/ownedAvatarPair.vite.ts": "89cde3ce584a7c0664120631fbe77432cd75ff32ed3a3c7d6d16d61c4b4f9e92",
+    "scripts/test-owned-avatar-browser.mjs": "6f0ff9abb81aa13757e89c3ac57dc0d5433ace56d7b76c9d1e7640e7da7ef89b",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "assetCommit": "25a9bd6c7392890e3b5d5d6ae1046bb7087d56ad",
+  "assetHashes": {
+    "male": "cc85bcd449f3f31347e4f7174986d41e4aca3067990f5d8a2e6ba3a099171927",
+    "female": "27c10902aa377e995bdbc115ab773cf22f8ea38582c49820304a33ad7685f25a"
+  },
+  "actualChrome": true,
+  "actualWebGL": true,
+  "syntheticPorts": true,
+  "syntheticObservations": true,
+  "actualSDK": false,
+  "actualCamera": false,
+  "releaseAvatar": false,
+  "samples": [
+    {
+      "gender": "male",
+      "passed": true,
+      "stages": [
+        {
+          "case": "prepared",
+          "gender": "male",
+          "generation": 1,
+          "closed": false,
+          "lateReady": false,
+          "models": 2,
+          "independent": true,
+          "framing": [
+            true,
+            true
+          ],
+          "state": {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 8
+          },
+          "userChanged": false,
+          "referenceUnchanged": true,
+          "attached": 2,
+          "sources": [
+            {
+              "generation": 1,
+              "mode": "valid",
+              "geometry": 0,
+              "material": 0,
+              "skeleton": 0,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            }
+          ],
+          "notices": [
+            {
+              "type": "ready",
+              "generation": 1
+            }
+          ],
+          "fakeDisposed": {
+            "camera": 0,
+            "inference": 0
+          },
+          "clonesReleased": 0,
+          "cloneTotal": 19,
+          "releaseEvent": false,
+          "memory": {
+            "geometries": 5,
+            "textures": 11
+          },
+          "rendererBaseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "calls": 10,
+          "triangles": 576508
+        },
+        {
+          "case": "observed-move",
+          "gender": "male",
+          "generation": 1,
+          "closed": false,
+          "lateReady": false,
+          "models": 2,
+          "independent": true,
+          "framing": [
+            true,
+            true
+          ],
+          "state": {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          "userChanged": true,
+          "referenceUnchanged": true,
+          "attached": 2,
+          "sources": [
+            {
+              "generation": 1,
+              "mode": "valid",
+              "geometry": 0,
+              "material": 0,
+              "skeleton": 0,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            }
+          ],
+          "notices": [
+            {
+              "type": "ready",
+              "generation": 1
+            }
+          ],
+          "fakeDisposed": {
+            "camera": 0,
+            "inference": 0
+          },
+          "clonesReleased": 0,
+          "cloneTotal": 19,
+          "releaseEvent": false,
+          "memory": {
+            "geometries": 5,
+            "textures": 11
+          },
+          "rendererBaseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "calls": 10,
+          "triangles": 576508
+        },
+        {
+          "case": "released",
+          "gender": "male",
+          "generation": 1,
+          "closed": false,
+          "lateReady": false,
+          "models": 0,
+          "independent": true,
+          "framing": [],
+          "state": {
+            "status": "closed",
+            "tracked": 0,
+            "total": 8
+          },
+          "userChanged": true,
+          "referenceUnchanged": true,
+          "attached": 0,
+          "sources": [
+            {
+              "generation": 1,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            }
+          ],
+          "notices": [
+            {
+              "type": "ready",
+              "generation": 1
+            }
+          ],
+          "fakeDisposed": {
+            "camera": 1,
+            "inference": 1
+          },
+          "clonesReleased": 19,
+          "cloneTotal": 19,
+          "releaseEvent": true,
+          "memory": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "rendererBaseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "calls": 0,
+          "triangles": 0
+        },
+        {
+          "case": "invalid-rig",
+          "gender": "male",
+          "generation": 2,
+          "closed": false,
+          "lateReady": false,
+          "models": 0,
+          "independent": true,
+          "framing": [],
+          "state": {
+            "status": "closed",
+            "tracked": 0,
+            "total": 8
+          },
+          "userChanged": true,
+          "referenceUnchanged": true,
+          "attached": 0,
+          "sources": [
+            {
+              "generation": 1,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 2,
+              "mode": "invalid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": false
+            }
+          ],
+          "notices": [
+            {
+              "type": "ready",
+              "generation": 1
+            },
+            {
+              "type": "error",
+              "generation": 2,
+              "reason": "asset-error"
+            }
+          ],
+          "fakeDisposed": {
+            "camera": 2,
+            "inference": 2
+          },
+          "clonesReleased": 19,
+          "cloneTotal": 19,
+          "releaseEvent": true,
+          "memory": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "rendererBaseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "calls": 0,
+          "triangles": 0
+        },
+        {
+          "case": "explicit-retry",
+          "gender": "male",
+          "generation": 3,
+          "closed": false,
+          "lateReady": false,
+          "models": 2,
+          "independent": true,
+          "framing": [
+            true,
+            true
+          ],
+          "state": {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 8
+          },
+          "userChanged": false,
+          "referenceUnchanged": true,
+          "attached": 2,
+          "sources": [
+            {
+              "generation": 1,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 2,
+              "mode": "invalid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": false
+            },
+            {
+              "generation": 3,
+              "mode": "valid",
+              "geometry": 0,
+              "material": 0,
+              "skeleton": 0,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            }
+          ],
+          "notices": [
+            {
+              "type": "ready",
+              "generation": 1
+            },
+            {
+              "type": "error",
+              "generation": 2,
+              "reason": "asset-error"
+            },
+            {
+              "type": "ready",
+              "generation": 3
+            }
+          ],
+          "fakeDisposed": {
+            "camera": 2,
+            "inference": 2
+          },
+          "clonesReleased": 19,
+          "cloneTotal": 38,
+          "releaseEvent": true,
+          "memory": {
+            "geometries": 5,
+            "textures": 11
+          },
+          "rendererBaseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "calls": 10,
+          "triangles": 576508
+        },
+        {
+          "case": "cancelled-late-source",
+          "gender": "male",
+          "generation": 5,
+          "closed": false,
+          "lateReady": true,
+          "models": 2,
+          "independent": true,
+          "framing": [
+            true,
+            true
+          ],
+          "state": {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 8
+          },
+          "userChanged": false,
+          "referenceUnchanged": true,
+          "attached": 2,
+          "sources": [
+            {
+              "generation": 1,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 2,
+              "mode": "invalid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": false
+            },
+            {
+              "generation": 3,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 4,
+              "mode": "late",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 5,
+              "mode": "valid",
+              "geometry": 0,
+              "material": 0,
+              "skeleton": 0,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            }
+          ],
+          "notices": [
+            {
+              "type": "ready",
+              "generation": 1
+            },
+            {
+              "type": "error",
+              "generation": 2,
+              "reason": "asset-error"
+            },
+            {
+              "type": "ready",
+              "generation": 3
+            },
+            {
+              "type": "ready",
+              "generation": 5
+            }
+          ],
+          "fakeDisposed": {
+            "camera": 4,
+            "inference": 4
+          },
+          "clonesReleased": 38,
+          "cloneTotal": 57,
+          "releaseEvent": true,
+          "memory": {
+            "geometries": 5,
+            "textures": 11
+          },
+          "rendererBaseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "calls": 10,
+          "triangles": 576508
+        },
+        {
+          "case": "late-cleanup-failure",
+          "gender": "male",
+          "generation": 7,
+          "closed": false,
+          "lateReady": true,
+          "models": 0,
+          "independent": true,
+          "framing": [],
+          "state": {
+            "status": "closed",
+            "tracked": 0,
+            "total": 8
+          },
+          "userChanged": false,
+          "referenceUnchanged": true,
+          "attached": 0,
+          "sources": [
+            {
+              "generation": 1,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 2,
+              "mode": "invalid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": false
+            },
+            {
+              "generation": 3,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 4,
+              "mode": "late",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 5,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 6,
+              "mode": "late-cleanup-fault",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 7,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            }
+          ],
+          "notices": [
+            {
+              "type": "ready",
+              "generation": 1
+            },
+            {
+              "type": "error",
+              "generation": 2,
+              "reason": "asset-error"
+            },
+            {
+              "type": "ready",
+              "generation": 3
+            },
+            {
+              "type": "ready",
+              "generation": 5
+            },
+            {
+              "type": "ready",
+              "generation": 7
+            },
+            {
+              "type": "error",
+              "generation": 6,
+              "reason": "cleanup-error"
+            }
+          ],
+          "fakeDisposed": {
+            "camera": 7,
+            "inference": 7
+          },
+          "clonesReleased": 76,
+          "cloneTotal": 76,
+          "releaseEvent": true,
+          "memory": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "rendererBaseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "calls": 0,
+          "triangles": 0
+        },
+        {
+          "case": "quarantined",
+          "gender": "male",
+          "generation": 8,
+          "closed": false,
+          "lateReady": true,
+          "models": 0,
+          "independent": true,
+          "framing": [],
+          "state": {
+            "status": "closed",
+            "tracked": 0,
+            "total": 8
+          },
+          "userChanged": false,
+          "referenceUnchanged": true,
+          "attached": 0,
+          "sources": [
+            {
+              "generation": 1,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 2,
+              "mode": "invalid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": false
+            },
+            {
+              "generation": 3,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 4,
+              "mode": "late",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 5,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 6,
+              "mode": "late-cleanup-fault",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 7,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            }
+          ],
+          "notices": [
+            {
+              "type": "ready",
+              "generation": 1
+            },
+            {
+              "type": "error",
+              "generation": 2,
+              "reason": "asset-error"
+            },
+            {
+              "type": "ready",
+              "generation": 3
+            },
+            {
+              "type": "ready",
+              "generation": 5
+            },
+            {
+              "type": "ready",
+              "generation": 7
+            },
+            {
+              "type": "error",
+              "generation": 6,
+              "reason": "cleanup-error"
+            }
+          ],
+          "fakeDisposed": {
+            "camera": 7,
+            "inference": 7
+          },
+          "clonesReleased": 76,
+          "cloneTotal": 76,
+          "releaseEvent": true,
+          "memory": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "rendererBaseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "calls": 0,
+          "triangles": 0
+        },
+        {
+          "case": "closed",
+          "gender": "male",
+          "generation": 8,
+          "closed": true,
+          "lateReady": true,
+          "models": 0,
+          "independent": true,
+          "framing": [],
+          "state": {
+            "status": "closed",
+            "tracked": 0,
+            "total": 8
+          },
+          "userChanged": false,
+          "referenceUnchanged": true,
+          "attached": 0,
+          "sources": [
+            {
+              "generation": 1,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 2,
+              "mode": "invalid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": false
+            },
+            {
+              "generation": 3,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 4,
+              "mode": "late",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 5,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 6,
+              "mode": "late-cleanup-fault",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 7,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            }
+          ],
+          "notices": [
+            {
+              "type": "ready",
+              "generation": 1
+            },
+            {
+              "type": "error",
+              "generation": 2,
+              "reason": "asset-error"
+            },
+            {
+              "type": "ready",
+              "generation": 3
+            },
+            {
+              "type": "ready",
+              "generation": 5
+            },
+            {
+              "type": "ready",
+              "generation": 7
+            },
+            {
+              "type": "error",
+              "generation": 6,
+              "reason": "cleanup-error"
+            }
+          ],
+          "fakeDisposed": {
+            "camera": 7,
+            "inference": 7
+          },
+          "clonesReleased": 76,
+          "cloneTotal": 76,
+          "releaseEvent": true,
+          "memory": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "rendererBaseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "calls": 0,
+          "triangles": 0
+        }
+      ],
+      "previewSha": "d6f734f5c9ce707f2ede41f01a0aca952a298c69e1a472abc3a0dab8ca53cae8"
+    },
+    {
+      "gender": "female",
+      "passed": true,
+      "stages": [
+        {
+          "case": "prepared",
+          "gender": "female",
+          "generation": 1,
+          "closed": false,
+          "lateReady": false,
+          "models": 2,
+          "independent": true,
+          "framing": [
+            true,
+            true
+          ],
+          "state": {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 8
+          },
+          "userChanged": false,
+          "referenceUnchanged": true,
+          "attached": 2,
+          "sources": [
+            {
+              "generation": 1,
+              "mode": "valid",
+              "geometry": 0,
+              "material": 0,
+              "skeleton": 0,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            }
+          ],
+          "notices": [
+            {
+              "type": "ready",
+              "generation": 1
+            }
+          ],
+          "fakeDisposed": {
+            "camera": 0,
+            "inference": 0
+          },
+          "clonesReleased": 0,
+          "cloneTotal": 19,
+          "releaseEvent": false,
+          "memory": {
+            "geometries": 5,
+            "textures": 11
+          },
+          "rendererBaseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "calls": 10,
+          "triangles": 567676
+        },
+        {
+          "case": "observed-move",
+          "gender": "female",
+          "generation": 1,
+          "closed": false,
+          "lateReady": false,
+          "models": 2,
+          "independent": true,
+          "framing": [
+            true,
+            true
+          ],
+          "state": {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          "userChanged": true,
+          "referenceUnchanged": true,
+          "attached": 2,
+          "sources": [
+            {
+              "generation": 1,
+              "mode": "valid",
+              "geometry": 0,
+              "material": 0,
+              "skeleton": 0,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            }
+          ],
+          "notices": [
+            {
+              "type": "ready",
+              "generation": 1
+            }
+          ],
+          "fakeDisposed": {
+            "camera": 0,
+            "inference": 0
+          },
+          "clonesReleased": 0,
+          "cloneTotal": 19,
+          "releaseEvent": false,
+          "memory": {
+            "geometries": 5,
+            "textures": 11
+          },
+          "rendererBaseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "calls": 10,
+          "triangles": 567676
+        },
+        {
+          "case": "released",
+          "gender": "female",
+          "generation": 1,
+          "closed": false,
+          "lateReady": false,
+          "models": 0,
+          "independent": true,
+          "framing": [],
+          "state": {
+            "status": "closed",
+            "tracked": 0,
+            "total": 8
+          },
+          "userChanged": true,
+          "referenceUnchanged": true,
+          "attached": 0,
+          "sources": [
+            {
+              "generation": 1,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            }
+          ],
+          "notices": [
+            {
+              "type": "ready",
+              "generation": 1
+            }
+          ],
+          "fakeDisposed": {
+            "camera": 1,
+            "inference": 1
+          },
+          "clonesReleased": 19,
+          "cloneTotal": 19,
+          "releaseEvent": true,
+          "memory": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "rendererBaseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "calls": 0,
+          "triangles": 0
+        },
+        {
+          "case": "invalid-rig",
+          "gender": "female",
+          "generation": 2,
+          "closed": false,
+          "lateReady": false,
+          "models": 0,
+          "independent": true,
+          "framing": [],
+          "state": {
+            "status": "closed",
+            "tracked": 0,
+            "total": 8
+          },
+          "userChanged": true,
+          "referenceUnchanged": true,
+          "attached": 0,
+          "sources": [
+            {
+              "generation": 1,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 2,
+              "mode": "invalid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": false
+            }
+          ],
+          "notices": [
+            {
+              "type": "ready",
+              "generation": 1
+            },
+            {
+              "type": "error",
+              "generation": 2,
+              "reason": "asset-error"
+            }
+          ],
+          "fakeDisposed": {
+            "camera": 2,
+            "inference": 2
+          },
+          "clonesReleased": 19,
+          "cloneTotal": 19,
+          "releaseEvent": true,
+          "memory": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "rendererBaseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "calls": 0,
+          "triangles": 0
+        },
+        {
+          "case": "explicit-retry",
+          "gender": "female",
+          "generation": 3,
+          "closed": false,
+          "lateReady": false,
+          "models": 2,
+          "independent": true,
+          "framing": [
+            true,
+            true
+          ],
+          "state": {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 8
+          },
+          "userChanged": false,
+          "referenceUnchanged": true,
+          "attached": 2,
+          "sources": [
+            {
+              "generation": 1,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 2,
+              "mode": "invalid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": false
+            },
+            {
+              "generation": 3,
+              "mode": "valid",
+              "geometry": 0,
+              "material": 0,
+              "skeleton": 0,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            }
+          ],
+          "notices": [
+            {
+              "type": "ready",
+              "generation": 1
+            },
+            {
+              "type": "error",
+              "generation": 2,
+              "reason": "asset-error"
+            },
+            {
+              "type": "ready",
+              "generation": 3
+            }
+          ],
+          "fakeDisposed": {
+            "camera": 2,
+            "inference": 2
+          },
+          "clonesReleased": 19,
+          "cloneTotal": 38,
+          "releaseEvent": true,
+          "memory": {
+            "geometries": 5,
+            "textures": 11
+          },
+          "rendererBaseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "calls": 10,
+          "triangles": 567676
+        },
+        {
+          "case": "cancelled-late-source",
+          "gender": "female",
+          "generation": 5,
+          "closed": false,
+          "lateReady": true,
+          "models": 2,
+          "independent": true,
+          "framing": [
+            true,
+            true
+          ],
+          "state": {
+            "status": "untracked",
+            "tracked": 0,
+            "total": 8
+          },
+          "userChanged": false,
+          "referenceUnchanged": true,
+          "attached": 2,
+          "sources": [
+            {
+              "generation": 1,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 2,
+              "mode": "invalid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": false
+            },
+            {
+              "generation": 3,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 4,
+              "mode": "late",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 5,
+              "mode": "valid",
+              "geometry": 0,
+              "material": 0,
+              "skeleton": 0,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            }
+          ],
+          "notices": [
+            {
+              "type": "ready",
+              "generation": 1
+            },
+            {
+              "type": "error",
+              "generation": 2,
+              "reason": "asset-error"
+            },
+            {
+              "type": "ready",
+              "generation": 3
+            },
+            {
+              "type": "ready",
+              "generation": 5
+            }
+          ],
+          "fakeDisposed": {
+            "camera": 4,
+            "inference": 4
+          },
+          "clonesReleased": 38,
+          "cloneTotal": 57,
+          "releaseEvent": true,
+          "memory": {
+            "geometries": 5,
+            "textures": 11
+          },
+          "rendererBaseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "calls": 10,
+          "triangles": 567676
+        },
+        {
+          "case": "late-cleanup-failure",
+          "gender": "female",
+          "generation": 7,
+          "closed": false,
+          "lateReady": true,
+          "models": 0,
+          "independent": true,
+          "framing": [],
+          "state": {
+            "status": "closed",
+            "tracked": 0,
+            "total": 8
+          },
+          "userChanged": false,
+          "referenceUnchanged": true,
+          "attached": 0,
+          "sources": [
+            {
+              "generation": 1,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 2,
+              "mode": "invalid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": false
+            },
+            {
+              "generation": 3,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 4,
+              "mode": "late",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 5,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 6,
+              "mode": "late-cleanup-fault",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 7,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            }
+          ],
+          "notices": [
+            {
+              "type": "ready",
+              "generation": 1
+            },
+            {
+              "type": "error",
+              "generation": 2,
+              "reason": "asset-error"
+            },
+            {
+              "type": "ready",
+              "generation": 3
+            },
+            {
+              "type": "ready",
+              "generation": 5
+            },
+            {
+              "type": "ready",
+              "generation": 7
+            },
+            {
+              "type": "error",
+              "generation": 6,
+              "reason": "cleanup-error"
+            }
+          ],
+          "fakeDisposed": {
+            "camera": 7,
+            "inference": 7
+          },
+          "clonesReleased": 76,
+          "cloneTotal": 76,
+          "releaseEvent": true,
+          "memory": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "rendererBaseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "calls": 0,
+          "triangles": 0
+        },
+        {
+          "case": "quarantined",
+          "gender": "female",
+          "generation": 8,
+          "closed": false,
+          "lateReady": true,
+          "models": 0,
+          "independent": true,
+          "framing": [],
+          "state": {
+            "status": "closed",
+            "tracked": 0,
+            "total": 8
+          },
+          "userChanged": false,
+          "referenceUnchanged": true,
+          "attached": 0,
+          "sources": [
+            {
+              "generation": 1,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 2,
+              "mode": "invalid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": false
+            },
+            {
+              "generation": 3,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 4,
+              "mode": "late",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 5,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 6,
+              "mode": "late-cleanup-fault",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 7,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            }
+          ],
+          "notices": [
+            {
+              "type": "ready",
+              "generation": 1
+            },
+            {
+              "type": "error",
+              "generation": 2,
+              "reason": "asset-error"
+            },
+            {
+              "type": "ready",
+              "generation": 3
+            },
+            {
+              "type": "ready",
+              "generation": 5
+            },
+            {
+              "type": "ready",
+              "generation": 7
+            },
+            {
+              "type": "error",
+              "generation": 6,
+              "reason": "cleanup-error"
+            }
+          ],
+          "fakeDisposed": {
+            "camera": 7,
+            "inference": 7
+          },
+          "clonesReleased": 76,
+          "cloneTotal": 76,
+          "releaseEvent": true,
+          "memory": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "rendererBaseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "calls": 0,
+          "triangles": 0
+        },
+        {
+          "case": "closed",
+          "gender": "female",
+          "generation": 8,
+          "closed": true,
+          "lateReady": true,
+          "models": 0,
+          "independent": true,
+          "framing": [],
+          "state": {
+            "status": "closed",
+            "tracked": 0,
+            "total": 8
+          },
+          "userChanged": false,
+          "referenceUnchanged": true,
+          "attached": 0,
+          "sources": [
+            {
+              "generation": 1,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 2,
+              "mode": "invalid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": false
+            },
+            {
+              "generation": 3,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 4,
+              "mode": "late",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 5,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 6,
+              "mode": "late-cleanup-fault",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            },
+            {
+              "generation": 7,
+              "mode": "valid",
+              "geometry": 5,
+              "material": 2,
+              "skeleton": 1,
+              "geometryTotal": 5,
+              "materialTotal": 2,
+              "skeletonTotal": 1,
+              "unchanged": true
+            }
+          ],
+          "notices": [
+            {
+              "type": "ready",
+              "generation": 1
+            },
+            {
+              "type": "error",
+              "generation": 2,
+              "reason": "asset-error"
+            },
+            {
+              "type": "ready",
+              "generation": 3
+            },
+            {
+              "type": "ready",
+              "generation": 5
+            },
+            {
+              "type": "ready",
+              "generation": 7
+            },
+            {
+              "type": "error",
+              "generation": 6,
+              "reason": "cleanup-error"
+            }
+          ],
+          "fakeDisposed": {
+            "camera": 7,
+            "inference": 7
+          },
+          "clonesReleased": 76,
+          "cloneTotal": 76,
+          "releaseEvent": true,
+          "memory": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "rendererBaseline": {
+            "geometries": 0,
+            "textures": 1
+          },
+          "calls": 0,
+          "triangles": 0
+        }
+      ],
+      "previewSha": "c4a136e6af6db749227ae146c6926ff59fa922a8076b9cefb130ed3289b0ae79"
+    }
+  ],
+  "browser": "154.0.8037.98",
+  "boundary": {
+    "external": 0,
+    "camera": 0,
+    "errors": []
+  },
+  "sourceAfter": {
+    "src/avatar/ownedAvatarPair.ts": "40524dcd51ff455a90abd4cd75e33c645cca31e99f02e477b0a1f34ae11e6845",
+    "src/avatar/observedPoseRig.ts": "680235478e06efc111cc04515619f76668806bb64f0b2687f2144443c453c606",
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "src/coaching/resources.ts": "0832d662b19b522153f7e13507147a7b33f264d0eee94f10e07e06758d1fa029",
+    "e2e/fixtures/ownedAvatarPairProbe.ts": "373fe39b64bc993045f0f54d1eb4502832a9b36e3c7ca574616b7a230b69252b",
+    "e2e/fixtures/ownedAvatarPair.vite.ts": "89cde3ce584a7c0664120631fbe77432cd75ff32ed3a3c7d6d16d61c4b4f9e92",
+    "scripts/test-owned-avatar-browser.mjs": "6f0ff9abb81aa13757e89c3ac57dc0d5433ace56d7b76c9d1e7640e7da7ef89b",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  }
+}

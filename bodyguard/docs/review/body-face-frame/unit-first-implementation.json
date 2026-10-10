@@ -1,0 +1,33 @@
+{
+  "label": "unit-first-implementation",
+  "cwd": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-body-face-frame/bodyguard/frontend",
+  "command": "./node_modules/.bin/vitest",
+  "args": [
+    "run",
+    "src/pose/bodyFaceVideoSource.test.ts",
+    "src/pose/ownedPoseFrame.test.ts",
+    "src/pose/videoPoseSource.test.ts"
+  ],
+  "exit": 1,
+  "elapsedMs": 897,
+  "sourceBefore": {
+    "src/pose/bodyFaceVideoSource.ts": "3cd60ba44fda29731373a0d1514a12098a79487d13ad1da0828664a1695a761d",
+    "src/pose/bodyFaceVideoSource.test.ts": "718be1bbf08d7ff0f22aacac0447184b4d38bc6447b7dc27712da471c6571d0e",
+    "src/pose/ownedPoseFrame.ts": "8b85254f1dcc20b4f1ec25bc875d11b48f57b7ce3e61f13b1f6cc29ad9066761",
+    "src/pose/videoPoseSource.ts": "57d53b123f0ebb14926880883ce5fe5bbde2c05a98da44abfb6cf6f465e26619",
+    "src/avatar/observedPoseRig.ts": "aef8a8c03646da5affe5b1a859ba486d021d765f9104049e29afbd22eb14ac9f",
+    "e2e/fixtures/bodyFaceFrameProbe.ts": null,
+    "scripts/test-body-face-browser.mjs": null
+  },
+  "sourceAfter": {
+    "src/pose/bodyFaceVideoSource.ts": "3cd60ba44fda29731373a0d1514a12098a79487d13ad1da0828664a1695a761d",
+    "src/pose/bodyFaceVideoSource.test.ts": "718be1bbf08d7ff0f22aacac0447184b4d38bc6447b7dc27712da471c6571d0e",
+    "src/pose/ownedPoseFrame.ts": "8b85254f1dcc20b4f1ec25bc875d11b48f57b7ce3e61f13b1f6cc29ad9066761",
+    "src/pose/videoPoseSource.ts": "57d53b123f0ebb14926880883ce5fe5bbde2c05a98da44abfb6cf6f465e26619",
+    "src/avatar/observedPoseRig.ts": "aef8a8c03646da5affe5b1a859ba486d021d765f9104049e29afbd22eb14ac9f",
+    "e2e/fixtures/bodyFaceFrameProbe.ts": null,
+    "scripts/test-body-face-browser.mjs": null
+  },
+  "stdout": "\n RUN  v5.0.2 /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-body-face-frame/bodyguard/frontend\n\n ❯ src/pose/bodyFaceVideoSource.test.ts (12 tests | 1 failed) 175ms\n   ❯ same frozen body and face frame (12)\n     × starts nothing, then uses one input and timestamp and returns copied rotation only 11ms\n\n Test Files  1 failed | 2 passed (3)\n      Tests  1 failed | 46 passed (47)\n   Start at  09:34:00\n   Duration  413ms (tests 43%, transform 39%, import 16%, worker 2%)\n\n",
+  "stderr": "\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  src/pose/bodyFaceVideoSource.test.ts > same frozen body and face frame > starts nothing, then uses one input and timestamp and returns copied rotation only\nAssertionError: expected [ +0, 0.14943813247359927, +0, …(1) ] to deeply equal [ +0, 0.14943813247359922, +0, …(1) ]\n\n- Expected\n+ Received\n\n  [\n    0,\n-   0.14943813247359922,\n+   0.14943813247359927,\n    0,\n-   0.9887710779360422,\n+   0.9887710779360425,\n  ]\n\n ❯ src/pose/bodyFaceVideoSource.test.ts:52:43\n     50|     expect(f.detectFace).toHaveBeenCalledWith(FakeFrame.made[0], 10)\n     51|     expect(Object.keys(frame?.result ?? {}).sort()).toEqual(['headOrie…\n     52|     expect(frame?.result.headOrientation).toEqual(new Quaternion().set…\n       |                                           ^\n     53|     expect(Object.isFrozen(frame?.result.headOrientation)).toBe(true)\n     54|     expect(f.body.close).toHaveBeenCalledTimes(1); expect(FakeFrame.ma…\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n"
+}

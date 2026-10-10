@@ -1,0 +1,33 @@
+{
+  "label": "unit-roundoff-fixed",
+  "cwd": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-body-face-frame/bodyguard/frontend",
+  "command": "./node_modules/.bin/vitest",
+  "args": [
+    "run",
+    "src/pose/bodyFaceVideoSource.test.ts",
+    "src/pose/ownedPoseFrame.test.ts",
+    "src/pose/videoPoseSource.test.ts"
+  ],
+  "exit": 0,
+  "elapsedMs": 902,
+  "sourceBefore": {
+    "src/pose/bodyFaceVideoSource.ts": "c75253d0183446b6f36a0edbcb10bee048783f261c0667d1ca0d10fb029cee67",
+    "src/pose/bodyFaceVideoSource.test.ts": "0edf5c78e853561ef293f099bd7992a8e0c0f83f7364da7a0e7e10f4a1eefce3",
+    "src/pose/ownedPoseFrame.ts": "db02c66628be7836ed6d5cbad2a204fa4ddb1f69438a8b60cbe2c99c7f5690a7",
+    "src/pose/videoPoseSource.ts": "57d53b123f0ebb14926880883ce5fe5bbde2c05a98da44abfb6cf6f465e26619",
+    "src/avatar/observedPoseRig.ts": "aef8a8c03646da5affe5b1a859ba486d021d765f9104049e29afbd22eb14ac9f",
+    "e2e/fixtures/bodyFaceFrameProbe.ts": null,
+    "scripts/test-body-face-browser.mjs": null
+  },
+  "sourceAfter": {
+    "src/pose/bodyFaceVideoSource.ts": "c75253d0183446b6f36a0edbcb10bee048783f261c0667d1ca0d10fb029cee67",
+    "src/pose/bodyFaceVideoSource.test.ts": "0edf5c78e853561ef293f099bd7992a8e0c0f83f7364da7a0e7e10f4a1eefce3",
+    "src/pose/ownedPoseFrame.ts": "db02c66628be7836ed6d5cbad2a204fa4ddb1f69438a8b60cbe2c99c7f5690a7",
+    "src/pose/videoPoseSource.ts": "57d53b123f0ebb14926880883ce5fe5bbde2c05a98da44abfb6cf6f465e26619",
+    "src/avatar/observedPoseRig.ts": "aef8a8c03646da5affe5b1a859ba486d021d765f9104049e29afbd22eb14ac9f",
+    "e2e/fixtures/bodyFaceFrameProbe.ts": null,
+    "scripts/test-body-face-browser.mjs": null
+  },
+  "stdout": "\n RUN  v5.0.2 /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-body-face-frame/bodyguard/frontend\n\n\n Test Files  3 passed (3)\n      Tests  47 passed (47)\n   Start at  09:34:35\n   Duration  418ms (transform 41%, tests 39%, import 18%, worker 2%)\n\n",
+  "stderr": ""
+}
