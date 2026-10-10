@@ -109,7 +109,7 @@ export function RecordsPage() {
     try {
       dateRange(draft.from, draft.to, new Date())
     } catch {
-      setFormError('시작일부터 종료일까지, 오늘 이전의 올바른 날짜를 선택해 주세요.')
+      setFormError('오늘까지의 날짜로 시작일·종료일 순서를 확인해 주세요.')
       return
     }
     setFormError('')
@@ -126,9 +126,8 @@ export function RecordsPage() {
       <h1 ref={heading} tabIndex={-1}>
         {id ? '수행 기록 상세' : '내 수행 기록'}
       </h1>
-      <p className="records-intro muted">스트레칭을 진행한 시간과 수행 과정을 확인하세요.</p>
       <p className="small muted records-explanation">
-        완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.
+        ‘완료’는 수행 종료입니다. 자세 정확성·효과를 보장하지 않습니다.
       </p>
       {!id && (
         <form className="records-filter" onSubmit={apply}>
@@ -200,7 +199,7 @@ export function RecordsPage() {
           <p role="alert">
             {current.status === 'missing'
               ? '목록에서 본인의 기록을 다시 선택해 주세요.'
-              : '연결을 확인하고 다시 조회해 주세요. 이전 결과를 현재 기록으로 표시하지 않았습니다.'}
+              : '연결을 확인하고 다시 조회해 주세요.'}
           </p>
           {current.status === 'error' && (
             <button
@@ -227,7 +226,7 @@ export function RecordsPage() {
               <h3>
                 {page === 0 ? '이 기간에는 수행 기록이 없습니다' : '이 페이지에는 기록이 없습니다'}
               </h3>
-              <p role="status">다른 기간을 조회하거나 스트레칭 시작 경로를 확인하세요.</p>
+              <p role="status">기간을 바꾸거나 시작 경로를 확인하세요.</p>
               <Link className="button secondary" to="/explore">
                 스트레칭 시작 경로 선택
               </Link>
@@ -331,9 +330,7 @@ export function RecordsPage() {
               <dd>{current.value.protocol_version}</dd>
             </div>
           </dl>
-          <p className="small muted">
-            수행 요약만 저장합니다. 원본 영상과 관절 좌표는 저장하지 않습니다.
-          </p>
+          <p className="small muted">수행 요약만 저장하며, 영상·관절 좌표는 저장하지 않습니다.</p>
         </div>
       ) : null}
       <div className="records-back">
