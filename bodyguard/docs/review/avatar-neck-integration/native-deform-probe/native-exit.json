@@ -1,0 +1,35 @@
+{
+  "started_at": "2026-10-10T06:39:19.666Z",
+  "ended_at": "2026-10-10T06:39:20.611Z",
+  "executable": "/Applications/Blender.app/Contents/MacOS/Blender",
+  "args": [
+    "--factory-startup",
+    "--disable-autoexec",
+    "-b",
+    "--python-exit-code",
+    "1",
+    "--python",
+    "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-avatar-neck-integration/bodyguard/assets/blender/integration-neck/probe_native_deform.py",
+    "--",
+    "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-avatar-neck-integration/bodyguard/docs/review/avatar-neck-integration/native-deform-probe/probe.json"
+  ],
+  "observed_native_exit": null,
+  "signal": "SIGSEGV",
+  "spawn_error": null,
+  "native_exit_is_terminal": true,
+  "executed": [
+    {
+      "name": "probe_native_deform.py",
+      "sha256": "8a402cb2e68a7e38ab65db8c3fc59adb145777364639adaa1f92d291c735ca85"
+    },
+    {
+      "name": "run_native_deform_probe.mjs",
+      "sha256": "4e6692ea92e1302a2f54b3795883c82ed950bd5bac3a87c5c759e140c07458ee"
+    }
+  ],
+  "executed_source_unchanged": true,
+  "nonhuman_fixture_only": true,
+  "professional_model_loaded_authored_or_saved": false,
+  "appearance_approved": false,
+  "stages_1_to_6_complete": false
+}

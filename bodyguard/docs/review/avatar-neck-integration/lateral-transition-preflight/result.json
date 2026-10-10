@@ -1,0 +1,18 @@
+{
+  "kind": "preflight_failures_not_native_authoring",
+  "runner": "run_lateral_transition.mjs",
+  "runner_sha256": "07d4a88f6a7bb066835ff11504a3d1bf2ce2c164ca600b484b526e7f64cb8048",
+  "biome_check_exit": 1,
+  "biome_failure": "assist/source/organizeImports: readFileSync and readdirSync import order",
+  "proof_mkdir_skipped_after_failed_quality_chain": true,
+  "runner_invoked_after_failed_quality_chain": true,
+  "runner_exit": 1,
+  "runner_failure": "ENOENT: scandir lateral-transition-run",
+  "blender_process_started": false,
+  "observed_native_exit": null,
+  "model_or_evidence_written_by_failed_runner": false,
+  "failed_runner_source_preserved": true,
+  "correction": "New named runner with sorted imports; verify successful QA result before creating proof and launching native process",
+  "authoring_parameters_changed": false,
+  "appearance_approved": false
+}

@@ -1,0 +1,311 @@
+# S2.A1 — 최종 통합의 얼굴–목 표면 보완
+
+2026-10-10 · 시작 main a466528 · FR-A-02/03/08 · codex/avatar-neck-integration · 옆 목·어깨 실제 저작 반려 / 외형 P2 미해결·미채택
+
+## 최신 실행 지점 — 새 저작 미실행 / 승인 범위 확인
+
+설치 [native API probe](../review/avatar-neck-integration/native-deform-probe-confirmed/README.md)는 실제 exit0·비인체 도구 확인만이다. 첫 초기화 SIGSEGV/native null도 보존했다. 준비한 제한 변형 저작은 [자동 승인 검토와 CEO 최종 선택](../review/avatar-neck-integration/lateral-native-deform-deferred.json)에서 두 번 차단돼 process0/native null/새 후보0이다. 최신 release contract/실제 main·PR106/107 병합/Draft108을 읽었으나 독립 구현만으로 3~6단계 전체 완료를 입증할 수 없다. 같은 질문의 두 CEO 응답 중 마지막 “아바타는 보류하고 독립 웹 작업 진행”을 적용한다. 앞선 승인으로 실행하지 않고 현재 결과/원본/실패만 보존한 뒤 독립 웹 작업으로 넘어간다. 기존 Draft/외형P2·D2/전체1~6·최소 문구/별도 승인 기준은 유지하며 전체 goal은 계속한다.
+
+## 이전 실행 지점 — 연속 전이 반려와 원래 core 확인
+
+[연속 전이](../review/avatar-neck-integration/lateral-transition/README.md)는 남성4119점/최대3.730mm·전체 보호/rig/위상/tiny 통과에도 접힘14→3·최대164.739°로 native exit1·저장0이다. 여성 제작·새 원본/렌더/GLB/전체변형/Chrome·실측은 미실행이다. 초기 준비 실패(native 미실행/null)·실제 반려1과 같은 실패의 읽기 전용 진단0을 구별해 보존했다.
+
+[원래 면/core 진단](../review/avatar-neck-integration/transition-faces-run/README.md)에서 남은3개 edge가 삼각면167049 주변의 부분 전이임을 확인했다. 원래 접힘의 core27점은 모두 선택 안/앞면 보호 밖·기존 ID로 A318 대응이 유일했다. 다음은 이 실제 core와 보호 경계를 구별하는 전문 native 제한 변형 설계·설치 API probe다. 아직 새 저작/허용치 변경하지 않았으며 같은 감쇠 수치·스무딩 반복은 종료한다. 외형P2/Draft/미채택·D2/전체1~6·최소 문구/별도 승인 경계를 유지한다.
+
+## 이전 실행 지점 — 복원 경계 원인 확인
+
+[복원 경계 대조](../review/avatar-neck-integration/restored-boundary/README.md)의 실제 native 진단은 exit0·새 저장0이다. 입력에서1.090°였던 edge293023은 동결 복원에서177.667°로 접혔다. source126108은 선택 밖/앞면 보호 아님으로 그대로 남고, 같은 연결의 나머지 세 점은 A318 배치로 복원됐다. A318 네 점/두 면 대응·정상 방향과 frozen rows·여성/private probe/두 입력 불변을 확인했다. 다음은 선택/중앙/앞면 보호를 유지하는 전문 위치의 연속 전이 설계이며 아직 저작하지 않았다.
+
+첫 실행 중단은 exit미확정/null로 따로 기록하고, 실제 재실행 terminal·소스·raw/gzip 증거를 보존했다. 새 렌더·GLB/전체변형/Chrome/실측은 미실행, 외형P2/Draft/미채택·D2/전체1~6 미완료·최소 문구/별도 승인 기준은 그대로다.
+
+## 이전 실행 지점 — 전문 배치 복원 반려
+
+[A318 실제 대조](../review/avatar-neck-integration/lateral-origin/README.md)는6면/9점의 원래 연결·skin/one-ring과 현재 좌표 변화를 확인했다. 해당 원본면은 정상 방향/최대5.705°였고 현재 점은0.140~2.127mm 달라져 접혔다. 읽기 전용exit0·두 원본/남녀 snapshot 불변·4개 증거/새 모델0이다. 기존 “원래” 입력be038c04와 전문 원본A318을 구분한다.
+
+그에 따른 [원래 배치 실제 복원](../review/avatar-neck-integration/lateral-restore/README.md)은 남성4149점/최대3.769mm·전체 보호/위상/tiny 통과와 접힘14→1을 확인했으나0 기준 미달로exit1·저장0이다. 여성 제작/새 렌더/원본·GLB/전체변형/Chrome·실측은 미실행이다. 실패/동일 실행 소스8개를 보존하며 다음은남은1개 edge의 국소 연결·선택/보호 경계 대조다. 해당 정확한 원인은 아직확정하지 않는다. 같은복원/스무딩·수치sweep은반복하지 않는다. 외형P2·Draft/미채택·D2/전체1~6미완료·최소문구/별도승인경계는유지한다.
+
+## 이전 실행 지점 — 옆 목·어깨 반려
+
+[남은6면 실제 비교](../review/avatar-neck-integration/lateral-faces/README.md)를 마쳤다. 원래부터 삼각면167049와quad171044가 뒤 방향으로 접혀 있으며, private6면 삼각화 뒤에도 반환면 연결의>90°가 원래5개/반려6개로 남았다. 진단 exit0·동결 반려 row exact·원본/여성/private probe 보호·새 후보0이다. 최초 인덱스 API 가정 오류exit1/실행 소스와별도 API probe/후속 진단을12개 증거로 구분한다. 다음은 원래 전문 원본의 국소 점 출처/배치·연결/표면 연속성 대조와 보완 설계다. 같은 마감·단위·삼각화를 반복하지 않는다. 진단 성공은 외형/새 제작·D2/전체1~6 통과가 아니다.
+
+[세 native 저작의 실제 실패·8컷·보존 증거](../review/avatar-neck-integration/lateral-attempt/README.md). 마지막 남성의 접힘14→4·최대174.035°로0 기준 미달·저장0이다. 원본 앞면/중앙·외부 좌표/위상/raw skin/속성/rig/PBR 보호는 통과했지만 실제 거친 마감은 남아 미채택이다. 여성 제작·새 원본/GLB·전체변형·브라우저/실측은 미실행이다. 과거be038c04/원본·실패·37/17개 증거는 유지하고 이번39개를 구분한다.
+
+남은4개 edge의 인접6면은 모두 내부 선택면·원래 앞면/보호점0이다. 다음은 원래 면 연결/비평면·퇴화 조건의 읽기 전용 비교와 국소 연결 설계다. 같은 중앙/Laplacian·단위·계산용 삼각화를 반복하지 않는다. 새 최종 원본의 외형·독립 재열기·GLB/전체변형/Chrome/목표 기기/실측을 실제 재실행해야 한다. Draft #108·외형P2·D2/전체1~6 미완료·최소 문구/별도 승인 경계를 유지한다.
+
+## 최신 검증 지점 — 목 중앙 후보
+
+저장된be038c04의 [독립 Blender 재열기·실제 남녀8컷 검수](../review/avatar-neck-integration/lower-verification/README.md)를 마쳤다. 앞면/손·외부 좌표/raw skin/polygon·rest rig/world/PBR/history·기존 point INT provenance 보호는 통과했다. 실제 목 아래/어깨 마감은 미달이며 중앙의 작은 변경으로 전체 외형 개선을 선언하지 않는다. 새GLB/118기술pose/브라우저·실제 사람 시험은 미실행이다.
+
+이전 사용량 제한과37개 체크포인트는 그대로 보존하고 후속 실제 실행17개 증거를 별도로 기록한다. 정상 자동 승인 절차가 통과해 실행했으며 우회/비용/계정/설정 변경0이다. 다음은 원래 앞면을 보호하는 옆 목/어깨의 연결 설계와 최종 원본 전체 검증이다. 같은 중앙 저작을 반복하지 않는다. Draft #108·P2/미채택·D2-A·전체1~6 미완료와 최소 문구/별도 승인 경계를 유지한다.
+
+## 순서와 범위
+
+### 설치 native 제한 변형 API 계약 — 2026-10-10
+
+연속 전이/원래 core 실제 결과와 실행 소스는 동결한다. 다음 도구는 같은 설치 commit의 native Laplacian Deform이다. 공식 구현에서 양수 그룹 값은 binary anchor membership이고 고정식은 least squares라 exact clamp가 아니다. 먼저 factory-startup/disable-autoexec의 별도 프로세스에서 실제 RNA/bind/evaluated mesh를 확인한다. professional 아바타/사용자 Blender 장면은 열지 않으며 비인체 격자만 사용한다. 같은 anchor의 양수 값1/0.25가 동일한 설치 결과를 주는지 검사하고 실제 anchor 오차와 내부 변형을 기록한다. 기본 iterations는 바꾸지 않는다. API/semantic probe는 source/로그/실제 종료와 실패를 보존하고, 아바타 제작·리깅/외형/GLB/브라우저·임상 판정 검증으로 세지 않는다.
+
+원래 core27과 보호 경계를 구분하는 private 전문 메시 설계는 이 결과 뒤 진행한다. 기존 topology/좌표·raw skin/rig/PBR 보호와6mm/tiny/접힘0 등 필수 기준은 유지한다. native anchor의 exact 고정을 가정하지 않고 최종 결과를 독립적으로 검사하며, 기존 helper를 고치거나 같은 감쇠 수치/스무딩을 반복하지 않는다. 아직 새 후보 제작을 실행하지 않았다. Draft/외형P2·D2/전체1~6 미완료·최소 문구/별도 승인 경계는 그대로다.
+
+### 원래 전문 표면의 native 제한 변형 계약 — 2026-10-10
+
+비인체 native probe는 실제 설치 RNA/bind/평가 메시에서 exit0이다. 같은 binary anchor의1/0.25 결과는 exact였지만 중심 target 오차2.494mm·경계 최대0.137mm였다. 따라서 native anchor를 hard 고정으로 취급하지 않는다. 첫 sandbox 프로세스는 Python 전 WM_init/Metal 초기화 SIGSEGV(native code=null)였으며 crash와 실행 source를 보존했다. 동일 helper의 허용된 독립 프로세스 실행을 구별한다. 아바타 품질/저작 성공은 아직 아니다.
+
+별도 `author_lateral_native_deform.py`는 같은 현재 선택(weight>0, 수치 불변)의 인접 전문 polygon만 private 복사한다. 기존 양수 source ID는 유일한 A318 실제 위치에 배치하고 새 ID는 현재 위치를 유지한다. Body의 위상/리그는 복사 도구로 교체하지 않는다. 접힘 edge의 인접면이 실제 core이며 남성27점은 모두 선택 안/앞면 보호 밖이어야 한다. 선택 밖 private border와 새 ID는 현재 좌표 anchor, core는 전문 원본 anchor다. 연결 component마다 최소3개의 보호 border가 있어야 한다. API probe에서 확인한 기본 iterations1과 binary group만 사용하며 조정 sweep은 없다.
+
+Private native solver는 작은 전문 면의 계산 단위만 mm로 변환한다. 실제 Body는 m·원래 위상/좌표 공간을 유지한다. Native 결과 중 선택 안 기존 ID만 반환하고 core는 전문 위치 exact, 선택 밖/새 ID는 현재 위치 exact로 강제한다. Soft solver의 core/border 오차는 먼저 기록한 뒤 독립 전체 snapshot·6mm/tiny/닫힘/winding·선택 접힘0을 검사한다. 남녀 모두 통과 전에는 새 모델을 저장하지 않고 실패/종료/여성 및 후속 미실행을 보존한다. Professional 형상 복사/도구 변형이지 코드로 인체를 생성하거나 raw skin/리그·앞면/중앙 보호를 완화하는 방식이 아니다. 새 원본의 독립 재열기·남녀8컷·GLB/전체변형/Chrome·실측 게이트와 Draft/외형P2/전체1~6·최소 문구/별도 승인 기준은 그대로다.
+
+선택 안 면만이 아니라 선택점에 인접한 모든 면/edge의 접힘도0이어야 한다. 보호 경계 양쪽의 사각지대를 남기지 않는다. 이는 더 넓은 기하 검수이며 선택/이동 범위나 기존 기준을 완화하지 않는다. 이 helper/runner는 정적 검사만 했으며 자동 승인 차단 후 실행하지 않았다. 실제 동작/성능/원본·기하/외형/GLB/브라우저는 모두 미검증이다.
+
+### 전문 위치의 연속 전이 계약 — 2026-10-10
+
+경계 진단5d9cfd6과 실제 raw/terminal·7개 archive는 동결한다. 남은 edge293023의 입력1.090°→hard 복원177.667°는 선택 밖 점을 둔 채 선택 안 점만 원래 배치로 옮긴 경계에서 발생했다. 앞면 보호를 풀거나 선택 밖/중앙 점을 이동해 통과시키지 않는다.
+
+별도 `author_lateral_transition.py`는 같은 입력be038c04/전문 원본A318과 유일한 source point 대응을 사용한다. 이전부터 정의돼 있던 `lateral_domain.weight`의 **동일한** smooth falloff를 현재 위치→전문 원본 위치의 전이에 실제 적용한다. 기존 hard 저작기는 weight>0을 선택 여부로만 쓰고 전체 원래 위치를 대입했으므로 이 전이가 없었다. 새 감쇠 구간/수치 sweep·native 스무딩/재삼각화·전신 코드 생성은 하지 않는다. 가중치1의 내부는 전문 원본에 exact 복원하고, 경계에서는 현재 위치를 연속적으로 유지한다. 이것만으로 접힘0/외형 통과를 예상 결과로 기록하지 않는다.
+
+기존 원래 selection/front와 선택 밖/중앙·raw skin/topology/history/provenance/rig/PBR/손 exact·6mm·작은 면 증가 금지·닫힘/winding·선택 구간 접힘0을 유지한다. 남녀 모두 실제 통과할 때만 별도 새 원본을 저장한다. 실패 시 모델 저장 전에 중단하고 실제 실패·여성/후속 미실행을 보존한다. 영구 proof의 runner가 실행 helper/imported helper SHA·raw 로그·실제 terminal을 남기고 기존 결과를 덮어쓰지 않는다.
+
+실제 새 원본의 독립 재열기와 같은 조건 남녀 외형 검수 후 새GLB/왕복/118기술pose·Chrome 두 모델/실측을 재실행한다. 이 계약/국소 기하 성공으로 외형P2/Draft/미채택·D2/전체1~6 미완료를 해제하지 않는다. 공개 웹/최소 문구·SDK/판정·안전/개인정보·운영 변경0과 별도 승인 경계는 그대로다.
+
+### 복원 경계의 원인 대조 계약 — 2026-10-10
+
+전문 배치 복원 실패fa51127/8개 증거와 이전 원본/부분 후보는 동결한다. 최신 main a466528·Draft #108 fa51127의 OPEN/Draft·MERGEABLE/CLEAN·체크 없음을 재확인했다. 별도 `inspect_restored_boundary.py`가 같은 동결 저작을 실패 상태 재현에 한 번만 사용하고 기존 row와 exact 비교한다. 저장0·여성 body/rig exact, 입력/전문 원본SHA 불변을 확인한다. 새 파라미터·새 저작·실패한 helper 수정/재시도는 하지 않는다.
+
+남은1개 native edge의 양쪽 면/점·source ID·원래 선택/앞면 보호 여부와 입력be038c04/실패 재현/A318의 위치·방향·연결을 대조한다. BMesh probe는 private에만 쓰고 body.to_mesh/save를 하지 않는다. 남은 접힘이 보호 경계에서 생겼다는 가설을 검사하되 확인 전 확정하지 않는다. 원래 ID가 없는 면이나 source 대응의 모호함은 그대로 기록하고 정상 원본으로 추정하지 않는다. 원인 대조 성공을 새 아바타·외형/GLB/전체변형/브라우저/실측·D2/전체1~6 완료로 세지 않는다. 기존 앞면/체형/관절·raw skin/rig·6mm/tiny/닫힘/winding/접힘0, 최소 문구·안전/개인정보·별도 승인 경계와 Draft/외형P2/미채택은 유지한다.
+
+#### 실행 중단과 보존 경로
+
+첫 진단은 세션40173에서 실행 중이었으나 turn 중단 뒤 핸들·해당 프로세스·임시 폴더가 없어 종료 결과를 확인하지 못했다. [중단 관찰](../review/avatar-neck-integration/restored-boundary-interrupted.json)의 native exit는 null이며 실패exit1이나 완료exit0로 추정하지 않는다. 작성한 소스와 기존 커밋 증거는 보존돼 있지만 첫 임시 raw 로그/보고서는 현재 읽을 수 없다.
+
+동일 inspector SHA a72bea96을 수정하지 않고 프로세스 없음(pgrep exit1)을 확인한 후 저장소 내부 `restored-boundary-run`에서 다시 진단한다. 새 runner는 실행 소스·로그와 실제 종료코드를 별도 파일로 남기며 기존 결과를 덮어쓰지 않는다. 이는 새 제작 파라미터 시험이 아니다. 이번 재실행도 실제 terminal 결과를 읽기 전 완료로 표시하지 않는다. 원본·리그·앞면 보호·새 저장0/외형 P2·Draft/전체 게이트는 그대로다.
+
+### 전문 원본의 점·면 출처 대조 계약 — 2026-10-10
+
+현재 a3b2883의 실행 소스/12개 증거와 이전 후보·실패는 동결한다. 최신 main a466528와 Draft #108 a3b2883의 OPEN/Draft·CLEAN/MERGEABLE·체크 없음을 다시 확인했다. 별도 읽기 전용 검사에서 입력be038c04의 남은6면/9개 source point ID를 A318 전문 원본2eb274cf에 대응한다. ID 존재만으로 좌표·연결 보존을 가정하지 않고, ID 유일성·회전/방향을 구별한 면 연결·같은 메시/세계 공간의 좌표·raw skin·native 면 방향/접힘·주변 연결을 비교한다.
+
+두 파일은 factory-startup/disable-autoexec에서 읽고 A318은 use_scripts=false/load_ui=false로 연다. 각 읽기 전후 body/rig snapshot과 두 입력 SHA 불변을 확인하며 장면·원본 저장/수정·동결 반려 재저작·새 후보/렌더/GLB/전체변형/브라우저 실행0이다. 대조 성공은 외형/제작 성공이 아니다. 결과가 원래부터의 접힘인지 이번 제작으로 바뀐 국소 배치인지를 구별한 뒤 다음 표면 보완을 설계한다. 기존 앞면/손·raw skin/rig·6mm·닫힘/winding/tiny·실제 외형과 D2/전체1~6 완료 기준, 최소 문구·안전/개인정보·별도 승인 경계와 Draft/외형 P2는 유지한다.
+
+### 원래 전문 배치 복원 계약 — 2026-10-10
+
+읽기 전용 원본 대조exit0에서6면은 A318과 같은 winding/연결이며9개 point의raw skin·one-ring도exact였다. 현재9점은 원래 배치에서0.140~2.127mm 달라져 있다. A318 대응 삼각/quad는normalY 양수·해당 주변edge 최대5.705°였지만 현재면은 최대176.768°로 접혔다. 따라서 이 국소 접힘은 A318에서 그대로 상속된 것이 아니다. 이전6면 진단의 “원래”는 입력be038c04를 뜻하며 전문 원본A318과 구분한다. 이 대조만으로 변경을 일으킨 정확한 중간 저작 단계/전체 외형 원인을 전부 확정하지 않는다.
+
+별도 `author_lateral_restore.py`는 기존 앞면 보호 옆 목/어깨 선택 안의기존 양수 source point만 A318의실제 전문 배치로 복원한다. point ID 유일성·같은 world/rest rig/group 이름·raw skin exact를 강제하며 새점(-1)은 추정하거나 삭제하지 않는다. 전문 원본의좌표 대응 복원이지 code 인체 생성·재삼각화·스무딩/수치 sweep이 아니다. 선택밖/앞면/중앙·면/skin/history/rig/PBR exact와6mm/tiny/닫힘/winding/선택 구간접힘0을 유지한다. 남녀 모두 통과할 때만 새 파일에 저장한다. 실패는 저장 전중단·여성 미실행/후속 미실행을 구별해 보존한다. 통과해도 독립재열기/실제외형·새GLB/전체변형/Chrome/실측·D2/전체1~6은별도 필수이며 Draft/미채택 기준은 그대로다.
+
+### 남은6면의 연결 원인 검사 계약 — 2026-10-10
+
+앞선3baf61e/PR #108의 실제 반려·소스/39개 증거를 동결한다. 별도 `inspect_lateral_faces.py`로 남은6면의 원래/반려 상태 native 면 크기·corner 면적·비평면 거리·tessellation과 연결을 비교한다. 계산용 private BMesh의6면 삼각화 probe는 원래 body에 쓰지 않는다. 같은 동결 저작을 진단 상태 복원에 한 번만 재현하고 기존 row와 exact 비교한다. 이는 새 제작·파라미터 재시도·외형/GLB/변형/브라우저 합격이 아니다. 원본SHA/여성/rig·private probe의 body 불변과 저장0을 확인한다. 인체·리깅/허용치·앞면 보호·최소 문구·별도 승인 경계와 P2/Draft는 유지한다.
+
+### 옆 목·어깨 마감 계약 — 2026-10-10
+
+최신 main a466528/기존 Draft #108 c17bff4·CLEAN/MERGEABLE·체크 없음을 확인했다. 저장be038c04의 중앙 제작·독립 검증17개를 동결한다. 같은 중앙 저작을 반복하지 않고 남녀 옆 목/어깨의 기존 전문 메시를 보완한다. 먼저 native dihedral/접힌 면과 실제 앞면 보호 영역·설치된 Blender API를 읽기 전용 검사해 원인을 분리한다.
+
+원래 앞면의 ray 가시 면에 연결된 점 전부와 중앙 목을 보호한다. 옆 목은 실제neck01/02 범위·중앙 밖, 어깨는 원래 아래 목/상부 체간의 국소 구간만 다룬다. 이 normalized mask와 dihedral 수치는 제작 범위/에셋 결함 관찰이며 사람의 정상 자세 기준이 아니다. 기존 연결/점·면 수/raw139 skin·163 rest/pose/world/PBR·원래 provenance/속성·손은 보호한다.
+
+읽기 전용 실제 검사exit0는 옆 목/어깨의 native dihedral>90° 면 연결이 남성14/여성6개·최대176.768/168.569°임을 확인했다. 선택4964/5589점과8328/9301개 내부 면에 남아 있으며, 닫힘/winding0만으로 접힌 표면이 해결된 것은 아니다. ray 앞면 연결점68082/70145개를 제외했다. 저작 통과에는 보호 비교/6mm/tiny 외에 선택 구간의>90°접힘0을 요구한다. 국소 실제 기하·표면 문제의 확인이지 모든 결함 원인이나 의료/카메라 정확도 규명이 아니다.
+
+거친 고주파 표면이 기존 위치/곡률 문제로 확인되면 전문 도구의 native Laplacian Smooth·volume preserve·normalized·국소 vertex group으로 한 고정 제작을 시도한다. whole-body remesh/primitive 인체·표면 숨김·재질/조명 변경은 하지 않는다. 기존6mm 예산·외부 점 exact·닫힘/winding/tiny 악화 거부를 유지하고 변화 없는 후보나 검사 실패는 저장하지 않는다. API schema는 설치5.1.1에서 확인하며 최신 공식5.1 manual/API 직접 조회의402 실패를 성공으로 표시하지 않는다. [공식 기능 설명](https://docs.blender.org/manual/en/2.90/modeling/modifiers/deform/laplacian_smooth.html)은 형상 보존 목표이지 품질/의학 인증이 아니다.
+
+실행 전 공식 설치commit b70da489d7f4의 `MOD_laplaciansmooth.cc`를 실제 GitHub API로 확인했다(blob04a8254675aa641bae39eb07ce95513dcce78344). `volume_preservation`은 group 가중치와 무관하게 전체 점을 scale하므로 앞면/외부 exact와 양립하지 않는다. 위 tentative volume-preserve 선택은 채택하지 않는다. native 국소 normalized Laplacian만 사용하고 builtin volume preserve는 끈다. 이것은 앞면 보호/리깅 정확도나 외형 기준 완화가 아니다. 전후 에셋 전체 실제 volume을 관찰하고 외부 좌표·raw skin/rest·6mm/닫힘/tiny·접힘0과 실제 형상 검수를 유지한다. 고정lambda0.2·iterations12·border0, 축XYZ다. 허용치를 늘리거나 값 sweep으로 통과시키지 않는다.
+
+테스트 순서는 읽기 전용 원본/보호 비교 → 고정 저작 전후의 전체 보호·국소 기하 → 새 저장본 독립 재열기 → 같은 조건 남녀8컷 직접 검수 → 외형이 기준에 맞으면 새 원본/GLB 왕복 전체118기술pose·Chrome 두rig/성능·외형이다. 실패는 원본/실행 helper/로그와 보존하고 후속 미실행을 구분한다. 좁은 기하 성공으로 최종 아바타/실제 사람 정확도·D2/전체1~6 완료를 선언하지 않는다. 공개 UI/문구·SDK/판정·개인정보/운영 변경0·최소 문구·별도 승인 경계와 Draft/외형P2를 유지한다.
+
+첫 실제 native 저작은exit1·저장0이다. 남성선택4964점 중76점이 최대0.602mm 이동했고 raw skin/위상/외부·앞면·중앙 목/rig/PBR 보호는 통과했지만 접힘14개·최대176.768°가 그대로였다. 여성 저작/새 원본/렌더/GLB/변형/브라우저는 미실행이다. 실행 소스와 실패를 동결한다. 공식 같은commit 소스의 절대 min_area0.00001이 짧은 edge/작은 면을 건너뛰는 것을 확인했지만 처리 가능 점 수와 실제 이동 점 수를 동일시한 첫 읽기 전용 가정은exit1로 실패했다. 별도 관찰에서 두 값을 분리하며 그 실패를 지우지 않는다.
+
+다음 수치 조건 보완은 lambda/iterations sweep이 아니라 **private 작업 사본의 단위를 m→mm로 바꾸는** native 처리다. 원래 전문 메시의 사본만1000배·임시 rig modifier 제거 후 같은 고정lambda0.2/12/border0/native normalized로 처리하고, 선택된 원래 점의 위치만 원래 단위로 되돌려 반영한다. 보호 점/원본 단위/rig/skin/위상/속성은 쓰지 않는다. 사본/임시mesh는finally에서 제거하며 공개/저장/후속 검증 기준을 낮추지 않는다. 이 보완도 실제 보호·6mm/tiny/접힘0·독립 새 원본·외형/GLB/변형/브라우저를 통과하기 전 채택하지 않는다.
+
+별도 읽기 전용 관찰exit0는 source formula의 m/mm 조건별 처리 가능 점 남성77/4908·여성18/5528을 기록했다. 원래 점/rig는 불변이며 실제 처리/이동·저작 성공이 아니다. 남성 실제 이동76과 첫 eligibility77은 다르므로 초기 equality 가설 실패는 그대로 남긴다. mm에서도 건너뛰는56/61점이 있어 단위 변환만으로 접힘/외형이 해결된다고 주장하지 않는다.
+
+private mm 실제 저작도exit1·저장0이다. 남성4941점·최대0.638mm 이동과 전체 보호/위상/tiny를 통과했고 선택 구간의 접힘14→5·최대174.944°였으나0 기준 미달로 저장하지 않았다. 여성 제작·후속 원본/GLB/변형/렌더/브라우저는 미실행이다. 이 native 결과는 단위 조건의 실제 영향을 확인하지만 전체 접합 해결은 아니다.
+
+남은 보완은 파라미터 재조정이 아니라 계산용 private 사본의 native Triangulate다. 원래 quad의 매우 작은/일직선 corner에서 solver가 멈추는 조건을 줄이려는 가설이며 남은5개의 원인을 전부 입증했다고 하지 않는다. 임시POINT INT index로 점 순서/개수 exact를 확인한 뒤 같은 고정 mm native 마감 위치만 원래 선택점으로 옮긴다. **제품 원본의 점·edge·polygon·raw skin/provenance·rig는 재삼각화하지 않는다.** 원래 기하에서 접힘0/6mm/tiny/보호를 다시 검사하고 실패하면 저장하지 않는다. 기존 두 저작/단위 가정 실패·실행 소스는 동결한다.
+
+이 계산용 Triangulate 실제 실행은exit1·저장0으로 종료했다. 남성4939점·최대0.377mm/보호 통과에도 접힘4개·최대174.035°가 남았다. 별도 동결 실패 재현/진단exit0는 같은 반려와4edge·6인접면을 확인하고 남성 반려 상태/여성 변경 없는 입력8컷을 생성했다. 진단/렌더 성공을 저작 성공으로 세지 않는다. 실제 모든8컷의 어깨 마감은 미달이다. 다음은 위 최신 실행 지점의 원래 면 연결 검사이며 동일 수치 마감 사이클은 종료한다.
+
+CEO의 10-05 지시대로 3단계 검수 목록/추천 입구, 4단계 계정·기록·데이터 관리, 5단계 준비 상태·백업 시험·라이선스, 6단계 현재 웹 통합/보안/자원 회귀의 독립 구현을 먼저 진행했다. PR #107까지 main에 포함됐다. 이제 이월한 D2-A의 국소 제작을 최종 통합·수정 구간에서 재개한다. **3~6단계 전체 통과를 선언하거나 외부 승인·실측·공개 UI 의존성을 건너뛰는 전환이 아니다.**
+
+기존 Draft #9와 그 작업트리의 변경·삭제 상태는 건드리지 않는다. 최신 main의 별도 브랜치에서 보존된 A318 전문 메시 원본(SHA256 2eb274cfce046848eced56c12646869908259b2e6a04c6e188597959f7c48fff)을 읽고 새 후보만 만든다. 원래 A323~326의 실패/미실행과 A37 개발 기본값은 유지한다.
+
+남녀 모두 최신 참조의 중성 백색 마네킹, 무의상, 얼굴–목 연속 연결, 자연 체형과 관절 구조를 유지한다. 앞 얼굴·쇄골·손·신체 전체·리그·가중치는 보호한다. 흐림/과노출/재질 변경으로 결함을 숨기지 않는다. 제품 UI·SDK 정책·카메라/판정·개인정보·운영 변경0이다. 웹 문구 최소화는 유지한다.
+
+## 제작 판단과 하네스
+
+기존 Y 방향만의 전역 곡률 풀이 반복 대신, Blender native Corrective Smooth의 길이 가중 국소 표면 정제를 전문 원본의 후두부–목 접합에만 적용한다. 전체 인체를 코드로 생성하거나 remesh하지 않는다. 기존 Y-only는 이전 후보의 구현 선택이지 출시 품질 조건이 아니었다. 이번은 마스크 안 XYZ의 작은 변위를 허용하되 기존 6mm 제작 예산·보호 영역·위상·리깅을 유지한다. 각도/시간/효과/사용자 정확도 기준을 바꾸지 않는다.
+
+고정 제작값 factor0.3·iterations16·LENGTH_WEIGHTED·only_smooth이며 반복 sweep하지 않는다. 공식 Blender manual의 국소 vertex group/길이 가중 설명을 확인했고 실제 설치 Blender에서 API/결과를 검증한다. 최신 manual 직접 요청 실패도 기록한다. <https://docs.blender.org/manual/en/4.2/modeling/modifiers/deform/corrective_smooth.html>
+
+1. 제작 전 입력 SHA·원래 점·면·그룹별 raw skin·각163 bone/rest/pose/world·PBR/속성·손을 기록한다. 마스크 밖 좌표 완전 동일, 마스크 안 유한 변위<6mm, 연결/닫힘과 전체 구조를 비교한다.
+2. 새 원본 독립 재열기에서 입력과 같은 비교를 다시 수행한다. 기존 파일 덮어쓰기 거부도 실제 확인한다. 기존 원본과 증거 SHA는 전후 불변이어야 한다.
+3. 기존 전체118 기술 변형/121행을 원본과 새 GLB 왕복본에서 실제 재실행한다. 기존 exporter/하네스는 exact 복사·해시로 구분하고 검사 완화 없이 사용한다.
+4. 같은 조명·카메라의 남녀 앞/뒤/측면/기울임 실제 렌더로 대조한다. 숫자 성공만으로 외형을 통과시키지 않는다. 실제 Chrome의 GLB 로드·독립 두 rig·움직임·정리와 외형을 확인한다.
+5. 실패는 원본 보고서/로그·제작 코드와 함께 보존하고 후속 검증 미실행은 명시한다. 아직 미완성인 모델을 제품에 적용하거나 최종 외형처럼 공개하지 않는다.
+
+## 완료와 남은 의존성
+
+이 Story는 국소 원본·GLB·변형·브라우저 보완이다. 외형 결함/새 P1/P2가 남으면 병합하지 않는다. 실제 사람·독립 관찰자·목표 노트북 정확도/부드러움·올바른 시범·웹 전체 코칭·권리/법무·외부 공급자/HTTPS·배포가 충족되지 않으면 D2-A와 전체1~6은 미완료다. 비용/계정/시크릿/운영 DB/배포/출시와 중요한 안전·개인정보 변경은 별도 승인이다.
+
+testing-strategy로 보호/실패·기술/실제 사용 경계를 먼저 정하고, code-review로 저장·보호 영역·리소스·diff를 재검토한다. 결과는 실제 미리보기·완료 기능·남은 문제 중심으로 기록한다.
+
+## 접합부 위상 보완 계약 — 2026-10-10
+
+같은 Story의 미해결 P2 보완이며 처음 후보와 검증을 대체하지 않는다. 최신 main a466528/현재 Draft #108 HEAD 6acabc7을 읽기 전용 확인했다. 체크 없음·리뷰 없음·CLEAN/MERGEABLE이지만 외형 미달로 병합 불가다. 새 후보 ce8887d를 읽기 전용 검사한 결과 뒤 목 아래에 120°를 넘는 접힌 면이 존재하고, custom normals는 없었다. 첫 sandbox Blender 실행은 exit139, 별도 허용된 독립 native 실행은 exit0이었다. 실패/크래시 로그와 원본은 보존한다.
+
+native Decimate collapse로 기존 전문 메시의 뒤쪽 국소 연결만 정리하는 후보를 만든다. 해당 vertex mask는 신장 기준 y>0, |x|<0.10, 0.82<z<0.94다. 고정 제거 예산은 해당 영역 triangle 수의30%이며 전신 ratio로 환산한다. 얼굴/앞면/손·나머지 신체의 좌표·raw skin·polygon 연결과 재질·163 rest bone/pose/world를 exact 보호하고, 원래 손 점은 삭제 없이 index만 재매핑한다. 이는 신규 단순 인체 생성이나 전체 remesh가 아니다. native 공식 구현의 zero-weight edge 보호를 확인하되 실제 설치 결과로 다시 검사한다: [Blender native 구현](https://github.com/blender/blender/blob/main/source/blender/bmesh/tools/bmesh_decimate_collapse.cc), [공식 API](https://docs.blender.org/api/5.0/bpy.types.DecimateModifier.html).
+
+하네스는 origin point ledger의 모호함/보호 영역 삭제, 비유한 값, 기존 표면에서6mm 이상 이탈, skin 합 오차0.01 이상, 보호 polygon 변경, 열린 면/뒤집힘/작은 면 증가 또는 접힌 면 감소 없음에서 실패한다. 위상 수가 달라지므로 예전 exact 전체 vertex 수를 통과 주장하지 않는다. 그 이후 독립 재열기·기존118 기술 pose·GLB export/왕복·같은 조건 실제 렌더·Chrome를 재실행한다. 실제 외형 평가는 별도다. 필수 검사나 외형 실패 시 미채택/미완료/Draft 유지, 공개 제품/의료 판정/운영 변경0이다.
+
+Native collapse의 INT point 속성은 index 유지가 아니라 보간이다. 첫 저장 전 검사에서 전체 ledger 중복을 발견하고 실패했다. 이를 원본 점으로 반올림하지 않는다. 보완된 저작기는 native 작업 마스크의0인 점만 exact origin ID로 검증하고 재구성 점은 -1로 명시한다. 보호점 origin의 중복/누락·좌표/skin/polygon 변경 검사는 그대로 강제한다. 재구성점의 변위는 실제 원본 표면 BVH로 검사하며 이전 실패 로그/실행 소스를 유지한다. 첫 그룹 wrapper 오류도 저장 전 실패로 보존했다.
+
+보호 면 비교는 male의90개 원래 다각형이182개 삼각형으로 남은 native 내부 triangulation을 검출했다. 실패와 상세 차이를 보존한다. 보완은 두 인접 면의 모든 점이 보호점이고 원래 edge 집합에 없는 native 추가 diagonal만 BMesh dissolve로 제거한다. 원래 edge/점은 제거하지 않으며 원래 polygon/material/shading exact 검사를 유지한다. 결과 없이 성공으로 간주하지 않는다.
+
+그 뒤 남은 native 추가 보호 면2개는 원래 면 집합에 없는 면만 제거했다. 작은 면적 가정으로 제거한 중간 시도는 실패했고 기록을 보존했다. 보호점/skin/원래 polygon exact는 통과했으나 첫 male의nonmanifold6/tiny3에서 저장 전 실패했다. 다음 보완은 기존 exporter와 동일한 fin 조건(삼각형·boundary2·다른 edge의face3·면적<1e-6)을 **재구성 영역 origin -1 점으로만 이루어진 면**에 제한 적용하고, 원래 보호점과닫힘·winding·작은 면 증가 방지 조건을 다시 강제한다. native added 보호 면/edge의 원본 복원과 국소 fin 제거는 전체 remesh나 임의 hole-fill이 아니다.
+
+원래 polygon 보호는 원래 전체 보호 면의 provenance로 비교해야 한다. Collapse 후 모든 점이 보호점인 새 삼각형2개는 원래 일부 점이 편집 영역이던 경계 면에서 나온 것으로, 이를 보호 면의 추가로 오분류해 지운 중간 실행이nonmanifold6을 만들었다. 실패는 유지하고 native FACE 원본 ID를 추가해 원래 전체 보호 면은exact 복원·비교하고 경계 면은 국소 편집 범위로 구별했다. 결과nonmanifold0/winding0, 원래 보호 polygon exact였으나 tiny2→3에서 실패했다. 다음 보완은 기존 exporter의 native dissolve_degenerate를 origin -1 국소 edge에만 dist1µm로 적용한다. 작은 면 증가 guard/나머지 보호 조건은 유지한다.
+
+### 위상 보완의 종료 결과
+
+[실제 실패/실행 소스/검증 미실행](../review/avatar-neck-integration/topology-attempt/README.md)을 보존했다. 마지막 실행은 male의보호점/raw skin/원래 보호 면·rest rig/PBR/손 index/닫힘0/winding0/tiny2를 통과하고 접힌 edge21→9를 관찰했다. **Female 보호 면 비교에서3개 누락으로 exit1**이었다. 그 누락이 실제 연결 변경인지 native FACE provenance 처리 문제인지 아직 분리 검증하지 않았으며 임의로 정상 처리하지 않는다. 전체남녀 제작 실패·새원본 저장0·새GLB/독립재열기/전체변형/렌더/Chrome 미실행이다. 이전 ce8887d 후보의 실제 성공을 이번 통과로 복사하지 않는다.
+
+자동 collapse/같은ratio sweep은 채택하지 않고 종료한다. 다음 보완은 참조를 기준으로 접합부의 표면과 연속 edge 흐름을 전문 도구에서 직접 재설계하는 국소 retopology다. 기존 원본을 고치는 대신 별도 원본에서 보호 영역/skin/rig·목과어깨 변형·GLB/Chrome/실제외형 검사를 다시 강제한다. 접힌 면 관찰이 전체 눈에 보이는 patch의 원인을 모두 입증한 것은 아니다. 외형 P2/전체1~6 조건과 별도 승인 경계는 그대로다.
+
+## 국소 quad 표면 재설계 계약 — 2026-10-10
+
+자동 collapse는 종료한 상태로 유지한다. 후속은 기존 ce8887d 전문 body/head에서 뒤 목–어깨 면만 native Grid Fill의 사각형 위주 edge 흐름으로 재구성한다. [Blender5.1 BMesh API](https://docs.blender.org/api/5.1/bmesh.ops.html)·설치된 native operator를 확인한다. 전신을 primitive로 만들거나 전체 remesh/원본 덮어쓰기를 하지 않는다. 앞면의모든점/손·patch밖 polygon/좌표/raw skin·rest rig/world/PBR를exact 보호한다. 교체되는 점의skin은 기존 전문 표면의triangle/barycentric field로 전송하고, 보호점과손은 삭제하지 않고index만 재매핑한다. 새점의역사ID는-1, 기존point ledger와history 배열은새index에 맞추되이전 원본은보존한다.
+
+읽기 전용 경계검사는뒤쪽의모든점이범위안인면만사용했다. 남성685점의단일loop, 여성717점/719edge의두접촉점을확인했다. 접촉점주변은선택면을줄이는방식으로정리하며앞면으로확장하지않는다. 홀수loop에는native 한triangle transition을두고나머지를quad로만든다. 새regular grid를원래뒤표면에맞춘뒤고정12회의nativefairing을적용한다. 기존접힌삼각형의smooth강도/ratio를반복하지않는다.
+
+저작하네스는불규칙/복수경계·nativefill실패·새표면의기존표면에서6mm이상이탈·sourcepoint보호누락·비유한값/skin합오류·원래외부polygon/리그/손변경·닫힘/winding/tiny악화에서실패한다. 피부전송이나숫자성공만으로해부학/외형을통과시키지않는다. 새원본독립재열기/118기술변형·GLB/왕복·동일조명실제렌더/Chrome와외형검수는후속필수다. 실패시저장전중단/미실행기록·Draft유지하며임상판정·공개웹·운영은변경하지않는다. 사진/웹캠실측/올바른시범·D2/전체1~6완료기준과별도승인경계는그대로다.
+
+### Quad 제작의 저장 전 검사와 가중치 전송
+
+초기 네 번의 native 실행은 모두 저장 전 실패했다. CustomData 생성 뒤의 BMesh 참조 유효성, 보호 경계 유지, Grid Fill의 명시적 span을 각각 확인했으며 이전 실패 소스와 로그는 보존했다. 명시적 span171의 남성 표면은 생성됐으나 자체 barycentric 가중치 검사에서 중단됐다. 이 실패를 통과로 바꾸거나 오차 허용치를 높이지 않는다.
+
+후속은 Blender native Data Transfer의 POLYINTERP_NEAREST로 읽기 전용 전문 원본의139개 그룹을 새 점에만 전송한다. 임시 복제 원본과 새 점 전용 mask는 저장 전 제거한다. 기존 점의 raw skin·좌표·외부 polygon·163 rest bone·PBR exact 검사는 그대로 유지하며 새 점의 원본 표면 거리6mm와 skin 합0.01 조건도 바꾸지 않는다. 기존 자체 전송 실패를 보존하며 native 전송의 실제 결과와 후속 변형/외형 검사를 별도로 판단한다. [Blender5.1 공식 Data Transfer API](https://docs.blender.org/api/5.1/bpy.types.DataTransferModifier.html)
+
+### Quad 실행 구간의 종료 결과
+
+[실제 실패·소스·미실행 경계](../review/avatar-neck-integration/quad-attempt/README.md)를 보존한다. unbound fairing의6mm 이탈과 전신 Shrinkwrap 대상의 국소 거리 실패를 기록한 뒤, 기존 선택 면만 참조하는 native surface fit을 적용했다. 맞추기 전28.1mm/맞춘 후2.45µm는 다른 제작 상태이며 첫 실패나 외형을 통과 처리하지 않는다. [공식 Shrinkwrap API](https://docs.blender.org/api/main/bpy.types.ShrinkwrapModifier.html)를 확인했고5.1 직접 웹 요청의402 실패도 구별한다. 실제 설치5.1.1 실행 결과로 판단했다.
+
+Native skin 전송의 보호점 literal0 항목 추가를 발견했다. 모든 보호점의0 아닌 값 exact를 먼저 확인한 뒤 기존에 없던0만 제거했고 최종 raw 배열 exact는 유지했다. 마지막 남성 실행은 앞면·손·외부 좌표/polygon/raw skin·rest rig/PBR와닫힘0/winding0을 확인했지만 tiny2→610으로exit1이었다. 여성 제작·새원본 저장·GLB/독립재열기/전체변형/렌더/Chrome는미실행이다. 전체 제작 실패·미채택·Draft #108/Story/D2/전체1~6 미완료다.
+
+단일 복잡한 경계의Grid Fill은 이 구간에서 종료한다. 다음은 후두부·목·승모근 구간별edge 연결/경계 간격을 전문 도구에서 설계하는 보완이며, 자동smooth/ratio/tiny 허용치 완화로 반복하지 않는다. 작은 면 증가의 원인을 해당설계로 추정하는 것은 가설이므로 실제 형상·변형으로 확인해야 한다. 기존 모든파일/실패·실측/올바른시범/승인공개UI·SDK/외부운영과 별도승인 경계는 유지한다.
+
+## 실제 결과
+
+### 구간별 제작 계약 — 2026-10-10
+
+앞선 단일 Grid Fill 실패를 보존한 뒤 구간 경계를 읽기 전용으로 검사했다. 첫 검사에서 rig-local과 body-local 좌표를 바로 비교한 배치를 사용했으나, 실제 world matrix의 남성0.974273/여성1.029914 축척 차이를 확인했다. 후속 검사는 `body.world.inverse × rig.world`로 같은 메시 공간에 옮겼다. 원본 rest bone/pose/world는 변경하지 않았다. 첫 검사도 보존하며 경계 배치나 전체 리깅 승인 증거로 사용하지 않는다.
+
+후속 구간은 이 메시 공간의 neck01 시작점과 neck02 끝점을 제작용 기준으로 삼아 상부 연결·목·좌/우 어깨 연결을 분리한다. 이는 올바른 운동 각도나 실제 사람의 해부학 판정이 아니다. 각 구간의 경계점과 새 quad의 시작 모서리·열 수는 실제 기하에서 정하며, 기본 vertex index에서 임의로 시작하지 않는다. [Blender 공식 Grid Fill](https://docs.blender.org/manual/en/5.0/modeling/meshes/editing/face/grid_fill.html)의 모서리·span 설명과 설치5.1.1 동작을 대조한다.
+
+구간별 새 파일은 앞선 검사를 실제 통과한 입력 SHA에만 이어서 만든다. 원본/이전 파일 덮어쓰기, 전신 생성·remesh, 접힌 원래 표면으로 재투영해 숫자를 맞추는 방식, smooth/ratio sweep은 하지 않는다. Native quad interpolation으로 만든 새 표면의 원본 거리6mm·가중치 합0.01·외부 좌표/polygon/raw skin·rest rig/PBR·손 보존과닫힘/winding/tiny 악화 방지를 그대로 강제한다. 한 구간에서 실패하면 전체 후보로 채택하지 않고 해당 실행 구간의 실패를 정리한다.
+
+모든 구간을 통과한 뒤에만 독립 재열기·118 기술 pose·GLB/왕복·동일 조명 실제 렌더·Chrome·외형을 판단한다. 부분 원본 저장이나 하나의 구간 성공은 최종 외형/코칭/D2/전체1~6 완료가 아니다. Blender MCP addon 상태 조회는 연결 오류였으며 live 사용자 작업은 건드리지 않고 독립 native 실행을 사용한다. UI 최소 문구·실측/시범·SDK/개인정보/운영·별도 승인 경계는 유지한다.
+
+#### 안쪽 경계 연결띠의 제작 계약
+
+상부 연결의 첫 native curvature 실행은 원래 표면에서7.0775mm 이탈해 저장 전 실패했다. 같은 실패 상태를 중립 조명에서 실제 렌더한 결과 남성 뒤쪽에 굴곡이 남았다. 여성은 이 실행에서 편집하지 않은 비교 원본이며, 성공 후보가 아니다. 후속 simple interpolation도6.1030mm로 실패했다. 허용 거리6mm를 높이지 않았다. 모서리 검사에서 지정한4개 중2개 대신 다른 점이 native quad 모서리로 쓰였으며, 맞은편 경계의 점 수 차이를 확인했다. 실행 소스/실패/진단 렌더를 보존한다.
+
+후속은 원래 불균등 경계를 그대로 둔 채 **새 안쪽 경계만 맞은편 점 수가 같은 구조**로 만들고 Blender native Bridge로 연결띠를 잇는다. [공식 Bridge Edge Loops](https://docs.blender.org/manual/en/5.1/modeling/meshes/editing/edge/bridge_edge_loops.html)의 서로 다른 경계 점 수 연결을 참고하되 실제 설치 결과로 판정한다. 연결띠는 원래 깨끗한 경계의 누적 길이를 따르는 새 점에만 제한하고, 안쪽 native simple grid의 모서리 표식4개가 실제 모두 일치해야 한다. 새 grid 전체를 접힌 원래 면으로 재투영하거나 smoothing으로 거리 검사를 맞추지 않는다. 보호점·6mm·skin·tiny·닫힘·리그 등 이전 조건은 그대로다. 실패하면 해당 제작 구간을 종료·보존하며 새 원본/GLB/전체 변형/Chrome 미실행을 구별한다.
+
+#### 이 실행 구간의 종료 결과
+
+[실제 구간별 실패·진단 렌더·보존](../review/avatar-neck-integration/segmented-attempt/README.md). 마지막 연결띠 실행은 원래 경계218점·안쪽36/55/36/55를 구성했으나 native 실제 모서리 표식0/0/1/3이 지정1/2/3/4와 달라 exit1이었다. 저장0·여성 제작/새 GLB/독립재열기/전체 변형/Chrome/이 연결띠 렌더 미실행이다. 기존 curvature 상태의 진단8컷을 새 후보의 성공/외형으로 쓰지 않는다. 거리/tiny/raw skin/rig 기준은 그대로이며 Draft #108의 외형 P2는 미해결이다.
+
+설치5.1.1의 `bmesh.ops.grid_fill`·`bridge_loops` API를 별도 native에서 읽기 전용 확인했다. 닫힌 경계의 자동 순회 방향은 [동일 버전 native 구현](https://github.com/blender/blender/blob/v5.1.1/source/blender/editors/mesh/editmesh_tools.cc)과 대조했다. 다음은 두 열린 맞은편 경계를 직접 지정하는 제작 설계이며 이번에는 미실행이다. 같은 span/offset을 반복하거나 모서리 guard를 삭제하지 않는다. 보호·실제 외형/실측/시범·공개 UI·SDK/운영 및 전체1~6 필수 조건은 유지한다.
+
+### 명시적 두 경계 제작 계약 — 2026-10-10
+
+기존 구간별 실패와42개 증거는 동결한다. 별도 `author_explicit_patch.py`에서 native `grid_fill`에 맞은편의 열린 두 경계를 직접 지정한다. 자동 span/offset·선택 순회에 의존하지 않고 새 안쪽 경계의 나머지 두 면만 연결 경로여야 한다. [설치 버전의 공식 native 구현](https://github.com/blender/blender/blob/v5.1.1/source/blender/bmesh/operators/bmo_fill_grid.cc)을 GitHub API로 읽기 전용 확인했다. web 직접 요청은 cache miss였으며 성공으로 세지 않는다.
+
+같은 네 모서리1/2/3/4·6mm·가중치 합·tiny·닫힘/winding·보호점/원래 면/손/raw skin·rest rig/PBR 조건을 유지한다. 격자 전체의 원래 접힌 표면 재투영/전체 인체 생성·remesh·스무딩 sweep은 하지 않는다. 남녀 저장 전 통과 뒤에도 독립 재열기·전체118 기술 pose·GLB 왕복·동일 조명 실제 외형/Chrome·실측/시범과 전체1~6 기준은 별도로 충족해야 한다. 실패 시 새 원본을 저장하지 않고 source/로그/JSON을 보존한다. 공개 웹/카메라·임상 판정·SDK·개인정보·운영 변경0·UI 최소 문구 원칙을 유지한다.
+
+명시적 simple 격자는 실제 네 모서리1/2/3/4를 따랐지만 첫 거리6.031mm에서 실패했다. 저장 금지 진단 모드에서 전체 새 점을 읽은 결과 최대22.502mm·6mm 이상1416점이었고, 실제 뒤/측면 렌더에서도 후두부의 부피가 평탄화됐다. 첫 실패값은 전체 최대가 아니다. 단순 허용치 상향이나 core 재투영으로 해결하지 않는다.
+
+후속 `author_curved_patch.py`는 경계/모서리 연결과 보호 조건을 고정한 채 native의 경계 곡률을 사용하는 보간 알고리즘을 적용한다. 공식 구현은 simple의4방향 가중 평균과 경계 단면 변환 보간을 구별한다. 실제 후두부 부피가 유지되는지는 가설이므로 별도 원본 저장 전 검사와 외형으로 확인한다. 이 bounded 알고리즘 비교는 강도/span/offset/허용치 sweep이나 이전 실패 반전이 아니다. 기존 실행 소스·진단 렌더와 모든 실패를 보존하며 최종1~6/별도 승인 기준은 유지한다.
+
+#### 명시적 두 경계 구간의 종료
+
+[실제 형상·실패·보존](../review/avatar-neck-integration/explicit-attempt/README.md). 곡률 실행은 남성 최대4.243mm·앞면/손/외부/raw skin/rest rig/PBR·닫힘0/winding0을 확인했으나 tiny2→3으로exit1이었다. core 면180개의 뒤틀림 관찰과 실제 뒤/측면 접합 주름도 남는다. 두 진단의 실제16PNG는 실패 상태이며 여성은 편집하지 않은 원본이다. 저장 금지 진단/원래 실패 exit1·원본 보존을 확인했고, 새 Blender 저장/여성 제작/GLB/독립재열기/118 기술 pose/Chrome는미실행이다. Draft/외형P2/Story/D2/전체1~6미완료다.
+
+두 경계만의 simple/curvature 보간은 여기서 종료한다. 다음은 내부 단면·접선·전문 원래 형상의 표면 흐름을 기준으로 조형하기 위한 읽기 전용 확인이다. 거리 검사만으로 새 격자를 채택하거나 tiny 하나만 지워 외형을 통과시키지 않는다. 로컬 addon 연결은 실제 오류로 비차단 요청했으며 사용자 장면·비용/새 계정/시크릿/telemetry를 변경하지 않았다. 독립 작업·최소 문구·전체1~6 필수 기준과 별도 승인 경계는 유지한다.
+
+#### 원래 전문 형상의 내부 단면 확인
+
+[읽기 전용 실행·보존](../review/avatar-neck-integration/reference-sections/README.md). 별도 private BMesh의 native plane cut으로 남녀 각각5개 내부 단면을 검사했고 모든10개에서 하나의 닫힌 단순 loop를 확인했다. 실제 native exit0·입력 SHA 불변이며 원래 장면 되쓰기/저장·새 표면 저작0이다. 같은 메시 공간의 뒤쪽 깊이는 남성20.368~48.955mm/여성5.305~45.604mm였다. 이 원본 기하 관찰은 내부 부피를 참고하는 다음 설계의 자료이며 사용자 좌표·정상 범위·코칭 각도·외형/제작 승인이 아니다. 이전 실패/42개 manifest는 변경하지 않고 새5개 증거를 별도 보존한다. 내부 단면 기반 저작·원본/GLB/변형/Chrome·실측/시범은 여전히 미실행이고 외형 P2/전체1~6 완료 조건은 유지한다.
+
+CEO의 최소 문구 요구도 유지한다. 제품 화면은 아바타 중심, 동작명·핵심 피드백·명확한 버튼 문구만 짧게 두고 자세한 설명은 펼쳐보기로 제공한다. 안전·카메라 권한·개인정보 고지는 생략하거나 모호하게 줄이지 않는다. 이번 저작 보완은 공개 화면을 변경하거나 미승인 화면 구성을 확장하지 않는다.
+
+### 원본 단면 기반 표면 제작 계약 — 2026-10-10
+
+최신 main a466528·Draft #108 HEAD48cf6f4/체크 없음·CLEAN을 재확인했다. 이전 명시적 simple/curvature 보간과 실행 소스·모든 증거는 동결한다. 새 `author_sectioned_patch.py`는 원본 내부 단면으로 부피를 안내하고 native Grid Fill은 연결 생성에만 사용한다. 상부 후두부에 한정하며 다른 목/어깨 구간은 같은 모델링 원리를 검증한 뒤 별도로 다룬다. 전체 인체를 코드로 만들거나 전문 구조를 지우지 않는다.
+
+원래 전문 입력ce8887d의 private BMesh에만 native plane cut을 적용해 각 새 행의 실제 뒤 단면을 읽는다. 하나의 닫힌 loop·뒤 단면의 단일 단조 열린 곡선·접힌 원래 면을 가이드로 쓰지 않는 조건을 강제한다. native quad의 그래프 거리를 통해 행/열을 확인하고 각 점을 해당 원래 곡선의 깊이에 놓는다. 경계만 보간하거나 접힌 표면에 core 전체를 재투영하지 않는다. 앞면/손·보호 외부 점/polygon/raw skin·rest rig/world/PBR exact·6mm 제작 예산·가중치 합0.01·닫힘/winding/tiny 악화 방지와 **새 core의 모든 면이 뒤쪽을 향하는 조건**을 유지한다. 이 기하 조건은 의료적 판정 임계값이 아니다.
+
+저장 금지 진단은 통과 여부와 무관하게 모델을 저장하지 않는다. 원본/이전 후보는 덮어쓰지 않는다. 남녀 부분 저작이 통과해도 전체 아바타 완성이 아니며, 독립 재열기·전체118 기술 pose·GLB/왕복·실제 외형/Chrome·실측/올바른 시범·D2와전체1~6 검증은 별도 필수다. 미완성 후보는 공개 제품에 적용하지 않는다. MCP 연결은 이번에도 실제 오류이고 live 사용자 장면/계정·비용·시크릿·telemetry 변경0이며 독립 native 제작을 진행한다. UI 최소 문구와 별도 승인 경계는 유지한다.
+
+#### 네 모서리 대응 연결띠 보완 계약 — 2026-10-10
+
+이전 부분 후보7481c5f와 실행 소스/30개 증거는 동결한다. 별도 `author_sectioned_ribbon.py`에서 원래 입력ce8887d를 다시 열고 기존 native 단면 부피를 유지한다. 네 모서리 대응을 고정한 네 쌍의 열린 경계를 native Bridge로 잇는다. [동일 버전 공식 구현](https://github.com/blender/blender/blob/v5.1.1/source/blender/bmesh/operators/bmo_bridge.cc)은 열린 경계와 점 수 차이를 처리하지만 닫힌 경계에는 자동 최적 회전이 적용됨을 GitHub API로 확인했다. web 직접 읽기는 cache miss였다. 실제 설치5.1.1의 별도 private mesh probe로 지원과 양끝 대응을 검증한 뒤 전문 메시에서 실행한다.
+
+연결띠 전체의 뒤 방향·원래와 같은 X/Z2178개 표본의 추가 뒤 교차 금지 조건을 저장 전에 추가한다. 이 제작용 표본 검사는 전체 교차 없음이나 임상 정확도 증명이 아니다. 원래 보호 영역/외부 polygon/raw skin/리그/history/PBR·6mm·skin 합0.01·tiny/닫힘/winding 기준은 유지한다. 새 파일 저장/독립 재열기/실제 고정 외형·GLB/전체 변형/Chrome는 각각 실제 실행 결과로 구별한다. 실패 시 저장 전 중단·원래 실패 보존·Draft 유지이며 전체 아바타/1~6 완료로 표시하지 않는다. 공개 제품·카메라/SDK/운영 변경0·최소 UI 문구·별도 승인 경계는 유지한다.
+
+#### 원래 투영 영역 기반 연결띠 계약
+
+네 쌍의 native Bridge 실행은 저장 전에 남성 연결띠 방향 검사 실패(exit1·저장0)로 종료했다. 모서리 대응은 맞았지만 Y음수 면68·새 뒤 중복 교차118개가 남았다. 저장 금지 재현에서 새 점19개가 원래 교체 영역의 X/Z 다각형 밖에 있음을 확인했다. 양끝 대응만이 결함 원인의 전부는 아니다. 이 실패와 실행 소스·진단8컷은 별도 보존하며 여성은 편집하지 않은 원본 비교다.
+
+별도 `author_sectioned_domain.py`는 원래 선택 경계가 각 행과 만나는 두 X값을 native 전문 단면의 폭에 함께 반영한다. 각 새 행은 원래 교체 영역 안으로 제한하고, 전체 연결띠는 native `triangle_fill`의 투영 영역 채움으로 만든다. 별도 private mesh probe에서 실제 내부 구멍 보존·입력 좌표 exact·면적과 뒤 방향을 확인했다. [공식 API](https://docs.blender.org/api/5.1/bmesh.ops.html#bmesh.ops.triangle_fill) 직접 요청의402 오류와 설치된5.1.1 actual doc/실행은 구별한다. 교체 영역/앞면/원래 경계/리그·6mm/skin/tiny/닫힘·추가 뒤 교차 금지와 외형/전체 변형/GLB/Chrome/실측·전체1~6 기준은 그대로다. native 연결 방식 변경이 합격이나 출시를 뜻하지 않는다.
+
+투영 영역 시험은 원래 행이 단일 구간이라는 가정에서 exit1·저장0으로 중단했다. 별도 `author_sectioned_interior.py`는 여러 구간을 무시하거나 min/max로 합치지 않고, 원래 X/Z 다각형의 짝지은 교차 중 x=0을 포함하는 유일한 실제 내부 구간만 각 행의 폭으로 쓴다. 관찰된 모든 구간도 보고서에 남긴다. 새 점 전체와 새 면 중심의 원래 투영 내부 포함 조건을 추가한다. 이는 임계값/원본 보호를 완화하는 변경이 아니라 잘못된 단일 구간 가정 대신 실제 원래 내부를 쓰는 설계다. 기존 native 단면 단순 loop/단조/기존 접힌 면 제외·뒤 방향/교차/tiny/6mm/raw skin/rig·외형/전체 검증은 유지한다. 이전 시험과 여성 미실행은 보존한다.
+
+읽기 전용 원본 경계 검사에서 남성의 전역 zmax 기반 마지막 행이23개 조각으로 나뉘며 중앙 내부가 없음을 확인했다. `inspect_patch_domain.py`는 남녀 원본 경계의 아래쪽 arc 최고점/위쪽 arc 최저점으로 공통 내부 높이 구간을 읽었고, 모든 새37/32개 행에 유일한 중앙 내부가 있었다. 검사 첫 실행의 lint 변수 바인딩 오류는 보완했으며 원래 보고서/실행 소스는 보존하고 별도 native 재실행을 한다. 이 원래 기하 관찰을 새 표면 합격으로 세지 않는다.
+
+별도 `author_sectioned_clear_band.py`는 이 실제 원래 arc의 안쪽 높이를 core span으로 사용한다. 원래 교체 영역·보호 경계/원본·메시 부피/리그를 바꾸지 않고 core 주변 연결띠를 native 투영 영역 채움으로 잇는다. 원래 전문 단면·중앙 내부·새 점/면 중심 내부 포함·뒤 방향/추가 중복 교차/tiny/6mm/raw skin 등 보호 조건은 유지한다. 실패한 이전3개 저작기를 고쳐 성공으로 바꾸지 않으며 실행 결과·외형·후속 전체 검증을 따로 기록한다.
+
+#### 연결띠 보완 구간의 실제 종료
+
+[실제 실패 외형·원래 경계·소스/로그·미실행](../review/avatar-neck-integration/ribbon-attempt/README.md). 네 쌍 연결·투영 단일 구간·중앙 내부·공통 내부 높이의4개 저작 시험은 모두 저장 전 exit1로 종료했다. 마지막 시험은 새 점2072개 전부 내부/core1980면 뒤 방향·거리8.942µm를 관측했지만 면 중심4개가 원래 내부 밖/연결띠 Y음수12·뒤 중복 교차48개가 남았다. 실제 실패 렌더16컷을 모두 직접 검수했고 여성은 편집하지 않은 원본 비교다. 새 모델 저장0·skin/최종 보호·독립 재열기/GLB/118 pose/Chrome 미실행이며 이전 성공을 복사하지 않는다.
+
+읽기 전용 원래 경계의 최종 native 재실행은 exit0이고 남녀37/32행의 공통 내부를 확인했다. 이 관찰과 private mesh native probe를 인체/외형 성공으로 세지 않는다. 처음 검사의 lint 변수 바인딩 오류와 첫 보고서/소스는 보존했다. MCP 연결은 이번에도 실제 오류이고 사용자 장면/계정/비용/시크릿/telemetry 변경0이다. 다음은 원래 투영 경계와 설치 native 제약 삼각분할의 보존 조건을 확인하는 설계이며 이번에는 미실행이다. 동일 허용치/원본·품질 보호·최소 UI 문구·외형 P2/전체1~6/별도 승인 경계를 유지하며 Draft 병합은 하지 않는다.
+
+#### Native 제약 연결띠 계약 — 2026-10-10
+
+읽기 전용 `inspect_projected_constraints.py`의 실제 Blender5.1.1 실행은 남녀 원래 선택 영역의 비인접 X/-Z 경계 교차0·원래 선택 면 Y음수0·원본 body/rig snapshot exact를 확인했다. Native CDT는 원래218/230점을 삽입·병합·좌표 이동 없이1:1로 돌려주고 모든 경계 edge를 유지했다. 이는 새 조형이나 외형 합격이 아니라, 원래 경계의 겹침이라는 가설을 분리하는 증거다. 기존 채움의12개 음수 면은 원래 경계 자체 때문에 필연적인 것으로 판단하지 않는다.
+
+별도의 private 비인체 오목 annulus probe가 설치된 `mathutils.geometry.delaunay_2d_cdt`로 경계·안쪽 구멍·면적·입력3D 좌표 exact·뒤 방향을 실제 확인했다. [공식5.1 API](https://docs.blender.org/api/5.1/mathutils.geometry.html#mathutils.geometry.delaunay_2d_cdt)의 origin/이동·병합 가능성 설명과 설치된 actual doc을 대조했고, 직접 웹 열기402 오류는 성공으로 세지 않는다. 원래 실패한 `triangle_fill` 저작기는 바꾸지 않는다.
+
+별도 `author_projected_ribbon.py`는 기존 실제 전문 단면/공통 내부 높이/core native Grid Fill을 유지하고 **연결띠의 연결만** 검증된 native2D 제약 인덱스로 정한다. 원래 경계·안쪽 점의 실제3D 좌표는 이동하지 않고, CDT의 새 점/병합/미세 이동/경계 분할·추가/손실을 거부한다. Core 내부의 CDT 삼각형만 구별해 제외하고 원래 안쪽 edge·annulus 면적·edge incidence·외부 보호·6mm/skin/raw rig/history/tiny/닫힘/winding/내부 포함/추가 뒤 교차 금지를 모두 유지한다. 이는 전신 코드 생성·remesh·의료 임계값 변경이 아니다.
+
+실제 저작/독립 재열기·전체118 pose/GLB/Chrome/같은 조건 렌더와 외형·실측을 따로 판단한다. 국소 성공만으로 기존 목–어깨·D2/전체1~6을 통과시키지 않는다. 실패 시 새 파일 저장 전 중단하고 원래 파일과 실제 실패·미실행을 보존한다. 공개 제품·UI/카메라/SDK/개인정보·운영 변경0·최소 문구·별도 승인 경계와 Draft #108 병합 보류는 유지한다.
+
+#### 제약 연결띠의 실제 결과
+
+[새 부분 원본·실제8컷·남은 외형/미실행](../review/avatar-neck-integration/projected-attempt/README.md). 남녀 저작과 독립 재열기는 실제 exit0로 새 부분 원본2932e63d를 저장했다. 보호 영역/raw skin/history/rig/PBR/손·닫힘/winding/tiny 조건을 유지했고 전체 연결띠Y음수/원래 투영 밖 점·면 중심/추가 뒤 교차0을 확인했다. 실제 모든8컷에서 이전 검은 틈은 사라졌지만 목 아래·어깨의 거친 표면은 남아 외형 P2·미채택이다. 새 원본의GLB/전체118변형/Chrome/실측·전체1~6은 미실행/미완료이며 과거 QA를 복사하지 않는다. 원래 입력·모든 frozen 실패·부분 후보/증거를 보존하고 다음 목–어깨 구간 설계로 이어간다. 공개 웹/운영 변경0·Draft 유지다.
+
+#### 앞면 보호 목 중앙 보완 계약 — 2026-10-10
+
+새2932e63d를 읽기 전용 확인한 결과 원래 목/어깨에 큰 native dihedral이 남았고 rest pose는 identity·custom normals는 없었다. Rest 평가 차이는 남성2.265µm/여성0.242µm이며 단순히 애니메이션 문제로 단정하지 않는다. Y>0은 실제 뒤 표면과 같지 않다. 앞에서 실제 ray로 보이는 원래 면을 제외하면 여성 목/남녀 어깨의 경계는 복수 hole과 투영 교차로 native CDT 점 삽입이 생겼다. 이를 원래 점에 반올림하거나 앞면을 수정해 통과시키지 않는다. 기존 실패와2932e63d·앞면/머리/가중치/리그를 보존한다.
+
+목은 중앙·좌·우로 분리해 설계한다. 중앙은 원래 신장 기준X±0.025/neck01 head~neck02 tail의 실제 선택 면이며 남성183/여성148점의 단일 경계·CDT1:1·앞면 포함0이었다. 이 값은 제작용 구간이며 사용자/해부학 정상 범위가 아니다. 별도 `author_neck_center.py`로 **중앙만** 새 원본에서 국소 재연결하고, 좌/우·어깨는 여전히 남은 문제로 둔다. 이 분할은 전체 외형 목표의 축소나 D2 통과가 아니다.
+
+새 guide는 native 전문 단면의 min/maxX 사이 두 실제 arc를 읽어 뒤 arc를 구분하고 그 실제 외곽 위치로 native quad core를 배치한다. 원래 접힌 단면/외삽은 거부하며 기존6mm·skin합0.01/뒤 방향·새 내부 포함/추가 중복 교차/tiny/닫힘·외부 원래 polygon/좌표/raw skin/history/rest rig/PBR/손 exact를 유지한다. 원래 보이는 앞면은 추가 보호하고, 이전 후두부 point INT provenance도 유지한다. 전신 생성·remesh·same smooth/ratio sweep·의료 판정 변경0이다. 원래 파일/모든 증거를 덮어쓰지 않는다.
+
+각 원본의 실제 저작/독립 재열기·같은 조건 외형은 별도 판단한다. 모든 남은 구간 통과 후 새 최종 원본/GLB/118변형/Chrome/외형·실측을 재검증해야 한다. 국소/원시 읽기 전용 검사로 전체 성공을 주장하지 않으며 공개 UI/SDK/개인정보·운영 변경0·최소 문구·Draft/외형 P2/전체1~6 미완료와 별도 승인 경계를 유지한다.
+
+#### 앞면 보호 목 중앙의 실제 결과 — 후속 검증 미실행
+
+[새 부분 원본·실제 결과·검증 제한·보완 의존성](../review/avatar-neck-integration/lower-attempt/README.md). native 남녀 저작 exit0로 부분 원본be038c04를 저장했다. 중앙3428/3191면·새1470/1152점, 원래 표면 거리 최대23.299/15.725µm, 원래 앞면97668/98727면·외부 좌표/raw skin/위상·이전point provenance/rig/PBR/손 보존을 제작 프로세스 안에서 확인했다. 전체 연결띠336/280면의 뒤 방향·tiny·원래 내부 포함·추가 교차 검사와 닫힘/winding 조건을 유지했다. 실제 사람 정확도나 전체 외형 완료가 아니다.
+
+새 원본 렌더 요청은 자동 승인 검토의 사용량 제한으로 **프로세스 시작 전 거부**되었다. native exit코드/새 미리보기는 없고 독립 재열기·GLB/118변형/Chrome도 미실행이다. 다른 경로로 승인 검토를 우회하지 않는다. 새 원본/실제 로그·초기 정적 실패를37개 보존 증거로 기록했고 재열기 helper는 준비만 했다. 앞선2932e63d8컷·ce8887d QA를 새 검증으로 복사하지 않으며 목 좌/우·어깨·전체1~6 미완료/P2/Draft/미채택을 유지한다. 제한 해소 후 현재be038 검증부터 이어가며 같은 저작을 중복 시작하지 않는다.
+
+#### 단면 제작 구간의 실제 결과
+
+[부분 원본·실제 외형·성공/실패·검증 미실행](../review/avatar-neck-integration/sectioned-attempt/README.md). 남녀 각각37/32개 native 단면 행의 부분 제작과 독립 재열기는 실제 exit0였다. 새 점의 원래 선택 표면 거리 최대1.122/1.255mm·앞면/손/외부 좌표/polygon/raw skin/history/rest rig/world/PBR exact·닫힘0/winding0/tiny2→2/0→0을 확인하고 새 부분 후보7481c5f를 저장했다. 기존 입력/모든 실패 증거는 불변이며 전체 아바타 저작 완료가 아니다.
+
+실제 고정 조건 남녀8컷을 모두 검수한 결과 머리 부피는 유지됐으나 연결띠에 점상 접합선이 남아 외형 P2다. 읽기 전용 native 검사에서 원래 뒤 표면 중복 교차0 대비 새 남성45/여성44개·최대3회와 연결띠 Y음수 면60/66개를 관찰했다. 원래 선택 표면 거리나 닫힘만으로 접힘이 해결된 것은 아니다. 다음 보완은 네 모서리 대응을 고정한 구간별 연결띠 설계와 교차 방지 검사이며 아직 미실행이다. 원래 목·어깨 마감도 미완료이며 전체 결함의 원인을 모두 규명했다고 주장하지 않는다.
+
+원래 입력의 후보 거부/저장된 후보 덮어쓰기 거부 음성 시험은 실제 exit1이고 바이트 불변이다. 부분 제작/재열기·8렌더·읽기 전용 검사를 GLB/왕복/전체118 pose/Chrome/실측/올바른 시범 완료로 세지 않는다. `engineering:code-review`는 연결띠 외형 P2로 Request Changes, Draft/병합 보류다. 공개 제품·임상/SDK/개인정보·운영 변경0·UI 최소 문구·전체1~6 필수 기준/별도 승인 경계는 유지한다.
+
+[Draft PR #108](https://github.com/HSU-OAS/bodyguard/pull/108)에 source d93e0b5와 실제 검증·새 편집 원본/GLB를 기록했다. 외형 P2 때문에 병합하지 않는다. 새 worktree는 app 호출의 Not a git repository/수동 worktree 미관리 판정으로 일반 Git worktree를 사용했고, PR 앱 첨부는 기존100개 한도 때문에 실패했다. 기존 첨부를 지우거나 등록 성공으로 표시하지 않는다.
+
+[실제 원본/GLB·미리보기·기술 성공/외형 실패·보존 증거](../review/avatar-neck-integration/README.md)에 기록했다. 원본 보호/독립 재열기·원본과 GLB 왕복 각각118 기술 pose/121행·34PNG, Chrome155 남녀 두 rig/전신 움직임/종료를 실제 실행했다. 같은 조건 전후 검수에서 뒤 목–어깨 패치/관절 마감은 미달이므로 **외형 P2·Story 미완료·새 후보 미채택·Draft PR/병합 보류**다. 모델링/리깅 정답·원본/실제 사람의 자세 정확도나 출시 완료를 증명하지 않는다.
+
+기존 최신 참조/여성 무의상 요구를 원래 제작 계약에 기록했다. 공개 JS/CSS/문구와 운영은 unchanged, 기존 Draft #9 HEAD/1959개 작업 상태/입력 SHA를 보존했다. 미실행 API/SQL/전체 DOM/실제 사람/공급자/HTTPS·새 파일 원본의 expert 검토는 명시했다. 다음 보완은 같은 smooth 강도 반복이 아니라 실제 남은 접합·변형 결함의 전문 메시 연결/표면 설계여야 한다.

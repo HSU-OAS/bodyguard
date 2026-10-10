@@ -1,5 +1,35 @@
 # 2단계 필수 보완 이월 및 후속 실행 순서
 
+## 현재 D2-A 실행 지점 — 2026-10-10
+
+새 전문 메시 저작은 [자동 승인 검토의 두 차단과 CEO 최종 선택](review/avatar-neck-integration/lateral-native-deform-deferred.json)으로 미실행/null·후보0이다. 독립3~6 구현 PR은 전체 단계 통과/조건 충족의 증거가 아니므로 우회하지 않았다. 같은 질문의 두 응답 중 마지막 “아바타는 보류하고 독립 웹 작업 진행”을 적용하며 앞선 승인으로 실행하지 않는다. [설치 native API probe](review/avatar-neck-integration/native-deform-probe-confirmed/README.md)의 실제0은 비인체 도구 확인만이며 첫 초기화 SIGSEGV/null도 보존했다. helper/runner·명세/정적 검사와 실제 제작을 구별한다. 기존 결과 보존 뒤 다른 승인 범위의 독립 웹 작업을 계속하며 외형P2/Draft·D2/전체1~6·최소 문구/별도 승인 기준은 그대로다.
+
+### 이전 전이·core 진단 — 보존
+
+[연속 전이](review/avatar-neck-integration/lateral-transition/README.md)는 보호/skin/rig/위상/tiny 통과에도 접힘3개로 실제 native1·저장0이다. 초기 준비 실패는 native 미실행/null로 별도 보존하고 여성 제작·후속 원본/GLB/변형/Chrome·실측도 미실행이다. 같은 실패의 실제 읽기 전용 진단0은 원래 core27점의 선택/앞면 보호·유일한 전문 대응을 확인했다. 다음은 native 제한 변형/설치 API probe이며 아직 새 저작하지 않았다. 기존 실패/원본·감쇠 반복 종료·외형P2/Draft/미채택·D2/전체1~6/최소 문구·별도 승인 기준은 유지한다.
+
+### 이전 경계 진단 — 보존
+
+[복원 경계 대조](review/avatar-neck-integration/restored-boundary/README.md)는 동결 반려 exact·실제 진단exit0/새 저장0이다. 원래 정상 연결에서 선택 밖 점은 그대로 남고 세 선택점만 전문 원본으로 복원돼 경계가 뒤집혔다. 다음은 동일 보호 범위 안의 연속 전이 설계이며 아직 새 저작하지 않았다. 첫 중단 exit미확정/null과 재실행 terminal/소스·실제 증거를 분리 보존했다. 외형P2·Draft/미채택·새 GLB/변형/브라우저/실측·D2/전체1~6 미완료와 최소 문구/별도 승인 기준은 그대로다.
+
+### 이전 기준선 — 보존
+
+[A318 대조](review/avatar-neck-integration/lateral-origin/README.md)에서6면/9점의연결·skin/one-ring을유지한현재좌표변화와전문원본의정상방향을구별했다. 읽기전용exit0·4개보존증거다. [원래 전문 배치 복원](review/avatar-neck-integration/lateral-restore/README.md)은남성접힘14→1/전체보호통과에도0기준미달로exit1·저장0, 여성/새렌더/GLB/전체변형/Chrome미실행이다. 8개실패증거를보존했으며 당시 다음은남은1개edge의국소연결·선택/보호경계대조였다. 현재 결과는 위에 기록했다. 같은복원/스무딩·값sweep반복0·원본/이전실패보존·P2/Draft/미채택·D2/전체1~6완료기준은그대로다. 최소문구·안전/개인정보/별도승인경계를유지한다.
+
+[옆 목·어깨 실제 보완 실패](review/avatar-neck-integration/lateral-attempt/README.md)를 기준으로 이어간다. 세 저작 모두 남성 접힘 검사에서 저장 전 실패했고 마지막14→4·원본 보호 통과와 실제 외형 미달을 구분한다. 반려 남성/변경 없는 여성8컷과39개 증거를 별도 보존했다. 여성 저작·새 후보/GLB/전체변형/브라우저는 미실행이다. 입력be038c04·이전37개 체크포인트와17개 독립 검증·모든 과거 원본/실패를 보존하며 이전 기술 성공을 복사하지 않는다.
+
+[남은6면 실제 진단](review/avatar-neck-integration/lateral-faces/README.md)은 원래부터 접힌 삼각면/quad·삼각화 미해결을 확인했다. 초기 API 가정 오류exit1을 지우지 않고 별도 설치 API probe/후속 진단exit0·원본/여성/private probe exact·새 후보0의12개를 구분한다. 다음은 원래 전문 원본의 국소점 출처/배치·연결/표면 연속성 대조와 보완 설계다. 동일 중앙/Laplacian·단위·계산 삼각화 반복은 하지 않는다. 새 최종 원본/GLB·변형/브라우저/외형·실측 통과가 필요하다. 이전 main a466528/PR3baf61e의 CLEAN·체크 없음 관찰을 새 HEAD 검증으로 대신하지 않는다. 외형P2로Draft #108은 병합하지 않는다. D2-M/T/R/I/P·1~6 필수 기준·최소 문구는 그대로다. 새 독립 Story는 최신main 확인부터 한다. 비용/계정/시크릿/운영DB/배포/출시·중요 안전/개인정보 변경은 별도 승인이다.
+
+## 이전 시점 기록 — 보존
+
+2026-10-10 [목 중앙 후보 실제 검증](review/avatar-neck-integration/lower-verification/README.md)은 독립 재열기/보호 통과·8컷 외형 미달이었다. 검증 보존e47bd74/c17bff4를 원격에 푸시하고 PR588파일 상태/blob·CLEAN/체크 없음과 본문/작성자 검토 반영을 확인했다. 이17개 증거와 기존37개 체크포인트는 당시의 실행/미실행 플래그 그대로 보존한다.
+
+2026-10-10 [S2.A1 국소 quad 실패](review/avatar-neck-integration/quad-attempt/README.md): 마지막 남성의 앞면·손·외부 좌표/raw skin/polygon·rest rig/PBR 보호와닫힘0/winding0을 확인했으나 tiny2→610으로저장전실패했다. 여성 제작·새원본/GLB/118변형/렌더/Chrome는미실행, 기존파일/실패보존·Draft #108/미채택·D2-A/전체1~6 미완료다. 단일Grid Fill 반복은종료하며 다음은후두부/목/승모근구간별표면/edge설계다. 실측·시범·승인공개구조/SDK·운영/별도승인과최소문구기준은유지한다.
+
+2026-10-10 [S2.A1 후속 위상 실패](review/avatar-neck-integration/topology-attempt/README.md): male 일부 보호/닫힘 검사는 통과했으나 female 보호 면 검사3개 누락으로 남녀 전체 제작 실패다. 새원본 저장0·GLB/변형/Chrome 미실행, 기존후보/실패 보존·Draft #108/미채택·D2-A/전체1~6 미완료다. 자동collapse 반복은 종료한다. 다음은 접합부 국소 표면/연속 edge 재설계이며 원본·리깅/실측·올바른시범·공개UI/SDK·운영 완료 기준과 별도 승인 경계를 유지한다.
+
+2026-10-10 최종 통합·수정의 [S2.A1 얼굴–목 표면 보완](stories/avatar-neck-integration.md)을 시작했다. 3→4→5→6의 독립 구현/검증 뒤 D2-A의 새 후보를 별도로 제작한다. 실제 단계3~6/전체1~6 통과 선언은 아니다. 원본·GLB·변형·Chrome 기술 검사는 외형 승인/실제 사람 정확도의 대체물이 아니며, 마감 P2·실측·올바른 시범·승인 공개 UI/SDK·외부 운영 조건이 남는다. 기존 Draft #9/원본·실패·A37 기본값과 별도 승인 경계를 유지한다.
+
 2026-10-09 [S6.19](stories/owned-native-warmup.md)는 로그인 소유 첫 추론 준비를 실제 Auth/API/SQL에 연결해 준비 판정/적립/기록0·권한 취소/늦은 결과·새 소유자·기존 코칭/본인 기록 경계를 확인했다. [실제 흐름과 실패/미완료](review/owned-native-warmup/README.md). 단일5초의 기본26/준비42와 로컬 품질 검사는 통과했으나 SDK CSP 차단 시도·기존 시작P2·실제 참여자/정확도·최종 외형/시범·승인 공개 UI/SDK·D2 및 전체1~6은 미완료다. 공개 byte/최소 문구·기본 thread/모델/화질·원본/GLB/조형·운영과 별도 승인 경계 유지.
 
 2026-10-05 · CEO 우선순위 변경 · 2단계 미완료 유지

@@ -1,5 +1,39 @@
 # Bodyguard — Tasks
 
+## 현재 실행 지점 — 2026-10-10
+
+새 전문 아바타 저작은 **실행 보류**다. [자동 승인 검토 차단과 CEO 최종 선택](review/avatar-neck-integration/lateral-native-deform-deferred.json)에서 3~6단계 전체 완료가 입증되지 않아 같은 부위의 새 제작 조건 미충족으로 두 번 거부됐다. 두 시도 모두 프로세스/새 모델0·native exit=null이며 우회하지 않는다. 독립 구현 PR 병합을 단계 전체 완료로 간주하지 않는다. 같은 질문의 두 CEO 응답 중 마지막인 **“아바타는 보류하고 독립 웹 작업 진행”**을 적용한다. 앞선 “최종 통합 아바타 보완 진행 승인”으로 실행하지 않는다. 기존 결과 정리·보존 후 새 저작 없이 독립 웹 작업으로 넘어간다. 전체 goal을 중단하거나 완료 처리하지 않는다.
+
+[실제 설치 API probe](review/avatar-neck-integration/native-deform-probe-confirmed/README.md)는 native exit0·비인체 격자만 처리했다. 양수 anchor1/0.25 결과는 exact지만 실제 고정 오차가 있어 원본/리그·품질 증거가 아니다. 첫 초기화 SIGSEGV는 exit=null/실행 source·crash로 별도 보존했다. 새 제한 변형 helper/runner는 명세·정적 검사 단계이며 아직 전문 모델에 실행하지 않았다. 기존 최소 문구·Draft/외형P2·D2/전체1~6·별도 승인 기준은 유지한다.
+
+[연속 전이 반려/원래 core 진단](review/avatar-neck-integration/lateral-transition/README.md): 원본·외부/앞면/중앙·raw skin/rig/위상은 유지됐으나 접힘이 남아 실제 native1·저장0이다. 여성 제작/새 렌더·GLB/변형/Chrome·실측은 미실행이다. 후속 실제 진단0은 기존 core27점이 선택 안/앞면 보호 밖·유일한 전문 원본 ID임을 확인했다. 다음은 core와 보호 경계를 구별하는 전문 native 제한 변형/설치 API probe이며 아직 새 저작하지 않았다. 감쇠 수치 반복은 종료한다. 초기 준비 실패/실제 반려·같은 실패 진단을 구별해 보존하며 외형P2/Draft #108·D2/전체1~6/최소 문구·별도 승인 경계는 유지한다.
+
+### 이전 경계 진단 — 보존
+
+[복원 경계 대조](review/avatar-neck-integration/restored-boundary/README.md)는 실제 exit0·저장0이며, 원본이 아닌 선택 안/밖 점의 혼합 배치에서 남은 접힘이 생겼음을 확인했다. 다음은 원래 전문 위치의 연속 전이 설계다. 보호 범위/위상/rig·6mm·접힘0을 완화하지 않는다. 첫 중단의 미확정 종료와 후속 실제 종료/증거를 구별했으며 새 렌더/GLB/변형/Chrome·실측은 미실행이다. 외형P2·Draft #108·D2/전체1~6/최소 문구·별도 승인 경계는 유지한다.
+
+### 이전 기준선 — 보존
+
+[전문 원본 대조](review/avatar-neck-integration/lateral-origin/README.md)는 원래A318의6면 연결/winding·9점 raw skin/one-ring exact와 현재좌표0.140~2.127mm변화를확인했다. A318의해당면은normalY양수/edge최대5.705°이며현재접힘은그대로상속된것이아니다. 진단exit0·원본/남녀snapshot불변·4개증거/새모델0이다. 이어진 [전문 배치 복원](review/avatar-neck-integration/lateral-restore/README.md)은남성4149점/최대3.769mm·보호통과·접힘14→1이지만0기준미달로exit1/저장0이었다. 여성제작/새원본·렌더/GLB/전체변형/Chrome·실측은미실행이며8개증거와이전실패를보존했다. 당시 다음은남은1개edge의국소연결·선택/보호경계대조였으며 현재 결과는 위에 기록했다. 외형P2/Draft #108·D2/전체1~6미완료·최소문구/별도승인기준은유지한다.
+
+[S2.A1 옆 목·어깨 실제 보완](review/avatar-neck-integration/lateral-attempt/README.md): 세 native 저작 모두 남성 접힘 검사에서 저장 전 실패했다. 마지막 접힘14→4와 원래 앞면/좌표·위상/raw skin/rig 보호를 확인했지만 실제 마감은 미달이다. 남성 반려 상태+변경하지 않은 여성 입력의8컷과39개 증거를 보존했다. 여성 저작·새 후보·GLB/전체변형/브라우저는 미실행이다. 입력be038c04·과거 원본/실패·37개 체크포인트/17개 검증은 유지한다.
+
+[남은6면 실제 비교](review/avatar-neck-integration/lateral-faces/README.md)는 원래부터 접힌 삼각면/quad와 계산용 삼각화만으로 해소되지 않는 것을 확인했다. 최초 API 가정 실패exit1·별도 native API probe/후속 진단exit0를12개로 보존했다. 동결 반려 row와 원본/여성/private probe 보호는 exact·새 후보0이다. 다음은 원래 전문 원본의 국소 점 출처/배치·연결/표면 연속성 대조와 보완 설계다. 같은 중앙/Laplacian·단위·계산 삼각화를 반복하지 않는다. 새 최종 원본에서 외형·원본/GLB/전체변형/Chrome/실측을 실제 재실행해야 한다. [남은 보완](review/avatar-neck-integration/lateral-faces/README.md#실제-확인)을 따른다.
+
+기존 웹의 로그인·선택 준비·비공개 코칭/기록 adapter 구현과 실제 출시 사용 흐름은 다르다. 검증된 출시 동작0, 외형/시작/SDK P2·실측·승인 UI·외부 공급자/HTTPS/운영과 전체1~6은 미완료다. 공개 웹·문구 최소화·안전/개인정보·별도 승인 경계를 유지한다.
+
+이번 실행 전 최신 main a466528·Draft #108 c17bff4의 CLEAN/MERGEABLE·체크 없음을 실제 확인했다. 이 관찰을 후속 HEAD 검증으로 재사용하지 않는다. 결과 보존과 [작성자 리뷰](review/avatar-neck-integration/lateral-attempt-review.md)를 같은 미완료 Story의 Draft에 기록하고 외형P2 때문에 병합하지 않는다. 새 독립 Story는 다시 최신main·새codex/*에서 시작한다. 화면은 아바타·핵심 버튼 중심, 상세 설명은 펼쳐보기·필수 안전/카메라/개인정보 안내는 필요한 순간의 짧은 문구로 제한한다. 미승인 화면 확장은 하지 않는다.
+
+## 이전 시점 기록 — 보존
+
+2026-10-10 목 중앙be038c04의 [독립 재열기·8컷](review/avatar-neck-integration/lower-verification/README.md)은 보호 통과/전체 외형 미달이었다. e47bd74/c17bff4를 실제 커밋·푸시하고 PR588파일 상태/blob·main a466528·OPEN/Draft·MERGEABLE/CLEAN·체크 없음, [본문](https://github.com/HSU-OAS/bodyguard/pull/108)과 [작성자 재검토](https://github.com/HSU-OAS/bodyguard/pull/108#issuecomment-6093381678)를 확인했다. 이 이전 관찰을 새 HEAD 검증으로 복사하지 않는다.
+
+2026-10-10 [S2.A1 국소 quad 실패](review/avatar-neck-integration/quad-attempt/README.md): 기존 앞면/손/외부 raw skin·좌표/polygon·rest rig/PBR를 보호했으나 작은면2→610으로저장전실패했다. 여성제작/새원본/GLB/변형/렌더/Chrome는미실행·원본/실패보존·Draft #108/외형P2/D2/전체1~6미완료다. 단일Grid Fill은종료하고 다음은후두부/목/승모근구간별표면/edge연결설계다. 공개UI/최소문구/판정/운영/별도승인기준은유지한다.
+
+2026-10-10 [S2.A1 위상 보완 실패](review/avatar-neck-integration/topology-attempt/README.md): native 국소 메시 정리를 실제 실행했으나 female 보호 면 검사3개 누락으로 실패·새후보 저장0·GLB/변형/Chrome 미실행이다. 원본/실행 소스/실패 증거를 보존하고 Draft #108/미채택/외형P2·D2/전체1~6 미완료를 유지한다. 자동collapse 반복은 종료하고 후속은 전문 도구의 접합부 국소 표면/edge 재설계다. 공개UI/최소문구·판정·운영 변경0, 기존 별도 승인 경계는 그대로다.
+
+2026-10-10 [S2.A1 얼굴–목 통합 보완](stories/avatar-neck-integration.md): PR #107 실제 merge a466528/main 포함·브랜치 보존을 확인하고 최신 main의 새 codex/avatar-neck-integration에서 시작했다. 3→4→5→6의 독립 구현 뒤 이월 D2-A를 새 전문 Blender 후보로 보완한다. 기존 Draft #9의1959개 로컬 변경/삭제·보존 원본을 건드리지 않았다. 단순 반복 시안이 아니라 새 원본·GLB·전체 변형·실제 두 rig를 검증하되 미완성 외형을 채택하지 않는다. 외형 P2/실측·시범·승인 공개 구조/SDK·외부/운영과 전체1~6 게이트는 미완료이며 텍스트 최소화와 별도 승인 규칙은 그대로다.
+
 2026-10-09 [S4.D5 최소 문구·움직이는 선택 시안](stories/visual-motion-selection-prototype.md): 기존 정적 코칭→남녀 같은 제작 시험 동작 미리보기→재생/정지→배치 복귀를 별도 HTML로 연결했다. [실제 화면·실패·한계](review/visual-motion-selection/README.md). 제품 구조/공개 번들·카메라/API/판정·원본/GLB/조형 변경0. 구조 승인·출시 동작0/실측·최종 외형·기존 시작P2·SDK/외부/운영·전체1~6/D2 미완료. 좁은 시안 범위의 조건부 PR 게이트를 진행한다. PR106은 source9e1ea57·mergea44e713의 실제 main 포함/브랜치 보존을 확인했다. 이전 시점 기록은 보존한다.
 
 2026-10-09 [S6.19 로그인 소유 첫 추론 준비](stories/owned-native-warmup.md): 준비 입력을 판정/기록에서 분리하고 준비 중 권한 취소·늦은 결과·명시적 새 소유자 재시작과 본인 중단 기록 흐름을 실제 Chrome/API/격리 SQL로 검증했다. [작동 흐름·실패/리뷰 보완·실제/합성 경계](review/owned-native-warmup/README.md). 단일5초의 최종 기본26/opt-in42·로컬 품질 검사가 통과했고 증거·조건부 PR 게이트를 진행한다. 공개 구조/문구 최소화·기본 경로/모델/화질·신체 판정·원본/GLB/조형·운영 변경0. SDK CSP 차단 시도·기존 시작P2·실측/최종 외형/시범·승인 UI/SDK·D2/전체1~6 미완료 유지. PR105는 source5f6884c1·mergece137244로 main에 포함됐고 원본 브랜치를 보존했다.

@@ -1,0 +1,63 @@
+{
+  "blender": "5.1.1",
+  "input_sha256": "be038c042c8b29acf53e0877adc085fec92608e230a563b6860914a01f58e068",
+  "professional_origin_sha256": "2eb274cfce046848eced56c12646869908259b2e6a04c6e188597959f7c48fff",
+  "method": "original_professional_position_with_existing_continuous_falloff",
+  "new_falloff_parameters": false,
+  "raw_skin_rig_topology_changed": false,
+  "appearance_approved": false,
+  "clinical_or_camera_work": false,
+  "passed": false,
+  "saved_candidate": false,
+  "rows": [
+    {
+      "gender": "Male",
+      "before": {
+        "vertices": 131178,
+        "edges": 308715,
+        "faces": 177539,
+        "nonmanifold": 0,
+        "winding": 0,
+        "tiny_faces": 2,
+        "selected_faces": 8328,
+        "selected_negative_y_faces": 31,
+        "selected_dihedral_above_90": 14,
+        "selected_maximum_dihedral_degrees": 176.76812341824638,
+        "whole_professional_mesh_volume_m3": 0.06579641204091018
+      },
+      "new_points_preserved": 0,
+      "existing_falloff_range": [
+        2.8586694274738893e-08,
+        1.0
+      ],
+      "fractional_transition_points": 4092,
+      "confirmed_boundary_amounts": {
+        "126108": 0.0,
+        "128261": 0.0004021009109095103,
+        "126107": 0.0005154762697562754,
+        "128260": 0.00421753333340319
+      },
+      "after": {
+        "vertices": 131178,
+        "edges": 308715,
+        "faces": 177539,
+        "nonmanifold": 0,
+        "winding": 0,
+        "tiny_faces": 2,
+        "selected_faces": 8328,
+        "selected_negative_y_faces": 27,
+        "selected_dihedral_above_90": 3,
+        "selected_maximum_dihedral_degrees": 164.7388488935333,
+        "whole_professional_mesh_volume_m3": 0.0657972095481308
+      },
+      "selected_points": 4964,
+      "moved_points": 4119,
+      "maximum_displacement_m": 0.0037304368970043347,
+      "outside_original_coordinates_exact": true,
+      "raw_skin_topology_rest_pose_world_PBR_history_hands_attributes_exact": true
+    }
+  ],
+  "failure": "AssertionError: Transition lateral folds remain",
+  "two_input_files_unchanged": true,
+  "candidate_present": false
+}
