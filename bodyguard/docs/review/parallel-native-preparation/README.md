@@ -48,3 +48,22 @@ native task별 close 호출 수는 이 브라우저 하네스에서 따로 계�
 `engineering:debug`로 실제 순차/혼합 fallback·scope·콜드 조건을 분리했고 `engineering:code-review`로 source/diff와 소유권·옵션·abort·성능·정적 공개 경계를 검토했다. 코드 기능/회수 시험은 통과했지만 **성능 P2/채택 기준이 미해결**이므로 Draft이며 병합 승인을 사용하지 않는다. 작성자 리뷰이지 독립 리뷰어 승인이나 단계 완료가 아니다. 최신 원격 diff/head/main/CLEAN/체크는 PR 생성 후 다시 확인하고 체크가 없으면 없다고 명시한다.
 
 아바타 보류·출시 적격 동작0·미승인 공개 코칭/SDK 통신 정책·실측/참여자·기존 시작P2·SMTP/Google/Docker/HTTPS/법무/운영·전체1~6의 조건은 그대로 남는다. 후속은 실패 원인을 바꾸는 구현/분리 근거를 확보하는 것이지 동일 정상 시험을 반복해 성공만 고르는 방식이 아니다.
+
+## 2026-10-11 제한된 원인 진단과 보류 결정
+
+CEO의 빠른 진행 요청에 따라 SDK 공용 factory 호출만 계측한 별도 Worker 두 개를 만들고 ABBA 네 번으로 한정했다. 새 아바타·카메라·제품 화면·SDK 내부 속성·운영 변경은 없다. [진단 원문](diagnostic-results.json), [시험 source](diagnose.mjs), [별도 bundle 설정](diagnostic.vite.mjs)은 제품에 import하지 않는다. baseline engine은 origin/main과 byte 동일, candidate engine SHA도 기존 최종 source와 같다. 기존 bundle/실패 결과는 덮어쓰지 않았다.
+
+| 순서 | 경로 | 준비 ms | body factory ms | face factory ms | hands factory ms | CPU 재시도 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| 1 | 기존 | 386.9 | 200.0 | 78.6 | 79.1 | 0 |
+| 2 | 후보 | 297.4 | 214.3 | 242.7 | 267.5 | 0 |
+| 3 | 후보 | 298.6 | 219.5 | 233.2 | 269.0 | 0 |
+| 4 | 기존 | 299.0 | 147.1 | 62.0 | 72.1 | 0 |
+
+실제 준비·추론·clean 종료4건, 각 성공 task close1회·Worker 종료1회·frame close3회가 확인됐다. 모두 GPU 옵션으로 호출되어 fulfilled됐고 CPU factory 호출은 없었다. 이 관측은 **GPU kernel의 실제 실행 확인이 아니며, 기존 실패 실행의 CPU 재시도 여부도 소급 입증하지 않는다.** 공용 factory wrapper가 추가된 별도 bundle이므로 진단의 `bothPairsFaster=true`를 원래 최종 성능 게이트 통과로 옮기지 않는다.
+
+후보에서 세 factory가 겹쳐 시작했지만 각 factory duration은 늘었고 마지막 쌍의 준비 차이는0.4ms였다. 관찰된 병렬 이점이 작다는 근거이며 전역 loader 경합·기기 상태 등 특정 원인을 확정한 결과는 아니다. 원래 준비688.5/527.2ms 실패·성능 P2·S6.26 미완료는 유지한다. **이번 후보는 보류하고 동일 정상 시험이나 같은 후보 수정 사이클을 추가 시작하지 않는다.** 새로운 원인 근거나 다른 구현 접근이 있을 때만 재검토한다. 사용자 흐름의 필수 통합과 독립 웹 작업을 우선하며 체크리스트/테스트 숫자를 진척으로 대체하지 않는다.
+
+새 source/bundle SHA는 실행 전에 기록했다. 원본·build/run stdout/stderr는 `/private/tmp/bodyguard-preparation-diagnostic.DQ66Cs`에 보존한다. 두 build·하네스 문법·네 실제 실행이 이번 추가 검증의 전부이며 전체frontend/SQL/GLB/물리 카메라/출시 성능 시험을 새로 실행했다고 하지 않는다. 브라우저/서버/proxy는 finally에서 닫았고 ps에서는 검사 shell/rg 외 관련 프로세스가 없었다. 외부 proxy 시도42회를 유지하고 시험 차단을 제품 정책 승인으로 취급하지 않는다.
+
+증거 복사 뒤 첫 byte 비교는 config 끝의 빈 줄 한 개가 빠져 실패했다. 기존 scratch는 바꾸지 않고 복사본의 빈 줄을 복원해 세 파일의 byte 동일성을 확인했다. 이후 staged diff 검사에서 그 EOF 빈 줄이 경고되어 **저장소 config만 EOF 빈 줄을 정리했다**. 원본 SHA는 실행한 scratch를 가리키며 저장소 config는 EOF whitespace 차이가 있는 재현 source다. 보고서/runner는 byte 동일하다. 문서 multi-file patch의 첫 시도는 Story 문맥 불일치로 적용되지 않았고 실제 문맥을 다시 읽어 수정했다. 이 실패를 SDK/브라우저 검증 성공으로 세지 않는다.

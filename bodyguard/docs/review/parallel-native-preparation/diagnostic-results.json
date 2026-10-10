@@ -1,0 +1,481 @@
+{
+  "method": "Test-only public SDK factory observers; fresh browser/profile ABBA, synthetic blank640x480; requested delegate and CPU retry only, NOT proof of actual GPU kernel execution; instrumented timings NOT original acceptance evidence",
+  "version": "155.0.8059.40",
+  "bundles": {
+    "baseline": {
+      "probeSha": "6191de3cbb2a62ca3f6ba924d3331c3dd9cb42189fb44d13f3fa847b0f7625e8",
+      "workerSha": "1170125bdd4f110f9d987e7f65513678d9840a89fb4a791e8a1a1e7e1bbbfcfb"
+    },
+    "candidate": {
+      "probeSha": "5b36f83a77a4e750d4f4da850b4e818723adfc5c56c03a7220915702eec5ac2a",
+      "workerSha": "f7eb68e907b70cc2259543904ea85d8df1ab6259113678cd41636d0411c1edb9"
+    }
+  },
+  "assetHashes": {
+    "/mediapipe/wasm/vision_wasm_internal.js": "e170ee67dd4e16c1a6fcd8840a206687e5a59b22c20e4a902bc445b095454d73",
+    "/mediapipe/wasm/vision_wasm_internal.wasm": "8da277a733926eacd0474b8704b36742d6ec3231c57a860c5b889dff8f1df886",
+    "/mediapipe/wasm/vision_wasm_module_internal.js": "da8934057f147b622e82cfb4c0dbd85461c598e268588b5a8ba9ca963a8ff82d",
+    "/mediapipe/wasm/vision_wasm_module_internal.wasm": "2dabd8e23c60984628beb7bb338764c81a08e6837145273f59578684b5d53c1b",
+    "/mediapipe/wasm/vision_wasm_nosimd_internal.js": "e81d715a3d42cc3373602eb2f7aff795d164934db680e32496b65dab537f9658",
+    "/mediapipe/wasm/vision_wasm_nosimd_internal.wasm": "a28483cd42e74e855bf5ebdb6b40d9b66a5b49e35e95020bc97669e6822a3192",
+    "/models/pose_landmarker_lite.task": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a",
+    "/models/face_landmarker.task": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+    "/models/gesture_recognizer.task": "97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482"
+  },
+  "results": [
+    {
+      "mode": "baseline",
+      "passed": true,
+      "result": {
+        "thread": "worker",
+        "state": "ready",
+        "readyMs": 386.8999999985099,
+        "firstMs": 911.9000000059605,
+        "timings": [
+          911.9000000059605,
+          21.200000002980232,
+          22
+        ],
+        "maxGapMs": 16.799999999999955,
+        "beats": 64,
+        "clickDelayMs": 2.2999999970197678,
+        "frames": 3,
+        "closes": 3,
+        "delegates": [],
+        "concurrentRejected": true
+      },
+      "closed": {
+        "thread": "worker",
+        "state": "closed",
+        "readyMs": 386.8999999985099,
+        "firstMs": 911.9000000059605,
+        "timings": [
+          911.9000000059605,
+          21.200000002980232,
+          22
+        ],
+        "maxGapMs": 16.799999999999955,
+        "beats": 64,
+        "clickDelayMs": 2.2999999970197678,
+        "frames": 3,
+        "closes": 3,
+        "delegates": [],
+        "concurrentRejected": true
+      },
+      "ownership": {
+        "cameras": 0,
+        "workers": 1,
+        "terminations": 1,
+        "storageKeys": 0
+      },
+      "diagnostics": [
+        {
+          "type": "ready",
+          "elapsedMs": 363.70000000298023,
+          "attempts": [
+            {
+              "task": "body",
+              "requestedDelegate": "GPU",
+              "startedMs": 5.800000004470348,
+              "durationMs": 200,
+              "outcome": "fulfilled",
+              "closes": 0
+            },
+            {
+              "task": "face",
+              "requestedDelegate": "GPU",
+              "startedMs": 205.80000000447035,
+              "durationMs": 78.59999999403954,
+              "outcome": "fulfilled",
+              "closes": 0
+            },
+            {
+              "task": "hands",
+              "requestedDelegate": "GPU",
+              "startedMs": 284.5,
+              "durationMs": 79.10000000149012,
+              "outcome": "fulfilled",
+              "closes": 0
+            }
+          ]
+        },
+        {
+          "type": "closed",
+          "elapsedMs": 1422.6000000014901,
+          "attempts": [
+            {
+              "task": "body",
+              "requestedDelegate": "GPU",
+              "startedMs": 5.800000004470348,
+              "durationMs": 200,
+              "outcome": "fulfilled",
+              "closes": 1
+            },
+            {
+              "task": "face",
+              "requestedDelegate": "GPU",
+              "startedMs": 205.80000000447035,
+              "durationMs": 78.59999999403954,
+              "outcome": "fulfilled",
+              "closes": 1
+            },
+            {
+              "task": "hands",
+              "requestedDelegate": "GPU",
+              "startedMs": 284.5,
+              "durationMs": 79.10000000149012,
+              "outcome": "fulfilled",
+              "closes": 1
+            }
+          ]
+        }
+      ],
+      "preparePlusFirstMs": 1298.8000000044703
+    },
+    {
+      "mode": "candidate",
+      "passed": true,
+      "result": {
+        "thread": "worker",
+        "state": "ready",
+        "readyMs": 297.3999999985099,
+        "firstMs": 835,
+        "timings": [
+          835,
+          21.900000005960464,
+          21.899999998509884
+        ],
+        "maxGapMs": 16.800000000000068,
+        "beats": 60,
+        "clickDelayMs": 1.5,
+        "frames": 3,
+        "closes": 3,
+        "delegates": [],
+        "concurrentRejected": true
+      },
+      "closed": {
+        "thread": "worker",
+        "state": "closed",
+        "readyMs": 297.3999999985099,
+        "firstMs": 835,
+        "timings": [
+          835,
+          21.900000005960464,
+          21.899999998509884
+        ],
+        "maxGapMs": 16.800000000000068,
+        "beats": 60,
+        "clickDelayMs": 1.5,
+        "frames": 3,
+        "closes": 3,
+        "delegates": [],
+        "concurrentRejected": true
+      },
+      "ownership": {
+        "cameras": 0,
+        "workers": 1,
+        "terminations": 1,
+        "storageKeys": 0
+      },
+      "diagnostics": [
+        {
+          "type": "ready",
+          "elapsedMs": 280.20000000298023,
+          "attempts": [
+            {
+              "task": "body",
+              "requestedDelegate": "GPU",
+              "startedMs": 1.3999999985098839,
+              "durationMs": 214.30000000447035,
+              "outcome": "fulfilled",
+              "closes": 0
+            },
+            {
+              "task": "face",
+              "requestedDelegate": "GPU",
+              "startedMs": 9.399999998509884,
+              "durationMs": 242.70000000298023,
+              "outcome": "fulfilled",
+              "closes": 0
+            },
+            {
+              "task": "hands",
+              "requestedDelegate": "GPU",
+              "startedMs": 12.700000002980232,
+              "durationMs": 267.5,
+              "outcome": "fulfilled",
+              "closes": 0
+            }
+          ]
+        },
+        {
+          "type": "closed",
+          "elapsedMs": 1270.7999999970198,
+          "attempts": [
+            {
+              "task": "body",
+              "requestedDelegate": "GPU",
+              "startedMs": 1.3999999985098839,
+              "durationMs": 214.30000000447035,
+              "outcome": "fulfilled",
+              "closes": 1
+            },
+            {
+              "task": "face",
+              "requestedDelegate": "GPU",
+              "startedMs": 9.399999998509884,
+              "durationMs": 242.70000000298023,
+              "outcome": "fulfilled",
+              "closes": 1
+            },
+            {
+              "task": "hands",
+              "requestedDelegate": "GPU",
+              "startedMs": 12.700000002980232,
+              "durationMs": 267.5,
+              "outcome": "fulfilled",
+              "closes": 1
+            }
+          ]
+        }
+      ],
+      "preparePlusFirstMs": 1132.3999999985099
+    },
+    {
+      "mode": "candidate",
+      "passed": true,
+      "result": {
+        "thread": "worker",
+        "state": "ready",
+        "readyMs": 298.6000000014901,
+        "firstMs": 832.3999999985099,
+        "timings": [
+          832.3999999985099,
+          23.600000001490116,
+          21.5
+        ],
+        "maxGapMs": 16.800000000000068,
+        "beats": 59,
+        "clickDelayMs": 2.0999999940395355,
+        "frames": 3,
+        "closes": 3,
+        "delegates": [],
+        "concurrentRejected": true
+      },
+      "closed": {
+        "thread": "worker",
+        "state": "closed",
+        "readyMs": 298.6000000014901,
+        "firstMs": 832.3999999985099,
+        "timings": [
+          832.3999999985099,
+          23.600000001490116,
+          21.5
+        ],
+        "maxGapMs": 16.800000000000068,
+        "beats": 59,
+        "clickDelayMs": 2.0999999940395355,
+        "frames": 3,
+        "closes": 3,
+        "delegates": [],
+        "concurrentRejected": true
+      },
+      "ownership": {
+        "cameras": 0,
+        "workers": 1,
+        "terminations": 1,
+        "storageKeys": 0
+      },
+      "diagnostics": [
+        {
+          "type": "ready",
+          "elapsedMs": 281.5,
+          "attempts": [
+            {
+              "task": "body",
+              "requestedDelegate": "GPU",
+              "startedMs": 1.1999999955296516,
+              "durationMs": 219.5,
+              "outcome": "fulfilled",
+              "closes": 0
+            },
+            {
+              "task": "face",
+              "requestedDelegate": "GPU",
+              "startedMs": 8.799999997019768,
+              "durationMs": 233.20000000298023,
+              "outcome": "fulfilled",
+              "closes": 0
+            },
+            {
+              "task": "hands",
+              "requestedDelegate": "GPU",
+              "startedMs": 12.299999997019768,
+              "durationMs": 269,
+              "outcome": "fulfilled",
+              "closes": 0
+            }
+          ]
+        },
+        {
+          "type": "closed",
+          "elapsedMs": 1257.3999999985099,
+          "attempts": [
+            {
+              "task": "body",
+              "requestedDelegate": "GPU",
+              "startedMs": 1.1999999955296516,
+              "durationMs": 219.5,
+              "outcome": "fulfilled",
+              "closes": 1
+            },
+            {
+              "task": "face",
+              "requestedDelegate": "GPU",
+              "startedMs": 8.799999997019768,
+              "durationMs": 233.20000000298023,
+              "outcome": "fulfilled",
+              "closes": 1
+            },
+            {
+              "task": "hands",
+              "requestedDelegate": "GPU",
+              "startedMs": 12.299999997019768,
+              "durationMs": 269,
+              "outcome": "fulfilled",
+              "closes": 1
+            }
+          ]
+        }
+      ],
+      "preparePlusFirstMs": 1131
+    },
+    {
+      "mode": "baseline",
+      "passed": true,
+      "result": {
+        "thread": "worker",
+        "state": "ready",
+        "readyMs": 299,
+        "firstMs": 842,
+        "timings": [
+          842,
+          21.100000001490116,
+          21.899999998509884
+        ],
+        "maxGapMs": 16.800000000000068,
+        "beats": 60,
+        "clickDelayMs": 1.3000000044703484,
+        "frames": 3,
+        "closes": 3,
+        "delegates": [],
+        "concurrentRejected": true
+      },
+      "closed": {
+        "thread": "worker",
+        "state": "closed",
+        "readyMs": 299,
+        "firstMs": 842,
+        "timings": [
+          842,
+          21.100000001490116,
+          21.899999998509884
+        ],
+        "maxGapMs": 16.800000000000068,
+        "beats": 60,
+        "clickDelayMs": 1.3000000044703484,
+        "frames": 3,
+        "closes": 3,
+        "delegates": [],
+        "concurrentRejected": true
+      },
+      "ownership": {
+        "cameras": 0,
+        "workers": 1,
+        "terminations": 1,
+        "storageKeys": 0
+      },
+      "diagnostics": [
+        {
+          "type": "ready",
+          "elapsedMs": 282.6000000014901,
+          "attempts": [
+            {
+              "task": "body",
+              "requestedDelegate": "GPU",
+              "startedMs": 1.2000000029802322,
+              "durationMs": 147.10000000149012,
+              "outcome": "fulfilled",
+              "closes": 0
+            },
+            {
+              "task": "face",
+              "requestedDelegate": "GPU",
+              "startedMs": 148.30000000447035,
+              "durationMs": 62,
+              "outcome": "fulfilled",
+              "closes": 0
+            },
+            {
+              "task": "hands",
+              "requestedDelegate": "GPU",
+              "startedMs": 210.39999999850988,
+              "durationMs": 72.10000000149012,
+              "outcome": "fulfilled",
+              "closes": 0
+            }
+          ]
+        },
+        {
+          "type": "closed",
+          "elapsedMs": 1278.8999999985099,
+          "attempts": [
+            {
+              "task": "body",
+              "requestedDelegate": "GPU",
+              "startedMs": 1.2000000029802322,
+              "durationMs": 147.10000000149012,
+              "outcome": "fulfilled",
+              "closes": 1
+            },
+            {
+              "task": "face",
+              "requestedDelegate": "GPU",
+              "startedMs": 148.30000000447035,
+              "durationMs": 62,
+              "outcome": "fulfilled",
+              "closes": 1
+            },
+            {
+              "task": "hands",
+              "requestedDelegate": "GPU",
+              "startedMs": 210.39999999850988,
+              "durationMs": 72.10000000149012,
+              "outcome": "fulfilled",
+              "closes": 1
+            }
+          ]
+        }
+      ],
+      "preparePlusFirstMs": 1141
+    }
+  ],
+  "requested": [
+    "/",
+    "/probe.js",
+    "/assets/nativeInference.worker-Ch8knyI9.js",
+    "/mediapipe/wasm/vision_wasm_internal.js",
+    "/mediapipe/wasm/vision_wasm_internal.wasm",
+    "/models/pose_landmarker_lite.task",
+    "/models/face_landmarker.task",
+    "/models/gesture_recognizer.task",
+    "/assets/nativeInference.worker-CfSYFBp_.js"
+  ],
+  "proxyAttempts": 42,
+  "proxySocketErrors": 0,
+  "blocked": 0,
+  "pageErrors": [],
+  "technicalPassed": true,
+  "bothPairsFaster": true,
+  "failure": null
+}
