@@ -47,50 +47,50 @@ export async function prepareWorkerNativeEngine(
     const path = (asset: string) => new URL(asset, self.location.href).href
     const vision = await FilesetResolver.forVisionTasks(path(WASM_BASE_PATH))
     signal.throwIfAborted()
-    async function load<T>(create: (delegate: 'GPU' | 'CPU') => Promise<T>): Promise<T> {
-      try {
-        return await create('GPU')
-      } catch {
-        signal.throwIfAborted()
-        return create('CPU')
-      }
+    async function create<T extends { close(): void }>(
+      factory: (delegate: 'GPU' | 'CPU') => Promise<T>,
+      delegate: 'GPU' | 'CPU',
+    ): Promise<T> {
+      signal.throwIfAborted()
+      return own(await factory(delegate))
     }
-    const body = own(
-      await load((delegate) =>
-        PoseLandmarker.createFromOptions(vision, {
-          canvas: new OffscreenCanvas(1, 1),
-          baseOptions: { modelAssetPath: path(POSE_MODELS[config.model].path), delegate },
-          runningMode: 'VIDEO',
-          numPoses: 2,
-        }),
-      ),
-    )
-    const face = config.face
-      ? own(
-          await load((delegate) =>
-            FaceLandmarker.createFromOptions(vision, {
-              canvas: new OffscreenCanvas(1, 1),
-              baseOptions: { modelAssetPath: path(FACE_MODEL_PATH), delegate },
-              runningMode: 'VIDEO',
-              numFaces: 1,
-              outputFacialTransformationMatrixes: true,
-              outputFaceBlendshapes: false,
-            }),
-          ),
-        )
-      : undefined
-    const hands = config.hands
-      ? own(
-          await load((delegate) =>
-            GestureRecognizer.createFromOptions(vision, {
-              canvas: new OffscreenCanvas(1, 1),
-              baseOptions: { modelAssetPath: path(GESTURE_MODEL_PATH), delegate },
-              runningMode: 'VIDEO',
-              numHands: 2,
-            }),
-          ),
-        )
-      : undefined
+    const makeBody = (delegate: 'GPU' | 'CPU') =>
+      PoseLandmarker.createFromOptions(vision, {
+        canvas: new OffscreenCanvas(1, 1),
+        baseOptions: { modelAssetPath: path(POSE_MODELS[config.model].path), delegate },
+        runningMode: 'VIDEO',
+        numPoses: 2,
+      })
+    const makeFace = (delegate: 'GPU' | 'CPU') =>
+      FaceLandmarker.createFromOptions(vision, {
+        canvas: new OffscreenCanvas(1, 1),
+        baseOptions: { modelAssetPath: path(FACE_MODEL_PATH), delegate },
+        runningMode: 'VIDEO',
+        numFaces: 1,
+        outputFacialTransformationMatrixes: true,
+        outputFaceBlendshapes: false,
+      })
+    const makeHands = (delegate: 'GPU' | 'CPU') =>
+      GestureRecognizer.createFromOptions(vision, {
+        canvas: new OffscreenCanvas(1, 1),
+        baseOptions: { modelAssetPath: path(GESTURE_MODEL_PATH), delegate },
+        runningMode: 'VIDEO',
+        numHands: 2,
+      })
+    // FR-M-02/07: settle every GPU owner before CPU recovery or returning failure.
+    // The SDK loader uses worker-global ModuleFactory/Module; retries must not race it.
+    const [preparedBody, preparedFace, preparedHands] = await Promise.allSettled([
+      create(makeBody, 'GPU'),
+      config.face ? create(makeFace, 'GPU') : Promise.resolve(undefined),
+      config.hands ? create(makeHands, 'GPU') : Promise.resolve(undefined),
+    ])
+    signal.throwIfAborted()
+    const body =
+      preparedBody.status === 'fulfilled' ? preparedBody.value : await create(makeBody, 'CPU')
+    const face =
+      preparedFace.status === 'fulfilled' ? preparedFace.value : await create(makeFace, 'CPU')
+    const hands =
+      preparedHands.status === 'fulfilled' ? preparedHands.value : await create(makeHands, 'CPU')
     return Object.freeze({
       detect(frame: VideoFrame, at: number) {
         if (disposed || signal.aborted) throw new Error('Worker inference unavailable')
