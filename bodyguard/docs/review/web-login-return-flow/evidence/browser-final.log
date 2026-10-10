@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/private/tmp/bodyguard-login-return.hMIhQq/run-browser.py", line 23, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/backend/tests/run_browser.py", line 76, in main
+    listener.bind(("127.0.0.1", 8000))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 48] Address already in use
