@@ -12,6 +12,13 @@ vi.mock('@mediapipe/tasks-vision', () => ({
   GestureRecognizer: { createFromOptions: sdk.hands },
 }))
 const config = { model: 'lite', face: true, hands: true, matrixLayout: 'column-major' } as const
+function deferred<T>() {
+  let resolve!: (value: T) => void
+  const promise = new Promise<T>((done) => {
+    resolve = done
+  })
+  return { promise, resolve }
+}
 const points = (length: number) => Array.from({ length }, () => ({ x: 0.5, y: 0.4, z: 0 }))
 function fixture() {
   const result = { landmarks: [points(33)], worldLandmarks: [points(33)], close: vi.fn() }
@@ -102,6 +109,113 @@ it('keeps explicit optional features disabled', async () => {
   expect(result).not.toHaveProperty('hands')
   expect(sdk.face).not.toHaveBeenCalled()
   expect(sdk.hands).not.toHaveBeenCalled()
+  engine.dispose()
+})
+// FR-M-02/07: all configured tasks may prepare concurrently, but none escapes ownership.
+it('starts face and hands while body preparation is still pending', async () => {
+  const f = fixture(),
+    body = deferred<typeof f.body>()
+  sdk.body.mockReturnValue(body.promise)
+  const prepared = prepareWorkerNativeEngine(config, f.abort.signal)
+  try {
+    await vi.waitFor(() => {
+      expect(sdk.body).toHaveBeenCalledOnce()
+      expect(sdk.face).toHaveBeenCalledOnce()
+      expect(sdk.hands).toHaveBeenCalledOnce()
+    })
+    expect(f.body.close).not.toHaveBeenCalled()
+  } finally {
+    body.resolve(f.body)
+    const engine = await prepared
+    engine.dispose()
+    for (const task of [f.body, f.face, f.hands]) expect(task.close).toHaveBeenCalledOnce()
+  }
+})
+it('waits for a late body owner before returning another task failure', async () => {
+  const f = fixture(),
+    body = deferred<typeof f.body>()
+  sdk.body.mockReturnValue(body.promise)
+  sdk.hands.mockRejectedValue(new Error('PRIVATE_HANDS'))
+  let settled = false
+  const outcome = prepareWorkerNativeEngine(config, f.abort.signal).then(
+    (engine) => {
+      settled = true
+      engine.dispose()
+      return null
+    },
+    (error) => {
+      settled = true
+      return error
+    },
+  )
+  try {
+    await vi.waitFor(() => expect(sdk.hands).toHaveBeenCalledOnce())
+    expect(settled).toBe(false)
+    expect(f.face.close).not.toHaveBeenCalled()
+  } finally {
+    body.resolve(f.body)
+    expect(await outcome).toMatchObject({ message: 'Worker inference unavailable' })
+    expect(sdk.hands.mock.calls.map((call) => call[1].baseOptions.delegate)).toEqual(['GPU', 'CPU'])
+    expect(f.body.close).toHaveBeenCalledOnce()
+    expect(f.face.close).toHaveBeenCalledOnce()
+  }
+})
+it('does not overlap CPU fallback with another pending GPU factory', async () => {
+  const f = fixture(),
+    face = deferred<typeof f.face>()
+  sdk.body.mockRejectedValueOnce(new Error('PRIVATE_GPU'))
+  sdk.face.mockReturnValue(face.promise)
+  const prepared = prepareWorkerNativeEngine(config, f.abort.signal)
+  try {
+    await vi.waitFor(() => expect(sdk.hands).toHaveBeenCalledOnce())
+    expect(sdk.body).toHaveBeenCalledOnce()
+  } finally {
+    face.resolve(f.face)
+    const engine = await prepared
+    expect(sdk.body.mock.calls.map((call) => call[1].baseOptions.delegate)).toEqual(['GPU', 'CPU'])
+    engine.dispose()
+    for (const task of [f.body, f.face, f.hands]) expect(task.close).toHaveBeenCalledOnce()
+  }
+})
+it('reclaims every late parallel owner after abort, without any CPU retry or ready engine', async () => {
+  const f = fixture(),
+    body = deferred<typeof f.body>(),
+    face = deferred<typeof f.face>(),
+    hands = deferred<typeof f.hands>()
+  sdk.body.mockReturnValue(body.promise)
+  sdk.face.mockReturnValue(face.promise)
+  sdk.hands.mockReturnValue(hands.promise)
+  const outcome = prepareWorkerNativeEngine(config, f.abort.signal).then(
+    (engine) => {
+      engine.dispose()
+      return null
+    },
+    (error) => error,
+  )
+  try {
+    await vi.waitFor(() => expect(sdk.hands).toHaveBeenCalledOnce())
+    f.abort.abort()
+    for (const task of [f.body, f.face, f.hands]) expect(task.close).not.toHaveBeenCalled()
+  } finally {
+    hands.resolve(f.hands)
+    face.resolve(f.face)
+    body.resolve(f.body)
+    expect(await outcome).toMatchObject({ message: 'Worker inference unavailable' })
+    for (const task of [f.body, f.face, f.hands]) expect(task.close).toHaveBeenCalledOnce()
+    for (const create of [sdk.body, sdk.face, sdk.hands]) expect(create).toHaveBeenCalledOnce()
+  }
+})
+it.each([
+  [true, false],
+  [false, true],
+])('keeps face=%s and hands=%s independently configured', async (face, hands) => {
+  const f = fixture(),
+    engine = await prepareWorkerNativeEngine({ ...config, face, hands }, f.abort.signal)
+  const result = await engine.detect(f.frame, 25)
+  expect(sdk.face).toHaveBeenCalledTimes(face ? 1 : 0)
+  expect(sdk.hands).toHaveBeenCalledTimes(hands ? 1 : 0)
+  expect(Object.hasOwn(result, 'headOrientation')).toBe(face)
+  expect(Object.hasOwn(result, 'hands')).toBe(hands)
   engine.dispose()
 })
 it('does not bind head/hands to missing or multiple bodies', async () => {
