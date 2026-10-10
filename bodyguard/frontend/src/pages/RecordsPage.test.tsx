@@ -209,3 +209,28 @@ it('new period clears previous rows and returns to page one, without storing rec
   expect([localStorage.length, sessionStorage.length]).toEqual([0, 0])
   await waitFor(() => expect(document.title).toBe('내 수행 기록 · BODYGUARD'))
 })
+
+// S4.D6: minimal copy is not permission to remove outcome/privacy/deletion boundaries.
+it('keeps a short outcome notice without repeated introductory copy', async () => {
+  stub(async () => json({ items: [row()], has_more: false }))
+  open()
+  await screen.findByRole('table')
+  const notice = document.querySelector('.records-explanation')
+  expect(notice?.textContent).toBe(
+    '‘완료’는 수행 종료입니다. 자세 정확성·효과를 보장하지 않습니다.',
+  )
+  expect(notice?.textContent?.replace(/\s/g, '').length).toBeLessThanOrEqual(40)
+  expect(document.querySelector('.records-intro')).toBeNull()
+  for (const name of ['시작일', '종료일']) expect(screen.getByLabelText(name)).toBeTruthy()
+  expect(screen.getByRole('button', { name: '기간 조회' })).toBeTruthy()
+  expect(screen.getByRole('button', { name: '이 기간 기록 삭제' })).toBeTruthy()
+})
+it('keeps summary-only storage explicit on detail with concise copy', async () => {
+  stub(async () => json(row()))
+  open(`/records/${id}`)
+  await screen.findByText('fixture-not-release')
+  expect(screen.getByText('수행 요약만 저장하며, 영상·관절 좌표는 저장하지 않습니다.')).toBeTruthy()
+  for (const name of ['시작', '종료', '관찰된 수행 시간', '반복 요약', '규칙 버전'])
+    expect(screen.getByText(name, { exact: true })).toBeTruthy()
+  expect(screen.getByRole('link', { name: '기록 목록으로 돌아가기' })).toBeTruthy()
+})
