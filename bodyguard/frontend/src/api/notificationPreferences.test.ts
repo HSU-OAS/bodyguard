@@ -51,6 +51,9 @@ it('prepares from real-shaped me/csrf/settings/me; save uses original proof with
     signal: new AbortController().signal,
   })
   expect(context.value).toEqual(values)
+  const read = fetcher.mock.calls.find(([url]) => url === '/api/v1/settings/notifications')
+  expect(new Headers(read?.[1]?.headers).get('X-CSRF-Token')).toBe('a'.repeat(64))
+  expect(new Headers(read?.[1]?.headers).get('X-Account-ID')).toBe(authority.user.id)
   csrf = 'b'.repeat(64)
   const saved = await context.save({ ...values, posture_minutes: 8 })
   expect(saved.posture_minutes).toBe(8)
@@ -179,6 +182,52 @@ it('explicit close/abort and late responses cannot confirm a past save', async (
   await rejection
   await expect(context.save(values)).rejects.toThrow()
 })
+
+// FR-U-04/NFR-08: same object identity must not transfer its authority to another ID.
+it.each(['csrf', 'settings-json', 'before-save', 'save-json'] as const)(
+  'rejects original settings owner mutation in %s',
+  async (phase) => {
+    const authority = makeOwner()
+    let serverOwner = authority.user.id
+    const mutate = () => {
+      authority.user.id = serverOwner = '00000000-0000-4000-8000-000000000002'
+    }
+    const fetcher = vi.fn(async (url: string, init?: RequestInit) => {
+      if (url.endsWith('/me')) return json({ ...authority.user, id: serverOwner })
+      if (url.endsWith('/csrf')) {
+        if (phase === 'csrf') mutate()
+        return json({ csrf_token: 'a'.repeat(64) })
+      }
+      const response = json(values)
+      if (phase === 'settings-json' || (phase === 'save-json' && init?.method === 'POST'))
+        response.json = async () => {
+          mutate()
+          return values
+        }
+      return response
+    })
+    vi.stubGlobal('fetch', fetcher)
+    const prepared = preparePreferences({
+      authority,
+      readAuthority: () => authority,
+      signal: new AbortController().signal,
+    })
+    if (phase === 'csrf' || phase === 'settings-json')
+      await expect(prepared).rejects.toMatchObject({ status: 401 })
+    else {
+      const context = await prepared
+      if (phase === 'before-save') mutate()
+      await expect(context.save(values)).rejects.toMatchObject({ status: 401 })
+      context.close()
+    }
+    if (phase === 'before-save')
+      expect(fetcher.mock.calls.some(([, init]) => init?.method === 'POST')).toBe(false)
+    if (phase === 'csrf')
+      expect(fetcher.mock.calls.some(([url]) => url.endsWith('/settings/notifications'))).toBe(
+        false,
+      )
+  },
+)
 it.each([
   { ...values, posture_minutes: 99 },
   { ...values, extra: 1 },
