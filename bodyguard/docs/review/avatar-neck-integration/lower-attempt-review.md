@@ -20,7 +20,9 @@
 
 실제 로컬 Ruff check/format10파일·Biome archive checker·`git diff --check`, 새37개 보존바이트와 이전137/30/66/35개 해당manifest 바이트 점검은 통과했다. 기존Draft9 HEAD25a9bd6/1959개 상태·A318/ce8887d/7481c5f/2932e63d/CEO참조 SHA는 불변이다. 이 점검은 새 native 재실행이 아니다.
 
-현재 갱신 직전 GitHub 읽기는 `error connecting to api.github.com`으로 실패했다. 원격 최신 상태·체크를 새로 확인했다고 표시하지 않으며 이번 보완의 푸시/PR 본문 갱신/병합은 아직 수행하지 않았다. 로컬 보존과 원격 완료를 구별한다.
+초기 GitHub 읽기는 `error connecting to api.github.com`으로 실패했다. 이후 보존 커밋4944b58의 기존codex/avatar-neck-integration 원격 푸시는 실제 exit0로 확인했다. 후속 PR 조회와 ls-remote는 API 연결/DNS 오류로 실패했고 Code Review 진단 도구도 GitHub 계정 연결 필요 오류를 반환했다. 별도 계정을 연결하거나 승인 검토를 우회하지 않았다. 원격 최신 PR HEAD·diff·CLEAN·체크를 재확인했다거나 본문/리뷰 갱신·병합이 완료됐다고 표시하지 않는다.
+
+자동 승인 검토 사용량 제한 해소를 CEO에게 요청했다. 제한이 해소되면 저작을 다시 시작하지 않고 저장be038 후보의 독립 재열기·실제 미리보기부터 이어간다. 별도 비용/계정/설정 변경은 실행하지 않는다.
 
 ## 판정
 
