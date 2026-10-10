@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-10 [S5.6 소유·삭제 제약 준비 검사](stories/readiness-owned-constraints.md): 실제 DB의 계정/기록 FK 손상을 정상 준비로 반환하는 결함을 재현해 수정했다. 손상503/live200→복원200, 이름 변경 정상·다른 schema/replica 우회 차단이 실제 PostgreSQL·loopback HTTP에서 작동한다. [실패/실제·합성/소스·리뷰](review/readiness-owned-constraints/README.md). 화면/공개 코칭/아바타·schema/정책·운영 변경0, 최신 아바타 보류·독립 웹 진행을 유지한다. 전체 서버 회귀와 최종 준비 하네스/정적 검증을 통과해 scoped 조건부 PR 게이트를 진행한다. 기존 타입/시작P2·실측/동작0·UI/SDK·외부/운영·D2/전체1~6은 미완료다. PR111의 실제 source904bb8f·merge9f589776/main 포함·브랜치 보존을 확인하고 그 최신 main에서 시작했다. 이전 시점 기록은 아래에 보존한다.
+
 2026-10-10 [S6.21 계정 데이터 탈퇴·재가입](stories/account-data-web-lifecycle.md): 네 종류 데이터/과거·활성 기준선의 취소 보존→본인만 삭제/타인 보존→동일 이메일 실제 웹 재가입→두 빈 기록 화면을 확인했다. [작동 흐름·실패·실제/합성·증거](review/account-data-web-lifecycle/README.md). 제품/UI/문구/API/DB 정책·새 아바타/운영 변경0이며 최신 아바타 보류·독립 웹 진행 지시를 따른다. 첫 전체의 private reader 시간 초과는 보존했고 최종 탈퇴/복구·읽기 전용 SQL·로컬 품질 검증을 통과했다. 좁은 Story의 조건부 PR gate를 진행한다. 실측/출시 동작0·최종 아바타·승인 코칭/SDK·시작P2·외부/운영·D2/전체1~6은 미완료다. PR110은 실제 merge8ab7f15/main 포함·브랜치 보존을 확인했다. 이전 시점 기록은 아래에 보존한다.
 
 2026-10-10 [S6.20 현재 기록 웹 HTTP·SQL 회귀](stories/web-http-records-regression.md): 가입→탐색 준비→기록 상세/삭제→계정/로그아웃과 기간 오류 복구를 실제 웹·API·새 격리 DB로 확인했다. [실제 흐름·옛 문구 실패/보완·증거](review/web-http-records-regression/README.md). 제품 UI/API/DB/정책 변경0·새 아바타 제작/검증0이다. 최신 CEO 선택 아바타 보류·독립 웹 진행, 기존 시작P2·출시 동작0/실측/참여자·승인 코칭/SDK·외부/운영·D2/전체1~6 미완료를 유지한다. 좁은 계약/검증 Story의 조건부 PR 게이트를 진행하며 이전 원본과 시점 기록을 보존한다.
