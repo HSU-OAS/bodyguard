@@ -1,8 +1,9 @@
 """FR-N-03/FR-U-04/05: account-owned timer preferences, no classifier or notification effects."""
 
 from collections.abc import Callable
+from typing import Annotated
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Header, Request
 from pydantic import BaseModel, ConfigDict, Field
 from sqlalchemy import Connection, Engine, select
 from sqlalchemy.dialects.postgresql import insert
@@ -23,13 +24,20 @@ def register_notification_preferences(
     app: FastAPI,
     db: Engine,
     owner: Callable[[Connection, Request, bool], str],
+    bind_read: Callable[[Request, str, str | None, str | None], None],
 ) -> None:
     fields = [notification_preferences.c[name] for name in NotificationPreferences.model_fields]
 
     @app.get("/api/v1/settings/notifications", response_model=NotificationPreferences)
-    def read_notifications(request: Request) -> NotificationPreferences:
+    def read_notifications(
+        request: Request,
+        read_csrf: Annotated[str | None, Header(alias="X-CSRF-Token")] = None,
+        expected_owner: Annotated[str | None, Header(alias="X-Account-ID")] = None,
+    ) -> NotificationPreferences:
         with db.begin() as connection:
             user_id = owner(connection, request, False)
+            # FR-U-04/NFR-08: a hint never selects the owner; validate the original lease.
+            bind_read(request, user_id, read_csrf, expected_owner)
             row = (
                 connection.execute(
                     select(*fields).where(notification_preferences.c.user_id == user_id)

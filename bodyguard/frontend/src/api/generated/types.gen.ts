@@ -735,6 +735,10 @@ export type DetailApiV1RecordsStretchRecordIdGetResponse =
 
 export type ReadNotificationsApiV1SettingsNotificationsGetData = {
   body?: never
+  headers?: {
+    'X-CSRF-Token'?: string | null
+    'X-Account-ID'?: string | null
+  }
   path?: never
   query?: never
   url: '/api/v1/settings/notifications'

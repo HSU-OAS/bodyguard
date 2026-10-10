@@ -25,6 +25,42 @@ DEFAULT = {
 CHANGED = {**DEFAULT, "posture_enabled": False, "posture_minutes": 15, "sitting_minutes": 90}
 
 
+def test_p09_read_binds_original_account_and_session(harness: Harness) -> None:
+    h = harness
+    original = h.account()
+    assert h.client.post(PATH, headers=h.csrf(), json=CHANGED).status_code == 200
+    proof = h.csrf()["X-CSRF-Token"]
+    headers = {"X-CSRF-Token": proof, "X-Account-ID": original}
+    assert h.client.get(PATH, headers=headers).json() == CHANGED
+    with h.new_client() as other:
+        saved_client = h.client
+        try:
+            h.client = other
+            other_id = h.account("bound-setting-other@example.com")
+        finally:
+            h.client = saved_client
+        assert other.get(PATH).json() == DEFAULT  # Legacy header-free reads unchanged.
+        other_proof = h.csrf(other)["X-CSRF-Token"]
+        # Valid credentials still cannot transfer A's explicitly bound read to B.
+        for supplied in (
+            headers,
+            {"X-CSRF-Token": other_proof, "X-Account-ID": original},
+            {"X-Account-ID": other_id},
+        ):
+            response = other.get(PATH, headers=supplied)
+            assert response.status_code == 403
+            assert response.json() == {"detail": "요청을 확인할 수 없습니다."}
+        assert (
+            other.get(PATH, headers={"X-CSRF-Token": other_proof, "X-Account-ID": other_id}).json()
+            == DEFAULT
+        )
+    assert h.client.get(PATH).json() == CHANGED
+    assert (
+        h.client.get(PATH, headers={"X-CSRF-Token": "f" * 64, "X-Account-ID": original}).status_code
+        == 403
+    )
+
+
 def test_p01_defaults_read_without_settings_write(harness: Harness) -> None:
     h = harness
     h.account()
