@@ -2,6 +2,14 @@
 
 ## 현재 실행 지점 — 2026-10-10
 
+새 전문 아바타 저작은 **실행 보류**다. [자동 승인 검토 차단과 CEO 최종 선택](review/avatar-neck-integration/lateral-native-deform-deferred.json)에서 3~6단계 전체 완료가 입증되지 않아 같은 부위의 새 제작 조건 미충족으로 두 번 거부됐다. 두 시도 모두 프로세스/새 모델0·native exit=null이며 우회하지 않는다. 독립 구현 PR 병합을 단계 전체 완료로 간주하지 않는다. 같은 질문의 두 CEO 응답 중 마지막인 **“아바타는 보류하고 독립 웹 작업 진행”**을 적용한다. 앞선 “최종 통합 아바타 보완 진행 승인”으로 실행하지 않는다. 기존 결과 정리·보존 후 새 저작 없이 독립 웹 작업으로 넘어간다. 전체 goal을 중단하거나 완료 처리하지 않는다.
+
+[실제 설치 API probe](review/avatar-neck-integration/native-deform-probe-confirmed/README.md)는 native exit0·비인체 격자만 처리했다. 양수 anchor1/0.25 결과는 exact지만 실제 고정 오차가 있어 원본/리그·품질 증거가 아니다. 첫 초기화 SIGSEGV는 exit=null/실행 source·crash로 별도 보존했다. 새 제한 변형 helper/runner는 명세·정적 검사 단계이며 아직 전문 모델에 실행하지 않았다. 기존 최소 문구·Draft/외형P2·D2/전체1~6·별도 승인 기준은 유지한다.
+
+[연속 전이 반려/원래 core 진단](review/avatar-neck-integration/lateral-transition/README.md): 원본·외부/앞면/중앙·raw skin/rig/위상은 유지됐으나 접힘이 남아 실제 native1·저장0이다. 여성 제작/새 렌더·GLB/변형/Chrome·실측은 미실행이다. 후속 실제 진단0은 기존 core27점이 선택 안/앞면 보호 밖·유일한 전문 원본 ID임을 확인했다. 다음은 core와 보호 경계를 구별하는 전문 native 제한 변형/설치 API probe이며 아직 새 저작하지 않았다. 감쇠 수치 반복은 종료한다. 초기 준비 실패/실제 반려·같은 실패 진단을 구별해 보존하며 외형P2/Draft #108·D2/전체1~6/최소 문구·별도 승인 경계는 유지한다.
+
+### 이전 경계 진단 — 보존
+
 [복원 경계 대조](review/avatar-neck-integration/restored-boundary/README.md)는 실제 exit0·저장0이며, 원본이 아닌 선택 안/밖 점의 혼합 배치에서 남은 접힘이 생겼음을 확인했다. 다음은 원래 전문 위치의 연속 전이 설계다. 보호 범위/위상/rig·6mm·접힘0을 완화하지 않는다. 첫 중단의 미확정 종료와 후속 실제 종료/증거를 구별했으며 새 렌더/GLB/변형/Chrome·실측은 미실행이다. 외형P2·Draft #108·D2/전체1~6/최소 문구·별도 승인 경계는 유지한다.
 
 ### 이전 기준선 — 보존

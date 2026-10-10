@@ -2,6 +2,14 @@
 
 ## 현재 D2-A 실행 지점 — 2026-10-10
 
+새 전문 메시 저작은 [자동 승인 검토의 두 차단과 CEO 최종 선택](review/avatar-neck-integration/lateral-native-deform-deferred.json)으로 미실행/null·후보0이다. 독립3~6 구현 PR은 전체 단계 통과/조건 충족의 증거가 아니므로 우회하지 않았다. 같은 질문의 두 응답 중 마지막 “아바타는 보류하고 독립 웹 작업 진행”을 적용하며 앞선 승인으로 실행하지 않는다. [설치 native API probe](review/avatar-neck-integration/native-deform-probe-confirmed/README.md)의 실제0은 비인체 도구 확인만이며 첫 초기화 SIGSEGV/null도 보존했다. helper/runner·명세/정적 검사와 실제 제작을 구별한다. 기존 결과 보존 뒤 다른 승인 범위의 독립 웹 작업을 계속하며 외형P2/Draft·D2/전체1~6·최소 문구/별도 승인 기준은 그대로다.
+
+### 이전 전이·core 진단 — 보존
+
+[연속 전이](review/avatar-neck-integration/lateral-transition/README.md)는 보호/skin/rig/위상/tiny 통과에도 접힘3개로 실제 native1·저장0이다. 초기 준비 실패는 native 미실행/null로 별도 보존하고 여성 제작·후속 원본/GLB/변형/Chrome·실측도 미실행이다. 같은 실패의 실제 읽기 전용 진단0은 원래 core27점의 선택/앞면 보호·유일한 전문 대응을 확인했다. 다음은 native 제한 변형/설치 API probe이며 아직 새 저작하지 않았다. 기존 실패/원본·감쇠 반복 종료·외형P2/Draft/미채택·D2/전체1~6/최소 문구·별도 승인 기준은 유지한다.
+
+### 이전 경계 진단 — 보존
+
 [복원 경계 대조](review/avatar-neck-integration/restored-boundary/README.md)는 동결 반려 exact·실제 진단exit0/새 저장0이다. 원래 정상 연결에서 선택 밖 점은 그대로 남고 세 선택점만 전문 원본으로 복원돼 경계가 뒤집혔다. 다음은 동일 보호 범위 안의 연속 전이 설계이며 아직 새 저작하지 않았다. 첫 중단 exit미확정/null과 재실행 terminal/소스·실제 증거를 분리 보존했다. 외형P2·Draft/미채택·새 GLB/변형/브라우저/실측·D2/전체1~6 미완료와 최소 문구/별도 승인 기준은 그대로다.
 
 ### 이전 기준선 — 보존

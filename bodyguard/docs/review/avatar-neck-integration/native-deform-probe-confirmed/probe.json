@@ -1,0 +1,58 @@
+{
+  "blender": "5.1.1",
+  "installed_build_hash": "b70da489d7f4",
+  "nonhuman_fixture_only": true,
+  "professional_model_loaded_authored_or_saved": false,
+  "appearance_approved": false,
+  "clinical_or_camera_work": false,
+  "completed": true,
+  "rows": [
+    {
+      "fixture": "positive-one",
+      "positive_group_weight": 1.0,
+      "vertices": 81,
+      "faces": 64,
+      "anchors": 33,
+      "native_bind_finished": true,
+      "default_iterations_unchanged": true,
+      "default_iterations": 1,
+      "finite_native_solution": true,
+      "center_target_error_m": 0.00249377783626295,
+      "maximum_boundary_anchor_error_m": 0.00013728493024172411,
+      "non_anchor_displacement_m": 0.0004349778175925296
+    },
+    {
+      "fixture": "positive-quarter",
+      "positive_group_weight": 0.25,
+      "vertices": 81,
+      "faces": 64,
+      "anchors": 33,
+      "native_bind_finished": true,
+      "default_iterations_unchanged": true,
+      "default_iterations": 1,
+      "finite_native_solution": true,
+      "center_target_error_m": 0.00249377783626295,
+      "maximum_boundary_anchor_error_m": 0.00013728493024172411,
+      "non_anchor_displacement_m": 0.0004349778175925296
+    }
+  ],
+  "installed_rna_properties": {
+    "vertex_group": {
+      "type": "STRING",
+      "readonly": false
+    },
+    "iterations": {
+      "type": "INT",
+      "readonly": false
+    },
+    "is_bind": {
+      "type": "BOOLEAN",
+      "readonly": true
+    }
+  },
+  "installed_bind_operator": "OBJECT_OT_laplaciandeform_bind",
+  "installed_bind_operator_doc": "bpy.ops.object.laplaciandeform_bind(modifier=\"\")\nBind mesh to system in laplacian deform modifier",
+  "positive_weight_solutions_exact": true,
+  "positive_weight_solution_maximum_difference_m": 0.0,
+  "original_startup_objects_exact": true
+}

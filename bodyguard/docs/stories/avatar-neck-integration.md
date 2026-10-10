@@ -2,7 +2,17 @@
 
 2026-10-10 · 시작 main a466528 · FR-A-02/03/08 · codex/avatar-neck-integration · 옆 목·어깨 실제 저작 반려 / 외형 P2 미해결·미채택
 
-## 최신 실행 지점 — 복원 경계 원인 확인
+## 최신 실행 지점 — 새 저작 미실행 / 승인 범위 확인
+
+설치 [native API probe](../review/avatar-neck-integration/native-deform-probe-confirmed/README.md)는 실제 exit0·비인체 도구 확인만이다. 첫 초기화 SIGSEGV/native null도 보존했다. 준비한 제한 변형 저작은 [자동 승인 검토와 CEO 최종 선택](../review/avatar-neck-integration/lateral-native-deform-deferred.json)에서 두 번 차단돼 process0/native null/새 후보0이다. 최신 release contract/실제 main·PR106/107 병합/Draft108을 읽었으나 독립 구현만으로 3~6단계 전체 완료를 입증할 수 없다. 같은 질문의 두 CEO 응답 중 마지막 “아바타는 보류하고 독립 웹 작업 진행”을 적용한다. 앞선 승인으로 실행하지 않고 현재 결과/원본/실패만 보존한 뒤 독립 웹 작업으로 넘어간다. 기존 Draft/외형P2·D2/전체1~6·최소 문구/별도 승인 기준은 유지하며 전체 goal은 계속한다.
+
+## 이전 실행 지점 — 연속 전이 반려와 원래 core 확인
+
+[연속 전이](../review/avatar-neck-integration/lateral-transition/README.md)는 남성4119점/최대3.730mm·전체 보호/rig/위상/tiny 통과에도 접힘14→3·최대164.739°로 native exit1·저장0이다. 여성 제작·새 원본/렌더/GLB/전체변형/Chrome·실측은 미실행이다. 초기 준비 실패(native 미실행/null)·실제 반려1과 같은 실패의 읽기 전용 진단0을 구별해 보존했다.
+
+[원래 면/core 진단](../review/avatar-neck-integration/transition-faces-run/README.md)에서 남은3개 edge가 삼각면167049 주변의 부분 전이임을 확인했다. 원래 접힘의 core27점은 모두 선택 안/앞면 보호 밖·기존 ID로 A318 대응이 유일했다. 다음은 이 실제 core와 보호 경계를 구별하는 전문 native 제한 변형 설계·설치 API probe다. 아직 새 저작/허용치 변경하지 않았으며 같은 감쇠 수치·스무딩 반복은 종료한다. 외형P2/Draft/미채택·D2/전체1~6·최소 문구/별도 승인 경계를 유지한다.
+
+## 이전 실행 지점 — 복원 경계 원인 확인
 
 [복원 경계 대조](../review/avatar-neck-integration/restored-boundary/README.md)의 실제 native 진단은 exit0·새 저장0이다. 입력에서1.090°였던 edge293023은 동결 복원에서177.667°로 접혔다. source126108은 선택 밖/앞면 보호 아님으로 그대로 남고, 같은 연결의 나머지 세 점은 A318 배치로 복원됐다. A318 네 점/두 면 대응·정상 방향과 frozen rows·여성/private probe/두 입력 불변을 확인했다. 다음은 선택/중앙/앞면 보호를 유지하는 전문 위치의 연속 전이 설계이며 아직 저작하지 않았다.
 
@@ -29,6 +39,32 @@
 이전 사용량 제한과37개 체크포인트는 그대로 보존하고 후속 실제 실행17개 증거를 별도로 기록한다. 정상 자동 승인 절차가 통과해 실행했으며 우회/비용/계정/설정 변경0이다. 다음은 원래 앞면을 보호하는 옆 목/어깨의 연결 설계와 최종 원본 전체 검증이다. 같은 중앙 저작을 반복하지 않는다. Draft #108·P2/미채택·D2-A·전체1~6 미완료와 최소 문구/별도 승인 경계를 유지한다.
 
 ## 순서와 범위
+
+### 설치 native 제한 변형 API 계약 — 2026-10-10
+
+연속 전이/원래 core 실제 결과와 실행 소스는 동결한다. 다음 도구는 같은 설치 commit의 native Laplacian Deform이다. 공식 구현에서 양수 그룹 값은 binary anchor membership이고 고정식은 least squares라 exact clamp가 아니다. 먼저 factory-startup/disable-autoexec의 별도 프로세스에서 실제 RNA/bind/evaluated mesh를 확인한다. professional 아바타/사용자 Blender 장면은 열지 않으며 비인체 격자만 사용한다. 같은 anchor의 양수 값1/0.25가 동일한 설치 결과를 주는지 검사하고 실제 anchor 오차와 내부 변형을 기록한다. 기본 iterations는 바꾸지 않는다. API/semantic probe는 source/로그/실제 종료와 실패를 보존하고, 아바타 제작·리깅/외형/GLB/브라우저·임상 판정 검증으로 세지 않는다.
+
+원래 core27과 보호 경계를 구분하는 private 전문 메시 설계는 이 결과 뒤 진행한다. 기존 topology/좌표·raw skin/rig/PBR 보호와6mm/tiny/접힘0 등 필수 기준은 유지한다. native anchor의 exact 고정을 가정하지 않고 최종 결과를 독립적으로 검사하며, 기존 helper를 고치거나 같은 감쇠 수치/스무딩을 반복하지 않는다. 아직 새 후보 제작을 실행하지 않았다. Draft/외형P2·D2/전체1~6 미완료·최소 문구/별도 승인 경계는 그대로다.
+
+### 원래 전문 표면의 native 제한 변형 계약 — 2026-10-10
+
+비인체 native probe는 실제 설치 RNA/bind/평가 메시에서 exit0이다. 같은 binary anchor의1/0.25 결과는 exact였지만 중심 target 오차2.494mm·경계 최대0.137mm였다. 따라서 native anchor를 hard 고정으로 취급하지 않는다. 첫 sandbox 프로세스는 Python 전 WM_init/Metal 초기화 SIGSEGV(native code=null)였으며 crash와 실행 source를 보존했다. 동일 helper의 허용된 독립 프로세스 실행을 구별한다. 아바타 품질/저작 성공은 아직 아니다.
+
+별도 `author_lateral_native_deform.py`는 같은 현재 선택(weight>0, 수치 불변)의 인접 전문 polygon만 private 복사한다. 기존 양수 source ID는 유일한 A318 실제 위치에 배치하고 새 ID는 현재 위치를 유지한다. Body의 위상/리그는 복사 도구로 교체하지 않는다. 접힘 edge의 인접면이 실제 core이며 남성27점은 모두 선택 안/앞면 보호 밖이어야 한다. 선택 밖 private border와 새 ID는 현재 좌표 anchor, core는 전문 원본 anchor다. 연결 component마다 최소3개의 보호 border가 있어야 한다. API probe에서 확인한 기본 iterations1과 binary group만 사용하며 조정 sweep은 없다.
+
+Private native solver는 작은 전문 면의 계산 단위만 mm로 변환한다. 실제 Body는 m·원래 위상/좌표 공간을 유지한다. Native 결과 중 선택 안 기존 ID만 반환하고 core는 전문 위치 exact, 선택 밖/새 ID는 현재 위치 exact로 강제한다. Soft solver의 core/border 오차는 먼저 기록한 뒤 독립 전체 snapshot·6mm/tiny/닫힘/winding·선택 접힘0을 검사한다. 남녀 모두 통과 전에는 새 모델을 저장하지 않고 실패/종료/여성 및 후속 미실행을 보존한다. Professional 형상 복사/도구 변형이지 코드로 인체를 생성하거나 raw skin/리그·앞면/중앙 보호를 완화하는 방식이 아니다. 새 원본의 독립 재열기·남녀8컷·GLB/전체변형/Chrome·실측 게이트와 Draft/외형P2/전체1~6·최소 문구/별도 승인 기준은 그대로다.
+
+선택 안 면만이 아니라 선택점에 인접한 모든 면/edge의 접힘도0이어야 한다. 보호 경계 양쪽의 사각지대를 남기지 않는다. 이는 더 넓은 기하 검수이며 선택/이동 범위나 기존 기준을 완화하지 않는다. 이 helper/runner는 정적 검사만 했으며 자동 승인 차단 후 실행하지 않았다. 실제 동작/성능/원본·기하/외형/GLB/브라우저는 모두 미검증이다.
+
+### 전문 위치의 연속 전이 계약 — 2026-10-10
+
+경계 진단5d9cfd6과 실제 raw/terminal·7개 archive는 동결한다. 남은 edge293023의 입력1.090°→hard 복원177.667°는 선택 밖 점을 둔 채 선택 안 점만 원래 배치로 옮긴 경계에서 발생했다. 앞면 보호를 풀거나 선택 밖/중앙 점을 이동해 통과시키지 않는다.
+
+별도 `author_lateral_transition.py`는 같은 입력be038c04/전문 원본A318과 유일한 source point 대응을 사용한다. 이전부터 정의돼 있던 `lateral_domain.weight`의 **동일한** smooth falloff를 현재 위치→전문 원본 위치의 전이에 실제 적용한다. 기존 hard 저작기는 weight>0을 선택 여부로만 쓰고 전체 원래 위치를 대입했으므로 이 전이가 없었다. 새 감쇠 구간/수치 sweep·native 스무딩/재삼각화·전신 코드 생성은 하지 않는다. 가중치1의 내부는 전문 원본에 exact 복원하고, 경계에서는 현재 위치를 연속적으로 유지한다. 이것만으로 접힘0/외형 통과를 예상 결과로 기록하지 않는다.
+
+기존 원래 selection/front와 선택 밖/중앙·raw skin/topology/history/provenance/rig/PBR/손 exact·6mm·작은 면 증가 금지·닫힘/winding·선택 구간 접힘0을 유지한다. 남녀 모두 실제 통과할 때만 별도 새 원본을 저장한다. 실패 시 모델 저장 전에 중단하고 실제 실패·여성/후속 미실행을 보존한다. 영구 proof의 runner가 실행 helper/imported helper SHA·raw 로그·실제 terminal을 남기고 기존 결과를 덮어쓰지 않는다.
+
+실제 새 원본의 독립 재열기와 같은 조건 남녀 외형 검수 후 새GLB/왕복/118기술pose·Chrome 두 모델/실측을 재실행한다. 이 계약/국소 기하 성공으로 외형P2/Draft/미채택·D2/전체1~6 미완료를 해제하지 않는다. 공개 웹/최소 문구·SDK/판정·안전/개인정보·운영 변경0과 별도 승인 경계는 그대로다.
 
 ### 복원 경계의 원인 대조 계약 — 2026-10-10
 
