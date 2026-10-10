@@ -1,0 +1,94 @@
+{
+  "base": "dd6bde6ba83ccf00e754ceae87ce9ae2fde0ec76",
+  "source": {
+    "App": "8a2baaebb1676293a324a1b06192ae3b9b41bf90ef036d71d68894ce3dda149a",
+    "AppTest": "4c61418f59a484940c44426f3158593cb0bb242fca189606d6d57fb4f8ca7daf"
+  },
+  "beforePassed": false,
+  "afterPassed": true,
+  "bodyComparisons": [
+    {
+      "name": "missing",
+      "width": 1440,
+      "sameBody": true
+    },
+    {
+      "name": "home",
+      "width": 1440,
+      "sameBody": true
+    },
+    {
+      "name": "login",
+      "width": 1440,
+      "sameBody": true
+    },
+    {
+      "name": "missing",
+      "width": 1024,
+      "sameBody": true
+    },
+    {
+      "name": "home",
+      "width": 1024,
+      "sameBody": true
+    },
+    {
+      "name": "login",
+      "width": 1024,
+      "sameBody": true
+    }
+  ],
+  "syntheticFrontendTests": 1600,
+  "realChromeVersion": "155.0.8059.40",
+  "realAPISQLVerified": false,
+  "realMotionVerified": false,
+  "avatarValidationExecuted": false,
+  "deploymentExecuted": false,
+  "errorsPreservedPrivately": true,
+  "logs": [
+    {
+      "name": "unit-before-fix.log",
+      "sha256": "f4b0c21786e17a2459843dd955bf7ad8f00fd05e51b8918ade74e226cc68ccfb"
+    },
+    {
+      "name": "related-after-fix.log",
+      "sha256": "f8921a24ae01730bb62de7801021d990661443b4c222592be60f3ab5c342c0c8"
+    },
+    {
+      "name": "types.log",
+      "sha256": "3c18e6c8f007bb39cf57e0437667b044dd7ef2d907641ee85f70b41f764cf4e9"
+    },
+    {
+      "name": "frontend-final-case.log",
+      "sha256": "ce1a18806dea040482a0c3184609ad6497f3a39a60bc8e7113cb6b5a8051816f"
+    }
+  ],
+  "builds": [
+    {
+      "name": "baseline-dist",
+      "assets": [
+        {
+          "name": "index-DDIQH3wS.js",
+          "sha256": "02d884c79530bccad9041e08946ea6a82576da436c241fcca5e2d92aa416c092"
+        },
+        {
+          "name": "index-dNUNBpCv.css",
+          "sha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e"
+        }
+      ]
+    },
+    {
+      "name": "final-case-dist",
+      "assets": [
+        {
+          "name": "index-DUOlp8P1.js",
+          "sha256": "124c3ef77480a618baa64a92255cf980e5a5bb5a3dffb59567d3a9282f1572b7"
+        },
+        {
+          "name": "index-dNUNBpCv.css",
+          "sha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e"
+        }
+      ]
+    }
+  ]
+}

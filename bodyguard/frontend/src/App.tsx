@@ -187,6 +187,8 @@ function Home() {
 function Shell() {
   const { state } = useAuth()
   const location = useLocation()
+  // FR-V-02/FR-U-04: match Router's case/trailing-slash pages, never rewrite URL/token.
+  const pagePath = location.pathname.replace(/\/+$/, '').toLowerCase() || '/'
   const previousFocus = useRef<{ path: string; phase: string | null } | null>(null)
   // FR-U-04 / release-plan4·6: these protected titles change after account checking.
   // Public forms and pages with their own focus policy must not react to auth alone.
@@ -199,11 +201,11 @@ function Shell() {
     previousFocus.current = { path: location.pathname, phase: focusState }
     // NFR-08: selection/records pages own their asynchronous title and focus.
     if (
-      (MotionSelection && location.pathname === '/dev/select') ||
-      location.pathname === '/account/delete' ||
-      location.pathname === '/account/notifications' ||
-      location.pathname === '/posture-records' ||
-      /^\/records(?:\/[^/]+)?$/.test(location.pathname)
+      (MotionSelection && pagePath === '/dev/select') ||
+      pagePath === '/account/delete' ||
+      pagePath === '/account/notifications' ||
+      pagePath === '/posture-records' ||
+      /^\/records(?:\/[^/]+)?$/.test(pagePath)
     )
       return
     const heading = document.querySelector<HTMLElement>('main h1')
@@ -218,25 +220,27 @@ function Shell() {
     )
       heading?.focus({ preventScroll: true })
     document.title = `${
-      location.pathname === '/login'
-        ? '로그인'
-        : location.pathname === '/signup'
-          ? '이메일 가입'
-          : location.pathname.startsWith('/password/')
-            ? '계정 복구'
-            : location.pathname === '/explore'
-              ? '스트레칭 시작 경로'
-              : location.pathname === '/start'
-                ? '내 시작'
-                : location.pathname === '/account'
-                  ? '내 계정'
-                  : location.pathname === '/help'
-                    ? '도움말'
-                    : location.pathname === '/data'
-                      ? '카메라와 데이터 안내'
-                      : '자세 코칭'
+      pagePath === '/'
+        ? '서비스 소개'
+        : pagePath === '/login'
+          ? '로그인'
+          : pagePath === '/signup'
+            ? '이메일 가입'
+            : pagePath === '/password/forgot' || pagePath === '/password/reset'
+              ? '계정 복구'
+              : pagePath === '/explore'
+                ? '스트레칭 시작 경로'
+                : pagePath === '/start'
+                  ? '내 시작'
+                  : pagePath === '/account'
+                    ? '내 계정'
+                    : pagePath === '/help'
+                      ? '도움말'
+                      : pagePath === '/data'
+                        ? '카메라와 데이터 안내'
+                        : '페이지를 찾을 수 없습니다'
     } · BODYGUARD`
-  }, [location.pathname, focusState])
+  }, [location.pathname, pagePath, focusState])
   return (
     <div className="website">
       <button
@@ -256,27 +260,33 @@ function Shell() {
         <nav aria-label="계정 메뉴">
           {state.status === 'ready' ? (
             <>
-              <Link className="nav-link" to="/start">
+              <Link
+                className="nav-link"
+                to="/start"
+                aria-current={pagePath === '/start' ? 'page' : undefined}
+              >
                 내 시작
               </Link>
               <Link
                 className="nav-link"
                 to="/posture-records"
-                aria-current={location.pathname === '/posture-records' ? 'page' : undefined}
+                aria-current={pagePath === '/posture-records' ? 'page' : undefined}
               >
                 자세 기록
               </Link>
               <Link
                 className="nav-link"
                 to="/records"
-                aria-current={location.pathname.startsWith('/records') ? 'page' : undefined}
+                aria-current={/^\/records(?:\/[^/]+)?$/.test(pagePath) ? 'page' : undefined}
               >
                 수행 기록
               </Link>
               <Link
                 className="nav-link"
                 to="/account"
-                aria-current={location.pathname.startsWith('/account') ? 'page' : undefined}
+                aria-current={
+                  /^\/account(?:\/(?:delete|notifications))?$/.test(pagePath) ? 'page' : undefined
+                }
               >
                 내 계정
               </Link>
@@ -386,14 +396,14 @@ function Shell() {
           <Link
             className="footer-link"
             to="/help"
-            aria-current={location.pathname === '/help' ? 'page' : undefined}
+            aria-current={pagePath === '/help' ? 'page' : undefined}
           >
             도움말
           </Link>
           <Link
             className="footer-link"
             to="/data"
-            aria-current={location.pathname === '/data' ? 'page' : undefined}
+            aria-current={pagePath === '/data' ? 'page' : undefined}
           >
             카메라·데이터 안내
           </Link>
