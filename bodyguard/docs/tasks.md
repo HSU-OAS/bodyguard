@@ -2,15 +2,17 @@
 
 ## 현재 실행 지점 — 2026-10-10
 
-[S2.A1 목 중앙 후보의 실제 검증](review/avatar-neck-integration/lower-verification/README.md): 저장be038c04의 별도 Blender 재열기와 실제 남녀8컷 검수를 마쳤다. 원본/리깅 보호는 통과했지만 목 아래·어깨 외형P2는 남아 미채택이다. 새GLB·전체변형·브라우저는 미실행이다. 이전 원본·실패·검증 대기37개 체크포인트는 그대로 보존한다.
+[S2.A1 옆 목·어깨 실제 보완](review/avatar-neck-integration/lateral-attempt/README.md): 세 native 저작 모두 남성 접힘 검사에서 저장 전 실패했다. 마지막 접힘14→4와 원래 앞면/좌표·위상/raw skin/rig 보호를 확인했지만 실제 마감은 미달이다. 남성 반려 상태+변경하지 않은 여성 입력의8컷과39개 증거를 보존했다. 여성 저작·새 후보·GLB/전체변형/브라우저는 미실행이다. 입력be038c04·과거 원본/실패·37개 체크포인트/17개 검증은 유지한다.
 
-다음은 앞면을 보호하는 목 좌/우·어깨 연결 설계와 새 최종 원본 전체 검증이다. 같은 중앙 저작을 반복하지 않는다. 자동 승인 검토는 현재 같은 정상 절차를 통과해 위 검증을 실행했고, 이전 사용량 제한은 과거 기록으로 남긴다. [남은 보완](review/avatar-neck-integration/lower-verification/README.md#남은-보완)을 따른다.
+남은4개 edge의 인접6면은 전부 수정 구간 내부·원래 앞면/보호점0이다. 다음은 원래 면 연결/비평면·퇴화 조건의 읽기 전용 비교→국소 연결 설계다. 같은 중앙 저작/Laplacian·단위·계산 Triangulate를 반복하지 않으며 기준을 낮추지 않는다. 새 최종 원본에서 외형·원본/GLB/전체변형/Chrome/실측을 실제 재실행한다. [남은 보완](review/avatar-neck-integration/lateral-attempt/README.md#남은-문제와-다음-조건)을 따른다.
 
 기존 웹의 로그인·선택 준비·비공개 코칭/기록 adapter 구현과 실제 출시 사용 흐름은 다르다. 검증된 출시 동작0, 외형/시작/SDK P2·실측·승인 UI·외부 공급자/HTTPS/운영과 전체1~6은 미완료다. 공개 웹·문구 최소화·안전/개인정보·별도 승인 경계를 유지한다.
 
-검증 보존e47bd74를 실제 커밋/푸시하고 origin/main a466528·PR #108의 전체588파일 상태/Git blob 일치·clean·OPEN/Draft·MERGEABLE/CLEAN·체크 없음을 재확인했다. [PR 본문](https://github.com/HSU-OAS/bodyguard/pull/108)과 [작성자 재검토](https://github.com/HSU-OAS/bodyguard/pull/108#issuecomment-6093381678)를 실제 반영했다. 외형P2 때문에 병합하지 않으며 이 관찰을 후속 HEAD 검증으로 재사용하지 않는다. 새 독립 Story는 다시 최신main을 확인하고 새codex/*에서 시작한다.
+이번 실행 전 최신 main a466528·Draft #108 c17bff4의 CLEAN/MERGEABLE·체크 없음을 실제 확인했다. 이 관찰을 후속 HEAD 검증으로 재사용하지 않는다. 결과 보존과 [작성자 리뷰](review/avatar-neck-integration/lateral-attempt-review.md)를 같은 미완료 Story의 Draft에 기록하고 외형P2 때문에 병합하지 않는다. 새 독립 Story는 다시 최신main·새codex/*에서 시작한다. 화면은 아바타·핵심 버튼 중심, 상세 설명은 펼쳐보기·필수 안전/카메라/개인정보 안내는 필요한 순간의 짧은 문구로 제한한다. 미승인 화면 확장은 하지 않는다.
 
 ## 이전 시점 기록 — 보존
+
+2026-10-10 목 중앙be038c04의 [독립 재열기·8컷](review/avatar-neck-integration/lower-verification/README.md)은 보호 통과/전체 외형 미달이었다. e47bd74/c17bff4를 실제 커밋·푸시하고 PR588파일 상태/blob·main a466528·OPEN/Draft·MERGEABLE/CLEAN·체크 없음, [본문](https://github.com/HSU-OAS/bodyguard/pull/108)과 [작성자 재검토](https://github.com/HSU-OAS/bodyguard/pull/108#issuecomment-6093381678)를 확인했다. 이 이전 관찰을 새 HEAD 검증으로 복사하지 않는다.
 
 2026-10-10 [S2.A1 국소 quad 실패](review/avatar-neck-integration/quad-attempt/README.md): 기존 앞면/손/외부 raw skin·좌표/polygon·rest rig/PBR를 보호했으나 작은면2→610으로저장전실패했다. 여성제작/새원본/GLB/변형/렌더/Chrome는미실행·원본/실패보존·Draft #108/외형P2/D2/전체1~6미완료다. 단일Grid Fill은종료하고 다음은후두부/목/승모근구간별표면/edge연결설계다. 공개UI/최소문구/판정/운영/별도승인기준은유지한다.
 
