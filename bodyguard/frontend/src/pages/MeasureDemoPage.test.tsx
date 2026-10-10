@@ -61,6 +61,8 @@ function measurementFixture(): ReturnType<typeof useMeasurement> {
 
 // FR-M-02·FR-M-07: 가시성 충족을 성공으로 기록하거나 원시 좌표를 저장하지 않는다.
 it('상반신 프레임은 머리·어깨 범위만 충족하며 전신·미검출 기록은 촬영 안내를 남긴다', () => {
+  // FR-M-02/07: 합성 프레임 시각을 render/접근성 조회의 실제 경과 시간과 분리한다.
+  vi.spyOn(performance, 'now').mockReturnValue(1000)
   const measurement = measurementFixture()
   vi.mocked(useMeasurement).mockReturnValue(measurement)
   const storage = vi.spyOn(Storage.prototype, 'setItem')
@@ -89,6 +91,28 @@ it('상반신 프레임은 머리·어깨 범위만 충족하며 전신·미검�
   fireEvent.click(panel.getByRole('button', { name: '기록 지우기' }))
   expect(panel.queryAllByRole('listitem')).toHaveLength(0)
   storage.mockRestore()
+})
+
+it('기록 시점의 1000ms 경계는 포함하고 지난 프레임은 보류한 뒤 새 입력만 재개한다', () => {
+  const clock = vi.spyOn(performance, 'now').mockReturnValue(1000)
+  const measurement = measurementFixture()
+  vi.mocked(useMeasurement).mockReturnValue(measurement)
+  render(<MeasureDemoPage />, { wrapper: MemoryRouter })
+  const panel = within(screen.getByRole('region', { name: '동작 촬영 검증' }))
+  const record = panel.getByRole('button', { name: '현재 프레임 기록' })
+  clock.mockReturnValue(2000)
+  fireEvent.click(record)
+  clock.mockReturnValue(2001)
+  fireEvent.click(record)
+  measurement.poseRef.current.sampledAt = 2001
+  fireEvent.click(record)
+  const rows = panel.getAllByRole('listitem')
+  expect(rows).toHaveLength(3)
+  expect(rows[0].textContent).toContain('머리·어깨: 필수 관절 5/5')
+  expect(rows[1].textContent).toContain('머리·어깨: 필수 관절 0/5')
+  expect(rows[1].textContent).toContain('새 프레임 대기 (촬영 범위 충족 아님)')
+  expect(rows[2].textContent).toContain('머리·어깨: 필수 관절 5/5')
+  for (const index of [0, 2]) expect(rows[index].textContent).toContain('동작 성공 아님')
 })
 
 it('첫 프레임 전·오래된 프레임·복수 포즈를 촬영 범위 충족으로 기록하지 않는다', () => {
