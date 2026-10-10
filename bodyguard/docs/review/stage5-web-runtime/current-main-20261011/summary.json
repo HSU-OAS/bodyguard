@@ -1,0 +1,140 @@
+{
+  "preMergeHead": "b6235843710e169cf102da6c7b92c9df0630695f",
+  "main": "32e18a01c15e89ae4e321d372165abed29b0f506",
+  "mergeHead": "32e18a01c15e89ae4e321d372165abed29b0f506",
+  "unchanged": {
+    "bodyguard/frontend/src": true,
+    "bodyguard/backend/app": true,
+    "bodyguard/frontend/package.json": true,
+    "bodyguard/frontend/pnpm-lock.yaml": true,
+    "bodyguard/backend/uv.lock": true,
+    "bodyguard/backend/migrations": true,
+    "AGENTS.md": true
+  },
+  "oldReviewImmutableFiles": 30,
+  "oldReviewImmutableBytesPreserved": true,
+  "latestMainGuardTokensPreserved": true,
+  "browser": {
+    "version": "155.0.8059.40",
+    "screens": 28,
+    "viewportWidths": [
+      1440,
+      1024
+    ],
+    "api": "Synthetic guest and Google-unavailable fixtures",
+    "apiRequests": 30,
+    "methods": [
+      "GET"
+    ],
+    "externalRequests": 0,
+    "pageErrors": [],
+    "packageUnchanged": true,
+    "ownedResourcesClosed": true,
+    "paths": [
+      "/",
+      "/login",
+      "/password/forgot",
+      "/signup",
+      "/HELP/",
+      "/DaTa/",
+      "/LoGiN/",
+      "/PaSsWoRd/RESET/"
+    ]
+  },
+  "notices": {
+    "browser": "155.0.8059.40",
+    "delivered": [
+      {
+        "path": "/licenses/bundled-js.json",
+        "status": 200,
+        "contentType": "application/json; charset=utf-8",
+        "bodySHA256": "19f0c9961dd082bcebb1ba8dfdde98ef58c843cdb0ea4973a47a91b46c940cd7"
+      },
+      {
+        "path": "/licenses/bundled-packages.json",
+        "status": 200,
+        "contentType": "application/json; charset=utf-8",
+        "bodySHA256": "1c80ec2f6a9ad967f999232165821bf4d27ff55197ea21c4e049ff2f974efb54"
+      },
+      {
+        "path": "/licenses/tailwindcss.txt",
+        "status": 200,
+        "contentType": "text/plain; charset=utf-8",
+        "bodySHA256": "0045fac7ef9a1530b1e59eacde31c4823bfbc8881ad2e543bc82c70c38cfcfd8"
+      }
+    ],
+    "denied": [
+      {
+        "path": "/licenses/missing.txt",
+        "status": 404
+      },
+      {
+        "path": "/licenses/bundled-js.json/extra",
+        "status": 404
+      },
+      {
+        "path": "/.env",
+        "status": 404
+      },
+      {
+        "path": "/api/auth/me",
+        "status": 404
+      }
+    ],
+    "noticeFilesUnchanged": true,
+    "externalRequests": 0,
+    "jsNotices": 4,
+    "server": "Owned test HTTP server, not NGINX",
+    "dockerVerified": false,
+    "tlsVerified": false,
+    "accountFlowVerified": false,
+    "legalApproved": false,
+    "ownedResourcesClosed": true
+  },
+  "packageHashes": {
+    "/index.html": "b8a5fd32c85617f34779a01319b974fbdd6a55489a6537b6ee3f994622ef9ead",
+    "/brand/google-icon.png": "2bc2ae8e4c67de66d74bf1deed12cd8f22981270266a487576b671b0b4df361c",
+    "/licenses/bundled-js.json": "19f0c9961dd082bcebb1ba8dfdde98ef58c843cdb0ea4973a47a91b46c940cd7",
+    "/licenses/bundled-packages.json": "1c80ec2f6a9ad967f999232165821bf4d27ff55197ea21c4e049ff2f974efb54",
+    "/licenses/tailwindcss.txt": "0045fac7ef9a1530b1e59eacde31c4823bfbc8881ad2e543bc82c70c38cfcfd8",
+    "/assets/index-DUOlp8P1.js": "124c3ef77480a618baa64a92255cf980e5a5bb5a3dffb59567d3a9282f1572b7",
+    "/assets/index-dNUNBpCv.css": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e"
+  },
+  "hashes": {
+    "public-flow-browser.mjs": "7d6c9adb6053ca553b88b98c5c137d76e09fb80f5f00507727e396f403c79923",
+    "public-flow-final.json": "d74f473333fa9f4fa0f24fe1f4193c96861e5a95bf3c257f2591f0ec7302530f",
+    "public-flow-failure.json": "e501a5959dee444895e12d15b15390fded71dbdae230ee09dc84f31688e1fc52",
+    "build.log": "d191d3a5dd624727ab9243c16080ce82878b4d11c943e5e520b4e34570067da9",
+    "build-canonical.log": "3cc990b019aac1f291112b4901bbcf37adc6d9138748846c7a9e6e9ba1d70fa2",
+    "frontend-final.log": "3f80f2ed97a0a20a66a82e115edafd81b573f0eb3cbf8e332dcd0856f3847449",
+    "export-final.log": "fe985bd91f5a6073b528d1ad0ecc37dfd2c010b92418ddc59ad00f6518f911ca",
+    "package-native-formatted.log": "4447ea0405ac7a147e779ab9eed0aa486e7f049b932fd3744691bf3ec43b709c",
+    "routes-red.log": "b49012eab590a9a3c8c54fc3aac1d774b2489e8b00011ac8934a5dfe509f831d"
+  },
+  "scope": "Draft PR29/S5.2 current-main local integration, uncommitted merge working tree",
+  "finalChecks": {
+    "frontend": "78 files / 1600 unit and DOM tests; mocks are not clinical/avatar/browser proof",
+    "export": "72 synthetic filesystem/source tests",
+    "deploy": "53 source/native Compose-parser/ASGI tests, including case/slash negative paths; not Docker/NGINX",
+    "typecheck": "passed",
+    "scopedBiome": "passed",
+    "ruff": "passed",
+    "productionBuild": "passed only with canonical-path wrapper using original Vite config; first NFC wrapper failed",
+    "byteSameAsPriorMainPublicJSAndCSS": true
+  },
+  "failuresPreserved": {
+    "routeRed": "10 failed / 31 passed before existing-path case/slash fix",
+    "firstBuild": "Bundled package metadata missing; separate canonical-root build passed without weakening helper",
+    "firstBrowser": "Harness expected 회원가입 title; actual existing title 이메일 가입. Product unchanged, harness corrected; failed report preserved",
+    "format": "First Ruff format check failed; formatted file, final passed"
+  },
+  "authorReview": {
+    "verdict": "Hold Draft; local bounded integration accepted, required package runtime gates unresolved",
+    "independentReviewer": false,
+    "boundary": "Latest-main guard tokens and immutable old evidence preserved; source/API/schema/dependency/avatars/operations unchanged",
+    "remaining": "Docker image/NGINX/TLS/actual packaged account and records/peer quotas/restarts/DB failure recovery not run"
+  },
+  "stage5Complete": false,
+  "allStages1To6Complete": false,
+  "mergeAllowed": false
+}

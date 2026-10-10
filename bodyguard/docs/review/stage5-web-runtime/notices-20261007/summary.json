@@ -1,0 +1,419 @@
+{
+  "date": "2026-10-07",
+  "latestMain": "885392cea785e4fc01d27a724dd8b24e3e3ce721",
+  "integratedHead": "68130f67f59f1eb7d9d3fb27ad0b2204f6fe146a",
+  "priorDraftHead": "05c2d55aa380ac41191e2b5e01850e2995cd9595",
+  "provenance": "Recorded integrated HEAD with uncommitted implementation; hashes match each relevant executed check. Later evidence commit was not executed.",
+  "codeSHA256": {
+    "bodyguard/frontend/scripts/export-web-runtime.mjs": "553fd810ee6501b9854500499bcd9ba66fcda0f32685a455c3a2711d01e1248f",
+    "bodyguard/frontend/scripts/export-web-runtime.test.mjs": "3fd6757a80a92789d546c8f40bfdc20bb79d64bd6dea2404832fa8dd2fa428fe",
+    "bodyguard/frontend/scripts/runtime-notice-boundary.test.mjs": "d252b07378d2ce4d79a9cbfbea0ef5289848cd9c87bd1905aa2e025e92d07639",
+    "bodyguard/frontend/scripts/test-runtime-notices-browser.mjs": "53a11d11ce8b1064d93591397fd2767a128f0cf0bc510f730fc9208f3faec252",
+    "bodyguard/frontend/.dockerignore": "402826a61415bbc0a5fcf4a65a5ae5f062e7d6c63ecbf41fd45f61050e248bee",
+    "bodyguard/deploy/nginx.conf": "fa834f607662bb09acd9619b1fd48f0ecacc1cc08baf4f03d6b4f2a864157121"
+  },
+  "unchangedDependencyInputs": {
+    "package.json": "fc5513803b158f0829f44e17a43335bcc0319d5476cb41abf8405656946363b7",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+    "node_modules/.pnpm/lock.yaml": "19fe347142fb8c0c2739126ed4518358a9137287d7e0a8ced914d086028a7a6d"
+  },
+  "runs": [
+    {
+      "label": "notice-boundary-red",
+      "head": "68130f67f59f1eb7d9d3fb27ad0b2204f6fe146a",
+      "exitCode": 1,
+      "sourceUnchanged": true,
+      "sourceFileCount": 202,
+      "sourceManifestSHA256": "824f54c99e45c6de85558b3f22978431ddc98cfa77c3cd282a71e1b02cd6f9d5",
+      "helperSHA256": "630d49b1e544664dbd24aca6eaea65b9133d3352d28b0955e1cc93191d2cd603",
+      "originalReportSHA256": "c49f775297d053d37e88f8c51fbc640ddf0e571486be2fab36a85f6e23f6426e",
+      "logSHA256": "ff6495e8baf53cb65691d273ad0a6ea60eb7b1a1474c3b3fbc7f6ede37ca1399"
+    },
+    {
+      "label": "corrected-boundary-red",
+      "head": "68130f67f59f1eb7d9d3fb27ad0b2204f6fe146a",
+      "exitCode": 1,
+      "sourceUnchanged": true,
+      "sourceFileCount": 202,
+      "sourceManifestSHA256": "76309da9ca30c6054fcfe56acdacf18b222aa12b0b31d59cd119379b95f8247d",
+      "helperSHA256": "630d49b1e544664dbd24aca6eaea65b9133d3352d28b0955e1cc93191d2cd603",
+      "originalReportSHA256": "4add3a5a079d8444d5c528759b868e731e674d0f8b95ec1e9587e02530314c03",
+      "logSHA256": "270da89bcc6e8241615e361733fbc6bbd76bd83282334bfc45c9924a6f5ea051"
+    },
+    {
+      "label": "export-boundary-green",
+      "head": "68130f67f59f1eb7d9d3fb27ad0b2204f6fe146a",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFileCount": 202,
+      "sourceManifestSHA256": "7b7728968816530957e962bc9aec9b42de38b8ef2ead22200259c7a676ee187e",
+      "helperSHA256": "630d49b1e544664dbd24aca6eaea65b9133d3352d28b0955e1cc93191d2cd603",
+      "originalReportSHA256": "74518bc74d5591fbd917a28892d6d6b3e7c9e6aa7fcbe22376ae68865481a57b",
+      "logSHA256": "d87b85e1456ed75f4663fb8b4d167a516bfd3433ea2f133265a9ef4b4b9ef438"
+    },
+    {
+      "label": "final-export-boundaries",
+      "head": "68130f67f59f1eb7d9d3fb27ad0b2204f6fe146a",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFileCount": 203,
+      "sourceManifestSHA256": "ffc85ec022c2adaeff42fb8ad924a1d905d7b91fd48a2634ee86378418fff2c8",
+      "helperSHA256": "630d49b1e544664dbd24aca6eaea65b9133d3352d28b0955e1cc93191d2cd603",
+      "originalReportSHA256": "90218ca812e2badb28c737d57529ed379e38b0c3b77228dd547322be91d8a424",
+      "logSHA256": "e5b8d03923c7f30d89474a0726c77ca5c71bb62b1bb0f5ebcd2347941487fbbc"
+    },
+    {
+      "label": "actual-build",
+      "head": "68130f67f59f1eb7d9d3fb27ad0b2204f6fe146a",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFileCount": 202,
+      "sourceManifestSHA256": "7b7728968816530957e962bc9aec9b42de38b8ef2ead22200259c7a676ee187e",
+      "helperSHA256": "630d49b1e544664dbd24aca6eaea65b9133d3352d28b0955e1cc93191d2cd603",
+      "originalReportSHA256": "6cc50788c877ecdc130941b54300c10f521a6e63585e9fc959e1ecedd315e9f7",
+      "logSHA256": "721c41c41c9cf7ea0ae2f49e6e56df41acd7fa48235d9afde3dfa3f610e9ea0d"
+    },
+    {
+      "label": "actual-export",
+      "head": "68130f67f59f1eb7d9d3fb27ad0b2204f6fe146a",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFileCount": 203,
+      "sourceManifestSHA256": "68c5f020cd50952461ec8396e99a7680410d49b4caf2e0d200f1bf07a5d2d5b3",
+      "helperSHA256": "630d49b1e544664dbd24aca6eaea65b9133d3352d28b0955e1cc93191d2cd603",
+      "originalReportSHA256": "41a4759301f0e2be11bf656ee826af224395404347e59fcaf2e0521bc9c942cf",
+      "logSHA256": "7fcacfd5bcd8006282c7441be5b299f00e39a41ef9ab4651ed29858e20f0e7d9"
+    },
+    {
+      "label": "actual-browser-delivery",
+      "head": "68130f67f59f1eb7d9d3fb27ad0b2204f6fe146a",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFileCount": 203,
+      "sourceManifestSHA256": "68c5f020cd50952461ec8396e99a7680410d49b4caf2e0d200f1bf07a5d2d5b3",
+      "helperSHA256": "630d49b1e544664dbd24aca6eaea65b9133d3352d28b0955e1cc93191d2cd603",
+      "originalReportSHA256": "31979a4bd626a4ab526345267a0f3add3ed090dc8ec68606d4a80a4746185859",
+      "logSHA256": "64137253b6984a008c75f05842173c337a6f182b97bf8f326fcb0e97d9ef8144"
+    },
+    {
+      "label": "reviewed-browser-delivery",
+      "head": "68130f67f59f1eb7d9d3fb27ad0b2204f6fe146a",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFileCount": 203,
+      "sourceManifestSHA256": "21a058d8d608eab482f80d45252a31074d651068b95b52e1754ff21f23537207",
+      "helperSHA256": "630d49b1e544664dbd24aca6eaea65b9133d3352d28b0955e1cc93191d2cd603",
+      "originalReportSHA256": "bb67fc181f23b6f341b29bbd75fb31724c0bf9d620337943b5922a3a0833e584",
+      "logSHA256": "679b4122a73b60c5b3c2a823a3f853a7bc8916128b46885750db6a5467452527"
+    },
+    {
+      "label": "frontend-regression",
+      "head": "68130f67f59f1eb7d9d3fb27ad0b2204f6fe146a",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFileCount": 203,
+      "sourceManifestSHA256": "68c5f020cd50952461ec8396e99a7680410d49b4caf2e0d200f1bf07a5d2d5b3",
+      "helperSHA256": "630d49b1e544664dbd24aca6eaea65b9133d3352d28b0955e1cc93191d2cd603",
+      "originalReportSHA256": "df0a577c22ca81e90e9ab45431a716ae9e64701b0e5fc16e544fc2be5cb42010",
+      "logSHA256": "3d1176daef6632cd5581a237f404997d24f6837c4a7946c1c1d6d818ed8b1bb5"
+    },
+    {
+      "label": "typecheck",
+      "head": "68130f67f59f1eb7d9d3fb27ad0b2204f6fe146a",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFileCount": 203,
+      "sourceManifestSHA256": "68c5f020cd50952461ec8396e99a7680410d49b4caf2e0d200f1bf07a5d2d5b3",
+      "helperSHA256": "630d49b1e544664dbd24aca6eaea65b9133d3352d28b0955e1cc93191d2cd603",
+      "originalReportSHA256": "067186b1a8f2e691fcf698c905074e91e377ae61e1466e127ed284d372086a3a",
+      "logSHA256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92"
+    },
+    {
+      "label": "reviewed-source-biome",
+      "head": "68130f67f59f1eb7d9d3fb27ad0b2204f6fe146a",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFileCount": 203,
+      "sourceManifestSHA256": "ffc85ec022c2adaeff42fb8ad924a1d905d7b91fd48a2634ee86378418fff2c8",
+      "helperSHA256": "630d49b1e544664dbd24aca6eaea65b9133d3352d28b0955e1cc93191d2cd603",
+      "originalReportSHA256": "d0d47419c772acf7ac8b782c93b5376c63535d252df3dc35b231c1e5b946e75c",
+      "logSHA256": "a0089af2e7c32a8286810e92fdf895d15e8eec439dc01a13a7bab301db619359"
+    },
+    {
+      "label": "native-package-contracts",
+      "head": "68130f67f59f1eb7d9d3fb27ad0b2204f6fe146a",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFileCount": 203,
+      "sourceManifestSHA256": "68c5f020cd50952461ec8396e99a7680410d49b4caf2e0d200f1bf07a5d2d5b3",
+      "helperSHA256": "630d49b1e544664dbd24aca6eaea65b9133d3352d28b0955e1cc93191d2cd603",
+      "originalReportSHA256": "de4f09209a0ca30989a3e1743092860007d703fac68f221d39f6c14c06325b18",
+      "logSHA256": "f5a2d57b7607f412b11dbbc572c8051aca47e553e2f4681a81ef7d94c63f8457"
+    },
+    {
+      "label": "backend-ruff",
+      "head": "68130f67f59f1eb7d9d3fb27ad0b2204f6fe146a",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFileCount": 203,
+      "sourceManifestSHA256": "21a058d8d608eab482f80d45252a31074d651068b95b52e1754ff21f23537207",
+      "helperSHA256": "630d49b1e544664dbd24aca6eaea65b9133d3352d28b0955e1cc93191d2cd603",
+      "originalReportSHA256": "4ab488fb482d9b59ecee6f72a3afa8eedd84d3aac1c74559ecec086cea9e5c45",
+      "logSHA256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "label": "backend-format",
+      "head": "68130f67f59f1eb7d9d3fb27ad0b2204f6fe146a",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFileCount": 203,
+      "sourceManifestSHA256": "21a058d8d608eab482f80d45252a31074d651068b95b52e1754ff21f23537207",
+      "helperSHA256": "630d49b1e544664dbd24aca6eaea65b9133d3352d28b0955e1cc93191d2cd603",
+      "originalReportSHA256": "a1a3386ee2a8d6c221893e3a80eba5e3934b7cd4e26eeeb13e612d113bf1978b",
+      "logSHA256": "0760fafc4f10688940f82c60169dcd12eac4379bcf0334b2d9e31bb1fdc46bab"
+    },
+    {
+      "label": "backend-mypy",
+      "head": "68130f67f59f1eb7d9d3fb27ad0b2204f6fe146a",
+      "exitCode": 0,
+      "sourceUnchanged": true,
+      "sourceFileCount": 203,
+      "sourceManifestSHA256": "21a058d8d608eab482f80d45252a31074d651068b95b52e1754ff21f23537207",
+      "helperSHA256": "630d49b1e544664dbd24aca6eaea65b9133d3352d28b0955e1cc93191d2cd603",
+      "originalReportSHA256": "ffa6faa521287410d6794e785e162417f4a58638be7d3f6aab46d79d05d9d53e",
+      "logSHA256": "049f51b850512be193c74d3fbb731e25fbc6374a66560d8ec0d6569d79c88ea6"
+    },
+    {
+      "label": "engine-check",
+      "head": "68130f67f59f1eb7d9d3fb27ad0b2204f6fe146a",
+      "exitCode": 1,
+      "sourceUnchanged": true,
+      "sourceFileCount": 203,
+      "sourceManifestSHA256": "21a058d8d608eab482f80d45252a31074d651068b95b52e1754ff21f23537207",
+      "helperSHA256": "630d49b1e544664dbd24aca6eaea65b9133d3352d28b0955e1cc93191d2cd603",
+      "originalReportSHA256": "82131106b5fda02f25dd26203a96965ab2856f84a2b0e44afb220041a39f066d",
+      "logSHA256": "3569e924299273dc9129e4ea157d72b1bcddf5edac7d32d2f1b5776292700b59"
+    }
+  ],
+  "originalArtifacts": [
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/README.md",
+      "sha256": "ee7f706242f977c612d5c979a7c9ba896350a826c0a02e1cc4388c0eddbe4d03"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/api-sql-regression.xml",
+      "sha256": "db3e572a61d31ff18d20be08696fd9dbfc8af3543f2948fd39cf8e9331e05374"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/api-sql-regression.xml.gz",
+      "sha256": "7f386dbbe5bf364c7982f5dcfc25366d02598b0c819881ce044c4949ecd86393"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/dom-regression.xml",
+      "sha256": "a322fc104ac06d4bd281942a4bacb900ea19675d257ea9880dae5f69a14c943a"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/dom-regression.xml.gz",
+      "sha256": "4d205a971548e0926cc9f149fcf72d3ed90358a3a7e3d0a974486aa759181d5f"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/execution-issues.md",
+      "sha256": "ca69035299a1cf3964f647361783867f20c0ba0221de0a39fcf930435af28332"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/export-boundary.xml",
+      "sha256": "187331c7d008d846c809cb05c046b5de7c37e557cb44217244446c52726ec80d"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/export-boundary.xml.gz",
+      "sha256": "e9cf15a1d1776cff53017c345978c59aecdc8de93f48c13e29b68042e43e0bb3"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/export-first-green.xml",
+      "sha256": "b01ab91ca9d7cb82a27e9bcf7260b873da6efe04e3a2495aa2215f1d633548f1"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/export-first-green.xml.gz",
+      "sha256": "a3e984b248d56ac7259e64da1f1845b3bbfa1b529f613d0b7db40d47fc6ff7ae"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/export-first-red.xml",
+      "sha256": "1899ed4a3537a3d47f4e484d963c378de0c538faf8162f593d06bfa25b9bf25f"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/export-first-red.xml.gz",
+      "sha256": "24b385ce7991094edbb8fbc5d098c6afe5ca56648772af0bdea17d5de6bdee98"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/export-review-green.xml",
+      "sha256": "b2cc77a9098758306a4a7abf6946022260ef4f20c4868611a825411a4b38ad2d"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/export-review-green.xml.gz",
+      "sha256": "15fddfbdd6816a6d83f1647bcfe7e083c66e806d06b43aedc3b6c6c8ecb92817"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/first-red.xml",
+      "sha256": "9bf59f8f7ffad9ab7fb6d749f180b8b3c6e1ebb85dacec873a65bfe307f7143d"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/first-red.xml.gz",
+      "sha256": "cbca51e30671d1429c31a73c4e93c05556c6a065aec754d8e87fa0d37a725b33"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/integrated-20261007/summary.json",
+      "sha256": "15fc4485897e435cdcfd9d91f5c7980a5f7e65c6376002c152bb6f8bbae79bfd"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/native-contract-first.xml",
+      "sha256": "844d63e887bb7933930dd1067638ca226a8fbb543fce3840b33bb6dbad9f2fa7"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/native-contract-first.xml.gz",
+      "sha256": "79f3a0c1be317ebfbc559cb44ab327a420015e29bec31dd663e1a6f6e33ddc5e"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/native-contract-green.xml",
+      "sha256": "a5624d647d81425e505a86a4380b5bea69407c984e4f33c7a301826d3e1bd079"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/native-contract-green.xml.gz",
+      "sha256": "2e133426faa1308f0386e79f792ab76df829bf034d79bda70e9b851a21a35b46"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/nginx-selected-manifest.json",
+      "sha256": "03bb386d2fbd11a402b4375dbd4f82aeb9de2fd24f58b49b11830db192a0ef57"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/nginx-stable-rejected-manifest.json",
+      "sha256": "466f0dcc87727cf356511eb618b16a1abb9e556aa5f643ab53fca32ba898af1d"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/node-manifest.json",
+      "sha256": "949ce07621da203822b1dc92a02f0c78fcbc91db081b2d5d33de90a9948a6e01"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/package-presence-green.xml",
+      "sha256": "2392200bfc3f0032cad0b829ae3cc4dfa1859ac1fd370fc4e2fedcfd73c90b14"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/package-presence-green.xml.gz",
+      "sha256": "4b6bccc43c0433b68620baa27df9cb0e08af5dace2f37f9b160a195d2489dfc0"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/python-manifest.json",
+      "sha256": "625673d458c17b9c4260019bc65237ef828d6ccc5645190183da50fd70e7c21b"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/routes-20261007/summary.json",
+      "sha256": "80567a46c14069c2b646bf6b4225ba5eb8ceea74d0cea76999b628a4cbb6c614"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/sha256sums.txt",
+      "sha256": "76f5747eec944dfdd3cdc6c27ebcc46b54c5d432883782553e835faf8332d017"
+    },
+    {
+      "path": "bodyguard/docs/review/stage5-web-runtime/uv-manifest.json",
+      "sha256": "240e8ce11785571becb73fb225aaf6bb30ebbfcf9458c0024555d919eb4e7c8f"
+    }
+  ],
+  "packageFiles": {
+    "assets/index-BZhaXPyN.js": "334736692ea127d229c8a1ead7e031ad0652c53e559cb2e4ae3eb95fd3dc8989",
+    "assets/index-FW13lazw.css": "3db1ea79a56892552afda1e0aba982f971b1f752e6647cd39a3be9441fc58686",
+    "brand/google-icon.png": "2bc2ae8e4c67de66d74bf1deed12cd8f22981270266a487576b671b0b4df361c",
+    "index.html": "05fc0c89e74f8a51c0039d0192ebba1d24303c27a70983758715fce380055b07",
+    "licenses/bundled-js.json": "19f0c9961dd082bcebb1ba8dfdde98ef58c843cdb0ea4973a47a91b46c940cd7",
+    "licenses/bundled-packages.json": "1c80ec2f6a9ad967f999232165821bf4d27ff55197ea21c4e049ff2f974efb54",
+    "licenses/tailwindcss.txt": "0045fac7ef9a1530b1e59eacde31c4823bfbc8881ad2e543bc82c70c38cfcfd8"
+  },
+  "packageMatchesActualViteOutput": true,
+  "previousScreenOutputFilesUnchanged": [
+    "assets/index-BZhaXPyN.js",
+    "assets/index-FW13lazw.css",
+    "brand/google-icon.png",
+    "index.html"
+  ],
+  "browser": {
+    "browser": "154.0.8037.98",
+    "delivered": [
+      {
+        "path": "/licenses/bundled-js.json",
+        "status": 200,
+        "contentType": "application/json; charset=utf-8",
+        "bodySHA256": "19f0c9961dd082bcebb1ba8dfdde98ef58c843cdb0ea4973a47a91b46c940cd7"
+      },
+      {
+        "path": "/licenses/bundled-packages.json",
+        "status": 200,
+        "contentType": "application/json; charset=utf-8",
+        "bodySHA256": "1c80ec2f6a9ad967f999232165821bf4d27ff55197ea21c4e049ff2f974efb54"
+      },
+      {
+        "path": "/licenses/tailwindcss.txt",
+        "status": 200,
+        "contentType": "text/plain; charset=utf-8",
+        "bodySHA256": "0045fac7ef9a1530b1e59eacde31c4823bfbc8881ad2e543bc82c70c38cfcfd8"
+      }
+    ],
+    "denied": [
+      {
+        "path": "/licenses/missing.txt",
+        "status": 404
+      },
+      {
+        "path": "/licenses/bundled-js.json/extra",
+        "status": 404
+      },
+      {
+        "path": "/.env",
+        "status": 404
+      },
+      {
+        "path": "/api/auth/me",
+        "status": 404
+      }
+    ],
+    "noticeFilesUnchanged": true,
+    "externalRequests": 0,
+    "jsNotices": 4,
+    "server": "Owned test HTTP server, not NGINX",
+    "dockerVerified": false,
+    "tlsVerified": false,
+    "accountFlowVerified": false,
+    "legalApproved": false,
+    "ownedResourcesClosed": true
+  },
+  "syntheticBoundaries": {
+    "passed": 64,
+    "failed": 0,
+    "note": "license fixtures 18 + existing export fixtures 33 + new notice/source fixtures 13; not actual image/context/NGINX"
+  },
+  "frontendRegression": {
+    "passed": 693,
+    "files": 42
+  },
+  "nativeContracts": {
+    "passed": 43,
+    "note": "file existence/Compose parser/ASGI/source regex only"
+  },
+  "helperSHA256": "1cdc528c26a8eba03955870a1540b137e01fe41e31dcb56d7d52ba86877914ff",
+  "actualExportHelperSHA256": "fabee60c4440b2df38cb0d83a78dc4fde022e007aa5b15f917e240af072c9bc8",
+  "engine": {
+    "context": "desktop-linux",
+    "localUnixEndpointConfirmed": true,
+    "versionExitCode": 1,
+    "server": null,
+    "socketPresent": false,
+    "started": false
+  },
+  "fullAPISQLRegressionRerun": false,
+  "nginxRuntimeVerified": false,
+  "actualDockerBuildVerified": false,
+  "httpsVerified": false,
+  "clinicalVerified": false,
+  "finalAvatarVerified": false,
+  "legalApproved": false,
+  "storyComplete": false,
+  "mergeAllowed": false,
+  "stages1To6Complete": false
+}

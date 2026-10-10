@@ -1,0 +1,12 @@
+# NFR-08: deny by default. No tests, .env, local venv/cache or source evidence.
+**
+!Dockerfile
+!pyproject.toml
+!uv.lock
+!alembic.ini
+!app/
+!app/*.py
+!migrations/
+!migrations/env.py
+!migrations/versions/
+!migrations/versions/*.py

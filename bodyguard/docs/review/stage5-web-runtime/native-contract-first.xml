@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="7" failures="0" skipped="0" tests="7" time="0.235" timestamp="2026-10-05T18:20:08.314768+09:00" hostname="MacBook-Air.local"><testcase classname="deploy.tests.test_local_package_contract" name="test_native_compose_preserves_local_only_services" time="0.094"><error message="failed on setup with &quot;AssertionError: Native Compose parser failed (no credentials/config printed)&#10;assert 125 == 0&#10; +  where 125 = CompletedProcess(args=['/usr/local/bin/docker', 'compose', '--env-file', '/dev/null', '--project-name', 'bodyguard-s5-...b&quot;unknown flag: --env-file\n\nUsage:  docker [OPTIONS] COMMAND [ARG...]\n\nRun 'docker --help' for more information\n&quot;).returncode&quot;">tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=&lt;pluggy._tracing.TagTracerSub object at 0x107f7cc30&gt;, _basetemp=PosixPath.../folders/8z/d7p5k9352z75y68hl1l0x3mr0000gn/T/pytest-of-gongman/pytest-0'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def parsed(tmp_path_factory: pytest.TempPathFactory) -&gt; dict[str, Any]:
+        owned = tmp_path_factory.mktemp("bodyguard-package-contract")
+        docker = shutil.which("docker")
+        assert docker, "Docker Compose CLI required; missing CLI is not a passing runtime test"
+        # No auto dotenv/service env resolution, user Docker credentials or live engine access.
+        environment = {
+            "PATH": os.environ.get("PATH", ""),
+            "DOCKER_CONFIG": str(owned / "docker-config"),
+            "BODYGUARD_WEB_IMAGE": "bodyguard-web-parser-test",
+            "BODYGUARD_API_IMAGE": "bodyguard-api-parser-test",
+            "BODYGUARD_WEB_PORT": "58443",
+            "BODYGUARD_TLS_CERT_FILE": str(owned / "cert.pem"),
+            "BODYGUARD_TLS_KEY_FILE": str(owned / "key.pem"),
+            "BODYGUARD_RUNTIME_ENV_FILE": str(owned / "runtime.conf"),
+        }
+        command = [
+            docker,
+            "compose",
+            "--env-file",
+            os.devnull,
+            "--project-name",
+            "bodyguard-s5-parse-only",
+            "-f",
+            str(COMPOSE),
+            "config",
+            "--no-env-resolution",
+            "--format",
+            "json",
+        ]
+        result = subprocess.run(command, env=environment, capture_output=True, timeout=10, check=False)
+&gt;       assert result.returncode == 0, "Native Compose parser failed (no credentials/config printed)"
+E       AssertionError: Native Compose parser failed (no credentials/config printed)
+E       assert 125 == 0
+E        +  where 125 = CompletedProcess(args=['/usr/local/bin/docker', 'compose', '--env-file', '/dev/null', '--project-name', 'bodyguard-s5-...b"unknown flag: --env-file\n\nUsage:  docker [OPTIONS] COMMAND [ARG...]\n\nRun 'docker --help' for more information\n").returncode
+
+../deploy/tests/test_local_package_contract.py:48: AssertionError</error></testcase><testcase classname="deploy.tests.test_local_package_contract" name="test_native_compose_keeps_one_explicit_proxy_peer" time="0.001"><error message="failed on setup with &quot;AssertionError: Native Compose parser failed (no credentials/config printed)&#10;assert 125 == 0&#10; +  where 125 = CompletedProcess(args=['/usr/local/bin/docker', 'compose', '--env-file', '/dev/null', '--project-name', 'bodyguard-s5-...b&quot;unknown flag: --env-file\n\nUsage:  docker [OPTIONS] COMMAND [ARG...]\n\nRun 'docker --help' for more information\n&quot;).returncode&quot;">tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=&lt;pluggy._tracing.TagTracerSub object at 0x107f7cc30&gt;, _basetemp=PosixPath.../folders/8z/d7p5k9352z75y68hl1l0x3mr0000gn/T/pytest-of-gongman/pytest-0'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def parsed(tmp_path_factory: pytest.TempPathFactory) -&gt; dict[str, Any]:
+        owned = tmp_path_factory.mktemp("bodyguard-package-contract")
+        docker = shutil.which("docker")
+        assert docker, "Docker Compose CLI required; missing CLI is not a passing runtime test"
+        # No auto dotenv/service env resolution, user Docker credentials or live engine access.
+        environment = {
+            "PATH": os.environ.get("PATH", ""),
+            "DOCKER_CONFIG": str(owned / "docker-config"),
+            "BODYGUARD_WEB_IMAGE": "bodyguard-web-parser-test",
+            "BODYGUARD_API_IMAGE": "bodyguard-api-parser-test",
+            "BODYGUARD_WEB_PORT": "58443",
+            "BODYGUARD_TLS_CERT_FILE": str(owned / "cert.pem"),
+            "BODYGUARD_TLS_KEY_FILE": str(owned / "key.pem"),
+            "BODYGUARD_RUNTIME_ENV_FILE": str(owned / "runtime.conf"),
+        }
+        command = [
+            docker,
+            "compose",
+            "--env-file",
+            os.devnull,
+            "--project-name",
+            "bodyguard-s5-parse-only",
+            "-f",
+            str(COMPOSE),
+            "config",
+            "--no-env-resolution",
+            "--format",
+            "json",
+        ]
+        result = subprocess.run(command, env=environment, capture_output=True, timeout=10, check=False)
+&gt;       assert result.returncode == 0, "Native Compose parser failed (no credentials/config printed)"
+E       AssertionError: Native Compose parser failed (no credentials/config printed)
+E       assert 125 == 0
+E        +  where 125 = CompletedProcess(args=['/usr/local/bin/docker', 'compose', '--env-file', '/dev/null', '--project-name', 'bodyguard-s5-...b"unknown flag: --env-file\n\nUsage:  docker [OPTIONS] COMMAND [ARG...]\n\nRun 'docker --help' for more information\n").returncode
+
+../deploy/tests/test_local_package_contract.py:48: AssertionError</error></testcase><testcase classname="deploy.tests.test_local_package_contract" name="test_configured_native_uvicorn_rejects_non_loopback_proxy_claims[127.0.0.1]" time="0.000"><error message="failed on setup with &quot;AssertionError: Native Compose parser failed (no credentials/config printed)&#10;assert 125 == 0&#10; +  where 125 = CompletedProcess(args=['/usr/local/bin/docker', 'compose', '--env-file', '/dev/null', '--project-name', 'bodyguard-s5-...b&quot;unknown flag: --env-file\n\nUsage:  docker [OPTIONS] COMMAND [ARG...]\n\nRun 'docker --help' for more information\n&quot;).returncode&quot;">tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=&lt;pluggy._tracing.TagTracerSub object at 0x107f7cc30&gt;, _basetemp=PosixPath.../folders/8z/d7p5k9352z75y68hl1l0x3mr0000gn/T/pytest-of-gongman/pytest-0'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def parsed(tmp_path_factory: pytest.TempPathFactory) -&gt; dict[str, Any]:
+        owned = tmp_path_factory.mktemp("bodyguard-package-contract")
+        docker = shutil.which("docker")
+        assert docker, "Docker Compose CLI required; missing CLI is not a passing runtime test"
+        # No auto dotenv/service env resolution, user Docker credentials or live engine access.
+        environment = {
+            "PATH": os.environ.get("PATH", ""),
+            "DOCKER_CONFIG": str(owned / "docker-config"),
+            "BODYGUARD_WEB_IMAGE": "bodyguard-web-parser-test",
+            "BODYGUARD_API_IMAGE": "bodyguard-api-parser-test",
+            "BODYGUARD_WEB_PORT": "58443",
+            "BODYGUARD_TLS_CERT_FILE": str(owned / "cert.pem"),
+            "BODYGUARD_TLS_KEY_FILE": str(owned / "key.pem"),
+            "BODYGUARD_RUNTIME_ENV_FILE": str(owned / "runtime.conf"),
+        }
+        command = [
+            docker,
+            "compose",
+            "--env-file",
+            os.devnull,
+            "--project-name",
+            "bodyguard-s5-parse-only",
+            "-f",
+            str(COMPOSE),
+            "config",
+            "--no-env-resolution",
+            "--format",
+            "json",
+        ]
+        result = subprocess.run(command, env=environment, capture_output=True, timeout=10, check=False)
+&gt;       assert result.returncode == 0, "Native Compose parser failed (no credentials/config printed)"
+E       AssertionError: Native Compose parser failed (no credentials/config printed)
+E       assert 125 == 0
+E        +  where 125 = CompletedProcess(args=['/usr/local/bin/docker', 'compose', '--env-file', '/dev/null', '--project-name', 'bodyguard-s5-...b"unknown flag: --env-file\n\nUsage:  docker [OPTIONS] COMMAND [ARG...]\n\nRun 'docker --help' for more information\n").returncode
+
+../deploy/tests/test_local_package_contract.py:48: AssertionError</error></testcase><testcase classname="deploy.tests.test_local_package_contract" name="test_configured_native_uvicorn_rejects_non_loopback_proxy_claims[::1]" time="0.000"><error message="failed on setup with &quot;AssertionError: Native Compose parser failed (no credentials/config printed)&#10;assert 125 == 0&#10; +  where 125 = CompletedProcess(args=['/usr/local/bin/docker', 'compose', '--env-file', '/dev/null', '--project-name', 'bodyguard-s5-...b&quot;unknown flag: --env-file\n\nUsage:  docker [OPTIONS] COMMAND [ARG...]\n\nRun 'docker --help' for more information\n&quot;).returncode&quot;">tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=&lt;pluggy._tracing.TagTracerSub object at 0x107f7cc30&gt;, _basetemp=PosixPath.../folders/8z/d7p5k9352z75y68hl1l0x3mr0000gn/T/pytest-of-gongman/pytest-0'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def parsed(tmp_path_factory: pytest.TempPathFactory) -&gt; dict[str, Any]:
+        owned = tmp_path_factory.mktemp("bodyguard-package-contract")
+        docker = shutil.which("docker")
+        assert docker, "Docker Compose CLI required; missing CLI is not a passing runtime test"
+        # No auto dotenv/service env resolution, user Docker credentials or live engine access.
+        environment = {
+            "PATH": os.environ.get("PATH", ""),
+            "DOCKER_CONFIG": str(owned / "docker-config"),
+            "BODYGUARD_WEB_IMAGE": "bodyguard-web-parser-test",
+            "BODYGUARD_API_IMAGE": "bodyguard-api-parser-test",
+            "BODYGUARD_WEB_PORT": "58443",
+            "BODYGUARD_TLS_CERT_FILE": str(owned / "cert.pem"),
+            "BODYGUARD_TLS_KEY_FILE": str(owned / "key.pem"),
+            "BODYGUARD_RUNTIME_ENV_FILE": str(owned / "runtime.conf"),
+        }
+        command = [
+            docker,
+            "compose",
+            "--env-file",
+            os.devnull,
+            "--project-name",
+            "bodyguard-s5-parse-only",
+            "-f",
+            str(COMPOSE),
+            "config",
+            "--no-env-resolution",
+            "--format",
+            "json",
+        ]
+        result = subprocess.run(command, env=environment, capture_output=True, timeout=10, check=False)
+&gt;       assert result.returncode == 0, "Native Compose parser failed (no credentials/config printed)"
+E       AssertionError: Native Compose parser failed (no credentials/config printed)
+E       assert 125 == 0
+E        +  where 125 = CompletedProcess(args=['/usr/local/bin/docker', 'compose', '--env-file', '/dev/null', '--project-name', 'bodyguard-s5-...b"unknown flag: --env-file\n\nUsage:  docker [OPTIONS] COMMAND [ARG...]\n\nRun 'docker --help' for more information\n").returncode
+
+../deploy/tests/test_local_package_contract.py:48: AssertionError</error></testcase><testcase classname="deploy.tests.test_local_package_contract" name="test_configured_native_uvicorn_rejects_non_loopback_proxy_claims[198.51.100.17]" time="0.000"><error message="failed on setup with &quot;AssertionError: Native Compose parser failed (no credentials/config printed)&#10;assert 125 == 0&#10; +  where 125 = CompletedProcess(args=['/usr/local/bin/docker', 'compose', '--env-file', '/dev/null', '--project-name', 'bodyguard-s5-...b&quot;unknown flag: --env-file\n\nUsage:  docker [OPTIONS] COMMAND [ARG...]\n\nRun 'docker --help' for more information\n&quot;).returncode&quot;">tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=&lt;pluggy._tracing.TagTracerSub object at 0x107f7cc30&gt;, _basetemp=PosixPath.../folders/8z/d7p5k9352z75y68hl1l0x3mr0000gn/T/pytest-of-gongman/pytest-0'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def parsed(tmp_path_factory: pytest.TempPathFactory) -&gt; dict[str, Any]:
+        owned = tmp_path_factory.mktemp("bodyguard-package-contract")
+        docker = shutil.which("docker")
+        assert docker, "Docker Compose CLI required; missing CLI is not a passing runtime test"
+        # No auto dotenv/service env resolution, user Docker credentials or live engine access.
+        environment = {
+            "PATH": os.environ.get("PATH", ""),
+            "DOCKER_CONFIG": str(owned / "docker-config"),
+            "BODYGUARD_WEB_IMAGE": "bodyguard-web-parser-test",
+            "BODYGUARD_API_IMAGE": "bodyguard-api-parser-test",
+            "BODYGUARD_WEB_PORT": "58443",
+            "BODYGUARD_TLS_CERT_FILE": str(owned / "cert.pem"),
+            "BODYGUARD_TLS_KEY_FILE": str(owned / "key.pem"),
+            "BODYGUARD_RUNTIME_ENV_FILE": str(owned / "runtime.conf"),
+        }
+        command = [
+            docker,
+            "compose",
+            "--env-file",
+            os.devnull,
+            "--project-name",
+            "bodyguard-s5-parse-only",
+            "-f",
+            str(COMPOSE),
+            "config",
+            "--no-env-resolution",
+            "--format",
+            "json",
+        ]
+        result = subprocess.run(command, env=environment, capture_output=True, timeout=10, check=False)
+&gt;       assert result.returncode == 0, "Native Compose parser failed (no credentials/config printed)"
+E       AssertionError: Native Compose parser failed (no credentials/config printed)
+E       assert 125 == 0
+E        +  where 125 = CompletedProcess(args=['/usr/local/bin/docker', 'compose', '--env-file', '/dev/null', '--project-name', 'bodyguard-s5-...b"unknown flag: --env-file\n\nUsage:  docker [OPTIONS] COMMAND [ARG...]\n\nRun 'docker --help' for more information\n").returncode
+
+../deploy/tests/test_local_package_contract.py:48: AssertionError</error></testcase><testcase classname="deploy.tests.test_local_package_contract" name="test_configured_native_uvicorn_rejects_non_loopback_proxy_claims[172.18.0.3]" time="0.000"><error message="failed on setup with &quot;AssertionError: Native Compose parser failed (no credentials/config printed)&#10;assert 125 == 0&#10; +  where 125 = CompletedProcess(args=['/usr/local/bin/docker', 'compose', '--env-file', '/dev/null', '--project-name', 'bodyguard-s5-...b&quot;unknown flag: --env-file\n\nUsage:  docker [OPTIONS] COMMAND [ARG...]\n\nRun 'docker --help' for more information\n&quot;).returncode&quot;">tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=&lt;pluggy._tracing.TagTracerSub object at 0x107f7cc30&gt;, _basetemp=PosixPath.../folders/8z/d7p5k9352z75y68hl1l0x3mr0000gn/T/pytest-of-gongman/pytest-0'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def parsed(tmp_path_factory: pytest.TempPathFactory) -&gt; dict[str, Any]:
+        owned = tmp_path_factory.mktemp("bodyguard-package-contract")
+        docker = shutil.which("docker")
+        assert docker, "Docker Compose CLI required; missing CLI is not a passing runtime test"
+        # No auto dotenv/service env resolution, user Docker credentials or live engine access.
+        environment = {
+            "PATH": os.environ.get("PATH", ""),
+            "DOCKER_CONFIG": str(owned / "docker-config"),
+            "BODYGUARD_WEB_IMAGE": "bodyguard-web-parser-test",
+            "BODYGUARD_API_IMAGE": "bodyguard-api-parser-test",
+            "BODYGUARD_WEB_PORT": "58443",
+            "BODYGUARD_TLS_CERT_FILE": str(owned / "cert.pem"),
+            "BODYGUARD_TLS_KEY_FILE": str(owned / "key.pem"),
+            "BODYGUARD_RUNTIME_ENV_FILE": str(owned / "runtime.conf"),
+        }
+        command = [
+            docker,
+            "compose",
+            "--env-file",
+            os.devnull,
+            "--project-name",
+            "bodyguard-s5-parse-only",
+            "-f",
+            str(COMPOSE),
+            "config",
+            "--no-env-resolution",
+            "--format",
+            "json",
+        ]
+        result = subprocess.run(command, env=environment, capture_output=True, timeout=10, check=False)
+&gt;       assert result.returncode == 0, "Native Compose parser failed (no credentials/config printed)"
+E       AssertionError: Native Compose parser failed (no credentials/config printed)
+E       assert 125 == 0
+E        +  where 125 = CompletedProcess(args=['/usr/local/bin/docker', 'compose', '--env-file', '/dev/null', '--project-name', 'bodyguard-s5-...b"unknown flag: --env-file\n\nUsage:  docker [OPTIONS] COMMAND [ARG...]\n\nRun 'docker --help' for more information\n").returncode
+
+../deploy/tests/test_local_package_contract.py:48: AssertionError</error></testcase><testcase classname="deploy.tests.test_local_package_contract" name="test_configured_native_uvicorn_rejects_non_loopback_proxy_claims[None]" time="0.000"><error message="failed on setup with &quot;AssertionError: Native Compose parser failed (no credentials/config printed)&#10;assert 125 == 0&#10; +  where 125 = CompletedProcess(args=['/usr/local/bin/docker', 'compose', '--env-file', '/dev/null', '--project-name', 'bodyguard-s5-...b&quot;unknown flag: --env-file\n\nUsage:  docker [OPTIONS] COMMAND [ARG...]\n\nRun 'docker --help' for more information\n&quot;).returncode&quot;">tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=&lt;pluggy._tracing.TagTracerSub object at 0x107f7cc30&gt;, _basetemp=PosixPath.../folders/8z/d7p5k9352z75y68hl1l0x3mr0000gn/T/pytest-of-gongman/pytest-0'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def parsed(tmp_path_factory: pytest.TempPathFactory) -&gt; dict[str, Any]:
+        owned = tmp_path_factory.mktemp("bodyguard-package-contract")
+        docker = shutil.which("docker")
+        assert docker, "Docker Compose CLI required; missing CLI is not a passing runtime test"
+        # No auto dotenv/service env resolution, user Docker credentials or live engine access.
+        environment = {
+            "PATH": os.environ.get("PATH", ""),
+            "DOCKER_CONFIG": str(owned / "docker-config"),
+            "BODYGUARD_WEB_IMAGE": "bodyguard-web-parser-test",
+            "BODYGUARD_API_IMAGE": "bodyguard-api-parser-test",
+            "BODYGUARD_WEB_PORT": "58443",
+            "BODYGUARD_TLS_CERT_FILE": str(owned / "cert.pem"),
+            "BODYGUARD_TLS_KEY_FILE": str(owned / "key.pem"),
+            "BODYGUARD_RUNTIME_ENV_FILE": str(owned / "runtime.conf"),
+        }
+        command = [
+            docker,
+            "compose",
+            "--env-file",
+            os.devnull,
+            "--project-name",
+            "bodyguard-s5-parse-only",
+            "-f",
+            str(COMPOSE),
+            "config",
+            "--no-env-resolution",
+            "--format",
+            "json",
+        ]
+        result = subprocess.run(command, env=environment, capture_output=True, timeout=10, check=False)
+&gt;       assert result.returncode == 0, "Native Compose parser failed (no credentials/config printed)"
+E       AssertionError: Native Compose parser failed (no credentials/config printed)
+E       assert 125 == 0
+E        +  where 125 = CompletedProcess(args=['/usr/local/bin/docker', 'compose', '--env-file', '/dev/null', '--project-name', 'bodyguard-s5-...b"unknown flag: --env-file\n\nUsage:  docker [OPTIONS] COMMAND [ARG...]\n\nRun 'docker --help' for more information\n").returncode
+
+../deploy/tests/test_local_package_contract.py:48: AssertionError</error></testcase></testsuite></testsuites>

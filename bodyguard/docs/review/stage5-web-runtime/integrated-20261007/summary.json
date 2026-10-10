@@ -1,0 +1,659 @@
+{
+  "executedHead": "6cb4b3138931290ee964f720f3d0bbfa2903173a",
+  "integratedMain": "33a6e8b5d24f6d9635bb1605d148ed6d30ba4f42",
+  "previousDraftHead": "1336d3d830ebab64cf6c1ce75acf94a71f53cda9",
+  "resolvedIntegrationFiles": [
+    "bodyguard/docs/tasks.md",
+    "bodyguard/frontend/scripts/check-selection-production.mjs"
+  ],
+  "sourceManifest": {
+    "bodyguard/frontend/src/App.test.tsx": "7789b33e8ea6deed6c938c1b99c5cf89b075d371153c119ac54506d4629ec751",
+    "bodyguard/frontend/src/App.tsx": "6ee68d0b2e687fd683104f2178b74a4b8d811272f58d0577088251b884a748e4",
+    "bodyguard/frontend/src/api/auth.ts": "b467901215b027c14db34e9b6f5ed3ad48504d692adad7aa6d8df9afd2bb2a09",
+    "bodyguard/frontend/src/api/generated/index.ts": "8afc5f5ec1bd65249da0b59912d8a6bd47024138d42fadcecae77ff05d8e9fc3",
+    "bodyguard/frontend/src/api/generated/types.gen.ts": "976f4ab3a3577b98e7741fcea2ae342ca226abab05675b030116597272a626cf",
+    "bodyguard/frontend/src/api/minuteSummaries.test.ts": "e358e4093b7ba2bc4e25b749760913e168dc8b57aea88a846f3ecbfe447f0c64",
+    "bodyguard/frontend/src/api/minuteSummaries.ts": "b93036e3251e0d0c9cfdeb65f5527a19e24c9992b029b002a7275fc0503e516a",
+    "bodyguard/frontend/src/api/notificationPreferences.test.ts": "da91da5369f6769cad0dfd92154fe24f68281e467432794f91b80281a9d98679",
+    "bodyguard/frontend/src/api/notificationPreferences.ts": "438fbc7e253551682662b658a7fb2af9a2215869862bf97345886a44fc416a40",
+    "bodyguard/frontend/src/api/recordDeletion.test.ts": "085ce35c2e101f654c7d99a6aead40fb12e8a4e60db99108f44b17e090d6bfda",
+    "bodyguard/frontend/src/api/recordDeletion.ts": "d58aa264f494de3a869446eb613ca470c1ac841db3a399ea110b0c298140c20f",
+    "bodyguard/frontend/src/api/records.test.ts": "3890f931fa897bc43b879fd6bd6eb9ebdf404184f6774425345938a3ceebc563",
+    "bodyguard/frontend/src/api/records.ts": "d2d3c373868db6de90e40fbfc550f22681cdaf695d98ac1a1cad7be38e683985",
+    "bodyguard/frontend/src/api/withdrawal.test.ts": "06843447cd20fce1c7351fd687495f310329edc589526926bb17310d531ab2f1",
+    "bodyguard/frontend/src/api/withdrawal.ts": "4778f28d9e53a853c49e18ca1cd9c9504ec2c4e5c213df929960a2708c6b4e76",
+    "bodyguard/frontend/src/auth.test.tsx": "7455e43a508f84e41f3fac33a73bfb37f8967bef1b204e2d133519ddf783a9be",
+    "bodyguard/frontend/src/auth.tsx": "8357e10ad49a027eb2e5996ea5d5bcc55b9262aac5edc6ed10d0ff14cf6bae10",
+    "bodyguard/frontend/src/avatar/Skeleton3D.tsx": "19100877becdfc86b6d7dcfbe963b4063f734ab49e597bd5103fadb24a745012",
+    "bodyguard/frontend/src/avatar/drawSkeleton2D.ts": "6eab27fbf94a6267f8178f34f2d7361153a82dabaefaa3a78b48ca63916d36cb",
+    "bodyguard/frontend/src/avatar/face.test.ts": "ca458f9137937ef0591b61ef699bcaa9496b804d350ef3c775b95f6b235a3e4b",
+    "bodyguard/frontend/src/avatar/face.ts": "66933cac1f6857ed4abc29a6f545c51d4b88a1b3a13c120d7df297661c18515f",
+    "bodyguard/frontend/src/avatar/faceTracking.test.ts": "d90feefaa2e35cb2d70474abf5ed2c4546d7ca8a0d57f6bc6f81b76d06c80bd1",
+    "bodyguard/frontend/src/avatar/faceTracking.ts": "f0f8633d92dc2e938d6b9d3ef2d45c3482d87834cf209c42ecfa1f02ef9a1cc5",
+    "bodyguard/frontend/src/avatar/skeleton.test.ts": "df19617c57d123534b9098126a00f9dd2a3b2d7bb4b8e61fd9a22e45019c1409",
+    "bodyguard/frontend/src/avatar/skeleton.ts": "eb99dab3fb032891dcd25575e7025f4398a352caba34d8d7c6021896bb878fc1",
+    "bodyguard/frontend/src/catalog/motions.test.ts": "234191fe75196c7277b78f3409d3809d72e4f48469b10013422615cad82ea20f",
+    "bodyguard/frontend/src/catalog/motions.ts": "7f75bf059626551559cd108a6eba40188861e4e9f2eed6445e6f731ccc6811a4",
+    "bodyguard/frontend/src/catalog/recommendation.test.ts": "3d21d4a7df0a9efc14713034be5e77526338e35c2db88ebbf487b7f798e4af48",
+    "bodyguard/frontend/src/catalog/recommendation.ts": "c478f41d549b976dec0210abe02a55f89d681998a62c7ac6846c8b9913f7194b",
+    "bodyguard/frontend/src/coaching/lifecycle.ts": "c98fedc99011b9ce57e1906bd2b6ecf7960c78faa6acdfcd3b9c9b590b8927a1",
+    "bodyguard/frontend/src/coaching/observationLoop.test.ts": "c15f7ef95dc8ba4988ab6a51dd6ed8a4e0e6b0407d06200852f0c435baf37cda",
+    "bodyguard/frontend/src/coaching/observationLoop.ts": "9291bdcabec45d091e0e319cbe49c49b30b3e64ad097956f1978787438247449",
+    "bodyguard/frontend/src/coaching/recordOwner.test.ts": "affb2a1d7255e666e7afb91bac15bdff8ccf6c243908f6ceb6485a9f50359c25",
+    "bodyguard/frontend/src/coaching/recordOwner.ts": "820368c6cf370913b622b98c21d82a53142f0a8a6247ee188e5317388a50c0ff",
+    "bodyguard/frontend/src/coaching/recordedSession.test.ts": "274730e42618f94627aa386d205008f124352e723ea1d670055fbed2e5c61f0d",
+    "bodyguard/frontend/src/coaching/recordedSession.ts": "8f9e814d3d4c63e2abac5d62c2230b2055c70a7a175cef52215fe06082a8d2bd",
+    "bodyguard/frontend/src/coaching/resources.test.ts": "b3e712726e5e3e5ea07e9e8ab6139c627d434303ee55ed44d75a0cd7d90d750c",
+    "bodyguard/frontend/src/coaching/resources.ts": "f673fd96387946ccfe76e3d0b97c277a47106e7f25f8f0bd73837fa6a6695640",
+    "bodyguard/frontend/src/coaching/resultRecord.test.ts": "91b7bb3368723595927f6ffa2ea04b091cb40fd62ac2eff44915f5503173f49c",
+    "bodyguard/frontend/src/coaching/resultRecord.ts": "10fc89e732376eb70b61720cab95685a7f26a59f4c760e4578a8af3536f1a64e",
+    "bodyguard/frontend/src/coaching/session.test.ts": "36cb7087b49fe1580291b8a3f882ba38dcb1bc8d66d3db7b609d550e4cdcddd8",
+    "bodyguard/frontend/src/coaching/session.ts": "3799bfdce8e829899f986b97770ce82a7bf4dd2932d0607060a513f23e080598",
+    "bodyguard/frontend/src/coaching/useRecordedCoaching.test.tsx": "49e60ab69337f5d599422882a701f2f897c4952f9b6c8da6f90822372d55be4e",
+    "bodyguard/frontend/src/coaching/useRecordedCoaching.ts": "bc55a2adb3446893b6e22f529ff62f120efbee807b73463905ab0b5c4abbc781",
+    "bodyguard/frontend/src/components/StatsPanel.tsx": "1f8ece0877672c8a313dd7502a3bc14f7c2ab14381e5273d2151e48bcc9cb9bc",
+    "bodyguard/frontend/src/index.css": "580ca04512309f462342380a861d28e1f1370447bc1b0aab2420bd859216da59",
+    "bodyguard/frontend/src/main.tsx": "030e52e8c4a712d04d9327c99c30114ef6c84b943359688214124a656812aeea",
+    "bodyguard/frontend/src/pages/AccountPage.tsx": "4bcc8349d1f5cac4fb75662fd21052f4cdd53902417c2b21793b8f5e075dc5c6",
+    "bodyguard/frontend/src/pages/DataHelpPage.css": "34aac1c1d09af0ff0f96384ae1cf2ca60b994b30a57f28e1aa8e1d56f2680865",
+    "bodyguard/frontend/src/pages/DataHelpPage.test.tsx": "33c7c972006b79268f8693e89e366cb90dfd59fffa8c035538283cdae10d1c4b",
+    "bodyguard/frontend/src/pages/DataHelpPage.tsx": "10642b3cc9bad675cd670b6a584d51d2cd58fa645f062bbc927c1253eaeee078",
+    "bodyguard/frontend/src/pages/ExplorePage.css": "fe5663bdd1f516ad8324ed6b4e6b7a706d652ea6c97ff1731301ca8f3a938eed",
+    "bodyguard/frontend/src/pages/ExplorePage.test.tsx": "7af10a1426dd8aff9cbcae8c4a6171d4ebfec82c8522feef63cc94ecc3088d72",
+    "bodyguard/frontend/src/pages/ExplorePage.tsx": "183659c0da1bbe755cb0e67533f4ec3fc36c3793841b2a7d15bbea9752d3e9a1",
+    "bodyguard/frontend/src/pages/GoogleAccount.test.tsx": "7565cea4f56fbe142f2270289a91ea9fe8034758ab0d9c44f4a6b9683d28643b",
+    "bodyguard/frontend/src/pages/MeasureDemoPage.test.tsx": "3a3a655ceffa6842e2f492d0e0975203f10336651c5dfbe04b84b062982cc2fa",
+    "bodyguard/frontend/src/pages/MeasureDemoPage.tsx": "301dcbda69fa5ded10db73f17d30495dd63c4065ee50efa6312b6983f0e983e3",
+    "bodyguard/frontend/src/pages/MemberPage.test.tsx": "1d8b40a1811b5fb4c818f926362e73bc2f93fe51654a7c69ebf269da099aad23",
+    "bodyguard/frontend/src/pages/MemberPage.tsx": "e5e9ade287c3d03e8020144b1f4d902a1f84604cd43583b29ad6ac48a6182711",
+    "bodyguard/frontend/src/pages/MinuteSummaryDeletion.tsx": "9711c289f79de2e019e7cf783de9d6db813e98f2dfd8f8374a46f49ab78bac4f",
+    "bodyguard/frontend/src/pages/MinuteSummaryPage.css": "99b5cbefe82ce0aeab6bc9272bcf22269ad23d5be59c3e9b57d16050ca65e7e2",
+    "bodyguard/frontend/src/pages/MinuteSummaryPage.recovery.test.tsx": "1aa490340e0526546759e02b5814ebbe9ad9e5167b39ab7f7096a921bdb9296d",
+    "bodyguard/frontend/src/pages/MinuteSummaryPage.test.tsx": "de68e7c9e2901af75692814631a8c21cf0abb439b34246f63349dd16c65fd340",
+    "bodyguard/frontend/src/pages/MinuteSummaryPage.tsx": "422ce916a6f7bf576fe7cf84b8932bee2f10aec6518977fc9fd883785dafd968",
+    "bodyguard/frontend/src/pages/MotionSelectionPage.css": "e3d15c6947358c4bdca97e1e22cca0fe328a7ec4fba4b49a7afa182f8a68ff61",
+    "bodyguard/frontend/src/pages/MotionSelectionPage.test.tsx": "45aaf06aa77a949839040139a1ea26d3f4cc95c5a61eaa03648cda68bb9f46d3",
+    "bodyguard/frontend/src/pages/MotionSelectionPage.tsx": "1759c2af721da442c224f7c76a5a070532fa83f8123811fe25401333d1586cfd",
+    "bodyguard/frontend/src/pages/NotificationPreferencesPage.css": "10a7a9cef2fb25fffeb4fea6bc0750c7825908c88e2b62675c4d442692772dcb",
+    "bodyguard/frontend/src/pages/NotificationPreferencesPage.test.tsx": "0d48de015430e4a205eca29c9aef030e388663a3f4a482384d9412aca65a6e81",
+    "bodyguard/frontend/src/pages/NotificationPreferencesPage.tsx": "7b1c19e536915f9cde478af79a446502270a34916a4fd8f2a600cd80b012bc4f",
+    "bodyguard/frontend/src/pages/PasswordPage.test.tsx": "78202d8a65a99c4d959b3e27b2a104ac882ff39ecadcf2b79951f83269604385",
+    "bodyguard/frontend/src/pages/PasswordPage.tsx": "d499ec4f6cd4d27e2f225f1184dd0b547837f1acd65f80be4e13a7624fe17504",
+    "bodyguard/frontend/src/pages/RecordDeletion.test.tsx": "30a2a9ec4328a601e7e82bae789bc42b0b99085922be3265652bfb5d381954a9",
+    "bodyguard/frontend/src/pages/RecordDeletion.tsx": "9ad189ad45f6cb1bd657b3852e4bcbe43a935d5a6a1c587f995e4dd829b976f6",
+    "bodyguard/frontend/src/pages/RecordsPage.css": "e4d6314012d9dc9df7e939926c98165122b533cbccf3f03762b9574123e966c4",
+    "bodyguard/frontend/src/pages/RecordsPage.test.tsx": "bbba46f2bad6289845b50bd1769a8ac58dd980b911fa2f477b398f5cc5a6487e",
+    "bodyguard/frontend/src/pages/RecordsPage.tsx": "0ccfd3bf8e3f8473797fe6e25d2403b5822a3694cf7615d3be4699a9b1224419",
+    "bodyguard/frontend/src/pages/WithdrawalPage.test.tsx": "657d556cbde947c3e9ee4c7ea6b9ca962f19b2518fdacdd2239f1a71a442f8e6",
+    "bodyguard/frontend/src/pages/WithdrawalPage.tsx": "c1cde2ee0f769cabdbf5e0722718e0a97d33141b39860399f7ef616d34c481f8",
+    "bodyguard/frontend/src/pose/camera.test.ts": "888573d5eda43249b2b09cb7279741e02b8d6e28ac50b70027e1e3cdffebf513",
+    "bodyguard/frontend/src/pose/camera.ts": "38b900cc43f6d19516ccb69542a0c77e810a20e75bbd3dd16a423f78f148f66d",
+    "bodyguard/frontend/src/pose/constants.ts": "18857d436d4cb1f4279a4bc01357d0b13d20d51c1fa13d33eaf4cb6332a63a60",
+    "bodyguard/frontend/src/pose/face.ts": "0d08fce5139fe974a870059fd6fbda24bff0248d1c2c512e3841c05c29916dd5",
+    "bodyguard/frontend/src/pose/hands.ts": "dd886d854cc88de783e404f5dca77237db4a3a4f9251b731a211b75f64961169",
+    "bodyguard/frontend/src/pose/landmarker.ts": "57c31241fb995442b4c60adb75849576483fbd32bf6c8412b5d3282f96625d7d",
+    "bodyguard/frontend/src/pose/useMeasurement.test.tsx": "bb1caa5763b00ce5b45b4d0a09e40eb105b40636554908c4b5419ebae86c6176",
+    "bodyguard/frontend/src/pose/useMeasurement.ts": "3ba882ebbe310a332484dde1ed380bccaed71629fcb5b04edc01b73e965a4b2d",
+    "bodyguard/frontend/src/posture/framing.test.ts": "254b8d6e1465f0450d93f1b18a36673327e02c9b15b8fab9f40bc425ccaf2225",
+    "bodyguard/frontend/src/posture/framing.ts": "9146025f6caedf6cdfd9ebd67ed23c71354bafa9bfd835889f64b853873ba2c2",
+    "bodyguard/frontend/src/posture/hands.test.ts": "ff725dbfdc7a8b7e08049a705b89bdeb0ce4b1339dee8218b19b647d3aefdc9a",
+    "bodyguard/frontend/src/posture/hands.ts": "9d3d810114eaa9410b0b8e14c270f9f3a3cc4183c981ba85e46afc9f28f46cb4",
+    "bodyguard/frontend/src/posture/landmarks.test.ts": "3af79b12b4445202732880b55154b698e080edce2bcdfafd559c28b4ece9066d",
+    "bodyguard/frontend/src/posture/landmarks.ts": "78b97d2360951f5904ef0d030cda66378f3ba87e9a4cc42f2f841265953b200b",
+    "bodyguard/frontend/src/startup-harness.test.ts": "e2dac428439dcda1880b27fcbb34c0b0868fd61442fa7e6a5c128a0a9e4c240e",
+    "bodyguard/frontend/src/stretch/progression.test.ts": "ff689fa412eebd2980a2b02acfd33fba3a498d053ad9e265d8ab944570eac0c1",
+    "bodyguard/frontend/src/stretch/progression.ts": "7c4df968a9b77fe78e20e92d2fa58951b7d0a7dc0b0df70e3330599ea1b6137a",
+    "bodyguard/frontend/src/summary/minuteAggregation.test.ts": "f16ba0f85b5409df0342ab0f2eb28b8ef4a8bb25fc8289b2b65c92a2fa2737a9",
+    "bodyguard/frontend/src/summary/minuteAggregation.ts": "fd6b1fcb3b0912a2641eeaa3586dc8ca22dc4a32b3bd95412097de3834b97550",
+    "bodyguard/frontend/src/summary/ownedMinuteUpload.test.ts": "44c6ae3f2e4fca379926b515d614ee2fa56d50607eab57c16ee8e93e89dd9c06",
+    "bodyguard/frontend/src/summary/ownedMinuteUpload.ts": "4ffbd7928af37599d8650207549ffcd584fa5bb2bae3c82aacc9d16318a9cf98",
+    "bodyguard/frontend/src/webDesign.test.ts": "a72fd04c2113c1a4eca1c154fd95242262a3fdc26c405ded2929c07f886ea5ca",
+    "bodyguard/frontend/e2e/account.spec.ts": "2daf7d7e1f2434054dfe76a39a026f03c5f8751e53a9f590e66991d4a19f4604",
+    "bodyguard/frontend/e2e/authcoaching.spec.ts": "eaa4e8a2d55f637dc1f1db4059b8d6d70e7f36248d7b0c069e4e1c46642d12b0",
+    "bodyguard/frontend/e2e/datahelp.spec.ts": "672d45402503203c6ed8482d2c3dde2d66ee3b388d796b3fdfa7389ce85889d1",
+    "bodyguard/frontend/e2e/demo.spec.ts": "706db7eddd8d810026b08e50e07f034ab1cb58f8c1e190796a93b9690309842a",
+    "bodyguard/frontend/e2e/design.spec.ts": "bfe642b007a501e02a5d47d87f3cc6bdee1cf3952c2f514390c70827f590ad71",
+    "bodyguard/frontend/e2e/fixtures/authCoaching.vite.ts": "c0c880157f86478409780597ced0ca59f815a21cd5e28e59bb795712c2e3cee6",
+    "bodyguard/frontend/e2e/fixtures/authCoachingProbe.ts": "45cf9a28bd9519db1563671f962dd27f80558250343924a45aaec2b3e4210c12",
+    "bodyguard/frontend/e2e/fixtures/minuteUpload.vite.ts": "346d36e1b83679122d703feffe59e86fbce380efa3af720004bcd8a3ac6074ea",
+    "bodyguard/frontend/e2e/fixtures/minuteUploadProbe.ts": "3c0766ce5cac64dc69ed61b7d4f23aaf4dc4d5d73a331b68cb709c9b6a1e51ca",
+    "bodyguard/frontend/e2e/fixtures/observationLoopProbe.ts": "00669c5e50d6262f6c9f44ed33c3e35eda7b6bd6dc6eb23db2f199e1f19e6ecc",
+    "bodyguard/frontend/e2e/fixtures/recordOwner.vite.ts": "b1f92ecaf9de4d381619e377da7457cc842c09d92b13c3db3db2b6a9756c5f0f",
+    "bodyguard/frontend/e2e/fixtures/recordOwnerProbe.ts": "6a2a57c8c3d104053b4fe9dee4c21af3bb676be56e11b2e81fdf23fbf36b7530",
+    "bodyguard/frontend/e2e/fixtures/recordedSession.vite.ts": "a50b61dc06605e12037a4436e132d2f5d5aea581013c0a7070c2f3c052177b98",
+    "bodyguard/frontend/e2e/fixtures/recordedSessionProbe.ts": "cab8f8cb2784bd6dff3a28dad75d552340ce5c77605b406fe17a6c6d19b4c786",
+    "bodyguard/frontend/e2e/fixtures/resultRecord.vite.ts": "c35415cbbed7d5b0e809c6fb29617eb2b49d1f2b5d4b05c95587c686cf723600",
+    "bodyguard/frontend/e2e/fixtures/resultRecordProbe.ts": "3e03bc9620bd2902c03edb2332219b11cd49c3fc48ba6b06d7cb0be761d0b330",
+    "bodyguard/frontend/e2e/fixtures/startupProbe.ts": "8d3387382dc14b8a641214da1bebbaec4e16918331fb38ead279e8853d2a6b4c",
+    "bodyguard/frontend/e2e/fixtures/startupVisibility.ts": "4b20c73bf4bc7f858ebca6630e0928db8c334e6093186bb4e4b586cb6de50da8",
+    "bodyguard/frontend/e2e/google.spec.ts": "ff6e3f1901d0098a5e8484961a35b256bb7b96dcd521bfb914908dfb81a7faed",
+    "bodyguard/frontend/e2e/integration.spec.ts": "b13ec025fbee3fd640e57963e09cd11b2c50915f7f0bd54fb767b1a405df62a1",
+    "bodyguard/frontend/e2e/minuteupload.spec.ts": "6bb785117c336ff87d46abd207582d4b7e2418e0db97d153660a71fabef41d75",
+    "bodyguard/frontend/e2e/notifications.spec.ts": "880b5e6575795ff82b04ac49f6efb6e3b1e27e6f9d3e82ea4bf0c8f312d02651",
+    "bodyguard/frontend/e2e/ownercapture.spec.ts": "7f5d5d8c567978e431fb16d271e582091039cdfdbedc6fb85c429a77d7e13782",
+    "bodyguard/frontend/e2e/password.spec.ts": "acffcafb0a1494719a4d81db89770c2241c05aa8f5ef00a77afa5fa667958539",
+    "bodyguard/frontend/e2e/recordedsession.spec.ts": "d0d4888a69a69ee89e7dc06cb624b5aa6a16a3099f109c1f493b4bdce2074ab1",
+    "bodyguard/frontend/e2e/records.spec.ts": "f107f73fc21826d380d27f84e71b037c96db768b96ca82f9a19ca1b6e0e575b2",
+    "bodyguard/frontend/e2e/resultrecord.spec.ts": "4b1c4d0008d569316c2c612a9948f1473fc428b15cc2e2ea6c08cac6e283127e",
+    "bodyguard/frontend/e2e/security.spec.ts": "699820a8f3fc80934f68af3cb7f41d34264ae7436439ee72acd7ff6cee3796d4",
+    "bodyguard/frontend/e2e/selection.spec.ts": "ceb779f7bda54778ee9044494c9aace0cd8e83028917a681bb6a662b79154057",
+    "bodyguard/frontend/e2e/startup.spec.ts": "67e0e41ec77f84e853f54fb3ed0a1b003d976a97adfd8aeac82c691fe5dd2ed4",
+    "bodyguard/frontend/e2e/summaries.spec.ts": "143228a1886abc342e0cb9656692915d2ff44c3942ecd63206187eea61c58c7e",
+    "bodyguard/frontend/e2e/withdrawal.spec.ts": "5ba59ae58d15c150045c836c9d6c5cc9f5df376c894eee8fef52e8487a1856fa",
+    "bodyguard/frontend/scripts/check-selection-production.mjs": "62e85c83b9a4c46bc582ace67b04a77ef0980541d4a6f2f37811e0708c620d4f",
+    "bodyguard/frontend/scripts/export-web-runtime.mjs": "1a34f5bfef8aa429c4fada6470b7f7a4c3ed0ddfc1b1d7acd1c9423f3a4c49e3",
+    "bodyguard/frontend/scripts/export-web-runtime.test.mjs": "1463a480991f50958df693b986652fefc80d4fb5d14bb818ec206269ac764105",
+    "bodyguard/frontend/scripts/generate-api.mjs": "7888a80bde867c468d6d44ee7da7f304ac652270ff59456ea0d3446318301b7d",
+    "bodyguard/frontend/scripts/prepare-assets.mjs": "6eb8a1af37f7abfd489701ee46f5824265c57982595c9229d363001abe70a6b5",
+    "bodyguard/frontend/scripts/test-selection-browser.mjs": "f3929a94bde5e0cfdfc22454feb7800908ae642597a15e203dedd70076221412",
+    "bodyguard/frontend/scripts/test-startup-browser.mjs": "26876585ac36cd4e7bdf34543feff3e1842d4343916f51a979e00c0ecef77622",
+    "bodyguard/frontend/scripts/verify-startup-negative.mjs": "391d1f2ac556e9d9dbb1899a9a5efc783d45a6880abd308b01c95b64338564e2",
+    "bodyguard/frontend/package.json": "fc5513803b158f0829f44e17a43335bcc0319d5476cb41abf8405656946363b7",
+    "bodyguard/frontend/pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+    "bodyguard/frontend/tsconfig.json": "421d118740181a029a8b4cc4d3b597a1b2b2d37953eaaefa8953fc0a99abde43",
+    "bodyguard/frontend/vite.config.ts": "7ddd1bb45a2c5638e23e5b379879752bbebb84371357456cae39faa7803aff58",
+    "bodyguard/frontend/index.html": "3d2b8cc649b264f767993d250fc0f06371b7f2b007ff0444d9cbca0b08274b81",
+    "bodyguard/frontend/biome.json": "589d102e125ede9281b4ece56bdc5c4ad04a77cd21b3b2ff02cc8dcc99629787",
+    "bodyguard/frontend/Dockerfile": "0eceaa826755f57c00c8f5b33384ea0ee4075df9dbe5e0393a27b8534969d74d",
+    "bodyguard/frontend/.dockerignore": "5a4a1690068e920a6c723daaf5edc91e54f636c79f4a32f0f0e42617cfbc7f86",
+    "bodyguard/backend/app/__init__.py": "09ccd265e3edc187c9e7713e9172da1538e8b0269c3eb8f5e7088206e0449f67",
+    "bodyguard/backend/app/baselines.py": "fdb3d2a9bea813e118d0282552af072ad2fc234bc77a2fed114012ea8ad074d7",
+    "bodyguard/backend/app/config.py": "1a34de1fba88787c0768c3320520a98f9954ead618fd2919da2c31f0f98317dc",
+    "bodyguard/backend/app/db.py": "75e71671ce2f818435e34dbb380c91e0d320b08e43e77fb4970b398f55af02ac",
+    "bodyguard/backend/app/main.py": "ceb529827451b20df29b129481dccaa1c58893ba8ed36b55e5cb89d397cfec50",
+    "bodyguard/backend/app/notification_preferences.py": "3e611a2745045c635fa0c422bb42849cfa6605332c16931f17498ee292a17cd8",
+    "bodyguard/backend/app/readiness.py": "3a21f890730ea37e7dcd81db1442baec7b2dcdeb272d8c20dabbd4511dae4318",
+    "bodyguard/backend/app/records.py": "e5bc81c54195c6c4767cf537af6ef903add5ef56d24cb7aa4d26f08e03b1306c",
+    "bodyguard/backend/app/security.py": "55b62cb7d0549740b3f820c19402abde68400dbea7fa645d3b43eed70f1c41f2",
+    "bodyguard/backend/app/summaries.py": "c62f92477a3a0a45f2a1b8f5b2889ef930db0951566b14086ff3f05a0eb10fd2",
+    "bodyguard/backend/app/withdrawal.py": "ba3e976d14fcefb6ccce50411a2d3fd04e475794089509313385ac31c12cc27a",
+    "bodyguard/backend/tests/__init__.py": "e2af6a967dfcc29c32aa3feb0789b10d875f19c8d614e7aa0571256d2ae1253a",
+    "bodyguard/backend/tests/backup_restore_proof.py": "2d5dd38c071c8e0260f0f290b86fecb57842973b3111ea45f8abec10d3de1ba8",
+    "bodyguard/backend/tests/conftest.py": "327b2fbb658626d0e44beecaff746adb5a9662bf3453aa4bc7049009a4bc79bf",
+    "bodyguard/backend/tests/license_inventory.py": "8b646220f773f2d72d8cbcd0423221f2e6aea804c76425b5a40f14546bcad578",
+    "bodyguard/backend/tests/minute_fixture.mjs": "fb1c288676a13688f891c2a0a33b786162a820801f5ca5b751f18f70e05697b4",
+    "bodyguard/backend/tests/run_browser.py": "c4c57b9f312c12ab239bb54fbd6307debe6a057d146f62209b4213e5b73a8748",
+    "bodyguard/backend/tests/test_account_withdrawal.py": "6ec5fe8f5950f814675540354c822c162acdf53ccb309a97ead47c4aee61069c",
+    "bodyguard/backend/tests/test_auth.py": "4e4faaffa45f83b401be9f61ae502f9e3b160a253e9c70495b4555d26db92883",
+    "bodyguard/backend/tests/test_backup_restore_proof.py": "b2f664cdbc9b4912f8ccba67f1ac3b95b5e6cfa52b9cea280035ac2431008291",
+    "bodyguard/backend/tests/test_baseline_races.py": "1e60e24d4b6c7a6be9483b5f39c4e2a5138b0e2f961d7b8a4738cc8fa8a57793",
+    "bodyguard/backend/tests/test_baselines.py": "463d7696cd425ab09c887f987f8245e053733354267e365e371d24c7f59cc57c",
+    "bodyguard/backend/tests/test_database_ownership.py": "d3c2398e5cee3326a864b58354c4f557cc6371eb56c65f78089aeb7d2a0c1ac6",
+    "bodyguard/backend/tests/test_google_auth.py": "31df21cfe7a6a6ccfb0ec2dd505b4cdd5e62ccc9801baeabe089e8a165fddbfa",
+    "bodyguard/backend/tests/test_license_inventory.py": "8cadc5f5e6c0dc4c3ca209dd451567b29adb398875b60ecab35abc6618941def",
+    "bodyguard/backend/tests/test_notification_preferences.py": "27af2504cb0aa53f2cdca662eeff5c77ceea1862416112a42a24614f6009fce5",
+    "bodyguard/backend/tests/test_password_reset.py": "b11d3769a3d93c918571d4ca968117680cc2de8de6e7a55e8741ca5901bc613d",
+    "bodyguard/backend/tests/test_readiness.py": "14a7c8a66f28c882e8bc1ad15e7ecc480e0c92fcf1e286bef4969462f6373c40",
+    "bodyguard/backend/tests/test_record_deletion.py": "64e721f90db0bd9e3c865414b429c04bc7453c23d1de41d14fdcd7cd0a237b41",
+    "bodyguard/backend/tests/test_records.py": "c0599bd7e3e7291f99a2bcf7283338f02394dbad483b6350fcc6df4bf9964904",
+    "bodyguard/backend/tests/test_records_integrity.py": "f4642fe491543c4c2fcaf151ca543af646836b6dd38afeb9ad6f227f932098d9",
+    "bodyguard/backend/tests/test_summaries.py": "766ab3f16c5028df5afce6004b6013278a855bedba9788a18ff63e9292803b73",
+    "bodyguard/backend/tests/test_summary_races.py": "66ea636cd2c47dd2389638682740f3ad179f326e4faab9493b75ead86080d0e2",
+    "bodyguard/backend/tests/test_summary_read_binding.py": "e509d9f6615cc1e1dea3d776a9736b0c5ca9317261b14fc5b974ea1312e98d95",
+    "bodyguard/backend/tests/test_summary_upload_binding.py": "8bb491e3613fc8a364c94cd8de46d09c3f7d91a8002b94ecfbed790c8b4b3af6",
+    "bodyguard/backend/tests/test_web_runtime_package.py": "1782bb67e2a6823e6b82761a627df9a01344133524f49d10a3eacf161c8aadb0",
+    "bodyguard/backend/tests/test_withdrawal_races.py": "9402e1403e153394b2546bc96d84e45e7ae55f3a0c6c6428d3699ad94fa95e01",
+    "bodyguard/backend/migrations/env.py": "7fc11238feff1651c6ee4b7121f2f2709018f66b7a10f4c69cb118deb44bc827",
+    "bodyguard/backend/migrations/versions/0001_accounts.py": "03bd853b82c0edc66806adaf49821ace66ea60106b46ea4cfc4841386fb255c4",
+    "bodyguard/backend/migrations/versions/0002_password_recovery.py": "f5e4e0e5367eaba5c3c573367bfb001e4db94ded07f48b3ce9d7313ebc1ae30d",
+    "bodyguard/backend/migrations/versions/0003_google_auth.py": "40a263d1ab5ec42dd043be29ae3bc43090b47ccf786f41fe3536ebe12b6ce7f0",
+    "bodyguard/backend/migrations/versions/0004_stretch_records.py": "886738df4b462d413bc4dd5fa2987ad14a74688dd61f83da062ee22befb00043",
+    "bodyguard/backend/migrations/versions/0005_account_withdrawal.py": "9287df4112f0765de8393bceebe6c130a06b44458eb805f869f81e4eeb59b944",
+    "bodyguard/backend/migrations/versions/0006_notification_preferences.py": "38cab62ddef4ebcff62508bd1c224fb021be0881f82dd172180de772332dcd8b",
+    "bodyguard/backend/migrations/versions/0007_account_baselines.py": "4fc556d3c58730b2fa03a9d72ade6b44ded4eeae4882ec7b7341e2f9c1318363",
+    "bodyguard/backend/migrations/versions/0008_minute_summaries.py": "b307ba881abf3cd52b55710eed17cb840e2f4ccc1cc442c8ecefeb21dbd932a6",
+    "bodyguard/backend/pyproject.toml": "d9cc14d980977d700adc2ae2aa5fd4eb01d9053fcad22f0cbc9172f46b816107",
+    "bodyguard/backend/uv.lock": "e87c2c0aba0ddf3c8bb54ea8d7e2f187ccaf694366199f8b70ae8566591f5fa0",
+    "bodyguard/backend/alembic.ini": "e7955a0ffb9c32a9c5067d7885ee9197328f17a4a12fb4a5bb556c2b85763aa2",
+    "bodyguard/backend/Dockerfile": "a433500e4e2d8d5ab44ed4c8cbf28d9990411019e156a1e9b7351ea29ef09fd7",
+    "bodyguard/backend/.dockerignore": "fe961e902f6926204a236c9e3943681a3d807623c8cd677eae512dd8564585b6",
+    "bodyguard/deploy/compose.web.yaml": "16eb4040cc4c9f28891ec79a0339bcd08432d98834476c24d5e099f8ca95c26a",
+    "bodyguard/deploy/nginx.conf": "49fb86b2f7a0eb539b842c5fbdb44137dacdf229a36370e8ca8c74ca9dcc4877",
+    "bodyguard/deploy/tests/test_local_package_contract.py": "1283cbe90a5b785d198c405491f2b3d853a26818d4b324a0e45b36e8048eafd4"
+  },
+  "executions": [
+    {
+      "label": "biome",
+      "start": "2026-10-07T08:18:36.041Z",
+      "end": "2026-10-07T08:18:36.624Z",
+      "command": [
+        "pnpm",
+        "check"
+      ],
+      "code": 0,
+      "signal": null,
+      "sourceUnchanged": true,
+      "originalEvidenceUnchanged": true,
+      "privateRecord": {
+        "name": "biome-2026-10-07T081836041Z-7000c242-c235-4157-bd53-3b5f116bfe4c.json",
+        "sha256": "b20a1494e7fd4f7988dc5b5215d681710b16c233fb294067146e84772c8f660a",
+        "rawPublished": false
+      },
+      "privateLog": {
+        "file": "biome-2026-10-07T081836041Z-7000c242-c235-4157-bd53-3b5f116bfe4c.log",
+        "sha256": "1110a57e3fe269d90dc6feecf27c921e4e9e8a5d6ae58c2959476567c4e7748d",
+        "rawPublished": false
+      }
+    },
+    {
+      "label": "build",
+      "start": "2026-10-07T08:18:56.469Z",
+      "end": "2026-10-07T08:18:57.581Z",
+      "command": [
+        "pnpm",
+        "exec",
+        "vite",
+        "build"
+      ],
+      "code": 0,
+      "signal": null,
+      "sourceUnchanged": true,
+      "originalEvidenceUnchanged": true,
+      "privateRecord": {
+        "name": "build-2026-10-07T081856469Z-7834cf85-9873-4c9d-84f9-125a673d5088.json",
+        "sha256": "174e63799ce9a038832c334788a1e8d9ae6351ee853f06c706b71a650bca84e6",
+        "rawPublished": false
+      },
+      "privateLog": {
+        "file": "build-2026-10-07T081856469Z-7834cf85-9873-4c9d-84f9-125a673d5088.log",
+        "sha256": "779eb863346d948b1120820703c8ec865f200eda9b51566d5487a698d195709e",
+        "rawPublished": false
+      }
+    },
+    {
+      "label": "export",
+      "start": "2026-10-07T08:19:30.148Z",
+      "end": "2026-10-07T08:19:30.224Z",
+      "command": [
+        "node",
+        "scripts/export-web-runtime.mjs",
+        "<owned-new-package-output>"
+      ],
+      "code": 0,
+      "signal": null,
+      "sourceUnchanged": true,
+      "originalEvidenceUnchanged": true,
+      "privateRecord": {
+        "name": "export-2026-10-07T081930148Z-3bfb0f75-9fe2-438d-808d-f14c4c020a6a.json",
+        "sha256": "3a8ae26469aba574389337dba3c39add7d9b1e3b24c80febe0545586a86da7de",
+        "rawPublished": false
+      },
+      "privateLog": {
+        "file": "export-2026-10-07T081930148Z-3bfb0f75-9fe2-438d-808d-f14c4c020a6a.log",
+        "sha256": "2bdf2beecedc1f3884b9f47a4e6e7ed6ebadbcf84dbf06b7607a0b28ea3857fb",
+        "rawPublished": false
+      }
+    },
+    {
+      "label": "exporter",
+      "start": "2026-10-07T08:18:16.821Z",
+      "end": "2026-10-07T08:18:17.056Z",
+      "command": [
+        "node",
+        "--test",
+        "scripts/export-web-runtime.test.mjs"
+      ],
+      "code": 0,
+      "signal": null,
+      "sourceUnchanged": true,
+      "originalEvidenceUnchanged": true,
+      "privateRecord": {
+        "name": "exporter-2026-10-07T081816821Z-9943d0f6-f129-4661-8c6d-c66c22a16693.json",
+        "sha256": "110f367bb42a5d81671635e709bc2e29e0c849012df0528bcdcb5766df86ece0",
+        "rawPublished": false
+      },
+      "privateLog": {
+        "file": "exporter-2026-10-07T081816821Z-9943d0f6-f129-4661-8c6d-c66c22a16693.log",
+        "sha256": "e01dc894c0a037330f13888df4163572f1cd46c874571813f2dc9f5631c18faf",
+        "rawPublished": false
+      }
+    },
+    {
+      "label": "format",
+      "start": "2026-10-07T08:18:37.033Z",
+      "end": "2026-10-07T08:18:37.090Z",
+      "command": [
+        ".venv/bin/ruff",
+        "format",
+        "--check",
+        ".",
+        "../deploy/tests"
+      ],
+      "code": 0,
+      "signal": null,
+      "sourceUnchanged": true,
+      "originalEvidenceUnchanged": true,
+      "privateRecord": {
+        "name": "format-2026-10-07T081837033Z-673619b5-9051-40cb-8c18-42b7835a4b43.json",
+        "sha256": "aeaa71f0b9d78fe05180ae9b452d72671e5e6ccf2ce51e560b33a87569d213ac",
+        "rawPublished": false
+      },
+      "privateLog": {
+        "file": "format-2026-10-07T081837033Z-673619b5-9051-40cb-8c18-42b7835a4b43.log",
+        "sha256": "f6eac9d01e0d1f0f32c0df41c9c6dacca939b84246d9d0e5d5993b33734f87ca",
+        "rawPublished": false
+      }
+    },
+    {
+      "label": "frontend",
+      "start": "2026-10-07T08:18:18.356Z",
+      "end": "2026-10-07T08:18:46.555Z",
+      "command": [
+        "pnpm",
+        "test",
+        "--maxWorkers=1"
+      ],
+      "code": 0,
+      "signal": null,
+      "sourceUnchanged": true,
+      "originalEvidenceUnchanged": true,
+      "privateRecord": {
+        "name": "frontend-2026-10-07T081818356Z-72b07b0e-b10b-417b-b667-93b47bd19cb5.json",
+        "sha256": "dc8e277615be240847f7de258c397b6d7720c6e57771434ba21d149c7d8619fb",
+        "rawPublished": false
+      },
+      "privateLog": {
+        "file": "frontend-2026-10-07T081818356Z-72b07b0e-b10b-417b-b667-93b47bd19cb5.log",
+        "sha256": "d768fe864ebe8389a10871f3fb1d8ee78009401bb7bd1b6994b0b450a48419b0",
+        "rawPublished": false
+      }
+    },
+    {
+      "label": "guard",
+      "start": "2026-10-07T08:19:29.983Z",
+      "end": "2026-10-07T08:19:30.054Z",
+      "command": [
+        "node",
+        "scripts/check-selection-production.mjs"
+      ],
+      "code": 0,
+      "signal": null,
+      "sourceUnchanged": true,
+      "originalEvidenceUnchanged": true,
+      "privateRecord": {
+        "name": "guard-2026-10-07T081929983Z-f4a5cd23-154e-4a3a-94c9-de9f13a01dcc.json",
+        "sha256": "0c907d8ca1a438b0eab5dbc87390bb09566e3b6688972e3f2c692c448f551695",
+        "rawPublished": false
+      },
+      "privateLog": {
+        "file": "guard-2026-10-07T081929983Z-f4a5cd23-154e-4a3a-94c9-de9f13a01dcc.log",
+        "sha256": "b4464da94ef1bc3218566f5daacbd59c0e58d99425d8f0afe531d7ffe2ca0105",
+        "rawPublished": false
+      }
+    },
+    {
+      "label": "mypy",
+      "start": "2026-10-07T08:18:37.282Z",
+      "end": "2026-10-07T08:18:38.779Z",
+      "command": [
+        ".venv/bin/mypy",
+        "app"
+      ],
+      "code": 0,
+      "signal": null,
+      "sourceUnchanged": true,
+      "originalEvidenceUnchanged": true,
+      "privateRecord": {
+        "name": "mypy-2026-10-07T081837282Z-da835417-2577-4b6b-be0a-c2e8d9d9c328.json",
+        "sha256": "6ee836ba3237b3171b5ad51a5d500883ef632baeb5e5775f0a5144a92708c3ef",
+        "rawPublished": false
+      },
+      "privateLog": {
+        "file": "mypy-2026-10-07T081837282Z-da835417-2577-4b6b-be0a-c2e8d9d9c328.log",
+        "sha256": "049f51b850512be193c74d3fbb731e25fbc6374a66560d8ec0d6569d79c88ea6",
+        "rawPublished": false
+      }
+    },
+    {
+      "label": "native",
+      "start": "2026-10-07T08:18:17.198Z",
+      "end": "2026-10-07T08:18:19.286Z",
+      "command": [
+        ".venv/bin/pytest",
+        "-q",
+        "tests/test_web_runtime_package.py",
+        "../deploy/tests/test_local_package_contract.py"
+      ],
+      "code": 0,
+      "signal": null,
+      "sourceUnchanged": true,
+      "originalEvidenceUnchanged": true,
+      "privateRecord": {
+        "name": "native-2026-10-07T081817198Z-c12b7a49-2532-4039-87e5-47a515d0b985.json",
+        "sha256": "235d1463f8a5c79fbd4960388c78c99c774755cab733506b15d458679692b2cd",
+        "rawPublished": false
+      },
+      "privateLog": {
+        "file": "native-2026-10-07T081817198Z-c12b7a49-2532-4039-87e5-47a515d0b985.log",
+        "sha256": "367c362b610a44da437b9f5ee4f61b947af55e447988f596208ef21d3c8ce2ed",
+        "rawPublished": false
+      }
+    },
+    {
+      "label": "ruff",
+      "start": "2026-10-07T08:18:36.786Z",
+      "end": "2026-10-07T08:18:36.869Z",
+      "command": [
+        ".venv/bin/ruff",
+        "check",
+        ".",
+        "../deploy/tests"
+      ],
+      "code": 0,
+      "signal": null,
+      "sourceUnchanged": true,
+      "originalEvidenceUnchanged": true,
+      "privateRecord": {
+        "name": "ruff-2026-10-07T081836786Z-dcd43a06-72e2-403e-8357-8d7b6e292fd0.json",
+        "sha256": "aaf1c714293223079efb7cff72995468fd0e56ee35652578dbd6b15635153c5a",
+        "rawPublished": false
+      },
+      "privateLog": {
+        "file": "ruff-2026-10-07T081836786Z-dcd43a06-72e2-403e-8357-8d7b6e292fd0.log",
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "rawPublished": false
+      }
+    },
+    {
+      "label": "types",
+      "start": "2026-10-07T08:18:34.906Z",
+      "end": "2026-10-07T08:18:41.833Z",
+      "command": [
+        "pnpm",
+        "typecheck"
+      ],
+      "code": 0,
+      "signal": null,
+      "sourceUnchanged": true,
+      "originalEvidenceUnchanged": true,
+      "privateRecord": {
+        "name": "types-2026-10-07T081834906Z-38b15573-4242-4cd3-a10f-53ff68c16ed1.json",
+        "sha256": "b0b36e2f8a4a4b4bfc6309cb752c20c3d2f5b31b29a0a8efa07759792eaa337f",
+        "rawPublished": false
+      },
+      "privateLog": {
+        "file": "types-2026-10-07T081834906Z-38b15573-4242-4cd3-a10f-53ff68c16ed1.log",
+        "sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92",
+        "rawPublished": false
+      }
+    }
+  ],
+  "originalArtifactsPreserved": [
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/api-sql-regression.xml",
+      "sha256": "db3e572a61d31ff18d20be08696fd9dbfc8af3543f2948fd39cf8e9331e05374"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/api-sql-regression.xml.gz",
+      "sha256": "7f386dbbe5bf364c7982f5dcfc25366d02598b0c819881ce044c4949ecd86393"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/dom-regression.xml",
+      "sha256": "a322fc104ac06d4bd281942a4bacb900ea19675d257ea9880dae5f69a14c943a"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/dom-regression.xml.gz",
+      "sha256": "4d205a971548e0926cc9f149fcf72d3ed90358a3a7e3d0a974486aa759181d5f"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/execution-issues.md",
+      "sha256": "ca69035299a1cf3964f647361783867f20c0ba0221de0a39fcf930435af28332"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/export-boundary.xml",
+      "sha256": "187331c7d008d846c809cb05c046b5de7c37e557cb44217244446c52726ec80d"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/export-boundary.xml.gz",
+      "sha256": "e9cf15a1d1776cff53017c345978c59aecdc8de93f48c13e29b68042e43e0bb3"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/export-first-green.xml",
+      "sha256": "b01ab91ca9d7cb82a27e9bcf7260b873da6efe04e3a2495aa2215f1d633548f1"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/export-first-green.xml.gz",
+      "sha256": "a3e984b248d56ac7259e64da1f1845b3bbfa1b529f613d0b7db40d47fc6ff7ae"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/export-first-red.xml",
+      "sha256": "1899ed4a3537a3d47f4e484d963c378de0c538faf8162f593d06bfa25b9bf25f"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/export-first-red.xml.gz",
+      "sha256": "24b385ce7991094edbb8fbc5d098c6afe5ca56648772af0bdea17d5de6bdee98"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/export-review-green.xml",
+      "sha256": "b2cc77a9098758306a4a7abf6946022260ef4f20c4868611a825411a4b38ad2d"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/export-review-green.xml.gz",
+      "sha256": "15fddfbdd6816a6d83f1647bcfe7e083c66e806d06b43aedc3b6c6c8ecb92817"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/first-red.xml",
+      "sha256": "9bf59f8f7ffad9ab7fb6d749f180b8b3c6e1ebb85dacec873a65bfe307f7143d"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/first-red.xml.gz",
+      "sha256": "cbca51e30671d1429c31a73c4e93c05556c6a065aec754d8e87fa0d37a725b33"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/native-contract-first.xml",
+      "sha256": "844d63e887bb7933930dd1067638ca226a8fbb543fce3840b33bb6dbad9f2fa7"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/native-contract-first.xml.gz",
+      "sha256": "79f3a0c1be317ebfbc559cb44ab327a420015e29bec31dd663e1a6f6e33ddc5e"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/native-contract-green.xml",
+      "sha256": "a5624d647d81425e505a86a4380b5bea69407c984e4f33c7a301826d3e1bd079"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/native-contract-green.xml.gz",
+      "sha256": "2e133426faa1308f0386e79f792ab76df829bf034d79bda70e9b851a21a35b46"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/nginx-selected-manifest.json",
+      "sha256": "03bb386d2fbd11a402b4375dbd4f82aeb9de2fd24f58b49b11830db192a0ef57"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/nginx-stable-rejected-manifest.json",
+      "sha256": "466f0dcc87727cf356511eb618b16a1abb9e556aa5f643ab53fca32ba898af1d"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/node-manifest.json",
+      "sha256": "949ce07621da203822b1dc92a02f0c78fcbc91db081b2d5d33de90a9948a6e01"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/package-presence-green.xml",
+      "sha256": "2392200bfc3f0032cad0b829ae3cc4dfa1859ac1fd370fc4e2fedcfd73c90b14"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/package-presence-green.xml.gz",
+      "sha256": "4b6bccc43c0433b68620baa27df9cb0e08af5dace2f37f9b160a195d2489dfc0"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/python-manifest.json",
+      "sha256": "625673d458c17b9c4260019bc65237ef828d6ccc5645190183da50fd70e7c21b"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/sha256sums.txt",
+      "sha256": "76f5747eec944dfdd3cdc6c27ebcc46b54c5d432883782553e835faf8332d017"
+    },
+    {
+      "file": "bodyguard/docs/review/stage5-web-runtime/uv-manifest.json",
+      "sha256": "240e8ce11785571becb73fb225aaf6bb30ebbfcf9458c0024555d919eb4e7c8f"
+    }
+  ],
+  "sourceUnchangedAcrossNativeExecution": true,
+  "productSourceEqualsIntegratedMain": true,
+  "mainExclusionTokensPreserved": 42,
+  "additionalExistingPackageExclusions": 2,
+  "exporter": {
+    "passed": 33,
+    "failed": 0,
+    "skipped": 0,
+    "actualFilesystem": true
+  },
+  "frontend": {
+    "files": 42,
+    "passed": 693,
+    "actualDOMNotCamera": true
+  },
+  "nativePackageChecks": {
+    "passed": 12,
+    "filePresence": 5,
+    "composeParserAndASGI": 7,
+    "dockerRuntime": false
+  },
+  "staticAndProductionBuildPassed": true,
+  "packageManifest": {
+    "assets/index-BZhaXPyN.js": "334736692ea127d229c8a1ead7e031ad0652c53e559cb2e4ae3eb95fd3dc8989",
+    "assets/index-FW13lazw.css": "3db1ea79a56892552afda1e0aba982f971b1f752e6647cd39a3be9441fc58686",
+    "brand/google-icon.png": "2bc2ae8e4c67de66d74bf1deed12cd8f22981270266a487576b671b0b4df361c",
+    "index.html": "05fc0c89e74f8a51c0039d0192ebba1d24303c27a70983758715fce380055b07"
+  },
+  "sourcePackageBytesMatch": true,
+  "productionGuard": {
+    "production_JS_files_checked": 1,
+    "development_catalog_strings": 0,
+    "unconnected_coaching_engine_strings": 0,
+    "unconnected_coaching_resource_strings": 0,
+    "unconnected_coaching_session_strings": 0,
+    "unconnected_observation_loop_strings": 0,
+    "unconnected_result_record_producer_strings": 0,
+    "unconnected_record_owner_capture_strings": 0,
+    "unconnected_recorded_session_strings": 0,
+    "unconnected_auth_coaching_hook_strings": 0,
+    "unconnected_minute_aggregation_strings": 0,
+    "unconnected_owned_minute_upload_strings": 0
+  },
+  "docker": {
+    "checkedAt": "2026-10-07T08:21:24.439Z",
+    "checkExitCode": 1,
+    "clientVersion": "29.2.1",
+    "serverAvailable": false,
+    "startedByThisWork": false,
+    "rawConfigurationPublished": false
+  },
+  "actualDockerBuild": false,
+  "actualContainerNGINX": false,
+  "actualTLSBrowser": false,
+  "actualPackagedAccountRecords": false,
+  "actualRestartDatabaseOutageRecovery": false,
+  "backendFullSQLRegressionRerun": false,
+  "actualCameraAvatarParticipant": false,
+  "designStructureApproved": false,
+  "privacyPolicyChanged": false,
+  "operationalChanges": false,
+  "nativeIntegrationComplete": true,
+  "allRequiredGatesPassed": false,
+  "storyComplete": false,
+  "mergeAuthorized": false,
+  "allStagesComplete": false,
+  "collectorSHA256": "b2c1afa143aed7b5ca3124c63498de2f01876bbdfd7069d18a65689790ddd5c9",
+  "boundary": "Owned native source/build/filesystem/Compose parser/ASGI only; missing daemon is not a skipped success. Docker image/HTTPS/packaged browser/restart recovery remain mandatory."
+}

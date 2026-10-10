@@ -1,6 +1,6 @@
 # S5.1 — 배포 전 서버 생존·준비 상태
 
-로컬 구현·검증 완료/PR 게이트 진행 · 시작 main34e433024bf8ceab059bb2071d440c4465aee37a · codex/stage5-runtime-readiness · 출시 계약5단계/NFR-08/FR-U-04·FR-R-03
+로컬 구현·검증 완료/PR #28 main 병합(mergecbfd07f) · 시작 main34e433024bf8ceab059bb2071d440c4465aee37a · codex/stage5-runtime-readiness · 출시 계약5단계/NFR-08/FR-U-04·FR-R-03
 
 ## 범위·의존성
 
@@ -48,3 +48,7 @@ CTO 기술 기본값은 접속2초(대상별), 작업 취소 deadline3초, SQL1�
 OpenAPI의 기본 status가 처음 선택 필드로 생성된 리뷰 문제를 필수 literal로 수정했다. 취소 한계 없는 구형 client도 거부했다. 생성 타입2회 동일 hash·TypeScript/Biome, Ruff/format28파일·mypy8소스 확인. 마지막 API에는 기존 asyncio 의존성 경고1건이 있고 중간 실행의 Pydantic 경고도 원본으로 남긴다. [전체 실패/실행·작성자 코드 리뷰](../review/stage5-readiness/README.md). 현재 변경 범위의 미해결P1/P2 없음이며 아직 PR 게이트·전체5단계/1~6단계 완료는 아니다.
 
 파일: backend/app/readiness.py·main.py, backend/tests/test_readiness.py, 실제 생성 frontend/src/api/generated/{index.ts,types.gen.ts}, backend/README.md, 이 Story·tasks·이전 Story 병합 기록·review/stage5-readiness 증거. next는 배포 패키지/프록시·운영 준비의 독립 구현이며 실제 적용/비용/계정/시크릿/운영 DB/배포 승인은 별도다.
+
+## 실제 병합·다음 Story
+
+PR #28은2026-10-05T08:41:25Z에 mergecbfd07ff944c94de12674bd982bfe98f075616f0로 main 병합했다. 최종 소스 ceb4c34bc8916412eaf797dff646ef33fb617411·main34e4330·실제 diff21파일·CLEAN/MERGEABLE·체크 없음·외부 리뷰0·로컬 clean/필수 검증·범위 내 미해결P1/P2 없음과 브랜치 보존 설정을 다시 확인하고 exact HEAD/merge commit을 사용했다. main 포함·원격 소스 브랜치 유지 확인. 다음은 최신 main의 새 codex/stage5-web-runtime-package에서 [S5.2 로컬 배포 패키지](stage5-web-runtime-package.md)다. 전체5단계/운영·배포 완료는 아니다.
