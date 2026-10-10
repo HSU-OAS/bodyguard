@@ -4,7 +4,7 @@
 
 [S2.A1 옆 목·어깨 실제 보완](review/avatar-neck-integration/lateral-attempt/README.md): 세 native 저작 모두 남성 접힘 검사에서 저장 전 실패했다. 마지막 접힘14→4와 원래 앞면/좌표·위상/raw skin/rig 보호를 확인했지만 실제 마감은 미달이다. 남성 반려 상태+변경하지 않은 여성 입력의8컷과39개 증거를 보존했다. 여성 저작·새 후보·GLB/전체변형/브라우저는 미실행이다. 입력be038c04·과거 원본/실패·37개 체크포인트/17개 검증은 유지한다.
 
-남은4개 edge의 인접6면은 전부 수정 구간 내부·원래 앞면/보호점0이다. 다음은 원래 면 연결/비평면·퇴화 조건의 읽기 전용 비교→국소 연결 설계다. 같은 중앙 저작/Laplacian·단위·계산 Triangulate를 반복하지 않으며 기준을 낮추지 않는다. 새 최종 원본에서 외형·원본/GLB/전체변형/Chrome/실측을 실제 재실행한다. [남은 보완](review/avatar-neck-integration/lateral-attempt/README.md#남은-문제와-다음-조건)을 따른다.
+[남은6면 실제 비교](review/avatar-neck-integration/lateral-faces/README.md)는 원래부터 접힌 삼각면/quad와 계산용 삼각화만으로 해소되지 않는 것을 확인했다. 최초 API 가정 실패exit1·별도 native API probe/후속 진단exit0를12개로 보존했다. 동결 반려 row와 원본/여성/private probe 보호는 exact·새 후보0이다. 다음은 원래 전문 원본의 국소 점 출처/배치·연결/표면 연속성 대조와 보완 설계다. 같은 중앙/Laplacian·단위·계산 삼각화를 반복하지 않는다. 새 최종 원본에서 외형·원본/GLB/전체변형/Chrome/실측을 실제 재실행해야 한다. [남은 보완](review/avatar-neck-integration/lateral-faces/README.md#실제-확인)을 따른다.
 
 기존 웹의 로그인·선택 준비·비공개 코칭/기록 adapter 구현과 실제 출시 사용 흐름은 다르다. 검증된 출시 동작0, 외형/시작/SDK P2·실측·승인 UI·외부 공급자/HTTPS/운영과 전체1~6은 미완료다. 공개 웹·문구 최소화·안전/개인정보·별도 승인 경계를 유지한다.
 
