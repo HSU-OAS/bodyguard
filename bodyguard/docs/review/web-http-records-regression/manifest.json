@@ -1,0 +1,944 @@
+{
+  "baselineHead": "1d87ad421995587f7bea024f33fc2ee5b75af26d",
+  "actualWebHttpSql": true,
+  "actualMailProvider": false,
+  "actualHumanCamera": false,
+  "actualStretchValidation": false,
+  "startupP2Resolved": false,
+  "source": {
+    "frontend/e2e/integration.spec.ts": "617dbf117c14763a627270b18e8c42f36d8bc30e344d841c443ab610041b9126",
+    "frontend/e2e/records.spec.ts": "3e80314553f9b6c1d7013b3b524ce2cece9a0436655ed8391c6e4fbb85b722f9",
+    "frontend/playwright.account.config.ts": "ad421d236f7ae1cbefd7fa3c49d78fdf25c72d5b4aeb542fb2aa9b61568884c3",
+    "frontend/vite.config.ts": "1200b2bf814fbd9ab7a34a922fc5c7a924a17f85a1890356436b778a25887473",
+    "frontend/package.json": "fc5513803b158f0829f44e17a43335bcc0319d5476cb41abf8405656946363b7",
+    "frontend/pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+    "backend/tests/run_browser.py": "ed73d397d31697ec2ebf139b251cbd37c53afb13ade54930af3dd3e2f1bceb25",
+    "backend/tests/conftest.py": "327b2fbb658626d0e44beecaff746adb5a9662bf3453aa4bc7049009a4bc79bf",
+    "backend/tests/test_database_ownership.py": "d3c2398e5cee3326a864b58354c4f557cc6371eb56c65f78089aeb7d2a0c1ac6",
+    "backend/uv.lock": "e87c2c0aba0ddf3c8bb54ea8d7e2f187ccaf694366199f8b70ae8566591f5fa0",
+    "docs/review/web-http-records-regression/collect.mjs": "3c5c9b918619cffb820dcec87e47a3067e37dcbbe36c38889f71c0f709ab7c81"
+  },
+  "artifacts": {
+    "evidence/scratch/before-source.json.gz": {
+      "rawSha256": "1f388b6728e37c9c1b5e848af3ec9b52ac3450e88e47fea07d9ed41a394cd039",
+      "gzipSha256": "250a513b2ddc64ab7597dc551439f13afe6e1daf14248b2daf7a331b4b697160",
+      "rawBytes": 17763
+    },
+    "evidence/scratch/database-ownership.log.gz": {
+      "rawSha256": "b4eb7be9000651a3e89c6a77e8b346d05d1d706d620aa6f8193e574a39b3ced1",
+      "gzipSha256": "d57e0ed71ded405238e93ed6933f841b1f3f84bb6c18a455c98290f1eb4892be",
+      "rawBytes": 98
+    },
+    "evidence/scratch/execution-notes.json.gz": {
+      "rawSha256": "01c1d5920cbbf3c2d0a5437c8909053cf013615aa62e66a7c01a09646e4d7022",
+      "gzipSha256": "f8fb7e9adfbaecdd1859ec71c1aebafe5424140f9bb7a54d4247e5c991ca60aa",
+      "rawBytes": 1646
+    },
+    "evidence/scratch/integration-final.log.gz": {
+      "rawSha256": "2065720ee9695417522639e289562d48521b8bc1884a14b98f3141b876765f40",
+      "gzipSha256": "ec719128b3b3475559c500caefa296e64927b5a1be7dde4b91bc5890d64029e2",
+      "rawBytes": 1135
+    },
+    "evidence/scratch/integration-first-green.spec.ts.gz": {
+      "rawSha256": "9ff342c8d6cec933d4b868a8550af78dcef9154540df018ff1f2b83d76ec7c6c",
+      "gzipSha256": "d8158e56373210a8fc767cfcc46feef665be3d37cf0e29b3992d5cdefd8f1a45",
+      "rawBytes": 10430
+    },
+    "evidence/scratch/integration-green.log.gz": {
+      "rawSha256": "64df33a718d7cf0b11c66f9e46482216f833f053887cd8fe8f8970aef0f03ede",
+      "gzipSha256": "6a6b59efb121bf04dd012d5fd99334b605ad85900fdc4fd2bdac5533c60aea63",
+      "rawBytes": 1135
+    },
+    "evidence/scratch/integration-red.log.gz": {
+      "rawSha256": "2acc0d56d20fb90e25296b86bc0f2cf99b9a3427cfd4eea920dfc0a805087253",
+      "gzipSha256": "51372483bdea75918a662ce19498f877cf6bc9f4782d1b6c5fb39fb8de9dd151",
+      "rawBytes": 3297
+    },
+    "evidence/scratch/integration.spec.ts.gz": {
+      "rawSha256": "31d5274f7ac29bd0167b146e1853f1779f6995c8dd0f6900d9ef5d963dbc92f8",
+      "gzipSha256": "47849d4631f3bba4fa925e771088901f24270cb391b0f7deee859f4cc24bae82",
+      "rawBytes": 10430
+    },
+    "evidence/scratch/playwright.account.config.ts.gz": {
+      "rawSha256": "ad421d236f7ae1cbefd7fa3c49d78fdf25c72d5b4aeb542fb2aa9b61568884c3",
+      "gzipSha256": "ba32edf9968b64278a91f7eaeb8a654834224122827123eea227e672da9a0126",
+      "rawBytes": 4403
+    },
+    "evidence/scratch/quality.log.gz": {
+      "rawSha256": "9d116ea2f380cec62526f350be633297da959c4c3ed99fd0a3258347b5376152",
+      "gzipSha256": "22d730cef31377277fb8ee0c86f2655fa7e0ee00d9970be33dbdaa12f9c3ed09",
+      "rawBytes": 16221
+    },
+    "evidence/scratch/records-green.log.gz": {
+      "rawSha256": "d1c184b7347174b9b73b9db0e400d10df1bbecc5b4cfda5f74535be0061e8cdf",
+      "gzipSha256": "dc64ac48ec51e3f2f91f7eb4a4743d52b09871ad7cbfb668229d1a931b5b5aef",
+      "rawBytes": 2168
+    },
+    "evidence/scratch/records-red.log.gz": {
+      "rawSha256": "d8ad033138e5b2c489b7aedf0e691f9527a10e64a2d101314e6707bd99d95852",
+      "gzipSha256": "9dcb0a34b3504bb4b2309addf5f7746aee5bd543065e9981c2e0579bb1ac1cda",
+      "rawBytes": 4119
+    },
+    "evidence/scratch/records.spec.ts.gz": {
+      "rawSha256": "f107f73fc21826d380d27f84e71b037c96db768b96ca82f9a19ca1b6e0e575b2",
+      "gzipSha256": "d9c1d60c72c55cd3de0be9f60c7e326ca8d136120f4cd444307abb4aa4dbe7b9",
+      "rawBytes": 21159
+    },
+    "evidence/scratch/run_browser.py.gz": {
+      "rawSha256": "ed73d397d31697ec2ebf139b251cbd37c53afb13ade54930af3dd3e2f1bceb25",
+      "gzipSha256": "d7291c30496112df823108b5580d206538ca2152c3ac96daf4fa09b8083ec582",
+      "rawBytes": 11098
+    },
+    "evidence/scratch/unit.json.gz": {
+      "rawSha256": "81082f3ee276665f8e938cdddf4cc13c5f90fc49ee9b5207352b184fde5b44fa",
+      "gzipSha256": "664f854caa9f030b68374fcc98a1521a4ea12a431d6c5f4d401b9df6111621d0",
+      "rawBytes": 510395
+    },
+    "evidence/scratch/unit.log.gz": {
+      "rawSha256": "db07eb8930caa777a260b3e2653b5190d687aa499b601fc4412bc04d381da95b",
+      "gzipSha256": "400f982f82f0f854152b6d172418adc0f7d29d1e320205af69491845bc79d776",
+      "rawBytes": 84
+    },
+    "evidence/scratch/uv.lock.gz": {
+      "rawSha256": "e87c2c0aba0ddf3c8bb54ea8d7e2f187ccaf694366199f8b70ae8566591f5fa0",
+      "gzipSha256": "982e2af1aa2e14ed80ea71bc47b866d6ec7fa4dc803098ce23bfc4a123959731",
+      "rawBytes": 173136
+    },
+    "evidence/integration-red/.last-run.json.gz": {
+      "rawSha256": "ac241d49dc6c201263eb56b330e5fdaa4f3160d18475990f32e4f943a2f706a9",
+      "gzipSha256": "54e75fda2d26f76754365542410268c08168b52135c13d20142526319c2efa90",
+      "rawBytes": 96
+    },
+    "evidence/integration-red/integration-WEB-I01-공개→가입→탐색-준비→기록-상세·취소·삭제→계정·로그아웃/error-context.md.gz": {
+      "rawSha256": "41f3985688938e842c74c3981972c23165c6966175adfd36b362364ee0fd5459",
+      "gzipSha256": "9e0e2cd7caf94c3f9f6b6e84d4e9005fb745a77fcd10bfb41687b833f908e8b7",
+      "rawBytes": 13130
+    },
+    "evidence/integration-red/integration-WEB-I01-공개→가입→탐색-준비→기록-상세·취소·삭제→계정·로그아웃/integration-explore-pending.png.gz": {
+      "rawSha256": "559757a7479f553af3c05e2ee5c0f9ab47d5c69eee592c236240cf3772abaa28",
+      "gzipSha256": "d35b0431c6e3e872c533eef3ac15e5929f2441e614ef25754ddaa4d4462e2b64",
+      "rawBytes": 74145
+    },
+    "evidence/integration-red/integration-WEB-I02-계정-장애-주입·공개-안내-보존·production-개발-경로-차단/integration-public-offline-700.png.gz": {
+      "rawSha256": "1ad1008b8ff2bcc62ab12d77615621f4122417021751f08535bdd602acf47f68",
+      "gzipSha256": "9c6fb63fe0adec819eccacaa6bf46710d6a3763d872ef4b1a0e3279f68bff5f6",
+      "rawBytes": 195596
+    },
+    "evidence/integration-red/report.json.gz": {
+      "rawSha256": "7d9f72e94d59b56565ad0f67c73ccf38417d056d6e7e3cf786ce5ebaa273017c",
+      "gzipSha256": "c65f7e07fb5883d80f0155df68ad3b3961b3be10a0550f892d3c8a5600c2d525",
+      "rawBytes": 12698
+    },
+    "evidence/records-red/.last-run.json.gz": {
+      "rawSha256": "0b01829fa7e6134e35669dc9654bde8365e61c0bfa936142f661e5e27fa8bdf0",
+      "gzipSha256": "00cbac1d1979b001c5bb13f2ba3e055cd56af14e7de3901433aca71d9aab05d0",
+      "rawBytes": 96
+    },
+    "evidence/records-red/records-RD-01-actual-previ-fd962-on-preserve-outside-records/deletion-preview-narrow.png.gz": {
+      "rawSha256": "3006c85c5b2c66a29ba0e2a9e12388a62a9ed25d69d946936ed6e8bedfd0e702",
+      "gzipSha256": "7cc56ae0b2c9c31710f037952c4221b878e671696ac4233ed6dfbb2f312fa377",
+      "rawBytes": 80539
+    },
+    "evidence/records-red/records-RD-01-actual-previ-fd962-on-preserve-outside-records/deletion-preview.png.gz": {
+      "rawSha256": "b6d1a1f7b1f52efc8e787439f46c99c0fd8a3ddec53d872e183444087a16351c",
+      "gzipSha256": "154a368c825912e70bad872754934ef36097e471349120c09339f1ac1726f90d",
+      "rawBytes": 88969
+    },
+    "evidence/records-red/records-RD-01-actual-previ-fd962-on-preserve-outside-records/deletion-result.png.gz": {
+      "rawSha256": "d58b1696325dee3ee31bee206781920fe4f330bf5e9c48289ba867db27882649",
+      "gzipSha256": "d60a8af9dfb53bbda555ea165e25fefc39712a8407b040e0b0077ab78dc9f1b4",
+      "rawBytes": 79106
+    },
+    "evidence/records-red/records-RD-02-changed-real-226c7--preserves-remaining-record/deletion-target-changed.png.gz": {
+      "rawSha256": "de375d2401f00b7c107b2fbb2af8647884ef119603b12f2defcd93dc624a3dd6",
+      "gzipSha256": "e749cedd74ddd3a95f4eff496c26d4dedbb8279daadc39ae92f1b846d0f073f1",
+      "rawBytes": 96705
+    },
+    "evidence/records-red/records-RD-03-server-confi-f6972--without-an-automatic-retry/deletion-expired.png.gz": {
+      "rawSha256": "d3a618f3f2d197adb489876585cebb466c9cbae76446186af2656b0eef88d2ce",
+      "gzipSha256": "0260f80d20812ebf63d71b656c928dd26294c101688a333883ce5e52925e0693",
+      "rawBytes": 89922
+    },
+    "evidence/records-red/records-RD-04-foreign-proo-f1966-on-cannot-reopen-private-UI/deletion-logout-boundary.png.gz": {
+      "rawSha256": "8b29c48c2a16415e63fa5f85ced377017262d802541dd8042c4e86f12c02265a",
+      "gzipSha256": "b3559bfa39e61a49f7159c82bb7238e75a3cf0502f4858263533bfecafccd381",
+      "rawBytes": 80883
+    },
+    "evidence/records-red/records-RD-05-record-saved-93a64-en-with-an-earlier-end-time/deletion-new-record-preserved.png.gz": {
+      "rawSha256": "cf434747fb8720171201b8540a048a3f5e47d8c23f49c3487b3c6bb9d661f636",
+      "gzipSha256": "572052aa5513f0939f88a1c5d642517ace7180cb510048350c1c1ddd26a6241b",
+      "rawBytes": 86359
+    },
+    "evidence/records-red/records-RW-01-protected-en-1fdc8-genuine-empty-record-period/records-empty.png.gz": {
+      "rawSha256": "06f46681f116ea4a06dcd6341bd5d92f9a60c5a2c6b56a19740081ba3575fa25",
+      "gzipSha256": "1d54f589dc74902f1823ab2bb7420f1c3edaa0a7cbc81d50a5ed4e83bb777eb8",
+      "rawBytes": 67736
+    },
+    "evidence/records-red/records-RW-02-actual-summa-0fd33-d-long-record-narrow-layout/record-detail-narrow.png.gz": {
+      "rawSha256": "795067c686284709e857785efa00fbcadcb5ada27c583b7b93c04b56e2399b36",
+      "gzipSha256": "32f2c93571e669e4b5490aa0aa31b52474f889422ea619c868a85a3d8ee737c7",
+      "rawBytes": 62054
+    },
+    "evidence/records-red/records-RW-02-actual-summa-0fd33-d-long-record-narrow-layout/records-list-narrow.png.gz": {
+      "rawSha256": "55073bb27f14bc1c9eb5594769e4efbca1fa5a529ed84a91033d3d2ba4e01ed6",
+      "gzipSha256": "9ab402df4ca8ffacba995bf892d7676e941fc6ab68906b481cca2d2dceec3847",
+      "rawBytes": 75680
+    },
+    "evidence/records-red/records-RW-02-actual-summa-0fd33-d-long-record-narrow-layout/records-list.png.gz": {
+      "rawSha256": "805086797e6e9743ebb676eb25aee7f7cd32ef28d83dc1b4c4426e8e8a3c9150",
+      "gzipSha256": "ef38bdb527caaccb5a9ee17fddf292c1cdfa9efe0c4b9710af6e3d8b05430e03",
+      "rawBytes": 81611
+    },
+    "evidence/records-red/records-RW-03-actual-perio-7ef3e--and-invalid-input-recovery/error-context.md.gz": {
+      "rawSha256": "da10057c8d92d07a106d761e2562833f44aea88cd6e3e9531db83200ea42f21a",
+      "gzipSha256": "2568f1908bc3c4d27042c6b50eaf9eccf84053491bd31f9f7ee2f0e7b4d0818c",
+      "rawBytes": 13507
+    },
+    "evidence/records-red/records-RW-03-actual-perio-7ef3e--and-invalid-input-recovery/records-period.png.gz": {
+      "rawSha256": "5140267f292c2a15bcbfc6c068463ec3bdb6a6266823e4170cc023f9f0a770db",
+      "gzipSha256": "28a184c18e12c0bd0a053ffc6a140351413649421d726353121fdb3799a92c98",
+      "rawBytes": 66482
+    },
+    "evidence/records-red/records-RW-04-actual-bound-b641f-ses-one-cutoff-and-keyboard/records-page-two.png.gz": {
+      "rawSha256": "bdb264f22dc56209b429b7c23600cd655cb52e676dd833d6b9dd5556249af00c",
+      "gzipSha256": "de1363ef8808caa25faf9d6de64e65f50a2e66aa6b66f007a7d0e67c32642e85",
+      "rawBytes": 72225
+    },
+    "evidence/records-red/records-RW-05-read-failure-1a7af--response-after-real-logout/records-loading.png.gz": {
+      "rawSha256": "ea7fd9223f07c360a070abd0b2f640e002a35bf3c6ea121372f5ac5268fdeac6",
+      "gzipSha256": "d25e2982755d172762c759e434f57cef54179b3b105acab8a4448b587303cb01",
+      "rawBytes": 49777
+    },
+    "evidence/records-red/records-RW-05-read-failure-1a7af--response-after-real-logout/records-read-error.png.gz": {
+      "rawSha256": "9aad3559cd2befbae16ecb2f29ca2181322ee4f5e8f7f60f262a6907caeaa0b2",
+      "gzipSha256": "38d52784c7be1b2ef839c5092262386406aafac2f3b396647a6b1562e9afa2f3",
+      "rawBytes": 58281
+    },
+    "evidence/records-red/records-RW-06-own-only-det-04442-count-and-Back-after-logout/record-unavailable.png.gz": {
+      "rawSha256": "78109a3529a4365df122d72841829c4b92dc590aec3de91eab44eae5faa3e8cb",
+      "gzipSha256": "8c14ef378793ba5ab376f399e7b3c25b3c9107e06517d94d1e465f1f33438195",
+      "rawBytes": 51133
+    },
+    "evidence/records-red/report.json.gz": {
+      "rawSha256": "84850d60640de64e680584079e0d5f5d4e9a616e7af6a22b13f0bafb5bed3a24",
+      "gzipSha256": "1118181c98f8f6062c4bfeb61098fb8e01f39851bedfe00d7d1e5726862446be",
+      "rawBytes": 21416
+    },
+    "evidence/integration-first-green/.last-run.json.gz": {
+      "rawSha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "gzipSha256": "1192e21d9c0e3eb952afd8d3e74333b99b8bf5aea64138d3262e079129e57154",
+      "rawBytes": 45
+    },
+    "evidence/integration-first-green/integration-WEB-I01-공개→가입→탐색-준비→기록-상세·취소·삭제→계정·로그아웃/integration-account-700.png.gz": {
+      "rawSha256": "fbfcb56801d60495bcaa742c8e2f7e73d56d1da3c742230ef4d00fbb40dab132",
+      "gzipSha256": "72351db3502f6dfd7647d4f94868d9349467fb3f6e2b3e41c4c6a38e41f2d015",
+      "rawBytes": 73834
+    },
+    "evidence/integration-first-green/integration-WEB-I01-공개→가입→탐색-준비→기록-상세·취소·삭제→계정·로그아웃/integration-explore-pending.png.gz": {
+      "rawSha256": "744b482b57afc77e29f58ac28262d2153ad05c12bc8d64aede32846593ceaee0",
+      "gzipSha256": "010af1e7050b1fb7f01b61297965f1164201627d62227334b8904e5dca4bfeb1",
+      "rawBytes": 74045
+    },
+    "evidence/integration-first-green/integration-WEB-I01-공개→가입→탐색-준비→기록-상세·취소·삭제→계정·로그아웃/integration-record-detail.png.gz": {
+      "rawSha256": "9c1c1510a68a673af1d42de17c6da581204631b7ee8e8dc9978a1797461001a3",
+      "gzipSha256": "1c5b14fc59b03ebf557a4d8c9473c27c0cadbca55145f3efc2ef9eb02ba3d59b",
+      "rawBytes": 66477
+    },
+    "evidence/integration-first-green/integration-WEB-I02-계정-장애-주입·공개-안내-보존·production-개발-경로-차단/integration-public-offline-700.png.gz": {
+      "rawSha256": "1ad1008b8ff2bcc62ab12d77615621f4122417021751f08535bdd602acf47f68",
+      "gzipSha256": "9c6fb63fe0adec819eccacaa6bf46710d6a3763d872ef4b1a0e3279f68bff5f6",
+      "rawBytes": 195596
+    },
+    "evidence/integration-first-green/report.json.gz": {
+      "rawSha256": "b199b0bbdb00677a57490b75e5fef50322f86bc1364724b8e6ca738e1b63b1fd",
+      "gzipSha256": "b46214eba313ba90b406d241644c73e28878c72971bc350a4f8788542388a97c",
+      "rawBytes": 7376
+    },
+    "evidence/records-final/.last-run.json.gz": {
+      "rawSha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "gzipSha256": "1192e21d9c0e3eb952afd8d3e74333b99b8bf5aea64138d3262e079129e57154",
+      "rawBytes": 45
+    },
+    "evidence/records-final/records-RD-01-actual-previ-fd962-on-preserve-outside-records/deletion-preview-narrow.png.gz": {
+      "rawSha256": "b5d1009dd6d15128bea4d814546ea66d4bf16859c0243bb101096293643df640",
+      "gzipSha256": "3b3a2a66b30745514a5d21df941dd3b14a7045d8149c0fd7766db384d49e6e3d",
+      "rawBytes": 80538
+    },
+    "evidence/records-final/records-RD-01-actual-previ-fd962-on-preserve-outside-records/deletion-preview.png.gz": {
+      "rawSha256": "131edbd73c8710e716ec49c040dfe85ceb3675ad096e77c93e506457713657f8",
+      "gzipSha256": "15af2e9aa2c194a430385f1ed8c43ec9c070cc8fbd084c3b069533cc780ef1b8",
+      "rawBytes": 88987
+    },
+    "evidence/records-final/records-RD-01-actual-previ-fd962-on-preserve-outside-records/deletion-result.png.gz": {
+      "rawSha256": "d58b1696325dee3ee31bee206781920fe4f330bf5e9c48289ba867db27882649",
+      "gzipSha256": "d60a8af9dfb53bbda555ea165e25fefc39712a8407b040e0b0077ab78dc9f1b4",
+      "rawBytes": 79106
+    },
+    "evidence/records-final/records-RD-02-changed-real-226c7--preserves-remaining-record/deletion-target-changed.png.gz": {
+      "rawSha256": "3d306fa92b2e2d1ed801acc7702c31e3eac63b720ab68cbc658b9496f522a4c6",
+      "gzipSha256": "5689ff114b0d00e3489377f91ca4a8165338f4f60865f7f9142cc645d2124c35",
+      "rawBytes": 96755
+    },
+    "evidence/records-final/records-RD-03-server-confi-f6972--without-an-automatic-retry/deletion-expired.png.gz": {
+      "rawSha256": "fccbcf33170fdc6a972eeab0849928b46bb6c2ef0227d09203cfd60e07a597ae",
+      "gzipSha256": "fe444e7a65f3986a86d92a51e11fb2212eda4ded5bf96c88f221d2b23f118361",
+      "rawBytes": 89941
+    },
+    "evidence/records-final/records-RD-04-foreign-proo-f1966-on-cannot-reopen-private-UI/deletion-logout-boundary.png.gz": {
+      "rawSha256": "8b29c48c2a16415e63fa5f85ced377017262d802541dd8042c4e86f12c02265a",
+      "gzipSha256": "b3559bfa39e61a49f7159c82bb7238e75a3cf0502f4858263533bfecafccd381",
+      "rawBytes": 80883
+    },
+    "evidence/records-final/records-RD-05-record-saved-93a64-en-with-an-earlier-end-time/deletion-new-record-preserved.png.gz": {
+      "rawSha256": "229be12f728fec745ca71fbbfb1ca1ae8643c25c720875a1b93ba12ebce3cd0d",
+      "gzipSha256": "e97c26ab9050fe0a672a86fd5ce35e40780aa8896fc3052c79760dec198dd9c5",
+      "rawBytes": 86126
+    },
+    "evidence/records-final/records-RW-01-protected-en-1fdc8-genuine-empty-record-period/records-empty.png.gz": {
+      "rawSha256": "06f46681f116ea4a06dcd6341bd5d92f9a60c5a2c6b56a19740081ba3575fa25",
+      "gzipSha256": "1d54f589dc74902f1823ab2bb7420f1c3edaa0a7cbc81d50a5ed4e83bb777eb8",
+      "rawBytes": 67736
+    },
+    "evidence/records-final/records-RW-02-actual-summa-0fd33-d-long-record-narrow-layout/record-detail-narrow.png.gz": {
+      "rawSha256": "644ced54ba3b4f39a70ca3f56775306da8dd63004f66e5c130ec038b4c3d5e0c",
+      "gzipSha256": "1525fcb35cdab8faf3f7dc075155aa6038b3caa6c06b19d8ef9072d943dd2064",
+      "rawBytes": 62156
+    },
+    "evidence/records-final/records-RW-02-actual-summa-0fd33-d-long-record-narrow-layout/records-list-narrow.png.gz": {
+      "rawSha256": "ee5b77b4ef3b22aaefe0214a220fde8709ed0f22069e75703276460615bbdbd0",
+      "gzipSha256": "91c003e01610d841570809242dd1932e14af2dbc5f2f2a8d4be280f25afdac0f",
+      "rawBytes": 75872
+    },
+    "evidence/records-final/records-RW-02-actual-summa-0fd33-d-long-record-narrow-layout/records-list.png.gz": {
+      "rawSha256": "cdb7d6209429df581eb9680c9d6d839cdd41542a162c29046edc5c0cad477731",
+      "gzipSha256": "2b7f6860d8f22db480f80fa2ca2e1563f3e6767fa82ff18430d795beeb2cdaeb",
+      "rawBytes": 81847
+    },
+    "evidence/records-final/records-RW-03-actual-perio-7ef3e--and-invalid-input-recovery/records-period.png.gz": {
+      "rawSha256": "54b80b5ee8adbabfd729f48293f0b8a362a00bc53e7e1e23a78948605ae759dc",
+      "gzipSha256": "d35f99438da42d00321c83efb0f06b971fa7e0d18330b2c09720806518f1ff9e",
+      "rawBytes": 66393
+    },
+    "evidence/records-final/records-RW-04-actual-bound-b641f-ses-one-cutoff-and-keyboard/records-page-two.png.gz": {
+      "rawSha256": "a14efad2b4884b6630dc6ed39df581fdc6aa1c7d8683e12788d58e64966b4502",
+      "gzipSha256": "b4af34f7a588c24b75566156e5ef782d2de772587facc847d7679466a348605a",
+      "rawBytes": 72218
+    },
+    "evidence/records-final/records-RW-05-read-failure-1a7af--response-after-real-logout/records-loading.png.gz": {
+      "rawSha256": "ea7fd9223f07c360a070abd0b2f640e002a35bf3c6ea121372f5ac5268fdeac6",
+      "gzipSha256": "d25e2982755d172762c759e434f57cef54179b3b105acab8a4448b587303cb01",
+      "rawBytes": 49777
+    },
+    "evidence/records-final/records-RW-05-read-failure-1a7af--response-after-real-logout/records-read-error.png.gz": {
+      "rawSha256": "9aad3559cd2befbae16ecb2f29ca2181322ee4f5e8f7f60f262a6907caeaa0b2",
+      "gzipSha256": "38d52784c7be1b2ef839c5092262386406aafac2f3b396647a6b1562e9afa2f3",
+      "rawBytes": 58281
+    },
+    "evidence/records-final/records-RW-06-own-only-det-04442-count-and-Back-after-logout/record-unavailable.png.gz": {
+      "rawSha256": "78109a3529a4365df122d72841829c4b92dc590aec3de91eab44eae5faa3e8cb",
+      "gzipSha256": "8c14ef378793ba5ab376f399e7b3c25b3c9107e06517d94d1e465f1f33438195",
+      "rawBytes": 51133
+    },
+    "evidence/records-final/report.json.gz": {
+      "rawSha256": "8933d88674ef6aed28b3a0e504676884436b384de5299f6d13015818a512bfd4",
+      "gzipSha256": "c4888bb1a86876fb3cae25fa8d6cad68df3cf732246a62e493e906e5b877ce96",
+      "rawBytes": 15509
+    },
+    "evidence/integration-final/.last-run.json.gz": {
+      "rawSha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903",
+      "gzipSha256": "1192e21d9c0e3eb952afd8d3e74333b99b8bf5aea64138d3262e079129e57154",
+      "rawBytes": 45
+    },
+    "evidence/integration-final/integration-WEB-I01-공개→가입→탐색-준비→기록-상세·취소·삭제→계정·로그아웃/integration-account-700.png.gz": {
+      "rawSha256": "252e076c6f8adbe8ade562e731ef0aea2df2971dc49e20b3c71a22bb85d3e5eb",
+      "gzipSha256": "1a819fbc4c5cffed0f01e9097ae4eb7826b2ad43a3cdab237b32f4bf06f8945e",
+      "rawBytes": 71901
+    },
+    "evidence/integration-final/integration-WEB-I01-공개→가입→탐색-준비→기록-상세·취소·삭제→계정·로그아웃/integration-explore-pending.png.gz": {
+      "rawSha256": "fce50bb2d67596a0c861647dd989f5f09f40fb8269348627de8ce9be35927ce1",
+      "gzipSha256": "2c9c4ae4d5b03d439e8b56efc36200b134fff2f8f202db201f3faffaf06748d5",
+      "rawBytes": 74127
+    },
+    "evidence/integration-final/integration-WEB-I01-공개→가입→탐색-준비→기록-상세·취소·삭제→계정·로그아웃/integration-record-detail.png.gz": {
+      "rawSha256": "7eb91d4a7c5b58dd0495184d08949b31f52c1f9fbd1a39c66711efbf9764df4a",
+      "gzipSha256": "913d5f5f1616c488f93dcce995e7ba58498f09f57b90bb83e077acc308ae3b90",
+      "rawBytes": 66387
+    },
+    "evidence/integration-final/integration-WEB-I02-계정-장애-주입·공개-안내-보존·production-개발-경로-차단/integration-public-offline-700.png.gz": {
+      "rawSha256": "84c22e8de80854cc59952c0dc74e95447344b7993e7ae93e06b3c591b81670e2",
+      "gzipSha256": "43f5c5886e0af819f5a5e622475a871fba5f1cc73fd6b9cae4fd9ff8976c3615",
+      "rawBytes": 159567
+    },
+    "evidence/integration-final/report.json.gz": {
+      "rawSha256": "9baa838ed3361203fa1a97d9cd2375d4f71f50d53356ea524ab9257714a93693",
+      "gzipSha256": "035a0b1cd2602d138339b29b6a6b5f307aef5408eee68114c409439414e1b15c",
+      "rawBytes": 7376
+    },
+    "evidence/source/frontend/e2e/integration.spec.ts.gz": {
+      "rawSha256": "617dbf117c14763a627270b18e8c42f36d8bc30e344d841c443ab610041b9126",
+      "gzipSha256": "94ddc933211a093dc31c90ef00b13e90fd7ffc1babd78a33441f0d752cadf083",
+      "rawBytes": 10422
+    },
+    "evidence/source/frontend/e2e/records.spec.ts.gz": {
+      "rawSha256": "3e80314553f9b6c1d7013b3b524ce2cece9a0436655ed8391c6e4fbb85b722f9",
+      "gzipSha256": "35a548984c26806c46eb83634902c57fb3ad47c45ccda0449d8b707ec284373b",
+      "rawBytes": 21226
+    },
+    "evidence/source/frontend/playwright.account.config.ts.gz": {
+      "rawSha256": "ad421d236f7ae1cbefd7fa3c49d78fdf25c72d5b4aeb542fb2aa9b61568884c3",
+      "gzipSha256": "ba32edf9968b64278a91f7eaeb8a654834224122827123eea227e672da9a0126",
+      "rawBytes": 4403
+    },
+    "evidence/source/frontend/vite.config.ts.gz": {
+      "rawSha256": "1200b2bf814fbd9ab7a34a922fc5c7a924a17f85a1890356436b778a25887473",
+      "gzipSha256": "a2edf371c635db0157a0146d20f0e30abb29fd4d5cb54abe84c5280bf0e17d8c",
+      "rawBytes": 821
+    },
+    "evidence/source/frontend/package.json.gz": {
+      "rawSha256": "fc5513803b158f0829f44e17a43335bcc0319d5476cb41abf8405656946363b7",
+      "gzipSha256": "e82e918f1288d6279173b652c496f61d942e638b7785125caf463a8646d519a6",
+      "rawBytes": 1527
+    },
+    "evidence/source/frontend/pnpm-lock.yaml.gz": {
+      "rawSha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+      "gzipSha256": "e32689fae2471a7e180c5afee7d3e2eefa98a83c4addcae2b2e3ba811559eb13",
+      "rawBytes": 80605
+    },
+    "evidence/source/backend/tests/run_browser.py.gz": {
+      "rawSha256": "ed73d397d31697ec2ebf139b251cbd37c53afb13ade54930af3dd3e2f1bceb25",
+      "gzipSha256": "d7291c30496112df823108b5580d206538ca2152c3ac96daf4fa09b8083ec582",
+      "rawBytes": 11098
+    },
+    "evidence/source/backend/tests/conftest.py.gz": {
+      "rawSha256": "327b2fbb658626d0e44beecaff746adb5a9662bf3453aa4bc7049009a4bc79bf",
+      "gzipSha256": "4ad40dbb5e6c82911e9ef71e02497a64158d7328eec0a7e51ebcc7304e0a81ed",
+      "rawBytes": 5954
+    },
+    "evidence/source/backend/tests/test_database_ownership.py.gz": {
+      "rawSha256": "d3c2398e5cee3326a864b58354c4f557cc6371eb56c65f78089aeb7d2a0c1ac6",
+      "gzipSha256": "4320fbc1596dc333ca798fc40c6f65c4c537c1894a6496fd22b24f474d55fdaa",
+      "rawBytes": 793
+    },
+    "evidence/source/backend/uv.lock.gz": {
+      "rawSha256": "e87c2c0aba0ddf3c8bb54ea8d7e2f187ccaf694366199f8b70ae8566591f5fa0",
+      "gzipSha256": "982e2af1aa2e14ed80ea71bc47b866d6ec7fa4dc803098ce23bfc4a123959731",
+      "rawBytes": 173136
+    },
+    "evidence/source/docs/review/web-http-records-regression/collect.mjs.gz": {
+      "rawSha256": "3c5c9b918619cffb820dcec87e47a3067e37dcbbe36c38889f71c0f709ab7c81",
+      "gzipSha256": "9afa4799822954ebc945ea7a9037cf766afe0a6675e926775aecd3b30ed594af",
+      "rawBytes": 6195
+    }
+  },
+  "runs": [
+    {
+      "label": "integration-red",
+      "folder": "integration-20261010T073531801911Z",
+      "passed": 1,
+      "failed": 1,
+      "tests": [
+        {
+          "title": "WEB-I01 공개→가입→탐색 준비→기록 상세·취소·삭제→계정·로그아웃",
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "retry": 0,
+              "durationMs": 8773,
+              "boundary": [
+                {
+                  "name": "integration-boundaries.json",
+                  "value": {
+                    "actualWebHttpSql": true,
+                    "actualProvider": false,
+                    "actualHumanCamera": false,
+                    "actualExercise": false,
+                    "cameraCalls": 0,
+                    "unexpectedRequests": [],
+                    "pageErrors": [],
+                    "storageLengths": [
+                      0,
+                      0
+                    ],
+                    "browserVersion": "155.0.8059.40"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "WEB-I02 계정 장애 주입·공개 안내 보존·production 개발 경로 차단",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1811,
+              "boundary": [
+                {
+                  "name": "integration-boundaries.json",
+                  "value": {
+                    "actualWebHttpSql": true,
+                    "actualProvider": false,
+                    "actualHumanCamera": false,
+                    "actualExercise": false,
+                    "cameraCalls": 0,
+                    "unexpectedRequests": [],
+                    "pageErrors": [],
+                    "storageLengths": [
+                      0,
+                      0
+                    ],
+                    "browserVersion": "155.0.8059.40"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "records-red",
+      "folder": "records-20261010T073646473919Z",
+      "passed": 10,
+      "failed": 1,
+      "tests": [
+        {
+          "title": "RD-05 record saved after preview is preserved even with an earlier end time",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1423,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "RD-04 foreign proof cannot delete another account and late deletion cannot reopen private UI",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1767,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "RD-03 server confirmation expiry preserves record without an automatic retry",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 975,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "RD-02 changed real SQL target requires another preview and preserves remaining record",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1259,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "RD-01 actual preview cancel and confirmed period deletion preserve outside records",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1169,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "RW-01 protected entry and genuine empty record period",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 903,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "RW-02 actual summaries, detail, Back period and long record narrow layout",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1450,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "RW-03 actual period filter and invalid input recovery",
+          "status": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "retry": 0,
+              "durationMs": 6079,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "RW-04 actual bounded pagination uses one cutoff and keyboard",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1704,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "RW-05 read failure recovery and cancelled late response after real logout",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1170,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "RW-06 own-only detail, second account and Back after logout",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1206,
+              "boundary": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "integration-first-green",
+      "folder": "integration-20261010T073829322394Z",
+      "passed": 2,
+      "failed": 0,
+      "tests": [
+        {
+          "title": "WEB-I01 공개→가입→탐색 준비→기록 상세·취소·삭제→계정·로그아웃",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 2723,
+              "boundary": [
+                {
+                  "name": "logout-completion-boundary.json",
+                  "value": {
+                    "movedBeforeConfirmation": false,
+                    "logoutConfirmed": 1,
+                    "logoutFailed": 1,
+                    "csrfFailed": 0
+                  }
+                },
+                {
+                  "name": "integration-boundaries.json",
+                  "value": {
+                    "actualWebHttpSql": true,
+                    "actualProvider": false,
+                    "actualHumanCamera": false,
+                    "actualExercise": false,
+                    "cameraCalls": 0,
+                    "unexpectedRequests": [],
+                    "pageErrors": [],
+                    "storageLengths": [
+                      0,
+                      0
+                    ],
+                    "browserVersion": "155.0.8059.40"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "WEB-I02 계정 장애 주입·공개 안내 보존·production 개발 경로 차단",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1231,
+              "boundary": [
+                {
+                  "name": "integration-boundaries.json",
+                  "value": {
+                    "actualWebHttpSql": true,
+                    "actualProvider": false,
+                    "actualHumanCamera": false,
+                    "actualExercise": false,
+                    "cameraCalls": 0,
+                    "unexpectedRequests": [],
+                    "pageErrors": [],
+                    "storageLengths": [
+                      0,
+                      0
+                    ],
+                    "browserVersion": "155.0.8059.40"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "records-final",
+      "folder": "records-20261010T073941309054Z",
+      "passed": 11,
+      "failed": 0,
+      "tests": [
+        {
+          "title": "RD-05 record saved after preview is preserved even with an earlier end time",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1078,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "RD-04 foreign proof cannot delete another account and late deletion cannot reopen private UI",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1494,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "RD-03 server confirmation expiry preserves record without an automatic retry",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1011,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "RD-02 changed real SQL target requires another preview and preserves remaining record",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1313,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "RD-01 actual preview cancel and confirmed period deletion preserve outside records",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1260,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "RW-01 protected entry and genuine empty record period",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 992,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "RW-02 actual summaries, detail, Back period and long record narrow layout",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1087,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "RW-03 actual period filter and invalid input recovery",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1090,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "RW-04 actual bounded pagination uses one cutoff and keyboard",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1259,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "RW-05 read failure recovery and cancelled late response after real logout",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1066,
+              "boundary": []
+            }
+          ]
+        },
+        {
+          "title": "RW-06 own-only detail, second account and Back after logout",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1068,
+              "boundary": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "integration-final",
+      "folder": "integration-20261010T074054430933Z",
+      "passed": 2,
+      "failed": 0,
+      "tests": [
+        {
+          "title": "WEB-I01 공개→가입→탐색 준비→기록 상세·취소·삭제→계정·로그아웃",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 3227,
+              "boundary": [
+                {
+                  "name": "logout-completion-boundary.json",
+                  "value": {
+                    "movedBeforeConfirmation": false,
+                    "logoutConfirmed": 1,
+                    "logoutFailed": 1,
+                    "csrfFailed": 0
+                  }
+                },
+                {
+                  "name": "integration-boundaries.json",
+                  "value": {
+                    "actualWebHttpSql": true,
+                    "actualProvider": false,
+                    "actualHumanCamera": false,
+                    "actualExercise": false,
+                    "cameraCalls": 0,
+                    "unexpectedRequests": [],
+                    "pageErrors": [],
+                    "storageLengths": [
+                      0,
+                      0
+                    ],
+                    "browserVersion": "155.0.8059.40"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "WEB-I02 계정 장애 주입·공개 안내 보존·production 개발 경로 차단",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "retry": 0,
+              "durationMs": 1498,
+              "boundary": [
+                {
+                  "name": "integration-boundaries.json",
+                  "value": {
+                    "actualWebHttpSql": true,
+                    "actualProvider": false,
+                    "actualHumanCamera": false,
+                    "actualExercise": false,
+                    "cameraCalls": 0,
+                    "unexpectedRequests": [],
+                    "pageErrors": [],
+                    "storageLengths": [
+                      0,
+                      0
+                    ],
+                    "browserVersion": "155.0.8059.40"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "unchangedProductConfigFiles": 170,
+  "unit": {
+    "passed": 1481,
+    "failed": 0,
+    "skipped": 0
+  },
+  "publicBundleByteIdentical": true
+}

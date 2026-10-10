@@ -127,9 +127,9 @@ test('WEB-I01 공개→가입→탐색 준비→기록 상세·취소·삭제→
   await page.getByRole('link', { name: /^fixture-web-integration .*기록 상세/ }).click()
   await expect(page.getByRole('heading', { name: '수행 기록 상세' })).toBeVisible()
   await expect(
-    page.getByText(
-      '완료는 수행 흐름의 종료를 뜻하며, 자세 정확성이나 효과를 보장하는 점수가 아닙니다.',
-    ),
+    page.getByText('‘완료’는 수행 종료입니다. 자세 정확성·효과를 보장하지 않습니다.', {
+      exact: true,
+    }),
   ).toBeVisible()
   await page.screenshot({ path: info.outputPath('integration-record-detail.png'), fullPage: true })
   await page.getByRole('link', { name: '기록 목록으로 돌아가기' }).click()

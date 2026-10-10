@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-10 [S6.20 현재 기록 웹 HTTP·SQL 회귀](stories/web-http-records-regression.md): 가입→탐색 준비→기록 상세/삭제→계정/로그아웃과 기간 오류 복구를 실제 웹·API·새 격리 DB로 확인했다. [실제 흐름·옛 문구 실패/보완·증거](review/web-http-records-regression/README.md). 제품 UI/API/DB/정책 변경0·새 아바타 제작/검증0이다. 최신 CEO 선택 아바타 보류·독립 웹 진행, 기존 시작P2·출시 동작0/실측/참여자·승인 코칭/SDK·외부/운영·D2/전체1~6 미완료를 유지한다. 좁은 계약/검증 Story의 조건부 PR 게이트를 진행하며 이전 원본과 시점 기록을 보존한다.
+
 2026-10-10 [S4.D6 기존 수행 기록 문구](stories/records-minimal-copy.md): 조회→상세→같은 기간 복귀, 삭제 확인→취소, 오류/재조회·페이지·로그아웃을 유지하며 중복 설명을 줄였다. [실제 전후 화면·흐름·실패](review/records-minimal-copy/README.md). 공개 기록 화면만 보완하며 코칭 구조/아바타·판정/SDK/API/DB·운영 변경0이다. 최신 CEO 선택은 아바타 보류·독립 웹 진행이며 Draft #108에 원본/실패/미실행을 보존했다. 합성 API 시험을 실제 SQL/수행/참여자 검증으로 세지 않는다. scoped PR gate를 진행하며 D2/전체1~6의 필수 조건은 유지한다. 이전 시점 기록은 보존한다.
 
 2026-10-09 [S4.D5 최소 문구·움직이는 선택 시안](stories/visual-motion-selection-prototype.md): 기존 정적 코칭→남녀 같은 제작 시험 동작 미리보기→재생/정지→배치 복귀를 별도 HTML로 연결했다. [실제 화면·실패·한계](review/visual-motion-selection/README.md). 제품 구조/공개 번들·카메라/API/판정·원본/GLB/조형 변경0. 구조 승인·출시 동작0/실측·최종 외형·기존 시작P2·SDK/외부/운영·전체1~6/D2 미완료. 좁은 시안 범위의 조건부 PR 게이트를 진행한다. PR106은 source9e1ea57·mergea44e713의 실제 main 포함/브랜치 보존을 확인했다. 이전 시점 기록은 보존한다.
