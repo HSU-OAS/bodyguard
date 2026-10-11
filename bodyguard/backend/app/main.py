@@ -1008,7 +1008,7 @@ def create_app(
         ):
             raise HTTPException(403, "요청을 확인할 수 없습니다.")
 
-    register_records(app, db, now_fn, record_owner, record_deletion_sign)
+    register_records(app, db, now_fn, record_owner, record_deletion_sign, summary_read_binding)
     register_notification_preferences(app, db, record_owner, summary_read_binding)
     register_baselines(app, db, now_fn, record_owner, ErrorOut, summary_read_binding)
     register_summaries(

@@ -1,6 +1,7 @@
 // FR-R-03/FR-U-04: owned summaries only; no persistent cache or exercise certification.
 import { ApiError } from './auth'
 import type { StretchList, StretchOut } from './generated'
+import { boundRecordRequest, type RecordBinding } from './recordBinding'
 
 export function recordId(value: string): boolean {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(value)
@@ -84,7 +85,8 @@ export function parseRecord(value: unknown): StretchOut {
     provenance: 'client-reported',
   }
 }
-async function get(path: string, signal: AbortSignal): Promise<unknown> {
+async function get(path: string, signal: AbortSignal, binding?: RecordBinding): Promise<unknown> {
+  if (binding) return boundRecordRequest(`/records/stretch${path}`, signal, binding)
   const response = await fetch(`/api/v1/records/stretch${path}`, {
     method: 'GET',
     credentials: 'same-origin',
@@ -98,19 +100,24 @@ export async function listRecords(
   range: { start: string; end: string },
   offset: number,
   signal: AbortSignal,
+  binding?: RecordBinding,
 ): Promise<StretchList> {
   if (!Number.isInteger(offset) || offset < 0 || offset > 10000) throw new ApiError(422)
   const query = new URLSearchParams({ ...range, limit: '20', offset: String(offset) })
-  const value = await get(`?${query}`, signal)
+  const value = await get(`?${query}`, signal, binding)
   if (!value || typeof value !== 'object') throw new ApiError(503)
   const list = value as Record<string, unknown>
   if (!Array.isArray(list.items) || list.items.length > 20 || typeof list.has_more !== 'boolean')
     throw new ApiError(503)
   return { items: list.items.map(parseRecord), has_more: list.has_more }
 }
-export async function readRecord(id: string, signal: AbortSignal): Promise<StretchOut> {
+export async function readRecord(
+  id: string,
+  signal: AbortSignal,
+  binding?: RecordBinding,
+): Promise<StretchOut> {
   if (!recordId(id)) throw new ApiError(404)
-  const row = parseRecord(await get(`/${id}`, signal))
+  const row = parseRecord(await get(`/${id}`, signal, binding))
   if (row.id !== id) throw new ApiError(503)
   return row
 }

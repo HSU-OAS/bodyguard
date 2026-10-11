@@ -6,7 +6,7 @@ from collections.abc import Callable
 from datetime import UTC, datetime, timedelta
 from typing import Literal
 
-from fastapi import FastAPI, HTTPException, Query, Request, Response
+from fastapi import FastAPI, Header, HTTPException, Query, Request, Response
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, field_validator, model_validator
 from sqlalchemy import Connection, Engine, String, cast, delete, func, literal, select
 from sqlalchemy.dialects.postgresql import aggregate_order_by, insert
@@ -118,6 +118,7 @@ def register_records(
     clock: Callable[[], datetime],
     owner: Callable[[Connection, Request, bool], str],
     sign: Callable[[str, Request, str], str],
+    binding: Callable[[Request, str, str | None, str | None], None],
 ) -> None:
     def deletion_scope(user_id: str, period: DeletePeriod, cutoff: datetime) -> tuple[CTE, CTE]:
         # FR-U-05: locked CTE is the exact target set; concurrent new rows cannot join DELETE.
@@ -160,9 +161,15 @@ def register_records(
         return targets, scope
 
     @app.post("/api/v1/records/stretch/delete-preview", response_model=DeleteProof)
-    def deletion_preview(payload: DeletePeriod, request: Request) -> DeleteProof:
+    def deletion_preview(
+        payload: DeletePeriod,
+        request: Request,
+        supplied: str | None = Header(None, alias="X-CSRF-Token"),
+        expected_owner: str | None = Header(None, alias="X-Account-ID"),
+    ) -> DeleteProof:
         with db.begin() as connection:
             user_id = owner(connection, request, True)
+            binding(request, user_id, supplied, expected_owner)
             now = clock()
             _, scope = deletion_scope(user_id, payload, now)
             values = connection.execute(select(scope)).mappings().one()
@@ -182,9 +189,15 @@ def register_records(
         response_model=DeletedOut,
         responses={409: {"description": "삭제 확인 만료 또는 대상 변경: 다시 확인 필요"}},
     )
-    def deletion(payload: DeleteInput, request: Request) -> DeletedOut:
+    def deletion(
+        payload: DeleteInput,
+        request: Request,
+        supplied: str | None = Header(None, alias="X-CSRF-Token"),
+        expected_owner: str | None = Header(None, alias="X-Account-ID"),
+    ) -> DeletedOut:
         with db.begin() as connection:
             user_id = owner(connection, request, True)
+            binding(request, user_id, supplied, expected_owner)
             if not hmac.compare_digest(
                 payload.signature, sign(user_id, request, payload.signed_message())
             ):
@@ -229,9 +242,16 @@ def register_records(
             return DeletedOut(deleted=result["deleted"])
 
     @app.post("/api/v1/records/stretch", response_model=StretchOut, status_code=201)
-    def save(payload: StretchInput, request: Request, response: Response) -> StretchOut:
+    def save(
+        payload: StretchInput,
+        request: Request,
+        response: Response,
+        supplied: str | None = Header(None, alias="X-CSRF-Token"),
+        expected_owner: str | None = Header(None, alias="X-Account-ID"),
+    ) -> StretchOut:
         with db.begin() as connection:
             user_id = owner(connection, request, True)
+            binding(request, user_id, supplied, expected_owner)
             now = clock()
             if payload.ended_at > now + timedelta(minutes=5):
                 raise HTTPException(422, "입력 형식을 확인해 주세요.")
@@ -265,9 +285,12 @@ def register_records(
         offset: int = Query(default=0, ge=0, le=10000),
         start: AwareDatetime | None = None,
         end: AwareDatetime | None = None,
+        supplied: str | None = Header(None, alias="X-CSRF-Token"),
+        expected_owner: str | None = Header(None, alias="X-Account-ID"),
     ) -> StretchList:
         with db.begin() as connection:
             user_id = owner(connection, request, False)
+            binding(request, user_id, supplied, expected_owner)
             if start is not None and end is not None and start >= end:
                 raise HTTPException(422, "입력 형식을 확인해 주세요.")
             query = select(stretch_records).where(stretch_records.c.user_id == user_id)
@@ -302,9 +325,15 @@ def register_records(
             )
 
     @app.get("/api/v1/records/stretch/{record_id}", response_model=StretchOut)
-    def detail(record_id: str, request: Request) -> StretchOut:
+    def detail(
+        record_id: str,
+        request: Request,
+        supplied: str | None = Header(None, alias="X-CSRF-Token"),
+        expected_owner: str | None = Header(None, alias="X-Account-ID"),
+    ) -> StretchOut:
         with db.begin() as connection:
             user_id = owner(connection, request, False)
+            binding(request, user_id, supplied, expected_owner)
             row = (
                 connection.execute(
                     select(stretch_records).where(

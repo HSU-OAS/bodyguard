@@ -29,6 +29,7 @@ function stub(
   const fetcher = vi.fn((url: string, init?: RequestInit) => {
     if (url === '/api/v1/me') return Promise.resolve(me())
     if (url === '/api/v1/auth/google/status') return Promise.resolve(json({ configured: false }))
+    if (url === '/api/v1/auth/csrf') return Promise.resolve(json({ csrf_token: 'a'.repeat(64) }))
     return records(url, init)
   })
   vi.stubGlobal('fetch', fetcher)
@@ -188,7 +189,7 @@ it('rejects invalid query periods without reading and recovers to recent records
   await screen.findByRole('heading', { name: '이 기간에는 수행 기록이 없습니다' })
 })
 it('new period clears previous rows and returns to page one, without storing records', async () => {
-  let release: (value: Response) => void = () => {}
+  let release: ((value: Response) => void) | undefined
   const fetcher = stub(async (url) =>
     new URL(url, 'http://localhost').searchParams.get('start') ===
     new Date('2026-09-01T00:00:00').toISOString()
@@ -203,7 +204,8 @@ it('new period clears previous rows and returns to page one, without storing rec
   fireEvent.change(screen.getByLabelText('종료일'), { target: { value: '2026-09-02' } })
   fireEvent.click(screen.getByRole('button', { name: '기간 조회' }))
   expect(screen.queryByRole('table')).toBeNull()
-  await act(async () => release(json({ items: [], has_more: false })))
+  await waitFor(() => expect(release).toBeTypeOf('function'))
+  await act(async () => release?.(json({ items: [], has_more: false })))
   await screen.findByRole('heading', { name: '이 기간에는 수행 기록이 없습니다' })
   expect(fetcher.mock.calls.some(([url]) => url.includes('offset=20'))).toBe(false)
   expect([localStorage.length, sessionStorage.length]).toEqual([0, 0])
@@ -234,3 +236,38 @@ it('keeps summary-only storage explicit on detail with concise copy', async () =
     expect(screen.getByText(name, { exact: true })).toBeTruthy()
   expect(screen.getByRole('link', { name: '기록 목록으로 돌아가기' })).toBeTruthy()
 })
+
+it.each(['/records', `/records/${id}`])(
+  'blocks %s after a bound request is rejected until account recheck',
+  async (path) => {
+    let rejected = true
+    const fetcher = stub(async (url, init) => {
+      expect(new Headers(init?.headers).get('X-Account-ID')).toBe('fixture-owner')
+      return rejected
+        ? json({}, 403)
+        : json(url.includes('?') ? { items: [row()], has_more: false } : row())
+    })
+    open(path)
+    await screen.findByRole('heading', { name: '계정을 다시 확인해 주세요' })
+    expect(document.activeElement).toBe(
+      screen.getByRole('heading', { name: '계정을 다시 확인해 주세요' }),
+    )
+    expect(screen.queryByRole('table')).toBeNull()
+    expect(screen.queryByRole('button', { name: '이 기간 기록 삭제' })).toBeNull()
+    const attempts = fetcher.mock.calls.filter(([url]) =>
+      url.startsWith('/api/v1/records/stretch'),
+    ).length
+    if (path === '/records') {
+      fireEvent.click(screen.getByRole('button', { name: '기간 조회' }))
+      await act(async () => {})
+      expect(
+        fetcher.mock.calls.filter(([url]) => url.startsWith('/api/v1/records/stretch')),
+      ).toHaveLength(attempts)
+      expect(screen.queryByRole('button', { name: '이 기간 기록 삭제' })).toBeNull()
+    }
+    rejected = false
+    fireEvent.click(screen.getByRole('button', { name: '계정 다시 확인' }))
+    if (path === '/records') await screen.findByRole('table')
+    else await screen.findByText('fixture-not-release')
+  },
+)

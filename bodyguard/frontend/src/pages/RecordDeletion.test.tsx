@@ -23,7 +23,7 @@ function setup(count = 2, deletionStatus = 200) {
     let body: unknown = { items: [], has_more: false }
     if (url === '/api/v1/me') body = { id: 'fixture-owner', email: 'fixture@example.com' }
     if (url === '/api/v1/auth/google/status') body = { configured: false }
-    if (url === '/api/v1/auth/csrf') body = { csrf_token: 'fixture-csrf' }
+    if (url === '/api/v1/auth/csrf') body = { csrf_token: 'a'.repeat(64) }
     if (url.endsWith('/delete-preview'))
       body = {
         ...JSON.parse(String(init?.body)),
@@ -175,7 +175,9 @@ it('opens deletion preview separately from reading and requires explicit confirm
         ? { id: 'fixture-owner', email: 'fixture@example.com' }
         : url === '/api/v1/auth/google/status'
           ? { configured: false }
-          : { items: [], has_more: false }
+          : url === '/api/v1/auth/csrf'
+            ? { csrf_token: 'a'.repeat(64) }
+            : { items: [], has_more: false }
     return mockResponse(body)
   })
   vi.stubGlobal('fetch', fetcher)
@@ -190,4 +192,20 @@ it('opens deletion preview separately from reading and requires explicit confirm
   expect(
     fetcher.mock.calls.filter(([url]) => url === '/api/v1/records/stretch/delete'),
   ).toHaveLength(0)
+})
+
+it('removes record rows and signed confirmation when deletion binding is rejected', async () => {
+  const fetcher = setup(2, 403)
+  await openPreview()
+  await previewText(2)
+  fireEvent.click(screen.getByRole('button', { name: '기록 삭제' }))
+  await screen.findByRole('heading', { name: '계정을 다시 확인해 주세요' })
+  expect(document.activeElement).toBe(
+    screen.getByRole('heading', { name: '계정을 다시 확인해 주세요' }),
+  )
+  expect(screen.queryByText('삭제 대상: 2건')).toBeNull()
+  expect(screen.queryByRole('button', { name: '기록 삭제' })).toBeNull()
+  expect(screen.queryByRole('button', { name: '이 기간 기록 삭제' })).toBeNull()
+  expect(screen.queryByText('2건의 수행 기록을 삭제했습니다.')).toBeNull()
+  expect(deletions(fetcher)).toHaveLength(1)
 })

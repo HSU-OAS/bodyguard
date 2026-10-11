@@ -1,10 +1,10 @@
 // FR-R-03/FR-U-04/NFR-08: private record journeys; no fake exercise result producer.
-import { type FormEvent, useEffect, useMemo, useRef, useState } from 'react'
+import { type FormEvent, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router'
 import { ApiError } from '../api/auth'
 import type { StretchList, StretchOut } from '../api/generated'
 import { dateRange, defaultPeriod, listRecords, localDay, readRecord } from '../api/records'
-import { useAuth } from '../auth'
+import { type ReadyAccount, useAuth } from '../auth'
 import { RecordDeletion } from './RecordDeletion'
 import './RecordsPage.css'
 
@@ -25,9 +25,10 @@ function duration(ms: number) {
 }
 type Result = {
   key: string
+  owner: ReadyAccount | null
 } & (
   | { status: 'loading' }
-  | { status: 'error' | 'missing' }
+  | { status: 'error' | 'missing' | 'auth-error' }
   | { status: 'list'; value: StretchList }
   | { status: 'detail'; value: StretchOut }
 )
@@ -43,11 +44,26 @@ export function RecordsPage() {
   const [revision, setRevision] = useState(0)
   const [selectionRevision, setSelectionRevision] = useState(0)
   const [formError, setFormError] = useState('')
-  const [result, setResult] = useState<Result>({ key: '', status: 'loading' })
+  const [result, setResult] = useState<Result>({ key: '', owner: null, status: 'loading' })
   const heading = useRef<HTMLHeadingElement>(null)
   const resultsHeading = useRef<HTMLHeadingElement>(null)
   const focusResults = useRef(false)
-  const { refresh } = useAuth()
+  const { state: auth, refresh } = useAuth()
+  const authority = auth.status === 'ready' ? auth : null
+  const [blocked, setBlocked] = useState<ReadyAccount | null>(null)
+  const owner = useRef<ReadyAccount | null>(null)
+  const activeRequest = useRef<AbortController | null>(null)
+  useLayoutEffect(() => {
+    owner.current = authority
+    return () => {
+      owner.current = null
+      activeRequest.current?.abort()
+    }
+  }, [authority])
+  const binding = useMemo(
+    () => (authority ? { authority, readAuthority: () => owner.current } : null),
+    [authority],
+  )
   // A fresh lookup fixes its end cutoff; later page requests reuse that cutoff.
   const [cutoff, setCutoff] = useState(() => new Date())
   const range = useMemo(() => {
@@ -58,7 +74,12 @@ export function RecordsPage() {
     }
   }, [from, to, cutoff])
   const key = `${id ?? ''}|${from}|${to}|${page}|${revision}`
-  const current = result.key === key ? result : { status: 'loading' as const }
+  const current =
+    authority && blocked === authority
+      ? { status: 'auth-error' as const }
+      : result.key === key && result.owner === authority
+        ? result
+        : { status: 'loading' as const }
   const listQuery = new URLSearchParams({ from, to }).toString()
 
   useEffect(() => {
@@ -77,32 +98,47 @@ export function RecordsPage() {
     heading.current?.focus({ preventScroll: true })
   }, [id])
   useEffect(() => {
-    if (!range) return
+    if (!range || !binding || blocked === binding.authority) return
     const controller = new AbortController()
-    setResult({ key, status: 'loading' })
+    activeRequest.current = controller
+    const captured = binding.authority
+    setResult({ key, owner: captured, status: 'loading' })
     const request = id
-      ? readRecord(id, controller.signal)
-      : listRecords(range, page * 20, controller.signal)
+      ? readRecord(id, controller.signal, binding)
+      : listRecords(range, page * 20, controller.signal, binding)
     void request.then(
       (value) => {
-        if (controller.signal.aborted) return
-        if ('items' in value) setResult({ key, status: 'list', value })
-        else setResult({ key, status: 'detail', value })
+        if (controller.signal.aborted || owner.current !== captured) return
+        if ('items' in value) setResult({ key, owner: captured, status: 'list', value })
+        else setResult({ key, owner: captured, status: 'detail', value })
       },
       (error: unknown) => {
-        if (controller.signal.aborted) return
+        if (controller.signal.aborted || owner.current !== captured) return
         if (error instanceof ApiError && error.status === 401) {
           void refresh()
           return
         }
+        if (error instanceof ApiError && error.status === 403) {
+          focusResults.current = true
+          setBlocked(captured)
+        }
         setResult({
           key,
-          status: error instanceof ApiError && error.status === 404 ? 'missing' : 'error',
+          owner: captured,
+          status:
+            error instanceof ApiError && error.status === 403
+              ? 'auth-error'
+              : error instanceof ApiError && error.status === 404
+                ? 'missing'
+                : 'error',
         })
       },
     )
-    return () => controller.abort()
-  }, [id, range, page, key, refresh])
+    return () => {
+      controller.abort()
+      if (activeRequest.current === controller) activeRequest.current = null
+    }
+  }, [id, range, page, key, refresh, binding, blocked])
 
   function apply(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -163,12 +199,19 @@ export function RecordsPage() {
           )}
         </form>
       )}
-      {!id && range && (
+      {!id && range && binding && current.status !== 'auth-error' && (
         <RecordDeletion
           key={`${from}|${to}|${selectionRevision}`}
           period={range}
           from={from}
           to={to}
+          binding={binding}
+          onAccountConflict={() => {
+            activeRequest.current?.abort()
+            focusResults.current = true
+            setBlocked(authority)
+            setResult({ key, owner: authority, status: 'auth-error' })
+          }}
           onChanged={() => {
             focusResults.current = true
             setPage(0)
@@ -184,6 +227,16 @@ export function RecordsPage() {
           <Link className="button secondary" to="/records">
             최근 기록으로 돌아가기
           </Link>
+        </div>
+      ) : current.status === 'auth-error' ? (
+        <div className="records-state">
+          <h2 ref={resultsHeading} tabIndex={-1}>
+            계정을 다시 확인해 주세요
+          </h2>
+          <p role="alert">기록 조회와 삭제를 중단했습니다.</p>
+          <button type="button" className="button secondary" onClick={() => void refresh()}>
+            계정 다시 확인
+          </button>
         </div>
       ) : current.status === 'loading' ? (
         <div className="records-state" role="status">

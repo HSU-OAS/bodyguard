@@ -597,6 +597,10 @@ export type LogoutApiV1AuthLogoutPostResponse =
 
 export type DeletionPreviewApiV1RecordsStretchDeletePreviewPostData = {
   body: DeletePeriod
+  headers?: {
+    'X-CSRF-Token'?: string | null
+    'X-Account-ID'?: string | null
+  }
   path?: never
   query?: never
   url: '/api/v1/records/stretch/delete-preview'
@@ -623,6 +627,10 @@ export type DeletionPreviewApiV1RecordsStretchDeletePreviewPostResponse =
 
 export type DeletionApiV1RecordsStretchDeletePostData = {
   body: DeleteInput
+  headers?: {
+    'X-CSRF-Token'?: string | null
+    'X-Account-ID'?: string | null
+  }
   path?: never
   query?: never
   url: '/api/v1/records/stretch/delete'
@@ -650,6 +658,10 @@ export type DeletionApiV1RecordsStretchDeletePostResponse =
 
 export type ListingApiV1RecordsStretchGetData = {
   body?: never
+  headers?: {
+    'X-CSRF-Token'?: string | null
+    'X-Account-ID'?: string | null
+  }
   path?: never
   query?: {
     limit?: number
@@ -681,6 +693,10 @@ export type ListingApiV1RecordsStretchGetResponse =
 
 export type SaveApiV1RecordsStretchPostData = {
   body: StretchInput
+  headers?: {
+    'X-CSRF-Token'?: string | null
+    'X-Account-ID'?: string | null
+  }
   path?: never
   query?: never
   url: '/api/v1/records/stretch'
@@ -707,6 +723,10 @@ export type SaveApiV1RecordsStretchPostResponse =
 
 export type DetailApiV1RecordsStretchRecordIdGetData = {
   body?: never
+  headers?: {
+    'X-CSRF-Token'?: string | null
+    'X-Account-ID'?: string | null
+  }
   path: {
     record_id: string
   }
