@@ -1,0 +1,166 @@
+{
+  "story": "S4.R9",
+  "base": "4489b5bcad71d3d8b6084066e288468d169aba8f",
+  "branch": "codex/summary-query-focus-ownership",
+  "source": {
+    "src/pages/MinuteSummaryPage.tsx": "7f4f5f3305fe6628268dc8aac20e03288d67bc42fd9634897aab580cca88bc65",
+    "src/pages/MinuteSummaryPage.focus.test.tsx": "8239d792e1bd693820172fca6c17782c9a6d21e270b5ac112ec6be713e2a2632",
+    "scripts/test-summary-focus.mjs": "2ec484a5a1ad5fb9560c3cc85ebafdbc4513e58031007d5d7021d6bf88741127",
+    "src/api/minuteSummaries.ts": "4c251cd5b33cef9cac5c5953023c43c6e0acbf51cc390f083d1062a7b373d18e",
+    "src/auth.tsx": "889843a8153e36c67708564d80729cdcdd59012702d1ff50923e1c50ca123b40",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+    "src/pages/MinuteSummaryPage.test.tsx": "de68e7c9e2901af75692814631a8c21cf0abb439b34246f63349dd16c65fd340",
+    "src/pages/MinuteSummaryPage.baseline.test.tsx": "de16087103292ca25bec513d64c9c6270a315faefb85d6822619d62c86de1a59",
+    "src/index.css": "580ca04512309f462342380a861d28e1f1370447bc1b0aab2420bd859216da59"
+  },
+  "quality": [
+    {
+      "command": "pnpm test related pages (3 files)",
+      "exit": 0,
+      "passed": 50,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": "evidence/final-related.json.gz"
+    },
+    {
+      "command": "pnpm test",
+      "exit": 0,
+      "passed": 1885,
+      "files": 104,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": "evidence/final-full.json.gz"
+    },
+    {
+      "command": "pnpm build (tsc, original notices, Vite)",
+      "exit": 0,
+      "evidence": "evidence/final-build.log.gz"
+    },
+    {
+      "command": "pnpm check",
+      "exit": 0,
+      "existingInfos": 16,
+      "evidence": "evidence/final-biome.log.gz"
+    },
+    {
+      "command": "pnpm test:production-guard",
+      "exit": 1,
+      "reason": "script does not exist",
+      "evidence": "evidence/final-guard.log.gz"
+    },
+    {
+      "command": "node scripts/check-selection-production.mjs",
+      "exit": 0,
+      "evidence": "evidence/final-production-guard.log.gz"
+    },
+    {
+      "command": "node --check scripts/test-summary-focus.mjs",
+      "exit": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit": 0
+    }
+  ],
+  "red": {
+    "initialPassed": 4,
+    "initialFailed": 4,
+    "wheelPassed": 9,
+    "wheelFailed": 1
+  },
+  "browser": {
+    "before": {
+      "passed": 0,
+      "failed": 6,
+      "exit": 1,
+      "product": {
+        "js": {
+          "path": "assets/index-CmT_KJFW.js",
+          "sha256": "a5cd8b5bfaa66a7b48387d712572bc0ab872018fb13b48ea48021730df824879"
+        },
+        "css": {
+          "path": "assets/index-Dynv9cmN.css",
+          "sha256": "4d4ad19162d6768f42fca57564338e0c0461c6c16d22e502da09d5c35fb33f92"
+        },
+        "html": "5b1a6d147686a97fead23d26be5217675509d645f575a7e1dbd099665c4976bc"
+      }
+    },
+    "firstAfter": {
+      "passed": 6,
+      "exit": 0,
+      "product": {
+        "js": {
+          "path": "assets/index-B4XG3S-v.js",
+          "sha256": "2d0b93ff1a849bf013942a47d248bf42ff6fe8c80c55716bdcc30288615c54fe"
+        },
+        "css": {
+          "path": "assets/index-BJPoAg5T.css",
+          "sha256": "60f6724b770dec8981223542da32ccbd0af2abf4204621d9382c27da55c5b9da"
+        },
+        "html": "9d86817d711d06c6c88b8fc2662b028f69fc56aff831bf9a15980e5502b01ed5"
+      },
+      "sameDriverAsBefore": true
+    },
+    "sandboxAttempt": {
+      "cases": 0,
+      "exit": 1,
+      "failure": {
+        "name": "Error",
+        "message": "listen EPERM: operation not permitted 127.0.0.1"
+      }
+    },
+    "final": {
+      "passed": 7,
+      "exit": 0,
+      "product": {
+        "js": {
+          "path": "assets/index-vT8IJSbL.js",
+          "sha256": "6a25f6a1b2103fc67b81a09de1c62034568f00987d6dd4e105dbb404e37fb1c6"
+        },
+        "css": {
+          "path": "assets/index-BJPoAg5T.css",
+          "sha256": "60f6724b770dec8981223542da32ccbd0af2abf4204621d9382c27da55c5b9da"
+        },
+        "html": "fa5a2eababb5b63a2ad4fd174e65990e4194316b6c09862c79a66a3fa02b199f"
+      },
+      "driverChangedForNativeWheel": true,
+      "browserVersion": "155.0.8059.40",
+      "externalContextRequests": 0,
+      "modelRequests": 0,
+      "pageErrors": [],
+      "ownServersStopped": true,
+      "proxyRefusals": 62
+    },
+    "realProductionUI": true,
+    "controlledAPI": true,
+    "realAuthSQL": false,
+    "realCamera": false,
+    "realHuman": false,
+    "OSAccessibility": false
+  },
+  "compiledCSS": {
+    "sourceChanged": false,
+    "beforeBytes": 31302,
+    "afterBytes": 31514,
+    "addedUnusedUtility": ".blur from event-name scanning",
+    "rulesRemoved": 0
+  },
+  "authorReview": {
+    "independent": false,
+    "fixed": "pending wheel interaction",
+    "unresolvedScopedP1P2": 0,
+    "previousSW10CauseProved": false
+  },
+  "backendOrSQLChanged": false,
+  "SDKOrAvatarChanged": false,
+  "rawBodyStoredOrForwarded": false,
+  "deployment": false,
+  "stages1to6Complete": false,
+  "holds": [
+    "avatar",
+    "participants",
+    "Docker/HTTPS",
+    "official license inquiry",
+    "real Gmail/Google"
+  ]
+}
