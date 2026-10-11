@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-11 최신 CEO 결정: 공식 저장소의 라이선스·NOTICE 외부 문의는 **나중에** 진행한다. 문의·외부 메시지0, 미확보 고지·버전 동등성·배포 승인 미완료를 유지한다. S5.7의 원문 보존/검증 보완은 독립적으로 마무리하며 아래 미승인 표현은 답변 전 시점 기록이다. 아바타·참여자·Docker 보류도 유지하고 독립 웹 기능을 계속한다.
+
 2026-10-11 [S5.7 고정 source 동봉 고지·누락 경계](stories/pinned-companion-notices.md): Rolldown의 참조 동봉 고지를 원문으로 보존했다. maath tag/source identity와 stats-gl의 npm2.4.2/source2.3.1 불일치를 실제 확인해 누락/버전 문제를 성공으로 대체하지 않았다. [결과·실패/작성자 리뷰·증거](review/pinned-companion-notices/README.md). source collector 원문 검사의 P2를 재현/보완했으며 제품/SDK/아바타·운영 변경0, 조건부 PR 게이트를 진행한다. PR135 sourcee56c40a→mergeababacfe/main·브랜치 보존 확인. 공식 source 문의3건은 CEO 미승인/외부 메시지0이며 아바타/참여자/Docker 보류·실제 판정/추천·시작P2/native timeout·외부/HTTPS/운영·전체1~6 미완료는 유지한다. 아래는 과거 시점 기록이다.
 
 2026-10-11 [S4.R7 공통 코칭→실제 기록 API 통합](stories/recorded-playback-api.md): 실제 계정/API/새 소유 SQL에서 현재 공통 consumer의 명시 저장→기존 기록 상세, 서버 수락 후 응답 단절→동일 재시도/한 기록, 다른 계정 조회·옛 proof 저장 거절을 확인했다. [작동 화면·실패/합성 구분·검증/작성자 리뷰](review/recorded-playback-api/README.md). 제품 UI/API/공개 JS·CSS·출시 동작0은 유지하며 합성 수행을 임상/사람 검증으로 세지 않는다. 세 소유 DB/API/preview 종료와 데이터·실패 원본 보존을 확인했고 조건부 PR 게이트를 진행한다. PR134 source1692d4d→merge67c18dde/main·브랜치 보존은 확인했다. 아바타/참여자/Docker 보류·실제 판정/추천·원래 시작P2/과거 native timeout·외부/운영·전체1~6 미완료는 그대로다. 아래는 과거 시점 기록이다.

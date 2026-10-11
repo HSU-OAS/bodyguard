@@ -1,5 +1,7 @@
 # 출시 통합 실행 게이트 — 2026-10-09
 
+**2026-10-11 최신 CEO 결정:** 공식 저장소의 고지 외부 문의는 나중에 진행한다. 문의·외부 메시지0이며 원문 미확보·버전 동등성·최종 배포 고지를 통과 처리하지 않는다. 아래 미승인 표현은 답변 전 시점 기록이다. 아바타·참여자·Docker 보류와 전체1~6 미통과는 불변이다.
+
 **2026-10-11 동봉 고지 갱신:** [S5.7](stories/pinned-companion-notices.md)에서 Rolldown의 동일 불변 commit source 동봉 고지를 보존하고 maath의 named license 경로 누락·stats-gl의 npm/source 버전 불일치를 확인했다. [실제 원문·실패/보완·한계](review/pinned-companion-notices/README.md). 누락4버전·모든 binary 부품/최종 artifact 대응·법무/배포 허가는 미완료며 공식 source 문의는 별도 CEO 미승인/외부 메시지0이다. PR135 mergeababacfe/main·브랜치 보존 확인, 제품/SDK/아바타·운영 변경0. 아바타/참여자/Docker 보류·시작P2/native timeout·실제 동작/판정/추천·외부/HTTPS/운영·전체1~6 게이트는 미통과로 유지한다.
 
 **2026-10-11 실제 기록 통합 갱신:** [S4.R7](stories/recorded-playback-api.md)은 현재 공통 코칭 consumer→실제 AuthProvider/API/격리 SQL의 명시 저장·기록 상세, 서버 저장 후 응답 단절의 동일 수동 재시도/한 기록, 다른 계정 읽기·옛 proof 저장 거절을 확인했다. [실제 흐름·화면·실패·작성자 리뷰/증거](review/recorded-playback-api/README.md). 시계/자원/관찰/판정/메일은 합성이며 사람/SDK/임상 정확도·출시 적격 증거가 아니다. 공개 JS/CSS·제품 UI/API/출시 동작0은 불변이고 시험 자원은 종료·원본 보존했다. PR134 source1692d4d→merge67c18dde/main·브랜치 보존은 확인했다. 아바타/참여자/Docker 보류·실제 시범/판정/추천·원래 시작P2/과거 native timeout·HTTPS/외부/운영과 전체1~6 필수 기준은 미통과다.
