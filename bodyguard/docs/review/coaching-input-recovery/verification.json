@@ -1,0 +1,154 @@
+{
+  "baseMain": "bbc2b152d3bd236338b29b1829fafe230179c34a",
+  "method": "copy/compress actual reports and DOM-only images; not a test execution",
+  "full": {
+    "files": 95,
+    "passed": 1714,
+    "failed": 0,
+    "pending": 0,
+    "maxWorkers": 2
+  },
+  "actualBrowser": {
+    "cases": [
+      "capture-fault: controlled fault during actual running input → fixed error/resources ended → explicit prepare1/discard → separate input/actual SDK frames → stop",
+      "worker-fault: controlled fault during actual running input → fixed error/resources ended → explicit prepare1/discard → separate input/actual SDK frames → stop",
+      "held decoded callback exceeds existing5000ms deadline → fixed error/ends → fresh explicit prepare/discard → late old callback cannot detach fresh camera/create frame → separate input/stop",
+      "controlled native stop fault after actual end → remaining Worker/source ended → fixed cleanup error; restart blocked also after actual router remount"
+    ],
+    "failure": null,
+    "external": 0,
+    "avatars": 0,
+    "writes": 0,
+    "errors": [],
+    "ownedResourcesClosed": true
+  },
+  "attempts": [
+    "baseline4pass/no product fix/RED0",
+    "strengthened final2pass, held-stage TimeoutError; original preserved, location/cause not retrospectively established",
+    "fixed-category diagnosis4pass",
+    "same source/limits stability-check4pass"
+  ],
+  "sourceBefore": [
+    {
+      "file": "src/pose/cameraPreparation.ts",
+      "sha256": "58f4ee1bcd65a72a833ea07d42ff4dc0ed0794457dcd851d0790bf8f8173e750"
+    },
+    {
+      "file": "src/pose/videoPoseSource.ts",
+      "sha256": "d17532edfa2afd2906e065f017c62da99fa7fd34c59a7bff31464e1742a447f5"
+    },
+    {
+      "file": "src/pose/workerInference.ts",
+      "sha256": "e6c5c01895915675fb4e598596c3b219f236aa51a490243673811a02ea6341f5"
+    },
+    {
+      "file": "src/pages/CameraPreparation.tsx",
+      "sha256": "ddadca17f96f2aeaa37d2480ce297be9dc6f32ff5959ca78b5ea7873bbcf4049"
+    },
+    {
+      "file": "scripts/test-input-recovery.mjs",
+      "sha256": "6949d6f5996fb4ecd4c3b9a60c5b5e0741fdf2129be1e4f764aa8f3d6fa43c8d"
+    }
+  ],
+  "sourceAfter": [
+    {
+      "file": "src/pose/cameraPreparation.ts",
+      "sha256": "58f4ee1bcd65a72a833ea07d42ff4dc0ed0794457dcd851d0790bf8f8173e750"
+    },
+    {
+      "file": "src/pose/videoPoseSource.ts",
+      "sha256": "d17532edfa2afd2906e065f017c62da99fa7fd34c59a7bff31464e1742a447f5"
+    },
+    {
+      "file": "src/pose/workerInference.ts",
+      "sha256": "e6c5c01895915675fb4e598596c3b219f236aa51a490243673811a02ea6341f5"
+    },
+    {
+      "file": "src/pages/CameraPreparation.tsx",
+      "sha256": "ddadca17f96f2aeaa37d2480ce297be9dc6f32ff5959ca78b5ea7873bbcf4049"
+    },
+    {
+      "file": "scripts/test-input-recovery.mjs",
+      "sha256": "6949d6f5996fb4ecd4c3b9a60c5b5e0741fdf2129be1e4f764aa8f3d6fa43c8d"
+    }
+  ],
+  "unitSource": {
+    "file": "src/pose/cameraPreparation.recovery.test.ts",
+    "sha256": "60a81d6b11c497f1a68302efeada0c49319d4f735f35903a960153d6b11eac0f"
+  },
+  "product": [
+    {
+      "file": "index-BVyDftrj.js",
+      "sha256": "dbdc8e3cb9ad8eeeae2519b7bbf37b84a230d4723607ec4817d38f5cee10c779",
+      "identicalToPR130": true
+    },
+    {
+      "file": "index-dNUNBpCv.css",
+      "sha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e",
+      "identicalToPR130": true
+    }
+  ],
+  "records": [
+    {
+      "file": "baseline.json.gz",
+      "originalBytes": 2651,
+      "originalSHA256": "66aad4d8a59fb9e977cb98eb010fb76bdd7e6427d0472f50f593742c1e62076d"
+    },
+    {
+      "file": "unit-baseline.json.gz",
+      "originalBytes": 2064,
+      "originalSHA256": "90ccca695d4df7e8bafe10384943842e52e8cd203b1d022c6da9b6652fe06c3b"
+    },
+    {
+      "file": "final.json.gz",
+      "originalBytes": 2466,
+      "originalSHA256": "c1e2f939d110a1bcfc9fb0d97ae935b7e0e3a091ae92f67ee6f9b0ce0b54b868"
+    },
+    {
+      "file": "diagnosis.json.gz",
+      "originalBytes": 2738,
+      "originalSHA256": "d80fd73adb547cb6da2ab1d4e45bd733d51e1090e00d8cbb5eda24f6d78eab58"
+    },
+    {
+      "file": "stability-check.json.gz",
+      "originalBytes": 2738,
+      "originalSHA256": "d80fd73adb547cb6da2ab1d4e45bd733d51e1090e00d8cbb5eda24f6d78eab58"
+    },
+    {
+      "file": "unit-full.json.gz",
+      "originalBytes": 591946,
+      "originalSHA256": "cbf63767d4b843bf8c3c5474c418d8402f5497e01fdeafeef1a1f604c1c8efdb"
+    },
+    {
+      "file": "baseline-helper.mjs.gz",
+      "originalBytes": 11682,
+      "originalSHA256": "de0ba468d7652b7fe2bd62e401c6189465cfe6edfce4ed48b38d4b6be9111902"
+    },
+    {
+      "file": "final-helper-at-run.mjs.gz",
+      "originalBytes": 12701,
+      "originalSHA256": "a79ee943d785f758cd8a523f96022a7d3eca636cfae862c059218fe13e92b817"
+    }
+  ],
+  "commandResults": {
+    "typecheck": "exit0",
+    "scopedBiome": "2files exit0",
+    "actualViteBuild": "117modules exit0; envDir scratch/no prepare-assets",
+    "productionGuard": "original program, only scratch asset-root substituted; CSP/notices present/JSON parseable; exit0",
+    "diffCheck": "exit0 before commit"
+  },
+  "review": {
+    "authorOnly": true,
+    "independentReview": false,
+    "unresolvedTestDiffP1P2": 0,
+    "productStartupIssueClosed": false
+  },
+  "notProven": [
+    "physical camera/device failure/person accuracy/15fps",
+    "avatar/clinical judgement/reference/public coaching",
+    "real provider/SQL",
+    "original startup P2 resolution",
+    "Docker/TLS/deployment"
+  ],
+  "releaseCandidate": false
+}

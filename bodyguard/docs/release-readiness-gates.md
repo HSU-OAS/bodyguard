@@ -1,5 +1,7 @@
 # 출시 통합 실행 게이트 — 2026-10-09
 
+**2026-10-11 입력 복구 갱신:** [S3.C4](stories/coaching-input-recovery.md)에서 현재 개발 웹의 제어 capture/Worker 오류·입력 정지·정리 오류와 명시 재시도를 실제 SDK/가짜 카메라로 검증했다. [작동 영역·실패 보존·범위](review/coaching-input-recovery/README.md). 제품/화면/SDK/판정 변경0이며 회귀 하네스를 추가한 결과다. 강화 시험의 원인 미확정 timeout과 기존 시작P2를 닫지 않으며 공개 코칭/기록0이다. PR130 mergebbc2b15/main 포함을 실제 확인했다. 아바타/Docker·실측/적격 동작0·운영/전체1~6 게이트는 미완료다.
+
 **2026-10-11 연속 입력 갱신:** [S3.C3](stories/coaching-continuous-input.md)은 승인된 개발 웹에서 카메라 준비 후 별도 명시 연속 입력과 종료·화면/계정 회수를 연결했다. [실제 작동 제어·실패 보존·경계](review/coaching-continuous-input/README.md). 같은 카메라/Worker의 관찰 producer이며 준비 frame 폐기·최신 메모리 슬롯1개·원래 촬영 시각을 유지한다. 공개 JS/CSS는 PR129 build와 byte 동일이고 공개 코칭/판정/기록0이다. PR129 mergeb5791b2/main은 실제 확인했다. 아바타/Docker 보류·출시 적격0·실측·기존 시작P2·전체1~6 완료 기준은 닫지 않았다.
 
 **2026-10-11 취소 경로 갱신:** [S3.C2](stories/camera-playback-cancellation.md)에서 획득한 카메라의 미완료 재생 취소·화면 이탈·늦은 완료와 정리 실패 차단을 보완했다. [실제 흐름·원문·경계](review/camera-playback-cancellation/README.md). 공개 JS/CSS와 판정/SDK 정책은 불변이며 PR128 source68f0bc2→mergebe1ec62/main을 실제 확인한 뒤 진행했다. 원래 시작P2·아바타/Docker 보류·실측/출시 적격0·전체1~6의 미완료는 해소되지 않았다.
