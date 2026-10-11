@@ -68,7 +68,15 @@ def main() -> int:
         "--grep",
         help="Test-name regex for explicit partitions; no retries or rate-limit changes",
     )
+    parser.add_argument(
+        "--config",
+        choices=("playwright.account.config.ts", "playwright.coaching-record-api.config.ts"),
+        default="playwright.account.config.ts",
+        help="Owned test configuration; defaults and safety limits remain unchanged",
+    )
     args = parser.parse_args()
+    if args.config == "playwright.coaching-record-api.config.ts" and args.suite != "authcoaching":
+        parser.error("The isolated coaching configuration requires the authcoaching suite")
     # Bind before touching data; never reuse a user's server on this port.
     with socket.socket() as listener, socket.socket() as blocked_proxy:
         # Reuse a closed test listener's TIME_WAIT, never another live listener.
@@ -233,7 +241,7 @@ def main() -> int:
                         "test",
                         f"{args.suite}.spec.ts",
                         "--config",
-                        "playwright.account.config.ts",
+                        args.config,
                         "--output",
                         output,
                         *(["--grep", args.grep] if args.grep else []),

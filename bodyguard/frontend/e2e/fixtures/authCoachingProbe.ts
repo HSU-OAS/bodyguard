@@ -124,6 +124,7 @@ export function mountAuthCoachingProbe(options: {
       await pending
     },
     save: () => session?.save(),
+    retry: () => session?.retry(),
     resume: () => session?.resume(),
     refresh: () => auth?.refresh(),
     signOut: () => auth?.signOut(),
@@ -144,6 +145,7 @@ export function mountAuthCoachingProbe(options: {
         playbackStarts,
         session: session?.getSnapshot().state.status ?? null,
         record: session?.getRecordSnapshot().status ?? null,
+        recordFailure: session?.getRecordSnapshot().failure ?? null,
         synthetic_clock_ports_frames: true,
       }
     },

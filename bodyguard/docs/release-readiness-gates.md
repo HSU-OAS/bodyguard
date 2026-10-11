@@ -1,5 +1,7 @@
 # 출시 통합 실행 게이트 — 2026-10-09
 
+**2026-10-11 실제 기록 통합 갱신:** [S4.R7](stories/recorded-playback-api.md)은 현재 공통 코칭 consumer→실제 AuthProvider/API/격리 SQL의 명시 저장·기록 상세, 서버 저장 후 응답 단절의 동일 수동 재시도/한 기록, 다른 계정 읽기·옛 proof 저장 거절을 확인했다. [실제 흐름·화면·실패·작성자 리뷰/증거](review/recorded-playback-api/README.md). 시계/자원/관찰/판정/메일은 합성이며 사람/SDK/임상 정확도·출시 적격 증거가 아니다. 공개 JS/CSS·제품 UI/API/출시 동작0은 불변이고 시험 자원은 종료·원본 보존했다. PR134 source1692d4d→merge67c18dde/main·브랜치 보존은 확인했다. 아바타/참여자/Docker 보류·실제 시범/판정/추천·원래 시작P2/과거 native timeout·HTTPS/외부/운영과 전체1~6 필수 기준은 미통과다.
+
 **2026-10-11 입력 인계 갱신:** [S3.C7](stories/camera-input-handoff.md)은 준비 시각 이하 callback을 추론 전에 건너뛰고 다음 원래 시각의 연속 입력을 받도록 보완했다. [실제 동작 변경/종료/새 준비·제어 실패 원본·검증 한계](review/camera-input-handoff/README.md). 시각 fault 제어 native와 시각 대체 없는 native 흐름을 구분하고 공개 byte/임상/출시 동작0은 유지했다. PR133 source1df077a→merge7ed34fb/main 포함을 확인했다. 아바타/참여자/Docker 보류·과거 시작P2/원인 미확정 timeout·전체1~6 필수 기준은 통과 처리하지 않는다.
 
 **2026-10-11 독립 통합 갱신:** [S3.C6](stories/recorded-playback-assembly.md)은 입력·현재 세션 상태·세대별 재생·계정 소유 기록의 공통 경로를 연결했다. [실제 Chrome/React·fixture HTTP 준비→합성 수행→명시 저장→기존 기록 상세 및 실패/리뷰](review/recorded-playback-assembly/README.md). 합성 계정/자원/시계/판정이며 native SDK/SQL/참여자/아바타의 통과 증거가 아니다. 새 상태 덮어쓰기 P2는 실제 재현/보완했고 공개 byte/시작 gate/출시 동작0은 불변이다. PR132 source724f282→mergef4bddae/main은 확인했다. UI/UX 추후·아바타/참여자/Docker 보류·실제 판정/추천·최종 외형/실측·시작P2/과거 native timeout·운영/HTTPS 및 전체1~6 미완료는 유지한다.

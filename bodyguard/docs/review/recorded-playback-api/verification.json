@@ -1,0 +1,1007 @@
+{
+  "baseMain": "67c18dde067c10fb8188a92839239ce06d14af7b",
+  "source": [
+    {
+      "file": "e2e/authcoaching.spec.ts",
+      "sha256": "4c580a66329929a12afd3ee6d02d3ac00d98a23469f775bf14e0232e03965016"
+    },
+    {
+      "file": "e2e/fixtures/authCoachingProbe.ts",
+      "sha256": "64a097d41fafbaabb4a4849f2f6793c12f77540be586e9bb0b60fdc369ca976b"
+    },
+    {
+      "file": "e2e/fixtures/authCoaching.vite.ts",
+      "sha256": "c0c880157f86478409780597ced0ca59f815a21cd5e28e59bb795712c2e3cee6"
+    },
+    {
+      "file": "playwright.coaching-record-api.config.ts",
+      "sha256": "c54679ce181f7f69d5b62de85fc88b5f89063da1e3cd8a180155a5a9cdfc6f21"
+    },
+    {
+      "file": "scripts/serve-recorded-api-proof.mjs",
+      "sha256": "2ea05afd8f3b948267b42e26cf2a5b10f42c39fbc658667a0c4a4a8766d824cd"
+    },
+    {
+      "file": "../backend/tests/run_browser.py",
+      "sha256": "887e0eff0082e340f3aba989477829638dce23573e26766ad7d5047103975b3e"
+    },
+    {
+      "file": "../backend/app/records.py",
+      "sha256": "e5bc81c54195c6c4767cf537af6ef903add5ef56d24cb7aa4d26f08e03b1306c"
+    },
+    {
+      "file": "../backend/app/main.py",
+      "sha256": "c99b12b1b1f3757d9671d9746e491c036541978f31aebd57db6953a952a9b3d9"
+    },
+    {
+      "file": "../backend/tests/conftest.py",
+      "sha256": "327b2fbb658626d0e44beecaff746adb5a9662bf3453aa4bc7049009a4bc79bf"
+    },
+    {
+      "file": "src/auth.tsx",
+      "sha256": "889843a8153e36c67708564d80729cdcdd59012702d1ff50923e1c50ca123b40"
+    },
+    {
+      "file": "src/coaching/useRecordedPlayback.ts",
+      "sha256": "99cbb0ebe2c231c9ac3125d2ee015a6197ae6efc64293e33b375112a268dcd4f"
+    },
+    {
+      "file": "src/coaching/useRecordedCoaching.ts",
+      "sha256": "d830bfb9a7b583cd93e193e2c8b0a62e0279e56df8fe8623d8dfad2eb987efb7"
+    },
+    {
+      "file": "src/coaching/recordedSession.ts",
+      "sha256": "8f9e814d3d4c63e2abac5d62c2230b2055c70a7a175cef52215fe06082a8d2bd"
+    },
+    {
+      "file": "src/coaching/recordOwner.ts",
+      "sha256": "820368c6cf370913b622b98c21d82a53142f0a8a6247ee188e5317388a50c0ff"
+    },
+    {
+      "file": "src/coaching/resultRecord.ts",
+      "sha256": "10fc89e732376eb70b61720cab95685a7f26a59f4c760e4578a8af3536f1a64e"
+    },
+    {
+      "file": "scripts/check-selection-production.mjs",
+      "sha256": "bd6d3dee5f02358fc17d402224074c39043b34f39dca21ba65f82a018bde995d"
+    },
+    {
+      "file": "../docs/review/recorded-playback-api/run-browser.mjs",
+      "sha256": "6d50570f8eb205fd46488af1f2a35afb959fd47f616d127271f7c0205f1e8e20"
+    }
+  ],
+  "sourceHashKind": "post-execution source snapshots, not a pre/post browser-run hash receipt",
+  "gateRun": "accepted",
+  "artifacts": [
+    {
+      "name": "first-verifier.mjs",
+      "bytes": 9038,
+      "sha256": "58679f0a9281b5294105a1f085a34d08f657e35e840927808eaeb2d462977625"
+    },
+    {
+      "name": "second-verifier.mjs",
+      "bytes": 10017,
+      "sha256": "578d871090cf7f14c06639f61ddef7d3cc786c470031007bd691ff45dbbcda7d"
+    },
+    {
+      "name": "browser-first-report.json",
+      "bytes": 20813,
+      "sha256": "82a84a3af308e954d73d17f6f0181a5e72afe7bffa3b1e6fdda192776825768e"
+    },
+    {
+      "name": "browser-final-report.json",
+      "bytes": 11718,
+      "sha256": "4d758e97dc2cad1a969f9f32fb5f6033033d20b43dfa7a80b58878867194bc6d"
+    },
+    {
+      "name": "browser-third-report.json",
+      "bytes": 11717,
+      "sha256": "ed9bc3c467c86e3aef827b5b896d8e47208f34df8097a7cf2e17ad1a4767b05d"
+    },
+    {
+      "name": "first-browser.stdout",
+      "bytes": 3833,
+      "sha256": "ce39ff1a1c9cb8862faa9d94fb1c13999587fa99287103beffb29bdcc2f40a9a"
+    },
+    {
+      "name": "first-browser.stderr",
+      "bytes": 680,
+      "sha256": "a60d9a73ae3344db08cbd8c98b4e77a2ff8236cce0285760d49e0b647381d67a"
+    },
+    {
+      "name": "first-browser-exit.json",
+      "bytes": 300,
+      "sha256": "491d7c015a3f133a66d2e118a9ccd41e4c3811bcd4838f17753c61d798867728"
+    },
+    {
+      "name": "first-db-init.log",
+      "bytes": 885,
+      "sha256": "ee6eac39a6013cee11e9a7457a94358c02e0067989ca74ba494cbeb53d6c71bb"
+    },
+    {
+      "name": "first-db-start.log",
+      "bytes": 52,
+      "sha256": "66afd0411ccc09366e99fdd99b85f21899c8d2d064f5835126859618802153ad"
+    },
+    {
+      "name": "first-db-create.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "first-db-identity.log",
+      "bytes": 47,
+      "sha256": "faa073edbd0b7926f3db96ce66886ed4745ddd436c5116ffeed8df8c846e30a0"
+    },
+    {
+      "name": "first-db-stop.log",
+      "bytes": 56,
+      "sha256": "ca19178a35ab4153b75b494963b66ce8243e1b94c173107c87b44d09db23652d"
+    },
+    {
+      "name": "first-db-stop-receipt.json",
+      "bytes": 79,
+      "sha256": "f0fe10ec4f6adb6f51f85efafd2595cebeb4ac616c5e8ee429954de98dba8bb9"
+    },
+    {
+      "name": "final-browser.stdout",
+      "bytes": 1167,
+      "sha256": "0394a5a9adc291110e69b6f07f69dcdbe1363b1a94d6665400920e7f1ecb5b64"
+    },
+    {
+      "name": "final-browser.stderr",
+      "bytes": 352,
+      "sha256": "abb3aa9fcb71dafb53a76bbad189b93bee76a26da1498e59e74a5f075178f1c8"
+    },
+    {
+      "name": "final-browser-exit.json",
+      "bytes": 300,
+      "sha256": "a7f6f3a0aa45038acca312af1979bcc952301605eb0e3183d5f062f8d9adedfc"
+    },
+    {
+      "name": "final-db-init.log",
+      "bytes": 885,
+      "sha256": "2682f67657eb0ca84074ad28a50bb45a82b1d1ed579e91c8a1bf8149539df69b"
+    },
+    {
+      "name": "final-db-start.log",
+      "bytes": 52,
+      "sha256": "66afd0411ccc09366e99fdd99b85f21899c8d2d064f5835126859618802153ad"
+    },
+    {
+      "name": "final-db-create.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-db-identity.log",
+      "bytes": 47,
+      "sha256": "faa073edbd0b7926f3db96ce66886ed4745ddd436c5116ffeed8df8c846e30a0"
+    },
+    {
+      "name": "final-db-stop.log",
+      "bytes": 56,
+      "sha256": "ca19178a35ab4153b75b494963b66ce8243e1b94c173107c87b44d09db23652d"
+    },
+    {
+      "name": "final-db-stop-receipt.json",
+      "bytes": 79,
+      "sha256": "f0fe10ec4f6adb6f51f85efafd2595cebeb4ac616c5e8ee429954de98dba8bb9"
+    },
+    {
+      "name": "third-browser.stdout",
+      "bytes": 1168,
+      "sha256": "b12219e23d3243b51e5159128f3b1530790943b50c6bf04e029193d388fd80d6"
+    },
+    {
+      "name": "third-browser.stderr",
+      "bytes": 352,
+      "sha256": "7bb4e6eca40ebf62f8fe89ac7a23eba1909469c0e325959d995205229006a89f"
+    },
+    {
+      "name": "third-browser-exit.json",
+      "bytes": 300,
+      "sha256": "a7f6f3a0aa45038acca312af1979bcc952301605eb0e3183d5f062f8d9adedfc"
+    },
+    {
+      "name": "third-db-init.log",
+      "bytes": 885,
+      "sha256": "7545df1c37bcfa44035abdc6f031871dac22f2e47d525a38ac694abc630b0082"
+    },
+    {
+      "name": "third-db-start.log",
+      "bytes": 52,
+      "sha256": "66afd0411ccc09366e99fdd99b85f21899c8d2d064f5835126859618802153ad"
+    },
+    {
+      "name": "third-db-create.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "third-db-identity.log",
+      "bytes": 47,
+      "sha256": "faa073edbd0b7926f3db96ce66886ed4745ddd436c5116ffeed8df8c846e30a0"
+    },
+    {
+      "name": "third-db-stop.log",
+      "bytes": 56,
+      "sha256": "ca19178a35ab4153b75b494963b66ce8243e1b94c173107c87b44d09db23652d"
+    },
+    {
+      "name": "third-db-stop-receipt.json",
+      "bytes": 79,
+      "sha256": "f0fe10ec4f6adb6f51f85efafd2595cebeb4ac616c5e8ee429954de98dba8bb9"
+    },
+    {
+      "name": "first-authcoaching.spec.ts",
+      "bytes": 15785,
+      "sha256": "f53414a2f366e6ba0e6602d597a402a20ef1ab96cbbc5ee89c3e8389396af760"
+    },
+    {
+      "name": "first-authCoachingProbe.ts",
+      "bytes": 4351,
+      "sha256": "fc7fa97695bc32fa68c381302e5f2d71e1ea380d1894871a2dbbed74f1209656"
+    },
+    {
+      "name": "first-run_browser.py",
+      "bytes": 12260,
+      "sha256": "73ee8d251e3f2fd3c33e15fd5778d443896ceff1c75cbe85f03e93dab11e32a8"
+    },
+    {
+      "name": "first-run-browser.mjs",
+      "bytes": 1782,
+      "sha256": "fd5b0c61d65479feb8dee058fe15f903ad293ea4bd10abdebd3a5bf89bdce046"
+    },
+    {
+      "name": "first-serve-recorded-api-proof.mjs",
+      "bytes": 1340,
+      "sha256": "2ea05afd8f3b948267b42e26cf2a5b10f42c39fbc658667a0c4a4a8766d824cd"
+    },
+    {
+      "name": "first-playwright-config.ts",
+      "bytes": 671,
+      "sha256": "e80dfea603ff448e6c16586e6d8abaa8ac0d652289a7263b9bdbaa7e478eb85c"
+    },
+    {
+      "name": "first-authcoaching-H06-server-ac-097e3-once-not-a-duplicate-record-error-context.md",
+      "bytes": 13366,
+      "sha256": "2e6bff5df064b8a08ec0473a957b24f8ec13997ebf0aba93f390ab2d1bbcf266"
+    },
+    {
+      "name": "first-authcoaching-H07-unannounc-8ab25-f-saving-for-another-person-error-context.md",
+      "bytes": 13295,
+      "sha256": "e922a975c66c6600223e3690c401e380fe05a616c3a5698044ac558eadc6ec3a"
+    },
+    {
+      "name": "unit-full.json",
+      "bytes": 604324,
+      "sha256": "7985758997577bb81f1c5a10747fa0ee04856580ac51bdd359e0cf64a70ac76e"
+    },
+    {
+      "name": "verified-source-e2e-authcoaching.spec.ts",
+      "bytes": 16289,
+      "sha256": "4c580a66329929a12afd3ee6d02d3ac00d98a23469f775bf14e0232e03965016"
+    },
+    {
+      "name": "verified-source-e2e-fixtures-authCoachingProbe.ts",
+      "bytes": 4420,
+      "sha256": "64a097d41fafbaabb4a4849f2f6793c12f77540be586e9bb0b60fdc369ca976b"
+    },
+    {
+      "name": "verified-source-e2e-fixtures-authCoaching.vite.ts",
+      "bytes": 855,
+      "sha256": "c0c880157f86478409780597ced0ca59f815a21cd5e28e59bb795712c2e3cee6"
+    },
+    {
+      "name": "verified-source-playwright.coaching-record-api.config.ts",
+      "bytes": 590,
+      "sha256": "c54679ce181f7f69d5b62de85fc88b5f89063da1e3cd8a180155a5a9cdfc6f21"
+    },
+    {
+      "name": "verified-source-scripts-serve-recorded-api-proof.mjs",
+      "bytes": 1340,
+      "sha256": "2ea05afd8f3b948267b42e26cf2a5b10f42c39fbc658667a0c4a4a8766d824cd"
+    },
+    {
+      "name": "verified-source-parent-backend-tests-run_browser.py",
+      "bytes": 12451,
+      "sha256": "887e0eff0082e340f3aba989477829638dce23573e26766ad7d5047103975b3e"
+    },
+    {
+      "name": "verified-source-parent-backend-app-records.py",
+      "bytes": 12837,
+      "sha256": "e5bc81c54195c6c4767cf537af6ef903add5ef56d24cb7aa4d26f08e03b1306c"
+    },
+    {
+      "name": "verified-source-parent-backend-app-main.py",
+      "bytes": 44183,
+      "sha256": "c99b12b1b1f3757d9671d9746e491c036541978f31aebd57db6953a952a9b3d9"
+    },
+    {
+      "name": "verified-source-parent-backend-tests-conftest.py",
+      "bytes": 5954,
+      "sha256": "327b2fbb658626d0e44beecaff746adb5a9662bf3453aa4bc7049009a4bc79bf"
+    },
+    {
+      "name": "verified-source-src-auth.tsx",
+      "bytes": 7183,
+      "sha256": "889843a8153e36c67708564d80729cdcdd59012702d1ff50923e1c50ca123b40"
+    },
+    {
+      "name": "verified-source-src-coaching-useRecordedPlayback.ts",
+      "bytes": 7208,
+      "sha256": "99cbb0ebe2c231c9ac3125d2ee015a6197ae6efc64293e33b375112a268dcd4f"
+    },
+    {
+      "name": "verified-source-src-coaching-useRecordedCoaching.ts",
+      "bytes": 9873,
+      "sha256": "d830bfb9a7b583cd93e193e2c8b0a62e0279e56df8fe8623d8dfad2eb987efb7"
+    },
+    {
+      "name": "verified-source-src-coaching-recordedSession.ts",
+      "bytes": 5793,
+      "sha256": "8f9e814d3d4c63e2abac5d62c2230b2055c70a7a175cef52215fe06082a8d2bd"
+    },
+    {
+      "name": "verified-source-src-coaching-recordOwner.ts",
+      "bytes": 3092,
+      "sha256": "820368c6cf370913b622b98c21d82a53142f0a8a6247ee188e5317388a50c0ff"
+    },
+    {
+      "name": "verified-source-src-coaching-resultRecord.ts",
+      "bytes": 11716,
+      "sha256": "10fc89e732376eb70b61720cab95685a7f26a59f4c760e4578a8af3536f1a64e"
+    },
+    {
+      "name": "verified-source-scripts-check-selection-production.mjs",
+      "bytes": 6575,
+      "sha256": "bd6d3dee5f02358fc17d402224074c39043b34f39dca21ba65f82a018bde995d"
+    },
+    {
+      "name": "verified-source-parent-docs-review-recorded-playback-api-run-browser.mjs",
+      "bytes": 1976,
+      "sha256": "6d50570f8eb205fd46488af1f2a35afb959fd47f616d127271f7c0205f1e8e20"
+    },
+    {
+      "name": "accepted-typecheck.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accepted-typecheck.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accepted-scope-biome.stdout",
+      "bytes": 43,
+      "sha256": "745a5dbd02eb898299354fe6a489fb2247854ec2c8d9001468ef0ea0dc3ac779"
+    },
+    {
+      "name": "accepted-scope-biome.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accepted-harness-ruff.stdout",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "name": "accepted-harness-ruff.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accepted-harness-format.stdout",
+      "bytes": 25,
+      "sha256": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50"
+    },
+    {
+      "name": "accepted-harness-format.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accepted-backend-mypy.stdout",
+      "bytes": 44,
+      "sha256": "8b88f6d12bd312c1b024b66d07a7f7619a68482ac4d64e475759b1823199faa5"
+    },
+    {
+      "name": "accepted-backend-mypy.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accepted-harness-negative-config.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accepted-harness-negative-config.stderr",
+      "bytes": 657,
+      "sha256": "c15b4e0f80a0a35f88f3bc1e1d9a4763405d0fb58557b65efe54fcadded6c82b"
+    },
+    {
+      "name": "accepted-node-harness-syntax.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accepted-node-harness-syntax.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accepted-node-serve-syntax.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accepted-node-serve-syntax.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accepted-private-guard.stdout",
+      "bytes": 1179,
+      "sha256": "d5427256c3d39b8ef3179c600682ef3f6ab1d94a986c761e0c8dd02ea436f0cb"
+    },
+    {
+      "name": "accepted-private-guard.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accepted-api-closed.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accepted-api-closed.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accepted-preview-closed.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accepted-preview-closed.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accepted-first-db-status.stdout",
+      "bytes": 26,
+      "sha256": "e138ccb54fdb08283c6eb21159c53207bbbbf07077246e2804e18d22efe6e250"
+    },
+    {
+      "name": "accepted-first-db-status.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accepted-second-db-status.stdout",
+      "bytes": 26,
+      "sha256": "e138ccb54fdb08283c6eb21159c53207bbbbf07077246e2804e18d22efe6e250"
+    },
+    {
+      "name": "accepted-second-db-status.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accepted-third-db-status.stdout",
+      "bytes": 26,
+      "sha256": "e138ccb54fdb08283c6eb21159c53207bbbbf07077246e2804e18d22efe6e250"
+    },
+    {
+      "name": "accepted-third-db-status.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accepted-diff-check.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accepted-diff-check.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "second-public.css",
+      "bytes": 31226,
+      "sha256": "bb6abe23075cafad3ab353dd5dabecb6e54ecbac4d81d2226942bcab8b220a13"
+    },
+    {
+      "name": "pr134-public.css",
+      "bytes": 31199,
+      "sha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e"
+    },
+    {
+      "name": "final-api-closed.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-api-closed.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-backend-mypy.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-backend-mypy.stdout",
+      "bytes": 44,
+      "sha256": "8b88f6d12bd312c1b024b66d07a7f7619a68482ac4d64e475759b1823199faa5"
+    },
+    {
+      "name": "final-diff-check.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-diff-check.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-final-db-status.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-final-db-status.stdout",
+      "bytes": 26,
+      "sha256": "e138ccb54fdb08283c6eb21159c53207bbbbf07077246e2804e18d22efe6e250"
+    },
+    {
+      "name": "final-first-db-status.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-first-db-status.stdout",
+      "bytes": 26,
+      "sha256": "e138ccb54fdb08283c6eb21159c53207bbbbf07077246e2804e18d22efe6e250"
+    },
+    {
+      "name": "final-harness-format.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-harness-format.stdout",
+      "bytes": 25,
+      "sha256": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50"
+    },
+    {
+      "name": "final-harness-negative-config.stderr",
+      "bytes": 657,
+      "sha256": "c15b4e0f80a0a35f88f3bc1e1d9a4763405d0fb58557b65efe54fcadded6c82b"
+    },
+    {
+      "name": "final-harness-negative-config.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-harness-ruff.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-harness-ruff.stdout",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "name": "final-node-harness-syntax.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-node-harness-syntax.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-node-serve-syntax.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-node-serve-syntax.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-preview-closed.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-preview-closed.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-private-guard.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-private-guard.stdout",
+      "bytes": 1179,
+      "sha256": "d5427256c3d39b8ef3179c600682ef3f6ab1d94a986c761e0c8dd02ea436f0cb"
+    },
+    {
+      "name": "final-scope-biome.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-scope-biome.stdout",
+      "bytes": 43,
+      "sha256": "745a5dbd02eb898299354fe6a489fb2247854ec2c8d9001468ef0ea0dc3ac779"
+    },
+    {
+      "name": "final-typecheck.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "final-typecheck.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "harness-ruff.stderr",
+      "bytes": 177,
+      "sha256": "3619999376e8fa6acbdcda90a0de85c70f0bbea63c67dbe4e473bb2be99d28db"
+    },
+    {
+      "name": "harness-ruff.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "scope-biome.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "scope-biome.stdout",
+      "bytes": 43,
+      "sha256": "7316929f3be23fdf35141f3bd29419f8db9163cae05fc31bed9d4bd33ea6b885"
+    },
+    {
+      "name": "source-e2e-authcoaching.spec.ts",
+      "bytes": 16289,
+      "sha256": "4c580a66329929a12afd3ee6d02d3ac00d98a23469f775bf14e0232e03965016"
+    },
+    {
+      "name": "source-e2e-fixtures-authCoaching.vite.ts",
+      "bytes": 855,
+      "sha256": "c0c880157f86478409780597ced0ca59f815a21cd5e28e59bb795712c2e3cee6"
+    },
+    {
+      "name": "source-e2e-fixtures-authCoachingProbe.ts",
+      "bytes": 4420,
+      "sha256": "64a097d41fafbaabb4a4849f2f6793c12f77540be586e9bb0b60fdc369ca976b"
+    },
+    {
+      "name": "source-parent-backend-app-main.py",
+      "bytes": 44183,
+      "sha256": "c99b12b1b1f3757d9671d9746e491c036541978f31aebd57db6953a952a9b3d9"
+    },
+    {
+      "name": "source-parent-backend-app-records.py",
+      "bytes": 12837,
+      "sha256": "e5bc81c54195c6c4767cf537af6ef903add5ef56d24cb7aa4d26f08e03b1306c"
+    },
+    {
+      "name": "source-parent-backend-tests-conftest.py",
+      "bytes": 5954,
+      "sha256": "327b2fbb658626d0e44beecaff746adb5a9662bf3453aa4bc7049009a4bc79bf"
+    },
+    {
+      "name": "source-parent-backend-tests-run_browser.py",
+      "bytes": 12451,
+      "sha256": "887e0eff0082e340f3aba989477829638dce23573e26766ad7d5047103975b3e"
+    },
+    {
+      "name": "source-parent-docs-review-recorded-playback-api-run-browser.mjs",
+      "bytes": 1976,
+      "sha256": "6d50570f8eb205fd46488af1f2a35afb959fd47f616d127271f7c0205f1e8e20"
+    },
+    {
+      "name": "source-playwright.coaching-record-api.config.ts",
+      "bytes": 589,
+      "sha256": "75630f37bb77b1d9971d52334a307a8e25c8bab0d420ce36062fa0173f3f61e2"
+    },
+    {
+      "name": "source-scripts-check-selection-production.mjs",
+      "bytes": 6575,
+      "sha256": "bd6d3dee5f02358fc17d402224074c39043b34f39dca21ba65f82a018bde995d"
+    },
+    {
+      "name": "source-scripts-serve-recorded-api-proof.mjs",
+      "bytes": 1340,
+      "sha256": "2ea05afd8f3b948267b42e26cf2a5b10f42c39fbc658667a0c4a4a8766d824cd"
+    },
+    {
+      "name": "source-src-auth.tsx",
+      "bytes": 7183,
+      "sha256": "889843a8153e36c67708564d80729cdcdd59012702d1ff50923e1c50ca123b40"
+    },
+    {
+      "name": "source-src-coaching-recordOwner.ts",
+      "bytes": 3092,
+      "sha256": "820368c6cf370913b622b98c21d82a53142f0a8a6247ee188e5317388a50c0ff"
+    },
+    {
+      "name": "source-src-coaching-recordedSession.ts",
+      "bytes": 5793,
+      "sha256": "8f9e814d3d4c63e2abac5d62c2230b2055c70a7a175cef52215fe06082a8d2bd"
+    },
+    {
+      "name": "source-src-coaching-resultRecord.ts",
+      "bytes": 11716,
+      "sha256": "10fc89e732376eb70b61720cab95685a7f26a59f4c760e4578a8af3536f1a64e"
+    },
+    {
+      "name": "source-src-coaching-useRecordedCoaching.ts",
+      "bytes": 9873,
+      "sha256": "d830bfb9a7b583cd93e193e2c8b0a62e0279e56df8fe8623d8dfad2eb987efb7"
+    },
+    {
+      "name": "source-src-coaching-useRecordedPlayback.ts",
+      "bytes": 7208,
+      "sha256": "99cbb0ebe2c231c9ac3125d2ee015a6197ae6efc64293e33b375112a268dcd4f"
+    },
+    {
+      "name": "typecheck.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "typecheck.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "commands": [
+    {
+      "name": "typecheck",
+      "command": "pnpm",
+      "args": [
+        "exec",
+        "tsc",
+        "--noEmit"
+      ],
+      "exit": 0,
+      "expected": 0,
+      "signal": null
+    },
+    {
+      "name": "scope-biome",
+      "command": "pnpm",
+      "args": [
+        "exec",
+        "biome",
+        "check",
+        "e2e/authcoaching.spec.ts",
+        "e2e/fixtures/authCoachingProbe.ts",
+        "playwright.coaching-record-api.config.ts",
+        "scripts/serve-recorded-api-proof.mjs"
+      ],
+      "exit": 0,
+      "expected": 0,
+      "signal": null
+    },
+    {
+      "name": "harness-ruff",
+      "command": ".venv/bin/ruff",
+      "args": [
+        "check",
+        "tests/run_browser.py"
+      ],
+      "exit": 0,
+      "expected": 0,
+      "signal": null
+    },
+    {
+      "name": "harness-format",
+      "command": ".venv/bin/ruff",
+      "args": [
+        "format",
+        "--check",
+        "tests/run_browser.py"
+      ],
+      "exit": 0,
+      "expected": 0,
+      "signal": null
+    },
+    {
+      "name": "backend-mypy",
+      "command": ".venv/bin/mypy",
+      "args": [
+        "app"
+      ],
+      "exit": 0,
+      "expected": 0,
+      "signal": null
+    },
+    {
+      "name": "harness-negative-config",
+      "command": ".venv/bin/python",
+      "args": [
+        "-m",
+        "tests.run_browser",
+        "records",
+        "--config",
+        "playwright.coaching-record-api.config.ts"
+      ],
+      "exit": 2,
+      "expected": 2,
+      "signal": null
+    },
+    {
+      "name": "node-harness-syntax",
+      "command": "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "args": [
+        "--check",
+        "../docs/review/recorded-playback-api/run-browser.mjs"
+      ],
+      "exit": 0,
+      "expected": 0,
+      "signal": null
+    },
+    {
+      "name": "node-serve-syntax",
+      "command": "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "args": [
+        "--check",
+        "scripts/serve-recorded-api-proof.mjs"
+      ],
+      "exit": 0,
+      "expected": 0,
+      "signal": null
+    },
+    {
+      "name": "private-guard",
+      "command": "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "args": [
+        "--input-type=module",
+        "-e",
+        {
+          "length": 6396,
+          "sha256": "689b1a216f56c6f292333f3c6344625fe5ef9f00585d5e19ad3e0c7011e9bba4"
+        }
+      ],
+      "exit": 0,
+      "expected": 0,
+      "signal": null
+    },
+    {
+      "name": "api-closed",
+      "command": "lsof",
+      "args": [
+        "-nP",
+        "-iTCP:8000",
+        "-sTCP:LISTEN"
+      ],
+      "exit": 1,
+      "expected": 1,
+      "signal": null
+    },
+    {
+      "name": "preview-closed",
+      "command": "lsof",
+      "args": [
+        "-nP",
+        "-iTCP:4173",
+        "-sTCP:LISTEN"
+      ],
+      "exit": 1,
+      "expected": 1,
+      "signal": null
+    },
+    {
+      "name": "first-db-status",
+      "command": "/opt/homebrew/opt/postgresql@18/bin/pg_ctl",
+      "args": [
+        "-D",
+        "/private/tmp/bodyguard-auth-test.4sNp6Z/data",
+        "status"
+      ],
+      "exit": 3,
+      "expected": 3,
+      "signal": null
+    },
+    {
+      "name": "second-db-status",
+      "command": "/opt/homebrew/opt/postgresql@18/bin/pg_ctl",
+      "args": [
+        "-D",
+        "/private/tmp/bodyguard-auth-test.F5dUvm/data",
+        "status"
+      ],
+      "exit": 3,
+      "expected": 3,
+      "signal": null
+    },
+    {
+      "name": "third-db-status",
+      "command": "/opt/homebrew/opt/postgresql@18/bin/pg_ctl",
+      "args": [
+        "-D",
+        "/private/tmp/bodyguard-auth-test.V8nhgp/data",
+        "status"
+      ],
+      "exit": 3,
+      "expected": 3,
+      "signal": null
+    },
+    {
+      "name": "diff-check",
+      "command": "git",
+      "args": [
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "expected": 0,
+      "signal": null
+    }
+  ],
+  "publicAssets": [
+    {
+      "name": "index-BVyDftrj.js",
+      "bytes": 355833,
+      "sha256": "dbdc8e3cb9ad8eeeae2519b7bbf37b84a230d4723607ec4817d38f5cee10c779",
+      "byteIdenticalToPR134": true
+    },
+    {
+      "name": "index-dNUNBpCv.css",
+      "bytes": 31199,
+      "sha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e",
+      "byteIdenticalToPR134": true
+    }
+  ],
+  "checks": {
+    "fullPassed": 1750,
+    "fullFiles": 98,
+    "failed": 0,
+    "skipped": 0,
+    "actualBrowserAPIandSQLCases": 8,
+    "actualBrowserDurationMs": 10449.627,
+    "originalBrowserPassed": 6,
+    "originalBrowserFailed": 2,
+    "correctedSecondBrowserPassed": 8,
+    "ownedDBsStoppedDataPreserved": true,
+    "cspNoticesAndNoGLB": true
+  },
+  "screenshotSHA256": "087a20ca47bcc7250dbc8853907537aedd6c4e8e8d27319a2fb23a1923de4082",
+  "preservedFailures": [
+    "H06 expected outer playback close at engine completion; resource ports had already disposed, outer lifecycle closes on unmount",
+    "H07 expected closed instead of the existing failed/session-expired record state; actual server rejected old proof; no policy change",
+    "First verifier stopped at uv cache permission denial (exit 2); raw logs and verifier preserved; final gates use the installed locked venv",
+    "Second verifier rejected a 27-byte unused CSS rule generated from a test-config comment; original CSS/verifier/gate logs preserved; comment removed and actual browser rerun in a new owned DB"
+  ],
+  "notProven": [
+    "native SDK/physical webcam/person/3D/clinical classifier or eligible motion",
+    "real Gmail/Google/Docker/HTTPS/deployment/whole1-6",
+    "original startup P2 or old native timeout resolution",
+    "whole backend pytest suite or default browser config in this Story"
+  ]
+}
