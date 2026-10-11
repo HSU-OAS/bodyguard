@@ -1,0 +1,110 @@
+{
+  "baseMain": "dde3d3c86731f1ba0c1c756769ddfb0aaaae187e",
+  "artifacts": [
+    {
+      "name": "unit-red.json",
+      "bytes": 1098,
+      "sha256": "6e0e8756d400002343a8cdebe66e36681ef196e375c921e54dbe1265c5046214"
+    },
+    {
+      "name": "unit-first.json",
+      "bytes": 7233,
+      "sha256": "c8f707f5b27f538b7e9e33b35a1b8c47e4f6e6b575d288512d572e795df2bbdc"
+    },
+    {
+      "name": "unit-dom-first.json",
+      "bytes": 8560,
+      "sha256": "c21c155e1e10b314879aef865a04cc504fa887c54b191dd2ea88366d4a0d8c0c"
+    },
+    {
+      "name": "unit-full.json",
+      "bytes": 597381,
+      "sha256": "d77b0ab5d657c086bf2781b462a3ca76a14956fbf8fd5a58b7b5274c69379f02"
+    },
+    {
+      "name": "unit-final-contract.json",
+      "bytes": 8560,
+      "sha256": "de37c92db0f04b33b2fef2eafecb33bf4c7734af7f4fbdb08eb46a99979981af"
+    },
+    {
+      "name": "native-first.json",
+      "bytes": 1781,
+      "sha256": "51467e423e3d9e7ae6f4b9f3329b4dcbf9de7141064daafb8e1617a829023902"
+    },
+    {
+      "name": "native-final.json",
+      "bytes": 1863,
+      "sha256": "978da703465997bfc5aede20180cd677396cc176f3f99f8fead3f0d77c7a5049"
+    },
+    {
+      "name": "native-diagnosis.json",
+      "bytes": 2294,
+      "sha256": "165b77e67ab65c7468903bffed603f1b4c824bff62ef6526df590b408536424a"
+    },
+    {
+      "name": "native-first-helper.mjs",
+      "bytes": 8562,
+      "sha256": "0c8452caa593ade16ede69b851c0db3d8fa64ecee26dd8e4e59b90c4ceadc825"
+    }
+  ],
+  "runtimeSource": [
+    {
+      "file": "src/pages/CameraPreparation.tsx",
+      "sha256": "39d29734aea393ef77a4656956bd19216888563615529c81f32fc29786a7b6a3"
+    },
+    {
+      "file": "src/pages/CoachingPage.tsx",
+      "sha256": "1f15c2847cf7a01d302785b82f5734f00d001cdd86befdd326cd34a0cf32cba0"
+    },
+    {
+      "file": "src/posture/cameraFraming.ts",
+      "sha256": "b3643c77515a845b806736d2b526a99fd544a86c36c7c20003b12461044cb049"
+    },
+    {
+      "file": "scripts/test-motion-framing.mjs",
+      "sha256": "09493d43d142255c2bb06efec845f6cd1e1251d797ef7cbb070ef41a9eab2398"
+    }
+  ],
+  "publicAssets": [
+    {
+      "name": "index-BVyDftrj.js",
+      "priorName": "index-BVyDftrj.js",
+      "bytes": 355833,
+      "sha256": "dbdc8e3cb9ad8eeeae2519b7bbf37b84a230d4723607ec4817d38f5cee10c779",
+      "byteIdenticalToPR131": true
+    },
+    {
+      "name": "index-dNUNBpCv.css",
+      "priorName": "index-dNUNBpCv.css",
+      "bytes": 31199,
+      "sha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e",
+      "byteIdenticalToPR131": true
+    }
+  ],
+  "checks": {
+    "fullUnitPassed": 1730,
+    "fullFiles": 97,
+    "contractPassed": 22,
+    "failed": 0,
+    "skipped": 0,
+    "nativeCases": 6,
+    "typecheckExit": 0,
+    "scopeBiomeExit": 0,
+    "buildExit": 0,
+    "privateGuardExit": 0
+  },
+  "preservedFailures": [
+    "missing-module RED suite",
+    "sandbox setup failure",
+    "initial native-input TimeoutError with no finer phase diagnostic",
+    "initial DOM fixture TypeScript errors were observed in command output; no separate raw log file",
+    "first collector assumed identical generated filenames and failed; content hash comparison corrected",
+    "first build Tailwind scanned test title invisible and emitted an unused utility; test label corrected and build re-executed"
+  ],
+  "notProven": [
+    "physical webcam/person accuracy/identity",
+    "avatar/reference/clinical judgement/recommendation/result recording",
+    "original startup P2 resolution",
+    "real provider/Docker/HTTPS/deployment/whole1-6"
+  ]
+}

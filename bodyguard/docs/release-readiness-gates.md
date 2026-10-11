@@ -1,5 +1,7 @@
 # 출시 통합 실행 게이트 — 2026-10-09
 
+**2026-10-11 기능 연결 우선:** CEO는 UI/UX 다듬기를 나중으로 두고 독립 웹 기능의 빠른 완성을 지시했다. 이어 아바타 보류 유지·실제 참여자 연결은 나중으로 답했으며 Docker 보류도 유지한다. [S3.C5](stories/motion-camera-framing.md)는 선택 동작의 촬영 안내를 실제 개발 연속 입력과 연결하고 동작 변경 시 종료/새 명시 준비·unknown ID 차단을 구현했다. [실제 흐름·가짜/실제 경계·실패](review/motion-camera-framing/README.md). 촬영 기술 상태는 자세 성공·추천·코칭/기록 활성화가 아니다. 기존 필수 단계 기준을 낮추거나 이월 항목을 통과 처리하지 않는다. PR131 source71afcb2→mergedde3d3c/main은 확인했다.
+
 **2026-10-11 입력 복구 갱신:** [S3.C4](stories/coaching-input-recovery.md)에서 현재 개발 웹의 제어 capture/Worker 오류·입력 정지·정리 오류와 명시 재시도를 실제 SDK/가짜 카메라로 검증했다. [작동 영역·실패 보존·범위](review/coaching-input-recovery/README.md). 제품/화면/SDK/판정 변경0이며 회귀 하네스를 추가한 결과다. 강화 시험의 원인 미확정 timeout과 기존 시작P2를 닫지 않으며 공개 코칭/기록0이다. PR130 mergebbc2b15/main 포함을 실제 확인했다. 아바타/Docker·실측/적격 동작0·운영/전체1~6 게이트는 미완료다.
 
 **2026-10-11 연속 입력 갱신:** [S3.C3](stories/coaching-continuous-input.md)은 승인된 개발 웹에서 카메라 준비 후 별도 명시 연속 입력과 종료·화면/계정 회수를 연결했다. [실제 작동 제어·실패 보존·경계](review/coaching-continuous-input/README.md). 같은 카메라/Worker의 관찰 producer이며 준비 frame 폐기·최신 메모리 슬롯1개·원래 촬영 시각을 유지한다. 공개 JS/CSS는 PR129 build와 byte 동일이고 공개 코칭/판정/기록0이다. PR129 mergeb5791b2/main은 실제 확인했다. 아바타/Docker 보류·출시 적격0·실측·기존 시작P2·전체1~6 완료 기준은 닫지 않았다.

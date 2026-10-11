@@ -115,7 +115,11 @@ export function CoachingPage() {
           </div>
         </section>
         <div className="coaching-footer">
-          <CameraPreparation />
+          {id !== null && !motion ? (
+            <p role="status">동작을 다시 선택해 주세요.</p>
+          ) : (
+            <CameraPreparation key={motion?.id ?? 'unselected'} motion={motion} />
+          )}
           <div className="coaching-actions">
             <button className="button primary" type="button" disabled>
               코칭 준비 중
