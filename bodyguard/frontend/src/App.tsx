@@ -28,6 +28,11 @@ const MotionSelection = import.meta.env.DEV
     )
   : null
 
+// FR-V-03: approved structure is not public coaching before asset/motion gates.
+const Coaching = import.meta.env.DEV
+  ? lazy(() => import('./pages/CoachingPage').then((module) => ({ default: module.CoachingPage })))
+  : null
+
 function SessionGate({ children }: { children?: ReactNode }) {
   const { state, refresh, signOut } = useAuth()
   const location = useLocation()
@@ -207,6 +212,7 @@ function Shell() {
     // NFR-08: selection/records pages own their asynchronous title and focus.
     if (
       (MotionSelection && pagePath === '/dev/select') ||
+      (Coaching && pagePath === '/dev/coaching') ||
       pagePath === '/account/delete' ||
       pagePath === '/account/notifications' ||
       pagePath === '/posture-records' ||
@@ -247,7 +253,7 @@ function Shell() {
     } · BODYGUARD`
   }, [location.pathname, pagePath, focusState])
   return (
-    <div className="website">
+    <div className={`website${Coaching && pagePath === '/dev/coaching' ? ' coaching-layout' : ''}`}>
       <button
         className="skip-link"
         type="button"
@@ -376,6 +382,18 @@ function Shell() {
                 <SessionGate>
                   <Suspense fallback={<p role="status">동작 안내를 여는 중입니다</p>}>
                     <MotionSelection />
+                  </Suspense>
+                </SessionGate>
+              }
+            />
+          )}
+          {Coaching && (
+            <Route
+              path="/dev/coaching"
+              element={
+                <SessionGate>
+                  <Suspense fallback={<p role="status">코칭 화면을 여는 중입니다</p>}>
+                    <Coaching />
                   </Suspense>
                 </SessionGate>
               }

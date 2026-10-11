@@ -1,7 +1,10 @@
 // FR-S-01/06, FR-V-02/03: protected development preview; selection never starts coaching.
 import { useEffect, useRef } from 'react'
 import { Link, useSearchParams } from 'react-router'
+import { motionNavigationUrl } from '../catalog/motionNavigation'
 import { findMotions, motionById, parseRegion, type Region } from '../catalog/motions'
+import { MotionPreview } from './MotionPreview'
+import './CoachingPage.css'
 import './MotionSelectionPage.css'
 
 const regions: readonly [Region, string][] = [
@@ -47,6 +50,9 @@ export function MotionSelectionPage() {
       <p className="motion-preview-note">
         출시 전 검수 화면입니다. 동작과 아바타 검증이 끝나기 전에는 코칭을 시작하지 않습니다.
       </p>
+      <Link className="back-link" to={motionNavigationUrl('/dev/coaching', params, selected?.id)}>
+        코칭 화면 구조 보기
+      </Link>
       {selectedId !== null ? (
         selected ? (
           <>
@@ -162,6 +168,7 @@ export function MotionSelectionPage() {
             <ul className="motion-list">
               {motions.map((motion) => (
                 <li key={motion.id}>
+                  <MotionPreview title={motion.title} />
                   <div>
                     <p className="motion-region">{motion.regionLabel}</p>
                     <h2>{motion.title}</h2>
