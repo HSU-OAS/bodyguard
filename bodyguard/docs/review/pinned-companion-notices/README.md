@@ -33,6 +33,6 @@ node --test bodyguard/scripts/companion-notice-proof.test.mjs bodyguard/scripts/
 
 `code-review` 기준으로 bounded 공개 요청·선택 metadata의 작성자/계정 필드 제외, 공식 ref→annotated commit/direct commit·source version/lock·raw bytes 보존, symlink/고정 파일명/원문 hash·오류 보존을 검토했다. 위 P2를 재현/보완했고 변경 범위 미해결 P1/P2는 없다. 독립 리뷰가 아닌 작성자 리뷰이며 저장 proof 자체는 서명된 SBOM이나 npm artifact 동등성의 신뢰 앵커가 아니다.
 
-공식 저장소3곳에 정확한 full license/copyright/NOTICE 출처를 묻는 제한된 공개 이슈의 CEO 승인을 요청했다. 현재는 **미승인·외부 메시지0**이고 답변/권리 승인을 완료로 세지 않는다. 사용자/영상/관절/시크릿/내부 코드 첨부나 비용/계정/운영 변경을 하지 않는다.
+공식 저장소3곳에 정확한 full license/copyright/NOTICE 출처를 묻는 제한된 공개 이슈의 CEO 승인을 요청했고, 2026-10-11 CEO가 **외부 문의는 나중에**로 결정했다. 따라서 **문의 보류·외부 메시지0**이며 답변/권리 승인을 완료로 세지 않는다. 사용자/영상/관절/시크릿/내부 코드 첨부나 비용/계정/운영 변경을 하지 않는다. 독립 웹 작업은 계속하되 이 미확보 고지를 통과 처리하지 않는다.
 
 제품 화면/API·SDK 통신 정책·아바타/GLB/Blender 변경0이다. 아바타·참여자·Docker 보류, 원래 시작P2/native timeout·실제 동작/판정/추천·외부/HTTPS/운영 및 전체1~6 미완료를 유지한다.
