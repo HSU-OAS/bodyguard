@@ -49,4 +49,5 @@ it('unknown motion does not silently become a successful or default motion', asy
   open('/dev/coaching?motion=__proto__')
   await screen.findByRole('heading', { name: '동작을 찾을 수 없습니다' })
   expect(screen.queryByRole('button', { name: '코칭 시작' })).toBeNull()
+  expect(screen.queryByRole('button', { name: '카메라 확인' })).toBeNull()
 })

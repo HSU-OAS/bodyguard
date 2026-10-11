@@ -1,8 +1,14 @@
 // FR-M-01/02/07·FR-U-04·NFR-08: explicit private preparation, never accepted coaching.
 import { useLayoutEffect, useRef, useState } from 'react'
 import { useAuth } from '../auth'
+import type { Motion } from '../catalog/motions'
 import { createCameraPreparation, type PreparationState } from '../pose/cameraPreparation'
 import { DEFAULT_POSE_MODEL } from '../pose/constants'
+import {
+  type CameraFramingStatus,
+  createCameraFraming,
+  motionFramingRequirement,
+} from '../posture/cameraFraming'
 
 const errors = {
   denied: '카메라 권한을 허용한 뒤 다시 확인해 주세요.',
@@ -19,18 +25,24 @@ const errors = {
 let retirement: Promise<void> | undefined
 let retirementFailed = false
 
-export function CameraPreparation() {
+export function CameraPreparation({ motion }: { motion?: Motion }) {
+  const motionId = motion?.id ?? null
   const { state: account } = useAuth()
   const accountId = account.status === 'ready' ? account.user.id : null
   const live = useRef(account)
   live.current = account
   const owner = useRef<ReturnType<typeof createCameraPreparation> | null>(null)
   const [state, setState] = useState<PreparationState>({ phase: 'idle' })
+  const [framing, setFraming] = useState<CameraFramingStatus | null>(null)
   useLayoutEffect(() => {
     if (account.status !== 'ready' || accountId === null) return
     const id = accountId
     let disposed = false
     let current: ReturnType<typeof createCameraPreparation> | undefined
+    let animation: number | undefined
+    const requirement = motionId === null ? null : motionFramingRequirement(motionId)
+    let observer = requirement ? createCameraFraming(requirement) : null
+    let previous: CameraFramingStatus | null = null
     const initialize = () => {
       if (disposed || live.current !== account) return
       if (retirementFailed) {
@@ -49,11 +61,35 @@ export function CameraPreparation() {
           account.user.id === id &&
           document.visibilityState === 'visible',
         onState: (next) => {
-          if (current && owner.current === current) setState(next)
+          if (current && owner.current === current && !disposed) {
+            setState(next)
+            if (next.phase !== 'observing') {
+              previous = null
+              setFraming(null)
+              observer = requirement ? createCameraFraming(requirement) : null
+            }
+          }
         },
       })
       owner.current = current
       setState({ phase: 'idle' })
+      setFraming(null)
+      // Consume the existing copied slot once; never capture/re-infer on render or retain arrays.
+      const tick = () => {
+        if (disposed || live.current !== account) return
+        if (observer && current?.state.phase === 'observing') {
+          const input = current.takeFrame()
+          const now = performance.now()
+          if (input) observer.accept(input, now)
+          const next = observer.read(now)
+          if (next !== previous) {
+            previous = next
+            setFraming(next)
+          }
+        }
+        animation = requestAnimationFrame(tick)
+      }
+      if (observer) animation = requestAnimationFrame(tick)
     }
     if (retirement) {
       setState({ phase: 'stopping' })
@@ -69,6 +105,8 @@ export function CameraPreparation() {
     window.addEventListener('pagehide', stop)
     return () => {
       disposed = true
+      if (animation !== undefined) cancelAnimationFrame(animation)
+      observer = null
       owner.current = null
       document.removeEventListener('visibilitychange', hidden)
       window.removeEventListener('pagehide', stop)
@@ -88,7 +126,7 @@ export function CameraPreparation() {
         if (retirement === pending) retirement = undefined
       })
     }
-  }, [account, accountId])
+  }, [account, accountId, motionId])
   const running = ['ready', 'preparing', 'connecting', 'observing'].includes(state.phase)
   const input = ['ready', 'connecting', 'observing'].includes(state.phase)
   return (
@@ -147,6 +185,19 @@ export function CameraPreparation() {
                       : '카메라 꺼짐'}
         </p>
       </div>
+      {motion && (
+        <p className="small muted" role="status" aria-label="현재 동작 촬영 안내">
+          {state.phase !== 'observing' || framing === null || framing === 'adjust'
+            ? motion.framing
+            : framing === 'position'
+              ? '화면 안에 몸이 보이도록 위치를 조정해 주세요.'
+              : framing === 'one-person'
+                ? '한 사람만 화면에 들어오게 해 주세요.'
+                : framing === 'in-frame'
+                  ? '촬영 범위 입력 확인됨 · 코칭 검증 전'
+                  : '새 촬영 입력을 기다리고 있습니다.'}
+        </p>
+      )}
       <p className="small muted">
         브라우저 안에서 입력만 확인합니다. 코칭·판정·저장은 시작하지 않습니다.
       </p>

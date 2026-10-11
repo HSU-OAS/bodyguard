@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-11 우선순위·[S3.C5 동작별 촬영 준비](stories/motion-camera-framing.md): CEO 지시대로 추가 디자인/UI/UX 다듬기는 뒤로 미루고 독립 기능 연결을 우선한다. 아바타 보류 유지·실제 참여자 연결은 나중·Docker 보류라는 답을 기록한다. 실제 개발 웹의 선택 동작 안내→카메라 준비→연속 입력 촬영 안내→동작 변경 시 종료/새 명시 준비·unknown ID 차단을 연결했다. [작동 영역·실패 원본·검증/작성자 리뷰](review/motion-camera-framing/README.md). 구도 버튼은 실제 요구 관절을 바꾸지 않으며 촬영 상태를 자세 성공/추천/코칭/기록으로 쓰지 않는다. PR131 source71afcb2→mergedde3d3c/main은 실제 확인했다. 조건부 PR 게이트는 진행 중이며 아바타/실측·간헐적 시작 대기·출시 적격0·운영/HTTPS·전체1~6은 미완료다. 아래는 과거 시점 기록이다.
+
 2026-10-11 [S3.C4 연속 입력 실패·재시도](stories/coaching-input-recovery.md): 실제 개발 웹/가짜 카메라·SDK에서 capture/Worker 오류·입력 정지→자원 종료→명시 재시도, 새 카메라 뒤 옛 callback 격리·정리 실패의 router 재진입 차단을 검증했다. [실제 오류 영역·강화 시험 실패·원본/리뷰](review/coaching-input-recovery/README.md). 제품/UI/SDK 변경0이며 새 회귀 시험을 추가했다. 강화 시험 timeout은 미확정으로 보존하고 정상 재시험으로 해결 처리하지 않는다. 전체frontend/정적/build/guard를 실행했으며 조건부 PR 게이트 진행 중이다. PR130 source904ab9b→mergebbc2b15/main 포함은 실제 확인했다. 아바타/Docker 보류·시작P2·실측/출시 적격0·전체1~6 미완료는 유지한다.
 
 2026-10-11 [S3.C3 연속 관찰 입력](stories/coaching-continuous-input.md): 카메라 확인→명시 입력 확인→같은 카메라/Worker의 순차 입력→끄기·재시작을 실제 개발 웹에 연결했다. [작동 영역·실패 원본·검증/작성자 리뷰](review/coaching-continuous-input/README.md). 연속 입력 중 화면 이탈·숨김/pagehide·401 회수를 확인했으며, 최신 복사 슬롯1개/consume-once·원래 시각·정리 실패 차단을 유지한다. 전체frontend/타입/build/private guard와 실제 가짜 카메라·SDK를 실행했고 조건부 PR 게이트 진행 중이다. PR129 sourceba721d4→mergeb5791b2/main 포함은 확인했다. 공개 코칭·판정·저장0, 아바타/Docker 보류·실측/출시 동작0·기존 시작P2·전체1~6 미완료는 유지한다. 아래는 이전 시점 기록이다.
