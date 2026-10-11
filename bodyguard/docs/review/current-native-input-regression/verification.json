@@ -1,0 +1,127 @@
+{
+  "story": "S6.C11",
+  "base": "9a26837bfaca00b4fa803d4432465cbd6a8834b2",
+  "branch": "codex/current-native-input-regression",
+  "initialContinuousExecutedHead": "2e302d0a810328ce95cfeb8e5eda930d149d6c43",
+  "initialContinuousSourceTree": "6ea1503cb34534d8a87b9f661463ef476893d44e",
+  "source": {
+    "src/pose/workerNativeEngine.ts": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+    "src/pose/cameraPreparation.ts": "5bb9acbe0d27934eec6d650eba6f0ab71e87c85521f413b2309f179cd4ee77e7",
+    "src/pages/CameraPreparation.tsx": "39d29734aea393ef77a4656956bd19216888563615529c81f32fc29786a7b6a3",
+    "src/posture/cameraFraming.ts": "b3643c77515a845b806736d2b526a99fd544a86c36c7c20003b12461044cb049",
+    "scripts/test-continuous-input.mjs": "d5af716892c1ed1f1bf3989733620a041a8038dfd07a006d3820b363eb7d3716",
+    "scripts/test-input-recovery.mjs": "6949d6f5996fb4ecd4c3b9a60c5b5e0741fdf2129be1e4f764aa8f3d6fa43c8d",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+    "src/pose/videoPoseSource.ts": "5818cd775915b90a8964e540927b1ef05043be214f18f40e46d920a40f4988a7",
+    "src/pose/workerInference.ts": "c358cc2431c598e7f2ad6911a698a7bb3f468d6d83314edd2f49e2a7192bdf54"
+  },
+  "actualBrowser": {
+    "continuousCases": [
+      "explicit native fake-camera preparation1 → separate input confirmation → >=5 subsequent actual heavy body/face/hands Worker frames; same camera/Worker, max in-flight1 → explicit stop",
+      "controlled held decoded callback cancelled during connecting; late callback cannot create an input or revive readiness",
+      "actual Router exit from running input releases source/camera/Worker; remount does not restart automatically",
+      "controlled pagehide event during actual running input ends source/camera/Worker",
+      "controlled hidden event during actual running input ends source/camera/Worker",
+      "800px notebook window/reduced motion/keyboard focus and44px input control; no horizontal overflow",
+      "actual AuthProvider controlled401 refresh during running input removes private UI and ends resources"
+    ],
+    "recoveryCases": [
+      "capture-fault: controlled fault during actual running input → fixed error/resources ended → explicit prepare1/discard → separate input/actual SDK frames → stop",
+      "worker-fault: controlled fault during actual running input → fixed error/resources ended → explicit prepare1/discard → separate input/actual SDK frames → stop",
+      "held decoded callback exceeds existing5000ms deadline → fixed error/ends → fresh explicit prepare/discard → late old callback cannot detach fresh camera/create frame → separate input/stop",
+      "controlled native stop fault after actual end → remaining Worker/source ended → fixed cleanup error; restart blocked also after actual router remount"
+    ],
+    "failures": 0,
+    "actualReactAndSDK": true,
+    "nativeFakeCamera": true,
+    "controlledAuthAndFaults": true,
+    "physicalDeviceOrHuman": false,
+    "avatarsRequested": 0,
+    "apiWrites": 0,
+    "externalContextRequests": 0,
+    "pageErrors": 0
+  },
+  "quality": [
+    {
+      "command": "pnpm test selected8files",
+      "exit": 0,
+      "passed": 60,
+      "files": 8,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": "evidence/continuous-related.json.gz"
+    },
+    {
+      "command": "pnpm test",
+      "exit": 0,
+      "passed": 1885,
+      "files": 104,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": "evidence/continuous-full.json.gz"
+    },
+    {
+      "command": "pnpm build (types/original notices/Vite)",
+      "exit": 0,
+      "evidence": "evidence/continuous-build.log.gz"
+    },
+    {
+      "command": "pnpm check",
+      "exit": 0,
+      "existingInfos": 16,
+      "evidence": "evidence/continuous-biome.log.gz"
+    },
+    {
+      "command": "node scripts/check-selection-production.mjs",
+      "exit": 0,
+      "evidence": "evidence/continuous-production-guard.log.gz"
+    },
+    {
+      "command": "git diff --check",
+      "exit": 0
+    }
+  ],
+  "publicAssets": [
+    {
+      "path": "assets/index-vT8IJSbL.js",
+      "bytes": 365359,
+      "sha256": "6a25f6a1b2103fc67b81a09de1c62034568f00987d6dd4e105dbb404e37fb1c6",
+      "identicalToPR144": true
+    },
+    {
+      "path": "assets/index-BJPoAg5T.css",
+      "bytes": 31514,
+      "sha256": "60f6724b770dec8981223542da32ccbd0af2abf4204621d9382c27da55c5b9da",
+      "identicalToPR144": true
+    }
+  ],
+  "productChanged": false,
+  "uiOrCSSChanged": false,
+  "backendOrSQLChanged": false,
+  "newAvatarTrial": false,
+  "physicalParticipants": false,
+  "OSAccessibility": false,
+  "authorReview": {
+    "independent": false,
+    "unresolvedEvidenceDiffP1P2": 0
+  },
+  "existingStartupP2Closed": false,
+  "stages1to6Complete": false,
+  "holds": [
+    "avatar",
+    "participants",
+    "Docker/HTTPS",
+    "official inquiry",
+    "real Gmail/Google"
+  ],
+  "notProven": [
+    "physical camera/people/accuracy/15fps",
+    "avatar/clinical judgement/reference",
+    "real provider/SQL",
+    "original startup P2 resolution",
+    "Docker/TLS/deployment/public coaching",
+    "physical camera/device failure/person accuracy/15fps",
+    "avatar/clinical judgement/reference/public coaching",
+    "Docker/TLS/deployment"
+  ]
+}
