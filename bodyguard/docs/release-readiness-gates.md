@@ -1,5 +1,7 @@
 # 출시 통합 실행 게이트 — 2026-10-09
 
+**2026-10-12 기록 화면 연결:** [S4.R10](stories/record-period-summary.md)의 기존 화면에서 실제 저장된 일·주 집계/날짜 선택·빈/오류/명시 재조회와 삭제 후 갱신을 production Chrome→loopback API→새 소유 PostgreSQL로 확인했다([실제 화면·실패/검증](review/record-period-summary/README.md)). 계정·기록·메일/오류는 합성이며 사람/SDK 판정·가입 메일 공급자·최종 아바타·Docker/HTTPS/운영이나 전체1~6 통과가 아니다. 새 메뉴·디자인·수집·API/운영 변경0, Draft51/이전 실패·보류와 나머지 필수 기준은 유지한다. 네 부가 기능은 ADR-0019의 출시 후 범위다.
+
 **2026-10-11 최신 범위 결정:** CEO가 기존 기록 화면의 일·주 집계·날짜 선택·빈/오류/재조회 연결을 승인하고 자세 알림·PDF·LLM 요약·변화 탐지를 출시 후로 이월했다([ADR-0019](adr/0019-first-release-core-scope.md)). Q-32는 결정됐지만 이 네 기능의 구현/검증 완료가 아니다. 아래 과거 시점의 Q13/27/32 선행 표기는 후속 범위로 읽는다. 실제 추천/판정·고품질 남녀 아바타·계정/기록 전체 흐름·실측·권리/법무·HTTPS/운영·안전/개인정보 및 전체1~6의 나머지 필수 기준은 그대로 남는다. Draft51과 실패/원본 보존, 아바타/참여자/Docker/문의/공급자 보류도 유지한다.
 
 **2026-10-11 최신 갱신:** 실제 Gmail/Google 공급자 연결은 나중으로 보류하며 발송/연결/공급자 로그인0이다. [S5.8](stories/embedded-package-notices.md)은 설치 maath 함수 주석3개·MediaPipe 타입 파일 머리2개를 byte/hash로 보존/대조했다. [실패 원본·부분 범위·검증/작성자 리뷰](review/embedded-package-notices/README.md). PR136 sourcec2629dd→merge9c620b5/main 확인 후 진행한 좁은 Story이며 full 원문4버전·SDK/WASM/최종 artifact 고지/권리를 통과 처리하지 않는다. 아바타·참여자·Docker·공식 문의 보류, 실제 동작/판정/추천·원래 시작P2/timeout·HTTPS/운영 및 전체1~6 미통과는 유지한다. 아래는 과거 시점 기록이다.

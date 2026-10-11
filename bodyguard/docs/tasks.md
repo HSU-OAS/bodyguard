@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-12 [S4.R10 기존 기록 화면의 일·주 집계](stories/record-period-summary.md): 기존 자세 기록에서 날짜·일/주 선택→본인 전체 집계, 빈 기록·실패→명시 재조회, 실제 삭제→오래된 집계 폐기→다시 조회가 작동한다. 새 메뉴/디자인/카메라/아바타/API·운영 변경0. [실제 화면·실패 원본·검증·작성자 리뷰](review/record-period-summary/README.md). 새 production Chrome3흐름·기존 기록4흐름/전체frontend1896·원래 build/Biome/guard 통과, scoped 조건부 PR 게이트 진행 중이다. PR146 source683143eb→mergee7f513af/main·브랜치 보존을 확인하고 최신 main에서 시작했다. 네 부가 기능은 출시 후로 이월했고 Draft51·시작P2·아바타/참여자/Docker/공급자/문의 보류와 실제 추천/판정·권리·HTTPS/운영·전체1~6 미완료를 유지한다. 아래는 과거 시점 기록이다.
+
 2026-10-11 [첫 출시 핵심 범위](adr/0019-first-release-core-scope.md): CEO가 기존 기록 화면의 일·주 집계 연결을 승인하고 자세 알림·PDF·LLM·변화 탐지를 출시 후로 이월했다. Q-32 결정과 운영/출시 문서만 갱신하며 제품 구현이나 전체1~6 완료로 표시하지 않는다. PR145 sourceb6bef1d→merge49955d7/main·동일 트리/브랜치 보존을 확인했다. 다음은 최신 main의 별도 Story로 기존 기록 화면을 현재 본인 집계 API에 연결하는 작업이다. Draft51·모든 이전 실패/증거·아바타/참여자/Docker/공식 문의/공급자 보류·기존 시작P2와 핵심 실제 품질/운영 기준은 유지한다. 아래는 과거 시점 기록이다.
 
 2026-10-11 [S6.C11 현재 SDK의 연속 입력·오류 복구 회귀](stories/current-native-input-regression.md): 최근 body gate별 추론 생략 후에도 실제 웹의 준비→연속 입력→끄기, 이탈/계정 회수와 입력 오류→명시 새 준비/입력→복구가 작동함을 확인했다. 정리 오류는 화면 재진입 후에도 재획득을 차단한다. [실제 영역·원본/SHA·작성자 리뷰](review/current-native-input-regression/README.md). 제품 변경0·정상 현재 회귀7/4·관련60/전체frontend1885·원래 타입/notice build/Biome/guard·공개byte 동일을 확인하고 좁은 조건부 PR 게이트 진행 중이다. PR144 source2e302d0→merge9a26837/main·트리/브랜치 보존을 확인했다. 가짜 장치·제어 계정/오류를 실제 사람/장치 정확도로 세지 않는다. 아바타/참여자/Docker/공식 문의/공급자 보류·출시 동작0·실제 보정/추천/판정·기존 시작P2/간헐 실패 원인·전체1~6 미완료는 유지한다. 아래는 과거 시점 기록이다.
