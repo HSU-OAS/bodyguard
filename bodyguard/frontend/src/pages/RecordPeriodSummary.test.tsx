@@ -5,7 +5,16 @@ import { afterEach, beforeEach, expect, it, vi } from 'vitest'
 import { App } from '../App'
 
 const account = { id: '00000000-0000-4000-8000-000000000001', email: 'fixture@example.com' }
-beforeEach(() => vi.setSystemTime(new Date('2026-10-06T12:01:00Z')))
+const DateTimeFormat = Intl.DateTimeFormat
+beforeEach(() => {
+  vi.setSystemTime(new Date('2026-10-06T12:01:00Z'))
+  // The HTTP fixture describes UTC days. Pin only the default browser zone;
+  // explicit IANA zones still use the native formatter and strict parser.
+  // biome-ignore lint/complexity/useArrowFunction: Vitest constructor mocks must be constructible.
+  vi.spyOn(Intl, 'DateTimeFormat').mockImplementation(function (locales, options) {
+    return new DateTimeFormat(locales, { timeZone: 'UTC', ...options })
+  })
+})
 afterEach(() => {
   cleanup()
   vi.restoreAllMocks()
@@ -54,6 +63,15 @@ function aggregate(path: string, minutes = 21) {
     provenance: 'client-reported',
   }
 }
+it('RP12 pins only the fixture default zone and preserves explicit native IANA zones', () => {
+  expect(new Intl.DateTimeFormat().resolvedOptions().timeZone).toBe('UTC')
+  expect(new Intl.DateTimeFormat('en', { timeZone: 'Asia/Seoul' }).resolvedOptions().timeZone).toBe(
+    'Asia/Seoul',
+  )
+  expect(
+    new Intl.DateTimeFormat('en', { timeZone: 'America/New_York' }).resolvedOptions().timeZone,
+  ).toBe('America/New_York')
+})
 function setup(handler: (path: string) => unknown | Promise<unknown>) {
   const fetch = vi.fn(async (path: string) => {
     if (path === '/api/v1/me') return new Response(JSON.stringify(account))
