@@ -33,8 +33,12 @@ async function register(context: BrowserContext) {
   ).toBe(201)
   return email
 }
-async function seed(context: BrowserContext, count = 1, deviation = 1.25) {
-  const top = new Date(Math.floor(Date.now() / 60000) * 60000 - 5 * 60000)
+async function seed(
+  context: BrowserContext,
+  count = 1,
+  deviation = 1.25,
+  top = new Date(Math.floor(Date.now() / 60000) * 60000 - 5 * 60000),
+) {
   const part = { method: 'Fixture+V1', unit: 'deg', measured_sec: 0, bad_sec: 0, dev_mean: null }
   const items = Array.from({ length: count }, (_, index) => ({
     minute_start: new Date(top.getTime() - index * 60000).toISOString(),
@@ -57,6 +61,146 @@ async function open(page: Page) {
   await page.goto('/posture-records')
   await expect(page.getByRole('button', { name: '삭제 대상 확인' })).toBeVisible()
 }
+async function selectSeedDay(page: Page, instant: string) {
+  const day = await page.evaluate((value) => {
+    const d = new Date(value)
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+  }, instant)
+  await page.getByRole('region', { name: '일·주 기록 요약' }).getByLabel('요약 날짜').fill(day)
+}
+
+test('RP-W01 기존 기록 화면의 실제 일·주 전체 집계와 다른 계정 격리', async ({
+  page,
+  context,
+  browser,
+}, info) => {
+  test.setTimeout(90_000)
+  // Yesterday at browser-local noon keeps all 21 minutes in one day/week even at midnight.
+  const instant = await page.evaluate(() => {
+    const d = new Date()
+    d.setDate(d.getDate() - 1)
+    d.setHours(12, 0, 0, 0)
+    return d.toISOString()
+  })
+  await register(context)
+  await seed(context, 21, 1.25, new Date(instant))
+  const other = await browser.newContext()
+  try {
+    await register(other)
+    await seed(other, 1, 8.75, new Date(instant))
+    let reads = 0
+    page.on('request', (request) => {
+      if (request.url().includes('/records/dashboard?')) reads++
+    })
+    await open(page)
+    await selectSeedDay(page, instant)
+    const list = page.getByRole('table', { name: '분별 평균 편차와 전체 측정 시간' })
+    await expect(list.locator('tbody tr')).toHaveCount(20)
+    const region = page.getByRole('region', { name: '일·주 기록 요약' })
+    expect(reads).toBe(0)
+    const query = region.getByRole('button', { name: '요약 조회' })
+    await query.focus()
+    await page.keyboard.press('Enter')
+    await expect(region.getByText('21분 기록', { exact: true })).toBeVisible()
+    const table = region.getByRole('table', { name: '기간 전체의 부위별 저장 지표' })
+    await expect(table.getByRole('row', { name: /어깨/ })).toContainText('50%')
+    await expect(table.getByRole('row', { name: /목/ })).toContainText('—')
+    expect(await table.textContent()).not.toContain('8.75')
+    await expect(query).toBeFocused()
+    await page.screenshot({ path: info.outputPath('record-period-day.png'), fullPage: true })
+    await region.getByLabel('요약 단위').selectOption('week')
+    await expect(region.getByText('21분 기록', { exact: true })).toHaveCount(0)
+    expect(reads).toBe(1)
+    await query.click()
+    await expect(region.getByText('21분 기록', { exact: true })).toBeVisible()
+    expect(reads).toBe(2)
+    await page.setViewportSize({ width: 800, height: 900 })
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+    expect((await query.boundingBox())?.height).toBeGreaterThanOrEqual(44)
+    await region.getByLabel('요약 단위').focus()
+    await expect(region.getByLabel('요약 단위')).toHaveCSS('outline-width', '3px')
+    await page.screenshot({ path: info.outputPath('record-period-notebook.png'), fullPage: true })
+  } finally {
+    await other.close()
+  }
+})
+
+test('RP-W02 실제 집계 오류 재조회와 날짜 편집의 늦은 응답 격리', async ({
+  page,
+  context,
+}, info) => {
+  test.setTimeout(90_000)
+  await register(context)
+  const items = await seed(context)
+  await open(page)
+  await selectSeedDay(page, items[0].minute_start)
+  const region = page.getByRole('region', { name: '일·주 기록 요약' })
+  await page.route('**/api/v1/records/dashboard?**', (route) =>
+    route.fulfill({ status: 503, body: '' }),
+  )
+  await region.getByRole('button', { name: '요약 조회' }).click()
+  await expect(region.getByRole('alert')).toContainText('다시 조회')
+  await page.screenshot({ path: info.outputPath('record-period-error.png'), fullPage: true })
+  await page.unroute('**/api/v1/records/dashboard?**')
+  await region.getByRole('button', { name: '요약 다시 조회' }).click()
+  await expect(region.getByText('1분 기록', { exact: true })).toBeVisible()
+  let release!: () => void
+  await page.route('**/api/v1/records/dashboard?**', async (route) => {
+    const response = await route.fetch()
+    await new Promise<void>((resolve) => {
+      release = resolve
+    })
+    try {
+      await route.fulfill({ response })
+    } catch {
+      /* The caller intentionally retired this request. */
+    }
+  })
+  await region.getByRole('button', { name: '요약 조회' }).click()
+  await expect.poll(() => typeof release).toBe('function')
+  const unit = region.getByLabel('요약 단위')
+  await unit.focus()
+  await unit.selectOption('week')
+  release()
+  await expect(unit).toBeFocused()
+  await expect(region.getByText('1분 기록', { exact: true })).toHaveCount(0)
+  await page.unroute('**/api/v1/records/dashboard?**')
+  await region.getByLabel('요약 날짜').fill('2000-01-01')
+  await region.getByRole('button', { name: '요약 조회' }).click()
+  await expect(region.getByText('이 기간에는 저장된 기록이 없습니다')).toBeVisible()
+  await page.screenshot({ path: info.outputPath('record-period-empty.png'), fullPage: true })
+})
+
+test('RP-W03 실제 삭제 뒤 오래된 집계 폐기와 계정 오류 회수', async ({ page, context }) => {
+  test.setTimeout(90_000)
+  await register(context)
+  const items = await seed(context)
+  await open(page)
+  await selectSeedDay(page, items[0].minute_start)
+  const region = page.getByRole('region', { name: '일·주 기록 요약' })
+  await region.getByRole('button', { name: '요약 조회' }).click()
+  await expect(region.getByText('1분 기록', { exact: true })).toBeVisible()
+  await page.getByRole('button', { name: '삭제 대상 확인' }).click()
+  await page.getByRole('button', { name: '확인한 자세 기록 삭제' }).click()
+  await expect(page.getByText(/자세 기록 1건을 삭제했습니다/)).toBeVisible()
+  await expect(region.getByText('1분 기록', { exact: true })).toHaveCount(0)
+  await expect(region.getByRole('button', { name: '요약 조회' })).toBeDisabled()
+  await page.getByRole('button', { name: '기간 다시 조회' }).click()
+  await page
+    .getByRole('region', { name: '일·주 기록 요약' })
+    .getByRole('button', { name: '요약 조회' })
+    .click()
+  await expect(page.getByText('이 기간에는 저장된 기록이 없습니다')).toBeVisible()
+  await page.route('**/api/v1/records/dashboard?**', (route) =>
+    route.fulfill({ status: 403, body: '' }),
+  )
+  await page
+    .getByRole('region', { name: '일·주 기록 요약' })
+    .getByRole('button', { name: '요약 조회' })
+    .click()
+  await expect(page.getByRole('button', { name: '계정 다시 확인' })).toBeVisible()
+  await expect(page.getByRole('button', { name: '삭제 대상 확인' })).toHaveCount(0)
+})
 function contrast(a: string, b: string) {
   function luminance(value: string) {
     const rgb = value

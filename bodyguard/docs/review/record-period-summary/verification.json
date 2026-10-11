@@ -1,0 +1,86 @@
+{
+  "story": "S4.R10",
+  "base": "e7f513af8fae106cbaa69aab4065b3f311b121a3",
+  "relatedFrontend": 130,
+  "fullFrontend": 1896,
+  "files": 105,
+  "runs": [
+    {
+      "id": "summaries-20261011T151428301721Z",
+      "result": [
+        2,
+        1
+      ],
+      "stats": {
+        "startTime": "2026-10-11T15:14:28.954Z",
+        "duration": 19763.737999999998,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "browser": "155.0.8059.40"
+    },
+    {
+      "id": "summaries-20261011T151545530438Z",
+      "result": [
+        2,
+        1
+      ],
+      "stats": {
+        "startTime": "2026-10-11T15:15:46.120Z",
+        "duration": 19411.606,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "browser": "155.0.8059.40"
+    },
+    {
+      "id": "summaries-20261011T151700030694Z",
+      "result": [
+        3,
+        0
+      ],
+      "stats": {
+        "startTime": "2026-10-11T15:17:00.615Z",
+        "duration": 13339.306999999999,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "browser": "155.0.8059.40"
+    },
+    {
+      "id": "summaries-20261011T151734374389Z",
+      "result": [
+        4,
+        0
+      ],
+      "stats": {
+        "startTime": "2026-10-11T15:17:35.051Z",
+        "duration": 30241.485,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "browser": "155.0.8059.40"
+    }
+  ],
+  "actual": "production Chrome / loopback FastAPI / PostgreSQL18.6 UTF8, synthetic accounts and records",
+  "notTested": [
+    "people or camera/SDK judgment",
+    "final avatar",
+    "mail/OAuth providers",
+    "Docker/HTTPS/operations",
+    "global startup P2 cause",
+    "whole stages1–6 completion"
+  ],
+  "ownedDbStoppedDataPreserved": [
+    "/private/tmp/bodyguard-auth-test.AP2JKe",
+    "/private/tmp/bodyguard-auth-test.KCGfE7"
+  ]
+}

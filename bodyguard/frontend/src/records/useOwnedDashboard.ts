@@ -1,4 +1,4 @@
-// FR-R-03/06, FR-U-04/NFR-08: committed auth and request lifetime; no public consumer.
+// FR-R-03/06, FR-U-04/NFR-08: committed auth and request lifetime for record consumers.
 import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import { ApiError } from '../api/auth'
 import { type DashboardQuery, readDashboard } from '../api/dashboard'

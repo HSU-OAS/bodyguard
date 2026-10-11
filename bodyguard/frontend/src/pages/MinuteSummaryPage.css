@@ -43,6 +43,32 @@
 .minute-baseline > p {
   margin-top: 12px;
 }
+.period-summary {
+  margin-bottom: 32px;
+}
+.period-summary select {
+  min-height: 48px;
+  min-width: 100px;
+  padding: 10px 12px;
+  border: 1px solid var(--control-line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+}
+.period-summary select:focus-visible,
+.period-summary summary:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+}
+.period-summary details {
+  overflow-wrap: anywhere;
+  font-weight: 400;
+}
+.period-summary summary {
+  cursor: pointer;
+  min-height: 44px;
+}
 .minute-detail .minute-baseline dl {
   margin: 16px 0 0;
 }

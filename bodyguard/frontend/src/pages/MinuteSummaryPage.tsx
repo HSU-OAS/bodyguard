@@ -16,6 +16,7 @@ import { dateRange, defaultPeriod } from '../api/records'
 import { type ReadyAccount, useAuth } from '../auth'
 import { MinuteSummaryDeletion } from './MinuteSummaryDeletion'
 import { RecordBaseline } from './RecordBaseline'
+import { RecordPeriodSummary } from './RecordPeriodSummary'
 import './RecordsPage.css'
 import './MinuteSummaryPage.css'
 
@@ -236,6 +237,12 @@ export function MinuteSummaryPage() {
           </p>
         )}
       </form>
+      <RecordPeriodSummary
+        key={key}
+        anchor={to}
+        disabled={busy || !range || shown?.status === 'auth-error' || ready?.stale === true}
+        onAuthFailure={blockAuthority}
+      />
       {range && (
         <section
           className="records-results"
