@@ -1,0 +1,343 @@
+{
+  "baseline": "f24310ebeca745e4f75ace1a2d355f3e0f49d75c",
+  "final": {
+    "method": "built product CSP; no test response CSP or route interception; owned different-origin positive control; blank SDK body+face+hands; no camera/avatar",
+    "chrome": "154.0.8037.57",
+    "product": "29a0700c566603066d1d29c41613dcde3e8d281ca91ea5cfa5beef03113a5114",
+    "fixture": "7ce59bd728dd10c03771fb2d37a23297da223225f75e1d7d6801c02860bcfbcd",
+    "results": [
+      {
+        "mode": "control",
+        "passed": true,
+        "network": {
+          "mainBlocked": false,
+          "workerBlocked": false,
+          "workerViolations": 0
+        },
+        "trapRequests": 2,
+        "ownership": {
+          "cameras": 0,
+          "workers": 1,
+          "terminations": 1,
+          "violations": 0,
+          "storageKeys": 0
+        }
+      },
+      {
+        "mode": "policy",
+        "passed": true,
+        "network": {
+          "mainBlocked": true,
+          "workerBlocked": true,
+          "workerViolations": 1
+        },
+        "trapRequests": 0,
+        "ownership": {
+          "cameras": 0,
+          "workers": 1,
+          "terminations": 1,
+          "violations": 1,
+          "storageKeys": 0
+        }
+      },
+      {
+        "mode": "main",
+        "passed": true,
+        "result": {
+          "thread": "main",
+          "state": "closed",
+          "readyMs": 613,
+          "firstMs": 1534.4000000059605,
+          "timings": [
+            1534.4000000059605,
+            28.599999994039536,
+            34.79999999701977
+          ],
+          "maxGapMs": 1533.1999999999998,
+          "beats": 8,
+          "clickDelayMs": 1519,
+          "frames": 3,
+          "closes": 3,
+          "delegates": [
+            "GPU",
+            "GPU",
+            "GPU"
+          ],
+          "concurrentRejected": false
+        },
+        "ownership": {
+          "cameras": 0,
+          "workers": 0,
+          "terminations": 0,
+          "violations": 3,
+          "storageKeys": 0
+        }
+      },
+      {
+        "mode": "worker",
+        "passed": true,
+        "result": {
+          "thread": "worker",
+          "state": "closed",
+          "readyMs": 639.2999999970198,
+          "firstMs": 1482.4000000059605,
+          "timings": [
+            1482.4000000059605,
+            77.59999999403954,
+            68.20000000298023
+          ],
+          "maxGapMs": 16.800000000000182,
+          "beats": 104,
+          "clickDelayMs": 1,
+          "frames": 3,
+          "closes": 3,
+          "delegates": [],
+          "concurrentRejected": true
+        },
+        "ownership": {
+          "cameras": 0,
+          "workers": 1,
+          "terminations": 1,
+          "violations": 0,
+          "storageKeys": 0
+        }
+      },
+      {
+        "mode": "web",
+        "passed": true,
+        "sameOrigin": true,
+        "ownership": {
+          "cameras": 0,
+          "workers": 0,
+          "terminations": 0,
+          "violations": 0,
+          "storageKeys": 0
+        }
+      }
+    ],
+    "trapRequests": 2,
+    "externalRequests": 0,
+    "proxyAttempts": 32,
+    "sdkProxyAttempts": 0,
+    "pageErrors": [],
+    "requested": [
+      "/control/",
+      "/probe/assets/sdkNetworkProbe-D1i2WE2N.js",
+      "/probe/assets/sdkNetworkProbe-mrQ1rjai.css",
+      "/favicon.ico",
+      "/network-worker.js",
+      "/probe/",
+      "/mediapipe/wasm/vision_wasm_internal.js",
+      "/mediapipe/wasm/vision_wasm_internal.wasm",
+      "/models/pose_landmarker_lite.task",
+      "/models/face_landmarker.task",
+      "/models/gesture_recognizer.task",
+      "/assets/nativeInference.worker-ZfXU2Vh8.js",
+      "/",
+      "/assets/index-BEdaKLPN.js",
+      "/assets/index-dNUNBpCv.css",
+      "/api/v1/me",
+      "/brand/google-icon.png",
+      "/api/v1/auth/google/status",
+      "/api/policy-probe"
+    ],
+    "failure": null
+  },
+  "initialFailed": {
+    "method": "built product CSP; no test response CSP or route interception; owned different-origin positive control; blank SDK body+face+hands; no camera/avatar",
+    "chrome": "154.0.8037.57",
+    "product": "29a0700c566603066d1d29c41613dcde3e8d281ca91ea5cfa5beef03113a5114",
+    "fixture": "7ce59bd728dd10c03771fb2d37a23297da223225f75e1d7d6801c02860bcfbcd",
+    "results": [
+      {
+        "mode": "control",
+        "passed": true,
+        "network": {
+          "mainBlocked": false,
+          "workerBlocked": false,
+          "workerViolations": 0
+        },
+        "trapRequests": 2,
+        "ownership": {
+          "cameras": 0,
+          "workers": 1,
+          "terminations": 1,
+          "violations": 0,
+          "storageKeys": 0
+        }
+      },
+      {
+        "mode": "policy",
+        "passed": true,
+        "network": {
+          "mainBlocked": true,
+          "workerBlocked": true,
+          "workerViolations": 1
+        },
+        "trapRequests": 0,
+        "ownership": {
+          "cameras": 0,
+          "workers": 1,
+          "terminations": 1,
+          "violations": 1,
+          "storageKeys": 0
+        }
+      },
+      {
+        "mode": "main",
+        "passed": true,
+        "result": {
+          "thread": "main",
+          "state": "closed",
+          "readyMs": 411.40000000596046,
+          "firstMs": 1299.5,
+          "timings": [
+            1299.5,
+            22.900000005960464,
+            21.400000005960464
+          ],
+          "maxGapMs": 1300,
+          "beats": 8,
+          "clickDelayMs": 1303.4000000059605,
+          "frames": 3,
+          "closes": 3,
+          "delegates": [
+            "GPU",
+            "GPU",
+            "GPU"
+          ],
+          "concurrentRejected": false
+        },
+        "ownership": {
+          "cameras": 0,
+          "workers": 0,
+          "terminations": 0,
+          "violations": 3,
+          "storageKeys": 0
+        }
+      },
+      {
+        "mode": "worker",
+        "passed": true,
+        "result": {
+          "thread": "worker",
+          "state": "closed",
+          "readyMs": 1327.2999999970198,
+          "firstMs": 1534.2000000029802,
+          "timings": [
+            1534.2000000029802,
+            29.900000005960464,
+            22.399999991059303
+          ],
+          "maxGapMs": 16.800000000000182,
+          "beats": 101,
+          "clickDelayMs": 2.9000000059604645,
+          "frames": 3,
+          "closes": 3,
+          "delegates": [],
+          "concurrentRejected": true
+        },
+        "ownership": {
+          "cameras": 0,
+          "workers": 1,
+          "terminations": 1,
+          "violations": 0,
+          "storageKeys": 0
+        }
+      },
+      {
+        "mode": "web",
+        "passed": true,
+        "sameOrigin": true,
+        "ownership": {
+          "cameras": 0,
+          "workers": 0,
+          "terminations": 0,
+          "violations": 0,
+          "storageKeys": 0
+        }
+      }
+    ],
+    "trapRequests": 2,
+    "externalRequests": 0,
+    "proxyAttempts": 31,
+    "pageErrors": [],
+    "requested": [
+      "/control/",
+      "/probe/assets/sdkNetworkProbe-D1i2WE2N.js",
+      "/probe/assets/sdkNetworkProbe-mrQ1rjai.css",
+      "/favicon.ico",
+      "/network-worker.js",
+      "/probe/",
+      "/mediapipe/wasm/vision_wasm_internal.js",
+      "/mediapipe/wasm/vision_wasm_internal.wasm",
+      "/models/pose_landmarker_lite.task",
+      "/models/face_landmarker.task",
+      "/models/gesture_recognizer.task",
+      "/assets/nativeInference.worker-ZfXU2Vh8.js",
+      "/",
+      "/assets/index-BEdaKLPN.js",
+      "/assets/index-dNUNBpCv.css",
+      "/api/v1/me",
+      "/brand/google-icon.png",
+      "/api/v1/auth/google/status",
+      "/api/policy-probe"
+    ],
+    "failure": {
+      "name": "AssertionError",
+      "message": "Expected values to be strictly equal:\n\n30 !== 0\n"
+    }
+  },
+  "development": {
+    "workerHeader": true,
+    "documentPolicy": true,
+    "pageErrors": [],
+    "hmrConnected": true,
+    "policySHA256": "f3c880b3a096ae39f829f9481dec3c6535d49a2e568b98bbb9a78bb83426bd5a",
+    "failure": null,
+    "boundary": "actual dev response/header/document/HMR only; no dev native SDK inference claim"
+  },
+  "realAccount": {
+    "stats": {
+      "startTime": "2026-10-11T04:43:39.556Z",
+      "duration": 9928.799,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "errors": []
+  },
+  "unit": {
+    "files": 81,
+    "passed": 1648,
+    "failed": 0
+  },
+  "typecheck": "passed",
+  "static": "scoped passed",
+  "productBuild": "passed with original notice gate",
+  "privateGuard": "original input overridden to owned product/assets; passed",
+  "sourceHashes": {
+    "src/pose/policyWorker.ts": "a3d514c6ef99e71ff97a95013caa72735fbfd925488fb042c67ef03978abcc5b",
+    "src/pose/policyWorker.test.ts": "6388a452c97412dc15abad526dcfe59307d7cb4ec35298187405d2a018ff9b7f",
+    "src/pose/inferenceWorker.ts": "d5e67e0584406ebbf3a852823605450b84057e5bbcdd287e1c805dac97560e2e",
+    "src/pose/workerInference.ts": "e6c5c01895915675fb4e598596c3b219f236aa51a490243673811a02ea6341f5",
+    "src/pose/workerNativeEngine.ts": "6216820d53d012108733d1044fb317d12800844b620075652181f77282ea5d39",
+    "src/pose/workerNativeEngine.test.ts": "2eb59652594f2a12fd2db278c8360ebf786c53b007d26cbf5cd66e0d328ce505",
+    "scripts/sdk-network-policy.ts": "4aad4fa00fc161e85566ff8784cf19a6d914e38431cf00957947a12eefd37134",
+    "scripts/build-sdk-policy-probe.mjs": "9ecb34662aff26669fdfff4f0b8b601f5ffbbfc4342a27bd2f99584f885e2bb1",
+    "scripts/test-sdk-network-policy.mjs": "d5a4af619c9c5ceb43eb321c4b12dfd6f27ec3f329570f4ca0073a9c3f011098",
+    "scripts/test-sdk-dev-policy.mjs": "5eb743d1a3dea03aab006115719d446fd925e0b82db96712ca16cde7c5bed2ad",
+    "e2e/fixtures/sdkNetworkProbe.ts": "ec9cc03a3ce2d85f9e5610e6e08df66c3e60ff606741bd0e418638ae258e41e8",
+    "e2e/fixtures/sdkNetworkProbe.html": "9e4c2ccb64e322ffcef1c6f558028819e23a8411b2a3be372f5ea385b1e48567",
+    "vite.config.ts": "bd9845cc990692266114875135389bc6978c29ef4071288dd02a3715845eb05b"
+  },
+  "rawHashes": {
+    "browser-first.json": "17830a45b7a21a72b1e45a0f210041487d6ea46130639bda9927d33f388dd224",
+    "browser-classified.json": "b9acaaddbc0514d5ecd61ec7128d535cf82bed5ea20c0b4fadacf4cf4b7d02a1",
+    "browser-final.json": "95be0b14dfe0feb2f483b2a9e30750afbf5c45f580ffa71d91cae70ef31e550d",
+    "development.json": "e3f824f8c4fbbff208ffd3ad82477b51184596f6eb4196a7dc04f8e17681b706",
+    "account-report.json": "2b5682e623b5f4df48452846ae96639678725b90ff0eccee03e71ee6535d1308"
+  },
+  "boundary": "no camera/avatar/physical participants; actual SDK on synthetic blank frames; actual HTTP/SQL accounts with synthetic mail; no deployment"
+}

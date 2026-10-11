@@ -49,6 +49,16 @@ beforeEach(() => {
   )
 })
 afterEach(() => vi.unstubAllGlobals())
+it('resolves fixed assets from the creator origin even inside an inherited-policy Blob worker', async () => {
+  vi.stubGlobal('self', { location: { href: 'blob:https://owned.invalid/owned' } })
+  const f = fixture()
+  const engine = await prepareWorkerNativeEngine(config, f.abort.signal)
+  expect(sdk.resolve).toHaveBeenCalledWith('https://owned.invalid/mediapipe/wasm')
+  expect(sdk.body.mock.calls[0][1].baseOptions.modelAssetPath).toBe(
+    'https://owned.invalid/models/pose_landmarker_lite.task',
+  )
+  engine.dispose()
+})
 it('keeps fixed same-origin VIDEO options and copies each SDK result before next call/release', async () => {
   const f = fixture(),
     engine = await prepareWorkerNativeEngine(config, f.abort.signal)

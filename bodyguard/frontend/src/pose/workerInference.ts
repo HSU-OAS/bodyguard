@@ -1,6 +1,7 @@
 // FR-M-02/07·FR-A-03/NFR-07/08: private same-browser, one-in-flight inference owner.
 import { ResourceCleanupError, type ResourceContext } from '../coaching/resources'
 import { POSE_MODELS, type PoseModel } from './constants'
+import { createInferenceWorker } from './inferenceWorker'
 import type { OwnedPoseResult } from './ownedPoseFrame'
 
 export type WorkerInferenceConfig = Readonly<{
@@ -45,8 +46,11 @@ export async function createWorkerPoseInference(
     throw unavailable()
   }
   let worker: Worker
+  let terminateWorker: () => void
   try {
-    worker = new Worker(new URL('./nativeInference.worker.ts', import.meta.url))
+    const owned = createInferenceWorker()
+    worker = owned.worker
+    terminateWorker = owned.terminate
   } catch {
     throw unavailable()
   }
@@ -93,7 +97,7 @@ export async function createWorkerPoseInference(
     worker.removeEventListener('messageerror', failed)
     if (cleanupTimer !== undefined) clearTimeout(cleanupTimer)
     clearResponseTimer()
-    worker.terminate()
+    terminateWorker()
   }
   function rejectWork() {
     clearResponseTimer()
