@@ -149,7 +149,7 @@ export function CoachingPage() {
               </Link>
             </details>
           )}
-          <p className="small muted">코칭·판정·저장 꺼짐 · 의학적 진단이 아닌 스트레칭 코칭</p>
+          <p className="small muted">코칭·판정·수행 기록 꺼짐 · 의학적 진단이 아닌 스트레칭 코칭</p>
         </div>
       </div>
       <dialog ref={picker} className="coaching-dialog" aria-labelledby="coaching-picker-title">
