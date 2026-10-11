@@ -1,7 +1,20 @@
 // FR-M-02/07·NFR-07/08: same-browser worker ownership, no real SDK/human claims.
 import { afterEach, describe, expect, it, vi } from 'vitest'
+import { MODEL_ASSETS, type OwnedModelAssets, prepareOwnedModelAssets } from './ownedModelAssets'
 import { createWorkerPoseInference } from './workerInference'
 
+vi.mock('./ownedModelAssets', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('./ownedModelAssets')>()),
+  prepareOwnedModelAssets: vi.fn(),
+}))
+const modelAssets = () => ({
+  body: new ArrayBuffer(MODEL_ASSETS.lite.bytes),
+  face: new ArrayBuffer(MODEL_ASSETS.face.bytes),
+  hands: new ArrayBuffer(MODEL_ASSETS.hands.bytes),
+})
+const tick = async () => {
+  for (let i = 0; i < 8; i++) await Promise.resolve()
+}
 class FakeWorker extends EventTarget {
   static current: FakeWorker
   sent: { data: unknown; transfer: Transferable[] }[] = []
@@ -17,7 +30,10 @@ class FakeWorker extends EventTarget {
     this.dispatchEvent(new MessageEvent('message', { data }))
   }
 }
-function fixture() {
+async function fixture(download?: Promise<OwnedModelAssets>) {
+  vi.mocked(prepareOwnedModelAssets).mockImplementationOnce(
+    () => download ?? Promise.resolve(modelAssets()),
+  )
   vi.stubGlobal('Worker', FakeWorker)
   const abort = new AbortController()
   const pending = createWorkerPoseInference(
@@ -25,6 +41,7 @@ function fixture() {
     { model: 'lite', face: true, hands: true, matrixLayout: 'column-major' },
   )
   const worker = FakeWorker.current
+  await tick()
   const ready = () => worker.reply({ type: 'ready', generation: 3, id: 0 })
   return { abort, pending, worker, ready }
 }
@@ -39,11 +56,68 @@ afterEach(() => {
   vi.useRealTimers()
 })
 describe('worker inference owner', () => {
+  it('does not spend the five-second init budget on a six-second model read', async () => {
+    vi.useFakeTimers()
+    let resolve!: (assets: OwnedModelAssets) => void
+    const f = await fixture(
+      new Promise((r) => {
+        resolve = r
+      }),
+    )
+    expect(f.worker.sent).toEqual([])
+    await vi.advanceTimersByTimeAsync(6000)
+    expect(f.worker.terminate).not.toHaveBeenCalled()
+    resolve(modelAssets())
+    await tick()
+    expect(f.worker.sent[0].transfer).toHaveLength(3)
+    await vi.advanceTimersByTimeAsync(4999)
+    f.ready()
+    const owner = await f.pending,
+      disposal = owner.dispose()
+    f.worker.reply({ type: 'closed', generation: 3, clean: true })
+    await disposal
+    expect(vi.getTimerCount()).toBe(0)
+  })
+  it('terminates before init on model-read abort, without requiring a native cleanup ack', async () => {
+    let resolve!: (assets: OwnedModelAssets) => void
+    const f = await fixture(
+      new Promise((r) => {
+        resolve = r
+      }),
+    )
+    const assertion = expect(f.pending).rejects.toThrow('Worker inference unavailable')
+    f.abort.abort()
+    await assertion
+    expect(f.worker.terminate).toHaveBeenCalledOnce()
+    resolve(modelAssets())
+    await tick()
+    f.ready()
+    expect(f.worker.sent).toEqual([])
+    expect(vi.mocked(prepareOwnedModelAssets).mock.calls.at(-1)?.[1].aborted).toBe(true)
+  })
+  it('rejects ready before any init rather than granting premature authority', async () => {
+    const f = await fixture(new Promise(() => {}))
+    const assertion = expect(f.pending).rejects.toThrow('Worker inference unavailable')
+    f.ready()
+    await assertion
+    expect(f.worker.sent).toEqual([])
+    expect(f.worker.terminate).toHaveBeenCalledOnce()
+  })
+  it('reports termination failure before init instead of a clean cancelled owner', async () => {
+    const f = await fixture(new Promise(() => {}))
+    f.worker.terminate.mockImplementation(() => {
+      throw new Error('PRIVATE_TERMINATE')
+    })
+    const assertion = expect(f.pending).rejects.toThrow('Resource cleanup failed')
+    f.abort.abort()
+    await assertion
+    expect(f.worker.sent).toEqual([])
+  })
   it('rejects late ready even when its timer callback has not been scheduled yet', async () => {
     vi.useFakeTimers()
     let now = 0
     vi.spyOn(performance, 'now').mockImplementation(() => now)
-    const f = fixture(),
+    const f = await fixture(),
       outcome = f.pending.then(
         () => 'ready',
         () => 'failed',
@@ -58,7 +132,7 @@ describe('worker inference owner', () => {
     vi.useFakeTimers()
     let now = 0
     vi.spyOn(performance, 'now').mockImplementation(() => now)
-    const f = fixture()
+    const f = await fixture()
     f.ready()
     const inference = await f.pending
     const outcome = inference.detect(frame().input, 2).then(
@@ -75,7 +149,7 @@ describe('worker inference owner', () => {
   })
   it('bounds a silently closed preparing worker and preserves missing cleanup acknowledgement', async () => {
     vi.useFakeTimers()
-    const f = fixture()
+    const f = await fixture()
     const assertion = expect(f.pending).rejects.toThrow('Resource cleanup failed')
     await vi.advanceTimersByTimeAsync(5000)
     expect(f.worker.sent.at(-1)?.data).toEqual({ type: 'close', generation: 3 })
@@ -87,7 +161,7 @@ describe('worker inference owner', () => {
   })
   it('bounds a missing inference response, never accepts its late result and observes cleanup', async () => {
     vi.useFakeTimers()
-    const f = fixture()
+    const f = await fixture()
     f.ready()
     const inference = await f.pending,
       a = frame()
@@ -105,7 +179,7 @@ describe('worker inference owner', () => {
   })
   it('does not spend a new frame deadline on preparation or an earlier successful frame', async () => {
     vi.useFakeTimers()
-    const f = fixture()
+    const f = await fixture()
     await vi.advanceTimersByTimeAsync(4999)
     f.ready()
     const inference = await f.pending
@@ -127,7 +201,7 @@ describe('worker inference owner', () => {
   })
   it('rejects preparation at its deadline even if late ready precedes a clean acknowledgement', async () => {
     vi.useFakeTimers()
-    const f = fixture(),
+    const f = await fixture(),
       assertion = expect(f.pending).rejects.toThrow('Worker inference unavailable')
     await vi.advanceTimersByTimeAsync(5000)
     f.ready()
@@ -138,7 +212,7 @@ describe('worker inference owner', () => {
   })
   it('clears an in-flight response deadline immediately on cancellation', async () => {
     vi.useFakeTimers()
-    const f = fixture()
+    const f = await fixture()
     f.ready()
     const inference = await f.pending,
       job = inference.detect(frame().input, 2)
@@ -155,14 +229,17 @@ describe('worker inference owner', () => {
     expect(vi.getTimerCount()).toBe(0)
   })
   it('uses a fixed same-origin worker and explicit model/features only', async () => {
-    const f = fixture()
+    const f = await fixture()
     expect(f.worker.url).toBe('/__bodyguard/inference-worker.js')
     expect(f.worker.sent[0].data).toEqual({
       type: 'init',
       generation: 3,
       id: 0,
       config: { model: 'lite', face: true, hands: true, matrixLayout: 'column-major' },
+      assets: modelAssets(),
     })
+    const init = f.worker.sent[0].data as { assets: OwnedModelAssets }
+    expect(f.worker.sent[0].transfer).toEqual(Object.values(init.assets))
     f.ready()
     const inference = await f.pending
     const disposal = inference.dispose()
@@ -171,7 +248,7 @@ describe('worker inference owner', () => {
     expect(f.worker.terminate).toHaveBeenCalledOnce()
   })
   it('transfers one clone, keeps borrowed input intact and preserves original timestamp', async () => {
-    const f = fixture(),
+    const f = await fixture(),
       a = frame()
     f.ready()
     const inference = await f.pending
@@ -191,7 +268,7 @@ describe('worker inference owner', () => {
     await disposal
   })
   it('rejects overlap before cloning or retaining a second frame', async () => {
-    const f = fixture(),
+    const f = await fixture(),
       a = frame(),
       b = frame()
     f.ready()
@@ -206,7 +283,7 @@ describe('worker inference owner', () => {
     await disposal
   })
   it('rejects pending work immediately on abort, discards late body and waits for cleanup ack', async () => {
-    const f = fixture(),
+    const f = await fixture(),
       a = frame()
     f.ready()
     const inference = await f.pending,
@@ -223,7 +300,7 @@ describe('worker inference owner', () => {
     await expect(inference.detect(a.input, 4)).rejects.toThrow('Worker inference unavailable')
   })
   it('cancels preparing without promoting a late ready response', async () => {
-    const f = fixture(),
+    const f = await fixture(),
       assertion = expect(f.pending).rejects.toThrow('Worker inference unavailable')
     f.abort.abort()
     f.ready()
@@ -237,7 +314,7 @@ describe('worker inference owner', () => {
     { type: 'result', generation: 3, id: 1, at: 1, result: points() },
     { type: 'error', generation: 3, id: 1, error: 'PRIVATE_COORDINATES_ERROR' },
   ])('fails closed on wrong ownership/timing or worker error', async (message) => {
-    const f = fixture()
+    const f = await fixture()
     f.ready()
     const inference = await f.pending,
       a = frame(),
@@ -252,7 +329,7 @@ describe('worker inference owner', () => {
     expect(f.worker.terminate).toHaveBeenCalledOnce()
   })
   it('reports cleanup rejection as fixed error, not SDK payload', async () => {
-    const f = fixture()
+    const f = await fixture()
     f.ready()
     const inference = await f.pending,
       disposal = inference.dispose()
@@ -263,7 +340,7 @@ describe('worker inference owner', () => {
   })
   it('bounds missing cleanup acknowledgement and terminates, without success fallback', async () => {
     vi.useFakeTimers()
-    const f = fixture()
+    const f = await fixture()
     f.ready()
     const inference = await f.pending,
       disposal = inference.dispose()
@@ -282,7 +359,7 @@ describe('worker inference owner', () => {
     ).rejects.toThrow('Worker inference unavailable')
   })
   it('reports transferred clone cleanup failure even when worker releases successfully', async () => {
-    const f = fixture(),
+    const f = await fixture(),
       a = frame()
     a.clone.close.mockImplementation(() => {
       throw new Error('PRIVATE_FRAME_CLOSE')
@@ -296,7 +373,7 @@ describe('worker inference owner', () => {
     expect(f.worker.terminate).toHaveBeenCalledOnce()
   })
   it('waits for partial initialization failure cleanup before rejecting its factory', async () => {
-    const f = fixture(),
+    const f = await fixture(),
       assertion = expect(f.pending).rejects.toThrow('Resource cleanup failed')
     f.worker.reply({ type: 'error', generation: 3, id: 0 })
     expect(f.worker.terminate).not.toHaveBeenCalled()
@@ -309,7 +386,7 @@ describe('worker inference owner', () => {
     post.mockImplementationOnce(() => {
       throw new Error('PRIVATE_POST')
     })
-    const f = fixture(),
+    const f = await fixture(),
       assertion = expect(f.pending).rejects.toThrow('Worker inference unavailable')
     f.worker.reply({ type: 'closed', generation: 3, clean: true })
     await assertion

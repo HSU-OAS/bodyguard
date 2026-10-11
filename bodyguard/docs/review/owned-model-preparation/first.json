@@ -1,0 +1,112 @@
+{
+  "createdAt": "2026-10-11T11:14:32.126Z",
+  "source": {
+    "src/pose/ownedModelAssets.ts": "a53585fe1c55690a12b0318bf20720e912400717fc808459814668f6cc3d586a",
+    "src/pose/workerInference.ts": "c358cc2431c598e7f2ad6911a698a7bb3f468d6d83314edd2f49e2a7192bdf54",
+    "src/pose/workerInferenceRuntime.ts": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+    "src/pose/workerNativeEngine.ts": "7458d43da056ab7a14a487e41aef8689ae79afb0c14c22ebddd4d0a18a2217fe",
+    "scripts/sdk-network-policy.ts": "4aad4fa00fc161e85566ff8784cf19a6d914e38431cf00957947a12eefd37134",
+    "e2e/fixtures/ownedModelProbe.ts": "6f901781ea5d967ed391a2bce891ebd7ad987f2b304202e26350cc3bdcabae9f"
+  },
+  "results": [],
+  "requests": [
+    {
+      "mode": "baseline",
+      "path": "/",
+      "delayed": false,
+      "servedMs": 1,
+      "aborted": false
+    },
+    {
+      "mode": "baseline",
+      "path": "/assets/ownedModelProbe-BBHHctxH.js",
+      "delayed": false,
+      "servedMs": 0,
+      "aborted": false
+    },
+    {
+      "mode": "baseline",
+      "path": "/models/pose_landmarker_heavy.task",
+      "delayed": false,
+      "servedMs": 0,
+      "aborted": false
+    },
+    {
+      "mode": "baseline",
+      "path": "/assets/nativeInference.worker-uTAJCKN7.js",
+      "delayed": false,
+      "servedMs": 0,
+      "aborted": false
+    },
+    {
+      "mode": "baseline",
+      "path": "/models/face_landmarker.task",
+      "delayed": false,
+      "servedMs": 0,
+      "aborted": false
+    },
+    {
+      "mode": "baseline",
+      "path": "/models/gesture_recognizer.task",
+      "delayed": false,
+      "servedMs": 0,
+      "aborted": false
+    },
+    {
+      "mode": "baseline",
+      "path": "/mediapipe/wasm/vision_wasm_internal.js",
+      "delayed": false,
+      "servedMs": 1,
+      "aborted": false
+    },
+    {
+      "mode": "baseline",
+      "path": "/mediapipe/wasm/vision_wasm_internal.wasm",
+      "delayed": false,
+      "servedMs": 0,
+      "aborted": false
+    },
+    {
+      "mode": "baseline",
+      "path": "/mediapipe/wasm/vision_wasm_internal.js",
+      "delayed": false,
+      "servedMs": 0,
+      "aborted": false
+    },
+    {
+      "mode": "baseline",
+      "path": "/mediapipe/wasm/vision_wasm_internal.wasm",
+      "delayed": false,
+      "servedMs": 0,
+      "aborted": false
+    },
+    {
+      "mode": "baseline",
+      "path": "/mediapipe/wasm/vision_wasm_internal.js",
+      "delayed": false,
+      "servedMs": 0,
+      "aborted": false
+    },
+    {
+      "mode": "baseline",
+      "path": "/mediapipe/wasm/vision_wasm_internal.wasm",
+      "delayed": false,
+      "servedMs": 0,
+      "aborted": false
+    }
+  ],
+  "errors": [],
+  "external": 0,
+  "forbidden": 9,
+  "failure": {
+    "name": "Error",
+    "message": "page.evaluate: InvalidStateError: Failed to construct 'VideoFrame': Invalid source state"
+  },
+  "serversStopped": true,
+  "actualCamera": false,
+  "actualHuman": false,
+  "avatar": false,
+  "controlledDownloadDelayMs": 6000,
+  "oldStartupP2Resolved": false,
+  "stages1to6Complete": false
+}

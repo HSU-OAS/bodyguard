@@ -2,6 +2,7 @@
 import { ResourceCleanupError, type ResourceContext } from '../coaching/resources'
 import { POSE_MODELS, type PoseModel } from './constants'
 import { createInferenceWorker } from './inferenceWorker'
+import { prepareOwnedModelAssets, validateOwnedModelAssets } from './ownedModelAssets'
 import type { OwnedPoseResult } from './ownedPoseFrame'
 
 export type WorkerInferenceConfig = Readonly<{
@@ -58,6 +59,8 @@ export async function createWorkerPoseInference(
     terminated = false,
     ready = false,
     cleanupFailed = false
+  let initSent = false
+  const modelAbort = new AbortController()
   let nextId = 0,
     lastAt = -Infinity
   let pending:
@@ -125,7 +128,7 @@ export async function createWorkerPoseInference(
       // A delayed timer callback cannot make an overdue response timely.
       if (responseDeadline !== undefined && performance.now() >= responseDeadline)
         throw unavailable()
-      if (data.type === 'ready' && data.id === 0 && !ready && !pending) {
+      if (data.type === 'ready' && initSent && data.id === 0 && !ready && !pending) {
         clearResponseTimer()
         ready = true
         resolveReady()
@@ -154,6 +157,7 @@ export async function createWorkerPoseInference(
   function dispose(): Promise<void> {
     if (disposal) return disposal
     retiring = true
+    modelAbort.abort()
     rejectWork()
     if (terminated) return Promise.reject(new ResourceCleanupError())
     disposal = new Promise<void>((resolve, reject) => {
@@ -167,6 +171,11 @@ export async function createWorkerPoseInference(
         }
         if (clean) resolve()
         else reject(new ResourceCleanupError())
+      }
+      // No native task can exist before init is sent. After init, require the original ack.
+      if (!initSent) {
+        finishDisposal(true)
+        return
       }
       cleanupTimer = setTimeout(() => finishDisposal?.(false), CLEANUP_LIMIT_MS)
       try {
@@ -189,8 +198,19 @@ export async function createWorkerPoseInference(
       aborted()
       throw unavailable()
     }
+    const assets = validateOwnedModelAssets(
+      config,
+      await Promise.race([
+        prepareOwnedModelAssets(config, modelAbort.signal),
+        prepared.then(() => {
+          throw unavailable()
+        }),
+      ]),
+    )
+    if (retiring || signal.aborted) throw unavailable()
+    initSent = true
     awaitResponse()
-    worker.postMessage({ type: 'init', generation, id: 0, config })
+    worker.postMessage({ type: 'init', generation, id: 0, config, assets }, Object.values(assets))
     await prepared
     if (retiring || signal.aborted) throw unavailable()
   } catch {

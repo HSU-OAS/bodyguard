@@ -1,0 +1,91 @@
+{
+  "createdAt": "2026-10-11T11:17:00.843Z",
+  "commands": [
+    {
+      "label": "unit",
+      "args": [
+        "node_modules/vitest/vitest.mjs",
+        "run"
+      ],
+      "start": "2026-10-11T11:16:38.484Z",
+      "end": "2026-10-11T11:16:51.699Z",
+      "status": 0,
+      "signal": null,
+      "log": "unit.log",
+      "sha256": "37b67d5b5eb348a9bd786ec9dd7bf2ae6d27650a6895498f9269c4920cc3a7cd"
+    },
+    {
+      "label": "types",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "start": "2026-10-11T11:16:51.701Z",
+      "end": "2026-10-11T11:16:59.012Z",
+      "status": 0,
+      "signal": null,
+      "log": "types.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "biome",
+      "args": [
+        "node_modules/@biomejs/biome/bin/biome",
+        "check",
+        "."
+      ],
+      "start": "2026-10-11T11:16:59.012Z",
+      "end": "2026-10-11T11:16:59.472Z",
+      "status": 0,
+      "signal": null,
+      "log": "biome.log",
+      "sha256": "fa972513d4fd7c859218f87f4584b500e28d9c0e74702b5eccf2bf1db21c9543"
+    },
+    {
+      "label": "notices",
+      "args": [
+        "--test",
+        "scripts/check-build-notices.test.mjs"
+      ],
+      "start": "2026-10-11T11:16:59.472Z",
+      "end": "2026-10-11T11:16:59.845Z",
+      "status": 0,
+      "signal": null,
+      "log": "notices.log",
+      "sha256": "5f77764b931187dedee1c75e483cc725a360f4e410091c6a1f8fd4e5a068911b"
+    },
+    {
+      "label": "model-build",
+      "args": [
+        "--experimental-strip-types",
+        "scripts/build-owned-model-preparation.mjs",
+        "/private/tmp/bodyguard-owned-models.BYjeWH"
+      ],
+      "start": "2026-10-11T11:16:59.845Z",
+      "end": "2026-10-11T11:17:00.767Z",
+      "status": 0,
+      "signal": null,
+      "log": "model-build.log",
+      "sha256": "208c1663bb5b8fb8510bf64441630cac216f5ec3d6f7af95686af5e707cf67f6"
+    },
+    {
+      "label": "unchanged-guard-body-owned-input",
+      "status": 0,
+      "sha256": "d5427256c3d39b8ef3179c600682ef3f6ab1d94a986c761e0c8dd02ea436f0cb",
+      "log": "guard.log"
+    }
+  ],
+  "production": [
+    {
+      "file": "index-BVyDftrj.js",
+      "bytes": 355833,
+      "sha256": "dbdc8e3cb9ad8eeeae2519b7bbf37b84a230d4723607ec4817d38f5cee10c779"
+    },
+    {
+      "file": "index-dNUNBpCv.css",
+      "bytes": 31199,
+      "sha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e"
+    }
+  ],
+  "pass": true
+}

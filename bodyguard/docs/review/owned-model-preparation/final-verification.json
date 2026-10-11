@@ -1,0 +1,104 @@
+{
+  "createdAt": "2026-10-11T11:19:19.292Z",
+  "commands": [
+    {
+      "label": "unit",
+      "args": [
+        "node_modules/vitest/vitest.mjs",
+        "run"
+      ],
+      "start": "2026-10-11T11:18:53.454Z",
+      "end": "2026-10-11T11:19:10.392Z",
+      "status": 0,
+      "signal": null,
+      "log": "final-unit.log",
+      "sha256": "50f05064610c83ce67ec82fc8a4747eaa5e273de8a07b97b35184737405c590d"
+    },
+    {
+      "label": "types",
+      "args": [
+        "node_modules/typescript/bin/tsc",
+        "--noEmit"
+      ],
+      "start": "2026-10-11T11:19:10.394Z",
+      "end": "2026-10-11T11:19:17.225Z",
+      "status": 0,
+      "signal": null,
+      "log": "final-types.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "biome",
+      "args": [
+        "node_modules/@biomejs/biome/bin/biome",
+        "check",
+        "."
+      ],
+      "start": "2026-10-11T11:19:17.225Z",
+      "end": "2026-10-11T11:19:17.757Z",
+      "status": 0,
+      "signal": null,
+      "log": "final-biome.log",
+      "sha256": "e2db7198c9699b8ea01c5ae94d1bcebc46226957eb96a0fab310086793ecfd5c"
+    },
+    {
+      "label": "notices",
+      "args": [
+        "--test",
+        "scripts/check-build-notices.test.mjs"
+      ],
+      "start": "2026-10-11T11:19:17.757Z",
+      "end": "2026-10-11T11:19:18.141Z",
+      "status": 0,
+      "signal": null,
+      "log": "final-notices.log",
+      "sha256": "4b31fc55f47974d94a7f91b257c77739031257df6c206730c76117a46cd4ebfa"
+    },
+    {
+      "label": "actual-models",
+      "args": [
+        "--experimental-strip-types",
+        "scripts/check-owned-models.mjs"
+      ],
+      "start": "2026-10-11T11:19:18.141Z",
+      "end": "2026-10-11T11:19:18.314Z",
+      "status": 0,
+      "signal": null,
+      "log": "final-actual-models.log",
+      "sha256": "7b048e872f1252b2e7a54b834f075135832653168462712abfe40864ba10b57e"
+    },
+    {
+      "label": "model-build",
+      "args": [
+        "--experimental-strip-types",
+        "scripts/build-owned-model-preparation.mjs",
+        "/private/tmp/bodyguard-owned-models.BYjeWH"
+      ],
+      "start": "2026-10-11T11:19:18.315Z",
+      "end": "2026-10-11T11:19:19.221Z",
+      "status": 0,
+      "signal": null,
+      "log": "final-model-build.log",
+      "sha256": "69198d39d2f0cc9eccc46f2e617035de5499834d3aae6cd3b6896a9cca99c6c4"
+    },
+    {
+      "label": "unchanged-guard-body-owned-input",
+      "status": 0,
+      "sha256": "d5427256c3d39b8ef3179c600682ef3f6ab1d94a986c761e0c8dd02ea436f0cb",
+      "log": "final-guard.log"
+    }
+  ],
+  "production": [
+    {
+      "file": "index-BVyDftrj.js",
+      "bytes": 355833,
+      "sha256": "dbdc8e3cb9ad8eeeae2519b7bbf37b84a230d4723607ec4817d38f5cee10c779"
+    },
+    {
+      "file": "index-dNUNBpCv.css",
+      "bytes": 31199,
+      "sha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e"
+    }
+  ],
+  "pass": true
+}

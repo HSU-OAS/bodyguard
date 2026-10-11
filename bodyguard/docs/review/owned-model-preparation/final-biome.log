@@ -1,0 +1,360 @@
+Checked 374 files in 358ms. No fixes applied.
+Found 16 infos.
+e2e/authdashboard.spec.ts:30:31 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    28 │ async function post(context: BrowserContext, path: string, data?: unknown) {
+    29 │   const csrf = await (await context.request.get('/api/v1/auth/csrf')).json()
+  > 30 │   return context.request.post('/api/v1' + path, {
+       │                               ^^^^^^^^^^^^^^^^
+    31 │     headers: { Origin: origin, 'X-CSRF-Token': csrf.csrf_token },
+    32 │     data,
+  
+  i Unsafe fix: Use a template literal.
+  
+     28  28 │   async function post(context: BrowserContext, path: string, data?: unknown) {
+     29  29 │     const csrf = await (await context.request.get('/api/v1/auth/csrf')).json()
+     30     │ - ··return·context.request.post('/api/v1'·+·path,·{
+         30 │ + ··return·context.request.post(`/api/v1${path}`,·{
+     31  31 │       headers: { Origin: origin, 'X-CSRF-Token': csrf.csrf_token },
+     32  32 │       data,
+  
+
+scripts/collect-inference-warmup.mjs:61:16 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    59 │ }
+    60 │ function archive(name, bytes) {
+  > 61 │   const file = 'evidence/' + name + '.gz',
+       │                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    62 │     compressed = gzipSync(bytes)
+    63 │   mkdirSync(resolve(destination, 'evidence', name, '..'), { recursive: true })
+  
+  i Unsafe fix: Use a template literal.
+  
+    59 59 │   }
+    60 60 │   function archive(name, bytes) {
+    61    │ - ··const·file·=·'evidence/'·+·name·+·'.gz',
+       61 │ + ··const·file·=·`evidence/${name}.gz`,
+    62 62 │       compressed = gzipSync(bytes)
+    63 63 │     mkdirSync(resolve(destination, 'evidence', name, '..'), { recursive: true })
+  
+
+scripts/collect-inference-warmup.mjs:76:11 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    74 │   const file = resolve(entry.parentPath, entry.name)
+    75 │   const name = file.slice(proof.length + 1)
+  > 76 │   archive('run/' + name, readFileSync(file))
+       │           ^^^^^^^^^^^^^
+    77 │ }
+    78 │ for (const file of [...Object.keys(checks.source), 'scripts/collect-inference-warmup.mjs']) {
+  
+  i Unsafe fix: Use a template literal.
+  
+    74 74 │     const file = resolve(entry.parentPath, entry.name)
+    75 75 │     const name = file.slice(proof.length + 1)
+    76    │ - ··archive('run/'·+·name,·readFileSync(file))
+       76 │ + ··archive(`run/${name}`,·readFileSync(file))
+    77 77 │   }
+    78 78 │   for (const file of [...Object.keys(checks.source), 'scripts/collect-inference-warmup.mjs']) {
+  
+
+scripts/collect-inference-warmup.mjs:80:12 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    78 │ for (const file of [...Object.keys(checks.source), 'scripts/collect-inference-warmup.mjs']) {
+    79 │   const bytes = readFileSync(resolve(root, file)),
+  > 80 │     name = 'source/' + file
+       │            ^^^^^^^^^^^^^^^^
+    81 │   archive(name, bytes)
+    82 │   manifest.source['bodyguard/frontend/' + file] = { artifact: name, sha256: sha(bytes) }
+  
+  i Unsafe fix: Use a template literal.
+  
+    78 78 │   for (const file of [...Object.keys(checks.source), 'scripts/collect-inference-warmup.mjs']) {
+    79 79 │     const bytes = readFileSync(resolve(root, file)),
+    80    │ - ····name·=·'source/'·+·file
+       80 │ + ····name·=·`source/${file}`
+    81 81 │     archive(name, bytes)
+    82 82 │     manifest.source['bodyguard/frontend/' + file] = { artifact: name, sha256: sha(bytes) }
+  
+
+scripts/collect-inference-warmup.mjs:82:19 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    80 │     name = 'source/' + file
+    81 │   archive(name, bytes)
+  > 82 │   manifest.source['bodyguard/frontend/' + file] = { artifact: name, sha256: sha(bytes) }
+       │                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    83 │ }
+    84 │ for (const file of ['docs/review/native-inference-warmup/verify.mjs']) {
+  
+  i Unsafe fix: Use a template literal.
+  
+    80 80 │       name = 'source/' + file
+    81 81 │     archive(name, bytes)
+    82    │ - ··manifest.source['bodyguard/frontend/'·+·file]·=·{·artifact:·name,·sha256:·sha(bytes)·}
+       82 │ + ··manifest.source[`bodyguard/frontend/${file}`]·=·{·artifact:·name,·sha256:·sha(bytes)·}
+    83 83 │   }
+    84 84 │   for (const file of ['docs/review/native-inference-warmup/verify.mjs']) {
+  
+
+scripts/collect-inference-warmup.mjs:86:12 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    84 │ for (const file of ['docs/review/native-inference-warmup/verify.mjs']) {
+    85 │   const bytes = readFileSync(resolve(repo, 'bodyguard', file)),
+  > 86 │     name = 'source/bodyguard/' + file
+       │            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    87 │   archive(name, bytes)
+    88 │   manifest.source['bodyguard/' + file] = { artifact: name, sha256: sha(bytes) }
+  
+  i Unsafe fix: Use a template literal.
+  
+    84 84 │   for (const file of ['docs/review/native-inference-warmup/verify.mjs']) {
+    85 85 │     const bytes = readFileSync(resolve(repo, 'bodyguard', file)),
+    86    │ - ····name·=·'source/bodyguard/'·+·file
+       86 │ + ····name·=·`source/bodyguard/${file}`
+    87 87 │     archive(name, bytes)
+    88 88 │     manifest.source['bodyguard/' + file] = { artifact: name, sha256: sha(bytes) }
+  
+
+scripts/collect-inference-warmup.mjs:88:19 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    86 │     name = 'source/bodyguard/' + file
+    87 │   archive(name, bytes)
+  > 88 │   manifest.source['bodyguard/' + file] = { artifact: name, sha256: sha(bytes) }
+       │                   ^^^^^^^^^^^^^^^^^^^
+    89 │ }
+    90 │ writeFileSync(resolve(destination, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n', {
+  
+  i Unsafe fix: Use a template literal.
+  
+    86 86 │       name = 'source/bodyguard/' + file
+    87 87 │     archive(name, bytes)
+    88    │ - ··manifest.source['bodyguard/'·+·file]·=·{·artifact:·name,·sha256:·sha(bytes)·}
+       88 │ + ··manifest.source[`bodyguard/${file}`]·=·{·artifact:·name,·sha256:·sha(bytes)·}
+    89 89 │   }
+    90 90 │   writeFileSync(resolve(destination, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n', {
+  
+
+scripts/collect-inference-warmup.mjs:90:54 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    88 │   manifest.source['bodyguard/' + file] = { artifact: name, sha256: sha(bytes) }
+    89 │ }
+  > 90 │ writeFileSync(resolve(destination, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n', {
+       │                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    91 │   flag: 'wx',
+    92 │ })
+  
+  i Unsafe fix: Use a template literal.
+  
+    88 88 │     manifest.source['bodyguard/' + file] = { artifact: name, sha256: sha(bytes) }
+    89 89 │   }
+    90    │ - writeFileSync(resolve(destination,·'manifest.json'),·JSON.stringify(manifest,·null,·2)·+·'\n',·{
+       90 │ + writeFileSync(resolve(destination,·'manifest.json'),·`${JSON.stringify(manifest,·null,·2)}\n`,·{
+    91 91 │     flag: 'wx',
+    92 92 │   })
+  
+
+scripts/collect-motion-preview-proof.mjs:105:3 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    103 │ writeFileSync(join(output, 'manifest.json'), JSON.stringify(manifest, null, 2), { flag: 'wx' })
+    104 │ process.stdout.write(
+  > 105 │   JSON.stringify({
+        │   ^^^^^^^^^^^^^^^^
+  > 106 │     recordedArtifacts: Object.keys(manifest.artifacts).length,
+  > 107 │     sourceFiles: source.length,
+  > 108 │     finalBrowserAssertions: 48,
+  > 109 │   }) + '\n',
+        │   ^^^^^^^^^
+    110 │ )
+    111 │ 
+  
+  i Unsafe fix: Use a template literal.
+  
+    103 103 │   writeFileSync(join(output, 'manifest.json'), JSON.stringify(manifest, null, 2), { flag: 'wx' })
+    104 104 │   process.stdout.write(
+    105     │ - ··JSON.stringify({
+        105 │ + ··`${JSON.stringify({
+    106 106 │       recordedArtifacts: Object.keys(manifest.artifacts).length,
+    107 107 │       sourceFiles: source.length,
+    108 108 │       finalBrowserAssertions: 48,
+    109     │ - ··})·+·'\n',
+        109 │ + ··})}\n`,
+    110 110 │   )
+    111 111 │   
+  
+
+scripts/test-inference-warmup.mjs:54:23 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    52 │     bytes = probe
+    53 │     mime = 'application/javascript'
+  > 54 │   } else if (path === '/assets/' + worker) {
+       │                       ^^^^^^^^^^^^^^^^^^^
+    55 │     bytes = readFileSync(resolve(proof, 'probe/assets', worker))
+    56 │     mime = 'application/javascript'
+  
+  i Unsafe fix: Use a template literal.
+  
+     52  52 │       bytes = probe
+     53  53 │       mime = 'application/javascript'
+     54     │ - ··}·else·if·(path·===·'/assets/'·+·worker)·{
+         54 │ + ··}·else·if·(path·===·`/assets/${worker}`)·{
+     55  55 │       bytes = readFileSync(resolve(proof, 'probe/assets', worker))
+     56  56 │       mime = 'application/javascript'
+  
+
+scripts/test-inference-warmup.mjs:80:16 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    78 │   server.listen(0, '127.0.0.1', yes)
+    79 │ })
+  > 80 │ const origin = 'http://127.0.0.1:' + server.address().port
+       │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    81 │ let browser,
+    82 │   failed = false
+  
+  i Unsafe fix: Use a template literal.
+  
+     78  78 │     server.listen(0, '127.0.0.1', yes)
+     79  79 │   })
+     80     │ - const·origin·=·'http://127.0.0.1:'·+·server.address().port
+         80 │ + const·origin·=·`http://127.0.0.1:${server.address().port}`
+     81  81 │   let browser,
+     82  82 │     failed = false
+  
+
+scripts/test-inference-warmup.mjs:118:23 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    116 │           .request()
+    117 │           .url()
+  > 118 │           .startsWith(origin + '/')
+        │                       ^^^^^^^^^^^^
+    119 │       )
+    120 │         return route.continue()
+  
+  i Unsafe fix: Use a template literal.
+  
+    116 116 │             .request()
+    117 117 │             .url()
+    118     │ - ··········.startsWith(origin·+·'/')
+        118 │ + ··········.startsWith(`${origin}/`)
+    119 119 │         )
+    120 120 │           return route.continue()
+  
+
+scripts/test-inference-warmup.mjs:274:25 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    272 │     defaultChanged: false,
+    273 │   }
+  > 274 │   writeFileSync(output, JSON.stringify(report, null, 2) + '\n', { flag: 'wx' })
+        │                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    275 │   console.log(
+    276 │     JSON.stringify(
+  
+  i Unsafe fix: Use a template literal.
+  
+    272 272 │       defaultChanged: false,
+    273 273 │     }
+    274     │ - ··writeFileSync(output,·JSON.stringify(report,·null,·2)·+·'\n',·{·flag:·'wx'·})
+        274 │ + ··writeFileSync(output,·`${JSON.stringify(report,·null,·2)}\n`,·{·flag:·'wx'·})
+    275 275 │     console.log(
+    276 276 │       JSON.stringify(
+  
+
+scripts/verify-inference-warmup.mjs:41:33 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    39 │   const result = spawnSync(process.execPath, args, { cwd: root, encoding: 'utf8' })
+    40 │   const log = `${result.stdout ?? ''}${result.stderr ?? ''}`
+  > 41 │   writeFileSync(resolve(checks, name + '.log'), log, { flag: 'wx' })
+       │                                 ^^^^^^^^^^^^^
+    42 │   report.commands.push({
+    43 │     name,
+  
+  i Unsafe fix: Use a template literal.
+  
+    39 39 │     const result = spawnSync(process.execPath, args, { cwd: root, encoding: 'utf8' })
+    40 40 │     const log = `${result.stdout ?? ''}${result.stderr ?? ''}`
+    41    │ - ··writeFileSync(resolve(checks,·name·+·'.log'),·log,·{·flag:·'wx'·})
+       41 │ + ··writeFileSync(resolve(checks,·`${name}.log`),·log,·{·flag:·'wx'·})
+    42 42 │     report.commands.push({
+    43 43 │       name,
+  
+
+scripts/verify-inference-warmup.mjs:64:47 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    62 │ )
+    63 │ report.pass = report.commands.every((command) => command.status === 0)
+  > 64 │ writeFileSync(resolve(checks, 'report.json'), JSON.stringify(report, null, 2) + '\n', {
+       │                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    65 │   flag: 'wx',
+    66 │ })
+  
+  i Unsafe fix: Use a template literal.
+  
+    62 62 │   )
+    63 63 │   report.pass = report.commands.every((command) => command.status === 0)
+    64    │ - writeFileSync(resolve(checks,·'report.json'),·JSON.stringify(report,·null,·2)·+·'\n',·{
+       64 │ + writeFileSync(resolve(checks,·'report.json'),·`${JSON.stringify(report,·null,·2)}\n`,·{
+    65 65 │     flag: 'wx',
+    66 66 │   })
+  
+
+scripts/verify-motion-preview-proof.mjs:41:3 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    39 │   }
+    40 │ process.stdout.write(
+  > 41 │   JSON.stringify({
+       │   ^^^^^^^^^^^^^^^^
+  > 42 │     artifacts: Object.keys(manifest.artifacts).length,
+  > 43 │     sourceFiles: Object.keys(manifest.source).length,
+  > 44 │     current: process.argv.includes('--current'),
+  > 45 │     passed: true,
+  > 46 │   }) + '\n',
+       │   ^^^^^^^^^
+    47 │ )
+    48 │ 
+  
+  i Unsafe fix: Use a template literal.
+  
+    39 39 │     }
+    40 40 │   process.stdout.write(
+    41    │ - ··JSON.stringify({
+       41 │ + ··`${JSON.stringify({
+    42 42 │       artifacts: Object.keys(manifest.artifacts).length,
+    43 43 │       sourceFiles: Object.keys(manifest.source).length,
+    44 44 │       current: process.argv.includes('--current'),
+    45 45 │       passed: true,
+    46    │ - ··})·+·'\n',
+       46 │ + ··})}\n`,
+    47 47 │   )
+    48 48 │   
+  
+

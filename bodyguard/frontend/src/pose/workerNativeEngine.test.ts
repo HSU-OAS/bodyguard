@@ -2,6 +2,7 @@
 import { Matrix4 } from 'three'
 import { afterEach, beforeEach, expect, it, vi } from 'vitest'
 import { ResourceCleanupError } from '../coaching/resources'
+import { MODEL_ASSETS, type ModelSelection } from './ownedModelAssets'
 import { prepareWorkerNativeEngine } from './workerNativeEngine'
 
 const sdk = vi.hoisted(() => ({ resolve: vi.fn(), body: vi.fn(), face: vi.fn(), hands: vi.fn() }))
@@ -12,6 +13,16 @@ vi.mock('@mediapipe/tasks-vision', () => ({
   GestureRecognizer: { createFromOptions: sdk.hands },
 }))
 const config = { model: 'lite', face: true, hands: true, matrixLayout: 'column-major' } as const
+function prepare(
+  config: ModelSelection & { matrixLayout: 'column-major' | 'row-major' },
+  signal: AbortSignal,
+) {
+  return prepareWorkerNativeEngine(config, signal, {
+    body: new ArrayBuffer(MODEL_ASSETS[config.model].bytes),
+    ...(config.face ? { face: new ArrayBuffer(MODEL_ASSETS.face.bytes) } : {}),
+    ...(config.hands ? { hands: new ArrayBuffer(MODEL_ASSETS.hands.bytes) } : {}),
+  })
+}
 const points = (length: number) => Array.from({ length }, () => ({ x: 0.5, y: 0.4, z: 0 }))
 function fixture() {
   const result = { landmarks: [points(33)], worldLandmarks: [points(33)], close: vi.fn() }
@@ -52,16 +63,17 @@ afterEach(() => vi.unstubAllGlobals())
 it('resolves fixed assets from the creator origin even inside an inherited-policy Blob worker', async () => {
   vi.stubGlobal('self', { location: { href: 'blob:https://owned.invalid/owned' } })
   const f = fixture()
-  const engine = await prepareWorkerNativeEngine(config, f.abort.signal)
+  const engine = await prepare(config, f.abort.signal)
   expect(sdk.resolve).toHaveBeenCalledWith('https://owned.invalid/mediapipe/wasm')
-  expect(sdk.body.mock.calls[0][1].baseOptions.modelAssetPath).toBe(
-    'https://owned.invalid/models/pose_landmarker_lite.task',
+  expect(sdk.body.mock.calls[0][1].baseOptions.modelAssetBuffer.byteLength).toBe(
+    MODEL_ASSETS.lite.bytes,
   )
+  expect(sdk.body.mock.calls[0][1].baseOptions).not.toHaveProperty('modelAssetPath')
   engine.dispose()
 })
 it('keeps fixed same-origin VIDEO options and copies each SDK result before next call/release', async () => {
   const f = fixture(),
-    engine = await prepareWorkerNativeEngine(config, f.abort.signal)
+    engine = await prepare(config, f.abort.signal)
   f.face.detectForVideo.mockImplementation(() => {
     f.result.landmarks[0][0].x = 99
     return f.faceResult
@@ -83,7 +95,7 @@ it('keeps fixed same-origin VIDEO options and copies each SDK result before next
   expect(sdk.resolve).toHaveBeenCalledWith('https://owned.invalid/mediapipe/wasm')
   expect(sdk.body.mock.calls[0][1]).toMatchObject({
     baseOptions: {
-      modelAssetPath: 'https://owned.invalid/models/pose_landmarker_lite.task',
+      modelAssetBuffer: expect.any(Uint8Array),
       delegate: 'GPU',
     },
     runningMode: 'VIDEO',
@@ -103,10 +115,7 @@ it('keeps fixed same-origin VIDEO options and copies each SDK result before next
 })
 it('keeps explicit optional features disabled', async () => {
   const f = fixture(),
-    engine = await prepareWorkerNativeEngine(
-      { ...config, face: false, hands: false },
-      f.abort.signal,
-    )
+    engine = await prepare({ ...config, face: false, hands: false }, f.abort.signal)
   const result = await engine.detect(f.frame, 25)
   expect(result).not.toHaveProperty('headOrientation')
   expect(result).not.toHaveProperty('hands')
@@ -116,7 +125,7 @@ it('keeps explicit optional features disabled', async () => {
 })
 it('does not bind head/hands to missing or multiple bodies', async () => {
   const f = fixture(),
-    engine = await prepareWorkerNativeEngine(config, f.abort.signal)
+    engine = await prepare(config, f.abort.signal)
   for (const landmarks of [[], [points(33), points(33)]]) {
     f.result.landmarks = landmarks
     f.result.worldLandmarks = landmarks
@@ -127,10 +136,13 @@ it('does not bind head/hands to missing or multiple bodies', async () => {
 it('tries GPU then CPU without disabling features or changing selected model', async () => {
   const f = fixture()
   sdk.body.mockRejectedValueOnce(new Error('PRIVATE_GPU'))
-  const engine = await prepareWorkerNativeEngine({ ...config, model: 'full' }, f.abort.signal)
+  const engine = await prepare({ ...config, model: 'full' }, f.abort.signal)
   expect(sdk.body.mock.calls.map((call) => call[1].baseOptions.delegate)).toEqual(['GPU', 'CPU'])
-  expect(sdk.body.mock.calls[1][1].baseOptions.modelAssetPath).toBe(
-    'https://owned.invalid/models/pose_landmarker_full.task',
+  expect(sdk.body.mock.calls[1][1].baseOptions.modelAssetBuffer.byteLength).toBe(
+    MODEL_ASSETS.full.bytes,
+  )
+  expect(sdk.body.mock.calls[0][1].baseOptions.modelAssetBuffer.buffer).toBe(
+    sdk.body.mock.calls[1][1].baseOptions.modelAssetBuffer.buffer,
   )
   expect(sdk.face).toHaveBeenCalledOnce()
   expect(sdk.hands).toHaveBeenCalledOnce()
@@ -139,9 +151,7 @@ it('tries GPU then CPU without disabling features or changing selected model', a
 it('reclaims partial body and face when hands preparation fails', async () => {
   const f = fixture()
   sdk.hands.mockRejectedValue(new Error('PRIVATE_HANDS'))
-  await expect(prepareWorkerNativeEngine(config, f.abort.signal)).rejects.toThrow(
-    'Worker inference unavailable',
-  )
+  await expect(prepare(config, f.abort.signal)).rejects.toThrow('Worker inference unavailable')
   expect(f.body.close).toHaveBeenCalledOnce()
   expect(f.face.close).toHaveBeenCalledOnce()
 })
@@ -151,16 +161,14 @@ it('reclaims a body resolving after abort, without preparing face or CPU retry',
     f.abort.abort()
     return f.body
   })
-  await expect(prepareWorkerNativeEngine(config, f.abort.signal)).rejects.toThrow(
-    'Worker inference unavailable',
-  )
+  await expect(prepare(config, f.abort.signal)).rejects.toThrow('Worker inference unavailable')
   expect(sdk.body).toHaveBeenCalledOnce()
   expect(sdk.face).not.toHaveBeenCalled()
   expect(f.body.close).toHaveBeenCalledOnce()
 })
 it('reports native result close failures as cleanup failures', async () => {
   const f = fixture(),
-    engine = await prepareWorkerNativeEngine(config, f.abort.signal)
+    engine = await prepare(config, f.abort.signal)
   f.result.close.mockImplementation(() => {
     throw new Error('PRIVATE_RESULT')
   })
@@ -173,9 +181,7 @@ it('attempts every task release and never converts cleanup failure to success', 
   f.face.close.mockImplementation(() => {
     throw new Error('PRIVATE_CLOSE')
   })
-  await expect(prepareWorkerNativeEngine(config, f.abort.signal)).rejects.toThrow(
-    ResourceCleanupError,
-  )
+  await expect(prepare(config, f.abort.signal)).rejects.toThrow(ResourceCleanupError)
   expect(f.face.close).toHaveBeenCalledOnce()
   expect(f.body.close).toHaveBeenCalledOnce()
 })

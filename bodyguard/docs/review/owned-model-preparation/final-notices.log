@@ -1,0 +1,26 @@
+✔ valid evidence is scoped, deterministic and never approval (11.005416ms)
+✔ rejects empty (4.097708ms)
+✔ rejects non-array (3.009917ms)
+✔ rejects empty text (2.921958ms)
+✔ rejects wrong text (3.168084ms)
+✔ rejects wrong identifier (3.475959ms)
+✔ rejects wrong version (3.399292ms)
+✔ rejects outside name (2.890667ms)
+✔ rejects extra path (3.020083ms)
+✔ rejects duplicate identity (3.666792ms)
+✔ rejects omission from actual bundled package inventory (4.109ms)
+✔ supports scoped packages and distinguishes installed versions (5.471833ms)
+✔ rejects notice symlink outside installed root (3.32225ms)
+✔ rejects notice symlink to credential-shaped file inside installed root (3.279041ms)
+✔ license instructions remain data, never executable (5.309375ms)
+✔ rejects changed CSS license and preserves source text (4.664167ms)
+✔ CSS plugin is build-only and requires actual CSS output (6.154542ms)
+✔ CLI missing-file error does not expose metadata or paths (114.682208ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 330.74575

@@ -2,6 +2,7 @@
 
 import { ResourceCleanupError } from '../coaching/resources'
 import { POSE_MODELS } from './constants'
+import { type OwnedModelAssets, validateOwnedModelAssets } from './ownedModelAssets'
 import type { WorkerInferenceConfig, WorkerPoseData } from './workerInference'
 
 export type WorkerInferenceEngine = Readonly<{
@@ -10,7 +11,11 @@ export type WorkerInferenceEngine = Readonly<{
 }>
 export function createWorkerInferenceRuntime(
   ports: Readonly<{
-    prepare(config: WorkerInferenceConfig, signal: AbortSignal): Promise<WorkerInferenceEngine>
+    prepare(
+      config: WorkerInferenceConfig,
+      signal: AbortSignal,
+      assets: OwnedModelAssets,
+    ): Promise<WorkerInferenceEngine>
     send(message: unknown): void
   }>,
 ) {
@@ -71,6 +76,7 @@ export function createWorkerInferenceRuntime(
         )
           throw new Error()
         generation = message.generation as number
+        const assets = validateOwnedModelAssets(config, message.assets)
         state = 'preparing'
         preparing = Promise.resolve()
           .then(() =>
@@ -82,6 +88,7 @@ export function createWorkerInferenceRuntime(
                 matrixLayout: config.matrixLayout,
               }),
               abort.signal,
+              assets,
             ),
           )
           .then((loaded) => {

@@ -9,7 +9,8 @@ import { readHeadOrientation } from '../avatar/headOrientationRig'
 import { ResourceCleanupError } from '../coaching/resources'
 import { JOINT_COUNT } from '../posture/landmarks'
 import { readNativeHands } from './bodyHandVideoSource'
-import { FACE_MODEL_PATH, GESTURE_MODEL_PATH, POSE_MODELS, WASM_BASE_PATH } from './constants'
+import { WASM_BASE_PATH } from './constants'
+import { type OwnedModelAssets, validateOwnedModelAssets } from './ownedModelAssets'
 import { copyPosePoints } from './ownedPoseFrame'
 import type { WorkerInferenceConfig, WorkerPoseData } from './workerInference'
 import type { WorkerInferenceEngine } from './workerInferenceRuntime'
@@ -17,6 +18,7 @@ import type { WorkerInferenceEngine } from './workerInferenceRuntime'
 export async function prepareWorkerNativeEngine(
   config: WorkerInferenceConfig,
   signal: AbortSignal,
+  modelAssets: OwnedModelAssets,
 ): Promise<WorkerInferenceEngine> {
   const releases: (() => void)[] = []
   let disposed = false,
@@ -42,6 +44,7 @@ export async function prepareWorkerNativeEngine(
   }
   try {
     signal.throwIfAborted()
+    const assets = validateOwnedModelAssets(config, modelAssets)
     if (typeof OffscreenCanvas !== 'function') throw new Error()
     // Fixed same-origin absolute assets. A worker has no DOM/import-meta-relative model URL.
     const path = (asset: string) => new URL(asset, `${new URL(self.location.href).origin}/`).href
@@ -59,18 +62,21 @@ export async function prepareWorkerNativeEngine(
       await load((delegate) =>
         PoseLandmarker.createFromOptions(vision, {
           canvas: new OffscreenCanvas(1, 1),
-          baseOptions: { modelAssetPath: path(POSE_MODELS[config.model].path), delegate },
+          baseOptions: { modelAssetBuffer: new Uint8Array(assets.body), delegate },
           runningMode: 'VIDEO',
           numPoses: 2,
         }),
       ),
     )
-    const face = config.face
+    const face = assets.face
       ? own(
           await load((delegate) =>
             FaceLandmarker.createFromOptions(vision, {
               canvas: new OffscreenCanvas(1, 1),
-              baseOptions: { modelAssetPath: path(FACE_MODEL_PATH), delegate },
+              baseOptions: {
+                modelAssetBuffer: new Uint8Array(assets.face as ArrayBuffer),
+                delegate,
+              },
               runningMode: 'VIDEO',
               numFaces: 1,
               outputFacialTransformationMatrixes: true,
@@ -79,12 +85,15 @@ export async function prepareWorkerNativeEngine(
           ),
         )
       : undefined
-    const hands = config.hands
+    const hands = assets.hands
       ? own(
           await load((delegate) =>
             GestureRecognizer.createFromOptions(vision, {
               canvas: new OffscreenCanvas(1, 1),
-              baseOptions: { modelAssetPath: path(GESTURE_MODEL_PATH), delegate },
+              baseOptions: {
+                modelAssetBuffer: new Uint8Array(assets.hands as ArrayBuffer),
+                delegate,
+              },
               runningMode: 'VIDEO',
               numHands: 2,
             }),

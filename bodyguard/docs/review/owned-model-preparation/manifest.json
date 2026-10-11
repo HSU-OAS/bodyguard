@@ -1,0 +1,129 @@
+{
+  "base": "8a658be0f720c61069d35cacf384568cc2fe001e",
+  "createdAt": "2026-10-11T11:19:57.759Z",
+  "artifacts": [
+    {
+      "file": "first.json",
+      "bytes": 3040,
+      "sha256": "6bcb4724086e8de882b69c1642dfdc5663504c1b2e69fe4085da1ba80c57fac2"
+    },
+    {
+      "file": "accepted.json",
+      "bytes": 7515,
+      "sha256": "00b0f0855cefefaf01319ff70b2e0ec51e2a4a35a4befe017c030cffec41f446"
+    },
+    {
+      "file": "verification.json",
+      "bytes": 2503,
+      "sha256": "b65dd6b2907c52c18f884753a66b28eea634a4ff906f84b106d526e0b653236f"
+    },
+    {
+      "file": "final-verification.json",
+      "bytes": 2936,
+      "sha256": "0647f61b9f97392ae52b8e39185f147a154f3a48b0ba11bb21d852c64a599528"
+    },
+    {
+      "file": "final-unit.log",
+      "bytes": 577,
+      "sha256": "50f05064610c83ce67ec82fc8a4747eaa5e273de8a07b97b35184737405c590d"
+    },
+    {
+      "file": "final-types.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "final-biome.log",
+      "bytes": 16140,
+      "sha256": "e2db7198c9699b8ea01c5ae94d1bcebc46226957eb96a0fab310086793ecfd5c"
+    },
+    {
+      "file": "final-notices.log",
+      "bytes": 1116,
+      "sha256": "4b31fc55f47974d94a7f91b257c77739031257df6c206730c76117a46cd4ebfa"
+    },
+    {
+      "file": "final-actual-models.log",
+      "bytes": 824,
+      "sha256": "7b048e872f1252b2e7a54b834f075135832653168462712abfe40864ba10b57e"
+    },
+    {
+      "file": "final-model-build.log",
+      "bytes": 1531,
+      "sha256": "69198d39d2f0cc9eccc46f2e617035de5499834d3aae6cd3b6896a9cca99c6c4"
+    },
+    {
+      "file": "final-guard.log",
+      "bytes": 1179,
+      "sha256": "d5427256c3d39b8ef3179c600682ef3f6ab1d94a986c761e0c8dd02ea436f0cb"
+    },
+    {
+      "file": "before-controlled-download.json",
+      "bytes": 6588,
+      "sha256": "ce00122b98e4eda54c7cd4c16a36773939b4155acecbbc999020f96359967069"
+    },
+    {
+      "file": "camera-flow.json",
+      "bytes": 1213,
+      "sha256": "ce3eb3de46c36d120a8aafd03c3040ee6228e32b329837e9fad661290e91bfe3"
+    },
+    {
+      "file": "camera-stopped-1440.png",
+      "bytes": 80196,
+      "sha256": "4f5d09c5956bafa7ecf003a589d38dcce2f6add0858e8ff9bfccd5202e25fb3e"
+    },
+    {
+      "file": "camera-denied-1440.png",
+      "bytes": 83714,
+      "sha256": "81464cdca4caeb0d2a4cb7b9ef7b2cadbc89815b0282b5a94c01f5e16e816087"
+    },
+    {
+      "file": "camera-stopped-800.png",
+      "bytes": 65603,
+      "sha256": "d6a85e845ff675ba89528d1b68ab41bc9bcb57e404ed255a698e724ff1d3e13e"
+    }
+  ],
+  "source": {
+    "src/pose/ownedModelAssets.ts": "a53585fe1c55690a12b0318bf20720e912400717fc808459814668f6cc3d586a",
+    "src/pose/ownedModelAssets.test.ts": "20eeb895d21682599a197b6940ad41737f65715de11cbb0991965731ccc6b03e",
+    "src/pose/workerInference.ts": "c358cc2431c598e7f2ad6911a698a7bb3f468d6d83314edd2f49e2a7192bdf54",
+    "src/pose/workerInference.test.ts": "c2bf9069bc7c46e01b4dca0e4d819e87d0fa93cb80483d29c21a2c40e6f46ebd",
+    "src/pose/workerInferenceRuntime.ts": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+    "src/pose/workerInferenceRuntime.test.ts": "08a3e9d6d9cb320903e5e0b85b918590d0f4a7593e36365bbdabde64ab8fc3fb",
+    "src/pose/workerNativeEngine.ts": "7458d43da056ab7a14a487e41aef8689ae79afb0c14c22ebddd4d0a18a2217fe",
+    "src/pose/workerNativeEngine.test.ts": "5924798c0bf09f75a88ccde63ab3f734dac89935fab1bfa548b4a48e44b2fb2e",
+    "e2e/fixtures/ownedModelProbe.ts": "95c947d3f22d926a2553d01df4da0acc5a6d98fada8b6910fede192d1b467bf6",
+    "e2e/fixtures/ownedModelProbe.html": "72ff4194bc106b1a10cca5076754732f4d9eb30499486962a83a1cede2924399",
+    "scripts/build-owned-model-preparation.mjs": "81cbf619ce514616c05bb92343cd435f959fcc8eb6c99f3b402a75fc3c338374",
+    "scripts/check-owned-models.mjs": "e945dedb492b39c1389ccdcff4379d2e34569c4615168df9cf8d409ea379fdb6",
+    "scripts/test-owned-model-preparation.mjs": "4855d3339ae2c7a0498720cd59792aed49c7d3f29a35d8d4ecec7a972bbad093"
+  },
+  "localBundles": [
+    {
+      "file": "nativeInference.worker-uTAJCKN7.js",
+      "bytes": 246213,
+      "sha256": "9b4bf0e240ea1de65e845836c4f9b2d3d5229f26a5c8cdaaefa71ab22579fb18"
+    },
+    {
+      "file": "ownedModelProbe-BAAh5jkP.js",
+      "bytes": 8386,
+      "sha256": "b86012162ce0d9bb2a3dfe6fe4fad9e82354b5345322017d0900e077c9687011"
+    },
+    {
+      "file": "ownedModelProbe-BBHHctxH.js",
+      "bytes": 8265,
+      "sha256": "3241a49370bbb03b851de20d3668791ea17a85c8ea717b9f12d8c6aa12a0cdaa"
+    }
+  ],
+  "localOnlyBundles": true,
+  "modelBytesChecked": 5,
+  "modelReadBudgetMs": 30000,
+  "workerInitInferCleanupMs": 5000,
+  "oldStartupP2Resolved": false,
+  "actualHuman": false,
+  "actualCamera": false,
+  "avatar": false,
+  "providerConnections": false,
+  "operationalChanges": false,
+  "stages1to6Complete": false
+}
