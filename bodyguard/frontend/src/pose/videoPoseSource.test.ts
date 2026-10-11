@@ -24,7 +24,7 @@ const deferred = <T>() => {
   })
   return { promise, resolve }
 }
-function setup() {
+function setup(afterAt?: number) {
   const abort = new AbortController()
   const track = Object.assign(new EventTarget(), {
     readyState: 'live',
@@ -50,7 +50,7 @@ function setup() {
   const detect = vi.fn().mockReturnValue(result)
   const source = createVideoPoseSource(
     { generation: 1, signal: abort.signal },
-    { video, stream, detect },
+    { video, stream, detect, afterAt },
   )
   const emit = (now = 10, sequence = 1, mediaTime = 0.1) => {
     callback?.(now, {
@@ -75,6 +75,54 @@ function setup() {
   }
 }
 describe('owned decoded video pose source', () => {
+  it.each([-1, NaN, Infinity, -Infinity])(
+    'rejects invalid detector handoff %s before any capture',
+    (afterAt) => {
+      expect(() => setup(afterAt)).toThrow('Invalid video pose source')
+      expect(FakeFrame.made).toHaveLength(0)
+    },
+  )
+  it('copies the finite handoff including zero rather than reading a mutable later value', async () => {
+    const f = setup()
+    const ports = { video: f.video, stream: f.stream, detect: f.detect, afterAt: 0 }
+    const source = createVideoPoseSource({ generation: 2, signal: f.abort.signal }, ports)
+    ports.afterAt = 50
+    const equal = source.read()
+    f.emit(0)
+    expect(await equal).toBeNull()
+    const next = source.read()
+    f.emit(1, 2, 0.2)
+    expect(await next).toMatchObject({ generation: 2, sequence: 2, at: 1 })
+    expect(f.detect.mock.calls[0][1]).toBe(1)
+    await source.dispose()
+    await f.source.dispose()
+  })
+  it('skips the detector warmup timestamp and earlier decoded input before allocating or detecting', async () => {
+    const f = setup(10)
+    // Same ordering contract as the real Worker. No actual pixels/SDK in this unit.
+    let detectorAt = 10
+    f.detect.mockImplementation((_input, at) => {
+      if (at <= detectorAt) throw new Error('Worker inference unavailable')
+      detectorAt = at
+      return f.result
+    })
+    for (const [now, sequence, mediaTime] of [
+      [10, 1, 0.1],
+      [9, 2, 0.2],
+    ]) {
+      const read = f.source.read()
+      f.emit(now, sequence, mediaTime)
+      expect(await read).toBeNull()
+      expect(FakeFrame.made).toHaveLength(0)
+      expect(f.detect).not.toHaveBeenCalled()
+    }
+    const read = f.source.read()
+    f.emit(11, 3, 0.3)
+    expect(await read).toMatchObject({ generation: 1, sequence: 3, at: 11 })
+    expect(f.detect).toHaveBeenCalledOnce()
+    expect(f.detect.mock.calls[0][1]).toBe(11)
+    await f.source.dispose()
+  })
   it.each([0, NaN, Infinity, 1.5])(
     'reclaims malformed VideoFrame dimension %s without inference',
     async (dimension) => {

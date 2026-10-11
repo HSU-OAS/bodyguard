@@ -11,17 +11,20 @@ export function createVideoPoseSource(
   ports: Readonly<{
     video: HTMLVideoElement
     stream: MediaStream
+    // FR-M-02/07: an already-used detector stamp; skip, never re-date older input.
+    afterAt?: number
     detect(frame: VideoFrame, at: number): OwnedPoseResult | Promise<OwnedPoseResult>
   }>,
 ) {
-  const { video, stream, detect } = ports
+  const { video, stream, detect, afterAt } = ports
   const { generation, signal } = context
   if (
     typeof VideoFrame !== 'function' ||
     typeof video.requestVideoFrameCallback !== 'function' ||
     typeof video.cancelVideoFrameCallback !== 'function' ||
     typeof stream.getVideoTracks !== 'function' ||
-    typeof detect !== 'function'
+    typeof detect !== 'function' ||
+    (afterAt !== undefined && (!Number.isFinite(afterAt) || afterAt < 0))
   )
     throw new Error('Invalid video pose source')
   const tracks = stream.getVideoTracks()
@@ -31,7 +34,7 @@ export function createVideoPoseSource(
     invalid = false,
     cleanupFailed = false
   let lastSequence = 0,
-    lastAt = -Infinity,
+    lastAt = afterAt ?? -Infinity,
     lastMedia = -Infinity
   let disposal: Promise<void> | undefined
   const inputs = new Set<VideoFrame>()

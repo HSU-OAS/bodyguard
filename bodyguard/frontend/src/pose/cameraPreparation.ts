@@ -21,6 +21,7 @@ type Operation = {
   task: Promise<void>
   stream?: MediaStream
   worker?: WorkerOwner
+  warmupAt?: number
   tracks: MediaStreamTrack[]
   ended: () => void
   cleanup?: Promise<void>
@@ -93,6 +94,7 @@ export function createCameraPreparation(
         poisoned = true
       }
       op.worker = undefined
+      op.warmupAt = undefined
     })()
     return op.cleanup
   }
@@ -141,7 +143,8 @@ export function createCameraPreparation(
         let result: Awaited<ReturnType<WorkerOwner['detect']>> | undefined
         try {
           check(op)
-          result = await op.worker.detect(frame, performance.now())
+          op.warmupAt = performance.now()
+          result = await op.worker.detect(frame, op.warmupAt)
           check(op)
         } finally {
           try {
@@ -180,11 +183,16 @@ export function createCameraPreparation(
     op.observationTask = (async () => {
       try {
         check(op)
-        if (!op.worker || !op.stream) throw new Error()
+        if (!op.worker || !op.stream || op.warmupAt === undefined) throw new Error()
         const worker = op.worker
         const source = createVideoPoseSource(
           { generation: op.generation, signal: op.controller.signal },
-          { video, stream: op.stream, detect: (frame, at) => worker.detect(frame, at) },
+          {
+            video,
+            stream: op.stream,
+            afterAt: op.warmupAt,
+            detect: (frame, at) => worker.detect(frame, at),
+          },
         )
         op.source = source
         publish({ phase: 'connecting' })

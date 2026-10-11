@@ -68,6 +68,34 @@ it('connects only after a separate explicit input request, not preparation', asy
   expect(current.state).toEqual({ phase: 'idle' })
 })
 
+it('hands off the exact warmup detector timestamp and uses a fresh value for the next generation', async () => {
+  let now = 100
+  vi.spyOn(performance, 'now').mockImplementation(() => now)
+  const current = owner(),
+    port = decoded()
+  await current.start()
+  expect(worker.detect.mock.calls[0][1]).toBe(100)
+  expect(createVideoPoseSource).not.toHaveBeenCalled()
+  now = 150
+  current.observe()
+  expect(vi.mocked(createVideoPoseSource).mock.calls[0][1].afterAt).toBe(100)
+  const stopped = current.stop()
+  port.send(null)
+  await stopped
+  now = 200
+  await current.start()
+  expect(worker.detect.mock.calls[1][1]).toBe(200)
+  now = 250
+  current.observe()
+  expect(vi.mocked(createVideoPoseSource).mock.calls[1][0].generation).toBe(2)
+  expect(vi.mocked(createVideoPoseSource).mock.calls[1][1].afterAt).toBe(200)
+  const closed = current.close()
+  port.send(null)
+  await closed
+  expect(current.takeFrame()).toBeNull()
+  expect(worker.dispose).toHaveBeenCalledTimes(2)
+})
+
 function input(sequence: number) {
   return Object.freeze({
     generation: 1,
