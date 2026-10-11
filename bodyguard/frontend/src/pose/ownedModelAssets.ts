@@ -78,6 +78,8 @@ export async function prepareOwnedModelAssets(
     typeof config.hands !== 'boolean'
   )
     throw unavailable()
+  // Snapshot the bounded selection before any fetch/hash await observes caller changes.
+  const selection = Object.freeze({ model: config.model, face: config.face, hands: config.hands })
   const abort = new AbortController(),
     deadline = performance.now() + MODEL_READ_LIMIT_MS
   const retire = () => abort.abort()
@@ -151,11 +153,14 @@ export async function prepareOwnedModelAssets(
   }
   try {
     check()
-    // Sequential read bounds live allocations to exactly the selected, pinned model sizes.
+    // At most three independent selected files, with the same total fixed result-buffer sizes.
+    // Failure/cancellation retires every sibling through the shared abort owner below.
     const work = (async () => {
-      const body = await read(MODEL_ASSETS[config.model])
-      const face = config.face ? await read(MODEL_ASSETS.face) : undefined
-      const hands = config.hands ? await read(MODEL_ASSETS.hands) : undefined
+      const [body, face, hands] = await Promise.all([
+        read(MODEL_ASSETS[selection.model]),
+        selection.face ? read(MODEL_ASSETS.face) : undefined,
+        selection.hands ? read(MODEL_ASSETS.hands) : undefined,
+      ])
       check()
       return Object.freeze({ body, ...(face ? { face } : {}), ...(hands ? { hands } : {}) })
     })()

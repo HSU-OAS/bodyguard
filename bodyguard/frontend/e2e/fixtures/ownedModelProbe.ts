@@ -33,17 +33,18 @@ const probe = {
     })()
     return job.then(snapshot)
   },
-  async infer() {
+  async infer(at = 1) {
     if (!owner || state !== 'ready') throw new Error('Probe not prepared')
+    if (!Number.isFinite(at) || at <= 0) throw new Error('Invalid generated input timestamp')
     // Generated empty canvas, NOT a captured camera/human/clinical fixture.
     const canvas = new OffscreenCanvas(640, 480),
       context = canvas.getContext('2d')
     if (!context) throw new Error('Probe canvas unavailable')
     context.fillStyle = '#ffffff'
     context.fillRect(0, 0, 640, 480)
-    const frame = new VideoFrame(canvas, { timestamp: 1000 })
+    const frame = new VideoFrame(canvas, { timestamp: at * 1000 })
     try {
-      const result = await owner.detect(frame, 1)
+      const result = await owner.detect(frame, at)
       result.close()
       frames++
     } finally {

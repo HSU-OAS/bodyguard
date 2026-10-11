@@ -162,12 +162,12 @@ it('cancels a pending reader and never promotes its later bytes', async () => {
   await vi.waitFor(() => expect(stream.locked).toBe(false))
   expect(cancel).toHaveBeenCalledOnce()
 })
-it('reclaims a fetch resolving after cancellation without starting another model', async () => {
-  let resolve!: (value: Response) => void
+it('reclaims each selected fetch resolving after cancellation without additional requests', async () => {
+  const receivers = new Map<string, (value: Response) => void>()
   const fetch = vi.fn(
-    () =>
+    (url: string) =>
       new Promise<Response>((r) => {
-        resolve = r
+        receivers.set(new URL(url).pathname, r)
       }),
   )
   vi.stubGlobal('fetch', fetch)
@@ -176,9 +176,14 @@ it('reclaims a fetch resolving after cancellation without starting another model
   const assertion = expect(pending).rejects.toThrow('Worker inference unavailable')
   abort.abort()
   await assertion
-  const res = response(original(MODEL_ASSETS.lite.path)),
-    cancel = vi.spyOn(res.body as ReadableStream<Uint8Array>, 'cancel')
-  resolve(res)
-  await vi.waitFor(() => expect(cancel).toHaveBeenCalledOnce())
-  expect(fetch).toHaveBeenCalledOnce()
+  const closes = [MODEL_ASSETS.lite.path, MODEL_ASSETS.face.path].map((path) => {
+    const res = response(original(path), new URL(path, location.origin).href)
+    const cancel = vi.spyOn(res.body as ReadableStream<Uint8Array>, 'cancel')
+    receivers.get(path)?.(res)
+    return cancel
+  })
+  await vi.waitFor(() => {
+    for (const cancel of closes) expect(cancel).toHaveBeenCalledOnce()
+  })
+  expect(fetch).toHaveBeenCalledTimes(2)
 })

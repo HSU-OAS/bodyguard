@@ -6,9 +6,10 @@ import { createServer } from 'node:http'
 import { join } from 'node:path'
 import { chromium } from '@playwright/test'
 
-const [scratch, executable, label] = process.argv.slice(2)
+const [scratch, executable, label, profile = 'all'] = process.argv.slice(2)
 assert(/^\/private\/tmp\/bodyguard-owned-models\.[A-Za-z0-9]+$/.test(scratch))
 assert(existsSync(executable) && /^[a-z][a-z0-9-]+$/.test(label))
+assert(['all', 'latency-only', 'current-clock', 'fixed-clock'].includes(profile))
 const output = join(scratch, `${label}.json`)
 assert(!existsSync(output), 'Keep earlier evidence')
 const sha = (b) => createHash('sha256').update(b).digest('hex')
@@ -19,6 +20,7 @@ const sourceFiles = [
   'src/pose/workerNativeEngine.ts',
   'scripts/sdk-network-policy.ts',
   'e2e/fixtures/ownedModelProbe.ts',
+  'scripts/test-owned-model-preparation.mjs',
 ]
 const source = Object.fromEntries(sourceFiles.map((file) => [file, sha(readFileSync(file))]))
 const built = new Map()
@@ -52,6 +54,8 @@ const proxy = createServer((_req, res) => {
 })
 proxy.on('connect', (_req, socket) => {
   forbidden++
+  // Browser background proxy connections may reset after the deliberate refusal.
+  socket.on('error', () => {})
   socket.end('HTTP/1.1 403 Forbidden\r\n\r\n')
 })
 const server = createServer((req, res) => {
@@ -63,10 +67,11 @@ const server = createServer((req, res) => {
     return
   }
   const delayed =
-    ['slow', 'cancel'].includes(mode) && !held && path === '/models/pose_landmarker_heavy.task'
+    (mode.startsWith('latency') && path.endsWith('.task')) ||
+    (['slow', 'cancel'].includes(mode) && !held && path === '/models/pose_landmarker_heavy.task')
   if (delayed) held = true
   const at = Date.now(),
-    row = { mode, path, delayed, servedMs: null, aborted: false }
+    row = { mode, path, delayed, requestedAt: at, servedMs: null, aborted: false }
   requests.push(row)
   res.on('close', () => {
     if (!res.writableEnded) row.aborted = true
@@ -93,10 +98,13 @@ const server = createServer((req, res) => {
     res.end(outputBytes)
   }
   if (delayed) {
-    const timer = setTimeout(() => {
-      timers.delete(timer)
-      serve()
-    }, 6000)
+    const timer = setTimeout(
+      () => {
+        timers.delete(timer)
+        serve()
+      },
+      mode.startsWith('latency') ? 900 : 6000,
+    )
     timers.add(timer)
   } else serve()
 })
@@ -121,7 +129,11 @@ try {
     proxy: { server: `http://127.0.0.1:${proxy.address().port}`, bypass: `<-loopback>,${host}` },
     args: ['--disable-background-networking', '--disable-component-update', '--disable-sync'],
   })
-  for (const name of ['baseline', 'slow', 'cancel', 'tamper']) {
+  for (const name of ['current-clock', 'fixed-clock'].includes(profile)
+    ? ['baseline']
+    : profile === 'latency-only'
+      ? ['latency', 'latency-cpu4']
+      : ['baseline', 'slow', 'cancel', 'tamper', 'latency', 'latency-cpu4']) {
     mode = name
     held = false
     const context = await browser.newContext({ serviceWorkers: 'block' }),
@@ -137,6 +149,10 @@ try {
       if (!r.url().startsWith(`${origin}/`) && !r.url().startsWith('blob:')) external++
     })
     try {
+      if (name === 'latency-cpu4') {
+        const cdp = await context.newCDPSession(page)
+        await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 })
+      }
       await page.goto(`${origin}/`)
       const job = page.evaluate(() => window.ownedModelProbe.begin())
       if (name === 'cancel') {
@@ -144,10 +160,29 @@ try {
         await page.evaluate(() => window.ownedModelProbe.close())
       }
       const prepared = await job
-      if (['baseline', 'slow'].includes(name)) {
+      const row = {
+        name,
+        prepared,
+        final: null,
+        workers,
+        closed,
+        storage: null,
+        cdpCpuRate: name === 'latency-cpu4' ? 4 : 1,
+        phase: 'prepared',
+        inferenceMs: null,
+      }
+      results.push(row)
+      const success = ['baseline', 'slow', 'latency', 'latency-cpu4'].includes(name)
+      if (success) {
         assert.equal(prepared.state, 'ready')
         assert.equal(prepared.failure, null)
-        await page.evaluate(() => window.ownedModelProbe.infer())
+        row.phase = 'inference'
+        const inferAt = Date.now()
+        await page.evaluate(
+          (current) => window.ownedModelProbe.infer(current ? performance.now() : 1),
+          ['current-clock', 'latency-only'].includes(profile),
+        )
+        row.inferenceMs = Date.now() - inferAt
       } else {
         assert.equal(prepared.failure, 'preparation')
         assert.equal(prepared.frames, 0)
@@ -155,14 +190,14 @@ try {
       const final = await page.evaluate(() => window.ownedModelProbe.close())
       await page.waitForTimeout(100)
       const storage = await page.evaluate(() => localStorage.length + sessionStorage.length)
-      assert.equal(final.failure, ['baseline', 'slow'].includes(name) ? null : 'preparation')
+      assert.equal(final.failure, success ? null : 'preparation')
       assert.equal(workers, 1)
       assert.equal(closed, 1)
       assert.equal(storage, 0)
       const taskRequests = requests.filter((r) => r.mode === name && r.path.endsWith('.task'))
-      assert.equal(taskRequests.length, ['baseline', 'slow'].includes(name) ? 3 : 1)
+      assert.equal(taskRequests.length, 3)
       assert.equal(new Set(taskRequests.map((r) => r.path)).size, taskRequests.length)
-      results.push({ name, prepared, final, workers, closed, storage })
+      Object.assign(row, { final, workers, closed, storage, phase: 'complete' })
     } finally {
       await context.close()
     }
@@ -180,6 +215,14 @@ try {
 for (const [file, hash] of Object.entries(source)) assert.equal(sha(readFileSync(file)), hash)
 const report = {
   createdAt: new Date().toISOString(),
+  browserVersion: browser?.version(),
+  profile,
+  generatedInputClock: ['current-clock', 'latency-only'].includes(profile)
+    ? 'current-performance'
+    : 'fixed-1ms',
+  readerProvenance: existsSync(join(scratch, 'model-reader-provenance.json'))
+    ? JSON.parse(readFileSync(join(scratch, 'model-reader-provenance.json'), 'utf8'))
+    : null,
   source,
   results,
   requests,
@@ -192,6 +235,7 @@ const report = {
   actualHuman: false,
   avatar: false,
   controlledDownloadDelayMs: 6000,
+  selectedLatencyDelayMs: 900,
   oldStartupP2Resolved: false,
   stages1to6Complete: false,
 }
