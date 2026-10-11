@@ -1,0 +1,282 @@
+{
+  "createdAt": "2026-10-11T10:59:04.749Z",
+  "sourceMain": "8a658be0f720c61069d35cacf384568cc2fe001e",
+  "before": [
+    {
+      "path": "src/pose/workerInference.ts",
+      "sha256": "e6c5c01895915675fb4e598596c3b219f236aa51a490243673811a02ea6341f5"
+    },
+    {
+      "path": "src/pose/workerNativeEngine.ts",
+      "sha256": "6216820d53d012108733d1044fb317d12800844b620075652181f77282ea5d39"
+    },
+    {
+      "path": "src/pose/workerInferenceRuntime.ts",
+      "sha256": "dbe22955757b7e264c06f8a0189337b8b342448688ecf32d51658b1f2154a3dc"
+    },
+    {
+      "path": "scripts/sdk-network-policy.ts",
+      "sha256": "4aad4fa00fc161e85566ff8784cf19a6d914e38431cf00957947a12eefd37134"
+    },
+    {
+      "path": "src/pose/constants.ts",
+      "sha256": "18857d436d4cb1f4279a4bc01357d0b13d20d51c1fa13d33eaf4cb6332a63a60"
+    }
+  ],
+  "results": [
+    {
+      "mode": "baseline",
+      "prepared": {
+        "state": "ready",
+        "failure": null,
+        "prefetchMs": null,
+        "workerMs": 491.19999998807907,
+        "frames": 0
+      },
+      "final": {
+        "state": "closed",
+        "failure": null,
+        "prefetchMs": null,
+        "workerMs": 491.19999998807907,
+        "frames": 0
+      },
+      "prepareElapsedMs": 495,
+      "workers": 1,
+      "closed": 1,
+      "storage": 0
+    },
+    {
+      "mode": "slow",
+      "prepared": {
+        "state": "failed",
+        "failure": "preparation",
+        "prefetchMs": null,
+        "workerMs": null,
+        "frames": 0
+      },
+      "final": {
+        "state": "closed",
+        "failure": "preparation",
+        "prefetchMs": null,
+        "workerMs": null,
+        "frames": 0
+      },
+      "prepareElapsedMs": 6699,
+      "workers": 1,
+      "closed": 1,
+      "storage": 0
+    },
+    {
+      "mode": "slow-prefetch",
+      "prepared": {
+        "state": "ready",
+        "failure": null,
+        "prefetchMs": 6047.100000008941,
+        "workerMs": 448.59999999403954,
+        "frames": 0
+      },
+      "final": {
+        "state": "closed",
+        "failure": null,
+        "prefetchMs": 6047.100000008941,
+        "workerMs": 448.59999999403954,
+        "frames": 0
+      },
+      "prepareElapsedMs": 6498,
+      "workers": 1,
+      "closed": 1,
+      "storage": 0
+    }
+  ],
+  "requests": [
+    {
+      "mode": "baseline",
+      "path": "/",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "baseline",
+      "path": "/assets/index-Bsnaxh9R.js",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "baseline",
+      "path": "/assets/nativeInference.worker-ZfXU2Vh8.js",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "baseline",
+      "path": "/mediapipe/wasm/vision_wasm_internal.js",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "baseline",
+      "path": "/mediapipe/wasm/vision_wasm_internal.wasm",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "baseline",
+      "path": "/models/pose_landmarker_heavy.task",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "baseline",
+      "path": "/mediapipe/wasm/vision_wasm_internal.wasm",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "baseline",
+      "path": "/models/face_landmarker.task",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "baseline",
+      "path": "/mediapipe/wasm/vision_wasm_internal.wasm",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "baseline",
+      "path": "/models/gesture_recognizer.task",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "slow",
+      "path": "/",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "slow",
+      "path": "/assets/index-Bsnaxh9R.js",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "slow",
+      "path": "/assets/nativeInference.worker-ZfXU2Vh8.js",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "slow",
+      "path": "/mediapipe/wasm/vision_wasm_internal.js",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "slow",
+      "path": "/mediapipe/wasm/vision_wasm_internal.wasm",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "slow",
+      "path": "/models/pose_landmarker_heavy.task",
+      "delayed": true,
+      "servedMs": 6002
+    },
+    {
+      "mode": "slow-prefetch",
+      "path": "/",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "slow-prefetch",
+      "path": "/assets/index-Bsnaxh9R.js",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "slow-prefetch",
+      "path": "/mediapipe/wasm/vision_wasm_internal.js",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "slow-prefetch",
+      "path": "/mediapipe/wasm/vision_wasm_internal.wasm",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "slow-prefetch",
+      "path": "/models/face_landmarker.task",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "slow-prefetch",
+      "path": "/models/pose_landmarker_heavy.task",
+      "delayed": true,
+      "servedMs": 6001
+    },
+    {
+      "mode": "slow-prefetch",
+      "path": "/models/gesture_recognizer.task",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "slow-prefetch",
+      "path": "/assets/nativeInference.worker-ZfXU2Vh8.js",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "slow-prefetch",
+      "path": "/mediapipe/wasm/vision_wasm_internal.wasm",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "slow-prefetch",
+      "path": "/models/pose_landmarker_heavy.task",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "slow-prefetch",
+      "path": "/mediapipe/wasm/vision_wasm_internal.wasm",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "slow-prefetch",
+      "path": "/mediapipe/wasm/vision_wasm_internal.wasm",
+      "delayed": false,
+      "servedMs": 0
+    },
+    {
+      "mode": "slow-prefetch",
+      "path": "/models/gesture_recognizer.task",
+      "delayed": false,
+      "servedMs": 0
+    }
+  ],
+  "errors": [],
+  "external": 0,
+  "forbidden": 22,
+  "failure": null,
+  "serversStopped": true,
+  "browserClosed": true,
+  "actualCamera": false,
+  "actualHuman": false,
+  "avatar": false,
+  "inferenceFrames": 0,
+  "controlledDownloadDelayMs": 6000,
+  "testOnlyCacheHeader": "public,max-age=3600,immutable",
+  "oldStartupP2Resolved": false,
+  "productChanged": false,
+  "stages1to6Complete": false
+}

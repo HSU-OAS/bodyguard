@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-11 [S3.C8 소유 모델 준비](stories/owned-model-preparation.md): 느린 모델 다운로드와 Worker 초기화 응답을 분리하고 고정 원본 byte/SHA256·메모리 transfer·init 전/후 취소를 구현했다. [실제 준비/첫 입력·취소/변조·화면8개 흐름·실패/리뷰/검증](review/owned-model-preparation/README.md). 전체frontend1773·정적·실제 원본5개·고지/build/guard를 통과했고 조건부 PR 게이트를 진행한다. 6초 제어 지연의 준비 성공을 기존 시작P2 해결/성능 통과로 세지 않는다. PR137 source7eae77ed→merge8a658be/main·브랜치 보존 확인 후 시작했다. 아바타/참여자/Docker/공식 문의/Gmail/Google 보류·공개 코칭 비활성/출시0·임상/실측/운영과 전체1~6 미완료는 유지한다. 아래는 과거 시점 기록이다.
+
 2026-10-11 최신 갱신: 실제 Gmail/Google 공급자 연결은 CEO의 **나중에** 결정으로 보류한다. 연결/발송/공급자 로그인0이다. [S5.8 설치 파일 부분 고지](stories/embedded-package-notices.md)는 maath의 함수 주석3개와 MediaPipe의 타입 파일 머리2개를 원문으로 보존/대조했다. [실패/한계·원본·작성자 리뷰](review/embedded-package-notices/README.md). PR136 sourcec2629dd→merge9c620b5/main·브랜치 보존 확인 후 진행했고, 로컬 좁은 검증 완료·조건부 PR 게이트 중이다. full 원문 미확인4버전·최종 권리/고지·실제 판정/추천·시작P2·아바타/참여자/Docker/공식 문의 보류·전체1~6 미완료는 유지한다. 아래는 과거 시점 기록이다.
 
 2026-10-11 최신 CEO 결정: 공식 저장소의 라이선스·NOTICE 외부 문의는 **나중에** 진행한다. 문의·외부 메시지0, 미확보 고지·버전 동등성·배포 승인 미완료를 유지한다. S5.7의 원문 보존/검증 보완은 독립적으로 마무리하며 아래 미승인 표현은 답변 전 시점 기록이다. 아바타·참여자·Docker 보류도 유지하고 독립 웹 기능을 계속한다.

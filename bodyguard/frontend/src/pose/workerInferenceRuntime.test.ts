@@ -1,6 +1,7 @@
 // FR-M-02/07·NFR-07/08: worker-side same-input and terminal cleanup contracts.
 import { expect, it, vi } from 'vitest'
 import { ResourceCleanupError } from '../coaching/resources'
+import { MODEL_ASSETS } from './ownedModelAssets'
 import { createWorkerInferenceRuntime, type WorkerInferenceEngine } from './workerInferenceRuntime'
 
 const config = { model: 'lite', face: true, hands: true, matrixLayout: 'column-major' } as const
@@ -20,7 +21,12 @@ function fixture() {
     engine = { detect: vi.fn(() => data()), dispose: vi.fn() }
   const prepare = vi.fn(async () => engine)
   const runtime = createWorkerInferenceRuntime({ prepare, send: (value) => out.push(value) })
-  const init = () => runtime.receive({ type: 'init', generation: 4, id: 0, config })
+  const assets = {
+    body: new ArrayBuffer(MODEL_ASSETS.lite.bytes),
+    face: new ArrayBuffer(MODEL_ASSETS.face.bytes),
+    hands: new ArrayBuffer(MODEL_ASSETS.hands.bytes),
+  }
+  const init = () => runtime.receive({ type: 'init', generation: 4, id: 0, config, assets })
   const frame = () => ({ displayWidth: 640, displayHeight: 480, close: vi.fn() })
   return { out, engine, prepare, runtime, init, frame }
 }
@@ -43,6 +49,23 @@ it('uses one decoded input and exact timestamp, closes before delivering result'
   expect(f.engine.dispose).toHaveBeenCalledOnce()
   expect(f.out.at(-1)).toEqual({ type: 'closed', generation: 4, clean: true })
 })
+it.each([
+  undefined,
+  { body: new ArrayBuffer(1) },
+  { body: new ArrayBuffer(MODEL_ASSETS.lite.bytes) },
+])(
+  'never starts native tasks for missing/truncated/feature-incomplete model buffers',
+  async (assets) => {
+    const f = fixture()
+    f.runtime.receive({ type: 'init', generation: 4, id: 0, config, assets })
+    await tick()
+    expect(f.prepare).not.toHaveBeenCalled()
+    expect(f.out).toEqual([{ type: 'error', generation: 4, id: 0 }])
+    f.runtime.receive({ type: 'close', generation: 4 })
+    await tick()
+    expect(f.out.at(-1)).toEqual({ type: 'closed', generation: 4, clean: true })
+  },
+)
 it('waits for initializing engine during cancel and does not emit late ready', async () => {
   const f = fixture(),
     gate = deferred<WorkerInferenceEngine>()
