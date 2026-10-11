@@ -1,0 +1,57 @@
+{
+  "baseMain": "ababacfe36b8f548e5b7ad1180fd8524f1fd0d83",
+  "actualPublicRequests": 11,
+  "actualRawResponsesMatched": 11,
+  "rawParent": "/private/tmp/bodyguard-companion-proof.SLDf1N",
+  "files": [
+    {
+      "path": "bodyguard/scripts/companion-notice-proof.mjs",
+      "sha256": "781c832a23978570cd6eedc8856c36d6b7327a87da68c651f9e0b5cdcd0b2af8"
+    },
+    {
+      "path": "bodyguard/scripts/companion-notice-proof.test.mjs",
+      "sha256": "ef68bf47574acf62b7c7dc0b6dae498d4b31223ba42ce6611ab0a9a462d9a7d0"
+    },
+    {
+      "path": "bodyguard/docs/review/pinned-companion-notices/evidence/proof.json",
+      "sha256": "ff3e4dba0a98a18e4fbf778a7d551eb622ce8066652aa9390a824fc264cf925b"
+    }
+  ],
+  "sourceHashKind": "post-execution snapshots",
+  "logs": [
+    {
+      "name": "before-notice-anchor.stdout",
+      "bytes": 2222,
+      "sha256": "eccbcc52f7d0ece60ec9ff143d5b4e4a9e9400602ba7daab61c8bb6d6085d85a"
+    },
+    {
+      "name": "before-notice-anchor.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "after-notice-anchor.stdout",
+      "bytes": 1154,
+      "sha256": "772d77ca553ba4547362bc10d6aa4753d4b90a208bec4f76cb78f199b354ec1c"
+    },
+    {
+      "name": "after-notice-anchor.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "tests": {
+    "initialPassed": 11,
+    "noticeAnchorREDPassed": 10,
+    "noticeAnchorREDFailed": 1,
+    "finalPassed": 11,
+    "finalFailed": 0,
+    "skipped": 0
+  },
+  "productRuntimeChanged": false,
+  "flags": {
+    "distributionApproved": false,
+    "completeArtifactNoticesVerified": false,
+    "npmArtifactSourceEquivalenceProven": false
+  }
+}
