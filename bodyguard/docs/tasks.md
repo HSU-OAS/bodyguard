@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-11 [S4.D6 코칭 공간·동작 선택 구조](stories/coaching-workspace-structure.md): 실제 React에서 선택/상세→코칭 구조→구도·설정·동작 변경→안내/나가기와 검색·필터 복귀를 연결했다. [실제 화면·모의/실제 경계·실패·작성자 리뷰](review/coaching-workspace-structure/README.md). 넓은 한 공간의 좌우 배치·화이트/블루·짧은 문구를 적용했지만 아바타/동작 영상은 미연결이고 시작/시범/판정/카메라/저장은 비활성이다. 비공개 production 경계를 유지하며 이 구조 목적의 필수 검증과 조건부 PR 게이트를 진행한다. SDK PR126 sourcec426f6d→merge5d12491/main·브랜치 보존을 실제 확인했다. 아바타 보류·출시 동작0·실측/참여자·시작P2·외부/운영/권리와 전체1~6 미완료는 유지한다. 아래는 이전 시점 기록이다.
+
 2026-10-11 [S6.SDK 동일 출처 통신 경계](stories/sdk-same-origin-policy.md): CEO의 직접 승인에 따라 SDK 실행 전 제품 CSP와 상속 Worker를 적용했다. [실제 SDK/외부 차단·로그인/가입 복귀·개발 HMR·실패/리뷰](review/sdk-network-policy/README.md). 전체frontend1648·타입/범위 정적·production 고지/비공개 경계 통과, 조건부 PR 게이트 진행. 코칭 구조/SDK의 승인 대기는 해소됐고 다음은 코칭 화면·선택 구조의 React 적용이다. 아바타 보류·동작 적격0·실측/참여자·시작P2·외부/운영/권리·전체1~6 미완료는 유지한다. 아래는 이전 시점 기록이다.
 
 2026-10-11 [S4.23 로그인 후 원래 개인 흐름 복귀](stories/web-login-return-flow.md): 기록/계정 직접 주소→로그인·가입 전환→이메일 인증/로그인→원래 기간/계정 화면을 연결했다. [실제 Chrome·API/소유 SQL 흐름·실패·작성자 리뷰](review/web-login-return-flow/README.md). CSS/본문/새 화면·API/권한/SDK/아바타/운영 변경0이며 실제 메일/Google·코칭을 완성한 것이 아니다. 현재 frontend1639/TS/범위 정적/production build·고지/private guard 통과, 정확히 소유한 DB/API/preview 종료와 원본 보존 확인, 조건부 PR 게이트를 진행한다. 동작 적격0·아바타 보류·미승인 코칭 구조/SDK·실측/참여자·시작P2·외부/운영 및 전체1~6 미완료는 그대로다. 아래는 기존 시점별 기록이다.

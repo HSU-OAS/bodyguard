@@ -1,5 +1,7 @@
 # 출시 통합 실행 게이트 — 2026-10-09
 
+**2026-10-11 갱신:** 승인된 SDK 정책은 [PR126](https://github.com/HSU-OAS/bodyguard/pull/126)의 sourcec426f6d→merge5d12491로 main에 포함됐다. [실제 SDK/외부 차단·인증 회귀의 범위](review/sdk-network-policy/README.md). 코칭·동작 선택 구조는 [S4.D6](stories/coaching-workspace-structure.md)에서 실제 React 개발 라우트에 적용하고 화면 흐름을 검증했다. [실제 작동 화면·실패·한계](review/coaching-workspace-structure/README.md). 아래 과거 목록의 구조/정책 승인 대기는 해소됐지만 실제 두 아바타·동작 미디어/판정·참여자·시작P2·운영/HTTPS와 전체1~6은 미완료다. 개발 구조는 공개 코칭으로 노출하지 않는다. PR36/51 등 과거 Draft를 자동 통과/병합한 것이 아니다.
+
 **1~6단계는 미완료다.** 전문가 최종 실용성 검토만 남은 출시 후보판이 아니다. 이 문서는 최신 main `5a1a3d8ec1149cf029c486aee35de1dc33a2f167`과 실제 열린 PR, 실행된 코칭 시안을 대조한 다음 작업의 입력이다. [출시 계약](release-plan.md)의 범위와 완료 기준을 바꾸지 않는다.
 
 ## 현재 사용자 흐름과 부족한 증거

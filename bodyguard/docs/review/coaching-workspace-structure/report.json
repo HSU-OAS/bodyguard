@@ -1,0 +1,176 @@
+{
+  "story": "S4.D6",
+  "recordedAt": "2026-10-11T05:02:47.382Z",
+  "base": "5d12491bdef5f09942f9dc1895bb000aebe48030",
+  "branch": "codex/coaching-workspace-structure",
+  "authority": "2026-10-11 direct CEO approval: coaching/selection local structure; avatar hold remains",
+  "boundary": {
+    "privateDevelopmentOnly": true,
+    "actualAvatarsConnected": false,
+    "actualMotionMediaConnected": false,
+    "actualCoachingOrVerdict": false,
+    "cameraSDKGLBStarted": false,
+    "operationalChanges": false,
+    "stages1to6Complete": false,
+    "releaseCandidate": false
+  },
+  "browser": {
+    "method": "actual development React/Vite; controlled account API; reduced motion; no browser route interception",
+    "results": [
+      {
+        "width": 1440,
+        "passed": true,
+        "flow": "select/detail→workspace/views→search/empty/reset→Escape/focus→keyboard/change→settings→guidance→exit→unknown→guest/offline",
+        "avatars": "not connected",
+        "media": "absent; no playback or decoded motion claim"
+      },
+      {
+        "width": 800,
+        "passed": true,
+        "flow": "select/detail→workspace/views→search/empty/reset→Escape/focus→keyboard/change→settings→guidance→exit→unknown→guest/offline",
+        "avatars": "not connected",
+        "media": "absent; no playback or decoded motion claim"
+      },
+      {
+        "width": 375,
+        "passed": true,
+        "flow": "select/detail→workspace/views→search/empty/reset→Escape/focus→keyboard/change→settings→guidance→exit→unknown→guest/offline",
+        "avatars": "not connected",
+        "media": "absent; no playback or decoded motion claim"
+      }
+    ],
+    "cameraCalls": 0,
+    "external": 0,
+    "modelRequests": 0,
+    "errors": [],
+    "failure": null
+  },
+  "browserFailures": {
+    "reviewed": {
+      "method": "actual development React/Vite; controlled account API; reduced motion; no browser route interception",
+      "results": [],
+      "cameraCalls": 0,
+      "external": 0,
+      "modelRequests": 0,
+      "errors": [],
+      "failure": {
+        "name": "AssertionError",
+        "message": "Expected values to be strictly equal:\n\n'0px' !== '-4px'\n"
+      }
+    },
+    "resolution": "Actual Tab navigation instead of mouse-origin programmatic focus; still assert focused, focus-visible, inset -4px. Original retained."
+  },
+  "unit": {
+    "success": true,
+    "files": 85,
+    "passed": 1666,
+    "failed": 0,
+    "scope": "whole frontend; media APIs are synthetic"
+  },
+  "unitFailedAttempt": {
+    "file": "unit-reviewed.json",
+    "passed": 1665,
+    "failed": 1,
+    "failures": [
+      {
+        "name": "retires the removed video without pausing a later valid preview",
+        "reason": "AssertionError: expected \"pause\" to not be called at all, but actually been called 2 times"
+      }
+    ],
+    "resolution": "Distinguish prototype mock calls by this owner, keeping old-video stop and new-video preservation assertions."
+  },
+  "quality": {
+    "typecheck": "passed exit0",
+    "scopedBiome": "14 files passed exit0",
+    "productionBuild": "original Vite config, no prepare-assets, passed exit0",
+    "privateGuard": "original predicate, only output root substituted; new coaching markers added; passed exit0",
+    "buildNotices": {
+      "jsNotices": [
+        {
+          "name": "react-dom",
+          "version": "19.3.0",
+          "identifier": "MIT",
+          "textSHA256": "cf9b17822d1fcd4ff32ccbe14183386fb3adf6f2ff92dc184130823f7fc28173"
+        },
+        {
+          "name": "react-router",
+          "version": "8.4.0",
+          "identifier": "MIT",
+          "textSHA256": "9bd42e9ab2f84a397e8efd7ba4feedd4956198c0ff6ea6f886fd47fcf8e53df2"
+        },
+        {
+          "name": "react",
+          "version": "19.3.0",
+          "identifier": "MIT",
+          "textSHA256": "cf9b17822d1fcd4ff32ccbe14183386fb3adf6f2ff92dc184130823f7fc28173"
+        },
+        {
+          "name": "scheduler",
+          "version": "0.28.0",
+          "identifier": "MIT",
+          "textSHA256": "cf9b17822d1fcd4ff32ccbe14183386fb3adf6f2ff92dc184130823f7fc28173"
+        }
+      ],
+      "css": {
+        "package": "tailwindcss",
+        "version": "4.3.3",
+        "noticeSHA256": "0045fac7ef9a1530b1e59eacde31c4823bfbc8881ad2e543bc82c70c38cfcfd8",
+        "bannerPresent": false
+      },
+      "scope": "Vite bundled-JS root license files and configured Tailwind CSS pipeline only",
+      "fullArtifactInventoryVerified": false,
+      "ancillaryNoticesVerified": false,
+      "distributionApproved": false
+    },
+    "diffCheck": "passed exit0",
+    "review": "scoped author review; no unresolved in-scope P1/P2; not independent review"
+  },
+  "notExecuted": [
+    "actual motion video decoding or hover playback",
+    "real camera/participants/independent observer",
+    "avatar creation/render/GLB/deformation validation",
+    "browser-menu zoom/assistive technology",
+    "whole backend/SQL/auth providers",
+    "Docker/NGINX/TLS/operational deployment",
+    "full final artifact rights/license inventory"
+  ],
+  "sourceSHA256": {
+    "src/catalog/motionNavigation.ts": "4eb88628efc5cb036293d0167b8483b1c6cca6f5b7c393b0c418303dee1c46bb",
+    "src/pages/CoachingNavigationContext.test.tsx": "c45d128440adb4ed6265e441ef49ba3289282820b86099ed09214d76af431995",
+    "src/pages/CoachingPage.tsx": "7f49c018306c9e0f722dddc099ac98191e65c0b7e84c4b0c2d44345c5a38a50e",
+    "src/pages/CoachingPage.css": "367de84bb9ca9c5f7ea09fcde1394708d739841f83f5f9c51382f8b08eaca45a",
+    "src/pages/CoachingPage.test.tsx": "4d9ee2ab8bc95ee4b68f67c033eb9391859c63d652e3ce0786bc77b66940ee9f",
+    "src/pages/MotionPreview.tsx": "f39e86f21b024e1fda50957e1a70db62ed51428fcea8ac60e13035491defdd1f",
+    "src/pages/MotionPreview.test.tsx": "17c0c79b6d9f32912add27b26647c583b5d6e940ae2883d219e150c3bdfa60c9",
+    "src/pages/MotionPreviewOwnershipEdges.test.tsx": "e8c279ac7f7d73d8cf2de5549dcac18127db8d332c863cf40a89c14cc534e53d",
+    "src/pages/MotionSelectionPage.tsx": "30e5f6d2d9056a83a0123757f8e36de6089b20d97b2f239432b29d6dbf1810ba",
+    "src/pages/MotionSelectionPage.css": "ba80facfa88aedfd0964c2f8b62e901cbe0618d6ff3f97373793121f835e7b74",
+    "src/App.tsx": "92f76aeb3e61f91d4dd3c402a2ab22a27087ccba563b47029a763210aebac86b",
+    "scripts/check-selection-production.mjs": "220f9e72d459a68b555b2dfa8465bdce3e543a961dea9b083913a2228fbf6b79",
+    "scripts/build-coaching-workspace.mjs": "1ca6e174446a8a037b63a7645028a5f9784453e92df68ef692188038b0131914",
+    "scripts/test-coaching-workspace.mjs": "4776f1b6c59dc9e0ab4ec99af4e3affd1864034919d32f411318d53eed410dbd"
+  },
+  "rawEvidence": {
+    "root": "/private/tmp/bodyguard-coaching-ui.kvPjTf",
+    "SHA256": {
+      "first.json": "ab74fb3eee116666ed63e1a74a3cfdd384788aa15737027eddaaecf38b2a2191",
+      "reviewed.json": "2b51083d59f66779b333fb7d66cb95b80f8ce35226708fa1924fbbe492af4cc2",
+      "keyboard.json": "ab74fb3eee116666ed63e1a74a3cfdd384788aa15737027eddaaecf38b2a2191",
+      "final.json": "ab74fb3eee116666ed63e1a74a3cfdd384788aa15737027eddaaecf38b2a2191",
+      "unit-final.json": "8299c5bab2fe9398ae29d6bb5f7fc3a6c7d76b37ec7d9f057999007f0e68d885",
+      "ownership-final.json": "a3644bb31286b037c2ce1ced243298f72cdb78ebc0523a891e6a8763d562bcc3",
+      "unit-reviewed.json": "ef011470a806fc4d41c7aa6d520890485e1b06139d2b086625b0dc5ec55404b3",
+      "scoped-navigation.json": "4b69055fbca4a8fe585f036635761a35182c54e5bddbdd4a33c8704603882967",
+      "unit-merge.json": "6b61fb5126c4fc7b7eaf0bc866e8d8c8448c6c316c07bbecc9f593a5d88a3867"
+    }
+  },
+  "actualReactScreenshots": {
+    "/private/tmp/bodyguard-coaching-ui.kvPjTf/final-workspace-1440.png": "314da7554fe0f77490e21721436ffc2d7ca60df0f6c3e4d1b855c65da23a6d24",
+    "/private/tmp/bodyguard-coaching-ui.kvPjTf/final-picker-800.png": "d596cc0c985ed1150723cf9503d3d6d7be4cfd5f18bd155941f5bf8937d7d8aa",
+    "/private/tmp/bodyguard-coaching-ui.kvPjTf/final-selection-375.png": "e55ed0c038ab18b0b7baff6e5d3f0f6940589270feffb3e4c610f61b23946876"
+  },
+  "productionAssetsSHA256": {
+    "index-BVyDftrj.js": "dbdc8e3cb9ad8eeeae2519b7bbf37b84a230d4723607ec4817d38f5cee10c779",
+    "index-dNUNBpCv.css": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e"
+  }
+}
