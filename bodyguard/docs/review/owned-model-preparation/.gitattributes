@@ -1,0 +1,4 @@
+# Preserve exact raw CLI evidence, including whitespace printed by Vitest/Biome.
+# These two paths only; product sources and default diff whitespace checks stay unchanged.
+final-biome.log -text whitespace=-blank-at-eol,-blank-at-eof
+final-unit.log -text whitespace=-blank-at-eol,-blank-at-eof
