@@ -89,12 +89,13 @@ export function CameraPreparation() {
       })
     }
   }, [account, accountId])
-  const running = state.phase === 'ready' || state.phase === 'preparing'
+  const running = ['ready', 'preparing', 'connecting', 'observing'].includes(state.phase)
+  const input = ['ready', 'connecting', 'observing'].includes(state.phase)
   return (
     <section
       className="camera-preparation"
       aria-label="카메라 준비 확인"
-      aria-busy={state.phase === 'preparing' || state.phase === 'stopping'}
+      aria-busy={['preparing', 'connecting', 'stopping'].includes(state.phase)}
     >
       <div className="coaching-tools">
         <button
@@ -110,7 +111,7 @@ export function CameraPreparation() {
             else void owner.current?.start()
           }}
         >
-          {state.phase === 'ready'
+          {input
             ? '카메라 끄기'
             : state.phase === 'preparing'
               ? '준비 취소'
@@ -120,19 +121,35 @@ export function CameraPreparation() {
                   ? '다시 확인'
                   : '카메라 확인'}
         </button>
+        {input && (
+          <button
+            type="button"
+            className="button secondary"
+            disabled={state.phase !== 'ready'}
+            onClick={() => owner.current?.observe()}
+          >
+            입력 확인
+          </button>
+        )}
         <p role={state.phase === 'error' ? 'alert' : 'status'}>
           {state.phase === 'error'
             ? errors[state.reason]
-            : state.phase === 'ready'
-              ? '카메라·분석 연결 확인됨'
-              : state.phase === 'preparing'
-                ? '카메라·분석 준비 중'
-                : state.phase === 'stopping'
-                  ? '권한 창이 열려 있다면 닫아 주세요.'
-                  : '카메라 꺼짐'}
+            : state.phase === 'observing'
+              ? '연속 입력 확인 중'
+              : state.phase === 'connecting'
+                ? '연속 입력 준비 중'
+                : state.phase === 'ready'
+                  ? '카메라·분석 연결 확인됨'
+                  : state.phase === 'preparing'
+                    ? '카메라·분석 준비 중'
+                    : state.phase === 'stopping'
+                      ? '권한 창이 열려 있다면 닫아 주세요.'
+                      : '카메라 꺼짐'}
         </p>
       </div>
-      <p className="small muted">연결만 확인합니다. 코칭·판정·저장은 시작하지 않습니다.</p>
+      <p className="small muted">
+        브라우저 안에서 입력만 확인합니다. 코칭·판정·저장은 시작하지 않습니다.
+      </p>
     </section>
   )
 }

@@ -27,6 +27,8 @@ for (const file of files) {
     'Camera preparation unavailable',
     '/__bodyguard/inference-worker.js',
     '카메라·분석 연결 확인됨',
+    '연속 입력 확인 중',
+    'Camera input unavailable',
     '/dev/coaching',
     '코칭 화면 구조 보기',
     '아바타 연결 대기',

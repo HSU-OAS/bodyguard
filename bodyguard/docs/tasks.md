@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-11 [S3.C3 연속 관찰 입력](stories/coaching-continuous-input.md): 카메라 확인→명시 입력 확인→같은 카메라/Worker의 순차 입력→끄기·재시작을 실제 개발 웹에 연결했다. [작동 영역·실패 원본·검증/작성자 리뷰](review/coaching-continuous-input/README.md). 연속 입력 중 화면 이탈·숨김/pagehide·401 회수를 확인했으며, 최신 복사 슬롯1개/consume-once·원래 시각·정리 실패 차단을 유지한다. 전체frontend/타입/build/private guard와 실제 가짜 카메라·SDK를 실행했고 조건부 PR 게이트 진행 중이다. PR129 sourceba721d4→mergeb5791b2/main 포함은 확인했다. 공개 코칭·판정·저장0, 아바타/Docker 보류·실측/출시 동작0·기존 시작P2·전체1~6 미완료는 유지한다. 아래는 이전 시점 기록이다.
+
 2026-10-11 [S3.C2 카메라 준비 취소](stories/camera-playback-cancellation.md): 미완료 재생의 취소·화면 이탈과 정리 실패를 보완했다. [실제 흐름·원본 RED·검증/리뷰](review/camera-playback-cancellation/README.md). 준비 취소 후 옛 재생을 기다리지 않고 명시 재시도할 수 있으며, 정리 불확실 시 차단한다. 실제 React/가짜 카메라·SDK와 전체frontend/타입/build/guard를 확인했고 조건부 PR 게이트 진행 중이다. PR128 source68f0bc2→mergebe1ec62/main은 실제 확인했다. 아바타/Docker 보류·실측/동작0·원래 시작P2·운영/전체1~6 미완료는 유지한다. 아래는 이전 시점 기록이다.
 
 2026-10-11 [S3.C1 카메라·첫 추론 준비](stories/coaching-camera-preparation.md): 승인된 코칭 화면에서 명시 준비→실제 SDK 첫 입력/폐기→끄기와 거부/취소·화면 이탈·계정 회수를 연결했다. [실제 화면·흐름·실패·작성자 리뷰](review/coaching-camera-preparation/README.md). 개발 classic Worker의 ESM 오류, 새 계정/새 화면의 이전 정리 우회, decoded 입력 대기/정리 실패를 보완했다. 전체 frontend1692·타입/범위 정적·production 고지/private guard·실제 Chrome/가짜 장치/SDK를 확인하고 조건부 PR 게이트를 진행한다. 아바타/동작 미디어·코칭/판정/추천/저장 활성화는 하지 않았다. PR127 sourcecb667d4→mergefd331d2/main·브랜치 보존을 확인했다. Docker는 CEO의 나중 연결 선택으로 실제 검증 보류다. 아바타 보류·출시 동작0·실측/참여자·기존 시작P2·외부/운영과 전체1~6 미완료는 유지한다. 아래는 이전 시점 기록이다.

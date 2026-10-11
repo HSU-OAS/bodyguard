@@ -1,0 +1,207 @@
+{
+  "baseMain": "b5791b2b1c3b6639d2d3e028b5b2659bda99acc7",
+  "method": "copy/compress executed reports and DOM-only PNG; does not execute verification",
+  "full": {
+    "files": 94,
+    "passed": 1710,
+    "failed": 0,
+    "pending": 0,
+    "maxWorkers": 2
+  },
+  "browser": {
+    "cases": [
+      "explicit native fake-camera preparation1 → separate input confirmation → >=5 subsequent actual heavy body/face/hands Worker frames; same camera/Worker, max in-flight1 → explicit stop",
+      "controlled held decoded callback cancelled during connecting; late callback cannot create an input or revive readiness",
+      "actual Router exit from running input releases source/camera/Worker; remount does not restart automatically",
+      "controlled pagehide event during actual running input ends source/camera/Worker",
+      "controlled hidden event during actual running input ends source/camera/Worker",
+      "800px notebook window/reduced motion/keyboard focus and44px input control; no horizontal overflow",
+      "actual AuthProvider controlled401 refresh during running input removes private UI and ends resources"
+    ],
+    "failure": null,
+    "external": 0,
+    "avatars": 0,
+    "writes": 0,
+    "errors": [],
+    "ownedResourcesClosed": true
+  },
+  "priorRegressions": {
+    "camera": 8,
+    "cancellationIsolated": 5,
+    "cancellationConcurrent": "1 passed, retry readiness TimeoutError; preserved, original startup P2 remains"
+  },
+  "failures": [
+    "original unit RED1",
+    "default full run1709 passed/1 existing MeasureDemoPage test5000ms timeout",
+    "sandbox browser setup failure; separate loopback listen diagnostic EPERM",
+    "concurrent cancellation readiness timeout"
+  ],
+  "commandResults": {
+    "typecheck": "exit0",
+    "scopedBiome": "exit0",
+    "actualViteBuild": "117modules exit0, envDir scratch; no prepare-assets",
+    "productionGuard": "original program with only asset-root substitution; exit0",
+    "noticesAndCSP": "present; JSON parseable; no unsafe-inline scripts",
+    "diffCheck": "exit0 before commit"
+  },
+  "review": {
+    "authorReview": true,
+    "independentReview": false,
+    "unresolvedScopedP1P2": 0
+  },
+  "source": [
+    {
+      "file": "src/pose/cameraPreparation.ts",
+      "sha256": "58f4ee1bcd65a72a833ea07d42ff4dc0ed0794457dcd851d0790bf8f8173e750"
+    },
+    {
+      "file": "src/pages/CameraPreparation.tsx",
+      "sha256": "ddadca17f96f2aeaa37d2480ce297be9dc6f32ff5959ca78b5ea7873bbcf4049"
+    },
+    {
+      "file": "scripts/test-continuous-input.mjs",
+      "sha256": "d5af716892c1ed1f1bf3989733620a041a8038dfd07a006d3820b363eb7d3716"
+    },
+    {
+      "file": "src/pose/cameraPreparation.observation.test.ts",
+      "sha256": "c017a96050b4afa500ac3d1806b6061bf9e8836205fe1ed9b3995638b2182b2c"
+    },
+    {
+      "file": "src/pages/CameraPreparation.observation.test.tsx",
+      "sha256": "0f6a90c83a98afddf3e2d1b836af05a3b0311c8c3a7ce8b73a1ae85d25bbaa1b"
+    },
+    {
+      "file": "src/pages/CameraPreparation.retirement.test.tsx",
+      "sha256": "808baa0242d899d52246b651277b18ff8a18684bea0431106d714696d40784e2"
+    },
+    {
+      "file": "scripts/check-selection-production.mjs",
+      "sha256": "bd6d3dee5f02358fc17d402224074c39043b34f39dca21ba65f82a018bde995d"
+    }
+  ],
+  "runtimeSourceBefore": [
+    {
+      "file": "src/pose/cameraPreparation.ts",
+      "sha256": "58f4ee1bcd65a72a833ea07d42ff4dc0ed0794457dcd851d0790bf8f8173e750"
+    },
+    {
+      "file": "src/pages/CameraPreparation.tsx",
+      "sha256": "ddadca17f96f2aeaa37d2480ce297be9dc6f32ff5959ca78b5ea7873bbcf4049"
+    },
+    {
+      "file": "scripts/test-continuous-input.mjs",
+      "sha256": "d5af716892c1ed1f1bf3989733620a041a8038dfd07a006d3820b363eb7d3716"
+    }
+  ],
+  "runtimeSourceAfter": [
+    {
+      "file": "src/pose/cameraPreparation.ts",
+      "sha256": "58f4ee1bcd65a72a833ea07d42ff4dc0ed0794457dcd851d0790bf8f8173e750"
+    },
+    {
+      "file": "src/pages/CameraPreparation.tsx",
+      "sha256": "ddadca17f96f2aeaa37d2480ce297be9dc6f32ff5959ca78b5ea7873bbcf4049"
+    },
+    {
+      "file": "scripts/test-continuous-input.mjs",
+      "sha256": "d5af716892c1ed1f1bf3989733620a041a8038dfd07a006d3820b363eb7d3716"
+    }
+  ],
+  "product": [
+    {
+      "file": "index-BVyDftrj.js",
+      "sha256": "dbdc8e3cb9ad8eeeae2519b7bbf37b84a230d4723607ec4817d38f5cee10c779",
+      "identicalToPR129": true
+    },
+    {
+      "file": "index-dNUNBpCv.css",
+      "sha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e",
+      "identicalToPR129": true
+    }
+  ],
+  "records": [
+    {
+      "file": "unit-red.json.gz",
+      "originalBytes": 2119,
+      "originalSHA256": "1f0525a53c97c8233bd0c27638a45032105a4a8af60d228c9ae9de9a0345f697"
+    },
+    {
+      "file": "unit-first.json.gz",
+      "originalBytes": 8000,
+      "originalSHA256": "97d854c641405bd0bd7fc0dafab84e94d00c18000168f4c46d9113c5fc5272a8"
+    },
+    {
+      "file": "unit-ownership.json.gz",
+      "originalBytes": 9454,
+      "originalSHA256": "e3e55f8e8515bb29e0898e2e3c66240c5840df72cfd0938fce3733e3a2407e3d"
+    },
+    {
+      "file": "unit-interface.json.gz",
+      "originalBytes": 3890,
+      "originalSHA256": "a79a4bfd7993014bbd2945dcc51b1f9a0f7fa7cb0e49095144e7f0baaeccfaa7"
+    },
+    {
+      "file": "unit-final.json.gz",
+      "originalBytes": 595388,
+      "originalSHA256": "9b80e7b7588a8d7c7ad529169b736149cdcd00bdd408f654bdc7c2e1724c95f0"
+    },
+    {
+      "file": "unit-timeout-recheck.json.gz",
+      "originalBytes": 3217,
+      "originalSHA256": "f34ce65a04ff4f8472dd80efc419a188e94a2c26491fb2b0e5542d31f7da57ce"
+    },
+    {
+      "file": "unit-final-bounded.json.gz",
+      "originalBytes": 590241,
+      "originalSHA256": "aea05fa5fc9329d3bcb984e7a2ba600b52d272d70fe17c013d2fce8e5a4fab27"
+    },
+    {
+      "file": "browser.json.gz",
+      "originalBytes": 2046,
+      "originalSHA256": "d1647a9877e3fb5fdeea219dda0391c1dc721e93b93578d93b56dd192c1908a8"
+    },
+    {
+      "file": "browser-final.json.gz",
+      "originalBytes": 1489,
+      "originalSHA256": "17cc028ee30a6c04353bbd8b25e09f2588ffba55a8b79a6af935b4c0e96b2a0a"
+    },
+    {
+      "file": "browser-final-local.json.gz",
+      "originalBytes": 2046,
+      "originalSHA256": "bbb49e293345a093300f713dec9668abe388c81baaa228084d15e6f720de9cb7"
+    },
+    {
+      "file": "browser-expanded.json.gz",
+      "originalBytes": 2218,
+      "originalSHA256": "49e7f182fc86df382fe7de16dbe0b47026f5ee21d5faf8472bd917360b0fbebb"
+    },
+    {
+      "file": "browser-helper-at-run.mjs.gz",
+      "originalBytes": 10726,
+      "originalSHA256": "f8722481faab0a614ef561bda163c077709d446e6da9998f03e48281aa85405c"
+    },
+    {
+      "file": "camera-regression.json.gz",
+      "originalBytes": 1213,
+      "originalSHA256": "ce3eb3de46c36d120a8aafd03c3040ee6228e32b329837e9fad661290e91bfe3"
+    },
+    {
+      "file": "cancellation-concurrent-failure.json.gz",
+      "originalBytes": 738,
+      "originalSHA256": "fa73a4a7adf1e8e3318532b94059cc5b6bc188aa5e8e3d1f71e3aa63f8c0f8a4"
+    },
+    {
+      "file": "cancellation-isolated.json.gz",
+      "originalBytes": 1079,
+      "originalSHA256": "d708d422a844d4b8e84a227624e8a79fb9a62236fee889bf598e08e9b85f4546"
+    }
+  ],
+  "notProven": [
+    "physical camera/people/accuracy/15fps",
+    "avatar/clinical judgement/reference",
+    "real provider/SQL",
+    "original startup P2 resolution",
+    "Docker/TLS/deployment/public coaching"
+  ],
+  "releaseCandidate": false
+}
