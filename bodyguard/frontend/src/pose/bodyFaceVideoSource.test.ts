@@ -166,7 +166,7 @@ describe('same frozen body and face frame', () => {
       expect(result?.result.headOrientation === null).toBe(sequence !== 1)
     }
   })
-  it('does not associate head with empty, multiple or incomplete body/world', async () => {
+  it('skips face for unusable body/world and resumes without reusing a previous head', async () => {
     const f = fixture()
     let sequence = 0
     for (const [images, worlds] of [
@@ -176,13 +176,78 @@ describe('same frozen body and face frame', () => {
         [points(), points()],
       ],
       [[points()], []],
+      [[points()], [points(), points()]],
       [[points().slice(0, 20)], [points()]],
+      [[points()], [points().slice(0, 20)]],
+      [[[{ ...points()[0], x: NaN }, ...points().slice(1)]], [points()]],
+      [[points()], [[{ ...points()[0], y: Infinity }, ...points().slice(1)]]],
     ]) {
       f.detectBody.mockReturnValue({ ...f.body, landmarks: images, worldLandmarks: worlds })
       const reading = f.source.read()
       f.emit(++sequence * 10, sequence, sequence / 10)
       expect((await reading)?.result.headOrientation).toBeNull()
+      expect(f.detectFace).not.toHaveBeenCalled()
+      expect(f.body.close).toHaveBeenCalledTimes(sequence)
+      expect(FakeFrame.made[sequence - 1].close).toHaveBeenCalledOnce()
     }
+    f.detectBody.mockReturnValue(f.body)
+    const reading = f.source.read()
+    f.emit(++sequence * 10, sequence, sequence / 10)
+    expect((await reading)?.result.headOrientation).not.toBeNull()
+    expect(f.detectFace).toHaveBeenCalledExactlyOnceWith(
+      FakeFrame.made[sequence - 1],
+      sequence * 10,
+    )
+    await f.source.dispose()
+  })
+  it('skips an irrelevant face exception, preserving the next valid-body failure', async () => {
+    const f = fixture()
+    f.detectFace.mockImplementation(() => {
+      throw new Error('PRIVATE_FACE')
+    })
+    f.detectBody.mockReturnValue({ ...f.body, landmarks: [], worldLandmarks: [] })
+    const empty = f.source.read()
+    f.emit()
+    expect((await empty)?.result.headOrientation).toBeNull()
+    expect(f.detectFace).not.toHaveBeenCalled()
+    f.detectBody.mockReturnValue(f.body)
+    const valid = f.source.read()
+    f.emit(20, 2, 0.2)
+    await expect(valid).rejects.toThrow('Video capture unavailable')
+    expect(f.body.close).toHaveBeenCalledTimes(2)
+    await f.source.dispose()
+  })
+  it('clears a previous head for an empty body and resumes on the same source', async () => {
+    const f = fixture()
+    const first = f.source.read()
+    f.emit()
+    expect((await first)?.result.headOrientation).not.toBeNull()
+    f.detectBody.mockReturnValue({ ...f.body, landmarks: [], worldLandmarks: [] })
+    const empty = f.source.read()
+    f.emit(20, 2, 0.2)
+    expect((await empty)?.result.headOrientation).toBeNull()
+    expect(f.detectFace).toHaveBeenCalledOnce()
+    f.detectBody.mockReturnValue(f.body)
+    const resumed = f.source.read()
+    f.emit(30, 3, 0.3)
+    expect((await resumed)?.result.headOrientation).not.toBeNull()
+    expect(f.detectFace).toHaveBeenCalledTimes(2)
+    expect(f.body.close).toHaveBeenCalledTimes(3)
+    await f.source.dispose()
+  })
+  it('preserves cleanup failure when face inference is skipped', async () => {
+    const f = fixture()
+    f.detectBody.mockReturnValue({ ...f.body, landmarks: [], worldLandmarks: [] })
+    f.body.close.mockImplementation(() => {
+      throw new Error('PRIVATE_CLOSE')
+    })
+    const reading = f.source.read()
+    f.emit()
+    await expect(reading).rejects.toBeInstanceOf(ResourceCleanupError)
+    await expect(f.source.dispose()).rejects.toBeInstanceOf(ResourceCleanupError)
+    expect(f.detectFace).not.toHaveBeenCalled()
+    expect(f.body.close).toHaveBeenCalledOnce()
+    expect(FakeFrame.made[0].close).toHaveBeenCalledOnce()
   })
   it('does not call face after abort while body is pending and still reclaims body and input', async () => {
     const f = fixture(),

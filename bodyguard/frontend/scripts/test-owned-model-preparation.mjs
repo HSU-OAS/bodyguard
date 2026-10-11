@@ -9,7 +9,7 @@ import { chromium } from '@playwright/test'
 const [scratch, executable, label, profile = 'all'] = process.argv.slice(2)
 assert(/^\/private\/tmp\/bodyguard-owned-models\.[A-Za-z0-9]+$/.test(scratch))
 assert(existsSync(executable) && /^[a-z][a-z0-9-]+$/.test(label))
-assert(['all', 'latency-only', 'current-clock', 'fixed-clock'].includes(profile))
+assert(['all', 'latency-only', 'current-clock', 'fixed-clock', 'body-gate'].includes(profile))
 const output = join(scratch, `${label}.json`)
 assert(!existsSync(output), 'Keep earlier evidence')
 const sha = (b) => createHash('sha256').update(b).digest('hex')
@@ -129,11 +129,13 @@ try {
     proxy: { server: `http://127.0.0.1:${proxy.address().port}`, bypass: `<-loopback>,${host}` },
     args: ['--disable-background-networking', '--disable-component-update', '--disable-sync'],
   })
-  for (const name of ['current-clock', 'fixed-clock'].includes(profile)
-    ? ['baseline']
-    : profile === 'latency-only'
-      ? ['latency', 'latency-cpu4']
-      : ['baseline', 'slow', 'cancel', 'tamper', 'latency', 'latency-cpu4']) {
+  for (const name of profile === 'body-gate'
+    ? ['body-gate-normal-1', 'body-gate-cpu4-1', 'body-gate-normal-2', 'body-gate-cpu4-2']
+    : ['current-clock', 'fixed-clock'].includes(profile)
+      ? ['baseline']
+      : profile === 'latency-only'
+        ? ['latency', 'latency-cpu4']
+        : ['baseline', 'slow', 'cancel', 'tamper', 'latency', 'latency-cpu4']) {
     mode = name
     held = false
     const context = await browser.newContext({ serviceWorkers: 'block' }),
@@ -149,7 +151,7 @@ try {
       if (!r.url().startsWith(`${origin}/`) && !r.url().startsWith('blob:')) external++
     })
     try {
-      if (name === 'latency-cpu4') {
+      if (name.includes('cpu4')) {
         const cdp = await context.newCDPSession(page)
         await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 })
       }
@@ -167,27 +169,43 @@ try {
         workers,
         closed,
         storage: null,
-        cdpCpuRate: name === 'latency-cpu4' ? 4 : 1,
+        cdpCpuRate: name.includes('cpu4') ? 4 : 1,
         phase: 'prepared',
         inferenceMs: null,
       }
       results.push(row)
-      const success = ['baseline', 'slow', 'latency', 'latency-cpu4'].includes(name)
+      const success =
+        name.startsWith('body-gate-') ||
+        ['baseline', 'slow', 'latency', 'latency-cpu4'].includes(name)
       if (success) {
         assert.equal(prepared.state, 'ready')
         assert.equal(prepared.failure, null)
         row.phase = 'inference'
-        const inferAt = Date.now()
-        await page.evaluate(
-          (current) => window.ownedModelProbe.infer(current ? performance.now() : 1),
-          ['current-clock', 'latency-only'].includes(profile),
-        )
-        row.inferenceMs = Date.now() - inferAt
+        const samples = []
+        for (let i = 0; i < (profile === 'body-gate' ? 3 : 1); i++) {
+          const inferAt = Date.now()
+          const observed = await page.evaluate(
+            ({ current, at }) => window.ownedModelProbe.infer(current ? performance.now() : at),
+            { current: ['current-clock', 'latency-only'].includes(profile), at: 1 + i * 20 },
+          )
+          const roundTripMs = Date.now() - inferAt
+          assert.deepEqual(observed.lastBodyGate, {
+            bodies: 0,
+            worlds: 0,
+            headUnavailable: true,
+            hands: 0,
+          })
+          assert.equal(observed.frames, i + 1)
+          samples.push({ roundTripMs, shape: observed.lastBodyGate })
+        }
+        row.inferenceMs = samples[0].roundTripMs
+        row.samples = samples
       } else {
         assert.equal(prepared.failure, 'preparation')
         assert.equal(prepared.frames, 0)
       }
       const final = await page.evaluate(() => window.ownedModelProbe.close())
+      row.final = final
       await page.waitForTimeout(100)
       const storage = await page.evaluate(() => localStorage.length + sessionStorage.length)
       assert.equal(final.failure, success ? null : 'preparation')

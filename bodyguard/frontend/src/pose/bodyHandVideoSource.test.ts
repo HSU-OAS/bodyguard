@@ -238,6 +238,7 @@ describe('same frozen body face and hands input', () => {
     f.emit(20, 2, 0.2)
     expect((await second)?.result.hands).toEqual([])
     f.detectHands.mockReturnValue(f.hands)
+    let sequence = 2
     for (const [landmarks, worldLandmarks] of [
       [[], []],
       [
@@ -245,15 +246,68 @@ describe('same frozen body face and hands input', () => {
         [points(), points()],
       ],
       [[points()], []],
+      [[points()], [points(), points()]],
       [[points(32)], [points()]],
+      [[points()], [points(32)]],
       [[[{ x: NaN, y: 0, z: 0 }, ...points(32)]], [points()]],
+      [[points()], [[{ x: 0, y: Infinity, z: 0 }, ...points(32)]]],
     ]) {
       f.detectBody.mockReturnValue({ ...f.body, landmarks, worldLandmarks })
-      const sequence = f.detectHands.mock.calls.length + 1
       const reading = f.source.read()
-      f.emit(sequence * 10, sequence, sequence / 10)
+      f.emit(++sequence * 10, sequence, sequence / 10)
       expect((await reading)?.result).toMatchObject({ hands: [], headOrientation: null })
+      expect(f.detectFace).toHaveBeenCalledTimes(2)
+      expect(f.detectHands).toHaveBeenCalledTimes(2)
+      expect(f.body.close).toHaveBeenCalledTimes(sequence)
     }
+    f.detectBody.mockReturnValue(f.body)
+    const resumed = f.source.read()
+    f.emit(++sequence * 10, sequence, sequence / 10)
+    expect((await resumed)?.result).toMatchObject({
+      headOrientation: [0, 0, 0, 1],
+      hands: [{ side: 'left' }, { side: 'right' }],
+    })
+    expect(f.detectFace).toHaveBeenCalledTimes(3)
+    expect(f.detectHands).toHaveBeenCalledTimes(3)
+    expect(f.detectHands).toHaveBeenLastCalledWith(FakeFrame.made[sequence - 1], sequence * 10)
+    await f.source.dispose()
+  })
+  it.each(['face', 'hands'] as const)(
+    'skips an irrelevant %s exception but preserves the next valid-body failure',
+    async (failed) => {
+      const f = fixture(),
+        throwing = failed === 'face' ? f.detectFace : f.detectHands
+      throwing.mockImplementation(() => {
+        throw new Error('PRIVATE_DEPENDENT_RESULT')
+      })
+      f.detectBody.mockReturnValue({ ...f.body, landmarks: [], worldLandmarks: [] })
+      const empty = f.source.read()
+      f.emit()
+      expect((await empty)?.result).toMatchObject({ headOrientation: null, hands: [] })
+      expect(f.detectFace).not.toHaveBeenCalled()
+      expect(f.detectHands).not.toHaveBeenCalled()
+      f.detectBody.mockReturnValue(f.body)
+      const valid = f.source.read()
+      f.emit(20, 2, 0.2)
+      await expect(valid).rejects.toThrow('Video capture unavailable')
+      expect(f.body.close).toHaveBeenCalledTimes(2)
+      await f.source.dispose()
+    },
+  )
+  it('preserves cleanup failure when both dependent detectors are skipped', async () => {
+    const f = fixture()
+    f.detectBody.mockReturnValue({ ...f.body, landmarks: [], worldLandmarks: [] })
+    f.body.close.mockImplementation(() => {
+      throw new Error('PRIVATE_CLOSE')
+    })
+    const reading = f.source.read()
+    f.emit()
+    await expect(reading).rejects.toBeInstanceOf(ResourceCleanupError)
+    await expect(f.source.dispose()).rejects.toBeInstanceOf(ResourceCleanupError)
+    expect(f.detectFace).not.toHaveBeenCalled()
+    expect(f.detectHands).not.toHaveBeenCalled()
+    expect(f.body.close).toHaveBeenCalledOnce()
+    expect(FakeFrame.made[0].close).toHaveBeenCalledOnce()
   })
   it('rejects repeated decoder stamps before all detectors', async () => {
     const f = fixture()
