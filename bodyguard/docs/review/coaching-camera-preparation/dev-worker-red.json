@@ -1,0 +1,34 @@
+{
+  "result": {
+    "preparation": null,
+    "inference": null,
+    "closed": {
+      "thread": "worker",
+      "state": "closed",
+      "readyMs": null,
+      "firstMs": null,
+      "timings": [],
+      "maxGapMs": 0,
+      "beats": 0,
+      "clickDelayMs": null,
+      "frames": 0,
+      "closes": 0,
+      "delegates": [],
+      "concurrentRejected": false
+    },
+    "workerErrors": [
+      "classic-esm-syntax"
+    ],
+    "camera": 0,
+    "external": 0,
+    "avatar": 0,
+    "pageErrors": [
+      "SyntaxError"
+    ]
+  },
+  "failure": {
+    "name": "Error",
+    "message": "page.evaluate: Error: Private thread comparison unavailable\n    at prepare (http://127.0.0.1:63870/e2e/fixtures/inferenceThreadProbe.ts:67:10)\n    at async <anonymous>:337:30"
+  },
+  "boundary": "actual dev Vite/Worker/SDK; 3 blank synthetic frames; no physical camera/person/avatars/SQL/performance sign-off"
+}

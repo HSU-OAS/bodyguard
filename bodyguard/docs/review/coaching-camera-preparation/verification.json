@@ -1,0 +1,135 @@
+{
+  "date": "2026-10-11",
+  "baseMain": "fd331d2204dd425e962095c823aac3ca9681f733",
+  "status": "local required verification passed; conditional PR gate pending",
+  "unitRuns": [
+    {
+      "kind": "obsolete-worker-url-unit-red",
+      "path": "/private/tmp/bodyguard-camera-preparation.Ho6HHT/unit-final.json",
+      "sha256": "440a03ad7065a312d06afbd2181ef185219e9cdbc2040a145c19c141864cfd66",
+      "files": 90,
+      "total": 1690,
+      "passed": 1689,
+      "failed": 1,
+      "pending": 0,
+      "success": false,
+      "failures": [
+        "worker inference owner uses a fixed same-origin worker and explicit model/features only"
+      ]
+    },
+    {
+      "kind": "pre-review-unit-green",
+      "path": "/private/tmp/bodyguard-camera-preparation.Ho6HHT/unit-green.json",
+      "sha256": "609b16eef3e69bbe5528a083d464aed5e973168a8f35ceb9696b6d482f00a058",
+      "files": 90,
+      "total": 1691,
+      "passed": 1691,
+      "failed": 0,
+      "pending": 0,
+      "success": true,
+      "failures": []
+    },
+    {
+      "kind": "review-unit-green-before-final-alias",
+      "path": "/private/tmp/bodyguard-camera-preparation.Ho6HHT/unit-reviewed.json",
+      "sha256": "ac675af240029c7ab0d2a1b88df002860bfc15760036b791db9d3d6c867a3d53",
+      "files": 90,
+      "total": 1692,
+      "passed": 1692,
+      "failed": 0,
+      "pending": 0,
+      "success": true,
+      "failures": []
+    },
+    {
+      "kind": "lazy-dom-pending-red",
+      "path": "/private/tmp/bodyguard-camera-preparation.bwkKkf/unit.json",
+      "sha256": "21c5375672f2b0ffbaa1e7e65fd8fcc80bcb9fbbfdf7b0ebf6597df16ead1583",
+      "files": 90,
+      "total": 1692,
+      "passed": 1691,
+      "failed": 1,
+      "pending": 0,
+      "success": false,
+      "failures": [
+        "changes display framing without enabling camera, verdict, timer or reference playback"
+      ]
+    },
+    {
+      "kind": "final-dom-ready-unit-green",
+      "path": "/private/tmp/bodyguard-camera-preparation.bwkKkf/unit-dom-ready.json",
+      "sha256": "317373bd4ee4c87d380bce19a5988f8405a34431b168c7163a874d933acf09a3",
+      "files": 90,
+      "total": 1692,
+      "passed": 1692,
+      "failed": 0,
+      "pending": 0,
+      "success": true,
+      "failures": []
+    }
+  ],
+  "browser": {
+    "report": "browser.json",
+    "passedCases": 8,
+    "actual": "React/AuthProvider/Vite/Chrome and SDK heavy body/face/hands",
+    "synthetic": "native Chrome fake camera, controlled account API/denial/late result/401",
+    "physicalOrClinical": false
+  },
+  "source": {
+    "sha256": "source-hashes.json",
+    "stableDuringFinalBrowser": "17 source/script files unchanged; DOM preimport test adjustment separately verified by final whole unit suite"
+  },
+  "gates": {
+    "typecheck": 0,
+    "biome": {
+      "files": 18,
+      "exit": 0
+    },
+    "production": {
+      "scratch": "/private/tmp/bodyguard-camera-preparation.bwkKkf/product",
+      "originalBuildExit": 0,
+      "originalNoticeGate": true,
+      "privateExclusionExit": 0,
+      "guardAdaptation": "unchanged checker with owned scratch assets root only"
+    },
+    "diffCheck": 0,
+    "authorReview": "ownership, network, state, release boundaries; scoped P1/P2 resolved",
+    "independentReviews": 0
+  },
+  "additionalFailedEvidence": [
+    {
+      "kind": "retirement before fix",
+      "casesFailed": 3,
+      "rawEvidence": "conversation tool stdout; no separate original file claimed"
+    },
+    {
+      "kind": "decoded input before fix",
+      "casesFailed": 2,
+      "rawEvidence": "conversation tool stdout; no separate original file claimed"
+    },
+    {
+      "kind": "Node TS import extension",
+      "browserStarted": false,
+      "rawEvidence": "conversation tool stdout"
+    },
+    {
+      "kind": "Biome dependency lint",
+      "fixed": "captured accountId is referenced in effect, not suppressed"
+    },
+    {
+      "kind": "in-flight HMR browser",
+      "passedCases": 8,
+      "qualification": "not the fixed-source final run; preserved in /private/tmp/bodyguard-camera-preparation.Ho6HHT/browser-reviewed.json"
+    }
+  ],
+  "notRun": [
+    "physical camera/person accuracy",
+    "real permission popup denial",
+    "SQL/provider mail/Google",
+    "avatar manufacturing/GLB/deformation/rendering",
+    "Docker/NGINX/TLS",
+    "production secrets/migration/deployment/release",
+    "expert practicality"
+  ],
+  "remainder": "all stage1-6 release gates unchanged; avatar and Docker held; release-eligible motions zero; original startup P2 not closed"
+}
