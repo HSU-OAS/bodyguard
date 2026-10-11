@@ -15,6 +15,7 @@ import { prepareSummaries, type SummaryContext } from '../api/minuteSummaries'
 import { dateRange, defaultPeriod } from '../api/records'
 import { type ReadyAccount, useAuth } from '../auth'
 import { MinuteSummaryDeletion } from './MinuteSummaryDeletion'
+import { RecordBaseline } from './RecordBaseline'
 import './RecordsPage.css'
 import './MinuteSummaryPage.css'
 
@@ -349,7 +350,14 @@ export function MinuteSummaryPage() {
                   한 번에 조회할 수 있는 범위의 끝입니다. 날짜 범위를 좁혀 남은 기록을 확인하세요.
                 </p>
               )}
-              {picked && <MinuteDetail item={picked} heading={detail} />}
+              {picked && (
+                <MinuteDetail
+                  key={`${ready.key}:${picked.minute_start}`}
+                  item={picked}
+                  heading={detail}
+                  onAuthFailure={blockAuthority}
+                />
+              )}
             </>
           )}
           {ready?.stale && (
@@ -393,9 +401,11 @@ export function MinuteSummaryPage() {
 function MinuteDetail({
   item,
   heading,
+  onAuthFailure,
 }: {
   item: MinuteOut
   heading: RefObject<HTMLHeadingElement | null>
+  onAuthFailure(): void
 }) {
   return (
     <section className="record-detail minute-detail" aria-labelledby="minute-detail-heading">
@@ -452,7 +462,10 @@ function MinuteDetail({
         ))}
         <div>
           <dt>개인 기준</dt>
-          <dd>{item.baseline_id ? '개인 기준선 사용' : '보정 전'}</dd>
+          <dd>
+            {item.baseline_id ? '개인 기준선 사용' : '보정 전'}
+            {item.baseline_id && <RecordBaseline item={item} onAuthFailure={onAuthFailure} />}
+          </dd>
         </div>
         <div>
           <dt>기록 버전</dt>

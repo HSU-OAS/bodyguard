@@ -1,0 +1,679 @@
+{
+  "at": "2026-10-11T12:31:15.206Z",
+  "scope": "existing posture-record detail baseline read only, not calibration/clinical verification/stage completion",
+  "sources": [
+    {
+      "name": "backend/tests/run_browser.py",
+      "sha256": "b7e6b9da986de4a8154ce3439771b42d1cbdcdea31872304cffc83c0ab7be42e"
+    },
+    {
+      "name": "backend/app/main.py",
+      "sha256": "705a9ae482c7fb85e93f0394e63f22dc87bc19693aee79b87a21ee200f4c96df"
+    },
+    {
+      "name": "backend/app/baselines.py",
+      "sha256": "68157f424cb55bcb5fed4fefdae3e12e99535de5e9d19e8f0bd1f24422371fd8"
+    },
+    {
+      "name": "backend/app/summaries.py",
+      "sha256": "46a057358a3a44c8a08b29f661213cec46d82f17350859c4b1e0e445f8e37637"
+    },
+    {
+      "name": "frontend/src/pages/RecordBaseline.tsx",
+      "sha256": "a80d3c286228deec46dae62e57b1bcc5600aaa5107290af9653b514e1b587b95"
+    },
+    {
+      "name": "frontend/src/pages/MinuteSummaryPage.tsx",
+      "sha256": "88e74ab5472cf4989c314a74aca992c71d10cabbbbfb441420f023b0bf39934c"
+    },
+    {
+      "name": "frontend/src/pages/MinuteSummaryPage.css",
+      "sha256": "160616da799bad07898a35894a864c19545e4813f4e6116ab94a00605909e951"
+    },
+    {
+      "name": "frontend/src/pages/MinuteSummaryPage.baseline.test.tsx",
+      "sha256": "de16087103292ca25bec513d64c9c6270a315faefb85d6822619d62c86de1a59"
+    },
+    {
+      "name": "frontend/src/api/baselines.ts",
+      "sha256": "973ba733bac42b53a23d079935cb82049dff6157e21155d8bf9acd2f3f7ea531"
+    },
+    {
+      "name": "frontend/src/api/minuteSummaries.ts",
+      "sha256": "4c251cd5b33cef9cac5c5953023c43c6e0acbf51cc390f083d1062a7b373d18e"
+    },
+    {
+      "name": "frontend/src/api/auth.ts",
+      "sha256": "0193700ff7ef9207ccb0329c37a7d4758a44262d52ac5367b682b9539c99de4b"
+    },
+    {
+      "name": "frontend/src/auth.tsx",
+      "sha256": "889843a8153e36c67708564d80729cdcdd59012702d1ff50923e1c50ca123b40"
+    },
+    {
+      "name": "frontend/src/App.tsx",
+      "sha256": "92f76aeb3e61f91d4dd3c402a2ab22a27087ccba563b47029a763210aebac86b"
+    },
+    {
+      "name": "frontend/e2e/recordbaseline.spec.ts",
+      "sha256": "f3915a3f615a1cf7fef1274812502ab91cae8ffcb8749e0f16653c05d5ebb3bb"
+    },
+    {
+      "name": "frontend/playwright.account.config.ts",
+      "sha256": "073a4a12c43405e34fbc71019ca6ba7dfa594ef9cc61c646e7716cac98bbac7e"
+    },
+    {
+      "name": "frontend/scripts/check-selection-production.mjs",
+      "sha256": "9e81c92bcfefc0e625f6b5207b03e8c8b1fd1169dd2397c5933195728873bb48"
+    }
+  ],
+  "frontend": {
+    "files": 101,
+    "tests": 1844,
+    "featureTests": 17
+  },
+  "backendRelated": {
+    "tests": 150,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "actualProductionChrome": {
+    "stats": {
+      "startTime": "2026-10-11T12:27:37.260Z",
+      "duration": 14397.167000000001,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "flows": [
+      {
+        "title": "record A survives recalibration B: real historical lookup, keyboard and notebook layout",
+        "boundaries": {
+          "actualProductionChromeHttpSql": true,
+          "syntheticAccountsValuesMail": true,
+          "actualBodyCalibration": false,
+          "camera": 0,
+          "external": 0,
+          "errors": [],
+          "baselineRequests": [
+            {
+              "path": "/api/v1/baselines/f266a9b2-0ff1-4b0f-a5e9-145b4502341e",
+              "method": "GET"
+            }
+          ],
+          "storage": [
+            0,
+            0
+          ],
+          "browser": "155.0.8059.40"
+        }
+      },
+      {
+        "title": "controlled response failure requires explicit retry before actual stored baseline appears",
+        "boundaries": {
+          "actualProductionChromeHttpSql": true,
+          "syntheticAccountsValuesMail": true,
+          "actualBodyCalibration": false,
+          "camera": 0,
+          "external": 0,
+          "errors": [],
+          "baselineRequests": [
+            {
+              "path": "/api/v1/baselines/3700d221-81bf-4239-b547-01507fbdaf8d",
+              "method": "GET"
+            },
+            {
+              "path": "/api/v1/baselines/3700d221-81bf-4239-b547-01507fbdaf8d",
+              "method": "GET"
+            }
+          ],
+          "storage": [
+            0,
+            0
+          ],
+          "browser": "155.0.8059.40"
+        }
+      },
+      {
+        "title": "silent cookie account switch closes original records and cannot read the other owner",
+        "boundaries": {
+          "actualProductionChromeHttpSql": true,
+          "syntheticAccountsValuesMail": true,
+          "actualBodyCalibration": false,
+          "camera": 0,
+          "external": 0,
+          "errors": [],
+          "baselineRequests": [],
+          "storage": [
+            0,
+            0
+          ],
+          "browser": "155.0.8059.40"
+        }
+      }
+    ]
+  },
+  "actualRecordRegression": {
+    "stats": {
+      "startTime": "2026-10-11T12:27:53.832Z",
+      "duration": 16342.333999999999,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "flows": [
+      {
+        "title": "SW-W01 실제 계정→자세 기록→상세·페이지·취소·삭제와 화이트 블루 웹",
+        "boundaries": {
+          "actualProductionChromeHttpSql": true,
+          "syntheticAggregatesMailFaults": true,
+          "actualPersonCameraClinical": false,
+          "camera": 0,
+          "unexpected": [],
+          "errors": [],
+          "timing": [
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 8.079
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 6.313
+            },
+            {
+              "path": "/api/v1/auth/csrf",
+              "method": "GET",
+              "milliseconds": 7.714
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 4.724
+            },
+            {
+              "path": "/api/v1/summaries",
+              "method": "GET",
+              "milliseconds": 7.944
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 4.518
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 7.343
+            },
+            {
+              "path": "/api/v1/auth/csrf",
+              "method": "GET",
+              "milliseconds": 4.893
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 5.486
+            },
+            {
+              "path": "/api/v1/summaries",
+              "method": "GET",
+              "milliseconds": 5.16
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 3.578
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 5.179
+            },
+            {
+              "path": "/api/v1/auth/csrf",
+              "method": "GET",
+              "milliseconds": 4.018
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 4.318
+            },
+            {
+              "path": "/api/v1/summaries",
+              "method": "GET",
+              "milliseconds": 7.28
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 3.639
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 4.856
+            },
+            {
+              "path": "/api/v1/auth/csrf",
+              "method": "GET",
+              "milliseconds": 3.813
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 2.945
+            },
+            {
+              "path": "/api/v1/summaries",
+              "method": "GET",
+              "milliseconds": 76.742
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 3.444
+            },
+            {
+              "path": "/api/v1/summaries/delete-preview",
+              "method": "POST",
+              "milliseconds": 12.468
+            },
+            {
+              "path": "/api/v1/summaries/delete-preview",
+              "method": "POST",
+              "milliseconds": 9.879
+            },
+            {
+              "path": "/api/v1/summaries/delete",
+              "method": "POST",
+              "milliseconds": 13.436
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 4.511
+            },
+            {
+              "path": "/api/v1/auth/csrf",
+              "method": "GET",
+              "milliseconds": 5.577
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 3.125
+            },
+            {
+              "path": "/api/v1/summaries",
+              "method": "GET",
+              "milliseconds": 4.01
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 3.423
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 5.764
+            },
+            {
+              "path": "/api/v1/auth/csrf",
+              "method": "GET",
+              "milliseconds": 4.084
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 3.936
+            },
+            {
+              "path": "/api/v1/summaries",
+              "method": "GET",
+              "milliseconds": 5.552
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 4.414
+            }
+          ],
+          "storage": [
+            0,
+            0
+          ],
+          "browser": "155.0.8059.40"
+        }
+      },
+      {
+        "title": "SW-W02 실제 삭제 뒤 응답 단절은 불확실·명시 재조회이며 재삭제하지 않는다",
+        "boundaries": {
+          "actualProductionChromeHttpSql": true,
+          "syntheticAggregatesMailFaults": true,
+          "actualPersonCameraClinical": false,
+          "camera": 0,
+          "unexpected": [],
+          "errors": [],
+          "timing": [
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 5.659
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 5.077
+            },
+            {
+              "path": "/api/v1/auth/csrf",
+              "method": "GET",
+              "milliseconds": 4.868
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 5.895
+            },
+            {
+              "path": "/api/v1/summaries",
+              "method": "GET",
+              "milliseconds": 4.589
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 2.756
+            },
+            {
+              "path": "/api/v1/summaries/delete-preview",
+              "method": "POST",
+              "milliseconds": 10.871
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 8.586
+            },
+            {
+              "path": "/api/v1/auth/csrf",
+              "method": "GET",
+              "milliseconds": 7.226
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 4.205
+            },
+            {
+              "path": "/api/v1/summaries",
+              "method": "GET",
+              "milliseconds": 4.493
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 3.862
+            }
+          ],
+          "storage": [
+            0,
+            0
+          ],
+          "browser": "155.0.8059.40"
+        }
+      },
+      {
+        "title": "SW-W03 실제 GET에 다른 계정 쿠키가 섞여도 기록은 표시되지 않는다",
+        "boundaries": {
+          "actualProductionChromeHttpSql": true,
+          "syntheticAggregatesMailFaults": true,
+          "actualPersonCameraClinical": false,
+          "camera": 0,
+          "unexpected": [],
+          "errors": [],
+          "timing": [
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 15.315
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 6.269
+            },
+            {
+              "path": "/api/v1/auth/csrf",
+              "method": "GET",
+              "milliseconds": 5.946
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 12.896
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 10.777
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 8.031
+            },
+            {
+              "path": "/api/v1/auth/csrf",
+              "method": "GET",
+              "milliseconds": 4.918
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 3.702
+            },
+            {
+              "path": "/api/v1/summaries",
+              "method": "GET",
+              "milliseconds": 5.635
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 3.437
+            }
+          ],
+          "storage": [
+            0,
+            0
+          ],
+          "browser": "155.0.8059.40"
+        }
+      },
+      {
+        "title": "SW-W04 실제 대상 변경409와 조회 오류 복구·invalid 기간",
+        "boundaries": {
+          "actualProductionChromeHttpSql": true,
+          "syntheticAggregatesMailFaults": true,
+          "actualPersonCameraClinical": false,
+          "camera": 0,
+          "unexpected": [],
+          "errors": [],
+          "timing": [
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 5.013
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 5.261
+            },
+            {
+              "path": "/api/v1/auth/csrf",
+              "method": "GET",
+              "milliseconds": 4.91
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 3.096
+            },
+            {
+              "path": "/api/v1/summaries",
+              "method": "GET",
+              "milliseconds": 4.032
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 3.624
+            },
+            {
+              "path": "/api/v1/summaries/delete-preview",
+              "method": "POST",
+              "milliseconds": 10.435
+            },
+            {
+              "path": "/api/v1/summaries/delete-preview",
+              "method": "POST",
+              "milliseconds": 9.049
+            },
+            {
+              "path": "/api/v1/summaries/delete",
+              "method": "POST",
+              "milliseconds": 11.916
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 5.701
+            },
+            {
+              "path": "/api/v1/auth/csrf",
+              "method": "GET",
+              "milliseconds": 4.596
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 3.024
+            },
+            {
+              "path": "/api/v1/summaries",
+              "method": "GET",
+              "milliseconds": 4.144
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 2.466
+            },
+            {
+              "path": "/api/v1/summaries/delete-preview",
+              "method": "POST",
+              "milliseconds": 8.77
+            },
+            {
+              "path": "/api/v1/summaries/delete",
+              "method": "POST",
+              "milliseconds": 8.77
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 7.636
+            },
+            {
+              "path": "/api/v1/auth/csrf",
+              "method": "GET",
+              "milliseconds": 4.759
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 3.651
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 4.957
+            },
+            {
+              "path": "/api/v1/auth/csrf",
+              "method": "GET",
+              "milliseconds": 5.111
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 3.521
+            },
+            {
+              "path": "/api/v1/summaries",
+              "method": "GET",
+              "milliseconds": 4.002
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 3.113
+            },
+            {
+              "path": "/api/v1/me",
+              "method": "GET",
+              "milliseconds": 7.723
+            }
+          ],
+          "storage": [
+            0,
+            0
+          ],
+          "browser": "155.0.8059.40"
+        }
+      }
+    ]
+  },
+  "controlledRed": {
+    "initial": {
+      "passed": 1,
+      "failed": 11
+    },
+    "compatibility": {
+      "passed": 13,
+      "failed": 2
+    }
+  },
+  "sqlBaselinesActiveMinutesOwners": [
+    6,
+    3,
+    3,
+    3
+  ],
+  "ownedDatabaseStopped": true,
+  "ownedPid": 6322,
+  "production": [
+    {
+      "file": "index-C7b-diaN.js",
+      "bytes": 362330,
+      "sha256": "49d6cddf1ad0ac797576158e5a1c70ba3fbb6d0790de5b39db33d4ecbc9ff60e"
+    },
+    {
+      "file": "index-Dynv9cmN.css",
+      "bytes": 31302,
+      "sha256": "4d4ad19162d6768f42fca57564338e0c0461c6c16d22e502da09d5c35fb33f92"
+    }
+  ],
+  "productionChangedForActualFeature": true,
+  "remoteGate": "pending, not asserted here"
+}

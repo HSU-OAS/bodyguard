@@ -36,6 +36,16 @@
 .minute-screen .records-back {
   margin-top: 32px;
 }
+/* FR-M-03: secondary metadata within the existing detail, not another screen/card. */
+.minute-baseline {
+  margin-top: 12px;
+}
+.minute-baseline > p {
+  margin-top: 12px;
+}
+.minute-detail .minute-baseline dl {
+  margin: 16px 0 0;
+}
 @media (max-width: 500px) {
   .minute-screen .records-filter label {
     width: 100%;
