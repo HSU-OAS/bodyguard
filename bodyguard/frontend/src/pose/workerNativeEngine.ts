@@ -118,10 +118,11 @@ export async function prepareWorkerNativeEngine(
                 points.length === JOINT_COUNT &&
                 points.every((p) => [p.x, p.y, p.z].every(Number.isFinite)),
             )
-          const nativeFace = face?.detectForVideo(frame, at)
+          // FR-M-02/07: skip only candidates this existing structural gate discards.
+          const nativeFace = single ? face?.detectForVideo(frame, at) : undefined
           const headOrientation =
             single && nativeFace ? readHeadOrientation(nativeFace, config.matrixLayout) : null
-          const nativeHands = hands?.recognizeForVideo(frame, at)
+          const nativeHands = single ? hands?.recognizeForVideo(frame, at) : undefined
           copied = Object.freeze({
             landmarks,
             worldLandmarks,

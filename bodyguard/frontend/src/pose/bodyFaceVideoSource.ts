@@ -62,19 +62,20 @@ export function createBodyFaceVideoSource(context: ResourceContext, ports: Ports
         const landmarks = copyPosePoints(body.landmarks)
         const worldLandmarks = copyPosePoints(body.worldLandmarks)
         let headOrientation: readonly number[] | null = null
-        if (!retiring && !signal.aborted) {
+        const singleBody =
+          landmarks.length === 1 &&
+          worldLandmarks.length === 1 &&
+          [landmarks[0], worldLandmarks[0]].every(
+            (points) =>
+              points.length === JOINT_COUNT &&
+              Array.from(points).every(
+                (point) => point && [point.x, point.y, point.z].every(Number.isFinite),
+              ),
+          )
+        // FR-M-02/07: do not calculate a candidate the existing body gate discards.
+        if (singleBody && !retiring && !signal.aborted) {
           const face = await detectFace(frame, at)
-          const singleBody =
-            landmarks.length === 1 &&
-            worldLandmarks.length === 1 &&
-            [landmarks[0], worldLandmarks[0]].every(
-              (points) =>
-                points.length === JOINT_COUNT &&
-                Array.from(points).every(
-                  (point) => point && [point.x, point.y, point.z].every(Number.isFinite),
-                ),
-            )
-          if (!retiring && !signal.aborted && singleBody)
+          if (!retiring && !signal.aborted)
             headOrientation = readHeadOrientation(face, matrixLayout)
         }
         return { landmarks, worldLandmarks, headOrientation, close: finish }

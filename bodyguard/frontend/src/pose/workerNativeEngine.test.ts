@@ -123,14 +123,83 @@ it('keeps explicit optional features disabled', async () => {
   expect(sdk.hands).not.toHaveBeenCalled()
   engine.dispose()
 })
-it('does not bind head/hands to missing or multiple bodies', async () => {
+it('skips dependent inference for unusable body/world and resumes on the same tasks', async () => {
   const f = fixture(),
     engine = await prepare(config, f.abort.signal)
-  for (const landmarks of [[], [points(33), points(33)]]) {
+  for (const [landmarks, worldLandmarks] of [
+    [[], []],
+    [
+      [points(33), points(33)],
+      [points(33), points(33)],
+    ],
+    [[points(33)], []],
+    [[points(33)], [points(33), points(33)]],
+    [[points(32)], [points(33)]],
+    [[points(33)], [points(32)]],
+    [[[{ x: NaN, y: 0, z: 0 }, ...points(32)]], [points(33)]],
+    [[points(33)], [[{ x: 0, y: Infinity, z: 0 }, ...points(32)]]],
+  ]) {
     f.result.landmarks = landmarks
-    f.result.worldLandmarks = landmarks
+    f.result.worldLandmarks = worldLandmarks
     expect(await engine.detect(f.frame, 25)).toMatchObject({ headOrientation: null, hands: [] })
+    expect(f.face.detectForVideo).not.toHaveBeenCalled()
+    expect(f.hands.recognizeForVideo).not.toHaveBeenCalled()
+    expect(f.face.close).not.toHaveBeenCalled()
+    expect(f.hands.close).not.toHaveBeenCalled()
   }
+  expect(f.result.close).toHaveBeenCalledTimes(8)
+  f.result.landmarks = [points(33)]
+  f.result.worldLandmarks = [points(33)]
+  expect(engine.detect(f.frame, 26)).toMatchObject({
+    headOrientation: [0, 0, 0, 1],
+    hands: [{ side: 'left' }],
+  })
+  expect(f.face.detectForVideo).toHaveBeenCalledExactlyOnceWith(f.frame, 26)
+  expect(f.hands.recognizeForVideo).toHaveBeenCalledExactlyOnceWith(f.frame, 26)
+  for (const create of [sdk.body, sdk.face, sdk.hands]) expect(create).toHaveBeenCalledOnce()
+  engine.dispose()
+})
+it.each(['face', 'hands'] as const)(
+  'does not execute an irrelevant %s exception but preserves a valid-body failure',
+  async (failed) => {
+    const f = fixture(),
+      engine = await prepare(config, f.abort.signal)
+    const throwing = failed === 'face' ? f.face.detectForVideo : f.hands.recognizeForVideo
+    throwing.mockImplementation(() => {
+      throw new Error('PRIVATE_DEPENDENT_RESULT')
+    })
+    f.result.landmarks = []
+    f.result.worldLandmarks = []
+    expect(engine.detect(f.frame, 25)).toMatchObject({ headOrientation: null, hands: [] })
+    expect(throwing).not.toHaveBeenCalled()
+    f.result.landmarks = [points(33)]
+    f.result.worldLandmarks = [points(33)]
+    expect(() => engine.detect(f.frame, 26)).toThrow('Worker inference unavailable')
+    expect(f.result.close).toHaveBeenCalledTimes(2)
+    engine.dispose()
+  },
+)
+it('clears candidates for a fresh empty body and recovers on the same initialized tasks', async () => {
+  const f = fixture(),
+    engine = await prepare(config, f.abort.signal)
+  expect(engine.detect(f.frame, 1)).toMatchObject({
+    headOrientation: [0, 0, 0, 1],
+    hands: [{ side: 'left' }],
+  })
+  f.result.landmarks = []
+  f.result.worldLandmarks = []
+  expect(engine.detect(f.frame, 2)).toMatchObject({ headOrientation: null, hands: [] })
+  f.result.landmarks = [points(33)]
+  f.result.worldLandmarks = [points(33)]
+  expect(engine.detect(f.frame, 3)).toMatchObject({
+    headOrientation: [0, 0, 0, 1],
+    hands: [{ side: 'left' }],
+  })
+  for (const detector of [f.face.detectForVideo, f.hands.recognizeForVideo]) {
+    expect(detector).toHaveBeenCalledTimes(2)
+    expect(detector).toHaveBeenLastCalledWith(f.frame, 3)
+  }
+  expect(f.result.close).toHaveBeenCalledTimes(3)
   engine.dispose()
 })
 it('tries GPU then CPU without disabling features or changing selected model', async () => {
@@ -166,15 +235,22 @@ it('reclaims a body resolving after abort, without preparing face or CPU retry',
   expect(sdk.face).not.toHaveBeenCalled()
   expect(f.body.close).toHaveBeenCalledOnce()
 })
-it('reports native result close failures as cleanup failures', async () => {
-  const f = fixture(),
-    engine = await prepare(config, f.abort.signal)
-  f.result.close.mockImplementation(() => {
-    throw new Error('PRIVATE_RESULT')
-  })
-  expect(() => engine.detect(f.frame, 25)).toThrow(ResourceCleanupError)
-  engine.dispose()
-})
+it.each([false, true])(
+  'reports native result close failures with unusable body=%s',
+  async (unusable) => {
+    const f = fixture(),
+      engine = await prepare(config, f.abort.signal)
+    f.result.close.mockImplementation(() => {
+      throw new Error('PRIVATE_RESULT')
+    })
+    if (unusable) {
+      f.result.landmarks = []
+      f.result.worldLandmarks = []
+    }
+    expect(() => engine.detect(f.frame, 25)).toThrow(ResourceCleanupError)
+    engine.dispose()
+  },
+)
 it('attempts every task release and never converts cleanup failure to success', async () => {
   const f = fixture()
   sdk.hands.mockRejectedValue(new Error('PRIVATE_HANDS'))

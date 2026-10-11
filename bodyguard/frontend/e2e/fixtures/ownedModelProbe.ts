@@ -8,7 +8,13 @@ let state = 'idle',
   failure: string | null = null,
   elapsedMs = 0,
   frames = 0
-const snapshot = () => ({ state, failure, elapsedMs, frames })
+let lastBodyGate: Readonly<{
+  bodies: number
+  worlds: number
+  headUnavailable: boolean
+  hands: number
+}> | null = null
+const snapshot = () => ({ state, failure, elapsedMs, frames, lastBodyGate })
 const probe = {
   begin() {
     if (job) throw new Error('Owned probe already started')
@@ -45,6 +51,13 @@ const probe = {
     const frame = new VideoFrame(canvas, { timestamp: at * 1000 })
     try {
       const result = await owner.detect(frame, at)
+      // Test-only bounded shape, never points/matrices or a real captured frame.
+      lastBodyGate = Object.freeze({
+        bodies: result.landmarks.length,
+        worlds: result.worldLandmarks.length,
+        headUnavailable: result.headOrientation === null,
+        hands: result.hands?.length ?? -1,
+      })
       result.close()
       frames++
     } finally {

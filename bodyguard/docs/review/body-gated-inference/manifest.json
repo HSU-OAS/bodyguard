@@ -1,0 +1,756 @@
+{
+  "createdAt": "2026-10-11T14:04:03.203Z",
+  "source": {
+    "src/pose/workerNativeEngine.ts": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+    "src/pose/bodyFaceVideoSource.ts": "19157c04ba23845d9bddd6d40584c63ba56e1e1fd4aa56b6c6bf7fa7a8a7e617",
+    "src/pose/bodyHandVideoSource.ts": "f5f67ead26c0d98d9dc04687473532e0bded78b33fe68b9fbba5454edd4b24d9",
+    "src/pose/workerNativeEngine.test.ts": "bf75f803218fce0be5c42a1ce04ff1ec7b0008e89e6e48242131508cb08145e5",
+    "src/pose/bodyFaceVideoSource.test.ts": "b1124ecdd8626b66730596b367284a2880c29aa9893283c7629ca4a0324c92b4",
+    "src/pose/bodyHandVideoSource.test.ts": "b411609a6f9af315aba726264f0105f7018647e04249cff54fc4890f5882cc68",
+    "src/pose/workerInference.ts": "c358cc2431c598e7f2ad6911a698a7bb3f468d6d83314edd2f49e2a7192bdf54",
+    "src/pose/workerInferenceRuntime.ts": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+    "src/pose/ownedPoseFrame.ts": "58c978a3b012e8bc7a6cd256200200c434066f8e26d96462de4913e353f9002d",
+    "src/pose/ownedModelAssets.ts": "eede84c8840a6a1937e2a51942fed9b7f907c6f750c4fdc73bf74503c623317e",
+    "e2e/fixtures/ownedModelProbe.ts": "801c23c28eb77c5a979179c72390307191dbeae745b5a4401132d2c23a8df4c4",
+    "scripts/test-owned-model-preparation.mjs": "be1a374636233a0482c26388403235d69818f216329701afbf4b65d526e776f0",
+    "scripts/build-owned-model-preparation.mjs": "394fa77a35120287b1bbcfa284a635332d4bf1b1e662eae5e525de4c55be80ab",
+    "scripts/test-camera-preparation.mjs": "d0c0d110fd2e7b6eb7754fe0916e40924ee222af9ebd7dc8abdfe5555c98d9ae",
+    "scripts/check-owned-models.mjs": "e945dedb492b39c1389ccdcff4379d2e34569c4615168df9cf8d409ea379fdb6",
+    "scripts/check-selection-production.mjs": "9e81c92bcfefc0e625f6b5207b03e8c8b1fd1169dd2397c5933195728873bb48",
+    "scripts/sdk-network-policy.ts": "4aad4fa00fc161e85566ff8784cf19a6d914e38431cf00957947a12eefd37134",
+    "src/pages/MinuteSummaryPage.test.tsx": "de68e7c9e2901af75692814631a8c21cf0abb439b34246f63349dd16c65fd340",
+    "src/pages/MinuteSummaryPage.tsx": "88e74ab5472cf4989c314a74aca992c71d10cabbbbfb441420f023b0bf39934c"
+  },
+  "artifacts": [
+    {
+      "file": "evidence/run/after-build.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/after-build.log",
+      "bytes": 467,
+      "sha256": "273e7968f735d035c4b8f9b49514a2f18fc12e72f8fdb10c6e719530424e214d",
+      "rawBytes": 1531,
+      "rawSha256": "436ba57680896af1a208a648414825b9c7a39531b739e10e171fd720f13ace8f"
+    },
+    {
+      "file": "evidence/run/after-native-regression.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/after-native-regression.log",
+      "bytes": 488,
+      "sha256": "b3d4bf54af7ef68189669fd43807e4933d7ce120c1e06b09ff1bfa45b2f14429",
+      "rawBytes": 2610,
+      "rawSha256": "34d95628e3a3c6d197ff0f4466544cfc237151a2eb64d829b78d626461325a97"
+    },
+    {
+      "file": "evidence/run/after-native-standalone.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/after-native-standalone.log",
+      "bytes": 472,
+      "sha256": "226635b36f318e99e67d0c19b6a3f295e5fa804a3756c3dd080113d305ce3af8",
+      "rawBytes": 2706,
+      "rawSha256": "6579d2ff6f04ce6daee67aa6ed549bf2670411d1d37ed2ab2526e4b45dc48d39"
+    },
+    {
+      "file": "evidence/run/after-native.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/after-native.log",
+      "bytes": 378,
+      "sha256": "2b31cc853531a161486fa15060aa5e6e38b05915b39bb6fb1a820325e6eba024",
+      "rawBytes": 709,
+      "rawSha256": "5acc5ca00ed0f0f217628326f8894a2f1a1240345c92df28de33ace78cc29f35"
+    },
+    {
+      "file": "evidence/run/before-bodyFaceVideoSource.ts.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/before-bodyFaceVideoSource.ts.gz",
+      "bytes": 1428,
+      "sha256": "d78bd16812c6371de915ef50524a470e3679083a4ea12e2d4d497c269c9ab9a3",
+      "rawBytes": 3820,
+      "rawSha256": "5413e493faf08498d3d5ca4d53c6e4bcc7f8b82aa4dffb2ea353f6174042e05a"
+    },
+    {
+      "file": "evidence/run/before-bodyHandVideoSource.ts.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/before-bodyHandVideoSource.ts.gz",
+      "bytes": 2072,
+      "sha256": "2cab98a502a70607cce672156a1c1241e1e1b1a2f0d1edb575cd604f82826cd0",
+      "rawBytes": 6166,
+      "rawSha256": "02521814ebf0c2758ac6492bb7287c8b911d49bd777c5f0afcdeaacab9ab18dd"
+    },
+    {
+      "file": "evidence/run/before-build.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/before-build.log",
+      "bytes": 468,
+      "sha256": "ad67a21491e7c3e7ecac9c99df5d9a73224ab425cc16bcc1fcc296d5fa9b2ded",
+      "rawBytes": 1531,
+      "rawSha256": "792899b043323111fa6bb657463169dc57ceca9a9a3ca7e0d22dfd90fca9e72e"
+    },
+    {
+      "file": "evidence/run/before-native-repeat.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/before-native-repeat.log",
+      "bytes": 309,
+      "sha256": "bef56efbd6b2a05d698ec0c6bef9c68af1ecc1b563e0b8db798c4c0eeb89bfc6",
+      "rawBytes": 455,
+      "rawSha256": "c76f971cab8e586b6f835cf7ebde45ab048ad0dc15302f481b381082ceda0db8"
+    },
+    {
+      "file": "evidence/run/before-native.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/before-native.log",
+      "bytes": 306,
+      "sha256": "7237cea5dd45409acdfc4237f1b16a7e45819a847f1a5b6727e7d3edb77d4ade",
+      "rawBytes": 448,
+      "rawSha256": "8df1d5ad25284a43bb16f11da0ffdc2c0d82d76b118491b6b316b4ddebd4a4e9"
+    },
+    {
+      "file": "evidence/run/before-workerNativeEngine.ts.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/before-workerNativeEngine.ts.gz",
+      "bytes": 1696,
+      "sha256": "ef617ce7dd09b8c13eb4e8996d34a7dfe40432dc424a480ee13792a893fd0dcb",
+      "rawBytes": 5398,
+      "rawSha256": "7458d43da056ab7a14a487e41aef8689ae79afb0c14c22ebddd4d0a18a2217fe"
+    },
+    {
+      "file": "evidence/run/biome-final.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/biome-final.log",
+      "bytes": 2956,
+      "sha256": "dd47c4f6e38cb757817a06bd7e6292c2696916df3dcacf2e4dee281fa76d040a",
+      "rawBytes": 16156,
+      "rawSha256": "4fa5562ec178f53279746af15178b71097332848b329c37fe1acb032a028daa4"
+    },
+    {
+      "file": "evidence/run/biome.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/biome.log",
+      "bytes": 2957,
+      "sha256": "7a4d0f6111bfd52efe286e0c04ca982111fd174f99cfad111c03bc5a858dda08",
+      "rawBytes": 16157,
+      "rawSha256": "70eb098e57a94df4f3ff8f038d85deb3e4f40ba919f111abb967c864140dfa8f"
+    },
+    {
+      "file": "evidence/run/camera.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/camera.log",
+      "bytes": 117,
+      "sha256": "109ad996bbd0075729e691009bf7d37caaa074729acd1a8c550cfd7563b2709a",
+      "rawBytes": 110,
+      "rawSha256": "bf64515bc28663e9350a31b51e38565ee13831cdf5ba3984d9c1c3a0200f3cb2"
+    },
+    {
+      "file": "evidence/run/collect.mjs.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/collect.mjs",
+      "bytes": 2734,
+      "sha256": "eb71e38e5eb4e22881b647cc0566c2f1927477bc16c29cab1d7ea9c7a861bb1a",
+      "rawBytes": 8153,
+      "rawSha256": "fe4fe22ba0cd015e4251fcdc8e34726cbc4a59b600990b97e92f35fd626e596d"
+    },
+    {
+      "file": "evidence/run/collector-result.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/collector-result.log",
+      "bytes": 20,
+      "sha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e",
+      "rawBytes": 0,
+      "rawSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/run/focus-and-related.json.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/focus-and-related.json",
+      "bytes": 4286,
+      "sha256": "bbcc58abffa0e23a9fd286488efaab6d7ba9b0791bdae99d478369e7c0502785",
+      "rawBytes": 29785,
+      "rawSha256": "828af24beb5be08115596a0d0f3a1c6f85844f11a526da25a0b96d7396d58ea9"
+    },
+    {
+      "file": "evidence/run/focus-and-related.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/focus-and-related.log",
+      "bytes": 197,
+      "sha256": "7a7c028daddf282643357f7a7d9fefb3554264ee54890ea44509a80396b8d9bf",
+      "rawBytes": 338,
+      "rawSha256": "973c34e3265c43fa8f5e3af4ed774b61f72accb9721ec24d20e9df96ab16c975"
+    },
+    {
+      "file": "evidence/run/full-frontend-final.json.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/full-frontend-final.json",
+      "bytes": 77392,
+      "sha256": "7b71a444a1c65e14db8ec188b0fda534215a9edeb51440f23cf5e0d39f550413",
+      "rawBytes": 645713,
+      "rawSha256": "f0a41dc735cacfeaf64f19640bd8adfbd753b31e25b68a7dba0c5a965f38f62b"
+    },
+    {
+      "file": "evidence/run/full-frontend-final.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/full-frontend-final.log",
+      "bytes": 174,
+      "sha256": "1e0075d16d2f35f3ff5b5539eae504c10c45df658da0fba889df0811e719f895",
+      "rawBytes": 249,
+      "rawSha256": "09aa6f3b1f80118ed53663afde39645a14d373e1aa370667a97e5410b76423d4"
+    },
+    {
+      "file": "evidence/run/full-frontend-standalone.json.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/full-frontend-standalone.json",
+      "bytes": 76855,
+      "sha256": "cc071e4ac18f39b4fd49da31be2fd84da36dc3b255890acabcfd211db778d44e",
+      "rawBytes": 644825,
+      "rawSha256": "f8b1afa57e9b1061b9fd89f4dba183bdbb06c40d5625ffddc44fe89ae5ed80ac"
+    },
+    {
+      "file": "evidence/run/full-frontend-standalone.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/full-frontend-standalone.log",
+      "bytes": 139,
+      "sha256": "3f522eb26a2f50199aa79300eec1e7f2e3abeb86f1dc17e105934cfe744a312d",
+      "rawBytes": 205,
+      "rawSha256": "a7f1bf55e4f207f696605bb0e1e61ed3b5f9e15e227b81a1aa64200d9cce9aa1"
+    },
+    {
+      "file": "evidence/run/full-frontend.json.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/full-frontend.json",
+      "bytes": 76825,
+      "sha256": "d4cf744b2c7fd74b3aa4bb6a84b0d20f416de31c43520914b650933e33e30ca4",
+      "rawBytes": 644080,
+      "rawSha256": "17db91d40debcd8e92f3a2169117d0faafd310edc3a56455a93a518651eb3669"
+    },
+    {
+      "file": "evidence/run/full-frontend.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/full-frontend.log",
+      "bytes": 131,
+      "sha256": "216911f53986d1caa4e8d4bece08c7db82a8481905b415de3fd923b1f5357bf4",
+      "rawBytes": 183,
+      "rawSha256": "66b8796f10f20ff23b6d2d8a4148aea62f97036aae38ccfae74c4f28b05effba"
+    },
+    {
+      "file": "evidence/run/green.json.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/green.json",
+      "bytes": 3076,
+      "sha256": "cbe539a308e11fa42ec8742e9a2ca0df4564fd351e18a54e7cb31769f64030a8",
+      "rawBytes": 21874,
+      "rawSha256": "bb50b0a0652112ba2c3c62f1337bb312a41eaf9f0b2613c277ae2d202f29ea57"
+    },
+    {
+      "file": "evidence/run/green.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/green.log",
+      "bytes": 170,
+      "sha256": "4750f3700e240b533209330d89d3b08d45321d9267e9c8adde67efe8492b71b4",
+      "rawBytes": 277,
+      "rawSha256": "6c81b07df31238454e5fb9cbc12f833ed55fd42d7dedc48f31537aa730c451ce"
+    },
+    {
+      "file": "evidence/run/models.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/models.log",
+      "bytes": 440,
+      "sha256": "186c9a2521ac2c72e27b67676a6f69c9de118f0eed2a0302e480c5fed4de78cc",
+      "rawBytes": 824,
+      "rawSha256": "7b048e872f1252b2e7a54b834f075135832653168462712abfe40864ba10b57e"
+    },
+    {
+      "file": "evidence/run/product-build.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/product-build.log",
+      "bytes": 350,
+      "sha256": "bd1b03b7b779e8f6103e391fb30eeb1bb54f978daff0c74b25888e6728cdc42b",
+      "rawBytes": 632,
+      "rawSha256": "6351c492183d04daa8ef4005a3e22ab26f73864458a29a92d24345ad68830982"
+    },
+    {
+      "file": "evidence/run/production-guard.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/production-guard.log",
+      "bytes": 332,
+      "sha256": "4e5371c802338a1173b3fd8a330c3f96b588b966f06e6d3330a8385dd6ea1b3f",
+      "rawBytes": 1179,
+      "rawSha256": "d5427256c3d39b8ef3179c600682ef3f6ab1d94a986c761e0c8dd02ea436f0cb"
+    },
+    {
+      "file": "evidence/run/quality-0.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/quality-0.log",
+      "bytes": 35,
+      "sha256": "4d5a0c23c9ecddf5ae14f132b0345c3788269435548b9568b882d38b627def51",
+      "rawBytes": 15,
+      "rawSha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92"
+    },
+    {
+      "file": "evidence/run/quality-1.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/quality-1.log",
+      "bytes": 2955,
+      "sha256": "f80f0a7986585cbb113bb10a8cd41414c108e782229971eef43d1c854f4b7e67",
+      "rawBytes": 16156,
+      "rawSha256": "8b09909fd9aa19d0bf1ede6ebedd2767bf801656e321e8b7795f31732ce33f58"
+    },
+    {
+      "file": "evidence/run/quality-2.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/quality-2.log",
+      "bytes": 440,
+      "sha256": "186c9a2521ac2c72e27b67676a6f69c9de118f0eed2a0302e480c5fed4de78cc",
+      "rawBytes": 824,
+      "rawSha256": "7b048e872f1252b2e7a54b834f075135832653168462712abfe40864ba10b57e"
+    },
+    {
+      "file": "evidence/run/quality-3.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/quality-3.log",
+      "bytes": 332,
+      "sha256": "4e5371c802338a1173b3fd8a330c3f96b588b966f06e6d3330a8385dd6ea1b3f",
+      "rawBytes": 1179,
+      "rawSha256": "d5427256c3d39b8ef3179c600682ef3f6ab1d94a986c761e0c8dd02ea436f0cb"
+    },
+    {
+      "file": "evidence/run/quality-4.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/quality-4.log",
+      "bytes": 20,
+      "sha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e",
+      "rawBytes": 0,
+      "rawSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "evidence/run/red.json.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/red.json",
+      "bytes": 4059,
+      "sha256": "b25600728b666377b3d31eccbfe67377ce383ca5d9a25d98de27c0abd9e3c6b3",
+      "rawBytes": 40853,
+      "rawSha256": "01c67494d043553206207cff6b5fb7c598c1a4a67eed7e6d1ea6ce2ddb700fb7"
+    },
+    {
+      "file": "evidence/run/red.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/red.log",
+      "bytes": 213,
+      "sha256": "d0ed49959696ad40b36aa14672b97293cabccb1c2122c064b157372db82c7e31",
+      "rawBytes": 327,
+      "rawSha256": "29c20c8eb4fffe3823c3287c98566f5d27186cb5358e9a8429a8aac94861a567"
+    },
+    {
+      "file": "evidence/run/typecheck-complete.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/typecheck-complete.log",
+      "bytes": 35,
+      "sha256": "4d5a0c23c9ecddf5ae14f132b0345c3788269435548b9568b882d38b627def51",
+      "rawBytes": 15,
+      "rawSha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92"
+    },
+    {
+      "file": "evidence/run/typecheck-final.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/typecheck-final.log",
+      "bytes": 35,
+      "sha256": "4d5a0c23c9ecddf5ae14f132b0345c3788269435548b9568b882d38b627def51",
+      "rawBytes": 15,
+      "rawSha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92"
+    },
+    {
+      "file": "evidence/run/typecheck.log.gz",
+      "origin": "/private/tmp/bodyguard-body-gate.Zk0t7T/typecheck.log",
+      "bytes": 279,
+      "sha256": "366c07772db248c166c9e54250ff6ccb37cfede55a9da897c573c976a57664cb",
+      "rawBytes": 1693,
+      "rawSha256": "d98eecc08513bedc2adb057a2523a9c62a8b2ed0e34bd7c0015d504770ed823d"
+    },
+    {
+      "file": "evidence/before/before-body-gate-repeat.json.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.HRKDvB/before-body-gate-repeat.json",
+      "bytes": 1428,
+      "sha256": "f6edb70f3d4a26042ec0dc4e9ea6407521cbab3f084323669322795ea0f4c05f",
+      "rawBytes": 4733,
+      "rawSha256": "1735749dfa8a081e640b62d289e5bf004968af875a3c21403dabc35bd37e08e8"
+    },
+    {
+      "file": "evidence/before/before-body-gate.json.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.HRKDvB/before-body-gate.json",
+      "bytes": 1433,
+      "sha256": "a20f3aca39341acecedc509995fa484e1c1bdf34f37a096babd585e8a9ef3549",
+      "rawBytes": 4733,
+      "rawSha256": "470b33285c63efad04a8c636edc2764becce871a6587e417a8ca06b3c1f1c5e5"
+    },
+    {
+      "file": "evidence/before/model-reader-provenance.json.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.HRKDvB/model-reader-provenance.json",
+      "bytes": 402,
+      "sha256": "15cd0ce8ea8ed355392a70f75f4f0add0857314958c64bfe74be5e2593bfd982",
+      "rawBytes": 510,
+      "rawSha256": "c80ede9c4b95f125db0fc71e97e2c5e4699cff6c560306afe305bf5ced8fea17"
+    },
+    {
+      "file": "evidence/before/probe/assets/nativeInference.worker-uTAJCKN7.js.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.HRKDvB/probe/assets/nativeInference.worker-uTAJCKN7.js",
+      "bytes": 71913,
+      "sha256": "55e081273db2079dfbfd0667162bf06a93990cd4bf425d7378f3503a949dcca1",
+      "rawBytes": 246213,
+      "rawSha256": "9b4bf0e240ea1de65e845836c4f9b2d3d5229f26a5c8cdaaefa71ab22579fb18"
+    },
+    {
+      "file": "evidence/before/probe/assets/ownedModelProbe-Bwbxm-Lk.js.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.HRKDvB/probe/assets/ownedModelProbe-Bwbxm-Lk.js",
+      "bytes": 3674,
+      "sha256": "10d8beec98848d352156bad166e2563982f44c49ddcdb71e21f93d0a68c15a70",
+      "rawBytes": 8703,
+      "rawSha256": "f2e5b63c1a3a669c26f68c0c88187eecd23ab8c906e4e740271ec29d49707ac4"
+    },
+    {
+      "file": "evidence/before/probe/e2e/fixtures/ownedModelProbe.html.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.HRKDvB/probe/e2e/fixtures/ownedModelProbe.html",
+      "bytes": 362,
+      "sha256": "afca1488132b1bf81e016a69a160cd45e4530d715f40bb10497ce234ba6d928e",
+      "rawBytes": 622,
+      "rawSha256": "28e6df9622cc852e7181f77b47fee00ef7b9e677c86926395ce8b106e68baf4d"
+    },
+    {
+      "file": "evidence/before/product/index.html.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.HRKDvB/product/index.html",
+      "bytes": 437,
+      "sha256": "92d9847a77d1e07c8a8a16b7c978111f7d115b293bbf56daa06a2ff9e0dca577",
+      "rawBytes": 868,
+      "rawSha256": "5b1a6d147686a97fead23d26be5217675509d645f575a7e1dbd099665c4976bc"
+    },
+    {
+      "file": "evidence/before/product/assets/index-CmT_KJFW.js.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.HRKDvB/product/assets/index-CmT_KJFW.js",
+      "bytes": 107643,
+      "sha256": "b52294a684e415ce143338995fcd21ff718f7338774a193210e3efa0b4689c66",
+      "rawBytes": 365040,
+      "rawSha256": "a5cd8b5bfaa66a7b48387d712572bc0ab872018fb13b48ea48021730df824879"
+    },
+    {
+      "file": "evidence/before/product/assets/index-Dynv9cmN.css.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.HRKDvB/product/assets/index-Dynv9cmN.css",
+      "bytes": 7244,
+      "sha256": "feeed8007bb10c3a1f345bb88b32a30ee34d2c56f75fbaa39aba7f9f7bd92559",
+      "rawBytes": 31302,
+      "rawSha256": "4d4ad19162d6768f42fca57564338e0c0461c6c16d22e502da09d5c35fb33f92"
+    },
+    {
+      "file": "evidence/before/product/licenses/bundled-js.json.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.HRKDvB/product/licenses/bundled-js.json",
+      "bytes": 865,
+      "sha256": "21e7315f35688e99535d31b2e909db0289a91787d1c1a295de9f3facdbfe9ed6",
+      "rawBytes": 4915,
+      "rawSha256": "19f0c9961dd082bcebb1ba8dfdde98ef58c843cdb0ea4973a47a91b46c940cd7"
+    },
+    {
+      "file": "evidence/before/product/licenses/bundled-packages.json.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.HRKDvB/product/licenses/bundled-packages.json",
+      "bytes": 106,
+      "sha256": "792b83195ecd52f814c32391afc036d92085b9a363d58d5ac66c33de329e2613",
+      "rawBytes": 233,
+      "rawSha256": "1c80ec2f6a9ad967f999232165821bf4d27ff55197ea21c4e049ff2f974efb54"
+    },
+    {
+      "file": "evidence/before/product/licenses/tailwindcss.txt.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.HRKDvB/product/licenses/tailwindcss.txt",
+      "bytes": 672,
+      "sha256": "bf878ff48d41b96c381f74fc40a3f4bbbb02d3e1427d0bcb5d6e2a8a1186b147",
+      "rawBytes": 1110,
+      "rawSha256": "0045fac7ef9a1530b1e59eacde31c4823bfbc8881ad2e543bc82c70c38cfcfd8"
+    },
+    {
+      "file": "evidence/before/product/mediapipe/wasm/vision_wasm_internal.js.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.HRKDvB/product/mediapipe/wasm/vision_wasm_internal.js",
+      "bytes": 78103,
+      "sha256": "0a42d8aca2ba99bb5146436a62e9ffb3de60638bf0a6eaf8a92673b1b5ee0dde",
+      "rawBytes": 323377,
+      "rawSha256": "e170ee67dd4e16c1a6fcd8840a206687e5a59b22c20e4a902bc445b095454d73"
+    },
+    {
+      "file": "evidence/before/product/mediapipe/wasm/vision_wasm_module_internal.js.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.HRKDvB/product/mediapipe/wasm/vision_wasm_module_internal.js",
+      "bytes": 78038,
+      "sha256": "74655b9e62d9c21335707fd18850ccff304ed5abbb999649bf86d5f455da45de",
+      "rawBytes": 323415,
+      "rawSha256": "da8934057f147b622e82cfb4c0dbd85461c598e268588b5a8ba9ca963a8ff82d"
+    },
+    {
+      "file": "evidence/before/product/mediapipe/wasm/vision_wasm_nosimd_internal.js.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.HRKDvB/product/mediapipe/wasm/vision_wasm_nosimd_internal.js",
+      "bytes": 78037,
+      "sha256": "de0c43f623395c8781fa90f225eefe6f29b5ce1debf359db9d7b47f9821c816d",
+      "rawBytes": 323180,
+      "rawSha256": "e81d715a3d42cc3373602eb2f7aff795d164934db680e32496b65dab537f9658"
+    },
+    {
+      "file": "evidence/after/after-body-gate-standalone.json.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.9RhUop/after-body-gate-standalone.json",
+      "bytes": 1961,
+      "sha256": "026fb044939604cb57eb0f9285e068dc92de0d03fa0a33a8c0f9374143c9ed95",
+      "rawBytes": 16548,
+      "rawSha256": "f00b357b09d4e128c7a077e470911807caed753078f7d5508aa65d5f9012f021"
+    },
+    {
+      "file": "evidence/after/after-body-gate.json.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.9RhUop/after-body-gate.json",
+      "bytes": 1521,
+      "sha256": "d3fe20c04e09cfb98316d0247d733aae18a9613601937a1621c1b4e0a4f1b0a5",
+      "rawBytes": 5337,
+      "rawSha256": "c3bb2d099f3f856dda984f1da476a6e8cc4dde0721f2ebc40181f71f99ac2b5c"
+    },
+    {
+      "file": "evidence/after/after-regression.json.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.9RhUop/after-regression.json",
+      "bytes": 2103,
+      "sha256": "de74a8fbbe5ad890f141c4b06f3cce1bd56557d4b75ca8b10d9c252929e65abb",
+      "rawBytes": 17791,
+      "rawSha256": "f5f5c53880f73754c31941721e95e4a1800247dfef1355c042180ed79a39af8a"
+    },
+    {
+      "file": "evidence/after/model-reader-provenance.json.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.9RhUop/model-reader-provenance.json",
+      "bytes": 402,
+      "sha256": "15cd0ce8ea8ed355392a70f75f4f0add0857314958c64bfe74be5e2593bfd982",
+      "rawBytes": 510,
+      "rawSha256": "c80ede9c4b95f125db0fc71e97e2c5e4699cff6c560306afe305bf5ced8fea17"
+    },
+    {
+      "file": "evidence/after/probe/assets/nativeInference.worker-CuVlNKhn.js.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.9RhUop/probe/assets/nativeInference.worker-CuVlNKhn.js",
+      "bytes": 71918,
+      "sha256": "e5216b3df3cf809695c6c70145029e8c97c1bea31e083f6db718c1a40079a773",
+      "rawBytes": 246231,
+      "rawSha256": "9b1e78407164cca3547dfbee5427ac9a376a322f8fb144195c29b900f2374044"
+    },
+    {
+      "file": "evidence/after/probe/assets/ownedModelProbe-DsZrvzFC.js.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.9RhUop/probe/assets/ownedModelProbe-DsZrvzFC.js",
+      "bytes": 3676,
+      "sha256": "c62d98658cf9e7d2f457df641f663f33aa4d3e931d81dab13d8cef3e210f26c5",
+      "rawBytes": 8703,
+      "rawSha256": "574f6dd725236e629e1a0dd9b02649b447a707b473aaadbd63e011d8b5e0f17a"
+    },
+    {
+      "file": "evidence/after/probe/e2e/fixtures/ownedModelProbe.html.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.9RhUop/probe/e2e/fixtures/ownedModelProbe.html",
+      "bytes": 362,
+      "sha256": "a84cfda5e70404f0ebfa80f122f7aff6453d9f6348caefa4a2704dbc29825d02",
+      "rawBytes": 622,
+      "rawSha256": "aca8676928dc0f5ae41e684c76272f3c3899f5c24b9c8343bddf6023fe9b4708"
+    },
+    {
+      "file": "evidence/after/product/index.html.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.9RhUop/product/index.html",
+      "bytes": 437,
+      "sha256": "92d9847a77d1e07c8a8a16b7c978111f7d115b293bbf56daa06a2ff9e0dca577",
+      "rawBytes": 868,
+      "rawSha256": "5b1a6d147686a97fead23d26be5217675509d645f575a7e1dbd099665c4976bc"
+    },
+    {
+      "file": "evidence/after/product/assets/index-CmT_KJFW.js.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.9RhUop/product/assets/index-CmT_KJFW.js",
+      "bytes": 107643,
+      "sha256": "b52294a684e415ce143338995fcd21ff718f7338774a193210e3efa0b4689c66",
+      "rawBytes": 365040,
+      "rawSha256": "a5cd8b5bfaa66a7b48387d712572bc0ab872018fb13b48ea48021730df824879"
+    },
+    {
+      "file": "evidence/after/product/assets/index-Dynv9cmN.css.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.9RhUop/product/assets/index-Dynv9cmN.css",
+      "bytes": 7244,
+      "sha256": "feeed8007bb10c3a1f345bb88b32a30ee34d2c56f75fbaa39aba7f9f7bd92559",
+      "rawBytes": 31302,
+      "rawSha256": "4d4ad19162d6768f42fca57564338e0c0461c6c16d22e502da09d5c35fb33f92"
+    },
+    {
+      "file": "evidence/after/product/licenses/bundled-js.json.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.9RhUop/product/licenses/bundled-js.json",
+      "bytes": 865,
+      "sha256": "21e7315f35688e99535d31b2e909db0289a91787d1c1a295de9f3facdbfe9ed6",
+      "rawBytes": 4915,
+      "rawSha256": "19f0c9961dd082bcebb1ba8dfdde98ef58c843cdb0ea4973a47a91b46c940cd7"
+    },
+    {
+      "file": "evidence/after/product/licenses/bundled-packages.json.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.9RhUop/product/licenses/bundled-packages.json",
+      "bytes": 106,
+      "sha256": "792b83195ecd52f814c32391afc036d92085b9a363d58d5ac66c33de329e2613",
+      "rawBytes": 233,
+      "rawSha256": "1c80ec2f6a9ad967f999232165821bf4d27ff55197ea21c4e049ff2f974efb54"
+    },
+    {
+      "file": "evidence/after/product/licenses/tailwindcss.txt.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.9RhUop/product/licenses/tailwindcss.txt",
+      "bytes": 672,
+      "sha256": "bf878ff48d41b96c381f74fc40a3f4bbbb02d3e1427d0bcb5d6e2a8a1186b147",
+      "rawBytes": 1110,
+      "rawSha256": "0045fac7ef9a1530b1e59eacde31c4823bfbc8881ad2e543bc82c70c38cfcfd8"
+    },
+    {
+      "file": "evidence/after/product/mediapipe/wasm/vision_wasm_internal.js.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.9RhUop/product/mediapipe/wasm/vision_wasm_internal.js",
+      "bytes": 78103,
+      "sha256": "0a42d8aca2ba99bb5146436a62e9ffb3de60638bf0a6eaf8a92673b1b5ee0dde",
+      "rawBytes": 323377,
+      "rawSha256": "e170ee67dd4e16c1a6fcd8840a206687e5a59b22c20e4a902bc445b095454d73"
+    },
+    {
+      "file": "evidence/after/product/mediapipe/wasm/vision_wasm_module_internal.js.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.9RhUop/product/mediapipe/wasm/vision_wasm_module_internal.js",
+      "bytes": 78038,
+      "sha256": "74655b9e62d9c21335707fd18850ccff304ed5abbb999649bf86d5f455da45de",
+      "rawBytes": 323415,
+      "rawSha256": "da8934057f147b622e82cfb4c0dbd85461c598e268588b5a8ba9ca963a8ff82d"
+    },
+    {
+      "file": "evidence/after/product/mediapipe/wasm/vision_wasm_nosimd_internal.js.gz",
+      "origin": "/private/tmp/bodyguard-owned-models.9RhUop/product/mediapipe/wasm/vision_wasm_nosimd_internal.js",
+      "bytes": 78037,
+      "sha256": "de0c43f623395c8781fa90f225eefe6f29b5ce1debf359db9d7b47f9821c816d",
+      "rawBytes": 323180,
+      "rawSha256": "e81d715a3d42cc3373602eb2f7aff795d164934db680e32496b65dab537f9658"
+    },
+    {
+      "file": "evidence/camera/body-gate-camera.json.gz",
+      "origin": "/private/tmp/bodyguard-camera-preparation.b3LXp9/body-gate-camera.json",
+      "bytes": 639,
+      "sha256": "58809f340370042254944efaa22dee74af58a1eef750d0e442e3e6c98a902cec",
+      "rawBytes": 1213,
+      "rawSha256": "ce3eb3de46c36d120a8aafd03c3040ee6228e32b329837e9fad661290e91bfe3"
+    },
+    {
+      "file": "body-gate-camera-denied-1440.png",
+      "origin": "/private/tmp/bodyguard-camera-preparation.b3LXp9/body-gate-camera-denied-1440.png",
+      "bytes": 83714,
+      "sha256": "81464cdca4caeb0d2a4cb7b9ef7b2cadbc89815b0282b5a94c01f5e16e816087"
+    },
+    {
+      "file": "body-gate-camera-stopped-1440.png",
+      "origin": "/private/tmp/bodyguard-camera-preparation.b3LXp9/body-gate-camera-stopped-1440.png",
+      "bytes": 80197,
+      "sha256": "2aba4fe3dda6dd3b08e5c144c5dd02c6391a1db06c20ed4b2020b7a6ebb29966"
+    },
+    {
+      "file": "body-gate-camera-stopped-800.png",
+      "origin": "/private/tmp/bodyguard-camera-preparation.b3LXp9/body-gate-camera-stopped-800.png",
+      "bytes": 65604,
+      "sha256": "9ae8243ce1b6151691aabb57bc48d5f5a6852c4563266c22a405ce332ae732e9"
+    },
+    {
+      "file": "evidence/source/src/pose/workerNativeEngine.ts.gz",
+      "origin": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/src/pose/workerNativeEngine.ts",
+      "bytes": 1748,
+      "sha256": "5d3a61e3bb3b26e0df04d0c00ace454cf4b7fbc866dfb35a962f13346326f98f",
+      "rawBytes": 5526,
+      "rawSha256": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f"
+    },
+    {
+      "file": "evidence/source/src/pose/bodyFaceVideoSource.ts.gz",
+      "origin": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/src/pose/bodyFaceVideoSource.ts",
+      "bytes": 1471,
+      "sha256": "a8cf705e3ff899927ca8de35a52a2ca89f585e82f3e8c398a8dac777686dcc7d",
+      "rawBytes": 3885,
+      "rawSha256": "19157c04ba23845d9bddd6d40584c63ba56e1e1fd4aa56b6c6bf7fa7a8a7e617"
+    },
+    {
+      "file": "evidence/source/src/pose/bodyHandVideoSource.ts.gz",
+      "origin": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/src/pose/bodyHandVideoSource.ts",
+      "bytes": 2118,
+      "sha256": "78a98e31491cdfd425977d6fbf43568292e8da8119f7b85113cb6e694260aedd",
+      "rawBytes": 6253,
+      "rawSha256": "f5f67ead26c0d98d9dc04687473532e0bded78b33fe68b9fbba5454edd4b24d9"
+    },
+    {
+      "file": "evidence/source/src/pose/workerNativeEngine.test.ts.gz",
+      "origin": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/src/pose/workerNativeEngine.test.ts",
+      "bytes": 2929,
+      "sha256": "54edfeebfe34c3275b9fbe5c3e21b6f6ee0c7fb86674102e77e57f6c7d6f9252",
+      "rawBytes": 11003,
+      "rawSha256": "bf75f803218fce0be5c42a1ce04ff1ec7b0008e89e6e48242131508cb08145e5"
+    },
+    {
+      "file": "evidence/source/src/pose/bodyFaceVideoSource.test.ts.gz",
+      "origin": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/src/pose/bodyFaceVideoSource.test.ts",
+      "bytes": 3770,
+      "sha256": "84f3403886e8609860a880be883d64c387256ea8b0677bb11dc1e92c967f6eb8",
+      "rawBytes": 16221,
+      "rawSha256": "b1124ecdd8626b66730596b367284a2880c29aa9893283c7629ca4a0324c92b4"
+    },
+    {
+      "file": "evidence/source/src/pose/bodyHandVideoSource.test.ts.gz",
+      "origin": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/src/pose/bodyHandVideoSource.test.ts",
+      "bytes": 3848,
+      "sha256": "9c57daf5613c7ddef904063f96d89faeb66bd2a3276cdfbe33f536deff5edc48",
+      "rawBytes": 14800,
+      "rawSha256": "b411609a6f9af315aba726264f0105f7018647e04249cff54fc4890f5882cc68"
+    },
+    {
+      "file": "evidence/source/src/pose/workerInference.ts.gz",
+      "origin": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/src/pose/workerInference.ts",
+      "bytes": 2655,
+      "sha256": "b0d86fefa045ce859e18fb49ec1985ad82804011072be3e5b8a9908390d142f4",
+      "rawBytes": 8628,
+      "rawSha256": "c358cc2431c598e7f2ad6911a698a7bb3f468d6d83314edd2f49e2a7192bdf54"
+    },
+    {
+      "file": "evidence/source/src/pose/workerInferenceRuntime.ts.gz",
+      "origin": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/src/pose/workerInferenceRuntime.ts",
+      "bytes": 1583,
+      "sha256": "8c4fb4d9838b9d5d90dfc357956f8119ab092e940917bfb5d08f7563df586b84",
+      "rawBytes": 5266,
+      "rawSha256": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63"
+    },
+    {
+      "file": "evidence/source/src/pose/ownedPoseFrame.ts.gz",
+      "origin": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/src/pose/ownedPoseFrame.ts",
+      "bytes": 2305,
+      "sha256": "e9dd4eb577174bacce2b38cca36bc63cb881b8196f8900b4addd3832b1862da0",
+      "rawBytes": 6649,
+      "rawSha256": "58c978a3b012e8bc7a6cd256200200c434066f8e26d96462de4913e353f9002d"
+    },
+    {
+      "file": "evidence/source/src/pose/ownedModelAssets.ts.gz",
+      "origin": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/src/pose/ownedModelAssets.ts",
+      "bytes": 2433,
+      "sha256": "ff9225e68030fd311848be42c0b1b6690a05b216c78767f947c71e6ec9c66a7d",
+      "rawBytes": 6573,
+      "rawSha256": "eede84c8840a6a1937e2a51942fed9b7f907c6f750c4fdc73bf74503c623317e"
+    },
+    {
+      "file": "evidence/source/e2e/fixtures/ownedModelProbe.ts.gz",
+      "origin": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/e2e/fixtures/ownedModelProbe.ts",
+      "bytes": 1183,
+      "sha256": "1a7033cd316e2a6f24ed082aa3d6940efa29f919ba097b4aab5c760b24b7e076",
+      "rawBytes": 2655,
+      "rawSha256": "801c23c28eb77c5a979179c72390307191dbeae745b5a4401132d2c23a8df4c4"
+    },
+    {
+      "file": "evidence/source/scripts/test-owned-model-preparation.mjs.gz",
+      "origin": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/scripts/test-owned-model-preparation.mjs",
+      "bytes": 3509,
+      "sha256": "e0ce13e4f7529b3cdd38f456404412b8c0db987dbadd3b35a773bae252acaa4c",
+      "rawBytes": 9498,
+      "rawSha256": "be1a374636233a0482c26388403235d69818f216329701afbf4b65d526e776f0"
+    },
+    {
+      "file": "evidence/source/scripts/build-owned-model-preparation.mjs.gz",
+      "origin": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/scripts/build-owned-model-preparation.mjs",
+      "bytes": 921,
+      "sha256": "1cafd540a7764988a36916ec16a7a6de48d430fd24f883d3bd682bc693bfb316",
+      "rawBytes": 2278,
+      "rawSha256": "394fa77a35120287b1bbcfa284a635332d4bf1b1e662eae5e525de4c55be80ab"
+    },
+    {
+      "file": "evidence/source/scripts/test-camera-preparation.mjs.gz",
+      "origin": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/scripts/test-camera-preparation.mjs",
+      "bytes": 3686,
+      "sha256": "2acb6b96a83fc15941feedfffde164a74d643b3827db272ce33763ea4ffc0c0a",
+      "rawBytes": 11453,
+      "rawSha256": "d0c0d110fd2e7b6eb7754fe0916e40924ee222af9ebd7dc8abdfe5555c98d9ae"
+    },
+    {
+      "file": "evidence/source/scripts/check-owned-models.mjs.gz",
+      "origin": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/scripts/check-owned-models.mjs",
+      "bytes": 480,
+      "sha256": "2bd8d608f497922bdade347aba52e4cae1a8b7594150a80ae5ad115decabcfa6",
+      "rawBytes": 847,
+      "rawSha256": "e945dedb492b39c1389ccdcff4379d2e34569c4615168df9cf8d409ea379fdb6"
+    },
+    {
+      "file": "evidence/source/scripts/check-selection-production.mjs.gz",
+      "origin": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/scripts/check-selection-production.mjs",
+      "bytes": 2319,
+      "sha256": "387f2a9dfaf8b697843d7c7d5440b72acd1d4f21c52210b3c019905e697377e9",
+      "rawBytes": 6637,
+      "rawSha256": "9e81c92bcfefc0e625f6b5207b03e8c8b1fd1169dd2397c5933195728873bb48"
+    },
+    {
+      "file": "evidence/source/scripts/sdk-network-policy.ts.gz",
+      "origin": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/scripts/sdk-network-policy.ts",
+      "bytes": 554,
+      "sha256": "900ee3d38442c389084361a46eb55002da4baf187fe78c679ca9c91b8e2e559b",
+      "rawBytes": 1176,
+      "rawSha256": "4aad4fa00fc161e85566ff8784cf19a6d914e38431cf00957947a12eefd37134"
+    },
+    {
+      "file": "evidence/source/src/pages/MinuteSummaryPage.test.tsx.gz",
+      "origin": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/src/pages/MinuteSummaryPage.test.tsx",
+      "bytes": 4164,
+      "sha256": "53ad43dc5ef64a645a952905e6c739cbf92788f6e6e070dd422f14b928895de1",
+      "rawBytes": 16564,
+      "rawSha256": "de68e7c9e2901af75692814631a8c21cf0abb439b34246f63349dd16c65fd340"
+    },
+    {
+      "file": "evidence/source/src/pages/MinuteSummaryPage.tsx.gz",
+      "origin": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/src/pages/MinuteSummaryPage.tsx",
+      "bytes": 5526,
+      "sha256": "9bb0c7caa11a7236ca6dabf0f53712ea8050c0a469917b0491f018e375accbd5",
+      "rawBytes": 19170,
+      "rawSha256": "88e74ab5472cf4989c314a74aca992c71d10cabbbbfb441420f023b0bf39934c"
+    }
+  ]
+}

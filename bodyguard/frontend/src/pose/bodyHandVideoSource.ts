@@ -135,14 +135,14 @@ export function createBodyHandVideoSource(context: ResourceContext, ports: Ports
           )
         let headOrientation: readonly number[] | null = null
         let hands: readonly HandObservation[] = Object.freeze([])
-        if (face && active()) {
+        // FR-M-02/07: keep initialized tasks for the next usable body; skip discarded candidates.
+        if (singleBody && face && active()) {
           const nativeFace = await face.detectFace(frame, at)
-          if (active() && singleBody)
-            headOrientation = readHeadOrientation(nativeFace, face.matrixLayout)
+          if (active()) headOrientation = readHeadOrientation(nativeFace, face.matrixLayout)
         }
-        if (active()) {
+        if (singleBody && active()) {
           const nativeHands = await detectHands(frame, at)
-          if (active() && singleBody) hands = readNativeHands(nativeHands)
+          if (active()) hands = readNativeHands(nativeHands)
         }
         return {
           landmarks,

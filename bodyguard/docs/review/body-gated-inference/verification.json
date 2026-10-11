@@ -1,0 +1,160 @@
+{
+  "story": "S3.C10",
+  "base": "c57c1a331ae4f264138e72dc6c797aaf23950243",
+  "branch": "codex/body-gated-worker-inference",
+  "source": {
+    "src/pose/workerNativeEngine.ts": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+    "src/pose/bodyFaceVideoSource.ts": "19157c04ba23845d9bddd6d40584c63ba56e1e1fd4aa56b6c6bf7fa7a8a7e617",
+    "src/pose/bodyHandVideoSource.ts": "f5f67ead26c0d98d9dc04687473532e0bded78b33fe68b9fbba5454edd4b24d9",
+    "src/pose/workerNativeEngine.test.ts": "bf75f803218fce0be5c42a1ce04ff1ec7b0008e89e6e48242131508cb08145e5",
+    "src/pose/bodyFaceVideoSource.test.ts": "b1124ecdd8626b66730596b367284a2880c29aa9893283c7629ca4a0324c92b4",
+    "src/pose/bodyHandVideoSource.test.ts": "b411609a6f9af315aba726264f0105f7018647e04249cff54fc4890f5882cc68",
+    "src/pose/workerInference.ts": "c358cc2431c598e7f2ad6911a698a7bb3f468d6d83314edd2f49e2a7192bdf54",
+    "src/pose/workerInferenceRuntime.ts": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+    "src/pose/ownedPoseFrame.ts": "58c978a3b012e8bc7a6cd256200200c434066f8e26d96462de4913e353f9002d",
+    "src/pose/ownedModelAssets.ts": "eede84c8840a6a1937e2a51942fed9b7f907c6f750c4fdc73bf74503c623317e",
+    "e2e/fixtures/ownedModelProbe.ts": "801c23c28eb77c5a979179c72390307191dbeae745b5a4401132d2c23a8df4c4",
+    "scripts/test-owned-model-preparation.mjs": "be1a374636233a0482c26388403235d69818f216329701afbf4b65d526e776f0",
+    "scripts/build-owned-model-preparation.mjs": "394fa77a35120287b1bbcfa284a635332d4bf1b1e662eae5e525de4c55be80ab",
+    "scripts/test-camera-preparation.mjs": "d0c0d110fd2e7b6eb7754fe0916e40924ee222af9ebd7dc8abdfe5555c98d9ae",
+    "scripts/check-owned-models.mjs": "e945dedb492b39c1389ccdcff4379d2e34569c4615168df9cf8d409ea379fdb6",
+    "scripts/check-selection-production.mjs": "9e81c92bcfefc0e625f6b5207b03e8c8b1fd1169dd2397c5933195728873bb48",
+    "scripts/sdk-network-policy.ts": "4aad4fa00fc161e85566ff8784cf19a6d914e38431cf00957947a12eefd37134",
+    "src/pages/MinuteSummaryPage.test.tsx": "de68e7c9e2901af75692814631a8c21cf0abb439b34246f63349dd16c65fd340",
+    "src/pages/MinuteSummaryPage.tsx": "88e74ab5472cf4989c314a74aca992c71d10cabbbbfb441420f023b0bf39934c"
+  },
+  "quality": [
+    {
+      "command": [
+        "pnpm",
+        "typecheck"
+      ],
+      "exit": 0,
+      "evidence": "quality-0.log"
+    },
+    {
+      "command": [
+        "pnpm",
+        "check"
+      ],
+      "exit": 0,
+      "evidence": "quality-1.log"
+    },
+    {
+      "command": [
+        "node",
+        "--experimental-strip-types",
+        "scripts/check-owned-models.mjs"
+      ],
+      "exit": 0,
+      "evidence": "quality-2.log"
+    },
+    {
+      "command": [
+        "node",
+        "scripts/check-selection-production.mjs"
+      ],
+      "exit": 0,
+      "evidence": "quality-3.log"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "evidence": "quality-4.log"
+    }
+  ],
+  "frontend": {
+    "passed": 1875,
+    "failed": 0,
+    "skip": 0,
+    "files": 103
+  },
+  "nativeBlank": {
+    "contexts": 4,
+    "framesPerContext": 3,
+    "syntheticInput": true,
+    "actualHuman": false,
+    "failure": null
+  },
+  "nativeRegression": {
+    "contexts": 6,
+    "failure": null
+  },
+  "camera": {
+    "cases": [
+      "initial: camera/worker/video/canvas0",
+      "actual document + actual SDK Worker external fetch blocked by native connect-src violation",
+      "native fake-camera + actual heavy body/face/hands Worker: first inference/discard → explicit stop, tracks/worker ended",
+      "synthetic camera denial → fixed recoverable error, no worker",
+      "synthetically held native stream: cancel → late result closed, no SDK readiness",
+      "fresh explicit native preparation → actual router exit releases",
+      "actual SPA route remount waits for synthetically held native permission; late stream ends, no auto reacquisition",
+      "actual AuthProvider controlled401 refresh → private UI removed, native resources ended"
+    ],
+    "nativeSDK": true,
+    "nativeFakeCamera": true,
+    "authAPI": "controlled fixture",
+    "actualHuman": false,
+    "avatarRequests": 0
+  },
+  "publicBuild": {
+    "before": {
+      "index-CmT_KJFW.js": {
+        "bytes": 365040,
+        "sha256": "a5cd8b5bfaa66a7b48387d712572bc0ab872018fb13b48ea48021730df824879"
+      },
+      "index-Dynv9cmN.css": {
+        "bytes": 31302,
+        "sha256": "4d4ad19162d6768f42fca57564338e0c0461c6c16d22e502da09d5c35fb33f92"
+      }
+    },
+    "after": {
+      "index-CmT_KJFW.js": {
+        "bytes": 365040,
+        "sha256": "a5cd8b5bfaa66a7b48387d712572bc0ab872018fb13b48ea48021730df824879"
+      },
+      "index-Dynv9cmN.css": {
+        "bytes": 31302,
+        "sha256": "4d4ad19162d6768f42fca57564338e0c0461c6c16d22e502da09d5c35fb33f92"
+      }
+    },
+    "standard": {
+      "index-CmT_KJFW.js": {
+        "bytes": 365040,
+        "sha256": "a5cd8b5bfaa66a7b48387d712572bc0ab872018fb13b48ea48021730df824879"
+      },
+      "index-Dynv9cmN.css": {
+        "bytes": 31302,
+        "sha256": "4d4ad19162d6768f42fca57564338e0c0461c6c16d22e502da09d5c35fb33f92"
+      }
+    }
+  },
+  "publicBytesUnchanged": true,
+  "failuresPreserved": [
+    "RED10",
+    "before native first inference twice",
+    "candidate paired-load cleanup assertion",
+    "first typecheck fixture type",
+    "full regression summary pagination focus once"
+  ],
+  "priorStartupP2Resolved": false,
+  "stage1to6Complete": false,
+  "untouched": [
+    "avatar/source/GLB",
+    "clinical rules",
+    "public UI",
+    "backend/API/schema",
+    "CI",
+    "env/secrets",
+    "operators/providers/deployment"
+  ],
+  "scopedReview": {
+    "authorOnly": true,
+    "unresolvedP1P2": 0,
+    "independentReview": false
+  }
+}
