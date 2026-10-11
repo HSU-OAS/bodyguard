@@ -56,7 +56,9 @@ npm194개의 name/version, runtime 후보69·dev 후보144(19는 둘 다)를 확
 
 2026-10-10 [S5.6의 공식 source 증거](review/upstream-license-evidence/README.md): 위8개 version의 registry/integrity를 source lock과 실제 대조했고 R3F·Draco·Biome·Rolldown4개 version의 불변 source 원문5개를 별도 보존했다. 설치 root 누락 상태/기존 inventory는 그대로이며, MediaPipe2개·maath·stats-gl4개 version 원문 연결과 전체 NOTICE/하위 부품/배포 artifact는 여전히 미확인이다. upstream source 증거를 설치 파일/최종 권리 승인으로 바꾸지 않는다.
 
-2026-10-11 [S5.7 source 동봉 고지/누락 경계](review/pinned-companion-notices/README.md): Rolldown의 같은 commit THIRD-PARTY-LICENSE 원문을 확보했다. maath 공식0.10.8 tag/source package는 연결됐지만 tree에 이름 있는 license/notice 경로가 없고, stats-gl2.4.2의 registry gitHead source package는2.3.1로 불일치한다. 누락4버전·실제 binary/배포 고지는 미확인 유지. 공식 source 문의는 CEO 미승인/외부 메시지0이며 고지 확보를 법무·배포 허가로 세지 않는다.
+2026-10-11 [S5.7 source 동봉 고지/누락 경계](review/pinned-companion-notices/README.md): Rolldown의 같은 commit THIRD-PARTY-LICENSE 원문을 확보했다. maath 공식0.10.8 tag/source package는 연결됐지만 tree에 이름 있는 license/notice 경로가 없고, stats-gl2.4.2의 registry gitHead source package는2.3.1로 불일치한다. 누락4버전·실제 binary/배포 고지는 미확인 유지. 공식 source 문의는 CEO의 나중 결정으로 보류/외부 메시지0이며 고지 확보를 법무·배포 허가로 세지 않는다.
+
+2026-10-11 [S5.8 설치 파일 부분 고지](review/embedded-package-notices/README.md): maath0.10.8 easing3파일의 Quaternion Damp 주석과 MediaPipe0.10.17/1.0.1 vision.d.ts의 맨 앞 고지2개를 byte/hash 그대로 별도 보존했다. 이는 해당 함수/타입 파일의 부분 고지이며 package 전체·Apache 전문·SDK/WASM NOTICE·최종 배포 고지의 완료가 아니다. 실패 proof3개/오류1도 보존하며 새로운 성공 증거는 verified-evidence 경로다. 기존 root 누락8버전/full 원문 미확인4버전/설치 inventory와 승인 false 경계를 유지한다.
 
 Python57 lock 항목 중54 metadata를 실제 읽었다.52는 선언+텍스트, pathspec1.1.1/pwdlib0.3.1은 텍스트만, colorama0.4.6/httpx2-jsfetch1.0/tzdata2026.4는 현재 미설치로 증거 미확인이다. License-File의 AUTHORS 등도 실제 파일/hash를 읽지만 내용이나 작성자 정보를 공개 출력하지 않는다. LGPL-3.0-only·MPL-2.0·PSF-2.0·복합 표현 등 실제 선언을 프로젝트 MIT로 대체하지 않는다.
 

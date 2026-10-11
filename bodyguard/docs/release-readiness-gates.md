@@ -1,5 +1,7 @@
 # 출시 통합 실행 게이트 — 2026-10-09
 
+**2026-10-11 최신 갱신:** 실제 Gmail/Google 공급자 연결은 나중으로 보류하며 발송/연결/공급자 로그인0이다. [S5.8](stories/embedded-package-notices.md)은 설치 maath 함수 주석3개·MediaPipe 타입 파일 머리2개를 byte/hash로 보존/대조했다. [실패 원본·부분 범위·검증/작성자 리뷰](review/embedded-package-notices/README.md). PR136 sourcec2629dd→merge9c620b5/main 확인 후 진행한 좁은 Story이며 full 원문4버전·SDK/WASM/최종 artifact 고지/권리를 통과 처리하지 않는다. 아바타·참여자·Docker·공식 문의 보류, 실제 동작/판정/추천·원래 시작P2/timeout·HTTPS/운영 및 전체1~6 미통과는 유지한다. 아래는 과거 시점 기록이다.
+
 **2026-10-11 최신 CEO 결정:** 공식 저장소의 고지 외부 문의는 나중에 진행한다. 문의·외부 메시지0이며 원문 미확보·버전 동등성·최종 배포 고지를 통과 처리하지 않는다. 아래 미승인 표현은 답변 전 시점 기록이다. 아바타·참여자·Docker 보류와 전체1~6 미통과는 불변이다.
 
 **2026-10-11 동봉 고지 갱신:** [S5.7](stories/pinned-companion-notices.md)에서 Rolldown의 동일 불변 commit source 동봉 고지를 보존하고 maath의 named license 경로 누락·stats-gl의 npm/source 버전 불일치를 확인했다. [실제 원문·실패/보완·한계](review/pinned-companion-notices/README.md). 누락4버전·모든 binary 부품/최종 artifact 대응·법무/배포 허가는 미완료며 공식 source 문의는 별도 CEO 미승인/외부 메시지0이다. PR135 mergeababacfe/main·브랜치 보존 확인, 제품/SDK/아바타·운영 변경0. 아바타/참여자/Docker 보류·시작P2/native timeout·실제 동작/판정/추천·외부/HTTPS/운영·전체1~6 게이트는 미통과로 유지한다.
