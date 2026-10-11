@@ -2,16 +2,18 @@
 import { createElement, useLayoutEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import { AuthProvider, useAuth } from '../../src/auth'
-import { useRecordedCoaching } from '../../src/coaching/useRecordedCoaching'
+import { type PlaybackInput, useRecordedPlayback } from '../../src/coaching/useRecordedPlayback'
 
 export function mountAuthCoachingProbe(options: {
   recordId: string
   utc: string
   delayed: boolean
 }) {
-  let hook: ReturnType<typeof useRecordedCoaching> | null = null
+  let hook: ReturnType<typeof useRecordedPlayback> | null = null
   let auth: ReturnType<typeof useAuth> | null = null
-  let session: ReturnType<ReturnType<typeof useRecordedCoaching>['getSession']> = null
+  let session: ReturnType<ReturnType<typeof useRecordedPlayback>['getSession']> = null
+  let input: PlaybackInput | null = null
+  let playbackStarts = 0
   let monotonicMs = 0
   let disposed = 0
   let acquired = 0
@@ -31,7 +33,7 @@ export function mountAuthCoachingProbe(options: {
     }
   }
   function View() {
-    const latestHook = useRecordedCoaching()
+    const latestHook = useRecordedPlayback()
     const latestAuth = useAuth()
     useLayoutEffect(() => {
       hook = latestHook
@@ -48,11 +50,6 @@ export function mountAuthCoachingProbe(options: {
       session =
         (await hook?.prepare({
           recordId: options.recordId,
-          ownedResources: {
-            close() {
-              lifecycleClosed++
-            },
-          },
           readClockPair: () => ({
             monotonicMs,
             utc: new Date(Date.parse(options.utc) + monotonicMs).toISOString(),
@@ -65,14 +62,29 @@ export function mountAuthCoachingProbe(options: {
             maxFrameGapMs: 200,
             steps: [{ id: 'first', kind: 'hold', targetMs: 100 }],
           },
-          ports: {
-            async camera() {
-              waiting = true
-              if (options.delayed) await permission
-              return resource()
-            },
-            inference: resource,
-            avatars: resource,
+          createPlayback(ownedInput) {
+            input = ownedInput
+            return {
+              ports: {
+                async camera() {
+                  waiting = true
+                  if (options.delayed) await permission
+                  return resource()
+                },
+                inference: resource,
+                avatars: resource,
+              },
+              start() {
+                playbackStarts++
+                return true
+              },
+              synchronize() {
+                return true
+              },
+              close() {
+                lifecycleClosed++
+              },
+            }
           },
           readGates: () => ({
             authenticated: true,
@@ -97,7 +109,7 @@ export function mountAuthCoachingProbe(options: {
         ['returned', 103],
       ] as const) {
         monotonicMs = ms
-        await session.observe({
+        input?.observe({
           generation: session.getSnapshot().state.generation,
           sampledAt: ms,
           sequence: sequence++,
@@ -129,6 +141,7 @@ export function mountAuthCoachingProbe(options: {
         disposed,
         waiting,
         lifecycleClosed,
+        playbackStarts,
         session: session?.getSnapshot().state.status ?? null,
         record: session?.getRecordSnapshot().status ?? null,
         synthetic_clock_ports_frames: true,
