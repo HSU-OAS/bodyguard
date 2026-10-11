@@ -27,3 +27,4 @@
 | 0016 | 손가락은 MediaPipe Gesture Recognizer로 | 확정 |
 | 0017 | 둥근 머리의 방향과 눈·입은 MediaPipe Face Landmarker로 | 확정 |
 | 0018 | Blender 제작 남녀 3D 아바타 두 개와 안전한 판정 경계 | 출시 범위 확정, 세부 검증 중 |
+| 0019 | 첫 출시 핵심 흐름 유지, 자세 알림·PDF·LLM·변화 탐지 출시 후 이월 | CEO 2026-10-11 확정 |
