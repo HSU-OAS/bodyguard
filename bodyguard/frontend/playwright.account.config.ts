@@ -38,6 +38,7 @@ export default defineConfig({
     'authdashboard.spec.ts',
     'recordjourney.spec.ts',
     'baselineclient.spec.ts',
+    'recordbaseline.spec.ts',
   ],
   reporter: process.env.BODYGUARD_TEST_RECORDS_REPORT
     ? [['list'], ['json', { outputFile: process.env.BODYGUARD_TEST_RECORDS_REPORT }]]
