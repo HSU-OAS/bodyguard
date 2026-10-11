@@ -791,6 +791,10 @@ export type SaveNotificationsApiV1SettingsNotificationsPostResponse =
 
 export type ActiveApiV1BaselinesActiveGetData = {
   body?: never
+  headers?: {
+    'X-CSRF-Token'?: string | null
+    'X-Account-ID'?: string | null
+  }
   path?: never
   query?: never
   url: '/api/v1/baselines/active'
@@ -817,6 +821,10 @@ export type ActiveApiV1BaselinesActiveGetResponse =
 
 export type DetailApiV1BaselinesBaselineIdGetData = {
   body?: never
+  headers?: {
+    'X-CSRF-Token'?: string | null
+    'X-Account-ID'?: string | null
+  }
   path: {
     baseline_id: string
   }
@@ -846,6 +854,10 @@ export type DetailApiV1BaselinesBaselineIdGetResponse =
 
 export type SaveApiV1BaselinesPostData = {
   body: BaselineInput
+  headers?: {
+    'X-CSRF-Token'?: string | null
+    'X-Account-ID'?: string | null
+  }
   path?: never
   query?: never
   url: '/api/v1/baselines'

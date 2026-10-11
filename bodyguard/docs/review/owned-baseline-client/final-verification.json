@@ -1,0 +1,143 @@
+{
+  "createdAt": "2026-10-11T11:58:56.151Z",
+  "scope": "S3.B1 baseline client, not body calibration/public UI/stage completion",
+  "sources": [
+    {
+      "name": "backend/app/baselines.py",
+      "sha256": "68157f424cb55bcb5fed4fefdae3e12e99535de5e9d19e8f0bd1f24422371fd8"
+    },
+    {
+      "name": "backend/app/main.py",
+      "sha256": "705a9ae482c7fb85e93f0394e63f22dc87bc19693aee79b87a21ee200f4c96df"
+    },
+    {
+      "name": "backend/tests/run_browser.py",
+      "sha256": "d556d4e6699b6f1b9a223e9cb8972cb546fabe23f3a637eb8d0ab6c37e57c950"
+    },
+    {
+      "name": "backend/tests/test_baseline_web_binding.py",
+      "sha256": "255d3169f1d8d7f337b366079f3e0cc6e7fdffb4e85d115e6d556a48253b6fff"
+    },
+    {
+      "name": "frontend/src/api/baselines.ts",
+      "sha256": "973ba733bac42b53a23d079935cb82049dff6157e21155d8bf9acd2f3f7ea531"
+    },
+    {
+      "name": "frontend/src/api/baselines.test.ts",
+      "sha256": "8f8d21b85b938ea59f88381b58a11fd38009da76b8585938bd4886107dbc8e84"
+    },
+    {
+      "name": "frontend/src/api/generated/types.gen.ts",
+      "sha256": "8803d2ab4aea32070b2491842307f5a09e94a0fe567ffb66d74fff12fd9662c2"
+    },
+    {
+      "name": "frontend/e2e/baselineclient.spec.ts",
+      "sha256": "ec1518119d2cb711e4ea4f89c2b155842698ae8e477f1885901a53427a22c427"
+    },
+    {
+      "name": "frontend/e2e/fixtures/baselineClientProbe.ts",
+      "sha256": "7a0e544668f51fa60a997db716e94f27536227b2bdb6e080c95a64bce0de770f"
+    },
+    {
+      "name": "frontend/e2e/fixtures/baselineClient.vite.ts",
+      "sha256": "4afe290a7db55a288f40e89cef70165777e110c2da955d4603ba5cf95810e066"
+    },
+    {
+      "name": "frontend/playwright.account.config.ts",
+      "sha256": "a51c62bcafce23c9f1cd885161031bf63446c4468997664973fc670b3a55606e"
+    },
+    {
+      "name": "frontend/scripts/check-selection-production.mjs",
+      "sha256": "9e81c92bcfefc0e625f6b5207b03e8c8b1fd1169dd2397c5933195728873bb48"
+    }
+  ],
+  "unit": {
+    "tests": 1827,
+    "files": 100,
+    "baselineTests": 54
+  },
+  "api": {
+    "tests": 542,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "chrome": {
+    "stats": {
+      "startTime": "2026-10-11T11:51:28.495Z",
+      "duration": 15314.617,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "flows": [
+      {
+        "title": "save, replacement, immutable history/retry, conflict and other-account separation",
+        "boundaries": {
+          "actualChromeHttpSql": true,
+          "actualBodyCalibration": false,
+          "realMail": false,
+          "external": 0,
+          "posts": 4,
+          "storage": [
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "title": "server accepted response is lost: explicit same-ID retry makes only one snapshot",
+        "boundaries": {
+          "actualChromeHttpSql": true,
+          "actualBodyCalibration": false,
+          "realMail": false,
+          "external": 0,
+          "posts": 2,
+          "storage": [
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "title": "cookie account changes silently: original read and save authority cannot transfer",
+        "boundaries": {
+          "actualChromeHttpSql": true,
+          "actualBodyCalibration": false,
+          "realMail": false,
+          "external": 0,
+          "posts": 1,
+          "storage": [
+            0,
+            0
+          ]
+        }
+      }
+    ]
+  },
+  "sqlRowsActiveOwners": [
+    3,
+    2,
+    2
+  ],
+  "ownedDatabaseStopped": true,
+  "priorProductionEvidence": {
+    "commit": "d2204436fb52792d89834a93012b9bc5fcfed4dc",
+    "file": "docs/review/owned-model-preparation/final-verification.json",
+    "sha256": "0647f61b9f97392ae52b8e39185f147a154f3a48b0ba11bb21d852c64a599528"
+  },
+  "production": [
+    {
+      "file": "index-BVyDftrj.js",
+      "bytes": 355833,
+      "sha256": "dbdc8e3cb9ad8eeeae2519b7bbf37b84a230d4723607ec4817d38f5cee10c779"
+    },
+    {
+      "file": "index-dNUNBpCv.css",
+      "bytes": 31199,
+      "sha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e"
+    }
+  ],
+  "remoteMergeGate": "pending, not asserted by this collector"
+}

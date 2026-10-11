@@ -5,7 +5,7 @@ from collections.abc import Callable
 from datetime import datetime
 from typing import Annotated, Literal
 
-from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi import FastAPI, Header, HTTPException, Request, Response
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 from sqlalchemy import Connection, Engine, RowMapping, insert, select, text, update
 
@@ -72,6 +72,7 @@ def register_baselines(
     clock: Callable[[], datetime],
     owner: Callable[[Connection, Request, bool, bool], str],
     error_model: type[BaseModel],
+    bind_read: Callable[[Request, str, str | None, str | None], None],
 ) -> None:
     def authenticate(connection: Connection, request: Request, writing: bool) -> str:
         connection.execute(text("SET LOCAL lock_timeout = '2s'"))
@@ -104,9 +105,15 @@ def register_baselines(
         )
 
     @app.get("/api/v1/baselines/active", response_model=BaselineOut | None)
-    def active(request: Request) -> BaselineOut | None:
+    def active(
+        request: Request,
+        read_csrf: Annotated[str | None, Header(alias="X-CSRF-Token")] = None,
+        expected_owner: Annotated[str | None, Header(alias="X-Account-ID")] = None,
+    ) -> BaselineOut | None:
         with db.begin() as connection:
             user_id = authenticate(connection, request, False)
+            # FR-U-04/NFR-08: bind this read to the web's original session/owner lease.
+            bind_read(request, user_id, read_csrf, expected_owner)
             row = (
                 connection.execute(
                     select(baselines).where(
@@ -123,9 +130,15 @@ def register_baselines(
         response_model=BaselineOut,
         responses={404: {"model": error_model}},
     )
-    def detail(baseline_id: str, request: Request) -> BaselineOut:
+    def detail(
+        baseline_id: str,
+        request: Request,
+        read_csrf: Annotated[str | None, Header(alias="X-CSRF-Token")] = None,
+        expected_owner: Annotated[str | None, Header(alias="X-Account-ID")] = None,
+    ) -> BaselineOut:
         with db.begin() as connection:
             user_id = authenticate(connection, request, False)
+            bind_read(request, user_id, read_csrf, expected_owner)
             row = (
                 find(connection, user_id, baseline_id.lower())
                 if re.fullmatch(UUID_PATTERN, baseline_id)
@@ -141,9 +154,17 @@ def register_baselines(
         status_code=201,
         responses={200: {"model": BaselineOut}, 409: {"model": error_model}},
     )
-    def save(payload: BaselineInput, request: Request, response: Response) -> BaselineOut:
+    def save(
+        payload: BaselineInput,
+        request: Request,
+        response: Response,
+        read_csrf: Annotated[str | None, Header(alias="X-CSRF-Token")] = None,
+        expected_owner: Annotated[str | None, Header(alias="X-Account-ID")] = None,
+    ) -> BaselineOut:
         with db.begin() as connection:
             user_id = authenticate(connection, request, True)
+            # FR-U-04: even a valid proof acquired during account ABA must not write another owner.
+            bind_read(request, user_id, read_csrf, expected_owner)
             values = _values(payload)
             existing = find(connection, user_id, payload.id)
             if existing is not None:
