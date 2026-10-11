@@ -80,9 +80,21 @@ export function MinuteSummaryPage() {
     const operation = new AbortController()
     current.current = operation
     setBusy(false)
+    // FR-R-03/FR-U-05: a later interaction relinquishes this query's automatic focus.
+    // No element/input is retained; account/key retirement removes all listeners.
+    const relinquish = () => {
+      focusResults.current = false
+    }
+    for (const event of ['focusin', 'keydown', 'pointerdown', 'wheel'])
+      document.addEventListener(event, relinquish, { capture: true, passive: true })
+    window.addEventListener('blur', relinquish)
     return () => {
       operation.abort()
       if (current.current === operation) current.current = null
+      focusResults.current = false
+      for (const event of ['focusin', 'keydown', 'pointerdown', 'wheel'])
+        document.removeEventListener(event, relinquish, true)
+      window.removeEventListener('blur', relinquish)
     }
   }, [authority, key])
   useEffect(() => {
@@ -135,7 +147,8 @@ export function MinuteSummaryPage() {
   const ready = shown?.status === 'ready' ? shown : null
   const picked =
     ready && !ready.stale ? ready.data.items.find((item) => item.minute_start === selected) : null
-  useEffect(() => {
+  // FR-U-05: the waiting user's result heading is focused in this DOM commit, before paint.
+  useLayoutEffect(() => {
     if (range && shown && shown.status !== 'loading' && focusResults.current) {
       focusResults.current = false
       if (document.hasFocus()) resultsHeading.current?.focus()
