@@ -1,0 +1,302 @@
+{
+  "timestamp": "2026-10-11T13:39:37.190Z",
+  "story": "S4.R8",
+  "base": "9882224cf78575ecbee5a051f6293048494bd130",
+  "branch": "codex/owned-records-read",
+  "frontend": {
+    "passed": 1865,
+    "failed": 0,
+    "skipped": 0,
+    "files": 103
+  },
+  "backend": {
+    "tests": 550,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "seconds": 151.479
+  },
+  "browser": {
+    "startTime": "2026-10-11T13:38:44.146Z",
+    "duration": 24870.309,
+    "expected": 14,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "errors": 0,
+    "root": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/records-20261011T133843494847Z"
+  },
+  "quality": [
+    {
+      "name": "types",
+      "command": [
+        "pnpm",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "name": "biome-final",
+      "command": [
+        "pnpm",
+        "check"
+      ],
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "name": "ruff",
+      "command": [
+        ".venv/bin/ruff",
+        "check",
+        "."
+      ],
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "name": "ruff-format",
+      "command": [
+        ".venv/bin/ruff",
+        "format",
+        "--check",
+        "."
+      ],
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "name": "mypy",
+      "command": [
+        ".venv/bin/mypy",
+        "app"
+      ],
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "name": "build",
+      "command": [
+        "pnpm",
+        "build"
+      ],
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "name": "production-guard-final",
+      "command": [
+        "node",
+        "scripts/check-selection-production.mjs"
+      ],
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "name": "diff-check",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "error": null
+    }
+  ],
+  "sourceFiles": [
+    {
+      "file": "backend/app/main.py",
+      "sha256": "ece054f6068a1d2b6329aae6a7b2a8e2d898b5faadc5cdd3c50a39fdaf775a28"
+    },
+    {
+      "file": "backend/app/records.py",
+      "sha256": "ea5913e06334a40c4d66aafacf83020e1790b768bcc6e0a54908c5b3e69d3182"
+    },
+    {
+      "file": "backend/tests/test_records_web_binding.py",
+      "sha256": "af4ba5696cf464ac69485637ee546bf4f56bb7eae4aad016ad7d72c494102cc9"
+    },
+    {
+      "file": "frontend/src/api/recordBinding.ts",
+      "sha256": "d641bf1239b82479bf12e88afaa26baa0ab00fa28a0e5bd058d5aa6343d2c48a"
+    },
+    {
+      "file": "frontend/src/api/recordBinding.test.ts",
+      "sha256": "cf1aabb8d9cdd4dcf7cae66c803875aa450ca31616eb55a64c552a5f1804dbce"
+    },
+    {
+      "file": "frontend/src/api/records.ts",
+      "sha256": "7be83758ef01db697998a4630fea7b7847a641e3398b3f1fb04cb49634ed0e7a"
+    },
+    {
+      "file": "frontend/src/api/recordDeletion.ts",
+      "sha256": "bd0b6bcbda0f7500f35fe700bae8891e441800d6eb1bc7e4317ec648874049df"
+    },
+    {
+      "file": "frontend/src/api/generated/types.gen.ts",
+      "sha256": "2072dc7ffbfe329f77ccf29db99a0df7573e30068f667ab99e59b925cf145fa7"
+    },
+    {
+      "file": "frontend/e2e/records.spec.ts",
+      "sha256": "58b2341da49e08ccd0a064b98b09ad4c56df10e14bb2f01c9a68652de49961ef"
+    },
+    {
+      "file": "frontend/src/pages/RecordsPage.tsx",
+      "sha256": "e7bc49a84dbd70d8a02f536c35c12555d15dd4c04c23d11d1315f0bbfcb69aca"
+    },
+    {
+      "file": "frontend/src/pages/RecordsPage.test.tsx",
+      "sha256": "8375606eba1d26dc8fc9953306ca8eb7314189631d18aeb5f74bad18d8a59241"
+    },
+    {
+      "file": "frontend/src/pages/RecordDeletion.tsx",
+      "sha256": "41f48b1fc19243d94faab9d2293469edec6e0f3434e7d13b19af486a8d32bf71"
+    },
+    {
+      "file": "frontend/src/pages/RecordDeletion.test.tsx",
+      "sha256": "7589818e73a46532525d742c419474535391599b8e9e563324fdd31f563a1d09"
+    }
+  ],
+  "sourcesStillMatch": true,
+  "productArtifacts": [
+    {
+      "file": "index-CmT_KJFW.js",
+      "bytes": 365040,
+      "sha256": "a5cd8b5bfaa66a7b48387d712572bc0ab872018fb13b48ea48021730df824879"
+    },
+    {
+      "file": "index-Dynv9cmN.css",
+      "bytes": 31302,
+      "sha256": "4d4ad19162d6768f42fca57564338e0c0461c6c16d22e502da09d5c35fb33f92"
+    }
+  ],
+  "images": [
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/records-20261011T133843494847Z/records-OR-04-detail-rejec-1df89-n-records-or-deletion-scope/record-detail-account-blocked.png",
+      "bytes": 53765,
+      "sha256": "56d0d941a65845acdfb050e78cb5949caff3dbb6696b0914de0e3dfd672096e1",
+      "stored": true
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/records-20261011T133843494847Z/records-OR-04-list-rejects-2ed59-n-records-or-deletion-scope/record-list-account-blocked.png",
+      "bytes": 55969,
+      "sha256": "93c9e44d82f841a9f2100910421a284e79bec30bf65b2a37036bd4183145ead6",
+      "stored": true
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/records-20261011T133843494847Z/records-OR-04-preview-reje-08ea1-n-records-or-deletion-scope/record-preview-account-blocked.png",
+      "bytes": 55978,
+      "sha256": "d79e1319726412dcd7b36cb75b88863806adb5ddc42b8e55e5df18836cd208de",
+      "stored": true
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/records-20261011T133843494847Z/records-RD-01-actual-previ-fd962-on-preserve-outside-records/deletion-preview-narrow.png",
+      "bytes": 80666,
+      "sha256": "76043f275058ef6f95c575fa3a84d9fde94f5989d69491666ae11dd3dcde2f4e",
+      "stored": false
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/records-20261011T133843494847Z/records-RD-01-actual-previ-fd962-on-preserve-outside-records/deletion-preview.png",
+      "bytes": 88849,
+      "sha256": "dd317af4e2c9a5412ae873900b418ed9f5a0c965d29f1a0ef026c819f52962be",
+      "stored": true
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/records-20261011T133843494847Z/records-RD-01-actual-previ-fd962-on-preserve-outside-records/deletion-result.png",
+      "bytes": 79227,
+      "sha256": "b46ee11ad15e8f4b5393b1093461e962cf8092b50a573b42d82bcab13ffdbc31",
+      "stored": true
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/records-20261011T133843494847Z/records-RD-02-changed-real-226c7--preserves-remaining-record/deletion-target-changed.png",
+      "bytes": 96341,
+      "sha256": "01d562ef90975b8a7049eb4487afdaf09476279f3dad66beebdd160283744700",
+      "stored": false
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/records-20261011T133843494847Z/records-RD-03-server-confi-f6972--without-an-automatic-retry/deletion-expired.png",
+      "bytes": 89800,
+      "sha256": "bf2f21ce5e1328a62916056ed0264c07dfcf06bdbcac4003b6b579dcc8ee419b",
+      "stored": false
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/records-20261011T133843494847Z/records-RD-04-foreign-proo-f1966-on-cannot-reopen-private-UI/deletion-logout-boundary.png",
+      "bytes": 80883,
+      "sha256": "8b29c48c2a16415e63fa5f85ced377017262d802541dd8042c4e86f12c02265a",
+      "stored": false
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/records-20261011T133843494847Z/records-RD-05-record-saved-93a64-en-with-an-earlier-end-time/deletion-new-record-preserved.png",
+      "bytes": 86110,
+      "sha256": "4aff10f06c9c1f8221d40e0b24dac32ad996c3ad31d29444cbade1ab6e3f2046",
+      "stored": false
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/records-20261011T133843494847Z/records-RW-01-protected-en-1fdc8-genuine-empty-record-period/records-empty.png",
+      "bytes": 68239,
+      "sha256": "6a93d248fd931f783342442b85834a39b47323d42ad0d46032c2d7c1b5abc50e",
+      "stored": false
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/records-20261011T133843494847Z/records-RW-02-actual-summa-0fd33-d-long-record-narrow-layout/record-detail-narrow.png",
+      "bytes": 61709,
+      "sha256": "da1ccea970d0dc305b6c78ec7a0687d13a8bf4e7ef3b8a82929d648507c8e5d3",
+      "stored": true
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/records-20261011T133843494847Z/records-RW-02-actual-summa-0fd33-d-long-record-narrow-layout/records-list-narrow.png",
+      "bytes": 76071,
+      "sha256": "b89b1e036e20946240aa8d8d9547fe08719a0ba915acc18acf2b1fc6e3b95995",
+      "stored": false
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/records-20261011T133843494847Z/records-RW-02-actual-summa-0fd33-d-long-record-narrow-layout/records-list.png",
+      "bytes": 81607,
+      "sha256": "43c2e54776187f984236437e42e19ab97aca5560f8fd8c3520dc11f9064fe8e6",
+      "stored": true
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/records-20261011T133843494847Z/records-RW-03-actual-perio-7ef3e--and-invalid-input-recovery/records-period.png",
+      "bytes": 68012,
+      "sha256": "6f8c01599b847d7ce87caf68a823e18726470782a06684339dc23219f18083c1",
+      "stored": false
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/records-20261011T133843494847Z/records-RW-04-actual-bound-b641f-ses-one-cutoff-and-keyboard/records-page-two.png",
+      "bytes": 72408,
+      "sha256": "7c669b0a1a971b4e59e40c6aec03a022a025848ba118fc56055d5bf2575b258a",
+      "stored": false
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/records-20261011T133843494847Z/records-RW-05-read-failure-1a7af--response-after-real-logout/records-loading.png",
+      "bytes": 49911,
+      "sha256": "bfda55e2ad5e2d1177a5dae5a29cb11f2d8f68e474d850e45e9f4e614e372e7f",
+      "stored": false
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/records-20261011T133843494847Z/records-RW-05-read-failure-1a7af--response-after-real-logout/records-read-error.png",
+      "bytes": 58410,
+      "sha256": "1d62498f2ac4fa58cb1f03b9a7a458e94c15fbb8de02356ca96e678a0f9cc590",
+      "stored": false
+    },
+    {
+      "source": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/records-20261011T133843494847Z/records-RW-06-own-only-det-04442-count-and-Back-after-logout/record-unavailable.png",
+      "bytes": 51133,
+      "sha256": "78109a3529a4365df122d72841829c4b92dc590aec3de91eab44eae5faa3e8cb",
+      "stored": false
+    }
+  ],
+  "environment": "real PostgreSQL18.6/API/Chrome155; synthetic accounts/mail/summaries; controlled cookie ABA and network/clock faults",
+  "wholeGoalComplete": false,
+  "avatarHold": true,
+  "qualifiedMotions": 0,
+  "notExecuted": [
+    "real participants/body coaching",
+    "final avatar creation/GLB/deformation",
+    "Docker/actual HTTPS",
+    "real Gmail/Google providers",
+    "deployment/release",
+    "clinical/expert review"
+  ]
+}

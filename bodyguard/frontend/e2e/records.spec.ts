@@ -88,6 +88,89 @@ function day(date: Date) {
   return `${date.getFullYear().toString().padStart(4, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
 }
 
+for (const operation of ['list', 'detail', 'preview'] as const) {
+  test(`OR-04 ${operation} rejects cookie ABA before displaying foreign records or deletion scope`, async ({
+    page,
+    context,
+  }, info) => {
+    await join(context)
+    const foreign = await seed(context, 2)
+    await seed(context, 3)
+    const cookieB = await context.cookies()
+    const csrfB = await (await context.request.get('/api/v1/auth/csrf')).json()
+    await context.clearCookies()
+    await join(context)
+    const own = await seed(context, 1)
+    const cookieA = await context.cookies()
+    const meA = await (await context.request.get('/api/v1/me')).json()
+    await page.goto(operation === 'detail' ? `/records/${own.id}` : '/records')
+    if (operation === 'detail') await expect(page.getByText('fixture-not-release')).toBeVisible()
+    else await expect(page.getByRole('link', { name: /^fixture-1 .*기록 상세/ })).toBeVisible()
+    const matcher =
+      operation === 'detail'
+        ? `**/api/v1/records/stretch/${own.id}`
+        : operation === 'preview'
+          ? '**/api/v1/records/stretch/delete-preview'
+          : /\/api\/v1\/records\/stretch\?/
+    let rejected = 0
+    await page.route(matcher, async (route) => {
+      expect(route.request().headers()['x-account-id']).toBe(meA.id)
+      // Controlled cookie transition only; actual local API/SQL produce the response.
+      // Cookies/CSRF remain in memory and are not attached to test evidence.
+      await context.clearCookies()
+      await context.addCookies(cookieB)
+      const response = await route.fetch({
+        headers: {
+          ...route.request().headers(),
+          cookie: cookieB.map(({ name, value }) => `${name}=${value}`).join('; '),
+          'x-csrf-token': csrfB.csrf_token,
+        },
+      })
+      expect(response.status()).toBe(403)
+      rejected++
+      // Restore A before delivery: a later /me check alone would miss this ABA.
+      await context.clearCookies()
+      await context.addCookies(cookieA)
+      await route.fulfill({ response })
+    })
+    if (operation === 'detail') await page.reload()
+    else
+      await page
+        .getByRole('button', {
+          name: operation === 'preview' ? '이 기간 기록 삭제' : '기간 조회',
+          exact: true,
+        })
+        .click()
+    await expect(page.getByRole('heading', { name: '계정을 다시 확인해 주세요' })).toBeVisible()
+    expect(rejected).toBe(1)
+    await expect(page.getByRole('table')).toHaveCount(0)
+    await expect(page.getByRole('button', { name: '기록 삭제', exact: true })).toHaveCount(0)
+    await expect(page.getByRole('button', { name: '이 기간 기록 삭제', exact: true })).toHaveCount(
+      0,
+    )
+    await expect(page.getByText('삭제 대상: 2건', { exact: true })).toHaveCount(0)
+    await expect(page.getByRole('link', { name: /^fixture-2 .*기록 상세/ })).toHaveCount(0)
+    await page.screenshot({
+      path: info.outputPath(`record-${operation}-account-blocked.png`),
+      fullPage: true,
+    })
+    await page.unroute(matcher)
+    await page.getByRole('button', { name: '계정 다시 확인', exact: true }).click()
+    if (operation === 'detail') await expect(page.getByText('fixture-not-release')).toBeVisible()
+    else await expect(page.getByRole('link', { name: /^fixture-1 .*기록 상세/ })).toBeVisible()
+    await context.clearCookies()
+    await context.addCookies(cookieB)
+    const remaining = await (await context.request.get('/api/v1/records/stretch')).json()
+    expect(remaining.items.map((item: { id: string }) => item.id)).toContain(foreign.id)
+    expect(remaining.items).toHaveLength(2)
+    await context.clearCookies()
+    await context.addCookies(cookieA)
+    expect(
+      (await (await context.request.get('/api/v1/records/stretch')).json()).items,
+    ).toHaveLength(1)
+  })
+}
+
 test('RD-05 record saved after preview is preserved even with an earlier end time', async ({
   page,
   context,

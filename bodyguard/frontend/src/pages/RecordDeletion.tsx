@@ -1,7 +1,8 @@
 // FR-U-05/NFR-08: explicit confirmation, no background retry or persisted proofs.
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { ApiError } from '../api/auth'
 import type { DeletePeriod, DeleteProof } from '../api/generated'
+import type { RecordBinding } from '../api/recordBinding'
 import { confirmDeletion, previewDeletion } from '../api/recordDeletion'
 import { useAuth } from '../auth'
 
@@ -14,20 +15,37 @@ export function RecordDeletion({
   from,
   to,
   onChanged,
+  binding,
+  onAccountConflict,
 }: {
   period: DeletePeriod
   from: string
   to: string
   onChanged: () => void
+  binding: RecordBinding
+  onAccountConflict: () => void
 }) {
-  const [state, setState] = useState<State>({ kind: 'idle' })
+  const [stored, setStored] = useState<{ owner: RecordBinding['authority']; value: State }>({
+    owner: binding.authority,
+    value: { kind: 'idle' },
+  })
+  const state: State = stored.owner === binding.authority ? stored.value : { kind: 'idle' }
+  function setState(value: State) {
+    setStored({ owner: binding.authority, value })
+  }
   const requestRef = useRef<AbortController | null>(null)
   const trigger = useRef<HTMLButtonElement>(null)
   const restoreFocus = useRef(false)
   const heading = useRef<HTMLHeadingElement>(null)
   const { refresh } = useAuth()
   const busy = state.kind === 'previewing' || state.kind === 'deleting'
-  useEffect(() => () => requestRef.current?.abort(), [])
+  useLayoutEffect(() => {
+    setStored({ owner: binding.authority, value: { kind: 'idle' } })
+    return () => {
+      requestRef.current?.abort()
+      requestRef.current = null
+    }
+  }, [binding.authority])
   useEffect(() => {
     if (state.kind !== 'idle') heading.current?.focus({ preventScroll: true })
     else if (restoreFocus.current) {
@@ -42,27 +60,32 @@ export function RecordDeletion({
     setState({ kind: 'idle' })
   }
   async function run(proof?: DeleteProof) {
-    if (requestRef.current) return
+    if (requestRef.current || binding.readAuthority() !== binding.authority) return
     const controller = new AbortController()
     requestRef.current = controller
     setState({ kind: proof ? 'deleting' : 'previewing' })
     try {
       if (proof) {
-        const deleted = await confirmDeletion(proof, controller.signal)
-        if (controller.signal.aborted) return
+        const deleted = await confirmDeletion(proof, controller.signal, binding)
+        if (controller.signal.aborted || binding.readAuthority() !== binding.authority) return
         setState({ kind: 'message', text: `${deleted}건의 수행 기록을 삭제했습니다.` })
         onChanged()
       } else {
-        const preview = await previewDeletion(period, controller.signal)
-        if (!controller.signal.aborted) setState({ kind: 'confirm', proof: preview })
+        const preview = await previewDeletion(period, controller.signal, binding)
+        if (!controller.signal.aborted && binding.readAuthority() === binding.authority)
+          setState({ kind: 'confirm', proof: preview })
       }
     } catch (error) {
-      if (controller.signal.aborted) return
+      if (controller.signal.aborted || binding.readAuthority() !== binding.authority) return
       if (error instanceof ApiError && error.status === 401) {
         void refresh()
         return
       }
-      const recheck = error instanceof ApiError && [403, 409].includes(error.status)
+      if (error instanceof ApiError && error.status === 403) {
+        onAccountConflict()
+        return
+      }
+      const recheck = error instanceof ApiError && error.status === 409
       setState({
         kind: 'message',
         text: recheck
