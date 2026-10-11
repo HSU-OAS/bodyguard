@@ -1,0 +1,26 @@
+{
+  "method": "actual React/Chrome/Vite + actual SDK/native fake camera; controlled account API and explicitly synthetic fault/401 triggers",
+  "cases": [
+    "initial: camera/worker/video/canvas0",
+    "actual document + actual SDK Worker external fetch blocked by native connect-src violation",
+    "native fake-camera + actual heavy body/face/hands Worker: first inference/discard → explicit stop, tracks/worker ended",
+    "synthetic camera denial → fixed recoverable error, no worker",
+    "synthetically held native stream: cancel → late result closed, no SDK readiness",
+    "fresh explicit native preparation → actual router exit releases",
+    "actual SPA route remount waits for synthetically held native permission; late stream ends, no auto reacquisition",
+    "actual AuthProvider controlled401 refresh → private UI removed, native resources ended"
+  ],
+  "external": 0,
+  "avatars": 0,
+  "errors": [],
+  "syntaxError": false,
+  "failure": null,
+  "notProven": [
+    "real participants/body accuracy",
+    "real permission popup denial",
+    "SQL/provider auth",
+    "avatar/GLB/deformation",
+    "clinical judgement/startup P2 resolution",
+    "public coaching/production deployment"
+  ]
+}

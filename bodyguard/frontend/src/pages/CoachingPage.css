@@ -133,6 +133,32 @@
 .camera-preparation > p {
   margin-top: 8px;
 }
+
+.camera-reference {
+  margin-top: 16px;
+  display: grid;
+  gap: 12px;
+}
+.camera-reference h3,
+.camera-reference p {
+  margin: 0;
+}
+.camera-reference > button {
+  justify-self: start;
+}
+.camera-reference label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.camera-reference input {
+  margin-top: 4px;
+  accent-color: var(--blue, #1769dc);
+}
+.camera-reference [aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: default;
+}
 .coaching-instructions {
   max-width: 640px;
   font-size: 14px;

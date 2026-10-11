@@ -9,6 +9,8 @@ import {
   createCameraFraming,
   motionFramingRequirement,
 } from '../posture/cameraFraming'
+import { CameraReferenceControls } from './CameraReferenceControls'
+import { useCameraReference } from './useCameraReference'
 
 const errors = {
   denied: '카메라 권한을 허용한 뒤 다시 확인해 주세요.',
@@ -34,6 +36,12 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
   const owner = useRef<ReturnType<typeof createCameraPreparation> | null>(null)
   const [state, setState] = useState<PreparationState>({ phase: 'idle' })
   const [framing, setFraming] = useState<CameraFramingStatus | null>(null)
+  const reference = useCameraReference(motionId)
+  const referencePort = useRef(reference)
+  referencePort.current = reference
+  useLayoutEffect(() => {
+    if (reference.saving === 'authority-error') void owner.current?.stop()
+  }, [reference.saving])
   useLayoutEffect(() => {
     if (account.status !== 'ready' || accountId === null) return
     const id = accountId
@@ -64,6 +72,7 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
           if (current && owner.current === current && !disposed) {
             setState(next)
             if (next.phase !== 'observing') {
+              referencePort.current.reset()
               previous = null
               setFraming(null)
               observer = requirement ? createCameraFraming(requirement) : null
@@ -77,11 +86,15 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
       // Consume the existing copied slot once; never capture/re-infer on render or retain arrays.
       const tick = () => {
         if (disposed || live.current !== account) return
-        if (observer && current?.state.phase === 'observing') {
+        if (current?.state.phase === 'observing') {
           const input = current.takeFrame()
           const now = performance.now()
-          if (input) observer.accept(input, now)
-          const next = observer.read(now)
+          if (input) {
+            observer?.accept(input, now)
+            referencePort.current.accept(input, now)
+          }
+          referencePort.current.tick(now)
+          const next = observer?.read(now) ?? null
           if (next !== previous) {
             previous = next
             setFraming(next)
@@ -89,7 +102,7 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
         }
         animation = requestAnimationFrame(tick)
       }
-      if (observer) animation = requestAnimationFrame(tick)
+      animation = requestAnimationFrame(tick)
     }
     if (retirement) {
       setState({ phase: 'stopping' })
@@ -141,6 +154,7 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
           className="button secondary"
           disabled={
             account.status !== 'ready' ||
+            reference.saving === 'authority-error' ||
             state.phase === 'stopping' ||
             (state.phase === 'error' && state.reason === 'cleanup')
           }
@@ -199,8 +213,9 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
         </p>
       )}
       <p className="small muted">
-        브라우저 안에서 입력만 확인합니다. 코칭·판정·저장은 시작하지 않습니다.
+        입력은 브라우저 안에서 처리합니다. 코칭·판정은 시작하지 않습니다.
       </p>
+      <CameraReferenceControls reference={reference} observing={state.phase === 'observing'} />
     </section>
   )
 }
