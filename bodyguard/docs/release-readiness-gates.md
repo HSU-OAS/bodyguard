@@ -1,5 +1,7 @@
 # 출시 통합 실행 게이트 — 2026-10-09
 
+**2026-10-11 취소 경로 갱신:** [S3.C2](stories/camera-playback-cancellation.md)에서 획득한 카메라의 미완료 재생 취소·화면 이탈·늦은 완료와 정리 실패 차단을 보완했다. [실제 흐름·원문·경계](review/camera-playback-cancellation/README.md). 공개 JS/CSS와 판정/SDK 정책은 불변이며 PR128 source68f0bc2→mergebe1ec62/main을 실제 확인한 뒤 진행했다. 원래 시작P2·아바타/Docker 보류·실측/출시 적격0·전체1~6의 미완료는 해소되지 않았다.
+
 **2026-10-11 카메라 준비 갱신:** [S3.C1](stories/coaching-camera-preparation.md)은 실제 개발 웹에서 명시 카메라 준비/SDK 첫 입력 처리·폐기/끄기와 거부/취소·계정/화면 이탈의 정리를 연결했다. [실제 화면·가짜 장치/제어 계정/실제 SDK 경계·실패](review/coaching-camera-preparation/README.md). 구조 PR127은 mergefd331d2/main에 포함됐다. 원래 시작P2를 닫거나 아바타·동작/추천/판정·실측·전체1~6 완료로 세지 않는다. CEO는 Docker 연결을 나중에 하기로 했으므로 컨테이너/HTTPS 실제 검증은 보류·미완료다. 아래 과거 SDK/화면/연결 상태는 위 최신 결과와 구분한다.
 
 **2026-10-11 갱신:** 승인된 SDK 정책은 [PR126](https://github.com/HSU-OAS/bodyguard/pull/126)의 sourcec426f6d→merge5d12491로 main에 포함됐다. [실제 SDK/외부 차단·인증 회귀의 범위](review/sdk-network-policy/README.md). 코칭·동작 선택 구조는 [S4.D6](stories/coaching-workspace-structure.md)에서 실제 React 개발 라우트에 적용하고 화면 흐름을 검증했다. [실제 작동 화면·실패·한계](review/coaching-workspace-structure/README.md). 아래 과거 목록의 구조/정책 승인 대기는 해소됐지만 실제 두 아바타·동작 미디어/판정·참여자·시작P2·운영/HTTPS와 전체1~6은 미완료다. 개발 구조는 공개 코칭으로 노출하지 않는다. PR36/51 등 과거 Draft를 자동 통과/병합한 것이 아니다.

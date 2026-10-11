@@ -1,0 +1,120 @@
+{
+  "baseline": "be1ec620965edae9a4ccd4b0ae02fc96061279f2",
+  "source": [
+    {
+      "file": "bodyguard/frontend/src/pose/camera.ts",
+      "sha256": "f5a69e394e07075d7822944aa2764415ecec4fd7a9d5519392bf479048e72e6e"
+    },
+    {
+      "file": "bodyguard/frontend/src/pose/cameraCancellation.test.ts",
+      "sha256": "e11e17999b83224bf280290ace92eefabca8bf05fb9d2dc2f5727f3437767a76"
+    },
+    {
+      "file": "bodyguard/frontend/src/pose/cameraPreparation.cancellation.test.ts",
+      "sha256": "96733e217bb775c5a29a56088ff2119e1b2166e238d30931b55047ccb014f9b2"
+    },
+    {
+      "file": "bodyguard/frontend/scripts/test-camera-cancellation.mjs",
+      "sha256": "90cd7c1eab620df03d22d7e44f9b2498f21cb22faa488fad5c61eb33c27be514"
+    }
+  ],
+  "records": [
+    {
+      "file": "unit-red.json.gz",
+      "rawSha256": "c67bc3e42ce9a515bbc4eedbdcc2b7318516685b69cb35369eec67367e7e79f8",
+      "rawBytes": 7252
+    },
+    {
+      "file": "unit-green.json.gz",
+      "rawSha256": "7364133cf52cb0a90840ad968cba41c1ee72be0699d76b7ca80ce646361dcfe0",
+      "rawBytes": 7317
+    },
+    {
+      "file": "unit-ownership.json.gz",
+      "rawSha256": "be9e6427af28d037caa2482152bb930a130d9af216debc4d39ad4b2dbfa2101f",
+      "rawBytes": 9737
+    },
+    {
+      "file": "unit-full.json.gz",
+      "rawSha256": "becc52c8abdae1147b3fc293f542ad097946d73aa256ad5053d5ea9a0f51fd91",
+      "rawBytes": 586612
+    },
+    {
+      "file": "browser.json.gz",
+      "rawSha256": "d708d422a844d4b8e84a227624e8a79fb9a62236fee889bf598e08e9b85f4546",
+      "rawBytes": 1079
+    },
+    {
+      "file": "browser-final.json.gz",
+      "rawSha256": "d708d422a844d4b8e84a227624e8a79fb9a62236fee889bf598e08e9b85f4546",
+      "rawBytes": 1079
+    },
+    {
+      "file": "browser-helper-at-run.mjs.gz",
+      "rawSha256": "0968d139c215628eeb34ea1ea825d1ad6b5d64163b5690863340c9d3a4e2b441",
+      "rawBytes": 9018
+    },
+    {
+      "file": "camera-regression.json.gz",
+      "rawSha256": "ce3eb3de46c36d120a8aafd03c3040ee6228e32b329837e9fad661290e91bfe3",
+      "rawBytes": 1213
+    }
+  ],
+  "unit": {
+    "files": 92,
+    "total": 1701,
+    "passed": 1701,
+    "failed": 0,
+    "pending": 0
+  },
+  "browser": {
+    "method": "actual React/AuthProvider/Chrome/Vite + native fake-camera/actual heavy SDK; controlled account and explicit stalled playback/stop faults",
+    "cases": [
+      "actual React: cancelled stalled playback settled while controlled native-play promise remains pending; native tracks ended/SDK0",
+      "explicit retry: actual heavy body/face/hands Worker first inference; late old play resolution cannot detach fresh camera; stop closes all",
+      "cancelled old play rejection consumed; no native/SDK readiness revival or pageerror",
+      "actual SPA exit/remount retires acquired stalled playback without releasing old play; no automatic new camera",
+      "controlled stop fault after native end: fixed cleanup error, no raw exception/restart; camera actually ended"
+    ],
+    "external": 0,
+    "avatars": 0,
+    "errors": [],
+    "failure": null,
+    "notProven": [
+      "physical camera/person accuracy/performance",
+      "real provider/SQL",
+      "original startup P2 resolution",
+      "avatar/clinical/public coaching",
+      "Docker/TLS/deployment"
+    ],
+    "ownedResourcesClosed": true
+  },
+  "existingCameraRegression": {
+    "method": "actual React/Chrome/Vite + actual SDK/native fake camera; controlled account API and explicitly synthetic fault/401 triggers",
+    "cases": [
+      "initial: camera/worker/video/canvas0",
+      "actual document + actual SDK Worker external fetch blocked by native connect-src violation",
+      "native fake-camera + actual heavy body/face/hands Worker: first inference/discard → explicit stop, tracks/worker ended",
+      "synthetic camera denial → fixed recoverable error, no worker",
+      "synthetically held native stream: cancel → late result closed, no SDK readiness",
+      "fresh explicit native preparation → actual router exit releases",
+      "actual SPA route remount waits for synthetically held native permission; late stream ends, no auto reacquisition",
+      "actual AuthProvider controlled401 refresh → private UI removed, native resources ended"
+    ],
+    "external": 0,
+    "avatars": 0,
+    "errors": [],
+    "syntaxError": false,
+    "failure": null,
+    "notProven": [
+      "real participants/body accuracy",
+      "real permission popup denial",
+      "SQL/provider auth",
+      "avatar/GLB/deformation",
+      "clinical judgement/startup P2 resolution",
+      "public coaching/production deployment"
+    ]
+  },
+  "artifactGenerationOnly": true,
+  "collectionDoesNotReexecuteBuildTypecheckOrBrowser": true
+}

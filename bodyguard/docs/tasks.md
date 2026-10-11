@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-11 [S3.C2 카메라 준비 취소](stories/camera-playback-cancellation.md): 미완료 재생의 취소·화면 이탈과 정리 실패를 보완했다. [실제 흐름·원본 RED·검증/리뷰](review/camera-playback-cancellation/README.md). 준비 취소 후 옛 재생을 기다리지 않고 명시 재시도할 수 있으며, 정리 불확실 시 차단한다. 실제 React/가짜 카메라·SDK와 전체frontend/타입/build/guard를 확인했고 조건부 PR 게이트 진행 중이다. PR128 source68f0bc2→mergebe1ec62/main은 실제 확인했다. 아바타/Docker 보류·실측/동작0·원래 시작P2·운영/전체1~6 미완료는 유지한다. 아래는 이전 시점 기록이다.
+
 2026-10-11 [S3.C1 카메라·첫 추론 준비](stories/coaching-camera-preparation.md): 승인된 코칭 화면에서 명시 준비→실제 SDK 첫 입력/폐기→끄기와 거부/취소·화면 이탈·계정 회수를 연결했다. [실제 화면·흐름·실패·작성자 리뷰](review/coaching-camera-preparation/README.md). 개발 classic Worker의 ESM 오류, 새 계정/새 화면의 이전 정리 우회, decoded 입력 대기/정리 실패를 보완했다. 전체 frontend1692·타입/범위 정적·production 고지/private guard·실제 Chrome/가짜 장치/SDK를 확인하고 조건부 PR 게이트를 진행한다. 아바타/동작 미디어·코칭/판정/추천/저장 활성화는 하지 않았다. PR127 sourcecb667d4→mergefd331d2/main·브랜치 보존을 확인했다. Docker는 CEO의 나중 연결 선택으로 실제 검증 보류다. 아바타 보류·출시 동작0·실측/참여자·기존 시작P2·외부/운영과 전체1~6 미완료는 유지한다. 아래는 이전 시점 기록이다.
 
 2026-10-11 [S4.D6 코칭 공간·동작 선택 구조](stories/coaching-workspace-structure.md): 실제 React에서 선택/상세→코칭 구조→구도·설정·동작 변경→안내/나가기와 검색·필터 복귀를 연결했다. [실제 화면·모의/실제 경계·실패·작성자 리뷰](review/coaching-workspace-structure/README.md). 넓은 한 공간의 좌우 배치·화이트/블루·짧은 문구를 적용했지만 아바타/동작 영상은 미연결이고 시작/시범/판정/카메라/저장은 비활성이다. 비공개 production 경계를 유지하며 이 구조 목적의 필수 검증과 조건부 PR 게이트를 진행한다. SDK PR126 sourcec426f6d→merge5d12491/main·브랜치 보존을 실제 확인했다. 아바타 보류·출시 동작0·실측/참여자·시작P2·외부/운영/권리와 전체1~6 미완료는 유지한다. 아래는 이전 시점 기록이다.
