@@ -1010,7 +1010,7 @@ def create_app(
 
     register_records(app, db, now_fn, record_owner, record_deletion_sign)
     register_notification_preferences(app, db, record_owner, summary_read_binding)
-    register_baselines(app, db, now_fn, record_owner, ErrorOut)
+    register_baselines(app, db, now_fn, record_owner, ErrorOut, summary_read_binding)
     register_summaries(
         app, db, now_fn, record_owner, record_deletion_sign, ErrorOut, summary_read_binding
     )

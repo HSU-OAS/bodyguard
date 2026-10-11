@@ -53,6 +53,8 @@ for (const file of files) {
     'Unable to save coaching record',
     'PRIVATE_RESULT_COORDINATES_ACCOUNT',
     'prepareResultProbe',
+    'baselineClientProbe',
+    '__private-baseline-probe.js',
     'Unable to capture coaching account',
     'PRIVATE_OWNER_COORDINATES_ACCOUNT',
     'prepareOwnerProbe',

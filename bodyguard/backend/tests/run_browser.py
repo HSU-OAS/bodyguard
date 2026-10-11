@@ -60,6 +60,7 @@ def main() -> int:
             "dashboardclient",
             "authdashboard",
             "recordjourney",
+            "baselineclient",
         ),
         nargs="?",
         default="account",
@@ -230,6 +231,7 @@ def main() -> int:
                         "dashboardclient",
                         "authdashboard",
                         "recordjourney",
+                        "baselineclient",
                     )
                     else f"test-results/{args.suite}"
                 )
@@ -289,6 +291,7 @@ def main() -> int:
                                 "dashboardclient",
                                 "authdashboard",
                                 "recordjourney",
+                                "baselineclient",
                             )
                             else ""
                         ),
