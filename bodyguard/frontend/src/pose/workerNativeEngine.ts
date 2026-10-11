@@ -44,7 +44,7 @@ export async function prepareWorkerNativeEngine(
     signal.throwIfAborted()
     if (typeof OffscreenCanvas !== 'function') throw new Error()
     // Fixed same-origin absolute assets. A worker has no DOM/import-meta-relative model URL.
-    const path = (asset: string) => new URL(asset, self.location.href).href
+    const path = (asset: string) => new URL(asset, `${new URL(self.location.href).origin}/`).href
     const vision = await FilesetResolver.forVisionTasks(path(WASM_BASE_PATH))
     signal.throwIfAborted()
     async function load<T>(create: (delegate: 'GPU' | 'CPU') => Promise<T>): Promise<T> {
