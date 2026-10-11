@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-11 최신 갱신: 실제 Gmail/Google 공급자 연결은 CEO의 **나중에** 결정으로 보류한다. 연결/발송/공급자 로그인0이다. [S5.8 설치 파일 부분 고지](stories/embedded-package-notices.md)는 maath의 함수 주석3개와 MediaPipe의 타입 파일 머리2개를 원문으로 보존/대조했다. [실패/한계·원본·작성자 리뷰](review/embedded-package-notices/README.md). PR136 sourcec2629dd→merge9c620b5/main·브랜치 보존 확인 후 진행했고, 로컬 좁은 검증 완료·조건부 PR 게이트 중이다. full 원문 미확인4버전·최종 권리/고지·실제 판정/추천·시작P2·아바타/참여자/Docker/공식 문의 보류·전체1~6 미완료는 유지한다. 아래는 과거 시점 기록이다.
+
 2026-10-11 최신 CEO 결정: 공식 저장소의 라이선스·NOTICE 외부 문의는 **나중에** 진행한다. 문의·외부 메시지0, 미확보 고지·버전 동등성·배포 승인 미완료를 유지한다. S5.7의 원문 보존/검증 보완은 독립적으로 마무리하며 아래 미승인 표현은 답변 전 시점 기록이다. 아바타·참여자·Docker 보류도 유지하고 독립 웹 기능을 계속한다.
 
 2026-10-11 [S5.7 고정 source 동봉 고지·누락 경계](stories/pinned-companion-notices.md): Rolldown의 참조 동봉 고지를 원문으로 보존했다. maath tag/source identity와 stats-gl의 npm2.4.2/source2.3.1 불일치를 실제 확인해 누락/버전 문제를 성공으로 대체하지 않았다. [결과·실패/작성자 리뷰·증거](review/pinned-companion-notices/README.md). source collector 원문 검사의 P2를 재현/보완했으며 제품/SDK/아바타·운영 변경0, 조건부 PR 게이트를 진행한다. PR135 sourcee56c40a→mergeababacfe/main·브랜치 보존 확인. 공식 source 문의3건은 CEO 미승인/외부 메시지0이며 아바타/참여자/Docker 보류·실제 판정/추천·시작P2/native timeout·외부/HTTPS/운영·전체1~6 미완료는 유지한다. 아래는 과거 시점 기록이다.
