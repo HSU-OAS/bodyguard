@@ -7,13 +7,17 @@ import { chromium } from '@playwright/test'
 import { createServer, mergeConfig } from 'vite'
 import config from '../vite.config.ts'
 
-const [scratch, executable, label] = process.argv.slice(2)
+const [scratch, executable, label, mode = 'native'] = process.argv.slice(2)
 assert(/^\/private\/tmp\/bodyguard-motion-framing\.[A-Za-z0-9]+$/.test(scratch))
 assert(/^[a-z][a-z0-9-]+$/.test(label) && !existsSync(`${scratch}/${label}.json`))
+assert(['native', 'handoff'].includes(mode))
 const files = [
   'src/pages/CameraPreparation.tsx',
   'src/pages/CoachingPage.tsx',
   'src/posture/cameraFraming.ts',
+  'src/pose/cameraPreparation.ts',
+  'src/pose/videoPoseSource.ts',
+  'src/pose/workerInference.ts',
   'scripts/test-motion-framing.mjs',
 ]
 const hashes = () =>
@@ -83,7 +87,14 @@ try {
     if (/\.glb(?:\?|$)/.test(r.url())) avatars++
   })
   await context.addInitScript(() => {
-    const p = { calls: 0, streams: [], frames: 0 }
+    const p = {
+      calls: 0,
+      streams: [],
+      frames: 0,
+      detectorAt: undefined,
+      inject: null,
+      injected: [],
+    }
     window.framingProbe = p
     const camera = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices)
     navigator.mediaDevices.getUserMedia = async (options) => {
@@ -94,8 +105,24 @@ try {
     }
     const post = Worker.prototype.postMessage
     Worker.prototype.postMessage = function (data, transfer) {
-      if (data?.type === 'frame') p.frames++
+      if (data?.type === 'frame') {
+        p.frames++
+        p.detectorAt = data.at
+      }
       return post.call(this, data, transfer)
+    }
+    // Test-only timestamp fault injection; actual decoder metadata/pixels/SDK stay native.
+    // Never persist this timestamp or SDK results. This is not a natural-race reproduction.
+    const request = HTMLVideoElement.prototype.requestVideoFrameCallback
+    HTMLVideoElement.prototype.requestVideoFrameCallback = function (callback) {
+      return request.call(this, (now, metadata) => {
+        const kind = p.inject
+        p.inject = null
+        if (kind) {
+          p.injected.push(kind)
+          callback(kind === 'equal' ? p.detectorAt : p.detectorAt - 1, metadata)
+        } else callback(now, metadata)
+      })
     }
   })
   page = await context.newPage()
@@ -124,17 +151,31 @@ try {
     assert.deepEqual(await counts(), { calls: old.calls + 1, frames: old.frames + 1 })
     phase = scope
   }
-  const observe = async () => {
+  const observe = async (kind) => {
     const scope = phase
     phase = `${scope}/observe`
     const old = await counts()
+    if (mode === 'handoff')
+      await page.evaluate((kind) => {
+        if (!Number.isFinite(window.framingProbe.detectorAt))
+          throw new Error('Missing preparation timestamp')
+        window.framingProbe.inject = kind
+      }, kind)
     await button('입력 확인').click()
+    phase = `${scope}/observe/first-three-frames`
     await page.waitForFunction((frames) => window.framingProbe.frames >= frames + 3, old.frames, {
       timeout: 8000,
     })
+    phase = `${scope}/observe/positioning-hint`
     await hint.filter({ hasText: '화면 안에 몸이 보이도록' }).waitFor({ timeout: 8000 })
     assert.equal(await button('코칭 준비 중').isDisabled(), true)
     assert.equal(await button('전체 시범').isDisabled(), true)
+    if (mode === 'handoff') {
+      assert.equal(await page.evaluate(() => window.framingProbe.inject), null)
+      assert.equal(await page.evaluate(() => window.framingProbe.injected.at(-1)), kind)
+      assert.equal((await counts()).calls, old.calls)
+      assert.equal(page.workers().length, 1)
+    }
     phase = scope
   }
   phase = 'initial'
@@ -145,10 +186,14 @@ try {
   cases.push('selected motion guidance before any camera/SDK acquisition')
   phase = 'native-input'
   await prepare()
-  await observe()
+  await observe('equal')
   cases.push(
     'actual native fake camera/heavy SDK: warmup discarded, separate continuous input → no body positioning hint; no judgement/reference/write',
   )
+  if (mode === 'handoff')
+    cases.push(
+      'controlled equal warmup timestamp skipped; later real decoded callbacks continue on same camera/Worker',
+    )
   phase = 'display-framing'
   const old = await counts()
   await button('전신').click()
@@ -175,8 +220,12 @@ try {
     .screenshot({ path: `${scratch}/${label}-motion-change.png` })
   phase = 'fresh-motion-input'
   await prepare()
-  await observe()
+  await observe('older')
   cases.push('new motion requires explicit fresh preparation and separate input check')
+  if (mode === 'handoff')
+    cases.push(
+      'controlled older warmup timestamp skipped in fresh preparation; no extra camera/Worker',
+    )
   phase = 'unknown-motion'
   const calls = (await counts()).calls
   await page.evaluate(() => {
@@ -205,6 +254,7 @@ try {
       return {
         calls: window.framingProbe?.calls,
         frames: window.framingProbe?.frames,
+        injected: window.framingProbe?.injected,
         tracks: window.framingProbe?.streams.map((s) => s.getTracks().map((t) => t.readyState)),
         ui: text.includes('분석 연결을 준비하지 못했습니다')
           ? 'inference-error'
@@ -231,6 +281,8 @@ try {
       {
         method:
           'actual React/native fake camera/heavy SDK; controlled account GET fixture; no person/positive body accuracy proof',
+        mode,
+        controlledTimestampFault: mode === 'handoff',
         cases,
         failure: failure ?? null,
         diagnostic: diagnostic ?? null,
@@ -245,6 +297,7 @@ try {
           'physical webcam/person accuracy/identity',
           'avatar/reference/clinical judgement/recommendation/result recording',
           'original startup P2 resolution',
+          'old native timeout root cause or naturally occurring timestamp race',
           'real provider/Docker/HTTPS/deployment/whole1-6',
         ],
       },

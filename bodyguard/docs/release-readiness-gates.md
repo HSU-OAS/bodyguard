@@ -1,5 +1,7 @@
 # 출시 통합 실행 게이트 — 2026-10-09
 
+**2026-10-11 입력 인계 갱신:** [S3.C7](stories/camera-input-handoff.md)은 준비 시각 이하 callback을 추론 전에 건너뛰고 다음 원래 시각의 연속 입력을 받도록 보완했다. [실제 동작 변경/종료/새 준비·제어 실패 원본·검증 한계](review/camera-input-handoff/README.md). 시각 fault 제어 native와 시각 대체 없는 native 흐름을 구분하고 공개 byte/임상/출시 동작0은 유지했다. PR133 source1df077a→merge7ed34fb/main 포함을 확인했다. 아바타/참여자/Docker 보류·과거 시작P2/원인 미확정 timeout·전체1~6 필수 기준은 통과 처리하지 않는다.
+
 **2026-10-11 독립 통합 갱신:** [S3.C6](stories/recorded-playback-assembly.md)은 입력·현재 세션 상태·세대별 재생·계정 소유 기록의 공통 경로를 연결했다. [실제 Chrome/React·fixture HTTP 준비→합성 수행→명시 저장→기존 기록 상세 및 실패/리뷰](review/recorded-playback-assembly/README.md). 합성 계정/자원/시계/판정이며 native SDK/SQL/참여자/아바타의 통과 증거가 아니다. 새 상태 덮어쓰기 P2는 실제 재현/보완했고 공개 byte/시작 gate/출시 동작0은 불변이다. PR132 source724f282→mergef4bddae/main은 확인했다. UI/UX 추후·아바타/참여자/Docker 보류·실제 판정/추천·최종 외형/실측·시작P2/과거 native timeout·운영/HTTPS 및 전체1~6 미완료는 유지한다.
 
 **2026-10-11 기능 연결 우선:** CEO는 UI/UX 다듬기를 나중으로 두고 독립 웹 기능의 빠른 완성을 지시했다. 이어 아바타 보류 유지·실제 참여자 연결은 나중으로 답했으며 Docker 보류도 유지한다. [S3.C5](stories/motion-camera-framing.md)는 선택 동작의 촬영 안내를 실제 개발 연속 입력과 연결하고 동작 변경 시 종료/새 명시 준비·unknown ID 차단을 구현했다. [실제 흐름·가짜/실제 경계·실패](review/motion-camera-framing/README.md). 촬영 기술 상태는 자세 성공·추천·코칭/기록 활성화가 아니다. 기존 필수 단계 기준을 낮추거나 이월 항목을 통과 처리하지 않는다. PR131 source71afcb2→mergedde3d3c/main은 확인했다.
