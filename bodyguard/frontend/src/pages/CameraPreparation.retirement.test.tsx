@@ -22,6 +22,8 @@ vi.mocked(createCameraPreparation).mockImplementation((options) => {
   const owner = {
     state: { phase: 'idle' } as PreparationState,
     start: vi.fn(async () => {}),
+    observe: vi.fn(),
+    takeFrame: vi.fn(() => null),
     stop: vi.fn(async () => {}),
     close: vi.fn(async () => {}),
     notify(next: PreparationState) {

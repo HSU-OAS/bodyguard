@@ -3,14 +3,20 @@ import { ResourceCleanupError } from '../coaching/resources'
 import { type CameraErrorKind, cameraErrorKind, closeCamera, openCamera } from './camera'
 import { POSE_MODELS, type PoseModel } from './constants'
 import { capturePreparationFrame } from './preparationFrame'
+import { createVideoPoseSource } from './videoPoseSource'
 import { createWorkerPoseInference } from './workerInference'
 
 export type PreparationState = Readonly<
-  | { phase: 'idle' | 'preparing' | 'ready' | 'stopping' }
+  | { phase: 'idle' | 'preparing' | 'ready' | 'connecting' | 'observing' | 'stopping' }
   | { phase: 'error'; reason: CameraErrorKind | 'inference' | 'frame' | 'cleanup' }
 >
 type WorkerOwner = Awaited<ReturnType<typeof createWorkerPoseInference>>
+type ObservationSource = ReturnType<typeof createVideoPoseSource>
+type Observation = Awaited<ReturnType<ObservationSource['read']>>
+// Technical per-read response bound; not clinical hold time or original startup test limit.
+const OBSERVATION_LIMIT_MS = 5000
 type Operation = {
+  generation: number
   controller: AbortController
   task: Promise<void>
   stream?: MediaStream
@@ -18,6 +24,9 @@ type Operation = {
   tracks: MediaStreamTrack[]
   ended: () => void
   cleanup?: Promise<void>
+  source?: ObservationSource
+  observationTask?: Promise<void>
+  latest?: Observation
 }
 export function createCameraPreparation(
   options: Readonly<{
@@ -72,6 +81,13 @@ export function createCameraPreparation(
     closeStream(op)
     op.cleanup = (async () => {
       try {
+        await op.source?.dispose()
+      } catch {
+        poisoned = true
+      }
+      op.source = undefined
+      op.latest = undefined
+      try {
         await op.worker?.dispose()
       } catch {
         poisoned = true
@@ -93,6 +109,7 @@ export function createCameraPreparation(
       return
     }
     const op: Operation = {
+      generation: ++generation,
       controller: new AbortController(),
       task: Promise.resolve(),
       tracks: [],
@@ -101,7 +118,6 @@ export function createCameraPreparation(
       },
     }
     active = op
-    const currentGeneration = ++generation
     publish({ phase: 'preparing' })
     op.task = (async () => {
       let stage: 'camera' | 'inference' | 'frame' = 'camera'
@@ -116,7 +132,7 @@ export function createCameraPreparation(
         }
         stage = 'inference'
         op.worker = await createWorkerPoseInference(
-          { generation: currentGeneration, signal: op.controller.signal },
+          { generation: op.generation, signal: op.controller.signal },
           { model, face: true, hands: true, matrixLayout: 'column-major' },
         )
         check(op)
@@ -156,14 +172,84 @@ export function createCameraPreparation(
     })()
     await op.task
   }
+  // FR-M-02/07: explicit continuous decoded input, one borrowed inference at a time.
+  // Only one copied observation is retained; raw frames/results stay source-owned.
+  function observe() {
+    const op = active
+    if (!op || state.phase !== 'ready' || op.observationTask || !authorized()) return
+    op.observationTask = (async () => {
+      try {
+        check(op)
+        if (!op.worker || !op.stream) throw new Error()
+        const worker = op.worker
+        const source = createVideoPoseSource(
+          { generation: op.generation, signal: op.controller.signal },
+          { video, stream: op.stream, detect: (frame, at) => worker.detect(frame, at) },
+        )
+        op.source = source
+        publish({ phase: 'connecting' })
+        let connected = false
+        let deadline = performance.now() + OBSERVATION_LIMIT_MS
+        while (true) {
+          check(op)
+          const remaining = deadline - performance.now()
+          if (!Number.isFinite(remaining) || remaining <= 0)
+            throw new Error('Camera input unavailable')
+          let timer: ReturnType<typeof setTimeout> | undefined
+          let observation: Observation
+          try {
+            observation = await Promise.race([
+              source.read(),
+              new Promise<never>((_, reject) => {
+                timer = setTimeout(() => reject(new Error('Camera input unavailable')), remaining)
+              }),
+            ])
+          } finally {
+            if (timer !== undefined) clearTimeout(timer)
+          }
+          check(op)
+          const now = performance.now()
+          if (!Number.isFinite(now) || now >= deadline) throw new Error('Camera input unavailable')
+          if (observation === null) continue
+          // Source preserves the original timestamp; do not refresh an older sample.
+          if (
+            observation.generation !== op.generation ||
+            !Number.isFinite(observation.at) ||
+            observation.at < 0 ||
+            observation.at > now ||
+            now - observation.at >= OBSERVATION_LIMIT_MS
+          )
+            throw new Error('Camera input unavailable')
+          deadline = now + OBSERVATION_LIMIT_MS
+          op.latest = observation
+          if (!connected) {
+            connected = true
+            publish({ phase: 'observing' })
+          }
+        }
+      } catch (error) {
+        op.latest = undefined
+        if (error instanceof ResourceCleanupError) poisoned = true
+        const failure: PreparationState | undefined =
+          op.controller.signal.aborted || !authorized()
+            ? undefined
+            : { phase: 'error', reason: 'frame' }
+        op.controller.abort()
+        await cleanup(op)
+        finish(op, failure)
+      }
+    })()
+  }
   async function stop() {
     const op = active
     if (!op) return
     publish({ phase: 'stopping' })
+    op.latest = undefined
     op.controller.abort()
     // Do not leave the camera running while native teardown or permission settles.
     closeStream(op)
     await op.task
+    await op.observationTask
     await cleanup(op)
     finish(op)
   }
@@ -172,6 +258,22 @@ export function createCameraPreparation(
       return state
     },
     start,
+    observe,
+    // No React state, logs, persistence or clinical verdict receives these coordinates.
+    takeFrame(): Observation {
+      const op = active
+      if (!op || state.phase !== 'observing' || !authorized() || op.controller.signal.aborted)
+        return null
+      const frame = op.latest ?? null
+      op.latest = undefined
+      const now = performance.now()
+      if (
+        frame &&
+        (!Number.isFinite(now) || now < frame.at || now - frame.at >= OBSERVATION_LIMIT_MS)
+      )
+        return null
+      return frame
+    },
     stop,
     close() {
       closed = true
