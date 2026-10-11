@@ -6,7 +6,7 @@ class FakeWorker extends EventTarget {
   static current: FakeWorker
   sent: { data: unknown; transfer: Transferable[] }[] = []
   terminate = vi.fn()
-  constructor(readonly url: URL) {
+  constructor(readonly url: string | URL) {
     super()
     FakeWorker.current = this
   }
@@ -156,7 +156,7 @@ describe('worker inference owner', () => {
   })
   it('uses a fixed same-origin worker and explicit model/features only', async () => {
     const f = fixture()
-    expect(f.worker.url.pathname).toMatch(/nativeInference\.worker\.ts$/)
+    expect(f.worker.url).toBe('/__bodyguard/inference-worker.js')
     expect(f.worker.sent[0].data).toEqual({
       type: 'init',
       generation: 3,

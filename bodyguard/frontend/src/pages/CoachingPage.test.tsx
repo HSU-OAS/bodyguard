@@ -1,8 +1,14 @@
 // @vitest-environment happy-dom
 // FR-V-01/03·FR-S-06·FR-U-04: DOM/auth fixtures, no actual motion/avatar claim.
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
-import { afterEach, expect, it, vi } from 'vitest'
+import { afterEach, beforeAll, expect, it, vi } from 'vitest'
 import { App } from '../App'
+
+// This DOM test covers account/layout controls, not lazy-module loading speed.
+// Actual cold dev loading/SDK execution is covered by test-camera-preparation.mjs.
+beforeAll(async () => {
+  await import('./CoachingPage')
+})
 
 afterEach(() => {
   cleanup()

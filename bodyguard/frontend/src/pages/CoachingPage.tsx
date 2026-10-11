@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import { motionNavigationUrl } from '../catalog/motionNavigation'
 import { findMotions, motionById, type Region } from '../catalog/motions'
+import { CameraPreparation } from './CameraPreparation'
 import { MotionPreview } from './MotionPreview'
 import './CoachingPage.css'
 
@@ -114,6 +115,7 @@ export function CoachingPage() {
           </div>
         </section>
         <div className="coaching-footer">
+          <CameraPreparation />
           <div className="coaching-actions">
             <button className="button primary" type="button" disabled>
               코칭 준비 중
@@ -143,7 +145,7 @@ export function CoachingPage() {
               </Link>
             </details>
           )}
-          <p className="small muted">카메라·판정·저장 꺼짐 · 의학적 진단이 아닌 스트레칭 코칭</p>
+          <p className="small muted">코칭·판정·저장 꺼짐 · 의학적 진단이 아닌 스트레칭 코칭</p>
         </div>
       </div>
       <dialog ref={picker} className="coaching-dialog" aria-labelledby="coaching-picker-title">

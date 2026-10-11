@@ -1,0 +1,61 @@
+{
+  "result": {
+    "preparation": {
+      "thread": "worker",
+      "state": "ready",
+      "readyMs": 1340,
+      "firstMs": null,
+      "timings": [],
+      "maxGapMs": 0,
+      "beats": 0,
+      "clickDelayMs": null,
+      "frames": 0,
+      "closes": 0,
+      "delegates": [],
+      "concurrentRejected": false
+    },
+    "inference": {
+      "thread": "worker",
+      "state": "ready",
+      "readyMs": 1340,
+      "firstMs": 1337.9000000059605,
+      "timings": [
+        1337.9000000059605,
+        28.799999997019768,
+        29.299999997019768
+      ],
+      "maxGapMs": 16.800000000000182,
+      "beats": 90,
+      "clickDelayMs": 1.800000011920929,
+      "frames": 3,
+      "closes": 3,
+      "delegates": [],
+      "concurrentRejected": true
+    },
+    "closed": {
+      "thread": "worker",
+      "state": "closed",
+      "readyMs": 1340,
+      "firstMs": 1337.9000000059605,
+      "timings": [
+        1337.9000000059605,
+        28.799999997019768,
+        29.299999997019768
+      ],
+      "maxGapMs": 16.800000000000182,
+      "beats": 90,
+      "clickDelayMs": 1.800000011920929,
+      "frames": 3,
+      "closes": 3,
+      "delegates": [],
+      "concurrentRejected": true
+    },
+    "workerErrors": [],
+    "camera": 0,
+    "external": 0,
+    "avatar": 0,
+    "pageErrors": []
+  },
+  "failure": null,
+  "boundary": "actual dev Vite/Worker/SDK; 3 blank synthetic frames; no physical camera/person/avatars/SQL/performance sign-off"
+}
