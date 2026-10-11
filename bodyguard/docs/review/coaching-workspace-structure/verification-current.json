@@ -1,0 +1,132 @@
+{
+  "method": "Actual React/Vite/Chrome 154 with controlled account API; no actual SQL/auth provider/motion/3D claim",
+  "base": "5d12491bdef5f09942f9dc1895bb000aebe48030",
+  "actualBrowser": {
+    "widths": [
+      1440,
+      1024,
+      800
+    ],
+    "height": 1000,
+    "reducedMotion": true,
+    "flow": "select/guidance → workspace → views → modal search/empty/reset → Escape/focus → keyboard change → settings → guidance → exit with search/region retained → unknown → guest/offline",
+    "passed": 3,
+    "failure": null,
+    "cameraCalls": 0,
+    "externalRequests": 0,
+    "modelRequests": 0,
+    "pageErrors": 0,
+    "avatars": "not connected",
+    "motionMedia": "absent; no decoded playback claim",
+    "cssDialogZoom": "2x at 800px; not native browser 200% zoom"
+  },
+  "localVerification": {
+    "frontend": {
+      "files": 85,
+      "tests": 1666,
+      "failed": 0
+    },
+    "typeScript": "passed",
+    "scopedBiome": {
+      "files": 14,
+      "result": "passed"
+    },
+    "productionBuild": "original Vite config and notice plugin; no asset/avatar prepare hooks; separate empty envDir",
+    "productionGuard": "original forbidden checks; input assets path only overridden; checked 1 JS; candidate markers absent",
+    "diffCheck": "passed",
+    "backendSQL": "not executed"
+  },
+  "rawArtifacts": [
+    {
+      "path": "/private/tmp/bodyguard-coaching-ui.2Xbr9f/browser-baseline.json",
+      "sha256": "2b51083d59f66779b333fb7d66cb95b80f8ce35226708fa1924fbbe492af4cc2",
+      "result": "failed 0px != -4px; mouse/programmatic focus was not keyboard focus-visible"
+    },
+    {
+      "path": "/private/tmp/bodyguard-coaching-ui.2Xbr9f/browser-desktop-context.json",
+      "sha256": "9ffb98833a8b39d3e86004828ab25ca5e2581a106dde696b999fe2dad9657522",
+      "result": "passed 3 desktop widths"
+    },
+    {
+      "path": "/private/tmp/bodyguard-coaching-ui.QjRQzl/product/assets/index-BVyDftrj.js",
+      "sha256": "dbdc8e3cb9ad8eeeae2519b7bbf37b84a230d4723607ec4817d38f5cee10c779"
+    },
+    {
+      "path": "/private/tmp/bodyguard-coaching-ui.QjRQzl/product/assets/index-dNUNBpCv.css",
+      "sha256": "043cb9bdb5d82a3baa9a8463c7a641cbe92ace213303f20c6c7f91e9a14ac82e"
+    },
+    {
+      "file": "desktop-current-workspace-1440.png",
+      "sha256": "314da7554fe0f77490e21721436ffc2d7ca60df0f6c3e4d1b855c65da23a6d24"
+    },
+    {
+      "file": "desktop-current-picker-1440.png",
+      "sha256": "73a65af1b16feff1a09d55abeb79d30a045fd58528f81af0473ca19d80eefcfd"
+    }
+  ],
+  "failuresPreservedInToolOutputs": [
+    "loopback EPERM before browser launch",
+    "navigation context RED: both search and region lost on exit/cautions link",
+    "earlier autoplay promise resolved after current play failure: no pause"
+  ],
+  "reviewer": "Author scoped review, not independent expert sign-off",
+  "sourceHashes": [
+    {
+      "file": "src/App.tsx",
+      "sha256": "92f76aeb3e61f91d4dd3c402a2ab22a27087ccba563b47029a763210aebac86b"
+    },
+    {
+      "file": "src/catalog/motionNavigation.ts",
+      "sha256": "4eb88628efc5cb036293d0167b8483b1c6cca6f5b7c393b0c418303dee1c46bb"
+    },
+    {
+      "file": "src/pages/CoachingNavigationContext.test.tsx",
+      "sha256": "c45d128440adb4ed6265e441ef49ba3289282820b86099ed09214d76af431995"
+    },
+    {
+      "file": "src/pages/CoachingPage.css",
+      "sha256": "367de84bb9ca9c5f7ea09fcde1394708d739841f83f5f9c51382f8b08eaca45a"
+    },
+    {
+      "file": "src/pages/CoachingPage.tsx",
+      "sha256": "7f49c018306c9e0f722dddc099ac98191e65c0b7e84c4b0c2d44345c5a38a50e"
+    },
+    {
+      "file": "src/pages/CoachingPage.test.tsx",
+      "sha256": "4d9ee2ab8bc95ee4b68f67c033eb9391859c63d652e3ce0786bc77b66940ee9f"
+    },
+    {
+      "file": "src/pages/MotionSelectionPage.css",
+      "sha256": "ba80facfa88aedfd0964c2f8b62e901cbe0618d6ff3f97373793121f835e7b74"
+    },
+    {
+      "file": "src/pages/MotionSelectionPage.tsx",
+      "sha256": "30e5f6d2d9056a83a0123757f8e36de6089b20d97b2f239432b29d6dbf1810ba"
+    },
+    {
+      "file": "src/pages/MotionPreview.tsx",
+      "sha256": "f39e86f21b024e1fda50957e1a70db62ed51428fcea8ac60e13035491defdd1f"
+    },
+    {
+      "file": "src/pages/MotionPreview.test.tsx",
+      "sha256": "17c0c79b6d9f32912add27b26647c583b5d6e940ae2883d219e150c3bdfa60c9"
+    },
+    {
+      "file": "src/pages/MotionPreviewOwnershipEdges.test.tsx",
+      "sha256": "e8c279ac7f7d73d8cf2de5549dcac18127db8d332c863cf40a89c14cc534e53d"
+    },
+    {
+      "file": "scripts/build-coaching-workspace.mjs",
+      "sha256": "1ca6e174446a8a037b63a7645028a5f9784453e92df68ef692188038b0131914"
+    },
+    {
+      "file": "scripts/test-coaching-workspace.mjs",
+      "sha256": "4776f1b6c59dc9e0ab4ec99af4e3affd1864034919d32f411318d53eed410dbd"
+    },
+    {
+      "file": "scripts/check-selection-production.mjs",
+      "sha256": "220f9e72d459a68b555b2dfa8465bdce3e543a961dea9b083913a2228fbf6b79"
+    }
+  ],
+  "completion": "Only approved private UI structure; avatar hold and all 1–6 release gates unchanged"
+}

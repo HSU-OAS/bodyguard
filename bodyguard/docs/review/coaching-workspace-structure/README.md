@@ -45,4 +45,8 @@ git diff --check
 
 ## 완료 경계·다음 의존성
 
+최종 소스의 추가 확인은 [verification-current.json](verification-current.json)에 별도 보존한다. 1440/1024/800px 데스크톱·좁은 노트북에서 실제 검색/필터를 유지한 선택→코칭→나가기까지 통과했고, 85파일/1666건·타입·범위 Biome14파일·별도 최종 production build/원래 고지·private guard·diff를 통과했다. 기존375px 재배치 증거는 과거 시험으로 보존하며 모바일 지원으로 확대하지 않는다. 검색/필터 복귀 손실2건 및 오래된 재생 요청의 실패는 최초 도구 출력에 남아 있고, 보완 뒤 실제 브라우저/회귀를 실행했다. 새 PNG는 [코칭 공간](desktop-current-workspace-1440.png)과 [동작 선택](desktop-current-picker-1440.png)의 실제 React 캡처이며 아바타가 없는 구조 검수 상태다.
+
+최종 디자인 진단(visual-audit·hierarchy-principles·spatial-rhythm·craft-signals·color-systems·type-systems·motion-design·quality-checklist): 제목/보기→넓은 비교 공간→접힌 안내/나가기 순서가 명확하고, 기존 단일 블루와 중립색·한글 타이포·둥근 모서리로 통일했다. native 대화상자와 카드의 키보드 테두리를 실제 Tab으로 확인했다. 장식 애니메이션/진단 숫자/거대한 타이머는 없다. 빈 비교 공간과 영상 대기는 의존성 상태이지 완성 디자인 증거가 아니다. 실물 아바타의 간격·발끝/관절 가독성·오류 부위 강조, 실제 미디어 재생, 스크린리더/브라우저 메뉴 확대는 후속 실제 검증이 필요하다. 이 한계를 좁은 Story의 P1/P2 없음과 전체 출시 완료로 혼동하지 않는다.
+
 이 좁은 구조 Story의 로컬 게이트만 완료한다. 아바타 보류·출시 적격 동작0·실제 참여자/독립 관찰·시작P2·최종 콘텐츠·Docker/HTTPS·외부 공급자·권리/법무·운영/배포·전체1~6 미완료를 유지한다. 기존 원본·GLB·HTML·실패 증거는 수정/삭제하지 않았다. 검증된 동작/미디어 및 보류 해제 후의 최종 scene 연결 전에는 코칭을 공개하지 않는다.
