@@ -1,0 +1,51 @@
+{
+  "method": "professional_core_restore_convex_local_transport",
+  "passed": false,
+  "appearance_approved": false,
+  "rows": [
+    {
+      "gender": "Male",
+      "core_points": 27,
+      "region_points": 1041,
+      "protected_border_points": 207,
+      "convex_iterations": 240,
+      "maximum_anchor_displacement_m": 0.002980598107768133,
+      "before": {
+        "vertices": 131178,
+        "edges": 308715,
+        "faces": 177539,
+        "nonmanifold": 0,
+        "winding": 0,
+        "tiny_faces": 2,
+        "selected_faces": 0,
+        "selected_negative_y_faces": 0,
+        "selected_dihedral_above_90": 0,
+        "selected_maximum_dihedral_degrees": 0,
+        "whole_professional_mesh_volume_m3": 0.06579642116507338
+      },
+      "after": {
+        "vertices": 131178,
+        "edges": 308715,
+        "faces": 177539,
+        "nonmanifold": 0,
+        "winding": 0,
+        "tiny_faces": 2,
+        "selected_faces": 1633,
+        "selected_negative_y_faces": 4,
+        "selected_dihedral_above_90": 11,
+        "selected_maximum_dihedral_degrees": 178.74225299405518,
+        "whole_professional_mesh_volume_m3": 0.06579642116507338
+      },
+      "selected_points": 834,
+      "moved_points": 834,
+      "maximum_displacement_m": 0.0029805980897329573,
+      "outside_original_coordinates_exact": true,
+      "raw_skin_topology_rest_pose_world_PBR_history_hands_attributes_exact": true
+    }
+  ],
+  "input_sha256": "be038c042c8b29acf53e0877adc085fec92608e230a563b6860914a01f58e068",
+  "professional_origin_sha256": "2eb274cfce046848eced56c12646869908259b2e6a04c6e188597959f7c48fff",
+  "failure": "AssertionError: Local folded surface remains",
+  "two_input_files_unchanged": true,
+  "candidate_present": false
+}

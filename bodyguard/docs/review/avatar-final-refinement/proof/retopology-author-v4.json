@@ -1,0 +1,98 @@
+{
+  "blender": "5.1.1",
+  "method": "native_fold_core_dissolve_local_beauty_triangulation",
+  "input_sha256": "be038c042c8b29acf53e0877adc085fec92608e230a563b6860914a01f58e068",
+  "passed": true,
+  "appearance_approved": false,
+  "rows": [
+    {
+      "gender": "Male",
+      "before": {
+        "vertices": 131178,
+        "edges": 308715,
+        "faces": 177539,
+        "nonmanifold": 0,
+        "winding": 0,
+        "tiny_faces": 2,
+        "selected_faces": 8328,
+        "selected_negative_y_faces": 31,
+        "selected_dihedral_above_90": 14,
+        "selected_maximum_dihedral_degrees": 176.76812341824638,
+        "whole_professional_mesh_volume_m3": 0.06579641204091018
+      },
+      "removed_core_points": 27,
+      "affected_region_points": 105,
+      "native_local_halo_points": 222,
+      "original_core_faces": 110,
+      "native_new_faces_before_explicit_split": 4,
+      "actual_removed_points": 28,
+      "unrelated_face_check": {
+        "exact_start_corner_removed": 0,
+        "exact_start_corner_added": 0,
+        "oriented_geometry_removed": 0,
+        "oriented_geometry_added": 0
+      },
+      "after": {
+        "vertices": 131150,
+        "edges": 308646,
+        "faces": 177498,
+        "nonmanifold": 0,
+        "winding": 0,
+        "tiny_faces": 2,
+        "selected_faces": 250,
+        "selected_negative_y_faces": 1,
+        "selected_dihedral_above_90": 0,
+        "selected_maximum_dihedral_degrees": 35.56053638530889,
+        "whole_professional_mesh_volume_m3": 0.06579641143337016
+      },
+      "surviving_positions_skin_exact": true,
+      "protected_front_hands_rig_exact": true
+    },
+    {
+      "gender": "Female",
+      "before": {
+        "vertices": 130650,
+        "edges": 307212,
+        "faces": 176564,
+        "nonmanifold": 0,
+        "winding": 0,
+        "tiny_faces": 0,
+        "selected_faces": 9301,
+        "selected_negative_y_faces": 33,
+        "selected_dihedral_above_90": 6,
+        "selected_maximum_dihedral_degrees": 168.5686862253212,
+        "whole_professional_mesh_volume_m3": 0.051699625474876824
+      },
+      "removed_core_points": 12,
+      "affected_region_points": 47,
+      "native_local_halo_points": 103,
+      "original_core_faces": 52,
+      "native_new_faces_before_explicit_split": 2,
+      "actual_removed_points": 12,
+      "unrelated_face_check": {
+        "exact_start_corner_removed": 0,
+        "exact_start_corner_added": 0,
+        "oriented_geometry_removed": 0,
+        "oriented_geometry_added": 0
+      },
+      "after": {
+        "vertices": 130638,
+        "edges": 307179,
+        "faces": 176543,
+        "nonmanifold": 0,
+        "winding": 0,
+        "tiny_faces": 0,
+        "selected_faces": 128,
+        "selected_negative_y_faces": 0,
+        "selected_dihedral_above_90": 0,
+        "selected_maximum_dihedral_degrees": 11.862340432529754,
+        "whole_professional_mesh_volume_m3": 0.05169962527934609
+      },
+      "surviving_positions_skin_exact": true,
+      "protected_front_hands_rig_exact": true
+    }
+  ],
+  "candidate_sha256": "e9c47f05aa5b0ec582dbefdabed0e3868d3d54dec710b7525c30f8aee35f806b",
+  "source_unchanged": true,
+  "candidate_present": true
+}

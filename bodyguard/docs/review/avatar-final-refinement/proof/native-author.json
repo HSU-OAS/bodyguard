@@ -1,0 +1,73 @@
+{
+  "blender": "5.1.1",
+  "input_sha256": "be038c042c8b29acf53e0877adc085fec92608e230a563b6860914a01f58e068",
+  "professional_origin_sha256": "2eb274cfce046848eced56c12646869908259b2e6a04c6e188597959f7c48fff",
+  "method": "native_transport_original_professional_patch_with_exact_core_and_protected_border",
+  "appearance_approved": false,
+  "clinical_or_camera_work": false,
+  "passed": false,
+  "saved_candidate": false,
+  "rows": [
+    {
+      "gender": "Male",
+      "before": {
+        "vertices": 131178,
+        "edges": 308715,
+        "faces": 177539,
+        "nonmanifold": 0,
+        "winding": 0,
+        "tiny_faces": 2,
+        "selected_faces": 8328,
+        "selected_negative_y_faces": 31,
+        "selected_dihedral_above_90": 14,
+        "selected_maximum_dihedral_degrees": 176.76812341824638,
+        "whole_professional_mesh_volume_m3": 0.06579641204091018
+      },
+      "incident_before": {
+        "incident_faces": 9402,
+        "incident_dihedral_above_90": 14,
+        "incident_maximum_dihedral_degrees": 176.76812341824638
+      },
+      "private_patch": {
+        "vertices": 5544,
+        "faces": 9402,
+        "core_points": 27,
+        "border_points": 580,
+        "new_points_fixed": 0,
+        "components": [
+          {
+            "points": 5544,
+            "anchors": 607
+          }
+        ],
+        "solver_unit_scale": 1000.0
+      },
+      "native_default_iterations": 1,
+      "native_core_error_m_before_exact_clamp": 45.54412211102246,
+      "native_border_error_m_discarded": 281.4678703914526,
+      "core_original_positions_exact": true,
+      "protected_border_and_new_points_exact": true,
+      "after": {
+        "vertices": 131178,
+        "edges": 308715,
+        "faces": 177539,
+        "nonmanifold": 0,
+        "winding": 0,
+        "tiny_faces": 2,
+        "selected_faces": 8328,
+        "selected_negative_y_faces": 4079,
+        "selected_dihedral_above_90": 1315,
+        "selected_maximum_dihedral_degrees": 179.99103014038693,
+        "whole_professional_mesh_volume_m3": 6519.96408178813
+      },
+      "incident_after": {
+        "incident_faces": 9402,
+        "incident_dihedral_above_90": 1994,
+        "incident_maximum_dihedral_degrees": 179.99103014038693
+      }
+    }
+  ],
+  "failure": "AssertionError: Existing local authoring budget exceeded",
+  "two_input_files_unchanged": true,
+  "candidate_present": false
+}
