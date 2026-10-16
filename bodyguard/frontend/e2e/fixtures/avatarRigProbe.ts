@@ -84,6 +84,31 @@ export async function mountRigProbe(canvas: HTMLCanvasElement, gender: 'male' | 
   let maximumError = 0
   let moved = false
   let targets: Record<string, number[]>[] = []
+  const intervals: number[] = []
+  const renderCosts: number[] = []
+  const updateCosts: number[] = []
+  let motionPrevious: number | null = null
+  const gl = renderer.getContext()
+  const debugRenderer = gl.getExtension('WEBGL_debug_renderer_info')
+  const gpu = debugRenderer ? gl.getParameter(debugRenderer.UNMASKED_RENDERER_WEBGL) : null
+  function performanceSummary() {
+    const summarize = (values: number[]) => {
+      const ordered = [...values].sort((a, b) => a - b)
+      return {
+        samples: ordered.length,
+        meanMs: ordered.length ? ordered.reduce((a, b) => a + b, 0) / ordered.length : null,
+        p95Ms: ordered.length ? ordered[Math.ceil(ordered.length * 0.95) - 1] : null,
+        maximumMs: ordered.at(-1) ?? null,
+      }
+    }
+    return {
+      gpu,
+      sequence,
+      interval: summarize(intervals),
+      render: summarize(renderCosts),
+      update: summarize(updateCosts),
+    }
+  }
   const pose = (angle: number) =>
     restDirections.map((directions, index) =>
       Object.fromEntries(
@@ -118,6 +143,9 @@ export async function mountRigProbe(canvas: HTMLCanvasElement, gender: 'male' | 
     const delta = now - previous
     previous = now
     if (moved) {
+      if (motionPrevious !== null && intervals.length < 240) intervals.push(now - motionPrevious)
+      motionPrevious = now
+      const updateStart = performance.now()
       const angle = ((Math.sin(now / 700) + 1) * Math.PI) / 36
       targets = pose(angle)
       sequence++
@@ -125,8 +153,11 @@ export async function mountRigProbe(canvas: HTMLCanvasElement, gender: 'male' | 
         driver.push({ generation: 1, sequence, at: now, directions: targets[index] })
         states[index] = driver.render(now, delta)
       })
+      if (updateCosts.length < 240) updateCosts.push(performance.now() - updateStart)
     }
+    const renderStart = performance.now()
     renderer.render(scene, camera)
+    if (moved && renderCosts.length < 240) renderCosts.push(performance.now() - renderStart)
     handle = requestAnimationFrame(frame)
   }
   handle = requestAnimationFrame(frame)
@@ -185,6 +216,7 @@ export async function mountRigProbe(canvas: HTMLCanvasElement, gender: 'male' | 
   }
   return Object.freeze({
     snapshot,
+    performance: performanceSummary,
     start: () => {
       moved = true
     },

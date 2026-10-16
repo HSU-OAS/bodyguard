@@ -124,9 +124,15 @@ try {
     await page.screenshot({ path: beforePath })
     sample.beforeSha = sha(readFileSync(beforePath))
     await page.evaluate(() => window.rig.start())
-    await page.waitForFunction(() => window.rig.snapshot().sequence >= 60, undefined, {
-      timeout: 10_000,
-    })
+    try {
+      await page.waitForFunction(() => window.rig.performance().sequence >= 60, undefined, {
+        timeout: 10_000,
+      })
+    } finally {
+      sample.performance = await page.evaluate(() => window.rig.performance())
+    }
+    assert(sample.performance.interval.samples >= 58)
+    assert(sample.performance.render.samples === sample.performance.update.samples)
     sample.settled = await page.evaluate(() => window.rig.settle())
     assert(
       sample.settled.framing.every((value) => value.inside),

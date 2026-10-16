@@ -1,0 +1,915 @@
+{
+  "label": "before",
+  "sourceSha": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+  "bundleSha": "d67b0d9bab3bd28e71e8337604a7c92ad84233d35acf109501db08db6a672e6a",
+  "assets": {
+    "male": "8c3d34b9d12c1d40f2c842c0167bff2c2d6ee72a427162b4c44d62e80bbf59bf",
+    "female": "a9bca83ca4dad075aaef8df8f49be17bba488883485847f6c034114a663e147b"
+  },
+  "actualPeople": false,
+  "samples": [
+    {
+      "gender": "male",
+      "external": 0,
+      "camera": 0,
+      "errors": [],
+      "initial": {
+        "framing": [
+          {
+            "inside": true
+          },
+          {
+            "inside": true
+          }
+        ],
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          }
+        ],
+        "sourceUnchanged": true,
+        "independent": true,
+        "eightWeightMeshes": [
+          1,
+          1
+        ],
+        "sequence": 1,
+        "calls": 2,
+        "triangles": 524584,
+        "maxDirectionError": 0,
+        "closed": false
+      },
+      "openWallMs": 3575.8238340000007,
+      "performance": {
+        "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+        "sequence": 60,
+        "interval": {
+          "samples": 58,
+          "meanMs": 16.66551724137931,
+          "p95Ms": 16.700000000000728,
+          "maximumMs": 16.800000000000182
+        },
+        "render": {
+          "samples": 59,
+          "meanMs": 0.39152542413291286,
+          "p95Ms": 0.800000011920929,
+          "maximumMs": 1.5
+        },
+        "update": {
+          "samples": 59,
+          "meanMs": 0.2830508467504534,
+          "p95Ms": 0.5999999940395355,
+          "maximumMs": 0.7000000178813934
+        }
+      },
+      "settled": {
+        "framing": [
+          {
+            "inside": true
+          },
+          {
+            "inside": true
+          }
+        ],
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          }
+        ],
+        "sourceUnchanged": true,
+        "independent": true,
+        "eightWeightMeshes": [
+          1,
+          1
+        ],
+        "sequence": 61,
+        "calls": 2,
+        "triangles": 524584,
+        "maxDirectionError": 0.00010432800465953763,
+        "closed": false
+      },
+      "cpu": {
+        "self": [
+          {
+            "function": "getContext",
+            "line": 33297,
+            "ms": 2479.6190000000092
+          },
+          {
+            "function": "(idle)",
+            "line": 0,
+            "ms": 901.9239999999991
+          },
+          {
+            "function": "getExtension",
+            "line": 26379,
+            "ms": 353.1379999999996
+          },
+          {
+            "function": "WebGLState",
+            "line": 29465,
+            "ms": 247.0029999999999
+          },
+          {
+            "function": "(program)",
+            "line": 0,
+            "ms": 213.45799999999994
+          },
+          {
+            "function": "onFirstUse",
+            "line": 27972,
+            "ms": 175.88999999999996
+          },
+          {
+            "function": "multiplyMatrices",
+            "line": 7201,
+            "ms": 26.402
+          },
+          {
+            "function": "mesh.applyBoneTransform",
+            "line": 37823,
+            "ms": 21.878
+          },
+          {
+            "function": "mesh.applyBoneTransform",
+            "line": 37823,
+            "ms": 21.529999999999994
+          },
+          {
+            "function": "multiplyMatrices",
+            "line": 7201,
+            "ms": 19.13
+          },
+          {
+            "function": "multiplyMatrices",
+            "line": 7201,
+            "ms": 18.666000000000004
+          },
+          {
+            "function": "mesh.applyBoneTransform",
+            "line": 37823,
+            "ms": 16.316999999999997
+          },
+          {
+            "function": "applyMatrix4",
+            "line": 5700,
+            "ms": 14.741
+          },
+          {
+            "function": "eightWeightGeometry",
+            "line": 37778,
+            "ms": 14.357000000000001
+          },
+          {
+            "function": "applyMatrix4",
+            "line": 5700,
+            "ms": 12.581999999999999
+          },
+          {
+            "function": "getVertexPosition",
+            "line": 15965,
+            "ms": 11.204999999999998
+          },
+          {
+            "function": "getVertexPosition",
+            "line": 15965,
+            "ms": 10.454
+          },
+          {
+            "function": "WebGLRenderer.setSize",
+            "line": 33507,
+            "ms": 10.299999999999999
+          },
+          {
+            "function": "(garbage collector)",
+            "line": 0,
+            "ms": 9.378
+          },
+          {
+            "function": "getComponent",
+            "line": 11689,
+            "ms": 8.790000000000001
+          },
+          {
+            "function": "applyMatrix4",
+            "line": 5700,
+            "ms": 8.194
+          },
+          {
+            "function": "getVertexPosition",
+            "line": 15965,
+            "ms": 7.606
+          },
+          {
+            "function": "copy",
+            "line": 5567,
+            "ms": 7.385
+          },
+          {
+            "function": "",
+            "line": 21442,
+            "ms": 6.543
+          },
+          {
+            "function": "",
+            "line": 37872,
+            "ms": 6.433
+          },
+          {
+            "function": "getComponent",
+            "line": 11689,
+            "ms": 6.355
+          },
+          {
+            "function": "getComponent",
+            "line": 11689,
+            "ms": 6.300999999999999
+          },
+          {
+            "function": "getComponent",
+            "line": 11689,
+            "ms": 6.2829999999999995
+          },
+          {
+            "function": "copy",
+            "line": 5567,
+            "ms": 5.026
+          },
+          {
+            "function": "validTransform",
+            "line": 37627,
+            "ms": 4.981
+          },
+          {
+            "function": "applyMatrix4",
+            "line": 3399,
+            "ms": 3.795
+          },
+          {
+            "function": "computeBoundingSphere",
+            "line": 15930,
+            "ms": 3.7780000000000005
+          },
+          {
+            "function": "performanceSummary",
+            "line": 37992,
+            "ms": 2.569
+          },
+          {
+            "function": "copy",
+            "line": 5567,
+            "ms": 2.5599999999999996
+          },
+          {
+            "function": "multiplyMatrices",
+            "line": 7201,
+            "ms": 2.558
+          }
+        ],
+        "inclusive": [
+          {
+            "function": "(root)",
+            "line": 0,
+            "ms": 4790.373000000012
+          },
+          {
+            "function": "mountRigProbe",
+            "line": 37926,
+            "ms": 3411.1140000000064
+          },
+          {
+            "function": "WebGLRenderer",
+            "line": 33093,
+            "ms": 3082.271000000009
+          },
+          {
+            "function": "getContext",
+            "line": 33297,
+            "ms": 2479.6190000000092
+          },
+          {
+            "function": "(idle)",
+            "line": 0,
+            "ms": 901.9239999999991
+          },
+          {
+            "function": "initGLContext",
+            "line": 33336,
+            "ms": 602.6519999999987
+          },
+          {
+            "function": "getExtension",
+            "line": 26379,
+            "ms": 353.1379999999996
+          },
+          {
+            "function": "init",
+            "line": 26389,
+            "ms": 353.1379999999996
+          },
+          {
+            "function": "WebGLRenderer.render",
+            "line": 34047,
+            "ms": 277.5019999999997
+          },
+          {
+            "function": "WebGLState",
+            "line": 29465,
+            "ms": 247.0029999999999
+          },
+          {
+            "function": "(program)",
+            "line": 0,
+            "ms": 213.45799999999994
+          },
+          {
+            "function": "WebGLRenderer.renderBufferDirect",
+            "line": 33837,
+            "ms": 184.66599999999997
+          },
+          {
+            "function": "renderObject",
+            "line": 34261,
+            "ms": 184.66599999999997
+          },
+          {
+            "function": "renderObjects",
+            "line": 34251,
+            "ms": 184.66599999999997
+          },
+          {
+            "function": "renderScene",
+            "line": 34176,
+            "ms": 184.66599999999997
+          },
+          {
+            "function": "setProgram",
+            "line": 34379,
+            "ms": 183.40999999999997
+          },
+          {
+            "function": "onFirstUse",
+            "line": 27972,
+            "ms": 175.88999999999996
+          },
+          {
+            "function": "WebGLProgram.getUniforms",
+            "line": 28011,
+            "ms": 175.88999999999996
+          },
+          {
+            "function": "projectObject",
+            "line": 34131,
+            "ms": 90.98800000000006
+          },
+          {
+            "function": "projectObject",
+            "line": 34131,
+            "ms": 90.98800000000006
+          },
+          {
+            "function": "projectObject",
+            "line": 34131,
+            "ms": 90.98800000000006
+          },
+          {
+            "function": "projectObject",
+            "line": 34131,
+            "ms": 90.98800000000006
+          },
+          {
+            "function": "expandByObject",
+            "line": 11079,
+            "ms": 90.29
+          },
+          {
+            "function": "expandByObject",
+            "line": 11079,
+            "ms": 90.29
+          },
+          {
+            "function": "expandByObject",
+            "line": 11079,
+            "ms": 90.29
+          },
+          {
+            "function": "setFromObject",
+            "line": 10969,
+            "ms": 90.29
+          },
+          {
+            "function": "",
+            "line": 38071,
+            "ms": 90.29
+          },
+          {
+            "function": "snapshot",
+            "line": 38058,
+            "ms": 90.29
+          },
+          {
+            "function": "window.openRig",
+            "line": 1,
+            "ms": 90.29
+          },
+          {
+            "function": "evaluate",
+            "line": 305,
+            "ms": 88.542
+          },
+          {
+            "function": "",
+            "line": 1,
+            "ms": 88.542
+          },
+          {
+            "function": "computeBoundingSphere",
+            "line": 15930,
+            "ms": 87.65400000000007
+          },
+          {
+            "function": "settle",
+            "line": 38088,
+            "ms": 87.267
+          },
+          {
+            "function": "",
+            "line": 1,
+            "ms": 87.267
+          },
+          {
+            "function": "getVertexPosition",
+            "line": 15965,
+            "ms": 86.46000000000001
+          }
+        ]
+      }
+    },
+    {
+      "gender": "female",
+      "external": 0,
+      "camera": 0,
+      "errors": [],
+      "initial": {
+        "framing": [
+          {
+            "inside": true
+          },
+          {
+            "inside": true
+          }
+        ],
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          }
+        ],
+        "sourceUnchanged": true,
+        "independent": true,
+        "eightWeightMeshes": [
+          1,
+          1
+        ],
+        "sequence": 1,
+        "calls": 2,
+        "triangles": 522536,
+        "maxDirectionError": 0,
+        "closed": false
+      },
+      "openWallMs": 355.2899580000012,
+      "performance": {
+        "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+        "sequence": 60,
+        "interval": {
+          "samples": 58,
+          "meanMs": 16.665517241379312,
+          "p95Ms": 16.700000000000045,
+          "maximumMs": 16.800000000000068
+        },
+        "render": {
+          "samples": 59,
+          "meanMs": 0.47288135249735946,
+          "p95Ms": 0.800000011920929,
+          "maximumMs": 1.199999988079071
+        },
+        "update": {
+          "samples": 59,
+          "meanMs": 0.3474576291391405,
+          "p95Ms": 0.6000000238418579,
+          "maximumMs": 0.8999999761581421
+        }
+      },
+      "settled": {
+        "framing": [
+          {
+            "inside": true
+          },
+          {
+            "inside": true
+          }
+        ],
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          }
+        ],
+        "sourceUnchanged": true,
+        "independent": true,
+        "eightWeightMeshes": [
+          1,
+          1
+        ],
+        "sequence": 61,
+        "calls": 2,
+        "triangles": 522536,
+        "maxDirectionError": 0.0000731345166065546,
+        "closed": false
+      },
+      "cpu": {
+        "self": [
+          {
+            "function": "(idle)",
+            "line": 0,
+            "ms": 911.2359999999996
+          },
+          {
+            "function": "(program)",
+            "line": 0,
+            "ms": 69.26300000000003
+          },
+          {
+            "function": "multiplyMatrices",
+            "line": 7201,
+            "ms": 32.9
+          },
+          {
+            "function": "multiplyMatrices",
+            "line": 7201,
+            "ms": 28.829
+          },
+          {
+            "function": "mesh.applyBoneTransform",
+            "line": 37823,
+            "ms": 22.636000000000003
+          },
+          {
+            "function": "mesh.applyBoneTransform",
+            "line": 37823,
+            "ms": 21.323
+          },
+          {
+            "function": "getContext",
+            "line": 33297,
+            "ms": 19.908
+          },
+          {
+            "function": "mesh.applyBoneTransform",
+            "line": 37823,
+            "ms": 17.019
+          },
+          {
+            "function": "multiplyMatrices",
+            "line": 7201,
+            "ms": 16.342
+          },
+          {
+            "function": "eightWeightGeometry",
+            "line": 37778,
+            "ms": 15.501
+          },
+          {
+            "function": "mountRigProbe",
+            "line": 37926,
+            "ms": 14.658999999999999
+          },
+          {
+            "function": "applyMatrix4",
+            "line": 5700,
+            "ms": 12.553999999999998
+          },
+          {
+            "function": "onFirstUse",
+            "line": 27972,
+            "ms": 11.446
+          },
+          {
+            "function": "getVertexPosition",
+            "line": 15965,
+            "ms": 11.043999999999999
+          },
+          {
+            "function": "applyMatrix4",
+            "line": 5700,
+            "ms": 9.04
+          },
+          {
+            "function": "(garbage collector)",
+            "line": 0,
+            "ms": 8.258999999999999
+          },
+          {
+            "function": "copy",
+            "line": 5567,
+            "ms": 8.015
+          },
+          {
+            "function": "getVertexPosition",
+            "line": 15965,
+            "ms": 7.581999999999999
+          },
+          {
+            "function": "getComponent",
+            "line": 11689,
+            "ms": 7.568
+          },
+          {
+            "function": "copy",
+            "line": 5567,
+            "ms": 7.277
+          },
+          {
+            "function": "getComponent",
+            "line": 11689,
+            "ms": 6.2989999999999995
+          },
+          {
+            "function": "copy",
+            "line": 5567,
+            "ms": 6.062
+          },
+          {
+            "function": "getExtension",
+            "line": 26379,
+            "ms": 5.1209999999999996
+          },
+          {
+            "function": "WebGLRenderer.setSize",
+            "line": 33507,
+            "ms": 5.095
+          },
+          {
+            "function": "summarize",
+            "line": 37993,
+            "ms": 5.059
+          },
+          {
+            "function": "getComponent",
+            "line": 11689,
+            "ms": 5.005
+          },
+          {
+            "function": "createBuffer",
+            "line": 24084,
+            "ms": 4.868
+          },
+          {
+            "function": "applyMatrix4",
+            "line": 3399,
+            "ms": 4.824
+          },
+          {
+            "function": "getVertexPosition",
+            "line": 15965,
+            "ms": 4.473
+          },
+          {
+            "function": "computeBoundingSphere",
+            "line": 15930,
+            "ms": 4.268000000000001
+          },
+          {
+            "function": "multiplyMatrices",
+            "line": 7201,
+            "ms": 4.197
+          },
+          {
+            "function": "render",
+            "line": 37702,
+            "ms": 4.073
+          },
+          {
+            "function": "texSubImage2D",
+            "line": 29981,
+            "ms": 3.851
+          },
+          {
+            "function": "",
+            "line": 21442,
+            "ms": 3.8049999999999997
+          },
+          {
+            "function": "applyMatrix4",
+            "line": 5700,
+            "ms": 3.784
+          }
+        ],
+        "inclusive": [
+          {
+            "function": "(root)",
+            "line": 0,
+            "ms": 1465.8939999999998
+          },
+          {
+            "function": "(idle)",
+            "line": 0,
+            "ms": 911.2359999999996
+          },
+          {
+            "function": "mountRigProbe",
+            "line": 37926,
+            "ms": 207.84299999999988
+          },
+          {
+            "function": "WebGLRenderer.render",
+            "line": 34047,
+            "ms": 118.52700000000003
+          },
+          {
+            "function": "evaluate",
+            "line": 305,
+            "ms": 97.81400000000001
+          },
+          {
+            "function": "",
+            "line": 1,
+            "ms": 97.81400000000001
+          },
+          {
+            "function": "projectObject",
+            "line": 34131,
+            "ms": 95.77200000000003
+          },
+          {
+            "function": "projectObject",
+            "line": 34131,
+            "ms": 95.77200000000003
+          },
+          {
+            "function": "projectObject",
+            "line": 34131,
+            "ms": 95.77200000000003
+          },
+          {
+            "function": "projectObject",
+            "line": 34131,
+            "ms": 95.77200000000003
+          },
+          {
+            "function": "settle",
+            "line": 38088,
+            "ms": 93.897
+          },
+          {
+            "function": "",
+            "line": 1,
+            "ms": 93.897
+          },
+          {
+            "function": "expandByObject",
+            "line": 11079,
+            "ms": 91.38099999999999
+          },
+          {
+            "function": "expandByObject",
+            "line": 11079,
+            "ms": 91.38099999999999
+          },
+          {
+            "function": "setFromObject",
+            "line": 10969,
+            "ms": 91.38099999999999
+          },
+          {
+            "function": "",
+            "line": 38071,
+            "ms": 91.38099999999999
+          },
+          {
+            "function": "snapshot",
+            "line": 38058,
+            "ms": 91.38099999999999
+          },
+          {
+            "function": "expandByObject",
+            "line": 11079,
+            "ms": 90.12599999999999
+          },
+          {
+            "function": "",
+            "line": 38071,
+            "ms": 89.20700000000001
+          },
+          {
+            "function": "snapshot",
+            "line": 38058,
+            "ms": 89.20700000000001
+          },
+          {
+            "function": "window.openRig",
+            "line": 1,
+            "ms": 89.20700000000001
+          },
+          {
+            "function": "expandByObject",
+            "line": 11079,
+            "ms": 89.149
+          },
+          {
+            "function": "expandByObject",
+            "line": 11079,
+            "ms": 89.149
+          },
+          {
+            "function": "expandByObject",
+            "line": 11079,
+            "ms": 89.149
+          },
+          {
+            "function": "setFromObject",
+            "line": 10969,
+            "ms": 89.149
+          },
+          {
+            "function": "computeBoundingSphere",
+            "line": 15930,
+            "ms": 88.99200000000003
+          },
+          {
+            "function": "getVertexPosition",
+            "line": 15965,
+            "ms": 85.52899999999998
+          },
+          {
+            "function": "getVertexPosition",
+            "line": 15965,
+            "ms": 83.48700000000005
+          },
+          {
+            "function": "getVertexPosition",
+            "line": 15965,
+            "ms": 78.59400000000004
+          },
+          {
+            "function": "mesh.applyBoneTransform",
+            "line": 37823,
+            "ms": 75.24000000000001
+          },
+          {
+            "function": "mesh.applyBoneTransform",
+            "line": 37823,
+            "ms": 74.177
+          },
+          {
+            "function": "(program)",
+            "line": 0,
+            "ms": 69.26300000000003
+          },
+          {
+            "function": "mesh.applyBoneTransform",
+            "line": 37823,
+            "ms": 67.55000000000004
+          },
+          {
+            "function": "frame",
+            "line": 38030,
+            "ms": 53.903
+          },
+          {
+            "function": "cloneEightWeightPair",
+            "line": 37847,
+            "ms": 33.187
+          }
+        ]
+      }
+    }
+  ],
+  "browser": "155.0.8059.80"
+}

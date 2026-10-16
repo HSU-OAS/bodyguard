@@ -130,12 +130,10 @@ function patchCpuSkin(mesh: SkinnedMesh) {
     base.applyMatrix4(mesh.bindMatrix)
     if (target instanceof Vector4) target.set(0, 0, 0, 0)
     else target.set(0, 0, 0)
-    for (const [jointName, weightName] of [
-      ['skinIndex', 'skinWeight'],
-      ['skinIndex1', 'skinWeight1'],
-    ]) {
-      const joints = mesh.geometry.getAttribute(jointName)
-      const weights = mesh.geometry.getAttribute(weightName)
+    // FR-A-03/04: precise bounds scan every vertex; avoid per-vertex tuple allocations.
+    for (let set = 0; set < 2; set++) {
+      const joints = mesh.geometry.getAttribute(set === 0 ? 'skinIndex' : 'skinIndex1')
+      const weights = mesh.geometry.getAttribute(set === 0 ? 'skinWeight' : 'skinWeight1')
       for (let component = 0; component < 4; component++) {
         const weight = weights.getComponent(index, component)
         if (!weight) continue
