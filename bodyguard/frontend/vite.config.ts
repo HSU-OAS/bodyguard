@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vitest/config'
 import { buildNoticePlugin } from './scripts/check-build-notices.ts'
 import { devInferenceWorkerPlugin } from './scripts/dev-inference-worker.ts'
+import { devMotionMediaPlugin } from './scripts/dev-motion-media.ts'
 import {
   SDK_DEV_POLICY,
   SDK_NETWORK_POLICY,
@@ -14,6 +15,7 @@ export default defineConfig({
   plugins: [
     sdkNetworkPolicyPlugin(),
     devInferenceWorkerPlugin(),
+    devMotionMediaPlugin(),
     react(),
     tailwindcss(),
     buildNoticePlugin(fileURLToPath(new URL('./', import.meta.url))),

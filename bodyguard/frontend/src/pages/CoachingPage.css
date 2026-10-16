@@ -283,11 +283,16 @@
   color: var(--muted);
   font-size: var(--type-small);
 }
-.motion-visual video {
+.motion-visual > video,
+.motion-visual > img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: contain;
   display: block;
+  background: var(--surface);
+}
+.motion-visual > [hidden] {
+  display: none;
 }
 .motion-visual-actions {
   display: flex;

@@ -105,3 +105,33 @@ it('retires playback when the poster becomes unavailable without changing the vi
   expect(document.querySelector('video')).toBeNull()
   expect(pause.mock.calls.length).toBeGreaterThan(before)
 })
+
+it('a different preview retires earlier intent and late play cannot replace the new owner', async () => {
+  const { pause, play } = ports()
+  let finishOld!: () => void
+  play
+    .mockReturnValueOnce(
+      new Promise<void>((yes) => {
+        finishOld = yes
+      }),
+    )
+    .mockResolvedValueOnce()
+  render(
+    <>
+      <MotionPreview title="첫 동작" media={{ poster: '/first.png', video: '/first.mp4' }} />
+      <MotionPreview title="다음 동작" media={{ poster: '/next.png', video: '/next.mp4' }} />
+    </>,
+  )
+  const [old, next] = document.querySelectorAll('video')
+  fireEvent.pointerEnter(screen.getByRole('group', { name: '첫 동작 미리보기' }))
+  fireEvent.click(screen.getByRole('button', { name: '다음 동작 미리보기 재생' }))
+  await screen.findByRole('button', { name: '다음 동작 미리보기 정지' })
+  const oldCount = pause.mock.contexts.filter((element) => element === old).length
+  const nextCount = pause.mock.contexts.filter((element) => element === next).length
+  finishOld()
+  await new Promise((yes) => setTimeout(yes, 0))
+  expect(pause.mock.contexts.filter((element) => element === old).length).toBeGreaterThan(oldCount)
+  expect(pause.mock.contexts.filter((element) => element === next).length).toBe(nextCount)
+  expect(screen.getByRole('button', { name: '첫 동작 미리보기 재생' })).toBeTruthy()
+  expect(screen.getByRole('button', { name: '다음 동작 미리보기 정지' })).toBeTruthy()
+})

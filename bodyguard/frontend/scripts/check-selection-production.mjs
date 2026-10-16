@@ -25,6 +25,7 @@ for (const file of files) {
     'CoachingPage',
     'CameraPreparation',
     'Camera preparation unavailable',
+    '/__bodyguard/motion-media/',
     '/__bodyguard/inference-worker.js',
     '카메라·분석 연결 확인됨',
     '연속 입력 확인 중',
@@ -154,6 +155,14 @@ for (const file of files) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
 }
+const candidateMedia = readdirSync(fileURLToPath(new URL('../dist/', import.meta.url)), {
+  recursive: true,
+}).filter((file) =>
+  /(?:male|female)-(?:neck-side|shoulder-shrug|arm-overhead)(?:-[A-Za-z0-9_-]+)?\.(?:png|mp4)$/.test(
+    String(file),
+  ),
+)
+assert.equal(candidateMedia.length, 0, 'Unvalidated motion media leaked into production output')
 console.log(
   JSON.stringify({
     production_JS_files_checked: files.length,

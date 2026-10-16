@@ -1,6 +1,7 @@
 // FR-S-01/06, FR-V-02/03: protected development preview; selection never starts coaching.
 import { useEffect, useRef } from 'react'
 import { Link, useSearchParams } from 'react-router'
+import { motionPreviewMedia } from '../catalog/motionMedia'
 import { motionNavigationUrl } from '../catalog/motionNavigation'
 import { findMotions, motionById, parseRegion, type Region } from '../catalog/motions'
 import { MotionPreview } from './MotionPreview'
@@ -168,7 +169,7 @@ export function MotionSelectionPage() {
             <ul className="motion-list">
               {motions.map((motion) => (
                 <li key={motion.id}>
-                  <MotionPreview title={motion.title} />
+                  <MotionPreview title={motion.title} media={motionPreviewMedia(motion.id)} />
                   <div>
                     <p className="motion-region">{motion.regionLabel}</p>
                     <h2>{motion.title}</h2>
