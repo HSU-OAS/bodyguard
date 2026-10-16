@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-16 [S3.C1](stories/neck-candidate-classifier.md): 목 동작의 같은 프레임→투영→명시 band 판정 후보→기존 진행→결과 DTO/모의 HTTP 저장 계약을 구현했다. 시작/목표/복귀·방향/어깨선/머리 위치 오류와 가림/시각·현 state/원시 데이터 배제를 [검증](review/neck-candidate-classifier/README.md)했다. 아직 현재 코칭 화면에 적용하지 않았고 임상 각도/운동량 기본값·출시 동작·실제 SQL/사람 증거를 만들지 않는다. 다음은 두 모델 stage와 후보 판정/오류별 시범·결과 UI 연결이다. PR156 source8822093→merge2ee43fe/main 포함 후 최신 main에서 시작했으며 기존 Draft/SDK P2·최종 외형/성능·별도 승인·1~4/1~6 미완료를 유지한다.
+
 2026-10-16 [S3.A2](stories/shared-coaching-reference.md): 왼쪽 카메라 관찰과 오른쪽 단계별 Blender 시범을 같은 흰 공간에 연결했다. 동일 복사 슬롯·세대/시각을 유지하며 사지/몸통·명시 머리/손 맞추기, 빈 입력/만료/중단·새 세대/성별/계정 회수가 작동한다. [실제 화면·생성/SDK 구분·실패/회귀 증거](review/shared-coaching-reference/README.md). 전체1~4 완료는 아니며 다음은 동작 판정/추천·교정 시범 적응·결과 생산 연결이다. PR155 sourcefd98deb→merge53ff077/main·동일 트리/브랜치 보존 확인 후 최신 main에서 시작했다. PR150/152 미해결 P2·Draft 병합 금지, 최종 외형/성능·참여자/공급자/Docker·운영 별도 승인 경계는 유지한다.
 
 2026-10-16 [S3.A1 단계별 3D 시범](stories/blender-reference-content.md): 기존 코칭 공간 오른쪽에 실제 Blender 남녀3종을 연결해 준비·수행·유지·복귀, 좌우·일시정지/재생·전신/확대가 작동한다. 손상 GLB·실제 GPU 컨텍스트 손실은 수동 재시도로 복구하고, 숨김/401/종료 시 소유 컨텍스트를 회수한다. [실제 화면·실패·검증](review/blender-reference-content/README.md). 왼쪽 실제 사용자 아바타는 아직 연결 대기이며 자동 판정/타이머/기록·최종 외형/전체1~4 완료가 아니다. 다음은 두 아바타와 실제 관찰→단계 시범·판정/추천→결과 흐름 통합이다. PR150/152의 별도 P2·Draft 병합 금지, 실제 참여자 미실행과 외부/운영 별도 승인 경계는 유지한다. 아래는 각 시점의 기록이다.
