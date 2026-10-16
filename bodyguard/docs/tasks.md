@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-17 [S3.R1](stories/camera-recommendation-flow.md): PR160 source7232c67→merge5bf3cede/main 확인 후 기존 추천 탭에 부위·촬영 범위 확인→자원 정리→남녀 움직임 후보→기존 안내를 연결했다. [작동 화면·공개 import/존재 신뢰도 P2 보완·실패와 실제/모의 구분](review/camera-recommendation-flow/README.md). 이것은 첫 촬영 조건 필터이며 개인별 교정 필요성 추천의 완성이 아니다. 기존 공개 적격0·아바타/판정 gate·기록/기준선 쓰기0을 유지한다. 다음은 근거/실행 프로필과 남은 동작 코칭 통합이다. 기존 Draft150/152/SDK P2·최종 외형/성능·별도 승인·전체1~4/1~6 실제 기준은 남는다.
+
 2026-10-17 [S4.R11](stories/neck-result-recording.md): PR159 sourceca4897c→mergeeb94fac/main 포함을 확인하고 현재 목 코칭의 완료/중단 결과→명시 저장/재시도→실제 API/격리 SQL→기존 기록 상세를 연결했다. [실제 화면·정리 실패 보완·응답 단절/계정 경계·실패 보존](review/neck-result-recording/README.md). 기본 후보 저장0은 유지하며 명시 DEV/loopback 격리 시험 구성만 저장한다. 공통 save/retry의 cleanup-error 차단을 추가했다. 다음은 동작별 근거/실행 프로필·추천과 공개 전 통합이다. 공개 적격/임상/최종 아바타·기존 Draft150/152/SDK P2·별도 승인·전체1~4/1~6 기준은 유지한다.
 
 2026-10-16 [S3.C3](stories/neck-surface-feedback.md): PR158 source75daffb→merge3b71975/main 확인 후 목·어깨 오류를 실제 사용자 GLB 표면에 연결했다. [남녀 작동 화면·원본/변형 보존·실패와 실제 검증](review/neck-surface-feedback/README.md). 오른쪽 제작 시범은 중립이며 머리 추적/입력 만료·가림에는 색을 해제한다. 일반 회귀는 동시 실행 수2로 전부 통과하고, 무거운 전체 정점 GLB 검증도 별도 필수 gate로 통과했다. 기본 병렬 실패를 보존한다. 후보 프로필은 테스트 주입만 허용하고 공개 gate/기록 쓰기를 열지 않는다. 다음은 검증된 실행 프로필·다른 동작/추천·실제 결과 저장 통합이며 최종 외형/성능·기존 Draft150/152/SDK P2·별도 승인·전체1~4/1~6 미완료 기준은 유지한다.

@@ -1,0 +1,11 @@
+/* FR-S-06: fit the actual candidate count within the existing pane; reuse its tokens. */
+.camera-recommendations .motion-list {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+}
+.camera-recommendations h3 {
+  margin: 24px 0 12px;
+}
+.camera-recommendations .motion-list h4 {
+  font-size: var(--type-label);
+  margin: 6px 0 12px;
+}
