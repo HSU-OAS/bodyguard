@@ -1,5 +1,7 @@
 # 2단계 필수 보완 이월 및 후속 실행 순서
 
+2026-10-17 S3.C5 [Draft #163 정리/ACK 진단](review/shoulder-shrug-workspace/cleanup/README.md): 단독/기본 소유 해제는 통과했지만 최초 정리 P2와 동시 실행 재개 추론 실패는 원인 미확정으로 유지한다. 기존 증거·원본·품질 기준을 보존하며 병합/Story·단계 완료가 아니다. 별도 승인 없는 운영/공개 승격은 없고 같은 Story 보완을 계속한다.
+
 2026-10-17 [S3.C5](stories/shoulder-shrug-workspace.md)는 남녀 projected 어깨 상승과 기존 두 아바타/단계/표면/결과를 로컬 후보로 연결했다([실제 화면·보존·실패](review/shoulder-shrug-workspace/README.md)). 실제 native 정리1실패가 원인 미확정 P2여서 Draft/미병합·Story 미완료이며 단독2통과로 해결을 주장하지 않는다. 다음은 정리 경로 보완이다. 새 원본/GLB/가중치 변경·공개 승격0, 기존 D2/외형/성능/임상·참여자 이월/외부·운영 별도 승인과 전체1~4/1~6 필수 기준을 유지한다.
 
 2026-10-17 [S3.C4](stories/shoulder-shrug-coaching.md)은 어깨 으쓱의 관찰/판정→실제 세션/결과 계약을 구현했다([실패/수치 보완·실제/생성 구분](review/shoulder-shrug-coaching/README.md)). D2-T/I의 독립 연결 진전이며 양측 어깨 상승의 사용자 표시·남녀 GLB/실행 UI·오류 표면/시범·임상 실행 프로필/추천은 아직 미완료다. 공개 적격0·기존 Draft/P2·원본/실패·외부/운영 별도 승인과 모든 D2/1~4/1~6 기준을 유지한다.

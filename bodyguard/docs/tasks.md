@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-17 S3.C5 [Draft PR #163](https://github.com/HSU-OAS/bodyguard/pull/163) 후속: [정리/ACK 분리 진단](review/shoulder-shrug-workspace/cleanup/README.md)으로 단독 정상 해제와 동시 실행 재개 추론 실패를 구분했다. 기존 정리 P2는 미해결·미병합이며 소유/제한 시간·공개 적격0·전체 단계 기준을 유지한다. 같은 Story의 응답/프로토콜 원인 분리를 계속하며 goal을 일시정지하지 않는다.
+
 2026-10-17 [S3.C5](stories/shoulder-shrug-workspace.md) **로컬 후보·Draft/미완료**: PR162 merge25429c00/최신 main 확인 후 기존 두 아바타 UI에 남녀 어깨 상승·복귀/오류 표면·반복 결과·중단/재개를 연결했다. [실제 화면/GLB/전체 회귀·실패 보존](review/shoulder-shrug-workspace/README.md). 실제 native 정리는 동시 실행1실패·단독2통과로 원인 미확정 P2이며 병합하지 않는다. 다음은 같은 Story의 원시 입력 없는 소유 자원/ACK 정리 분리·보완이다. 공개 적격0·임상 프로필/개인별 추천·최종 외형/성능·기존 Draft/P2·참여자 이월/외부·운영 승인과 전체1~4/1~6 기준을 유지하고 goal은 계속 진행한다.
 
 2026-10-17 [S3.C4](stories/shoulder-shrug-coaching.md): PR161 source45531d14→merge995a00fa/main 확인 후 어깨 으쓱의 같은 프레임 기하→보상/가림 판정→기존 실제 세션/반복·제한 결과 계약을 구현했다. [실행·수치 P2 보완·실패/모의 구분](review/shoulder-shrug-coaching/README.md). 생성 관절/자원·모의 HTTP 시험이며 새 어깨 실행 UI/GLB·실제 사람/SDK·임상 기본값이나 공개 동작 승격이 아니다. 다음은 실제 남녀 모델의 양측 어깨 상승 재현과 기존 두 아바타 실행 UI·오류/시범 통합이다. 기존 공개 적격0·Draft150/152/SDK P2·최종 외형/성능·별도 승인·전체1~4/1~6 실제 기준은 유지한다.

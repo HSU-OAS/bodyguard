@@ -8,7 +8,8 @@ import { chromium } from '@playwright/test'
 import { createServer, mergeConfig } from 'vite'
 import config from '../vite.config.ts'
 
-const [scratch, label, selected = 'neck-side'] = process.argv.slice(2)
+const [scratch, label, selected = 'neck-side', diagnostics] = process.argv.slice(2)
+assert(diagnostics === undefined || diagnostics === 'diagnostics')
 assert(selected === 'neck-side' || selected === 'shoulder-shrug')
 assert(
   /^\/private\/tmp\/bodyguard-(?:neck-(?:workspace|surface)|shrug-workspace)\.[A-Za-z0-9]+$/.test(
@@ -25,6 +26,11 @@ const files = [
   'src/coaching/neckWorkspacePlayback.ts',
   'src/pages/NeckCoachingRun.tsx',
   'src/pose/workerInference.ts',
+  'src/pose/workerInferenceRuntime.ts',
+  'src/pose/workerNativeEngine.ts',
+  'src/coaching/ownedPlaybackResources.ts',
+  'src/avatar/ownedPosePlayback.ts',
+  'src/pose/videoPoseSource.ts',
   'src/pose/nativeInference.worker.ts',
   'src/avatar/referenceStage.ts',
   'src/avatar/neckSurfaceFeedback.ts',
@@ -43,6 +49,7 @@ const files = [
   'e2e/fixtures/neckWorkspaceEntry.tsx',
   'e2e/fixtures/neckWorkspaceSource.ts',
   'scripts/test-neck-workspace-native.mjs',
+  'e2e/fixtures/nativeCleanupDiagnostics.ts',
   'vite.config.ts',
   'pnpm-lock.yaml',
 ]
@@ -88,6 +95,34 @@ const server = await createServer(
           if (id === './pages/CoachingPage' && importer?.split('?')[0] === resolve('src/App.tsx'))
             return resolve(entry)
         },
+        transform(source, id) {
+          if (!diagnostics || id.split('?')[0] !== resolve('src/coaching/neckWorkspacePlayback.ts'))
+            return
+          const names = [
+            'prepareReferenceStage',
+            'closeCamera',
+            'createVideoPoseSource',
+            'createWorkerPoseInference',
+          ]
+          for (const name of names) {
+            const original = new RegExp(`(?<=import \\{[^}]*)(?<![A-Za-z])${name}(?=[, }])`)
+            assert(original.test(source), `Missing diagnostic import ${name}`)
+            source = source.replace(original, `${name} as native_${name}`)
+          }
+          return (
+            source +
+            `
+import { cleanupNote, traceCleanup } from '/e2e/fixtures/nativeCleanupDiagnostics.ts';
+const prepareReferenceStage = async (...args) => traceCleanup('avatars', await native_prepareReferenceStage(...args));
+const createVideoPoseSource = (...args) => traceCleanup('source', native_createVideoPoseSource(...args));
+const createWorkerPoseInference = async (...args) => traceCleanup('inference', await native_createWorkerPoseInference(...args));
+const closeCamera = (...args) => {
+  cleanupNote('camera', 'start');
+  try { const value = native_closeCamera(...args); cleanupNote('camera', 'clean'); return value }
+  catch (error) { cleanupNote('camera', 'failed'); throw error }
+};`
+          )
+        },
       },
     ],
     server: {
@@ -124,6 +159,47 @@ try {
       return stop.call(this)
     }
   })
+  if (diagnostics)
+    await context.addInitScript(() => {
+      window.nativeCleanupTrace = []
+      window.nativeWorkerTrace = []
+      window.nativeWorkerCounts = { frames: 0, results: 0 }
+      const NativeWorker = window.Worker
+      let next = 0
+      window.Worker = class extends NativeWorker {
+        constructor(...args) {
+          super(...args)
+          this.traceId = ++next
+          this.note('created')
+          this.addEventListener('message', (event) => {
+            const data = event.data
+            if (data?.type === 'result') window.nativeWorkerCounts.results++
+            if (['boot', 'ready', 'error', 'closed'].includes(data?.type))
+              this.note(data.type, data.type === 'closed' ? data.clean === true : undefined)
+          })
+          this.addEventListener('error', () => this.note('worker-error'))
+          this.addEventListener('messageerror', () => this.note('message-error'))
+        }
+        note(phase, clean) {
+          if (window.nativeWorkerTrace.length < 120)
+            window.nativeWorkerTrace.push({
+              worker: this.traceId,
+              phase,
+              ms: Math.round(performance.now()),
+              ...(clean === undefined ? {} : { clean }),
+            })
+        }
+        postMessage(data, ...args) {
+          if (data?.type === 'frame') window.nativeWorkerCounts.frames++
+          if (data?.type === 'init' || data?.type === 'close') this.note(`send-${data.type}`)
+          return super.postMessage(data, ...args)
+        }
+        terminate() {
+          this.note('terminate')
+          return super.terminate()
+        }
+      }
+    })
   await context.route('**/*', (route) => {
     const url = new URL(route.request().url())
     paths.push(url.pathname)
@@ -202,6 +278,16 @@ try {
     })
   }
 } finally {
+  const cleanupDiagnostics =
+    diagnostics && page
+      ? await page
+          .evaluate(() => ({
+            resources: window.nativeCleanupTrace,
+            workers: window.nativeWorkerTrace,
+            counts: window.nativeWorkerCounts,
+          }))
+          .catch(() => null)
+      : null
   const version = browser?.version()
   await browser?.close()
   await server.close()
@@ -217,6 +303,7 @@ try {
         motion: selected,
         version,
         rafReceiver,
+        cleanupDiagnostics,
         before,
         after,
         cases,
