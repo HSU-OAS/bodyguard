@@ -64,7 +64,7 @@ export function createRecordedSession(options: Options) {
   let anchor: Pair | null = null
   let disposed = false
   let disposal: Promise<void> | null = null
-  let recordFailure: 'invalid-result' | 'ownership-error' | null = null
+  let recordFailure: 'invalid-result' | 'ownership-error' | 'cleanup-error' | null = null
 
   function owned(): boolean {
     if (disposed) return false
@@ -129,8 +129,14 @@ export function createRecordedSession(options: Options) {
   })()
   claimedContexts.add(context)
   const action = (run: () => Promise<void>) => (owned() ? run() : session.end('session-expired'))
+  function cleanupFailed() {
+    if (session.getSnapshot().failure !== 'cleanup-error') return false
+    recordFailure = 'cleanup-error'
+    return true
+  }
   function save(): Promise<void> {
     if (!owned()) return session.end('session-expired')
+    if (cleanupFailed()) return Promise.resolve()
     const snapshot = session.getSnapshot()
     if (!anchor) return Promise.resolve()
     try {
@@ -156,7 +162,10 @@ export function createRecordedSession(options: Options) {
     getRecordSnapshot() {
       const snapshot = writer.getSnapshot()
       return Object.freeze({
-        status: recordFailure === 'invalid-result' ? ('failed' as const) : snapshot.status,
+        status:
+          recordFailure === 'invalid-result' || recordFailure === 'cleanup-error'
+            ? ('failed' as const)
+            : snapshot.status,
         failure: recordFailure ?? snapshot.failure,
       })
     },
@@ -171,7 +180,7 @@ export function createRecordedSession(options: Options) {
     close: (reason: Parameters<typeof session.close>[0]) => action(() => session.close(reason)),
     syncOwner: () => action(() => Promise.resolve()),
     save,
-    retry: () => action(writer.retry),
+    retry: () => action(() => (cleanupFailed() ? Promise.resolve() : writer.retry())),
     dispose,
   })
 }

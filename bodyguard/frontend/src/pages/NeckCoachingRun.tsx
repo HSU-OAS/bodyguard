@@ -14,6 +14,8 @@ import { type CoachingPlan, createCoaching } from '../stretch/progression'
 
 export type NeckRunConfiguration = Readonly<{
   scope: 'candidate-review-only'
+  // Test runner must additionally own the isolated DB; this is not clinical authority.
+  recording?: 'isolated-local-test'
   criteria: NeckReviewCriteria
   plan: CoachingPlan
   readGates(): Readonly<{
@@ -38,6 +40,8 @@ const phases = {
 // A remount must also wait for an old native permission/Worker/GPU owner to retire.
 let retirement: Promise<void> | undefined
 let retirementFailed = false
+type RunSession = NonNullable<ReturnType<ReturnType<typeof useRecordedPlayback>['getSession']>>
+type RecordState = ReturnType<RunSession['getRecordSnapshot']>
 
 function checked(input: NeckRunConfiguration) {
   const criteria = copyNeckReviewCriteria(input.criteria),
@@ -54,16 +58,33 @@ function checked(input: NeckRunConfiguration) {
     typeof input.readGates !== 'function'
   )
     throw new Error('Invalid candidate run')
-  return Object.freeze({ criteria, plan, readGates: input.readGates })
+  const recording = input.recording
+  if (
+    recording !== undefined &&
+    (recording !== 'isolated-local-test' ||
+      !import.meta.env.DEV ||
+      !['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname))
+  )
+    throw new Error('Invalid candidate recording')
+  return Object.freeze({ criteria, plan, readGates: input.readGates, recording })
 }
 
 export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfiguration }) {
-  const auth = useAuth().state,
+  const authentication = useAuth(),
+    auth = authentication.state,
     playback = useRecordedPlayback(),
     live = useRef(playback),
     canvas = useRef<HTMLCanvasElement>(null),
     native = useRef<ReturnType<typeof createNeckWorkspacePlayback> | null>(null),
     resultHeading = useRef<HTMLHeadingElement>(null),
+    recordNotice = useRef<HTMLParagraphElement>(null),
+    recordRun = useRef<{
+      id: string
+      session: RunSession
+      playback: ReturnType<typeof createNeckWorkspacePlayback>
+      configuration: NeckRunConfiguration
+      auth: typeof auth
+    } | null>(null),
     mounted = useRef(false),
     pending = useRef(false),
     runId = useRef(0),
@@ -78,6 +99,7 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
   authority.current = configuration
   account.current = auth
   const [snapshot, setSnapshot] = useState<SessionSnapshot | null>(null),
+    [recordState, setRecordState] = useState<RecordState | null>(null),
     [issue, setIssue] = useState<NeckCandidateError | null>(null),
     [busy, setBusy] = useState(false),
     [attempt, setAttempt] = useState(0),
@@ -115,6 +137,8 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
     mounted.current = true
     const clearRun = () => {
       canceled.current = true
+      recordRun.current = null
+      setRecordState(null)
       setSnapshot(null)
       setIssue(null)
     }
@@ -137,6 +161,8 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
     }
   }, [])
   useLayoutEffect(() => {
+    recordRun.current = null
+    setRecordState(null)
     setSnapshot(null)
     setIssue(null)
     setFailed(false)
@@ -154,6 +180,8 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
     setFailed(false)
     setSnapshot(null)
     const id = ++runId.current
+    recordRun.current = null
+    setRecordState(null)
     setAttempt(id)
     const original = configuration
     try {
@@ -167,8 +195,9 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
         retirementFailed
       )
         throw new Error()
+      const recordId = crypto.randomUUID()
       const session = await live.current.prepare({
-        recordId: crypto.randomUUID(),
+        recordId,
         plan: config.plan,
         readClockPair: () => ({ monotonicMs: performance.now(), utc: new Date().toISOString() }),
         readGates: config.readGates,
@@ -200,6 +229,14 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
         canceled.current
       )
         throw new Error()
+      if (config.recording === 'isolated-local-test' && native.current)
+        recordRun.current = {
+          id: recordId,
+          session,
+          playback: native.current,
+          configuration: original,
+          auth,
+        }
       await session.start()
       if (session.getSnapshot().state.status === 'idle') throw new Error()
     } catch {
@@ -239,6 +276,57 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
       if (mounted.current) setBusy(false)
     }
   }
+  async function saveRecord(retry: boolean) {
+    const run = recordRun.current
+    const current = () =>
+      run !== null &&
+      mounted.current &&
+      !canceled.current &&
+      recordRun.current === run &&
+      authority.current === run.configuration &&
+      account.current === run.auth &&
+      live.current.getSession() === run.session
+    if (pending.current || !run || !current()) return
+    const snapshot = run.session.getSnapshot(),
+      previous = run.session.getRecordSnapshot()
+    if (
+      snapshot.state.status !== 'ended' ||
+      !snapshot.closed ||
+      !snapshot.state.result ||
+      previous.status === 'saved' ||
+      previous.status === 'closed' ||
+      (retry
+        ? previous.status !== 'failed' ||
+          !['network', 'invalid-response'].includes(previous.failure ?? '')
+        : previous.status !== 'idle')
+    )
+      return
+    pending.current = true
+    setBusy(true)
+    try {
+      // closed means input stopped, not cleanup settled. Join its existing barrier first.
+      await run.playback.close()
+      await run.session.close('user-stop')
+      if (!current()) return
+      // The generic controller reports cleanup failure by snapshot, not by rejection.
+      if (run.session.getSnapshot().failure === 'cleanup-error') throw new Error()
+      const done = retry ? run.session.retry() : run.session.save()
+      if (current()) setRecordState(run.session.getRecordSnapshot())
+      await done
+      if (current()) setRecordState(run.session.getRecordSnapshot())
+    } catch {
+      retirementFailed = true
+      if (current()) {
+        recordRun.current = null
+        setRecordState(null)
+        setFailed(true)
+      }
+      await live.current.cancel().catch(() => {})
+    } finally {
+      pending.current = false
+      if (mounted.current) setBusy(false)
+    }
+  }
   const state = snapshot?.state,
     result = state?.result,
     running = state?.status === 'running',
@@ -255,6 +343,10 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
   useLayoutEffect(() => {
     if (result) resultHeading.current?.focus({ preventScroll: true })
   }, [result])
+  useLayoutEffect(() => {
+    if (recordState?.status === 'saved' || recordState?.status === 'failed')
+      recordNotice.current?.focus({ preventScroll: true })
+  }, [recordState])
   return (
     <section
       className="coaching-workspace"
@@ -374,7 +466,67 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
                   </li>
                 ))}
               </ul>
-              <p className="small muted">검수 결과는 운동 기록에 저장하지 않습니다.</p>
+              {recordRun.current ? (
+                <div>
+                  <p className="small muted">격리된 합성 시험 기록 · 실제 운동 기록이 아닙니다.</p>
+                  <p
+                    ref={recordNotice}
+                    tabIndex={-1}
+                    role={recordState?.status === 'failed' ? 'alert' : 'status'}
+                  >
+                    {recordState?.status === 'saved'
+                      ? '시험 기록을 저장했습니다.'
+                      : recordState?.status === 'saving'
+                        ? '시험 기록 저장 중'
+                        : busy && !recordState
+                          ? '연결 정리 중 · 아직 기록을 전송하지 않았습니다.'
+                          : recordState?.status === 'failed'
+                            ? recordState.failure === 'session-expired' ||
+                              recordState.failure === 'ownership-error'
+                              ? '계정을 다시 확인해 주세요. 자동으로 다시 저장하지 않습니다.'
+                              : recordState.failure === 'network' ||
+                                  recordState.failure === 'invalid-response'
+                                ? '저장 응답을 확인하지 못했습니다. 같은 기록으로 다시 시도할 수 있습니다.'
+                                : '기록을 저장하지 못했습니다. 새 검수 전에 연결을 확인해 주세요.'
+                            : '저장하면 현재 시험 계정에서만 확인할 수 있습니다.'}
+                  </p>
+                  {recordState?.status === 'saved' ? (
+                    <Link to={`/records/${recordRun.current.id}`}>저장한 시험 기록 보기</Link>
+                  ) : recordState?.status === 'failed' ? (
+                    recordState.failure === 'network' ||
+                    recordState.failure === 'invalid-response' ? (
+                      <button
+                        className="button secondary"
+                        type="button"
+                        aria-disabled={busy}
+                        onClick={() => void saveRecord(true)}
+                      >
+                        같은 시험 기록 다시 저장
+                      </button>
+                    ) : recordState.failure === 'session-expired' ||
+                      recordState.failure === 'ownership-error' ? (
+                      <button
+                        className="button secondary"
+                        type="button"
+                        onClick={() => void authentication.refresh()}
+                      >
+                        계정 다시 확인
+                      </button>
+                    ) : null
+                  ) : (
+                    <button
+                      className="button primary"
+                      type="button"
+                      aria-disabled={busy}
+                      onClick={() => void saveRecord(false)}
+                    >
+                      시험 기록 저장
+                    </button>
+                  )}
+                </div>
+              ) : (
+                <p className="small muted">검수 결과는 운동 기록에 저장하지 않습니다.</p>
+              )}
             </section>
           ) : null}
           {problem && (

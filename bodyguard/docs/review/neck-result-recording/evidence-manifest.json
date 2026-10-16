@@ -1,0 +1,536 @@
+{
+  "capturedAt": "2026-10-16T15:34:25.583Z",
+  "baseMain": "eb94fac57e33ce35afa6d072a701a3aceedae31f",
+  "source": {
+    "bodyguard/backend/app/config.py": "1a34de1fba88787c0768c3320520a98f9954ead618fd2919da2c31f0f98317dc",
+    "bodyguard/backend/app/main.py": "ece054f6068a1d2b6329aae6a7b2a8e2d898b5faadc5cdd3c50a39fdaf775a28",
+    "bodyguard/backend/app/records.py": "ea5913e06334a40c4d66aafacf83020e1790b768bcc6e0a54908c5b3e69d3182",
+    "bodyguard/backend/tests/conftest.py": "327b2fbb658626d0e44beecaff746adb5a9662bf3453aa4bc7049009a4bc79bf",
+    "bodyguard/backend/tests/run_browser.py": "4d4dac50013adc103ade39903c1272bc3e39284067645ba01b9dae9956db4990",
+    "bodyguard/frontend/e2e/fixtures/neckCandidate.ts": "e15c11d6cd07d77885d0fe0c9b9d4bbc6132e205b05b70c319474936acd6c1e5",
+    "bodyguard/frontend/e2e/fixtures/neckRecordingEntry.tsx": "8f6a1fd9074418828579003c68c6e91916eca3adecfe811068f318fa63ec4dab",
+    "bodyguard/frontend/e2e/fixtures/neckWorkspaceEntry.tsx": "a43d4988f912fefc4343bd1ff9ef28052d8c7d304f29c3bc919121a5c86cb455",
+    "bodyguard/frontend/e2e/fixtures/neckWorkspaceSource.ts": "d884303cf16aaaf307b2b96dedad0a785fa0601d0207e868f5a680ef40697390",
+    "bodyguard/frontend/e2e/neckrecording.spec.ts": "25e9d5cc18398c7befcd69c27dff5335c37deec326bcbfb0d9f71401af114454",
+    "bodyguard/frontend/playwright.account.config.ts": "073a4a12c43405e34fbc71019ca6ba7dfa594ef9cc61c646e7716cac98bbac7e",
+    "bodyguard/frontend/playwright.neck-recording.config.ts": "efffe7514593c07507224497a6b3171f6a5871b32ccd5c9a78982d729edcd0a8",
+    "bodyguard/frontend/pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+    "bodyguard/frontend/scripts/check-selection-production.mjs": "b1e6354711456752e20aa47a76d286c3ed9378204830ac785ffe3270856a6e11",
+    "bodyguard/frontend/scripts/serve-neck-recording.mjs": "cb721639299ebbe114c14eba65d0a3d9c1f954a3673292f0cbe2a0305a62e68f",
+    "bodyguard/frontend/scripts/test-neck-workspace.mjs": "f54719e4cb5295962e56e25ca29bce7d6dee0baa2d6f0c80ab42b7519c201b87",
+    "bodyguard/frontend/src/api/auth.ts": "0193700ff7ef9207ccb0329c37a7d4758a44262d52ac5367b682b9539c99de4b",
+    "bodyguard/frontend/src/api/recordBinding.ts": "d641bf1239b82479bf12e88afaa26baa0ab00fa28a0e5bd058d5aa6343d2c48a",
+    "bodyguard/frontend/src/api/records.ts": "7be83758ef01db697998a4630fea7b7847a641e3398b3f1fb04cb49634ed0e7a",
+    "bodyguard/frontend/src/auth.tsx": "889843a8153e36c67708564d80729cdcdd59012702d1ff50923e1c50ca123b40",
+    "bodyguard/frontend/src/avatar/neckSurfaceFeedback.ts": "305cc707305b925383e7020871bb9b2ce1a8750167b0d3e1d10e698f9d35a708",
+    "bodyguard/frontend/src/avatar/observedComparison.ts": "9f532e8a49cc8a607a3105ce0c9268fd39f21d9be85485778ca8cfe877cf6036",
+    "bodyguard/frontend/src/avatar/observedPoseRig.ts": "02c49e8cff2d8f40d2c1bacbc955ce27826389fcd03d0a14cf53214b6411adb7",
+    "bodyguard/frontend/src/avatar/projectedSurfaceRegions.ts": "a40dfe4662a6f382680f465fa6346a1bf319ed1629a5122eab958ba3a2c6045b",
+    "bodyguard/frontend/src/avatar/referenceStage.ts": "45b186b2bd251189cd12cf4927590e8bd20315af84c242c6114f5545f97ff49f",
+    "bodyguard/frontend/src/avatar/surfaceFeedback.ts": "b0c621ed26fd74697ae7b439f3770f35184f25001017c66f6c3dd4cbd7886a8a",
+    "bodyguard/frontend/src/coaching/neckCandidateFeedback.ts": "3ed38634be9b2fa4278a4908f6bb3a552e19ccc5be5adb772402b73d87d543f6",
+    "bodyguard/frontend/src/coaching/neckWorkspacePlayback.ts": "6aa95fedf79a2d9f0b8b1a4240b164c369b020fe327f8aa2d8f803eca78c806e",
+    "bodyguard/frontend/src/coaching/recordOwner.ts": "820368c6cf370913b622b98c21d82a53142f0a8a6247ee188e5317388a50c0ff",
+    "bodyguard/frontend/src/coaching/recordedSession.test.ts": "75e8972261fd0b48dfc962be943a2ec2e8244926f646a7ca74ebb92c7067d158",
+    "bodyguard/frontend/src/coaching/recordedSession.ts": "ab17fa60b42551a1377471a71546b99bfba30670f61c0fc7e062fd5891984e68",
+    "bodyguard/frontend/src/coaching/resources.ts": "0832d662b19b522153f7e13507147a7b33f264d0eee94f10e07e06758d1fa029",
+    "bodyguard/frontend/src/coaching/resultRecord.ts": "10fc89e732376eb70b61720cab95685a7f26a59f4c760e4578a8af3536f1a64e",
+    "bodyguard/frontend/src/coaching/session.ts": "3799bfdce8e829899f986b97770ce82a7bf4dd2932d0607060a513f23e080598",
+    "bodyguard/frontend/src/coaching/useRecordedCoaching.ts": "d830bfb9a7b583cd93e193e2c8b0a62e0279e56df8fe8623d8dfad2eb987efb7",
+    "bodyguard/frontend/src/coaching/useRecordedPlayback.ts": "99cbb0ebe2c231c9ac3125d2ee015a6197ae6efc64293e33b375112a268dcd4f",
+    "bodyguard/frontend/src/pages/CoachingPage.css": "33b49b34ec356512aef9d531f567719c774845d99c89004931367d545c13beb3",
+    "bodyguard/frontend/src/pages/CoachingPage.tsx": "0814982e19a4d1b5ceb7c7c8ef7bf5826263f6bde3b99199df848b608345bcdd",
+    "bodyguard/frontend/src/pages/NeckCoachingRun.test.tsx": "b9cc71435c5de8e989b403161dc3db3a07963e28588c0ed7852cb933424a59d9",
+    "bodyguard/frontend/src/pages/NeckCoachingRun.tsx": "55a67e6b5043a3d6b3033b6ede1dcdf347fb72d65335b068eb70bb7701169070",
+    "bodyguard/frontend/src/pages/RecordsPage.tsx": "e7bc49a84dbd70d8a02f536c35c12555d15dd4c04c23d11d1315f0bbfcb69aca",
+    "bodyguard/frontend/src/stretch/neckCandidateClassifier.ts": "baf51df453e5fb82e4431662f42f4fb1a98605705826c7fdc977aa4c21c01ce7",
+    "bodyguard/frontend/src/stretch/progression.ts": "7c4df968a9b77fe78e20e92d2fa58951b7d0a7dc0b0df70e3330599ea1b6137a",
+    "bodyguard/frontend/vite.config.ts": "86bb8e81d20d3c53ee7b9ed796d42247817532265372fc5be42d52760251a105"
+  },
+  "artifacts": {
+    "source/bodyguard__backend__app__config.py.gz": {
+      "bytes": 1150,
+      "sha256": "31673aacad2371e791ddaf2a10fd5b4545e3f83458743b9551879948a2c2b005"
+    },
+    "source/bodyguard__backend__app__main.py.gz": {
+      "bytes": 9794,
+      "sha256": "d4a381280cd96c08f2b5d1c12d474e4749845865c9b0dc23751142646a371106"
+    },
+    "source/bodyguard__backend__app__records.py.gz": {
+      "bytes": 3537,
+      "sha256": "dccdc0e9dddd83f23e3d01baf5bcfbfb475f59098d9bbf65656c66869cfc0400"
+    },
+    "source/bodyguard__backend__tests__conftest.py.gz": {
+      "bytes": 2158,
+      "sha256": "4ad40dbb5e6c82911e9ef71e02497a64158d7328eec0a7e51ebcc7304e0a81ed"
+    },
+    "source/bodyguard__backend__tests__run_browser.py.gz": {
+      "bytes": 3518,
+      "sha256": "c44228818f4545f76de235bd824049fd3bb61f87e9160e4f8829890ef9bcfd5b"
+    },
+    "source/bodyguard__frontend__e2e__fixtures__neckCandidate.ts.gz": {
+      "bytes": 835,
+      "sha256": "7a71db0df3189009ba0da23d69fc242831cd60280a2ba9ce3c9d22326652092b"
+    },
+    "source/bodyguard__frontend__e2e__fixtures__neckRecordingEntry.tsx.gz": {
+      "bytes": 254,
+      "sha256": "525cb53406448f75e9fa732ff2f3ad6806eb4f9d580b87258cd189689ad5733a"
+    },
+    "source/bodyguard__frontend__e2e__fixtures__neckWorkspaceEntry.tsx.gz": {
+      "bytes": 502,
+      "sha256": "08ceb242da2dfb4bc4a583a94a1b64510aa4f9e3e5fe45e8838d16e8d8859043"
+    },
+    "source/bodyguard__frontend__e2e__fixtures__neckWorkspaceSource.ts.gz": {
+      "bytes": 1187,
+      "sha256": "6fd9ed56b090029ce1b698b586c44a044dc8af9eba903df28a10c102bb940988"
+    },
+    "source/bodyguard__frontend__e2e__neckrecording.spec.ts.gz": {
+      "bytes": 3102,
+      "sha256": "2639d9ef604a808a4a6f6b41ce9e0b51aebee0d704198f40c536dab59d8f254e"
+    },
+    "source/bodyguard__frontend__playwright.account.config.ts.gz": {
+      "bytes": 1469,
+      "sha256": "8d5b5bb4ac2e720524046668f169ce9df35bb746bd9684f6f99b33ce56be1293"
+    },
+    "source/bodyguard__frontend__playwright.neck-recording.config.ts.gz": {
+      "bytes": 277,
+      "sha256": "5b236dae8bdaeb91056348c370e25cc03da5d2364e3a75a49376847d3d24c6b6"
+    },
+    "source/bodyguard__frontend__pnpm-lock.yaml.gz": {
+      "bytes": 27750,
+      "sha256": "e32689fae2471a7e180c5afee7d3e2eefa98a83c4addcae2b2e3ba811559eb13"
+    },
+    "source/bodyguard__frontend__scripts__check-selection-production.mjs.gz": {
+      "bytes": 2758,
+      "sha256": "c38a38d21dbd0f7872af35cdac33c71319814d48f019c38f9cb936034d6814b9"
+    },
+    "source/bodyguard__frontend__scripts__serve-neck-recording.mjs.gz": {
+      "bytes": 894,
+      "sha256": "06857d8a4d488227df660d93001fd607c095a9f6bc0b243061a372e5bcbe85b3"
+    },
+    "source/bodyguard__frontend__scripts__test-neck-workspace.mjs.gz": {
+      "bytes": 5186,
+      "sha256": "b6f06ab3a3a2b04f72307688c02b4806d005fe98720caae8941406f9f647c483"
+    },
+    "source/bodyguard__frontend__src__api__auth.ts.gz": {
+      "bytes": 1898,
+      "sha256": "0138887ff3bf97950420ec0f354060890b77ad6b7c6f0eea8b14177fab33bbd5"
+    },
+    "source/bodyguard__frontend__src__api__recordBinding.ts.gz": {
+      "bytes": 989,
+      "sha256": "cc4192572cb6f950eb00a6f3feb1b943a1c8cb2c4bb782dcfe9a39cf9cc7fda2"
+    },
+    "source/bodyguard__frontend__src__api__records.ts.gz": {
+      "bytes": 1674,
+      "sha256": "868e019021a34f6c5deb38da73b2a53f1072f0cfdf984dddfed53c237d0f7a23"
+    },
+    "source/bodyguard__frontend__src__auth.tsx.gz": {
+      "bytes": 1853,
+      "sha256": "24b8407658d3801ba99572cc40b37d16f0d5424915c66313c725c5373b9498ca"
+    },
+    "source/bodyguard__frontend__src__avatar__neckSurfaceFeedback.ts.gz": {
+      "bytes": 1955,
+      "sha256": "be49cec673b7e04fd633451cb804f47cb1ffcaeab440e27401bc7a7b43b7b3f2"
+    },
+    "source/bodyguard__frontend__src__avatar__observedComparison.ts.gz": {
+      "bytes": 1746,
+      "sha256": "a8f5fc0f1b61f90880b5eb03c8648900117b47325341d7e848e5eda970c612ab"
+    },
+    "source/bodyguard__frontend__src__avatar__observedPoseRig.ts.gz": {
+      "bytes": 2619,
+      "sha256": "ecb427256aa47e26b44c4751544544bf2a081a39b4b900e600aee955115b7e61"
+    },
+    "source/bodyguard__frontend__src__avatar__projectedSurfaceRegions.ts.gz": {
+      "bytes": 1448,
+      "sha256": "53490f4b2baee13decbe3c21bc71f8df6083d23ca802851752e9a47233d6264d"
+    },
+    "source/bodyguard__frontend__src__avatar__referenceStage.ts.gz": {
+      "bytes": 3367,
+      "sha256": "b9acd1f353b972c123d6134fe834c7e9a03a6a741f571c1a85741f8b0cf98926"
+    },
+    "source/bodyguard__frontend__src__avatar__surfaceFeedback.ts.gz": {
+      "bytes": 4982,
+      "sha256": "0e168dc3621141cfbdb201fa74af9c7f9d693c680cb347bf7df67149467c7a1a"
+    },
+    "source/bodyguard__frontend__src__coaching__neckCandidateFeedback.ts.gz": {
+      "bytes": 1390,
+      "sha256": "e206ec299809c5c9d82de85ac857806edf61bd435b10233468f2209a9f214602"
+    },
+    "source/bodyguard__frontend__src__coaching__neckWorkspacePlayback.ts.gz": {
+      "bytes": 2335,
+      "sha256": "2dc6e136b159a31221e86e39fff95ed2b47189d7beb4307e5795e7b61cbe53f4"
+    },
+    "source/bodyguard__frontend__src__coaching__recordOwner.ts.gz": {
+      "bytes": 1134,
+      "sha256": "8788e8280bf0e41fb1206d37280db5bb57314dfa8ab9058130a973b36808681f"
+    },
+    "source/bodyguard__frontend__src__coaching__recordedSession.test.ts.gz": {
+      "bytes": 3989,
+      "sha256": "80b50156b139af529c8543b193f95c2d0768bab5059e581b51ce5ff1b79f211d"
+    },
+    "source/bodyguard__frontend__src__coaching__recordedSession.ts.gz": {
+      "bytes": 1985,
+      "sha256": "dbc0b518c1766b8413abf037d24e81b5a7de92034484e52a8943dca168cf9dbc"
+    },
+    "source/bodyguard__frontend__src__coaching__resources.ts.gz": {
+      "bytes": 2205,
+      "sha256": "2b3c669ddb4bf20f68a54f2dcad598deb35ae80c4d3d73883ef4412a9b1935ec"
+    },
+    "source/bodyguard__frontend__src__coaching__resultRecord.ts.gz": {
+      "bytes": 3467,
+      "sha256": "0588a2c1f8b8bfa6f54e5ba9070e5873f30212c98fae1c9855491398a3065cc6"
+    },
+    "source/bodyguard__frontend__src__coaching__session.ts.gz": {
+      "bytes": 1947,
+      "sha256": "0cf2d746d71a7a4ecd0cf488c3fc62cf4875081eb432c582abdbae10f9e0a611"
+    },
+    "source/bodyguard__frontend__src__coaching__useRecordedCoaching.ts.gz": {
+      "bytes": 2892,
+      "sha256": "6b245190bb759d68a00c5b9646612b5decf2f8bef6c9efae4e89684d6b85e10d"
+    },
+    "source/bodyguard__frontend__src__coaching__useRecordedPlayback.ts.gz": {
+      "bytes": 2253,
+      "sha256": "fb3aa249d1a36c16794791c594ab9575ec1580ddebf27a9a1b90996421892e1d"
+    },
+    "source/bodyguard__frontend__src__pages__CoachingPage.css.gz": {
+      "bytes": 2104,
+      "sha256": "759cfa5ea2d06197f1daca0e8d2e9f2e9d2fd2d353aace7af18b2a8b5e343fa7"
+    },
+    "source/bodyguard__frontend__src__pages__CoachingPage.tsx.gz": {
+      "bytes": 3938,
+      "sha256": "2dcc705d54f841b2f0a9c134ebaa527a6510932eb448cebe4445a874cd9239d2"
+    },
+    "source/bodyguard__frontend__src__pages__NeckCoachingRun.test.tsx.gz": {
+      "bytes": 4223,
+      "sha256": "23108822c6dce0435d5aef0ef7abc57768c573399377c5c185637ad6b3e44440"
+    },
+    "source/bodyguard__frontend__src__pages__NeckCoachingRun.tsx.gz": {
+      "bytes": 6331,
+      "sha256": "f2a7d6b9506392900cd253ac7c79c4f949ae814341ef5f5c5bd19796e8f70c7c"
+    },
+    "source/bodyguard__frontend__src__pages__RecordsPage.tsx.gz": {
+      "bytes": 4145,
+      "sha256": "e84a6dfc4e856dedeeafc08402415c21af68b48d14f81797387fc8ed8d26b315"
+    },
+    "source/bodyguard__frontend__src__stretch__neckCandidateClassifier.ts.gz": {
+      "bytes": 1801,
+      "sha256": "d6dbb564094cc02948cc2673848b5b0cb448f1aff0e6e42200a9344922e3e050"
+    },
+    "source/bodyguard__frontend__src__stretch__progression.ts.gz": {
+      "bytes": 3396,
+      "sha256": "c2ffade11aa8c04dc176d2fa613e79b14c8d34502dc0f2be6b1e6afb3f49c367"
+    },
+    "source/bodyguard__frontend__vite.config.ts.gz": {
+      "bytes": 671,
+      "sha256": "4501d26f96eb55bc7fc0b5859d4453a8a2f71c8cd5eec9f5d75071bfec28e769"
+    },
+    "evidence/browser-a-source-after.json": {
+      "bytes": 3129,
+      "sha256": "0b699dc21e00dca4d27ba69d21e7e15fecc645cb425c9bf14169d43e365111e1"
+    },
+    "evidence/browser-a-source-before.json": {
+      "bytes": 3129,
+      "sha256": "0b699dc21e00dca4d27ba69d21e7e15fecc645cb425c9bf14169d43e365111e1"
+    },
+    "evidence/browser-a.log.gz": {
+      "bytes": 961,
+      "sha256": "58df904b3cff5f5e93229b8d095468678f8e2aa16601099b047141d9b3336534"
+    },
+    "evidence/browser-b-process.json": {
+      "bytes": 127,
+      "sha256": "1080eee365b8c2e1f1a6e2e26a1d44178e9d65ee8bbd2b5957fa7b03d223b522"
+    },
+    "evidence/browser-b-source-after.json": {
+      "bytes": 3129,
+      "sha256": "3e7b0d8326493525e324a9b1bf8269f014764ba52d16def3ad6b6d5366796554"
+    },
+    "evidence/browser-b-source-before.json": {
+      "bytes": 3129,
+      "sha256": "3e7b0d8326493525e324a9b1bf8269f014764ba52d16def3ad6b6d5366796554"
+    },
+    "evidence/browser-b.log.gz": {
+      "bytes": 472,
+      "sha256": "17ab5ce5e09bbe1291caa4faeed12e0e795cd4f35230991ade459bc40baeebb3"
+    },
+    "evidence/build-a.log.gz": {
+      "bytes": 346,
+      "sha256": "6fc8fb0d29e81770ec487fa2e0a6604485aa056fbb8229425298f6c6901abb69"
+    },
+    "evidence/check-a.log.gz": {
+      "bytes": 2956,
+      "sha256": "0a8c8727c0ebb32caa1c707b1b0371fdc866d47c3392bea2e411ec925c9b38f1"
+    },
+    "evidence/config-negative.json": {
+      "bytes": 274,
+      "sha256": "cbe01dfce475cf6884aaa65659564d930041476af5c2c86504b83a6e78f5485f"
+    },
+    "evidence/db-b-identity.json": {
+      "bytes": 213,
+      "sha256": "acdbaaf0ff2dd368d63730232df4f5e0cb1d2e9343059c839d39aa2d54bf3505"
+    },
+    "evidence/db-createdb-a.log.gz": {
+      "bytes": 20,
+      "sha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    "evidence/db-createdb-b.log.gz": {
+      "bytes": 20,
+      "sha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    "evidence/db-identity.json": {
+      "bytes": 281,
+      "sha256": "e1c8673ef38c96bd89d8ea29590da2c60a04959585795253c7efe1665e6840fb"
+    },
+    "evidence/db-initdb-a.log.gz": {
+      "bytes": 479,
+      "sha256": "8c39108f71432b2180fe340156127de9aaca774038886e7a8d4f9b61a7be0771"
+    },
+    "evidence/db-initdb-b.log.gz": {
+      "bytes": 482,
+      "sha256": "d5d50b5705d03045dd999b52401a6fb0a9a483c2aca9639a3ef00b811528c8e2"
+    },
+    "evidence/db-pg_ctl-a.log.gz": {
+      "bytes": 62,
+      "sha256": "f6be72271e138bca4ca451db72b495bb3b5f03e146a0d76ffc40d666aabf8516"
+    },
+    "evidence/db-pg_ctl-b.log.gz": {
+      "bytes": 62,
+      "sha256": "f6be72271e138bca4ca451db72b495bb3b5f03e146a0d76ffc40d666aabf8516"
+    },
+    "evidence/db-stop-a.json": {
+      "bytes": 78,
+      "sha256": "ebb7ba6eafe0a7ad2d67c49bee00173e6bb341d64bd1b1ef05bdf6f167d82b90"
+    },
+    "evidence/db-stop-a.log.gz": {
+      "bytes": 68,
+      "sha256": "ec0a1619956c756fee2c688e6f9e3dbabe01491cad916dff5db450e4803769ea"
+    },
+    "evidence/db-stop-b.log.gz": {
+      "bytes": 68,
+      "sha256": "ec0a1619956c756fee2c688e6f9e3dbabe01491cad916dff5db450e4803769ea"
+    },
+    "evidence/diff-a.log.gz": {
+      "bytes": 20,
+      "sha256": "abfbb86f9f5ddfbd9fc1a72c43ab384702ce8bae86b60f3324748485e235e61e"
+    },
+    "evidence/full-a.log.gz": {
+      "bytes": 448,
+      "sha256": "ee3ec8cc005e718e70f06a9fd5808f14821739ed8ff7bdf3ed7fe2502bad43f1"
+    },
+    "evidence/guard-a.log.gz": {
+      "bytes": 332,
+      "sha256": "4e5371c802338a1173b3fd8a330c3f96b588b966f06e6d3330a8385dd6ea1b3f"
+    },
+    "evidence/ruff-a.log.gz": {
+      "bytes": 39,
+      "sha256": "015047cfb42239ae3bda1838a71cda9cd9c9a2193044fdc633e2f0b32574a0cf"
+    },
+    "evidence/ruff-final.log.gz": {
+      "bytes": 39,
+      "sha256": "015047cfb42239ae3bda1838a71cda9cd9c9a2193044fdc633e2f0b32574a0cf"
+    },
+    "evidence/ruff-format-final.log.gz": {
+      "bytes": 45,
+      "sha256": "3847c414274207887a2e0b3f8ba43b27dc01bede88e0e460b6276a2b2e1725ce"
+    },
+    "evidence/scoped-final.log.gz": {
+      "bytes": 61,
+      "sha256": "9a368eff04e14ac58be3b44206aa351cc4ccc34773a9b7691b3edc3b798e6539"
+    },
+    "evidence/type-a.log.gz": {
+      "bytes": 35,
+      "sha256": "4d5a0c23c9ecddf5ae14f132b0345c3788269435548b9568b882d38b627def51"
+    },
+    "evidence/type-b.log.gz": {
+      "bytes": 252,
+      "sha256": "52a827d483585b6a57d98d4a8a9487871a4b8db6a18615b73b8375eb4f0d8c1f"
+    },
+    "evidence/type-c.log.gz": {
+      "bytes": 249,
+      "sha256": "e22d35f8c0bd33a42fff5525922ea555e05f3aa09fafbab038d5865c0a98f7d9"
+    },
+    "evidence/type-d.log.gz": {
+      "bytes": 249,
+      "sha256": "e22d35f8c0bd33a42fff5525922ea555e05f3aa09fafbab038d5865c0a98f7d9"
+    },
+    "evidence/type-e.log.gz": {
+      "bytes": 35,
+      "sha256": "4d5a0c23c9ecddf5ae14f132b0345c3788269435548b9568b882d38b627def51"
+    },
+    "evidence/type-f.log.gz": {
+      "bytes": 35,
+      "sha256": "4d5a0c23c9ecddf5ae14f132b0345c3788269435548b9568b882d38b627def51"
+    },
+    "evidence/unit-a.log.gz": {
+      "bytes": 335,
+      "sha256": "c27afce2d8bbe5ce6a3fd5477d702d213da9a7500767d05f0a3acb9854316892"
+    },
+    "evidence/unit-b.log.gz": {
+      "bytes": 334,
+      "sha256": "798ef15da217398838c2aa85b4f36410464a7699c93f8749302834e8fd831d62"
+    },
+    "evidence/unit-c.log.gz": {
+      "bytes": 810,
+      "sha256": "771573eb72b8d8a1809c844fc5644fea576100fd0960728972f980831250b1e5"
+    },
+    "evidence/unit-d.log.gz": {
+      "bytes": 351,
+      "sha256": "462ad89f0d3eb863a6b8338e9d4fe7c25330001b38f31771a072de6db3da887e"
+    },
+    "evidence/browser-a/.last-run.json": {
+      "bytes": 145,
+      "sha256": "f53bbb153688dfdc8c876c1ef7ce9c1000fdb9d769002c6244642d2618c33d01"
+    },
+    "evidence/browser-a/neckrecording-N01-actual-e-0af0d-and-other-account-isolation/error-context.md": {
+      "bytes": 1714,
+      "sha256": "172d3522b6fe4221b1252217e2d39151d935999b825c454bf5b701c2afb179eb"
+    },
+    "evidence/browser-a/neckrecording-N02-actual-A-f8fd0-and-only-one-SQL-backed-row/error-context.md": {
+      "bytes": 1711,
+      "sha256": "ad56bdcd1937818c2215bb2edb3436c3f217250da7ce6223689355f7e8b33c85"
+    },
+    "evidence/browser-a/neckrecording-N03-female-r-59d08-try-or-cross-account-record/old-proof-rejected.png": {
+      "bytes": 70931,
+      "sha256": "c384b0807ed05d045150df97bc4d8a1016cc833b6b122bb46f87e7d9c9ff4007"
+    },
+    "evidence/browser-a/report.json": {
+      "bytes": 14221,
+      "sha256": "3911a2dd446a52843eae0995ea1066ecf2fb4975f63d63d4c4ea6960dd46705f"
+    },
+    "evidence/browser-b/.last-run.json": {
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    "evidence/browser-b/neckrecording-N01-actual-e-0af0d-and-other-account-isolation/actual-record-detail.png": {
+      "bytes": 65213,
+      "sha256": "a9740385c15246a39acd06827c7c5d3ab10b1868647b3aee4d978971ae5a1304"
+    },
+    "evidence/browser-b/neckrecording-N01-actual-e-0af0d-and-other-account-isolation/completed-saved.png": {
+      "bytes": 67533,
+      "sha256": "f43a92afc6eaca0c462142a5a9d87cd8dbbc59cae7475653fd7a459da74f19fd"
+    },
+    "evidence/browser-b/neckrecording-N01-actual-e-0af0d-and-other-account-isolation/completed-unsaved.png": {
+      "bytes": 70026,
+      "sha256": "10f95ec95918f0dfcdc74a68caa6d154937219e5755bb43b2bfd36c7917307cf"
+    },
+    "evidence/browser-b/neckrecording-N02-actual-A-f8fd0-and-only-one-SQL-backed-row/accepted-response-loss.png": {
+      "bytes": 72477,
+      "sha256": "17ae10641c2ca0409bbaf69519aafb38ac92db8a35b68fccc783d7a80c9a0389"
+    },
+    "evidence/browser-b/neckrecording-N03-female-r-59d08-try-or-cross-account-record/old-proof-rejected.png": {
+      "bytes": 70953,
+      "sha256": "8e4baa6da3b3d4ec29e37b30e3815a58c83f026dcf7cb84bd86a9d557397df58"
+    },
+    "evidence/browser-b/report.json": {
+      "bytes": 6405,
+      "sha256": "6ffd704e74778ed45e9358caee4fe0f5a2a5c4d87b20cb692908c7d47498908f"
+    },
+    "evidence/recording-default-a-both-started.png": {
+      "bytes": 163877,
+      "sha256": "4043645c5ffcfe370f9a3cb6393ce07bcb183d7e91efc4fc514f84b8903e39d8"
+    },
+    "evidence/recording-default-a-completed-result.png": {
+      "bytes": 61580,
+      "sha256": "f42d6c66bd376487ff692e32108cea79769084f135504e3c35c6bf9c9c1b7f8d"
+    },
+    "evidence/recording-default-a-empty-disarmed.png": {
+      "bytes": 111589,
+      "sha256": "72cf079466dd58d851a37826a51146fae545dea03eaf78ef0d2147f058d9909b"
+    },
+    "evidence/recording-default-a-female-800.png": {
+      "bytes": 119726,
+      "sha256": "94b554ca4a8c62889b3658b62f517d48b9b57602a12a41a64854131626922a41"
+    },
+    "evidence/recording-default-a-female-running.png": {
+      "bytes": 154958,
+      "sha256": "71522ae2b57add819e9244ebed67e69872a6b6a0097eaefb36d2d2fa59507bde"
+    },
+    "evidence/recording-default-a-female-surface-neck.png": {
+      "bytes": 155101,
+      "sha256": "322633a0de833b99d346f5bb5f31ef232e763967b008319a2ffb3a5687a6f139"
+    },
+    "evidence/recording-default-a-female-surface-shoulders.png": {
+      "bytes": 155969,
+      "sha256": "0723e4d4b4b46e9ba7594116142d387dfe1b0b8ddb248e6c46d93b8271b4cc23"
+    },
+    "evidence/recording-default-a-female-상반신.png": {
+      "bytes": 244076,
+      "sha256": "bc134610c08154ded2c6251ecd6d80dd47dbddc9eb40256373b3362d90611e39"
+    },
+    "evidence/recording-default-a-female-자세히.png": {
+      "bytes": 230440,
+      "sha256": "4c79da257a09ec4d463e53f182364ef2f51c4453da3c50ea482a4f492d55fd1d"
+    },
+    "evidence/recording-default-a-female-전신.png": {
+      "bytes": 154816,
+      "sha256": "277458be22f048f924c2707f0d5e2ab144a0c868667dc17454094876c8388cab"
+    },
+    "evidence/recording-default-a-inference-error.png": {
+      "bytes": 67691,
+      "sha256": "0c1ccd81fb9b62ef67872a645872358944fde2853a9f79ac32f107b867205a37"
+    },
+    "evidence/recording-default-a-left-return.png": {
+      "bytes": 164054,
+      "sha256": "d5b3594d87cc7d12d40bfa24bfd609e769cf9efb5b1e70d675ca171c62cad51e"
+    },
+    "evidence/recording-default-a-pain-result.png": {
+      "bytes": 59139,
+      "sha256": "0a79e69ec8dab65e8a52e0f4324b12cb20d00547cfc744ca84a39f7c1317890d"
+    },
+    "evidence/recording-default-a-right-return.png": {
+      "bytes": 164196,
+      "sha256": "5d4f830e7d6144bbff631d466f6ed2eadb98eaf41831ab1fb08b4feaa50a04f4"
+    },
+    "evidence/recording-default-a-shoulder-feedback.png": {
+      "bytes": 170780,
+      "sha256": "a05af84e9a9f66128c34263d855fb071fe5dd5787eab4aca3e980423cd8ff98f"
+    },
+    "evidence/recording-default-a-surface-neck.png": {
+      "bytes": 168804,
+      "sha256": "cdc6ebbcc2fa27f6a7d7a9619b16845798c75ce6f8ce4f3369e948e7a1acf8ab"
+    },
+    "evidence/recording-default-a-surface-shoulder.png": {
+      "bytes": 170754,
+      "sha256": "63de68afea47771330d6c26869757b96483727553bd51c7cae66e4c4855343d3"
+    },
+    "evidence/recording-default-a-wrong-direction.png": {
+      "bytes": 168888,
+      "sha256": "58aea7c4e24e950f3489390701d367d54988550d9675ff9e4e13ec7efc733eb7"
+    },
+    "evidence/recording-default-a.json": {
+      "bytes": 4677,
+      "sha256": "87354dab894c80d3b821a629413310843814aaf92ac93e04a1861d6eae49bd39"
+    },
+    "evidence/recording-default-a.log.gz": {
+      "bytes": 188,
+      "sha256": "67c69581ba8cd473ef0a050a2bedb046743c41bf2cd90b7bdd1e31ad1849cfe8"
+    }
+  },
+  "browserB": {
+    "tests": 3,
+    "skipped": 0,
+    "flaky": 0,
+    "sourceBeforeAfterCurrentMatch": true,
+    "coreHashedFiles": 30
+  },
+  "defaultBrowser": {
+    "flows": 8,
+    "writes": 0,
+    "sourceBeforeAfterCurrentMatch": true
+  },
+  "scope": "Actual account/API/SQL/React/GLB/classifier; generated input/profile/Worker/mail. No participant/realSDK/clinical/release proof.",
+  "gates": {
+    "full-a": "121 files / 2033 tests, maxWorkers2",
+    "build-a/guard-a": "original typecheck/notice/Vite then public isolation pass",
+    "check-a": "errors0 existinginfos16",
+    "scoped-final": "10 files zero diagnostics",
+    "ruff-final/ruff-format-final": "runner pass",
+    "config-negative": "2 mismatches rejected before database/socket"
+  },
+  "preservation": "Two distinct owned SQL clusters stopped with PID/UID/inode/executable checks; all data preserved outside Git. Mailbox/cookies/CSRF/DB data not archived. Early uv/cache/wrong-cwd diagnostics only in terminal; original Ruff failure log reused, not claimed preserved.",
+  "limits": [
+    "Default candidate remains non-saving; only explicit DEV/loopback isolated test config writes.",
+    "Clinical profiles/released motions/recommendation/final avatars and prior Draft/SDK P2 remain.",
+    "Current source archive captured after validation; failed browser-a retains hashes/context not all original source copies.",
+    "No production DB/secret/provider/Docker/HTTPS/deploy/release."
+  ]
+}
