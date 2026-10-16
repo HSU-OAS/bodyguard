@@ -1,5 +1,7 @@
 # 2단계 필수 보완 이월 및 후속 실행 순서
 
+2026-10-16 [S3.C1](stories/neck-candidate-classifier.md)은 D2-T/I의 첫 동작 classifier 후보와 진행/결과 계약을 구현했다. [생성 좌표→실제 판정 코드/엔진→제한 DTO·모의 HTTP 및 실패 기록](review/neck-candidate-classifier/README.md). 임상 band/추천·실제 화면의 자동 코칭/결과·실측/SQL 저장을 검증한 것은 아니다. 전체1~4/1~6과 D2 필수 기준·기존 Draft/P2 및 별도 승인 경계를 유지한다. 다음은 현재 두 모델 stage와 판정 후보/오류별 시범·결과 UI 연결이다.
+
 2026-10-16 [S3.A2](stories/shared-coaching-reference.md)는 왼쪽 동일 카메라 관찰·명시 머리/손 기준과 오른쪽 Blender 단계 시범을 같은 개발 공간에 연결했다. [화면·실패·실제 SDK/생성 좌표 검증 구분](review/shared-coaching-reference/README.md). D2-T의 독립 연결 진전이며, 정확한 동작 판정/추천·오류 강조/교정 시범 적응·결과/기록과 나머지 콘텐츠는 아직 없다. D2-A/M/T/I/R/P·최종 외형/성능·과거 간헐 SDK P2와1~4/1~6 필수 기준을 완료로 표시하지 않는다. 기존 Draft와 원본/GLB/실패·별도 승인 경계를 유지한다.
 
 2026-10-16 [S3.A1](stories/blender-reference-content.md): D2-T의 오른쪽 단계별 시범 콘텐츠를 실제 전문 Blender 남녀3종으로 연결했다. [단계/좌우·정지·복귀·오류 복구 화면/실패 보존](review/blender-reference-content/README.md). 원래 신체 GLB/163관절·여덟 가중치를 유지하고 공개 빌드에는 넣지 않았다. 왼쪽 실제 사용자 아바타·근거 있는 판정/추천·결과의 동시 통합과 나머지4종은 남는다. D2-A/M/T/I/R/P·최종 외형/성능·PR152의 간헐 SDK P2 및 전체1~4/1~6 완료로 표시하지 않는다. 다음은 이 시범과 관찰 흐름을 연결하는 구현이며 사람/외부 연결 보류를 독립 작업의 중단 이유로 삼지 않는다.
