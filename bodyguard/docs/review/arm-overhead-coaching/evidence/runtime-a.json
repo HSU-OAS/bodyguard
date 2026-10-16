@@ -1,0 +1,67 @@
+{
+  "method": "Vite SSR actual pure classifier/session/engine/result modules; generated points/resources, mock HTTP, no browser/SDK/person/SQL/clinical accuracy",
+  "before": {
+    "src/posture/armOverheadObservation.ts": "87c73d06e6bf1643a72f73d299f3a0400f656f16cbe44833e6047e3d835229ea",
+    "src/posture/shoulderShrugObservation.ts": "5778261aee044041b6558ade91c0cebd856aa69a3e203aa30006e26018862a7e",
+    "src/posture/thresholds.ts": "c3acef188ba9fe22be26e4fc0a10659556d53aaa5f842556d2b340bf5bcbc328",
+    "src/stretch/overheadCandidateClassifier.ts": "cb927066e09d1a7fe5992090f8ae5a97383b00ede4ffcc22396b20968e7b7c6f",
+    "src/coaching/overheadCandidateFeedback.ts": "c28cad98050d4b3f593900a555439277f4632fd8a1645fb558f06a39b5f379a5",
+    "src/coaching/session.ts": "3799bfdce8e829899f986b97770ce82a7bf4dd2932d0607060a513f23e080598",
+    "src/coaching/resources.ts": "0832d662b19b522153f7e13507147a7b33f264d0eee94f10e07e06758d1fa029",
+    "src/stretch/progression.ts": "7c4df968a9b77fe78e20e92d2fa58951b7d0a7dc0b0df70e3330599ea1b6137a",
+    "src/coaching/resultRecord.ts": "10fc89e732376eb70b61720cab95685a7f26a59f4c760e4578a8af3536f1a64e",
+    "src/api/records.ts": "7be83758ef01db697998a4630fea7b7847a641e3398b3f1fb04cb49634ed0e7a",
+    "src/api/auth.ts": "0193700ff7ef9207ccb0329c37a7d4758a44262d52ac5367b682b9539c99de4b",
+    "e2e/fixtures/overheadCandidate.ts": "a80c3934fd660dd52e9a05ac0dc31b05ff9afd520bf6fd916683cc3823ddbfd7",
+    "scripts/test-overhead-candidate.mjs": "9b9402f786b1f3703a78b178da35d3030ec562f04d51027f16225a8bab60dbba",
+    "vite.config.ts": "86bb8e81d20d3c53ee7b9ed796d42247817532265372fc5be42d52760251a105",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "after": {
+    "src/posture/armOverheadObservation.ts": "87c73d06e6bf1643a72f73d299f3a0400f656f16cbe44833e6047e3d835229ea",
+    "src/posture/shoulderShrugObservation.ts": "5778261aee044041b6558ade91c0cebd856aa69a3e203aa30006e26018862a7e",
+    "src/posture/thresholds.ts": "c3acef188ba9fe22be26e4fc0a10659556d53aaa5f842556d2b340bf5bcbc328",
+    "src/stretch/overheadCandidateClassifier.ts": "cb927066e09d1a7fe5992090f8ae5a97383b00ede4ffcc22396b20968e7b7c6f",
+    "src/coaching/overheadCandidateFeedback.ts": "c28cad98050d4b3f593900a555439277f4632fd8a1645fb558f06a39b5f379a5",
+    "src/coaching/session.ts": "3799bfdce8e829899f986b97770ce82a7bf4dd2932d0607060a513f23e080598",
+    "src/coaching/resources.ts": "0832d662b19b522153f7e13507147a7b33f264d0eee94f10e07e06758d1fa029",
+    "src/stretch/progression.ts": "7c4df968a9b77fe78e20e92d2fa58951b7d0a7dc0b0df70e3330599ea1b6137a",
+    "src/coaching/resultRecord.ts": "10fc89e732376eb70b61720cab95685a7f26a59f4c760e4578a8af3536f1a64e",
+    "src/api/records.ts": "7be83758ef01db697998a4630fea7b7847a641e3398b3f1fb04cb49634ed0e7a",
+    "src/api/auth.ts": "0193700ff7ef9207ccb0329c37a7d4758a44262d52ac5367b682b9539c99de4b",
+    "e2e/fixtures/overheadCandidate.ts": "a80c3934fd660dd52e9a05ac0dc31b05ff9afd520bf6fd916683cc3823ddbfd7",
+    "scripts/test-overhead-candidate.mjs": "9b9402f786b1f3703a78b178da35d3030ec562f04d51027f16225a8bab60dbba",
+    "vite.config.ts": "86bb8e81d20d3c53ee7b9ed796d42247817532265372fc5be42d52760251a105",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "cases": [
+    "left and right hold completion each requires neutral start and return",
+    "two repetitions per arm require all four actual returns",
+    "existing result contract writes bounded summary only to mock same-origin HTTP",
+    "wrong-arm does not accrue target hold or fabricate completion",
+    "both-arms does not accrue target hold or fabricate completion",
+    "head does not accrue target hold or fabricate completion",
+    "trunk does not accrue target hold or fabricate completion",
+    "elbow does not accrue target hold or fabricate completion",
+    "hips revokes the previous target rather than bridging hold",
+    "presence revokes the previous target rather than bridging hold",
+    "multiple revokes the previous target rather than bridging hold",
+    "gap revokes the previous target rather than bridging hold",
+    "false validation gate acquires no resource and cannot be bypassed",
+    "revoked authentication ends rather than completing a candidate",
+    "pause retires the old cohort and only a fresh generation can observe after resume"
+  ],
+  "saved": [
+    {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "motion_id": "arm-overhead",
+      "protocol_version": "math-overhead-v1",
+      "started_at": "2026-10-17T00:00:00.000Z",
+      "ended_at": "2026-10-17T00:00:00.160Z",
+      "outcome": "completed",
+      "observed_ms": 100,
+      "repetitions": 0
+    }
+  ],
+  "failure": null
+}

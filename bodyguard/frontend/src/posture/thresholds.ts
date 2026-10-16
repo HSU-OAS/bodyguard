@@ -170,3 +170,90 @@ export function copyShrugReviewCriteria(value: ShrugReviewCriteria): ShrugReview
     throw invalid()
   }
 }
+
+// FR-S-02/04: explicit projected review bands, never a clinical protocol/default.
+export type OverheadReviewCriteria = Readonly<{
+  scope: 'image-plane-candidate-only'
+  version: string
+  minimumConfidence: number
+  maxFrameAgeMs: number
+  maxFrameGapMs: number
+  neutralUpperArmDownRad: ReviewBand
+  targetUpperArmDownRad: ReviewBand
+  neutralWristAboveFace: ReviewBand
+  targetWristAboveFace: ReviewBand
+  neutralElbowRad: ReviewBand
+  targetElbowRad: ReviewBand
+  hipAxisRad: ReviewBand
+  headAxisRad: ReviewBand
+  headHeight: ReviewBand
+  headAlongHip: ReviewBand
+  trunkLeanRad: ReviewBand
+}>
+export function copyOverheadReviewCriteria(value: OverheadReviewCriteria): OverheadReviewCriteria {
+  const invalid = () => new Error('Invalid overhead candidate criteria')
+  try {
+    const row = {
+      scope: value.scope,
+      version: value.version,
+      minimumConfidence: value.minimumConfidence,
+      maxFrameAgeMs: value.maxFrameAgeMs,
+      maxFrameGapMs: value.maxFrameGapMs,
+    }
+    if (
+      row.scope !== 'image-plane-candidate-only' ||
+      typeof row.version !== 'string' ||
+      !/^[a-z0-9][a-z0-9.-]{0,63}$/.test(row.version) ||
+      !Number.isFinite(row.minimumConfidence) ||
+      row.minimumConfidence <= 0 ||
+      row.minimumConfidence > 1 ||
+      ![row.maxFrameAgeMs, row.maxFrameGapMs].every(
+        (n) => Number.isFinite(n) && n > 0 && n <= Number.MAX_SAFE_INTEGER,
+      )
+    )
+      throw invalid()
+    const band = (b: ReviewBand, kind: 'free' | 'angle' | 'signed' | 'positive'): ReviewBand => {
+      if (!Array.isArray(b) || b.length !== 2) throw invalid()
+      const [lo, hi] = b
+      if (
+        ![lo, hi].every(Number.isFinite) ||
+        !Number.isFinite(hi - lo) ||
+        hi - lo <= NECK_FLOAT_ROUND_OFF * 4 * Math.max(1, Math.abs(lo), Math.abs(hi)) ||
+        (kind === 'angle' && (lo < 0 || hi > Math.PI)) ||
+        (kind === 'signed' && (lo <= -Math.PI / 2 || hi >= Math.PI / 2)) ||
+        (kind === 'positive' && lo <= 0)
+      )
+        throw invalid()
+      return Object.freeze([lo, hi])
+    }
+    const neutralUpperArmDownRad = band(value.neutralUpperArmDownRad, 'angle'),
+      targetUpperArmDownRad = band(value.targetUpperArmDownRad, 'angle'),
+      neutralWristAboveFace = band(value.neutralWristAboveFace, 'free'),
+      targetWristAboveFace = band(value.targetWristAboveFace, 'positive')
+    const separated = (neutral: ReviewBand, target: ReviewBand) =>
+      target[0] - neutral[1] >
+      NECK_FLOAT_ROUND_OFF * 4 * Math.max(1, Math.abs(target[0]), Math.abs(neutral[1]))
+    if (
+      !separated(neutralUpperArmDownRad, targetUpperArmDownRad) ||
+      !separated(neutralWristAboveFace, targetWristAboveFace) ||
+      neutralWristAboveFace[1] >= 0
+    )
+      throw invalid()
+    return Object.freeze({
+      ...row,
+      neutralUpperArmDownRad,
+      targetUpperArmDownRad,
+      neutralWristAboveFace,
+      targetWristAboveFace,
+      neutralElbowRad: band(value.neutralElbowRad, 'angle'),
+      targetElbowRad: band(value.targetElbowRad, 'angle'),
+      hipAxisRad: band(value.hipAxisRad, 'signed'),
+      headAxisRad: band(value.headAxisRad, 'signed'),
+      headHeight: band(value.headHeight, 'positive'),
+      headAlongHip: band(value.headAlongHip, 'free'),
+      trunkLeanRad: band(value.trunkLeanRad, 'signed'),
+    })
+  } catch {
+    throw invalid()
+  }
+}
