@@ -5,6 +5,9 @@ declare global {
   interface Window {
     workspaceAvatarFixture: {
       angle: number
+      headAngle: number
+      handBend: number
+      details: boolean
       empty: boolean
       starts: number
       stops: number
@@ -12,7 +15,16 @@ declare global {
     }
   }
 }
-window.workspaceAvatarFixture = { angle: 0, empty: false, starts: 0, stops: 0, reads: 0 }
+window.workspaceAvatarFixture = {
+  angle: 0,
+  headAngle: 0,
+  handBend: 0,
+  details: true,
+  empty: false,
+  starts: 0,
+  stops: 0,
+  reads: 0,
+}
 export function createCameraPreparation(options: {
   allowed(): boolean
   onState(state: PreparationState): void
@@ -86,12 +98,36 @@ export function createCameraPreparation(options: {
           y = world[i].y - world[11].y
         world[i] = { ...world[i], x: world[11].x + x * c - y * s, y: world[11].y + x * s + y * c }
       }
+      // Generated palm/finger directions; not captured from a person or an SDK result.
+      const hands = (['left', 'right'] as const).map((side) => {
+        const hand = Array.from({ length: 21 }, () => ({ x: 0, y: 0, z: 0 }))
+        for (let digit = 0; digit < 5; digit++) {
+          const start = digit * 4 + 1
+          hand[start] = { x: (2 - digit) * 0.04, y: -0.1, z: 0 }
+          for (let joint = 1; joint <= 3; joint++) {
+            const previous = hand[start + joint - 1]
+            hand[start + joint] = {
+              x: previous.x,
+              y: previous.y - 0.03 * Math.cos(f.handBend * joint),
+              z: previous.z - 0.03 * Math.sin(f.handBend * joint),
+            }
+          }
+        }
+        return { side, landmarks: hand.map(() => ({ x: 0.5, y: 0.5, z: 0 })), worldLandmarks: hand }
+      })
       return {
         generation,
         sequence: ++sequence,
         at: performance.now(),
         image: { width: 640, height: 480, imageIsMirrored: false },
-        result: { landmarks: f.empty ? [] : [points], worldLandmarks: f.empty ? [] : [world] },
+        result: {
+          landmarks: f.empty ? [] : [points],
+          worldLandmarks: f.empty ? [] : [world],
+          headOrientation: f.details
+            ? [0, 0, Math.sin(f.headAngle / 2), Math.cos(f.headAngle / 2)]
+            : null,
+          hands: f.details ? hands : [],
+        },
       }
     },
   })

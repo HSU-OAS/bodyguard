@@ -10,12 +10,16 @@ import {
 } from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { ResourceCleanupError, type ResourceContext } from '../coaching/resources'
+import { createHeadRotationRig } from './headOrientationRig'
+import { hasSingleDisplayBody, readDetailAlignment } from './observedDetailAlignment'
+import { copyHandObservations, createObservedHandRig } from './observedHandRig'
 import type { PoseRigFrame } from './observedPoseRig'
 import { prepareOwnedAvatarPair } from './ownedAvatarPair'
 import { prepareAvatarStage } from './prepareAvatarStage'
 import { type AvatarGender, REVIEW_AVATAR_ASSETS } from './reviewAvatarAssets'
 
 export type AvatarView = 'full' | 'upper' | 'detail'
+export type DetailAlignmentStatus = 'idle' | 'waiting' | 'aligned' | 'partial' | 'unavailable'
 export type WorkspaceAvatar = Awaited<ReturnType<typeof prepareWorkspaceAvatar>>
 
 export async function prepareWorkspaceAvatar(
@@ -28,6 +32,11 @@ export async function prepareWorkspaceAvatar(
   let pair: Awaited<ReturnType<typeof prepareOwnedAvatarPair>> | undefined
   let renderer: WebGLRenderer | undefined
   let resize: ResizeObserver | undefined
+  let head: ReturnType<typeof createHeadRotationRig> | undefined
+  let hands: ReturnType<typeof createObservedHandRig> | undefined
+  let alignment: DetailAlignmentStatus = 'idle'
+  let requestedAfter = -Infinity
+  let lastSequence = 0
   let closed = false,
     cleanupFailed = false
   let width = 0,
@@ -46,6 +55,8 @@ export async function prepareWorkspaceAvatar(
       canvas.removeEventListener('webglcontextlost', lost)
       for (const release of [
         () => resize?.disconnect(),
+        () => head?.dispose(),
+        () => hands?.dispose(),
         () => {
           renderer?.setScissorTest(false)
           renderer?.clear()
@@ -188,10 +199,49 @@ export async function prepareWorkspaceAvatar(
     draw('full')
     const owned = pair
     return Object.freeze({
-      observe: (frame: PoseRigFrame) => !closed && owned.observe(frame),
+      alignOnNextFrame() {
+        if (closed || context.signal.aborted) return false
+        head?.dispose()
+        hands?.dispose()
+        head = hands = undefined
+        requestedAfter = performance.now()
+        alignment = 'waiting'
+        return true
+      },
+      getAlignmentStatus: () => alignment,
+      observe(frame: PoseRigFrame) {
+        if (closed || context.signal.aborted || !owned.observe(frame)) return false
+        // The body-only rig allows equal timestamps; detail drivers never refresh from them.
+        if (frame.sequence <= lastSequence) return false
+        lastSequence = frame.sequence
+        if (alignment === 'waiting' && frame.at >= requestedAfter) {
+          const captured = readDetailAlignment(frame, context.generation, performance.now(), 1000)
+          const common = { context, mirror: true, halfLifeMs: 50, maxAgeMs: 1000 }
+          try {
+            if (captured?.head)
+              head = createHeadRotationRig(models[1], { ...common, ...captured.head })
+            if (captured?.hands)
+              hands = createObservedHandRig(models[1], { ...common, ...captured.hands })
+            alignment = head && hands ? 'aligned' : head || hands ? 'partial' : 'unavailable'
+          } catch {
+            head?.dispose()
+            hands?.dispose()
+            head = hands = undefined
+            alignment = 'unavailable'
+          }
+        }
+        const single = hasSingleDisplayBody(frame)
+        const stamp = { generation: frame.generation, sequence: frame.sequence, at: frame.at }
+        head?.push({ ...stamp, rotation: single ? (frame.result.headOrientation ?? null) : null })
+        hands?.push({ ...stamp, hands: single ? copyHandObservations(frame.result.hands) : [] })
+        return true
+      },
       render: (now: number, deltaMs: number, view: AvatarView) => {
         if (closed || context.signal.aborted) return
+        if (alignment === 'waiting' && now - requestedAfter > 1000) alignment = 'unavailable'
         owned.render(now, deltaMs)
+        head?.render(now, deltaMs)
+        hands?.render(now, deltaMs)
         draw(view)
       },
       dispose,

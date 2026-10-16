@@ -178,6 +178,24 @@ function candidates(
   return result
 }
 
+// FR-A-01/03: explicit display alignment only; never sampled as a correct hand pose.
+export function readHandCameraReferences(
+  hands: readonly HandObservation[] | undefined,
+): HandDisplayAlignment['cameraReferences'] | null {
+  try {
+    const palms = candidates(copyHandObservations(hands), false, new Quaternion())
+    const left = palms.get('left'),
+      right = palms.get('right')
+    if (!left || !right) return null
+    return Object.freeze({
+      left: Object.freeze(left.palm.toArray()),
+      right: Object.freeze(right.palm.toArray()),
+    })
+  } catch {
+    return null
+  }
+}
+
 /** Explicit display reference, never auto-neutral calibration. Wrist uses a palm plane;
  * each finger segment uses swing only and retains authored twist. Missing joints freeze
  * local pose (moving parents may still move world pose), with zero observation coverage.

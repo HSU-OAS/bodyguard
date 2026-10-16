@@ -54,7 +54,13 @@ function fixture(held = false) {
     }
     return camera
   })
-  const view = { observe: vi.fn(() => true), render: vi.fn(), dispose: vi.fn() }
+  const view = {
+    observe: vi.fn(() => true),
+    render: vi.fn(),
+    dispose: vi.fn(),
+    alignOnNextFrame: vi.fn(() => true),
+    getAlignmentStatus: vi.fn(() => 'idle' as const),
+  }
   let resolve!: (v: WorkspaceAvatar) => void
   vi.mocked(prepareWorkspaceAvatar).mockImplementation(() =>
     held
@@ -186,4 +192,19 @@ it('model/context failure stops capture and does not loop automatic model or cam
   await f.tick(observation(2))
   expect(prepareWorkspaceAvatar).toHaveBeenCalledTimes(1)
   expect(f.camera.start).toHaveBeenCalledTimes(1)
+})
+
+it('only offers explicit detail alignment after model readiness and clears it on stop', async () => {
+  const f = fixture()
+  expect(screen.getByRole('button', { name: '움직임 맞추기' }).hasAttribute('disabled')).toBe(true)
+  await f.open()
+  await f.tick(observation(1))
+  fireEvent.click(screen.getByRole('button', { name: '움직임 맞추기' }))
+  expect(f.view.alignOnNextFrame).toHaveBeenCalledTimes(1)
+  expect(screen.getByRole('button', { name: '움직임 맞추는 중' }).hasAttribute('disabled')).toBe(
+    true,
+  )
+  fireEvent.click(screen.getByRole('button', { name: '카메라 끄기' }))
+  await act(async () => {})
+  expect(screen.getByRole('button', { name: '움직임 맞추기' }).hasAttribute('disabled')).toBe(true)
 })

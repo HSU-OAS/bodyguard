@@ -2,6 +2,8 @@
 // FR-A-01/03·NFR-08: renderer/loader faults only, not real model or body accuracy.
 import { BoxGeometry, Group, Mesh, MeshStandardMaterial } from 'three'
 import { afterEach, beforeEach, expect, it, vi } from 'vitest'
+import { createHeadRotationRig } from './headOrientationRig'
+import { createObservedHandRig } from './observedHandRig'
 import { prepareOwnedAvatarPair } from './ownedAvatarPair'
 import { REVIEW_AVATAR_ASSETS } from './reviewAvatarAssets'
 import { prepareWorkspaceAvatar } from './workspaceAvatar'
@@ -49,6 +51,18 @@ vi.mock('three/addons/loaders/GLTFLoader.js', () => ({
   },
 }))
 vi.mock('./ownedAvatarPair', () => ({ prepareOwnedAvatarPair: vi.fn() }))
+const details = vi.hoisted(() => ({
+  head: { push: vi.fn(), render: vi.fn(), dispose: vi.fn() },
+  hands: { push: vi.fn(), render: vi.fn(), dispose: vi.fn() },
+}))
+vi.mock('./headOrientationRig', async (original) => ({
+  ...(await original<typeof import('./headOrientationRig')>()),
+  createHeadRotationRig: vi.fn(() => details.head),
+}))
+vi.mock('./observedHandRig', async (original) => ({
+  ...(await original<typeof import('./observedHandRig')>()),
+  createObservedHandRig: vi.fn(() => details.hands),
+}))
 function fixture() {
   const models = ['reference', 'user'].map((name) => {
     const root = new Group()
@@ -109,7 +123,60 @@ beforeEach(() => {
 })
 afterEach(() => {
   vi.clearAllMocks()
+  vi.restoreAllMocks()
   vi.unstubAllGlobals()
+})
+
+it('requires an explicit request and a subsequently captured frame for head alignment', async () => {
+  const f = fixture(),
+    view = await f.start()
+  const body = Array.from({ length: 33 }, () => ({ x: 0.5, y: 0.5, z: 0 }))
+  const observation = (sequence: number, at: number) => ({
+    generation: 7,
+    sequence,
+    at,
+    result: { landmarks: [body], worldLandmarks: [body], headOrientation: [0, 0, 0, 1] },
+  })
+  view.observe(observation(1, 90))
+  expect(createHeadRotationRig).not.toHaveBeenCalled()
+  vi.spyOn(performance, 'now').mockReturnValue(100)
+  expect(view.alignOnNextFrame()).toBe(true)
+  view.observe(observation(2, 99))
+  expect(createHeadRotationRig).not.toHaveBeenCalled()
+  view.observe(observation(3, 100))
+  expect(createHeadRotationRig).toHaveBeenCalledExactlyOnceWith(
+    f.pair.models[1],
+    expect.objectContaining({ cameraReference: [0, 0, 0, 1], mirror: true }),
+  )
+  expect(createObservedHandRig).not.toHaveBeenCalled()
+  expect(view.getAlignmentStatus()).toBe('partial')
+  expect(details.head.push).toHaveBeenLastCalledWith(
+    expect.objectContaining({ sequence: 3, rotation: [0, 0, 0, 1] }),
+  )
+  view.observe({
+    ...observation(4, 110),
+    result: { landmarks: [], worldLandmarks: [], headOrientation: [0, 0, 0, 1] },
+  })
+  expect(details.head.push).toHaveBeenLastCalledWith(
+    expect.objectContaining({ sequence: 4, rotation: null }),
+  )
+  view.render(110, 10, 'full')
+  expect(details.head.render).toHaveBeenCalledWith(110, 10)
+  f.abort.abort()
+  view.dispose()
+  expect(details.head.dispose).toHaveBeenCalledTimes(1)
+  expect(view.alignOnNextFrame()).toBe(false)
+})
+
+it('expires a requested alignment without a fresh frame instead of waiting forever or auto-retrying', async () => {
+  const f = fixture(),
+    view = await f.start()
+  vi.spyOn(performance, 'now').mockReturnValue(100)
+  view.alignOnNextFrame()
+  view.render(1101, 16, 'full')
+  expect(view.getAlignmentStatus()).toBe('unavailable')
+  expect(createHeadRotationRig).not.toHaveBeenCalled()
+  view.dispose()
 })
 
 it('renders one shared canvas as independent left-user/right-reference viewports and disposes once', async () => {

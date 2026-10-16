@@ -2,7 +2,7 @@
 import { type RefObject, useLayoutEffect, useRef, useState } from 'react'
 import { useAuth } from '../auth'
 import type { AvatarGender } from '../avatar/reviewAvatarAssets'
-import type { AvatarView, WorkspaceAvatar } from '../avatar/workspaceAvatar'
+import type { AvatarView, DetailAlignmentStatus, WorkspaceAvatar } from '../avatar/workspaceAvatar'
 import type { Motion } from '../catalog/motions'
 import { ResourceCleanupError } from '../coaching/resources'
 import { createCameraPreparation, type PreparationState } from '../pose/cameraPreparation'
@@ -48,6 +48,8 @@ export function CameraPreparation({ motion, avatar }: { motion?: Motion; avatar?
   const [state, setState] = useState<PreparationState>({ phase: 'idle' })
   const [framing, setFraming] = useState<CameraFramingStatus | null>(null)
   const [avatarPreparing, setAvatarPreparing] = useState(false)
+  const [detailAlignment, setDetailAlignment] = useState<DetailAlignmentStatus | 'off'>('off')
+  const alignDetails = useRef<(() => void) | null>(null)
   const reference = useCameraReference(motionId)
   const referencePort = useRef(reference)
   referencePort.current = reference
@@ -81,6 +83,8 @@ export function CameraPreparation({ motion, avatar }: { motion?: Motion; avatar?
       const owned = avatarOwner,
         pending = avatarJob
       avatarOwner = undefined
+      alignDetails.current = null
+      if (!disposed) setDetailAlignment('off')
       try {
         owned?.dispose()
       } catch {
@@ -151,6 +155,10 @@ export function CameraPreparation({ motion, avatar }: { motion?: Motion; avatar?
             return
           }
           avatarOwner = prepared
+          alignDetails.current = () => {
+            if (prepared.alignOnNextFrame()) setDetailAlignment('waiting')
+          }
+          setDetailAlignment('idle')
           setAvatarPreparing(false)
           publishAvatar('ready')
         })
@@ -230,6 +238,7 @@ export function CameraPreparation({ motion, avatar }: { motion?: Motion; avatar?
               previousNow === undefined ? 0 : now - previousNow,
               avatarPort.current?.view ?? 'full',
             )
+            if (avatarOwner) setDetailAlignment(avatarOwner.getAlignmentStatus())
           } catch {
             avatarError = true
             publishAvatar('error')
@@ -367,6 +376,27 @@ export function CameraPreparation({ motion, avatar }: { motion?: Motion; avatar?
         reference={reference}
         observing={state.phase === 'observing' && !avatarPreparing}
       />
+      {avatar && (
+        <div className="coaching-tools">
+          <button
+            type="button"
+            className="button secondary"
+            disabled={detailAlignment === 'off' || detailAlignment === 'waiting'}
+            onClick={() => alignDetails.current?.()}
+          >
+            {detailAlignment === 'waiting' ? '움직임 맞추는 중' : '움직임 맞추기'}
+          </button>
+          <p className="small muted" role="status" aria-label="머리·손 표시 정렬">
+            {detailAlignment === 'aligned'
+              ? '머리·손 표시 기준 설정됨'
+              : detailAlignment === 'partial'
+                ? '일부 연결됨 · 얼굴과 양손을 보여주고 다시 맞춰주세요.'
+                : detailAlignment === 'unavailable'
+                  ? '얼굴과 양손을 보여주고 다시 맞춰주세요.'
+                  : '정면을 보고 양손을 편 뒤 맞춰주세요. 올바른 자세 판정은 아닙니다.'}
+          </p>
+        </div>
+      )}
     </section>
   )
 }

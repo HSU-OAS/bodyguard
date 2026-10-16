@@ -12,6 +12,8 @@ import config from '../vite.config.ts'
 const sourceFiles = [
   'src/avatar/workspaceAvatar.ts',
   'src/avatar/reviewAvatarAssets.ts',
+  'src/avatar/observedDetailAlignment.ts',
+  'src/avatar/observedHandRig.ts',
   'src/pages/CameraPreparation.tsx',
   'src/pages/CoachingPage.tsx',
   'src/pages/CoachingPage.css',
@@ -67,6 +69,20 @@ const server = await createServer(
         enforce: 'pre',
         load(id) {
           if (id.split('?')[0] === target) return source
+        },
+        transform(code, id) {
+          if (id.split('?')[0] !== resolve('src/avatar/workspaceAvatar.ts')) return
+          // Technical coverage only in this synthetic harness, never product diagnostics/points.
+          assert(code.includes('head?.render(now, deltaMs)'))
+          return code
+            .replace(
+              'head?.render(now, deltaMs)',
+              'window.workspaceViewProof.head = head?.render(now, deltaMs)',
+            )
+            .replace(
+              'hands?.render(now, deltaMs)',
+              'window.workspaceViewProof.hands = hands?.render(now, deltaMs)',
+            )
         },
       },
     ],
@@ -179,6 +195,55 @@ try {
   cases.push(
     'real professional GLB + eight-weight owned pair: left synthetic limbs move; right reference pixels unchanged',
   )
+  await page.getByRole('button', { name: '움직임 맞추기', exact: true }).click()
+  await page.getByText('머리·손 표시 기준 설정됨', { exact: true }).waitFor()
+  // Footer clicks scroll the page; compare the original full canvas, not lower-body crops.
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }))
+  await page.waitForTimeout(1000)
+  assert.deepEqual(await canvas.boundingBox(), clip)
+  const alignedLeft = await page.screenshot({ clip: left }),
+    alignedRight = await page.screenshot({ clip: right })
+  await page.evaluate(() => {
+    window.workspaceAvatarFixture.headAngle = 0.5
+  })
+  await page.waitForTimeout(1000)
+  const headMoved = await page.screenshot({ clip: left })
+  console.log(
+    JSON.stringify({
+      detailCoverage: await page.evaluate(() => ({
+        head: window.workspaceViewProof.head,
+        hands: window.workspaceViewProof.hands,
+      })),
+    }),
+  )
+  assert.notEqual(sha(alignedLeft), sha(headMoved))
+  assert.equal(sha(alignedRight), sha(await page.screenshot({ clip: right })))
+  writeFileSync(`${scratch}/${label}-head-moved.png`, headMoved, { flag: 'wx' })
+  cases.push(
+    'explicit fresh-frame display alignment: only left head changes, reference pixels unchanged',
+  )
+  await page.evaluate(() => {
+    window.workspaceAvatarFixture.handBend = 0.5
+  })
+  await page.waitForTimeout(1000)
+  const fingersMoved = await page.screenshot({ clip: left })
+  assert.notEqual(sha(headMoved), sha(fingersMoved))
+  assert.equal(sha(alignedRight), sha(await page.screenshot({ clip: right })))
+  writeFileSync(`${scratch}/${label}-fingers-moved.png`, fingersMoved, { flag: 'wx' })
+  cases.push(
+    'same-frame generated finger bends change only left model; no reference or coaching verdict',
+  )
+  await page.evaluate(() => {
+    window.workspaceAvatarFixture.details = false
+  })
+  await page.getByRole('button', { name: '움직임 맞추기', exact: true }).click()
+  await page.getByText('얼굴과 양손을 보여주고 다시 맞춰주세요.', { exact: true }).waitFor()
+  cases.push(
+    'explicit real UI alignment without supplied face/hands fails visibly, no invented reference',
+  )
+  await page.evaluate(() => {
+    window.workspaceAvatarFixture.details = true
+  })
   const starts = await page.evaluate(() => window.workspaceAvatarFixture.starts)
   const viewHashes = []
   for (const name of ['상반신', '자세히', '전신']) {
@@ -202,6 +267,10 @@ try {
     'full/upper/detail display controls do not reacquire camera/model or enable coaching/reference verdict',
   )
   await stop()
+  assert.equal(
+    await page.getByRole('button', { name: '움직임 맞추기', exact: true }).isDisabled(),
+    true,
+  )
   const draws = await page.evaluate(() => window.workspaceViewProof.draws)
   await page.waitForTimeout(100)
   assert.equal(await page.evaluate(() => window.workspaceViewProof.draws), draws)
@@ -213,6 +282,8 @@ try {
   await open()
   await ready()
   assert.equal(assets.at(-1), '/__bodyguard/review-avatar/female.glb')
+  await page.getByRole('button', { name: '움직임 맞추기', exact: true }).click()
+  await page.getByText('머리·손 표시 기준 설정됨', { exact: true }).waitFor()
   await page.setViewportSize({ width: 800, height: 1000 })
   await page.waitForTimeout(100)
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true)
