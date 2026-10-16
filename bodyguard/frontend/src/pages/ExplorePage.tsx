@@ -1,10 +1,18 @@
 // FR-S-06/FR-U-04: protected entry paths; no unvalidated coaching or camera access.
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { Link } from 'react-router'
 import { recommendationReadiness, releasedMotionIds } from '../catalog/recommendation'
 import './ExplorePage.css'
 
-export function ExplorePage() {
+// FR-S-06: compile the entire private catalogue/import side effects out of public builds.
+const ReviewRecommendations = import.meta.env.DEV
+  ? lazy(() =>
+      import('./CameraRecommendations').then((module) => ({
+        default: module.CameraRecommendations,
+      })),
+    )
+  : undefined
+export function ExplorePage({ reviewCamera = false }: { reviewCamera?: boolean }) {
   const [mode, setMode] = useState<'select' | 'recommend'>('select')
   const [purpose, setPurpose] = useState<'neck' | 'shoulder' | 'torso' | null>(null)
   const readiness = recommendationReadiness({ purpose, bodyCheck: 'not-started' })
@@ -68,10 +76,18 @@ export function ExplorePage() {
               </label>
             ))}
           </fieldset>
-          <p role="status">{readiness.message}</p>
-          <p className="small muted">
-            신체 확인과 맞춤 추천은 준비 중입니다. 카메라는 켜지지 않습니다.
-          </p>
+          {reviewCamera && ReviewRecommendations && purpose ? (
+            <Suspense fallback={<p role="status">촬영 안내를 준비하고 있습니다.</p>}>
+              <ReviewRecommendations key={purpose} purpose={purpose} />
+            </Suspense>
+          ) : (
+            <>
+              <p role="status">{readiness.message}</p>
+              <p className="small muted">
+                신체 확인과 맞춤 추천은 준비 중입니다. 카메라는 켜지지 않습니다.
+              </p>
+            </>
+          )}
           <button type="button" className="button secondary" onClick={() => setMode('select')}>
             직접 선택으로 이동
           </button>

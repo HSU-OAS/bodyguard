@@ -2,6 +2,11 @@
 import { type RefObject, useLayoutEffect, useRef, useState } from 'react'
 import { useAuth } from '../auth'
 import type { ReferenceStage } from '../avatar/referenceStage'
+import {
+  type CameraRecommendations,
+  createCameraRecommendations,
+  type RecommendationPurpose,
+} from '../catalog/cameraRecommendations'
 import type { Motion } from '../catalog/motions'
 import { createCameraPreparation, type PreparationState } from '../pose/cameraPreparation'
 import { DEFAULT_POSE_MODEL } from '../pose/constants'
@@ -31,9 +36,14 @@ let retirementFailed = false
 export function CameraPreparation({
   motion,
   comparison,
+  recommendation,
 }: {
   motion?: Motion
   comparison?: RefObject<ReferenceStage | null>
+  recommendation?: Readonly<{
+    purpose: RecommendationPurpose
+    onResult(value: CameraRecommendations | null): void
+  }>
 }) {
   const motionId = motion?.id ?? null
   const { state: account } = useAuth()
@@ -44,6 +54,9 @@ export function CameraPreparation({
   const [state, setState] = useState<PreparationState>({ phase: 'idle' })
   const [framing, setFraming] = useState<CameraFramingStatus | null>(null)
   const [displayReady, setDisplayReady] = useState(false)
+  const [recommendationState, setRecommendationState] = useState<CameraRecommendations | null>(null)
+  const collectRecommendation = useRef<(() => Promise<void>) | null>(null)
+  const cancelCollection = useRef<(() => void) | null>(null)
   const reference = useCameraReference(motionId)
   const referencePort = useRef(reference)
   referencePort.current = reference
@@ -54,6 +67,8 @@ export function CameraPreparation({
     if (account.status !== 'ready' || accountId === null) return
     const id = accountId
     let disposed = false
+    let intent = 0,
+      collecting = false
     let current: ReturnType<typeof createCameraPreparation> | undefined
     let animation: number | undefined
     let display: ReferenceStage | null = null,
@@ -74,6 +89,11 @@ export function CameraPreparation({
     const requirement = motionId === null ? null : motionFramingRequirement(motionId)
     let observer = requirement ? createCameraFraming(requirement) : null
     let previous: CameraFramingStatus | null = null
+    const check = recommendation ? createCameraRecommendations(recommendation.purpose) : null
+    let previousCheck: CameraRecommendations | null = null
+    cancelCollection.current = () => {
+      intent++
+    }
     const initialize = () => {
       if (disposed || live.current !== account) return
       if (retirementFailed) {
@@ -105,6 +125,10 @@ export function CameraPreparation({
               previous = null
               setFraming(null)
               observer = requirement ? createCameraFraming(requirement) : null
+              check?.reset()
+              previousCheck = null
+              setRecommendationState(null)
+              recommendation?.onResult(null)
             }
           }
         },
@@ -112,6 +136,47 @@ export function CameraPreparation({
       owner.current = current
       setState({ phase: 'idle' })
       setFraming(null)
+      collectRecommendation.current = async () => {
+        const original = current
+        if (
+          !import.meta.env.DEV ||
+          collecting ||
+          disposed ||
+          !original ||
+          original.state.phase !== 'observing' ||
+          live.current !== account ||
+          document.visibilityState !== 'visible'
+        )
+          return
+        const captured = check?.read(performance.now())
+        if (captured?.status !== 'ready') return
+        const own = ++intent
+        collecting = true
+        try {
+          await original.stop()
+          if (
+            disposed ||
+            own !== intent ||
+            owner.current !== original ||
+            live.current !== account ||
+            document.visibilityState !== 'visible'
+          )
+            return
+          const stopped = owner.current?.state
+          if (stopped?.phase === 'error') {
+            if (stopped.reason === 'cleanup') retirementFailed = true
+            return
+          }
+          if (stopped?.phase !== 'idle') return
+          recommendation?.onResult(captured)
+        } catch {
+          if (!disposed && own === intent && live.current === account)
+            setState({ phase: 'error', reason: 'cleanup' })
+          retirementFailed = true
+        } finally {
+          collecting = false
+        }
+      }
       // Consume the existing copied slot once; never capture/re-infer on render or retain arrays.
       const tick = () => {
         if (disposed || live.current !== account) return
@@ -122,7 +187,8 @@ export function CameraPreparation({
           if (stage !== display) suspendDisplay()
           if (input) {
             observer?.accept(input, now)
-            referencePort.current.accept(input, now)
+            check?.accept(input, now)
+            if (!recommendation) referencePort.current.accept(input, now)
             try {
               if (stage && (stage !== display || displayGeneration !== input.generation)) {
                 if (!stage.beginObservation(input.generation)) throw new Error()
@@ -135,11 +201,16 @@ export function CameraPreparation({
               void current.stop()
             }
           }
-          referencePort.current.tick(now)
+          if (!recommendation) referencePort.current.tick(now)
           const next = observer?.read(now) ?? null
           if (next !== previous) {
             previous = next
             setFraming(next)
+          }
+          const summary = check?.read(now) ?? null
+          if (summary !== previousCheck) {
+            previousCheck = summary
+            setRecommendationState(summary)
           }
         }
         animation = requestAnimationFrame(tick)
@@ -151,6 +222,7 @@ export function CameraPreparation({
       void retirement.then(initialize)
     } else initialize()
     const stop = () => {
+      intent++
       void current?.stop()
     }
     const hidden = () => {
@@ -160,6 +232,9 @@ export function CameraPreparation({
     window.addEventListener('pagehide', stop)
     return () => {
       disposed = true
+      intent++
+      collectRecommendation.current = null
+      cancelCollection.current = null
       suspendDisplay()
       if (animation !== undefined) cancelAnimationFrame(animation)
       observer = null
@@ -182,7 +257,7 @@ export function CameraPreparation({
         if (retirement === pending) retirement = undefined
       })
     }
-  }, [account, accountId, motionId, comparison])
+  }, [account, accountId, motionId, comparison, recommendation])
   const running = ['ready', 'preparing', 'connecting', 'observing'].includes(state.phase)
   const input = ['ready', 'connecting', 'observing'].includes(state.phase)
   return (
@@ -202,6 +277,7 @@ export function CameraPreparation({
             (state.phase === 'error' && state.reason === 'cleanup')
           }
           onClick={() => {
+            cancelCollection.current?.()
             if (running) void owner.current?.stop()
             else void owner.current?.start()
           }}
@@ -236,6 +312,16 @@ export function CameraPreparation({
             움직임 맞추기
           </button>
         )}
+        {recommendation && (
+          <button
+            className="button primary"
+            type="button"
+            disabled={state.phase !== 'observing' || recommendationState?.status !== 'ready'}
+            onClick={() => void collectRecommendation.current?.()}
+          >
+            촬영 조건으로 후보 보기
+          </button>
+        )}
         <p role={state.phase === 'error' ? 'alert' : 'status'}>
           {state.phase === 'error'
             ? errors[state.reason]
@@ -268,7 +354,17 @@ export function CameraPreparation({
       <p className="small muted">
         입력은 브라우저 안에서 처리합니다. 코칭·판정은 시작하지 않습니다.
       </p>
-      <CameraReferenceControls reference={reference} observing={state.phase === 'observing'} />
+      {recommendation ? (
+        <p className="small muted" role="status" aria-label="후보 촬영 조건">
+          {recommendationState?.status === 'ready'
+            ? '선택한 부위의 촬영 범위를 확인했습니다.'
+            : recommendationState?.status === 'one-person'
+              ? '한 사람만 화면에 들어오게 해 주세요.'
+              : '머리와 양쪽 어깨, 필요한 팔·몸통이 보이도록 준비해 주세요.'}
+        </p>
+      ) : (
+        <CameraReferenceControls reference={reference} observing={state.phase === 'observing'} />
+      )}
     </section>
   )
 }

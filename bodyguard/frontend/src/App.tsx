@@ -371,7 +371,7 @@ function Shell() {
             path="/explore"
             element={
               <SessionGate>
-                <ExplorePage />
+                <ExplorePage reviewCamera={import.meta.env.DEV} />
               </SessionGate>
             }
           />
