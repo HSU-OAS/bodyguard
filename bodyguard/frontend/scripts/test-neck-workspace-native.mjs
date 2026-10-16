@@ -8,8 +8,18 @@ import { chromium } from '@playwright/test'
 import { createServer, mergeConfig } from 'vite'
 import config from '../vite.config.ts'
 
-const [scratch, label] = process.argv.slice(2)
-assert(/^\/private\/tmp\/bodyguard-neck-(?:workspace|surface)\.[A-Za-z0-9]+$/.test(scratch))
+const [scratch, label, selected = 'neck-side'] = process.argv.slice(2)
+assert(selected === 'neck-side' || selected === 'shoulder-shrug')
+assert(
+  /^\/private\/tmp\/bodyguard-(?:neck-(?:workspace|surface)|shrug-workspace)\.[A-Za-z0-9]+$/.test(
+    scratch,
+  ),
+)
+const entry =
+    selected === 'shoulder-shrug'
+      ? 'e2e/fixtures/shrugWorkspaceEntry.tsx'
+      : 'e2e/fixtures/neckWorkspaceEntry.tsx',
+  preparation = selected === 'shoulder-shrug' ? '양쪽 · 준비' : '왼쪽 · 준비'
 assert(/^[a-z][a-z0-9-]+$/.test(label) && !existsSync(`${scratch}/${label}.json`))
 const files = [
   'src/coaching/neckWorkspacePlayback.ts',
@@ -20,6 +30,16 @@ const files = [
   'src/avatar/neckSurfaceFeedback.ts',
   'src/avatar/projectedSurfaceRegions.ts',
   'src/avatar/surfaceFeedback.ts',
+  'src/avatar/observedShoulderElevation.ts',
+  'src/avatar/observedPoseRig.ts',
+  'src/avatar/observedComparison.ts',
+  'src/stretch/shrugCandidateClassifier.ts',
+  'src/coaching/shrugCandidateFeedback.ts',
+  'src/posture/shoulderShrugObservation.ts',
+  'src/posture/thresholds.ts',
+  'e2e/fixtures/shrugWorkspaceEntry.tsx',
+  'e2e/fixtures/shrugWorkspaceSource.ts',
+  'e2e/fixtures/shrugCandidate.ts',
   'e2e/fixtures/neckWorkspaceEntry.tsx',
   'e2e/fixtures/neckWorkspaceSource.ts',
   'scripts/test-neck-workspace-native.mjs',
@@ -66,7 +86,7 @@ const server = await createServer(
         enforce: 'pre',
         resolveId(id, importer) {
           if (id === './pages/CoachingPage' && importer?.split('?')[0] === resolve('src/App.tsx'))
-            return resolve('e2e/fixtures/neckWorkspaceEntry.tsx')
+            return resolve(entry)
         },
       },
     ],
@@ -126,9 +146,9 @@ try {
   })
   assert.deepEqual(rafReceiver, { direct: 'TypeError', wrapped: 'ok' })
   page.on('pageerror', (error) => errors.push(error.message))
-  await page.goto(`${origin}dev/coaching?motion=neck-side`)
+  await page.goto(`${origin}dev/coaching?motion=${selected}`)
   await page.getByRole('button', { name: '검수 시작', exact: true }).click()
-  await page.getByText('왼쪽 · 준비', { exact: true }).waitFor({ timeout: 30000 })
+  await page.getByText(preparation, { exact: true }).waitFor({ timeout: 30000 })
   await page.waitForTimeout(1200)
   assert.equal(await page.getByRole('progressbar').getAttribute('value'), '0')
   assert.equal(await page.getByRole('alert').count(), 0)
@@ -144,7 +164,7 @@ try {
   await page.waitForFunction((node) => node.getContext('webgl2')?.isContextLost() === true, old)
   await old.dispose()
   await resume.click()
-  await page.getByText('왼쪽 · 준비', { exact: true }).waitFor({ timeout: 30000 })
+  await page.getByText(preparation, { exact: true }).waitFor({ timeout: 30000 })
   await page.waitForTimeout(600)
   assert.equal(await page.getByRole('alert').count(), 0)
   await page.getByRole('button', { name: '불편하면 중단', exact: true }).click()
@@ -153,7 +173,12 @@ try {
     () => window.nativeRunCounters.opens === 2 && window.nativeRunCounters.stops === 2,
   )
   await page.screenshot({ path: `${scratch}/${label}-stopped.png`, fullPage: true })
-  assert.equal(await page.getByText('왼쪽 · 완료', { exact: true }).count(), 0)
+  assert.equal(
+    await page
+      .getByText(selected === 'shoulder-shrug' ? '양쪽 · 완료' : '왼쪽 · 완료', { exact: true })
+      .count(),
+    0,
+  )
   assert.equal(writes, 0)
   assert.equal(external, 0)
   assert.deepEqual(errors, [])
@@ -189,6 +214,7 @@ try {
       {
         method:
           'actual Chrome blank fake device + actual Worker/MediaPipe/GLBs/native resource ownership; generated protocol/controlled auth, no person/accuracy/clinical proof',
+        motion: selected,
         version,
         rafReceiver,
         before,

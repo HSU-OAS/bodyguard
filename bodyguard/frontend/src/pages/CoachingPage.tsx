@@ -8,7 +8,7 @@ import { motionNavigationUrl } from '../catalog/motionNavigation'
 import { findMotions, motionById, type Region } from '../catalog/motions'
 import { CameraPreparation } from './CameraPreparation'
 import { MotionPreview } from './MotionPreview'
-import { NeckCoachingRun, type NeckRunConfiguration } from './NeckCoachingRun'
+import { type CandidateRunConfiguration, NeckCoachingRun } from './NeckCoachingRun'
 import { ReferenceDemonstration, type ReferenceStatus } from './ReferenceDemonstration'
 import './CoachingPage.css'
 
@@ -31,7 +31,7 @@ const regions = [
   ['torso', '상체'],
 ] as const
 
-export function CoachingPage({ run }: { run?: NeckRunConfiguration } = {}) {
+export function CoachingPage({ run }: { run?: CandidateRunConfiguration } = {}) {
   return run ? (
     <NeckCoachingRun key={run.criteria.version} configuration={run} />
   ) : (

@@ -6,36 +6,53 @@ import { closeCamera, openCamera } from '../pose/camera'
 import { DEFAULT_POSE_MODEL } from '../pose/constants'
 import { createVideoPoseSource } from '../pose/videoPoseSource'
 import { createWorkerPoseInference } from '../pose/workerInference'
-import { copyNeckReviewCriteria, type NeckReviewCriteria } from '../posture/thresholds'
+import {
+  copyNeckReviewCriteria,
+  copyShrugReviewCriteria,
+  type NeckReviewCriteria,
+  type ShrugReviewCriteria,
+} from '../posture/thresholds'
 import type { NeckCandidateError } from '../stretch/neckCandidateClassifier'
 import type { CoachingState } from '../stretch/progression'
+import type { ShrugCandidateError } from '../stretch/shrugCandidateClassifier'
 import { createNeckCandidateFeedback } from './neckCandidateFeedback'
 import { createOwnedPlaybackResources } from './ownedPlaybackResources'
 import { ResourceCleanupError, type ResourceContext } from './resources'
 import type { SessionSnapshot } from './session'
+import { createShrugCandidateFeedback } from './shrugCandidateFeedback'
 import type { PlaybackInput } from './useRecordedPlayback'
 
 export function createNeckWorkspacePlayback(
   input: PlaybackInput,
   options: Readonly<{
     canvas(context: ResourceContext): Promise<HTMLCanvasElement>
-    criteria: NeckReviewCriteria
+    criteria: NeckReviewCriteria | ShrugReviewCriteria
+    motion?: 'neck-side' | 'shoulder-shrug'
     gender: AvatarGender
     session(): Readonly<{ getSnapshot(): SessionSnapshot }> | null
     view(): ReferenceView
-    feedback(error: NeckCandidateError | null): void
+    feedback(error: NeckCandidateError | ShrugCandidateError | null): void
   }>,
 ) {
   if (!import.meta.env.DEV) throw new Error('Candidate workspace unavailable')
-  const criteria = copyNeckReviewCriteria(options.criteria)
-  let evaluator: ReturnType<typeof createNeckCandidateFeedback> | undefined,
+  const motion = options.motion ?? 'neck-side'
+  if (motion !== 'neck-side' && motion !== 'shoulder-shrug')
+    throw new Error('Candidate workspace unavailable')
+  const criteria =
+    motion === 'shoulder-shrug'
+      ? copyShrugReviewCriteria(options.criteria as ShrugReviewCriteria)
+      : copyNeckReviewCriteria(options.criteria as NeckReviewCriteria)
+  let evaluator:
+      | ReturnType<typeof createNeckCandidateFeedback>
+      | ReturnType<typeof createShrugCandidateFeedback>
+      | undefined,
     latest: CoachingState | undefined,
-    issue: NeckCandidateError | null = null,
+    issue: NeckCandidateError | ShrugCandidateError | null = null,
     sampledAt = -Infinity,
     lastKey = '',
     revision = 0,
     closed = false
-  const publish = (next: NeckCandidateError | null) => {
+  const publish = (next: NeckCandidateError | ShrugCandidateError | null) => {
     if (next !== issue) {
       issue = next
       options.feedback(next)
@@ -86,7 +103,7 @@ export function createNeckWorkspacePlayback(
         stage = await prepareReferenceStage(context, {
           canvas,
           gender: options.gender,
-          motion: 'neck-side',
+          motion,
           feedback: criteria,
           onFailure: () =>
             input.onFailure({
@@ -96,9 +113,9 @@ export function createNeckWorkspacePlayback(
             }),
         })
         if (!stage.beginObservation(context.generation)) throw new Error()
+        if (motion === 'shoulder-shrug' && !stage.alignObservation()) throw new Error()
         const owned = stage
-        evaluator = createNeckCandidateFeedback({
-          criteria,
+        const common = {
           generation: context.generation,
           now: () => performance.now(),
           session: {
@@ -109,18 +126,41 @@ export function createNeckWorkspacePlayback(
             },
           },
           observe: input.observe,
-          regions: {
-            'neck-shoulder-line': 'shoulder-line',
-            'neck-head-position': 'head-position',
-            'neck-wrong-direction': 'head-position',
-            'neck-range': 'head-position',
-          },
-        })
+        }
+        evaluator =
+          motion === 'shoulder-shrug'
+            ? createShrugCandidateFeedback({
+                ...common,
+                criteria: criteria as ShrugReviewCriteria,
+                regions: {
+                  'shrug-head': 'head-position',
+                  'shrug-trunk': 'trunk',
+                  'shrug-arms': 'shoulder-line',
+                  'shrug-asymmetry': 'shoulder-line',
+                  'shrug-range': 'shoulder-line',
+                },
+              })
+            : createNeckCandidateFeedback({
+                ...common,
+                criteria: criteria as NeckReviewCriteria,
+                regions: {
+                  'neck-shoulder-line': 'shoulder-line',
+                  'neck-head-position': 'head-position',
+                  'neck-wrong-direction': 'head-position',
+                  'neck-range': 'head-position',
+                },
+              })
         return {
           align: owned.alignObservation,
           observe(frame: Parameters<ReferenceStage['observe']>[0]) {
             if (!owned.observe(frame)) return false
-            const decision = evaluator?.evaluate(frame)
+            const coverage = motion === 'shoulder-shrug' ? owned.getObservationCoverage() : null
+            const shoulderDisplay =
+              coverage?.generation === frame.generation &&
+              coverage.sequence === frame.sequence &&
+              coverage.at === frame.at &&
+              coverage.projectedRegions?.includes('shoulder-line') === true
+            const decision = evaluator?.evaluate(frame, motion === 'neck-side' || shoulderDisplay)
             if (decision) {
               latest = decision.state
               sampledAt = frame.at
@@ -132,7 +172,12 @@ export function createNeckWorkspacePlayback(
                 version: decision.state.plan.version,
                 errors: decision.errors,
               })
-              publish((decision.errors[0]?.code as NeckCandidateError | undefined) ?? null)
+              publish(
+                (decision.errors[0]?.code as
+                  | NeckCandidateError
+                  | ShrugCandidateError
+                  | undefined) ?? null,
+              )
             }
             return true
           },
@@ -142,7 +187,11 @@ export function createNeckWorkspacePlayback(
             const state = latest,
               step = state?.plan.steps[state.stepIndex]?.id,
               phase =
-                issue === 'neck-head-position' || issue === 'neck-shoulder-line'
+                issue === 'neck-head-position' ||
+                issue === 'neck-shoulder-line' ||
+                issue === 'shrug-head' ||
+                issue === 'shrug-trunk' ||
+                issue === 'shrug-arms'
                   ? 'waiting-start'
                   : (state?.phase ?? 'waiting-start'),
               key = `${step}:${phase}:${issue ?? ''}`
@@ -152,7 +201,7 @@ export function createNeckWorkspacePlayback(
             }
             const command: ReferenceCommand = {
               phase,
-              stepId: step === 'right' ? 'right' : 'left',
+              stepId: motion === 'shoulder-shrug' ? 'both' : step === 'right' ? 'right' : 'left',
               playing: state?.status === 'running' && now - sampledAt <= criteria.maxFrameAgeMs,
               revision,
               view: options.view(),

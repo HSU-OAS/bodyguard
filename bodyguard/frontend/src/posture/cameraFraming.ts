@@ -19,7 +19,7 @@ const required: Record<FramingRequirement, readonly number[]> = {
 const motions: Readonly<Record<string, FramingRequirement>> = Object.freeze({
   'neck-side': 'head-shoulders',
   'chin-retraction': 'head-shoulders',
-  'shoulder-shrug': 'head-torso',
+  'shoulder-shrug': 'upper-body',
   'cross-body-shoulder': 'arms',
   'arm-overhead': 'upper-body',
   'lateral-trunk': 'upper-body',

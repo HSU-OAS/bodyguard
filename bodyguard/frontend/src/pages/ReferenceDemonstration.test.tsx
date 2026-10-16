@@ -22,6 +22,7 @@ function port() {
     beginObservation: vi.fn(() => true),
     observe: vi.fn(() => true),
     updateFeedback: vi.fn(() => false),
+    getObservationCoverage: vi.fn(() => null),
     suspendObservation: vi.fn(),
     alignObservation: vi.fn(() => true),
   }

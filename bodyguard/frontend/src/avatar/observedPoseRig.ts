@@ -2,6 +2,7 @@
 import type { Object3D } from 'three'
 import type { CapturedImage } from '../posture/capturedImage'
 import { JOINT_COUNT, type Point } from '../posture/landmarks'
+import type { ShrugReviewCriteria } from '../posture/thresholds'
 import {
   createDirectionalRig,
   OBSERVED_LIMB_BINDINGS,
@@ -14,6 +15,10 @@ import {
   type HandDisplayAlignment,
   type HandObservation,
 } from './observedHandRig'
+import {
+  createObservedShoulderElevation,
+  PROJECTED_SHOULDER_BINDINGS,
+} from './observedShoulderElevation'
 import { OBSERVED_TRUNK_BINDING, observedTrunkDirection } from './observedTrunk'
 import type { ProjectedSurfaceRegion } from './projectedSurfaceRegions'
 
@@ -41,7 +46,12 @@ export type PoseCoverage = Readonly<{
   projectedRegions?: readonly ProjectedSurfaceRegion[]
 }>
 type Options = Parameters<typeof createDirectionalRig>[1] &
-  Readonly<{ mirror: boolean; head?: HeadDisplayAlignment; hands?: HandDisplayAlignment }>
+  Readonly<{
+    mirror: boolean
+    head?: HeadDisplayAlignment
+    hands?: HandDisplayAlignment
+    shoulders?: ShrugReviewCriteria
+  }>
 /** One detectForVideo result owns both arrays. Caller preserves its capture stamps;
  * this adapter does not verify a detector, turn coverage into success, or own GPU resources.
  * A fresh empty/ambiguous result revokes coverage immediately, without resetting to a correct pose.
@@ -60,7 +70,13 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
     )
   )
     throw new Error('Invalid observed pose rig')
-  const driver = createDirectionalRig(model, options)
+  const shoulders = options.shoulders
+    ? createObservedShoulderElevation(model, options.context, options.shoulders, mirror)
+    : undefined
+  const driver = createDirectionalRig(model, {
+    ...options,
+    bindings: [...options.bindings, ...(shoulders ? PROJECTED_SHOULDER_BINDINGS : [])],
+  })
   let head: ReturnType<typeof createHeadRotationRig> | undefined
   let hands: ReturnType<typeof createObservedHandRig> | undefined
   try {
@@ -82,6 +98,7 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
       })
   } catch {
     driver.dispose()
+    shoulders?.close()
     head?.dispose()
     throw new Error('Invalid observed pose rig')
   }
@@ -99,6 +116,7 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
     pending = undefined
     coverage = null
     driver.dispose()
+    shoulders?.close()
     head?.dispose()
     hands?.dispose()
   }
@@ -152,6 +170,7 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
         if (permitted.has(name) && Number.isFinite(length) && length > 0)
           selected[name] = value.map((component) => component / length)
       }
+      const projectedShoulders = shoulders?.observe(frame, performance.now()) ?? {}
       const completeBody =
         !!(head || hands) &&
         single &&
@@ -170,7 +189,7 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
         generation: suppliedGeneration,
         sequence,
         at,
-        directions: selected,
+        directions: { ...selected, ...projectedShoulders },
       })
       if (
         head &&
@@ -193,6 +212,13 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
           sequence,
           at,
           bones: Object.freeze(Object.keys(selected)),
+          ...(shoulders
+            ? {
+                projectedRegions: Object.freeze(
+                  Object.keys(projectedShoulders).length === 2 ? ['shoulder-line' as const] : [],
+                ),
+              }
+            : {}),
         })
       return accepted
     } catch {
@@ -215,6 +241,11 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
     observe,
     render,
     getCoverage: () => (closed || signal.aborted ? null : coverage),
+    alignShoulders: (now: number) => {
+      if (!shoulders) return false
+      coverage = null
+      return shoulders.align(now)
+    },
     dispose,
   })
 }
