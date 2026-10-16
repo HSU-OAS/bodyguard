@@ -8,6 +8,7 @@ import { motionNavigationUrl } from '../catalog/motionNavigation'
 import { findMotions, motionById, type Region } from '../catalog/motions'
 import { CameraPreparation } from './CameraPreparation'
 import { MotionPreview } from './MotionPreview'
+import { NeckCoachingRun, type NeckRunConfiguration } from './NeckCoachingRun'
 import { ReferenceDemonstration, type ReferenceStatus } from './ReferenceDemonstration'
 import './CoachingPage.css'
 
@@ -30,7 +31,15 @@ const regions = [
   ['torso', '상체'],
 ] as const
 
-export function CoachingPage() {
+export function CoachingPage({ run }: { run?: NeckRunConfiguration } = {}) {
+  return run ? (
+    <NeckCoachingRun key={run.criteria.version} configuration={run} />
+  ) : (
+    <CoachingPreviewPage />
+  )
+}
+
+function CoachingPreviewPage() {
   const [params, setParams] = useSearchParams()
   const id = params.get('motion')
   const motion = id ? motionById(id) : undefined

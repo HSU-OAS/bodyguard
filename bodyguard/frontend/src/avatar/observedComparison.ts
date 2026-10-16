@@ -27,6 +27,11 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal) {
     requestedAfter: number | undefined,
     closed = false
   let status: ComparisonStatus = 'waiting'
+  let snapshot: Readonly<{
+    status: 'untracked' | 'tracking' | 'partial' | 'closed'
+    tracked: number
+    total: number
+  }> = Object.freeze({ status: 'untracked', tracked: 0, total: 9 })
   model.visible = false
   function suspend() {
     body?.dispose()
@@ -36,6 +41,7 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal) {
     generation = requestedAfter = undefined
     sequence = 0
     status = 'waiting'
+    snapshot = Object.freeze({ status: 'untracked', tracked: 0, total: 9 })
     model.visible = false
     reset()
   }
@@ -107,6 +113,7 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal) {
         return 'waiting' as const
       }
       const state = body.render(now, delta)
+      snapshot = Object.freeze({ status: state.status, tracked: state.tracked, total: state.total })
       head?.render(now, delta)
       hands?.render(now, delta)
       model.visible = state.status === 'tracking' || state.status === 'partial'
@@ -122,6 +129,7 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal) {
           : ('tracking' as const)
     },
     suspend,
+    getSnapshot: () => snapshot,
     dispose() {
       if (!closed) {
         closed = true

@@ -160,6 +160,11 @@ for (const file of files) {
     'readyReceipts',
     'Native preparation frame unavailable',
     'mountNativeContentionProbe',
+    'Candidate workspace unavailable',
+    'candidate-review-only',
+    'createNeckWorkspacePlayback',
+    'neckWorkspaceFixture',
+    '판정 후보 검수 · 출시 코칭 아님',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
