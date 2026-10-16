@@ -18,6 +18,7 @@ const drain = async () => {
 }
 function setup(
   prepareSource?: (source: { read(): Promise<PoseRigFrame | null> }) => Promise<void>,
+  prepareSourceBeforeAvatars = false,
 ) {
   const events: string[] = [],
     callbacks = new Map<number, (at: number) => void>()
@@ -41,6 +42,7 @@ function setup(
   }[] = []
   const sources: { read: ReturnType<typeof vi.fn>; dispose: ReturnType<typeof vi.fn> }[] = []
   const options = {
+    prepareSourceBeforeAvatars,
     ...(prepareSource ? { prepareSource } : {}),
     camera: vi.fn(async (context: ResourceContext) => {
       const camera = {
@@ -118,6 +120,89 @@ function setup(
   }
 }
 describe('owned playback resource cohort', () => {
+  it('prepares the same source before avatar acquisition without granting ready or observing its cold frame', async () => {
+    const gate = deferred<void>(),
+      warm = vi.fn(async (source: { read(): Promise<PoseRigFrame | null> }) => {
+        await source.read()
+        await gate.promise
+      }),
+      f = setup(warm, true),
+      preparing = f.prepare()
+    await drain()
+    expect(f.options.avatars).not.toHaveBeenCalled()
+    expect(f.sources[0].read).toHaveBeenCalledOnce()
+    expect(f.notices).toEqual([])
+    expect(f.actor.start(1)).toBe(false)
+    expect(f.callbacks.size).toBe(0)
+    gate.resolve()
+    await preparing
+    expect(f.options.avatars).toHaveBeenCalledOnce()
+    expect(warm).toHaveBeenCalledOnce()
+    expect(f.notices).toEqual([{ type: 'ready', generation: 1 }])
+    expect(f.pairs[0].observe).not.toHaveBeenCalled()
+    expect(f.actor.start(1)).toBe(true)
+    await f.fire(100)
+    expect(f.options.source).toHaveBeenCalledOnce()
+    expect(f.sources[0].read).toHaveBeenCalledTimes(2)
+    await f.controller.close()
+    await f.actor.close()
+  })
+  it('cancels pre-avatar preparation immediately but waits for borrowed inference before native close', async () => {
+    const gate = deferred<void>(),
+      f = setup(async (source) => {
+        await source.read()
+        await gate.promise
+      }, true),
+      preparing = f.prepare()
+    await drain()
+    const closing = f.controller.close()
+    await drain()
+    expect(f.options.source.mock.calls[0][0].signal.aborted).toBe(true)
+    expect(f.detectors[0].context.signal.aborted).toBe(false)
+    expect(f.detectors[0].dispose).not.toHaveBeenCalled()
+    expect(f.options.avatars).not.toHaveBeenCalled()
+    gate.resolve()
+    await preparing
+    await closing
+    await f.actor.close()
+    expect(f.options.avatars).not.toHaveBeenCalled()
+    expect(f.notices).toEqual([])
+    for (const resource of [f.sources[0], f.detectors[0], f.cameras[0]])
+      expect(resource.dispose).toHaveBeenCalledOnce()
+  })
+  it.each([false, true])(
+    'retains pre-avatar failure and reclaims source/camera/SDK, cleanup=%s',
+    async (cleanup) => {
+      const f = setup(async () => {
+        throw cleanup ? new ResourceCleanupError() : new Error('PRIVATE_PREPARE')
+      }, true)
+      await f.prepare()
+      if (cleanup) await expect(f.actor.close()).rejects.toBeInstanceOf(ResourceCleanupError)
+      else await f.actor.close()
+      expect(f.options.avatars).not.toHaveBeenCalled()
+      expect(f.notices).toContainEqual({
+        type: 'error',
+        generation: 1,
+        reason: cleanup ? 'cleanup-error' : 'asset-error',
+      })
+      expect(f.notices.some((n) => (n as { type: string }).type === 'ready')).toBe(false)
+      expect(JSON.stringify(f.actor.getSnapshot())).not.toContain('PRIVATE')
+      for (const resource of [f.sources[0], f.detectors[0], f.cameras[0]])
+        expect(resource.dispose).toHaveBeenCalledOnce()
+    },
+  )
+  it('rejects preparation-order options without a preparation owner', () => {
+    const f = setup()
+    expect(() =>
+      createOwnedPlaybackResources({ ...f.options, prepareSourceBeforeAvatars: true }),
+    ).toThrow('Playback resource unavailable')
+    expect(() =>
+      createOwnedPlaybackResources({
+        ...f.options,
+        prepareSourceBeforeAvatars: 'yes' as unknown as boolean,
+      }),
+    ).toThrow('Playback resource unavailable')
+  })
   it('reclaims all owners after ordinary preparation rejection without private error leakage', async () => {
     const f = setup(async () => {
       throw new Error('PRIVATE_PREPARATION')

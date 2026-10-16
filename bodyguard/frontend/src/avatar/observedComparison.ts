@@ -1,5 +1,6 @@
 // FR-A-01/03·FR-M-02/07: current camera generation drives only the user copy, never a verdict.
 import type { Bone, Object3D, Quaternion } from 'three'
+import type { ShrugReviewCriteria } from '../posture/thresholds'
 import { OBSERVED_LIMB_BINDINGS } from './directionalRig'
 import { createHeadRotationRig } from './headOrientationRig'
 import { hasSingleDisplayBody, readDetailAlignment } from './observedDetailAlignment'
@@ -8,7 +9,11 @@ import { createObservedPoseRig, type PoseRigFrame } from './observedPoseRig'
 import { OBSERVED_TRUNK_BINDING } from './observedTrunk'
 
 export type ComparisonStatus = 'waiting' | 'tracking' | 'partial' | 'aligned' | 'unavailable'
-export function createObservedComparison(model: Object3D, signal: AbortSignal) {
+export function createObservedComparison(
+  model: Object3D,
+  signal: AbortSignal,
+  shoulders?: ShrugReviewCriteria,
+) {
   const rest: { bone: Bone; rotation: Quaternion }[] = []
   model.traverse((node) => {
     if ((node as Bone).isBone) rest.push({ bone: node as Bone, rotation: node.quaternion.clone() })
@@ -60,6 +65,7 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal) {
         halfLifeMs: 50,
         maxAgeMs: 1000,
         bindings: [...OBSERVED_LIMB_BINDINGS, OBSERVED_TRUNK_BINDING],
+        ...(shoulders ? { shoulders } : {}),
       })
       return true
     },
@@ -113,6 +119,7 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal) {
     align() {
       if (closed || signal.aborted || !body) return false
       requestedAfter = performance.now()
+      body.alignShoulders(requestedAfter)
       headTracking = false
       headSequence = undefined
       status = 'waiting'

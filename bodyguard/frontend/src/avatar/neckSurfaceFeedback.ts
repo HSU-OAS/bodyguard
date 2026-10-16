@@ -2,9 +2,16 @@
 import type { Object3D } from 'three'
 import type { ResourceContext } from '../coaching/resources'
 import { observeCapturedNeckSide } from '../posture/neckSideObservation'
-import { copyNeckReviewCriteria, type NeckReviewCriteria } from '../posture/thresholds'
+import { observeShoulderShrug } from '../posture/shoulderShrugObservation'
+import {
+  copyNeckReviewCriteria,
+  copyShrugReviewCriteria,
+  type NeckReviewCriteria,
+  type ShrugReviewCriteria,
+} from '../posture/thresholds'
 import type { createObservedComparison } from './observedComparison'
 import type { PoseRigFrame } from './observedPoseRig'
+import { OBSERVED_TRUNK_BINDING } from './observedTrunk'
 import { PROJECTED_SURFACE_REGIONS } from './projectedSurfaceRegions'
 import { createSurfaceFeedback, type FeedbackFrame } from './surfaceFeedback'
 
@@ -12,11 +19,17 @@ type Coverage = ReturnType<ReturnType<typeof createObservedComparison>['getCover
 export function createNeckSurfaceFeedback(
   model: Object3D,
   context: ResourceContext,
-  supplied: NeckReviewCriteria,
+  supplied: NeckReviewCriteria | ShrugReviewCriteria,
+  motion: 'neck-side' | 'shoulder-shrug' = 'neck-side',
 ) {
-  const criteria = copyNeckReviewCriteria(supplied),
+  if (motion !== 'neck-side' && motion !== 'shoulder-shrug')
+    throw new Error('Invalid avatar feedback')
+  const criteria =
+      motion === 'shoulder-shrug'
+        ? copyShrugReviewCriteria(supplied as ShrugReviewCriteria)
+        : copyNeckReviewCriteria(supplied as NeckReviewCriteria),
     program = Object.freeze({
-      motionId: 'neck-side',
+      motionId: motion,
       version: criteria.version,
       regions: [
         {
@@ -29,6 +42,9 @@ export function createNeckSurfaceFeedback(
           bones: PROJECTED_SURFACE_REGIONS['shoulder-line'],
           projection: 'shoulder-line' as const,
         },
+        ...(motion === 'shoulder-shrug'
+          ? [{ id: 'trunk', bones: [OBSERVED_TRUNK_BINDING.bone] }]
+          : []),
       ],
     }),
     surface = createSurfaceFeedback(model, { context, program, maxAgeMs: criteria.maxFrameAgeMs })
@@ -67,7 +83,8 @@ export function createNeckSurfaceFeedback(
         observationToken = token
         stamp = Object.freeze({ ...next, available: false })
         decision = undefined
-        const projection = observeCapturedNeckSide({
+        const observe = motion === 'shoulder-shrug' ? observeShoulderShrug : observeCapturedNeckSide
+        const projection = observe({
           frame: { ...next, image: frame.image, result: frame.result },
           now: performance.now(),
           minimumConfidence: criteria.minimumConfidence,
@@ -93,7 +110,7 @@ export function createNeckSurfaceFeedback(
           sequence !== current.sequence ||
           sequence <= lastUpdate ||
           at !== current.at ||
-          motionId !== 'neck-side' ||
+          motionId !== motion ||
           version !== criteria.version
         )
           return false
@@ -101,19 +118,27 @@ export function createNeckSurfaceFeedback(
         const token = {}
         updateToken = token
         const requested = frame.errors
-        if (!Array.isArray(requested) || requested.length > 2) throw new Error()
+        if (!Array.isArray(requested) || requested.length > (motion === 'shoulder-shrug' ? 3 : 2))
+          throw new Error()
         const seen = new Set<string>(),
           errors = Array.from(requested, (error) => {
             const { regionId, severity, code } = error
             if (
               seen.has(regionId) ||
               severity !== 'deviation' ||
-              (regionId === 'shoulder-line'
-                ? code !== 'neck-shoulder-line'
-                : regionId !== 'head-position' ||
-                  !['neck-head-position', 'neck-wrong-direction', 'neck-range'].includes(
-                    code ?? '',
-                  ))
+              (motion === 'shoulder-shrug'
+                ? !(regionId === 'head-position'
+                    ? code === 'shrug-head'
+                    : regionId === 'trunk'
+                      ? code === 'shrug-trunk'
+                      : regionId === 'shoulder-line' &&
+                        ['shrug-arms', 'shrug-asymmetry', 'shrug-range'].includes(code ?? ''))
+                : regionId === 'shoulder-line'
+                  ? code !== 'neck-shoulder-line'
+                  : regionId !== 'head-position' ||
+                    !['neck-head-position', 'neck-wrong-direction', 'neck-range'].includes(
+                      code ?? '',
+                    ))
             )
               throw new Error()
             seen.add(regionId)
@@ -153,14 +178,17 @@ export function createNeckSurfaceFeedback(
         clear()
         return surface.render(now, false)
       }
-      const key = `${current.sequence}:${coverage.headTracking}`
+      const shoulderTracking =
+        motion === 'neck-side' || coverage.projectedRegions?.includes('shoulder-line') === true
+      const key = `${current.sequence}:${coverage.headTracking}:${shoulderTracking}`
       if (accepted !== applied || key !== appliedKey) {
         const wasSameFrame = applied?.sequence === current.sequence
         applied = accepted
         appliedKey = key
-        const projectedRegions = coverage.headTracking
-          ? (['neck-head-line', 'shoulder-line'] as const)
-          : (['shoulder-line'] as const)
+        const projectedRegions = [
+          ...(coverage.headTracking ? ['neck-head-line' as const] : []),
+          ...(shoulderTracking ? ['shoulder-line' as const] : []),
+        ]
         // Same-frame loss may revoke colour, never re-consume an old decision to add evidence.
         if (wasSameFrame) surface.observe(null)
         else {
@@ -169,7 +197,9 @@ export function createNeckSurfaceFeedback(
             surface.update({
               ...accepted,
               errors: accepted.errors.filter(
-                (error) => error.regionId !== 'head-position' || coverage.headTracking,
+                (error) =>
+                  (error.regionId !== 'head-position' || coverage.headTracking) &&
+                  (error.regionId !== 'shoulder-line' || shoulderTracking),
               ),
             })
         }

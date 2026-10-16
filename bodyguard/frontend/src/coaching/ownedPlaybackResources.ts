@@ -18,6 +18,8 @@ type Options<C extends OwnedResource, I extends OwnedResource, A extends Avatars
   source(context: ResourceContext, camera: C, inference: I): Source
   // Private readiness work only. No avatar observation, progress or renderer authority.
   prepareSource?(source: Source): void | Promise<void>
+  // Native cold inference can prepare before avatar GPU work; the default order is unchanged.
+  prepareSourceBeforeAvatars?: boolean
   scheduler: PlaybackOptions['scheduler']
   render(avatars: A): unknown
   onFailure(notice: Extract<ResourceNotice, { type: 'error' }>): void | Promise<void>
@@ -35,13 +37,16 @@ export function createOwnedPlaybackResources<
   I extends OwnedResource,
   A extends Avatars,
 >(options: Options<C, I, A>) {
+  const beforeAvatars = options?.prepareSourceBeforeAvatars ?? false
   if (
     ['camera', 'inference', 'avatars', 'source', 'render', 'onFailure'].some(
       (key) => typeof options?.[key as keyof typeof options] !== 'function',
     ) ||
     typeof options.scheduler?.request !== 'function' ||
     typeof options.scheduler?.cancel !== 'function' ||
-    (options.prepareSource !== undefined && typeof options.prepareSource !== 'function')
+    (options.prepareSource !== undefined && typeof options.prepareSource !== 'function') ||
+    typeof beforeAvatars !== 'boolean' ||
+    (beforeAvatars && typeof options.prepareSource !== 'function')
   )
     throw unavailable()
   type Cohort = {
@@ -344,6 +349,7 @@ export function createOwnedPlaybackResources<
       const cohort = matches(context)
       if (!cohort.inference || cohort.requested.has('avatars')) throw unavailable()
       cohort.requested.add('avatars')
+      if (beforeAvatars) await prepareSource(cohort)
       const wrapper = await acquire(
         cohort,
         () =>
@@ -355,7 +361,7 @@ export function createOwnedPlaybackResources<
           cohort.pairClaim = owned
         },
       )
-      if (options.prepareSource) await prepareSource(cohort)
+      if (options.prepareSource && !beforeAvatars) await prepareSource(cohort)
       if (live(cohort)) cohort.status = 'ready'
       return wrapper
     },

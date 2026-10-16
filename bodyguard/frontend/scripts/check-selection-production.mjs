@@ -36,6 +36,9 @@ for (const file of files) {
     'Invalid shrug candidate feedback',
     'math-shrug-v1',
     'PRIVATE_SHRUG_RAW_SENTINEL',
+    'Projected shoulder display unavailable',
+    'shrugWorkspaceFixture',
+    '양쪽 어깨의 움직임을 함께 확인해 주세요',
     'math-neck-v1',
     'createObservedComparison',
     'workspaceAvatarFixture',
@@ -179,6 +182,10 @@ for (const file of files) {
     'Invalid projected surface region',
     'projectedSurfaceEnvelope',
     'neckWorkspaceFixture',
+    'nativeCleanupTrace',
+    'nativeWorkerTrace',
+    'nativeWorkerCounts',
+    'nativeWorkerFailures',
     '판정 후보 검수 · 출시 코칭 아님',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)

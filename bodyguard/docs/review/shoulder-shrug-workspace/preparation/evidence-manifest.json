@@ -1,0 +1,2175 @@
+{
+  "story": "S3.C5",
+  "status": "draft-original-native-cleanup-p2-unresolved",
+  "priorCandidate": "c0cfe7fabe0ceefecbd35559741ef99d1eca11d9",
+  "method": "actual SDK/Worker/GLB with blank fake device; controlled auth; generated-input concurrent/neck UI; prewarm-a is only a test transform, actual-native-* uses real implemented same-source preparation; fixed diagnostic fields only, no person/video/coordinate/error payload recording",
+  "observation": "failure-probe-b: resumed first request 17705ms, response timeout 22750ms, overdue result 22839ms; original native-a cleanup-error cause remains unproven",
+  "verification": {
+    "actualNativeConcurrent": 2,
+    "actualShoulderUIConcurrent": 4,
+    "actualNeckNativeWithoutDiagnostics": 2,
+    "finalNative": 2,
+    "neckUI": 8,
+    "relatedUnitFiles": 3,
+    "relatedUnitTests": 137,
+    "fullFiles": 127,
+    "fullTests": 2095,
+    "buildNoticeProductionGuard": "passed",
+    "biomeErrors": 0,
+    "biomeInfos": 17,
+    "scope": "preparation improvement, not all-environment performance/clinical/public release"
+  },
+  "sources": [
+    {
+      "path": "bodyguard/docs/review/shoulder-shrug-workspace/README.md",
+      "archive": "source/bodyguard__docs__review__shoulder-shrug-workspace__README.md.gz",
+      "sha256": "5ba3d620bc54dce0647a899c7138e5095b37660f01903188722d991355e5e9df",
+      "archiveSha256": "837dde02fd3d14636619e5177050225819d7c1644779c63bf6ad2d432811d6ea",
+      "bytes": 9807
+    },
+    {
+      "path": "bodyguard/docs/review/shoulder-shrug-workspace/preparation/README.md",
+      "archive": "source/bodyguard__docs__review__shoulder-shrug-workspace__preparation__README.md.gz",
+      "sha256": "0a912412bf5c019e9b9f8d23abfbda11dc653e293cdeaf601a6d3f42403d45e5",
+      "archiveSha256": "5c70b572ce6439d1e21f46f01f0f9a1a84c58c44e87199e62542ae999fc47b7e",
+      "bytes": 6479
+    },
+    {
+      "path": "bodyguard/docs/stage2-carryover.md",
+      "archive": "source/bodyguard__docs__stage2-carryover.md.gz",
+      "sha256": "8e20413631c9652b3f79c08e66e3ac7728676346fac18109f78e96b616437cf0",
+      "archiveSha256": "1435a56e0ec99db57397aa9c9b888c5eb8984b2cd7890f93118bfd239cdf8701",
+      "bytes": 36569
+    },
+    {
+      "path": "bodyguard/docs/stories/shoulder-shrug-workspace.md",
+      "archive": "source/bodyguard__docs__stories__shoulder-shrug-workspace.md.gz",
+      "sha256": "8d433b297e28744d22381810f8d486f63f8b393b28505ffd2fdfd064b56d574b",
+      "archiveSha256": "eb8488b2f7d77b561e2a6c481b333c8a075d7f8b26b528854329c70056ed8d65",
+      "bytes": 4467
+    },
+    {
+      "path": "bodyguard/docs/tasks.md",
+      "archive": "source/bodyguard__docs__tasks.md.gz",
+      "sha256": "39bfbade660d7db7fa1120eeeb1b5024d1d8baa28622c7689248eaafe2bd721d",
+      "archiveSha256": "240256a1bc4fcb34ff474f48a9e237518051b9c3e2dae0deb4ec4b2163e23f19",
+      "bytes": 140480
+    },
+    {
+      "path": "bodyguard/frontend/e2e/fixtures/nativeCleanupDiagnostics.ts",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__nativeCleanupDiagnostics.ts.gz",
+      "sha256": "c38886569ec247f7f1f704db2a0c6680949e9a25cc8f823d69721b0ebee9e0e0",
+      "archiveSha256": "ad5617a13f4bd61362661d56e63c94524672dede669fe92f9f7b64bd7de76079",
+      "bytes": 2157
+    },
+    {
+      "path": "bodyguard/frontend/e2e/fixtures/nativeWorkerDiagnosticsTransform.ts",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__nativeWorkerDiagnosticsTransform.ts.gz",
+      "sha256": "c1c0317dce74e6fa30351c3db2a881776362a9d8129b494b424ed901e5376141",
+      "archiveSha256": "9731e4cf3779e031424ab088bad6c74cc14eb8ef9eb46208389f79c3a74b0e20",
+      "bytes": 1791
+    },
+    {
+      "path": "bodyguard/frontend/e2e/fixtures/neckWorkspaceEntry.tsx",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__neckWorkspaceEntry.tsx.gz",
+      "sha256": "a43d4988f912fefc4343bd1ff9ef28052d8c7d304f29c3bc919121a5c86cb455",
+      "archiveSha256": "08ceb242da2dfb4bc4a583a94a1b64510aa4f9e3e5fe45e8838d16e8d8859043",
+      "bytes": 1006
+    },
+    {
+      "path": "bodyguard/frontend/e2e/fixtures/neckWorkspaceSource.ts",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__neckWorkspaceSource.ts.gz",
+      "sha256": "d884303cf16aaaf307b2b96dedad0a785fa0601d0207e868f5a680ef40697390",
+      "archiveSha256": "6fd9ed56b090029ce1b698b586c44a044dc8af9eba903df28a10c102bb940988",
+      "bytes": 3065
+    },
+    {
+      "path": "bodyguard/frontend/e2e/fixtures/shrugCandidate.ts",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugCandidate.ts.gz",
+      "sha256": "1cb2ea8f8aec7b98cfb327aec48471a5df175c48e9d2c6265751b7d718c0ada4",
+      "archiveSha256": "fa52cf8ec8fb6ea61da503dcfc73c93fd3b45168932b569dda1d642badbd5866",
+      "bytes": 1829
+    },
+    {
+      "path": "bodyguard/frontend/e2e/fixtures/shrugWorkspaceEntry.tsx",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugWorkspaceEntry.tsx.gz",
+      "sha256": "f6634dbc60834113a4e8353c1b46cb7723acde6526aed8bcfa47448156086b8b",
+      "archiveSha256": "3698dfd7ba45fe92483c874f72b7147e3dc6fe008aa2fe738ea6a4aed22669b2",
+      "bytes": 983
+    },
+    {
+      "path": "bodyguard/frontend/e2e/fixtures/shrugWorkspaceSource.ts",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugWorkspaceSource.ts.gz",
+      "sha256": "06d3d45123503e0bdc010e167186ca14446888d4b7af8871300d8fb0246a684b",
+      "archiveSha256": "529fe230a018f080650b583197743f573312435606b5f9e58818d88a7dcec938",
+      "bytes": 2767
+    },
+    {
+      "path": "bodyguard/frontend/pnpm-lock.yaml",
+      "archive": "source/bodyguard__frontend__pnpm-lock.yaml.gz",
+      "sha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+      "archiveSha256": "e32689fae2471a7e180c5afee7d3e2eefa98a83c4addcae2b2e3ba811559eb13",
+      "bytes": 80605
+    },
+    {
+      "path": "bodyguard/frontend/scripts/check-selection-production.mjs",
+      "archive": "source/bodyguard__frontend__scripts__check-selection-production.mjs.gz",
+      "sha256": "25087946ed58fa706753fb9659c715b4149615906199f95087f05934128a5751",
+      "archiveSha256": "84839e3bc200ae3e36eb8da0f4a79dd54f2b7e9a7f2fb30c8f53a35302d09a75",
+      "bytes": 8503
+    },
+    {
+      "path": "bodyguard/frontend/scripts/test-neck-workspace-native.mjs",
+      "archive": "source/bodyguard__frontend__scripts__test-neck-workspace-native.mjs.gz",
+      "sha256": "8a2b98635fcdf730fe24364bd25daee44f42a408c7cd33bfca6f22c72474941a",
+      "archiveSha256": "00dfdad3f7500b706ab384849c0179787c09cd2bdb8701c381d6719f6904a87d",
+      "bytes": 13495
+    },
+    {
+      "path": "bodyguard/frontend/src/avatar/neckSurfaceFeedback.ts",
+      "archive": "source/bodyguard__frontend__src__avatar__neckSurfaceFeedback.ts.gz",
+      "sha256": "bab1996652b86318d931a90c87782d838b396bae3eb785f8a54bada06c4211cb",
+      "archiveSha256": "425b6ebcb798c22802f36f462fd1564bc5d6ab64149aa891fe9937f9ddc4152e",
+      "bytes": 8144
+    },
+    {
+      "path": "bodyguard/frontend/src/avatar/observedComparison.ts",
+      "archive": "source/bodyguard__frontend__src__avatar__observedComparison.ts.gz",
+      "sha256": "8ff0b0f380576ad10b7e482a7ac9022978f0625b827871e574c17df1e01be1f3",
+      "archiveSha256": "873cab1c5de5e2b01d9ddbf03e3653fc9becd42f6b944c414f33c051fc7e40ab",
+      "bytes": 6066
+    },
+    {
+      "path": "bodyguard/frontend/src/avatar/observedPoseRig.ts",
+      "archive": "source/bodyguard__frontend__src__avatar__observedPoseRig.ts.gz",
+      "sha256": "2a85eddecf945708454d77e4d16d6ea0b1ed5005ddfad7b1e0e861ad1ec9ff6d",
+      "archiveSha256": "d5bbb6b8a295d7c80ba804cfcc37c59ff588753eeb2bacf8ec6251cd71960274",
+      "bytes": 8822
+    },
+    {
+      "path": "bodyguard/frontend/src/avatar/observedShoulderElevation.ts",
+      "archive": "source/bodyguard__frontend__src__avatar__observedShoulderElevation.ts.gz",
+      "sha256": "b32138a65f8fb44e2956b0709b2b7844de414c7dc65ed6c68e0467194a48a6de",
+      "archiveSha256": "82e4dc7393245958911a956fa7c6b7fb976893b5d7476a7890b87a3a918c68f0",
+      "bytes": 5427
+    },
+    {
+      "path": "bodyguard/frontend/src/avatar/ownedPosePlayback.ts",
+      "archive": "source/bodyguard__frontend__src__avatar__ownedPosePlayback.ts.gz",
+      "sha256": "cecd8b5e05f705f6eb04844a1c975c44ee96b64dae1507f8c2d0731693826daa",
+      "archiveSha256": "cc9a9b3522d02f54fab0f7c568e976f561cfe4f222bbe208d61b0584e8d6f531",
+      "bytes": 8257
+    },
+    {
+      "path": "bodyguard/frontend/src/avatar/projectedSurfaceRegions.ts",
+      "archive": "source/bodyguard__frontend__src__avatar__projectedSurfaceRegions.ts.gz",
+      "sha256": "a40dfe4662a6f382680f465fa6346a1bf319ed1629a5122eab958ba3a2c6045b",
+      "archiveSha256": "53490f4b2baee13decbe3c21bc71f8df6083d23ca802851752e9a47233d6264d",
+      "bytes": 3996
+    },
+    {
+      "path": "bodyguard/frontend/src/avatar/referenceStage.ts",
+      "archive": "source/bodyguard__frontend__src__avatar__referenceStage.ts.gz",
+      "sha256": "9ac3519f8acc921178877443f3cea78946f663e549cd15ce6cf914c0c32e535b",
+      "archiveSha256": "4f503767301245448799f7d8f93211f7d86c76c6a02afe860a568079ca8106ed",
+      "bytes": 11193
+    },
+    {
+      "path": "bodyguard/frontend/src/avatar/surfaceFeedback.ts",
+      "archive": "source/bodyguard__frontend__src__avatar__surfaceFeedback.ts.gz",
+      "sha256": "b0c621ed26fd74697ae7b439f3770f35184f25001017c66f6c3dd4cbd7886a8a",
+      "archiveSha256": "0e168dc3621141cfbdb201fa74af9c7f9d693c680cb347bf7df67149467c7a1a",
+      "bytes": 17614
+    },
+    {
+      "path": "bodyguard/frontend/src/coaching/neckWorkspacePlayback.ts",
+      "archive": "source/bodyguard__frontend__src__coaching__neckWorkspacePlayback.ts.gz",
+      "sha256": "72cacfbc508b23a692f8e548d31fbbdb672fe4cc3c0c7935c468123f3d20f282",
+      "archiveSha256": "2f82095319a9eff117f9a806144b820989bfc2f55e7fbc06ea4b76b5f602bf7a",
+      "bytes": 9803
+    },
+    {
+      "path": "bodyguard/frontend/src/coaching/ownedPlaybackResources.test.ts",
+      "archive": "source/bodyguard__frontend__src__coaching__ownedPlaybackResources.test.ts.gz",
+      "sha256": "8c43b76818c8cd6b9d9174ac9c25f33b871f6133ed1cc025f34bc5bcc8637c5b",
+      "archiveSha256": "adc375ddbd731e59263bfb72acc524a16791b32cfbb37c7c3e12dde84608f251",
+      "bytes": 26915
+    },
+    {
+      "path": "bodyguard/frontend/src/coaching/ownedPlaybackResources.ts",
+      "archive": "source/bodyguard__frontend__src__coaching__ownedPlaybackResources.ts.gz",
+      "sha256": "144aed75e60e05c0c2e0405d427b4e4c1f1f63d3875ce8a6f38e1d0e74645a10",
+      "archiveSha256": "13bbfe67124ab1c7ecd4fe97d7908408dba46560e1b8ed63be7216847301782c",
+      "bytes": 15490
+    },
+    {
+      "path": "bodyguard/frontend/src/coaching/shrugCandidateFeedback.ts",
+      "archive": "source/bodyguard__frontend__src__coaching__shrugCandidateFeedback.ts.gz",
+      "sha256": "2cbd1c9cefe3b9267d99c2449ff3c2adddfd80345636705e20784ceb504b0d43",
+      "archiveSha256": "e43a8a7965795b93dc556648c5ab8cd06c3459e8432bacfb2c8756736de5ed9c",
+      "bytes": 4614
+    },
+    {
+      "path": "bodyguard/frontend/src/pages/NeckCoachingRun.tsx",
+      "archive": "source/bodyguard__frontend__src__pages__NeckCoachingRun.tsx.gz",
+      "sha256": "1a09fc42452f817e3d16a34ef5dcc44146bc5c0d27db4dbe68c104f63c315ee2",
+      "archiveSha256": "230056d7e13c811c9aea5784e0bf1b619083944b6d8933ab8f712b19cf847377",
+      "bytes": 25672
+    },
+    {
+      "path": "bodyguard/frontend/src/pose/nativeCleanupDiagnostics.test.ts",
+      "archive": "source/bodyguard__frontend__src__pose__nativeCleanupDiagnostics.test.ts.gz",
+      "sha256": "d8f047add84a07eccf58f3b21e1867db648d9e59bd5ba241c945994d7e3754b4",
+      "archiveSha256": "ed6b1b099d4eae725019d4b603ec83c82f97b9faddc89df66e72d1f812491918",
+      "bytes": 3917
+    },
+    {
+      "path": "bodyguard/frontend/src/pose/nativeInference.worker.ts",
+      "archive": "source/bodyguard__frontend__src__pose__nativeInference.worker.ts.gz",
+      "sha256": "05f348328e805177de820a47e29dc8b06deb0cf0f6b3faaf40dcc5957b07e74b",
+      "archiveSha256": "b6d0ff88969d0490ab40c6f4e42a78e47eb2a122dccbe3bde2bca2e27c68e499",
+      "bytes": 723
+    },
+    {
+      "path": "bodyguard/frontend/src/pose/videoPoseSource.ts",
+      "archive": "source/bodyguard__frontend__src__pose__videoPoseSource.ts.gz",
+      "sha256": "5818cd775915b90a8964e540927b1ef05043be214f18f40e46d920a40f4988a7",
+      "archiveSha256": "922696527010721a83e7ad8aa1dd468e6210c0415f78336851e2c9fdd888fbe0",
+      "bytes": 9164
+    },
+    {
+      "path": "bodyguard/frontend/src/pose/workerInference.ts",
+      "archive": "source/bodyguard__frontend__src__pose__workerInference.ts.gz",
+      "sha256": "fde00062253a12ec7caf0a9ee5a3fbf661ae393914574fba8939b0c2575b89dc",
+      "archiveSha256": "0c441e4e4b4520c4d2077006b32af2a61c436c31eaa31deb1e1577c8322b97ab",
+      "bytes": 9662
+    },
+    {
+      "path": "bodyguard/frontend/src/pose/workerInferenceRuntime.ts",
+      "archive": "source/bodyguard__frontend__src__pose__workerInferenceRuntime.ts.gz",
+      "sha256": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+      "archiveSha256": "8c4fb4d9838b9d5d90dfc357956f8119ab092e940917bfb5d08f7563df586b84",
+      "bytes": 5266
+    },
+    {
+      "path": "bodyguard/frontend/src/pose/workerNativeEngine.ts",
+      "archive": "source/bodyguard__frontend__src__pose__workerNativeEngine.ts.gz",
+      "sha256": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+      "archiveSha256": "5d3a61e3bb3b26e0df04d0c00ace454cf4b7fbc866dfb35a962f13346326f98f",
+      "bytes": 5526
+    },
+    {
+      "path": "bodyguard/frontend/src/posture/shoulderShrugObservation.ts",
+      "archive": "source/bodyguard__frontend__src__posture__shoulderShrugObservation.ts.gz",
+      "sha256": "5778261aee044041b6558ade91c0cebd856aa69a3e203aa30006e26018862a7e",
+      "archiveSha256": "05f265775a00861b1081ca97f6a67e1931c2662147e80110a8e39d3651468ad8",
+      "bytes": 4649
+    },
+    {
+      "path": "bodyguard/frontend/src/posture/thresholds.ts",
+      "archive": "source/bodyguard__frontend__src__posture__thresholds.ts.gz",
+      "sha256": "2756415afec3eddfd899d1bddf0d6e5117ec77cad8bc55446a5612740d94de8d",
+      "archiveSha256": "9505f8ebeb796eb167e00daa63596ebc9789feb5c2f9e1f543471e3762c23e27",
+      "bytes": 6298
+    },
+    {
+      "path": "bodyguard/frontend/src/stretch/shrugCandidateClassifier.ts",
+      "archive": "source/bodyguard__frontend__src__stretch__shrugCandidateClassifier.ts.gz",
+      "sha256": "6128c211404a6f2ddcc4c0f7e81a71c1d0c69bc39b9492f5a414165165bee116",
+      "archiveSha256": "198561a668d779715b2ac6d1b63e4aa0522f54aa67f0dbd9d69a757b28e2ca23",
+      "bytes": 6087
+    },
+    {
+      "path": "bodyguard/frontend/vite.config.ts",
+      "archive": "source/bodyguard__frontend__vite.config.ts.gz",
+      "sha256": "86bb8e81d20d3c53ee7b9ed796d42247817532265372fc5be42d52760251a105",
+      "archiveSha256": "4501d26f96eb55bc7fc0b5859d4453a8a2f71c8cd5eec9f5d75071bfec28e769",
+      "bytes": 1439
+    },
+    {
+      "path": "bodyguard/frontend/scripts/test-shrug-workspace.mjs",
+      "archive": "source/bodyguard__frontend__scripts__test-shrug-workspace.mjs.gz",
+      "sha256": "ad33be1d2cca02b2e38e84af9a726ce6fd63f64399027b1715636be1c5445327",
+      "archiveSha256": "7b05beee2c0f4d6f7226102aedbbac23cb78bc8846f3e939039816595f9d8fef",
+      "bytes": 11918
+    }
+  ],
+  "snapshots": [
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/src/coaching/neckWorkspacePlayback.ts",
+      "sha256": "4d046cf5f768ab7c2898c9b78a0f94f2ea707ecfd5c533c6f7fd6d55c594dec3",
+      "archive": "history/4d046cf5f768ab7c2898c9b78a0f94f2ea707ecfd5c533c6f7fd6d55c594dec3-src__coaching__neckWorkspacePlayback.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/src/pages/NeckCoachingRun.tsx",
+      "sha256": "1a09fc42452f817e3d16a34ef5dcc44146bc5c0d27db4dbe68c104f63c315ee2",
+      "archive": "source/bodyguard__frontend__src__pages__NeckCoachingRun.tsx.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/src/pose/workerInference.ts",
+      "sha256": "fde00062253a12ec7caf0a9ee5a3fbf661ae393914574fba8939b0c2575b89dc",
+      "archive": "source/bodyguard__frontend__src__pose__workerInference.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/src/pose/workerInferenceRuntime.ts",
+      "sha256": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+      "archive": "source/bodyguard__frontend__src__pose__workerInferenceRuntime.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/src/pose/workerNativeEngine.ts",
+      "sha256": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+      "archive": "source/bodyguard__frontend__src__pose__workerNativeEngine.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/src/coaching/ownedPlaybackResources.ts",
+      "sha256": "a6ae2fcb30f8dab6c8eff6fe040d5c25d2e84d6fbe83ad74c77f685032750716",
+      "archive": "history/a6ae2fcb30f8dab6c8eff6fe040d5c25d2e84d6fbe83ad74c77f685032750716-src__coaching__ownedPlaybackResources.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/src/avatar/ownedPosePlayback.ts",
+      "sha256": "cecd8b5e05f705f6eb04844a1c975c44ee96b64dae1507f8c2d0731693826daa",
+      "archive": "source/bodyguard__frontend__src__avatar__ownedPosePlayback.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/src/pose/videoPoseSource.ts",
+      "sha256": "5818cd775915b90a8964e540927b1ef05043be214f18f40e46d920a40f4988a7",
+      "archive": "source/bodyguard__frontend__src__pose__videoPoseSource.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/src/pose/nativeInference.worker.ts",
+      "sha256": "05f348328e805177de820a47e29dc8b06deb0cf0f6b3faaf40dcc5957b07e74b",
+      "archive": "source/bodyguard__frontend__src__pose__nativeInference.worker.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/src/avatar/referenceStage.ts",
+      "sha256": "9ac3519f8acc921178877443f3cea78946f663e549cd15ce6cf914c0c32e535b",
+      "archive": "source/bodyguard__frontend__src__avatar__referenceStage.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/src/avatar/neckSurfaceFeedback.ts",
+      "sha256": "bab1996652b86318d931a90c87782d838b396bae3eb785f8a54bada06c4211cb",
+      "archive": "source/bodyguard__frontend__src__avatar__neckSurfaceFeedback.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/src/avatar/projectedSurfaceRegions.ts",
+      "sha256": "a40dfe4662a6f382680f465fa6346a1bf319ed1629a5122eab958ba3a2c6045b",
+      "archive": "source/bodyguard__frontend__src__avatar__projectedSurfaceRegions.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/src/avatar/surfaceFeedback.ts",
+      "sha256": "b0c621ed26fd74697ae7b439f3770f35184f25001017c66f6c3dd4cbd7886a8a",
+      "archive": "source/bodyguard__frontend__src__avatar__surfaceFeedback.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/src/avatar/observedShoulderElevation.ts",
+      "sha256": "b32138a65f8fb44e2956b0709b2b7844de414c7dc65ed6c68e0467194a48a6de",
+      "archive": "source/bodyguard__frontend__src__avatar__observedShoulderElevation.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/src/avatar/observedPoseRig.ts",
+      "sha256": "2a85eddecf945708454d77e4d16d6ea0b1ed5005ddfad7b1e0e861ad1ec9ff6d",
+      "archive": "source/bodyguard__frontend__src__avatar__observedPoseRig.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/src/avatar/observedComparison.ts",
+      "sha256": "8ff0b0f380576ad10b7e482a7ac9022978f0625b827871e574c17df1e01be1f3",
+      "archive": "source/bodyguard__frontend__src__avatar__observedComparison.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/src/stretch/shrugCandidateClassifier.ts",
+      "sha256": "6128c211404a6f2ddcc4c0f7e81a71c1d0c69bc39b9492f5a414165165bee116",
+      "archive": "source/bodyguard__frontend__src__stretch__shrugCandidateClassifier.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/src/coaching/shrugCandidateFeedback.ts",
+      "sha256": "2cbd1c9cefe3b9267d99c2449ff3c2adddfd80345636705e20784ceb504b0d43",
+      "archive": "source/bodyguard__frontend__src__coaching__shrugCandidateFeedback.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/src/posture/shoulderShrugObservation.ts",
+      "sha256": "5778261aee044041b6558ade91c0cebd856aa69a3e203aa30006e26018862a7e",
+      "archive": "source/bodyguard__frontend__src__posture__shoulderShrugObservation.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/src/posture/thresholds.ts",
+      "sha256": "2756415afec3eddfd899d1bddf0d6e5117ec77cad8bc55446a5612740d94de8d",
+      "archive": "source/bodyguard__frontend__src__posture__thresholds.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugWorkspaceEntry.tsx",
+      "sha256": "f6634dbc60834113a4e8353c1b46cb7723acde6526aed8bcfa47448156086b8b",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugWorkspaceEntry.tsx.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugWorkspaceSource.ts",
+      "sha256": "06d3d45123503e0bdc010e167186ca14446888d4b7af8871300d8fb0246a684b",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugWorkspaceSource.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugCandidate.ts",
+      "sha256": "1cb2ea8f8aec7b98cfb327aec48471a5df175c48e9d2c6265751b7d718c0ada4",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugCandidate.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/e2e/fixtures/neckWorkspaceEntry.tsx",
+      "sha256": "a43d4988f912fefc4343bd1ff9ef28052d8c7d304f29c3bc919121a5c86cb455",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__neckWorkspaceEntry.tsx.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/e2e/fixtures/neckWorkspaceSource.ts",
+      "sha256": "d884303cf16aaaf307b2b96dedad0a785fa0601d0207e868f5a680ef40697390",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__neckWorkspaceSource.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/e2e/fixtures/nativeCleanupDiagnostics.ts",
+      "sha256": "c38886569ec247f7f1f704db2a0c6680949e9a25cc8f823d69721b0ebee9e0e0",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__nativeCleanupDiagnostics.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/e2e/fixtures/nativeWorkerDiagnosticsTransform.ts",
+      "sha256": "c1c0317dce74e6fa30351c3db2a881776362a9d8129b494b424ed901e5376141",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__nativeWorkerDiagnosticsTransform.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/vite.config.ts",
+      "sha256": "86bb8e81d20d3c53ee7b9ed796d42247817532265372fc5be42d52760251a105",
+      "archive": "source/bodyguard__frontend__vite.config.ts.gz"
+    },
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/pnpm-lock.yaml",
+      "sha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+      "archive": "source/bodyguard__frontend__pnpm-lock.yaml.gz"
+    },
+    {
+      "label": "failure-concurrent-b",
+      "path": "bodyguard/frontend/src/pages/NeckCoachingRun.tsx",
+      "sha256": "1a09fc42452f817e3d16a34ef5dcc44146bc5c0d27db4dbe68c104f63c315ee2",
+      "archive": "source/bodyguard__frontend__src__pages__NeckCoachingRun.tsx.gz"
+    },
+    {
+      "label": "failure-concurrent-b",
+      "path": "bodyguard/frontend/src/coaching/neckWorkspacePlayback.ts",
+      "sha256": "4d046cf5f768ab7c2898c9b78a0f94f2ea707ecfd5c533c6f7fd6d55c594dec3",
+      "archive": "history/4d046cf5f768ab7c2898c9b78a0f94f2ea707ecfd5c533c6f7fd6d55c594dec3-src__coaching__neckWorkspacePlayback.ts.gz"
+    },
+    {
+      "label": "failure-concurrent-b",
+      "path": "bodyguard/frontend/src/coaching/shrugCandidateFeedback.ts",
+      "sha256": "2cbd1c9cefe3b9267d99c2449ff3c2adddfd80345636705e20784ceb504b0d43",
+      "archive": "source/bodyguard__frontend__src__coaching__shrugCandidateFeedback.ts.gz"
+    },
+    {
+      "label": "failure-concurrent-b",
+      "path": "bodyguard/frontend/src/stretch/shrugCandidateClassifier.ts",
+      "sha256": "6128c211404a6f2ddcc4c0f7e81a71c1d0c69bc39b9492f5a414165165bee116",
+      "archive": "source/bodyguard__frontend__src__stretch__shrugCandidateClassifier.ts.gz"
+    },
+    {
+      "label": "failure-concurrent-b",
+      "path": "bodyguard/frontend/src/avatar/observedShoulderElevation.ts",
+      "sha256": "b32138a65f8fb44e2956b0709b2b7844de414c7dc65ed6c68e0467194a48a6de",
+      "archive": "source/bodyguard__frontend__src__avatar__observedShoulderElevation.ts.gz"
+    },
+    {
+      "label": "failure-concurrent-b",
+      "path": "bodyguard/frontend/src/avatar/observedPoseRig.ts",
+      "sha256": "2a85eddecf945708454d77e4d16d6ea0b1ed5005ddfad7b1e0e861ad1ec9ff6d",
+      "archive": "source/bodyguard__frontend__src__avatar__observedPoseRig.ts.gz"
+    },
+    {
+      "label": "failure-concurrent-b",
+      "path": "bodyguard/frontend/src/avatar/observedComparison.ts",
+      "sha256": "8ff0b0f380576ad10b7e482a7ac9022978f0625b827871e574c17df1e01be1f3",
+      "archive": "source/bodyguard__frontend__src__avatar__observedComparison.ts.gz"
+    },
+    {
+      "label": "failure-concurrent-b",
+      "path": "bodyguard/frontend/src/avatar/neckSurfaceFeedback.ts",
+      "sha256": "bab1996652b86318d931a90c87782d838b396bae3eb785f8a54bada06c4211cb",
+      "archive": "source/bodyguard__frontend__src__avatar__neckSurfaceFeedback.ts.gz"
+    },
+    {
+      "label": "failure-concurrent-b",
+      "path": "bodyguard/frontend/src/avatar/referenceStage.ts",
+      "sha256": "9ac3519f8acc921178877443f3cea78946f663e549cd15ce6cf914c0c32e535b",
+      "archive": "source/bodyguard__frontend__src__avatar__referenceStage.ts.gz"
+    },
+    {
+      "label": "failure-concurrent-b",
+      "path": "bodyguard/frontend/src/avatar/surfaceFeedback.ts",
+      "sha256": "b0c621ed26fd74697ae7b439f3770f35184f25001017c66f6c3dd4cbd7886a8a",
+      "archive": "source/bodyguard__frontend__src__avatar__surfaceFeedback.ts.gz"
+    },
+    {
+      "label": "failure-concurrent-b",
+      "path": "bodyguard/frontend/src/avatar/projectedSurfaceRegions.ts",
+      "sha256": "a40dfe4662a6f382680f465fa6346a1bf319ed1629a5122eab958ba3a2c6045b",
+      "archive": "source/bodyguard__frontend__src__avatar__projectedSurfaceRegions.ts.gz"
+    },
+    {
+      "label": "failure-concurrent-b",
+      "path": "bodyguard/frontend/src/posture/shoulderShrugObservation.ts",
+      "sha256": "5778261aee044041b6558ade91c0cebd856aa69a3e203aa30006e26018862a7e",
+      "archive": "source/bodyguard__frontend__src__posture__shoulderShrugObservation.ts.gz"
+    },
+    {
+      "label": "failure-concurrent-b",
+      "path": "bodyguard/frontend/src/posture/thresholds.ts",
+      "sha256": "2756415afec3eddfd899d1bddf0d6e5117ec77cad8bc55446a5612740d94de8d",
+      "archive": "source/bodyguard__frontend__src__posture__thresholds.ts.gz"
+    },
+    {
+      "label": "failure-concurrent-b",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugWorkspaceEntry.tsx",
+      "sha256": "f6634dbc60834113a4e8353c1b46cb7723acde6526aed8bcfa47448156086b8b",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugWorkspaceEntry.tsx.gz"
+    },
+    {
+      "label": "failure-concurrent-b",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugWorkspaceSource.ts",
+      "sha256": "06d3d45123503e0bdc010e167186ca14446888d4b7af8871300d8fb0246a684b",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugWorkspaceSource.ts.gz"
+    },
+    {
+      "label": "failure-concurrent-b",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugCandidate.ts",
+      "sha256": "1cb2ea8f8aec7b98cfb327aec48471a5df175c48e9d2c6265751b7d718c0ada4",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugCandidate.ts.gz"
+    },
+    {
+      "label": "failure-concurrent-b",
+      "path": "bodyguard/frontend/scripts/test-shrug-workspace.mjs",
+      "sha256": "ad33be1d2cca02b2e38e84af9a726ce6fd63f64399027b1715636be1c5445327",
+      "archive": "source/bodyguard__frontend__scripts__test-shrug-workspace.mjs.gz"
+    },
+    {
+      "label": "failure-concurrent-b",
+      "path": "bodyguard/frontend/vite.config.ts",
+      "sha256": "86bb8e81d20d3c53ee7b9ed796d42247817532265372fc5be42d52760251a105",
+      "archive": "source/bodyguard__frontend__vite.config.ts.gz"
+    },
+    {
+      "label": "failure-concurrent-b",
+      "path": "bodyguard/frontend/pnpm-lock.yaml",
+      "sha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+      "archive": "source/bodyguard__frontend__pnpm-lock.yaml.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/src/coaching/neckWorkspacePlayback.ts",
+      "sha256": "4d046cf5f768ab7c2898c9b78a0f94f2ea707ecfd5c533c6f7fd6d55c594dec3",
+      "archive": "history/4d046cf5f768ab7c2898c9b78a0f94f2ea707ecfd5c533c6f7fd6d55c594dec3-src__coaching__neckWorkspacePlayback.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/src/pages/NeckCoachingRun.tsx",
+      "sha256": "1a09fc42452f817e3d16a34ef5dcc44146bc5c0d27db4dbe68c104f63c315ee2",
+      "archive": "source/bodyguard__frontend__src__pages__NeckCoachingRun.tsx.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/src/pose/workerInference.ts",
+      "sha256": "fde00062253a12ec7caf0a9ee5a3fbf661ae393914574fba8939b0c2575b89dc",
+      "archive": "source/bodyguard__frontend__src__pose__workerInference.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/src/pose/workerInferenceRuntime.ts",
+      "sha256": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+      "archive": "source/bodyguard__frontend__src__pose__workerInferenceRuntime.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/src/pose/workerNativeEngine.ts",
+      "sha256": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+      "archive": "source/bodyguard__frontend__src__pose__workerNativeEngine.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/src/coaching/ownedPlaybackResources.ts",
+      "sha256": "a6ae2fcb30f8dab6c8eff6fe040d5c25d2e84d6fbe83ad74c77f685032750716",
+      "archive": "history/a6ae2fcb30f8dab6c8eff6fe040d5c25d2e84d6fbe83ad74c77f685032750716-src__coaching__ownedPlaybackResources.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/src/avatar/ownedPosePlayback.ts",
+      "sha256": "cecd8b5e05f705f6eb04844a1c975c44ee96b64dae1507f8c2d0731693826daa",
+      "archive": "source/bodyguard__frontend__src__avatar__ownedPosePlayback.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/src/pose/videoPoseSource.ts",
+      "sha256": "5818cd775915b90a8964e540927b1ef05043be214f18f40e46d920a40f4988a7",
+      "archive": "source/bodyguard__frontend__src__pose__videoPoseSource.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/src/pose/nativeInference.worker.ts",
+      "sha256": "05f348328e805177de820a47e29dc8b06deb0cf0f6b3faaf40dcc5957b07e74b",
+      "archive": "source/bodyguard__frontend__src__pose__nativeInference.worker.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/src/avatar/referenceStage.ts",
+      "sha256": "9ac3519f8acc921178877443f3cea78946f663e549cd15ce6cf914c0c32e535b",
+      "archive": "source/bodyguard__frontend__src__avatar__referenceStage.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/src/avatar/neckSurfaceFeedback.ts",
+      "sha256": "bab1996652b86318d931a90c87782d838b396bae3eb785f8a54bada06c4211cb",
+      "archive": "source/bodyguard__frontend__src__avatar__neckSurfaceFeedback.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/src/avatar/projectedSurfaceRegions.ts",
+      "sha256": "a40dfe4662a6f382680f465fa6346a1bf319ed1629a5122eab958ba3a2c6045b",
+      "archive": "source/bodyguard__frontend__src__avatar__projectedSurfaceRegions.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/src/avatar/surfaceFeedback.ts",
+      "sha256": "b0c621ed26fd74697ae7b439f3770f35184f25001017c66f6c3dd4cbd7886a8a",
+      "archive": "source/bodyguard__frontend__src__avatar__surfaceFeedback.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/src/avatar/observedShoulderElevation.ts",
+      "sha256": "b32138a65f8fb44e2956b0709b2b7844de414c7dc65ed6c68e0467194a48a6de",
+      "archive": "source/bodyguard__frontend__src__avatar__observedShoulderElevation.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/src/avatar/observedPoseRig.ts",
+      "sha256": "2a85eddecf945708454d77e4d16d6ea0b1ed5005ddfad7b1e0e861ad1ec9ff6d",
+      "archive": "source/bodyguard__frontend__src__avatar__observedPoseRig.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/src/avatar/observedComparison.ts",
+      "sha256": "8ff0b0f380576ad10b7e482a7ac9022978f0625b827871e574c17df1e01be1f3",
+      "archive": "source/bodyguard__frontend__src__avatar__observedComparison.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/src/stretch/shrugCandidateClassifier.ts",
+      "sha256": "6128c211404a6f2ddcc4c0f7e81a71c1d0c69bc39b9492f5a414165165bee116",
+      "archive": "source/bodyguard__frontend__src__stretch__shrugCandidateClassifier.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/src/coaching/shrugCandidateFeedback.ts",
+      "sha256": "2cbd1c9cefe3b9267d99c2449ff3c2adddfd80345636705e20784ceb504b0d43",
+      "archive": "source/bodyguard__frontend__src__coaching__shrugCandidateFeedback.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/src/posture/shoulderShrugObservation.ts",
+      "sha256": "5778261aee044041b6558ade91c0cebd856aa69a3e203aa30006e26018862a7e",
+      "archive": "source/bodyguard__frontend__src__posture__shoulderShrugObservation.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/src/posture/thresholds.ts",
+      "sha256": "2756415afec3eddfd899d1bddf0d6e5117ec77cad8bc55446a5612740d94de8d",
+      "archive": "source/bodyguard__frontend__src__posture__thresholds.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugWorkspaceEntry.tsx",
+      "sha256": "f6634dbc60834113a4e8353c1b46cb7723acde6526aed8bcfa47448156086b8b",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugWorkspaceEntry.tsx.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugWorkspaceSource.ts",
+      "sha256": "06d3d45123503e0bdc010e167186ca14446888d4b7af8871300d8fb0246a684b",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugWorkspaceSource.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugCandidate.ts",
+      "sha256": "1cb2ea8f8aec7b98cfb327aec48471a5df175c48e9d2c6265751b7d718c0ada4",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugCandidate.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/e2e/fixtures/neckWorkspaceEntry.tsx",
+      "sha256": "a43d4988f912fefc4343bd1ff9ef28052d8c7d304f29c3bc919121a5c86cb455",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__neckWorkspaceEntry.tsx.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/e2e/fixtures/neckWorkspaceSource.ts",
+      "sha256": "d884303cf16aaaf307b2b96dedad0a785fa0601d0207e868f5a680ef40697390",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__neckWorkspaceSource.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/scripts/test-neck-workspace-native.mjs",
+      "sha256": "1378f6d23f8762ca58f850e49c17297a5042ebdcadf7a3df03bdc41433ec8b26",
+      "archive": "history/1378f6d23f8762ca58f850e49c17297a5042ebdcadf7a3df03bdc41433ec8b26-scripts__test-neck-workspace-native.mjs.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/e2e/fixtures/nativeCleanupDiagnostics.ts",
+      "sha256": "c38886569ec247f7f1f704db2a0c6680949e9a25cc8f823d69721b0ebee9e0e0",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__nativeCleanupDiagnostics.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/e2e/fixtures/nativeWorkerDiagnosticsTransform.ts",
+      "sha256": "c1c0317dce74e6fa30351c3db2a881776362a9d8129b494b424ed901e5376141",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__nativeWorkerDiagnosticsTransform.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/vite.config.ts",
+      "sha256": "86bb8e81d20d3c53ee7b9ed796d42247817532265372fc5be42d52760251a105",
+      "archive": "source/bodyguard__frontend__vite.config.ts.gz"
+    },
+    {
+      "label": "prewarm-a",
+      "path": "bodyguard/frontend/pnpm-lock.yaml",
+      "sha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+      "archive": "source/bodyguard__frontend__pnpm-lock.yaml.gz"
+    },
+    {
+      "label": "prewarm-concurrent-a",
+      "path": "bodyguard/frontend/src/pages/NeckCoachingRun.tsx",
+      "sha256": "1a09fc42452f817e3d16a34ef5dcc44146bc5c0d27db4dbe68c104f63c315ee2",
+      "archive": "source/bodyguard__frontend__src__pages__NeckCoachingRun.tsx.gz"
+    },
+    {
+      "label": "prewarm-concurrent-a",
+      "path": "bodyguard/frontend/src/coaching/neckWorkspacePlayback.ts",
+      "sha256": "4d046cf5f768ab7c2898c9b78a0f94f2ea707ecfd5c533c6f7fd6d55c594dec3",
+      "archive": "history/4d046cf5f768ab7c2898c9b78a0f94f2ea707ecfd5c533c6f7fd6d55c594dec3-src__coaching__neckWorkspacePlayback.ts.gz"
+    },
+    {
+      "label": "prewarm-concurrent-a",
+      "path": "bodyguard/frontend/src/coaching/shrugCandidateFeedback.ts",
+      "sha256": "2cbd1c9cefe3b9267d99c2449ff3c2adddfd80345636705e20784ceb504b0d43",
+      "archive": "source/bodyguard__frontend__src__coaching__shrugCandidateFeedback.ts.gz"
+    },
+    {
+      "label": "prewarm-concurrent-a",
+      "path": "bodyguard/frontend/src/stretch/shrugCandidateClassifier.ts",
+      "sha256": "6128c211404a6f2ddcc4c0f7e81a71c1d0c69bc39b9492f5a414165165bee116",
+      "archive": "source/bodyguard__frontend__src__stretch__shrugCandidateClassifier.ts.gz"
+    },
+    {
+      "label": "prewarm-concurrent-a",
+      "path": "bodyguard/frontend/src/avatar/observedShoulderElevation.ts",
+      "sha256": "b32138a65f8fb44e2956b0709b2b7844de414c7dc65ed6c68e0467194a48a6de",
+      "archive": "source/bodyguard__frontend__src__avatar__observedShoulderElevation.ts.gz"
+    },
+    {
+      "label": "prewarm-concurrent-a",
+      "path": "bodyguard/frontend/src/avatar/observedPoseRig.ts",
+      "sha256": "2a85eddecf945708454d77e4d16d6ea0b1ed5005ddfad7b1e0e861ad1ec9ff6d",
+      "archive": "source/bodyguard__frontend__src__avatar__observedPoseRig.ts.gz"
+    },
+    {
+      "label": "prewarm-concurrent-a",
+      "path": "bodyguard/frontend/src/avatar/observedComparison.ts",
+      "sha256": "8ff0b0f380576ad10b7e482a7ac9022978f0625b827871e574c17df1e01be1f3",
+      "archive": "source/bodyguard__frontend__src__avatar__observedComparison.ts.gz"
+    },
+    {
+      "label": "prewarm-concurrent-a",
+      "path": "bodyguard/frontend/src/avatar/neckSurfaceFeedback.ts",
+      "sha256": "bab1996652b86318d931a90c87782d838b396bae3eb785f8a54bada06c4211cb",
+      "archive": "source/bodyguard__frontend__src__avatar__neckSurfaceFeedback.ts.gz"
+    },
+    {
+      "label": "prewarm-concurrent-a",
+      "path": "bodyguard/frontend/src/avatar/referenceStage.ts",
+      "sha256": "9ac3519f8acc921178877443f3cea78946f663e549cd15ce6cf914c0c32e535b",
+      "archive": "source/bodyguard__frontend__src__avatar__referenceStage.ts.gz"
+    },
+    {
+      "label": "prewarm-concurrent-a",
+      "path": "bodyguard/frontend/src/avatar/surfaceFeedback.ts",
+      "sha256": "b0c621ed26fd74697ae7b439f3770f35184f25001017c66f6c3dd4cbd7886a8a",
+      "archive": "source/bodyguard__frontend__src__avatar__surfaceFeedback.ts.gz"
+    },
+    {
+      "label": "prewarm-concurrent-a",
+      "path": "bodyguard/frontend/src/avatar/projectedSurfaceRegions.ts",
+      "sha256": "a40dfe4662a6f382680f465fa6346a1bf319ed1629a5122eab958ba3a2c6045b",
+      "archive": "source/bodyguard__frontend__src__avatar__projectedSurfaceRegions.ts.gz"
+    },
+    {
+      "label": "prewarm-concurrent-a",
+      "path": "bodyguard/frontend/src/posture/shoulderShrugObservation.ts",
+      "sha256": "5778261aee044041b6558ade91c0cebd856aa69a3e203aa30006e26018862a7e",
+      "archive": "source/bodyguard__frontend__src__posture__shoulderShrugObservation.ts.gz"
+    },
+    {
+      "label": "prewarm-concurrent-a",
+      "path": "bodyguard/frontend/src/posture/thresholds.ts",
+      "sha256": "2756415afec3eddfd899d1bddf0d6e5117ec77cad8bc55446a5612740d94de8d",
+      "archive": "source/bodyguard__frontend__src__posture__thresholds.ts.gz"
+    },
+    {
+      "label": "prewarm-concurrent-a",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugWorkspaceEntry.tsx",
+      "sha256": "f6634dbc60834113a4e8353c1b46cb7723acde6526aed8bcfa47448156086b8b",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugWorkspaceEntry.tsx.gz"
+    },
+    {
+      "label": "prewarm-concurrent-a",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugWorkspaceSource.ts",
+      "sha256": "06d3d45123503e0bdc010e167186ca14446888d4b7af8871300d8fb0246a684b",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugWorkspaceSource.ts.gz"
+    },
+    {
+      "label": "prewarm-concurrent-a",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugCandidate.ts",
+      "sha256": "1cb2ea8f8aec7b98cfb327aec48471a5df175c48e9d2c6265751b7d718c0ada4",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugCandidate.ts.gz"
+    },
+    {
+      "label": "prewarm-concurrent-a",
+      "path": "bodyguard/frontend/scripts/test-shrug-workspace.mjs",
+      "sha256": "ad33be1d2cca02b2e38e84af9a726ce6fd63f64399027b1715636be1c5445327",
+      "archive": "source/bodyguard__frontend__scripts__test-shrug-workspace.mjs.gz"
+    },
+    {
+      "label": "prewarm-concurrent-a",
+      "path": "bodyguard/frontend/vite.config.ts",
+      "sha256": "86bb8e81d20d3c53ee7b9ed796d42247817532265372fc5be42d52760251a105",
+      "archive": "source/bodyguard__frontend__vite.config.ts.gz"
+    },
+    {
+      "label": "prewarm-concurrent-a",
+      "path": "bodyguard/frontend/pnpm-lock.yaml",
+      "sha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+      "archive": "source/bodyguard__frontend__pnpm-lock.yaml.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/src/coaching/neckWorkspacePlayback.ts",
+      "sha256": "72cacfbc508b23a692f8e548d31fbbdb672fe4cc3c0c7935c468123f3d20f282",
+      "archive": "source/bodyguard__frontend__src__coaching__neckWorkspacePlayback.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/src/pages/NeckCoachingRun.tsx",
+      "sha256": "1a09fc42452f817e3d16a34ef5dcc44146bc5c0d27db4dbe68c104f63c315ee2",
+      "archive": "source/bodyguard__frontend__src__pages__NeckCoachingRun.tsx.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/src/pose/workerInference.ts",
+      "sha256": "fde00062253a12ec7caf0a9ee5a3fbf661ae393914574fba8939b0c2575b89dc",
+      "archive": "source/bodyguard__frontend__src__pose__workerInference.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/src/pose/workerInferenceRuntime.ts",
+      "sha256": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+      "archive": "source/bodyguard__frontend__src__pose__workerInferenceRuntime.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/src/pose/workerNativeEngine.ts",
+      "sha256": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+      "archive": "source/bodyguard__frontend__src__pose__workerNativeEngine.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/src/coaching/ownedPlaybackResources.ts",
+      "sha256": "144aed75e60e05c0c2e0405d427b4e4c1f1f63d3875ce8a6f38e1d0e74645a10",
+      "archive": "source/bodyguard__frontend__src__coaching__ownedPlaybackResources.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/src/avatar/ownedPosePlayback.ts",
+      "sha256": "cecd8b5e05f705f6eb04844a1c975c44ee96b64dae1507f8c2d0731693826daa",
+      "archive": "source/bodyguard__frontend__src__avatar__ownedPosePlayback.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/src/pose/videoPoseSource.ts",
+      "sha256": "5818cd775915b90a8964e540927b1ef05043be214f18f40e46d920a40f4988a7",
+      "archive": "source/bodyguard__frontend__src__pose__videoPoseSource.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/src/pose/nativeInference.worker.ts",
+      "sha256": "05f348328e805177de820a47e29dc8b06deb0cf0f6b3faaf40dcc5957b07e74b",
+      "archive": "source/bodyguard__frontend__src__pose__nativeInference.worker.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/src/avatar/referenceStage.ts",
+      "sha256": "9ac3519f8acc921178877443f3cea78946f663e549cd15ce6cf914c0c32e535b",
+      "archive": "source/bodyguard__frontend__src__avatar__referenceStage.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/src/avatar/neckSurfaceFeedback.ts",
+      "sha256": "bab1996652b86318d931a90c87782d838b396bae3eb785f8a54bada06c4211cb",
+      "archive": "source/bodyguard__frontend__src__avatar__neckSurfaceFeedback.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/src/avatar/projectedSurfaceRegions.ts",
+      "sha256": "a40dfe4662a6f382680f465fa6346a1bf319ed1629a5122eab958ba3a2c6045b",
+      "archive": "source/bodyguard__frontend__src__avatar__projectedSurfaceRegions.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/src/avatar/surfaceFeedback.ts",
+      "sha256": "b0c621ed26fd74697ae7b439f3770f35184f25001017c66f6c3dd4cbd7886a8a",
+      "archive": "source/bodyguard__frontend__src__avatar__surfaceFeedback.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/src/avatar/observedShoulderElevation.ts",
+      "sha256": "b32138a65f8fb44e2956b0709b2b7844de414c7dc65ed6c68e0467194a48a6de",
+      "archive": "source/bodyguard__frontend__src__avatar__observedShoulderElevation.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/src/avatar/observedPoseRig.ts",
+      "sha256": "2a85eddecf945708454d77e4d16d6ea0b1ed5005ddfad7b1e0e861ad1ec9ff6d",
+      "archive": "source/bodyguard__frontend__src__avatar__observedPoseRig.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/src/avatar/observedComparison.ts",
+      "sha256": "8ff0b0f380576ad10b7e482a7ac9022978f0625b827871e574c17df1e01be1f3",
+      "archive": "source/bodyguard__frontend__src__avatar__observedComparison.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/src/stretch/shrugCandidateClassifier.ts",
+      "sha256": "6128c211404a6f2ddcc4c0f7e81a71c1d0c69bc39b9492f5a414165165bee116",
+      "archive": "source/bodyguard__frontend__src__stretch__shrugCandidateClassifier.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/src/coaching/shrugCandidateFeedback.ts",
+      "sha256": "2cbd1c9cefe3b9267d99c2449ff3c2adddfd80345636705e20784ceb504b0d43",
+      "archive": "source/bodyguard__frontend__src__coaching__shrugCandidateFeedback.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/src/posture/shoulderShrugObservation.ts",
+      "sha256": "5778261aee044041b6558ade91c0cebd856aa69a3e203aa30006e26018862a7e",
+      "archive": "source/bodyguard__frontend__src__posture__shoulderShrugObservation.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/src/posture/thresholds.ts",
+      "sha256": "2756415afec3eddfd899d1bddf0d6e5117ec77cad8bc55446a5612740d94de8d",
+      "archive": "source/bodyguard__frontend__src__posture__thresholds.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugWorkspaceEntry.tsx",
+      "sha256": "f6634dbc60834113a4e8353c1b46cb7723acde6526aed8bcfa47448156086b8b",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugWorkspaceEntry.tsx.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugWorkspaceSource.ts",
+      "sha256": "06d3d45123503e0bdc010e167186ca14446888d4b7af8871300d8fb0246a684b",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugWorkspaceSource.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugCandidate.ts",
+      "sha256": "1cb2ea8f8aec7b98cfb327aec48471a5df175c48e9d2c6265751b7d718c0ada4",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugCandidate.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/e2e/fixtures/neckWorkspaceEntry.tsx",
+      "sha256": "a43d4988f912fefc4343bd1ff9ef28052d8c7d304f29c3bc919121a5c86cb455",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__neckWorkspaceEntry.tsx.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/e2e/fixtures/neckWorkspaceSource.ts",
+      "sha256": "d884303cf16aaaf307b2b96dedad0a785fa0601d0207e868f5a680ef40697390",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__neckWorkspaceSource.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/scripts/test-neck-workspace-native.mjs",
+      "sha256": "f95438be7b32773c03a40b6cfabdf95e2a22635257c6781d8e79dff2f0414b1e",
+      "archive": "history/f95438be7b32773c03a40b6cfabdf95e2a22635257c6781d8e79dff2f0414b1e-scripts__test-neck-workspace-native.mjs.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/e2e/fixtures/nativeCleanupDiagnostics.ts",
+      "sha256": "c38886569ec247f7f1f704db2a0c6680949e9a25cc8f823d69721b0ebee9e0e0",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__nativeCleanupDiagnostics.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/e2e/fixtures/nativeWorkerDiagnosticsTransform.ts",
+      "sha256": "c1c0317dce74e6fa30351c3db2a881776362a9d8129b494b424ed901e5376141",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__nativeWorkerDiagnosticsTransform.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/vite.config.ts",
+      "sha256": "86bb8e81d20d3c53ee7b9ed796d42247817532265372fc5be42d52760251a105",
+      "archive": "source/bodyguard__frontend__vite.config.ts.gz"
+    },
+    {
+      "label": "actual-native-a",
+      "path": "bodyguard/frontend/pnpm-lock.yaml",
+      "sha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+      "archive": "source/bodyguard__frontend__pnpm-lock.yaml.gz"
+    },
+    {
+      "label": "actual-browser-a",
+      "path": "bodyguard/frontend/src/pages/NeckCoachingRun.tsx",
+      "sha256": "1a09fc42452f817e3d16a34ef5dcc44146bc5c0d27db4dbe68c104f63c315ee2",
+      "archive": "source/bodyguard__frontend__src__pages__NeckCoachingRun.tsx.gz"
+    },
+    {
+      "label": "actual-browser-a",
+      "path": "bodyguard/frontend/src/coaching/neckWorkspacePlayback.ts",
+      "sha256": "72cacfbc508b23a692f8e548d31fbbdb672fe4cc3c0c7935c468123f3d20f282",
+      "archive": "source/bodyguard__frontend__src__coaching__neckWorkspacePlayback.ts.gz"
+    },
+    {
+      "label": "actual-browser-a",
+      "path": "bodyguard/frontend/src/coaching/shrugCandidateFeedback.ts",
+      "sha256": "2cbd1c9cefe3b9267d99c2449ff3c2adddfd80345636705e20784ceb504b0d43",
+      "archive": "source/bodyguard__frontend__src__coaching__shrugCandidateFeedback.ts.gz"
+    },
+    {
+      "label": "actual-browser-a",
+      "path": "bodyguard/frontend/src/stretch/shrugCandidateClassifier.ts",
+      "sha256": "6128c211404a6f2ddcc4c0f7e81a71c1d0c69bc39b9492f5a414165165bee116",
+      "archive": "source/bodyguard__frontend__src__stretch__shrugCandidateClassifier.ts.gz"
+    },
+    {
+      "label": "actual-browser-a",
+      "path": "bodyguard/frontend/src/avatar/observedShoulderElevation.ts",
+      "sha256": "b32138a65f8fb44e2956b0709b2b7844de414c7dc65ed6c68e0467194a48a6de",
+      "archive": "source/bodyguard__frontend__src__avatar__observedShoulderElevation.ts.gz"
+    },
+    {
+      "label": "actual-browser-a",
+      "path": "bodyguard/frontend/src/avatar/observedPoseRig.ts",
+      "sha256": "2a85eddecf945708454d77e4d16d6ea0b1ed5005ddfad7b1e0e861ad1ec9ff6d",
+      "archive": "source/bodyguard__frontend__src__avatar__observedPoseRig.ts.gz"
+    },
+    {
+      "label": "actual-browser-a",
+      "path": "bodyguard/frontend/src/avatar/observedComparison.ts",
+      "sha256": "8ff0b0f380576ad10b7e482a7ac9022978f0625b827871e574c17df1e01be1f3",
+      "archive": "source/bodyguard__frontend__src__avatar__observedComparison.ts.gz"
+    },
+    {
+      "label": "actual-browser-a",
+      "path": "bodyguard/frontend/src/avatar/neckSurfaceFeedback.ts",
+      "sha256": "bab1996652b86318d931a90c87782d838b396bae3eb785f8a54bada06c4211cb",
+      "archive": "source/bodyguard__frontend__src__avatar__neckSurfaceFeedback.ts.gz"
+    },
+    {
+      "label": "actual-browser-a",
+      "path": "bodyguard/frontend/src/avatar/referenceStage.ts",
+      "sha256": "9ac3519f8acc921178877443f3cea78946f663e549cd15ce6cf914c0c32e535b",
+      "archive": "source/bodyguard__frontend__src__avatar__referenceStage.ts.gz"
+    },
+    {
+      "label": "actual-browser-a",
+      "path": "bodyguard/frontend/src/avatar/surfaceFeedback.ts",
+      "sha256": "b0c621ed26fd74697ae7b439f3770f35184f25001017c66f6c3dd4cbd7886a8a",
+      "archive": "source/bodyguard__frontend__src__avatar__surfaceFeedback.ts.gz"
+    },
+    {
+      "label": "actual-browser-a",
+      "path": "bodyguard/frontend/src/avatar/projectedSurfaceRegions.ts",
+      "sha256": "a40dfe4662a6f382680f465fa6346a1bf319ed1629a5122eab958ba3a2c6045b",
+      "archive": "source/bodyguard__frontend__src__avatar__projectedSurfaceRegions.ts.gz"
+    },
+    {
+      "label": "actual-browser-a",
+      "path": "bodyguard/frontend/src/posture/shoulderShrugObservation.ts",
+      "sha256": "5778261aee044041b6558ade91c0cebd856aa69a3e203aa30006e26018862a7e",
+      "archive": "source/bodyguard__frontend__src__posture__shoulderShrugObservation.ts.gz"
+    },
+    {
+      "label": "actual-browser-a",
+      "path": "bodyguard/frontend/src/posture/thresholds.ts",
+      "sha256": "2756415afec3eddfd899d1bddf0d6e5117ec77cad8bc55446a5612740d94de8d",
+      "archive": "source/bodyguard__frontend__src__posture__thresholds.ts.gz"
+    },
+    {
+      "label": "actual-browser-a",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugWorkspaceEntry.tsx",
+      "sha256": "f6634dbc60834113a4e8353c1b46cb7723acde6526aed8bcfa47448156086b8b",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugWorkspaceEntry.tsx.gz"
+    },
+    {
+      "label": "actual-browser-a",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugWorkspaceSource.ts",
+      "sha256": "06d3d45123503e0bdc010e167186ca14446888d4b7af8871300d8fb0246a684b",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugWorkspaceSource.ts.gz"
+    },
+    {
+      "label": "actual-browser-a",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugCandidate.ts",
+      "sha256": "1cb2ea8f8aec7b98cfb327aec48471a5df175c48e9d2c6265751b7d718c0ada4",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugCandidate.ts.gz"
+    },
+    {
+      "label": "actual-browser-a",
+      "path": "bodyguard/frontend/scripts/test-shrug-workspace.mjs",
+      "sha256": "ad33be1d2cca02b2e38e84af9a726ce6fd63f64399027b1715636be1c5445327",
+      "archive": "source/bodyguard__frontend__scripts__test-shrug-workspace.mjs.gz"
+    },
+    {
+      "label": "actual-browser-a",
+      "path": "bodyguard/frontend/vite.config.ts",
+      "sha256": "86bb8e81d20d3c53ee7b9ed796d42247817532265372fc5be42d52760251a105",
+      "archive": "source/bodyguard__frontend__vite.config.ts.gz"
+    },
+    {
+      "label": "actual-browser-a",
+      "path": "bodyguard/frontend/pnpm-lock.yaml",
+      "sha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+      "archive": "source/bodyguard__frontend__pnpm-lock.yaml.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/src/coaching/neckWorkspacePlayback.ts",
+      "sha256": "72cacfbc508b23a692f8e548d31fbbdb672fe4cc3c0c7935c468123f3d20f282",
+      "archive": "source/bodyguard__frontend__src__coaching__neckWorkspacePlayback.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/src/pages/NeckCoachingRun.tsx",
+      "sha256": "1a09fc42452f817e3d16a34ef5dcc44146bc5c0d27db4dbe68c104f63c315ee2",
+      "archive": "source/bodyguard__frontend__src__pages__NeckCoachingRun.tsx.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/src/pose/workerInference.ts",
+      "sha256": "fde00062253a12ec7caf0a9ee5a3fbf661ae393914574fba8939b0c2575b89dc",
+      "archive": "source/bodyguard__frontend__src__pose__workerInference.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/src/pose/workerInferenceRuntime.ts",
+      "sha256": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+      "archive": "source/bodyguard__frontend__src__pose__workerInferenceRuntime.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/src/pose/workerNativeEngine.ts",
+      "sha256": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+      "archive": "source/bodyguard__frontend__src__pose__workerNativeEngine.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/src/coaching/ownedPlaybackResources.ts",
+      "sha256": "144aed75e60e05c0c2e0405d427b4e4c1f1f63d3875ce8a6f38e1d0e74645a10",
+      "archive": "source/bodyguard__frontend__src__coaching__ownedPlaybackResources.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/src/avatar/ownedPosePlayback.ts",
+      "sha256": "cecd8b5e05f705f6eb04844a1c975c44ee96b64dae1507f8c2d0731693826daa",
+      "archive": "source/bodyguard__frontend__src__avatar__ownedPosePlayback.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/src/pose/videoPoseSource.ts",
+      "sha256": "5818cd775915b90a8964e540927b1ef05043be214f18f40e46d920a40f4988a7",
+      "archive": "source/bodyguard__frontend__src__pose__videoPoseSource.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/src/pose/nativeInference.worker.ts",
+      "sha256": "05f348328e805177de820a47e29dc8b06deb0cf0f6b3faaf40dcc5957b07e74b",
+      "archive": "source/bodyguard__frontend__src__pose__nativeInference.worker.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/src/avatar/referenceStage.ts",
+      "sha256": "9ac3519f8acc921178877443f3cea78946f663e549cd15ce6cf914c0c32e535b",
+      "archive": "source/bodyguard__frontend__src__avatar__referenceStage.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/src/avatar/neckSurfaceFeedback.ts",
+      "sha256": "bab1996652b86318d931a90c87782d838b396bae3eb785f8a54bada06c4211cb",
+      "archive": "source/bodyguard__frontend__src__avatar__neckSurfaceFeedback.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/src/avatar/projectedSurfaceRegions.ts",
+      "sha256": "a40dfe4662a6f382680f465fa6346a1bf319ed1629a5122eab958ba3a2c6045b",
+      "archive": "source/bodyguard__frontend__src__avatar__projectedSurfaceRegions.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/src/avatar/surfaceFeedback.ts",
+      "sha256": "b0c621ed26fd74697ae7b439f3770f35184f25001017c66f6c3dd4cbd7886a8a",
+      "archive": "source/bodyguard__frontend__src__avatar__surfaceFeedback.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/src/avatar/observedShoulderElevation.ts",
+      "sha256": "b32138a65f8fb44e2956b0709b2b7844de414c7dc65ed6c68e0467194a48a6de",
+      "archive": "source/bodyguard__frontend__src__avatar__observedShoulderElevation.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/src/avatar/observedPoseRig.ts",
+      "sha256": "2a85eddecf945708454d77e4d16d6ea0b1ed5005ddfad7b1e0e861ad1ec9ff6d",
+      "archive": "source/bodyguard__frontend__src__avatar__observedPoseRig.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/src/avatar/observedComparison.ts",
+      "sha256": "8ff0b0f380576ad10b7e482a7ac9022978f0625b827871e574c17df1e01be1f3",
+      "archive": "source/bodyguard__frontend__src__avatar__observedComparison.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/src/stretch/shrugCandidateClassifier.ts",
+      "sha256": "6128c211404a6f2ddcc4c0f7e81a71c1d0c69bc39b9492f5a414165165bee116",
+      "archive": "source/bodyguard__frontend__src__stretch__shrugCandidateClassifier.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/src/coaching/shrugCandidateFeedback.ts",
+      "sha256": "2cbd1c9cefe3b9267d99c2449ff3c2adddfd80345636705e20784ceb504b0d43",
+      "archive": "source/bodyguard__frontend__src__coaching__shrugCandidateFeedback.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/src/posture/shoulderShrugObservation.ts",
+      "sha256": "5778261aee044041b6558ade91c0cebd856aa69a3e203aa30006e26018862a7e",
+      "archive": "source/bodyguard__frontend__src__posture__shoulderShrugObservation.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/src/posture/thresholds.ts",
+      "sha256": "2756415afec3eddfd899d1bddf0d6e5117ec77cad8bc55446a5612740d94de8d",
+      "archive": "source/bodyguard__frontend__src__posture__thresholds.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugWorkspaceEntry.tsx",
+      "sha256": "f6634dbc60834113a4e8353c1b46cb7723acde6526aed8bcfa47448156086b8b",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugWorkspaceEntry.tsx.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugWorkspaceSource.ts",
+      "sha256": "06d3d45123503e0bdc010e167186ca14446888d4b7af8871300d8fb0246a684b",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugWorkspaceSource.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugCandidate.ts",
+      "sha256": "1cb2ea8f8aec7b98cfb327aec48471a5df175c48e9d2c6265751b7d718c0ada4",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugCandidate.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/e2e/fixtures/neckWorkspaceEntry.tsx",
+      "sha256": "a43d4988f912fefc4343bd1ff9ef28052d8c7d304f29c3bc919121a5c86cb455",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__neckWorkspaceEntry.tsx.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/e2e/fixtures/neckWorkspaceSource.ts",
+      "sha256": "d884303cf16aaaf307b2b96dedad0a785fa0601d0207e868f5a680ef40697390",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__neckWorkspaceSource.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/scripts/test-neck-workspace-native.mjs",
+      "sha256": "f95438be7b32773c03a40b6cfabdf95e2a22635257c6781d8e79dff2f0414b1e",
+      "archive": "history/f95438be7b32773c03a40b6cfabdf95e2a22635257c6781d8e79dff2f0414b1e-scripts__test-neck-workspace-native.mjs.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/e2e/fixtures/nativeCleanupDiagnostics.ts",
+      "sha256": "c38886569ec247f7f1f704db2a0c6680949e9a25cc8f823d69721b0ebee9e0e0",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__nativeCleanupDiagnostics.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/e2e/fixtures/nativeWorkerDiagnosticsTransform.ts",
+      "sha256": "c1c0317dce74e6fa30351c3db2a881776362a9d8129b494b424ed901e5376141",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__nativeWorkerDiagnosticsTransform.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/vite.config.ts",
+      "sha256": "86bb8e81d20d3c53ee7b9ed796d42247817532265372fc5be42d52760251a105",
+      "archive": "source/bodyguard__frontend__vite.config.ts.gz"
+    },
+    {
+      "label": "actual-default-a",
+      "path": "bodyguard/frontend/pnpm-lock.yaml",
+      "sha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+      "archive": "source/bodyguard__frontend__pnpm-lock.yaml.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/src/coaching/neckWorkspacePlayback.ts",
+      "sha256": "72cacfbc508b23a692f8e548d31fbbdb672fe4cc3c0c7935c468123f3d20f282",
+      "archive": "source/bodyguard__frontend__src__coaching__neckWorkspacePlayback.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/src/pages/NeckCoachingRun.tsx",
+      "sha256": "1a09fc42452f817e3d16a34ef5dcc44146bc5c0d27db4dbe68c104f63c315ee2",
+      "archive": "source/bodyguard__frontend__src__pages__NeckCoachingRun.tsx.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/src/pose/workerInference.ts",
+      "sha256": "fde00062253a12ec7caf0a9ee5a3fbf661ae393914574fba8939b0c2575b89dc",
+      "archive": "source/bodyguard__frontend__src__pose__workerInference.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/src/pose/workerInferenceRuntime.ts",
+      "sha256": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+      "archive": "source/bodyguard__frontend__src__pose__workerInferenceRuntime.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/src/pose/workerNativeEngine.ts",
+      "sha256": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+      "archive": "source/bodyguard__frontend__src__pose__workerNativeEngine.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/src/coaching/ownedPlaybackResources.ts",
+      "sha256": "144aed75e60e05c0c2e0405d427b4e4c1f1f63d3875ce8a6f38e1d0e74645a10",
+      "archive": "source/bodyguard__frontend__src__coaching__ownedPlaybackResources.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/src/avatar/ownedPosePlayback.ts",
+      "sha256": "cecd8b5e05f705f6eb04844a1c975c44ee96b64dae1507f8c2d0731693826daa",
+      "archive": "source/bodyguard__frontend__src__avatar__ownedPosePlayback.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/src/pose/videoPoseSource.ts",
+      "sha256": "5818cd775915b90a8964e540927b1ef05043be214f18f40e46d920a40f4988a7",
+      "archive": "source/bodyguard__frontend__src__pose__videoPoseSource.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/src/pose/nativeInference.worker.ts",
+      "sha256": "05f348328e805177de820a47e29dc8b06deb0cf0f6b3faaf40dcc5957b07e74b",
+      "archive": "source/bodyguard__frontend__src__pose__nativeInference.worker.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/src/avatar/referenceStage.ts",
+      "sha256": "9ac3519f8acc921178877443f3cea78946f663e549cd15ce6cf914c0c32e535b",
+      "archive": "source/bodyguard__frontend__src__avatar__referenceStage.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/src/avatar/neckSurfaceFeedback.ts",
+      "sha256": "bab1996652b86318d931a90c87782d838b396bae3eb785f8a54bada06c4211cb",
+      "archive": "source/bodyguard__frontend__src__avatar__neckSurfaceFeedback.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/src/avatar/projectedSurfaceRegions.ts",
+      "sha256": "a40dfe4662a6f382680f465fa6346a1bf319ed1629a5122eab958ba3a2c6045b",
+      "archive": "source/bodyguard__frontend__src__avatar__projectedSurfaceRegions.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/src/avatar/surfaceFeedback.ts",
+      "sha256": "b0c621ed26fd74697ae7b439f3770f35184f25001017c66f6c3dd4cbd7886a8a",
+      "archive": "source/bodyguard__frontend__src__avatar__surfaceFeedback.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/src/avatar/observedShoulderElevation.ts",
+      "sha256": "b32138a65f8fb44e2956b0709b2b7844de414c7dc65ed6c68e0467194a48a6de",
+      "archive": "source/bodyguard__frontend__src__avatar__observedShoulderElevation.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/src/avatar/observedPoseRig.ts",
+      "sha256": "2a85eddecf945708454d77e4d16d6ea0b1ed5005ddfad7b1e0e861ad1ec9ff6d",
+      "archive": "source/bodyguard__frontend__src__avatar__observedPoseRig.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/src/avatar/observedComparison.ts",
+      "sha256": "8ff0b0f380576ad10b7e482a7ac9022978f0625b827871e574c17df1e01be1f3",
+      "archive": "source/bodyguard__frontend__src__avatar__observedComparison.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/src/stretch/shrugCandidateClassifier.ts",
+      "sha256": "6128c211404a6f2ddcc4c0f7e81a71c1d0c69bc39b9492f5a414165165bee116",
+      "archive": "source/bodyguard__frontend__src__stretch__shrugCandidateClassifier.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/src/coaching/shrugCandidateFeedback.ts",
+      "sha256": "2cbd1c9cefe3b9267d99c2449ff3c2adddfd80345636705e20784ceb504b0d43",
+      "archive": "source/bodyguard__frontend__src__coaching__shrugCandidateFeedback.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/src/posture/shoulderShrugObservation.ts",
+      "sha256": "5778261aee044041b6558ade91c0cebd856aa69a3e203aa30006e26018862a7e",
+      "archive": "source/bodyguard__frontend__src__posture__shoulderShrugObservation.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/src/posture/thresholds.ts",
+      "sha256": "2756415afec3eddfd899d1bddf0d6e5117ec77cad8bc55446a5612740d94de8d",
+      "archive": "source/bodyguard__frontend__src__posture__thresholds.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugWorkspaceEntry.tsx",
+      "sha256": "f6634dbc60834113a4e8353c1b46cb7723acde6526aed8bcfa47448156086b8b",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugWorkspaceEntry.tsx.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugWorkspaceSource.ts",
+      "sha256": "06d3d45123503e0bdc010e167186ca14446888d4b7af8871300d8fb0246a684b",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugWorkspaceSource.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/e2e/fixtures/shrugCandidate.ts",
+      "sha256": "1cb2ea8f8aec7b98cfb327aec48471a5df175c48e9d2c6265751b7d718c0ada4",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__shrugCandidate.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/e2e/fixtures/neckWorkspaceEntry.tsx",
+      "sha256": "a43d4988f912fefc4343bd1ff9ef28052d8c7d304f29c3bc919121a5c86cb455",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__neckWorkspaceEntry.tsx.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/e2e/fixtures/neckWorkspaceSource.ts",
+      "sha256": "d884303cf16aaaf307b2b96dedad0a785fa0601d0207e868f5a680ef40697390",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__neckWorkspaceSource.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/scripts/test-neck-workspace-native.mjs",
+      "sha256": "8a2b98635fcdf730fe24364bd25daee44f42a408c7cd33bfca6f22c72474941a",
+      "archive": "source/bodyguard__frontend__scripts__test-neck-workspace-native.mjs.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/e2e/fixtures/nativeCleanupDiagnostics.ts",
+      "sha256": "c38886569ec247f7f1f704db2a0c6680949e9a25cc8f823d69721b0ebee9e0e0",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__nativeCleanupDiagnostics.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/e2e/fixtures/nativeWorkerDiagnosticsTransform.ts",
+      "sha256": "c1c0317dce74e6fa30351c3db2a881776362a9d8129b494b424ed901e5376141",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__nativeWorkerDiagnosticsTransform.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/vite.config.ts",
+      "sha256": "86bb8e81d20d3c53ee7b9ed796d42247817532265372fc5be42d52760251a105",
+      "archive": "source/bodyguard__frontend__vite.config.ts.gz"
+    },
+    {
+      "label": "actual-native-final",
+      "path": "bodyguard/frontend/pnpm-lock.yaml",
+      "sha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+      "archive": "source/bodyguard__frontend__pnpm-lock.yaml.gz"
+    }
+  ],
+  "missingHistorical": [
+    {
+      "label": "failure-probe-b",
+      "path": "bodyguard/frontend/scripts/test-neck-workspace-native.mjs",
+      "sha256": "f3e728d90671eae3b083c8050c0722f7e78010c5bfd991f1dd6eeaeca46834a4",
+      "status": "exact intermediate source not preserved; fingerprint/log retained"
+    }
+  ],
+  "artifacts": [
+    {
+      "original": "actual-browser-a-completed-result.png",
+      "archive": "evidence/actual-browser-a-completed-result.png",
+      "sha256": "73999c33999354b7ea01fa4dd64a8d1847602ba53cfff6166c8bd43ed0e55ab5",
+      "archiveSha256": "73999c33999354b7ea01fa4dd64a8d1847602ba53cfff6166c8bd43ed0e55ab5",
+      "bytes": 60971
+    },
+    {
+      "original": "actual-browser-a-empty-no-success.png",
+      "archive": "evidence/actual-browser-a-empty-no-success.png",
+      "sha256": "12bdc41ce4de60c0e4117a487af854e826cedd3437af06ac532d974c19cdc4f4",
+      "archiveSha256": "12bdc41ce4de60c0e4117a487af854e826cedd3437af06ac532d974c19cdc4f4",
+      "bytes": 111625
+    },
+    {
+      "original": "actual-browser-a-female-asymmetry.png",
+      "archive": "evidence/actual-browser-a-female-asymmetry.png",
+      "sha256": "6634f824d6caf2dc5e907615c3e5404f8a60afca73d96192257b4e4f7de356d7",
+      "archiveSha256": "6634f824d6caf2dc5e907615c3e5404f8a60afca73d96192257b4e4f7de356d7",
+      "bytes": 150271
+    },
+    {
+      "original": "actual-browser-a-female-laptop.png",
+      "archive": "evidence/actual-browser-a-female-laptop.png",
+      "sha256": "0e644d097c48366b1615248fe7e2ff26643e83f78c06df7a3fb88a6ab04a088d",
+      "archiveSha256": "0e644d097c48366b1615248fe7e2ff26643e83f78c06df7a3fb88a6ab04a088d",
+      "bytes": 100985
+    },
+    {
+      "original": "actual-browser-a-female-neutral.png",
+      "archive": "evidence/actual-browser-a-female-neutral.png",
+      "sha256": "9f3fde118f04000a0410445ee991ab945f3d2edd2b985a2c51fefa02faa2826d",
+      "archiveSha256": "9f3fde118f04000a0410445ee991ab945f3d2edd2b985a2c51fefa02faa2826d",
+      "bytes": 143903
+    },
+    {
+      "original": "actual-browser-a-male-asymmetry.png",
+      "archive": "evidence/actual-browser-a-male-asymmetry.png",
+      "sha256": "714d6e4e866b899418ded87cbaf0252fcca240d8cc34d616e6d5c3ac6c3fb02d",
+      "archiveSha256": "714d6e4e866b899418ded87cbaf0252fcca240d8cc34d616e6d5c3ac6c3fb02d",
+      "bytes": 164673
+    },
+    {
+      "original": "actual-browser-a-male-head-feedback.png",
+      "archive": "evidence/actual-browser-a-male-head-feedback.png",
+      "sha256": "37f96a302cce86320ee7b3efe3607e12e631e24b1a00d95ebc50d58ef205716b",
+      "archiveSha256": "37f96a302cce86320ee7b3efe3607e12e631e24b1a00d95ebc50d58ef205716b",
+      "bytes": 161508
+    },
+    {
+      "original": "actual-browser-a-male-neutral.png",
+      "archive": "evidence/actual-browser-a-male-neutral.png",
+      "sha256": "ca5a6ff744151626ecbb5efb96a0d2cdabd467cb2fc98edcb47bc0ae68a31e72",
+      "archiveSha256": "ca5a6ff744151626ecbb5efb96a0d2cdabd467cb2fc98edcb47bc0ae68a31e72",
+      "bytes": 156782
+    },
+    {
+      "original": "actual-browser-a-male-raised.png",
+      "archive": "evidence/actual-browser-a-male-raised.png",
+      "sha256": "8be40df393cf2080fce80f76df2c48c9ade75cbdb90545268fb56fea5f2b0d37",
+      "archiveSha256": "8be40df393cf2080fce80f76df2c48c9ade75cbdb90545268fb56fea5f2b0d37",
+      "bytes": 160243
+    },
+    {
+      "original": "actual-browser-a.json",
+      "archive": "evidence/actual-browser-a.json",
+      "sha256": "933297cb2df27e65f5ec3b9b1f7881313d6a6608ba14a207b6e67832c367f8cb",
+      "archiveSha256": "933297cb2df27e65f5ec3b9b1f7881313d6a6608ba14a207b6e67832c367f8cb",
+      "bytes": 4919
+    },
+    {
+      "original": "actual-browser-a.log",
+      "archive": "evidence/actual-browser-a.log.gz",
+      "sha256": "4da443acb950d3dcf29ed48ff7d4b91e5d1e3597a6bf69aad94676638699f369",
+      "archiveSha256": "e2377aa61086eb932a2c44b869563150e2c13f8e14b50c77bd35afd4e7062a27",
+      "bytes": 178
+    },
+    {
+      "original": "actual-default-a-running.png",
+      "archive": "evidence/actual-default-a-running.png",
+      "sha256": "43cda878c2ef4e8d4d56543f1c5d34ed17b8f38fa6a422be24cb788e8b7f6004",
+      "archiveSha256": "43cda878c2ef4e8d4d56543f1c5d34ed17b8f38fa6a422be24cb788e8b7f6004",
+      "bytes": 111668
+    },
+    {
+      "original": "actual-default-a-stopped.png",
+      "archive": "evidence/actual-default-a-stopped.png",
+      "sha256": "f5e5b0718e9e120d3688681655d4d36faece6d300b020d2832ae0f59a9f2f980",
+      "archiveSha256": "f5e5b0718e9e120d3688681655d4d36faece6d300b020d2832ae0f59a9f2f980",
+      "bytes": 64837
+    },
+    {
+      "original": "actual-default-a.json",
+      "archive": "evidence/actual-default-a.json",
+      "sha256": "3ed2452ef15c73dfaebbce16eddd14e607e104e1112b5bd8e3606f9b730fa59a",
+      "archiveSha256": "3ed2452ef15c73dfaebbce16eddd14e607e104e1112b5bd8e3606f9b730fa59a",
+      "bytes": 13201
+    },
+    {
+      "original": "actual-default-a.log",
+      "archive": "evidence/actual-default-a.log.gz",
+      "sha256": "2990f05be77d13aeb484b65b469aef490d714a258e3bdb991850c157d1856ea1",
+      "archiveSha256": "5560abf953e500b2b90a427444a72a3023d63bb166bfccb84a534b1ce4a289e8",
+      "bytes": 193
+    },
+    {
+      "original": "actual-native-a-running.png",
+      "archive": "evidence/actual-native-a-running.png",
+      "sha256": "12bdc41ce4de60c0e4117a487af854e826cedd3437af06ac532d974c19cdc4f4",
+      "archiveSha256": "12bdc41ce4de60c0e4117a487af854e826cedd3437af06ac532d974c19cdc4f4",
+      "bytes": 111625
+    },
+    {
+      "original": "actual-native-a-stopped.png",
+      "archive": "evidence/actual-native-a-stopped.png",
+      "sha256": "7e4c66f82c3cf8367983e3ee9a15636d53b69839da493cbe3d7e5165f07430bd",
+      "archiveSha256": "7e4c66f82c3cf8367983e3ee9a15636d53b69839da493cbe3d7e5165f07430bd",
+      "bytes": 63250
+    },
+    {
+      "original": "actual-native-a.json",
+      "archive": "evidence/actual-native-a.json",
+      "sha256": "a3ad5bc3a4e39c76b44fc3678c65fa2dc0d3b798b56cb918e228c2eae79d1538",
+      "archiveSha256": "a3ad5bc3a4e39c76b44fc3678c65fa2dc0d3b798b56cb918e228c2eae79d1538",
+      "bytes": 23939
+    },
+    {
+      "original": "actual-native-a.log",
+      "archive": "evidence/actual-native-a.log.gz",
+      "sha256": "85f710f98af97f8f8b5373c2a9b11460b87d3f07d7467367ca2395563365caa1",
+      "archiveSha256": "77eaf5add2301114f1995e08f7521109884e41d3bc090d88e1a92540ad2a4dfd",
+      "bytes": 192
+    },
+    {
+      "original": "actual-native-final-running.png",
+      "archive": "evidence/actual-native-final-running.png",
+      "sha256": "12bdc41ce4de60c0e4117a487af854e826cedd3437af06ac532d974c19cdc4f4",
+      "archiveSha256": "12bdc41ce4de60c0e4117a487af854e826cedd3437af06ac532d974c19cdc4f4",
+      "bytes": 111625
+    },
+    {
+      "original": "actual-native-final-stopped.png",
+      "archive": "evidence/actual-native-final-stopped.png",
+      "sha256": "7e4c66f82c3cf8367983e3ee9a15636d53b69839da493cbe3d7e5165f07430bd",
+      "archiveSha256": "7e4c66f82c3cf8367983e3ee9a15636d53b69839da493cbe3d7e5165f07430bd",
+      "bytes": 63250
+    },
+    {
+      "original": "actual-native-final.json",
+      "archive": "evidence/actual-native-final.json",
+      "sha256": "a114f16001515ebed41904d9bd704e88e95a6296ae5e53aa8eddc2342a0261c7",
+      "archiveSha256": "a114f16001515ebed41904d9bd704e88e95a6296ae5e53aa8eddc2342a0261c7",
+      "bytes": 17140
+    },
+    {
+      "original": "actual-native-final.log",
+      "archive": "evidence/actual-native-final.log.gz",
+      "sha256": "9062c44ecc1198864a1e963a08cd3fa6cc10d4e8951a028aaf56a40b0d43f58f",
+      "archiveSha256": "1a8d06aacdc5a2f7d1527a15155c1d23beacd6c16a1ea853002f2b6a871f6721",
+      "bytes": 260
+    },
+    {
+      "original": "build-a.log",
+      "archive": "evidence/build-a.log.gz",
+      "sha256": "ee9692cd212a65b5249d121a90494373922ce05aeeaa88eba03b7f8b5c521192",
+      "archiveSha256": "5b2680a92d12c18df9c6cbba3ed800b3ec090e6244f69efab9be56a78025dfcb",
+      "bytes": 632
+    },
+    {
+      "original": "check-a.log",
+      "archive": "evidence/check-a.log.gz",
+      "sha256": "38a2475201052f1cb94772820fe8dd85a0025359446e91fd2c7b6aebd615b714",
+      "archiveSha256": "0f57872b9358b73be16328604ca33e20588b1dd0886a89923c50a91bc07e6637",
+      "bytes": 17165
+    },
+    {
+      "original": "failure-concurrent-a.log",
+      "archive": "evidence/failure-concurrent-a.log.gz",
+      "sha256": "bdc8f56b7226e081582f5188f7933a6d646a61d8d62fb1cb9bfff48ec4862cf3",
+      "archiveSha256": "3d947eeb6cdb702831ef8d14b713e98544ac8cf8c026e06097e3b335e58c771c",
+      "bytes": 1145
+    },
+    {
+      "original": "failure-concurrent-b-completed-result.png",
+      "archive": "evidence/failure-concurrent-b-completed-result.png",
+      "sha256": "73999c33999354b7ea01fa4dd64a8d1847602ba53cfff6166c8bd43ed0e55ab5",
+      "archiveSha256": "73999c33999354b7ea01fa4dd64a8d1847602ba53cfff6166c8bd43ed0e55ab5",
+      "bytes": 60971
+    },
+    {
+      "original": "failure-concurrent-b-empty-no-success.png",
+      "archive": "evidence/failure-concurrent-b-empty-no-success.png",
+      "sha256": "12bdc41ce4de60c0e4117a487af854e826cedd3437af06ac532d974c19cdc4f4",
+      "archiveSha256": "12bdc41ce4de60c0e4117a487af854e826cedd3437af06ac532d974c19cdc4f4",
+      "bytes": 111625
+    },
+    {
+      "original": "failure-concurrent-b-female-asymmetry.png",
+      "archive": "evidence/failure-concurrent-b-female-asymmetry.png",
+      "sha256": "111e00bedc9c2bd0f12b32c698c642180d12e2eb467d70eb017204821d38e91b",
+      "archiveSha256": "111e00bedc9c2bd0f12b32c698c642180d12e2eb467d70eb017204821d38e91b",
+      "bytes": 150785
+    },
+    {
+      "original": "failure-concurrent-b-female-laptop.png",
+      "archive": "evidence/failure-concurrent-b-female-laptop.png",
+      "sha256": "2821dfd2fb3a6ffed46607b16e902aed4d8d2288a976e81f73ac62cc0c569997",
+      "archiveSha256": "2821dfd2fb3a6ffed46607b16e902aed4d8d2288a976e81f73ac62cc0c569997",
+      "bytes": 100761
+    },
+    {
+      "original": "failure-concurrent-b-female-neutral.png",
+      "archive": "evidence/failure-concurrent-b-female-neutral.png",
+      "sha256": "6b1c4bbd456b355131d2d9410baadef9f3bc2ac379e7505ba62f6b895b4dd9d2",
+      "archiveSha256": "6b1c4bbd456b355131d2d9410baadef9f3bc2ac379e7505ba62f6b895b4dd9d2",
+      "bytes": 144153
+    },
+    {
+      "original": "failure-concurrent-b-male-asymmetry.png",
+      "archive": "evidence/failure-concurrent-b-male-asymmetry.png",
+      "sha256": "2a3a521b7f1bc593db9265dfe37280ae66f7cdbe487f2aec4e5f2218f23fb43d",
+      "archiveSha256": "2a3a521b7f1bc593db9265dfe37280ae66f7cdbe487f2aec4e5f2218f23fb43d",
+      "bytes": 164448
+    },
+    {
+      "original": "failure-concurrent-b-male-head-feedback.png",
+      "archive": "evidence/failure-concurrent-b-male-head-feedback.png",
+      "sha256": "7bc891c6f19c1faa35ed182c17b41509dfe2d4223c5f43bf2e236a9c283509ea",
+      "archiveSha256": "7bc891c6f19c1faa35ed182c17b41509dfe2d4223c5f43bf2e236a9c283509ea",
+      "bytes": 161694
+    },
+    {
+      "original": "failure-concurrent-b-male-neutral.png",
+      "archive": "evidence/failure-concurrent-b-male-neutral.png",
+      "sha256": "4e5450acc0777ed958096fcb84dd0dde6200dd4005421a363c457280984825e7",
+      "archiveSha256": "4e5450acc0777ed958096fcb84dd0dde6200dd4005421a363c457280984825e7",
+      "bytes": 156711
+    },
+    {
+      "original": "failure-concurrent-b-male-raised.png",
+      "archive": "evidence/failure-concurrent-b-male-raised.png",
+      "sha256": "1c6b5a7636f2d1fc7676d29f9e737a350d4663916253bad2f1b16847dcfc1ba3",
+      "archiveSha256": "1c6b5a7636f2d1fc7676d29f9e737a350d4663916253bad2f1b16847dcfc1ba3",
+      "bytes": 158134
+    },
+    {
+      "original": "failure-concurrent-b.json",
+      "archive": "evidence/failure-concurrent-b.json",
+      "sha256": "e5dc3af14c8b05bb1e4f9bc769ee3d8ca917ff48d4f8ab8e81d9d10bbf60bd21",
+      "archiveSha256": "e5dc3af14c8b05bb1e4f9bc769ee3d8ca917ff48d4f8ab8e81d9d10bbf60bd21",
+      "bytes": 4919
+    },
+    {
+      "original": "failure-concurrent-b.log",
+      "archive": "evidence/failure-concurrent-b.log.gz",
+      "sha256": "cb9ec468ce33b3df3febd1dd10f94b954ee514c84f5e2f2771d0f8cb6be2cdc6",
+      "archiveSha256": "6649f28a598c45a71587540c09ebbdd2263752e5a55e1ac76d7109217e371ef7",
+      "bytes": 178
+    },
+    {
+      "original": "failure-probe-a.log",
+      "archive": "evidence/failure-probe-a.log.gz",
+      "sha256": "aa6026f6f615ae495d826db9eb09fe56d547313d2615467f8352c88137fda466",
+      "archiveSha256": "424b6e07d5e70a7e279bc3b48c4b70e309188a20e40dd950c0342e8cb6cb9eec",
+      "bytes": 1135
+    },
+    {
+      "original": "failure-probe-b-failure-ui.txt",
+      "archive": "evidence/failure-probe-b-failure-ui.txt.gz",
+      "sha256": "b719794c148759b014718a29fdda737859c40632fba7f231f9f28362124b3e06",
+      "archiveSha256": "fc66f79075107b418080cfc4e42ae661b3137b13a07fe12d2b541349069f75d4",
+      "bytes": 781
+    },
+    {
+      "original": "failure-probe-b-failure.png",
+      "archive": "evidence/failure-probe-b-failure.png",
+      "sha256": "da6465c9757acd3f9d722d72375fdc06840c57783daabf4867afecf35a70be17",
+      "archiveSha256": "da6465c9757acd3f9d722d72375fdc06840c57783daabf4867afecf35a70be17",
+      "bytes": 52425
+    },
+    {
+      "original": "failure-probe-b-running.png",
+      "archive": "evidence/failure-probe-b-running.png",
+      "sha256": "12bdc41ce4de60c0e4117a487af854e826cedd3437af06ac532d974c19cdc4f4",
+      "archiveSha256": "12bdc41ce4de60c0e4117a487af854e826cedd3437af06ac532d974c19cdc4f4",
+      "bytes": 111625
+    },
+    {
+      "original": "failure-probe-b.json",
+      "archive": "evidence/failure-probe-b.json",
+      "sha256": "12051983bfb6732c7c996241e0966854f28dc16585158e962520987694b79d58",
+      "archiveSha256": "12051983bfb6732c7c996241e0966854f28dc16585158e962520987694b79d58",
+      "bytes": 18518
+    },
+    {
+      "original": "failure-probe-b.log",
+      "archive": "evidence/failure-probe-b.log.gz",
+      "sha256": "9c16e17da3a878f7326967aa2c4286698fd90412a4c823f178774fa1141fed5e",
+      "archiveSha256": "39b6260838ddbe3bd6dd910a28e7f9935373efbc0dda8df4f4255f36aa10f56e",
+      "bytes": 809
+    },
+    {
+      "original": "full-a.log",
+      "archive": "evidence/full-a.log.gz",
+      "sha256": "a5ecf21ac61c8eaca4fd0b3854e8d038f79e2d3a7a25f7aba247fa09351430cd",
+      "archiveSha256": "3a85f9af209dc9f97eaf6cd1404da536a5242032913b285912343d6eff1864ea",
+      "bytes": 609
+    },
+    {
+      "original": "helper-a.log",
+      "archive": "evidence/helper-a.log.gz",
+      "sha256": "53f26730c6e7680695017ed68a7baa3e2534d755b76f138ad11ecb174e1e35cf",
+      "archiveSha256": "d9373f4b9f0688670411eaa8c149c0d855aa180d7e78a9cee7ea3fb4e4f958d5",
+      "bytes": 352
+    },
+    {
+      "original": "helper-b.log",
+      "archive": "evidence/helper-b.log.gz",
+      "sha256": "32fe074cd739ceb92a0b805ef6fb38780666e9f32c62669e70ad4679d1be82e7",
+      "archiveSha256": "dc33c92fd4d666d356ee96e7221ee67d77fbef812582ebc79ed776f529d96151",
+      "bytes": 352
+    },
+    {
+      "original": "neck-regression-a.log",
+      "archive": "evidence/neck-regression-a.log.gz",
+      "sha256": "13cc52969f3ca8c27fc596713f476acc710a8bc52437400ab893a411a75b1ac8",
+      "archiveSha256": "0b954179c8b435923ee3b72106dbcbc1e78f3b0a7d36055d6ddef08c04239add",
+      "bytes": 197
+    },
+    {
+      "original": "prewarm-a-running.png",
+      "archive": "evidence/prewarm-a-running.png",
+      "sha256": "12bdc41ce4de60c0e4117a487af854e826cedd3437af06ac532d974c19cdc4f4",
+      "archiveSha256": "12bdc41ce4de60c0e4117a487af854e826cedd3437af06ac532d974c19cdc4f4",
+      "bytes": 111625
+    },
+    {
+      "original": "prewarm-a-stopped.png",
+      "archive": "evidence/prewarm-a-stopped.png",
+      "sha256": "b95190d38214b5f27036006792e0bc34acc5a8aa29e00057b8659534afdd503b",
+      "archiveSha256": "b95190d38214b5f27036006792e0bc34acc5a8aa29e00057b8659534afdd503b",
+      "bytes": 63227
+    },
+    {
+      "original": "prewarm-a.json",
+      "archive": "evidence/prewarm-a.json",
+      "sha256": "7e9a70fdf7fcdd25b88eaa16bee03a699e9df7f599561f0273c68adfecbd40fe",
+      "archiveSha256": "7e9a70fdf7fcdd25b88eaa16bee03a699e9df7f599561f0273c68adfecbd40fe",
+      "bytes": 23578
+    },
+    {
+      "original": "prewarm-a.log",
+      "archive": "evidence/prewarm-a.log.gz",
+      "sha256": "555c7c318e4af0076ab2b1d307dea96d2fa86ff2d5a6352f12d217aebf0eccad",
+      "archiveSha256": "6368e3d070aa822a25f230c035beb1701a97c4e0839f635d2cc73822748e20fa",
+      "bytes": 186
+    },
+    {
+      "original": "prewarm-concurrent-a-completed-result.png",
+      "archive": "evidence/prewarm-concurrent-a-completed-result.png",
+      "sha256": "20592d1789260ff88b739da54c48548ea3b646d07f63cdcd2ac6cdfcc95ecdad",
+      "archiveSha256": "20592d1789260ff88b739da54c48548ea3b646d07f63cdcd2ac6cdfcc95ecdad",
+      "bytes": 60991
+    },
+    {
+      "original": "prewarm-concurrent-a-empty-no-success.png",
+      "archive": "evidence/prewarm-concurrent-a-empty-no-success.png",
+      "sha256": "12bdc41ce4de60c0e4117a487af854e826cedd3437af06ac532d974c19cdc4f4",
+      "archiveSha256": "12bdc41ce4de60c0e4117a487af854e826cedd3437af06ac532d974c19cdc4f4",
+      "bytes": 111625
+    },
+    {
+      "original": "prewarm-concurrent-a-female-asymmetry.png",
+      "archive": "evidence/prewarm-concurrent-a-female-asymmetry.png",
+      "sha256": "5e6507b81308735a9d7ac6b5ab7b0a8c23ed0951ffb9272543db800c45b24ae6",
+      "archiveSha256": "5e6507b81308735a9d7ac6b5ab7b0a8c23ed0951ffb9272543db800c45b24ae6",
+      "bytes": 150756
+    },
+    {
+      "original": "prewarm-concurrent-a-female-laptop.png",
+      "archive": "evidence/prewarm-concurrent-a-female-laptop.png",
+      "sha256": "8268e839f9b3349ea882d45e28581b6e8bb6fb57f85de2a071421dbb2d1d9f6e",
+      "archiveSha256": "8268e839f9b3349ea882d45e28581b6e8bb6fb57f85de2a071421dbb2d1d9f6e",
+      "bytes": 100767
+    },
+    {
+      "original": "prewarm-concurrent-a-female-neutral.png",
+      "archive": "evidence/prewarm-concurrent-a-female-neutral.png",
+      "sha256": "ece6c510aa38f77059fc70f2381b2f3d3c041c934c58707ae6e248d3fea1a11d",
+      "archiveSha256": "ece6c510aa38f77059fc70f2381b2f3d3c041c934c58707ae6e248d3fea1a11d",
+      "bytes": 144122
+    },
+    {
+      "original": "prewarm-concurrent-a-male-asymmetry.png",
+      "archive": "evidence/prewarm-concurrent-a-male-asymmetry.png",
+      "sha256": "88ec2fedb77afafb5575d4d711b3f0b34a75696ec3519212a3b72ad689aa4611",
+      "archiveSha256": "88ec2fedb77afafb5575d4d711b3f0b34a75696ec3519212a3b72ad689aa4611",
+      "bytes": 165757
+    },
+    {
+      "original": "prewarm-concurrent-a-male-head-feedback.png",
+      "archive": "evidence/prewarm-concurrent-a-male-head-feedback.png",
+      "sha256": "f883ae8c944e1ec601bef5072833d0db901da31477c712f73c89afef05b785d7",
+      "archiveSha256": "f883ae8c944e1ec601bef5072833d0db901da31477c712f73c89afef05b785d7",
+      "bytes": 161485
+    },
+    {
+      "original": "prewarm-concurrent-a-male-neutral.png",
+      "archive": "evidence/prewarm-concurrent-a-male-neutral.png",
+      "sha256": "ab1627a4a6dc1e12e2e63c1cde7bf33672cff9e4d0204f58cf77456200340960",
+      "archiveSha256": "ab1627a4a6dc1e12e2e63c1cde7bf33672cff9e4d0204f58cf77456200340960",
+      "bytes": 157815
+    },
+    {
+      "original": "prewarm-concurrent-a-male-raised.png",
+      "archive": "evidence/prewarm-concurrent-a-male-raised.png",
+      "sha256": "638a9864968ab960f1f831f417450e61c12155af6407f8af84575729cc07eb51",
+      "archiveSha256": "638a9864968ab960f1f831f417450e61c12155af6407f8af84575729cc07eb51",
+      "bytes": 159937
+    },
+    {
+      "original": "prewarm-concurrent-a.json",
+      "archive": "evidence/prewarm-concurrent-a.json",
+      "sha256": "e5dc3af14c8b05bb1e4f9bc769ee3d8ca917ff48d4f8ab8e81d9d10bbf60bd21",
+      "archiveSha256": "e5dc3af14c8b05bb1e4f9bc769ee3d8ca917ff48d4f8ab8e81d9d10bbf60bd21",
+      "bytes": 4919
+    },
+    {
+      "original": "prewarm-concurrent-a.log",
+      "archive": "evidence/prewarm-concurrent-a.log.gz",
+      "sha256": "9393617bf5d773977326f7a810e4e3d2f9d7d594645a614e7d078442d1beed2b",
+      "archiveSha256": "c6f26b0f9de95a16591461fddc6e70a7e16c22e8cf0ea923aa89752ea4189c44",
+      "bytes": 178
+    },
+    {
+      "original": "production-guard-a.log",
+      "archive": "evidence/production-guard-a.log.gz",
+      "sha256": "d5427256c3d39b8ef3179c600682ef3f6ab1d94a986c761e0c8dd02ea436f0cb",
+      "archiveSha256": "4e5371c802338a1173b3fd8a330c3f96b588b966f06e6d3330a8385dd6ea1b3f",
+      "bytes": 1179
+    },
+    {
+      "original": "runtime-a.log",
+      "archive": "evidence/runtime-a.log.gz",
+      "sha256": "e744b9641b736bcf1f893addadc0d553c86b1c7eaca99bb3fb2d3a5202070108",
+      "archiveSha256": "4126cae0446ebdb14a1a2352859b140caf556998e760accf292936cfee9d3bf1",
+      "bytes": 572
+    },
+    {
+      "original": "scoped-a.log",
+      "archive": "evidence/scoped-a.log.gz",
+      "sha256": "7fbfaddf40f3d94330b54594b41a8fb5bf9fbeaab4f49fe2372cca906800d0c5",
+      "archiveSha256": "88337a3aa1560ebeea1d6bc01e2cf99e2114b725bc8f3d74a323c97af41991fe",
+      "bytes": 40
+    },
+    {
+      "original": "scoped-b.log",
+      "archive": "evidence/scoped-b.log.gz",
+      "sha256": "19b9d38fa0e6a3f9491b4ea17a66217a61eefc97de16accd2a499a6de85b417d",
+      "archiveSha256": "838aa4105bcf1b987cf288bf75d7cf441e2a81c0168ce5d2dd32752b60933b17",
+      "bytes": 38
+    },
+    {
+      "original": "scoped-final.log",
+      "archive": "evidence/scoped-final.log.gz",
+      "sha256": "f89fc8e022426c721c33be63717a308d1b7b34a4c7188935a4ebd1089a933e0f",
+      "archiveSha256": "98ec07b790829117418e10fc4b8f6874a067a9c184e1f3168bd6e201e704f078",
+      "bytes": 44
+    },
+    {
+      "original": "scoped-runner-final.log",
+      "archive": "evidence/scoped-runner-final.log.gz",
+      "sha256": "4c483b1ac160082a6c6a917381e82511d512ec00b152656ec5727c87673e260e",
+      "archiveSha256": "ffeb6e6c8881749b2996d88491d479f1d05db4f418eb533b4ad7c09c384a5ae4",
+      "bytes": 43
+    },
+    {
+      "original": "scoped-runtime-a.log",
+      "archive": "evidence/scoped-runtime-a.log.gz",
+      "sha256": "f8ee5b80d9cf91e946f6da85edfa989d4d38f1c444c39655768a787a50a0bd68",
+      "archiveSha256": "373e47a99cc2ee287491b3aff33248be6f8d497b9f05bc5f1f11d7a4f803be20",
+      "bytes": 39
+    },
+    {
+      "original": "type-a.log",
+      "archive": "evidence/type-a.log.gz",
+      "sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92",
+      "archiveSha256": "4d5a0c23c9ecddf5ae14f132b0345c3788269435548b9568b882d38b627def51",
+      "bytes": 15
+    },
+    {
+      "original": "type-b.log",
+      "archive": "evidence/type-b.log.gz",
+      "sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92",
+      "archiveSha256": "4d5a0c23c9ecddf5ae14f132b0345c3788269435548b9568b882d38b627def51",
+      "bytes": 15
+    },
+    {
+      "original": "neck-pre-avatar-regression-a-both-started.png",
+      "archive": "evidence/neck-pre-avatar-regression-a-both-started.png",
+      "sha256": "a08016a05252fec5c117d990f13f0e1d5e80e37d93490cc76bcd794209b0a4e0",
+      "archiveSha256": "a08016a05252fec5c117d990f13f0e1d5e80e37d93490cc76bcd794209b0a4e0",
+      "bytes": 163893
+    },
+    {
+      "original": "neck-pre-avatar-regression-a-completed-result.png",
+      "archive": "evidence/neck-pre-avatar-regression-a-completed-result.png",
+      "sha256": "f42d6c66bd376487ff692e32108cea79769084f135504e3c35c6bf9c9c1b7f8d",
+      "archiveSha256": "f42d6c66bd376487ff692e32108cea79769084f135504e3c35c6bf9c9c1b7f8d",
+      "bytes": 61580
+    },
+    {
+      "original": "neck-pre-avatar-regression-a-empty-disarmed.png",
+      "archive": "evidence/neck-pre-avatar-regression-a-empty-disarmed.png",
+      "sha256": "3aaae3e44b9818d37911b4b203775b629f947623a35e6d587f175d067f0403ea",
+      "archiveSha256": "3aaae3e44b9818d37911b4b203775b629f947623a35e6d587f175d067f0403ea",
+      "bytes": 111643
+    },
+    {
+      "original": "neck-pre-avatar-regression-a-female-800.png",
+      "archive": "evidence/neck-pre-avatar-regression-a-female-800.png",
+      "sha256": "35b78096d20effb926fa7bc0f819c4968ff02065cca6ba92cf0cf1a63aff9f30",
+      "archiveSha256": "35b78096d20effb926fa7bc0f819c4968ff02065cca6ba92cf0cf1a63aff9f30",
+      "bytes": 119699
+    },
+    {
+      "original": "neck-pre-avatar-regression-a-female-running.png",
+      "archive": "evidence/neck-pre-avatar-regression-a-female-running.png",
+      "sha256": "4e3efaa9809329d100ed6a5c6df77bd780eb446d077163224c4f9ccdfb1e33c4",
+      "archiveSha256": "4e3efaa9809329d100ed6a5c6df77bd780eb446d077163224c4f9ccdfb1e33c4",
+      "bytes": 154803
+    },
+    {
+      "original": "neck-pre-avatar-regression-a-female-surface-neck.png",
+      "archive": "evidence/neck-pre-avatar-regression-a-female-surface-neck.png",
+      "sha256": "56546d580152fa81dc36da0c36e220d30902d973d5e361837c867e75a76848bb",
+      "archiveSha256": "56546d580152fa81dc36da0c36e220d30902d973d5e361837c867e75a76848bb",
+      "bytes": 154966
+    },
+    {
+      "original": "neck-pre-avatar-regression-a-female-surface-shoulders.png",
+      "archive": "evidence/neck-pre-avatar-regression-a-female-surface-shoulders.png",
+      "sha256": "15fdaf7f341cc813b06e43ae964f4ef67797c2f7746204cebfdc0b8a8b1b88f6",
+      "archiveSha256": "15fdaf7f341cc813b06e43ae964f4ef67797c2f7746204cebfdc0b8a8b1b88f6",
+      "bytes": 156107
+    },
+    {
+      "original": "neck-pre-avatar-regression-a-female-상반신.png",
+      "archive": "evidence/neck-pre-avatar-regression-a-female-상반신.png",
+      "sha256": "779aca7901b8e7ac7e8c937ad9f3a1bd2ff98c51f0e4fd3a020e698d769effd7",
+      "archiveSha256": "779aca7901b8e7ac7e8c937ad9f3a1bd2ff98c51f0e4fd3a020e698d769effd7",
+      "bytes": 243446
+    },
+    {
+      "original": "neck-pre-avatar-regression-a-female-자세히.png",
+      "archive": "evidence/neck-pre-avatar-regression-a-female-자세히.png",
+      "sha256": "23c69a5fac2545e47d3d83304a704a573f5490d564db3c9b9b5daece1bbe79cb",
+      "archiveSha256": "23c69a5fac2545e47d3d83304a704a573f5490d564db3c9b9b5daece1bbe79cb",
+      "bytes": 230333
+    },
+    {
+      "original": "neck-pre-avatar-regression-a-female-전신.png",
+      "archive": "evidence/neck-pre-avatar-regression-a-female-전신.png",
+      "sha256": "5b5d050737de616f86ab69555c41dcae442ea275c14692e90f893dd280c98efb",
+      "archiveSha256": "5b5d050737de616f86ab69555c41dcae442ea275c14692e90f893dd280c98efb",
+      "bytes": 154755
+    },
+    {
+      "original": "neck-pre-avatar-regression-a-inference-error.png",
+      "archive": "evidence/neck-pre-avatar-regression-a-inference-error.png",
+      "sha256": "0c1ccd81fb9b62ef67872a645872358944fde2853a9f79ac32f107b867205a37",
+      "archiveSha256": "0c1ccd81fb9b62ef67872a645872358944fde2853a9f79ac32f107b867205a37",
+      "bytes": 67691
+    },
+    {
+      "original": "neck-pre-avatar-regression-a-left-return.png",
+      "archive": "evidence/neck-pre-avatar-regression-a-left-return.png",
+      "sha256": "2eaa761db656b2cf64ddb2504634ce91002e935adf564b3e4d4c613702c4a1c2",
+      "archiveSha256": "2eaa761db656b2cf64ddb2504634ce91002e935adf564b3e4d4c613702c4a1c2",
+      "bytes": 164082
+    },
+    {
+      "original": "neck-pre-avatar-regression-a-pain-result.png",
+      "archive": "evidence/neck-pre-avatar-regression-a-pain-result.png",
+      "sha256": "0a79e69ec8dab65e8a52e0f4324b12cb20d00547cfc744ca84a39f7c1317890d",
+      "archiveSha256": "0a79e69ec8dab65e8a52e0f4324b12cb20d00547cfc744ca84a39f7c1317890d",
+      "bytes": 59139
+    },
+    {
+      "original": "neck-pre-avatar-regression-a-right-return.png",
+      "archive": "evidence/neck-pre-avatar-regression-a-right-return.png",
+      "sha256": "69920078583a83a33ef58bced7c12ff1e7fba820d7946deb1183ec023549be3b",
+      "archiveSha256": "69920078583a83a33ef58bced7c12ff1e7fba820d7946deb1183ec023549be3b",
+      "bytes": 164071
+    },
+    {
+      "original": "neck-pre-avatar-regression-a-shoulder-feedback.png",
+      "archive": "evidence/neck-pre-avatar-regression-a-shoulder-feedback.png",
+      "sha256": "373432689d3e39dc32243adf9c9b1f0bdbabb0c1176c3b877780baac0377b340",
+      "archiveSha256": "373432689d3e39dc32243adf9c9b1f0bdbabb0c1176c3b877780baac0377b340",
+      "bytes": 170577
+    },
+    {
+      "original": "neck-pre-avatar-regression-a-surface-neck.png",
+      "archive": "evidence/neck-pre-avatar-regression-a-surface-neck.png",
+      "sha256": "f1de0c91699bce45b5c53966532975ca9a79143f985edeaa66c3f07a9e9af10e",
+      "archiveSha256": "f1de0c91699bce45b5c53966532975ca9a79143f985edeaa66c3f07a9e9af10e",
+      "bytes": 168997
+    },
+    {
+      "original": "neck-pre-avatar-regression-a-surface-shoulder.png",
+      "archive": "evidence/neck-pre-avatar-regression-a-surface-shoulder.png",
+      "sha256": "d59136c712d02257fecf39abef000ea4a56b049547b903ffd526814aa4e39646",
+      "archiveSha256": "d59136c712d02257fecf39abef000ea4a56b049547b903ffd526814aa4e39646",
+      "bytes": 170515
+    },
+    {
+      "original": "neck-pre-avatar-regression-a-wrong-direction.png",
+      "archive": "evidence/neck-pre-avatar-regression-a-wrong-direction.png",
+      "sha256": "1098fea7ec3ae9b6d03af46e14b5417833bbfcab5c306db14e962916d7d10d0a",
+      "archiveSha256": "1098fea7ec3ae9b6d03af46e14b5417833bbfcab5c306db14e962916d7d10d0a",
+      "bytes": 168754
+    },
+    {
+      "original": "neck-pre-avatar-regression-a.json",
+      "archive": "evidence/neck-pre-avatar-regression-a.json",
+      "sha256": "3c76ffcbe97069d66334c6bc2d5ac84f89abb1fee8c17f1c76231f2976ea836f",
+      "archiveSha256": "3c76ffcbe97069d66334c6bc2d5ac84f89abb1fee8c17f1c76231f2976ea836f",
+      "bytes": 4677
+    }
+  ]
+}

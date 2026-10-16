@@ -4,9 +4,14 @@ import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-libra
 import { MemoryRouter } from 'react-router'
 import { afterEach, beforeEach, expect, it, vi } from 'vitest'
 import { criteria } from '../../e2e/fixtures/neckCandidate'
+import { shrugCriteria } from '../../e2e/fixtures/shrugCandidate'
 import { AuthProvider } from '../auth'
 import type { PlaybackInput } from '../coaching/useRecordedPlayback'
-import { NeckCoachingRun, type NeckRunConfiguration } from './NeckCoachingRun'
+import {
+  type CandidateRunConfiguration,
+  NeckCoachingRun,
+  type NeckRunConfiguration,
+} from './NeckCoachingRun'
 
 const fixture = vi.hoisted(() => ({
   input: null as PlaybackInput | null,
@@ -103,7 +108,7 @@ afterEach(async () => {
   vi.restoreAllMocks()
   vi.unstubAllGlobals()
 })
-async function open(config = configuration()) {
+async function open(config: CandidateRunConfiguration = configuration()) {
   render(
     <MemoryRouter>
       <AuthProvider>
@@ -138,6 +143,36 @@ async function supply(
     })
   })
 }
+it('reuses the actual run UI for the both-shoulder phase/result without granting a clinical profile or record writes', async () => {
+  const review = shrugCriteria()
+  await open({
+    ...configuration(),
+    criteria: review,
+    plan: {
+      motionId: 'shoulder-shrug',
+      version: review.version,
+      source: 'direct',
+      maxFrameAgeMs: review.maxFrameAgeMs,
+      maxFrameGapMs: review.maxFrameGapMs,
+      steps: [{ id: 'both', kind: 'hold', targetMs: 50 }],
+    },
+  })
+  expect(screen.getByRole('heading', { name: '어깨 으쓱·이완' })).toBeTruthy()
+  await act(async () => fireEvent.click(screen.getByRole('button', { name: '검수 시작' })))
+  await screen.findByText('양쪽 · 준비', { exact: true })
+  await supply('start', 'both')
+  await supply('target', 'both')
+  await supply('target', 'both', 1, 50)
+  await supply('returned', 'both')
+  await screen.findByRole('heading', { name: '검수 흐름 완료' })
+  expect(screen.getByText('양쪽 · 완료', { exact: false })).toBeTruthy()
+  expect(screen.queryByRole('button', { name: '시험 기록 저장' })).toBeNull()
+  expect(
+    fetcher.mock.calls.every(
+      ([path, init]) => init?.method !== 'POST' || String(path).endsWith('/csrf'),
+    ),
+  ).toBe(true)
+})
 it('does not acquire resources on mount or with a false motion gate', async () => {
   fixture.allow = false
   await open()
