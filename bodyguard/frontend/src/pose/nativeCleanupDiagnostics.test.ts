@@ -1,5 +1,12 @@
+import { readFileSync } from 'node:fs'
+import { ModuleKind, ScriptTarget, transpileModule } from 'typescript'
 import { afterEach, expect, it, vi } from 'vitest'
-import { cleanupNote, traceCleanup } from '../../e2e/fixtures/nativeCleanupDiagnostics'
+import {
+  cleanupNote,
+  traceCleanup,
+  workerFailureNote,
+} from '../../e2e/fixtures/nativeCleanupDiagnostics'
+import { instrumentWorkerFailure } from '../../e2e/fixtures/nativeWorkerDiagnosticsTransform'
 
 afterEach(() => vi.unstubAllGlobals())
 function setup() {
@@ -49,4 +56,56 @@ it('bounds the log and is inert outside the explicit test trace', () => {
   expect(events).toHaveLength(120)
   vi.stubGlobal('window', {})
   expect(() => cleanupNote('camera', 'failed')).not.toThrow()
+})
+it('stores only fixed worker state and time fields, not caller data or error messages', () => {
+  const events: unknown[] = []
+  vi.stubGlobal('window', { nativeWorkerFailures: events })
+  const state = {
+    ready: true,
+    pending: true,
+    retiring: false,
+    initSent: true,
+    cleanupFailed: false,
+    lateByMs: 5.2,
+    result: 'PRIVATE_RESULT',
+  }
+  for (let i = 0; i < 50; i++) workerFailureNote('PRIVATE_ERROR', state)
+  expect(events).toHaveLength(16)
+  expect(events[0]).toMatchObject({
+    phase: 'worker-event',
+    lateByMs: 5,
+    ready: true,
+    pending: true,
+  })
+  expect(Object.keys(events[0] as object).sort()).toEqual([
+    'cleanupFailed',
+    'initSent',
+    'lateByMs',
+    'ms',
+    'pending',
+    'phase',
+    'ready',
+    'retiring',
+  ])
+  expect(JSON.stringify(events)).not.toContain('PRIVATE')
+})
+it('instruments the exact current Worker owner without changing deadlines and rejects source drift', () => {
+  const source = readFileSync(new URL('./workerInference.ts', import.meta.url), 'utf8')
+  const instrumented = instrumentWorkerFailure(source)
+  expect(source).not.toContain('workerFailureNote')
+  for (const line of [
+    'const CLEANUP_LIMIT_MS = 5000',
+    'const RESPONSE_LIMIT_MS = 5000',
+    'performance.now() >= responseDeadline',
+    "worker.postMessage({ type: 'close', generation })",
+  ])
+    expect(instrumented).toContain(line)
+  expect(
+    transpileModule(instrumented, {
+      compilerOptions: { target: ScriptTarget.ES2022, module: ModuleKind.ESNext },
+      reportDiagnostics: true,
+    }).diagnostics,
+  ).toEqual([])
+  expect(() => instrumentWorkerFailure(instrumented)).toThrow('Native diagnostic source mismatch')
+  expect(() => instrumentWorkerFailure('')).toThrow('Native diagnostic source mismatch')
 })

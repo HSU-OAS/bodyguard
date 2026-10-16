@@ -232,6 +232,11 @@ export function createNeckWorkspacePlayback(
         stream: camera.stream,
         detect: inference.detect,
       }),
+    // FR-M-07/NFR-07: discard the cold frame before GPU models; no observation or progress.
+    prepareSourceBeforeAvatars: true,
+    async prepareSource(source) {
+      if (!(await source.read())) throw new Error('Native preparation frame unavailable')
+    },
     // Actual callback time is used for display/expiry, never to restamp captured input.
     scheduler: {
       request: (tick) => requestAnimationFrame(() => tick(performance.now())),

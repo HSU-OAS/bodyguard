@@ -6,6 +6,7 @@ import { createServer as http } from 'node:http'
 import { resolve } from 'node:path'
 import { chromium } from '@playwright/test'
 import { createServer, mergeConfig } from 'vite'
+import { instrumentWorkerFailure } from '../e2e/fixtures/nativeWorkerDiagnosticsTransform.ts'
 import config from '../vite.config.ts'
 
 const [scratch, label, selected = 'neck-side', diagnostics] = process.argv.slice(2)
@@ -50,6 +51,7 @@ const files = [
   'e2e/fixtures/neckWorkspaceSource.ts',
   'scripts/test-neck-workspace-native.mjs',
   'e2e/fixtures/nativeCleanupDiagnostics.ts',
+  'e2e/fixtures/nativeWorkerDiagnosticsTransform.ts',
   'vite.config.ts',
   'pnpm-lock.yaml',
 ]
@@ -65,6 +67,7 @@ let rafReceiver,
   browser,
   page,
   failure = null,
+  failureCleanupObservation = 'not-requested',
   writes = 0,
   external = 0
 const api = http((req, res) => {
@@ -96,6 +99,8 @@ const server = await createServer(
             return resolve(entry)
         },
         transform(source, id) {
+          if (diagnostics && id.split('?')[0] === resolve('src/pose/workerInference.ts'))
+            return instrumentWorkerFailure(source)
           if (!diagnostics || id.split('?')[0] !== resolve('src/coaching/neckWorkspacePlayback.ts'))
             return
           const names = [
@@ -164,16 +169,23 @@ try {
       window.nativeCleanupTrace = []
       window.nativeWorkerTrace = []
       window.nativeWorkerCounts = { frames: 0, results: 0 }
+      window.nativeWorkerFailures = []
       const NativeWorker = window.Worker
       let next = 0
       window.Worker = class extends NativeWorker {
         constructor(...args) {
           super(...args)
           this.traceId = ++next
+          this.framePosts = 0
+          this.frameResults = 0
           this.note('created')
           this.addEventListener('message', (event) => {
             const data = event.data
-            if (data?.type === 'result') window.nativeWorkerCounts.results++
+            if (data?.type === 'result') {
+              window.nativeWorkerCounts.results++
+              // Keep cold-frame timings bounded without crowding out cleanup ACKs.
+              if (++this.frameResults <= 3) this.note('frame-result')
+            }
             if (['boot', 'ready', 'error', 'closed'].includes(data?.type))
               this.note(data.type, data.type === 'closed' ? data.clean === true : undefined)
           })
@@ -190,7 +202,10 @@ try {
             })
         }
         postMessage(data, ...args) {
-          if (data?.type === 'frame') window.nativeWorkerCounts.frames++
+          if (data?.type === 'frame') {
+            window.nativeWorkerCounts.frames++
+            if (++this.framePosts <= 3) this.note('frame-post')
+          }
           if (data?.type === 'init' || data?.type === 'close') this.note(`send-${data.type}`)
           return super.postMessage(data, ...args)
         }
@@ -276,6 +291,17 @@ try {
     writeFileSync(`${scratch}/${label}-failure-ui.txt`, await page.locator('body').innerText(), {
       flag: 'wx',
     })
+    // Observe the original owner barriers before destroying Chrome, not a larger SDK budget.
+    try {
+      await page.waitForFunction(
+        () => window.nativeRunCounters.opens === window.nativeRunCounters.stops,
+        undefined,
+        { timeout: 11000 },
+      )
+      failureCleanupObservation = 'camera-retired'
+    } catch {
+      failureCleanupObservation = 'not-observed-within-bound'
+    }
   }
 } finally {
   const cleanupDiagnostics =
@@ -285,6 +311,7 @@ try {
             resources: window.nativeCleanupTrace,
             workers: window.nativeWorkerTrace,
             counts: window.nativeWorkerCounts,
+            failures: window.nativeWorkerFailures,
           }))
           .catch(() => null)
       : null
@@ -304,6 +331,8 @@ try {
         version,
         rafReceiver,
         cleanupDiagnostics,
+        failureCleanupObservation,
+        preparation: 'same-source-before-avatar-GPU',
         before,
         after,
         cases,

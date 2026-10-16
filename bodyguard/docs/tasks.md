@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-17 S3.C5 [첫 추론 준비 보완](review/shoulder-shrug-workspace/preparation/README.md): 동시 재개 실패가5초 응답 마감 초과인 직접 경로를 확인하고, 동일 source 첫 입력 폐기→아바타 GPU 준비→새 입력 코칭을 실제 연결했다. 구현 후 동시 native2/어깨UI4·목 native2/화면8·전체2095 통과. 최초 종료 P2는 원인 미확정으로 Draft #163/미병합 유지, 전체1~4/1~6 통과가 아니다. 독립 동작 코칭과 SDK 정리 보완을 계속하며 기존 원본·실패·품질/별도 승인 기준을 보존한다.
+
 2026-10-17 S3.C5 [Draft PR #163](https://github.com/HSU-OAS/bodyguard/pull/163) 후속: [정리/ACK 분리 진단](review/shoulder-shrug-workspace/cleanup/README.md)으로 단독 정상 해제와 동시 실행 재개 추론 실패를 구분했다. 기존 정리 P2는 미해결·미병합이며 소유/제한 시간·공개 적격0·전체 단계 기준을 유지한다. 같은 Story의 응답/프로토콜 원인 분리를 계속하며 goal을 일시정지하지 않는다.
 
 2026-10-17 [S3.C5](stories/shoulder-shrug-workspace.md) **로컬 후보·Draft/미완료**: PR162 merge25429c00/최신 main 확인 후 기존 두 아바타 UI에 남녀 어깨 상승·복귀/오류 표면·반복 결과·중단/재개를 연결했다. [실제 화면/GLB/전체 회귀·실패 보존](review/shoulder-shrug-workspace/README.md). 실제 native 정리는 동시 실행1실패·단독2통과로 원인 미확정 P2이며 병합하지 않는다. 다음은 같은 Story의 원시 입력 없는 소유 자원/ACK 정리 분리·보완이다. 공개 적격0·임상 프로필/개인별 추천·최종 외형/성능·기존 Draft/P2·참여자 이월/외부·운영 승인과 전체1~4/1~6 기준을 유지하고 goal은 계속 진행한다.

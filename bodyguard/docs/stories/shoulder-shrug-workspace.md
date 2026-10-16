@@ -20,6 +20,8 @@ S3.C4의 어깨 판정을 기존 두 아바타 실행 화면에 연결한다. �
 
 ## 현재 결과 — Draft/미완료
 
+[첫 추론 준비 순서 보완](../review/shoulder-shrug-workspace/preparation/README.md): 같은 source의 첫 read를 표시/진행 없이 폐기한 뒤 아바타 GPU를 준비한다. 기본 owner 호출자 순서는 유지하며 목/어깨 실행만 명시 옵션을 켰다. 준비 중 취소/실패에는 source·SDK·카메라 회수와 ready/적립 차단이 필수다. 실제 적용 후 동시 native2/UI4·목 native2/화면8·전체2095 회귀를 통과했다. 원래5초 경계를 늘리지 않았고 최초 종료 P2는 남으므로 Draft/미병합이다.
+
 [Draft PR #163](https://github.com/HSU-OAS/bodyguard/pull/163)의 후속 [고정 이벤트 정리/ACK 진단](../review/shoulder-shrug-workspace/cleanup/README.md)을 추가했다. 제품 SDK/5초 경계는 그대로다. 단독 계측/기본 경로의 해제는 통과했으나 동시 실행 재개 inference-error도 보존한다. 원래 cleanup-error와의 인과는 미확정이며 어느 실패도 면제하지 않는다. 다음은 동일 Story의 응답/프로토콜 원인 분리다.
 
 [작동 화면·남녀 GLB 변형/표면·실제/모의 구분·실패와 병합 보류](../review/shoulder-shrug-workspace/README.md). 생성 입력의 실제 실행 UI/시범·오류/반복 결과와 기존 목 회귀는 작동한다. 실제 네이티브 정리는 동시 실행1실패·단독2통과로 원인이 미확정이다. 이를 미해결 P2로 유지해 Draft만 보존하고 병합/Story 완료를 선언하지 않는다. 다음은 원시 입력 없는 소유 자원/ACK 정리 경로 분리 검증·보완이며 사전 승인/전체 목표를 유지한다.
