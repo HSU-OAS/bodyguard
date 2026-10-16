@@ -26,6 +26,9 @@ for (const file of files) {
     'CameraPreparation',
     'Camera preparation unavailable',
     '/__bodyguard/motion-media/',
+    '/__bodyguard/reference-content/',
+    '/__bodyguard/review-avatar/',
+    'Blender reference unavailable',
     '/__bodyguard/inference-worker.js',
     '카메라·분석 연결 확인됨',
     '연속 입력 확인 중',
@@ -163,6 +166,13 @@ const candidateMedia = readdirSync(fileURLToPath(new URL('../dist/', import.meta
   ),
 )
 assert.equal(candidateMedia.length, 0, 'Unvalidated motion media leaked into production output')
+assert.equal(
+  readdirSync(fileURLToPath(new URL('../dist/', import.meta.url)), { recursive: true }).filter(
+    (file) => String(file).endsWith('.glb'),
+  ).length,
+  0,
+  'Unapproved reference/body GLB leaked into production',
+)
 console.log(
   JSON.stringify({
     production_JS_files_checked: files.length,

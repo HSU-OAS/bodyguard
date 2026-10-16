@@ -1,0 +1,141 @@
+// FR-S-03/04·NFR-08: explicit private manual preview, never an observed/validated pose.
+import { useEffect, useRef, useState } from 'react'
+import type { ReferenceMotion } from '../avatar/referenceContentAssets'
+import type { ReferenceCommand, ReferenceStage } from '../avatar/referenceStage'
+import type { AvatarGender } from '../avatar/reviewAvatarAssets'
+import { ResourceCleanupError } from '../coaching/resources'
+
+export type ReferenceStatus = 'loading' | 'ready' | 'error'
+let retirement: Promise<void> | undefined
+let retirementFailed = false
+export function ReferenceDemonstration({
+  motion,
+  gender,
+  command,
+  onStatus,
+}: Readonly<{
+  motion: ReferenceMotion
+  gender: AvatarGender
+  command: ReferenceCommand
+  onStatus(status: ReferenceStatus): void
+}>) {
+  const canvas = useRef<HTMLCanvasElement>(null),
+    live = useRef({ command, onStatus })
+  live.current = { command, onStatus }
+  const [status, setStatus] = useState<ReferenceStatus>('loading'),
+    [attempt, setAttempt] = useState(0),
+    [reloadOnly, setReloadOnly] = useState(false)
+  useEffect(() => {
+    const abort = new AbortController()
+    let disposed = false,
+      owner: ReferenceStage | undefined,
+      frame: number | undefined,
+      previous: number | undefined
+    const publish = (next: ReferenceStatus) => {
+      if (!disposed) {
+        setStatus(next)
+        live.current.onStatus(next)
+      }
+    }
+    const release = () => {
+      try {
+        owner?.dispose()
+      } catch {
+        retirementFailed = true
+      }
+      owner = undefined
+    }
+    const fail = () => {
+      if (disposed) return
+      abort.abort()
+      if (frame !== undefined) cancelAnimationFrame(frame)
+      release()
+      setReloadOnly(retirementFailed)
+      publish('error')
+    }
+    publish('loading')
+    let modulePending = true
+    const pending = Promise.resolve(retirement)
+      .then(async () => {
+        if (disposed) return
+        if (retirementFailed || !canvas.current) throw new Error()
+        const { prepareReferenceStage } = await import('../avatar/referenceStage')
+        modulePending = false
+        if (disposed || abort.signal.aborted || !canvas.current) return
+        const prepared = await prepareReferenceStage(
+          { generation: attempt + 1, signal: abort.signal },
+          { canvas: canvas.current, gender, motion, onFailure: fail },
+        )
+        if (disposed || abort.signal.aborted) {
+          prepared.dispose()
+          return
+        }
+        owner = prepared
+        publish('ready')
+        const tick = (now: number) => {
+          if (disposed || abort.signal.aborted) return
+          try {
+            owner?.render(now, previous === undefined ? 0 : now - previous, live.current.command)
+            previous = now
+            frame = requestAnimationFrame(tick)
+          } catch {
+            fail()
+          }
+        }
+        frame = requestAnimationFrame(tick)
+      })
+      .catch((error) => {
+        if (error instanceof ResourceCleanupError) retirementFailed = true
+        if (!disposed && !abort.signal.aborted) {
+          fail()
+          setReloadOnly(modulePending || retirementFailed)
+        }
+      })
+    const hidden = () => {
+      if (document.hidden) fail()
+    }
+    document.addEventListener('visibilitychange', hidden)
+    window.addEventListener('pagehide', fail)
+    return () => {
+      disposed = true
+      abort.abort()
+      if (frame !== undefined) cancelAnimationFrame(frame)
+      document.removeEventListener('visibilitychange', hidden)
+      window.removeEventListener('pagehide', fail)
+      release()
+      const done = pending.then(() => {
+        release()
+        if (retirement === done) retirement = undefined
+      })
+      retirement = done
+    }
+  }, [motion, gender, attempt])
+  return (
+    <div className="reference-demonstration">
+      <canvas key={attempt} ref={canvas} role="img" aria-label="3D 시범 후보" />
+      <div className="reference-status">
+        <p role={status === 'error' ? 'alert' : 'status'}>
+          {status === 'loading'
+            ? '3D 시범 준비 중'
+            : status === 'error'
+              ? reloadOnly
+                ? '화면을 새로 열고 시범을 확인해 주세요.'
+                : '시범을 준비하지 못했습니다'
+              : '시범 후보 · 자동 판정 없음'}
+        </p>
+        {status === 'error' && (
+          <button
+            className="button secondary"
+            type="button"
+            onClick={() => {
+              if (reloadOnly) location.reload()
+              else setAttempt((value) => value + 1)
+            }}
+          >
+            {reloadOnly ? '화면 새로고침' : '시범 다시 불러오기'}
+          </button>
+        )}
+      </div>
+    </div>
+  )
+}

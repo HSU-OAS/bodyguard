@@ -33,7 +33,7 @@ it.each([401, 503])('does not open workspace before account authority: %s', asyn
   })
   expect(screen.queryByRole('region', { name: '두 아바타 공간' })).toBeNull()
 })
-it('changes display framing without enabling camera, verdict, timer or reference playback', async () => {
+it('changes display framing without starting camera, verdict, timer or a preview before an explicit request', async () => {
   const fetcher = open('/dev/coaching?motion=neck-side')
   await screen.findByRole('heading', { name: '목 옆으로 기울이기', level: 1 })
   fireEvent.click(screen.getByRole('button', { name: /^전신$/ }))
@@ -41,7 +41,7 @@ it('changes display framing without enabling camera, verdict, timer or reference
     'full',
   )
   expect(screen.getByRole('button', { name: '코칭 준비 중' }).hasAttribute('disabled')).toBe(true)
-  expect(screen.getByRole('button', { name: '전체 시범' }).hasAttribute('disabled')).toBe(true)
+  expect(screen.getByRole('button', { name: '시범 미리보기' }).hasAttribute('disabled')).toBe(false)
   expect(document.querySelectorAll('video, canvas')).toHaveLength(0)
   expect(fetcher.mock.calls.map((call) => call[0])).toEqual(['/api/v1/me'])
 })

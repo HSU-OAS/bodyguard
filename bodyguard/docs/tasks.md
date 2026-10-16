@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-16 [S3.A1 단계별 3D 시범](stories/blender-reference-content.md): 기존 코칭 공간 오른쪽에 실제 Blender 남녀3종을 연결해 준비·수행·유지·복귀, 좌우·일시정지/재생·전신/확대가 작동한다. 손상 GLB·실제 GPU 컨텍스트 손실은 수동 재시도로 복구하고, 숨김/401/종료 시 소유 컨텍스트를 회수한다. [실제 화면·실패·검증](review/blender-reference-content/README.md). 왼쪽 실제 사용자 아바타는 아직 연결 대기이며 자동 판정/타이머/기록·최종 외형/전체1~4 완료가 아니다. 다음은 두 아바타와 실제 관찰→단계 시범·판정/추천→결과 흐름 통합이다. PR150/152의 별도 P2·Draft 병합 금지, 실제 참여자 미실행과 외부/운영 별도 승인 경계는 유지한다. 아래는 각 시점의 기록이다.
+
 2026-10-16 최신 진행: 1~4단계 우선 구현, goal active. [S2.V2](stories/motion-preview-content.md)의 남녀3종 Blender 움직임 미리보기는 PR153 merge203a6ab로 main에 반영됐다. [S6.P2a](stories/sdk-lifecycle-startup.md)는 Worker 실행 전 실패를 잘못된 cleanup 오류로 고정하는 경로를 보완해 같은 페이지의 명시 재시도를 복구했다. [실제 대조/복구·기존 회귀·실패 보존](review/sdk-coaching-startup/README.md). PR152의 과거 간헐 시작/정리 원인은 여전히 미확정이며 Draft/병합 금지다. 다음 핵심 구현은 제작된 Blender 동작과 두 아바타/단계별 시범·결과 흐름 연결이며, 통과 재실행/추가 계측만 반복하는 것으로 대신하지 않는다. 실제 사람·최종 외형/정답/추천/판정·1~4/전체1~6 통과가 아니며 공급자/Docker/운영 별도 승인 경계는 유지한다. 아바타의 과거 제작 보류는 [최신 해제/재개 결정](operating-rules.md)에 의해 로컬 후보 제작을 더는 막지 않는다. 아래는 각 시점의 기록이다.
 
 2026-10-16 [S2.P1](stories/avatar-cpu-skin-cost.md): 두 독립 아바타의 여덟 가중치를 그대로 유지하고 CPU 정점별 반복 할당만 제거했다. 실제 Chrome의 동일 페이지 독립 ABBA에서 정확한 전신 계산 중앙값은 남성86.75→83.90ms, 여성88.15→83.80ms다. [실제 이동·해제/재시도·실패/원문/남은 문제](review/avatar-cpu-skin-cost/README.md). 초기 GPU context2479.6ms와 기존 지연 P2·외형/추천/코칭·전체1~6은 미해결이다. PR150의 외형 후보는 Draft/미채택이며 공개 모델/UI·판정·운영 변경0. CPU 미세 보완을 반복하기보다 남은 핵심 흐름을 다음에 연결한다.
