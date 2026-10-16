@@ -1,0 +1,96 @@
+{
+  "label": "diagnostic-expensive",
+  "head": "8291d431d6d7202f4ab1f2b8957ec885705130a1",
+  "sourceBefore": {
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "e2e/fixtures/avatarRigProbe.ts": "011a565b3ef4f68a2874a9ffc8117648e1bb60f49139d02639276a798597c2d8",
+    "scripts/test-avatar-rig-browser.mjs": "306db441a1a4e4f3a57df95d2bc969a6dfb7541b03414d39b9687cdfe4e5bea8",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "assetCommit": null,
+  "candidateDirectory": "/private/tmp/bodyguard-avatar-final.GwZoPJ/glb-continuous",
+  "assetHashes": {
+    "male": "8c3d34b9d12c1d40f2c842c0167bff2c2d6ee72a427162b4c44d62e80bbf59bf",
+    "female": "a9bca83ca4dad075aaef8df8f49be17bba488883485847f6c034114a663e147b"
+  },
+  "actualChrome": true,
+  "actualWebGL": true,
+  "actualCamera": false,
+  "syntheticDirections": true,
+  "releaseAvatar": false,
+  "samples": [
+    {
+      "gender": "male",
+      "passed": false,
+      "initial": {
+        "framing": [
+          {
+            "inside": true
+          },
+          {
+            "inside": true
+          }
+        ],
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          }
+        ],
+        "sourceUnchanged": true,
+        "independent": true,
+        "eightWeightMeshes": [
+          1,
+          1
+        ],
+        "sequence": 1,
+        "calls": 2,
+        "triangles": 524584,
+        "maxDirectionError": 0,
+        "closed": false
+      },
+      "beforeSha": "e45f5ace27fe0e270d45a3d1f54aea15ee2954ef6e646ee29c7e743206e9bd4d",
+      "performance": {
+        "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+        "sequence": 55,
+        "interval": {
+          "samples": 53,
+          "meanMs": 190.8716981132075,
+          "p95Ms": 300,
+          "maximumMs": 1549.8999999999978
+        },
+        "render": {
+          "samples": 54,
+          "meanMs": 10.277777777984738,
+          "p95Ms": 30.600000001490116,
+          "maximumMs": 343.8999999985099
+        },
+        "update": {
+          "samples": 54,
+          "meanMs": 33.48703703711982,
+          "p95Ms": 105.59999999776483,
+          "maximumMs": 1171.0999999977648
+        }
+      }
+    }
+  ],
+  "browser": "155.0.8059.40",
+  "failure": {
+    "name": "TimeoutError",
+    "message": "page.waitForFunction: Timeout 10000ms exceeded."
+  },
+  "sourceAfter": {
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "e2e/fixtures/avatarRigProbe.ts": "011a565b3ef4f68a2874a9ffc8117648e1bb60f49139d02639276a798597c2d8",
+    "scripts/test-avatar-rig-browser.mjs": "306db441a1a4e4f3a57df95d2bc969a6dfb7541b03414d39b9687cdfe4e5bea8",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  }
+}
