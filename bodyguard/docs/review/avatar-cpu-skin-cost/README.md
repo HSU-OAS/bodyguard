@@ -29,6 +29,7 @@ Chrome155.0.8059.80/Apple M4에서 남녀 각각 두 모델의 합성 움직임�
 - 실제 A37 Chrome 남녀2흐름, owned 자원 남녀2흐름에서 페이지의 외부 요청/카메라 호출/pageerror0이었다. Chrome 프로세스 전체 통신 또는 모든 GPU 드라이버 자원 회수까지 입증한 것은 아니다.
 - 최초 Biome는 새 시험의 forEach 반환으로 실패했고 본문을 for-of로 바꾼 뒤 재검사했다. frontend 하위에서 최초 archive 명령은 pathspec 오류였고, 저장소 루트에서 pipefail로 재실행했다. 두 초기 tool 출력은 실행 기록에 있으며 별도 파일 원문이 있다고 주장하지 않는다.
 - 기존 결과 경로에 대한 재실행은 의도된 exit1로 거부됐다. [원문](proof/existing-output-negative.log)을 남기며 기존 JSON을 덮어쓰지 않았다. 이 부정 시험을 통합 성공 수에 넣지 않는다.
+- 최초 staged diff 검사는 raw Biome/시험 로그의 공백으로 실패했다. 해당3개는 내용을 자르지 않고 gzip으로 무손실 보존했으며 최초 로컬 커밋34b0beb와 원래 임시 파일에도 남는다. 최종 branch 전체 diff 검사를 다시 실행한다. 소스/검증 내용 변경은 없다.
 
 ## 재현·보존
 
