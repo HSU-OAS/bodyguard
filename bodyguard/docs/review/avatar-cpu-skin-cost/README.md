@@ -35,6 +35,8 @@ Chrome155.0.8059.80/Apple M4에서 남녀 각각 두 모델의 합성 움직임�
 
 [proof](proof/)에는 원문 JSON·CPU profile·시험/build/guard 로그·사용한 두 bundle의 gzip·두 실제 실행 스크립트가 있다. 압축은 생성 파일의 무손실 보관이며 모델/이미지 수정이 아니다. [manifest](manifest.json)는 결과 파일과 최종 tracked source의 SHA를 기록한다. 사용자 영상/관절 데이터는0이며 전부 전문 모델과 합성 포즈다.
 
+두 bundle의 기존 Three.js 저작권/SPDX는 유지됐고 설치된 동일 버전의 [MIT 원문](proof/three-LICENSE.txt)을 byte 그대로 동봉했다. 새 의존성/권리 채택이나 전체 출시 라이선스 미완료 해결로 확대하지 않는다.
+
 일반 회귀는 새 bodyguard-rig-proof/owned-avatar-proof 임시 디렉터리에 immutable25a9bd6의 남녀 A37을 git archive로 풀고 각 fixture Vite config로 build한 뒤 원래 scripts/test-avatar-rig-browser.mjs, test-owned-avatar-browser.mjs를 실행한다. private env는 BODYGUARD_TEST_RIG_PROBE/BODYGUARD_TEST_OWNED_AVATAR다.
 
 비교 재현은 새 디렉터리에 before-probe.js.gz→before-probe.js, after-probe.js.gz→probe/probe.js를 풀고 compare.mjs에 frontend 절대 경로·그 디렉터리·새 label을 전달한다. 후보 GLB는 불변2be0ebe에서 읽는다. profile.mjs는 같은 bundle에서 CDP CPU sampling을 수집하며 profile 결과와 단순 ABBA 수치를 혼합하지 않는다. before.json은 bounds 반복을 추가하기 전 실행이라 exactBoundsMs가 없는 원래 형식이다.
