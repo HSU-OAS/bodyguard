@@ -81,3 +81,15 @@ it('hiding and unmounting pause without background playback', async () => {
   page.unmount()
   expect(HTMLMediaElement.prototype.pause).toHaveBeenCalledTimes(2)
 })
+
+it('shows a poster failure and remounts only its owned probe on explicit retry', () => {
+  vi.spyOn(HTMLMediaElement.prototype, 'load').mockImplementation(() => {})
+  render(<MotionPreview title="시험" media={media} />)
+  const old = document.querySelector('img')
+  if (!old) throw new Error('Poster probe missing')
+  fireEvent.error(old)
+  expect(screen.getByText('미리보기를 불러오지 못했습니다')).toBeTruthy()
+  fireEvent.click(screen.getByRole('button', { name: '다시 불러오기' }))
+  expect(document.querySelector('img')).not.toBe(old)
+  expect(HTMLMediaElement.prototype.load).toHaveBeenCalledTimes(1)
+})

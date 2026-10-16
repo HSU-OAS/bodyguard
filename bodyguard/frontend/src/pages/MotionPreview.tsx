@@ -2,12 +2,15 @@
 import { useEffect, useRef, useState } from 'react'
 
 export type MotionMedia = Readonly<{ poster: string; video: string }>
+let activePreview: { token: object; stop(): void } | undefined
 export function MotionPreview({ title, media }: { title: string; media?: MotionMedia }) {
+  const token = useRef({})
   const video = useRef<HTMLVideoElement>(null)
   const epoch = useRef(0)
   const wantsPlay = useRef(false)
   const [playing, setPlaying] = useState(false)
   const [failed, setFailed] = useState(false)
+  const [retry, setRetry] = useState(0)
   const local = (path: string) => {
     try {
       const url = new URL(path, location.href)
@@ -26,6 +29,7 @@ export function MotionPreview({ title, media }: { title: string; media?: MotionM
   }
   const available = media && local(media.poster) && local(media.video)
   function stop() {
+    if (activePreview?.token === token.current) activePreview = undefined
     wantsPlay.current = false
     epoch.current++
     video.current?.pause()
@@ -42,6 +46,8 @@ export function MotionPreview({ title, media }: { title: string; media?: MotionM
     const owned = video.current,
       generation = ++epoch.current
     if (!owned) return
+    if (activePreview?.token !== token.current) activePreview?.stop()
+    activePreview = { token: token.current, stop }
     wantsPlay.current = true
     try {
       await owned.play()
@@ -65,6 +71,7 @@ export function MotionPreview({ title, media }: { title: string; media?: MotionM
     const owned = video.current
     const reduced = matchMedia('(prefers-reduced-motion: reduce)')
     const pause = () => {
+      if (activePreview?.token === token.current) activePreview = undefined
       wantsPlay.current = false
       epoch.current++
       owned?.pause()
@@ -76,6 +83,7 @@ export function MotionPreview({ title, media }: { title: string; media?: MotionM
     document.addEventListener('visibilitychange', hidden)
     reduced.addEventListener('change', pause)
     return () => {
+      if (activePreview?.token === token.current) activePreview = undefined
       epoch.current++
       wantsPlay.current = false
       owned?.pause()
@@ -100,8 +108,20 @@ export function MotionPreview({ title, media }: { title: string; media?: MotionM
     >
       {available ? (
         <>
+          {/* A native video's poster failure does not reliably raise video.error. */}
+          <img
+            key={`${media.poster}:${retry}`}
+            hidden={playing}
+            alt=""
+            src={media.poster}
+            onError={() => {
+              stop()
+              setFailed(true)
+            }}
+          />
           <video
             ref={video}
+            hidden={!playing}
             src={media.video}
             poster={media.poster}
             muted
@@ -134,6 +154,7 @@ export function MotionPreview({ title, media }: { title: string; media?: MotionM
                 onClick={() => {
                   stop()
                   setFailed(false)
+                  setRetry((value) => value + 1)
                   video.current?.load()
                 }}
               >

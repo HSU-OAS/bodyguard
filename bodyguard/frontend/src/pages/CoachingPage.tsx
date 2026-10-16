@@ -1,6 +1,7 @@
 // FR-V-01/03·FR-S-06·FR-A-01/02: approved layout, private until actual motion/asset gates.
 import { useEffect, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
+import { motionPreviewMedia } from '../catalog/motionMedia'
 import { motionNavigationUrl } from '../catalog/motionNavigation'
 import { findMotions, motionById, type Region } from '../catalog/motions'
 import { CameraPreparation } from './CameraPreparation'
@@ -28,10 +29,19 @@ export function CoachingPage() {
   const [gender, setGender] = useState('male')
   const [query, setQuery] = useState('')
   const [region, setRegion] = useState<Region>('all')
+  const [pickerOpen, setPickerOpen] = useState(false)
   const picker = useRef<HTMLDialogElement>(null)
   const settings = useRef<HTMLDialogElement>(null)
   const heading = useRef<HTMLHeadingElement>(null)
   const motions = findMotions(query, region)
+  const openPicker = () => {
+    setPickerOpen(true)
+    picker.current?.showModal()
+  }
+  const closePicker = () => {
+    picker.current?.close()
+    setPickerOpen(false)
+  }
   const title =
     id !== null && !motion ? '동작을 찾을 수 없습니다' : (motion?.title ?? '스트레칭 코칭')
   useEffect(() => {
@@ -42,6 +52,7 @@ export function CoachingPage() {
     const hidden = () => {
       if (document.hidden) {
         picker.current?.close()
+        setPickerOpen(false)
         settings.current?.close()
       }
     }
@@ -53,7 +64,7 @@ export function CoachingPage() {
     <section className="coaching-workspace" aria-labelledby="coaching-heading">
       <nav className="coaching-rail" aria-label="코칭 메뉴">
         <Link to="/start">내 시작</Link>
-        <button type="button" onClick={() => picker.current?.showModal()}>
+        <button type="button" onClick={openPicker}>
           동작
         </button>
         <Link to="/records">기록</Link>
@@ -83,11 +94,7 @@ export function CoachingPage() {
                 </button>
               ))}
             </fieldset>
-            <button
-              className="button secondary"
-              type="button"
-              onClick={() => picker.current?.showModal()}
-            >
+            <button className="button secondary" type="button" onClick={openPicker}>
               동작 변경
             </button>
           </div>
@@ -152,13 +159,18 @@ export function CoachingPage() {
           <p className="small muted">코칭·판정·수행 기록 꺼짐 · 의학적 진단이 아닌 스트레칭 코칭</p>
         </div>
       </div>
-      <dialog ref={picker} className="coaching-dialog" aria-labelledby="coaching-picker-title">
+      <dialog
+        ref={picker}
+        className="coaching-dialog"
+        aria-labelledby="coaching-picker-title"
+        onClose={() => setPickerOpen(false)}
+      >
         <header>
           <h2 id="coaching-picker-title">동작 고르기</h2>
           <button
             className="button secondary"
             type="button"
-            onClick={() => picker.current?.close()}
+            onClick={closePicker}
             aria-label="동작 고르기 닫기"
           >
             닫기
@@ -193,13 +205,20 @@ export function CoachingPage() {
           <ul className="coaching-motion-grid">
             {motions.map((item) => (
               <li key={item.id}>
-                <MotionPreview title={item.title} />
+                <MotionPreview
+                  title={item.title}
+                  media={
+                    pickerOpen
+                      ? motionPreviewMedia(item.id, gender === 'female' ? 'female' : 'male')
+                      : undefined
+                  }
+                />
                 <button
                   type="button"
                   className="coaching-motion-select"
                   aria-label={`${item.title} 화면에서 보기`}
                   onClick={() => {
-                    picker.current?.close()
+                    closePicker()
                     setParams((current) => {
                       const next = new URLSearchParams(current)
                       next.set('motion', item.id)
