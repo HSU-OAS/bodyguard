@@ -16,7 +16,14 @@ const command: ReferenceCommand = {
 }
 let frames: Map<number, FrameRequestCallback>, next: number
 function port() {
-  return { render: vi.fn(), dispose: vi.fn() }
+  return {
+    render: vi.fn(),
+    dispose: vi.fn(),
+    beginObservation: vi.fn(() => true),
+    observe: vi.fn(() => true),
+    suspendObservation: vi.fn(),
+    alignObservation: vi.fn(() => true),
+  }
 }
 function open(onStatus = vi.fn()) {
   return render(
@@ -29,6 +36,7 @@ function open(onStatus = vi.fn()) {
   )
 }
 beforeEach(() => {
+  vi.spyOn(performance, 'now').mockReturnValue(100)
   frames = new Map()
   next = 0
   vi.stubGlobal('requestAnimationFrame', (fn: FrameRequestCallback) => {
@@ -42,6 +50,7 @@ afterEach(async () => {
   cleanup()
   await act(async () => {})
   vi.unstubAllGlobals()
+  vi.restoreAllMocks()
 })
 it('renders the latest command and releases its owner and RAF on unmount', async () => {
   const stage = port(),
@@ -56,7 +65,7 @@ it('renders the latest command and releases its owner and RAF on unmount', async
   act(() => {
     const batch = [...frames.values()]
     frames.clear()
-    for (const fn of batch) fn(100)
+    for (const fn of batch) fn(1) // Frame-start timestamp intentionally older than current input.
   })
   expect(stage.render).toHaveBeenCalledWith(100, 0, updated)
   const signal = vi.mocked(prepareReferenceStage).mock.calls[0][0].signal

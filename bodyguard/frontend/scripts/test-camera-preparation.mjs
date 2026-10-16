@@ -6,7 +6,8 @@ import { chromium } from '@playwright/test'
 import { createServer, mergeConfig } from 'vite'
 import config from '../vite.config.ts'
 
-const [scratch, executable, label] = process.argv.slice(2)
+const [scratch, executable, label, mode] = process.argv.slice(2)
+assert(mode === undefined || mode === 'with-reference')
 assert(/^\/private\/tmp\/bodyguard-camera-preparation\.[A-Za-z0-9]+$/.test(scratch))
 assert(/^[a-z][a-z0-9-]+$/.test(label) && !existsSync(`${scratch}/${label}.json`))
 let account = 'ready',
@@ -96,6 +97,12 @@ try {
   assert.equal(page.workers().length, 0)
   assert.equal(await page.locator('video,canvas').count(), 0)
   cases.push('initial: camera/worker/video/canvas0')
+  const openReference = async () => {
+    if (mode !== 'with-reference') return
+    await page.getByRole('button', { name: '시범 미리보기', exact: true }).click()
+    await page.getByText('시범 후보 · 자동 판정 없음', { exact: true }).waitFor({ timeout: 16000 })
+  }
+  await openReference()
   const panel = page.getByRole('region', { name: '카메라 준비 확인' })
   const ended = async () => {
     await page.waitForFunction(() =>
@@ -116,6 +123,16 @@ try {
     throw e
   }
   assert.equal(await page.getByRole('button', { name: '코칭 준비 중' }).isDisabled(), true)
+  if (mode === 'with-reference') {
+    await page.getByRole('button', { name: '수행 시범 단계 재생' }).click()
+    await page.getByRole('button', { name: '입력 확인', exact: true }).click()
+    await page.getByText('연속 입력 확인 중', { exact: true }).waitFor({ timeout: 16000 })
+    await page.waitForTimeout(500)
+    await page.getByText('내 움직임 연결 대기', { exact: true }).waitFor()
+    cases.push(
+      'actual own GLB guide + real heavy/face/hands SDK continuous fake-camera input; no invented user/clinical judgement',
+    )
+  }
   const inferenceWorker = page.workers()[0]
   assert(inferenceWorker)
   // Confirm native policy violations, not merely a refused proxy or empty request count.
@@ -219,6 +236,7 @@ try {
   await page.screenshot({ path: `${scratch}/${label}-stopped-800.png`, fullPage: true })
   await page.setViewportSize({ width: 1440, height: 1100 })
   await page.goto(`${origin}dev/coaching?motion=neck-side`)
+  await openReference()
   await page.getByRole('button', { name: '카메라 확인', exact: true }).click()
   await page.getByRole('button', { name: '카메라 끄기', exact: true }).waitFor({ timeout: 16000 })
   account = 'guest'
@@ -229,7 +247,7 @@ try {
     'actual AuthProvider controlled401 refresh → private UI removed, native resources ended',
   )
   assert.equal(external, 0)
-  assert.equal(avatars, 0)
+  assert.equal(avatars, mode === 'with-reference' ? 4 : 0)
   assert.equal(errors.length, 0)
   await context.close()
 } catch (e) {
@@ -245,6 +263,7 @@ try {
       {
         method:
           'actual React/Chrome/Vite + actual SDK/native fake camera; controlled account API and explicitly synthetic fault/401 triggers',
+        referenceStage: mode === 'with-reference',
         cases,
         external,
         avatars,

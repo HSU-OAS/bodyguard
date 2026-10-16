@@ -1,11 +1,15 @@
 // @vitest-environment happy-dom
 // Actual App/AuthProvider/client; input/API responses are controlled, not human validation.
 import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { afterEach, beforeEach, expect, it, vi } from 'vitest'
+import { afterEach, beforeAll, beforeEach, expect, it, vi } from 'vitest'
 import { App } from '../App'
 import { createCameraPreparation, type PreparationState } from '../pose/cameraPreparation'
 
 vi.mock('../pose/cameraPreparation', () => ({ createCameraPreparation: vi.fn() }))
+// This DOM contract is not a cold lazy-module speed test; real startup stays in Chrome.
+beforeAll(async () => {
+  await import('./CoachingPage')
+})
 type Input = NonNullable<ReturnType<ReturnType<typeof createCameraPreparation>['takeFrame']>>
 const a = { id: '00000000-0000-4000-8000-000000000001', email: 'fixture@example.com' }
 const b = { ...a, id: '00000000-0000-4000-8000-000000000002' }

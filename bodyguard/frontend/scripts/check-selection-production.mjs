@@ -29,6 +29,8 @@ for (const file of files) {
     '/__bodyguard/reference-content/',
     '/__bodyguard/review-avatar/',
     'Blender reference unavailable',
+    'createObservedComparison',
+    'workspaceAvatarFixture',
     '/__bodyguard/inference-worker.js',
     '카메라·분석 연결 확인됨',
     '연속 입력 확인 중',

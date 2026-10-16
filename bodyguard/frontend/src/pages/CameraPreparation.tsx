@@ -1,6 +1,7 @@
 // FR-M-01/02/07·FR-U-04·NFR-08: explicit private preparation, never accepted coaching.
-import { useLayoutEffect, useRef, useState } from 'react'
+import { type RefObject, useLayoutEffect, useRef, useState } from 'react'
 import { useAuth } from '../auth'
+import type { ReferenceStage } from '../avatar/referenceStage'
 import type { Motion } from '../catalog/motions'
 import { createCameraPreparation, type PreparationState } from '../pose/cameraPreparation'
 import { DEFAULT_POSE_MODEL } from '../pose/constants'
@@ -27,7 +28,13 @@ const errors = {
 let retirement: Promise<void> | undefined
 let retirementFailed = false
 
-export function CameraPreparation({ motion }: { motion?: Motion }) {
+export function CameraPreparation({
+  motion,
+  comparison,
+}: {
+  motion?: Motion
+  comparison?: RefObject<ReferenceStage | null>
+}) {
   const motionId = motion?.id ?? null
   const { state: account } = useAuth()
   const accountId = account.status === 'ready' ? account.user.id : null
@@ -36,6 +43,7 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
   const owner = useRef<ReturnType<typeof createCameraPreparation> | null>(null)
   const [state, setState] = useState<PreparationState>({ phase: 'idle' })
   const [framing, setFraming] = useState<CameraFramingStatus | null>(null)
+  const [displayReady, setDisplayReady] = useState(false)
   const reference = useCameraReference(motionId)
   const referencePort = useRef(reference)
   referencePort.current = reference
@@ -48,6 +56,21 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
     let disposed = false
     let current: ReturnType<typeof createCameraPreparation> | undefined
     let animation: number | undefined
+    let display: ReferenceStage | null = null,
+      displayGeneration: number | undefined
+    const suspendDisplay = () => {
+      const owned = display
+      display = null
+      displayGeneration = undefined
+      if (!disposed) setDisplayReady(false)
+      try {
+        owned?.suspendObservation()
+      } catch {
+        retirementFailed = true
+        if (!disposed) setState({ phase: 'error', reason: 'cleanup' })
+        void current?.stop()
+      }
+    }
     const requirement = motionId === null ? null : motionFramingRequirement(motionId)
     let observer = requirement ? createCameraFraming(requirement) : null
     let previous: CameraFramingStatus | null = null
@@ -65,13 +88,19 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
         model: DEFAULT_POSE_MODEL,
         allowed: () =>
           !disposed &&
+          !retirementFailed &&
           live.current === account &&
           account.user.id === id &&
           document.visibilityState === 'visible',
         onState: (next) => {
           if (current && owner.current === current && !disposed) {
+            if (retirementFailed) {
+              setState({ phase: 'error', reason: 'cleanup' })
+              return
+            }
             setState(next)
             if (next.phase !== 'observing') {
+              suspendDisplay()
               referencePort.current.reset()
               previous = null
               setFraming(null)
@@ -89,9 +118,22 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
         if (current?.state.phase === 'observing') {
           const input = current.takeFrame()
           const now = performance.now()
+          const stage = comparison?.current ?? null
+          if (stage !== display) suspendDisplay()
           if (input) {
             observer?.accept(input, now)
             referencePort.current.accept(input, now)
+            try {
+              if (stage && (stage !== display || displayGeneration !== input.generation)) {
+                if (!stage.beginObservation(input.generation)) throw new Error()
+                display = stage
+                displayGeneration = input.generation
+                setDisplayReady(true)
+              }
+              stage?.observe(input)
+            } catch {
+              void current.stop()
+            }
           }
           referencePort.current.tick(now)
           const next = observer?.read(now) ?? null
@@ -118,6 +160,7 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
     window.addEventListener('pagehide', stop)
     return () => {
       disposed = true
+      suspendDisplay()
       if (animation !== undefined) cancelAnimationFrame(animation)
       observer = null
       owner.current = null
@@ -139,7 +182,7 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
         if (retirement === pending) retirement = undefined
       })
     }
-  }, [account, accountId, motionId])
+  }, [account, accountId, motionId, comparison])
   const running = ['ready', 'preparing', 'connecting', 'observing'].includes(state.phase)
   const input = ['ready', 'connecting', 'observing'].includes(state.phase)
   return (
@@ -181,6 +224,16 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
             onClick={() => owner.current?.observe()}
           >
             입력 확인
+          </button>
+        )}
+        {comparison && (
+          <button
+            type="button"
+            className="button secondary"
+            disabled={state.phase !== 'observing' || !displayReady}
+            onClick={() => comparison.current?.alignObservation()}
+          >
+            움직임 맞추기
           </button>
         )}
         <p role={state.phase === 'error' ? 'alert' : 'status'}>
