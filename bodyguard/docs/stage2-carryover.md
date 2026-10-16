@@ -1,5 +1,7 @@
 # 2단계 필수 보완 이월 및 후속 실행 순서
 
+2026-10-17 [S3.C6](stories/arm-overhead-coaching.md)은 한 팔씩 올림/복귀의 생성 기하→같은 프레임 판정→실제 session/result 계약을 연결했다([실패·terminal P2 보완·증거](review/arm-overhead-coaching/README.md)). 화면/실제 SDK·3D 변형·실측/임상 프로필 검증이 아니며 공개 적격0·기존 원본/실패와 D2/전체1~4/1~6 필수 기준은 유지한다. Draft163의 종료 P2·기존 Draft/최종 외형/성능·추천/외부·운영 미완료와 별도 승인도 유지한다.
+
 2026-10-17 [S3.C4](stories/shoulder-shrug-coaching.md)은 어깨 으쓱의 관찰/판정→실제 세션/결과 계약을 구현했다([실패/수치 보완·실제/생성 구분](review/shoulder-shrug-coaching/README.md)). D2-T/I의 독립 연결 진전이며 양측 어깨 상승의 사용자 표시·남녀 GLB/실행 UI·오류 표면/시범·임상 실행 프로필/추천은 아직 미완료다. 공개 적격0·기존 Draft/P2·원본/실패·외부/운영 별도 승인과 모든 D2/1~4/1~6 기준을 유지한다.
 
 2026-10-17 [S3.R1](stories/camera-recommendation-flow.md)은 목적·촬영 범위의 기술 필터를 기존 개발 추천 탭에 연결했다([화면·실패/리뷰·실제/모의 구분](review/camera-recommendation-flow/README.md)). 명시 확인 후 camera/Worker를 정리하고 남녀 움직임 후보/안내를 표시하며 공개 적격0은 유지한다. 개인별 교정 필요성 추천·임상/출시 프로필·나머지 동작 판정·최종 외형/성능·실측과 기존 Draft/P2는 남는다. D2 필수 기준·원본/실패·운영 별도 승인 및 전체1~4/1~6 미완료를 유지한다.

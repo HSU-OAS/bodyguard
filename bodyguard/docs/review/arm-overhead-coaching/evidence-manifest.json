@@ -1,0 +1,705 @@
+{
+  "story": "S3.C6",
+  "base": "25429c004305de0393935f0b0bd470ecb0e0fd97",
+  "status": "local-contract-verified-pending-pr-review",
+  "method": "actual pure classifier/session/engine/result modules in Vite SSR; generated points/resources and mock same-origin HTTP, no browser/SDK/person/SQL/clinical proof",
+  "reviews": {
+    "finding": "terminal feedback after accepted frame",
+    "red": "review-red-a: 1 failed/9 passed",
+    "fix": "ended/paused state emits no feedback errors",
+    "unresolvedScopedP1P2": 0,
+    "existingDraftsAndP2": "unchanged; #163/#150/#152 not merged"
+  },
+  "verification": {
+    "relatedFiles": 6,
+    "relatedTests": 111,
+    "newTests": 55,
+    "runtimeFlows": 15,
+    "fullFiles": 127,
+    "fullTests": 2134,
+    "buildNoticeAndGuard": "passed",
+    "biomeErrors": 0,
+    "biomeInfos": 16
+  },
+  "limitations": [
+    "runtime-a had WebSocket EPERM despite 15 functional passes; not a clean environment validation",
+    "runtime-b/c disable WebSocket and fail on logged Vite errors",
+    "initial unit intermediate sources not all archived; failed logs retained",
+    "no new UI, GLB/Blender, SDK policy, clinical defaults, public eligibility or operational change"
+  ],
+  "sources": [
+    {
+      "path": "bodyguard/docs/review/arm-overhead-coaching/README.md",
+      "archive": "source/bodyguard__docs__review__arm-overhead-coaching__README.md.gz",
+      "sha256": "91e9a0cf958a94865abedd0df65a8086e8471145c481386cdab6d709e85d6c18",
+      "archiveSha256": "584704841f4040553efbee0735fcfb599a5cd5d1d0547df77c811601c93bf122",
+      "bytes": 5684
+    },
+    {
+      "path": "bodyguard/docs/stage2-carryover.md",
+      "archive": "source/bodyguard__docs__stage2-carryover.md.gz",
+      "sha256": "7f9b341084bfceabc5fc668d4f74421e3a817837cfb6c050e4048dee4e24c745",
+      "archiveSha256": "48c7d09da1d015a962d4fe3f2e204584886e76db628f1febffeae9d05009a9f1",
+      "bytes": 35645
+    },
+    {
+      "path": "bodyguard/docs/stories/arm-overhead-coaching.md",
+      "archive": "source/bodyguard__docs__stories__arm-overhead-coaching.md.gz",
+      "sha256": "6bce15ea8582a6c43e3b36c2a0761cfb20525120c37a47c8392eadbbcc13dccc",
+      "archiveSha256": "b565153d82189c9baa4a9ee9477dcf08c4c155b2a9825fd100dda3adf5f449ee",
+      "bytes": 5649
+    },
+    {
+      "path": "bodyguard/docs/tasks.md",
+      "archive": "source/bodyguard__docs__tasks.md.gz",
+      "sha256": "05e6c6839e04a366264d1afc64a9d37b797fdb63dd3e53e282344a9145476056",
+      "archiveSha256": "d7d1647ea06a9719891109dd8fdbea69acd7d69e62d3316a87fdd5a82f5444cf",
+      "bytes": 139412
+    },
+    {
+      "path": "bodyguard/frontend/e2e/fixtures/overheadCandidate.ts",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__overheadCandidate.ts.gz",
+      "sha256": "a80c3934fd660dd52e9a05ac0dc31b05ff9afd520bf6fd916683cc3823ddbfd7",
+      "archiveSha256": "8535ae02acbc66625ec78e76b86471975c8ccd335ae224b06cd12acfec84df1c",
+      "bytes": 2107
+    },
+    {
+      "path": "bodyguard/frontend/pnpm-lock.yaml",
+      "archive": "source/bodyguard__frontend__pnpm-lock.yaml.gz",
+      "sha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+      "archiveSha256": "e32689fae2471a7e180c5afee7d3e2eefa98a83c4addcae2b2e3ba811559eb13",
+      "bytes": 80605
+    },
+    {
+      "path": "bodyguard/frontend/scripts/check-selection-production.mjs",
+      "archive": "source/bodyguard__frontend__scripts__check-selection-production.mjs.gz",
+      "sha256": "f7993ca6cf35b7086e2504678e21ff4f86c208438357f6a212d3ce9a43aadcf8",
+      "archiveSha256": "538628c6e0aacf6b8e744b2c8dd6aace9b0824908b02a796232ffebee4de7575",
+      "bytes": 8406
+    },
+    {
+      "path": "bodyguard/frontend/scripts/test-overhead-candidate.mjs",
+      "archive": "source/bodyguard__frontend__scripts__test-overhead-candidate.mjs.gz",
+      "sha256": "fc6376735dd649797dac7f855b8bcd777d3c7c808dbe6347001a0279b928213a",
+      "archiveSha256": "a5a68ef582a5494640d173edc72d8584f7723dc48c137fc2770686a33516defb",
+      "bytes": 10657
+    },
+    {
+      "path": "bodyguard/frontend/src/api/auth.ts",
+      "archive": "source/bodyguard__frontend__src__api__auth.ts.gz",
+      "sha256": "0193700ff7ef9207ccb0329c37a7d4758a44262d52ac5367b682b9539c99de4b",
+      "archiveSha256": "0138887ff3bf97950420ec0f354060890b77ad6b7c6f0eea8b14177fab33bbd5",
+      "bytes": 5029
+    },
+    {
+      "path": "bodyguard/frontend/src/api/records.ts",
+      "archive": "source/bodyguard__frontend__src__api__records.ts.gz",
+      "sha256": "7be83758ef01db697998a4630fea7b7847a641e3398b3f1fb04cb49634ed0e7a",
+      "archiveSha256": "868e019021a34f6c5deb38da73b2a53f1072f0cfdf984dddfed53c237d0f7a23",
+      "bytes": 4909
+    },
+    {
+      "path": "bodyguard/frontend/src/coaching/overheadCandidateFeedback.test.ts",
+      "archive": "source/bodyguard__frontend__src__coaching__overheadCandidateFeedback.test.ts.gz",
+      "sha256": "73e56374bc4d18d421b9633ffe70d44b4522dfe850d85d3ff65a26d7970a18b5",
+      "archiveSha256": "b8761978952c527c32e754b2ee7f5fcdc62206d4725341472bbbb1452ee723d5",
+      "bytes": 11903
+    },
+    {
+      "path": "bodyguard/frontend/src/coaching/overheadCandidateFeedback.ts",
+      "archive": "source/bodyguard__frontend__src__coaching__overheadCandidateFeedback.ts.gz",
+      "sha256": "da5a5c978051aed123eab631c04863cbde9c9cbb2c6a363cbbe2d7f89f15533d",
+      "archiveSha256": "6bb443a8f6d7bc8c563d32d054cc0357917d835d3804b3288599f034dc0c64be",
+      "bytes": 5225
+    },
+    {
+      "path": "bodyguard/frontend/src/coaching/resources.ts",
+      "archive": "source/bodyguard__frontend__src__coaching__resources.ts.gz",
+      "sha256": "0832d662b19b522153f7e13507147a7b33f264d0eee94f10e07e06758d1fa029",
+      "archiveSha256": "2b3c669ddb4bf20f68a54f2dcad598deb35ae80c4d3d73883ef4412a9b1935ec",
+      "bytes": 6884
+    },
+    {
+      "path": "bodyguard/frontend/src/coaching/resultRecord.ts",
+      "archive": "source/bodyguard__frontend__src__coaching__resultRecord.ts.gz",
+      "sha256": "10fc89e732376eb70b61720cab95685a7f26a59f4c760e4578a8af3536f1a64e",
+      "archiveSha256": "0588a2c1f8b8bfa6f54e5ba9070e5873f30212c98fae1c9855491398a3065cc6",
+      "bytes": 11716
+    },
+    {
+      "path": "bodyguard/frontend/src/coaching/session.ts",
+      "archive": "source/bodyguard__frontend__src__coaching__session.ts.gz",
+      "sha256": "3799bfdce8e829899f986b97770ce82a7bf4dd2932d0607060a513f23e080598",
+      "archiveSha256": "0cf2d746d71a7a4ecd0cf488c3fc62cf4875081eb432c582abdbae10f9e0a611",
+      "bytes": 6276
+    },
+    {
+      "path": "bodyguard/frontend/src/posture/armOverheadObservation.ts",
+      "archive": "source/bodyguard__frontend__src__posture__armOverheadObservation.ts.gz",
+      "sha256": "87c73d06e6bf1643a72f73d299f3a0400f656f16cbe44833e6047e3d835229ea",
+      "archiveSha256": "89c13fb52479c9a688b68af793ac4d497ce5d9e83b873b3a397fd7433b6a4f50",
+      "bytes": 2846
+    },
+    {
+      "path": "bodyguard/frontend/src/posture/shoulderShrugObservation.ts",
+      "archive": "source/bodyguard__frontend__src__posture__shoulderShrugObservation.ts.gz",
+      "sha256": "5778261aee044041b6558ade91c0cebd856aa69a3e203aa30006e26018862a7e",
+      "archiveSha256": "05f265775a00861b1081ca97f6a67e1931c2662147e80110a8e39d3651468ad8",
+      "bytes": 4649
+    },
+    {
+      "path": "bodyguard/frontend/src/posture/thresholds.ts",
+      "archive": "source/bodyguard__frontend__src__posture__thresholds.ts.gz",
+      "sha256": "c3acef188ba9fe22be26e4fc0a10659556d53aaa5f842556d2b340bf5bcbc328",
+      "archiveSha256": "6e1865d0c7a5e51f2fac2ded4e025cfc426b332a71ac6a83df4a066df1f99c77",
+      "bytes": 9638
+    },
+    {
+      "path": "bodyguard/frontend/src/stretch/overheadCandidateClassifier.test.ts",
+      "archive": "source/bodyguard__frontend__src__stretch__overheadCandidateClassifier.test.ts.gz",
+      "sha256": "5a21dd4787b4a753170321cb002ee0cc20720f3dcdc4a0fa0ab44222c55b315f",
+      "archiveSha256": "613ff46b758093df220f271d3de229c9139f293af6a348b79647082fd1474e28",
+      "bytes": 8958
+    },
+    {
+      "path": "bodyguard/frontend/src/stretch/overheadCandidateClassifier.ts",
+      "archive": "source/bodyguard__frontend__src__stretch__overheadCandidateClassifier.ts.gz",
+      "sha256": "cb927066e09d1a7fe5992090f8ae5a97383b00ede4ffcc22396b20968e7b7c6f",
+      "archiveSha256": "e63a9daa81fb00c5168fef7664235b936ebe86fcbe99d30ce44876e61573e1c7",
+      "bytes": 6722
+    },
+    {
+      "path": "bodyguard/frontend/src/stretch/progression.ts",
+      "archive": "source/bodyguard__frontend__src__stretch__progression.ts.gz",
+      "sha256": "7c4df968a9b77fe78e20e92d2fa58951b7d0a7dc0b0df70e3330599ea1b6137a",
+      "archiveSha256": "c2ffade11aa8c04dc176d2fa613e79b14c8d34502dc0f2be6b1e6afb3f49c367",
+      "bytes": 13772
+    },
+    {
+      "path": "bodyguard/frontend/vite.config.ts",
+      "archive": "source/bodyguard__frontend__vite.config.ts.gz",
+      "sha256": "86bb8e81d20d3c53ee7b9ed796d42247817532265372fc5be42d52760251a105",
+      "archiveSha256": "4501d26f96eb55bc7fc0b5859d4453a8a2f71c8cd5eec9f5d75071bfec28e769",
+      "bytes": 1439
+    }
+  ],
+  "snapshots": [
+    {
+      "label": "runtime-a",
+      "path": "bodyguard/frontend/src/posture/armOverheadObservation.ts",
+      "sha256": "87c73d06e6bf1643a72f73d299f3a0400f656f16cbe44833e6047e3d835229ea",
+      "archive": "source/bodyguard__frontend__src__posture__armOverheadObservation.ts.gz"
+    },
+    {
+      "label": "runtime-a",
+      "path": "bodyguard/frontend/src/posture/shoulderShrugObservation.ts",
+      "sha256": "5778261aee044041b6558ade91c0cebd856aa69a3e203aa30006e26018862a7e",
+      "archive": "source/bodyguard__frontend__src__posture__shoulderShrugObservation.ts.gz"
+    },
+    {
+      "label": "runtime-a",
+      "path": "bodyguard/frontend/src/posture/thresholds.ts",
+      "sha256": "c3acef188ba9fe22be26e4fc0a10659556d53aaa5f842556d2b340bf5bcbc328",
+      "archive": "source/bodyguard__frontend__src__posture__thresholds.ts.gz"
+    },
+    {
+      "label": "runtime-a",
+      "path": "bodyguard/frontend/src/stretch/overheadCandidateClassifier.ts",
+      "sha256": "cb927066e09d1a7fe5992090f8ae5a97383b00ede4ffcc22396b20968e7b7c6f",
+      "archive": "source/bodyguard__frontend__src__stretch__overheadCandidateClassifier.ts.gz"
+    },
+    {
+      "label": "runtime-a",
+      "path": "bodyguard/frontend/src/coaching/overheadCandidateFeedback.ts",
+      "sha256": "c28cad98050d4b3f593900a555439277f4632fd8a1645fb558f06a39b5f379a5",
+      "archive": "history/c28cad98050d4b3f593900a555439277f4632fd8a1645fb558f06a39b5f379a5-src__coaching__overheadCandidateFeedback.ts.gz"
+    },
+    {
+      "label": "runtime-a",
+      "path": "bodyguard/frontend/src/coaching/session.ts",
+      "sha256": "3799bfdce8e829899f986b97770ce82a7bf4dd2932d0607060a513f23e080598",
+      "archive": "source/bodyguard__frontend__src__coaching__session.ts.gz"
+    },
+    {
+      "label": "runtime-a",
+      "path": "bodyguard/frontend/src/coaching/resources.ts",
+      "sha256": "0832d662b19b522153f7e13507147a7b33f264d0eee94f10e07e06758d1fa029",
+      "archive": "source/bodyguard__frontend__src__coaching__resources.ts.gz"
+    },
+    {
+      "label": "runtime-a",
+      "path": "bodyguard/frontend/src/stretch/progression.ts",
+      "sha256": "7c4df968a9b77fe78e20e92d2fa58951b7d0a7dc0b0df70e3330599ea1b6137a",
+      "archive": "source/bodyguard__frontend__src__stretch__progression.ts.gz"
+    },
+    {
+      "label": "runtime-a",
+      "path": "bodyguard/frontend/src/coaching/resultRecord.ts",
+      "sha256": "10fc89e732376eb70b61720cab95685a7f26a59f4c760e4578a8af3536f1a64e",
+      "archive": "source/bodyguard__frontend__src__coaching__resultRecord.ts.gz"
+    },
+    {
+      "label": "runtime-a",
+      "path": "bodyguard/frontend/src/api/records.ts",
+      "sha256": "7be83758ef01db697998a4630fea7b7847a641e3398b3f1fb04cb49634ed0e7a",
+      "archive": "source/bodyguard__frontend__src__api__records.ts.gz"
+    },
+    {
+      "label": "runtime-a",
+      "path": "bodyguard/frontend/src/api/auth.ts",
+      "sha256": "0193700ff7ef9207ccb0329c37a7d4758a44262d52ac5367b682b9539c99de4b",
+      "archive": "source/bodyguard__frontend__src__api__auth.ts.gz"
+    },
+    {
+      "label": "runtime-a",
+      "path": "bodyguard/frontend/e2e/fixtures/overheadCandidate.ts",
+      "sha256": "a80c3934fd660dd52e9a05ac0dc31b05ff9afd520bf6fd916683cc3823ddbfd7",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__overheadCandidate.ts.gz"
+    },
+    {
+      "label": "runtime-a",
+      "path": "bodyguard/frontend/scripts/test-overhead-candidate.mjs",
+      "sha256": "9b9402f786b1f3703a78b178da35d3030ec562f04d51027f16225a8bab60dbba",
+      "archive": "history/9b9402f786b1f3703a78b178da35d3030ec562f04d51027f16225a8bab60dbba-scripts__test-overhead-candidate.mjs.gz"
+    },
+    {
+      "label": "runtime-a",
+      "path": "bodyguard/frontend/vite.config.ts",
+      "sha256": "86bb8e81d20d3c53ee7b9ed796d42247817532265372fc5be42d52760251a105",
+      "archive": "source/bodyguard__frontend__vite.config.ts.gz"
+    },
+    {
+      "label": "runtime-a",
+      "path": "bodyguard/frontend/pnpm-lock.yaml",
+      "sha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+      "archive": "source/bodyguard__frontend__pnpm-lock.yaml.gz"
+    },
+    {
+      "label": "runtime-b",
+      "path": "bodyguard/frontend/src/posture/armOverheadObservation.ts",
+      "sha256": "87c73d06e6bf1643a72f73d299f3a0400f656f16cbe44833e6047e3d835229ea",
+      "archive": "source/bodyguard__frontend__src__posture__armOverheadObservation.ts.gz"
+    },
+    {
+      "label": "runtime-b",
+      "path": "bodyguard/frontend/src/posture/shoulderShrugObservation.ts",
+      "sha256": "5778261aee044041b6558ade91c0cebd856aa69a3e203aa30006e26018862a7e",
+      "archive": "source/bodyguard__frontend__src__posture__shoulderShrugObservation.ts.gz"
+    },
+    {
+      "label": "runtime-b",
+      "path": "bodyguard/frontend/src/posture/thresholds.ts",
+      "sha256": "c3acef188ba9fe22be26e4fc0a10659556d53aaa5f842556d2b340bf5bcbc328",
+      "archive": "source/bodyguard__frontend__src__posture__thresholds.ts.gz"
+    },
+    {
+      "label": "runtime-b",
+      "path": "bodyguard/frontend/src/stretch/overheadCandidateClassifier.ts",
+      "sha256": "cb927066e09d1a7fe5992090f8ae5a97383b00ede4ffcc22396b20968e7b7c6f",
+      "archive": "source/bodyguard__frontend__src__stretch__overheadCandidateClassifier.ts.gz"
+    },
+    {
+      "label": "runtime-b",
+      "path": "bodyguard/frontend/src/coaching/overheadCandidateFeedback.ts",
+      "sha256": "c28cad98050d4b3f593900a555439277f4632fd8a1645fb558f06a39b5f379a5",
+      "archive": "history/c28cad98050d4b3f593900a555439277f4632fd8a1645fb558f06a39b5f379a5-src__coaching__overheadCandidateFeedback.ts.gz"
+    },
+    {
+      "label": "runtime-b",
+      "path": "bodyguard/frontend/src/coaching/session.ts",
+      "sha256": "3799bfdce8e829899f986b97770ce82a7bf4dd2932d0607060a513f23e080598",
+      "archive": "source/bodyguard__frontend__src__coaching__session.ts.gz"
+    },
+    {
+      "label": "runtime-b",
+      "path": "bodyguard/frontend/src/coaching/resources.ts",
+      "sha256": "0832d662b19b522153f7e13507147a7b33f264d0eee94f10e07e06758d1fa029",
+      "archive": "source/bodyguard__frontend__src__coaching__resources.ts.gz"
+    },
+    {
+      "label": "runtime-b",
+      "path": "bodyguard/frontend/src/stretch/progression.ts",
+      "sha256": "7c4df968a9b77fe78e20e92d2fa58951b7d0a7dc0b0df70e3330599ea1b6137a",
+      "archive": "source/bodyguard__frontend__src__stretch__progression.ts.gz"
+    },
+    {
+      "label": "runtime-b",
+      "path": "bodyguard/frontend/src/coaching/resultRecord.ts",
+      "sha256": "10fc89e732376eb70b61720cab95685a7f26a59f4c760e4578a8af3536f1a64e",
+      "archive": "source/bodyguard__frontend__src__coaching__resultRecord.ts.gz"
+    },
+    {
+      "label": "runtime-b",
+      "path": "bodyguard/frontend/src/api/records.ts",
+      "sha256": "7be83758ef01db697998a4630fea7b7847a641e3398b3f1fb04cb49634ed0e7a",
+      "archive": "source/bodyguard__frontend__src__api__records.ts.gz"
+    },
+    {
+      "label": "runtime-b",
+      "path": "bodyguard/frontend/src/api/auth.ts",
+      "sha256": "0193700ff7ef9207ccb0329c37a7d4758a44262d52ac5367b682b9539c99de4b",
+      "archive": "source/bodyguard__frontend__src__api__auth.ts.gz"
+    },
+    {
+      "label": "runtime-b",
+      "path": "bodyguard/frontend/e2e/fixtures/overheadCandidate.ts",
+      "sha256": "a80c3934fd660dd52e9a05ac0dc31b05ff9afd520bf6fd916683cc3823ddbfd7",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__overheadCandidate.ts.gz"
+    },
+    {
+      "label": "runtime-b",
+      "path": "bodyguard/frontend/scripts/test-overhead-candidate.mjs",
+      "sha256": "fc6376735dd649797dac7f855b8bcd777d3c7c808dbe6347001a0279b928213a",
+      "archive": "source/bodyguard__frontend__scripts__test-overhead-candidate.mjs.gz"
+    },
+    {
+      "label": "runtime-b",
+      "path": "bodyguard/frontend/vite.config.ts",
+      "sha256": "86bb8e81d20d3c53ee7b9ed796d42247817532265372fc5be42d52760251a105",
+      "archive": "source/bodyguard__frontend__vite.config.ts.gz"
+    },
+    {
+      "label": "runtime-b",
+      "path": "bodyguard/frontend/pnpm-lock.yaml",
+      "sha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+      "archive": "source/bodyguard__frontend__pnpm-lock.yaml.gz"
+    },
+    {
+      "label": "runtime-c",
+      "path": "bodyguard/frontend/src/posture/armOverheadObservation.ts",
+      "sha256": "87c73d06e6bf1643a72f73d299f3a0400f656f16cbe44833e6047e3d835229ea",
+      "archive": "source/bodyguard__frontend__src__posture__armOverheadObservation.ts.gz"
+    },
+    {
+      "label": "runtime-c",
+      "path": "bodyguard/frontend/src/posture/shoulderShrugObservation.ts",
+      "sha256": "5778261aee044041b6558ade91c0cebd856aa69a3e203aa30006e26018862a7e",
+      "archive": "source/bodyguard__frontend__src__posture__shoulderShrugObservation.ts.gz"
+    },
+    {
+      "label": "runtime-c",
+      "path": "bodyguard/frontend/src/posture/thresholds.ts",
+      "sha256": "c3acef188ba9fe22be26e4fc0a10659556d53aaa5f842556d2b340bf5bcbc328",
+      "archive": "source/bodyguard__frontend__src__posture__thresholds.ts.gz"
+    },
+    {
+      "label": "runtime-c",
+      "path": "bodyguard/frontend/src/stretch/overheadCandidateClassifier.ts",
+      "sha256": "cb927066e09d1a7fe5992090f8ae5a97383b00ede4ffcc22396b20968e7b7c6f",
+      "archive": "source/bodyguard__frontend__src__stretch__overheadCandidateClassifier.ts.gz"
+    },
+    {
+      "label": "runtime-c",
+      "path": "bodyguard/frontend/src/coaching/overheadCandidateFeedback.ts",
+      "sha256": "da5a5c978051aed123eab631c04863cbde9c9cbb2c6a363cbbe2d7f89f15533d",
+      "archive": "source/bodyguard__frontend__src__coaching__overheadCandidateFeedback.ts.gz"
+    },
+    {
+      "label": "runtime-c",
+      "path": "bodyguard/frontend/src/coaching/session.ts",
+      "sha256": "3799bfdce8e829899f986b97770ce82a7bf4dd2932d0607060a513f23e080598",
+      "archive": "source/bodyguard__frontend__src__coaching__session.ts.gz"
+    },
+    {
+      "label": "runtime-c",
+      "path": "bodyguard/frontend/src/coaching/resources.ts",
+      "sha256": "0832d662b19b522153f7e13507147a7b33f264d0eee94f10e07e06758d1fa029",
+      "archive": "source/bodyguard__frontend__src__coaching__resources.ts.gz"
+    },
+    {
+      "label": "runtime-c",
+      "path": "bodyguard/frontend/src/stretch/progression.ts",
+      "sha256": "7c4df968a9b77fe78e20e92d2fa58951b7d0a7dc0b0df70e3330599ea1b6137a",
+      "archive": "source/bodyguard__frontend__src__stretch__progression.ts.gz"
+    },
+    {
+      "label": "runtime-c",
+      "path": "bodyguard/frontend/src/coaching/resultRecord.ts",
+      "sha256": "10fc89e732376eb70b61720cab95685a7f26a59f4c760e4578a8af3536f1a64e",
+      "archive": "source/bodyguard__frontend__src__coaching__resultRecord.ts.gz"
+    },
+    {
+      "label": "runtime-c",
+      "path": "bodyguard/frontend/src/api/records.ts",
+      "sha256": "7be83758ef01db697998a4630fea7b7847a641e3398b3f1fb04cb49634ed0e7a",
+      "archive": "source/bodyguard__frontend__src__api__records.ts.gz"
+    },
+    {
+      "label": "runtime-c",
+      "path": "bodyguard/frontend/src/api/auth.ts",
+      "sha256": "0193700ff7ef9207ccb0329c37a7d4758a44262d52ac5367b682b9539c99de4b",
+      "archive": "source/bodyguard__frontend__src__api__auth.ts.gz"
+    },
+    {
+      "label": "runtime-c",
+      "path": "bodyguard/frontend/e2e/fixtures/overheadCandidate.ts",
+      "sha256": "a80c3934fd660dd52e9a05ac0dc31b05ff9afd520bf6fd916683cc3823ddbfd7",
+      "archive": "source/bodyguard__frontend__e2e__fixtures__overheadCandidate.ts.gz"
+    },
+    {
+      "label": "runtime-c",
+      "path": "bodyguard/frontend/scripts/test-overhead-candidate.mjs",
+      "sha256": "fc6376735dd649797dac7f855b8bcd777d3c7c808dbe6347001a0279b928213a",
+      "archive": "source/bodyguard__frontend__scripts__test-overhead-candidate.mjs.gz"
+    },
+    {
+      "label": "runtime-c",
+      "path": "bodyguard/frontend/vite.config.ts",
+      "sha256": "86bb8e81d20d3c53ee7b9ed796d42247817532265372fc5be42d52760251a105",
+      "archive": "source/bodyguard__frontend__vite.config.ts.gz"
+    },
+    {
+      "label": "runtime-c",
+      "path": "bodyguard/frontend/pnpm-lock.yaml",
+      "sha256": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+      "archive": "source/bodyguard__frontend__pnpm-lock.yaml.gz"
+    }
+  ],
+  "artifacts": [
+    {
+      "original": "build-a.log",
+      "archive": "evidence/build-a.log.gz",
+      "sha256": "2675be193f46abf7fffa0c4b829c7e1b49a887d7ace161ae583bad9d32bd8198",
+      "archiveSha256": "01b7a086629ffe278d41099e155620d79af3a49d1cbca3b874a64a77110669ef",
+      "bytes": 632
+    },
+    {
+      "original": "build-b.log",
+      "archive": "evidence/build-b.log.gz",
+      "sha256": "f11b329af04bd415143b5b0d388b70130ad60b65bae7fa21ed4100b9d370378a",
+      "archiveSha256": "c8486a0894888ae3b4d4e863b564e43ff68e2fe9e0ee6e5c32029476e40aac4d",
+      "bytes": 632
+    },
+    {
+      "original": "check-a.log",
+      "archive": "evidence/check-a.log.gz",
+      "sha256": "698c7575faf58993aa6f1059536ea669fbd4d8f76ace6f9113e218e7e5a6639b",
+      "archiveSha256": "cc3d97b6ebddd02e38b06f3fc443d603f4701025cf234560cbeda6f6eaa04b81",
+      "bytes": 16157
+    },
+    {
+      "original": "check-b.log",
+      "archive": "evidence/check-b.log.gz",
+      "sha256": "cdd80002470ee4d77c1f3461d71e4ebe09c696913a9384e59c20fed3ac7a8003",
+      "archiveSha256": "e192cd9d427fe6619a47b3db593777b63191667e2b61066c431c9ff01666b980",
+      "bytes": 16157
+    },
+    {
+      "original": "classifier-a.log",
+      "archive": "evidence/classifier-a.log.gz",
+      "sha256": "a1a0ef85e372e99e5749fba4cfabf352eb68a739d6e18e7e31d8cdb289c1f1ec",
+      "archiveSha256": "8088bb226374d13035f63f8d7d8e6076ddc8accd075a0c0eb04cc0084a23230d",
+      "bytes": 2807
+    },
+    {
+      "original": "core-b.log",
+      "archive": "evidence/core-b.log.gz",
+      "sha256": "5a180534323f460041ff8c1905405a4400daaef03771f700bfa43bad0974e439",
+      "archiveSha256": "4d29ff868a7e0e72ec0ece7ff06bb1fa98f51076a3c56895ec04e667e024bda5",
+      "bytes": 354
+    },
+    {
+      "original": "core-c.log",
+      "archive": "evidence/core-c.log.gz",
+      "sha256": "3cc5eec10958b88a1976791e51ffc9cab2f85be2f806bb3568b9c8f9496a7d2b",
+      "archiveSha256": "f306fd72a1c72b2d72d34d45626a4437c41e4984e2e56e409f07dc3b1486eef9",
+      "bytes": 354
+    },
+    {
+      "original": "core-d.log",
+      "archive": "evidence/core-d.log.gz",
+      "sha256": "9126a704c67cfdb69b2d549df5dcccb16f7f4e3cd43b623a6751cd0327610201",
+      "archiveSha256": "e0268116b3e5d7be5443aa922df474547e27ea92ed1dc2903413d100c07162f1",
+      "bytes": 354
+    },
+    {
+      "original": "core-e.log",
+      "archive": "evidence/core-e.log.gz",
+      "sha256": "cf4978dacd819f6cf695a7029c2c62627700c9256fa651c595c75a6ab54c335c",
+      "archiveSha256": "3752e8918bc8344de1c81d341ed1a62f254adc44df2576928766e7e414b0ea04",
+      "bytes": 555
+    },
+    {
+      "original": "full-a.log",
+      "archive": "evidence/full-a.log.gz",
+      "sha256": "e27d1d78823efcbd826eb0c6a661cf94cd87e97be5723a07086b7a215cf6c5d6",
+      "archiveSha256": "133657b2eef2c9966cc2681c909ac168920f7072f690b4200b14e45b8f8ff60c",
+      "bytes": 609
+    },
+    {
+      "original": "full-b.log",
+      "archive": "evidence/full-b.log.gz",
+      "sha256": "9c98b97074d162fc8ccf0187be292b8883102fe53f930fa42ac940bc51b5c7ab",
+      "archiveSha256": "7ae88f2229d5da4d4a8e873a5a1b285cd2601f36171d4303cd17b8e9d7f11f32",
+      "bytes": 609
+    },
+    {
+      "original": "production-guard-a.log",
+      "archive": "evidence/production-guard-a.log.gz",
+      "sha256": "d5427256c3d39b8ef3179c600682ef3f6ab1d94a986c761e0c8dd02ea436f0cb",
+      "archiveSha256": "4e5371c802338a1173b3fd8a330c3f96b588b966f06e6d3330a8385dd6ea1b3f",
+      "bytes": 1179
+    },
+    {
+      "original": "production-guard-b.log",
+      "archive": "evidence/production-guard-b.log.gz",
+      "sha256": "d5427256c3d39b8ef3179c600682ef3f6ab1d94a986c761e0c8dd02ea436f0cb",
+      "archiveSha256": "4e5371c802338a1173b3fd8a330c3f96b588b966f06e6d3330a8385dd6ea1b3f",
+      "bytes": 1179
+    },
+    {
+      "original": "red-classifier-a.log",
+      "archive": "evidence/red-classifier-a.log.gz",
+      "sha256": "60eb623a1d6acf3d49d38ff39b28a156e3a98a03af47df6c622f21161813f79b",
+      "archiveSha256": "55d7d0e8f102dba537fe73c3bce990ca48ef67686ae7fd871407f2461f0105ae",
+      "bytes": 1389
+    },
+    {
+      "original": "red-feedback-a.log",
+      "archive": "evidence/red-feedback-a.log.gz",
+      "sha256": "a83f51602119f266edaaaf08e337a344a55625135064dde8e6cda2b621570d64",
+      "archiveSha256": "77bba095f94fb0089bdd2b0200b9b860d25fc287566c48cfb380daa37dab225e",
+      "bytes": 1377
+    },
+    {
+      "original": "red-types-a.log",
+      "archive": "evidence/red-types-a.log.gz",
+      "sha256": "252103a9f5b4c46a0cc8e7d7b29b33a1cc584cf6bfc633d281dd1ce73e879531",
+      "archiveSha256": "e1f3d4d78c8a671c43c823eb8b2af0a30e13bd833f12befa7bd6de49bf702d7e",
+      "bytes": 144
+    },
+    {
+      "original": "review-red-a.log",
+      "archive": "evidence/review-red-a.log.gz",
+      "sha256": "37d0bc5626879cb3326892ea905bdc807cd383042d6bcba879e0c73088cd03c2",
+      "archiveSha256": "c72d80e205550c8c097a0d6ae219496a2dd2842f3df93d47b6ee39f34bf684d6",
+      "bytes": 1410
+    },
+    {
+      "original": "runtime-a.json",
+      "archive": "evidence/runtime-a.json",
+      "sha256": "3b52599f9cd3fa9d225a26ea7d369c709aed7851113a5fa895ca92bc0fd552fb",
+      "archiveSha256": "3b52599f9cd3fa9d225a26ea7d369c709aed7851113a5fa895ca92bc0fd552fb",
+      "bytes": 4740
+    },
+    {
+      "original": "runtime-a.log",
+      "archive": "evidence/runtime-a.log.gz",
+      "sha256": "fae762a82340392812cd4244b8e1a050f57b73b9c8625d4dcb75ee203fa8c7d7",
+      "archiveSha256": "20a225bfbb80d28d0d79b9831b81c8bc430c7f1cae123b1d2d90f4be33a732c2",
+      "bytes": 3773
+    },
+    {
+      "original": "runtime-b.json",
+      "archive": "evidence/runtime-b.json",
+      "sha256": "025ccf754d0bec2177e5cf144c7e77e150b66e7c9301a17b277489cfbe5a7ea9",
+      "archiveSha256": "025ccf754d0bec2177e5cf144c7e77e150b66e7c9301a17b277489cfbe5a7ea9",
+      "bytes": 4767
+    },
+    {
+      "original": "runtime-b.log",
+      "archive": "evidence/runtime-b.log.gz",
+      "sha256": "99e7428b9a4c7dca39afd6d0bb4ee56d8c8b8b08cefe9dadad6d555e36578aca",
+      "archiveSha256": "1592f30cd993d40d5c749aecec786a86193ab6e5f7aa7553d2f350b9cbb1321f",
+      "bytes": 94
+    },
+    {
+      "original": "runtime-c.json",
+      "archive": "evidence/runtime-c.json",
+      "sha256": "582183f831b5427e0b080dea319907b4d2c50245fa1bf7c66b566c77e1cea8f2",
+      "archiveSha256": "582183f831b5427e0b080dea319907b4d2c50245fa1bf7c66b566c77e1cea8f2",
+      "bytes": 4767
+    },
+    {
+      "original": "runtime-c.log",
+      "archive": "evidence/runtime-c.log.gz",
+      "sha256": "7ccb2df48901f93bd7a567050a562bf13b8eb10f00784dd2aec985d80690d8aa",
+      "archiveSha256": "1ba51297f95b8ebecc7088e2a0c574835ab930271a6ef8481c58b172e3006aa3",
+      "bytes": 94
+    },
+    {
+      "original": "scoped-a.log",
+      "archive": "evidence/scoped-a.log.gz",
+      "sha256": "0ce15f76abd07ee703048c9b85662bc971f0a08e6987c1dcdedbc124aa7d0cd6",
+      "archiveSha256": "144fc635547109211f076bc9c8bdfe774e3d9f84d095c6bea6e3c82b00fad32f",
+      "bytes": 40
+    },
+    {
+      "original": "scoped-b.log",
+      "archive": "evidence/scoped-b.log.gz",
+      "sha256": "d6cbf2b7a36f011038686d817dd27ebaf5a6955dd60d881ded27234a5fc25e27",
+      "archiveSha256": "327b37cb678c824b0db61babfdb10325691caff9fe31454ce9845d2f03ebbc0a",
+      "bytes": 40
+    },
+    {
+      "original": "scoped-c.log",
+      "archive": "evidence/scoped-c.log.gz",
+      "sha256": "b4390c1fc84d3c40793934ed5fda2c89a56e7607d9c8238c8f98725e2ca401d0",
+      "archiveSha256": "50765bfc41a2d396183ed7eb3213cc0236191fd420b5414967506cd4e5cb4d1b",
+      "bytes": 40
+    },
+    {
+      "original": "scoped-d.log",
+      "archive": "evidence/scoped-d.log.gz",
+      "sha256": "0ffca6db22cbdc2d10ac2a2c3c0e0c99717990508d157171a557a1a91017a96d",
+      "archiveSha256": "1da466f0cd0c29a4c1a15be9b9c05e6c30952a66a056a2a5da46a00af4bb212d",
+      "bytes": 40
+    },
+    {
+      "original": "scoped-final.log",
+      "archive": "evidence/scoped-final.log.gz",
+      "sha256": "b6727929bc8242b2ca4bdf99a8a2a9757327580c10c60e734d3251404ea7512c",
+      "archiveSha256": "26e51662f6da25efb62177a9fbc16878bddbba4ef9fcf6929900a150671d163c",
+      "bytes": 43
+    },
+    {
+      "original": "scoped-review-a.log",
+      "archive": "evidence/scoped-review-a.log.gz",
+      "sha256": "199dde15ec6065f017342484310f40683b7ffadae3ef183e885472de9f86b700",
+      "archiveSha256": "4b154d4986daff75046db326f951758f9d8a0cc603ed68fbe33ce15fe36faf1f",
+      "bytes": 39
+    },
+    {
+      "original": "scoped-runtime-a.log",
+      "archive": "evidence/scoped-runtime-a.log.gz",
+      "sha256": "6016748527b1c7e65c92cfd6beaf8fc2d636097dbf5e6e843f96004b4744995b",
+      "archiveSha256": "1195c59a8483d7b6e68a4384a75024e11d803b9e522b839196b4952f52e7b86d",
+      "bytes": 38
+    },
+    {
+      "original": "scoped-runtime-b.log",
+      "archive": "evidence/scoped-runtime-b.log.gz",
+      "sha256": "e388ad129c75a755035a0be9dc08e10f76ff374b35b0099a2b1eb32a035dda5b",
+      "archiveSha256": "4172ed40f056bba6a27a1afd7a048b8d880548c44cf9f2592fb91372db2b68e7",
+      "bytes": 39
+    },
+    {
+      "original": "source-check.json",
+      "archive": "evidence/source-check.json",
+      "sha256": "f3b7f9adff24030d5511c08683f5a15251765832a4738dda92b1f4e03bc2a0dd",
+      "archiveSha256": "f3b7f9adff24030d5511c08683f5a15251765832a4738dda92b1f4e03bc2a0dd",
+      "bytes": 858
+    },
+    {
+      "original": "type-b.log",
+      "archive": "evidence/type-b.log.gz",
+      "sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92",
+      "archiveSha256": "4d5a0c23c9ecddf5ae14f132b0345c3788269435548b9568b882d38b627def51",
+      "bytes": 15
+    },
+    {
+      "original": "type-c.log",
+      "archive": "evidence/type-c.log.gz",
+      "sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92",
+      "archiveSha256": "4d5a0c23c9ecddf5ae14f132b0345c3788269435548b9568b882d38b627def51",
+      "bytes": 15
+    },
+    {
+      "original": "type-d.log",
+      "archive": "evidence/type-d.log.gz",
+      "sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92",
+      "archiveSha256": "4d5a0c23c9ecddf5ae14f132b0345c3788269435548b9568b882d38b627def51",
+      "bytes": 15
+    }
+  ]
+}

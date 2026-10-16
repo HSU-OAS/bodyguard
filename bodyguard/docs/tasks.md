@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-17 [S3.C6 한 팔씩 올림/복귀](stories/arm-overhead-coaching.md): PR162 merge25429c00 최신 main에서 지정 팔/반대 팔·팔꿈치 투영/손목 높이·머리/체간·가림/세대/원본 시각을 관찰/판정하고 기존 실제 session/result 계약에 연결했다. [실행·terminal P2 보완·생성/실제·증거](review/arm-overhead-coaching/README.md). 임상 기본값/공개 적격 승격0·화면/SDK/원본/GLB/운영 변경0. 순수 계약의 scoped PR 게이트를 진행하며 다음은 실제 남녀 아바타/오류 표면/시범/실행 UI 연결이다. 기존 Draft163/150/152·P2·최종 외형/성능·임상/개인별 추천·참여자 이월/외부·운영 승인 및 전체1~4/1~6 기준은 유지한다.
+
 2026-10-17 [S3.C4](stories/shoulder-shrug-coaching.md): PR161 source45531d14→merge995a00fa/main 확인 후 어깨 으쓱의 같은 프레임 기하→보상/가림 판정→기존 실제 세션/반복·제한 결과 계약을 구현했다. [실행·수치 P2 보완·실패/모의 구분](review/shoulder-shrug-coaching/README.md). 생성 관절/자원·모의 HTTP 시험이며 새 어깨 실행 UI/GLB·실제 사람/SDK·임상 기본값이나 공개 동작 승격이 아니다. 다음은 실제 남녀 모델의 양측 어깨 상승 재현과 기존 두 아바타 실행 UI·오류/시범 통합이다. 기존 공개 적격0·Draft150/152/SDK P2·최종 외형/성능·별도 승인·전체1~4/1~6 실제 기준은 유지한다.
 
 2026-10-17 [S3.R1](stories/camera-recommendation-flow.md): PR160 source7232c67→merge5bf3cede/main 확인 후 기존 추천 탭에 부위·촬영 범위 확인→자원 정리→남녀 움직임 후보→기존 안내를 연결했다. [작동 화면·공개 import/존재 신뢰도 P2 보완·실패와 실제/모의 구분](review/camera-recommendation-flow/README.md). 이것은 첫 촬영 조건 필터이며 개인별 교정 필요성 추천의 완성이 아니다. 기존 공개 적격0·아바타/판정 gate·기록/기준선 쓰기0을 유지한다. 다음은 근거/실행 프로필과 남은 동작 코칭 통합이다. 기존 Draft150/152/SDK P2·최종 외형/성능·별도 승인·전체1~4/1~6 실제 기준은 남는다.
