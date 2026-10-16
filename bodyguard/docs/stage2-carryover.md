@@ -1,5 +1,7 @@
 # 2단계 필수 보완 이월 및 후속 실행 순서
 
+2026-10-16 [S3.A1](stories/blender-reference-content.md): D2-T의 오른쪽 단계별 시범 콘텐츠를 실제 전문 Blender 남녀3종으로 연결했다. [단계/좌우·정지·복귀·오류 복구 화면/실패 보존](review/blender-reference-content/README.md). 원래 신체 GLB/163관절·여덟 가중치를 유지하고 공개 빌드에는 넣지 않았다. 왼쪽 실제 사용자 아바타·근거 있는 판정/추천·결과의 동시 통합과 나머지4종은 남는다. D2-A/M/T/I/R/P·최종 외형/성능·PR152의 간헐 SDK P2 및 전체1~4/1~6 완료로 표시하지 않는다. 다음은 이 시범과 관찰 흐름을 연결하는 구현이며 사람/외부 연결 보류를 독립 작업의 중단 이유로 삼지 않는다.
+
 2026-10-16 최신: [운영 규칙](operating-rules.md)의 제작 보류 해제·개발 재개·1~4 우선 요청을 적용한다. [S2.V2](stories/motion-preview-content.md)는 남녀3종 움직임 미리보기를 연결했고, [S6.P2a](stories/sdk-lifecycle-startup.md)는 Worker boot 전 실패에서 잘못 요구하던 native ACK/cleanup 오염을 고쳐 명시 재시도를 복구했다. [실제 main 대조·복구·남은 문제](review/sdk-coaching-startup/README.md). 이는 D2-R 전체나 PR152 간헐 시작/정리 P2의 해결이 아니다. D2-A/M/T/I/P·올바른 시범/사용자·판정/추천/결과 통합과1~4/1~6 필수 기준은 그대로 미완료다. 다음은 실제 핵심 사용자 흐름 연결이며 사람 시험/공급자/Docker 대기를 독립 구현 중단 조건으로 삼지 않는다. 아래 기록의 과거 보류/다음 작업은 당시 상태다.
 
 2026-10-09 [S6.19](stories/owned-native-warmup.md)는 로그인 소유 첫 추론 준비를 실제 Auth/API/SQL에 연결해 준비 판정/적립/기록0·권한 취소/늦은 결과·새 소유자·기존 코칭/본인 기록 경계를 확인했다. [실제 흐름과 실패/미완료](review/owned-native-warmup/README.md). 단일5초의 기본26/준비42와 로컬 품질 검사는 통과했으나 SDK CSP 차단 시도·기존 시작P2·실제 참여자/정확도·최종 외형/시범·승인 공개 UI/SDK·D2 및 전체1~6은 미완료다. 공개 byte/최소 문구·기본 thread/모델/화질·원본/GLB/조형·운영과 별도 승인 경계 유지.

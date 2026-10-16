@@ -1,14 +1,23 @@
 // FR-V-01/03·FR-S-06·FR-A-01/02: approved layout, private until actual motion/asset gates.
 import { useEffect, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
+import { referenceMotion } from '../avatar/referenceContentAssets'
+import type { ReferenceCommand } from '../avatar/referenceStage'
 import { motionPreviewMedia } from '../catalog/motionMedia'
 import { motionNavigationUrl } from '../catalog/motionNavigation'
 import { findMotions, motionById, type Region } from '../catalog/motions'
 import { CameraPreparation } from './CameraPreparation'
 import { MotionPreview } from './MotionPreview'
+import { ReferenceDemonstration, type ReferenceStatus } from './ReferenceDemonstration'
 import './CoachingPage.css'
 
 type View = 'full' | 'upper' | 'detail'
+const phases = [
+  ['waiting-start', '준비'],
+  ['seeking-target', '수행'],
+  ['holding', '유지'],
+  ['waiting-return', '복귀'],
+] as const
 const views = [
   ['upper', '상반신'],
   ['full', '전신'],
@@ -30,6 +39,14 @@ export function CoachingPage() {
   const [query, setQuery] = useState('')
   const [region, setRegion] = useState<Region>('all')
   const [pickerOpen, setPickerOpen] = useState(false)
+  const [previewOwner, setPreviewOwner] = useState<string | null>(null)
+  const previewKey = motion ? `${motion.id}:${gender}` : null
+  const preview = previewKey !== null && previewOwner === previewKey
+  const [referenceStatus, setReferenceStatus] = useState<ReferenceStatus>('loading')
+  const [phase, setPhase] = useState<ReferenceCommand['phase']>('waiting-start')
+  const [side, setSide] = useState<'left' | 'right'>('left')
+  const [playing, setPlaying] = useState(false)
+  const [revision, setRevision] = useState(0)
   const picker = useRef<HTMLDialogElement>(null)
   const settings = useRef<HTMLDialogElement>(null)
   const heading = useRef<HTMLHeadingElement>(null)
@@ -51,6 +68,8 @@ export function CoachingPage() {
   useEffect(() => {
     const hidden = () => {
       if (document.hidden) {
+        setPreviewOwner(null)
+        setPlaying(false)
         picker.current?.close()
         setPickerOpen(false)
         settings.current?.close()
@@ -59,6 +78,9 @@ export function CoachingPage() {
     document.addEventListener('visibilitychange', hidden)
     return () => document.removeEventListener('visibilitychange', hidden)
   }, [])
+  useEffect(() => {
+    if (previewOwner !== null && previewOwner !== previewKey) setPreviewOwner(null)
+  }, [previewOwner, previewKey])
 
   return (
     <section className="coaching-workspace" aria-labelledby="coaching-heading">
@@ -100,10 +122,28 @@ export function CoachingPage() {
           </div>
         </header>
         <ol className="coaching-stages" aria-label="코칭 순서">
-          <li>준비</li>
-          <li>수행</li>
-          <li>유지</li>
-          <li>복귀</li>
+          {phases.map(([value, label]) => (
+            <li key={value}>
+              {preview ? (
+                <button
+                  type="button"
+                  className="button secondary"
+                  aria-label={`${label} 시범 단계 재생`}
+                  aria-pressed={phase === value}
+                  disabled={referenceStatus !== 'ready'}
+                  onClick={() => {
+                    setPhase(value)
+                    setPlaying(true)
+                    setRevision((r) => r + 1)
+                  }}
+                >
+                  {label}
+                </button>
+              ) : (
+                label
+              )}
+            </li>
+          ))}
         </ol>
         <section
           className="coaching-space"
@@ -115,11 +155,31 @@ export function CoachingPage() {
             <span>내 움직임</span>
             <span>현재 단계 시범</span>
           </div>
-          <div className="coaching-scene-pending" role="status">
-            <span className="coaching-connection-dot" aria-hidden="true" />
-            <p>아바타 연결 대기</p>
-            <p className="small muted">최종 아바타·동작 검증 후 연결됩니다</p>
-          </div>
+          {preview && motion && referenceMotion(motion.id) ? (
+            <>
+              <ReferenceDemonstration
+                motion={motion.id}
+                gender={gender === 'female' ? 'female' : 'male'}
+                command={{
+                  phase,
+                  stepId: motion.id === 'shoulder-shrug' ? 'both' : side,
+                  playing,
+                  revision,
+                  view,
+                }}
+                onStatus={setReferenceStatus}
+              />
+              <div className="coaching-scene-pending reference-user-pending" role="status">
+                <p>내 움직임 연결 대기</p>
+              </div>
+            </>
+          ) : (
+            <div className="coaching-scene-pending" role="status">
+              <span className="coaching-connection-dot" aria-hidden="true" />
+              <p>아바타 연결 대기</p>
+              <p className="small muted">최종 아바타·동작 검증 후 연결됩니다</p>
+            </div>
+          )}
         </section>
         <div className="coaching-footer">
           {id !== null && !motion ? (
@@ -131,9 +191,52 @@ export function CoachingPage() {
             <button className="button primary" type="button" disabled>
               코칭 준비 중
             </button>
-            <button className="button secondary" type="button" disabled>
-              전체 시범
+            <button
+              className="button secondary"
+              type="button"
+              disabled={!motion || !referenceMotion(motion.id)}
+              aria-expanded={preview}
+              onClick={() => {
+                setPreviewOwner(preview ? null : previewKey)
+                setPlaying(false)
+                setPhase('waiting-start')
+                setReferenceStatus('loading')
+                setRevision((r) => r + 1)
+              }}
+            >
+              {preview ? '시범 닫기' : '시범 미리보기'}
             </button>
+            {preview && (
+              <>
+                <button
+                  className="button secondary"
+                  type="button"
+                  disabled={referenceStatus !== 'ready'}
+                  aria-pressed={playing}
+                  onClick={() => setPlaying((value) => !value)}
+                >
+                  {playing ? '시범 일시정지' : '시범 재생'}
+                </button>
+                {motion?.id !== 'shoulder-shrug' && (
+                  <fieldset className="coaching-segmented">
+                    <legend className="sr-only">시범 방향</legend>
+                    {(['left', 'right'] as const).map((value) => (
+                      <button
+                        type="button"
+                        key={value}
+                        aria-pressed={side === value}
+                        onClick={() => {
+                          setSide(value)
+                          setRevision((r) => r + 1)
+                        }}
+                      >
+                        {value === 'left' ? '왼쪽 시범' : '오른쪽 시범'}
+                      </button>
+                    ))}
+                  </fieldset>
+                )}
+              </>
+            )}
             <Link className="button secondary" to={motionNavigationUrl('/dev/select', params)}>
               나가기
             </Link>

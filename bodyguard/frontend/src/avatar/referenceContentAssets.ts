@@ -1,0 +1,29 @@
+// FR-S-03/04·FR-A-01: actual Blender-only animation assets, not clinical targets.
+import type { AvatarGender } from './reviewAvatarAssets.ts'
+
+export type ReferenceMotion = 'neck-side' | 'shoulder-shrug' | 'arm-overhead'
+const rows = {
+  male: {
+    'neck-side': [170172, '5ab579feaf713399936d1e62f6db03bd74cb85d8e69822ea13ac1ed0a1f225c1'],
+    'shoulder-shrug': [162996, '918a689df109be458b0e0cf5b3329e73501eda04c12bde64c83c65f22d869d9f'],
+    'arm-overhead': [170244, 'a8dffa164a556e6b3792abda2359e240d032d588d28afaf269c97c63bc87b433'],
+  },
+  female: {
+    'neck-side': [170492, 'f51359d0422ae40bc94531243bcb802fcd82544ca6efe2a6d5a29fd55e242891'],
+    'shoulder-shrug': [163312, '10b32291301e32a0abe03469d3bb894f7d2d6419514cab0ad9837605ab642eea'],
+    'arm-overhead': [170560, 'd5ee3957521d10d6b21be45bc43ad6155f828ab6f39890cbf3b67263a085774d'],
+  },
+} as const
+export function referenceMotion(id: string): id is ReferenceMotion {
+  return id === 'neck-side' || id === 'shoulder-shrug' || id === 'arm-overhead'
+}
+export function referenceContentAsset(gender: AvatarGender, motion: ReferenceMotion) {
+  if (!Object.hasOwn(rows, gender) || !referenceMotion(motion))
+    throw new Error('Blender reference unavailable')
+  const [bytes, sha256] = rows[gender][motion]
+  return Object.freeze({
+    url: `/__bodyguard/reference-content/${gender}/${motion}.glb`,
+    bytes,
+    sha256,
+  })
+}

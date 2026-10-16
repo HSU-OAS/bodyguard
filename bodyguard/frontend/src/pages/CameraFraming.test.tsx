@@ -126,7 +126,11 @@ it('consumes only explicit continuous input and shows a categorical hint without
     '촬영 범위 입력 확인됨',
   )
   expect(screen.getByRole('button', { name: '코칭 준비 중' }).hasAttribute('disabled')).toBe(true)
-  expect(screen.getByRole('button', { name: '전체 시범' }).hasAttribute('disabled')).toBe(true)
+  expect(screen.getByRole('button', { name: '시범 미리보기' }).hasAttribute('disabled')).toBe(false)
+  expect(screen.getByRole('button', { name: '시범 미리보기' }).getAttribute('aria-expanded')).toBe(
+    'false',
+  )
+  expect(screen.queryByRole('img', { name: '3D 시범 후보' })).toBeNull()
   now = 1100
   pump()
   expect(screen.getByRole('status', { name: '현재 동작 촬영 안내' }).textContent).toContain(
