@@ -1,0 +1,228 @@
+{
+  "method": "actual React/Chrome/native generated fake-device; controlled pre-SDK scripts and account API; not original intermittent P2 reproduction",
+  "variant": "working-source",
+  "originalParentSha256": null,
+  "version": "155.0.8059.80",
+  "before": {
+    "src/pose/workerInference.ts": "fde00062253a12ec7caf0a9ee5a3fbf661ae393914574fba8939b0c2575b89dc",
+    "src/pose/nativeInference.worker.ts": "05f348328e805177de820a47e29dc8b06deb0cf0f6b3faaf40dcc5957b07e74b",
+    "src/pose/workerInferenceRuntime.ts": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+    "src/pose/workerNativeEngine.ts": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+    "scripts/test-worker-boot-recovery.mjs": "c9eb75ab0826202c12c0c39a9a6770f55207c88120a20ac6a71b9fb604fc3346",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "after": {
+    "src/pose/workerInference.ts": "fde00062253a12ec7caf0a9ee5a3fbf661ae393914574fba8939b0c2575b89dc",
+    "src/pose/nativeInference.worker.ts": "05f348328e805177de820a47e29dc8b06deb0cf0f6b3faaf40dcc5957b07e74b",
+    "src/pose/workerInferenceRuntime.ts": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+    "src/pose/workerNativeEngine.ts": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+    "scripts/test-worker-boot-recovery.mjs": "c9eb75ab0826202c12c0c39a9a6770f55207c88120a20ac6a71b9fb604fc3346",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "cases": [
+    "never-boots: pre-SDK failure is recoverable; explicit retry uses actual heavy/face/hands SDK and clean native closure without reload",
+    "script-error: pre-SDK failure is recoverable; explicit retry uses actual heavy/face/hands SDK and clean native closure without reload",
+    "syntax-error: pre-SDK failure is recoverable; explicit retry uses actual heavy/face/hands SDK and clean native closure without reload"
+  ],
+  "traces": [
+    {
+      "fault": "never-boots",
+      "phase": "failed",
+      "calls": 1,
+      "workers": 1,
+      "terminated": 1,
+      "tracksEnded": true,
+      "events": [],
+      "stored": 0,
+      "visibleError": "분석 연결을 준비하지 못했습니다. 다시 확인해 주세요."
+    },
+    {
+      "fault": "never-boots",
+      "phase": "explicit-retry-stopped",
+      "calls": 2,
+      "workers": 2,
+      "terminated": 2,
+      "tracksEnded": true,
+      "events": [
+        {
+          "direction": "receive",
+          "type": "boot",
+          "clean": null,
+          "at": 7872.200000017881
+        },
+        {
+          "direction": "send",
+          "type": "init",
+          "clean": null,
+          "at": 7872.300000011921
+        },
+        {
+          "direction": "receive",
+          "type": "ready",
+          "clean": null,
+          "at": 8350.90000000596
+        },
+        {
+          "direction": "send",
+          "type": "frame",
+          "clean": null,
+          "at": 8354.09999999404
+        },
+        {
+          "direction": "receive",
+          "type": "result",
+          "clean": null,
+          "at": 9087.200000017881
+        },
+        {
+          "direction": "send",
+          "type": "close",
+          "clean": null,
+          "at": 9472.700000017881
+        },
+        {
+          "direction": "receive",
+          "type": "closed",
+          "clean": true,
+          "at": 9927
+        }
+      ],
+      "stored": 0
+    },
+    {
+      "fault": "script-error",
+      "phase": "failed",
+      "calls": 1,
+      "workers": 1,
+      "terminated": 1,
+      "tracksEnded": true,
+      "events": [],
+      "stored": 0,
+      "visibleError": "분석 연결을 준비하지 못했습니다. 다시 확인해 주세요."
+    },
+    {
+      "fault": "script-error",
+      "phase": "explicit-retry-stopped",
+      "calls": 2,
+      "workers": 2,
+      "terminated": 2,
+      "tracksEnded": true,
+      "events": [
+        {
+          "direction": "receive",
+          "type": "boot",
+          "clean": null,
+          "at": 1455.8999999761581
+        },
+        {
+          "direction": "send",
+          "type": "init",
+          "clean": null,
+          "at": 1573.0999999940395
+        },
+        {
+          "direction": "receive",
+          "type": "ready",
+          "clean": null,
+          "at": 1956.8999999761581
+        },
+        {
+          "direction": "send",
+          "type": "frame",
+          "clean": null,
+          "at": 1957.3999999761581
+        },
+        {
+          "direction": "receive",
+          "type": "result",
+          "clean": null,
+          "at": 2506.7999999821186
+        },
+        {
+          "direction": "send",
+          "type": "close",
+          "clean": null,
+          "at": 2721.5999999940395
+        },
+        {
+          "direction": "receive",
+          "type": "closed",
+          "clean": true,
+          "at": 3126.399999976158
+        }
+      ],
+      "stored": 0
+    },
+    {
+      "fault": "syntax-error",
+      "phase": "failed",
+      "calls": 1,
+      "workers": 1,
+      "terminated": 1,
+      "tracksEnded": true,
+      "events": [],
+      "stored": 0,
+      "visibleError": "분석 연결을 준비하지 못했습니다. 다시 확인해 주세요."
+    },
+    {
+      "fault": "syntax-error",
+      "phase": "explicit-retry-stopped",
+      "calls": 2,
+      "workers": 2,
+      "terminated": 2,
+      "tracksEnded": true,
+      "events": [
+        {
+          "direction": "receive",
+          "type": "boot",
+          "clean": null,
+          "at": 1417.6000000238419
+        },
+        {
+          "direction": "send",
+          "type": "init",
+          "clean": null,
+          "at": 1524.7000000178814
+        },
+        {
+          "direction": "receive",
+          "type": "ready",
+          "clean": null,
+          "at": 1879.4000000059605
+        },
+        {
+          "direction": "send",
+          "type": "frame",
+          "clean": null,
+          "at": 1880
+        },
+        {
+          "direction": "receive",
+          "type": "result",
+          "clean": null,
+          "at": 2502.600000023842
+        },
+        {
+          "direction": "send",
+          "type": "close",
+          "clean": null,
+          "at": 2666.800000011921
+        },
+        {
+          "direction": "receive",
+          "type": "closed",
+          "clean": true,
+          "at": 3059.5
+        }
+      ],
+      "stored": 0
+    }
+  ],
+  "visibleError": "분석 연결을 준비하지 못했습니다. 다시 확인해 주세요.",
+  "external": 0,
+  "errors": [],
+  "failure": null,
+  "actualPeople": false,
+  "actualPermissionPopup": false,
+  "originalIntermittentP2Resolved": false
+}

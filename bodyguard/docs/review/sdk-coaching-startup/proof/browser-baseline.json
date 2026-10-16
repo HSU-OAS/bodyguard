@@ -1,0 +1,59 @@
+{
+  "method": "actual React/Chrome/native generated fake-device; controlled pre-SDK scripts and account API; not original intermittent P2 reproduction",
+  "variant": "baseline",
+  "originalParentSha256": "c358cc2431c598e7f2ad6911a698a7bb3f468d6d83314edd2f49e2a7192bdf54",
+  "version": "155.0.8059.80",
+  "before": {
+    "src/pose/workerInference.ts": "98f70b2422459b7aba6828c01c85d83d9ec82d3347505272967bb4ab32901926",
+    "src/pose/nativeInference.worker.ts": "05f348328e805177de820a47e29dc8b06deb0cf0f6b3faaf40dcc5957b07e74b",
+    "src/pose/workerInferenceRuntime.ts": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+    "src/pose/workerNativeEngine.ts": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+    "scripts/test-worker-boot-recovery.mjs": "efce9edbbc91148ea42c8a1a6e75fc3b056da898d6bcf990f2163069148c3f1f",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "after": {
+    "src/pose/workerInference.ts": "98f70b2422459b7aba6828c01c85d83d9ec82d3347505272967bb4ab32901926",
+    "src/pose/nativeInference.worker.ts": "05f348328e805177de820a47e29dc8b06deb0cf0f6b3faaf40dcc5957b07e74b",
+    "src/pose/workerInferenceRuntime.ts": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+    "src/pose/workerNativeEngine.ts": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+    "scripts/test-worker-boot-recovery.mjs": "efce9edbbc91148ea42c8a1a6e75fc3b056da898d6bcf990f2163069148c3f1f",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "cases": [],
+  "traces": [
+    {
+      "fault": "never-boots",
+      "phase": "failed",
+      "calls": 1,
+      "workers": 1,
+      "terminated": 1,
+      "tracksEnded": true,
+      "events": [
+        {
+          "direction": "send",
+          "type": "init",
+          "clean": null,
+          "at": 1989.5999999940395
+        },
+        {
+          "direction": "send",
+          "type": "close",
+          "clean": null,
+          "at": 6992
+        }
+      ],
+      "stored": 0,
+      "visibleError": "카메라 정리를 확인하지 못했습니다. 페이지를 새로 열어 주세요."
+    }
+  ],
+  "visibleError": "카메라 정리를 확인하지 못했습니다. 페이지를 새로 열어 주세요.",
+  "external": 0,
+  "errors": [],
+  "failure": {
+    "name": "AssertionError",
+    "message": "Expected values to be strictly equal:"
+  },
+  "actualPeople": false,
+  "actualPermissionPopup": false,
+  "originalIntermittentP2Resolved": false
+}

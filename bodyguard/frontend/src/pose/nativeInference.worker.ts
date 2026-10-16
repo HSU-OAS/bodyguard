@@ -11,3 +11,5 @@ const runtime = createWorkerInferenceRuntime({
   send: (message) => scope.postMessage(message),
 })
 scope.addEventListener('message', (event) => runtime.receive(event.data))
+// FR-M-07: boot is not SDK readiness; init is accepted only after this handler exists.
+scope.postMessage({ type: 'boot' })

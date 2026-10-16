@@ -60,6 +60,7 @@ export async function createWorkerPoseInference(
     ready = false,
     cleanupFailed = false
   let initSent = false
+  let booted = false
   const modelAbort = new AbortController()
   let nextId = 0,
     lastAt = -Infinity
@@ -73,6 +74,12 @@ export async function createWorkerPoseInference(
   })
   // postMessage itself may fail before the await below owns the rejection.
   void prepared.catch(() => {})
+  let resolveBoot!: () => void, rejectBoot!: (error: Error) => void
+  const boot = new Promise<void>((resolve, reject) => {
+    resolveBoot = resolve
+    rejectBoot = reject
+  })
+  void boot.catch(() => {})
   let disposal: Promise<void> | undefined
   let finishDisposal: ((clean: boolean) => void) | undefined
   let cleanupTimer: ReturnType<typeof setTimeout> | undefined
@@ -107,6 +114,7 @@ export async function createWorkerPoseInference(
     const current = pending
     pending = undefined
     current?.reject(unavailable())
+    if (!booted) rejectBoot(unavailable())
     if (!ready) rejectReady(unavailable())
   }
   function failed() {
@@ -120,6 +128,22 @@ export async function createWorkerPoseInference(
     if (terminated) return
     try {
       const data = event.data as Record<string, unknown>
+      // No SDK can exist until the installed native handler acknowledges its boot.
+      // Keep boot + init within the SAME original response deadline after model reads.
+      if (data?.type === 'boot' && !retiring) {
+        if (
+          typeof data !== 'object' ||
+          Array.isArray(data) ||
+          booted ||
+          initSent ||
+          Object.keys(data).length !== 1 ||
+          (responseDeadline !== undefined && performance.now() >= responseDeadline)
+        )
+          throw unavailable()
+        booted = true
+        resolveBoot()
+        return
+      }
       if (!data || typeof data !== 'object' || data.generation !== generation) throw unavailable()
       if (retiring) {
         if (data.type === 'closed') finishDisposal?.(data.clean === true)
@@ -208,8 +232,16 @@ export async function createWorkerPoseInference(
       ]),
     )
     if (retiring || signal.aborted) throw unavailable()
-    initSent = true
     awaitResponse()
+    await boot
+    if (
+      retiring ||
+      signal.aborted ||
+      responseDeadline === undefined ||
+      performance.now() >= responseDeadline
+    )
+      throw unavailable()
+    initSent = true
     worker.postMessage({ type: 'init', generation, id: 0, config, assets }, Object.values(assets))
     await prepared
     if (retiring || signal.aborted) throw unavailable()

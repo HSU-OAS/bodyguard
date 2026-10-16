@@ -1,0 +1,10 @@
+import { execFileSync } from 'node:child_process'
+import { resolve } from 'node:path'
+import config from "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/vite.config.ts"
+
+const baseline = execFileSync('git', ['show', '203a6ab:bodyguard/frontend/src/pose/workerInference.ts'], { encoding: 'utf8' })
+export default {
+  ...config,
+  envDir: false,
+  plugins: [{ name: 'immutable-original-worker-parent', enforce: 'pre', load(id) { if (id.split('?')[0] === resolve('src/pose/workerInference.ts')) return baseline } }, ...config.plugins],
+}
