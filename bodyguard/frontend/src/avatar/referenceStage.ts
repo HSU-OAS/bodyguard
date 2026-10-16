@@ -253,6 +253,7 @@ export async function prepareReferenceStage(
           options.onObservation?.(observedState)
         }
         draw(command.view)
+        return observed?.getSnapshot()
       },
       dispose,
     })
