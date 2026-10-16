@@ -16,6 +16,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { ResourceCleanupError, type ResourceContext } from '../coaching/resources'
 import { assertBlenderReferenceBinding, blenderReferenceProgram } from './blenderReferenceProgram'
 import { cloneEightWeightPair } from './eightWeightSkin'
+import { type ComparisonStatus, createObservedComparison } from './observedComparison'
 import { prepareAvatarStage } from './prepareAvatarStage'
 import { type ReferenceMotion, referenceContentAsset } from './referenceContentAssets'
 import { referenceFraming } from './referenceFraming'
@@ -40,6 +41,7 @@ export async function prepareReferenceStage(
     gender: AvatarGender
     motion: ReferenceMotion
     onFailure(): void
+    onObservation?(status: ComparisonStatus): void
   }>,
 ) {
   if (!import.meta.env.DEV) throw new Error('Blender reference unavailable')
@@ -47,6 +49,7 @@ export async function prepareReferenceStage(
     { canvas, gender, motion, onFailure } = options
   let source: Object3D | undefined, pair: ReturnType<typeof cloneEightWeightPair> | undefined
   let player: ReturnType<typeof createReferencePlayback> | undefined,
+    observed: ReturnType<typeof createObservedComparison> | undefined,
     renderer: WebGLRenderer | undefined,
     resize: ResizeObserver | undefined
   let closed = false,
@@ -81,6 +84,7 @@ export async function prepareReferenceStage(
       for (const release of [
         () => resize?.disconnect(),
         () => player?.dispose(),
+        () => observed?.dispose(),
         () => pair?.dispose(),
         ...[...original].map((resource) => () => resource.dispose()),
         () => {
@@ -122,9 +126,9 @@ export async function prepareReferenceStage(
     signal.throwIfAborted()
     assertBlenderReferenceBinding(source, animation.scene)
     pair = cloneEightWeightPair(source)
-    const guide = pair.copies[0]
-    // The other copy stays unshown/unobserved. It is never presented as the user's body.
-    scene.add(guide, new HemisphereLight('#ffffff', '#8b97a6', 2))
+    const [guide, user] = pair.copies
+    observed = createObservedComparison(user, signal)
+    scene.add(guide, user, new HemisphereLight('#ffffff', '#8b97a6', 2))
     const light = new DirectionalLight('#ffffff', 2)
     light.position.set(-2, 3, 3)
     scene.add(light)
@@ -152,10 +156,40 @@ export async function prepareReferenceStage(
       const center = bounds.min.y + framing.centerY,
         { halfX, halfY } = framing
       guide.position.x = framing.guideX
+      user.position.x = -framing.guideX
       camera.position.set(0, center, bodyHeight * 3)
       camera.lookAt(0, center, 0)
       camera.near = bodyHeight * 0.01
       camera.far = bodyHeight * 6
+      if (view !== 'full') {
+        // Cropped views share the white canvas, but arms must not cover the other comparison.
+        const leftWidth = Math.floor(width / 2),
+          visible = [user.visible, guide.visible]
+        renderer.setScissorTest(true)
+        try {
+          for (const [index, model] of [user, guide].entries()) {
+            const paneWidth = index === 0 ? leftWidth : width - leftWidth
+            const cropY = bodyHeight * (view === 'upper' ? 0.35 : 0.24)
+            const cropX = (cropY * paneWidth) / height
+            camera.position.x = model.position.x
+            camera.lookAt(model.position.x, center, 0)
+            camera.left = -cropX
+            camera.right = cropX
+            camera.top = cropY
+            camera.bottom = -cropY
+            camera.updateProjectionMatrix()
+            user.visible = index === 0 && visible[0]
+            guide.visible = index === 1 && visible[1]
+            renderer.setViewport(index === 0 ? 0 : leftWidth, 0, paneWidth, height)
+            renderer.setScissor(index === 0 ? 0 : leftWidth, 0, paneWidth, height)
+            if (paint) renderer.render(scene, camera)
+          }
+        } finally {
+          ;[user.visible, guide.visible] = visible
+          renderer.setScissorTest(false)
+        }
+        return
+      }
       camera.left = -halfX
       camera.right = halfX
       camera.top = halfY
@@ -181,7 +215,15 @@ export async function prepareReferenceStage(
     canvas.addEventListener('webglcontextlost', lost)
     signal.addEventListener('abort', aborted, { once: true })
     signal.throwIfAborted()
+    let previousObservation: ComparisonStatus | undefined
     return Object.freeze({
+      beginObservation: (ownerGeneration: number) => observed?.begin(ownerGeneration) ?? false,
+      observe: (frame: Parameters<ReturnType<typeof createObservedComparison>['observe']>[0]) =>
+        observed?.observe(frame) ?? false,
+      suspendObservation() {
+        observed?.suspend()
+      },
+      alignObservation: () => observed?.align() ?? false,
       render(now: number, delta: number, command: ReferenceCommand) {
         if (closed || signal.aborted || !player) return
         if (command.revision !== revision) {
@@ -205,6 +247,11 @@ export async function prepareReferenceStage(
         const state = player.render(now, delta)
         if (state.status === 'unavailable' || state.status === 'stale' || state.status === 'closed')
           throw new Error('Blender reference unavailable')
+        const observedState = observed?.render(now, delta) ?? 'waiting'
+        if (observedState !== previousObservation) {
+          previousObservation = observedState
+          options.onObservation?.(observedState)
+        }
         draw(command.view)
       },
       dispose,

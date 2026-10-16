@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import { referenceMotion } from '../avatar/referenceContentAssets'
-import type { ReferenceCommand } from '../avatar/referenceStage'
+import type { ReferenceCommand, ReferenceStage } from '../avatar/referenceStage'
 import { motionPreviewMedia } from '../catalog/motionMedia'
 import { motionNavigationUrl } from '../catalog/motionNavigation'
 import { findMotions, motionById, type Region } from '../catalog/motions'
@@ -48,6 +48,7 @@ export function CoachingPage() {
   const [playing, setPlaying] = useState(false)
   const [revision, setRevision] = useState(0)
   const picker = useRef<HTMLDialogElement>(null)
+  const comparison = useRef<ReferenceStage | null>(null)
   const settings = useRef<HTMLDialogElement>(null)
   const heading = useRef<HTMLHeadingElement>(null)
   const motions = findMotions(query, region)
@@ -156,23 +157,19 @@ export function CoachingPage() {
             <span>현재 단계 시범</span>
           </div>
           {preview && motion && referenceMotion(motion.id) ? (
-            <>
-              <ReferenceDemonstration
-                motion={motion.id}
-                gender={gender === 'female' ? 'female' : 'male'}
-                command={{
-                  phase,
-                  stepId: motion.id === 'shoulder-shrug' ? 'both' : side,
-                  playing,
-                  revision,
-                  view,
-                }}
-                onStatus={setReferenceStatus}
-              />
-              <div className="coaching-scene-pending reference-user-pending" role="status">
-                <p>내 움직임 연결 대기</p>
-              </div>
-            </>
+            <ReferenceDemonstration
+              motion={motion.id}
+              gender={gender === 'female' ? 'female' : 'male'}
+              command={{
+                phase,
+                stepId: motion.id === 'shoulder-shrug' ? 'both' : side,
+                playing,
+                revision,
+                view,
+              }}
+              onStatus={setReferenceStatus}
+              stage={comparison}
+            />
           ) : (
             <div className="coaching-scene-pending" role="status">
               <span className="coaching-connection-dot" aria-hidden="true" />
@@ -185,7 +182,11 @@ export function CoachingPage() {
           {id !== null && !motion ? (
             <p role="status">동작을 다시 선택해 주세요.</p>
           ) : (
-            <CameraPreparation key={motion?.id ?? 'unselected'} motion={motion} />
+            <CameraPreparation
+              key={`${motion?.id ?? 'unselected'}:${gender}`}
+              motion={motion}
+              comparison={comparison}
+            />
           )}
           <div className="coaching-actions">
             <button className="button primary" type="button" disabled>

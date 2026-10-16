@@ -1,0 +1,415 @@
+/* FR-V-01·NFR-08: one unboxed space, restrained medical-adjacent web tools. */
+.website.coaching-layout .site-header,
+.website.coaching-layout main,
+.website.coaching-layout .site-footer {
+  max-width: 1600px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.website.coaching-layout .site-header {
+  min-height: 76px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+.coaching-workspace {
+  display: grid;
+  grid-template-columns: 80px minmax(0, 1fr);
+  gap: 24px;
+  padding: 24px 0;
+}
+.coaching-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 8px;
+}
+.coaching-rail a,
+.coaching-rail button {
+  display: grid;
+  place-items: center;
+  min-height: 56px;
+  padding: 8px;
+  border-radius: 12px;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.coaching-rail button {
+  color: var(--accent);
+  background: var(--surface-soft);
+}
+.coaching-heading,
+.coaching-tools,
+.coaching-actions,
+.coaching-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.coaching-heading {
+  justify-content: space-between;
+  gap: 24px;
+}
+.website .coaching-heading h1 {
+  font-size: var(--type-section);
+  letter-spacing: -0.7px;
+  margin-top: 4px;
+}
+.coaching-tools .button,
+.coaching-actions .button,
+.coaching-dialog .button {
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 12px;
+}
+.coaching-segmented {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.coaching-segmented button {
+  min-height: 44px;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.coaching-segmented [aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.coaching-stages {
+  display: flex;
+  gap: 32px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  color: var(--muted);
+}
+.coaching-space {
+  position: relative;
+  min-height: clamp(360px, calc(100vh - 370px), 720px);
+}
+.reference-demonstration,
+.reference-demonstration canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.coaching-role-labels {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+.reference-status {
+  position: absolute;
+  left: 50%;
+  right: 0;
+  bottom: 8px;
+  text-align: center;
+  font-size: var(--type-small);
+  color: var(--muted);
+}
+.coaching-scene-pending.reference-user-pending {
+  right: 50%;
+}
+.reference-observation-status {
+  position: absolute;
+  left: 0;
+  right: 50%;
+  bottom: 8px;
+  color: var(--muted);
+  text-align: center;
+  font-size: var(--type-small);
+}
+.coaching-stages .button {
+  min-height: 44px;
+  border-radius: 12px;
+  padding: 6px 12px;
+}
+.coaching-stages [aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.coaching-role-labels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(48px, 8vw, 160px);
+  text-align: center;
+  padding: 32px 24px;
+  font-weight: 600;
+}
+.coaching-scene-pending {
+  position: absolute;
+  inset: 30% 0 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+.coaching-connection-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--control-line);
+  margin-bottom: 8px;
+}
+.coaching-footer {
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.coaching-actions button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+.camera-preparation > p {
+  margin-top: 8px;
+}
+
+.camera-reference {
+  margin-top: 16px;
+  display: grid;
+  gap: 12px;
+}
+.camera-reference h3,
+.camera-reference p {
+  margin: 0;
+}
+.camera-reference > button {
+  justify-self: start;
+}
+.camera-reference label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.camera-reference input {
+  margin-top: 4px;
+  accent-color: var(--blue, #1769dc);
+}
+.camera-reference [aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: default;
+}
+.coaching-instructions {
+  max-width: 640px;
+  font-size: 14px;
+}
+.coaching-instructions summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 600;
+}
+.coaching-instructions p,
+.coaching-instructions ol {
+  margin-top: 16px;
+}
+.coaching-instructions ol {
+  list-style: decimal;
+  padding-left: 24px;
+}
+.coaching-dialog {
+  margin: auto;
+  width: min(880px, calc(100% - 48px));
+  max-height: calc(100dvh - 48px);
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  color: var(--ink);
+  overflow: auto;
+}
+.coaching-dialog::backdrop {
+  background: rgb(20 43 73 / 28%);
+}
+.coaching-dialog header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 12px;
+}
+.coaching-dialog .coaching-search {
+  display: block;
+  margin-top: 20px;
+  font-weight: 600;
+}
+.coaching-search input,
+.coaching-settings select {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--control-line);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-top: 8px;
+}
+.coaching-filters {
+  margin: 16px 0 24px;
+}
+.coaching-filters [aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--surface-soft);
+  color: var(--accent);
+}
+.coaching-motion-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+}
+.coaching-motion-grid li {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.coaching-motion-select {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  width: 100%;
+  gap: 4px 8px;
+  padding: 16px;
+  text-align: left;
+  cursor: pointer;
+}
+.coaching-motion-select strong {
+  font-size: 16px;
+  grid-row: 2;
+  font-weight: 600;
+}
+.coaching-motion-select > span:last-child {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: center;
+  color: var(--accent);
+}
+.coaching-empty {
+  padding: 32px 0;
+}
+.coaching-empty .button {
+  margin-top: 16px;
+}
+.coaching-settings {
+  max-width: 480px;
+}
+.coaching-settings label {
+  display: block;
+  margin: 24px 0;
+  font-weight: 600;
+}
+.motion-visual {
+  background: var(--surface-soft);
+  position: relative;
+}
+.motion-visual-pending {
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: var(--muted);
+  font-size: var(--type-small);
+}
+.motion-visual > video,
+.motion-visual > img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  display: block;
+  background: var(--surface);
+}
+.motion-visual > [hidden] {
+  display: none;
+}
+.motion-visual-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px;
+}
+.motion-visual p {
+  padding: 8px;
+  font-size: var(--type-small);
+}
+.coaching-workspace :is(button, a, input, select, summary):focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+.coaching-workspace .coaching-motion-select:focus-visible {
+  outline-offset: -4px;
+}
+.coaching-motion-select:hover {
+  background: var(--surface-soft);
+}
+@media (max-width: 1100px) {
+  .coaching-heading {
+    align-items: flex-start;
+  }
+  .coaching-workspace {
+    gap: 16px;
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .coaching-workspace {
+    grid-template-columns: 1fr;
+  }
+  .coaching-rail {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .coaching-rail a,
+  .coaching-rail button {
+    min-width: 64px;
+    min-height: 44px;
+  }
+  .coaching-role-labels {
+    gap: 32px;
+    padding: 24px 0;
+  }
+  .coaching-dialog {
+    padding: 20px;
+    width: calc(100% - 24px);
+  }
+  .coaching-motion-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .coaching-space {
+    min-height: 360px;
+  }
+}
+@media (max-width: 420px) {
+  .coaching-motion-grid {
+    grid-template-columns: 1fr;
+  }
+  .coaching-tools {
+    gap: 8px;
+  }
+  .coaching-segmented button {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coaching-workspace *,
+  .coaching-dialog * {
+    animation: none;
+    transition: none;
+    scroll-behavior: auto;
+  }
+}

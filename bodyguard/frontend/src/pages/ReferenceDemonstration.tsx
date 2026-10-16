@@ -1,5 +1,6 @@
 // FR-S-03/04·NFR-08: explicit private manual preview, never an observed/validated pose.
-import { useEffect, useRef, useState } from 'react'
+import { type RefObject, useEffect, useRef, useState } from 'react'
+import type { ComparisonStatus } from '../avatar/observedComparison'
 import type { ReferenceMotion } from '../avatar/referenceContentAssets'
 import type { ReferenceCommand, ReferenceStage } from '../avatar/referenceStage'
 import type { AvatarGender } from '../avatar/reviewAvatarAssets'
@@ -13,11 +14,13 @@ export function ReferenceDemonstration({
   gender,
   command,
   onStatus,
+  stage,
 }: Readonly<{
   motion: ReferenceMotion
   gender: AvatarGender
   command: ReferenceCommand
   onStatus(status: ReferenceStatus): void
+  stage?: RefObject<ReferenceStage | null>
 }>) {
   const canvas = useRef<HTMLCanvasElement>(null),
     live = useRef({ command, onStatus })
@@ -25,6 +28,7 @@ export function ReferenceDemonstration({
   const [status, setStatus] = useState<ReferenceStatus>('loading'),
     [attempt, setAttempt] = useState(0),
     [reloadOnly, setReloadOnly] = useState(false)
+  const [observation, setObservation] = useState<ComparisonStatus>('waiting')
   useEffect(() => {
     const abort = new AbortController()
     let disposed = false,
@@ -38,6 +42,7 @@ export function ReferenceDemonstration({
       }
     }
     const release = () => {
+      if (stage && stage.current === owner) stage.current = null
       try {
         owner?.dispose()
       } catch {
@@ -64,17 +69,28 @@ export function ReferenceDemonstration({
         if (disposed || abort.signal.aborted || !canvas.current) return
         const prepared = await prepareReferenceStage(
           { generation: attempt + 1, signal: abort.signal },
-          { canvas: canvas.current, gender, motion, onFailure: fail },
+          {
+            canvas: canvas.current,
+            gender,
+            motion,
+            onFailure: fail,
+            onObservation: (next) => {
+              if (!disposed && !abort.signal.aborted) setObservation(next)
+            },
+          },
         )
         if (disposed || abort.signal.aborted) {
           prepared.dispose()
           return
         }
         owner = prepared
+        if (stage) stage.current = prepared
         publish('ready')
-        const tick = (now: number) => {
+        const tick = () => {
           if (disposed || abort.signal.aborted) return
           try {
+            // RAF's frame-start timestamp can precede another callback's newly accepted input.
+            const now = performance.now()
             owner?.render(now, previous === undefined ? 0 : now - previous, live.current.command)
             previous = now
             frame = requestAnimationFrame(tick)
@@ -115,10 +131,15 @@ export function ReferenceDemonstration({
       })
       retirement = done
     }
-  }, [motion, gender, attempt])
+  }, [motion, gender, attempt, stage])
   return (
     <div className="reference-demonstration">
       <canvas key={attempt} ref={canvas} role="img" aria-label="3D 시범 후보" />
+      <p className="reference-observation-status" role="status">
+        {observation === 'waiting' || status !== 'ready'
+          ? '내 움직임 연결 대기'
+          : '내 움직임 · 관찰 표시'}
+      </p>
       <div className="reference-status">
         <p role={status === 'error' ? 'alert' : 'status'}>
           {status === 'loading'
