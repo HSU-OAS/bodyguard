@@ -14,14 +14,17 @@ import {
 } from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { ResourceCleanupError, type ResourceContext } from '../coaching/resources'
+import type { NeckReviewCriteria } from '../posture/thresholds'
 import { assertBlenderReferenceBinding, blenderReferenceProgram } from './blenderReferenceProgram'
 import { cloneEightWeightPair } from './eightWeightSkin'
+import { createNeckSurfaceFeedback } from './neckSurfaceFeedback'
 import { type ComparisonStatus, createObservedComparison } from './observedComparison'
 import { prepareAvatarStage } from './prepareAvatarStage'
 import { type ReferenceMotion, referenceContentAsset } from './referenceContentAssets'
 import { referenceFraming } from './referenceFraming'
 import { createReferencePlayback, type ReferenceCue } from './referencePlayback'
 import { type AvatarGender, REVIEW_AVATAR_ASSETS } from './reviewAvatarAssets'
+import type { FeedbackFrame } from './surfaceFeedback'
 import { readVerifiedReferenceAsset } from './verifiedReferenceAsset'
 
 export type ReferenceView = 'full' | 'upper' | 'detail'
@@ -42,6 +45,7 @@ export async function prepareReferenceStage(
     motion: ReferenceMotion
     onFailure(): void
     onObservation?(status: ComparisonStatus): void
+    feedback?: NeckReviewCriteria
   }>,
 ) {
   if (!import.meta.env.DEV) throw new Error('Blender reference unavailable')
@@ -50,6 +54,7 @@ export async function prepareReferenceStage(
   let source: Object3D | undefined, pair: ReturnType<typeof cloneEightWeightPair> | undefined
   let player: ReturnType<typeof createReferencePlayback> | undefined,
     observed: ReturnType<typeof createObservedComparison> | undefined,
+    feedback: ReturnType<typeof createNeckSurfaceFeedback> | undefined,
     renderer: WebGLRenderer | undefined,
     resize: ResizeObserver | undefined
   let closed = false,
@@ -84,6 +89,7 @@ export async function prepareReferenceStage(
       for (const release of [
         () => resize?.disconnect(),
         () => player?.dispose(),
+        () => feedback?.dispose(),
         () => observed?.dispose(),
         () => pair?.dispose(),
         ...[...original].map((resource) => () => resource.dispose()),
@@ -128,6 +134,10 @@ export async function prepareReferenceStage(
     pair = cloneEightWeightPair(source)
     const [guide, user] = pair.copies
     observed = createObservedComparison(user, signal)
+    if (options.feedback) {
+      if (motion !== 'neck-side') throw new Error()
+      feedback = createNeckSurfaceFeedback(user, context, options.feedback)
+    }
     scene.add(guide, user, new HemisphereLight('#ffffff', '#8b97a6', 2))
     const light = new DirectionalLight('#ffffff', 2)
     light.position.set(-2, 3, 3)
@@ -217,11 +227,20 @@ export async function prepareReferenceStage(
     signal.throwIfAborted()
     let previousObservation: ComparisonStatus | undefined
     return Object.freeze({
-      beginObservation: (ownerGeneration: number) => observed?.begin(ownerGeneration) ?? false,
-      observe: (frame: Parameters<ReturnType<typeof createObservedComparison>['observe']>[0]) =>
-        observed?.observe(frame) ?? false,
+      beginObservation: (ownerGeneration: number) => {
+        if (feedback && ownerGeneration !== generation) return false
+        feedback?.clear()
+        return observed?.begin(ownerGeneration) ?? false
+      },
+      observe(frame: Parameters<ReturnType<typeof createObservedComparison>['observe']>[0]) {
+        const accepted = observed?.observe(frame) ?? false
+        if (accepted) feedback?.observe(frame)
+        return accepted
+      },
+      updateFeedback: (frame: FeedbackFrame) => feedback?.update(frame) ?? false,
       suspendObservation() {
         observed?.suspend()
+        feedback?.clear()
       },
       alignObservation: () => observed?.align() ?? false,
       render(now: number, delta: number, command: ReferenceCommand) {
@@ -248,6 +267,7 @@ export async function prepareReferenceStage(
         if (state.status === 'unavailable' || state.status === 'stale' || state.status === 'closed')
           throw new Error('Blender reference unavailable')
         const observedState = observed?.render(now, delta) ?? 'waiting'
+        feedback?.render(now, observed?.getCoverage() ?? null)
         if (observedState !== previousObservation) {
           previousObservation = observedState
           options.onObservation?.(observedState)

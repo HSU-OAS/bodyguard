@@ -163,6 +163,9 @@ for (const file of files) {
     'Candidate workspace unavailable',
     'candidate-review-only',
     'createNeckWorkspacePlayback',
+    'createNeckSurfaceFeedback',
+    'Invalid projected surface region',
+    'projectedSurfaceEnvelope',
     'neckWorkspaceFixture',
     '판정 후보 검수 · 출시 코칭 아님',
   ]) {

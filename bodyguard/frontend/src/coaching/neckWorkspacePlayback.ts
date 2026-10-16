@@ -87,6 +87,7 @@ export function createNeckWorkspacePlayback(
           canvas,
           gender: options.gender,
           motion: 'neck-side',
+          feedback: criteria,
           onFailure: () =>
             input.onFailure({
               type: 'error',
@@ -123,6 +124,14 @@ export function createNeckWorkspacePlayback(
             if (decision) {
               latest = decision.state
               sampledAt = frame.at
+              owned.updateFeedback({
+                generation: frame.generation,
+                sequence: frame.sequence,
+                at: frame.at,
+                motionId: decision.state.plan.motionId,
+                version: decision.state.plan.version,
+                errors: decision.errors,
+              })
               publish((decision.errors[0]?.code as NeckCandidateError | undefined) ?? null)
             }
             return true

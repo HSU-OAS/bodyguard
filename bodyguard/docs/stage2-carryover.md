@@ -1,5 +1,7 @@
 # 2단계 필수 보완 이월 및 후속 실행 순서
 
+2026-10-16 [S3.C3](stories/neck-surface-feedback.md)는 D2-T/I의 목/어깨 오류 표면 표시를 남녀 실제 GLB의 기존 코칭 후보 흐름에 연결했다. [생성 입력의 GPU 화면·8가중치/전체 정점 보존·실제 SDK 빈 장치 회귀와 실패](review/neck-surface-feedback/README.md). 이는 image-plane 관찰에 대응한 영역 강조이지 개별 경추/쇄골 측정이 아니다. 임상 프로필·출시 동작/추천·실제 결과 기록 통합·최종 외형/성능과 기존 Draft/P2 및 모든 D2 필수 조건은 남는다. 원본·기존 검증 증거와 공개/운영 승인 경계를 유지하며1~4/1~6 완료로 표시하지 않는다.
+
 2026-10-16 [S3.C2](stories/neck-coaching-workspace.md)는 D2-T/I의 판정 후보→현재 좌우 시범/진행→완료·중단 화면을 연결했다. [생성 입력의 실제 화면/엔진과 실제 SDK 빈 장치 경로·실패 보존](review/neck-coaching-workspace/README.md). 공개 코칭/정답 프로필·추천/세밀한 목 표면 강조·최종 외형/성능·실제 결과 저장 통합은 아직 아니다. 기본 동작 gate·D2 필수 기준, Draft150/152와 SDK 과거 P2·사람/외부 연결 이월·운영 별도 승인을 유지하며1~4/1~6 완료로 표시하지 않는다.
 
 2026-10-16 [S3.C1](stories/neck-candidate-classifier.md)은 D2-T/I의 첫 동작 classifier 후보와 진행/결과 계약을 구현했다. [생성 좌표→실제 판정 코드/엔진→제한 DTO·모의 HTTP 및 실패 기록](review/neck-candidate-classifier/README.md). 임상 band/추천·실제 화면의 자동 코칭/결과·실측/SQL 저장을 검증한 것은 아니다. 전체1~4/1~6과 D2 필수 기준·기존 Draft/P2 및 별도 승인 경계를 유지한다. 다음은 현재 두 모델 stage와 판정 후보/오류별 시범·결과 UI 연결이다.

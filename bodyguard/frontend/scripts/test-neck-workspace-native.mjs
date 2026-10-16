@@ -9,7 +9,7 @@ import { createServer, mergeConfig } from 'vite'
 import config from '../vite.config.ts'
 
 const [scratch, label] = process.argv.slice(2)
-assert(/^\/private\/tmp\/bodyguard-neck-workspace\.[A-Za-z0-9]+$/.test(scratch))
+assert(/^\/private\/tmp\/bodyguard-neck-(?:workspace|surface)\.[A-Za-z0-9]+$/.test(scratch))
 assert(/^[a-z][a-z0-9-]+$/.test(label) && !existsSync(`${scratch}/${label}.json`))
 const files = [
   'src/coaching/neckWorkspacePlayback.ts',
@@ -17,6 +17,9 @@ const files = [
   'src/pose/workerInference.ts',
   'src/pose/nativeInference.worker.ts',
   'src/avatar/referenceStage.ts',
+  'src/avatar/neckSurfaceFeedback.ts',
+  'src/avatar/projectedSurfaceRegions.ts',
+  'src/avatar/surfaceFeedback.ts',
   'e2e/fixtures/neckWorkspaceEntry.tsx',
   'e2e/fixtures/neckWorkspaceSource.ts',
   'scripts/test-neck-workspace-native.mjs',

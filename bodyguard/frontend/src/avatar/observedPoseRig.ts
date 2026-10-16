@@ -15,6 +15,7 @@ import {
   type HandObservation,
 } from './observedHandRig'
 import { OBSERVED_TRUNK_BINDING, observedTrunkDirection } from './observedTrunk'
+import type { ProjectedSurfaceRegion } from './projectedSurfaceRegions'
 
 export type PoseRigFrame = Readonly<{
   generation: number
@@ -36,6 +37,8 @@ export type PoseCoverage = Readonly<{
   sequence: number
   at: number
   bones: readonly string[]
+  // Separate projected region evidence; never promote it to observed bone rotations.
+  projectedRegions?: readonly ProjectedSurfaceRegion[]
 }>
 type Options = Parameters<typeof createDirectionalRig>[1] &
   Readonly<{ mirror: boolean; head?: HeadDisplayAlignment; hands?: HandDisplayAlignment }>

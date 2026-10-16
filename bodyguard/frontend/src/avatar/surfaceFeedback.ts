@@ -10,11 +10,20 @@ import { ResourceCleanupError, type ResourceContext } from '../coaching/resource
 import { OBSERVED_LIMB_BINDINGS } from './directionalRig'
 import type { PoseCoverage } from './observedPoseRig'
 import { OBSERVED_TRUNK_BINDING } from './observedTrunk'
+import {
+  PROJECTED_SURFACE_REGIONS,
+  type ProjectedSurfaceRegion,
+  projectedSurfaceEnvelope,
+} from './projectedSurfaceRegions'
 
 export type FeedbackProgram = Readonly<{
   motionId: string
   version: string
-  regions: readonly Readonly<{ id: string; bones: readonly string[] }>[]
+  regions: readonly Readonly<{
+    id: string
+    bones: readonly string[]
+    projection?: ProjectedSurfaceRegion
+  }>[]
 }>
 export type FeedbackFrame = Readonly<{
   generation: number
@@ -54,7 +63,8 @@ export function copyFeedbackProgram(input: FeedbackProgram): FeedbackProgram {
       usedBones = new Set<string>()
     const copied = Array.from(regions).map((region) => {
       const id = region.id,
-        supplied = region.bones
+        supplied = region.bones,
+        projection: ProjectedSurfaceRegion | undefined = region.projection
       if (
         !named(id) ||
         ids.has(id) ||
@@ -65,18 +75,29 @@ export function copyFeedbackProgram(input: FeedbackProgram): FeedbackProgram {
         throw invalid()
       ids.add(id)
       const bones = Array.from(supplied)
+      if (projection !== undefined) {
+        if (!Object.hasOwn(PROJECTED_SURFACE_REGIONS, projection)) throw invalid()
+        const mask = PROJECTED_SURFACE_REGIONS[projection]
+        if (bones.length !== mask.length || !mask.every((bone) => bones.includes(bone)))
+          throw invalid()
+      }
       if (bones.includes(OBSERVED_TRUNK_BINDING.bone) && bones.length !== 1) throw invalid()
       for (const bone of bones) {
         // FR-A-03/FR-M-07: only the observed aggregate axis; no inferred spine/pelvis coverage.
         if (
-          (!OBSERVED_LIMB_BINDINGS.some((binding) => binding.bone === bone) &&
+          (projection === undefined &&
+            !OBSERVED_LIMB_BINDINGS.some((binding) => binding.bone === bone) &&
             bone !== OBSERVED_TRUNK_BINDING.bone) ||
           usedBones.has(bone)
         )
           throw invalid()
         usedBones.add(bone)
       }
-      return Object.freeze({ id, bones: Object.freeze(bones) })
+      return Object.freeze({
+        id,
+        bones: Object.freeze(bones),
+        ...(projection !== undefined ? { projection } : {}),
+      })
     })
     return Object.freeze({ motionId, version, regions: Object.freeze(copied) })
   } catch {
@@ -123,6 +144,11 @@ export function createSurfaceFeedback(
   )
     throw invalid()
   const regions = new Map(program.regions.map((region) => [region.id, region]))
+  const projectedPeaks = new Map(
+    program.regions
+      .filter((region) => region.projection !== undefined)
+      .map((region) => [region.id, 0]),
+  )
   const attention = new Color('#ef9a32'),
     deviation = new Color('#e85a63')
   const owned: {
@@ -142,9 +168,12 @@ export function createSurfaceFeedback(
     coverage: PoseCoverage | null = null,
     consumedSequence = -1,
     lastNow = -Infinity
+  let dirty = false,
+    paintedKey = ''
   let active: readonly string[] = Object.freeze([])
   let pending: FeedbackFrame['errors'] | null = null
   function clear() {
+    paintedKey = ''
     if (!active.length) return
     active = Object.freeze([])
     for (const entry of owned) {
@@ -247,6 +276,18 @@ export function createSurfaceFeedback(
           }
         if (Math.abs(sum - 1) > 1e-5) throw invalid()
       }
+      for (const region of program.regions) {
+        if (!region.projection) continue
+        const envelope = projectedSurfaceEnvelope(mesh, region.projection),
+          values = influence.get(region.id)
+        if (!values) throw invalid()
+        let peak = projectedPeaks.get(region.id) ?? 0
+        for (let vertex = 0; vertex < values.length; vertex++) {
+          values[vertex] *= envelope[vertex]
+          peak = Math.max(peak, values[vertex])
+        }
+        projectedPeaks.set(region.id, peak)
+      }
       // FR-A-03: unequal authored influence peaks must not hide this aggregate region.
       // Normalize its colour only; preserve exact nonzero membership and all skin weights.
       for (const region of program.regions) {
@@ -299,6 +340,7 @@ export function createSurfaceFeedback(
     })
     if (
       !owned.length ||
+      [...projectedPeaks.values()].some((peak) => peak <= 0) ||
       (program.regions.some((region) => region.bones[0] === OBSERVED_TRUNK_BINDING.bone) &&
         trunkPeak <= 0)
     )
@@ -322,11 +364,12 @@ export function createSurfaceFeedback(
     throw invalid()
   }
 
-  function observe(next: PoseCoverage | null) {
+  function observe(next: PoseCoverage | null, deferPaint = false) {
     if (closed || signal.aborted) return
     coverage = next
     pending = null
-    clear()
+    dirty = true
+    if (!deferPaint || !next) clear()
   }
   function update(frame: FeedbackFrame): boolean {
     if (closed || signal.aborted || !coverage) return false
@@ -339,6 +382,7 @@ export function createSurfaceFeedback(
         version = frame.version
       if (
         suppliedGeneration !== generation ||
+        current.generation !== generation ||
         sequence !== current.sequence ||
         sequence <= consumedSequence ||
         at !== current.at ||
@@ -362,7 +406,9 @@ export function createSurfaceFeedback(
           !region ||
           seen.has(value.regionId) ||
           !['attention', 'deviation'].includes(value.severity) ||
-          region.bones.some((bone) => !observed.has(bone))
+          (region.projection === undefined
+            ? region.bones.some((bone) => !observed.has(bone))
+            : !current.projectedRegions?.includes(region.projection))
         )
           throw invalid()
         seen.add(value.regionId)
@@ -380,6 +426,8 @@ export function createSurfaceFeedback(
     }
   }
   function paint(errors: FeedbackFrame['errors']) {
+    const key = JSON.stringify(errors.map(({ regionId, severity }) => [regionId, severity]))
+    if (key === paintedKey) return
     for (const entry of owned) {
       entry.weights.array.fill(0)
       entry.tints.array.fill(0)
@@ -405,6 +453,7 @@ export function createSurfaceFeedback(
       entry.tints.needsUpdate = true
     }
     active = Object.freeze(errors.map((value) => value.regionId))
+    paintedKey = key
   }
   function render(now: number, observed = true) {
     if (!closed && (!time(now) || now < lastNow)) {
@@ -421,7 +470,8 @@ export function createSurfaceFeedback(
       else if (pending) {
         paint(pending)
         pending = null
-      }
+      } else if (dirty) clear()
+      dirty = false
     }
     return Object.freeze({
       status: closed ? 'closed' : active.length ? 'highlighting' : 'neutral',
