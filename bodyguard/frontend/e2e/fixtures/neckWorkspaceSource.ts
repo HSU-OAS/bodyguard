@@ -8,6 +8,8 @@ declare global {
       angle: number
       shoulder: number
       empty: boolean
+      head: boolean
+      pausedInput: boolean
       fail: boolean
       cameras: number
       stops: number
@@ -25,6 +27,8 @@ window.neckWorkspaceFixture ??= {
   angle: 0,
   shoulder: 0,
   empty: false,
+  head: true,
+  pausedInput: false,
   fail: false,
   cameras: 0,
   stops: 0,
@@ -72,6 +76,7 @@ export function createVideoPoseSource(context: ResourceContext) {
     async read() {
       if (closed || context.signal.aborted) return null
       const f = window.neckWorkspaceFixture
+      if (f.pausedInput) return null
       f.reads++
       if (f.fail) throw new Error('Controlled inference failure')
       const input = frame(f.angle, ++sequence, performance.now(), {
@@ -100,7 +105,8 @@ export function createVideoPoseSource(context: ResourceContext) {
           worldLandmarks: f.empty
             ? []
             : [points.map((p) => ({ ...p, x: p.x - 0.5, y: p.y - 0.76 }))],
-          headOrientation: f.empty ? null : [0, 0, Math.sin(f.angle / 2), Math.cos(f.angle / 2)],
+          headOrientation:
+            f.empty || !f.head ? null : [0, 0, Math.sin(f.angle / 2), Math.cos(f.angle / 2)],
           hands: [],
         },
       }

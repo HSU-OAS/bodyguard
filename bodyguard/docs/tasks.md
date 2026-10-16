@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-16 [S3.C3](stories/neck-surface-feedback.md): PR158 source75daffb→merge3b71975/main 확인 후 목·어깨 오류를 실제 사용자 GLB 표면에 연결했다. [남녀 작동 화면·원본/변형 보존·실패와 실제 검증](review/neck-surface-feedback/README.md). 오른쪽 제작 시범은 중립이며 머리 추적/입력 만료·가림에는 색을 해제한다. 일반 회귀는 동시 실행 수2로 전부 통과하고, 무거운 전체 정점 GLB 검증도 별도 필수 gate로 통과했다. 기본 병렬 실패를 보존한다. 후보 프로필은 테스트 주입만 허용하고 공개 gate/기록 쓰기를 열지 않는다. 다음은 검증된 실행 프로필·다른 동작/추천·실제 결과 저장 통합이며 최종 외형/성능·기존 Draft150/152/SDK P2·별도 승인·전체1~4/1~6 미완료 기준은 유지한다.
+
 2026-10-16 [S3.C2](stories/neck-coaching-workspace.md): 명시 개발 구성의 두 아바타 화면에 실제 classifier→기존 소유 세션/단계→시범 반응·좌우 완료/중단 결과를 연결했다. [작동 화면·실패·생성 입력/실제 빈 장치 SDK 구분](review/neck-coaching-workspace/README.md). 일시정지·새 세대/새 canvas 재개·늦은 권한 취소·오류 회복·숨김/401을 검증 중이며 조건부 PR 게이트를 진행한다. 기본 화면의 코칭은 여전히 비활성이고 후보 결과 저장/임상 프로필·추천·세밀한 목 표면 착색·최종 외형/성능은 미완료다. PR157 sourcefc16ced→merge5b03763/main 확인 후 최신 main에서 시작했다. 기존 Draft150/152·SDK P2·별도 승인·전체1~4/1~6 실제 기준은 유지한다.
 
 2026-10-16 [S3.C1](stories/neck-candidate-classifier.md): 목 동작의 같은 프레임→투영→명시 band 판정 후보→기존 진행→결과 DTO/모의 HTTP 저장 계약을 구현했다. 시작/목표/복귀·방향/어깨선/머리 위치 오류와 가림/시각·현 state/원시 데이터 배제를 [검증](review/neck-candidate-classifier/README.md)했다. 아직 현재 코칭 화면에 적용하지 않았고 임상 각도/운동량 기본값·출시 동작·실제 SQL/사람 증거를 만들지 않는다. 다음은 두 모델 stage와 후보 판정/오류별 시범·결과 UI 연결이다. PR156 source8822093→merge2ee43fe/main 포함 후 최신 main에서 시작했으며 기존 Draft/SDK P2·최종 외형/성능·별도 승인·1~4/1~6 미완료를 유지한다.

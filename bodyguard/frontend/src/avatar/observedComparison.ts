@@ -25,6 +25,8 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal) {
     generation: number | undefined,
     sequence = 0,
     requestedAfter: number | undefined,
+    headSequence: number | undefined,
+    headTracking = false,
     closed = false
   let status: ComparisonStatus = 'waiting'
   let snapshot: Readonly<{
@@ -40,6 +42,8 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal) {
     body = head = hands = undefined
     generation = requestedAfter = undefined
     sequence = 0
+    headSequence = undefined
+    headTracking = false
     status = 'waiting'
     snapshot = Object.freeze({ status: 'untracked', tracked: 0, total: 9 })
     model.visible = false
@@ -70,6 +74,8 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal) {
         return false
       if (!body.observe(frame)) return false
       sequence = frame.sequence
+      headTracking = false
+      headSequence = undefined
       const now = performance.now()
       if (requestedAfter !== undefined && frame.at >= requestedAfter) {
         const aligned = readDetailAlignment(frame, generation, now, 1000)
@@ -97,13 +103,18 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal) {
       }
       const single = hasSingleDisplayBody(frame)
       const stamp = { generation: frame.generation, sequence: frame.sequence, at: frame.at }
-      head?.push({ ...stamp, rotation: single ? (frame.result.headOrientation ?? null) : null })
+      if (
+        head?.push({ ...stamp, rotation: single ? (frame.result.headOrientation ?? null) : null })
+      )
+        headSequence = frame.sequence
       hands?.push({ ...stamp, hands: single ? copyHandObservations(frame.result.hands) : [] })
       return true
     },
     align() {
       if (closed || signal.aborted || !body) return false
       requestedAfter = performance.now()
+      headTracking = false
+      headSequence = undefined
       status = 'waiting'
       return true
     },
@@ -114,7 +125,10 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal) {
       }
       const state = body.render(now, delta)
       snapshot = Object.freeze({ status: state.status, tracked: state.tracked, total: state.total })
-      head?.render(now, delta)
+      headTracking =
+        head?.render(now, delta).status === 'tracking' &&
+        headSequence === sequence &&
+        requestedAfter === undefined
       hands?.render(now, delta)
       model.visible = state.status === 'tracking' || state.status === 'partial'
       if (requestedAfter !== undefined && now - requestedAfter > 1000) {
@@ -130,6 +144,12 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal) {
     },
     suspend,
     getSnapshot: () => snapshot,
+    getCoverage() {
+      const coverage = body?.getCoverage()
+      return !closed && !signal.aborted && model.visible && coverage
+        ? Object.freeze({ ...coverage, headTracking })
+        : null
+    },
     dispose() {
       if (!closed) {
         closed = true

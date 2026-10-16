@@ -15,6 +15,7 @@
     "typecheck": "tsc --noEmit",
     "gen:api": "node scripts/generate-api.mjs",
     "test": "vitest run",
+    "test:neck-surface": "vitest run --config scripts/vitest-neck-surface.config.ts",
     "test:e2e": "playwright test",
     "test:selection": "pnpm build && node scripts/check-selection-production.mjs && node scripts/test-selection-browser.mjs",
     "check": "biome check .",

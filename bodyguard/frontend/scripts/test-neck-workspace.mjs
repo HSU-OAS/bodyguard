@@ -8,8 +8,9 @@ import { chromium } from '@playwright/test'
 import { createServer, mergeConfig } from 'vite'
 import config from '../vite.config.ts'
 
-const [scratch, label] = process.argv.slice(2)
-assert(/^\/private\/tmp\/bodyguard-neck-workspace\.[A-Za-z0-9]+$/.test(scratch))
+const [scratch, label, colour] = process.argv.slice(2)
+assert(/^\/private\/tmp\/bodyguard-neck-(?:workspace|surface)\.[A-Za-z0-9]+$/.test(scratch))
+assert(colour === undefined || colour === 'with-surface')
 assert(/^[a-z][a-z0-9-]+$/.test(label) && !existsSync(`${scratch}/${label}.json`))
 const sha = (value) => createHash('sha256').update(value).digest('hex')
 const files = [
@@ -17,6 +18,10 @@ const files = [
   'src/pages/NeckCoachingRun.tsx',
   'src/pages/CoachingPage.tsx',
   'src/avatar/observedComparison.ts',
+  'src/avatar/neckSurfaceFeedback.ts',
+  'src/avatar/projectedSurfaceRegions.ts',
+  'src/avatar/surfaceFeedback.ts',
+  'src/avatar/observedPoseRig.ts',
   'src/avatar/referenceStage.ts',
   'src/pages/CoachingPage.css',
   'e2e/fixtures/neckWorkspaceEntry.tsx',
@@ -135,7 +140,47 @@ try {
   const status = (text) => page.getByText(text, { exact: true }).waitFor({ timeout: 20000 })
   const set = (value) =>
     page.evaluate((value) => Object.assign(window.neckWorkspaceFixture, value), value)
+  const redness = () =>
+    page.evaluate(
+      () =>
+        new Promise((resolve) =>
+          requestAnimationFrame(() => {
+            const canvas = document.querySelector('canvas'),
+              gl = canvas.getContext('webgl2')
+            const width = gl.drawingBufferWidth,
+              height = gl.drawingBufferHeight,
+              pixels = new Uint8Array(width * height * 4)
+            gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, pixels)
+            const halves = [
+              { count: 0, sumY: 0 },
+              { count: 0, sumY: 0 },
+            ]
+            for (let y = 0; y < height; y++)
+              for (let x = 0; x < width; x++) {
+                const i = (y * width + x) * 4
+                // Render-only chroma separation, NOT pose/clinical thresholds or a camera image.
+                if (
+                  pixels[i] > pixels[i + 1] + 15 &&
+                  pixels[i] > pixels[i + 2] + 10 &&
+                  pixels[i + 3] > 0
+                ) {
+                  const h = halves[x < width / 2 ? 0 : 1]
+                  h.count++
+                  h.sumY += y
+                }
+              }
+            resolve(
+              halves.map((h) => ({
+                count: h.count,
+                meanY: h.count ? h.sumY / h.count / height : null,
+              })),
+            )
+          }),
+        ),
+    )
   const start = async () => {
+    // This simulates a new user's preparation; never weaken the application's start gate.
+    await set({ angle: 0, shoulder: 0, head: true, empty: false, pausedInput: false })
     await page.getByRole('button', { name: /^(검수 시작|새 검수 시작)$/ }).click()
     await status('왼쪽 · 수행')
   }
@@ -158,6 +203,34 @@ try {
   await image('shoulder-feedback')
   await set({ shoulder: 0, angle: 0.4 })
   await status('선택한 방향의 시범을 확인해 주세요')
+  if (colour) {
+    const neck = await redness()
+    assert(neck[0].count > 0 && neck[1].count === 0)
+    await set({ head: false })
+    await page.waitForTimeout(200)
+    const missing = await redness()
+    assert.equal(missing[0].count, 0)
+    await set({ head: true })
+    await page.waitForTimeout(200)
+    assert((await redness())[0].count > 0)
+    await set({ pausedInput: true })
+    await page.waitForTimeout(1300)
+    assert.equal((await redness())[0].count, 0)
+    await set({ pausedInput: false, angle: 0 })
+    await status('왼쪽 · 수행')
+    await set({ shoulder: 0.2 })
+    await status('어깨선 확인 · 준비 시범을 다시 보세요')
+    const shoulder = await redness()
+    assert(shoulder[0].count > 0 && shoulder[1].count === 0)
+    assert(neck[0].meanY > shoulder[0].meanY)
+    await image('surface-shoulder')
+    await set({ shoulder: 0, angle: 0.4 })
+    await status('선택한 방향의 시범을 확인해 주세요')
+    await image('surface-neck')
+    cases.push(
+      'actual GPU pixels: user-only distinct neck/shoulder region; missing head and stale capture revoke red, fresh input recovers',
+    )
+  }
   await image('wrong-direction')
   await set({ angle: 0, empty: true })
   await status('왼쪽 · 준비')
@@ -199,6 +272,23 @@ try {
   )
   await page.getByLabel('검수 아바타 형태').selectOption('female')
   await start()
+  if (colour) {
+    await page.getByRole('button', { name: '움직임 맞추기', exact: true }).click()
+    await page.waitForTimeout(200)
+    await set({ shoulder: 0.2 })
+    await status('어깨선 확인 · 준비 시범을 다시 보세요')
+    const shoulders = await redness()
+    assert(shoulders[0].count > 0 && shoulders[1].count === 0)
+    await image('female-surface-shoulders')
+    await set({ shoulder: 0, angle: 0.4 })
+    await status('선택한 방향의 시범을 확인해 주세요')
+    const neck = await redness()
+    assert(neck[0].count > 0 && neck[1].count === 0)
+    await image('female-surface-neck')
+    cases.push(
+      'female actual GPU neck/shoulder masks and neutral guide; same native-owned flow without additional capture',
+    )
+  }
   await image('female-running')
   for (const name of ['상반신', '자세히', '전신']) {
     await page.getByRole('button', { name, exact: true }).click()

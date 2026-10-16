@@ -249,8 +249,11 @@ it.each(['/records', `/records/${id}`])(
     })
     open(path)
     await screen.findByRole('heading', { name: '계정을 다시 확인해 주세요' })
-    expect(document.activeElement).toBe(
-      screen.getByRole('heading', { name: '계정을 다시 확인해 주세요' }),
+    // DOM availability precedes the page's passive focus effect under a loaded worker pool.
+    await waitFor(() =>
+      expect(document.activeElement).toBe(
+        screen.getByRole('heading', { name: '계정을 다시 확인해 주세요' }),
+      ),
     )
     expect(screen.queryByRole('table')).toBeNull()
     expect(screen.queryByRole('button', { name: '이 기간 기록 삭제' })).toBeNull()
