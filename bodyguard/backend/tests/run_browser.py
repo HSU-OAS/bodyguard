@@ -62,6 +62,7 @@ def main() -> int:
             "recordjourney",
             "baselineclient",
             "recordbaseline",
+            "neckrecording",
         ),
         nargs="?",
         default="account",
@@ -72,13 +73,19 @@ def main() -> int:
     )
     parser.add_argument(
         "--config",
-        choices=("playwright.account.config.ts", "playwright.coaching-record-api.config.ts"),
+        choices=(
+            "playwright.account.config.ts",
+            "playwright.coaching-record-api.config.ts",
+            "playwright.neck-recording.config.ts",
+        ),
         default="playwright.account.config.ts",
         help="Owned test configuration; defaults and safety limits remain unchanged",
     )
     args = parser.parse_args()
     if args.config == "playwright.coaching-record-api.config.ts" and args.suite != "authcoaching":
         parser.error("The isolated coaching configuration requires the authcoaching suite")
+    if (args.config == "playwright.neck-recording.config.ts") != (args.suite == "neckrecording"):
+        parser.error("The isolated neck recording configuration requires its matching suite")
     # Bind before touching data; never reuse a user's server on this port.
     with socket.socket() as listener, socket.socket() as blocked_proxy:
         # Reuse a closed test listener's TIME_WAIT, never another live listener.
@@ -234,6 +241,7 @@ def main() -> int:
                         "recordjourney",
                         "baselineclient",
                         "recordbaseline",
+                        "neckrecording",
                     )
                     else f"test-results/{args.suite}"
                 )
@@ -295,6 +303,7 @@ def main() -> int:
                                 "recordjourney",
                                 "baselineclient",
                                 "recordbaseline",
+                                "neckrecording",
                             )
                             else ""
                         ),

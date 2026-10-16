@@ -15,6 +15,7 @@ const fixture = vi.hoisted(() => ({
   starts: 0,
   closes: 0,
   allow: true,
+  disposal: null as Promise<void> | null,
 }))
 vi.mock('../coaching/neckWorkspacePlayback', () => ({
   createNeckWorkspacePlayback(input: PlaybackInput) {
@@ -24,6 +25,7 @@ vi.mock('../coaching/neckWorkspacePlayback', () => ({
       return {
         dispose: () => {
           fixture.disposed++
+          return fixture.disposal ?? undefined
         },
       }
     }
@@ -43,7 +45,7 @@ vi.mock('../coaching/neckWorkspacePlayback', () => ({
 }))
 let now = 100,
   sequence = 0,
-  fetcher: ReturnType<typeof vi.fn>
+  fetcher: ReturnType<typeof vi.fn<(path: string, init?: RequestInit) => Promise<Response>>>
 const configuration = (): NeckRunConfiguration => {
   const review = criteria()
   return {
@@ -78,6 +80,7 @@ beforeEach(() => {
     starts: 0,
     closes: 0,
     allow: true,
+    disposal: null,
   })
   vi.spyOn(performance, 'now').mockImplementation(() => now)
   fetcher = vi.fn((path: string) =>
@@ -219,4 +222,215 @@ it('hidden clears the visible run and releases resources; returning does not res
   await act(async () => document.dispatchEvent(new Event('visibilitychange')))
   expect(fixture.acquired).toBe(3)
   expect(screen.getByRole('button', { name: '검수 시작' })).toBeTruthy()
+})
+
+const recording = (): NeckRunConfiguration => ({
+  ...configuration(),
+  recording: 'isolated-local-test',
+})
+async function complete() {
+  for (const side of ['left', 'right']) {
+    await supply('start', side)
+    await supply('target', side)
+    await supply('target', side, 1, 50)
+    await supply('returned', side)
+  }
+  await screen.findByRole('heading', { name: '검수 흐름 완료' })
+}
+function recordServer(reply?: (body: string) => Promise<Response>) {
+  const fallback = fetcher.getMockImplementation(),
+    bodies: string[] = [],
+    signals: AbortSignal[] = []
+  if (!fallback) throw new Error('Missing ordinary fixture response')
+  fetcher.mockImplementation((path: string, init?: RequestInit) => {
+    if (path !== '/api/v1/records/stretch' || init?.method !== 'POST') return fallback(path)
+    bodies.push(String(init.body))
+    signals.push(init.signal as AbortSignal)
+    return reply
+      ? reply(String(init.body))
+      : Promise.resolve(
+          new Response(
+            JSON.stringify({
+              ...JSON.parse(String(init.body)),
+              created_at: new Date().toISOString(),
+              provenance: 'client-reported',
+            }),
+            { status: 201 },
+          ),
+        )
+  })
+  return { bodies, signals }
+}
+it('refuses isolated recording on a non-loopback host before acquiring resources', async () => {
+  vi.spyOn(window.location, 'hostname', 'get').mockReturnValue('example.com')
+  await open(recording())
+  await act(async () => fireEvent.click(screen.getByRole('button', { name: '검수 시작' })))
+  await screen.findByRole('alert')
+  expect(fixture.acquired).toBe(0)
+})
+it('saves the exact ended result only after cleanup settles; duplicate clicks send once and saved link identifies it', async () => {
+  const server = recordServer()
+  await open(recording())
+  await start()
+  let release!: () => void
+  fixture.disposal = new Promise<void>((resolve) => {
+    release = resolve
+  })
+  await complete()
+  expect(server.bodies).toHaveLength(0)
+  const button = screen.getByRole('button', { name: '시험 기록 저장' })
+  await act(async () => {
+    fireEvent.click(button)
+    fireEvent.click(button)
+  })
+  expect(server.bodies).toHaveLength(0)
+  await act(async () => release())
+  const message = await screen.findByText('시험 기록을 저장했습니다.')
+  expect(server.bodies).toHaveLength(1)
+  const row = JSON.parse(server.bodies[0])
+  expect(Object.keys(row).sort()).toEqual(
+    [
+      'id',
+      'motion_id',
+      'protocol_version',
+      'started_at',
+      'ended_at',
+      'outcome',
+      'observed_ms',
+      'repetitions',
+    ].sort(),
+  )
+  expect(row).toMatchObject({
+    motion_id: 'neck-side',
+    outcome: 'completed',
+    observed_ms: 100,
+    repetitions: 0,
+  })
+  expect(screen.getByRole('link', { name: '저장한 시험 기록 보기' }).getAttribute('href')).toBe(
+    `/records/${row.id}`,
+  )
+  expect(document.activeElement).toBe(message)
+  expect(screen.queryByRole('button', { name: '시험 기록 저장' })).toBeNull()
+})
+it('an interrupted result stays interrupted and never saves automatically', async () => {
+  const server = recordServer()
+  await open(recording())
+  await start()
+  await supply('start')
+  await supply('target')
+  await supply('target', 'left', 1, 20)
+  await act(async () => fireEvent.click(screen.getByRole('button', { name: '불편하면 중단' })))
+  await screen.findByRole('heading', { name: '불편으로 중단했습니다' })
+  expect(server.bodies).toHaveLength(0)
+  await act(async () => fireEvent.click(screen.getByRole('button', { name: '시험 기록 저장' })))
+  await screen.findByText('시험 기록을 저장했습니다.')
+  expect(JSON.parse(server.bodies[0])).toMatchObject({ outcome: 'interrupted', observed_ms: 20 })
+})
+it('lost response retries only explicitly with the identical UUID and body', async () => {
+  let count = 0
+  const server = recordServer(async (body) => {
+    if (++count === 1) throw new TypeError('Controlled response loss')
+    return new Response(
+      JSON.stringify({
+        ...JSON.parse(body),
+        created_at: new Date().toISOString(),
+        provenance: 'client-reported',
+      }),
+      { status: 200 },
+    )
+  })
+  await open(recording())
+  await start()
+  await complete()
+  await act(async () => fireEvent.click(screen.getByRole('button', { name: '시험 기록 저장' })))
+  await screen.findByRole('button', { name: '같은 시험 기록 다시 저장' })
+  expect(server.bodies).toHaveLength(1)
+  await act(async () =>
+    fireEvent.click(screen.getByRole('button', { name: '같은 시험 기록 다시 저장' })),
+  )
+  await screen.findByText('시험 기록을 저장했습니다.')
+  expect(server.bodies).toHaveLength(2)
+  expect(server.bodies[1]).toBe(server.bodies[0])
+})
+it.each([401, 403, 409])(
+  'HTTP %i is not saved and does not offer an unsafe automatic retry',
+  async (status) => {
+    const server = recordServer(async () => new Response('{}', { status }))
+    await open(recording())
+    await start()
+    await complete()
+    await act(async () => fireEvent.click(screen.getByRole('button', { name: '시험 기록 저장' })))
+    await screen.findByRole('alert')
+    expect(screen.queryByText('시험 기록을 저장했습니다.')).toBeNull()
+    expect(screen.queryByRole('button', { name: '같은 시험 기록 다시 저장' })).toBeNull()
+    expect(server.bodies).toHaveLength(1)
+    if (status !== 409) {
+      await act(async () => fireEvent.click(screen.getByRole('button', { name: '계정 다시 확인' })))
+      expect(screen.queryByText('검수 흐름 완료')).toBeNull()
+      expect(server.bodies).toHaveLength(1)
+    }
+  },
+)
+it('auth refresh aborts a pending write and a late accepted response cannot revive saved UI', async () => {
+  let release!: (response: Response) => void
+  const server = recordServer(
+    () =>
+      new Promise((resolve) => {
+        release = resolve
+      }),
+  )
+  await open(recording())
+  await start()
+  await complete()
+  await act(async () => fireEvent.click(screen.getByRole('button', { name: '시험 기록 저장' })))
+  await screen.findByText('시험 기록 저장 중')
+  await act(async () => dispatchEvent(new Event('focus')))
+  expect(server.signals[0].aborted).toBe(true)
+  await act(async () =>
+    release(
+      new Response(
+        JSON.stringify({
+          ...JSON.parse(server.bodies[0]),
+          created_at: new Date().toISOString(),
+          provenance: 'client-reported',
+        }),
+        { status: 201 },
+      ),
+    ),
+  )
+  expect(screen.queryByText('시험 기록을 저장했습니다.')).toBeNull()
+  expect(screen.queryByRole('link', { name: '저장한 시험 기록 보기' })).toBeNull()
+  expect(server.bodies).toHaveLength(1)
+})
+it('hidden during pending cleanup prevents the later write', async () => {
+  const server = recordServer()
+  await open(recording())
+  await start()
+  let release!: () => void
+  fixture.disposal = new Promise<void>((resolve) => {
+    release = resolve
+  })
+  await complete()
+  await act(async () => fireEvent.click(screen.getByRole('button', { name: '시험 기록 저장' })))
+  vi.spyOn(document, 'visibilityState', 'get').mockReturnValue('hidden')
+  await act(async () => document.dispatchEvent(new Event('visibilitychange')))
+  await act(async () => release())
+  expect(server.bodies).toHaveLength(0)
+  expect(screen.queryByText('시험 기록을 저장했습니다.')).toBeNull()
+})
+it('cleanup failure never submits a record and quarantines this native workspace', async () => {
+  const server = recordServer()
+  await open(recording())
+  await start()
+  let reject!: (error: Error) => void
+  fixture.disposal = new Promise<void>((_, fail) => {
+    reject = fail
+  })
+  await complete()
+  await act(async () => fireEvent.click(screen.getByRole('button', { name: '시험 기록 저장' })))
+  await act(async () => reject(new Error('Controlled test cleanup failure')))
+  await screen.findByRole('alert')
+  expect(server.bodies).toHaveLength(0)
+  expect(screen.queryByRole('button', { name: '시험 기록 저장' })).toBeNull()
+  expect(screen.getByRole('button', { name: '새 검수 시작' }).hasAttribute('disabled')).toBe(true)
 })

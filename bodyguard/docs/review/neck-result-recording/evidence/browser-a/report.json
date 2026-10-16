@@ -1,0 +1,255 @@
+{
+  "config": {
+    "argv": [
+      "/opt/homebrew/Cellar/node@24/24.20.0/bin/node",
+      "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/node_modules/.pnpm/@playwright+test@1.63.0/node_modules/@playwright/test/cli.js",
+      "test",
+      "neckrecording.spec.ts",
+      "--config",
+      "playwright.neck-recording.config.ts",
+      "--output",
+      "test-results/neckrecording-20261016T152243477058Z"
+    ],
+    "configFile": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/playwright.neck-recording.config.ts",
+    "rootDir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/neckrecording-20261016T152243477058Z",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "neckrecording.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/neckrecording-20261016T152243477058Z/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node scripts/serve-neck-recording.mjs",
+      "url": "http://localhost:4173",
+      "reuseExistingServer": false,
+      "timeout": 180000
+    }
+  },
+  "suites": [
+    {
+      "title": "neckrecording.spec.ts",
+      "file": "neckrecording.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "N01 actual ended UI saves completed and interrupted summaries; current record detail and other-account isolation",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1405,
+                  "error": {
+                    "message": "Error: page.evaluate: TypeError: Cannot convert undefined or null to object\n    at Object.assign (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:17)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+                    "stack": "Error: page.evaluate: TypeError: Cannot convert undefined or null to object\n    at Object.assign (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:17)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:17)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at set (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/e2e/neckrecording.spec.ts:63:8)\n    at start (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/e2e/neckrecording.spec.ts:67:9)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/e2e/neckrecording.spec.ts:108:9",
+                    "location": {
+                      "file": "eval at evaluate (:311:30), <anonymous>",
+                      "column": 17,
+                      "line": 1
+                    }
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "eval at evaluate (:311:30), <anonymous>",
+                        "column": 17,
+                        "line": 1
+                      },
+                      "message": "Error: page.evaluate: TypeError: Cannot convert undefined or null to object\n    at Object.assign (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:17)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:17)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at set (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/e2e/neckrecording.spec.ts:63:8)\n    at start (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/e2e/neckrecording.spec.ts:67:9)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/e2e/neckrecording.spec.ts:108:9"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T15:22:45.625Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/neckrecording-20261016T152243477058Z/neckrecording-N01-actual-e-0af0d-and-other-account-isolation/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "eval at evaluate (:311:30), <anonymous>",
+                    "column": 17,
+                    "line": 1
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "850bc9bc71179e35ff87-457fb8eefccc2c5b6d89",
+          "file": "neckrecording.spec.ts",
+          "line": 101,
+          "column": 1
+        },
+        {
+          "title": "N02 actual API accepts201 then response loss; explicit identical retry returns200 and only one SQL-backed row",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1162,
+                  "error": {
+                    "message": "Error: page.evaluate: TypeError: Cannot convert undefined or null to object\n    at Object.assign (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:17)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+                    "stack": "Error: page.evaluate: TypeError: Cannot convert undefined or null to object\n    at Object.assign (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:17)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:17)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at set (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/e2e/neckrecording.spec.ts:63:8)\n    at start (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/e2e/neckrecording.spec.ts:67:9)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/e2e/neckrecording.spec.ts:171:9",
+                    "location": {
+                      "file": "eval at evaluate (:311:30), <anonymous>",
+                      "column": 17,
+                      "line": 1
+                    }
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "eval at evaluate (:311:30), <anonymous>",
+                        "column": 17,
+                        "line": 1
+                      },
+                      "message": "Error: page.evaluate: TypeError: Cannot convert undefined or null to object\n    at Object.assign (<anonymous>)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:17)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:17)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at set (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/e2e/neckrecording.spec.ts:63:8)\n    at start (/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/e2e/neckrecording.spec.ts:67:9)\n    at /Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/e2e/neckrecording.spec.ts:171:9"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T15:22:55.765Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Applications/학교 내부/2026-2학기/오픈소스 AI SW 융합 프로젝트/BODYGUARD-dashboard-client/bodyguard/frontend/test-results/neckrecording-20261016T152243477058Z/neckrecording-N02-actual-A-f8fd0-and-only-one-SQL-backed-row/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "eval at evaluate (:311:30), <anonymous>",
+                    "column": 17,
+                    "line": 1
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "850bc9bc71179e35ff87-8b29a2670f67d19ce065",
+          "file": "neckrecording.spec.ts",
+          "line": 165,
+          "column": 1
+        },
+        {
+          "title": "N03 female run with silent cookie account replacement rejects old proof403; no retry or cross-account record",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3080,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T15:22:57.829Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "850bc9bc71179e35ff87-dfbe8f736b2260514143",
+          "file": "neckrecording.spec.ts",
+          "line": 208,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-16T15:22:44.252Z",
+    "duration": 17177.691,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

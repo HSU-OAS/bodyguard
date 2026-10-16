@@ -175,6 +175,19 @@ it('A02 completion uses actual engine summary and exact eight fields; never auto
   expect(h.resources.every((r) => r.dispose.mock.calls.length === 1)).toBe(true)
   await s.dispose()
 })
+it('cleanup failure reported by a settled controller cannot save or retry a completed result', async () => {
+  const h = await setup(),
+    s = createRecordedSession(h.options)
+  await s.start()
+  h.resources[0].dispose.mockRejectedValue(new Error('Controlled cleanup failure'))
+  await complete(s, h)
+  expect(s.getSnapshot().failure).toBe('cleanup-error')
+  await s.save()
+  await s.retry()
+  expect(h.rows).toHaveLength(0)
+  expect(s.getRecordSnapshot()).toEqual({ status: 'failed', failure: 'cleanup-error' })
+  await s.dispose()
+})
 it('A02 pause/resume and UTC jumps preserve first anchor and verified time', async () => {
   const h = await setup()
   const s = createRecordedSession(h.options)

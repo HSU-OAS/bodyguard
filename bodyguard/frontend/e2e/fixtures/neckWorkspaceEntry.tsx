@@ -5,7 +5,7 @@ import { criteria } from './neckCandidate'
 import './neckWorkspaceSource'
 
 const review = criteria()
-const configuration: NeckRunConfiguration = {
+export const configuration: NeckRunConfiguration = {
   scope: 'candidate-review-only',
   criteria: { ...review, maxFrameAgeMs: 1000, maxFrameGapMs: 1000 },
   plan: {
