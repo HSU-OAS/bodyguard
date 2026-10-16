@@ -1,0 +1,143 @@
+{
+  "method": "built product CSP; no test response CSP or route interception; owned different-origin positive control; blank SDK body+face+hands; no camera/avatar",
+  "chrome": "155.0.8059.80",
+  "product": "4c37af8a768373a33ee6924de63c0c78c71a403564ce3f8ae194ef2a5a8c1e39",
+  "fixture": "443388edc5b09b70ee2a5b35e38d8dd608a2950b95d44e572c8bbbbca23b3370",
+  "results": [
+    {
+      "mode": "control",
+      "passed": true,
+      "network": {
+        "mainBlocked": false,
+        "workerBlocked": false,
+        "workerViolations": 0
+      },
+      "trapRequests": 2,
+      "ownership": {
+        "cameras": 0,
+        "workers": 1,
+        "terminations": 1,
+        "violations": 0,
+        "storageKeys": 0
+      }
+    },
+    {
+      "mode": "policy",
+      "passed": true,
+      "network": {
+        "mainBlocked": true,
+        "workerBlocked": true,
+        "workerViolations": 1
+      },
+      "trapRequests": 0,
+      "ownership": {
+        "cameras": 0,
+        "workers": 1,
+        "terminations": 1,
+        "violations": 1,
+        "storageKeys": 0
+      }
+    },
+    {
+      "mode": "main",
+      "passed": true,
+      "result": {
+        "thread": "main",
+        "state": "closed",
+        "readyMs": 620.3000000119209,
+        "firstMs": 2039.5,
+        "timings": [
+          2039.5,
+          24.299999982118607,
+          25.30000001192093
+        ],
+        "maxGapMs": 2033.2,
+        "beats": 8,
+        "clickDelayMs": 2021.5999999940395,
+        "frames": 3,
+        "closes": 3,
+        "delegates": [
+          "GPU",
+          "GPU",
+          "GPU"
+        ],
+        "concurrentRejected": false
+      },
+      "ownership": {
+        "cameras": 0,
+        "workers": 0,
+        "terminations": 0,
+        "violations": 3,
+        "storageKeys": 0
+      }
+    },
+    {
+      "mode": "worker",
+      "passed": true,
+      "result": {
+        "thread": "worker",
+        "state": "closed",
+        "readyMs": 368.7000000178814,
+        "firstMs": 389,
+        "timings": [
+          389,
+          12.300000011920929,
+          15.5
+        ],
+        "maxGapMs": 16.800000000000068,
+        "beats": 31,
+        "clickDelayMs": 2.0999999940395355,
+        "frames": 3,
+        "closes": 3,
+        "delegates": [],
+        "concurrentRejected": true
+      },
+      "ownership": {
+        "cameras": 0,
+        "workers": 1,
+        "terminations": 1,
+        "violations": 0,
+        "storageKeys": 0
+      }
+    },
+    {
+      "mode": "web",
+      "passed": true,
+      "sameOrigin": true,
+      "ownership": {
+        "cameras": 0,
+        "workers": 0,
+        "terminations": 0,
+        "violations": 0,
+        "storageKeys": 0
+      }
+    }
+  ],
+  "trapRequests": 2,
+  "externalRequests": 0,
+  "proxyAttempts": 33,
+  "sdkProxyAttempts": 0,
+  "pageErrors": [],
+  "requested": [
+    "/control/",
+    "/probe/assets/sdkNetworkProbe-DyHwJtwe.js",
+    "/probe/assets/sdkNetworkProbe-CgSUwhNM.css",
+    "/favicon.ico",
+    "/network-worker.js",
+    "/probe/",
+    "/mediapipe/wasm/vision_wasm_internal.js",
+    "/mediapipe/wasm/vision_wasm_internal.wasm",
+    "/models/pose_landmarker_lite.task",
+    "/models/face_landmarker.task",
+    "/models/gesture_recognizer.task",
+    "/assets/nativeInference.worker-CG7a0oNt.js",
+    "/",
+    "/assets/index-Bk1UkKLQ.js",
+    "/assets/index-nL67AkbD.css",
+    "/api/v1/me",
+    "/brand/google-icon.png",
+    "/api/v1/auth/google/status",
+    "/api/policy-probe"
+  ],
+  "failure": null
+}

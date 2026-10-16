@@ -30,7 +30,7 @@ class FakeWorker extends EventTarget {
     this.dispatchEvent(new MessageEvent('message', { data }))
   }
 }
-async function fixture(download?: Promise<OwnedModelAssets>) {
+async function fixture(download?: Promise<OwnedModelAssets>, boot = true) {
   vi.mocked(prepareOwnedModelAssets).mockImplementationOnce(
     () => download ?? Promise.resolve(modelAssets()),
   )
@@ -41,6 +41,7 @@ async function fixture(download?: Promise<OwnedModelAssets>) {
     { model: 'lite', face: true, hands: true, matrixLayout: 'column-major' },
   )
   const worker = FakeWorker.current
+  if (boot) worker.reply({ type: 'boot' })
   await tick()
   const ready = () => worker.reply({ type: 'ready', generation: 3, id: 0 })
   return { abort, pending, worker, ready }
@@ -56,6 +57,98 @@ afterEach(() => {
   vi.useRealTimers()
 })
 describe('worker inference owner', () => {
+  it('a worker that never boots fails within the original budget without claiming native cleanup failed', async () => {
+    vi.useFakeTimers()
+    const f = await fixture(undefined, false)
+    const outcome = f.pending.then(
+      () => 'unexpected readiness',
+      (error: Error) => error.message,
+    )
+    await vi.advanceTimersByTimeAsync(5000)
+    const terminatedAtDeadline = f.worker.terminate.mock.calls.length
+    // Drain the unchanged baseline's second cleanup timer too, to retain its actual error.
+    await vi.advanceTimersByTimeAsync(5000)
+    expect(await outcome).toBe('Worker inference unavailable')
+    expect(terminatedAtDeadline).toBe(1)
+    expect(f.worker.sent).toEqual([])
+    expect(f.worker.terminate).toHaveBeenCalledOnce()
+    expect(vi.getTimerCount()).toBe(0)
+  })
+  it('shares the original five-second response budget between boot and SDK init', async () => {
+    vi.useFakeTimers()
+    const f = await fixture(undefined, false)
+    await vi.advanceTimersByTimeAsync(4000)
+    f.worker.reply({ type: 'boot' })
+    await tick()
+    expect((f.worker.sent[0].data as { type: string }).type).toBe('init')
+    await vi.advanceTimersByTimeAsync(999)
+    f.ready()
+    const owner = await f.pending
+    const disposal = owner.dispose()
+    f.worker.reply({ type: 'closed', generation: 3, clean: true })
+    await disposal
+    expect(vi.getTimerCount()).toBe(0)
+  })
+  it('does not grant a fresh deadline when a late boot leaves insufficient SDK time', async () => {
+    vi.useFakeTimers()
+    const f = await fixture(undefined, false)
+    const assertion = expect(f.pending).rejects.toThrow('Worker inference unavailable')
+    await vi.advanceTimersByTimeAsync(4000)
+    f.worker.reply({ type: 'boot' })
+    await tick()
+    await vi.advanceTimersByTimeAsync(1000)
+    expect(f.worker.sent.at(-1)?.data).toEqual({ type: 'close', generation: 3 })
+    f.worker.reply({ type: 'closed', generation: 3, clean: true })
+    await assertion
+    expect(f.worker.terminate).toHaveBeenCalledOnce()
+  })
+  it('rejects an overdue boot even before the timer callback can run, without sending init', async () => {
+    vi.useFakeTimers()
+    let now = 0
+    vi.spyOn(performance, 'now').mockImplementation(() => now)
+    const f = await fixture(undefined, false)
+    const assertion = expect(f.pending).rejects.toThrow('Worker inference unavailable')
+    now = 5000
+    f.worker.reply({ type: 'boot' })
+    await assertion
+    expect(f.worker.sent).toEqual([])
+    expect(f.worker.terminate).toHaveBeenCalledOnce()
+  })
+  it('cancels an unbooted worker without transferring assets or requesting native cleanup', async () => {
+    const f = await fixture(undefined, false)
+    const assertion = expect(f.pending).rejects.toThrow('Worker inference unavailable')
+    f.abort.abort()
+    await assertion
+    f.worker.reply({ type: 'boot' })
+    expect(f.worker.sent).toEqual([])
+    expect(f.worker.terminate).toHaveBeenCalledOnce()
+  })
+  it('rejects array-shaped boot before any init', async () => {
+    const f = await fixture(undefined, false)
+    const assertion = expect(f.pending).rejects.toThrow('Worker inference unavailable')
+    f.worker.reply(Object.assign([], { type: 'boot' }))
+    await assertion
+    expect(f.worker.sent).toEqual([])
+  })
+  it.each([
+    { type: 'boot', generation: 3 },
+    { type: 'boot', ready: true },
+  ])('rejects malformed boot %j before any init', async (message) => {
+    const f = await fixture(undefined, false)
+    const assertion = expect(f.pending).rejects.toThrow('Worker inference unavailable')
+    f.worker.reply(message)
+    await assertion
+    expect(f.worker.sent).toEqual([])
+  })
+  it('a repeated boot after init fails closed and still requires an actual cleanup acknowledgement', async () => {
+    const f = await fixture()
+    const assertion = expect(f.pending).rejects.toThrow('Worker inference unavailable')
+    f.worker.reply({ type: 'boot' })
+    expect(f.worker.sent.at(-1)?.data).toEqual({ type: 'close', generation: 3 })
+    f.worker.reply({ type: 'closed', generation: 3, clean: true })
+    await assertion
+    expect(f.worker.terminate).toHaveBeenCalledOnce()
+  })
   it('does not spend the five-second init budget on a six-second model read', async () => {
     vi.useFakeTimers()
     let resolve!: (assets: OwnedModelAssets) => void
