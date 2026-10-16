@@ -3,6 +3,7 @@ import {
   BufferGeometry,
   Float32BufferAttribute,
   Group,
+  Matrix4,
   MeshStandardMaterial,
   ShaderLib,
   Skeleton,
@@ -108,6 +109,97 @@ describe('eight-weight asset skinning', () => {
     )
     expect(eightWeightShader(ShaderLib.depth.vertexShader)).toContain('skinned += extraBone3')
     expect(() => eightWeightShader('void main() {}')).toThrow()
+  })
+
+  it('matches eight-influence affine sums for each vertex and fresh transforms/attributes', () => {
+    const { scene, mesh: source } = fixture()
+    const vertices = [1, 2, 3, -2, 0.5, 4, 0, -3, 0.25]
+    source.geometry.setAttribute('position', new Float32BufferAttribute(vertices, 3))
+    for (const name of ['skinIndex', 'skinWeight', 'joints_1', 'weights_1']) {
+      const attribute = source.geometry.getAttribute(name)
+      const values = Array.from({ length: 3 }, () => Array.from(attribute.array)).flat()
+      source.geometry.setAttribute(
+        name,
+        name.includes('Index') || name.includes('joints')
+          ? new Uint16BufferAttribute(values, 4)
+          : new Float32BufferAttribute(values, 4),
+      )
+    }
+    source.position.set(0.5, -1, 0.25)
+    source.scale.set(1.2, 0.8, 1.1)
+    source.updateMatrixWorld(true)
+    source.bind(source.skeleton)
+    const pair = cloneEightWeightPair(scene)
+    const meshes = pair.copies.map((copy) => copy.children[0] as SkinnedMesh)
+    const transforms = meshes[0].skeleton.bones.map((bone) => bone.matrixWorld.toArray())
+    const sum = (mesh: SkinnedMesh, index: number, input: Vector4) => {
+      const base = input.clone().applyMatrix4(mesh.bindMatrix)
+      const result = new Vector4(0, 0, 0, 0)
+      for (let component = 0; component < 8; component++) {
+        const suffix = component < 4 ? '' : '1'
+        const joint = mesh.geometry
+          .getAttribute(`skinIndex${suffix}`)
+          .getComponent(index, component % 4)
+        const weight = mesh.geometry
+          .getAttribute(`skinWeight${suffix}`)
+          .getComponent(index, component % 4)
+        const point = base
+          .clone()
+          .applyMatrix4(
+            new Matrix4().multiplyMatrices(
+              mesh.skeleton.bones[joint].matrixWorld,
+              mesh.skeleton.boneInverses[joint],
+            ),
+          )
+        result.addScaledVector(point, weight)
+      }
+      result.w = base.w
+      return result.applyMatrix4(mesh.bindMatrixInverse)
+    }
+    try {
+      for (let step = 1; step <= 2; step++) {
+        meshes[1].skeleton.bones.forEach((bone, i) => {
+          bone.position.set(i * step * 0.02, -i * 0.03, step * 0.04)
+          bone.rotation.set(i * 0.07, step * 0.13, -i * 0.11)
+          bone.scale.set(1 + i * 0.02, 0.9 + step * 0.1, 1.1)
+        })
+        if (step === 2) {
+          const geometry = meshes[1].geometry
+          const extra = geometry.getAttribute('skinWeight1').clone()
+          const first = geometry.getAttribute('skinWeight').clone()
+          extra.setX(1, extra.getX(1) + 0.05)
+          first.setX(1, first.getX(1) - 0.05)
+          geometry.setAttribute('skinWeight1', extra)
+          geometry.setAttribute('skinWeight', first)
+        }
+        for (const copy of pair.copies) copy.updateMatrixWorld(true)
+        for (const mesh of meshes)
+          for (let vertex = 0; vertex < 3; vertex++) {
+            const input = new Vector4(
+              vertices[vertex * 3],
+              vertices[vertex * 3 + 1],
+              vertices[vertex * 3 + 2],
+              1,
+            )
+            const expected = sum(mesh, vertex, input)
+            const position = mesh.applyBoneTransform(vertex, new Vector3(input.x, input.y, input.z))
+            expect(
+              position.distanceTo(new Vector3(expected.x, expected.y, expected.z)),
+            ).toBeLessThan(1e-10)
+            for (const w of [0, 1]) {
+              input.w = w
+              const result = mesh.applyBoneTransform(vertex, input.clone())
+              const correct = sum(mesh, vertex, input)
+              result.toArray().forEach((value, component) => {
+                expect(Math.abs(value - correct.getComponent(component))).toBeLessThan(1e-10)
+              })
+            }
+          }
+      }
+      expect(meshes[0].skeleton.bones.map((bone) => bone.matrixWorld.toArray())).toEqual(transforms)
+    } finally {
+      pair.dispose()
+    }
   })
   it('disposes owned clone skeleton textures once, without disposing source assets', () => {
     const { scene, mesh: source, geometry } = fixture()
