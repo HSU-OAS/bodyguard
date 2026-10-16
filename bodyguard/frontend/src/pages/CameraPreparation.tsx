@@ -1,7 +1,10 @@
 // FR-M-01/02/07·FR-U-04·NFR-08: explicit private preparation, never accepted coaching.
-import { useLayoutEffect, useRef, useState } from 'react'
+import { type RefObject, useLayoutEffect, useRef, useState } from 'react'
 import { useAuth } from '../auth'
+import type { AvatarGender } from '../avatar/reviewAvatarAssets'
+import type { AvatarView, WorkspaceAvatar } from '../avatar/workspaceAvatar'
 import type { Motion } from '../catalog/motions'
+import { ResourceCleanupError } from '../coaching/resources'
 import { createCameraPreparation, type PreparationState } from '../pose/cameraPreparation'
 import { DEFAULT_POSE_MODEL } from '../pose/constants'
 import {
@@ -9,6 +12,7 @@ import {
   createCameraFraming,
   motionFramingRequirement,
 } from '../posture/cameraFraming'
+import { JOINT_COUNT } from '../posture/landmarks'
 import { CameraReferenceControls } from './CameraReferenceControls'
 import { useCameraReference } from './useCameraReference'
 
@@ -27,7 +31,14 @@ const errors = {
 let retirement: Promise<void> | undefined
 let retirementFailed = false
 
-export function CameraPreparation({ motion }: { motion?: Motion }) {
+export type WorkspaceAvatarStatus = 'idle' | 'waiting' | 'loading' | 'ready' | 'error'
+type AvatarPort = Readonly<{
+  canvas: RefObject<HTMLCanvasElement | null>
+  gender: AvatarGender
+  view: AvatarView
+  onState(status: WorkspaceAvatarStatus): void
+}>
+export function CameraPreparation({ motion, avatar }: { motion?: Motion; avatar?: AvatarPort }) {
   const motionId = motion?.id ?? null
   const { state: account } = useAuth()
   const accountId = account.status === 'ready' ? account.user.id : null
@@ -36,9 +47,14 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
   const owner = useRef<ReturnType<typeof createCameraPreparation> | null>(null)
   const [state, setState] = useState<PreparationState>({ phase: 'idle' })
   const [framing, setFraming] = useState<CameraFramingStatus | null>(null)
+  const [avatarPreparing, setAvatarPreparing] = useState(false)
   const reference = useCameraReference(motionId)
   const referencePort = useRef(reference)
   referencePort.current = reference
+  const avatarPort = useRef(avatar)
+  avatarPort.current = avatar
+  const avatarGender = avatar?.gender
+  const avatarCanvas = avatar?.canvas
   useLayoutEffect(() => {
     if (reference.saving === 'authority-error') void owner.current?.stop()
   }, [reference.saving])
@@ -48,6 +64,105 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
     let disposed = false
     let current: ReturnType<typeof createCameraPreparation> | undefined
     let animation: number | undefined
+    let avatarOwner: WorkspaceAvatar | undefined
+    let avatarAbort: AbortController | undefined
+    let avatarJob: Promise<void> | undefined
+    let avatarRetiring: Promise<void> | undefined
+    let avatarError = false
+    let previousNow: number | undefined
+    const publishAvatar = (next: WorkspaceAvatarStatus) => {
+      if (!disposed && live.current === account) avatarPort.current?.onState(next)
+    }
+    const retireAvatar = () => {
+      if (avatarRetiring) return avatarRetiring
+      if (!avatarAbort && !avatarOwner && !avatarJob) return Promise.resolve()
+      avatarAbort?.abort()
+      avatarAbort = undefined
+      const owned = avatarOwner,
+        pending = avatarJob
+      avatarOwner = undefined
+      try {
+        owned?.dispose()
+      } catch {
+        retirementFailed = true
+      }
+      if (!avatarError) publishAvatar('idle')
+      if (!disposed) setAvatarPreparing(false)
+      const done = Promise.resolve(pending).then(() => {
+        if (avatarRetiring === done) avatarRetiring = undefined
+        if (!disposed && live.current === account)
+          setState(
+            retirementFailed
+              ? { phase: 'error', reason: 'cleanup' }
+              : (current?.state ?? { phase: 'idle' }),
+          )
+      })
+      avatarRetiring = done
+      return done
+    }
+    const connectAvatar = (
+      frame: NonNullable<ReturnType<NonNullable<typeof current>['takeFrame']>>,
+    ) => {
+      const requested = avatarPort.current
+      if (!requested || !avatarGender || !avatarCanvas || avatarError || avatarRetiring) return
+      if (avatarOwner) {
+        avatarOwner.observe(frame)
+        return
+      }
+      if (avatarJob) return
+      if (
+        frame.result.landmarks.length !== 1 ||
+        frame.result.worldLandmarks.length !== 1 ||
+        frame.result.landmarks[0].length !== JOINT_COUNT ||
+        frame.result.worldLandmarks[0].length !== JOINT_COUNT
+      )
+        return
+      const canvas = avatarCanvas.current
+      if (!canvas) return
+      const abort = new AbortController()
+      const generation = frame.generation
+      avatarAbort = abort
+      referencePort.current.reset()
+      setAvatarPreparing(true)
+      publishAvatar('loading')
+      const fail = () => {
+        if (disposed || avatarAbort !== abort || live.current !== account) return
+        avatarError = true
+        publishAvatar('error')
+        void current?.stop()
+      }
+      avatarJob = import('../avatar/workspaceAvatar')
+        .then(({ prepareWorkspaceAvatar }) => {
+          if (disposed || abort.signal.aborted || live.current !== account) return
+          return prepareWorkspaceAvatar(
+            { generation, signal: abort.signal },
+            { canvas, gender: avatarGender, onFailure: fail },
+          )
+        })
+        .then((prepared) => {
+          if (!prepared) return
+          if (
+            disposed ||
+            abort.signal.aborted ||
+            avatarAbort !== abort ||
+            live.current !== account
+          ) {
+            prepared.dispose()
+            return
+          }
+          avatarOwner = prepared
+          setAvatarPreparing(false)
+          publishAvatar('ready')
+        })
+        .catch((error) => {
+          if (!disposed) setAvatarPreparing(false)
+          if (error instanceof ResourceCleanupError) retirementFailed = true
+          fail()
+        })
+        .finally(() => {
+          avatarJob = undefined
+        })
+    }
     const requirement = motionId === null ? null : motionFramingRequirement(motionId)
     let observer = requirement ? createCameraFraming(requirement) : null
     let previous: CameraFramingStatus | null = null
@@ -65,13 +180,26 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
         model: DEFAULT_POSE_MODEL,
         allowed: () =>
           !disposed &&
+          !retirementFailed &&
+          !avatarRetiring &&
           live.current === account &&
           account.user.id === id &&
           document.visibilityState === 'visible',
         onState: (next) => {
           if (current && owner.current === current && !disposed) {
-            setState(next)
+            if (retirementFailed) {
+              setState({ phase: 'error', reason: 'cleanup' })
+              publishAvatar('error')
+              return
+            }
+            if (next.phase === 'observing') publishAvatar('waiting')
+            setState(avatarRetiring && next.phase === 'idle' ? { phase: 'stopping' } : next)
             if (next.phase !== 'observing') {
+              void retireAvatar()
+              if (next.phase === 'preparing') {
+                avatarError = false
+                publishAvatar('idle')
+              }
               referencePort.current.reset()
               previous = null
               setFraming(null)
@@ -81,7 +209,9 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
         },
       })
       owner.current = current
+      referencePort.current.reset()
       setState({ phase: 'idle' })
+      publishAvatar('idle')
       setFraming(null)
       // Consume the existing copied slot once; never capture/re-infer on render or retain arrays.
       const tick = () => {
@@ -92,7 +222,20 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
           if (input) {
             observer?.accept(input, now)
             referencePort.current.accept(input, now)
+            connectAvatar(input)
           }
+          try {
+            avatarOwner?.render(
+              now,
+              previousNow === undefined ? 0 : now - previousNow,
+              avatarPort.current?.view ?? 'full',
+            )
+          } catch {
+            avatarError = true
+            publishAvatar('error')
+            void current.stop()
+          }
+          previousNow = now
           referencePort.current.tick(now)
           const next = observer?.read(now) ?? null
           if (next !== previous) {
@@ -117,7 +260,9 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
     document.addEventListener('visibilitychange', hidden)
     window.addEventListener('pagehide', stop)
     return () => {
+      publishAvatar('idle')
       disposed = true
+      const avatarDone = retireAvatar()
       if (animation !== undefined) cancelAnimationFrame(animation)
       observer = null
       owner.current = null
@@ -128,6 +273,8 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
       const pending = (async () => {
         try {
           await previous.close()
+          await avatarDone
+          if (retirementFailed) return
           if (previous.state.phase === 'error' && previous.state.reason === 'cleanup')
             retirementFailed = true
         } catch {
@@ -139,7 +286,7 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
         if (retirement === pending) retirement = undefined
       })
     }
-  }, [account, accountId, motionId])
+  }, [account, accountId, motionId, avatarGender, avatarCanvas])
   const running = ['ready', 'preparing', 'connecting', 'observing'].includes(state.phase)
   const input = ['ready', 'connecting', 'observing'].includes(state.phase)
   return (
@@ -154,6 +301,7 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
           className="button secondary"
           disabled={
             account.status !== 'ready' ||
+            retirementFailed ||
             reference.saving === 'authority-error' ||
             state.phase === 'stopping' ||
             (state.phase === 'error' && state.reason === 'cleanup')
@@ -215,7 +363,10 @@ export function CameraPreparation({ motion }: { motion?: Motion }) {
       <p className="small muted">
         입력은 브라우저 안에서 처리합니다. 코칭·판정은 시작하지 않습니다.
       </p>
-      <CameraReferenceControls reference={reference} observing={state.phase === 'observing'} />
+      <CameraReferenceControls
+        reference={reference}
+        observing={state.phase === 'observing' && !avatarPreparing}
+      />
     </section>
   )
 }

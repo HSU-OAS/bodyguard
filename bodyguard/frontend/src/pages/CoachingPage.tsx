@@ -1,9 +1,10 @@
 // FR-V-01/03·FR-S-06·FR-A-01/02: approved layout, private until actual motion/asset gates.
 import { useEffect, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
+import type { AvatarGender } from '../avatar/reviewAvatarAssets'
 import { motionNavigationUrl } from '../catalog/motionNavigation'
 import { findMotions, motionById, type Region } from '../catalog/motions'
-import { CameraPreparation } from './CameraPreparation'
+import { CameraPreparation, type WorkspaceAvatarStatus } from './CameraPreparation'
 import { MotionPreview } from './MotionPreview'
 import './CoachingPage.css'
 
@@ -25,7 +26,9 @@ export function CoachingPage() {
   const id = params.get('motion')
   const motion = id ? motionById(id) : undefined
   const [view, setView] = useState<View>('full')
-  const [gender, setGender] = useState('male')
+  const [gender, setGender] = useState<AvatarGender>('male')
+  const [avatarStatus, setAvatarStatus] = useState<WorkspaceAvatarStatus>('idle')
+  const avatarCanvas = useRef<HTMLCanvasElement>(null)
   const [query, setQuery] = useState('')
   const [region, setRegion] = useState<Region>('all')
   const picker = useRef<HTMLDialogElement>(null)
@@ -64,7 +67,7 @@ export function CoachingPage() {
       <div className="coaching-work-area">
         <header className="coaching-heading">
           <div>
-            <p className="small muted">화면 구조 검수 · 코칭 연결 전</p>
+            <p className="small muted">기술 연결 검수 · 코칭 검증 전</p>
             <h1 id="coaching-heading" ref={heading} tabIndex={-1}>
               {title}
             </h1>
@@ -106,19 +109,45 @@ export function CoachingPage() {
         >
           <div className="coaching-role-labels">
             <span>내 움직임</span>
-            <span>현재 단계 시범</span>
+            <span>비교 모델 · 시범 연결 전</span>
           </div>
-          <div className="coaching-scene-pending" role="status">
+          <canvas
+            ref={avatarCanvas}
+            className="coaching-avatar-canvas"
+            style={{ visibility: avatarStatus === 'ready' ? 'visible' : 'hidden' }}
+            role="img"
+            aria-label="검수 모델 두 개: 왼쪽 사지와 몸통 관찰, 오른쪽 비교 모델. 올바른 시범과 판정은 아직 연결되지 않았습니다."
+            aria-describedby="coaching-avatar-status"
+          />
+          <div
+            className="coaching-scene-pending"
+            hidden={avatarStatus === 'ready'}
+            role={avatarStatus === 'error' ? 'alert' : 'status'}
+          >
             <span className="coaching-connection-dot" aria-hidden="true" />
-            <p>아바타 연결 대기</p>
-            <p className="small muted">최종 아바타·동작 검증 후 연결됩니다</p>
+            <p>
+              {avatarStatus === 'waiting'
+                ? '신체 입력을 기다리고 있습니다'
+                : avatarStatus === 'loading'
+                  ? '검수 모델 연결 중'
+                  : avatarStatus === 'error'
+                    ? '모델 연결 실패 · 카메라를 다시 확인해 주세요'
+                    : '카메라 입력 후 모델이 연결됩니다'}
+            </p>
           </div>
+          <p id="coaching-avatar-status" className="coaching-avatar-status small muted">
+            미완성 검수 모델 · 사지/몸통 표시 · 시범·판정 꺼짐
+          </p>
         </section>
         <div className="coaching-footer">
           {id !== null && !motion ? (
             <p role="status">동작을 다시 선택해 주세요.</p>
           ) : (
-            <CameraPreparation key={motion?.id ?? 'unselected'} motion={motion} />
+            <CameraPreparation
+              key={motion?.id ?? 'unselected'}
+              motion={motion}
+              avatar={{ canvas: avatarCanvas, gender, view, onState: setAvatarStatus }}
+            />
           )}
           <div className="coaching-actions">
             <button className="button primary" type="button" disabled>
@@ -258,7 +287,10 @@ export function CoachingPage() {
         </label>
         <label>
           아바타 형태
-          <select value={gender} onChange={(event) => setGender(event.target.value)}>
+          <select
+            value={gender}
+            onChange={(event) => setGender(event.target.value as AvatarGender)}
+          >
             <option value="male">남성</option>
             <option value="female">여성</option>
           </select>

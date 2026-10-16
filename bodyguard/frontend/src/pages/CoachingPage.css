@@ -111,6 +111,21 @@
   gap: 8px;
   text-align: center;
 }
+.coaching-scene-pending[hidden] {
+  display: none;
+}
+.coaching-avatar-canvas {
+  position: absolute;
+  inset: 72px 0 32px;
+  width: 100%;
+  height: calc(100% - 104px);
+}
+.coaching-avatar-status {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
 .coaching-connection-dot {
   width: 8px;
   height: 8px;

@@ -1,15 +1,47 @@
 // FR-M-01/02/07·NFR-08: actual React + native fake-camera/SDK; controlled account API.
 import assert from 'node:assert/strict'
-import { existsSync, writeFileSync } from 'node:fs'
+import { execFileSync } from 'node:child_process'
+import { createHash } from 'node:crypto'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { createServer as createHTTPServer } from 'node:http'
+import { resolve } from 'node:path'
 import { chromium } from '@playwright/test'
 import { createServer, mergeConfig } from 'vite'
 import config from '../vite.config.ts'
 
-const [scratch, executable, label] = process.argv.slice(2)
+const [scratch, executable, label, variant] = process.argv.slice(2)
+const sourceFiles = [
+  'src/pages/CameraPreparation.tsx',
+  'src/pose/cameraPreparation.ts',
+  'src/pose/workerInference.ts',
+  'src/pose/nativeInference.worker.ts',
+  'scripts/test-camera-preparation.mjs',
+  'scripts/dev-inference-worker.ts',
+  'pnpm-lock.yaml',
+]
+const snapshot = () =>
+  Object.fromEntries(
+    sourceFiles.map((path) => [
+      path,
+      createHash('sha256').update(readFileSync(path)).digest('hex'),
+    ]),
+  )
+const sourceBefore = snapshot()
+assert(variant === undefined || variant === 'baseline-main-camera')
+const baseline = variant
+  ? execFileSync(
+      'git',
+      [
+        'show',
+        '8675f72da7070851379c43d4d8e40d9995cadd6d:bodyguard/frontend/src/pages/CameraPreparation.tsx',
+      ],
+      { encoding: 'utf8' },
+    )
+  : null
 assert(/^\/private\/tmp\/bodyguard-camera-preparation\.[A-Za-z0-9]+$/.test(scratch))
 assert(/^[a-z][a-z0-9-]+$/.test(label) && !existsSync(`${scratch}/${label}.json`))
 let account = 'ready',
+  page,
   browser,
   failure,
   external = 0,
@@ -38,6 +70,17 @@ const server = await createServer(
   mergeConfig(config, {
     configFile: false,
     envDir: scratch,
+    plugins: baseline
+      ? [
+          {
+            name: 'immutable-main-camera-comparison',
+            enforce: 'pre',
+            load(id) {
+              if (id.split('?')[0] === resolve('src/pages/CameraPreparation.tsx')) return baseline
+            },
+          },
+        ]
+      : [],
     server: {
       host: '127.0.0.1',
       port: 0,
@@ -48,6 +91,7 @@ const server = await createServer(
   }),
 )
 let visibleError,
+  workerMessages = [],
   syntaxError = false
 try {
   await server.listen()
@@ -67,7 +111,32 @@ try {
   })
   await context.addInitScript(() => {
     const actual = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices)
-    window.preparationProbe = { calls: 0, streams: [], mode: 'normal', release: null }
+    window.preparationProbe = { calls: 0, streams: [], mode: 'normal', release: null, messages: [] }
+    const NativeWorker = Worker
+    const note = (direction, data) => {
+      const p = window.preparationProbe
+      if (p.messages.length < 100)
+        p.messages.push({
+          direction,
+          type: ['init', 'infer', 'close', 'ready', 'result', 'closed', 'error'].includes(
+            data?.type,
+          )
+            ? data.type
+            : 'other',
+          clean: typeof data?.clean === 'boolean' ? data.clean : null,
+          at: performance.now(),
+        })
+    }
+    window.Worker = class extends NativeWorker {
+      constructor(...args) {
+        super(...args)
+        this.addEventListener('message', (event) => note('receive', event.data))
+      }
+      postMessage(...args) {
+        note('send', args[0])
+        return super.postMessage(...args)
+      }
+    }
     navigator.mediaDevices.getUserMedia = async (options) => {
       const p = window.preparationProbe
       p.calls++
@@ -81,7 +150,7 @@ try {
       return stream
     }
   })
-  const page = await context.newPage()
+  page = await context.newPage()
   context.on('request', (request) => {
     if (new URL(request.url()).origin !== new URL(origin).origin) external++
     if (/\.glb(?:\?|$)/.test(request.url())) avatars++
@@ -94,8 +163,10 @@ try {
   await page.getByRole('button', { name: '카메라 확인', exact: true }).waitFor()
   assert.equal(await page.evaluate(() => window.preparationProbe.calls), 0)
   assert.equal(page.workers().length, 0)
-  assert.equal(await page.locator('video,canvas').count(), 0)
-  cases.push('initial: camera/worker/video/canvas0')
+  assert.equal(await page.locator('video').count(), 0)
+  assert.equal(await page.locator('canvas').count(), 1)
+  assert.equal(await page.locator('canvas').isVisible(), false)
+  cases.push('initial: camera/worker/video/GLB requests0; inactive accessible canvas only')
   const panel = page.getByRole('region', { name: '카메라 준비 확인' })
   const ended = async () => {
     await page.waitForFunction(() =>
@@ -231,10 +302,36 @@ try {
   assert.equal(external, 0)
   assert.equal(avatars, 0)
   assert.equal(errors.length, 0)
+  workerMessages = await page.evaluate(() => window.preparationProbe.messages)
+  assert(
+    workerMessages.some((message) => message.type === 'closed' && message.clean === true),
+    'Actual Worker close acknowledgement must be recorded before closing the context',
+  )
   await context.close()
 } catch (e) {
   failure = { name: e.name, message: e.message.split('\n')[0] }
 } finally {
+  let failureState
+  if (page && !page.isClosed()) {
+    try {
+      workerMessages = await page.evaluate(() => window.preparationProbe?.messages ?? [])
+    } catch {
+      /* No raw worker errors/results. */
+    }
+  }
+  if (failure && page && !page.isClosed()) {
+    try {
+      failureState = {
+        panel: await page.getByRole('region', { name: '카메라 준비 확인' }).innerText(),
+        workers: page.workers().length,
+        tracks: await page.evaluate(() =>
+          window.preparationProbe.streams.map((s) => s.getTracks().map((t) => t.readyState)),
+        ),
+      }
+    } catch {
+      /* Fixed state only. */
+    }
+  }
   await browser?.close()
   await server.close()
   api.closeAllConnections()
@@ -245,6 +342,12 @@ try {
       {
         method:
           'actual React/Chrome/Vite + actual SDK/native fake camera; controlled account API and explicitly synthetic fault/401 triggers',
+        variant: variant ?? 'working-source',
+        baselineSha256: baseline ? createHash('sha256').update(baseline).digest('hex') : null,
+        workerMessages,
+        sourceBefore,
+        sourceAfter: snapshot(),
+        failureState,
         cases,
         external,
         avatars,
