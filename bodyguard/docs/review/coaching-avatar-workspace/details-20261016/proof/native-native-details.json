@@ -1,0 +1,84 @@
+{
+  "method": "actual React/Chrome/Vite + actual SDK/native fake camera; controlled account API and explicitly synthetic fault/401 triggers",
+  "variant": "working-source",
+  "baselineSha256": null,
+  "workerMessages": [
+    {
+      "direction": "send",
+      "type": "init",
+      "clean": null,
+      "at": 1089.7999999821186
+    },
+    {
+      "direction": "receive",
+      "type": "ready",
+      "clean": null,
+      "at": 1468.199999988079
+    },
+    {
+      "direction": "send",
+      "type": "other",
+      "clean": null,
+      "at": 1468.2999999821186
+    },
+    {
+      "direction": "receive",
+      "type": "result",
+      "clean": null,
+      "at": 2016.199999988079
+    },
+    {
+      "direction": "send",
+      "type": "close",
+      "clean": null,
+      "at": 2208.699999988079
+    },
+    {
+      "direction": "receive",
+      "type": "closed",
+      "clean": true,
+      "at": 2587.0999999940395
+    }
+  ],
+  "sourceBefore": {
+    "src/pages/CameraPreparation.tsx": "a52c61451622974304f3e0460cddeea1a60138f01df50770ed7f36471898f13c",
+    "src/pose/cameraPreparation.ts": "5bb9acbe0d27934eec6d650eba6f0ab71e87c85521f413b2309f179cd4ee77e7",
+    "src/pose/workerInference.ts": "c358cc2431c598e7f2ad6911a698a7bb3f468d6d83314edd2f49e2a7192bdf54",
+    "src/pose/nativeInference.worker.ts": "8b92c8b571d3ccd2f7cf53df7df9d418f5b1df74fabe6977f21a537bdb8d1406",
+    "scripts/test-camera-preparation.mjs": "aff0f3a576bfb2a7494d798e7614da30a6b6e560263cb8c966444b06290eb8c5",
+    "scripts/dev-inference-worker.ts": "504d40a5351979cc7bea6f3bfd445446df22670b7dfd7684a10bc903eb1d3478",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "sourceAfter": {
+    "src/pages/CameraPreparation.tsx": "a52c61451622974304f3e0460cddeea1a60138f01df50770ed7f36471898f13c",
+    "src/pose/cameraPreparation.ts": "5bb9acbe0d27934eec6d650eba6f0ab71e87c85521f413b2309f179cd4ee77e7",
+    "src/pose/workerInference.ts": "c358cc2431c598e7f2ad6911a698a7bb3f468d6d83314edd2f49e2a7192bdf54",
+    "src/pose/nativeInference.worker.ts": "8b92c8b571d3ccd2f7cf53df7df9d418f5b1df74fabe6977f21a537bdb8d1406",
+    "scripts/test-camera-preparation.mjs": "aff0f3a576bfb2a7494d798e7614da30a6b6e560263cb8c966444b06290eb8c5",
+    "scripts/dev-inference-worker.ts": "504d40a5351979cc7bea6f3bfd445446df22670b7dfd7684a10bc903eb1d3478",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "cases": [
+    "initial: camera/worker/video/GLB requests0; inactive accessible canvas only",
+    "actual document + actual SDK Worker external fetch blocked by native connect-src violation",
+    "native fake-camera + actual heavy body/face/hands Worker: first inference/discard → explicit stop, tracks/worker ended",
+    "synthetic camera denial → fixed recoverable error, no worker",
+    "synthetically held native stream: cancel → late result closed, no SDK readiness",
+    "fresh explicit native preparation → actual router exit releases",
+    "actual SPA route remount waits for synthetically held native permission; late stream ends, no auto reacquisition",
+    "actual AuthProvider controlled401 refresh → private UI removed, native resources ended"
+  ],
+  "external": 0,
+  "avatars": 0,
+  "errors": [],
+  "syntaxError": false,
+  "failure": null,
+  "notProven": [
+    "real participants/body accuracy",
+    "real permission popup denial",
+    "SQL/provider auth",
+    "avatar/GLB/deformation",
+    "clinical judgement/startup P2 resolution",
+    "public coaching/production deployment"
+  ]
+}

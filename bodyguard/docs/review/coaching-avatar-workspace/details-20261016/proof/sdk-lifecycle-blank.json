@@ -1,0 +1,535 @@
+{
+  "method": "actual Chrome/SDK heavy+face+hands; generated blank input; private metadata instrumentation; fresh documents, shared browser and worker bundle cache",
+  "version": "155.0.8059.80",
+  "before": {
+    "src/pose/workerNativeEngine.ts": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+    "src/pose/workerInference.ts": "c358cc2431c598e7f2ad6911a698a7bb3f468d6d83314edd2f49e2a7192bdf54",
+    "src/pose/workerInferenceRuntime.ts": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+    "e2e/fixtures/sdkLifecycle.worker.ts": "887c23dc79e37b3344d71d2e076c402b833b14af220599364e07b9dca910e55c",
+    "e2e/fixtures/sdkLifecycleProbe.ts": "3932dae6cfd7d6397de16318de373815d3e3b19a5c1d1ede85745c649d0ee598",
+    "scripts/test-sdk-lifecycle.mjs": "2a7d51461e7a5ea394f1a6344ad7ff68a4cf58026903158a4054f03b99d10052",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "after": {
+    "src/pose/workerNativeEngine.ts": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+    "src/pose/workerInference.ts": "c358cc2431c598e7f2ad6911a698a7bb3f468d6d83314edd2f49e2a7192bdf54",
+    "src/pose/workerInferenceRuntime.ts": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+    "e2e/fixtures/sdkLifecycle.worker.ts": "887c23dc79e37b3344d71d2e076c402b833b14af220599364e07b9dca910e55c",
+    "e2e/fixtures/sdkLifecycleProbe.ts": "3932dae6cfd7d6397de16318de373815d3e3b19a5c1d1ede85745c649d0ee598",
+    "scripts/test-sdk-lifecycle.mjs": "2a7d51461e7a5ea394f1a6344ad7ff68a4cf58026903158a4054f03b99d10052",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "runs": [
+    {
+      "cancelAt": "none",
+      "state": "ready-and-read",
+      "failure": null,
+      "counts": {
+        "bodies": 0,
+        "worlds": 0,
+        "hands": 0,
+        "head": false
+      },
+      "created": 1,
+      "terminated": 1,
+      "events": [
+        {
+          "task": "parent",
+          "phase": "send-init",
+          "at": 1792144614583.5999
+        },
+        {
+          "task": "runtime",
+          "phase": "receive-init",
+          "delegate": null,
+          "error": null,
+          "at": 1792144614636.2
+        },
+        {
+          "task": "body",
+          "phase": "create-begin",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144614640.7
+        },
+        {
+          "task": "body",
+          "phase": "create-done",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144614936.9
+        },
+        {
+          "task": "face",
+          "phase": "create-begin",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144614937.0999
+        },
+        {
+          "task": "face",
+          "phase": "create-done",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144615026.2
+        },
+        {
+          "task": "hands",
+          "phase": "create-begin",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144615026.2998
+        },
+        {
+          "task": "hands",
+          "phase": "create-done",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144615137.7
+        },
+        {
+          "task": "runtime",
+          "phase": "ready",
+          "delegate": null,
+          "error": null,
+          "at": 1792144615137.9
+        },
+        {
+          "task": "parent",
+          "phase": "receive-ready",
+          "clean": false,
+          "at": 1792144615137.7998
+        },
+        {
+          "task": "parent",
+          "phase": "send-frame",
+          "at": 1792144615142.9
+        },
+        {
+          "task": "runtime",
+          "phase": "receive-frame",
+          "delegate": null,
+          "error": null,
+          "at": 1792144615143.0999
+        },
+        {
+          "task": "parent",
+          "phase": "receive-result",
+          "clean": false,
+          "at": 1792144616161.5
+        },
+        {
+          "task": "parent",
+          "phase": "send-close",
+          "at": 1792144616161.7
+        },
+        {
+          "task": "runtime",
+          "phase": "receive-close",
+          "delegate": null,
+          "error": null,
+          "at": 1792144616165.0999
+        },
+        {
+          "task": "hands",
+          "phase": "close-begin",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144616165.5999
+        },
+        {
+          "task": "hands",
+          "phase": "close-done",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144616491.2998
+        },
+        {
+          "task": "face",
+          "phase": "close-begin",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144616491.4
+        },
+        {
+          "task": "face",
+          "phase": "close-done",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144616711.0999
+        },
+        {
+          "task": "body",
+          "phase": "close-begin",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144616711.0999
+        },
+        {
+          "task": "body",
+          "phase": "close-done",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144616716.5999
+        },
+        {
+          "task": "runtime",
+          "phase": "closed",
+          "delegate": null,
+          "error": null,
+          "at": 1792144616717
+        },
+        {
+          "task": "parent",
+          "phase": "receive-closed",
+          "clean": true,
+          "at": 1792144616717
+        }
+      ],
+      "actualCamera": false,
+      "actualPeople": false,
+      "passed": true
+    },
+    {
+      "cancelAt": "body",
+      "state": "cancelled",
+      "failure": "unavailable",
+      "created": 1,
+      "terminated": 1,
+      "events": [
+        {
+          "task": "parent",
+          "phase": "send-init",
+          "at": 1792144617322.4001
+        },
+        {
+          "task": "runtime",
+          "phase": "receive-init",
+          "delegate": null,
+          "error": null,
+          "at": 1792144617322.9
+        },
+        {
+          "task": "body",
+          "phase": "create-begin",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144617324
+        },
+        {
+          "task": "parent",
+          "phase": "abort-request",
+          "at": 1792144617324
+        },
+        {
+          "task": "parent",
+          "phase": "send-close",
+          "at": 1792144617324.1
+        },
+        {
+          "task": "runtime",
+          "phase": "receive-close",
+          "delegate": null,
+          "error": null,
+          "at": 1792144617345.2
+        },
+        {
+          "task": "body",
+          "phase": "create-done",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144617549.6
+        },
+        {
+          "task": "body",
+          "phase": "close-begin",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144617549.7
+        },
+        {
+          "task": "body",
+          "phase": "close-done",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144618070.6
+        },
+        {
+          "task": "runtime",
+          "phase": "closed",
+          "delegate": null,
+          "error": null,
+          "at": 1792144618071.3
+        },
+        {
+          "task": "parent",
+          "phase": "receive-closed",
+          "clean": true,
+          "at": 1792144618071.4001
+        }
+      ],
+      "actualCamera": false,
+      "actualPeople": false,
+      "passed": true
+    },
+    {
+      "cancelAt": "face",
+      "state": "cancelled",
+      "failure": "unavailable",
+      "created": 1,
+      "terminated": 1,
+      "events": [
+        {
+          "task": "parent",
+          "phase": "send-init",
+          "at": 1792144618592.9
+        },
+        {
+          "task": "runtime",
+          "phase": "receive-init",
+          "delegate": null,
+          "error": null,
+          "at": 1792144618593.6
+        },
+        {
+          "task": "body",
+          "phase": "create-begin",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144618594.9001
+        },
+        {
+          "task": "body",
+          "phase": "create-done",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144618840.6
+        },
+        {
+          "task": "face",
+          "phase": "create-begin",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144618840.6
+        },
+        {
+          "task": "parent",
+          "phase": "abort-request",
+          "at": 1792144618840.5999
+        },
+        {
+          "task": "parent",
+          "phase": "send-close",
+          "at": 1792144618840.9
+        },
+        {
+          "task": "runtime",
+          "phase": "receive-close",
+          "delegate": null,
+          "error": null,
+          "at": 1792144618843.3
+        },
+        {
+          "task": "face",
+          "phase": "create-done",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144618913.1
+        },
+        {
+          "task": "face",
+          "phase": "close-begin",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144618913.2
+        },
+        {
+          "task": "face",
+          "phase": "close-done",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144619234.4001
+        },
+        {
+          "task": "body",
+          "phase": "close-begin",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144619234.4001
+        },
+        {
+          "task": "body",
+          "phase": "close-done",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144619679
+        },
+        {
+          "task": "runtime",
+          "phase": "closed",
+          "delegate": null,
+          "error": null,
+          "at": 1792144619679.3
+        },
+        {
+          "task": "parent",
+          "phase": "receive-closed",
+          "clean": true,
+          "at": 1792144619679.4
+        }
+      ],
+      "actualCamera": false,
+      "actualPeople": false,
+      "passed": true
+    },
+    {
+      "cancelAt": "hands",
+      "state": "cancelled",
+      "failure": "unavailable",
+      "created": 1,
+      "terminated": 1,
+      "events": [
+        {
+          "task": "parent",
+          "phase": "send-init",
+          "at": 1792144620257.6
+        },
+        {
+          "task": "runtime",
+          "phase": "receive-init",
+          "delegate": null,
+          "error": null,
+          "at": 1792144620258.3
+        },
+        {
+          "task": "body",
+          "phase": "create-begin",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144620259.5
+        },
+        {
+          "task": "body",
+          "phase": "create-done",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144620498
+        },
+        {
+          "task": "face",
+          "phase": "create-begin",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144620498.2
+        },
+        {
+          "task": "face",
+          "phase": "create-done",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144620574.4
+        },
+        {
+          "task": "hands",
+          "phase": "create-begin",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144620574.4
+        },
+        {
+          "task": "parent",
+          "phase": "abort-request",
+          "at": 1792144620574.5
+        },
+        {
+          "task": "parent",
+          "phase": "send-close",
+          "at": 1792144620574.7
+        },
+        {
+          "task": "runtime",
+          "phase": "receive-close",
+          "delegate": null,
+          "error": null,
+          "at": 1792144620577.3
+        },
+        {
+          "task": "hands",
+          "phase": "create-done",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144620666.3
+        },
+        {
+          "task": "hands",
+          "phase": "close-begin",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144620666.5
+        },
+        {
+          "task": "hands",
+          "phase": "close-done",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144621057.8
+        },
+        {
+          "task": "face",
+          "phase": "close-begin",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144621057.9
+        },
+        {
+          "task": "face",
+          "phase": "close-done",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144621311
+        },
+        {
+          "task": "body",
+          "phase": "close-begin",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144621311.0999
+        },
+        {
+          "task": "body",
+          "phase": "close-done",
+          "delegate": "GPU",
+          "error": null,
+          "at": 1792144621710.3
+        },
+        {
+          "task": "runtime",
+          "phase": "closed",
+          "delegate": null,
+          "error": null,
+          "at": 1792144621710.5
+        },
+        {
+          "task": "parent",
+          "phase": "receive-closed",
+          "clean": true,
+          "at": 1792144621710.6
+        }
+      ],
+      "actualCamera": false,
+      "actualPeople": false,
+      "passed": true
+    }
+  ],
+  "external": 0,
+  "cameraRequests": 0,
+  "errors": [],
+  "failure": null,
+  "notProven": [
+    "real people/pose accuracy",
+    "original intermittent P2 root cause",
+    "cold driver/cache performance",
+    "correct stretching/reference/recommendation",
+    "production deployment"
+  ]
+}

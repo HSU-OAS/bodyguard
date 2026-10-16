@@ -1,0 +1,47 @@
+{
+  "method": "actual React/Chrome/Vite + actual SDK/native fake camera; controlled account API and explicitly synthetic fault/401 triggers",
+  "variant": "working-source",
+  "baselineSha256": null,
+  "workerMessages": [],
+  "sourceBefore": {
+    "src/pages/CameraPreparation.tsx": "3b4283c2d6ba2f96d95b75c07f709720c63ff0f85975c16de8f950f32598f01c",
+    "src/pose/cameraPreparation.ts": "5bb9acbe0d27934eec6d650eba6f0ab71e87c85521f413b2309f179cd4ee77e7",
+    "src/pose/workerInference.ts": "c358cc2431c598e7f2ad6911a698a7bb3f468d6d83314edd2f49e2a7192bdf54",
+    "src/pose/nativeInference.worker.ts": "8b92c8b571d3ccd2f7cf53df7df9d418f5b1df74fabe6977f21a537bdb8d1406",
+    "scripts/test-camera-preparation.mjs": "6384c72b771ad4d0df7997f79c91627ce393db9886e4b9fa388fa1e377773ad6",
+    "scripts/dev-inference-worker.ts": "504d40a5351979cc7bea6f3bfd445446df22670b7dfd7684a10bc903eb1d3478",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "sourceAfter": {
+    "src/pages/CameraPreparation.tsx": "3b4283c2d6ba2f96d95b75c07f709720c63ff0f85975c16de8f950f32598f01c",
+    "src/pose/cameraPreparation.ts": "5bb9acbe0d27934eec6d650eba6f0ab71e87c85521f413b2309f179cd4ee77e7",
+    "src/pose/workerInference.ts": "c358cc2431c598e7f2ad6911a698a7bb3f468d6d83314edd2f49e2a7192bdf54",
+    "src/pose/nativeInference.worker.ts": "8b92c8b571d3ccd2f7cf53df7df9d418f5b1df74fabe6977f21a537bdb8d1406",
+    "scripts/test-camera-preparation.mjs": "6384c72b771ad4d0df7997f79c91627ce393db9886e4b9fa388fa1e377773ad6",
+    "scripts/dev-inference-worker.ts": "504d40a5351979cc7bea6f3bfd445446df22670b7dfd7684a10bc903eb1d3478",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "cases": [
+    "initial: camera/worker/video/GLB requests0; inactive accessible canvas only",
+    "actual document + actual SDK Worker external fetch blocked by native connect-src violation",
+    "native fake-camera + actual heavy body/face/hands Worker: first inference/discard → explicit stop, tracks/worker ended",
+    "synthetic camera denial → fixed recoverable error, no worker",
+    "synthetically held native stream: cancel → late result closed, no SDK readiness",
+    "fresh explicit native preparation → actual router exit releases",
+    "actual SPA route remount waits for synthetically held native permission; late stream ends, no auto reacquisition",
+    "actual AuthProvider controlled401 refresh → private UI removed, native resources ended"
+  ],
+  "external": 0,
+  "avatars": 0,
+  "errors": [],
+  "syntaxError": false,
+  "failure": null,
+  "notProven": [
+    "real participants/body accuracy",
+    "real permission popup denial",
+    "SQL/provider auth",
+    "avatar/GLB/deformation",
+    "clinical judgement/startup P2 resolution",
+    "public coaching/production deployment"
+  ]
+}

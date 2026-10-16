@@ -42,7 +42,9 @@ it('changes display framing without enabling camera, verdict, timer or reference
   )
   expect(screen.getByRole('button', { name: '코칭 준비 중' }).hasAttribute('disabled')).toBe(true)
   expect(screen.getByRole('button', { name: '전체 시범' }).hasAttribute('disabled')).toBe(true)
-  expect(document.querySelectorAll('video, canvas')).toHaveLength(0)
+  expect(document.querySelectorAll('video')).toHaveLength(0)
+  expect(document.querySelectorAll('canvas')).toHaveLength(1)
+  expect(screen.getByText('카메라 입력 후 모델이 연결됩니다')).toBeDefined()
   expect(fetcher.mock.calls.map((call) => call[0])).toEqual(['/api/v1/me'])
 })
 it('unknown motion does not silently become a successful or default motion', async () => {

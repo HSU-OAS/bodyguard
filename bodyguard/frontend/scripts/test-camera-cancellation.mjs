@@ -101,7 +101,9 @@ try {
     )
     assert.equal(page.workers().length, 0)
     assert.equal(await page.evaluate(() => localStorage.length + sessionStorage.length), 0)
-    assert.equal(await page.locator('video,canvas').count(), 0)
+    assert.equal(await page.locator('video').count(), 0)
+    assert.equal(await page.locator('canvas').count(), 1)
+    assert.equal(await page.locator('canvas').isVisible(), false)
   }
   phase = 'explicit-prepare-cancel'
   await page.goto(`${origin}dev/coaching?motion=neck-side`)

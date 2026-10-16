@@ -25,6 +25,9 @@ for (const file of files) {
     'CoachingPage',
     'CameraPreparation',
     'Camera preparation unavailable',
+    'Workspace avatar unavailable',
+    '/__bodyguard/review-avatar/',
+    '미완성 검수 모델',
     '/__bodyguard/inference-worker.js',
     '카메라·분석 연결 확인됨',
     '연속 입력 확인 중',
@@ -154,6 +157,10 @@ for (const file of files) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)
   }
 }
+assert(
+  !readdirSync(join(root, '..'), { recursive: true }).some((name) => String(name).endsWith('.glb')),
+  'Unapproved review GLB leaked into the production output',
+)
 console.log(
   JSON.stringify({
     production_JS_files_checked: files.length,

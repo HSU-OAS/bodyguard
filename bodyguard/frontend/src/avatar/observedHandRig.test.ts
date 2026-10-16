@@ -7,6 +7,7 @@ import {
   createObservedHandRig,
   HAND_RIG_BINDINGS,
   type HandObservation,
+  readHandCameraReferences,
 } from './observedHandRig'
 import { createObservedPoseRig } from './observedPoseRig'
 
@@ -98,6 +99,43 @@ function body(value: HandObservation[], sequence = 1, at = 100) {
 }
 
 describe('owned hand display', () => {
+  it.each([false, true])(
+    'explicit non-identity palm reference cancels only display offset, mirror=%s',
+    (mirror) => {
+      const f = fixture(),
+        abort = new AbortController()
+      const references = readHandCameraReferences(hands(0.35))
+      expect(references).not.toBeNull()
+      if (!references) throw new Error('Generated palm reference missing')
+      const rig = createObservedHandRig(f.model, {
+        context: { generation: 1, signal: abort.signal },
+        ...alignment(),
+        cameraReferences: references,
+        mirror,
+        halfLifeMs: 50,
+        maxAgeMs: 250,
+      })
+      send(rig, hands(0.35))
+      rig.render(100, 0)
+      for (const side of ['L', 'R'])
+        expect(
+          f.objects
+            .get(`wrist${side}`)
+            ?.getWorldQuaternion(new Quaternion())
+            .angleTo(new Quaternion()),
+        ).toBeLessThan(1e-6)
+      send(rig, hands(0.7), 2, 110)
+      rig.render(110, 1000)
+      for (const side of ['L', 'R'])
+        expect(
+          f.objects
+            .get(`wrist${side}`)
+            ?.getWorldQuaternion(new Quaternion())
+            .angleTo(new Quaternion()),
+        ).toBeGreaterThan(0.3)
+      rig.dispose()
+    },
+  )
   it('normalizes accepted Float32 quaternion roundoff without changing the supplied calibration', () => {
     const supplied = alignment()
     supplied.sceneFromCamera[3] = 1.000005
