@@ -1,0 +1,31 @@
+{
+  "blender": "5.1.1",
+  "method": "native_fold_core_dissolve_local_beauty_triangulation",
+  "input_sha256": "be038c042c8b29acf53e0877adc085fec92608e230a563b6860914a01f58e068",
+  "passed": false,
+  "appearance_approved": false,
+  "rows": [
+    {
+      "gender": "Male",
+      "before": {
+        "vertices": 131178,
+        "edges": 308715,
+        "faces": 177539,
+        "nonmanifold": 0,
+        "winding": 0,
+        "tiny_faces": 2,
+        "selected_faces": 8328,
+        "selected_negative_y_faces": 31,
+        "selected_dihedral_above_90": 14,
+        "selected_maximum_dihedral_degrees": 176.76812341824638,
+        "whole_professional_mesh_volume_m3": 0.06579641204091018
+      },
+      "removed_core_points": 27,
+      "affected_region_points": 105,
+      "original_core_faces": 110
+    }
+  ],
+  "failure": "AssertionError: Unrelated faces changed",
+  "source_unchanged": true,
+  "candidate_present": false
+}

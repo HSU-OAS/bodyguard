@@ -1,0 +1,74 @@
+{
+  "label": "continuous-alone",
+  "head": "8291d431d6d7202f4ab1f2b8957ec885705130a1",
+  "sourceBefore": {
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "e2e/fixtures/avatarRigProbe.ts": "5ea2f0c88a325ea05732877eb747fce539187b6eea33fc1c44e4d9c733465e6c",
+    "scripts/test-avatar-rig-browser.mjs": "ea530e923be584421f7a2d741c0dc8ec48a5f95dabe6bb036c1455f51194a212",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "assetCommit": null,
+  "candidateDirectory": "/private/tmp/bodyguard-avatar-final.GwZoPJ/glb-continuous",
+  "assetHashes": {
+    "male": "8c3d34b9d12c1d40f2c842c0167bff2c2d6ee72a427162b4c44d62e80bbf59bf",
+    "female": "a9bca83ca4dad075aaef8df8f49be17bba488883485847f6c034114a663e147b"
+  },
+  "actualChrome": true,
+  "actualWebGL": true,
+  "actualCamera": false,
+  "syntheticDirections": true,
+  "releaseAvatar": false,
+  "samples": [
+    {
+      "gender": "male",
+      "passed": false,
+      "initial": {
+        "framing": [
+          {
+            "inside": true
+          },
+          {
+            "inside": true
+          }
+        ],
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          }
+        ],
+        "sourceUnchanged": true,
+        "independent": true,
+        "eightWeightMeshes": [
+          1,
+          1
+        ],
+        "sequence": 1,
+        "calls": 2,
+        "triangles": 524584,
+        "maxDirectionError": 0,
+        "closed": false
+      },
+      "beforeSha": "e45f5ace27fe0e270d45a3d1f54aea15ee2954ef6e646ee29c7e743206e9bd4d"
+    }
+  ],
+  "browser": "155.0.8059.40",
+  "failure": {
+    "name": "TimeoutError",
+    "message": "page.waitForFunction: Timeout 10000ms exceeded."
+  },
+  "sourceAfter": {
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/eightWeightSkin.ts": "b961c5266931c3472a1068844951dd8cbbd183e0ec9e3fb183736b2d721964c7",
+    "e2e/fixtures/avatarRigProbe.ts": "5ea2f0c88a325ea05732877eb747fce539187b6eea33fc1c44e4d9c733465e6c",
+    "scripts/test-avatar-rig-browser.mjs": "ea530e923be584421f7a2d741c0dc8ec48a5f95dabe6bb036c1455f51194a212",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  }
+}
