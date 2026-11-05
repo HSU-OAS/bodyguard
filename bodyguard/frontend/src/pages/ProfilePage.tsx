@@ -1,5 +1,5 @@
 import { type FormEvent, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { Link, useSearchParams } from 'react-router'
+import { Link, useNavigate, useSearchParams } from 'react-router'
 import { ApiError } from '../api/auth'
 import { boundRecordRequest } from '../api/recordBinding'
 import { type ReadyAccount, useAuth } from '../auth'
@@ -72,6 +72,8 @@ function asDraft(p: Profile): Draft {
 export function ProfilePage() {
   const { state, refresh } = useAuth()
   const [query] = useSearchParams()
+  const navigate = useNavigate()
+  const onboarding = query.has('next')
   const destination = query.has('next') ? loginDestination(query) : '/account'
   const authority = state.status === 'ready' ? state : null
   const owner = useRef<ReadyAccount | null>(null)
@@ -135,7 +137,7 @@ export function ProfilePage() {
       )
     }
   }
-  async function save(input: Draft) {
+  async function save(input: Draft, continueAfterSave = false) {
     const controller = abort.current
     if (
       !authority ||
@@ -191,6 +193,7 @@ export function ProfilePage() {
         throw new ApiError(503)
       setView({ owner: authority, status: 'saved', profile: response, draft: asDraft(response) })
       setConfirmDelete(false)
+      if (continueAfterSave) navigate(destination, { replace: true })
     } catch (error) {
       if (controller.signal.aborted || owner.current !== authority) return
       if (error instanceof ApiError && [401, 403].includes(error.status)) {
@@ -207,11 +210,19 @@ export function ProfilePage() {
   }
   if (!authority) return null
   return (
-    <section className="profile-screen">
-      <Link className="profile-back" to="/account">
-        ← 내 계정
-      </Link>
-      <p className="profile-kicker">MY BODYGUARD</p>
+    <section className={`profile-screen${onboarding ? ' profile-onboarding' : ''}`}>
+      {onboarding ? (
+        <Link className="figma-login-brand" to="/">
+          BODYGUARD
+        </Link>
+      ) : (
+        <>
+          <Link className="profile-back" to="/account">
+            ← 내 계정
+          </Link>
+          <p className="profile-kicker">MY BODYGUARD</p>
+        </>
+      )}
       <h1 ref={heading} tabIndex={-1}>
         기본 정보
       </h1>
@@ -237,14 +248,14 @@ export function ProfilePage() {
             className="profile-form"
             onSubmit={(event: FormEvent) => {
               event.preventDefault()
-              void save(draft)
+              void save(draft, onboarding)
             }}
             aria-busy={status === 'saving'}
           >
             {invalid && <p role="alert">입력한 값을 확인해 주세요.</p>}
             <fieldset disabled={locked}>
               <label>
-                닉네임
+                이름 또는 닉네임
                 <input
                   value={draft.nickname}
                   maxLength={60}
@@ -253,44 +264,62 @@ export function ProfilePage() {
                 />
               </label>
               <label>
-                나이 <span>세</span>
-                <input
-                  type="number"
-                  min="0"
-                  max="150"
-                  step="1"
-                  inputMode="numeric"
-                  value={draft.age}
-                  placeholder="나이를 입력해 주세요"
-                  onChange={(event) => change({ age: event.target.value })}
-                />
+                나이
+                <span className="profile-input-wrap">
+                  <input
+                    aria-label="나이 세"
+                    type="number"
+                    min="0"
+                    max="150"
+                    step="1"
+                    inputMode="numeric"
+                    value={draft.age}
+                    placeholder="나이를 입력해 주세요"
+                    onChange={(event) => change({ age: event.target.value })}
+                  />
+                  <span className="profile-unit" aria-hidden="true">
+                    세
+                  </span>
+                </span>
               </label>
               <div className="profile-pair">
                 <label>
-                  키 <span>cm</span>
-                  <input
-                    type="number"
-                    min="0.01"
-                    max="1000"
-                    step="any"
-                    inputMode="decimal"
-                    value={draft.height_cm}
-                    placeholder="선택 입력"
-                    onChange={(event) => change({ height_cm: event.target.value })}
-                  />
+                  키
+                  <span className="profile-input-wrap">
+                    <input
+                      aria-label="키 cm"
+                      type="number"
+                      min="0.01"
+                      max="1000"
+                      step="any"
+                      inputMode="decimal"
+                      value={draft.height_cm}
+                      placeholder="선택 입력"
+                      onChange={(event) => change({ height_cm: event.target.value })}
+                    />
+                    <span className="profile-unit" aria-hidden="true">
+                      cm
+                    </span>
+                  </span>
                 </label>
                 <label>
-                  몸무게 <span>kg</span>
-                  <input
-                    type="number"
-                    min="0.01"
-                    max="1000"
-                    step="any"
-                    inputMode="decimal"
-                    value={draft.weight_kg}
-                    placeholder="선택 입력"
-                    onChange={(event) => change({ weight_kg: event.target.value })}
-                  />
+                  몸무게
+                  <span className="profile-input-wrap">
+                    <input
+                      aria-label="몸무게 kg"
+                      type="number"
+                      min="0.01"
+                      max="1000"
+                      step="any"
+                      inputMode="decimal"
+                      value={draft.weight_kg}
+                      placeholder="선택 입력"
+                      onChange={(event) => change({ weight_kg: event.target.value })}
+                    />
+                    <span className="profile-unit" aria-hidden="true">
+                      kg
+                    </span>
+                  </span>
                 </label>
               </div>
               <fieldset className="profile-gender">
@@ -316,15 +345,10 @@ export function ProfilePage() {
                 </div>
               </fieldset>
               <button className="button primary profile-save" type="submit">
-                {status === 'saving' ? '저장 중…' : '저장하기'}
+                {status === 'saving' ? '저장 중…' : onboarding ? '다음' : '저장하기'}
               </button>
             </fieldset>
             <p role="status">{status === 'saved' ? '기본 정보를 저장했습니다.' : ''}</p>
-            {status === 'saved' && query.has('next') && (
-              <p>
-                <Link to={destination}>다음</Link>
-              </p>
-            )}
             {(status === 'uncertain' || status === 'conflict') && (
               <div role="alert">
                 <p>
@@ -342,7 +366,7 @@ export function ProfilePage() {
                 </button>
               </div>
             )}
-            {!locked && (
+            {!locked && !onboarding && (
               <div className="profile-delete">
                 {confirmDelete ? (
                   <>

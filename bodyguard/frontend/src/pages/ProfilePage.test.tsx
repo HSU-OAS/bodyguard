@@ -45,7 +45,7 @@ it('loads only the owned profile and saves explicit optional fields', async () =
   )
   open()
   await screen.findByRole('button', { name: '저장하기' })
-  fireEvent.change(screen.getByLabelText('닉네임'), { target: { value: '가상 사용자' } })
+  fireEvent.change(screen.getByLabelText('이름 또는 닉네임'), { target: { value: '가상 사용자' } })
   fireEvent.change(screen.getByLabelText('나이 세'), { target: { value: '28' } })
   fireEvent.click(screen.getByLabelText('여성'))
   fireEvent.click(screen.getByRole('button', { name: '저장하기' }))
@@ -88,12 +88,13 @@ it.each([409, 503])('save failure %s stops editing and requires a fresh read', a
   await screen.findByRole('alert')
   expect(document.body.textContent).not.toContain('private fixture')
   expect(
-    (screen.getByLabelText('닉네임').closest('fieldset') as HTMLFieldSetElement).disabled,
+    (screen.getByLabelText('이름 또는 닉네임').closest('fieldset') as HTMLFieldSetElement).disabled,
   ).toBe(true)
   fireEvent.click(screen.getByRole('button', { name: '다시 불러오기' }))
   await waitFor(() =>
     expect(
-      (screen.getByLabelText('닉네임').closest('fieldset') as HTMLFieldSetElement).disabled,
+      (screen.getByLabelText('이름 또는 닉네임').closest('fieldset') as HTMLFieldSetElement)
+        .disabled,
     ).toBe(false),
   )
   expect(calls.mock.calls.filter(([, init]) => init?.method === 'POST')).toHaveLength(1)
@@ -156,4 +157,29 @@ it('email signup opens the optional profile and skipping keeps the original dest
   )
   fireEvent.click(screen.getByRole('link', { name: '나중에 하기' }))
   await screen.findByRole('heading', { name: '내 몸을 위한 시작' })
+})
+
+it('onboarding saves explicitly and continues to the safe destination', async () => {
+  const calls = network(async (init) =>
+    init?.method === 'POST' ? json({ ...JSON.parse(String(init.body)), revision: 1 }) : json(empty),
+  )
+  open('/account/profile?next=%2Fstart')
+  await screen.findByRole('button', { name: '다음' })
+  fireEvent.change(screen.getByLabelText('이름 또는 닉네임'), { target: { value: '가상 사용자' } })
+  fireEvent.click(screen.getByRole('button', { name: '다음' }))
+  await screen.findByRole('heading', { name: '내 몸을 위한 시작' })
+  const post = calls.mock.calls.filter(
+    ([url, init]) => url === '/api/v1/profile' && init?.method === 'POST',
+  )
+  expect(post).toHaveLength(1)
+  expect(JSON.parse(String(post[0][1]?.body)).nickname).toBe('가상 사용자')
+})
+
+it('onboarding does not continue when the save is uncertain', async () => {
+  network(async (init) => (init?.method === 'POST' ? json({}, 503) : json(empty)))
+  open('/account/profile?next=%2Fstart')
+  fireEvent.click(await screen.findByRole('button', { name: '다음' }))
+  await screen.findByText(/저장 결과를 확인하지 못했습니다/)
+  expect(window.location.pathname).toBe('/account/profile')
+  expect(screen.getByRole('button', { name: '다시 불러오기' })).toBeTruthy()
 })
