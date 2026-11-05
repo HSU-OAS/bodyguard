@@ -360,6 +360,9 @@ export function RecordsPage() {
                 </span>
               </div>
             )}
+            {page === 0 && current.value.has_more && (
+              <p className="figma-records-summary">전체 기간 요약은 아직 제공되지 않습니다.</p>
+            )}
             <h2 ref={resultsHeading} tabIndex={-1}>
               {from} — {to}
             </h2>

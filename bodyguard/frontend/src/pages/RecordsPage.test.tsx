@@ -136,6 +136,7 @@ it('switches day/week ranges and shows a total only when the returned list is co
   fireEvent.click(screen.getByRole('button', { name: '기간 조회' }))
   await screen.findByRole('button', { name: '다음 페이지' })
   expect(screen.queryByText('기록 1건')).toBeNull()
+  expect(screen.getByText('전체 기간 요약은 아직 제공되지 않습니다.')).toBeTruthy()
 })
 it('a selected calendar day queries that day without retaining a prior week', async () => {
   stub(async () => json({ items: [], has_more: false }))
