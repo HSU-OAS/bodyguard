@@ -1,4 +1,132 @@
 /* FR-R-03/NFR-08: neutral comparative records, not medical score decoration. */
+/* FR-R-03: Figma MENU-03 with real record data and bounded summaries. */
+.figma-records-layout {
+  display: grid;
+  grid-template-columns: 264px minmax(0, 1fr);
+  align-items: start;
+  gap: 48px;
+}
+.figma-records-menu {
+  display: flex;
+  flex-direction: column;
+  margin-top: 64px;
+  padding: 16px;
+  border: 1px solid #e5e8ec;
+  border-radius: 20px;
+}
+.figma-records-menu > :is(a, button) {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 88px;
+  padding: 0 16px;
+  border: 0;
+  border-bottom: 1px solid #edeff2;
+  background: #fff;
+  color: #263b50;
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+}
+.figma-records-menu img {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+.figma-records-menu small {
+  margin-left: auto;
+  font-size: 10px;
+  white-space: nowrap;
+}
+.figma-records-menu [aria-current="page"] {
+  background: #eff5ff;
+  color: #245fc5;
+  border-radius: 10px;
+  font-weight: 600;
+}
+.figma-records-menu > .figma-records-home {
+  min-height: 44px;
+  justify-content: center;
+  border: 0;
+  border-radius: 10px;
+  background: #f5f7fa;
+  margin-top: 16px;
+}
+.figma-records-period {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 32px;
+}
+.figma-records-period > p {
+  font-size: 20px;
+  font-weight: 600;
+}
+.figma-records-period > fieldset,
+.figma-records-days {
+  display: flex;
+  gap: 8px;
+  border: 0;
+  padding: 0;
+  min-width: 0;
+}
+.figma-records-period button,
+.figma-records-days button {
+  border: 0;
+  border-radius: 10px;
+  min-height: 48px;
+  padding: 8px 16px;
+  background: #f5f7fa;
+  color: #263b50;
+  font: inherit;
+  cursor: pointer;
+}
+.figma-records-period button[aria-pressed="true"],
+.figma-records-days button[aria-pressed="true"] {
+  background: #245fc5;
+  color: #fff;
+}
+.figma-records-days {
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.figma-records-days button {
+  flex: 1;
+  min-width: 72px;
+}
+.figma-records-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 40px;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  background: #eff5ff;
+  color: #1e4273;
+  font-size: 20px;
+  font-weight: 600;
+}
+.records-screen > .eyebrow {
+  display: none;
+}
+.website .records-screen > h1 {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+.records-custom-period {
+  margin-top: 20px;
+}
+.records-custom-period > summary {
+  color: var(--accent);
+  cursor: pointer;
+}
+.records-table-scroll {
+  border: 1px solid #e5e8ec;
+  border-radius: 20px;
+  padding: 16px;
+}
 /* FR-U-05: a distinct, restrained destructive action and wrapping confirmation. */
 .record-deletion {
   margin: 24px 0;
@@ -38,6 +166,9 @@
   flex-wrap: wrap;
   gap: 16px;
   margin: 32px 0;
+}
+.records-custom-period .records-filter {
+  margin-top: 16px;
 }
 .records-filter label {
   display: grid;
