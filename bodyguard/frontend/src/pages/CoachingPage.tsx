@@ -202,6 +202,7 @@ function CoachingPreviewPage() {
               key={`${motion?.id ?? 'unselected'}:${gender}`}
               motion={motion}
               comparison={comparison}
+              avatarReady={preview && referenceStatus === 'ready'}
             />
           )}
           <div className="coaching-actions">

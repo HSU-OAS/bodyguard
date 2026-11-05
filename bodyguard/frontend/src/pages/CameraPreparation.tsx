@@ -36,10 +36,12 @@ let retirementFailed = false
 export function CameraPreparation({
   motion,
   comparison,
+  avatarReady = false,
   recommendation,
 }: {
   motion?: Motion
   comparison?: RefObject<ReferenceStage | null>
+  avatarReady?: boolean
   recommendation?: Readonly<{
     purpose: RecommendationPurpose
     onResult(value: CameraRecommendations | null): void
@@ -51,6 +53,9 @@ export function CameraPreparation({
   const live = useRef(account)
   live.current = account
   const owner = useRef<ReturnType<typeof createCameraPreparation> | null>(null)
+  const actionEpoch = useRef(0)
+  const readyAvatar = useRef(avatarReady)
+  readyAvatar.current = avatarReady
   const [state, setState] = useState<PreparationState>({ phase: 'idle' })
   const [framing, setFraming] = useState<CameraFramingStatus | null>(null)
   const [displayReady, setDisplayReady] = useState(false)
@@ -232,6 +237,7 @@ export function CameraPreparation({
     window.addEventListener('pagehide', stop)
     return () => {
       disposed = true
+      actionEpoch.current++
       intent++
       collectRecommendation.current = null
       cancelCollection.current = null
@@ -277,6 +283,7 @@ export function CameraPreparation({
             (state.phase === 'error' && state.reason === 'cleanup')
           }
           onClick={() => {
+            actionEpoch.current++
             cancelCollection.current?.()
             if (running) void owner.current?.stop()
             else void owner.current?.start()
@@ -292,6 +299,46 @@ export function CameraPreparation({
                   ? '다시 확인'
                   : '카메라 확인'}
         </button>
+        {comparison &&
+          avatarReady &&
+          !running &&
+          state.phase !== 'stopping' &&
+          !(state.phase === 'error' && state.reason === 'cleanup') && (
+            <button
+              type="button"
+              className="button primary"
+              disabled={account.status !== 'ready' || reference.saving === 'authority-error'}
+              onClick={() => {
+                const current = owner.current
+                if (!current || (current.state.phase !== 'idle' && current.state.phase !== 'error'))
+                  return
+                const stage = comparison.current
+                if (!stage) return
+                const epoch = ++actionEpoch.current
+                cancelCollection.current?.()
+                void current
+                  .start()
+                  .then(() => {
+                    if (
+                      actionEpoch.current === epoch &&
+                      owner.current === current &&
+                      live.current === account &&
+                      readyAvatar.current &&
+                      comparison.current === stage &&
+                      document.visibilityState === 'visible' &&
+                      current.state.phase === 'ready'
+                    )
+                      current.observe()
+                  })
+                  .catch(() => {
+                    if (actionEpoch.current === epoch && owner.current === current)
+                      void current.stop()
+                  })
+              }}
+            >
+              카메라로 내 움직임 연결
+            </button>
+          )}
         {input && (
           <button
             type="button"
