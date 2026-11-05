@@ -29,7 +29,7 @@ function open(path = '/dev/coaching', status = 200) {
 it.each([401, 503])('does not open workspace before account authority: %s', async (status) => {
   open('/dev/coaching?motion=neck-side', status)
   await screen.findByRole('heading', {
-    name: status === 401 ? '다시 만나 반갑습니다' : '연결을 확인해 주세요',
+    name: status === 401 ? '로그인' : '연결을 확인해 주세요',
   })
   expect(screen.queryByRole('region', { name: '두 아바타 공간' })).toBeNull()
 })

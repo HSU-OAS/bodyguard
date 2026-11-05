@@ -260,7 +260,9 @@ function Shell() {
     } · BODYGUARD`
   }, [location.pathname, pagePath, focusState])
   return (
-    <div className={`website${Coaching && pagePath === '/dev/coaching' ? ' coaching-layout' : ''}`}>
+    <div
+      className={`website${Coaching && pagePath === '/dev/coaching' ? ' coaching-layout' : ''}${pagePath === '/login' ? ' figma-login-shell' : ''}`}
+    >
       <button
         className="skip-link"
         type="button"

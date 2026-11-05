@@ -1,0 +1,90 @@
+/* FR-U-01/04, NFR-08: Figma AUTH-01 layout with the existing real authentication states. */
+.website.figma-login-shell .site-header,
+.website.figma-login-shell .site-footer {
+  display: none;
+}
+.website.figma-login-shell main {
+  max-width: none;
+  min-height: 100vh;
+  padding: 32px 24px;
+  display: grid;
+  place-items: center;
+}
+.account-layout.figma-login {
+  display: block;
+  min-height: 0;
+  padding: 0;
+  width: min(100%, 384px);
+}
+.figma-login .account-form {
+  max-width: none;
+}
+.figma-login-brand {
+  display: block;
+  color: #245fc5;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 36px;
+  letter-spacing: 0.1px;
+  text-align: center;
+  text-decoration: none;
+  margin-bottom: 48px;
+}
+.website .figma-login h1 {
+  color: #1e3248;
+  font-size: 32px;
+  line-height: 1.5;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+  text-align: center;
+}
+.figma-login .account-form form {
+  margin-top: 32px;
+}
+.figma-login .account-form label {
+  color: #263b50;
+  font-size: 20px;
+  line-height: 1.5;
+  font-weight: 400;
+  margin-top: 24px;
+}
+.figma-login .account-form label:first-child {
+  margin-top: 0;
+}
+.figma-login .account-form input {
+  height: 52px;
+  margin-top: 8px;
+}
+.figma-login .password-input button {
+  top: 21px;
+}
+.figma-login form > .primary {
+  background: #245fc5;
+  min-height: 52px;
+}
+.figma-login form > .primary:hover:not(:disabled) {
+  background: #194c9e;
+}
+.figma-login-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 16px;
+}
+.figma-login-links a {
+  color: #52657a;
+  padding: 10px 0;
+  text-decoration: none;
+}
+.figma-login-links a:last-child {
+  color: #245fc5;
+  font-weight: 600;
+}
+.figma-login .google-option {
+  margin-top: 24px;
+}
+.figma-login .back-link {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+}
