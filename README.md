@@ -38,7 +38,9 @@
 | 기록 | 본인 기록 저장·조회·삭제와 집계 개발·시험 | 실제 코칭 결과 생산·저장과 화면 전체 연결 |
 | 출시·검증 | 격리 환경의 단위·브라우저·API·DB 시험 수행 | 실제 사람·노트북 조건별 정확도·성능, HTTPS·보안·라이선스·전문가 검토 |
 
-공개 테스트 URL은 아직 이 문서에 안내하지 않습니다. 개발 중인 화면과 테스트 방법은 [프런트엔드 안내](bodyguard/frontend/README.md)와 [진행 현황](bodyguard/docs/tasks.md)을 확인하세요.
+**외부 테스트 URL:** [웹캠·아바타 검수용 시제품](https://hsu-oas.github.io/bodyguard/). 노트북 브라우저에서 카메라 권한을 허용해 후보 아바타의 웹캠 입력을 확인할 수 있습니다. 이 페이지는 별도 검수본으로 자세 판정·스트레칭 시범·로그인·기록 저장을 제공하지 않으며, 실제 사용자별 추종 정확도와 최종 아바타 품질도 검증 중입니다. [검수 페이지 설명](bodyguard/pages-preview/README.md)
+
+개발 중인 전체 웹과 테스트 방법은 [프런트엔드 안내](bodyguard/frontend/README.md)와 [기능별 진행 현황](docs/05_10w_review.md)을 확인하세요.
 
 발표 자료에서 제시한 목표는 포즈 인식 15fps 이상, 피드백 지연 1초 이내, 육안 판정 대비 일치율 80% 이상입니다. 이는 목표치이며 실제 서비스의 달성 수치를 뜻하지 않습니다. 동작·기기·촬영 조건별 실측과 사용자 검증이 필요합니다.
 
@@ -107,5 +109,6 @@ pnpm dev
 - [요구사항](bodyguard/docs/prd.md) · [시스템 설계](bodyguard/docs/design.md) · [출시 계획](bodyguard/docs/release-plan.md)
 - [Figma 화면 설계](https://www.figma.com/design/8f6TiE81S5Cu2bjgTuHFeZ/BODYGUARD-%C2%B7-UI-%EC%84%A4%EA%B3%84?node-id=0-1) — UI 시안이며 기능 구현 완료를 의미하지 않습니다.
 - [동작 근거](bodyguard/docs/motion-evidence.md) · [3D 아바타 제작](bodyguard/docs/avatar-production.md)
+- [10주차 리뷰·기능별 진행 현황](docs/05_10w_review.md) · [E2E 테스트 시연 안내](docs/06_e2e_test_guide.md)
 - [검증 기록](bodyguard/docs/review/) · [진행 작업](bodyguard/docs/tasks.md)
 - 프로젝트 코드는 [MIT 라이선스](LICENSE)를 따릅니다. 외부 자산과 라이브러리의 조건은 각각 확인합니다.
