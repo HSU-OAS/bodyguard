@@ -24,6 +24,13 @@ it('기록 UUID·기간과 자세 기록의 기존 페이지를 보존하며 모
   )
   expect(personalDestination('/account?email=DO_NOT_ECHO')).toBe('/account')
 })
+it('개발 코칭 로그인 복귀는 안전한 동작 ID 하나만 보존한다', () => {
+  expect(personalDestination('/dev/coaching?motion=neck-side&token=DO_NOT_ECHO')).toBe(
+    '/dev/coaching?motion=neck-side',
+  )
+  expect(personalDestination('/dev/coaching?motion=neck-side&motion=other')).toBe('/dev/coaching')
+  expect(personalDestination('/dev/coaching?motion=%2F%2Fevil.test')).toBe('/dev/coaching')
+})
 it.each([
   '',
   '/',

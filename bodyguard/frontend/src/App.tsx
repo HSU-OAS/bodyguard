@@ -33,6 +33,13 @@ const Coaching = import.meta.env.DEV
   ? lazy(() => import('./pages/CoachingPage').then((module) => ({ default: module.CoachingPage })))
   : null
 
+// FR-S-06/FR-V-03: Figma layout review remains separate from the public service.
+const FigmaHome = import.meta.env.DEV
+  ? lazy(() =>
+      import('./pages/FigmaHomePage').then((module) => ({ default: module.FigmaHomePage })),
+    )
+  : null
+
 function SessionGate({ children }: { children?: ReactNode }) {
   const { state, refresh, signOut } = useAuth()
   const location = useLocation()
@@ -439,6 +446,12 @@ function Shell() {
 // FR-M-01·07 라우트 이탈은 측정 화면을 실제로 해제하여 카메라를 끈다.
 function AppContent() {
   const location = useLocation()
+  if (FigmaHome && location.pathname === '/dev/figma-home')
+    return (
+      <Suspense fallback={<p role="status">화면을 여는 중입니다</p>}>
+        <FigmaHome />
+      </Suspense>
+    )
   return Demo && location.pathname === '/dev/measure' ? (
     <Suspense fallback={<p role="status">개발 도구를 여는 중입니다</p>}>
       <Demo />
