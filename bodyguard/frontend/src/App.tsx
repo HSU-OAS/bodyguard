@@ -261,7 +261,7 @@ function Shell() {
   }, [location.pathname, pagePath, focusState])
   return (
     <div
-      className={`website${Coaching && pagePath === '/dev/coaching' ? ' coaching-layout' : ''}${pagePath === '/login' || pagePath === '/signup' ? ' figma-login-shell' : ''}`}
+      className={`website${Coaching && pagePath === '/dev/coaching' ? ' coaching-layout' : ''}${['/login', '/signup', '/password/forgot', '/password/reset'].includes(pagePath) ? ' figma-login-shell' : ''}`}
     >
       <button
         className="skip-link"
