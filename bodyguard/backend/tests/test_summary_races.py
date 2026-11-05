@@ -206,7 +206,7 @@ def test_downgrade_waits_for_insert_and_preserves_committed_data(harness):
     h = harness
     h.account()
     proof = h.csrf()
-    inserted, dropping, release = Event(), Event(), Event()
+    inserted, dropping, profile_lock, release = Event(), Event(), Event(), Event()
 
     def after(*args):
         if str(args[2]).startswith("INSERT INTO minute_summaries"):
@@ -216,6 +216,8 @@ def test_downgrade_waits_for_insert_and_preserves_committed_data(harness):
     def before(*args):
         if str(args[2]).startswith("LOCK TABLE minute_summaries IN ACCESS EXCLUSIVE"):
             dropping.set()
+        if str(args[2]).startswith("LOCK TABLE user_profiles IN ACCESS EXCLUSIVE"):
+            profile_lock.set()
 
     event.listen(h.engine, "after_cursor_execute", after)
     event.listen(Engine, "before_cursor_execute", before)
@@ -229,10 +231,11 @@ def test_downgrade_waits_for_insert_and_preserves_committed_data(harness):
                 migration = pool.submit(
                     command.downgrade, Config("alembic.ini"), "0007_account_baselines"
                 )
-                assert dropping.wait(3)
+                assert profile_lock.wait(3)
             finally:
                 release.set()
             assert writing.result(timeout=5).status_code == 201
+            assert dropping.wait(3)
             with pytest.raises(RuntimeError, match="backup"):
                 migration.result(timeout=5)
     finally:

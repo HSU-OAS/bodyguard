@@ -146,7 +146,17 @@ export function AccountPage({ mode }: { mode: 'login' | 'signup' }) {
     }
   }
 
-  if (auth.state.status === 'ready') return <Navigate to={destination} replace />
+  if (auth.state.status === 'ready')
+    return (
+      <Navigate
+        to={
+          mode === 'signup' && verify
+            ? `/account/profile?${new URLSearchParams({ next: destination })}`
+            : destination
+        }
+        replace
+      />
+    )
   const heading = verify ? '이메일을 확인해 주세요' : mode === 'signup' ? '회원가입' : '로그인'
   const googleOption = !verify && (
     <div className="google-option">

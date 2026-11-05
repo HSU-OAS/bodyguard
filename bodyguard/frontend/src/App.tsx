@@ -9,6 +9,7 @@ import { MemberPage } from './pages/MemberPage'
 import { MinuteSummaryPage } from './pages/MinuteSummaryPage'
 import { NotificationPreferencesPage } from './pages/NotificationPreferencesPage'
 import { PasswordPage } from './pages/PasswordPage'
+import { ProfilePage } from './pages/ProfilePage'
 import { RecordsPage } from './pages/RecordsPage'
 import { WithdrawalPage } from './pages/WithdrawalPage'
 
@@ -222,6 +223,7 @@ function Shell() {
       (Coaching && pagePath === '/dev/coaching') ||
       pagePath === '/account/delete' ||
       pagePath === '/account/notifications' ||
+      pagePath === '/account/profile' ||
       pagePath === '/posture-records' ||
       /^\/records(?:\/[^/]+)?$/.test(pagePath)
     )
@@ -305,7 +307,9 @@ function Shell() {
                 className="nav-link"
                 to="/account"
                 aria-current={
-                  /^\/account(?:\/(?:delete|notifications))?$/.test(pagePath) ? 'page' : undefined
+                  /^\/account(?:\/(?:delete|notifications|profile))?$/.test(pagePath)
+                    ? 'page'
+                    : undefined
                 }
               >
                 내 계정
@@ -348,6 +352,14 @@ function Shell() {
             element={
               <SessionGate>
                 <NotificationPreferencesPage />
+              </SessionGate>
+            }
+          />
+          <Route
+            path="/account/profile"
+            element={
+              <SessionGate>
+                <ProfilePage />
               </SessionGate>
             }
           />

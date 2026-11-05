@@ -31,6 +31,7 @@ from app.baselines import register_baselines
 from app.config import Settings
 from app.db import challenges, google_flows, limits, resets, sessions, users
 from app.notification_preferences import register_notification_preferences
+from app.profiles import register_profiles
 from app.readiness import register_readiness
 from app.records import register_records
 from app.security import cleanup, code, digest, keyed, passwords, quota, token
@@ -1010,6 +1011,7 @@ def create_app(
 
     register_records(app, db, now_fn, record_owner, record_deletion_sign, summary_read_binding)
     register_notification_preferences(app, db, record_owner, summary_read_binding)
+    register_profiles(app, db, record_owner, summary_read_binding)
     register_baselines(app, db, now_fn, record_owner, ErrorOut, summary_read_binding)
     register_summaries(
         app, db, now_fn, record_owner, record_deletion_sign, ErrorOut, summary_read_binding

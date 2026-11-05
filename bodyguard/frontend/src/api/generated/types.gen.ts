@@ -197,6 +197,24 @@ export type NotificationPreferences = {
   sound_enabled: boolean
 }
 
+export type ProfileOut = {
+  nickname?: string | null
+  age?: number | null
+  height_cm?: number | null
+  weight_kg?: number | null
+  gender?: 'male' | 'female' | null
+  revision: number
+}
+
+export type ProfileWrite = {
+  nickname?: string | null
+  age?: number | null
+  height_cm?: number | null
+  weight_kg?: number | null
+  gender?: 'male' | 'female' | null
+  revision: number
+}
+
 export type ReadyOut = {
   status: 'ready'
 }
@@ -810,6 +828,66 @@ export type SaveNotificationsApiV1SettingsNotificationsPostResponses = {
 
 export type SaveNotificationsApiV1SettingsNotificationsPostResponse =
   SaveNotificationsApiV1SettingsNotificationsPostResponses[keyof SaveNotificationsApiV1SettingsNotificationsPostResponses]
+
+export type ReadProfileApiV1ProfileGetData = {
+  body?: never
+  headers?: {
+    'X-CSRF-Token'?: string | null
+    'X-Account-ID'?: string | null
+  }
+  path?: never
+  query?: never
+  url: '/api/v1/profile'
+}
+
+export type ReadProfileApiV1ProfileGetErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type ReadProfileApiV1ProfileGetError =
+  ReadProfileApiV1ProfileGetErrors[keyof ReadProfileApiV1ProfileGetErrors]
+
+export type ReadProfileApiV1ProfileGetResponses = {
+  200: ProfileOut
+}
+
+export type ReadProfileApiV1ProfileGetResponse =
+  ReadProfileApiV1ProfileGetResponses[keyof ReadProfileApiV1ProfileGetResponses]
+
+export type SaveProfileApiV1ProfilePostData = {
+  body: ProfileWrite
+  headers?: {
+    'X-CSRF-Token'?: string | null
+    'X-Account-ID'?: string | null
+  }
+  path?: never
+  query?: never
+  url: '/api/v1/profile'
+}
+
+export type SaveProfileApiV1ProfilePostErrors = {
+  400: ErrorOut
+  401: ErrorOut
+  403: ErrorOut
+  422: ErrorOut
+  429: ErrorOut
+  503: ErrorOut
+}
+
+export type SaveProfileApiV1ProfilePostError =
+  SaveProfileApiV1ProfilePostErrors[keyof SaveProfileApiV1ProfilePostErrors]
+
+export type SaveProfileApiV1ProfilePostResponses = {
+  200: ProfileOut
+}
+
+export type SaveProfileApiV1ProfilePostResponse =
+  SaveProfileApiV1ProfilePostResponses[keyof SaveProfileApiV1ProfilePostResponses]
 
 export type ActiveApiV1BaselinesActiveGetData = {
   body?: never

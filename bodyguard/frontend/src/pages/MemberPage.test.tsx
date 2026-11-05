@@ -53,7 +53,9 @@ it('MC-01 keeps essential account meaning within a compact description budget', 
   expect(screen.getByText('기간별로 조회·삭제합니다.')).toBeTruthy()
   expect(screen.getByText('1분별 측정 시간·부위별 편차 조회와 기간별 삭제.')).toBeTruthy()
   expect(screen.getByText(/실제 알림은 연결 전입니다/)).toBeTruthy()
-  expect(screen.getByText('본인 확인 후 계정과 자세·수행 기록을 삭제합니다.')).toBeTruthy()
+  expect(
+    screen.getByText('본인 확인 후 계정과 기본 정보·자세·수행 기록을 삭제합니다.'),
+  ).toBeTruthy()
   for (const [name, href] of [
     ['수행 기록 관리', '/records'],
     ['자세 기록 관리', '/posture-records'],
