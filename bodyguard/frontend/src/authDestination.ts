@@ -34,6 +34,8 @@ export function personalDestination(value: unknown): string | null {
   if (devCoaching) {
     const values = query.getAll('motion')
     if (values.length === 1 && /^[a-z0-9-]{1,80}$/.test(values[0])) safe.set('motion', values[0])
+    const preview = query.getAll('preview')
+    if (safe.has('motion') && preview.length === 1 && preview[0] === '1') safe.set('preview', '1')
   }
   if (path === '/records' || detail || path === '/posture-records') {
     for (const key of ['from', 'to']) {

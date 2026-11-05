@@ -48,7 +48,14 @@ function CoachingPreviewPage() {
   const [query, setQuery] = useState('')
   const [region, setRegion] = useState<Region>('all')
   const [pickerOpen, setPickerOpen] = useState(false)
-  const [previewOwner, setPreviewOwner] = useState<string | null>(null)
+  const [previewOwner, setPreviewOwner] = useState<string | null>(() =>
+    params.getAll('preview').length === 1 &&
+    params.get('preview') === '1' &&
+    motion &&
+    referenceMotion(motion.id)
+      ? `${motion.id}:male`
+      : null,
+  )
   const previewKey = motion ? `${motion.id}:${gender}` : null
   const preview = previewKey !== null && previewOwner === previewKey
   const [referenceStatus, setReferenceStatus] = useState<ReferenceStatus>('loading')

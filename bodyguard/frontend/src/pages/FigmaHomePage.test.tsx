@@ -33,14 +33,14 @@ it('requires a supported candidate and keeps the coaching link in the developmen
   )
   fireEvent.click(screen.getByRole('button', { name: '목 옆 늘리기' }))
   expect(screen.getByRole('link', { name: '코칭 화면 보기' }).getAttribute('href')).toBe(
-    '/dev/coaching?motion=neck-side',
+    '/dev/coaching?motion=neck-side&preview=1',
   )
   expect(screen.getByRole('button', { name: '목 옆 늘리기' }).getAttribute('aria-pressed')).toBe(
     'true',
   )
   fireEvent.pointerDown(screen.getByRole('img', { name: '턱 당기기 정지 시안' }))
   expect(screen.getByRole('link', { name: '코칭 화면 보기' }).getAttribute('href')).toBe(
-    '/dev/coaching?motion=chin-retraction',
+    '/dev/coaching?motion=chin-retraction&preview=1',
   )
 })
 

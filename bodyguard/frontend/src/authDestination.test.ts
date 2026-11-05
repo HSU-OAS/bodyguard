@@ -76,3 +76,16 @@ it('중복/잘못된 날짜·중복 page는 반사하지 않고 유효 값만 �
   expect(personalDestination('/posture-records?page=1&page=2')).toBe('/posture-records')
   expect(personalDestination('/records?page=1')).toBe('/records')
 })
+
+it('개발 코칭 복귀에 명시적 시범 요청만 보존하고 중복·잘못된 값은 버린다', () => {
+  expect(personalDestination('/dev/coaching?motion=neck-side&preview=1&token=SECRET')).toBe(
+    '/dev/coaching?motion=neck-side&preview=1',
+  )
+  expect(personalDestination('/dev/coaching?motion=neck-side&preview=1&preview=1')).toBe(
+    '/dev/coaching?motion=neck-side',
+  )
+  expect(personalDestination('/dev/coaching?motion=neck-side&preview=bad')).toBe(
+    '/dev/coaching?motion=neck-side',
+  )
+  expect(personalDestination('/dev/coaching?preview=1')).toBe('/dev/coaching')
+})

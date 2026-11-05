@@ -76,3 +76,20 @@ it('서버 상태를 확인하지 못하면 복귀 목적이 있어도 개인 �
   expect(screen.queryByRole('heading', { name: '로그인' })).toBeNull()
   expect(window.location.pathname).toBe('/records')
 })
+
+it('피그마 선택 후 로그인해도 명시적 시범 요청을 유지한다', async () => {
+  setupAuth()
+  window.history.replaceState(null, '', '/dev/coaching?motion=neck-side&preview=1')
+  render(<App />)
+  await screen.findByRole('heading', { name: '로그인' })
+  fireEvent.change(screen.getByLabelText('이메일', { exact: true }), {
+    target: { value: account.email },
+  })
+  fireEvent.change(screen.getByLabelText('비밀번호', { exact: true }), {
+    target: { value: 'test-password-long-123' },
+  })
+  fireEvent.click(screen.getByRole('button', { name: '로그인' }))
+  await screen.findByRole('heading', { name: '목 옆으로 기울이기' })
+  expect(window.location.search).toBe('?motion=neck-side&preview=1')
+  expect(screen.getByRole('button', { name: '시범 닫기' })).toBeTruthy()
+})
