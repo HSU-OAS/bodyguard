@@ -436,3 +436,61 @@
     scroll-behavior: auto;
   }
 }
+
+/* FR-V-03: Figma's shared comparison space; candidate and camera gates remain unchanged. */
+.figma-coaching.coaching-workspace {
+  display: block;
+}
+.figma-coaching .coaching-rail {
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-top: 0;
+  margin-bottom: 16px;
+}
+.figma-coaching .coaching-rail :is(a, button) {
+  min-height: 44px;
+  padding: 6px 18px;
+}
+.figma-coaching .coaching-work-area {
+  display: flex;
+  flex-direction: column;
+}
+.figma-coaching .coaching-heading {
+  order: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+}
+.figma-coaching .coaching-heading > div:first-child {
+  grid-column: 2;
+  text-align: center;
+}
+.figma-coaching .coaching-heading > .coaching-tools {
+  grid-column: 3;
+  justify-self: end;
+}
+.figma-coaching .coaching-space {
+  order: 1;
+  min-height: clamp(480px, calc(100vh - 210px), 720px);
+}
+.figma-coaching .coaching-stages {
+  order: 2;
+  margin-top: 12px;
+}
+.figma-coaching .coaching-footer {
+  order: 3;
+  margin-top: 16px;
+}
+.figma-coaching .coaching-role-labels {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 12px 24px;
+}
+.figma-coaching .reference-demonstration {
+  bottom: 64px;
+  height: auto;
+}
+.figma-coaching .reference-status,
+.figma-coaching .reference-observation-status {
+  top: 12px;
+  bottom: auto;
+}
