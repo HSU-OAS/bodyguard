@@ -54,7 +54,7 @@ it.each([401, 503])('blocks private records when account check returns %s', asyn
   stub(records, () => json({}, status))
   open()
   await screen.findByRole('heading', {
-    name: status === 401 ? '다시 만나 반갑습니다' : '연결을 확인해 주세요',
+    name: status === 401 ? '로그인' : '연결을 확인해 주세요',
   })
   expect(records).not.toHaveBeenCalled()
 })
@@ -146,7 +146,7 @@ it('rechecks the account after a records 401 and discards private content', asyn
     () => (expired ? json({}, 401) : json({ id: 'fixture-owner', email: 'fixture@example.com' })),
   )
   open()
-  await screen.findByRole('heading', { name: '다시 만나 반갑습니다' })
+  await screen.findByRole('heading', { name: '로그인' })
   expect(screen.queryByRole('heading', { name: '내 수행 기록' })).toBeNull()
 })
 it('focus recheck hides loaded private data before its answer and ignores late data', async () => {
@@ -161,7 +161,7 @@ it('focus recheck hides loaded private data before its answer and ignores late d
   expired = true
   fireEvent(window, new Event('focus'))
   expect(screen.queryByRole('table')).toBeNull()
-  await screen.findByRole('heading', { name: '다시 만나 반갑습니다' })
+  await screen.findByRole('heading', { name: '로그인' })
   cleanup()
   expired = false
   stub(
@@ -175,7 +175,7 @@ it('focus recheck hides loaded private data before its answer and ignores late d
   await screen.findByText('기록을 불러오고 있습니다.')
   expired = true
   fireEvent(window, new Event('focus'))
-  await screen.findByRole('heading', { name: '다시 만나 반갑습니다' })
+  await screen.findByRole('heading', { name: '로그인' })
   await act(async () => release(json({ items: [row()], has_more: false })))
   expect(screen.queryByRole('table')).toBeNull()
 })

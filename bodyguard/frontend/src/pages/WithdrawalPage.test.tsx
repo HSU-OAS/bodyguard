@@ -50,7 +50,7 @@ it.each([401, 503])('AW-03 private withdrawal is closed when /me returns%s', asy
   stub(action, async () => json({}, status))
   open()
   await screen.findByRole('heading', {
-    name: status === 401 ? '다시 만나 반갑습니다' : '계정 연결을 확인해 주세요',
+    name: status === 401 ? '로그인' : '계정 연결을 확인해 주세요',
   })
   expect(action).not.toHaveBeenCalled()
 })

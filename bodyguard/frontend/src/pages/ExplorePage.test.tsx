@@ -17,7 +17,7 @@ it.each([401, 503])('keeps the explore route protected for account status %s', a
   vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response('{}', { status })))
   render(<App />)
   await screen.findByRole('heading', {
-    name: status === 401 ? '다시 만나 반갑습니다' : '연결을 확인해 주세요',
+    name: status === 401 ? '로그인' : '연결을 확인해 주세요',
   })
   expect(screen.queryByRole('heading', { name: '스트레칭 시작 경로' })).toBeNull()
 })
