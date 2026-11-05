@@ -131,7 +131,7 @@ export function FigmaHomePage() {
             {selected ? (
               <Link
                 className="figma-start"
-                to={`/dev/coaching?motion=${encodeURIComponent(selected)}`}
+                to={`/dev/coaching?motion=${encodeURIComponent(selected)}&preview=1`}
               >
                 코칭 화면 보기
               </Link>

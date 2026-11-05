@@ -51,3 +51,26 @@ it('unknown motion does not silently become a successful or default motion', asy
   expect(screen.queryByRole('button', { name: '코칭 시작' })).toBeNull()
   expect(screen.queryByRole('button', { name: '카메라 확인' })).toBeNull()
 })
+
+it('opens the candidate scene only when explicitly requested from the Figma flow', async () => {
+  const fetcher = open('/dev/coaching?motion=neck-side&preview=1')
+  await screen.findByRole('heading', { name: '목 옆으로 기울이기', level: 1 })
+  expect(screen.getByRole('button', { name: '시범 닫기' })).toBeTruthy()
+  expect(screen.getByRole('img', { name: '3D 시범 후보' })).toBeTruthy()
+  expect(
+    fetcher.mock.calls.map((call) => String(call[0])).filter((url) => url.startsWith('/api/')),
+  ).toEqual(['/api/v1/me'])
+})
+
+it('does not load a reference for an unsupported or duplicated preview request', async () => {
+  open('/dev/coaching?motion=chin-retraction&preview=1')
+  await screen.findByRole('heading', { name: '턱 당기기', level: 1 })
+  expect(screen.queryByRole('img', { name: '3D 시범 후보' })).toBeNull()
+})
+
+it('does not load a scene for duplicate preview parameters', async () => {
+  open('/dev/coaching?motion=neck-side&preview=1&preview=1')
+  await screen.findByRole('heading', { name: '목 옆으로 기울이기', level: 1 })
+  expect(screen.queryByRole('img', { name: '3D 시범 후보' })).toBeNull()
+  expect(screen.getByRole('button', { name: '시범 미리보기' })).toBeTruthy()
+})
