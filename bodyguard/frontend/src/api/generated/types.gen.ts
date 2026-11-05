@@ -220,6 +220,8 @@ export type StretchInput = {
 export type StretchList = {
   items: Array<StretchOut>
   has_more: boolean
+  total_count?: number | null
+  total_observed_ms?: number | null
 }
 
 export type StretchOut = {

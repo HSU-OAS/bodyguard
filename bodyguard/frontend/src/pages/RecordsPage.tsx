@@ -103,6 +103,17 @@ export function RecordsPage() {
       : result.key === key && result.owner === authority
         ? result
         : { status: 'loading' as const }
+  const summary =
+    current.status !== 'list'
+      ? null
+      : current.value.total_count != null && current.value.total_observed_ms != null
+        ? { count: current.value.total_count, observed: current.value.total_observed_ms }
+        : page === 0 && !current.value.has_more
+          ? {
+              count: current.value.items.length,
+              observed: current.value.items.reduce((sum, item) => sum + item.observed_ms, 0),
+            }
+          : null
   const listQuery = new URLSearchParams({ from, to }).toString()
   const days = range ? Array.from({ length: 7 }, (_, index) => shiftDay(to, index - 6)) : []
 
@@ -351,16 +362,13 @@ export function RecordsPage() {
           </div>
         ) : current.status === 'list' ? (
           <div className="records-results">
-            {page === 0 && !current.value.has_more && (
+            {summary && (
               <div className="figma-records-summary">
-                <span>기록 {current.value.items.length}건</span>
-                <span>
-                  관찰 시간{' '}
-                  {duration(current.value.items.reduce((sum, item) => sum + item.observed_ms, 0))}
-                </span>
+                <span>기록 {summary.count}건</span>
+                <span>관찰 시간 {duration(summary.observed)}</span>
               </div>
             )}
-            {page === 0 && current.value.has_more && (
+            {!summary && page === 0 && current.value.has_more && (
               <p className="figma-records-summary">전체 기간 요약은 아직 제공되지 않습니다.</p>
             )}
             <h2 ref={resultsHeading} tabIndex={-1}>

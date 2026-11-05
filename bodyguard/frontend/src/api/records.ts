@@ -109,7 +109,25 @@ export async function listRecords(
   const list = value as Record<string, unknown>
   if (!Array.isArray(list.items) || list.items.length > 20 || typeof list.has_more !== 'boolean')
     throw new ApiError(503)
-  return { items: list.items.map(parseRecord), has_more: list.has_more }
+  const items = list.items.map(parseRecord)
+  const count = list.total_count
+  const observed = list.total_observed_ms
+  // Older servers may omit both fields; never treat a partial page as a total.
+  if (count == null && observed == null) return { items, has_more: list.has_more }
+  if (
+    typeof count !== 'number' ||
+    !Number.isSafeInteger(count) ||
+    count < 0 ||
+    typeof observed !== 'number' ||
+    !Number.isSafeInteger(observed) ||
+    observed < items.reduce((sum, item) => sum + item.observed_ms, 0) ||
+    (items.length > 0 && count < offset + items.length) ||
+    (list.has_more && count <= offset + items.length) ||
+    (!list.has_more && count > offset + items.length) ||
+    (count === 0 && observed !== 0)
+  )
+    throw new ApiError(503)
+  return { items, has_more: list.has_more, total_count: count, total_observed_ms: observed }
 }
 export async function readRecord(
   id: string,
