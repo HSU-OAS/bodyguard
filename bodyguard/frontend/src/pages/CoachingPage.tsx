@@ -93,7 +93,7 @@ function CoachingPreviewPage() {
   }, [previewOwner, previewKey])
 
   return (
-    <section className="coaching-workspace" aria-labelledby="coaching-heading">
+    <section className="coaching-workspace figma-coaching" aria-labelledby="coaching-heading">
       <nav className="coaching-rail" aria-label="코칭 메뉴">
         <Link to="/start">내 시작</Link>
         <button type="button" onClick={openPicker}>
