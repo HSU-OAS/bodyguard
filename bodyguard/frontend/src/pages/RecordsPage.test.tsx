@@ -84,10 +84,11 @@ it('shows loading, genuine empty period and start recovery without invented scor
 it('opens real-shaped detail and preserves the selected period on return', async () => {
   stub(async (url) => json(url.includes('?') ? { items: [row()], has_more: false } : row()))
   open('/records?from=2026-09-01&to=2026-09-30')
-  const link = await screen.findByRole('link', { name: /neck-side.*기록 상세/ })
+  const link = await screen.findByRole('link', { name: /목 옆으로 기울이기.*기록 상세/ })
   expect(screen.getByText('12초')).toBeTruthy()
   fireEvent.click(link)
   await screen.findByText('fixture-not-release')
+  expect(screen.getByRole('heading', { name: '목 옆으로 기울이기' })).toBeTruthy()
   expect(document.title).toBe('수행 기록 상세 · BODYGUARD')
   expect(screen.getByText('중단')).toBeTruthy()
   fireEvent.click(screen.getByRole('link', { name: '기록 목록으로 돌아가기' }))
@@ -107,7 +108,7 @@ it('changes pages using the same query cutoff and never appends duplicates', asy
   await screen.findByRole('table')
   fireEvent.click(screen.getByRole('button', { name: '다음 페이지' }))
   await screen.findByRole('link', { name: /fixture-21.*기록 상세/ })
-  expect(screen.queryByRole('link', { name: /neck-side.*기록 상세/ })).toBeNull()
+  expect(screen.queryByRole('link', { name: /목 옆으로 기울이기.*기록 상세/ })).toBeNull()
   expect((screen.getByRole('button', { name: '다음 페이지' }) as HTMLButtonElement).disabled).toBe(
     true,
   )
@@ -115,7 +116,7 @@ it('changes pages using the same query cutoff and never appends duplicates', asy
   const ends = calls.map(([url]) => new URL(url, 'http://localhost').searchParams.get('end'))
   expect(new Set(ends).size).toBe(1)
   fireEvent.click(screen.getByRole('button', { name: '이전 페이지' }))
-  await screen.findByRole('link', { name: /neck-side.*기록 상세/ })
+  await screen.findByRole('link', { name: /목 옆으로 기울이기.*기록 상세/ })
 })
 it('switches day/week ranges and shows a total only when the returned list is complete', async () => {
   let paginated = false

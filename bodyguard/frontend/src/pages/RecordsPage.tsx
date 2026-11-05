@@ -56,6 +56,9 @@ type Result = {
 )
 
 export function RecordsPage() {
+  const [recordMotionLabel, setRecordMotionLabel] = useState<(id: string) => string>(
+    () => (id: string) => id,
+  )
   const { recordId: id } = useParams()
   const [params, setParams] = useSearchParams()
   const [initial] = useState(() => defaultPeriod())
@@ -116,6 +119,22 @@ export function RecordsPage() {
           : null
   const listQuery = new URLSearchParams({ from, to }).toString()
   const days = range ? Array.from({ length: 7 }, (_, index) => shiftDay(to, index - 6)) : []
+
+  useEffect(() => {
+    // FR-S-06: candidate names are loaded only for the private development review.
+    if (!import.meta.env.DEV) return
+    let active = true
+    void import('../catalog/motionLabels')
+      .then(({ motionLabel }) => {
+        if (active) setRecordMotionLabel(() => motionLabel)
+      })
+      .catch(() => {
+        // An unavailable development catalog leaves the original record identifier visible.
+      })
+    return () => {
+      active = false
+    }
+  }, [])
 
   useEffect(() => {
     // NFR-08: keyboard paging must not lose focus when the old table is removed.
@@ -394,7 +413,7 @@ export function RecordsPage() {
                   <thead>
                     <tr>
                       <th scope="col">종료 시각</th>
-                      <th scope="col">동작 식별자</th>
+                      <th scope="col">동작</th>
                       <th scope="col">수행 상태</th>
                       <th scope="col">관찰 시간</th>
                       <th scope="col">반복</th>
@@ -409,9 +428,9 @@ export function RecordsPage() {
                         <th scope="row">
                           <Link
                             to={`/records/${record.id}?${listQuery}`}
-                            aria-label={`${record.motion_id} · ${time(record.ended_at)} 기록 상세`}
+                            aria-label={`${recordMotionLabel(record.motion_id)} · ${time(record.ended_at)} 기록 상세`}
                           >
-                            {record.motion_id}
+                            {recordMotionLabel(record.motion_id)}
                           </Link>
                         </th>
                         <td>
@@ -458,7 +477,7 @@ export function RecordsPage() {
           </div>
         ) : current.status === 'detail' ? (
           <div className="record-detail">
-            <h2>{current.value.motion_id}</h2>
+            <h2>{recordMotionLabel(current.value.motion_id)}</h2>
             <p className="record-outcome">{outcomes[current.value.outcome]}</p>
             <dl>
               <div>
