@@ -72,7 +72,7 @@ it('서버 상태를 확인하지 못하면 복귀 목적이 있어도 개인 �
   vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response('{}', { status: 503 })))
   render(<App />)
   await screen.findByRole('heading', { name: '연결을 확인해 주세요' })
-  expect(screen.queryByRole('heading', { name: '내 수행 기록' })).toBeNull()
+  expect(screen.queryByRole('heading', { name: '스트레칭 기록' })).toBeNull()
   expect(screen.queryByRole('heading', { name: '로그인' })).toBeNull()
   expect(window.location.pathname).toBe('/records')
 })

@@ -4,6 +4,7 @@ import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-libra
 import { StrictMode } from 'react'
 import { afterEach, expect, it, vi } from 'vitest'
 import { App } from '../App'
+import { defaultPeriod, localDay } from '../api/records'
 
 const id = '00000000-0000-4000-8000-000000000001'
 function row(index = 1) {
@@ -116,6 +117,39 @@ it('changes pages using the same query cutoff and never appends duplicates', asy
   fireEvent.click(screen.getByRole('button', { name: '이전 페이지' }))
   await screen.findByRole('link', { name: /neck-side.*기록 상세/ })
 })
+it('switches day/week ranges and shows a total only when the returned list is complete', async () => {
+  let paginated = false
+  stub(async () => json({ items: [row()], has_more: paginated }))
+  open()
+  await screen.findByRole('table')
+  expect(screen.getByText('기록 1건')).toBeTruthy()
+  expect(screen.getByText('관찰 시간 12초')).toBeTruthy()
+  const { to } = defaultPeriod()
+  fireEvent.click(screen.getByRole('button', { name: '일간' }))
+  await waitFor(() => expect(new URLSearchParams(location.search).get('from')).toBe(to))
+  expect(new URLSearchParams(location.search).get('to')).toBe(to)
+  fireEvent.click(screen.getByRole('button', { name: '주간' }))
+  await waitFor(() =>
+    expect(new URLSearchParams(location.search).get('from')).toBe(defaultPeriod().from),
+  )
+  paginated = true
+  fireEvent.click(screen.getByRole('button', { name: '기간 조회' }))
+  await screen.findByRole('button', { name: '다음 페이지' })
+  expect(screen.queryByText('기록 1건')).toBeNull()
+  expect(screen.getByText('전체 기간 요약은 아직 제공되지 않습니다.')).toBeTruthy()
+})
+it('a selected calendar day queries that day without retaining a prior week', async () => {
+  stub(async () => json({ items: [], has_more: false }))
+  open()
+  await screen.findByRole('heading', { name: '이 기간에는 수행 기록이 없습니다' })
+  fireEvent.click(screen.getByRole('button', { name: '일간' }))
+  const previous = new Date()
+  previous.setDate(previous.getDate() - 1)
+  const day = localDay(previous)
+  fireEvent.click(screen.getByRole('button', { name: `${day} 선택` }))
+  await waitFor(() => expect(new URLSearchParams(location.search).get('to')).toBe(day))
+  expect(new URLSearchParams(location.search).get('from')).toBe(day)
+})
 it('retries a failed read, keeps raw error out of the page and does not call it empty', async () => {
   let failed = true
   stub(async () =>
@@ -147,7 +181,7 @@ it('rechecks the account after a records 401 and discards private content', asyn
   )
   open()
   await screen.findByRole('heading', { name: '로그인' })
-  expect(screen.queryByRole('heading', { name: '내 수행 기록' })).toBeNull()
+  expect(screen.queryByRole('heading', { name: '스트레칭 기록' })).toBeNull()
 })
 it('focus recheck hides loaded private data before its answer and ignores late data', async () => {
   let expired = false
