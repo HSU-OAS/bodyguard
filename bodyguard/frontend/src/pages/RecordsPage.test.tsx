@@ -150,6 +150,16 @@ it('a selected calendar day queries that day without retaining a prior week', as
   await waitFor(() => expect(new URLSearchParams(location.search).get('to')).toBe(day))
   expect(new URLSearchParams(location.search).get('from')).toBe(day)
 })
+it('renders server totals even when the first page is incomplete', async () => {
+  stub(async () =>
+    json({ items: [row()], has_more: true, total_count: 23, total_observed_ms: 276000 }),
+  )
+  open()
+  await screen.findByRole('table')
+  expect(screen.getByText('기록 23건')).toBeTruthy()
+  expect(screen.getByText('관찰 시간 4분 36초')).toBeTruthy()
+  expect(screen.queryByText('전체 기간 요약은 아직 제공되지 않습니다.')).toBeNull()
+})
 it('retries a failed read, keeps raw error out of the page and does not call it empty', async () => {
   let failed = true
   stub(async () =>

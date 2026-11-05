@@ -28,7 +28,12 @@ def test_records_empty_save_and_read(harness: Harness) -> None:
     h.account()
     response = h.client.get("/api/v1/records/stretch")
     assert response.status_code == 200
-    assert response.json() == {"items": [], "has_more": False}
+    assert response.json() == {
+        "items": [],
+        "has_more": False,
+        "total_count": 0,
+        "total_observed_ms": 0,
+    }
     data = payload(h)
     first = h.client.post("/api/v1/records/stretch", headers=h.csrf(), json=data)
     assert first.status_code == 201
@@ -42,6 +47,8 @@ def test_records_empty_save_and_read(harness: Harness) -> None:
     rows = h.client.get("/api/v1/records/stretch").json()
     assert len(rows["items"]) == 1
     assert "user_id" not in rows["items"][0]
+    assert rows["total_count"] == 1
+    assert rows["total_observed_ms"] == 12000
     changed = {**data, "repetitions": 1}
     assert (
         h.client.post("/api/v1/records/stretch", headers=h.csrf(), json=changed).status_code == 409
@@ -72,6 +79,8 @@ def test_records_ownership_and_session(harness: Harness) -> None:
         },
     )
     assert other.get("/api/v1/records/stretch").json()["items"] == []
+    assert other.get("/api/v1/records/stretch").json()["total_count"] == 0
+    assert other.get("/api/v1/records/stretch").json()["total_observed_ms"] == 0
     assert other.get(f"/api/v1/records/stretch/{data['id']}").status_code == 404
     assert other.get(f"/api/v1/records/stretch/{uuid4()}").status_code == 404
     assert (
@@ -88,6 +97,8 @@ def test_records_ownership_and_session(harness: Harness) -> None:
     assert (
         other.post("/api/v1/records/stretch", headers=h.csrf(other), json=data).status_code == 201
     )
+    assert other.get("/api/v1/records/stretch").json()["total_count"] == 1
+    assert h.client.get("/api/v1/records/stretch").json()["total_observed_ms"] == 12000
     other.close()
     with h.engine.connect() as connection:
         assert len(connection.execute(select(stretch_records)).all()) == 2
@@ -99,6 +110,47 @@ def test_records_ownership_and_session(harness: Harness) -> None:
         ).status_code
         == 403
     )
+
+
+def test_totals_cover_all_pages_and_empty_offsets(harness: Harness) -> None:
+    h = harness
+    h.account()
+    headers = h.csrf()
+    for index in range(23):
+        data = {**payload(h), "observed_ms": (index + 1) * 1000}
+        assert (
+            h.client.post("/api/v1/records/stretch", headers=headers, json=data).status_code == 201
+        )
+    for offset, expected_items in ((0, 20), (20, 3), (100, 0)):
+        response = h.client.get("/api/v1/records/stretch", params={"limit": 20, "offset": offset})
+        assert response.status_code == 200
+        result = response.json()
+        assert len(result["items"]) == expected_items
+        assert result["has_more"] is (offset == 0)
+        assert result["total_count"] == 23
+        assert result["total_observed_ms"] == sum(range(1, 24)) * 1000
+    previous_day = h.clock.now - timedelta(days=1)
+    older = {
+        **payload(h),
+        "started_at": (previous_day - timedelta(seconds=40)).isoformat(),
+        "ended_at": previous_day.isoformat(),
+    }
+    assert h.client.post("/api/v1/records/stretch", headers=headers, json=older).status_code == 201
+    selected = h.client.get(
+        "/api/v1/records/stretch",
+        params={
+            "start": (h.clock.now - timedelta(seconds=1)).isoformat(),
+            "end": (h.clock.now + timedelta(seconds=1)).isoformat(),
+        },
+    ).json()
+    assert selected["total_count"] == 23
+    assert selected["total_observed_ms"] == sum(range(1, 24)) * 1000
+    excluded = h.client.get(
+        "/api/v1/records/stretch",
+        params={"start": (h.clock.now + timedelta(seconds=1)).isoformat()},
+    ).json()
+    assert excluded["total_count"] == 0
+    assert excluded["total_observed_ms"] == 0
 
 
 def test_records_revoked_credentials(harness: Harness) -> None:

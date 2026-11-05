@@ -54,6 +54,44 @@ it('reads own bounded list without persistent credentials and rejects malformed 
   fetcher.mockResolvedValue(new Response(JSON.stringify({ items: [], has_more: 'yes' })))
   await expect(listRecords({ start: 'a', end: 'b' }, 0, signal)).rejects.toThrow()
 })
+it('accepts consistent full-period totals across pages and rejects inconsistent totals', async () => {
+  const fetcher = vi.fn()
+  vi.stubGlobal('fetch', fetcher)
+  const signal = new AbortController().signal
+  fetcher.mockResolvedValue(
+    new Response(
+      JSON.stringify({
+        items: [example],
+        has_more: true,
+        total_count: 21,
+        total_observed_ms: 25000,
+      }),
+    ),
+  )
+  expect(await listRecords({ start: 'a', end: 'b' }, 0, signal)).toMatchObject({
+    total_count: 21,
+    total_observed_ms: 25000,
+  })
+  for (const bad of [
+    { total_count: 1, total_observed_ms: 25000 },
+    { total_count: 21, total_observed_ms: 1 },
+    { total_count: 21, total_observed_ms: null },
+    { total_count: Number.MAX_SAFE_INTEGER + 1, total_observed_ms: 25000 },
+  ]) {
+    fetcher.mockResolvedValue(
+      new Response(JSON.stringify({ items: [example], has_more: true, ...bad })),
+    )
+    await expect(listRecords({ start: 'a', end: 'b' }, 0, signal)).rejects.toThrow()
+  }
+  fetcher.mockResolvedValue(
+    new Response(
+      JSON.stringify({ items: [], has_more: false, total_count: 21, total_observed_ms: 25000 }),
+    ),
+  )
+  expect(await listRecords({ start: 'a', end: 'b' }, 100, signal)).toMatchObject({
+    total_count: 21,
+  })
+})
 it.each([
   { observed_ms: true },
   { observed_ms: -1 },
