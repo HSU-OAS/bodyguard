@@ -1,4 +1,5 @@
 // FR-S-01/06: source-matched development candidates, never released by source access alone.
+import { motionLabels } from './motionLabels'
 export type Region = 'all' | 'neck' | 'shoulder' | 'torso'
 export type Motion = Readonly<{
   id: string
@@ -32,7 +33,7 @@ const commonCautions = [
 export const previewMotions: readonly Motion[] = Object.freeze([
   Object.freeze({
     id: 'neck-side',
-    title: '목 옆으로 기울이기',
+    title: motionLabels['neck-side'],
     region: 'neck' as const,
     regionLabel: '목',
     summary: '어깨를 편하게 두고, 머리를 한쪽으로 천천히 기울였다가 중앙으로 돌아오는 동작입니다.',
@@ -64,7 +65,7 @@ export const previewMotions: readonly Motion[] = Object.freeze([
   }),
   freezeMotion({
     id: 'chin-retraction',
-    title: '턱 당기기',
+    title: motionLabels['chin-retraction'],
     region: 'neck',
     regionLabel: '목',
     summary: '머리를 아래로 숙이지 않고 턱을 부드럽게 뒤로 당겼다가 돌아옵니다.',
@@ -90,7 +91,7 @@ export const previewMotions: readonly Motion[] = Object.freeze([
   // FR-S-01: CUH neck-sprain advice, shrug/relax only; no rehab prescription copied.
   freezeMotion({
     id: 'shoulder-shrug',
-    title: '어깨 으쓱·이완',
+    title: motionLabels['shoulder-shrug'],
     region: 'shoulder',
     regionLabel: '어깨',
     summary: '양쪽 어깨를 부드럽게 올렸다가 편하게 내리는 동작입니다.',
@@ -114,7 +115,7 @@ export const previewMotions: readonly Motion[] = Object.freeze([
   }),
   freezeMotion({
     id: 'cross-body-shoulder',
-    title: '팔 교차 어깨 늘이기',
+    title: motionLabels['cross-body-shoulder'],
     region: 'shoulder',
     regionLabel: '어깨',
     summary: '어깨를 편하게 두고 한 팔을 가슴 앞으로 가져와 위팔을 잡습니다.',
@@ -139,7 +140,7 @@ export const previewMotions: readonly Motion[] = Object.freeze([
   // FR-S-01: NBT exercise 5 overhead portion, seated/one arm at a time only.
   freezeMotion({
     id: 'arm-overhead',
-    title: '팔 위로 뻗기',
+    title: motionLabels['arm-overhead'],
     region: 'shoulder',
     regionLabel: '어깨',
     summary: '바르게 앉아 한 팔씩 번갈아 편안한 범위에서 머리 위로 올렸다가 내립니다.',
@@ -163,7 +164,7 @@ export const previewMotions: readonly Motion[] = Object.freeze([
   }),
   freezeMotion({
     id: 'lateral-trunk',
-    title: '옆구리 늘이기',
+    title: motionLabels['lateral-trunk'],
     region: 'torso',
     regionLabel: '상체',
     summary: '앉아서 한 팔을 머리 위로 올리고 몸통을 천천히 옆으로 기울입니다.',
@@ -190,7 +191,7 @@ export const previewMotions: readonly Motion[] = Object.freeze([
   }),
   freezeMotion({
     id: 'seated-trunk-rotation',
-    title: '상체 비틀기',
+    title: motionLabels['seated-trunk-rotation'],
     region: 'torso',
     regionLabel: '상체',
     summary: '의자에 앉아 골반 위치를 유지하며 상체를 천천히 좌우로 돌립니다.',
