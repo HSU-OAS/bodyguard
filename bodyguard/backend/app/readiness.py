@@ -14,7 +14,7 @@ from sqlalchemy import Engine, false, select
 
 from app.db import metadata
 
-EXPECTED_REVISION = "0008_minute_summaries"
+EXPECTED_REVISION = "0009_optional_profile"
 PROBE_TIMEOUT_SECONDS = 3
 
 # FR-U-04/05: required ownership/cascade semantics, not constraint names or user rows.

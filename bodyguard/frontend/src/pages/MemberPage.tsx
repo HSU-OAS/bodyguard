@@ -25,6 +25,13 @@ export function MemberPage() {
           로그아웃
         </button>
       </section>
+      <section className="member-section" aria-labelledby="member-profile">
+        <h2 id="member-profile">기본 정보</h2>
+        <p>선택한 기본 정보를 확인하거나 수정·삭제합니다.</p>
+        <Link className="button secondary" to="/account/profile">
+          기본 정보 관리
+        </Link>
+      </section>
       <section className="member-section" aria-labelledby="member-records">
         <h2 id="member-records">수행 기록</h2>
         <p>기간별로 조회·삭제합니다.</p>
@@ -48,7 +55,7 @@ export function MemberPage() {
       </section>
       <section className="member-section" aria-labelledby="member-withdrawal">
         <h2 id="member-withdrawal">회원 탈퇴</h2>
-        <p>본인 확인 후 계정과 자세·수행 기록을 삭제합니다.</p>
+        <p>본인 확인 후 계정과 기본 정보·자세·수행 기록을 삭제합니다.</p>
         <Link className="button secondary" to="/account/delete">
           회원 탈퇴 안내
         </Link>

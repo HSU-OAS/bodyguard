@@ -8,6 +8,7 @@ const pages = new Set([
   '/posture-records',
   '/account',
   '/account/notifications',
+  '/account/profile',
   '/account/delete',
 ])
 
