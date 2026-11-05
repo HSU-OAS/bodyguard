@@ -52,7 +52,7 @@ it('기록 진입→가입/로그인 전환→이메일 로그인 뒤 원래 기
   render(<App />)
   await screen.findByRole('heading', { name: '로그인' })
   fireEvent.click(screen.getByRole('link', { name: '회원가입' }))
-  await screen.findByRole('heading', { name: '나를 위한 움직임의 시작' })
+  await screen.findByRole('heading', { name: '회원가입' })
   expect(new URLSearchParams(window.location.search).get('next')).toBe(destination)
   const links = screen.getAllByRole('link', { name: '로그인' })
   fireEvent.click(links[links.length - 1])

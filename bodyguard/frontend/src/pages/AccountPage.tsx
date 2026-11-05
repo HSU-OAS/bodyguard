@@ -147,11 +147,7 @@ export function AccountPage({ mode }: { mode: 'login' | 'signup' }) {
   }
 
   if (auth.state.status === 'ready') return <Navigate to={destination} replace />
-  const heading = verify
-    ? '이메일을 확인해 주세요'
-    : mode === 'signup'
-      ? '나를 위한 움직임의 시작'
-      : '로그인'
+  const heading = verify ? '이메일을 확인해 주세요' : mode === 'signup' ? '회원가입' : '로그인'
   const googleOption = !verify && (
     <div className="google-option">
       <button
@@ -194,44 +190,14 @@ export function AccountPage({ mode }: { mode: 'login' | 'signup' }) {
           구글 연결 다시 확인
         </button>
       )}
-      {mode === 'signup' && <p className="account-divider">또는 이메일로</p>}
     </div>
   )
   return (
-    <section className={`account-layout${mode === 'login' ? ' figma-login' : ''}`}>
-      {mode !== 'login' && (
-        <aside className="account-intro">
-          <p className="eyebrow">BODYGUARD / MY ACCOUNT</p>
-          <h2>
-            일상에 맞춘
-            <br />몸 돌보기.
-          </h2>
-          <p>
-            노트북 웹캠 한 대로 시작하는
-            <br />
-            스트레칭과 자세 코칭.
-          </p>
-          <div className="privacy-note">
-            <span className="section-number">01</span>
-            <p>
-              카메라는 직접 시작할 때만 켜집니다.
-              <br />
-              원본 영상은 저장하거나 전송하지 않습니다.
-            </p>
-          </div>
-          <p className="muted small">
-            현재 개발 중인 웹입니다.
-            <br />
-            출시 전 기능·안전·개인정보 검증을 진행하고 있습니다.
-          </p>
-        </aside>
-      )}
+    <section className="account-layout figma-login">
       <div className="account-form">
-        {mode === 'login' && (
-          <Link className="figma-login-brand" to="/">
-            BODYGUARD
-          </Link>
-        )}
+        <Link className="figma-login-brand" to="/">
+          BODYGUARD
+        </Link>
         {mode !== 'login' && (
           <p className="eyebrow">
             {verify ? '이메일 인증 · 2 / 2' : mode === 'signup' ? '이메일 가입 · 1 / 2' : '로그인'}
@@ -247,7 +213,6 @@ export function AccountPage({ mode }: { mode: 'login' | 'signup' }) {
                 : '이메일로 내 계정에 로그인하세요.'}
           </p>
         )}
-        {mode === 'signup' && googleOption}
         <form
           onSubmit={(event) => {
             void submit(event)
@@ -392,10 +357,15 @@ export function AccountPage({ mode }: { mode: 'login' | 'signup' }) {
             </Link>
           </div>
         )}
-        {mode === 'login' && googleOption}
+        {googleOption}
         <Link className="back-link" to="/">
           서비스 소개로 돌아가기
         </Link>
+        {mode === 'signup' && (
+          <Link className="back-link" to="/data">
+            카메라·데이터 안내
+          </Link>
+        )}
       </div>
     </section>
   )
