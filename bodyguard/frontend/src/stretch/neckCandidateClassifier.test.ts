@@ -204,3 +204,12 @@ it('copies and rejects missing/nonfinite/overlapping/same-sided criteria rather 
       createNeckCandidateClassifier({ ...criteria(), ...changes } as NeckReviewCriteria, 7),
     ).toThrow('Invalid neck candidate criteria')
 })
+
+it('does not accept a target when the nose projects outside the observed ear segment', () => {
+  const f = frame(-0.4)
+  f.result.landmarks[0][0].x = 0.8
+  const candidate = createNeckCandidateClassifier(criteria(), 7)
+  expect(candidate.classify(f, 100, { stepId: 'left', phase: 'holding' })?.classification).toBe(
+    'unobservable',
+  )
+})
