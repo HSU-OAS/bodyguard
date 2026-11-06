@@ -1,0 +1,38 @@
+00:02.235  blend            | Read blend: "/private/tmp/bodyguard-avatar-review.KXV9oj/candidate-fair-unapproved.blend"
+WEB FINAL TRIANGLES Male {"vertices": 131148, "triangles": 262292, "repaired_bad_parents": 0, "explicit_good_parents": 10, "zero_triangles_before": 0, "zero_triangles_after": 0, "preserved_existing_tiny_triangles": 1, "minimum_triangle_area_m2": 1.2350813602361031e-11, "coordinates_skin_unrelated_triangles_exact": true, "appearance_approved": false}
+WEB FIN REPAIR Male 2
+Info: 289320 vertex weights limited
+INFO Draco mesh compression is available, use library at /Applications/Blender.app/Contents/Resources/5.1/scripts/addons_core/io_scene_gltf2/libextern_draco.dylib
+13:27:41 | INFO: Starting glTF 2.0 export
+13:27:41 | WARNING: Armature must be the parent of skinned meshArmature is selected by its name, but may be false in case of instances
+13:27:41 | INFO: Extracting primitive: female_v006lowresUV.001
+13:27:42 | INFO: Primitives created: 1
+13:27:42 | INFO: Finished glTF 2.0 export in 1.177436113357544 s
+
+WEB FINAL TRIANGLES Female {"vertices": 130636, "triangles": 261268, "repaired_bad_parents": 1, "explicit_good_parents": 2, "zero_triangles_before": 0, "zero_triangles_after": 0, "preserved_existing_tiny_triangles": 0, "minimum_triangle_area_m2": 1.4361803309828052e-10, "coordinates_skin_unrelated_triangles_exact": true, "appearance_approved": false}
+WEB FIN REPAIR Female 2
+Info: 283346 vertex weights limited
+13:27:50 | INFO: Starting glTF 2.0 export
+13:27:50 | INFO: Extracting primitive: GEO-body_female_realistic.001
+13:27:52 | INFO: Primitives created: 1
+13:27:52 | INFO: Finished glTF 2.0 export in 1.3027241230010986 s
+
+Info: Saved as "web-fair.blend"
+13:27:52 | INFO: Data are loaded, start creating Blender stuff
+13:27:52 | INFO: Blender create Mesh node female_v006lowresUV.001
+13:27:53 | INFO: glTF import finished in 1.19s
+13:27:53 | INFO: Data are loaded, start creating Blender stuff
+13:27:53 | INFO: Blender create Mesh node GEO-body_female_realistic.001
+13:27:55 | INFO: glTF import finished in 1.49s
+00:30.630  blend            | Read blend: "/private/tmp/bodyguard-avatar-review.KXV9oj/web-fair.blend"
+13:27:56 | INFO: Data are loaded, start creating Blender stuff
+13:27:56 | INFO: Blender create Mesh node female_v006lowresUV.001
+13:27:57 | INFO: glTF import finished in 1.46s
+13:27:57 | INFO: Data are loaded, start creating Blender stuff
+13:27:57 | INFO: Blender create Mesh node GEO-body_female_realistic.001
+13:27:59 | INFO: glTF import finished in 2.03s
+Info: Saved as "web-fair-roundtrip.blend"
+WEB ROUNDTRIP [{"gender": "Male", "bytes": 11594720, "meshes": 1, "bounds_m": [[-0.2751196324825287, 0.2751199007034302], [-0.18425239622592926, 0.11132831871509552], [-0.0056211985647678375, 1.684626579284668]], "animations": 0, "images": 0}, {"gender": "Female", "bytes": 11549800, "meshes": 1, "bounds_m": [[-0.3038701117038727, 0.30387017130851746], [-0.15825755894184113, 0.1165170893073082], [0.0019709879998117685, 1.6388297080993652]], "animations": 0, "images": 0}]
+Blender 5.1.1 (hash b70da489d7f4 built 2026-04-14 01:46:23)
+
+Blender quit
