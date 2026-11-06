@@ -25,3 +25,5 @@
 동일 환경에서 수정 전 main의 세 화면 테스트를 별도로 돌렸을 때도 `loginReturn` 1건과 `CoachingNavigationContext` 2건이 같은 로딩 단계에서 실패했다([원문](evidence/coaching-lazy-trial/baseline.log.gz)). 이는 가중치 변경만이 그 실패를 만든다는 주장은 반박하지만, 부하가 유일한 원인임을 증명하지는 않는다.
 
 별도 임시 브랜치에서 검수 실행 엔진만 lazy import하는 초기 로딩 개선안도 시험했으나, 같은 세 파일의 시험에서 5건이 실패해 개선이 입증되지 않았다. 시험 diff와 결과를 [별도 보존](evidence/coaching-lazy-trial/)하고 제품 코드에 적용하지 않았다. 양 시험 사이 시스템 부하가 일정하지 않았으므로 실패 개수 비교만으로 성능 우열을 결론 내리지 않는다.
+
+추가 원인 분리를 위해 세 화면 파일만 시험 설정의 `asyncUtilTimeout=10000ms`, `testTimeout=20000ms`로 실행한 진단에서는 22개가 통과했다. 원래 대기 한도의 전체 테스트 통과가 아니며 변경한 설정은 제품/기본 테스트에 적용하지 않았다. 첫 명령은 Vitest가 `--setupFiles` 인자를 지원하지 않아 실행 전 실패했고, 이후 별도 임시 config로 재실행했다. [두 원문과 설정](evidence/diagnostic-wait/).
