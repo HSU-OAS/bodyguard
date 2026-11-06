@@ -112,7 +112,7 @@ export function observeNeckSide(input: NeckObservationInput): NeckSideObservatio
         return unavailable
       points.push(point)
     }
-    const [, leftEar, rightEar, leftShoulder, rightShoulder] = points
+    const [nose, leftEar, rightEar, leftShoulder, rightShoulder] = points
     const sign = imageIsMirrored ? -1 : 1
     // FR-M-02: normalized x/y have different scales; restore the captured aspect.
     // Cartesian image-plane y points up. Neither this nor z is an anatomical angle.
@@ -129,6 +129,14 @@ export function observeNeckSide(input: NeckObservationInput): NeckSideObservatio
       sy = shoulder.y / shoulderLength
     const ex = ears.x / earLength,
       ey = ears.y / earLength
+    // A nose projected beyond both ears is incompatible with the frontal
+    // landmark arrangement this candidate relies on. This only rejects an
+    // obvious ambiguous input; being inside the segment does not prove the
+    // head is frontal or that the estimated landmarks are accurate.
+    const earToNose = delta(leftEar, nose)
+    const noseAlongEar = earToNose.x * ex + earToNose.y * ey
+    if (!Number.isFinite(noseAlongEar) || noseAlongEar < 0 || noseAlongEar > earLength)
+      return unavailable
     const left = delta(leftShoulder, leftEar),
       right = delta(rightShoulder, rightEar)
     const offsetX = (left.x + right.x) / 2,

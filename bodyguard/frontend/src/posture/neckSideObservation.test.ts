@@ -264,3 +264,19 @@ describe('private neck-side projected observation', () => {
     expect(observeNeckSide(input)).toEqual({ status: 'unavailable' })
   })
 })
+
+it.each([650, 950])('rejects a nose projected outside the ear segment (%s px)', (noseX) => {
+  const input = mutable()
+  input.frame.result.landmarks[0][0].x = noseX / input.width
+  expect(observeNeckSide(input).status).toBe('unavailable')
+})
+
+it.each([-0.3, 0.3])('rejects that ambiguity after image rotation %s and mirroring', (angle) => {
+  const input = mutable()
+  input.frame.result.landmarks[0][0].x = 650 / input.width
+  const rotated = transform(input, angle)
+  expect(observeNeckSide(rotated).status).toBe('unavailable')
+  for (const point of rotated.frame.result.landmarks[0]) point.x = 1 - point.x
+  rotated.imageIsMirrored = true
+  expect(observeNeckSide(rotated).status).toBe('unavailable')
+})
