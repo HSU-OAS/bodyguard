@@ -21,3 +21,7 @@
 - 전체 검증 실패와 기존 아바타 외형·초기 성능 P2가 남으므로 **PR은 Draft로 유지하고 병합하지 않는다.** 실제 사람의 웹캠·자세/손 정확도는 별도 미실행이다.
 
 브라우저 시험 당시 HEAD는 변경 전 `d9b0fa93`이지만 실행한 수정 파일의 전후 SHA-256은 모두 `66d0c7f5b9c8a3af53a3097d56db13ebe14b5eb7305ddfe836ba503ddcf3bfd5`이며 이 PR 파일과 일치한다. 실제 실행 runner는 `executed/local-avatar-weight-proof.mjs`(SHA `94fc74a58109798456f751a212cc076b5b74ad74fca7c7ace5e125a0b0a1ea40`)이고, 보고서의 기존 `scripts/test-avatar-rig-browser.mjs` 지문은 이 별도 실행 파일의 지문이 아니다. 이 구분을 유지한다.
+
+동일 환경에서 수정 전 main의 세 화면 테스트를 별도로 돌렸을 때도 `loginReturn` 1건과 `CoachingNavigationContext` 2건이 같은 로딩 단계에서 실패했다([원문](evidence/coaching-lazy-trial/baseline.log.gz)). 이는 가중치 변경만이 그 실패를 만든다는 주장은 반박하지만, 부하가 유일한 원인임을 증명하지는 않는다.
+
+별도 임시 브랜치에서 검수 실행 엔진만 lazy import하는 초기 로딩 개선안도 시험했으나, 같은 세 파일의 시험에서 5건이 실패해 개선이 입증되지 않았다. 시험 diff와 결과를 [별도 보존](evidence/coaching-lazy-trial/)하고 제품 코드에 적용하지 않았다. 양 시험 사이 시스템 부하가 일정하지 않았으므로 실패 개수 비교만으로 성능 우열을 결론 내리지 않는다.
