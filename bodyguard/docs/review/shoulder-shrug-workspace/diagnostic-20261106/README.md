@@ -24,7 +24,7 @@
 
 ## 공개 정적 손 이미지의 CPU/GPU 비교
 
-Google MediaPipe의 공개 테스트 이미지 `thumb_up.jpg` (generation `1662650667349746`, SHA-256 `5d673c081ab13b8a1812269ff57047066f9c33c07db5f4178089e8cb3fdc0291`)를 로컬 임시 폴더로 받아 사용했다. 이미지 자체는 저장소에 복사하지 않았다. 같은 버전의 손 모델을 동일 이미지로 VIDEO 모드에서 20프레임씩 시험했으며 Chrome/WebGL의 실제 SDK, 동일 출처 로컬 모델/WASM을 사용하고 외부 요청·pageerror는 0이었다. GPU를 먼저, CPU를 나중에 실행한 1회 시험이다.
+[Google MediaPipe 공개 테스트 이미지 `thumb_up.jpg`](https://storage.googleapis.com/mediapipe-assets/thumb_up.jpg?generation=1662650667349746) (generation `1662650667349746`, SHA-256 `5d673c081ab13b8a1812269ff57047066f9c33c07db5f4178089e8cb3fdc0291`)를 로컬 임시 폴더로 받아 사용했다. 이미지 자체는 저장소에 복사하지 않았다. 같은 버전의 손 모델을 동일 이미지로 VIDEO 모드에서 20프레임씩 시험했으며 Chrome/WebGL의 실제 SDK, 동일 출처 로컬 모델/WASM을 사용하고 외부 요청·pageerror는 0이었다. GPU를 먼저, CPU를 나중에 실행한 1회 시험이다.
 
 양쪽 모두 20프레임에서 손 하나를 감지했다. 21개 관절의 x/y/z 정규화 좌표를 대응 비교했을 때 최대 절댓값 차이는 약 0.0136이었다. 첫 프레임을 제외한 평균 추론 시간은 GPU 약 26.0ms, CPU 약 60.3ms였다. 순서·캐시·기기 하나·정적 사진의 한계가 있어 이 수치가 일반적인 성능, 실제 신체 오차, 의학적 정확도, 동작 추적의 등가성을 뜻하지는 않는다. 원시 관절은 브라우저 메모리에서만 비교하고 저장소에는 집계 결과만 기록했다. [집계 결과](evidence/hand-static-cpu-gpu.json) · [실행 코드](executed/local-hand-cpu-gpu-compare.mjs) · [브라우저 비교 코드](executed/local-hand-cpu-gpu-compare.ts).
 
