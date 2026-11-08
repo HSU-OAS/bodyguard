@@ -74,25 +74,30 @@ export function eightWeightGeometry(source: BufferGeometry, boneCount: number) {
       )
     )
       throw new Error('여덟 관절 가중치가 완전하지 않습니다')
+    // At most eight joints per vertex. Reuse a scratch array rather than
+    // allocating a Set for every vertex of the high-resolution model.
+    const seen: number[] = []
     for (let vertex = 0; vertex < first.count; vertex++) {
       let firstSum = 0
       let extraSum = 0
-      const seen = new Set<number>()
+      let seenCount = 0
       for (let set = 0; set < 2; set++) {
         const weights = set === 0 ? first : extra
         for (let component = 0; component < 4; component++) {
           const weight = weights.getComponent(vertex, component)
           const joint = indices[set].getComponent(vertex, component)
+          let duplicate = false
+          if (weight > 0) for (let i = 0; i < seenCount; i++) duplicate ||= seen[i] === joint
           if (
             !Number.isFinite(weight) ||
             weight < 0 ||
             !Number.isInteger(joint) ||
             joint < 0 ||
             joint >= boneCount ||
-            (weight > 0 && seen.has(joint))
+            duplicate
           )
             throw new Error('잘못된 관절 가중치입니다')
-          if (weight > 0) seen.add(joint)
+          if (weight > 0) seen[seenCount++] = joint
           if (set === 0) firstSum += weight
           else extraSum += weight
         }

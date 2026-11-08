@@ -43,6 +43,25 @@ describe('eight-weight asset skinning', () => {
     fixed.dispose()
   })
 
+  it('checks repeated joints independently for each vertex and ignores zero-weight slots', () => {
+    const { geometry } = fixture()
+    geometry.setAttribute('position', new Float32BufferAttribute([1, 2, 3, 4, 5, 6], 3))
+    geometry.setAttribute('skinIndex', new Uint16BufferAttribute([0, 1, 2, 3, 0, 1, 2, 3], 4))
+    geometry.setAttribute(
+      'skinWeight',
+      new Float32BufferAttribute([0.4, 0.3, 0.2, 0.1, 0.4, 0.3, 0.2, 0.1], 4),
+    )
+    geometry.setAttribute('joints_1', new Uint16BufferAttribute([4, 5, 6, 7, 4, 5, 6, 0], 4))
+    geometry.setAttribute(
+      'weights_1',
+      new Float32BufferAttribute([0.1, 0.05, 0.03, 0.02, 0.1, 0.05, 0.03, 0], 4),
+    )
+    const fixed = eightWeightGeometry(geometry, 8)
+    fixed.dispose()
+    geometry.getAttribute('weights_1').setW(1, 0.01)
+    expect(() => eightWeightGeometry(geometry, 8)).toThrow()
+  })
+
   it.each([
     'missing-extra-indices',
     'invalid-shape',
