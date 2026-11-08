@@ -10,6 +10,7 @@ import {
   OrthographicCamera,
   Scene,
   type SkinnedMesh,
+  Vector3,
   WebGLRenderer,
 } from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
@@ -21,7 +22,7 @@ import { createNeckSurfaceFeedback } from './neckSurfaceFeedback'
 import { type ComparisonStatus, createObservedComparison } from './observedComparison'
 import { prepareAvatarStage } from './prepareAvatarStage'
 import { type ReferenceMotion, referenceContentAsset } from './referenceContentAssets'
-import { referenceFraming } from './referenceFraming'
+import { referenceFraming, upperComparisonHalfY } from './referenceFraming'
 import { createReferencePlayback, type ReferenceCue } from './referencePlayback'
 import { type AvatarGender, REVIEW_AVATAR_ASSETS } from './reviewAvatarAssets'
 import type { FeedbackFrame } from './surfaceFeedback'
@@ -159,7 +160,17 @@ export async function prepareReferenceStage(
         renderer?.setSize(w, h, false)
       }
     }
-    function draw(view: ReferenceView, paint = true) {
+    let previousUpperHalfY: number | null = null
+    let previousView: ReferenceView | undefined
+    const point = new Vector3(),
+      centerPoint = new Vector3()
+    const upperAnchors = [user, guide].map((model) => ({
+      model,
+      bones: ['head', 'wristL', 'wristR', 'lowerarm01L', 'lowerarm01R']
+        .map((name) => model.getObjectByName(name))
+        .filter((bone): bone is Object3D => !!bone),
+    }))
+    function draw(view: ReferenceView, paint = true, delta = 0) {
       if (!renderer || closed) return
       size()
       const framing = referenceFraming(bodyHeight, width, height, view, motion)
@@ -171,15 +182,39 @@ export async function prepareReferenceStage(
       camera.lookAt(0, center, 0)
       camera.near = bodyHeight * 0.01
       camera.far = bodyHeight * 6
+      if (view !== previousView) previousUpperHalfY = null
+      previousView = view
       if (view !== 'full') {
         // Cropped views share the white canvas, but arms must not cover the other comparison.
         const leftWidth = Math.floor(width / 2),
           visible = [user.visible, guide.visible]
+        let upperHalfY = bodyHeight * 0.35
+        if (view === 'upper') {
+          const offsets: { x: number; y: number }[] = []
+          for (const { model, bones } of upperAnchors) {
+            if (!model.visible) continue
+            model.getWorldPosition(centerPoint)
+            for (const bone of bones) {
+              bone.getWorldPosition(point)
+              offsets.push({ x: point.x - centerPoint.x, y: point.y - center })
+            }
+          }
+          upperHalfY = upperComparisonHalfY(
+            bodyHeight,
+            Math.min(leftWidth, width - leftWidth),
+            height,
+            offsets,
+            previousUpperHalfY,
+            delta,
+            motion,
+          )
+          previousUpperHalfY = upperHalfY
+        }
         renderer.setScissorTest(true)
         try {
           for (const [index, model] of [user, guide].entries()) {
             const paneWidth = index === 0 ? leftWidth : width - leftWidth
-            const cropY = bodyHeight * (view === 'upper' ? 0.35 : 0.24)
+            const cropY = view === 'upper' ? upperHalfY : bodyHeight * 0.24
             const cropX = (cropY * paneWidth) / height
             camera.position.x = model.position.x
             camera.lookAt(model.position.x, center, 0)
@@ -272,7 +307,7 @@ export async function prepareReferenceStage(
           previousObservation = observedState
           options.onObservation?.(observedState)
         }
-        draw(command.view)
+        draw(command.view, true, delta)
         return observed?.getSnapshot()
       },
       dispose,

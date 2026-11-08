@@ -49,3 +49,5 @@ SDK 간헐 종료 실패·아바타 외형과 성능·얼굴/손 및 실제 사�
 같은 렌더 시점에 상반신 고정 구도와 시험용 동적 구도를 비교한 [동일 자세 시험](probe-avatar-comparison.json)에서는 [고정 구도](probe-avatar-comparison.baseline.avatar.png)의 팔 잘림이 [동적 구도](probe-avatar-comparison.dynamic.avatar.png)에서는 해소됐다. 동적 구도는 아바타가 작아지며, 배율 전환이 부드러운지와 다른 자세·화면 크기는 검증하지 않았다. 이는 시험용 변환이며 제품에 채택된 기능이 아니다. [시험 runner](probe-avatar-comparison-runner.mjs).
 
 검증 중 저장소 루트에서 실행한 Biome은 중첩 설정 오류로 시작하지 못해 frontend 디렉터리에서 다시 실행해 통과했다. 이 오류를 제품 테스트 실패나 통과로 세지 않는다.
+
+상반신 구도 보완이 반영된 main `0382b8c8`을 통합한 뒤, 추가 변환 없이 현재 runner로 첫 공개 영상과 여성 후보를 다시 실행했다. [결과](probe-latest-main-avatar.json)는 45프레임 모두 아바타 관절 커버리지가 있었고, Worker·카메라·아바타가 정리됐다. 얼굴 방향은 0프레임, 손 관찰은 30프레임이다. [실제 후보 화면](probe-latest-main-avatar.avatar.png)은 공개 스쿼트 영상 입력과 별도 어깨 준비 시범을 보여 주는 검수 화면이며, 팔·어깨 변형이 여전히 부자연스럽고 정확한 사용자 추적이나 최종 외형을 뜻하지 않는다. 사용자 영상과 원시 좌표는 저장하지 않았다.
