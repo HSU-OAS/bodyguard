@@ -1,6 +1,6 @@
 # 아바타의 여덟 관절 가중치 준비 비용 보완
 
-2026-11-06 · 시작 main `d9b0fa93` · **전체 검사 실패 / Draft 후보**
+2026-11-06 · 시작 main `d9b0fa93` · **2026-11-09 전체 회귀 재검증 통과**
 
 기존 로더는 정점마다 중복 관절 검사를 위해 `Set`을 생성했다. 한 정점에 최대 8개만 확인하므로 하나의 배열을 해당 함수 호출에서 재사용하고 정점마다 유효 길이를 초기화했다. 유효하지 않은 중복, 인덱스·가중치와 정규화 거부 기준은 유지한다. 관절 수, 표면, 리깅, WebGL 셰이더와 사용자 데이터는 변경하지 않는다.
 
@@ -18,7 +18,7 @@
 - 첫 전체 Vitest는 Blender 렌더 및 다른 프로세스가 동시에 실행된 상태에서 22파일/126개 실패·11 오류가 발생했다. 주로 제한 시간 초과와 비동기 화면 미표시가 기록됐다. [원본 로그](evidence/eightweight-full.log.gz).
 - `--maxWorkers=2` 재실행은 129파일 중 126파일/2,166개 통과, 3파일/3개 실패였다. [원본 로그](evidence/eightweight-full-capped.log.gz). 실패한 세 화면을 `--maxWorkers=1`로 별도 실행해도 2파일/3개가 실패했다. [원본 로그](evidence/eightweight-retry-specific.log.gz). 화면 로딩 중 기대 요소를 찾지 못한 관찰이지만 이 기록만으로 부하가 유일한 원인이라고 확정하지 않는다.
 - `--pool=threads --maxWorkers=1`의 재시도도 화면 테스트 시간 초과가 누적돼 직접 중단했다(exit 143). 완료된 전체 검사가 아니다. [부분 로그](evidence/eightweight-full-threads-interrupted.log.gz).
-- 전체 검증 실패와 기존 아바타 외형·초기 성능 P2가 남으므로 **PR은 Draft로 유지하고 병합하지 않는다.** 실제 사람의 웹캠·자세/손 정확도는 별도 미실행이다.
+- 2026-11-06 당시 전체 검증 실패와 기존 아바타 외형·초기 성능 P2가 남아 PR을 Draft로 유지했다. 실제 사람의 웹캠·자세/손 정확도는 별도 미실행이다. 아래의 이후 재검증 결과와 구분한다.
 
 브라우저 시험 당시 HEAD는 변경 전 `d9b0fa93`이지만 실행한 수정 파일의 전후 SHA-256은 모두 `66d0c7f5b9c8a3af53a3097d56db13ebe14b5eb7305ddfe836ba503ddcf3bfd5`이며 이 PR 파일과 일치한다. 실제 실행 runner는 `executed/local-avatar-weight-proof.mjs`(SHA `94fc74a58109798456f751a212cc076b5b74ad74fca7c7ace5e125a0b0a1ea40`)이고, 보고서의 기존 `scripts/test-avatar-rig-browser.mjs` 지문은 이 별도 실행 파일의 지문이 아니다. 이 구분을 유지한다.
 
@@ -27,3 +27,9 @@
 별도 임시 브랜치에서 검수 실행 엔진만 lazy import하는 초기 로딩 개선안도 시험했으나, 같은 세 파일의 시험에서 5건이 실패해 개선이 입증되지 않았다. 시험 diff와 결과를 [별도 보존](evidence/coaching-lazy-trial/)하고 제품 코드에 적용하지 않았다. 양 시험 사이 시스템 부하가 일정하지 않았으므로 실패 개수 비교만으로 성능 우열을 결론 내리지 않는다.
 
 추가 원인 분리를 위해 세 화면 파일만 시험 설정의 `asyncUtilTimeout=10000ms`, `testTimeout=20000ms`로 실행한 진단에서는 22개가 통과했다. 원래 대기 한도의 전체 테스트 통과가 아니며 변경한 설정은 제품/기본 테스트에 적용하지 않았다. 첫 명령은 Vitest가 `--setupFiles` 인자를 지원하지 않아 실행 전 실패했고, 이후 별도 임시 config로 재실행했다. [두 원문과 설정](evidence/diagnostic-wait/).
+
+## 2026-11-09 재검증
+
+동일 PR 코드에서 기본 테스트 제한 시간을 변경하지 않고 `--maxWorkers=2`로 전체 Vitest를 재실행하여 **129개 파일, 2,169개 테스트가 통과**했다. 앞서 실패한 기록은 위에 그대로 보존한다. [전체 원본 로그](evidence/full-20261109.log.gz).
+
+변경 파일 Biome, TypeScript 검사, Vite production build와 production guard도 통과했다. [실행 로그](evidence/build-20261109.log.gz). 이 결과는 가중치 준비 코드의 회귀 검증이며, 아바타 최종 외형, 기기별 첫 화면 속도, 실제 사람의 자세·손 추적이나 Worker 종료 문제의 해결을 뜻하지 않는다.
