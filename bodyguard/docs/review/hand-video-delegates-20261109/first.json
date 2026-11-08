@@ -1,0 +1,37 @@
+{
+  "method": "public prerecorded hand video, same decoded frames to CPU and GPU GestureRecognizer in one local Worker; reference is another model prediction, not ground truth",
+  "videoSha256": "57c10fb1eb76639edf43e9675213dcc495c51851e32a3592cacaa9437be4f37e",
+  "referenceSha256": "34f5abb7ff4d35e2ab631760d10d9c12f982596d0a24961445dc020de69d46b4",
+  "version": "156.0.8078.80",
+  "before": {
+    "e2e/fixtures/handDelegateProbe.html": "4fa0fcc236128baa73f1d81ab9abb06725806f776097ec9ed0b4622583b8b0ae",
+    "e2e/fixtures/handDelegateProbe.ts": "e05417e3ebbf3d677e8ade5a2d06db48f7c0d27d0006b6d638fb834e6aa06dad",
+    "e2e/fixtures/handDelegateProbe.worker.ts": "13e002ad6f0330fab8a322351046d7a145108750b8b154cecda87d39d56e261a",
+    "scripts/test-hand-delegates-video.mjs": "aea7ade3b7fdc0d6dfc008404deb4beb263b106fe0dd41fd52916c2a91b96b09",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+    "public/models/gesture_recognizer.task": "97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482"
+  },
+  "after": {
+    "e2e/fixtures/handDelegateProbe.html": "4fa0fcc236128baa73f1d81ab9abb06725806f776097ec9ed0b4622583b8b0ae",
+    "e2e/fixtures/handDelegateProbe.ts": "e05417e3ebbf3d677e8ade5a2d06db48f7c0d27d0006b6d638fb834e6aa06dad",
+    "e2e/fixtures/handDelegateProbe.worker.ts": "13e002ad6f0330fab8a322351046d7a145108750b8b154cecda87d39d56e261a",
+    "scripts/test-hand-delegates-video.mjs": "aea7ade3b7fdc0d6dfc008404deb4beb263b106fe0dd41fd52916c2a91b96b09",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+    "public/models/gesture_recognizer.task": "97952348cf6a6a4915c2ea1496b4b37ebabc50cbbf80571435643c455f2b0482"
+  },
+  "sourceChanged": false,
+  "result": {
+    "processed": 0,
+    "cleanup": "not-started",
+    "failure": "Worker init",
+    "summary": null
+  },
+  "failure": {
+    "name": "AssertionError",
+    "message": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'Worker init'\n- null\n"
+  },
+  "cameraRequests": 0,
+  "external": 0,
+  "writes": 0,
+  "pageErrors": []
+}
