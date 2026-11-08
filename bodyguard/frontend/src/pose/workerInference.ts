@@ -83,6 +83,7 @@ export async function createWorkerPoseInference(
   let disposal: Promise<void> | undefined
   let finishDisposal: ((clean: boolean) => void) | undefined
   let cleanupTimer: ReturnType<typeof setTimeout> | undefined
+  let cleanupDeadline: number | undefined
   let responseTimer: ReturnType<typeof setTimeout> | undefined
   let responseDeadline: number | undefined
   function clearResponseTimer() {
@@ -146,7 +147,12 @@ export async function createWorkerPoseInference(
       }
       if (!data || typeof data !== 'object' || data.generation !== generation) throw unavailable()
       if (retiring) {
-        if (data.type === 'closed') finishDisposal?.(data.clean === true)
+        if (data.type === 'closed')
+          finishDisposal?.(
+            data.clean === true &&
+              cleanupDeadline !== undefined &&
+              performance.now() < cleanupDeadline,
+          )
         return
       }
       // A delayed timer callback cannot make an overdue response timely.
@@ -201,6 +207,9 @@ export async function createWorkerPoseInference(
         finishDisposal(true)
         return
       }
+      // As with inference responses, a delayed event loop must not turn a late
+      // acknowledgement into an on-time cleanup. The timeout remains unchanged.
+      cleanupDeadline = performance.now() + CLEANUP_LIMIT_MS
       cleanupTimer = setTimeout(() => finishDisposal?.(false), CLEANUP_LIMIT_MS)
       try {
         worker.postMessage({ type: 'close', generation })
