@@ -1,0 +1,56 @@
+{
+  "method": "public prerecorded video as Chrome fake camera, actual local Worker/MediaPipe, no clinical or live-person claim",
+  "inputY4mSha256": "1df697eccf5e050538de3a5720dae25d56ed62a4d118dbf94aa09f675aa6df53",
+  "version": "156.0.8078.80",
+  "before": {
+    "src/pose/workerInference.ts": "daec71928a333ccf03ba94ab3e2612a8237e0689b9d03dd35e26683e88975f15",
+    "src/pose/workerInferenceRuntime.ts": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+    "src/pose/workerNativeEngine.ts": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "scripts/test-public-video-worker.mjs": "87884741568de8e3ecbdb049ee17314d323b67202ebf2177970a0f46412ffaf7",
+    "e2e/fixtures/publicVideoProbe.html": "398e6d377d1faf11465da13e2c3ba66331635e0727e74486857425d91e2eb9cb"
+  },
+  "after": {
+    "src/pose/workerInference.ts": "daec71928a333ccf03ba94ab3e2612a8237e0689b9d03dd35e26683e88975f15",
+    "src/pose/workerInferenceRuntime.ts": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+    "src/pose/workerNativeEngine.ts": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "scripts/test-public-video-worker.mjs": "87884741568de8e3ecbdb049ee17314d323b67202ebf2177970a0f46412ffaf7",
+    "e2e/fixtures/publicVideoProbe.html": "398e6d377d1faf11465da13e2c3ba66331635e0727e74486857425d91e2eb9cb"
+  },
+  "result": {
+    "frames": 45,
+    "singleBodies": 45,
+    "withWorldBody": 45,
+    "withFace": 0,
+    "withHands": 32,
+    "directionFrames": 45,
+    "directionNames": [
+      "lowerarm01L",
+      "lowerarm01R",
+      "lowerleg01L",
+      "lowerleg01R",
+      "upperarm01L",
+      "upperarm01R",
+      "upperleg01L",
+      "upperleg01R"
+    ],
+    "boneMotionRadians": {
+      "upperarm01L": 0.85532468902339,
+      "lowerarm01L": 1.078226319172703,
+      "upperarm01R": 0.7282578360713752,
+      "lowerarm01R": 1.5443934883996067,
+      "upperleg01L": 1.0687172372732172,
+      "lowerleg01L": 0.18004699701873186,
+      "upperleg01R": 0.8309508259872256,
+      "lowerleg01R": 0.2864281638187796
+    },
+    "shoulderImageVerticalRange": 0.19372840225696564,
+    "cameraStopped": true,
+    "workerClean": true
+  },
+  "failure": null,
+  "externalRequests": 0,
+  "writes": 0,
+  "pageErrors": []
+}
