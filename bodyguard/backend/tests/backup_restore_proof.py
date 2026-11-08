@@ -26,6 +26,7 @@ from app.db import (
     minute_summaries,
     notification_preferences,
     stretch_records,
+    user_profiles,
     users,
 )
 from app.main import create_app
@@ -271,8 +272,20 @@ def _schemas_equivalent(source: list[list[Any]], target: list[list[Any]]) -> boo
     }
     if len(source) != len(target):
         return False
+    profile_gender_rendered = {
+        "CHECK (gender IS NULL OR (gender::text = ANY (ARRAY['male'::character varying, "
+        "'female'::character varying]::text[])))",
+        "CHECK (gender IS NULL OR (gender::text = ANY (ARRAY['male'::character varying::text, "
+        "'female'::character varying::text])))",
+    }
     for before, after in zip(source, target, strict=True):
         if before == after:
+            continue
+        if (
+            before[:3] == after[:3] == ["constraint", "user_profiles", "profile_gender"]
+            and before[3] in profile_gender_rendered
+            and after[3] in profile_gender_rendered
+        ):
             continue
         if not (
             before[:3] == after[:3] == ["constraint", "stretch_records", "record_outcome"]
@@ -504,6 +517,17 @@ def run_isolated_proof(*, _interrupt_before_restore: bool = False) -> dict[str, 
                     )
                 connection.execute(insert(stretch_records), records)
                 connection.execute(
+                    insert(user_profiles).values(
+                        user_id=owner,
+                        revision=1,
+                        nickname="synthetic",
+                        age=28,
+                        height_cm=170.5,
+                        weight_kg=65.2,
+                        gender="female",
+                    )
+                )
+                connection.execute(
                     insert(notification_preferences).values(
                         user_id=owner,
                         posture_enabled=False,
@@ -663,6 +687,16 @@ def run_isolated_proof(*, _interrupt_before_restore: bool = False) -> dict[str, 
             result["restored_counts"] = _counts(restored)
             result["record_contents_match"] = _fingerprint(restored) == snapshot_fingerprint
             with restored.connect() as connection:
+                profile = connection.execute(select(user_profiles)).mappings().one()
+                result["profile_restored"] = dict(profile) == {
+                    "user_id": owner,
+                    "revision": 1,
+                    "nickname": "synthetic",
+                    "age": 28,
+                    "height_cm": 170.5,
+                    "weight_kg": 65.2,
+                    "gender": "female",
+                }
                 row = connection.execute(select(notification_preferences)).mappings().one()
                 result["notification_preferences_restored"] = dict(row) == {
                     "user_id": owner,
@@ -808,10 +842,11 @@ def run_isolated_proof(*, _interrupt_before_restore: bool = False) -> dict[str, 
             )
             result["proof_completed"] = all(
                 (
-                    result["revision"] == "0008_minute_summaries",
+                    result["revision"] == "0009_optional_profile",
                     result["restored_counts"] == result["source_counts"],
                     result["record_contents_match"],
                     result["notification_preferences_restored"],
+                    result["profile_restored"],
                     result["baseline_history_and_owner_restored"],
                     result["minute_summaries_restored"],
                     result["minute_summary_owner_isolation_restored"],

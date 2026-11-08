@@ -4,6 +4,7 @@ import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-libra
 import { StrictMode } from 'react'
 import { afterEach, expect, it, vi } from 'vitest'
 import { App } from '../App'
+import { defaultPeriod, localDay } from '../api/records'
 
 const id = '00000000-0000-4000-8000-000000000001'
 function row(index = 1) {
@@ -54,7 +55,7 @@ it.each([401, 503])('blocks private records when account check returns %s', asyn
   stub(records, () => json({}, status))
   open()
   await screen.findByRole('heading', {
-    name: status === 401 ? '다시 만나 반갑습니다' : '연결을 확인해 주세요',
+    name: status === 401 ? '로그인' : '연결을 확인해 주세요',
   })
   expect(records).not.toHaveBeenCalled()
 })
@@ -83,10 +84,11 @@ it('shows loading, genuine empty period and start recovery without invented scor
 it('opens real-shaped detail and preserves the selected period on return', async () => {
   stub(async (url) => json(url.includes('?') ? { items: [row()], has_more: false } : row()))
   open('/records?from=2026-09-01&to=2026-09-30')
-  const link = await screen.findByRole('link', { name: /neck-side.*기록 상세/ })
+  const link = await screen.findByRole('link', { name: /목 옆으로 기울이기.*기록 상세/ })
   expect(screen.getByText('12초')).toBeTruthy()
   fireEvent.click(link)
   await screen.findByText('fixture-not-release')
+  expect(screen.getByRole('heading', { name: '목 옆으로 기울이기' })).toBeTruthy()
   expect(document.title).toBe('수행 기록 상세 · BODYGUARD')
   expect(screen.getByText('중단')).toBeTruthy()
   fireEvent.click(screen.getByRole('link', { name: '기록 목록으로 돌아가기' }))
@@ -106,7 +108,7 @@ it('changes pages using the same query cutoff and never appends duplicates', asy
   await screen.findByRole('table')
   fireEvent.click(screen.getByRole('button', { name: '다음 페이지' }))
   await screen.findByRole('link', { name: /fixture-21.*기록 상세/ })
-  expect(screen.queryByRole('link', { name: /neck-side.*기록 상세/ })).toBeNull()
+  expect(screen.queryByRole('link', { name: /목 옆으로 기울이기.*기록 상세/ })).toBeNull()
   expect((screen.getByRole('button', { name: '다음 페이지' }) as HTMLButtonElement).disabled).toBe(
     true,
   )
@@ -114,7 +116,50 @@ it('changes pages using the same query cutoff and never appends duplicates', asy
   const ends = calls.map(([url]) => new URL(url, 'http://localhost').searchParams.get('end'))
   expect(new Set(ends).size).toBe(1)
   fireEvent.click(screen.getByRole('button', { name: '이전 페이지' }))
-  await screen.findByRole('link', { name: /neck-side.*기록 상세/ })
+  await screen.findByRole('link', { name: /목 옆으로 기울이기.*기록 상세/ })
+})
+it('switches day/week ranges and shows a total only when the returned list is complete', async () => {
+  let paginated = false
+  stub(async () => json({ items: [row()], has_more: paginated }))
+  open()
+  await screen.findByRole('table')
+  expect(screen.getByText('기록 1건')).toBeTruthy()
+  expect(screen.getByText('관찰 시간 12초')).toBeTruthy()
+  const { to } = defaultPeriod()
+  fireEvent.click(screen.getByRole('button', { name: '일간' }))
+  await waitFor(() => expect(new URLSearchParams(location.search).get('from')).toBe(to))
+  expect(new URLSearchParams(location.search).get('to')).toBe(to)
+  fireEvent.click(screen.getByRole('button', { name: '주간' }))
+  await waitFor(() =>
+    expect(new URLSearchParams(location.search).get('from')).toBe(defaultPeriod().from),
+  )
+  paginated = true
+  fireEvent.click(screen.getByRole('button', { name: '기간 조회' }))
+  await screen.findByRole('button', { name: '다음 페이지' })
+  expect(screen.queryByText('기록 1건')).toBeNull()
+  expect(screen.getByText('전체 기간 요약은 아직 제공되지 않습니다.')).toBeTruthy()
+})
+it('a selected calendar day queries that day without retaining a prior week', async () => {
+  stub(async () => json({ items: [], has_more: false }))
+  open()
+  await screen.findByRole('heading', { name: '이 기간에는 수행 기록이 없습니다' })
+  fireEvent.click(screen.getByRole('button', { name: '일간' }))
+  const previous = new Date()
+  previous.setDate(previous.getDate() - 1)
+  const day = localDay(previous)
+  fireEvent.click(screen.getByRole('button', { name: `${day} 선택` }))
+  await waitFor(() => expect(new URLSearchParams(location.search).get('to')).toBe(day))
+  expect(new URLSearchParams(location.search).get('from')).toBe(day)
+})
+it('renders server totals even when the first page is incomplete', async () => {
+  stub(async () =>
+    json({ items: [row()], has_more: true, total_count: 23, total_observed_ms: 276000 }),
+  )
+  open()
+  await screen.findByRole('table')
+  expect(screen.getByText('기록 23건')).toBeTruthy()
+  expect(screen.getByText('관찰 시간 4분 36초')).toBeTruthy()
+  expect(screen.queryByText('전체 기간 요약은 아직 제공되지 않습니다.')).toBeNull()
 })
 it('retries a failed read, keeps raw error out of the page and does not call it empty', async () => {
   let failed = true
@@ -146,8 +191,8 @@ it('rechecks the account after a records 401 and discards private content', asyn
     () => (expired ? json({}, 401) : json({ id: 'fixture-owner', email: 'fixture@example.com' })),
   )
   open()
-  await screen.findByRole('heading', { name: '다시 만나 반갑습니다' })
-  expect(screen.queryByRole('heading', { name: '내 수행 기록' })).toBeNull()
+  await screen.findByRole('heading', { name: '로그인' })
+  expect(screen.queryByRole('heading', { name: '스트레칭 기록' })).toBeNull()
 })
 it('focus recheck hides loaded private data before its answer and ignores late data', async () => {
   let expired = false
@@ -161,7 +206,7 @@ it('focus recheck hides loaded private data before its answer and ignores late d
   expired = true
   fireEvent(window, new Event('focus'))
   expect(screen.queryByRole('table')).toBeNull()
-  await screen.findByRole('heading', { name: '다시 만나 반갑습니다' })
+  await screen.findByRole('heading', { name: '로그인' })
   cleanup()
   expired = false
   stub(
@@ -175,7 +220,7 @@ it('focus recheck hides loaded private data before its answer and ignores late d
   await screen.findByText('기록을 불러오고 있습니다.')
   expired = true
   fireEvent(window, new Event('focus'))
-  await screen.findByRole('heading', { name: '다시 만나 반갑습니다' })
+  await screen.findByRole('heading', { name: '로그인' })
   await act(async () => release(json({ items: [row()], has_more: false })))
   expect(screen.queryByRole('table')).toBeNull()
 })

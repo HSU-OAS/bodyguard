@@ -8,7 +8,7 @@ from typing import Literal
 
 from fastapi import FastAPI, Header, HTTPException, Query, Request, Response
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, field_validator, model_validator
-from sqlalchemy import Connection, Engine, String, cast, delete, func, literal, select
+from sqlalchemy import Connection, Engine, String, cast, delete, func, literal, select, true
 from sqlalchemy.dialects.postgresql import aggregate_order_by, insert
 from sqlalchemy.sql.selectable import CTE
 
@@ -53,6 +53,8 @@ class StretchOut(StretchInput):
 class StretchList(BaseModel):
     items: list[StretchOut]
     has_more: bool
+    total_count: int | None = Field(default=None, ge=0, le=9007199254740991)
+    total_observed_ms: int | None = Field(default=None, ge=0, le=9007199254740991)
 
 
 class DeletePeriod(BaseModel):
@@ -293,23 +295,40 @@ def register_records(
             binding(request, user_id, supplied, expected_owner)
             if start is not None and end is not None and start >= end:
                 raise HTTPException(422, "입력 형식을 확인해 주세요.")
-            query = select(stretch_records).where(stretch_records.c.user_id == user_id)
+            conditions = [stretch_records.c.user_id == user_id]
             if start is not None:
-                query = query.where(stretch_records.c.ended_at >= start)
+                conditions.append(stretch_records.c.ended_at >= start)
             if end is not None:
-                query = query.where(stretch_records.c.ended_at < end)
+                conditions.append(stretch_records.c.ended_at < end)
+            # FR-R-03: one snapshot, separate indexable scans for totals and the bounded page.
+            totals = (
+                select(
+                    func.count().label("record_total"),
+                    func.coalesce(func.sum(stretch_records.c.observed_ms), 0).label(
+                        "observed_total"
+                    ),
+                )
+                .where(*conditions)
+                .cte("record_totals")
+            )
+            page = (
+                select(stretch_records)
+                .where(*conditions)
+                .order_by(stretch_records.c.ended_at.desc(), stretch_records.c.id.desc())
+                .limit(limit + 1)
+                .offset(offset)
+                .cte("record_page")
+            )
             rows = (
                 connection.execute(
-                    query.order_by(
-                        stretch_records.c.ended_at.desc(),
-                        stretch_records.c.id.desc(),
-                    )
-                    .limit(limit + 1)
-                    .offset(offset)
+                    select(page, totals.c.record_total, totals.c.observed_total)
+                    .select_from(totals.outerjoin(page, true()))
+                    .order_by(page.c.ended_at.desc(), page.c.id.desc())
                 )
                 .mappings()
                 .all()
             )
+            records = [row for row in rows if row["id"] is not None]
             return StretchList(
                 items=[
                     StretchOut(
@@ -319,9 +338,11 @@ def register_records(
                             if name != "provenance"
                         }
                     )
-                    for row in rows[:limit]
+                    for row in records[:limit]
                 ],
-                has_more=len(rows) > limit,
+                has_more=len(records) > limit,
+                total_count=rows[0]["record_total"],
+                total_observed_ms=rows[0]["observed_total"],
             )
 
     @app.get("/api/v1/records/stretch/{record_id}", response_model=StretchOut)

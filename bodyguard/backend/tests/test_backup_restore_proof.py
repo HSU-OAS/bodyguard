@@ -17,11 +17,12 @@ def test_native_owned_backup_restore_and_limits(monkeypatch: pytest.MonkeyPatch)
     monkeypatch.setenv("PGDATABASE", "refuse_external_database")
     monkeypatch.setenv("BODYGUARD_DATABASE_URL", "refuse_external_database")
     result = run_isolated_proof()
-    assert result["revision"] == "0008_minute_summaries"
+    assert result["revision"] == "0009_optional_profile"
     assert result["source_counts"] == {"users": 2, "stretch_records": 3}
     assert result["restored_counts"] == result["source_counts"]
     assert result["record_contents_match"] is True
     assert result["notification_preferences_restored"] is True
+    assert result["profile_restored"] is True
     assert result["baseline_history_and_owner_restored"] is True
     assert result["minute_summaries_restored"] is True
     assert result["minute_summary_owner_isolation_restored"] is True

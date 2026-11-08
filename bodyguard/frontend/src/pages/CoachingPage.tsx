@@ -48,7 +48,14 @@ function CoachingPreviewPage() {
   const [query, setQuery] = useState('')
   const [region, setRegion] = useState<Region>('all')
   const [pickerOpen, setPickerOpen] = useState(false)
-  const [previewOwner, setPreviewOwner] = useState<string | null>(null)
+  const [previewOwner, setPreviewOwner] = useState<string | null>(() =>
+    params.getAll('preview').length === 1 &&
+    params.get('preview') === '1' &&
+    motion &&
+    referenceMotion(motion.id)
+      ? `${motion.id}:male`
+      : null,
+  )
   const previewKey = motion ? `${motion.id}:${gender}` : null
   const preview = previewKey !== null && previewOwner === previewKey
   const [referenceStatus, setReferenceStatus] = useState<ReferenceStatus>('loading')
@@ -93,7 +100,7 @@ function CoachingPreviewPage() {
   }, [previewOwner, previewKey])
 
   return (
-    <section className="coaching-workspace" aria-labelledby="coaching-heading">
+    <section className="coaching-workspace figma-coaching" aria-labelledby="coaching-heading">
       <nav className="coaching-rail" aria-label="코칭 메뉴">
         <Link to="/start">내 시작</Link>
         <button type="button" onClick={openPicker}>
@@ -195,6 +202,7 @@ function CoachingPreviewPage() {
               key={`${motion?.id ?? 'unselected'}:${gender}`}
               motion={motion}
               comparison={comparison}
+              avatarReady={preview && referenceStatus === 'ready'}
             />
           )}
           <div className="coaching-actions">

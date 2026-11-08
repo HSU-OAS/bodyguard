@@ -1,5 +1,7 @@
 # Bodyguard — Tasks
 
+2026-10-17 [S3.C6 한 팔씩 올림/복귀](stories/arm-overhead-coaching.md): PR162 merge25429c00 최신 main에서 지정 팔/반대 팔·팔꿈치 투영/손목 높이·머리/체간·가림/세대/원본 시각을 관찰/판정하고 기존 실제 session/result 계약에 연결했다. [실행·terminal P2 보완·생성/실제·증거](review/arm-overhead-coaching/README.md). 임상 기본값/공개 적격 승격0·화면/SDK/원본/GLB/운영 변경0. 순수 계약의 scoped PR 게이트를 진행하며 다음은 실제 남녀 아바타/오류 표면/시범/실행 UI 연결이다. 기존 Draft163/150/152·P2·최종 외형/성능·임상/개인별 추천·참여자 이월/외부·운영 승인 및 전체1~4/1~6 기준은 유지한다.
+
 2026-10-17 S3.C5 [첫 추론 준비 보완](review/shoulder-shrug-workspace/preparation/README.md): 동시 재개 실패가5초 응답 마감 초과인 직접 경로를 확인하고, 동일 source 첫 입력 폐기→아바타 GPU 준비→새 입력 코칭을 실제 연결했다. 구현 후 동시 native2/어깨UI4·목 native2/화면8·전체2095 통과. 최초 종료 P2는 원인 미확정으로 Draft #163/미병합 유지, 전체1~4/1~6 통과가 아니다. 독립 동작 코칭과 SDK 정리 보완을 계속하며 기존 원본·실패·품질/별도 승인 기준을 보존한다.
 
 2026-10-17 S3.C5 [Draft PR #163](https://github.com/HSU-OAS/bodyguard/pull/163) 후속: [정리/ACK 분리 진단](review/shoulder-shrug-workspace/cleanup/README.md)으로 단독 정상 해제와 동시 실행 재개 추론 실패를 구분했다. 기존 정리 P2는 미해결·미병합이며 소유/제한 시간·공개 적격0·전체 단계 기준을 유지한다. 같은 Story의 응답/프로토콜 원인 분리를 계속하며 goal을 일시정지하지 않는다.

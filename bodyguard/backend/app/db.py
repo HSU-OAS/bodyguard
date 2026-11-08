@@ -156,6 +156,29 @@ notification_preferences = Table(
     CheckConstraint("posture_minutes BETWEEN 1 AND 1440", name="notification_posture_minutes"),
     CheckConstraint("sitting_minutes BETWEEN 1 AND 1440", name="notification_sitting_minutes"),
 )
+user_profiles = Table(
+    "user_profiles",
+    metadata,
+    Column("user_id", String(36), ForeignKey("users.id", ondelete="CASCADE"), primary_key=True),
+    Column("revision", Integer, nullable=False),
+    Column("nickname", String(60)),
+    Column("age", Integer),
+    Column("height_cm", Double),
+    Column("weight_kg", Double),
+    Column("gender", String(6)),
+    CheckConstraint("revision BETWEEN 1 AND 2147483647", name="profile_revision"),
+    CheckConstraint(
+        "nickname IS NULL OR length(trim(nickname)) BETWEEN 1 AND 60", name="profile_nickname"
+    ),
+    CheckConstraint("age IS NULL OR age BETWEEN 0 AND 150", name="profile_age"),
+    CheckConstraint(
+        "height_cm IS NULL OR (height_cm > 0 AND height_cm <= 1000)", name="profile_height"
+    ),
+    CheckConstraint(
+        "weight_kg IS NULL OR (weight_kg > 0 AND weight_kg <= 1000)", name="profile_weight"
+    ),
+    CheckConstraint("gender IS NULL OR gender IN ('male', 'female')", name="profile_gender"),
+)
 stretch_records = Table(
     "stretch_records",
     metadata,

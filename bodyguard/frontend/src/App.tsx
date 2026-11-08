@@ -9,6 +9,7 @@ import { MemberPage } from './pages/MemberPage'
 import { MinuteSummaryPage } from './pages/MinuteSummaryPage'
 import { NotificationPreferencesPage } from './pages/NotificationPreferencesPage'
 import { PasswordPage } from './pages/PasswordPage'
+import { ProfilePage } from './pages/ProfilePage'
 import { RecordsPage } from './pages/RecordsPage'
 import { WithdrawalPage } from './pages/WithdrawalPage'
 
@@ -31,6 +32,13 @@ const MotionSelection = import.meta.env.DEV
 // FR-V-03: approved structure is not public coaching before asset/motion gates.
 const Coaching = import.meta.env.DEV
   ? lazy(() => import('./pages/CoachingPage').then((module) => ({ default: module.CoachingPage })))
+  : null
+
+// FR-S-06/FR-V-03: Figma layout review remains separate from the public service.
+const FigmaHome = import.meta.env.DEV
+  ? lazy(() =>
+      import('./pages/FigmaHomePage').then((module) => ({ default: module.FigmaHomePage })),
+    )
   : null
 
 function SessionGate({ children }: { children?: ReactNode }) {
@@ -215,6 +223,7 @@ function Shell() {
       (Coaching && pagePath === '/dev/coaching') ||
       pagePath === '/account/delete' ||
       pagePath === '/account/notifications' ||
+      pagePath === '/account/profile' ||
       pagePath === '/posture-records' ||
       /^\/records(?:\/[^/]+)?$/.test(pagePath)
     )
@@ -253,7 +262,9 @@ function Shell() {
     } · BODYGUARD`
   }, [location.pathname, pagePath, focusState])
   return (
-    <div className={`website${Coaching && pagePath === '/dev/coaching' ? ' coaching-layout' : ''}`}>
+    <div
+      className={`website${Coaching && pagePath === '/dev/coaching' ? ' coaching-layout' : ''}${['/login', '/signup', '/password/forgot', '/password/reset'].includes(pagePath) || (pagePath === '/account/profile' && new URLSearchParams(location.search).has('next')) ? ' figma-login-shell' : ''}`}
+    >
       <button
         className="skip-link"
         type="button"
@@ -296,7 +307,9 @@ function Shell() {
                 className="nav-link"
                 to="/account"
                 aria-current={
-                  /^\/account(?:\/(?:delete|notifications))?$/.test(pagePath) ? 'page' : undefined
+                  /^\/account(?:\/(?:delete|notifications|profile))?$/.test(pagePath)
+                    ? 'page'
+                    : undefined
                 }
               >
                 내 계정
@@ -339,6 +352,14 @@ function Shell() {
             element={
               <SessionGate>
                 <NotificationPreferencesPage />
+              </SessionGate>
+            }
+          />
+          <Route
+            path="/account/profile"
+            element={
+              <SessionGate>
+                <ProfilePage />
               </SessionGate>
             }
           />
@@ -439,6 +460,12 @@ function Shell() {
 // FR-M-01·07 라우트 이탈은 측정 화면을 실제로 해제하여 카메라를 끈다.
 function AppContent() {
   const location = useLocation()
+  if (FigmaHome && location.pathname === '/dev/figma-home')
+    return (
+      <Suspense fallback={<p role="status">화면을 여는 중입니다</p>}>
+        <FigmaHome />
+      </Suspense>
+    )
   return Demo && location.pathname === '/dev/measure' ? (
     <Suspense fallback={<p role="status">개발 도구를 여는 중입니다</p>}>
       <Demo />

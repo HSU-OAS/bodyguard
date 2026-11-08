@@ -3,6 +3,7 @@ import { type FormEvent, useEffect, useLayoutEffect, useRef, useState } from 're
 import { Link, useLocation, useNavigate } from 'react-router'
 import { ApiError, errorMessage, forgot, validPassword } from '../api/auth'
 import { useAuth } from '../auth'
+import './FigmaLogin.css'
 
 function linkToken(hash: string, search: string) {
   if (search) return ''
@@ -114,13 +115,11 @@ export function PasswordPage({ mode }: { mode: 'forgot' | 'reset' }) {
 
   const invalid = mode === 'reset' && !token && !complete
   return (
-    <section className="account-layout">
-      <aside className="account-intro">
-        <p className="eyebrow">BODYGUARD / ACCOUNT RECOVERY</p>
-        <h2>안전한 계정 복구</h2>
-        <p>이메일의 일회용 링크로 재설정합니다.</p>
-      </aside>
+    <section className="account-layout figma-login">
       <div className="account-form">
+        <Link className="figma-login-brand" to="/">
+          BODYGUARD
+        </Link>
         <p className="eyebrow">계정 복구</p>
         <h1 ref={heading} tabIndex={-1}>
           {complete

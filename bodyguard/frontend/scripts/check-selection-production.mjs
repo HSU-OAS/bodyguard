@@ -186,6 +186,10 @@ for (const file of files) {
     'nativeWorkerTrace',
     'nativeWorkerCounts',
     'nativeWorkerFailures',
+    'createOverheadCandidateClassifier',
+    'createOverheadCandidateFeedback',
+    'Invalid overhead candidate criteria',
+    'math-overhead-v1',
     '판정 후보 검수 · 출시 코칭 아님',
   ]) {
     assert(!text.includes(forbidden), `Development candidate leaked into ${String(file)}`)

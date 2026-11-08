@@ -434,7 +434,7 @@ def test_r05_actual_migration_preserves_old_users_and_sessions(harness: Harness)
             )
         with h.engine.connect() as c:
             assert (
-                c.scalar(text("SELECT version_num FROM alembic_version")) == "0008_minute_summaries"
+                c.scalar(text("SELECT version_num FROM alembic_version")) == "0009_optional_profile"
             )
     finally:
         command.upgrade(config, "head")

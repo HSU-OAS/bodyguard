@@ -42,7 +42,7 @@ it.each([
   setupAuth()
   window.history.replaceState(null, '', path)
   render(<App />)
-  await screen.findByRole('heading', { name: '다시 만나 반갑습니다' })
+  await screen.findByRole('heading', { name: '로그인' })
   expect(new URLSearchParams(window.location.search).get('next')).toBe(expected)
 })
 it('기록 진입→가입/로그인 전환→이메일 로그인 뒤 원래 기간으로 복귀한다', async () => {
@@ -50,13 +50,13 @@ it('기록 진입→가입/로그인 전환→이메일 로그인 뒤 원래 기
   setupAuth()
   window.history.replaceState(null, '', '/records?from=2026-10-01&to=2026-10-09')
   render(<App />)
-  await screen.findByRole('heading', { name: '다시 만나 반갑습니다' })
-  fireEvent.click(screen.getByRole('link', { name: '이메일로 가입' }))
-  await screen.findByRole('heading', { name: '나를 위한 움직임의 시작' })
+  await screen.findByRole('heading', { name: '로그인' })
+  fireEvent.click(screen.getByRole('link', { name: '회원가입' }))
+  await screen.findByRole('heading', { name: '회원가입' })
   expect(new URLSearchParams(window.location.search).get('next')).toBe(destination)
   const links = screen.getAllByRole('link', { name: '로그인' })
   fireEvent.click(links[links.length - 1])
-  await screen.findByRole('heading', { name: '다시 만나 반갑습니다' })
+  await screen.findByRole('heading', { name: '로그인' })
   fireEvent.change(screen.getByLabelText('이메일', { exact: true }), {
     target: { value: account.email },
   })
@@ -72,7 +72,24 @@ it('서버 상태를 확인하지 못하면 복귀 목적이 있어도 개인 �
   vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response('{}', { status: 503 })))
   render(<App />)
   await screen.findByRole('heading', { name: '연결을 확인해 주세요' })
-  expect(screen.queryByRole('heading', { name: '내 수행 기록' })).toBeNull()
-  expect(screen.queryByRole('heading', { name: '다시 만나 반갑습니다' })).toBeNull()
+  expect(screen.queryByRole('heading', { name: '스트레칭 기록' })).toBeNull()
+  expect(screen.queryByRole('heading', { name: '로그인' })).toBeNull()
   expect(window.location.pathname).toBe('/records')
+})
+
+it('피그마 선택 후 로그인해도 명시적 시범 요청을 유지한다', async () => {
+  setupAuth()
+  window.history.replaceState(null, '', '/dev/coaching?motion=neck-side&preview=1')
+  render(<App />)
+  await screen.findByRole('heading', { name: '로그인' })
+  fireEvent.change(screen.getByLabelText('이메일', { exact: true }), {
+    target: { value: account.email },
+  })
+  fireEvent.change(screen.getByLabelText('비밀번호', { exact: true }), {
+    target: { value: 'test-password-long-123' },
+  })
+  fireEvent.click(screen.getByRole('button', { name: '로그인' }))
+  await screen.findByRole('heading', { name: '목 옆으로 기울이기' })
+  expect(window.location.search).toBe('?motion=neck-side&preview=1')
+  expect(screen.getByRole('button', { name: '시범 닫기' })).toBeTruthy()
 })

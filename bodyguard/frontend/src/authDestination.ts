@@ -8,6 +8,7 @@ const pages = new Set([
   '/posture-records',
   '/account',
   '/account/notifications',
+  '/account/profile',
   '/account/delete',
 ])
 
@@ -25,9 +26,17 @@ export function personalDestination(value: unknown): string | null {
   if (extra !== undefined || !/^\/[A-Za-z0-9/-]+$/.test(rawPath)) return null
   const path = rawPath.toLowerCase().replace(/\/+$/, '')
   const detail = path.startsWith('/records/') && recordId(path.slice('/records/'.length))
-  if (!pages.has(path) && !detail) return null
+  // FR-S-06: preserve the selected candidate only in the protected development review.
+  const devCoaching = import.meta.env.DEV && path === '/dev/coaching'
+  if (!pages.has(path) && !detail && !devCoaching) return null
   const query = new URLSearchParams(search)
   const safe = new URLSearchParams()
+  if (devCoaching) {
+    const values = query.getAll('motion')
+    if (values.length === 1 && /^[a-z0-9-]{1,80}$/.test(values[0])) safe.set('motion', values[0])
+    const preview = query.getAll('preview')
+    if (safe.has('motion') && preview.length === 1 && preview[0] === '1') safe.set('preview', '1')
+  }
   if (path === '/records' || detail || path === '/posture-records') {
     for (const key of ['from', 'to']) {
       const values = query.getAll(key)

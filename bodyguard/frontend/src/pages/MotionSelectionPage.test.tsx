@@ -48,7 +48,7 @@ it('C-01 hides content while account confirmation is pending', async () => {
 })
 it('C-01 guest does not see the catalog and uses the unchanged login return', async () => {
   open('/dev/select?motion=neck-side', 401)
-  expect(await screen.findByRole('heading', { name: '다시 만나 반갑습니다' })).toBeTruthy()
+  expect(await screen.findByRole('heading', { name: '로그인' })).toBeTruthy()
   expect(screen.queryByText('목 옆으로 기울이기')).toBeNull()
   expect(window.location.search).toBe('?next=%2Fstart')
 })
@@ -99,7 +99,7 @@ it('C-01 focus recheck removes selected content before the next account response
   fetcher.mockResolvedValue(new Response('{}', { status: 401 }))
   fireEvent(window, new Event('focus'))
   expect(screen.queryByRole('heading', { name: '목 옆으로 기울이기', level: 1 })).toBeNull()
-  expect(await screen.findByRole('heading', { name: '다시 만나 반갑습니다' })).toBeTruthy()
+  expect(await screen.findByRole('heading', { name: '로그인' })).toBeTruthy()
 })
 
 it('C-07 cached navigation keeps the selection page title', async () => {

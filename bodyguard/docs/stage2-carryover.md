@@ -1,5 +1,7 @@
 # 2단계 필수 보완 이월 및 후속 실행 순서
 
+2026-10-17 [S3.C6](stories/arm-overhead-coaching.md)은 한 팔씩 올림/복귀의 생성 기하→같은 프레임 판정→실제 session/result 계약을 연결했다([실패·terminal P2 보완·증거](review/arm-overhead-coaching/README.md)). 화면/실제 SDK·3D 변형·실측/임상 프로필 검증이 아니며 공개 적격0·기존 원본/실패와 D2/전체1~4/1~6 필수 기준은 유지한다. Draft163의 종료 P2·기존 Draft/최종 외형/성능·추천/외부·운영 미완료와 별도 승인도 유지한다.
+
 2026-10-17 S3.C5 [동일 source 첫 추론 준비](review/shoulder-shrug-workspace/preparation/README.md)를 연결했다. 준비 입력은 폐기하고 아바타 GPU·ready·진행 전에 처리한다. 구현 후 목/어깨·동시 실행 회귀 통과는 기록하되 최초 정리 P2/최종 외형·임상/성능·전체 단계 미완료와 별도 승인 기준은 그대로다. Draft #163과 과거 증거를 유지한다.
 
 2026-10-17 S3.C5 [Draft #163 정리/ACK 진단](review/shoulder-shrug-workspace/cleanup/README.md): 단독/기본 소유 해제는 통과했지만 최초 정리 P2와 동시 실행 재개 추론 실패는 원인 미확정으로 유지한다. 기존 증거·원본·품질 기준을 보존하며 병합/Story·단계 완료가 아니다. 별도 승인 없는 운영/공개 승격은 없고 같은 Story 보완을 계속한다.

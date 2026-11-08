@@ -11,6 +11,7 @@ import {
 } from '../api/auth'
 import { useAuth } from '../auth'
 import { loginDestination } from '../authDestination'
+import './FigmaLogin.css'
 
 const googleErrors: Record<string, string> = {
   cancelled: '구글 로그인을 취소했습니다. 다시 시작하거나 이메일로 계속해 주세요.',
@@ -145,95 +146,82 @@ export function AccountPage({ mode }: { mode: 'login' | 'signup' }) {
     }
   }
 
-  if (auth.state.status === 'ready') return <Navigate to={destination} replace />
-  const heading = verify
-    ? '이메일을 확인해 주세요'
-    : mode === 'signup'
-      ? '나를 위한 움직임의 시작'
-      : '다시 만나 반갑습니다'
+  if (auth.state.status === 'ready')
+    return (
+      <Navigate
+        to={
+          mode === 'signup' && verify
+            ? `/account/profile?${new URLSearchParams({ next: destination })}`
+            : destination
+        }
+        replace
+      />
+    )
+  const heading = verify ? '이메일을 확인해 주세요' : mode === 'signup' ? '회원가입' : '로그인'
+  const googleOption = !verify && (
+    <div className="google-option">
+      <button
+        type="button"
+        className="button google-button wide"
+        disabled={pending || googleState !== 'ready'}
+        aria-describedby="google-feedback"
+        onClick={() => {
+          if (busy.current || googleState !== 'ready') return
+          busy.current = true
+          setPending(true)
+          setError('')
+          setGoogleState('leaving')
+          window.location.assign('/api/v1/auth/google/login')
+        }}
+      >
+        <span className="google-icon" aria-hidden="true">
+          <img src="/brand/google-icon.png" alt="" width={40} height={40} />
+        </span>
+        Google로 계속하기
+      </button>
+      <p id="google-feedback" className="muted small google-feedback" role="status">
+        {googleState === 'checking'
+          ? '구글 연결을 확인하고 있습니다.'
+          : googleState === 'leaving'
+            ? '구글 로그인으로 이동합니다.'
+            : googleState === 'unavailable'
+              ? '구글 연결을 준비하고 있습니다. 이메일로 계속해 주세요.'
+              : googleState === 'error'
+                ? '구글 연결을 확인하지 못했습니다. 이메일로 계속할 수 있습니다.'
+                : '구글 계정으로 로그인하거나 새 계정을 만듭니다.'}
+      </p>
+      {googleState === 'error' && (
+        <button
+          type="button"
+          className="text-button google-retry"
+          disabled={pending}
+          onClick={checkGoogle}
+        >
+          구글 연결 다시 확인
+        </button>
+      )}
+    </div>
+  )
   return (
-    <section className="account-layout">
-      <aside className="account-intro">
-        <p className="eyebrow">BODYGUARD / MY ACCOUNT</p>
-        <h2>
-          일상에 맞춘
-          <br />몸 돌보기.
-        </h2>
-        <p>
-          노트북 웹캠 한 대로 시작하는
-          <br />
-          스트레칭과 자세 코칭.
-        </p>
-        <div className="privacy-note">
-          <span className="section-number">01</span>
-          <p>
-            카메라는 직접 시작할 때만 켜집니다.
-            <br />
-            원본 영상은 저장하거나 전송하지 않습니다.
-          </p>
-        </div>
-        <p className="muted small">
-          현재 개발 중인 웹입니다.
-          <br />
-          출시 전 기능·안전·개인정보 검증을 진행하고 있습니다.
-        </p>
-      </aside>
+    <section className="account-layout figma-login">
       <div className="account-form">
-        <p className="eyebrow">
-          {verify ? '이메일 인증 · 2 / 2' : mode === 'signup' ? '이메일 가입 · 1 / 2' : '로그인'}
-        </p>
+        <Link className="figma-login-brand" to="/">
+          BODYGUARD
+        </Link>
+        {mode !== 'login' && (
+          <p className="eyebrow">
+            {verify ? '이메일 인증 · 2 / 2' : mode === 'signup' ? '이메일 가입 · 1 / 2' : '로그인'}
+          </p>
+        )}
         <h1 tabIndex={-1}>{heading}</h1>
-        <p className="muted">
-          {verify
-            ? `${email}로 보낸 6자리 코드를 입력하세요. 코드는 10분간 유효합니다.`
-            : mode === 'signup'
-              ? '이메일 인증 후 계정이 만들어집니다.'
-              : '이메일로 내 계정에 로그인하세요.'}
-        </p>
-        {!verify && (
-          <div className="google-option">
-            <button
-              type="button"
-              className="button google-button wide"
-              disabled={pending || googleState !== 'ready'}
-              aria-describedby="google-feedback"
-              onClick={() => {
-                if (busy.current || googleState !== 'ready') return
-                busy.current = true
-                setPending(true)
-                setError('')
-                setGoogleState('leaving')
-                window.location.assign('/api/v1/auth/google/login')
-              }}
-            >
-              <span className="google-icon" aria-hidden="true">
-                <img src="/brand/google-icon.png" alt="" width={40} height={40} />
-              </span>
-              Google로 계속하기
-            </button>
-            <p id="google-feedback" className="muted small google-feedback" role="status">
-              {googleState === 'checking'
-                ? '구글 연결을 확인하고 있습니다.'
-                : googleState === 'leaving'
-                  ? '구글 로그인으로 이동합니다.'
-                  : googleState === 'unavailable'
-                    ? '구글 연결을 준비하고 있습니다. 이메일로 계속해 주세요.'
-                    : googleState === 'error'
-                      ? '구글 연결을 확인하지 못했습니다. 이메일로 계속할 수 있습니다.'
-                      : '구글 계정으로 로그인하거나 새 계정을 만듭니다.'}
-            </p>
-            {googleState === 'error' && (
-              <button
-                type="button"
-                className="text-button google-retry"
-                disabled={pending}
-                onClick={checkGoogle}
-              >
-                구글 연결 다시 확인
-              </button>
-            )}
-            <p className="account-divider">또는 이메일로</p>
-          </div>
+        {mode !== 'login' && (
+          <p className="muted">
+            {verify
+              ? `${email}로 보낸 6자리 코드를 입력하세요. 코드는 10분간 유효합니다.`
+              : mode === 'signup'
+                ? '이메일 인증 후 계정이 만들어집니다.'
+                : '이메일로 내 계정에 로그인하세요.'}
+          </p>
         )}
         <form
           onSubmit={(event) => {
@@ -364,27 +352,30 @@ export function AccountPage({ mode }: { mode: 'login' | 'signup' }) {
               이메일 변경·가입 다시 시작
             </button>
           </div>
-        ) : (
+        ) : mode === 'signup' ? (
           <p className="form-secondary">
-            {mode === 'signup' ? '이미 계정이 있나요?' : '처음 오셨나요?'}{' '}
-            <Link
-              to={
-                (mode === 'signup' ? '/login?' : '/signup?') +
-                new URLSearchParams({ next: destination }).toString()
-              }
-            >
-              {mode === 'signup' ? '로그인' : '이메일로 가입'}
+            이미 계정이 있나요?{' '}
+            <Link to={'/login?' + new URLSearchParams({ next: destination }).toString()}>
+              로그인
             </Link>
           </p>
+        ) : (
+          <div className="figma-login-links">
+            <Link to="/password/forgot">비밀번호 찾기</Link>
+            <Link to={'/signup?' + new URLSearchParams({ next: destination }).toString()}>
+              회원가입
+            </Link>
+          </div>
         )}
-        {mode === 'login' && (
-          <p className="form-secondary">
-            <Link to="/password/forgot">비밀번호를 잊으셨나요?</Link>
-          </p>
-        )}
+        {googleOption}
         <Link className="back-link" to="/">
           서비스 소개로 돌아가기
         </Link>
+        {mode === 'signup' && (
+          <Link className="back-link" to="/data">
+            카메라·데이터 안내
+          </Link>
+        )}
       </div>
     </section>
   )

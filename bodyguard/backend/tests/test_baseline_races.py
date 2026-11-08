@@ -211,7 +211,7 @@ def test_b06_downgrade_waits_for_concurrent_insert_then_preserves_it(harness: Ha
         command.upgrade(config, "head")
     assert h.client.get(PATH + "/active").status_code == 200
     with h.engine.connect() as c:
-        assert c.scalar(text("SELECT version_num FROM alembic_version")) == "0008_minute_summaries"
+        assert c.scalar(text("SELECT version_num FROM alembic_version")) == "0009_optional_profile"
 
 
 def test_b05_actual_owner_lock_timeout_preserves_active(harness: Harness) -> None:

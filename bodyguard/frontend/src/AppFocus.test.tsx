@@ -97,7 +97,7 @@ it('F02 로그아웃 실패 제목·명시 재시도·게스트 로그인', asyn
   const retry = screen.getByRole('button', { name: '로그아웃 다시 시도' })
   retry.focus()
   fireEvent.click(retry)
-  const login = await screen.findByRole('heading', { name: '다시 만나 반갑습니다' })
+  const login = await screen.findByRole('heading', { name: '로그인' })
   await waitFor(() => expect(focused(login)).toBe(true))
 })
 
@@ -179,7 +179,7 @@ it('F06 기록 제목의 초점은 담당 화면이 한 번만 관리한다', as
       ),
   )
   render(<App />)
-  const heading = await screen.findByRole('heading', { name: '내 수행 기록' })
+  const heading = await screen.findByRole('heading', { name: '스트레칭 기록' })
   await waitFor(() => expect(focused(heading)).toBe(true))
   expect(focus.mock.contexts.filter((node) => node === heading).length).toBe(1)
 })

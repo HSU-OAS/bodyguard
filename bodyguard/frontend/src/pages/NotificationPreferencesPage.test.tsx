@@ -60,7 +60,7 @@ it.each([401, 503])('W01 auth gate blocks settings requests at %s', async (statu
   network(settings, () => json({}, status))
   open()
   await screen.findByRole('heading', {
-    name: status === 401 ? '다시 만나 반갑습니다' : '연결을 확인해 주세요',
+    name: status === 401 ? '로그인' : '연결을 확인해 주세요',
   })
   expect(settings).not.toHaveBeenCalled()
   expect(screen.queryByRole('button', { name: '설정 저장' })).toBeNull()
@@ -172,7 +172,7 @@ it('W04 pending save is single-flight; auth refresh removes old drafts and ignor
   expect(calls.mock.calls.filter(([, init]) => init?.method === 'POST')).toHaveLength(1)
   expired = true
   fireEvent(window, new Event('focus'))
-  await screen.findByRole('heading', { name: '다시 만나 반갑습니다' })
+  await screen.findByRole('heading', { name: '로그인' })
   expect((pendingSignal as AbortSignal | null)?.aborted).toBe(true)
   await act(async () => done(json(defaults)))
   expect(screen.queryByText('설정을 저장했습니다.')).toBeNull()

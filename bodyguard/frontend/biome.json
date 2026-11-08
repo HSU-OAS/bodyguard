@@ -29,6 +29,16 @@
   },
   "overrides": [
     {
+      "includes": ["src/assets/figma-home/*.svg"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "noSvgWithoutTitle": "off"
+          }
+        }
+      }
+    },
+    {
       "includes": ["src/api/generated/**"],
       "linter": {
         "rules": {
