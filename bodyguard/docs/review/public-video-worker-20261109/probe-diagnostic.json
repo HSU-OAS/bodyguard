@@ -1,0 +1,38 @@
+{
+  "method": "public prerecorded video as Chrome fake camera, actual local Worker/MediaPipe, no clinical or live-person claim",
+  "inputY4mSha256": "70dab96aef1936a4e764f4e89acc6b743c749de7a70a4336a469e4913f265beb",
+  "version": "156.0.8078.80",
+  "before": {
+    "src/pose/workerInference.ts": "daec71928a333ccf03ba94ab3e2612a8237e0689b9d03dd35e26683e88975f15",
+    "src/pose/workerInferenceRuntime.ts": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+    "src/pose/workerNativeEngine.ts": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+    "src/pose/nativeInference.worker.ts": "05f348328e805177de820a47e29dc8b06deb0cf0f6b3faaf40dcc5957b07e74b",
+    "src/pose/ownedModelAssets.ts": "eede84c8840a6a1937e2a51942fed9b7f907c6f750c4fdc73bf74503c623317e",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "scripts/test-public-video-worker.mjs": "9f3ef553924dae80422f7bf4d33e70e41a96dabc2fc009c37b0346464ec48e4e",
+    "e2e/fixtures/publicVideoProbe.html": "398e6d377d1faf11465da13e2c3ba66331635e0727e74486857425d91e2eb9cb"
+  },
+  "after": {
+    "src/pose/workerInference.ts": "daec71928a333ccf03ba94ab3e2612a8237e0689b9d03dd35e26683e88975f15",
+    "src/pose/workerInferenceRuntime.ts": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+    "src/pose/workerNativeEngine.ts": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+    "src/pose/nativeInference.worker.ts": "05f348328e805177de820a47e29dc8b06deb0cf0f6b3faaf40dcc5957b07e74b",
+    "src/pose/ownedModelAssets.ts": "eede84c8840a6a1937e2a51942fed9b7f907c6f750c4fdc73bf74503c623317e",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "scripts/test-public-video-worker.mjs": "9f3ef553924dae80422f7bf4d33e70e41a96dabc2fc009c37b0346464ec48e4e",
+    "e2e/fixtures/publicVideoProbe.html": "398e6d377d1faf11465da13e2c3ba66331635e0727e74486857425d91e2eb9cb"
+  },
+  "sourceChanged": false,
+  "result": null,
+  "failure": {
+    "name": "TimeoutError",
+    "message": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:55752/e2e/fixtures/publicVideoProbe.html\", waiting until \"load\"\u001b[22m\n"
+  },
+  "externalRequests": 0,
+  "writes": 0,
+  "pageErrors": [],
+  "diagnostics": true,
+  "workerLogs": []
+}
