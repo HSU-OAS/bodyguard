@@ -11,3 +11,5 @@
 runner는 원래 frontend의 `scripts/local-rig-direction-proof.mjs`에서 실행했으며 결과 JSON의 실행 전 SHA와 보존한 파일의 SHA가 일치한다. 재실행에는 동일한 공개 Y4M을 별도 임시 경로에 준비하고 runner를 frontend `scripts/`에 같은 이름으로 복사해야 한다. 소스 비디오 캡처 기능은 위 Y4M 해시에 고정되어 있고 캡처 이미지는 로컬 임시 폴더에만 남겼다.
 
 실제 표시 중이고 9개 관절이 추적되는 프레임만 선택하도록 강화한 [첫 재검증](valid-first-failed.json)은 아바타 준비 전 SDK 초기화 오류로 프레임 0개를 처리했다. 카메라는 종료됐으며 정리 성공 여부와 오류 원인은 이 실행에서 확인되지 않았다. [로그](valid-first-failed.log.gz)와 [실행 runner](valid-runner.mjs)를 보존한다. 결과는 미확정이며 기존의 숨겨진 아바타 숫자로 대신하지 않는다.
+
+진단 로그를 켠 [두 번째 재검증](valid-diagnostic-failed.json)에서도 SDK 초기화 응답이 51.3초 후 제한 시간을 넘겨 0프레임으로 실패했다. 카메라는 종료됐지만 Worker 정리는 제한 시간 안에 완료되지 않았다. 진단 로그는 첫 작업의 종료 시작까지만 보여 주며, 이것만으로 근본 원인을 단정할 수 없다. [실행 로그](valid-diagnostic-failed.log.gz)를 보존한다. 이 결과는 동일 프레임 추적 정확도나 실제 사용자 검증의 성공이 아니다.
