@@ -1,0 +1,7 @@
+# 2026-11-09 최신 main 통합 재검증
+
+PR #163을 기존 최신 main `d9b0fa93` 및 가중치 최적화 병합 `c913a4d3`에 차례로 통합했다. 기존 문서와 공개 산출물 제외 검사의 양쪽 내용을 유지했다. 최종 통합 후 기본 제한 시간과 `--maxWorkers=2`로 전체 131개 파일, 2,185개 테스트가 통과했다. 변경 범위 Biome, TypeScript, Vite production build, production guard도 통과했다. [전체 테스트 원문](full.log.gz) · [빌드 원문](build.log.gz).
+
+`c913a4d3`을 통합하기 **전** `fecb6369` 상태의 실제 Chrome 156, 빈 가짜 카메라, 실제 Worker/MediaPipe/모델 및 후보 GLB로 어깨 후보의 시작·일시정지·재개·중단을 1회 실행했다. 두 Worker가 종료 확인을 보냈고 57개 요청과 결과가 기록됐으며 외부 요청·쓰기·페이지 오류는 0이었다. SDK Worker에 종료 단계 기록을 추가한 시험이다. [결과](native.json) · [실행 로그](native.log.gz). 실제 사람·웹캠·자세나 손 정확도 검증은 아니다.
+
+이 단독 성공은 이전의 간헐적인 Worker 정리 실패를 해결하거나 원인을 밝힌 증거가 아니다. 따라서 기존 P2는 미해결로 유지하고 PR을 Draft로 둔다. MediaPipe의 별도 [손 인식 close 멈춤 제보](https://github.com/google-ai-edge/mediapipe/issues/5718)는 다른 버전의 사례로, 활동 부족으로 닫혔으며 이번 오류의 동일 원인이나 해결 증거가 아니다.
