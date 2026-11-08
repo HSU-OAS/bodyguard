@@ -240,6 +240,38 @@ describe('worker inference owner', () => {
     expect(await outcome).toBe('rejected')
     expect(vi.getTimerCount()).toBe(0)
   })
+  it.each([
+    ['at the deadline', 5000],
+    ['after the deadline', 5001],
+  ])('rejects a cleanup acknowledgement %s when the timer callback is delayed', async (_, at) => {
+    vi.useFakeTimers()
+    let now = 0
+    vi.spyOn(performance, 'now').mockImplementation(() => now)
+    const f = await fixture()
+    f.ready()
+    const inference = await f.pending
+    const cleanup = inference.dispose()
+    const assertion = expect(cleanup).rejects.toThrow('Resource cleanup failed')
+    now = at
+    f.worker.reply({ type: 'closed', generation: 3, clean: true })
+    await assertion
+    expect(f.worker.terminate).toHaveBeenCalledOnce()
+    expect(vi.getTimerCount()).toBe(0)
+  })
+  it('accepts a cleanup acknowledgement before its unchanged deadline', async () => {
+    vi.useFakeTimers()
+    let now = 0
+    vi.spyOn(performance, 'now').mockImplementation(() => now)
+    const f = await fixture()
+    f.ready()
+    const inference = await f.pending
+    const cleanup = inference.dispose()
+    now = 4999
+    f.worker.reply({ type: 'closed', generation: 3, clean: true })
+    await expect(cleanup).resolves.toBeUndefined()
+    expect(f.worker.terminate).toHaveBeenCalledOnce()
+    expect(vi.getTimerCount()).toBe(0)
+  })
   it('bounds a silently closed preparing worker and preserves missing cleanup acknowledgement', async () => {
     vi.useFakeTimers()
     const f = await fixture()
