@@ -41,6 +41,8 @@ const pageErrors = [],
   workerLogs = []
 const diagnostics = process.env.BODYGUARD_DIAGNOSTICS === '1'
 const avatar = process.env.BODYGUARD_AVATAR === '1'
+const avatarGender = process.env.BODYGUARD_AVATAR_GENDER ?? 'female'
+assert(['female', 'male'].includes(avatarGender), 'Unknown avatar gender')
 const server = await createServer(
   mergeConfig(config, {
     configFile: false,
@@ -134,7 +136,7 @@ try {
   })
   await page.goto(`${origin}e2e/fixtures/publicVideoProbe.html`)
   result = await page.evaluate(
-    async ({ avatar }) => {
+    async ({ avatar, avatarGender }) => {
       const { createWorkerPoseInference } = await import('/src/pose/workerInference.ts')
       const { observedLimbDirections } = await import('/src/avatar/directionalRig.ts')
       const abort = new AbortController()
@@ -189,7 +191,7 @@ try {
             { generation: 1, signal: abort.signal },
             {
               canvas,
-              gender: 'female',
+              gender: avatarGender,
               motion: 'shoulder-shrug',
               onFailure: () => {
                 aggregate.avatarFailure = true
@@ -200,8 +202,10 @@ try {
           stage.alignObservation()
         }
         aggregate.stage = 'inference'
+        let lastRenderAt = null
         for (let index = 0; index < 45; index++) {
           await new Promise((resolve) => setTimeout(resolve, 180))
+          aggregate.stage = 'detect'
           const now = performance.now()
           const frame = new VideoFrame(video, { timestamp: Math.floor(now * 1000) })
           let observed
@@ -223,6 +227,7 @@ try {
             if (observed.headOrientation) aggregate.withFace++
             if (observed.hands?.length) aggregate.withHands++
             if (stage) {
+              aggregate.stage = 'avatar-observe'
               const accepted = stage.observe({
                 generation: 1,
                 sequence: index + 1,
@@ -234,21 +239,30 @@ try {
                 },
                 result: observed,
               })
+              aggregate.stage = 'avatar-render'
               const renderAt = performance.now()
-              const snapshot = stage.render(renderAt, 16, {
+              const delta = lastRenderAt === null ? 0 : renderAt - lastRenderAt
+              lastRenderAt = renderAt
+              const snapshot = stage.render(renderAt, delta, {
                 phase: 'waiting-start',
                 stepId: 'both',
                 playing: true,
                 revision: 0,
                 view: 'upper',
               })
-              if (accepted && stage.getObservationCoverage()) aggregate.avatarCoveredFrames++
+              if (
+                accepted &&
+                snapshot?.tracked > 0 &&
+                ['tracking', 'partial'].includes(snapshot.status)
+              )
+                aggregate.avatarCoveredFrames++
               aggregate.avatarMaxTracked = Math.max(
                 aggregate.avatarMaxTracked,
                 snapshot?.tracked ?? 0,
               )
               if (index === 25) await window.saveAvatarPreview(canvas.toDataURL('image/png'))
             }
+            aggregate.stage = 'directions'
             const directions = observedLimbDirections(
               observed.landmarks[0] ?? null,
               observed.worldLandmarks[0] ?? null,
@@ -320,7 +334,7 @@ try {
       }
       return aggregate
     },
-    { avatar },
+    { avatar, avatarGender },
   )
   assert.equal(result.inferenceFailure, null, 'Inference failed')
   assert.equal(result.cleanupFailure, null, 'Worker cleanup failed')
@@ -371,6 +385,7 @@ try {
         pageErrors,
         diagnostics,
         avatar,
+        avatarGender,
         workerLogs,
         workerFailures,
       },
