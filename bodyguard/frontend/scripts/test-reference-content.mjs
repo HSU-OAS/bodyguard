@@ -250,7 +250,7 @@ try {
   const revokedCanvas = await ownedCanvas()
   account = false
   await page.evaluate(() => dispatchEvent(new Event('focus')))
-  await page.getByRole('heading', { name: '다시 만나 반갑습니다' }).waitFor()
+  await page.getByRole('heading', { name: '로그인', exact: true }).waitFor()
   await retired(revokedCanvas)
   assert.equal(page.workers().length, 0)
   assert.equal(await page.evaluate(() => localStorage.length + sessionStorage.length), 0)
