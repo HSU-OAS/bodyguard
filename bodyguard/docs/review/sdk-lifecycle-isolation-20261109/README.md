@@ -19,3 +19,7 @@
 ## 자동 검증 상태
 
 관련 Worker 단위 3파일 66개, 변경 파일 Biome과 TypeScript 검사는 통과했다. 전체 Vitest 기본 실행은 130파일 중 6파일·6개 테스트가 실패했다([원문](vitest-full-failed.log.gz)). 병렬 수를 줄인 재실행에서도 별도의 로그인 화면 테스트 2개가 실패해 전체 결과가 나오기 전에 중단했다([중단 원문](vitest-serial-interrupted.log.gz)). 당시 다른 앱을 포함한 시스템 부하는 높았지만 실패 원인을 그것으로 단정하지 않는다. 전체 검사는 통과로 표시하지 않는다. 브라우저 시험 후 코드 주석 한 줄만 설명을 보다 신중하게 변경했으며 실행 코드는 바뀌지 않았다.
+
+이후 부하가 낮아졌을 때 같은 낮은 동시성으로 다시 시작한 전체 검사에서도 로그인 화면 테스트 1개가 실패했다. 전체 종료 전에 중단했고([중단 원문](vitest-serial-retry-interrupted.log.gz)), 이 실행 역시 통과로 세지 않는다. 기존 실패와 같은 원인인지는 미확정이다.
+
+이후 Vite production build와 기존 production guard는 통과했다([빌드](vite-build.log.gz) · [guard](production-guard.log.gz)). guard는 미연결 개발용 코칭 코드가 공개 번들에 들어가지 않았는지 검사한다. 이것을 전체 회귀 테스트나 배포의 성공으로 해석하지 않는다.
