@@ -50,12 +50,15 @@ export async function prepareWorkerNativeEngine(
     const path = (asset: string) => new URL(asset, `${new URL(self.location.href).origin}/`).href
     const vision = await FilesetResolver.forVisionTasks(path(WASM_BASE_PATH))
     signal.throwIfAborted()
-    async function load<T>(create: (delegate: 'GPU' | 'CPU') => Promise<T>): Promise<T> {
+    async function load<T>(
+      create: (delegate: 'GPU' | 'CPU') => Promise<T>,
+      preferred: 'GPU' | 'CPU' = 'GPU',
+    ): Promise<T> {
       try {
-        return await create('GPU')
+        return await create(preferred)
       } catch {
         signal.throwIfAborted()
-        return create('CPU')
+        return create(preferred === 'GPU' ? 'CPU' : 'GPU')
       }
     }
     const body = own(
@@ -87,16 +90,20 @@ export async function prepareWorkerNativeEngine(
       : undefined
     const hands = assets.hands
       ? own(
-          await load((delegate) =>
-            GestureRecognizer.createFromOptions(vision, {
-              canvas: new OffscreenCanvas(1, 1),
-              baseOptions: {
-                modelAssetBuffer: new Uint8Array(assets.hands as ArrayBuffer),
-                delegate,
-              },
-              runningMode: 'VIDEO',
-              numHands: 2,
-            }),
+          // FR-M-07: try CPU to reduce possible contention; still require both
+          // hands and bounded cleanup. GPU remains a fallback if CPU creation fails.
+          await load(
+            (delegate) =>
+              GestureRecognizer.createFromOptions(vision, {
+                canvas: new OffscreenCanvas(1, 1),
+                baseOptions: {
+                  modelAssetBuffer: new Uint8Array(assets.hands as ArrayBuffer),
+                  delegate,
+                },
+                runningMode: 'VIDEO',
+                numHands: 2,
+              }),
+            'CPU',
           ),
         )
       : undefined
