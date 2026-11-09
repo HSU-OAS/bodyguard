@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "source": "stevenzchen/pose-trainer 7d54c527722c89feeb71d98ebd1ba585b0886338",
+  "disclaimers": [
+    "OpenPose 18-keypoint model output is not actual joint ground truth or MediaPipe output",
+    "Confidence fields differ between OpenPose and MediaPipe; 0.5 is an exploratory mapping",
+    "1024x1024 pixel space preserves 2D distances but does not validate actual camera boundaries",
+    "Author good/bad exercise labels are not independent expert posture annotations",
+    "The classifier uses an arbitrary synthetic test profile, not validated clinical thresholds",
+    "Single-frame seeking-target output is not a full repetition or correctness result"
+  ],
+  "checksum": "3a5c4219dea7f0b06b327ef7403019fad238d9793fc38f581b0490d98cb50626",
+  "groups": {
+    "author_bad": {
+      "files": 17,
+      "samples": 686,
+      "available": 682,
+      "unavailable": 4,
+      "classifications": {
+        "unobservable": 4,
+        "unmet": 682
+      },
+      "errors": {
+        "shrug-head": 682,
+        "shrug-arms": 674,
+        "shrug-asymmetry": 63,
+        "shrug-trunk": 57
+      },
+      "amplitude": {
+        "files": 17,
+        "min": 0.15967209811826422,
+        "q25": 0.2015813764204628,
+        "median": 0.2959222920285778,
+        "q75": 0.3250138892724346,
+        "max": 0.37946146199851905
+      }
+    },
+    "author_good": {
+      "files": 15,
+      "samples": 652,
+      "available": 652,
+      "unavailable": 0,
+      "classifications": {
+        "unmet": 652
+      },
+      "errors": {
+        "shrug-head": 652,
+        "shrug-trunk": 80,
+        "shrug-arms": 636,
+        "shrug-asymmetry": 37
+      },
+      "amplitude": {
+        "files": 15,
+        "min": 0.17723398967865123,
+        "q25": 0.2391376814886006,
+        "median": 0.2888348173730786,
+        "q75": 0.362368015140619,
+        "max": 0.43517943605853926
+      }
+    }
+  }
+}
