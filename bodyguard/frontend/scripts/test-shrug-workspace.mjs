@@ -261,7 +261,7 @@ try {
   await start()
   account = false
   await page.evaluate(() => dispatchEvent(new Event('focus')))
-  await page.getByRole('heading', { name: '다시 만나 반갑습니다' }).waitFor()
+  await page.getByRole('heading', { name: '로그인' }).waitFor()
   await page.waitForFunction(() => {
     const f = window.shrugWorkspaceFixture
     return f.cameras === f.stops && f.workers === f.workerStops
