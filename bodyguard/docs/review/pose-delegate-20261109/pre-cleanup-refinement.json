@@ -1,0 +1,189 @@
+{
+  "method": "public prerecorded pose video, same decoded frames to CPU and GPU GestureRecognizer in one local Worker; reference is another model prediction, not ground truth",
+  "videoSha256": "ea9151e447b301985d5d65666551ef863b369a2e0f3a71ddd58abef2e722f96a",
+  "version": "156.0.8078.80",
+  "before": {
+    "e2e/fixtures/poseDelegateProbe.html": "14114f4e40b13d360ba4bb8534212ce881c5b444f0869a875629fff7c74c9f37",
+    "e2e/fixtures/poseDelegateProbe.ts": "67ab2d32c7a7b26b5320b1c08b18bdb943b6c6d6f426ab3656cef746a2df551f",
+    "e2e/fixtures/poseDelegateProbe.worker.ts": "9927d1282e9678ce77f4dd60902a06c187b857b685f6156e1d4a665ec0a6e79d",
+    "scripts/test-pose-delegates-video.mjs": "729ec5cc979c6b9af908c3b47753c554b0729e43479e77255b285fce75462d1b",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+    "public/models/pose_landmarker_lite.task": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+  },
+  "after": {
+    "e2e/fixtures/poseDelegateProbe.html": "14114f4e40b13d360ba4bb8534212ce881c5b444f0869a875629fff7c74c9f37",
+    "e2e/fixtures/poseDelegateProbe.ts": "67ab2d32c7a7b26b5320b1c08b18bdb943b6c6d6f426ab3656cef746a2df551f",
+    "e2e/fixtures/poseDelegateProbe.worker.ts": "9927d1282e9678ce77f4dd60902a06c187b857b685f6156e1d4a665ec0a6e79d",
+    "scripts/test-pose-delegates-video.mjs": "729ec5cc979c6b9af908c3b47753c554b0729e43479e77255b285fce75462d1b",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+    "public/models/pose_landmarker_lite.task": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+  },
+  "sourceChanged": false,
+  "result": {
+    "processed": 65,
+    "cleanup": "clean",
+    "failure": null,
+    "summary": {
+      "type": "summary",
+      "counts": {
+        "frames": 65,
+        "both": 64,
+        "cpuOnly": 0,
+        "gpuOnly": 0,
+        "neither": 1,
+        "bothWorld": 64
+      },
+      "imagePixels": {
+        "count": 2112,
+        "mean": 3.6271097940021275,
+        "median": 3.259543784990968,
+        "p95": 7.451743450783287,
+        "max": 25.664647173321807
+      },
+      "worldModelUnits": {
+        "count": 2112,
+        "mean": 0.014800052010909885,
+        "median": 0.012171411562738939,
+        "p95": 0.033911805673230926,
+        "max": 0.1183170257545622
+      },
+      "imagePixelsByRegion": {
+        "head": {
+          "count": 192,
+          "mean": 3.122376960989495,
+          "median": 2.991555048616356,
+          "p95": 5.6669878389008606,
+          "max": 7.956533807479733
+        },
+        "shoulders": {
+          "count": 128,
+          "mean": 2.771795561717171,
+          "median": 2.5659000501164195,
+          "p95": 5.46429464608532,
+          "max": 5.9844810628117635
+        },
+        "elbows": {
+          "count": 128,
+          "mean": 3.791689315559239,
+          "median": 3.3675280258373435,
+          "p95": 8.379986588395463,
+          "max": 14.308104490240042
+        },
+        "wrists": {
+          "count": 128,
+          "mean": 3.695391237430697,
+          "median": 3.3692641725948653,
+          "p95": 7.205482456787379,
+          "max": 9.732257127331891
+        },
+        "hips": {
+          "count": 128,
+          "mean": 2.9691282401081605,
+          "median": 2.665339195130337,
+          "p95": 6.182378480816449,
+          "max": 9.190457864074554
+        },
+        "knees": {
+          "count": 128,
+          "mean": 4.052166135967334,
+          "median": 3.3050826866765304,
+          "p95": 8.257497943579612,
+          "max": 10.712395915877632
+        },
+        "ankles": {
+          "count": 128,
+          "mean": 3.6466441754828685,
+          "median": 3.327254099047112,
+          "p95": 8.056361987573586,
+          "max": 11.112600348215182
+        },
+        "feet": {
+          "count": 256,
+          "mean": 4.808505195427041,
+          "median": 4.283886957210737,
+          "p95": 10.392718210178204,
+          "max": 20.705790593841602
+        }
+      },
+      "imagePixelsByRegionBothVisibilityAtLeastHalf": {
+        "head": {
+          "count": 192,
+          "mean": 3.122376960989495,
+          "median": 2.991555048616356,
+          "p95": 5.6669878389008606,
+          "max": 7.956533807479733
+        },
+        "shoulders": {
+          "count": 128,
+          "mean": 2.771795561717171,
+          "median": 2.5659000501164195,
+          "p95": 5.46429464608532,
+          "max": 5.9844810628117635
+        },
+        "elbows": {
+          "count": 128,
+          "mean": 3.791689315559239,
+          "median": 3.3675280258373435,
+          "p95": 8.379986588395463,
+          "max": 14.308104490240042
+        },
+        "wrists": {
+          "count": 128,
+          "mean": 3.695391237430697,
+          "median": 3.3692641725948653,
+          "p95": 7.205482456787379,
+          "max": 9.732257127331891
+        },
+        "hips": {
+          "count": 128,
+          "mean": 2.9691282401081605,
+          "median": 2.665339195130337,
+          "p95": 6.182378480816449,
+          "max": 9.190457864074554
+        },
+        "knees": {
+          "count": 128,
+          "mean": 4.052166135967334,
+          "median": 3.3050826866765304,
+          "p95": 8.257497943579612,
+          "max": 10.712395915877632
+        },
+        "ankles": {
+          "count": 128,
+          "mean": 3.6466441754828685,
+          "median": 3.327254099047112,
+          "p95": 8.056361987573586,
+          "max": 11.112600348215182
+        },
+        "feet": {
+          "count": 256,
+          "mean": 4.808505195427041,
+          "median": 4.283886957210737,
+          "p95": 10.392718210178204,
+          "max": 20.705790593841602
+        }
+      },
+      "timingsMs": {
+        "CPU": {
+          "count": 65,
+          "mean": 56.18461538828336,
+          "median": 53.5,
+          "p95": 84.70000004768372,
+          "max": 175.5
+        },
+        "GPU": {
+          "count": 65,
+          "mean": 35.74923077730032,
+          "median": 25,
+          "p95": 36.299999952316284,
+          "max": 737.2000000476837
+        }
+      }
+    }
+  },
+  "failure": null,
+  "cameraRequests": 0,
+  "external": 0,
+  "writes": 0,
+  "pageErrors": []
+}
