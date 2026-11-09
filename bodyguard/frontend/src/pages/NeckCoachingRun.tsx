@@ -8,9 +8,15 @@ import { createNeckWorkspacePlayback } from '../coaching/neckWorkspacePlayback'
 import type { ResourceContext } from '../coaching/resources'
 import type { SessionSnapshot } from '../coaching/session'
 import { useRecordedPlayback } from '../coaching/useRecordedPlayback'
-import { copyNeckReviewCriteria, type NeckReviewCriteria } from '../posture/thresholds'
+import {
+  copyNeckReviewCriteria,
+  copyShrugReviewCriteria,
+  type NeckReviewCriteria,
+  type ShrugReviewCriteria,
+} from '../posture/thresholds'
 import type { NeckCandidateError } from '../stretch/neckCandidateClassifier'
 import { type CoachingPlan, createCoaching } from '../stretch/progression'
+import type { ShrugCandidateError } from '../stretch/shrugCandidateClassifier'
 
 export type NeckRunConfiguration = Readonly<{
   scope: 'candidate-review-only'
@@ -25,11 +31,19 @@ export type NeckRunConfiguration = Readonly<{
     userAvatarReady: boolean
   }>
 }>
+export type ShrugRunConfiguration = Omit<NeckRunConfiguration, 'criteria'> &
+  Readonly<{ criteria: ShrugReviewCriteria }>
+export type CandidateRunConfiguration = NeckRunConfiguration | ShrugRunConfiguration
 const feedback = {
   'neck-shoulder-line': '어깨선 확인 · 준비 시범을 다시 보세요',
   'neck-head-position': '머리 위치 확인 · 준비 시범을 다시 보세요',
   'neck-wrong-direction': '선택한 방향의 시범을 확인해 주세요',
   'neck-range': '현재 목표 시범을 확인해 주세요',
+  'shrug-head': '머리 위치 확인 · 준비 시범을 다시 보세요',
+  'shrug-trunk': '몸통 기울기 확인 · 준비 시범을 다시 보세요',
+  'shrug-arms': '팔을 편하게 내리고 시범을 확인해 주세요',
+  'shrug-asymmetry': '양쪽 어깨의 움직임을 함께 확인해 주세요',
+  'shrug-range': '편안한 범위에서 시범을 확인해 주세요',
 } as const
 const phases = {
   'waiting-start': '준비',
@@ -43,18 +57,23 @@ let retirementFailed = false
 type RunSession = NonNullable<ReturnType<ReturnType<typeof useRecordedPlayback>['getSession']>>
 type RecordState = ReturnType<RunSession['getRecordSnapshot']>
 
-function checked(input: NeckRunConfiguration) {
-  const criteria = copyNeckReviewCriteria(input.criteria),
-    plan = createCoaching(input.plan).plan
+function checked(input: CandidateRunConfiguration) {
+  const plan = createCoaching(input.plan).plan
+  if (plan.motionId !== 'neck-side' && plan.motionId !== 'shoulder-shrug')
+    throw new Error('Invalid candidate run')
+  const motion = plan.motionId
+  const criteria =
+    motion === 'shoulder-shrug'
+      ? copyShrugReviewCriteria(input.criteria as ShrugReviewCriteria)
+      : copyNeckReviewCriteria(input.criteria as NeckReviewCriteria)
   if (
     input.scope !== 'candidate-review-only' ||
-    plan.motionId !== 'neck-side' ||
     plan.version !== criteria.version ||
     plan.maxFrameAgeMs !== criteria.maxFrameAgeMs ||
     plan.maxFrameGapMs !== criteria.maxFrameGapMs ||
-    plan.steps.length !== 2 ||
-    plan.steps[0].id !== 'left' ||
-    plan.steps[1].id !== 'right' ||
+    (motion === 'shoulder-shrug'
+      ? plan.steps.length !== 1 || plan.steps[0].id !== 'both'
+      : plan.steps.length !== 2 || plan.steps[0].id !== 'left' || plan.steps[1].id !== 'right') ||
     typeof input.readGates !== 'function'
   )
     throw new Error('Invalid candidate run')
@@ -66,10 +85,10 @@ function checked(input: NeckRunConfiguration) {
       !['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname))
   )
     throw new Error('Invalid candidate recording')
-  return Object.freeze({ criteria, plan, readGates: input.readGates, recording })
+  return Object.freeze({ criteria, plan, motion, readGates: input.readGates, recording })
 }
 
-export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfiguration }) {
+export function NeckCoachingRun({ configuration }: { configuration: CandidateRunConfiguration }) {
   const authentication = useAuth(),
     auth = authentication.state,
     playback = useRecordedPlayback(),
@@ -82,7 +101,7 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
       id: string
       session: RunSession
       playback: ReturnType<typeof createNeckWorkspacePlayback>
-      configuration: NeckRunConfiguration
+      configuration: CandidateRunConfiguration
       auth: typeof auth
     } | null>(null),
     mounted = useRef(false),
@@ -100,7 +119,7 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
   account.current = auth
   const [snapshot, setSnapshot] = useState<SessionSnapshot | null>(null),
     [recordState, setRecordState] = useState<RecordState | null>(null),
-    [issue, setIssue] = useState<NeckCandidateError | null>(null),
+    [issue, setIssue] = useState<NeckCandidateError | ShrugCandidateError | null>(null),
     [busy, setBusy] = useState(false),
     [attempt, setAttempt] = useState(0),
     [failed, setFailed] = useState(false),
@@ -205,6 +224,7 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
           const owned = createNeckWorkspacePlayback(input, {
             canvas: (context) => canvasFor(context, id),
             criteria: config.criteria,
+            motion: config.motion,
             gender,
             session: () => live.current.getSession(),
             view: () => currentView.current,
@@ -362,7 +382,11 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
         <header className="coaching-heading">
           <div>
             <p className="small muted">판정 후보 검수 · 출시 코칭 아님</p>
-            <h1 id="run-title">목 옆으로 기울이기</h1>
+            <h1 id="run-title">
+              {configuration.plan.motionId === 'shoulder-shrug'
+                ? '어깨 으쓱·이완'
+                : '목 옆으로 기울이기'}
+            </h1>
           </div>
           <fieldset className="coaching-segmented">
             <legend className="sr-only">두 아바타 표시 구도</legend>
@@ -426,7 +450,7 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
                   : paused
                     ? '일시정지'
                     : running
-                      ? `${step?.id === 'right' ? '오른쪽' : '왼쪽'} · ${phases[state.phase]}`
+                      ? `${step?.id === 'both' ? '양쪽' : step?.id === 'right' ? '오른쪽' : '왼쪽'} · ${phases[state.phase]}`
                       : '시작하면 카메라를 연결합니다'}
           </p>
         </section>
@@ -457,7 +481,7 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
               <ul>
                 {result.steps.map((item) => (
                   <li key={item.id}>
-                    {item.id === 'left' ? '왼쪽' : '오른쪽'} ·{' '}
+                    {item.id === 'both' ? '양쪽' : item.id === 'left' ? '왼쪽' : '오른쪽'} ·{' '}
                     {item.outcome === 'completed'
                       ? '완료'
                       : item.outcome === 'partial'

@@ -101,7 +101,7 @@ export const previewMotions: readonly Motion[] = Object.freeze([
       '어깨의 힘을 풀고 편하게 내립니다.',
     ],
     cautions: [...commonCautions, '힘주어 높이 올리거나 통증이 생기는 범위까지 움직이지 마세요.'],
-    framing: '머리와 양쪽 어깨, 몸통이 보이도록 준비합니다.',
+    framing: '머리와 양쪽 어깨·팔꿈치·손목·몸통·골반이 보이도록 준비합니다.',
     sources: [
       {
         title: 'Cambridge University Hospitals · Shoulder shrug',

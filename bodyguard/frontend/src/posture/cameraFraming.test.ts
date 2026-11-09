@@ -22,7 +22,7 @@ it('maps only known candidates; camera display framing never changes requirement
   expect(motionFramingRequirement('neck-side')).toBe('head-shoulders')
   expect(motionFramingRequirement('cross-body-shoulder')).toBe('arms')
   expect(motionFramingRequirement('arm-overhead')).toBe('upper-body')
-  expect(motionFramingRequirement('shoulder-shrug')).toBe('head-torso')
+  expect(motionFramingRequirement('shoulder-shrug')).toBe('upper-body')
   expect(motionFramingRequirement('seated-trunk-rotation')).toBe('head-torso')
   expect(previewMotions.every((motion) => motionFramingRequirement(motion.id) !== null)).toBe(true)
   expect(motionFramingRequirement('__proto__')).toBeNull()

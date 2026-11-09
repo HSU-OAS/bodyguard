@@ -15,7 +15,11 @@ import {
 } from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { ResourceCleanupError, type ResourceContext } from '../coaching/resources'
-import type { NeckReviewCriteria } from '../posture/thresholds'
+import {
+  copyShrugReviewCriteria,
+  type NeckReviewCriteria,
+  type ShrugReviewCriteria,
+} from '../posture/thresholds'
 import { assertBlenderReferenceBinding, blenderReferenceProgram } from './blenderReferenceProgram'
 import { cloneEightWeightPair } from './eightWeightSkin'
 import { createNeckSurfaceFeedback } from './neckSurfaceFeedback'
@@ -46,7 +50,7 @@ export async function prepareReferenceStage(
     motion: ReferenceMotion
     onFailure(): void
     onObservation?(status: ComparisonStatus): void
-    feedback?: NeckReviewCriteria
+    feedback?: NeckReviewCriteria | ShrugReviewCriteria
   }>,
 ) {
   if (!import.meta.env.DEV) throw new Error('Blender reference unavailable')
@@ -134,10 +138,16 @@ export async function prepareReferenceStage(
     assertBlenderReferenceBinding(source, animation.scene)
     pair = cloneEightWeightPair(source)
     const [guide, user] = pair.copies
-    observed = createObservedComparison(user, signal)
+    observed = createObservedComparison(
+      user,
+      signal,
+      motion === 'shoulder-shrug' && options.feedback
+        ? copyShrugReviewCriteria(options.feedback as ShrugReviewCriteria)
+        : undefined,
+    )
     if (options.feedback) {
-      if (motion !== 'neck-side') throw new Error()
-      feedback = createNeckSurfaceFeedback(user, context, options.feedback)
+      if (motion !== 'neck-side' && motion !== 'shoulder-shrug') throw new Error()
+      feedback = createNeckSurfaceFeedback(user, context, options.feedback, motion)
     }
     scene.add(guide, user, new HemisphereLight('#ffffff', '#8b97a6', 2))
     const light = new DirectionalLight('#ffffff', 2)
@@ -273,6 +283,7 @@ export async function prepareReferenceStage(
         return accepted
       },
       updateFeedback: (frame: FeedbackFrame) => feedback?.update(frame) ?? false,
+      getObservationCoverage: () => observed?.getCoverage() ?? null,
       suspendObservation() {
         observed?.suspend()
         feedback?.clear()

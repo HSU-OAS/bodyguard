@@ -84,6 +84,18 @@ async function fixture(validated = true, repetitions = 0) {
   }
 }
 afterEach(() => vi.unstubAllGlobals())
+it('display coverage loss is an unobservable frame, not skipped evidence that accrues across a gap', async () => {
+  const f = await fixture()
+  f.send(0, 30)
+  f.send(40, 40)
+  f.setNow(60)
+  const decision = f.adapter.evaluate(shrugFrame(40, 3, 60, { generation: 1 }), false)
+  expect(decision?.errors).toEqual([])
+  expect(f.session.getSnapshot().state.phase).toBe('waiting-start')
+  expect(f.session.getSnapshot().state.progress[0].holdMs).toBe(0)
+  await f.session.close('user-stop')
+  await f.settle()
+})
 it('real session completes two generated shrug/relax repetitions and emits only the existing bounded summary DTO', async () => {
   const f = await fixture(true, 2),
     fetcher = vi.fn(

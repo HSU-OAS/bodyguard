@@ -44,6 +44,7 @@ export function createShrugCandidateFeedback(
   return Object.freeze({
     evaluate(
       frame: PoseRigFrame,
+      displayReady = true,
     ): Readonly<{ state: SessionSnapshot['state']; errors: FeedbackFrame['errors'] }> | null {
       if (closed) return null
       if (busy) {
@@ -80,7 +81,7 @@ export function createShrugCandidateFeedback(
           sampledAt: decision.sampledAt,
           personCount: decision.personCount,
           stepId: decision.stepId,
-          classification: decision.classification,
+          classification: displayReady === true ? decision.classification : 'unobservable',
         })
         if (after && typeof (after as unknown as PromiseLike<unknown>).then === 'function') {
           void Promise.resolve(after).catch(() => {})
@@ -101,7 +102,7 @@ export function createShrugCandidateFeedback(
         return Object.freeze({
           state: current.state,
           errors: Object.freeze(
-            decision.errors.flatMap((code) => {
+            (displayReady === true ? decision.errors : []).flatMap((code) => {
               const regionId = regions[code]
               if (seen.has(regionId)) return []
               seen.add(regionId)
