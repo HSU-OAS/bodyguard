@@ -147,7 +147,7 @@ try {
     JSON.stringify(
       {
         method:
-          'public prerecorded pose video, same decoded frames to CPU and GPU GestureRecognizer in one local Worker; reference is another model prediction, not ground truth',
+          'public prerecorded pose video, same decoded frames to CPU and GPU PoseLandmarker in one local Worker; reference is another model prediction, not ground truth',
         videoSha256: hash(videoPath),
         version,
         before,
