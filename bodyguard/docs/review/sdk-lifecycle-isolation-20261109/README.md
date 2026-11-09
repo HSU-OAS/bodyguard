@@ -27,3 +27,5 @@
 기존과 후보의 로그인 화면 파일을 따로 1회씩 실행했을 때 각각 23개가 통과했다([기존](login-base.log.gz), [후보](login-candidate.log.gz)). 최초 실패 6파일을 낮은 동시성으로 모아 재실행한 결과 5파일·77검사 통과, 로그인 후 복귀 1검사가 실패했다([원문](failed-files-isolated.log.gz)). 그 로그인 복귀 파일을 기존과 후보에서 각각 따로 실행한 6검사는 양쪽 모두 통과했다([기존](login-return-base.log.gz), [후보](login-return-candidate.log.gz)). 실행 순서와 부하가 같지 않아 이것만으로 실패 원인을 단정하지 않으며 전체 검사 실패도 그대로다.
 
 작업 수를 1개로 제한한 후속 전체 검사에서도 남녀 Blender 클립 결합 테스트 2개가 실패해 전체 종료 전에 중단했다([원문](vitest-one-worker-interrupted.log.gz)). 이 실행은 전체 실패·통과 여부를 확정할 수 없고 실패 원인은 미확정이다.
+
+이후 같은 Blender 클립 검사 파일을 별도 실행한 5검사는 후보와 기존 코드에서 각각 통과했다([후보](avatar-test-candidate.log.gz), [기존](avatar-test-base.log.gz)). 각 실행 환경의 부하와 시점이 달라 전체 검사의 실패 원인을 단정하지 않는다.
