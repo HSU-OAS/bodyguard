@@ -23,3 +23,5 @@
 이후 부하가 낮아졌을 때 같은 낮은 동시성으로 다시 시작한 전체 검사에서도 로그인 화면 테스트 1개가 실패했다. 전체 종료 전에 중단했고([중단 원문](vitest-serial-retry-interrupted.log.gz)), 이 실행 역시 통과로 세지 않는다. 기존 실패와 같은 원인인지는 미확정이다.
 
 이후 Vite production build와 기존 production guard는 통과했다([빌드](vite-build.log.gz) · [guard](production-guard.log.gz)). guard는 미연결 개발용 코칭 코드가 공개 번들에 들어가지 않았는지 검사한다. 이것을 전체 회귀 테스트나 배포의 성공으로 해석하지 않는다.
+
+기존과 후보의 로그인 화면 파일을 따로 1회씩 실행했을 때 각각 23개가 통과했다([기존](login-base.log.gz), [후보](login-candidate.log.gz)). 최초 실패 6파일을 낮은 동시성으로 모아 재실행한 결과 5파일·77검사 통과, 로그인 후 복귀 1검사가 실패했다([원문](failed-files-isolated.log.gz)). 그 로그인 복귀 파일을 기존과 후보에서 각각 따로 실행한 6검사는 양쪽 모두 통과했다([기존](login-return-base.log.gz), [후보](login-return-candidate.log.gz)). 실행 순서와 부하가 같지 않아 이것만으로 실패 원인을 단정하지 않으며 전체 검사 실패도 그대로다.
