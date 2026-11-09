@@ -149,6 +149,8 @@ for (const file of files) {
     'mountSurfaceFeedbackProbe',
     'Worker inference unavailable',
     'createWorkerPoseInference',
+    'comparePoseDelegates',
+    '/__bodyguard/test-pose-delegates.js',
     'mountWorkerPoseProbe',
     'nativeInference.worker',
     'createOwnedMotionPreview',

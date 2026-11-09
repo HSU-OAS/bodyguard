@@ -1,0 +1,73 @@
+{
+  "method": "public prerecorded pose video, same decoded frames to CPU and GPU GestureRecognizer in one local Worker; reference is another model prediction, not ground truth",
+  "videoSha256": "ea9151e447b301985d5d65666551ef863b369a2e0f3a71ddd58abef2e722f96a",
+  "version": "156.0.8078.80",
+  "before": {
+    "e2e/fixtures/poseDelegateProbe.html": "14114f4e40b13d360ba4bb8534212ce881c5b444f0869a875629fff7c74c9f37",
+    "e2e/fixtures/poseDelegateProbe.ts": "c4cc374f7b2cc8ca281c5f19233c6b35d8d824418723caab3e356b242aedff20",
+    "e2e/fixtures/poseDelegateProbe.worker.ts": "9700c967fab2b1602bce63794e80269e1578352fa83d1eb7b42696a0cc935eb7",
+    "scripts/test-pose-delegates-video.mjs": "729ec5cc979c6b9af908c3b47753c554b0729e43479e77255b285fce75462d1b",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+    "public/models/pose_landmarker_lite.task": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+  },
+  "after": {
+    "e2e/fixtures/poseDelegateProbe.html": "14114f4e40b13d360ba4bb8534212ce881c5b444f0869a875629fff7c74c9f37",
+    "e2e/fixtures/poseDelegateProbe.ts": "c4cc374f7b2cc8ca281c5f19233c6b35d8d824418723caab3e356b242aedff20",
+    "e2e/fixtures/poseDelegateProbe.worker.ts": "9700c967fab2b1602bce63794e80269e1578352fa83d1eb7b42696a0cc935eb7",
+    "scripts/test-pose-delegates-video.mjs": "729ec5cc979c6b9af908c3b47753c554b0729e43479e77255b285fce75462d1b",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+    "public/models/pose_landmarker_lite.task": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+  },
+  "sourceChanged": false,
+  "result": {
+    "processed": 65,
+    "cleanup": "clean",
+    "failure": null,
+    "summary": {
+      "type": "summary",
+      "counts": {
+        "frames": 65,
+        "both": 64,
+        "cpuOnly": 0,
+        "gpuOnly": 0,
+        "neither": 1,
+        "bothWorld": 64
+      },
+      "imagePixels": {
+        "count": 2112,
+        "mean": 3.6271097940021275,
+        "median": 3.259543784990968,
+        "p95": 7.451743450783287,
+        "max": 25.664647173321807
+      },
+      "worldModelUnits": {
+        "count": 2112,
+        "mean": 0.014800052010909885,
+        "median": 0.012171411562738939,
+        "p95": 0.033911805673230926,
+        "max": 0.1183170257545622
+      },
+      "timingsMs": {
+        "CPU": {
+          "count": 65,
+          "mean": 60.38923076849717,
+          "median": 53.59999990463257,
+          "p95": 91.60000014305115,
+          "max": 298.7000000476837
+        },
+        "GPU": {
+          "count": 65,
+          "mean": 40.28615385202261,
+          "median": 27.300000190734863,
+          "p95": 40.200000047683716,
+          "max": 837.0999999046326
+        }
+      }
+    }
+  },
+  "failure": null,
+  "cameraRequests": 0,
+  "external": 0,
+  "writes": 0,
+  "pageErrors": []
+}
