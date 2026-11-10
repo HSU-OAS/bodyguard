@@ -52,7 +52,7 @@ export async function prepareWorkerNativeEngine(
     signal.throwIfAborted()
     async function load<T>(
       create: (delegate: 'GPU' | 'CPU') => Promise<T>,
-      preferred: 'GPU' | 'CPU' = 'GPU',
+      preferred: 'GPU' | 'CPU' = 'CPU',
     ): Promise<T> {
       try {
         return await create(preferred)
@@ -90,8 +90,8 @@ export async function prepareWorkerNativeEngine(
       : undefined
     const hands = assets.hands
       ? own(
-          // FR-M-07: try CPU to reduce possible contention; still require both
-          // hands and bounded cleanup. GPU remains a fallback if CPU creation fails.
+          // FR-M-07: CPU is a tested candidate for reducing cold-start contention.
+          // GPU remains a fallback; tracking accuracy is not yet validated.
           await load(
             (delegate) =>
               GestureRecognizer.createFromOptions(vision, {
