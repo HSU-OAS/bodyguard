@@ -1,0 +1,229 @@
+{
+  "label": "smooth",
+  "head": "bc56abbb25c7b6bb94f59ee49baf5c9555843838",
+  "sourceBefore": {
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/eightWeightSkin.ts": "12b7271d1644ace12990488d0958311323fb1ba53e924f167eaa5f8e301e5650",
+    "e2e/fixtures/avatarRigProbe.ts": "011a565b3ef4f68a2874a9ffc8117648e1bb60f49139d02639276a798597c2d8",
+    "scripts/test-avatar-rig-browser.mjs": "9b377bb5700709d4b19811ff08a2ae0f8cb9b555a30eeccf87c6c77b5dcc8832",
+    "scripts/local-native-smooth-browser-20261111.mjs": "fa680b297659852991b4b7abc447ca4c737270f378af210af779df6c43c84775",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "assetCommit": null,
+  "candidateDirectory": "/private/tmp/bodyguard-female-native-smooth-bounded-20261111/glb",
+  "assetHashes": {
+    "male": "8c3d34b9d12c1d40f2c842c0167bff2c2d6ee72a427162b4c44d62e80bbf59bf",
+    "female": "a1985272d6b369af873f5e7e7c51044a04d0fc1590ea7a6853717385e1db728f"
+  },
+  "actualChrome": true,
+  "actualWebGL": true,
+  "actualCamera": false,
+  "syntheticDirections": true,
+  "releaseAvatar": false,
+  "samples": [
+    {
+      "gender": "male",
+      "passed": true,
+      "initial": {
+        "framing": [
+          {
+            "inside": true
+          },
+          {
+            "inside": true
+          }
+        ],
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          }
+        ],
+        "sourceUnchanged": true,
+        "independent": true,
+        "eightWeightMeshes": [
+          1,
+          1
+        ],
+        "sequence": 1,
+        "calls": 2,
+        "triangles": 524584,
+        "maxDirectionError": 0,
+        "closed": false
+      },
+      "beforeSha": "2f52634966d60089df5d947748c362338c663c3a7db838313e465c6cf41111da",
+      "performance": {
+        "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+        "sequence": 60,
+        "interval": {
+          "samples": 58,
+          "meanMs": 16.665517241379312,
+          "p95Ms": 16.700000000000045,
+          "maximumMs": 16.799999999999955
+        },
+        "render": {
+          "samples": 59,
+          "meanMs": 0.211864406779661,
+          "p95Ms": 0.39999985694885254,
+          "maximumMs": 0.40000009536743164
+        },
+        "update": {
+          "samples": 59,
+          "meanMs": 0.2033898305084746,
+          "p95Ms": 0.3000001907348633,
+          "maximumMs": 0.5
+        }
+      },
+      "settled": {
+        "framing": [
+          {
+            "inside": true
+          },
+          {
+            "inside": true
+          }
+        ],
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          }
+        ],
+        "sourceUnchanged": true,
+        "independent": true,
+        "eightWeightMeshes": [
+          1,
+          1
+        ],
+        "sequence": 61,
+        "calls": 2,
+        "triangles": 524584,
+        "maxDirectionError": 0.00008630281360668856,
+        "closed": false
+      },
+      "afterSha": "a2252c4bfc00f7883a81a6364b8e285386449287416b31add87d67c34da4b571",
+      "closed": true
+    },
+    {
+      "gender": "female",
+      "passed": true,
+      "initial": {
+        "framing": [
+          {
+            "inside": true
+          },
+          {
+            "inside": true
+          }
+        ],
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          }
+        ],
+        "sourceUnchanged": true,
+        "independent": true,
+        "eightWeightMeshes": [
+          1,
+          1
+        ],
+        "sequence": 1,
+        "calls": 2,
+        "triangles": 522536,
+        "maxDirectionError": 0,
+        "closed": false
+      },
+      "beforeSha": "eb705b7d77c827b40bbcfc17b2e116885d7ba0f529fdd1c418d16f9226f70baf",
+      "performance": {
+        "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4, Unspecified Version)",
+        "sequence": 60,
+        "interval": {
+          "samples": 58,
+          "meanMs": 16.66551724137931,
+          "p95Ms": 16.799999999999727,
+          "maximumMs": 16.800000000000182
+        },
+        "render": {
+          "samples": 59,
+          "meanMs": 0.35593219934883763,
+          "p95Ms": 0.5999999046325684,
+          "maximumMs": 0.7000000476837158
+        },
+        "update": {
+          "samples": 59,
+          "meanMs": 0.2491525472220728,
+          "p95Ms": 0.40000009536743164,
+          "maximumMs": 0.40000009536743164
+        }
+      },
+      "settled": {
+        "framing": [
+          {
+            "inside": true
+          },
+          {
+            "inside": true
+          }
+        ],
+        "states": [
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          },
+          {
+            "status": "tracking",
+            "tracked": 8,
+            "total": 8
+          }
+        ],
+        "sourceUnchanged": true,
+        "independent": true,
+        "eightWeightMeshes": [
+          1,
+          1
+        ],
+        "sequence": 61,
+        "calls": 2,
+        "triangles": 522536,
+        "maxDirectionError": 0.0002037214663550835,
+        "closed": false
+      },
+      "afterSha": "0e925a461cb8600d01a32353e3563f5f7039e6007443cbbc059e251a1ac3e348",
+      "closed": true
+    }
+  ],
+  "browser": "157.0.8103.39",
+  "boundary": {
+    "external": 0,
+    "camera": 0,
+    "errors": []
+  },
+  "sourceAfter": {
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/eightWeightSkin.ts": "12b7271d1644ace12990488d0958311323fb1ba53e924f167eaa5f8e301e5650",
+    "e2e/fixtures/avatarRigProbe.ts": "011a565b3ef4f68a2874a9ffc8117648e1bb60f49139d02639276a798597c2d8",
+    "scripts/test-avatar-rig-browser.mjs": "9b377bb5700709d4b19811ff08a2ae0f8cb9b555a30eeccf87c6c77b5dcc8832",
+    "scripts/local-native-smooth-browser-20261111.mjs": "fa680b297659852991b4b7abc447ca4c737270f378af210af779df6c43c84775",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  }
+}

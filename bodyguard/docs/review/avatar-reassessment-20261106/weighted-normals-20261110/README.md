@@ -1,6 +1,6 @@
 # 여성 목·어깨 법선 시험 — 미채택
 
-2026-11-10. 같은 부위의 단순 표면 완화가 충분히 개선되지 않아, 별도 원본 사본에 Blender Weighted Normal을 적용해 음영 변화만 시험했다. 기존 원본 SHA-256 `71c369c96667549d00a4e77ff5d0b301ce307d806d5f0b301ce307d806d5f3b42e739f48b4b7a8a2d`와 선택한 원본 정점 인덱스를 사용했다. 새 [Blender 후보](models/candidate-unapproved.blend), [작업 스크립트](trial.py), [결과](report.json), [실행](trial.log.gz), [렌더](render.log.gz)를 보존한다.
+2026-11-10. 같은 부위의 단순 표면 완화가 충분히 개선되지 않아, 별도 원본 사본에 Blender Weighted Normal을 적용해 음영 변화만 시험했다. 기존 원본 SHA-256 `71c369c96667549d00a4e77ff5d0b301ce307d806d5f3b42e739f48b4b7a8a2d`와 선택한 원본 정점 인덱스를 사용했다. 새 [Blender 후보](models/candidate-unapproved.blend), [작업 스크립트](trial.py), [결과](report.json), [실행](trial.log.gz), [렌더](render.log.gz)를 보존한다.
 
 모든 정점의 위치와 총 정점·면 개수, 남아 있는 modifier 이름이 원본과 동일한 것은 검사했다. 커스텀 법선이 생겼으며, 이것은 리깅·스킨 가중치·관절 변형까지 보존됐다는 검사 결과는 아니다. 같은 기존 조명과 재질·카메라에서 만든 [뒷면](female-back.png)과 [앞면](female-front.png)을 기존 [원본 뒷면](../protected-female-20261109/original-back.png)과 비교하면 목 뒤와 어깨의 울퉁불퉁한 음영이 여전히 보여 외형 개선 기준에 미달한다. 법선 방식만으로 문제가 해결된다고 판단할 수 없으며 후보를 채택하지 않는다.
 
