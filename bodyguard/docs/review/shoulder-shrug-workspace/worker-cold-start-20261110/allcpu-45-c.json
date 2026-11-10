@@ -1,0 +1,93 @@
+{
+  "method": "public prerecorded video as Chrome fake camera, actual local Worker/MediaPipe, no clinical or live-person claim",
+  "inputY4mSha256": "1df697eccf5e050538de3a5720dae25d56ed62a4d118dbf94aa09f675aa6df53",
+  "version": "157.0.8103.39",
+  "before": {
+    "src/pose/workerInference.ts": "daec71928a333ccf03ba94ab3e2612a8237e0689b9d03dd35e26683e88975f15",
+    "src/pose/workerInferenceRuntime.ts": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+    "src/pose/workerNativeEngine.ts": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+    "src/pose/nativeInference.worker.ts": "05f348328e805177de820a47e29dc8b06deb0cf0f6b3faaf40dcc5957b07e74b",
+    "src/pose/ownedModelAssets.ts": "eede84c8840a6a1937e2a51942fed9b7f907c6f750c4fdc73bf74503c623317e",
+    "e2e/fixtures/nativeCleanupDiagnostics.ts": "c38886569ec247f7f1f704db2a0c6680949e9a25cc8f823d69721b0ebee9e0e0",
+    "e2e/fixtures/nativeWorkerDiagnosticsTransform.ts": "c1c0317dce74e6fa30351c3db2a881776362a9d8129b494b424ed901e5376141",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/referenceStage.ts": "26ec4f7bb3f465d61d18cbed317b4e692b95e6d7e110ee8493c6c118febebd1b",
+    "src/avatar/observedComparison.ts": "8ff0b0f380576ad10b7e482a7ac9022978f0625b827871e574c17df1e01be1f3",
+    "src/avatar/observedPoseRig.ts": "2a85eddecf945708454d77e4d16d6ea0b1ed5005ddfad7b1e0e861ad1ec9ff6d",
+    "scripts/local-sdk-45frame-allcpu-20261110.mjs": "ea7780ae202dabdfcb453cead43968058f9551ba92b227cc39e2c7c0a33c4228",
+    "e2e/fixtures/publicVideoProbe.html": "398e6d377d1faf11465da13e2c3ba66331635e0727e74486857425d91e2eb9cb"
+  },
+  "after": {
+    "src/pose/workerInference.ts": "daec71928a333ccf03ba94ab3e2612a8237e0689b9d03dd35e26683e88975f15",
+    "src/pose/workerInferenceRuntime.ts": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+    "src/pose/workerNativeEngine.ts": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+    "src/pose/nativeInference.worker.ts": "05f348328e805177de820a47e29dc8b06deb0cf0f6b3faaf40dcc5957b07e74b",
+    "src/pose/ownedModelAssets.ts": "eede84c8840a6a1937e2a51942fed9b7f907c6f750c4fdc73bf74503c623317e",
+    "e2e/fixtures/nativeCleanupDiagnostics.ts": "c38886569ec247f7f1f704db2a0c6680949e9a25cc8f823d69721b0ebee9e0e0",
+    "e2e/fixtures/nativeWorkerDiagnosticsTransform.ts": "c1c0317dce74e6fa30351c3db2a881776362a9d8129b494b424ed901e5376141",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984",
+    "src/avatar/directionalRig.ts": "07f4129d65b9e615ea7186d52345498e4864bd42e2bc6575be6c9f3b99487f61",
+    "src/avatar/referenceStage.ts": "26ec4f7bb3f465d61d18cbed317b4e692b95e6d7e110ee8493c6c118febebd1b",
+    "src/avatar/observedComparison.ts": "8ff0b0f380576ad10b7e482a7ac9022978f0625b827871e574c17df1e01be1f3",
+    "src/avatar/observedPoseRig.ts": "2a85eddecf945708454d77e4d16d6ea0b1ed5005ddfad7b1e0e861ad1ec9ff6d",
+    "scripts/local-sdk-45frame-allcpu-20261110.mjs": "ea7780ae202dabdfcb453cead43968058f9551ba92b227cc39e2c7c0a33c4228",
+    "e2e/fixtures/publicVideoProbe.html": "398e6d377d1faf11465da13e2c3ba66331635e0727e74486857425d91e2eb9cb"
+  },
+  "sourceChanged": false,
+  "result": {
+    "frames": 45,
+    "singleBodies": 45,
+    "withWorldBody": 45,
+    "withFace": 0,
+    "withHands": 33,
+    "directionFrames": 45,
+    "directionNames": [
+      "lowerarm01L",
+      "lowerarm01R",
+      "lowerleg01L",
+      "lowerleg01R",
+      "upperarm01L",
+      "upperarm01R",
+      "upperleg01L",
+      "upperleg01R"
+    ],
+    "boneMotionRadians": {
+      "upperarm01L": 0.8104907901916579,
+      "lowerarm01L": 1.0671059647169412,
+      "upperarm01R": 0.7062488324439031,
+      "lowerarm01R": 1.5709187939169726,
+      "upperleg01L": 1.0503366824626283,
+      "lowerleg01L": 0.16728873046959747,
+      "upperleg01R": 0.7899536007515087,
+      "lowerleg01R": 0.29422445798017266
+    },
+    "shoulderImageVerticalRange": 0.19532325863838196,
+    "cameraStopped": true,
+    "workerClean": true,
+    "stage": "directions",
+    "inferenceFailure": null,
+    "cleanupFailure": null,
+    "avatarFailure": false,
+    "avatarCoveredFrames": 0,
+    "avatarMaxTracked": 0,
+    "avatarClean": false,
+    "inferenceMs": {
+      "samples": 45,
+      "median": 122.59999990463257,
+      "p95": 133.20000004768372,
+      "max": 347.19999980926514
+    }
+  },
+  "failure": null,
+  "externalRequests": 0,
+  "writes": 0,
+  "pageErrors": [],
+  "diagnostics": false,
+  "avatar": false,
+  "avatarGender": "female",
+  "workerLogs": [
+    "allcpu-transformed-worker-sha256 970bcc7e23142456809932cd46dc1022cb9bcbb1fd512d4d1e33dfbb6400d8ec"
+  ],
+  "workerFailures": []
+}
