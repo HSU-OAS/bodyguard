@@ -1,0 +1,32 @@
+{
+  "materials": [
+    {
+      "name": "BODYGUARD porcelain warm white",
+      "use_nodes": true,
+      "nodes": [
+        {
+          "name": "Principled BSDF",
+          "type": "ShaderNodeBsdfPrincipled",
+          "image": false
+        },
+        {
+          "name": "Material Output",
+          "type": "ShaderNodeOutputMaterial",
+          "image": false
+        }
+      ]
+    }
+  ],
+  "mesh": {
+    "has_custom_normals": false,
+    "polygons": 176543,
+    "smooth_polygons": 176543
+  },
+  "modifiers": [
+    {
+      "name": "Neutral-rest skin - QA required",
+      "type": "ARMATURE",
+      "visible": true
+    }
+  ]
+}

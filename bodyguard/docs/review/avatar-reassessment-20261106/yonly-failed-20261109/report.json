@@ -1,0 +1,55 @@
+{
+  "blender": "5.1.1",
+  "source_sha256": "71c369c96667549d00a4e77ff5d0b301ce307d806d5f3b42e739f48b4b7a8a2d",
+  "method": "native_weighted_smooth_y_only_female_nov09",
+  "passed": false,
+  "appearance_approved": false,
+  "rows": [
+    {
+      "gender": "Female",
+      "domain_m": {
+        "low": 1.2527028942108154,
+        "shoulder": 1.3127028942108154,
+        "high": 1.5045558309555054,
+        "width": 0.19863257229328155
+      },
+      "before": {
+        "vertices": 130638,
+        "edges": 307179,
+        "faces": 176543,
+        "nonmanifold": 0,
+        "winding": 0,
+        "tiny_faces": 0,
+        "selected_faces": 16088,
+        "selected_negative_y_faces": 19,
+        "selected_dihedral_above_90": 0,
+        "selected_maximum_dihedral_degrees": 45.02539248047861,
+        "whole_professional_mesh_volume_m3": 0.0516961204874765
+      },
+      "sharp_edges_frozen": 4,
+      "frozen_vertices": 57,
+      "protected_surface_transition_m": 0.015,
+      "selected_points": 10299,
+      "moved_points": 10161,
+      "maximum_displacement_m": 0.003877994604408741,
+      "outside_original_coordinates_exact": true,
+      "raw_skin_topology_rest_pose_world_PBR_history_hands_attributes_exact": true,
+      "after": {
+        "vertices": 130638,
+        "edges": 307179,
+        "faces": 176543,
+        "nonmanifold": 0,
+        "winding": 0,
+        "tiny_faces": 0,
+        "selected_faces": 16088,
+        "selected_negative_y_faces": 19,
+        "selected_dihedral_above_90": 31,
+        "selected_maximum_dihedral_degrees": 123.51158117652619,
+        "whole_professional_mesh_volume_m3": 0.05169196132645053
+      }
+    }
+  ],
+  "failure": "AssertionError: Projection introduced a fold",
+  "source_unchanged": true,
+  "candidate_present": false
+}
