@@ -1,0 +1,89 @@
+"""FR-A-01/03·FR-S-03: export preserved professional actions, never overwrite source."""
+
+import hashlib
+import json
+import re
+import struct
+import sys
+from pathlib import Path
+
+import bpy
+
+scratch, label = sys.argv[sys.argv.index("--") + 1 :]
+assert re.fullmatch(r"/private/tmp/bodyguard-reference-content\.[A-Za-z0-9]+", scratch)
+assert re.fullmatch(r"[a-z][a-z0-9-]+", label)
+out = Path(scratch) / label
+out.mkdir(exist_ok=False)
+source = Path(bpy.data.filepath)
+source_sha = hashlib.sha256(source.read_bytes()).hexdigest()
+assert source.name == "candidate.blend"
+assert source_sha == "e227d1d387a499d7815fdc03c3c8f8b75984642bd7c66f4c3ba2a04b76cc93f8"
+reports = []
+for gender in ("male", "female"):
+    rig = bpy.data.objects[f"BODYGUARD {gender.title()} rig WIP"]
+    bpy.ops.object.select_all(action="DESELECT")
+    rig.hide_set(False)
+    rig.select_set(True)
+    bpy.context.view_layer.objects.active = rig
+    for motion, end in (
+        ("neck-side", 144),
+    ):
+        action = bpy.data.actions[f"bodyguard-preview-{gender}-{motion}"]
+        rig.animation_data.action = action
+        rig.animation_data.action_slot = action.slots[0]
+        bpy.context.scene.frame_start = 1
+        bpy.context.scene.frame_end = end
+        bpy.context.scene.frame_set(1)
+        bpy.context.view_layer.update()
+        target = out / f"{gender}-{motion}.glb"
+        assert not target.exists()
+        bpy.ops.export_scene.gltf(
+            filepath=str(target),
+            export_format="GLB",
+            use_selection=True,
+            export_animations=True,
+            export_animation_mode="ACTIVE_ACTIONS",
+            export_bake_animation=True,
+            export_anim_single_armature=True,
+            export_anim_slide_to_zero=True,
+            export_skins=True,
+            export_all_influences=True,
+            export_influence_nb=8,
+        )
+        data = target.read_bytes()
+        assert data[:4] == b"glTF"
+        length, kind = struct.unpack_from("<II", data, 12)
+        assert kind == 0x4E4F534A
+        content = json.loads(data[20 : 20 + length])
+        assert not content.get("meshes"), (
+            "Animation-only asset unexpectedly includes body geometry"
+        )
+        assert len(content.get("animations", [])) == 1, (
+            "Expected the active authored action only"
+        )
+        reports.append(
+            {
+                "gender": gender,
+                "motion": motion,
+                "bytes": len(data),
+                "sha256": hashlib.sha256(data).hexdigest(),
+                "nodes": len(content["nodes"]),
+                "channels": len(content["animations"][0]["channels"]),
+                "meshes": 0,
+            }
+        )
+assert hashlib.sha256(source.read_bytes()).hexdigest() == source_sha
+(out / "export-report.json").write_text(
+    json.dumps(
+        {
+            "blender": bpy.app.version_string,
+            "sourceSha256": source_sha,
+            "sourceSaved": False,
+            "originalGLBModified": False,
+            "actualPeople": False,
+            "reports": reports,
+        },
+        indent=2,
+    )
+)
+print("BODYGUARD_REFERENCE_EXPORT " + json.dumps(reports))

@@ -1,0 +1,30 @@
+// FR-S-03/FR-A-03: native candidate GLB binding check, not medical correctness.
+import {execFileSync} from 'node:child_process'
+import {readFileSync} from 'node:fs'
+import {AnimationMixer, Vector3} from 'three'
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js'
+import {expect,it} from 'vitest'
+import {assertBlenderReferenceBinding,blenderReferenceProgram} from './blenderReferenceProgram'
+import {cloneEightWeightPair} from './eightWeightSkin'
+const parse=(b:Buffer)=>new GLTFLoader().parseAsync(new Uint8Array(b).buffer,'')
+it.each(['male','female'])('%s seated neck candidate binds and keeps forward thighs',async gender=>{
+ const directory=readFileSync('/private/tmp/bodyguard-seated-export-20261111-location.txt','utf8').trim()
+ const animation=await parse(readFileSync(`${directory}/seated-neck/${gender}-neck-side.glb`))
+ const raw=execFileSync('git',['show',`2be0ebe:bodyguard/docs/review/avatar-final-refinement/continuous-20261014/models/bodyguard-${gender}-candidate.glb`],{maxBuffer:16000000})
+ const body=await parse(raw)
+ expect(assertBlenderReferenceBinding(body.scene,animation.scene)).toBe(163)
+ const program=blenderReferenceProgram('neck-side',animation)
+ const pair=cloneEightWeightPair(body.scene)
+ try{
+  const guide=pair.copies[0];const mixer=new AnimationMixer(guide)
+  try{
+   const action=mixer.clipAction(program.steps[0].clips['waiting-start']);action.play();mixer.update(0);guide.updateWorldMatrix(true,true)
+   for(const side of ['L','R']){
+    const a=guide.getObjectByName(`upperleg01${side}`),b=guide.getObjectByName(`lowerleg01${side}`)
+    expect(a&&b).toBeTruthy();if(!a||!b) throw Error('Missing thigh')
+    const direction=b.getWorldPosition(new Vector3()).sub(a.getWorldPosition(new Vector3())).normalize()
+    expect(direction.z).toBeGreaterThan(.99)
+   }
+  }finally{mixer.stopAllAction();mixer.uncacheRoot(guide)}
+ }finally{pair.dispose()}
+})
