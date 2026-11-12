@@ -49,18 +49,17 @@
 .figma-stage {
   position: absolute;
   left: 50%;
-  top: 12%;
-  height: 82%;
+  top: 11.6666667vh;
+  height: 81.875vh;
   aspect-ratio: 278.619 / 786;
   transform: translateX(-50%);
   background: url("../assets/figma-home/13f8b.png") center / contain no-repeat;
-  mask: url("../assets/figma-home/f21d2.png") center / 100% 100% no-repeat;
+  mask: url("../assets/figma-home/f21d2.png") center top / 100% 101.5% no-repeat;
   mask-mode: luminance;
 }
 .figma-drawer {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: clamp(120px, 15.625vh, 180px);
   height: min(620px, 75vh);
   background: #fff;
   border: 1px solid #e5e8ec;
@@ -90,8 +89,8 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 30px;
-  height: 76px;
+  width: 28px;
+  height: 144px;
   display: grid;
   place-items: center;
   border: 0;
@@ -99,11 +98,11 @@
   cursor: pointer;
 }
 .figma-left .figma-toggle {
-  right: -30px;
+  right: -28px;
   border-radius: 0 18px 18px 0;
 }
 .figma-right .figma-toggle {
-  left: -30px;
+  left: -28px;
   border-radius: 18px 0 0 18px;
 }
 .figma-toggle img {
@@ -127,7 +126,7 @@
   border: 0;
   border-bottom: 1px solid #edeff2;
   font: inherit;
-  font-size: 18px;
+  font-size: 20px;
   text-decoration: none;
   text-align: left;
   padding: 0 12px;
@@ -157,6 +156,7 @@
   overflow: auto;
 }
 .figma-motion {
+  position: relative;
   min-width: 0;
   border: 1px solid transparent;
   border-radius: 8px;
@@ -174,6 +174,10 @@
   overflow: hidden;
 }
 .figma-thumb {
+  position: relative;
+  width: 104px;
+  max-width: 100%;
+  margin-inline: auto;
   background-image: url("../assets/figma-home/58e32.png");
   background-size: 324.31% 320.14%;
 }
@@ -213,6 +217,13 @@
   padding: 0;
   min-width: 0;
   border: 0;
+  height: 100%;
+}
+.figma-thumb .motion-visual > img {
+  visibility: hidden;
+}
+.figma-thumb .motion-visual-actions {
+  opacity: 0;
 }
 .figma-motion .motion-visual img,
 .figma-motion .motion-visual video {
@@ -240,16 +251,29 @@
   border: 0;
   background: transparent;
   color: #3f4855;
-  padding: 4px;
+  padding: 0;
+  margin: 4px 0;
+  width: 100%;
   font: inherit;
-  line-height: 1.3;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
   cursor: pointer;
+}
+.figma-motion > button > span {
+  display: block;
 }
 .figma-motion > button:disabled {
   color: #68788a;
   cursor: default;
 }
 .figma-motion small {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: white;
+  border-radius: 4px;
+  padding: 0 3px;
   display: block;
   font-size: 10px;
 }
@@ -288,4 +312,13 @@
   .figma-notice {
     top: 85px;
   }
+}
+
+.figma-thumb:hover .motion-visual-actions,
+.figma-thumb:focus-within .motion-visual-actions {
+  opacity: 1;
+}
+
+.figma-thumb .motion-visual {
+  background: transparent;
 }

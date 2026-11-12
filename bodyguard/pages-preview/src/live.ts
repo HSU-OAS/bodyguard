@@ -8,8 +8,24 @@ import { createVideoPoseSource } from '../../frontend/src/pose/videoPoseSource'
 import type { AvatarGender } from '../../frontend/src/avatar/reviewAvatarAssets'
 import type { ReferenceView } from '../../frontend/src/avatar/referenceStage'
 
-document.querySelector('#root')!.innerHTML = '<header><strong>BODYGUARD · 실제 웹캠 추종 검수</strong><span>자세 판정·기록 저장 꺼짐 · 아바타는 검수 후보</span></header><main><div class="toolbar"><label>아바타 <select id="gender"><option value="male">남성</option><option value="female">여성</option></select></label><label>보기 <select id="view"><option value="full">전신</option><option value="upper">상반신</option><option value="detail">자세히</option></select></label><label><input id="detailed-hands" type="checkbox"> 손가락까지 추적</label><button id="start">웹캠 시작</button><button id="align" disabled>정면 맞추기</button><button id="stop" disabled>웹캠 종료</button><span id="counter"></span></div><p id="status" role="status">시작을 누르고 브라우저의 카메라 권한을 허용하세요.</p><section class="space"><div class="roles"><strong>내 움직임 · 웹캠 입력</strong><strong>기준 아바타 · 중립 자세</strong></div><canvas id="avatar" aria-label="실제 웹캠 입력 두 아바타 검수"></canvas></section><aside class="camera-box"><video id="camera" muted playsinline aria-label="내 카메라 미리보기"></video><span>내 카메라 · 브라우저 내부 처리</span></aside><p class="help">화면에서 한 걸음 물러나 어깨와 팔이 보이게 한 뒤, 한 팔을 천천히 들어보세요. 머리 방향은 정면을 본 상태에서 ‘정면 맞추기’를 누르세요.</p><p class="note">lite 모델 추종 검수입니다. 실제 정확도·노트북 성능은 검증 중이며, 촬영 범위 밖의 움직임까지 재현하지는 않습니다. 영상·좌표를 저장·전송하지 않습니다.</p></main>'
+document.querySelector('#root')!.innerHTML = '<header><a class="wordmark" href="/bodyguard/">BODYGUARD</a><span>자세 판정·기록 저장 꺼짐 · 아바타는 검수 후보</span></header><main><h1 class="inspection-title">웹캠 추종 체험</h1><div class="toolbar"><label>아바타 <select id="gender"><option value="male">남성</option><option value="female">여성</option></select></label><label>보기 <select id="view"><option value="full">전신</option><option value="upper">상반신</option><option value="detail">자세히</option></select></label><label><input id="detailed-hands" type="checkbox"> 손가락까지 추적</label><button id="start">웹캠 시작</button><button id="align" disabled>정면 맞추기</button><button id="stop" disabled>웹캠 종료</button><span id="counter"></span></div><p id="status" role="status">시작을 누르고 브라우저의 카메라 권한을 허용하세요.</p><section class="space"><div class="roles"><strong>내 움직임 · 웹캠 입력</strong><strong>기준 아바타 · 중립 자세</strong></div><canvas id="avatar" aria-label="실제 웹캠 입력 두 아바타 검수"></canvas></section><aside class="camera-box"><video id="camera" muted playsinline aria-label="내 카메라 미리보기"></video><span>내 카메라 · 브라우저 내부 처리</span></aside><p class="help">화면에서 한 걸음 물러나 어깨와 팔이 보이게 한 뒤, 한 팔을 천천히 들어보세요. 머리 방향은 정면을 본 상태에서 ‘정면 맞추기’를 누르세요.</p><p class="note">lite 모델 추종 검수입니다. 실제 정확도·노트북 성능은 검증 중이며, 촬영 범위 밖의 움직임까지 재현하지는 않습니다. 영상·좌표를 저장·전송하지 않습니다.</p></main>'
 const start=document.querySelector<HTMLButtonElement>('#start')!, stop=document.querySelector<HTMLButtonElement>('#stop')!, align=document.querySelector<HTMLButtonElement>('#align')!, gender=document.querySelector<HTMLSelectElement>('#gender')!, view=document.querySelector<HTMLSelectElement>('#view')!, handsOption=document.querySelector<HTMLInputElement>('#detailed-hands')!, status=document.querySelector<HTMLParagraphElement>('#status')!, counter=document.querySelector('#counter')!, video=document.querySelector<HTMLVideoElement>('#camera')!
+// FR-S-06: allowlisted selection sets the inspection context and camera framing only.
+const inspectionSelections:Record<string,readonly [string,ReferenceView]>={
+ 'neck-side':['목 옆 늘리기','upper'],
+ 'chin-retraction':['턱 당기기','upper'],
+ 'shoulder-shrug':['어깨 올리기','upper'],
+ 'cross-body-shoulder':['양팔 교차하기','upper'],
+ 'arm-overhead':['팔 위로 늘리기','full'],
+ 'lateral-trunk':['옆구리 늘리기','full'],
+ 'seated-trunk-rotation':['몸통 돌리기','full'],
+}
+const selectionId=new URLSearchParams(location.search).get('motion')??''
+const selection=Object.hasOwn(inspectionSelections,selectionId)?inspectionSelections[selectionId]:undefined
+if(selection){
+ document.querySelector('.inspection-title')!.textContent=selection[0]+' · 웹캠 추종 체험'
+ view.value=selection[1]
+}
 const statusText=(message:string)=>{status.textContent=message}
 const failures:{reason:string;phase:string;atMs:number}[]=[]
 let nextGeneration=0, active:ReturnType<typeof createOwnedPlaybackResources>|undefined, controller:ReturnType<typeof createResourceController>|undefined, phase='idle', generation=0, frames=0, tracked=0, lastPublish=0, error:string|null=null, busyClose:Promise<void>|undefined, poisoned=false

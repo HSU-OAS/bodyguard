@@ -19,6 +19,21 @@ afterEach(() => {
   vi.unstubAllGlobals()
 })
 
+it('links the isolated inspection without inventing a login or personal records', () => {
+  render(
+    <MemoryRouter>
+      <FigmaHomePage inspectionHref="/bodyguard/inspection.html" />
+    </MemoryRouter>,
+  )
+  expect(screen.queryByRole('link', { name: '내 계정' })).toBeNull()
+  expect(screen.queryByRole('link', { name: '스트레칭 기록' })).toBeNull()
+  fireEvent.click(screen.getByRole('button', { name: '목 옆 늘리기' }))
+  expect(screen.getByRole('link', { name: '웹캠 체험' }).getAttribute('href')).toBe(
+    '/bodyguard/inspection.html?motion=neck-side',
+  )
+  expect(screen.queryByRole('link', { name: '코칭 화면 보기' })).toBeNull()
+})
+
 it('requires a supported candidate and keeps the coaching link in the development review', () => {
   render(
     <MemoryRouter>

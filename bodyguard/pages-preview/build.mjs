@@ -14,6 +14,7 @@ const output=process.argv[2]
 if(!output||!output.startsWith('/'))throw Error('An absolute new output directory is required')
 await mkdir(output)
 const base='/bodyguard'
+const mediaFile=resolve(frontend,'src/catalog/motionMedia.ts')
 const workerFile=resolve(frontend,'src/pose/workerNativeEngine.ts')
 const observationFile=resolve(frontend,'src/avatar/observedComparison.ts')
 const stageFile=resolve(frontend,'src/avatar/referenceStage.ts')
@@ -53,19 +54,29 @@ function transforms(kind){
    return one(source,'    awaitResponse()\n    await boot','    awaitResponse(20000)\n    await boot')
   }
   if(file===workerFile&&kind==='worker')return one(source,"return await create('GPU')","return await create('CPU')")
-  if([constantsFile,referenceFile,avatarFile,verifyFile,assetsFile].includes(file))return withBase(source)
+  if([constantsFile,referenceFile,avatarFile,verifyFile,assetsFile,mediaFile].includes(file))return withBase(source)
  }}
 }
-const shared={configFile:false,root:frontend,publicDir:false,mode:'development',
+const shared={configFile:false,base:base+'/',root:frontend,publicDir:false,mode:'development',
  define:{'import.meta.env.DEV':'true','import.meta.env.PROD':'false'},
  build:{emptyOutDir:false,copyPublicDir:false,minify:true}}
 await build({...shared,plugins:[transforms('page')],build:{...shared.build,outDir:output,
  lib:{entry:resolve(here,'src/live.ts'),formats:['es'],fileName:()=> 'inspection.js'},
  rollupOptions:{output:{inlineDynamicImports:true}}}})
+await build({...shared,
+ resolve:{alias:[
+  {find:/^react(?=\/|$)/,replacement:resolve(frontend,'node_modules/react')},
+  {find:/^react-dom(?=\/|$)/,replacement:resolve(frontend,'node_modules/react-dom')},
+  {find:'react-router',replacement:resolve(frontend,'node_modules/react-router')},
+ ]},
+ plugins:[transforms('home')],build:{...shared.build,outDir:output,assetsInlineLimit:0,cssCodeSplit:false,
+ rollupOptions:{input:resolve(here,'src/home.tsx'),output:{format:'es',entryFileNames:'home.js',inlineDynamicImports:true,
+ assetFileNames:asset=>asset.names.some(name=>name.endsWith('.css'))?'home.css':'assets/[name]-[hash][extname]'}}}})
 await mkdir(resolve(output,'__bodyguard'),{recursive:true})
 await build({...shared,plugins:[transforms('worker')],build:{...shared.build,outDir:resolve(output,'__bodyguard'),
  lib:{entry:resolve(frontend,'src/pose/nativeInference.worker.ts'),formats:['iife'],name:'BodyguardPreviewWorker',fileName:()=> 'inference-worker.js'}}})
-await copyFile(resolve(here,'index.html'),resolve(output,'index.html'))
+await copyFile(resolve(here,'index.html'),resolve(output,'inspection.html'))
+await copyFile(resolve(here,'home.html'),resolve(output,'index.html'))
 await writeFile(resolve(output,'.nojekyll'),'')
 async function save(rel,bytes,expectedHash){
  if(expectedHash&&createHash('sha256').update(bytes).digest('hex')!==expectedHash)throw Error('Preview asset hash mismatch: '+rel)
@@ -81,6 +92,18 @@ for(const gender of ['male','female']){
  await save('__bodyguard/review-avatar/'+gender+'.glb',body,hash)
  await save('__bodyguard/reference-content/'+gender+'/arm-overhead.glb',await readFile(resolve(referenceRoot,gender+'-arm-overhead.glb')))
 }
+const mediaRoot=resolve(here,'../docs/review/motion-preview-content/media')
+const mediaManifest=JSON.parse(await readFile(resolve(mediaRoot,'manifest.json'),'utf8'))
+for(const motion of ['neck-side','shoulder-shrug','arm-overhead']){
+ for(const format of ['png','mp4']){
+  const name='male-'+motion+'.'+format
+  const entry=mediaManifest.assets.find(asset=>asset.file===name)
+  if(!entry||!Number.isSafeInteger(entry.bytes)||entry.bytes<=0||entry.bytes>4000000||!/^[a-f0-9]{64}$/.test(entry.sha256))throw Error('Invalid preview media manifest')
+  const bytes=await readFile(resolve(mediaRoot,name))
+  if(bytes.length!==entry.bytes)throw Error('Preview media length mismatch')
+  await save('__bodyguard/motion-media/male/'+motion+'.'+format,bytes,entry.sha256)
+ }
+}
 const modelHashes={
  'pose_landmarker_lite.task':'59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a',
  'face_landmarker.task':'64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff',
@@ -95,3 +118,6 @@ await save('licenses/three-LICENSE.txt',await readFile(resolve(frontend,'node_mo
 await save('licenses/APACHE-2.0.txt',await readFile(resolve(here,'../docs/review/upstream-license-evidence/6-LICENSE-APACHE.txt')))
 await save('licenses/mediapipe-partial-notice.txt',await readFile(resolve(here,'../docs/review/embedded-package-notices/verified-evidence/mediapipe-101-NOTICE.txt')))
 console.log('Isolated webcam preview built:',output)
+
+for(const [name,file] of [['react','LICENSE'],['react-dom','LICENSE'],['react-router','LICENSE.md']])
+ await save('licenses/'+name+'-LICENSE.txt',await readFile(resolve(frontend,'node_modules',name,file)))
