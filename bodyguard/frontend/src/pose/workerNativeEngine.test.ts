@@ -96,7 +96,7 @@ it('keeps fixed same-origin VIDEO options and copies each SDK result before next
   expect(sdk.body.mock.calls[0][1]).toMatchObject({
     baseOptions: {
       modelAssetBuffer: expect.any(Uint8Array),
-      delegate: 'GPU',
+      delegate: 'CPU',
     },
     runningMode: 'VIDEO',
     numPoses: 2,
@@ -107,7 +107,11 @@ it('keeps fixed same-origin VIDEO options and copies each SDK result before next
     outputFacialTransformationMatrixes: true,
     outputFaceBlendshapes: false,
   })
-  expect(sdk.hands.mock.calls[0][1]).toMatchObject({ runningMode: 'VIDEO', numHands: 2 })
+  expect(sdk.hands.mock.calls[0][1]).toMatchObject({
+    baseOptions: { delegate: 'CPU' },
+    runningMode: 'VIDEO',
+    numHands: 2,
+  })
   engine.dispose()
   engine.dispose()
   for (const task of [f.body, f.face, f.hands]) expect(task.close).toHaveBeenCalledOnce()
@@ -202,11 +206,11 @@ it('clears candidates for a fresh empty body and recovers on the same initialize
   expect(f.result.close).toHaveBeenCalledTimes(3)
   engine.dispose()
 })
-it('tries GPU then CPU without disabling features or changing selected model', async () => {
+it('tries CPU then GPU without disabling features or changing selected model', async () => {
   const f = fixture()
-  sdk.body.mockRejectedValueOnce(new Error('PRIVATE_GPU'))
+  sdk.body.mockRejectedValueOnce(new Error('PRIVATE_CPU'))
   const engine = await prepare({ ...config, model: 'full' }, f.abort.signal)
-  expect(sdk.body.mock.calls.map((call) => call[1].baseOptions.delegate)).toEqual(['GPU', 'CPU'])
+  expect(sdk.body.mock.calls.map((call) => call[1].baseOptions.delegate)).toEqual(['CPU', 'GPU'])
   expect(sdk.body.mock.calls[1][1].baseOptions.modelAssetBuffer.byteLength).toBe(
     MODEL_ASSETS.full.bytes,
   )
@@ -217,6 +221,51 @@ it('tries GPU then CPU without disabling features or changing selected model', a
   expect(sdk.hands).toHaveBeenCalledOnce()
   engine.dispose()
 })
+it('tries CPU then GPU for hands without changing the model or other tasks', async () => {
+  const f = fixture()
+  sdk.hands.mockRejectedValueOnce(new Error('PRIVATE_CPU'))
+  const engine = await prepare(config, f.abort.signal)
+  expect(sdk.hands.mock.calls.map((call) => call[1].baseOptions.delegate)).toEqual(['CPU', 'GPU'])
+  expect(sdk.hands.mock.calls[0][1].baseOptions.modelAssetBuffer.buffer).toBe(
+    sdk.hands.mock.calls[1][1].baseOptions.modelAssetBuffer.buffer,
+  )
+  expect(sdk.body.mock.calls[0][1].baseOptions.delegate).toBe('CPU')
+  expect(sdk.face.mock.calls[0][1].baseOptions.delegate).toBe('CPU')
+  engine.dispose()
+})
+it('retries face on GPU if its CPU initialization fails', async () => {
+  const f = fixture()
+  sdk.face.mockRejectedValueOnce(new Error('PRIVATE_CPU'))
+  const engine = await prepare(config, f.abort.signal)
+  expect(sdk.face.mock.calls.map((call) => call[1].baseOptions.delegate)).toEqual(['CPU', 'GPU'])
+  expect(sdk.face.mock.calls[0][1].baseOptions.modelAssetBuffer.buffer).toBe(
+    sdk.face.mock.calls[1][1].baseOptions.modelAssetBuffer.buffer,
+  )
+  engine.dispose()
+})
+it.each(['body', 'face'] as const)('does not retry %s on GPU after cancellation', async (kind) => {
+  const f = fixture()
+  sdk[kind].mockImplementationOnce(async () => {
+    f.abort.abort()
+    throw new Error('PRIVATE_CPU')
+  })
+  await expect(prepare(config, f.abort.signal)).rejects.toThrow('Worker inference unavailable')
+  expect(sdk[kind]).toHaveBeenCalledOnce()
+  expect(sdk.hands).not.toHaveBeenCalled()
+  if (kind === 'face') expect(f.body.close).toHaveBeenCalledOnce()
+  else expect(sdk.face).not.toHaveBeenCalled()
+})
+it('does not retry hands on GPU after cancellation', async () => {
+  const f = fixture()
+  sdk.hands.mockImplementationOnce(async () => {
+    f.abort.abort()
+    throw new Error('PRIVATE_CPU')
+  })
+  await expect(prepare(config, f.abort.signal)).rejects.toThrow('Worker inference unavailable')
+  expect(sdk.hands).toHaveBeenCalledOnce()
+  expect(f.body.close).toHaveBeenCalledOnce()
+  expect(f.face.close).toHaveBeenCalledOnce()
+})
 it('reclaims partial body and face when hands preparation fails', async () => {
   const f = fixture()
   sdk.hands.mockRejectedValue(new Error('PRIVATE_HANDS'))
@@ -224,7 +273,7 @@ it('reclaims partial body and face when hands preparation fails', async () => {
   expect(f.body.close).toHaveBeenCalledOnce()
   expect(f.face.close).toHaveBeenCalledOnce()
 })
-it('reclaims a body resolving after abort, without preparing face or CPU retry', async () => {
+it('reclaims a body resolving after abort, without preparing face or GPU retry', async () => {
   const f = fixture()
   sdk.body.mockImplementation(async () => {
     f.abort.abort()

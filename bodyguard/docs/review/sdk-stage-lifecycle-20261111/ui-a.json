@@ -1,0 +1,468 @@
+{
+  "method": "actual Chrome blank fake device + actual Worker/MediaPipe/GLBs/native resource ownership; generated protocol/controlled auth, no person/accuracy/clinical proof",
+  "motion": "shoulder-shrug",
+  "version": "157.0.8103.39",
+  "rafReceiver": {
+    "direct": "TypeError",
+    "wrapped": "ok"
+  },
+  "cleanupDiagnostics": {
+    "resources": [
+      {
+        "kind": "source",
+        "phase": "start",
+        "ms": 4591
+      },
+      {
+        "kind": "source",
+        "phase": "clean",
+        "ms": 4600
+      },
+      {
+        "kind": "avatars",
+        "phase": "start",
+        "ms": 4600
+      },
+      {
+        "kind": "avatars",
+        "phase": "clean",
+        "ms": 4608
+      },
+      {
+        "kind": "inference",
+        "phase": "start",
+        "ms": 4609
+      },
+      {
+        "kind": "inference",
+        "phase": "clean",
+        "ms": 4655
+      },
+      {
+        "kind": "camera",
+        "phase": "start",
+        "ms": 4655
+      },
+      {
+        "kind": "camera",
+        "phase": "clean",
+        "ms": 4655
+      },
+      {
+        "kind": "source",
+        "phase": "start",
+        "ms": 6658
+      },
+      {
+        "kind": "source",
+        "phase": "clean",
+        "ms": 6668
+      },
+      {
+        "kind": "avatars",
+        "phase": "start",
+        "ms": 6668
+      },
+      {
+        "kind": "avatars",
+        "phase": "clean",
+        "ms": 6671
+      },
+      {
+        "kind": "inference",
+        "phase": "start",
+        "ms": 6671
+      },
+      {
+        "kind": "inference",
+        "phase": "clean",
+        "ms": 6710
+      },
+      {
+        "kind": "camera",
+        "phase": "start",
+        "ms": 6710
+      },
+      {
+        "kind": "camera",
+        "phase": "clean",
+        "ms": 6710
+      }
+    ],
+    "workers": [
+      {
+        "worker": 1,
+        "phase": "created",
+        "ms": 1670
+      },
+      {
+        "worker": 1,
+        "phase": "boot",
+        "ms": 1711
+      },
+      {
+        "worker": 1,
+        "phase": "send-init",
+        "ms": 1810
+      },
+      {
+        "worker": 1,
+        "phase": "ready",
+        "ms": 2283
+      },
+      {
+        "worker": 1,
+        "phase": "frame-post",
+        "ms": 2318
+      },
+      {
+        "worker": 1,
+        "phase": "frame-result",
+        "ms": 2496
+      },
+      {
+        "worker": 1,
+        "phase": "frame-post",
+        "ms": 3182
+      },
+      {
+        "worker": 1,
+        "phase": "frame-result",
+        "ms": 3203
+      },
+      {
+        "worker": 1,
+        "phase": "frame-post",
+        "ms": 3282
+      },
+      {
+        "worker": 1,
+        "phase": "frame-result",
+        "ms": 3301
+      },
+      {
+        "worker": 1,
+        "phase": "send-close",
+        "ms": 4608
+      },
+      {
+        "worker": 1,
+        "phase": "closed",
+        "ms": 4655,
+        "clean": true
+      },
+      {
+        "worker": 1,
+        "phase": "terminate",
+        "ms": 4655
+      },
+      {
+        "worker": 2,
+        "phase": "created",
+        "ms": 4794
+      },
+      {
+        "worker": 2,
+        "phase": "boot",
+        "ms": 4844
+      },
+      {
+        "worker": 2,
+        "phase": "send-init",
+        "ms": 4900
+      },
+      {
+        "worker": 2,
+        "phase": "ready",
+        "ms": 5284
+      },
+      {
+        "worker": 2,
+        "phase": "frame-post",
+        "ms": 5293
+      },
+      {
+        "worker": 2,
+        "phase": "frame-result",
+        "ms": 5462
+      },
+      {
+        "worker": 2,
+        "phase": "frame-post",
+        "ms": 5798
+      },
+      {
+        "worker": 2,
+        "phase": "frame-result",
+        "ms": 5818
+      },
+      {
+        "worker": 2,
+        "phase": "frame-post",
+        "ms": 5848
+      },
+      {
+        "worker": 2,
+        "phase": "frame-result",
+        "ms": 5868
+      },
+      {
+        "worker": 2,
+        "phase": "send-close",
+        "ms": 6671
+      },
+      {
+        "worker": 2,
+        "phase": "closed",
+        "ms": 6710,
+        "clean": true
+      },
+      {
+        "worker": 2,
+        "phase": "terminate",
+        "ms": 6710
+      }
+    ],
+    "counts": {
+      "frames": 48,
+      "results": 48
+    },
+    "failures": []
+  },
+  "failureCleanupObservation": "not-requested",
+  "preparation": "same-source-before-avatar-GPU",
+  "before": {
+    "src/coaching/neckWorkspacePlayback.ts": "72cacfbc508b23a692f8e548d31fbbdb672fe4cc3c0c7935c468123f3d20f282",
+    "src/pages/NeckCoachingRun.tsx": "1a09fc42452f817e3d16a34ef5dcc44146bc5c0d27db4dbe68c104f63c315ee2",
+    "src/pose/workerInference.ts": "daec71928a333ccf03ba94ab3e2612a8237e0689b9d03dd35e26683e88975f15",
+    "src/pose/workerInferenceRuntime.ts": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+    "src/pose/workerNativeEngine.ts": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+    "src/coaching/ownedPlaybackResources.ts": "144aed75e60e05c0c2e0405d427b4e4c1f1f63d3875ce8a6f38e1d0e74645a10",
+    "src/avatar/ownedPosePlayback.ts": "cecd8b5e05f705f6eb04844a1c975c44ee96b64dae1507f8c2d0731693826daa",
+    "src/pose/videoPoseSource.ts": "5818cd775915b90a8964e540927b1ef05043be214f18f40e46d920a40f4988a7",
+    "src/pose/nativeInference.worker.ts": "05f348328e805177de820a47e29dc8b06deb0cf0f6b3faaf40dcc5957b07e74b",
+    "src/avatar/referenceStage.ts": "26ec4f7bb3f465d61d18cbed317b4e692b95e6d7e110ee8493c6c118febebd1b",
+    "src/avatar/neckSurfaceFeedback.ts": "bab1996652b86318d931a90c87782d838b396bae3eb785f8a54bada06c4211cb",
+    "src/avatar/projectedSurfaceRegions.ts": "a40dfe4662a6f382680f465fa6346a1bf319ed1629a5122eab958ba3a2c6045b",
+    "src/avatar/surfaceFeedback.ts": "b0c621ed26fd74697ae7b439f3770f35184f25001017c66f6c3dd4cbd7886a8a",
+    "src/avatar/observedShoulderElevation.ts": "b32138a65f8fb44e2956b0709b2b7844de414c7dc65ed6c68e0467194a48a6de",
+    "src/avatar/observedPoseRig.ts": "2a85eddecf945708454d77e4d16d6ea0b1ed5005ddfad7b1e0e861ad1ec9ff6d",
+    "src/avatar/observedComparison.ts": "8ff0b0f380576ad10b7e482a7ac9022978f0625b827871e574c17df1e01be1f3",
+    "src/stretch/shrugCandidateClassifier.ts": "6128c211404a6f2ddcc4c0f7e81a71c1d0c69bc39b9492f5a414165165bee116",
+    "src/coaching/shrugCandidateFeedback.ts": "2cbd1c9cefe3b9267d99c2449ff3c2adddfd80345636705e20784ceb504b0d43",
+    "src/posture/shoulderShrugObservation.ts": "5778261aee044041b6558ade91c0cebd856aa69a3e203aa30006e26018862a7e",
+    "src/posture/thresholds.ts": "c3acef188ba9fe22be26e4fc0a10659556d53aaa5f842556d2b340bf5bcbc328",
+    "e2e/fixtures/shrugWorkspaceEntry.tsx": "f6634dbc60834113a4e8353c1b46cb7723acde6526aed8bcfa47448156086b8b",
+    "e2e/fixtures/shrugWorkspaceSource.ts": "06d3d45123503e0bdc010e167186ca14446888d4b7af8871300d8fb0246a684b",
+    "e2e/fixtures/shrugCandidate.ts": "1cb2ea8f8aec7b98cfb327aec48471a5df175c48e9d2c6265751b7d718c0ada4",
+    "e2e/fixtures/neckWorkspaceEntry.tsx": "a43d4988f912fefc4343bd1ff9ef28052d8c7d304f29c3bc919121a5c86cb455",
+    "e2e/fixtures/neckWorkspaceSource.ts": "d884303cf16aaaf307b2b96dedad0a785fa0601d0207e868f5a680ef40697390",
+    "scripts/local-candidate-ui-20261111.mjs": "9c93d0271e31dbeb80706565ca2c7a79b7203450f187e35d822faba104f5b4bc",
+    "/private/tmp/bodyguard-worker-candidate-20261111.js": "98665c5734dc824a14f111dc1bfaa9e0419396500272479e4c90b1f8ee8eedfc",
+    "e2e/fixtures/nativeCleanupDiagnostics.ts": "c38886569ec247f7f1f704db2a0c6680949e9a25cc8f823d69721b0ebee9e0e0",
+    "e2e/fixtures/nativeWorkerDiagnosticsTransform.ts": "c1c0317dce74e6fa30351c3db2a881776362a9d8129b494b424ed901e5376141",
+    "vite.config.ts": "86bb8e81d20d3c53ee7b9ed796d42247817532265372fc5be42d52760251a105",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "after": {
+    "src/coaching/neckWorkspacePlayback.ts": "72cacfbc508b23a692f8e548d31fbbdb672fe4cc3c0c7935c468123f3d20f282",
+    "src/pages/NeckCoachingRun.tsx": "1a09fc42452f817e3d16a34ef5dcc44146bc5c0d27db4dbe68c104f63c315ee2",
+    "src/pose/workerInference.ts": "daec71928a333ccf03ba94ab3e2612a8237e0689b9d03dd35e26683e88975f15",
+    "src/pose/workerInferenceRuntime.ts": "bd36919803fc1c5fada5cf89ee76e6398ab4b4fcaf21d0b524198634eb655f63",
+    "src/pose/workerNativeEngine.ts": "86c0e45ea43abfe2c79913fd1b891ba51c0236a57de655bc33e7e51fcae24a2f",
+    "src/coaching/ownedPlaybackResources.ts": "144aed75e60e05c0c2e0405d427b4e4c1f1f63d3875ce8a6f38e1d0e74645a10",
+    "src/avatar/ownedPosePlayback.ts": "cecd8b5e05f705f6eb04844a1c975c44ee96b64dae1507f8c2d0731693826daa",
+    "src/pose/videoPoseSource.ts": "5818cd775915b90a8964e540927b1ef05043be214f18f40e46d920a40f4988a7",
+    "src/pose/nativeInference.worker.ts": "05f348328e805177de820a47e29dc8b06deb0cf0f6b3faaf40dcc5957b07e74b",
+    "src/avatar/referenceStage.ts": "26ec4f7bb3f465d61d18cbed317b4e692b95e6d7e110ee8493c6c118febebd1b",
+    "src/avatar/neckSurfaceFeedback.ts": "bab1996652b86318d931a90c87782d838b396bae3eb785f8a54bada06c4211cb",
+    "src/avatar/projectedSurfaceRegions.ts": "a40dfe4662a6f382680f465fa6346a1bf319ed1629a5122eab958ba3a2c6045b",
+    "src/avatar/surfaceFeedback.ts": "b0c621ed26fd74697ae7b439f3770f35184f25001017c66f6c3dd4cbd7886a8a",
+    "src/avatar/observedShoulderElevation.ts": "b32138a65f8fb44e2956b0709b2b7844de414c7dc65ed6c68e0467194a48a6de",
+    "src/avatar/observedPoseRig.ts": "2a85eddecf945708454d77e4d16d6ea0b1ed5005ddfad7b1e0e861ad1ec9ff6d",
+    "src/avatar/observedComparison.ts": "8ff0b0f380576ad10b7e482a7ac9022978f0625b827871e574c17df1e01be1f3",
+    "src/stretch/shrugCandidateClassifier.ts": "6128c211404a6f2ddcc4c0f7e81a71c1d0c69bc39b9492f5a414165165bee116",
+    "src/coaching/shrugCandidateFeedback.ts": "2cbd1c9cefe3b9267d99c2449ff3c2adddfd80345636705e20784ceb504b0d43",
+    "src/posture/shoulderShrugObservation.ts": "5778261aee044041b6558ade91c0cebd856aa69a3e203aa30006e26018862a7e",
+    "src/posture/thresholds.ts": "c3acef188ba9fe22be26e4fc0a10659556d53aaa5f842556d2b340bf5bcbc328",
+    "e2e/fixtures/shrugWorkspaceEntry.tsx": "f6634dbc60834113a4e8353c1b46cb7723acde6526aed8bcfa47448156086b8b",
+    "e2e/fixtures/shrugWorkspaceSource.ts": "06d3d45123503e0bdc010e167186ca14446888d4b7af8871300d8fb0246a684b",
+    "e2e/fixtures/shrugCandidate.ts": "1cb2ea8f8aec7b98cfb327aec48471a5df175c48e9d2c6265751b7d718c0ada4",
+    "e2e/fixtures/neckWorkspaceEntry.tsx": "a43d4988f912fefc4343bd1ff9ef28052d8c7d304f29c3bc919121a5c86cb455",
+    "e2e/fixtures/neckWorkspaceSource.ts": "d884303cf16aaaf307b2b96dedad0a785fa0601d0207e868f5a680ef40697390",
+    "scripts/local-candidate-ui-20261111.mjs": "9c93d0271e31dbeb80706565ca2c7a79b7203450f187e35d822faba104f5b4bc",
+    "/private/tmp/bodyguard-worker-candidate-20261111.js": "98665c5734dc824a14f111dc1bfaa9e0419396500272479e4c90b1f8ee8eedfc",
+    "e2e/fixtures/nativeCleanupDiagnostics.ts": "c38886569ec247f7f1f704db2a0c6680949e9a25cc8f823d69721b0ebee9e0e0",
+    "e2e/fixtures/nativeWorkerDiagnosticsTransform.ts": "c1c0317dce74e6fa30351c3db2a881776362a9d8129b494b424ed901e5376141",
+    "vite.config.ts": "86bb8e81d20d3c53ee7b9ed796d42247817532265372fc5be42d52760251a105",
+    "pnpm-lock.yaml": "d7729cc17930684bf6eb9dc99171e499fc02234ff388fd560e34ab69d9c89984"
+  },
+  "cases": [
+    "real same-origin Worker/SDK/GLB ready; blank fake camera does not pass motion or accrue hold",
+    "actual native pause/SDK-camera-GPU cleanup and explicit fresh resume/stop; no candidate result write or automatic success"
+  ],
+  "errors": [],
+  "writes": 0,
+  "external": 0,
+  "paths": [
+    "/dev/coaching",
+    "/@vite/client",
+    "/src/main.tsx",
+    "/@react-refresh",
+    "/node_modules/.vite/deps/react.js",
+    "/node_modules/.vite/deps/react-dom_client.js",
+    "/src/App.tsx",
+    "/src/index.css",
+    "/node_modules/.vite/deps/react_jsx-dev-runtime.js",
+    "/node_modules/.vite/deps/rolldown-runtime-DC62tzP2.js",
+    "/node_modules/.vite/deps/react-router.js",
+    "/src/auth.tsx",
+    "/src/authDestination.ts",
+    "/src/pages/AccountPage.tsx",
+    "/src/pages/DataHelpPage.tsx",
+    "/src/pages/ExplorePage.tsx",
+    "/src/pages/MemberPage.tsx",
+    "/src/pages/MinuteSummaryPage.tsx",
+    "/src/pages/NotificationPreferencesPage.tsx",
+    "/src/pages/PasswordPage.tsx",
+    "/src/pages/ProfilePage.tsx",
+    "/src/pages/RecordsPage.tsx",
+    "/src/pages/WithdrawalPage.tsx",
+    "/node_modules/.vite/deps/react-dom.js",
+    "/node_modules/.vite/deps/scheduler-CIrxBpAn.js",
+    "/@fs/Applications/%E1%84%92%E1%85%A1%E1%86%A8%E1%84%80%E1%85%AD%20%E1%84%82%E1%85%A2%E1%84%87%E1%85%AE/2026-2%E1%84%92%E1%85%A1%E1%86%A8%E1%84%80%E1%85%B5/%E1%84%8B%E1%85%A9%E1%84%91%E1%85%B3%E1%86%AB%E1%84%89%E1%85%A9%E1%84%89%E1%85%B3%20AI%20SW%20%E1%84%8B%E1%85%B2%E1%86%BC%E1%84%92%E1%85%A1%E1%86%B8%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3/BODYGUARD-dashboard-client/bodyguard/frontend/node_modules/.pnpm/vite@8.3.1_@types+node@24.13.6_jiti@2.7.0/node_modules/vite/dist/client/env.mjs",
+    "/src/api/records.ts",
+    "/src/catalog/recommendation.ts",
+    "/src/pages/ExplorePage.css",
+    "/src/api/auth.ts",
+    "/src/api/withdrawal.ts",
+    "/src/pages/FigmaLogin.css",
+    "/src/pages/DataHelpPage.css",
+    "/src/api/minuteSummaries.ts",
+    "/src/pages/MinuteSummaryDeletion.tsx",
+    "/src/pages/RecordBaseline.tsx",
+    "/src/pages/RecordPeriodSummary.tsx",
+    "/src/pages/RecordsPage.css",
+    "/src/pages/MinuteSummaryPage.css",
+    "/src/api/notificationPreferences.ts",
+    "/src/pages/NotificationPreferencesPage.css",
+    "/src/api/recordBinding.ts",
+    "/src/pages/ProfilePage.css",
+    "/src/assets/figma-home/7cba9.svg",
+    "/src/assets/figma-home/38cc0.svg",
+    "/src/assets/figma-home/b943c.svg",
+    "/src/assets/figma-home/ec753.svg",
+    "/src/assets/figma-home/f2c6a.svg",
+    "/src/pages/RecordDeletion.tsx",
+    "/src/api/baselines.ts",
+    "/src/api/dashboard.ts",
+    "/src/records/useOwnedDashboard.ts",
+    "/src/api/recordDeletion.ts",
+    "/api/v1/me",
+    "/api/v1/me",
+    "/e2e/fixtures/shrugWorkspaceEntry.tsx",
+    "/src/pages/CoachingPage.tsx",
+    "/e2e/fixtures/shrugCandidate.ts",
+    "/e2e/fixtures/shrugWorkspaceSource.ts",
+    "/src/avatar/referenceContentAssets.ts",
+    "/src/catalog/motionMedia.ts",
+    "/src/catalog/motionNavigation.ts",
+    "/src/catalog/motions.ts",
+    "/src/pages/CameraPreparation.tsx",
+    "/src/pages/MotionPreview.tsx",
+    "/src/pages/NeckCoachingRun.tsx",
+    "/src/pages/ReferenceDemonstration.tsx",
+    "/src/pages/CoachingPage.css",
+    "/src/catalog/motionLabels.ts",
+    "/src/catalog/cameraRecommendations.ts",
+    "/src/pose/cameraPreparation.ts",
+    "/src/pose/constants.ts",
+    "/src/posture/cameraFraming.ts",
+    "/src/pages/CameraReferenceControls.tsx",
+    "/src/pages/useCameraReference.ts",
+    "/src/coaching/resources.ts",
+    "/src/coaching/neckWorkspacePlayback.ts",
+    "/src/coaching/useRecordedPlayback.ts",
+    "/src/posture/thresholds.ts",
+    "/src/stretch/progression.ts",
+    "/src/posture/landmarks.ts",
+    "/src/pose/camera.ts",
+    "/src/pose/preparationFrame.ts",
+    "/src/pose/videoPoseSource.ts",
+    "/src/pose/workerInference.ts",
+    "/src/posture/cameraReference.ts",
+    "/src/posture/framing.ts",
+    "/src/avatar/referenceStage.ts",
+    "/src/coaching/neckCandidateFeedback.ts",
+    "/src/coaching/ownedPlaybackResources.ts",
+    "/src/coaching/shrugCandidateFeedback.ts",
+    "/e2e/fixtures/nativeCleanupDiagnostics.ts",
+    "/src/coaching/useRecordedCoaching.ts",
+    "/src/pose/inferenceWorker.ts",
+    "/src/pose/ownedModelAssets.ts",
+    "/src/posture/neckSideObservation.ts",
+    "/src/pose/ownedPoseFrame.ts",
+    "/node_modules/.vite/deps/three.js",
+    "/node_modules/.vite/deps/three_addons_loaders_GLTFLoader__js.js",
+    "/src/avatar/blenderReferenceProgram.ts",
+    "/src/avatar/eightWeightSkin.ts",
+    "/src/avatar/neckSurfaceFeedback.ts",
+    "/src/avatar/observedComparison.ts",
+    "/src/avatar/prepareAvatarStage.ts",
+    "/src/avatar/referenceFraming.ts",
+    "/src/avatar/referencePlayback.ts",
+    "/src/avatar/reviewAvatarAssets.ts",
+    "/src/avatar/verifiedReferenceAsset.ts",
+    "/src/stretch/neckCandidateClassifier.ts",
+    "/src/avatar/ownedPosePlayback.ts",
+    "/src/stretch/shrugCandidateClassifier.ts",
+    "/src/coaching/lifecycle.ts",
+    "/src/coaching/recordedSession.ts",
+    "/src/coaching/recordOwner.ts",
+    "/node_modules/.vite/deps/three.module-Ddh8N-Wh.js",
+    "/node_modules/.vite/deps/three_addons_utils_SkeletonUtils__js.js",
+    "/src/pose/nativeInference.worker.ts",
+    "/src/pose/policyWorker.ts",
+    "/src/posture/shoulderShrugObservation.ts",
+    "/src/avatar/observedTrunk.ts",
+    "/src/avatar/projectedSurfaceRegions.ts",
+    "/src/avatar/surfaceFeedback.ts",
+    "/src/avatar/observedHandRig.ts",
+    "/src/posture/capturedImage.ts",
+    "/src/avatar/directionalRig.ts",
+    "/src/avatar/headOrientationRig.ts",
+    "/src/avatar/observedDetailAlignment.ts",
+    "/src/avatar/observedPoseRig.ts",
+    "/src/coaching/resultRecord.ts",
+    "/src/coaching/session.ts",
+    "/src/avatar/observedShoulderElevation.ts",
+    "/api/v1/me",
+    "/api/v1/auth/csrf",
+    "/api/v1/me",
+    "/models/pose_landmarker_heavy.task",
+    "/models/face_landmarker.task",
+    "/models/gesture_recognizer.task",
+    "/__bodyguard/inference-worker.js",
+    "/mediapipe/wasm/vision_wasm_internal.js",
+    "/mediapipe/wasm/vision_wasm_internal.wasm",
+    "/mediapipe/wasm/vision_wasm_internal.js",
+    "/mediapipe/wasm/vision_wasm_internal.wasm",
+    "/mediapipe/wasm/vision_wasm_internal.js",
+    "/mediapipe/wasm/vision_wasm_internal.wasm",
+    "/__bodyguard/reference-content/male/shoulder-shrug.glb",
+    "/__bodyguard/review-avatar/male.glb",
+    "/models/pose_landmarker_heavy.task",
+    "/models/face_landmarker.task",
+    "/models/gesture_recognizer.task",
+    "/__bodyguard/inference-worker.js",
+    "/mediapipe/wasm/vision_wasm_internal.js",
+    "/mediapipe/wasm/vision_wasm_internal.wasm",
+    "/mediapipe/wasm/vision_wasm_internal.js",
+    "/mediapipe/wasm/vision_wasm_internal.wasm",
+    "/mediapipe/wasm/vision_wasm_internal.js",
+    "/mediapipe/wasm/vision_wasm_internal.wasm",
+    "/__bodyguard/reference-content/male/shoulder-shrug.glb",
+    "/__bodyguard/review-avatar/male.glb"
+  ],
+  "failure": null
+}
