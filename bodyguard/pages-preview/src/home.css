@@ -1,0 +1,13 @@
+/* FR-S-06: same Figma frame and local assets; no global product stylesheet overrides. */
+* { box-sizing: border-box; }
+body { margin: 0; font: 16px/1.5 'Noto Sans KR', system-ui, sans-serif; }
+.figma-home { min-height: 100dvh; }
+.preview-license { position: absolute; left: 32px; bottom: 12px; font-size: 12px; }
+.preview-license a { color: #526475; }
+@media (max-width: 760px) {
+  .figma-header { padding: 22px 24px; }
+  .figma-wordmark { font-size: 22px; }
+  .figma-left { left: 16px; width: 180px; }
+  .figma-right { right: 16px; width: 280px; }
+  .figma-nav a, .figma-nav button { gap: 8px; font-size: 14px; padding: 0 4px; }
+}
