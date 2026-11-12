@@ -14,7 +14,7 @@ CEO가 `공개 검수 페이지 교체 배포 승인`으로 다음 범위를 승
 
 ## 실제 배포 결과
 
-[실행 43135424089](https://github.com/HSU-OAS/bodyguard/actions/runs/43135424089)의 build·deploy가 성공했다. 배포 단계 완료 시각은 **2026-11-12 10:35:14 KST**다. 실제 실행 정보는 [github-run.json](github-run.json), 공개 HTTPS 200 응답은 [응답 헤더](https-headers.txt)와 [제공된 HTML](served-index.html)에 보존한다. 복구는 필요하지 않아 실행하지 않았다.
+[실행 43135424089](https://github.com/HSU-OAS/bodyguard/actions/runs/43135424089)의 build·deploy가 성공했다. 배포 단계 완료 시각은 **2026-11-12 10:35:14 KST**다. 실제 실행 정보는 [github-run.json](github-run.json), 공개 HTTPS 200 응답은 [응답 헤더 보기본](https-headers.txt)·[원문 CRLF 보존본](https-headers.raw.gz)와 [제공된 HTML](served-index.html)에 보존한다. 복구는 필요하지 않아 실행하지 않았다.
 
 ## 공개 URL에서 확인한 사용자 흐름
 
@@ -52,3 +52,5 @@ CEO가 `공개 검수 페이지 교체 배포 승인`으로 다음 범위를 승
 같은 공개 URL에서 동작 선택 → 웹캠 체험 → 아바타·보기 설정 → 웹캠 시작 → 카메라 권한 허용 순으로 사용한다. 이전 화면이 보이면 브라우저에서 강력 새로고침해 현재 파일을 다시 읽는다. ID·Password는 필요 없다.
 
 실제 사용자·조명·촬영 범위별 인식 정확도와 자연스러움은 미검증이다. 홈의 인체는 정지 시안, 호버 영상과 추종 모델은 검수 후보이며, 검수 화면 우측은 중립 자세다. 동작별 올바른 시범·잘못된 부위 판정·회원·기록 통합이나 전체 1~6단계 완료를 뜻하지 않는다.
+
+문서 검사에서는 원문 HTTP 헤더의 CRLF 때문에 최초 `git diff --check`가 실패했다. 원문 바이트를 gzip으로 보존하고 읽기용 텍스트만 LF로 정리한 뒤 최종 diff 검사를 재실행했다.
