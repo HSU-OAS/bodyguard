@@ -37,7 +37,10 @@ function transforms(kind){
  return {name:'pages-preview-policy',enforce:'pre',transform(source,id){
   const file=id.split('?')[0]
   if(file===observationFile)return patchHeadOnlyVisibility(source)
-  if(file===stageFile)return one(source,'updateFeedback: (frame: FeedbackFrame) => feedback?.update(frame) ?? false,',"updateFeedback: (frame: FeedbackFrame) => feedback?.update(frame) ?? false,\n      getObservationCoverage: () => observed?.getCoverage() ?? null,")
+  if(file===stageFile){
+   source=one(source,'renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2))','renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.5))')
+   return one(source,'updateFeedback: (frame: FeedbackFrame) => feedback?.update(frame) ?? false,',"updateFeedback: (frame: FeedbackFrame) => feedback?.update(frame) ?? false,\n      getObservationCoverage: () => observed?.getCoverage() ?? null,")
+  }
   if(file===inferenceFile){
    return one(source,
     "if (import.meta.env.DEV) {",
@@ -55,7 +58,7 @@ function transforms(kind){
 }
 const shared={configFile:false,root:frontend,publicDir:false,mode:'development',
  define:{'import.meta.env.DEV':'true','import.meta.env.PROD':'false'},
- build:{emptyOutDir:false,copyPublicDir:false,minify:false}}
+ build:{emptyOutDir:false,copyPublicDir:false,minify:true}}
 await build({...shared,plugins:[transforms('page')],build:{...shared.build,outDir:output,
  lib:{entry:resolve(here,'src/live.ts'),formats:['es'],fileName:()=> 'inspection.js'},
  rollupOptions:{output:{inlineDynamicImports:true}}}})
