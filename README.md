@@ -38,7 +38,17 @@
 | 기록 | 본인 기록 저장·조회·삭제와 집계 개발·시험 | 실제 코칭 결과 생산·저장과 화면 전체 연결 |
 | 출시·검증 | 격리 환경의 단위·브라우저·API·DB 시험 수행 | 실제 사람·노트북 조건별 정확도·성능, HTTPS·보안·라이선스·전문가 검토 |
 
-**외부 테스트 URL:** [웹캠·아바타 검수용 시제품](https://hsu-oas.github.io/bodyguard/). 노트북 브라우저에서 카메라 권한을 허용해 후보 아바타의 웹캠 입력을 확인할 수 있습니다. 이 페이지는 별도 검수본으로 자세 판정·스트레칭 시범·로그인·기록 저장을 제공하지 않으며, 실제 사용자별 추종 정확도와 최종 아바타 품질도 검증 중입니다. [검수 페이지 설명](bodyguard/pages-preview/README.md)
+## 테스트 접속
+
+| 항목 | 내용 |
+| --- | --- |
+| Test URL | [https://hsu-oas.github.io/bodyguard/](https://hsu-oas.github.io/bodyguard/) |
+| ID / Password | 둘 다 불필요합니다. 회원가입 없이 접속하는 별도 검수 페이지입니다. |
+| 이용 방법 | 노트북 브라우저에서 아바타·보기 범위를 고르고 `웹캠 시작`을 누른 뒤 카메라 권한을 허용합니다. |
+| 제공 범위 | 웹캠 입력과 남녀 후보 아바타의 추종 검수 |
+| AI 접근 / 서비스 유형 | 딥러닝 / Web |
+
+이 페이지는 자세 판정·스트레칭 시범·로그인·기록 저장을 제공하지 않으며, 실제 사용자별 추종 정확도와 최종 아바타 품질도 검증 중입니다. [검수 페이지 설명](bodyguard/pages-preview/README.md) · [수업 제출 입력값과 접속 확인](docs/07_repository_submission.md)
 
 개발 중인 전체 웹과 테스트 방법은 [프런트엔드 안내](bodyguard/frontend/README.md)와 [기능별 진행 현황](docs/05_10w_review.md)을 확인하세요.
 
@@ -66,6 +76,8 @@
 | 서버·데이터 | FastAPI, Python, PostgreSQL | 계정·수행 기록 API와 저장 |
 | 테스트 | Vitest, Playwright, pytest | 단위·브라우저·API 검증 |
 
+제품의 AI 접근은 **딥러닝**입니다. MediaPipe의 사전 학습 모델로 신체 특징을 추정하고, 별도의 동작별 규칙으로 코칭을 구성합니다. 자체 모델을 학습한 것은 아닙니다. 개발 보조 도구를 사용한다는 이유로 제품을 에이전트형 AI로 분류하지 않습니다.
+
 오픈소스 코드·모델·3D 에셋의 라이선스는 각각 확인해야 합니다. 프로젝트의 MIT 라이선스가 모든 외부 의존성에 적용된다는 뜻은 아닙니다. 최종 배포물의 고지와 라이선스 검토는 진행 중입니다. [라이선스 검토](bodyguard/docs/stage5-license-inventory-runbook.md)
 
 ## 저장소 구성
@@ -74,14 +86,24 @@
 .
 ├── README.md                 프로젝트 헌장
 ├── LICENSE                   프로젝트 라이선스
-├── docs/                     과목 제출 문서
+├── docs/                     과목 제출 문서와 제출 안내
+│   └── images/               공개 검수 페이지의 접속 화면
 └── bodyguard/
     ├── frontend/             React 웹과 브라우저 테스트
     ├── backend/              FastAPI 계정·기록 API와 테스트
-    ├── assets/               아바타 등 제작 에셋
+    ├── assets/               Blender 원본과 제작 검수 이미지
     ├── docs/                 요구사항·설계·Story·검증 기록
     └── design-prototypes/    디자인 시안
 ```
+
+| 제출 자료 | 저장 위치 |
+| --- | --- |
+| 문서 | [과목 제출 문서](docs/) · [요구사항·설계·검증 기록](bodyguard/docs/) |
+| 소스 | [웹 소스](bodyguard/frontend/src/) · [API 소스](bodyguard/backend/app/) · [공개 검수 페이지 빌드](bodyguard/pages-preview/) |
+| 이미지 | [접속 화면](docs/images/) · [Blender 제작 검수 이미지](bodyguard/assets/blender/review/) · [브라우저 검증 기록](bodyguard/docs/review/) |
+| 기타 | [라이선스](LICENSE) · [Blender 원본](bodyguard/assets/blender/) · [E2E 안내](docs/06_e2e_test_guide.md) |
+
+소스는 `bodyguard/frontend`와 `bodyguard/backend`에서 관리합니다. 제출용 폴더명을 맞추기 위한 소스 복제본은 두지 않습니다. 검수 이미지에는 과거 후보와 실패 결과도 포함되며 최종 제품 외형을 뜻하지 않습니다.
 
 ## 로컬 개발
 
@@ -110,5 +132,6 @@ pnpm dev
 - [Figma 화면 설계](https://www.figma.com/design/8f6TiE81S5Cu2bjgTuHFeZ/BODYGUARD-%C2%B7-UI-%EC%84%A4%EA%B3%84?node-id=0-1) — UI 시안이며 기능 구현 완료를 의미하지 않습니다.
 - [동작 근거](bodyguard/docs/motion-evidence.md) · [3D 아바타 제작](bodyguard/docs/avatar-production.md)
 - [10주차 리뷰·기능별 진행 현황](docs/05_10w_review.md) · [E2E 테스트 시연 안내](docs/06_e2e_test_guide.md)
+- [형상관리·Test URL·AI 접근 제출 안내](docs/07_repository_submission.md)
 - [검증 기록](bodyguard/docs/review/) · [진행 작업](bodyguard/docs/tasks.md)
 - 프로젝트 코드는 [MIT 라이선스](LICENSE)를 따릅니다. 외부 자산과 라이브러리의 조건은 각각 확인합니다.

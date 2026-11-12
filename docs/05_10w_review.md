@@ -8,7 +8,7 @@ BODYGUARD는 노트북 웹캠으로 사용자의 움직임을 확인하고, 추�
 
 - [공개 저장소](https://github.com/HSU-OAS/bodyguard) · [프로젝트 헌장](../README.md) · [화면 설계 Figma](https://www.figma.com/design/8f6TiE81S5Cu2bjgTuHFeZ/BODYGUARD-%C2%B7-UI-%EC%84%A4%EA%B3%84?node-id=0-1)
 - [외부 테스트 URL](https://hsu-oas.github.io/bodyguard/): 웹캠 추종과 **검수 후보** 아바타를 확인하는 별도 시제품. 자세 판정, 스트레칭 시범, 로그인, 기록 저장 및 서버 API는 제공하지 않는다. 실제 사람별 추종 품질은 검증 중이다. [검수본 설명](../bodyguard/pages-preview/README.md)
-- 스프레드시트의 AI 접근은 **딥러닝**으로 기입했다. 제품은 사전 학습된 MediaPipe 포즈 모델을 활용한다. 개발 보조 도구의 종류와 제품의 AI 접근은 구분한다.
+- 제품의 AI 접근은 **딥러닝**으로 분류한다. 제품은 사전 학습된 MediaPipe 포즈 모델을 활용한다. 개발 보조 도구의 종류와 제품의 AI 접근은 구분한다. 공유표의 최신 입력 여부와 제출값은 [제출 안내](07_repository_submission.md)를 확인한다.
 
 ## 현재 요구사항과 범위
 
