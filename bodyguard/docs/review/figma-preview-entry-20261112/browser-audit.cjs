@@ -6,6 +6,7 @@ const [url,output]=process.argv.slice(2);
 (async()=>{
  fs.mkdirSync(output,{recursive:true});
  const browser=await chromium.launch({channel:'chrome',headless:true});
+ try {
  const context=await browser.newContext({viewport:{width:1440,height:960},serviceWorkers:'block'});
  const errors=[],failed=[];
  const page=await context.newPage();
@@ -49,7 +50,7 @@ const [url,output]=process.argv.slice(2);
  await page.getByRole('group',{name:'목 옆 늘리기 미리보기',exact:true}).hover();
  assert(await page.getByLabel('목 옆 늘리기 동작 영상',{exact:true}).evaluate(v=>v.paused));
  fs.writeFileSync(path.join(output,'browser.json'),JSON.stringify({url,geometry,errors,failed,cameraStarted:false,hoverVideo:true,panelToggles:true,inspectionNavigation:true,reducedMotion:true},null,2)+'\n');
- await browser.close();
  assert.equal(errors.length,0,JSON.stringify(errors));assert.equal(failed.length,0,JSON.stringify(failed));
  console.log('PASS Figma geometry, local assets, panel controls, hover video, inspection navigation, 1024px, reduced motion; camera not started');
+ } finally { await browser.close(); }
 })().catch(e=>{console.error(e);process.exitCode=1});
