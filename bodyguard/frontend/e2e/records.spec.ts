@@ -134,13 +134,15 @@ for (const operation of ['list', 'detail', 'preview'] as const) {
       await route.fulfill({ response })
     })
     if (operation === 'detail') await page.reload()
-    else
+    else {
+      if (operation === 'list') await openCustomPeriod(page)
       await page
         .getByRole('button', {
           name: operation === 'preview' ? '이 기간 기록 삭제' : '기간 조회',
           exact: true,
         })
         .click()
+    }
     await expect(page.getByRole('heading', { name: '계정을 다시 확인해 주세요' })).toBeVisible()
     expect(rejected).toBe(1)
     await expect(page.getByRole('table')).toHaveCount(0)
@@ -243,7 +245,7 @@ test('RD-04 foreign proof cannot delete another account and late deletion cannot
   try {
     expect((await post(context, '/auth/logout')).status()).toBe(204)
     await page.goto('/records')
-    await expect(page.getByRole('heading', { name: '다시 만나 반갑습니다' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: '로그인', exact: true })).toBeVisible()
     release?.()
     await expect(page.getByText('1건의 수행 기록을 삭제했습니다.', { exact: true })).toHaveCount(0)
     await page.screenshot({ path: info.outputPath('deletion-logout-boundary.png'), fullPage: true })
@@ -370,7 +372,13 @@ test('RD-01 actual preview cancel and confirmed period deletion preserve outside
   expect(remaining.map((item: { id: string }) => item.id)).toEqual([outside.id])
   await page.screenshot({ path: info.outputPath('deletion-result.png'), fullPage: true })
 })
+async function openCustomPeriod(page: Page) {
+  if (!(await page.getByRole('button', { name: '기간 조회', exact: true }).isVisible()))
+    await page.getByText('기간 직접 선택', { exact: true }).click()
+}
+
 async function filter(page: Page, from: string, to: string) {
+  await openCustomPeriod(page)
   await page.getByLabel('시작일', { exact: true }).fill(from)
   await page.getByLabel('종료일', { exact: true }).fill(to)
   await page.getByRole('button', { name: '기간 조회', exact: true }).click()
@@ -380,12 +388,12 @@ test('RW-01 protected entry and genuine empty record period', async ({ page, con
   const errors: string[] = []
   page.on('pageerror', (error) => errors.push(error.message))
   await page.goto('/records')
-  await expect(page.getByRole('heading', { name: '다시 만나 반갑습니다' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: '로그인', exact: true })).toBeVisible()
   expect((await context.request.get('/api/v1/records/stretch')).status()).toBe(401)
   await join(context)
   await page.goto('/start')
   await page.getByRole('link', { name: '내 수행 기록 확인' }).click()
-  await expect(page.getByRole('heading', { name: '내 수행 기록' })).toBeFocused()
+  await expect(page.getByRole('heading', { name: '스트레칭 기록', exact: true })).toBeFocused()
   await expect(
     page.getByRole('heading', { name: '이 기간에는 수행 기록이 없습니다' }),
   ).toBeVisible()
@@ -512,7 +520,7 @@ test('RW-05 read failure recovery and cancelled late response after real logout'
     await page.screenshot({ path: info.outputPath('records-loading.png'), fullPage: true })
     expect((await post(context, '/auth/logout')).status()).toBe(204)
     await page.evaluate(() => window.dispatchEvent(new Event('focus')))
-    await expect(page.getByRole('heading', { name: '다시 만나 반갑습니다' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: '로그인', exact: true })).toBeVisible()
     release()
     await expect(page.getByRole('table')).toHaveCount(0)
   } finally {
@@ -529,7 +537,7 @@ test('RW-06 own-only detail, second account and Back after logout', async ({
   await expect(page.getByText('fixture-not-release', { exact: true })).toBeVisible()
   expect((await post(context, '/auth/logout')).status()).toBe(204)
   await page.evaluate(() => window.dispatchEvent(new Event('focus')))
-  await expect(page.getByRole('heading', { name: '다시 만나 반갑습니다' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: '로그인', exact: true })).toBeVisible()
   await page.goBack()
   await expect(page.getByText('fixture-not-release', { exact: true })).toHaveCount(0)
   await join(context)

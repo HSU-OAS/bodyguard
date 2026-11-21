@@ -5,6 +5,7 @@ import { randomUUID } from 'node:crypto'
 import { readFileSync, renameSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { type BrowserContext, expect, type Locator, type Page, test } from '@playwright/test'
+import { skipOptionalProfile } from './fixtures/profileOnboarding'
 
 const origin = 'http://localhost:4173'
 const password = '격리된 계정 웹 시험 비밀번호 12345'
@@ -303,6 +304,7 @@ test('AW-B07 전체 데이터 취소·본인만 탈퇴·동일 이메일 웹 재
     await expect(page.getByRole('heading', { name: '이메일을 확인해 주세요' })).toBeVisible()
     await page.getByLabel('인증 코드', { exact: true }).fill(await mailCode(email))
     await page.getByRole('button', { name: '인증하고 시작하기' }).click()
+    await skipOptionalProfile(page)
     await expect(page.getByText(email, { exact: true })).toBeVisible()
     const fresh = (await readOwned(context, '/me')).id as string
     expect(fresh).not.toBe(owner.owner)
@@ -488,7 +490,7 @@ test('AW-B02 오답·최종 동의·204·기존 세션 이탈·타 계정 보존
     }
     await expect(page.getByRole('heading', { name: '회원 탈퇴가 완료되었습니다' })).toBeVisible()
     await expect(page.getByRole('heading', { name: '회원 탈퇴가 완료되었습니다' })).toBeFocused()
-    await expect(otherTab.getByRole('heading', { name: '다시 만나 반갑습니다' })).toBeVisible()
+    await expect(otherTab.getByRole('heading', { name: '로그인', exact: true })).toBeVisible()
     await page.setViewportSize({ width: 375, height: 900 })
     await noOverflow(page)
     await page.screenshot({ path: info.outputPath('withdrawal-completed-375.png'), fullPage: true })
@@ -502,7 +504,7 @@ test('AW-B02 오답·최종 동의·204·기존 세션 이탈·타 계정 보존
       ),
     ).toEqual([otherId])
     await page.goto('/account')
-    await expect(page.getByRole('heading', { name: '다시 만나 반갑습니다' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: '로그인', exact: true })).toBeVisible()
     expect((await post(context, '/auth/login', { email, password })).status()).toBe(401)
     expect(requests.filter((url) => url.endsWith('/me/delete/confirm'))).toHaveLength(2)
   } finally {

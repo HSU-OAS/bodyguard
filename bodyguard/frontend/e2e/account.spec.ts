@@ -3,6 +3,7 @@
 import { randomUUID } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { expect, type Page, test } from '@playwright/test'
+import { skipOptionalProfile } from './fixtures/profileOnboarding'
 
 let cameraCalls = 0
 test.beforeEach(async ({ context }) => {
@@ -45,6 +46,7 @@ test('B-02 actual 60-second resend retires the old code and verifies the new ema
   await expect(page.getByRole('alert')).toContainText('인증 코드를 확인')
   await page.getByLabel('인증 코드', { exact: true }).fill(fresh)
   await page.getByRole('button', { name: '인증하고 시작하기' }).click()
+  await skipOptionalProfile(page)
   await expect(page.getByText(email, { exact: true })).toBeVisible()
 })
 
@@ -135,6 +137,7 @@ async function join(page: Page, email: string) {
   await expect(page.getByRole('heading', { name: '이메일을 확인해 주세요' })).toBeVisible()
   await page.getByLabel('인증 코드', { exact: true }).fill(await codeFor(email))
   await page.getByRole('button', { name: '인증하고 시작하기' }).click()
+  await skipOptionalProfile(page)
   await expect(page.getByRole('heading', { name: '내 몸을 위한 시작' })).toBeVisible()
 }
 
@@ -143,21 +146,22 @@ test('RETURN 기록 기간→가입 전환→인증 후 같은 기간과 빈 기
   const email = address()
   const destination = '/records?from=2026-10-01&to=2026-10-09'
   await page.goto(destination)
-  await expect(page.getByRole('heading', { name: '다시 만나 반갑습니다' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: '로그인', exact: true })).toBeVisible()
   expect(new URL(page.url()).searchParams.get('next')).toBe(destination)
-  await page.getByRole('link', { name: '이메일로 가입', exact: true }).click()
+  await page.getByRole('link', { name: '회원가입', exact: true }).click()
+  await expect(page.getByRole('heading', { name: '회원가입', exact: true })).toBeVisible()
   expect(new URL(page.url()).searchParams.get('next')).toBe(destination)
   await fillCredentials(page, email)
   await page.getByRole('button', { name: '인증 코드 받기', exact: true }).click()
   await expect(page.getByRole('heading', { name: '이메일을 확인해 주세요' })).toBeVisible()
   await page.getByLabel('인증 코드', { exact: true }).fill(await codeFor(email))
   await page.getByRole('button', { name: '인증하고 시작하기' }).click()
-  await expect(page).toHaveURL(`http://localhost:4173${destination}`)
-  await expect(page.getByRole('heading', { name: '내 수행 기록', exact: true })).toBeVisible()
+  await skipOptionalProfile(page, destination)
+  await expect(page.getByRole('heading', { name: '스트레칭 기록', exact: true })).toBeVisible()
   await expect(page.getByLabel('시작일', { exact: true })).toHaveValue('2026-10-01')
   await expect(page.getByLabel('종료일', { exact: true })).toHaveValue('2026-10-09')
   await page.reload()
-  await expect(page.getByRole('heading', { name: '내 수행 기록', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: '스트레칭 기록', exact: true })).toBeVisible()
   await page.screenshot({ path: info.outputPath('returned-records.png'), fullPage: true })
 })
 
@@ -167,9 +171,9 @@ test('RETURN 기존 이메일 로그인은 내 계정 목적과 narrow 화면을
   const email = address()
   await join(page, email)
   await page.getByRole('button', { name: '로그아웃', exact: true }).click()
-  await expect(page.getByRole('heading', { name: '다시 만나 반갑습니다' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: '로그인', exact: true })).toBeVisible()
   await page.goto('/ACCOUNT/')
-  await expect(page.getByRole('heading', { name: '다시 만나 반갑습니다' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: '로그인', exact: true })).toBeVisible()
   expect(new URL(page.url()).searchParams.get('next')).toBe('/account')
   await page.setViewportSize({ width: 1024, height: 900 })
   await fillCredentials(page, email)
@@ -208,7 +212,7 @@ test('B-01 공개·제품 개발 경로·카메라 0·좁은 창·키보드', as
   await expect(page.getByRole('button', { name: '측정 시작' })).toHaveCount(0)
   await page.goto('/start')
   await expect(page).toHaveURL(/\/login\?next=%2Fstart$/)
-  await expect(page.getByRole('heading', { name: '다시 만나 반갑습니다' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: '로그인', exact: true })).toBeVisible()
   await expect(page.getByRole('button', { name: 'Google로 계속하기', exact: true })).toBeDisabled()
   await expect(
     page.getByText('구글 연결을 준비하고 있습니다. 이메일로 계속해 주세요.'),
@@ -246,7 +250,7 @@ test('B-01/02 실제 가입·오답·재발송 대기·로그아웃·로그인·
   await page.screenshot({ path: info.outputPath('verification-error.png'), fullPage: true })
   await page.getByLabel('인증 코드', { exact: true }).fill(code)
   await page.getByRole('button', { name: '인증하고 시작하기' }).click()
-  await expect(page).toHaveURL('/start')
+  await skipOptionalProfile(page)
   await expect(page.getByText(email, { exact: true })).toBeVisible()
   await page.screenshot({ path: info.outputPath('protected-start.png'), fullPage: true })
   expect(
@@ -270,7 +274,7 @@ test('B-02 실제 가입 단계 새로고침은 인증 권한 없이 안전하�
   await page.getByRole('button', { name: '인증 코드 받기', exact: true }).click()
   await expect(page.getByRole('heading', { name: '이메일을 확인해 주세요' })).toBeVisible()
   await page.reload()
-  await expect(page.getByRole('heading', { name: '나를 위한 움직임의 시작' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: '회원가입', exact: true })).toBeVisible()
   await expect(page.getByLabel('이메일', { exact: true })).toHaveValue('')
   await page.goto('/start')
   await expect(page).toHaveURL(/\/login/)
