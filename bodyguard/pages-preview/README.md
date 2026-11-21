@@ -25,7 +25,7 @@ node bodyguard/pages-preview/build.mjs /absolute/path/to/new-empty-output
 
 ## 웹캠과 아바타의 좌우 검증
 
-Chrome이 설치된 환경에서 `/bodyguard/`에 놓을 빌드 출력에 대해 `node bodyguard/pages-preview/check-arm-mirroring.mjs /absolute/path/to/bodyguard`를 실행한다. 가상 카메라와 합성 관절 입력으로 남녀 아바타의 오른팔과 왼팔을 각각 들어 올려 전신·상반신·자세히 보기에서 거울형 카메라 미리보기와 같은 쪽의 어깨에서 움직이는지 확인한다.
+Chrome이 설치된 환경에서 `/bodyguard/`에 놓을 빌드 출력에 대해 `node bodyguard/pages-preview/check-arm-mirroring.mjs /absolute/path/to/bodyguard`를 실행한다. 가상 카메라와 합성 관절 입력으로 남녀 아바타의 오른팔과 왼팔을 각각 들어 올려 전신·상반신·자세히 보기에서 거울형 카메라 미리보기와 같은 쪽의 어깨에서 움직이는지 확인한다. 같은 페이지에서 웹캠을 종료하고 다시 시작해 두 번째 세션에서도 3D 추종이 이어지는지 검증한다.
 
 ## 공개 적용 확인
 

@@ -52,7 +52,11 @@ async function shutdown(message='웹캠을 종료했습니다.'){
 start.addEventListener('click',async()=>{
  if(phase!=='idle'||poisoned||busyClose)return
  phase='preparing';error=null;frames=tracked=0;generation=++nextGeneration;setControls();statusText('카메라 권한을 요청합니다.')
- const canvas=document.querySelector<HTMLCanvasElement>('#avatar')!, picked=gender.value as AvatarGender, pickedHands=handsOption.checked
+ const previousCanvas=document.querySelector<HTMLCanvasElement>('#avatar')!
+ // Each session disposes its WebGL context. A retired canvas cannot start another session.
+ const canvas=previousCanvas.cloneNode(false) as HTMLCanvasElement
+ previousCanvas.replaceWith(canvas)
+ const picked=gender.value as AvatarGender, pickedHands=handsOption.checked
  let owner:ReturnType<typeof createOwnedPlaybackResources>
  const fail=(reason:string)=>{
   if(failures.length<20)failures.push({reason,phase,atMs:Math.round(performance.now())})

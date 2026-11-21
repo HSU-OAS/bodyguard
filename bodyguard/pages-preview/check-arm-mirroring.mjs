@@ -179,11 +179,20 @@ try {
         }
       }
     }
-    await page.click('#stop')
+    const stop = async () => {
+      await page.click('#stop')
+      await page.waitForFunction(() => {
+        const state = window.bodyguardLivePreview.snapshot()
+        return state.phase === 'idle' && !state.cameraLive && state.error === null
+      })
+    }
+    await stop()
+    await page.click('#start')
     await page.waitForFunction(() => {
       const state = window.bodyguardLivePreview.snapshot()
-      return state.phase === 'idle' && !state.cameraLive && state.error === null
+      return state.generation === 2 && state.cameraLive && state.tracked === 9
     })
+    await stop()
   }
   assert.deepEqual(pageErrors, [])
 } finally {
