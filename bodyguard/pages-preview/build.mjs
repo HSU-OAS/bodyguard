@@ -91,6 +91,7 @@ for(const gender of ['male','female']){
  const body=execFileSync('git',['show','2be0ebebe731d4b2e44cd93f453ddbf76b6b581f:bodyguard/docs/review/avatar-final-refinement/continuous-20261014/models/bodyguard-'+gender+'-candidate.glb'],{cwd:repo,maxBuffer:16000000})
  await save('__bodyguard/review-avatar/'+gender+'.glb',body,hash)
  await save('__bodyguard/reference-content/'+gender+'/arm-overhead.glb',await readFile(resolve(referenceRoot,gender+'-arm-overhead.glb')))
+ await save('__bodyguard/reference-content/'+gender+'/shoulder-shrug.glb',await readFile(resolve(referenceRoot,gender+'-shoulder-shrug.glb')))
 }
 const mediaRoot=resolve(here,'../docs/review/motion-preview-content/media')
 const mediaManifest=JSON.parse(await readFile(resolve(mediaRoot,'manifest.json'),'utf8'))

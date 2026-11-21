@@ -29,4 +29,6 @@ Chrome이 설치된 환경에서 `/bodyguard/`에 놓을 빌드 출력에 대해
 
 ## 공개 적용 확인
 
+배포 대기 중인 어깨 시범 후보에서는 `어깨 올리기`를 선택하면 웹캠 동작과 나란히 3D 시범의 준비·올리기·내리기를 고를 수 있다. 시범은 선택한 단계에서 한 번 재생된다. [Cambridge University Hospitals의 어깨 올리기·이완 안내](https://www.cuh.nhs.uk/patient-information/neck-sprain-advice/)와 기존 남녀 Blender 애니메이션을 사용한다. 자동 판정과 수행 기록은 꺼져 있다.
+
 승인 커밋은 `9f0987bd`이며 [배포 실행 43135424089](https://github.com/HSU-OAS/bodyguard/actions/runs/43135424089)의 빌드·배포가 성공했다. [외부 검증 기록](../docs/review/pages-deployment-20261112/README.md)에 실제 HTTPS 화면·클릭 흐름·가상 카메라 결과를 보존한다. 첫 모델 다운로드의 대기 시간과 추론 처리 시간은 구분한다. 실제 사용자 정확도·전체 웹·출시 검증 완료를 뜻하지 않는다.
