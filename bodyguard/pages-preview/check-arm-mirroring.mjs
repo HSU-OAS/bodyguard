@@ -193,6 +193,33 @@ try {
       return state.generation === 2 && state.cameraLive && state.tracked === 9
     })
     await stop()
+
+    await page.goto(origin + '/bodyguard/inspection.html?motion=shoulder-shrug')
+    await page.selectOption('#gender', gender)
+    const step = page.locator('#reference-step')
+    assert.equal(await step.isDisabled(), true)
+    await page.click('#start')
+    await page.waitForFunction(() => window.bodyguardLivePreview.snapshot().tracked === 9)
+    const bounds = await page.locator('#avatar').boundingBox()
+    assert.ok(bounds)
+    const { x, y, width, height } = bounds
+    const left = { x, y, width: Math.floor(width / 2), height }
+    const right = { x: x + left.width, y, width: width - left.width, height }
+    const settled = async (phase) => {
+      await step.selectOption(phase)
+      // The authored lift/return clips run once and hold their last pose.
+      await page.waitForTimeout(1600)
+      return page.screenshot({ clip: right })
+    }
+    const ready = await page.screenshot({ clip: right })
+    const userReady = await page.screenshot({ clip: left })
+    const lifted = await settled('seeking-target')
+    assert.ok(!ready.equals(lifted), 'The guide must lift its shoulders')
+    assert.ok(lifted.equals(await page.screenshot({ clip: right })), 'The guide must not loop')
+    assert.ok(userReady.equals(await page.screenshot({ clip: left })), 'The user stays independent')
+    const returned = await settled('waiting-return')
+    assert.ok(!lifted.equals(returned), 'The guide must return from the lift')
+    await stop()
   }
   assert.deepEqual(pageErrors, [])
 } finally {
