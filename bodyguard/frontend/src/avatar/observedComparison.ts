@@ -8,7 +8,7 @@ import { createObservedPoseRig, type PoseRigFrame } from './observedPoseRig'
 import { OBSERVED_TRUNK_BINDING } from './observedTrunk'
 
 export type ComparisonStatus = 'waiting' | 'tracking' | 'partial' | 'aligned' | 'unavailable'
-export function createObservedComparison(model: Object3D, signal: AbortSignal) {
+export function createObservedComparison(model: Object3D, signal: AbortSignal, mirror = true) {
   const rest: { bone: Bone; rotation: Quaternion }[] = []
   model.traverse((node) => {
     if ((node as Bone).isBone) rest.push({ bone: node as Bone, rotation: node.quaternion.clone() })
@@ -56,7 +56,7 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal) {
       generation = next
       body = createObservedPoseRig(model, {
         context: { generation: next, signal },
-        mirror: true,
+        mirror,
         halfLifeMs: 50,
         maxAgeMs: 1000,
         bindings: [...OBSERVED_LIMB_BINDINGS, OBSERVED_TRUNK_BINDING],
@@ -81,7 +81,7 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal) {
         const aligned = readDetailAlignment(frame, generation, now, 1000)
         const common = {
           context: { generation, signal },
-          mirror: true,
+          mirror,
           halfLifeMs: 50,
           maxAgeMs: 1000,
         }

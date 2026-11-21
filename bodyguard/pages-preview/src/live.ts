@@ -72,7 +72,7 @@ start.addEventListener('click',async()=>{
   },
   async avatars(context){
    statusText('추론 모델 준비됨 · 3D 아바타를 준비합니다.')
-   const stage=await prepareReferenceStage(context,{canvas,gender:picked,motion:'arm-overhead',onFailure:()=>fail('asset-error')})
+   const stage=await prepareReferenceStage(context,{canvas,gender:picked,motion:'arm-overhead',mirrorUserDisplay:true,onFailure:()=>fail('asset-error')})
    if(!stage.beginObservation(context.generation)){stage.dispose();throw new Error('Observation unavailable')}
    // FR-A-01/03: align after fresh detail arrives, never before cold inference.
    let needsAlignment=true

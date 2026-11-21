@@ -44,6 +44,7 @@ export async function prepareReferenceStage(
     canvas: HTMLCanvasElement
     gender: AvatarGender
     motion: ReferenceMotion
+    mirrorUserDisplay?: boolean
     onFailure(): void
     onObservation?(status: ComparisonStatus): void
     feedback?: NeckReviewCriteria
@@ -51,7 +52,7 @@ export async function prepareReferenceStage(
 ) {
   if (!import.meta.env.DEV) throw new Error('Blender reference unavailable')
   const { signal, generation } = context,
-    { canvas, gender, motion, onFailure } = options
+    { canvas, gender, motion, onFailure, mirrorUserDisplay = false } = options
   let source: Object3D | undefined, pair: ReturnType<typeof cloneEightWeightPair> | undefined
   let player: ReturnType<typeof createReferencePlayback> | undefined,
     observed: ReturnType<typeof createObservedComparison> | undefined,
@@ -134,7 +135,8 @@ export async function prepareReferenceStage(
     assertBlenderReferenceBinding(source, animation.scene)
     pair = cloneEightWeightPair(source)
     const [guide, user] = pair.copies
-    observed = createObservedComparison(user, signal)
+    // A mirrored display uses the raw joint directions and reflects the model during the draw.
+    observed = createObservedComparison(user, signal, !mirrorUserDisplay)
     if (options.feedback) {
       if (motion !== 'neck-side') throw new Error()
       feedback = createNeckSurfaceFeedback(user, context, options.feedback)
@@ -170,6 +172,21 @@ export async function prepareReferenceStage(
         .map((name) => model.getObjectByName(name))
         .filter((bone): bone is Object3D => !!bone),
     }))
+    function paintScene(renderer: WebGLRenderer) {
+      if (!mirrorUserDisplay || !user.visible) {
+        renderer.render(scene, camera)
+        return
+      }
+      // Reflect the whole rendered user so the arm and its shoulder move to the same side.
+      const scaleX = user.scale.x
+      user.scale.x = -scaleX
+      try {
+        renderer.render(scene, camera)
+      } finally {
+        user.scale.x = scaleX
+        user.updateMatrixWorld(true)
+      }
+    }
     function draw(view: ReferenceView, paint = true, delta = 0) {
       if (!renderer || closed) return
       size()
@@ -227,7 +244,7 @@ export async function prepareReferenceStage(
             guide.visible = index === 1 && visible[1]
             renderer.setViewport(index === 0 ? 0 : leftWidth, 0, paneWidth, height)
             renderer.setScissor(index === 0 ? 0 : leftWidth, 0, paneWidth, height)
-            if (paint) renderer.render(scene, camera)
+            if (paint) paintScene(renderer)
           }
         } finally {
           ;[user.visible, guide.visible] = visible
@@ -242,7 +259,7 @@ export async function prepareReferenceStage(
       camera.updateProjectionMatrix()
       renderer.setViewport(0, 0, width, height)
       renderer.setScissorTest(false)
-      if (paint) renderer.render(scene, camera)
+      if (paint) paintScene(renderer)
     }
     size()
     if (!width || !height) throw new Error()

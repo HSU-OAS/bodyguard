@@ -23,6 +23,10 @@ node bodyguard/pages-preview/build.mjs /absolute/path/to/new-empty-output
 
 테스트는 브라우저의 합성 입력과 실제 사람의 웹캠 입력을 구분해서 기록한다. 실제 사용자의 체형·조명·카메라별 성능은 미검증이다.
 
+## 웹캠과 아바타의 좌우 검증
+
+Chrome이 설치된 환경에서 `/bodyguard/`에 놓을 빌드 출력에 대해 `node bodyguard/pages-preview/check-arm-mirroring.mjs /absolute/path/to/bodyguard`를 실행한다. 가상 카메라와 합성 관절 입력으로 남녀 아바타의 오른팔과 왼팔을 각각 들어 올려 전신·상반신·자세히 보기에서 거울형 카메라 미리보기와 같은 쪽의 어깨에서 움직이는지 확인한다.
+
 ## 공개 적용 확인
 
 승인 커밋은 `9f0987bd`이며 [배포 실행 43135424089](https://github.com/HSU-OAS/bodyguard/actions/runs/43135424089)의 빌드·배포가 성공했다. [외부 검증 기록](../docs/review/pages-deployment-20261112/README.md)에 실제 HTTPS 화면·클릭 흐름·가상 카메라 결과를 보존한다. 첫 모델 다운로드의 대기 시간과 추론 처리 시간은 구분한다. 실제 사용자 정확도·전체 웹·출시 검증 완료를 뜻하지 않는다.
