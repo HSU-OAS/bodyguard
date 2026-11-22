@@ -12,6 +12,9 @@ const frontend=resolve(here,'../frontend')
 const repo=resolve(here,'../..')
 const output=process.argv[2]
 if(!output||!output.startsWith('/'))throw Error('An absolute new output directory is required')
+const flag=process.argv[3]
+if(flag!==undefined&&flag!=='--local-neck-review')throw Error('Unknown build option')
+const localNeckReview=flag==='--local-neck-review'
 await mkdir(output)
 const base='/bodyguard'
 const mediaFile=resolve(frontend,'src/catalog/motionMedia.ts')
@@ -58,7 +61,7 @@ function transforms(kind){
  }}
 }
 const shared={configFile:false,base:base+'/',root:frontend,publicDir:false,mode:'development',
- define:{'import.meta.env.DEV':'true','import.meta.env.PROD':'false'},
+ define:{'import.meta.env.DEV':'true','import.meta.env.PROD':'false',__BODYGUARD_LOCAL_NECK_REVIEW__:JSON.stringify(localNeckReview)},
  build:{emptyOutDir:false,copyPublicDir:false,minify:true}}
 await build({...shared,plugins:[transforms('page')],build:{...shared.build,outDir:output,
  lib:{entry:resolve(here,'src/live.ts'),formats:['es'],fileName:()=> 'inspection.js'},
@@ -92,6 +95,7 @@ for(const gender of ['male','female']){
  await save('__bodyguard/review-avatar/'+gender+'.glb',body,hash)
  await save('__bodyguard/reference-content/'+gender+'/arm-overhead.glb',await readFile(resolve(referenceRoot,gender+'-arm-overhead.glb')))
  await save('__bodyguard/reference-content/'+gender+'/shoulder-shrug.glb',await readFile(resolve(referenceRoot,gender+'-shoulder-shrug.glb')))
+ if(localNeckReview) await save('__bodyguard/reference-content/'+gender+'/neck-side.glb',await readFile(resolve(referenceRoot,gender+'-neck-side-seated.glb')))
 }
 const mediaRoot=resolve(here,'../docs/review/motion-preview-content/media')
 const mediaManifest=JSON.parse(await readFile(resolve(mediaRoot,'manifest.json'),'utf8'))

@@ -9,6 +9,7 @@ const require = createRequire(new URL('../frontend/package.json', import.meta.ur
 const { chromium } = require('@playwright/test')
 assert.ok(process.argv[2] && isAbsolute(process.argv[2]), 'Pass the absolute preview build path')
 const output = resolve(process.argv[2])
+const localNeckReview = process.argv[3] === '--local-neck-review'
 const mount = resolve(output, '..')
 const server = createServer(async (req, res) => {
   try {
@@ -37,6 +38,8 @@ try {
   await page.addInitScript(() => {
     window.lift = 'none'
     window.showHands = false
+    window.headTilt = 0
+    window.hideEar = false
     window.Worker = class extends EventTarget {
       send(data) {
         queueMicrotask(() => this.dispatchEvent(new MessageEvent('message', { data })))
@@ -59,6 +62,8 @@ try {
           presence: 0.99,
         }))
         const locations = {
+          7: [0.5 + 0.06 * Math.cos(window.headTilt), 0.18 - 0.08 * Math.sin(window.headTilt)],
+          8: [0.5 - 0.06 * Math.cos(window.headTilt), 0.18 + 0.08 * Math.sin(window.headTilt)],
           11: [0.62, 0.31],
           12: [0.38, 0.31],
           13: [0.65, 0.46],
@@ -82,6 +87,7 @@ try {
         }
         for (const [index, [x, y]] of Object.entries(locations))
           Object.assign(landmarks[index], { x, y })
+        if (window.hideEar) landmarks[7].visibility = 0.1
         const worldLandmarks = landmarks.map((p) => ({ ...p, x: p.x - 0.5, y: p.y - 0.59 }))
         const hands = window.showHands
           ? ['left', 'right'].map((side) => {
@@ -104,7 +110,7 @@ try {
           result: {
             landmarks: [landmarks],
             worldLandmarks: [worldLandmarks],
-            headOrientation: [0, 0, 0, 1],
+            headOrientation: [0, 0, Math.sin(window.headTilt / 2), Math.cos(window.headTilt / 2)],
             hands,
           },
         })
@@ -114,6 +120,8 @@ try {
   const origin = 'http://127.0.0.1:' + server.address().port
   for (const gender of ['male', 'female']) {
     await page.goto(origin + '/bodyguard/inspection.html?motion=neck-side')
+    assert.equal(await page.locator('#direction-status').isVisible(), localNeckReview)
+    if (localNeckReview) await page.goto(origin + '/bodyguard/inspection.html?motion=arm-overhead')
     await page.selectOption('#gender', gender)
     await page.click('#start')
     await page.waitForFunction(() => window.bodyguardLivePreview.snapshot().tracked === 9)
@@ -236,6 +244,32 @@ try {
       return state.headTracked && !state.handTracked
     })
     await stop()
+    if (localNeckReview) {
+      await page.goto(origin + '/bodyguard/inspection.html?motion=neck-side')
+      await page.selectOption('#gender', gender)
+      await page.click('#start')
+      await page.waitForFunction(() => window.bodyguardLivePreview.snapshot().tracked > 0)
+      await page.locator('#align').click()
+      await page.getByText('카메라에서 보이는 움직임 기준 위치', { exact: true }).waitFor()
+      await page.locator('#reference-step').selectOption('right')
+      await page.evaluate(() => {
+        window.headTilt = -0.25
+      })
+      await page.getByText('시범 오른쪽 · 카메라에서 보이는 움직임 왼쪽', { exact: true }).waitFor()
+      await page.evaluate(() => {
+        window.headTilt = 0.25
+      })
+      await page
+        .getByText('시범 오른쪽 · 카메라에서 보이는 움직임 오른쪽', { exact: true })
+        .waitFor()
+      await page.evaluate(() => {
+        window.hideEar = true
+      })
+      await page
+        .getByText('머리와 양쪽 어깨가 화면에 들어오게 조정해 주세요.', { exact: true })
+        .waitFor()
+      await stop()
+    }
 
     await page.goto(origin + '/bodyguard/inspection.html?motion=shoulder-shrug')
     await page.selectOption('#gender', gender)
