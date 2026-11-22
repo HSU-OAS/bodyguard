@@ -251,24 +251,44 @@ try {
       await page.waitForFunction(() => window.bodyguardLivePreview.snapshot().tracked > 0)
       await page.locator('#align').click()
       await page.getByText('카메라에서 보이는 움직임 기준 위치', { exact: true }).waitFor()
+      const replay = page.getByRole('button', { name: '시범 다시 보기', exact: true })
+      assert.equal(await replay.isDisabled(), true)
       await page.locator('#reference-step').selectOption('right')
+      assert.equal(await replay.isEnabled(), true)
       await page.evaluate(() => {
         window.headTilt = -0.25
       })
-      await page.getByText('시범 오른쪽 · 카메라에서 보이는 움직임 왼쪽', { exact: true }).waitFor()
+      const feedback = page.locator('#direction-status')
+      await page
+        .getByText('시범과 반대 방향입니다. 정면으로 돌아와 오른쪽 시범을 다시 보세요.', { exact: true })
+        .waitFor()
+      assert.equal(await feedback.getAttribute('data-opposite'), '')
+      const bounds = await page.locator('#avatar').boundingBox()
+      assert.ok(bounds)
+      const guide = { ...bounds, x: bounds.x + bounds.width / 2, width: bounds.width / 2 }
+      await page.waitForTimeout(2200)
+      const target = await page.screenshot({ clip: guide })
+      await replay.click()
+      assert.ok(!target.equals(await page.screenshot({ clip: guide })), 'Replay must move the guide')
       await page.evaluate(() => {
         window.headTilt = 0.25
       })
+      await page.getByText('시범과 같은 방향입니다.', { exact: true }).waitFor()
+      assert.equal(await feedback.getAttribute('data-opposite'), null)
+      await page.locator('#reference-step').selectOption('left')
       await page
-        .getByText('시범 오른쪽 · 카메라에서 보이는 움직임 오른쪽', { exact: true })
+        .getByText('시범과 반대 방향입니다. 정면으로 돌아와 왼쪽 시범을 다시 보세요.', { exact: true })
         .waitFor()
+      assert.equal(await feedback.getAttribute('data-opposite'), '')
       await page.evaluate(() => {
         window.hideEar = true
       })
       await page
         .getByText('머리와 양쪽 어깨가 화면에 들어오게 조정해 주세요.', { exact: true })
         .waitFor()
+      assert.equal(await feedback.getAttribute('data-opposite'), null)
       await stop()
+      assert.equal(await replay.isDisabled(), true)
     }
 
     await page.goto(origin + '/bodyguard/inspection.html?motion=shoulder-shrug')

@@ -20,7 +20,7 @@ Node 24와 pnpm 12.6.0을 사용한다. 먼저 `bodyguard/frontend`에서 `pnpm 
 node bodyguard/pages-preview/build.mjs /absolute/path/to/new-empty-output
 ```
 
-개발 기기에서 웹캠으로 목 시범과 방향을 대조하려면 새 출력 경로에 `--local-neck-review`를 추가한다. `/bodyguard/inspection.html?motion=neck-side`에서 웹캠 시작 후 `정면 맞추기`를 누르고 왼쪽 또는 오른쪽 시범을 고른다. 화면에서는 현재 카메라에서 보이는 방향만 표시한다. 기본 배포 빌드에는 이 화면과 목 시범 파일이 포함되지 않는다.
+개발 기기에서 웹캠으로 목 시범과 방향을 대조하려면 새 출력 경로에 `--local-neck-review`를 추가한다. `/bodyguard/inspection.html?motion=neck-side`에서 웹캠 시작 후 `정면 맞추기`를 누르고 왼쪽 또는 오른쪽 시범을 고른다. 보이는 움직임이 시범과 반대일 때만 붉은 안내를 띄운다. `시범 다시 보기`를 누르면 기준 아바타가 선택한 동작을 다시 보여준다. 이 화면은 카메라에서 보이는 방향을 비교하며 기본 배포 빌드에는 이 화면과 목 시범 파일이 포함되지 않는다.
 
 출력 경로는 존재하지 않는 새 디렉터리여야 한다. `/bodyguard/` 하위 경로, HTTPS, 브라우저 카메라 권한, 필요한 모델 파일을 사용하는 환경에서만 검수한다. GitHub Actions의 수동 워크플로는 결과물을 Pages에 배포하며 일반 제품 배포를 하지 않는다.
 
@@ -29,6 +29,8 @@ node bodyguard/pages-preview/build.mjs /absolute/path/to/new-empty-output
 ## 웹캠과 아바타의 좌우 검증
 
 Chrome이 설치된 환경에서 `/bodyguard/`에 놓을 빌드 출력에 대해 `node bodyguard/pages-preview/check-arm-mirroring.mjs /absolute/path/to/bodyguard`를 실행한다. 가상 카메라와 합성 관절 입력으로 남녀 아바타의 오른팔과 왼팔을 각각 들어 올려 전신·상반신·자세히 보기에서 거울형 카메라 미리보기와 같은 쪽의 어깨에서 움직이는지 확인한다. 같은 페이지에서 웹캠을 종료하고 다시 시작해 두 번째 세션에서도 3D 추종이 이어지는지 검증한다.
+
+로컬 목 검수 빌드에는 검사 명령에도 `--local-neck-review`를 붙인다. 합성 입력과 실제 WebGL로 남녀 각각 반대 방향의 붉은 안내, 같은 방향과 가림에서의 안내 해제, 기준 아바타의 시범 재생을 확인한다.
 
 ## 공개 적용 확인
 

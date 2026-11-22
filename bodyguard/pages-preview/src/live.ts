@@ -41,6 +41,8 @@ const referencePhases=['waiting-start','seeking-target','waiting-return'] as con
 let referencePhase:ReferenceCommand['phase']|undefined
 let referenceSide:'left'|'right'='left'
 let referenceStep:HTMLSelectElement|undefined
+let referenceReplay:HTMLButtonElement|undefined
+let referenceRevision=1
 let directionStatus:HTMLParagraphElement|undefined
 if(shoulderReference||neckReview){
  document.querySelector('.roles strong:last-child')!.textContent=neckReview?'기준 아바타 · 목 방향 시범':'기준 아바타 · 어깨 올리기 시범'
@@ -57,11 +59,19 @@ if(shoulderReference||neckReview){
   }else{
    referencePhase=referencePhases.find(candidate=>candidate===picked)
   }
+  setControls()
  })
 }
 if(neckReview){
  document.querySelector('.inspection-title')!.textContent='목 옆 기울이기 · 방향 대조'
  document.querySelector('.help')!.textContent='정면을 기준으로 맞춘 뒤 시범 단계를 고르세요.'
+ referenceReplay=document.createElement('button')
+ referenceReplay.type='button'
+ referenceReplay.textContent='시범 다시 보기'
+ referenceReplay.addEventListener('click',()=>{
+  if(phase==='running'&&referencePhase==='seeking-target') referenceRevision++
+ })
+ referenceStep?.closest('label')?.after(referenceReplay)
  view.value='detail'
  directionStatus=document.createElement('p')
  directionStatus.id='direction-status'
@@ -73,7 +83,15 @@ const statusText=(message:string)=>{status.textContent=message}
 const failures:{reason:string;phase:string;atMs:number}[]=[]
 let nextGeneration=0, active:ReturnType<typeof createOwnedPlaybackResources>|undefined, controller:ReturnType<typeof createResourceController>|undefined, phase='idle', generation=0, frames=0, tracked=0, lastPublish=0, error:string|null=null, busyClose:Promise<void>|undefined, poisoned=false
 let bodySignal:'none'|'single'|'multiple'='none',headSignal=false,headTracked=false,handTracked=false,handsPending=false
-const setControls=()=>{start.disabled=phase!=='idle'||poisoned;stop.disabled=phase==='idle'||phase==='closing';gender.disabled=phase!=='idle';handsOption.disabled=phase!=='idle';align.disabled=alignHands.disabled=phase!=='running';alignHands.hidden=handStatus.hidden=!handsOption.checked;if(referenceStep) referenceStep.disabled=phase!=='running'}
+const setControls=()=>{
+ start.disabled=phase!=='idle'||poisoned
+ stop.disabled=phase==='idle'||phase==='closing'
+ gender.disabled=handsOption.disabled=phase!=='idle'
+ align.disabled=alignHands.disabled=phase!=='running'
+ alignHands.hidden=handStatus.hidden=!handsOption.checked
+ if(referenceStep) referenceStep.disabled=phase!=='running'
+ if(referenceReplay) referenceReplay.disabled=phase!=='running'||referencePhase!=='seeking-target'
+}
 async function shutdown(message='웹캠을 종료했습니다.'){
  if(busyClose)return busyClose
  const owner=active, control=controller
@@ -88,7 +106,10 @@ async function shutdown(message='웹캠을 종료했습니다.'){
   counter.textContent=''
   tracked=0;bodySignal='none';headSignal=headTracked=handTracked=handsPending=false
   handStatus.textContent=''
-  if(directionStatus) directionStatus.textContent='정면을 보고 ‘정면 맞추기’를 누르세요.'
+  if(directionStatus){
+   directionStatus.textContent='정면을 보고 ‘정면 맞추기’를 누르세요.'
+   directionStatus.removeAttribute('data-opposite')
+  }
   statusText(failed?'카메라 종료를 요청했으나 추론 자원 해제를 확인하지 못했습니다. 새로고침 후 다시 시작하세요.':message)
  })()
  busyClose=closing
@@ -147,7 +168,7 @@ start.addEventListener('click',async()=>{
     render(now:number,delta:number){
      const state=stage.render(now,delta,{
       phase:referencePhase??'waiting-start',stepId:shoulderReference?'both':referenceSide,
-      playing:referencePhase!==undefined,revision:1,view:view.value as ReferenceView,
+      playing:referencePhase!==undefined,revision:referenceRevision,view:view.value as ReferenceView,
      })??{status:'untracked' as const,tracked:0,total:9}
      tracked=state.tracked
      headTracked=stage.getObservationCoverage()?.headTracking===true
@@ -157,16 +178,19 @@ start.addEventListener('click',async()=>{
      if(directionStatus&&direction){
       const observation=direction.read(now)
       const names={left:'왼쪽',right:'오른쪽',center:'기준 위치'} as const
-      const message=observation.state==='waiting'
-       ?'정면을 보고 ‘정면 맞추기’를 누르세요.'
-       :observation.state==='unavailable'
-        ?'머리와 양쪽 어깨가 화면에 들어오게 조정해 주세요.'
-        :observation.state==='settling'
-         ?'움직임 확인 중'
-         :referencePhase==='seeking-target'
-          ?'시범 '+names[referenceSide]+' · 카메라에서 보이는 움직임 '+names[observation.direction]
-          :'카메라에서 보이는 움직임 '+names[observation.direction]
+      const comparing=observation.state==='observed'&&referencePhase==='seeking-target'
+      const opposite=comparing&&observation.direction!=='center'&&observation.direction!==referenceSide
+      let message='움직임 확인 중'
+      if(observation.state==='waiting') message='정면을 보고 ‘정면 맞추기’를 누르세요.'
+      if(observation.state==='unavailable') message='머리와 양쪽 어깨가 화면에 들어오게 조정해 주세요.'
+      if(observation.state==='observed'){
+       if(!comparing) message='카메라에서 보이는 움직임 '+names[observation.direction]
+       else if(opposite) message='시범과 반대 방향입니다. 정면으로 돌아와 '+names[referenceSide]+' 시범을 다시 보세요.'
+       else if(observation.direction===referenceSide) message='시범과 같은 방향입니다.'
+       else message='정면을 기준으로 '+names[referenceSide]+' 시범을 확인하세요.'
+      }
       if(directionStatus.textContent!==message) directionStatus.textContent=message
+      if(opposite!==directionStatus.hasAttribute('data-opposite')) directionStatus.toggleAttribute('data-opposite',opposite)
      }
      if(pickedHands){
       const message=handsPending?'양손을 펴서 카메라에 보여주세요.':handTracked?'손가락 추종 중':'양손을 화면에 넣고 손 맞추기를 눌러주세요.'
