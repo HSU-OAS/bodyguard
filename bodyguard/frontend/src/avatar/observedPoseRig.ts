@@ -1,5 +1,5 @@
 // FR-A-01/03·FR-M-02/07: one provider result, private directional display only.
-import type { Object3D } from 'three'
+import { type Object3D, Quaternion, Vector3 } from 'three'
 import type { CapturedImage } from '../posture/capturedImage'
 import { JOINT_COUNT, type Point } from '../posture/landmarks'
 import {
@@ -40,6 +40,14 @@ export type PoseCoverage = Readonly<{
   // Separate projected region evidence; never promote it to observed bone rotations.
   projectedRegions?: readonly ProjectedSurfaceRegion[]
 }>
+// FR-A-01/03: a user-requested upright reference removes the shared camera/depth tilt that a
+// single webcam bakes into every world direction (measured ~13-15° with a desk laptop camera).
+// Display alignment only: never a posture verdict, never applied without an explicit request.
+export const UPRIGHT_SAMPLES = 8
+export const MAX_UPRIGHT_TILT_DEG = 30
+export type UprightCalibration = 'none' | 'pending' | 'applied' | 'rejected'
+const UP = Object.freeze(new Vector3(0, 1, 0))
+
 type Options = Parameters<typeof createDirectionalRig>[1] &
   Readonly<{ mirror: boolean; head?: HeadDisplayAlignment; hands?: HandDisplayAlignment }>
 /** One detectForVideo result owns both arrays. Caller preserves its capture stamps;
@@ -92,12 +100,17 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
   let lastNow = -Infinity
   let pending: object | undefined
   let coverage: PoseCoverage | null = null
+  let upright: UprightCalibration = 'none'
+  let correction: Quaternion | null = null
+  let samples: { sum: Vector3; count: number } | null = null
 
   function dispose() {
     if (closed) return
     closed = true
     pending = undefined
     coverage = null
+    samples = null
+    correction = null
     driver.dispose()
     head?.dispose()
     hands?.dispose()
@@ -138,12 +151,11 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
         Array.isArray(worlds[0]) &&
         images[0].length === JOINT_COUNT &&
         worlds[0].length === JOINT_COUNT
+      const trunk = single ? observedTrunkDirection(images[0], worlds[0], mirror) : {}
       const directions = single
         ? {
             ...observedLimbDirections(images[0], worlds[0], mirror),
-            ...(permitted.has(OBSERVED_TRUNK_BINDING.bone)
-              ? observedTrunkDirection(images[0], worlds[0], mirror)
-              : {}),
+            ...(permitted.has(OBSERVED_TRUNK_BINDING.bone) ? trunk : {}),
           }
         : {}
       const selected: Record<string, readonly number[]> = {}
@@ -166,6 +178,24 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
       const rotation = Array.isArray(supplied) ? Array.from(supplied) : null
       const copiedHands = hands && completeBody ? copyHandObservations(result.hands) : []
       if (closed || signal.aborted || pending !== token) return false
+      const trunkSample = trunk[OBSERVED_TRUNK_BINDING.bone]
+      if (samples && trunkSample) {
+        samples.sum.add(new Vector3(trunkSample[0], trunkSample[1], trunkSample[2]).normalize())
+        if (++samples.count >= UPRIGHT_SAMPLES) {
+          const mean = samples.sum.normalize()
+          samples = null
+          // Minimal swing to vertical: removes pitch/roll only, never the user's facing (yaw).
+          if (mean.lengthSq() > 0 && (mean.angleTo(UP) * 180) / Math.PI <= MAX_UPRIGHT_TILT_DEG) {
+            correction = new Quaternion().setFromUnitVectors(mean, UP)
+            upright = 'applied'
+          } else upright = 'rejected'
+        }
+      }
+      if (correction)
+        for (const [name, value] of Object.entries(selected)) {
+          const v = new Vector3(value[0], value[1], value[2]).applyQuaternion(correction)
+          selected[name] = [v.x, v.y, v.z]
+        }
       const accepted = driver.push({
         generation: suppliedGeneration,
         sequence,
@@ -211,9 +241,19 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
       ...(hands ? { hands: hands.render(now, deltaMs) } : {}),
     })
   }
+  /** Samples the next trusted trunk directions as "standing upright"; earlier correction is kept
+   * until that completes, and kept again if the sampled body is too tilted to be upright. */
+  function calibrateUpright() {
+    if (closed || signal.aborted) return false
+    samples = { sum: new Vector3(), count: 0 }
+    upright = 'pending'
+    return true
+  }
   return Object.freeze({
     observe,
     render,
+    calibrateUpright,
+    getUprightCalibration: () => upright,
     getCoverage: () => (closed || signal.aborted ? null : coverage),
     dispose,
   })

@@ -139,6 +139,8 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal, m
         pending.hands = now
         handTracking = false
       }
+      // Front alignment also means "standing upright now": remove the camera/depth tilt.
+      if (target !== 'hands') body.calibrateUpright()
       alignmentRequested = true
       return true
     },
@@ -168,7 +170,11 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal, m
     },
     suspend,
     getSnapshot: () => snapshot,
-    getDetailStatus: () => ({ handsPending: pending.hands !== undefined, handTracking }),
+    getDetailStatus: () => ({
+      handsPending: pending.hands !== undefined,
+      handTracking,
+      upright: body?.getUprightCalibration() ?? ('none' as const),
+    }),
     getCoverage() {
       const coverage = body?.getCoverage()
       return !closed && !signal.aborted && model.visible && coverage

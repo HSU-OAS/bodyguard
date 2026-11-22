@@ -106,6 +106,7 @@ it.each(['male', 'female'] as const)(
       return input
     }
     expect(observation.align('head')).toBe(true)
+    expect(observation.getDetailStatus().upright).toBe('pending')
     const missingFace = freshFrame()
     observation.observe({
       ...missingFace,
@@ -122,11 +123,11 @@ it.each(['male', 'female'] as const)(
     observation.observe({ ...missingHands, result: { ...missingHands.result, hands: [] } })
     observation.render(now, 10)
     expect(observation.getCoverage()?.headTracking).toBe(true)
-    expect(observation.getDetailStatus()).toEqual({ handsPending: true, handTracking: false })
+    expect(observation.getDetailStatus()).toMatchObject({ handsPending: true, handTracking: false })
     observation.observe(freshFrame())
     observation.render(now, 10)
     expect(observation.getCoverage()?.headTracking).toBe(true)
-    expect(observation.getDetailStatus()).toEqual({ handsPending: false, handTracking: true })
+    expect(observation.getDetailStatus()).toMatchObject({ handsPending: false, handTracking: true })
     now += 10
     window.workspaceAvatarFixture.headAngle = 0.35
     window.workspaceAvatarFixture.handBend = 0.6
