@@ -39,6 +39,7 @@ try {
     window.lift = 'none'
     window.showHands = false
     window.headTilt = 0
+    window.shoulderTilt = 0
     window.hideEar = false
     window.Worker = class extends EventTarget {
       send(data) {
@@ -64,8 +65,8 @@ try {
         const locations = {
           7: [0.5 + 0.06 * Math.cos(window.headTilt), 0.18 - 0.08 * Math.sin(window.headTilt)],
           8: [0.5 - 0.06 * Math.cos(window.headTilt), 0.18 + 0.08 * Math.sin(window.headTilt)],
-          11: [0.62, 0.31],
-          12: [0.38, 0.31],
+          11: [0.5 + 0.12 * Math.cos(window.shoulderTilt), 0.31 - 0.16 * Math.sin(window.shoulderTilt)],
+          12: [0.5 - 0.12 * Math.cos(window.shoulderTilt), 0.31 + 0.16 * Math.sin(window.shoulderTilt)],
           13: [0.65, 0.46],
           14: [0.35, 0.46],
           15: [0.66, 0.6],
@@ -280,6 +281,18 @@ try {
         .getByText('시범과 반대 방향입니다. 정면으로 돌아와 왼쪽 시범을 다시 보세요.', { exact: true })
         .waitFor()
       assert.equal(await feedback.getAttribute('data-opposite'), '')
+      await page.evaluate(() => {
+        window.headTilt = 0
+        window.shoulderTilt = -0.25
+      })
+      await page.getByText('움직임 확인 중', { exact: true }).waitFor()
+      const firstUncertain = await page.evaluate(() => window.bodyguardLivePreview.snapshot().frames)
+      await page.waitForFunction(
+        (frames) => window.bodyguardLivePreview.snapshot().frames >= frames + 5,
+        firstUncertain,
+      )
+      assert.equal(await feedback.textContent(), '움직임 확인 중')
+      assert.equal(await feedback.getAttribute('data-opposite'), null)
       await page.evaluate(() => {
         window.hideEar = true
       })
