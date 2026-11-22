@@ -1,15 +1,23 @@
 import { expect, it } from 'vitest'
 import { createNeckDirectionReview } from './neckDirectionReview'
 
-function frame(sequence: number, at: number, angle: number, mirror: boolean) {
+function frame(sequence: number, at: number, angle: number, mirror: boolean, shoulderAngle = 0) {
   const landmarks = Array.from({ length: 33 }, () => ({
     x: 0.5,
     y: 0.38,
     z: 0,
     visibility: 0.99,
   }))
-  landmarks[11] = { ...landmarks[11], x: 0.62, y: 0.55 }
-  landmarks[12] = { ...landmarks[12], x: 0.38, y: 0.55 }
+  landmarks[11] = {
+    ...landmarks[11],
+    x: 0.5 + 0.12 * Math.cos(shoulderAngle),
+    y: 0.55 - 0.16 * Math.sin(shoulderAngle),
+  }
+  landmarks[12] = {
+    ...landmarks[12],
+    x: 0.5 - 0.12 * Math.cos(shoulderAngle),
+    y: 0.55 + 0.16 * Math.sin(shoulderAngle),
+  }
   // A front-facing subject's left ear appears at the larger raw x coordinate.
   landmarks[7] = {
     ...landmarks[7],
@@ -62,3 +70,28 @@ it.each([false, true])(
     expect(observer.read(missing.at + 1020)).toEqual({ state: 'waiting' })
   },
 )
+
+it.each([false, true])('does not cue a neck tilt from shoulders alone (mirror=%s)', (mirror) => {
+  const observer = createNeckDirectionReview(4)
+  let next = 1
+  const feed = (head: number, shoulders: number) => {
+    const sequence = next++,
+      at = sequence * 20
+    observer.observe(frame(sequence, at, head, mirror, shoulders), at)
+    return observer.read(at)
+  }
+  observer.align(0)
+  for (let i = 0; i < 3; i++) feed(0, 0)
+  feed(0, 0.25)
+  feed(0, 0.25)
+  expect(feed(0, 0.25)).toEqual({ state: 'settling' })
+  feed(-0.25, 0)
+  feed(-0.25, 0)
+  expect(feed(-0.25, 0)).toEqual({ state: 'observed', direction: 'left' })
+  feed(0.15, 0.35)
+  feed(0.15, 0.35)
+  expect(feed(0.15, 0.35)).toEqual({ state: 'settling' })
+  feed(-0.25, -0.25)
+  feed(-0.25, -0.25)
+  expect(feed(-0.25, -0.25)).toEqual({ state: 'observed', direction: 'center' })
+})
