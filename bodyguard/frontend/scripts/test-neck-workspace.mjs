@@ -202,7 +202,14 @@ try {
   await status('어깨선 확인 · 준비 시범을 다시 보세요')
   await image('shoulder-feedback')
   await set({ shoulder: 0, angle: 0.4 })
-  await status('선택한 방향의 시범을 확인해 주세요')
+  await status('반대 방향이에요. 왼쪽으로 기울이는 시범을 보세요.')
+  const feedback = await page.locator('.coaching-feedback').boundingBox()
+  const stage = await page.locator('.coaching-space').boundingBox()
+  assert(feedback && stage && feedback.y + feedback.height <= stage.y)
+  assert.equal(
+    await page.getByRole('button', { name: '상반신', exact: true }).getAttribute('aria-pressed'),
+    'true',
+  )
   if (colour) {
     const neck = await redness()
     assert(neck[0].count > 0 && neck[1].count === 0)
@@ -225,7 +232,7 @@ try {
     assert(neck[0].meanY > shoulder[0].meanY)
     await image('surface-shoulder')
     await set({ shoulder: 0, angle: 0.4 })
-    await status('선택한 방향의 시범을 확인해 주세요')
+    await status('반대 방향이에요. 왼쪽으로 기울이는 시범을 보세요.')
     await image('surface-neck')
     cases.push(
       'actual GPU pixels: user-only distinct neck/shoulder region; missing head and stale capture revoke red, fresh input recovers',
@@ -234,6 +241,7 @@ try {
   await image('wrong-direction')
   await set({ angle: 0, empty: true })
   await status('왼쪽 · 준비')
+  assert.equal(await page.locator('.coaching-feedback').textContent(), '')
   assert.equal(await page.locator('progress').getAttribute('value'), '0')
   await image('empty-disarmed')
   await set({ empty: false })
@@ -258,6 +266,8 @@ try {
   await image('left-return')
   await set({ angle: 0 })
   await status('오른쪽 · 수행')
+  await set({ angle: -0.4 })
+  await status('반대 방향이에요. 오른쪽으로 기울이는 시범을 보세요.')
   await set({ angle: 0.4 })
   await status('오른쪽 · 복귀')
   await image('right-return')
@@ -281,7 +291,7 @@ try {
     assert(shoulders[0].count > 0 && shoulders[1].count === 0)
     await image('female-surface-shoulders')
     await set({ shoulder: 0, angle: 0.4 })
-    await status('선택한 방향의 시범을 확인해 주세요')
+    await status('반대 방향이에요. 왼쪽으로 기울이는 시범을 보세요.')
     const neck = await redness()
     assert(neck[0].count > 0 && neck[1].count === 0)
     await image('female-surface-neck')
