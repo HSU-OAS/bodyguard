@@ -61,6 +61,7 @@ if(shoulderReference||neckReview){
 }
 if(neckReview){
  document.querySelector('.inspection-title')!.textContent='목 옆 기울이기 · 방향 대조'
+ document.querySelector('.help')!.textContent='정면을 기준으로 맞춘 뒤 시범 단계를 고르세요.'
  view.value='detail'
  directionStatus=document.createElement('p')
  directionStatus.id='direction-status'
@@ -171,7 +172,7 @@ start.addEventListener('click',async()=>{
       const message=handsPending?'양손을 펴서 카메라에 보여주세요.':handTracked?'손가락 추종 중':'양손을 화면에 넣고 손 맞추기를 눌러주세요.'
       if(handStatus.textContent!==message) handStatus.textContent=message
      }
-     if(now-lastPublish>250){lastPublish=now;counter.textContent='입력 '+frames+' 프레임';if(phase==='running')statusText(state.tracked>0?'웹캠 추종 중 · 팔과 몸통을 천천히 움직여보세요.':headTracked?'머리 방향 추종 중 · 팔도 움직이려면 양쪽 팔꿈치·손목까지 화면에 넣어주세요.':bodySignal==='multiple'?'화면에 한 사람만 나오도록 조정해 주세요.':bodySignal==='none'?'카메라는 연결됐지만 신체를 찾지 못했습니다. 조금 물러나 양쪽 팔꿈치까지 보이게 해주세요.':'신체는 감지됐지만 팔·몸통 방향을 확인하지 못했습니다. 양쪽 팔꿈치·손목까지 보이게 해주세요.')}
+     if(now-lastPublish>250){lastPublish=now;counter.textContent='입력 '+frames+' 프레임';if(phase==='running')statusText(state.tracked>0?(neckReview?'웹캠 추종 중 · 머리와 양쪽 어깨를 화면에 넣어 주세요.':'웹캠 추종 중 · 팔과 몸통을 천천히 움직여보세요.'):headTracked?'머리 방향 추종 중 · 팔도 움직이려면 양쪽 팔꿈치·손목까지 화면에 넣어주세요.':bodySignal==='multiple'?'화면에 한 사람만 나오도록 조정해 주세요.':bodySignal==='none'?'카메라는 연결됐지만 신체를 찾지 못했습니다. 조금 물러나 양쪽 팔꿈치까지 보이게 해주세요.':'신체는 감지됐지만 팔·몸통 방향을 확인하지 못했습니다. 양쪽 팔꿈치·손목까지 보이게 해주세요.')}
      return state
     },
     align(target:'head'|'hands'){
