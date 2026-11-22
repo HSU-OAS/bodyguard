@@ -9,7 +9,7 @@ import { readVerifiedReferenceAsset } from './verifiedReferenceAsset'
 
 const asset = referenceContentAsset('male', 'neck-side')
 const original = new Uint8Array(
-  await readFile(resolve('../docs/review/blender-reference-content/animations/male-neck-side.glb')),
+  await readFile(resolve('../docs/review/blender-reference-content/animations', asset.filename)),
 )
 let fetcher: ReturnType<typeof vi.fn>
 function response(bytes = original, overrides: Record<string, unknown> = {}) {

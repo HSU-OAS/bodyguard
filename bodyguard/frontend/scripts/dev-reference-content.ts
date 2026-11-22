@@ -32,7 +32,7 @@ export function devReferenceContentPlugin(): Plugin {
             source: 'file',
             file: fileURLToPath(
               new URL(
-                `../../docs/review/blender-reference-content/animations/${gender}-${motion}.glb`,
+                `../../docs/review/blender-reference-content/animations/${asset.filename}`,
                 import.meta.url,
               ),
             ),

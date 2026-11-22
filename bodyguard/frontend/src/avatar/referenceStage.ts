@@ -1,5 +1,6 @@
 // FR-S-03/04·FR-A-01/03: manual DEV-only authored guide; no camera/clinical state.
 import {
+  type Bone,
   Box3,
   Color,
   DirectionalLight,
@@ -148,6 +149,17 @@ export async function prepareReferenceStage(
     const bounds = new Box3().setFromObject(guide, true),
       bodyHeight = bounds.max.y - bounds.min.y
     if (!Number.isFinite(bodyHeight) || bodyHeight <= 0) throw new Error()
+    if (motion === 'neck-side') {
+      // Prime only the guide after measuring the standing body used to frame both avatars.
+      for (const track of program.steps[0].clips['waiting-start'].tracks) {
+        const [name, property] = track.name.split('.')
+        const bone = guide.getObjectByName(name) as Bone | undefined
+        if (!bone?.isBone) throw new Error('Blender reference unavailable')
+        if (property === 'quaternion') bone.quaternion.fromArray(track.values)
+        if (property === 'position') bone.position.fromArray(track.values)
+        if (property === 'scale') bone.scale.fromArray(track.values)
+      }
+    }
     player = createReferencePlayback(guide, { context, program })
     renderer = new WebGLRenderer({ canvas, antialias: true })
     renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2))

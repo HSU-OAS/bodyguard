@@ -2,7 +2,7 @@
 import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
-import { type Bone, Box3, type Object3D } from 'three'
+import { type Bone, Box3, type Object3D, type Quaternion, Vector3 } from 'three'
 import { type GLTF, GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { beforeAll, expect, it } from 'vitest'
 import { assertBlenderReferenceBinding, blenderReferenceProgram } from './blenderReferenceProgram'
@@ -44,12 +44,12 @@ beforeAll(async () => {
     )
     bodies.set(gender, await parse(bytes))
     for (const motion of motions) {
+      const asset = referenceContentAsset(gender, motion)
       const path = new URL(
-        `../../../docs/review/blender-reference-content/animations/${gender}-${motion}.glb`,
+        `../../../docs/review/blender-reference-content/animations/${asset.filename}`,
         import.meta.url,
       )
-      const raw = readFileSync(path),
-        asset = referenceContentAsset(gender, motion)
+      const raw = readFileSync(path)
       expect(raw.length).toBe(asset.bytes)
       expect(createHash('sha256').update(raw).digest('hex')).toBe(asset.sha256)
       animations.set(`${gender}/${motion}`, await parse(raw))
@@ -79,6 +79,7 @@ it.each(['male', 'female'])(
       })
       let now = 0,
         sequence = 0
+      const startingGuide = new Map<string, Quaternion>()
       for (const step of program.steps)
         for (const phase of [
           'waiting-start',
@@ -104,6 +105,19 @@ it.each(['male', 'female'])(
             expect(player.render(now, 100).status).toBe('playing')
             now += 100
           } while (now - start < duration + 300)
+          if (phase === 'waiting-start' && motion === 'neck-side') {
+            guide.traverse((node) => {
+              if ((node as Bone).isBone) startingGuide.set(node.name, node.quaternion.clone())
+            })
+            for (const side of ['L', 'R']) {
+              const hip = required(guide.getObjectByName(`upperleg01${side}`)),
+                knee = required(guide.getObjectByName(`lowerleg01${side}`))
+              const forward = knee
+                .getWorldPosition(new Vector3())
+                .sub(hip.getWorldPosition(new Vector3()))
+              expect(forward.normalize().z).toBeGreaterThan(0.99)
+            }
+          }
           if (phase === 'seeking-target') expect(fingerprint(guide)).not.toBe(source)
           if (phase === 'holding') {
             const posed = new Box3().setFromObject(guide, true)
@@ -124,7 +138,9 @@ it.each(['male', 'female'])(
               if ((node as Bone).isBone)
                 rotations.push(
                   node.quaternion.angleTo(
-                    required(body.scene.getObjectByName(node.name)).quaternion,
+                    motion === 'neck-side'
+                      ? required(startingGuide.get(node.name))
+                      : required(body.scene.getObjectByName(node.name)).quaternion,
                   ),
                 )
             })
