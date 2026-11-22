@@ -50,6 +50,7 @@ export async function prepareReferenceStage(
     gender: AvatarGender
     motion: ReferenceMotion
     mirrorUserDisplay?: boolean
+    mirrorGuideDisplay?: boolean
     onFailure(): void
     onObservation?(status: ComparisonStatus): void
     feedback?: NeckReviewCriteria
@@ -57,7 +58,14 @@ export async function prepareReferenceStage(
 ) {
   if (!import.meta.env.DEV) throw new Error('Blender reference unavailable')
   const { signal, generation } = context,
-    { canvas, gender, motion, onFailure, mirrorUserDisplay = false } = options
+    {
+      canvas,
+      gender,
+      motion,
+      onFailure,
+      mirrorUserDisplay = false,
+      mirrorGuideDisplay = false,
+    } = options
   let source: Object3D | undefined, pair: ReturnType<typeof cloneEightWeightPair> | undefined
   let player: ReturnType<typeof createReferencePlayback> | undefined,
     observed: ReturnType<typeof createObservedComparison> | undefined,
@@ -189,18 +197,26 @@ export async function prepareReferenceStage(
         .filter((bone): bone is Object3D => !!bone),
     }))
     function paintScene(renderer: WebGLRenderer) {
-      if (!mirrorUserDisplay || !user.visible) {
+      const reflectUser = mirrorUserDisplay && user.visible,
+        reflectGuide = mirrorGuideDisplay && guide.visible
+      if (!reflectUser && !reflectGuide) {
         renderer.render(scene, camera)
         return
       }
       // Reflect the whole rendered user so the arm and its shoulder move to the same side.
-      const scaleX = user.scale.x
-      user.scale.x = -scaleX
+      if (reflectUser) user.scale.x *= -1
+      if (reflectGuide) guide.scale.x *= -1
       try {
         renderer.render(scene, camera)
       } finally {
-        user.scale.x = scaleX
-        user.updateMatrixWorld(true)
+        if (reflectUser) {
+          user.scale.x *= -1
+          user.updateMatrixWorld(true)
+        }
+        if (reflectGuide) {
+          guide.scale.x *= -1
+          guide.updateMatrixWorld(true)
+        }
       }
     }
     function draw(view: ReferenceView, paint = true, delta = 0) {

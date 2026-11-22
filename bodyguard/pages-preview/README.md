@@ -20,6 +20,8 @@ Node 24와 pnpm 12.6.0을 사용한다. 먼저 `bodyguard/frontend`에서 `pnpm 
 node bodyguard/pages-preview/build.mjs /absolute/path/to/new-empty-output
 ```
 
+개발 기기에서 웹캠으로 목 시범과 방향을 대조하려면 새 출력 경로에 `--local-neck-review`를 추가한다. `/bodyguard/inspection.html?motion=neck-side`에서 웹캠 시작 후 `정면 맞추기`를 누르고 왼쪽 또는 오른쪽 시범을 고른다. 화면에서는 현재 카메라에서 보이는 방향만 표시한다. 기본 배포 빌드에는 이 화면과 목 시범 파일이 포함되지 않는다.
+
 출력 경로는 존재하지 않는 새 디렉터리여야 한다. `/bodyguard/` 하위 경로, HTTPS, 브라우저 카메라 권한, 필요한 모델 파일을 사용하는 환경에서만 검수한다. GitHub Actions의 수동 워크플로는 결과물을 Pages에 배포하며 일반 제품 배포를 하지 않는다.
 
 테스트는 브라우저의 합성 입력과 실제 사람의 웹캠 입력을 구분해서 기록한다. 실제 사용자의 체형·조명·카메라별 성능은 미검증이다.
