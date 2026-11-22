@@ -10,7 +10,7 @@ import type { AvatarGender } from '../../frontend/src/avatar/reviewAvatarAssets'
 import type { ReferenceCommand, ReferenceView } from '../../frontend/src/avatar/referenceStage'
 
 declare const __BODYGUARD_LOCAL_NECK_REVIEW__: boolean
-document.querySelector('#root')!.innerHTML = '<header><a class="wordmark" href="/bodyguard/">BODYGUARD</a><span>자세 판정·기록 저장 꺼짐 · 아바타는 검수 후보</span></header><main><h1 class="inspection-title">웹캠 추종 체험</h1><div class="toolbar"><label>아바타 <select id="gender"><option value="male">남성</option><option value="female">여성</option></select></label><label>보기 <select id="view"><option value="full">전신</option><option value="upper">상반신</option><option value="detail">자세히</option></select></label><label><input id="detailed-hands" type="checkbox"> 손가락까지 추적</label><button id="start">웹캠 시작</button><button id="align" disabled>정면 맞추기</button><button id="stop" disabled>웹캠 종료</button><span id="counter"></span></div><p id="status" role="status">시작을 누르고 브라우저의 카메라 권한을 허용하세요.</p><section class="space"><div class="roles"><strong>내 움직임 · 웹캠 입력</strong><strong>기준 아바타 · 중립 자세</strong></div><canvas id="avatar" aria-label="실제 웹캠 입력 두 아바타 검수"></canvas></section><aside class="camera-box"><video id="camera" muted playsinline aria-label="내 카메라 미리보기"></video><span>내 카메라 · 브라우저 내부 처리</span></aside><p class="help">화면에서 한 걸음 물러나 어깨와 팔이 보이게 한 뒤, 한 팔을 천천히 들어보세요. 머리 방향은 정면을 본 상태에서 ‘정면 맞추기’를 누르세요.</p><p class="note">lite 모델 추종 검수입니다. 실제 정확도·노트북 성능은 검증 중이며, 촬영 범위 밖의 움직임까지 재현하지는 않습니다. 영상·좌표를 저장·전송하지 않습니다.</p></main>'
+document.querySelector('#root')!.innerHTML = '<header><a class="wordmark" href="/bodyguard/">BODYGUARD</a><span>자세 판정·기록 저장 꺼짐 · 아바타는 검수 후보</span></header><main><h1 class="inspection-title">웹캠 추종 체험</h1><div class="toolbar"><label>아바타 <select id="gender"><option value="male">남성</option><option value="female">여성</option></select></label><label>보기 <select id="view"><option value="full">전신</option><option value="upper">상반신</option><option value="detail">자세히</option></select></label><label><input id="detailed-hands" type="checkbox"> 손가락까지 추적</label><button id="start">웹캠 시작</button><button id="align" disabled>정면 맞추기</button><button id="stop" disabled>웹캠 종료</button><span id="counter"></span></div><p id="status" role="status">시작을 누르고 브라우저의 카메라 권한을 허용하세요.</p><section class="space"><div class="roles"><strong>내 움직임 · 웹캠 입력</strong><strong>기준 아바타 · 중립 자세</strong></div><canvas id="avatar" aria-label="실제 웹캠 입력 두 아바타 검수"></canvas></section><aside class="camera-box"><video id="camera" muted playsinline aria-label="내 카메라 미리보기"></video><span>내 카메라 · 브라우저 내부 처리</span></aside><p class="help">화면에서 한 걸음 물러나 어깨와 팔이 보이게 한 뒤, 한 팔을 천천히 들어보세요. 똑바로 서서 정면을 본 상태에서 ‘정면 맞추기’를 누르면 몸 기울기와 머리 방향을 맞춥니다.</p><p class="note">lite 모델 추종 검수입니다. 실제 정확도·노트북 성능은 검증 중이며, 촬영 범위 밖의 움직임까지 재현하지는 않습니다. 영상·좌표를 저장·전송하지 않습니다.</p></main>'
 const start=document.querySelector<HTMLButtonElement>('#start')!, stop=document.querySelector<HTMLButtonElement>('#stop')!, align=document.querySelector<HTMLButtonElement>('#align')!, gender=document.querySelector<HTMLSelectElement>('#gender')!, view=document.querySelector<HTMLSelectElement>('#view')!, handsOption=document.querySelector<HTMLInputElement>('#detailed-hands')!, status=document.querySelector<HTMLParagraphElement>('#status')!, counter=document.querySelector('#counter')!, video=document.querySelector<HTMLVideoElement>('#camera')!
 const alignHands=document.createElement('button'), handStatus=document.createElement('span')
 alignHands.type='button'
@@ -82,7 +82,7 @@ if(neckReview){
 const statusText=(message:string)=>{status.textContent=message}
 const failures:{reason:string;phase:string;atMs:number}[]=[]
 let nextGeneration=0, active:ReturnType<typeof createOwnedPlaybackResources>|undefined, controller:ReturnType<typeof createResourceController>|undefined, phase='idle', generation=0, frames=0, tracked=0, lastPublish=0, error:string|null=null, busyClose:Promise<void>|undefined, poisoned=false
-let bodySignal:'none'|'single'|'multiple'='none',headSignal=false,headTracked=false,handTracked=false,handsPending=false
+let bodySignal:'none'|'single'|'multiple'='none',headSignal=false,headTracked=false,handTracked=false,handsPending=false,upright:'none'|'pending'|'applied'|'rejected'|undefined
 const setControls=()=>{
  start.disabled=phase!=='idle'||poisoned
  stop.disabled=phase==='idle'||phase==='closing'
@@ -104,7 +104,7 @@ async function shutdown(message='웹캠을 종료했습니다.'){
   if(failed){poisoned=true;error='cleanup-error'}
   phase='idle';setControls()
   counter.textContent=''
-  tracked=0;bodySignal='none';headSignal=headTracked=handTracked=handsPending=false
+  tracked=0;bodySignal='none';headSignal=headTracked=handTracked=handsPending=false;upright=undefined
   handStatus.textContent=''
   if(directionStatus){
    directionStatus.textContent='정면을 보고 ‘정면 맞추기’를 누르세요.'
@@ -175,6 +175,7 @@ start.addEventListener('click',async()=>{
      const detail=stage.getDetailStatus()
      handsPending=detail?.handsPending===true
      handTracked=detail?.handTracking===true
+     upright=detail?.upright
      if(directionStatus&&direction){
       const observation=direction.read(now)
       const names={left:'왼쪽',right:'오른쪽',center:'기준 위치'} as const
@@ -196,7 +197,7 @@ start.addEventListener('click',async()=>{
       const message=handsPending?'양손을 펴서 카메라에 보여주세요.':handTracked?'손가락 추종 중':'양손을 화면에 넣고 손 맞추기를 눌러주세요.'
       if(handStatus.textContent!==message) handStatus.textContent=message
      }
-     if(now-lastPublish>250){lastPublish=now;counter.textContent='입력 '+frames+' 프레임';if(phase==='running')statusText(state.tracked>0?(neckReview?'웹캠 추종 중 · 머리와 양쪽 어깨를 화면에 넣어 주세요.':'웹캠 추종 중 · 팔과 몸통을 천천히 움직여보세요.'):headTracked?'머리 방향 추종 중 · 팔도 움직이려면 양쪽 팔꿈치·손목까지 화면에 넣어주세요.':bodySignal==='multiple'?'화면에 한 사람만 나오도록 조정해 주세요.':bodySignal==='none'?'카메라는 연결됐지만 신체를 찾지 못했습니다. 조금 물러나 양쪽 팔꿈치까지 보이게 해주세요.':'신체는 감지됐지만 팔·몸통 방향을 확인하지 못했습니다. 양쪽 팔꿈치·손목까지 보이게 해주세요.')}
+     if(now-lastPublish>250){lastPublish=now;counter.textContent='입력 '+frames+' 프레임';if(phase==='running')statusText(upright==='rejected'?'몸이 많이 기울어 있어 몸 기울기 보정을 건너뛰었습니다. 똑바로 서서 ‘정면 맞추기’를 다시 누르세요.':upright==='pending'?'똑바로 선 채로 잠시 기다려 주세요. 어깨와 골반이 보여야 몸 기울기를 맞춥니다.':state.tracked>0?(neckReview?'웹캠 추종 중 · 머리와 양쪽 어깨를 화면에 넣어 주세요.':'웹캠 추종 중 · 팔과 몸통을 천천히 움직여보세요.'):headTracked?'머리 방향 추종 중 · 팔도 움직이려면 양쪽 팔꿈치·손목까지 화면에 넣어주세요.':bodySignal==='multiple'?'화면에 한 사람만 나오도록 조정해 주세요.':bodySignal==='none'?'카메라는 연결됐지만 신체를 찾지 못했습니다. 조금 물러나 양쪽 팔꿈치까지 보이게 해주세요.':'신체는 감지됐지만 팔·몸통 방향을 확인하지 못했습니다. 양쪽 팔꿈치·손목까지 보이게 해주세요.')}
      return state
     },
     align(target:'head'|'hands'){
@@ -225,7 +226,7 @@ start.addEventListener('click',async()=>{
  try{await ownController.run({type:'request-camera',generation})}catch{fail('ownership-error')}
 })
 stop.addEventListener('click',()=>{void shutdown()})
-align.addEventListener('click',()=>{if(active?.command(generation,pair=>'align'in pair&&typeof pair.align==='function'&&pair.align('head')===true))statusText('현재 정면을 기준으로 머리 방향을 맞춥니다.')})
+align.addEventListener('click',()=>{if(active?.command(generation,pair=>'align'in pair&&typeof pair.align==='function'&&pair.align('head')===true))statusText('똑바로 선 지금 자세를 기준으로 몸 기울기와 머리 방향을 맞춥니다.')})
 alignHands.addEventListener('click',()=>{active?.command(generation,pair=>'align'in pair&&typeof pair.align==='function'&&pair.align('hands')===true)})
 handsOption.addEventListener('change',setControls)
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&phase!=='idle')void shutdown('화면을 벗어나 웹캠을 종료했습니다. 다시 시작할 수 있습니다.')})

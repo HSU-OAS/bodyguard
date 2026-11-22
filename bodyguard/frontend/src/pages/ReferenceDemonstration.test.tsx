@@ -24,7 +24,11 @@ function port() {
     updateFeedback: vi.fn(() => false),
     suspendObservation: vi.fn(),
     alignObservation: vi.fn(() => true),
-    getDetailStatus: vi.fn(() => ({ handsPending: false, handTracking: false })),
+    getDetailStatus: vi.fn(() => ({
+      handsPending: false,
+      handTracking: false,
+      upright: 'none' as const,
+    })),
   }
 }
 function open(onStatus = vi.fn()) {
