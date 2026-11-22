@@ -20,7 +20,11 @@ import type { NeckReviewCriteria } from '../posture/thresholds'
 import { assertBlenderReferenceBinding, blenderReferenceProgram } from './blenderReferenceProgram'
 import { cloneEightWeightPair } from './eightWeightSkin'
 import { createNeckSurfaceFeedback } from './neckSurfaceFeedback'
-import { type ComparisonStatus, createObservedComparison } from './observedComparison'
+import {
+  type ComparisonStatus,
+  createObservedComparison,
+  type DetailAlignmentTarget,
+} from './observedComparison'
 import { prepareAvatarStage } from './prepareAvatarStage'
 import { type ReferenceMotion, referenceContentAsset } from './referenceContentAssets'
 import { referenceFraming, upperComparisonHalfY } from './referenceFraming'
@@ -306,7 +310,8 @@ export async function prepareReferenceStage(
         observed?.suspend()
         feedback?.clear()
       },
-      alignObservation: () => observed?.align() ?? false,
+      alignObservation: (target?: DetailAlignmentTarget) => observed?.align(target) ?? false,
+      getDetailStatus: () => observed?.getDetailStatus(),
       render(now: number, delta: number, command: ReferenceCommand) {
         if (closed || signal.aborted || !player) return
         if (command.revision !== revision) {

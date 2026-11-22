@@ -30,6 +30,7 @@ function stage() {
     updateFeedback: vi.fn(() => false),
     suspendObservation: vi.fn(),
     alignObservation: vi.fn(() => true),
+    getDetailStatus: vi.fn(() => ({ handsPending: false, handTracking: false })),
     render: vi.fn(),
     dispose: vi.fn(),
   }
