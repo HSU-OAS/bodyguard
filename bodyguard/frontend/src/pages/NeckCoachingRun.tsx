@@ -28,7 +28,6 @@ export type NeckRunConfiguration = Readonly<{
 const feedback = {
   'neck-shoulder-line': '어깨선 확인 · 준비 시범을 다시 보세요',
   'neck-head-position': '머리 위치 확인 · 준비 시범을 다시 보세요',
-  'neck-wrong-direction': '선택한 방향의 시범을 확인해 주세요',
   'neck-range': '현재 목표 시범을 확인해 주세요',
 } as const
 const phases = {
@@ -94,7 +93,7 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
     canceled = useRef(false),
     authority = useRef(configuration),
     account = useRef(auth),
-    currentView = useRef<ReferenceView>('full')
+    currentView = useRef<ReferenceView>('upper')
   live.current = playback
   authority.current = configuration
   account.current = auth
@@ -104,7 +103,7 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
     [busy, setBusy] = useState(false),
     [attempt, setAttempt] = useState(0),
     [failed, setFailed] = useState(false),
-    [view, setView] = useState<ReferenceView>('full'),
+    [view, setView] = useState<ReferenceView>('upper'),
     [gender, setGender] = useState<AvatarGender>('male')
   currentView.current = view
   function canvasFor(context: ResourceContext, id: number): Promise<HTMLCanvasElement> {
@@ -340,6 +339,7 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
     owned = playback.getSession() !== null,
     step = state?.plan.steps[state.stepIndex],
     progress = state?.progress[state.stepIndex]
+  const side = step?.id === 'right' ? '오른쪽' : '왼쪽'
   useLayoutEffect(() => {
     if (result) resultHeading.current?.focus({ preventScroll: true })
   }, [result])
@@ -391,6 +391,13 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
             </li>
           ))}
         </ol>
+        <p className="coaching-feedback" role="status" aria-atomic="true">
+          {running && issue
+            ? issue === 'neck-wrong-direction'
+              ? `반대 방향이에요. ${side}으로 기울이는 시범을 보세요.`
+              : feedback[issue]
+            : null}
+        </p>
         <section
           className="coaching-space"
           aria-label="두 아바타 공간"
@@ -426,16 +433,11 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
                   : paused
                     ? '일시정지'
                     : running
-                      ? `${step?.id === 'right' ? '오른쪽' : '왼쪽'} · ${phases[state.phase]}`
+                      ? `${side} · ${phases[state.phase]}`
                       : '시작하면 카메라를 연결합니다'}
           </p>
         </section>
         <div className="coaching-footer">
-          {issue && running && (
-            <p className="coaching-feedback" role="status">
-              {feedback[issue]}
-            </p>
-          )}
           {running && step && progress && (
             <progress
               aria-label="현재 단계 관찰 유지 진행"
