@@ -346,7 +346,7 @@ try {
   assert.equal(await page.evaluate(() => window.neckWorkspaceFixture.cameras), count)
   account = false
   await page.evaluate(() => dispatchEvent(new Event('focus')))
-  await page.getByRole('heading', { name: '다시 만나 반갑습니다' }).waitFor()
+  await page.getByRole('heading', { name: '로그인', exact: true }).waitFor()
   assert.equal(await page.locator('canvas').count(), 0)
   assert.equal(writes, 0)
   assert.equal(physical, 0)
