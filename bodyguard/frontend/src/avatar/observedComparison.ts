@@ -8,14 +8,22 @@ import { createObservedPoseRig, type PoseRigFrame } from './observedPoseRig'
 import { OBSERVED_TRUNK_BINDING } from './observedTrunk'
 
 export type ComparisonStatus = 'waiting' | 'tracking' | 'partial' | 'aligned' | 'unavailable'
+export type DetailAlignmentTarget = 'head' | 'hands' | 'all'
+
+const MAX_DETAIL_AGE_MS = 1000
+
 export function createObservedComparison(model: Object3D, signal: AbortSignal, mirror = true) {
   const rest: { bone: Bone; rotation: Quaternion }[] = []
   model.traverse((node) => {
     if ((node as Bone).isBone) rest.push({ bone: node as Bone, rotation: node.quaternion.clone() })
   })
-  const reset = (detailsOnly = false) => {
+  const reset = (target: DetailAlignmentTarget = 'all') => {
     for (const { bone, rotation } of rest)
-      if (!detailsOnly || /^(head|wrist[LR]|finger\d-\d[LR])$/.test(bone.name))
+      if (
+        target === 'all' ||
+        (target === 'head' && bone.name === 'head') ||
+        (target === 'hands' && /^(wrist[LR]|finger\d-\d[LR])$/.test(bone.name))
+      )
         bone.quaternion.copy(rotation)
     model.updateMatrixWorld(true)
   }
@@ -24,11 +32,12 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal, m
     hands: ReturnType<typeof createObservedHandRig> | undefined,
     generation: number | undefined,
     sequence = 0,
-    requestedAfter: number | undefined,
     headSequence: number | undefined,
     headTracking = false,
+    handTracking = false,
     closed = false
-  let status: ComparisonStatus = 'waiting'
+  const pending: Partial<Record<'head' | 'hands', number>> = {}
+  let alignmentRequested = false
   let snapshot: Readonly<{
     status: 'untracked' | 'tracking' | 'partial' | 'closed'
     tracked: number
@@ -40,11 +49,10 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal, m
     head?.dispose()
     hands?.dispose()
     body = head = hands = undefined
-    generation = requestedAfter = undefined
+    generation = pending.head = pending.hands = undefined
     sequence = 0
     headSequence = undefined
-    headTracking = false
-    status = 'waiting'
+    headTracking = handTracking = alignmentRequested = false
     snapshot = Object.freeze({ status: 'untracked', tracked: 0, total: 9 })
     model.visible = false
     reset()
@@ -77,29 +85,38 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal, m
       headTracking = false
       headSequence = undefined
       const now = performance.now()
-      if (requestedAfter !== undefined && frame.at >= requestedAfter) {
-        const aligned = readDetailAlignment(frame, generation, now, 1000)
+      const eligible = (after: number | undefined) =>
+        after !== undefined && frame.at >= after && now - after <= MAX_DETAIL_AGE_MS
+      const wantsHead = eligible(pending.head),
+        wantsHands = eligible(pending.hands)
+      if (wantsHead || wantsHands) {
+        const aligned = readDetailAlignment(frame, generation, now, MAX_DETAIL_AGE_MS)
         const common = {
           context: { generation, signal },
           mirror,
           halfLifeMs: 50,
-          maxAgeMs: 1000,
+          maxAgeMs: MAX_DETAIL_AGE_MS,
         }
-        head?.dispose()
-        hands?.dispose()
-        head = hands = undefined
-        reset(true)
-        try {
-          if (aligned?.head) head = createHeadRotationRig(model, { ...common, ...aligned.head })
-          if (aligned?.hands) hands = createObservedHandRig(model, { ...common, ...aligned.hands })
-          status = head && hands ? 'aligned' : head || hands ? 'partial' : 'unavailable'
-        } catch {
+        if (wantsHead && aligned?.head) {
+          pending.head = undefined
           head?.dispose()
-          hands?.dispose()
-          head = hands = undefined
-          status = 'unavailable'
+          reset('head')
+          try {
+            head = createHeadRotationRig(model, { ...common, ...aligned.head })
+          } catch {
+            head = undefined
+          }
         }
-        requestedAfter = undefined
+        if (wantsHands && aligned?.hands) {
+          pending.hands = undefined
+          hands?.dispose()
+          reset('hands')
+          try {
+            hands = createObservedHandRig(model, { ...common, ...aligned.hands })
+          } catch {
+            hands = undefined
+          }
+        }
       }
       const single = hasSingleDisplayBody(frame)
       const stamp = { generation: frame.generation, sequence: frame.sequence, at: frame.at }
@@ -110,12 +127,19 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal, m
       hands?.push({ ...stamp, hands: single ? copyHandObservations(frame.result.hands) : [] })
       return true
     },
-    align() {
+    align(target: DetailAlignmentTarget = 'all') {
       if (closed || signal.aborted || !body) return false
-      requestedAfter = performance.now()
-      headTracking = false
-      headSequence = undefined
-      status = 'waiting'
+      const now = performance.now()
+      if (target !== 'hands') {
+        pending.head = now
+        headTracking = false
+        headSequence = undefined
+      }
+      if (target !== 'head') {
+        pending.hands = now
+        handTracking = false
+      }
+      alignmentRequested = true
       return true
     },
     render(now: number, delta: number) {
@@ -125,25 +149,26 @@ export function createObservedComparison(model: Object3D, signal: AbortSignal, m
       }
       const state = body.render(now, delta)
       snapshot = Object.freeze({ status: state.status, tracked: state.tracked, total: state.total })
+      for (const target of ['head', 'hands'] as const) {
+        const after = pending[target]
+        if (after !== undefined && now - after > MAX_DETAIL_AGE_MS) pending[target] = undefined
+      }
       headTracking =
         head?.render(now, delta).status === 'tracking' &&
         headSequence === sequence &&
-        requestedAfter === undefined
-      hands?.render(now, delta)
+        pending.head === undefined
+      handTracking = (hands?.render(now, delta).tracked ?? 0) > 0 && pending.hands === undefined
       model.visible = state.status === 'tracking' || state.status === 'partial'
-      if (requestedAfter !== undefined && now - requestedAfter > 1000) {
-        requestedAfter = undefined
-        status = 'unavailable'
-      }
       if (!model.visible) return 'waiting' as const
-      return status === 'aligned' || status === 'unavailable'
-        ? status
-        : state.status === 'partial'
-          ? ('partial' as const)
-          : ('tracking' as const)
+      if (pending.head === undefined && pending.hands === undefined) {
+        if (head && hands) return 'aligned' as const
+        if (alignmentRequested && !head && !hands) return 'unavailable' as const
+      }
+      return state.status === 'partial' ? ('partial' as const) : ('tracking' as const)
     },
     suspend,
     getSnapshot: () => snapshot,
+    getDetailStatus: () => ({ handsPending: pending.hands !== undefined, handTracking }),
     getCoverage() {
       const coverage = body?.getCoverage()
       return !closed && !signal.aborted && model.visible && coverage

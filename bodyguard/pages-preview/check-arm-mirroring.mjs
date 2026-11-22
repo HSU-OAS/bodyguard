@@ -36,6 +36,7 @@ try {
   page.on('pageerror', (error) => pageErrors.push(error.message))
   await page.addInitScript(() => {
     window.lift = 'none'
+    window.showHands = false
     window.Worker = class extends EventTarget {
       send(data) {
         queueMicrotask(() => this.dispatchEvent(new MessageEvent('message', { data })))
@@ -82,6 +83,19 @@ try {
         for (const [index, [x, y]] of Object.entries(locations))
           Object.assign(landmarks[index], { x, y })
         const worldLandmarks = landmarks.map((p) => ({ ...p, x: p.x - 0.5, y: p.y - 0.59 }))
+        const hands = window.showHands
+          ? ['left', 'right'].map((side) => {
+              const points = [{ x: 0, y: 0, z: 0 }]
+              for (let finger = 0; finger < 5; finger++)
+                for (let joint = 0; joint < 4; joint++)
+                  points.push({ x: (2 - finger) * 0.04, y: -0.1 - joint * 0.03, z: 0 })
+              return {
+                side,
+                landmarks: points.map(() => ({ x: 0.5, y: 0.5, z: 0 })),
+                worldLandmarks: points,
+              }
+            })
+          : []
         this.send({
           type: 'result',
           generation,
@@ -91,6 +105,7 @@ try {
             landmarks: [landmarks],
             worldLandmarks: [worldLandmarks],
             headOrientation: [0, 0, 0, 1],
+            hands,
           },
         })
       }
@@ -187,10 +202,38 @@ try {
       })
     }
     await stop()
+    const handButton = page.getByRole('button', { name: '손 맞추기', exact: true })
+    assert.equal(await handButton.isVisible(), false)
+    await page.locator('#detailed-hands').check()
+    assert.equal(await handButton.isDisabled(), true)
     await page.click('#start')
     await page.waitForFunction(() => {
       const state = window.bodyguardLivePreview.snapshot()
-      return state.generation === 2 && state.cameraLive && state.tracked === 9
+      return state.generation === 2 && state.cameraLive && state.tracked === 9 && state.headTracked
+    })
+    await handButton.click()
+    await page.waitForFunction(() => {
+      const state = window.bodyguardLivePreview.snapshot()
+      return state.handsPending && state.headTracked && !state.handTracked
+    })
+    await page.evaluate(() => {
+      window.showHands = true
+    })
+    await page.waitForFunction(() => {
+      const state = window.bodyguardLivePreview.snapshot()
+      return !state.handsPending && state.headTracked && state.handTracked
+    })
+    await page.locator('#align').click()
+    await page.waitForFunction(() => {
+      const state = window.bodyguardLivePreview.snapshot()
+      return state.headTracked && state.handTracked
+    })
+    await page.evaluate(() => {
+      window.showHands = false
+    })
+    await page.waitForFunction(() => {
+      const state = window.bodyguardLivePreview.snapshot()
+      return state.headTracked && !state.handTracked
     })
     await stop()
 

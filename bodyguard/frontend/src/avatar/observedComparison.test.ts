@@ -99,12 +99,34 @@ it.each(['male', 'female'] as const)(
     expect(shaPose(user)).toBe(beforeReference)
     expect(observation.observe(first)).toBe(false)
     expect(observation.observe({ ...first, generation: 2, sequence: 99 })).toBe(false)
-    expect(observation.align()).toBe(true)
-    now += 10
-    const alignment = camera.takeFrame()
-    if (!alignment) throw new Error('Missing generated frame')
-    observation.observe(alignment)
+    const freshFrame = () => {
+      now += 10
+      const input = camera.takeFrame()
+      if (!input) throw new Error('Missing generated frame')
+      return input
+    }
+    expect(observation.align('head')).toBe(true)
+    const missingFace = freshFrame()
+    observation.observe({
+      ...missingFace,
+      result: { ...missingFace.result, headOrientation: null },
+    })
     observation.render(now, 10)
+    expect(observation.getCoverage()?.headTracking).toBe(false)
+    observation.observe(freshFrame())
+    observation.render(now, 10)
+    expect(observation.getCoverage()?.headTracking).toBe(true)
+    expect(observation.getDetailStatus().handTracking).toBe(false)
+    expect(observation.align('hands')).toBe(true)
+    const missingHands = freshFrame()
+    observation.observe({ ...missingHands, result: { ...missingHands.result, hands: [] } })
+    observation.render(now, 10)
+    expect(observation.getCoverage()?.headTracking).toBe(true)
+    expect(observation.getDetailStatus()).toEqual({ handsPending: true, handTracking: false })
+    observation.observe(freshFrame())
+    observation.render(now, 10)
+    expect(observation.getCoverage()?.headTracking).toBe(true)
+    expect(observation.getDetailStatus()).toEqual({ handsPending: false, handTracking: true })
     now += 10
     window.workspaceAvatarFixture.headAngle = 0.35
     window.workspaceAvatarFixture.handBend = 0.6
@@ -126,6 +148,7 @@ it.each(['male', 'female'] as const)(
     observation.observe(empty)
     expect(observation.render(now, 10)).toBe('waiting')
     expect(user.visible).toBe(false)
+    expect(observation.getDetailStatus().handTracking).toBe(false)
     window.workspaceAvatarFixture.empty = false
     now += 10
     const recovered = camera.takeFrame()
