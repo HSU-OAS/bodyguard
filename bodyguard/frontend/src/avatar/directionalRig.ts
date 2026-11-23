@@ -4,14 +4,28 @@ import type { ResourceContext } from '../coaching/resources'
 import { type Point, trustedJoints } from '../posture/landmarks'
 
 type Directions = Readonly<Record<string, readonly number[]>>
-type Frame = Readonly<{ generation: number; sequence: number; at: number; directions: Directions }>
-type Binding = Readonly<{ bone: string; anchor: string }>
+type Frame = Readonly<{
+  generation: number
+  sequence: number
+  at: number
+  directions: Directions
+  // Optional observed side axis per bone (model space). Adds roll about the bone axis.
+  laterals?: Directions
+}>
+// `lateral`: the model-space side axis the observed lateral is compared against (twist binding).
+type Binding = Readonly<{ bone: string; anchor: string; lateral?: readonly number[] }>
 type Options = Readonly<{
   context: ResourceContext
   bindings: readonly Binding[]
   halfLifeMs: number
   maxAgeMs: number
+  // FR-A-01: when set, a bone without observation for this long eases back to its authored
+  // rest pose instead of freezing mid-motion. Display only; never reported as tracked.
+  relaxAfterMs?: number
+  relaxHalfLifeMs?: number
 }>
+// Spine cannot roll further; larger observed twists are depth noise, not anatomy.
+export const MAX_TWIST_DEG = 70
 type State = Readonly<{
   status: 'tracking' | 'partial' | 'untracked' | 'closed'
   tracked: number
@@ -63,6 +77,8 @@ export function observedLimbDirections(
  */
 export function createDirectionalRig(model: Object3D, options: Options) {
   const { halfLifeMs, maxAgeMs } = options
+  const relaxAfterMs = options.relaxAfterMs
+  const relaxHalfLifeMs = options.relaxHalfLifeMs ?? 250
   const { generation, signal } = options.context
   const invalid = () => new Error('Invalid directional avatar rig')
   if (
@@ -73,6 +89,8 @@ export function createDirectionalRig(model: Object3D, options: Options) {
     halfLifeMs <= 0 ||
     !Number.isFinite(maxAgeMs) ||
     maxAgeMs <= 0 ||
+    (relaxAfterMs !== undefined && !(Number.isFinite(relaxAfterMs) && relaxAfterMs >= 0)) ||
+    !(Number.isFinite(relaxHalfLifeMs) && relaxHalfLifeMs > 0) ||
     options.bindings.length === 0
   )
     throw invalid()
@@ -101,7 +119,7 @@ export function createDirectionalRig(model: Object3D, options: Options) {
   }
   model.updateWorldMatrix(true, true)
   const bindings = options.bindings
-    .map(({ bone: name, anchor: anchorName }) => {
+    .map(({ bone: name, anchor: anchorName, lateral }) => {
       if (seen.has(name)) throw invalid()
       seen.add(name)
       const bone = exact(name)
@@ -124,8 +142,20 @@ export function createDirectionalRig(model: Object3D, options: Options) {
         localDirection.length() === 0
       )
         throw invalid()
+      let localLateral: Vector3 | null = null
+      if (lateral !== undefined) {
+        if (!Array.isArray(lateral) || lateral.length !== 3 || !lateral.every(Number.isFinite))
+          throw invalid()
+        localLateral = new Vector3(lateral[0], lateral[1], lateral[2])
+          .applyQuaternion(model.getWorldQuaternion(new Quaternion()))
+          .applyQuaternion(bone.getWorldQuaternion(new Quaternion()).invert())
+        if (localLateral.lengthSq() === 0) throw invalid()
+        localLateral.normalize()
+      }
       return {
         name,
+        localLateral,
+        seenAt: -Infinity,
         bone,
         depth,
         localDirection: localDirection.normalize(),
@@ -135,13 +165,22 @@ export function createDirectionalRig(model: Object3D, options: Options) {
     })
     .sort((a, b) => a.depth - b.depth)
   let closed = false
-  let latest: { sequence: number; at: number; directions: Map<string, Vector3> } | null = null
+  let latest: {
+    sequence: number
+    at: number
+    directions: Map<string, Vector3>
+    laterals: Map<string, Vector3>
+  } | null = null
   let lastNow = -Infinity
   const parentInverse = new Matrix4()
   const localTarget = new Vector3()
   const target = new Quaternion()
   const swing = new Quaternion()
   const baseline = new Vector3()
+  const restLateral = new Vector3()
+  const seenLateral = new Vector3()
+  const twist = new Quaternion()
+  const cross = new Vector3()
   const state = (status: State['status'], tracked = 0): State =>
     Object.freeze({ status, tracked, total: bindings.length })
   function dispose() {
@@ -183,7 +222,18 @@ export function createDirectionalRig(model: Object3D, options: Options) {
       if (!Number.isFinite(length) || length === 0) return false
       directions.set(name, vector.divideScalar(length))
     }
-    latest = { sequence: frame.sequence, at: frame.at, directions }
+    const laterals = new Map<string, Vector3>()
+    if (frame.laterals !== undefined) {
+      if (!frame.laterals || typeof frame.laterals !== 'object') return false
+      for (const [name, value] of Object.entries(frame.laterals)) {
+        if (!seen.has(name) || !Array.isArray(value) || value.length !== 3) return false
+        const vector = new Vector3(value[0], value[1], value[2])
+        const length = vector.length()
+        if (!Number.isFinite(length) || length === 0) return false
+        laterals.set(name, vector.divideScalar(length))
+      }
+    }
+    latest = { sequence: frame.sequence, at: frame.at, directions, laterals }
     return true
   }
   function render(now: number, deltaMs: number): State {
@@ -191,12 +241,23 @@ export function createDirectionalRig(model: Object3D, options: Options) {
     if (!Number.isFinite(now) || now < lastNow || !Number.isFinite(deltaMs) || deltaMs < 0)
       return state('untracked')
     lastNow = now
-    if (!latest || now < latest.at || now - latest.at > maxAgeMs) return state('untracked')
     if ([...transformNodes].some((node) => !validTransform(node))) return state('untracked')
+    const fresh = latest && now >= latest.at && now - latest.at <= maxAgeMs ? latest : null
     const alpha = 1 - 2 ** (-deltaMs / halfLifeMs)
+    const relaxAlpha = 1 - 2 ** (-deltaMs / relaxHalfLifeMs)
     for (const binding of bindings) {
-      const direction = latest.directions.get(binding.name)
-      if (!direction) continue
+      const direction = fresh?.directions.get(binding.name)
+      // A side axis alone (e.g. shoulders seen, hips not) rolls the rest axis; never counted.
+      const lateral = binding.localLateral ? fresh?.laterals.get(binding.name) : undefined
+      if (!direction && !lateral) {
+        // Ease a long-missing bone back to rest; local rotation only, children follow.
+        if (relaxAfterMs !== undefined && now - binding.seenAt > relaxAfterMs) {
+          binding.bone.quaternion.slerp(binding.rest, relaxAlpha)
+          binding.bone.updateWorldMatrix(false, true)
+        }
+        continue
+      }
+      binding.seenAt = now
       binding.bone.parent?.updateWorldMatrix(true, false)
       if (binding.bone.parent) parentInverse.copy(binding.bone.parent.matrixWorld)
       else parentInverse.identity()
@@ -205,10 +266,30 @@ export function createDirectionalRig(model: Object3D, options: Options) {
       if (!parentInverse.elements.every(Number.isFinite) || parentInverse.determinant() === 0)
         return state('untracked')
       parentInverse.invert()
-      localTarget.copy(direction).transformDirection(parentInverse)
       baseline.copy(binding.localDirection).applyQuaternion(binding.rest).normalize()
+      // Roll only: keep the currently shown lean, never snap it back to rest.
+      if (direction) localTarget.copy(direction).transformDirection(parentInverse)
+      else localTarget.copy(binding.localDirection).applyQuaternion(binding.bone.quaternion)
       swing.setFromUnitVectors(baseline, localTarget)
       target.copy(swing).multiply(binding.rest).normalize()
+      if (binding.localLateral && lateral) {
+        // Roll about the observed bone axis so the rest side axis meets the observed one.
+        restLateral.copy(binding.localLateral).applyQuaternion(binding.rest).applyQuaternion(swing)
+        seenLateral.copy(lateral).transformDirection(parentInverse)
+        restLateral.addScaledVector(localTarget, -restLateral.dot(localTarget))
+        seenLateral.addScaledVector(localTarget, -seenLateral.dot(localTarget))
+        if (restLateral.lengthSq() > 1e-6 && seenLateral.lengthSq() > 1e-6) {
+          restLateral.normalize()
+          seenLateral.normalize()
+          const limit = (MAX_TWIST_DEG * Math.PI) / 180
+          const angle = Math.atan2(
+            cross.crossVectors(restLateral, seenLateral).dot(localTarget),
+            restLateral.dot(seenLateral),
+          )
+          twist.setFromAxisAngle(localTarget, Math.max(-limit, Math.min(limit, angle)))
+          target.premultiply(twist).normalize()
+        }
+      }
       if (binding.initialized) binding.bone.quaternion.slerp(target, alpha)
       else {
         binding.bone.quaternion.copy(target)
@@ -216,7 +297,8 @@ export function createDirectionalRig(model: Object3D, options: Options) {
       }
       binding.bone.updateWorldMatrix(false, true)
     }
-    const count = latest.directions.size
+    if (!fresh) return state('untracked')
+    const count = fresh.directions.size
     return state(
       count === bindings.length ? 'tracking' : count === 0 ? 'untracked' : 'partial',
       count,

@@ -8,13 +8,26 @@ import {
   observedLimbDirections,
 } from './directionalRig'
 import { createHeadRotationRig, type HeadDisplayAlignment } from './headOrientationRig'
+import { shapeHinges } from './hingeLimits'
+import { createMotionFilter } from './motionFilter'
 import {
   copyHandObservations,
   createObservedHandRig,
   type HandDisplayAlignment,
   type HandObservation,
 } from './observedHandRig'
-import { OBSERVED_TRUNK_BINDING, observedTrunkDirection } from './observedTrunk'
+import {
+  type ClavicleBone,
+  createShoulderElevationRig,
+  elevationAngle,
+  OBSERVED_CLAVICLES,
+  observedShoulderOffsets,
+} from './observedShoulders'
+import {
+  OBSERVED_TRUNK_BINDING,
+  observedShoulderLine,
+  observedTrunkDirection,
+} from './observedTrunk'
 import type { ProjectedSurfaceRegion } from './projectedSurfaceRegions'
 
 export type PoseRigFrame = Readonly<{
@@ -49,7 +62,19 @@ export type UprightCalibration = 'none' | 'pending' | 'applied' | 'rejected'
 const UP = Object.freeze(new Vector3(0, 1, 0))
 
 type Options = Parameters<typeof createDirectionalRig>[1] &
-  Readonly<{ mirror: boolean; head?: HeadDisplayAlignment; hands?: HandDisplayAlignment }>
+  Readonly<{
+    mirror: boolean
+    head?: HeadDisplayAlignment
+    hands?: HandDisplayAlignment
+    // FR-A-01: show shrugs on the clavicles once an upright reference exists.
+    shoulders?: boolean
+    // FR-A-01: adaptive smoothing and elbow/knee shaping for natural display. Off keeps raw input.
+    natural?: boolean
+  }>
+const rotate = (value: readonly number[], rotation: Quaternion) => {
+  const v = new Vector3(value[0], value[1], value[2]).applyQuaternion(rotation)
+  return [v.x, v.y, v.z]
+}
 /** One detectForVideo result owns both arrays. Caller preserves its capture stamps;
  * this adapter does not verify a detector, turn coverage into success, or own GPU resources.
  * A fresh empty/ambiguous result revokes coverage immediately, without resetting to a correct pose.
@@ -71,7 +96,15 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
   const driver = createDirectionalRig(model, options)
   let head: ReturnType<typeof createHeadRotationRig> | undefined
   let hands: ReturnType<typeof createObservedHandRig> | undefined
+  let shoulders: ReturnType<typeof createShoulderElevationRig> | undefined
   try {
+    if (options.shoulders)
+      shoulders = createShoulderElevationRig(model, {
+        context: options.context,
+        halfLifeMs: options.halfLifeMs,
+        maxAgeMs,
+        relaxAfterMs: options.relaxAfterMs,
+      })
     if (options.head)
       head = createHeadRotationRig(model, {
         ...options.head,
@@ -91,6 +124,7 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
   } catch {
     driver.dispose()
     head?.dispose()
+    shoulders?.dispose()
     throw new Error('Invalid observed pose rig')
   }
   const permitted = new Set(options.bindings.map(({ bone }) => bone))
@@ -103,6 +137,11 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
   let upright: UprightCalibration = 'none'
   let correction: Quaternion | null = null
   let samples: { sum: Vector3; count: number } | null = null
+  // Upright ear→shoulder offsets (raw avatar space); heights are read through `correction`.
+  type ShoulderSamples = Record<ClavicleBone, { sum: Vector3; count: number }>
+  let shoulderSamples: ShoulderSamples | null = null
+  let shoulderReference: Record<ClavicleBone, Vector3> | null = null
+  const filter = options.natural ? createMotionFilter() : null
 
   function dispose() {
     if (closed) return
@@ -111,9 +150,13 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
     coverage = null
     samples = null
     correction = null
+    shoulderSamples = null
+    shoulderReference = null
+    filter?.clear()
     driver.dispose()
     head?.dispose()
     hands?.dispose()
+    shoulders?.dispose()
   }
   function observe(frame: PoseRigFrame): boolean {
     if (closed || signal.aborted) return false
@@ -152,6 +195,12 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
         images[0].length === JOINT_COUNT &&
         worlds[0].length === JOINT_COUNT
       const trunk = single ? observedTrunkDirection(images[0], worlds[0], mirror) : {}
+      const laterals: Record<string, readonly number[]> =
+        options.natural && single && permitted.has(OBSERVED_TRUNK_BINDING.bone)
+          ? { ...observedShoulderLine(images[0], worlds[0], mirror) }
+          : {}
+      const offsets: Partial<Record<ClavicleBone, readonly number[]>> =
+        shoulders && single ? { ...observedShoulderOffsets(images[0], worlds[0], mirror) } : {}
       const directions = single
         ? {
             ...observedLimbDirections(images[0], worlds[0], mirror),
@@ -191,17 +240,64 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
           } else upright = 'rejected'
         }
       }
-      if (correction)
-        for (const [name, value] of Object.entries(selected)) {
-          const v = new Vector3(value[0], value[1], value[2]).applyQuaternion(correction)
-          selected[name] = [v.x, v.y, v.z]
+      if (shoulderSamples) {
+        for (const bone of OBSERVED_CLAVICLES) {
+          const offset = offsets[bone]
+          if (!offset) continue
+          shoulderSamples[bone].sum.add(new Vector3(offset[0], offset[1], offset[2]))
+          shoulderSamples[bone].count++
         }
+        const done = shoulderSamples
+        if (OBSERVED_CLAVICLES.every((bone) => done[bone].count >= UPRIGHT_SAMPLES)) {
+          shoulderReference = {
+            clavicleL: done.clavicleL.sum.divideScalar(done.clavicleL.count),
+            clavicleR: done.clavicleR.sum.divideScalar(done.clavicleR.count),
+          }
+          shoulderSamples = null
+        }
+      }
+      if (correction) {
+        for (const [name, value] of Object.entries(selected))
+          selected[name] = rotate(value, correction)
+        for (const [name, value] of Object.entries(laterals))
+          laterals[name] = rotate(value, correction)
+      }
+      if (filter) {
+        shapeHinges(selected)
+        for (const [name, value] of Object.entries(selected))
+          selected[name] = filter.apply(`d:${name}`, at, value)
+        for (const [name, value] of Object.entries(laterals))
+          laterals[name] = filter.apply(`l:${name}`, at, value)
+      }
+      const angles: Partial<Record<ClavicleBone, number>> = {}
+      if (shoulderReference) {
+        const reference = shoulderReference
+        const level = correction ?? new Quaternion()
+        const height = (value: readonly number[]) => -rotate(value, level)[1]
+        const span = reference.clavicleL.distanceTo(reference.clavicleR) / 2
+        for (const bone of OBSERVED_CLAVICLES) {
+          const offset = offsets[bone]
+          if (!offset) continue
+          const raised = height(reference[bone].toArray()) - height(offset)
+          const angle = elevationAngle(raised, span)
+          if (angle === null) continue
+          angles[bone] = filter ? filter.apply(`c:${bone}`, at, [angle])[0] : angle
+        }
+      }
       const accepted = driver.push({
         generation: suppliedGeneration,
         sequence,
         at,
         directions: selected,
+        ...(Object.keys(laterals).length ? { laterals } : {}),
       })
+      if (
+        shoulders &&
+        (!accepted || !shoulders.push({ generation: suppliedGeneration, sequence, at, angles }))
+      ) {
+        dispose()
+        return false
+      }
       if (
         head &&
         (!accepted || !head.push({ generation: suppliedGeneration, sequence, at, rotation }))
@@ -235,6 +331,7 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
     if (Number.isFinite(now) && now >= lastNow && Number.isFinite(deltaMs) && deltaMs >= 0)
       lastNow = now
     const body = driver.render(now, deltaMs)
+    shoulders?.render(now, deltaMs)
     return Object.freeze({
       ...body,
       ...(head ? { head: head.render(now, deltaMs) } : {}),
@@ -246,6 +343,11 @@ export function createObservedPoseRig(model: Object3D, options: Options) {
   function calibrateUpright() {
     if (closed || signal.aborted) return false
     samples = { sum: new Vector3(), count: 0 }
+    if (shoulders)
+      shoulderSamples = {
+        clavicleL: { sum: new Vector3(), count: 0 },
+        clavicleR: { sum: new Vector3(), count: 0 },
+      }
     upright = 'pending'
     return true
   }

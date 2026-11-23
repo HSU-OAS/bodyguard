@@ -3,7 +3,12 @@ import { type Point, trustedJoints } from '../posture/landmarks'
 
 // Exact existing GLTFLoader bones: spine05 has neck01 as a descendant.
 // Root/pelvis and intermediate local rotations remain authored, not inferred.
-export const OBSERVED_TRUNK_BINDING = Object.freeze({ bone: 'spine05', anchor: 'neck01' })
+// `lateral` is the avatar's left in model space; the observed shoulder line rolls the trunk.
+export const OBSERVED_TRUNK_BINDING = Object.freeze({
+  bone: 'spine05',
+  anchor: 'neck01',
+  lateral: Object.freeze([1, 0, 0]),
+})
 const ENDPOINTS = [11, 12, 23, 24] as const
 
 /** Same single image/world result. No automatic calibration, anatomical
@@ -47,4 +52,25 @@ export function observedTrunkDirection(
       )
   }
   return Object.freeze(result)
+}
+
+/** Same single result. Person's right shoulder → left shoulder, in avatar space like limb
+ * directions. Needs only both shoulders, so seated framing without hips still shows rotation.
+ * Display roll only: never a rotation measurement or verdict. */
+export function observedShoulderLine(
+  image: readonly Point[] | null,
+  world: readonly Point[] | null,
+  mirror: boolean,
+): Readonly<Record<string, readonly number[]>> {
+  const trusted = trustedJoints(image)
+  const left = world?.[11]
+  const right = world?.[12]
+  if (!trusted[11] || !trusted[12] || !left || !right) return Object.freeze({})
+  const value = [(left.x - right.x) * (mirror ? -1 : 1), -(left.y - right.y), -(left.z - right.z)]
+  const length = Math.hypot(...value)
+  if (!value.every(Number.isFinite) || !Number.isFinite(length) || length === 0)
+    return Object.freeze({})
+  return Object.freeze({
+    [OBSERVED_TRUNK_BINDING.bone]: Object.freeze(value.map((component) => component / length)),
+  })
 }
