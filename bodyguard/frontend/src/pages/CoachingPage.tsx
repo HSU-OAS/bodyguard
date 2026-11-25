@@ -7,6 +7,7 @@ import { motionPreviewMedia } from '../catalog/motionMedia'
 import { motionNavigationUrl } from '../catalog/motionNavigation'
 import { findMotions, motionById, type Region } from '../catalog/motions'
 import { CameraPreparation } from './CameraPreparation'
+import { CameraSourceSelect } from './CameraSourceSelect'
 import { MotionPreview } from './MotionPreview'
 import { NeckCoachingRun, type NeckRunConfiguration } from './NeckCoachingRun'
 import { ReferenceDemonstration, type ReferenceStatus } from './ReferenceDemonstration'
@@ -62,6 +63,8 @@ function CoachingPreviewPage() {
   const [phase, setPhase] = useState<ReferenceCommand['phase']>('waiting-start')
   const [side, setSide] = useState<'left' | 'right'>('left')
   const [playing, setPlaying] = useState(false)
+  // Bumped on a camera change so an open camera closes; the next start opens the new one.
+  const [cameraRevision, setCameraRevision] = useState(0)
   const [revision, setRevision] = useState(0)
   const picker = useRef<HTMLDialogElement>(null)
   const comparison = useRef<ReferenceStage | null>(null)
@@ -199,7 +202,7 @@ function CoachingPreviewPage() {
             <p role="status">동작을 다시 선택해 주세요.</p>
           ) : (
             <CameraPreparation
-              key={`${motion?.id ?? 'unselected'}:${gender}`}
+              key={`${motion?.id ?? 'unselected'}:${gender}:${cameraRevision}`}
               motion={motion}
               comparison={comparison}
               avatarReady={preview && referenceStatus === 'ready'}
@@ -403,6 +406,10 @@ function CoachingPreviewPage() {
             <option value="female">여성</option>
           </select>
         </label>
+        <CameraSourceSelect onChange={() => setCameraRevision((value) => value + 1)} />
+        <p className="small muted">
+          카메라를 바꾸면 켜져 있던 카메라가 꺼집니다. 다시 켜면 고른 카메라로 시작합니다.
+        </p>
         <p className="small muted">
           화면 설정만 변경합니다. 촬영 범위·판정 기준은 바뀌지 않습니다.
         </p>
