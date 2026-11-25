@@ -1,5 +1,5 @@
 import { ResourceCleanupError } from '../coaching/resources'
-import { CAMERA_CONSTRAINTS } from './constants'
+import { cameraConstraints, preferredCamera, setPreferredCamera } from './cameraSource'
 
 export type CameraErrorKind = 'denied' | 'busy' | 'not-found' | 'unknown'
 
@@ -9,7 +9,7 @@ export async function openCamera(
   signal: AbortSignal,
 ): Promise<MediaStream> {
   signal.throwIfAborted()
-  const stream = await navigator.mediaDevices.getUserMedia(CAMERA_CONSTRAINTS)
+  const stream = await requestCamera(signal)
   let closed = false,
     cleanupFailed = false
   let rejectPlayback: ((reason: Error) => void) | undefined
@@ -58,6 +58,21 @@ export async function openCamera(
   } finally {
     signal.removeEventListener('abort', aborted)
     rejectPlayback = undefined
+  }
+}
+
+// A chosen camera that was unplugged falls back to the browser default once.
+async function requestCamera(signal: AbortSignal) {
+  const chosen = preferredCamera()
+  try {
+    return await navigator.mediaDevices.getUserMedia(cameraConstraints(chosen))
+  } catch (error) {
+    const name = error instanceof DOMException ? error.name : ''
+    if (chosen === null || (name !== 'OverconstrainedError' && name !== 'NotFoundError'))
+      throw error
+    if (preferredCamera() === chosen) setPreferredCamera(null)
+    signal.throwIfAborted()
+    return navigator.mediaDevices.getUserMedia(cameraConstraints(null))
   }
 }
 
