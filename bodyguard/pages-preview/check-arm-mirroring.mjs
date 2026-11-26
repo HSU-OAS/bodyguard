@@ -212,8 +212,9 @@ try {
     }
     await stop()
     const handButton = page.getByRole('button', { name: '손 맞추기', exact: true })
-    assert.equal(await handButton.isVisible(), false)
-    await page.locator('#detailed-hands').check()
+    // Finger tracking is on by default: the hand button shows but stays off until the camera runs.
+    assert.equal(await page.locator('#detailed-hands').isChecked(), true)
+    assert.equal(await handButton.isVisible(), true)
     assert.equal(await handButton.isDisabled(), true)
     await page.click('#start')
     await page.waitForFunction(() => {
