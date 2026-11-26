@@ -10,7 +10,7 @@ import type { AvatarGender } from '../../frontend/src/avatar/reviewAvatarAssets'
 import type { ReferenceCommand, ReferenceView } from '../../frontend/src/avatar/referenceStage'
 
 declare const __BODYGUARD_LOCAL_NECK_REVIEW__: boolean
-document.querySelector('#root')!.innerHTML = '<header><a class="wordmark" href="/bodyguard/">BODYGUARD</a><span>자세 판정·기록 저장 꺼짐 · 아바타는 검수 후보</span></header><main><h1 class="inspection-title">웹캠 추종 체험</h1><div class="toolbar"><label>아바타 <select id="gender"><option value="male">남성</option><option value="female">여성</option></select></label><label>보기 <select id="view"><option value="full">전신</option><option value="upper">상반신</option><option value="detail">자세히</option></select></label><label><input id="detailed-hands" type="checkbox"> 손가락까지 추적</label><button id="start">웹캠 시작</button><button id="align" disabled>정면 맞추기</button><button id="stop" disabled>웹캠 종료</button><span id="counter"></span></div><p id="status" role="status">시작을 누르고 브라우저의 카메라 권한을 허용하세요.</p><section class="space"><div class="roles"><strong>내 움직임 · 웹캠 입력</strong><strong>기준 아바타 · 중립 자세</strong></div><canvas id="avatar" aria-label="실제 웹캠 입력 두 아바타 검수"></canvas></section><aside class="camera-box"><video id="camera" muted playsinline aria-label="내 카메라 미리보기"></video><span>내 카메라 · 브라우저 내부 처리</span></aside><p class="help">화면에서 한 걸음 물러나 어깨와 팔이 보이게 한 뒤, 한 팔을 천천히 들어보세요. 머리 방향은 정면을 본 상태에서 ‘정면 맞추기’를 누르세요.</p><p class="note">lite 모델 추종 검수입니다. 실제 정확도·노트북 성능은 검증 중이며, 촬영 범위 밖의 움직임까지 재현하지는 않습니다. 영상·좌표를 저장·전송하지 않습니다.</p></main>'
+document.querySelector('#root')!.innerHTML = '<header><a class="wordmark" href="/bodyguard/">BODYGUARD</a><span>자세 판정·기록 저장 꺼짐 · 아바타는 검수 후보</span></header><main><h1 class="inspection-title">웹캠 추종 체험</h1><div class="toolbar"><label>아바타 <select id="gender"><option value="male">남성</option><option value="female">여성</option></select></label><label>보기 <select id="view"><option value="full">전신</option><option value="upper">상반신</option><option value="detail">자세히</option></select></label><label><input id="detailed-hands" type="checkbox" checked> 손가락까지 추적</label><button id="start">웹캠 시작</button><button id="align" disabled>정면 맞추기</button><button id="stop" disabled>웹캠 종료</button><span id="counter"></span></div><p id="status" role="status">시작을 누르고 브라우저의 카메라 권한을 허용하세요.</p><section class="space"><div class="roles"><strong>내 움직임 · 웹캠 입력</strong><strong>기준 아바타 · 중립 자세</strong></div><canvas id="avatar" aria-label="실제 웹캠 입력 두 아바타 검수"></canvas></section><aside class="camera-box"><video id="camera" muted playsinline aria-label="내 카메라 미리보기"></video><span>내 카메라 · 브라우저 내부 처리</span></aside><p class="help">화면에서 한 걸음 물러나 어깨와 팔이 보이게 한 뒤, 한 팔을 천천히 들어보세요. 머리 방향은 정면을 본 상태에서 ‘정면 맞추기’를 누르세요.</p><p class="note">lite 모델 추종 검수입니다. 실제 정확도·노트북 성능은 검증 중이며, 촬영 범위 밖의 움직임까지 재현하지는 않습니다. 영상·좌표를 저장·전송하지 않습니다.</p></main>'
 const start=document.querySelector<HTMLButtonElement>('#start')!, stop=document.querySelector<HTMLButtonElement>('#stop')!, align=document.querySelector<HTMLButtonElement>('#align')!, gender=document.querySelector<HTMLSelectElement>('#gender')!, view=document.querySelector<HTMLSelectElement>('#view')!, handsOption=document.querySelector<HTMLInputElement>('#detailed-hands')!, status=document.querySelector<HTMLParagraphElement>('#status')!, counter=document.querySelector('#counter')!, video=document.querySelector<HTMLVideoElement>('#camera')!
 const alignHands=document.createElement('button'), handStatus=document.createElement('span')
 alignHands.type='button'
@@ -37,6 +37,9 @@ if(selection){
 const shoulderReference=selectionId==='shoulder-shrug'
 const neckReview=__BODYGUARD_LOCAL_NECK_REVIEW__&&selectionId==='neck-side'&&
  ['localhost','127.0.0.1','[::1]'].includes(location.hostname)
+// Arm-overhead is the default reference; it has authored left/right steps like the neck review.
+const armReference=!shoulderReference&&!neckReview&&(selectionId===''||selectionId==='arm-overhead')
+const sideReference=neckReview||armReference
 const referencePhases=['waiting-start','seeking-target','waiting-return'] as const
 let referencePhase:ReferenceCommand['phase']|undefined
 let referenceSide:'left'|'right'='left'
@@ -44,16 +47,18 @@ let referenceStep:HTMLSelectElement|undefined
 let referenceReplay:HTMLButtonElement|undefined
 let referenceRevision=1
 let directionStatus:HTMLParagraphElement|undefined
-if(shoulderReference||neckReview){
- document.querySelector('.roles strong:last-child')!.textContent=neckReview?'기준 아바타 · 목 방향 시범':'기준 아바타 · 어깨 올리기 시범'
+if(shoulderReference||sideReference){
+ document.querySelector('.roles strong:last-child')!.textContent=neckReview?'기준 아바타 · 목 방향 시범':armReference?'기준 아바타 · 팔 위로 늘리기 시범':'기준 아바타 · 어깨 올리기 시범'
  const steps=neckReview
   ?'<option value="waiting-start">준비</option><option value="left">왼쪽 시범</option><option value="right">오른쪽 시범</option>'
+  :armReference
+  ?'<option value="waiting-start">준비</option><option value="left">왼팔 시범</option><option value="right">오른팔 시범</option>'
   :'<option value="waiting-start">준비</option><option value="seeking-target">올리기</option><option value="waiting-return">내리기</option>'
  document.querySelector('.toolbar')!.insertAdjacentHTML('beforeend','<label>시범 단계 <select id="reference-step" disabled>'+steps+'</select></label>')
  referenceStep=document.querySelector<HTMLSelectElement>('#reference-step')!
  referenceStep.addEventListener('change',()=>{
   const picked=referenceStep?.value
-  if(neckReview&&(picked==='left'||picked==='right')){
+  if(sideReference&&(picked==='left'||picked==='right')){
    referenceSide=picked
    referencePhase='seeking-target'
   }else{
@@ -62,9 +67,7 @@ if(shoulderReference||neckReview){
   setControls()
  })
 }
-if(neckReview){
- document.querySelector('.inspection-title')!.textContent='목 옆 기울이기 · 방향 대조'
- document.querySelector('.help')!.textContent='정면을 기준으로 맞춘 뒤 시범 단계를 고르세요.'
+if(sideReference){
  referenceReplay=document.createElement('button')
  referenceReplay.type='button'
  referenceReplay.textContent='시범 다시 보기'
@@ -72,6 +75,11 @@ if(neckReview){
   if(phase==='running'&&referencePhase==='seeking-target') referenceRevision++
  })
  referenceStep?.closest('label')?.after(referenceReplay)
+}
+if(armReference) document.querySelector('.help')!.textContent='웹캠을 시작한 뒤 시범 단계에서 왼팔 또는 오른팔 시범을 고르세요. 손가락은 ‘손 맞추기’를 누른 뒤 따라 움직입니다.'
+if(neckReview){
+ document.querySelector('.inspection-title')!.textContent='목 옆 기울이기 · 방향 대조'
+ document.querySelector('.help')!.textContent='정면을 기준으로 맞춘 뒤 시범 단계를 고르세요.'
  view.value='detail'
  directionStatus=document.createElement('p')
  directionStatus.id='direction-status'
@@ -146,7 +154,7 @@ start.addEventListener('click',async()=>{
    statusText('추론 모델 준비됨 · 3D 아바타를 준비합니다.')
    const direction=neckReview?createNeckDirectionReview(context.generation):undefined
    const motion=neckReview?'neck-side':shoulderReference?'shoulder-shrug':'arm-overhead'
-   const stage=await prepareReferenceStage(context,{canvas,gender:picked,motion,mirrorUserDisplay:true,mirrorGuideDisplay:neckReview,onFailure:()=>fail('asset-error')})
+   const stage=await prepareReferenceStage(context,{canvas,gender:picked,motion,mirrorUserDisplay:true,mirrorGuideDisplay:sideReference,onFailure:()=>fail('asset-error')})
    if(!stage.beginObservation(context.generation)){stage.dispose();throw new Error('Observation unavailable')}
    // FR-A-01/03: align after fresh detail arrives, never before cold inference.
    let needsAlignment=true
