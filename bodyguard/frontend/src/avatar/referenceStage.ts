@@ -18,6 +18,10 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { ResourceCleanupError, type ResourceContext } from '../coaching/resources'
 import type { NeckReviewCriteria } from '../posture/thresholds'
 import { assertBlenderReferenceBinding, blenderReferenceProgram } from './blenderReferenceProgram'
+import {
+  type CandidateFeedbackSpec,
+  createCandidateSurfaceFeedback,
+} from './candidateSurfaceFeedback'
 import { cloneEightWeightPair } from './eightWeightSkin'
 import { createNeckSurfaceFeedback } from './neckSurfaceFeedback'
 import {
@@ -54,6 +58,8 @@ export async function prepareReferenceStage(
     onFailure(): void
     onObservation?(status: ComparisonStatus): void
     feedback?: NeckReviewCriteria
+    // FR-A-01/03: other motions supply their own region program instead of neck criteria.
+    feedbackProgram?: CandidateFeedbackSpec
   }>,
 ) {
   if (!import.meta.env.DEV) throw new Error('Blender reference unavailable')
@@ -69,7 +75,10 @@ export async function prepareReferenceStage(
   let source: Object3D | undefined, pair: ReturnType<typeof cloneEightWeightPair> | undefined
   let player: ReturnType<typeof createReferencePlayback> | undefined,
     observed: ReturnType<typeof createObservedComparison> | undefined,
-    feedback: ReturnType<typeof createNeckSurfaceFeedback> | undefined,
+    feedback:
+      | ReturnType<typeof createNeckSurfaceFeedback>
+      | ReturnType<typeof createCandidateSurfaceFeedback>
+      | undefined,
     renderer: WebGLRenderer | undefined,
     resize: ResizeObserver | undefined
   let closed = false,
@@ -153,6 +162,9 @@ export async function prepareReferenceStage(
     if (options.feedback) {
       if (motion !== 'neck-side') throw new Error()
       feedback = createNeckSurfaceFeedback(user, context, options.feedback)
+    } else if (options.feedbackProgram) {
+      if (options.feedbackProgram.motionId !== motion) throw new Error()
+      feedback = createCandidateSurfaceFeedback(user, context, options.feedbackProgram)
     }
     scene.add(guide, user, new HemisphereLight('#ffffff', '#8b97a6', 2))
     const light = new DirectionalLight('#ffffff', 2)
