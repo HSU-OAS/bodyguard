@@ -97,6 +97,10 @@ export function createNeckWorkspacePlayback(
         })
         if (!stage.beginObservation(context.generation)) throw new Error()
         const owned = stage
+        // FR-A-01/03: take the head display reference on the first upright, fully observed
+        // start frame of this generation, so the user copy follows without a manual click.
+        // '움직임 맞추기' still re-aligns explicitly.
+        let headAligned = false
         evaluator = createNeckCandidateFeedback({
           criteria,
           generation: context.generation,
@@ -122,6 +126,8 @@ export function createNeckWorkspacePlayback(
             if (!owned.observe(frame)) return false
             const decision = evaluator?.evaluate(frame)
             if (decision) {
+              if (!headAligned && decision.classification === 'start')
+                headAligned = owned.alignObservation('head')
               latest = decision.state
               sampledAt = frame.at
               owned.updateFeedback({
