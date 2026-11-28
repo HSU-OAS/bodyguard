@@ -45,6 +45,14 @@ const NeckDemoCoaching = import.meta.env.DEV
       ),
     )
   : null
+// FR-S-02/03/04: DEV-only shoulder-shrug / arm-overhead demo runs on the shared run screen.
+const UpperBodyCoaching = import.meta.env.DEV
+  ? lazy(() =>
+      import('./pages/UpperBodyCoachingRun').then((module) => ({
+        default: module.UpperBodyCoachingRun,
+      })),
+    )
+  : null
 
 // FR-S-06/FR-V-03: Figma layout review remains separate from the public service.
 const FigmaHome = import.meta.env.DEV
@@ -444,6 +452,25 @@ function Shell() {
               }
             />
           )}
+          {UpperBodyCoaching &&
+            (
+              [
+                ['/dev/coaching/shrug', 'shoulder-shrug'],
+                ['/dev/coaching/overhead', 'arm-overhead'],
+              ] as const
+            ).map(([path, motion]) => (
+              <Route
+                key={path}
+                path={path}
+                element={
+                  <SessionGate>
+                    <Suspense fallback={<p role="status">코칭 화면을 여는 중입니다</p>}>
+                      <UpperBodyCoaching motion={motion} />
+                    </Suspense>
+                  </SessionGate>
+                }
+              />
+            ))}
           <Route
             path="*"
             element={
