@@ -7,16 +7,18 @@ import type { AvatarGender } from '../avatar/reviewAvatarAssets'
 import { createNeckWorkspacePlayback } from '../coaching/neckWorkspacePlayback'
 import type { ResourceContext } from '../coaching/resources'
 import type { SessionSnapshot } from '../coaching/session'
-import { useRecordedPlayback } from '../coaching/useRecordedPlayback'
+import {
+  type PlaybackInput,
+  type RecordedPlayback,
+  useRecordedPlayback,
+} from '../coaching/useRecordedPlayback'
 import { copyNeckReviewCriteria, type NeckReviewCriteria } from '../posture/thresholds'
-import type { NeckCandidateError } from '../stretch/neckCandidateClassifier'
 import { type CoachingPlan, createCoaching } from '../stretch/progression'
 
-export type NeckRunConfiguration = Readonly<{
+export type CandidateRunConfiguration = Readonly<{
   scope: 'candidate-review-only'
   // Test runner must additionally own the isolated DB; this is not clinical authority.
   recording?: 'isolated-local-test'
-  criteria: NeckReviewCriteria
   plan: CoachingPlan
   readGates(): Readonly<{
     authenticated: boolean
@@ -24,6 +26,29 @@ export type NeckRunConfiguration = Readonly<{
     referenceAvatarReady: boolean
     userAvatarReady: boolean
   }>
+}>
+export type NeckRunConfiguration = CandidateRunConfiguration &
+  Readonly<{ criteria: NeckReviewCriteria }>
+export type CandidatePlayback = RecordedPlayback & Readonly<{ align(): boolean }>
+export type CandidatePlaybackOptions = Readonly<{
+  canvas(context: ResourceContext): Promise<HTMLCanvasElement>
+  gender: AvatarGender
+  session(): ReturnType<ReturnType<typeof useRecordedPlayback>['getSession']>
+  view(): ReferenceView
+  feedback(code: string | null): void
+}>
+/** FR-S-02/03/04: what differs between candidate motions on the shared run screen. */
+export type CandidateMotion<C extends CandidateRunConfiguration> = Readonly<{
+  title: string
+  stepLabel(id: string): string
+  feedbackText(code: string, step: string): string | null
+  // Throws when the configuration does not belong to this motion.
+  validate(input: C, plan: CoachingPlan): void
+  createPlayback(
+    input: PlaybackInput,
+    options: CandidatePlaybackOptions,
+    config: C,
+  ): CandidatePlayback
 }>
 const feedback = {
   'neck-shoulder-line': '어깨선 확인 · 준비 시범을 다시 보세요',
@@ -42,21 +67,39 @@ let retirementFailed = false
 type RunSession = NonNullable<ReturnType<ReturnType<typeof useRecordedPlayback>['getSession']>>
 type RecordState = ReturnType<RunSession['getRecordSnapshot']>
 
-function checked(input: NeckRunConfiguration) {
-  const criteria = copyNeckReviewCriteria(input.criteria),
-    plan = createCoaching(input.plan).plan
-  if (
-    input.scope !== 'candidate-review-only' ||
-    plan.motionId !== 'neck-side' ||
-    plan.version !== criteria.version ||
-    plan.maxFrameAgeMs !== criteria.maxFrameAgeMs ||
-    plan.maxFrameGapMs !== criteria.maxFrameGapMs ||
-    plan.steps.length !== 2 ||
-    plan.steps[0].id !== 'left' ||
-    plan.steps[1].id !== 'right' ||
-    typeof input.readGates !== 'function'
-  )
+const neckMotion: CandidateMotion<NeckRunConfiguration> = Object.freeze({
+  title: '목 옆으로 기울이기',
+  stepLabel: (id: string) => (id === 'right' ? '오른쪽' : '왼쪽'),
+  feedbackText: (code: string, step: string) =>
+    code === 'neck-wrong-direction'
+      ? `반대 방향이에요. ${step}으로 기울이는 시범을 보세요.`
+      : (feedback[code as keyof typeof feedback] ?? null),
+  validate(input: NeckRunConfiguration, plan: CoachingPlan) {
+    const criteria = copyNeckReviewCriteria(input.criteria)
+    if (
+      plan.motionId !== 'neck-side' ||
+      plan.version !== criteria.version ||
+      plan.maxFrameAgeMs !== criteria.maxFrameAgeMs ||
+      plan.maxFrameGapMs !== criteria.maxFrameGapMs ||
+      plan.steps.length !== 2 ||
+      plan.steps[0].id !== 'left' ||
+      plan.steps[1].id !== 'right'
+    )
+      throw new Error('Invalid candidate run')
+  },
+  createPlayback: (input, options, config) =>
+    createNeckWorkspacePlayback(input, {
+      ...options,
+      criteria: copyNeckReviewCriteria(config.criteria),
+      feedback: (next) => options.feedback(next),
+    }),
+})
+
+function checked<C extends CandidateRunConfiguration>(input: C, motion: CandidateMotion<C>) {
+  const plan = createCoaching(input.plan).plan
+  if (input.scope !== 'candidate-review-only' || typeof input.readGates !== 'function')
     throw new Error('Invalid candidate run')
+  motion.validate(input, plan)
   const recording = input.recording
   if (
     recording !== undefined &&
@@ -65,23 +108,33 @@ function checked(input: NeckRunConfiguration) {
       !['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname))
   )
     throw new Error('Invalid candidate recording')
-  return Object.freeze({ criteria, plan, readGates: input.readGates, recording })
+  return Object.freeze({ plan, readGates: input.readGates, recording })
 }
 
 export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfiguration }) {
+  return <CandidateCoachingRun configuration={configuration} motion={neckMotion} />
+}
+
+export function CandidateCoachingRun<C extends CandidateRunConfiguration>({
+  configuration,
+  motion,
+}: {
+  configuration: C
+  motion: CandidateMotion<C>
+}) {
   const authentication = useAuth(),
     auth = authentication.state,
     playback = useRecordedPlayback(),
     live = useRef(playback),
     canvas = useRef<HTMLCanvasElement>(null),
-    native = useRef<ReturnType<typeof createNeckWorkspacePlayback> | null>(null),
+    native = useRef<CandidatePlayback | null>(null),
     resultHeading = useRef<HTMLHeadingElement>(null),
     recordNotice = useRef<HTMLParagraphElement>(null),
     recordRun = useRef<{
       id: string
       session: RunSession
-      playback: ReturnType<typeof createNeckWorkspacePlayback>
-      configuration: NeckRunConfiguration
+      playback: CandidatePlayback
+      configuration: C
       auth: typeof auth
     } | null>(null),
     mounted = useRef(false),
@@ -99,7 +152,7 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
   account.current = auth
   const [snapshot, setSnapshot] = useState<SessionSnapshot | null>(null),
     [recordState, setRecordState] = useState<RecordState | null>(null),
-    [issue, setIssue] = useState<NeckCandidateError | null>(null),
+    [issue, setIssue] = useState<string | null>(null),
     [busy, setBusy] = useState(false),
     [attempt, setAttempt] = useState(0),
     [failed, setFailed] = useState(false),
@@ -184,7 +237,7 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
     setAttempt(id)
     const original = configuration
     try {
-      const config = checked(original)
+      const config = checked(original, motion)
       await retirement
       if (
         !mounted.current ||
@@ -201,17 +254,20 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
         readClockPair: () => ({ monotonicMs: performance.now(), utc: new Date().toISOString() }),
         readGates: config.readGates,
         createPlayback: (input) => {
-          const owned = createNeckWorkspacePlayback(input, {
-            canvas: (context) => canvasFor(context, id),
-            criteria: config.criteria,
-            gender,
-            session: () => live.current.getSession(),
-            view: () => currentView.current,
-            feedback: (next) => {
-              if (mounted.current && authority.current === original && account.current === auth)
-                setIssue(next)
+          const owned = motion.createPlayback(
+            input,
+            {
+              canvas: (context) => canvasFor(context, id),
+              gender,
+              session: () => live.current.getSession(),
+              view: () => currentView.current,
+              feedback: (next) => {
+                if (mounted.current && authority.current === original && account.current === auth)
+                  setIssue(next)
+              },
             },
-          })
+            original,
+          )
           native.current = owned
           return owned
         },
@@ -339,7 +395,7 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
     owned = playback.getSession() !== null,
     step = state?.plan.steps[state.stepIndex],
     progress = state?.progress[state.stepIndex]
-  const side = step?.id === 'right' ? '오른쪽' : '왼쪽'
+  const side = motion.stepLabel(step?.id ?? '')
   useLayoutEffect(() => {
     if (result) resultHeading.current?.focus({ preventScroll: true })
   }, [result])
@@ -362,7 +418,7 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
         <header className="coaching-heading">
           <div>
             <p className="small muted">판정 후보 검수 · 출시 코칭 아님</p>
-            <h1 id="run-title">목 옆으로 기울이기</h1>
+            <h1 id="run-title">{motion.title}</h1>
           </div>
           <fieldset className="coaching-segmented">
             <legend className="sr-only">두 아바타 표시 구도</legend>
@@ -392,11 +448,7 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
           ))}
         </ol>
         <p className="coaching-feedback" role="status" aria-atomic="true">
-          {running && issue
-            ? issue === 'neck-wrong-direction'
-              ? `반대 방향이에요. ${side}으로 기울이는 시범을 보세요.`
-              : feedback[issue]
-            : null}
+          {running && issue ? motion.feedbackText(issue, side) : null}
         </p>
         <section
           className="coaching-space"
@@ -461,7 +513,7 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
               <ul>
                 {result.steps.map((item) => (
                   <li key={item.id}>
-                    {item.id === 'left' ? '왼쪽' : '오른쪽'} ·{' '}
+                    {motion.stepLabel(item.id)} ·{' '}
                     {item.outcome === 'completed'
                       ? '완료'
                       : item.outcome === 'partial'
