@@ -13,6 +13,11 @@ import { ReferenceDemonstration, type ReferenceStatus } from './ReferenceDemonst
 import './CoachingPage.css'
 
 type View = 'full' | 'upper' | 'detail'
+const candidateRuns: Readonly<Record<string, string>> = Object.freeze({
+  'neck-side': '/dev/coaching/neck',
+  'shoulder-shrug': '/dev/coaching/shrug',
+  'arm-overhead': '/dev/coaching/overhead',
+})
 const phases = [
   ['waiting-start', '준비'],
   ['seeking-target', '수행'],
@@ -256,8 +261,8 @@ function CoachingPreviewPage() {
               </>
             )}
             {/* FR-S-02/03/04: DEV demo entry; candidate bands, not a released verdict. */}
-            {motion?.id === 'neck-side' && (
-              <Link className="button primary" to="/dev/coaching/neck">
+            {motion && candidateRuns[motion.id] && (
+              <Link className="button primary" to={candidateRuns[motion.id]}>
                 후보 판정으로 코칭 시작
               </Link>
             )}
