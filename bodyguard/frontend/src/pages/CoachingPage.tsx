@@ -255,6 +255,12 @@ function CoachingPreviewPage() {
                 )}
               </>
             )}
+            {/* FR-S-02/03/04: DEV demo entry; candidate bands, not a released verdict. */}
+            {motion?.id === 'neck-side' && (
+              <Link className="button primary" to="/dev/coaching/neck">
+                후보 판정으로 코칭 시작
+              </Link>
+            )}
             <Link className="button secondary" to={motionNavigationUrl('/dev/select', params)}>
               나가기
             </Link>
