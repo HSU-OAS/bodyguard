@@ -33,6 +33,18 @@ const MotionSelection = import.meta.env.DEV
 const Coaching = import.meta.env.DEV
   ? lazy(() => import('./pages/CoachingPage').then((module) => ({ default: module.CoachingPage })))
   : null
+// FR-S-02/03/04: DEV-only demo of the full neck coaching run with labelled candidate bands.
+const NeckDemoCoaching = import.meta.env.DEV
+  ? lazy(() =>
+      Promise.all([import('./pages/CoachingPage'), import('./coaching/neckDemoRun')]).then(
+        ([page, demo]) => ({
+          default: function NeckDemoCoaching() {
+            return <page.CoachingPage run={demo.neckDemoRun} />
+          },
+        }),
+      ),
+    )
+  : null
 
 // FR-S-06/FR-V-03: Figma layout review remains separate from the public service.
 const FigmaHome = import.meta.env.DEV
@@ -415,6 +427,18 @@ function Shell() {
                 <SessionGate>
                   <Suspense fallback={<p role="status">코칭 화면을 여는 중입니다</p>}>
                     <Coaching />
+                  </Suspense>
+                </SessionGate>
+              }
+            />
+          )}
+          {NeckDemoCoaching && (
+            <Route
+              path="/dev/coaching/neck"
+              element={
+                <SessionGate>
+                  <Suspense fallback={<p role="status">코칭 화면을 여는 중입니다</p>}>
+                    <NeckDemoCoaching />
                   </Suspense>
                 </SessionGate>
               }

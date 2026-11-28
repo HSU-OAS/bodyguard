@@ -401,6 +401,8 @@ export function NeckCoachingRun({ configuration }: { configuration: NeckRunConfi
         <section
           className="coaching-space"
           aria-label="두 아바타 공간"
+          // The finished run has released its 3D context; keep only the result below.
+          hidden={Boolean(result)}
           data-view={view}
           data-avatar={gender}
         >

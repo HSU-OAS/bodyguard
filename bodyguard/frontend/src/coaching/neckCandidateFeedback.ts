@@ -6,6 +6,7 @@ import {
   createNeckCandidateClassifier,
   type NeckCandidateError,
 } from '../stretch/neckCandidateClassifier'
+import type { ObservationClass } from '../stretch/progression'
 import type { createCoachingSession, SessionSnapshot } from './session'
 
 type Session = Pick<ReturnType<typeof createCoachingSession>, 'getSnapshot'>
@@ -44,9 +45,11 @@ export function createNeckCandidateFeedback(
     throw new Error('Invalid neck candidate feedback')
   let closed = false
   return Object.freeze({
-    evaluate(
-      frame: PoseRigFrame,
-    ): Readonly<{ state: SessionSnapshot['state']; errors: FeedbackFrame['errors'] }> | null {
+    evaluate(frame: PoseRigFrame): Readonly<{
+      state: SessionSnapshot['state']
+      classification: ObservationClass
+      errors: FeedbackFrame['errors']
+    }> | null {
       if (closed) return null
       try {
         const before = options.session.getSnapshot(),
@@ -93,6 +96,7 @@ export function createNeckCandidateFeedback(
           return null
         return Object.freeze({
           state: current.state,
+          classification: decision.classification,
           errors: Object.freeze(
             decision.errors.map((code) =>
               Object.freeze({ regionId: regions[code], severity: 'deviation' as const, code }),
